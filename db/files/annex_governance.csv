@@ -1,0 +1,110 @@
+governance_pillar;governance_problem;governance_problem_fr;severity_3;severity_2;severity_1;Severity_0
+Law enforcement;Corruption leads to illegal activity/poor enforcement;Corruption conduit à une activité illégale / mauvaise application de la loi;"- La société contourne la loi et / ou gagne un avantage commercialen raison de liens politiques
+- Le gouvernement prend l'action illégale pour aider l'entreprise
+- Une preuve solide de corruption liée à une mauvaise application de la loi permettant des infractions sévères (niveau 3)
+- Tentatives de légitimer le bois illégal (16+ pieds ou 70+ m3 ou preuve d'une pratique systémique impliquant plusieurs autorités)";"- La société bénéficie de sanctions réduites en raison de liens politiques
+- Une preuve solide de corruption liée à une mauvaise application de la loi permettant des infractions sévères (niveau 2)
+- Tentatives de légitimer le bois illégal (6 à 15 peids; Comportement répété d'une autorité)";"- Potentiel de conflit d'intérêts existe mais n'est pas prouvé
+- Une preuve solide de corruption liée à une mauvaise application de la loi permettant des infractions sévères (niveau 1)
+- Tentatives de légitimer le bois illégal (1 à 5 pieds; Preuve d'un incident)";
+Law enforcement;Poor application of sanctions ;Défaut d'application des sanctions;"- < 20% des sanctions prononcées appliquées
+- Constats d'infractions sévères (niveau 3) non sanctionnés selon la loi
+- Non saisie du bois frauduleux (> 100m3)
+- Procès-verbaux de constat d'infraction pas établis (<20% des constats) ou vices sur > 50% des PV d'un trimestre ou plus
+- Incohérences systématiques des sanctions";"- Entre 20-50% des sanctions prononcées appliquées
+- Constats d'infractions (sévèrité niveau 2) non sanctionés
+- Non saisie du bois frauduleux 50-100 m3
+- Erreurs systématiques dans le calcul des pénalités
+- Erreurs dans 20-50% des PV d'un trimestre ou plus
+- Inconstance dans l’application des dispositions (aucune preuve d'être systémique)";"- > 80% des sanctions prononcées appliquée
+- Équivalent de non sanction d'une observation de niveau 1
+- Non saisie du bois frauduleux < 50 m3
+- Erreurs dans le calcul des pénalités (aucune preuve d'être systémique)
+- Erreurs dans < 20% des PV d'un trimestre ou plus
+- Non respect des procédures de transmission des PVs aux autorités compétentes";
+Transparency;Information not made public as required by law, including the VPA;Information non rendue publique malgré la loi, y compris l'APV;< 20% des informations sont accessibles au public;20-50% des informations sont accessibles au public;51-95% des informations sont accessibles au public;
+Policy framework;Policy gaps;Lacunes dans les politiques clés pour la gestion durable des forêts;"- Les lacunes politiques permettent une exploitation non durable à grande échelle
+- Montants des amendes n'ont aucun caractère dissuasif (systematique)";"- Les lacunes politiques entravent systématiquement l'application efficace des lois forestières
+- Montants des amendes n'ont aucun caractère dissuasif (aucune preuve d'être systémique)";Les lacunes politiques entraînent des problèmes de gouvernance mineurs (tels que les retards mineurs dus à des processus bureaucratiques fastidieux);
+Planning and decision making;Lack of interagency cooperation ;Manque de coopération interinstitutions ;"- Manque de coopération provoque des problèmes systémiques de gouvernance et d'application de la loi
+- Plusiers obstacles délibérés à empêcher l'observateur mandaté d'accéder aux documents ou à une zone
+- Préjudice physique ou incarcération injustifiée d'observateurs indépendants";"- Manque de coopération provoque des problèmes périodiques de gouvernance et d'application de la loi
+- Un obstacle délibérés à empêcher l'observateur mandaté d'accéder aux documents ou à une zone";"- Le manque de coopération masque l'efficacité de l'application de la loi et / ou de la gouvernance
+- Missions conjointes annulées par les autorités ou pas entièrement exécuté comme prévu";
+Planning and decision making;Lack of transparency on use of forestry revenues, including taxes and fines;Manque de transparence sur l'utilisation des taxes, transactions et d'autres recettes forestières;Absence de budget sur la répartition de fonds forestiers disponible au public;Budget sur la répartition de fonds forestiers incomplet disponible au public;Budget sur la répartition de fonds forestiers disponible au public avec des retards;
+Law enforcement;Poor control;Mauvais contrôle/suivi;"- Aucune mission de contrôle prévue par la loi effectuée (au moins un trimestre)
+- Absence de contrôle efficace aux plusieurs postes de contrôle
+- Absence de suivi (permis spéciaux, production, niveau de réalisation des obligations conventionnelles et exécution de plans d'aménagements)
+- Contrôle partiel ou < 50% de l'échantillon réglementaire (inventaire)
+";"- 1-50% missions de contrôle requises par la lois effectuées
+- Absence de contrôle a une poste de contrôle
+- Absence de planification de missions
+- Absence d'une standardisation du contrôle
+- Suivi partiel permis spéciaux (entre 50%-25%)
+- Suivi partiel/incorrect production (écart 2 000-10 000 m3)
+- Suivi partiel sur le niveau de réalisation des obligations conventionnelles et exécution de plans d'aménagements (majorité des obligations)";"- 51-95% missions de contrôle requises effectuées
+- Suivi partiel permis spéciaux (entre moins de 25%)
+- Suivi partiel/incorrect production (moins de 2 000 m3)
+- Suivi partiel sur le niveau de réalisation des obligations conventionnelles et exécution de plans d'aménagements (moins de la majorité des obligations)
+- Mauvaise planification de missions
+- Contrôle partiel ou de 50-90% de l'échantillon réglementaire (inventaire)
+";
+Law enforcement;Poor reporting of enforcement;Mauvais rapportage de l'application de la loi;Absence totale de rapports importants ;"- Mauvaise qualité de plusiers rapports
+- < 50% rapports attendus soumis ";"- Mauvaise qualité d'un rapports
+- Entre 51-90% rapports attendus soumis ";
+Law enforcement;Poor tax and fine collection;Mauvaise recouvrement des taxes/transactions/frais;"- Moins de 25% recouvrés/au moins un trimestre par Départment/Province
+- Perte de plus de 100 000 euros";"- Entre 25-75% recouvrés/au moins un trimestre par Départment/Province
+- Perte entre 99 000-10 000 euros
+- Calculs erronés systémique des impôts dus
+- Transmission irrégulière > 10 000 euros";"- Entre 76-99%  recouvrés/au moins un trimestre par Départment/Province
+- Non-respect des procédures de collecte (e.g. paiement en espèce)
+- Perte moins de 10 000 euros
+- Calculs erronés des impôts dus (aucune preuve d'être systémique)
+- Transmission irrégulière < 10 000 euros";
+Law enforcement;Poor distribution of law enforcement means;Mauvaise répartition des moyens d'application de la loi;"- Entre 0-6 agents/300 000 ha (moins de 1 agent/50 000 ha)
+- Des postes de contrôle importants abandonnés régulièrement
+- Absence de 4x4 ou moto tout terrain fonctionnels
+- < 25% fonds prévus reçus par l'unité d'exécution sous-nationale dans des délais raisonnables
+- Les agents forestiers manquent de l'équipement nécessaire dans la majorité des postes de terrain";"- Entre 7-15 agents/300.000 ha (1 agent/42 000 ha - 20 000 ha)
+- Mauvaise localisation ou pas assez des brigades
+- Des postes de contrôle importants abandonnés (observee une fois)
+- Un 4x4 ou moto tout terrain fonctionnel
+- Entre 25-75% fonds prévus reçus par l'unité d'exécution sous-nationale dans des délais raisonnables
+- Les agents forestiers ne disposent pas de l'équipement nécessaire dans plusieurs postes de terrain";"- Entre 15-20 agents/300.000 ha
+- Deux 4x4 ou moto tout terrain fonctionnels
+- Entre 76-99% fonds prévus reçus par l'unité d'exécution sous-nationale dans des délais raisonnables
+- Les agents forestiers ne disposent pas de l'équipement nécessaire dans une poste de terrain";
+Law enforcement;Non respect of procedures - management of seized goods;Non respect de procédures - gestion des produits saisis;"- Non respect des procédures de gestion pour un volume > 500m3
+- Vente illégale de bois saisi";Non respect des procédures de gestion pour un volume entre 200-500m3;Non respect des procédures de gestion pour un volume < 200m3;
+Planning and decision making;Non respect of procedures - attribution of right to exploit, trade or transport CITES species;Non respect de procédures CITES - attribution de droit d'exploiter/transporter/vendre;16+ pieds ou 70+ m3;6 à 15 peids;1 à 5 pieds;
+Planning and decision making;Non respect of procedures authorising harvesting of forest resources;Non respect des procédures autorisant la récolte/gestion des ressources forestières ;"- Délivrance d'autorisation de coupe (industriel) sans dossier
+- Autorisations de coupe (industriel) illégales
+- Volume de bois accordé est supérieur à son volume maximum annuel prévu dans la convention (plus de 1000 m3)
+- Autorisations à la compagnie qui n'a pas été pénalisé pour les infractions sévères
+- Trop d'autorisations accordées
+- Validation d'un plan d'aménagement malgré: présence < 50% des membres du comité de validation; plan incomplet / très mauvaise qualité; un ans ou plus après le délai ";"- < 50% de procédures respectées (hormis les procédures essentielles pour assurer un processus compétitif et transparent)
+- Dossier manquant plusiers elements
+- Mauvais type d'autorisation
+- Incohérence entre l'autorisation et les limites de la zone d'exploitation
+- Le volume de bois accordé est supérieur à son volume maximum annuelprévu dans la convention (entre 200m3 et 1000 m3)
+- Délivrance malgré l'avis défavorable des autorités locales ou dossier incomplet
+- Délivrance d'autorisation de coupe (artisanale) sans dossier
+- Autorisations de coupe (artisanale) illégales
+- Validation d'un plan d'aménagement malgré: présence 25-50% des membres du comité de validation; validation d'un plan de mauvaise qualité";"- Délivrance hors delai
+- Le volume de bois accordé est supérieur à son volume maximum annuelprévu dans la convention (moins de 200m3)
+- Délivrance d'autorisation de coupe (artisanale) malgre les irrégularités mineures
+- Validation d'un plan d'aménagement malgré: présence 50-90% des membres du comité de validation; moins de un ans après le délai ";
+Planning and decision making;Non respect of procedures authorising transport or export of forest resources;Non-respect des procédures autorisant le transport ou l'exportation des ressources forestières;"- Autorisation d'exportation en violation de quota (plus de 50% de bois sous forme de grumes)
+- Autorisation d'exportation en violation du moratoire
+- Autorisation de vidange illégale ou sans dossier";"- Autorisation d'exportation en violation de quota (entre 30-50% de bois sous forme de grumes)
+- Autorisation de vidange avec dossier incomplet ";"- Autorisation d'exportation en violation de quota (entre 16-29% de bois sous forme de grumes)
+- Autorisation de vidange - irrégularités mineures";
+Planning and decision making;Non respect of procedures granting access to forest resources;Non-respect des procédures donnant accès aux ressources forestières;"- Absence d'appel d'offres concession
+- Attribution d'agrément malgré manque de la plupart de critères
+- Attribution de la concession forestière malgré < 20% critères ou manipulation des points (sur-estimation de points par le gouvernement); attribution illégale (e.g. contre un moratorium)
+";"- < 50% de procédures respectées (appel d'offres concession)
+- Au moins 1 procédure importante permettant un processus compétitif et transparent non respectée
+- Attribution d'agrément malgré manque de quelques critères
+- Attribution de la concession forestière malgré 21-50% critères ou non respect des procédures importantes permettant un processus juste ";"- > 50% de procédures respectées hormi procédures essentielles pour assurer un processus compétitif et transparent (appel d'offres concession)
+- Irrégularités mineures du processus d'agrément
+- Attribution de la concession forestière: non respect de certaines procédures considérées modérément importantes, mais non essentielles pour garantir une procédure légale et juste";

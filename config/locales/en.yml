@@ -1,0 +1,364 @@
+---
+en:
+  locale_name: "English"
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
+        carrierwave_processing_error: failed to be processed
+        carrierwave_integrity_error: is not an allowed file type
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      required: must exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "$"
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm
+
+  shared:
+    edit_permissions: Edit permissions
+    permissions_request: Permissions request
+    edit: 'Edit'
+    update: 'Update'
+    delete: 'Delete'
+    create: 'Create'
+    back: 'Back'
+    confirm_message: 'Are you sure?'
+    view: 'View'
+    edit_info: 'Edit info'
+    edit_relations: 'Edit relations'
+    add_localization: 'Add locations'
+    add_location: 'Add location'
+    remove_location: 'Remove location'
+    name: 'Name'
+    status: 'Status'
+    remove: 'Remove'
+    add: 'Add'
+    general_info: 'General Info'
+    activate: 'Activate'
+    deactivate: 'Deactivate'
+    deactivated_at: 'Deactivated at'
+    relation_details: 'Relation details'
+    view_map: 'View on map'
+    updated: 'Updated'
+    created: 'Created'
+    can_not_be_deleted: 'Can not be deleted!'
+    role: 'Role'
+    admin: 'Admin'
+    ngo: 'NGO'
+    user: 'User'
+    operator: 'Operator'
+    add_other_domain: 'Add a new domain'
+    no_entries: 'No entries'
+    select_file: 'Select file'
+    title: 'Title'
+    continue: 'Continue'
+    finish: 'Finish'
+
+  navbar:
+    dashboard: 'Dashboard'
+    home: 'Home'
+    users: 'Users'
+    categories: 'Categories'
+    edit_account: 'Edit account'
+    logout: 'Logout'
+    login: 'Login'
+    register: 'Register'
+    settings: 'Settings'
+    admin: 'Administration'
+    countries: 'Countries'
+    observations: 'Observations'
+    species: 'Species'
+    administration: 'Admin'
+    operators: 'Operators'
+    observers: 'Monitors'
+    categories: 'Categories'
+    laws: 'Laws'
+    governments: 'Governments'
+    annex_operators: 'Annex (operators)'
+    annex_governances: 'Annex (governance)'
+
+  users:
+    user: 'User'
+    users: 'Users'
+    edit_user: 'Edit User'
+    forgot_pw: 'Forgot your Password?'
+    send_instructions: 'Send me reset password instructions'
+    login_action: 'login'
+
+  countries:
+    countries: 'Countries'
+
+  observations:
+    observations: 'Observations'
+    types: 'Observation type'
+    info: 'Details'
+    attachments: 'Documentation'
+
+  species:
+    species: 'Species'
+
+  operators:
+    operators: 'Operators'
+
+  observers:
+    observers: 'Monitors'
+
+  categories:
+    categories: 'Categories'
+
+  laws:
+    laws: 'Laws'
+
+  governments:
+    governments: 'Governments'
+
+  annex_operators:
+    annex_operators: 'Annex (operators)'
+
+  annex_governances:
+    annex_governances: 'Annex (governance)'
+
+  # Page specific entries
+  observation_types:
+    ? "AnnexGovernance"
+    : "Governance illegality"
+    ? "AnnexOperator"
+    : "Illegality"
+
+  document_types:
+    ? "Report"
+    : "Report"
+    ? "Doumentation"
+    : "Doumentation"
+
+  observer_types:
+    ? "Mandated"
+    : "Mandated"
+    ? "SemiMandated"
+    : "SemiMandated"
+    ? "External"
+    : "External"
+    ? "Government"
+    : "Government"
+
+  operator_types:
+    ? "Company"
+    : "Company"
+    ? "Artisanal"
+    : "Artisanal"
+    ? "Sawmill"
+    : "Sawmill"
+    ? "CommunityForest"
+    : "CommunityForest"
+    ? "ARB1327"
+    : "ARB1327"
+    ? "PalmOil"
+    : "PalmOil"
+    ? "Trader"
+    : "Trader"
+
+  wicked:
+    types: 'observation-type'
+    info: 'observation-info'
+    attachments: 'observation-attachments'

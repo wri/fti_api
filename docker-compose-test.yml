@@ -1,0 +1,15 @@
+test:
+  build: .
+  command: test
+  volumes:
+    - .:/fti_api
+  links:
+    - postgres
+  env_file: test.env
+
+postgres:
+  image: postgres
+
+# redis:
+#   image: redis
+#   container_name: redis_fti_api

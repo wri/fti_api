@@ -1,0 +1,10 @@
+.git
+.gitignore
+.bundle
+.gems
+.rbenv-gemsets
+db/*.sqlite3
+log/*
+tmp/*
+vendor/bundle
+/coverage

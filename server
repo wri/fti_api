@@ -1,0 +1,58 @@
+#! /bin/bash
+
+case "$1" in
+    start)
+        ps -ef | grep 3000 | grep puma
+        if [ $? -eq 1 ]
+        then
+          case "$2" in
+            develop)
+              echo "Startting server..."
+              bundle exec puma -C config/puma.rb
+              echo "Server running on port 3000 ;)!"
+              ;;
+            *)
+              echo "Usage: server start {develop}" >&2
+              exit 1
+              ;;
+          esac
+        else
+          echo "Server already running on port 3000 ;)!"
+        fi
+        ;;
+    stop)
+        ps -ef | grep 3000 | grep puma
+        if [ $? -eq 1 ]
+        then
+          echo "Server is down."
+        else
+          echo "Stopping server..."
+          kill -9 $(lsof -i tcp:3000 -t)
+          echo "Server is down."
+        fi
+        ;;
+    status)
+        ps -ef | grep 3000 | grep puma
+        if [ $? -eq 1 ]
+        then
+          echo "Server is down."
+        else
+          echo "Server running on port 3000 ;)!"
+        fi
+        ;;
+    restart)
+        ps -ef | grep 3000 | grep puma
+        if [ $? -eq 1 ]
+        then
+          bundle exec puma -C config/puma.rb
+        else
+          kill -9 $(lsof -i tcp:3000 -t) && bundle exec puma -C config/puma.rb
+        fi
+        ;;
+    *)
+        echo "Usage: server {start develop|stop|status|restart}" >&2
+        exit 1
+        ;;
+esac
+
+exit 0

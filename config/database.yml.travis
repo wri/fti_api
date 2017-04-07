@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: fti_travis_ci_test
+  username: postgres
