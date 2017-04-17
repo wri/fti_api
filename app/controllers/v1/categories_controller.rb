@@ -51,7 +51,7 @@ module V1
       end
 
       def category_params
-        params.require(:category).permit(:name, :description, :category_type, :parent_id)
+        params.require(:category).permit(:name)
       end
   end
 end
