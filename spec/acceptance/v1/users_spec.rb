@@ -12,11 +12,11 @@ module V1
       }
     end
 
-    let!(:user) { User.create(email: 'test@email.com', password: 'password', password_confirmation: 'password', nickname: 'test', name: '00 User one') }
-
     let!(:admin) { FactoryGirl.create(:admin, name: '00 User one')                          }
     let!(:ngo)   { FactoryGirl.create(:ngo)                                                 }
     let!(:user)  { FactoryGirl.create(:user, email: 'test@email.com', password: 'password') }
+
+    let!(:country) { FactoryGirl.create(:country) }
 
     context 'Show users' do
       it 'Get users list' do
@@ -87,6 +87,17 @@ module V1
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'User successfully registrated!' }] }.to_json)
         end
+
+        it 'Register valid user with ngo role request' do
+          post '/register', params: {"user": { "email": "test@gmail.com", "nickname": "sebanew",
+                                     "password": "password", "password_confirmation": "password", "name": "Test user new",
+                                     "permissions_request": "ngo", "country_id": country.id, "institution": "My orga" }},
+                            headers: @headers
+          expect(status).to eq(201)
+          expect(body).to   eq({ messages: [{ status: 201, title: 'User successfully registrated!' }] }.to_json)
+
+          expect(User.find_by(email: 'test@gmail.com').permissions_request).to eq('ngo')
+        end
       end
     end
 
@@ -139,11 +150,12 @@ module V1
           expect(body).to   eq({ messages: [{ status: 200, title: 'User successfully updated!' }] }.to_json)
         end
 
-        # it 'Update user role by admin' do
-        #   patch "/users/#{user.id}", params: {"user": { "role": "admin" }}, headers: @headers
-        #   expect(status).to           eq(200)
-        #   expect(user.reload.role).to eq('admin')
-        # end
+        it 'Update user role by admin' do
+          patch "/users/#{user.id}", params: {"user": { "user_permission_attributes": { "id": user.user_permission.id , "user_role": "ngo" }}},
+                                     headers: @headers
+          expect(status).to           eq(200)
+          expect(user.reload.ngo?).to eq(true)
+        end
       end
 
       describe 'User can update profile' do
@@ -165,11 +177,12 @@ module V1
           expect(body).to   eq({ messages: [{ status: 200, title: 'User successfully updated!' }] }.to_json)
         end
 
-        # it 'Do not allow user to change the role' do
-        #   patch "/users/#{user.id}", params: {"user": { "role": "admin" }}, headers: @headers
-        #   expect(status).to           eq(200)
-        #   expect(user.reload.role).to eq('user')
-        # end
+        it 'Do not allow user to change the role' do
+          patch "/users/#{user.id}", params: {"user": { "user_permission_attributes": { "id": user.user_permission.id , "user_role": "ngo" }}},
+                                     headers: @headers
+          expect(status).to           eq(200)
+          expect(user.reload.ngo?).to eq(false)
+        end
       end
     end
 

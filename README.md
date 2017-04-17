@@ -4,7 +4,7 @@
 
 ## DOCUMENTATION ##
 
-[API Documentation]() Comming soon...
+[API Documentation](https://fti-api-documentation.herokuapp.com)
 
 ## USAGE ##
 

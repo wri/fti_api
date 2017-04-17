@@ -40,6 +40,8 @@ class User < ApplicationRecord
   has_many :observers, through: :user_observers
   has_many :operators, through: :user_operators
 
+  accepts_nested_attributes_for :user_permission
+
   validates :nickname,    presence: true, uniqueness: { case_sensitive: false }
   validates_uniqueness_of :email
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
