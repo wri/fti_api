@@ -51,10 +51,9 @@ module V1
 
       def user_params
         set_user_params = [:name, :email, :country_id, :password, :password_confirmation,
-                           :city_id, :nickname, :institution, :position,
-                           :twitter_account, :linkedin_account, :image]
+                           :nickname, :institution, :web_url, :permissions_request]
         if @current_user.is_active_admin?
-          set_user_params << [:role, :is_active]
+          set_user_params << [:is_active, user_permission_attributes: [:id, :user_role, :permissions]]
         end
 
         params.require(:user).permit(set_user_params)
