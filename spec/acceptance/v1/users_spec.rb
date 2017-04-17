@@ -12,8 +12,6 @@ module V1
       }
     end
 
-    let!(:user) { User.create(email: 'test@email.com', password: 'password', password_confirmation: 'password', nickname: 'test', name: '00 User one') }
-
     let!(:admin) { FactoryGirl.create(:admin, name: '00 User one')                          }
     let!(:ngo)   { FactoryGirl.create(:ngo)                                                 }
     let!(:user)  { FactoryGirl.create(:user, email: 'test@email.com', password: 'password') }
@@ -139,11 +137,12 @@ module V1
           expect(body).to   eq({ messages: [{ status: 200, title: 'User successfully updated!' }] }.to_json)
         end
 
-        # it 'Update user role by admin' do
-        #   patch "/users/#{user.id}", params: {"user": { "role": "admin" }}, headers: @headers
-        #   expect(status).to           eq(200)
-        #   expect(user.reload.role).to eq('admin')
-        # end
+        it 'Update user role by admin' do
+          patch "/users/#{user.id}", params: {"user": { "user_permission_attributes": { "id": user.user_permission.id , "user_role": "ngo" }}},
+                                     headers: @headers
+          expect(status).to           eq(200)
+          expect(user.reload.ngo?).to eq(true)
+        end
       end
 
       describe 'User can update profile' do
@@ -165,11 +164,12 @@ module V1
           expect(body).to   eq({ messages: [{ status: 200, title: 'User successfully updated!' }] }.to_json)
         end
 
-        # it 'Do not allow user to change the role' do
-        #   patch "/users/#{user.id}", params: {"user": { "role": "admin" }}, headers: @headers
-        #   expect(status).to           eq(200)
-        #   expect(user.reload.role).to eq('user')
-        # end
+        it 'Do not allow user to change the role' do
+          patch "/users/#{user.id}", params: {"user": { "user_permission_attributes": { "id": user.user_permission.id , "user_role": "ngo" }}},
+                                     headers: @headers
+          expect(status).to           eq(200)
+          expect(user.reload.ngo?).to eq(false)
+        end
       end
     end
 
