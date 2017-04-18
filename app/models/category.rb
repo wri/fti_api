@@ -24,8 +24,7 @@ class Category < ApplicationRecord
   }
 
   default_scope do
-    includes(:translations, { annex_governances: :translations }, { annex_operators: :translations }).
-    with_translations(I18n.available_locales)
+    includes(:translations, { annex_governances: :translations }, { annex_operators: :translations })
   end
 
   class << self
