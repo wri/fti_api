@@ -31,11 +31,13 @@ class AnnexGovernance < ApplicationRecord
                            .order('annex_governance_translations.governance_problem ASC')
   }
 
-  default_scope { includes(:translations) }
+  default_scope do
+    includes(:translations, { severities: :translations }, { categories: :translations }, :comments)
+  end
 
   class << self
     def fetch_all(options)
-      annex_governances = by_governance_problem_asc
+      annex_governances = all
       annex_governances
     end
 

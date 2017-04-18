@@ -24,13 +24,12 @@ class Category < ApplicationRecord
   }
 
   default_scope do
-    includes(:translations, { annex_governances: :translations }, { annex_operators: :translations }).
-    with_translations(I18n.available_locales)
+    includes(:translations)
   end
 
   class << self
     def fetch_all(options)
-      categories = all
+      categories = includes({ annex_governances: :translations }, { annex_operators: :translations })
       categories
     end
   end
