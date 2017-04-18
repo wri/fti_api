@@ -32,7 +32,7 @@ class Law < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      laws = all
+      laws = includes(:country)
       laws
     end
 

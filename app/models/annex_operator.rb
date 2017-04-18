@@ -36,11 +36,16 @@ class AnnexOperator < ApplicationRecord
 
   scope :by_country, ->country_id { where('annex_operators.country_id = ?', country_id) }
 
-  default_scope { includes(:translations) }
+  default_scope do
+    includes(:translations, { severities: :translations },
+                            { categories: :translations },
+                            { laws: :translations },
+                            :comments, :country)
+  end
 
   class << self
     def fetch_all(options)
-      annex_operators = by_illegality_asc
+      annex_operators = all
       annex_operators
     end
 
