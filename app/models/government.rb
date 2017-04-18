@@ -21,7 +21,6 @@ class Government < ApplicationRecord
 
   scope :by_entity_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
-                           .order('government_translations.government_entity ASC')
   }
 
   scope :by_country, ->country_id { where('governments.country_id = ?', country_id) }
