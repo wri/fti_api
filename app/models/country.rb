@@ -38,8 +38,7 @@ class Country < ApplicationRecord
   scope :by_activated, -> { where(is_active: true) }
 
   default_scope do
-    includes(:translations).
-    with_translations(I18n.available_locales)
+    includes(:translations)
   end
 
   class << self

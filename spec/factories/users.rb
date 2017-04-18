@@ -43,6 +43,20 @@ FactoryGirl.define do
     end
   end
 
+  factory :operator_user, class: User do
+    sequence(:email)    { |n| "operator#{n}@vizzuality.com" }
+    sequence(:nickname) { |n| "operator#{n}"                }
+
+    password 'password'
+    password_confirmation { |u| u.password }
+    name 'Test operator'
+    is_active true
+
+    after(:create) do |random_operator|
+      random_operator.user_permission.update(user_role: 'operator')
+    end
+  end
+
   factory :admin, class: User do
     sequence(:email)    { |n| "admin#{n}@vizzuality.com" }
     sequence(:nickname) { |n| "admin#{n}"                }

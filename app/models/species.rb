@@ -34,7 +34,7 @@ class Species < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      species = by_name_asc
+      species = includes(:countries)
       species
     end
   end

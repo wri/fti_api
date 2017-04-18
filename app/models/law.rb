@@ -26,11 +26,13 @@ class Law < ApplicationRecord
                            .order('law_translations.legal_reference ASC')
   }
 
-  default_scope { includes(:translations) }
+  default_scope do
+    includes(:translations)
+  end
 
   class << self
     def fetch_all(options)
-      laws = by_legal_reference_asc
+      laws = includes(:country)
       laws
     end
 
