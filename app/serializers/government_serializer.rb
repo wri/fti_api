@@ -3,5 +3,5 @@
 class GovernmentSerializer < ActiveModel::Serializer
   attributes :id, :government_entity, :country_id, :details
 
-  #has_many :observations
+  belongs_to country, serializer: CountrySerializer
 end
