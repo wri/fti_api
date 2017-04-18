@@ -36,7 +36,7 @@ class Operator < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      operators = by_name_asc
+      operators = includes(:country, :users)
       operators
     end
 
