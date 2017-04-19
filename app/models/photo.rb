@@ -14,7 +14,7 @@
 #
 
 class Photo < ApplicationRecord
-  mount_uploader :attachment, PhotoUploader
+  mount_base64_uploader :attachment, PhotoUploader
 
   belongs_to :attacheable, polymorphic: true
 

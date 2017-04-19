@@ -16,7 +16,7 @@
 class Observer < ApplicationRecord
   translates :name, :organization
 
-  mount_uploader :logo, LogoUploader
+  mount_base64_uploader :logo, LogoUploader
 
   belongs_to :country, inverse_of: :observers, optional: true
 

@@ -17,7 +17,7 @@
 class Operator < ApplicationRecord
   translates :name, :details
 
-  mount_uploader :logo, LogoUploader
+  mount_base64_uploader :logo, LogoUploader
 
   belongs_to :country, inverse_of: :operators, optional: true
 

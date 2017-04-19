@@ -111,6 +111,9 @@ module V1
 
     context 'Edit operators' do
       let!(:error) { { errors: [{ status: 422, title: "name can't be blank" }]}}
+      let!(:photo_data) {
+        "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))}"
+      }
 
       describe 'For admin user' do
         before(:each) do
@@ -126,6 +129,13 @@ module V1
 
         it 'Returns success object when the operator was seccessfully updated by admin' do
           patch "/operators/#{operator.id}", params: {"operator": { "name": "Operator one" }},
+                                             headers: @headers
+          expect(status).to eq(200)
+          expect(body).to   eq({ messages: [{ status: 200, title: 'Operator successfully updated!' }] }.to_json)
+        end
+
+        it 'Upload logo and returns success object when the operator was seccessfully updated by admin' do
+          patch "/operators/#{operator.id}", params: {"operator": { "logo": photo_data }},
                                              headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Operator successfully updated!' }] }.to_json)

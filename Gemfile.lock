@@ -101,6 +101,9 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    carrierwave-base64 (2.5.0)
+      carrierwave (>= 0.8.0)
+      mime-types (~> 3.0)
     case_transform (0.2)
       activesupport
     chronic (0.10.2)
@@ -321,7 +324,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.2)
   capistrano-rvm
   capistrano-secrets-yml
-  carrierwave (~> 1.0)
+  carrierwave-base64
   codeclimate-test-reporter (~> 1.0.0)
   database_cleaner
   dotenv-rails
