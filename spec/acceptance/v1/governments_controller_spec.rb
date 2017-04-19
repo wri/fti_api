@@ -86,7 +86,7 @@ module V1
 
         it 'Returns success object when the government was successfully created by admin' do
           post '/governments', params: {'government' => { 'government_entity' => 'Government one' }},
-               headers: @headers
+                               headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Government successfully created!' }] }.to_json)
         end
@@ -146,7 +146,7 @@ module V1
 
         it 'Do not allow to update government by a non admin user' do
           patch "/governments/#{government.id}", params: {'government' => { 'government_entity' => 'Government one' }},
-                                               headers: @headers_user
+                                                 headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
         end

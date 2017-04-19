@@ -10,7 +10,7 @@
 
 FactoryGirl.define do
   factory :government do
-    sequence(:government_entity) { |n| "#{n} Government" }
+    government_entity 'A Government'
     details           'Indicator one'
 
     after(:create) do |government|

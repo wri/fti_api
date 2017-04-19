@@ -11,11 +11,11 @@ module V1
 
     def index
       @governments = GovernmentsIndex.new(self)
-      render json: @governments.governments#, each_serializer: GovernmentSerializer, links: @governments.links
+      render json: @governments.governments, each_serializer: GovernmentSerializer, links: @governments.links
     end
 
     def show
-      render json: @government, serializer: GovernmentSerializer, #include: [:annex_governances, :annex_operators],
+      render json: @government, serializer: GovernmentSerializer, include: [:country],
              meta: { updated_at: @government.updated_at, created_at: @government.created_at }
     end
 
