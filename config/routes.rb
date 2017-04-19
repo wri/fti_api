@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       resources :governments
       resources :annex_operators
       resources :annex_governances
-      resources :observers, path: 'monitors', as: :monitors
+      resources :observers
       resources :observations
     end
   end
