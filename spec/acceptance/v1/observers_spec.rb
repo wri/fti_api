@@ -19,12 +19,12 @@ module V1
 
     context 'Show observers' do
       it 'Get observers list' do
-        get '/monitors', headers: @headers
+        get '/observers', headers: @headers
         expect(status).to eq(200)
       end
 
       it 'Get specific observer' do
-        get "/monitors/#{observer.id}", headers: @headers
+        get "/observers/#{observer.id}", headers: @headers
         expect(status).to eq(200)
       end
     end
@@ -37,21 +37,21 @@ module V1
       }
 
       it 'Show list of observers for first page with per pege param' do
-        get '/monitors?page[number]=1&page[size]=3', headers: @headers
+        get '/observers?page[number]=1&page[size]=3', headers: @headers
 
         expect(status).to    eq(200)
         expect(json.size).to eq(3)
       end
 
       it 'Show list of observers for second page with per pege param' do
-        get '/monitors?page[number]=2&page[size]=3', headers: @headers
+        get '/observers?page[number]=2&page[size]=3', headers: @headers
 
         expect(status).to    eq(200)
         expect(json.size).to eq(3)
       end
 
       it 'Show list of observers for sort by name' do
-        get '/monitors?sort=name', headers: @headers
+        get '/observers?sort=name', headers: @headers
 
         expect(status).to    eq(200)
         expect(json.size).to eq(6)
@@ -59,7 +59,7 @@ module V1
       end
 
       it 'Show list of observers for sort by name DESC' do
-        get '/monitors?sort=-name', headers: @headers
+        get '/observers?sort=-name', headers: @headers
 
         expect(status).to    eq(200)
         expect(json.size).to eq(6)
@@ -77,13 +77,13 @@ module V1
         end
 
         it 'Returns error object when the observer cannot be created by admin' do
-          post '/monitors', params: {"observer": { "name": "", "observer_type": "Mandated"  }}, headers: @headers
+          post '/observers', params: {"observer": { "name": "", "observer_type": "Mandated"  }}, headers: @headers
           expect(status).to eq(422)
           expect(body).to   eq(error.to_json)
         end
 
         it 'Returns success object when the observer was seccessfully created by admin' do
-          post '/monitors', params: {"observer": { "name": "Monitor one", "observer_type": "Mandated"  }},
+          post '/observers', params: {"observer": { "name": "Monitor one", "observer_type": "Mandated"  }},
                              headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Monitor successfully created!' }] }.to_json)
@@ -101,7 +101,7 @@ module V1
         }
 
         it 'Do not allows to create observer by not admin user' do
-          post '/monitors', params: {"observer": { "name": "Monitor one" }},
+          post '/observers', params: {"observer": { "name": "Monitor one" }},
                              headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
@@ -122,20 +122,20 @@ module V1
         end
 
         it 'Returns error object when the observer cannot be updated by admin' do
-          patch "/monitors/#{observer.id}", params: {"observer": { "name": "" }}, headers: @headers
+          patch "/observers/#{observer.id}", params: {"observer": { "name": "" }}, headers: @headers
           expect(status).to eq(422)
           expect(body).to   eq(error.to_json)
         end
 
         it 'Returns success object when the observer was seccessfully updated by admin' do
-          patch "/monitors/#{observer.id}", params: {"observer": { "name": "Monitor one" }},
+          patch "/observers/#{observer.id}", params: {"observer": { "name": "Monitor one" }},
                                              headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Monitor successfully updated!' }] }.to_json)
         end
 
         it 'Upload logo and returns success object when the observer was seccessfully updated by admin' do
-          patch "/monitors/#{observer.id}", params: {"observer": { "logo": photo_data }},
+          patch "/observers/#{observer.id}", params: {"observer": { "logo": photo_data }},
                                              headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Monitor successfully updated!' }] }.to_json)
@@ -153,7 +153,7 @@ module V1
         }
 
         it 'Do not allows to update observer by not admin user' do
-          patch "/monitors/#{observer.id}", params: {"observer": { "name": "Monitor one" }},
+          patch "/observers/#{observer.id}", params: {"observer": { "name": "Monitor one" }},
                                              headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
@@ -169,7 +169,7 @@ module V1
         end
 
         it 'Returns success object when the observer was seccessfully deleted by admin' do
-          delete "/monitors/#{observer.id}", headers: @headers
+          delete "/observers/#{observer.id}", headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Monitor successfully deleted!' }] }.to_json)
         end
@@ -186,7 +186,7 @@ module V1
         }
 
         it 'Do not allows to delete observer by not admin user' do
-          delete "/monitors/#{observer.id}", headers: @headers_user
+          delete "/observers/#{observer.id}", headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
         end

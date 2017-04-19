@@ -5,8 +5,8 @@ class ObserversIndex
   SORTABLE_FIELDS = [:name, :updated_at, :created_at]
   PER_PAGE = 10
 
-  delegate :params,       to: :controller
-  delegate :monitors_url, to: :controller
+  delegate :params,        to: :controller
+  delegate :observers_url, to: :controller
 
   attr_reader :controller
 
@@ -22,10 +22,10 @@ class ObserversIndex
 
   def links
     {
-      first: monitors_url(rebuild_params.merge(first_page)),
-      prev:  monitors_url(rebuild_params.merge(prev_page)),
-      next:  monitors_url(rebuild_params.merge(next_page)),
-      last:  monitors_url(rebuild_params.merge(last_page))
+      first: observers_url(rebuild_params.merge(first_page)),
+      prev:  observers_url(rebuild_params.merge(prev_page)),
+      next:  observers_url(rebuild_params.merge(next_page)),
+      last:  observers_url(rebuild_params.merge(last_page))
     }
   end
 
