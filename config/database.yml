@@ -19,6 +19,7 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") { } %>
   # please see the update below about using hostnames to
   # access linked services via docker-compose
   host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] %>
@@ -32,7 +33,7 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: fti_api
+  #username: fti
 
   # The password associated with the postgres role (username).
   #password:
