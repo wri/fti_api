@@ -17,7 +17,7 @@
 class Operator < ApplicationRecord
   translates :name, :details
 
-  mount_uploader :logo, LogoUploader
+  mount_base64_uploader :logo, LogoUploader
 
   belongs_to :country, inverse_of: :operators, optional: true
 
@@ -36,7 +36,7 @@ class Operator < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      operators = by_name_asc
+      operators = includes(:country, :users)
       operators
     end
 

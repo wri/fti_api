@@ -15,7 +15,7 @@
 #
 
 class Document < ApplicationRecord
-  mount_uploader :attachment, DocumentUploader
+  mount_base64_uploader :attachment, DocumentUploader
 
   belongs_to :attacheable, polymorphic: true
 
