@@ -37,7 +37,7 @@ class Observer < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      observers = by_name_asc
+      observers = includes(:country, :users)
       observers
     end
 
