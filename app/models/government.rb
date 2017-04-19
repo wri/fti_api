@@ -21,7 +21,7 @@ class Government < ApplicationRecord
 
   scope :by_entity_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
-                           .order('government_translations.government_entity ASC')
+        .order('government_translations.government_entity ASC')
   }
 
   scope :by_country, ->country_id { where('governments.country_id = ?', country_id) }
@@ -30,7 +30,7 @@ class Government < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      governments = by_entity_asc
+      governments = includes(:country)
       governments
     end
 
