@@ -23,7 +23,10 @@ Rails.application.routes.draw do
         resources :comments, only: [:create, :destroy], on: :member, as: :comment
       end
 
-      resources :annex_governances
+      resources :annex_governances do
+        resources :comments, only: [:create, :destroy], on: :member, as: :comment
+      end
+
       resources :observers
       resources :observations
     end
