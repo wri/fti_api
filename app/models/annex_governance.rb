@@ -32,12 +32,12 @@ class AnnexGovernance < ApplicationRecord
   }
 
   default_scope do
-    includes(:translations, { severities: :translations }, { categories: :translations }, :comments)
+    includes(:translations)
   end
 
   class << self
     def fetch_all(options)
-      annex_governances = all
+      annex_governances = includes({ severities: :translations }, { categories: :translations }, :comments)
       annex_governances
     end
 

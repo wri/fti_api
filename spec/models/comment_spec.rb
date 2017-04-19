@@ -22,8 +22,35 @@ RSpec.describe Comment, type: :model do
     @body        = 'Lorem ipsum dolor..'
   end
 
+  let!(:annex_options) {
+    options = {}
+    options['commentable_type'] = @annex.class.name
+    options['commentable_id']   = @annex.id
+    options['body']             = @body
+    options['user']             = @user
+    options
+  }
+
+  let!(:observation_options) {
+    options = {}
+    options['commentable_type'] = @observation.class.name
+    options['commentable_id']   = @observation.id
+    options['body']             = @body
+    options['user']             = @user
+    options
+  }
+
+  let!(:severity_options) {
+    options = {}
+    options['commentable_type'] = @severity.class.name
+    options['commentable_id']   = @severity.id
+    options['body']             = @body
+    options['user']             = @user
+    options
+  }
+
   it 'Comment on annex' do
-    @comment = Comment.build(@annex, @user, @body)
+    @comment = Comment.build(annex_options)
     @comment.save!
     expect(@comment.valid?).to             eq(true)
     expect(@comment.commentable_type).to   eq('AnnexOperator')
@@ -31,7 +58,7 @@ RSpec.describe Comment, type: :model do
   end
 
   it 'Comment on observation' do
-    @comment = Comment.build(@observation, @user, @body)
+    @comment = Comment.build(observation_options)
     @comment.save!
     expect(@comment.valid?).to                   eq(true)
     expect(@comment.commentable_type).to         eq('Observation')
@@ -39,7 +66,7 @@ RSpec.describe Comment, type: :model do
   end
 
   it 'Comment on severity and count user comments' do
-    @comment = Comment.build(@severity, @user, @body)
+    @comment = Comment.build(severity_options)
     @comment.save!
     expect(@comment.valid?).to            eq(true)
     expect(@comment.commentable_type).to  eq('Severity')

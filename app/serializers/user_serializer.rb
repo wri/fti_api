@@ -21,8 +21,10 @@
 #
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :country_id, :nickname, :institution,
+  attributes :id, :name, :email, :nickname, :institution,
              :is_active, :deactivated_at
 
-  has_one :user_permission, serializer: UserPermissionSerializer
+  belongs_to :country,         serializer: CountrySerializer
+  has_one    :user_permission, serializer: UserPermissionSerializer
+  has_many   :comments,        serializer: CommentSerializer
 end

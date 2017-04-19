@@ -64,7 +64,8 @@ class User < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      all
+      users = includes(:user_permission, :comments, :country)
+      users
     end
 
     def user_select

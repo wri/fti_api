@@ -213,8 +213,7 @@ module V1
 
           get '/users/current-user', headers: headers
           expect(status).to eq(200)
-          expect(json).to   eq({"id"=>"#{user.id}", "type"=>"users", "attributes"=>{"name"=>"Test user", "email"=>"#{user.email}", "country_id"=>nil, "nickname"=>"#{user.nickname}", "institution"=>nil, "is_active"=>true, "deactivated_at"=>nil},
-                                                                     "relationships" => {"user_permission"=>{"data"=>{"id"=>"#{user.id}", "type"=>"user_permissions"}}}})
+          expect(json['attributes']).to eq({"name"=>"Test user", "email"=>"#{user.email}", "nickname"=>"#{user.nickname}", "institution"=>nil, "is_active"=>true, "deactivated_at"=>nil})
         end
 
         let!(:error) {

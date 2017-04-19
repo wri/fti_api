@@ -14,4 +14,6 @@
 
 class SeveritySerializer < ActiveModel::Serializer
   attributes :id, :level, :details
+
+  has_many :comments, serializer: CommentSerializer
 end
