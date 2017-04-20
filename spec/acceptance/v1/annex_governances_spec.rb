@@ -195,14 +195,14 @@ module V1
 
         it 'Returns error object when the annex_governance comment cannot be created by admin' do
           post "/annex_governances/#{annex_governance.id}/comments", params: {"comment": { "commentable_type": "AnnexGovernance", "commentable_id": annex_governance.id, "body": "" }},
-                                                                 headers: @headers
+                                                                     headers: @headers
           expect(status).to eq(422)
           expect(body).to   eq(error.to_json)
         end
 
         it 'Returns success object when the annex_governance comment was seccessfully created by admin' do
           post "/annex_governances/#{annex_governance.id}/comments", params: {"comment": { "commentable_type": "AnnexGovernance", "commentable_id": annex_governance.id, "body": "Lorem ipsum dolor.." }},
-                                                                 headers: @headers
+                                                                     headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Comment successfully created!' }] }.to_json)
         end

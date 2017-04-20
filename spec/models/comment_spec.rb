@@ -40,15 +40,6 @@ RSpec.describe Comment, type: :model do
     options
   }
 
-  let!(:severity_options) {
-    options = {}
-    options['commentable_type'] = @severity.class.name
-    options['commentable_id']   = @severity.id
-    options['body']             = @body
-    options['user']             = @user
-    options
-  }
-
   it 'Comment on annex' do
     @comment = Comment.build(annex_options)
     @comment.save!
@@ -63,14 +54,5 @@ RSpec.describe Comment, type: :model do
     expect(@comment.valid?).to                   eq(true)
     expect(@comment.commentable_type).to         eq('Observation')
     expect(@observation.reload.comments.size).to eq(1)
-  end
-
-  it 'Comment on severity and count user comments' do
-    @comment = Comment.build(severity_options)
-    @comment.save!
-    expect(@comment.valid?).to            eq(true)
-    expect(@comment.commentable_type).to  eq('Severity')
-    expect(@severity.comments.size).to    eq(1)
-    expect(@user.reload.comments.size).to eq(1)
   end
 end

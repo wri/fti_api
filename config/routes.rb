@@ -18,6 +18,11 @@ Rails.application.routes.draw do
       resources :operators
       resources :laws
       resources :governments
+      resources :observers
+
+      resources :observations do
+        resources :comments, only: [:create, :destroy], on: :member, as: :comment
+      end
 
       resources :annex_operators do
         resources :comments, only: [:create, :destroy], on: :member, as: :comment
@@ -26,9 +31,6 @@ Rails.application.routes.draw do
       resources :annex_governances do
         resources :comments, only: [:create, :destroy], on: :member, as: :comment
       end
-
-      resources :observers
-      resources :observations
     end
   end
 end
