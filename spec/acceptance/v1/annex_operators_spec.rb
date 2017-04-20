@@ -183,5 +183,47 @@ module V1
         end
       end
     end
+
+    context 'Create comments on annex_operators' do
+      let!(:error) { { errors: [{ status: 422, title: "Please review Your comment body params. Params for body, commentable_type and commentable_id must be present!" }]}}
+
+      describe 'For admin' do
+        before(:each) do
+          token    = JWT.encode({ user: admin.id }, ENV['AUTH_SECRET'], 'HS256')
+          @headers = @headers.merge("Authorization" => "Bearer #{token}")
+        end
+
+        it 'Returns error object when the annex_operator comment cannot be created by admin' do
+          post "/annex_operators/#{annex_operator.id}/comments", params: {"comment": { "commentable_type": "AnnexOperator", "commentable_id": annex_operator.id, "body": "" }},
+                                                                 headers: @headers
+          expect(status).to eq(422)
+          expect(body).to   eq(error.to_json)
+        end
+
+        it 'Returns success object when the annex_operator comment was seccessfully created by admin' do
+          post "/annex_operators/#{annex_operator.id}/comments", params: {"comment": { "commentable_type": "AnnexOperator", "commentable_id": annex_operator.id, "body": "Lorem ipsum dolor.." }},
+                                                                 headers: @headers
+          expect(status).to eq(201)
+          expect(body).to   eq({ messages: [{ status: 201, title: 'Comment successfully created!' }] }.to_json)
+        end
+      end
+    end
+
+    context 'Delete comments on annex_operators' do
+      let!(:comment) { Comment.create(commentable: annex_operator, user: user, body: 'Lorem ipsum..') }
+
+      describe 'For admin' do
+        before(:each) do
+          token    = JWT.encode({ user: admin.id }, ENV['AUTH_SECRET'], 'HS256')
+          @headers = @headers.merge("Authorization" => "Bearer #{token}")
+        end
+
+        it 'Returns success object when the annex_operator comment was seccessfully created by admin' do
+          delete "/annex_operators/#{annex_operator.id}/comments/#{comment.id}", headers: @headers
+          expect(status).to eq(200)
+          expect(body).to   eq({ messages: [{ status: 200, title: 'Comment successfully deleted!' }] }.to_json)
+        end
+      end
+    end
   end
 end

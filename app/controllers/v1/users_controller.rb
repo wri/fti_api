@@ -15,7 +15,8 @@ module V1
     end
 
     def show
-      render json: @user, serializer: UserSerializer, include: [:user_permission], meta: { updated_at: @user.updated_at, created_at: @user.created_at }
+      render json: @user, serializer: UserSerializer, include: [:user_permission, :comments, :country],
+             meta: { updated_at: @user.updated_at, created_at: @user.created_at }
     end
 
     def update
