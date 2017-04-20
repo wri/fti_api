@@ -20,7 +20,6 @@ class Severity < ApplicationRecord
   belongs_to :annex_operator,   foreign_key: :severable_id
 
   has_many :observations, inverse_of: :severity
-  has_many :comments,     as: :commentable
 
   def level_details
     "#{self.level} - #{self.details}"

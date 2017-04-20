@@ -26,10 +26,15 @@ class Comment < ActiveRecord::Base
   scope :sort_by_created_at, -> { order('comments.sort_by_created_at DESC') }
 
   class << self
-    def build(commentable, user, body)
-      new commentable: commentable,
-          user_id:     user.id,
-          body:        body
+    def build(options)
+      commentable = options['commentable_type'].classify.constantize if options['commentable_type'].present?
+      user        = options['user']                                  if options['user'].present?
+      body        = options['body']                                  if options['body'].present?
+      if commentable.present? && user.present? && body.present?
+        commentable = commentable.find(options['commentable_id'].to_i)
+
+        new(commentable: commentable, user_id: user.id, body: body)
+      end
     end
 
     def body_max_length
