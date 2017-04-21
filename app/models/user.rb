@@ -52,7 +52,9 @@ class User < ApplicationRecord
                                  exclusion: { in: %w(admin superuser about root fti otp faq conntact user operator ngo) },
                                  multiline: true
 
-  validates :password, confirmation: true
+  validates :password, confirmation: true,
+                       length: { within: 8..20 },
+                       on: :create
   validates :password_confirmation, presence: true, on: :create
 
   include Activable

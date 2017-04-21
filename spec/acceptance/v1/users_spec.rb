@@ -74,11 +74,19 @@ module V1
                                 { status: 422, title: "name can't be blank"},
                                 { status: 422, title: "password_confirmation can't be blank" }]}}
 
+      let!(:error_pw) { { errors: [{ status: 422, title: "password is too short (minimum is 8 characters)" }]}}
+
       describe 'Registration' do
         it 'Returns error object when the user cannot be registrated' do
           post '/register', params: {"user": { "email": "test@gmail.com", "password": "password" }}, headers: @headers
           expect(status).to eq(422)
           expect(body).to   eq(error.to_json)
+        end
+
+        it 'Returns error object when the user password is to short' do
+          post '/register', params: {"user": { "email": "test@gmail.com", "nickname": "sebanew", "password": "12", "password_confirmation": "12", "name": "Test user new" }}, headers: @headers
+          expect(status).to eq(422)
+          expect(body).to   eq(error_pw.to_json)
         end
 
         it 'Register valid user' do
