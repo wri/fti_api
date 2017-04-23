@@ -54,7 +54,7 @@ module V1
       def operator_params
         set_operator_params = params.require(:operator).permit(:name, :operator_type, :logo, :concession,
                                                                :is_active, :details, :country_id, user_ids: [])
-        set_operator_params[:logo] = process_image_base64(set_operator_params[:logo]) if set_operator_params[:logo].present?
+        set_operator_params[:logo] = process_file_base64(set_operator_params[:logo]) if set_operator_params[:logo].present?
         set_operator_params
       end
   end

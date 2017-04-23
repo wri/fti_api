@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
-# Table name: photos
+# Table name: documents
 #
 #  id               :integer          not null, primary key
 #  name             :string
+#  document_type    :string
 #  attachment       :string
 #  attacheable_id   :integer
 #  attacheable_type :string
@@ -12,15 +15,8 @@
 #  user_id          :integer
 #
 
-require 'rails_helper'
+class DocumentSerializer < ActiveModel::Serializer
+  attributes :id, :name, :attachment, :document_type, :user_id
 
-RSpec.describe Photo, type: :model do
-  before :each do
-    @photo = create(:photo)
-  end
-
-  it 'Count on law' do
-    expect(Photo.count).to eq(1)
-    expect(@photo.attacheable.illegality).to eq('Illegality one')
-  end
+  belongs_to :attacheable
 end

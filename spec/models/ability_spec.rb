@@ -43,6 +43,8 @@ RSpec.describe Ability, type: :model do
 
       it 'Can manage observations' do
         expect_any_instance_of(Ability).to receive(:can).with([:manage], Observation, user_id: @ngo.id)
+        expect_any_instance_of(Ability).to receive(:can).with([:manage], Photo, user_id: @ngo.id)
+        expect_any_instance_of(Ability).to receive(:can).with([:manage], Document, user_id: @ngo.id)
         expect_any_instance_of(Ability).to receive(:can).with([:manage], User, id: @ngo.id)
         expect_any_instance_of(Ability).to receive(:cannot).with([:activate, :deactivate, :destroy], User, id: @ngo.id)
         expect_any_instance_of(Ability).to receive(:cannot).with([:edit, :update], UserPermission, user_id: @ngo.id)
