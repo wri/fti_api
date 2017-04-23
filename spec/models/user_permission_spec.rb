@@ -23,7 +23,7 @@ RSpec.describe UserPermission, type: :model do
   }
 
   let!(:ngo_permissions) {
-    {"user"=>{"id"=>["manage"]}, "observation"=>{"user_id"=>["manage"]}}
+    {"user"=>{"id"=>["manage"]}, "observation"=>{"user_id"=>["manage"]}, "photo"=>{"user_id"=>["manage"]}, "document"=>{"user_id"=>["manage"]}}
   }
 
   let!(:operator_permissions) {

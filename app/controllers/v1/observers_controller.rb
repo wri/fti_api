@@ -54,7 +54,7 @@ module V1
       def observer_params
         set_observer_params = params.require(:observer).permit(:observer_type, :name, :organization,
                                                                :is_active, :logo, :country_id, user_ids: [])
-        set_observer_params[:logo] = process_image_base64(set_observer_params[:logo]) if set_observer_params[:logo].present?
+        set_observer_params[:logo] = process_file_base64(set_observer_params[:logo]) if set_observer_params[:logo].present?
         set_observer_params
       end
   end

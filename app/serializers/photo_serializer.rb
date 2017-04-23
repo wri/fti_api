@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: photos
@@ -12,15 +14,8 @@
 #  user_id          :integer
 #
 
-require 'rails_helper'
+class PhotoSerializer < ActiveModel::Serializer
+  attributes :id, :name, :attachment, :user_id
 
-RSpec.describe Photo, type: :model do
-  before :each do
-    @photo = create(:photo)
-  end
-
-  it 'Count on law' do
-    expect(Photo.count).to eq(1)
-    expect(@photo.attacheable.illegality).to eq('Illegality one')
-  end
+  belongs_to :attacheable
 end
