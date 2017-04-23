@@ -8,13 +8,13 @@ module ApiUploads
 
     private
 
-      def process_image_base64(image_base64)
-        filename = 'file-to-upload'
-        content_type, _encoding, image_base64_string = image_base64.split(/[:;,]/)[1..3]
+      def process_file_base64(file_base64)
+        filename = 'file'
+        content_type, _encoding, file_base64_string = file_base64.split(/[:;,]/)[1..3]
 
         @file_tmp = Tempfile.new(filename)
         @file_tmp.binmode
-        @file_tmp.write(Base64.decode64(image_base64_string))
+        @file_tmp.write(Base64.decode64(file_base64_string))
         @file_tmp.rewind
 
         content_type = "file --mime -b #{content_type}"

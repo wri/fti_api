@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class GovernmentsIndex
-  DEFAULT_SORTING = { government_entity: :asc }
-  SORTABLE_FIELDS = [:government_entity, :updated_at, :created_at]
+class ObservationsIndex
+  DEFAULT_SORTING = { evidence: :asc }
+  SORTABLE_FIELDS = [:evidence, :updated_at, :created_at]
   PER_PAGE = 10
 
-  delegate :params,          to: :controller
-  delegate :governments_url, to: :controller
+  delegate :params,           to: :controller
+  delegate :observations_url, to: :controller
 
   attr_reader :controller
 
@@ -14,25 +14,25 @@ class GovernmentsIndex
     @controller = controller
   end
 
-  def governments
-    @governments ||= Government.fetch_all(options_filter)
-                               .order(sort_params)
-                               .paginate(page: current_page, per_page: per_page)
+  def observations
+    @observations ||= Observation.fetch_all(options_filter)
+                                 .order(sort_params)
+                                 .paginate(page: current_page, per_page: per_page)
   end
 
   def links
     {
-      first: governments_url(rebuild_params.merge(first_page)),
-      prev:  governments_url(rebuild_params.merge(prev_page)),
-      next:  governments_url(rebuild_params.merge(next_page)),
-      last:  governments_url(rebuild_params.merge(last_page))
+      first: observations_url(rebuild_params.merge(first_page)),
+      prev:  observations_url(rebuild_params.merge(prev_page)),
+      next:  observations_url(rebuild_params.merge(next_page)),
+      last:  observations_url(rebuild_params.merge(last_page))
     }
   end
 
   private
 
     def options_filter
-      params.permit('id', 'government_entity', 'sort', 'government', 'government' => {}).tap do |filter_params|
+      params.permit('id', 'evidence', 'sort', 'observation', 'observation' => {}).tap do |filter_params|
         filter_params[:page]= {}
         filter_params[:page][:number] = params[:page][:number] if params[:page].present? && params[:page][:number].present?
         filter_params[:page][:size]   = params[:page][:size]   if params[:page].present? && params[:page][:size].present?
@@ -65,15 +65,15 @@ class GovernmentsIndex
     end
 
     def total_pages
-      @total_pages ||= governments.total_pages
+      @total_pages ||= observations.total_pages
     end
 
     def sort_params
       for_sort = SortParams.sorted_fields(params[:sort], SORTABLE_FIELDS, DEFAULT_SORTING)
-      if params[:sort].present? && params[:sort].include?('government_entity')
-        new_for_sort  = "government_translations.government_entity #{for_sort['government_entity']}"
-        new_for_sort += ", government.updated_at #{for_sort['updated_at']}" if params[:sort].include?('updated_at')
-        new_for_sort += ", government.created_at #{for_sort['created_at']}" if params[:sort].include?('created_at')
+      if params[:sort].present? && params[:sort].include?('evidence')
+        new_for_sort  = "observation_translations.evidence #{for_sort['evidence']}"
+        new_for_sort += ", observation.updated_at #{for_sort['updated_at']}" if params[:sort].include?('updated_at')
+        new_for_sort += ", observation.created_at #{for_sort['created_at']}" if params[:sort].include?('created_at')
 
         for_sort = new_for_sort
       end

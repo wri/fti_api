@@ -12,11 +12,13 @@
 #  attacheable_type :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  user_id          :integer
 #
 
 class Document < ApplicationRecord
   mount_base64_uploader :attachment, DocumentUploader
 
+  belongs_to :user, inverse_of: :documents
   belongs_to :attacheable, polymorphic: true
 
   after_destroy :remove_attachment_id_directory
