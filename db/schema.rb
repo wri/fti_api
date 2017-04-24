@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
   enable_extension "plpgsql"
   enable_extension "citext"
 
-  create_table "annex_governance_translations", id: :bigserial, force: :cascade do |t|
+  create_table "annex_governance_translations", force: :cascade do |t|
     t.integer  "annex_governance_id", null: false
     t.string   "locale",              null: false
     t.datetime "created_at",          null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["law_id"], name: "index_annex_operator_laws_on_law_id", using: :btree
   end
 
-  create_table "annex_operator_translations", id: :bigserial, force: :cascade do |t|
+  create_table "annex_operator_translations", force: :cascade do |t|
     t.integer  "annex_operator_id", null: false
     t.string   "locale",            null: false
     t.datetime "created_at",        null: false
@@ -60,10 +60,10 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["country_id"], name: "index_annex_operators_on_country_id", using: :btree
   end
 
-  create_table "api_keys", id: :bigserial, force: :cascade do |t|
+  create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
     t.datetime "expires_at"
-    t.bigint   "user_id"
+    t.integer  "user_id"
     t.boolean  "is_active",    default: true
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["category_id"], name: "index_categorings_on_category_id", using: :btree
   end
 
-  create_table "category_translations", id: :bigserial, force: :cascade do |t|
+  create_table "category_translations", force: :cascade do |t|
     t.integer  "category_id", null: false
     t.string   "locale",      null: false
     t.datetime "created_at",  null: false
@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.boolean  "is_active",        default: false, null: false
   end
 
-  create_table "country_translations", id: :bigserial, force: :cascade do |t|
+  create_table "country_translations", force: :cascade do |t|
     t.integer  "country_id",  null: false
     t.string   "locale",      null: false
     t.datetime "created_at",  null: false
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["attacheable_id", "attacheable_type"], name: "documents_attacheable_index", using: :btree
   end
 
-  create_table "government_translations", id: :bigserial, force: :cascade do |t|
+  create_table "government_translations", force: :cascade do |t|
     t.integer  "government_id",     null: false
     t.string   "locale",            null: false
     t.datetime "created_at",        null: false
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["country_id"], name: "index_governments_on_country_id", using: :btree
   end
 
-  create_table "law_translations", id: :bigserial, force: :cascade do |t|
+  create_table "law_translations", force: :cascade do |t|
     t.integer  "law_id",          null: false
     t.string   "locale",          null: false
     t.datetime "created_at",      null: false
@@ -178,7 +178,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["country_id"], name: "index_laws_on_country_id", using: :btree
   end
 
-  create_table "observation_translations", id: :bigserial, force: :cascade do |t|
+  create_table "observation_translations", force: :cascade do |t|
     t.integer  "observation_id",    null: false
     t.string   "locale",            null: false
     t.datetime "created_at",        null: false
@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["severity_id"], name: "index_observations_on_severity_id", using: :btree
   end
 
-  create_table "observer_translations", id: :bigserial, force: :cascade do |t|
+  create_table "observer_translations", force: :cascade do |t|
     t.integer  "observer_id",  null: false
     t.string   "locale",       null: false
     t.datetime "created_at",   null: false
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["country_id"], name: "index_observers_on_country_id", using: :btree
   end
 
-  create_table "operator_translations", id: :bigserial, force: :cascade do |t|
+  create_table "operator_translations", force: :cascade do |t|
     t.integer  "operator_id", null: false
     t.string   "locale",      null: false
     t.datetime "created_at",  null: false
@@ -279,7 +279,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["severable_id", "severable_type"], name: "index_severities_on_severable_id_and_severable_type", using: :btree
   end
 
-  create_table "severity_translations", id: :bigserial, force: :cascade do |t|
+  create_table "severity_translations", force: :cascade do |t|
     t.integer  "severity_id", null: false
     t.string   "locale",      null: false
     t.datetime "created_at",  null: false
@@ -321,7 +321,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.index ["species_id"], name: "index_species_observations_on_species_id", using: :btree
   end
 
-  create_table "species_translations", id: :bigserial, force: :cascade do |t|
+  create_table "species_translations", force: :cascade do |t|
     t.integer  "species_id",  null: false
     t.string   "locale",      null: false
     t.datetime "created_at",  null: false
@@ -357,7 +357,7 @@ ActiveRecord::Schema.define(version: 20170421123102) do
     t.datetime "updated_at",               null: false
   end
 
-  create_table "users", id: :bigserial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",                          null: false
