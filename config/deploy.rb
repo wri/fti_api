@@ -14,7 +14,7 @@ set :rvm_roles, [:app, :web, :db]
 
 set :keep_releases, 5
 
-set :linked_files, %w{.env config/secrets.yml}
+set :linked_files, %w{.env}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 
 set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
