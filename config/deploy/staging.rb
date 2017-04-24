@@ -72,11 +72,3 @@ set :ssh_options, {
 }
 set :branch, 'staging'
 set :deploy_to, '~/fti-api-staging'
-
-set :default_env, {
-  'PATH' => "/home/ubuntu/.rvm/gems/ruby-2.4.0/bin:/home/ubuntu/.rvm/bin:$PATH",
-  'RUBY_VERSION' => 'ruby-2.4.0',
-  'GEM_HOME'     => '/home/ubuntu/.rvm/gems/ruby-2.4.0',
-  'GEM_PATH'     => '/home/ubuntu/.rvm/gems/ruby-2.4.0',
-  'BUNDLE_PATH'  => '/home/ubuntu/.rvm/gems/ruby-2.4.0'
-}
