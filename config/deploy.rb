@@ -6,6 +6,14 @@ lock '3.8.1'
 set :application, 'OtpAPI'
 set :repo_url, 'git@github.com:Vizzuality/fti_api.git'
 
+set :default_env, {
+  'PATH' => "/home/ubuntu/.rvm/gems/ruby-2.4.1/bin:/home/ubuntu/.rvm/bin:$PATH",
+  'RUBY_VERSION' => 'ruby-2.4.1',
+  'GEM_HOME'     => '/home/ubuntu/.rvm/gems/ruby-2.4.1',
+  'GEM_PATH'     => '/home/ubuntu/.rvm/gems/ruby-2.4.1',
+  'BUNDLE_PATH'  => '/home/ubuntu/.rvm/gems/ruby-2.4.1'
+}
+
 set :passenger_restart_with_touch, true
 
 set :rvm_type, :user
