@@ -36,7 +36,7 @@ require "capistrano/rails/migrations"
 require "capistrano/passenger"
 require 'capistrano/env-config'
 # require 'capistrano/secrets_yml'
-require 'capistrano/postgresql'
+# require 'capistrano/postgresql'
 # require 'whenever/capistrano'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
