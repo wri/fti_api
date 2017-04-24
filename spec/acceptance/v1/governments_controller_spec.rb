@@ -8,7 +8,7 @@ module V1
 
       @headers = {
           'ACCEPT' => 'application/json',
-          'HTTP_OTP_API_KEY' => "Bearer #{token}"
+          'HTTP_OTP-API-KEY' => "Bearer #{token}"
       }
     end
 
