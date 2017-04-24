@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'oj'
+require 'auth'
 
 class ApplicationController < ActionController::API
   include CanCan::ControllerAdditions
