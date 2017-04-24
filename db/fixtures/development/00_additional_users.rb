@@ -16,7 +16,7 @@ unless User.find_by(nickname: 'webuser')
   puts '*                                                                       *'
   puts "* Web user created (email: 'webuser@example.com', password: 'password'  *"
   puts '*                                                                       *'
-  puts "* API Key created (OTP-API-KEY: Bearer #{@user.api_key.access_token})    *"
+  puts "* API Key created (OTP_API_KEY: Bearer #{@user.api_key.access_token})    *"
   puts '*                                                                       *'
   puts '*************************************************************************'
 end
