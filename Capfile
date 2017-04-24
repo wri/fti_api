@@ -35,7 +35,7 @@ require "capistrano/bundler"
 require "capistrano/rails/migrations"
 require "capistrano/passenger"
 require 'capistrano/env-config'
-require 'capistrano/secrets_yml'
+# require 'capistrano/secrets_yml'
 require 'capistrano/postgresql'
 # require 'whenever/capistrano'
 
