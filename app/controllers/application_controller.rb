@@ -60,7 +60,7 @@ class ApplicationController < ActionController::API
     end
 
     def api_key
-      request.env['HTTP_OTP-API-KEY'].scan(/Bearer (.*)$/).flatten.last
+      request.env['HTTP_OTP_API_KEY'].scan(/Bearer (.*)$/).flatten.last
     end
 
     def auth
@@ -72,7 +72,7 @@ class ApplicationController < ActionController::API
     end
 
     def api_key_present?
-      !!request.env.fetch('HTTP_OTP-API-KEY', '').scan(/Bearer/).flatten.first
+      !!request.env.fetch('HTTP_OTP_API_KEY', '').scan(/Bearer/).flatten.first
     end
 
     def auth_present?
