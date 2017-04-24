@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# ruby '2.4.0'
+ruby '2.4.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -55,10 +55,8 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-env-config'
   gem 'capistrano-passenger'
-  gem 'capistrano-postgresql'
   gem 'capistrano-rails',          '~> 1.2'
   gem 'capistrano-rvm'
-  gem 'capistrano-secrets-yml'
   gem 'listen',                    '~> 3.0.5'
   gem 'pry-rails'
   gem 'spring'
