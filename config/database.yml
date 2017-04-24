@@ -84,7 +84,7 @@ test:
 #
 staging:
   <<: *default
-  database: fti_staging
+  database: fti_api_staging
   username: <%= ENV['SC_DATABASE_USER'] %>
   password: <%= ENV['SC_DATABASE_PASSWORD'] %>
 

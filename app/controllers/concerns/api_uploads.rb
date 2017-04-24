@@ -33,6 +33,7 @@ module ApiUploads
         if @file_tmp.present?
           @file_tmp.close
           @file_tmp.unlink
+          CarrierWave.clean_cached_files! 1
         end
       end
   end
