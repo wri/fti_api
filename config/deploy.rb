@@ -9,7 +9,7 @@ set :repo_url, 'git@github.com:Vizzuality/fti_api.git'
 set :passenger_restart_with_touch, true
 
 set :rvm_type, :auto
-set :rvm_ruby_version, '2.4.0'
+set :rvm_ruby_version, '2.4.0@fti_api_5-0-2'
 set :rvm_roles, [:app, :web, :db]
 
 set :keep_releases, 5
