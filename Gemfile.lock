@@ -86,17 +86,12 @@ GEM
       dotenv (~> 2.0)
     capistrano-passenger (0.2.0)
       capistrano (~> 3.0)
-    capistrano-postgresql (4.2.1)
-      capistrano (>= 3.0)
     capistrano-rails (1.2.3)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano-secrets-yml (1.0.0)
-      capistrano (>= 3.1)
-      sshkit (>= 1.2.0)
     carrierwave (1.0.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -321,10 +316,8 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-env-config
   capistrano-passenger
-  capistrano-postgresql
   capistrano-rails (~> 1.2)
   capistrano-rvm
-  capistrano-secrets-yml
   carrierwave-base64
   codeclimate-test-reporter (~> 1.0.0)
   database_cleaner
@@ -360,6 +353,9 @@ DEPENDENCIES
   webmock
   whenever
   will_paginate
+
+RUBY VERSION
+   ruby 2.4.0p0
 
 BUNDLED WITH
    1.14.6
