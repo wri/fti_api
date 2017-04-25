@@ -51,6 +51,8 @@ class Observation < ApplicationRecord
   validates :observation_type, presence: true, inclusion: { in: %w(AnnexGovernance AnnexOperator),
                                                             message: "%{value} is not a valid observation type" }
 
+  include Activable
+
   scope :by_date_desc,  -> { order('observations.publication_date DESC') }
   scope :by_governance, -> { where(observation_type: 'AnnexGovernance')  }
   scope :by_operator,   -> { where(observation_type: 'AnnexOperator')    }

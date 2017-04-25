@@ -58,15 +58,16 @@ module V1
       def observation_params
         return_params = params.require(:observation).permit(:pv, :operator_opinion, :litigation_status, :observation_type, :id,
                                                             :user_id, :publication_date, :country_id, :annex_operator_id, :annex_governance_id,
-                                                            :observer_id, :operator_id, :government_id, :severity_id, :is_active, :locale,
+                                                            :observer_id, :operator_id, :government_id, :severity_id, :locale,
                                                             :details, :evidence, { photos_attributes: [:id, :name, :attachment, :user_id, :_destroy] },
                                                             { documents_attributes: [:id, :name, :attachment, :user_id, :document_type, :_destroy] }, :species_ids)
 
         return_params[:user_id] = params[:observation][:user_id] if @current_user.is_active_admin?
         return_params[:user_id] = @current_user.id               if :create && return_params[:user_id].blank?
 
-        return_params[:user_id] = params[:observation][:user_id] if @current_user.is_active_admin?
-        return_params[:user_id] = @current_user.id               if :create && return_params[:user_id].blank?
+        if @current_user.is_active_admin?
+          return_params[:is_active] = params[:observation][:is_active]
+        end
 
         if return_params[:photos_attributes].present?
           return_params[:photos_attributes].each do |photo_attributes|
