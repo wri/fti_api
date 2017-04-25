@@ -113,9 +113,6 @@ module V1
 
     context 'Edit observations' do
       let!(:error) { { errors: [{ status: 422, title: "country_id can't be blank" }]}}
-      let!(:photo_data) {
-        "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))}"
-      }
 
       describe 'For admin user' do
         before(:each) do
@@ -130,23 +127,33 @@ module V1
         end
 
         it 'Returns success object when the observation was seccessfully updated by admin' do
+          patch "/observations/#{observation.id}", params: {"observation": { "is_active": false }},
+                                                   headers: @headers
+          expect(status).to eq(200)
+          expect(body).to   eq({ messages: [{ status: 200, title: 'Observation successfully updated!' }] }.to_json)
+          expect(observation.reload.deactivated?).to eq(true)
+        end
+
+        it 'Returns success object when the observation was seccessfully deactivated by admin' do
           patch "/observations/#{observation.id}", params: {"observation": { "country_id": country.id }},
                                                    headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Observation successfully updated!' }] }.to_json)
+          expect(Observation.with_translations('fr').size).to eq(0)
         end
 
-        it 'Upload logo and returns success object when the observation was seccessfully updated by admin' do
-          patch "/observations/#{observation.id}", params: {"observation": { "logo": photo_data }},
-                                                   headers: @headers
+        it 'Allows to translate obervation' do
+          patch "/observations/#{observation.id}?locale=fr", params: {"observation": { "evidence": "FR Observation one" }},
+                                                             headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Observation successfully updated!' }] }.to_json)
+          expect(Observation.with_translations('fr').size).to eq(1)
         end
       end
 
       describe 'For not admin user' do
         before(:each) do
-          token         = JWT.encode({ user: user.id }, ENV['AUTH_SECRET'], 'HS256')
+          token         = JWT.encode({ user: ngo.id }, ENV['AUTH_SECRET'], 'HS256')
           @headers_user = @headers.merge("Authorization" => "Bearer #{token}")
         end
 
@@ -154,11 +161,25 @@ module V1
           { errors: [{ status: '401', title: 'You are not authorized to access this page.' }] }
         }
 
+        let!(:error) {
+          { errors: [{ status: '401', title: 'Unauthorized' }] }
+        }
+
+        let!(:observation_by_user) { FactoryGirl.create(:observation_1, evidence: 'Observation by ngo', user_id: ngo.id) }
+
         it 'Do not allows to update observation by not admin user' do
           patch "/observations/#{observation.id}", params: {"observation": { "name": "Observation one" }},
                                                    headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
+        end
+
+        it 'Do not allows to deactivated observation by user' do
+          patch "/observations/#{observation_by_user.id}", params: {"observation": { "is_active": false }},
+                                                           headers: @headers
+          expect(status).to eq(401)
+          expect(body).to   eq(error.to_json)
+          expect(observation_by_user.reload.deactivated?).to eq(false)
         end
       end
 
