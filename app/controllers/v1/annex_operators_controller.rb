@@ -51,7 +51,9 @@ module V1
       end
 
       def annex_operator_params
-        params.require(:annex_operator).permit(:country_id, :illegality, :details)
+        params.require(:annex_operator).permit(:country_id, :illegality, :details,
+                                               { category_ids: [] }, { law_ids: [] },
+                                               { severities_attributes: [:id, :level, :details, :_destroy] })
       end
   end
 end
