@@ -15,6 +15,7 @@ module V1
     let!(:user)     { FactoryGirl.create(:user)          }
     let!(:admin)    { FactoryGirl.create(:admin)         }
     let!(:operator) { FactoryGirl.create(:operator_user) }
+    let!(:category) { FactoryGirl.create(:category)      }
 
     let!(:annex_governance) { FactoryGirl.create(:annex_governance, governance_pillar: '00 AG one') }
 
@@ -84,10 +85,13 @@ module V1
         end
 
         it 'Returns success object when the annex_governance was seccessfully created by admin' do
-          post '/annex_governances', params: {"annex_governance": { "governance_pillar": "Annex Governance one", "governance_problem": "COO" }},
-                             headers: @headers
+          post '/annex_governances', params: {"annex_governance": { "governance_pillar": "Annex Governance one", "governance_problem": "COO", "category_ids": [category.id],
+                                                                    "severities_attributes": [{ "level": 2, "details": "Lorem ipsum" }] }},
+                                     headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Annex Governance successfully created!' }] }.to_json)
+          expect(AnnexGovernance.find_by(governance_pillar: 'Annex Governance one').categories.size).to eq(1)
+          expect(AnnexGovernance.find_by(governance_pillar: 'Annex Governance one').severities.size).to eq(1)
         end
       end
 
@@ -103,7 +107,7 @@ module V1
 
         it 'Do not allows to create annex_governance by not admin user' do
           post '/annex_governances', params: {"annex_governance": { "governance_pillar": "Annex Governance one", "governance_problem": "COO" }},
-                                    headers: @headers_user
+                                     headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
         end

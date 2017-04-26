@@ -51,7 +51,9 @@ module V1
       end
 
       def annex_governance_params
-        params.require(:annex_governance).permit(:governance_pillar, :governance_problem, :details)
+        params.require(:annex_governance).permit(:governance_pillar, :governance_problem, :details,
+                                                 { category_ids: [] },
+                                                 { severities_attributes: [:id, :level, :details, :_destroy] })
       end
   end
 end
