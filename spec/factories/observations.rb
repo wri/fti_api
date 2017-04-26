@@ -57,4 +57,12 @@ FactoryGirl.define do
                          species: [FactoryGirl.create(:species, name: "Species #{Faker::Lorem.sentence}")])
     end
   end
+
+  factory :observation, class: 'Observation' do
+    observation_type 'AnnexOperator'
+    is_active         true
+    evidence         'Operator observation'
+    publication_date DateTime.now.to_date
+    association :country, factory: :country
+  end
 end

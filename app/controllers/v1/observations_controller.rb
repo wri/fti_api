@@ -11,7 +11,7 @@ module V1
     before_action :set_observation, only: [:show, :update, :destroy]
 
     def index
-      @observations = ObservationsIndex.new(self)
+      @observations = ObservationsIndex.new(self, @current_user)
       render json: @observations.observations, each_serializer: ObservationSerializer, links: @observations.links
     end
 

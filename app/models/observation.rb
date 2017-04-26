@@ -53,20 +53,28 @@ class Observation < ApplicationRecord
 
   include Activable
 
-  scope :by_date_desc,  -> { order('observations.publication_date DESC') }
-  scope :by_governance, -> { where(observation_type: 'AnnexGovernance')  }
-  scope :by_operator,   -> { where(observation_type: 'AnnexOperator')    }
+  scope :by_date_desc,  ->          { order('observations.publication_date DESC') }
+  scope :by_governance, ->          { where(observation_type: 'AnnexGovernance')  }
+  scope :by_operator,   ->          { where(observation_type: 'AnnexOperator')    }
+  scope :by_user,       ->(by_user) { where(user_id: by_user)                     }
 
   default_scope { includes(:translations) }
 
   class << self
     def fetch_all(options)
+      by_user = options['user'] if options['user'].present?
+      by_type = options['type'] if options['type'].present?
+
       observations = includes([:documents, :photos,
                                :annex_operator, :annex_governance,
                                :country, :species, :observer, :operator,
-                               :severity, :comments,
+                               :severity, :comments, :government,
                                { annex_operator: :translations },
                                { annex_governance: :translations }])
+
+      observations = observations.by_user(by_user) if by_user.present?
+      observations = observations.by_governance    if by_type.present? && by_type.parameterize.include?('governance')
+      observations = observations.by_operator      if by_type.present? && by_type.parameterize.include?('operator')
       observations
     end
 

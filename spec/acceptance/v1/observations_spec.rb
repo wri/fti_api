@@ -14,12 +14,20 @@ module V1
 
     let!(:user)    { FactoryGirl.create(:user)    }
     let!(:admin)   { FactoryGirl.create(:admin)   }
-    let!(:ngo)     { FactoryGirl.create(:ngo)   }
+    let!(:ngo)     { FactoryGirl.create(:ngo)     }
     let!(:country) { FactoryGirl.create(:country) }
 
     let!(:observation) { FactoryGirl.create(:observation_1, evidence: '00 Observation one') }
 
     context 'Show observations' do
+      let!(:observations) {
+        observations = []
+        observations << FactoryGirl.create_list(:observation_1, 4)
+        observations << FactoryGirl.create(:observation, evidence: 'ZZZ Next first one', user_id: ngo.id)
+        observations << FactoryGirl.create(:observation, evidence: 'AAA Next first one', user_id: ngo.id)
+        observations << FactoryGirl.create(:observation, evidence: '00 Observation one', user_id: admin.id)
+      }
+
       it 'Get observations list' do
         get '/observations', headers: @headers
         expect(status).to eq(200)
@@ -28,6 +36,31 @@ module V1
       it 'Get specific observation' do
         get "/observations/#{observation.id}", headers: @headers
         expect(status).to eq(200)
+      end
+
+      describe 'Filter opbservations by user' do
+        before(:each) do
+          token         = JWT.encode({ user: ngo.id }, ENV['AUTH_SECRET'], 'HS256')
+          @headers_user = @headers.merge("Authorization" => "Bearer #{token}")
+        end
+
+        it 'Get all observations by specific user' do
+          get '/observations', params: { user: admin.id }, headers: @headers
+          expect(status).to eq(200)
+          expect(json.size).to eq(1)
+        end
+
+        it 'Get owned observations list' do
+          get '/observations', params: { user: 'current' }, headers: @headers_user
+          expect(status).to eq(200)
+          expect(json.size).to eq(2)
+        end
+
+        it 'Get all observations list' do
+          get '/observations', params: { user: 'not' }, headers: @headers
+          expect(status).to eq(200)
+          expect(json.size).to eq(8)
+        end
       end
     end
 
@@ -139,7 +172,9 @@ module V1
                                                    headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Observation successfully updated!' }] }.to_json)
-          expect(Observation.with_translations('fr').size).to eq(0)
+          expect(observation.reload.evidence).to eq('00 Observation one')
+          I18n.locale = 'en'
+          expect(observation.reload.evidence).to eq('00 Observation one')
         end
 
         it 'Allows to translate obervation' do
@@ -147,7 +182,9 @@ module V1
                                                              headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Observation successfully updated!' }] }.to_json)
-          expect(Observation.with_translations('fr').size).to eq(1)
+          expect(observation.reload.evidence).to eq('FR Observation one')
+          I18n.locale = 'en'
+          expect(observation.reload.evidence).to eq('00 Observation one')
         end
       end
 
