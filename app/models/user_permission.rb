@@ -18,7 +18,7 @@ class UserPermission < ApplicationRecord
   belongs_to :user
 
   before_update :change_permissions,         if: 'user_role_changed?'
-  after_update  :accept_permissions_request, if: 'user.permissions_request.present? && user.permissions_accepted.blank?'
+  after_update  :accept_permissions_request, if: 'user.permissions_request.present?'
 
   private
 
@@ -38,7 +38,7 @@ class UserPermission < ApplicationRecord
 
     def accept_permissions_request
       if user_role == user.permissions_request
-        self.user.update(permissions_accepted: Time.now)
+        self.user.update(permissions_accepted: Time.now, permissions_request: nil)
       end
     end
 end

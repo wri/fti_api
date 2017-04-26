@@ -22,7 +22,8 @@
 
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :email, :nickname, :institution,
-             :is_active, :deactivated_at
+             :is_active, :deactivated_at, :web_url,
+             :permissions_request, :permissions_accepted
 
   belongs_to :country,         serializer: CountrySerializer
   has_one    :user_permission, serializer: UserPermissionSerializer
