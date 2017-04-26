@@ -15,6 +15,8 @@ module V1
     let!(:user)     { FactoryGirl.create(:user)          }
     let!(:admin)    { FactoryGirl.create(:admin)         }
     let!(:operator) { FactoryGirl.create(:operator_user) }
+    let!(:category) { FactoryGirl.create(:category)      }
+    let!(:law)      { FactoryGirl.create(:law)           }
 
     let!(:annex_operator) { FactoryGirl.create(:annex_operator, illegality: '00 AO one') }
 
@@ -33,7 +35,7 @@ module V1
     context 'Pagination and sort for annex_operators' do
       let!(:annex_operators) {
         annex_operators = []
-        annex_operators << FactoryGirl.create_list(:annex_operator, 4)
+        annex_operators << FactoryGirl.create_list(:annex_operator, 3)
         annex_operators << FactoryGirl.create(:annex_operator, illegality: 'ZZZ Next first one')
       }
 
@@ -84,10 +86,14 @@ module V1
         end
 
         it 'Returns success object when the annex_operator was seccessfully created by admin' do
-          post '/annex_operators', params: {"annex_operator": { "illegality": "Annex Operator one" }},
-                             headers: @headers
+          post '/annex_operators', params: {"annex_operator": { "illegality": "Annex Operator new", "category_ids": [category.id], "law_ids": [law.id],
+                                                                "severities_attributes": [{ "level": 2, "details": "Lorem ipsum" }] }},
+                                   headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Annex Operator successfully created!' }] }.to_json)
+          expect(AnnexOperator.find_by(illegality: 'Annex Operator new').categories.size).to eq(1)
+          expect(AnnexOperator.find_by(illegality: 'Annex Operator new').laws.size).to       eq(1)
+          expect(AnnexOperator.find_by(illegality: 'Annex Operator new').severities.size).to eq(1)
         end
       end
 
@@ -103,7 +109,7 @@ module V1
 
         it 'Do not allows to create annex_operator by not admin user' do
           post '/annex_operators', params: {"annex_operator": { "illegality": "Annex Operator one" }},
-                                    headers: @headers_user
+                                   headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
         end
@@ -127,7 +133,7 @@ module V1
 
         it 'Returns success object when the annex_operator was seccessfully updated by admin' do
           patch "/annex_operators/#{annex_operator.id}", params: {"annex_operator": { "illegality": "Annex Operator one" }},
-                                                             headers: @headers
+                                                         headers: @headers
           expect(status).to eq(200)
           expect(body).to   eq({ messages: [{ status: 200, title: 'Annex Operator successfully updated!' }] }.to_json)
         end
@@ -145,7 +151,7 @@ module V1
 
         it 'Do not allows to update annex_operator by not admin user' do
           patch "/annex_operators/#{annex_operator.id}", params: {"annex_operator": { "illegality": "Annex Operator one" }},
-                                                             headers: @headers_user
+                                                         headers: @headers_user
           expect(status).to eq(401)
           expect(body).to   eq(error_unauthorized.to_json)
         end
