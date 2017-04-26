@@ -193,7 +193,7 @@ namespace :import_operator_observations_csv do
 
         data_oo = {}
         data_oo[:observation_type]  = 'AnnexOperator'
-        data_oo[:publication_date]  = data_row['publication_date']
+        data_oo[:publication_date]  = DateTime.strptime(data_row['publication_date'],'%y/%m/%d')
         data_oo[:country_id]        = country_id
         data_oo[:details]           = data_row['description']
         data_oo[:evidence]          = data_row['evidence']
@@ -259,7 +259,7 @@ namespace :import_governance_observations_csv do
 
         data_go = {}
         data_go[:observation_type]  = 'AnnexGovernance'
-        data_go[:publication_date]  = data_row['publication_date']
+        data_go[:publication_date]  = DateTime.strptime(data_row['publication_date'],'%y/%m/%d')
         data_go[:country_id]        = country_id
         data_go[:details]           = data_row['description']
         data_go[:evidence]          = data_row['evidence']
