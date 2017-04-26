@@ -8,10 +8,11 @@ class ObservationsIndex
   delegate :params,           to: :controller
   delegate :observations_url, to: :controller
 
-  attr_reader :controller
+  attr_reader :controller, :current_user
 
-  def initialize(controller)
-    @controller = controller
+  def initialize(controller, current_user=nil)
+    @controller   = controller
+    @current_user = current_user
   end
 
   def observations
@@ -32,12 +33,25 @@ class ObservationsIndex
   private
 
     def options_filter
-      params.permit('id', 'evidence', 'sort', 'observation', 'observation' => {}).tap do |filter_params|
+      params.permit('id', 'sort', 'type', 'user', 'observation', 'observation' => {}).tap do |filter_params|
         filter_params[:page]= {}
         filter_params[:page][:number] = params[:page][:number] if params[:page].present? && params[:page][:number].present?
         filter_params[:page][:size]   = params[:page][:size]   if params[:page].present? && params[:page][:size].present?
+
+        if params[:user].present? && params[:user].include?('current') && @current_user.present?
+          filter_params[:user] = @current_user.id
+        elsif params[:user].present? && is_number?(params[:user])
+          filter_params[:user] = params[:user]
+        else
+          filter_params[:user] = nil
+        end
+
         filter_params
       end
+    end
+
+    def is_number?(number)
+      number.to_i.to_s == number.to_s
     end
 
     def current_page
