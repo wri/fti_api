@@ -99,7 +99,7 @@ module V1
         it 'Register valid user with ngo role request' do
           post '/register', params: {"user": { "email": "test@gmail.com", "nickname": "sebanew",
                                      "password": "password", "password_confirmation": "password", "name": "Test user new",
-                                     "permissions_request": "ngo", "country_id": country.id, "institution": "My orga" }},
+                                     "permissions_request": "NGO", "country_id": country.id, "institution": "My orga" }},
                             headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'User successfully registrated!' }] }.to_json)
