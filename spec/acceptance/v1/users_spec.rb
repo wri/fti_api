@@ -106,6 +106,15 @@ module V1
 
           expect(User.find_by(email: 'test@gmail.com').permissions_request).to eq('ngo')
         end
+
+        it 'Returns error object when the user permissions_request invalid' do
+          post '/register', params: {"user": { "email": "test@gmail.com", "nickname": "sebanew",
+                                     "password": "password", "password_confirmation": "password", "name": "Test user new",
+                                     "permissions_request": "blaBla", "country_id": country.id, "institution": "My orga" }},
+                            headers: @headers
+          expect(status).to eq(422)
+          expect(body).to   eq({ messages: [{ status: 422, title: 'Not valid permissions_request. Valid permissions_request: ["operator", "ngo"]' }] }.to_json)
+        end
       end
     end
 

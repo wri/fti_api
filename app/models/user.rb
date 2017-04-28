@@ -27,6 +27,7 @@ class User < ApplicationRecord
 
   # Include default devise modules.
   TEMP_EMAIL_REGEX = /\Achange@tmp/
+  PERMISSIONS = %w(operator ngo)
 
   belongs_to :country, inverse_of: :users, optional: true
 
