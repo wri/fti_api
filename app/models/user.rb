@@ -72,14 +72,10 @@ class User < ApplicationRecord
       users = includes(:user_permission, :comments, :country)
       users
     end
-
-    def user_select
-      by_nickname_asc.map { |c| [c.nickname, c.id] }
-    end
   end
 
   def display_name
-    return "#{half_email}" if name.blank?
+    "#{half_email}" if name.blank?
     "#{name}"
   end
 
@@ -108,7 +104,42 @@ class User < ApplicationRecord
     end
   end
 
+  def send_reset_password_instructions(options)
+    reset_url  = options[:reset_url]
+    reset_url += '?reset_password_token='
+    reset_url += generate_reset_token(self)
+
+    PasswordMailer.password_email(display_name, email, reset_url).deliver
+  end
+
+  def reset_password_by_token(options)
+    if reset_password_sent_at.present? && DateTime.now <= reset_password_sent_at + 2.hours
+      update(password: options[:password],
+             password_confirmation: options[:password_confirmation],
+             reset_password_sent_at: nil)
+    else
+      self.errors.add(:reset_password_token, 'link expired.')
+      self
+    end
+  end
+
+  def reset_password_by_current_user(options)
+    if update(password: options[:password],
+              password_confirmation: options[:password_confirmation])
+      self
+    else
+      self.errors.add(:password, 'could not be updated!')
+      self
+    end
+  end
+
   private
+
+    def generate_reset_token(user)
+      token = SecureRandom.uuid
+      user.update(reset_password_token: token, reset_password_sent_at: DateTime.now)
+      user.reset_password_token
+    end
 
     def validate_nickname
       if User.where(email: nickname).exists?
@@ -117,9 +148,9 @@ class User < ApplicationRecord
     end
 
     def half_email
-      return "" if email.blank?
+      "" if email.blank?
       index = email.index('@')
-      return "" if index.nil? || index.to_i.zero?
+      "" if index.nil? || index.to_i.zero?
       email[0, index.to_i]
     end
 end

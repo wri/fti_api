@@ -56,6 +56,7 @@ group :development do
   gem 'capistrano-env-config'
   gem 'capistrano-passenger'
   gem 'capistrano-rails',          '~> 1.2'
+  gem 'capistrano-resque',         require: false
   gem 'capistrano-rvm'
   gem 'listen',                    '~> 3.0.5'
   gem 'pry-rails'
@@ -81,4 +82,8 @@ gem 'newrelic_rpm'
 gem 'puma'
 gem 'rack-cors'
 gem 'rails_12factor',              group: :production
+gem 'redis-rails'
+gem 'resque'
+gem 'resque-scheduler'
+gem 'resque_mailer'
 gem 'tzinfo-data'
