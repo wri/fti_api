@@ -67,7 +67,7 @@ module V1
     context 'Pagination and sort for observations' do
       let!(:observations) {
         observations = []
-        observations << FactoryGirl.create_list(:observation_1, 4)
+        observations << FactoryGirl.create_list(:observation_2, 4)
         observations << FactoryGirl.create(:observation_1, evidence: 'ZZZ Next first one')
       }
 
@@ -99,6 +99,22 @@ module V1
         expect(status).to    eq(200)
         expect(json.size).to eq(6)
         expect(json[0]['attributes']['evidence']).to eq('ZZZ Next first one')
+      end
+
+      it 'Filter by operator' do
+        get '/observations?type=operator', headers: @headers
+
+        expect(status).to    eq(200)
+        expect(json.size).to eq(2)
+        expect(json[0]['attributes']['evidence']).to eq('00 Observation one')
+      end
+
+      it 'Filter by governance' do
+        get '/observations?type=governance', headers: @headers
+
+        expect(status).to    eq(200)
+        expect(json.size).to eq(4)
+        expect(json[0]['attributes']['evidence']).to eq('Governance observation')
       end
     end
 
