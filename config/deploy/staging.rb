@@ -65,10 +65,19 @@
 server ENV['STAGING_IP'],
 user: ENV['SSH_USER'],
 roles: %w{web app db}, primary: true
+
 set :ssh_options, {
   forward_agent: true,
   auth_methods: %w(publickey password),
   password: fetch(:password)
 }
+
 set :branch, 'staging'
 set :deploy_to, '~/fti-api-staging'
+
+role :resque_worker, ENV['STAGING_IP']
+role :resque_scheduler, ENV['STAGING_IP']
+
+set :workers, {
+    ENV['STAGING_IP'] => { 'mailer' => 2 }
+}
