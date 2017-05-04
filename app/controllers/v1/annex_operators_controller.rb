@@ -11,7 +11,8 @@ module V1
 
     def index
       @annex_operators = AnnexOperatorsIndex.new(self)
-      render json: @annex_operators.annex_operators, each_serializer: AnnexOperatorSerializer, links: @annex_operators.links
+      render json: @annex_operators.annex_operators, each_serializer: AnnexOperatorSerializer, include: [:severities, :categories, :laws, :comments, :country],
+             meta: { total_items: @annex_operators.total_items }, links: @annex_operators.links
     end
 
     def show

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503074554) do
+ActiveRecord::Schema.define(version: 20170504133837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,6 +206,8 @@ ActiveRecord::Schema.define(version: 20170503074554) do
     t.boolean  "is_active",           default: true
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.decimal  "lat"
+    t.decimal  "lng"
     t.index ["annex_governance_id"], name: "index_observations_on_annex_governance_id", using: :btree
     t.index ["annex_operator_id"], name: "index_observations_on_annex_operator_id", using: :btree
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree

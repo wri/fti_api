@@ -15,9 +15,13 @@ class GovernmentsIndex
   end
 
   def governments
-    @governments ||= Government.fetch_all(options_filter)
-                               .order(sort_params)
-                               .paginate(page: current_page, per_page: per_page)
+    @governments       ||= Government.fetch_all(options_filter)
+    @governments_items ||= @governments.order(sort_params)
+                                       .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @governments.size
   end
 
   def links

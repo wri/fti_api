@@ -15,9 +15,13 @@ class AnnexGovernancesIndex
   end
 
   def annex_governances
-    @annex_governances ||= AnnexGovernance.fetch_all(options_filter)
-                                          .order(sort_params)
-                                          .paginate(page: current_page, per_page: per_page)
+    @annex_governances       ||= AnnexGovernance.fetch_all(options_filter)
+    @annex_governances_items ||= @annex_governances.order(sort_params)
+                                                   .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @annex_governances.size
   end
 
   def links

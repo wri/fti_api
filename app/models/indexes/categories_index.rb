@@ -16,9 +16,13 @@ class CategoriesIndex
   end
 
   def categories
-    @categories ||= Category.fetch_all(options_filter)
-                            .order(sort_params)
-                            .paginate(page: current_page, per_page: per_page)
+    @categories       ||= Category.fetch_all(options_filter)
+    @categories_items ||= @categories.order(sort_params)
+                                     .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @categories.size
   end
 
   def links

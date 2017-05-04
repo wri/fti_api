@@ -134,7 +134,7 @@ module V1
         end
 
         it 'Returns success object when the observation was seccessfully created by admin' do
-          post '/observations', params: {"observation": { "country_id": country.id, observation_type: 'AnnexOperator', publication_date: DateTime.now }},
+          post '/observations', params: {"observation": { "country_id": country.id, observation_type: 'AnnexOperator', publication_date: DateTime.now, lat: 123.4444, lng: 12.4444 }},
                                 headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Observation successfully created!' }] }.to_json)

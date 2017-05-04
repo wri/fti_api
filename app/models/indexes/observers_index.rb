@@ -15,9 +15,13 @@ class ObserversIndex
   end
 
   def observers
-    @observers ||= Observer.fetch_all(options_filter)
-                           .order(sort_params)
-                           .paginate(page: current_page, per_page: per_page)
+    @observers       ||= Observer.fetch_all(options_filter)
+    @observers_items ||= @observers.order(sort_params)
+                                   .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @observers.size
   end
 
   def links

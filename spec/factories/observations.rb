@@ -26,6 +26,8 @@ FactoryGirl.define do
     evidence         'Operator observation'
     publication_date DateTime.now.to_date
     association :country, factory: :country
+    lng 12.2222
+    lat 12.3333
 
     after(:create) do |observation|
       annex = FactoryGirl.create(:annex_operator)
@@ -45,6 +47,8 @@ FactoryGirl.define do
     evidence         'Governance observation'
     publication_date (DateTime.now - 1.days).to_date
     association :country, factory: :country
+    lng 12.2222
+    lat 12.3333
 
     after(:create) do |observation|
       annex = FactoryGirl.create(:annex_governance)
@@ -64,5 +68,7 @@ FactoryGirl.define do
     evidence         'Operator observation'
     publication_date DateTime.now.to_date
     association :country, factory: :country
+    lng 12.2222
+    lat 12.3333
   end
 end

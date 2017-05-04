@@ -15,9 +15,13 @@ class LawsIndex
   end
 
   def laws
-    @laws ||= Law.fetch_all(options_filter)
-                 .order(sort_params)
-                 .paginate(page: current_page, per_page: per_page)
+    @laws       ||= Law.fetch_all(options_filter)
+    @laws_items ||= @laws.order(sort_params)
+                         .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @laws.size
   end
 
   def links

@@ -16,9 +16,13 @@ class ObservationsIndex
   end
 
   def observations
-    @observations ||= Observation.fetch_all(options_filter)
-                                 .order(sort_params)
-                                 .paginate(page: current_page, per_page: per_page)
+    @observations       ||= Observation.fetch_all(options_filter)
+    @observations_items ||= @observations.order(sort_params)
+                                         .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @observations.size
   end
 
   def links

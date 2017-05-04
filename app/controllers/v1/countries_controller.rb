@@ -11,7 +11,8 @@ module V1
 
     def index
       @countries = CountriesIndex.new(self)
-      render json: @countries.countries, each_serializer: CountrySerializer, links: @countries.links
+      render json: @countries.countries, each_serializer: CountrySerializer,
+             meta: { total_items: @countries.total_items }, links: @countries.links
     end
 
     def show

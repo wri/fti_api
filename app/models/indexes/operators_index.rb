@@ -15,9 +15,13 @@ class OperatorsIndex
   end
 
   def operators
-    @operators ||= Operator.fetch_all(options_filter)
-                           .order(sort_params)
-                           .paginate(page: current_page, per_page: per_page)
+    @operators       ||= Operator.fetch_all(options_filter)
+    @operators_items ||= @operators.order(sort_params)
+                                   .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @operators.size
   end
 
   def links

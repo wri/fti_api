@@ -15,9 +15,13 @@ class CountriesIndex
   end
 
   def countries
-    @countries ||= Country.fetch_all(options_filter)
-                          .order(sort_params)
-                          .paginate(page: current_page, per_page: per_page)
+    @countries       ||= Country.fetch_all(options_filter)
+    @countries_items ||= @countries.order(sort_params)
+                                   .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @countries.size
   end
 
   def links
