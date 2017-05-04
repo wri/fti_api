@@ -32,11 +32,15 @@ module V1
 
 
     context 'Pagination and sort for governments' do
+      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+
       let!(:governments) {
         governments = []
         governments << FactoryGirl.create_list(:government, 4)
-        governments << FactoryGirl.create(:government, government_entity: 'ZZZ Next first one')
+        governments << FactoryGirl.create(:government, government_entity: 'ZZZ Next first one Spain', country: country)
       }
+
+      let(:country_id) { Government.find_by(government_entity: 'ZZZ Next first one Spain').country.id }
 
       it 'Show list of governments for first page with per page param' do
         get '/governments?page[number]=1&page[size]=3', headers: @headers
@@ -65,7 +69,15 @@ module V1
 
         expect(status).to                        eq(200)
         expect(json.size).to                     eq(6)
-        expect(json[0]['attributes']['government_entity']).to eq('ZZZ Next first one')
+        expect(json[0]['attributes']['government_entity']).to eq('ZZZ Next first one Spain')
+      end
+
+      it 'Filter governments by country and sort by government_entity ASC' do
+        get "/governments?country=#{country_id}&sort=government_entity", headers: @headers
+
+        expect(status).to                                     eq(200)
+        expect(json.size).to                                  eq(1)
+        expect(json[0]['attributes']['government_entity']).to match('Spain')
       end
     end
 

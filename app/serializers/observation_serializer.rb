@@ -19,6 +19,8 @@
 #  is_active           :boolean          default(TRUE)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  lat                 :decimal(, )
+#  lng                 :decimal(, )
 #
 
 class ObservationSerializer < ActiveModel::Serializer

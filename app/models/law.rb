@@ -26,13 +26,18 @@ class Law < ApplicationRecord
                            .order('law_translations.legal_reference ASC')
   }
 
+  scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
+
   default_scope do
     includes(:translations)
   end
 
   class << self
     def fetch_all(options)
+      country_id  = options['country'] if options.present? && options['country'].present?
+
       laws = includes(:country)
+      laws = laws.filter_by_country(country_id) if country_id.present?
       laws
     end
 

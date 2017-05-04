@@ -36,7 +36,7 @@ class LawsIndex
   private
 
     def options_filter
-      params.permit('id', 'legal_reference', 'sort', 'law', 'law' => {}).tap do |filter_params|
+      params.permit('id', 'legal_reference', 'country', 'sort', 'law', 'law' => {}).tap do |filter_params|
         filter_params[:page]= {}
         filter_params[:page][:number] = params[:page][:number] if params[:page].present? && params[:page][:number].present?
         filter_params[:page][:size]   = params[:page][:size]   if params[:page].present? && params[:page][:size].present?

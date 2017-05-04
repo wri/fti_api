@@ -24,19 +24,17 @@ class Government < ApplicationRecord
         .order('government_translations.government_entity ASC')
   }
 
-  scope :by_country, ->country_id { where('governments.country_id = ?', country_id) }
+  scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
 
   default_scope { includes(:translations) }
 
   class << self
     def fetch_all(options)
-      governments = includes(:country)
-      governments
-    end
+      country_id  = options['country'] if options.present? && options['country'].present?
 
-    def entity_select(options)
-      country_id = options[:country_id] if options[:country_id].present?
-      by_country(country_id).by_entity_asc.map { |c| [c.government_entity, c.id] }
+      governments = includes(:country)
+      governments = governments.filter_by_country(country_id) if country_id.present?
+      governments
     end
   end
 
