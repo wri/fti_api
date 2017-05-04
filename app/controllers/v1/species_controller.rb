@@ -11,7 +11,8 @@ module V1
 
     def index
       @species = SpeciesIndex.new(self)
-      render json: @species.species, each_serializer: SpeciesSerializer, links: @species.links
+      render json: @species.species, each_serializer: SpeciesSerializer,
+             meta: { total_items: @species.total_items }, links: @species.links
     end
 
     def show

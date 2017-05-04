@@ -11,7 +11,8 @@ module V1
 
     def index
       @governments = GovernmentsIndex.new(self)
-      render json: @governments.governments, each_serializer: GovernmentSerializer, links: @governments.links
+      render json: @governments.governments, each_serializer: GovernmentSerializer,
+             meta: { total_items: @governments.total_items }, links: @governments.links
     end
 
     def show

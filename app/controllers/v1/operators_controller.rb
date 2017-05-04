@@ -12,7 +12,8 @@ module V1
 
     def index
       @operators = OperatorsIndex.new(self)
-      render json: @operators.operators, each_serializer: OperatorSerializer, links: @operators.links
+      render json: @operators.operators, each_serializer: OperatorSerializer,
+             meta: { total_items: @operators.total_items }, links: @operators.links
     end
 
     def show

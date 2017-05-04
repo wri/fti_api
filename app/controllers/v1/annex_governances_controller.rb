@@ -11,7 +11,8 @@ module V1
 
     def index
       @annex_governances = AnnexGovernancesIndex.new(self)
-      render json: @annex_governances.annex_governances, each_serializer: AnnexGovernanceSerializer, links: @annex_governances.links
+      render json: @annex_governances.annex_governances, each_serializer: AnnexGovernanceSerializer, include: [:severities, :categories, :comments],
+             meta: { total_items: @annex_governances.total_items }, links: @annex_governances.links
     end
 
     def show
