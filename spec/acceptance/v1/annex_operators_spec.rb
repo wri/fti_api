@@ -33,11 +33,15 @@ module V1
     end
 
     context 'Pagination and sort for annex_operators' do
+      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+
       let!(:annex_operators) {
         annex_operators = []
         annex_operators << FactoryGirl.create_list(:annex_operator, 3)
-        annex_operators << FactoryGirl.create(:annex_operator, illegality: 'ZZZ Next first one')
+        annex_operators << FactoryGirl.create(:annex_operator, illegality: 'ZZZ Next first one Spain', country_id: country.id)
       }
+
+      let(:country_id) { AnnexOperator.find_by(illegality: 'ZZZ Next first one Spain').country.id }
 
       it 'Show list of annex_operators for first page with per pege param' do
         get '/annex_operators?page[number]=1&page[size]=3', headers: @headers
@@ -66,7 +70,15 @@ module V1
 
         expect(status).to    eq(200)
         expect(json.size).to eq(6)
-        expect(json[0]['attributes']['illegality']).to eq('ZZZ Next first one')
+        expect(json[0]['attributes']['illegality']).to eq('ZZZ Next first one Spain')
+      end
+
+      it 'Filter annex_operators by country and sort by illegality ASC' do
+        get "/annex_operators?country=#{country_id}&sort=illegality", headers: @headers
+
+        expect(status).to                              eq(200)
+        expect(json.size).to                           eq(1)
+        expect(json[0]['attributes']['illegality']).to match('Spain')
       end
     end
 

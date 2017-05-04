@@ -28,6 +28,7 @@ module V1
         observations << FactoryGirl.create(:observation, evidence: '00 Observation one', user_id: admin.id)
       }
 
+
       it 'Get observations list' do
         get '/observations', headers: @headers
         expect(status).to eq(200)
@@ -65,11 +66,15 @@ module V1
     end
 
     context 'Pagination and sort for observations' do
+      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+
       let!(:observations) {
         observations = []
         observations << FactoryGirl.create_list(:observation_2, 4)
-        observations << FactoryGirl.create(:observation_1, evidence: 'ZZZ Next first one')
+        observations << FactoryGirl.create(:observation_1, evidence: 'ZZZ Next first one Spain', country: country)
       }
+
+      let(:country_id) { Observation.find_by(evidence: 'ZZZ Next first one Spain').country.id }
 
       it 'Show list of observations for first page with per pege param' do
         get '/observations?page[number]=1&page[size]=3', headers: @headers
@@ -98,7 +103,7 @@ module V1
 
         expect(status).to    eq(200)
         expect(json.size).to eq(6)
-        expect(json[0]['attributes']['evidence']).to eq('ZZZ Next first one')
+        expect(json[0]['attributes']['evidence']).to eq('ZZZ Next first one Spain')
       end
 
       it 'Filter by operator' do
@@ -115,6 +120,14 @@ module V1
         expect(status).to    eq(200)
         expect(json.size).to eq(4)
         expect(json[0]['attributes']['evidence']).to eq('Governance observation')
+      end
+
+      it 'Filter observations by country and sort by illegality ASC' do
+        get "/observations?country=#{country_id}&sort=illegality", headers: @headers
+
+        expect(status).to                            eq(200)
+        expect(json.size).to                         eq(1)
+        expect(json[0]['attributes']['evidence']).to match('Spain')
       end
     end
 

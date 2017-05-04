@@ -19,6 +19,8 @@
 #  is_active           :boolean          default(TRUE)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  lat                 :decimal(, )
+#  lng                 :decimal(, )
 #
 
 class Observation < ApplicationRecord
@@ -58,12 +60,15 @@ class Observation < ApplicationRecord
   scope :by_operator,   ->          { where(observation_type: 'AnnexOperator')    }
   scope :by_user,       ->(by_user) { where(user_id: by_user)                     }
 
+  scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
+
   default_scope { includes(:translations) }
 
   class << self
     def fetch_all(options)
-      by_user = options['user'] if options['user'].present?
-      by_type = options['type'] if options['type'].present?
+      by_user    = options['user']    if options.present? && options['user'].present?
+      by_type    = options['type']    if options.present? && options['type'].present?
+      country_id = options['country'] if options.present? && options['country'].present?
 
       observations = includes([:documents, :photos,
                                :annex_operator, :annex_governance,
@@ -72,9 +77,10 @@ class Observation < ApplicationRecord
                                { annex_operator: :translations },
                                { annex_governance: :translations }])
 
-      observations = observations.by_user(by_user) if by_user.present?
-      observations = observations.by_governance    if by_type.present? && by_type.parameterize.include?('governance')
-      observations = observations.by_operator      if by_type.present? && by_type.parameterize.include?('operator')
+      observations = observations.by_user(by_user)              if by_user.present?
+      observations = observations.by_governance                 if by_type.present? && by_type.parameterize.include?('governance')
+      observations = observations.by_operator                   if by_type.present? && by_type.parameterize.include?('operator')
+      observations = observations.filter_by_country(country_id) if country_id.present?
       observations
     end
 

@@ -46,9 +46,5 @@ RSpec.describe AnnexOperator, type: :model do
     it 'Fetch all annex operators' do
       expect(AnnexOperator.fetch_all(nil).count).to eq(2)
     end
-
-    it 'Illegality select' do
-      expect(AnnexOperator.illegality_select(country_id: @annex.country_id).count).to eq(1)
-    end
   end
 end
