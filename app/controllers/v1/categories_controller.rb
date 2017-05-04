@@ -11,7 +11,8 @@ module V1
 
     def index
       @categories = CategoriesIndex.new(self)
-      render json: @categories.categories, each_serializer: CategorySerializer, links: @categories.links
+      render json: @categories.categories, each_serializer: CategorySerializer,
+             meta: { total_items: @categories.total_items }, links: @categories.links
     end
 
     def show

@@ -11,7 +11,8 @@ module V1
 
     def index
       @laws = LawsIndex.new(self)
-      render json: @laws.laws, each_serializer: LawSerializer, links: @laws.links
+      render json: @laws.laws, each_serializer: LawSerializer,
+             meta: { total_items: @laws.total_items }, links: @laws.links
     end
 
     def show

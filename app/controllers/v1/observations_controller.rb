@@ -12,7 +12,8 @@ module V1
 
     def index
       @observations = ObservationsIndex.new(self, @current_user)
-      render json: @observations.observations, each_serializer: ObservationSerializer, links: @observations.links
+      render json: @observations.observations, each_serializer: ObservationSerializer,
+             meta: { total_items: @observations.total_items }, links: @observations.links
     end
 
     def show
@@ -58,7 +59,7 @@ module V1
       def observation_params
         return_params = params.require(:observation).permit(:pv, :operator_opinion, :litigation_status, :observation_type, :id,
                                                             :user_id, :publication_date, :country_id, :annex_operator_id, :annex_governance_id,
-                                                            :observer_id, :operator_id, :government_id, :severity_id, :locale,
+                                                            :observer_id, :operator_id, :government_id, :severity_id, :locale, :lat, :lng,
                                                             :details, :evidence, { photos_attributes: [:id, :name, :attachment, :user_id, :_destroy] },
                                                             { documents_attributes: [:id, :name, :attachment, :user_id, :document_type, :_destroy] }, :species_ids)
 

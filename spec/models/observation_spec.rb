@@ -36,6 +36,8 @@ RSpec.describe Observation, type: :model do
       expect(@observation.country.name).to               match('Country')
       expect(@observation.illegality).to                 eq('Illegality one')
       expect(@observation.laws.first.legal_reference).to eq('Lorem')
+      expect(@observation.lat).to                        eq(12.3333)
+      expect(@observation.lng).to                        eq(12.2222)
     end
 
     it 'Order by illegality desc' do

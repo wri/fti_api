@@ -15,9 +15,13 @@ class UsersIndex
   end
 
   def users
-    @users ||= User.fetch_all(options_filter)
-                   .order(sort_params)
-                   .paginate(page: current_page, per_page: per_page)
+    @users       ||= User.fetch_all(options_filter)
+    @users_items ||= @users.order(sort_params)
+                           .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @users.size
   end
 
   def links

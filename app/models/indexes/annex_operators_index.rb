@@ -15,9 +15,13 @@ class AnnexOperatorsIndex
   end
 
   def annex_operators
-    @annex_operators ||= AnnexOperator.fetch_all(options_filter)
-                                      .order(sort_params)
-                                      .paginate(page: current_page, per_page: per_page)
+    @annex_operators       ||= AnnexOperator.fetch_all(options_filter)
+    @annex_operators_items ||= @annex_operators.order(sort_params)
+                                               .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @annex_operators.size
   end
 
   def links

@@ -12,7 +12,8 @@ module V1
 
     def index
       @observers = ObserversIndex.new(self)
-      render json: @observers.observers, each_serializer: ObserverSerializer, links: @observers.links
+      render json: @observers.observers, each_serializer: ObserverSerializer,
+             meta: { total_items: @observers.total_items }, links: @observers.links
     end
 
     def show

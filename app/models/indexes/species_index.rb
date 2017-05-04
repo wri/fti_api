@@ -15,9 +15,13 @@ class SpeciesIndex
   end
 
   def species
-    @species ||= Species.fetch_all(options_filter)
-                        .order(sort_params)
-                        .paginate(page: current_page, per_page: per_page)
+    @species       ||= Species.fetch_all(options_filter)
+    @species_items ||= @species.order(sort_params)
+                               .paginate(page: current_page, per_page: per_page)
+  end
+
+  def total_items
+    @total_items ||= @species.size
   end
 
   def links

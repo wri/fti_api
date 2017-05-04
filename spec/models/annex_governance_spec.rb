@@ -17,7 +17,7 @@ RSpec.describe AnnexGovernance, type: :model do
     end
 
     it 'Count on annex' do
-      expect(AnnexGovernance.count).to                       eq(2)
+      expect(AnnexGovernance.count).to                        eq(2)
       expect(AnnexGovernance.all.first.governance_problem).to eq('Z Annex governance problem')
     end
 
