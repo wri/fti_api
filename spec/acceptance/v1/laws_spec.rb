@@ -31,11 +31,15 @@ module V1
     end
 
     context 'Pagination and sort for laws' do
+      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+
       let!(:laws) {
         laws = []
         laws << FactoryGirl.create_list(:law, 4)
-        laws << FactoryGirl.create(:law, legal_reference: 'ZZZ Next first one')
+        laws << FactoryGirl.create(:law, legal_reference: 'ZZZ Next first one Spain', country: country)
       }
+
+      let(:country_id) { Law.find_by(legal_reference: 'ZZZ Next first one Spain').country.id }
 
       it 'Show list of laws for first page with per pege param' do
         get '/laws?page[number]=1&page[size]=3', headers: @headers
@@ -64,7 +68,15 @@ module V1
 
         expect(status).to    eq(200)
         expect(json.size).to eq(6)
-        expect(json[0]['attributes']['legal_reference']).to eq('ZZZ Next first one')
+        expect(json[0]['attributes']['legal_reference']).to eq('ZZZ Next first one Spain')
+      end
+
+      it 'Filter laws by country and sort by illegality ASC' do
+        get "/laws?country=#{country_id}&sort=illegality", headers: @headers
+
+        expect(status).to                                   eq(200)
+        expect(json.size).to                                eq(1)
+        expect(json[0]['attributes']['legal_reference']).to match('Spain')
       end
     end
 

@@ -34,7 +34,7 @@ class AnnexOperator < ApplicationRecord
                            .order('annex_operator_translations.illegality ASC')
   }
 
-  scope :by_country, ->country_id { where('annex_operators.country_id = ?', country_id) }
+  scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
 
   default_scope do
     includes(:translations)
@@ -42,18 +42,15 @@ class AnnexOperator < ApplicationRecord
 
   class << self
     def fetch_all(options)
+      country_id  = options['country'] if options.present? && options['country'].present?
+
       annex_operators = includes({ severities: :translations },
                                  { categories: :translations },
                                  { laws: :translations },
                                  :comments, :country)
-      annex_operators
-    end
 
-    def illegality_select(options=nil)
-      country_id = options[:country_id] if options.present? && options[:country_id].present?
-      illegalities = all
-      illegalities = illegalities.by_country(country_id) if country_id.present?
-      illegalities.by_illegality_asc.map { |il| [il.illegality, il.id] }
+      annex_operators = annex_operators.filter_by_country(country_id) if country_id.present?
+      annex_operators
     end
   end
 

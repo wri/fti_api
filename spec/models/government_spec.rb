@@ -43,8 +43,4 @@ RSpec.describe Government, type: :model do
   it 'Fetch all governments' do
     expect(Government.fetch_all(nil).count).to eq(2)
   end
-
-  it 'Governnment select for country' do
-    expect(Government.entity_select(country_id: @government.country_id).size).to eq(1)
-  end
 end
