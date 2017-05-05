@@ -14,14 +14,10 @@ gem 'rails', '~> 5.0.2'
 
 # API
 gem 'active_model_serializers', '~> 0.10.4'
-gem 'json-schema'
 gem 'oj'
 gem 'oj_mimic_json'
-gem 'typhoeus', require: false
 
 # Data
-gem 'active_hash'
-gem 'activerecord-import'
 gem 'cancancan'
 gem 'globalize',                   github: 'globalize/globalize'
 gem 'seed-fu'
@@ -37,9 +33,6 @@ gem 'mini_magick'
 # Templating
 gem 'slim-rails'
 gem 'will_paginate'
-
-# Messages
-gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug',                    platform: :mri
