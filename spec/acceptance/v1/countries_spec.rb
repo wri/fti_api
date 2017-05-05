@@ -34,7 +34,7 @@ module V1
       let!(:countries) {
         countries = []
         countries << FactoryGirl.create_list(:country, 4)
-        countries << FactoryGirl.create(:country, name: 'ZZZ Next first one')
+        countries << FactoryGirl.create(:country, name: 'ZZZ Next first one', is_active: false)
       }
 
       it 'Show list of countries for first page with per pege param' do
@@ -65,6 +65,20 @@ module V1
         expect(status).to                        eq(200)
         expect(json.size).to                     eq(6)
         expect(json[0]['attributes']['name']).to eq('ZZZ Next first one')
+      end
+
+      it 'Filter countries by active' do
+        get '/countries?is_active=true', headers: @headers
+
+        expect(status).to    eq(200)
+        expect(json.size).to eq(5)
+      end
+
+      it 'Filter countries by inactive' do
+        get '/countries?is_active=false', headers: @headers
+
+        expect(status).to    eq(200)
+        expect(json.size).to eq(1)
       end
     end
 

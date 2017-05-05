@@ -35,7 +35,7 @@ class Country < ApplicationRecord
                            .order('country_translations.name ASC')
   }
 
-  scope :by_activated, -> { where(is_active: true) }
+  scope :by_status, ->(status) { where(is_active: status) }
 
   default_scope do
     includes(:translations)
@@ -43,16 +43,11 @@ class Country < ApplicationRecord
 
   class << self
     def fetch_all(options)
+      by_status = options['is_active'] if options.present? && options['is_active'].in?(['true', 'false'])
+
       countries = all
+      countries = countries.by_status(by_status) if by_status.present?
       countries
-    end
-
-    def country_select
-      by_name_asc.map { |c| [c.name, c.id] }
-    end
-
-    def active_country_select
-      by_activated.by_name_asc.map { |c| [c.name, c.id] }
     end
   end
 
