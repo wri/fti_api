@@ -80,6 +80,14 @@ module V1
         expect(status).to    eq(200)
         expect(json.size).to eq(1)
       end
+
+      it 'Load short list of countries' do
+        get '/countries?short=true&is_active=false', headers: @headers
+
+        expect(status).to    eq(200)
+        expect(json.size).to eq(1)
+        expect(json[0]['attributes']).to eq({ "name" => "ZZZ Next first one"})
+      end
     end
 
     context 'Create countries' do
