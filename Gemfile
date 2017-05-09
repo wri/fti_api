@@ -71,7 +71,6 @@ end
 
 # Server
 gem 'dotenv-rails'
-gem 'newrelic_rpm'
 gem 'puma'
 gem 'rack-cors'
 gem 'rails_12factor',              group: :production
