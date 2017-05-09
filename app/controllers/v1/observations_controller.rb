@@ -14,7 +14,8 @@ module V1
       @observations = ObservationsIndex.new(self, @current_user)
       render json: @observations.observations, each_serializer: ObservationSerializer,
              include: [:country, :operator,
-                       :severity, :categories],
+                       :severity, [annex_operator: :categories], [annex_governance: :categories],
+                       :annex_operator, :annex_governance],
              meta: { total_items: @observations.total_items }, links: @observations.links
     end
 
