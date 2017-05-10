@@ -21,7 +21,8 @@ module V1
 
     def show
       render json: @observation, serializer: ObservationSerializer, include: [:documents, :photos,
-                                                                              :annex_operator, :annex_governance,
+                                                                              [annex_operator: :severities],
+                                                                              [annex_governance: :severities],
                                                                               :country, :species, :observer, :operator,
                                                                               :severity, :comments,
                                                                               :annex_operator, :annex_governance],
