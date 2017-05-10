@@ -30,6 +30,8 @@ class Country < ApplicationRecord
 
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 
+  before_save :set_active
+
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
                            .order('country_translations.name ASC')
@@ -53,5 +55,11 @@ class Country < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  private
+
+  def set_active
+    is_active = true unless is_active == true || is_active == false
   end
 end
