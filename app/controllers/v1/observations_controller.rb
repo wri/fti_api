@@ -14,13 +14,15 @@ module V1
       @observations = ObservationsIndex.new(self, @current_user)
       render json: @observations.observations, each_serializer: ObservationSerializer,
              include: [:country, :operator,
-                       :severity, :categories],
+                       :severity, [annex_operator: :categories], [annex_governance: :categories],
+                       :annex_operator, :annex_governance],
              meta: { total_items: @observations.total_items }, links: @observations.links
     end
 
     def show
       render json: @observation, serializer: ObservationSerializer, include: [:documents, :photos,
-                                                                              :annex_operator, :annex_governance,
+                                                                              [annex_operator: :severities],
+                                                                              [annex_governance: :severities],
                                                                               :country, :species, :observer, :operator,
                                                                               :severity, :comments,
                                                                               :annex_operator, :annex_governance],
