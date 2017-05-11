@@ -11,7 +11,7 @@ module V1
       if @user && @user.authenticate(auth_params[:password])
         token = Auth.issue({ user: @user.id })
         @user.update(current_sign_in_ip: auth_params[:current_sign_in_ip]) if auth_params[:current_sign_in_ip].present?
-        render json: { token: token, role: @user.role, user_id: @user.id }, status: 200
+        render json: { token: token, role: @user.user_permission.user_role, user_id: @user.id }, status: 200
       else
         render json: { errors: [{ status: '401', title: 'Incorrect email or password' }] }, status: 401
       end
