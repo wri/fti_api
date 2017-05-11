@@ -20,17 +20,23 @@ class UserPermission < ApplicationRecord
   before_update :change_permissions,         if: 'user_role_changed?'
   after_update  :accept_permissions_request, if: 'user.permissions_request.present?'
 
-  private
+  def change_permissions
+    self.permissions = role_permissions
+  end
 
-    def change_permissions
-      self.permissions = role_permissions
-    end
+  private
 
     def role_permissions
       case self.user_role
-      when 'admin'    then { admin: { all: [:read]  }, all:         { all: [:manage]     } }
-      when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]       } }
-      when 'ngo'      then { user:  { id: [:manage] }, observation: { all: [:manage] }, photo: { all: [:manage] }, document: { all: [:manage] } }
+      when 'admin'    then { admin: { all: [:read]  }, all:         { all: [:manage] } }
+      when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]   } }
+      when 'ngo'      then { user:  { id: [:manage] }, observation: { all: [:manage] },
+                             photo: { all: [:manage] }, document: { all: [:manage] },
+                             category: { all: [:manage] }, annex_governance: { all: [:manage] },
+                             annex_operator: { all: [:manage] }, comment: { all: [:manage] },
+                             country: { all: [:manage] }, government: { all: [:manage]},
+                             law: { all: [:manage] }, observer: { all: [:manage] },
+                             operator: { all: [:manage]}, species: { all: [:manage] }}
       else
         { user: { id: [:manage] }, observation: { all: [:read] }  }
       end
