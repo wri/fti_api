@@ -24,7 +24,7 @@ module V1
                                                                               [annex_operator: :severities],
                                                                               [annex_governance: :severities],
                                                                               :country, :species, :observer, :operator,
-                                                                              :severity, :comments,
+                                                                              :severity, :comments, :government,
                                                                               :annex_operator, :annex_governance],
              meta: { updated_at: @observation.updated_at, created_at: @observation.created_at }
     end
