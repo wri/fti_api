@@ -22,7 +22,7 @@ class Ability
         can [:read], User, id: user.id
       end
     else
-      can :read, :observation
+      can :read, [Observation, Country]
     end
   end
 end
