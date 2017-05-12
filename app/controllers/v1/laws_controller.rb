@@ -16,7 +16,7 @@ module V1
     end
 
     def show
-      render json: @law, serializer: LawSerializer, meta: { updated_at: @law.updated_at, created_at: @law.created_at }
+      render json: @law, serializer: LawSerializer, includes: :country , meta: { updated_at: @law.updated_at, created_at: @law.created_at }
     end
 
     def update
