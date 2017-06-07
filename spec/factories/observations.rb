@@ -19,6 +19,7 @@
 #  updated_at          :datetime         not null
 #  lat                 :decimal(, )
 #  lng                 :decimal(, )
+#  fmu_id              :integer
 #
 
 FactoryGirl.define do
