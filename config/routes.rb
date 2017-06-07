@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :laws
       resources :governments
       resources :observers
+      resources :fmus
 
       resources :observations do
         resources :comments, only: [:create, :destroy], on: :member, as: :comment

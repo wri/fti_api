@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: observations
@@ -21,6 +20,7 @@
 #  updated_at          :datetime         not null
 #  lat                 :decimal(, )
 #  lng                 :decimal(, )
+#  fmu_id              :integer
 #
 
 class ObservationSerializer < ActiveModel::Serializer
