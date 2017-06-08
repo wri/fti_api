@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       resources :observers
       resources :fmus
 
+      get 'observation_filters', to: 'observation_filters#index'
+
       resources :observations do
         resources :comments, only: [:create, :destroy], on: :member, as: :comment
       end
