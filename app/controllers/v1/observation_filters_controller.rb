@@ -4,6 +4,8 @@ module V1
     include ErrorSerializer
     include ApiUploads
 
+    skip_before_action :authenticate
+
     def index
       annexes = %w(AnnexOperator AnnexGovernance)
       countries = Country.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :iso, :name)
