@@ -61,6 +61,11 @@ class Observation < ApplicationRecord
   scope :by_user,       ->(by_user) { where(user_id: by_user)                     }
 
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
+  scope :filter_by_fmu, ->(fmu_id) { where(fmu_id: fmu_id) }
+  scope :filter_by_year, ->(year) { where("extract(year from publication_date) = #{year}") }
+  scope :filter_by_observer, ->(observer_id) { where(observer_id: observer_id) }
+  scope :filter_by_category, ->(category_id) { where(category_id: category_id) }
+  scope :filter_by_severity, ->(severity_level) { joins(:severity).where("severities.level = #{severity_level}") }
 
   default_scope { includes(:translations) }
 
@@ -69,6 +74,12 @@ class Observation < ApplicationRecord
       by_user    = options['user']    if options.present? && options['user'].present?
       by_type    = options['type']    if options.present? && options['type'].present?
       country_id = options['country'] if options.present? && options['country'].present?
+      fmu_id = options['fmu'] if options.present? && options['fmu'].present?
+      year = options['year'] if options.present? && options['year'].present?
+      observer_id = options['observer_id'] if options.present? && options['observer_id'].present?
+      category_id = options['category_id'] if options.present? && options['category_id'].present?
+      severity = options['severity'] if options.present? && options['severity'].present?
+
 
       observations = includes([:documents, :photos,
                                :annex_operator, :annex_governance,
@@ -81,6 +92,11 @@ class Observation < ApplicationRecord
       observations = observations.by_governance                 if by_type.present? && by_type.parameterize.include?('governance')
       observations = observations.by_operator                   if by_type.present? && by_type.parameterize.include?('operator')
       observations = observations.filter_by_country(country_id) if country_id.present?
+      observations = observations.filter_by_fmu(fmu_id) if fmu_id.present?
+      observations = observations.filter_by_year(year) if year.present?
+      observations = observations.filter_by_observer(observer_id) if observer_id.present?
+      observations = observations.filter_by_category(category_id) if category_id.present?
+      observations = observations.filter_by_severity(severity) if severity.present?
       observations
     end
 

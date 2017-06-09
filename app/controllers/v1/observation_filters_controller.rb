@@ -7,7 +7,7 @@ module V1
     skip_before_action :authenticate
 
     def index
-      annexes = [{id: 'AnnexOperator', name: 'Operator'}, {id: 'AnnexGovernance', name: 'Governance'}]
+      annexes = [{id: 'operator', name: 'Operator'}, {id: 'governance', name: 'Governance'}]
       countries = Country.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :iso, :name)
         .map{|x| {id: x[0], iso: x[1], name: x[2]}}
       fmus = Fmu.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :name)
