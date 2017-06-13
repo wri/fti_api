@@ -296,3 +296,69 @@ namespace :import_governance_observations_csv do
     puts 'Governance observations loaded'
   end
 end
+
+
+
+namespace :import_operators_countries do
+  I18n.locale = :en
+  desc 'Loads operators\' countries from a csv file'
+  task all: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'companies.csv'))
+    puts '* Operator countries... *'
+    country_congo = Country.find_by(iso: 'COG')
+    country_drc = Country.find_by(iso: 'COD')
+    Operator.transaction do
+      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+
+        if data_row['Congo (Atlas)'].present?
+          operator = Operator.find_by(name: data_row['Congo (Atlas)'])
+          if operator.present?
+            operator.update(country: country_congo)
+          end
+        end
+
+        if data_row['DRC (Atlas)'].present?
+          operator = Operator.find_by(name: data_row['DRC (Atlas)'])
+          if operator.present?
+            operator.update(country: country_drc)
+          end
+        end
+      end
+    end
+  end
+end
+
+
+namespace :import_fmus do
+  I18n.locale = :en
+  desc 'Loads fmus from a csv file'
+  task all: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'concession.csv'))
+    puts '* FMUs... *'
+    #Fmu.transaction do
+      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+
+        name = data_row['fmu_name']
+        operator_name = data_row['company_na']
+        country_iso = data_row['iso3_fmu']
+
+        puts "FMU: #{name}"
+
+        fmu = Fmu.where(name: name).first_or_create
+
+        if operator_name.present?
+          operator = Operator.find_by(name: operator_name)
+          fmu.operator = operator  if operator.present?
+        end
+        if country_iso.present?
+          country = Country.find_by(iso: country_iso)
+          fmu.country = country if country.present?
+        end
+
+        fmu.save!
+      end
+    #end
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607134125) do
+ActiveRecord::Schema.define(version: 20170613154444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,7 +154,7 @@ ActiveRecord::Schema.define(version: 20170607134125) do
   create_table "fmus", force: :cascade do |t|
     t.integer  "country_id"
     t.integer  "operator_id"
-    t.json     "geojson"
+    t.jsonb    "geojson"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree

@@ -24,6 +24,7 @@ class Operator < ApplicationRecord
   has_many :observations, inverse_of: :operator
   has_many :user_operators
   has_many :users, through: :user_operators
+  has_many :fmus, inverse_of: :operator
 
   validates :name, presence: true
 
