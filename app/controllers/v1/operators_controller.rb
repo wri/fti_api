@@ -17,7 +17,11 @@ module V1
     end
 
     def show
-      render json: @operator, serializer: OperatorSerializer, include: [:country, :users],
+      render json: @operator, serializer: OperatorSerializer,
+             include: [:country, :users,
+                       [observations:
+                            [[annex_operator: :severities],
+                            [annex_governance: :severities]]]],
              meta: { updated_at: @operator.updated_at, created_at: @operator.created_at }
     end
 

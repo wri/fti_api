@@ -20,4 +20,5 @@ class OperatorSerializer < ActiveModel::Serializer
 
   belongs_to :country, serializer: CountrySerializer
   has_many   :users,   serializer: UserSerializer
+  has_many :observations, serializer: ObservationSerializer
 end
