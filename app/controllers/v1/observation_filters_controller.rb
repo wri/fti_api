@@ -22,9 +22,9 @@ module V1
       levels =[{id: 0, name: 'Unknown'}, {id: 1, name: 'Low'}, {id: 2, name: 'Medium'}, {id: 3, name: 'High'}]
 
       filters = {
-          'type': annexes,
-          'country': countries,
-          'fmu': fmus,
+          'types': annexes,
+          'countries': countries,
+          'fmus': fmus,
           'years': years,
           'monitors': monitors,
           'categories': categories,

@@ -64,7 +64,7 @@ class Observation < ApplicationRecord
   scope :filter_by_fmu, ->(fmu_id) { where(fmu_id: fmu_id) }
   scope :filter_by_year, ->(year) { where("extract(year from publication_date) = #{year}") }
   scope :filter_by_observer, ->(observer_id) { where(observer_id: observer_id) }
-  scope :filter_by_category, ->(category_id) { where(category_id: category_id) }
+  scope :filter_by_category, ->(category_id) { joins(annex_operator: :categorings).where('annex_operator') }
   scope :filter_by_severity, ->(severity_level) { joins(:severity).where("severities.level = #{severity_level}") }
 
   default_scope { includes(:translations) }
