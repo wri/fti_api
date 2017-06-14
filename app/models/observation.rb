@@ -55,30 +55,30 @@ class Observation < ApplicationRecord
 
   include Activable
 
-  scope :by_date_desc,  ->          { order('observations.publication_date DESC') }
-  scope :by_governance, ->          { where(observation_type: 'AnnexGovernance')  }
-  scope :by_operator,   ->          { where(observation_type: 'AnnexOperator')    }
-  scope :by_user,       ->(by_user) { where(user_id: by_user)                     }
+  scope :by_date_desc,  ->           { order('observations.publication_date DESC') }
+  scope :by_governance, ->           { where(observation_type: 'AnnexGovernance')  }
+  scope :by_operator,   ->           { where(observation_type: 'AnnexOperator')    }
+  scope :by_user_ids,   ->(by_users) { where(user_id: [by_users])                     }
 
-  scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
-  scope :filter_by_fmu, ->(fmu_id) { where(fmu_id: fmu_id) }
-  scope :filter_by_year, ->(year) { where("extract(year from publication_date) = #{year}") }
-  scope :filter_by_observer, ->(observer_id) { where(observer_id: observer_id) }
-  scope :filter_by_category, ->(category_id) { joins(annex_operator: :categorings).where('annex_operator') }
-  scope :filter_by_severity, ->(severity_level) { joins(:severity).where("severities.level = #{severity_level}") }
+  scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
+  scope :filter_by_fmu_ids,       ->(fmu_ids)         { where(fmu_id: fmu_ids.split(',')) }
+  scope :filter_by_years,         ->(years)           { where("extract(year from publication_date) in [#{years}]") }
+  scope :filter_by_observer_ids,  ->(observer_ids)    { where(observer_ids: observer_ids.split(',')) }
+  #scope :filter_by_category_ids,  ->(category_ids)    { joins(annex_operator: :categorings).where('annex_operator') }
+  scope :filter_by_severities,    ->(severity_levels) { joins(:severity).where("severities.level in (#{severity_levels})") }
 
   default_scope { includes(:translations) }
 
   class << self
     def fetch_all(options)
-      by_user    = options['user']    if options.present? && options['user'].present?
-      by_type    = options['type']    if options.present? && options['type'].present?
-      country_id = options['country'] if options.present? && options['country'].present?
-      fmu_id = options['fmu'] if options.present? && options['fmu'].present?
-      year = options['year'] if options.present? && options['year'].present?
-      observer_id = options['observer_id'] if options.present? && options['observer_id'].present?
-      category_id = options['category_id'] if options.present? && options['category_id'].present?
-      severity = options['severity'] if options.present? && options['severity'].present?
+      by_user_ids    = options['user_ids']    if options.present? && options['user_ids'].present?
+      by_type    = options['type']            if options.present? && options['type'].present?
+      country_ids = options['country_ids']    if options.present? && options['country_ids'].present?
+      fmu_ids = options['fmu_ids']            if options.present? && options['fmu_ids'].present?
+      years = options['years']                if options.present? && options['years'].present?
+      observer_ids = options['observer_ids']  if options.present? && options['observer_ids'].present?
+      #category_id = options['category_id']    if options.present? && options['category_id'].present?
+      severities = options['severities']        if options.present? && options['severities'].present?
 
 
       observations = includes([:documents, :photos,
@@ -88,15 +88,15 @@ class Observation < ApplicationRecord
                                { annex_operator: :translations },
                                { annex_governance: :translations }])
 
-      observations = observations.by_user(by_user)              if by_user.present?
-      observations = observations.by_governance                 if by_type.present? && by_type.parameterize.include?('governance')
-      observations = observations.by_operator                   if by_type.present? && by_type.parameterize.include?('operator')
-      observations = observations.filter_by_country(country_id) if country_id.present?
-      observations = observations.filter_by_fmu(fmu_id) if fmu_id.present?
-      observations = observations.filter_by_year(year) if year.present?
-      observations = observations.filter_by_observer(observer_id) if observer_id.present?
-      observations = observations.filter_by_category(category_id) if category_id.present?
-      observations = observations.filter_by_severity(severity) if severity.present?
+      observations = observations.by_user_ids(by_user_ids)              if by_user_ids.present?
+      observations = observations.by_governance                         if by_type.present? && by_type.parameterize.include?('governance')
+      observations = observations.by_operator                           if by_type.present? && by_type.parameterize.include?('operator')
+      observations = observations.filter_by_country_ids(country_ids)    if country_ids.present?
+      observations = observations.filter_by_fmus(fmu_ids)               if fmu_ids.present?
+      observations = observations.filter_by_years(years)                if years.present?
+      observations = observations.filter_by_observer_ids(observer_ids)  if observer_ids.present?
+      #observations = observations.filter_by_category(category_id)       if category_id.present?
+      observations = observations.filter_by_severities(severities)      if severities.present?
       observations
     end
 
