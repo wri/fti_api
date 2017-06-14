@@ -13,6 +13,7 @@ module V1
     def index
       @operators = OperatorsIndex.new(self)
       render json: @operators.operators, each_serializer: OperatorSerializer,
+             include: [:country],
              meta: { total_items: @operators.total_items }, links: @operators.links
     end
 

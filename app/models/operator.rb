@@ -35,9 +35,14 @@ class Operator < ApplicationRecord
 
   default_scope { includes(:translations) }
 
+  scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
+
   class << self
     def fetch_all(options)
+      country_ids = options['country_ids']    if options.present? && options['country_ids'].present?
+
       operators = includes(:country, :users)
+      operators = operators.filter_by_country_ids(country_ids)    if country_ids.present?
       operators
     end
 
