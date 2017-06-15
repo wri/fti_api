@@ -17,4 +17,6 @@
 
 class CountrySerializer < ActiveModel::Serializer
   attributes :id, :iso, :region_iso, :country_centroid, :region_centroid, :is_active, :name, :region_name
+
+  has_many :fmus, serializer: FmuSerializer
 end

@@ -334,31 +334,39 @@ namespace :import_fmus do
   I18n.locale = :en
   desc 'Loads fmus from a csv file'
   task all: :environment do
-    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'concession.csv'))
-    puts '* FMUs... *'
-    #Fmu.transaction do
-      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
-        data_row = row.to_h
 
-        name = data_row['fmu_name']
-        operator_name = data_row['company_na']
-        country_iso = data_row['iso3_fmu']
 
-        puts "FMU: #{name}"
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'concession.geojson'))
 
-        fmu = Fmu.where(name: name).first_or_create
+    file = File.read(filename)
+    data_hash = JSON.parse(file)
+    data_hash['features'].each do |row|
+      properties = row['properties']
+      name = properties['fmu_name']
+      operator_name = properties['company_na']
+      country_iso = properties['iso3_fmu']
 
-        if operator_name.present?
-          operator = Operator.find_by(name: operator_name)
-          fmu.operator = operator  if operator.present?
-        end
-        if country_iso.present?
-          country = Country.find_by(iso: country_iso)
-          fmu.country = country if country.present?
-        end
+      puts "FMU: #{name}"
 
-        fmu.save!
+      fmu = Fmu.where(name: name).first_or_create
+      if operator_name.present?
+        operator = Operator.find_by(name: operator_name)
+        fmu.operator = operator  if operator.present?
       end
-    #end
+      if country_iso.present?
+        country = Country.find_by(iso: country_iso)
+        fmu.country = country if country.present?
+      end
+      fmu.save!
+
+      # Updating the geojson
+
+      geojson = row
+      geojson['properties']['id'] = fmu.id
+      geojson['properties']['operator_id'] = fmu.operator.id if fmu.operator.present?
+      fmu.geojson = geojson
+      fmu.save!
+
+    end
   end
 end

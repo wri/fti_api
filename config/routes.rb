@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       resources :laws
       resources :governments
       resources :observers
-      resources :fmus
+      resources :fmus, only: :index
 
       get 'observation_filters', to: 'observation_filters#index'
 

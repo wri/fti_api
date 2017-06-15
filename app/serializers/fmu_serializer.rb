@@ -11,7 +11,7 @@
 #
 
 class FmuSerializer < ActiveModel::Serializer
-  attributes :id, :geojson, :name
+  attributes :id, :name
 
   belongs_to :country, serializer: CountrySerializer
   belongs_to :operator, serializer: OperatorSerializer
