@@ -13,13 +13,13 @@ module V1
     def index
       @operators = OperatorsIndex.new(self)
       render json: @operators.operators, each_serializer: OperatorSerializer,
-             include: [:country],
+             include: [:country, :fmus],
              meta: { total_items: @operators.total_items }, links: @operators.links
     end
 
     def show
       render json: @operator, serializer: OperatorSerializer,
-             include: [:country, :users,
+             include: [:country, :users, :fmus,
                        [observations:
                             [[annex_operator: :severities],
                             [annex_governance: :severities]]]],

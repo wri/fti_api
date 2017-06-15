@@ -19,6 +19,7 @@ class OperatorSerializer < ActiveModel::Serializer
   attributes :id, :name, :operator_type, :concession, :is_active, :logo, :details
 
   belongs_to :country, serializer: CountrySerializer
+  has_many :fmus, serializer: FmuSerializer
   has_many   :users,   serializer: UserSerializer
   has_many :observations, serializer: ObservationSerializer
 end
