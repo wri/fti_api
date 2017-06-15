@@ -13,6 +13,7 @@
 
 
 class Fmu < ApplicationRecord
+  include ValidationHelper
   translates :name
 
   belongs_to :country, inverse_of: :fmus
@@ -25,14 +26,17 @@ class Fmu < ApplicationRecord
 
   default_scope { includes(:translations) }
 
-  scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
+  scope :filter_by_countries,  ->(country_ids)  { where(country_id: country_ids.split(',')) }
+  scope :filter_by_operators,  ->(operator_ids) { where(operator_id: operator_ids.split(',')) }
 
   class << self
     def fetch_all(options)
-      country_id  = options['country'] if options.present? && options['country'].present?
+      country_ids  = options['country_ids'] if options.present? && options['country_ids'].present? && ValidationHelper.ids?(options['country_ids'])
+      operator_ids  = options['operator_ids'] if options.present? && options['operator_ids'].present? && ValidationHelper.ids?(options['operator_ids'])
 
-      fmus = includes(:country)
-      fmus = fmus.filter_by_country(country_id) if country_id.present?
+      fmus = includes([:country, :operator])
+      fmus = fmus.filter_by_countries(country_ids) if country_ids.present?
+      fmus = fmus.filter_by_operators(operator_ids) if operator_ids.present?
       fmus
     end
   end
