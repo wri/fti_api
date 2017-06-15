@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :governments
       resources :observers
       resources :fmus, only: :index
+      resources :contacts, only: [:create, :index]
 
       get 'observation_filters', to: 'observation_filters#index'
 
