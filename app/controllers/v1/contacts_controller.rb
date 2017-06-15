@@ -5,8 +5,7 @@ module V1
 
     include ErrorSerializer
 
-    skip_before_action :authenticate, only: [:index, :show]
-    load_and_authorize_resource class: 'Contact'
+    skip_before_action :authenticate, only: [:index, :show, :create]
 
     def create
       contact = Contact.new(contact_params)
@@ -29,7 +28,7 @@ module V1
     private
 
     def contact_params
-      params.permit(:email, :name)
+      params.require(:contact).permit(:email, :name)
     end
   end
 end
