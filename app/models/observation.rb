@@ -24,6 +24,7 @@
 #
 
 class Observation < ApplicationRecord
+  include ValidationHelper
   translates :details, :evidence, :concern_opinion, :litigation_status
 
   belongs_to :country,    inverse_of: :observations
@@ -71,14 +72,14 @@ class Observation < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      by_user_ids    = options['user_ids']    if options.present? && options['user_ids'].present?
+      by_user_ids    = options['user_ids']    if options.present? && options['user_ids'].present? && ValidationHelper.ids?(options['user_ids'])
       by_type    = options['type']            if options.present? && options['type'].present?
-      country_ids = options['country_ids']    if options.present? && options['country_ids'].present?
-      fmu_ids = options['fmu_ids']            if options.present? && options['fmu_ids'].present?
-      years = options['years']                if options.present? && options['years'].present?
-      observer_ids = options['observer_ids']  if options.present? && options['observer_ids'].present?
+      country_ids = options['country_ids']    if options.present? && options['country_ids'].present? && ValidationHelper.ids?(options['country_ids'])
+      fmu_ids = options['fmu_ids']            if options.present? && options['fmu_ids'].present? && ValidationHelper.ids?(options['fmu_ids'])
+      years = options['years']                if options.present? && options['years'].present? && ValidationHelper.ids?(options['years'])
+      observer_ids = options['observer_ids']  if options.present? && options['observer_ids'].present? && ValidationHelper.ids?(options['observer_ids'])
       #category_id = options['category_id']    if options.present? && options['category_id'].present?
-      severities = options['severities']        if options.present? && options['severities'].present?
+      severities = options['severities']        if options.present? && options['severities'].present? && ValidationHelper.ids?(options['severities'])
 
 
       observations = includes([:documents, :photos,
