@@ -27,6 +27,9 @@ class ObservationSerializer < ActiveModel::Serializer
   attributes :id, :observation_type, :publication_date,
              :pv, :is_active, :details, :evidence, :concern_opinion, :litigation_status, :lat, :lng
 
+  #cached
+  #delegate :cache_key, to: :object
+
   belongs_to :country,          serializer: CountrySerializer
   belongs_to :annex_operator,   serializer: AnnexOperatorSerializer
   belongs_to :annex_governance, serializer: AnnexGovernanceSerializer

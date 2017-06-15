@@ -63,7 +63,7 @@ class Observation < ApplicationRecord
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
   scope :filter_by_fmu_ids,       ->(fmu_ids)         { where(fmu_id: fmu_ids.split(',')) }
-  scope :filter_by_years,         ->(years)           { where("extract(year from publication_date) in [#{years}]") }
+  scope :filter_by_years,         ->(years)           { where("extract(year from publication_date) in (#{years})") }
   scope :filter_by_observer_ids,  ->(observer_ids)    { where(observer_ids: observer_ids.split(',')) }
   #scope :filter_by_category_ids,  ->(category_ids)    { joins(annex_operator: :categorings).where('annex_operator') }
   scope :filter_by_severities,    ->(severity_levels) { joins(:severity).where("severities.level in (#{severity_levels})") }
