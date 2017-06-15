@@ -6,11 +6,10 @@
 #  id          :integer          not null, primary key
 #  country_id  :integer
 #  operator_id :integer
-#  geojson     :json
+#  geojson     :jsonb
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-
 
 class Fmu < ApplicationRecord
   include ValidationHelper
