@@ -58,7 +58,10 @@ namespace :import_operators_csv do
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        Operator.find_or_create_by!(data_row)
+        #Operator.find_or_create_by!(data_row)
+        operator = Operator.where(name: data_row['name']).first_or_create
+        operator.operator_type = data_row['operator_type']
+        operator.save!
       end
     end
     puts 'Operators loaded'
