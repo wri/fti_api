@@ -183,6 +183,8 @@ namespace :import_operator_observations_csv do
         operator_name = data_row['operator_name']
         operator_id   = Operator.where(name: operator_name).pluck(:id) if operator_name.present?
 
+        puts "...Observation for operator #{operator_name} with the id #{operator_id}"
+
         law_names = data_row['legal_reference'].split(',') if data_row['legal_reference'].present?
         law_ids = []
         if law_names.present?
