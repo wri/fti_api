@@ -14,7 +14,7 @@ module V1
         .map{|x| {id: x[0], name: x[1]}}
       years = Observation.pluck(:publication_date).map{|x| x.year}.uniq.sort
         .map{ |x| {id: x, name: x }}
-      monitor_ids = Observer.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :name)
+      observer_ids = Observer.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :name)
         .map{|x| {id: x[0], name: x[1]}}
       category_ids = Category.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :name)
         .map{|x| {id: x[0], name: x[1]}}
@@ -26,7 +26,7 @@ module V1
           'country_ids': country_ids,
           'fmu_ids': fmu_ids,
           'years': years,
-          'monitor_ids': monitor_ids,
+          'observer_ids': observer_ids,
           'category_ids': category_ids,
           'severities': severities
       }.to_json
