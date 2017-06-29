@@ -26,6 +26,8 @@ class Operator < ApplicationRecord
   has_many :users, through: :user_operators
   has_many :fmus, inverse_of: :operator
 
+  after_create :create_operator_id
+
   validates :name, presence: true
 
   scope :by_name_asc, -> {
@@ -61,5 +63,15 @@ class Operator < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  private
+
+  def create_operator_id
+    if country_id.present?
+      update_columns(operator_id: "#{country.iso}-unknown-#{id}")
+    else
+      update_columns(operator_id: "na-unknown-#{id}")
+    end
   end
 end
