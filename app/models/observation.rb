@@ -27,6 +27,8 @@ class Observation < ApplicationRecord
   include ValidationHelper
   translates :details, :evidence, :concern_opinion, :litigation_status
 
+  enum observation_type: %w(operator government)
+
   belongs_to :country,    inverse_of: :observations
   belongs_to :observer,   inverse_of: :observations, optional: true
   belongs_to :severity,   inverse_of: :observations
@@ -51,8 +53,8 @@ class Observation < ApplicationRecord
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
-  validates :observation_type, presence: true, inclusion: { in: %w(AnnexGovernance AnnexOperator),
-                                                            message: "%{value} is not a valid observation type" }
+  #validates :observation_type, presence: true, inclusion: { in: %w(AnnexGovernance AnnexOperator),
+  #                                                          message: "%{value} is not a valid observation type" }
 
   include Activable
 

@@ -7,7 +7,7 @@ class Refactor < ActiveRecord::Migration[5.0]
         drop_table :categorings
 
         puts 'Adding type to categories'
-        add_column :categories, :type, :string
+        add_column :categories, :category_type, :integer
 
         # Annex Governance
         puts 'Dropping Annex Governances'
@@ -23,7 +23,7 @@ class Refactor < ActiveRecord::Migration[5.0]
         puts 'Creating Subcategories'
         create_table :subcategories do |t|
           t.integer :category_id
-          t.string :type
+          t.integer :subcategory_type
 
           t.timestamps
         end
@@ -52,10 +52,20 @@ class Refactor < ActiveRecord::Migration[5.0]
         puts 'Adding severities to subcategories'
         add_foreign_key :severities, :subcategories
 
+        # Observations
+        Observation.find_each do |o|
+          o.update_columns(observation_type: (o.observation_type == 'AnnexOperator' ? '0' : '1'))
+        end
+        change_column :observations, :observation_type, 'integer USING CAST(observation_type AS integer)'
 
       end
 
       dir.down do
+        change_column :observations, :observation_type, 'varchar USING CAST(observation_type AS varchar)'
+        Observation.find_each do |o|
+          o.update_columns(observation_type: (o.observation_type == '0' ? 'AnnexOperator' : 'AnnexGovernance'))
+        end
+
         remove_column :severities, :subcategory_id, :integer
         add_column :severities, :severable_type, :string
         add_column :severities, :severable_id, :integer
@@ -89,7 +99,7 @@ class Refactor < ActiveRecord::Migration[5.0]
                                                     details: :text
                                                   })
 
-        remove_column :categories, :type, :string
+        remove_column :categories, :category_type, :string
         create_table :categorings
       end
     end

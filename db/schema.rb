@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20170629142327) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "category_type"
   end
 
   create_table "category_translations", force: :cascade do |t|
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20170629142327) do
     t.integer  "annex_operator_id"
     t.integer  "annex_governance_id"
     t.integer  "severity_id"
-    t.string   "observation_type",                   null: false
+    t.integer  "observation_type",                   null: false
     t.integer  "user_id"
     t.datetime "publication_date"
     t.integer  "country_id"
@@ -316,9 +316,9 @@ ActiveRecord::Schema.define(version: 20170629142327) do
 
   create_table "subcategories", force: :cascade do |t|
     t.integer  "category_id"
-    t.string   "type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "subcategory_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "subcategory_translations", force: :cascade do |t|

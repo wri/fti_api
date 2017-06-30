@@ -10,13 +10,13 @@
 #
 
 class Category < ApplicationRecord
+  enum category_type: { operator: 0, government: 1 }
+
   translates :name
 
-  has_many :categorings, dependent: :destroy
-  has_many :annex_governances, through: :categorings
-  has_many :annex_operators,   through: :categorings
+  has_many :subcategories, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  #validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :category_type }
 
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
@@ -29,7 +29,7 @@ class Category < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      categories = includes({ annex_governances: :translations }, { annex_operators: :translations })
+      categories = includes({ subcategories: :translations })
       categories
     end
   end

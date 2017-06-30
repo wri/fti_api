@@ -70,15 +70,15 @@ end
 
 namespace :import_categories_csv do
   I18n.locale = :en
-  desc 'Loads categories data from a csv file'
+  desc 'Loads operator categories data from a csv file'
   task create_categories: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'categories.csv'))
-    puts '* Loading Categories... *'
+    puts '* Loading Operator Categories... *'
     Category.transaction do
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        Category.find_or_create_by!(data_row)
+        Category.where(name: data_row['name'], category_type: Category.category_types[:operator]).first_or_create
       end
     end
     puts 'Categories loaded'
