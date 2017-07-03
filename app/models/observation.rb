@@ -36,8 +36,7 @@ class Observation < ApplicationRecord
   belongs_to :government, inverse_of: :observations, optional: true
   belongs_to :user,       inverse_of: :observations, optional: true
 
-  belongs_to :annex_operator,   inverse_of: :observations, optional: true
-  belongs_to :annex_governance, inverse_of: :observations, optional: true
+  belongs_to :subcategory, inverse_of: :observations, optional: true
 
   has_many :species_observations
   has_many :species, through: :species_observations
@@ -130,10 +129,6 @@ class Observation < ApplicationRecord
     else
       annex_governance.governance_problem
     end
-  end
-
-  def laws
-    try(:annex_operator).laws
   end
 
   def user_name

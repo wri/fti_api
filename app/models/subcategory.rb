@@ -3,4 +3,5 @@ class Subcategory < ApplicationRecord
 
   belongs_to :category
   has_many :severities
+  has_many :country_subcategories
 end

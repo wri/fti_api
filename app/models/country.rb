@@ -20,14 +20,14 @@ class Country < ApplicationRecord
   has_many :users,           inverse_of: :country
   has_many :observations,    inverse_of: :country
   has_many :observers,       inverse_of: :country
-  has_many :annex_operators, inverse_of: :country
-  has_many :laws,            inverse_of: :country
   has_many :governments,     inverse_of: :country
   has_many :operators,       inverse_of: :country
   has_many :fmus,            inverse_of: :country
 
   has_many :species_countries
   has_many :species, through: :species_countries
+
+  has_many :country_subcategories
 
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629142327) do
+ActiveRecord::Schema.define(version: 20170703164310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(version: 20170629142327) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.boolean  "is_active",        default: false, null: false
+  end
+
+  create_table "country_subcategories", force: :cascade do |t|
+    t.integer  "country_id"
+    t.integer  "subcategory_id"
+    t.text     "law"
+    t.text     "penalty"
+    t.text     "apv"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "country_translations", force: :cascade do |t|
@@ -130,25 +140,6 @@ ActiveRecord::Schema.define(version: 20170629142327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_governments_on_country_id", using: :btree
-  end
-
-  create_table "law_translations", force: :cascade do |t|
-    t.integer  "law_id",          null: false
-    t.string   "locale",          null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "legal_reference"
-    t.string   "legal_penalty"
-    t.index ["law_id"], name: "index_law_translations_on_law_id", using: :btree
-    t.index ["locale"], name: "index_law_translations_on_locale", using: :btree
-  end
-
-  create_table "laws", force: :cascade do |t|
-    t.integer  "country_id"
-    t.string   "vpa_indicator"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["country_id"], name: "index_laws_on_country_id", using: :btree
   end
 
   create_table "laws_subcategories", id: false, force: :cascade do |t|
@@ -385,8 +376,9 @@ ActiveRecord::Schema.define(version: 20170629142327) do
 
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "country_subcategories", "countries"
+  add_foreign_key "country_subcategories", "subcategories"
   add_foreign_key "documents", "users"
-  add_foreign_key "laws", "countries"
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"
   add_foreign_key "observations", "governments"

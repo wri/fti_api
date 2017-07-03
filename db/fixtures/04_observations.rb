@@ -1,27 +1,27 @@
 if Observer.count.zero?
-  Rake::Task['import_monitors_csv:create_monitors'].invoke
+  Rake::Task['import:monitors'].invoke
 end
 
 if Operator.count.zero?
-  Rake::Task['import_operators_csv:create_operators'].invoke
+  Rake::Task['import:operators'].invoke
 end
 
 if Law.count.zero?
-  Rake::Task['import_laws_csv:create_laws'].invoke
+  Rake::Task['import:laws'].invoke
 end
 
-if AnnexOperator.count.zero?
-  Rake::Task['import_annex_operators_csv:create_annex_operators'].invoke
+unless Subcategory.operator.any?
+  Rake::Task['import:subcategory_operators'].invoke
 end
 
-if AnnexGovernance.count.zero?
-  Rake::Task['import_annex_governance_csv:create_annex_governance'].invoke
+unless Subcategory.government.any?
+  Rake::Task['import:subcategory_governments']
 end
 
 if Observation.by_operator.count.zero?
-  Rake::Task['import_operator_observations_csv:create_operator_observation'].invoke
+  Rake::Task['import:operator_observations'].invoke
 end
 
 if Observation.by_governance.count.zero?
-  Rake::Task['import_governance_observations_csv:create_governance_observation'].invoke
+  Rake::Task['import:governance_observations'].invoke
 end

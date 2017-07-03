@@ -19,7 +19,6 @@ Rails.application.routes.draw do
       resources :categories
       resources :species
       resources :operators
-      resources :laws
       resources :governments
       resources :observers
       resources :fmus, only: :index
