@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operators
@@ -12,6 +11,7 @@
 #  updated_at    :datetime         not null
 #  is_active     :boolean          default(TRUE)
 #  logo          :string
+#  operator_id   :string
 #
 
 class Operator < ApplicationRecord

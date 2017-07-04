@@ -7,7 +7,7 @@
 #  annex_operator_id   :integer
 #  annex_governance_id :integer
 #  severity_id         :integer
-#  observation_type    :string           not null
+#  observation_type    :integer          not null
 #  user_id             :integer
 #  publication_date    :datetime
 #  country_id          :integer
@@ -47,19 +47,15 @@ class Observation < ApplicationRecord
 
   accepts_nested_attributes_for :photos,           allow_destroy: true
   accepts_nested_attributes_for :documents,        allow_destroy: true
-  accepts_nested_attributes_for :annex_operator,   allow_destroy: true
-  accepts_nested_attributes_for :annex_governance, allow_destroy: true
+  accepts_nested_attributes_for :subcategory, allow_destroy: false
+
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
-  #validates :observation_type, presence: true, inclusion: { in: %w(AnnexGovernance AnnexOperator),
-  #                                                          message: "%{value} is not a valid observation type" }
 
   include Activable
 
   scope :by_date_desc,  ->           { order('observations.publication_date DESC') }
-  scope :by_governance, ->           { where(observation_type: 'AnnexGovernance')  }
-  scope :by_operator,   ->           { where(observation_type: 'AnnexOperator')    }
   scope :by_user_ids,   ->(by_users) { where(user_id: [by_users])                     }
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
@@ -84,7 +80,6 @@ class Observation < ApplicationRecord
 
 
       observations = includes([:documents, :photos,
-                               :annex_operator, :annex_governance,
                                :country, :species, :observer, :operator,
                                :severity, :comments, :government,
                                { annex_operator: :translations },
@@ -102,32 +97,8 @@ class Observation < ApplicationRecord
       observations
     end
 
-    def types
-      %w(AnnexGovernance AnnexOperator).freeze
-    end
-
     def translated_types
       types.map { |t| [I18n.t("observation_types.#{t}", default: t), t.camelize] }
-    end
-  end
-
-  def is_governance?
-    observation_type.include?('AnnexGovernance')
-  end
-
-  def is_operator?
-    observation_type.include?('AnnexOperator')
-  end
-
-  def illegality
-    try(:annex_operator).try(:illegality)
-  end
-
-  def title
-    if observation_type.include?('AnnexOperator')
-      annex_operator.illegality
-    else
-      annex_governance.governance_problem
     end
   end
 

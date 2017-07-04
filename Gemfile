@@ -18,12 +18,13 @@ gem 'oj'
 gem 'oj_mimic_json'
 
 # Data
-gem 'cancancan'
+gem 'activerecord-import'
 gem 'globalize',                   github: 'globalize/globalize'
 gem 'seed-fu'
 
 # Auth and Omniauth
 gem 'bcrypt'
+gem 'cancancan'
 gem 'jwt'
 
 # Uploads

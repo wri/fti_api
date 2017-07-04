@@ -18,8 +18,8 @@ class AddLawsToSubcategories < ActiveRecord::Migration[5.0]
   end
 
   def down
-    add_foreign_key :country_subcategories, :countries
-    add_foreign_key :country_subcategories, :subcategories
+    remove_foreign_key :country_subcategories, :countries
+    remove_foreign_key :country_subcategories, :subcategories
 
     drop_table :country_subcategories
   end

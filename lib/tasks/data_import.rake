@@ -8,11 +8,13 @@ namespace :import do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'cites_listings.csv'))
     puts '* Loading Species... *'
     Species.transaction do
+      batch, batch_size = [], 2_000
+      country_lookup = Hash[Country.pluck(:name, :id)]
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
         country_names = data_row['countries'].split(',') if data_row['countries'].present?
-        country_ids   = Country.where(name: country_names).pluck(:id) if country_names.present?
+        country_ids   = country_names.map { |c| country_lookup[c] } if country_names.present?
 
         data_species = {}
         data_species[:cites_id]        = data_row['cites_id']
@@ -25,7 +27,12 @@ namespace :import do
         data_species[:cites_status]    = data_row['cites_status']
         data_species[:country_ids]     = country_ids if country_ids.present?
 
-        Species.create!(data_species) if data_row['name'].present?
+        batch << Species.new(data_species) if data_row['name'].present?
+
+        if batch_size <= batch.size
+          Species.import batch
+          batch = []
+        end
       end
     end
     puts 'Species loaded'
@@ -87,16 +94,22 @@ namespace :import do
       cameroon = Country.find_by(name: 'Cameroon')
       civ = Country.find_by(name: 'Cote d\'Ivoire')
 
-      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        category = Category.where(name: data_row['category_name'], type: Category.category_type[:operator]).first_or_create!
-        subcategory = category.subcategories.build(name: data_row['illegality'])
+        category = Category.where(name: data_row['category_name'], category_type: Category.category_types[:operator]).first_or_create!
+        subcategory = Subcategory.where(name: data_row['illegality'],
+                                        subcategory_type: Subcategory.subcategory_types[:operator],
+                                        category_id: category.id).first_or_create!
         subcategory.update_attributes(name: data_row['illegality_fr'], locale: :fr)
-        subcategory.update_attributes(severities_attributes: [{ level: 3, details: data_row['severity_3'] || 'Not specified' },
-                                                              { level: 2, details: data_row['severity_2'] || 'Not specified' },
-                                                              { level: 1, details: data_row['severity_1'] || 'Not specified' },
-                                                              { level: 0, details: data_row['severity_0'] || 'Not specified' }])
+
+        if subcategory.severities.empty?
+          (0..3).each do |s|
+            subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+          end
+        end
+
+
         subcategory.save!
 
         %w(congo drc cameroon civ).each do |country|
@@ -104,10 +117,8 @@ namespace :import do
           cs.law = data_row["#{country}_law"]
           cs.penalty = data_row["#{country}_penalties"]
           cs.apv = data_row["#{country}_apv"]
-          cs.save!
+          cs.save! if cs.law.present? || cs.penalty.present?
         end
-
-
      end
     end
     puts 'Operator Subcategories loaded'
@@ -121,13 +132,17 @@ namespace :import do
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        category = Category.where(name: data_row['governance_pilar'], type: Category.category_type[:government]).first_or_create!
-        subcategory = category.subcategories.build(name: data_row['governance_problem'])
+        category = Category.where(name: data_row['governance_pillar'], category_type: Category.category_types[:government]).first_or_create!
+        subcategory = Subcategory.where(name: data_row['governance_problem'],
+                                        subcategory_type: Subcategory.subcategory_types[:government],
+                                        category_id: category.id).first_or_create!
+
         subcategory.update_attributes(name: data_row['governance_problem_fr'], locale: :fr)
-        subcategory.update_attributes(severities_attributes: [{ level: 3, details: data_row['severity_3'] || 'Not specified' },
-                                                              { level: 2, details: data_row['severity_2'] || 'Not specified' },
-                                                              { level: 1, details: data_row['severity_1'] || 'Not specified' },
-                                                              { level: 0, details: data_row['severity_0'] || 'Not specified' }])
+        if subcategory.severities.empty?
+          (0..3).each do |s|
+            subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+          end
+        end
         subcategory.save!
       end
     end
@@ -135,7 +150,7 @@ namespace :import do
   end
 
   desc 'Loads operator observations data from a csv file'
-  task observation_operators: :environment do
+  task operator_observations: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_observations.csv'))
     puts '* Operators observations... *'
     Observation.transaction do
@@ -152,10 +167,12 @@ namespace :import do
         operator_id   = Operator.where(name: operator_name).pluck(:id) if operator_name.present?
 
         subcategory_name = data_row['illegality']
-        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_type[:operator]) if subcategory_name.present?
+        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pluck(:id).first if subcategory_name.present?
+
+        next unless subcategory_id.present?
 
         data_oo = {}
-        data_oo[:observation_type]  = Observation.observation_type[:operator]
+        data_oo[:observation_type]  = Observation.observation_types[:operator]
         data_oo[:publication_date]  = DateTime.strptime(data_row['publication_date'],'%y/%m/%d')
         data_oo[:country_id]        = country_id
         data_oo[:details]           = data_row['description']
@@ -178,7 +195,7 @@ namespace :import do
   end
 
   desc 'Loads governance observations data from a csv file'
-  task observation_governments: :environment do
+  task government_observation: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'governance_observations.csv'))
     puts '* Governance observations... *'
     Observation.transaction do
@@ -198,11 +215,11 @@ namespace :import do
         government_id     = Government.where(government_entity: government_entity, country_id: country_id).first_or_create.id if government_entity.present?
 
         subcategory_name = data_row['governance_problem']
-        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_type[:government]) if subcategory_name.present?
+        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:government]).pluck(:id).first if subcategory_name.present?
 
 
         data_go = {}
-        data_go[:observation_type]  = Observation.observation_type[:government]
+        data_go[:observation_type]  = Observation.observation_types[:government]
         data_go[:publication_date]  = DateTime.strptime(data_row['publication_date'],'%y/%m/%d')
         data_go[:country_id]        = country_id
         data_go[:details]           = data_row['description']
@@ -214,16 +231,14 @@ namespace :import do
         data_go[:subcategory_id]    = subcategory_id if subcategory_id.present?
         data_go[:country_id] = country_id if country_id.present?
 
-        @go = Observation.create(data_go)
+        go = Observation.create(data_go)
         severity_id = go.subcategory.severities.where(level: data_row['severities']).pluck(:id)
         go.update_attributes(severity_id: severity_id)
       end
     end
     puts 'Governance observations loaded'
   end
-
-
-
+  
 
   desc 'Loads operators\' countries from a csv file'
   task operator_countries: :environment do

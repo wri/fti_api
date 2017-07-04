@@ -58,9 +58,16 @@ class Refactor < ActiveRecord::Migration[5.0]
         end
         change_column :observations, :observation_type, 'integer USING CAST(observation_type AS integer)'
 
+        add_column :observations, :subcategory_id, :integer
+        remove_column :observations, :annex_governance_id, :integer
+        remove_column :observations, :annex_operator_id, :integer
       end
 
       dir.down do
+        remove_column :observations, :subcategory_id, :integer
+        add_column :observations, :annex_governance_id, :integer
+        add_column :observations, :annex_operator_id, :integer
+
         change_column :observations, :observation_type, 'varchar USING CAST(observation_type AS varchar)'
         Observation.find_each do |o|
           o.update_columns(observation_type: (o.observation_type == '0' ? 'AnnexOperator' : 'AnnexGovernance'))

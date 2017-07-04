@@ -6,10 +6,6 @@ if Operator.count.zero?
   Rake::Task['import:operators'].invoke
 end
 
-if Law.count.zero?
-  Rake::Task['import:laws'].invoke
-end
-
 unless Subcategory.operator.any?
   Rake::Task['import:subcategory_operators'].invoke
 end

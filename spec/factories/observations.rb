@@ -6,7 +6,7 @@
 #  annex_operator_id   :integer
 #  annex_governance_id :integer
 #  severity_id         :integer
-#  observation_type    :string           not null
+#  observation_type    :integer          not null
 #  user_id             :integer
 #  publication_date    :datetime
 #  country_id          :integer
