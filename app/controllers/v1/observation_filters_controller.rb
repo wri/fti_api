@@ -2,7 +2,6 @@
 module V1
   class ObservationFiltersController < ApplicationController
     include ErrorSerializer
-    include ApiUploads
 
     skip_before_action :authenticate
 

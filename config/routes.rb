@@ -14,29 +14,20 @@ Rails.application.routes.draw do
 
     scope '(:locale)', locale: /en|fr/ do
       # Resources
-      resources :users
-      resources :countries
-      resources :categories
-      resources :species
-      resources :operators
-      resources :governments
-      resources :observers
+      jsonapi_resources :users do; end
+      jsonapi_resources :countries do; end
+      jsonapi_resources :categories do; end
+      jsonapi_resources :species do; end
+      jsonapi_resources :operators do; end
+      jsonapi_resources :governments do; end
+      jsonapi_resources :observers do; end
+      jsonapi_resources :observations do; end
       resources :fmus, only: :index
       resources :contacts, only: [:create, :index]
 
       get 'observation_filters', to: 'observation_filters#index'
 
-      resources :observations do
-        resources :comments, only: [:create, :destroy], on: :member, as: :comment
-      end
 
-      resources :annex_operators do
-        resources :comments, only: [:create, :destroy], on: :member, as: :comment
-      end
-
-      resources :annex_governances do
-        resources :comments, only: [:create, :destroy], on: :member, as: :comment
-      end
     end
   end
 end
