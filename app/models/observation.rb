@@ -86,8 +86,6 @@ class Observation < ApplicationRecord
                                { annex_governance: :translations }])
 
       observations = observations.by_user_ids(by_user_ids)              if by_user_ids.present?
-      observations = observations.by_governance                         if by_type.present? && by_type.parameterize.include?('governance')
-      observations = observations.by_operator                           if by_type.present? && by_type.parameterize.include?('operator')
       observations = observations.filter_by_country_ids(country_ids)    if country_ids.present?
       observations = observations.filter_by_fmus(fmu_ids)               if fmu_ids.present?
       observations = observations.filter_by_years(years)                if years.present?

@@ -80,7 +80,7 @@ namespace :import do
         Category.where(name: data_row['name'], category_type: Category.category_types[:operator]).first_or_create
       end
     end
-    puts 'Categories loaded'
+    puts 'Operator Categories loaded'
   end
 
   desc 'Loads subcategories of type operator'
@@ -194,10 +194,10 @@ namespace :import do
     puts 'Operator observations loaded'
   end
 
-  desc 'Loads governance observations data from a csv file'
-  task government_observation: :environment do
+  desc 'Loads government observations data from a csv file'
+  task government_observations: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'governance_observations.csv'))
-    puts '* Governance observations... *'
+    puts '* Government observations... *'
     Observation.transaction do
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
@@ -236,9 +236,9 @@ namespace :import do
         go.update_attributes(severity_id: severity_id)
       end
     end
-    puts 'Governance observations loaded'
+    puts 'Governement observations loaded'
   end
-  
+
 
   desc 'Loads operators\' countries from a csv file'
   task operator_countries: :environment do
@@ -270,8 +270,6 @@ namespace :import do
 
   desc 'Loads fmus from a csv file'
   task fmus: :environment do
-
-
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'concession.geojson'))
 
     file = File.read(filename)
@@ -281,8 +279,6 @@ namespace :import do
       name = properties['fmu_name']
       operator_name = properties['company_na']
       country_iso = properties['iso3_fmu']
-
-      puts "FMU: #{name}"
 
       fmu = Fmu.where(name: name).first_or_create
       if operator_name.present?

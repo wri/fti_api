@@ -1,23 +1,8 @@
-if Observer.count.zero?
-  Rake::Task['import:monitors'].invoke
-end
+Rake::Task['import:monitors'].invoke                 unless Observer.any?
+Rake::Task['import:operators'].invoke                unless Operator.any?
+Rake::Task['import:subcategory_operators'].invoke    unless Subcategory.operator.any?
+Rake::Task['import:subcategory_governments'].invoke  unless Subcategory.government.any?
+Rake::Task['import:operator_observations'].invoke    unless Observation.operator.any?
+Rake::Task['import:government_observations'].invoke  unless Observation.government.any?
 
-if Operator.count.zero?
-  Rake::Task['import:operators'].invoke
-end
 
-unless Subcategory.operator.any?
-  Rake::Task['import:subcategory_operators'].invoke
-end
-
-unless Subcategory.government.any?
-  Rake::Task['import:subcategory_governments']
-end
-
-if Observation.by_operator.count.zero?
-  Rake::Task['import:operator_observations'].invoke
-end
-
-if Observation.by_governance.count.zero?
-  Rake::Task['import:governance_observations'].invoke
-end
