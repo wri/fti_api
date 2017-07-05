@@ -171,9 +171,10 @@ namespace :import do
 
         next unless subcategory_id.present?
 
+        date = data_row['publication_date']
         data_oo = {}
         data_oo[:observation_type]  = Observation.observation_types[:operator]
-        data_oo[:publication_date]  = DateTime.strptime(data_row['publication_date'],'%y/%m/%d')
+        data_oo[:publication_date]  = date.count(' ') > 0 ? Date.parse(date) : Date.parse("Jan #{date}")
         data_oo[:country_id]        = country_id
         data_oo[:details]           = data_row['description']
         data_oo[:evidence]          = data_row['evidence']
@@ -186,9 +187,11 @@ namespace :import do
         data_oo[:country_id] = country_id if country_id.present?
 
         oo = Observation.create(data_oo)
-        severity_id = oo.subcategory.severities.where(level: data_row['severities']).pluck(:id)
+        severity_id = oo.subcategory.severities.find_by(level: data_row['severities']).id
         oo.update_attributes!(severity_id: severity_id)
 
+        fmu = Fmu.find_by(name: data_row['concession'])
+        oo.update_attributes(fmu_id: fmu.id) if fmu.present?
       end
     end
     puts 'Operator observations loaded'
@@ -232,11 +235,11 @@ namespace :import do
         data_go[:country_id] = country_id if country_id.present?
 
         go = Observation.create(data_go)
-        severity_id = go.subcategory.severities.where(level: data_row['severities']).pluck(:id)
+        severity_id = go.subcategory.severities.find_by(level: data_row['severities']).id
         go.update_attributes!(severity_id: severity_id)
       end
     end
-    puts 'Governement observations loaded'
+    puts 'Government observations loaded'
   end
 
 
