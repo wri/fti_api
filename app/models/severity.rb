@@ -25,13 +25,6 @@ class Severity < ApplicationRecord
 
   default_scope { includes(:translations) }
 
-  class << self
-    def fetch_all(options)
-      severities = by_level_asc
-      severities
-    end
-  end
-
   def cache_key
     super + '-' + Globalize.locale.to_s
   end

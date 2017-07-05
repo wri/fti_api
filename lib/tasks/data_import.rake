@@ -187,7 +187,7 @@ namespace :import do
 
         oo = Observation.create(data_oo)
         severity_id = oo.subcategory.severities.where(level: data_row['severities']).pluck(:id)
-        oo.update_attributes(severity_id: severity_id)
+        oo.update_attributes!(severity_id: severity_id)
 
       end
     end
@@ -233,7 +233,7 @@ namespace :import do
 
         go = Observation.create(data_go)
         severity_id = go.subcategory.severities.where(level: data_row['severities']).pluck(:id)
-        go.update_attributes(severity_id: severity_id)
+        go.update_attributes!(severity_id: severity_id)
       end
     end
     puts 'Governement observations loaded'

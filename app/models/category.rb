@@ -24,16 +24,10 @@ class Category < ApplicationRecord
                            .order('category_translations.name ASC')
   }
 
-  default_scope do
-    includes(:translations)
-  end
+  #default_scope do
+  #  includes(:translations)
+  #end
 
-  class << self
-    def fetch_all(options)
-      categories = includes({ subcategories: :translations })
-      categories
-    end
-  end
 
   def cache_key
     super + '-' + Globalize.locale.to_s

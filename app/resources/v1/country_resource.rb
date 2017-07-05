@@ -1,7 +1,17 @@
 module V1
   class CountryResource < JSONAPI::Resource
-    attributes :iso, :region_iso, :country_centroid, :region_centroid, :is_active, :name, :region_name
+    caching
+
+    attributes :iso, :region_iso, :country_centroid,
+               :region_centroid, :is_active, :region_name
 
     has_many :fmus
+
+    filter :iso
+    filter :is_active, default: true
+
+    def custom_links(_)
+      { self: nil }
+    end
   end
 end
