@@ -3,6 +3,8 @@ module V1
     caching
     attributes :level, :details
 
+    filters :id, :level
+
     def custom_links(_)
       { self: nil }
     end

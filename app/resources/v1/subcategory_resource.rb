@@ -2,12 +2,14 @@ module V1
   class SubcategoryResource < JSONAPI::Resource
     caching
 
-    attributes :name, :details, :subcategory_type
+    attributes :name, :details, :subcategory_type, :category_id
 
     has_one :category
     has_many :severities
     has_many :country_subcategories
     has_many :observations
+
+    filters :id, :name, :subcategory_type, :category_id
 
     def custom_links(_)
       { self: nil }

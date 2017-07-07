@@ -3,7 +3,10 @@ module V1
     caching
 
     attributes :observation_type, :publication_date,
-               :pv, :is_active, :details, :evidence, :concern_opinion, :litigation_status, :lat, :lng
+               :pv, :is_active, :details, :evidence, :concern_opinion,
+               :litigation_status, :lat, :lng,
+               :observation_type, :country_id, :fmu_id, :publication_date,
+               :observer_id, :subcategory_id, :severity_id
 
     has_many :species
     has_many :comments
@@ -17,6 +20,8 @@ module V1
     has_one :observer
     has_one :operator
     has_one :government
+
+    filters :id, :observation_type, :fmu_id, :country_id, :fmu_id, :publication_date, :observer_id, 'subcategory.category_id'
 
     def custom_links(_)
       { self: nil }
