@@ -23,10 +23,10 @@ module V1
           'observation_type': types,
           'country_id': country_ids,
           'fmu_id': fmu_ids,
-          'publication_date': years,
+          'years': years,
           'observer_id': observer_ids,
-          'subcategory.category_id': category_ids,
-          'severity.level': severities
+          'category_id': category_ids,
+          'severity_level': severities
       }.to_json
 
       render json: filters
