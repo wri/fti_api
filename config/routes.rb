@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     patch '/users/current-user/password', to: 'passwords#update'
 
     # Helper requests
-    get '/users/current-user',  to: 'current_user#show'
+    get '/users/current-user',  to: 'users#current'
 
     scope '(:locale)', locale: /en|fr/ do
       # Resources

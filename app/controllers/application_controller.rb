@@ -7,6 +7,10 @@ class ApplicationController < ActionController::API
   include CanCan::ControllerAdditions
   include JSONAPI::ActsAsResourceController
 
+  def context
+    {current_user: current_user}
+  end
+
   before_action :check_access, :authenticate
   before_action :set_locale
 

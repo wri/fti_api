@@ -4,10 +4,11 @@ module V1
   class UsersController < ApplicationController
     include ErrorSerializer
 
-    skip_before_action :authenticate, only: [:index, :show]
     load_and_authorize_resource class: 'User'
 
-    before_action :set_user, only: [:show, :update, :destroy]
-
+    def current
+      user = User.find(context[:current_user])
+      render json: JSONAPI::ResourceSerializer.new(UserResource).serialize_to_hash(UserResource.new(user, context))
+    end
   end
 end
