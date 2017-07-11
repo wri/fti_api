@@ -6,7 +6,7 @@ module V1
                :permissions_request, :permissions_accepted
 
     has_one :country
-    has_one    :user_permission
+    has_one    :user_permission, foreign_key_on: :related
     has_many   :comments
 
     def custom_links(_)

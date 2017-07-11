@@ -8,7 +8,10 @@ module V1
 
     def current
       user = User.find(context[:current_user])
-      render json: JSONAPI::ResourceSerializer.new(UserResource).serialize_to_hash(UserResource.new(user, context))
+      include_resources = %w[user_permission]
+      render json: JSONAPI::ResourceSerializer.new(UserResource,
+                                                   include: include_resources
+      ).serialize_to_hash(UserResource.new(user, context))
     end
   end
 end
