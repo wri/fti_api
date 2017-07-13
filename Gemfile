@@ -40,6 +40,7 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop',                   require: false
   gem 'webmock'
+  gem 'rails-erd'
 end
 
 group :development do
