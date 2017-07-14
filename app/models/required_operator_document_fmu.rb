@@ -1,0 +1,3 @@
+class RequiredOperatorDocumentFmu < RequiredOperatorDocument
+
+end

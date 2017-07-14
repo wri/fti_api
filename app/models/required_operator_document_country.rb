@@ -1,0 +1,3 @@
+class RequiredOperatorDocumentCountry < RequiredOperatorDocument
+
+end

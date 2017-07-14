@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703164310) do
+ActiveRecord::Schema.define(version: 20170714111006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,16 @@ ActiveRecord::Schema.define(version: 20170703164310) do
     t.index ["country_id"], name: "index_observers_on_country_id", using: :btree
   end
 
+  create_table "operator_documents", force: :cascade do |t|
+    t.string   "type"
+    t.date     "expire_date"
+    t.date     "start_date"
+    t.integer  "fmu_id"
+    t.integer  "required_operator_document_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
   create_table "operator_translations", force: :cascade do |t|
     t.integer  "operator_id", null: false
     t.string   "locale",      null: false
@@ -241,6 +251,30 @@ ActiveRecord::Schema.define(version: 20170703164310) do
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
     t.index ["attacheable_id", "attacheable_type"], name: "photos_attacheable_index", using: :btree
+  end
+
+  create_table "required_operator_document_group_translations", force: :cascade do |t|
+    t.integer  "required_operator_document_group_id", null: false
+    t.string   "locale",                              null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "name"
+    t.index ["locale"], name: "index_required_operator_document_group_translations_on_locale", using: :btree
+    t.index ["required_operator_document_group_id"], name: "index_64b55c0cec158f1717cc5d775ae87c7a48f1cc59", using: :btree
+  end
+
+  create_table "required_operator_document_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "required_operator_documents", force: :cascade do |t|
+    t.string   "type"
+    t.integer  "required_operator_document_group_id"
+    t.string   "name"
+    t.integer  "country_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "severities", force: :cascade do |t|
@@ -382,7 +416,11 @@ ActiveRecord::Schema.define(version: 20170703164310) do
   add_foreign_key "observations", "observers"
   add_foreign_key "observations", "operators"
   add_foreign_key "observers", "countries"
+  add_foreign_key "operator_documents", "fmus"
+  add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "photos", "users"
+  add_foreign_key "required_operator_documents", "countries"
+  add_foreign_key "required_operator_documents", "required_operator_document_groups"
   add_foreign_key "severities", "subcategories"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"

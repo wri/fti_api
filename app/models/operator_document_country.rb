@@ -1,0 +1,3 @@
+class OperatorDocumentCountry < OperatorDocument
+  belongs_to :required_operator_document_country
+end
