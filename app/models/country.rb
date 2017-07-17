@@ -29,6 +29,8 @@ class Country < ApplicationRecord
 
   has_many :country_subcategories
 
+  has_many :operator_documents, dependent: :destroy
+
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 
   before_save :set_active

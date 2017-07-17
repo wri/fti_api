@@ -57,12 +57,14 @@ namespace :import do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operators.csv'))
     puts '* Loading Operators... *'
     Operator.transaction do
-      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
         #Operator.find_or_create_by!(data_row)
+        country = Country.find_by(name: data_row['country'])
         operator = Operator.where(name: data_row['name']).first_or_create
         operator.operator_type = data_row['operator_type']
+        operator.country = country
         operator.save!
       end
     end
@@ -164,7 +166,7 @@ namespace :import do
         monitor_id   = Observer.where(name: monitor_name).pluck(:id) if monitor_name.present?
 
         operator_name = data_row['operator_name']
-        operator_id   = Operator.where(name: operator_name).pluck(:id) if operator_name.present?
+        operator_id   = Operator.where(name: operator_name, country_id: country_id).pluck(:id) if operator_name.present?
 
         subcategory_name = data_row['illegality']
         subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pluck(:id).first if subcategory_name.present?
@@ -212,7 +214,7 @@ namespace :import do
         monitor_id   = Observer.where(name: monitor_name).pluck(:id).first if monitor_name.present?
 
         operator_name = data_row['operator_name']
-        operator_id   = Operator.where(name: operator_name, operator_type: 'Company').first_or_create.id if operator_name.present?
+        operator_id   = Operator.where(name: operator_name, country_id: country_id).first_or_create.id if operator_name.present?
 
         government_entity = data_row['government_entity']
         government_id     = Government.where(government_entity: government_entity, country_id: country_id).first_or_create.id if government_entity.present?
@@ -273,6 +275,8 @@ namespace :import do
 
   desc 'Loads fmus from a csv file'
   task fmus: :environment do
+
+    puts '* FMUs... *'
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'concession.geojson'))
 
     file = File.read(filename)
@@ -302,6 +306,7 @@ namespace :import do
       fmu.geojson = geojson
       fmu.save!
 
+      puts 'Finished FMUs'
     end
   end
 

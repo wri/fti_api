@@ -5,5 +5,6 @@ Rake::Task['import:subcategory_operators'].invoke    unless Subcategory.operator
 Rake::Task['import:subcategory_governments'].invoke  unless Subcategory.government.any?
 Rake::Task['import:operator_observations'].invoke    unless Observation.operator.any?
 Rake::Task['import:government_observations'].invoke  unless Observation.government.any?
-
-
+Rake::Task['import:operator_countries'].invoke       unless Operator.where('country_id is not null').exists?
+Rake::Task['import:operator_document_types'].invoke  unless RequiredOperatorDocumentGroup.any?
+Rake::Task['import:operator_documents'].invoke       unless OperatorDocument.any?
