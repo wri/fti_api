@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714111006) do
+ActiveRecord::Schema.define(version: 20170717114558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,6 +217,8 @@ ActiveRecord::Schema.define(version: 20170714111006) do
     t.integer  "required_operator_document_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "status"
+    t.integer  "operator_id"
   end
 
   create_table "operator_translations", force: :cascade do |t|
@@ -417,6 +419,7 @@ ActiveRecord::Schema.define(version: 20170714111006) do
   add_foreign_key "observations", "operators"
   add_foreign_key "observers", "countries"
   add_foreign_key "operator_documents", "fmus"
+  add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "photos", "users"
   add_foreign_key "required_operator_documents", "countries"
