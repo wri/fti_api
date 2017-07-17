@@ -1,0 +1,55 @@
+group_en;group_fr;generic_country;generic_fmu;congo_country;congo_fmu;drc_country;drc_fmu
+Legal registration;Enregistrement légal de l'entreprise (y compris obligations specifiques aux professions forestieres comme le marteau);Official registration of the company ;;Certificat d'agrément forestier;;Statuts notariés de l'entité;
+;;;;Carte d'identité des professionnels du bois et de la forêt;;;
+;;Written authorization(s) from the legally competent authority to carry out forest activities in the country;;Extrait du registre du commerce et du crédit mobilier;;RCCM;
+;;;;Document du tribunal actant le marteau forestier;;;
+Use rights;Droit d'acces/usage a la ressource forestiere;;Document demonstrating that the company has the right to use the resource in the Forest Management Unit (ownership title or official notification of allocation such as concession title);Convention d'établissement;Convention d’aménagement et de transformation (CAT);;Contrat de concession forestière
+;;; Any associated convention;Avenant à la convention;Convention de transformation industrielle (CTI);;Accord sur la clause sociale du cahier des charges
+Forest Management;Documents d'aménagement (dont documents préparatoires, rapports d'inventaire, documents de suivi);;Management plan;;Plan de gestion;;Plan de gestion approuvé des quatre premières assiettes annuelles de coupe
+;;;;;;;Rapports d'évaluation et courriers d'approbation des plans de gestion (souvent inclus dans le plan de gestion)
+;;;;;Résumé du plan d'aménagement;;Attestation de conformité du plan de sondage d’inventaire d’aménagement de la superficie sous aménagement (souvent inclus dans le plan de gestion)
+;;;Summary of the approved management plan;;Compte-rendu de la réunion de validation du plan d'aménagement;;Rapport d'inventaire d'aménagement (souvent inclus dans le plan de gestion)
+;;;;;;;Attestation de conformité des travaux de sondage et du rapport d’inventaire (souvent inclus dans le plan de gestion)
+;;;;;Compte-rendu du comité de suivi et d'évaluation du plan d'aménagement;;Avis du MECNT/DIAF sur le plan d’aménagement (souvent inclus dans le plan de gestion)
+;;;Evidence of the management plan official approval;;;;Plan d'aménagement 
+;;;;;;;Approbation du plan d’aménagement par le comité d’approbation des plans d’aménagement (souvent inclus dans le plan de gestion)
+;;;;;Compte-rendu du comité de suivi et d'évaluation du plan de gestion;;Plan quinquennal de gestion 
+;;;;;;;Plan annuel d’opération par AAC
+Harvesting Exploitation;;;Harvesting permits, licenses or other legal documents required for specific harvesting operations;;Autorisation de coupe d'achèvement;;Permis annuel de coupe
+;;;;;Autorisation de coupe annuelle;;Déclarations trimestrielles de production du bois d’oeuvre
+;;;Annual summary of harvested volumes detailed by species;;Autorisation de coupe provisoire;;Permis d’exploitation d’une unité de transformation 
+;;;;;;;Rapport trimestriel d’opérations forestières 
+Environmental regulations;Etudes d'impact;;Environmental impact assessment;;Etude d'impact environementale et sociale (base-vie);;Etude d’impact environnemental 
+;;;;;Etude d'impact environementale et sociale (exploitation);;
+;;;;;Etude d'impact environementale et sociale (scierie) le cas echeant;;
+Transport;;Required trading and transport permits;;Agrément de transports;;;Permis de circulation
+;;Legally required transport documents;;;;;
+Trade&Export;;CITES permits;;Declaration en douanes;;Contrat de vente validé;
+;;;;;;Facture commerciale;
+;;;;;;Connaissement (B/L) ;
+;;;;;;Note de perception DGRAD ;
+;;;;;;Preuve de paiement banque ;
+;;;;;;Déclaration douanière ;
+;;Customs declaration;;Permis d’exportation CITES;;Numéro d’import-export ;
+;;;;;;Déclaration de « marchandises » à l’exportation et à l’importation = déclaration de lot prêt (voir avec FFN);
+;;;;;;Permis d’exportation CITES;
+;;;;;;Certification phytosanitaire;
+Taxes and fees;Justificatifs de paiement des taxes/fiscalite;Receipts or attestations of payment of income and profit taxes related to profit derived from the sale of forest products and harvesting activities;Receipts or attestations of payment of all legally required forest harvesting specific fees such as royalties, stumpage fees and other volume-based fees.;Décharge attestant du paiement de la taxe d'abattage;Décharge attestant du paiement de la taxe de superficie;Lettre d’attribution du numéro impôt, plus badge pour les personnes physiques ;Notes de débit et de perception (redevance de superficie forestière) 
+;;;;;;Déclaration et quittance délivrées par la DGI (impôt sur les bénéfices et profits) ;
+;;;;;;Déclaration et quittance délivrées par la DGI (impôt professionnel sur les rémunérations) ;
+;;;;Décharge attestant du paiement de la taxe de déboisement;;Déclaration de l’assujetti et quittance délivrée par la DGI (impôt mobilier);
+;;;;;;Déclaration de l’assujetti et quittance délivrée par la DGI (impôt professionnel sur les rémunérations versées au personnel expatrié) ;Attestation de paiement (redevance de superficie forestière) 
+;;;;;;Déclaration et quittance délivrées par la DGI (impôt sur la taxe sur la valeur ajoutée) ;
+;;;;Patente;;Notes de débit et de perception (taxe de reboisement) ;
+;;;;;;Attestation de paiement (taxe de reboisement) ;
+3rd parties’ legal rights;Droits des tierces parties (notamment population locale);;Evidence of engagement with local population;;Compte-rendu du conseil de concertation;;Plan de consultation des populations locales et/ou peuple autochtones (éventuellement déjà inclus dans les clauses sociales qui font partie du contrat)
+;;;;;Etat de réalisation du cahier des charges;;Accord sur la clause sociale du cahier des charges conforme au modèle fixé par arrêté 
+;;;;;;;PV de désignation des membres et d’installation des comités locaux de gestion (CLG) et de suivi (CLS) (éventuellement déjà inclus dans les clauses sociales qui font partie du contrat)
+;;;;;Preuve de contribution au fond de développement local;;Accord amiable (Preuve d’exécution) ou Décision de la Commission de règlement des différends forestiers ou Décision de justice (seulement en cas de problème)
+Workers’ rights;Droit des travailleurs;Evidence of social security registration;;Arrêté d'autorisation d'exercice du ministère en charge de la santé;;Documents d’affiliation de l’entité à l’INSS;
+;;;;Arrêté d’agrément du personnel du centre socio-sanitaire de l’entreprise;;Documents d’affiliation et d’immatriculation des employés à l’INSS;
+;;;;Attestation d'immatriculation à la CNSS;;Bilan annuel des cotisations à l’Institut national de préparation professionnelle (INPP) : nombre des travailleurs et preuves de paiements correspondant;
+;; Evidence of social security contribution payment;;Autorisation d'heures supplémentaires;;Règlement d’entreprise;
+;;;;Extrait du registre de réclamation et de revendication du personnel (derniere page);;Convention collective ou protocole d’accord visé par l’Inspecteur du Travail;
+;;;;Procès-verbal d'élections professionnelles;;;
+;;;;Procès-verbal de réunion du comité d'hygiène et de sécurité;;;

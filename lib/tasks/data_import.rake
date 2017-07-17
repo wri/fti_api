@@ -304,4 +304,43 @@ namespace :import do
 
     end
   end
+
+
+  desc 'Import Operator Documents Types'
+  task operator_document_types: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_document_types.csv'))
+
+    puts '* Operator document types... *'
+    country_congo = Country.find_by(iso: 'COG')
+    country_drc = Country.find_by(iso: 'COD')
+    country_generic = nil
+
+    rodg = nil
+
+    RequiredOperatorDocumentGroup.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+        if data_row['group_en'].present?
+          rodg = RequiredOperatorDocumentGroup.where(name: data_row['group_en']).first
+          if rodg.blank?
+            rodg =  RequiredOperatorDocumentGroup.new(name: data_row['group_en'])
+            rodg.update_attributes!(name: data_row['group_fr'], locale: :fr)
+          end
+        end
+
+        %w(generic congo drc).each do |country|
+          %w(country fmu).each do |doc_type|
+            rod = data_row["#{country}_#{doc_type}"]
+            if rod.present?
+              RequiredOperatorDocument.where(required_operator_document_group_id: rodg.id,
+                                             name: rod, type: "RequiredOperatorDocument#{doc_type.capitalize}",
+                                             country_id: eval("country_#{country}")).first_or_create!
+            end
+          end
+        end
+      end
+    end
+
+    puts ' Finished operator document types'
+  end
 end

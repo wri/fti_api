@@ -1,6 +1,6 @@
 class CreateOperatorDocument < ActiveRecord::Migration[5.0]
   def change
-    create_table :operator_documents do |t|
+    create_table :operator_documents   do |t|
       t.string :type
       t.date :expire_date
       t.date :start_date
