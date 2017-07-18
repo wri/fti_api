@@ -6,7 +6,6 @@ module V1
     has_one :country
     has_one :fmu
     has_one   :operator
-    #has_one :required_operator_document_fmu
     has_one :required_operator_document
 
     filters :type, :status
