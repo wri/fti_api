@@ -1,3 +1,4 @@
+
 module V1
   class OperatorDocumentCountryResource < JSONAPI::Resource
     caching
@@ -5,7 +6,8 @@ module V1
 
     has_one :country
     has_one   :operator
-    has_one :required_operator_document_country
+    #has_one :required_operator_document_country
+    has_one :required_operator_document
 
     filters :type, :status
 

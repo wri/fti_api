@@ -12,5 +12,5 @@
 #
 
 class RequiredOperatorDocumentFmu < RequiredOperatorDocument
-
+  has_many :operator_document_fmus
 end

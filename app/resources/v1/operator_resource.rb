@@ -7,7 +7,10 @@ module V1
     has_many :fmus
     has_many   :users
     has_many :observations
+
     has_many :operator_documents
+    has_many :operator_document_fmus
+    has_many :operator_document_countries
 
     filter :country
 

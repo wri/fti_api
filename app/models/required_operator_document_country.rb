@@ -12,5 +12,5 @@
 #
 
 class RequiredOperatorDocumentCountry < RequiredOperatorDocument
-
+  has_many :operator_document_countries
 end

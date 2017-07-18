@@ -5,7 +5,7 @@ module V1
 
     has_one :country
     has_one :required_operator_document_group
-    has_many :operator_document_countries
+    has_many :operator_document_fmus
 
     filters :name, :type
 

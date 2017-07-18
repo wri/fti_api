@@ -15,5 +15,5 @@
 #
 
 class OperatorDocumentCountry < OperatorDocument
-  belongs_to :required_operator_document_country
+  belongs_to :required_operator_document_country, foreign_key: 'required_operator_document_id'
 end

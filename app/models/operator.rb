@@ -25,7 +25,10 @@ class Operator < ApplicationRecord
   has_many :user_operators
   has_many :users, through: :user_operators
   has_many :fmus, inverse_of: :operator
+
   has_many :operator_documents
+  has_many :operator_document_countries
+  has_many :operator_document_fmus
 
   after_create :create_operator_id
 
