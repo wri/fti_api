@@ -6,6 +6,7 @@ module V1
     has_one :country
     has_one   :operator
     has_one :required_operator_document
+    has_one :required_operator_document_country
 
     filters :type, :status
 
