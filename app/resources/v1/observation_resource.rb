@@ -36,6 +36,10 @@ module V1
       records.where("extract(year from observations.publication_date) in (#{value.map{|x| x.to_i rescue nil}.join(', ')})")
     }
 
+    def self.sortable_fields(context)
+      super + [:'country.iso']
+    end
+
     def custom_links(_)
       { self: nil }
     end
