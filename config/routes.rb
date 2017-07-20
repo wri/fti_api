@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       jsonapi_resources :users do; end
       jsonapi_resources :countries do; end
       jsonapi_resources :categories do; end
+      jsonapi_resources :subcategories do; end
       jsonapi_resources :species do; end
       jsonapi_resources :operators do; end
       jsonapi_resources :governments do; end
