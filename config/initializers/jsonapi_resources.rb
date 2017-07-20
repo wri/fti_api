@@ -37,7 +37,39 @@ module JSONAPI
       link_object_hash[:data] = to_one_linkage(source, relationship) if include_linkage
       link_object_hash
     end
+  end
 
+  class Resource
+    class << self
+      def apply_sort(records, order_options, _context = {})
+        if order_options.any?
+          order_options.each_pair do |field, direction|
+            if field.to_s.include?(".")
+              *model_names, column_name = field.split(".")
+
+              associations = _lookup_association_chain([records.model.to_s, *model_names])
+              joins_query = _build_joins([records.model, *associations])
+
+              # _sorting is appended to avoid name clashes with manual joins eg. overridden filters
+              order_by_query = "#{associations.last.name}_sorting.#{column_name} #{direction}"
+              records = records.joins(joins_query).order(order_by_query)
+            else
+              # Hack to work with Globalize
+              if @model_class.attribute_names.include?(field)
+                records = records.order(field => direction)
+              else
+                if @model_class.respond_to?(field) # To check if it exists in the translations table
+                  records = records.joins(:translations)
+                                .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
+                end
+              end
+            end
+          end
+        end
+
+        records
+      end
+    end
   end
 end
 
