@@ -2,9 +2,10 @@
 #
 # Table name: categories
 #
-#  id         :integer          not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id            :integer          not null, primary key
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  category_type :integer
 #
 
 FactoryGirl.define do

@@ -13,17 +13,18 @@ gem 'pg',    '~> 0.18'
 gem 'rails', '~> 5.0.2'
 
 # API
-gem 'active_model_serializers', '~> 0.10.4'
+gem 'jsonapi-resources'
 gem 'oj'
 gem 'oj_mimic_json'
 
 # Data
-gem 'cancancan'
+gem 'activerecord-import'
 gem 'globalize',                   github: 'globalize/globalize'
 gem 'seed-fu'
 
 # Auth and Omniauth
 gem 'bcrypt'
+gem 'cancancan'
 gem 'jwt'
 
 # Uploads
@@ -39,6 +40,7 @@ group :development, :test do
   gem 'faker'
   gem 'rubocop',                   require: false
   gem 'webmock'
+  gem 'rails-erd'
 end
 
 group :development do

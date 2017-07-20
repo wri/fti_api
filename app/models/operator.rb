@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operators
@@ -12,6 +11,7 @@
 #  updated_at    :datetime         not null
 #  is_active     :boolean          default(TRUE)
 #  logo          :string
+#  operator_id   :string
 #
 
 class Operator < ApplicationRecord
@@ -25,6 +25,12 @@ class Operator < ApplicationRecord
   has_many :user_operators
   has_many :users, through: :user_operators
   has_many :fmus, inverse_of: :operator
+
+  has_many :operator_documents
+  has_many :operator_document_countries
+  has_many :operator_document_fmus
+
+  after_create :create_operator_id
 
   validates :name, presence: true
 
@@ -61,5 +67,15 @@ class Operator < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  private
+
+  def create_operator_id
+    if country_id.present?
+      update_columns(operator_id: "#{country.iso}-unknown-#{id}")
+    else
+      update_columns(operator_id: "na-unknown-#{id}")
+    end
   end
 end

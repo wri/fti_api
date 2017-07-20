@@ -9,4 +9,3 @@
 
 # Find and create new seed files in db/fixtures
 Rake::Task['db:seed_fu'].invoke
-Rake::Task['import_operators_countries:all'].invoke unless Operator.where('country_id is not null').exists?

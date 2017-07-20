@@ -20,14 +20,16 @@ class Country < ApplicationRecord
   has_many :users,           inverse_of: :country
   has_many :observations,    inverse_of: :country
   has_many :observers,       inverse_of: :country
-  has_many :annex_operators, inverse_of: :country
-  has_many :laws,            inverse_of: :country
   has_many :governments,     inverse_of: :country
   has_many :operators,       inverse_of: :country
   has_many :fmus,            inverse_of: :country
 
   has_many :species_countries
   has_many :species, through: :species_countries
+
+  has_many :country_subcategories
+
+  has_many :operator_documents, dependent: :destroy
 
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 
@@ -42,16 +44,6 @@ class Country < ApplicationRecord
 
   default_scope do
     includes(:translations)
-  end
-
-  class << self
-    def fetch_all(options)
-      by_status = options['is_active'] if options.present? && options['is_active'].in?(['true', 'false'])
-
-      countries = all
-      countries = countries.by_status(by_status) if by_status.present?
-      countries
-    end
   end
 
   def cache_key
