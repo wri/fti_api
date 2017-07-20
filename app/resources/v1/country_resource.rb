@@ -3,7 +3,7 @@ module V1
     caching
 
     attributes :iso, :region_iso, :country_centroid,
-               :region_centroid, :is_active, :region_name
+               :region_centroid, :is_active, :region_name, :name
 
     has_many :fmus
 
