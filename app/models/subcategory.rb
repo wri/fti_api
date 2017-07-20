@@ -17,4 +17,8 @@ class Subcategory < ApplicationRecord
   has_many :severities, dependent: :destroy
   has_many :country_subcategories, dependent: :destroy
   has_many :observations, inverse_of: :subcategory, dependent: :destroy
+
+  default_scope do
+    includes(:translations).with_translations('en')
+  end
 end

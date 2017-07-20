@@ -58,10 +58,11 @@ module JSONAPI
               if @model_class.attribute_names.include?(field)
                 records = records.order(field => direction)
               else
-                if @model_class.respond_to?(field) # To check if it exists in the translations table
-                  records = records.joins(:translations)
-                                .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
-                end
+                # TODO: Check a way to do this
+                #if @model_class.respond_to?(field) # To check if it exists in the translations table
+                records = records.joins(:translations)
+                              .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
+                #end
               end
             end
           end
