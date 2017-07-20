@@ -33,9 +33,7 @@ class UserPermission < ApplicationRecord
       when 'ngo'      then { user:  { id: [:manage] }, observation: { id: [:manage] },
                              photo: { all: [:manage] }, document: { all: [:manage] },
                              category: { all: [:manage] }, annex_governance: { all: [:manage] },
-                             annex_operator: { all: [:manage] }, comment: { all: [:manage] },
                              country: { all: [:manage] }, government: { all: [:manage]},
-                             law: { all: [:manage] }, observer: { all: [:manage] },
                              operator: { all: [:manage]}, species: { all: [:manage] }}
       else
         { user: { id: [:manage] }, observation: { all: [:read] }  }

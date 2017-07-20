@@ -10,6 +10,7 @@
 #  updated_at    :datetime         not null
 #  is_active     :boolean          default(TRUE)
 #  logo          :string
+#  operator_id   :string
 #
 
 FactoryGirl.define do

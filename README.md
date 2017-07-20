@@ -67,7 +67,7 @@ cd fti_api
     cp env.sample .env
 
     bundle exec rake db:create
-    bundle exec rake db:migrate
+    bundle exec rake db:schema:load
 
 ### Load sample data: ###
 

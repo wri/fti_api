@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operators
@@ -12,6 +11,7 @@
 #  updated_at    :datetime         not null
 #  is_active     :boolean          default(TRUE)
 #  logo          :string
+#  operator_id   :string
 #
 
 class Operator < ApplicationRecord
@@ -25,6 +25,10 @@ class Operator < ApplicationRecord
   has_many :user_operators
   has_many :users, through: :user_operators
   has_many :fmus, inverse_of: :operator
+
+  has_many :operator_documents
+  has_many :operator_document_countries
+  has_many :operator_document_fmus
 
   after_create :create_operator_id
 
