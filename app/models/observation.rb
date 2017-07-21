@@ -56,7 +56,7 @@ class Observation < ApplicationRecord
   include Activable
 
 
-  default_scope { includes(:translations).with_translations('en') }
+  #default_scope { includes(:translations).with_translations('en') }
 
   class << self
     def translated_types
