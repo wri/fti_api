@@ -30,7 +30,7 @@ module FtiApi
     config.i18n.enforce_available_locales = true
     config.i18n.fallbacks                 = { 'en' => 'fr', 'fr' => 'en' }
 
-    config.api_only = true
+    config.api_only = false
 
     config.generators do |g|
       g.template_engine nil

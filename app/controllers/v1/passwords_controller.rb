@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class PasswordsController < ApplicationController
+  class PasswordsController < ApiController
     include ErrorSerializer
 
     skip_before_action :authenticate, only: [:create, :update_by_token]

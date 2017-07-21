@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class OperatorsController < ApplicationController
+  class OperatorsController < ApiController
     include ErrorSerializer
     include ApiUploads
 

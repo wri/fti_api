@@ -1,7 +1,7 @@
 # Controller for the email contacts
 
 module V1
-  class ContactsController < ApplicationController
+  class ContactsController < ApiController
 
     include ErrorSerializer
 

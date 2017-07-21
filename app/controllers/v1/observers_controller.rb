@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ObserversController < ApplicationController
+  class ObserversController < ApiController
     include ErrorSerializer
     include ApiUploads
 
