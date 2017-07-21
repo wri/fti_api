@@ -37,7 +37,7 @@ module V1
     }
 
     def self.sortable_fields(context)
-      super + [:'country.iso', :'severity.level']
+      super + [:'country.iso', :'severity.level', :'subcategory.name', :'operator.name']
     end
 
     def custom_links(_)
