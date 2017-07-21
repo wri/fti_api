@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
   include JSONAPI::ActsAsResourceController
 
   def context
-    {current_user: current_user, locale: (params[:locale] || 'en')}
+    {current_user: current_user, locale: (params[:locale] || I18n.default_locale)}
   end
 
   before_action :check_access, :authenticate
