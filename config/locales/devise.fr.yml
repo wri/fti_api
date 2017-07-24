@@ -1,16 +1,4 @@
 fr:
-  activerecord:
-    attributes:
-      user:
-        current_password: Mot de passe actuel
-        email: Courriel
-        password: Mot de passe
-        password_confirmation: Confirmation du mot de passe
-        remember_me: Se souvenir de moi
-        reset_password_token: Clé de Réinitialisation du Mot de Passe
-        unlock_token: Clé de déblocage
-    models:
-      user: Utilisateur
   devise:
     confirmations:
       confirmed: Votre compte a été confirmé avec succès.

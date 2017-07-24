@@ -28,7 +28,10 @@
 #
 
 class User < ApplicationRecord
-  has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, 
+         :recoverable, :rememberable, :trackable, :validatable
 
   enum permissions_request: { operator: 1, ngo: 2 }
 

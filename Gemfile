@@ -9,6 +9,21 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Active admin
+gem 'activeadmin'
+gem 'devise'
+
+# Active Admin skins
+gem 'active_skin'
+#gem 'active_admin_theme'
+#gem "active_material", github: "vigetlabs/active_material"
+#gem 'active_admin_flat_skin'
+#gem 'face_of_active_admin'
+#gem 'activeadmin_blaze_theme'
+#gem 'flattened_active_admin'
+
+
+# Rails and DB
 gem 'pg',    '~> 0.18'
 gem 'rails', '~> 5.0.2'
 
@@ -33,7 +48,7 @@ gem 'mini_magick'
 
 # Templating
 gem 'slim-rails'
-gem 'will_paginate'
+#gem 'will_paginate'
 
 group :development, :test do
   gem 'byebug',                    platform: :mri
