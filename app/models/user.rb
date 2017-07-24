@@ -62,7 +62,7 @@ class User < ApplicationRecord
   validate  :validate_nickname
 
   validates_format_of :nickname, with: /\A[a-z0-9_\.][-a-z0-9]{1,19}\Z/i,
-                                 exclusion: { in: %w(admin superuser about root fti otp faq conntact user operator ngo) },
+                                 exclusion: { in: %w(admin superuser about root fti otp faq contact user operator ngo) },
                                  multiline: true
 
   validates :password, confirmation: true,

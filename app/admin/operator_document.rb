@@ -1,7 +1,7 @@
 ActiveAdmin.register OperatorDocument do
   menu parent: 'Documents', priority: 2
 
-  actions :all
+  actions :all, except: [:destroy, :new, :create]
   permit_params :name
 
   index do

@@ -22,10 +22,10 @@ ActiveAdmin.register RequiredOperatorDocument do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Required Operator Document Details' do
-      disable = object.new_record? ? false : true
-      f.input :required_operator_document_group, input_html: { disabled: disable }
-      f.input :country, input_html: { disabled: disable }
-      f.input :type, input_html: { disabled: disable }
+      editing = object.new_record? ? false : true
+      f.input :required_operator_document_group, input_html: { disabled: editing }
+      f.input :country, input_html: { disabled: editing }
+      f.input :type, input_html: { disabled: editing }
       f.input :name
     end
     f.actions
