@@ -55,9 +55,10 @@ module JSONAPI
                 records = records.joins(joins_query).order(order_by_query)
               else
                 if association.klass.new.attributes.has_key?(column_name)
-                  records = @model_class.joins("#{association.name.to_s}": :translations)
-                                .where("#{association.name.to_s}_translations.locale = '#{_context[:locale]}'")
-                                .order("lower(#{association.name.to_s}_translations.#{column_name}) #{direction}")
+                  joins_query = _build_joins([records.model, *association])
+                  joins_query << " LEFT JOIN #{association.name}_translations ON #{association.name}_translations.#{association.name}_id = #{association.name}_sorting.id AND #{association.name}_translations.locale = '#{_context[:locale]}'"
+                  order_by_query = "#{association.name}_translations.#{column_name} #{direction}"
+                  records = records.joins(joins_query).order(order_by_query)
                 end
               end
             else
