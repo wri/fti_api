@@ -46,23 +46,27 @@ module JSONAPI
           order_options.each_pair do |field, direction|
             if field.to_s.include?(".")
               *model_names, column_name = field.split(".")
+              association = _lookup_association_chain([records.model.to_s, *model_names]).last
 
-              associations = _lookup_association_chain([records.model.to_s, *model_names])
-              joins_query = _build_joins([records.model, *associations])
-
-              # _sorting is appended to avoid name clashes with manual joins eg. overridden filters
-              order_by_query = "#{associations.last.name}_sorting.#{column_name} #{direction}"
-              records = records.joins(joins_query).order(order_by_query)
+              if association.klass.attribute_names.include?(field)
+                joins_query = _build_joins([records.model, *associations])
+                # _sorting is appended to avoid name clashes with manual joins eg. overridden filters
+                order_by_query = "#{association.name}_sorting.#{column_name} #{direction}"
+                records = records.joins(joins_query).order(order_by_query)
+              else
+                if association.klass.new.attributes.has_key?(column_name)
+                  records = @model_class.joins("#{association.name.to_s}": :translations).where("#{association.name.to_s}_translations.locale = '#{_context[:locale]}'").order("lower(#{association.name.to_s}_translations.#{column_name}) #{direction}")
+                end
+              end
             else
               # Hack to work with Globalize
               if @model_class.attribute_names.include?(field)
                 records = records.order(field => direction)
               else
-                # TODO: Check a way to do this
-                #if @model_class.respond_to?(field) # To check if it exists in the translations table
-                records = records.joins(:translations)
+                if @model_class.new.attributes.has_key?(field) # To check if it exists in the translations table
+                  records = records.joins(:translations).with_translations(_context[:locale])
                               .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
-                #end
+                end
               end
             end
           end
