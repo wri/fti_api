@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -25,6 +24,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  encrypted_password     :string           default(""), not null
+#  remember_created_at    :datetime
 #
 
 class User < ApplicationRecord

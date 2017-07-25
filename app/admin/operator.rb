@@ -2,7 +2,7 @@
 ActiveAdmin.register Operator do
 
   actions :all, except: :destroy
-  permit_params :name
+  permit_params :name, :country_id, :details, :concession, :is_active
 
   index do
     column :country

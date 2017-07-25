@@ -20,6 +20,7 @@
 #  lng              :decimal(, )
 #  fmu_id           :integer
 #  subcategory_id   :integer
+#  status           :integer
 #
 
 class Observation < ApplicationRecord
@@ -27,6 +28,8 @@ class Observation < ApplicationRecord
   translates :details, :evidence, :concern_opinion, :litigation_status
 
   enum observation_type: %w(operator government)
+  enum validation_status: ['Created', 'Under revision', 'Approved', 'Rejected']
+
 
   belongs_to :country,    inverse_of: :observations
   belongs_to :observer,   inverse_of: :observations, optional: true
@@ -52,6 +55,7 @@ class Observation < ApplicationRecord
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
+  validates_presence_of :validation_status
 
   include Activable
 

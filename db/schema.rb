@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721142156) do
+ActiveRecord::Schema.define(version: 20170725081137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20170721142156) do
 
   create_table "observations", force: :cascade do |t|
     t.integer  "severity_id"
-    t.integer  "observation_type",                null: false
+    t.integer  "observation_type",                 null: false
     t.integer  "user_id"
     t.datetime "publication_date"
     t.integer  "country_id"
@@ -188,13 +188,14 @@ ActiveRecord::Schema.define(version: 20170721142156) do
     t.integer  "operator_id"
     t.integer  "government_id"
     t.string   "pv"
-    t.boolean  "is_active",        default: true
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "is_active",         default: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.decimal  "lat"
     t.decimal  "lng"
     t.integer  "fmu_id"
     t.integer  "subcategory_id"
+    t.integer  "validation_status", default: 0,    null: false
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
     t.index ["observer_id"], name: "index_observations_on_observer_id", using: :btree

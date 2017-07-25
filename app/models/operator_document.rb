@@ -17,6 +17,9 @@
 class OperatorDocument < ApplicationRecord
   belongs_to :operator
   belongs_to :required_operator_document
+
   has_many :documents, as: :attacheable
+  accepts_nested_attributes_for :documents
+
   enum status: { doc_not_provided: 0, doc_invalid: 1, doc_valid: 2 }
 end

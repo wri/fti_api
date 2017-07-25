@@ -23,6 +23,8 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  encrypted_password     :string           default(""), not null
+#  remember_created_at    :datetime
 #
 
 FactoryGirl.define do

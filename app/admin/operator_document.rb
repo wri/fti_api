@@ -2,7 +2,9 @@ ActiveAdmin.register OperatorDocument do
   menu parent: 'Documents', priority: 2
 
   actions :all, except: [:destroy, :new, :create]
-  permit_params :name
+  permit_params :name, :required_operator_document_id,
+                :operator_id, :type, :status, :expire_date, :start_date,
+                documents_attributes: [:id, :name, :document_type, :attachment]
 
   index do
     column :required_operator_document
@@ -23,14 +25,20 @@ ActiveAdmin.register OperatorDocument do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Required Operator Details' do
-      f.input :required_operator_document
-      f.input :operator
-      f.input :type
-      f.input :status
-      f.input :expire_date
-      f.input :start_date
+    f.inputs 'Operator Document Details' do
+      f.input :required_operator_document, input_html: { disabled: true }
+      f.input :operator, input_html: { disabled: true }
+      f.input :type, input_html: { disabled: true }
+      f.input :status, include_blank: false
+      f.input :expire_date, as: :date_picker
+      f.input :start_date, as: :date_picker
 
+
+      f.has_many :documents, allow_destroy: false, new_record: true, heading: 'Documents' do |d|
+        d.input :name
+        d.input :document_type, collection: %w(Report Doumentation), include_blank: false
+        d.input :attachment
+      end
     end
     f.actions
   end

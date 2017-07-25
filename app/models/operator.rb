@@ -31,6 +31,7 @@ class Operator < ApplicationRecord
   has_many :operator_document_fmus
 
   after_create :create_operator_id
+  after_create :create_documents
 
   validates :name, presence: true
 
@@ -78,4 +79,24 @@ class Operator < ApplicationRecord
       update_columns(operator_id: "na-unknown-#{id}")
     end
   end
+
+  def create_documents
+    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
+
+    RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
+      OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).first_or_create do |odc|
+        odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+      end
+    end
+
+    RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
+      Fmu.where(operator_id: id).find_each do |fmu|
+        OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
+          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+        end
+      end
+    end
+
+  end
+
 end

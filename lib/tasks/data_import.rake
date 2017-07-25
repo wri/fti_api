@@ -364,7 +364,7 @@ namespace :import do
 
     puts '... creating required operator documents per fmu'
     RequiredOperatorDocumentFmu.find_each do |rodf|
-      Fmu.find_each do |fmu|
+      Fmu.where(country_id: rodf.country_id).find_each do |fmu|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: fmu.operator_id, fmu_id: fmu.id).first_or_create do |odf|
           odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
         end

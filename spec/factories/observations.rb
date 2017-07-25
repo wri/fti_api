@@ -19,6 +19,7 @@
 #  lng              :decimal(, )
 #  fmu_id           :integer
 #  subcategory_id   :integer
+#  status           :integer
 #
 
 FactoryGirl.define do
