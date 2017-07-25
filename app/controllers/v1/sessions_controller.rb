@@ -8,7 +8,7 @@ module V1
 
     def create
       @user = User.find_by(email: auth_params[:email])
-      if @user && @user.valid_password?(auth_params[:password])
+      if @user && @user.authenticate(auth_params[:password])
         token = Auth.issue({ user: @user.id })
         @user.update(current_sign_in_ip: auth_params[:current_sign_in_ip]) if auth_params[:current_sign_in_ip].present?
         render json: { token: token, role: @user.user_permission.user_role, user_id: @user.id }, status: 200
