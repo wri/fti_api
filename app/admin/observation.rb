@@ -36,7 +36,6 @@ ActiveAdmin.register Observation do
 
   filter :country
   filter :operator
- # filter :status, as: :select, collection: Observation.validation_statuses
   filter :updated_at
 
 end

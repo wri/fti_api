@@ -25,6 +25,8 @@
 #  last_sign_in_ip        :inet
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
+#  observer_id            :integer
+#  operator_id            :integer
 #
 
 FactoryGirl.define do

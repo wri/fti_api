@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725081137) do
+ActiveRecord::Schema.define(version: 20170725173923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -371,24 +371,6 @@ ActiveRecord::Schema.define(version: 20170725081137) do
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
   end
 
-  create_table "user_observers", force: :cascade do |t|
-    t.integer  "observer_id"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["observer_id"], name: "index_user_observers_on_observer_id", using: :btree
-    t.index ["user_id"], name: "index_user_observers_on_user_id", using: :btree
-  end
-
-  create_table "user_operators", force: :cascade do |t|
-    t.integer  "operator_id"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["operator_id"], name: "index_user_operators_on_operator_id", using: :btree
-    t.index ["user_id"], name: "index_user_operators_on_user_id", using: :btree
-  end
-
   create_table "user_permissions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "user_role",   default: 0,  null: false
@@ -420,6 +402,8 @@ ActiveRecord::Schema.define(version: 20170725081137) do
     t.inet     "last_sign_in_ip"
     t.string   "encrypted_password",     default: "",   null: false
     t.datetime "remember_created_at"
+    t.integer  "observer_id"
+    t.integer  "operator_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

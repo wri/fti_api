@@ -26,6 +26,8 @@
 #  last_sign_in_ip        :inet
 #  encrypted_password     :string           default(""), not null
 #  remember_created_at    :datetime
+#  observer_id            :integer
+#  operator_id            :integer
 #
 
 class User < ApplicationRecord
@@ -49,10 +51,8 @@ class User < ApplicationRecord
   has_many :photos,       inverse_of: :user
   has_many :documents,    inverse_of: :user
 
-  has_many :user_observers
-  has_many :user_operators
-  has_many :observers, through: :user_observers
-  has_many :operators, through: :user_operators
+  belongs_to :observer, optional: true
+  belongs_to :operator,  optional: true
 
   accepts_nested_attributes_for :user_permission
 
