@@ -18,6 +18,7 @@ class Fmu < ApplicationRecord
   belongs_to :country, inverse_of: :fmus
   belongs_to :operator, inverse_of: :fmus
   has_many :documents, as: :attacheable, dependent: :destroy
+  has_many :observations, inverse_of: :fmu
 
   accepts_nested_attributes_for :documents, allow_destroy: true
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class UsersController < ApplicationController
+  class UsersController < ApiController
     include ErrorSerializer
 
     load_and_authorize_resource class: 'User'

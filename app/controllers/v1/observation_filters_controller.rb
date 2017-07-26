@@ -1,6 +1,6 @@
 
 module V1
-  class ObservationFiltersController < ApplicationController
+  class ObservationFiltersController < ApiController
     include ErrorSerializer
 
     skip_before_action :authenticate

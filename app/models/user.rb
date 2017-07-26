@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -25,10 +24,17 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
+#  encrypted_password     :string           default(""), not null
+#  remember_created_at    :datetime
+#  observer_id            :integer
+#  operator_id            :integer
 #
 
 class User < ApplicationRecord
-  has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, 
+         :recoverable, :rememberable, :trackable, :validatable
 
   enum permissions_request: { operator: 1, ngo: 2 }
 
@@ -45,10 +51,8 @@ class User < ApplicationRecord
   has_many :photos,       inverse_of: :user
   has_many :documents,    inverse_of: :user
 
-  has_many :user_observers
-  has_many :user_operators
-  has_many :observers, through: :user_observers
-  has_many :operators, through: :user_operators
+  belongs_to :observer, optional: true
+  belongs_to :operator,  optional: true
 
   accepts_nested_attributes_for :user_permission
 
@@ -59,7 +63,7 @@ class User < ApplicationRecord
   validate  :validate_nickname
 
   validates_format_of :nickname, with: /\A[a-z0-9_\.][-a-z0-9]{1,19}\Z/i,
-                                 exclusion: { in: %w(admin superuser about root fti otp faq conntact user operator ngo) },
+                                 exclusion: { in: %w(admin superuser about root fti otp faq contact user operator ngo) },
                                  multiline: true
 
   validates :password, confirmation: true,

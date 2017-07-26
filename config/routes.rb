@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self) do
+
+  end
+
+  root to: "home#index"
+
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
     post  '/login',                       to: 'sessions#create'
@@ -23,6 +30,7 @@ Rails.application.routes.draw do
       jsonapi_resources :governments do; end
       jsonapi_resources :observers do; end
       jsonapi_resources :observations do; end
+      jsonapi_resources :documents do; end
       jsonapi_resources :operator_documents do; end
       jsonapi_resources :required_operator_documents do; end
       jsonapi_resources :required_operator_document_groups do; end
@@ -30,8 +38,6 @@ Rails.application.routes.draw do
       resources :contacts, only: [:create, :index]
 
       get 'observation_filters', to: 'observation_filters#index'
-
-
     end
   end
 end

@@ -10,11 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717114558) do
+ActiveRecord::Schema.define(version: 20170725173923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "citext"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_type"
+    t.integer  "resource_id"
+    t.string   "author_type"
+    t.integer  "author_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  end
 
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
@@ -166,7 +180,7 @@ ActiveRecord::Schema.define(version: 20170717114558) do
 
   create_table "observations", force: :cascade do |t|
     t.integer  "severity_id"
-    t.integer  "observation_type",                null: false
+    t.integer  "observation_type",                 null: false
     t.integer  "user_id"
     t.datetime "publication_date"
     t.integer  "country_id"
@@ -174,13 +188,14 @@ ActiveRecord::Schema.define(version: 20170717114558) do
     t.integer  "operator_id"
     t.integer  "government_id"
     t.string   "pv"
-    t.boolean  "is_active",        default: true
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.boolean  "is_active",         default: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.decimal  "lat"
     t.decimal  "lng"
     t.integer  "fmu_id"
     t.integer  "subcategory_id"
+    t.integer  "validation_status", default: 0,    null: false
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
     t.index ["observer_id"], name: "index_observations_on_observer_id", using: :btree
@@ -356,24 +371,6 @@ ActiveRecord::Schema.define(version: 20170717114558) do
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
   end
 
-  create_table "user_observers", force: :cascade do |t|
-    t.integer  "observer_id"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["observer_id"], name: "index_user_observers_on_observer_id", using: :btree
-    t.index ["user_id"], name: "index_user_observers_on_user_id", using: :btree
-  end
-
-  create_table "user_operators", force: :cascade do |t|
-    t.integer  "operator_id"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["operator_id"], name: "index_user_operators_on_operator_id", using: :btree
-    t.index ["user_id"], name: "index_user_operators_on_user_id", using: :btree
-  end
-
   create_table "user_permissions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "user_role",   default: 0,  null: false
@@ -403,6 +400,10 @@ ActiveRecord::Schema.define(version: 20170717114558) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "encrypted_password",     default: "",   null: false
+    t.datetime "remember_created_at"
+    t.integer  "observer_id"
+    t.integer  "operator_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

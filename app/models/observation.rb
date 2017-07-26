@@ -3,23 +3,24 @@
 #
 # Table name: observations
 #
-#  id               :integer          not null, primary key
-#  severity_id      :integer
-#  observation_type :integer          not null
-#  user_id          :integer
-#  publication_date :datetime
-#  country_id       :integer
-#  observer_id      :integer
-#  operator_id      :integer
-#  government_id    :integer
-#  pv               :string
-#  is_active        :boolean          default(TRUE)
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  lat              :decimal(, )
-#  lng              :decimal(, )
-#  fmu_id           :integer
-#  subcategory_id   :integer
+#  id                :integer          not null, primary key
+#  severity_id       :integer
+#  observation_type  :integer          not null
+#  user_id           :integer
+#  publication_date  :datetime
+#  country_id        :integer
+#  observer_id       :integer
+#  operator_id       :integer
+#  government_id     :integer
+#  pv                :string
+#  is_active         :boolean          default(TRUE)
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  lat               :decimal(, )
+#  lng               :decimal(, )
+#  fmu_id            :integer
+#  subcategory_id    :integer
+#  validation_status :integer          default("Created"), not null
 #
 
 class Observation < ApplicationRecord
@@ -27,6 +28,8 @@ class Observation < ApplicationRecord
   translates :details, :evidence, :concern_opinion, :litigation_status
 
   enum observation_type: %w(operator government)
+  enum validation_status: ['Created', 'Under revision', 'Approved', 'Rejected']
+
 
   belongs_to :country,    inverse_of: :observations
   belongs_to :observer,   inverse_of: :observations, optional: true
@@ -52,6 +55,7 @@ class Observation < ApplicationRecord
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
+  validates_presence_of :validation_status
 
   include Activable
 

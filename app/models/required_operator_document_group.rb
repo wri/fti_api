@@ -8,7 +8,7 @@
 #
 
 class RequiredOperatorDocumentGroup < ApplicationRecord
-  translates :name, :details
+  translates :name
   has_many :required_operator_documents, dependent: :destroy
   has_many :required_operator_document_countries
   has_many :required_operator_document_fmus
