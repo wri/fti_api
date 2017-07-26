@@ -74,10 +74,38 @@ module JSONAPI
             end
           end
         end
-
         records
       end
     end
   end
+
+  module ActsAsResourceController
+    def render_results(operation_results)
+      response_doc = create_response_document(operation_results)
+      content = response_doc.contents
+
+      render_options = {}
+      if operation_results.has_errors?
+        render_options[:json] = content
+      else
+        # Bypasing ActiveSupport allows us to use CompiledJson objects for cached response fragments
+        render_options[:body] = JSON.generate(content)
+      end
+
+      if content.dig(:data, :links, :self).present?
+        render_options[:location] = content[:data]["links"][:self] if (
+        response_doc.status == :created && content[:data].class != Array
+        )
+      end
+
+      # For whatever reason, `render` ignores :status and :content_type when :body is set.
+      # But, we can just set those values directly in the Response object instead.
+      response.status = response_doc.status
+      response.headers['Content-Type'] = JSONAPI::MEDIA_TYPE
+
+      render(render_options)
+    end
+  end
+
 end
 

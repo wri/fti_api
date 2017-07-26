@@ -21,6 +21,8 @@ class Document < ApplicationRecord
   belongs_to :user, inverse_of: :documents
   belongs_to :attacheable, polymorphic: true
 
+  belongs_to :operator_document
+
   after_destroy :remove_attachment_id_directory
 
   validates :document_type, presence: true, inclusion: { in: %w(Report Doumentation),
