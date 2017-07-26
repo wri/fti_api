@@ -92,7 +92,7 @@ module JSONAPI
         render_options[:body] = JSON.generate(content)
       end
 
-      if content.dig(:data, :links, :self).present?
+      if content[:data].is_a?(Hash) && content.dig(:data, :links, :self).present?
         render_options[:location] = content[:data]["links"][:self] if (
         response_doc.status == :created && content[:data].class != Array
         )
@@ -106,6 +106,5 @@ module JSONAPI
       render(render_options)
     end
   end
-
 end
 
