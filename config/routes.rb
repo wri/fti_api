@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       jsonapi_resources :governments do; end
       jsonapi_resources :observers do; end
       jsonapi_resources :observations do; end
+      jsonapi_resources :documents do; end
       jsonapi_resources :operator_documents do; end
       jsonapi_resources :required_operator_documents do; end
       jsonapi_resources :required_operator_document_groups do; end
