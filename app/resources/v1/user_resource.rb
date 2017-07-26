@@ -8,6 +8,8 @@ module V1
     has_one :country
     has_one    :user_permission, foreign_key_on: :related
     has_many   :comments
+    has_one :observer
+    has_one :operator
 
     def custom_links(_)
       { self: nil }
