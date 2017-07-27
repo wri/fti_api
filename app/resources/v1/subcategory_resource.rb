@@ -11,6 +11,10 @@ module V1
 
     filters :id, :name, :subcategory_type, :category_id
 
+    filter :observation_type, apply:->(records, value, _options) {
+      records.joins(:observations).where('observations.observation_type = ?', value[0].to_i)
+    }
+
     def custom_links(_)
       { self: nil }
     end
