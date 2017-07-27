@@ -11,6 +11,8 @@ module V1
     has_one :observer
     has_one :operator
 
+    filters :is_active, :email, :name, :nickname, :institution
+
     def custom_links(_)
       { self: nil }
     end

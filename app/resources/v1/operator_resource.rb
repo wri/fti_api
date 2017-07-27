@@ -12,7 +12,7 @@ module V1
     has_many :operator_document_fmus
     has_many :operator_document_countries
 
-    filter :country
+    filters :country, :is_active, :name, :operator_type
 
     def custom_links(_)
       { self: nil }
