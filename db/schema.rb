@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726171916) do
+ActiveRecord::Schema.define(version: 20170727150124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -259,6 +259,7 @@ ActiveRecord::Schema.define(version: 20170726171916) do
     t.float    "percentage_valid_documents_all"
     t.float    "percentage_valid_documents_country"
     t.float    "percentage_valid_documents_fmu"
+    t.integer  "certification"
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
   end
 

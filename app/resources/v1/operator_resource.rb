@@ -3,7 +3,7 @@ module V1
     caching
     attributes :name, :operator_type, :concession, :is_active, :logo, :details,
                :percentage_valid_documents_fmu, :percentage_valid_documents_country,
-               :percentage_valid_documents_all
+               :percentage_valid_documents_all, :certification
 
     has_one :country
     has_many :fmus

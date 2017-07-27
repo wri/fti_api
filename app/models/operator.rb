@@ -15,12 +15,15 @@
 #  percentage_valid_documents_all     :float
 #  percentage_valid_documents_country :float
 #  percentage_valid_documents_fmu     :float
+#  certification                      :integer
 #
 
 class Operator < ApplicationRecord
   translates :name, :details
 
   mount_base64_uploader :logo, LogoUploader
+
+  enum certification: { fsc: 0, pefc: 1, olb: 2 }
 
   belongs_to :country, inverse_of: :operators, optional: true
 
@@ -78,9 +81,9 @@ class Operator < ApplicationRecord
     self.percentage_valid_documents_fmu = operator_documents.where(type: 'OperatorDocumentFmu', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentFmu').count.to_f rescue 0
     self.percentage_valid_documents_country = operator_documents.where(type: 'OperatorDocumentCountry', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentCountry').count.to_f rescue 0
 
-    self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all = NaN
-    self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country = NaN
-    self.percentage_valid_documents_fmu = 0 if self.percentage_valid_documents_fmu = NaN
+    self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all.nan?
+    self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country.nan?
+    self.percentage_valid_documents_fmu = 0 if self.percentage_valid_documents_fmu.nan?
 
     self.save!
   end
