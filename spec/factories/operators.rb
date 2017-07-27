@@ -14,6 +14,7 @@
 #  percentage_valid_documents_all     :float
 #  percentage_valid_documents_country :float
 #  percentage_valid_documents_fmu     :float
+#  certification                      :integer
 #
 
 FactoryGirl.define do
