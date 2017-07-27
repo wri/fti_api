@@ -226,6 +226,8 @@ GEM
     oj (2.18.5)
     oj_mimic_json (1.0.1)
     orm_adapter (0.5.0)
+    paranoia (2.3.1)
+      activerecord (>= 4.0, < 5.2)
     parser (2.4.0.0)
       ast (~> 2.2)
     pg (0.20.0)
@@ -454,6 +456,7 @@ DEPENDENCIES
   mini_magick
   oj
   oj_mimic_json
+  paranoia (~> 2.2)
   pg (~> 0.18)
   pry-rails
   puma
