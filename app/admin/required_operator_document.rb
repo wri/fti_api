@@ -2,7 +2,7 @@ ActiveAdmin.register RequiredOperatorDocument do
   menu parent: 'Documents', priority: 1
 
   actions :all
-  permit_params :name
+  permit_params :name, :type, :valid_period, :country
 
   index do
     column :required_operator_document_group
@@ -27,6 +27,7 @@ ActiveAdmin.register RequiredOperatorDocument do
       f.input :country, input_html: { disabled: editing }
       f.input :type, input_html: { disabled: editing }
       f.input :name
+      f.input :valid_period
     end
     f.actions
   end

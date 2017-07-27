@@ -26,6 +26,7 @@ class Document < ApplicationRecord
 
   after_destroy :remove_attachment_id_directory
   after_create :change_operator_status
+  after_create :set_operator_document_expire_date
   before_destroy :change_operator_status
 
   validates :document_type, presence: true, inclusion: { in: %w(Report Doumentation),
@@ -49,6 +50,11 @@ class Document < ApplicationRecord
   end
 
   def change_operator_status
+    attacheable.update_attribute(:status, OperatorDocument.statuses[:doc_pending]) if attacheable.is_a?(OperatorDocument)
+  end
+
+  def set_operator_document_expire_date
+    
     attacheable.update_attribute(:status, OperatorDocument.statuses[:doc_pending]) if attacheable.is_a?(OperatorDocument)
   end
 end
