@@ -47,6 +47,6 @@ class Document < ApplicationRecord
   end
 
   def change_operator_status
-    attacheable.update_attributes(status: OperatorDocument.statuses[:pending]) if attacheable.is_a?(OperatorDocument)
+    attacheable.update_attribute(:status, OperatorDocument.statuses[:doc_pending]) if attacheable.is_a?(OperatorDocument)
   end
 end
