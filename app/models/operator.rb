@@ -74,11 +74,11 @@ class Operator < ApplicationRecord
   end
 
   def update_valid_documents_percentages
-    all = (operator_documents.where(status: OperatorDocument.statuses[:doc_valid]).count / operator_documents.count).to_f rescue 0
-    fmu = (operator_documents.where(type: 'OperatorDocumentFmu', status: OperatorDocument.statuses[:doc_valid]).count / operator_documents.where(type: 'OperatorDocumentFmu').count).to_f rescue 0
-    country = (operator_documents.where(type: 'OperatorDocumentCountry', status: OperatorDocument.statuses[:doc_valid]).count / operator_documents.where(type: 'OperatorDocumentCountry').count).to_f rescue 0
+    percentage_valid_documents_all = (operator_documents.where(status: OperatorDocument.statuses[:doc_valid]).count / operator_documents.count).to_f rescue 0
+    percentage_valid_documents_fmu = (operator_documents.where(type: 'OperatorDocumentFmu', status: OperatorDocument.statuses[:doc_valid]).count / operator_documents.where(type: 'OperatorDocumentFmu').count).to_f rescue 0
+    percentage_valid_documents_country = (operator_documents.where(type: 'OperatorDocumentCountry', status: OperatorDocument.statuses[:doc_valid]).count / operator_documents.where(type: 'OperatorDocumentCountry').count).to_f rescue 0
 
-    self.update_attributes(percentage_valid_documents_all: all, percentage_valid_documents_country: country, percentage_valid_documents_fmu: fmu)
+    save
   end
 
   private
