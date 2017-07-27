@@ -17,6 +17,7 @@
 
 class Document < ApplicationRecord
   mount_base64_uploader :attachment, DocumentUploader
+  acts_as_paranoid
 
   belongs_to :user, inverse_of: :documents
   belongs_to :attacheable, polymorphic: true

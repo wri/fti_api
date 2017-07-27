@@ -13,6 +13,9 @@ end
 gem 'activeadmin'
 gem 'devise'
 
+# Soft Delete
+gem 'paranoia', "~> 2.2"
+
 # Active Admin skins
 gem 'active_skin'
 #gem 'active_admin_theme'
