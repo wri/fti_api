@@ -26,6 +26,7 @@ class Document < ApplicationRecord
 
   after_destroy :remove_attachment_id_directory
   after_create :change_operator_status
+  before_destroy :change_operator_status
 
   validates :document_type, presence: true, inclusion: { in: %w(Report Doumentation),
                                                          message: "%{value} is not a valid document type" }
