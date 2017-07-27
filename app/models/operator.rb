@@ -3,15 +3,18 @@
 #
 # Table name: operators
 #
-#  id            :integer          not null, primary key
-#  operator_type :string
-#  country_id    :integer
-#  concession    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_active     :boolean          default(TRUE)
-#  logo          :string
-#  operator_id   :string
+#  id                                 :integer          not null, primary key
+#  operator_type                      :string
+#  country_id                         :integer
+#  concession                         :string
+#  created_at                         :datetime         not null
+#  updated_at                         :datetime         not null
+#  is_active                          :boolean          default(TRUE)
+#  logo                               :string
+#  operator_id                        :string
+#  percentage_valid_documents_all     :float
+#  percentage_valid_documents_country :float
+#  percentage_valid_documents_fmu     :float
 #
 
 class Operator < ApplicationRecord
@@ -73,7 +76,7 @@ class Operator < ApplicationRecord
   def update_valid_documents_percentages
     all = (operator_documents.where(status: 2).count / operator_documents.count).to_f rescue 0
     fmu = (operator_documents.where(type: 'OperatorDocumentFmu', status: 2).count / operator_documents.where(type: 'OperatorDocumentFmu').count).to_f rescue 0
-    country = (country operator_documents.where(type: 'OperatorDocumentCountry', status: 2).count / operator_documents.where(type: 'OperatorDocumentCountry').count).to_f rescue 0
+    country = (operator_documents.where(type: 'OperatorDocumentCountry', status: 2).count / operator_documents.where(type: 'OperatorDocumentCountry').count).to_f rescue 0
 
     self.update_attributes(percentage_valid_documents_all: all, percentage_valid_documents_country: country, percentage_valid_documents_fmu: fmu)
   end

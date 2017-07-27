@@ -24,6 +24,7 @@ class Document < ApplicationRecord
   belongs_to :operator_document
 
   after_destroy :remove_attachment_id_directory
+  after_create :change_operator_status
 
   validates :document_type, presence: true, inclusion: { in: %w(Report Doumentation),
                                                          message: "%{value} is not a valid document type" }
@@ -43,5 +44,9 @@ class Document < ApplicationRecord
 
   def remove_attachment_id_directory
     FileUtils.rm_rf(File.join('public', 'uploads', 'document', 'attachment', self.id.to_s)) if self.attachment
+  end
+
+  def change_operator_status
+    attacheable.update_attributes(status: OperatorDocument.statuses[:pending]) if attacheable.is_a?(OperatorDocument)
   end
 end

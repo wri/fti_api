@@ -2,15 +2,18 @@
 #
 # Table name: operators
 #
-#  id            :integer          not null, primary key
-#  operator_type :string
-#  country_id    :integer
-#  concession    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_active     :boolean          default(TRUE)
-#  logo          :string
-#  operator_id   :string
+#  id                                 :integer          not null, primary key
+#  operator_type                      :string
+#  country_id                         :integer
+#  concession                         :string
+#  created_at                         :datetime         not null
+#  updated_at                         :datetime         not null
+#  is_active                          :boolean          default(TRUE)
+#  logo                               :string
+#  operator_id                        :string
+#  percentage_valid_documents_all     :float
+#  percentage_valid_documents_country :float
+#  percentage_valid_documents_fmu     :float
 #
 
 FactoryGirl.define do
