@@ -21,5 +21,5 @@ class OperatorDocument < ApplicationRecord
   has_many :documents, as: :attacheable
   accepts_nested_attributes_for :documents
 
-  enum status: { doc_not_provided: 0, pending: 1, doc_invalid: 2, doc_valid: 3 }
+  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3 }
 end
