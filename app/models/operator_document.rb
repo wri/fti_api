@@ -23,7 +23,7 @@ class OperatorDocument < ApplicationRecord
 
   after_save :update_operator_percentages, if: :status_changed?
 
-  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3 }
+  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
 
   def update_operator_percentages
     operator.update_valid_documents_percentages
