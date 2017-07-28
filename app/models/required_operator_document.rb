@@ -9,10 +9,19 @@
 #  country_id                          :integer
 #  created_at                          :datetime         not null
 #  updated_at                          :datetime         not null
+#  valid_period                        :integer
 #
 
 class RequiredOperatorDocument < ApplicationRecord
   belongs_to :required_operator_document_group
   belongs_to :country
   has_many :operator_documents
+
+  validates :valid_period, numericality: { greater_than: 0}
+  after_destroy :invalidate_operator_documents
+
+
+  def invalidate_operator_documents
+    self.operator_documents.find_each{|x| x.update(status: OperatorDocument.statuses[:doc_expired])}
+  end
 end
