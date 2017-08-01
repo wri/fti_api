@@ -11,6 +11,16 @@ module V1
 
     filters :type, :status
 
+    def fetchable_fields
+      if context[:current_user] &&
+          (context[:current_user].user_permission.user_role == 'admin' || context[:current_user].operator_id == @model.operator_id)
+        super
+      else
+        super - [:attachment]
+      end
+    end
+
+
     def custom_links(_)
       { self: nil }
     end

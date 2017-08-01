@@ -13,6 +13,15 @@ module V1
 
     filters :type, :status
 
+    def fetchable_fields
+      if (context[:current_user])
+        super - [:attachment]
+      else
+        super
+      end
+    end
+
+
     def custom_links(_)
       { self: nil }
     end
