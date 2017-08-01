@@ -20,6 +20,9 @@ module V1
       end
     end
 
+#    def self.updatable_fields(context)
+#      super - [:operator_id, :required_operator_document_id]
+#    end
 
     def custom_links(_)
       { self: nil }
