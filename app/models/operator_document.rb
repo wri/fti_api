@@ -31,6 +31,7 @@ class OperatorDocument < ApplicationRecord
   before_save :update_current, if: :current_changed?
   before_create :set_status
   after_save :update_operator_percentages, if: :status_changed?
+  after_save :touch_operator
   before_destroy :insure_unity
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
@@ -63,6 +64,10 @@ class OperatorDocument < ApplicationRecord
   }
 
   private
+
+  def touch_operator
+    operator.touch
+  end
 
   def insure_unity
     if self.attachment.present?
