@@ -12,6 +12,9 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
+#  attachment                    :string
+#  current                       :boolean
+#  deleted_at                    :datetime
 #
 
 class OperatorDocumentCountry < OperatorDocument

@@ -12,9 +12,13 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
+#  attachment                    :string
+#  current                       :boolean
+#  deleted_at                    :datetime
 #
 
 class OperatorDocumentFmu < OperatorDocument
   belongs_to :required_operator_document_fmu, foreign_key: 'required_operator_document_id'
   belongs_to :fmu, optional: true
+
 end

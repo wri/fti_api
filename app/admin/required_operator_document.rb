@@ -27,7 +27,7 @@ ActiveAdmin.register RequiredOperatorDocument do
       f.input :country, input_html: { disabled: editing }
       f.input :type, input_html: { disabled: editing }
       f.input :name
-      f.input :valid_period
+      f.input :valid_period, label: 'Validity (days)'
     end
     f.actions
   end
