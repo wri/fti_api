@@ -103,14 +103,14 @@ class Operator < ApplicationRecord
 
     RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
       OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).first_or_create do |odc|
-        odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+        odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
       end
     end
 
     RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
       Fmu.where(operator_id: id).find_each do |fmu|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
-          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
         end
       end
     end
