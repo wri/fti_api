@@ -29,6 +29,7 @@ class OperatorDocument < ApplicationRecord
   validates_presence_of :start_date
   validates_presence_of :expire_date
   before_save :update_current, if: :current_changed?
+  before_create :set_status
   after_save :update_operator_percentages, if: :status_changed?
   before_destroy :insure_unity
 
@@ -71,6 +72,14 @@ class OperatorDocument < ApplicationRecord
       od.save!(validate: false)
     else
       false
+    end
+  end
+
+  def set_status
+    if attachment.present?
+      self.status = OperatorDocument.statuses[:doc_pending]
+    else
+      self.status = OperatorDocument.statuses[:doc_not_provided]
     end
   end
 end
