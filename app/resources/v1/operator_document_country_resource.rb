@@ -11,6 +11,19 @@ module V1
 
     filters :type, :status
 
+    def fetchable_fields
+      if context[:current_user] &&
+          (context[:current_user].user_permission.user_role == 'admin' || context[:current_user].operator_id == @model.operator_id)
+        super
+      else
+        super - [:attachment]
+      end
+    end
+
+#    def self.updatable_fields(context)
+#      super - [:operator_id, :required_operator_document_id]
+#    end
+
     def custom_links(_)
       { self: nil }
     end
