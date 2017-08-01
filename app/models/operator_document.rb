@@ -18,7 +18,7 @@
 #
 
 class OperatorDocument < ApplicationRecord
-  acts_as_paranoid
+  acts_as_paranoid without_default_scope: true
 
   belongs_to :operator, required: true
   belongs_to :required_operator_document, required: true
@@ -59,9 +59,7 @@ class OperatorDocument < ApplicationRecord
     end
   end
 
-  scope :default, ->{
-    where(current: true)
-  }
+  default_scope { where(current: true, deleted_at: nil) }
 
   private
 
