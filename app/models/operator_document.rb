@@ -23,7 +23,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :operator, required: true
   belongs_to :required_operator_document, required: true
 
-  mount_uploader :attachment, OperatorDocumentUploader
+  mount_base64_uploader :attachment, OperatorDocumentUploader
 
   before_validation :set_expire_date, unless: :expire_date_changed?
   validates_presence_of :start_date
@@ -65,8 +65,10 @@ class OperatorDocument < ApplicationRecord
 
   def insure_unity
     if self.attachment.present?
-      OperatorDocument.create!(fmu_id: self.fmu_id, country_id: self.fmu_id,
-                               required_operator_document_id: self.required_operator_document_id)
+      od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
+                                    required_operator_document_id: self.required_operator_document_id,
+                                    status: OperatorDocument.statuses[:doc_not_provided])
+      od.save!(validate: false)
     else
       false
     end
