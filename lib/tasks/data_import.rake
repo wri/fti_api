@@ -337,7 +337,7 @@ namespace :import do
           %w(country fmu).each do |doc_type|
             rod_name = data_row["#{country}_#{doc_type}"]
             if rod_name.present?
-              RequiredOperatorDocument.where(required_operator_document_group_id: rodg.id,
+              RequiredOperatorDocument.where(required_operator_document_group_id: rodg.id, valid_period: 365,
                                              name: rod_name, type: "RequiredOperatorDocument#{doc_type.capitalize}",
                                              country_id: eval("country_#{country}")).first_or_create!
 
