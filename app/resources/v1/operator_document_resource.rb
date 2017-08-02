@@ -13,6 +13,7 @@ module V1
 
     filters :type, :status
 
+    before_create :set_operator_id
 
     def fetchable_fields
       if (context[:current_user])
@@ -20,6 +21,11 @@ module V1
       else
         super
       end
+    end
+
+    def set_operator_id
+      # TODO: put the code from the controller here
+      # @model.user_id ||= context[:current_user].id
     end
 
 #    def self.updatable_fields(context)
