@@ -1,7 +1,10 @@
 module V1
   class OperatorDocumentFmuResource < JSONAPI::Resource
     caching
-    attributes :expire_date, :start_date, :status, :created_at, :updated_at, :attachment
+    attributes :expire_date, :start_date,
+               :status, :created_at, :updated_at,
+               :attachment, :operator_id, :required_operator_document_id,
+               :fmu_id, :current
 
     has_one :country
     has_one :fmu
