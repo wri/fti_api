@@ -7,8 +7,8 @@ unless User.find_by(nickname: 'admin')
                       end
 
   @user = User.new(email: 'admin@example.com', password: 'password', password_confirmation: 'password', name: 'Admin', nickname: 'admin', country_id: assign_country_id)
+  @user.build_user_permission(user_role: 'admin')
   @user.save
-  @user.user_permission.update(user_role: 'admin')
 
   puts '*************************************************************************'
   puts '*                                                                       *'
@@ -27,6 +27,7 @@ unless User.find_by(nickname: 'user')
                       end
 
   @user = User.new(email: 'user@example.com', password: 'password', password_confirmation: 'password', name: 'User', nickname: 'user', country_id: assign_country_id, is_active: true)
+  @user.build_user_permission(user_role: 'user')
   @user.save
 
   puts '*************************************************************************'
@@ -36,41 +37,7 @@ unless User.find_by(nickname: 'user')
   puts '*************************************************************************'
 end
 
-unless User.find_by(nickname: 'ngo')
-  assign_country_id = if country = Country.find_by(iso: 'USA')
-                        country.id
-                      else
-                        nil
-                      end
 
-  @user = User.new(email: 'ngo@example.com', password: 'password', password_confirmation: 'password', name: 'NGO', nickname: 'ngo', country_id: assign_country_id, is_active: true)
-  @user.save
-  @user.user_permission.update(user_role: 'ngo')
-
-  puts '*************************************************************************'
-  puts '*                                                                       *'
-  puts "* NGO created (email: 'ngo@example.com', password: 'password'           *"
-  puts '*                                                                       *'
-  puts '*************************************************************************'
-end
-
-unless User.find_by(nickname: 'operator')
-  assign_country_id = if country = Country.find_by(iso: 'USA')
-                        country.id
-                      else
-                        nil
-                      end
-
-  @user = User.new(email: 'operator@example.com', password: 'password', password_confirmation: 'password', name: 'Operator', nickname: 'operator', country_id: assign_country_id, is_active: true)
-  @user.save
-  @user.user_permission.update(user_role: 'operator')
-
-  puts '***************************************************************************'
-  puts '*                                                                         *'
-  puts "* Operator created (email: 'operator@example.com', password: 'password'   *"
-  puts '*                                                                         *'
-  puts '***************************************************************************'
-end
 
 unless User.find_by(nickname: 'webuser')
   assign_country_id = if country = Country.find_by(iso: 'USA')
@@ -80,6 +47,7 @@ unless User.find_by(nickname: 'webuser')
                       end
 
   @user = User.new(email: 'webuser@example.com', password: 'password', password_confirmation: 'password', name: 'Web', nickname: 'webuser', country_id: assign_country_id, is_active: true)
+  @user.build_user_permission(user_role: 'user')
   @user.save
   @user.regenerate_api_key
 
