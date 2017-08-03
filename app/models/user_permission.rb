@@ -30,8 +30,8 @@ class UserPermission < ApplicationRecord
       case self.user_role
       when 'admin'    then { admin: { all: [:manage]  }, all:         { all: [:manage] } }
       when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]   },
-                             operator_document: { id: [:manage] }}
-      when 'ngo'      then { user:  { id: [:manage] }, observation: { id: [:manage] },
+                             operator_document: { operator_id: [:manage] }}
+      when 'ngo'      then { user:  { id: [:manage] }, observation: { observer_id: [:manage] },
                              photo: { all: [:manage] }, document: { all: [:manage] },
                              category: { all: [:manage] }, annex_governance: { all: [:manage] },
                              country: { all: [:manage] }, government: { all: [:manage]},

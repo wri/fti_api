@@ -11,7 +11,7 @@ class Ability
             if f_key.to_s.include?('all')
               can actions.map(&:to_sym), (klass = subject.classify.safe_constantize) ? klass : subject.to_sym
             else
-              can actions.map(&:to_sym), (klass = subject.classify.safe_constantize) ? klass : subject.to_sym, f_key.to_sym => user.id
+              can actions.map(&:to_sym), (klass = subject.classify.safe_constantize) ? klass : subject.to_sym, "#{f_key}": eval("user.#{f_key}")
             end
           end
         end
