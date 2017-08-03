@@ -21,9 +21,8 @@ class Ability
       else
         can [:read], User, id: user.id
       end
-    else
-      can :read, [Observation, Country, Observer, Operator,
-                  Fmu, Category, OperatorDocument, RequiredOperatorDocument, RequiredOperatorDocumentGroup]
     end
+    can :read, [Observation, Country, Observer, Operator,
+                Fmu, Category, OperatorDocument, RequiredOperatorDocument, RequiredOperatorDocumentGroup]
   end
 end

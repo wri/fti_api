@@ -21,8 +21,7 @@ class Observer < ApplicationRecord
   belongs_to :country, inverse_of: :observers, optional: true
 
   has_many :observations, inverse_of: :observer
-  has_many :user_observers
-  has_many :users, through: :user_observers
+  has_many :users, inverse_of: :observer
 
   validates :name, presence: true
   validates :observer_type, presence: true, inclusion: { in: %w(Mandated SemiMandated External Government),
