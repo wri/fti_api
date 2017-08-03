@@ -15,5 +15,10 @@ module V1
       end
       super
     end
+
+    def destroy
+      puts "coiso"
+      super
+    end
   end
 end

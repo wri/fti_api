@@ -1,8 +1,8 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation,
-                :user_permission_attributes, :country_id,
+  permit_params :email, :password, :password_confirmation, :country_id,
                 :institution, :name, :nickname, :web_url, :is_active,
-                :observer_id, :operator_id
+                :observer_id, :operator_id,
+                user_permission_attributes: [:user_role]
 
   filter :name
   filter :institution
@@ -32,7 +32,7 @@ ActiveAdmin.register User do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Admin Details' do
       f.inputs for: [:user_permission, f.object.user_permission || UserPermission.new] do |p|
-        p.input :user_role, as: :select, collection: UserPermission.user_roles, include_blank: false
+        p.input :user_role, as: :select, collection: UserPermission.user_roles.keys, include_blank: false
       end
       f.input :observer
       f.input :operator
