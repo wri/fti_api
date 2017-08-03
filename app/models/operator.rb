@@ -28,8 +28,7 @@ class Operator < ApplicationRecord
   belongs_to :country, inverse_of: :operators, optional: true
 
   has_many :observations, inverse_of: :operator
-  has_many :user_operators
-  has_many :users, through: :user_operators
+  has_many :users, inverse_of: :operator
   has_many :fmus, inverse_of: :operator
 
   has_many :operator_documents
