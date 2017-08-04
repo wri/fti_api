@@ -19,6 +19,16 @@ ActiveAdmin.register Operator do
   filter :concession
   filter :updated_at
 
+  sidebar 'Documents', only: :show do
+    attributes_table_for resource do
+      ul do
+        resource.operator_documents.collect do |od|
+          li link_to("[#{od.status}] #{od.required_operator_document.name}", admin_operator_document_path(od.id))
+        end
+      end
+    end
+  end
+
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Translated fields' do
