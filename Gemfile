@@ -11,7 +11,10 @@ end
 
 # Active admin
 gem 'activeadmin'
+gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
+
 gem 'devise'
+
 
 # Soft Delete
 gem 'paranoia', "~> 2.2"

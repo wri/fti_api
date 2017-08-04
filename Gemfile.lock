@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/fabn/activeadmin-globalize.git
+  revision: 49c219d740a5b4c34b2e6bf0a20e9994d95f1127
+  branch: develop
+  specs:
+    activeadmin-globalize (1.0.0.pre)
+      activeadmin (~> 1.0.0.pre)
+      globalize (>= 3.1.0, < 6.0)
+
+GIT
   remote: https://github.com/globalize/globalize.git
   revision: 8daef404a33fce7d8e6bf444451335e6f4d828d2
   specs:
@@ -427,6 +436,7 @@ PLATFORMS
 DEPENDENCIES
   active_skin
   activeadmin
+  activeadmin-globalize (~> 1.0.0.pre)!
   activerecord-import
   annotate
   bcrypt
