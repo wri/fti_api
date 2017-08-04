@@ -14,7 +14,7 @@ ActiveAdmin.register Operator do
     actions
   end
 
-  filter :name
+  #filter :name
   filter :country
   filter :concession
   filter :updated_at
