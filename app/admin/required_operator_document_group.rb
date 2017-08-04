@@ -12,6 +12,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   end
 
   index do
+    translation_status
     column :name
     column :concession
 
@@ -24,7 +25,9 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Required Operator Document Group Details' do
-      f.input :name
+      f.translated_inputs switch_locale: false do |t|
+        t.input :name
+      end
     end
     f.actions
   end
