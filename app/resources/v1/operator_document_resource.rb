@@ -24,8 +24,9 @@ module V1
     end
 
     def set_operator_id
-      # TODO: put the code from the controller here
-      # @model.user_id ||= context[:current_user].id
+      if context[:current_user].present? && context[:current_user].operator_id.present?
+        @model.operator_id = context[:current_user].operator_id
+      end
     end
 
 #    def self.updatable_fields(context)
