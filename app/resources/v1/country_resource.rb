@@ -6,6 +6,7 @@ module V1
                :region_centroid, :is_active, :region_name, :name
 
     has_many :fmus
+    has_many :required_operator_documents
 
     filter :iso
     filter :is_active, default: true
