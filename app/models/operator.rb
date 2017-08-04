@@ -20,6 +20,9 @@
 
 class Operator < ApplicationRecord
   translates :name, :details
+  active_admin_translates :name, :details do
+    validates_presence_of :name
+  end
 
   mount_base64_uploader :logo, LogoUploader
 

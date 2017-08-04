@@ -26,10 +26,9 @@ class Country < ApplicationRecord
 
   has_many :species_countries
   has_many :species, through: :species_countries
-
   has_many :country_subcategories
-
   has_many :operator_documents, dependent: :destroy
+  has_many :required_operator_documents
 
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 

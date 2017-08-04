@@ -15,11 +15,19 @@ module V1
 
     filters :type, :status
 
+    before_create :set_operator_id
+
     def fetchable_fields
       if (context[:current_user])
         super - [:attachment]
       else
         super
+      end
+    end
+
+    def set_operator_id
+      if context[:current_user].present? && context[:current_user].operator_id.present?
+        @model.operator_id = context[:current_user].operator_id
       end
     end
 
