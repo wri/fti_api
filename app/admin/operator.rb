@@ -7,9 +7,12 @@ ActiveAdmin.register Operator do
 
   index do
     translation_status
-    column :country
-    column :name
-    column :concession
+    column :country, sortable: true
+    column :name, sortable: true
+    column :concession, sortable: true
+    column 'Score', :score_absolute, sortable: true
+    column 'Obs/Visit', :obs_per_visit, sortable: true
+    column '% Docs', :percentage_valid_documents_all, sortable: true
 
     actions
   end
