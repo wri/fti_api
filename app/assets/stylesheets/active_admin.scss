@@ -22,3 +22,7 @@ $panelHeaderBck: #317a4b;
 
 $skinLogo: image_url("logo.svg") no-repeat 0 0;
 @import "active_skin";
+
+form input[type='date'] {
+  width: 115px;
+}

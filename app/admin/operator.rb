@@ -2,7 +2,7 @@
 ActiveAdmin.register Operator do
 
   actions :all, except: :destroy
-  permit_params :name, :country_id, :details, :concession, :is_active, :certification,
+  permit_params :name, :operator_type, :country_id, :details, :concession, :is_active, :certification,
                 translations_attributes: [:id, :locale, :name, :details, :destroy]
 
   index do
@@ -38,6 +38,7 @@ ActiveAdmin.register Operator do
       end
     end
     f.inputs 'Country Details' do
+      f.input :operator_type
       f.input :country
       f.input :certification
       f.input :concession

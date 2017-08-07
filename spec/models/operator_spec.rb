@@ -15,6 +15,9 @@
 #  percentage_valid_documents_country :float
 #  percentage_valid_documents_fmu     :float
 #  certification                      :integer
+#  score_absolute                     :float
+#  score                              :integer
+#  obs_per_visit                      :float
 #
 
 require 'rails_helper'
