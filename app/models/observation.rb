@@ -86,6 +86,6 @@ class Observation < ApplicationRecord
   private
 
   def update_operator_scores
-    operator.calculate_observations_scores
+    operator.calculate_observations_scores unless operator.nil?
   end
 end

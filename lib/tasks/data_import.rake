@@ -305,8 +305,8 @@ namespace :import do
       fmu.geojson = geojson
       fmu.save!
 
-      puts 'Finished FMUs'
     end
+    puts 'Finished FMUs'
   end
 
 

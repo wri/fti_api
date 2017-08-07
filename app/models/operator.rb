@@ -93,7 +93,7 @@ class Operator < ApplicationRecord
 
 
   def calculate_observations_scores
-    number_of_visits = observations.select('date(publication_date) as observation_date').group('date(publication_date)').count
+    number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
     self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
 
     high = observations.joins(:severity).where('severities.level = 3').count
