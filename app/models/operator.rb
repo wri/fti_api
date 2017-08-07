@@ -23,9 +23,7 @@
 
 class Operator < ApplicationRecord
   translates :name, :details
-  active_admin_translates :name, :details do
-    validates_presence_of :name
-  end
+  active_admin_translates :name, :details
 
   mount_base64_uploader :logo, LogoUploader
 
@@ -95,7 +93,7 @@ class Operator < ApplicationRecord
 
 
   def calculate_observations_scores
-    number_of_visits = observations.select('date(publication_date) as observation_date').group('date(publication_date)').count
+    number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
     self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
 
     high = observations.joins(:severity).where('severities.level = 3').count
