@@ -354,8 +354,9 @@ namespace :import do
     puts '* Operator documents'
 
     puts '... creating required operator documents per country'
-    RequiredOperatorDocumentCountry.find_each do |rodc|
-      Operator.where(country_id: rodc.country_id).find_each do |operator|
+    Operator.find_each do |operator|
+      country = RequiredOperatorDocumentCountry.where(country_id: operator.country_id).any? ? operator.country_id : nil
+      RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: operator.id).first_or_create do |odc|
           odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
         end
@@ -363,8 +364,9 @@ namespace :import do
     end
 
     puts '... creating required operator documents per fmu'
-    RequiredOperatorDocumentFmu.find_each do |rodf|
-      Fmu.where(country_id: rodf.country_id).find_each do |fmu|
+    Fmu.find_each do |fmu|
+      country = RequiredOperatorDocumentFmu.where(country_id: fmu.country_id).any? ? fmu.country_id : nil
+      RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
         if fmu.operator_id.present?
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: fmu.operator_id, fmu_id: fmu.id).first_or_create do |odf|
             odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
