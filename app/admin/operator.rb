@@ -2,14 +2,17 @@
 ActiveAdmin.register Operator do
 
   actions :all, except: :destroy
-  permit_params :name, :country_id, :details, :concession, :is_active, :certification,
+  permit_params :name, :operator_type, :country_id, :details, :concession, :is_active, :certification,
                 translations_attributes: [:id, :locale, :name, :details, :destroy]
 
   index do
     translation_status
-    column :country
-    column :name
-    column :concession
+    column :country, sortable: true
+    column :name, sortable: true
+    column :concession, sortable: true
+    column 'Score', :score_absolute, sortable: true
+    column 'Obs/Visit', :obs_per_visit, sortable: true
+    column '% Docs', :percentage_valid_documents_all, sortable: true
 
     actions
   end
@@ -38,6 +41,7 @@ ActiveAdmin.register Operator do
       end
     end
     f.inputs 'Country Details' do
+      f.input :operator_type
       f.input :country
       f.input :certification
       f.input :concession

@@ -16,6 +16,9 @@
 #  percentage_valid_documents_country :float
 #  percentage_valid_documents_fmu     :float
 #  certification                      :integer
+#  score_absolute                     :float
+#  score                              :integer
+#  obs_per_visit                      :float
 #
 
 class Operator < ApplicationRecord
@@ -90,6 +93,33 @@ class Operator < ApplicationRecord
     self.save!
   end
 
+
+  def calculate_observations_scores
+    number_of_visits = observations.select('date(publication_date) as observation_date').group('date(publication_date)').count
+    self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
+
+    high = observations.joins(:severity).where('severities.level = 3').count
+    medium = observations.joins(:severity).where('severities.level = 2').count
+    low = observations.joins(:severity).where('severities.level = 1').count
+    unknown = observations.joins(:severity).where('severities.level = 0').count
+    weighted_score = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
+    self.score_absolute = weighted_score * self.obs_per_visit rescue nil
+
+    save
+  end
+
+  class << self
+    def calculate_scores
+      Operator.where(score_absolute: nil).update_all(score: 0)
+
+      number_operators = Operator.where.not(score_absolute: nil).count
+      Operator.where.not(score_absolute: nil).order(:score_absolute).limit(number_operators / 3).update_all(score: 3)
+      Operator.where.not(score_absolute: nil).order(:score_absolute).limit(number_operators / 3).offset(number_operators / 3).update_all(score: 2)
+      Operator.where.not(score_absolute: nil).order(:score_absolute).offset(2*(number_operators / 3)).update_all(score: 1)
+    end
+  end
+
+
   private
 
   def create_operator_id
@@ -116,7 +146,5 @@ class Operator < ApplicationRecord
         end
       end
     end
-
   end
-
 end

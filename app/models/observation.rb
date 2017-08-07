@@ -58,10 +58,12 @@ class Observation < ApplicationRecord
   validates :publication_date, presence: true
   validates_presence_of :validation_status
 
+  after_create  :update_operator_scores
+  after_destroy :update_operator_scores
+  after_save    :update_operator_scores, if: 'publication_date_changed? || severity_id_changed?'
+
   include Activable
 
-
-  #default_scope { includes(:translations).with_translations('en') }
 
   class << self
     def translated_types
@@ -79,5 +81,11 @@ class Observation < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  private
+
+  def update_operator_scores
+    operator.calculate_observations_scores
   end
 end
