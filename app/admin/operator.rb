@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 ActiveAdmin.register Operator do
 
+  config.order_clause
+
   actions :all, except: :destroy
   permit_params :name, :operator_type, :country_id, :details, :concession, :is_active, :certification,
                 translations_attributes: [:id, :locale, :name, :details, :destroy]
@@ -55,7 +57,7 @@ ActiveAdmin.register Operator do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes(:translations)
+      end_of_association_chain.includes([:translations, [country: :translations]])
     end
   end
 end
