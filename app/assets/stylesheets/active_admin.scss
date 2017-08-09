@@ -33,9 +33,14 @@ $skinLogo: image_url("logo.svg") no-repeat 0 0;
 $pending-color: #FF9900;
 $rejected-color: #FF0000;
 $approved-color: #08A510;
+$expired-color: #772222;
 
 .status_tag {
   &.under_revision { background: $pending-color; }
   &.rejected { background: $rejected-color; }
   &.approved { background: $approved-color; }
+  &.doc_pending { background: $pending-color; }
+  &.doc_invalid { background: $rejected-color; }
+  &.doc_valid { background: $approved-color; }
+  &.doc_expired { background: $expired-color; }
 }

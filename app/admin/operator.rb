@@ -7,8 +7,8 @@ ActiveAdmin.register Operator do
 
   index do
     translation_status
-    column :country, sortable: true
-    column :name
+    column :country, sortable: 'country_translations.name'
+    column :name, sortable: 'operator_translations.name'
     column :concession, sortable: true
     column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
       "#{'%.2f' % operator.score_absolute}" rescue nil
@@ -51,5 +51,11 @@ ActiveAdmin.register Operator do
       f.input :is_active
     end
     f.actions
+  end
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations)
+    end
   end
 end

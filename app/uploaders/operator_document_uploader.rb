@@ -10,4 +10,12 @@ class OperatorDocumentUploader < CarrierWave::Uploader::Base
   def extension_whitelist
     %w(pdf doc htm html docx txt csv xml)
   end
+
+  def exists?
+    !file.blank?
+  end
+
+  def original_filename
+    file.filename
+  end
 end
