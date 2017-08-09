@@ -1,3 +1,6 @@
+//= require activeadmin_addons/all
+
+
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
@@ -23,6 +26,16 @@ $panelHeaderBck: #317a4b;
 $skinLogo: image_url("logo.svg") no-repeat 0 0;
 @import "active_skin";
 
-form input[type='date'] {
-  width: 115px;
+
+// .ActiveAdmin Add-ons
+// ..Colors to enums
+
+$pending-color: #FF9900;
+$rejected-color: #FF0000;
+$approved-color: #08A510;
+
+.status_tag {
+  &.under_revision { background: $pending-color; }
+  &.rejected { background: $rejected-color; }
+  &.approved { background: $approved-color; }
 }

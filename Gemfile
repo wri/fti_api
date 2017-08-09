@@ -11,6 +11,7 @@ end
 
 # Active admin
 gem 'activeadmin'
+gem 'activeadmin_addons'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
 
 gem 'devise'

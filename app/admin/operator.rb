@@ -8,9 +8,11 @@ ActiveAdmin.register Operator do
   index do
     translation_status
     column :country, sortable: true
-    column :name, sortable: true
+    column :name
     column :concession, sortable: true
-    column 'Score', :score_absolute, sortable: true
+    column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
+      "#{'%.2f' % operator.score_absolute}" rescue nil
+    end
     column 'Obs/Visit', :obs_per_visit, sortable: true
     column '% Docs', :percentage_valid_documents_all, sortable: true
 
