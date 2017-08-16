@@ -94,16 +94,25 @@ class Operator < ApplicationRecord
 
   def calculate_observations_scores
     number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
+    number_of_visits = number_of_visits.keys.count
+
+    # When there are no observations
+    if number_of_visits == 0
+      self.obs_per_visit = nil
+      self.score_absolute = nil
+      save!
+      return
+    end
+
     self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
 
-    high = observations.joins(:severity).where('severities.level = 3').count
-    medium = observations.joins(:severity).where('severities.level = 2').count
-    low = observations.joins(:severity).where('severities.level = 1').count
-    unknown = observations.joins(:severity).where('severities.level = 0').count
-    weighted_score = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
-    self.score_absolute = weighted_score * self.obs_per_visit rescue nil
+    high = observations.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
+    medium = observations.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
+    low = observations.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
+    unknown = observations.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
+    self.score_absolute  = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
 
-    save
+    save!
   end
 
   class << self
@@ -111,9 +120,12 @@ class Operator < ApplicationRecord
       Operator.where(score_absolute: nil).update_all(score: 0)
 
       number_operators = Operator.where.not(score_absolute: nil).count
-      Operator.where.not(score_absolute: nil).order(:score_absolute).limit(number_operators / 3).update_all(score: 3)
-      Operator.where.not(score_absolute: nil).order(:score_absolute).limit(number_operators / 3).offset(number_operators / 3).update_all(score: 2)
-      Operator.where.not(score_absolute: nil).order(:score_absolute).offset(2*(number_operators / 3)).update_all(score: 1)
+      third_operators = (number_operators / 3).to_i
+      Operator.where.not(score_absolute: nil).order(:score_absolute)
+          .limit(third_operators).update_all(score: 1)
+      Operator.where.not(score_absolute: nil)
+          .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
+      Operator.where.not(score_absolute: nil).order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
     end
   end
 

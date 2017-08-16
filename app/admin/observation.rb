@@ -47,15 +47,15 @@ ActiveAdmin.register Observation do
 
   index do
     selectable_column
-    column 'Status', :validation_status
-    column :country, sortable: true
+    tag_column 'Status', :validation_status, sortable: true
+    column :country
     column :fmu
-    column :operator, sortable: true
+    column :operator
     column :subcategory
-    column :severity, sortable: true do |o|
+    column :severity do |o|
       o.severity.level
     end
-    column :publication_date
+    column :publication_date, sortable: true
     column 'Active?', :is_active
     column('Approve') { |observation| link_to 'Approve', approve_admin_observation_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_observation_path(observation), method: :put}
@@ -63,11 +63,11 @@ ActiveAdmin.register Observation do
     actions
   end
 
+  filter :validation_status
   filter :country
   filter :observation_type, as: :select
   filter :operator
   filter :is_active
-  filter :validation_status, as: :select
   filter :updated_at
 
 

@@ -7,12 +7,14 @@ ActiveAdmin.register OperatorDocument do
                 :attachment
 
   index do
+    tag_column :status
     column :required_operator_document
     column :operator
     column :type
     column :expire_date
     column :start_date
-    column :status
+    attachment_column :attachment
+
 
     actions
   end
@@ -35,5 +37,22 @@ ActiveAdmin.register OperatorDocument do
       f.input :start_date, as: :date_picker
     end
     f.actions
+  end
+
+  show do
+    attributes_table do
+      row :required_operator_document
+      row :operator
+      row :status
+      row :fmu, unless: resource.fmu.blank?
+      row :current
+      attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
+      row :start_date
+      row :expire_date
+      row :created_at
+      row :updated_at
+      row :deleted_at
+    end
+    active_admin_comments
   end
 end

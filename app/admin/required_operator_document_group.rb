@@ -13,7 +13,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
 
   index do
     translation_status
-    column :name
+    column :name, sortable: 'required_operator_document_group_translations.name'
     column :concession
 
     actions
@@ -30,5 +30,11 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
       end
     end
     f.actions
+  end
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:translations)
+    end
   end
 end
