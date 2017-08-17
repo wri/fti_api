@@ -1,4 +1,12 @@
 ActiveAdmin.register Observation do
+  config.order_clause
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([:translations, [country: :translations],
+                                         :severity, [operator: :translations], [subcategory: :translations]])
+    end
+  end
 
   actions :all, except: [:new, :create]
   permit_params :name
@@ -48,11 +56,11 @@ ActiveAdmin.register Observation do
   index do
     selectable_column
     tag_column 'Status', :validation_status, sortable: true
-    column :country
+    column :country, sortable: 'country_translations.name'
     column :fmu
-    column :operator
-    column :subcategory
-    column :severity do |o|
+    column :operator, sortable: 'operator_translations.name'
+    column :subcategory, sortable: 'subcategory_translations.name'
+    column :severity, sortable: 'severities.level' do |o|
       o.severity.level
     end
     column :publication_date, sortable: true
