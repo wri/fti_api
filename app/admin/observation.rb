@@ -71,11 +71,13 @@ ActiveAdmin.register Observation do
     actions
   end
 
-  filter :validation_status
+  filter :validation_status, as: :check_boxes, collection: Observation.validation_statuses
   filter :country
-  filter :observation_type, as: :select
   filter :operator
+  filter :subcategory
+  filter :severity_level, as: :check_boxes, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :is_active
+  filter :publication_date
   filter :updated_at
 
 
