@@ -1,5 +1,12 @@
 ActiveAdmin.register OperatorDocument do
   menu parent: 'Documents', priority: 2
+  config.order_clause
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([:required_operator_document, [operator: :translations]])
+    end
+  end
 
   actions :all, except: [:destroy, :new, :create]
   permit_params :name, :required_operator_document_id,
@@ -8,8 +15,8 @@ ActiveAdmin.register OperatorDocument do
 
   index do
     tag_column :status
-    column :required_operator_document
-    column :operator
+    column :required_operator_document, sortable: 'required_operator_documents.name'
+    column :operator, sortable: 'operator_translations.name'
     column :type
     column :expire_date
     column :start_date
