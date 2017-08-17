@@ -23,6 +23,7 @@ ActiveAdmin.register Operator do
 
   #filter :name
   filter :country
+  filter :translations_name_contains, as: :string, label: 'Name', placeholder: 'Search by name...'
   filter :concession
   filter :updated_at
 
