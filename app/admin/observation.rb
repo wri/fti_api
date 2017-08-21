@@ -4,7 +4,8 @@ ActiveAdmin.register Observation do
   controller do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
-                                         :severity, [operator: :translations], [subcategory: :translations]])
+                                         :severity, [operator: :translations],
+                                         [subcategory: :translations], [observer: :translations]])
     end
   end
 
@@ -58,6 +59,7 @@ ActiveAdmin.register Observation do
     tag_column 'Status', :validation_status, sortable: true
     column :country, sortable: 'country_translations.name'
     column :fmu
+    column :monitor, sortable: 'observer_translations.name'
     column :operator, sortable: 'operator_translations.name'
     column :subcategory, sortable: 'subcategory_translations.name'
     column :severity, sortable: 'severities.level' do |o|
