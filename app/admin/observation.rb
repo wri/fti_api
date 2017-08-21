@@ -1,6 +1,14 @@
 ActiveAdmin.register Observation do
   config.order_clause
 
+  scope_to do
+    Class.new do
+      def self.observations
+        Observation.unscoped
+      end
+    end
+  end
+
   controller do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],

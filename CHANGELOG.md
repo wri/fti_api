@@ -14,3 +14,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Added the monitor to the observations listing
 - Structural changes:
   - Added Forest Atlas UUID to operators
+  - Observations not approved aren't shown or used for calculations
