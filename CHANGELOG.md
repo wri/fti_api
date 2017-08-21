@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Added sort and filters for Operators, Observations and Documents
   - Added `approve` and `reject` actions for operator document
   - Added the monitor to the observations listing
+  - Show deleted documents
 - Structural changes:
   - Added Forest Atlas UUID to operators
   - Observations not approved aren't shown or used for calculations

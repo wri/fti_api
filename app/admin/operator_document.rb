@@ -2,6 +2,16 @@ ActiveAdmin.register OperatorDocument do
   menu parent: 'Documents', priority: 2
   config.order_clause
 
+  active_admin_paranoia
+
+  scope_to do
+    Class.new do
+      def self.operator_documents
+        OperatorDocument.unscoped
+      end
+    end
+  end
+
   controller do
     def scoped_collection
       end_of_association_chain.includes([:required_operator_document, [operator: :translations]])
@@ -60,7 +70,7 @@ ActiveAdmin.register OperatorDocument do
       row :required_operator_document
       row :operator
       row :status
-      row :fmu, unless: resource.fmu.blank?
+      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :current
       if resource.attachment.present?
         attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
