@@ -18,6 +18,7 @@
 #  score_absolute                     :float
 #  score                              :integer
 #  obs_per_visit                      :float
+#  fa_id                              :uuid
 #
 
 FactoryGirl.define do
