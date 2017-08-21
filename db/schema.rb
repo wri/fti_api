@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821100650) do
+ActiveRecord::Schema.define(version: 20170821150104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -269,7 +269,7 @@ ActiveRecord::Schema.define(version: 20170821100650) do
     t.float    "score_absolute"
     t.integer  "score"
     t.float    "obs_per_visit"
-    t.uuid     "fa_id"
+    t.string   "fa_id"
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
   end
 
