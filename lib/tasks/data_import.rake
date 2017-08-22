@@ -161,8 +161,8 @@ namespace :import do
         country_names = data_row['countries'].split(',') if data_row['countries'].present?
         country_id    = Country.where(name: country_names).pluck(:id).first
 
-        monitor_name = data_row['monitor_name']
-        monitor_id   = Observer.where(name: monitor_name).pluck(:id) if monitor_name.present?
+        monitor_names = data_row['monitor_name'].split('/')
+        monitor_ids   = Observer.where(name: monitor_names).pluck(:id) if monitor_names.any?
 
         operator_name = data_row['operator_name']
         operator_id   = Operator.where(name: operator_name, country_id: country_id).pluck(:id) if operator_name.present?
@@ -182,7 +182,7 @@ namespace :import do
         data_oo[:concern_opinion]   = data_row['concern_opinion']
         data_oo[:litigation_status] = data_row['litigation_status']
         data_oo[:pv]                = data_row['pv']
-        data_oo[:observer_id]       = monitor_id.first  if monitor_id.present?
+        data_oo[:observer_ids]      = monitor_ids       if monitor_ids.present? && monitor_ids.any?
         data_oo[:operator_id]       = operator_id.first if operator_id.present?
         data_oo[:subcategory_id]    = subcategory_id if subcategory_id.present?
         data_oo[:country_id] = country_id if country_id.present?
@@ -229,10 +229,10 @@ namespace :import do
         data_go[:details]           = data_row['description']
         data_go[:evidence]          = data_row['evidence']
         data_go[:concern_opinion]   = data_row['concern_opinion']
-        data_go[:observer_id]       = monitor_id    if monitor_id.present?
-        data_go[:operator_id]       = operator_id   if operator_id.present?
-        data_go[:government_id]     = government_id if government_id.present?
-        data_go[:subcategory_id]    = subcategory_id if subcategory_id.present?
+        data_go[:observer_ids]      = monitor_id      if monitor_id.present?
+        data_go[:operator_id]       = operator_id     if operator_id.present?
+        data_go[:government_id]     = government_id   if government_id.present?
+        data_go[:subcategory_id]    = subcategory_id  if subcategory_id.present?
         data_go[:country_id] = country_id if country_id.present?
 
         go = Observation.create(data_go)
