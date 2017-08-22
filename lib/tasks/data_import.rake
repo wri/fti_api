@@ -248,25 +248,13 @@ namespace :import do
   task operator_countries: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'companies.csv'))
     puts '* Operator countries... *'
-    country_congo = Country.find_by(iso: 'COG')
-    country_drc = Country.find_by(iso: 'COD')
     Operator.transaction do
-      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        if data_row['Congo (Atlas)'].present?
-          operator = Operator.find_by(name: data_row['Congo (Atlas)'])
-          if operator.present?
-            operator.update(country: country_congo)
-          end
-        end
-
-        if data_row['DRC (Atlas)'].present?
-          operator = Operator.find_by(name: data_row['DRC (Atlas)'])
-          if operator.present?
-            operator.update(country: country_drc)
-          end
-        end
+        Operator.where(name: data_row['name'],
+                       country: Country.find_by(name: data_row['country']),
+                       fa_id: data_row['id']).first_or_create
       end
     end
   end
