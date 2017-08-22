@@ -6,18 +6,18 @@ module V1
                :pv, :is_active, :details, :evidence, :concern_opinion,
                :litigation_status, :lat, :lng,
                :country_id, :fmu_id,
-               :observer_id, :subcategory_id, :severity_id
+               :subcategory_id, :severity_id
 
     has_many :species
     has_many :comments
     has_many :photos
     has_many :documents
+    has_many :observers
 
     has_one :country
     has_one :subcategory
     has_one :severity
     has_one :user
-    has_one :observer
     has_one :operator
     has_one :government
 

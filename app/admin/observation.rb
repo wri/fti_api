@@ -13,12 +13,14 @@ ActiveAdmin.register Observation do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
                                          :severity, [operator: :translations],
-                                         [subcategory: :translations], [observer: :translations]])
+                                         [subcategory: :translations], [observer_observations: [observer: :translations]]])
     end
   end
 
   actions :all, except: [:new, :create]
-  permit_params :name
+  permit_params :name, :lng, :pv, :lat, :lon,
+                :validation_status, :publication_date, :is_active, :observer_ids,
+                translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status]
 
 
   member_action :approve, method: :put do
@@ -67,7 +69,9 @@ ActiveAdmin.register Observation do
     tag_column 'Status', :validation_status, sortable: true
     column :country, sortable: 'country_translations.name'
     column :fmu
-    column :monitor, sortable: 'observer_translations.name'
+    column :observers do |o|
+      o.observers.pluck(:name).join(', ')
+    end
     column :operator, sortable: 'operator_translations.name'
     column :subcategory, sortable: 'subcategory_translations.name'
     column :severity, sortable: 'severities.level' do |o|
@@ -84,6 +88,7 @@ ActiveAdmin.register Observation do
   filter :validation_status, as: :check_boxes, collection: Observation.validation_statuses
   filter :country
   filter :operator
+  filter :observers
   filter :subcategory
   filter :severity_level, as: :check_boxes, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :is_active
@@ -101,7 +106,7 @@ ActiveAdmin.register Observation do
               collection: Severity.all.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]},
               input_html: { disabled: true }
       f.input :fmu, input_html: { disabled: true }
-      f.input :observer, input_html: { disabled: true }
+      f.input :observers
       f.input :government, as: :select,
               collection: Government.all.map {|g| [g.government_entity, g.id] },
               input_html: { disabled: true } if f.object.observation_type == 'government'

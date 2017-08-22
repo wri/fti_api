@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821152404) do
+ActiveRecord::Schema.define(version: 20170822092834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,7 +186,6 @@ ActiveRecord::Schema.define(version: 20170821152404) do
     t.integer  "user_id"
     t.datetime "publication_date"
     t.integer  "country_id"
-    t.integer  "observer_id"
     t.integer  "operator_id"
     t.integer  "government_id"
     t.string   "pv"
@@ -200,9 +199,17 @@ ActiveRecord::Schema.define(version: 20170821152404) do
     t.integer  "validation_status", default: 0,    null: false
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
-    t.index ["observer_id"], name: "index_observations_on_observer_id", using: :btree
     t.index ["operator_id"], name: "index_observations_on_operator_id", using: :btree
     t.index ["severity_id"], name: "index_observations_on_severity_id", using: :btree
+  end
+
+  create_table "observer_observations", force: :cascade do |t|
+    t.integer  "observer_id"
+    t.integer  "observation_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["observation_id"], name: "index_observer_observations_on_observation_id", using: :btree
+    t.index ["observer_id"], name: "index_observer_observations_on_observer_id", using: :btree
   end
 
   create_table "observer_translations", force: :cascade do |t|
@@ -431,7 +438,6 @@ ActiveRecord::Schema.define(version: 20170821152404) do
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"
   add_foreign_key "observations", "governments"
-  add_foreign_key "observations", "observers"
   add_foreign_key "observations", "operators"
   add_foreign_key "observers", "countries"
   add_foreign_key "operator_documents", "fmus"

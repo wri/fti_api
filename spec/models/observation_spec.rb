@@ -8,7 +8,6 @@
 #  user_id           :integer
 #  publication_date  :datetime
 #  country_id        :integer
-#  observer_id       :integer
 #  operator_id       :integer
 #  government_id     :integer
 #  pv                :string
