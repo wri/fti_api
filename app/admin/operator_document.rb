@@ -31,7 +31,7 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new, :create]
   permit_params :name, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
-                :attachment
+                :attachment, :uploaded_by
 
   index do
     tag_column :status
@@ -40,6 +40,7 @@ ActiveAdmin.register OperatorDocument do
     column :fmu
     column :expire_date
     column :start_date
+    column :uploaded_by
     attachment_column :attachment
     column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
@@ -57,6 +58,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :required_operator_document, input_html: { disabled: true }
       f.input :operator, input_html: { disabled: true }
       f.input :type, input_html: { disabled: true }
+      f.input :uploaded_by
       f.input :status, include_blank: false
       f.input :attachment
       f.input :expire_date, as: :date_picker
@@ -71,6 +73,7 @@ ActiveAdmin.register OperatorDocument do
       row :operator
       row :status
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
+      row :uploaded_by
       row :current
       if resource.attachment.present?
         attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)

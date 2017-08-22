@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Structural changes:
   - Added Forest Atlas UUID to operators
   - Observations not approved aren't shown or used for calculations
+  - Added `uploaded_by` to Operator Documents

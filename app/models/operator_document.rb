@@ -35,6 +35,7 @@ class OperatorDocument < ApplicationRecord
   before_destroy :insure_unity
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
+  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4}
 
   def update_operator_percentages
     operator.update_valid_documents_percentages
