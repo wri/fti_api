@@ -4,7 +4,7 @@ module V1
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :current
+               :fmu_id, :current, :uploaded_by
 
     has_one :country
     has_one :fmu
@@ -26,6 +26,7 @@ module V1
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?
         @model.operator_id = context[:current_user].operator_id
+        @model.uplodaded_by = :operator
       end
     end
 

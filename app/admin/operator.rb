@@ -4,12 +4,13 @@ ActiveAdmin.register Operator do
   config.order_clause
 
   actions :all, except: :destroy
-  permit_params :name, :operator_type, :country_id, :details, :concession, :is_active, :certification,
+  permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active, :certification,
                 translations_attributes: [:id, :locale, :name, :details, :destroy]
 
   index do
     translation_status
     column :country, sortable: 'country_translations.name'
+    column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
     column :concession, sortable: true
     column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
@@ -23,6 +24,7 @@ ActiveAdmin.register Operator do
 
   #filter :name
   filter :country
+  filter :translations_name_contains, as: :string, label: 'Name', placeholder: 'Search by name...'
   filter :concession
   filter :updated_at
 
@@ -45,6 +47,7 @@ ActiveAdmin.register Operator do
       end
     end
     f.inputs 'Country Details' do
+      f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type
       f.input :country
       f.input :certification

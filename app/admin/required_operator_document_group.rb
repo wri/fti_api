@@ -19,7 +19,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
     actions
   end
 
-  filter :name
+  filter :translations_name_contains, as: :string, label: 'Name', placeholder: 'Search by name...'
   filter :updated_at
 
   form do |f|

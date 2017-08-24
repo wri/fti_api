@@ -1,27 +1,54 @@
 ActiveAdmin.register OperatorDocument do
   menu parent: 'Documents', priority: 2
+  config.order_clause
+
+  active_admin_paranoia
+
+  scope_to do
+    Class.new do
+      def self.operator_documents
+        OperatorDocument.unscoped
+      end
+    end
+  end
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([:required_operator_document, [operator: :translations]])
+    end
+  end
+
+  member_action :approve, method: :put do
+    resource.update_attributes(status: OperatorDocument.statuses[:doc_valid])
+    redirect_to resource_path, notice: 'Document approved'
+  end
+
+  member_action :reject, method: :put do
+    resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid])
+    redirect_to resource_path, notice: 'Document rejected'
+  end
 
   actions :all, except: [:destroy, :new, :create]
   permit_params :name, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
-                :attachment
+                :attachment, :uploaded_by
 
   index do
     tag_column :status
-    column :required_operator_document
-    column :operator
-    column :type
+    column :required_operator_document, sortable: 'required_operator_documents.name'
+    column :operator, sortable: 'operator_translations.name'
+    column :fmu
     column :expire_date
     column :start_date
+    column :uploaded_by
     attachment_column :attachment
-
-
+    column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
+    column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
     actions
   end
 
   filter :required_operator_document
   filter :operator
-  filter :type
   filter :status
   filter :updated_at
 
@@ -31,6 +58,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :required_operator_document, input_html: { disabled: true }
       f.input :operator, input_html: { disabled: true }
       f.input :type, input_html: { disabled: true }
+      f.input :uploaded_by
       f.input :status, include_blank: false
       f.input :attachment
       f.input :expire_date, as: :date_picker
@@ -44,9 +72,12 @@ ActiveAdmin.register OperatorDocument do
       row :required_operator_document
       row :operator
       row :status
-      row :fmu, unless: resource.fmu.blank?
+      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
+      row :uploaded_by
       row :current
-      attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
+      if resource.attachment.present?
+        attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
+      end
       row :start_date
       row :expire_date
       row :created_at

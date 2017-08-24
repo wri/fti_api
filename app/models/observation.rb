@@ -9,7 +9,6 @@
 #  user_id           :integer
 #  publication_date  :datetime
 #  country_id        :integer
-#  observer_id       :integer
 #  operator_id       :integer
 #  government_id     :integer
 #  pv                :string
@@ -33,7 +32,6 @@ class Observation < ApplicationRecord
 
 
   belongs_to :country,    inverse_of: :observations
-  belongs_to :observer,   inverse_of: :observations, optional: true
   belongs_to :severity,   inverse_of: :observations
   belongs_to :operator,   inverse_of: :observations, optional: true
   belongs_to :government, inverse_of: :observations, optional: true
@@ -44,6 +42,9 @@ class Observation < ApplicationRecord
 
   has_many :species_observations
   has_many :species, through: :species_observations
+
+  has_many :observer_observations, dependent: :destroy
+  has_many :observers, through: :observer_observations
 
   has_many :comments,  as: :commentable
   has_many :photos,    as: :attacheable, dependent: :destroy
@@ -58,12 +59,14 @@ class Observation < ApplicationRecord
   validates :publication_date, presence: true
   validates_presence_of :validation_status
 
+  before_save   :set_active_status
   after_create  :update_operator_scores
   after_destroy :update_operator_scores
   after_save    :update_operator_scores, if: 'publication_date_changed? || severity_id_changed?'
 
   include Activable
 
+  default_scope { where(is_active: true) }
 
   class << self
     def translated_types
@@ -87,5 +90,10 @@ class Observation < ApplicationRecord
 
   def update_operator_scores
     operator.calculate_observations_scores unless operator.nil?
+  end
+
+  def set_active_status
+    self.is_active = self.validation_status == 'Approved' ? true : false
+    nil
   end
 end

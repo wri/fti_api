@@ -161,14 +161,29 @@ namespace :import do
         country_names = data_row['countries'].split(',') if data_row['countries'].present?
         country_id    = Country.where(name: country_names).pluck(:id).first
 
-        monitor_name = data_row['monitor_name']
-        monitor_id   = Observer.where(name: monitor_name).pluck(:id) if monitor_name.present?
+        monitor_names = data_row['monitor_name'].split('/')
+        monitor_ids   = Observer.where(name: monitor_names).pluck(:id) if monitor_names.any?
 
         operator_name = data_row['operator_name']
         operator_id   = Operator.where(name: operator_name, country_id: country_id).pluck(:id) if operator_name.present?
 
         subcategory_name = data_row['illegality']
         subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pluck(:id).first if subcategory_name.present?
+
+        document_link = data_row['document_link']
+        document_name = data_row['document_name']
+        document = nil
+
+        if document_name.present? && document_link.present?
+          begin
+            puts ".........Going to load #{document_name}"
+            document = Document.new(name: document_name, document_type: 'Report')
+            document.remote_attachment_url = document_link
+          rescue
+            puts "-------Couldn't load #{document_name}"
+          end
+        end
+
 
         next unless subcategory_id.present?
 
@@ -182,7 +197,7 @@ namespace :import do
         data_oo[:concern_opinion]   = data_row['concern_opinion']
         data_oo[:litigation_status] = data_row['litigation_status']
         data_oo[:pv]                = data_row['pv']
-        data_oo[:observer_id]       = monitor_id.first  if monitor_id.present?
+        data_oo[:observer_ids]      = monitor_ids       if monitor_ids.present? && monitor_ids.any?
         data_oo[:operator_id]       = operator_id.first if operator_id.present?
         data_oo[:subcategory_id]    = subcategory_id if subcategory_id.present?
         data_oo[:country_id] = country_id if country_id.present?
@@ -193,6 +208,9 @@ namespace :import do
 
         fmu = Fmu.find_by(name: data_row['concession'])
         oo.update_attributes(fmu_id: fmu.id) if fmu.present?
+
+        oo.documents << document if document.present?
+        oo.save
       end
     end
     puts 'Operator observations loaded'
@@ -229,10 +247,10 @@ namespace :import do
         data_go[:details]           = data_row['description']
         data_go[:evidence]          = data_row['evidence']
         data_go[:concern_opinion]   = data_row['concern_opinion']
-        data_go[:observer_id]       = monitor_id    if monitor_id.present?
-        data_go[:operator_id]       = operator_id   if operator_id.present?
-        data_go[:government_id]     = government_id if government_id.present?
-        data_go[:subcategory_id]    = subcategory_id if subcategory_id.present?
+        data_go[:observer_ids]      = monitor_id      if monitor_id.present?
+        data_go[:operator_id]       = operator_id     if operator_id.present?
+        data_go[:government_id]     = government_id   if government_id.present?
+        data_go[:subcategory_id]    = subcategory_id  if subcategory_id.present?
         data_go[:country_id] = country_id if country_id.present?
 
         go = Observation.create(data_go)
@@ -248,25 +266,13 @@ namespace :import do
   task operator_countries: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'companies.csv'))
     puts '* Operator countries... *'
-    country_congo = Country.find_by(iso: 'COG')
-    country_drc = Country.find_by(iso: 'COD')
     Operator.transaction do
-      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        if data_row['Congo (Atlas)'].present?
-          operator = Operator.find_by(name: data_row['Congo (Atlas)'])
-          if operator.present?
-            operator.update(country: country_congo)
-          end
-        end
-
-        if data_row['DRC (Atlas)'].present?
-          operator = Operator.find_by(name: data_row['DRC (Atlas)'])
-          if operator.present?
-            operator.update(country: country_drc)
-          end
-        end
+        Operator.where(name: data_row['name'],
+                       country: Country.find_by(name: data_row['country']),
+                       fa_id: data_row['id']).first_or_create
       end
     end
   end

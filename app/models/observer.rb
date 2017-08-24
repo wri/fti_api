@@ -20,7 +20,9 @@ class Observer < ApplicationRecord
 
   belongs_to :country, inverse_of: :observers, optional: true
 
-  has_many :observations, inverse_of: :observer
+  has_many :observer_observations, dependent: :destroy
+  has_many :observations, through: :observer_observations
+
   has_many :users, inverse_of: :observer
 
   validates :name, presence: true

@@ -9,4 +9,4 @@
 
 # Find and create new seed files in db/fixtures
 Rake::Task['db:seed_fu'].invoke
-User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+#User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

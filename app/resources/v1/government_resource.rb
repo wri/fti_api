@@ -2,7 +2,7 @@ module V1
   class GovernmentResource < JSONAPI::Resource
     caching
 
-    attributes :government_entity, :details, :name
+    attributes :government_entity, :details
 
     has_one :country
 

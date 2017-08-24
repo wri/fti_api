@@ -16,6 +16,10 @@ class OperatorDocumentUploader < CarrierWave::Uploader::Base
   end
 
   def original_filename
-    file.filename
+    if file.present?
+      file.filename
+    else
+      super
+    end
   end
 end

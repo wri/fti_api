@@ -5,6 +5,7 @@ module V1
 
     has_one :country
     has_many   :users
+    has_many :observations
 
     def custom_links(_)
       { self: nil }

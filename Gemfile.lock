@@ -42,6 +42,9 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_admin_paranoia (1.0.11)
+      paranoia (>= 1.0)
+      rails (>= 4.0)
     active_skin (0.0.12)
     activeadmin (1.0.0)
       arbre (>= 1.1.1)
@@ -443,6 +446,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin_paranoia
   active_skin
   activeadmin
   activeadmin-globalize (~> 1.0.0.pre)!

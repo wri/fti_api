@@ -15,6 +15,7 @@
 #  attachment                    :string
 #  current                       :boolean
 #  deleted_at                    :datetime
+#  uploaded_by                   :integer
 #
 
 class OperatorDocumentCountry < OperatorDocument
