@@ -170,6 +170,21 @@ namespace :import do
         subcategory_name = data_row['illegality']
         subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pluck(:id).first if subcategory_name.present?
 
+        document_link = data_row['document_link']
+        document_name = data_row['document_name']
+        document = nil
+
+        if document_name.present? && document_link.present?
+          begin
+            puts ".........Going to load #{document_name}"
+            document = Document.new(name: document_name, document_type: 'Report')
+            document.remote_attachment_url = document_link
+          rescue
+            puts "-------Couldn't load #{document_name}"
+          end
+        end
+
+
         next unless subcategory_id.present?
 
         date = data_row['publication_date']
@@ -193,6 +208,9 @@ namespace :import do
 
         fmu = Fmu.find_by(name: data_row['concession'])
         oo.update_attributes(fmu_id: fmu.id) if fmu.present?
+
+        oo.documents << document if document.present?
+        oo.save
       end
     end
     puts 'Operator observations loaded'
