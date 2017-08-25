@@ -13,7 +13,7 @@ ActiveAdmin.register Observation do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
                                          :severity, [operator: :translations],
-                                         [subcategory: :translations], [observer_observations: [observer: :translations]]])
+                                         [subcategory: :translations], [observer_observations: [observer: :translations]], :user])
     end
   end
 
@@ -79,6 +79,7 @@ ActiveAdmin.register Observation do
     end
     column :publication_date, sortable: true
     column 'Active?', :is_active
+    column :user, sortable: 'users.name'
     column('Approve') { |observation| link_to 'Approve', approve_admin_observation_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_observation_path(observation), method: :put}
     column('Review') { |observation| link_to 'Review', start_review_admin_observation_path(observation), method: :put}
