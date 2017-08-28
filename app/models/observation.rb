@@ -62,7 +62,7 @@ class Observation < ApplicationRecord
   before_save   :set_active_status
   after_create  :update_operator_scores
   after_destroy :update_operator_scores
-  after_save    :update_operator_scores, if: 'publication_date_changed? || severity_id_changed?'
+  after_save    :update_operator_scores, if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
 
   include Activable
 
