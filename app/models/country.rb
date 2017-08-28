@@ -39,6 +39,8 @@ class Country < ApplicationRecord
                            .order('country_translations.name ASC')
   }
 
+  scope :with_observations, -> { left_outer_joins(:observations).where.not(observations: { id: nil }).uniq }
+
   scope :by_status, ->(status) { where(is_active: status) }
 
   default_scope do
