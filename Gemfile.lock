@@ -236,6 +236,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
+    newrelic_rpm (4.3.0.335)
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
@@ -478,6 +479,7 @@ DEPENDENCIES
   jwt
   listen (~> 3.0.5)
   mini_magick
+  newrelic_rpm
   oj
   oj_mimic_json
   paranoia (~> 2.2)
@@ -508,4 +510,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.14.6
+   1.15.2

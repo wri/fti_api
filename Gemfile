@@ -58,6 +58,9 @@ gem 'mini_magick'
 gem 'slim-rails'
 #gem 'will_paginate'
 
+# New Relic
+gem 'newrelic_rpm'
+
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
