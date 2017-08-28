@@ -18,7 +18,7 @@ ActiveAdmin.register Observation do
   end
 
   actions :all, except: [:new, :create]
-  permit_params :name, :lng, :pv, :lat, :lon,
+  permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id,
                 :validation_status, :publication_date, :is_active, :observer_ids,
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status]
 
@@ -102,10 +102,9 @@ ActiveAdmin.register Observation do
     f.inputs 'Country Details' do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
-      f.input :subcategory, input_html: { disabled: true }
+      f.input :subcategory
       f.input :severity, as: :select,
-              collection: Severity.all.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]},
-              input_html: { disabled: true }
+              collection: Severity.all.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
       f.input :fmu, input_html: { disabled: true }
       f.input :observers
       f.input :government, as: :select,
