@@ -15,7 +15,7 @@ module V1
 
     filters :type, :status
 
-    before_create :set_operator_id
+    before_create :set_operator_id, :set_user_id
 
     def fetchable_fields
       if (context[:current_user])
@@ -28,6 +28,12 @@ module V1
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?
         @model.operator_id = context[:current_user].operator_id
+      end
+    end
+
+    def set_user_id
+      if context[:current_user].present?
+        @model.user_id = context[:current_user].id
       end
     end
 
