@@ -13,7 +13,8 @@ ActiveAdmin.register Observation do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
                                          :severity, [operator: :translations],
-                                         [subcategory: :translations], [observer_observations: [observer: :translations]], :user])
+                                         [subcategory: :translations], [observer_observations: [observer: :translations]],
+                                         [fmu: :translations], :user])
     end
   end
 
@@ -68,8 +69,8 @@ ActiveAdmin.register Observation do
     selectable_column
     tag_column 'Status', :validation_status, sortable: true
     column :country, sortable: 'country_translations.name'
-    column :fmu
-    column :observers do |o|
+    column :fmu, sortable: 'fmu_translations.name'
+    column :observers, sortable: 'observer_translations.name' do |o|
       o.observers.pluck(:name).join(', ')
     end
     column :operator, sortable: 'operator_translations.name'
