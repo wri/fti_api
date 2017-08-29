@@ -14,19 +14,19 @@ ActiveAdmin.register OperatorDocument do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:required_operator_document, [operator: :translations],
-                                        [fmu: :translations]])
+      end_of_association_chain.includes([:required_operator_document, :user, [operator: :translations],
+                                        [fmu: :translations], [required_operator_document: [required_operator_document_group: :translations]]])
     end
   end
 
   member_action :approve, method: :put do
     resource.update_attributes(status: OperatorDocument.statuses[:doc_valid])
-    redirect_to resource_path, notice: 'Document approved'
+    redirect_to collection_path, notice: 'Document approved'
   end
 
   member_action :reject, method: :put do
     resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid])
-    redirect_to resource_path, notice: 'Document rejected'
+    redirect_to collection_path, notice: 'Document rejected'
   end
 
   actions :all, except: [:destroy, :new, :create]
@@ -42,6 +42,10 @@ ActiveAdmin.register OperatorDocument do
     end
     column :operator, sortable: 'operator_translations.name'
     column :fmu, sortable: 'fmu_translations.name'
+    column 'Legal Category' do |od|
+      od.required_operator_document.required_operator_document_group.name
+    end
+    column :user, sortable: 'users.name'
     column :expire_date
     column :start_date
     column :created_at
