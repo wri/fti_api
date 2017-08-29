@@ -14,7 +14,8 @@ ActiveAdmin.register OperatorDocument do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:required_operator_document, [operator: :translations]])
+      end_of_association_chain.includes([:required_operator_document, [operator: :translations],
+                                        [fmu: :translations]])
     end
   end
 
@@ -36,10 +37,14 @@ ActiveAdmin.register OperatorDocument do
   index do
     tag_column :status
     column :required_operator_document, sortable: 'required_operator_documents.name'
+    column :'Type', sortable: 'required_operator_documents.type' do |od|
+      od.required_operator_document.type
+    end
     column :operator, sortable: 'operator_translations.name'
-    column :fmu
+    column :fmu, sortable: 'fmu_translations.name'
     column :expire_date
     column :start_date
+    column :created_at
     column :uploaded_by
     attachment_column :attachment
     column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
