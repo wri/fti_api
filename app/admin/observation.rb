@@ -26,17 +26,17 @@ ActiveAdmin.register Observation do
 
   member_action :approve, method: :put do
     resource.update_attributes(validation_status: Observation.validation_statuses['Approved'])
-    redirect_to resource_path, notice: 'Document approved'
+    redirect_to collection_path, notice: 'Document approved'
   end
 
   member_action :reject, method: :put do
     resource.update_attributes(validation_status: Observation.validation_statuses['Rejected'])
-    redirect_to resource_path, notice: 'Document rejected'
+    redirect_to collection_path, notice: 'Document rejected'
   end
 
   member_action :start_review, method: :put do
     resource.update_attributes(validation_status: Observation.validation_statuses['Under revision'])
-    redirect_to resource_path, notice: 'Document under revision'
+    redirect_to collection_path, notice: 'Document under revision'
   end
 
 
