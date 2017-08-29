@@ -82,9 +82,17 @@ class OperatorDocument < ApplicationRecord
     end
   end
 
+  def expired?
+    expire_date < Time.now
+  end
+
   def set_status
     if attachment.present?
-      self.status = OperatorDocument.statuses[:doc_pending]
+      if expired?
+        self.status = OperatorDocument.statuses[:doc_expired]
+      else
+        self.status = OperatorDocument.statuses[:doc_pending]
+      end
     else
       self.status = OperatorDocument.statuses[:doc_not_provided]
     end
