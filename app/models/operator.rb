@@ -36,7 +36,7 @@ class Operator < ApplicationRecord
   has_many :users, inverse_of: :operator
   has_many :fmus, inverse_of: :operator
 
-  has_many :operator_documents
+  has_many :operator_documents, -> { valid }
   has_many :operator_document_countries
   has_many :operator_document_fmus
 

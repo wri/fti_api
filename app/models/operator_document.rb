@@ -63,7 +63,8 @@ class OperatorDocument < ApplicationRecord
     end
   end
 
-  default_scope { where(current: true, deleted_at: nil) }
+  # default_scope { where(current: true, deleted_at: nil) }
+  scope :valid, -> { where(current: true, deleted_at: nil) }
 
   private
 
