@@ -11,7 +11,7 @@ module V1
     has_one :operator
     has_one :required_operator_document
 
-    filters :type, :status
+    filters :type, :status, :operator_id, :current
 
     before_create :set_operator_id, :set_user_id
 
