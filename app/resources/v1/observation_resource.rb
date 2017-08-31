@@ -43,5 +43,16 @@ module V1
     def custom_links(_)
       { self: nil }
     end
+
+    def self.records(options = {})
+      context = options[:context]
+      user = context[:current_user]
+      if user.present? && user.observer_id.present?
+        Observation.with_inactive(user.observer_id)
+      else
+        super
+      end
+      #super
+    end
   end
 end
