@@ -104,9 +104,8 @@ class User < ApplicationRecord
 
   def regenerate_api_key
     token = Auth.issue({ user: id })
-    if ::APIKey.where(user_id: id).first_or_create
-      api_key.update(access_token: token, is_active: true, expires_at: DateTime.now + 1.year)
-    end
+    api_key = ::APIKey.where(user_id: id).first_or_create
+    api_key.update(access_token: token, is_active: true, expires_at: DateTime.now + 1.year)
   end
 
   def delete_api_key
