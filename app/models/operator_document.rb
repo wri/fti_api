@@ -19,7 +19,7 @@
 #
 
 class OperatorDocument < ApplicationRecord
-  acts_as_paranoid without_default_scope: true
+  acts_as_paranoid #without_default_scope: true
 
   belongs_to :operator, required: true
   belongs_to :required_operator_document, required: true
@@ -33,6 +33,7 @@ class OperatorDocument < ApplicationRecord
   validates_presence_of :expire_date, if: :attachment?
   before_save :update_current, if: :current_changed?
   before_create :set_status
+  before_create :delete_previous_pending_document
   after_save :update_operator_percentages, if: :status_changed?
   after_save :touch_operator
   before_destroy :insure_unity
@@ -76,26 +77,26 @@ class OperatorDocument < ApplicationRecord
     if self.current
       od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
                                     required_operator_document_id: self.required_operator_document_id,
-                                    status: OperatorDocument.statuses[:doc_not_provided], type: self.type)
+                                    status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
+                                    current: true)
       od.save!(validate: false)
     else
-      false
+      true
     end
-  end
-
-  def expired?
-    expire_date < Time.now
   end
 
   def set_status
     if attachment.present?
-      if expired?
-        self.status = OperatorDocument.statuses[:doc_expired]
-      else
-        self.status = OperatorDocument.statuses[:doc_pending]
-      end
+      self.status = OperatorDocument.statuses[:doc_pending]
     else
       self.status = OperatorDocument.statuses[:doc_not_provided]
     end
+  end
+
+  def delete_previous_pending_document
+    pending_documents = OperatorDocument.where(operator_id: self.operator_id,
+                                              required_operator_document_id: self.required_operator_document_id,
+                                              status: OperatorDocument.statuses[:doc_pending])
+    pending_documents.each {|x| x.destroy}
   end
 end
