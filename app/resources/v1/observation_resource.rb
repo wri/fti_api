@@ -44,15 +44,21 @@ module V1
       { self: nil }
     end
 
+    # To allow the filtering of results according to the app and user
+    # In the portal, only the approved observations should be shown
+    # (using the default scope)
+    # In the observation tools, the monitors should see theirs
+
     def self.records(options = {})
       context = options[:context]
       user = context[:current_user]
-      if user.present? && user.observer_id.present?
+      app = context[:app]
+      if user.present? && user.observer_id.present? && app == 'observations-tool'
         Observation.with_inactive(user.observer_id)
       else
         super
       end
-      #super
     end
+
   end
 end
