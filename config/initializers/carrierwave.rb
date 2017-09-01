@@ -8,7 +8,7 @@ if Rails.env.test? || Rails.env.cucumber?
 
   # Make sure your tested uploaders are included:
   PhotoUploader
-  DocumentUploader
+  ObservationDocumentUploader
   LogoUploader
   OperatorDocumentUploader
 

@@ -30,7 +30,7 @@ Rails.application.routes.draw do
       jsonapi_resources :governments do; end
       jsonapi_resources :observers do; end
       jsonapi_resources :observations do; end
-      jsonapi_resources :documents do; end
+      jsonapi_resources :observation_documents do; end
       jsonapi_resources :operator_documents, except: [:create, :update] do; end
       jsonapi_resources :operator_document_fmus do; end
       jsonapi_resources :operator_document_countries do; end
