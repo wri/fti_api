@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.2] - 2017-09-01
+### Technical details
+- Changed documents to observation documents
+- Added Reports to Observations
+
 ## [0.9.2] - 2017-08-31
 ### Technical details
 - Fixed generation of api keys for users

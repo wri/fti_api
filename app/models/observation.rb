@@ -3,23 +3,24 @@
 #
 # Table name: observations
 #
-#  id                :integer          not null, primary key
-#  severity_id       :integer
-#  observation_type  :integer          not null
-#  user_id           :integer
-#  publication_date  :datetime
-#  country_id        :integer
-#  operator_id       :integer
-#  government_id     :integer
-#  pv                :string
-#  is_active         :boolean          default(TRUE)
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  lat               :decimal(, )
-#  lng               :decimal(, )
-#  fmu_id            :integer
-#  subcategory_id    :integer
-#  validation_status :integer          default("Created"), not null
+#  id                    :integer          not null, primary key
+#  severity_id           :integer
+#  observation_type      :integer          not null
+#  user_id               :integer
+#  publication_date      :datetime
+#  country_id            :integer
+#  operator_id           :integer
+#  government_id         :integer
+#  pv                    :string
+#  is_active             :boolean          default(TRUE)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  lat                   :decimal(, )
+#  lng                   :decimal(, )
+#  fmu_id                :integer
+#  subcategory_id        :integer
+#  validation_status     :integer          default("Created"), not null
+#  observation_report_id :integer
 #
 
 class Observation < ApplicationRecord
@@ -48,10 +49,12 @@ class Observation < ApplicationRecord
 
   has_many :comments,  as: :commentable
   has_many :photos,    as: :attacheable, dependent: :destroy
-  has_many :documents, as: :attacheable, dependent: :destroy
+  has_many :observation_documents, dependent: :destroy
+  belongs_to :observation_report
 
   accepts_nested_attributes_for :photos,           allow_destroy: true
-  accepts_nested_attributes_for :documents,        allow_destroy: true
+  accepts_nested_attributes_for :observation_documents,        allow_destroy: true
+  accepts_nested_attributes_for :observation_report,        allow_destroy: true
   accepts_nested_attributes_for :subcategory, allow_destroy: false
 
 

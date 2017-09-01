@@ -177,7 +177,7 @@ namespace :import do
         if document_name.present? && document_link.present?
           begin
             puts ".........Going to load #{document_name}"
-            document = Document.new(name: document_name, document_type: 'Report')
+            document = ObservationDocument.new(name: document_name)
             document.remote_attachment_url = document_link
           rescue
             puts "-------Couldn't load #{document_name}"
@@ -209,7 +209,7 @@ namespace :import do
         fmu = Fmu.find_by(name: data_row['concession'])
         oo.update_attributes(fmu_id: fmu.id) if fmu.present?
 
-        oo.documents << document if document.present?
+        oo.observation_documents << document if document.present?
         oo.save
       end
     end
