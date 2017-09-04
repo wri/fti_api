@@ -32,8 +32,12 @@ module V1
       records.joins(:subcategory).where('subcategories.category_id = ?', value[0].to_i)
     }
 
-    filter :years, apply:->(records, value, _options) {
+    filter :years, apply: ->(records, value, _options) {
       records.where("extract(year from observations.publication_date) in (#{value.map{|x| x.to_i rescue nil}.join(', ')})")
+    }
+
+    filter :'observation_report.id', apply: ->(records, value, _options) {
+      records.joins(:observation_report).where('observation_reports.id = ?', value[0].to_i)
     }
 
     def self.sortable_fields(context)
