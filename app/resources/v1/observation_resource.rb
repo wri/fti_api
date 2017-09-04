@@ -11,7 +11,7 @@ module V1
     has_many :species
     has_many :comments
     has_many :photos
-    has_many :documents
+    has_many :observation_documents
     has_many :observers
 
     has_one :country
@@ -53,8 +53,12 @@ module V1
       context = options[:context]
       user = context[:current_user]
       app = context[:app]
-      if user.present? && user.observer_id.present? && app == 'observations-tool'
-        Observation.with_inactive(user.observer_id)
+      if app == 'observations-tool' && user.present?
+        if  user.observer_id.present?
+          Observation.own_with_inactive(user.observer_id)
+        elsif user.user_permission.present? && user.user_permission.user_role == 'admin'
+          Observation.with_inactive
+        end
       else
         super
       end

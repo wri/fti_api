@@ -70,7 +70,8 @@ class Observation < ApplicationRecord
   include Activable
 
   default_scope { where(is_active: true) }
-  scope :with_inactive, ->(observer) {unscope(where: :is_active).joins(:observers).where("observers.id = #{observer}")}
+  scope :own_with_inactive, ->(observer) {unscope(where: :is_active).joins(:observers).where("observers.id = #{observer}")}
+  scope :with_inactive,     ->()         {unscope(where: :is_active).joins(:observers)}
 
   class << self
     def translated_types
