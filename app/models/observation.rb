@@ -21,6 +21,7 @@
 #  subcategory_id        :integer
 #  validation_status     :integer          default("Created"), not null
 #  observation_report_id :integer
+#  actions_taken         :text
 #
 
 class Observation < ApplicationRecord

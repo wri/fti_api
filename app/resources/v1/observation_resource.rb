@@ -6,7 +6,7 @@ module V1
                :pv, :is_active, :details, :evidence, :concern_opinion,
                :litigation_status, :lat, :lng,
                :country_id, :fmu_id,
-               :subcategory_id, :severity_id, :created_at, :updated_at
+               :subcategory_id, :severity_id, :created_at, :updated_at, :actions_taken
 
     has_many :species
     has_many :comments
