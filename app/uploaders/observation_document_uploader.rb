@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DocumentUploader < CarrierWave::Uploader::Base
+class ObservationDocumentUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir

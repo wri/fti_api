@@ -11,7 +11,7 @@ module V1
     has_many :species
     has_many :comments
     has_many :photos
-    has_many :documents
+    has_many :observation_documents
     has_many :observers
 
     has_one :country
@@ -43,5 +43,26 @@ module V1
     def custom_links(_)
       { self: nil }
     end
+
+    # To allow the filtering of results according to the app and user
+    # In the portal, only the approved observations should be shown
+    # (using the default scope)
+    # In the observation tools, the monitors should see theirs
+
+    def self.records(options = {})
+      context = options[:context]
+      user = context[:current_user]
+      app = context[:app]
+      if app == 'observations-tool' && user.present?
+        if  user.observer_id.present?
+          Observation.own_with_inactive(user.observer_id)
+        elsif user.user_permission.present? && user.user_permission.user_role == 'admin'
+          Observation.with_inactive
+        end
+      else
+        super
+      end
+    end
+
   end
 end

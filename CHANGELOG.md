@@ -6,10 +6,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.2] - 2017-09-01
+### Technical details
+- Changed documents to observation documents
+- Added Reports to Observations
+
 ## [0.9.2] - 2017-08-31
 ### Technical details
 - Fixed generation of api keys for users
 - Deletes previous pending operator documents
+- Added the app name to the context
+
+### Fixes
+- Observations tool
+  - The monitors observations are now displayed (even if they haven't yet been approved)
 
 ## [0.9.1] - 2017-08-30
 ### Additions

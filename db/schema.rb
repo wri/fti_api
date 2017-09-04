@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829114121) do
+ActiveRecord::Schema.define(version: 20170901102244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,20 +106,6 @@ ActiveRecord::Schema.define(version: 20170829114121) do
     t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
   end
 
-  create_table "documents", force: :cascade do |t|
-    t.string   "name"
-    t.string   "document_type"
-    t.string   "attachment"
-    t.integer  "attacheable_id"
-    t.string   "attacheable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "user_id"
-    t.datetime "deleted_at"
-    t.index ["attacheable_id", "attacheable_type"], name: "documents_attacheable_index", using: :btree
-    t.index ["deleted_at"], name: "index_documents_on_deleted_at", using: :btree
-  end
-
   create_table "fmu_translations", force: :cascade do |t|
     t.integer  "fmu_id",     null: false
     t.string   "locale",     null: false
@@ -167,6 +153,27 @@ ActiveRecord::Schema.define(version: 20170829114121) do
     t.index ["subcategory_id"], name: "index_laws_subcategories_on_subcategory_id", using: :btree
   end
 
+  create_table "observation_documents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "attachment"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "user_id"
+    t.datetime "deleted_at"
+    t.integer  "observation_id"
+    t.index ["deleted_at"], name: "index_observation_documents_on_deleted_at", using: :btree
+  end
+
+  create_table "observation_reports", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "publication_date"
+    t.string   "attachment"
+    t.integer  "user_id"
+    t.integer  "observer_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "observation_translations", force: :cascade do |t|
     t.integer  "observation_id",    null: false
     t.string   "locale",            null: false
@@ -182,21 +189,22 @@ ActiveRecord::Schema.define(version: 20170829114121) do
 
   create_table "observations", force: :cascade do |t|
     t.integer  "severity_id"
-    t.integer  "observation_type",                 null: false
+    t.integer  "observation_type",                     null: false
     t.integer  "user_id"
     t.datetime "publication_date"
     t.integer  "country_id"
     t.integer  "operator_id"
     t.integer  "government_id"
     t.string   "pv"
-    t.boolean  "is_active",         default: true
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "is_active",             default: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.decimal  "lat"
     t.decimal  "lng"
     t.integer  "fmu_id"
     t.integer  "subcategory_id"
-    t.integer  "validation_status", default: 0,    null: false
+    t.integer  "validation_status",     default: 0,    null: false
+    t.integer  "observation_report_id"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
     t.index ["operator_id"], name: "index_observations_on_operator_id", using: :btree
@@ -435,10 +443,14 @@ ActiveRecord::Schema.define(version: 20170829114121) do
   add_foreign_key "comments", "users"
   add_foreign_key "country_subcategories", "countries"
   add_foreign_key "country_subcategories", "subcategories"
-  add_foreign_key "documents", "users"
+  add_foreign_key "observation_documents", "observations"
+  add_foreign_key "observation_documents", "users"
+  add_foreign_key "observation_reports", "observers"
+  add_foreign_key "observation_reports", "users"
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"
   add_foreign_key "observations", "governments"
+  add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"
   add_foreign_key "observers", "countries"
   add_foreign_key "operator_documents", "fmus"
