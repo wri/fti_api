@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901102244) do
+ActiveRecord::Schema.define(version: 20170904133210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,14 +164,22 @@ ActiveRecord::Schema.define(version: 20170901102244) do
     t.index ["deleted_at"], name: "index_observation_documents_on_deleted_at", using: :btree
   end
 
+  create_table "observation_report_observers", force: :cascade do |t|
+    t.integer  "observation_report_id"
+    t.integer  "observer_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
   create_table "observation_reports", force: :cascade do |t|
     t.string   "title"
     t.datetime "publication_date"
     t.string   "attachment"
     t.integer  "user_id"
-    t.integer  "observer_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observation_reports_on_deleted_at", using: :btree
   end
 
   create_table "observation_translations", force: :cascade do |t|
@@ -445,7 +453,8 @@ ActiveRecord::Schema.define(version: 20170901102244) do
   add_foreign_key "country_subcategories", "subcategories"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
-  add_foreign_key "observation_reports", "observers"
+  add_foreign_key "observation_report_observers", "observation_reports"
+  add_foreign_key "observation_report_observers", "observers"
   add_foreign_key "observation_reports", "users"
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"

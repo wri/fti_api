@@ -19,6 +19,7 @@ class ApiController < ActionController::API
   rescue_from JWT::VerificationError,         with: :bad_auth_key
 
   rescue_from CanCan::AccessDenied do |exception|
+    Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
     render json: { errors: [{ status: '401', title: exception.message }] }, status: 401
   end
 
