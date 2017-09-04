@@ -10,6 +10,9 @@ class Ability
           actions_obj.each do |f_key, actions|
             if f_key.to_s.include?('all')
               can actions.map(&:to_sym), (klass = subject.classify.safe_constantize) ? klass : subject.to_sym
+            elsif f_key.starts_with?('[')
+              f_key = eval(f_key)
+              can actions.map(&:to_sym), (klass = subject.classify.safe_constantize) ? klass : subject.to_sym, f_key.first
             else
               can actions.map(&:to_sym), (klass = subject.classify.safe_constantize) ? klass : subject.to_sym, "#{f_key}": eval("user.#{f_key}")
             end

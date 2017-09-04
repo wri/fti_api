@@ -28,14 +28,16 @@ class UserPermission < ApplicationRecord
 
     def role_permissions
       case self.user_role
-      when 'admin'    then { admin: { all: [:manage]  }, all:         { all: [:manage] } }
+      when 'admin'    then { admin: { all: [:manage]  }, all: { all: [:manage] } }
       when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]   },
                              operator_document: { operator_id: [:manage] }}
       when 'ngo'      then { user:  { id: [:manage] }, observation: { observer_id: [:manage] },
                              photo: { all: [:manage] }, document: { all: [:manage] },
-                             category: { all: [:manage] }, annex_governance: { all: [:manage] },
+                             category: { all: [:manage] }, subcategory: { all: [:manage] },
                              country: { all: [:manage] }, government: { all: [:manage]},
-                             operator: { all: [:manage]}, species: { all: [:manage] }}
+                             operator: { all: [:manage]}, species: { all: [:manage] },
+                             observation_document: { observer_id: [:manage] },
+                             observation_report: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage]} }
       else
         { user: { id: [:manage] }, observation: { all: [:read] }  }
       end
