@@ -27,19 +27,29 @@ class UserPermission < ApplicationRecord
   private
 
     def role_permissions
+      # case self.user_role
+      # when 'admin'    then { admin: { all: [:manage]  }, all: { all: [:manage] } }
+      # when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]   },
+      #                        operator_document: { operator_id: [:manage] }}
+      # when 'ngo'      then { user:  { id: [:manage] }, observation: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
+      #                        photo: { all: [:manage] }, document: { all: [:manage] },
+      #                        category: { all: [:manage] }, subcategory: { all: [:manage] },
+      #                        country: { all: [:manage] }, government: { all: [:manage]},
+      #                        operator: { all: [:manage]}, species: { all: [:manage] },
+      #                        observation_document: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
+      #                        observation_report: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage]} }
+      # else
+      #   { user: { id: [:manage] }, observation: { all: [:read] }  }
+      # end
+
       case self.user_role
-      when 'admin'    then { admin: { all: [:manage]  }, all: { all: [:manage] } }
-      when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]   },
-                             operator_document: { operator_id: [:manage] }}
-      when 'ngo'      then { user:  { id: [:manage] }, observation: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
-                             photo: { all: [:manage] }, document: { all: [:manage] },
-                             category: { all: [:manage] }, subcategory: { all: [:manage] },
-                             country: { all: [:manage] }, government: { all: [:manage]},
-                             operator: { all: [:manage]}, species: { all: [:manage] },
-                             observation_document: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
-                             observation_report: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage]} }
-      else
-        { user: { id: [:manage] }, observation: { all: [:read] }  }
+        when 'admin'
+          { admin: [{ manage: {} }], all: [{ manage: {} } ] }
+        when 'operator'
+          { user: [{ manage: { id: user.id } }] , operator_document: [{ manage: { operator_id: eval('self.') } }] }
+        when 'ngo'
+        else
+
       end
     end
 
