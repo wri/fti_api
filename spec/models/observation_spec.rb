@@ -21,6 +21,8 @@
 #  validation_status     :integer          default("Created"), not null
 #  observation_report_id :integer
 #  actions_taken         :text
+#  modified_user_id      :integer
+#  law_id                :integer
 #
 
 require 'rails_helper'

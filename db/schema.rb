@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904164018) do
+ActiveRecord::Schema.define(version: 20170905154518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -144,13 +144,18 @@ ActiveRecord::Schema.define(version: 20170904164018) do
     t.index ["country_id"], name: "index_governments_on_country_id", using: :btree
   end
 
-  create_table "laws_subcategories", id: false, force: :cascade do |t|
-    t.integer  "law_id",         null: false
-    t.integer  "subcategory_id", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["law_id"], name: "index_laws_subcategories_on_law_id", using: :btree
-    t.index ["subcategory_id"], name: "index_laws_subcategories_on_subcategory_id", using: :btree
+  create_table "laws", force: :cascade do |t|
+    t.text     "written_infraction"
+    t.text     "infraction"
+    t.text     "sanctions"
+    t.integer  "min_fine"
+    t.integer  "max_fine"
+    t.string   "penal_servitude"
+    t.text     "other_penalties"
+    t.text     "flegt"
+    t.integer  "subcategory_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "observation_documents", force: :cascade do |t|
@@ -214,6 +219,8 @@ ActiveRecord::Schema.define(version: 20170904164018) do
     t.integer  "validation_status",     default: 0,    null: false
     t.integer  "observation_report_id"
     t.text     "actions_taken"
+    t.integer  "modified_user_id"
+    t.integer  "law_id"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
     t.index ["operator_id"], name: "index_observations_on_operator_id", using: :btree
@@ -452,6 +459,7 @@ ActiveRecord::Schema.define(version: 20170904164018) do
   add_foreign_key "comments", "users"
   add_foreign_key "country_subcategories", "countries"
   add_foreign_key "country_subcategories", "subcategories"
+  add_foreign_key "laws", "subcategories"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
   add_foreign_key "observation_report_observers", "observation_reports"
@@ -460,8 +468,10 @@ ActiveRecord::Schema.define(version: 20170904164018) do
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"
   add_foreign_key "observations", "governments"
+  add_foreign_key "observations", "laws"
   add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"
+  add_foreign_key "observations", "users", column: "modified_user_id"
   add_foreign_key "observers", "countries"
   add_foreign_key "operator_documents", "fmus"
   add_foreign_key "operator_documents", "operators"

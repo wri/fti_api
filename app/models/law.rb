@@ -14,15 +14,10 @@
 #  subcategory_id     :integer
 #
 
-FactoryGirl.define do
-  factory :law do
-    legal_reference 'Lorem'
-    legal_penalty   'Lorem ipsum..'
-    vpa_indicator   'Indicator one'
+class Law < ApplicationRecord
+  belongs_to :subcategory,  required: true
+  has_many   :observations, inverse_of: :laws
 
-    after(:create) do |law|
-      law.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                       iso: "C#{Faker::Lorem.sentence}"))
-    end
-  end
+  validates :min_fine, numericality: { greater_than_or_equal_to: 0 }
+  validates :max_fine, numericality: { greater_than_or_equal_to: 0 }
 end

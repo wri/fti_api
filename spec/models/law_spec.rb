@@ -2,11 +2,16 @@
 #
 # Table name: laws
 #
-#  id            :integer          not null, primary key
-#  country_id    :integer
-#  vpa_indicator :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                 :integer          not null, primary key
+#  written_infraction :text
+#  infraction         :text
+#  sanctions          :text
+#  min_fine           :integer
+#  max_fine           :integer
+#  penal_servitude    :string
+#  other_penalties    :text
+#  flegt              :text
+#  subcategory_id     :integer
 #
 
 require 'rails_helper'

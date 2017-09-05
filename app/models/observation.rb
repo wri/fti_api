@@ -22,6 +22,8 @@
 #  validation_status     :integer          default("Created"), not null
 #  observation_report_id :integer
 #  actions_taken         :text
+#  modified_user_id      :integer
+#  law_id                :integer
 #
 
 class Observation < ApplicationRecord
@@ -33,12 +35,14 @@ class Observation < ApplicationRecord
   enum validation_status: ['Created', 'Under revision', 'Approved', 'Rejected']
 
 
-  belongs_to :country,    inverse_of: :observations
-  belongs_to :severity,   inverse_of: :observations
-  belongs_to :operator,   inverse_of: :observations, optional: true
-  belongs_to :government, inverse_of: :observations, optional: true
-  belongs_to :user,       inverse_of: :observations, optional: true
-  belongs_to :fmu,        inverse_of: :observations, optional: true
+  belongs_to :country,        inverse_of: :observations
+  belongs_to :severity,       inverse_of: :observations
+  belongs_to :operator,       inverse_of: :observations, optional: true
+  belongs_to :government,     inverse_of: :observations, optional: true
+  belongs_to :user,           inverse_of: :observations, optional: true
+  belongs_to :modified_user,  class_name: 'User', foreign_key: 'modified_user_id', optional: true
+  belongs_to :fmu,            inverse_of: :observations, optional: true
+  belongs_to :law,            inverse_of: :observations, optional: true
 
   belongs_to :subcategory, inverse_of: :observations, optional: true
 
