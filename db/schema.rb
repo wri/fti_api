@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904164018) do
+ActiveRecord::Schema.define(version: 20170905143433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(version: 20170904164018) do
     t.integer  "validation_status",     default: 0,    null: false
     t.integer  "observation_report_id"
     t.text     "actions_taken"
+    t.integer  "modified_user_id"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
     t.index ["operator_id"], name: "index_observations_on_operator_id", using: :btree
@@ -462,6 +463,7 @@ ActiveRecord::Schema.define(version: 20170904164018) do
   add_foreign_key "observations", "governments"
   add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"
+  add_foreign_key "observations", "users", column: "modified_user_id"
   add_foreign_key "observers", "countries"
   add_foreign_key "operator_documents", "fmus"
   add_foreign_key "operator_documents", "operators"

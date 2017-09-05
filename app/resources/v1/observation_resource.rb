@@ -18,10 +18,12 @@ module V1
     has_one :subcategory
     has_one :severity
     has_one :user
+    has_one :modified_user
     has_one :operator
     has_one :government
 
     after_create :add_own_observer
+    before_save  :set_modified
 
     filters :id, :observation_type, :fmu_id, :country_id, :fmu_id,
             :publication_date, :observer_id, :subcategory_id, :years
@@ -57,6 +59,11 @@ module V1
       rescue Exception => e
         Rails.logger.warn "Observation created without user: #{e.inspect}"
       end
+    end
+
+    def set_modified
+      user = context[:current_user]
+      @model.modified_user_id = user.id
     end
 
     # To allow the filtering of results according to the app and user
