@@ -31,12 +31,12 @@ class UserPermission < ApplicationRecord
       when 'admin'    then { admin: { all: [:manage]  }, all: { all: [:manage] } }
       when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]   },
                              operator_document: { operator_id: [:manage] }}
-      when 'ngo'      then { user:  { id: [:manage] }, observation: { observer_id: [:manage] },
+      when 'ngo'      then { user:  { id: [:manage] }, observation: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
                              photo: { all: [:manage] }, document: { all: [:manage] },
                              category: { all: [:manage] }, subcategory: { all: [:manage] },
                              country: { all: [:manage] }, government: { all: [:manage]},
                              operator: { all: [:manage]}, species: { all: [:manage] },
-                             observation_document: { observer_id: [:manage] },
+                             observation_document: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
                              observation_report: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage]} }
       else
         { user: { id: [:manage] }, observation: { all: [:read] }  }

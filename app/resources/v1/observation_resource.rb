@@ -21,6 +21,8 @@ module V1
     has_one :operator
     has_one :government
 
+    before_create :add_own_observer
+
     filters :id, :observation_type, :fmu_id, :country_id, :fmu_id,
             :publication_date, :observer_id, :subcategory_id, :years
 
@@ -48,6 +50,16 @@ module V1
       { self: nil }
     end
 
+    def add_own_observer
+      begin
+        context = options[:context]
+        user = context[:current_user]
+        @model.observers << user.observer_id if user.observer_id.present?
+      rescue
+      end
+
+    end
+
     # To allow the filtering of results according to the app and user
     # In the portal, only the approved observations should be shown
     # (using the default scope)
@@ -58,13 +70,15 @@ module V1
       user = context[:current_user]
       app = context[:app]
       if app == 'observations-tool' && user.present?
-        if  user.observer_id.present?
+        if user.observer_id.present?
           Observation.own_with_inactive(user.observer_id)
         elsif user.user_permission.present? && user.user_permission.user_role == 'admin'
-          Observation.with_inactive
+          Observation
+        else
+          Observation.active
         end
       else
-        super
+        Observation.active
       end
     end
 
