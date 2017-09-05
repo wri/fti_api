@@ -57,6 +57,8 @@ module V1
       begin
         user = context[:current_user]
         @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
+        @model.user_id = user.id
+        @model.save
       rescue Exception => e
         Rails.logger.warn "Observation created without user: #{e.inspect}"
       end
