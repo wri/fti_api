@@ -21,7 +21,7 @@ module V1
     has_one :operator
     has_one :government
 
-    before_create :add_own_observer
+    after_create :add_own_observer
 
     filters :id, :observation_type, :fmu_id, :country_id, :fmu_id,
             :publication_date, :observer_id, :subcategory_id, :years
