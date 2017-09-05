@@ -52,12 +52,11 @@ module V1
 
     def add_own_observer
       begin
-        context = options[:context]
         user = context[:current_user]
-        @model.observers << user.observer_id if user.observer_id.present?
-      rescue
+        @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
+      rescue Exception => e
+        Rails.logger.warn "Observation created without user: #{e.inspect}"
       end
-
     end
 
     # To allow the filtering of results according to the app and user
