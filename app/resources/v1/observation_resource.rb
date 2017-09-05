@@ -6,7 +6,7 @@ module V1
                :pv, :is_active, :details, :evidence, :concern_opinion,
                :litigation_status, :lat, :lng,
                :country_id, :fmu_id,
-               :subcategory_id, :severity_id
+               :subcategory_id, :severity_id, :created_at, :updated_at, :actions_taken
 
     has_many :species
     has_many :comments
@@ -32,8 +32,12 @@ module V1
       records.joins(:subcategory).where('subcategories.category_id = ?', value[0].to_i)
     }
 
-    filter :years, apply:->(records, value, _options) {
+    filter :years, apply: ->(records, value, _options) {
       records.where("extract(year from observations.publication_date) in (#{value.map{|x| x.to_i rescue nil}.join(', ')})")
+    }
+
+    filter :'observation_report.id', apply: ->(records, value, _options) {
+      records.joins(:observation_report).where('observation_reports.id = ?', value[0].to_i)
     }
 
     def self.sortable_fields(context)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904133210) do
+ActiveRecord::Schema.define(version: 20170904164018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,6 +213,7 @@ ActiveRecord::Schema.define(version: 20170904133210) do
     t.integer  "subcategory_id"
     t.integer  "validation_status",     default: 0,    null: false
     t.integer  "observation_report_id"
+    t.text     "actions_taken"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
     t.index ["operator_id"], name: "index_observations_on_operator_id", using: :btree
