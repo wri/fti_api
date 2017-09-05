@@ -21,6 +21,7 @@ module V1
     has_one :modified_user
     has_one :operator
     has_one :government
+    has_one :law
 
     after_create :add_own_observer
     before_save  :set_modified

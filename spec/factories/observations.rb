@@ -22,6 +22,7 @@
 #  observation_report_id :integer
 #  actions_taken         :text
 #  modified_user_id      :integer
+#  law_id                :integer
 #
 
 FactoryGirl.define do
