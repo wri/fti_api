@@ -22,4 +22,36 @@ namespace :db do
     pids_directory_name = 'tmp/pids'
     FileUtils.mkdir_p(pids_directory_name) unless File.exists?(pids_directory_name)
   end
+
+  desc 'Rebuilds and imports the database'
+  task :destroy_and_rebuild do
+    puts 'Are you sure you want to destroy and rebuild the database? (type "yes" to continue)'
+    input = gets.chomp
+    return unless input == 'yes'
+
+    puts ':::: Going to backup the database'
+    sh "pg_dump fti_api_staging #{DateTime.now.to_date}.dump"
+
+    puts ':::: Stopping nginx'
+    sh 'sudo service nginx stop'
+
+    puts ':::: Creating and importing the database'
+    sh 'RAILS_ENV=staging bundle exec rails db:drop db:schema:load db:create db:seed'
+
+    puts ':::: Calculating documents percentages'
+    sh 'RAILS_ENV=staging bundle exec rails documents:percentages'
+
+    puts ':::: Calculating observation scores'
+    sh 'RAILS_ENV=staging bundle exec rails observation_scores:calculate'
+
+    puts 'Restart nginx'
+    sh 'sudo service nginx start'
+
+    puts 'Creating the permissions for the users'
+    Rake::Task['db:seed_fu'].invoke
+
+    puts 'Generating API Keys for all users'
+    User.find_each {|x| x.regenerate_api_key}
+
+  end
 end
