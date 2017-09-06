@@ -45,5 +45,15 @@ class ObservationReportUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  def exists?
+    !file.blank?
+  end
 
+  def original_filename
+    if file.present?
+      file.filename
+    else
+      super
+    end
+  end
 end

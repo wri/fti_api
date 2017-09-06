@@ -26,11 +26,11 @@ namespace :db do
   desc 'Rebuilds and imports the database'
   task :destroy_and_rebuild do
     puts 'Are you sure you want to destroy and rebuild the database? (type "yes" to continue)'
-    input = gets.chomp
+    input = STDIN.gets.chomp
     return unless input == 'yes'
 
     puts ':::: Going to backup the database'
-    sh "pg_dump fti_api_staging #{DateTime.now.to_date}.dump"
+    sh "pg_dump fti_api_staging > #{DateTime.now.to_date}.dump"
 
     puts ':::: Stopping nginx'
     sh 'sudo service nginx stop'
@@ -48,7 +48,7 @@ namespace :db do
     sh 'sudo service nginx start'
 
     puts 'Creating the permissions for the users'
-    Rake::Task['db:seed_fu'].invoke
+    Rake::Task['permissions:update'].invoke
 
     puts 'Generating API Keys for all users'
     User.find_each {|x| x.regenerate_api_key}
