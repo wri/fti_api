@@ -150,6 +150,38 @@ namespace :import do
     puts 'Government Subcategories loaded'
   end
 
+  desc 'Loads laws from a csv file'
+  task laws: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'laws.csv'))
+    puts '* Laws... *'
+    Law.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+        subcategory = Subcategory.find_by(name: data_row['category'])
+
+        unless subcategory.present?
+          puts "Couldn't find subcategory #{data_row['category']}"
+          next
+        end
+
+        written_infraction = data_row['written_infraction']
+        infraction         = data_row['infraction']
+        sanctions          = data_row['sanctions']
+        min_fine           = data_row['min_fine']
+        max_fine           = data_row['max_fine']
+        penal_servitude    = data_row['penal_servitude']
+        other_penalties    = data_row['other_penalties']
+        flegt              = data_row['flegt']
+
+        law = Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
+                        sanctions: sanctions, min_fine: min_fine, max_fine: max_fine, penal_servitude: penal_servitude,
+                        other_penalties: other_penalties, flegt: flegt).first_or_create
+      end
+
+      puts 'Laws loaded'
+    end
+  end
+
   desc 'Loads operator observations data from a csv file'
   task operator_observations: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_observations.csv'))
