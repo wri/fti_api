@@ -22,6 +22,7 @@ module V1
     has_one :operator
     has_one :government
     has_one :law
+    has_one :fmu
 
     after_create :add_own_observer
     before_save  :set_modified
