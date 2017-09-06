@@ -10,6 +10,6 @@
 #
 
 class ObservationReportObserver < ApplicationRecord
-  belongs_to :observer
-  belongs_to :observation_report
+  belongs_to :observer, touch: true
+  belongs_to :observation_report, touch: true
 end
