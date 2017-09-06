@@ -150,6 +150,38 @@ namespace :import do
     puts 'Government Subcategories loaded'
   end
 
+  desc 'Loads laws from a csv file'
+  task laws: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'laws.csv'))
+    puts '* Laws... *'
+    Law.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+        subcategory = Subcategory.find_by(name: data_row['category'])
+
+        unless subcategory.present?
+          puts "Couldn't find subcategory #{data_row['category']}"
+          next
+        end
+
+        written_infraction = data_row['written_infraction']
+        infraction         = data_row['infraction']
+        sanctions          = data_row['sanctions']
+        min_fine           = data_row['min_fine']
+        max_fine           = data_row['max_fine']
+        penal_servitude    = data_row['penal_servitude']
+        other_penalties    = data_row['other_penalties']
+        flegt              = data_row['flegt']
+
+        law = Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
+                        sanctions: sanctions, min_fine: min_fine, max_fine: max_fine, penal_servitude: penal_servitude,
+                        other_penalties: other_penalties, flegt: flegt).first_or_create
+      end
+
+      puts 'Laws loaded'
+    end
+  end
+
   desc 'Loads operator observations data from a csv file'
   task operator_observations: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_observations.csv'))
@@ -170,17 +202,23 @@ namespace :import do
         subcategory_name = data_row['illegality']
         subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pluck(:id).first if subcategory_name.present?
 
-        document_link = data_row['document_link']
-        document_name = data_row['document_name']
-        document = nil
+        report_link = data_row['document_link']
+        report_name = data_row['document_name']
+        report = nil
 
-        if document_name.present? && document_link.present?
+        if report_name.present? && report_link.present?
           begin
-            puts ".........Going to load #{document_name}"
-            document = ObservationDocument.new(name: document_name)
-            document.remote_attachment_url = document_link
-          rescue
-            puts "-------Couldn't load #{document_name}"
+            puts ".........Going to load #{report_name}"
+
+            report = ObservationReport.find_by(title: report_name)
+            if report.blank?
+              report = ObservationReport.new(title: report_name)
+              report.remote_attachment_url = report_link
+              report.observers = Observer.where(id: monitor_ids)
+              report.save
+            end
+          rescue Exception => e
+            puts "-------Couldn't load #{report_name}: #{e.inspect}"
           end
         end
 
@@ -209,7 +247,7 @@ namespace :import do
         fmu = Fmu.find_by(name: data_row['concession'])
         oo.update_attributes(fmu_id: fmu.id) if fmu.present?
 
-        oo.observation_documents << document if document.present?
+        oo.observation_report = report if report.present?
         oo.save
       end
     end
@@ -363,7 +401,8 @@ namespace :import do
       country = RequiredOperatorDocumentCountry.where(country_id: operator.country_id).any? ? operator.country_id : nil
       RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: operator.id).first_or_create do |odc|
-          odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+          #odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+          odc.update_column(:status, OperatorDocument.statuses[:doc_not_provided])
         end
       end
     end
@@ -374,7 +413,8 @@ namespace :import do
       RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
         if fmu.operator_id.present?
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: fmu.operator_id, fmu_id: fmu.id).first_or_create do |odf|
-            odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+            #odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+            odf.update_column(:status, OperatorDocument.statuses[:doc_not_provided])
           end
         end
       end
