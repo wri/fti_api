@@ -6,6 +6,32 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.3] - 2017-09-6
+### Technical details
+- Added `created-at` and `updated-at` for observations
+- Added `operator` and `monitor` to the users endpoint
+- Added filter by report id to observations endpoint
+- Added controller action to the JsonApi Resources context
+- Removed the default scope from observations
+- When creating an observation, the current monitor is added to its monitor list
+- Fmus included in `observations-tool` now have the geoJason
+- Added touch for observations/observers/reports/documents
+
+
+### Improvements
+- Observations tool
+  - Admins can see all observations
+
+### Aditions
+- Reports can be shared between monitors
+- Added `actions-taken` to observations
+- Observations save the user who last modified them
+- Laws
+
+### Backoffice
+- Showing all the fields in observations
+- Added Miscelaneous
+
 ## [0.9.2] - 2017-09-01
 ### Technical details
 - Changed documents to observation documents

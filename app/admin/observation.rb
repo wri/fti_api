@@ -14,7 +14,7 @@ ActiveAdmin.register Observation do
       end_of_association_chain.includes([:translations, [country: :translations],
                                          :severity, [operator: :translations],
                                          [subcategory: :translations], [observer_observations: [observer: :translations]],
-                                         [fmu: :translations], :user])
+                                         [fmu: :translations], :user, :observation_report])
     end
   end
 
@@ -67,6 +67,7 @@ ActiveAdmin.register Observation do
 
   index do
     selectable_column
+    column 'Active?', :is_active
     tag_column 'Status', :validation_status, sortable: true
     column :country, sortable: 'country_translations.name'
     column :fmu, sortable: 'fmu_translations.name'
@@ -74,13 +75,26 @@ ActiveAdmin.register Observation do
       o.observers.pluck(:name).join(', ')
     end
     column :operator, sortable: 'operator_translations.name'
+    column :government, sortable: 'government_translations.government_entity' do |o|
+      o.government.government_entity if o.government.present?
+    end
     column :subcategory, sortable: 'subcategory_translations.name'
+    column :law
     column :severity, sortable: 'severities.level' do |o|
       o.severity.level
     end
     column :publication_date, sortable: true
-    column 'Active?', :is_active
+    column :actions_taken
+    column :details
+    column :evidence
+    column :concern_opinion
+    column :report, sortable: 'observation_reports.title' do |o|
+      o.observation_report.title if o.observation_report.present?
+    end
     column :user, sortable: 'users.name'
+    column :modified_user
+    column :created_at
+    column :updated_at
     column('Approve') { |observation| link_to 'Approve', approve_admin_observation_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_observation_path(observation), method: :put}
     column('Review') { |observation| link_to 'Review', start_review_admin_observation_path(observation), method: :put}
@@ -103,7 +117,8 @@ ActiveAdmin.register Observation do
     f.inputs 'Country Details' do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
-      f.input :subcategory
+      f.input :subcategory, input_html: { disabled: true }
+      f.input :law, input_html: { disabled: true }
       f.input :severity, as: :select,
               collection: Severity.all.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
       f.input :fmu, input_html: { disabled: true }
@@ -116,6 +131,9 @@ ActiveAdmin.register Observation do
       f.input :pv
       f.input :lat
       f.input :lng
+      #f.input :law
+      f.input :observation_report, as: :select
+      #f.input :observation_documents
       f.input :validation_status
       f.input :is_active
     end
