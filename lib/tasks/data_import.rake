@@ -202,17 +202,23 @@ namespace :import do
         subcategory_name = data_row['illegality']
         subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pluck(:id).first if subcategory_name.present?
 
-        document_link = data_row['document_link']
-        document_name = data_row['document_name']
-        document = nil
+        report_link = data_row['document_link']
+        report_name = data_row['document_name']
+        report = nil
 
-        if document_name.present? && document_link.present?
+        if report_name.present? && report_link.present?
           begin
-            puts ".........Going to load #{document_name}"
-            document = ObservationDocument.new(name: document_name)
-            document.remote_attachment_url = document_link
-          rescue
-            puts "-------Couldn't load #{document_name}"
+            puts ".........Going to load #{report_name}"
+
+            report = ObservationReport.find_by(title: report_name)
+            if report.blank?
+              report = ObservationReport.new(title: report_name)
+              report.remote_attachment_url = report_link
+              report.observers = Observer.where(id: monitor_ids)
+              report.save
+            end
+          rescue Exception => e
+            puts "-------Couldn't load #{report_name}: #{e.inspect}"
           end
         end
 
@@ -241,7 +247,7 @@ namespace :import do
         fmu = Fmu.find_by(name: data_row['concession'])
         oo.update_attributes(fmu_id: fmu.id) if fmu.present?
 
-        oo.observation_documents << document if document.present?
+        oo.observation_report = report if report.present?
         oo.save
       end
     end
@@ -395,7 +401,8 @@ namespace :import do
       country = RequiredOperatorDocumentCountry.where(country_id: operator.country_id).any? ? operator.country_id : nil
       RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: operator.id).first_or_create do |odc|
-          odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+          #odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+          odc.update_column(:status, OperatorDocument.statuses[:doc_not_provided])
         end
       end
     end
@@ -406,7 +413,8 @@ namespace :import do
       RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
         if fmu.operator_id.present?
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: fmu.operator_id, fmu_id: fmu.id).first_or_create do |odf|
-            odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+            #odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+            odf.update_column(:status, OperatorDocument.statuses[:doc_not_provided])
           end
         end
       end
