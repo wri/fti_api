@@ -22,21 +22,23 @@
 class OperatorDocument < ApplicationRecord
   acts_as_paranoid #without_default_scope: true
 
-  belongs_to :operator, required: true
+  belongs_to :operator, required: true, touch: true
   belongs_to :required_operator_document, required: true
   belongs_to :fmu
   belongs_to :user
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
 
-  before_validation :set_expire_date, unless: :expire_date_changed?
   validates_presence_of :start_date, if: :attachment?
   validates_presence_of :expire_date, if: :attachment?
+
+  before_validation :set_expire_date, unless: :expire_date_changed?
+
   before_save :update_current, if: :current_changed?
   before_create :set_status
   before_create :delete_previous_pending_document
   after_save :update_operator_percentages, if: :status_changed?
-  after_save :touch_operator
+
   before_destroy :insure_unity
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
@@ -69,10 +71,6 @@ class OperatorDocument < ApplicationRecord
   scope :valid, -> { where(current: true, deleted_at: nil) }
 
   private
-
-  def touch_operator
-    operator.touch
-  end
 
   def insure_unity
     if self.current
