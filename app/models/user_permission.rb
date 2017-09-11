@@ -44,21 +44,21 @@ class UserPermission < ApplicationRecord
 
       case self.user_role
         when 'admin'
-          { admin: [{ manage: {} }], all: [{ manage: {} } ] }
+          { admin: { manage: {} }, all: { manage: {} } }
         when 'operator'
-          { user: [{ manage: { id: user.id } }] , operator_document: [{ manage: { operator_id: eval('self.') } }],
-            observation: [{ read: {}}]}
+          { user: { manage: { id: user.id }} , operator_document: { manage: { operator_id: eval('self.') }},
+            observation: { read: {}}}
         when 'ngo'
-          { user: [{ manage: { id: user.id } }], observation: [{ manage: { observers: { id: user.observer_id }}}, { create: {}}],
-            observation_report: [{cru: { observers: { id: user.observer_id}}}],
-            observation_documents: [{crud: { observers: { id: user.observer_id}}}],
-            category: [{cru: {}}], subcategory: [{cru: {}}], government: [{cru: {}}], species: [{cru: {}}], operator: [{cru: {}}],
-            law: [{ cru: {}}], severity: [{ cru: {}}], observer: [{ read: {} }, { update: {id: user.observer_id}}],
-            fmu: [{ read: {}}, update: {}], operator_document: [{ manage: { } }], required_operator_document_group: [{ cru: {} }],
-            required_operator_document: [{ cru: {}}]
+          { user: { manage: { id: user.id } }, observation: { manage: { observers: { id: user.observer_id }},  create: {}},
+            observation_report: { cru: { observers: { id: user.observer_id }}},
+            observation_documents: { crud: { observers: { id: user.observer_id }}},
+            category: { cru: {}}, subcategory: { cru: {}}, government: { cru: {}}, species: { cru: {}}, operator: { cru: {}},
+            law: { cru: {}}, severity: { cru: {}}, observer: { read: {} ,  update: { id: user.observer_id }},
+            fmu: { read: {}, update: {}}, operator_document: { manage: {} }, required_operator_document_group: { cru: {}},
+            required_operator_document: { cru: {}}
           }
         else
-          { user: [{ id: user.id }], observations: [{ read: {}}]}
+          { user: { id: user.id }, observations: { read: {}}}
       end
     end
 
