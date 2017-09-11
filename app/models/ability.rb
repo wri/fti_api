@@ -4,6 +4,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(user=nil)
+
+    alias_action :create, :read, :update, :destroy, to: :crud
+    alias_action :create, :read, :update, to: :cru
+
     if user
       if user.activated?
         #user.user_permission.permissions.each do |subject, actions_list|
