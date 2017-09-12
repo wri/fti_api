@@ -17,8 +17,8 @@ class ObservationDocument < ApplicationRecord
   mount_base64_uploader :attachment, ObservationDocumentUploader
   acts_as_paranoid
 
-  belongs_to :user, inverse_of: :documents, touch: true
-  belongs_to :observation, inverse_of: :documents, touch: true
+  belongs_to :user, inverse_of: :observation_documents, touch: true
+  belongs_to :observation, inverse_of: :observation_documents, touch: true
 
   after_destroy :remove_attachment_id_directory
 
