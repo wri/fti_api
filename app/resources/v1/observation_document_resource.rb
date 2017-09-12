@@ -2,9 +2,10 @@ module V1
   class ObservationDocumentResource < JSONAPI::Resource
     caching
 
-    attributes :name, :document_type, :user_id, :attachment, :operator_document, :created_at
+    attributes :name, :attachment, :created_at, :updated_at
 
     has_one :observation
+    has_one :user
 
     def custom_links(_)
       { self: nil }
