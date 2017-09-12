@@ -2,11 +2,11 @@ module V1
   class ObservationReportResource < JSONAPI::Resource
     caching
 
-    attributes :name, :publication_date, :created_at, :updated_at, :attachment
+    attributes :title, :publication_date, :created_at, :updated_at, :attachment
 
     has_many :observers
     has_one :user
-    has_one :observations
+    has_many :observations
 
     def custom_links(_)
       { self: nil }
