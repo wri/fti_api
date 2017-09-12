@@ -83,7 +83,7 @@ module V1
         if user.observer_id.present?
           Observation.own_with_inactive(user.observer_id)
         elsif user.user_permission.present? && user.user_permission.user_role == 'admin'
-          Observation
+          Observation.joins(:translations)
         else
           Observation.active
         end

@@ -74,8 +74,12 @@ class Observation < ApplicationRecord
 
   include Activable
 
-  scope :active, ->() { where(is_active: true) }
-  scope :own_with_inactive, ->(observer) { joins(:observers).where("observers.id = #{observer}") }
+  scope :active, ->() { joins(:translations).where(is_active: true) }
+  scope :own_with_inactive, ->(observer) {
+    joins('INNER JOIN "observer_observations" ON "observer_observations"."observation_id" = "observations"."id"
+INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_id" = "all_observers"."id"')
+        .where("all_observers.id = #{observer}")
+  }
 
   class << self
     def translated_types
