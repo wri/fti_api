@@ -265,8 +265,8 @@ namespace :import do
         country_names = data_row['countries'].split(',') if data_row['countries'].present?
         country_id    = Country.where(name: country_names).pluck(:id).first
 
-        monitor_name = data_row['monitor_name']
-        monitor_id   = Observer.where(name: monitor_name).pluck(:id).first if monitor_name.present?
+        monitor_names = data_row['monitor_name'].split('/')
+        monitor_ids   = Observer.where(name: monitor_names).pluck(:id) if monitor_names.any?
 
         operator_name = data_row['operator_name']
         operator_id   = Operator.where(name: operator_name, country_id: country_id).first_or_create.id if operator_name.present?
@@ -277,15 +277,36 @@ namespace :import do
         subcategory_name = data_row['governance_problem']
         subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:government]).pluck(:id).first if subcategory_name.present?
 
+        report_link = data_row['document_link']
+        report_name = data_row['document_name']
+        report = nil
 
+        if report_name.present? && report_link.present?
+          begin
+            puts ".........Going to load #{report_name}"
+
+            report = ObservationReport.find_by(title: report_name)
+            if report.blank?
+              report = ObservationReport.new(title: report_name)
+              report.remote_attachment_url = report_link
+              report.observers = Observer.where(id: monitor_ids)
+              report.save
+            end
+          rescue Exception => e
+            puts "-------Couldn't load #{report_name}: #{e.inspect}"
+          end
+        end
+
+
+        date = data_row['publication_date']
         data_go = {}
         data_go[:observation_type]  = Observation.observation_types[:government]
-        data_go[:publication_date]  = DateTime.strptime(data_row['publication_date'],'%y/%m/%d')
+        data_go[:publication_date]  = date.count(' ') > 0 ? Date.parse(date) : Date.parse("Jan #{date}")
         data_go[:country_id]        = country_id
         data_go[:details]           = data_row['description']
         data_go[:evidence]          = data_row['evidence']
         data_go[:concern_opinion]   = data_row['concern_opinion']
-        data_go[:observer_ids]      = monitor_id      if monitor_id.present?
+        data_go[:observer_ids]      = monitor_ids     if monitor_ids.present?
         data_go[:operator_id]       = operator_id     if operator_id.present?
         data_go[:government_id]     = government_id   if government_id.present?
         data_go[:subcategory_id]    = subcategory_id  if subcategory_id.present?
@@ -294,6 +315,9 @@ namespace :import do
         go = Observation.create(data_go)
         severity_id = go.subcategory.severities.find_by(level: data_row['severities']).id
         go.update_attributes!(severity_id: severity_id)
+
+        go.observation_report = report if report.present?
+        go.save
       end
     end
     puts 'Government observations loaded'

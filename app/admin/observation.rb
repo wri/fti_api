@@ -95,9 +95,11 @@ ActiveAdmin.register Observation do
     column :modified_user
     column :created_at
     column :updated_at
-    column('Approve') { |observation| link_to 'Approve', approve_admin_observation_path(observation), method: :put}
-    column('Reject') { |observation| link_to 'Reject', reject_admin_observation_path(observation), method: :put}
-    column('Review') { |observation| link_to 'Review', start_review_admin_observation_path(observation), method: :put}
+    column('Actions') do |observation|
+      a 'Approve', href: approve_admin_observation_path(observation),      'data-method': :put
+      a 'Reject',  href: reject_admin_observation_path(observation),       'data-method': :put
+      a 'Review',  href: start_review_admin_observation_path(observation), 'data-method': :put
+    end
     actions
   end
 
