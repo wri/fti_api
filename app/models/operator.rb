@@ -20,6 +20,8 @@
 #  score                              :integer
 #  obs_per_visit                      :float
 #  fa_id                              :string
+#  address                            :string
+#  website                            :string
 #
 
 class Operator < ApplicationRecord
@@ -44,6 +46,7 @@ class Operator < ApplicationRecord
   after_create :create_documents
 
   validates :name, presence: true
+  validates :website, url: true, if: lambda {|x| x.website.present?}
 
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)

@@ -19,6 +19,8 @@
 #  score                              :integer
 #  obs_per_visit                      :float
 #  fa_id                              :string
+#  address                            :string
+#  website                            :string
 #
 
 FactoryGirl.define do
