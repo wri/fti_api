@@ -36,7 +36,7 @@ namespace :db do
     sh 'sudo service nginx stop'
 
     puts ':::: Creating and importing the database'
-    sh 'RAILS_ENV=staging bundle exec rails db:drop db:schema:load db:create db:seed'
+    sh 'RAILS_ENV=staging bundle exec rails db:drop db:create db:schema:load db:seed'
 
     puts ':::: Calculating documents percentages'
     sh 'RAILS_ENV=staging bundle exec rails documents:percentages'
