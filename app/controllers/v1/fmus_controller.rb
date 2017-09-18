@@ -9,13 +9,20 @@ module V1
 
     def index
       fmus = Fmu.fetch_all(options_filter)
-      render json: build_json(fmus)
+
+      if params[:format].present? && params[:format].include?('geojson')
+        render json: build_json(fmus)
+      else
+        fmus_resources = fmus.map {|x| FmuResource.new(x, context)}
+        render json: JSONAPI::ResourceSerializer.new(FmuResource)
+                         .serialize_to_hash(fmus_resources)
+      end
     end
 
     private
 
     def options_filter
-      params.permit(:country_ids, :operator_ids)
+      params.permit(:country_ids, :operator_ids, :free)
     end
 
     def build_json(fmus)

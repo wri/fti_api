@@ -28,15 +28,18 @@ class Fmu < ApplicationRecord
 
   scope :filter_by_countries,  ->(country_ids)  { where(country_id: country_ids.split(',')) }
   scope :filter_by_operators,  ->(operator_ids) { where(operator_id: operator_ids.split(',')) }
+  scope :filter_by_free,       ->()             { where operator_id: nil}
 
   class << self
     def fetch_all(options)
       country_ids  = options['country_ids'] if options.present? && options['country_ids'].present? && ValidationHelper.ids?(options['country_ids'])
       operator_ids  = options['operator_ids'] if options.present? && options['operator_ids'].present? && ValidationHelper.ids?(options['operator_ids'])
+      free = options.present? && options['free'] == 'true'
 
       fmus = includes([:country, :operator])
       fmus = fmus.filter_by_countries(country_ids) if country_ids.present?
       fmus = fmus.filter_by_operators(operator_ids) if operator_ids.present?
+      fmus = fmus.filter_by_free if free
       fmus
     end
   end

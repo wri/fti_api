@@ -5,10 +5,11 @@ class Ability
 
   def initialize(user=nil)
 
-    alias_action :create, :read, :update, :destroy, to: :crud
-    alias_action :read, :update, :destroy, to: :rud
-    alias_action :create, :read, :update, to: :cru
-    alias_action :read, :update, to: :ru
+    alias_action :create, :read, :update, :destroy,       to: :crud
+    alias_action :read, :update, :destroy,                to: :rud
+    alias_action :create, :read, :update,                 to: :cru
+    alias_action :read, :update,                          to: :ru
+    alias_action :delete, :update,                        to: :ud
 
     if user
       if user.activated?
@@ -25,7 +26,8 @@ class Ability
       end
     end
     can :read, [Country, Observer, Operator,
-                Fmu, Category, OperatorDocument, RequiredOperatorDocument, RequiredOperatorDocumentGroup]
+                Fmu, Category, OperatorDocument, RequiredOperatorDocument, RequiredOperatorDocumentGroup,
+                ObservationReport, ObservationDocument]
     can :read, Observation, is_active: true
     can :create, Operator, is_active: false
   end
