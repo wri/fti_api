@@ -8,6 +8,7 @@ class ApiController < ActionController::API
   include JSONAPI::ActsAsResourceController
 
   def context
+    puts "--------------- #{params[:app]}"
     {current_user: current_user, app: params[:app], action: params[:action], locale: (params[:locale] || I18n.default_locale)}
   end
 
