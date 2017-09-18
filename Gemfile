@@ -45,6 +45,9 @@ gem 'activerecord-import'
 gem 'globalize',                   github: 'globalize/globalize'
 gem 'seed-fu'
 
+# Validation
+gem 'valid_url'
+
 # Auth and Omniauth
 gem 'bcrypt'
 gem 'cancancan'
