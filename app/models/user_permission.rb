@@ -50,8 +50,8 @@ class UserPermission < ApplicationRecord
             observation: { read: {}}}
         when 'ngo'
           { user: { manage: { id: user.id } }, observation: { manage: { observers: { id: user.observer_id }},  create: {}},
-            observation_report: { ru: { observers: { id: user.observer_id }}, create: {}},
-            observation_documents: { rud: { observers: { id: user.observer_id }}, create: {}},
+            observation_report: { update: { observers: { id: user.observer_id }}, create: {}},
+            observation_documents:  { ud: { observers: { id: user.observer_id }}, create: {}},
             category: { cru: {}}, subcategory: { cru: {}}, government: { cru: {}}, species: { cru: {}}, operator: { cru: {}},
             law: { cru: {}}, severity: { cru: {}}, observer: { read: {} ,  update: { id: user.observer_id }},
             fmu: { read: {}, update: {}}, operator_document: { manage: {} }, required_operator_document_group: { cru: {}},
