@@ -12,8 +12,6 @@ module V1
     end
 
     def fetchable_fields
-      Rails.logger.debug "--------#{context[:app]}"
-      puts "<<<<<< #{context[:app]}"
       if (context[:app] != 'observations-tool')
         super - [:geojson]
       else
