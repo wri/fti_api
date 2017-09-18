@@ -41,6 +41,6 @@ class Ability
     end
     can :read, [Country, Observer, Operator,
                 Fmu, Category, OperatorDocument, RequiredOperatorDocument, RequiredOperatorDocumentGroup]
-    can :read, Observation, active: true
+    can :read, Observation, is_active: true
   end
 end
