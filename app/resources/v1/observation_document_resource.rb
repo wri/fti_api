@@ -7,6 +7,8 @@ module V1
     has_one :observation
     has_one :user
 
+    filters :observation_id, :name, :user_id
+
     def custom_links(_)
       { self: nil }
     end
