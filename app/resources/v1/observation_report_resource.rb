@@ -20,7 +20,7 @@ module V1
 
     def add_observers
       begin
-        @model.observers = @model.observation.observers if @model.observation
+        @model.observer_ids = @model.observations.map(&:observers).map(&:ids).flatten if @model.observations.any?
         @model.save
       rescue Exception => e
         Rails.logger.warn "ObservationReport created without observers: #{e.inspect}"

@@ -70,7 +70,8 @@ class Observation < ApplicationRecord
   before_save   :set_active_status
   after_create  :update_operator_scores
   after_destroy :update_operator_scores
-  after_save    :update_operator_scores, if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
+  after_save    :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
+  after_save    :update_reports_observers, if: 'observation_report_id_changed?'
 
   include Activable
 
@@ -108,5 +109,11 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def set_active_status
     self.is_active = self.validation_status == 'Approved' ? true : false
     nil
+  end
+
+  def update_reports_observers
+    return unless observation_report.present?
+    observation_report.observer_ids =
+        observation_report.observations.map(&:observers).map(&:ids).flatten
   end
 end
