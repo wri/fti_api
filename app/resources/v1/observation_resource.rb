@@ -55,12 +55,18 @@ module V1
       { self: nil }
     end
 
+    # This is called in an after save cause in the before save, there are still no relationships present
+    # meaning that if there are more users, they'll override the current one
+
     def add_own_observer
       begin
         user = context[:current_user]
         @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
         @model.user_id = user.id
         @model.save
+        # This is added because of the order of the callbacks in JAR
+        @model.update_reports_observers
+
       rescue Exception => e
         Rails.logger.warn "Observation created without user: #{e.inspect}"
       end

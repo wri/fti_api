@@ -100,6 +100,13 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     super + '-' + Globalize.locale.to_s
   end
 
+  def update_reports_observers
+    return unless observation_report.present?
+    observation_report.observer_ids =
+        observation_report.observations.map(&:observers).map(&:ids).flatten
+  end
+
+
   private
 
   def update_operator_scores
@@ -109,11 +116,5 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def set_active_status
     self.is_active = self.validation_status == 'Approved' ? true : false
     nil
-  end
-
-  def update_reports_observers
-    return unless observation_report.present?
-    observation_report.observer_ids =
-        observation_report.observations.map(&:observers).map(&:ids).flatten
   end
 end
