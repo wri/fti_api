@@ -14,10 +14,12 @@
 #  subcategory_id     :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  country_id         :integer
 #
 
 class Law < ApplicationRecord
   belongs_to :subcategory,  required: true
+  belongs_to :country,      required: true
   has_many   :observations, inverse_of: :laws
 
   validates :min_fine, numericality: { greater_than_or_equal_to: 0 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170918115530) do
+ActiveRecord::Schema.define(version: 20170920092303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,16 +85,6 @@ ActiveRecord::Schema.define(version: 20170918115530) do
     t.boolean  "is_active",        default: false, null: false
   end
 
-  create_table "country_subcategories", force: :cascade do |t|
-    t.integer  "country_id"
-    t.integer  "subcategory_id"
-    t.text     "law"
-    t.text     "penalty"
-    t.text     "apv"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
   create_table "country_translations", force: :cascade do |t|
     t.integer  "country_id",  null: false
     t.string   "locale",      null: false
@@ -156,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170918115530) do
     t.integer  "subcategory_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "country_id"
   end
 
   create_table "observation_documents", force: :cascade do |t|
@@ -459,8 +450,7 @@ ActiveRecord::Schema.define(version: 20170918115530) do
 
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
-  add_foreign_key "country_subcategories", "countries"
-  add_foreign_key "country_subcategories", "subcategories"
+  add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
