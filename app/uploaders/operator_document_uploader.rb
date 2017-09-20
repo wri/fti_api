@@ -8,7 +8,7 @@ class OperatorDocumentUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w(pdf doc htm html docx txt csv xml)
+    %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
   end
 
   def exists?
