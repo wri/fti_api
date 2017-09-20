@@ -47,6 +47,7 @@ class Operator < ApplicationRecord
 
   validates :name, presence: true
   validates :website, url: true, if: lambda {|x| x.website.present?}
+  validates :operator_type, inclusion: { in: :types }
 
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
@@ -71,7 +72,8 @@ class Operator < ApplicationRecord
     end
 
     def types
-      %w(Logging\ Company Artisanal Sawmill CommunityForest ARB1327 PalmOil Trader Company).freeze
+      ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
+      'Sawmill', 'Other', 'Unknown'].freeze
     end
 
     def translated_types
