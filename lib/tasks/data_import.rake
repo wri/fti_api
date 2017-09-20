@@ -388,6 +388,35 @@ namespace :import do
     puts 'Finished FMUs'
   end
 
+  # Adds the FA id to the Operator, and checks the FMUs
+  desc 'Loads operator ids and fmus'
+  task operator_id_fmus: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_id_fmus.csv'))
+    puts '* Operator Ids and Fmus... *'
+
+    Operator.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+
+        begin
+        operator = Operator.find_by(name: data_row['operator'])
+        if operator.fa_id.blank?
+          operator.fa_id = data_row['id']
+          operator.save
+        end
+
+        fmu = Fmu.find_by(name: data_row['fmu'])
+        if fmu.operator_id.blank?
+          fmu.operator_id = operator.id
+          fmu.save
+        end
+        rescue Exception => e
+          puts "Error in operator id fmu: #{e.inspect}"
+        end
+      end
+    end
+  end
+
 
   # This task is not to be used in the import
 
