@@ -9,7 +9,7 @@ class Ability
     alias_action :read, :update, :destroy,                to: :rud
     alias_action :create, :read, :update,                 to: :cru
     alias_action :read, :update,                          to: :ru
-    alias_action :delete, :update,                        to: :ud
+    alias_action :destroy, :update,                       to: :ud
 
     if user
       if user.activated?

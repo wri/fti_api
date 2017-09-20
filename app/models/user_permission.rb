@@ -49,12 +49,21 @@ class UserPermission < ApplicationRecord
           { user: { manage: { id: user.id }} , operator_document: { manage: { operator_id: eval('self.') }},
             observation: { read: {}}}
         when 'ngo'
-          { user: { manage: { id: user.id } }, observation: { manage: { observers: { id: user.observer_id }},  create: {}},
+          { user: { manage: { id: user.id } },
+            observation: { manage: { observers: { id: user.observer_id }},  create: {}},
             observation_report: { update: { observers: { id: user.observer_id }}, create: {}},
-            observation_documents:  { ud: { observers: { id: user.observer_id }}, create: {}},
-            category: { cru: {}}, subcategory: { cru: {}}, government: { cru: {}}, species: { cru: {}}, operator: { cru: {}},
-            law: { cru: {}}, severity: { cru: {}}, observer: { read: {} ,  update: { id: user.observer_id }},
-            fmu: { read: {}, update: {}}, operator_document: { manage: {} }, required_operator_document_group: { cru: {}},
+            observation_documents:  { ud: { observation: { is_active: false, observers: { id: user.observer_id }}}, create: {}},
+            category: { cru: {}},
+            subcategory: { cru: {}},
+            government: { cru: {}},
+            species: { cru: {}},
+            operator: { cru: {}},
+            law: { cru: {}},
+            severity: { cru: {}},
+            observer: { read: {} ,  update: { id: user.observer_id }},
+            fmu: { read: {}, update: {}},
+            operator_document: { manage: {} },
+            required_operator_document_group: { cru: {}},
             required_operator_document: { cru: {}}
           }
         else
