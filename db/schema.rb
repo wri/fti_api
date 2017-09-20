@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920092303) do
+ActiveRecord::Schema.define(version: 20170920115213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 20170920092303) do
     t.integer  "max_fine"
     t.string   "penal_servitude"
     t.text     "other_penalties"
-    t.text     "flegt"
+    t.text     "apv"
     t.integer  "subcategory_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
