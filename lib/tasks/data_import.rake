@@ -249,8 +249,10 @@ namespace :import do
           end
         end
 
-
-        raise Exception.new("Couldn't load |#{subcategory_name}|") unless subcategory_id.present?
+        unless subcategory_id.present?
+          puts "Couldn't load subcategory ::#{subcategory_name}::"
+          next
+        end
 
         date = data_row['publication_date']
         data_oo = {}
