@@ -28,8 +28,9 @@ module V1
     after_create :add_own_observer
     before_save  :set_modified
 
-    filters :id, :observation_type, :fmu_id, :country_id, :fmu_id,
-            :publication_date, :observer_id, :subcategory_id, :years
+    filters :id, :observation_type, :fmu_id, :country_id,
+            :publication_date, :observer_id, :subcategory_id, :years,
+            :observation_report, :law, :operator, :government, :subcategory
 
     filter :category_id, apply: ->(records, value, _options) {
       records.joins(:subcategory).where('subcategories.category_id = ?', value[0].to_i)
