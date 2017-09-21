@@ -10,7 +10,7 @@
 #  max_fine           :integer
 #  penal_servitude    :string
 #  other_penalties    :text
-#  flegt              :text
+#  apv                :text
 #  subcategory_id     :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
