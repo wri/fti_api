@@ -5,6 +5,7 @@ module V1
                :penal_servitude, :other_pernalties, :flegt
 
     has_one :subcategory
+    has_one :country
     has_many   :observations
 
     def custom_links(_)

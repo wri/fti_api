@@ -3,6 +3,22 @@ require 'csv'
 namespace :import do
   I18n.locale = :en
 
+
+  desc 'Loads categories data from a csv file'
+  task categories: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'categories.csv'))
+    puts '* Loading Operator Categories... *'
+    Category.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+
+        Category.where(name: data_row['name'], category_type: Category.category_types[:operator]).first_or_create
+      end
+    end
+    puts 'Categories loaded'
+  end
+
+
   desc 'Loads species data from a csv file'
   task species: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'cites_listings.csv'))
@@ -38,6 +54,46 @@ namespace :import do
     puts 'Species loaded'
   end
 
+
+  desc 'Import Operator Documents Types'
+  task operator_document_types: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_document_types.csv'))
+
+    puts '* Operator document types... *'
+    country_congo = Country.find_by(iso: 'COG').id
+    country_drc = Country.find_by(iso: 'COD').id
+    country_generic = nil
+
+    rodg = nil
+
+    RequiredOperatorDocumentGroup.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        data_row = row.to_h
+        if data_row['group_en'].present?
+          rodg = RequiredOperatorDocumentGroup.where(name: data_row['group_en']).first
+          if rodg.blank?
+            rodg =  RequiredOperatorDocumentGroup.new(name: data_row['group_en'])
+            rodg.update_attributes!(name: data_row['group_fr'], locale: :fr)
+          end
+        end
+
+        %w(generic congo drc).each do |country|
+          %w(country fmu).each do |doc_type|
+            rod_name = data_row["#{country}_#{doc_type}"]
+            if rod_name.present?
+              RequiredOperatorDocument.where(required_operator_document_group_id: rodg.id, valid_period: 365,
+                                             name: rod_name, type: "RequiredOperatorDocument#{doc_type.capitalize}",
+                                             country_id: eval("country_#{country}")).first_or_create!
+
+            end
+          end
+        end
+      end
+    end
+    puts ' Finished operator document types'
+  end
+
+
   desc 'Loads monitors data from a csv file'
   task monitors: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'monitors.csv'))
@@ -52,82 +108,84 @@ namespace :import do
     puts 'Monitors loaded'
   end
 
+
   desc 'Loads operators data from a csv file'
   task operators: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operators.csv'))
     puts '* Loading Operators... *'
     Operator.transaction do
-      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
         country = Country.find_by(name: data_row['country'])
-        operator = Operator.where(name: data_row['name']).first_or_create
-        operator.operator_type = data_row['operator_type']
+        operator = Operator.where(name: data_row['operator']).first_or_create
+        operator.operator_type = data_row['type']
         operator.country = country
+        operator.fa_id = data_row['id']
         operator.save!
       end
     end
     puts 'Operators loaded'
   end
 
-  desc 'Loads operator categories data from a csv file'
-  task categories: :environment do
-    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'categories.csv'))
-    puts '* Loading Operator Categories... *'
-    Category.transaction do
-      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
-        data_row = row.to_h
-
-        Category.where(name: data_row['name'], category_type: Category.category_types[:operator]).first_or_create
-      end
-    end
-    puts 'Operator Categories loaded'
-  end
 
   desc 'Loads subcategories of type operator'
   task subcategory_operators: :environment do
-    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'annex_operators.csv'))
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'subcategory_operators.csv'))
     puts '* Subcategories operators... *'
     Subcategory.transaction do
 
       congo = Country.find_by(name: 'Congo')
       drc = Country.find_by(name: 'Democratic Republic of the Congo')
       cameroon = Country.find_by(name: 'Cameroon')
-      civ = Country.find_by(name: 'Cote d\'Ivoire')
+      ci = Country.find_by(name: 'Cote d\'Ivoire')
 
-      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+      subcategory = nil
+
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        category = Category.where(name: data_row['category_name'], category_type: Category.category_types[:operator]).first_or_create!
-        subcategory = Subcategory.where(name: data_row['illegality'],
-                                        subcategory_type: Subcategory.subcategory_types[:operator],
-                                        category_id: category.id).first_or_create!
-        subcategory.update_attributes(name: data_row['illegality_fr'], locale: :fr)
+        if data_row['illegality'].present?
+          category = Category.where(name: data_row['category_name'], category_type: Category.category_types[:operator]).first_or_create!
+          subcategory = Subcategory.where(name: data_row['illegality'],
+                                          subcategory_type: Subcategory.subcategory_types[:operator],
+                                          category_id: category.id).first_or_create!
+          subcategory.update_attributes(name: data_row['illegality_fr'], locale: :fr)
 
-        if subcategory.severities.empty?
-          (0..3).each do |s|
-            subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+          if subcategory.severities.empty?
+            (0..3).each do |s|
+              subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+            end
           end
+
+          subcategory.save!
         end
 
+        %w(congo drc cameroon ci).each do |country|
+          written_infraction = data_row["#{country} written_infraction"]
+          infraction         = data_row["#{country} infraction"]
+          sanctions          = data_row["#{country} sanctions"]
+          min_fine           = data_row["#{country} min_fine"]
+          max_fine           = data_row["#{country} max_fine"]
+          penal_servitude    = data_row["#{country} penal_servitude"]
+          other_penalties    = data_row["#{country} other_penalties"]
+          apv                = data_row["#{country} apv"]
 
-        subcategory.save!
-
-        %w(congo drc cameroon civ).each do |country|
-          cs = CountrySubcategory.first_or_create(subcategory_id: subcategory.id, country_id: eval("#{country}.id"))
-          cs.law = data_row["#{country}_law"]
-          cs.penalty = data_row["#{country}_penalties"]
-          cs.apv = data_row["#{country}_apv"]
-          cs.save! if cs.law.present? || cs.penalty.present?
+          if written_infraction.present? || infraction.present?
+            law = Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
+                            sanctions: sanctions, min_fine: min_fine, max_fine: max_fine, penal_servitude: penal_servitude,
+                            other_penalties: other_penalties, apv: apv, country_id: eval("#{country}.id")).first_or_create
+          end
         end
      end
     end
     puts 'Operator Subcategories loaded'
   end
 
+
   desc 'Loads the government subcategories data from a csv file'
   task subcategory_governments: :environment do
-    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'annex_governance.csv'))
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'subcategory_governance.csv'))
     puts '* Government Subcategories ... *'
     Subcategory.transaction do
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
@@ -150,37 +208,6 @@ namespace :import do
     puts 'Government Subcategories loaded'
   end
 
-  desc 'Loads laws from a csv file'
-  task laws: :environment do
-    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'laws.csv'))
-    puts '* Laws... *'
-    Law.transaction do
-      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
-        data_row = row.to_h
-        subcategory = Subcategory.find_by(name: data_row['category'])
-
-        unless subcategory.present?
-          puts "Couldn't find subcategory #{data_row['category']}"
-          next
-        end
-
-        written_infraction = data_row['written_infraction']
-        infraction         = data_row['infraction']
-        sanctions          = data_row['sanctions']
-        min_fine           = data_row['min_fine']
-        max_fine           = data_row['max_fine']
-        penal_servitude    = data_row['penal_servitude']
-        other_penalties    = data_row['other_penalties']
-        flegt              = data_row['flegt']
-
-        law = Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
-                        sanctions: sanctions, min_fine: min_fine, max_fine: max_fine, penal_servitude: penal_servitude,
-                        other_penalties: other_penalties, flegt: flegt).first_or_create
-      end
-
-      puts 'Laws loaded'
-    end
-  end
 
   desc 'Loads operator observations data from a csv file'
   task operator_observations: :environment do
@@ -223,7 +250,7 @@ namespace :import do
         end
 
 
-        next unless subcategory_id.present?
+        raise Exception.new("Couldn't load |#{subcategory_name}|") unless subcategory_id.present?
 
         date = data_row['publication_date']
         data_oo = {}
@@ -254,6 +281,7 @@ namespace :import do
     puts 'Operator observations loaded'
   end
 
+  # This also creates the government entities
   desc 'Loads government observations data from a csv file'
   task government_observations: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'governance_observations.csv'))
@@ -312,7 +340,7 @@ namespace :import do
         data_go[:subcategory_id]    = subcategory_id  if subcategory_id.present?
         data_go[:country_id] = country_id if country_id.present?
 
-        go = Observation.create(data_go)
+        go = Observation.create!(data_go)
         severity_id = go.subcategory.severities.find_by(level: data_row['severities']).id
         go.update_attributes!(severity_id: severity_id)
 
@@ -321,22 +349,6 @@ namespace :import do
       end
     end
     puts 'Government observations loaded'
-  end
-
-
-  desc 'Loads operators\' countries from a csv file'
-  task operator_countries: :environment do
-    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'companies.csv'))
-    puts '* Operator countries... *'
-    Operator.transaction do
-      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
-        data_row = row.to_h
-
-        Operator.where(name: data_row['name'],
-                       country: Country.find_by(name: data_row['country']),
-                       fa_id: data_row['id']).first_or_create
-      end
-    end
   end
 
 
@@ -377,44 +389,37 @@ namespace :import do
     puts 'Finished FMUs'
   end
 
+  # Adds the FA id to the Operator, and checks the FMUs
+  desc 'Loads operator ids and fmus'
+  task operator_id_fmus: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_id_fmus.csv'))
+    puts '* Operator Ids and Fmus... *'
 
-  desc 'Import Operator Documents Types'
-  task operator_document_types: :environment do
-    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_document_types.csv'))
-
-    puts '* Operator document types... *'
-    country_congo = Country.find_by(iso: 'COG').id
-    country_drc = Country.find_by(iso: 'COD').id
-    country_generic = nil
-
-    rodg = nil
-
-    RequiredOperatorDocumentGroup.transaction do
+    Operator.transaction do
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
-        if data_row['group_en'].present?
-          rodg = RequiredOperatorDocumentGroup.where(name: data_row['group_en']).first
-          if rodg.blank?
-            rodg =  RequiredOperatorDocumentGroup.new(name: data_row['group_en'])
-            rodg.update_attributes!(name: data_row['group_fr'], locale: :fr)
-          end
+
+        operator = Operator.find_by(name: data_row['operator'])
+        if operator.fa_id.blank?
+          operator.fa_id = data_row['id']
+          operator.save
         end
 
-        %w(generic congo drc).each do |country|
-          %w(country fmu).each do |doc_type|
-            rod_name = data_row["#{country}_#{doc_type}"]
-            if rod_name.present?
-              RequiredOperatorDocument.where(required_operator_document_group_id: rodg.id, valid_period: 365,
-                                             name: rod_name, type: "RequiredOperatorDocument#{doc_type.capitalize}",
-                                             country_id: eval("country_#{country}")).first_or_create!
-
-            end
+        begin
+          fmu = Fmu.joins(:translations).where("name like '%#{data_row['fmu']}%'").first
+          if fmu.operator_id.blank?
+            fmu.operator_id = operator.id
+            fmu.save
           end
+        rescue Exception => e
+          puts "Error in operator id fmu: #{e.inspect} - #{data_row['fmu']}"
         end
       end
     end
-    puts ' Finished operator document types'
   end
+
+
+  # This task is not to be used in the import
 
   desc 'Create Operator Documents'
   task operator_documents: :environment do
