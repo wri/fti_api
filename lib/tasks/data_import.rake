@@ -118,7 +118,7 @@ namespace :import do
         data_row = row.to_h
 
         country = Country.find_by(name: data_row['country'])
-        operator = Operator.where(name: data_row['name']).first_or_create
+        operator = Operator.where(name: data_row['operator']).first_or_create
         operator.operator_type = data_row['type']
         operator.country = country
         operator.fa_id = data_row['id']
@@ -161,7 +161,6 @@ namespace :import do
           subcategory.save!
         end
 
-        ## TODO REDO
         %w(congo drc cameroon ci).each do |country|
           written_infraction = data_row["#{country} written_infraction"]
           infraction         = data_row["#{country} infraction"]
@@ -172,9 +171,11 @@ namespace :import do
           other_penalties    = data_row["#{country} other_penalties"]
           apv                = data_row["#{country} apv"]
 
-          law = Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
-                          sanctions: sanctions, min_fine: min_fine, max_fine: max_fine, penal_servitude: penal_servitude,
-                          other_penalties: other_penalties, apv: apv, country_id: eval("#{country}.id")).first_or_create
+          if written_infraction.present? || infraction.present?
+            law = Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
+                            sanctions: sanctions, min_fine: min_fine, max_fine: max_fine, penal_servitude: penal_servitude,
+                            other_penalties: other_penalties, apv: apv, country_id: eval("#{country}.id")).first_or_create
+          end
         end
      end
     end
@@ -197,7 +198,7 @@ namespace :import do
 
         subcategory.update_attributes(name: data_row['governance_problem_fr'], locale: :fr)
         if subcategory.severities.empty?
-          (1..3).each do |s|
+          (0..3).each do |s|
             subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
           end
         end
@@ -249,7 +250,7 @@ namespace :import do
         end
 
 
-        next unless subcategory_id.present?
+        raise Exception.new("Couldn't load |#{subcategory_name}|") unless subcategory_id.present?
 
         date = data_row['publication_date']
         data_oo = {}
@@ -339,7 +340,7 @@ namespace :import do
         data_go[:subcategory_id]    = subcategory_id  if subcategory_id.present?
         data_go[:country_id] = country_id if country_id.present?
 
-        go = Observation.create(data_go)
+        go = Observation.create!(data_go)
         severity_id = go.subcategory.severities.find_by(level: data_row['severities']).id
         go.update_attributes!(severity_id: severity_id)
 
@@ -398,20 +399,20 @@ namespace :import do
       CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
         data_row = row.to_h
 
-        begin
         operator = Operator.find_by(name: data_row['operator'])
         if operator.fa_id.blank?
           operator.fa_id = data_row['id']
           operator.save
         end
 
-        fmu = Fmu.find_by(name: data_row['fmu'])
-        if fmu.operator_id.blank?
-          fmu.operator_id = operator.id
-          fmu.save
-        end
+        begin
+          fmu = Fmu.joins(:translations).where("name like '%#{data_row['fmu']}%'").first
+          if fmu.operator_id.blank?
+            fmu.operator_id = operator.id
+            fmu.save
+          end
         rescue Exception => e
-          puts "Error in operator id fmu: #{e.inspect}"
+          puts "Error in operator id fmu: #{e.inspect} - #{data_row['fmu']}"
         end
       end
     end

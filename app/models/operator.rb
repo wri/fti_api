@@ -32,6 +32,9 @@ class Operator < ApplicationRecord
 
   enum certification: { fsc: 0, pefc: 1, olb: 2 }
 
+  TYPES = ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
+           'Sawmill', 'Other', 'Unknown'].freeze
+
   belongs_to :country, inverse_of: :operators, optional: true
 
   has_many :observations, -> { active },  inverse_of: :operator
@@ -47,7 +50,7 @@ class Operator < ApplicationRecord
 
   validates :name, presence: true
   validates :website, url: true, if: lambda {|x| x.website.present?}
-  validates :operator_type, inclusion: { in: :types }
+  validates :operator_type, inclusion: { in: TYPES }
 
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
@@ -72,8 +75,7 @@ class Operator < ApplicationRecord
     end
 
     def types
-      ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
-      'Sawmill', 'Other', 'Unknown'].freeze
+      TYPES
     end
 
     def translated_types
