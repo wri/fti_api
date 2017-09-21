@@ -15,7 +15,6 @@ class Subcategory < ApplicationRecord
 
   belongs_to :category
   has_many :severities, dependent: :destroy
-  has_many :country_subcategories, dependent: :destroy
   has_many :observations, inverse_of: :subcategory, dependent: :destroy
   has_many :laws, inverse_of: :subcategory
 

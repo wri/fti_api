@@ -1,182 +1,350 @@
-country,name,operator_type
-Brazil,Agropecuária Vitória Régia SA,Logging company
-Brazil,Estate of Violeta Elizabeth Hagmann ,Estate
-Brazil,Rainbow Trading Importação e Exportação LTDA,Sawmill
-Brazil,Tecniflora Ltd,Logging company
-Brazil,Virola-Jatobá Sustainable Development Project (sub-contract with Vitória Régia Exportadora and Bortolanza),Logging company
-Cambodia,Try Pheap Group,Logging company
-Cameroon,Abong Mbang & Fils,Artisanal
-Cameroon,AFRIGRUM,Logging company
-Cameroon,Amougou Amougou Jules (AAJ),Artisanal
-Cameroon,Biloa Atsama,Artisanal
-Cameroon,BODUCAM,Logging company
-Cameroon,BUBINGA (en partenariat avec South & Fils),Artisanal
-Cameroon,CAFECO,Logging company
-Cameroon,CAMEROON LONG YUAN,Logging company
-Cameroon,CFC,Logging company
-Cameroon,COBANKO (partenaire: Abong Mbang & Fils),Logging company
-Cameroon,COFA,Logging company
-Cameroon,Communauté COVINCO/ABong Mbang Cars,Community forest
-Cameroon,CUF,Community forest
-Cameroon,ECIC,Logging company
-Cameroon,EFICNT,Logging company
-Cameroon,MGZ,Logging company
-Cameroon,ISIBOIS ,Logging company
-Cameroon,ETF,Logging company
-Cameroon,ETAMFA,Logging company
-Cameroon,SEF,Logging company
-Cameroon,EFM,Logging company
-Cameroon,FIPCAM,Logging company
-Cameroon,GBOPABA / Abong Mbang & Fils,Logging company
-Cameroon,GIC MPDB,Logging company
-Cameroon,Grandes Scieries d'Edéa,Sawmill
-Cameroon,Horizon Bois,Logging company
-Cameroon,IFTCA,Logging company
-Cameroon,Juju Bois,Logging company
-Cameroon,KIEFFER et Cie (KIEFFER),Logging company
-Cameroon,LFM,Logging company
-Cameroon,LOREMA,Logging company
-Cameroon,MMG,Logging company
-Cameroon,Monsieur Francis ABESSOLO MINTOUNOU,Artisanal
-Cameroon,Monsieur Marc NEMI BINGAN,Artisanal
-Cameroon,Monsieur Nyeck,Artisanal
-Cameroon,Muwud Emanuel and Sons Entreprises (MUWUD),Artisanal
-Cameroon,PEMACO,Logging company
-Cameroon,PLACAM,Logging company
-Cameroon,SABM,Logging company
-Cameroon,SALCAM,Sawmill
-Cameroon,SEF,
-Cameroon,SBAC,Logging company
-Cameroon,SCDS,Logging company
-Cameroon,SCIEB,Logging company
-Cameroon,SCIFO,Logging company
-Cameroon,SEFAC,Logging company
-Cameroon,SFAC,Logging company
-Cameroon,SFIL,Logging company
-Cameroon,SFIM,Logging company
-Cameroon,SFMF en partenariat avec SIFAM,Logging company
-Cameroon,SFSC,Logging company
-Cameroon,SFW,Logging company
-Cameroon,SG SOC,Logging company
-Cameroon,SITAF,Logging company
-Cameroon,SN COCAM,Logging company
-Cameroon,SN EWAFI en partenariat avec PLACAM,Logging company
-Cameroon,Société Cana Bois,Logging company
-Cameroon,Société Commercial International Cameroun,Logging company
-Cameroon,SOFATEF,Logging company
-Cameroon,SOFICOM,Logging company
-Cameroon,SOFOROC,Logging company
-Cameroon,South et Fils,Artisanal
-Cameroon,TCS,Logging company
-Cameroon,Transformation Reef Cameroun,Sawmill
-Cameroon,TTS,Sawmill
-Cameroon,Zingui Juda ,Artisanal
-Cameroon,ZINGUI Judas,Artisanal
-Central African Republic,IFB,Logging company
-Central African Republic,SCAD,Logging company
-Central African Republic,SCAF,Logging company
-Central African Republic,SCD,Logging company
-Central African Republic,SEFCA,Logging company
-Central African Republic,SINFOCAM ,Logging company
-Central African Republic,SOFOKAD (Vicwood),Logging company
-Central African Republic,Thanry,Logging company
-Central African Republic,VICA,Logging company
-Central African Republic,VICWOOD,Logging company
-Congo,ADL,Logging company
-Congo,Agil Congo,Mining company
-Congo,ASIA CONGO INDUSTRIE,Logging company
-Congo,ATAMA PLANTATION SARL (APS),Industrial agriculture
-Congo,ATAMA PLANTATION SARL (APS),Logging company
-Congo,BNC/YOKA,Logging company
-Congo,BPL,Logging company
-Congo,Casmir MADOUKA,Artisanal
-Congo,Charles Omboumahou,Unknown
-Congo,CIB,Logging company
-Congo,CIBN,Logging company
-Congo,COFIBOIS,Logging company
-Congo,CONGO DEJIA WOOD INDUSTRY,Logging company
-Congo,Eco-Oil Energie,Industrial agriculture
-Congo,Ekassi Mbongo,Industrial agriculture
-Congo,Ets Lurcia Services,Industrial agriculture
-Congo,FORALAC,Logging company
-Congo,GET/YZ,Logging company
-Congo,Groupe Malekat Constant,Industrial agriculture
-Congo,IFO,Logging company
-Congo,Lexus Agric,Industrial agriculture
-Congo,LIKOUALA TIMBER,Logging company
-Congo,LOWON Congo,Logging company
-Congo,Million Well Holding,Mining company
-Congo,MOKABI SA,Logging company
-Congo,OSSA Richard,Logging company
-Congo,SEFYD,Logging company
-Congo,SETRAF,Logging company
-Congo,SFIB,Logging company
-Congo,SICOFOR,Logging company
-Congo,SIFCO,Logging company
-Congo,SIPAM,Logging company
-Congo,Société Groupe EKASI-BONGO,Logging company
-Congo,SOFIA,Logging company
-Congo,SOFIL,Logging company
-Congo,TAMAN INDUSTRIE,Logging company
-Congo,Techniques Bois Du Niari (TBN),Industrial agriculture
-Congo,THANRY-CONGO,Logging company
-Congo,TRABEC,Logging company
-Congo,WANG SAM COMPAGNY,Logging company
-Congo,YOKA René,Logging company
-Gabon,IFEG,Logging company
-Gabon,Madame Marie-Gisèle ANDEME,Artisanal
-Gabon,Monsieur Aimé-Placide SERGENT,Artisanal
-Gabon,Monsieur Bertin ELAP KAMGA,Artisanal
-Gabon,Monsieur Emmanuel NZE ANGWE ,Artisanal
-Gabon,Monsieur Ferdinand MOUKELA ,Artisanal
-Gabon,Monsieur Gauthier OBIANG ESSONO,Artisanal
-Gabon,Monsieur Honoré KENGNE,Artisanal
-Gabon,Monsieur Jean-Serge Aboubakar Lengouma,Artisanal
-Gabon,Monsieur Joseph NFONCHA,Artisanal
-Gabon,Monsieur YANG CHOLUN,Artisanal
-Gabon,PENG XIN SARL,Logging company
-Gabon,SEAB/Monsieur YAP CHOON HING,Logging company
-Indonesia,CV Surya Agung Mandiri (SAM),Logging company
-Indonesia,PT Albasia Bhumipala Persada (ABP),Logging company
-Indonesia,PT Bahana Lestari Bhumipala Persada (BLBP),Logging company
-Indonesia,PT Budi Lampung Sejahtera (BLS),Logging company
-Indonesia,PT Decorindo Inti Alam Wood (DIAW),Logging company
-Indonesia,PT FLORA NUSA PERDANA,Industrial agriculture
-Indonesia,PT Gaung Satyagraha Agrindo (GSA),Logging company
-Indonesia,PT Hasnur Jaya Utama (HJU),Logging company
-Indonesia,PT KAHAYAN AGRO PLANTATIONS,Industrial agriculture
-Indonesia,PT Karya Jaya Berdikari (KJB),Logging company
-Indonesia,PT Lestari Asri Jaya (LAJ),Logging company
-Indonesia,PT NUSANTARA SAWIT PERSADA,Industrial agriculture
-Indonesia,PT Panca Usaha Palopo Plywood (PUPP),Logging company
-Indonesia,PT PRASETYA MITRA MUDA,Industrial agriculture
-Indonesia,PT Rimba Hutani Mas (RHM),Logging company
-Indonesia,PT Seng Fong Moulding Perkasa (SFMP),Logging company
-Indonesia,PT Telaga Mas Kalimantan Company (TMKC),Logging company
-Indonesia,PT Toba Pulp Lestari (TPL),Logging company
-Cote d'Ivoire,STBC,Logging company
-Liberia,ICC/Foret Venture,Logging company
-Madagascar,"Various collectors, traders, middemen",Traders
-Malaysia,Shin Yang,Logging company
-Democratic Republic of the Congo,Bego Congo,Logging company
-Democratic Republic of the Congo,CFT,Logging company
-Democratic Republic of the Congo,COTREFOR (Ex. TRANS M),Logging company
-Democratic Republic of the Congo,FORABOLA,Logging company
-Democratic Republic of the Congo,ITB,Logging company
-Democratic Republic of the Congo,KAYEMBE KEYIMBI André,Artisanal
-Democratic Republic of the Congo,KULUTUNI LUBAMBA Georges,Artisanal
-Democratic Republic of the Congo,LA FORESTIERE,Logging company
-Democratic Republic of the Congo,LA FORESTIERE DU LAC,Logging company
-Democratic Republic of the Congo,LOKOTA DEWELE Robert,Logging company
-Democratic Republic of the Congo,Monsieur IYEKO KU MU Donat,Artisanal
-Democratic Republic of the Congo,Monsieur WASHIDO Dieudonné,Artisanal
-Democratic Republic of the Congo,MWA MBILWA NKALA Jean Paul,Artisanal
-Democratic Republic of the Congo,NBK Services,Logging company
-Democratic Republic of the Congo,NGOY ISAMO Auguy,Artisanal
-Democratic Republic of the Congo,RIBA CONGO,Logging company
-Democratic Republic of the Congo,SAFO,Logging company
-Democratic Republic of the Congo,SEDAF,Logging company
-Democratic Republic of the Congo,SODEFOR,Logging company
-Democratic Republic of the Congo,Sodefor,Logging company
-Democratic Republic of the Congo,TALA TINA,Logging company
-Democratic Republic of the Congo,TSHIMBI ESEKO André,Artisanal
+country;operator;type;id
+Brazil;Estate of Violeta Elizabeth Hagmann;Estate;
+Brazil;Agropecuária Vitória Régia SA;Logging company;
+Brazil;Tecniflora Ltd;Logging company;
+Brazil;Virola-Jatobá Sustainable Development Project;Logging company;
+Brazil;Rainbow Trading Importação e Exportação LTDA;Sawmill;
+Cambodia;Try Pheap Group;Logging company;
+Cameroon;Abong Mbang & Fils;Artisanal;
+Cameroon;Amougou Amougou Jules (AAJ);Artisanal;
+Cameroon;Biloa Atsama;Artisanal;
+Cameroon;BUBINGA;Artisanal;
+Cameroon;Monsieur Francis ABESSOLO MINTOUNOU;Artisanal;
+Cameroon;Monsieur Marc NEMI BINGAN;Artisanal;
+Cameroon;Monsieur Nyeck;Artisanal;
+Cameroon;Muwud Emanuel and Sons Entreprises (MUWUD);Artisanal;
+Cameroon;South et Fils;Artisanal;
+Cameroon;Zingui Juda;Artisanal;
+Cameroon;ZINGUI Judas;Artisanal;
+Cameroon;Communauté COVINCO/ABong Mbang Cars;Community forest;
+Cameroon;CUF;Community forest;
+Cameroon;AFRIGRUM;Logging company;
+Cameroon;ALPICAM;Logging company;
+Cameroon;ANAFOR;Logging company;
+Cameroon;BODUCAM;Logging company;
+Cameroon;BOTAC;Logging company;
+Cameroon;CAFECO;Logging company;
+Cameroon;CAMBOIS;Logging company;
+Cameroon;CAMEROON LONG YUAN;Logging company;
+Cameroon;CAMTRANS;Logging company;
+Cameroon;CANABOIS;Logging company;
+Cameroon;CFC;Logging company;
+Cameroon;CFK;Logging company;
+Cameroon;CIBC;Logging company;
+Cameroon;COBANKO (partenaire: Abong Mbang & Fils);Logging company;
+Cameroon;COFA;Logging company;
+Cameroon;Com. Dimako;Logging company;
+Cameroon;CUF;Logging company;
+Cameroon;DINO&FILS;Logging company;
+Cameroon;ECIC;Logging company;
+Cameroon;EDEATECH;Logging company;
+Cameroon;EFFA;Logging company;
+Cameroon;EFICNT;Logging company;
+Cameroon;EFJK;Logging company;
+Cameroon;EFM;Logging company;
+Cameroon;ENEF;Logging company;
+Cameroon;ENJC;Logging company;
+Cameroon;ETAMFA;Logging company;
+Cameroon;ETF;Logging company;
+Cameroon;ETS KAKOUANDE;Logging company;
+Cameroon;FILIERE BOIS;Logging company;
+Cameroon;FIPCAM;Logging company;
+Cameroon;GBOPABA / Abong Mbang & Fils;Logging company;
+Cameroon;GIC MPDB;Logging company;
+Cameroon;GRACOVIR;Logging company;
+Cameroon;Green Valley Inc.;Logging company;
+Cameroon;GRUMCAM;Logging company;
+Cameroon;Habitat 2000;Logging company;
+Cameroon;Horizon Bois;Logging company;
+Cameroon;IBC;Logging company;
+Cameroon;IFTCA;Logging company;
+Cameroon;INC;Logging company;
+Cameroon;ISIBOIS;Logging company;
+Cameroon;Juju Bois;Logging company;
+Cameroon;KIEFFER et Cie (KIEFFER);Logging company;
+Cameroon;La cotiere forestiere;Logging company;
+Cameroon;LA ROSIERE;Logging company;
+Cameroon;LFM;Logging company;
+Cameroon;LOREMA;Logging company;
+Cameroon;MGZ;Logging company;
+Cameroon;MMG;Logging company;
+Cameroon;MPACKO;Logging company;
+Cameroon;Multi-Services Plus;Logging company;
+Cameroon;PALLISCO;Logging company;
+Cameroon;PEMACO;Logging company;
+Cameroon;PLACAM;Logging company;
+Cameroon;PM SARL;Logging company;
+Cameroon;SAB;Logging company;
+Cameroon;SABM;Logging company;
+Cameroon;SBAC;Logging company;
+Cameroon;SCABOIS;Logging company;
+Cameroon;SCDS;Logging company;
+Cameroon;SCIEB;Logging company;
+Cameroon;SCIFO;Logging company;
+Cameroon;SCTB;Logging company;
+Cameroon;SEBAC;Logging company;
+Cameroon;SEBC;Logging company;
+Cameroon;SEF;Logging company;
+Cameroon;SEFAC;Logging company;
+Cameroon;SEFECCAM;Logging company;
+Cameroon;SEPFCO;Logging company;
+Cameroon;SFAC;Logging company;
+Cameroon;SFB;Logging company;
+Cameroon;SFCS;Logging company;
+Cameroon;SFDB;Logging company;
+Cameroon;SFEES;Logging company;
+Cameroon;SFF;Logging company;
+Cameroon;SFID;Logging company;
+Cameroon;SFIL;Logging company;
+Cameroon;SFIM;Logging company;
+Cameroon;SFMF;Logging company;
+Cameroon;SFSC;Logging company;
+Cameroon;SFW;Logging company;
+Cameroon;SG SOC;Logging company;
+Cameroon;SIBM;Logging company;
+Cameroon;SIENCAM;Logging company;
+Cameroon;SIM;Logging company;
+Cameroon;SITAF;Logging company;
+Cameroon;SN COCAM;Logging company;
+Cameroon;SN EWAFI;Logging company;
+Cameroon;SOCIB;Logging company;
+Cameroon;Patrice Bois;Logging company;
+Cameroon;Société Cana Bois;Logging company;
+Cameroon;Société Commercial International Cameroun;Logging company;
+Cameroon;SODETRANCAM;Logging company;
+Cameroon;SOFATEF;Logging company;
+Cameroon;SOFICOM;Logging company;
+Cameroon;SOFOHNY;Logging company;
+Cameroon;SOFOROC;Logging company;
+Cameroon;STBK;Logging company;
+Cameroon;STJJY;Logging company;
+Cameroon;TCS;Logging company;
+Cameroon;TONKAM&Cie;Logging company;
+Cameroon;Grandes Scieries d'Edéa;Sawmill;
+Cameroon;SALCAM;Sawmill;
+Cameroon;Transformation Reef Cameroun;Sawmill;
+Cameroon;TTS;Sawmill;
+Central African Republic;IFB;Logging company;
+Central African Republic;SCAD;Logging company;
+Central African Republic;SCAF;Logging company;
+Central African Republic;SCD;Logging company;
+Central African Republic;SEFCA;Logging company;
+Central African Republic;SFK;Logging company;
+Central African Republic;SINFOCAM;Logging company;
+Central African Republic;SOFOKAD;Logging company;
+Central African Republic;Thanry;Logging company;
+Central African Republic;VICA;Logging company;
+Central African Republic;VICWOOD;Logging company;
+Congo;Casmir MADOUKA;Artisanal;
+Congo;ATAMA PLANTATION SARL (APS);Industrial agriculture;
+Congo;Eco-Oil Energie;Industrial agriculture;
+Congo;Ekassi Mbongo;Industrial agriculture;
+Congo;Ets Lurcia Services;Industrial agriculture;
+Congo;Groupe Malekat Constant;Industrial agriculture;
+Congo;Lexus Agric;Industrial agriculture;
+Congo;Techniques Bois Du Niari (TBN);Industrial agriculture;
+Congo;ADL;Logging company;
+Congo;AFRIWOOD INDUSTRIES;Logging company;CG/PNR/13B947
+Congo;ASIA CONGO INDUSTRIE;Logging company;CG/PNR/09B1268
+Congo;BNC/YOKA;Logging company;
+Congo;BOIS KASSA;Logging company;CG/UNKNOWN/0001
+Congo;BPL;Logging company;CG/UNKNOWN/0002
+Congo;BTC SARL;Logging company;CG/UNKNOWN/0003
+Congo;CIB;Logging company;CG/OUE/05B179
+Congo;CIBN;Logging company;CG/UNKNOWN/0004
+Congo;CITB QUATOR;Logging company;CG/UNKNOWN/0005
+Congo;COFIBOIS;Logging company;CG/UNKNOWN/0006
+Congo;CONGO DEJIA WOOD INDUSTRY;Logging company;CG/UNKNOWN/0007
+Congo;COTRANS;Logging company;CG/UNKNOWN/0008
+Congo;Entreprise Christelle;Logging company;CG/UNKNOWN/0009
+Congo;ETBM SARL;Logging company;CG/UNKNOWN/0010
+Congo;FORALAC;Logging company;CG/PNR/10B1363
+Congo;GET/YZ;Logging company;
+Congo;IFO;Logging company;CG/UNKNOWN/0011
+Congo;KIMBAKALA ET CIE;Logging company;CG/UNKNOWN/0012
+Congo;LIKOUALA TIMBER;Logging company;CG/UNKNOWN/0013
+Congo;LOWON Congo;Logging company;
+Congo;MOKABI SA;Logging company;CG/IMP/03B001
+Congo;OSSA Richard;Logging company;
+Congo;SADEF-CONGO;Logging company;CG/UNKNOWN/0014
+Congo;SEFYD;Logging company;CG/BZV/07B428
+Congo;SETRAF;Logging company;
+Congo;SFIB;Logging company;CG/UNKNOWN/0015
+Congo;SICOFOR;Logging company;CG/PNR/10B1907
+Congo;SIFCO;Logging company;CG/BZV/04B2198
+Congo;SIPAM;Logging company;CG/UNKNOWN/0016
+Congo;Société Groupe EKASI-BONGO;Logging company;
+Congo;SOFIA;Logging company;CG/UNKNOWN/0017
+Congo;SOFIL;Logging company;CG/UNKNOWN/0018
+Congo;SPIEX;Logging company;CG/UNKNOWN/0019
+Congo;TAMAN INDUSTRIE;Logging company;CG/UNKNOWN/0020
+Congo;THANRY-CONGO;Logging company;CG/BZV/11B2841
+Congo;TRABEC;Logging company;
+Congo;WANG SAM COMPAGNY;Logging company;CG/UNKNOWN/0021
+Congo;Wang Sam Ressources and Trading Company Congo (WSR);Logging company;
+Congo;YOKA René;Logging company;
+Congo;Agil Congo;Mining company;
+Congo;Million Well Holding;Mining company;
+Congo;Charles Omboumahou;Unknown;
+Democratic Republic of Congo;KAYEMBE KEYIMBI André;Artisanal;
+Democratic Republic of Congo;KULUTUNI LUBAMBA Georges;Artisanal;
+Democratic Republic of Congo;Monsieur IYEKO KU MU Donat;Artisanal;
+Democratic Republic of Congo;Monsieur WASHIDO Dieudonné;Artisanal;
+Democratic Republic of Congo;MWA MBILWA NKALA Jean Paul;Artisanal;
+Democratic Republic of Congo;NGOY ISAMO Auguy;Artisanal;
+Democratic Republic of Congo;TSHIMBI ESEKO André;Artisanal;
+Democratic Republic of Congo;BAKRI BOIS CORPORATION;Logging company;DRC/UNKNOWN/0001
+Democratic Republic of Congo;BEGO CONGO;Logging company;DRC/UNKNOWN/0002
+Democratic Republic of Congo;CFE (ex. SICOBOIS);Logging company;DRC/UNKNOWN/0003
+Democratic Republic of Congo;CFT;Logging company;DRC/UNKNOWN/0004
+Democratic Republic of Congo;COMPAGNIE DES BOIS;Logging company;DRC/UNKNOWN/0005
+Democratic Republic of Congo;COTREFOR;Logging company;DRC/UNKNOWN/0006
+Democratic Republic of Congo;ENRA;Logging company;DRC/UNKNOWN/0007
+Democratic Republic of Congo;FORABOLA;Logging company;DRC/UNKNOWN/0008
+Democratic Republic of Congo;ITB;Logging company;DRC/UNKNOWN/0009
+Democratic Republic of Congo;LA FORESTIERE;Logging company;DRC/UNKNOWN/0010
+Democratic Republic of Congo;LA FORESTIERE DU LAC;Logging company;DRC/UNKNOWN/0011
+Democratic Republic of Congo;LOKOTA DEWELE Robert;Logging company;
+Democratic Republic of Congo;MAISON NBK SERVICE;Logging company;DRC/UNKNOWN/0012
+Democratic Republic of Congo;MEGA BOIS;Logging company;DRC/UNKNOWN/0013
+Democratic Republic of Congo;MOTEMA;Logging company;DRC/UNKNOWN/0014
+Democratic Republic of Congo;NBK Services;Logging company;
+Democratic Republic of Congo;RIBA CONGO;Logging company;DRC/UNKNOWN/0015
+Democratic Republic of Congo;SAFO;Logging company;DRC/UNKNOWN/0016
+Democratic Republic of Congo;SCIBOIS;Logging company;DRC/UNKNOWN/0017
+Democratic Republic of Congo;SCTP;Logging company;DRC/UNKNOWN/0018
+Democratic Republic of Congo;SEDAF;Logging company;
+Democratic Republic of Congo;SEFOCO;Logging company;DRC/UNKNOWN/0019
+Democratic Republic of Congo;SICOBOIS;Logging company;DRC/UNKNOWN/0020
+Democratic Republic of Congo;SIFORCO;Logging company;DRC/UNKNOWN/0021
+Democratic Republic of Congo;SODEFOR;Logging company;DRC/UNKNOWN/0022
+Democratic Republic of Congo;SOMICONGO;Logging company;DRC/UNKNOWN/0023
+Democratic Republic of Congo;TALA TINA;Logging company;DRC/UNKNOWN/0024
+Gabon;Madame Marie-Gisèle ANDEME;Artisanal;
+Gabon;Monsieur Aimé-Placide SERGENT;Artisanal;
+Gabon;Monsieur Bertin ELAP KAMGA;Artisanal;
+Gabon;Monsieur Emmanuel NZE ANGWE;Artisanal;
+Gabon;Monsieur Ferdinand MOUKELA;Artisanal;
+Gabon;Monsieur Gauthier OBIANG ESSONO;Artisanal;
+Gabon;Monsieur Honoré KENGNE;Artisanal;
+Gabon;Monsieur Jean-Serge Aboubakar Lengouma;Artisanal;
+Gabon;Monsieur Joseph NFONCHA;Artisanal;
+Gabon;Monsieur YANG CHOLUN;Artisanal;
+Gabon;BAYONNE;Logging company;
+Gabon;Bois et Scierie de l'Ogooue;Logging company;
+Gabon;Bois et Scierie de l'Ogooue Mitzic-Nord;Logging company;
+Gabon;BOKOUE LOBE;Logging company;
+Gabon;BONUS HARVEST/CIPLAC;Logging company;
+Gabon;BORDAMUR TOUJOURS VERT;Logging company;
+Gabon;Bordamur/Toujours Vert;Logging company;
+Gabon;BSO Ogooue Mitzic;Logging company;
+Gabon;BSO Ogooue Ndjole;Logging company;
+Gabon;CBG Gamba;Logging company;
+Gabon;CBG Mandji;Logging company;
+Gabon;CFA/DLH;Logging company;
+Gabon;CIFHO Leke;Logging company;
+Gabon;CIFHO Moyabi;Logging company;
+Gabon;Compagnie Africaine d'Exploitation du Bois;Logging company;
+Gabon;COMPAGNIE DES BOIS DU GABON;Logging company;
+Gabon;COMPAGNIE FORESTIERE DES ABEILLES;Logging company;
+Gabon;Compagnie Forestiere du Haut Ogooue;Logging company;
+Gabon;CORA Wood;Logging company;
+Gabon;CORA WOOD - UFA 3;Logging company;
+Gabon;CORA WOOD GABON;Logging company;
+Gabon;CORA Wood LASSIO;Logging company;
+Gabon;Exploitation Forestiere de Moanda;Logging company;
+Gabon;Exploitation Gabonaise de Grumes;Logging company;
+Gabon;Export Negoce du Bois;Logging company;
+Gabon;FOREEX;Logging company;
+Gabon;Forestiere d'Exploitation et d'Exportation;Logging company;
+Gabon;Forestry Development Gabon;Logging company;
+Gabon;GABON ALONG SARL;Logging company;
+Gabon;Gabon Export Bois-ASSALA-Compagnie Bois Kota;Logging company;
+Gabon;GAW/GSEZW-HO/OI;Logging company;
+Gabon;GAW-Ngounie;Logging company;
+Gabon;GEB-ASSALA-CBK;Logging company;
+Gabon;GIB-Tale;Logging company;
+Gabon;GIE OKANO;Logging company;
+Gabon;GIW/GSEZW-Oyem;Logging company;
+Gabon;GIW-Estuaire;Logging company;
+Gabon;GIW-Minvoul;Logging company;
+Gabon;Grand Bois;Logging company;
+Gabon;GRANDE MAYUMBA;Logging company;
+Gabon;GSEZ/GSEZW-Sud Ngounie;Logging company;
+Gabon;GSEZ-Olam Zolende;Logging company;
+Gabon;GSEZW-Lambarene Lacs;Logging company;
+Gabon;HUA JIA;Logging company;
+Gabon;IBNG Lambarene;Logging company;
+Gabon;IFEG;Logging company;
+Gabon;IMENOU PLATEAU;Logging company;
+Gabon;Industrie Forestiere de Lambarene;Logging company;
+Gabon;Leroy;Logging company;
+Gabon;LEROY GABON;Logging company;
+Gabon;Mitzic Exploitation Forestiere;Logging company;
+Gabon;MONT PELE BOIS;Logging company;
+Gabon;New Oriental International Investiment;Logging company;
+Gabon;OBANGUE;Logging company;
+Gabon;OLAM GABON / MOMBA;Logging company;
+Gabon;OLAM GABON Makokou;Logging company;
+Gabon;OSSIE Industrie;Logging company;
+Gabon;PENG XIN SARL;Logging company;
+Gabon;PENG XIN SARL;Logging company;
+Gabon;PRECIOUS WOOD GABON;Logging company;
+Gabon;PRECIOUS WOOD/ex CEB;Logging company;
+Gabon;Rain Forest Management;Logging company;
+Gabon;Regroupement FOREEX OKANO/TCBG;Logging company;
+Gabon;RIMBUNAN HIJAU GABON;Logging company;
+Gabon;ROUGIER GABON;Logging company;
+Gabon;Rougier Haut Abanga;Logging company;
+Gabon;Rougier Ogooue-Ivindo;Logging company;
+Gabon;SBL/TRB;Logging company;
+Gabon;SEAB/Monsieur YAP CHOON HING;Logging company;
+Gabon;SEEF;Logging company;
+Gabon;SFIK;Logging company;
+Gabon;SNBG-OVG;Logging company;
+Gabon;Societe des Bois de Lastourville/ Transbois;Logging company;
+Gabon;Societe Equatoriale d'Exploitation Forestiere;Logging company;
+Gabon;Societe Forestiere Industrielle de Koulamoutou;Logging company;
+Gabon;Societe Import Export Bois;Logging company;
+Gabon;Societe Nationale des Bois du Gabon;Logging company;
+Gabon;Societe Taurian Ressource Gabon;Logging company;
+Gabon;Societe Transformation Integree Bois Gabon;Logging company;
+Gabon;STIBG;Logging company;
+Gabon;SUNLY GABON CENTRE SUD;Logging company;
+Gabon;SUNLY OKONDJA;Logging company;
+Gabon;SUNRY GABON Nord Est;Logging company;
+Gabon;SUNRY GABON NORD-EST;Logging company;
+Gabon;TALIBOIS;Logging company;
+Gabon;TBNI;Logging company;
+Gabon;Transport Bois Negoce International;Logging company;
+Gabon;Tropical Logs Production;Logging company;
+Gabon;Tropical Timber Industry Board;Logging company;
+Gabon;TTIB;Logging company;
+Gabon;WAN CHUAN TIMBER SARL;Logging company;
+Indonesia;PT Berkala Maju Bersama (BMB) and PT Jaya Jadi Utama (JJU);Industrial agriculture;
+Indonesia;PT FLORA NUSA PERDANA;Industrial agriculture;
+Indonesia;PT KAHAYAN AGRO PLANTATIONS;Industrial agriculture;
+Indonesia;PT NUSANTARA SAWIT PERSADA;Industrial agriculture;
+Indonesia;PT PRASETYA MITRA MUDA;Industrial agriculture;
+Indonesia;PT Sawit Lamandau Raya;Industrial agriculture;
+Indonesia;PT Suryamas Cipta Perkasa (SCP);Industrial agriculture;
+Indonesia;CV Surya Agung Mandiri (SAM);Logging company;
+Indonesia;PT Albasia Bhumipala Persada (ABP);Logging company;
+Indonesia;PT Bahana Lestari Bhumipala Persada (BLBP);Logging company;
+Indonesia;PT Budi Lampung Sejahtera (BLS);Logging company;
+Indonesia;PT Decorindo Inti Alam Wood (DIAW);Logging company;
+Indonesia;PT Gaung Satyagraha Agrindo (GSA);Logging company;
+Indonesia;PT Hasnur Jaya Utama (HJU);Logging company;
+Indonesia;PT Karya Jaya Berdikari (KJB);Logging company;
+Indonesia;PT Lestari Asri Jaya (LAJ);Logging company;
+Indonesia;PT Panca Usaha Palopo Plywood (PUPP);Logging company;
+Indonesia;PT Puji Sampurna;Logging company;
+Indonesia;PT Rimba Hutani Mas (RHM);Logging company;
+Indonesia;PT Rotua;Logging company;
+Indonesia;PT Seng Fong Moulding Perkasa (SFMP);Logging company;
+Indonesia;PT Telaga Mas Kalimantan Company (TMKC);Logging company;
+Indonesia;PT Toba Pulp Lestari (TPL);Logging company;
+Cote d’Ivoire;SODEFOR;Logging company;
+Cote d’Ivoire;STBC;Logging company;
+Liberia;ICC/Foret Venture;Logging company;
+Malaysia;Shin Yang;Logging company;
