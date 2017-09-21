@@ -12,6 +12,6 @@
 #
 
 class SpeciesObservation < ApplicationRecord
-  belongs_to :observations
+  belongs_to :observation
   belongs_to :species
 end
