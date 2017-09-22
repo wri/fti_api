@@ -15,6 +15,10 @@ class Fmu < ApplicationRecord
   include ValidationHelper
   translates :name
 
+  active_admin_translates :name do
+    validates_presence_of :name
+  end
+
   belongs_to :country, inverse_of: :fmus
   belongs_to :operator, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu

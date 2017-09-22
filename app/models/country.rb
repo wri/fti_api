@@ -43,6 +43,8 @@ class Country < ApplicationRecord
 
   scope :by_status, ->(status) { where(is_active: status) }
 
+  scope :active, ->() { where(is_active: true) }
+
   default_scope do
     includes(:translations)
   end

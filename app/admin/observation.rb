@@ -20,7 +20,7 @@ ActiveAdmin.register Observation do
 
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id,
-                :validation_status, :publication_date, :is_active, :observer_ids,
+                :validation_status, :publication_date, :is_active, :observer_ids, :observation_report_id,
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status]
 
 
@@ -133,9 +133,7 @@ ActiveAdmin.register Observation do
       f.input :pv
       f.input :lat
       f.input :lng
-      #f.input :law
       f.input :observation_report, as: :select
-      #f.input :observation_documents
       f.input :validation_status
       f.input :is_active
     end

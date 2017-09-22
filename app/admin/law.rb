@@ -1,16 +1,31 @@
 ActiveAdmin.register Law do
   menu parent: 'Settings', priority: 3
 
-  actions :new, :create, :show, :edit, :index
+  actions :new, :create, :show, :edit, :index, :update
 
   config.order_clause
 
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([[country: :translations],
+                                         [subcategory: :translations]])
+    end
+  end
+
   permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :penal_servitude,
-                :other_penalties, :flegt
+                :other_penalties, :apv, :written_infraction
+
+  filter :country
+  filter :subcategory
+  filter :written_infraction, label: 'Illegality as written by law', as: :select
+  filter :infraction, label: 'Legal reference: Illegality', as: :select
+  filter :sanctions, label: 'Legal reference: Penalties', as: :select
+  filter :max_fine, label: 'Maximum Fine'
+  filter :min_fine, label: 'Minimum Fine'
 
   index do
-    column :country, sortable: true
-    column :subcategory, sortable: true
+    column :country, sortable: 'country_translations.name'
+    column :subcategory, sortable: 'subcategory_translations.name'
     column 'Illegality as written by law', :written_infraction, sortable: true
     column 'Legal reference: Illegality', :infraction, sortable: true
     column 'Legal reference: Penalties', :sanctions, sortable: true
