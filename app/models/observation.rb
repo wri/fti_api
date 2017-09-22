@@ -54,24 +54,25 @@ class Observation < ApplicationRecord
 
   has_many :comments,  as: :commentable
   has_many :photos,    as: :attacheable, dependent: :destroy
-  has_many :observation_documents, dependent: :destroy
+  has_many :observation_documents#, dependent: :destroy
   belongs_to :observation_report
 
-  accepts_nested_attributes_for :photos,           allow_destroy: true
+  accepts_nested_attributes_for :photos,                       allow_destroy: true
   accepts_nested_attributes_for :observation_documents,        allow_destroy: true
-  accepts_nested_attributes_for :observation_report,        allow_destroy: true
-  accepts_nested_attributes_for :subcategory, allow_destroy: false
+  accepts_nested_attributes_for :observation_report,           allow_destroy: true
+  accepts_nested_attributes_for :subcategory,                  allow_destroy: false
 
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
   validates_presence_of :validation_status
 
-  before_save   :set_active_status
-  after_create  :update_operator_scores
-  after_destroy :update_operator_scores
-  after_save    :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
-  after_save    :update_reports_observers, if: 'observation_report_id_changed?'
+  before_save    :set_active_status
+  after_create   :update_operator_scores
+  before_destroy :destroy_documents
+  after_destroy  :update_operator_scores
+  after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
+  after_save     :update_reports_observers, if: 'observation_report_id_changed?'
 
   include Activable
 
@@ -116,5 +117,9 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def set_active_status
     self.is_active = self.validation_status == 'Approved' ? true : false
     nil
+  end
+
+  def destroy_documents
+    observation_documents.find_each(&:really_destroy!)
   end
 end
