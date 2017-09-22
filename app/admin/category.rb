@@ -4,6 +4,7 @@ ActiveAdmin.register Category do
   actions :create, :show, :edit, :index
 
   config.order_clause
+  config.filters = false
 
   scope :all, default: true
   scope :operator
