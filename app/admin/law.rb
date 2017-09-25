@@ -1,5 +1,5 @@
 ActiveAdmin.register Law do
-  menu parent: 'Settings', priority: 3
+  menu parent: 'Settings', priority: 4
 
   actions :new, :create, :show, :edit, :index, :update
 

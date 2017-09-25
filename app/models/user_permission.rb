@@ -18,7 +18,6 @@ class UserPermission < ApplicationRecord
   belongs_to :user
 
   before_update :change_permissions,         if: 'user_role_changed?'
-  after_update  :accept_permissions_request, if: 'user.permissions_request.present?'
 
   def change_permissions
     self.permissions = role_permissions
@@ -27,21 +26,6 @@ class UserPermission < ApplicationRecord
   private
 
     def role_permissions
-      # case self.user_role
-      # when 'admin'    then { admin: { all: [:manage]  }, all: { all: [:manage] } }
-      # when 'operator' then { user:  { id: [:manage] }, observation: { all: [:read]   },
-      #                        operator_document: { operator_id: [:manage] }}
-      # when 'ngo'      then { user:  { id: [:manage] }, observation: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
-      #                        photo: { all: [:manage] }, document: { all: [:manage] },
-      #                        category: { all: [:manage] }, subcategory: { all: [:manage] },
-      #                        country: { all: [:manage] }, government: { all: [:manage]},
-      #                        operator: { all: [:manage]}, species: { all: [:manage] },
-      #                        observation_document: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage] },
-      #                        observation_report: { ['observers': {'id': eval('self.user.observer_id')}] => [:manage]} }
-      # else
-      #   { user: { id: [:manage] }, observation: { all: [:read] }  }
-      # end
-
       case self.user_role
         when 'admin'
           { admin: { manage: {} }, all: { manage: {} } }
@@ -68,12 +52,6 @@ class UserPermission < ApplicationRecord
           }
         else
           { user: { id: user.id }, observations: { read: {}}}
-      end
-    end
-
-    def accept_permissions_request
-      if user_role == user.permissions_request
-        self.user.update(permissions_accepted: Time.now, permissions_request: nil)
       end
     end
 end

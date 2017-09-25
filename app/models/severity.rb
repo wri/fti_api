@@ -13,15 +13,21 @@
 class Severity < ApplicationRecord
   translates :details
 
-  belongs_to :subcategory, inverse_of: :severities
+  active_admin_translates :details do
+    validates_presence_of :details
+  end
+
+  belongs_to :subcategory, inverse_of: :severities, required: :true
   has_many :observations, inverse_of: :severity
+
+  validates_presence_of   :level
+  validates_uniqueness_of :level, scope: :subcategory_id
+  validates :level, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 3 }
+
 
   def level_details
     "#{self.level} - #{self.details}"
   end
-
-  validates_presence_of   :level
-  validates_uniqueness_of :level, scope: :subcategory_id
 
   default_scope { includes(:translations) }
 
