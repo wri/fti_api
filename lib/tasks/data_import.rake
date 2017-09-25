@@ -152,6 +152,8 @@ namespace :import do
                                           category_id: category.id).first_or_create!
           subcategory.update_attributes(name: data_row['illegality_fr'], locale: :fr)
 
+          subcategory.save!
+
           if subcategory.severities.empty?
             (0..3).each do |s|
               subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
@@ -196,6 +198,8 @@ namespace :import do
                                         subcategory_type: Subcategory.subcategory_types[:government],
                                         category_id: category.id).first_or_create!
 
+        subcategory.save!
+        
         subcategory.update_attributes(name: data_row['governance_problem_fr'], locale: :fr)
         if subcategory.severities.empty?
           (0..3).each do |s|
