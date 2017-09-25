@@ -56,6 +56,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :user_permission
 
+  before_validation :create_from_request
+
   validates :nickname,    presence: true, uniqueness: { case_sensitive: false }
   validates_uniqueness_of :email
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
@@ -146,38 +148,44 @@ class User < ApplicationRecord
 
   private
 
-    def generate_reset_token(user)
-      token = SecureRandom.uuid
-      user.update(reset_password_token: token, reset_password_sent_at: DateTime.now)
-      user.reset_password_token
-    end
+  def create_from_request
+    return unless permissions_request.present?
+    self.user_permission = UserPermission.new(user_role: permissions_request)
 
-    def validate_nickname
-      if User.where(email: nickname).exists?
-        errors.add(:nickname, :invalid)
-      end
-    end
+  end
 
-    def half_email
-      "" if email.blank?
-      index = email.index('@')
-      "" if index.nil? || index.to_i.zero?
-      email[0, index.to_i]
-    end
+  def generate_reset_token(user)
+    token = SecureRandom.uuid
+    user.update(reset_password_token: token, reset_password_sent_at: DateTime.now)
+    user.reset_password_token
+  end
 
-  def user_integrity
-    if user_permission.blank?
-      errors['user_permission'] << 'You must choose a user permission'
-    else
-      case user_permission.user_role
-        when 'operator'
-          errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
-        when 'ngo'
-          errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
-        else
-          errors['operator_id'] << 'Cannot have an Operator' unless operator_id.blank?
-          errors['observer_id'] << 'Cannot have an Observer' unless observer_id.blank?
-      end
+  def validate_nickname
+    if User.where(email: nickname).exists?
+      errors.add(:nickname, :invalid)
     end
   end
+
+  def half_email
+    "" if email.blank?
+    index = email.index('@')
+    "" if index.nil? || index.to_i.zero?
+    email[0, index.to_i]
+  end
+
+def user_integrity
+  if user_permission.blank?
+    errors['user_permission'] << 'You must choose a user permission'
+  else
+    case user_permission.user_role
+      when 'operator'
+        errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
+      when 'ngo'
+        errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
+      else
+        errors['operator_id'] << 'Cannot have an Operator' unless operator_id.blank?
+        errors['observer_id'] << 'Cannot have an Observer' unless observer_id.blank?
+    end
+  end
+end
 end

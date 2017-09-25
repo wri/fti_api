@@ -5,12 +5,10 @@ ActiveAdmin.register User do
                 :observer_id, :operator_id,
                 user_permission_attributes: [:user_role]
 
-  filter :name
-  filter :institution
-  filter :nickname
-  filter :email
+  filter :name, as: :select
+  filter :nickname, as: :select
+  filter :email, as: :select
   filter :current_sign_in_at
-  filter :sign_in_count
   filter :created_at
 
   index do
@@ -22,7 +20,6 @@ ActiveAdmin.register User do
     column :email
     column :observer
     column :operator
-    column :institution
     column :current_sign_in_at
     column :sign_in_count
 
@@ -38,7 +35,6 @@ ActiveAdmin.register User do
       f.input :observer
       f.input :operator
       f.input :country
-      f.input :institution
       f.input :name
       f.input :nickname
       f.input :email
