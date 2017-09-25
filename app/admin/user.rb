@@ -12,6 +12,18 @@ ActiveAdmin.register User do
   filter :created_at
 
   index do
+    column('Activation') do |user|
+      if user.id != current_user.id
+        if user.is_active
+          a 'Deactivate', href: deactivate_admin_user_path(user),  'data-method': :put,
+            onclick: "return confirm('Are you sure you want to activate user #{user.name}')"
+        else
+          a 'Activate', href: activate_admin_user_path(user),      'data-method': :put,
+            onclick: "return confirm('Are you sure you want to deactivate user #{user.name}')"
+        end
+      end
+    end
+    column :is_active
     column 'Role', :user_permission do |user|
       user.user_permission.user_role
     end
@@ -44,5 +56,15 @@ ActiveAdmin.register User do
       f.input :is_active
     end
     f.actions
+  end
+
+  member_action :activate, method: :put do
+    resource.update_attributes(is_active: true) unless resource.id == current_user.id
+    redirect_to collection_path, notice: 'User activated'
+  end
+
+  member_action :deactivate, method: :put do
+    resource.update_attributes(is_active: false) unless resource.id == current_user.id
+    redirect_to collection_path, notice: 'User deactivated'
   end
 end
