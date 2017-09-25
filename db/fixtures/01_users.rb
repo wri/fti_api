@@ -61,7 +61,7 @@ unless User.find_by(nickname: 'webuser')
 end
 
 unless User.find_by(nickname: 'testngo')
-  assign_country_id = if country = Country.find_by(iso: 'Congo')
+  assign_country_id = if country = Country.find_by(iso: 'COG')
                         country.id
                       else
                         nil
