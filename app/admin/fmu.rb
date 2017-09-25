@@ -1,5 +1,5 @@
 ActiveAdmin.register Fmu do
-  menu parent: 'Settings', priority: 4
+  menu parent: 'Settings', priority: 5
 
   actions :show, :edit, :index, :update
 

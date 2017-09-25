@@ -1,5 +1,5 @@
 ActiveAdmin.register Country do
-  menu parent: 'Settings', priority: 5
+  menu parent: 'Settings', priority: 6
 
   actions :show, :index
 
