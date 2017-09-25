@@ -377,7 +377,7 @@ namespace :import do
         country = Country.find_by(iso: country_iso)
         fmu.country = country if country.present?
       end
-      fmu.save!
+      fmu.save!(validate: false)
 
       # Updating the geojson
 
@@ -385,7 +385,7 @@ namespace :import do
       geojson['properties']['id'] = fmu.id
       geojson['properties']['operator_id'] = fmu.operator.id if fmu.operator.present?
       fmu.geojson = geojson
-      fmu.save!
+      fmu.save!(validate: false)
 
     end
     puts 'Finished FMUs'

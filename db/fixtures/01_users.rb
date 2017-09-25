@@ -69,7 +69,8 @@ unless User.find_by(nickname: 'testngo')
 
   @user = User.new(email: 'testngo@ngo.com', password: 'testpassword!ng0',
                    password_confirmation: 'testpassword!ng0', name: 'testngo',
-                   nickname: 'testngo', country_id: assign_country_id, is_active: true)
+                   nickname: 'testngo', country_id: assign_country_id, is_active: true,
+                   observer_id: 1)
   @user.build_user_permission(user_role: 'ngo')
   @user.save
   @user.regenerate_api_key
