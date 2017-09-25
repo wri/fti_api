@@ -24,6 +24,7 @@ class Fmu < ApplicationRecord
   has_many :observations, inverse_of: :fmu
 
   validates :country_id, presence: true
+  validates :name, presence: true
 
   default_scope { includes(:translations) }
 

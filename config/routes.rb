@@ -2,9 +2,7 @@
 
 Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self) do
-
-  end
+  ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
 
   root to: "home#index"
 
