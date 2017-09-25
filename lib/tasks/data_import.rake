@@ -156,11 +156,11 @@ namespace :import do
 
           if subcategory.severities.empty?
             (0..3).each do |s|
-              subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+              sev = subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+              sev.save!
             end
           end
 
-          subcategory.save!
         end
 
         %w(congo drc cameroon ci).each do |country|
@@ -203,10 +203,10 @@ namespace :import do
         subcategory.update_attributes(name: data_row['governance_problem_fr'], locale: :fr)
         if subcategory.severities.empty?
           (0..3).each do |s|
-            subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+            sev = subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
+            sev.save!
           end
         end
-        subcategory.save!
       end
     end
     puts 'Government Subcategories loaded'
