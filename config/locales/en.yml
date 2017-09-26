@@ -2,7 +2,7 @@
 en:
   locale_name: "English"
   active_admin:
-    powered_by: ""
+    powered_by: "Admin Backoffice"
   activerecord:
     errors:
       messages:
