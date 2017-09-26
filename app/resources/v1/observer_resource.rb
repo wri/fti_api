@@ -26,5 +26,9 @@ module V1
     def self.creatable_fields(context)
       super - [:is_active]
     end
+
+    def self.records(options = {})
+      Observer.active
+    end
   end
 end
