@@ -106,7 +106,7 @@ ActiveAdmin.register Observation do
     column :evidence
     column :concern_opinion
     column :report, sortable: 'observation_reports.title' do |o|
-      o.observation_report.title if o.observation_report.present?
+      link_to o.observation_report.title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
     column :user, sortable: 'users.name'
     column :modified_user

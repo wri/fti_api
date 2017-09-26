@@ -1,16 +1,23 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: observers
 #
-#  id            :integer          not null, primary key
-#  observer_type :string           not null
-#  country_id    :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_active     :boolean          default(TRUE)
-#  logo          :string
+#  id                :integer          not null, primary key
+#  observer_type     :string           not null
+#  country_id        :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  is_active         :boolean          default(TRUE)
+#  logo              :string
+#  address           :string
+#  information_name  :string
+#  information_email :string
+#  information_phone :string
+#  data_name         :string
+#  data_email        :string
+#  data_phone        :string
+#  organization_type :string
 #
 
 class Observer < ApplicationRecord
@@ -28,9 +35,16 @@ class Observer < ApplicationRecord
 
   has_many :users, inverse_of: :observer
 
+  EMAIL_VALIDATOR = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+
   validates :name, presence: true
   validates :observer_type, presence: true, inclusion: { in: %w(Mandated SemiMandated External Government),
                                                          message: "%{value} is not a valid observer type" }
+  validates :organization_type,
+            inclusion: { in: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other'] }, if: :organization_type?
+
+  validates_format_of :information_email, with: EMAIL_VALIDATOR
+  validates_format_of :data_email, with: EMAIL_VALIDATOR
 
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
