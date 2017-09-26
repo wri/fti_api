@@ -151,7 +151,6 @@ class User < ApplicationRecord
   def create_from_request
     return unless permissions_request.present?
     self.user_permission = UserPermission.new(user_role: permissions_request)
-
   end
 
   def generate_reset_token(user)
@@ -173,19 +172,19 @@ class User < ApplicationRecord
     email[0, index.to_i]
   end
 
-def user_integrity
-  if user_permission.blank?
-    errors['user_permission'] << 'You must choose a user permission'
-  else
-    case user_permission.user_role
-      when 'operator'
-        errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
-      when 'ngo'
-        errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
-      else
-        errors['operator_id'] << 'Cannot have an Operator' unless operator_id.blank?
-        errors['observer_id'] << 'Cannot have an Observer' unless observer_id.blank?
+  def user_integrity
+    if user_permission.blank?
+      errors['user_permission'] << 'You must choose a user permission'
+    else
+      case user_permission.user_role
+        when 'operator'
+          errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
+        when 'ngo'
+          errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
+        else
+          errors['operator_id'] << 'Cannot have an Operator' unless operator_id.blank?
+          errors['observer_id'] << 'Cannot have an Observer' unless observer_id.blank?
+      end
     end
   end
-end
 end
