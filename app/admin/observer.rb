@@ -4,63 +4,50 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   config.order_clause
 
   actions :all, except: :destroy
-  # permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active, :certification,
-  #               translations_attributes: [:id, :locale, :name, :details, :destroy]
-  #
-  # index do
-  #   translation_status
-  #   column :country, sortable: 'country_translations.name'
-  #   column 'FA UUID', :fa_id
-  #   column :name, sortable: 'operator_translations.name'
-  #   column :concession, sortable: true
-  #   column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
-  #     "#{'%.2f' % operator.score_absolute}" rescue nil
-  #   end
-  #   column 'Obs/Visit', :obs_per_visit, sortable: true
-  #   column '% Docs', :percentage_valid_documents_all, sortable: true
-  #
-  #   actions
-  # end
-  #
-  # #filter :name
-  # filter :country
-  # filter :translations_name_contains, as: :string, label: 'Name', placeholder: 'Search by name...'
-  # filter :concession
-  # filter :updated_at
-  #
-  # sidebar 'Documents', only: :show do
-  #   attributes_table_for resource do
-  #     ul do
-  #       resource.operator_documents.collect do |od|
-  #         li link_to("[#{od.status}] #{od.required_operator_document.name}", admin_operator_document_path(od.id))
-  #       end
-  #     end
-  #   end
-  # end
-  #
-  # form do |f|
-  #   f.semantic_errors *f.object.errors.keys
-  #   f.inputs 'Translated fields' do
-  #     f.translated_inputs switch_locale: false do |t|
-  #       t.input :name
-  #       t.input :details
-  #     end
-  #   end
-  #   f.inputs 'Country Details' do
-  #     f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
-  #     f.input :operator_type
-  #     f.input :country
-  #     f.input :certification
-  #     f.input :concession
-  #     f.input :logo
-  #     f.input :is_active
-  #   end
-  #   f.actions
-  # end
-  #
-  # controller do
-  #   def scoped_collection
-  #     end_of_association_chain.includes([:translations, [country: :translations]])
-  #   end
-  # end
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([:translations, [country: :translations]])
+    end
+  end
+
+  permit_params :country_id, :observer_type, :is_active, :logo, :address, :information_name, :information_email,
+                :information_phone, :data_name, :data_email, :data_phone, :organization_type
+
+  index do
+    column :is_active
+    column :country, sortable: 'country_translations.name'
+    column :observer_type, sortable: true
+    image_column :logo
+    column :name, sortable: 'observer_translations.name'
+    column :created_at
+    column :updated_at
+    actions
+  end
+
+  filter :is_active
+  filter :country
+  filter :translations_name_contains, as: :select, label: 'Name'
+
+
+  show do
+    attributes_table do
+      row :observer_type
+      row :organization_type
+      row :country
+      image_row :logo
+      row :address
+      row :information_name
+      row :information_email
+      row :information_phone
+      row :data_name
+      row :data_email
+      row :data_phone
+      row :created_at
+      row :updated_at
+
+    end
+    active_admin_comments
+  end
+
 end

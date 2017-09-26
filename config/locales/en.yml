@@ -1,6 +1,8 @@
 ---
 en:
   locale_name: "English"
+  active_admin:
+    powered_by: ""
   activerecord:
     errors:
       messages:

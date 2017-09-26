@@ -44,3 +44,8 @@ $expired-color: #772222;
   &.doc_valid { background: $approved-color; }
   &.doc_expired { background: $expired-color; }
 }
+
+// To increase the width of observations-details
+.col-details {
+  min-width: 500px;
+}

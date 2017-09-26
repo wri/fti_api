@@ -36,4 +36,21 @@ class LogoUploader < CarrierWave::Uploader::Base
   version :medium do
     process resize_to_fill: [600, 600]
   end
+
+  # This is just for active admin
+  version :original do
+    process resize_to_fill: [80, 80]
+  end
+
+  def exists?
+    !file.blank?
+  end
+
+  def original_filename
+    if file.present?
+      file.filename
+    else
+      super
+    end
+  end
 end

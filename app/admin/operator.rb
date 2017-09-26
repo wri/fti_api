@@ -22,7 +22,6 @@ ActiveAdmin.register Operator do
     actions
   end
 
-  #filter :name
   filter :country
   filter :translations_name_contains, as: :string, label: 'Name', placeholder: 'Search by name...'
   filter :concession
