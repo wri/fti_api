@@ -43,7 +43,7 @@ class ApiController < ActionController::API
   def current_user
     if auth_present?
       user = User.find(auth['user'])
-      if user
+      if user && user.is_active
         @current_user ||= user
       end
     end
