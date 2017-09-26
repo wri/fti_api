@@ -13,13 +13,14 @@ ActiveAdmin.register Observation do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
                                          :severity, [operator: :translations],
+                                         [government: :translations],
                                          [subcategory: :translations], [observer_observations: [observer: :translations]],
                                          [fmu: :translations], :user, :observation_report])
     end
   end
 
   actions :all, except: [:new, :create]
-  permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id,
+  permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observer_ids, :observation_report_id,
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status]
 
@@ -65,8 +66,24 @@ ActiveAdmin.register Observation do
   scope :operator
   scope :government
 
+  filter :validation_status, as: :select, collection: Observation.validation_statuses
+  filter :country
+  filter :observers
+  filter :operator
+  filter :government_translations_government_entity_contains, as: :select, label: 'Government Entity',
+         collection: Government.joins(:translations).pluck(:government_entity)
+  filter :subcategory
+  filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
+  filter :observation_report
+  filter :user
+  filter :modified_user
+  filter :is_active
+  filter :publication_date
+  filter :updated_at
+
   index do
     selectable_column
+    column :id
     column 'Active?', :is_active
     tag_column 'Status', :validation_status, sortable: true
     column :country, sortable: 'country_translations.name'
@@ -103,32 +120,27 @@ ActiveAdmin.register Observation do
     actions
   end
 
-  filter :validation_status, as: :check_boxes, collection: Observation.validation_statuses
-  filter :country
-  filter :operator
-  filter :observers
-  filter :subcategory
-  filter :severity_level, as: :check_boxes, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :is_active
-  filter :publication_date
-  filter :updated_at
-
-
   form do |f|
+    operator   = object.operator_id.present? ? true : false
+    law        = object.law_id.present? ? true : false
+    fmu        = object.fmu_id.present? ? true : false
+    government = object.government_id.present? ? true : false
+
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Country Details' do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
-      f.input :law, input_html: { disabled: true }
+      f.input :law, input_html: { disabled: law },
+              collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]}
       f.input :severity, as: :select,
-              collection: Severity.all.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
-      f.input :fmu, input_html: { disabled: true }
+              collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
+      f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
       f.input :government, as: :select,
               collection: Government.all.map {|g| [g.government_entity, g.id] },
-              input_html: { disabled: true } if f.object.observation_type == 'government'
-      f.input :operator, input_html: { disabled: true } if f.object.observation_type == 'operator'
+              input_html: { disabled: government } if f.object.observation_type == 'government'
+      f.input :operator, input_html: { disabled: operator } if f.object.observation_type == 'operator'
       f.input :publication_date, as: :date_picker
       f.input :pv
       f.input :lat
