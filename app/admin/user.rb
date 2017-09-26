@@ -25,7 +25,7 @@ ActiveAdmin.register User do
     end
     column :is_active
     column 'Role', :user_permission do |user|
-      user.user_permission.user_role
+      user.user_permission.user_role if user.user_permission
     end
     column :name
     column :nickname
