@@ -139,7 +139,11 @@ ActiveAdmin.register Observation do
     government = object.government_id.present? ? true : false
 
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Country Details' do
+    f.inputs 'Status' do
+      f.input :is_active
+      f.input :validation_status
+    end
+    f.inputs 'Observation Details' do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
@@ -153,17 +157,15 @@ ActiveAdmin.register Observation do
               collection: Government.all.map {|g| [g.government_entity, g.id] },
               input_html: { disabled: government } if f.object.observation_type == 'government'
       f.input :operator, input_html: { disabled: operator } if f.object.observation_type == 'operator'
-      f.input :publication_date, as: :date_picker
+      f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false }
       f.input :pv
       f.input :lat
       f.input :lng
       f.input :observation_report, as: :select
-      f.has_many :observation_documents do |t|
+      f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
         t.input :name
         t.input :attachment
       end
-      f.input :validation_status
-      f.input :is_active
     end
     f.inputs 'Translated fields' do
       f.translated_inputs switch_locale: false do |t|
