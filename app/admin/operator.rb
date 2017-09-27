@@ -4,7 +4,8 @@ ActiveAdmin.register Operator do
   config.order_clause
 
   actions :all, except: :destroy
-  permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active, :certification,
+  permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
+                :logo, fmu_ids: [],
                 translations_attributes: [:id, :locale, :name, :details, :destroy]
 
   index do
@@ -23,9 +24,22 @@ ActiveAdmin.register Operator do
   end
 
   filter :country
-  filter :translations_name_contains, as: :string, label: 'Name', placeholder: 'Search by name...'
-  filter :concession
-  filter :updated_at
+  filter :translations_name_contains, as: :select, label: 'Name',
+         collection: Operator.joins(:translations).pluck(:name)
+  filter :concession, as: :select
+  filter :score
+  filter :score_absolute, label: 'Obs/Visit'
+  filter :percentage_valid_documents_all, label: '% Docs'
+
+  sidebar 'Fmus', only: :show do
+    attributes_table_for resource do
+      ul do
+        resource.fmus.collect do |fmu|
+          li link_to(fmu.name, admin_fmu_path(fmu.id))
+        end
+      end
+    end
+  end
 
   sidebar 'Documents', only: :show do
     attributes_table_for resource do
@@ -38,6 +52,7 @@ ActiveAdmin.register Operator do
   end
 
   form do |f|
+    edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Translated fields' do
       f.translated_inputs switch_locale: false do |t|
@@ -45,17 +60,51 @@ ActiveAdmin.register Operator do
         t.input :details
       end
     end
-    f.inputs 'Country Details' do
+    f.inputs 'Operator Details' do
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
-      f.input :operator_type
-      f.input :country
-      f.input :certification
+      f.input :operator_type, as: :select,
+              collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
+                           'Industrial agriculture', 'Mining company',
+                           'Sawmill', 'Other', 'Unknown']
+      f.input :country, input_html: { disabled: edit }
       f.input :concession
       f.input :logo
       f.input :is_active
+      available_fmus = Fmu.filter_by_free
+      if edit
+        available_fmus = []
+        Fmu.filter_by_free.find_each{|x| available_fmus << x}
+        f.object.fmus.find_each{|x| available_fmus << x}
+        f.input :fmus, collection: available_fmus
+      else
+        f.input :fmus, collection: available_fmus
+      end
     end
     f.actions
   end
+
+  show do
+    attributes_table do
+      row :is_active
+      row :operator_type
+      row :fa_id
+      row :details
+      row :country
+      image_row :logo
+      row :address
+      row :website
+      row :fmus
+      row :percentage_valid_documents_all
+      row :obs_per_visit
+      row :score
+      row :score_absolute
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
+  end
+
+
 
   controller do
     def scoped_collection
