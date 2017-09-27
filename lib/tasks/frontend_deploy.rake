@@ -7,8 +7,12 @@ namespace :deploy do
 
   task portal: :environment do
     Rails.logger.warn ':::: Going to redeploy the portal :::::'
-    command =  '../../otp-portal/npm run build'
-    stdout, stderr, status = Open3.capture3(command)
+    command =  'cd ../../otp-portal; npm run build'
+    begin
+      stdout, stderr, status = Open3.capture3(command)
+    rescue Exception => e
+      Rails.logger.error e.inspect
+    end
     Rails.logger.debug stdout
     Rails.logger.debug stderr
     Rails.logger.debug status
