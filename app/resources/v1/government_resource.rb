@@ -10,6 +10,8 @@ module V1
       super + [:'country.name']
     end
 
+    filters :country
+
     filter :'country.name', apply: ->(records, value, _options) {
       if value.present?
         sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
