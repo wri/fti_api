@@ -21,7 +21,9 @@ ActiveAdmin.register Observation do
 
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
-                :validation_status, :publication_date, :is_active, :observer_ids, :observation_report_id,
+                :validation_status, :publication_date, :is_active, :observation_report_id,
+                :law_id, observer_ids: [],
+                observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status]
 
 
@@ -60,6 +62,16 @@ ActiveAdmin.register Observation do
       observation.update_attributes(validation_status: Observation.validation_statuses['Under Revision'])
     end
     redirect_to collection_path, notice: 'Documents put under revision!'
+  end
+
+  sidebar 'Documents', only: :show do
+    attributes_table_for resource do
+      ul do
+          resource.observation_documents.collect do |od|
+          li link_to(od.name, admin_observation_document_path(od.id))
+        end
+      end
+    end
   end
 
   scope :all, default: true
@@ -146,6 +158,10 @@ ActiveAdmin.register Observation do
       f.input :lat
       f.input :lng
       f.input :observation_report, as: :select
+      f.has_many :observation_documents do |t|
+        t.input :name
+        t.input :attachment
+      end
       f.input :validation_status
       f.input :is_active
     end
