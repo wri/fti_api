@@ -35,6 +35,10 @@ module V1
                :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all]
     end
 
+    def self.records(options = {})
+      Operator.active
+    end
+
     def custom_links(_)
       { self: nil }
     end

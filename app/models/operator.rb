@@ -57,6 +57,10 @@ class Operator < ApplicationRecord
                            .order('operator_translations.name ASC')
   }
 
+  scope :active, -> {
+    where(is_active: true)
+  }
+
   default_scope { includes(:translations) }
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
