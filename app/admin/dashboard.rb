@@ -2,14 +2,8 @@ ActiveAdmin.register_page "Dashboard" do
 
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
-  # collection_action :deploy_portal, method: :post do
-  #   system 'ls'
-  #   sh 'ls'
-  #   redirect_to admin_dashboard_path, notice: 'Deploying...'
-  # end
-
   page_action :deploy_portal, method: :post do
-    system 'ls'
+    system 'rake deploy:portal'
     redirect_to admin_dashboard_path, notice: 'Deploying'
   end
 
