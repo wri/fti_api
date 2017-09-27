@@ -68,7 +68,7 @@ ActiveAdmin.register Observation do
     attributes_table_for resource do
       ul do
           resource.observation_documents.collect do |od|
-          li link_to(od.name, admin_observation_document_path(od.id))
+          li link_to(od.name, admin_evidence_path(od.id))
         end
       end
     end
