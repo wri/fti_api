@@ -1,22 +1,32 @@
-ActiveAdmin.register ObservationDocument do
-  menu parent: 'Uploaded Documents', priority: 2
+ActiveAdmin.register ObservationDocument, as: 'Evidence' do
+  menu parent: 'Uploaded Documents', as: 'Evidence', priority: 2
 
   actions :show, :index
 
   config.order_clause
 
-  filter :name, as: :select
-  filter :user, as: :select
-  filter :created_at
-
-
   index do
-    column :name
-    column :observation do |o|
-      link_to "#{o.observation.operator.name} - #{o.observation.publication_date}", admin_observation_path(o)
-    end
+    column :id, sortable: true
+    column :observation, sortable: true
+    column :name, sortable: true
     attachment_column :attachment
-    column :user
-    column :created_at
+    column :user, sortable: true
+    column :created_at, sortable: true
+    column :updated_at, sortable: :true
+    column :deleted_at, sortable: true
+    actions
+  end
+
+  show do
+    attributes_table do
+      row :id
+      row :observation
+      attachment_row :attachment
+      row :user
+      row :created_at
+      row :updated_at
+      row :deleted_at
+    end
+    active_admin_comments
   end
 end
