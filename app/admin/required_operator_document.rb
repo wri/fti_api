@@ -15,8 +15,8 @@ ActiveAdmin.register RequiredOperatorDocument do
 
   filter :required_operator_document_group
   filter :country
-  filter :type
-  filter :name
+  filter :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu)
+  filter :name, as: :select
   filter :updated_at
 
   form do |f|

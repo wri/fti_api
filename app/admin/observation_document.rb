@@ -17,6 +17,15 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
     actions
   end
 
+  filter :observation, as: :select, collection: Observation.joins(:observation_documents).pluck(:id)
+  filter :name, as: :select
+  filter :attachment, as: :select
+  filter :user
+  filter :created_at
+  filter :updated_at
+  filter :deleted_at
+
+
   show do
     attributes_table do
       row :id

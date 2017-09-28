@@ -58,7 +58,7 @@ ActiveAdmin.register OperatorDocument do
 
   filter :required_operator_document
   filter :operator
-  filter :status
+  filter :status, as: :select, collection: OperatorDocument.statuses
   filter :updated_at
 
   form do |f|
