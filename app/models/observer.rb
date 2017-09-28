@@ -48,7 +48,7 @@ class Observer < ApplicationRecord
             inclusion: { in: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other'] }, if: :organization_type?
 
   validates_format_of :information_email, with: EMAIL_VALIDATOR, if: :information_email?
-  validates_format_of :data_email, with: EMAIL_VALIDATOR, if: :data_email
+  validates_format_of :data_email, with: EMAIL_VALIDATOR, if: :data_email?
 
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
