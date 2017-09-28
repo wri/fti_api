@@ -6,12 +6,19 @@ ActiveAdmin.register ObservationReport do
   config.order_clause
   active_admin_paranoia
 
-  filter :id, as: :select
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([[observation_report_observers: [observer: :translations]],
+                                         [observations: :translations]])
+    end
+  end
+
   filter :title, as: :select
   filter :attachment, as: :select
   filter :user, as: :select
+  filter :observers
+  filter :observations, as: :select, collection: Observation.pluck(:id)
   filter :publication_date
-  filter :created_at
 
   index do
     column :id
@@ -19,6 +26,20 @@ ActiveAdmin.register ObservationReport do
     column :publication_date
     attachment_column :attachment
     column :user
+    column :observations do |o|
+      links = []
+      o.observations.each do |obs|
+       links << link_to(obs.id, admin_observation_path(obs.id))
+      end
+      links.reduce(:+)
+    end
+    column :observers do |o|
+      links = []
+      o.observers.joins(:translations).each do |observer|
+        links << link_to(observer.name, admin_monitor_path(observer.id))
+      end
+      links.reduce(:+)
+    end
     column :created_at
     column :updated_at
   end
