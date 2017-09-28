@@ -57,9 +57,9 @@ class Operator < ApplicationRecord
                            .order('operator_translations.name ASC')
   }
 
-  scope :active, -> {
-    where(is_active: true)
-  }
+  scope :active, -> { where(is_active: true) }
+
+  scope :fa_operator, -> { where.not(fa_id: nil) }
 
   default_scope { includes(:translations) }
 
@@ -92,52 +92,56 @@ class Operator < ApplicationRecord
   end
 
   def update_valid_documents_percentages
-    self.percentage_valid_documents_all = operator_documents.where(status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.count.to_f rescue 0
-    self.percentage_valid_documents_fmu = operator_documents.where(type: 'OperatorDocumentFmu', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentFmu').count.to_f rescue 0
-    self.percentage_valid_documents_country = operator_documents.where(type: 'OperatorDocumentCountry', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentCountry').count.to_f rescue 0
+    if fa_id.present?
+      self.percentage_valid_documents_all = operator_documents.where(status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.count.to_f rescue 0
+      self.percentage_valid_documents_fmu = operator_documents.where(type: 'OperatorDocumentFmu', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentFmu').count.to_f rescue 0
+      self.percentage_valid_documents_country = operator_documents.where(type: 'OperatorDocumentCountry', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentCountry').count.to_f rescue 0
 
-    self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all.nan?
-    self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country.nan?
-    self.percentage_valid_documents_fmu = 0 if self.percentage_valid_documents_fmu.nan?
+      self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all.nan?
+      self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country.nan?
+      self.percentage_valid_documents_fmu = 0 if self.percentage_valid_documents_fmu.nan?
 
-    self.save!
+      self.save!
+    end
   end
 
 
   def calculate_observations_scores
-    number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
-    number_of_visits = number_of_visits.keys.count
+    if fa_id.present?
+      number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
+      number_of_visits = number_of_visits.keys.count
 
-    # When there are no observations
-    if number_of_visits == 0
-      self.obs_per_visit = nil
-      self.score_absolute = nil
+      # When there are no observations
+      if number_of_visits == 0
+        self.obs_per_visit = nil
+        self.score_absolute = nil
+        save!
+        return
+      end
+
+      self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
+
+      high = observations.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
+      medium = observations.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
+      low = observations.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
+      unknown = observations.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
+      self.score_absolute  = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
+
       save!
-      return
     end
-
-    self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
-
-    high = observations.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
-    medium = observations.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
-    low = observations.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
-    unknown = observations.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
-    self.score_absolute  = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
-
-    save!
   end
 
   class << self
     def calculate_scores
-      Operator.where(score_absolute: nil).update_all(score: 0)
+      Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
 
-      number_operators = Operator.where.not(score_absolute: nil).count
+      number_operators = Operator.active.fa_operator.where.not(score_absolute: nil).count
       third_operators = (number_operators / 3).to_i
-      Operator.where.not(score_absolute: nil).order(:score_absolute)
+      Operator.active.fa_operator.where.not(score_absolute: nil).order(:score_absolute)
           .limit(third_operators).update_all(score: 1)
-      Operator.where.not(score_absolute: nil)
+      Operator.active.fa_operator.where.not(score_absolute: nil)
           .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
-      Operator.where.not(score_absolute: nil).order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
+      Operator.active.fa_operator.where.not(score_absolute: nil).order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
     end
   end
 
