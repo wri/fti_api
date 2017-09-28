@@ -18,7 +18,7 @@ namespace :deploy do
   desc 'Deploys the portal'
   task portal: :environment do
     Rails.logger.warn ':::: Going to redeploy the portal :::::'
-    command =  'cd ../../otp-portal; npm run build'
+    command =  'cd ../../otp-portal; npm run transifex:pull; npm run build'
     begin
       stdout, stderr, status = Open3.capture3(command)
     rescue Exception => e
