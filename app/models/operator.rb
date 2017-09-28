@@ -57,8 +57,8 @@ class Operator < ApplicationRecord
                            .order('operator_translations.name ASC')
   }
 
-  scope :active, -> { where(is_active: true) }
-
+  scope :active,   -> { where(is_active: true) }
+  scope :inactive, -> { where(is_active: false) }
   scope :fa_operator, -> { where.not(fa_id: nil) }
 
   default_scope { includes(:translations) }
