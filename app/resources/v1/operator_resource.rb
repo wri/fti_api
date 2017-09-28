@@ -57,7 +57,7 @@ module V1
       user = context[:current_user]
       app = context[:app]
       if app == 'observations-tool' && user.present?
-        Operator
+        super(options)
       else
         Operator.active.fa_operator
       end
