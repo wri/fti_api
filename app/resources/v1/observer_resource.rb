@@ -9,7 +9,7 @@ module V1
     has_many   :users
     has_many :observations
 
-    before_save :inactivate
+    before_create :inactivate
 
     def inactivate
       @model.is_active = false
