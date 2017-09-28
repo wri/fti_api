@@ -15,7 +15,7 @@ module V1
     has_many :operator_document_fmus
     has_many :operator_document_countries
 
-    filters :country, :is_active, :name, :operator_type
+    filters :country, :is_active, :name, :operator_type, :fa_operator
 
     before_create :set_active
 
@@ -48,8 +48,19 @@ module V1
       end
     }
 
+    filter :fa_operator, apply: ->(records, value, _options) {
+
+    }
+
     def self.records(options = {})
-      Operator.active
+      context = options[:context]
+      user = context[:current_user]
+      app = context[:app]
+      if app == 'observations-tool' && user.present?
+        Operator
+      else
+        Operator.active.fa_operator
+      end
     end
 
     def custom_links(_)
