@@ -29,19 +29,40 @@ ActiveAdmin.register Observation do
 
   member_action :approve, method: :put do
     resource.update_attributes(validation_status: Observation.validation_statuses['Approved'])
-    redirect_to collection_path, notice: 'Document approved'
+    redirect_to collection_path, notice: 'Observation approved'
   end
 
   member_action :reject, method: :put do
     resource.update_attributes(validation_status: Observation.validation_statuses['Rejected'])
-    redirect_to collection_path, notice: 'Document rejected'
+    redirect_to collection_path, notice: 'Observation rejected'
   end
 
   member_action :start_review, method: :put do
     resource.update_attributes(validation_status: Observation.validation_statuses['Under revision'])
-    redirect_to collection_path, notice: 'Document under revision'
+    redirect_to collection_path, notice: 'Observation under revision'
   end
 
+
+  action_item :approve, only: :show do
+    if ['Created', 'Under revision'].include? resource.validation_status
+      link_to 'Approve', approve_admin_observation_path(observation),
+              method: :put, data: { confirm: 'Do you want to APPROVE this observation?' }, notice: 'Observation Approved'
+    end
+  end
+
+  action_item :reject, only: :show do
+    if ['Created', 'Under revision'].include? resource.validation_status
+      link_to 'Reject', reject_admin_observation_path(observation),
+              method: :put, data: { confirm: 'Do you want to REJECT this observation?' }, notice: 'Observation Rejected'
+    end
+  end
+
+  action_item :start_review, only: :show do
+    if %w(Created Rejected Approved).include? resource.validation_status
+      link_to 'Start Revision', start_review_admin_observation_path(observation),
+              method: :put, notice: 'Observation Under Revision'
+    end
+  end
 
   batch_action :approve, confirm: 'Are you sure you want to approve all this observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
@@ -177,4 +198,41 @@ ActiveAdmin.register Observation do
     end
     f.actions
   end
+
+  show do
+    attributes_table do
+      row :is_active
+      tag_row :validation_status
+      row :country
+      row :observation_type
+      row :subcategory
+      row :law
+      row :severity do |o|
+        o.severity.details
+      end
+      if resource.fmu.present?
+        row :fmu
+      end
+      if resource.operator.present?
+        row :operator
+      end
+      if resource.government.present?
+        row :government do |o|
+          o.government.government_entity
+        end
+      end
+      row :publication_date
+      row :pv
+      row :lat
+      row :lng
+      row :actions_taken
+      row :observation_report
+      row :user
+      row :modified_user
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
+  end
+
 end
