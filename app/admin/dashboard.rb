@@ -4,20 +4,15 @@ ActiveAdmin.register_page "Dashboard" do
 
   page_action :deploy_portal, method: :post do
     system 'rake deploy:portal'
-    redirect_to admin_dashboard_path, notice: 'Deploying'
+    redirect_to admin_dashboard_path, notice: 'Deploying Portal'
+  end
+
+  page_action :deploy_ot, method: :post do
+    system 'rake deploy:tools'
+    redirect_to admin_dashboard_path, notice: 'Deploying IM Backoffice'
   end
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
-
-    # sidebar :actions do
-    # button_to "Update projects", "/admin/projects/updateprojects", :method => :post, :confirm => "Are you sure?"
-    # end
-    #
-    # collection_action :updateprojects, :method => :post do
-    #   system "rake dataspider:import_projects_ninja"
-    #   redirect_to admin_dashboard_path, :notice => "Syncing..."
-    # end
-
     columns do
       column do
         panel 'Site Management' do
