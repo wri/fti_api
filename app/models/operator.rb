@@ -46,7 +46,7 @@ class Operator < ApplicationRecord
   has_many :operator_document_fmus, -> { valid }
 
   after_create :create_operator_id
-  after_save :create_documents
+  after_create :create_documents
 
   validates :name, presence: true
   validates :website, url: true, if: lambda {|x| x.website.present?}
@@ -145,6 +145,33 @@ class Operator < ApplicationRecord
     end
   end
 
+
+  def rebuild_documents
+    return if fa_id.blank?
+    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
+
+    # Country Documents
+    RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
+      unless OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).present?
+        OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id,
+                                      status: OperatorDocument.statuses[:doc_not_provided],
+                                      current: true).create!
+      end
+    end
+
+    # FMU Documents
+    RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
+      Fmu.where(operator_id: id).find_each do |fmu|
+        unless OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).any?
+          OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id,
+                                    status: OperatorDocument.statuses[:doc_not_provided],
+                                    current: true).create!
+        end
+      end
+    end
+
+
+  end
 
   private
 

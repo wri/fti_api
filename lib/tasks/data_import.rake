@@ -450,4 +450,53 @@ namespace :import do
     end
     puts 'Finished operator documents'
   end
+
+  # Imports the operator document files
+  desc 'Import Operator Documents'' Files'
+  task operator_document_files: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_documents.csv'))
+    puts '* Operator Documents Files... *'
+    i = 0
+    OperatorDocument.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        i = i+1
+        puts '-> ' + i.to_s
+        data_row = row.to_h
+        operator = Operator.find_by(fa_id: data_row['ID'])
+        fmu = nil
+        fmu = Fmu.joins(:translations).where("name like '%#{data_row['FA_FMU']}%'").first if data_row['FA_FMU'].present?
+        required_operator_document = RequiredOperatorDocument.find_by(name: data_row['OTP_Document name'])
+        link = data_row['Link to the document']
+        start_date = data_row['OTP_Signature date']
+
+        puts "Operator: #{operator} | RODC : #{required_operator_document} | FMU #{fmu}"
+
+        if operator.nil? || required_operator_document.nil? || fmu.nil?
+          puts ">>>>>>>> ERROR: #{data_row['ID']} | #{data_row['OTP_Document name']} | FMU #{fmu}"
+          next
+        end
+
+        operator_document =
+            if fmu.present?
+              OperatorDocument.find_by(operator_id: operator.id,
+                                       required_operator_document_id: required_operator_document.id, fmu_id: fmu.id)
+            else
+              OperatorDocument.find_by(operator_id: operator.id,
+                                       required_operator_document_id: required_operator_document.id)
+            end
+
+        operator_document.start_date = start_date
+
+        begin
+          puts ":::::: Going to load #{link}"
+          operator_document.remote_attachment_url = link
+        rescue Exception => e
+          puts "-------Couldn't load Operator Document: #{link}: #{e.inspect}"
+        end
+
+        operator_document.save!
+      end
+    end
+  end
+
 end
