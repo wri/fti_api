@@ -98,6 +98,8 @@ ActiveAdmin.register Observation do
   scope :all, default: true
   scope :operator
   scope :government
+  scope :pending
+  scope :created
 
   filter :validation_status, as: :select, collection: Observation.validation_statuses
   filter :country

@@ -18,7 +18,8 @@ ActiveAdmin.register_page "Dashboard" do
         panel 'Portal' do
           button_to 'Deploy Portal', '/admin/dashboard/deploy_portal', method: :post,
                     data: { confirm: 'Are you sure you want to deploy the PORTAL?' },
-                    style: 'font-size: 1.5em'
+                    class: 'deploy-button'
+                    #style: 'font-size: 1.5em'
         end
       end
 
@@ -26,14 +27,15 @@ ActiveAdmin.register_page "Dashboard" do
         panel 'IM Backoffice' do
           button_to 'Deploy IM Backoffice', '/admin/dashboard/deploy_ot', method: :post,
                     data: { confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'},
-                    style: 'font-size: 1.5em'
+                    class: 'deploy-button'
+                    #style: 'font-size: 1.5em'
         end
       end
     end
 
     columns do
       column do
-        panel 'First 20 Pending Observations' do
+        panel "First 20 Pending Observations out of #{Observation.Created.count}" do
           table_for Observation.Created.order('updated_at DESC').limit(20).each do
             column('ID') { |obs| link_to obs.id, admin_observation_path(obs.id) }
             column('Country') {|obs| obs.country }
@@ -46,7 +48,7 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
       column do
-        panel 'First 20 Pending Documents' do
+        panel "First 20 Pending Documents out of #{OperatorDocument.doc_pending.count}" do
           table_for OperatorDocument.doc_pending.order('updated_at DESC').limit(20).each do
             column('Operator') { |od| link_to od.operator.name, admin_operator_path(od.operator_id) }
             column('Name') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
