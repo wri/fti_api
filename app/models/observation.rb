@@ -83,6 +83,9 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
         .where("all_observers.id = #{observer}")
   }
 
+  scope :pending, ->() { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
+  scope :created, ->() { joins(:translations).where(validation_status: 'Created') }
+
   class << self
     def translated_types
       types.map { |t| [I18n.t("observation_types.#{t}", default: t), t.camelize] }

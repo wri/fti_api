@@ -61,6 +61,8 @@ ActiveAdmin.register OperatorDocument do
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :updated_at
 
+  scope 'Pending', :doc_pending
+
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Operator Document Details' do
@@ -76,14 +78,14 @@ ActiveAdmin.register OperatorDocument do
     f.actions
   end
 
-  show do
+  show title: proc{ "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
     attributes_table do
+      row :current
+      tag_row :status
       row :required_operator_document
       row :operator
-      row :status
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :uploaded_by
-      row :current
       if resource.attachment.present?
         attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
       end

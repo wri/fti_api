@@ -41,15 +41,25 @@ ActiveAdmin.register Operator do
     end
   end
 
-  sidebar 'Documents', only: :show do
-    attributes_table_for resource do
-      ul do
-        resource.operator_documents.collect do |od|
-          li link_to("[#{od.status}] #{od.required_operator_document.name}", admin_operator_document_path(od.id))
-        end
-      end
+  sidebar 'Valid Documents', only: :show, if: proc{ resource.operator_documents.where(status: 'doc_valid').any? } do
+    table_for resource.operator_documents.where(status: 'doc_valid').collect do |od|
+      column('') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
   end
+
+  sidebar 'Pending Documents', only: :show, if: proc{ resource.operator_documents.where(status: 'doc_pending').any? } do
+    table_for resource.operator_documents.where(status: 'doc_pending').collect do |od|
+      column('') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
+    end
+  end
+
+  sidebar 'Invalid Documents', only: :show,
+          if: proc{ resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).any? } do
+    table_for resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).collect do |od|
+      column('') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
+    end
+  end
+
 
   form do |f|
     edit = f.object.new_record? ? false : true
