@@ -3,7 +3,7 @@ namespace :deploy do
 
   task tools: :environment do
     Rails.logger.warn ':::: Going to redeploy the IM Backoffice :::::'
-    command =  'cd ../../otp-observations-tool; npm run transifex; npm run prod-build'
+    command =  'cd ../../otp-observations-tool; npm run transifex:pull; npm run prod-build'
     begin
       stdout, stderr, status = Open3.capture3(command)
     rescue Exception => e
