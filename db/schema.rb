@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926102853) do
+ActiveRecord::Schema.define(version: 20171002163848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,8 +110,11 @@ ActiveRecord::Schema.define(version: 20170926102853) do
     t.integer  "country_id"
     t.integer  "operator_id"
     t.jsonb    "geojson"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "certification_fsc",  default: false
+    t.boolean  "certification_pefc", default: false
+    t.boolean  "certification_olb",  default: false
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
     t.index ["operator_id"], name: "index_fmus_on_operator_id", using: :btree
   end
@@ -297,7 +300,6 @@ ActiveRecord::Schema.define(version: 20170926102853) do
     t.float    "percentage_valid_documents_all"
     t.float    "percentage_valid_documents_country"
     t.float    "percentage_valid_documents_fmu"
-    t.integer  "certification"
     t.float    "score_absolute"
     t.integer  "score"
     t.float    "obs_per_visit"
