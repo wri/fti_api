@@ -67,7 +67,23 @@ class OperatorDocument < ApplicationRecord
     end
   end
 
-  # default_scope { where(current: true, deleted_at: nil) }
+  def self.expire_documents
+    documents_to_expire = OperatorDocument.where("expire_date < '#{Date.today}'::date and status = 3")
+    number_of_documents = documents_to_expire.count
+    documents_to_expire.find_each(&:expire_document)
+    Rails.logger.info "Expired #{number_of_documents} documents"
+  end
+
+  def expire_document
+    self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
+    o = OperatorDocument.new(operator_id: self.operator_id,
+                             required_operator_document_id: self.required_operator_document_id,
+                             fmu_id: self.fmu_id, start_date: Date.today,
+                             status: OperatorDocument.statuses[:doc_not_provided],
+                             current: true)
+    o.save!
+  end
+
   scope :valid, -> { where(current: true, deleted_at: nil) }
 
   private
@@ -98,4 +114,5 @@ class OperatorDocument < ApplicationRecord
                                               status: OperatorDocument.statuses[:doc_pending])
     pending_documents.each {|x| x.destroy}
   end
+
 end

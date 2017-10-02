@@ -59,7 +59,6 @@ gem 'mini_magick'
 
 # Templating
 gem 'slim-rails'
-#gem 'will_paginate'
 
 # New Relic
 gem 'newrelic_rpm'
