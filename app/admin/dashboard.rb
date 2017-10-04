@@ -3,32 +3,34 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   page_action :deploy_portal, method: :post do
-    system 'rake deploy:portal'
+    system 'rake deploy:portal' if current_user.user_permission.user_role == 'admin'
     redirect_to admin_dashboard_path, notice: 'Deploying Portal'
   end
 
   page_action :deploy_ot, method: :post do
-    system 'rake deploy:tools'
+    system 'rake deploy:tools' if current_user.user_permission.user_role == 'admin'
     redirect_to admin_dashboard_path, notice: 'Deploying IM Backoffice'
   end
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
-    columns do
-      column do
-        panel 'Portal' do
-          button_to 'Deploy Portal', '/admin/dashboard/deploy_portal', method: :post,
-                    data: { confirm: 'Are you sure you want to deploy the PORTAL?' },
-                    class: 'deploy-button'
-                    #style: 'font-size: 1.5em'
+    if current_user.user_permission.user_role == 'admin'
+      columns do
+        column do
+          panel 'Portal' do
+            button_to 'Deploy Portal', '/admin/dashboard/deploy_portal', method: :post,
+                      data: { confirm: 'Are you sure you want to deploy the PORTAL?' },
+                      class: 'deploy-button'
+                      #style: 'font-size: 1.5em'
+          end
         end
-      end
 
-      column do
-        panel 'IM Backoffice' do
-          button_to 'Deploy IM Backoffice', '/admin/dashboard/deploy_ot', method: :post,
-                    data: { confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'},
-                    class: 'deploy-button'
-                    #style: 'font-size: 1.5em'
+        column do
+          panel 'IM Backoffice' do
+            button_to 'Deploy IM Backoffice', '/admin/dashboard/deploy_ot', method: :post,
+                      data: { confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'},
+                      class: 'deploy-button'
+                      #style: 'font-size: 1.5em'
+          end
         end
       end
     end

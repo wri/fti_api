@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <th>User</th>
+    <th>Monitor</th>
+  </tr>
+  <% users.each do |user| %>
+    <tr>
+      <td><%= link_to user[:name], admin_single_access_control_path(user.id) %></td>
+      <td><%= 8 %></td>
+    </tr>
+  <% end %>
+</table>
+<%#= paginate users %>

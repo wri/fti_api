@@ -1,0 +1,9 @@
+<%=
+  Arbre::Context.new({}, self) do
+    table_for(User.all, sortable: true, class: 'index_table') do
+      column :id
+      column :name
+      column :created_at
+    end
+  end
+%>

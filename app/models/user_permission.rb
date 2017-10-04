@@ -13,7 +13,7 @@
 #
 
 class UserPermission < ApplicationRecord
-  enum user_role: { user: 0, operator: 1, ngo: 2, admin: 3 }.freeze
+  enum user_role: { user: 0, operator: 1, ngo: 2, admin: 3, ngo_manager: 4, bo_manager: 5 }.freeze
 
   belongs_to :user
 
@@ -38,18 +38,56 @@ class UserPermission < ApplicationRecord
             observation: { manage: { observers: { id: user.observer_id }},  create: {}},
             observation_report: { update: { observers: { id: user.observer_id }}, create: {}},
             observation_documents:  { ud: { observation: { is_active: false, observers: { id: user.observer_id }}}, create: {}},
-            category: { cru: {}},
-            subcategory: { cru: {}},
-            government: { cru: {}},
-            species: { cru: {}},
-            operator: { cru: {}},
-            law: { cru: {}},
-            severity: { cru: {}},
+            category: { read: {}},
+            subcategory: { read: {}},
+            government: { read: {}},
+            species: { read: {}},
+            operator: { create: {}, read: {}},
+            law: { read: {}},
+            severity: { read: {}},
             observer: { read: {} ,  update: { id: user.observer_id }},
-            fmu: { read: {}, update: {}},
-            operator_document: { manage: {} },
-            required_operator_document_group: { cru: {}},
-            required_operator_document: { cru: {}}
+            fmu: { read: {}},
+            operator_document: { read: {} },
+            required_operator_document_group: { read: {}},
+            required_operator_document: { read: {}}
+          }
+        when 'ngo_manager'
+          {
+              user: { manage: { id: user.id } },
+              observation: { manage: { observers: { id: user.observer_id }},  create: {}},
+              observation_report: { update: { observers: { id: user.observer_id }}, create: {}},
+              observation_documents:  { ud: { observation: { is_active: false, observers: { id: user.observer_id }}}, create: {}},
+              category: { cru: {}},
+              subcategory: { cru: {}},
+              government: { cru: {}},
+              species: { cru: {}},
+              operator: { cru: {}},
+              law: { cru: {}},
+              severity: { cru: {}},
+              observer: { read: {} ,  update: { id: user.observer_id }},
+              fmu: { read: {}, update: {}},
+              operator_document: { manage: {} },
+              required_operator_document_group: { cru: {}},
+              required_operator_document: { cru: {}}
+          }
+        when 'bo_manager'
+          {
+              user: { manage: { id: user.id }},
+              observation: { manage: {}},
+              observer: { read: {}},
+              operator: { read: {}},
+              observation_report: { read: {} },
+              observation_documents:  { read: {}},
+              category: { read: {}},
+              subcategory: { read: {}},
+              government: { read: {}},
+              species: { read: {}},
+              law: { read: {}},
+              severity: { read: {}},
+              fmu: { read: {}},
+              operator_document: { read: {} },
+              required_operator_document_group: { read: {}},
+              required_operator_document: { read: {}}
           }
         else
           { user: { id: user.id }, observations: { read: {}}}
