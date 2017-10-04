@@ -3,12 +3,15 @@
 #
 # Table name: fmus
 #
-#  id          :integer          not null, primary key
-#  country_id  :integer
-#  operator_id :integer
-#  geojson     :jsonb
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id                 :integer          not null, primary key
+#  country_id         :integer
+#  operator_id        :integer
+#  geojson            :jsonb
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  certification_fsc  :boolean          default(FALSE)
+#  certification_pefc :boolean          default(FALSE)
+#  certification_olb  :boolean          default(FALSE)
 #
 
 class Fmu < ApplicationRecord

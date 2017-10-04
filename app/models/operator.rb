@@ -15,7 +15,6 @@
 #  percentage_valid_documents_all     :float
 #  percentage_valid_documents_country :float
 #  percentage_valid_documents_fmu     :float
-#  certification                      :integer
 #  score_absolute                     :float
 #  score                              :integer
 #  obs_per_visit                      :float
@@ -30,7 +29,7 @@ class Operator < ApplicationRecord
 
   mount_base64_uploader :logo, LogoUploader
 
-  enum certification: { fsc: 0, pefc: 1, olb: 2 }
+  #enum certification: { fsc: 0, pefc: 1, olb: 2 }
 
   TYPES = ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
            'Sawmill', 'Other', 'Unknown'].freeze
