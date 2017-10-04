@@ -25,10 +25,25 @@ ActiveAdmin.register RequiredOperatorDocument do
       editing = object.new_record? ? false : true
       f.input :required_operator_document_group
       f.input :country
-      f.input :type, input_html: { disabled: editing }
+      f.input :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu),
+              include_blank: false, input_html: { disabled: editing }
       f.input :name
       f.input :valid_period, label: 'Validity (days)'
     end
     f.actions
+  end
+
+  controller do
+    def create
+      super do |format|
+        redirect_to collection_url and return if resource.valid?
+      end
+    end
+
+    def update
+      super do |format|
+        redirect_to collection_url and return if resource.valid?
+      end
+    end
   end
 end
