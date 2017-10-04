@@ -10,9 +10,12 @@
 #  created_at                          :datetime         not null
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
+#  deleted_at                          :datetime
 #
 
 class RequiredOperatorDocument < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :required_operator_document_group
   belongs_to :country
   has_many :operator_documents
