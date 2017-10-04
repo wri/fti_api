@@ -10,6 +10,7 @@
 #  created_at                          :datetime         not null
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
+#  deleted_at                          :datetime
 #
 
 class RequiredOperatorDocumentCountry < RequiredOperatorDocument

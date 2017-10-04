@@ -1,6 +1,8 @@
 ActiveAdmin.register RequiredOperatorDocument do
   menu parent: 'Documents', priority: 1
 
+  active_admin_paranoia
+
   actions :all
   permit_params :name, :type, :valid_period, :country, :required_operator_document_group_id, :country_id
 
