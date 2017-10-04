@@ -469,10 +469,14 @@ namespace :import do
         link = data_row['Link to the document']
         start_date = data_row['OTP_Signature date']
 
-        puts "Operator: #{operator} | RODC : #{required_operator_document} | FMU #{fmu}"
-
-        if operator.nil? || required_operator_document.nil? || fmu.nil?
-          puts ">>>>>>>> ERROR: #{data_row['ID']} | #{data_row['OTP_Document name']} | FMU #{fmu}"
+        if operator.nil?
+          puts ">>>>>>>> OPERATOR #{data_row['ID']}"
+          next
+        elsif required_operator_document.nil?
+          puts ">>>>>>>> DOCUMENT #{data_row['OTP_Document name']}"
+          next
+        elsif fmu.nil? && data_row['FA_FMU'].present?
+          puts ">>>>>>>> FMU #{data_row['FA_FMU']}"
           next
         end
 
@@ -484,17 +488,21 @@ namespace :import do
               OperatorDocument.find_by(operator_id: operator.id,
                                        required_operator_document_id: required_operator_document.id)
             end
-
-        operator_document.start_date = start_date
-
+        
         begin
-          puts ":::::: Going to load #{link}"
+          next if operator_document.status == OperatorDocument.statuses[:doc_pending]
           operator_document.remote_attachment_url = link
         rescue Exception => e
           puts "-------Couldn't load Operator Document: #{link}: #{e.inspect}"
         end
 
-        operator_document.save!
+        begin
+          operator_document.start_date = start_date
+          operator_document.status = OperatorDocument.statuses[:doc_pending]
+          operator_document.save!
+        rescue
+          puts "<<<<<<<<<<<<< Operator Document not found"
+        end
       end
     end
   end
