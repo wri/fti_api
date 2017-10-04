@@ -1,0 +1,15 @@
+<%= form_for([:admin, @up]) do |f|%>
+  <h1><%= @up.user.name %></h1>
+
+  <%
+    @permissions = @up.permissions
+  %>
+
+  <fieldset class="form-group row">
+    <%= label_tag 'Category' %>
+    <div class="col-sm-10"><%= check_box_tag :category, class: 'form-control' %></div>
+  </fieldset>
+
+  <%= f.hidden_field :permissions, value: nil %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
