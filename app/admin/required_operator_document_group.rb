@@ -2,7 +2,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   menu parent: 'Documents', priority: 0
 
   actions :all, except: :destroy
-  permit_params :name
+  permit_params translations_attributes: [:id, :locale, :name]
 
   sidebar :required_operator_documents, only: :show do
     sidebar = RequiredOperatorDocument.where(required_operator_document_group: resource).collect do |rod|
