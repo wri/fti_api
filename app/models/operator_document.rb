@@ -20,7 +20,7 @@
 #
 
 class OperatorDocument < ApplicationRecord
-  acts_as_paranoid #without_default_scope: true
+  acts_as_paranoid
 
   belongs_to :operator, required: true, touch: true
   belongs_to :required_operator_document, required: true
@@ -89,7 +89,7 @@ class OperatorDocument < ApplicationRecord
   private
 
   def insure_unity
-    if self.current
+    if self.current && self.observatio
       od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
                                     required_operator_document_id: self.required_operator_document_id,
                                     status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
