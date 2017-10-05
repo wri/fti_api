@@ -39,7 +39,13 @@ ActiveAdmin.register OperatorDocument do
       od.deleted_at.nil?
     end
     tag_column :status
-    column :required_operator_document, sortable: 'required_operator_documents.name'
+    column :required_operator_document, sortable: 'required_operator_documents.name' do |od|
+      if od.required_operator_document.present?
+        od.required_operator_document.name
+      else
+        RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).name
+      end
+    end
     column :'Type', sortable: 'required_operator_documents.type' do |od|
       if od.required_operator_document.present?
         od.required_operator_document.type
