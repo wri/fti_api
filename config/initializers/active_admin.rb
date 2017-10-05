@@ -292,8 +292,8 @@ ActiveAdmin.setup do |config|
   # config.order_clause = MyOrderClause
 
   # These two are defined in ActiveAdmin::FilterSaver::Controller, which is loaded below.
-  config.before_filter :restore_search_filters
-  config.after_filter :save_search_filters
+  config.before_filter :restore_search_filters, unless: :devise_controller?
+  config.after_filter :save_search_filters, unless: :devise_controller?
 end
 
 require 'active_admin/filter_saver/controller'
