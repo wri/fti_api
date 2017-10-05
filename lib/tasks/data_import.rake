@@ -488,7 +488,7 @@ namespace :import do
               OperatorDocument.find_by(operator_id: operator.id,
                                        required_operator_document_id: required_operator_document.id)
             end
-        
+
         begin
           next if operator_document.status == OperatorDocument.statuses[:doc_pending]
           operator_document.remote_attachment_url = link
