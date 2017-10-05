@@ -73,7 +73,10 @@ ActiveAdmin.register OperatorDocument do
     actions
   end
 
-  filter :required_operator_document
+
+  filter :required_operator_document,
+         collection: RequiredOperatorDocument.
+             joins(country: :translations).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
   filter :operator
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :updated_at
