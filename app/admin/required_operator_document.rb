@@ -7,6 +7,9 @@ ActiveAdmin.register RequiredOperatorDocument do
   permit_params :name, :type, :valid_period, :country, :required_operator_document_group_id, :country_id
 
   index do
+    bool_column :exists do |rod|
+      rod.deleted_at.nil?
+    end
     column :required_operator_document_group
     column :country
     column :type
