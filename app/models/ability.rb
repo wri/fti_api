@@ -21,14 +21,28 @@ class Ability
 
         cannot [:activate, :deactivate, :destroy], User,           id: user.id
         cannot [:edit, :update],                   UserPermission, user_id: user.id
+
+        if user.user_permission.user_role == 'bo_manager'
+          can :read, ActiveAdmin::Page, name: 'Dashboard'
+          can :read, ActiveAdmin::Comment
+          can :create, ActiveAdmin::Comment
+          can :manage, ActiveAdmin::Comment, author_id: user.id
+
+        end
+
       else
         can [:read], User, id: user.id
       end
     end
-    can :read, [Country, Observer, Operator,
-                Fmu, Category, OperatorDocument, RequiredOperatorDocument, RequiredOperatorDocumentGroup,
+
+
+
+    can :read, [Country, Fmu, Category, Subcategory, Law, Species,
+                OperatorDocument, RequiredOperatorDocument, RequiredOperatorDocumentGroup,
                 ObservationReport, ObservationDocument]
     can :read, Observation, is_active: true
+    can :read, Observer, is_active: true
+    can :read, Operator, is_active: true
     can :create, Operator, is_active: false
   end
 end
