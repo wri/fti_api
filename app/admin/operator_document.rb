@@ -35,15 +35,26 @@ ActiveAdmin.register OperatorDocument do
                 :attachment, :uploaded_by
 
   index do
+    bool_column :exists do |od|
+      od.deleted_at.nil?
+    end
     tag_column :status
     column :required_operator_document, sortable: 'required_operator_documents.name'
     column :'Type', sortable: 'required_operator_documents.type' do |od|
-      od.required_operator_document.type
+      if od.required_operator_document.present?
+        od.required_operator_document.type
+      else
+        RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).type
+      end
     end
     column :operator, sortable: 'operator_translations.name'
     column :fmu, sortable: 'fmu_translations.name'
     column 'Legal Category' do |od|
-      od.required_operator_document.required_operator_document_group.name
+      if od.required_operator_document.present?
+        od.required_operator_document.required_operator_document_group.name
+      else
+        RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).required_operator_document_group.name
+      end
     end
     column :user, sortable: 'users.name'
     column :expire_date
