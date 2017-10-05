@@ -55,3 +55,11 @@ form input.deploy-button {
   font-size: 1.5em;
   width: 100%;
 }
+
+.form-control-checkbox {
+  margin: 0 0 5px;
+
+  label {
+    margin: 0 0 0 4px;
+  }
+}

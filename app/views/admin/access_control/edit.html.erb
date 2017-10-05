@@ -1,15 +1,37 @@
 <%= form_for([:admin, @up]) do |f|%>
-  <h1><%= @up.user.name %></h1>
-
   <%
-    @permissions = @up.permissions
+    @permissions = {}
+
+    @categories = %w(observer operator observation_report observation_documents
+    category subcategory government species law severity fmu operator_document
+    required_operator_document required_operator_document_group)
+    @categories.each do |p|
+      @permissions[p] = @up.permissions[p]['read'].nil? ? true : false
+    end
   %>
 
-  <fieldset class="form-group row">
-    <%= label_tag 'Category' %>
-    <%= check_box_tag :category, class: 'form-control' %>
+  <h1><%= @up.user.name %></h1>
+
+  <fieldset class="form-group row" id="access-control">
+    <% @categories.each do |category| %>
+      <div class="form-control-checkbox">
+        <%= check_box_tag category, '', @permissions[category], class: 'form-control' %>
+        <%= label_tag category %>
+      </div>
+    <% end %>
   </fieldset>
 
-  <%= f.hidden_field :permissions, value: nil %>
-  <%= f.submit class: 'btn btn-primary' %>
+  <%= f.hidden_field :permissions, value: @up.permissions.to_json %>
+
+  <fieldset class="actions">
+    <ol>
+      <li>
+        <%= f.submit class: 'btn-submit' %>
+      </li>
+      <li class="cancel">
+        <%= link_to 'Cancel', admin_access_control_path%>
+      </li>
+    </ol>
+  </fieldset>
+
 <% end %>
