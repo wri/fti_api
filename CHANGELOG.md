@@ -6,6 +6,75 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.7] - 2017-09-28
+### Backoffice
+- Improved the dashboard (added pending documents and operators)
+- The last filters used are saved
+
+### Features
+- Created task for expiring documents and performing the scores calculations
+- Changed the certifications from being associated to an Operator, to an FMU
+- Made the Required Operator Document persisted even when deleted
+
+### Import
+- Imported Operator Documents' Files
+
+### Technical details
+- Added cascade deletes to the required operator document
+
+## [0.9.6] - 2017-09-28
+### Backoffice
+- Added the resources:
+  - Laws
+  - Species
+  - FMUs
+  - Monitors
+- Improved usability and the interface
+- Insured only admins who are active can log in
+- Improved forms:
+  - Observer
+  - Operator
+  - Observation
+- Created the buttons to deploy the Portal and IM BO (and update the translations)
+
+### Features
+- Added filters and sorting in the IM BO for:
+  - `Operators`
+  - `Monitors`
+
+### Technical details
+- Added endpoint for severities  
+
+## [0.9.5] - 2017-09-20
+### Features
+- Creation of operators in the Portal
+- New fields for Operators (website and address)
+- Added filters and sorting in the IM BO for:
+  - `FMUs` 
+  - `Observation Reports`
+  - `Observation Documents`
+  - `Laws` 
+- Creating a report in an observation makes all the observers own the report
+- Created special rules for operators with FA ID
+  - Are the only ones with documents
+  - Are the only ones with observation scores
+  
+### Technical details
+- Refactored the import task
+
+
+
+## [0.9.4] - 2017-09-13
+### Imports
+- New data for governance and operator observations
+
+### Technical details
+- Refactored the permissions system
+
+### Bug fixes
+- In the IM BO, only the user's monitor was being listed in the observations
+- Permissions: ngo's couldn't create reports or documents
+
 ## [0.9.3] - 2017-09-6
 ### Technical details
 - Added `created-at` and `updated-at` for observations
@@ -14,15 +83,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added controller action to the JsonApi Resources context
 - Removed the default scope from observations
 - When creating an observation, the current monitor is added to its monitor list
-- Fmus included in `observations-tool` now have the geoJason
+- FMUs included in `observations-tool` now have the geoJason
 - Added touch for observations/observers/reports/documents
+- Created the task to import Laws
+- Added touch to observer and observation when saving reports and documents
+- Created a deploy and import task
 
 
 ### Improvements
 - Observations tool
   - Admins can see all observations
 
-### Aditions
+### Additions
 - Reports can be shared between monitors
 - Added `actions-taken` to observations
 - Observations save the user who last modified them
