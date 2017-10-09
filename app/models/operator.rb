@@ -31,8 +31,6 @@ class Operator < ApplicationRecord
 
   mount_base64_uploader :logo, LogoUploader
 
-  #enum certification: { fsc: 0, pefc: 1, olb: 2 }
-
   TYPES = ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
            'Sawmill', 'Other', 'Unknown'].freeze
 
@@ -40,7 +38,11 @@ class Operator < ApplicationRecord
 
   has_many :observations, -> { active },  inverse_of: :operator
   has_many :users, inverse_of: :operator
-  has_many :fmus, inverse_of: :operator
+
+  has_many :fmu_operators, -> { where(current: true).limit(1) }, inverse_of: :operator
+  has_many :fmus, through: :fmu_operators
+  has_many :all_fmu_operators, class_name: 'FmuOperator'
+  has_many :all_fmus, through: :all_fmu_operators, source: :fmu
 
   has_many :operator_documents, -> { valid }
   has_many :operator_document_countries, -> { valid }

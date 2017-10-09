@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(version: 20171017161902) do
     t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
   end
 
+  create_table "fmu_operators", force: :cascade do |t|
+    t.integer "fmu_id",      null: false
+    t.integer "operator_id", null: false
+    t.boolean "current",     null: false
+    t.date    "start_date"
+    t.date    "end_date"
+    t.index ["fmu_id", "operator_id"], name: "index_fmu_operators_on_fmu_id_and_operator_id", using: :btree
+    t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id", using: :btree
+  end
+
   create_table "fmu_translations", force: :cascade do |t|
     t.integer  "fmu_id",     null: false
     t.string   "locale",     null: false
@@ -117,16 +127,6 @@ ActiveRecord::Schema.define(version: 20171017161902) do
     t.boolean  "certification_pefc", default: false
     t.boolean  "certification_olb",  default: false
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
-  end
-
-  create_table "fmus_operators", id: false, force: :cascade do |t|
-    t.integer "fmu_id",      null: false
-    t.integer "operator_id", null: false
-    t.boolean "current"
-    t.date    "start_date"
-    t.date    "end_date"
-    t.index ["fmu_id", "operator_id"], name: "index_fmus_operators_on_fmu_id_and_operator_id", using: :btree
-    t.index ["operator_id", "fmu_id"], name: "index_fmus_operators_on_operator_id_and_fmu_id", using: :btree
   end
 
   create_table "government_translations", force: :cascade do |t|
@@ -160,8 +160,6 @@ ActiveRecord::Schema.define(version: 20171017161902) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "country_id"
-    t.index ["country_id"], name: "index_laws_on_country_id", using: :btree
-    t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
   end
 
   create_table "observation_documents", force: :cascade do |t|

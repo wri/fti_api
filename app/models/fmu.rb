@@ -22,8 +22,13 @@ class Fmu < ApplicationRecord
   end
 
   belongs_to :country, inverse_of: :fmus
-  belongs_to :operator, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu
+
+  has_many :fmu_operators, inverse_of: :fmu
+  has_many :operators, through: :fmu_operators
+  has_one :fmu_operator, ->{ where(current: true).limit(1) }
+  has_one :operator, through: :fmu_operator
+
 
   validates :country_id, presence: true
   validates :name, presence: true
@@ -38,7 +43,7 @@ class Fmu < ApplicationRecord
   scope :with_certification_fsc,   ->()             { where certification_fsc: true }
   scope :with_certification_pefc,  ->()             { where certification_pefc: true }
   scope :with_certification_olb,   ->()             { where certification_olb: true }
-  scope :current,                  ->()             { }
+  scope :current,                  ->()             { joins(:operator_fmus).where(current: true).limit(1) }
 
   class << self
     def fetch_all(options)
