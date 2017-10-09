@@ -70,7 +70,15 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
 
-      column
+      column do
+        panel "Last 20 Contact requests out of #{Contact.count}" do
+          table_for Contact.order('created_at DESC').limit(20).each do
+            column('Name')  { |c| link_to c.name, admin_contact_path(c.id) }
+            column('Email') { |c| c.email }
+            column('Date')  { |c| c.created_at }
+          end
+        end
+      end
     end
   end # content
 end
