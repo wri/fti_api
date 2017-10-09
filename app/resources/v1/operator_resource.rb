@@ -52,6 +52,10 @@ module V1
 
     }
 
+    def obs_per_visit
+      sprintf('%.2f', @model.obs_per_visit) if @model.obs_per_visit.present?
+    end
+
     def self.records(options = {})
       context = options[:context]
       user = context[:current_user]
