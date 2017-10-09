@@ -38,6 +38,7 @@ class Fmu < ApplicationRecord
   scope :with_certification_fsc,   ->()             { where certification_fsc: true }
   scope :with_certification_pefc,  ->()             { where certification_pefc: true }
   scope :with_certification_olb,   ->()             { where certification_olb: true }
+  scope :current,                  ->()             { }
 
   class << self
     def fetch_all(options)
