@@ -1,5 +1,5 @@
 ActiveAdmin.register RequiredOperatorDocumentGroup do
-  menu parent: 'Documents', priority: 0
+  menu parent: 'Operator Documents', priority: 0
 
   actions :all, except: :destroy
   permit_params translations_attributes: [:id, :locale, :name]

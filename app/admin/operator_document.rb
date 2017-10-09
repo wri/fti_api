@@ -1,5 +1,5 @@
 ActiveAdmin.register OperatorDocument do
-  menu parent: 'Documents', priority: 2
+  menu parent: 'Operator Documents', priority: 2
   config.order_clause
 
   active_admin_paranoia

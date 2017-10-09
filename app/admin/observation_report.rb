@@ -1,5 +1,5 @@
 ActiveAdmin.register ObservationReport do
-  menu parent: 'Uploaded Documents', priority: 1
+  menu parent: 'Observation Documents', priority: 1
 
   actions :show, :index
 

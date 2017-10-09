@@ -1,5 +1,5 @@
 ActiveAdmin.register ObservationDocument, as: 'Evidence' do
-  menu parent: 'Uploaded Documents', as: 'Evidence', priority: 2
+  menu parent: 'Observation Documents', as: 'Evidence', priority: 2
 
   actions :show, :index
 
