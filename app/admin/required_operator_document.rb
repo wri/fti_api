@@ -1,5 +1,5 @@
 ActiveAdmin.register RequiredOperatorDocument do
-  menu parent: 'Documents', priority: 1
+  menu parent: 'Operator Documents', priority: 1
 
   active_admin_paranoia
 
