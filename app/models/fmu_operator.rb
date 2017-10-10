@@ -32,12 +32,14 @@ class FmuOperator < ApplicationRecord
   # Insures only one operator is active per fmu
   def one_active_per_fmu
     return false unless fmu.present?
-    fmu.fmu_operators.where(current: true).count <= 1
+    unless fmu.fmu_operators.where(current: true).count <= 1
+      errors.add(:current, 'There can only be one active operator at a time')
+    end
   end
 
   # Makes sure the dates don't collide
   def non_colliding_dates
-    dates = FmuOperator.where(fmu_id: self.fmu_id, operator: self.operator_id).pluck(:start_date, :end_date)
+    dates = FmuOperator.where(fmu_id: self.fmu_id).pluck(:start_date, :end_date)
     dates << [self.start_date, self.end_date]
 
     for i in 0...(dates.count - 1)
