@@ -15,11 +15,17 @@ class FmuOperator < ApplicationRecord
 
   belongs_to :fmu,        required: true
   belongs_to :operator,   required: true
+  before_validation     :set_current_start_date
   validates_presence_of :start_date
   validate :start_date_is_earlier
   validate :one_active_per_fmu
   validate :non_colliding_dates
 
+
+  # Sets the start date as today, if none is provided
+  def set_current_start_date
+    self.start_date = Date.today unless self.start_date.present?
+  end
 
   # Validates if the start date is earlier than the end date
   def start_date_is_earlier
@@ -55,11 +61,16 @@ class FmuOperator < ApplicationRecord
     return true
   end
 
-  # Calculates and sets all the active operator_fmus on a given day
-  def self.calculate_active
+  # Calculates and sets all the current operator_fmus on a given day
+  def self.calculate_current
     # Checks which one should be active
+    to_deactivate = FmuOperator.where("current = 'TRUE' AND end_date < #{Date.today}")
+    to_activate   = FmuOperator.
+        where("current = 'FALSE' AND start_date <= ##{Date.today} AND (end_date = NULL OR end_date >= #{Date.today})")
 
     # Updates the operator documents
+    to_deactivate.find_each{ |x| x.current = false; x.save! }
+    to_activate.find_each{ |x| x.current = true; x.save! }
   end
 
 
