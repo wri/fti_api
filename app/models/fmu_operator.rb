@@ -64,9 +64,9 @@ class FmuOperator < ApplicationRecord
   # Calculates and sets all the current operator_fmus on a given day
   def self.calculate_current
     # Checks which one should be active
-    to_deactivate = FmuOperator.where("current = 'TRUE' AND end_date < #{Date.today}")
+    to_deactivate = FmuOperator.where("current = 'TRUE' AND end_date < '#{Date.today}'::date")
     to_activate   = FmuOperator.
-        where("current = 'FALSE' AND start_date <= ##{Date.today} AND (end_date = NULL OR end_date >= #{Date.today})")
+        where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date = NULL OR end_date >= '#{Date.today}'::date)")
 
     # Updates the operator documents
     to_deactivate.find_each{ |x| x.current = false; x.save! }
