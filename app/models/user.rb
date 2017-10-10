@@ -179,7 +179,7 @@ class User < ApplicationRecord
       case user_permission.user_role
         when 'operator'
           errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
-        when 'ngo'
+        when 'ngo', 'ngo_manager'
           errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
         else
           errors['operator_id'] << 'Cannot have an Operator' unless operator_id.blank?
