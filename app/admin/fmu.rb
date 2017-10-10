@@ -8,7 +8,7 @@ ActiveAdmin.register Fmu do
   controller do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
-                                         [operator: :translations]])
+                                         [fmu_operators: [operator: :translations]]])
     end
   end
 
