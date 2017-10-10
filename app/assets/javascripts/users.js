@@ -18,6 +18,7 @@ function updateFields(){
       operatorInput.parent().hide();
       break;
     case 'ngo':
+    case 'ngo_manager':
       observerInput.prop('disabled', false);
       observerInput.parent().show();
       operatorInput.prop('disabled', true);
