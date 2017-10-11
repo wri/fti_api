@@ -25,7 +25,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   belongs_to :user
 
   before_validation(on: :create) do
-    self.status = OperatorDocument.statuses[:doc_not_provided]
+    self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
 
   validates_presence_of :operator_document_id

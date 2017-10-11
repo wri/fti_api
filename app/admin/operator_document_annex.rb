@@ -40,8 +40,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     tag_column :status
     column :operator_document, sortable: 'operator_documents.name' do |od|
-      if od.operator_document.present?
-        od.operator_document.name
+      if od.operator_document.present? && od.operator_document.required_operator_document.present?
+        od.operator_document.required_operator_document.name
       else
         OperatorDocument.unscoped.find(od.operator_document_id).name
       end
@@ -70,7 +70,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Operator Document Annex Details' do
-      f.input :operator_document, input_html: { disabled: true }
+      f.input :operator_document, as: :select, collection: OperatorDocument.pluck(:id), input_html: { disabled: true }
       f.input :uploaded_by
       f.input :name
       f.input :status, include_blank: false
@@ -84,9 +84,16 @@ ActiveAdmin.register OperatorDocumentAnnex do
   show  do
     attributes_table do
       tag_row :status
-      row :required_operator_document
-      row :operator
+      row :required_operator_document do
+        resource.operator_document.required_operator_document if resource.operator_document.present? &&
+            resource.operator_document.required_operator_document.present?
+      end
+      row :operator do
+        resource.operator_document.operator if resource.operator_document.present?
+      end
+      row :operator_document
       row :uploaded_by
+      row :user
       if resource.attachment.present?
         attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
       end

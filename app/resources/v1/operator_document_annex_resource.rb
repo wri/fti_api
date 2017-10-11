@@ -2,10 +2,11 @@ module V1
   class OperatorDocumentAnnexResource < JSONAPI::Resource
     caching
     attributes :operator_document_id, :name,
-               :start_date, :expire_date, :status,
+               :start_date, :expire_date, :status, :attachment,
                :uploaded_by, :created_at, :updated_at
 
     has_one :operator_document
+    has_one :user
 
     filters :status, :operator_document_id
 
@@ -14,7 +15,7 @@ module V1
     def set_user_id
       if context[:current_user].present?
         @model.user_id = context[:current_user].id
-        @model.uplodaded_by = :operator
+        @model.uploaded_by = :operator
       end
     end
 
