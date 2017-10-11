@@ -1,5 +1,5 @@
 ActiveAdmin.register Fmu do
-  menu parent: 'Settings', priority: 4
+  menu parent: 'Settings', priority: 5
 
   actions :show, :edit, :index, :update
 
@@ -15,7 +15,8 @@ ActiveAdmin.register Fmu do
   scope :all, default: true
   scope 'Free', :filter_by_free
 
-  permit_params :id, translations_attributes: [:id, :locale, :name]
+  permit_params :id, :certification_fsc, :certification_pefc,
+                :certification_olb, translations_attributes: [:id, :locale, :name]
 
   filter :id, as: :select
   filter :translations_name_contains, as: :select, label: 'Name',
@@ -28,6 +29,9 @@ ActiveAdmin.register Fmu do
     column :name, sortable: 'fmu_translations.name'
     column :country, sortable: 'country_translations.name'
     column :operator, sortable: 'operator_translations.name'
+    column :certification_fsc
+    column :certification_pefc
+    column :certification_olb
 
     actions
   end
@@ -37,6 +41,9 @@ ActiveAdmin.register Fmu do
     f.inputs 'Fmu Details' do
       f.input :country,  input_html: { disabled: true }
       f.input :operator, input_html: { disabled: true }
+      f.input :certification_fsc
+      f.input :certification_pefc
+      f.input :certification_olb
     end
 
     f.inputs 'Translated fields' do

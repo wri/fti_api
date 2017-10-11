@@ -13,6 +13,8 @@
 class Severity < ApplicationRecord
   translates :details
 
+  active_admin_translates :details do; end
+
   belongs_to :subcategory, inverse_of: :severities
   has_many :observations, inverse_of: :severity
 

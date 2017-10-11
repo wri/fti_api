@@ -13,6 +13,8 @@ class Subcategory < ApplicationRecord
   enum subcategory_type: { operator: 0, government: 1 }
   translates :name, :details
 
+  active_admin_translates :name do; end
+
   belongs_to :category
   has_many :severities, dependent: :destroy
   has_many :observations, inverse_of: :subcategory, dependent: :destroy

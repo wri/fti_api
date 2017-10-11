@@ -1,5 +1,5 @@
 ActiveAdmin.register Species do
-  menu parent: 'Settings', priority: 5
+  menu parent: 'Settings', priority: 7
 
   actions :create, :show, :edit, :index
 
