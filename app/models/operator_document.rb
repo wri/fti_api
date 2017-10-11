@@ -90,11 +90,6 @@ class OperatorDocument < ApplicationRecord
 
   def insure_unity
     if self.current && self.required_operator_document.present?
-      od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                                    required_operator_document_id: self.required_operator_document_id,
-                                    status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
-                                    current: true)
-      od.save!(validate: false)
     else
       true
     end
