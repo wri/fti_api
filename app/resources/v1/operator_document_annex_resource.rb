@@ -9,12 +9,17 @@ module V1
 
     filters :status, :operator_document_id
 
-    before_create :set_user_id
+    before_create :set_user_id, :set_status
 
     def set_user_id
       if context[:current_user].present?
         @model.user_id = context[:current_user].id
+        @model.uplodaded_by = :operator
       end
+    end
+
+    def set_status
+      @model.status = OperatorDocumentAnnex.statuses[:doc_pending]
     end
 
     def custom_links(_)

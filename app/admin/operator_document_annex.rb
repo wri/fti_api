@@ -4,9 +4,10 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   active_admin_paranoia
 
+  # To include the deleted operator document annexes
   scope_to do
     Class.new do
-      def self.operator_documents
+      def self.operator_document_annexes
         OperatorDocumentAnnex.unscoped
       end
     end
@@ -14,8 +15,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   controller do
     def scoped_collection
-#      end_of_association_chain.includes([:user, [operator_document: [operator: :translations]]])
-#      end_of_association_chain.includes([:user, :operator_document])
+     end_of_association_chain.includes([:user, [operator_document: [operator: :translations]]])
+ #     end_of_association_chain.includes([:user, :operator_document])
     end
   end
 
@@ -59,7 +60,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
 
-  filter :operator_document
+  filter :operator_document, as: :select, collection: OperatorDocument.pluck(:id)
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
   filter :updated_at
