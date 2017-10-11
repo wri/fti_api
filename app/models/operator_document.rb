@@ -26,6 +26,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :required_operator_document, required: true
   belongs_to :fmu
   belongs_to :user
+  has_many :operator_document_annexes
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
 
