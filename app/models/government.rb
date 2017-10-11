@@ -13,8 +13,9 @@
 class Government < ApplicationRecord
   translates :government_entity, :details
 
-  belongs_to :country, inverse_of: :governments, optional: true
+  active_admin_translates :government_entity, :details do; end
 
+  belongs_to :country, inverse_of: :governments, optional: true
   has_many :observations, inverse_of: :government
 
   validates :government_entity, presence: true
