@@ -15,13 +15,23 @@ ActiveAdmin.register Severity do
 
   filter :translations_details_contains, as: :select, label: 'Details',
          collection: Severity.joins(:translations).pluck(:details)
-  filter :subcategory
+  filter :subcategory, as: :select
   filter :level, as: :select, collection: 0..3
+  filter :created_at
+  filter :updated_at
+
+  sidebar :observations, only: :show do
+    sidebar = Observation.where(law: resource).collect do |obs|
+      auto_link(obs, obs.id)
+    end
+    safe_join(sidebar, content_tag('br'))
+  end
 
   index do
-    column :subcategory, sortable: 'subcategory_translations.name'
-    column :level, sortable: true
     column :details, sortable: 'severity_translations.details'
+    column :subcategory, sortable: 'subcategory_translations.name'
+    column :level
+    column :updated_at
 
     actions
   end
@@ -42,7 +52,6 @@ ActiveAdmin.register Severity do
 
     f.actions
   end
-
 
   show do
     attributes_table do

@@ -11,6 +11,8 @@ ActiveAdmin.register Subcategory do
     end
   end
 
+  permit_params translations_attributes: [:id, :locale, :name]
+
   scope :all, default: true
   scope :operator
   scope :government
@@ -28,6 +30,13 @@ ActiveAdmin.register Subcategory do
     safe_join(sidebar, content_tag('br'))
   end
 
+  sidebar :severities, only: :show do
+    sidebar = Severity.where(subcategory: resource).collect do |sev|
+      auto_link(sev, sev.level)
+    end
+    safe_join(sidebar, content_tag('br'))
+  end
+
   index do
     column :name, sortable: 'subcategory_translations.name'
     column :category, sortable: 'category_translations.name'
@@ -36,5 +45,32 @@ ActiveAdmin.register Subcategory do
     column :updated_at
 
     actions
+  end
+
+  form do |f|
+    f.semantic_errors *f.object.errors.keys
+    f.inputs 'Subcategory Details' do
+      f.input :category,          input_html: { disabled: true }
+      f.input :subcategory_type,  input_html: { disabled: true }
+    end
+
+    f.inputs 'Translated fields' do
+      f.translated_inputs switch_locale: false do |t|
+        t.input :name
+      end
+    end
+
+    f.actions
+  end
+
+  show do
+    attributes_table do
+      row :category
+      row :subcategory_type
+      row :name
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
   end
 end
