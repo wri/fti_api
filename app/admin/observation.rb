@@ -102,7 +102,7 @@ ActiveAdmin.register Observation do
   scope :created
 
   filter :validation_status, as: :select, collection: Observation.validation_statuses
-  filter :country
+  filter :country, as: :select, collection: Country.joins(:observations).group(:id)
   filter :observers
   filter :operator
   filter :government_translations_government_entity_contains, as: :select, label: 'Government Entity',
