@@ -60,8 +60,9 @@ gem 'mini_magick'
 # Templating
 gem 'slim-rails'
 
-# New Relic
+# Performance
 gem 'newrelic_rpm'
+gem 'oink'
 
 group :development, :test do
   gem 'byebug',                    platform: :mri
