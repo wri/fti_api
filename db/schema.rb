@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004094942) do
+ActiveRecord::Schema.define(version: 20171013150213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.boolean  "is_active",        default: false, null: false
+    t.index ["is_active"], name: "index_countries_on_is_active", using: :btree
+    t.index ["iso"], name: "index_countries_on_iso", using: :btree
   end
 
   create_table "country_translations", force: :cascade do |t|
@@ -94,6 +96,17 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.string   "region_name"
     t.index ["country_id"], name: "index_country_translations_on_country_id", using: :btree
     t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
+  end
+
+  create_table "fmu_operators", force: :cascade do |t|
+    t.integer "fmu_id",      null: false
+    t.integer "operator_id", null: false
+    t.boolean "current",     null: false
+    t.date    "start_date"
+    t.date    "end_date"
+    t.index ["current"], name: "index_fmu_operators_on_current", using: :btree
+    t.index ["fmu_id", "operator_id"], name: "index_fmu_operators_on_fmu_id_and_operator_id", using: :btree
+    t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id", using: :btree
   end
 
   create_table "fmu_translations", force: :cascade do |t|
@@ -108,7 +121,6 @@ ActiveRecord::Schema.define(version: 20171004094942) do
 
   create_table "fmus", force: :cascade do |t|
     t.integer  "country_id"
-    t.integer  "operator_id"
     t.jsonb    "geojson"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
@@ -116,7 +128,6 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.boolean  "certification_pefc", default: false
     t.boolean  "certification_olb",  default: false
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
-    t.index ["operator_id"], name: "index_fmus_on_operator_id", using: :btree
   end
 
   create_table "government_translations", force: :cascade do |t|
@@ -150,6 +161,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "country_id"
+    t.index ["country_id"], name: "index_laws_on_country_id", using: :btree
+    t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
   end
 
   create_table "observation_documents", force: :cascade do |t|
@@ -161,6 +174,9 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.datetime "deleted_at"
     t.integer  "observation_id"
     t.index ["deleted_at"], name: "index_observation_documents_on_deleted_at", using: :btree
+    t.index ["name"], name: "index_observation_documents_on_name", using: :btree
+    t.index ["observation_id"], name: "index_observation_documents_on_observation_id", using: :btree
+    t.index ["user_id"], name: "index_observation_documents_on_user_id", using: :btree
   end
 
   create_table "observation_report_observers", force: :cascade do |t|
@@ -168,6 +184,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.integer  "observer_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.index ["observation_report_id", "observer_id"], name: "index_obs_rep_id_and_observer_id", using: :btree
+    t.index ["observer_id", "observation_report_id"], name: "index_observer_id_and_obs_rep_id", using: :btree
   end
 
   create_table "observation_reports", force: :cascade do |t|
@@ -179,6 +197,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.datetime "updated_at",       null: false
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_observation_reports_on_deleted_at", using: :btree
+    t.index ["title"], name: "index_observation_reports_on_title", using: :btree
+    t.index ["user_id"], name: "index_observation_reports_on_user_id", using: :btree
   end
 
   create_table "observation_translations", force: :cascade do |t|
@@ -216,9 +236,16 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.integer  "modified_user_id"
     t.integer  "law_id"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
+    t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
+    t.index ["is_active"], name: "index_observations_on_is_active", using: :btree
+    t.index ["law_id"], name: "index_observations_on_law_id", using: :btree
+    t.index ["observation_report_id"], name: "index_observations_on_observation_report_id", using: :btree
+    t.index ["observation_type"], name: "index_observations_on_observation_type", using: :btree
     t.index ["operator_id"], name: "index_observations_on_operator_id", using: :btree
     t.index ["severity_id"], name: "index_observations_on_severity_id", using: :btree
+    t.index ["user_id"], name: "index_observations_on_user_id", using: :btree
+    t.index ["validation_status"], name: "index_observations_on_validation_status", using: :btree
   end
 
   create_table "observer_observations", force: :cascade do |t|
@@ -257,6 +284,25 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.string   "data_phone"
     t.string   "organization_type"
     t.index ["country_id"], name: "index_observers_on_country_id", using: :btree
+    t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
+  end
+
+  create_table "operator_document_annexes", force: :cascade do |t|
+    t.integer  "operator_document_id"
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "expire_date"
+    t.date     "deleted_at"
+    t.integer  "status"
+    t.string   "attachment"
+    t.integer  "uploaded_by"
+    t.integer  "user_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at", using: :btree
+    t.index ["operator_document_id"], name: "index_operator_document_annexes_on_operator_document_id", using: :btree
+    t.index ["status"], name: "index_operator_document_annexes_on_status", using: :btree
+    t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
   end
 
   create_table "operator_documents", force: :cascade do |t|
@@ -274,7 +320,15 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.datetime "deleted_at"
     t.integer  "uploaded_by"
     t.integer  "user_id"
+    t.index ["current"], name: "index_operator_documents_on_current", using: :btree
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
+    t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree
+    t.index ["fmu_id"], name: "index_operator_documents_on_fmu_id", using: :btree
+    t.index ["operator_id"], name: "index_operator_documents_on_operator_id", using: :btree
+    t.index ["required_operator_document_id"], name: "index_operator_documents_on_required_operator_document_id", using: :btree
+    t.index ["start_date"], name: "index_operator_documents_on_start_date", using: :btree
+    t.index ["status"], name: "index_operator_documents_on_status", using: :btree
+    t.index ["type"], name: "index_operator_documents_on_type", using: :btree
   end
 
   create_table "operator_translations", force: :cascade do |t|
@@ -307,6 +361,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.string   "address"
     t.string   "website"
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
+    t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
+    t.index ["is_active"], name: "index_operators_on_is_active", using: :btree
   end
 
   create_table "photos", force: :cascade do |t|
@@ -345,6 +401,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.integer  "valid_period"
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_required_operator_documents_on_deleted_at", using: :btree
+    t.index ["required_operator_document_group_id"], name: "index_req_op_doc_group_id", using: :btree
+    t.index ["type"], name: "index_required_operator_documents_on_type", using: :btree
   end
 
   create_table "severities", force: :cascade do |t|
@@ -352,6 +410,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "subcategory_id"
+    t.index ["level", "subcategory_id"], name: "index_severities_on_level_and_subcategory_id", using: :btree
+    t.index ["subcategory_id", "level"], name: "index_severities_on_subcategory_id_and_level", using: :btree
   end
 
   create_table "severity_translations", force: :cascade do |t|
@@ -411,6 +471,8 @@ ActiveRecord::Schema.define(version: 20171004094942) do
     t.integer  "subcategory_type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id", using: :btree
+    t.index ["subcategory_type"], name: "index_subcategories_on_subcategory_type", using: :btree
   end
 
   create_table "subcategory_translations", force: :cascade do |t|
