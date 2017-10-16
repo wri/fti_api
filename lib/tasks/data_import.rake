@@ -507,4 +507,60 @@ namespace :import do
     end
   end
 
+
+  # Imports the operator document files
+  desc 'Import Operator Documents'' Files V2'
+  task operator_document_files_v2: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_documents_v2.csv'))
+    puts '* Operator Documents Files... *'
+    i = 0
+    OperatorDocument.transaction do
+      CSV.foreach(filename, col_sep: ';', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
+        i = i+1
+        puts '-> ' + i.to_s
+        data_row = row.to_h
+        operator = Operator.find_by(fa_id: data_row['ID'])
+        fmu = nil
+        fmu = Fmu.joins(:translations).where("name like '%#{data_row['Concession']}%'").first if data_row['Type'] == 'RequiredOperatorDocumentFmu'
+        required_operator_document = RequiredOperatorDocument.find_by(name: data_row['Required operator document'])
+        start_date = data_row['Start Date']
+        file = data_row['Document File Path']
+
+        if operator.nil?
+          puts ">>>>>>>> OPERATOR #{data_row['Company']}"
+          next
+        elsif required_operator_document.nil?
+          puts ">>>>>>>> DOCUMENT #{data_row['Required operator Document']}"
+          next
+        elsif fmu.nil? && data_row['Type'] == 'RequiredOperatorDocumentFmu'
+          puts ">>>>>>>> FMU #{data_row['Concession']}"
+          next
+        end
+
+        operator_document =
+            if fmu.present?
+              OperatorDocument.find_by(operator_id: operator.id,
+                                       required_operator_document_id: required_operator_document.id, fmu_id: fmu.id)
+            else
+              OperatorDocument.find_by(operator_id: operator.id,
+                                       required_operator_document_id: required_operator_document.id)
+            end
+
+        begin
+          next if operator_document.status == OperatorDocument.statuses[:doc_pending]
+          operator_document.attachment = File.open(File.join(Rails.root, 'db', 'files', 'operator_document_files', file).shellescape)
+        rescue Exception => e
+          puts "-------Couldn't load Operator Document: #{file}: #{e.inspect}"
+        end
+
+        begin
+          operator_document.start_date = start_date
+          operator_document.status = OperatorDocument.statuses[:doc_pending]
+          operator_document.save!
+        rescue
+          puts "<<<<<<<<<<<<< Operator Document not found"
+        end
+      end
+    end
+  end
 end
