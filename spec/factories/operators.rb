@@ -20,6 +20,8 @@
 #  fa_id                              :string
 #  address                            :string
 #  website                            :string
+#  country_doc_rank                   :integer
+#  country_operators                  :integer
 #
 
 FactoryGirl.define do
