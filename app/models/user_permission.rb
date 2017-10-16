@@ -31,7 +31,7 @@ class UserPermission < ApplicationRecord
         when 'admin'
           { admin: { manage: {} }, all: { manage: {} } }
         when 'operator'
-          { user: { manage: { id: user.id }} , operator_document: { manage: { operator_id: eval('self.') }},
+          { user: { manage: { id: user.id }} , operator_document: { manage: { operator_id: eval('self.id') }},
             observation: { read: {}}}
         # TODO Put this back when the observations-tool support it
         # when 'ngo'
