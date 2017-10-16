@@ -24,7 +24,7 @@ module V1
           @model.penal_servitude.present? &&
           @model.apv.present?
     end
-    
+
     def custom_links(_)
       { self: nil }
     end
