@@ -4,7 +4,7 @@ module V1
     attributes :name, :operator_type, :concession, :is_active, :logo, :details,
                :percentage_valid_documents_fmu, :percentage_valid_documents_country,
                :percentage_valid_documents_all, :score, :obs_per_visit,
-               :website, :address, :fa_id
+               :website, :address, :fa_id, :country_doc_rank, :country_operators
 
     has_one :country
     has_many :fmus
@@ -27,12 +27,14 @@ module V1
 
     def self.updatable_fields(context)
       super - [:score, :obs_per_visit, :fa_id,
-               :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all]
+               :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all,
+               :country_doc_rank, :country_operators]
     end
 
     def self.creatable_fields(context)
       super - [:score, :obs_per_visit, :fa_id,
-               :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all]
+               :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all,
+               :country_doc_rank, :country_operators]
     end
 
     def self.sortable_fields(context)

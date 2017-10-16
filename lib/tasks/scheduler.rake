@@ -14,7 +14,10 @@ namespace :scheduler do
   task calculate_scores: :environment do
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
     Rails.logger.info "Going to calculate operator scores documents at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
-    time = Benchmark.ms { Operator.calculate_scores }
+    time = Benchmark.ms do
+      Operator.calculate_scores
+      Operator.calculate_document_ranking
+    end
     Rails.logger.info "Scores calculated. It took #{time} ms."
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end

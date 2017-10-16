@@ -21,6 +21,8 @@
 #  fa_id                              :string
 #  address                            :string
 #  website                            :string
+#  country_doc_rank                   :integer
+#  country_operators                  :integer
 #
 
 class Operator < ApplicationRecord
@@ -104,7 +106,6 @@ class Operator < ApplicationRecord
     end
   end
 
-
   def calculate_observations_scores
     if fa_id.present?
       number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
@@ -131,6 +132,25 @@ class Operator < ApplicationRecord
   end
 
   class << self
+    # Calculates the ranking of each operator within its own country
+    # based on the percentage of documents uploaded
+    def calculate_document_ranking
+      Country.active.find_each do |country|
+        number_of_operators = country.operators.count
+        rank_position = 0
+        country.operators.order(percentage_valid_documents_all: :desc).each do |o|
+          if o.percentage_valid_documents_all.present?
+            rank = rank_position + 1
+            rank_position += 1
+          else
+            rank = number_of_operators
+          end
+          o.update_attributes(country_operators: number_of_operators,
+                              country_doc_rank: rank)
+        end
+      end
+    end
+
     def calculate_scores
       Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
 

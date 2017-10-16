@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013150213) do
+ActiveRecord::Schema.define(version: 20171016171030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -360,6 +360,8 @@ ActiveRecord::Schema.define(version: 20171013150213) do
     t.string   "fa_id"
     t.string   "address"
     t.string   "website"
+    t.integer  "country_doc_rank"
+    t.integer  "country_operators"
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
     t.index ["is_active"], name: "index_operators_on_is_active", using: :btree

@@ -2,7 +2,7 @@ module V1
   class LawResource < JSONAPI::Resource
     caching
     attributes :written_infraction, :infraction, :sanctions, :min_fine, :max_fine,
-               :penal_servitude, :other_penalties, :apv
+               :penal_servitude, :other_penalties, :apv, :complete
 
     has_one :subcategory
     has_one :country
@@ -13,6 +13,16 @@ module V1
 
     def self.sortable_fields(context)
       super + [:'subcategory.name', :'country.name']
+    end
+
+    def complete
+      @model.written_infraction.present? &&
+          @model.infraction.present? &&
+          @model.sanctions.present? &&
+          @model.min_fine.present? &&
+          @model.max_fine.present? &&
+          @model.penal_servitude.present? &&
+          @model.apv.present?
     end
 
     def custom_links(_)
