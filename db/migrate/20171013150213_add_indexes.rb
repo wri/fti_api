@@ -3,7 +3,8 @@ class AddIndexes < ActiveRecord::Migration[5.0]
     add_index :countries, :is_active
     add_index :countries, :iso
 
-    add_index :fmu_operators, :current
+    # TODO Add this in another migration after merging the branches
+    # add_index :fmu_operators, :current
 
     add_index :laws, :country_id
     add_index :laws, :subcategory_id
