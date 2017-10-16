@@ -24,21 +24,7 @@ module V1
           @model.penal_servitude.present? &&
           @model.apv.present?
     end
-
-
-      #  written_infraction :text
-      #  infraction         :text
-      #  sanctions          :text
-      #  min_fine           :integer
-      #  max_fine           :integer
-      #  penal_servitude    :string
-      #  other_penalties    :text
-      #  apv                :text
-      #  subcategory_id     :integer
-      #  created_at         :datetime         not null
-      #  updated_at         :datetime         not null
-      #  country_id         :integer
-
+    
     def custom_links(_)
       { self: nil }
     end
