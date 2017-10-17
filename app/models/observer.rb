@@ -21,7 +21,7 @@
 #
 
 class Observer < ApplicationRecord
-  translates :name, :organization
+  translates :name, :organization, touch: true
 
   active_admin_translates :name do
     validates_presence_of :name
