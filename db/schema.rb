@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016171030) do
+ActiveRecord::Schema.define(version: 20171017161902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -365,6 +365,17 @@ ActiveRecord::Schema.define(version: 20171016171030) do
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
     t.index ["is_active"], name: "index_operators_on_is_active", using: :btree
+  end
+
+  create_table "partners", force: :cascade do |t|
+    t.string   "name"
+    t.string   "website"
+    t.string   "logo"
+    t.integer  "priority"
+    t.integer  "category"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "photos", force: :cascade do |t|

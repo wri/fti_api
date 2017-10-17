@@ -11,6 +11,7 @@ if Rails.env.test? || Rails.env.cucumber?
   ObservationDocumentUploader
   LogoUploader
   OperatorDocumentUploader
+  PartnerLogoUploader
 
   CarrierWave::Uploader::Base.descendants.each do |klass|
     next if klass.anonymous?
