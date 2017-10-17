@@ -559,7 +559,7 @@ namespace :import do
         end
 
         begin
-          operator_document.start_date = Date.strptime(start_date, 'mm/dd/yy')
+          operator_document.start_date = Date.strptime(start_date, '%m/%d/%Y')
           operator_document.status = OperatorDocument.statuses[:doc_pending]
           operator_document.save!
         rescue
