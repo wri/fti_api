@@ -24,6 +24,14 @@ module V1
       @model.is_active = false unless user.present?
     end
 
+    filter :certifications, apply: ->(records, value, _options) {
+      records = records.fmus_with_certification_fsc       if value.include?('fsc')
+      records = records.fmus_with_certification_pefc      if value.include?('pefc')
+      records = records.fmus_with_certification_olb       if value.include?('olb')
+
+      records
+    }
+
 
     def self.updatable_fields(context)
       super - [:score, :obs_per_visit, :fa_id,

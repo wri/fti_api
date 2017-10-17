@@ -65,6 +65,11 @@ class Operator < ApplicationRecord
   default_scope { includes(:translations) }
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
+  # TODO Refactor this when merging the branches
+  scope :fmus_with_certification_fsc,   ->()          { joins(:fmus).where(fmus: {certification_fsc: true }).distinct }
+  scope :fmus_with_certification_pefc,  ->()          { joins(:fmus).where(fmus: {certification_pefc: true }).distinct }
+  scope :fmus_with_certification_olb,   ->()          { joins(:fmus).where(fmus: {certification_olb: true }).distinct }
+
 
   class << self
     def fetch_all(options)

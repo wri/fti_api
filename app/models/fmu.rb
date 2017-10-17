@@ -30,9 +30,12 @@ class Fmu < ApplicationRecord
 
   default_scope { includes(:translations) }
 
-  scope :filter_by_countries,  ->(country_ids)  { where(country_id: country_ids.split(',')) }
-  scope :filter_by_operators,  ->(operator_ids) { where(operator_id: operator_ids.split(',')) }
-  scope :filter_by_free,       ->()             { where operator_id: nil}
+  scope :filter_by_countries,      ->(country_ids)  { where(country_id: country_ids.split(',')) }
+  scope :filter_by_operators,      ->(operator_ids) { where(operator_id: operator_ids.split(',')) }
+  scope :filter_by_free,           ->()             { where operator_id: nil}
+  scope :with_certification_fsc,   ->()             { where certification_fsc: true }
+  scope :with_certification_pefc,  ->()             { where certification_pefc: true }
+  scope :with_certification_olb,   ->()             { where certification_olb: true }
 
   class << self
     def fetch_all(options)
