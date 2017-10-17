@@ -12,7 +12,7 @@
 class Category < ApplicationRecord
   enum category_type: { operator: 0, government: 1 }
 
-  translates :name
+  translates :name, touch: true
 
   has_many :subcategories, dependent: :destroy
 

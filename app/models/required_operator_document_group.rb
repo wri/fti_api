@@ -8,7 +8,7 @@
 #
 
 class RequiredOperatorDocumentGroup < ApplicationRecord
-  translates :name
+  translates :name, touch: true
   active_admin_translates :name, :details do
     validates_presence_of :name
   end

@@ -11,7 +11,7 @@
 
 class Subcategory < ApplicationRecord
   enum subcategory_type: { operator: 0, government: 1 }
-  translates :name, :details
+  translates :name, :details, touch: true
 
   active_admin_translates :name do; end
 

@@ -467,7 +467,7 @@ namespace :import do
         fmu = Fmu.joins(:translations).where("name like '%#{data_row['FA_FMU']}%'").first if data_row['FA_FMU'].present?
         required_operator_document = RequiredOperatorDocument.find_by(name: data_row['OTP_Document name'])
         link = data_row['Link to the document']
-        start_date = data_row['OTP_Signature date']
+        start_date = data_row['Start date']
 
         if operator.nil?
           puts ">>>>>>>> OPERATOR #{data_row['ID']}"
@@ -521,9 +521,9 @@ namespace :import do
         data_row = row.to_h
         operator = Operator.find_by(fa_id: data_row['ID'])
         fmu = nil
-        fmu = Fmu.joins(:translations).where("name like '%#{data_row['Concession']}%'").first if data_row['Type'] == 'RequiredOperatorDocumentFmu'
+        fmu = Fmu.joins(:translations).where("lower(name) like '%#{data_row['Concession'].downcase}%'").first if data_row['Type'] == 'RequiredOperatorDocumentFmu'
         required_operator_document = RequiredOperatorDocument.find_by(name: data_row['Required operator document'])
-        start_date = data_row['Start Date']
+        start_date = data_row['Start date']
         file = data_row['Document File Path']
 
         if operator.nil?
@@ -546,19 +546,24 @@ namespace :import do
                                        required_operator_document_id: required_operator_document.id)
             end
 
+        if operator_document.nil?
+          puts '>>>>>>>> OPERATOR DOCUMENT'
+          next
+        end
+
         begin
           next if operator_document.status == OperatorDocument.statuses[:doc_pending]
-          operator_document.attachment = File.open(File.join(Rails.root, 'db', 'files', 'operator_document_files', file).shellescape)
+          operator_document.attachment = File.open(File.join(Rails.root, 'db', 'files', 'operator_document_files', file))
         rescue Exception => e
           puts "-------Couldn't load Operator Document: #{file}: #{e.inspect}"
         end
 
         begin
-          operator_document.start_date = start_date
+          operator_document.start_date = Date.strptime(start_date, 'mm/dd/yy')
           operator_document.status = OperatorDocument.statuses[:doc_pending]
           operator_document.save!
         rescue
-          puts "<<<<<<<<<<<<< Operator Document not found"
+          puts "<<<<<<<<<<<<< Couldn't save operator document: #{operator_document.errors.inspect}"
         end
       end
     end

@@ -28,7 +28,7 @@
 
 class Observation < ApplicationRecord
   include ValidationHelper
-  translates :details, :evidence, :concern_opinion, :litigation_status
+  translates :details, :evidence, :concern_opinion, :litigation_status, touch: true
   active_admin_translates :details, :evidence, :concern_opinion, :litigation_status
 
   enum observation_type: %w(operator government)

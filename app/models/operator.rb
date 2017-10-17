@@ -26,7 +26,7 @@
 #
 
 class Operator < ApplicationRecord
-  translates :name, :details
+  translates :name, :details, touch: true
   active_admin_translates :name, :details
 
   mount_base64_uploader :logo, LogoUploader

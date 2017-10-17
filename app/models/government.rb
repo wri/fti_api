@@ -11,7 +11,7 @@
 #
 
 class Government < ApplicationRecord
-  translates :government_entity, :details
+  translates :government_entity, :details, touch: true
 
   active_admin_translates :government_entity, :details do; end
 

@@ -11,7 +11,7 @@
 #
 
 class Severity < ApplicationRecord
-  translates :details
+  translates :details, touch: true
 
   active_admin_translates :details do; end
 

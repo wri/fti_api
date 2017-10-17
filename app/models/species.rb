@@ -19,7 +19,7 @@
 #
 
 class Species < ApplicationRecord
-  translates :common_name
+  translates :common_name, touch: true
 
   has_many :species_observations
   has_many :species_countries
