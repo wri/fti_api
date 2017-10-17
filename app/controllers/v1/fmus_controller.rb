@@ -13,9 +13,10 @@ module V1
       if params[:format].present? && params[:format].include?('geojson')
         render json: build_json(fmus)
       else
-        fmus_resources = fmus.map {|x| FmuResource.new(x, context)}
-        render json: JSONAPI::ResourceSerializer.new(FmuResource)
-                         .serialize_to_hash(fmus_resources)
+        # fmus_resources = fmus.map {|x| FmuResource.new(x, context)}
+        # render json: JSONAPI::ResourceSerializer.new(FmuResource)
+        #                  .serialize_to_hash(fmus_resources)
+        super
       end
     end
 

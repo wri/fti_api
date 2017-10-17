@@ -10,5 +10,13 @@ module V1
     def custom_links(_)
       { self: nil }
     end
+
+    filter :certifications, apply: ->(records, value, _options) {
+      records = records.with_certification_fsc       if value.include?('fsc')
+      records = records.with_certification_pefc      if value.include?('pefc')
+      records = records.with_certification_olb       if value.include?('olb')
+
+      records
+    }
   end
 end
