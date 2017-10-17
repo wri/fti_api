@@ -33,25 +33,24 @@ class UserPermission < ApplicationRecord
         when 'operator'
           { user: { manage: { id: user.id }} , operator_document: { manage: { operator_id: user.operator_id }},
             observation: { read: {}}}
-        # TODO Put this back when the observations-tool support it
-        # when 'ngo'
-        #   { user: { manage: { id: user.id } },
-        #     observation: { manage: { observers: { id: user.observer_id }},  create: {}},
-        #     observation_report: { update: { observers: { id: user.observer_id }}, create: {}},
-        #     observation_documents:  { ud: { observation: { is_active: false, observers: { id: user.observer_id }}}, create: {}},
-        #     category: { read: {}},
-        #     subcategory: { read: {}},
-        #     government: { read: {}},
-        #     species: { read: {}},
-        #     operator: { create: {}, read: {}},
-        #     law: { read: {}},
-        #     severity: { read: {}},
-        #     observer: { read: {} ,  update: { id: user.observer_id }},
-        #     fmu: { read: {}},
-        #     operator_document: { read: {} },
-        #     required_operator_document_group: { read: {}},
-        #     required_operator_document: { read: {}}
-        #   }
+        when 'ngo'
+          { user: { manage: { id: user.id } },
+            observation: { manage: { observers: { id: user.observer_id }},  create: {}},
+            observation_report: { update: { observers: { id: user.observer_id }}, create: {}},
+            observation_documents:  { ud: { observation: { is_active: false, observers: { id: user.observer_id }}}, create: {}},
+            category: { read: {}},
+            subcategory: { read: {}},
+            government: { read: {}},
+            species: { read: {}},
+            operator: { create: {}, read: {}},
+            law: { read: {}},
+            severity: { read: {}},
+            observer: { read: {} ,  update: { id: user.observer_id }},
+            fmu: { read: {}},
+            operator_document: { read: {} },
+            required_operator_document_group: { read: {}},
+            required_operator_document: { read: {}}
+          }
         when 'ngo_manager', 'ngo'
           {
               user: { manage: { id: user.id } },
