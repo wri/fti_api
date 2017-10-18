@@ -541,10 +541,12 @@ namespace :import do
         operator_document =
             if fmu.present?
               OperatorDocument.find_by(operator_id: operator.id,
-                                       required_operator_document_id: required_operator_document.id, fmu_id: fmu.id)
+                                       required_operator_document_id: required_operator_document.id, fmu_id: fmu.id,
+                                       current: true)
             else
               OperatorDocument.find_by(operator_id: operator.id,
-                                       required_operator_document_id: required_operator_document.id)
+                                       required_operator_document_id: required_operator_document.id,
+                                       current: true)
             end
 
         if operator_document.nil?
