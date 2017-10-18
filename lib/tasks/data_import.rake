@@ -553,8 +553,9 @@ namespace :import do
         end
 
         begin
-          next if operator_document.status == OperatorDocument.statuses[:doc_pending]
-          operator_document.attachment = File.open(File.join(Rails.root, 'db', 'files', 'operator_document_files', file))
+          unless operator_document.status == OperatorDocument.statuses[:doc_pending]
+            operator_document.attachment = File.open(File.join(Rails.root, 'db', 'files', 'operator_document_files', file))
+          end
         rescue Exception => e
           puts "-------Couldn't load Operator Document: #{file}: #{e.inspect}"
         end
