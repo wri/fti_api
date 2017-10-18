@@ -76,12 +76,6 @@ class OperatorDocument < ApplicationRecord
 
   def expire_document
     self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
-    o = OperatorDocument.new(operator_id: self.operator_id,
-                             required_operator_document_id: self.required_operator_document_id,
-                             fmu_id: self.fmu_id, start_date: Date.today,
-                             status: OperatorDocument.statuses[:doc_not_provided],
-                             current: true)
-    o.save!
   end
 
   scope :valid, -> { where(current: true, deleted_at: nil) }
