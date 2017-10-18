@@ -7,6 +7,8 @@ module V1
     has_one :country
     has_one :operator
 
+    filters :country, :free, :certification
+
     def custom_links(_)
       { self: nil }
     end
@@ -18,5 +20,12 @@ module V1
 
       records
     }
+
+    filter :free, apply: ->(records, value, _options) {
+      records = records.filter_by_free
+
+      records
+    }
+
   end
 end

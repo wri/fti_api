@@ -32,6 +32,16 @@ ActiveAdmin.register Partner do
 
 
   show do
+    attributes_table do
+      row :name
+      row :website
+      image_row :logo
+      row :priority
+      row :description
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
 
   end
 end
