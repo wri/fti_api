@@ -524,6 +524,7 @@ namespace :import do
         fmu = Fmu.joins(:translations).where("lower(name) like '%#{data_row['Concession'].downcase}%'").first if data_row['Type'] == 'RequiredOperatorDocumentFmu'
         required_operator_document = RequiredOperatorDocument.find_by(name: data_row['Required operator document'])
         start_date = data_row['Start date']
+        expire_date = data_row['Expire date']
         file = data_row['Document File Path']
 
         if operator.nil?
@@ -559,7 +560,9 @@ namespace :import do
         end
 
         begin
+          operator_document.uploaded_by = 3
           operator_document.start_date = Date.strptime(start_date, '%m/%d/%Y')
+          operator_document.expire_date = Date.strptime(expire_date , '%m/%d/%Y')
           operator_document.status = OperatorDocument.statuses[:doc_pending]
           operator_document.save!
         rescue
