@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       jsonapi_resources :required_operator_documents do; end
       jsonapi_resources :required_operator_document_groups do; end
       jsonapi_resources :partners do; end
-      resources :fmus, only: :index
+      resources :fmus, only: [:index, :update]
       resources :contacts, only: [:create, :index]
 
       get 'observation_filters', to: 'observation_filters#index'
