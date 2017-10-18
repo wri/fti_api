@@ -15,7 +15,7 @@ module V1
     has_many :operator_document_fmus
     has_many :operator_document_countries
 
-    filters :country, :is_active, :name, :operator_type, :fa_operator
+    filters :country, :is_active, :name, :operator_type
 
     before_create :set_active
 
@@ -58,10 +58,6 @@ module V1
       end
     }
 
-    filter :fa_operator, apply: ->(records, value, _options) {
-
-    }
-
     def obs_per_visit
       sprintf('%.2f', @model.obs_per_visit) if @model.obs_per_visit.present?
     end
@@ -73,7 +69,7 @@ module V1
       if app == 'observations-tool' && user.present?
         super(options)
       else
-        Operator.active.fa_operator
+        Operator.active
       end
     end
 
