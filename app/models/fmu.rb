@@ -28,6 +28,8 @@ class Fmu < ApplicationRecord
   validates :country_id, presence: true
   validates :name, presence: true
 
+  before_save :update_geojson
+
   default_scope { includes(:translations) }
 
   scope :filter_by_countries,      ->(country_ids)  { where(country_id: country_ids.split(',')) }
@@ -49,6 +51,18 @@ class Fmu < ApplicationRecord
       fmus = fmus.filter_by_free if free
       fmus
     end
+  end
+
+  def update_geojson
+    temp_geojson = self.geojson
+    temp_geojson['properties']['fmu_name'] = self.name
+    temp_geojson['properties']['company_name'] = self.operator.name if self.operator.present?
+    temp_geojson['properties']['operator_id'] = self.operator_id if self.operator_id.present?
+    temp_geojson['properties']['certification_fsc'] = self.certification_fsc
+    temp_geojson['properties']['certification_pefc'] = self.certification_pefc
+    temp_geojson['properties']['certification_olb'] = self.certification_olb
+
+    self.geojson = temp_geojson
   end
 
   def cache_key

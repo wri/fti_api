@@ -71,6 +71,14 @@ class Operator < ApplicationRecord
   scope :fmus_with_certification_olb,   ->()          { joins(:fmus).where(fmus: {certification_olb: true }).distinct }
 
 
+  class Translation
+    after_save do
+      if name_changed?
+        Operator.find(self.operator_id).fmus.find_each { |x| x.save }
+      end
+    end
+  end
+
   class << self
     def fetch_all(options)
       country_ids = options['country_ids']    if options.present? && options['country_ids'].present?
