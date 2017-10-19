@@ -37,7 +37,7 @@ module V1
     }
 
     filter :severity_level, apply: ->(records, value, _options) {
-      records.joins(:subcategory).where('subcategories.category_id = ?', value[0].to_i)
+      records.joins(:severity).where('severities.level = ?', value[0].to_i)
     }
 
     filter :years, apply: ->(records, value, _options) {
