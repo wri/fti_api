@@ -61,7 +61,6 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['certification_fsc'] = self.certification_fsc
     temp_geojson['properties']['certification_pefc'] = self.certification_pefc
     temp_geojson['properties']['certification_olb'] = self.certification_olb
-    temp_geojson['properties'] = temp_geojson['properties'].except 'company_name'
 
     self.geojson = temp_geojson
   end
