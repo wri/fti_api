@@ -15,7 +15,7 @@ module V1
     has_many :operator_document_fmus
     has_many :operator_document_countries
 
-    filters :country, :is_active, :name, :operator_type
+    filters :country, :is_active, :name, :operator_type, :fa
 
     before_create :set_active
 
@@ -56,6 +56,10 @@ module V1
       else
         records
       end
+    }
+
+    filter :fa, apply: ->(records, _value, _options) {
+      records.fa_operator
     }
 
     def obs_per_visit

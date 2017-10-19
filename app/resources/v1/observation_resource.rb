@@ -48,12 +48,6 @@ module V1
       records.joins(:observation_report).where('observation_reports.id = ?', value[0].to_i)
     }
 
-    def records_for_operator
-      relationship = self.class._relationship(:operator)
-      relation_name = relationship.relation_name(context: @context)
-      records_for(relation_name)
-    end
-
     def self.sortable_fields(context)
       super + [:'country.iso', :'severity.level', :'subcategory.name', :'operator.name']
     end
@@ -99,7 +93,7 @@ module V1
         elsif user.user_permission.present? && user.user_permission.user_role == 'admin'
           Observation.joins(:translations)
         else
-          Observation.active.fa_operator
+          Observation.active
         end
       else
         Observation.active
