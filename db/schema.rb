@@ -98,17 +98,6 @@ ActiveRecord::Schema.define(version: 20171017161902) do
     t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
   end
 
-  create_table "fmu_operators", force: :cascade do |t|
-    t.integer "fmu_id",      null: false
-    t.integer "operator_id", null: false
-    t.boolean "current",     null: false
-    t.date    "start_date"
-    t.date    "end_date"
-    t.index ["current"], name: "index_fmu_operators_on_current", using: :btree
-    t.index ["fmu_id", "operator_id"], name: "index_fmu_operators_on_fmu_id_and_operator_id", using: :btree
-    t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id", using: :btree
-  end
-
   create_table "fmu_translations", force: :cascade do |t|
     t.integer  "fmu_id",     null: false
     t.string   "locale",     null: false
@@ -120,6 +109,7 @@ ActiveRecord::Schema.define(version: 20171017161902) do
   end
 
   create_table "fmus", force: :cascade do |t|
+    t.integer  "operator_id"
     t.integer  "country_id"
     t.jsonb    "geojson"
     t.datetime "created_at",                         null: false
