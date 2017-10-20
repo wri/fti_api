@@ -11,6 +11,18 @@ ActiveAdmin.register User do
   filter :current_sign_in_at
   filter :created_at
 
+  controller do
+    def update
+      model = :user
+
+      if params[model][:password].blank?
+        %w(password password_confirmation).each { |p| params[model].delete(p) }
+      end
+
+      super
+    end
+  end
+
   index do
     column('Activation') do |user|
       if user.id != current_user.id
