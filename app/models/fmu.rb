@@ -55,6 +55,7 @@ class Fmu < ApplicationRecord
 
   def update_geojson
     temp_geojson = self.geojson
+    return unless temp_geojson.present?
     temp_geojson['properties']['fmu_name'] = self.name
     temp_geojson['properties']['company_na'] = self.operator.name if self.operator.present?
     temp_geojson['properties']['operator_id'] = self.operator_id if self.operator_id.present?

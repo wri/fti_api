@@ -35,8 +35,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
-  enum permissions_request: { operator: 1, ngo: 2 }
-
   # Include default devise modules.
   TEMP_EMAIL_REGEX = /\Achange@tmp/
   PERMISSIONS = %w(operator ngo)
@@ -55,8 +53,6 @@ class User < ApplicationRecord
   belongs_to :operator,  optional: true
 
   accepts_nested_attributes_for :user_permission
-
-  before_validation :create_from_request
 
   validates :nickname,    presence: true, uniqueness: { case_sensitive: false }
   validates_uniqueness_of :email
@@ -147,11 +143,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def create_from_request
-    return unless permissions_request.present?
-    self.user_permission = UserPermission.new(user_role: permissions_request)
-  end
 
   def generate_reset_token(user)
     token = SecureRandom.uuid
