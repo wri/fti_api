@@ -195,7 +195,7 @@ class Operator < ApplicationRecord
 
     # FMU Documents
     RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
-      Fmu.joins(:fmu_operators).where(operator_id: id, current: true).find_each do |fmu|
+      Fmu.joins(:fmu_operators).where(fmu_operators: { operator_id: id, current: true }).find_each do |fmu|
         unless OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).any?
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id,
                                     status: OperatorDocument.statuses[:doc_not_provided],
