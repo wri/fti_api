@@ -45,7 +45,7 @@ class FmuOperator < ApplicationRecord
 
   # Makes sure the dates don't collide
   def non_colliding_dates
-    dates = FmuOperator.where(fmu_id: self.fmu_id).pluck(:start_date, :end_date)
+    dates = FmuOperator.where(fmu_id: self.fmu_id).where.not(fmu_id: self.fmu_id).pluck(:start_date, :end_date)
     dates << [self.start_date, self.end_date]
 
     for i in 0...(dates.count - 1)
