@@ -16,12 +16,12 @@ ActiveAdmin.register Country do
   filter :is_active
 
   index do
+    column 'Active?', :is_active, sortable: true
     column :id, sortable: true
     column :iso, sortable: true
     column :name, sortable: 'country_translations.name'
     column :region_iso, sortable: true
     column :region_name, sortable: 'country_translations.region_name'
-    column :is_active, sortable: true
 
     actions
   end

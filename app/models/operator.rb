@@ -31,8 +31,6 @@ class Operator < ApplicationRecord
 
   mount_base64_uploader :logo, LogoUploader
 
-  #enum certification: { fsc: 0, pefc: 1, olb: 2 }
-
   TYPES = ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
            'Sawmill', 'Other', 'Unknown'].freeze
 
@@ -40,7 +38,13 @@ class Operator < ApplicationRecord
 
   has_many :observations, -> { active },  inverse_of: :operator
   has_many :users, inverse_of: :operator
-  has_many :fmus, inverse_of: :operator
+
+  has_many :fmu_operators, -> { where(current: true) }, inverse_of: :operator
+  has_many :fmus, through: :fmu_operators
+  has_many :all_fmu_operators, class_name: 'FmuOperator'
+  has_many :all_fmus, through: :all_fmu_operators, source: :fmu
+
+  accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
 
   has_many :operator_documents, -> { valid }
   has_many :operator_document_countries, -> { valid }
@@ -193,7 +197,7 @@ class Operator < ApplicationRecord
 
     # FMU Documents
     RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
-      Fmu.where(operator_id: id).find_each do |fmu|
+      Fmu.joins(:fmu_operators).where(fmu_operators: { operator_id: id, current: true }).find_each do |fmu|
         unless OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).any?
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id,
                                     status: OperatorDocument.statuses[:doc_not_provided],
@@ -226,7 +230,7 @@ class Operator < ApplicationRecord
       end
 
       RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
-        Fmu.where(operator_id: id).find_each do |fmu|
+        self.fmus.find_each do |fmu|
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
             odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
           end

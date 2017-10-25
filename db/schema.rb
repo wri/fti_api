@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171017161902) do
+ActiveRecord::Schema.define(version: 20171023083419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(version: 20171017161902) do
     t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
   end
 
+  create_table "fmu_operators", force: :cascade do |t|
+    t.integer "fmu_id",      null: false
+    t.integer "operator_id", null: false
+    t.boolean "current",     null: false
+    t.date    "start_date"
+    t.date    "end_date"
+    t.index ["fmu_id", "operator_id"], name: "index_fmu_operators_on_fmu_id_and_operator_id", using: :btree
+    t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id", using: :btree
+  end
+
   create_table "fmu_translations", force: :cascade do |t|
     t.integer  "fmu_id",     null: false
     t.string   "locale",     null: false
@@ -109,7 +119,6 @@ ActiveRecord::Schema.define(version: 20171017161902) do
   end
 
   create_table "fmus", force: :cascade do |t|
-    t.integer  "operator_id"
     t.integer  "country_id"
     t.jsonb    "geojson"
     t.datetime "created_at",                         null: false
@@ -275,24 +284,6 @@ ActiveRecord::Schema.define(version: 20171017161902) do
     t.string   "organization_type"
     t.index ["country_id"], name: "index_observers_on_country_id", using: :btree
     t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
-  end
-
-  create_table "operator_document_annexes", force: :cascade do |t|
-    t.integer  "operator_document_id"
-    t.string   "name"
-    t.date     "start_date"
-    t.date     "expire_date"
-    t.date     "deleted_at"
-    t.integer  "status"
-    t.string   "attachment"
-    t.integer  "uploaded_by"
-    t.integer  "user_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at", using: :btree
-    t.index ["operator_document_id"], name: "index_operator_document_annexes_on_operator_document_id", using: :btree
-    t.index ["status"], name: "index_operator_document_annexes_on_status", using: :btree
-    t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
   end
 
   create_table "operator_documents", force: :cascade do |t|

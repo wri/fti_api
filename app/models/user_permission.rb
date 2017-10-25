@@ -32,7 +32,7 @@ class UserPermission < ApplicationRecord
           { admin: { manage: {} }, all: { manage: {} } }
         when 'operator'
           { user: { manage: { id: user.id }} , operator_document: { manage: { operator_id: user.operator_id }},
-            observation: { read: {}}}
+            observation: { read: {}}, fmu: { ru: {}}, operator: { ru: { id: user.operator_id }}}
         when 'ngo'
           { user: { manage: { id: user.id } },
             observation: { manage: { observers: { id: user.observer_id }},  create: {}},

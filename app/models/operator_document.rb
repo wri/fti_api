@@ -26,6 +26,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :required_operator_document, required: true
   belongs_to :fmu
   belongs_to :user
+  has_many :operator_document_annexes
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
 
@@ -84,8 +85,11 @@ class OperatorDocument < ApplicationRecord
 
   def insure_unity
     if self.current && self.required_operator_document.present?
-    else
-      true
+      od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
+                                required_operator_document_id: self.required_operator_document_id,
+                                status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
+                                current: true)
+      od.save!(validate: false)
     end
   end
 

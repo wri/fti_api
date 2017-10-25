@@ -1,6 +1,7 @@
 module V1
   class FmuResource < JSONAPI::Resource
     caching
+    paginator :none
 
     attributes :name, :geojson, :certification_fsc, :certification_pefc, :certification_olb
 

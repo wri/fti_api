@@ -22,8 +22,13 @@ class Fmu < ApplicationRecord
   end
 
   belongs_to :country, inverse_of: :fmus
-  belongs_to :operator, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu
+
+  has_many :fmu_operators, inverse_of: :fmu
+  has_many :operators, through: :fmu_operators
+  has_one :fmu_operator, ->{ where(current: true) }
+  has_one :operator, through: :fmu_operator
+
 
   validates :country_id, presence: true
   validates :name, presence: true
@@ -32,12 +37,14 @@ class Fmu < ApplicationRecord
 
   default_scope { includes(:translations) }
 
+  # TODO Redo all of those
   scope :filter_by_countries,      ->(country_ids)  { where(country_id: country_ids.split(',')) }
-  scope :filter_by_operators,      ->(operator_ids) { where(operator_id: operator_ids.split(',')) }
-  scope :filter_by_free,           ->()             { where operator_id: nil}
+  scope :filter_by_operators,      ->(operator_ids) { joins(:fmu_operators).where(fmu_operators: { current: true, operator_id: operator_ids.split(',') }) }
+  scope :filter_by_free,           ->()             { left_joins(:fmu_operators).where(fmu_operators: { current: [nil, false] }).group(:id) }
   scope :with_certification_fsc,   ->()             { where certification_fsc: true }
   scope :with_certification_pefc,  ->()             { where certification_pefc: true }
   scope :with_certification_olb,   ->()             { where certification_olb: true }
+  scope :current,                  ->()             { joins(:fmu_operators).where(fmu_operators: { current: true }) }
 
   class << self
     def fetch_all(options)
@@ -58,7 +65,7 @@ class Fmu < ApplicationRecord
     return unless temp_geojson.present?
     temp_geojson['properties']['fmu_name'] = self.name
     temp_geojson['properties']['company_na'] = self.operator.name if self.operator.present?
-    temp_geojson['properties']['operator_id'] = self.operator_id if self.operator_id.present?
+    temp_geojson['properties']['operator_id'] = self.operator.id if self.operator.present?
     temp_geojson['properties']['certification_fsc'] = self.certification_fsc
     temp_geojson['properties']['certification_pefc'] = self.certification_pefc
     temp_geojson['properties']['certification_olb'] = self.certification_olb

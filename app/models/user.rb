@@ -43,11 +43,12 @@ class User < ApplicationRecord
 
   has_one  :api_key
   has_one  :user_permission
-  has_many :observations,             inverse_of: :user
-  has_many :comments,                 inverse_of: :user, dependent: :destroy
-  has_many :photos,                   inverse_of: :user
-  has_many :observation_documents,    inverse_of: :user
-  has_many :observation_reports,      inverse_of: :user
+  has_many :observations,               inverse_of: :user
+  has_many :comments,                   inverse_of: :user, dependent: :destroy
+  has_many :photos,                     inverse_of: :user
+  has_many :observation_documents,      inverse_of: :user
+  has_many :observation_reports,        inverse_of: :user
+  has_many :operator_document_annexes,  inverse_of: :user
 
   belongs_to :observer, optional: true
   belongs_to :operator,  optional: true

@@ -29,6 +29,16 @@ ActiveAdmin.register OperatorDocument do
     redirect_to collection_path, notice: 'Document rejected'
   end
 
+  sidebar 'Annexes', only: :show do
+    attributes_table_for resource do
+      ul do
+        resource.operator_document_annexes.collect do |annex|
+          li link_to(annex.name, admin_operator_document_annex_path(annex.id))
+        end
+      end
+    end
+  end
+
   actions :all, except: [:destroy, :new, :create]
   permit_params :name, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
@@ -39,16 +49,17 @@ ActiveAdmin.register OperatorDocument do
       od.deleted_at.nil?
     end
     tag_column :status
-    column :required_operator_document, sortable: 'required_operator_documents.name' do |od|
+    column :id
+    column 'Required Document', :required_operator_document, sortable: 'required_operator_documents.name' do |od|
       if od.required_operator_document.present?
-        od.required_operator_document.name
+        link_to od.required_operator_document.name, admin_required_operator_document_path(od.required_operator_document)
       else
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).name
       end
     end
     column :'Type', sortable: 'required_operator_documents.type' do |od|
       if od.required_operator_document.present?
-        od.required_operator_document.type
+        od.required_operator_document.type == 'RequiredOperatorDocumentFmu' ? 'Fmu' : 'Operator'
       else
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).type
       end
@@ -74,11 +85,13 @@ ActiveAdmin.register OperatorDocument do
   end
 
 
+  filter :id, as: :select
   filter :required_operator_document,
          collection: RequiredOperatorDocument.
              joins(country: :translations).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
   filter :operator
   filter :status, as: :select, collection: OperatorDocument.statuses
+  filter :type, as: :select
   filter :updated_at
 
   scope 'Pending', :doc_pending
