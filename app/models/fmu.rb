@@ -65,7 +65,7 @@ class Fmu < ApplicationRecord
     return unless temp_geojson.present?
     temp_geojson['properties']['fmu_name'] = self.name
     temp_geojson['properties']['company_na'] = self.operator.name if self.operator.present?
-    temp_geojson['properties']['operator_id'] = self.operator_id if self.operator_id.present?
+    temp_geojson['properties']['operator_id'] = self.operator.id if self.operator.present?
     temp_geojson['properties']['certification_fsc'] = self.certification_fsc
     temp_geojson['properties']['certification_pefc'] = self.certification_pefc
     temp_geojson['properties']['certification_olb'] = self.certification_olb
