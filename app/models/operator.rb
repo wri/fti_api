@@ -44,6 +44,8 @@ class Operator < ApplicationRecord
   has_many :all_fmu_operators, class_name: 'FmuOperator'
   has_many :all_fmus, through: :all_fmu_operators, source: :fmu
 
+  accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
+
   has_many :operator_documents, -> { valid }
   has_many :operator_document_countries, -> { valid }
   has_many :operator_document_fmus, -> { valid }
