@@ -72,7 +72,7 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true, on: :create
   validate :user_integrity
 
-  before_create :create_from_request
+  before_validation :create_from_request, on: :create
 
   include Activable
   include Roleable
@@ -151,7 +151,7 @@ class User < ApplicationRecord
   def create_from_request
     return unless permissions_request.present?
     self.user_permission = UserPermission.new(user_role: permissions_request)
-    self.permission_request = nil
+    self.permissions_request = nil
   end
 
   def generate_reset_token(user)
