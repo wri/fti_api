@@ -17,6 +17,7 @@
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
+#  reason                        :text
 #
 
 class OperatorDocument < ApplicationRecord
@@ -30,10 +31,11 @@ class OperatorDocument < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
 
+  before_validation :set_expire_date, unless: :expire_date_changed?
+
   validates_presence_of :start_date, if: :attachment?
   validates_presence_of :expire_date, if: :attachment?
-
-  before_validation :set_expire_date, unless: :expire_date_changed?
+  validate :reason_or_attachment
 
   before_save :update_current, if: :current_changed?
   before_create :set_status
@@ -42,7 +44,7 @@ class OperatorDocument < ApplicationRecord
 
   before_destroy :insure_unity
 
-  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
+  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4}
 
   def update_operator_percentages
@@ -79,7 +81,11 @@ class OperatorDocument < ApplicationRecord
     self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
   end
 
-  scope :valid, -> { where(current: true, deleted_at: nil) }
+  scope :actual,   -> { where(current: true, deleted_at: nil) }
+  scope :valid,    -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required, -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+
+
 
   private
 
@@ -106,6 +112,12 @@ class OperatorDocument < ApplicationRecord
                                               required_operator_document_id: self.required_operator_document_id,
                                               status: OperatorDocument.statuses[:doc_pending])
     pending_documents.each {|x| x.destroy}
+  end
+
+  def reason_or_attachment
+    if self.attachment.present? && self.reason.present?
+      self.errors[:reason] << 'Cannot have a reason not to have a documen '
+    end
   end
 
 end

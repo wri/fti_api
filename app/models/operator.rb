@@ -46,9 +46,9 @@ class Operator < ApplicationRecord
 
   accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
 
-  has_many :operator_documents, -> { valid }
-  has_many :operator_document_countries, -> { valid }
-  has_many :operator_document_fmus, -> { valid }
+  has_many :operator_documents, -> { actual }
+  has_many :operator_document_countries, -> { actual }
+  has_many :operator_document_fmus, -> { actual }
 
   after_create :create_operator_id
   after_create :create_documents
@@ -111,9 +111,9 @@ class Operator < ApplicationRecord
 
   def update_valid_documents_percentages
     if fa_id.present?
-      self.percentage_valid_documents_all = operator_documents.where(status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.count.to_f rescue 0
-      self.percentage_valid_documents_fmu = operator_documents.where(type: 'OperatorDocumentFmu', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentFmu').count.to_f rescue 0
-      self.percentage_valid_documents_country = operator_documents.where(type: 'OperatorDocumentCountry', status: OperatorDocument.statuses[:doc_valid]).count.to_f / operator_documents.where(type: 'OperatorDocumentCountry').count.to_f rescue 0
+      self.percentage_valid_documents_all = operator_documents.valid.count.to_f / operator_documents.required.count.to_f rescue 0
+      self.percentage_valid_documents_fmu = operator_document_fmus.valid.count.to_f / operator_document_fmus.required.count.to_f rescue 0
+      self.percentage_valid_documents_country = operator_document_countries.valid.count.to_f / operator_documents.required.count.to_f rescue 0
 
       self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all.nan?
       self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country.nan?
