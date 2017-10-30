@@ -13,6 +13,9 @@ class Category < ApplicationRecord
   enum category_type: { operator: 0, government: 1 }
 
   translates :name, touch: true
+  active_admin_translates :name do
+    validates_presence_of :name
+  end
 
   has_many :subcategories, dependent: :destroy
 
@@ -24,11 +27,6 @@ class Category < ApplicationRecord
                            .order('category_translations.name ASC')
   }
 
-  #default_scope do
-  #  includes(:translations)
-  #end
-
-
   def cache_key
     super + '-' + Globalize.locale.to_s
   end
@@ -36,7 +34,7 @@ class Category < ApplicationRecord
   private
 
   def uniqueness
-    if Category.where(name: self.name, category_type: self.category_type).any?
+    if Category.where(name: self.name, category_type: self.category_type).where.not(id: self.id).any?
       self.errors[:name] = 'Must be unique'
     end
   end
