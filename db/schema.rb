@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023083419) do
+ActiveRecord::Schema.define(version: 20171030152153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,6 +286,24 @@ ActiveRecord::Schema.define(version: 20171023083419) do
     t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
   end
 
+  create_table "operator_document_annexes", force: :cascade do |t|
+    t.integer  "operator_document_id"
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "expire_date"
+    t.date     "deleted_at"
+    t.integer  "status"
+    t.string   "attachment"
+    t.integer  "uploaded_by"
+    t.integer  "user_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at", using: :btree
+    t.index ["operator_document_id"], name: "index_operator_document_annexes_on_operator_document_id", using: :btree
+    t.index ["status"], name: "index_operator_document_annexes_on_status", using: :btree
+    t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
+  end
+
   create_table "operator_documents", force: :cascade do |t|
     t.string   "type"
     t.date     "expire_date"
@@ -301,6 +319,7 @@ ActiveRecord::Schema.define(version: 20171023083419) do
     t.datetime "deleted_at"
     t.integer  "uploaded_by"
     t.integer  "user_id"
+    t.text     "reason"
     t.index ["current"], name: "index_operator_documents_on_current", using: :btree
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree

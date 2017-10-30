@@ -4,7 +4,7 @@ module V1
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :current
+               :fmu_id, :current, :reason
 
     has_one :country
     has_one :fmu

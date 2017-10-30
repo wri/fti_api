@@ -34,6 +34,7 @@ $pending-color: #FF9900;
 $rejected-color: #FF0000;
 $approved-color: #08A510;
 $expired-color: #772222;
+$not-required-color: #AA8888;
 
 .status_tag {
   &.under_revision { background: $pending-color; }
@@ -43,6 +44,7 @@ $expired-color: #772222;
   &.doc_invalid { background: $rejected-color; }
   &.doc_valid { background: $approved-color; }
   &.doc_expired { background: $expired-color; }
+  &.doc_not_required { background: $not-required-color; }
 }
 
 // To increase the width of observations-details

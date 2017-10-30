@@ -20,12 +20,17 @@ ActiveAdmin.register OperatorDocument do
   end
 
   member_action :approve, method: :put do
-    resource.update_attributes(status: OperatorDocument.statuses[:doc_valid])
+    if resource.reason.present?
+      resource.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
+    else
+      resource.update_attributes(status: OperatorDocument.statuses[:doc_valid])
+    end
     redirect_to collection_path, notice: 'Document approved'
   end
 
   member_action :reject, method: :put do
-    resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid])
+    resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
+    resource.remove_attachment!
     redirect_to collection_path, notice: 'Document rejected'
   end
 
@@ -42,7 +47,7 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new, :create]
   permit_params :name, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
-                :attachment, :uploaded_by
+                :attachment, :uploaded_by, :reason
 
   index do
     bool_column :exists do |od|
@@ -79,6 +84,7 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
+    column :reason
     column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
     actions
@@ -105,6 +111,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :uploaded_by
       f.input :status, include_blank: false
       f.input :attachment
+      f.input :reason
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
     end
@@ -122,6 +129,7 @@ ActiveAdmin.register OperatorDocument do
       if resource.attachment.present?
         attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
       end
+      row :reason
       row :start_date
       row :expire_date
       row :created_at
