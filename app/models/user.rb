@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   belongs_to :country, inverse_of: :users, optional: true
 
-  has_one  :api_key
+  has_one  :api_key, dependent: :destroy
   has_one  :user_permission
   has_many :observations,               inverse_of: :user
   has_many :comments,                   inverse_of: :user, dependent: :destroy
