@@ -12,6 +12,12 @@ ActiveAdmin.register User do
   filter :created_at
 
   controller do
+    def scoped_collection
+      User.where.not(email: 'webuser@example.com').includes([country: :translations], :user_permission)
+    end
+  end
+
+  controller do
     def update
       model = :user
 
@@ -76,7 +82,7 @@ ActiveAdmin.register User do
   end
 
   member_action :deactivate, method: :put do
-    resource.update_attributes(is_active: false) unless resource.id == current_user.id
+    resource.update_attributes(is_active: false) unless (resource.id == current_user.id) || (resource.email == 'webuser@example.com')
     redirect_to collection_path, notice: 'User deactivated'
   end
 end
