@@ -12,6 +12,18 @@ module V1
     filter :iso
     filter :is_active, default: true
 
+    filter :is_active, apply: ->(records, value, _options) {
+      case value.first
+        when 'true'
+          records.where(is_active: true)
+        when 'false'
+          records.where(is_active: false)
+        else
+          records
+      end
+    }
+
+
     def custom_links(_)
       { self: nil }
     end
