@@ -81,7 +81,11 @@ class OperatorDocument < ApplicationRecord
     self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
   end
 
-  scope :valid, -> { where(current: true, deleted_at: nil) }
+  scope :actual,   -> { where(current: true, deleted_at: nil) }
+  scope :valid,    -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required, -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+
+
 
   private
 
@@ -112,7 +116,7 @@ class OperatorDocument < ApplicationRecord
 
   def reason_or_attachment
     if self.attachment.present? && self.reason.present?
-      self.errors[:reason] << 'Cannot have a reason not to have a document and a file at the same time'
+      self.errors[:reason] << 'Cannot have a reason not to have a documen '
     end
   end
 
