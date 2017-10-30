@@ -10,18 +10,14 @@ module V1
     has_many :governments
 
     filter :iso
-    filter :is_active, default: true
-
-    filter :is_active, apply: ->(records, value, _options) {
-      case value.first
-        when 'true'
-          records.where(is_active: true)
-        when 'false'
-          records.where(is_active: false)
-        else
-          records
-      end
-    }
+    filter :is_active, default: 'true',
+           apply: ->(records, value, _options) {
+             if %w(true false).include?(value.first)
+               records.where(is_active: value.first)
+             else
+               records
+             end
+           }
 
 
     def custom_links(_)
