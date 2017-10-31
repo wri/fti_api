@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030152153) do
+ActiveRecord::Schema.define(version: 20171031104317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,6 +176,15 @@ ActiveRecord::Schema.define(version: 20171030152153) do
     t.index ["name"], name: "index_observation_documents_on_name", using: :btree
     t.index ["observation_id"], name: "index_observation_documents_on_observation_id", using: :btree
     t.index ["user_id"], name: "index_observation_documents_on_user_id", using: :btree
+  end
+
+  create_table "observation_operators", force: :cascade do |t|
+    t.integer  "observation_id"
+    t.integer  "operator_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["observation_id"], name: "index_observation_operators_on_observation_id", using: :btree
+    t.index ["operator_id"], name: "index_observation_operators_on_operator_id", using: :btree
   end
 
   create_table "observation_report_observers", force: :cascade do |t|
@@ -541,6 +550,8 @@ ActiveRecord::Schema.define(version: 20171030152153) do
   add_foreign_key "laws", "subcategories"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
+  add_foreign_key "observation_operators", "observations"
+  add_foreign_key "observation_operators", "operators"
   add_foreign_key "observation_report_observers", "observation_reports"
   add_foreign_key "observation_report_observers", "observers"
   add_foreign_key "observation_reports", "users"
