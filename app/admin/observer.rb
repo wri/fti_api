@@ -61,7 +61,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     end
     f.inputs 'Monitor Details' do
       edit = f.object.new_record? ? false : true
-      f.input :country, input_html: { disabled: edit }
+      f.input :country, input_html: { disabled: edit  && f.object.country_id.present?}
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
       f.input :logo
