@@ -22,7 +22,7 @@ ActiveAdmin.register Observation do
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
-                :law_id, :fmu_id, observer_ids: [],
+                :law_id, :fmu_id, observer_ids: [], relevant_operators: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status]
 
@@ -130,6 +130,14 @@ ActiveAdmin.register Observation do
     column :government, sortable: 'government_translations.government_entity' do |o|
       o.government.government_entity if o.government.present?
     end
+    column :relevant_operators do |o|
+      links = []
+      o.relevant_operators.each do |operator|
+        links << link_to(operator.name, admin_operator_path(operator.id))
+      end
+      links.reduce(:+)
+      #link_to o.relevant_operators.pluck(:name).join(', ')
+    end
     column :subcategory, sortable: 'subcategory_translations.name'
     column :law
     column :severity, sortable: 'severities.level' do |o|
@@ -221,6 +229,7 @@ ActiveAdmin.register Observation do
       if resource.government.present?
         row :government do |o|
           o.government.government_entity
+          o.relevant_operators
         end
       end
       row :publication_date

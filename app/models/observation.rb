@@ -52,9 +52,12 @@ class Observation < ApplicationRecord
   has_many :observer_observations, dependent: :destroy
   has_many :observers, through: :observer_observations
 
+  has_many :observation_operators, dependent: :destroy
+  has_many :relevant_operators, through: :observation_operators, source: :operator
+
   has_many :comments,  as: :commentable
   has_many :photos,    as: :attacheable, dependent: :destroy
-  has_many :observation_documents#, dependent: :destroy
+  has_many :observation_documents
   belongs_to :observation_report
 
   accepts_nested_attributes_for :photos,                       allow_destroy: true

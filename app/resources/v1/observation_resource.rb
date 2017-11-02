@@ -13,6 +13,7 @@ module V1
     has_many :photos
     has_many :observation_documents
     has_many :observers
+    has_many :relevant_operators
 
     has_one :country
     has_one :subcategory
