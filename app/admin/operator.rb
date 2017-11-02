@@ -8,8 +8,13 @@ ActiveAdmin.register Operator do
                 :logo, fmu_ids: [],
                 translations_attributes: [:id, :locale, :name, :details, :destroy]
 
+  member_action :activate, method: :put do
+    resource.update_attributes(is_active: true)
+    redirect_to collection_path, notice: 'Operator activated'
+  end
+
   index do
-    translation_status
+    column 'Active?', :is_active
     column :country, sortable: 'country_translations.name'
     column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
@@ -19,9 +24,19 @@ ActiveAdmin.register Operator do
     end
     column 'Obs/Visit', :obs_per_visit, sortable: true
     column '% Docs', :percentage_valid_documents_all, sortable: true
+    column('Actions') do |operator|
+      unless operator.is_active
+        a 'Activate', href: activate_admin_operator_path(operator),
+          'data-method': :put, 'data-confirm': 'Do you want to ACTIVATE this operator?'
+      end
+    end
 
     actions
   end
+
+  scope :all, default: true
+  scope :active
+  scope :inactive
 
   filter :country
   filter :translations_name_contains, as: :select, label: 'Name',
@@ -79,7 +94,6 @@ ActiveAdmin.register Operator do
       f.input :country, input_html: { disabled: edit }
       f.input :concession
       f.input :logo
-      f.input :is_active
       available_fmus = Fmu.filter_by_free
       if edit
         available_fmus = []
@@ -89,6 +103,7 @@ ActiveAdmin.register Operator do
       else
         f.input :fmus, collection: available_fmus
       end
+      f.input :is_active
     end
     f.actions
   end
