@@ -3,7 +3,7 @@ ActiveAdmin.register Operator do
 
   config.order_clause
 
-  actions :all, except: :destroy
+  actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, fmu_ids: [],
                 translations_attributes: [:id, :locale, :name, :details, :destroy]
