@@ -71,6 +71,17 @@ ActiveAdmin.register_page "Dashboard" do
       end
 
       column do
+        panel 'IM Requests' do
+          table_for Observer.inactive.order('updated_at DESC').limit(20).each do
+            column('Name') { |o| link_to o.name, admin_operator_path(o.id) }
+            column('Country') { |o| o.country.name }
+          end
+        end
+      end
+    end
+
+    columns do
+      column do
         panel "Last 20 Contact requests out of #{Contact.count}" do
           table_for Contact.order('created_at DESC').limit(20).each do
             column('Name')  { |c| link_to c.name, admin_contact_path(c.id) }

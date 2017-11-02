@@ -55,9 +55,8 @@ class Observer < ApplicationRecord
                            .order('observer_translations.name ASC')
   }
 
-  scope :active, -> {
-    where(is_active: true)
-  }
+  scope :active, -> { where(is_active: true) }
+  scope :inactive, -> { where(is_active: false) }
 
   default_scope { includes(:translations) }
 
