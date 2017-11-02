@@ -47,7 +47,7 @@ ActiveAdmin.register Law do
       if f.object.new_record?
         f.input :country
         f.input :subcategory, as: :select,
-                collection: Subcategory.operator.joins(:translations).order(:name)
+                collection: Subcategory.operator.with_translations(I18n.locale).order(:name)
       else
         f.input :country, input_html: { disabled: true }
         f.input :subcategory, input_html: { disabled: true }
@@ -55,7 +55,7 @@ ActiveAdmin.register Law do
 
       f.input :written_infraction, label: 'Illegality as written by law'
       f.input :infraction,         label: 'Legal reference: Illegality'
-      f.input :sanctions,          label: 'Legal feference: Penalties'
+      f.input :sanctions,          label: 'Legal reference: Penalties'
       f.input :min_fine,           label: 'Minimum Fine'
       f.input :max_fine,           label: 'Maximum Fine'
       f.input :penal_servitude
