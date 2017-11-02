@@ -80,6 +80,7 @@ class User < ApplicationRecord
 
   scope :recent,          -> { order('users.updated_at DESC') }
   scope :by_nickname_asc, -> { order('users.nickname ASC')    }
+  scope :inactive,        -> { where(is_active: false) }
 
   class << self
     def fetch_all(options)
