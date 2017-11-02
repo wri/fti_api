@@ -1,7 +1,7 @@
 ActiveAdmin.register Law do
   menu parent: 'Settings', priority: 4
 
-  actions :new, :create, :show, :edit, :index, :update
+  actions :new, :create, :show, :edit, :index, :update, :destroy
 
   config.order_clause
 
@@ -13,7 +13,7 @@ ActiveAdmin.register Law do
   end
 
   permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :penal_servitude,
-                :other_penalties, :apv, :written_infraction
+                :other_penalties, :apv, :written_infraction, :country_id
 
   filter :country
   filter :subcategory
