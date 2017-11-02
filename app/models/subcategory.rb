@@ -23,8 +23,4 @@ class Subcategory < ApplicationRecord
   default_scope do
     includes(:translations)
   end
-
-  def cache_key
-    super + '-' + Globalize.locale.to_s
-  end
 end
