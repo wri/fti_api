@@ -35,13 +35,14 @@ class Operator < ApplicationRecord
            'Sawmill', 'Other', 'Unknown'].freeze
 
   belongs_to :country, inverse_of: :operators, optional: true
+  has_many :all_operator_documents, class_name: 'OperatorDocument'
 
-  has_many :observations, -> { active },  inverse_of: :operator
-  has_many :users, inverse_of: :operator
+  has_many :observations, -> { active },  inverse_of: :operator, dependent: :destroy
+  has_many :users, inverse_of: :operator, dependent: :destroy
 
-  has_many :fmu_operators, -> { where(current: true) }, inverse_of: :operator
+  has_many :fmu_operators, -> { where(current: true) }
   has_many :fmus, through: :fmu_operators
-  has_many :all_fmu_operators, class_name: 'FmuOperator'
+  has_many :all_fmu_operators, class_name: 'FmuOperator', inverse_of: :operator, dependent: :destroy
   has_many :all_fmus, through: :all_fmu_operators, source: :fmu
 
   accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
@@ -52,6 +53,7 @@ class Operator < ApplicationRecord
 
   after_create :create_operator_id
   after_create :create_documents
+  before_destroy :really_destroy_documents
 
   validates :name, presence: true
   validates :website, url: true, if: lambda {|x| x.website.present?}
@@ -237,5 +239,10 @@ class Operator < ApplicationRecord
         end
       end
     end
+  end
+
+  def really_destroy_documents
+    mark_for_destruction # Hack to work with the hard delete of operator documents
+    all_operator_documents.find_each {|x| x.really_destroy!}
   end
 end

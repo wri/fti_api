@@ -37,10 +37,10 @@ class OperatorDocument < ApplicationRecord
   validates_presence_of :expire_date, if: :attachment?
   validate :reason_or_attachment
 
-  before_save :update_current, if: :current_changed?
+  before_save :update_current, on: %w[create update], if: :current_changed?
   before_create :set_status
   before_create :delete_previous_pending_document
-  after_save :update_operator_percentages, if: :status_changed?
+  after_save :update_operator_percentages, on: %w[create update],  if: :status_changed?
 
   before_destroy :insure_unity
 
@@ -56,6 +56,7 @@ class OperatorDocument < ApplicationRecord
   end
 
   def update_current
+    return if operator.present? && operator.marked_for_destruction?
     if current == true
       documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
                                                    required_operator_document_id: self.required_operator_document_id, current: true)
@@ -90,6 +91,7 @@ class OperatorDocument < ApplicationRecord
   private
 
   def insure_unity
+    return if operator.present? && operator.marked_for_destruction?
     if self.current && self.required_operator_document.present?
       od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
                                 required_operator_document_id: self.required_operator_document_id,
