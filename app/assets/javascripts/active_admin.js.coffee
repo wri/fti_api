@@ -3,3 +3,4 @@
 #= require access_control
 #= require users
 #= require index-filters
+#= require active_admin_sidebar

@@ -30,5 +30,12 @@ module V1
     def self.records(options = {})
       Observer.active
     end
+
+    # Adds the locale to the cache
+    def self.attribute_caching_context(context)
+      return {
+          locale: context[:locale]
+      }
+    end
   end
 end

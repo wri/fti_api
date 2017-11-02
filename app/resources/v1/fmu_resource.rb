@@ -28,5 +28,12 @@ module V1
       records
     }
 
+    # Adds the locale to the cache
+    def self.attribute_caching_context(context)
+      return {
+          locale: context[:locale]
+      }
+    end
+
   end
 end

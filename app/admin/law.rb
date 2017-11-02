@@ -1,7 +1,7 @@
 ActiveAdmin.register Law do
   menu parent: 'Settings', priority: 4
 
-  actions :new, :create, :show, :edit, :index, :update
+  actions :new, :create, :show, :edit, :index, :update, :destroy
 
   config.order_clause
 
@@ -13,7 +13,7 @@ ActiveAdmin.register Law do
   end
 
   permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :penal_servitude,
-                :other_penalties, :apv, :written_infraction
+                :other_penalties, :apv, :written_infraction, :country_id
 
   filter :country
   filter :subcategory
@@ -45,8 +45,9 @@ ActiveAdmin.register Law do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Law Details' do
       if f.object.new_record?
-        f.input :country, input_html: { class: "select2" }
-        f.input :subcategory, input_html: { class: "select2" }
+        f.input :country
+        f.input :subcategory, as: :select,
+                collection: Subcategory.operator.joins(:translations).order(:name)
       else
         f.input :country, input_html: { disabled: true }
         f.input :subcategory, input_html: { disabled: true }
