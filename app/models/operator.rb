@@ -40,7 +40,7 @@ class Operator < ApplicationRecord
   has_many :observations, -> { active },  inverse_of: :operator, dependent: :destroy
   has_many :users, inverse_of: :operator, dependent: :destroy
 
-  has_many :fmu_operators, -> { where(current: true) }
+  has_many :fmu_operators, -> { where(current: true) }, inverse_of: :operator, dependent: :destroy
   has_many :fmus, through: :fmu_operators
   has_many :all_fmu_operators, class_name: 'FmuOperator', inverse_of: :operator, dependent: :destroy
   has_many :all_fmus, through: :all_fmu_operators, source: :fmu
