@@ -16,6 +16,7 @@ class OperatorDocumentUploader < CarrierWave::Uploader::Base
   end
 
   def filename
+    return unless super.present?
     filename = '' + model.operator.name[0...30] + '-' + model.required_operator_document.name[0...100] + '-' + Date.today.to_s
     filename += '.' + super.split('.').last if super.split('.').any?
     filename

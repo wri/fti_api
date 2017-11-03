@@ -53,6 +53,7 @@ class Operator < ApplicationRecord
 
   after_create :create_operator_id
   after_create :create_documents
+  after_update :create_documents, if: :fa_id_changed?
   before_destroy :really_destroy_documents
 
   validates :name, presence: true
