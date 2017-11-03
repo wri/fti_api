@@ -34,10 +34,10 @@ ActiveAdmin.register User do
       if user.id != current_user.id
         if user.is_active
           a 'Deactivate', href: deactivate_admin_user_path(user),  'data-method': :put,
-            onclick: "return confirm('Are you sure you want to activate user #{user.name}')"
+            'data-confirm': "Are you sure you want to DEACTIVATE user #{user.name}"
         else
           a 'Activate', href: activate_admin_user_path(user),      'data-method': :put,
-            onclick: "return confirm('Are you sure you want to deactivate user #{user.name}')"
+            'data-confirm': "Are you sure you want to ACTIVATE user #{user.name}"
         end
       end
     end

@@ -27,7 +27,7 @@ ActiveAdmin.register Operator do
     column('Actions') do |operator|
       unless operator.is_active
         a 'Activate', href: activate_admin_operator_path(operator),
-          'data-method': :put, 'data-confirm': 'Do you want to ACTIVATE this operator?'
+          'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the operator #{operator.name}?"
       end
     end
 
