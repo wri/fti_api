@@ -6,17 +6,17 @@ module V1
     skip_before_action :authenticate
 
     def index
+      language = params['locale'].present? ? params['locale'] : 'en'
+      I18n.locale = language
+
       types = [{id: 'operator', name: 'Operator'}, {id: 'government', name: 'Government'}]
-      country_ids = Country.with_observations.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :iso, :name)
-        .map{|x| {id: x[0], iso: x[1], name: x[2]}}.sort_by { |c| c[:name] }
-      fmu_ids = Fmu.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :name)
-        .map{|x| {id: x[0], name: x[1]}}
+      country_ids = Country.with_observations.joins(:translations)
+                        .map{|x| {id: x.id, iso: x.iso, name: x.name}}.sort_by { |c| c[:name] }
+      fmu_ids = Fmu.all.joins(:translations).map{|x| {id: x.id, name: x.name }}
       years = Observation.pluck(:publication_date).map{|x| x.year}.uniq.sort
-        .map{ |x| {id: x, name: x }}
-      observer_ids = Observer.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :name)
-        .map{|x| {id: x[0], name: x[1]}}
-      category_ids = Category.all.includes(:translations).with_translations(I18n.available_locales).pluck(:id, :name)
-        .map{|x| {id: x[0], name: x[1]}}
+                  .map{ |x| {id: x, name: x }}
+      observer_ids = Observer.all.includes(:translations).map{|x| {id: x.id, name: x.name }}
+      category_ids = Category.all.includes(:translations).map{ |x| { id: x.id, name: x.name } }
       severities =[{id: 0, name: 'Unknown'}, {id: 1, name: 'Low'}, {id: 2, name: 'Medium'}, {id: 3, name: 'High'}]
 
       filters = {

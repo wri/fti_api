@@ -34,7 +34,7 @@ module V1
             :observation_report, :law, :operator, :government, :subcategory, :is_active
 
     filter :category_id, apply: ->(records, value, _options) {
-      records.joins(:subcategory).where('subcategories.category_id = ?', value[0].to_i)
+      records.joins(:subcategory).where(subcategories: { category_id: value })
     }
 
     filter :severity_level, apply: ->(records, value, _options) {
@@ -46,7 +46,11 @@ module V1
     }
 
     filter :'observation_report.id', apply: ->(records, value, _options) {
-      records.joins(:observation_report).where('observation_reports.id = ?', value[0].to_i)
+      records.joins(:observation_report).where(observation_reports: { id: value })
+    }
+
+    filter :observer_id, apply: ->(records, value, _options) {
+      records.joins(:observers).where(observers: { id: value })
     }
 
     def self.sortable_fields(context)

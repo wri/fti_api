@@ -14,6 +14,9 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  # Activates fallbacks for the language
+  config.i18n.fallbacks = true
+
   # Enable/disable caching. By default caching is disabled.
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
