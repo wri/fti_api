@@ -1,7 +1,7 @@
 ActiveAdmin.register Country do
   menu parent: 'Settings', priority: 6
 
-  actions :show, :index
+  actions :show, :index, :edit, :update
 
   config.order_clause
 
@@ -15,6 +15,8 @@ ActiveAdmin.register Country do
   filter :region_name
   filter :is_active
 
+  permit_params translations_attributes: [:id, :locale, :name]
+
   index do
     column 'Active?', :is_active, sortable: true
     column :id, sortable: true
@@ -26,17 +28,26 @@ ActiveAdmin.register Country do
     actions
   end
 
-  # form do |f|
-  #   f.semantic_errors *f.object.errors.keys
-  #   f.inputs 'Fmu Details' do
-  #     f.input :country,  input_html: { disabled: true }
-  #     f.input :operator, input_html: { disabled: true }
-  #
-  #     f.translated_inputs switch_locale: false do |t|
-  #       t.input :name
-  #     end
-  #
-  #     f.actions
-  #   end
-  # end
+  form do |f|
+    f.semantic_errors *f.object.errors.keys
+    f.inputs 'Country Details' do
+      f.translated_inputs switch_locale: false do |t|
+        t.input :name
+      end
+
+      f.actions
+    end
+  end
+
+  show do
+    attributes_table do
+      row :name
+      row :iso
+      row :region_iso
+      row :is_active
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
+  end
 end
