@@ -19,6 +19,11 @@ module V1
              end
            }
 
+    # Hack to ignore the sort by name for now
+    def self.apply_sort(records, order_options, context = {})
+      order_options.except! 'name' if order_options.key?('name')
+      super(records, order_options, context)
+    end
 
     def custom_links(_)
       { self: nil }
