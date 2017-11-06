@@ -85,7 +85,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel 'User Requests' do
           table_for User.inactive.order('updated_at DESC').limit(20).each do
             column('Name')    { |o| link_to o.name, admin_user_path(o.id) }
-            column('Country') { |o| o.country.name }
+            column('Country') { |o| o.country.name  if o.country.present? }
             column('Role')    { |o| o.user_permission.user_role if o.user_permission.present? }
           end
         end
