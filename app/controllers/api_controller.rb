@@ -93,6 +93,10 @@ class ApiController < ActionController::API
   end
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = if params[:locale].present? && I18n.available_locales.map{|x| x.to_s}.include?(params[:locale])
+                    params[:locale]
+                  else
+                    I18n.default_locale.to_s
+                  end
   end
 end

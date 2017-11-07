@@ -6,9 +6,6 @@ module V1
     skip_before_action :authenticate
 
     def index
-      language = params['locale'].present? ? params['locale'] : 'en'
-      I18n.locale = language
-
       types = [{id: 'operator', name: 'Operator'}, {id: 'government', name: 'Government'}]
       country_ids = Country.with_observations.joins(:translations)
                         .map{|x| {id: x.id, iso: x.iso, name: x.name}}.sort_by { |c| c[:name] }
