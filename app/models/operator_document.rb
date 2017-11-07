@@ -102,7 +102,7 @@ class OperatorDocument < ApplicationRecord
   end
 
   def set_status
-    if attachment.present?
+    if attachment.present? || reason.present?
       self.status = OperatorDocument.statuses[:doc_pending]
     else
       self.status = OperatorDocument.statuses[:doc_not_provided]
