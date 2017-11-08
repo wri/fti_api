@@ -11,7 +11,8 @@ ActiveAdmin.register Severity do
     end
   end
 
-  permit_params :id, :subcategory_id, :level, translations_attributes: [:id, :locale, :details]
+  permit_params :subcategory_id, :level, translations_attributes: [:id, :locale, :details, :_destroy]
+
 
   filter :translations_details_contains, as: :select, label: 'Details',
          collection: Severity.joins(:translations).pluck(:details)
@@ -31,6 +32,7 @@ ActiveAdmin.register Severity do
     column :details, sortable: 'severity_translations.details'
     column :subcategory, sortable: 'subcategory_translations.name'
     column :level
+    column :created_at
     column :updated_at
 
     actions

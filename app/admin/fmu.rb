@@ -16,7 +16,7 @@ ActiveAdmin.register Fmu do
   scope 'Free', :filter_by_free
 
   permit_params :id, :certification_fsc, :certification_pefc,
-                :certification_olb, translations_attributes: [:id, :locale, :name]
+                :certification_olb, translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
   filter :translations_name_contains, as: :select, label: 'Name',

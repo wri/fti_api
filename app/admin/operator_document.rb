@@ -29,8 +29,13 @@ ActiveAdmin.register OperatorDocument do
   end
 
   member_action :reject, method: :put do
-    resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
-    resource.remove_attachment!
+    if resource.reason.present?
+      resource.update_attributes(status: OperatorDocument.statuses[:doc_not_provided], reason: nil)
+    else
+      resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
+      resource.remove_attachment!
+    end
+
     redirect_to collection_path, notice: 'Document rejected'
   end
 

@@ -19,10 +19,4 @@ ActiveAdmin.register Species do
   filter :scientific_name, as: :select
   filter :cites_status, as: :select
   filter :iucn_status, as: :select
-
-  controller do
-    def scoped_collection
-      end_of_association_chain.includes([:translations])
-    end
-  end
 end

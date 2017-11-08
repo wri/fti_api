@@ -11,7 +11,7 @@ ActiveAdmin.register Subcategory do
     end
   end
 
-  permit_params translations_attributes: [:id, :locale, :name]
+  permit_params translations_attributes: [:id, :locale, :name, :_destroy]
 
   scope :all, default: true
   scope :operator

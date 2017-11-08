@@ -10,7 +10,7 @@ ActiveAdmin.register Category do
   scope :operator
   scope :government
 
-  permit_params :category_type, translations_attributes: [:id, :locale, :name]
+  permit_params :category_type, translations_attributes: [:id, :locale, :name, :_destroy]
 
   sidebar :subcategories, only: :show do
     sidebar = Subcategory.joins(:translations).where(category: resource).collect do |s|
