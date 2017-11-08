@@ -13,7 +13,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   permit_params :country_id, :observer_type, :is_active, :logo, :address, :information_name, :information_email,
                 :information_phone, :data_name, :data_email, :data_phone, :organization_type,
-                translations_attributes: [:id, :locale, :name]
+                translations_attributes: [:id, :locale, :name, :_destroy]
 
   index do
     column :is_active

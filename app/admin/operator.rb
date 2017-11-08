@@ -6,7 +6,7 @@ ActiveAdmin.register Operator do
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, fmu_ids: [],
-                translations_attributes: [:id, :locale, :name, :details, :destroy]
+                translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update_attributes(is_active: true)

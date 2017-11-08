@@ -15,7 +15,7 @@ ActiveAdmin.register Country do
   filter :region_name
   filter :is_active
 
-  permit_params translations_attributes: [:id, :locale, :name]
+  permit_params translations_attributes: [:id, :locale, :name, :_destroy]
 
   index do
     column 'Active?', :is_active, sortable: true

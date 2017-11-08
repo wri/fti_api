@@ -24,7 +24,7 @@ ActiveAdmin.register Observation do
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :law_id, :fmu_id, observer_ids: [], relevant_operators: [],
                 observation_documents_attributes: [:id, :name, :attachment],
-                translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status]
+                translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
 
 
   member_action :approve, method: :put do

@@ -11,7 +11,7 @@ ActiveAdmin.register Severity do
     end
   end
 
-  permit_params translations_attributes: [:id, :locale, :details]
+  permit_params translations_attributes: [:id, :locale, :details, :_destroy]
 
 
   filter :translations_details_contains, as: :select, label: 'Details',
