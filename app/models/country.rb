@@ -16,6 +16,9 @@
 
 class Country < ApplicationRecord
   translates :name, :region_name, touch: true
+  active_admin_translates :name, :region_name do
+    validates_presence_of :name
+  end
 
   has_many :users,           inverse_of: :country
   has_many :observations,    inverse_of: :country
