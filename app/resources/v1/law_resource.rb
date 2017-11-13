@@ -2,7 +2,7 @@ module V1
   class LawResource < JSONAPI::Resource
     caching
     attributes :written_infraction, :infraction, :sanctions, :min_fine, :max_fine,
-               :penal_servitude, :other_penalties, :apv, :complete
+               :penal_servitude, :other_penalties, :apv, :complete, :currency
 
     has_one :subcategory
     has_one :country
@@ -22,7 +22,8 @@ module V1
           @model.min_fine.present? &&
           @model.max_fine.present? &&
           @model.penal_servitude.present? &&
-          @model.apv.present?
+          @model.apv.present? &&
+          @model.currency.present?
     end
 
     def custom_links(_)

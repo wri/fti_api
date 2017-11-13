@@ -15,6 +15,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  country_id         :integer
+#  currency           :string
 #
 
 class Law < ApplicationRecord
