@@ -4,6 +4,7 @@ require 'active_support/concern'
 module GlobalizeFallback
   extend ActiveSupport::Concern
 
+  # TODO: Try to optimize it
   included do
     scope :with_fallback_translations, -> {
 
