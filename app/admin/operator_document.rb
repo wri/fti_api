@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register OperatorDocument do
   menu parent: 'Operator Documents', priority: 2
   config.order_clause
@@ -15,7 +17,7 @@ ActiveAdmin.register OperatorDocument do
   controller do
     def scoped_collection
       end_of_association_chain.includes([:required_operator_document, :user, [operator: :translations],
-                                        [fmu: :translations], [required_operator_document: [required_operator_document_group: :translations]]])
+                                         [fmu: :translations], [required_operator_document: [required_operator_document_group: :translations]]])
     end
   end
 
@@ -67,7 +69,7 @@ ActiveAdmin.register OperatorDocument do
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).name
       end
     end
-    column :'Type', sortable: 'required_operator_documents.type' do |od|
+    column :Type, sortable: 'required_operator_documents.type' do |od|
       if od.required_operator_document.present?
         od.required_operator_document.type == 'RequiredOperatorDocumentFmu' ? 'Fmu' : 'Operator'
       else

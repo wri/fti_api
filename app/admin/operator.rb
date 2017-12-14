@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ActiveAdmin.register Operator do
 
   config.order_clause
@@ -6,7 +7,7 @@ ActiveAdmin.register Operator do
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, fmu_ids: [],
-                translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                       translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update_attributes(is_active: true)
@@ -27,7 +28,7 @@ ActiveAdmin.register Operator do
     column('Actions') do |operator|
       unless operator.is_active
         a 'Activate', href: activate_admin_operator_path(operator),
-          'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the operator #{operator.name}?"
+                      'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the operator #{operator.name}?"
       end
     end
 
@@ -40,7 +41,7 @@ ActiveAdmin.register Operator do
 
   filter :country
   filter :translations_name_contains, as: :select, label: 'Name',
-         collection: Operator.joins(:translations).pluck(:name)
+                                      collection: Operator.joins(:translations).pluck(:name)
   filter :concession, as: :select
   filter :score
   filter :score_absolute, label: 'Obs/Visit'
@@ -69,7 +70,7 @@ ActiveAdmin.register Operator do
   end
 
   sidebar 'Invalid Documents', only: :show,
-          if: proc{ resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).any? } do
+                               if: proc{ resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).any? } do
     table_for resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).collect do |od|
       column('') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
@@ -88,9 +89,9 @@ ActiveAdmin.register Operator do
     f.inputs 'Operator Details' do
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type, as: :select,
-              collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
-                           'Industrial agriculture', 'Mining company',
-                           'Sawmill', 'Other', 'Unknown']
+                              collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
+                                           'Industrial agriculture', 'Mining company',
+                                           'Sawmill', 'Other', 'Unknown']
       f.input :country, input_html: { disabled: edit }
       f.input :concession
       f.input :logo

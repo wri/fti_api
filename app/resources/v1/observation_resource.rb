@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ObservationResource < JSONAPI::Resource
     caching
@@ -72,7 +74,6 @@ module V1
         @model.save
         # This is added because of the order of the callbacks in JAR
         @model.update_reports_observers
-
       rescue Exception => e
         Rails.logger.warn "Observation created without user: #{e.inspect}"
       end
@@ -107,7 +108,7 @@ module V1
 
     # Adds the locale to the cache
     def self.attribute_caching_context(context)
-      return {
+      {
           locale: context[:locale]
       }
     end

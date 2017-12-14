@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operator_document_annexes
@@ -33,7 +35,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   validates_presence_of :status
 
   enum status: { doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
-  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4}
+  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
 
   def self.expire_document_annexes
     documents_to_expire =

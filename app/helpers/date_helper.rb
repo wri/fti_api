@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module DateHelper
 
   # Returns true if two date ranges intersect

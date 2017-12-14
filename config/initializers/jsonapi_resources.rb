@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 JSONAPI.configure do |config|
   # built in paginators are :none, :offset, :paged
   config.default_paginator = :paged
@@ -54,7 +56,7 @@ module JSONAPI
                 order_by_query = "#{association.name}_sorting.#{column_name} #{direction}"
                 records = records.joins(joins_query).order(order_by_query)
               else
-                if association.klass.new.attributes.has_key?(column_name)
+                if association.klass.new.attributes.key?(column_name)
                   joins_query = _build_joins([records.model, *association])
                   joins_query << " LEFT JOIN #{association.name}_translations ON #{association.name}_translations.#{association.name}_id = #{association.name}_sorting.id AND #{association.name}_translations.locale = '#{_context[:locale]}'"
                   order_by_query = "#{association.name}_translations.#{column_name} #{direction}"
@@ -66,7 +68,7 @@ module JSONAPI
               if @model_class.attribute_names.include?(field)
                 records = records.order(field => direction)
               else
-                if @model_class.new.attributes.has_key?(field) # To check if it exists in the translations table
+                if @model_class.new.attributes.key?(field) # To check if it exists in the translations table
                   records = records.joins(:translations).with_translations(_context[:locale])
                               .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
                 end
@@ -93,9 +95,9 @@ module JSONAPI
       end
 
       if content[:data].is_a?(Hash) && content.dig(:data, :links, :self).present?
-        render_options[:location] = content[:data]["links"][:self] if (
+        render_options[:location] = content[:data]["links"][:self] if 
         response_doc.status == :created && content[:data].class != Array
-        )
+        
       end
 
       # For whatever reason, `render` ignores :status and :content_type when :body is set.
@@ -107,4 +109,3 @@ module JSONAPI
     end
   end
 end
-

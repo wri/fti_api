@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operator_documents
@@ -45,7 +47,7 @@ class OperatorDocument < ApplicationRecord
   before_destroy :insure_unity
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
-  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4}
+  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
 
   def update_operator_percentages
     operator.update_valid_documents_percentages
@@ -111,8 +113,8 @@ class OperatorDocument < ApplicationRecord
 
   def delete_previous_pending_document
     pending_documents = OperatorDocument.where(operator_id: self.operator_id,
-                                              required_operator_document_id: self.required_operator_document_id,
-                                              status: OperatorDocument.statuses[:doc_pending])
+                                               required_operator_document_id: self.required_operator_document_id,
+                                               status: OperatorDocument.statuses[:doc_pending])
     pending_documents.each {|x| x.destroy}
   end
 

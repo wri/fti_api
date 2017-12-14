@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTableObservationReportObservers < ActiveRecord::Migration[5.0]
   def change
     create_table :observation_report_observers do |t|

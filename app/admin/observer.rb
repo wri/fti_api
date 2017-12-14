@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ActiveAdmin.register Observer, as: 'Monitor' do
 
   config.order_clause
@@ -29,7 +30,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   filter :is_active
   filter :country
   filter :translations_name_contains, as: :select, label: 'Name',
-         collection: Observer.joins(:translations).pluck(:name)
+                                      collection: Observer.joins(:translations).pluck(:name)
 
 
   show do
@@ -61,7 +62,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     end
     f.inputs 'Monitor Details' do
       edit = f.object.new_record? ? false : true
-      f.input :country, input_html: { disabled: edit  && f.object.country_id.present?}
+      f.input :country, input_html: { disabled: edit  && f.object.country_id.present? }
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
       f.input :logo

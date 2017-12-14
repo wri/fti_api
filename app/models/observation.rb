@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: observations
@@ -108,16 +109,16 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def update_reports_observers
-    return unless observation_report.present?
+    return if observation_report.blank?
     observation_report.observer_ids =
-        observation_report.observations.map(&:observers).map(&:ids).flatten
+      observation_report.observations.map(&:observers).map(&:ids).flatten
   end
 
 
   private
 
   def update_operator_scores
-    operator.calculate_observations_scores unless operator.nil?
+    operator&.calculate_observations_scores
   end
 
   def set_active_status

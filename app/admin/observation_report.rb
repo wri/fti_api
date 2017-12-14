@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register ObservationReport do
   menu parent: 'Observation Documents', priority: 1
 
@@ -29,7 +31,7 @@ ActiveAdmin.register ObservationReport do
     column :observations do |o|
       links = []
       o.observations.each do |obs|
-       links << link_to(obs.id, admin_observation_path(obs.id))
+        links << link_to(obs.id, admin_observation_path(obs.id))
       end
       links.reduce(:+)
     end

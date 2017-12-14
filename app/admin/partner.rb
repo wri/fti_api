@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ActiveAdmin.register Partner do
   menu parent: 'User Management', priority: 4
   permit_params :name, :website, :logo, :priority, :category, :description

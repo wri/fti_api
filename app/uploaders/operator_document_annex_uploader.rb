@@ -12,7 +12,7 @@ class OperatorDocumentAnnexUploader < CarrierWave::Uploader::Base
   end
 
   def exists?
-    !file.blank?
+    file.present?
   end
 
   def original_filename

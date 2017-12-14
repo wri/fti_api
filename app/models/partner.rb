@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: partners
@@ -16,7 +18,7 @@
 class Partner < ApplicationRecord
   mount_base64_uploader :logo, PartnerLogoUploader
 
-  validates :priority, numericality: {only_integer: true, greater_than_or_equal_to: 0 },  if: :priority?
+  validates :priority, numericality: { only_integer: true, greater_than_or_equal_to: 0 },  if: :priority?
   validates_presence_of :name
 
 

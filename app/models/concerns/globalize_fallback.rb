@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'active_support/concern'
 
 module GlobalizeFallback
@@ -9,23 +10,23 @@ module GlobalizeFallback
     scope :with_fallback_translations, -> {
 
 
-    # joins(
-    #     "INNER JOIN (
-    #         SELECT #{self.table_name}.id, #{coalesce_string}
-    #         FROM #{self.table_name}
-    #         LEFT JOIN #{self.translations_table_name} original ON #{self.table_name}.id = original.#{fk_column} AND original.locale = '#{Globalize.fallbacks[0]}'
-    #         LEFT JOIN #{self.translations_table_name} fallback ON #{self.table_name}.id = fallback.#{fk_column} AND fallback.locale = '#{Globalize.fallbacks[1]}'
-    #       ) #{self.translations_table_name} ON #{self.translations_table_name}.id = #{self.table_name}.id
-    #     ")
+      # joins(
+      #     "INNER JOIN (
+      #         SELECT #{self.table_name}.id, #{coalesce_string}
+      #         FROM #{self.table_name}
+      #         LEFT JOIN #{self.translations_table_name} original ON #{self.table_name}.id = original.#{fk_column} AND original.locale = '#{Globalize.fallbacks[0]}'
+      #         LEFT JOIN #{self.translations_table_name} fallback ON #{self.table_name}.id = fallback.#{fk_column} AND fallback.locale = '#{Globalize.fallbacks[1]}'
+      #       ) #{self.translations_table_name} ON #{self.translations_table_name}.id = #{self.table_name}.id
+      #     ")
 
-    # joins(
-    #     "INNER JOIN (
-    #         SELECT #{self.table_name}.id, #{coalesce_string}
-    #         FROM #{self.table_name}
-    #         LEFT JOIN #{self.translations_table_name} original ON #{self.table_name}.id = original.#{fk_column} AND original.locale = '#{Globalize.fallbacks[0]}'
-    #         LEFT JOIN #{self.translations_table_name} fallback ON #{self.table_name}.id = fallback.#{fk_column} AND fallback.locale = '#{Globalize.fallbacks[1]}'
-    #       ) pref ON pref.id = #{self.table_name}.id
-    #     ")
+      # joins(
+      #     "INNER JOIN (
+      #         SELECT #{self.table_name}.id, #{coalesce_string}
+      #         FROM #{self.table_name}
+      #         LEFT JOIN #{self.translations_table_name} original ON #{self.table_name}.id = original.#{fk_column} AND original.locale = '#{Globalize.fallbacks[0]}'
+      #         LEFT JOIN #{self.translations_table_name} fallback ON #{self.table_name}.id = fallback.#{fk_column} AND fallback.locale = '#{Globalize.fallbacks[1]}'
+      #       ) pref ON pref.id = #{self.table_name}.id
+      #     ")
 
 
 

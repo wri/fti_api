@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Observation do
   config.order_clause
 
@@ -23,8 +25,8 @@ ActiveAdmin.register Observation do
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :law_id, :fmu_id, observer_ids: [], relevant_operators: [],
-                observation_documents_attributes: [:id, :name, :attachment],
-                translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
+                                  observation_documents_attributes: [:id, :name, :attachment],
+                                  translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
 
 
   member_action :approve, method: :put do
@@ -88,9 +90,9 @@ ActiveAdmin.register Observation do
   sidebar 'Documents', only: :show do
     attributes_table_for resource do
       ul do
-          resource.observation_documents.collect do |od|
-          li link_to(od.name, admin_evidence_path(od.id))
-        end
+        resource.observation_documents.collect do |od|
+        li link_to(od.name, admin_evidence_path(od.id))
+      end
       end
     end
   end
@@ -106,7 +108,7 @@ ActiveAdmin.register Observation do
   filter :observers
   filter :operator
   filter :government_translations_government_entity_contains, as: :select, label: 'Government Entity',
-         collection: Government.joins(:translations).pluck(:government_entity)
+                                                              collection: Government.joins(:translations).pluck(:government_entity)
   filter :subcategory
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :observation_report
@@ -179,14 +181,16 @@ ActiveAdmin.register Observation do
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
       f.input :law, input_html: { disabled: law },
-              collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]}
+                    collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]}
       f.input :severity, as: :select,
-              collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
+                         collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
-      f.input :government, as: :select,
-              collection: Government.all.map {|g| [g.government_entity, g.id] },
-              input_html: { disabled: government } if f.object.observation_type == 'government'
+      if f.object.observation_type == 'government'
+        f.input :government, as: :select,
+                             collection: Government.all.map {|g| [g.government_entity, g.id] },
+                             input_html: { disabled: government }
+      end
       f.input :operator, input_html: { disabled: operator } if f.object.observation_type == 'operator'
       f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false }
       f.input :pv

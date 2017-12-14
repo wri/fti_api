@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class OperatorResource < JSONAPI::Resource
     caching
@@ -21,7 +23,7 @@ module V1
 
     def set_active
       user = context[:current_user]
-      @model.is_active = false unless user.present?
+      @model.is_active = false if user.blank?
     end
 
     filter :certification, apply: ->(records, value, _options) {
@@ -83,7 +85,7 @@ module V1
 
     # Adds the locale to the cache
     def self.attribute_caching_context(context)
-      return {
+      {
           locale: context[:locale]
       }
     end

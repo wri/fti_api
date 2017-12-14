@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Severity do
   menu parent: 'Settings', priority: 3
 
@@ -15,7 +17,7 @@ ActiveAdmin.register Severity do
 
 
   filter :translations_details_contains, as: :select, label: 'Details',
-         collection: Severity.joins(:translations).pluck(:details)
+                                         collection: Severity.joins(:translations).pluck(:details)
   filter :subcategory, as: :select
   filter :level, as: :select, collection: [0, 1, 2, 3]
   filter :created_at

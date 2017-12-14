@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Contact do
   menu parent: 'User Management', priority: 3
   permit_params :email, :name

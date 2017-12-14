@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddLawsToSubcategories < ActiveRecord::Migration[5.0]
   def up
     create_table :country_subcategories do |t|

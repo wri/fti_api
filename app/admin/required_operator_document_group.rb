@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register RequiredOperatorDocumentGroup do
   menu parent: 'Operator Documents', priority: 0
 
@@ -20,7 +22,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   end
 
   filter :translations_name_contains, as: :select,
-         collection: RequiredOperatorDocumentGroup.joins(:translations).pluck(:name)
+                                      collection: RequiredOperatorDocumentGroup.joins(:translations).pluck(:name)
   filter :updated_at
 
   form do |f|

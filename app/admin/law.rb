@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Law do
   menu parent: 'Settings', priority: 4
 
@@ -47,7 +49,7 @@ ActiveAdmin.register Law do
       if f.object.new_record?
         f.input :country
         f.input :subcategory, as: :select,
-                collection: Subcategory.operator.with_translations(I18n.locale).order(:name)
+                              collection: Subcategory.operator.with_translations(I18n.locale).order(:name)
       else
         f.input :country, input_html: { disabled: true }
         f.input :subcategory, input_html: { disabled: true }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register FmuOperator do
   menu parent: 'Settings', priority: 5
 
