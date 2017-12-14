@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113092353) do
+ActiveRecord::Schema.define(version: 20171214120021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -428,6 +428,16 @@ ActiveRecord::Schema.define(version: 20171113092353) do
     t.index ["type"], name: "index_required_operator_documents_on_type", using: :btree
   end
 
+  create_table "sawmills", force: :cascade do |t|
+    t.string   "name"
+    t.float    "lat"
+    t.float    "lng"
+    t.boolean  "is_active",   default: true, null: false
+    t.integer  "operator_id",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "severities", force: :cascade do |t|
     t.integer  "level"
     t.datetime "created_at",     null: false
@@ -570,6 +580,7 @@ ActiveRecord::Schema.define(version: 20171113092353) do
   add_foreign_key "photos", "users"
   add_foreign_key "required_operator_documents", "countries"
   add_foreign_key "required_operator_documents", "required_operator_document_groups"
+  add_foreign_key "sawmills", "operators"
   add_foreign_key "severities", "subcategories"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"

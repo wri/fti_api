@@ -52,6 +52,8 @@ class Operator < ApplicationRecord
   has_many :operator_document_countries, -> { actual }
   has_many :operator_document_fmus, -> { actual }
 
+  has_many :sawmills
+
   after_create :create_operator_id
   after_create :create_documents
   after_update :create_documents, if: :fa_id_changed?
