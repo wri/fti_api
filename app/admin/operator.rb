@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Operator do
+  menu parent: 'Operators', priority: 1
 
   config.order_clause
 
@@ -52,6 +53,16 @@ ActiveAdmin.register Operator do
       ul do
         resource.fmus.collect do |fmu|
           li link_to(fmu.name, admin_fmu_path(fmu.id))
+        end
+      end
+    end
+  end
+
+  sidebar 'Sawmills', only: :show do
+    attributes_table_for resource do
+      ul do
+        resource.sawmills.collect do |sawmill|
+          li link_to(sawmill.name, admin_sawmill_path(sawmill.id))
         end
       end
     end
