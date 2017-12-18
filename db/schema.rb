@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214120021) do
+ActiveRecord::Schema.define(version: 20171214181355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,14 @@ ActiveRecord::Schema.define(version: 20171214120021) do
     t.boolean  "is_active",        default: false, null: false
     t.index ["is_active"], name: "index_countries_on_is_active", using: :btree
     t.index ["iso"], name: "index_countries_on_iso", using: :btree
+  end
+
+  create_table "countries_observers", id: false, force: :cascade do |t|
+    t.integer "country_id",  null: false
+    t.integer "observer_id", null: false
+    t.index ["country_id", "observer_id"], name: "index_countries_observers_on_country_id_and_observer_id", using: :btree
+    t.index ["country_id", "observer_id"], name: "index_unique_country_observer", unique: true, using: :btree
+    t.index ["observer_id", "country_id"], name: "index_countries_observers_on_observer_id_and_country_id", using: :btree
   end
 
   create_table "country_translations", force: :cascade do |t|
@@ -279,7 +287,6 @@ ActiveRecord::Schema.define(version: 20171214120021) do
 
   create_table "observers", force: :cascade do |t|
     t.string   "observer_type",                    null: false
-    t.integer  "country_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.boolean  "is_active",         default: true
@@ -292,7 +299,6 @@ ActiveRecord::Schema.define(version: 20171214120021) do
     t.string   "data_email"
     t.string   "data_phone"
     t.string   "organization_type"
-    t.index ["country_id"], name: "index_observers_on_country_id", using: :btree
     t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
   end
 
@@ -573,7 +579,6 @@ ActiveRecord::Schema.define(version: 20171214120021) do
   add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"
   add_foreign_key "observations", "users", column: "modified_user_id"
-  add_foreign_key "observers", "countries"
   add_foreign_key "operator_documents", "fmus"
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"

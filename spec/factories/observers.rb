@@ -4,7 +4,6 @@
 #
 #  id                :integer          not null, primary key
 #  observer_type     :string           not null
-#  country_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  is_active         :boolean          default(TRUE)

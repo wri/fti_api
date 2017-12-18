@@ -10,6 +10,7 @@ module V1
     has_many :fmus
     has_many :required_operator_documents
     has_many :governments
+    has_many :monitors
 
     filter :iso
     filter :is_active, default: 'true',
