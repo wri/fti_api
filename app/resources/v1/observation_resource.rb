@@ -8,7 +8,7 @@ module V1
                :pv, :is_active, :details, :evidence, :concern_opinion,
                :litigation_status, :lat, :lng,
                :country_id, :fmu_id,
-               :subcategory_id, :severity_id, :created_at, :updated_at, :actions_taken
+               :subcategory_id, :severity_id, :created_at, :updated_at, :actions_taken, :validation_status
 
     has_many :species
     has_many :comments
@@ -30,6 +30,7 @@ module V1
 
     after_create :add_own_observer
     before_save  :set_modified
+    before_save  :validate_status
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
@@ -79,9 +80,16 @@ module V1
       end
     end
 
+    # Saves the last user who modified the observation
     def set_modified
       user = context[:current_user]
       @model.modified_user_id = user.id
+    end
+
+
+    # Makes sure the validation status can be only one of the two: created, ready for revision
+    def validate_status
+      @model.validation_status = 'Created' unless ['Created', 'Ready for revision'].include?(@model.validation_status)
     end
 
     # To allow the filtering of results according to the app and user
