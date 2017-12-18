@@ -8,17 +8,23 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:translations, [country: :translations]])
+      end_of_association_chain.includes([:translations, [countries: :translations]])
     end
   end
 
-  permit_params :country_id, :observer_type, :is_active, :logo, :address, :information_name, :information_email,
+  permit_params :observer_type, :is_active, :logo, :address, :information_name, :information_email,
                 :information_phone, :data_name, :data_email, :data_phone, :organization_type,
-                translations_attributes: [:id, :locale, :name, :_destroy]
+                translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
   index do
     column :is_active
-    column :country, sortable: 'country_translations.name'
+    column :countries do |observer|
+      links =[]
+      observer.countries.each do |country|
+        links << link_to(country.name, admin_country_path(country.id))
+      end
+      links.join(' ').html_safe
+    end
     column :observer_type, sortable: true
     image_column :logo
     column :name, sortable: 'observer_translations.name'
@@ -28,7 +34,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   filter :is_active
-  filter :country
+  filter :countries
   filter :translations_name_contains, as: :select, label: 'Name',
                                       collection: Observer.joins(:translations).pluck(:name)
 
@@ -37,7 +43,13 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     attributes_table do
       row :observer_type
       row :organization_type
-      row :country
+      row :countries do |observer|
+        links =[]
+        observer.countries.each do |country|
+          links << link_to(country.name, admin_country_path(country.id))
+        end
+        links.join(' ').html_safe
+      end
       image_row :logo
       row :address
       row :information_name
@@ -61,8 +73,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       end
     end
     f.inputs 'Monitor Details' do
-      edit = f.object.new_record? ? false : true
-      f.input :country, input_html: { disabled: edit  && f.object.country_id.present? }
+      f.input :countries
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
       f.input :logo
@@ -75,11 +86,5 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       f.input :data_phone
     end
     f.actions
-  end
-
-  controller do
-    def scoped_collection
-      end_of_association_chain.includes([:translations, [country: :translations]])
-    end
   end
 end

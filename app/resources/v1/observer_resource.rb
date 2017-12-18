@@ -7,9 +7,11 @@ module V1
                :information_name, :information_email, :information_phone, :data_name,
                :data_email, :data_phone, :organization_type
 
-    has_one :country
+    has_many :countries
     has_many   :users
     has_many :observations
+
+    filter :countries
 
     before_create :inactivate
 
