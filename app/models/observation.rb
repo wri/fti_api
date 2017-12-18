@@ -33,7 +33,7 @@ class Observation < ApplicationRecord
   active_admin_translates :details, :evidence, :concern_opinion, :litigation_status
 
   enum observation_type: %w(operator government)
-  enum validation_status: ['Created', 'Under revision', 'Approved', 'Rejected']
+  enum validation_status: ['Created', 'Ready for revision', 'Under revision', 'Approved', 'Rejected']
 
 
   belongs_to :country,        inverse_of: :observations
@@ -88,7 +88,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   }
 
   scope :pending, ->() { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
-  scope :created, ->() { joins(:translations).where(validation_status: 'Created') }
+  scope :created, ->() { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
 
   class << self
     def translated_types

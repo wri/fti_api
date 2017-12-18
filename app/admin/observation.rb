@@ -158,9 +158,9 @@ ActiveAdmin.register Observation do
     column :created_at
     column :updated_at
     column('Actions') do |observation|
-      a 'Approve', href: approve_admin_observation_path(observation),      'data-method': :put
-      a 'Reject',  href: reject_admin_observation_path(observation),       'data-method': :put
-      a 'Review',  href: start_review_admin_observation_path(observation), 'data-method': :put
+      a 'Approve', href: approve_admin_observation_path(observation),      'data-method': :put if ['Ready for revision', 'Under revision', 'Rejected'].include?(observation.validation_status)
+      a 'Reject',  href: reject_admin_observation_path(observation),       'data-method': :put if ['Ready for revision', 'Under revision', 'Approved'].include?(observation.validation_status)
+      a 'Review',  href: start_review_admin_observation_path(observation), 'data-method': :put if ['Ready for revision', 'Approved', 'Rejected'].include?(observation.validation_status)
     end
     actions
   end
