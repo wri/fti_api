@@ -91,6 +91,11 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
+    column 'Annexes' do |od|
+      links = []
+      od.operator_document_annexes.each {|a| links << link_to(a.id, admin_operator_document_annex_path(a))}
+      links.join(' ').html_safe
+    end
     column :reason
     column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
