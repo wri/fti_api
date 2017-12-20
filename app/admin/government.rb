@@ -5,7 +5,7 @@ ActiveAdmin.register Government do
 
   config.order_clause
 
-  actions :all, except: :destroy
+  actions :all
   permit_params :country_id, translations_attributes: [:id, :locale, :government_entity, :details, :_destroy]
 
   controller do

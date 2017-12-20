@@ -19,6 +19,7 @@ class Government < ApplicationRecord
   has_many :observations, inverse_of: :government
 
   validates :government_entity, presence: true
+  before_destroy :observations_present?
 
   scope :by_entity_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
@@ -41,5 +42,15 @@ class Government < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  private
+
+  # Doesn't allow the removal of the entity if there are observations for it
+  def observations_present?
+    if observations.any?
+      errors.add(:base, 'Cannot delete an entity that has observations.')
+      false
+    end
   end
 end
