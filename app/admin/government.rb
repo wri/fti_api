@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ActiveAdmin.register Government do
   menu parent: 'Settings', priority: 7
 
@@ -24,9 +25,9 @@ ActiveAdmin.register Government do
 
   filter :country
   filter :translations_government_entity_contains, as: :select, label: 'Entity',
-         collection: Government.joins(:translations).pluck(:government_entity)
+                                                   collection: Government.joins(:translations).pluck(:government_entity)
   filter :translations_details_contains, as: :select, label: 'Details',
-         collection: Government.joins(:translations).pluck(:details)
+                                         collection: Government.joins(:translations).pluck(:details)
 
   sidebar 'Observations', only: :show do
     attributes_table_for resource do

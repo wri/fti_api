@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Subcategory do
   menu parent: 'Settings', priority: 2
 
@@ -18,14 +20,14 @@ ActiveAdmin.register Subcategory do
   scope :government
 
   filter :translations_name_contains, as: :select, label: 'Name',
-         collection: Subcategory.joins(:translations).pluck(:name)
+                                      collection: Subcategory.joins(:translations).pluck(:name)
   filter :category, as: :select
   filter :created_at
   filter :updated_at
 
   sidebar :laws, only: :show do
     sidebar = Law.where(subcategory: resource).collect do |law|
-      auto_link(law, law.name.camelize)
+      auto_link(law, law.written_infraction&.camelize)
     end
     safe_join(sidebar, content_tag('br'))
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113092353) do
+ActiveRecord::Schema.define(version: 20171218115838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,14 @@ ActiveRecord::Schema.define(version: 20171113092353) do
     t.boolean  "is_active",        default: false, null: false
     t.index ["is_active"], name: "index_countries_on_is_active", using: :btree
     t.index ["iso"], name: "index_countries_on_iso", using: :btree
+  end
+
+  create_table "countries_observers", id: false, force: :cascade do |t|
+    t.integer "country_id",  null: false
+    t.integer "observer_id", null: false
+    t.index ["country_id", "observer_id"], name: "index_countries_observers_on_country_id_and_observer_id", using: :btree
+    t.index ["country_id", "observer_id"], name: "index_unique_country_observer", unique: true, using: :btree
+    t.index ["observer_id", "country_id"], name: "index_countries_observers_on_observer_id_and_country_id", using: :btree
   end
 
   create_table "country_translations", force: :cascade do |t|
@@ -279,7 +287,6 @@ ActiveRecord::Schema.define(version: 20171113092353) do
 
   create_table "observers", force: :cascade do |t|
     t.string   "observer_type",                    null: false
-    t.integer  "country_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.boolean  "is_active",         default: true
@@ -292,7 +299,6 @@ ActiveRecord::Schema.define(version: 20171113092353) do
     t.string   "data_email"
     t.string   "data_phone"
     t.string   "organization_type"
-    t.index ["country_id"], name: "index_observers_on_country_id", using: :btree
     t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
   end
 
@@ -377,15 +383,24 @@ ActiveRecord::Schema.define(version: 20171113092353) do
     t.index ["is_active"], name: "index_operators_on_is_active", using: :btree
   end
 
+  create_table "partner_translations", force: :cascade do |t|
+    t.integer  "partner_id",  null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name",        null: false
+    t.text     "description"
+    t.index ["locale"], name: "index_partner_translations_on_locale", using: :btree
+    t.index ["partner_id"], name: "index_partner_translations_on_partner_id", using: :btree
+  end
+
   create_table "partners", force: :cascade do |t|
-    t.string   "name"
     t.string   "website"
     t.string   "logo"
     t.integer  "priority"
     t.integer  "category"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -426,6 +441,16 @@ ActiveRecord::Schema.define(version: 20171113092353) do
     t.index ["deleted_at"], name: "index_required_operator_documents_on_deleted_at", using: :btree
     t.index ["required_operator_document_group_id"], name: "index_req_op_doc_group_id", using: :btree
     t.index ["type"], name: "index_required_operator_documents_on_type", using: :btree
+  end
+
+  create_table "sawmills", force: :cascade do |t|
+    t.string   "name"
+    t.float    "lat"
+    t.float    "lng"
+    t.boolean  "is_active",   default: true, null: false
+    t.integer  "operator_id",                null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "severities", force: :cascade do |t|
@@ -563,13 +588,13 @@ ActiveRecord::Schema.define(version: 20171113092353) do
   add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"
   add_foreign_key "observations", "users", column: "modified_user_id"
-  add_foreign_key "observers", "countries"
   add_foreign_key "operator_documents", "fmus"
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "photos", "users"
   add_foreign_key "required_operator_documents", "countries"
   add_foreign_key "required_operator_documents", "required_operator_document_groups"
+  add_foreign_key "sawmills", "operators"
   add_foreign_key "severities", "subcategories"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"

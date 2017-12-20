@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: fmu_operators
@@ -24,7 +26,7 @@ class FmuOperator < ApplicationRecord
 
   # Sets the start date as today, if none is provided
   def set_current_start_date
-    self.start_date = Date.today unless self.start_date.present?
+    self.start_date = Date.today if self.start_date.blank?
   end
 
   # Validates if the start date is earlier than the end date
@@ -37,7 +39,7 @@ class FmuOperator < ApplicationRecord
 
   # Insures only one operator is active per fmu
   def one_active_per_fmu
-    return false unless fmu.present?
+    return false if fmu.blank?
     unless fmu.fmu_operators.where(current: true).count <= 1
       errors.add(:current, 'There can only be one active operator at a time')
     end
@@ -58,7 +60,7 @@ class FmuOperator < ApplicationRecord
       end
     end
 
-    return true
+    true
   end
 
   # Calculates and sets all the current operator_fmus on a given day

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTableOperatorDocumentAnnex < ActiveRecord::Migration[5.0]
   def change
     create_table :operator_document_annexes do |t|

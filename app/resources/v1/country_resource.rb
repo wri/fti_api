@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class CountryResource < JSONAPI::Resource
     caching
@@ -8,10 +10,11 @@ module V1
     has_many :fmus
     has_many :required_operator_documents
     has_many :governments
+    has_many :monitors
 
     filter :iso
     filter :is_active, default: 'true',
-           apply: ->(records, value, _options) {
+                       apply: ->(records, value, _options) {
              if %w(true false).include?(value.first)
                records.where(is_active: value.first)
              else
@@ -31,7 +34,7 @@ module V1
 
     # Adds the locale to the cache
     def self.attribute_caching_context(context)
-      return {
+      {
           locale: context[:locale]
       }
     end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Fmu do
   menu parent: 'Settings', priority: 5
 
@@ -20,7 +22,7 @@ ActiveAdmin.register Fmu do
 
   filter :id, as: :select
   filter :translations_name_contains, as: :select, label: 'Name',
-         collection: Fmu.joins(:translations).pluck(:name)
+                                      collection: Fmu.joins(:translations).pluck(:name)
   filter :country
   filter :operator
 

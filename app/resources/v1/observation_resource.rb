@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ObservationResource < JSONAPI::Resource
     caching
@@ -6,7 +8,7 @@ module V1
                :pv, :is_active, :details, :evidence, :concern_opinion,
                :litigation_status, :lat, :lng,
                :country_id, :fmu_id,
-               :subcategory_id, :severity_id, :created_at, :updated_at, :actions_taken
+               :subcategory_id, :severity_id, :created_at, :updated_at, :actions_taken, :validation_status
 
     has_many :species
     has_many :comments
@@ -28,6 +30,7 @@ module V1
 
     after_create :add_own_observer
     before_save  :set_modified
+    before_save  :validate_status
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
@@ -72,15 +75,21 @@ module V1
         @model.save
         # This is added because of the order of the callbacks in JAR
         @model.update_reports_observers
-
       rescue Exception => e
         Rails.logger.warn "Observation created without user: #{e.inspect}"
       end
     end
 
+    # Saves the last user who modified the observation
     def set_modified
       user = context[:current_user]
       @model.modified_user_id = user.id
+    end
+
+
+    # Makes sure the validation status can be only one of the two: created, ready for revision
+    def validate_status
+      @model.validation_status = 'Created' unless ['Created', 'Ready for revision'].include?(@model.validation_status)
     end
 
     # To allow the filtering of results according to the app and user
@@ -107,7 +116,7 @@ module V1
 
     # Adds the locale to the cache
     def self.attribute_caching_context(context)
-      return {
+      {
           locale: context[:locale]
       }
     end

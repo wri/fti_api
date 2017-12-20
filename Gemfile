@@ -10,11 +10,11 @@ git_source(:github) do |repo_name|
 end
 
 # Active admin
-gem 'activeadmin'
-gem 'activeadmin_addons'
-gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
 gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
+gem 'activeadmin'
+gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
+gem 'activeadmin_addons'
 
 gem 'devise'
 
@@ -68,9 +68,9 @@ gem 'oink'
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
+  gem 'rails-erd'
   gem 'rubocop',                   require: false
   gem 'webmock'
-  gem 'rails-erd'
 end
 
 group :development do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class ObserverResource < JSONAPI::Resource
     caching
@@ -5,9 +7,11 @@ module V1
                :information_name, :information_email, :information_phone, :data_name,
                :data_email, :data_phone, :organization_type
 
-    has_one :country
+    has_many :countries
     has_many   :users
     has_many :observations
+
+    filter :countries
 
     before_create :inactivate
 
@@ -33,7 +37,7 @@ module V1
 
     # Adds the locale to the cache
     def self.attribute_caching_context(context)
-      return {
+      {
           locale: context[:locale]
       }
     end

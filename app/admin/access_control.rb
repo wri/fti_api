@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register_page 'Access Control' do
   menu parent: 'User Management', priority: 2
 

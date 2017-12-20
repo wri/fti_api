@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: required_operator_documents
@@ -22,7 +24,7 @@ class RequiredOperatorDocument < ApplicationRecord
   has_many :operator_document_fmus
   has_many :operator_document_countries
 
-  validates :valid_period, numericality: { greater_than: 0}
+  validates :valid_period, numericality: { greater_than: 0 }
   after_destroy :invalidate_operator_documents
 
 

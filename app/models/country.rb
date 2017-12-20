@@ -22,7 +22,7 @@ class Country < ApplicationRecord
 
   has_many :users,           inverse_of: :country
   has_many :observations,    inverse_of: :country
-  has_many :observers,       inverse_of: :country
+  has_and_belongs_to_many :observers
   has_many :governments,     inverse_of: :country
   has_many :operators,       inverse_of: :country
   has_many :fmus,            inverse_of: :country

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -150,7 +151,7 @@ class User < ApplicationRecord
   private
 
   def create_from_request
-    return unless permissions_request.present?
+    return if permissions_request.blank?
     self.user_permission = UserPermission.new(user_role: permissions_request)
     self.permissions_request = nil
   end
@@ -179,13 +180,13 @@ class User < ApplicationRecord
       errors['user_permission'] << 'You must choose a user permission'
     else
       case user_permission.user_role
-        when 'operator'
-          errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
-        when 'ngo', 'ngo_manager'
-          errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
-        else
-          errors['operator_id'] << 'Cannot have an Operator' unless operator_id.blank?
-          errors['observer_id'] << 'Cannot have an Observer' unless observer_id.blank?
+      when 'operator'
+        errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
+      when 'ngo', 'ngo_manager'
+        errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
+      else
+        errors['operator_id'] << 'Cannot have an Operator' if operator_id.present?
+          errors['observer_id'] << 'Cannot have an Observer' if observer_id.present?
       end
     end
   end

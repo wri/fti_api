@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ObservationReportUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
@@ -44,7 +46,7 @@ class ObservationReportUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
   def exists?
-    !file.blank?
+    file.present?
   end
 
   def original_filename

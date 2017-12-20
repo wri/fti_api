@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register_page "Dashboard" do
 
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
@@ -18,18 +20,18 @@ ActiveAdmin.register_page "Dashboard" do
         column do
           panel 'Portal' do
             button_to 'Deploy Portal', '/admin/dashboard/deploy_portal', method: :post,
-                      data: { confirm: 'Are you sure you want to deploy the PORTAL?' },
-                      class: 'deploy-button'
-                      #style: 'font-size: 1.5em'
+                                                                         data: { confirm: 'Are you sure you want to deploy the PORTAL?' },
+                                                                         class: 'deploy-button'
+            #style: 'font-size: 1.5em'
           end
         end
 
         column do
           panel 'IM Backoffice' do
             button_to 'Deploy IM Backoffice', '/admin/dashboard/deploy_ot', method: :post,
-                      data: { confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'},
-                      class: 'deploy-button'
-                      #style: 'font-size: 1.5em'
+                                                                            data: { confirm: 'Are you sure you want to deploy the IM BACKOFFICE?' },
+                                                                            class: 'deploy-button'
+            #style: 'font-size: 1.5em'
           end
         end
       end

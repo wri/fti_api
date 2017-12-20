@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRequiredOperatorDocumentGroups < ActiveRecord::Migration[5.0]
   def change
     create_table :required_operator_document_groups do |t|

@@ -1,9 +1,11 @@
 # frozen_string_literal: true
+
 ActiveAdmin.register Partner do
   menu parent: 'User Management', priority: 4
-  permit_params :name, :website, :logo, :priority, :category, :description
+  permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
-  filter :name, as: :select
+  filter :translations_name_contains, as: :select, label: 'Name',
+         collection: Partner.joins(:translations).pluck(:name)
   filter :website, as: :select
 
 
@@ -19,13 +21,16 @@ ActiveAdmin.register Partner do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
+    f.inputs 'Translated fields' do
+      f.translated_inputs switch_locale: false do |t|
+        t.input :name
+        t.input :description
+      end
+    end
     f.inputs 'Partner Details' do
-
-      f.input :name
       f.input :website
-      f.input :logo
       f.input :priority
-      f.input :description
+      f.input :logo
     end
     f.actions
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register User do
   menu parent: 'User Management', priority: 1
   permit_params :email, :password, :password_confirmation, :country_id,
@@ -34,16 +36,16 @@ ActiveAdmin.register User do
       if user.id != current_user.id
         if user.is_active
           a 'Deactivate', href: deactivate_admin_user_path(user),  'data-method': :put,
-            'data-confirm': "Are you sure you want to DEACTIVATE user #{user.name}"
+                          'data-confirm': "Are you sure you want to DEACTIVATE user #{user.name}"
         else
           a 'Activate', href: activate_admin_user_path(user),      'data-method': :put,
-            'data-confirm': "Are you sure you want to ACTIVATE user #{user.name}"
+                        'data-confirm': "Are you sure you want to ACTIVATE user #{user.name}"
         end
       end
     end
     column :is_active
     column 'Role', :user_permission do |user|
-      user.user_permission.user_role if user.user_permission
+      user.user_permission&.user_role
     end
     column :name
     column :nickname

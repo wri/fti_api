@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class GovernmentResource < JSONAPI::Resource
     caching
@@ -27,7 +29,7 @@ module V1
 
     # Adds the locale to the cache
     def self.attribute_caching_context(context)
-      return {
+      {
           locale: context[:locale]
       }
     end

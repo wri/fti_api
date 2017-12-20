@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveAdmin
   module FilterSaver
 
@@ -25,7 +27,7 @@ module ActiveAdmin
           end
         elsif filter_storage && (params[:action].to_sym == :index) && params[:q].blank? && (params[:commit] != 'Filter')
           saved_filters = filter_storage[controller_key]
-          unless saved_filters.blank?
+          if saved_filters.present?
             params[:q] = saved_filters
           end
         end

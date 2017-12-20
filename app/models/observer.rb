@@ -5,7 +5,6 @@
 #
 #  id                :integer          not null, primary key
 #  observer_type     :string           not null
-#  country_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  is_active         :boolean          default(TRUE)
@@ -29,7 +28,7 @@ class Observer < ApplicationRecord
 
   mount_base64_uploader :logo, LogoUploader
 
-  belongs_to :country, inverse_of: :observers, optional: true
+  has_and_belongs_to_many :countries
 
   has_many :observer_observations, dependent: :destroy
   has_many :observations, through: :observer_observations
@@ -62,7 +61,7 @@ class Observer < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      observers = includes(:country, :users)
+      observers = includes(:countries, :users)
       observers
     end
 

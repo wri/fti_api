@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operators
@@ -51,6 +52,8 @@ class Operator < ApplicationRecord
   has_many :operator_document_countries, -> { actual }
   has_many :operator_document_fmus, -> { actual }
 
+  has_many :sawmills
+
   after_create :create_operator_id
   after_create :create_documents
   after_update :create_documents, if: :fa_id_changed?
@@ -73,9 +76,9 @@ class Operator < ApplicationRecord
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
   # TODO Refactor this when merging the branches
-  scope :fmus_with_certification_fsc,   ->()          { joins(:fmus).where(fmus: {certification_fsc: true }).distinct }
-  scope :fmus_with_certification_pefc,  ->()          { joins(:fmus).where(fmus: {certification_pefc: true }).distinct }
-  scope :fmus_with_certification_olb,   ->()          { joins(:fmus).where(fmus: {certification_olb: true }).distinct }
+  scope :fmus_with_certification_fsc,   ->()          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
+  scope :fmus_with_certification_pefc,  ->()          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
+  scope :fmus_with_certification_olb,   ->()          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
 
 
   class Translation
@@ -132,7 +135,7 @@ class Operator < ApplicationRecord
       number_of_visits = number_of_visits.keys.count
 
       # When there are no observations
-      if number_of_visits == 0
+      if number_of_visits.zero?
         self.obs_per_visit = nil
         self.score_absolute = nil
         save!
@@ -191,7 +194,7 @@ class Operator < ApplicationRecord
 
     # Country Documents
     RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
-      unless OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).present?
+      if OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).blank?
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id,
                                       status: OperatorDocument.statuses[:doc_not_provided],
                                       current: true).create!

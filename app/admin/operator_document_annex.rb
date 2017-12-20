@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register OperatorDocumentAnnex do
   menu parent: 'Operator Documents', priority: 3
   config.order_clause
@@ -15,8 +17,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   controller do
     def scoped_collection
-     end_of_association_chain.includes([:user, [operator_document: [operator: :translations]]])
- #     end_of_association_chain.includes([:user, :operator_document])
+      end_of_association_chain.includes([:user, [operator_document: [operator: :translations]]])
+      #     end_of_association_chain.includes([:user, :operator_document])
     end
   end
 

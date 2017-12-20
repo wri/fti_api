@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register OperatorDocument do
   menu parent: 'Operator Documents', priority: 2
   config.order_clause
@@ -15,7 +17,7 @@ ActiveAdmin.register OperatorDocument do
   controller do
     def scoped_collection
       end_of_association_chain.includes([:required_operator_document, :user, [operator: :translations],
-                                        [fmu: :translations], [required_operator_document: [required_operator_document_group: :translations]]])
+                                         [fmu: :translations], [required_operator_document: [required_operator_document_group: :translations]]])
     end
   end
 
@@ -67,7 +69,7 @@ ActiveAdmin.register OperatorDocument do
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).name
       end
     end
-    column :'Type', sortable: 'required_operator_documents.type' do |od|
+    column :Type, sortable: 'required_operator_documents.type' do |od|
       if od.required_operator_document.present?
         od.required_operator_document.type == 'RequiredOperatorDocumentFmu' ? 'Fmu' : 'Operator'
       else
@@ -89,6 +91,11 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
+    column 'Annexes' do |od|
+      links = []
+      od.operator_document_annexes.each {|a| links << link_to(a.id, admin_operator_document_annex_path(a))}
+      links.join(' ').html_safe
+    end
     column :reason
     column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
