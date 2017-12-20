@@ -8,7 +8,7 @@ class CreateJoinTableCountriesObservers < ActiveRecord::Migration[5.0]
     add_index(:countries_observers, [:country_id, :observer_id], unique: true, name: 'index_unique_country_observer' )
 
     Observer.find_each do |observer|
-      observer.countries << Country.find(observer.country_id)
+      observer.countries << Country.find(observer.country_id) if observer.country_id.present?
     end
 
     remove_index :observers, :country_id
