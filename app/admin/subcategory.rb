@@ -27,7 +27,7 @@ ActiveAdmin.register Subcategory do
 
   sidebar :laws, only: :show do
     sidebar = Law.where(subcategory: resource).collect do |law|
-      auto_link(law, law.name.camelize)
+      auto_link(law, law.written_infraction&.camelize)
     end
     safe_join(sidebar, content_tag('br'))
   end
