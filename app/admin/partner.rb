@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Partner do
-  menu parent: 'User Management', priority: 4
+  # menu parent: 'User Management', priority: 4
+  menu false
   permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
   filter :translations_name_contains, as: :select, label: 'Name',

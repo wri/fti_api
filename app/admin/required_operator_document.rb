@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredOperatorDocument do
-  menu parent: 'Operator Documents', priority: 1
+  # menu parent: 'Operator Documents', priority: 1
+  menu false
 
   active_admin_paranoia
 

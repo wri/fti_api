@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredOperatorDocumentGroup do
-  menu parent: 'Operator Documents', priority: 0
+  # menu parent: 'Operator Documents', priority: 0
+  menu false
 
   actions :all, except: :destroy
   permit_params translations_attributes: [:id, :locale, :name]

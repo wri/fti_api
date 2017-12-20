@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register_page 'Access Control' do
-  menu parent: 'User Management', priority: 2
+  # menu parent: 'User Management', priority: 2
+  menu false
 
   page_action :edit do
   end

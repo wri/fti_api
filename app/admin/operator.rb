@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Operator do
-  menu parent: 'Operators', priority: 1
+ActiveAdmin.register Operator, as: 'Producer' do
+  # menu parent: 'Operators', priority: 1
+  menu false
 
   config.order_clause
 
@@ -28,7 +29,7 @@ ActiveAdmin.register Operator do
     column '% Docs', :percentage_valid_documents_all, sortable: true
     column('Actions') do |operator|
       unless operator.is_active
-        a 'Activate', href: activate_admin_operator_path(operator),
+        a 'Activate', href: activate_admin_producer_path(operator),
                       'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the operator #{operator.name}?"
       end
     end

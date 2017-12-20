@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register OperatorDocument do
-  menu parent: 'Operator Documents', priority: 2
+  # menu parent: 'Operator Documents', priority: 2
+  menu false
   config.order_clause
 
   active_admin_paranoia

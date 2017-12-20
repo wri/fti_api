@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Fmu do
-  menu parent: 'Settings', priority: 5
+  # menu parent: 'Settings', priority: 5
+  menu false
 
   actions :show, :edit, :index, :update
 
