@@ -4,7 +4,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   config.order_clause
 
-  actions :all, except: :destroy
+  actions :all
 
   controller do
     def scoped_collection
@@ -41,6 +41,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   show do
     attributes_table do
+      row :is_active
       row :observer_type
       row :organization_type
       row :countries do |observer|
@@ -84,6 +85,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       f.input :data_name
       f.input :data_email
       f.input :data_phone
+      f.input :is_active
     end
     f.actions
   end
