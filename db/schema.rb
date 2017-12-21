@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171218115838) do
+ActiveRecord::Schema.define(version: 20171220163723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,8 +150,9 @@ ActiveRecord::Schema.define(version: 20171218115838) do
 
   create_table "governments", force: :cascade do |t|
     t.integer  "country_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "is_active",  default: true
     t.index ["country_id"], name: "index_governments_on_country_id", using: :btree
   end
 

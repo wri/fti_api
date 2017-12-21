@@ -6,7 +6,7 @@ ActiveAdmin.register Government do
   config.order_clause
 
   actions :all
-  permit_params :country_id, translations_attributes: [:id, :locale, :government_entity, :details, :_destroy]
+  permit_params :country_id, :is_active, translations_attributes: [:id, :locale, :government_entity, :details, :_destroy]
 
   controller do
     def scoped_collection
@@ -14,8 +14,11 @@ ActiveAdmin.register Government do
     end
   end
 
+  scope :all
+  scope :active, default: true
 
   index do
+    column 'Active?', :is_active
     column :country, sortable: 'country_translations.name'
     column :government_entity, sortable: 'government_translations.government_entity'
     column :details, sortable: 'government_translations.government_details'
@@ -43,6 +46,7 @@ ActiveAdmin.register Government do
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Government Details' do
+      f.input :is_active
       f.input :country, input_html: { disabled: edit }
     end
 
@@ -57,6 +61,7 @@ ActiveAdmin.register Government do
 
   show title: proc{ "#{resource.government_entity}" }do
     attributes_table do
+      row :is_active
       row :country
       row :government_entity
       row :details
