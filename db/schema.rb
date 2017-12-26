@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171220163723) do
+ActiveRecord::Schema.define(version: 20171222121954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -337,6 +337,8 @@ ActiveRecord::Schema.define(version: 20171220163723) do
     t.integer  "uploaded_by"
     t.integer  "user_id"
     t.text     "reason"
+    t.text     "note"
+    t.datetime "response_date"
     t.index ["current"], name: "index_operator_documents_on_current", using: :btree
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree

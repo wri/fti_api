@@ -6,7 +6,7 @@ module V1
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :current, :uploaded_by, :reason
+               :fmu_id, :current, :uploaded_by, :reason, :note, :response_date
 
     has_one :country
     has_one :fmu
@@ -24,11 +24,41 @@ module V1
       end
     end
 
+    def self.updatable_fields(context)
+      super - [:note, :response_date]
+    end
+    def self.creatable_fields(context)
+      super - [:note, :response_date]
+    end
+
     def set_user_id
       if context[:current_user].present?
         @model.user_id = context[:current_user].id
       end
     end
+
+    def status
+      context = options[:context]
+      user = context[:current_user]
+      app = context[:app]
+      if (app != 'observations-tool' && user.present?) || [:doc_not_provided, :doc_valid, :doc_expired, :doc_not_required].include?(@model.status)
+        @model.status
+      else
+        :doc_not_provided
+      end
+    end
+
+    def self.records(options = {})
+      context = options[:context]
+      user = context[:current_user]
+      app = context[:app]
+      if app != 'observations-tool' && user.present?
+        OperatorDocument.actual.from_user(user.id)
+      else
+        OperatorDocument.all
+      end
+    end
+
 
     def custom_links(_)
       { self: nil }

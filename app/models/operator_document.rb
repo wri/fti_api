@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operator_documents
@@ -20,6 +19,8 @@
 #  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
+#  note                          :text
+#  response_date                 :datetime
 #
 
 class OperatorDocument < ApplicationRecord
@@ -84,9 +85,10 @@ class OperatorDocument < ApplicationRecord
     self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
   end
 
-  scope :actual,   -> { where(current: true, deleted_at: nil) }
-  scope :valid,    -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required, -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :actual,    -> { where(current: true, deleted_at: nil) }
+  scope :valid,     -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required,  -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :from_user, ->(operator_id) { where(operator_id: operator_id) }
 
 
 

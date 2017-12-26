@@ -54,7 +54,7 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new, :create]
   permit_params :name, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
-                :attachment, :uploaded_by, :reason
+                :attachment, :uploaded_by, :reason, :note, :response_date
 
   index do
     bool_column :exists do |od|
@@ -97,6 +97,8 @@ ActiveAdmin.register OperatorDocument do
       links.join(' ').html_safe
     end
     column :reason
+    column :note
+    column :response_date
     column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
     column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
     actions
@@ -124,6 +126,8 @@ ActiveAdmin.register OperatorDocument do
       f.input :status, include_blank: false
       f.input :attachment
       f.input :reason
+      f.input :note
+      f.input :response_date
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
     end
