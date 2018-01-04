@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ActiveAdmin.register Sawmill do
   menu parent: 'Operators', priority: 2
 
@@ -20,7 +21,7 @@ ActiveAdmin.register Sawmill do
     column('Actions') do |sawmill|
       unless sawmill.is_active
         a 'Activate', href: activate_admin_sawmill_path(sawmill),
-          'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the sawmill #{sawmill.name}?"
+                      'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the sawmill #{sawmill.name}?"
       end
     end
 
@@ -32,7 +33,7 @@ ActiveAdmin.register Sawmill do
   scope :inactive
 
   filter :operator_translations_name_contains, as: :select, label: 'Operator',
-         collection: Operator.joins(:translations).pluck(:name)
+                                               collection: Operator.joins(:translations).pluck(:name)
   filter :name
 
 

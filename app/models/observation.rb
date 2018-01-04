@@ -28,6 +28,7 @@
 #
 
 class Observation < ApplicationRecord
+  include Translatable
   include ValidationHelper
   translates :details, :evidence, :concern_opinion, :litigation_status, touch: true
   active_admin_translates :details, :evidence, :concern_opinion, :litigation_status

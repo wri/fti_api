@@ -19,6 +19,7 @@
 #
 
 class Species < ApplicationRecord
+  include Translatable
   translates :common_name, touch: true
 
   has_many :species_observations
