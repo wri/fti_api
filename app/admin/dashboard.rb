@@ -51,8 +51,8 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel 'New IMs' do
           table_for Observer.inactive.order('updated_at DESC').limit(20).each do
-            column('Name') { |o| link_to o.name, admin_observer_path(o.id) }
-            column('Country') { |o| o.country.name }
+            column('Name') { |o| link_to o.name, admin_monitor_path(o.id) }
+            column('Countries') { |o| o.countries.each{ |x| x.name }.join(', ') }
           end
         end
       end
@@ -89,7 +89,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "First 20 Pending Documents out of #{OperatorDocument.doc_pending.count}" do
           table_for OperatorDocument.doc_pending.order('updated_at DESC').limit(20).each do
-            column('Operator') { |od| link_to od.operator.name, admin_operator_path(od.operator_id) }
+            column('Operator') { |od| link_to od.operator.name, admin_producer_path(od.operator_id) }
             column('Name') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
             column('Creation Date') { |od| od.created_at.strftime("%A, %d/%b/%Y") }
           end
