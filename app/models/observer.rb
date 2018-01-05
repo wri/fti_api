@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: observers
@@ -20,6 +21,7 @@
 #
 
 class Observer < ApplicationRecord
+  include Translatable
   translates :name, :organization, touch: true
 
   active_admin_translates :name do

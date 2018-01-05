@@ -27,6 +27,7 @@
 #
 
 class Operator < ApplicationRecord
+  include Translatable
   translates :name, :details, touch: true
   active_admin_translates :name, :details
 

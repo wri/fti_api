@@ -28,6 +28,7 @@
 #
 
 class Observation < ApplicationRecord
+  include Translatable
   include ValidationHelper
   translates :details, :evidence, :concern_opinion, :litigation_status, touch: true
   active_admin_translates :details, :evidence, :concern_opinion, :litigation_status
@@ -70,6 +71,7 @@ class Observation < ApplicationRecord
   validates :country_id,       presence: true
   validates :publication_date, presence: true
   validates_presence_of :validation_status
+  validates_presence_of :observation_type
   validate :active_government
 
   before_save    :set_active_status

@@ -5,7 +5,7 @@ ActiveAdmin.register Partner do
   permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
   filter :translations_name_contains, as: :select, label: 'Name',
-         collection: Partner.joins(:translations).pluck(:name)
+                                      collection: Partner.joins(:translations).pluck(:name)
   filter :website, as: :select
 
 

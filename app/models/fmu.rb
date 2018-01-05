@@ -16,6 +16,7 @@
 
 class Fmu < ApplicationRecord
   include ValidationHelper
+  include Translatable
   translates :name, touch: true
 
   active_admin_translates :name do

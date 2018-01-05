@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: governments
@@ -11,6 +12,7 @@
 #
 
 class Government < ApplicationRecord
+  include Translatable
   translates :government_entity, :details, touch: true
 
   active_admin_translates :government_entity, :details do; end
