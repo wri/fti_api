@@ -5,9 +5,10 @@ require 'active_support/concern'
 module Translatable
   extend ActiveSupport::Concern
 
-  # TODO: Try to optimize it
   included do
+    attr_accessor :skip_translate
     after_save :translate
+    skip_callback :save, :after, :translate, if: :skip_translate
 
     def translate
       translated_attribute_names.each do |attr|
@@ -15,13 +16,14 @@ module Translatable
         if translation.any?
           first_translation = translation.first.second
           (I18n.available_locales - [I18n.locale]).each do |locale|
-            if translation[locale].blank?
+            if translation[locale].blank? && first_translation.present?
               self.attributes = { attr => first_translation, locale: locale }
-              save
             end
           end
         end
       end
+      self.skip_translate = true
+      self.save
     end
   end
 end
