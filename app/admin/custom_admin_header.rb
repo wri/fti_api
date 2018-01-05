@@ -12,14 +12,14 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
       # Add one item with one son.
       ul do
         li do
-          text_node 'Independent Monitoring'
+          text_node content_tag 'a', 'Independent Monitoring'
           ul do
             li { link_to 'Monitors',         admin_monitors_path }
             li { link_to 'Observations',     admin_observations_path }
             li { link_to 'Reports',          admin_observation_reports_path }
             li { link_to 'Evidence',         admin_evidences_path }
             li do
-              text_node link_to 'Settings'
+              text_node content_tag 'a', 'Settings'
               ul do
                 li { link_to 'Categories',             admin_categories_path }
                 li { link_to 'Subcategories',          admin_subcategories_path }
@@ -36,7 +36,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
       # Adds a menu item with one son and one grandson.
       ul do
         li do
-          text_node 'Private Sector'
+          text_node content_tag 'a', 'Private Sector'
           ul do
             li { link_to 'Producers',            admin_producers_path }
             li { link_to 'Document Categories',  admin_required_operator_document_groups_path }
@@ -44,7 +44,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             li { link_to 'Producer Documents',   admin_operator_documents_path }
             li { link_to 'Annexes',              admin_operator_document_annexes_path }
             li do
-              text_node link_to 'Settings'
+              text_node content_tag 'a', 'Settings'
               ul do
                 li { link_to 'Countries',            admin_countries_path }
                 li { link_to 'Fmus',                 admin_fmus_path }
@@ -57,7 +57,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
 
       ul do
         li do
-          text_node 'User Management'
+          text_node content_tag 'a', 'User Management'
           ul do
             li { link_to 'Users',            admin_users_path }
             li { link_to 'Access Control',   admin_access_control_path }
@@ -66,6 +66,10 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             li { link_to 'Comments',         admin_comments_path }
           end
         end
+      end
+
+      ul class: 'logout' do
+        li { link_to ' Logout', destroy_user_session_path }
       end
 
       # Dashboard
