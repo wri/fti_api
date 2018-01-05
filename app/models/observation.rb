@@ -71,6 +71,7 @@ class Observation < ApplicationRecord
   validates :country_id,       presence: true
   validates :publication_date, presence: true
   validates_presence_of :validation_status
+  validates_presence_of :observation_type
   validate :active_government
 
   before_save    :set_active_status
