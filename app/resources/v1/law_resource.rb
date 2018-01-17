@@ -13,6 +13,18 @@ module V1
     filters :country, :subcategory, :written_infraction, :infraction, :sanctions, :min_fine, :max_fine,
             :penal_servitude, :other_penalties, :apv
 
+    filter :complete, apply: -> (records, value, _options) {
+      if value == true
+        records.where('written_infraction is not null and infraction is not null and
+sanctions is not null and min_fine is not null and max_fine is not null and penal_servitude is not null
+and apv is not null and currency is not null')
+      else
+        records.where('written_infraction is null or infraction is null or
+sanctions is null or min_fine is null or max_fine is null or penal_servitude is null
+or apv is null or currency is null')
+      end
+    }
+
     def self.sortable_fields(context)
       super + [:'subcategory.name', :'country.name']
     end
