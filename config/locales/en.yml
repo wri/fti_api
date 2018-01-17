@@ -368,6 +368,16 @@ en:
     ? "Trader"
     : "Trader"
 
+  filters:
+    operator: 'Operator'
+    governance: 'Governance'
+    unknown: 'Unknown'
+    low: 'Low'
+    medium: 'Medium'
+    high: 'High'
+
+
+
   wicked:
     types: 'observation-type'
     info: 'observation-info'
