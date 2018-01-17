@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Observation do
+  menu false
+
   config.order_clause
 
   scope_to do
@@ -135,7 +137,7 @@ ActiveAdmin.register Observation do
     column :relevant_operators do |o|
       links = []
       o.relevant_operators.each do |operator|
-        links << link_to(operator.name, admin_operator_path(operator.id))
+        links << link_to(operator.name, admin_producer_path(operator.id))
       end
       links.reduce(:+)
       #link_to o.relevant_operators.pluck(:name).join(', ')

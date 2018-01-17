@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Government do
-  menu parent: 'Settings', priority: 7
+  # menu parent: 'Settings', priority: 7
+  menu false
 
   config.order_clause
 

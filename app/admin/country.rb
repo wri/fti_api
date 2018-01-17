@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Country do
-  menu parent: 'Settings', priority: 6
+  #menu parent: 'Settings', priority: 6
+  menu false
 
   actions :show, :index, :edit, :update
 

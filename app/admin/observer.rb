@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Observer, as: 'Monitor' do
+  menu false
 
   config.order_clause
 

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Severity do
-  menu parent: 'Settings', priority: 3
+  # menu parent: 'Settings', priority: 3
+  menu false
 
   actions :show, :edit, :index, :update
 
