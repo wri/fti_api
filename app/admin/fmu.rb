@@ -25,7 +25,6 @@ ActiveAdmin.register Fmu do
   filter :translations_name_contains, as: :select, label: 'Name',
                                       collection: Fmu.joins(:translations).pluck(:name)
   filter :country
-  filter :operator
 
   index do
     column :id, sortable: true
