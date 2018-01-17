@@ -34,7 +34,7 @@ module V1
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
-            :observation_report, :law, :operator, :government, :subcategory, :is_active
+            :observation_report, :law, :operator, :government, :subcategory, :is_active, :validation_status
 
     filter :category_id, apply: ->(records, value, _options) {
       records.joins(:subcategory).where(subcategories: { category_id: value })
