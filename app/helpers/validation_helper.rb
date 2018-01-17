@@ -4,6 +4,6 @@ module ValidationHelper
 
   # Returns true if it gets a list of ids divided by commas
   def self.ids?(ids)
-    ids === /(\d)+(,(\d)+)*$/
+    /(\d)+(,(\d)+)*$/ === ids
   end
 end
