@@ -8,7 +8,7 @@ module V1
     skip_before_action :authenticate
 
     def index
-      types = [{ id: 'operator', name: 'Operator' }, { id: 'government', name: 'Government' }]
+      types = [{ id: 'operator', name: 'Operator' }, { id: 'government', name: 'Governance' }]
       country_ids = Country.with_observations.joins(:translations)
                         .map{|x| { id: x.id, iso: x.iso, name: x.name }}.sort_by { |c| c[:name] }
       fmu_ids = Fmu.all.joins(:translations).map{|x| { id: x.id, name: x.name }}
