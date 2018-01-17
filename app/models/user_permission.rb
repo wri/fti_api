@@ -50,7 +50,7 @@ class UserPermission < ApplicationRecord
           operator_document: { read: {} },
           required_operator_document_group: { read: {} },
           required_operator_document: { read: {} } }
-      when 'ngo_manager', 'ngo'
+      when 'ngo_manager'
         {
             user: { manage: { id: user.id } },
             observation: { manage: { observers: { id: user.observer_id } },  create: {} },
