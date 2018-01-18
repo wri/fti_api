@@ -38,9 +38,8 @@ module V1
     end
 
     def status
-      context = options[:context]
-      user = context[:current_user]
-      app = context[:app]
+      user = @context[:current_user]
+      app = @context[:app]
       if (app != 'observations-tool' && user.present? && user.is_operator?(@model.operator_id)) ||
           %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
         @model.status
