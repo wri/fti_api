@@ -17,6 +17,10 @@ module V1
       records.joins(:observations).where('observations.observation_type = ?', value[0].to_i)
     }
 
+    def self.sortable_fields(context)
+      super + [:'category.name']
+    end
+
     def custom_links(_)
       { self: nil }
     end
