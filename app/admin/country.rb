@@ -13,7 +13,7 @@ ActiveAdmin.register Country do
 
   filter :iso, as: :select
   filter :translations_name_contains, as: :select, label: 'Name',
-                                      collection: Country.joins(:translations).pluck(:name)
+                                      collection: Country.order(:name).pluck(:name)
   filter :region_iso, as: :select
   filter :region_name
   filter :is_active

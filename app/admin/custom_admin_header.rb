@@ -2,6 +2,9 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
   include Rails.application.routes.url_helpers
 
   def build(namespace, menu)
+    div id: 'logo' do
+      image_tag(image_url("logo.svg"))
+    end
     div id: 'tabs' do
       # Add one item without son.
       ul do
@@ -68,8 +71,13 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
         end
       end
 
-      ul class: 'logout' do
-        li { link_to ' Logout', destroy_user_session_path }
+      div id: 'tool-menu' do
+        ul class: 'user' do
+          li { link_to @arbre_context.assigns[:current_user].email, admin_user_path(@arbre_context.assigns[:current_user].id)}
+        end
+        ul class: 'logout' do
+          li { link_to ' Logout', destroy_user_session_path }
+        end
       end
 
       # Dashboard
