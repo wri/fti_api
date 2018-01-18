@@ -2,85 +2,93 @@ $skinLogo: #fff image-url("active_skin/default_logo.png") no-repeat 30px 0 !defa
 $skinTextColor: #1e2a33 !default
 
 .custom_admin_header
+  display: flex
+  justify-content: space-between
   background: #ecf0f1
   border: none
   text-shadow: none
-  height: 40px
-  padding: 0
-
-  .site_title
-    background-color: #fff
-    background: $skinLogo
-    padding-left: 130px
-    color: $skinTextColor
-    text-indent: -999999px
+  padding: 15px 30px
 
   a, a:link
     color: $skinTextColor
 
-  #tabs
-    padding: 0
-    font-size: 0
-
-  #tabs
+  .c-nav
+    display: flex
     font-size: 1em
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif
-    padding-left: 80px
-    background: #6a7176
-    background: -webkit-gradient(linear, left top, left bottom, from(#6a7176), to(#4d5256))
-    background: -moz-linear-gradient(-90deg, #6a7176, #4d5256)
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6a7176', endColorstr='#4d5256')
-    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6a7176', endColorstr='#4d5256')
-
-  #tabs ul
-    margin: 0
     padding: 0
-    list-style: none
 
-  #tabs ul li
-    float: left
+    .logo
+      margin-right: 40px
 
-  #tabs ul li a
-    float: left
-    padding-left: 20px
-    padding-right: 20px
-    padding-top: 10px
-    padding-bottom: 10px
-    text-decoration: none
-    color: #eee
-    text-transform: uppercase
+    .list
+      display: flex
+      justify-content: flex-start
 
-  #tabs li ul
-    background: #7b8389
-    box-shadow: 0 1px 3px #444444
-    left: -999em
-    margin: 37px 0 0
-    position: absolute
-    width: 200px
-    z-index: 1010
+    ul
+      margin: 0
+      padding: 0
+      list-style: none
 
-  #tabs li ul a
-    background: none
-    border: 0 none
-    margin-right: 0
-    width: 160px
+      li
+        display: block
+        position: relative
 
-  #tabs ul li a:hover,
-  #tabs ul li:hover > a
-    color: #fff
-    background: #444444
+        a
+          display: block
+          padding-left: 20px
+          padding-right: 20px
+          padding-top: 10px
+          padding-bottom: 10px
+          text-decoration: none
+          color: #444
+          text-transform: uppercase
 
-  #tabs li ul a:hover,
-  #tabs ul li li:hover > a
-    color: #fff
-    background: #444444
+    li ul
+      background: #eee
+      box-shadow: 0 1px 3px #444444
+      left: -999em
+      position: absolute
+      width: 200px
+      z-index: 1010
 
-  #tabs li:hover ul
+      a
+        background: none
+        border: 0 none
+        margin-right: 0
+        width: 160px
+
+        &.-with-children
+          &:after
+            content: ">"
+            position: absolute
+            top: 50%
+            right: 10px
+            transform: translate(0, -50%)
+            display: block
+            width: 10px
+            height: 10px
+            display: flex
+            align-items: center
+            justify-content: center
+
+  .c-nav ul li a:hover,
+  .c-nav ul li:hover > a
+    color: #444
+    background: #fff
+
+  .c-nav li ul a:hover,
+  .c-nav ul li li:hover > a
+    color: #444
+    background: #fff
+
+  .c-nav li:hover ul
     left: auto
 
-  #tabs li li ul
+  .c-nav li li ul
+    top: 0
     margin: 0px 0 0 200px
     visibility: hidden
 
-  #tabs li li:hover ul
+  .c-nav li li:hover ul
     visibility: visible
