@@ -128,7 +128,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :attachment
       f.input :reason
       f.input :note
-      f.input :response_date
+      f.input :response_date, as: :date_picker
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
     end
