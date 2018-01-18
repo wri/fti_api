@@ -4,7 +4,7 @@ module V1
   class GovernmentResource < JSONAPI::Resource
     caching
 
-    attributes :government_entity, :details
+    attributes :government_entity, :details, :is_active
 
     has_one :country
 
@@ -12,7 +12,7 @@ module V1
       super + [:'country.name']
     end
 
-    filters :country
+    filters :country, :is_active
 
     filter :'country.name', apply: ->(records, value, _options) {
       if value.present?

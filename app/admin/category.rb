@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Category do
-  menu parent: 'Settings', priority: 1
+  # menu parent: 'Settings', priority: 1
+  menu false
 
   actions :create, :show, :edit, :index, :update
 

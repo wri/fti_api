@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateJoinTableCountriesObservers < ActiveRecord::Migration[5.0]
   def up
     create_join_table :countries, :observers do |t|

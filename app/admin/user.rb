@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  menu parent: 'User Management', priority: 1
+  # menu parent: 'User Management', priority: 1
+  menu false
   permit_params :email, :password, :password_confirmation, :country_id,
                 :institution, :name, :nickname, :web_url, :is_active,
                 :observer_id, :operator_id,

@@ -11,7 +11,7 @@ module V1
     has_many   :users
     has_many :observations
 
-    filter :countries
+    filters :countries, :is_active
 
     before_create :inactivate
 

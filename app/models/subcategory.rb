@@ -12,6 +12,7 @@
 #
 
 class Subcategory < ApplicationRecord
+  include Translatable
   enum subcategory_type: { operator: 0, government: 1 }
   translates :name, :details, touch: true
 

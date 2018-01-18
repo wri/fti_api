@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Country do
-  menu parent: 'Settings', priority: 6
+  #menu parent: 'Settings', priority: 6
+  menu false
 
   actions :show, :index, :edit, :update
 
@@ -12,7 +13,7 @@ ActiveAdmin.register Country do
 
   filter :iso, as: :select
   filter :translations_name_contains, as: :select, label: 'Name',
-                                      collection: Country.joins(:translations).pluck(:name)
+                                      collection: Country.order(:name).pluck(:name)
   filter :region_iso, as: :select
   filter :region_name
   filter :is_active

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: observers
@@ -20,6 +21,7 @@
 #
 
 class Observer < ApplicationRecord
+  include Translatable
   translates :name, :organization, touch: true
 
   active_admin_translates :name do
@@ -30,10 +32,10 @@ class Observer < ApplicationRecord
 
   has_and_belongs_to_many :countries
 
-  has_many :observer_observations, dependent: :destroy
+  has_many :observer_observations, dependent: :restrict_with_error
   has_many :observations, through: :observer_observations
 
-  has_many :observation_report_observers
+  has_many :observation_report_observers, dependent: :restrict_with_error
   has_many :observation_reports, through: :observation_report_observers
 
   has_many :users, inverse_of: :observer

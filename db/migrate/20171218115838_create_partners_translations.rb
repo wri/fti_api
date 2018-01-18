@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class CreatePartnersTranslations < ActiveRecord::Migration[5.0]
   def change
     reversible do |dir|
       dir.up do
         Partner.create_translation_table!({ name: { type: :string, null: false },
-                                          description: { type: :text }},
+                                            description: { type: :text } },
                                           { migrate_data: true })
         remove_column :partners, :name
         remove_column :partners, :description

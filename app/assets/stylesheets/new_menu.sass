@@ -1,0 +1,94 @@
+$skinLogo: #fff image-url("active_skin/default_logo.png") no-repeat 30px 0 !default
+$skinTextColor: #1e2a33 !default
+
+.custom_admin_header
+  display: flex
+  justify-content: space-between
+  background: #ecf0f1
+  border: none
+  text-shadow: none
+  padding: 15px 30px
+
+  a, a:link
+    color: $skinTextColor
+
+  .c-nav
+    display: flex
+    font-size: 1em
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif
+    padding: 0
+
+    .logo
+      margin-right: 40px
+
+    .list
+      display: flex
+      justify-content: flex-start
+
+    ul
+      margin: 0
+      padding: 0
+      list-style: none
+
+      li
+        display: block
+        position: relative
+
+        a
+          display: block
+          padding-left: 20px
+          padding-right: 20px
+          padding-top: 10px
+          padding-bottom: 10px
+          text-decoration: none
+          color: #444
+          text-transform: uppercase
+
+    li ul
+      background: #eee
+      box-shadow: 0 1px 3px #444444
+      left: -999em
+      position: absolute
+      width: 200px
+      z-index: 1010
+
+      a
+        background: none
+        border: 0 none
+        margin-right: 0
+        width: 160px
+
+        &.-with-children
+          &:after
+            content: ">"
+            position: absolute
+            top: 50%
+            right: 10px
+            transform: translate(0, -50%)
+            display: block
+            width: 10px
+            height: 10px
+            display: flex
+            align-items: center
+            justify-content: center
+
+  .c-nav ul li a:hover,
+  .c-nav ul li:hover > a
+    color: #444
+    background: #fff
+
+  .c-nav li ul a:hover,
+  .c-nav ul li li:hover > a
+    color: #444
+    background: #fff
+
+  .c-nav li:hover ul
+    left: auto
+
+  .c-nav li li ul
+    top: 0
+    margin: 0px 0 0 200px
+    visibility: hidden
+
+  .c-nav li li:hover ul
+    visibility: visible

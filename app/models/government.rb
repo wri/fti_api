@@ -8,15 +8,17 @@
 #  country_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  is_active  :boolean          default(TRUE)
 #
 
 class Government < ApplicationRecord
+  include Translatable
   translates :government_entity, :details, touch: true
 
   active_admin_translates :government_entity, :details do; end
 
   belongs_to :country, inverse_of: :governments, optional: true
-  has_many :observations, inverse_of: :government
+  has_many :observations, inverse_of: :government, dependent: :restrict_with_error
 
   validates :government_entity, presence: true
 
@@ -26,6 +28,7 @@ class Government < ApplicationRecord
   }
 
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
+  scope :active, ->() { where(is_active: true) }
 
   default_scope { includes(:translations) }
 

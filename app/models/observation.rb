@@ -28,6 +28,7 @@
 #
 
 class Observation < ApplicationRecord
+  include Translatable
   include ValidationHelper
   translates :details, :evidence, :concern_opinion, :litigation_status, touch: true
   active_admin_translates :details, :evidence, :concern_opinion, :litigation_status
@@ -70,6 +71,8 @@ class Observation < ApplicationRecord
   validates :country_id,       presence: true
   validates :publication_date, presence: true
   validates_presence_of :validation_status
+  validates_presence_of :observation_type
+  validate :active_government
 
   before_save    :set_active_status
   after_create   :update_operator_scores
@@ -128,5 +131,12 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   def destroy_documents
     observation_documents.find_each(&:really_destroy!)
+  end
+
+  def active_government
+    return if observation_type != 'government'
+    return if persisted?
+    return if government.nil?
+    errors[:government] << 'The selected government is not active' unless government.is_active
   end
 end

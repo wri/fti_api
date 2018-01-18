@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: partners
@@ -13,6 +14,7 @@
 #
 
 class Partner < ApplicationRecord
+  include Translatable
   mount_base64_uploader :logo, PartnerLogoUploader
   translates :name, :description
 

@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Observer, as: 'Monitor' do
+  menu false
 
   config.order_clause
 
-  actions :all, except: :destroy
+  actions :all
 
   controller do
     def scoped_collection
@@ -34,13 +35,14 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   filter :is_active
-  filter :countries
+  filter :countries, collection: Country.joins(:translations).order(:name).pluck(:name)
   filter :translations_name_contains, as: :select, label: 'Name',
                                       collection: Observer.joins(:translations).pluck(:name)
 
 
   show do
     attributes_table do
+      row :is_active
       row :observer_type
       row :organization_type
       row :countries do |observer|
@@ -84,6 +86,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       f.input :data_name
       f.input :data_email
       f.input :data_phone
+      f.input :is_active
     end
     f.actions
   end

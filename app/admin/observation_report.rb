@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register ObservationReport do
-  menu parent: 'Observation Documents', priority: 1
+  # menu parent: 'Observation Documents', priority: 1
+  menu false
 
   actions :show, :index
 

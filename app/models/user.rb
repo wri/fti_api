@@ -90,6 +90,10 @@ class User < ApplicationRecord
     end
   end
 
+  def is_operator?(operator_id)
+    self&.user_permission&.user_role == 'operator' && self.operator_id == operator_id
+  end
+
   def display_name
     "#{half_email}" if name.blank?
     "#{name}"

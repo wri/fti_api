@@ -20,6 +20,8 @@
 #  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
+#  note                          :text
+#  response_date                 :datetime
 #
 
 class OperatorDocumentFmu < OperatorDocument
