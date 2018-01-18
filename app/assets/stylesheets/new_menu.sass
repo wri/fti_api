@@ -2,114 +2,85 @@ $skinLogo: #fff image-url("active_skin/default_logo.png") no-repeat 30px 0 !defa
 $skinTextColor: #1e2a33 !default
 
 .custom_admin_header
-    background: #ecf0f1
-    border: none
-    text-shadow: none
-    height: 40px
+  background: #ecf0f1
+  border: none
+  text-shadow: none
+  height: 40px
+  padding: 0
+
+  .site_title
+    background-color: #fff
+    background: $skinLogo
+    padding-left: 130px
+    color: $skinTextColor
+    text-indent: -999999px
+
+  a, a:link
+    color: $skinTextColor
+
+  #tabs
     padding: 0
+    font-size: 0
 
-  
-    .site_title
-        background-color: #fff
-        background: $skinLogo
-        padding-left: 130px
-        color: $skinTextColor
-        text-indent: -999999px
+  #tabs
+    font-size: 1em
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif
+    padding-left: 80px
+    background: #6a7176
+    background: -webkit-gradient(linear, left top, left bottom, from(#6a7176), to(#4d5256))
+    background: -moz-linear-gradient(-90deg, #6a7176, #4d5256)
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6a7176', endColorstr='#4d5256')
+    -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6a7176', endColorstr='#4d5256')
 
-    a, a:link
-        color: $skinTextColor
+  #tabs ul
+    margin: 0
+    padding: 0
+    list-style: none
 
-    #tabs
-        padding: 0
-        font-size: 0
+  #tabs ul li
+    float: left
 
+  #tabs ul li a
+    float: left
+    padding-left: 20px
+    padding-right: 20px
+    padding-top: 10px
+    padding-bottom: 10px
+    text-decoration: none
+    color: #eee
+    text-transform: uppercase
 
-    #tabs
-        font-size: 1.0em
-        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif
-        padding-left: 80px
-        background: #6a7176
-        background: -webkit-gradient(linear, left top, left bottom, from(#6a7176), to(#4d5256))
-        background: -moz-linear-gradient(-90deg, #6a7176, #4d5256)
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6a7176', endColorstr='#4d5256')
-        -ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6a7176', endColorstr='#4d5256')
+  #tabs li ul
+    background: #7b8389
+    box-shadow: 0 1px 3px #444444
+    left: -999em
+    margin: 37px 0 0
+    position: absolute
+    width: 200px
+    z-index: 1010
 
+  #tabs li ul a
+    background: none
+    border: 0 none
+    margin-right: 0
+    width: 160px
 
-    #tabs ul
-        margin: 0
-        padding: 0
-        list-style: none
+  #tabs ul li a:hover,
+  #tabs ul li:hover > a
+    color: #fff
+    background: #444444
 
+  #tabs li ul a:hover,
+  #tabs ul li li:hover > a
+    color: #fff
+    background: #444444
 
-    #tabs ul li
-        float: left
+  #tabs li:hover ul
+    left: auto
 
+  #tabs li li ul
+    margin: 0px 0 0 200px
+    visibility: hidden
 
-    #tabs ul li a
-        float: left
-        padding-left: 20px
-        padding-right: 20px
-        padding-top: 3px
-        padding-bottom: 3px
-        text-decoration: none
-        -webkit-border-radius: 5px
-        -moz-border-radius: 5px
-        border-radius: 5px
-
-
-    #tabs li ul
-        background: #7b8389
-        border-top-right-radius: 5px
-        -moz-border-radius-topright: 5px
-        -webkit-border-top-right-radius: 5px
-        border-top-left-radius: 5px
-        -moz-border-radius-topleft: 5px
-        -webkit-border-top-left-radius: 5px
-        border-bottom-right-radius: 5px
-        -moz-border-radius-bottomright: 5px
-        -webkit-border-bottom-right-radius: 5px
-        border-bottom-left-radius: 5px
-        -moz-border-radius-bottomleft: 5px
-        -webkit-border-bottom-left-radius: 5px
-        box-shadow: 0 1px 3px #444444
-        -moz-box-shadow: 0 1px 3px #444444
-        -webkit-box-shadow: 0 1px 3px #444444
-        left: -999em
-        margin: 25px 0 0
-        position: absolute
-        width: 200px
-        z-index: 1010
-
-
-    #tabs li ul a
-        background: none
-        border: 0 none
-        margin-right: 0
-        width: 160px
-        padding-top: 3px
-        padding-bottom: 3px
-
-
-    #tabs ul li a:hover,
-    #tabs ul li:hover > a
-        color: #fff
-        background: #7b8389
-
-
-    #tabs li ul a:hover,
-    #tabs ul li li:hover > a
-        color: #fff
-        background: #7b8389
-
-
-    #tabs li:hover ul
-        left: auto
-
-
-    #tabs li li ul
-        margin: 0px 0 0 200px
-        visibility: hidden
-
-
-    #tabs li li:hover ul
-        visibility: visible
+  #tabs li li:hover ul
+    visibility: visible

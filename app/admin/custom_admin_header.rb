@@ -91,7 +91,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
       # User management
       # a. Users / b. Access Control / c. Contacts / d. Partners / e. Comments
 
-      super(namespace, menu)
+      # super(namespace, menu)
     end
   end
 end
