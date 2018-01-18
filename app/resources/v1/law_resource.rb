@@ -14,7 +14,7 @@ module V1
             :penal_servitude, :other_penalties, :apv
 
     filter :complete, apply: -> (records, value, _options) {
-      if value == true
+      if value[0] == "true"
         records.where('written_infraction is not null and infraction is not null and
 sanctions is not null and min_fine is not null and max_fine is not null and penal_servitude is not null
 and apv is not null and currency is not null')
