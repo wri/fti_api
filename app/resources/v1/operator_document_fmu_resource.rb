@@ -34,7 +34,8 @@ module V1
     def status
       user = @context[:current_user]
       app = @context[:app]
-      if (app != 'observations-tool' && user.present?) || [:doc_not_provided, :doc_valid, :doc_expired, :doc_not_required].include?(@model.status)
+      if (app != 'observations-tool' && user.present? && user.is_operator?(@model.operator_id)) ||
+          %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
         @model.status
       else
         :doc_not_provided
