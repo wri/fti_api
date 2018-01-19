@@ -75,6 +75,7 @@ class Observation < ApplicationRecord
   validate :active_government
 
   before_save    :set_active_status
+  before_save    :set_centroid
   after_create   :update_operator_scores
   before_destroy :destroy_documents
   after_destroy  :update_operator_scores
@@ -119,6 +120,14 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
 
   private
+
+  def set_centroid
+    if fmu.present? && lat.blank? && lng.blank?
+      self.lat = fmu.geojson.dig('properties', 'centroid', 'coordinates').first rescue nil
+      self.lng = fmu.geojson.dig('properties', 'centroid', 'coordinates').second rescue nil
+
+    end
+  end
 
   def update_operator_scores
     operator&.calculate_observations_scores
