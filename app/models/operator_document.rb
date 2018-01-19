@@ -28,7 +28,7 @@ class OperatorDocument < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :operator, required: true, touch: true
-  belongs_to :required_operator_document, required: true
+  belongs_to :required_operator_document, ->() { with_archived }, required: true
   belongs_to :fmu
   belongs_to :user
   has_many :operator_document_annexes
