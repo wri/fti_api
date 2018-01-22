@@ -37,11 +37,11 @@ module V1
             :observation_report, :law, :operator, :government, :subcategory, :is_active, :validation_status
 
     filter :category_id, apply: ->(records, value, _options) {
-      records.joins(:subcategory).where(subcategories: { category_id: value })
+      records.by_category(value)
     }
 
     filter :severity_level, apply: ->(records, value, _options) {
-      records.joins(:severity).where(severities: { level: value })
+      records.by_severity_level(value)
     }
 
     filter :years, apply: ->(records, value, _options) {
