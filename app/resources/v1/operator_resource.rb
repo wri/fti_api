@@ -23,8 +23,7 @@ module V1
     before_create :set_active
 
     def set_active
-      user = context[:current_user]
-      @model.is_active = false if user.blank?
+      @model.is_active = false
     end
 
     filter :certification, apply: ->(records, value, _options) {
