@@ -61,6 +61,7 @@ ActiveAdmin.register OperatorDocument do
     bool_column :exists do |od|
       od.deleted_at.nil?
     end
+    column :current
     tag_column :status
     column :id
     column 'Required Document', :required_operator_document, sortable: 'required_operator_documents.name' do |od|

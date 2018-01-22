@@ -26,7 +26,7 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
         OperatorDocumentFmu.where(required_operator_document_id: self.id,
                                   operator_id: fmu.operator.id,
                                   fmu_id: fmu.id).first_or_create do |odf|
-          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided])
+          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
         end
       end
     end
