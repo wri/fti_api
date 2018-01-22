@@ -8,9 +8,9 @@ module V1
     before_action :set_user
 
     def create
-      if @user.send_reset_password_instructions(user_params)
+      if @user.send_reset_password_instructions(request.original_url)
         if @user.errors.empty?
-          render json: { messages: [{ status: 200, title: 'Reset password email send!' }] }, status: 200
+          render json: { messages: [{ status: 200, title: 'Reset password email sent!' }] }, status: 200
         else
           render json: ErrorSerializer.serialize(@user.errors, 422), status: 422
         end

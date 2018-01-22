@@ -123,10 +123,8 @@ class User < ApplicationRecord
     end
   end
 
-  def send_reset_password_instructions(options)
-    reset_url  = options[:reset_url]
-    reset_url += '?reset_password_token='
-    reset_url += generate_reset_token(self)
+  def send_reset_password_instructions(url)
+    reset_url  = url + '?reset_password_token=' + generate_reset_token(self)
 
     PasswordMailer.password_email(display_name, email, reset_url).deliver
   end
