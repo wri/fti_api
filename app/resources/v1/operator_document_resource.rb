@@ -12,6 +12,7 @@ module V1
     has_one :fmu
     has_one :operator
     has_one :required_operator_document
+    has_many :operator_document_annexes
 
     filters :type, :status, :operator_id, :current
 
