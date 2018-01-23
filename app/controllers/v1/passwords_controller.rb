@@ -51,7 +51,7 @@ module V1
                 elsif user_params[:reset_password_token].present?
                   User.find_by(reset_password_token: user_params[:reset_password_token])
                 else
-                  User.find_by(email: user_params[:email]) if user_params[:reset_url].present?
+                  User.find_by(email: user_params[:email]) if user_params[:email].present?
                 end
 
         render json: { errors: [{ status: 422, title: 'Unprocessable entity.' }] }, status: 422 if @user.nil?
