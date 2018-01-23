@@ -44,6 +44,10 @@ module V1
       records.by_severity_level(value)
     }
 
+    filter :government_id, apply: ->(records, value, _options) {
+      records.by_government(value)
+    }
+
     filter :years, apply: ->(records, value, _options) {
       records.where("extract(year from observations.publication_date) in (#{value.map{|x| x.to_i rescue nil}.join(', ')})")
     }
@@ -57,7 +61,9 @@ module V1
     }
 
     def self.sortable_fields(context)
-      super + [:'country.iso', :'severity.level', :'subcategory.name', :'operator.name', :'country.name']
+      super + [:'country.iso', :'severity.level', :'subcategory.name',
+               :'operator.name', :'country.name', :'law.written_infraction',
+               :'fmu.name', :'observation_report.title', :'government.government_entity']
     end
 
     def custom_links(_)

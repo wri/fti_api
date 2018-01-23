@@ -91,11 +91,11 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
         .where("all_observers.id = #{observer}")
   }
 
-  scope :by_category, ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
+  scope :by_category,       ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: { level: level }) }
-
-  scope :pending, ->() { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
-  scope :created, ->() { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
+  scope :by_government,     ->(government_id) { joins(:government).where(governments: { id: government_id }) }
+  scope :pending,           ->() { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
+  scope :created,           ->() { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
 
   class << self
     def translated_types
