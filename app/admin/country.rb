@@ -8,6 +8,12 @@ ActiveAdmin.register Country do
 
   config.order_clause
 
+  controller do
+    def scoped_collection
+      end_of_association_chain.with_translations(I18n.locale)
+    end
+  end
+
   scope :all
   scope :active
 
