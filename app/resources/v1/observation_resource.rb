@@ -63,8 +63,17 @@ module V1
     def self.sortable_fields(context)
       super + [:'country.iso', :'severity.level', :'subcategory.name',
                :'operator.name', :'country.name', :'law.written_infraction',
-               :'fmu.name', :'observation_report.title', :'government.government_entity']
+               :'fmu.name', :'observation_report.title', :'government.government_entity', :'category']
     end
+
+    def self.apply_sort(records, order_options, context = {})
+      if order_options.key?('category')
+        records = records.order_by_category(order_options['category'])
+        order_options.except!('category')
+      end
+      super(records, order_options, context)
+    end
+
 
     def custom_links(_)
       { self: nil }
