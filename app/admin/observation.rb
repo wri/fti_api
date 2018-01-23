@@ -26,7 +26,7 @@ ActiveAdmin.register Observation do
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
-                :law_id, :fmu_id, observer_ids: [], relevant_operators: [],
+                :location_information, :law_id, :fmu_id, observer_ids: [], relevant_operators: [],
                                   observation_documents_attributes: [:id, :name, :attachment],
                                   translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
 
@@ -127,6 +127,7 @@ ActiveAdmin.register Observation do
     tag_column 'Status', :validation_status, sortable: true
     column :country, sortable: 'country_translations.name'
     column :fmu, sortable: 'fmu_translations.name'
+    column :location_information, sortable: true
     column :observers, sortable: 'observer_translations.name' do |o|
       o.observers.pluck(:name).join(', ')
     end
@@ -145,7 +146,7 @@ ActiveAdmin.register Observation do
     column :subcategory, sortable: 'subcategory_translations.name'
     column :law
     column :severity, sortable: 'severities.level' do |o|
-      o.severity.level
+      o&.severity&.level
     end
     column :publication_date, sortable: true
     column :actions_taken
@@ -186,6 +187,7 @@ ActiveAdmin.register Observation do
                     collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]}
       f.input :severity, as: :select,
                          collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
+      f.input :location_information  if f.object.observation_type == 'operator'
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
       if f.object.observation_type == 'government'
@@ -225,6 +227,9 @@ ActiveAdmin.register Observation do
       row :law
       row :severity do |o|
         o.severity.details
+      end
+      if resource.location_information.present?
+        row :location_information
       end
       if resource.fmu.present?
         row :fmu

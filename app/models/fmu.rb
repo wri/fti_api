@@ -32,6 +32,8 @@ class Fmu < ApplicationRecord
   has_one :operator, through: :fmu_operator
 
 
+  accepts_nested_attributes_for :operators
+
   validates :country_id, presence: true
   validates :name, presence: true
 

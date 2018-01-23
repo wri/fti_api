@@ -42,7 +42,10 @@ ActiveAdmin.register Fmu do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Fmu Details' do
       f.input :country,  input_html: { disabled: true }
-      f.input :operator, input_html: { disabled: true }
+      # TODO This needs a better approach
+      f.has_many :operators, new_record: false do |o|
+        o.input :name, input_html: { disabled: true }
+      end
       f.input :certification_fsc
       f.input :certification_pefc
       f.input :certification_olb
