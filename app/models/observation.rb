@@ -97,6 +97,12 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :pending,           ->() { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
   scope :created,           ->() { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
 
+
+  # TODO Check if there's a better way to order by category
+  # scope :order_by_category, ->(order = 'ASC') { joins(subcategory: :category).order("category_translations.name #{order}") }
+  # scope :order_by_category, ->(order = 'ASC') { joins(subcategory: :category).merge(Category.order(name: order)) }
+  scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name #{order}") }
+
   class << self
     def translated_types
       types.map { |t| [I18n.t("observation_types.#{t}", default: t), t.camelize] }
