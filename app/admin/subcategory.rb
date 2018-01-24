@@ -14,7 +14,7 @@ ActiveAdmin.register Subcategory do
     end
   end
 
-  permit_params translations_attributes: [:id, :locale, :name, :_destroy]
+  permit_params :location_required, translations_attributes: [:id, :locale, :name, :_destroy]
 
   scope :all, default: true
   scope :operator
@@ -44,6 +44,7 @@ ActiveAdmin.register Subcategory do
     column :name, sortable: 'subcategory_translations.name'
     column :category, sortable: 'category_translations.name'
     column :subcategory_type
+    column :location_required
     column :created_at
     column :updated_at
 
@@ -55,6 +56,7 @@ ActiveAdmin.register Subcategory do
     f.inputs 'Subcategory Details' do
       f.input :category,          input_html: { disabled: true }
       f.input :subcategory_type,  input_html: { disabled: true }
+      f.input :location_required
     end
 
     f.inputs 'Translated fields' do
@@ -71,6 +73,7 @@ ActiveAdmin.register Subcategory do
       row :category
       row :subcategory_type
       row :name
+      row :location_required
       row :created_at
       row :updated_at
     end
