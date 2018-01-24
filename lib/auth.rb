@@ -10,7 +10,11 @@ class Auth
   end
 
   def self.decode(token)
-    JWT.decode(token, auth_secret, true, { algorithm: ALGORITHM }).first
+    begin
+      JWT.decode(token, auth_secret, true, { algorithm: ALGORITHM }).first
+    rescue
+      nil
+    end
   end
 
   def self.auth_secret
