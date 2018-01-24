@@ -25,6 +25,7 @@
 #  modified_user_id      :integer
 #  law_id                :integer
 #  location_information  :string
+#  is_physical_place     :boolean          default(TRUE)
 #
 
 class Observation < ApplicationRecord
@@ -75,6 +76,7 @@ class Observation < ApplicationRecord
   validate :active_government
 
   before_save    :set_active_status
+  before_save    :check_is_physical_place
   before_save    :set_centroid
   after_create   :update_operator_scores
   before_destroy :destroy_documents
@@ -129,6 +131,14 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
 
   private
+
+  def check_is_physical_place
+    if is_physical_place
+      self.lat = nil
+      self.lng = nil
+      self.fmu = nil
+    end
+  end
 
   def set_centroid
     if fmu.present? && lat.blank? && lng.blank?
