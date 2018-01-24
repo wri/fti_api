@@ -13,6 +13,7 @@ module V1
     has_one :required_operator_document
     has_one :required_operator_document_country
     has_many :documents
+    has_many :operator_document_annexes
 
     filters :type, :status, :operator_id, :current
 

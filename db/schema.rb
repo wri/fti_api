@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123183741) do
+ActiveRecord::Schema.define(version: 20180124161609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -543,8 +543,9 @@ ActiveRecord::Schema.define(version: 20180123183741) do
   create_table "subcategories", force: :cascade do |t|
     t.integer  "category_id"
     t.integer  "subcategory_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "location_required", default: true
     t.index ["category_id"], name: "index_subcategories_on_category_id", using: :btree
     t.index ["subcategory_type"], name: "index_subcategories_on_subcategory_type", using: :btree
   end

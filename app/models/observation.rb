@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: observations
@@ -25,6 +24,7 @@
 #  actions_taken         :text
 #  modified_user_id      :integer
 #  law_id                :integer
+#  location_information  :string
 #
 
 class Observation < ApplicationRecord

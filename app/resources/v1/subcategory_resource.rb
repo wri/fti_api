@@ -4,7 +4,7 @@ module V1
   class SubcategoryResource < JSONAPI::Resource
     caching
 
-    attributes :name, :details, :subcategory_type, :category_id
+    attributes :name, :details, :subcategory_type, :category_id, :location_required
 
     has_one :category
     has_many :severities

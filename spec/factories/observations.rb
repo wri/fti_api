@@ -23,6 +23,7 @@
 #  actions_taken         :text
 #  modified_user_id      :integer
 #  law_id                :integer
+#  location_information  :string
 #
 
 FactoryGirl.define do
