@@ -24,6 +24,7 @@
 #  modified_user_id      :integer
 #  law_id                :integer
 #  location_information  :string
+#  is_physical_place     :boolean          default(TRUE)
 #
 
 FactoryGirl.define do

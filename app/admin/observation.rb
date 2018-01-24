@@ -141,7 +141,6 @@ ActiveAdmin.register Observation do
         links << link_to(operator.name, admin_producer_path(operator.id))
       end
       links.reduce(:+)
-      #link_to o.relevant_operators.pluck(:name).join(', ')
     end
     column :subcategory, sortable: 'subcategory_translations.name'
     column :law
@@ -187,6 +186,7 @@ ActiveAdmin.register Observation do
                     collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]}
       f.input :severity, as: :select,
                          collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
+      f.input :is_physical_place, input_html: { disabled: true }
       f.input :location_information  if f.object.observation_type == 'operator'
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
@@ -228,6 +228,7 @@ ActiveAdmin.register Observation do
       row :severity do |o|
         o.severity.details
       end
+      row :is_physical_place
       if resource.location_information.present?
         row :location_information
       end
