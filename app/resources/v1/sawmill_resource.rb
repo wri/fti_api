@@ -4,7 +4,7 @@ module V1
   class SawmillResource < JSONAPI::Resource
     caching
     immutable
-    attributes :name, :lat, :lng, :is_active
+    attributes :name, :lat, :lng, :is_active, :geojson
 
     has_one :operator
 
@@ -22,6 +22,16 @@ module V1
         records
       end
     }
+
+
+    def self.updatable_fields(context)
+      super - [:geojson]
+    end
+
+    def self.creatable_fields(context)
+      super - [:geojson]
+    end
+
 
     def self.records(options = {})
       Sawmill.active
