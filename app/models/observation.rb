@@ -133,7 +133,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   private
 
   def check_is_physical_place
-    if is_physical_place
+    if !is_physical_place
       self.lat = nil
       self.lng = nil
       self.fmu = nil
