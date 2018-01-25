@@ -16,6 +16,7 @@ ActiveAdmin.register Sawmill do
 
   index do
     column 'Active?', :is_active
+    column :name
     column :operator, sortable: 'operator_translations.name'
     column 'Latitude', :lat
     column 'Longitude', :lng
