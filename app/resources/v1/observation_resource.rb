@@ -23,6 +23,7 @@ module V1
     has_one :severity
     has_one :user
     has_one :modified_user
+
     has_one :operator
     has_one :government
     has_one :law
@@ -35,7 +36,8 @@ module V1
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
-            :observation_report, :law, :operator, :government, :subcategory, :is_active, :validation_status
+            :observation_report, :law, :operator, :government,
+            :subcategory, :is_active, :validation_status, :is_physical_place
 
     filter :category_id, apply: ->(records, value, _options) {
       records.by_category(value)
