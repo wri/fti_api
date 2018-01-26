@@ -43,6 +43,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             text_node content_tag 'a', 'Private Sector'
             ul do
               li { link_to 'Producers',            admin_producers_path }
+              li { link_to 'Sawmills',             admin_sawmills_path }
               li { link_to 'Document Categories',  admin_required_operator_document_groups_path }
               li { link_to 'Required Documents',   admin_required_operator_documents_path }
               li { link_to 'Producer Documents',   admin_operator_documents_path }

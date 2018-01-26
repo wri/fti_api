@@ -33,11 +33,15 @@ class ApiController < ActionController::API
   end
 
   def web_user
-    if api_key_present?
-      user = User.find(api_auth['user'])
-      if user && user.api_key_exists?
-        @current_api_user ||= user
+    begin
+      if api_key_present?
+        user = User.find(api_auth['user'])
+        if user && user.api_key_exists?
+          @current_api_user ||= user
+        end
       end
+    rescue
+      @current_api_user = nil
     end
   end
 
