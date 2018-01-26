@@ -65,5 +65,12 @@ module V1
       { self: nil }
     end
 
+    # Caching conditions
+    def self.attribute_caching_context(context)
+      {
+          locale: context[:locale],
+          owner: context[:current_user]
+      }
+    end
   end
 end

@@ -45,5 +45,12 @@ module V1
     def custom_links(_)
       { self: nil }
     end
+
+    def self.attribute_caching_context(context)
+      {
+          locale: context[:locale],
+          owner: context[:current_user]
+      }
+    end
   end
 end
