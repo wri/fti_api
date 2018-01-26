@@ -41,7 +41,7 @@ module V1
     def status
       user = @context[:current_user]
       app = @context[:app]
-      if (app != 'observations-tool' && user.present? && user.is_operator?(@model.operator_id)) ||
+      if (app != 'observations-tool' && user.present? && (user&.user_permission&.user_role =='admin' || user.is_operator?(@model.operator_id))) ||
           %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
         @model.status
       else
