@@ -24,12 +24,6 @@ gem 'paranoia', "~> 2.2"
 
 # Active Admin skins
 gem 'active_skin'
-#gem 'active_admin_theme'
-#gem "active_material", github: "vigetlabs/active_material"
-#gem 'active_admin_flat_skin'
-#gem 'face_of_active_admin'
-#gem 'activeadmin_blaze_theme'
-#gem 'flattened_active_admin'
 
 
 # Rails and DB
@@ -111,3 +105,6 @@ gem 'resque'
 gem 'resque-scheduler'
 gem 'resque_mailer'
 gem 'tzinfo-data'
+
+# Mailer
+gem 'mailgun-ruby', '~>1.1.6'
