@@ -14,7 +14,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   permit_params :observer_type, :is_active, :logo, :address, :information_name, :information_email,
-                :information_phone, :data_name, :data_email, :data_phone, :organization_type,
+                :information_phone, :data_name, :data_email, :data_phone, :organization_type, :delete_logo,
                 translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
   index do
@@ -78,7 +78,10 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       f.input :countries
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
-      f.input :logo
+      f.input :logo, as: :file, hint: f.template.image_tag(f.object.logo.url(:thumbnail))
+      if f.object.logo.present?
+        f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
+      end
       f.input :address
       f.input :information_name
       f.input :information_email

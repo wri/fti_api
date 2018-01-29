@@ -29,6 +29,7 @@ class Observer < ApplicationRecord
   end
 
   mount_base64_uploader :logo, LogoUploader
+  attr_accessor :delete_logo
 
   has_and_belongs_to_many :countries
 
@@ -42,6 +43,7 @@ class Observer < ApplicationRecord
 
   EMAIL_VALIDATOR = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
+  before_validation { self.remove_logo! if self.delete_logo == '1' }
   validates :name, presence: true
   validates :observer_type, presence: true, inclusion: { in: %w(Mandated SemiMandated External Government),
                                                          message: "%{value} is not a valid observer type" }

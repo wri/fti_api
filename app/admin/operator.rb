@@ -8,8 +8,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
-                :logo, fmu_ids: [],
-                       translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                :logo, :delete_logo, fmu_ids: [],
+                translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update_attributes(is_active: true)
@@ -106,7 +106,10 @@ ActiveAdmin.register Operator, as: 'Producer' do
                                            'Sawmill', 'Other', 'Unknown']
       f.input :country, input_html: { disabled: edit }
       f.input :concession
-      f.input :logo
+      f.input :logo, as: :file, hint: f.template.image_tag(f.object.logo.url(:thumbnail))
+      if f.object.logo.present?
+        f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
+      end
       available_fmus = Fmu.filter_by_free
       if edit
         available_fmus = []
