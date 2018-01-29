@@ -5,7 +5,8 @@ module V1
     caching
     paginator :none
 
-    attributes :name, :geojson, :certification_fsc, :certification_pefc, :certification_olb
+    attributes :name, :geojson, :certification_fsc, :certification_pefc, :certification_olb,
+               :certification_vlc, :certification_vlo, :certification_tltv
 
     has_one :country
     has_one :operator
@@ -20,6 +21,9 @@ module V1
       records = records.with_certification_fsc       if value.include?('fsc')
       records = records.with_certification_pefc      if value.include?('pefc')
       records = records.with_certification_olb       if value.include?('olb')
+      records = records.with_certification_vlc       if value.include?('vlc')
+      records = records.with_certification_vlo       if value.include?('vlo')
+      records = records.with_certification_tltv      if value.include?('tltv')
 
       records
     }

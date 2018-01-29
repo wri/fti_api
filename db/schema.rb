@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129104123) do
+ActiveRecord::Schema.define(version: 20180129110530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,9 @@ ActiveRecord::Schema.define(version: 20180129104123) do
     t.boolean  "certification_fsc",  default: false
     t.boolean  "certification_pefc", default: false
     t.boolean  "certification_olb",  default: false
+    t.boolean  "certification_vlc"
+    t.boolean  "certification_vlo"
+    t.boolean  "certification_tltv"
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
   end
 
