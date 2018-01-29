@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125103118) do
+ActiveRecord::Schema.define(version: 20180129110530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,9 @@ ActiveRecord::Schema.define(version: 20180125103118) do
     t.boolean  "certification_fsc",  default: false
     t.boolean  "certification_pefc", default: false
     t.boolean  "certification_olb",  default: false
+    t.boolean  "certification_vlc"
+    t.boolean  "certification_vlo"
+    t.boolean  "certification_tltv"
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
   end
 
@@ -447,6 +450,16 @@ ActiveRecord::Schema.define(version: 20180125103118) do
   create_table "required_operator_document_groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "required_operator_document_translations", force: :cascade do |t|
+    t.integer  "required_operator_document_id", null: false
+    t.string   "locale",                        null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.text     "explanation"
+    t.index ["locale"], name: "index_required_operator_document_translations_on_locale", using: :btree
+    t.index ["required_operator_document_id"], name: "index_eed74ed5a0934f32c4b075e5beee98f1ebf34d19", using: :btree
   end
 
   create_table "required_operator_documents", force: :cascade do |t|

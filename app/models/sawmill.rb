@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: sawmills
@@ -12,6 +11,7 @@
 #  operator_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  geojson     :jsonb
 #
 
 class Sawmill < ApplicationRecord

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: fmus
@@ -12,6 +11,9 @@
 #  certification_fsc  :boolean          default(FALSE)
 #  certification_pefc :boolean          default(FALSE)
 #  certification_olb  :boolean          default(FALSE)
+#  certification_vlc  :boolean
+#  certification_vlo  :boolean
+#  certification_tltv :boolean
 #
 
 class Fmu < ApplicationRecord
@@ -48,6 +50,9 @@ class Fmu < ApplicationRecord
   scope :with_certification_fsc,   ->()             { where certification_fsc: true }
   scope :with_certification_pefc,  ->()             { where certification_pefc: true }
   scope :with_certification_olb,   ->()             { where certification_olb: true }
+  scope :with_certification_vlc,   ->()             { where certification_vlc: true }
+  scope :with_certification_vlo,   ->()             { where certification_vlo: true }
+  scope :with_certification_tltv,  ->()             { where certification_tltv: true }
   scope :current,                  ->()             { joins(:fmu_operators).where(fmu_operators: { current: true }) }
 
   class << self
@@ -73,6 +78,9 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['certification_fsc'] = self.certification_fsc
     temp_geojson['properties']['certification_pefc'] = self.certification_pefc
     temp_geojson['properties']['certification_olb'] = self.certification_olb
+    temp_geojson['properties']['certification_vlc'] = self.certification_vlc
+    temp_geojson['properties']['certification_vlo'] = self.certification_vlo
+    temp_geojson['properties']['certification_tltv'] = self.certification_tltv
 
     self.geojson = temp_geojson
   end

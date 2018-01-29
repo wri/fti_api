@@ -19,7 +19,8 @@ ActiveAdmin.register Fmu do
   scope 'Free', :filter_by_free
 
   permit_params :id, :certification_fsc, :certification_pefc,
-                :certification_olb, translations_attributes: [:id, :locale, :name, :_destroy]
+                :certification_olb, :certification_vlc, :certification_vlo, :certification_tltv,
+                translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
   filter :translations_name_contains, as: :select, label: 'Name',
@@ -31,9 +32,12 @@ ActiveAdmin.register Fmu do
     column :name, sortable: 'fmu_translations.name'
     column :country, sortable: 'country_translations.name'
     column :operator, sortable: 'operator_translations.name'
-    column :certification_fsc
-    column :certification_pefc
-    column :certification_olb
+    column 'FSC', :certification_fsc
+    column 'PEFC', :certification_pefc
+    column 'OLB', :certification_olb
+    column 'VLC', :certification_vlc
+    column 'VLO', :certification_vlo
+    column 'TLTV', :certification_tltv
 
     actions
   end
@@ -49,6 +53,9 @@ ActiveAdmin.register Fmu do
       f.input :certification_fsc
       f.input :certification_pefc
       f.input :certification_olb
+      f.input :certification_vlc
+      f.input :certification_vlo
+      f.input :certification_tltv
     end
 
     f.inputs 'Translated fields' do

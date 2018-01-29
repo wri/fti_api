@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredOperatorDocument do
-  # menu parent: 'Operator Documents', priority: 1
   menu false
 
   active_admin_paranoia
 
   actions :all
-  permit_params :name, :type, :valid_period, :country, :required_operator_document_group_id, :country_id
+  permit_params :name, :type, :valid_period, :country, :required_operator_document_group_id, :country_id,
+                translations_attributes: [:id, :locale, :explanation]
 
   index do
     bool_column :exists do |rod|
@@ -37,6 +37,11 @@ ActiveAdmin.register RequiredOperatorDocument do
                      include_blank: false, input_html: { disabled: editing }
       f.input :name
       f.input :valid_period, label: 'Validity (days)'
+      f.inputs 'Translated fields' do
+        f.translated_inputs switch_locale: false do |t|
+          t.input :explanation
+        end
+      end
     end
     f.actions
   end

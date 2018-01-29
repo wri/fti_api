@@ -18,6 +18,9 @@
 class RequiredOperatorDocument < ApplicationRecord
   acts_as_paranoid
 
+  translates :explanation
+  active_admin_translates :explanation
+
   belongs_to :required_operator_document_group
   belongs_to :country
   has_many :operator_documents, dependent: :destroy
