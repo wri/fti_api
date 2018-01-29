@@ -5,7 +5,7 @@ module V1
     caching
     attributes :observer_type, :name, :organization, :is_active, :logo, :address,
                :information_name, :information_email, :information_phone, :data_name,
-               :data_email, :data_phone, :organization_type
+               :data_email, :data_phone, :organization_type, :delete_logo
 
     has_many :countries
     has_many   :users
@@ -22,6 +22,10 @@ module V1
 
     def custom_links(_)
       { self: nil }
+    end
+
+    def fetchable_fields
+      super - [:delete_logo]
     end
 
     def self.updatable_fields(context)

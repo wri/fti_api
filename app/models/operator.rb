@@ -32,6 +32,7 @@ class Operator < ApplicationRecord
   active_admin_translates :name, :details
 
   mount_base64_uploader :logo, LogoUploader
+  attr_accessor :delete_logo
 
   TYPES = ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
            'Sawmill', 'Other', 'Unknown'].freeze
@@ -55,6 +56,7 @@ class Operator < ApplicationRecord
 
   has_many :sawmills
 
+  before_validation { self.remove_logo! if self.delete_logo == '1' }
   after_create :create_operator_id
   after_create :create_documents
   after_update :create_documents, if: :fa_id_changed?
