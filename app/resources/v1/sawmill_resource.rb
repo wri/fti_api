@@ -3,12 +3,19 @@
 module V1
   class SawmillResource < JSONAPI::Resource
     caching
-    immutable
     attributes :name, :lat, :lng, :is_active, :geojson
 
     has_one :operator
 
     filters :operator, :name, :is_active
+
+    before_create :set_operator_id
+
+    def set_operator_id
+      if context[:current_user].present? && context[:current_user].operator_id.present?
+        @model.operator_id = context[:current_user].operator_id
+      end
+    end
 
     def self.sortable_fields(context)
       super + [:'operator.name']

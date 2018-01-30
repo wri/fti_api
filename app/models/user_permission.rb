@@ -33,7 +33,8 @@ class UserPermission < ApplicationRecord
       when 'operator'
         { user: { manage: { id: user.id } } , operator_document: { manage: { operator_id: user.operator_id } },
           operator_document_annex: { ud: { operator_document: { operator_id: user.operator_id }}, create: {}},
-          observation: { read: {} }, fmu: { ru: {} }, operator: { ru: { id: user.operator_id } } }
+          observation: { read: {} }, fmu: { ru: {} }, operator: { ru: { id: user.operator_id } },
+          sawmill: { create: {}, ud: { operator_id: user.operator_id }}}
       when 'ngo'
         { user: { manage: { id: user.id } },
           observation: { manage: { observers: { id: user.observer_id } },  create: {} },
