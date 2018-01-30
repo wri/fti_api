@@ -105,6 +105,3 @@ gem 'resque'
 gem 'resque-scheduler'
 gem 'resque_mailer'
 gem 'tzinfo-data'
-
-# Mailer
-gem 'mailgun-ruby', '~>1.1.6'
