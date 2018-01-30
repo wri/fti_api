@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register ObservationReport do
-  # menu parent: 'Observation Documents', priority: 1
   menu false
 
-  actions :show, :index
+  actions :show, :index, :update, :edit
+
+  permit_params :user_id, :title, :publication_date, :attachment
 
   config.order_clause
   active_admin_paranoia
@@ -25,7 +26,9 @@ ActiveAdmin.register ObservationReport do
 
   index do
     column :id
-    column :title
+    column :title do |report|
+      link_to(report.title, admin_observation_report_path(report.id))
+    end
     column :publication_date
     attachment_column :attachment
     column :user
@@ -45,6 +48,21 @@ ActiveAdmin.register ObservationReport do
     end
     column :created_at
     column :updated_at
+
+    actions
+  end
+
+  form do |f|
+    f.semantic_errors *f.object.errors.keys
+    f.inputs 'Report Details' do
+      f.input :user
+      f.input :title
+      f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false }
+      f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
+
+      f.actions
+
+    end
   end
 
   show do
