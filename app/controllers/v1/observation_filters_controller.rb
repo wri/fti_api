@@ -33,8 +33,8 @@ module V1
           'observer_id': observer_ids,
           'category_id': category_ids,
           'severity_level': severities,
-          operator_id: operator_ids,
-          report_id: reports_ids
+          'operator': operator_ids,
+          'observation-report': reports_ids
       }.to_json
 
       render json: filters
