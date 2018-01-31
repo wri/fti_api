@@ -39,11 +39,6 @@ module V1
       super - [:geojson]
     end
 
-
-    def self.records(options = {})
-      Sawmill.active
-    end
-
     def custom_links(_)
       { self: nil }
     end
