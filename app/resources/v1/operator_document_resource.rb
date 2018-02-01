@@ -53,7 +53,7 @@ module V1
       context = options[:context]
       user = context[:current_user]
       app = context[:app]
-      if app != 'observations-tool' && user.present?
+      if app != 'observations-tool' && user.present? && context[:action] != 'destroy'
         OperatorDocument.actual.from_user(user.id)
       else
         OperatorDocument.all
