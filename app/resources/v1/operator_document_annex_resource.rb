@@ -14,6 +14,18 @@ module V1
 
     before_create :set_user_id, :set_status
 
+    def self.records(options = {})
+      context = options[:context]
+      user = context[:current_user]
+      app = context[:app]
+      if app != 'observations-tool' && user.present? && context[:action] != 'destroy'
+        OperatorDocumentAnnex.from_user(user.id)
+      else
+        OperatorDocumentAnnex.valid
+      end
+    end
+
+
     def set_user_id
       if context[:current_user].present?
         @model.user_id = context[:current_user].id
