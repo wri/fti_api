@@ -18,8 +18,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:user, [operator_document: [operator: :translations]]])
-      #     end_of_association_chain.includes([:user, :operator_document])
+      end_of_association_chain.includes([:user, [operator_document: [operator: :translations, required_operator_document: :translations]]])
     end
   end
 
@@ -42,14 +41,14 @@ ActiveAdmin.register OperatorDocumentAnnex do
       od.deleted_at.nil?
     end
     tag_column :status
-    column :operator_document, sortable: 'operator_documents.name' do |od|
+    column :operator_document, sortable: 'required_operator_documents.name' do |od|
       if od.operator_document.present? && od.operator_document.required_operator_document.present?
         od.operator_document.required_operator_document.name
       else
-        OperatorDocument.unscoped.find(od.operator_document_id).name
+        OperatorDocument.unscoped.find(od.operator_document_id).required_operator_document.name
       end
     end
-    column :operator, sortable: 'operator_document_operator_translations.name'
+    column :operator, sortable: 'operator_translations.name'
 
     column :user, sortable: 'users.name'
     column :expire_date
