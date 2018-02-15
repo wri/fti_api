@@ -60,3 +60,22 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+server ENV['PRODUCTION_IP'],
+       user: ENV['SSH_USER'],
+       roles: %w{web app db}, primary: true
+
+set :ssh_options, {
+    forward_agent: true,
+    auth_methods: %w(publickey password),
+    password: fetch(:password)
+}
+
+set :branch, 'master'
+set :deploy_to, '~/fti-api-production'
+
+role :resque_worker, ENV['PRODUCTION_IP']
+role :resque_scheduler, ENV['PRODUCTION_IP']
+
+set :workers, {
+    ENV['STAGING_IP'] => { 'mailer' => 2 }
+}

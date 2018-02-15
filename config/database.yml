@@ -90,6 +90,6 @@ staging:
 
 production:
   <<: *default
-  database: fti_production
+  database: fti_api_production
   username: <%= ENV['SC_DATABASE_USER'] %>
   password: <%= ENV['SC_DATABASE_PASSWORD'] %>
