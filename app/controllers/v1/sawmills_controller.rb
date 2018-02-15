@@ -6,10 +6,18 @@ module V1
     load_and_authorize_resource class: 'Sawmill'
 
     def index
-      sawmills = Sawmill.fetch_all(options_filter)
-
       if params[:format].present? && params[:format].include?('geojson')
+        sawmills = Sawmill.fetch_all(options_filter)
         render json: build_json(sawmills)
+      else
+        super
+      end
+    end
+
+    def show
+      if params[:format].present? && params[:format].include?('geojson')
+        sawmill = Sawmill.find(params[:id])
+        render json: build_json([sawmill])
       else
         super
       end
