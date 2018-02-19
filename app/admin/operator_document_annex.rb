@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register OperatorDocumentAnnex do
-  # menu parent: 'Operator Documents', priority: 3
   menu false
   config.order_clause
 
@@ -23,13 +22,19 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :approve, method: :put do
-    resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_valid])
-    redirect_to collection_path, notice: 'Document approved'
+    if resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_valid])
+      redirect_to collection_path, notice: 'Annex approved'
+    else
+      redirect_to collection_path, alert: 'Annex could not be approved'
+    end
   end
 
   member_action :reject, method: :put do
-    resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_invalid])
-    redirect_to collection_path, notice: 'Document rejected'
+    if resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_invalid])
+      redirect_to collection_path, notice: 'Annex rejected'
+    else
+      redirect_to collection_path, alert: 'Annex could not be rejected'
+    end
   end
 
   actions :all, except: [:destroy, :new, :create]
@@ -56,8 +61,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
-    column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
-    column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
+    column('Approve') { |annex| link_to 'Approve', approve_admin_operator_document_annex_path(annex), method: :put}
+    column('Reject') { |annex| link_to 'Reject', reject_admin_operator_document_annex_path(annex), method: :put}
     actions
   end
 
