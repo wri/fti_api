@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Fmu do
-  # menu parent: 'Settings', priority: 5
   menu false
 
   actions :show, :edit, :index, :update
@@ -25,7 +24,8 @@ ActiveAdmin.register Fmu do
   filter :id, as: :select
   filter :translations_name_contains, as: :select, label: 'Name',
                                       collection: Fmu.joins(:translations).pluck(:name)
-  filter :country
+  filter :country, as: :select,
+         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
 
   index do
     column :id, sortable: true
