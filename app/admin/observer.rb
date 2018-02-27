@@ -35,7 +35,8 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   filter :is_active
-  filter :countries, collection: Country.joins(:translations).order(:name).pluck(:name)
+  filter :countries, as: :select,
+         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
   filter :translations_name_contains, as: :select, label: 'Name',
                                       collection: Observer.joins(:translations).pluck(:name)
 
