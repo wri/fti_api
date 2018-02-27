@@ -76,7 +76,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       end
     end
     f.inputs 'Monitor Details' do
-      f.input :countries
+      f.input :countries, collection: Country.with_translations(I18n.locale).order('country_translations.name asc')
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
       f.input :logo, as: :file, hint: f.template.image_tag(f.object.logo.url(:thumbnail))
