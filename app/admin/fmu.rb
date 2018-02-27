@@ -10,7 +10,7 @@ ActiveAdmin.register Fmu do
   controller do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
-                                         [fmu_operators: [operator: :translations]]])
+                                         [fmu_operator: [operator: :translations]]])
     end
   end
 
@@ -27,11 +27,14 @@ ActiveAdmin.register Fmu do
   filter :country, as: :select,
          collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
 
+  filter :operator_in_all, label: 'Operator', as: :select,
+         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+
   index do
     column :id, sortable: true
     column :name, sortable: 'fmu_translations.name'
     column :country, sortable: 'country_translations.name'
-    column :operator, sortable: 'operator_translations.name'
+    column :operator
     column 'FSC', :certification_fsc
     column 'PEFC', :certification_pefc
     column 'OLB', :certification_olb
