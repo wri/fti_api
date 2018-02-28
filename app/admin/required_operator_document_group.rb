@@ -5,7 +5,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   menu false
 
   actions :all, except: :destroy
-  permit_params translations_attributes: [:id, :locale, :name]
+  permit_params :position, translations_attributes: [:id, :locale, :name]
 
   sidebar :required_operator_documents, only: :show do
     sidebar = RequiredOperatorDocument.where(required_operator_document_group: resource).collect do |rod|
@@ -16,8 +16,8 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
 
   index do
     translation_status
+    column :position, sortable: true
     column :name, sortable: 'required_operator_document_group_translations.name'
-    column :concession
 
     actions
   end
@@ -29,6 +29,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Required Operator Document Group Details' do
+      f.input :position
       f.translated_inputs switch_locale: false do |t|
         t.input :name
       end

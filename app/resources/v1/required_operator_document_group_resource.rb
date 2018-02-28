@@ -3,7 +3,7 @@
 module V1
   class RequiredOperatorDocumentGroupResource < JSONAPI::Resource
     caching
-    attributes :name
+    attributes :name, :position
 
     has_many :required_operator_documents
 
@@ -11,6 +11,10 @@ module V1
 
     def custom_links(_)
       { self: nil }
+    end
+
+    def self.default_sort
+      [{field: 'position', direction: :asc}]
     end
 
     # Adds the locale to the cache
