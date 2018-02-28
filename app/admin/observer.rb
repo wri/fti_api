@@ -35,7 +35,8 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   filter :is_active
-  filter :countries, collection: Country.joins(:translations).order(:name).pluck(:name)
+  filter :countries, as: :select,
+         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
   filter :translations_name_contains, as: :select, label: 'Name',
                                       collection: Observer.joins(:translations).pluck(:name)
 
@@ -75,7 +76,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       end
     end
     f.inputs 'Monitor Details' do
-      f.input :countries
+      f.input :countries, collection: Country.with_translations(I18n.locale).order('country_translations.name asc')
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
       f.input :logo, as: :file, hint: f.template.image_tag(f.object.logo.url(:thumbnail))

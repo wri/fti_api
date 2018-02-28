@@ -53,7 +53,13 @@ ActiveAdmin.register OperatorDocumentAnnex do
         OperatorDocument.unscoped.find(od.operator_document_id).required_operator_document.name
       end
     end
-    column :operator, sortable: 'operator_translations.name'
+    column :operator, sortable: 'operator_translations.name' do |od|
+      if od.operator_document.present? && od.operator_document.operator.present?
+        od.operator_document.operator.name
+      else
+        OperatorDocument.unscoped.find(od.operator_document_id).operator.name
+      end
+    end
 
     column :user, sortable: 'users.name'
     column :expire_date

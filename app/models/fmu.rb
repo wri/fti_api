@@ -88,4 +88,14 @@ class Fmu < ApplicationRecord
   def cache_key
     super + '-' + Globalize.locale.to_s
   end
+
+  # Methods for Active Admin
+
+  ransacker :operator,
+            formatter: proc { |operator_ids|
+              matches = Fmu.filter_by_operators(operator_ids).map(&:id)
+              matches.any? ? matches : nil
+            } do |parent|
+    parent.table[:id]
+  end
 end
