@@ -23,6 +23,7 @@ module JSONAPI
     def link_object_to_many(source, relationship, include_linkage)
       include_linkage = include_linkage | relationship.always_include_linkage_data
       link_object_hash = {}
+      # MONKEY_PATCH to show the links only if there's linkage data
       link_object_hash[:links] = {} if relationship.always_include_linkage_data
       link_object_hash[:links][:self] = self_link(source, relationship) if relationship.always_include_linkage_data
       link_object_hash[:links][:related] = related_link(source, relationship) if relationship.always_include_linkage_data
@@ -33,6 +34,7 @@ module JSONAPI
     def link_object_to_one(source, relationship, include_linkage)
       include_linkage = include_linkage | @always_include_to_one_linkage_data | relationship.always_include_linkage_data
       link_object_hash = {}
+      # MONKEY PATCH to show the links only if there's linkage data
       link_object_hash[:links] = {} if relationship.always_include_linkage_data
       link_object_hash[:links][:self] = self_link(source, relationship) if relationship.always_include_linkage_data
       link_object_hash[:links][:related] = related_link(source, relationship) if relationship.always_include_linkage_data
@@ -50,6 +52,7 @@ module JSONAPI
               *model_names, column_name = field.split(".")
               association = _lookup_association_chain([records.model.to_s, *model_names]).last
 
+              # MONKEY_PATCH to work with Globalize
               if association.klass.attribute_names.include?(column_name)
                 joins_query = _build_joins([records.model, *association])
                 # _sorting is appended to avoid name clashes with manual joins eg. overridden filters
@@ -94,6 +97,7 @@ module JSONAPI
         render_options[:body] = JSON.generate(content)
       end
 
+      # MONKEY PATCH : To allow the gem to work without links
       if content[:data].is_a?(Hash) && content.dig(:data, :links, :self).present?
         render_options[:location] = content[:data]["links"][:self] if 
         response_doc.status == :created && content[:data].class != Array
