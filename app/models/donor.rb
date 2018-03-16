@@ -13,5 +13,6 @@
 #  type       :string           default("Partner")
 #
 
-class Partner < Contributor
+class Donor < Contributor
+
 end

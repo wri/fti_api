@@ -68,6 +68,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
               li { link_to 'Access Control',   admin_access_control_path }
               li { link_to 'Contacts',         admin_contacts_path }
               li { link_to 'Partners',         admin_partners_path }
+              li { link_to 'Donors',           admin_donors_path }
               li { link_to 'Comments',         admin_comments_path }
               li { link_to 'FAQs',             admin_faqs_path }
             end
