@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Partner do
+ActiveAdmin.register Donor do
   menu false
   permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
@@ -27,7 +27,7 @@ ActiveAdmin.register Partner do
         t.input :description
       end
     end
-    f.inputs 'Partner Details' do
+    f.inputs 'Donor Details' do
       f.input :website
       f.input :priority
       f.input :logo

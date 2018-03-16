@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       jsonapi_resources :required_operator_documents do; end
       jsonapi_resources :required_operator_document_groups do; end
       jsonapi_resources :partners do; end
+      jsonapi_resources :partners do; end
       jsonapi_resources :operator_document_annexes do; end
       jsonapi_resources :sawmills do; end
       jsonapi_resources :faqs, only: [:index, :show] do; end

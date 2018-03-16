@@ -13,5 +13,16 @@
 #  type       :string           default("Partner")
 #
 
-class Partner < Contributor
+class Contributor < ApplicationRecord
+  include Translatable
+  mount_base64_uploader :logo, PartnerLogoUploader
+  translates :name, :description
+
+  active_admin_translates :name do
+    validates_presence_of :name
+  end
+
+
+  validates :priority, numericality: { only_integer: true, greater_than_or_equal_to: 0 },  if: :priority?
+  validates_presence_of :name
 end
