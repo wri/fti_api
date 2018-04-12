@@ -29,6 +29,16 @@ or apv is null or currency is null')
       super + [:'subcategory.name', :'country.name']
     end
 
+    # When ordering by a translated table in a belongs_to relationship
+    # we add the ordering by id to insure that when limiting by 1 or 100
+    # the order of the results is the same
+    def self.apply_sort(records, order_options, context = {})
+      if order_options['country.name'].present? || order_options['subcategory.name'].present?
+        order_options['id'] =  'DESC'
+      end
+      super(records, order_options, context)
+    end
+
     def complete
       @model.written_infraction.present? &&
           @model.infraction.present? &&
