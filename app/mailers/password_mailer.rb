@@ -10,6 +10,6 @@ Someone has requested a link to change your password. You can do this through th
 If you didn't request this, please ignore this email.\n
 Your password won't change until you access the link above and create a new one."
 
-    send_email(user_email, ENV['CONTACT_EMAIL'], text, 'Requested link to change your password')
+    send_email(ENV['CONTACT_EMAIL'], user_email, text, 'Requested link to change your password')
   end
 end
