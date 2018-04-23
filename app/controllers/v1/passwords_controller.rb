@@ -8,14 +8,14 @@ module V1
     before_action :set_user
 
     def create
-      if @user.send_reset_password_instructions(request.original_url)
-        if @user.errors.empty?
+      if @user.errors.empty?
+        if @user.send_reset_password_instructions(request.original_url)
           render json: { messages: [{ status: 200, title: 'Reset password email sent!' }] }, status: 200
         else
-          render json: ErrorSerializer.serialize(@user.errors, 422), status: 422
+          render json: ErrorSerializer.serialize(@user.errors, 423), status: 423
         end
       else
-        render json: ErrorSerializer.serialize(@user.errors, 423), status: 423
+        render json: ErrorSerializer.serialize(@user.errors, 422), status: 422
       end
     end
 
@@ -54,7 +54,7 @@ module V1
                   User.find_by(email: user_params[:email]) if user_params[:email].present?
                 end
 
-        render json: { errors: [{ status: 422, title: 'Unprocessable entity.' }] }, status: 422 if @user.nil?
+        render json: { errors: [{ status: 422, title: 'Couldn\'t find the user with this email' }] }, status: 422 if @user.nil?
       end
 
       def user_params
