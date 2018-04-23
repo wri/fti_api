@@ -386,6 +386,7 @@ GEM
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-graphviz (1.2.3)
     ruby-progressbar (1.8.1)
+    ruby_http_client (3.0.2)
     rufus-scheduler (3.4.0)
       et-orbi (~> 1.0)
     safe_yaml (1.0.4)
@@ -405,6 +406,8 @@ GEM
       activesupport (>= 3.1)
     select2-rails (3.5.10)
       thor (~> 0.14)
+    sendgrid-ruby (4.0.8)
+      ruby_http_client (~> 3.0.1)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -521,6 +524,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   seed-fu
+  sendgrid-ruby
   simplecov
   slim-rails
   spring

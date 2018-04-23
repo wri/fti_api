@@ -59,6 +59,9 @@ gem 'slim-rails'
 gem 'newrelic_rpm'
 gem 'oink'
 
+# Mail
+gem 'sendgrid-ruby'
+
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'

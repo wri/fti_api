@@ -2,12 +2,14 @@
 
 class PasswordMailer < AsyncMailer
   def password_email(user_name, user_email, reset_url)
-    @name      = user_name
-    @email     = user_email
-    @reset_url = reset_url
 
-    @subject = 'Requested link to change your password'
+    text =
+        "Dear #{user_name}\n
+Someone has requested a link to change your password. You can do this through the link below.\n
+#{reset_url}.\n
+If you didn't request this, please ignore this email.\n
+Your password won't change until you access the link above and create a new one."
 
-    mail(to: @email, subject: @subject)
+    send_email(user_email, ENV['CONTACT_EMAIL'], text, 'Requested link to change your password')
   end
 end
