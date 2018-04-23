@@ -15,7 +15,7 @@ module V1
           render json: ErrorSerializer.serialize(@user.errors, 422), status: 422
         end
       else
-        render json: ErrorSerializer.serialize(@user.errors, 422), status: 422
+        render json: ErrorSerializer.serialize(@user.errors, 423), status: 423
       end
     end
 
