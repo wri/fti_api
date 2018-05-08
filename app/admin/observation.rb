@@ -124,7 +124,7 @@ ActiveAdmin.register Observation do
     selectable_column
     column :id
     column 'Active?', :is_active
-    tag_column 'Status', :validation_status, sortable: true
+    tag_column 'Status', :validation_status, sortable: 'validation_status'
     column :country, sortable: 'country_translations.name'
     column :fmu, sortable: 'fmu_translations.name'
     column :location_information, sortable: true
