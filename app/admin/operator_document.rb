@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register OperatorDocument do
-  # menu parent: 'Operator Documents', priority: 2
   menu false
   config.order_clause
 
@@ -109,8 +108,11 @@ ActiveAdmin.register OperatorDocument do
   filter :id, as: :select
   filter :required_operator_document,
          collection: RequiredOperatorDocument.
-             joins(country: :translations).where(country_translations: {locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
-  filter :operator
+             joins(country: :translations)
+                         .order('required_operator_documents.name')
+                         .where(country_translations: {locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
+  filter :operator, label: 'Operator', as: :select,
+         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :updated_at

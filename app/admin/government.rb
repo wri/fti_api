@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Government do
-  # menu parent: 'Settings', priority: 7
   menu false
 
   config.order_clause
@@ -22,16 +21,22 @@ ActiveAdmin.register Government do
     column 'Active?', :is_active
     column :country, sortable: 'country_translations.name'
     column :government_entity, sortable: 'government_translations.government_entity'
-    column :details, sortable: 'government_translations.government_details'
+    column :details, sortable: 'government_translations.details'
 
     actions
   end
 
-  filter :country
-  filter :translations_government_entity_contains, as: :select, label: 'Entity',
-                                                   collection: Government.joins(:translations).pluck(:government_entity)
-  filter :translations_details_contains, as: :select, label: 'Details',
-                                         collection: Government.joins(:translations).pluck(:details)
+  filter :country, as: :select, collection:
+      Country.joins(:governments).with_translations(I18n.locale)
+          .order('country_translations.name')
+  filter :translations_government_entity_contains,
+         as: :select, label: 'Entity',
+         collection: Government.with_translations(I18n.locale)
+                         .order('government_translations.government_entity').pluck(:government_entity)
+  filter :translations_details_contains,
+         as: :select, label: 'Details',
+         collection: Government.with_translations(I18n.locale)
+                         .order('government_translations.details').pluck(:details)
 
   sidebar 'Observations', only: :show do
     attributes_table_for resource do

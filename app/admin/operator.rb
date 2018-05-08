@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Operator, as: 'Producer' do
-  # menu parent: 'Operators', priority: 1
   menu false
 
   config.order_clause
@@ -41,9 +40,13 @@ ActiveAdmin.register Operator, as: 'Producer' do
   scope :active
   scope :inactive
 
-  filter :country
-  filter :translations_name_contains, as: :select, label: 'Name',
-                                      collection: Operator.joins(:translations).pluck(:name)
+  filter :country, as: :select, collection:
+      Country.joins(:operators).with_translations(I18n.locale)
+          .order('country_translations.name')
+  filter :translations_name_contains,
+         as: :select, label: 'Name',
+         collection: Operator.with_translations(I18n.locale)
+                         .order('operator_translations.name').pluck(:name)
   filter :concession, as: :select
   filter :score
   filter :score_absolute, label: 'Obs/Visit'

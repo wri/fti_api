@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Species do
-  # menu parent: 'Settings', priority: 8
   menu false
 
   actions :create, :show, :edit, :index

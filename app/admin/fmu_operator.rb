@@ -1,12 +1,19 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register FmuOperator do
-  # menu parent: 'Settings', priority: 5
   menu false
 
   actions :show, :edit, :index, :update, :new, :create
 
   permit_params :fmu_id, :operator_id, :current, :start_date, :end_date
+
+  filter :operator, label: 'Operator', as: :select,
+         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+  filter :fmu, label: 'Fmu', as: :select,
+         collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name')}
+  filter :current
+  filter :start_date
+  filter :end_date
 
   index do
     column :current

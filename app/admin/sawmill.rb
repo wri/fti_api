@@ -34,8 +34,10 @@ ActiveAdmin.register Sawmill do
   scope :active
   scope :inactive
 
-  filter :operator_translations_name_contains, as: :select, label: 'Operator',
-                                               collection: Operator.joins(:translations).pluck(:name)
+  filter :operator_translations_name_contains,
+         as: :select, label: 'Operator',
+         collection: Operator.joins(:sawmills).with_translations(I18n.locale)
+                         .order('operator_translations.name').pluck('operator_translations.name')
   filter :name
 
 

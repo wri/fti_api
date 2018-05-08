@@ -17,9 +17,13 @@ ActiveAdmin.register Severity do
   permit_params translations_attributes: [:id, :locale, :details, :_destroy]
 
 
-  filter :translations_details_contains, as: :select, label: 'Details',
-                                         collection: Severity.joins(:translations).pluck(:details)
-  filter :subcategory, as: :select
+  filter :translations_details_contains,
+         as: :select, label: 'Details',
+         collection: Severity.with_translations(I18n.locale)
+                         .order('severity_translations.details').pluck(:details)
+  filter :subcategory, as: :select,
+         collection: Subcategory.with_translations(I18n.locale)
+                         .order('subcategory_translations.name')
   filter :level, as: :select, collection: [0, 1, 2, 3]
   filter :created_at
   filter :updated_at
