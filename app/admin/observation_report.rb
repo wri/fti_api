@@ -19,9 +19,10 @@ ActiveAdmin.register ObservationReport do
 
   filter :title, as: :select
   filter :attachment, as: :select
-  filter :user, as: :select
-  filter :observers
-  filter :observations, as: :select, collection: Observation.pluck(:id)
+  filter :user, as: :select, collection: User.order(:name)
+  filter :observers, label: 'Observers', as: :select,
+         collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
+  filter :observations, as: :select, collection: Observation.order(:id).pluck(:id)
   filter :publication_date
 
   index do

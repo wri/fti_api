@@ -15,11 +15,15 @@ ActiveAdmin.register Law do
     end
   end
 
-  permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :penal_servitude,
-                :other_penalties, :apv, :written_infraction, :country_id
+  permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :currency,
+                :penal_servitude, :other_penalties, :apv, :written_infraction, :country_id
 
-  filter :country
-  filter :subcategory
+  filter :country, as: :select, collection:
+      Country.joins(:laws).with_translations(I18n.locale)
+          .order('country_translations.name')
+  filter :subcategory, as: :select, collection:
+      Subcategory.joins(:observations).with_translations(I18n.locale)
+          .order('subcategory_translations.name')
   filter :written_infraction, label: 'Illegality as written by law', as: :select
   filter :infraction, label: 'Legal reference: Illegality', as: :select
   filter :sanctions, label: 'Legal reference: Penalties', as: :select
@@ -34,6 +38,7 @@ ActiveAdmin.register Law do
     column 'Legal reference: Penalties', :sanctions, sortable: true
     column 'Minimum fine', :min_fine, sortable: true
     column 'Maximum fine', :max_fine, sortable: true
+    column :currency
     column :penal_servitude, sortable: true
     column :other_penalties, sortable: true
     column 'Indicator APV', :apv, sortable: true
@@ -61,6 +66,7 @@ ActiveAdmin.register Law do
       f.input :sanctions,          label: 'Legal reference: Penalties'
       f.input :min_fine,           label: 'Minimum Fine'
       f.input :max_fine,           label: 'Maximum Fine'
+      f.input :currency
       f.input :penal_servitude
       f.input :other_penalties
       f.input :apv, label: 'Indicateur APV'

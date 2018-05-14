@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register ObservationDocument, as: 'Evidence' do
-  # menu parent: 'Observation Documents', as: 'Evidence', priority: 2
   menu false
 
   actions :show, :index
@@ -20,7 +19,9 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
     actions
   end
 
-  filter :observation, as: :select, collection: Observation.joins(:observation_documents).pluck(:id)
+  filter :observation, as: :select,
+         collection: Observation.joins(:observation_documents)
+                         .distinct.order(:id).pluck(:id)
   filter :name, as: :select
   filter :attachment, as: :select
   filter :user

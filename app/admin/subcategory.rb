@@ -20,9 +20,12 @@ ActiveAdmin.register Subcategory do
   scope :operator
   scope :government
 
-  filter :translations_name_contains, as: :select, label: 'Name',
-                                      collection: Subcategory.joins(:translations).pluck(:name)
-  filter :category, as: :select
+  filter :translations_name_contains,
+         as: :select, label: 'Name',
+         collection: Subcategory.with_translations(I18n.locale)
+                         .order('subcategory_translations.name').pluck(:name)
+  filter :category, as: :select,
+         collection: -> { Category.with_translations(I18n.locale).order('category_translations.name')}
   filter :created_at
   filter :updated_at
 

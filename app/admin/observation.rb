@@ -105,17 +105,29 @@ ActiveAdmin.register Observation do
   scope :pending
   scope :created
 
-  filter :validation_status, as: :select, collection: Observation.validation_statuses
-  filter :country, as: :select, collection: Country.joins(:observations).group(:id)
-  filter :observers
-  filter :operator
-  filter :government_translations_government_entity_contains, as: :select, label: 'Government Entity',
-                                                              collection: Government.joins(:translations).pluck(:government_entity)
-  filter :subcategory
+  filter :validation_status, as: :select, collection:
+      Observation.validation_statuses.sort
+  filter :country, as: :select, collection:
+      Country.joins(:observations).with_translations(I18n.locale)
+          .order('country_translations.name')
+  filter :observers, label: 'Observers', as: :select,
+         collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
+  filter :operator, label: 'Operator', as: :select,
+           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+  filter :government_translations_government_entity_contains,
+         as: :select, label: 'Government Entity',
+         collection: Government.with_translations(I18n.locale)
+                         .order('government_translations.government_entity')
+                         .pluck(:government_entity)
+  filter :subcategory,
+         label: 'Subcategory', as: :select,
+         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name')}
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :observation_report
-  filter :user
-  filter :modified_user
+  filter :observation_report,
+         label: 'Report', as: :select,
+         collection: ObservationReport.order(:title)
+  filter :user, label: 'User who created', as: :select, collection: User.order(:name)
+  filter :modified_user, label: 'User who modified', as: :select, collection: User.order(:name)
   filter :is_active
   filter :publication_date
   filter :updated_at
@@ -124,7 +136,7 @@ ActiveAdmin.register Observation do
     selectable_column
     column :id
     column 'Active?', :is_active
-    tag_column 'Status', :validation_status, sortable: true
+    tag_column 'Status', :validation_status, sortable: 'validation_status'
     column :country, sortable: 'country_translations.name'
     column :fmu, sortable: 'fmu_translations.name'
     column :location_information, sortable: true
