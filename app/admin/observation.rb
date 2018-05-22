@@ -141,7 +141,11 @@ ActiveAdmin.register Observation do
     column :fmu, sortable: 'fmu_translations.name'
     column :location_information, sortable: true
     column :observers, sortable: 'observer_translations.name' do |o|
-      o.observers.pluck(:name).join(', ')
+      links = []
+      o.observers.with_translations(I18n.locale).each do |observer|
+        links << link_to(observer.name, admin_monitor_path(observer.id))
+      end
+      links.reduce(:+)
     end
     column :operator, sortable: 'operator_translations.name'
     column :government, sortable: 'government_translations.government_entity' do |o|

@@ -22,7 +22,7 @@ ActiveAdmin.register Law do
       Country.joins(:laws).with_translations(I18n.locale)
           .order('country_translations.name')
   filter :subcategory, as: :select, collection:
-      Subcategory.joins(:observations).with_translations(I18n.locale)
+      Subcategory.joins(:laws).with_translations(I18n.locale)
           .order('subcategory_translations.name')
   filter :written_infraction, label: 'Illegality as written by law', as: :select
   filter :infraction, label: 'Legal reference: Illegality', as: :select
