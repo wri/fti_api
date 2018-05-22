@@ -372,6 +372,8 @@ namespace :import do
       operator_name = properties['company_na']
       country_iso = properties['iso3_fmu']
 
+      next if Fmu.where(name: name).any?
+
       fmu = Fmu.where(name: name).first_or_create
       if operator_name.present?
         operator = Operator.find_by(name: operator_name)
