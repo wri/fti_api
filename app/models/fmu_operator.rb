@@ -68,7 +68,7 @@ class FmuOperator < ApplicationRecord
     # Checks which one should be active
     to_deactivate = FmuOperator.where("current = 'TRUE' AND end_date < '#{Date.today}'::date")
     to_activate   = FmuOperator.
-        where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date = NULL OR end_date >= '#{Date.today}'::date)")
+        where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date IS NULL OR end_date >= '#{Date.today}'::date)")
 
     # Updates the operator documents
     to_deactivate.find_each{ |x| x.current = false; x.save! }
