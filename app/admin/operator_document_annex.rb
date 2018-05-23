@@ -47,18 +47,12 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     tag_column :status
     column :operator_document, sortable: 'required_operator_documents.name' do |od|
-      if od.operator_document.present? && od.operator_document.required_operator_document.present?
-        od.operator_document.required_operator_document.name
-      else
-        OperatorDocument.unscoped.find(od.operator_document_id).required_operator_document.name
-      end
+      rod = OperatorDocument.unscoped.find(od.operator_document_id)
+      link_to(rod.required_operator_document.name, admin_operator_document_path(rod.id))
     end
     column :operator, sortable: 'operator_translations.name' do |od|
-      if od.operator_document.present? && od.operator_document.operator.present?
-        od.operator_document.operator.name
-      else
-        OperatorDocument.unscoped.find(od.operator_document_id).operator.name
-      end
+      o = OperatorDocument.unscoped.find(od.operator_document_id).operator
+      link_to(o.name, admin_producer_path(o.id))
     end
 
     column :user, sortable: 'users.name'
