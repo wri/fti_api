@@ -72,7 +72,16 @@ class FmuOperator < ApplicationRecord
 
     # Updates the operator documents
     to_deactivate.find_each{ |x| x.current = false; x.save! }
-    to_activate.find_each{ |x| x.current = true; x.save! }
+    to_activate.find_each do |x|
+      x.current = true
+      x.save!
+
+      query = "UPDATE fmus
+set geojson = jsonb_set(geojson, '{properties}', '{\"company_na\":\"#{x.operator.name}\", \"operator_id\":#{x.operator_id}}', true)
+where fmus.id = #{x.fmu_id}"
+
+      ActiveRecord::Base.connection.execute(query)
+    end
   end
 
 
