@@ -155,6 +155,7 @@ ActiveAdmin.register OperatorDocument do
   end
 
 
+  filter :current
   filter :id, as: :select
   filter :required_operator_document,
          collection: RequiredOperatorDocument.
