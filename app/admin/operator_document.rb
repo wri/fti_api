@@ -55,6 +55,56 @@ ActiveAdmin.register OperatorDocument do
                 :operator_id, :type, :status, :expire_date, :start_date,
                 :attachment, :uploaded_by, :reason, :note, :response_date
 
+  csv do
+    column :exists do |o|
+      o.deleted_at.nil?
+    end
+    column :current
+    column :status
+    column :id
+    column :required_operator_document do |o|
+     o.required_operator_document.name
+    end
+    column :Type do |o|
+      if o.required_operator_document.present?
+        o.required_operator_document.type == 'RequiredOperatorDocumentFmu' ? 'Fmu' : 'Operator'
+      else
+        RequiredOperatorDocument.unscoped.find(o.required_operator_document_id).type
+      end
+    end
+    column :operator do |o|
+      o.operator.name
+    end
+    column :fmu do |o|
+      o.fmu&.name
+    end
+    column 'Legal Category' do |o|
+      if o.required_operator_document.present?
+        o.required_operator_document.required_operator_document_group.name
+      else
+        RequiredOperatorDocument.unscoped.find(o.required_operator_document_id).required_operator_document_group.name
+      end
+    end
+    column :user do |o|
+      o.user&.name
+    end
+    column :expire_date
+    column :start_date
+    column :created_at
+    column :uploaded_by
+    column :attachment do |o|
+      o.attachment&.filename
+    end
+    column 'Annexes' do |o|
+      links = []
+      o.operator_document_annexes.each {|a| links << a.name}
+      links.join(' ').html_safe
+    end
+    column :reason
+    column :note
+    column :response_date
+  end
+
   index do
     bool_column :exists do |od|
       od.deleted_at.nil?
