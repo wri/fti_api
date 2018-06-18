@@ -16,7 +16,7 @@
 #  operator_id                   :integer
 #  attachment                    :string
 #  current                       :boolean
-#  deleted_at                    :datetime
+#  deleted_at                    :datetim§e
 #  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
