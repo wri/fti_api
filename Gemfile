@@ -102,7 +102,6 @@ end
 gem 'dotenv-rails'
 gem 'puma'
 gem 'rack-cors'
-gem 'rails_12factor',              group: :production
 gem 'redis-rails'
 gem 'resque'
 gem 'resque-scheduler'
