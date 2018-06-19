@@ -15,6 +15,23 @@ ActiveAdmin.register Operator, as: 'Producer' do
     redirect_to collection_path, notice: 'Operator activated'
   end
 
+  csv do
+    column :is_active
+    column :country do |operator|
+      operator.country.name rescue nil
+    end
+    column :fa_id
+    column :name
+    column :concession
+    column :score_absolute do |operator|
+      "#{'%.2f' % operator.score_absolute}" rescue nil
+    end
+    column :obs_per_visit
+    column '% Docs' do |operator|
+      operator.percentage_valid_documents_all
+    end
+  end
+
   index do
     column 'Active?', :is_active
     column :country, sortable: 'country_translations.name'
