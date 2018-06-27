@@ -132,6 +132,61 @@ ActiveAdmin.register Observation do
   filter :publication_date
   filter :updated_at
 
+
+
+  csv do
+    column :id
+    column :is_active
+    column 'Status' do |observation|
+      observation.validation_status
+    end
+    column :country do |observation|
+      observation.country.name #if observation.country
+    end
+    column :fmu do |observation|
+      observation.fmu&.name #if observation.fmu
+    end
+    column :location_information
+    column :observers do |observation|
+      observation.observers.map(&:name).join(', ')
+    end
+    column :operator do |observation|
+      observation.operator&.name # if observation.operator
+    end
+    column :government do |observation|
+      observation.government&.government_entity #if observation.government
+    end
+    column :relevant_operators do |observation|
+      observation.relevant_operators.map(&:name).join(', ')
+    end
+    column :subcategory do |observation|
+      observation.subcategory&.name
+    end
+    column :law do |observation|
+      observation.law_id
+    end
+    column :severity do |observation|
+      observation.severity&.level
+    end
+    column :publication_date
+    column :actions_taken
+    column :details
+    column :evidence
+    column :concern_opinion
+    column :report do |observation|
+      observation.observation_report&.title
+    end
+    column :user do |observation|
+      observation.user&.name
+    end
+    column :modified_user do |observation|
+      observation.modified_user&.name
+    end
+    column :created_at
+    column :updated_at
+  end
+
+
   index do
     selectable_column
     column :id
