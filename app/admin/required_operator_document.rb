@@ -9,6 +9,21 @@ ActiveAdmin.register RequiredOperatorDocument do
   permit_params :name, :type, :valid_period, :country, :required_operator_document_group_id, :country_id,
                 translations_attributes: [:id, :locale, :explanation]
 
+  csv do
+    column 'exists' do |rod|
+      rod.deleted_at.nil?
+    end
+    column 'required_operator_document_group' do |rod|
+      rod.required_operator_document_group&.name
+    end
+    column 'country' do |rod|
+      rod.country&.name
+    end
+    column :type
+    column :name
+
+  end
+
   index do
     bool_column :exists do |rod|
       rod.deleted_at.nil?

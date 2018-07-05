@@ -25,6 +25,26 @@ ActiveAdmin.register ObservationReport do
   filter :observations, as: :select, collection: Observation.order(:id).pluck(:id)
   filter :publication_date
 
+  csv do
+    column :id
+    column :title
+    column :publication_date
+    column :attachment
+    column 'user' do |obsr|
+      obsr.user&.name
+    end
+    column 'observations' do |obsr|
+      ids = obsr.observations.map {|o| o.id}
+      ids.reduce(:+)
+    end
+    column 'observers' do |o|
+      names = o.observers.joins(:translations).map { |o| o.name}
+      names.reduce(:+)
+    end
+    column :created_at
+    column :updated_at
+  end
+
   index do
     column :id
     column :title do |report|

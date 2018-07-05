@@ -9,6 +9,12 @@ ActiveAdmin.register Contact do
   filter :email, as: :select
   filter :created_at
 
+  csv do
+    column :name
+    column :email
+    column :created_at
+  end
+
   index do
     selectable_column
     column :name

@@ -55,6 +55,18 @@ ActiveAdmin.register Sawmill do
     f.actions
   end
 
+  csv do
+    column 'operator' do |s|
+      s.operator&.name
+    end
+    column :name
+    column :lat
+    column :lng
+    column :is_active
+    column :created_at
+    column :updated_at
+  end
+
   show do
     attributes_table do
       row :operator

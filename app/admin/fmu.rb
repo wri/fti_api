@@ -30,6 +30,23 @@ ActiveAdmin.register Fmu do
   filter :operator_in_all, label: 'Operator', as: :select,
          collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
 
+  csv do
+    column :id
+    column :name
+    column 'country' do |fmu|
+      fmu.country&.name
+    end
+    column 'operator' do |fmu|
+      fmu.operator&.name
+    end
+    column :certification_fsc
+    column :certification_pefc
+    column :certification_olb
+    column :certification_vlc
+    column :certification_vlo
+    column :certification_tltv
+  end
+
   index do
     column :id, sortable: true
     column :name, sortable: 'fmu_translations.name'

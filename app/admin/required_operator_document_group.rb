@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredOperatorDocumentGroup do
-  # menu parent: 'Operator Documents', priority: 0
   menu false
 
   actions :all, except: :destroy
@@ -12,6 +11,11 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
       auto_link(rod, rod.name.camelize)
     end
     safe_join(sidebar, content_tag('br'))
+  end
+
+  csv do
+    column :position
+    column :name
   end
 
   index do

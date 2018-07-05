@@ -31,6 +31,24 @@ ActiveAdmin.register User do
     end
   end
 
+  csv do
+    column :is_active
+    column 'role'  do |user|
+      user.user_permission&.user_role
+    end
+    column :name
+    column :nickname
+    column :email
+    column 'observer' do |user|
+      user.observer&.name
+    end
+    column 'operator' do |user|
+      user.operator&.name
+    end
+    column :current_sign_in_at
+    column :sign_in_count
+  end
+
   index do
     column('Activation') do |user|
       if user.id != current_user.id

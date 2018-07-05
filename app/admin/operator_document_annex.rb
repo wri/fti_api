@@ -41,6 +41,27 @@ ActiveAdmin.register OperatorDocumentAnnex do
   permit_params :name, :operator_document_id, :status, :expire_date, :start_date,
                 :attachment, :uploaded_by
 
+  csv do
+    column 'exists' do |annex|
+      annex.deleted_at.nil?
+    end
+    column :status
+    column 'operator_document' do |annex|
+      OperatorDocument.unscoped.find(annex.operator_document_id)&.required_operator_document&.name
+    end
+    column 'operator' do |annex|
+      OperatorDocument.unscoped.find(annex.operator_document_id)&.operator&.name
+    end
+
+    column 'user' do |annex|
+      annex.user&.name
+    end
+    column :expire_date
+    column :start_date
+    column :created_at
+    column :uploaded_by
+  end
+
   index do
     bool_column :exists do |od|
       od.deleted_at.nil?

@@ -15,6 +15,18 @@ ActiveAdmin.register FmuOperator do
   filter :start_date
   filter :end_date
 
+  csv do
+    column :current
+    column 'fmu' do |fo|
+      fo.fmu&.name
+    end
+    column 'operator' do |fo|
+      fo.operator&.name
+    end
+    column :start_date
+    column :end_date
+  end
+
   index do
     column :current
     column :fmu
