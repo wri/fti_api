@@ -17,6 +17,15 @@ ActiveAdmin.register Government do
   scope :all
   scope :active, default: true
 
+  csv do
+    column :is_active
+    column 'country' do |g|
+      g.country&.name
+    end
+    column :government_entity
+    column :details
+  end
+
   index do
     column 'Active?', :is_active
     column :country, sortable: 'country_translations.name'

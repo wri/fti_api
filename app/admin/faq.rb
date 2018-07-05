@@ -20,6 +20,14 @@ ActiveAdmin.register Faq do
     end
   end
 
+  csv do
+    column :position
+    column :question
+    column :answer
+    column :created_at
+    column :updated_at
+  end
+
   index do
     column :position
     column :question

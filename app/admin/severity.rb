@@ -35,6 +35,16 @@ ActiveAdmin.register Severity do
     safe_join(sidebar, content_tag('br'))
   end
 
+  csv do
+    column :details
+    column 'subcategory' do |s|
+      s.subcategory&.name
+    end
+    column :level
+    column :created_at
+    column :updated_at
+  end
+
   index do
     column :details, sortable: 'severity_translations.details'
     column :subcategory, sortable: 'subcategory_translations.name'

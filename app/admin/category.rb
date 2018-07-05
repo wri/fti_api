@@ -28,6 +28,13 @@ ActiveAdmin.register Category do
     end
   end
 
+  csv do
+    column :name
+    column :category_type
+    column :created_at
+    column :updated_at
+  end
+
   index do
     column :name
     column :category_type

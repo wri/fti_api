@@ -7,6 +7,20 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
 
   config.order_clause
 
+  csv do
+    column :id
+    column :observation do |od|
+      od.observation&.id
+    end
+    column :name
+    column :user do |od|
+      od.user&.name
+    end
+    column :created_at
+    column :updated_at
+    column :deleted_at
+  end
+
   index do
     column :id, sortable: true
     column :observation, sortable: true

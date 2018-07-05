@@ -8,6 +8,12 @@ ActiveAdmin.register Donor do
                                       collection: Partner.joins(:translations).pluck(:name)
   filter :website, as: :select
 
+  csv do
+    column :name
+    column :website
+    column :priority
+    column :description
+  end
 
   index do
     column :name

@@ -43,6 +43,17 @@ ActiveAdmin.register Subcategory do
     safe_join(sidebar, content_tag('br'))
   end
 
+  csv do
+    column :name
+    column 'category' do |s|
+      s.category&.name
+    end
+    column :subcategory_type
+    column :location_required
+    column :created_at
+    column :updated_at
+  end
+
   index do
     column :name, sortable: 'subcategory_translations.name'
     column :category, sortable: 'category_translations.name'

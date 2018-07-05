@@ -17,6 +17,18 @@ ActiveAdmin.register Observer, as: 'Monitor' do
                 :information_phone, :data_name, :data_email, :data_phone, :organization_type, :delete_logo,
                 translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
+  csv do
+    column :is_active
+    column :countries do |observer|
+      names = observer.countries.map {|c| c.name }
+      names.join(' ').tr(',', ';')
+    end
+    column :observer_type
+    column :name
+    column :created_at
+    column :updated_at
+  end
+
   index do
     column :is_active
     column :countries do |observer|

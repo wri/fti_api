@@ -30,6 +30,32 @@ ActiveAdmin.register Law do
   filter :max_fine, label: 'Maximum Fine'
   filter :min_fine, label: 'Minimum Fine'
 
+  csv do
+    column :country do |l|
+      l.country&.name
+    end
+    column :subcategory do |l|
+      l.subcategory&.name
+    end
+    column 'Illegality as written by law' do |l|
+      l.written_infraction
+    end
+    column 'Legal reference: Illegality' do |l|
+      l.infraction
+    end
+    column 'Legal reference: Penalties' do |l|
+      l.sanctions
+    end
+    column :min_fine
+    column :max_fine
+    column :currency
+    column :penal_servitude
+    column :other_penalties
+    column :apv
+    column :created_at
+    column :updated_at
+  end
+
   index do
     column :country, sortable: 'country_translations.name'
     column :subcategory, sortable: 'subcategory_translations.name'

@@ -26,6 +26,15 @@ ActiveAdmin.register Country do
 
   permit_params translations_attributes: [:id, :locale, :name, :_destroy]
 
+  csv do
+    column :is_active
+    column :id
+    column :iso
+    column :name
+    column :region_iso
+    column :region_name
+  end
+
   index do
     column 'Active?', :is_active, sortable: true
     column :id, sortable: true
