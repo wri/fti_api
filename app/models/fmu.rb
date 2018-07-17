@@ -46,7 +46,9 @@ class Fmu < ApplicationRecord
   # TODO Redo all of those
   scope :filter_by_countries,      ->(country_ids)  { where(country_id: country_ids.split(',')) }
   scope :filter_by_operators,      ->(operator_ids) { joins(:fmu_operators).where(fmu_operators: { current: true, operator_id: operator_ids.split(',') }) }
-  scope :filter_by_free,           ->()             { where.not(id: FmuOperator.where(current: :true)).group(:id) }
+  # this could also be done like: "id not in ( select fmu_id from fmu_operators where \"current\" = true)"
+  # but it might break the method chaining
+  scope :filter_by_free,           ->()             { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
   scope :with_certification_fsc,   ->()             { where certification_fsc: true }
   scope :with_certification_pefc,  ->()             { where certification_pefc: true }
   scope :with_certification_olb,   ->()             { where certification_olb: true }
