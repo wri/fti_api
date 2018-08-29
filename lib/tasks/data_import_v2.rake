@@ -90,11 +90,9 @@ namespace :import do
       puts '* Operator Documents Files... *'
       i = 0
 
-      return unless RequiredOperatorDocumentGroup.where(name: 'Cameroon').count.zero?
-
       OperatorDocument.transaction do
         puts ' ... Creating Required Operator Documents and Groups ...'
-        rodg = RequiredOperatorDocumentGroup.create name: 'Cameroon'
+        rodg = RequiredOperatorDocumentGroup.last
 
         rod1 = RequiredOperatorDocumentFmu.new(
             required_operator_document_group: rodg, country: Country.find_by(iso: 'CMR'),
