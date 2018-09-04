@@ -43,7 +43,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel 'New Producers' do
           table_for Operator.inactive.order('updated_at DESC').limit(20).each do
             column('Name') { |o| link_to o.name, admin_producer_path(o.id) }
-            column('Country') { |o| o.country.name }
+            column('Country') { |o| o.country.present? ? o.country.name : 'No country' }
           end
         end
       end
