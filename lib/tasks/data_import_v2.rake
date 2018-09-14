@@ -60,6 +60,41 @@ namespace :import do
       puts 'Finished FMUs'
     end
 
+    desc 'Loads fmus (ventes de coupe) data from a csv file'
+    task ventes_de_coupe: :environment do
+      puts '* FMUs (ventes de coupe)... *'
+      filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'v2', 'ventes_de_coupe.geojson'))
+
+      file = File.read(filename)
+      data_hash = JSON.parse(file)
+      data_hash['features'].each do |row|
+        properties = row['properties']
+        name = properties['nom_vc']
+        country_iso = 'CMR'
+
+        next if Fmu.where(name: name).any?
+
+        fmu = Fmu.where(name: name).first_or_create
+
+        if country_iso.present?
+          country = Country.find_by(iso: country_iso)
+          fmu.country = country if country.present?
+        end
+        fmu.save!(validate: false)
+
+        # Updating the geojson
+
+        geojson = row
+        geojson['properties']['id'] = fmu.id
+        geojson['properties']['operator_id'] = fmu.operator.id if fmu.operator.present?
+        geojson['properties']['fmu_type'] = 'ventes_de_coupe'
+        fmu.geojson = geojson
+        fmu.save!(validate: false)
+
+      end
+      puts 'Finished FMUs (ventes_de_coupe)'
+    end
+
     desc 'Load operator-fmus from a csv file'
     task operator_fmus: :environment do
       puts '* operator-fmus... *'
@@ -70,7 +105,7 @@ namespace :import do
         CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8') do |row|
           data_row = row.to_h
 
-          operator = Operator.where(name: data_row['exploitant']).first
+          operator = Operator.where(name: data_row['attributai']).first
           Fmu.where("geojson @> '{\"properties\": {\"nom_conces\": \"#{data_row['nom_conces']}\"}}'").each do |fmu|
             start_date = Time.at(data_row['date_attr'].to_f / 1000) if data_row['date_attr'].present?
 
@@ -148,8 +183,21 @@ namespace :import do
 
       Rake::Task['import:v2:operators'].invoke
       Rake::Task['import:v2:fmus'].invoke
+      Rake::Task['import:v2:ventes_de_coupe'].invoke
       Rake::Task['import:v2:operator_fmus'].invoke
       Rake::Task['import:v2:operator_document_files'].invoke
+    end
+
+    desc 'Clears all the documents imported in v2'
+    task clear: :environment do
+      puts '* Deleting changes for Cameroon... *'
+      Operator.transaction do
+        country = Country.find_by iso: 'CMR'
+        Operator.where(country: country).find_each { |o| o.observations.destroy_all }
+        Operator.where(country: country).destroy_all
+        Fmu.where(country: country).destroy_all
+      end
+      puts '* Cameroon changes deleted... *'
     end
   end
 end
