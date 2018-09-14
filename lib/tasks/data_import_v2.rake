@@ -193,7 +193,6 @@ namespace :import do
       puts '* Deleting changes for Cameroon... *'
       Operator.transaction do
         country = Country.find_by iso: 'CMR'
-        Operator.where(country: country).find_each { |o| o.observations.destroy_all }
         Operator.where(country: country).destroy_all
         Fmu.where(country: country).destroy_all
       end
