@@ -41,7 +41,7 @@ class Operator < ApplicationRecord
   has_many :all_operator_documents, class_name: 'OperatorDocument'
 
   has_many :observations, -> { active },  inverse_of: :operator, dependent: :destroy
-  has_many :all_observations, inverse_of: :operator, dependent: :destroy
+  has_many :all_observations, class_name: 'Observation', inverse_of: :operator, dependent: :destroy
   has_many :users, inverse_of: :operator, dependent: :destroy
 
   has_many :fmu_operators, -> { where(current: true) }, inverse_of: :operator, dependent: :destroy
