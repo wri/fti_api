@@ -54,7 +54,7 @@ namespace :import do
         geojson = row
         geojson['properties']['id'] = fmu.id
         geojson['properties']['operator_id'] = fmu.operator.id if fmu.operator.present?
-        geojson['properties']['fmu_type'] = properties['nom_foret'].eql?('UFA') ? 'ufa' : 'communal'
+        geojson['properties']['fmu_type'] = properties['desc_type'].eql?('UFA') ? 'ufa' : 'communal'
         fmu.geojson = geojson
         fmu.save!(validate: false)
 
