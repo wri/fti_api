@@ -19,6 +19,7 @@ namespace :import do
           operator.operator_type = 'Unknown'
           operator.country = country
           operator.operator_id = data_row['nrc_ste']
+          operator.fa_id = data_row['nrc_ste']
           operator.is_active = true
           operator.save!
         end
@@ -53,6 +54,7 @@ namespace :import do
         geojson = row
         geojson['properties']['id'] = fmu.id
         geojson['properties']['operator_id'] = fmu.operator.id if fmu.operator.present?
+        geojson['properties']['fmu_type'] = properties['nom_foret'].eql?('UFA') ? 'ufa' : 'communal'
         fmu.geojson = geojson
         fmu.save!(validate: false)
 
