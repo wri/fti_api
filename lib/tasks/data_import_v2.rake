@@ -37,6 +37,7 @@ namespace :import do
       data_hash['features'].each do |row|
         properties = row['properties']
         name = properties['nom_foret']
+        operator_name = properties['attributai']
         country_iso = 'CMR'
 
         next if Fmu.where(name: name).any?
@@ -53,8 +54,12 @@ namespace :import do
 
         geojson = row
         geojson['properties']['id'] = fmu.id
-        geojson['properties']['operator_id'] = fmu.operator.id if fmu.operator.present?
         geojson['properties']['fmu_type'] = properties['desc_type'].eql?('UFA') ? 'ufa' : 'communal'
+        if operator_name.present?
+          operator = Operator.find_by(name: operator_name)
+          geojson['properties']['operator_id'] = operator.id if operator.present?
+          geojson['properties']['company_na'] = operator_name if operator.present?
+        end
         fmu.geojson = geojson
         fmu.save!(validate: false)
 
@@ -72,11 +77,13 @@ namespace :import do
       data_hash['features'].each do |row|
         properties = row['properties']
         name = properties['nom_vc']
+        operator_name = properties['attributai']
         country_iso = 'CMR'
 
         next if Fmu.where(name: name).any?
 
         fmu = Fmu.where(name: name).first_or_create
+
 
         if country_iso.present?
           country = Country.find_by(iso: country_iso)
@@ -88,8 +95,13 @@ namespace :import do
 
         geojson = row
         geojson['properties']['id'] = fmu.id
-        geojson['properties']['operator_id'] = fmu.operator.id if fmu.operator.present?
         geojson['properties']['fmu_type'] = 'ventes_de_coupe'
+        if operator_name.present?
+          operator = Operator.find_by(name: operator_name)
+          geojson['properties']['operator_id'] = operator.id if operator.present?
+          geojson['properties']['company_na'] = operator_name if operator.present?
+        end
+
         fmu.geojson = geojson
         fmu.save!(validate: false)
 
