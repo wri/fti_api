@@ -107,9 +107,8 @@ ActiveAdmin.register Observation do
 
   filter :validation_status, as: :select, collection:
       Observation.validation_statuses.sort
-  filter :country, as: :select, collection:
-      Country.joins(:observations).with_translations(I18n.locale)
-          .order('country_translations.name')
+  filter :country, as: :select,
+          collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
   filter :observers, label: 'Observers', as: :select,
          collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
   filter :operator, label: 'Operator', as: :select,
