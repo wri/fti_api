@@ -57,9 +57,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
   scope :active
   scope :inactive
 
-  filter :country, as: :select, collection:
-      Country.joins(:operators).with_translations(I18n.locale)
-          .order('country_translations.name')
+  filter :country, as: :select,
+          collection: -> { Country.joins(:operators).with_translations(I18n.locale) .order('country_translations.name') }
   filter :translations_name_contains,
          as: :select, label: 'Name',
          collection: Operator.with_translations(I18n.locale)
