@@ -146,6 +146,9 @@ ActiveAdmin.setup do |config|
     left_sidebar!(collapsed: true) if respond_to?(:left_sidebar!)
   end
 
+  # Set default locale for active admin
+  config.before_action :set_admin_locale
+
   # == Localize Date/Time Format
   #
   # Set the localize format to display dates and times.
