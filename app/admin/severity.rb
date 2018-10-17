@@ -4,7 +4,7 @@ ActiveAdmin.register Severity do
   # menu parent: 'Settings', priority: 3
   menu false
 
-  actions :show, :edit, :index, :update
+  actions :show, :edit, :index, :update, :new, :create
 
   config.order_clause
 
@@ -14,7 +14,7 @@ ActiveAdmin.register Severity do
     end
   end
 
-  permit_params translations_attributes: [:id, :locale, :details, :_destroy]
+  permit_params :subcategory_id, :level, translations_attributes: [:id, :locale, :details, :_destroy]
 
 
   filter :translations_details_contains,
@@ -23,7 +23,7 @@ ActiveAdmin.register Severity do
                          .order('severity_translations.details').pluck(:details)
   filter :subcategory, as: :select,
          collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :level, as: :select, collection: [0, 1, 2, 3]
+  filter :level, as: :select, collection: 0..3
   filter :created_at
   filter :updated_at
 
@@ -56,9 +56,10 @@ ActiveAdmin.register Severity do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
+    editing = object.new_record? ? false : true
     f.inputs 'Severity Details' do
-      f.input :subcategory,  input_html: { disabled: true }
-      f.input :level, input_html: { disabled: true }
+      f.input :subcategory,  input_html: { disabled: editing }
+      f.input :level, input_html: { disabled: editing }
     end
 
     f.inputs 'Translated fields' do
