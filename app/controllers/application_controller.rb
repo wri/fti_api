@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
   def access_denied(exception)
     redirect_to admin_dashboard_path, alert: exception.message
   end
+
+  def set_admin_locale
+    I18n.locale = :fr
+  end
 end
