@@ -22,8 +22,7 @@ ActiveAdmin.register Severity do
          collection: Severity.with_translations(I18n.locale)
                          .order('severity_translations.details').pluck(:details)
   filter :subcategory, as: :select,
-         collection: Subcategory.with_translations(I18n.locale)
-                         .order('subcategory_translations.name')
+         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :level, as: :select, collection: 0..3
   filter :created_at
   filter :updated_at

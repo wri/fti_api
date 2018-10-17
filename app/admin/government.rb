@@ -35,17 +35,16 @@ ActiveAdmin.register Government do
     actions
   end
 
-  filter :country, as: :select, collection:
-      Country.joins(:governments).with_translations(I18n.locale)
-          .order('country_translations.name')
+  filter :country, as: :select,
+          collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_government_entity_contains,
          as: :select, label: 'Entity',
          collection: Government.with_translations(I18n.locale)
-                         .order('government_translations.government_entity').pluck(:government_entity)
+                         .order('government_translations.government_entity').pluck(:government_entity).uniq
   filter :translations_details_contains,
          as: :select, label: 'Details',
          collection: Government.with_translations(I18n.locale)
-                         .order('government_translations.details').pluck(:details)
+                         .order('government_translations.details').pluck(:details).uniq
 
   sidebar 'Observations', only: :show do
     attributes_table_for resource do

@@ -23,10 +23,9 @@ ActiveAdmin.register Fmu do
   filter :id, as: :select
   filter :translations_name_contains,
          as: :select, label: 'Name',
-         collection: Fmu.with_translations(I18n.locale).order('fmu_translations.name').pluck(:name)
-  filter :country, as: :select, collection:
-      Country.joins(:fmus).with_translations(I18n.locale)
-          .order('country_translations.name')
+         collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
+  filter :country, as: :select,
+          collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator_in_all, label: 'Operator', as: :select,
          collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
 
