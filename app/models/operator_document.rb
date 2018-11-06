@@ -116,6 +116,7 @@ class OperatorDocument < ApplicationRecord
 
   def delete_previous_pending_document
     pending_documents = OperatorDocument.where(operator_id: self.operator_id,
+                                               fmu_id: self.fmu_id,
                                                required_operator_document_id: self.required_operator_document_id,
                                                status: OperatorDocument.statuses[:doc_pending])
     pending_documents.each {|x| x.destroy}
