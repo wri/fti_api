@@ -35,7 +35,7 @@ class OperatorDocument < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
 
-  before_validation :set_expire_date, unless: :expire_date_changed?
+  before_validation :set_expire_date, unless: :expire_date?
 
   validates_presence_of :start_date, if: :attachment?
   validates_presence_of :expire_date, if: :attachment?
