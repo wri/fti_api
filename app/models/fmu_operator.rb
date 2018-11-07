@@ -71,10 +71,10 @@ class FmuOperator < ApplicationRecord
         where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date IS NULL OR end_date >= '#{Date.today}'::date)")
 
     # Updates the operator documents
-    to_deactivate.find_each{ |x| x.current = false; x.save! }
+    to_deactivate.find_each{ |x| x.current = false; x.save!(validate: false) }
     to_activate.find_each do |x|
       x.current = true
-      x.save!
+      x.save!(validate: false)
 
       query = "update fmus
 set geojson = jsonb_set(geojson, '{properties}',
