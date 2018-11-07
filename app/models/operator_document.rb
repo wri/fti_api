@@ -91,8 +91,6 @@ class OperatorDocument < ApplicationRecord
   scope :required,  -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user, ->(operator_id) { where(operator_id: operator_id) }
 
-
-
   private
 
   def insure_unity
@@ -124,7 +122,7 @@ class OperatorDocument < ApplicationRecord
 
   def reason_or_attachment
     if self.attachment.present? && self.reason.present?
-      self.errors[:reason] << 'Cannot have a reason not to have a documen '
+      self.errors[:reason] << 'Cannot have a reason not to have a document'
     end
   end
 
