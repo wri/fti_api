@@ -35,7 +35,7 @@ class OperatorDocument < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
 
-  before_validation :set_expire_date, unless: :expire_date_changed?
+  before_validation :set_expire_date, unless: :expire_date?
 
   validates_presence_of :start_date, if: :attachment?
   validates_presence_of :expire_date, if: :attachment?
@@ -91,8 +91,6 @@ class OperatorDocument < ApplicationRecord
   scope :required,  -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user, ->(operator_id) { where(operator_id: operator_id) }
 
-
-
   private
 
   def insure_unity
@@ -116,6 +114,7 @@ class OperatorDocument < ApplicationRecord
 
   def delete_previous_pending_document
     pending_documents = OperatorDocument.where(operator_id: self.operator_id,
+                                               fmu_id: self.fmu_id,
                                                required_operator_document_id: self.required_operator_document_id,
                                                status: OperatorDocument.statuses[:doc_pending])
     pending_documents.each {|x| x.destroy}
@@ -123,7 +122,7 @@ class OperatorDocument < ApplicationRecord
 
   def reason_or_attachment
     if self.attachment.present? && self.reason.present?
-      self.errors[:reason] << 'Cannot have a reason not to have a documen '
+      self.errors[:reason] << 'Cannot have a reason not to have a document'
     end
   end
 

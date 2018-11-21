@@ -23,6 +23,8 @@ class FmuOperator < ApplicationRecord
   validate :one_active_per_fmu
   validate :non_colliding_dates
 
+  after_save :update_documents_list
+
 
   # Sets the start date as today, if none is provided
   def set_current_start_date
@@ -40,7 +42,8 @@ class FmuOperator < ApplicationRecord
   # Insures only one operator is active per fmu
   def one_active_per_fmu
     return false if fmu.blank?
-    unless fmu.fmu_operators.where(current: true).count <= 1
+    count = persisted? ? 1 : 0
+    unless fmu.fmu_operators.where(current: true).count <= count
       errors.add(:current, 'There can only be one active operator at a time')
     end
   end
@@ -71,12 +74,13 @@ class FmuOperator < ApplicationRecord
         where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date IS NULL OR end_date >= '#{Date.today}'::date)")
 
     # Updates the operator documents
-    to_deactivate.find_each{ |x| x.current = false; x.save! }
+    to_deactivate.find_each{ |x| x.current = false; x.save!(validate: false) }
     to_activate.find_each do |x|
       x.current = true
-      x.save!
+      x.save!(validate: false)
 
-      query = "update fmus
+      query = "
+update fmus
 set geojson = jsonb_set(geojson, '{properties}',
     (SELECT JSONB_BUILD_OBJECT('properties', geojson->'properties' || '{\"company_na\": \"#{x.operator&.name}\", \"operator_id\": #{x.operator_id}}'::JSONB)
     FROM fmus
@@ -84,6 +88,28 @@ set geojson = jsonb_set(geojson, '{properties}',
 WHERE id = #{x.fmu_id};"
 
       ActiveRecord::Base.connection.execute(query)
+    end
+  end
+
+  private
+
+  # Updates the list of documents for this FMU
+  def update_documents_list
+    current_operator = self.fmu.operator.id rescue nil
+
+    OperatorDocumentFmu.transaction do
+      destroyed_count = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator).delete_all
+      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator}"
+
+      return unless current_operator
+      RequiredOperatorDocumentFmu.where(country_id: fmu.country_id).each do |rodf|
+        OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
+                                  operator_id: current_operator,
+                                  fmu_id: fmu_id).first_or_create do |odf|
+          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true) unless odf.persisted?
+        end
+      end
+      Rails.logger.info "Create the documents for operator #{current_operator} and FMU #{fmu_id}"
     end
   end
 end

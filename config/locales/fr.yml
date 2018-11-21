@@ -3,6 +3,11 @@ fr:
   locale_name: "Français"
   active_admin:
     powered_by: "Admin Backoffice"
+    globalize:
+      language:
+        en: "Anglais"
+        fr: "Français"
+        zh-CN: "Chinois"
   activerecord:
     errors:
       messages:
