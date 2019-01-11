@@ -212,5 +212,20 @@ namespace :import do
       end
       puts '* Cameroon changes deleted... *'
     end
+
+    desc 'Adds operator to fmus'
+    task fmus_to_operators: :environment do
+      Fmu.find_each do |fmu|
+        next if fmu.operator.present?
+        sql = "SELECT geojson->'properties'->>'company_na' as name from fmus where id = #{fmu.id};"
+        operator_name = ActiveRecord::Base.connection.execute(sql)[0]['name']
+        next if operator_name.blank?
+        operator = Operator.with_translations.where(name: operator_name).first
+        next if operator.blank?
+        fmu.operator = operator
+        fmu.save!
+        puts "Added operator #{operator_name} to fmu #{fmu.id}"
+      end
+    end
   end
 end
