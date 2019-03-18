@@ -74,7 +74,7 @@ class Operator < ApplicationRecord
 
   scope :active,   -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
-  scope :fa_operator, -> { where.not(fa_id: nil) }
+  scope :fa_operator, -> { where("fa_id <> ''") }
 
   default_scope { includes(:translations) }
 
