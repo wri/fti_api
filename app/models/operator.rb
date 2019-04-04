@@ -41,6 +41,7 @@ class Operator < ApplicationRecord
   has_many :all_operator_documents, class_name: 'OperatorDocument'
 
   has_many :observations, -> { active },  inverse_of: :operator, dependent: :destroy
+  has_many :all_observations, class_name: 'Observation', inverse_of: :operator, dependent: :destroy
   has_many :users, inverse_of: :operator, dependent: :destroy
 
   has_many :fmu_operators, -> { where(current: true) }, inverse_of: :operator, dependent: :destroy
@@ -73,7 +74,7 @@ class Operator < ApplicationRecord
 
   scope :active,   -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
-  scope :fa_operator, -> { where.not(fa_id: nil) }
+  scope :fa_operator, -> { where("fa_id <> ''") }
 
   default_scope { includes(:translations) }
 
