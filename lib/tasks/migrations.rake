@@ -8,20 +8,20 @@ namespace :environment_migration do
     puts "Starting to migrate staging for date #{date}"
     ActiveRecord::Base.transaction do
       ActiveRecord::Base.connection.execute("SET session_replication_role = 'replica'")
-      # Remove indexes
-      puts "Removing Indexes"
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_req_op_doc_group_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_operator_translations_on_operator_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_64b55c0cec158f1717cc5d775ae87c7a48f1cc59;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_eed74ed5a0934f32c4b075e5beee98f1ebf34d19;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_fmu_translations_on_fmu_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_fmu_operators_on_fmu_id_and_operator_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_fmu_operators_on_operator_id_and_fmu_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_operator_documents_on_required_operator_document_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_operator_documents_on_operator_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_operator_documents_on_fmu_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_operator_document_annexes_on_operator_document_id;')
-      # ActiveRecord::Base.connection.execute('DROP INDEX index_operator_document_annexes_on_user_id;')
+
+      # Removing specific objects for duplicated entries
+      puts "Removing specific records"
+      ActiveRecord::Base.connection.execute("DELETE FROM api_keys where user_id in (63, 67, 69)")
+      ActiveRecord::Base.connection.execute("DELETE FROM user_permissions where user_id in (63, 67, 69)")
+      ActiveRecord::Base.connection.execute("DELETE FROM users where id in (63, 67, 69)")
+
+      # Updating specific entries
+      puts 'Updating specific entries'
+      ActiveRecord::Base.connection.execute("UPDATE operator_documents set user_id = 27 where user_id = 63")
+      ActiveRecord::Base.connection.execute("UPDATE operator_document_annexes set user_id = 27 where user_id = 63")
+
+      ActiveRecord::Base.connection.execute("UPDATE operator_documents set user_id = 69 where user_id = 107")
+      ActiveRecord::Base.connection.execute("UPDATE operator_document_annexes set user_id = 69 where user_id = 107")
 
       # Remove old records
       puts "Removing old records"
@@ -39,6 +39,7 @@ namespace :environment_migration do
       ActiveRecord::Base.connection.execute("DELETE FROM fmu_translations where created_at < '#{date}'")
       ActiveRecord::Base.connection.execute("DELETE FROM fmus where created_at < '#{date}'")
 
+      ActiveRecord::Base.connection.execute("DELETE FROM user_permissions where created_at < '#{date}'")
       ActiveRecord::Base.connection.execute("DELETE FROM api_keys where created_at < '#{date}'")
       ActiveRecord::Base.connection.execute("DELETE FROM users where created_at < '#{date}'")
 
@@ -48,18 +49,26 @@ namespace :environment_migration do
 
       # Update ids
       puts "Update Ids"
+      ActiveRecord::Base.connection.execute("UPDATE user_permissions set id = id + 10000, user_id = user_id + 10000")
+      ActiveRecord::Base.connection.execute("UPDATE api_keys set id = id + 10000, user_id = user_id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE users set id = id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE operators set id = id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE operator_translations set id = id + 10000, operator_id = operator_id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE fmus set id = id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE fmu_translations set id = id + 10000, fmu_id = fmu_id + 10000")
-      #ActiveRecord::Base.connection.execute("UPDATE required_operator_document_groups set id = id + 10000")
-      #ActiveRecord::Base.connection.execute("UPDATE required_operator_document_group_translations set id = id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE fmu_operators set id = id + 10000, fmu_id = fmu_id + 10000, operator_id = operator_id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE required_operator_documents set id = id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE required_operator_document_translations set id = id + 10000, required_operator_document_id = required_operator_document_id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE operator_documents set id = id + 10000, required_operator_document_id = required_operator_document_id + 10000, fmu_id = fmu_id + 10000, operator_id = operator_id + 10000, user_id = user_id + 10000")
       ActiveRecord::Base.connection.execute("UPDATE operator_document_annexes set id = id + 10000, operator_document_id = operator_document_id + 10000, user_id = user_id + 10000")
+
+
+      # HACK
+      puts "Removing existing required operator document groups"
+      ActiveRecord::Base.connection.execute("DELETE FROM required_operator_document_groups where id <> 11")
+      ActiveRecord::Base.connection.execute("DELETE FROM required_operator_document_group_translations where required_operator_document_group_id <> 11")
+
+
 
       ActiveRecord::Base.connection.execute("SET session_replication_role = 'origin'")
 
@@ -106,10 +115,17 @@ namespace :environment_migration do
           end
         end
       end
-
-      # Create pg_dump
-      puts "Creating dump"
-      sh "pg_dump --data-only -U postgres -d fti_api_staging -t public.operators -t public.operator_translations -t public.fmus -t public.fmu_translations -t public.required_operator_document_groups -t public.required_operator_document_group_translations -t public.required_operator_documents -t public.required_operator_document_translations -t public.fmu_operators -t public.operator_documents -t public.operator_document_annexes -t public.users --file staging#{Date.today.to_i.to_s}.dump"
     end
+
+    # Create pg_dump
+    puts "Creating dump"
+    sh "pg_dump --data-only -U postgres -d fti_api_staging -Fc -t public.operators -t public.operator_translations -t public.fmus -t public.fmu_translations -t public.required_operator_document_groups -t public.required_operator_document_group_translations -t public.required_operator_documents -t public.required_operator_document_translations -t public.fmu_operators -t public.operator_documents -t public.operator_document_annexes -t public.users -t public.api_keys -t public.user_permissions --file staging.dump"
+  end
+
+  desc 'Imports a file into production'
+  task :import, [:file] => :environment do |_task, args|
+    return unless Rails.env.production?
+    file = args[:file] || 'staging.dump'
+    sh "pg_restore -v -d fti_api_production #{file}"
   end
 end
