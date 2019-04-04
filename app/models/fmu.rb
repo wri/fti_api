@@ -28,11 +28,12 @@ class Fmu < ApplicationRecord
   belongs_to :country, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu
 
-  has_many :fmu_operators, inverse_of: :fmu
+  has_many :fmu_operators, inverse_of: :fmu, dependent: :destroy
   has_many :operators, through: :fmu_operators
   has_one :fmu_operator, ->{ where(current: true) }
   has_one :operator, through: :fmu_operator
 
+  has_many :operator_document_fmus, dependent: :destroy
 
   accepts_nested_attributes_for :operators
 
@@ -40,6 +41,7 @@ class Fmu < ApplicationRecord
   validates :name, presence: true
 
   before_save :update_geojson
+  before_destroy :really_destroy_documents
 
   default_scope { includes(:translations) }
 
@@ -99,5 +101,12 @@ class Fmu < ApplicationRecord
               matches.any? ? matches : nil
             } do |parent|
     parent.table[:id]
+  end
+
+  private
+
+  def really_destroy_documents
+    mark_for_destruction # Hack to work with the hard delete of operator documents
+    ActiveRecord::Base.connection.execute("DELETE FROM operator_documents WHERE fmu_id = #{id}")
   end
 end

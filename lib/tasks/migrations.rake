@@ -1,6 +1,8 @@
 namespace :environment_migration do
   desc 'Generates a json with the previous database'
   task :export, [:date] => :environment do |_task, args|
+    Rails.logger.level = Logger::DEBUG
+    ActiveRecord::Base.logger = Logger.new STDOUT
     return unless Rails.env.staging?
     return unless args[:date].present?
     date = args[:date] # Basedate: 2019-08-28
@@ -76,45 +78,45 @@ namespace :environment_migration do
       require 'fileutils'
 
       # Update folder names
-      puts "Renaming folders"
-      # Operators
-      Dir.chdir(Rails.root.join('public', 'uploads', 'operator', 'logo')) do
-        folders = Dir.glob('*').select { |f| File.directory? f }
-        folders.each do |f|
-          operator = Operator.where(id: f.to_i + 10000).first
-          if operator.present?
-            File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
-          else
-            FileUtils.rm_r "./#{f}"
-          end
-        end
-      end
-
-      # Operator documents
-      Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document', 'attachment')) do
-        folders = Dir.glob('*').select { |f| File.directory? f }
-        folders.each do |f|
-          operator_document = OperatorDocument.where(id: f.to_i + 10000).first
-          if operator_document.present?
-            File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
-          else
-            FileUtils.rm_r "./#{f}"
-          end
-        end
-      end
-
-      # Annexes
-      Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document_annex', 'attachment')) do
-        folders = Dir.glob('*').select { |f| File.directory? f }
-        folders.each do |f|
-          operator_document_annex = OperatorDocumentAnnex.where(id: f.to_i + 10000).first
-          if operator_document_annex.present?
-            File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
-          else
-            FileUtils.rm_r "./#{f}"
-          end
-        end
-      end
+      # puts "Renaming folders"
+      # # Operators
+      # Dir.chdir(Rails.root.join('public', 'uploads', 'operator', 'logo')) do
+      #   folders = Dir.glob('*').select { |f| File.directory? f }
+      #   folders.each do |f|
+      #     operator = Operator.where(id: f.to_i + 10000).first
+      #     if operator.present?
+      #       File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
+      #     else
+      #       FileUtils.rm_r "./#{f}"
+      #     end
+      #   end
+      # end
+      #
+      # # Operator documents
+      # Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document', 'attachment')) do
+      #   folders = Dir.glob('*').select { |f| File.directory? f }
+      #   folders.each do |f|
+      #     operator_document = OperatorDocument.where(id: f.to_i + 10000).first
+      #     if operator_document.present?
+      #       File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
+      #     else
+      #       FileUtils.rm_r "./#{f}"
+      #     end
+      #   end
+      # end
+      #
+      # # Annexes
+      # Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document_annex', 'attachment')) do
+      #   folders = Dir.glob('*').select { |f| File.directory? f }
+      #   folders.each do |f|
+      #     operator_document_annex = OperatorDocumentAnnex.where(id: f.to_i + 10000).first
+      #     if operator_document_annex.present?
+      #       File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
+      #     else
+      #       FileUtils.rm_r "./#{f}"
+      #     end
+      #   end
+      # end
     end
 
     # Create pg_dump
@@ -123,9 +125,93 @@ namespace :environment_migration do
   end
 
   desc 'Imports a file into production'
-  task :import, [:file] => :environment do |_task, args|
+  task :import, [:date, :file] => :environment do |_task, args|
+    Rails.logger.level = Logger::DEBUG
+    ActiveRecord::Base.logger = Logger.new STDOUT
+
     return unless Rails.env.production?
+    return unless args[:date].present?
+    date = args[:date] # Basedate: 2019-08-28
     file = args[:file] || 'staging.dump'
+
+    # Hacks
+    # Deal with old operators
+
+    Operator.find(557).destroy!
+    Operator.find(371).destroy!
+    Operator.find(374).destroy!
+    Operator.find(377).destroy!
+    Operator.find(378).destroy!
+    Operator.find(376).destroy!
+    Operator.find(372).destroy!
+    Operator.find(373).destroy!
+    Operator.find(375).destroy!
+    Operator.find(379).destroy!
+    Operator.find(380).destroy!
+
+    # Delete docs for: 387, 491, 505
+    # 555 - Replace observations
+
+    # Restore database
     sh "pg_restore -v -d fti_api_production #{file}"
+
+    ActiveRecord::Base.transaction do
+
+      operators_to_remove = []
+      fmus_to_remove = []
+      Operator.where("country_id = 45 and created_at < '#{date}'").find_each do |operator|
+        operator.all_observations.find_each do |obs|
+          if obs.fmu_id
+            fmu = Fmu.find(obs.fmu_id)
+            new_fmu = Fmu.with_translations.where(name: fmu.name).order(:id).last
+            if new_fmu.id != fmu.id
+              obs.fmu = new_fmu
+              obs.save
+              fmus_to_remove << fmu.id
+            end
+          end
+          new_operator = Operator.with_translations.where(name: operator.name).order(:id).last
+          next if new_operator.id == operator.id
+          obs.operator = new_operator
+          obs.save
+          operators_to_remove << operator.id
+        end
+      end
+
+      operators_to_remove.uniq!
+      fmus_to_remove.uniq!
+
+      # Remove deleted operators
+      operators_to_remove.each do |operator_id|
+        Operator.find(operator_id).destroy!
+      end
+
+      # Remove deleted fmus
+      fmus_to_remove.each do |fmu_id|
+        ActiveRecord::Base.connection.execute("DELETE FROM operator_documents where fmu_id = '#{fmu_id}'")
+        Fmu.find(fmu_id).destroy!
+      end
+
+      # Remove duplicated operators
+      Operator.where("country_id = 45 and id < 10000").find_each do |operator|
+        next if operator.observations.any?
+        operator.destroy!
+      end
+
+      # Remove duplicated fmus
+      Fmu.where("country_id = 45 and id < 10000").find_each do |fmu|
+        next if fmu.observations.any?
+        ActiveRecord::Base.connection.execute("DELETE FROM operator_documents where fmu_id = '#{fmu.id}'")
+        fmu.destroy!
+      end
+
+      # Create the documents for operators
+      Operator.where("country_id = 45").find_each do |operator|
+        operator.rebuild_documents
+      end
+
+
+      puts "finished"
+    end
   end
 end
