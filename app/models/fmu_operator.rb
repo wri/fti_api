@@ -17,6 +17,7 @@ class FmuOperator < ApplicationRecord
 
   belongs_to :fmu,        required: true
   belongs_to :operator,   required: true
+
   before_validation     :set_current_start_date
   validates_presence_of :start_date
   validate :start_date_is_earlier

@@ -257,6 +257,6 @@ class Operator < ApplicationRecord
 
   def really_destroy_documents
     mark_for_destruction # Hack to work with the hard delete of operator documents
-    all_operator_documents.find_each {|x| x.really_destroy!}
+    ActiveRecord::Base.connection.execute("DELETE FROM operator_documents WHERE operator_id = #{id}")
   end
 end
