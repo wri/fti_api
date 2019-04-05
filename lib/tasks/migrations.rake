@@ -79,44 +79,44 @@ namespace :environment_migration do
 
       # Update folder names
       # puts "Renaming folders"
-      # # Operators
-      # Dir.chdir(Rails.root.join('public', 'uploads', 'operator', 'logo')) do
-      #   folders = Dir.glob('*').select { |f| File.directory? f }
-      #   folders.each do |f|
-      #     operator = Operator.where(id: f.to_i + 10000).first
-      #     if operator.present?
-      #       File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
-      #     else
-      #       FileUtils.rm_r "./#{f}"
-      #     end
-      #   end
-      # end
-      #
-      # # Operator documents
-      # Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document', 'attachment')) do
-      #   folders = Dir.glob('*').select { |f| File.directory? f }
-      #   folders.each do |f|
-      #     operator_document = OperatorDocument.where(id: f.to_i + 10000).first
-      #     if operator_document.present?
-      #       File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
-      #     else
-      #       FileUtils.rm_r "./#{f}"
-      #     end
-      #   end
-      # end
-      #
-      # # Annexes
-      # Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document_annex', 'attachment')) do
-      #   folders = Dir.glob('*').select { |f| File.directory? f }
-      #   folders.each do |f|
-      #     operator_document_annex = OperatorDocumentAnnex.where(id: f.to_i + 10000).first
-      #     if operator_document_annex.present?
-      #       File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
-      #     else
-      #       FileUtils.rm_r "./#{f}"
-      #     end
-      #   end
-      # end
+      # Operators
+      Dir.chdir(Rails.root.join('public', 'uploads', 'operator', 'logo')) do
+        folders = Dir.glob('*').select { |f| File.directory? f }
+        folders.each do |f|
+          operator = Operator.where(id: f.to_i + 10000).first
+          if operator.present?
+            File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
+          else
+            FileUtils.rm_r "./#{f}"
+          end
+        end
+      end
+
+      # Operator documents
+      Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document', 'attachment')) do
+        folders = Dir.glob('*').select { |f| File.directory? f }
+        folders.each do |f|
+          operator_document = OperatorDocument.where(id: f.to_i + 10000).first
+          if operator_document.present?
+            File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
+          else
+            FileUtils.rm_r "./#{f}"
+          end
+        end
+      end
+
+      # Annexes
+      Dir.chdir(Rails.root.join('public', 'uploads', 'operator_document_annex', 'attachment')) do
+        folders = Dir.glob('*').select { |f| File.directory? f }
+        folders.each do |f|
+          operator_document_annex = OperatorDocumentAnnex.where(id: f.to_i + 10000).first
+          if operator_document_annex.present?
+            File.rename "./#{f}", "./#{(f.to_i + 10000).to_s}"
+          else
+            FileUtils.rm_r "./#{f}"
+          end
+        end
+      end
     end
 
     # Create pg_dump
@@ -135,21 +135,30 @@ namespace :environment_migration do
     file = args[:file] || 'staging.dump'
 
     # Hacks
-    # Deal with old operators
 
-    Operator.find(557).destroy!
-    Operator.find(371).destroy!
-    Operator.find(374).destroy!
-    Operator.find(377).destroy!
-    Operator.find(378).destroy!
-    Operator.find(376).destroy!
-    Operator.find(372).destroy!
-    Operator.find(373).destroy!
-    Operator.find(375).destroy!
-    Operator.find(379).destroy!
-    Operator.find(380).destroy!
+    ActiveRecord::Base.transaction do
+      # Remove test required operator documents
+      ActiveRecord::Base.connection.execute("DELETE FROM operator_documents where required_operator_document_id in (127, 128) ")
+      RequiredOperatorDocument.find(127).really_destroy!
+      RequiredOperatorDocument.find(128).really_destroy!
 
+      # Deal with old operators
+
+      Operator.find(557).destroy!
+      Operator.find(371).destroy!
+      Operator.find(374).destroy!
+      Operator.find(377).destroy!
+      Operator.find(378).destroy!
+      Operator.find(376).destroy!
+      Operator.find(372).destroy!
+      Operator.find(373).destroy!
+      Operator.find(375).destroy!
+      Operator.find(379).destroy!
+      Operator.find(380).destroy!
+
+    end
     # Delete docs for: 387, 491, 505
+    ActiveRecord::Base.connection.execute("DELETE FROM operator_documents where operator_id in (387, 491, 505) ")
     # 555 - Replace observations
 
     # Restore database
