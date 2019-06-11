@@ -17,7 +17,7 @@ gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize
 gem 'activeadmin_addons'
 
 # WYSIWYG
-gem 'activeadmin_froala_editor'
+gem 'activeadmin_quill_editor'
 
 gem 'devise'
 
