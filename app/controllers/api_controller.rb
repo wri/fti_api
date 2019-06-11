@@ -61,7 +61,7 @@ class ApiController < ActionController::API
   protected
 
   def check_access
-    #render json: { errors: [{ status: '401', title: 'Sorry invalid API token' }] }, status: 401 unless valid_api_key?
+    render json: { errors: [{ status: '401', title: 'Sorry invalid API token' }] }, status: 401 unless valid_api_key?
   end
 
   def authenticate

@@ -16,9 +16,6 @@ gem 'activeadmin'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
 gem 'activeadmin_addons'
 
-# WYSIWYG
-gem 'activeadmin_froala_editor'
-
 gem 'devise'
 
 
