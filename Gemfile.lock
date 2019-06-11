@@ -71,6 +71,8 @@ GEM
       railties
       select2-rails (~> 3.5.9)
       xdan-datetimepicker-rails (~> 2.5.1)
+    activeadmin_quill_editor (0.1.4)
+      activeadmin (~> 1.0)
     activejob (5.0.2)
       activesupport (= 5.0.2)
       globalid (>= 0.3.6)
@@ -472,6 +474,7 @@ DEPENDENCIES
   activeadmin
   activeadmin-globalize (~> 1.0.0.pre)!
   activeadmin_addons
+  activeadmin_quill_editor
   activerecord-import
   annotate
   bcrypt
@@ -532,4 +535,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.15.2
+   1.17.3

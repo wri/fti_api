@@ -50,7 +50,18 @@ ActiveAdmin.register Faq do
     end
     f.translated_inputs switch_locale: false do |t|
       t.input :question
-      t.input :answer
+      t.input :answer,
+              as: :quill_editor,
+              input_html: {
+                  data: {
+                      options: {
+                          modules: {
+                              toolbar: [['bold', 'italic', 'underline'],
+                                        ['link', 'video']]
+                          },
+                          placeholder: 'Type something...',
+                          theme: 'snow'
+                      }}}
     end
     f.actions
   end

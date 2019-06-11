@@ -4,3 +4,6 @@
 #= require users
 #= require index-filters
 #= require active_admin_sidebar
+
+#= require activeadmin/quill_editor/quill
+#= require activeadmin/quill_editor_input
