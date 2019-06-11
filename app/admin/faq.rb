@@ -50,7 +50,7 @@ ActiveAdmin.register Faq do
     end
     f.translated_inputs switch_locale: false do |t|
       t.input :question
-      t.input :answer
+      t.input :answer, as: :froala_editor
     end
     f.actions
   end
