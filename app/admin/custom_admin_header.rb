@@ -64,13 +64,15 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
           li do
             text_node content_tag 'a', 'User Management'
             ul do
-              li { link_to 'Users',            admin_users_path }
-              li { link_to 'Access Control',   admin_access_control_path }
-              li { link_to 'Contacts',         admin_contacts_path }
-              li { link_to 'Partners',         admin_partners_path }
-              li { link_to 'Donors',           admin_donors_path }
-              li { link_to 'Comments',         admin_comments_path }
-              li { link_to 'FAQs',             admin_faqs_path }
+              li { link_to 'Users',              admin_users_path }
+              li { link_to 'Access Control',     admin_access_control_path }
+              li { link_to 'Contacts',           admin_contacts_path }
+              li { link_to 'Partners',           admin_partners_path }
+              li { link_to 'Donors',             admin_donors_path }
+              li { link_to 'Comments',           admin_comments_path }
+              li { link_to 'FAQs',               admin_faqs_path }
+              li { link_to 'Tutorials',          admin_tutorials_path }
+              li { link_to 'Tutorial Documents', admin_uploaded_documents_path }
             end
           end
         end
