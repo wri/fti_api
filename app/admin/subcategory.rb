@@ -10,7 +10,7 @@ ActiveAdmin.register Subcategory do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([category: :translations])
+      end_of_association_chain.includes([:translations, [category: :translations]])
     end
   end
 
@@ -20,7 +20,7 @@ ActiveAdmin.register Subcategory do
   scope :operator
   scope :government
 
-  filter :translations_name_eq,
+  filter :translations_name_contains,
          as: :select, label: 'Name',
          collection: Subcategory.with_translations(I18n.locale)
                          .order('subcategory_translations.name').pluck(:name)

@@ -2,17 +2,10 @@
 
 ActiveAdmin.register Donor do
   menu false
-
-  controller do
-    def scoped_collection
-      end_of_association_chain.with_translations(I18n.locale)
-    end
-  end
-
   permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
   filter :translations_name_contains, as: :select, label: 'Name',
-                                      collection: Donor.with_translations(I18n.locale).pluck(:name)
+                                      collection: Partner.joins(:translations).pluck(:name)
   filter :website, as: :select
 
   csv do
