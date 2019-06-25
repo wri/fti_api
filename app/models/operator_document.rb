@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operator_documents
@@ -16,7 +15,7 @@
 #  operator_id                   :integer
 #  attachment                    :string
 #  current                       :boolean
-#  deleted_at                    :datetim§e
+#  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
