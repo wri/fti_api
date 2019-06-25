@@ -9,8 +9,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([countries: :translations])
-      end_of_association_chain.with_translations(I18n.locale)
+      end_of_association_chain.includes([:translations, [countries: :translations]])
     end
   end
 
@@ -50,10 +49,10 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   filter :is_active
   filter :countries, as: :select,
          collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
-  filter :translations_name_eq,
+  filter :translations_name_contains,
          as: :select, label: 'Name',
-          collection: Observer.with_translations(I18n.locale)
-                          .order('observer_translations.name').pluck(:name)
+         collection: Observer.with_translations(I18n.locale)
+                         .order('observer_translations.name').pluck(:name)
 
 
   show do
