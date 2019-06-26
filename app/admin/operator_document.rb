@@ -165,12 +165,16 @@ ActiveAdmin.register OperatorDocument do
 
 
   filter :current
-  filter :id, as: :select
   filter :required_operator_document,
          collection: RequiredOperatorDocument.
              joins(country: :translations)
                          .order('required_operator_documents.name')
                          .where(country_translations: {locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
+  filter :required_operator_document_country_id, label: 'Country', as: :select,
+         collection: Country.with_translations(I18n.locale).order('country_translations.name')
+         # collection: RequiredOperatorDocument.
+         #   joins(country: :translations)
+         #     .where(country_translations: {locale: I18n.locale }).uniq.map {|x| ["#{x.country.name}", x.country.id]}
   filter :operator, label: 'Operator', as: :select,
          collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
   filter :status, as: :select, collection: OperatorDocument.statuses
