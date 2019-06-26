@@ -16,8 +16,11 @@ ActiveAdmin.register OperatorDocument do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:required_operator_document, :user, [operator: :translations],
-                                         [fmu: :translations], [required_operator_document: [required_operator_document_group: :translations]]])
+      end_of_association_chain
+        .includes([:required_operator_document, :user, [operator: :translations],
+                   [fmu: :translations],
+                   [required_operator_document:
+                      [required_operator_document_group: :translations, country: :translations]]])
     end
   end
 
@@ -57,13 +60,16 @@ ActiveAdmin.register OperatorDocument do
 
   csv do
     column :exists do |o|
-      o.deleted_at.nil?
+      o.deleted_at.nil? && o.required_operator_document.deleted_at.nil?
     end
     column :current
     column :status
     column :id
     column :required_operator_document do |o|
      o.required_operator_document.name
+    end
+    column :country do |o|
+      o.required_operator_document.country.name
     end
     column :Type do |o|
       if o.required_operator_document.present?
@@ -107,11 +113,14 @@ ActiveAdmin.register OperatorDocument do
 
   index do
     bool_column :exists do |od|
-      od.deleted_at.nil?
+      od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
     end
     column :current
     tag_column :status
     column :id
+    column :country do |od|
+      od.required_operator_document.country
+    end
     column 'Required Document', :required_operator_document, sortable: 'required_operator_documents.name' do |od|
       if od.required_operator_document.present?
         link_to od.required_operator_document.name, admin_required_operator_document_path(od.required_operator_document)
