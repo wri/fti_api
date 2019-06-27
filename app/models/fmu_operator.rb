@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: fmu_operators
@@ -10,6 +9,8 @@
 #  current     :boolean          not null
 #  start_date  :date
 #  end_date    :date
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 
 class FmuOperator < ApplicationRecord

@@ -16,7 +16,7 @@ ActiveAdmin.register Faq do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:translations])
+      end_of_association_chain.with_translations(I18n.locale)
     end
   end
 
