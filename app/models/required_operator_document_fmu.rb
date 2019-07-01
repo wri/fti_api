@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: required_operator_documents
@@ -13,15 +12,20 @@
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
 #  deleted_at                          :datetime
+#  forest_type                         :string
 #
 
 class RequiredOperatorDocumentFmu < RequiredOperatorDocument
+  include ForestTypeable
   has_many :operator_document_fmus
 
   after_create :create_operator_document_fmus
 
   def create_operator_document_fmus
-    Fmu.where(country_id: self.country_id).find_each do |fmu|
+    fmu_attributes = { country_id: self.country_id }
+    fmu_attributes[:forest_type] = self.forest_type if self.forest_type.present?
+
+    Fmu.where(fmu_attributes).find_each do |fmu|
       if fmu.operator.present? # This is to prevent faulty situations when the fmu has no operator id
         OperatorDocumentFmu.where(required_operator_document_id: self.id,
                                   operator_id: fmu.operator.id,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190617164842) do
+ActiveRecord::Schema.define(version: 20190627171009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,7 +185,9 @@ ActiveRecord::Schema.define(version: 20190617164842) do
     t.boolean  "certification_vlc"
     t.boolean  "certification_vlo"
     t.boolean  "certification_tltv"
+    t.integer  "forest_type",        default: 0,     null: false
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
+    t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
   end
 
   create_table "government_translations", force: :cascade do |t|
@@ -485,7 +487,9 @@ ActiveRecord::Schema.define(version: 20190617164842) do
     t.datetime "updated_at",                          null: false
     t.integer  "valid_period"
     t.datetime "deleted_at"
+    t.integer  "forest_type"
     t.index ["deleted_at"], name: "index_required_operator_documents_on_deleted_at", using: :btree
+    t.index ["forest_type"], name: "index_required_operator_documents_on_forest_type", using: :btree
     t.index ["required_operator_document_group_id"], name: "index_req_op_doc_group_id", using: :btree
     t.index ["type"], name: "index_required_operator_documents_on_type", using: :btree
   end
