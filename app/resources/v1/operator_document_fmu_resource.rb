@@ -6,7 +6,7 @@ module V1
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :current, :reason
+               :fmu_id, :forest_type, :current, :reason
 
     has_one :country
     has_one :fmu
@@ -19,6 +19,10 @@ module V1
     filters :type, :status, :operator_id, :current
 
     before_create :set_operator_id, :set_user_id
+
+    def forest_type
+      Fmu::FOREST_TYPES[@model.forest_type.to_sym][:label] if @model.forest_type
+    end
 
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?

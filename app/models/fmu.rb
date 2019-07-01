@@ -14,11 +14,13 @@
 #  certification_vlc  :boolean
 #  certification_vlo  :boolean
 #  certification_tltv :boolean
+#  forest_type        :integer          default("general"), not null
 #
 
 class Fmu < ApplicationRecord
   include ValidationHelper
   include Translatable
+  include ForestTypeable
   translates :name, touch: true
 
   active_admin_translates :name do
@@ -39,6 +41,7 @@ class Fmu < ApplicationRecord
 
   validates :country_id, presence: true
   validates :name, presence: true
+  validates :forest_type, presence: true
 
   before_save :update_geojson
   before_destroy :really_destroy_documents

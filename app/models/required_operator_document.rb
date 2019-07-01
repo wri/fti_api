@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: required_operator_documents
@@ -13,9 +12,11 @@
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
 #  deleted_at                          :datetime
+#  forest_type                         :string
 #
 
 class RequiredOperatorDocument < ApplicationRecord
+  include ForestTypeable
   acts_as_paranoid
 
   translates :explanation

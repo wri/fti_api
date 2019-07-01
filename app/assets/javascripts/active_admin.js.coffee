@@ -2,6 +2,7 @@
 #= require activeadmin_addons/all
 #= require access_control
 #= require users
+#= require rod
 #= require index-filters
 #= require active_admin_sidebar
 

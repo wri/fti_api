@@ -5,13 +5,18 @@ module V1
     caching
     paginator :none
 
-    attributes :name, :geojson, :certification_fsc, :certification_pefc, :certification_olb,
+    attributes :name, :geojson, :forest_type,
+               :certification_fsc, :certification_pefc, :certification_olb,
                :certification_vlc, :certification_vlo, :certification_tltv
 
     has_one :country
     has_one :operator
 
     filters :country, :free, :certification
+
+    def forest_type
+      Fmu::FOREST_TYPES[@model.forest_type][:label]
+    end
 
     def custom_links(_)
       { self: nil }
