@@ -18,6 +18,8 @@ class Subcategory < ApplicationRecord
 
   active_admin_translates :name do; end
 
+  validates_presence_of :category, :subcategory_type
+
   belongs_to :category
   has_many :severities, dependent: :destroy
   has_many :observations, inverse_of: :subcategory, dependent: :destroy

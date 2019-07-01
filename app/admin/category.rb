@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Category do
-  # menu parent: 'Settings', priority: 1
   menu false
 
-  actions :create, :show, :edit, :index, :update
+  actions :all, :except => [:destroy]
 
   config.order_clause
   config.filters = false

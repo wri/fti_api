@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Subcategory do
-  # menu parent: 'Settings', priority: 2
   menu false
 
-  actions :create, :show, :edit, :index, :update
+  actions :all, :except => [:destroy]
 
   config.order_clause
 
@@ -14,7 +13,8 @@ ActiveAdmin.register Subcategory do
     end
   end
 
-  permit_params :location_required, translations_attributes: [:id, :locale, :name, :_destroy]
+  permit_params :location_required, :category_id, :subcategory_type,
+                translations_attributes: [:id, :locale, :name, :_destroy]
 
   scope :all, default: true
   scope :operator
@@ -67,9 +67,10 @@ ActiveAdmin.register Subcategory do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
+    edit = f.object.new_record? ? false : true
     f.inputs 'Subcategory Details' do
-      f.input :category,          input_html: { disabled: true }
-      f.input :subcategory_type,  input_html: { disabled: true }
+      f.input :category,          input_html: { disabled: edit }
+      f.input :subcategory_type,  input_html: { disabled: edit }
       f.input :location_required
     end
 
