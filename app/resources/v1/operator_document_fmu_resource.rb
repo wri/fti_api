@@ -21,7 +21,8 @@ module V1
     before_create :set_operator_id, :set_user_id
 
     def forest_type
-      Fmu::FOREST_TYPES[@model.forest_type.to_sym][:label] if @model.forest_type
+      rod = @model.required_operator_document
+      Fmu::FOREST_TYPES[rod.forest_type.to_sym][:label] if rod.forest_type
     end
 
     def set_operator_id
