@@ -1,6 +1,10 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
 en:
+  active_admin:
+    globalize:
+      language:
+        zh-CN: "Chinese"
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
