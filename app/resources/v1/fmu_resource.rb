@@ -15,7 +15,7 @@ module V1
     filters :country, :free, :certification
 
     def forest_type
-      Fmu::FOREST_TYPES[@model.forest_type][:label]
+      Fmu::FOREST_TYPES[@model.forest_type.to_sym][:label] if @model.forest_type
     end
 
     def custom_links(_)
