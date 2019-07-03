@@ -14,7 +14,7 @@
 #  certification_vlc  :boolean
 #  certification_vlo  :boolean
 #  certification_tltv :boolean
-#  forest_type        :integer          default("general"), not null
+#  forest_type        :integer          default("fmu"), not null
 #
 
 class Fmu < ApplicationRecord

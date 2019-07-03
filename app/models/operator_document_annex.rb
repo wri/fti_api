@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operator_document_annexes
@@ -16,6 +15,7 @@
 #  user_id              :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  public               :boolean          default(TRUE), not null
 #
 
 class OperatorDocumentAnnex < ApplicationRecord

@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operators
@@ -24,6 +23,7 @@
 #  website                            :string
 #  country_doc_rank                   :integer
 #  country_operators                  :integer
+#  approved                           :boolean          default(TRUE), not null
 #
 
 class Operator < ApplicationRecord
@@ -124,12 +124,11 @@ class Operator < ApplicationRecord
       # For the total number of documents, we take into account only the documents which
       # are required (current and not deleted) and whose required_operator_document
       # is also not deleted
-      self.percentage_valid_documents_all =
-          operator_documents.valid.count.to_f / operator_documents.joins(:required_operator_document).required.count.to_f rescue 0
-      self.percentage_valid_documents_fmu =
-          operator_document_fmus.valid.count.to_f / operator_document_fmus.joins(:required_operator_document).required.count.to_f rescue 0
-      self.percentage_valid_documents_country =
-          operator_document_countries.valid.count.to_f / operator_documents.required.joins(:required_operator_document).count.to_f rescue 0
+      if approved
+        percentage_approved
+      else
+        percentage_non_approved
+      end
 
       self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all.nan?
       self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country.nan?
@@ -137,6 +136,27 @@ class Operator < ApplicationRecord
 
       self.save!
     end
+  end
+
+  # Calculates the percentage of documents for when the operator hasn't been approved
+  # This counts only public documents
+  def percentage_non_approved
+    self.percentage_valid_documents_all =
+      operator_documents.valid.available.count.to_f / operator_documents.joins(:required_operator_document).required.count.to_f rescue 0
+    self.percentage_valid_documents_fmu =
+      operator_document_fmus.valid.available.count.to_f / operator_document_fmus.joins(:required_operator_document).required.count.to_f rescue 0
+    self.percentage_valid_documents_country =
+      operator_document_countries.valid.available.count.to_f / operator_documents.required.joins(:required_operator_document).count.to_f rescue 0
+  end
+
+  # Calculates the percentage documents knowing they've all been approved
+  def percentage_approved
+    self.percentage_valid_documents_all =
+      operator_documents.valid.count.to_f / operator_documents.joins(:required_operator_document).required.count.to_f rescue 0
+    self.percentage_valid_documents_fmu =
+      operator_document_fmus.valid.count.to_f / operator_document_fmus.joins(:required_operator_document).required.count.to_f rescue 0
+    self.percentage_valid_documents_country =
+      operator_document_countries.valid.count.to_f / operator_documents.required.joins(:required_operator_document).count.to_f rescue 0
   end
 
   def calculate_observations_scores

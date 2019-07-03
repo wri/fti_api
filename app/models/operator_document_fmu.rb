@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: operator_documents
@@ -22,6 +21,7 @@
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
+#  public                        :boolean          default(TRUE), not null
 #
 
 class OperatorDocumentFmu < OperatorDocument

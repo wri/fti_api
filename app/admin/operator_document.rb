@@ -54,7 +54,7 @@ ActiveAdmin.register OperatorDocument do
   end
 
   actions :all, except: [:destroy, :new, :create]
-  permit_params :name, :required_operator_document_id,
+  permit_params :name, :public, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
                 :attachment, :uploaded_by, :reason, :note, :response_date
 
@@ -116,6 +116,7 @@ ActiveAdmin.register OperatorDocument do
       od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
     end
     column :current
+    column :public
     tag_column :status
     column :id
     column :country do |od|
@@ -165,6 +166,7 @@ ActiveAdmin.register OperatorDocument do
 
 
   filter :current
+  filter :public
   filter :id
   filter :required_operator_document,
          collection: RequiredOperatorDocument.
@@ -189,6 +191,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :type, input_html: { disabled: true }
       f.input :uploaded_by
       f.input :status, include_blank: false
+      f.input :public
       f.input :attachment
       f.input :reason
       f.input :note
@@ -202,6 +205,7 @@ ActiveAdmin.register OperatorDocument do
   show title: proc{ "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
     attributes_table do
       row :current
+      row :public
       tag_row :status
       row :required_operator_document
       row :operator
