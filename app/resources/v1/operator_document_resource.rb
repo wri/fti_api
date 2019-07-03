@@ -16,13 +16,17 @@ module V1
 
     filters :type, :status, :operator_id, :current
 
-    before_create :set_operator_id, :set_user_id
+    before_create :set_operator_id, :set_user_id, :set_public
 
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?
         @model.operator_id = context[:current_user].operator_id
         @model.uplodaded_by = :operator
       end
+    end
+
+    def set_public
+      @model.public = false
     end
 
     def self.updatable_fields(context)

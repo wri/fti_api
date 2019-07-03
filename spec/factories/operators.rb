@@ -22,6 +22,7 @@
 #  website                            :string
 #  country_doc_rank                   :integer
 #  country_operators                  :integer
+#  approved                           :boolean          default(TRUE), not null
 #
 
 FactoryGirl.define do

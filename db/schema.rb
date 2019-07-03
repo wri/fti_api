@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190627171009) do
+ActiveRecord::Schema.define(version: 20190701181155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -368,10 +368,12 @@ ActiveRecord::Schema.define(version: 20190627171009) do
     t.string   "attachment"
     t.integer  "uploaded_by"
     t.integer  "user_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "public",               default: true, null: false
     t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at", using: :btree
     t.index ["operator_document_id"], name: "index_operator_document_annexes_on_operator_document_id", using: :btree
+    t.index ["public"], name: "index_operator_document_annexes_on_public", using: :btree
     t.index ["status"], name: "index_operator_document_annexes_on_status", using: :btree
     t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
   end
@@ -382,8 +384,8 @@ ActiveRecord::Schema.define(version: 20190627171009) do
     t.date     "start_date"
     t.integer  "fmu_id"
     t.integer  "required_operator_document_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "status"
     t.integer  "operator_id"
     t.string   "attachment"
@@ -394,11 +396,13 @@ ActiveRecord::Schema.define(version: 20190627171009) do
     t.text     "reason"
     t.text     "note"
     t.datetime "response_date"
+    t.boolean  "public",                        default: true, null: false
     t.index ["current"], name: "index_operator_documents_on_current", using: :btree
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree
     t.index ["fmu_id"], name: "index_operator_documents_on_fmu_id", using: :btree
     t.index ["operator_id"], name: "index_operator_documents_on_operator_id", using: :btree
+    t.index ["public"], name: "index_operator_documents_on_public", using: :btree
     t.index ["required_operator_document_id"], name: "index_operator_documents_on_required_operator_document_id", using: :btree
     t.index ["start_date"], name: "index_operator_documents_on_start_date", using: :btree
     t.index ["status"], name: "index_operator_documents_on_status", using: :btree
@@ -436,6 +440,8 @@ ActiveRecord::Schema.define(version: 20190627171009) do
     t.string   "website"
     t.integer  "country_doc_rank"
     t.integer  "country_operators"
+    t.boolean  "approved",                           default: true, null: false
+    t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
     t.index ["is_active"], name: "index_operators_on_is_active", using: :btree
@@ -483,11 +489,13 @@ ActiveRecord::Schema.define(version: 20190627171009) do
     t.integer  "required_operator_document_group_id"
     t.string   "name"
     t.integer  "country_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.integer  "valid_period"
     t.datetime "deleted_at"
     t.integer  "forest_type"
+    t.boolean  "contract_signature",                  default: false, null: false
+    t.index ["contract_signature"], name: "index_required_operator_documents_on_contract_signature", using: :btree
     t.index ["deleted_at"], name: "index_required_operator_documents_on_deleted_at", using: :btree
     t.index ["forest_type"], name: "index_required_operator_documents_on_forest_type", using: :btree
     t.index ["required_operator_document_group_id"], name: "index_req_op_doc_group_id", using: :btree

@@ -3,8 +3,8 @@
 module V1
   class OperatorResource < JSONAPI::Resource
     caching
-    attributes :name, :operator_type, :concession, :is_active, :logo, :details,
-               :percentage_valid_documents_fmu, :percentage_valid_documents_country,
+    attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
+               :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
                :percentage_valid_documents_all, :score, :obs_per_visit,
                :website, :address, :fa_id, :country_doc_rank, :country_operators,
                :delete_logo

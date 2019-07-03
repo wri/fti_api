@@ -12,7 +12,7 @@ module V1
 
     filters :status, :operator_document_id
 
-    before_create :set_user_id, :set_status
+    before_create :set_user_id, :set_status, :set_public
 
     def name
       show_attribute('name')
@@ -62,6 +62,10 @@ module V1
         @model.user_id = context[:current_user].id
         @model.uploaded_by = :operator
       end
+    end
+
+    def set_public
+      @model.public = false
     end
 
     def set_status
