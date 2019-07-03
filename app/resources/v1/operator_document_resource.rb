@@ -16,13 +16,17 @@ module V1
 
     filters :type, :status, :operator_id, :current
 
-    before_create :set_operator_id, :set_user_id
+    before_create :set_operator_id, :set_user_id, :set_public
 
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?
         @model.operator_id = context[:current_user].operator_id
-        @model.uplodaded_by = :operator
+        @model.uploaded_by = :operator
       end
+    end
+
+    def set_public
+      @model.public = false
     end
 
     def self.updatable_fields(context)
@@ -38,15 +42,19 @@ module V1
       end
     end
 
+    # TODO: Implement permissions system here
     def status
-      user = @context[:current_user]
-      app = @context[:app]
-      if (app != 'observations-tool' && user.present? && (user&.user_permission&.user_role =='admin' || user.is_operator?(@model.operator_id))) ||
-          %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
-        @model.status
-      else
-        :doc_not_provided
-      end
+      return @model.status if can_see_document?
+      return :doc_not_provided unless document_public?
+
+      hidden_document_status
+    end
+
+    def attachment
+      return @model.attachment if can_see_document?
+      return :doc_not_provided unless document_public?
+
+      { url: nil }
     end
 
     def self.records(options = {})
@@ -60,7 +68,6 @@ module V1
       end
     end
 
-
     def custom_links(_)
       { self: nil }
     end
@@ -71,6 +78,25 @@ module V1
           locale: context[:locale],
           owner: context[:current_user]
       }
+    end
+
+    def document_public?
+      @model.public || @model.operator.approved
+    end
+
+    def can_see_document?
+      user = @context[:current_user]
+      app = @context[:app]
+
+      return false if app == 'observations-tool'
+      return true if user&.user_permission&.user_role =='admin'
+      return true if user&.is_operator?(@model.operator_id)
+      false
+    end
+
+    def hidden_document_status
+      return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
+      return :doc_not_provided
     end
   end
 end

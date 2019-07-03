@@ -12,12 +12,15 @@
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
 #  deleted_at                          :datetime
-#  forest_type                         :string
+#  forest_type                         :integer
+#  contract_signature                  :boolean          default(FALSE), not null
 #
 
 class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   include ForestTypeable
   has_many :operator_document_fmus
+
+  validates :contract_signature, absence: true
 
   after_create :create_operator_document_fmus
 
