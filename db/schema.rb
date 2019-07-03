@@ -532,13 +532,6 @@ ActiveRecord::Schema.define(version: 20190701181155) do
     t.index ["severity_id"], name: "index_severity_translations_on_severity_id", using: :btree
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, force: :cascade do |t|
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
-  end
-
   create_table "species", force: :cascade do |t|
     t.string   "name"
     t.string   "species_class"
@@ -600,44 +593,6 @@ ActiveRecord::Schema.define(version: 20190701181155) do
     t.text     "details"
     t.index ["locale"], name: "index_subcategory_translations_on_locale", using: :btree
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
-  end
-
-  create_table "tutorials", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.text     "description"
-    t.integer  "position"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "uploaded_documents", force: :cascade do |t|
-    t.string   "name"
-    t.string   "author"
-    t.string   "caption"
-    t.string   "file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "us_gaz", force: :cascade do |t|
-    t.integer "seq"
-    t.text    "word"
-    t.text    "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "us_lex", force: :cascade do |t|
-    t.integer "seq"
-    t.text    "word"
-    t.text    "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "us_rules", force: :cascade do |t|
-    t.text    "rule"
-    t.boolean "is_custom", default: true, null: false
   end
 
   create_table "user_permissions", force: :cascade do |t|
