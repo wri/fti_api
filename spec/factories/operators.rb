@@ -29,6 +29,7 @@ FactoryGirl.define do
   factory :operator do
     name "Operator #{Faker::Lorem.sentence}"
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+    operator_type { Operator::TYPES.sample }
 
     after(:create) do |operator|
       operator.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",

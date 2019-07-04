@@ -48,8 +48,9 @@ FactoryGirl.define do
     name 'Test ngo'
     is_active true
 
-    after(:create) do |random_ngo|
-      random_ngo.user_permission.update(user_role: 'ngo')
+    after(:build) do |random_ngo|
+      random_ngo.observer ||= FactoryGirl.create(:observer)
+      random_ngo.user_permission = UserPermission.new(user_role: 2)
     end
   end
 
@@ -62,8 +63,9 @@ FactoryGirl.define do
     name 'Test operator'
     is_active true
 
-    after(:create) do |random_operator|
-      random_operator.user_permission.update(user_role: 'operator')
+    after(:build) do |random_operator|
+      random_operator.operator ||= FactoryGirl.create(:operator)
+      random_operator.user_permission = UserPermission.new(user_role: 1)
     end
   end
 
@@ -76,8 +78,8 @@ FactoryGirl.define do
     name 'Admin user'
     is_active true
 
-    after(:create) do |random_admin|
-      random_admin.user_permission.update(user_role: 'admin')
+    after(:build) do |random_admin|
+      random_admin.user_permission = UserPermission.new(user_role: 3)
     end
   end
 
@@ -89,6 +91,10 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
     name 'Web user'
     is_active true
+
+    after(:build) do |random_webuser|
+      random_webuser.user_permission = UserPermission.new(user_role: 0)
+    end
 
     after(:create) do |user|
       user.regenerate_api_key
