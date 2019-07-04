@@ -9,10 +9,10 @@ module ForestTypeable
 
   class_methods do
     FOREST_TYPES = {
-        fmu:     { index: 0, label: 'FMU' },
-        ufa:     { index: 1, label: 'UFA' },
-        cf:      { index: 2, label: 'Communal Forest' },
-        vdc:     { index: 3, label: 'Vente de Coupe'}
+        fmu:     { index: 0, label: 'FMU', geojson_label: '' },
+        ufa:     { index: 1, label: 'UFA', geojson_label: 'ufa' },
+        cf:      { index: 2, label: 'Communal Forest', geojson_label: 'communal' },
+        vdc:     { index: 3, label: 'Vente de Coupe', geojson_label: 'ventes_de_coupe' }
     }
   end
 end

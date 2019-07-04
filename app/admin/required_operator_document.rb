@@ -51,8 +51,8 @@ ActiveAdmin.register RequiredOperatorDocument do
     f.inputs 'Required Operator Document Details' do
       editing = object.new_record? ? false : true
       f.input :required_operator_document_group
-      f.input :contract_signature
-      f.input :country
+      f.input :contract_signature, input_html: { disabled: editing }
+      f.input :country, input_html: { disabled: editing }
       f.input :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu),
                      include_blank: false, input_html: { disabled: editing }
       f.input :forest_type, as: :select,

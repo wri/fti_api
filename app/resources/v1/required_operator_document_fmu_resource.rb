@@ -12,7 +12,7 @@ module V1
     filters :name, :type
 
     def forest_type
-      Fmu::FOREST_TYPES[@model.forest_type.to_sym][:label] if @model.forest_type
+      Fmu::FOREST_TYPES[@model.forest_type.to_sym][:geojson_label] if @model.forest_type
     end
 
     def custom_links(_)
