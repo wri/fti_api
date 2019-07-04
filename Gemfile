@@ -99,6 +99,7 @@ group :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'timecop'
+  gem 'shoulda-matchers', '~> 4.0.1'
 end
 
 # Server

@@ -405,6 +405,8 @@ GEM
       thor (~> 0.14)
     sendgrid-ruby (4.0.8)
       ruby_http_client (~> 3.0.1)
+    shoulda-matchers (4.0.1)
+      activesupport (>= 4.2.0)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -522,6 +524,7 @@ DEPENDENCIES
   rubocop
   seed-fu
   sendgrid-ruby
+  shoulda-matchers (~> 4.0.1)
   simplecov
   slim-rails
   spring
