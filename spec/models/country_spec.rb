@@ -15,32 +15,56 @@
 require 'rails_helper'
 
 RSpec.describe Country, type: :model do
-  context 'For user relations' do
-    before :each do
-      @country = create(:country)
-      @user    = create(:user, country: @country)
-    end
+  subject(:country) { FactoryGirl.build :country }
 
-    it 'Count on country' do
-      expect(User.count).to          eq(1)
-      expect(@country.users.size).to eq(1)
-      expect(@user.country.name).to  match('Country')
-    end
+  it 'is valid with valid attributes' do
+    country = FactoryGirl.build :country
+    expect(country).to be_valid
+  end
 
-    it 'Fallbacks for empty translations on country' do
-      expect(@user.country.name).to match('Country')
-    end
+  context 'Relations' do
+    it { is_expected.to have_many(:users).inverse_of(:country) }
+    it { is_expected.to have_many(:observations).inverse_of(:country) }
+    it { is_expected.to have_and_belong_to_many(:observers) }
+    it { is_expected.to have_many(:governments).inverse_of(:country) }
+    it { is_expected.to have_many(:operators).inverse_of(:country) }
+    it { is_expected.to have_many(:fmus).inverse_of(:country) }
+    it { is_expected.to have_many(:laws) }
+    it { is_expected.to have_many(:species_countries) }
+    it { is_expected.to have_many(:species).through(:species_countries) }
+    it { is_expected.to have_many(:required_operator_documents) }
+  end
 
-    it 'Translate country to fr' do
-      @country.update(name: 'Australia FR', locale: :fr)
-      I18n.locale = :fr
-      expect(@user.country.name).to eq('Australia FR')
-      I18n.locale = :en
-      expect(@user.country.name).to match('Country')
-    end
+  context 'Validations' do
+    it { is_expected.to validate_presence_of(:name) }
 
-    it 'Fetch all countries' do
-      expect(Country.fetch_all(nil).count).to eq(1)
+    it { is_expected.to validate_uniqueness_of(:name).case_insensitive }
+  end
+
+  context 'Hooks' do
+    context '#set_active' do
+      context 'when is_active has not been initialized' do
+        it 'set is_active to true' do
+          country = FactoryGirl.create(:country, is_active: nil)
+          expect(country.is_active).to eql true
+        end
+      end
+
+      context 'when is_active has been intialized' do
+        it 'keep the value of is_active' do
+          country = Country.create(is_active: false)
+          expect(country.is_active).to eql false
+        end
+      end
+    end
+  end
+
+  context 'Methods' do
+    context '#cache_key' do
+      it 'return the default value with the locale' do
+        country = FactoryGirl.create :country
+        expect(country.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+      end
     end
   end
 end

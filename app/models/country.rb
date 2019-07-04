@@ -31,23 +31,24 @@ class Country < ApplicationRecord
 
   has_many :species_countries
   has_many :species, through: :species_countries
-  has_many :operator_documents, dependent: :destroy
   has_many :required_operator_documents
 
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 
   before_save :set_active
 
-  scope :by_name_asc, -> {
+  scope :by_name_asc, (-> {
     includes(:translations).with_translations(I18n.available_locales)
                            .order('country_translations.name ASC')
-  }
+  })
 
-  scope :with_observations, -> { left_outer_joins(:observations).where.not(observations: { id: nil }).uniq }
+  scope :with_observations, (-> {
+    left_outer_joins(:observations).where.not(observations: { id: nil }).uniq
+  })
 
-  scope :by_status, ->(status) { where(is_active: status) }
+  scope :by_status, (->(status) { where(is_active: status) })
 
-  scope :active, ->() { where(is_active: true) }
+  scope :active, (->() { where(is_active: true) })
 
   default_scope do
     includes(:translations)
@@ -60,6 +61,6 @@ class Country < ApplicationRecord
   private
 
   def set_active
-    is_active = true unless is_active == true || is_active == false
+    self.is_active = true unless is_active.in? [true, false]
   end
 end
