@@ -67,4 +67,6 @@ RSpec.describe Country, type: :model do
       end
     end
   end
+
+  it_should_behave_like 'translatable', FactoryGirl.create(:country), %i[name region_name]
 end
