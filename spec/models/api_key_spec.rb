@@ -45,4 +45,6 @@ RSpec.describe APIKey, type: :model do
       end
     end
   end
+
+  it_should_behave_like 'activable', :api_key, FactoryGirl.build(:api_key)
 end
