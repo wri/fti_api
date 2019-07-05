@@ -71,12 +71,23 @@ FactoryGirl.define do
   end
 
   factory :observation, class: 'Observation' do
-    observation_type 'AnnexOperator'
+    observation_type { %w[operator government].sample }
     is_active         true
     evidence         'Operator observation'
     publication_date DateTime.now.to_date
     association :country, factory: :country
     lng 12.2222
     lat 12.3333
+
+    after(:build) do |random_observation|
+      random_observation.subcategory ||= FactoryGirl.create(:subcategory)
+      random_observation.severity ||= FactoryGirl.create(:severity, subcategory: random_observation.subcategory)
+      random_observation.user ||= FactoryGirl.create(:admin)
+      random_observation.operator ||= FactoryGirl.create(:operator)
+      random_observation.government ||= FactoryGirl.create(:government)
+      unless random_observation.species.any?
+        random_observation.species ||= [FactoryGirl.create(:species, name: "Species #{Faker::Lorem.sentence}")]
+      end
+    end
   end
 end

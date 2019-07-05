@@ -28,46 +28,355 @@
 require 'rails_helper'
 
 RSpec.describe Operator, type: :model do
-  before :each do
-    FactoryGirl.create(:operator, name: 'Z Operator')
-    @operator = create(:operator)
+  before :all do
+    @country = FactoryGirl.create(:country)
+    @operator = FactoryGirl.create(:operator, country: @country, fa_id: 'fa-id')
+    @required_operator_document_group = FactoryGirl.create(:required_operator_document_group)
+
+    fmu = FactoryGirl.create(:fmu, country: @country)
+    FactoryGirl.create(:fmu_operator, fmu: fmu, operator: @operator)
+
+    required_operator_document_data = {
+      country: @country,
+      required_operator_document_group: @required_operator_document_group
+    }
+    @required_operator_document =
+      FactoryGirl.create(:required_operator_document, **required_operator_document_data)
+    @required_operator_document_country =
+      FactoryGirl.create(:required_operator_document_country, **required_operator_document_data)
+    @required_operator_document_fmu =
+      FactoryGirl.create(:required_operator_document_fmu, **required_operator_document_data)
   end
 
-  it 'Count on operator' do
-    expect(Operator.count).to          eq(2)
-    expect(Operator.all.first.name).to eq('Z Operator')
+  it_should_behave_like 'translatable', FactoryGirl.create(:operator), %i[name details]
+
+  describe 'Relations' do
+    it { is_expected.to belong_to(:country).inverse_of(:operators).optional }
+    it { is_expected.to have_many(:all_operator_documents).class_name('OperatorDocument') }
+
+    it { is_expected.to have_many(:observations).inverse_of(:operator).dependent(:destroy) }
+    it { is_expected.to have_many(:all_observations).class_name('Observation').inverse_of(:operator).dependent(:destroy) }
+    it { is_expected.to have_many(:users).inverse_of(:operator).dependent(:destroy) }
+
+    it { is_expected.to have_many(:fmu_operators).inverse_of(:operator).dependent(:destroy) }
+    it { is_expected.to have_many(:fmus).through(:fmu_operators) }
+    it { is_expected.to have_many(:all_fmu_operators).class_name('FmuOperator').inverse_of(:operator).dependent(:destroy) }
+    it { is_expected.to have_many(:all_fmus).through(:all_fmu_operators).source(:fmu) }
+
+    it { is_expected.to have_many(:operator_documents) }
+    it { is_expected.to have_many(:operator_document_countries) }
+    it { is_expected.to have_many(:operator_document_fmus) }
+
+    it { is_expected.to have_many(:sawmills) }
   end
 
-  it 'Order by name asc' do
-    expect(Operator.by_name_asc.first.name).to match('Operator')
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_inclusion_of(:operator_type).in_array(Operator::TYPES) }
   end
 
-  it 'Fallbacks for empty translations on operator' do
-    I18n.locale = :fr
-    expect(@operator.name).to match('Operator')
-    I18n.locale = :en
+  describe 'Hooks' do
+    context '#create_operator_id' do
+      context 'when country is present' do
+        it 'update operator_id using the country and id' do
+          expect(@operator.operator_id).to eql "#{@country.iso}-unknown-#{@operator.id}"
+        end
+      end
+
+      context 'when country is not present' do
+        it 'update the id' do
+          operator = FactoryGirl.create(:operator)
+          expect(operator.operator_id).to eql "na-unknown-#{operator.id}"
+        end
+      end
+    end
+
+    context '#create_documents' do
+      context 'when fa_id is present and there are operator_documents' do
+        before do
+          # Having a random order, @operator data can differ depending on the order
+          other_country = FactoryGirl.create(:country)
+          @other_operator = FactoryGirl.create(:operator, country: other_country, fa_id: 'fa-id')
+
+          fmu = FactoryGirl.create(:fmu, country: other_country)
+          FactoryGirl.create(:fmu_operator, fmu: fmu, operator: @other_operator)
+
+          required_operator_document_data = {
+            country: other_country,
+            required_operator_document_group: @required_operator_document_group
+          }
+          FactoryGirl.create(:required_operator_document_country, **required_operator_document_data)
+          FactoryGirl.create(:required_operator_document_fmu, **required_operator_document_data)
+        end
+
+        it 'set :doc_not_provided status for related OperatorDocumentCountry and OperatorDocumentFmu' do
+          @other_operator.update_attributes(fa_id: 'another_fa_id')
+
+          expect(@other_operator.operator_document_countries.size).to eql 1
+          operator_document_country = @other_operator.operator_document_countries.first
+          expect(operator_document_country.status).to eql 'doc_not_provided'
+          expect(operator_document_country.current).to eql true
+
+          expect(@other_operator.operator_document_fmus.size).to eql 1
+          operator_document_fmu = @other_operator.operator_document_fmus.first
+          expect(operator_document_fmu.status).to eql 'doc_not_provided'
+          expect(operator_document_fmu.current).to eql true
+        end
+      end
+    end
+
+    context '#really_destroy_documents' do
+      it 'destroy operator_documents associated with the operator' do
+        another_operator = FactoryGirl.create(:operator)
+        operator_document = FactoryGirl.create(:operator_document, operator: another_operator)
+        another_operator.send(:really_destroy_documents)
+
+        expect(OperatorDocument.where(id: operator_document.id).first).to be_nil
+      end
+    end
   end
 
-  it 'Translate operator to fr' do
-    @operator.update(name: 'Operator FR', locale: :fr)
-    I18n.locale = :fr
-    expect(@operator.name).to eq('Operator FR')
-    I18n.locale = :en
-    expect(@operator.name).to match('Operator')
+  describe 'Instance methods' do
+    before :all do
+      valid_status = OperatorDocument.statuses[:doc_valid]
+      pending_status = OperatorDocument.statuses[:doc_pending]
+      common_data = {
+        operator_id: @operator.id,
+        current: true,
+        required_operator_document_id: @required_operator_document.id,
+        public: true
+      }
+
+      # Generate one valid operator document and two pending operator documents of each type
+      %i[operator_document operator_document_fmu operator_document_country].each do |op_doc_type|
+        [false, true].each do |public|
+          common_data[:public] = public
+          common_data[:required_operator_document_id] =
+            instance_variable_get("@required_#{op_doc_type}").id
+
+          valid_op_doc = FactoryGirl.create(op_doc_type, **common_data)
+          valid_op_doc.update_attributes(status: valid_status)
+
+          pending_op_docs = FactoryGirl.create_list(op_doc_type, 2, **common_data)
+          pending_op_docs.each do |pending_op_doc|
+            pending_op_doc.update_attributes(status: pending_status)
+          end
+        end
+      end
+
+      # Observations
+      (0..3).each do |level|
+        severity = FactoryGirl.create(:severity, level: level)
+        FactoryGirl.create(
+          :observation,
+          severity: severity,
+          operator: @operator,
+          country: @country,
+          validation_status: 'Approved'
+        )
+      end
+
+      # Operator without documents and observations to check empty values
+      @another_operator = FactoryGirl.create(:operator, country: @country, fa_id: 'fa-id')
+    end
+
+    context '#cache_key' do
+      it 'return the default value with the locale' do
+        expect(@operator.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+      end
+    end
+
+    context '#update_valid_documents_percentages' do
+      context 'when fa_id is present' do
+        context 'when operator is approved' do
+          it 'update approved percentages' do
+            @operator.update_attributes(fa_id: 'fa_id', approved: true)
+            @operator.update_valid_documents_percentages
+
+            expect(@operator.percentage_valid_documents_all).to eql(1.0 / 3.0)
+            expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 3.0)
+            expect(@operator.percentage_valid_documents_country).to eql(1.0 / 3.0)
+          end
+        end
+
+        context 'when operator is not approved' do
+          it 'update non approved percentages' do
+            @operator.update_attributes(fa_id: 'fa_id', approved: false)
+            @operator.update_valid_documents_percentages
+
+            expect(@operator.percentage_valid_documents_all).to eql(1.0 / 6.0)
+            expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 6.0)
+            expect(@operator.percentage_valid_documents_country).to eql(1.0 / 6.0)
+          end
+        end
+
+        context 'when there are not documents' do
+          it 'update percentages with a 0 value' do
+            @another_operator.update_valid_documents_percentages
+
+            expect(@another_operator.percentage_valid_documents_all).to eql 0.0
+            expect(@another_operator.percentage_valid_documents_fmu).to eql 0.0
+            expect(@another_operator.percentage_valid_documents_country).to eql 0.0
+          end
+        end
+      end
+    end
+
+    context '#percentage_non_approved' do
+      it 'update the percentages of valid and available operator documents' do
+        @operator.percentage_non_approved
+
+        expect(@operator.percentage_valid_documents_all).to eql(1.0 / 6.0)
+        expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 6.0)
+        expect(@operator.percentage_valid_documents_country).to eql(1.0 / 6.0)
+      end
+    end
+
+    context '#percentage_approved' do
+      it 'update the percentages of valid operator documents' do
+        @operator.percentage_approved
+
+        expect(@operator.percentage_valid_documents_all).to eql(1.0 / 3.0)
+        expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 3.0)
+        expect(@operator.percentage_valid_documents_country).to eql(1.0 / 3.0)
+      end
+    end
+
+    context '#calculate_observations_scores' do
+      context 'when there are not visits' do
+        it 'update observations per visits and score with blank values' do
+          @another_operator.calculate_observations_scores
+
+          expect(@another_operator.obs_per_visit).to eql nil
+          expect(@another_operator.score_absolute).to eql nil
+        end
+      end
+
+      context 'when there are visits' do
+        it 'update observations per visits and calculate the score' do
+          @operator.calculate_observations_scores
+
+          expect(@operator.obs_per_visit).to eql(4.0)
+          expect(@operator.score_absolute).to eql((4.0 + 2 + 2 + 1) / 9.0)
+        end
+      end
+    end
+
+    context '#rebuild_documents' do
+      context 'when fa_id is present and there are operator_documents' do
+        before do
+          # Need to create another data to really check the creation of the documents
+          other_country = FactoryGirl.create(:country)
+          @other_operator = FactoryGirl.create(:operator, country: other_country, fa_id: 'fa-id')
+
+          fmu = FactoryGirl.create(:fmu, country: other_country)
+          FactoryGirl.create(:fmu_operator, fmu: fmu, operator: @other_operator)
+
+          required_operator_document_data = {
+            country: other_country,
+            required_operator_document_group: @required_operator_document_group
+          }
+          FactoryGirl.create(:required_operator_document_country, **required_operator_document_data)
+          FactoryGirl.create(:required_operator_document_fmu, **required_operator_document_data)
+        end
+
+        it 'set :doc_not_provided status for related OperatorDocumentCountry and OperatorDocumentFmu' do
+          @other_operator.rebuild_documents
+
+          expect(@other_operator.operator_document_countries.size).to eql 1
+          operator_document_country = @other_operator.operator_document_countries.first
+          expect(operator_document_country.status).to eql 'doc_not_provided'
+          expect(operator_document_country.current).to eql true
+
+          expect(@other_operator.operator_document_fmus.size).to eql 1
+          operator_document_fmu = @other_operator.operator_document_fmus.first
+          expect(operator_document_fmu.status).to eql 'doc_not_provided'
+          expect(operator_document_fmu.current).to eql true
+        end
+      end
+    end
   end
 
-  it 'Name validation' do
-    @operator = Operator.new(name: '')
+  describe 'Class methods' do
+    context '#fetch_all' do
+      context 'when country_ids is not specified' do
+        it 'fetch all operators' do
+          expect(Operator.fetch_all(nil).count).to eq(Operator.all.size)
+        end
+      end
 
-    @operator.valid?
-    expect { @operator.save! }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Name can't be blank")
-  end
+      context 'when country is specified' do
+        it 'fetch operators filtered by country' do
+          expect(Operator.fetch_all({'country_ids' => [@country.id]}).to_a).to eql(
+            Operator.where(country_id: @country.id).to_a
+          )
+        end
+      end
+    end
 
-  it 'Fetch all operators' do
-    expect(Operator.fetch_all(nil).count).to eq(2)
-  end
+    context '#operator_select' do
+      it 'select operators ordered asd by name' do
+        result = Operator.by_name_asc.map { |c| [c.name, c.id] }
+        expect(Operator.operator_select).to eq(result)
 
-  it 'Operator select' do
-    expect(Operator.operator_select.size).to eq(2)
+      end
+    end
+
+    context '#types' do
+      it 'return operator types' do
+        expect(Operator.types).to eql Operator::TYPES
+      end
+    end
+
+    context '#translated_types' do
+      it 'return translated operator types' do
+        translated_types = Operator.types.map do |t|
+          [I18n.t("operator_types.#{t}", default: t), t.camelize]
+        end
+        expect(Operator.translated_types).to eql(translated_types)
+      end
+    end
+
+    context '#calculate_document_ranking' do
+      it 'calculate the rank per country of the operators based on their documents' do
+        Operator.calculate_document_ranking
+
+        @country.operators.order(percentage_valid_documents_all: :desc).each_with_index do |operator, index|
+          expect(operator.country_operators).to eql @country.operators.count
+          expect(operator.country_doc_rank).to eql(index + 1)
+        end
+      end
+    end
+
+    context '#calculate_scores' do
+      before do
+        prev_op_size = Operator.all.size.to_f
+        Operator.all.map { |operator| operator.calculate_observations_scores }
+
+        5.times do |t|
+          country = FactoryGirl.create(:country)
+          operator = FactoryGirl.create(:operator, country: country, is_active: true, fa_id: "fa_#{t}")
+          operator.update_attribute(:score_absolute, t / 10.to_f)
+        end
+      end
+
+      it 'update score of the operators ordering by score and spliting then into 3 groups' do
+        Operator.calculate_scores
+
+        third_operators =
+          (Operator.active.fa_operator.where.not(score_absolute: nil).count / 3).to_i
+
+        query =
+          Operator
+            .active
+            .fa_operator
+            .where
+            .not(score_absolute: nil)
+
+        expect(query.order("score_absolute LIMIT #{third_operators}").map(&:score).uniq.first).to eql 1
+        expect(query.order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").map(&:score).uniq.first).to eql 2
+        expect(query.order("score_absolute OFFSET #{2 * third_operators}").map(&:score).uniq.first).to eql 3
+      end
+    end
   end
 end

@@ -86,6 +86,7 @@ class Observation < ApplicationRecord
 
   include Activable
 
+  # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, ->() { joins(:translations).where(is_active: true) }
   scope :own_with_inactive, ->(observer) {
     joins('INNER JOIN "observer_observations" ON "observer_observations"."observation_id" = "observations"."id"

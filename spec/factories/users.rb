@@ -37,6 +37,10 @@ FactoryGirl.define do
     password_confirmation { |u| u.password }
     name 'Test user'
     is_active true
+
+    after(:build) do |random_user|
+      random_user.user_permission = UserPermission.new(user_role: 0)
+    end
   end
 
   factory :ngo, class: User do
