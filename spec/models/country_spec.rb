@@ -22,6 +22,8 @@ RSpec.describe Country, type: :model do
     expect(country).to be_valid
   end
 
+  it_should_behave_like 'translatable', FactoryGirl.create(:country), %i[name region_name]
+
   context 'Relations' do
     it { is_expected.to have_many(:users).inverse_of(:country) }
     it { is_expected.to have_many(:observations).inverse_of(:country) }
@@ -67,6 +69,4 @@ RSpec.describe Country, type: :model do
       end
     end
   end
-
-  it_should_behave_like 'translatable', FactoryGirl.create(:country), %i[name region_name]
 end
