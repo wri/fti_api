@@ -8,7 +8,7 @@ FactoryGirl.define do
       random_required_operator_document.country ||=
         FactoryGirl.create(:country)
       random_required_operator_document.required_operator_document_group ||=
-        FactoryGirl.create(:required_operator_document_group, country: country)
+        FactoryGirl.create(:required_operator_document_group)
     end
 
     factory :required_operator_document_country do

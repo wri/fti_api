@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :fmu_operator do
-    start_date { DateTime.yesterday }
+    start_date { Date.today }
+    end_date { Date.tomorrow }
     current { true }
 
     after(:build) do |random_fmu_operator|
