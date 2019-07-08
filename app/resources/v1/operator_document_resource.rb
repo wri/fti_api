@@ -58,14 +58,20 @@ module V1
     end
 
     def self.records(options = {})
-      context = options[:context]
-      user = context[:current_user]
-      app = context[:app]
-      if app != 'observations-tool' && user.present? && user.operator_id && context[:action] != 'destroy'
-        OperatorDocument.actual.from_user(user.operator_id)
-      else
-        OperatorDocument.all
-      end
+      OperatorDocument.all
+
+      # TODO : This code is faulty. I'm not sure if any of this is necessary.
+      # It could be that when logged in, the operator could see his old
+      # documents and that those should be added to the list of documents
+
+      # context = options[:context]
+      # user = context[:current_user]
+      # app = context[:app]
+      # if app != 'observations-tool' && user.present? && user.operator_id && context[:action] != 'destroy'
+      #   OperatorDocument.actual.from_user(user.operator_id)
+      # else
+      #   OperatorDocument.all
+      # end
     end
 
     def custom_links(_)
