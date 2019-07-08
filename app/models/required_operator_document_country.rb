@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: required_operator_documents
@@ -13,10 +12,14 @@
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
 #  deleted_at                          :datetime
+#  forest_type                         :integer
+#  contract_signature                  :boolean          default(FALSE), not null
 #
 
 class RequiredOperatorDocumentCountry < RequiredOperatorDocument
   has_many :operator_document_countries
+
+  validates_uniqueness_of :contract_signature, scope: :country_id, if: :contract_signature?
 
   after_create :create_operator_document_countries
 
@@ -27,6 +30,4 @@ class RequiredOperatorDocumentCountry < RequiredOperatorDocument
       end
     end
   end
-
-
 end

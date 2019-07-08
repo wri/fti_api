@@ -6,7 +6,8 @@ ActiveAdmin.register RequiredOperatorDocument do
   active_admin_paranoia
 
   actions :all
-  permit_params :name, :type, :valid_period, :country, :required_operator_document_group_id, :country_id,
+  permit_params :name, :type, :forest_type, :valid_period, :contract_signature,
+                :country, :required_operator_document_group_id, :country_id,
                 translations_attributes: [:id, :locale, :explanation]
 
   csv do
@@ -28,6 +29,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     bool_column :exists do |rod|
       rod.deleted_at.nil?
     end
+    column :contract_signature
     column :required_operator_document_group
     column :country
     column :type
@@ -36,9 +38,11 @@ ActiveAdmin.register RequiredOperatorDocument do
     actions
   end
 
+  filter :contract_signature, as: :select, collection: [['True', true], ['False', false]]
   filter :required_operator_document_group
   filter :country
   filter :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu)
+  filter :forest_type, as: :select
   filter :name, as: :select
   filter :updated_at
 
@@ -47,9 +51,13 @@ ActiveAdmin.register RequiredOperatorDocument do
     f.inputs 'Required Operator Document Details' do
       editing = object.new_record? ? false : true
       f.input :required_operator_document_group
-      f.input :country
+      f.input :contract_signature, input_html: { disabled: editing }
+      f.input :country, input_html: { disabled: editing }
       f.input :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu),
                      include_blank: false, input_html: { disabled: editing }
+      f.input :forest_type, as: :select,
+              collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.first] },
+              include_blank: true, input_html: { disabled: editing }
       f.input :name
       f.input :valid_period, label: 'Validity (days)'
       f.inputs 'Translated fields' do

@@ -21,6 +21,7 @@
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
+#  public                        :boolean          default(TRUE), not null
 #
 
 class OperatorDocument < ApplicationRecord
@@ -46,6 +47,9 @@ class OperatorDocument < ApplicationRecord
   after_save :update_operator_percentages, on: %w[create update],  if: :status_changed?
 
   before_destroy :insure_unity
+
+  scope :to_expire, ->(date) { joins(:required_operator_document)
+                                .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
@@ -75,7 +79,7 @@ class OperatorDocument < ApplicationRecord
   end
 
   def self.expire_documents
-    documents_to_expire = OperatorDocument.where("expire_date < '#{Date.today}'::date and status = 3")
+    documents_to_expire = OperatorDocument.to_expire(Date.today)
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} documents"
@@ -85,10 +89,11 @@ class OperatorDocument < ApplicationRecord
     self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
   end
 
-  scope :actual,    -> { where(current: true, deleted_at: nil) }
-  scope :valid,     -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required,  -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
-  scope :from_user, ->(operator_id) { where(operator_id: operator_id) }
+  scope :actual,       -> { where(current: true, deleted_at: nil) }
+  scope :valid,        -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required,     -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
+  scope :available,    -> { where(public: true) }
 
   private
 
@@ -124,5 +129,4 @@ class OperatorDocument < ApplicationRecord
       self.errors[:reason] << 'Cannot have a reason not to have a document'
     end
   end
-
 end
