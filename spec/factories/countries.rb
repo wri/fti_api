@@ -21,5 +21,9 @@ FactoryGirl.define do
     is_active true
     country_centroid '{ "type":"Point", "coordinates":[-25,135] }'
     region_centroid  '{ "type":"Point", "coordinates":[-26.3793465342288,135.977532183695] } }'
+
+    after(:build) do |random_country|
+      random_country.translation.name = random_country.name
+    end
   end
 end

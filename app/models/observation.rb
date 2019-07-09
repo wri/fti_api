@@ -30,7 +30,9 @@
 
 class Observation < ApplicationRecord
   include Translatable
+  include Activable
   include ValidationHelper
+
   translates :details, :evidence, :concern_opinion, :litigation_status, touch: true
   active_admin_translates :details, :evidence, :concern_opinion, :litigation_status
 
@@ -71,8 +73,8 @@ class Observation < ApplicationRecord
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
-  validates_presence_of :validation_status
-  validates_presence_of :observation_type
+  validates :validation_status, presence: true
+  validates :observation_type, presence: true
   validate :active_government
 
   before_save    :set_active_status
@@ -83,8 +85,6 @@ class Observation < ApplicationRecord
   after_destroy  :update_operator_scores
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
   after_save     :update_reports_observers, if: 'observation_report_id_changed?'
-
-  include Activable
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, ->() { joins(:translations).where(is_active: true) }
@@ -108,7 +108,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   class << self
     def translated_types
-      types.map { |t| [I18n.t("observation_types.#{t}", default: t), t.camelize] }
+      observation_types.map { |t| [I18n.t("observation_types.#{t.first}", default: t.first), t.first.camelize] }
     end
   end
 
@@ -117,7 +117,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def translated_type
-    I18n.t("observation_types.#{observation_type.constantize}")
+    I18n.t("observation_types.#{observation_type}")
   end
 
   def cache_key
@@ -126,6 +126,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   def update_reports_observers
     return if observation_report.blank?
+
     observation_report.observer_ids =
       observation_report.observations.map(&:observers).map(&:ids).flatten
   end
@@ -134,19 +135,18 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   private
 
   def check_is_physical_place
-    if !is_physical_place
-      self.lat = nil
-      self.lng = nil
-      self.fmu = nil
-    end
+    return if is_physical_place
+
+    self.lat = nil
+    self.lng = nil
+    self.fmu = nil
   end
 
   def set_centroid
-    if fmu.present? && lat.blank? && lng.blank?
-      self.lat = fmu.geojson.dig('properties', 'centroid', 'coordinates').first rescue nil
-      self.lng = fmu.geojson.dig('properties', 'centroid', 'coordinates').second rescue nil
+    return if fmu.blank? || lat.present? || lng.present?
 
-    end
+    self.lat = fmu.geojson.dig('properties', 'centroid', 'coordinates').first rescue nil
+    self.lng = fmu.geojson.dig('properties', 'centroid', 'coordinates').second rescue nil
   end
 
   def update_operator_scores
@@ -163,9 +163,11 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def active_government
-    return if observation_type != 'government'
-    return if persisted?
-    return if government.nil?
-    errors[:government] << 'The selected government is not active' unless government.is_active
+    return if persisted? ||
+              observation_type != 'government' ||
+              government.nil? ||
+              government.is_active
+
+    errors[:government] << 'The selected government is not active'
   end
 end

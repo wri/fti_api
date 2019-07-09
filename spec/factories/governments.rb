@@ -15,8 +15,8 @@ FactoryGirl.define do
     details           'Indicator one'
 
     after(:create) do |government|
-      government.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                              iso: "C#{Faker::Lorem.sentence}"))
+      country_attributes = FactoryGirl.build(:country).attributes.except(%w[id created_at updated_at])
+      government.country ||= Country.find_or_create_by(country_attributes)
     end
   end
 end

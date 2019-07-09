@@ -74,8 +74,8 @@ FactoryGirl.define do
   end
 
   factory :admin, class: User do
-    sequence(:email)    { |n| "admin#{n}@vizzuality.com" }
-    sequence(:nickname) { |n| "admin#{n}"                }
+    sequence(:email)    { |n| Faker::Internet.email }
+    sequence(:nickname) { |n| "admin#{n}" }
 
     password 'password'
     password_confirmation { |u| u.password }

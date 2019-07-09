@@ -75,16 +75,25 @@ FactoryGirl.define do
     is_active         true
     evidence         'Operator observation'
     publication_date DateTime.now.to_date
-    association :country, factory: :country
     lng 12.2222
     lat 12.3333
 
     after(:build) do |random_observation|
+      country = random_observation.country
+      unless random_observation.country
+        # Country ISO are limited and can cause problems with uniqueness validation
+        country_attributes = FactoryGirl.build(:country).attributes.except('id', 'created_at', 'updated_at')
+        country = Country.find_by(country_attributes) ||
+                  FactoryGirl.create(:country, country_attributes)
+        random_observation.country = country
+      end
+
       random_observation.subcategory ||= FactoryGirl.create(:subcategory)
       random_observation.severity ||= FactoryGirl.create(:severity, subcategory: random_observation.subcategory)
       random_observation.user ||= FactoryGirl.create(:admin)
-      random_observation.operator ||= FactoryGirl.create(:operator)
-      random_observation.government ||= FactoryGirl.create(:government)
+      random_observation.operator ||= FactoryGirl.create(:operator, country: country)
+      random_observation.government ||= FactoryGirl.create(:government, country: country)
+      random_observation.observers = [FactoryGirl.create(:observer)]
       unless random_observation.species.any?
         random_observation.species ||= [FactoryGirl.create(:species, name: "Species #{Faker::Lorem.sentence}")]
       end
