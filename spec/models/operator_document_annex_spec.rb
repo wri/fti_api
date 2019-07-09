@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe OperatorDocumentAnnex, type: :model do
+  subject(:operator_document_annex) { FactoryGirl.build :operator_document_annex }
+
+  it 'is valid with valid attributes' do
+    expect(operator_document_annex).to be_valid
+  end
+
   describe 'Relations' do
     it { is_expected.to belong_to(:operator_document).required }
     it { is_expected.to belong_to(:user) }

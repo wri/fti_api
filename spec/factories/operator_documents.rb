@@ -18,11 +18,11 @@ FactoryGirl.define do
       random_operator_document.fmu ||= FactoryGirl.create(:fmu, country: country)
     end
 
-    factory :operator_document_country do
+    factory :operator_document_country, class: OperatorDocumentCountry do
       type { 'OperatorDocumentCountry' }
     end
 
-    factory :operator_document_fmu do
+    factory :operator_document_fmu, class: OperatorDocumentFmu do
       type { 'OperatorDocumentFmu' }
     end
   end
