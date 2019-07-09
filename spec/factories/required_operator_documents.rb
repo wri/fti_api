@@ -11,11 +11,11 @@ FactoryGirl.define do
         FactoryGirl.create(:required_operator_document_group)
     end
 
-    factory :required_operator_document_country do
+    factory :required_operator_document_country, class: RequiredOperatorDocumentCountry do
       type { 'RequiredOperatorDocumentCountry' }
     end
 
-    factory :required_operator_document_fmu do
+    factory :required_operator_document_fmu, class: RequiredOperatorDocumentFmu do
       type { 'RequiredOperatorDocumentFmu' }
     end
   end

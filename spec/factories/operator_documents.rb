@@ -24,6 +24,12 @@ FactoryGirl.define do
 
     factory :operator_document_fmu, class: OperatorDocumentFmu do
       type { 'OperatorDocumentFmu' }
+
+      after(:build) do |random_operator_document_fmu|
+        random_operator_document_fmu.required_operator_document_fmu ||=
+          FactoryGirl.create :required_operator_document_fmu
+        random_operator_document_fmu.fmu ||= FactoryGirl.create :fmu
+      end
     end
   end
 end
