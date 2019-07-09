@@ -244,7 +244,7 @@ RSpec.describe Observation, type: :model do
       end
     end
 
-    context 'cache_key' do
+    describe '#cache_key' do
       it 'return the default value with the locale' do
         observation = FactoryGirl.create :observation
 
