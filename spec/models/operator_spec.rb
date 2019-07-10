@@ -28,6 +28,8 @@
 require 'rails_helper'
 
 RSpec.describe Operator, type: :model do
+  subject(:operator) { FactoryGirl.build :operator }
+
   before :all do
     @country = FactoryGirl.create(:country)
     @operator = FactoryGirl.create(:operator, country: @country, fa_id: 'fa-id')
@@ -46,6 +48,10 @@ RSpec.describe Operator, type: :model do
       FactoryGirl.create(:required_operator_document_country, **required_operator_document_data)
     @required_operator_document_fmu =
       FactoryGirl.create(:required_operator_document_fmu, **required_operator_document_data)
+  end
+
+  it 'is valid with valid attributes' do
+    expect(operator).to be_valid
   end
 
   it_should_behave_like 'translatable', FactoryGirl.create(:operator), %i[name details]
@@ -107,6 +113,8 @@ RSpec.describe Operator, type: :model do
           }
           FactoryGirl.create(:required_operator_document_country, **required_operator_document_data)
           FactoryGirl.create(:required_operator_document_fmu, **required_operator_document_data)
+
+          @other_operator.operator_documents.destroy_all
         end
 
         it 'set :doc_not_provided status for related OperatorDocumentCountry and OperatorDocumentFmu' do
@@ -180,6 +188,18 @@ RSpec.describe Operator, type: :model do
       @another_operator = FactoryGirl.create(:operator, country: @country, fa_id: 'fa-id')
     end
 
+    before do
+      # On each test, we are creating new operator_documents due to the different
+      # callbacks which appears on Operator and OperatorDocument. For this, we get the
+      # number of required operator_documents on each test
+      @operator_documents_required =
+        @operator.operator_documents.joins(:required_operator_document).required.count.to_f
+      @operator_document_countries_required =
+        @operator.operator_document_countries.joins(:required_operator_document).required.count.to_f
+      @operator_document_fmus_required =
+        @operator.operator_document_fmus.joins(:required_operator_document).required.count.to_f
+    end
+
     context '#cache_key' do
       it 'return the default value with the locale' do
         expect(@operator.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
@@ -193,9 +213,9 @@ RSpec.describe Operator, type: :model do
             @operator.update_attributes(fa_id: 'fa_id', approved: true)
             @operator.update_valid_documents_percentages
 
-            expect(@operator.percentage_valid_documents_all).to eql(1.0 / 3.0)
-            expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 3.0)
-            expect(@operator.percentage_valid_documents_country).to eql(1.0 / 3.0)
+            expect(@operator.percentage_valid_documents_all).to eql(6.0 / @operator_documents_required)
+            expect(@operator.percentage_valid_documents_country).to eql(2.0 / @operator_document_countries_required)
+            expect(@operator.percentage_valid_documents_fmu).to eql(2.0 / @operator_document_fmus_required)
           end
         end
 
@@ -204,9 +224,9 @@ RSpec.describe Operator, type: :model do
             @operator.update_attributes(fa_id: 'fa_id', approved: false)
             @operator.update_valid_documents_percentages
 
-            expect(@operator.percentage_valid_documents_all).to eql(1.0 / 6.0)
-            expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 6.0)
-            expect(@operator.percentage_valid_documents_country).to eql(1.0 / 6.0)
+            expect(@operator.percentage_valid_documents_all).to eql(3.0 / @operator_documents_required)
+            expect(@operator.percentage_valid_documents_country).to eql(1.0 / @operator_document_countries_required)
+            expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / @operator_document_fmus_required)
           end
         end
 
@@ -226,9 +246,9 @@ RSpec.describe Operator, type: :model do
       it 'update the percentages of valid and available operator documents' do
         @operator.percentage_non_approved
 
-        expect(@operator.percentage_valid_documents_all).to eql(1.0 / 6.0)
-        expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 6.0)
-        expect(@operator.percentage_valid_documents_country).to eql(1.0 / 6.0)
+        expect(@operator.percentage_valid_documents_all).to eql(3.0 / @operator_documents_required)
+        expect(@operator.percentage_valid_documents_country).to eql(1.0 / @operator_document_countries_required)
+        expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / @operator_document_fmus_required)
       end
     end
 
@@ -236,9 +256,9 @@ RSpec.describe Operator, type: :model do
       it 'update the percentages of valid operator documents' do
         @operator.percentage_approved
 
-        expect(@operator.percentage_valid_documents_all).to eql(1.0 / 3.0)
-        expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / 3.0)
-        expect(@operator.percentage_valid_documents_country).to eql(1.0 / 3.0)
+        expect(@operator.percentage_valid_documents_all).to eql(6.0 / @operator_documents_required)
+        expect(@operator.percentage_valid_documents_country).to eql(2.0 / @operator_document_countries_required)
+        expect(@operator.percentage_valid_documents_fmu).to eql(2.0 / @operator_document_fmus_required)
       end
     end
 
