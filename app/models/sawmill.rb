@@ -15,7 +15,7 @@
 #
 
 class Sawmill < ApplicationRecord
-  belongs_to :operator, optional: false
+  belongs_to :operator
   validates_numericality_of :lat, greater_than_or_equal_to: -90, less_than_or_equal_to: 90
   validates_numericality_of :lng, greater_than_or_equal_to: -180, less_than_or_equal_to: 180
 
