@@ -39,6 +39,7 @@ class GovDocument < ApplicationRecord
 
   before_save :update_current, on: %w[create update], if: :current_changed?
   before_create :set_status
+  before_create :set_country
   before_create :delete_previous_pending_document
   after_save :update_percentages, on: %w[create update],  if: :status_changed?
 
@@ -104,6 +105,10 @@ class GovDocument < ApplicationRecord
     else
       self.status = GovDocument.statuses[:doc_not_provided]
     end
+  end
+
+  def set_country
+    self.country_id = required_gov_document.country_id
   end
 
   def delete_previous_pending_document

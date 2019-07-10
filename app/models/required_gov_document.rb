@@ -15,6 +15,7 @@
 #
 
 class RequiredGovDocument < ApplicationRecord
+  includes Translatable
   acts_as_paranoid
 
   translates :explanation, touch: true
