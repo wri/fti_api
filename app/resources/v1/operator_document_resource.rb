@@ -45,14 +45,13 @@ module V1
     # TODO: Implement permissions system here
     def status
       return @model.status if can_see_document?
-      return :doc_not_provided unless document_public?
+      # return :doc_not_provided unless document_public?
 
       hidden_document_status
     end
 
     def attachment
-      return @model.attachment if can_see_document?
-      return :doc_not_provided unless document_public?
+      return @model.attachment if can_see_document? || document_public?
 
       { url: nil }
     end
