@@ -14,6 +14,12 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  subject(:comment) { FactoryGirl.build :comment }
+
+  it 'is valid with valid attributes' do
+    expect(comment).to be_valid
+  end
+
   describe 'Relations' do
     it { is_expected.to belong_to(:commentable) }
     it { is_expected.to belong_to(:user).inverse_of(:comments)}
