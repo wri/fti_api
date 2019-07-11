@@ -5,9 +5,8 @@ RSpec.shared_examples 'activable' do |model_name, model|
     context 'hooks' do
       context '#set_deactivated_at' do
         it "set deactivated_at when #{model_name} is saved" do
-          expect(model.deactivated_at).to eql nil
+          model.deactivate
 
-          model.save
           expect(model.deactivated_at).not_to eql nil
         end
       end

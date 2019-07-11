@@ -61,11 +61,10 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
   validates :name,        presence: true
-  validate  :validate_nickname
 
   validates_format_of :nickname, with: /\A[a-z0-9_\.][-a-z0-9]{1,19}\Z/i,
-                                 exclusion: { in: %w(admin superuser about root fti otp faq contact user operator ngo) },
                                  multiline: true
+  validates :nickname, exclusion: {in: %w(admin superuser about root fti otp faq contact user operator ngo) }
 
   validates :password, confirmation: true,
                        length: { within: 8..20 },
@@ -95,7 +94,7 @@ class User < ApplicationRecord
   end
 
   def display_name
-    "#{half_email}" if name.blank?
+    return "#{half_email}" if name.blank?
     "#{name}"
   end
 
@@ -108,6 +107,7 @@ class User < ApplicationRecord
   end
 
   def api_key_exists?
+    # TODO Should return true/false but not nil
     !self.api_key.expired? if self.api_key.present?
   end
 
@@ -118,9 +118,7 @@ class User < ApplicationRecord
   end
 
   def delete_api_key
-    if self.api_key
-      APIKey.where(user_id: self.id).delete_all
-    end
+    APIKey.where(user_id: self.id).delete_all if self.api_key
   end
 
   def send_reset_password_instructions(url)
@@ -165,16 +163,10 @@ class User < ApplicationRecord
     user.reset_password_token
   end
 
-  def validate_nickname
-    if User.where(email: nickname).exists?
-      errors.add(:nickname, :invalid)
-    end
-  end
-
   def half_email
-    "" if email.blank?
+    return '' if email.blank?
     index = email.index('@')
-    "" if index.nil? || index.to_i.zero?
+    return '' if index.nil? || index.to_i.zero?
     email[0, index.to_i]
   end
 
@@ -189,7 +181,7 @@ class User < ApplicationRecord
         errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
       else
         errors['operator_id'] << 'Cannot have an Operator' if operator_id.present?
-          errors['observer_id'] << 'Cannot have an Observer' if observer_id.present?
+        errors['observer_id'] << 'Cannot have an Observer' if observer_id.present?
       end
     end
   end
