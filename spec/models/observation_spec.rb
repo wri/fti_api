@@ -40,7 +40,7 @@ RSpec.describe Observation, type: :model do
   #it_should_behave_like 'activable', :observation, FactoryGirl.build(:observation)
 
   it_should_behave_like 'translatable',
-    FactoryGirl.build(:observation),
+    FactoryGirl.create(:observation),
     %i[details evidence concern_opinion litigation_status]
 
   describe 'Enums' do

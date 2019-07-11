@@ -27,7 +27,7 @@ RSpec.describe Observer, type: :model do
     expect(observer).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.build(:observer), %i[name organization]
+  it_should_behave_like 'translatable', FactoryGirl.create(:observer), %i[name organization]
 
   describe 'Relations' do
     it { is_expected.to have_and_belong_to_many(:countries) }

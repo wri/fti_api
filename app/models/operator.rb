@@ -88,7 +88,7 @@ class Operator < ApplicationRecord
   class Translation
     after_save do
       if name_changed?
-        Operator.find(self.operator_id).fmus.find_each { |x| x.save }
+        Operator.find_by(id: self.operator_id)&.fmus&.find_each { |x| x.save }
       end
     end
   end

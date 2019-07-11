@@ -25,7 +25,7 @@ RSpec.describe Species, type: :model do
     expect(species).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.build(:species), %i[common_name]
+  it_should_behave_like 'translatable', FactoryGirl.create(:species), %i[common_name]
 
   describe 'Relations' do
     it { is_expected.to have_many(:species_observations) }

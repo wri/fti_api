@@ -7,7 +7,7 @@ RSpec.describe Subcategory, type: :model do
     expect(subcategory).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.build(:subcategory), %i[name details]
+  it_should_behave_like 'translatable', FactoryGirl.create(:subcategory), %i[name details]
 
   describe 'Enums' do
     it { is_expected.to define_enum_for(:subcategory_type).with_values(

@@ -106,10 +106,6 @@ RSpec.describe FmuOperator, type: :model do
           required_operator_document = FactoryGirl.create :required_operator_document_fmu,
             country: country
           FactoryGirl.create :operator_document_fmu,
-            operator: operator,
-            fmu: @fmu,
-            required_operator_document: required_operator_document
-          FactoryGirl.create :operator_document_fmu,
             operator: another_operator,
             fmu: @fmu,
             required_operator_document: required_operator_document
