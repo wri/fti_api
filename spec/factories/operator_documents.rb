@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :operator_document do
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
@@ -8,19 +8,19 @@ FactoryGirl.define do
     after(:build) do |random_operator_document|
       country = random_operator_document&.operator&.country ||
                 random_operator_document&.required_operator_document&.country ||
-                FactoryGirl.create(:country)
+                FactoryBot.create(:country)
 
-      random_operator_document.operator ||= FactoryGirl.create(:operator, country: country)
+      random_operator_document.operator ||= FactoryBot.create(:operator, country: country)
       unless random_operator_document.required_operator_document
-        required_operator_document_group = FactoryGirl.create(:required_operator_document_group)
-        random_operator_document.required_operator_document ||= FactoryGirl.create(
+        required_operator_document_group = FactoryBot.create(:required_operator_document_group)
+        random_operator_document.required_operator_document ||= FactoryBot.create(
           :required_operator_document,
           country: country,
           required_operator_document_group: required_operator_document_group
         )
       end
-      random_operator_document.user ||= FactoryGirl.create(:user)
-      random_operator_document.fmu ||= FactoryGirl.create(:fmu, country: country)
+      random_operator_document.user ||= FactoryBot.create(:user)
+      random_operator_document.fmu ||= FactoryBot.create(:fmu, country: country)
     end
 
     factory :operator_document_country, class: OperatorDocumentCountry do
@@ -32,8 +32,8 @@ FactoryGirl.define do
 
       after(:build) do |random_operator_document_fmu|
         random_operator_document_fmu.required_operator_document_fmu ||=
-          FactoryGirl.create :required_operator_document_fmu
-        random_operator_document_fmu.fmu ||= FactoryGirl.create :fmu
+          FactoryBot.create :required_operator_document_fmu
+        random_operator_document_fmu.fmu ||= FactoryBot.create :fmu
       end
     end
   end

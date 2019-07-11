@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Subcategory, type: :model do
-  subject(:subcategory) { FactoryGirl.build :subcategory }
+  subject(:subcategory) { FactoryBot.build :subcategory }
 
   it 'is valid with valid attributes' do
     expect(subcategory).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:subcategory), %i[name details]
+  it_should_behave_like 'translatable', FactoryBot.create(:subcategory), %i[name details]
 
   describe 'Enums' do
     it { is_expected.to define_enum_for(:subcategory_type).with_values(

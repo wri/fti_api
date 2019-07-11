@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RequiredOperatorDocument, type: :model do
-  subject(:required_operator_document) { FactoryGirl.build :required_operator_document }
+  subject(:required_operator_document) { FactoryBot.build :required_operator_document }
 
   it 'is valid with valid attributes' do
     expect(required_operator_document).to be_valid
@@ -9,7 +9,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
   it_should_behave_like 'forest_typeable', RequiredOperatorDocument
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:required_operator_document), %i[explanation]
+  it_should_behave_like 'translatable', FactoryBot.create(:required_operator_document), %i[explanation]
 
   describe 'Relations' do
     it { is_expected.to belong_to(:required_operator_document_group) }
@@ -25,7 +25,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
     describe '#fixed_fields_unchanged' do
       context 'when it is persisted' do
         before do
-          @required_operator_document = FactoryGirl.create :required_operator_document,
+          @required_operator_document = FactoryBot.create :required_operator_document,
             contract_signature: false,
             forest_type: 1,
             type: 'RequiredOperatorDocument'
@@ -66,7 +66,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
         context 'when country_id has changed' do
           it 'add an error on country_id' do
-            another_country = FactoryGirl.create :country
+            another_country = FactoryBot.create :country
             @required_operator_document.update_attributes(country_id: another_country.id)
 
             expect(@required_operator_document.valid?).to eql false

@@ -18,14 +18,14 @@
 #  currency           :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :law do
     min_fine { rand(0..10) }
     max_fine { rand(0..10) }
 
     after(:build) do |law|
-      law.subcategory ||= FactoryGirl.create :subcategory
-      law.country ||= FactoryGirl.create :country
+      law.subcategory ||= FactoryBot.create :subcategory
+      law.country ||= FactoryBot.create :country
     end
   end
 end

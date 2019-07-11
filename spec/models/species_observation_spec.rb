@@ -12,7 +12,7 @@
 require 'rails_helper'
 
 RSpec.describe SpeciesObservation, type: :model do
-  subject(:species_observation) { FactoryGirl.build :species_observation }
+  subject(:species_observation) { FactoryBot.build :species_observation }
 
   it 'is valid with valid attributes' do
     expect(species_observation).to be_valid

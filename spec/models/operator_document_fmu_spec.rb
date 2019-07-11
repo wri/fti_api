@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OperatorDocumentFmu, type: :model do
-  subject(:operator_document_fmu) { FactoryGirl.build :operator_document_fmu }
+  subject(:operator_document_fmu) { FactoryBot.build :operator_document_fmu }
 
   it 'is valid with valid attributes' do
     expect(operator_document_fmu).to be_valid

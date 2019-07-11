@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Fmu, type: :model do
   it 'is valid with valid attributes' do
-    fmu = FactoryGirl.build :fmu
+    fmu = FactoryBot.build :fmu
     expect(fmu).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:fmu), %i[name]
+  it_should_behave_like 'translatable', FactoryBot.create(:fmu), %i[name]
 
   describe 'Relations' do
     it { is_expected.to belong_to(:country).inverse_of(:fmus) }
@@ -27,7 +27,7 @@ RSpec.describe Fmu, type: :model do
   describe 'Methods' do
     context '#cache_key' do
       it 'return the default value with the locale' do
-        fmu = FactoryGirl.build :fmu
+        fmu = FactoryBot.build :fmu
         expect(fmu.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end
     end
@@ -37,17 +37,17 @@ RSpec.describe Fmu, type: :model do
     context '#update_geojson' do
       context 'when geojson is blank' do
         it 'return nil' do
-          fmu = FactoryGirl.create :fmu, geojson: nil
+          fmu = FactoryBot.create :fmu, geojson: nil
           expect(fmu.geojson).to eql nil
         end
       end
 
       context 'when geojson is present' do
         it 'fill geojson with properties from fmu' do
-          country = FactoryGirl.create :country
-          operator = FactoryGirl.create :operator, country: country, fa_id: 'fa_id'
-          fmu = FactoryGirl.create :fmu, geojson: {properties: {}}, country: country
-          FactoryGirl.create(:fmu_operator, fmu: fmu, operator: operator)
+          country = FactoryBot.create :country
+          operator = FactoryBot.create :operator, country: country, fa_id: 'fa_id'
+          fmu = FactoryBot.create :fmu, geojson: {properties: {}}, country: country
+          FactoryBot.create(:fmu_operator, fmu: fmu, operator: operator)
           fmu.reload
           fmu.save
 
@@ -66,8 +66,8 @@ RSpec.describe Fmu, type: :model do
 
     context '#really_destroy_documents' do
       it 'destroy operator_documents associated with the fmu' do
-        another_fmu = FactoryGirl.create(:fmu)
-        operator_document = FactoryGirl.create(:operator_document, fmu: another_fmu)
+        another_fmu = FactoryBot.create(:fmu)
+        operator_document = FactoryBot.create(:operator_document, fmu: another_fmu)
         another_fmu.destroy
 
         expect(OperatorDocument.where(id: operator_document.id).first).to be_nil
@@ -78,7 +78,7 @@ RSpec.describe Fmu, type: :model do
   describe 'Instance methods' do
     context '#cache_key' do
       it 'return the default value with the locale' do
-        fmu = FactoryGirl.create :fmu
+        fmu = FactoryBot.create :fmu
         expect(fmu.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end
     end
@@ -86,16 +86,16 @@ RSpec.describe Fmu, type: :model do
 
   describe 'Class methods' do
     before :all do
-      @country = FactoryGirl.create :country
-      operator = FactoryGirl.create :operator, fa_id: 'fa-id'
-      @operator = FactoryGirl.create :operator, country: @country, fa_id: 'fa_id'
+      @country = FactoryBot.create :country
+      operator = FactoryBot.create :operator, fa_id: 'fa-id'
+      @operator = FactoryBot.create :operator, country: @country, fa_id: 'fa_id'
 
-      FactoryGirl.create(:fmu, country: @country)
-      fmu1 = FactoryGirl.create(:fmu, country: operator.country)
-      fmu2 = FactoryGirl.create(:fmu, country: @country)
+      FactoryBot.create(:fmu, country: @country)
+      fmu1 = FactoryBot.create(:fmu, country: operator.country)
+      fmu2 = FactoryBot.create(:fmu, country: @country)
 
-      FactoryGirl.create(:fmu_operator, fmu: fmu1, operator: operator)
-      FactoryGirl.create(:fmu_operator, fmu: fmu2, operator: @operator)
+      FactoryBot.create(:fmu_operator, fmu: fmu1, operator: operator)
+      FactoryBot.create(:fmu_operator, fmu: fmu2, operator: @operator)
     end
 
     context 'when country_ids and operator_ids are not specified' do

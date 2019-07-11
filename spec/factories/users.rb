@@ -28,15 +28,15 @@
 #  operator_id            :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email)    { |n| "pepe#{n}@vizzuality.com" }
     sequence(:nickname) { |n| "pepe#{n}"                }
 
-    password 'password'
+    password { 'password' }
     password_confirmation { |u| u.password }
-    name 'Test user'
-    is_active true
+      name { 'Test user' }
+    is_active { true }
 
     after(:build) do |random_user|
       random_user.user_permission = UserPermission.new(user_role: 0)
@@ -47,13 +47,13 @@ FactoryGirl.define do
     sequence(:email)    { |n| "ngo#{n}@vizzuality.com" }
     sequence(:nickname) { |n| "ngo#{n}"                }
 
-    password 'password'
+    password { 'password' }
     password_confirmation { |u| u.password }
-    name 'Test ngo'
-    is_active true
+    name { 'Test ngo' }
+    is_active { true }
 
     after(:build) do |random_ngo|
-      random_ngo.observer ||= FactoryGirl.create(:observer)
+      random_ngo.observer ||= FactoryBot.create(:observer)
       random_ngo.user_permission = UserPermission.new(user_role: 2)
     end
   end
@@ -62,13 +62,13 @@ FactoryGirl.define do
     sequence(:email)    { |n| "operator#{n}@vizzuality.com" }
     sequence(:nickname) { |n| "operator#{n}"                }
 
-    password 'password'
+    password { 'password' }
     password_confirmation { |u| u.password }
-    name 'Test operator'
-    is_active true
+    name { 'Test operator' }
+    is_active { true }
 
     after(:build) do |random_operator|
-      random_operator.operator ||= FactoryGirl.create(:operator)
+      random_operator.operator ||= FactoryBot.create(:operator)
       random_operator.user_permission = UserPermission.new(user_role: 1)
     end
   end
@@ -77,10 +77,10 @@ FactoryGirl.define do
     sequence(:email)    { |n| Faker::Internet.email }
     sequence(:nickname) { |n| "admin#{n}" }
 
-    password 'password'
+    password { 'password' }
     password_confirmation { |u| u.password }
-    name 'Admin user'
-    is_active true
+    name { 'Admin user' }
+    is_active { true }
 
     after(:build) do |random_admin|
       random_admin.user_permission = UserPermission.new(user_role: 3)
@@ -91,10 +91,10 @@ FactoryGirl.define do
     sequence(:email)    { |n| "webuser#{n}@vizzuality.com" }
     sequence(:nickname) { |n| "webuser#{n}"                }
 
-    password 'password'
+    password { 'password' }
     password_confirmation { |u| u.password }
-    name 'Web user'
-    is_active true
+    name { 'Web user' }
+    is_active { true }
 
     after(:build) do |random_webuser|
       random_webuser.user_permission = UserPermission.new(user_role: 0)

@@ -12,13 +12,13 @@ module V1
       }
     end
 
-    let!(:user)     { FactoryGirl.create(:user)          }
-    let!(:admin)    { FactoryGirl.create(:admin)         }
-    let!(:operator) { FactoryGirl.create(:operator_user) }
-    let!(:category) { FactoryGirl.create(:category)      }
-    let!(:law)      { FactoryGirl.create(:law)           }
+    let!(:user)     { FactoryBot.create(:user)          }
+    let!(:admin)    { FactoryBot.create(:admin)         }
+    let!(:operator) { FactoryBot.create(:operator_user) }
+    let!(:category) { FactoryBot.create(:category)      }
+    let!(:law)      { FactoryBot.create(:law)           }
 
-    let!(:annex_operator) { FactoryGirl.create(:annex_operator, illegality: '00 AO one') }
+    let!(:annex_operator) { FactoryBot.create(:annex_operator, illegality: '00 AO one') }
 
     context 'Show annex_operators' do
       it 'Get annex_operators list' do
@@ -33,12 +33,12 @@ module V1
     end
 
     context 'Pagination and sort for annex_operators' do
-      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+      let!(:country) { FactoryBot.create(:country, name: 'Spain') }
 
       let!(:annex_operators) {
         annex_operators = []
-        annex_operators << FactoryGirl.create_list(:annex_operator, 3)
-        annex_operators << FactoryGirl.create(:annex_operator, illegality: 'ZZZ Next first one Spain', country_id: country.id)
+        annex_operators << FactoryBot.create_list(:annex_operator, 3)
+        annex_operators << FactoryBot.create(:annex_operator, illegality: 'ZZZ Next first one Spain', country_id: country.id)
       }
 
       let(:country_id) { AnnexOperator.find_by(illegality: 'ZZZ Next first one Spain').country.id }

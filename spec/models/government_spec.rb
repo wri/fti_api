@@ -12,13 +12,13 @@
 require 'rails_helper'
 
 RSpec.describe Government, type: :model do
-  subject(:government) { FactoryGirl.build :government }
+  subject(:government) { FactoryBot.build :government }
 
   it 'is valid with valid attributes' do
     expect(government).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:government), %i[details]
+  it_should_behave_like 'translatable', FactoryBot.create(:government), %i[details]
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:government_entity) }
@@ -40,9 +40,9 @@ RSpec.describe Government, type: :model do
   describe 'Class methods' do
     describe '#fetch_all' do
       before do
-        @country = FactoryGirl.create :country
-        FactoryGirl.create :government, country: @country
-        FactoryGirl.create :government
+        @country = FactoryBot.create :country
+        FactoryBot.create :government, country: @country
+        FactoryBot.create :government
       end
 
       context 'when country_ids is not specified' do

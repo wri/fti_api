@@ -12,11 +12,11 @@ module V1
       }
     end
 
-    let!(:user)  { FactoryGirl.create(:user)  }
-    let!(:admin) { FactoryGirl.create(:admin) }
-    let!(:ngo)   { FactoryGirl.create(:ngo)   }
+    let!(:user)  { FactoryBot.create(:user)  }
+    let!(:admin) { FactoryBot.create(:admin) }
+    let!(:ngo)   { FactoryBot.create(:ngo)   }
 
-    let!(:category) { FactoryGirl.create(:category, name: '00 Category one') }
+    let!(:category) { FactoryBot.create(:category, name: '00 Category one') }
 
     context 'Show categories' do
       it 'Get categories list' do
@@ -33,8 +33,8 @@ module V1
     context 'Pagination and sort for categories' do
       let!(:categories) {
         categories = []
-        categories << FactoryGirl.create_list(:category, 4)
-        categories << FactoryGirl.create(:category, name: 'ZZZ Next first one')
+        categories << FactoryBot.create_list(:category, 4)
+        categories << FactoryBot.create(:category, name: 'ZZZ Next first one')
       }
 
       it 'Show list of categories for first page with per pege param' do

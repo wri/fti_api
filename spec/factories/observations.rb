@@ -27,75 +27,75 @@
 #  is_physical_place     :boolean          default(TRUE)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :observation_1, class: 'Observation' do
-    observation_type 'AnnexOperator'
-    is_active         true
-    evidence         'Operator observation'
-    publication_date DateTime.now.to_date
+    observation_type { 'AnnexOperator' }
+    is_active { true }
+    evidence { 'Operator observation' }
+    publication_date { DateTime.now.to_date }
     association :country, factory: :country
-    lng 12.2222
-    lat 12.3333
+    lng { 12.2222 }
+    lat { 12.3333 }
 
     after(:create) do |observation|
-      annex = FactoryGirl.create(:annex_operator)
+      annex = FactoryBot.create(:annex_operator)
 
-      observation.update(severity: FactoryGirl.create(:severity, severable: annex),
+      observation.update(severity: FactoryBot.create(:severity, severable: annex),
                          annex_operator: annex,
-                         user: FactoryGirl.create(:admin),
-                         observer: FactoryGirl.create(:observer, name: "Observer #{Faker::Lorem.sentence}"),
-                         operator: FactoryGirl.create(:operator, name: "Operator #{Faker::Lorem.sentence}"),
-                         species: [FactoryGirl.create(:species)])
+                         user: FactoryBot.create(:admin),
+                         observer: FactoryBot.create(:observer, name: "Observer #{Faker::Lorem.sentence}"),
+                         operator: FactoryBot.create(:operator, name: "Operator #{Faker::Lorem.sentence}"),
+                         species: [FactoryBot.create(:species)])
     end
   end
 
   factory :observation_2, class: 'Observation' do
-    observation_type 'AnnexGovernance'
-    is_active         true
-    evidence         'Governance observation'
-    publication_date (DateTime.now - 1.days).to_date
+    observation_type { 'AnnexGovernance' }
+    is_active { true }
+    evidence { 'Governance observation' }
+    publication_date { (DateTime.now - 1.days).to_date }
     association :country, factory: :country
-    lng 12.2222
-    lat 12.3333
+    lng { 12.2222 }
+    lat { 12.3333 }
 
     after(:create) do |observation|
-      annex = FactoryGirl.create(:annex_governance)
+      annex = FactoryBot.create(:annex_governance)
 
-      observation.update(severity: FactoryGirl.create(:severity, severable: annex),
+      observation.update(severity: FactoryBot.create(:severity, severable: annex),
                          annex_governance: annex,
-                         user: FactoryGirl.create(:admin),
-                         observer: FactoryGirl.create(:observer, name: "Observer #{Faker::Lorem.sentence}"),
-                         government: FactoryGirl.create(:government),
-                         species: [FactoryGirl.create(:species, name: "Species #{Faker::Lorem.sentence}")])
+                         user: FactoryBot.create(:admin),
+                         observer: FactoryBot.create(:observer, name: "Observer #{Faker::Lorem.sentence}"),
+                         government: FactoryBot.create(:government),
+                         species: [FactoryBot.create(:species, name: "Species #{Faker::Lorem.sentence}")])
     end
   end
 
   factory :observation, class: 'Observation' do
     observation_type { %w[operator government].sample }
-    is_active         true
-    evidence         'Operator observation'
-    publication_date DateTime.now.to_date
-    lng 12.2222
-    lat 12.3333
+    is_active { true }
+    evidence { 'Operator observation' }
+    publication_date { DateTime.now.to_date }
+    lng { 12.2222 }
+    lat { 12.3333 }
 
     after(:build) do |random_observation|
       country = random_observation.country
       unless random_observation.country
         # Country ISO are limited and can cause problems with uniqueness validation
-        country_attributes = FactoryGirl.build(:country).attributes.except('id', 'created_at', 'updated_at')
+        country_attributes = FactoryBot.build(:country).attributes.except('id', 'created_at', 'updated_at')
         country = Country.find_by(country_attributes) ||
-                  FactoryGirl.create(:country, country_attributes)
+                  FactoryBot.create(:country, country_attributes)
         random_observation.country = country
       end
 
-      random_observation.subcategory ||= FactoryGirl.create(:subcategory)
-      random_observation.severity ||= FactoryGirl.create(:severity, subcategory: random_observation.subcategory)
-      random_observation.user ||= FactoryGirl.create(:admin)
-      random_observation.operator ||= FactoryGirl.create(:operator, country: country)
-      random_observation.government ||= FactoryGirl.create(:government, country: country)
-      random_observation.observers = [FactoryGirl.create(:observer)]
+      random_observation.subcategory ||= FactoryBot.create(:subcategory)
+      random_observation.severity ||= FactoryBot.create(:severity, subcategory: random_observation.subcategory)
+      random_observation.user ||= FactoryBot.create(:admin)
+      random_observation.operator ||= FactoryBot.create(:operator, country: country)
+      random_observation.government ||= FactoryBot.create(:government, country: country)
+      random_observation.observers = [FactoryBot.create(:observer)]
       unless random_observation.species.any?
-        random_observation.species ||= [FactoryGirl.create(:species, name: "Species #{Faker::Lorem.sentence}")]
+        random_observation.species ||= [FactoryBot.create(:species, name: "Species #{Faker::Lorem.sentence}")]
       end
     end
   end

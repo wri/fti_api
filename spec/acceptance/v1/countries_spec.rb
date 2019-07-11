@@ -12,11 +12,11 @@ module V1
       }
     end
 
-    let!(:user)  { FactoryGirl.create(:user)  }
-    let!(:admin) { FactoryGirl.create(:admin) }
-    let!(:ngo)   { FactoryGirl.create(:ngo)   }
+    let!(:user)  { FactoryBot.create(:user)  }
+    let!(:admin) { FactoryBot.create(:admin) }
+    let!(:ngo)   { FactoryBot.create(:ngo)   }
 
-    let!(:country) { FactoryGirl.create(:country, name: '00 Country one') }
+    let!(:country) { FactoryBot.create(:country, name: '00 Country one') }
 
     context 'Show countries' do
       it 'Get countries list' do
@@ -33,8 +33,8 @@ module V1
     context 'Pagination and sort for countries' do
       let!(:countries) {
         countries = []
-        countries << FactoryGirl.create_list(:country, 4)
-        countries << FactoryGirl.create(:country, name: 'ZZZ Next first one', is_active: false)
+        countries << FactoryBot.create_list(:country, 4)
+        countries << FactoryBot.create(:country, name: 'ZZZ Next first one', is_active: false)
       }
 
       it 'Show list of countries for first page with per pege param' do

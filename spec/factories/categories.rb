@@ -8,7 +8,7 @@
 #  category_type :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :category do
     sequence(:name) { |n| "#{n} Category #{Faker::Address.country}" }
     category_type { rand(0..1) }

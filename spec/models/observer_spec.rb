@@ -21,13 +21,13 @@
 require 'rails_helper'
 
 RSpec.describe Observer, type: :model do
-  subject(:observer) { FactoryGirl.build :observer }
+  subject(:observer) { FactoryBot.build :observer }
 
   it 'is valid with valid attributes' do
     expect(observer).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:observer), %i[name organization]
+  it_should_behave_like 'translatable', FactoryBot.create(:observer), %i[name organization]
 
   describe 'Relations' do
     it { is_expected.to have_and_belong_to_many(:countries) }
@@ -64,7 +64,7 @@ RSpec.describe Observer, type: :model do
 
   describe 'Class methods' do
     before do
-      FactoryGirl.create_list :observer, 3
+      FactoryBot.create_list :observer, 3
     end
 
     describe '#fetch_all' do

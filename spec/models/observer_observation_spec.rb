@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ObserverObservation, type: :model do
-  subject(:observer_observation) { FactoryGirl.build :observer_observation }
+  subject(:observer_observation) { FactoryBot.build :observer_observation }
 
   it 'is valid with valid attributes' do
     expect(observer_observation).to be_valid

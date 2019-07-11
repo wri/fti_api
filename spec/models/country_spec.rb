@@ -15,14 +15,14 @@
 require 'rails_helper'
 
 RSpec.describe Country, type: :model do
-  subject(:country) { FactoryGirl.build :country }
+  subject(:country) { FactoryBot.build :country }
 
   it 'is valid with valid attributes' do
-    country = FactoryGirl.build :country
+    country = FactoryBot.build :country
     expect(country).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:country), %i[name region_name]
+  it_should_behave_like 'translatable', FactoryBot.create(:country), %i[name region_name]
 
   context 'Relations' do
     it { is_expected.to have_many(:users).inverse_of(:country) }
@@ -47,7 +47,7 @@ RSpec.describe Country, type: :model do
     context '#set_active' do
       context 'when is_active has not been initialized' do
         it 'set is_active to true' do
-          country = FactoryGirl.create(:country, is_active: nil)
+          country = FactoryBot.create(:country, is_active: nil)
           expect(country.is_active).to eql true
         end
       end
@@ -64,7 +64,7 @@ RSpec.describe Country, type: :model do
   context 'Methods' do
     context '#cache_key' do
       it 'return the default value with the locale' do
-        country = FactoryGirl.create :country
+        country = FactoryBot.create :country
         expect(country.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end
     end

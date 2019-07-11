@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Sawmill, type: :model do
-  subject(:sawmill) { FactoryGirl.build :sawmill }
+  subject(:sawmill) { FactoryBot.build :sawmill }
 
   it 'is valid with valid attributes' do
     expect(sawmill).to be_valid
@@ -25,7 +25,7 @@ RSpec.describe Sawmill, type: :model do
   describe 'Hooks' do
     describe '#update_geojson' do
       it 'update geojson data' do
-        sawmill = FactoryGirl.create :sawmill
+        sawmill = FactoryBot.create :sawmill
 
         sawmill.reload
         expect(sawmill.geojson).to eql({
@@ -48,12 +48,12 @@ RSpec.describe Sawmill, type: :model do
   describe 'Class methods' do
     describe '#fetch_all' do
       before :all do
-        @operator = FactoryGirl.create :operator
-        another_operator = FactoryGirl.create :operator
+        @operator = FactoryBot.create :operator
+        another_operator = FactoryBot.create :operator
 
-        FactoryGirl.create :sawmill, operator: @operator, is_active: false
-        FactoryGirl.create :sawmill, operator: another_operator, is_active: true
-        FactoryGirl.create :sawmill, operator: @operator, is_active: true
+        FactoryBot.create :sawmill, operator: @operator, is_active: false
+        FactoryBot.create :sawmill, operator: another_operator, is_active: true
+        FactoryBot.create :sawmill, operator: @operator, is_active: true
       end
 
       context 'when operator_ids and active are not specified' do

@@ -12,12 +12,12 @@ module V1
       }
     end
 
-    let!(:user)     { FactoryGirl.create(:user)          }
-    let!(:admin)    { FactoryGirl.create(:admin)         }
-    let!(:operator) { FactoryGirl.create(:operator_user) }
-    let!(:category) { FactoryGirl.create(:category)      }
+    let!(:user)     { FactoryBot.create(:user)          }
+    let!(:admin)    { FactoryBot.create(:admin)         }
+    let!(:operator) { FactoryBot.create(:operator_user) }
+    let!(:category) { FactoryBot.create(:category)      }
 
-    let!(:annex_governance) { FactoryGirl.create(:annex_governance, governance_pillar: '00 AG one') }
+    let!(:annex_governance) { FactoryBot.create(:annex_governance, governance_pillar: '00 AG one') }
 
     context 'Show annex_governances' do
       it 'Get annex_governances list' do
@@ -34,8 +34,8 @@ module V1
     context 'Pagination and sort for annex_governances' do
       let!(:annex_governances) {
         annex_governances = []
-        annex_governances << FactoryGirl.create_list(:annex_governance, 4)
-        annex_governances << FactoryGirl.create(:annex_governance, governance_pillar: 'ZZZ Next first one')
+        annex_governances << FactoryBot.create_list(:annex_governance, 4)
+        annex_governances << FactoryBot.create(:annex_governance, governance_pillar: 'ZZZ Next first one')
       }
 
       it 'Show list of annex_governances for first page with per pege param' do

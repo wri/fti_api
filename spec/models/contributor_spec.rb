@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Contributor, type: :model do
-  subject(:contributor) { FactoryGirl.build :contributor }
+  subject(:contributor) { FactoryBot.build :contributor }
 
   it 'is valid with valid attributes' do
     expect(contributor).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:contributor), %i[name description]
+  it_should_behave_like 'translatable', FactoryBot.create(:contributor), %i[name description]
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:name) }

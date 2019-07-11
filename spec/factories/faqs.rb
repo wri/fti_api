@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :faq do
     position { rand(0..10) }
   end

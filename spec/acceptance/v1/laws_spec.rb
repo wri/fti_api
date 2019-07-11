@@ -12,11 +12,11 @@ module V1
       }
     end
 
-    let!(:user)     { FactoryGirl.create(:user)          }
-    let!(:admin)    { FactoryGirl.create(:admin)         }
-    let!(:operator) { FactoryGirl.create(:operator_user) }
+    let!(:user)     { FactoryBot.create(:user)          }
+    let!(:admin)    { FactoryBot.create(:admin)         }
+    let!(:operator) { FactoryBot.create(:operator_user) }
 
-    let!(:law) { FactoryGirl.create(:law, legal_reference: '00 Law one') }
+    let!(:law) { FactoryBot.create(:law, legal_reference: '00 Law one') }
 
     context 'Show laws' do
       it 'Get laws list' do
@@ -31,12 +31,12 @@ module V1
     end
 
     context 'Pagination and sort for laws' do
-      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+      let!(:country) { FactoryBot.create(:country, name: 'Spain') }
 
       let!(:laws) {
         laws = []
-        laws << FactoryGirl.create_list(:law, 4)
-        laws << FactoryGirl.create(:law, legal_reference: 'ZZZ Next first one Spain', country: country)
+        laws << FactoryBot.create_list(:law, 4)
+        laws << FactoryBot.create(:law, legal_reference: 'ZZZ Next first one Spain', country: country)
       }
 
       let(:country_id) { Law.find_by(legal_reference: 'ZZZ Next first one Spain').country.id }

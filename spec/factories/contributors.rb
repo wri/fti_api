@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :contributor do
     name { |n| "Contributor#{n}" }
     website { |n| "Website#{n}" }

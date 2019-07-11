@@ -12,20 +12,20 @@ module V1
       }
     end
 
-    let!(:user)    { FactoryGirl.create(:user)    }
-    let!(:admin)   { FactoryGirl.create(:admin)   }
-    let!(:ngo)     { FactoryGirl.create(:ngo)     }
-    let!(:country) { FactoryGirl.create(:country) }
+    let!(:user)    { FactoryBot.create(:user)    }
+    let!(:admin)   { FactoryBot.create(:admin)   }
+    let!(:ngo)     { FactoryBot.create(:ngo)     }
+    let!(:country) { FactoryBot.create(:country) }
 
-    let!(:observation) { FactoryGirl.create(:observation_1, evidence: '00 Observation one') }
+    let!(:observation) { FactoryBot.create(:observation_1, evidence: '00 Observation one') }
 
     context 'Show observations' do
       let!(:observations) {
         observations = []
-        observations << FactoryGirl.create_list(:observation_1, 4)
-        observations << FactoryGirl.create(:observation, evidence: 'ZZZ Next first one', user_id: ngo.id)
-        observations << FactoryGirl.create(:observation, evidence: 'AAA Next first one', user_id: ngo.id)
-        observations << FactoryGirl.create(:observation, evidence: '00 Observation one', user_id: admin.id)
+        observations << FactoryBot.create_list(:observation_1, 4)
+        observations << FactoryBot.create(:observation, evidence: 'ZZZ Next first one', user_id: ngo.id)
+        observations << FactoryBot.create(:observation, evidence: 'AAA Next first one', user_id: ngo.id)
+        observations << FactoryBot.create(:observation, evidence: '00 Observation one', user_id: admin.id)
       }
 
 
@@ -66,12 +66,12 @@ module V1
     end
 
     context 'Pagination and sort for observations' do
-      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+      let!(:country) { FactoryBot.create(:country, name: 'Spain') }
 
       let!(:observations) {
         observations = []
-        observations << FactoryGirl.create_list(:observation_2, 4)
-        observations << FactoryGirl.create(:observation_1, evidence: 'ZZZ Next first one Spain', country: country)
+        observations << FactoryBot.create_list(:observation_2, 4)
+        observations << FactoryBot.create(:observation_1, evidence: 'ZZZ Next first one Spain', country: country)
       }
 
       let(:country_id) { Observation.find_by(evidence: 'ZZZ Next first one Spain').country.id }
@@ -231,7 +231,7 @@ module V1
           { errors: [{ status: '401', title: 'Unauthorized' }] }
         }
 
-        let!(:observation_by_user) { FactoryGirl.create(:observation_1, evidence: 'Observation by ngo', user_id: ngo.id) }
+        let!(:observation_by_user) { FactoryBot.create(:observation_1, evidence: 'Observation by ngo', user_id: ngo.id) }
 
         it 'Do not allows to update observation by not admin user' do
           patch "/observations/#{observation.id}", params: {"observation": { "name": "Observation one" }},

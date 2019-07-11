@@ -14,7 +14,7 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  subject(:comment) { FactoryGirl.build :comment }
+  subject(:comment) { FactoryBot.build :comment }
 
   it 'is valid with valid attributes' do
     expect(comment).to be_valid
@@ -36,8 +36,8 @@ RSpec.describe Comment, type: :model do
     describe '#build' do
       context 'when commentable, user and body are present' do
         it 'build a new Comment with the specified data' do
-          user = FactoryGirl.create :user
-          observation = FactoryGirl.create :observation
+          user = FactoryBot.create :user
+          observation = FactoryBot.create :observation
           comment = Comment.build({
             'commentable_type' => 'Observation',
             'commentable_id' => observation.id,

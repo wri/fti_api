@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe FmuOperator, type: :model do
   it 'is valid with valid attributes' do
-    fmu_operator = FactoryGirl.build :fmu_operator
+    fmu_operator = FactoryBot.build :fmu_operator
     expect(fmu_operator).to be_valid
   end
 
@@ -19,7 +19,7 @@ RSpec.describe FmuOperator, type: :model do
       context 'when end_date is present' do
         context 'when start_date is greather or equal to the end_date' do
           it 'add an error on start_date' do
-            fmu_operator = FactoryGirl.build :fmu_operator,
+            fmu_operator = FactoryBot.build :fmu_operator,
               start_date: Date.today,
               end_date: Date.yesterday
 
@@ -36,9 +36,9 @@ RSpec.describe FmuOperator, type: :model do
       context 'when fmu is present' do
         context 'when fmu has another operator active' do
           it 'add an error on current' do
-            fmu_operator = FactoryGirl.create :fmu_operator, current: true
+            fmu_operator = FactoryBot.create :fmu_operator, current: true
             fmu = fmu_operator.fmu
-            another_fmu_operator = FactoryGirl.build :fmu_operator, fmu: fmu, current: true
+            another_fmu_operator = FactoryBot.build :fmu_operator, fmu: fmu, current: true
 
             expect(another_fmu_operator.valid?).to eql false
             expect(another_fmu_operator.errors[:current]).to eql(
@@ -52,9 +52,9 @@ RSpec.describe FmuOperator, type: :model do
     context '#non_clliding_dates' do
       context 'when two operators dont have end_date' do
         it 'add an error on end_date' do
-          fmu = FactoryGirl.create :fmu
-          FactoryGirl.create :fmu_operator, fmu: fmu, end_date: nil
-          fmu_operator = FactoryGirl.build :fmu_operator, fmu: fmu, end_date: nil
+          fmu = FactoryBot.create :fmu
+          FactoryBot.create :fmu_operator, fmu: fmu, end_date: nil
+          fmu_operator = FactoryBot.build :fmu_operator, fmu: fmu, end_date: nil
 
           expect(fmu_operator.valid?).to eql false
           expect(fmu_operator.errors[:end_date]).to eql(
@@ -65,12 +65,12 @@ RSpec.describe FmuOperator, type: :model do
 
       context 'when two range dates intersect' do
         it 'add an error on start_date' do
-          fmu = FactoryGirl.create :fmu
-          FactoryGirl.create :fmu_operator,
+          fmu = FactoryBot.create :fmu
+          FactoryBot.create :fmu_operator,
             fmu: fmu,
             start_date: Date.yesterday,
             end_date: Date.tomorrow
-          fmu_operator = FactoryGirl.build :fmu_operator,
+          fmu_operator = FactoryBot.build :fmu_operator,
             fmu: fmu,
             start_date: Date.today,
             end_date: Date.tomorrow
@@ -88,34 +88,32 @@ RSpec.describe FmuOperator, type: :model do
     context '#update_documents_list' do
       context 'the operator has fa_id' do
         before do
-          country = FactoryGirl.create :country
+          country = FactoryBot.create :country
 
-          @fmu = FactoryGirl.create :fmu, country: country
+          @fmu = FactoryBot.create :fmu, country: country
 
-          operator = FactoryGirl.create :operator, country: country, fa_id: 'fa_id'
-          FactoryGirl.create :fmu_operator, operator: operator, fmu: @fmu
+          operator = FactoryBot.create :operator, country: country, fa_id: 'fa_id'
+          FactoryBot.create :fmu_operator, operator: operator, fmu: @fmu
 
-          another_operator = FactoryGirl.create :operator, country: country, fa_id: 'fa_id'
-          @fmu_operator = FactoryGirl.create :fmu_operator,
+          another_operator = FactoryBot.create :operator, country: country, fa_id: 'fa_id'
+          @fmu_operator = FactoryBot.create :fmu_operator,
             operator: another_operator,
             fmu: @fmu,
             current: false,
             start_date: Date.yesterday - 1.day,
             end_date: Date.yesterday
 
-          required_operator_document = FactoryGirl.create :required_operator_document_fmu,
+          required_operator_document = FactoryBot.create :required_operator_document_fmu,
             country: country
-          FactoryGirl.create :operator_document_fmu,
+          FactoryBot.create :operator_document_fmu,
             operator: another_operator,
             fmu: @fmu,
             required_operator_document: required_operator_document
 
-          FactoryGirl.create_list :required_operator_document_fmu, 3, country: country
+          FactoryBot.create_list :required_operator_document_fmu, 3, country: country
         end
 
         it 'update the list of documents attached on itself' do
-          expect(OperatorDocumentFmu.all.size).to eql 2
-
           @fmu_operator.save
 
           expect(
@@ -137,7 +135,7 @@ RSpec.describe FmuOperator, type: :model do
     context '#set_current_start_date' do
       context 'when start_date is blank' do
         it 'set start_date with the current date' do
-          fmu_operator = FactoryGirl.create :fmu_operator, start_date: nil
+          fmu_operator = FactoryBot.create :fmu_operator, start_date: nil
           fmu_operator.set_current_start_date
 
           expect(fmu_operator.start_date).to eql Date.today
@@ -149,15 +147,15 @@ RSpec.describe FmuOperator, type: :model do
   describe 'Class methods' do
     context '#calculate_current' do
       before do
-        fmu = FactoryGirl.create :fmu
-        @deactivate_fmu_operator = FactoryGirl.create :fmu_operator,
+        fmu = FactoryBot.create :fmu
+        @deactivate_fmu_operator = FactoryBot.create :fmu_operator,
           current: true,
           fmu: fmu,
           start_date: Date.yesterday - 1.day,
           end_date: Date.yesterday
 
-        another_fmu = FactoryGirl.create :fmu, geojson: {properties: {}}
-        @activate_fmu_operator = FactoryGirl.create :fmu_operator,
+        another_fmu = FactoryBot.create :fmu, geojson: {properties: {}}
+        @activate_fmu_operator = FactoryBot.create :fmu_operator,
           current: false,
           fmu: another_fmu,
           start_date: Date.today,

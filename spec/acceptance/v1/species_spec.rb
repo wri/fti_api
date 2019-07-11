@@ -12,11 +12,11 @@ module V1
       }
     end
 
-    let!(:user)     { FactoryGirl.create(:user)          }
-    let!(:admin)    { FactoryGirl.create(:admin)         }
-    let!(:operator) { FactoryGirl.create(:operator_user) }
+    let!(:user)     { FactoryBot.create(:user)          }
+    let!(:admin)    { FactoryBot.create(:admin)         }
+    let!(:operator) { FactoryBot.create(:operator_user) }
 
-    let!(:species) { FactoryGirl.create(:species, name: '00 Species one') }
+    let!(:species) { FactoryBot.create(:species, name: '00 Species one') }
 
     context 'Show species' do
       it 'Get species list' do
@@ -33,8 +33,8 @@ module V1
     context 'Pagination and sort for species' do
       let!(:species_list) {
         species = []
-        species << FactoryGirl.create_list(:species, 4)
-        species << FactoryGirl.create(:species, name: 'ZZZ Next first one')
+        species << FactoryBot.create_list(:species, 4)
+        species << FactoryBot.create(:species, name: 'ZZZ Next first one')
       }
 
       it 'Show list of species for first page with per pege param' do

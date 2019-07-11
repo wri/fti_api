@@ -11,13 +11,13 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  subject(:category) { FactoryGirl.build :category }
+  subject(:category) { FactoryBot.build :category }
 
   it 'is valid with valid attributes' do
     expect(category).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:category), %i[name]
+  it_should_behave_like 'translatable', FactoryBot.create(:category), %i[name]
 
   describe 'Relations' do
     it { is_expected.to have_many(:subcategories).dependent(:destroy) }
@@ -38,7 +38,7 @@ RSpec.describe Category, type: :model do
   describe 'Scopes' do
     describe '#by_name_asc' do
       it 'Order by name asc' do
-        FactoryGirl.create(:category, name: 'Z Category')
+        FactoryBot.create(:category, name: 'Z Category')
         @category = create(:category, name: '00 Category')
 
         expect(Category.by_name_asc.first.name).to eq('00 Category')
