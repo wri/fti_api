@@ -11,12 +11,13 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  before :each do
-    FactoryGirl.create(:category, name: 'Z Category')
-    @category = create(:category, name: '00 Category')
+  subject(:category) { FactoryGirl.build :category }
+
+  it 'is valid with valid attributes' do
+    expect(category).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryGirl.create(:category), %i[name]
+  it_should_behave_like 'translatable', FactoryGirl.build(:category), %i[name]
 
   describe 'Relations' do
     it { is_expected.to have_many(:subcategories).dependent(:destroy) }
@@ -27,16 +28,19 @@ RSpec.describe Category, type: :model do
   end
 
   describe 'Methods' do
-    context '#cache_key' do
+    describe '#cache_key' do
       it 'return the default value with the locale' do
-        expect(@category.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+        expect(category.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end
     end
   end
 
   describe 'Scopes' do
-    context '#by_name_asc' do
+    describe '#by_name_asc' do
       it 'Order by name asc' do
+        FactoryGirl.create(:category, name: 'Z Category')
+        @category = create(:category, name: '00 Category')
+
         expect(Category.by_name_asc.first.name).to eq('00 Category')
       end
     end
