@@ -21,36 +21,31 @@
 require 'rails_helper'
 
 RSpec.describe Law, type: :model do
-  before :each do
-    FactoryGirl.create(:law, legal_reference: 'Z Lorem')
-    @law = create(:law)
+  subject(:law) { FactoryGirl.build :law }
+
+  it 'is valid with valid attributes' do
+    expect(law).to be_valid
   end
 
-  it 'Count on law' do
-    expect(Law.count).to                     eq(2)
-    expect(Law.all.first.legal_reference).to eq('Z Lorem')
-    expect(@law.country.name).to             match('Country')
+  describe 'Validations' do
+    describe '#min_fine' do
+      context 'is present' do
+        before { allow(subject).to receive(:min_fine?).and_return(true) }
+        it { is_expected.to validate_numericality_of(:min_fine).is_greater_than_or_equal_to(0) }
+      end
+    end
+
+    describe '#max_fine' do
+      context 'is present' do
+        before { allow(subject).to receive(:max_fine?).and_return(true) }
+        it { is_expected.to validate_numericality_of(:max_fine).is_greater_than_or_equal_to(0) }
+      end
+    end
   end
 
-  it 'Order by legal_reference asc' do
-    expect(Law.by_legal_reference_asc.first.legal_reference).to eq('Lorem')
-  end
-
-  it 'Fallbacks for empty translations on law' do
-    I18n.locale = :fr
-    expect(@law.legal_reference).to eq('Lorem')
-    I18n.locale = :en
-  end
-
-  it 'Translate law to fr' do
-    @law.update(legal_reference: 'Lorem FR', locale: :fr)
-    I18n.locale = :fr
-    expect(@law.legal_reference).to eq('Lorem FR')
-    I18n.locale = :en
-    expect(@law.legal_reference).to eq('Lorem')
-  end
-
-  it 'Fetch all laws' do
-    expect(Law.fetch_all(nil).count).to eq(2)
+  describe 'Relations' do
+    it { is_expected.to belong_to(:subcategory).inverse_of(:laws) }
+    it { is_expected.to belong_to(:country).inverse_of(:laws) }
+    it { is_expected.to have_many(:observations).inverse_of(:law) }
   end
 end

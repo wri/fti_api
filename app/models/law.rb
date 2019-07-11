@@ -21,9 +21,9 @@
 #
 
 class Law < ApplicationRecord
-  belongs_to :subcategory,  required: true
-  belongs_to :country,      required: true
-  has_many   :observations, inverse_of: :laws
+  belongs_to :subcategory, inverse_of: :laws
+  belongs_to :country, inverse_of: :laws
+  has_many   :observations, inverse_of: :law
 
   validates :min_fine, numericality: { greater_than_or_equal_to: 0 }, if: :min_fine?
   validates :max_fine, numericality: { greater_than_or_equal_to: 0 }, if: :max_fine?

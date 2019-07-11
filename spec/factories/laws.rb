@@ -20,13 +20,12 @@
 
 FactoryGirl.define do
   factory :law do
-    legal_reference 'Lorem'
-    legal_penalty   'Lorem ipsum..'
-    vpa_indicator   'Indicator one'
+    min_fine { rand(0..10) }
+    max_fine { rand(0..10) }
 
-    after(:create) do |law|
-      law.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                       iso: "C#{Faker::Lorem.sentence}"))
+    after(:build) do |law|
+      law.subcategory ||= FactoryGirl.create :subcategory
+      law.country ||= FactoryGirl.create :country
     end
   end
 end
