@@ -12,36 +12,52 @@
 require 'rails_helper'
 
 RSpec.describe Government, type: :model do
-  before :each do
-    FactoryGirl.create(:government, government_entity: 'Z Government')
-    @government = create(:government)
+  subject(:government) { FactoryGirl.build :government }
+
+  it 'is valid with valid attributes' do
+    expect(government).to be_valid
   end
 
-  it 'Count on government' do
-    expect(Government.count).to          eq(2)
-    expect(Government.all.first.government_entity).to eq('Z Government')
-    expect(@government.country.name).to               match('Country')
+  it_should_behave_like 'translatable', FactoryGirl.create(:government), %i[details]
+
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:government_entity) }
   end
 
-  it 'Order by government_entity asc' do
-    expect(Government.by_entity_asc.first.government_entity).to eq('A Government')
+  describe 'Relations' do
+    it { is_expected.to belong_to(:country).inverse_of(:governments).optional }
+    it { is_expected.to have_many(:observations).inverse_of(:government).dependent(:restrict_with_error) }
   end
 
-  it 'Fallbacks for empty translations on government' do
-    I18n.locale = :fr
-    expect(@government.government_entity).to eq('A Government')
-    I18n.locale = :en
+  describe 'Instance methods' do
+    describe '#cache_key' do
+      it 'return the default value with the locale' do
+        expect(government.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+      end
+    end
   end
 
-  it 'Translate government to fr' do
-    @government.update(government_entity: 'A Government FR', locale: :fr)
-    I18n.locale = :fr
-    expect(@government.government_entity).to eq('A Government FR')
-    I18n.locale = :en
-    expect(@government.government_entity).to eq('A Government')
-  end
+  describe 'Class methods' do
+    describe '#fetch_all' do
+      before do
+        @country = FactoryGirl.create :country
+        FactoryGirl.create :government, country: @country
+        FactoryGirl.create :government
+      end
 
-  it 'Fetch all governments' do
-    expect(Government.fetch_all(nil).count).to eq(2)
+      context 'when country_ids is not specified' do
+        it 'fetch all operators' do
+          expect(Government.fetch_all(nil).count).to eq(Government.all.size)
+        end
+      end
+
+      context 'when country is specified' do
+        it 'fetch operators filtered by country' do
+          expect(Government.fetch_all({'country' => [@country.id]}).to_a).to eql(
+            Government.where(country_id: @country.id).includes(:country).to_a
+          )
+        end
+      end
+    end
   end
 end
