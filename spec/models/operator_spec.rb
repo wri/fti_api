@@ -82,7 +82,7 @@ RSpec.describe Operator, type: :model do
   end
 
   describe 'Hooks' do
-    context '#create_operator_id' do
+    describe '#create_operator_id' do
       context 'when country is present' do
         it 'update operator_id using the country and id' do
           expect(@operator.operator_id).to eql "#{@country.iso}-unknown-#{@operator.id}"
@@ -97,7 +97,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#create_documents' do
+    describe '#create_documents' do
       context 'when fa_id is present and there are operator_documents' do
         before do
           # Having a random order, @operator data can differ depending on the order
@@ -133,7 +133,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#really_destroy_documents' do
+    describe '#really_destroy_documents' do
       it 'destroy operator_documents associated with the operator' do
         another_operator = FactoryBot.create(:operator)
         operator_document = FactoryBot.create(:operator_document, operator: another_operator)
@@ -200,13 +200,13 @@ RSpec.describe Operator, type: :model do
         @operator.operator_document_fmus.joins(:required_operator_document).required.count.to_f
     end
 
-    context '#cache_key' do
+    describe '#cache_key' do
       it 'return the default value with the locale' do
         expect(@operator.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end
     end
 
-    context '#update_valid_documents_percentages' do
+    describe '#update_valid_documents_percentages' do
       context 'when fa_id is present' do
         context 'when operator is approved' do
           it 'update approved percentages' do
@@ -242,7 +242,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#percentage_non_approved' do
+    describe '#percentage_non_approved' do
       it 'update the percentages of valid and available operator documents' do
         @operator.percentage_non_approved
 
@@ -252,7 +252,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#percentage_approved' do
+    describe '#percentage_approved' do
       it 'update the percentages of valid operator documents' do
         @operator.percentage_approved
 
@@ -262,7 +262,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#calculate_observations_scores' do
+    describe '#calculate_observations_scores' do
       context 'when there are not visits' do
         it 'update observations per visits and score with blank values' do
           @another_operator.calculate_observations_scores
@@ -282,7 +282,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#rebuild_documents' do
+    describe '#rebuild_documents' do
       context 'when fa_id is present and there are operator_documents' do
         before do
           # Need to create another data to really check the creation of the documents
@@ -318,7 +318,7 @@ RSpec.describe Operator, type: :model do
   end
 
   describe 'Class methods' do
-    context '#fetch_all' do
+    describe '#fetch_all' do
       context 'when country_ids is not specified' do
         it 'fetch all operators' do
           expect(Operator.fetch_all(nil).count).to eq(Operator.all.size)
@@ -334,7 +334,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#operator_select' do
+    describe '#operator_select' do
       it 'select operators ordered asd by name' do
         result = Operator.by_name_asc.map { |c| [c.name, c.id] }
         expect(Operator.operator_select).to eq(result)
@@ -342,13 +342,13 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#types' do
+    describe '#types' do
       it 'return operator types' do
         expect(Operator.types).to eql Operator::TYPES
       end
     end
 
-    context '#translated_types' do
+    describe '#translated_types' do
       it 'return translated operator types' do
         translated_types = Operator.types.map do |t|
           [I18n.t("operator_types.#{t}", default: t), t.camelize]
@@ -357,7 +357,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#calculate_document_ranking' do
+    describe '#calculate_document_ranking' do
       it 'calculate the rank per country of the operators based on their documents' do
         Operator.calculate_document_ranking
 
@@ -368,7 +368,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    context '#calculate_scores' do
+    describe '#calculate_scores' do
       before do
         prev_op_size = Operator.all.size.to_f
         Operator.all.map { |operator| operator.calculate_observations_scores }

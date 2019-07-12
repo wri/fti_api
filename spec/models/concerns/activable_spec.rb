@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.shared_examples 'activable' do |model_name, model|
   if model.attributes.key? 'deactivated_at'
     context 'hooks' do
-      context '#set_deactivated_at' do
+      describe '#set_deactivated_at' do
         it "set deactivated_at when #{model_name} is saved" do
           model.deactivate
 
@@ -13,21 +13,21 @@ RSpec.shared_examples 'activable' do |model_name, model|
     end
   end
 
-  context '#activate' do
+  describe '#activate' do
     it "mark #{model_name} as actived" do
       model.activate
       expect(model.is_active).to eql true
     end
   end
 
-  context '#deactivate' do
+  describe '#deactivate' do
     it "mark #{model_name} as deactivated" do
       model.deactivate
       expect(model.is_active).to eql false
     end
   end
 
-  context '#deactivated?' do
+  describe '#deactivated?' do
     context "when #{model_name} is actived" do
       it 'returns false' do
         model.is_active = true
@@ -43,7 +43,7 @@ RSpec.shared_examples 'activable' do |model_name, model|
     end
   end
 
-  context '#activated?' do
+  describe '#activated?' do
     context "when #{model_name} is actived" do
       it 'returns true' do
         model.is_active = true
@@ -59,7 +59,7 @@ RSpec.shared_examples 'activable' do |model_name, model|
     end
   end
 
-  context '#status' do
+  describe '#status' do
     context "when #{model_name} is actived" do
       it 'returns activated' do
         model.is_active = true

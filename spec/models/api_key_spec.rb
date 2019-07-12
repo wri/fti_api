@@ -12,7 +12,7 @@ RSpec.describe APIKey, type: :model do
   end
 
   context 'Methods' do
-    context '#expired?' do
+    describe '#expired?' do
       context 'when APIKey expires_at date is lower than current date' do
         it 'returns true' do
           api_key = FactoryBot.create(:api_key, expires_at: Date.yesterday)

@@ -15,7 +15,7 @@ RSpec.describe FmuOperator, type: :model do
     # We have a before_validation which sets start_date, so we cant test this
     #it { is_expected.to validate_presence_of(:start_date) }
 
-    context '#start_date_is_earlier' do
+    describe '#start_date_is_earlier' do
       context 'when end_date is present' do
         context 'when start_date is greather or equal to the end_date' do
           it 'add an error on start_date' do
@@ -32,7 +32,7 @@ RSpec.describe FmuOperator, type: :model do
       end
     end
 
-    context '#one_active_per_fmu' do
+    describe '#one_active_per_fmu' do
       context 'when fmu is present' do
         context 'when fmu has another operator active' do
           it 'add an error on current' do
@@ -49,7 +49,7 @@ RSpec.describe FmuOperator, type: :model do
       end
     end
 
-    context '#non_clliding_dates' do
+    describe '#non_clliding_dates' do
       context 'when two operators dont have end_date' do
         it 'add an error on end_date' do
           fmu = FactoryBot.create :fmu
@@ -85,7 +85,7 @@ RSpec.describe FmuOperator, type: :model do
   end
 
   describe 'Hooks' do
-    context '#update_documents_list' do
+    describe '#update_documents_list' do
       context 'the operator has fa_id' do
         before do
           country = FactoryBot.create :country
@@ -132,7 +132,7 @@ RSpec.describe FmuOperator, type: :model do
   end
 
   describe 'Instance methods' do
-    context '#set_current_start_date' do
+    describe '#set_current_start_date' do
       context 'when start_date is blank' do
         it 'set start_date with the current date' do
           fmu_operator = FactoryBot.create :fmu_operator, start_date: nil
@@ -145,7 +145,7 @@ RSpec.describe FmuOperator, type: :model do
   end
 
   describe 'Class methods' do
-    context '#calculate_current' do
+    describe '#calculate_current' do
       before do
         fmu = FactoryBot.create :fmu
         @deactivate_fmu_operator = FactoryBot.create :fmu_operator,

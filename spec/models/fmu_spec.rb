@@ -25,7 +25,7 @@ RSpec.describe Fmu, type: :model do
   end
 
   describe 'Methods' do
-    context '#cache_key' do
+    describe '#cache_key' do
       it 'return the default value with the locale' do
         fmu = FactoryBot.build :fmu
         expect(fmu.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
@@ -34,7 +34,7 @@ RSpec.describe Fmu, type: :model do
   end
 
   describe 'Hooks' do
-    context '#update_geojson' do
+    describe '#update_geojson' do
       context 'when geojson is blank' do
         it 'return nil' do
           fmu = FactoryBot.create :fmu, geojson: nil
@@ -64,7 +64,7 @@ RSpec.describe Fmu, type: :model do
       end
     end
 
-    context '#really_destroy_documents' do
+    describe '#really_destroy_documents' do
       it 'destroy operator_documents associated with the fmu' do
         another_fmu = FactoryBot.create(:fmu)
         operator_document = FactoryBot.create(:operator_document, fmu: another_fmu)
@@ -76,7 +76,7 @@ RSpec.describe Fmu, type: :model do
   end
 
   describe 'Instance methods' do
-    context '#cache_key' do
+    describe '#cache_key' do
       it 'return the default value with the locale' do
         fmu = FactoryBot.create :fmu
         expect(fmu.cache_key).to match(/-#{Globalize.locale.to_s}\z/)

@@ -44,7 +44,7 @@ RSpec.describe Country, type: :model do
   end
 
   context 'Hooks' do
-    context '#set_active' do
+    describe '#set_active' do
       context 'when is_active has not been initialized' do
         it 'set is_active to true' do
           country = FactoryBot.create(:country, is_active: nil)
@@ -62,7 +62,7 @@ RSpec.describe Country, type: :model do
   end
 
   context 'Methods' do
-    context '#cache_key' do
+    describe '#cache_key' do
       it 'return the default value with the locale' do
         country = FactoryBot.create :country
         expect(country.cache_key).to match(/-#{Globalize.locale.to_s}\z/)

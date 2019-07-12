@@ -29,7 +29,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
   end
 
   describe 'Instance methods' do
-    context '#expire_document_annex' do
+    describe '#expire_document_annex' do
       it 'set status to doc_expired' do
         operator_document_annex = FactoryBot.create :operator_document_annex,
           status: OperatorDocumentAnnex.statuses[:doc_pending]
@@ -41,7 +41,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
   end
 
   describe 'Class methods' do
-    context '#expire_document_annexes' do
+    describe '#expire_document_annexes' do
       before do
         FactoryBot.create_list :operator_document_annex, 3
       end

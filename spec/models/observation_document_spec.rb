@@ -12,7 +12,7 @@ RSpec.describe ObservationDocument, type: :model do
   end
 
   describe 'Hooks' do
-    context '#remove_attachment_id_directory' do
+    describe '#remove_attachment_id_directory' do
       it 'removes all attached documents' do
         observation_document = FactoryBot.create :observation_document
         filepath = File.join(

@@ -35,7 +35,7 @@ FactoryBot.define do
 
     password { 'password' }
     password_confirmation { |u| u.password }
-      name { 'Test user' }
+    name { 'Test user' }
     is_active { true }
 
     after(:build) do |random_user|
