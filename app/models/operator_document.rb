@@ -42,6 +42,7 @@ class OperatorDocument < ApplicationRecord
   validate :reason_or_attachment
 
   before_save :update_current, on: %w[create update], if: :current_changed?
+  before_save :set_type, on: %w[create update]
   before_create :set_status
   before_create :delete_previous_pending_document
   after_save :update_operator_percentages, on: %w[create update],  if: :status_changed?
@@ -106,6 +107,12 @@ class OperatorDocument < ApplicationRecord
                                 current: true)
       od.save!(validate: false)
     end
+  end
+
+  def set_type
+    return if type.present?
+    self.type = 'OperatorDocumentFmu' if required_operator_document.is_a?(RequiredOperatorDocumentFmu)
+    self.type = 'OperatorDocumentCountry' if required_operator_document.is_a?(RequiredOperatorDocumentCountry)
   end
 
   def set_status
