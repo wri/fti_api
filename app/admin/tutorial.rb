@@ -6,7 +6,7 @@ ActiveAdmin.register Tutorial do
   config.order_clause
 
 
-  permit_params :position, :name, :description
+  permit_params :position, translations_attributes: [:id, :locale, :name, :description, :_destroy]
 
   filter :position, as: :select
   filter :name
@@ -23,19 +23,21 @@ ActiveAdmin.register Tutorial do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Tutorial Details' do
       f.input :position
-      f.input :name
-      f.input :description,
-              as: :quill_editor,
-              input_html: {
+      f.translated_inputs switch_locale: false do |t|
+        t.input :name
+        t.input :description,
+                as: :quill_editor,
+                input_html: {
                   data: {
-                      options: {
-                          modules: {
-                              toolbar: [['bold', 'italic', 'underline'],
-                                        ['link', 'video']]
-                          },
-                          placeholder: 'Type something...',
-                          theme: 'snow'
-                      }}}
+                    options: {
+                      modules: {
+                        toolbar: [['bold', 'italic', 'underline'],
+                                  ['link', 'video']]
+                      },
+                      placeholder: 'Type something...',
+                      theme: 'snow'
+                    }}}
+      end
     end
     f.actions
   end
