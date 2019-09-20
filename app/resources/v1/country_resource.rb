@@ -9,6 +9,7 @@ module V1
 
     has_many :fmus
     has_many :required_operator_documents
+    has_many :required_gov_documents
     has_many :governments
     has_many :monitors
 
