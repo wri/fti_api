@@ -13,7 +13,6 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
           li { link_to 'Dashboard', admin_dashboard_path }
         end
 
-        # Add one item with one son.
         ul do
           li do
             text_node content_tag 'a', 'Independent Monitoring'
@@ -37,7 +36,6 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
           end
         end
 
-        # Adds a menu item with one son and one grandson.
         ul do
           li do
             text_node content_tag 'a', 'Private Sector'
@@ -56,6 +54,17 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
                   li { link_to 'Fmu allocations',      admin_fmu_operators_path }
                 end
               end
+            end
+          end
+        end
+
+        ul do
+          li do
+            text_node content_tag 'a', 'Government Sector'
+            ul do
+              li { link_to 'Required Document Group',  admin_required_gov_document_groups_path }
+              li { link_to 'Required Documents',       admin_required_gov_documents_path }
+              li { link_to 'Documents',                admin_gov_documents_path }
             end
           end
         end

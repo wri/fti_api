@@ -1,17 +1,17 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: countries
 #
-#  id               :integer          not null, primary key
-#  iso              :string
-#  region_iso       :string
-#  country_centroid :jsonb
-#  region_centroid  :jsonb
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  is_active        :boolean          default(FALSE), not null
+#  id                         :integer          not null, primary key
+#  iso                        :string
+#  region_iso                 :string
+#  country_centroid           :jsonb
+#  region_centroid            :jsonb
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  is_active                  :boolean          default(FALSE), not null
+#  percentage_valid_documents :float
 #
 
 class Country < ApplicationRecord
@@ -33,6 +33,8 @@ class Country < ApplicationRecord
   has_many :species, through: :species_countries
   has_many :operator_documents, dependent: :destroy
   has_many :required_operator_documents
+  has_many :required_gov_documents
+  has_many :gov_documents, -> { actual }
 
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 
@@ -55,6 +57,12 @@ class Country < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  def update_valid_documents_percentages
+    self.percentage_valid_documents =
+        gov_documents.valid.count.to_f / gov_documents.joins(:required_gov_document).required.count.to_f rescue 0
+    save!
   end
 
   private
