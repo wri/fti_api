@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190701181155) do
+ActiveRecord::Schema.define(version: 20190708155422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,9 +108,10 @@ ActiveRecord::Schema.define(version: 20190701181155) do
     t.string   "region_iso"
     t.jsonb    "country_centroid"
     t.jsonb    "region_centroid"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "is_active",        default: false, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "is_active",                  default: false, null: false
+    t.float    "percentage_valid_documents"
     t.index ["is_active"], name: "index_countries_on_is_active", using: :btree
     t.index ["iso"], name: "index_countries_on_iso", using: :btree
   end
@@ -188,6 +189,36 @@ ActiveRecord::Schema.define(version: 20190701181155) do
     t.integer  "forest_type",        default: 0,     null: false
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
     t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
+  end
+
+  create_table "gov_documents", force: :cascade do |t|
+    t.integer  "status",                   null: false
+    t.text     "reason"
+    t.date     "start_date"
+    t.date     "expire_date"
+    t.boolean  "current",                  null: false
+    t.integer  "uploaded_by"
+    t.string   "link"
+    t.string   "value"
+    t.string   "units"
+    t.datetime "deleted_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "required_gov_document_id"
+    t.integer  "country_id"
+    t.integer  "user_id"
+    t.index ["country_id"], name: "index_gov_documents_on_country_id", using: :btree
+    t.index ["required_gov_document_id"], name: "index_gov_documents_on_required_gov_document_id", using: :btree
+    t.index ["user_id"], name: "index_gov_documents_on_user_id", using: :btree
+  end
+
+  create_table "gov_files", force: :cascade do |t|
+    t.string   "attachment"
+    t.datetime "deleted_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "gov_document_id"
+    t.index ["gov_document_id"], name: "index_gov_files_on_gov_document_id", using: :btree
   end
 
   create_table "government_translations", force: :cascade do |t|
@@ -458,6 +489,48 @@ ActiveRecord::Schema.define(version: 20190701181155) do
     t.index ["attacheable_id", "attacheable_type"], name: "photos_attacheable_index", using: :btree
   end
 
+  create_table "required_gov_document_group_translations", force: :cascade do |t|
+    t.integer  "required_gov_document_group_id", null: false
+    t.string   "locale",                         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "name",                           null: false
+    t.text     "description"
+    t.index ["locale"], name: "index_required_gov_document_group_translations_on_locale", using: :btree
+    t.index ["required_gov_document_group_id"], name: "index_d5783e31f1865cb8918d628281b44e29621b4216", using: :btree
+  end
+
+  create_table "required_gov_document_groups", force: :cascade do |t|
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "required_gov_document_translations", force: :cascade do |t|
+    t.integer  "required_gov_document_id", null: false
+    t.string   "locale",                   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.text     "explanation"
+    t.index ["locale"], name: "index_required_gov_document_translations_on_locale", using: :btree
+    t.index ["required_gov_document_id"], name: "index_759a54fdd00cf06c291ffc4857fb904934dd47b9", using: :btree
+  end
+
+  create_table "required_gov_documents", force: :cascade do |t|
+    t.string   "name",                           null: false
+    t.integer  "document_type",                  null: false
+    t.integer  "valid_period"
+    t.datetime "deleted_at"
+    t.integer  "required_gov_document_group_id"
+    t.integer  "country_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["country_id"], name: "index_required_gov_documents_on_country_id", using: :btree
+    t.index ["deleted_at"], name: "index_required_gov_documents_on_deleted_at", using: :btree
+    t.index ["document_type"], name: "index_required_gov_documents_on_document_type", using: :btree
+    t.index ["required_gov_document_group_id"], name: "index_required_gov_documents_on_required_gov_document_group_id", using: :btree
+  end
+
   create_table "required_operator_document_group_translations", force: :cascade do |t|
     t.integer  "required_operator_document_group_id", null: false
     t.string   "locale",                              null: false
@@ -678,6 +751,10 @@ ActiveRecord::Schema.define(version: 20190701181155) do
 
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "gov_documents", "countries", on_delete: :cascade
+  add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
+  add_foreign_key "gov_documents", "users", on_delete: :cascade
+  add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
   add_foreign_key "observation_documents", "observations"
@@ -698,6 +775,8 @@ ActiveRecord::Schema.define(version: 20190701181155) do
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "photos", "users"
+  add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
+  add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade
   add_foreign_key "required_operator_documents", "countries"
   add_foreign_key "required_operator_documents", "required_operator_document_groups"
   add_foreign_key "sawmills", "operators"
