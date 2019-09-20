@@ -20,6 +20,9 @@ class RequiredOperatorDocument < ApplicationRecord
   include ForestTypeable
   acts_as_paranoid
 
+  translates :explanation
+  active_admin_translates :explanation
+
   belongs_to :required_operator_document_group
   belongs_to :country
   has_many :operator_documents, dependent: :destroy
@@ -47,4 +50,5 @@ class RequiredOperatorDocument < ApplicationRecord
     errors.add(:type, 'Cannot change document type') if type_changed?
     errors.add(:country_id, 'Cannot change the country') if country_id_changed?
   end
+
 end

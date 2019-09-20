@@ -90,10 +90,6 @@ class User < ApplicationRecord
     end
   end
 
-  def is_government(country_id)
-    self&.user_permission&.user_role == 'government' && self.country_id == country_id
-  end
-
   def is_operator?(operator_id)
     self&.user_permission&.user_role == 'operator' && self.operator_id == operator_id
   end
