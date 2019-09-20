@@ -13,7 +13,7 @@
 #
 
 class UserPermission < ApplicationRecord
-  enum user_role: { user: 0, operator: 1, ngo: 2, ngo_manager: 4, bo_manager: 5, admin: 3 }.freeze
+  enum user_role: { user: 0, operator: 1, ngo: 2, ngo_manager: 4, bo_manager: 5, admin: 3, government: 6 }.freeze
 
   belongs_to :user
 
@@ -89,6 +89,13 @@ class UserPermission < ApplicationRecord
             operator_document: { read: {} },
             required_operator_document_group: { read: {} },
             required_operator_document: { read: {} }
+        }
+      when 'government'
+        {
+            user: { manage: { id: user.id } },
+            gov_document: { manage: { required_gov_document: { country_id: user.country_id }}},
+            gov_file: { ud: { gov_document: { required_gov_document: { country_id: user.country_id  }}}, create: {}},
+            observation: { read: {} }, fmu: { ru: {} }, operator: { ru: { id: user.operator_id }}
         }
       else
         { user: { id: user.id }, observations: { read: {} } }
