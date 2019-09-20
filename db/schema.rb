@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190708155422) do
+ActiveRecord::Schema.define(version: 20190920085534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,6 +256,18 @@ ActiveRecord::Schema.define(version: 20190708155422) do
     t.string   "currency"
     t.index ["country_id"], name: "index_laws_on_country_id", using: :btree
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
+  end
+
+  create_table "layer", primary_key: ["topology_id", "layer_id"], force: :cascade do |t|
+    t.integer "topology_id",                null: false
+    t.integer "layer_id",                   null: false
+    t.string  "schema_name",                null: false
+    t.string  "table_name",                 null: false
+    t.string  "feature_column",             null: false
+    t.integer "feature_type",               null: false
+    t.integer "level",          default: 0, null: false
+    t.integer "child_id"
+    t.index ["schema_name", "table_name", "feature_column"], name: "layer_schema_name_table_name_feature_column_key", unique: true, using: :btree
   end
 
   create_table "observation_documents", force: :cascade do |t|
@@ -675,12 +687,29 @@ ActiveRecord::Schema.define(version: 20190708155422) do
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
   end
 
-  create_table "tutorials", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.text     "description"
-    t.integer  "position"
+  create_table "topology", force: :cascade do |t|
+    t.string  "name",                      null: false
+    t.integer "srid",                      null: false
+    t.float   "precision",                 null: false
+    t.boolean "hasz",      default: false, null: false
+    t.index ["name"], name: "topology_name_key", unique: true, using: :btree
+  end
+
+  create_table "tutorial_translations", force: :cascade do |t|
+    t.integer  "tutorial_id", null: false
+    t.string   "locale",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.text     "description"
+    t.index ["locale"], name: "index_tutorial_translations_on_locale", using: :btree
+    t.index ["tutorial_id"], name: "index_tutorial_translations_on_tutorial_id", using: :btree
+  end
+
+  create_table "tutorials", force: :cascade do |t|
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "uploaded_documents", force: :cascade do |t|
@@ -757,6 +786,7 @@ ActiveRecord::Schema.define(version: 20190708155422) do
   add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
+  add_foreign_key "layer", "topology", name: "layer_topology_id_fkey"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
   add_foreign_key "observation_operators", "observations"
