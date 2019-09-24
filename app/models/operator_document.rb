@@ -100,6 +100,7 @@ class OperatorDocument < ApplicationRecord
   scope :required,     -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
   scope :available,    -> { where(public: true) }
+  scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
 
   private
 
