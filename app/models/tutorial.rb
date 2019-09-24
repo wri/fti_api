@@ -11,4 +11,6 @@
 #
 
 class Tutorial < ApplicationRecord
+  translates :name, :description
+  active_admin_translates :name, :description
 end

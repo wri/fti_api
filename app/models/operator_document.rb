@@ -90,11 +90,17 @@ class OperatorDocument < ApplicationRecord
     self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
   end
 
+  # When a doc is valid or not required
+  def approved?
+    %w(doc_not_required doc_valid).include?(status)
+  end
+
   scope :actual,       -> { where(current: true, deleted_at: nil) }
   scope :valid,        -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
   scope :required,     -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
   scope :available,    -> { where(public: true) }
+  scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
 
   private
 
