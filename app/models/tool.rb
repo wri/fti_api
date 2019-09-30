@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: tutorials
+# Table name: tools
 #
 #  id         :integer          not null, primary key
 #  position   :integer
@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 
-class Tutorial < ApplicationRecord
+class Tool < ApplicationRecord
   translates :name, :description
   active_admin_translates :name, :description
 end

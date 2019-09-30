@@ -43,6 +43,8 @@ Rails.application.routes.draw do
       jsonapi_resources :sawmills do; end
       jsonapi_resources :faqs, only: [:index, :show] do; end
       jsonapi_resources :tutorials, only: [:index, :show] do; end
+      jsonapi_resources :how_tos, only: [:index, :show] do; end
+      jsonapi_resources :tools, only: [:index, :show] do; end
       jsonapi_resources :required_gov_documents do; end
       jsonapi_resources :gov_documents do; end
       resources :fmus, only: [:index, :update]
