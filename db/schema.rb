@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190920085534) do
+ActiveRecord::Schema.define(version: 20190930103120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -238,6 +238,23 @@ ActiveRecord::Schema.define(version: 20190920085534) do
     t.datetime "updated_at",                null: false
     t.boolean  "is_active",  default: true
     t.index ["country_id"], name: "index_governments_on_country_id", using: :btree
+  end
+
+  create_table "how_to_translations", force: :cascade do |t|
+    t.integer  "how_to_id",   null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.text     "description"
+    t.index ["how_to_id"], name: "index_how_to_translations_on_how_to_id", using: :btree
+    t.index ["locale"], name: "index_how_to_translations_on_locale", using: :btree
+  end
+
+  create_table "how_tos", force: :cascade do |t|
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "laws", force: :cascade do |t|
@@ -685,6 +702,23 @@ ActiveRecord::Schema.define(version: 20190920085534) do
     t.text     "details"
     t.index ["locale"], name: "index_subcategory_translations_on_locale", using: :btree
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
+  end
+
+  create_table "tool_translations", force: :cascade do |t|
+    t.integer  "tool_id",     null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.text     "description"
+    t.index ["locale"], name: "index_tool_translations_on_locale", using: :btree
+    t.index ["tool_id"], name: "index_tool_translations_on_tool_id", using: :btree
+  end
+
+  create_table "tools", force: :cascade do |t|
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "topology", force: :cascade do |t|
