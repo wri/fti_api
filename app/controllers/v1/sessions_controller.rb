@@ -12,7 +12,8 @@ module V1
         token = Auth.issue({ user: @user.id })
         @user.update_tracked_fields!(request)
         render json: { token: token, role: @user.user_permission.user_role,
-                       user_id: @user.id, operator: @user.operator_id, observer: @user.observer_id }, status: 200
+                       user_id: @user.id, country: @user.country_id,
+                       operator: @user.operator_id, observer: @user.observer_id }, status: 200
       else
         render json: { errors: [{ status: '401', title: 'Incorrect email or password' }] }, status: 401
       end
