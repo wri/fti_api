@@ -31,9 +31,12 @@ class UserPermission < ApplicationRecord
       when 'admin'
         { admin: { manage: {} }, all: { manage: {} } }
       when 'operator'
-        { user: { manage: { id: user.id } } , operator_document: { manage: { operator_id: user.operator_id } },
+        { user: { manage: { id: user.id } } ,
+          operator_document: { manage: { operator_id: user.operator_id } },
           operator_document_annex: { ud: { operator_document: { operator_id: user.operator_id }}, create: {}},
-          observation: { read: {} }, fmu: { ru: {} }, operator: { ru: { id: user.operator_id } },
+          observation: { read: {} },
+          fmu: { ru: {} },
+          operator: { ru: { id: user.operator_id } },
           sawmill: { create: {}, ud: { operator_id: user.operator_id }}}
       when 'ngo'
         { user: { manage: { id: user.id } },
@@ -93,9 +96,8 @@ class UserPermission < ApplicationRecord
       when 'government'
         {
             user: { manage: { id: user.id } },
-            gov_document: { manage: { required_gov_document: { country_id: user.country_id }}},
-            gov_file: { ud: { gov_document: { required_gov_document: { country_id: user.country_id  }}}, create: {}},
-            observation: { read: {} }, fmu: { ru: {} }, operator: { ru: { id: user.operator_id }}
+            gov_document: { ru: { country_id: user.country_id }, create: {}},
+            gov_file: { ud: { gov_document: { required_gov_document: { country_id: user.country_id  }}}, create: {}}
         }
       else
         { user: { id: user.id }, observations: { read: {} } }
