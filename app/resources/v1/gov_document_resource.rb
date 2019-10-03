@@ -24,7 +24,8 @@
 module V1
   class GovDocumentResource < JSONAPI::Resource
     caching
-    attributes :expire_date, :start_date,
+    attributes :required_gov_document_id,
+               :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :current, :uploaded_by, :reason,
                :link, :value, :units
@@ -35,22 +36,18 @@ module V1
 
     filters :type, :status, :operator_id, :current
 
-    # before_create :set_operator_id
-    before_create :set_user_id
+    before_create :set_user_id, :set_country_id, :set_current
 
-    # def set_operator_id
-    #   if context[:current_user].present? && context[:current_user].operator_id.present?
-    #     @model.operator_id = context[:current_user].operator_id
-    #     @model.uploaded_by = :operator
-    #   end
-    # end
+    def set_current
+      @model.current = true
+    end
 
 
     def self.updatable_fields(context)
-      super - [:response_date]
+      super - [:created_at, :updated_at, :deleted_at, :status]
     end
     def self.creatable_fields(context)
-      super - [:response_date]
+      super - [:created_at, :updated_at, :deleted_at, :status]
     end
 
     def set_user_id
@@ -59,20 +56,16 @@ module V1
       end
     end
 
+    def set_country_id
+      @model.country_id = @model.required_gov_document&.country_id
+    end
+
     # TODO: Implement permissions system here
     def status
       return @model.status if can_see_document?
 
       hidden_document_status
     end
-
-    # def attachment
-    #   return @model.attachment if can_see_document?
-    #   return :doc_not_provided unless document_public?
-    #
-    #   { url: nil }
-    # end
-
 
     def custom_links(_)
       { self: nil }
