@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       jsonapi_resources :tools, only: [:index, :show] do; end
       jsonapi_resources :required_gov_documents do; end
       jsonapi_resources :gov_documents do; end
+      jsonapi_resources :gov_files do; end
       resources :fmus, only: [:index, :update]
       resources :contacts, only: [:create, :index]
 
