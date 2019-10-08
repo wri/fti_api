@@ -41,7 +41,7 @@ class FmuOperator < ApplicationRecord
     end
   end
 
-  # Insures only one operator is active per fmu
+  # Ensures only one operator is active per fmu
   def one_active_per_fmu
     return false if fmu.blank?
     count = persisted? ? 1 : 0

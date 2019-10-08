@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - FMUs
   - Monitors
 - Improved usability and the interface
-- Insured only admins who are active can log in
+- Ensured only admins who are active can log in
 - Improved forms:
   - Observer
   - Operator

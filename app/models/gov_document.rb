@@ -43,7 +43,7 @@ class GovDocument < ApplicationRecord
   before_create :delete_previous_pending_document
   after_save :update_percentages, on: %w[create update],  if: :status_changed?
 
-  before_destroy :insure_unity
+  before_destroy :ensure_unity
 
   scope :with_archived, ->() { unscope(where: :deleted_at) }
   scope :to_expire, ->(date) { where("expire_date < '#{date}'::date and status = #{GovDocument.statuses[:doc_valid]}") }
@@ -91,8 +91,10 @@ class GovDocument < ApplicationRecord
 
   private
 
-  def insure_unity
+  def ensure_unity
     return if required_gov_document&.marked_for_destruction?
+    return unless current && required_gov_document.present?
+
     doc = GovDocument.new(required_gov_document_id: required_gov_document_id,
                           status: GovDocument.statuses[:doc_not_provided],
                           current: true)

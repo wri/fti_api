@@ -30,7 +30,7 @@ or apv is null or currency is null')
     end
 
     # When ordering by a translated table in a belongs_to relationship
-    # we add the ordering by id to insure that when limiting by 1 or 100
+    # we add the ordering by id to ensure that when limiting by 1 or 100
     # the order of the results is the same
     def self.apply_sort(records, order_options, context = {})
       if order_options['country.name'].present? || order_options['subcategory.name'].present?
