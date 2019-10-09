@@ -17,4 +17,15 @@ class GovFile < ApplicationRecord
   belongs_to :gov_document, ->() { with_archived }, required: true
 
   mount_base64_uploader :attachment, GovDocumentUploader
+
+  after_create :update_gov_doc_status
+
+  private
+
+  def update_gov_doc_status
+    return if gov_document.status == 'doc_pending'
+
+    gov_document.update(status: GovDocument.statuses[:doc_pending])
+    puts 'a'
+  end
 end

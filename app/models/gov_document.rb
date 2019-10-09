@@ -122,7 +122,7 @@ class GovDocument < ApplicationRecord
   def clear_wrong_fields
     if reason.present?
       self.link = self.value = self.units = nil
-      self.gov_files.each(&:really_destroy!)
+      self.gov_files.each(&:destroy)
       return
     end
 
@@ -131,10 +131,10 @@ class GovDocument < ApplicationRecord
       self.link = self.value = self.units = nil
     when 'link'
       self.value = self.units = nil
-      self.gov_files.each(&:really_destroy!)
+      self.gov_files.each(&:destroy)
     when 'stats'
       self.link = nil
-      self.gov_files.each(&:really_destroy!)
+      self.gov_files.each(&:destroy)
     end
   end
 end
