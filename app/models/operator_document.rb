@@ -47,7 +47,7 @@ class OperatorDocument < ApplicationRecord
   before_create :delete_previous_pending_document
   after_save :update_operator_percentages, on: %w[create update],  if: :status_changed?
 
-  before_destroy :insure_unity
+  before_destroy :ensure_unity
 
   scope :to_expire, ->(date) { joins(:required_operator_document)
                                 .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
@@ -90,15 +90,21 @@ class OperatorDocument < ApplicationRecord
     self.update_attributes(status: OperatorDocument.statuses[:doc_expired])
   end
 
+  # When a doc is valid or not required
+  def approved?
+    %w(doc_not_required doc_valid).include?(status)
+  end
+
   scope :actual,       -> { where(current: true, deleted_at: nil) }
   scope :valid,        -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
   scope :required,     -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
   scope :available,    -> { where(public: true) }
+  scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
 
   private
 
-  def insure_unity
+  def ensure_unity
     return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
     if self.current && self.required_operator_document.present?
       od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,

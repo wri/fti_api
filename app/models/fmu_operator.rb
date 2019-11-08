@@ -41,7 +41,7 @@ class FmuOperator < ApplicationRecord
     end
   end
 
-  # Insures only one operator is active per fmu
+  # Ensures only one operator is active per fmu
   def one_active_per_fmu
     return false if fmu.blank?
     count = persisted? ? 1 : 0
@@ -98,7 +98,7 @@ WHERE id = #{x.fmu_id};"
   # Updates the list of documents for this FMU
   def update_documents_list
     current_operator = self.fmu.operator.id rescue nil
-    return unless self.fmu.operator.fa_id.present?
+    return unless self.operator.fa_id.present?
 
     OperatorDocumentFmu.transaction do
       destroyed_count = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator).delete_all

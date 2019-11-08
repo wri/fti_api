@@ -13,7 +13,6 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
           li { link_to 'Dashboard', admin_dashboard_path }
         end
 
-        # Add one item with one son.
         ul do
           li do
             text_node content_tag 'a', 'Independent Monitoring'
@@ -37,7 +36,6 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
           end
         end
 
-        # Adds a menu item with one son and one grandson.
         ul do
           li do
             text_node content_tag 'a', 'Private Sector'
@@ -62,17 +60,43 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
 
         ul do
           li do
+            text_node content_tag 'a', 'Government Sector'
+            ul do
+              li { link_to 'Required Document Group',  admin_required_gov_document_groups_path }
+              li { link_to 'Required Documents',       admin_required_gov_documents_path }
+              li { link_to 'Documents',                admin_gov_documents_path }
+            end
+          end
+        end
+
+        ul do
+          li do
+            text_node content_tag 'a', 'Static Content'
+            ul do
+              li { link_to 'Partners',           admin_partners_path }
+              li { link_to 'Donors',             admin_donors_path }
+              li do
+                text_node content_tag 'a', 'Help page', class: '-with-children'
+                ul do
+                  li { link_to 'FAQs',               admin_faqs_path }
+                  li { link_to 'How Tos',            admin_how_tos_path }
+                  li { link_to 'Tools',              admin_tools_path }
+                  li { link_to 'Tutorials',          admin_tutorials_path }
+                  li { link_to 'Uploaded Documents', admin_uploaded_documents_path }
+                end
+              end
+            end
+          end
+        end
+
+        ul do
+          li do
             text_node content_tag 'a', 'User Management'
             ul do
               li { link_to 'Users',              admin_users_path }
               li { link_to 'Access Control',     admin_access_control_path }
               li { link_to 'Contacts',           admin_contacts_path }
-              li { link_to 'Partners',           admin_partners_path }
-              li { link_to 'Donors',             admin_donors_path }
               li { link_to 'Comments',           admin_comments_path }
-              li { link_to 'FAQs',               admin_faqs_path }
-              li { link_to 'Tutorials',          admin_tutorials_path }
-              li { link_to 'Tutorial Documents', admin_uploaded_documents_path }
             end
           end
         end

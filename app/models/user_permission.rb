@@ -13,7 +13,7 @@
 #
 
 class UserPermission < ApplicationRecord
-  enum user_role: { user: 0, operator: 1, ngo: 2, ngo_manager: 4, bo_manager: 5, admin: 3 }.freeze
+  enum user_role: { user: 0, operator: 1, ngo: 2, ngo_manager: 4, bo_manager: 5, admin: 3, government: 6 }.freeze
 
   belongs_to :user
 
@@ -31,9 +31,12 @@ class UserPermission < ApplicationRecord
       when 'admin'
         { admin: { manage: {} }, all: { manage: {} } }
       when 'operator'
-        { user: { manage: { id: user.id } } , operator_document: { manage: { operator_id: user.operator_id } },
+        { user: { manage: { id: user.id } } ,
+          operator_document: { manage: { operator_id: user.operator_id } },
           operator_document_annex: { ud: { operator_document: { operator_id: user.operator_id }}, create: {}},
-          observation: { read: {} }, fmu: { ru: {} }, operator: { ru: { id: user.operator_id } },
+          observation: { read: {} },
+          fmu: { ru: {} },
+          operator: { ru: { id: user.operator_id } },
           sawmill: { create: {}, ud: { operator_id: user.operator_id }}}
       when 'ngo'
         { user: { manage: { id: user.id } },
@@ -89,6 +92,12 @@ class UserPermission < ApplicationRecord
             operator_document: { read: {} },
             required_operator_document_group: { read: {} },
             required_operator_document: { read: {} }
+        }
+      when 'government'
+        {
+            user: { manage: { id: user.id } },
+            gov_document: { rud: { country_id: user.country_id }, create: {}},
+            gov_file: { rud: { gov_document: { required_gov_document: { country_id: user.country_id  }}}, create: {}}
         }
       else
         { user: { id: user.id }, observations: { read: {} } }

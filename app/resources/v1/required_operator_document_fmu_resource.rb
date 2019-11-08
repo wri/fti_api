@@ -3,7 +3,7 @@
 module V1
   class RequiredOperatorDocumentFmuResource < JSONAPI::Resource
     caching
-    attributes :forest_type, :name, :valid_period, :explanation
+    attributes :forest_type, :name, :valid_period, :explanation, :forest_type
 
     has_one :country
     has_one :required_operator_document_group

@@ -3,7 +3,7 @@
 module V1
   class RequiredOperatorDocumentCountryResource < JSONAPI::Resource
     caching
-    attributes :name, :valid_period, :explanation
+    attributes :name, :valid_period, :explanation, :forest_type, :contract_signature
 
     has_one :country
     has_one :required_operator_document_group
