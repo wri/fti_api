@@ -19,9 +19,9 @@ namespace :import do
         properties = row['properties']
 
         name = properties['fmu_name'].strip
-        operator = Operator.find_by(name: properties['company_na'])
+        operator = Operator.find_by(name: properties['company_name'])
 
-        puts "-------------------------------------------------------------------------#{properties['company_na']}" if operator.blank?
+        puts "-------------------------------------------------------------------------#{properties['company_name']}" if operator.blank?
 
         fmus << name
         fmu = Fmu.where(name: name, country_id: country.id).first if name.present?
@@ -33,7 +33,7 @@ namespace :import do
 
         #next unless fmu
 
-        new_associations << { "#{name}": {old: fmu&.operator&.name, new: properties['company_na'] }} unless fmu&.operator == operator
+        new_associations << { "#{name}": {old: fmu&.operator&.name, new: properties['company_name'] }} unless fmu&.operator == operator
       end
 
       old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus.include?(f.name)}
@@ -60,10 +60,10 @@ namespace :import do
       country = Country.find_by(iso: 'CMR')
       data_hash['features'].each_with_index do |row, index|
         properties = row['properties']
-        puts "#{index.to_s.rjust(3, '0')}>> Importing fmu: #{properties['fmu_name'].strip.rjust(30, ' ')}. Operator #{ properties['company_na']}"
+        puts "#{index.to_s.rjust(3, '0')}>> Importing fmu: #{properties['fmu_name'].strip.rjust(30, ' ')}. Operator #{ properties['company_name']}"
 
         name = properties['fmu_name'].strip
-        operator_name = properties['company_na'].strip
+        operator_name = properties['company_name']&.strip
         operator = Operator.find_by(name: operator_name)
         puts "Creating Operator: #{operator_name}" unless (operator.present? || operator_name.blank?)
         operator ||= Operator.create!(name:operator_name,
