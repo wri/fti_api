@@ -7,100 +7,133 @@ namespace :import do
     desc 'Load geojson'
     task dry_run: :environment do
       Rails.logger.info('Importing the geojson')
-      new_fmus = {}
-      fmus = []
-      replaced_fmus = {}
-      new_associations = []
-      filename = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'fmus_CMR.json'))
+      new_fmus = { CMR: {}, COD: {}, CAF: {}, COG: {}, GAB: {} }
+      fmus = { CMR: [], COD: [], CAF: [], COG: [], GAB: [] }
+      replaced_fmus = { CMR: {}, COD: {}, CAF: {}, COG: {}, GAB: {} }
+      new_associations = { CMR: [], COD: [], CAF: [], COG: [], GAB: [] }
+      new_operators = { CMR: [], COD: [], CAF: [], COG: [], GAB: [] }
+      filename = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'fmus.json'))
       file = File.read filename
       data_hash = JSON.parse(file)
-      country = Country.find_by(iso: 'CMR')
       data_hash['features'].each_with_index  do |row, index|
         properties = row['properties']
 
+        country = Country.find_by(iso: properties['iso3_fmu'])
+        iso = country.iso.to_sym
         name = properties['fmu_name'].strip
-        operator = Operator.find_by(name: properties['company_name'])
+        operator = Operator.find_by(name: properties['company_na'])
 
-        puts "-------------------------------------------------------------------------#{properties['company_name']}" if operator.blank?
+        new_operators[iso] << properties['company_na']
 
-        fmus << name
+        fmus[iso] << name
         fmu = Fmu.where(name: name, country_id: country.id).first if name.present?
         if fmu.present?
-          replaced_fmus[index] = name
+          replaced_fmus[iso][index] = name
         else
-          new_fmus[index] = name
+          new_fmus[iso][index] = name
         end
 
-        #next unless fmu
-
-        new_associations << { "#{name}": {old: fmu&.operator&.name, new: properties['company_name'] }} unless fmu&.operator == operator
+        new_associations[iso] << { "#{name}": {old: fmu&.operator&.name, new: properties['company_na'] }} unless fmu&.operator == operator
       end
 
-      old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus.include?(f.name)}
+      %i[CMR COD CAF COG GAB].each do |iso|
+        puts ">>>>>>>>>>>>>>>>>> #{iso} >>>>>>>>>>>>>>>>>>>"
 
-      puts "----- New fmus:"
-      new_fmus.sort.each{ |k, v| puts "---> #{k} - #{v}"}
-      puts "NEW #{new_fmus.count}"
-      puts "----- Modified fmus:"
-      replaced_fmus.sort.each {|k, v| puts ">>>> #{k} - #{v}"}
-      puts "MODIFIED #{replaced_fmus.count}"
-      puts "----- Untouched fmus: "
-      old_fmus.each { |f| puts "... #{f.id} - #{f.name}"}
-      puts "UNTOUCHED #{old_fmus.count}"
-      puts "----- New associations: "
-      new_associations.each {|f| puts f }
-      puts new_associations.count
+        country = Country.find_by iso: iso
+        old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus[iso].include?(f.name) }
+
+        puts "..... New FMUs"
+        new_fmus[iso].sort.each{ |k, v| puts "Line #{k} - #{v}"}
+        puts "_____ New FMUs count: #{new_fmus[iso].count}"
+
+        puts "..... Modified FMUs"
+        replaced_fmus[iso].sort.each{ |k, v| puts "Line #{k} - #{v}"}
+        puts "_____ Modified FMUs count: #{replaced_fmus[iso].count}"
+
+        puts "..... FMUs to remove"
+        old_fmus.each { |f| puts "#{f.id} - #{f.name}"}
+        puts "_____ FMUs to remove count: #{old_fmus.count}"
+
+        puts "..... New associations"
+        new_associations[iso].each {|f| puts f }
+        puts "_____ New associations count #{new_associations[iso].count}"
+
+        puts ":::::::::::: Finished #{iso} :::::::::::::"
+      end
+
     end
 
-    desc 'Import Cameroon'
+    desc 'Import all countries'
     task geojson: :environment do
-      filename = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'fmus_CMR.json'))
-      file = File.read filename
-      data_hash = JSON.parse(file)
-      country = Country.find_by(iso: 'CMR')
-      data_hash['features'].each_with_index do |row, index|
-        properties = row['properties']
-        puts "#{index.to_s.rjust(3, '0')}>> Importing fmu: #{properties['fmu_name'].strip.rjust(30, ' ')}. Operator #{ properties['company_name']}"
+      Fmu.transaction do
+        puts "Going to update all the names of the fmus to remove the carriage returns"
+        ActiveRecord::Base.connection.execute("UPDATE \"fmu_translations\" SET \"name\" = regexp_replace(\"name\", E'(^[\\n\\r]+)|([\\n\\r]+$)', '', 'g' );")
 
-        name = properties['fmu_name'].strip
-        operator_name = properties['company_name']&.strip
-        operator = Operator.find_by(name: operator_name)
-        puts "Creating Operator: #{operator_name}" unless (operator.present? || operator_name.blank?)
-        operator ||= Operator.create!(name:operator_name,
-                                      country_id: country.id,
-                                      fa_id: "CMR/UNKNOWN/#{index.to_s.rjust(4, '0')}",
-                                      operator_type: 'Logging company') unless operator_name.blank?
+        fmus = { CMR: [], COD: [], CAF: [], COG: [], GAB: [] }
+
+        filename = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'fmus.json'))
+        file = File.read filename
+        data_hash = JSON.parse(file)
+        data_hash['features'].each_with_index do |row, index|
+          properties = row['properties']
+          country = Country.find_by(iso: properties['iso3_fmu'])
+
+          puts "#{index.to_s.rjust(3, '0')}[#{country.iso}]>> Importing fmu: #{properties['fmu_name'].strip.rjust(30, ' ')}. Operator #{ properties['company_na']}"
+
+          name = properties['fmu_name'].strip
+          operator_name = properties['company_na']&.strip
+          operator = Operator.find_by(name: operator_name)
+          puts "Creating Operator: #{operator_name}" unless (operator.present? || operator_name.blank?)
+          operator ||= Operator.create!(name:operator_name,
+                                        country_id: country.id,
+                                        fa_id: "CMR/UNKNOWN/#{index.to_s.rjust(4, '0')}",
+                                        operator_type: 'Logging company') unless operator_name.blank?
 
 
-        fmu = Fmu.where(name: name, country_id: country.id).first if name.present?
-        fmu = Fmu.where(country_id: country.id, name: "row-#{index}").first unless name.present?
-        if fmu.blank?
-          puts "Creating FMU: #{name}"
-          fmu = Fmu.new
-          fmu.country = country
-          fmu.name = name.blank? ? "row-#{index}" : name
-          fmu.forest_type = properties['fmu_type'].nil? ? 'fmu' : 'vdc'
-        end
+          fmu = Fmu.where(name: name, country_id: country.id).first if name.present?
+          fmu = Fmu.where(country_id: country.id, name: "row-#{index}").first unless name.present?
 
-        fmu.geojson = row
-        fmu.save!
+          if fmu.blank?
+            puts "Creating FMU: #{name}"
+            fmu = Fmu.new
+            fmu.country = country
+            fmu.name = name.blank? ? "row-#{index}" : name
+            fmu.forest_type = (Fmu::FOREST_TYPES.select{|_,v| v[:geojson_label] == properties['fmu_type_label']}).first.first rescue 'fmu'
+          end
 
-        if fmu.operator != operator
-          next if operator.blank? # This makes sure that we don't remove operators from fmus
+          fmus[country.iso.to_sym] << fmu.name
 
-          begin
-            puts "Changing operator. FMU: #{name.rjust(27, ' ')}. Operator: #{operator.name}"
-            if fmu.operator.present?
-              puts "FMU: #{fmu.name.rjust(30, ' ')} had operator #{fmu.operator.name}"
-              end_date = Date.parse(properties['start_date']) - 1.day rescue Date.today
-              FmuOperator.where(fmu_id: fmu.id, current: true).find_each do |fo|
-                fo.update!(current: false, end_date: end_date)
+          fmu.geojson = row
+          fmu.save!
+
+          if fmu.operator != operator
+            if operator.blank? # Ends the fmus contracts yesterday
+              fmu.fmu_operator.update(end_date: Date.today - 1.day, current: false)
+            else
+              begin
+                puts "Changing operator. FMU: #{name.rjust(27, ' ')}. Operator: #{operator.name}"
+                if fmu.operator.present?
+                  puts "FMU: #{fmu.name.rjust(30, ' ')} had operator #{fmu.operator.name}"
+                  end_date = Date.parse(properties['start_date']) - 1.day rescue Date.today
+                  FmuOperator.where(fmu_id: fmu.id, current: true).find_each do |fo|
+                    fo.update!(current: false, end_date: end_date)
+                  end
+                end
+                FmuOperator.create!(current: true, fmu_id: fmu.id, operator_id: operator.id, start_date: properties['start_date'])
+              rescue
+                puts ">>>>>>>>>>>>>>>#{fmu.name}-> Couldn't update #{fmu.operator.name} to #{operator.name}."
               end
             end
-            FmuOperator.create!(current: true, fmu_id: fmu.id, operator_id: operator.id, start_date: properties['start_date'])
-          rescue
-            puts ">>>>>>>>>>>>>>>#{fmu.name}-> Couldn't update #{fmu.operator.name} to #{operator.name}."
           end
+        end
+
+        puts "---- Removing old fmus"
+        %i[CMR COD CAF COG GAB].each do |iso|
+          country = Country.find_by iso: iso
+          old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus[iso].include?(f.name) }
+
+          puts "[#{iso}] Removing #{old_fmus.count} fmus: #{old_fmus.map{|x| x.name}.join(', ')}"
+          old_fmus.each(&:destroy)
         end
       end
     end
