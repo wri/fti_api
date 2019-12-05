@@ -49,7 +49,7 @@ class Observation < ApplicationRecord
 
   belongs_to :subcategory, inverse_of: :observations, optional: true
 
-  has_many :species_observations
+  has_many :species_observations, dependent: :destroy
   has_many :species, through: :species_observations
 
   has_many :observer_observations, dependent: :destroy
@@ -58,7 +58,7 @@ class Observation < ApplicationRecord
   has_many :observation_operators, dependent: :destroy
   has_many :relevant_operators, through: :observation_operators, source: :operator
 
-  has_many :comments,  as: :commentable
+  has_many :comments,  as: :commentable, dependent: :destroy
   has_many :photos,    as: :attacheable, dependent: :destroy
   has_many :observation_documents
   belongs_to :observation_report
@@ -158,7 +158,9 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def destroy_documents
-    observation_documents.find_each(&:really_destroy!)
+    #observation_documents.find_each(&:really_destroy!)
+    mark_for_destruction # Hack to work with the hard delete of operator documents
+    ActiveRecord::Base.connection.execute("DELETE FROM observation_documents WHERE observation_id = #{id}")
   end
 
   def active_government

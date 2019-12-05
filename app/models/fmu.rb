@@ -28,14 +28,14 @@ class Fmu < ApplicationRecord
   end
 
   belongs_to :country, inverse_of: :fmus
-  has_many :observations, inverse_of: :fmu
+  has_many :observations, inverse_of: :fmu, dependent: :destroy
 
   has_many :fmu_operators, inverse_of: :fmu, dependent: :destroy
   has_many :operators, through: :fmu_operators
   has_one :fmu_operator, ->{ where(current: true) }
   has_one :operator, through: :fmu_operator
 
-  has_many :operator_document_fmus, dependent: :destroy
+  has_many :operator_document_fmus
 
   accepts_nested_attributes_for :operators
 
