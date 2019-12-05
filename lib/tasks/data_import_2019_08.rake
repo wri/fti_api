@@ -80,8 +80,9 @@ namespace :import do
 
           begin
             fmu = Fmu.with_translations.find(properties['old_fmuid'])
+            next if fmu.country.iso == 'CMR' # Not importing Cameroon at the time
             new_fmu_name = properties['new_fmunam']&.strip.presence || fmu.name.presence || fmu.geojson&.dig('properties', 'globalid')&.presence || "fmu-row-#{index}"
-            puts "Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{new_fmu_name}'. ID: #{fmu.id}"
+            puts "[#{fmu.country.iso}] Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{new_fmu_name}'. ID: #{fmu.id}"
 
             fmu.name = new_fmu_name
             fmu.save
