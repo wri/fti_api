@@ -66,8 +66,55 @@ namespace :import do
     desc 'Import all countries'
     task geojson: :environment do
       Fmu.transaction do
+        puts 'Updating fmus old names to the new ones'
+        if Rails.env.production?
+          fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'production_intersects_80_v2.json'))
+        else
+          fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'staging_intersects_80_v2.json'))
+        end
+        file = File.read fmunames_file
+        data_hash = JSON.parse(file)
+        data_hash['features'].each_with_index do |row, index|
+          properties = row['properties']
+          next if properties['old_fmunam']&.strip == properties['new_fmunam']&.strip
+
+          begin
+            fmu = Fmu.with_translations.find(properties['old_fmuid'])
+            new_fmu_name = properties['new_fmunam']&.strip.presence || fmu.name.presence || fmu.geojson&.dig('properties', 'globalid')&.presence || "fmu-row-#{index}"
+            puts "Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{new_fmu_name}'. ID: #{fmu.id}"
+
+            fmu.name = new_fmu_name
+            fmu.save
+          rescue NoMethodError
+            puts "-- Cannot find fmu named #{properties['old_fmunam']}"
+          end
+        end
+
         puts "Going to update all the names of the fmus to remove the carriage returns"
         ActiveRecord::Base.connection.execute("UPDATE \"fmu_translations\" SET \"name\" = regexp_replace(\"name\", E'(^[\\n\\r]+)|([\\n\\r]+$)', '', 'g' );")
+
+        # puts 'Updating fmus old names to the new ones'
+        # if Rails.env.production?
+        #   fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'production_fmunames.json'))
+        # else
+        #   fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'staging_fmunames.json'))
+        # end
+        # file = File.read fmunames_file
+        # data_hash = JSON.parse(file)
+        # data_hash['features'].each do |row|
+        #   properties = row['properties']
+        #   next if properties['old_fmunam']&.strip == properties['fmu_name']&.strip
+        #
+        #   puts "Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{properties['fmu_name']&.strip}'"
+        #   begin
+        #     fmu = Fmu.with_translations.find_by(name: properties['old_fmunam']&.strip)
+        #     fmu.name = properties['fmu_name']&.strip
+        #     fmu.save
+        #   rescue NoMethodError
+        #     puts "-- Cannot find fmu named #{properties['fmu_name']}"
+        #   end
+        # end
+
 
         fmus = { CMR: [], COD: [], CAF: [], COG: [], GAB: [] }
 
@@ -77,12 +124,13 @@ namespace :import do
         data_hash['features'].each_with_index do |row, index|
           properties = row['properties']
           country = Country.find_by(iso: properties['iso3_fmu'])
+          next if properties['iso3_fmu'] == 'CMR' # Not importing Cameroon at the time
 
           puts "#{index.to_s.rjust(3, '0')}[#{country.iso}]>> Importing fmu: #{properties['fmu_name'].strip.rjust(30, ' ')}. Operator #{ properties['company_na']}"
 
           name = properties['fmu_name'].strip
           operator_name = properties['company_na']&.strip
-          operator = Operator.find_by(name: operator_name)
+          operator =  Operator.with_translations.find_by("lower(name) = ?", operator_name.downcase)
           puts "Creating Operator: #{operator_name}" unless (operator.present? || operator_name.blank?)
           operator ||= Operator.create!(name:operator_name,
                                         country_id: country.id,
@@ -91,13 +139,18 @@ namespace :import do
 
 
           fmu = Fmu.where(name: name, country_id: country.id).first if name.present?
-          fmu = Fmu.where(country_id: country.id, name: "row-#{index}").first unless name.present?
+          fmu = Fmu.where(country_id: country.id, name: "#{country.iso}-row-#{index}").first unless name.present?
+          unless fmu
+            globalid = properties['globalid']
+            fmu = Fmu.where(country_id: country.id).where("geojson->'properties'->>'globalid' = '#{globalid}'").first if globalid.present?
+            puts "-------------------------------------------------- FOUND FMU BY globalid #{fmu.name}" if fmu.present?
+          end
 
           if fmu.blank?
             puts "Creating FMU: #{name}"
             fmu = Fmu.new
             fmu.country = country
-            fmu.name = name.blank? ? "row-#{index}" : name
+            fmu.name = name.blank? ? "#{country.iso}-row-#{index}" : name
             fmu.forest_type = (Fmu::FOREST_TYPES.select{|_,v| v[:geojson_label] == properties['fmu_type_label']}).first.first rescue 'fmu'
           end
 
@@ -121,6 +174,9 @@ namespace :import do
                 end
                 FmuOperator.create!(current: true, fmu_id: fmu.id, operator_id: operator.id, start_date: properties['start_date'])
               rescue
+                vaaaa = 10
+                vaaaa+= 10
+
                 puts ">>>>>>>>>>>>>>>#{fmu.name}-> Couldn't update #{fmu.operator.name} to #{operator.name}."
               end
             end
