@@ -94,29 +94,6 @@ namespace :import do
         puts "Going to update all the names of the fmus to remove the carriage returns"
         ActiveRecord::Base.connection.execute("UPDATE \"fmu_translations\" SET \"name\" = regexp_replace(\"name\", E'(^[\\n\\r]+)|([\\n\\r]+$)', '', 'g' );")
 
-        # puts 'Updating fmus old names to the new ones'
-        # if Rails.env.production?
-        #   fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'production_fmunames.json'))
-        # else
-        #   fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'staging_fmunames.json'))
-        # end
-        # file = File.read fmunames_file
-        # data_hash = JSON.parse(file)
-        # data_hash['features'].each do |row|
-        #   properties = row['properties']
-        #   next if properties['old_fmunam']&.strip == properties['fmu_name']&.strip
-        #
-        #   puts "Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{properties['fmu_name']&.strip}'"
-        #   begin
-        #     fmu = Fmu.with_translations.find_by(name: properties['old_fmunam']&.strip)
-        #     fmu.name = properties['fmu_name']&.strip
-        #     fmu.save
-        #   rescue NoMethodError
-        #     puts "-- Cannot find fmu named #{properties['fmu_name']}"
-        #   end
-        # end
-
-
         fmus = { CMR: [], COD: [], CAF: [], COG: [], GAB: [] }
 
         filename = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'fmus.json'))
@@ -175,9 +152,6 @@ namespace :import do
                 end
                 FmuOperator.create!(current: true, fmu_id: fmu.id, operator_id: operator.id, start_date: properties['start_date'])
               rescue
-                vaaaa = 10
-                vaaaa+= 10
-
                 puts ">>>>>>>>>>>>>>>#{fmu.name}-> Couldn't update #{fmu.operator.name} to #{operator.name}."
               end
             end
@@ -186,6 +160,7 @@ namespace :import do
 
         puts "---- Removing old fmus"
         %i[CMR COD CAF COG GAB].each do |iso|
+          next if iso == :CMR # Not importing Cameroon at the time
           country = Country.find_by iso: iso
           old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus[iso].include?(f.name) }
 
