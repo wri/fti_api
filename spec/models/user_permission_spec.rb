@@ -13,71 +13,114 @@
 require 'rails_helper'
 
 RSpec.describe UserPermission, type: :model do
-  before :each do
-    @user     = create(:user)
-    @user_ngo = create(:user, permissions_request: 'ngo')
+  before :all do
+    @user = FactoryBot.create :user
   end
 
-  let!(:user_permissions) {
-    {"user"=>{"id"=>["manage"]}, "observation"=>{"all"=>["read"]}}
+  subject(:user_permission) { FactoryBot.build :user_permission }
+
+  let(:admin_permissions) {
+    { admin: { manage: {} }, all: { manage: {} } }
   }
 
-  let!(:ngo_permissions) {
-    {"user"=>{"id"=>["manage"]}, "observation"=>{"user_id"=>["manage"]}, "photo"=>{"user_id"=>["manage"]}, "document"=>{"user_id"=>["manage"]}}
+  let(:operator_permissions) {
+    { user: { manage: { id: @user.id } } , operator_document: { manage: { operator_id: @user.operator_id } },
+      operator_document_annex: { ud: { operator_document: { operator_id: @user.operator_id }}, create: {}},
+      observation: { read: {} }, fmu: { ru: {} }, operator: { ru: { id: @user.operator_id } },
+      sawmill: { create: {}, ud: { operator_id: @user.operator_id }}}
   }
 
-  let!(:operator_permissions) {
-    {"user"=>{"id"=>["manage"]}, "observation"=>{"all"=>["read"]}}
+  let(:ngo_permissions) {
+    { user: { manage: { id: @user.id } },
+      observation: { manage: { observers: { id: @user.observer_id } },  create: {} },
+      observation_report: { update: { observers: { id: @user.observer_id } }, create: {} },
+      observation_documents:  { ud: { observation: { is_active: false, observers: { id: @user.observer_id } } }, create: {} },
+      category: { read: {} },
+      subcategory: { read: {} },
+      government: { read: {} },
+      species: { read: {} },
+      operator: { create: {}, read: {} },
+      law: { read: {} },
+      severity: { read: {} },
+      observer: { read: {} ,  update: { id: @user.observer_id } },
+      fmu: { read: {} },
+      operator_document: { read: {} },
+      required_operator_document_group: { read: {} },
+      required_operator_document: { read: {} } }
   }
 
-  let!(:admin_permissions) {
-    {"admin"=>{"all"=>["read"]},"all"=>{"all"=>["manage"]}}
+  let(:ngo_manager_permissions) {
+    {
+      user: { manage: { id: @user.id } },
+      observation: { manage: { observers: { id: @user.observer_id } },  create: {} },
+      observation_report: { update: { observers: { id: @user.observer_id } }, create: {} },
+      observation_documents:  { ud: { observation: { is_active: false, observers: { id: @user.observer_id } } }, create: {} },
+      category: { cru: {} },
+      subcategory: { cru: {} },
+      government: { cru: {} },
+      species: { cru: {} },
+      operator: { cru: {} },
+      law: { cru: {} },
+      severity: { cru: {} },
+      observer: { read: {} ,  update: { id: @user.observer_id } },
+      fmu: { read: {}, update: {} },
+      operator_document: { manage: {} },
+      required_operator_document_group: { cru: {} },
+      required_operator_document: { cru: {} }
+    }
   }
 
-  it 'Check default user permissions' do
-    expect(@user.user_permission.user_role).to   eq('user')
-    expect(@user.user_permission.permissions).to eq(user_permissions)
+  let(:bo_manager_permissions) {
+    {
+      user: { manage: { id: @user.id } },
+      observation: { manage: {} },
+      observer: { read: {} },
+      operator: { read: {} },
+      observation_report: { read: {} },
+      observation_documents:  { read: {} },
+      category: { read: {} },
+      subcategory: { read: {} },
+      government: { read: {} },
+      species: { read: {} },
+      law: { read: {} },
+      severity: { read: {} },
+      fmu: { read: {} },
+      operator_document: { read: {} },
+      required_operator_document_group: { read: {} },
+      required_operator_document: { read: {} }
+    }
+  }
+
+  let(:user_permissions) {
+    { user: { id: @user.id }, observations: { read: {} } }
+  }
+
+  it 'is valid with valid attributes' do
+    expect(user_permission).to be_valid
   end
 
-  it 'Change user permissions and role to admin' do
-    @user.user_permission.update(user_role: 'admin', permissions: admin_permissions)
-
-    expect(@user.user_permission.user_role).to   eq('admin')
-    expect(@user.user_permission.permissions).to eq(admin_permissions)
+  describe 'Enums' do
+    it { is_expected.to define_enum_for(:user_role).with_values(
+      { user: 0, operator: 1, ngo: 2, ngo_manager: 4, bo_manager: 5, admin: 3 }
+    ) }
   end
 
-  it 'Change user permissions and role to ngo' do
-    @user.user_permission.update(user_role: 'ngo', permissions: ngo_permissions)
-
-    expect(@user.user_permission.user_role).to   eq('ngo')
-    expect(@user.user_permission.permissions).to eq(ngo_permissions)
+  describe 'Relations' do
+    it { is_expected.to belong_to(:user) }
   end
 
-  it 'Change user permissions and role to operator' do
-    @user.user_permission.update(user_role: 'operator', permissions: operator_permissions)
-
-    expect(@user.user_permission.user_role).to   eq('operator')
-    expect(@user.user_permission.permissions).to eq(operator_permissions)
-  end
-
-  it 'Change ngo user permissions and role to user' do
-    @user_ngo.user_permission.update(user_role: 'ngo',  permissions: ngo_permissions)
-    @user_ngo.user_permission.update(user_role: 'user', permissions: user_permissions)
-
-    expect(@user_ngo.user_permission.user_role).to   eq('user')
-    expect(@user_ngo.user_permission.permissions).to eq(user_permissions)
-  end
-
-  it 'Accept user role request' do
-    @user_ngo.user_permission.update(user_role: 'ngo')
-
-    expect(@user_ngo.user_permission.user_role).to   eq('ngo')
-    expect(@user_ngo.user_permission.permissions).to eq(ngo_permissions)
-  end
-
-  it 'Is a user an user? Show the role name' do
-    expect(@user.admin?).to    eq(false)
-    expect(@user.user?).to     eq(true)
-    expect(@user.role_name).to eq('User')
+  describe 'Hooks' do
+    describe '#change_permissions' do
+      %i[admin operator ngo ngo_manager bo_manager user].each do |role|
+        context "when user_role is #{role}" do
+          it "set permissions to #{role} role permissions" do
+            user_permission = FactoryBot.create :user_permission, user_role: role, user: @user
+            expect(user_permission.permissions).to eql(
+              send("#{role}_permissions").with_indifferent_access
+            )
+          end
+        end
+      end
+    end
   end
 end

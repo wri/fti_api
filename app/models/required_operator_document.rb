@@ -30,15 +30,10 @@ class RequiredOperatorDocument < ApplicationRecord
   has_many :operator_document_countries
 
   validates :valid_period, numericality: { greater_than: 0 }
-  after_destroy :invalidate_operator_documents
 
   validate :fixed_fields_unchanged
 
   scope :with_archived, ->() { unscope(where: :deleted_at) }
-
-  def invalidate_operator_documents
-    self.operator_documents.find_each{|x| x.update(status: OperatorDocument.statuses[:doc_expired])}
-  end
 
   private
 

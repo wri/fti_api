@@ -634,13 +634,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.index ["severity_id"], name: "index_severity_translations_on_severity_id", using: :btree
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, force: :cascade do |t|
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
-  end
-
   create_table "species", force: :cascade do |t|
     t.string   "name"
     t.string   "species_class"

@@ -21,53 +21,79 @@
 require 'rails_helper'
 
 RSpec.describe Observer, type: :model do
-  before :each do
-    FactoryGirl.create(:observer, name: 'Z Observer')
-    @monitor = create(:observer)
+  subject(:observer) { FactoryBot.build :observer }
+
+  it 'is valid with valid attributes' do
+    expect(observer).to be_valid
   end
 
-  it 'Count on observer' do
-    expect(Observer.count).to          eq(2)
-    expect(Observer.all.first.name).to eq('Z Observer')
+  it_should_behave_like 'translatable', FactoryBot.create(:observer), %i[name organization]
+
+  describe 'Relations' do
+    it { is_expected.to have_and_belong_to_many(:countries) }
+    it { is_expected.to have_many(:observer_observations).dependent(:restrict_with_error) }
+    it { is_expected.to have_many(:observations).through(:observer_observations) }
+    it { is_expected.to have_many(:observation_report_observers).dependent(:restrict_with_error) }
+    it { is_expected.to have_many(:observation_reports).through(:observation_report_observers) }
+    it { is_expected.to have_many(:users).inverse_of(:observer) }
   end
 
-  it 'Order by name asc' do
-    expect(Observer.by_name_asc.first.name).to match('Observer')
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:observer_type) }
+
+    it { is_expected.to validate_inclusion_of(:observer_type)
+      .in_array(%w[Mandated SemiMandated External Government])
+      .with_message(/is not a valid observer type/)
+    }
+    it { is_expected.to validate_inclusion_of(:organization_type)
+      .in_array(['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other'])
+    }
+
+    it { is_expected.to allow_value('email@email.com').for(:information_email) }
+    it { is_expected.to allow_value('email@email.com').for(:data_email) }
   end
 
-  it 'Fallbacks for empty translations on observer' do
-    I18n.locale = :fr
-    expect(@monitor.name).to match('Observer')
-    I18n.locale = :en
+  describe 'Instance methods' do
+    describe '#cache_key' do
+      it 'return the default value with the locale' do
+        expect(observer.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+      end
+    end
   end
 
-  it 'Translate observer to fr' do
-    @monitor.update(name: 'Observer FR', locale: :fr)
-    I18n.locale = :fr
-    expect(@monitor.name).to eq('Observer FR')
-    I18n.locale = :en
-    expect(@monitor.name).to match('Observer')
-  end
+  describe 'Class methods' do
+    before do
+      FactoryBot.create_list :observer, 3
+    end
 
-  it 'Name and observer_type validation' do
-    @monitor = Observer.new(name: '', observer_type: '')
+    describe '#fetch_all' do
+      it 'fetch all operators' do
+        expect(Observer.fetch_all(nil)).to eq(Observer.includes(:countries, :users))
+      end
+    end
 
-    @monitor.valid?
-    expect { @monitor.save! }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Name can't be blank, Observer type can't be blank, Observer type  is not a valid observer type")
-  end
+    describe '#observer_select' do
+      it 'return formatted information of observer sorted by name asc' do
+        expect(Observer.observer_select).to eql(
+          Observer.by_name_asc.map { |c| ["#{c.name} (#{c.observer_type})", c.id] }
+        )
+      end
+    end
 
-  it 'Observer_type validation' do
-    @monitor = Observer.new(name: 'Observer new', observer_type: 'Not in types')
+    describe '#types' do
+      it 'return types for the observers' do
+        expect(Observer.types).to eql %w(Mandated SemiMandated External Government).freeze
+      end
+    end
 
-    @monitor.valid?
-    expect { @monitor.save! }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Observer type Not in types is not a valid observer type")
-  end
+    describe '#translated_types' do
+      it 'return transated types for the observers' do
+        translated_types =
+          Observer.types.map { |t| [I18n.t("observer_types.#{t}", default: t), t.camelize] }
 
-  it 'Fetch all monitors' do
-    expect(Observer.fetch_all(nil).count).to eq(2)
-  end
-
-  it 'Monitor select' do
-    expect(Observer.observer_select.size).to eq(2)
+        expect(Observer.translated_types).to eql translated_types
+      end
+    end
   end
 end

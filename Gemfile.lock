@@ -177,11 +177,11 @@ GEM
     et-orbi (1.0.3)
       tzinfo
     execjs (2.7.0)
-    factory_girl (4.8.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.8.0)
-      factory_girl (~> 4.8.0)
-      railties (>= 3.0.0)
+    factory_bot (5.0.2)
+      activesupport (>= 4.2.0)
+    factory_bot_rails (5.0.2)
+      factory_bot (~> 5.0.2)
+      railties (>= 4.2.0)
     faker (1.7.3)
       i18n (~> 0.5)
     ffi (1.9.18)
@@ -405,6 +405,8 @@ GEM
       thor (~> 0.14)
     sendgrid-ruby (4.0.8)
       ruby_http_client (~> 3.0.1)
+    shoulda-matchers (4.0.1)
+      activesupport (>= 4.2.0)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -495,7 +497,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   email_spec
-  factory_girl_rails
+  factory_bot_rails
   faker
   globalize!
   jsonapi-resources
@@ -522,6 +524,7 @@ DEPENDENCIES
   rubocop
   seed-fu
   sendgrid-ruby
+  shoulda-matchers (~> 4.0.1)
   simplecov
   slim-rails
   spring

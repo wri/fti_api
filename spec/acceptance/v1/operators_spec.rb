@@ -7,15 +7,15 @@ module V1
       token    = JWT.encode({ user: @webuser.id }, ENV['AUTH_SECRET'], 'HS256')
 
       @headers = {
-        "ACCEPT" => "application/json",
+        # "ACCEPT" => "application/json",
         "HTTP_OTP_API_KEY" => "Bearer #{token}"
       }
     end
 
-    let!(:user)  { FactoryGirl.create(:user)  }
-    let!(:admin) { FactoryGirl.create(:admin) }
+    let!(:user)  { FactoryBot.create(:user)  }
+    let!(:admin) { FactoryBot.create(:admin) }
 
-    let!(:operator) { FactoryGirl.create(:operator, name: '00 Operator one') }
+    let!(:operator) { FactoryBot.create(:operator, name: '00 Operator one') }
 
     context 'Show operators' do
       it 'Get operators list' do
@@ -32,8 +32,8 @@ module V1
     context 'Pagination and sort for operators' do
       let!(:operators) {
         operators = []
-        operators << FactoryGirl.create_list(:operator, 4)
-        operators << FactoryGirl.create(:operator, name: 'ZZZ Next first one')
+        operators << FactoryBot.create_list(:operator, 4)
+        operators << FactoryBot.create(:operator, name: 'ZZZ Next first one')
       }
 
       it 'Show list of operators for first page with per pege param' do

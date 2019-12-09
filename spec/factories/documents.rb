@@ -14,10 +14,10 @@
 #  deleted_at       :datetime
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :document do
-    document_type 'Report'
-    name 'Document'
+    document_type { 'Report' }
+    name { 'Document' }
     attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')) }
     association :attacheable, factory: :observation_1
   end

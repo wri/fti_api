@@ -14,45 +14,42 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  before :each do
-    @user        = create(:admin)
-    @observation = create(:observation_1)
-    @annex       = @observation.severity.annex_operator
-    @severity    = @observation.severity
-    @body        = 'Lorem ipsum dolor..'
+  subject(:comment) { FactoryBot.build :comment }
+
+  it 'is valid with valid attributes' do
+    expect(comment).to be_valid
   end
 
-  let!(:annex_options) {
-    options = {}
-    options['commentable_type'] = @annex.class.name
-    options['commentable_id']   = @annex.id
-    options['body']             = @body
-    options['user']             = @user
-    options
-  }
-
-  let!(:observation_options) {
-    options = {}
-    options['commentable_type'] = @observation.class.name
-    options['commentable_id']   = @observation.id
-    options['body']             = @body
-    options['user']             = @user
-    options
-  }
-
-  it 'Comment on annex' do
-    @comment = Comment.build(annex_options)
-    @comment.save!
-    expect(@comment.valid?).to             eq(true)
-    expect(@comment.commentable_type).to   eq('AnnexOperator')
-    expect(@annex.reload.comments.size).to eq(1)
+  describe 'Relations' do
+    it { is_expected.to belong_to(:commentable) }
+    it { is_expected.to belong_to(:user).inverse_of(:comments)}
   end
 
-  it 'Comment on observation' do
-    @comment = Comment.build(observation_options)
-    @comment.save!
-    expect(@comment.valid?).to                   eq(true)
-    expect(@comment.commentable_type).to         eq('Observation')
-    expect(@observation.reload.comments.size).to eq(1)
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:body) }
+    it { is_expected.to validate_presence_of(:user) }
+
+    it { is_expected.to validate_length_of(:body).is_at_most(Comment.body_max_length) }
+  end
+
+  describe 'Class methods' do
+    describe '#build' do
+      context 'when commentable, user and body are present' do
+        it 'build a new Comment with the specified data' do
+          user = FactoryBot.create :user
+          observation = FactoryBot.create :observation
+          comment = Comment.build({
+            'commentable_type' => 'Observation',
+            'commentable_id' => observation.id,
+            'user' => user,
+            'body' => 'body'
+          })
+
+          expect(comment.commentable).to eql observation
+          expect(comment.user_id).to eql user.id
+          expect(comment.body).to eql 'body'
+        end
+      end
+    end
   end
 end

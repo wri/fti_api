@@ -38,7 +38,7 @@ class OperatorDocument < ApplicationRecord
   before_validation :set_expire_date, unless: :expire_date?
 
   validates_presence_of :start_date, if: :attachment?
-  validates_presence_of :expire_date, if: :attachment?
+  validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
   validate :reason_or_attachment
 
   before_save :update_current, on: %w[create update], if: :current_changed?
@@ -64,19 +64,17 @@ class OperatorDocument < ApplicationRecord
   end
 
   def update_current
-    return if operator.present? && operator.marked_for_destruction?
-    if current == true
-      documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                                                   required_operator_document_id: self.required_operator_document_id, current: true)
-                                .where.not(id: self.id)
-      documents_to_update.find_each {|x| x.update_attributes!(current: false)}
-    else
-      documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                                                   required_operator_document_id: self.required_operator_document_id, current: true)
-      unless documents_to_update.any?
-        self.update_attributes(current: false)
-      end
-    end
+    return if operator.present? && operator.marked_for_destruction? && !current
+
+    documents_to_update = OperatorDocument.where(
+      fmu_id: self.fmu_id,
+      operator_id: self.operator_id,
+      required_operator_document_id: self.required_operator_document_id,
+      current: true
+    ).where.not(
+      id: self.id
+    )
+    documents_to_update.find_each {|x| x.update_attributes!(current: false)}
   end
 
   def self.expire_documents
@@ -105,14 +103,16 @@ class OperatorDocument < ApplicationRecord
   private
 
   def ensure_unity
-    return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
-    if self.current && self.required_operator_document.present?
-      od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                                required_operator_document_id: self.required_operator_document_id,
-                                status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
-                                current: true)
-      od.save!(validate: false)
-    end
+    return if (operator.present? && operator.marked_for_destruction?) ||
+              (required_operator_document.present? && required_operator_document.marked_for_destruction?) ||
+              !self.current ||
+              self.required_operator_document.blank?
+
+    od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
+                              required_operator_document_id: self.required_operator_document_id,
+                              status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
+                              current: true)
+    od.save!(validate: false)
   end
 
   def set_type
@@ -138,8 +138,8 @@ class OperatorDocument < ApplicationRecord
   end
 
   def reason_or_attachment
-    if self.attachment.present? && self.reason.present?
-      self.errors[:reason] << 'Cannot have a reason not to have a document'
-    end
+    return if self.attachment.blank? || self.reason.blank?
+
+    self.errors[:reason] << 'Cannot have a reason not to have a document'
   end
 end

@@ -7,16 +7,16 @@ module V1
       token    = JWT.encode({ user: @webuser.id }, ENV['AUTH_SECRET'], 'HS256')
 
       @headers = {
-        "ACCEPT" => "application/json",
+        # "ACCEPT" => "application/json",
         "HTTP_OTP_API_KEY" => "Bearer #{token}"
       }
     end
 
-    let!(:admin) { FactoryGirl.create(:admin, name: '00 User one')                          }
-    let!(:ngo)   { FactoryGirl.create(:ngo)                                                 }
-    let!(:user)  { FactoryGirl.create(:user, email: 'test@email.com', password: 'password') }
+    let!(:admin) { FactoryBot.create(:admin, name: '00 User one')                          }
+    let!(:ngo)   { FactoryBot.create(:ngo)                                                 }
+    let!(:user)  { FactoryBot.create(:user, email: 'test@email.com', password: 'password') }
 
-    let!(:country) { FactoryGirl.create(:country) }
+    let!(:country) { FactoryBot.create(:country) }
 
     context 'Show users' do
       it 'Get users list' do
@@ -33,8 +33,8 @@ module V1
     context 'Pagination and sort for users' do
       let!(:users) {
         users = []
-        users << FactoryGirl.create_list(:user, 4)
-        users << FactoryGirl.create(:user, name: 'ZZZ Next first one')
+        users << FactoryBot.create_list(:user, 4)
+        users << FactoryBot.create(:user, name: 'ZZZ Next first one')
       }
 
       it 'Show list of users for first page with per pege param' do

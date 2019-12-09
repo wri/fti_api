@@ -7,15 +7,15 @@ module V1
       token    = JWT.encode({ user: @webuser.id }, ENV['AUTH_SECRET'], 'HS256')
 
       @headers = {
-        "ACCEPT" => "application/json",
+        # "ACCEPT" => "application/json",
         "HTTP_OTP_API_KEY" => "Bearer #{token}"
       }
     end
 
-    let!(:user)  { FactoryGirl.create(:user)  }
-    let!(:admin) { FactoryGirl.create(:admin) }
+    let!(:user)  { FactoryBot.create(:user)  }
+    let!(:admin) { FactoryBot.create(:admin) }
 
-    let!(:observer) { FactoryGirl.create(:observer, name: '00 Monitor one') }
+    let!(:observer) { FactoryBot.create(:observer, name: '00 Monitor one') }
 
     context 'Show observers' do
       it 'Get observers list' do
@@ -32,8 +32,8 @@ module V1
     context 'Pagination and sort for observers' do
       let!(:observers) {
         observers = []
-        observers << FactoryGirl.create_list(:observer, 4)
-        observers << FactoryGirl.create(:observer, name: 'ZZZ Next first one')
+        observers << FactoryBot.create_list(:observer, 4)
+        observers << FactoryBot.create(:observer, name: 'ZZZ Next first one')
       }
 
       it 'Show list of observers for first page with per pege param' do

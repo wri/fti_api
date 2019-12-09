@@ -7,16 +7,16 @@ module V1
       token    = JWT.encode({ user: @webuser.id }, ENV['AUTH_SECRET'], 'HS256')
 
       @headers = {
-          'ACCEPT' => 'application/json',
+          # 'ACCEPT' => 'application/json',
           'HTTP_OTP_API_KEY' => "Bearer #{token}"
       }
     end
 
-    let!(:user)  { FactoryGirl.create(:user)  }
-    let!(:admin) { FactoryGirl.create(:admin) }
-    let!(:ngo)   { FactoryGirl.create(:ngo)   }
+    let!(:user)  { FactoryBot.create(:user)  }
+    let!(:admin) { FactoryBot.create(:admin) }
+    let!(:ngo)   { FactoryBot.create(:ngo)   }
 
-    let!(:government) { FactoryGirl.create(:government, government_entity: '00 Government one') }
+    let!(:government) { FactoryBot.create(:government, government_entity: '00 Government one') }
 
     context 'Show governments' do
       it 'Get governments list' do
@@ -32,12 +32,12 @@ module V1
 
 
     context 'Pagination and sort for governments' do
-      let!(:country) { FactoryGirl.create(:country, name: 'Spain') }
+      let!(:country) { FactoryBot.create(:country, name: 'Spain') }
 
       let!(:governments) {
         governments = []
-        governments << FactoryGirl.create_list(:government, 4)
-        governments << FactoryGirl.create(:government, government_entity: 'ZZZ Next first one Spain', country: country)
+        governments << FactoryBot.create_list(:government, 4)
+        governments << FactoryBot.create(:government, government_entity: 'ZZZ Next first one Spain', country: country)
       }
 
       let(:country_id) { Government.find_by(government_entity: 'ZZZ Next first one Spain').country.id }

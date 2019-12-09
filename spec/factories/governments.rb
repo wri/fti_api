@@ -9,14 +9,14 @@
 #  is_active  :boolean          default(TRUE)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :government do
-    government_entity 'A Government'
-    details           'Indicator one'
+    government_entity { 'A Government' }
+    details { 'Indicator one' }
 
     after(:create) do |government|
-      government.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                              iso: "C#{Faker::Lorem.sentence}"))
+      country_attributes = FactoryBot.build(:country).attributes.except(%w[id created_at updated_at])
+      government.country ||= Country.find_or_create_by(country_attributes)
     end
   end
 end

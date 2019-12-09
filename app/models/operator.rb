@@ -88,7 +88,7 @@ class Operator < ApplicationRecord
   class Translation
     after_save do
       if name_changed?
-        Operator.find(self.operator_id).fmus.find_each { |x| x.save }
+        Operator.find_by(id: self.operator_id)&.fmus&.find_each { |x| x.save }
       end
     end
   end
@@ -160,28 +160,30 @@ class Operator < ApplicationRecord
   end
 
   def calculate_observations_scores
-    if fa_id.present?
-      number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
-      number_of_visits = number_of_visits.keys.count
+    return if fa_id.blank?
 
-      # When there are no observations
-      if number_of_visits.zero?
-        self.obs_per_visit = nil
-        self.score_absolute = nil
-        save!
-        return
-      end
+    observations_query = observations.unscope(:joins)
+    number_of_visits = observations_query.select('date(publication_date)')
+                                         .group('date(publication_date)').count
+    number_of_visits = number_of_visits.keys.count
 
-      self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
-
-      high = observations.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
-      medium = observations.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
-      low = observations.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
-      unknown = observations.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
-      self.score_absolute  = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
-
+    # When there are no observations
+    if number_of_visits.zero?
+      self.obs_per_visit = nil
+      self.score_absolute = nil
       save!
+      return
     end
+
+    self.obs_per_visit = observations_query.count.to_f / number_of_visits rescue nil
+
+    high = observations_query.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
+    medium = observations_query.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
+    low = observations_query.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
+    unknown = observations_query.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
+    self.score_absolute = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
+
+    save!
   end
 
   class << self
@@ -210,16 +212,19 @@ class Operator < ApplicationRecord
       number_operators = Operator.active.fa_operator.where.not(score_absolute: nil).count
       third_operators = (number_operators / 3).to_i
       Operator.active.fa_operator.where.not(score_absolute: nil).order(:score_absolute)
-          .limit(third_operators).update_all(score: 1)
+        .limit(third_operators).update_all(score: 1)
       Operator.active.fa_operator.where.not(score_absolute: nil)
-          .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
-      Operator.active.fa_operator.where.not(score_absolute: nil).order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
+        .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
+      Operator.active.fa_operator.where.not(score_absolute: nil)
+        .order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
     end
   end
 
 
   def rebuild_documents
+    # TODO: Refactor, use the same logic that appears on create_documents
     return if fa_id.blank?
+
     country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
 
     # Country Documents
@@ -241,8 +246,6 @@ class Operator < ApplicationRecord
         end
       end
     end
-
-
   end
 
   private
@@ -256,6 +259,7 @@ class Operator < ApplicationRecord
   end
 
   def create_documents
+<<<<<<< HEAD
     return if fa_id.blank? || country_id.blank?
 
     country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
@@ -274,6 +278,22 @@ class Operator < ApplicationRecord
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
             odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
           end
+=======
+    return if fa_id.blank? || operator_documents.any?
+
+    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
+
+    RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
+      OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).first_or_create do |odc|
+        odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+      end
+    end
+
+    RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
+      self.fmus.find_each do |fmu|
+        OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
+          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+>>>>>>> fix-167002452-testing
         end
       end
     end

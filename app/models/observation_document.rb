@@ -24,7 +24,7 @@ class ObservationDocument < ApplicationRecord
   after_destroy :remove_attachment_id_directory
 
   def remove_attachment_id_directory
-    FileUtils.rm_rf(File.join('public', 'uploads', 'document', 'attachment', self.id.to_s)) if self.attachment
+    root = Rails.env.test? ? 'spec/support' : 'public'
+    FileUtils.rm_rf(File.join(root, 'uploads', self.class.to_s.underscore, 'attachment', self.id.to_s)) if self.attachment
   end
-
 end
