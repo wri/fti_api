@@ -2,22 +2,28 @@ require 'rails_helper'
 
 module V1
   describe 'Countries', type: :request do
-    let(:ngo)   { FactoryBot.create(:ngo)   }
+    let(:ngo) { FactoryBot.create(:ngo) }
+    let(:country) { FactoryBot.create(:country, name: '00 Country one') }
 
-    let!(:country) { FactoryBot.create(:country, name: '00 Country one') }
-    let(:error) { jsonapi_errors(422, 100, { iso: ["can't be blank"] }) }
+    it_behaves_like "jsonapi-resources__show", Country.model_name
 
-    context 'Show countries' do
-      it 'Get countries list' do
-        get '/countries', headers: webuser_headers
-        expect(status).to eq(200)
-      end
+    it_behaves_like(
+      "jsonapi-resources__create",
+      Country.model_name,
+      { name: 'Country one', iso: 'COO' },
+      { name: 'Country one', iso: '' },
+      [422, 100, { iso: ["can't be blank"] }]
+    )
 
-      it 'Get specific country' do
-        get "/countries/#{country.id}", headers: webuser_headers
-        expect(status).to eq(200)
-      end
-    end
+    it_behaves_like(
+      "jsonapi-resources__edit",
+      Country.model_name,
+      { name: 'Country two', iso: 'COO' },
+      { name: 'Country two', iso: '' },
+      [422, 100, { iso: ["can't be blank"] }]
+    )
+
+    it_behaves_like "jsonapi-resources__delete", Country, Country.model_name
 
     context 'Pagination and sort for countries' do
       let!(:countries) {
@@ -79,85 +85,8 @@ module V1
       end
     end
 
-    context 'Create countries' do
-      describe 'For admin user' do
-        it 'Returns error object when the country cannot be created by admin' do
-          post('/countries',
-               params: jsonapi_params('countries', nil, { name: 'Test' }),
-               headers: admin_headers)
-
-          expect(status).to eq(422)
-          expect(parsed_body).to eq(error)
-        end
-
-        it 'Returns success object when the country was seccessfully created by admin' do
-          post('/countries',
-               params: jsonapi_params('countries', nil, { name: 'Country one', iso: 'COO' }),
-               headers: admin_headers)
-
-          expect(status).to eq(201)
-          expect(parsed_data[:id]).not_to be_empty
-          expect(parsed_attributes[:name]).to eq('Country one')
-          expect(parsed_attributes[:iso]).to eq('COO')
-        end
-      end
-
-      describe 'For not admin user' do
-        it 'Do not allows to create country by not admin user' do
-          post('/countries',
-               params: jsonapi_params('countries', nil, { name: 'Country one', iso: 'COO' }),
-               headers: user_headers)
-
-          expect(status).to eq(401)
-          expect(parsed_body).to eq(default_status_errors(401))
-        end
-      end
-    end
-
-    context 'Edit countries' do
-      describe 'For admin user' do
-        it 'Returns error object when the country cannot be updated by admin' do
-          patch("/countries/#{country.id}",
-                params: jsonapi_params('countries', country.id, { iso: '' }),
-                headers: admin_headers)
-
-          expect(status).to eq(422)
-          expect(parsed_body).to eq(error)
-        end
-
-        it 'Returns success object when the country was seccessfully updated by admin' do
-          patch("/countries/#{country.id}",
-                params: jsonapi_params('countries', country.id, { name: 'Country one one', iso: 'COO' }),
-                headers: admin_headers)
-
-          expect(status).to eq(200)
-          expect(parsed_attributes[:name]).to eq('Country one one')
-        end
-      end
-
-      describe 'For not admin user' do
-        it 'Do not allows to update country by not admin user' do
-          patch("/countries/#{country.id}",
-                params: jsonapi_params('countries', country.id, { name: 'Country one one', iso: 'COO' }),
-                headers: user_headers)
-
-          expect(status).to eq(401)
-          expect(parsed_body).to eq(default_status_errors(401))
-        end
-      end
-    end
-
     context 'Delete countries' do
-      describe 'For admin user' do
-        it 'Returns success object when the country was seccessfully deleted by admin' do
-          delete("/countries/#{country.id}", headers: admin_headers)
-
-          expect(status).to eq(204)
-          expect(Country.exists?(country.id)).to be_falsey
-        end
-      end
-
-      describe 'For not admin user' do
+      describe 'For ngo user' do
         let(:ngo_headers) { authorize_headers(ngo.id) }
 
         it 'Do not allows to delete country by not admin user' do
