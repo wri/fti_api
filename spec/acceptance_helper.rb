@@ -39,16 +39,29 @@ module AcceptanceHelper
     @webuser_headers ||= { "HTTP_OTP_API_KEY" => "Bearer #{webuser_token}" }
   end
 
-  def authorize_headers(id, jsonapi: false)
-    {}.tap do |headers|
-      headers["Authorization"] = "Bearer #{generate_token(id)}"
-      headers["HTTP_OTP_API_KEY"] = "Bearer #{webuser_token}"
+  def admin
+    @admin ||= create(:admin)
+  end
 
-      if jsonapi
-        headers["Content-Type"] = "application/vnd.api+json"
-        headers["HTTP_ACCEPT"] = "application/vnd.api+json"
-      end
-    end
+  def admin_headers
+    @admin_headers ||= authorize_headers(admin.id)
+  end
+
+  def user
+    @user = create(:user)
+  end
+
+  def user_headers
+    @user_headers ||= authorize_headers(user.id)
+  end
+
+  def authorize_headers(id)
+    {
+      "Authorization" => "Bearer #{generate_token(id)}",
+      "HTTP_OTP_API_KEY" => "Bearer #{webuser_token}",
+      "Content-Type" => "application/vnd.api+json",
+      "HTTP_ACCEPT" => "application/vnd.api+json"
+    }
   end
 
   def jsonapi_errors(status, code, errors = {})

@@ -62,12 +62,10 @@ module V1
       end
 
       describe 'For admin user' do
-        let(:headers) { authorize_headers(admin.id, jsonapi: true) }
-
         it 'Returns error object when the observer cannot be created by admin' do
           post('/observers',
                params: jsonapi_params('observers', nil, { name: '', 'observer-type' => 'Mandated' }),
-               headers: headers)
+               headers: admin_headers)
 
           expect(status).to eq(422)
           expect(parsed_body).to eq(error)
@@ -76,7 +74,7 @@ module V1
         it 'Returns success object when the observer was seccessfully created by admin' do
           post('/observers',
                params: jsonapi_params('observers', nil, { name: 'Monitor one', 'observer-type' => 'Mandated' }),
-               headers: headers)
+               headers: admin_headers)
 
           expect(status).to eq(201)
           expect(parsed_data[:id]).not_to be_empty
@@ -87,12 +85,10 @@ module V1
       end
 
       describe 'For not admin user' do
-        let(:headers) { authorize_headers(user.id, jsonapi: true) }
-
         it 'Do not allows to create observer by not admin user' do
           post('/observers',
                params: jsonapi_params('observers', nil, { name: 'Monitor one' }),
-               headers: headers)
+               headers: user_headers)
 
           expect(status).to eq(401)
           expect(parsed_body).to eq(default_status_errors(401))
@@ -108,12 +104,10 @@ module V1
       }
 
       describe 'For admin user' do
-        let(:headers) { authorize_headers(admin.id, jsonapi: true) }
-
         it 'Returns error object when the observer cannot be updated by admin' do
           patch("/observers/#{observer.id}",
                 params: jsonapi_params('observers', observer.id, { name: '' }),
-                headers: headers)
+                headers: admin_headers)
 
           expect(status).to eq(422)
           expect(parsed_body).to eq(error)
@@ -122,7 +116,7 @@ module V1
         it 'Returns success object when the observer was seccessfully updated by admin' do
           patch("/observers/#{observer.id}",
                 params: jsonapi_params('observers', observer.id, { name: 'Monitor one' }),
-                headers: headers)
+                headers: admin_headers)
 
           expect(status).to eq(200)
           expect(parsed_attributes[:name]).to eq('Monitor one')
@@ -131,7 +125,7 @@ module V1
         it 'Upload logo and returns success object when the observer was seccessfully updated by admin' do
           patch("/observers/#{observer.id}",
                 params: jsonapi_params('observers', observer.id, { logo: photo_data }),
-                headers: headers)
+                headers: admin_headers)
 
           expect(status).to eq(200)
           expect(parsed_attributes[:logo][:url]).to end_with("spec/support/uploads/observer/logo/#{observer.id}/logo.jpeg")
@@ -139,12 +133,10 @@ module V1
       end
 
       describe 'For not admin user' do
-        let(:headers) { authorize_headers(user.id, jsonapi: true) }
-
         it 'Do not allows to update observer by not admin user' do
           patch("/observers/#{observer.id}",
                 params: jsonapi_params('observers', observer.id, { name: 'Monitor one' }),
-                headers: headers)
+                headers: user_headers)
 
           expect(status).to eq(401)
           expect(parsed_body).to eq(default_status_errors(401))
@@ -154,10 +146,8 @@ module V1
 
     context 'Delete observers' do
       describe 'For admin user' do
-        let(:headers) { authorize_headers(admin.id, jsonapi: true) }
-
         it 'Returns success object when the observer was seccessfully deleted by admin' do
-          delete "/observers/#{observer.id}", headers: headers
+          delete "/observers/#{observer.id}", headers: admin_headers
 
           expect(status).to eq(204)
           expect(Observer.exists?(observer.id)).to be_falsey
@@ -165,13 +155,12 @@ module V1
       end
 
       describe 'For not admin user' do
-        let(:headers) { authorize_headers(user.id, jsonapi: true) }
-
         it 'Do not allows to delete observer by not admin user' do
-          delete "/observers/#{observer.id}", headers: headers
+          delete "/observers/#{observer.id}", headers: user_headers
 
           expect(status).to eq(401)
           expect(parsed_body).to eq(default_status_errors(401))
+          expect(Observer.exists?(observer.id)).to be_truthy
         end
       end
     end
