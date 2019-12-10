@@ -141,13 +141,13 @@ module V1
         end
 
         it 'Returns error object when the observation cannot be created by admin' do
-          post '/observations', params: {"observation": { "country_id": "", observation_type: 'AnnexOperator', publication_date: DateTime.now }}, headers: @headers
+          post '/observations', params: {"observation": { "country_id": "", observation_type: 'operator', publication_date: DateTime.now }}, headers: @headers
           expect(status).to eq(422)
           expect(body).to   eq(error.to_json)
         end
 
         it 'Returns success object when the observation was seccessfully created by admin' do
-          post '/observations', params: {"observation": { "country_id": country.id, observation_type: 'AnnexOperator', publication_date: DateTime.now, lat: 123.4444, lng: 12.4444 }},
+          post '/observations', params: {"observation": { "country_id": country.id, observation_type: 'operator', publication_date: DateTime.now, lat: 123.4444, lng: 12.4444 }},
                                 headers: @headers
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Observation successfully created!' }] }.to_json)
@@ -264,7 +264,7 @@ module V1
         end
 
         it 'Upload image and returns success object when the observation was seccessfully created' do
-          post '/observations', params: {"observation": { "evidence": "Observation with photo", "country_id": country.id, observation_type: 'AnnexOperator', publication_date: DateTime.now, "photos_attributes": [{"name": "observation photo", "attachment": "#{photo_data}" }]}},
+          post '/observations', params: {"observation": { "evidence": "Observation with photo", "country_id": country.id, observation_type: 'operator', publication_date: DateTime.now, "photos_attributes": [{"name": "observation photo", "attachment": "#{photo_data}" }]}},
                                 headers: @headers_user
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Observation successfully created!' }] }.to_json)
@@ -272,7 +272,7 @@ module V1
         end
 
         it 'Upload document and returns success object when the observation was seccessfully created' do
-          post '/observations', params: {"observation": { "evidence": "Observation with document", "country_id": country.id, observation_type: 'AnnexOperator', publication_date: DateTime.now, "documents_attributes": [{"name": "observation doc", "attachment": "#{document_data}", document_type: "Doumentation" }]}},
+          post '/observations', params: {"observation": { "evidence": "Observation with document", "country_id": country.id, observation_type: 'operator', publication_date: DateTime.now, "documents_attributes": [{"name": "observation doc", "attachment": "#{document_data}", document_type: "Doumentation" }]}},
                                 headers: @headers_user
           expect(status).to eq(201)
           expect(body).to   eq({ messages: [{ status: 201, title: 'Observation successfully created!' }] }.to_json)

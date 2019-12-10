@@ -29,7 +29,7 @@
 
 FactoryBot.define do
   factory :observation_1, class: 'Observation' do
-    observation_type { 'AnnexOperator' }
+    observation_type { 'operator' }
     is_active { true }
     evidence { 'Operator observation' }
     publication_date { DateTime.now.to_date }

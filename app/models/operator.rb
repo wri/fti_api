@@ -259,7 +259,6 @@ class Operator < ApplicationRecord
   end
 
   def create_documents
-<<<<<<< HEAD
     return if fa_id.blank? || country_id.blank?
 
     country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
@@ -278,22 +277,6 @@ class Operator < ApplicationRecord
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
             odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
           end
-=======
-    return if fa_id.blank? || operator_documents.any?
-
-    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
-
-    RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
-      OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).first_or_create do |odc|
-        odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
-      end
-    end
-
-    RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
-      self.fmus.find_each do |fmu|
-        OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
-          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
->>>>>>> fix-167002452-testing
         end
       end
     end

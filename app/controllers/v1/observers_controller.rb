@@ -10,6 +10,7 @@ module V1
 
     def update
       # When sending the logo empty, it deletes it
+      # byebug
       if params.dig('data', 'attributes', 'logo') == ""
         params['data']['attributes']['delete-logo'] = '1'
       end

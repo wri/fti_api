@@ -3,28 +3,21 @@ require 'acceptance_helper'
 module V1
   describe 'Observer', type: :request do
     before(:each) do
-      @webuser = create(:webuser)
-      token    = JWT.encode({ user: @webuser.id }, ENV['AUTH_SECRET'], 'HS256')
-
-      @headers = {
-        # "ACCEPT" => "application/json",
-        "HTTP_OTP_API_KEY" => "Bearer #{token}"
-      }
+      @request.env[]
     end
 
     let!(:user)  { FactoryBot.create(:user)  }
     let!(:admin) { FactoryBot.create(:admin) }
-
     let!(:observer) { FactoryBot.create(:observer, name: '00 Monitor one') }
 
     context 'Show observers' do
       it 'Get observers list' do
-        get '/observers', headers: @headers
+        get '/observers', headers: webuser_headers
         expect(status).to eq(200)
       end
 
       it 'Get specific observer' do
-        get "/observers/#{observer.id}", headers: @headers
+        get "/observers/#{observer.id}", headers: webuser_headers
         expect(status).to eq(200)
       end
     end
@@ -110,21 +103,27 @@ module V1
     end
 
     context 'Edit observers' do
-      let!(:error) { { errors: [{ status: 422, title: "name can't be blank" }]}}
+      let(:error) do
+        { errors: [{ status: "422", title: "can't be blank", detail: "name - can't be blank",
+                     code: "100", source: { pointer: "/data/attributes/name" } }] }
+      end
+
       let!(:photo_data) {
         "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))}"
       }
 
       describe 'For admin user' do
-        before(:each) do
-          token    = JWT.encode({ user: admin.id }, ENV['AUTH_SECRET'], 'HS256')
-          @headers = @headers.merge("Authorization" => "Bearer #{token}")
-        end
+        let(:headers) { authorize_headers(admin.id, jsonapi: true) }
 
         it 'Returns error object when the observer cannot be updated by admin' do
-          patch "/observers/#{observer.id}", params: {"observer": { "name": "" }}, headers: @headers
+          patch(
+            "/observers/#{observer.id}",
+            params: { data: { id: observer.id.to_s, type: "observers", attributes: { name: "" } } }.to_json,
+            headers: headers
+          )
+
           expect(status).to eq(422)
-          expect(body).to   eq(error.to_json)
+          expect(json_main).to eq(error)
         end
 
         it 'Returns success object when the observer was seccessfully updated by admin' do
