@@ -1,11 +1,7 @@
-require 'acceptance_helper'
+require 'rails_helper'
 
 module V1
   describe 'Observer', type: :request do
-    before(:each) do
-      @request.env[]
-    end
-
     let!(:user)  { FactoryBot.create(:user)  }
     let!(:admin) { FactoryBot.create(:admin) }
     let!(:observer) { FactoryBot.create(:observer, name: '00 Monitor one') }
@@ -30,83 +26,82 @@ module V1
       }
 
       it 'Show list of observers for first page with per pege param' do
-        get '/observers?page[number]=1&page[size]=3', headers: @headers
+        get '/observers?page[number]=1&page[size]=3', headers: webuser_headers
 
         expect(status).to    eq(200)
-        expect(json.size).to eq(3)
+        expect(parsed_data.size).to eq(3)
       end
 
       it 'Show list of observers for second page with per pege param' do
-        get '/observers?page[number]=2&page[size]=3', headers: @headers
+        get '/observers?page[number]=2&page[size]=3', headers: webuser_headers
 
         expect(status).to    eq(200)
-        expect(json.size).to eq(3)
+        expect(parsed_data.size).to eq(3)
       end
 
       it 'Show list of observers for sort by name' do
-        get '/observers?sort=name', headers: @headers
+        get '/observers?sort=name', headers: webuser_headers
 
         expect(status).to    eq(200)
-        expect(json.size).to eq(6)
-        expect(json[0]['attributes']['name']).to eq('00 Monitor one')
+        expect(parsed_data.size).to eq(6)
+        expect(parsed_data[0][:attributes][:name]).to eq('00 Monitor one')
       end
 
       it 'Show list of observers for sort by name DESC' do
-        get '/observers?sort=-name', headers: @headers
+        get '/observers?sort=-name', headers: webuser_headers
 
         expect(status).to    eq(200)
-        expect(json.size).to eq(6)
-        expect(json[0]['attributes']['name']).to eq('ZZZ Next first one')
+        expect(parsed_data.size).to eq(6)
+        expect(parsed_data[0][:attributes][:name]).to eq('ZZZ Next first one')
       end
     end
 
     context 'Create observers' do
-      let!(:error) { { errors: [{ status: 422, title: "name can't be blank" }]}}
+      let(:error) do
+        jsonapi_errors(422, 100, { name: ["can't be blank"] })
+      end
 
       describe 'For admin user' do
-        before(:each) do
-          token    = JWT.encode({ user: admin.id }, ENV['AUTH_SECRET'], 'HS256')
-          @headers = @headers.merge("Authorization" => "Bearer #{token}")
-        end
+        let(:headers) { authorize_headers(admin.id, jsonapi: true) }
 
         it 'Returns error object when the observer cannot be created by admin' do
-          post '/observers', params: {"observer": { "name": "", "observer_type": "Mandated"  }}, headers: @headers
+          post('/observers',
+               params: jsonapi_params('observers', nil, { name: '', 'observer-type' => 'Mandated' }),
+               headers: headers)
+
           expect(status).to eq(422)
-          expect(body).to   eq(error.to_json)
+          expect(parsed_body).to eq(error)
         end
 
         it 'Returns success object when the observer was seccessfully created by admin' do
-          post '/observers', params: {"observer": { "name": "Monitor one", "observer_type": "Mandated"  }},
-                             headers: @headers
+          post('/observers',
+               params: jsonapi_params('observers', nil, { name: 'Monitor one', 'observer-type' => 'Mandated' }),
+               headers: headers)
+
           expect(status).to eq(201)
-          expect(body).to   eq({ messages: [{ status: 201, title: 'Monitor successfully created!' }] }.to_json)
+          expect(parsed_data[:id]).not_to be_empty
+          expect(parsed_attributes[:name]).to eq('Monitor one')
+          expect(parsed_attributes[:"observer-type"]).to eq('Mandated')
+          expect(parsed_attributes[:"is-active"]).to eq(false)
         end
       end
 
       describe 'For not admin user' do
-        before(:each) do
-          token         = JWT.encode({ user: user.id }, ENV['AUTH_SECRET'], 'HS256')
-          @headers_user = @headers.merge("Authorization" => "Bearer #{token}")
-        end
-
-        let!(:error_unauthorized) {
-          { errors: [{ status: '401', title: 'You are not authorized to access this page.' }] }
-        }
+        let(:headers) { authorize_headers(user.id, jsonapi: true) }
 
         it 'Do not allows to create observer by not admin user' do
-          post '/observers', params: {"observer": { "name": "Monitor one" }},
-                             headers: @headers_user
+          post('/observers',
+               params: jsonapi_params('observers', nil, { name: 'Monitor one' }),
+               headers: headers)
+
           expect(status).to eq(401)
-          expect(body).to   eq(error_unauthorized.to_json)
+          expect(parsed_body).to eq(default_status_errors(401))
         end
       end
     end
 
     context 'Edit observers' do
-      let(:error) do
-        { errors: [{ status: "422", title: "can't be blank", detail: "name - can't be blank",
-                     code: "100", source: { pointer: "/data/attributes/name" } }] }
-      end
+      let(:error) { jsonapi_errors(422, 100, { name: ["can't be blank"] }) }
 
       let!(:photo_data) {
         "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))}"
@@ -116,78 +111,67 @@ module V1
         let(:headers) { authorize_headers(admin.id, jsonapi: true) }
 
         it 'Returns error object when the observer cannot be updated by admin' do
-          patch(
-            "/observers/#{observer.id}",
-            params: { data: { id: observer.id.to_s, type: "observers", attributes: { name: "" } } }.to_json,
-            headers: headers
-          )
+          patch("/observers/#{observer.id}",
+                params: jsonapi_params('observers', observer.id, { name: '' }),
+                headers: headers)
 
           expect(status).to eq(422)
-          expect(json_main).to eq(error)
+          expect(parsed_body).to eq(error)
         end
 
         it 'Returns success object when the observer was seccessfully updated by admin' do
-          patch "/observers/#{observer.id}", params: {"observer": { "name": "Monitor one" }},
-                                             headers: @headers
+          patch("/observers/#{observer.id}",
+                params: jsonapi_params('observers', observer.id, { name: 'Monitor one' }),
+                headers: headers)
+
           expect(status).to eq(200)
-          expect(body).to   eq({ messages: [{ status: 200, title: 'Monitor successfully updated!' }] }.to_json)
+          expect(parsed_attributes[:name]).to eq('Monitor one')
         end
 
         it 'Upload logo and returns success object when the observer was seccessfully updated by admin' do
-          patch "/observers/#{observer.id}", params: {"observer": { "logo": photo_data }},
-                                             headers: @headers
+          patch("/observers/#{observer.id}",
+                params: jsonapi_params('observers', observer.id, { logo: photo_data }),
+                headers: headers)
+
           expect(status).to eq(200)
-          expect(body).to   eq({ messages: [{ status: 200, title: 'Monitor successfully updated!' }] }.to_json)
+          expect(parsed_attributes[:logo][:url]).to end_with("spec/support/uploads/observer/logo/#{observer.id}/logo.jpeg")
         end
       end
 
       describe 'For not admin user' do
-        before(:each) do
-          token         = JWT.encode({ user: user.id }, ENV['AUTH_SECRET'], 'HS256')
-          @headers_user = @headers.merge("Authorization" => "Bearer #{token}")
-        end
-
-        let!(:error_unauthorized) {
-          { errors: [{ status: '401', title: 'You are not authorized to access this page.' }] }
-        }
+        let(:headers) { authorize_headers(user.id, jsonapi: true) }
 
         it 'Do not allows to update observer by not admin user' do
-          patch "/observers/#{observer.id}", params: {"observer": { "name": "Monitor one" }},
-                                             headers: @headers_user
+          patch("/observers/#{observer.id}",
+                params: jsonapi_params('observers', observer.id, { name: 'Monitor one' }),
+                headers: headers)
+
           expect(status).to eq(401)
-          expect(body).to   eq(error_unauthorized.to_json)
+          expect(parsed_body).to eq(default_status_errors(401))
         end
       end
     end
 
     context 'Delete observers' do
       describe 'For admin user' do
-        before(:each) do
-          token    = JWT.encode({ user: admin.id }, ENV['AUTH_SECRET'], 'HS256')
-          @headers = @headers.merge("Authorization" => "Bearer #{token}")
-        end
+        let(:headers) { authorize_headers(admin.id, jsonapi: true) }
 
         it 'Returns success object when the observer was seccessfully deleted by admin' do
-          delete "/observers/#{observer.id}", headers: @headers
-          expect(status).to eq(200)
-          expect(body).to   eq({ messages: [{ status: 200, title: 'Monitor successfully deleted!' }] }.to_json)
+          delete "/observers/#{observer.id}", headers: headers
+
+          expect(status).to eq(204)
+          expect(Observer.exists?(observer.id)).to be_falsey
         end
       end
 
       describe 'For not admin user' do
-        before(:each) do
-          token         = JWT.encode({ user: user.id }, ENV['AUTH_SECRET'], 'HS256')
-          @headers_user = @headers.merge("Authorization" => "Bearer #{token}")
-        end
-
-        let!(:error_unauthorized) {
-          { errors: [{ status: '401', title: 'You are not authorized to access this page.' }] }
-        }
+        let(:headers) { authorize_headers(user.id, jsonapi: true) }
 
         it 'Do not allows to delete observer by not admin user' do
-          delete "/observers/#{observer.id}", headers: @headers_user
+          delete "/observers/#{observer.id}", headers: headers
+
           expect(status).to eq(401)
-          expect(body).to   eq(error_unauthorized.to_json)
+          expect(parsed_body).to eq(default_status_errors(401))
         end
       end
     end

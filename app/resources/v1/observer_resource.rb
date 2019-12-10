@@ -3,12 +3,13 @@
 module V1
   class ObserverResource < JSONAPI::Resource
     caching
+
     attributes :observer_type, :name, :organization, :is_active, :logo, :address,
                :information_name, :information_email, :information_phone, :data_name,
                :data_email, :data_phone, :organization_type, :delete_logo
 
     has_many :countries
-    has_many   :users
+    has_many :users
     has_many :observations
 
     filters :countries, :is_active
@@ -18,7 +19,6 @@ module V1
     def inactivate
       @model.is_active = false
     end
-
 
     def custom_links(_)
       { self: nil }
@@ -31,6 +31,7 @@ module V1
     def self.updatable_fields(context)
       super - [:is_active]
     end
+
     def self.creatable_fields(context)
       super - [:is_active]
     end
