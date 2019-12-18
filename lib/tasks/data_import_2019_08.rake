@@ -80,7 +80,7 @@ namespace :import do
 
           begin
             fmu = Fmu.with_translations.find(properties['old_fmuid'])
-            next if fmu.country.iso == 'CMR' # Not importing Cameroon at the time
+            #next if fmu.country.iso == 'CMR' # Not importing Cameroon at the time
             new_fmu_name = properties['new_fmunam']&.strip.presence || fmu.name.presence || fmu.geojson&.dig('properties', 'globalid')&.presence || "fmu-row-#{index}"
             puts "[#{fmu.country.iso}] Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{new_fmu_name}'. ID: #{fmu.id}"
 
@@ -102,7 +102,7 @@ namespace :import do
         data_hash['features'].each_with_index do |row, index|
           properties = row['properties']
           country = Country.find_by(iso: properties['iso3_fmu'])
-          next if properties['iso3_fmu'] == 'CMR' # Not importing Cameroon at the time
+          #next if properties['iso3_fmu'] == 'CMR' # Not importing Cameroon at the time
 
           puts "#{index.to_s.rjust(3, '0')}[#{country.iso}]>> Importing fmu: #{properties['fmu_name'].strip.rjust(30, ' ')}. Operator #{ properties['company_na']}"
 
@@ -129,9 +129,12 @@ namespace :import do
             fmu = Fmu.new
             fmu.country = country
             fmu.name = name.blank? ? "#{country.iso}-row-#{index}" : name
-            fmu.forest_type = (Fmu::FOREST_TYPES.select{|_,v| v[:geojson_label] == properties['fmu_type_label']}).first.first rescue 'fmu'
+            if properties['iso3_fmu'] == 'CAF'
+              fmu.forest_type = :pea
+            else
+              fmu.forest_type = (Fmu::FOREST_TYPES.select{|_,v| v[:geojson_label] == properties['fmu_type_label']}).first.first rescue 'fmu'
+            end
           end
-
           fmus[country.iso.to_sym] << fmu.name
 
           fmu.geojson = row
@@ -160,7 +163,7 @@ namespace :import do
 
         puts "---- Removing old fmus"
         %i[CMR COD CAF COG GAB].each do |iso|
-          next if iso == :CMR # Not importing Cameroon at the time
+          #next if iso == :CMR # Not importing Cameroon at the time
           country = Country.find_by iso: iso
           old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus[iso].include?(f.name) }
 
