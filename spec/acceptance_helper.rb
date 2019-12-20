@@ -1,6 +1,9 @@
 module AcceptanceHelper
   ERRORS = {
-    '401' => { status: '401', title: 'You are not authorized to access this page.' }
+    '401' => { status: '401', title: 'You are not authorized to access this page.' },
+    '401_unautorized' => { status: '401', title: 'Unauthorized' },
+    '422' => { status: 422, title: 'Unprocessable entity.' },
+    '422_undefined_user' => { status: 422, title: "Couldn't find the user with this email" },
   }.freeze
 
   def default_status_errors(*attributes)
@@ -8,19 +11,21 @@ module AcceptanceHelper
   end
 
   def parsed_data
-    @parsed_data ||= parsed_body[:data]
+    parsed_body[:data]
   end
 
   def parsed_attributes
-    @parsed_attributes ||= parsed_data[:attributes]
+    parsed_data[:attributes]
   end
 
   def parsed_body
-    @parsed_body ||= Oj.load(response.body, symbol_keys: true)
+    Oj.load(response.body, symbol_keys: true)
   end
 
   def login_user(user)
-    post '/login', params: {"auth": { "email": "#{user.email}", "password": "#{user.password}" }}
+    post('/login',
+         params: { auth: { email: user.email, password: user.password }},
+         headers: webuser_headers)
   end
 
   def generate_token(id)
@@ -48,20 +53,25 @@ module AcceptanceHelper
   end
 
   def user
-    @user = create(:user)
+    @user ||= create(:user)
   end
 
   def user_headers
     @user_headers ||= authorize_headers(user.id)
   end
 
-  def authorize_headers(id)
-    {
-      "Authorization" => "Bearer #{generate_token(id)}",
-      "HTTP_OTP_API_KEY" => "Bearer #{webuser_token}",
-      "Content-Type" => "application/vnd.api+json",
-      "HTTP_ACCEPT" => "application/vnd.api+json"
+  def authorize_headers(id, jsonapi: true)
+    headers = {
+      'Authorization' => "Bearer #{generate_token(id)}",
+      'HTTP_OTP_API_KEY' => "Bearer #{webuser_token}",
     }
+
+    return headers unless jsonapi
+
+    headers.merge!(
+      'Content-Type' => 'application/vnd.api+json',
+      'HTTP_ACCEPT' => 'application/vnd.api+json'
+    )
   end
 
   def jsonapi_errors(status, code, errors = {})

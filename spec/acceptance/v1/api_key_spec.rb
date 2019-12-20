@@ -6,7 +6,7 @@ module V1
 
       describe 'Request with valid api key' do
         it 'Get users list' do
-          get '/users', headers: webuser_headers
+          get '/users', headers: admin_headers
           expect(status).to eq(200)
         end
       end
@@ -19,7 +19,7 @@ module V1
         it 'Get users list' do
           get '/users'
           expect(status).to eq(401)
-          expect(parsed_body).to   eq(error)
+          expect(parsed_body).to eq(error)
         end
       end
     end

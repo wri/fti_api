@@ -38,19 +38,15 @@ FactoryBot.define do
     lat { 12.3333 }
 
     after(:create) do |observation|
-      annex = FactoryBot.create(:annex_operator)
-
-      observation.update(severity: FactoryBot.create(:severity, severable: annex),
-                         annex_operator: annex,
+      observation.update(severity: FactoryBot.create(:severity),
                          user: FactoryBot.create(:admin),
-                         observer: FactoryBot.create(:observer, name: "Observer #{Faker::Lorem.sentence}"),
                          operator: FactoryBot.create(:operator, name: "Operator #{Faker::Lorem.sentence}"),
                          species: [FactoryBot.create(:species)])
     end
   end
 
   factory :observation_2, class: 'Observation' do
-    observation_type { 'AnnexGovernance' }
+    observation_type { 'government' }
     is_active { true }
     evidence { 'Governance observation' }
     publication_date { (DateTime.now - 1.days).to_date }
@@ -59,12 +55,8 @@ FactoryBot.define do
     lat { 12.3333 }
 
     after(:create) do |observation|
-      annex = FactoryBot.create(:annex_governance)
-
-      observation.update(severity: FactoryBot.create(:severity, severable: annex),
-                         annex_governance: annex,
+      observation.update(severity: FactoryBot.create(:severity),
                          user: FactoryBot.create(:admin),
-                         observer: FactoryBot.create(:observer, name: "Observer #{Faker::Lorem.sentence}"),
                          government: FactoryBot.create(:government),
                          species: [FactoryBot.create(:species, name: "Species #{Faker::Lorem.sentence}")])
     end
@@ -73,6 +65,7 @@ FactoryBot.define do
   factory :observation, class: 'Observation' do
     observation_type { %w[operator government].sample }
     is_active { true }
+    validation_status { 'Approved' }
     evidence { 'Operator observation' }
     publication_date { DateTime.now.to_date }
     lng { 12.2222 }
