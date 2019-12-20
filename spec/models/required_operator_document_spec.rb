@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RequiredOperatorDocument, type: :model do
-  subject(:required_operator_document) { FactoryBot.build :required_operator_document }
+  subject(:required_operator_document) { FactoryBot.build(:required_operator_document) }
 
   it 'is valid with valid attributes' do
     expect(required_operator_document).to be_valid
@@ -25,10 +25,11 @@ RSpec.describe RequiredOperatorDocument, type: :model do
     describe '#fixed_fields_unchanged' do
       context 'when it is persisted' do
         before do
-          @required_operator_document = FactoryBot.create :required_operator_document,
+          @required_operator_document = create(
+            :required_operator_document,
             contract_signature: false,
             forest_type: 1,
-            type: 'RequiredOperatorDocument'
+            type: 'RequiredOperatorDocument')
         end
 
         context 'when contract_signature has changed' do
@@ -66,7 +67,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
         context 'when country_id has changed' do
           it 'add an error on country_id' do
-            another_country = FactoryBot.create :country
+            another_country = create(:country)
             @required_operator_document.update_attributes(country_id: another_country.id)
 
             expect(@required_operator_document.valid?).to eql false

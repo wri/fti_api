@@ -16,10 +16,10 @@
 require 'rails_helper'
 
 RSpec.describe Country, type: :model do
-  subject(:country) { FactoryBot.build :country }
+  subject(:country) { FactoryBot.build(:country) }
 
   it 'is valid with valid attributes' do
-    country = FactoryBot.build :country
+    country = build(:country)
     expect(country).to be_valid
   end
 
@@ -48,7 +48,7 @@ RSpec.describe Country, type: :model do
     describe '#set_active' do
       context 'when is_active has not been initialized' do
         it 'set is_active to true' do
-          country = FactoryBot.create(:country, is_active: nil)
+          country = create(:country, is_active: nil)
           expect(country.is_active).to eql true
         end
       end
@@ -65,7 +65,7 @@ RSpec.describe Country, type: :model do
   context 'Methods' do
     describe '#cache_key' do
       it 'return the default value with the locale' do
-        country = FactoryBot.create :country
+        country = create(:country)
         expect(country.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end
     end

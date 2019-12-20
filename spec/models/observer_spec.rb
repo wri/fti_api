@@ -21,7 +21,7 @@
 require 'rails_helper'
 
 RSpec.describe Observer, type: :model do
-  subject(:observer) { FactoryBot.build :observer }
+  subject(:observer) { FactoryBot.build(:observer) }
 
   it 'is valid with valid attributes' do
     expect(observer).to be_valid
@@ -64,7 +64,7 @@ RSpec.describe Observer, type: :model do
 
   describe 'Class methods' do
     before do
-      FactoryBot.create_list :observer, 3
+      create_list(:observer, 3)
     end
 
     describe '#fetch_all' do

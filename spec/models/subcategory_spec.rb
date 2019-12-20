@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Subcategory, type: :model do
-  subject(:subcategory) { FactoryBot.build :subcategory }
+  subject(:subcategory) { FactoryBot.build(:subcategory) }
 
   it 'is valid with valid attributes' do
     expect(subcategory).to be_valid

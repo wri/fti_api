@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Faq, type: :model do
-  subject(:faq) { FactoryBot.build :faq }
+  subject(:faq) { FactoryBot.build(:faq) }
 
   it 'is valid with valid attributes' do
     expect(faq).to be_valid

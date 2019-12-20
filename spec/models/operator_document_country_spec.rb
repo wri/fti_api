@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OperatorDocumentCountry, type: :model do
-  subject(:operator_document_country) { FactoryBot.build :operator_document_country }
+  subject(:operator_document_country) { FactoryBot.build(:operator_document_country) }
 
   it 'is valid with valid attributes' do
     expect(operator_document_country).to be_valid
@@ -17,12 +17,12 @@ RSpec.describe OperatorDocumentCountry, type: :model do
     describe '#invalidate_operator' do
       context 'when operator is approved' do
         it 'set approved field to false on the operator' do
-          operator = FactoryBot.create :operator, approved: true
-          required_operator_document = FactoryBot.create :required_operator_document,
-            contract_signature: true
-          operator_document_country = FactoryBot.create :operator_document_country,
-            required_operator_document: required_operator_document,
-            operator: operator
+          operator = create(:operator, approved: true)
+          required_operator_document =
+            create(:required_operator_document, contract_signature: true)
+          create(:operator_document_country,
+                 required_operator_document: required_operator_document,
+                 operator: operator)
 
           operator.reload
           expect(operator.approved).to eql false
@@ -33,12 +33,13 @@ RSpec.describe OperatorDocumentCountry, type: :model do
     describe '#validate_operator' do
       context 'when operator is not approved' do
         it 'set approved field to true on the operator' do
-          operator = FactoryBot.create :operator, approved: false
-          required_operator_document = FactoryBot.create :required_operator_document,
-            contract_signature: true
-          operator_document_country = FactoryBot.create :operator_document_country,
+          operator = create(:operator, approved: false)
+          required_operator_document =
+            create(:required_operator_document, contract_signature: true)
+          operator_document_country = create(
+            :operator_document_country,
             required_operator_document: required_operator_document,
-            operator: operator
+            operator: operator)
 
           operator_document_country.destroy
 
@@ -53,12 +54,13 @@ RSpec.describe OperatorDocumentCountry, type: :model do
     describe '#update_operator_approved' do
       context 'when there are current documents of contract signature not valid or required' do
         it 'set operator as non approved' do
-          operator = FactoryBot.create :operator, approved: false
-          required_operator_document = FactoryBot.create :required_operator_document,
-            contract_signature: true
-          operator_document_country = FactoryBot.create :operator_document_country,
+          operator = create(:operator, approved: false)
+          required_operator_document =
+            create(:required_operator_document, contract_signature: true)
+          operator_document_country = create(
+            :operator_document_country,
             required_operator_document: required_operator_document,
-            operator: operator
+            operator: operator)
           operator_document_country.send('update_operator_approved')
 
           operator.reload

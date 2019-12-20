@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OperatorDocumentAnnex, type: :model do
-  subject(:operator_document_annex) { FactoryBot.build :operator_document_annex }
+  subject(:operator_document_annex) { FactoryBot.build(:operator_document_annex) }
 
   it 'is valid with valid attributes' do
     expect(operator_document_annex).to be_valid
@@ -31,8 +31,8 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
   describe 'Instance methods' do
     describe '#expire_document_annex' do
       it 'set status to doc_expired' do
-        operator_document_annex = FactoryBot.create :operator_document_annex,
-          status: OperatorDocumentAnnex.statuses[:doc_pending]
+        operator_document_annex =
+          create(:operator_document_annex, status: OperatorDocumentAnnex.statuses[:doc_pending])
         operator_document_annex.expire_document_annex
 
         expect(operator_document_annex.status).to eql 'doc_expired'

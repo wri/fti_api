@@ -12,7 +12,7 @@
 require 'rails_helper'
 
 RSpec.describe Government, type: :model do
-  subject(:government) { FactoryBot.build :government }
+  subject(:government) { FactoryBot.build(:government) }
 
   it 'is valid with valid attributes' do
     expect(government).to be_valid
@@ -40,9 +40,9 @@ RSpec.describe Government, type: :model do
   describe 'Class methods' do
     describe '#fetch_all' do
       before do
-        @country = FactoryBot.create :country
-        FactoryBot.create :government, country: @country
-        FactoryBot.create :government
+        @country = create(:country)
+        create(:government, country: @country)
+        create(:government)
       end
 
       context 'when country_ids is not specified' do

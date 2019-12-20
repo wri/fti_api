@@ -28,26 +28,26 @@
 require 'rails_helper'
 
 RSpec.describe Operator, type: :model do
-  subject(:operator) { FactoryBot.build :operator }
+  subject(:operator) { FactoryBot.build(:operator) }
 
   before :all do
-    @country = FactoryBot.create(:country)
-    @operator = FactoryBot.create(:operator, country: @country, fa_id: 'fa-id')
-    @required_operator_document_group = FactoryBot.create(:required_operator_document_group)
+    @country = create(:country)
+    @operator = create(:operator, country: @country, fa_id: 'fa-id')
+    @required_operator_document_group = create(:required_operator_document_group)
 
-    fmu = FactoryBot.create(:fmu, country: @country)
-    FactoryBot.create(:fmu_operator, fmu: fmu, operator: @operator)
+    fmu = create(:fmu, country: @country)
+    create(:fmu_operator, fmu: fmu, operator: @operator)
 
     required_operator_document_data = {
       country: @country,
       required_operator_document_group: @required_operator_document_group
     }
     @required_operator_document =
-      FactoryBot.create(:required_operator_document, **required_operator_document_data)
+      create(:required_operator_document, **required_operator_document_data)
     @required_operator_document_country =
-      FactoryBot.create(:required_operator_document_country, **required_operator_document_data)
+      create(:required_operator_document_country, **required_operator_document_data)
     @required_operator_document_fmu =
-      FactoryBot.create(:required_operator_document_fmu, **required_operator_document_data)
+      create(:required_operator_document_fmu, **required_operator_document_data)
   end
 
   it 'is valid with valid attributes' do
@@ -91,7 +91,7 @@ RSpec.describe Operator, type: :model do
 
       context 'when country is not present' do
         it 'update the id' do
-          operator = FactoryBot.create(:operator)
+          operator = create(:operator)
           expect(operator.operator_id).to eql "na-unknown-#{operator.id}"
         end
       end
@@ -101,10 +101,10 @@ RSpec.describe Operator, type: :model do
       context 'when fa_id is present and there are operator_documents' do
         before do
           # Having a random order, @operator data can differ depending on the order
-          other_country = FactoryBot.create(:country)
-          @other_operator = FactoryBot.create(:operator, country: other_country, fa_id: 'fa-id')
+          other_country = create(:country)
+          @other_operator = create(:operator, country: other_country, fa_id: 'fa-id')
 
-          fmu = FactoryBot.create(:fmu, country: other_country)
+          fmu = create(:fmu, country: other_country)
           FactoryBot.create(:fmu_operator, fmu: fmu, operator: @other_operator)
 
           required_operator_document_data = {
@@ -135,8 +135,8 @@ RSpec.describe Operator, type: :model do
 
     describe '#really_destroy_documents' do
       it 'destroy operator_documents associated with the operator' do
-        another_operator = FactoryBot.create(:operator)
-        operator_document = FactoryBot.create(:operator_document, operator: another_operator)
+        another_operator = create(:operator)
+        operator_document = create(:operator_document, operator: another_operator)
         another_operator.send(:really_destroy_documents)
 
         expect(OperatorDocument.where(id: operator_document.id).first).to be_nil
@@ -162,10 +162,10 @@ RSpec.describe Operator, type: :model do
           common_data[:required_operator_document_id] =
             instance_variable_get("@required_#{op_doc_type}").id
 
-          valid_op_doc = FactoryBot.create(op_doc_type, **common_data)
+          valid_op_doc = create(op_doc_type, **common_data)
           valid_op_doc.update_attributes(status: valid_status)
 
-          pending_op_docs = FactoryBot.create_list(op_doc_type, 2, **common_data)
+          pending_op_docs = create_list(op_doc_type, 2, **common_data)
           pending_op_docs.each do |pending_op_doc|
             pending_op_doc.update_attributes(status: pending_status)
           end
@@ -174,18 +174,17 @@ RSpec.describe Operator, type: :model do
 
       # Observations
       (0..3).each do |level|
-        severity = FactoryBot.create(:severity, level: level)
-        FactoryBot.create(
+        severity = create(:severity, level: level)
+        create(
           :observation,
           severity: severity,
           operator: @operator,
           country: @country,
-          validation_status: 'Approved'
-        )
+          validation_status: 'Approved')
       end
 
       # Operator without documents and observations to check empty values
-      @another_operator = FactoryBot.create(:operator, country: @country, fa_id: 'fa-id')
+      @another_operator = create(:operator, country: @country, fa_id: 'fa-id')
     end
 
     before do
@@ -286,18 +285,18 @@ RSpec.describe Operator, type: :model do
       context 'when fa_id is present and there are operator_documents' do
         before do
           # Need to create another data to really check the creation of the documents
-          other_country = FactoryBot.create(:country)
-          @other_operator = FactoryBot.create(:operator, country: other_country, fa_id: 'fa-id')
+          other_country = create(:country)
+          @other_operator = create(:operator, country: other_country, fa_id: 'fa-id')
 
-          fmu = FactoryBot.create(:fmu, country: other_country)
-          FactoryBot.create(:fmu_operator, fmu: fmu, operator: @other_operator)
+          fmu = create(:fmu, country: other_country)
+          create(:fmu_operator, fmu: fmu, operator: @other_operator)
 
           required_operator_document_data = {
             country: other_country,
             required_operator_document_group: @required_operator_document_group
           }
-          FactoryBot.create(:required_operator_document_country, **required_operator_document_data)
-          FactoryBot.create(:required_operator_document_fmu, **required_operator_document_data)
+          create(:required_operator_document_country, **required_operator_document_data)
+          create(:required_operator_document_fmu, **required_operator_document_data)
         end
 
         it 'set :doc_not_provided status for related OperatorDocumentCountry and OperatorDocumentFmu' do
@@ -370,12 +369,11 @@ RSpec.describe Operator, type: :model do
 
     describe '#calculate_scores' do
       before do
-        prev_op_size = Operator.all.size.to_f
         Operator.all.map { |operator| operator.calculate_observations_scores }
 
         5.times do |t|
-          country = FactoryBot.create(:country)
-          operator = FactoryBot.create(:operator, country: country, is_active: true, fa_id: "fa_#{t}")
+          country = create(:country)
+          operator = create(:operator, country: country, is_active: true, fa_id: "fa_#{t}")
           operator.update_attribute(:score_absolute, t / 10.to_f)
         end
       end

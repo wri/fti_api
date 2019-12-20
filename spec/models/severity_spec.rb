@@ -12,7 +12,7 @@
 require 'rails_helper'
 
 RSpec.describe Severity, type: :model do
-  subject(:severity) { FactoryBot.build :severity }
+  subject(:severity) { FactoryBot.build(:severity) }
 
   it_should_behave_like 'translatable', FactoryBot.create(:severity), %i[details]
 

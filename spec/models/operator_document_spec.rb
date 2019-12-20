@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OperatorDocument, type: :model do
-  subject(:operator_document) { FactoryBot.build :operator_document }
+  subject(:operator_document) { FactoryBot.build(:operator_document) }
 
   it 'is valid with valid attributes' do
     expect(operator_document).to be_valid
@@ -31,7 +31,7 @@ RSpec.describe OperatorDocument, type: :model do
     describe '#set_expire_date' do
       context 'when there is not expire_date' do
         it 'set expire_date with the start_date plus the valid_period days' do
-          operator_document = FactoryBot.build :operator_document, expire_date: nil
+          operator_document = build(:operator_document, expire_date: nil)
           operator_document.valid?
 
           expect(operator_document.expire_date).to eql(
@@ -45,7 +45,7 @@ RSpec.describe OperatorDocument, type: :model do
     describe '#reason_or_attachment' do
       context 'when there is attachment and reason' do
         it 'add an error on reason' do
-          operator_document = FactoryBot.build :operator_document, reason: 'aaa'
+          operator_document = build(:operator_document, reason: 'aaa')
 
           expect(operator_document.valid?).to eql false
           expect(operator_document.errors[:reason]).to eql(
@@ -58,31 +58,34 @@ RSpec.describe OperatorDocument, type: :model do
 
   describe 'Hooks' do
     before :all do
-      @country = FactoryBot.create :country
-      @operator = FactoryBot.create :operator, country: @country, fa_id: 'fa_id'
+      @country = create(:country)
+      @operator = create(:operator, country: @country, fa_id: 'fa_id')
 
-      @fmu = FactoryBot.create(:fmu, country: @country)
-      FactoryBot.create(:fmu_operator, fmu: @fmu, operator: @operator)
+      @fmu = create(:fmu, country: @country)
+      create(:fmu_operator, fmu: @fmu, operator: @operator)
     end
 
     before do
-      @required_operator_document = FactoryBot.create :required_operator_document,
+      @required_operator_document = create(
+        :required_operator_document,
         country: @country,
-        required_operator_document_group: @required_operator_document_group
+        required_operator_document_group: @required_operator_document_group)
     end
 
     describe '#update_current' do
       context 'when there is not operator or he/she is marked for destruction' do
         before do
-          FactoryBot.create :operator_document,
+          create(:operator_document,
+                 operator: @operator,
+                 required_operator_document: @required_operator_document,
+                 fmu: @fmu,
+                 current: true)
+
+          @operator_document = build(
+            :operator_document,
             operator: @operator,
             required_operator_document: @required_operator_document,
-            fmu: @fmu,
-            current: true
-          @operator_document = FactoryBot.build :operator_document,
-            operator: @operator,
-            required_operator_document: @required_operator_document,
-            fmu: @fmu
+            fmu: @fmu)
         end
 
         context 'when operator_document is the current one' do
@@ -101,7 +104,7 @@ RSpec.describe OperatorDocument, type: :model do
     describe '#set_status' do
       context 'when attachment or reason are present' do
         it 'update status as doc_pending' do
-          operator_document = FactoryBot.create :operator_document
+          operator_document = create(:operator_document)
 
           expect(operator_document.status).to eql 'doc_pending'
         end
@@ -109,7 +112,7 @@ RSpec.describe OperatorDocument, type: :model do
 
       context 'when attachment or reason are not present' do
         it 'update status as doc_not_provided' do
-          operator_document = FactoryBot.create :operator_document, attachment: nil, reason: nil
+          operator_document = create(:operator_document, attachment: nil, reason: nil)
 
           expect(operator_document.status).to eql 'doc_not_provided'
         end
@@ -118,22 +121,26 @@ RSpec.describe OperatorDocument, type: :model do
 
     describe '#delete_previous_pending_document' do
       it 'deletes previous pending operator_documents' do
-        another_operator = FactoryBot.create :operator, country: @country, fa_id: 'fa_id'
-        FactoryBot.create :operator_document,
+        another_operator = create(:operator, country: @country, fa_id: 'fa_id')
+        create(
+          :operator_document,
           operator: another_operator,
           fmu: @fmu,
-          required_operator_document: @required_operator_document
-        FactoryBot.create :operator_document,
+          required_operator_document: @required_operator_document)
+
+        create(
+          :operator_document,
           operator: @operator,
           fmu: @fmu,
-          required_operator_document: @required_operator_document
+          required_operator_document: @required_operator_document)
 
         expect(OperatorDocument.all.size).to eql 2
 
-        FactoryBot.create :operator_document,
+        create(
+          :operator_document,
           operator: @operator,
           fmu: @fmu,
-          required_operator_document: @required_operator_document
+          required_operator_document: @required_operator_document)
 
         expect(OperatorDocument.all.size).to eql 2
       end
@@ -151,10 +158,10 @@ RSpec.describe OperatorDocument, type: :model do
         }
 
         # Generate one valid operator document and two pending operator documents of each type
-        valid_op_doc = FactoryBot.create(:operator_document, **common_data)
+        valid_op_doc = create(:operator_document, **common_data)
         valid_op_doc.update_attributes(status: valid_status)
 
-        pending_op_docs = FactoryBot.create_list(:operator_document, 2, **common_data)
+        pending_op_docs = create_list(:operator_document, 2, **common_data)
         pending_op_docs.each do |pending_op_doc|
           pending_op_doc.update_attributes(status: pending_status)
         end
@@ -180,10 +187,11 @@ RSpec.describe OperatorDocument, type: :model do
       context 'when operator and required_operator_document exist and are not marked '\
               'for destruction, not current operator document and not required operator document' do
         it 'creates a new operator document' do
-          operator_document = FactoryBot.create :operator_document,
+          operator_document = create(
+            :operator_document,
             operator: @operator,
             required_operator_document: @required_operator_document,
-            current: true
+            current: true)
 
           expect(OperatorDocument.count).to eql 1
 
@@ -207,7 +215,7 @@ RSpec.describe OperatorDocument, type: :model do
   describe 'Instance methods' do
     describe '#expire_document' do
       it 'update status as doc_expired' do
-        operator_document = FactoryBot.create :operator_document
+        operator_document = create(:operator_document)
 
         expect(operator_document.status).not_to eql 'doc_expired'
 
@@ -221,12 +229,13 @@ RSpec.describe OperatorDocument, type: :model do
   describe 'Class methods' do
     describe '#expire_documents' do
       it 'update status as doc_expired which expire_date is lower than today' do
-        required_operator_document = FactoryBot.create :required_operator_document,
-          contract_signature: false
-        FactoryBot.create :operator_document,
+        required_operator_document =
+          create(:required_operator_document, contract_signature: false)
+        create(
+          :operator_document,
           required_operator_document: required_operator_document,
           status: OperatorDocument.statuses[:doc_valid],
-          expire_date: Date.yesterday
+          expire_date: Date.yesterday)
 
         OperatorDocument.expire_documents
 

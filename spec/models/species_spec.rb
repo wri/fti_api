@@ -19,7 +19,7 @@
 require 'rails_helper'
 
 RSpec.describe Species, type: :model do
-  subject(:species) { FactoryBot.build :species }
+  subject(:species) { FactoryBot.build(:species) }
 
   it 'is valid with valid attributes' do
     expect(species).to be_valid

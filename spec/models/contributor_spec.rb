@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Contributor, type: :model do
-  subject(:contributor) { FactoryBot.build :contributor }
+  subject(:contributor) { FactoryBot.build(:contributor) }
 
   it 'is valid with valid attributes' do
     expect(contributor).to be_valid

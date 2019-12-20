@@ -30,7 +30,7 @@
 require 'rails_helper'
 
 RSpec.describe Observation, type: :model do
-  subject(:observation) { FactoryBot.build :observation }
+  subject(:observation) { FactoryBot.build(:observation) }
 
   it 'is valid with valid attributes' do
     expect(observation).to be_valid
@@ -89,7 +89,7 @@ RSpec.describe Observation, type: :model do
     describe '#active_government' do
       context 'when type is goverment and goverment is not specified' do
         it 'add error on goverment' do
-          observation = FactoryBot.build :observation, observation_type: 'government', government: nil
+          observation = build(:observation, observation_type: 'government', government: nil)
           observation.government.update_attributes(is_active: false)
           observation.save
 
@@ -104,14 +104,14 @@ RSpec.describe Observation, type: :model do
 
   describe 'Hooks' do
     before :all do
-      @country = FactoryBot.create(:country)
-      @operator = FactoryBot.create(:operator, country: @country, fa_id: 'fa-id')
+      @country = create(:country)
+      @operator = create(:operator, country: @country, fa_id: 'fa-id')
     end
 
     describe '#set_active_status' do
       context 'when validation_status is Approved' do
         it 'set is_active to true' do
-          observation = FactoryBot.create :observation, validation_status: 'Approved'
+          observation = create(:observation, validation_status: 'Approved')
 
           expect(observation.is_active).to eql true
         end
@@ -119,7 +119,7 @@ RSpec.describe Observation, type: :model do
 
       context 'when validation_status is not Approved' do
         it 'set is_active to false' do
-          observation = FactoryBot.create :observation, validation_status: 'Rejected'
+          observation = create(:observation, validation_status: 'Rejected')
 
           expect(observation.is_active).to eql false
         end
@@ -129,7 +129,7 @@ RSpec.describe Observation, type: :model do
     describe '#check_is_physical_place' do
       context 'when there is not physical place' do
         it 'set lat, lng and fmu to nil' do
-          observation = FactoryBot.create :observation, is_physical_place: false
+          observation = create(:observation, is_physical_place: false)
 
           expect(observation.lat).to eql nil
           expect(observation.lng).to eql nil
@@ -141,12 +141,12 @@ RSpec.describe Observation, type: :model do
     describe '#set_centroid' do
       context 'when there is fmu but lat and lng are not present' do
         it 'set lat and lng with the information of the fmu properties' do
-          fmu = FactoryBot.create :fmu,
-            geojson: {properties: {centroid: {coordinates: [10.91, -4.32]}}}
-          observation = FactoryBot.create :observation, fmu: fmu, lat: nil, lng: nil
+          fmu =
+            create(:fmu, geojson: { properties: { centroid: { coordinates: [10.91, -4.32] } } })
+          observation = create(:observation, fmu: fmu, lat: nil, lng: nil)
 
-          expect(observation.lat).to eql 10.91
-          expect(observation.lng).to eql -4.32
+          expect(observation.lat).to eql(10.91)
+          expect(observation.lng).to eql(-4.32)
         end
       end
     end
@@ -154,7 +154,7 @@ RSpec.describe Observation, type: :model do
     describe '#update_operator_scores' do
       before do
         (0..3).each do |level|
-          severity = FactoryBot.create(:severity, level: level)
+          severity = create(:severity, level: level)
           FactoryBot.create(
             :observation,
             severity: severity,
@@ -167,11 +167,12 @@ RSpec.describe Observation, type: :model do
 
       it 'calculate observation scores' do
         severity = Severity.find_by(level: 2)
-        observation = FactoryBot.create :observation,
+        observation = create(
+          :observation,
           operator: @operator,
           severity: severity,
           country: @country,
-          validation_status: 'Approved'
+          validation_status: 'Approved')
 
         expect(@operator.obs_per_visit).to eql(5.0)
         expect(@operator.score_absolute).to eql((4.0 + 4.0 + 2 + 1) / 9.0)
@@ -185,8 +186,8 @@ RSpec.describe Observation, type: :model do
 
     describe '#destroy_documents' do
       before do
-        @observation = FactoryBot.create :observation, country: @country, operator: @operator
-        FactoryBot.create_list :observation_document, 3, observation: @observation
+        @observation = create(:observation, country: @country, operator: @operator)
+        create_list(:observation_document, 3, observation: @observation)
       end
 
       it 'destroy related observation documents' do
@@ -201,8 +202,8 @@ RSpec.describe Observation, type: :model do
     describe '#update_report_observers' do
       context 'when there is observation report' do
         it 'update the observer_ids with the observer_id associated to the observations' do
-          observation_report = FactoryBot.create :observation_report
-          observation = FactoryBot.create :observation
+          observation_report = create(:observation_report)
+          observation = create(:observation)
 
           observation.update_attributes(observation_report_id: observation_report.id)
 
@@ -219,8 +220,8 @@ RSpec.describe Observation, type: :model do
     describe '#user_name' do
       context 'when there is an user' do
         it 'return username' do
-          user = FactoryBot.create :user
-          observation = FactoryBot.create :observation, user: user
+          user = create(:user)
+          observation = create(:observation, user: user)
 
           expect(observation.user_name).to eql observation.user.name
         end
@@ -228,7 +229,7 @@ RSpec.describe Observation, type: :model do
 
       context 'when there is not an user' do
         it 'return nil' do
-          observation = FactoryBot.create :observation
+          observation = create(:observation)
           observation.update_attributes(user_id: nil)
 
           expect(observation.user_name).to eql nil
@@ -238,7 +239,7 @@ RSpec.describe Observation, type: :model do
 
     describe '#translated_type' do
       it 'return the translation of the observation type' do
-        observation = FactoryBot.create :observation, observation_type: 'operator'
+        observation = create(:observation, observation_type: 'operator')
 
         expect(observation.translated_type).to eql I18n.t("observation_types.operator")
       end
@@ -246,7 +247,7 @@ RSpec.describe Observation, type: :model do
 
     describe '#cache_key' do
       it 'return the default value with the locale' do
-        observation = FactoryBot.create :observation
+        observation = create(:observation)
 
         expect(observation.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end

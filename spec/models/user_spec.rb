@@ -31,7 +31,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { FactoryBot.build :user }
+  subject(:user) { FactoryBot.build(:user) }
 
   it 'is valid with valid attributes' do
     expect(user).to be_valid
@@ -85,7 +85,7 @@ RSpec.describe User, type: :model do
     describe '#user_integrity' do
       context 'when there is not an user permission' do
         it 'add an error on user_permission' do
-          user = FactoryBot.create :user
+          user = create(:user)
           user.update_attribute(:user_permission, nil)
 
           expect(user.valid?).to eql false
@@ -97,7 +97,7 @@ RSpec.describe User, type: :model do
 
       context 'when user permission is operator and there is not operator' do
         it 'add an error on operator_id' do
-          user_permission = FactoryBot.create :user_permission, user_role: 1
+          user_permission = create(:user_permission, user_role: 1)
           user = user_permission.user
 
           expect(user.valid?).to eql false
@@ -109,7 +109,7 @@ RSpec.describe User, type: :model do
 
       context 'when user permission is ngo or ngo_manager and there is not observer' do
         it 'add an error on observer' do
-          user_permission = FactoryBot.create :user_permission, user_role: 2
+          user_permission = create(:user_permission, user_role: 2)
           user = user_permission.user
 
           expect(user.valid?).to eql false
@@ -122,8 +122,8 @@ RSpec.describe User, type: :model do
       context 'when user_permission is admin, user or bo_manager' do
         context 'when operator is present' do
           it 'add an error on operator_id' do
-            operator = FactoryBot.create :operator
-            user_permission = FactoryBot.create :user_permission, user_role: 3
+            operator = create(:operator)
+            user_permission = create(:user_permission, user_role: 3)
             user = user_permission.user
             user.update_attributes(operator_id: operator.id)
 
@@ -136,8 +136,8 @@ RSpec.describe User, type: :model do
 
         context 'when observer is present' do
           it 'add an error on observer_id' do
-            observer = FactoryBot.create :observer
-            user_permission = FactoryBot.create :user_permission, user_role: 3
+            observer = create(:observer)
+            user_permission = create(:user_permission, user_role: 3)
             user = user_permission.user
             user.update_attributes(observer_id: observer.id)
 
@@ -155,7 +155,7 @@ RSpec.describe User, type: :model do
     describe '#create_from_request' do
       context 'when permision_request is present' do
         it 'add user_permission which correspond to the permissions_request' do
-          user = FactoryBot.build :user, permissions_request: 1
+          user = build(:user, permissions_request: 1)
 
           expect(user.user_permission).not_to eql nil
           expect(user.user_permission.user_role).to eql 'user'
@@ -167,8 +167,8 @@ RSpec.describe User, type: :model do
   describe 'Instance methods' do
     describe '#is_operator?' do
       before do
-        @operator = FactoryBot.create :operator
-        @user = FactoryBot.create :user, permissions_request: 1, operator: @operator
+        @operator = create(:operator)
+        @user = create(:user, permissions_request: 1, operator: @operator)
       end
 
       context 'when the user is an operator' do
@@ -180,7 +180,7 @@ RSpec.describe User, type: :model do
 
         context 'when operator_id is not the same which appear on the parameter' do
           it 'return false' do
-            another_operator = FactoryBot.create :operator
+            another_operator = create(:operator)
 
             expect(@user.is_operator?(another_operator.id)).to eql false
           end
@@ -189,7 +189,7 @@ RSpec.describe User, type: :model do
 
       context 'when the user is not an operator' do
         it 'return false' do
-          user = FactoryBot.build :user, permissions_request: 2
+          user = build(:user, permissions_request: 2)
 
           expect(user.is_operator?(@operator.id)).to eql false
         end
@@ -199,7 +199,7 @@ RSpec.describe User, type: :model do
     describe '#display_name' do
       context 'when name is present' do
         it 'return name' do
-          user = FactoryBot.build :user, name: nil
+          user = build(:user, name: nil)
 
           expect(user.send('display_name')).to eql user.send('half_email')
         end
@@ -215,7 +215,7 @@ RSpec.describe User, type: :model do
     describe '#active_for_authentication?' do
       context 'when is_active is true' do
         it 'return true' do
-          user = FactoryBot.create :user
+          user = create(:user)
 
           expect(user.active_for_authentication?).to eql true
         end
@@ -223,7 +223,7 @@ RSpec.describe User, type: :model do
 
       context 'when is_active is false' do
         it 'return false' do
-          user = FactoryBot.create:user, is_active: false
+          user = create(:user, is_active: false)
 
           expect(user.active_for_authentication?).to eql false
         end
@@ -240,8 +240,8 @@ RSpec.describe User, type: :model do
       context 'when api_key is present' do
         context 'when api_key has expired' do
           it 'return false' do
-            api_key = FactoryBot.create :api_key, expires_at: DateTime.yesterday
-            user = FactoryBot.create :user, api_key: api_key
+            api_key = create(:api_key, expires_at: DateTime.yesterday)
+            user = create(:user, api_key: api_key)
 
             expect(user.api_key_exists?).to eql false
           end
@@ -249,8 +249,8 @@ RSpec.describe User, type: :model do
 
         context 'when api_key has not expired' do
           it 'return true' do
-            api_key = FactoryBot.create :api_key
-            user = FactoryBot.create :user, api_key: api_key
+            api_key = create(:api_key)
+            user = create(:user, api_key: api_key)
 
             expect(user.api_key_exists?).to eql true
           end
@@ -259,7 +259,7 @@ RSpec.describe User, type: :model do
 
       context 'when api_key is blank' do
         it 'return nil' do
-          user = FactoryBot.create :user, api_key: nil
+          user = create(:user, api_key: nil)
 
           expect(user.api_key_exists?).to eql nil
         end
@@ -268,7 +268,7 @@ RSpec.describe User, type: :model do
 
     describe '#regenerate_api_key' do
       it 'create/update api_key with the information of the user' do
-        user = FactoryBot.create :user
+        user = create(:user)
 
         expect(user.api_key).to eql nil
 
@@ -281,8 +281,8 @@ RSpec.describe User, type: :model do
 
     describe '#delete_api_key' do
       it 'removes all api_key associated to the user' do
-        api_key = FactoryBot.create :api_key
-        user = FactoryBot.create :user, api_key: api_key
+        api_key = create(:api_key)
+        user = create(:user, api_key: api_key)
 
         user.delete_api_key
 
@@ -293,7 +293,7 @@ RSpec.describe User, type: :model do
     describe '#reset_password_by_token' do
       context 'when reset_password_send_at is present and is within time' do
         it 'update the password with the specified options' do
-          user = FactoryBot.create :user, reset_password_sent_at: DateTime.current
+          user = create(:user, reset_password_sent_at: DateTime.current)
 
           expect do
             user.reset_password_by_token({password: 'foobarfoo', password_confirmation: 'foobarfoo'})
@@ -303,7 +303,7 @@ RSpec.describe User, type: :model do
 
       context 'when reset_password_send_at is not present or is too late' do
         it 'add an error on reset_password_token' do
-          user = FactoryBot.create :user
+          user = create(:user)
 
           expect do
             user.reset_password_by_token({password: 'foobarfoo', password_confirmation: 'foobarfoo'})
@@ -316,7 +316,7 @@ RSpec.describe User, type: :model do
     describe '#reset_password_by_current_user' do
       context 'when password and password_confirmation are valid' do
         it 'return the user instance' do
-          user = FactoryBot.create :user
+          user = create(:user)
 
           expect do
             user.reset_password_by_current_user({password: 'foobarfoo', password_confirmation: 'foobarfoo'})
@@ -327,7 +327,7 @@ RSpec.describe User, type: :model do
 
     describe '#generate_reset_token' do
       it 'generate a random reset password token' do
-        user = FactoryBot.create :user
+        user = create(:user)
 
         expect do
           user.send('generate_reset_token', user)
@@ -338,7 +338,7 @@ RSpec.describe User, type: :model do
     describe '#half_email' do
       context 'when email is blank' do
         it 'return empty string' do
-          user = FactoryBot.build :user, email: nil
+          user = build(:user, email: nil)
 
           expect(user.send('half_email')).to eql ''
         end
@@ -346,7 +346,7 @@ RSpec.describe User, type: :model do
 
       context 'when email is present and index is greather than 0' do
         it 'return first part of the email' do
-          user = FactoryBot.build :user
+          user = build(:user)
 
           expect(user.send('half_email')).not_to eql ''
         end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ObservationOperator, type: :model do
   it 'is valid with valid attributes' do
-    observation_operator = FactoryBot.build :observation_operator
+    observation_operator = build(:observation_operator)
     expect(observation_operator).to be_valid
   end
 

@@ -14,10 +14,10 @@ require 'rails_helper'
 
 RSpec.describe UserPermission, type: :model do
   before :all do
-    @user = FactoryBot.create :user
+    @user = create(:user)
   end
 
-  subject(:user_permission) { FactoryBot.build :user_permission }
+  subject(:user_permission) { FactoryBot.build(:user_permission) }
 
   let(:admin_permissions) {
     { admin: { manage: {} }, all: { manage: {} } }
@@ -114,7 +114,7 @@ RSpec.describe UserPermission, type: :model do
       %i[admin operator ngo ngo_manager bo_manager user].each do |role|
         context "when user_role is #{role}" do
           it "set permissions to #{role} role permissions" do
-            user_permission = FactoryBot.create :user_permission, user_role: role, user: @user
+            user_permission = create(:user_permission, user_role: role, user: @user)
             expect(user_permission.permissions).to eql(
               send("#{role}_permissions").with_indifferent_access
             )

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ObservationDocument, type: :model do
   it 'is valid with valid attributes' do
-    observation_document = FactoryBot.build :observation_document
+    observation_document = build(:observation_document)
     expect(observation_document).to be_valid
   end
 
@@ -14,7 +14,7 @@ RSpec.describe ObservationDocument, type: :model do
   describe 'Hooks' do
     describe '#remove_attachment_id_directory' do
       it 'removes all attached documents' do
-        observation_document = FactoryBot.create :observation_document
+        observation_document = create(:observation_document)
         filepath = File.join(
           'spec',
           'support',

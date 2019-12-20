@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RequiredOperatorDocumentCountry, type: :model do
-  subject(:required_operator_document_country) { FactoryBot.build :required_operator_document_country }
+  subject(:required_operator_document_country) { FactoryBot.build(:required_operator_document_country) }
 
   it 'is valid with valid attributes' do
     expect(required_operator_document_country).to be_valid
@@ -28,19 +28,19 @@ RSpec.describe RequiredOperatorDocumentCountry, type: :model do
   describe 'Hooks' do
     describe '#create_operator_document_countries' do
       before do
-        @country = FactoryBot.create(:country)
-        FactoryBot.create_list :operator, 3, country: @country
+        @country = create(:country)
+        create_list(:operator, 3, country: @country)
 
-        @required_operator_document_group = FactoryBot.create(:required_operator_document_group)
+        @required_operator_document_group = create(:required_operator_document_group)
       end
 
 
       it 'create or update status of operator_document_country to be doc_not_provided' do
         expect(RequiredOperatorDocumentCountry.all.size).to eql 0
 
-        FactoryBot.create :required_operator_document_country,
+        create(:required_operator_document_country,
           country: @country,
-          required_operator_document_group: @required_operator_document_group
+          required_operator_document_group: @required_operator_document_group)
 
         expect(OperatorDocumentCountry.all.size).to eql 3
       end
