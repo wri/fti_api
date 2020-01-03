@@ -105,18 +105,6 @@ class OperatorDocument < ApplicationRecord
   private
 
   def ensure_unity
-<<<<<<< HEAD
-    return if (operator.present? && operator.marked_for_destruction?) ||
-              (required_operator_document.present? && required_operator_document.marked_for_destruction?) ||
-              !self.current ||
-              self.required_operator_document.blank?
-
-    od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                              required_operator_document_id: self.required_operator_document_id,
-                              status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
-                              current: true)
-    od.save!(validate: false)
-=======
     return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
     return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
     if self.current && self.required_operator_document.present?
@@ -126,7 +114,6 @@ class OperatorDocument < ApplicationRecord
                                 current: true)
       od.save!(validate: false)
     end
->>>>>>> develop
   end
 
   def set_type
