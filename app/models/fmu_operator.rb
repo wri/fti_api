@@ -99,7 +99,10 @@ WHERE id = #{x.fmu_id};"
     return if self.fmu&.operator&.fa_id.blank?
 
     OperatorDocumentFmu.transaction do
-      destroyed_count = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator).delete_all
+      to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator)
+      destroyed_count = to_destroy.count
+      to_destroy.each { |x| x.delete }
+
       Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator}"
 
       return unless current_operator

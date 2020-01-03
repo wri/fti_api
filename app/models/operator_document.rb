@@ -64,18 +64,19 @@ class OperatorDocument < ApplicationRecord
   end
 
   def update_current
-    return if operator.present? && operator.marked_for_destruction? && !current
-
-    documents_to_update = OperatorDocument.where(
-      fmu_id: fmu_id,
-      operator_id: operator_id,
-      required_operator_document_id: required_operator_document_id,
-      current: true
-    ).where.not(
-      id: id
-    )
-
-    documents_to_update.find_each { |document| document.update_attributes!(current: false) }
+    return if (operator.present? && operator.marked_for_destruction?) || fmu&.marked_for_destruction?
+    if current == true
+      documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
+                                                   required_operator_document_id: self.required_operator_document_id, current: true)
+                                .where.not(id: self.id)
+      documents_to_update.find_each {|x| x.update_attributes!(current: false)}
+    else
+      documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
+                                                   required_operator_document_id: self.required_operator_document_id, current: true)
+      unless documents_to_update.any?
+        self.update_attributes(current: false)
+      end
+    end
   end
 
   def self.expire_documents
@@ -104,6 +105,7 @@ class OperatorDocument < ApplicationRecord
   private
 
   def ensure_unity
+<<<<<<< HEAD
     return if (operator.present? && operator.marked_for_destruction?) ||
               (required_operator_document.present? && required_operator_document.marked_for_destruction?) ||
               !self.current ||
@@ -114,6 +116,17 @@ class OperatorDocument < ApplicationRecord
                               status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
                               current: true)
     od.save!(validate: false)
+=======
+    return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
+    return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
+    if self.current && self.required_operator_document.present?
+      od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
+                                required_operator_document_id: self.required_operator_document_id,
+                                status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
+                                current: true)
+      od.save!(validate: false)
+    end
+>>>>>>> develop
   end
 
   def set_type
