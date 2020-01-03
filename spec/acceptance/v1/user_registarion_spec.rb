@@ -34,7 +34,7 @@ module V1
 
       it 'Returns error object when the user password is to short' do
         post('/register',
-             params: { user: valid_user_params.merge(password: '12', password_confirmation: '12') },
+             params: { user: valid_user_params.merge(password: '121212', password_confirmation: '121212') },
              headers: webuser_headers)
 
         expect(parsed_body).to eq(error_pw)

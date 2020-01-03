@@ -100,7 +100,7 @@ class UserPermission < ApplicationRecord
             gov_file: { rud: { gov_document: { required_gov_document: { country_id: user.country_id  }}}, create: {}}
         }
       else
-        { user: { id: user.id }, observations: { read: {} } }
+        { user: { manage: { id: user.id } }, observations: { read: {} } }
       end
     end
 end

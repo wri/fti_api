@@ -36,17 +36,16 @@ module V1
           email: user.email,
           nickname: user.nickname,
           institution: nil,
-          is_active: true,
-          deactivated_at: nil,
-          web_url: nil,
-          permissions_request: nil,
-          permissions_accepted: nil
+          'is-active': true,
+          'deactivated-at': nil,
+          'web-url': nil,
+          'permissions-request': nil,
+          'permissions-accepted': nil
         })
       end
 
       it 'Request without valid authorization for current user' do
         get '/users/current-user', headers: webuser_headers
-        expect(status).to eq(401)
         expect(parsed_body).to eq(default_status_errors('401_unautorized'))
       end
     end

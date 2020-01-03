@@ -99,9 +99,9 @@ module JSONAPI
 
       # MONKEY PATCH : To allow the gem to work without links
       if content[:data].is_a?(Hash) && content.dig(:data, :links, :self).present?
-        render_options[:location] = content[:data]["links"][:self] if 
+        render_options[:location] = content[:data]["links"][:self] if
         response_doc.status == :created && content[:data].class != Array
-        
+
       end
 
       # For whatever reason, `render` ignores :status and :content_type when :body is set.
