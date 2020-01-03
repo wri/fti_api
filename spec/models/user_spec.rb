@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
 
   describe 'Enums' do
     it { is_expected.to define_enum_for(:permissions_request).with_values(
-      { operator: 1, ngo: 2, ngo_manager: 4 }
+      { operator: 1, ngo: 2, ngo_manager: 4, government: 6 }
     ) }
   end
 

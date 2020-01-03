@@ -30,7 +30,7 @@
 require 'rails_helper'
 
 RSpec.describe Observation, type: :model do
-  subject(:observation) { FactoryBot.build(:observation) }
+  subject(:observation) { FactoryBot.create(:observation) }
 
   it 'is valid with valid attributes' do
     expect(observation).to be_valid
@@ -89,7 +89,7 @@ RSpec.describe Observation, type: :model do
     describe '#active_government' do
       context 'when type is goverment and goverment is not specified' do
         it 'add error on goverment' do
-          observation = build(:observation, observation_type: 'government', government: nil)
+          observation = build(:observation, observation_type: 'government')
           observation.government.update_attributes(is_active: false)
           observation.save
 

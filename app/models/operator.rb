@@ -88,7 +88,7 @@ class Operator < ApplicationRecord
   class Translation
     after_save do
       if name_changed?
-        Operator.find_by(id: self.operator_id)&.fmus&.find_each { |x| x.save }
+        Operator.find_by(id: operator_id)&.fmus&.find_each { |fmu| fmu.save }
       end
     end
   end
@@ -146,7 +146,7 @@ class Operator < ApplicationRecord
     self.percentage_valid_documents_fmu =
       operator_document_fmus.valid.available.ns.count.to_f / operator_document_fmus.required.ns.count.to_f rescue 0
     self.percentage_valid_documents_country =
-      operator_document_countries.valid.available.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_document_countries.valid.available.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
   end
 
   # Calculates the percentage documents knowing they've all been approved
@@ -156,7 +156,7 @@ class Operator < ApplicationRecord
     self.percentage_valid_documents_fmu =
       operator_document_fmus.valid.ns.count.to_f / operator_document_fmus.ns.required.count.to_f rescue 0
     self.percentage_valid_documents_country =
-      operator_document_countries.valid.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_document_countries.valid.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
   end
 
   def calculate_observations_scores
@@ -223,9 +223,9 @@ class Operator < ApplicationRecord
 
   def rebuild_documents
     # TODO: Refactor, use the same logic that appears on create_documents
-    return if fa_id.blank?
+    return if fa_id.blank? || country_id.blank?
 
-    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
+    country = RequiredOperatorDocument.where(country_id: country_id).exists? && country_id
 
     # Country Documents
     RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
@@ -261,7 +261,7 @@ class Operator < ApplicationRecord
   def create_documents
     return if fa_id.blank? || country_id.blank?
 
-    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
+    country = RequiredOperatorDocument.where(country_id: country_id).exists? && country_id
 
     if operator_document_countries.none?
       RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|

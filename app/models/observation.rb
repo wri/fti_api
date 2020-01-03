@@ -168,6 +168,6 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
               government.nil? ||
               government.is_active
 
-    errors[:government] << 'The selected government is not active'
+    errors.add(:government, 'The selected government is not active')
   end
 end

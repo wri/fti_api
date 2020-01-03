@@ -39,6 +39,7 @@ class User < ApplicationRecord
   # Include default devise modules.
   TEMP_EMAIL_REGEX = /\Achange@tmp/
   PERMISSIONS = %w(operator ngo ngo_manager government)
+  PROTECTED_NICKNAMES = %w(admin superuser about root fti otp faq contact user operator ngo).freeze
   enum permissions_request: { operator: 1, ngo: 2, ngo_manager: 4, government: 6 }
 
   belongs_to :country, inverse_of: :users, optional: true
@@ -64,7 +65,7 @@ class User < ApplicationRecord
 
   validates_format_of :nickname, with: /\A[a-z0-9_\.][-a-z0-9]{1,19}\Z/i,
                                  multiline: true
-  validates :nickname, exclusion: {in: %w(admin superuser about root fti otp faq contact user operator ngo) }
+  validates :nickname, exclusion: { in: PROTECTED_NICKNAMES }
 
   validates :password, confirmation: true,
                        length: { within: 8..20 },
@@ -98,8 +99,7 @@ class User < ApplicationRecord
   end
 
   def display_name
-    return "#{half_email}" if name.blank?
-    "#{name}"
+    name.present? ? "#{name}" : "#{half_email}"
   end
 
   def active_for_authentication?
@@ -176,17 +176,22 @@ class User < ApplicationRecord
 
   def user_integrity
     if user_permission.blank?
-      errors['user_permission'] << 'You must choose a user permission'
-    else
-      case user_permission.user_role
-      when 'operator'
-        errors['operator_id'] << 'User of type Operator must have an operator and no observer' unless operator.present? && observer_id.blank?
-      when 'ngo', 'ngo_manager'
-        errors['observer_id'] << 'User of type NGO must have an observer and no operator' unless observer.present? && operator_id.blank?
-      else
-        errors['operator_id'] << 'Cannot have an Operator' if operator_id.present?
-        errors['observer_id'] << 'Cannot have an Observer' if observer_id.present?
+      errors.add(:user_permission, 'You must choose a user permission')
+      return
+    end
+
+    case user_permission.user_role
+    when 'operator'
+      if operator_id.blank? || observer_id.present?
+        errors.add(:operator_id, 'User of type Operator must have an operator and no observer')
       end
+    when 'ngo', 'ngo_manager'
+      if operator_id.present? || observer_id.blank?
+        errors.add(:observer_id, 'User of type NGO must have an observer and no operator')
+      end
+    else
+      errors.add(:operator_id, 'Cannot have an Operator') if operator_id.present?
+      errors.add(:observer_id, 'Cannot have an Observer') if observer_id.present?
     end
   end
 end

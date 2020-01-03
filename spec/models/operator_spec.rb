@@ -92,7 +92,7 @@ RSpec.describe Operator, type: :model do
       context 'when country is not present' do
         it 'update the id' do
           operator = create(:operator)
-          expect(operator.operator_id).to eql "na-unknown-#{operator.id}"
+          expect(operator.operator_id).to eql "#{operator.country.iso}-unknown-#{operator.id}"
         end
       end
     end

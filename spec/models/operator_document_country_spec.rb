@@ -41,7 +41,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
             required_operator_document: required_operator_document,
             operator: operator)
 
-          operator_document_country.destroy
+          operator_document_country.update_attributes(status: :doc_valid)
 
           operator.reload
           expect(operator.approved).to eql true
@@ -61,10 +61,13 @@ RSpec.describe OperatorDocumentCountry, type: :model do
             :operator_document_country,
             required_operator_document: required_operator_document,
             operator: operator)
+
+          operator_document_country.update_attributes(status: :doc_valid)
           operator_document_country.send('update_operator_approved')
 
           operator.reload
-          expect(operator.operator_id).to eql operator.id.to_s
+
+          expect(operator.operator_id).to eql("#{operator.country.iso}-unknown-#{operator.id}")
           expect(operator.approved).to eql true
         end
       end

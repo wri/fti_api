@@ -29,41 +29,43 @@
 
 FactoryBot.define do
   factory :observation_1, class: 'Observation' do
+    severity
+    country
+    species { build_list(:species, 1) }
+    user { build(:admin) }
+    operator { build(:operator, name: "Operator #{Faker::Lorem.sentence}") }
     observation_type { 'operator' }
     is_active { true }
     evidence { 'Operator observation' }
     publication_date { DateTime.now.to_date }
-    association :country, factory: :country
     lng { 12.2222 }
     lat { 12.3333 }
-
-    after(:create) do |observation|
-      observation.update(severity: FactoryBot.create(:severity),
-                         user: FactoryBot.create(:admin),
-                         operator: FactoryBot.create(:operator, name: "Operator #{Faker::Lorem.sentence}"),
-                         species: [FactoryBot.create(:species)])
-    end
   end
 
   factory :observation_2, class: 'Observation' do
+    severity
+    government
+    country
+    species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
+    user { build(:admin) }
     observation_type { 'government' }
     is_active { true }
     evidence { 'Governance observation' }
-    publication_date { (DateTime.now - 1.days).to_date }
-    association :country, factory: :country
+    publication_date { DateTime.now.yesterday.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
-
-    after(:create) do |observation|
-      observation.update(severity: FactoryBot.create(:severity),
-                         user: FactoryBot.create(:admin),
-                         government: FactoryBot.create(:government),
-                         species: [FactoryBot.create(:species, name: "Species #{Faker::Lorem.sentence}")])
-    end
   end
 
   factory :observation, class: 'Observation' do
+    country
+    subcategory
+    user { build(:admin) }
+    severity { build(:severity, subcategory: subcategory) }
+    operator { build(:operator, country: country) }
+    government { build(:government, country: country) }
     observation_type { %w[operator government].sample }
+    observers { build_list(:observer, 1) }
+    species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     is_active { true }
     validation_status { 'Approved' }
     evidence { 'Operator observation' }
@@ -71,25 +73,8 @@ FactoryBot.define do
     lng { 12.2222 }
     lat { 12.3333 }
 
-    after(:build) do |random_observation|
-      country = random_observation.country
-      unless random_observation.country
-        # Country ISO are limited and can cause problems with uniqueness validation
-        country_attributes = FactoryBot.build(:country).attributes.except('id', 'created_at', 'updated_at')
-        country = Country.find_by(country_attributes) ||
-                  FactoryBot.create(:country, country_attributes)
-        random_observation.country = country
-      end
-
-      random_observation.subcategory ||= FactoryBot.create(:subcategory)
-      random_observation.severity ||= FactoryBot.create(:severity, subcategory: random_observation.subcategory)
-      random_observation.user ||= FactoryBot.create(:admin)
-      random_observation.operator ||= FactoryBot.create(:operator, country: country)
-      random_observation.government ||= FactoryBot.create(:government, country: country)
-      random_observation.observers = [FactoryBot.create(:observer)]
-      unless random_observation.species.any?
-        random_observation.species ||= [FactoryBot.create(:species, name: "Species #{Faker::Lorem.sentence}")]
-      end
+    after(:build) do |observation|
+      observation.observers.each { |observer| observer.translation.name = observer.name  }
     end
   end
 end

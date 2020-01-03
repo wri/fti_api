@@ -67,14 +67,15 @@ class OperatorDocument < ApplicationRecord
     return if operator.present? && operator.marked_for_destruction? && !current
 
     documents_to_update = OperatorDocument.where(
-      fmu_id: self.fmu_id,
-      operator_id: self.operator_id,
-      required_operator_document_id: self.required_operator_document_id,
+      fmu_id: fmu_id,
+      operator_id: operator_id,
+      required_operator_document_id: required_operator_document_id,
       current: true
     ).where.not(
-      id: self.id
+      id: id
     )
-    documents_to_update.find_each {|x| x.update_attributes!(current: false)}
+
+    documents_to_update.find_each { |document| document.update_attributes!(current: false) }
   end
 
   def self.expire_documents
@@ -122,11 +123,14 @@ class OperatorDocument < ApplicationRecord
   end
 
   def set_status
-    if attachment.present? || reason.present?
-      self.status = OperatorDocument.statuses[:doc_pending]
-    else
-      self.status = OperatorDocument.statuses[:doc_not_provided]
-    end
+    status =
+      if attachment.present? || reason.present?
+        :doc_pending
+      else
+        :doc_not_provided
+      end
+
+    self.status = OperatorDocument.statuses[status]
   end
 
   def delete_previous_pending_document

@@ -11,12 +11,8 @@
 
 FactoryBot.define do
   factory :government do
+    country
     government_entity { 'A Government' }
     details { 'Indicator one' }
-
-    after(:create) do |government|
-      country_attributes = FactoryBot.build(:country).attributes.except(%w[id created_at updated_at])
-      government.country ||= Country.find_or_create_by(country_attributes)
-    end
   end
 end

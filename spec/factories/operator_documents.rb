@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :operator_document do
+    user
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
     current { true }
@@ -11,6 +12,7 @@ FactoryBot.define do
                 FactoryBot.create(:country)
 
       random_operator_document.operator ||= FactoryBot.create(:operator, country: country)
+
       unless random_operator_document.required_operator_document
         required_operator_document_group = FactoryBot.create(:required_operator_document_group)
         random_operator_document.required_operator_document ||= FactoryBot.create(
@@ -28,13 +30,9 @@ FactoryBot.define do
     end
 
     factory :operator_document_fmu, class: OperatorDocumentFmu do
+      fmu
+      required_operator_document_fmu
       type { 'OperatorDocumentFmu' }
-
-      after(:build) do |random_operator_document_fmu|
-        random_operator_document_fmu.required_operator_document_fmu ||=
-          FactoryBot.create :required_operator_document_fmu
-        random_operator_document_fmu.fmu ||= FactoryBot.create :fmu
-      end
     end
   end
 end
