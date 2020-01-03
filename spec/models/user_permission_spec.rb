@@ -92,7 +92,7 @@ RSpec.describe UserPermission, type: :model do
   }
 
   let(:user_permissions) {
-    { user: { manage: { id: @user.id }}, observations: { read: {} } }
+    { user: { current: { id: @user.id }, read: { id: @user.id } }, observations: { read: {} } }
   }
 
   it 'is valid with valid attributes' do

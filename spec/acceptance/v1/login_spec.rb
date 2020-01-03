@@ -24,10 +24,6 @@ module V1
     end
 
     describe 'For current user' do
-      before(:each) do
-        login_user(user)
-      end
-
       it 'Get current user' do
         get '/users/current-user', headers: user_headers
         expect(status).to eq(200)
