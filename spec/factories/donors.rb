@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: categories
+# Table name: donors
 #
 #  id            :integer          not null, primary key
 #  created_at    :datetime         not null
