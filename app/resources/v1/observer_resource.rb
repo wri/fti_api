@@ -2,6 +2,7 @@
 
 module V1
   class ObserverResource < JSONAPI::Resource
+    include CachableByLocale
     caching
     attributes :observer_type, :name, :organization, :is_active, :logo, :address,
                :information_name, :information_email, :information_phone, :data_name,
@@ -37,13 +38,6 @@ module V1
 
     def self.records(options = {})
       Observer.active
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end

@@ -2,6 +2,8 @@
 
 module V1
   class GovFileResource < JSONAPI::Resource
+    include CachableByLocale
+    include CachableByCurrentUser
     caching
     attributes :attachment, :gov_document_id
 
@@ -9,17 +11,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-
-    private
-
-    # Caching conditions
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale],
-          owner: context[:current_user]
-      }
     end
   end
 end

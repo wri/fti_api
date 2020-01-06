@@ -2,6 +2,7 @@
 
 module V1
   class CategoryResource < JSONAPI::Resource
+    include CachableByLocale
     caching
 
     attributes :name, :category_type
@@ -11,13 +12,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end
