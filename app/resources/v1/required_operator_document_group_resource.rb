@@ -2,7 +2,7 @@
 
 module V1
   class RequiredOperatorDocumentGroupResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
     attributes :name, :position
 

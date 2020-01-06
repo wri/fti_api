@@ -2,7 +2,7 @@
 
 module V1
   class SawmillResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
     attributes :name, :lat, :lng, :is_active, :geojson
 

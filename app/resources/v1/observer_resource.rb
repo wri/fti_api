@@ -2,7 +2,7 @@
 
 module V1
   class ObserverResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
     attributes :observer_type, :name, :organization, :is_active, :logo, :address,
                :information_name, :information_email, :information_phone, :data_name,

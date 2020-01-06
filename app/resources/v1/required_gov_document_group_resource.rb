@@ -2,7 +2,7 @@
 
 module V1
   class RequiredGovDocumentGroupResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
     attributes :name, :position
 

@@ -2,7 +2,7 @@
 
 module V1
   class SeverityResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
     attributes :level, :details
 

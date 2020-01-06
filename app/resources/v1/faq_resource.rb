@@ -1,6 +1,6 @@
 module V1
   class FaqResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     immutable
     caching
 

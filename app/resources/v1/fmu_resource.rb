@@ -2,7 +2,7 @@
 
 module V1
   class FmuResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
     paginator :none
 

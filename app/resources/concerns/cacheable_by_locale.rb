@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module CachableByCurrentUser
+module CacheableByLocale
   extend ActiveSupport::Concern
 
   module ClassMethods
     def attribute_caching_context(context)
-      (super || {}).merge(owner: context[:current_user].id)
+      (super || {}).merge(locale: context[:locale])
     end
   end
 end

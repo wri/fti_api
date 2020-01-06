@@ -2,7 +2,7 @@
 
 module V1
   class ObservationResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
 
     attributes :observation_type, :publication_date,

@@ -2,8 +2,8 @@
 
 module V1
   class OperatorDocumentResource < JSONAPI::Resource
-    include CachableByLocale
-    include CachableByCurrentUser
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,

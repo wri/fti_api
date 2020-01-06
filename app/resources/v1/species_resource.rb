@@ -2,7 +2,7 @@
 
 module V1
   class SpeciesResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
 
     attributes :common_name, :name, :species_class, :sub_species,
