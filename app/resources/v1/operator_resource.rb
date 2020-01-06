@@ -2,7 +2,7 @@
 
 module V1
   class OperatorResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,

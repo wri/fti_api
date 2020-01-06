@@ -2,8 +2,8 @@
 
 module V1
   class OperatorDocumentAnnexResource < JSONAPI::Resource
-    include CachableByLocale
-    include CachableByCurrentUser
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :operator_document_id, :name,
                :start_date, :expire_date, :status, :attachment,

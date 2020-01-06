@@ -2,7 +2,7 @@
 
 module V1
   class CategoryResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
 
     attributes :name, :category_type

@@ -1,6 +1,6 @@
 module V1
   class TutorialResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     immutable
     caching
 

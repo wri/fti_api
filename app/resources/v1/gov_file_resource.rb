@@ -2,8 +2,8 @@
 
 module V1
   class GovFileResource < JSONAPI::Resource
-    include CachableByLocale
-    include CachableByCurrentUser
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :attachment, :gov_document_id
 

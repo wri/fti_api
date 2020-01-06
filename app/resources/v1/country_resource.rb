@@ -2,7 +2,7 @@
 
 module V1
   class CountryResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
 
     attributes :iso, :region_iso, :country_centroid,

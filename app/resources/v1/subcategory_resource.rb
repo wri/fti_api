@@ -2,7 +2,7 @@
 
 module V1
   class SubcategoryResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
 
     attributes :name, :details, :subcategory_type, :category_id, :location_required

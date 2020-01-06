@@ -2,7 +2,7 @@
 
 module V1
   class GovernmentResource < JSONAPI::Resource
-    include CachableByLocale
+    include CacheableByLocale
     caching
 
     attributes :government_entity, :details, :is_active

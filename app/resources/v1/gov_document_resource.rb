@@ -23,8 +23,8 @@
 
 module V1
   class GovDocumentResource < JSONAPI::Resource
-    include CachableByLocale
-    include CachableByCurrentUser
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :required_gov_document_id,
                :expire_date, :start_date,
