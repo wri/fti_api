@@ -23,6 +23,8 @@
 
 module V1
   class GovDocumentResource < JSONAPI::Resource
+    include CachableByLocale
+    include CachableByCurrentUser
     caching
     attributes :required_gov_document_id,
                :expire_date, :start_date,
@@ -69,14 +71,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Caching conditions
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale],
-          owner: context[:current_user]
-      }
     end
 
     def can_see_document?

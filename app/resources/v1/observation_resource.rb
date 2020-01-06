@@ -2,6 +2,7 @@
 
 module V1
   class ObservationResource < JSONAPI::Resource
+    include CachableByLocale
     caching
 
     attributes :observation_type, :publication_date,
@@ -130,13 +131,6 @@ module V1
       else
         Observation.active
       end
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end

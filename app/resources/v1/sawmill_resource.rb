@@ -2,6 +2,7 @@
 
 module V1
   class SawmillResource < JSONAPI::Resource
+    include CachableByLocale
     caching
     attributes :name, :lat, :lng, :is_active, :geojson
 
@@ -41,13 +42,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end

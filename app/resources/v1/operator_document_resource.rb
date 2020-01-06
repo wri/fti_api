@@ -2,6 +2,8 @@
 
 module V1
   class OperatorDocumentResource < JSONAPI::Resource
+    include CachableByLocale
+    include CachableByCurrentUser
     caching
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
@@ -75,14 +77,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Caching conditions
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale],
-          owner: context[:current_user]
-      }
     end
 
     def document_public?
