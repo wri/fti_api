@@ -64,7 +64,7 @@ class OperatorDocument < ApplicationRecord
   end
 
   def update_current
-    return if operator.present? && operator.marked_for_destruction?
+    return if (operator.present? && operator.marked_for_destruction?) || fmu&.marked_for_destruction?
     if current == true
       documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
                                                    required_operator_document_id: self.required_operator_document_id, current: true)
@@ -106,6 +106,7 @@ class OperatorDocument < ApplicationRecord
 
   def ensure_unity
     return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
+    return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
     if self.current && self.required_operator_document.present?
       od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
                                 required_operator_document_id: self.required_operator_document_id,

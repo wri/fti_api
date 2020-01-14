@@ -28,14 +28,14 @@ class Fmu < ApplicationRecord
   end
 
   belongs_to :country, inverse_of: :fmus
-  has_many :observations, inverse_of: :fmu
+  has_many :observations, inverse_of: :fmu, dependent: :destroy
 
   has_many :fmu_operators, inverse_of: :fmu, dependent: :destroy
   has_many :operators, through: :fmu_operators
   has_one :fmu_operator, ->{ where(current: true) }
   has_one :operator, through: :fmu_operator
 
-  has_many :operator_document_fmus, dependent: :destroy
+  has_many :operator_document_fmus
 
   accepts_nested_attributes_for :operators
 
@@ -79,6 +79,8 @@ class Fmu < ApplicationRecord
   def update_geojson
     temp_geojson = self.geojson
     return if temp_geojson.blank?
+
+    temp_geojson['properties']['id'] = self.id
     temp_geojson['properties']['fmu_name'] = self.name
     temp_geojson['properties']['company_na'] = self.operator.name if self.operator.present?
     temp_geojson['properties']['operator_id'] = self.operator.id if self.operator.present?
@@ -88,6 +90,7 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['certification_vlc'] = self.certification_vlc
     temp_geojson['properties']['certification_vlo'] = self.certification_vlo
     temp_geojson['properties']['certification_tltv'] = self.certification_tltv
+    temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
 
     self.geojson = temp_geojson
   end
