@@ -201,6 +201,7 @@ ActiveAdmin.register Observation do
       end
       links.reduce(:+)
     end
+    column :observation_type, sortable: 'observation_type'
     column :operator, sortable: 'operator_translations.name'
     column :government, sortable: 'government_translations.government_entity' do |o|
       o.government.government_entity if o.government.present?
@@ -213,7 +214,20 @@ ActiveAdmin.register Observation do
       links.reduce(:+)
     end
     column :subcategory, sortable: 'subcategory_translations.name'
+
     column :law
+    column(:law_country, sortable: 'country_translations.name') { |o| o.law&.country }
+    column(:subcategory, sortable: 'subcategory_translations.name') { |o| o.law&.subcategory }
+    column('Illegality as written by law', sortable: true) { |o| o.law&.written_infraction }
+    column('Legal reference: Illegality', sortable: true) { |o| o.law&.infraction }
+    column('Legal reference: Penalties', sortable: true) { |o| o.law&.sanctions }
+    column('Minimum fine', sortable: true) { |o| o.law&.min_fine }
+    column('Maximum fine', sortable: true) { |o| o.law&.max_fine }
+    column(:currency) { |o| o.law&.currency }
+    column(:penal_servitude, sortable: true) { |o| o.law&.penal_servitude }
+    column(:other_penalties, sortable: true) { |o| o.law&.other_penalties }
+    column('Indicator APV', sortable: true) { |o| o.law&.apv }
+
     column :severity, sortable: 'severities.level' do |o|
       o&.severity&.level
     end
@@ -222,6 +236,11 @@ ActiveAdmin.register Observation do
     column :details
     column :evidence
     column :concern_opinion
+    column :pv
+    column :lat
+    column :lng
+    column :is_physical_place
+    column :litigation_status
     column :report, sortable: 'observation_reports.title' do |o|
       link_to o.observation_report.title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
