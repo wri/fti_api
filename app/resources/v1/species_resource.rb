@@ -2,6 +2,7 @@
 
 module V1
   class SpeciesResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
 
     attributes :common_name, :name, :species_class, :sub_species,
@@ -12,13 +13,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end
