@@ -1,5 +1,6 @@
 module V1
   class ToolResource < JSONAPI::Resource
+    include CacheableByLocale
     immutable
     caching
 
@@ -11,13 +12,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end

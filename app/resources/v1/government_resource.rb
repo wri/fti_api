@@ -2,6 +2,7 @@
 
 module V1
   class GovernmentResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
 
     attributes :government_entity, :details, :is_active
@@ -25,13 +26,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end
