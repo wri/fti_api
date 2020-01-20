@@ -4,7 +4,12 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
   def build(namespace, menu)
     div class: 'c-nav' do
       div class: 'logo' do
-        image_tag(image_url("logo.svg"))
+        div do
+          image_tag(image_url("logo.svg"))
+        end
+        div class: 'env' do
+          Rails.env.humanize
+        end
       end
       div class: 'list' do
         # Add one item without son.
