@@ -235,17 +235,22 @@ ActiveAdmin.register Observation do
       o&.severity&.level
     end
     column :publication_date, sortable: true
-    column :actions_taken
+    column :actions_taken do |o|
+      o.actions_taken[0..100] + (o.actions_taken.length >= 100 ? '...' : '') if o.actions_taken
+    end
     column :details
     column :evidence
-    column :concern_opinion
+    column :concern_opinion do |o|
+      o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
+    end
     column :pv
     column :lat
     column :lng
     column :is_physical_place
     column :litigation_status
     column :report, sortable: 'observation_reports.title' do |o|
-      link_to o.observation_report.title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
+      title = o.observation_report.title[0..100] + (o.observation_report.title.length >= 100 ? '...' : '') if o.observation_report&.title
+      link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
     column :user, sortable: 'users.name'
     column :modified_user
