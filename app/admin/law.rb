@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Law do
-  # menu parent: 'Settings', priority: 4
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :new, :create, :show, :edit, :index, :update, :destroy

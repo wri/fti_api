@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Country do
-  #menu parent: 'Settings', priority: 6
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :show, :index, :edit, :update

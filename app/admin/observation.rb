@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Observation do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause
