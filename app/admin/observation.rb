@@ -87,7 +87,7 @@ ActiveAdmin.register Observation do
 
   batch_action :under_revision, confirm: 'Are you sure you want to put all this observations under revision?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update_attributes(validation_status: Observation.validation_statuses['Under Revision'])
+      observation.update_attributes(validation_status: Observation.validation_statuses['Under revision'])
     end
     redirect_to collection_path, notice: 'Documents put under revision!'
   end
