@@ -77,6 +77,10 @@ form input.deploy-button {
 }
 
 body.active_admin {
+  #hidden_active_admin_goto_page {
+    width: 100%;
+    box-sizing: border-box;
+  }
 
   #sidebar {
     .filter_numeric_range {

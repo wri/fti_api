@@ -5,6 +5,7 @@
 #= require rod
 #= require index-filters
 #= require active_admin_sidebar
+#= require pagination
 
 #= require activeadmin/quill_editor/quill
 #= require activeadmin/quill_editor_input
