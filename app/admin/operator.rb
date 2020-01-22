@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Operator, as: 'Producer' do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause

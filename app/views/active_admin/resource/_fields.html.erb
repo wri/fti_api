@@ -1,0 +1,8 @@
+<div class="observation-attributes">
+<% attributes.each do |column| %>
+    <div class="observations-checkbox" id="attribute-<%= column %>">
+      <input type="checkbox" class="observation-checkbox" id="<%= column %>" checked><%=column.humanize %>
+    </div>
+<% end %>
+</div>
+

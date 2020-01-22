@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Severity do
-  # menu parent: 'Settings', priority: 3
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :show, :edit, :index, :update, :new, :create

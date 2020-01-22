@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Observation do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause
+  config.per_page = [10, 20, 40, 80, 160, 360]
 
   scope_to do
     Class.new do
@@ -84,7 +88,7 @@ ActiveAdmin.register Observation do
 
   batch_action :under_revision, confirm: 'Are you sure you want to put all this observations under revision?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update_attributes(validation_status: Observation.validation_statuses['Under Revision'])
+      observation.update_attributes(validation_status: Observation.validation_statuses['Under revision'])
     end
     redirect_to collection_path, notice: 'Documents put under revision!'
   end
@@ -105,6 +109,7 @@ ActiveAdmin.register Observation do
   scope :pending
   scope :created
 
+  filter :id, as: :numeric_range
   filter :validation_status, as: :select, collection:
       Observation.validation_statuses.sort
   filter :country, as: :select,
@@ -232,17 +237,22 @@ ActiveAdmin.register Observation do
       o&.severity&.level
     end
     column :publication_date, sortable: true
-    column :actions_taken
+    column :actions_taken do |o|
+      o.actions_taken[0..100] + (o.actions_taken.length >= 100 ? '...' : '') if o.actions_taken
+    end
     column :details
     column :evidence
-    column :concern_opinion
+    column :concern_opinion do |o|
+      o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
+    end
     column :pv
     column :lat
     column :lng
     column :is_physical_place
     column :litigation_status
     column :report, sortable: 'observation_reports.title' do |o|
-      link_to o.observation_report.title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
+      title = o.observation_report.title[0..100] + (o.observation_report.title.length >= 100 ? '...' : '') if o.observation_report&.title
+      link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
     column :user, sortable: 'users.name'
     column :modified_user
@@ -254,6 +264,16 @@ ActiveAdmin.register Observation do
       a 'Review',  href: start_review_admin_observation_path(observation), 'data-method': :put if ['Ready for revision', 'Approved', 'Rejected'].include?(observation.validation_status)
     end
     actions
+
+    panel 'Visible columns' do
+      render partial: "fields",
+             locals: { attributes: %w[active status country fmu location_information observers observation_type
+                                      operator government relevant_operators subcategory law law_country
+                                      illegality_as_written_by_law  legal_reference_illegality legal_reference_penalties
+                                      minimum_fine maximum_fine currency penal_servitude other_penalties indicator_apv severity
+                                      publication_date actions_taken details evidence concern_opinion pv lat lng is_physical_place
+                                      litigation_status report user modified_user created_at updated_at] }
+    end
   end
 
   form do |f|
@@ -263,6 +283,9 @@ ActiveAdmin.register Observation do
     government = object.government_id.present? ? true : false
 
     f.semantic_errors *f.object.errors.keys
+    f.inputs 'Info' do
+      f.input :id, input_html: { disabled: true }
+    end
     f.inputs 'Status' do
       f.input :is_active
       f.input :validation_status
