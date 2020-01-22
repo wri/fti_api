@@ -102,4 +102,14 @@ body.active_admin {
       }
     }
   }
+
+  .observations-checkbox {
+    display: inline-block;
+    margin-right: 15px;
+    input {
+      display: inline-block;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
 }

@@ -264,6 +264,16 @@ ActiveAdmin.register Observation do
       a 'Review',  href: start_review_admin_observation_path(observation), 'data-method': :put if ['Ready for revision', 'Approved', 'Rejected'].include?(observation.validation_status)
     end
     actions
+
+    panel 'Visible columns' do
+      render partial: "fields",
+             locals: { attributes: %w[active status country fmu location_information observers observation_type
+                                      operator government relevant_operators subcategory law law_country
+                                      illegality_as_written_by_law  legal_reference_illegality legal_reference_penalties
+                                      minimum_fine maximum_fine currency penal_servitude other_penalties indicator_apv severity
+                                      publication_date actions_taken details evidence concern_opinion pv lat lng is_physical_place
+                                      litigation_status report user modified_user created_at updated_at] }
+    end
   end
 
   form do |f|
