@@ -108,6 +108,7 @@ ActiveAdmin.register Observation do
   scope :pending
   scope :created
 
+  filter :id, as: :numeric_range
   filter :validation_status, as: :select, collection:
       Observation.validation_statuses.sort
   filter :country, as: :select,

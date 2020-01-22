@@ -75,3 +75,27 @@ form input.deploy-button {
 .index_as_table {
   font-size: 12px !important;
 }
+
+body.active_admin {
+
+  #sidebar {
+    .filter_numeric_range {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      label {
+        width: 100%;
+      }
+
+      input {
+        width: 36%;
+      }
+      .separator {
+        display: inline-block;
+        text-align: center;
+        width: 12px;
+      }
+    }
+  }
+}
