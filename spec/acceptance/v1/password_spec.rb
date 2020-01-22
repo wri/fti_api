@@ -10,7 +10,7 @@ module V1
         it 'Request password reset token by user' do
           post('/reset-password',
                params: { password: { email: user.email }},
-               headers: webuser_headers)
+               headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq({ messages: [{ status: 200, title: 'Reset password email sent!' }] })
           expect(status).to eq(200)
@@ -21,7 +21,7 @@ module V1
         it 'Returns error object when the user email is not valid' do
           post('/reset-password',
                params: { password: { email: 'invalid@gmai.com' }},
-               headers: webuser_headers)
+               headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq(default_status_errors('422_undefined_user'))
           expect(status).to eq(422)
@@ -30,7 +30,7 @@ module V1
         it 'Returns error object when the user email is not valid' do
           post('/reset-password',
                params: { password: { any_attribute: '' }},
-               headers: webuser_headers)
+               headers: non_api_webuser_headers)
 
           expect(status).to eq(422)
           expect(parsed_body).to eq(default_status_errors('422_undefined_user'))
@@ -53,7 +53,7 @@ module V1
                  password: 'testpassword',
                  password_confirmation: 'testpassword'
                }},
-               headers: webuser_headers)
+               headers: non_api_webuser_headers)
 
           expect(parsed_body).to   eq({ messages: [{ status: 200, title: 'Password successfully updated!' }] })
           expect(status).to eq(200)
@@ -78,7 +78,7 @@ module V1
                  password: 'testpassword',
                  password_confirmation: 'testpassword'
                  }},
-                 headers: webuser_headers)
+                 headers: non_api_webuser_headers)
 
           expect(parsed_body).to   eq(default_status_errors('422_undefined_user'))
           expect(status).to eq(422)
@@ -87,7 +87,7 @@ module V1
         it 'Returns error object when the user token is not present' do
           post('/users/password',
                params: { password: { password: 'testpassword', password_confirmation: 'testpassword' }},
-               headers: webuser_headers)
+               headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq(default_status_errors('422_undefined_user'))
           expect(status).to eq(422)
@@ -96,7 +96,7 @@ module V1
         it 'Returns error object when the user password and confirmation not valid' do
           post('/users/password',
                params: { password: { reset_password_token: @token_2, password: 'testpassword', password_confirmation: 'testpass' }},
-               headers: webuser_headers)
+               headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq(error_pw)
           expect(status).to eq(422)
@@ -105,7 +105,7 @@ module V1
         it 'Returns error object when the user token expired' do
           post('/users/password',
                params: { password: { reset_password_token: @token, password: 'testpassword', password_confirmation: 'testpassword' }},
-               headers: webuser_headers)
+               headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq(error_expired)
           expect(status).to eq(422)

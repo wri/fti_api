@@ -5,35 +5,26 @@ module V1
     it_behaves_like "jsonapi-resources", Operator, {
       show: {},
       create: {
-        success_role: :admin,
+        success_roles: %i[admin user],
         valid_params: { name: 'Operator one', 'operator-type': 'Other' },
         invalid_params: { name: '', 'operator-type': 'Other',  },
         error_attributes: [422, 100, { name: ["can't be blank"] }]
       },
       edit: {
-        success_role: :admin,
-        failure_role: :user,
+        success_roles: %i[admin],
+        failure_roles: %i[user],
         valid_params: { name: 'Operator one', 'operator-type': 'Other' },
         invalid_params: { name: '', 'operator-type': 'Other',  },
         error_attributes: [422, 100, { name: ["can't be blank"] }]
       },
       delete: {
-        success_role: :admin,
-        failure_role: :user
+        success_roles: %i[admin],
+        failure_roles: %i[user]
       },
       pagination: {},
       sort: {
         attribute: :name,
         sequence: -> (i) { "#{i} operator" }
-      }
-    }
-
-    it_behaves_like "jsonapi-resources", Operator, {
-      create: {
-        success_role: :user,
-        valid_params: { name: 'Operator one', 'operator-type': 'Other' },
-        invalid_params: { name: '', 'operator-type': 'Other',  },
-        error_attributes: [422, 100, { name: ["can't be blank"] }]
       }
     }
 
@@ -45,7 +36,7 @@ module V1
       let(:operator) { create(:operator) }
 
       describe 'For admin user' do
-        it 'Upload logo and returns success object when the operator was seccessfully updated by admin' do
+        it 'Upload logo and returns success object when the operator was successfully updated by admin' do
           patch("/operators/#{operator.id}",
                 params: jsonapi_params('operators', operator.id, { logo: photo_data }),
                 headers: admin_headers)

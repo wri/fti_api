@@ -4,7 +4,7 @@ module V1
   describe 'Login and authenticate user', type: :request do
     it 'Returns error object when the user cannot login' do
       post '/login', params: { auth: { email: user.email, password: 'wrong password' }},
-                     headers: webuser_headers
+                     headers: non_api_webuser_headers
 
       expect(status).to eq(401)
       expect(parsed_body).to eq({ errors: [{ status: '401', title: 'Incorrect email or password' }]})
@@ -12,7 +12,7 @@ module V1
 
     it 'Valid login' do
       post '/login', params: { auth: { email: user.email, password: 'password' }},
-                     headers: webuser_headers
+                     headers: non_api_webuser_headers
 
       expect(status).to eq(200)
       expect(parsed_body).to eq({
@@ -41,7 +41,7 @@ module V1
       end
 
       it 'Request without valid authorization for current user' do
-        get '/users/current-user', headers: webuser_headers
+        get '/users/current-user', headers: non_api_webuser_headers
         expect(parsed_body).to eq(default_status_errors('401_unautorized'))
       end
     end

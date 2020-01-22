@@ -41,7 +41,17 @@ module AcceptanceHelper
   end
 
   def webuser_headers
-    @webuser_headers ||= { "HTTP_OTP_API_KEY" => "Bearer #{webuser_token}" }
+    @webuser_headers ||= {
+      'HTTP_OTP_API_KEY' => "Bearer #{webuser_token}",
+      'Content-Type' => 'application/vnd.api+json',
+      'HTTP_ACCEPT' => 'application/vnd.api+json'
+    }
+  end
+
+  def non_api_webuser_headers
+    @non_api_webuser_headers ||= {
+      'HTTP_OTP_API_KEY' => "Bearer #{webuser_token}",
+    }
   end
 
   def admin

@@ -124,6 +124,7 @@ class Operator < ApplicationRecord
       # For the total number of documents, we take into account only the documents which
       # are required (current and not deleted) and whose required_operator_document
       # is also not deleted
+
       if approved
         percentage_approved
       else
@@ -222,10 +223,9 @@ class Operator < ApplicationRecord
 
 
   def rebuild_documents
-    # TODO: Refactor, use the same logic that appears on create_documents
-    return if fa_id.blank? || country_id.blank?
+    return if fa_id.blank?
 
-    country = RequiredOperatorDocument.where(country_id: country_id).exists? && country_id
+    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
 
     # Country Documents
     RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
@@ -259,9 +259,9 @@ class Operator < ApplicationRecord
   end
 
   def create_documents
-    return if fa_id.blank? || country_id.blank?
+    return if fa_id.blank?
 
-    country = RequiredOperatorDocument.where(country_id: country_id).exists? && country_id
+    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
 
     if operator_document_countries.none?
       RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|

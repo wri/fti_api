@@ -4,11 +4,11 @@ module V1
   describe 'Users', type: :request do
     it_behaves_like "jsonapi-resources", User, {
       show: {
-        success_role: :admin
+        success_roles: %i[admin]
       },
       create: {
-        success_role: :admin,
-        failure_role: :user,
+        success_roles: %i[admin],
+        failure_roles: %i[user],
         excluded_params: %i[password password-confirmation permissions-request],
         valid_params: {
           email: 'test@gmail.com',
@@ -26,8 +26,8 @@ module V1
         }]
       },
       edit: {
-        success_role: :admin,
-        failure_role: :user,
+        success_roles: %i[admin],
+        failure_roles: %i[user],
         excluded_params: %i[password password-confirmation permissions-request],
         valid_params: {
           email: 'test@gmail.com',
@@ -41,20 +41,20 @@ module V1
         error_attributes: [422, 100, { 'name': ["can't be blank"] }]
       },
       delete: {
-        success_role: :admin,
-        failure_role: :user
+        success_roles: %i[admin],
+        failure_roles: %i[user]
       },
       pagination: {
-        success_role: :admin
+        success_roles: %i[admin]
       },
       sort: {
-        success_role: :admin,
+        success_roles: %i[admin],
         attribute: :name,
         sequence: -> (i) { "#{i} observer" },
         expected_count: 8,
         desc: "Web user"
       }
-    }    
+    }
 
     context 'Update users' do
       describe 'Update user by admin' do

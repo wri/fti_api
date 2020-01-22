@@ -25,8 +25,8 @@ module V1
     end
 
     describe 'Registration' do
-      it 'Returns error object when the user cannot be registrated' do
-        post '/register', params: { user: invalid_user_params }, headers: webuser_headers
+      it 'Returns error object when the user cannot be registered' do
+        post '/register', params: { user: invalid_user_params }, headers: non_api_webuser_headers
 
         expect(parsed_body).to eq(error)
         expect(status).to eq(422)
@@ -35,7 +35,7 @@ module V1
       it 'Returns error object when the user password is to short' do
         post('/register',
              params: { user: valid_user_params.merge(password: '121212', password_confirmation: '121212') },
-             headers: webuser_headers)
+             headers: non_api_webuser_headers)
 
         expect(parsed_body).to eq(error_pw)
         expect(status).to eq(422)
@@ -43,7 +43,7 @@ module V1
 
       it 'Register valid user' do
         post '/register', params: { user: valid_user_params },
-                          headers: webuser_headers
+                          headers: non_api_webuser_headers
 
         expect(parsed_body).to eq({ messages: [{ status: 201, title: 'User successfully registered!' }] })
         expect(status).to eq(201)
@@ -52,7 +52,7 @@ module V1
       it 'Register valid user with ngo role request' do
         post('/register',
              params: { user: valid_user_params.merge(permissions_request: 'ngo', observer_id: create(:observer).id) },
-             headers: webuser_headers)
+             headers: non_api_webuser_headers)
 
         expect(parsed_body).to eq({ messages: [{ status: 201, title: 'User successfully registered!' }] })
         expect(status).to eq(201)
@@ -62,7 +62,7 @@ module V1
       it 'Returns error object when the user permissions_request invalid' do
         post('/register',
              params: { user: valid_user_params.merge(permissions_request: "invalid permissions_request") },
-             headers: webuser_headers)
+             headers: non_api_webuser_headers)
 
         expect(parsed_body).to eq({
           messages: [{

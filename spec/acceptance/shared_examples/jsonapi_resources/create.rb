@@ -4,43 +4,48 @@ RSpec.shared_examples 'jsonapi-resources__create' do |options|
 
   context "Create" do
     let(:route) { "/#{@route_key}" }
-    let(:success_headers) { options[:success_role] ? authorize_headers(create(options[:success_role]).id) : webuser_headers }
-    let(:failure_headers) { options[:failure_role] ? authorize_headers(create(options[:failure_role]).id) : webuser_headers }
 
-    describe 'For admin user' do
-      it "Returns error object when cannot be created by admin" do
-        post(route,
-             params: jsonapi_params(@collection, nil, options[:invalid_params]),
-             headers: success_headers)
+    (options[:success_roles] || [:webuser]).each do |role|
+      describe "For user with #{role} role" do
+        let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
-        expect(parsed_body).to eq(jsonapi_errors(*options[:error_attributes]))
-        expect(status).to eq(422)
-      end
+        it "Returns error object when cannot be created by admin" do
+          post(route,
+               params: jsonapi_params(@collection, nil, options[:invalid_params]),
+               headers: headers)
 
-      it "Returns success object when was seccessfully created by admin" do
-        post(route,
-             params: jsonapi_params(@collection, nil, options[:valid_params]),
-             headers: success_headers)
+          expect(parsed_body).to eq(jsonapi_errors(*options[:error_attributes]))
+          expect(status).to eq(422)
+        end
 
-        expect(parsed_data[:id]).not_to be_empty
-        options[:valid_params]
-          .except(*options[:excluded_params])
-          .each { |name, value| expect(parsed_attributes[name]).to eq(value) }
-        expect(status).to eq(201)
+        it "Returns success object when was successfully created by admin" do
+          post(route,
+               params: jsonapi_params(@collection, nil, options[:valid_params]),
+               headers: headers)
+
+          expect(parsed_data[:id]).not_to be_empty
+          options[:valid_params]
+            .except(*options[:excluded_params])
+            .each { |name, value| expect(parsed_attributes[name]).to eq(value) }
+          expect(status).to eq(201)
+        end
       end
     end
 
-    if options[:failure_headers]
-      describe 'For not admin user' do
+    (options[:failure_roles] || [:webuser]).each do |role|
+      describe "For user with #{role} role" do
+        let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
+
         it "Do not allows to create by not admin user" do
           post(route,
                params: jsonapi_params(@collection, nil, options[:valid_params]),
-               headers: failure_headers)
+               headers: headers)
 
           expect(parsed_body).to eq(default_status_errors(401))
           expect(status).to eq(401)
         end
       end
     end
+
   end
 end
