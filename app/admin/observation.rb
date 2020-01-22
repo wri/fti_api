@@ -7,6 +7,7 @@ ActiveAdmin.register Observation do
   menu false
 
   config.order_clause
+  config.per_page = [10, 20, 40, 80, 160, 360]
 
   scope_to do
     Class.new do
