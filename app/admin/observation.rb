@@ -272,6 +272,9 @@ ActiveAdmin.register Observation do
     government = object.government_id.present? ? true : false
 
     f.semantic_errors *f.object.errors.keys
+    f.inputs 'Info' do
+      f.input :id, input_html: { disabled: true }
+    end
     f.inputs 'Status' do
       f.input :is_active
       f.input :validation_status
