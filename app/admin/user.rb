@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
+  extend BackRedirectable
+  back_redirect
+
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,
                 :institution, :name, :nickname, :web_url, :is_active,

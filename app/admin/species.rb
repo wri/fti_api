@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Species do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :create, :show, :edit, :index

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredOperatorDocument do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   active_admin_paranoia

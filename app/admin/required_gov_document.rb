@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredGovDocument do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   active_admin_paranoia

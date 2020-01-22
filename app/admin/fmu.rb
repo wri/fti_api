@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Fmu do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :show, :edit, :index, :update
