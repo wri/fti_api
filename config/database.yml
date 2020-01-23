@@ -93,3 +93,9 @@ production:
   database: fti_api_production
   username: <%= ENV['SC_DATABASE_USER'] %>
   password: <%= ENV['SC_DATABASE_PASSWORD'] %>
+
+production_secondary:
+  <<: *default
+  database: fti_api_production_secondary
+  username: <%= ENV['SC_DATABASE_USER'] %>
+  password: <%= ENV['SC_DATABASE_PASSWORD'] %>

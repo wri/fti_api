@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register ObservationReport do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :show, :index, :update, :edit

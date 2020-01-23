@@ -103,5 +103,9 @@ FactoryBot.define do
     after(:create) do |user|
       user.regenerate_api_key
     end
+
+    after(:build) do |random_admin|
+      random_admin.user_permission = UserPermission.new(user_role: 0)
+    end
   end
 end
