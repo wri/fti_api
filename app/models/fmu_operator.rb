@@ -96,7 +96,7 @@ WHERE id = #{x.fmu_id};"
   # Updates the list of documents for this FMU
   def update_documents_list
     current_operator = self.fmu.operator.id rescue nil
-    return if self.fmu&.operator&.fa_id.blank?
+    return if self.operator&.fa_id.blank?
 
     OperatorDocumentFmu.transaction do
       to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator)
