@@ -18,6 +18,7 @@
 
 module V1
   class RequiredGovDocumentResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     immutable
     attributes :name, :valid_period, :document_type,
