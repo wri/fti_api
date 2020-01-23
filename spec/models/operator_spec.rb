@@ -378,7 +378,7 @@ RSpec.describe Operator, type: :model do
         end
       end
 
-      it 'update score of the operators ordering by score and spliting then into 3 groups' do
+      it 'update score of the operators ordering by score and splitting then into 3 groups' do
         Operator.calculate_scores
 
         third_operators =

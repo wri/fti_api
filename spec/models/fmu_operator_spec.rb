@@ -17,7 +17,7 @@ RSpec.describe FmuOperator, type: :model do
 
     describe '#start_date_is_earlier' do
       context 'when end_date is present' do
-        context 'when start_date is greather or equal to the end_date' do
+        context 'when start_date is greater or equal to the end_date' do
           it 'add an error on start_date' do
             fmu_operator = build(:fmu_operator,
               start_date: Date.today,
@@ -49,7 +49,7 @@ RSpec.describe FmuOperator, type: :model do
       end
     end
 
-    describe '#non_clliding_dates' do
+    describe '#non_colliding_dates' do
       context 'when two operators dont have end_date' do
         it 'add an error on end_date' do
           fmu = create(:fmu)
@@ -168,7 +168,7 @@ RSpec.describe FmuOperator, type: :model do
           end_date: Date.tomorrow)
       end
 
-      it 'deactive old fmu_operators and activate current ones with new properties' do
+      it 'deactivate old fmu_operators and activate current ones with new properties' do
         FmuOperator.calculate_current
 
         @deactivate_fmu_operator.reload
