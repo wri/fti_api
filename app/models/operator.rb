@@ -259,7 +259,7 @@ class Operator < ApplicationRecord
   end
 
   def create_documents
-    return if fa_id.blank?
+    return if fa_id.blank? || country_id.blank?
 
     country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
 
