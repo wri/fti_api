@@ -5,6 +5,8 @@ module CacheableByCurrentUser
 
   module ClassMethods
     def attribute_caching_context(context)
+      return super unless context[:current_user]
+
       (super || {}).merge(owner: context[:current_user].id)
     end
   end
