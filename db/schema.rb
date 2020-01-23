@@ -275,18 +275,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
   end
 
-  create_table "layer", primary_key: ["topology_id", "layer_id"], force: :cascade do |t|
-    t.integer "topology_id",                null: false
-    t.integer "layer_id",                   null: false
-    t.string  "schema_name",                null: false
-    t.string  "table_name",                 null: false
-    t.string  "feature_column",             null: false
-    t.integer "feature_type",               null: false
-    t.integer "level",          default: 0, null: false
-    t.integer "child_id"
-    t.index ["schema_name", "table_name", "feature_column"], name: "layer_schema_name_table_name_feature_column_key", unique: true, using: :btree
-  end
-
   create_table "observation_documents", force: :cascade do |t|
     t.string   "name"
     t.string   "attachment"
@@ -714,14 +702,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "topology", force: :cascade do |t|
-    t.string  "name",                      null: false
-    t.integer "srid",                      null: false
-    t.float   "precision",                 null: false
-    t.boolean "hasz",      default: false, null: false
-    t.index ["name"], name: "topology_name_key", unique: true, using: :btree
-  end
-
   create_table "tutorial_translations", force: :cascade do |t|
     t.integer  "tutorial_id", null: false
     t.string   "locale",      null: false
@@ -746,27 +726,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.string   "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "us_gaz", force: :cascade do |t|
-    t.integer "seq"
-    t.text    "word"
-    t.text    "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "us_lex", force: :cascade do |t|
-    t.integer "seq"
-    t.text    "word"
-    t.text    "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "us_rules", force: :cascade do |t|
-    t.text    "rule"
-    t.boolean "is_custom", default: true, null: false
   end
 
   create_table "user_permissions", force: :cascade do |t|
@@ -813,7 +772,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
   add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
-  add_foreign_key "layer", "topology", name: "layer_topology_id_fkey"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
   add_foreign_key "observation_operators", "observations"

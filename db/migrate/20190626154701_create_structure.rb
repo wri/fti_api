@@ -1,5 +1,7 @@
 class CreateStructure < ActiveRecord::Migration[5.0]
   def change
+    return if table_exists?("active_admin_comments") # To make sure it's not executed
+
     # These are extensions that must be enabled in order to support this database
     enable_extension "plpgsql"
     enable_extension "address_standardizer"
@@ -10,7 +12,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
     enable_extension "postgis_tiger_geocoder"
     enable_extension "postgis_topology"
 
-    create_table "active_admin_comments", force: :cascade do |t|
+    create_table "active_admin_comments", if_not_exists: true do |t|
       t.string   "namespace"
       t.text     "body"
       t.string   "resource_type"
@@ -24,7 +26,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
     end
 
-    create_table "api_keys", force: :cascade do |t|
+    create_table "api_keys", if_not_exists: true do |t|
       t.string   "access_token"
       t.datetime "expires_at"
       t.integer  "user_id"
@@ -35,13 +37,13 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["user_id"], name: "index_api_keys_on_user_id", using: :btree
     end
 
-    create_table "categories", force: :cascade do |t|
+    create_table "categories", if_not_exists: true do |t|
       t.datetime "created_at",    null: false
       t.datetime "updated_at",    null: false
       t.integer  "category_type"
     end
 
-    create_table "category_translations", force: :cascade do |t|
+    create_table "category_translations", if_not_exists: true do |t|
       t.integer  "category_id", null: false
       t.string   "locale",      null: false
       t.datetime "created_at",  null: false
@@ -51,7 +53,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["locale"], name: "index_category_translations_on_locale", using: :btree
     end
 
-    create_table "comments", force: :cascade do |t|
+    create_table "comments", if_not_exists: true do |t|
       t.integer  "commentable_id"
       t.string   "commentable_type"
       t.text     "body"
@@ -62,14 +64,14 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
     end
 
-    create_table "contacts", force: :cascade do |t|
+    create_table "contacts", if_not_exists: true do |t|
       t.string   "name"
       t.string   "email"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
-    create_table "contributor_translations", force: :cascade do |t|
+    create_table "contributor_translations", if_not_exists: true do |t|
       t.integer  "contributor_id", null: false
       t.string   "locale",         null: false
       t.datetime "created_at",     null: false
@@ -80,7 +82,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["locale"], name: "index_contributor_translations_on_locale", using: :btree
     end
 
-    create_table "contributors", force: :cascade do |t|
+    create_table "contributors", if_not_exists: true do |t|
       t.string   "website"
       t.string   "logo"
       t.integer  "priority"
@@ -91,7 +93,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["type"], name: "index_contributors_on_type", using: :btree
     end
 
-    create_table "countries", force: :cascade do |t|
+    create_table "countries", if_not_exists: true do |t|
       t.string   "iso"
       t.string   "region_iso"
       t.jsonb    "country_centroid"
@@ -103,7 +105,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["iso"], name: "index_countries_on_iso", using: :btree
     end
 
-    create_table "countries_observers", id: false, force: :cascade do |t|
+    create_table "countries_observers", id: false do |t|
       t.integer "country_id",  null: false
       t.integer "observer_id", null: false
       t.index ["country_id", "observer_id"], name: "index_countries_observers_on_country_id_and_observer_id", using: :btree
@@ -111,7 +113,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["observer_id", "country_id"], name: "index_countries_observers_on_observer_id_and_country_id", using: :btree
     end
 
-    create_table "country_translations", force: :cascade do |t|
+    create_table "country_translations", if_not_exists: true do |t|
       t.integer  "country_id",  null: false
       t.string   "locale",      null: false
       t.datetime "created_at",  null: false
@@ -122,7 +124,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
     end
 
-    create_table "faq_translations", force: :cascade do |t|
+    create_table "faq_translations", if_not_exists: true do |t|
       t.integer  "faq_id",     null: false
       t.string   "locale",     null: false
       t.datetime "created_at", null: false
@@ -133,14 +135,14 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["locale"], name: "index_faq_translations_on_locale", using: :btree
     end
 
-    create_table "faqs", force: :cascade do |t|
+    create_table "faqs", if_not_exists: true do |t|
       t.integer  "position",   null: false
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
       t.string   "image"
     end
 
-    create_table "fmu_operators", force: :cascade do |t|
+    create_table "fmu_operators", if_not_exists: true do |t|
       t.integer  "fmu_id",      null: false
       t.integer  "operator_id", null: false
       t.boolean  "current",     null: false
@@ -152,7 +154,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id", using: :btree
     end
 
-    create_table "fmu_translations", force: :cascade do |t|
+    create_table "fmu_translations", if_not_exists: true do |t|
       t.integer  "fmu_id",     null: false
       t.string   "locale",     null: false
       t.datetime "created_at", null: false
@@ -162,7 +164,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["locale"], name: "index_fmu_translations_on_locale", using: :btree
     end
 
-    create_table "fmus", force: :cascade do |t|
+    create_table "fmus", if_not_exists: true do |t|
       t.integer  "country_id"
       t.jsonb    "geojson"
       t.datetime "created_at",                         null: false
@@ -176,7 +178,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
     end
 
-    create_table "government_translations", force: :cascade do |t|
+    create_table "government_translations", if_not_exists: true do |t|
       t.integer  "government_id",     null: false
       t.string   "locale",            null: false
       t.datetime "created_at",        null: false
@@ -187,7 +189,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["locale"], name: "index_government_translations_on_locale", using: :btree
     end
 
-    create_table "governments", force: :cascade do |t|
+    create_table "governments", if_not_exists: true do |t|
       t.integer  "country_id"
       t.datetime "created_at",                null: false
       t.datetime "updated_at",                null: false
@@ -195,7 +197,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["country_id"], name: "index_governments_on_country_id", using: :btree
     end
 
-    create_table "laws", force: :cascade do |t|
+    create_table "laws", if_not_exists: true do |t|
       t.text     "written_infraction"
       t.text     "infraction"
       t.text     "sanctions"
@@ -213,7 +215,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
     end
 
-    create_table "observation_documents", force: :cascade do |t|
+    create_table "observation_documents", if_not_exists: true do |t|
       t.string   "name"
       t.string   "attachment"
       t.datetime "created_at",     null: false
@@ -227,7 +229,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["user_id"], name: "index_observation_documents_on_user_id", using: :btree
     end
 
-    create_table "observation_operators", force: :cascade do |t|
+    create_table "observation_operators", if_not_exists: true do |t|
       t.integer  "observation_id"
       t.integer  "operator_id"
       t.datetime "created_at",     null: false
@@ -236,7 +238,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["operator_id"], name: "index_observation_operators_on_operator_id", using: :btree
     end
 
-    create_table "observation_report_observers", force: :cascade do |t|
+    create_table "observation_report_observers", if_not_exists: true do |t|
       t.integer  "observation_report_id"
       t.integer  "observer_id"
       t.datetime "created_at",            null: false
@@ -245,7 +247,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["observer_id", "observation_report_id"], name: "index_observer_id_and_obs_rep_id", using: :btree
     end
 
-    create_table "observation_reports", force: :cascade do |t|
+    create_table "observation_reports", if_not_exists: true do |t|
       t.string   "title"
       t.datetime "publication_date"
       t.string   "attachment"
@@ -258,7 +260,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["user_id"], name: "index_observation_reports_on_user_id", using: :btree
     end
 
-    create_table "observation_translations", force: :cascade do |t|
+    create_table "observation_translations", if_not_exists: true do |t|
       t.integer  "observation_id",    null: false
       t.string   "locale",            null: false
       t.datetime "created_at",        null: false
@@ -271,7 +273,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["observation_id"], name: "index_observation_translations_on_observation_id", using: :btree
     end
 
-    create_table "observations", force: :cascade do |t|
+    create_table "observations", if_not_exists: true do |t|
       t.integer  "severity_id"
       t.integer  "observation_type",                     null: false
       t.integer  "user_id"
@@ -307,7 +309,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["validation_status"], name: "index_observations_on_validation_status", using: :btree
     end
 
-    create_table "observer_observations", force: :cascade do |t|
+    create_table "observer_observations", if_not_exists: true do |t|
       t.integer  "observer_id"
       t.integer  "observation_id"
       t.datetime "created_at",     null: false
@@ -316,7 +318,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["observer_id"], name: "index_observer_observations_on_observer_id", using: :btree
     end
 
-    create_table "observer_translations", force: :cascade do |t|
+    create_table "observer_translations", if_not_exists: true do |t|
       t.integer  "observer_id",  null: false
       t.string   "locale",       null: false
       t.datetime "created_at",   null: false
@@ -327,7 +329,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["observer_id"], name: "index_observer_translations_on_observer_id", using: :btree
     end
 
-    create_table "observers", force: :cascade do |t|
+    create_table "observers", if_not_exists: true do |t|
       t.string   "observer_type",                    null: false
       t.datetime "created_at",                       null: false
       t.datetime "updated_at",                       null: false
@@ -344,7 +346,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
     end
 
-    create_table "operator_document_annexes", force: :cascade do |t|
+    create_table "operator_document_annexes", if_not_exists: true do |t|
       t.integer  "operator_document_id"
       t.string   "name"
       t.date     "start_date"
@@ -362,7 +364,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
     end
 
-    create_table "operator_documents", force: :cascade do |t|
+    create_table "operator_documents", if_not_exists: true do |t|
       t.string   "type"
       t.date     "expire_date"
       t.date     "start_date"
@@ -391,7 +393,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["type"], name: "index_operator_documents_on_type", using: :btree
     end
 
-    create_table "operator_translations", force: :cascade do |t|
+    create_table "operator_translations", if_not_exists: true do |t|
       t.integer  "operator_id", null: false
       t.string   "locale",      null: false
       t.datetime "created_at",  null: false
@@ -402,7 +404,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["operator_id"], name: "index_operator_translations_on_operator_id", using: :btree
     end
 
-    create_table "operators", force: :cascade do |t|
+    create_table "operators", if_not_exists: true do |t|
       t.string   "operator_type"
       t.integer  "country_id"
       t.string   "concession"
@@ -427,7 +429,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["is_active"], name: "index_operators_on_is_active", using: :btree
     end
 
-    create_table "photos", force: :cascade do |t|
+    create_table "photos", if_not_exists: true do |t|
       t.string   "name"
       t.string   "attachment"
       t.integer  "attacheable_id"
@@ -438,7 +440,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["attacheable_id", "attacheable_type"], name: "photos_attacheable_index", using: :btree
     end
 
-    create_table "required_operator_document_group_translations", force: :cascade do |t|
+    create_table "required_operator_document_group_translations", if_not_exists: true do |t|
       t.integer  "required_operator_document_group_id", null: false
       t.string   "locale",                              null: false
       t.datetime "created_at",                          null: false
@@ -448,13 +450,13 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["required_operator_document_group_id"], name: "index_64b55c0cec158f1717cc5d775ae87c7a48f1cc59", using: :btree
     end
 
-    create_table "required_operator_document_groups", force: :cascade do |t|
+    create_table "required_operator_document_groups", if_not_exists: true do |t|
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
       t.integer  "position"
     end
 
-    create_table "required_operator_document_translations", force: :cascade do |t|
+    create_table "required_operator_document_translations", if_not_exists: true do |t|
       t.integer  "required_operator_document_id", null: false
       t.string   "locale",                        null: false
       t.datetime "created_at",                    null: false
@@ -464,7 +466,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["required_operator_document_id"], name: "index_eed74ed5a0934f32c4b075e5beee98f1ebf34d19", using: :btree
     end
 
-    create_table "required_operator_documents", force: :cascade do |t|
+    create_table "required_operator_documents", if_not_exists: true do |t|
       t.string   "type"
       t.integer  "required_operator_document_group_id"
       t.string   "name"
@@ -478,7 +480,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["type"], name: "index_required_operator_documents_on_type", using: :btree
     end
 
-    create_table "sawmills", force: :cascade do |t|
+    create_table "sawmills", if_not_exists: true do |t|
       t.string   "name"
       t.float    "lat"
       t.float    "lng"
@@ -489,7 +491,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.jsonb    "geojson"
     end
 
-    create_table "severities", force: :cascade do |t|
+    create_table "severities", if_not_exists: true do |t|
       t.integer  "level"
       t.datetime "created_at",     null: false
       t.datetime "updated_at",     null: false
@@ -498,7 +500,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["subcategory_id", "level"], name: "index_severities_on_subcategory_id_and_level", using: :btree
     end
 
-    create_table "severity_translations", force: :cascade do |t|
+    create_table "severity_translations", if_not_exists: true do |t|
       t.integer  "severity_id", null: false
       t.string   "locale",      null: false
       t.datetime "created_at",  null: false
@@ -508,7 +510,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["severity_id"], name: "index_severity_translations_on_severity_id", using: :btree
     end
 
-    create_table "species", force: :cascade do |t|
+    create_table "species", if_not_exists: true do |t|
       t.string   "name"
       t.string   "species_class"
       t.string   "sub_species"
@@ -522,7 +524,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.datetime "updated_at",      null: false
     end
 
-    create_table "species_countries", force: :cascade do |t|
+    create_table "species_countries", if_not_exists: true do |t|
       t.integer  "country_id"
       t.integer  "species_id"
       t.datetime "created_at", null: false
@@ -531,7 +533,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["species_id"], name: "index_species_countries_on_species_id", using: :btree
     end
 
-    create_table "species_observations", force: :cascade do |t|
+    create_table "species_observations", if_not_exists: true do |t|
       t.integer  "observation_id"
       t.integer  "species_id"
       t.datetime "created_at",     null: false
@@ -540,7 +542,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["species_id"], name: "index_species_observations_on_species_id", using: :btree
     end
 
-    create_table "species_translations", force: :cascade do |t|
+    create_table "species_translations", if_not_exists: true do |t|
       t.integer  "species_id",  null: false
       t.string   "locale",      null: false
       t.datetime "created_at",  null: false
@@ -550,7 +552,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["species_id"], name: "index_species_translations_on_species_id", using: :btree
     end
 
-    create_table "subcategories", force: :cascade do |t|
+    create_table "subcategories", if_not_exists: true do |t|
       t.integer  "category_id"
       t.integer  "subcategory_type"
       t.datetime "created_at",                       null: false
@@ -560,7 +562,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["subcategory_type"], name: "index_subcategories_on_subcategory_type", using: :btree
     end
 
-    create_table "subcategory_translations", force: :cascade do |t|
+    create_table "subcategory_translations", if_not_exists: true do |t|
       t.integer  "subcategory_id", null: false
       t.string   "locale",         null: false
       t.datetime "created_at",     null: false
@@ -571,7 +573,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
     end
 
-    create_table "user_permissions", force: :cascade do |t|
+    create_table "user_permissions", if_not_exists: true do |t|
       t.integer  "user_id"
       t.integer  "user_role",   default: 0,  null: false
       t.jsonb    "permissions", default: {}
@@ -579,7 +581,7 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.datetime "updated_at",               null: false
     end
 
-    create_table "users", force: :cascade do |t|
+    create_table "users", if_not_exists: true do |t|
       t.string   "email"
       t.datetime "created_at",                            null: false
       t.datetime "updated_at",                            null: false
@@ -605,6 +607,23 @@ class CreateStructure < ActiveRecord::Migration[5.0]
       t.integer  "operator_id"
       t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
       t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    end
+
+    create_table "tutorials", if_not_exists: true do |t|
+      t.integer  "position"
+      t.string "name", null: false
+      t.text "description"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+    end
+
+    create_table "uploaded_documents", if_not_exists: true do |t|
+      t.string   "name"
+      t.string   "author"
+      t.string   "caption"
+      t.string   "file"
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
     end
 
     add_foreign_key "api_keys", "users"
