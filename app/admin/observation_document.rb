@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register ObservationDocument, as: 'Evidence' do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :show, :index

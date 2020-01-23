@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Contact do
-  # menu parent: 'User Management', priority: 3
+  extend BackRedirectable
+  back_redirect
+
   menu false
   permit_params :email, :name
 
@@ -23,5 +25,4 @@ ActiveAdmin.register Contact do
 
     actions
   end
-
 end
