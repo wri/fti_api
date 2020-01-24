@@ -17,7 +17,7 @@
 #
 
 class RequiredOperatorDocumentCountry < RequiredOperatorDocument
-  has_many :operator_document_countries
+  has_many :operator_document_countries, foreign_key: 'required_operator_document_id'
 
   validates_uniqueness_of :contract_signature, scope: :country_id, if: :contract_signature?
 

@@ -6,7 +6,7 @@ RSpec.describe DocumentUploader do
 
   before :each do
     DocumentUploader.enable_processing = true
-    @document = create(:document)
+    @document = create(:observation_document)
     @uploader = DocumentUploader.new(@document, Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')))
     @uploader.store!(File.open(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')))
   end

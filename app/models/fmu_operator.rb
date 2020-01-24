@@ -43,16 +43,14 @@ class FmuOperator < ApplicationRecord
 
   # Ensures only one operator is active per fmu
   def one_active_per_fmu
-    return false if fmu.blank?
-    count = persisted? ? 1 : 0
-    unless fmu.fmu_operators.where(current: true).count <= count
-      errors.add(:current, 'There can only be one active operator at a time')
-    end
+    return false if fmu.blank? || !current || fmu.fmu_operators.where(current: true).none?
+
+    errors.add(:current, 'There can only be one active operator at a time')
   end
 
   # Makes sure the dates don't collide
   def non_colliding_dates
-    dates = FmuOperator.where(fmu_id: self.fmu_id).where.not(fmu_id: self.fmu_id).pluck(:start_date, :end_date)
+    dates = FmuOperator.where(fmu_id: self.fmu_id).where.not(id: self.id).pluck(:start_date, :end_date)
     dates << [self.start_date, self.end_date]
 
     for i in 0...(dates.count - 1)
@@ -98,7 +96,7 @@ WHERE id = #{x.fmu_id};"
   # Updates the list of documents for this FMU
   def update_documents_list
     current_operator = self.fmu.operator.id rescue nil
-    return unless self.operator.fa_id.present?
+    return if self.operator&.fa_id.blank?
 
     OperatorDocumentFmu.transaction do
       to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator)

@@ -8,12 +8,9 @@
 #  category_type :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :category do
     sequence(:name) { |n| "#{n} Category #{Faker::Address.country}" }
-
-    after(:create) do |category|
-      category.update(annex_operators: [FactoryGirl.create(:annex_operator)])
-    end
+    category_type { rand(0..1) }
   end
 end

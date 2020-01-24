@@ -15,7 +15,7 @@
 #
 
 class Sawmill < ApplicationRecord
-  belongs_to :operator, optional: false
+  belongs_to :operator
   validates_numericality_of :lat, greater_than_or_equal_to: -90, less_than_or_equal_to: 90
   validates_numericality_of :lng, greater_than_or_equal_to: -180, less_than_or_equal_to: 180
 
@@ -44,7 +44,7 @@ class Sawmill < ApplicationRecord
                 select id, json_build_object(
                         'type', 'Feature',
                         'id', id,
-                        'geometry', ST_AsGeoJSON(ST_MakePoint(lng, lat))::json,
+                        'geometry', ST_AsGeoJSON(ST_MakePoint(lng, lat), 9)::json,
                        'properties', (select row_to_json(sub) from (select name, is_active, operator_id) as sub)
               ) as geojson
               from sawmills

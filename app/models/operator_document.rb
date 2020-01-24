@@ -38,7 +38,7 @@ class OperatorDocument < ApplicationRecord
   before_validation :set_expire_date, unless: :expire_date?
 
   validates_presence_of :start_date, if: :attachment?
-  validates_presence_of :expire_date, if: :attachment?
+  validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
   validate :reason_or_attachment
 
   before_save :update_current, on: %w[create update], if: :current_changed?
@@ -123,11 +123,14 @@ class OperatorDocument < ApplicationRecord
   end
 
   def set_status
-    if attachment.present? || reason.present?
-      self.status = OperatorDocument.statuses[:doc_pending]
-    else
-      self.status = OperatorDocument.statuses[:doc_not_provided]
-    end
+    status =
+      if attachment.present? || reason.present?
+        :doc_pending
+      else
+        :doc_not_provided
+      end
+
+    self.status = OperatorDocument.statuses[status]
   end
 
   def delete_previous_pending_document
@@ -139,8 +142,8 @@ class OperatorDocument < ApplicationRecord
   end
 
   def reason_or_attachment
-    if self.attachment.present? && self.reason.present?
-      self.errors[:reason] << 'Cannot have a reason not to have a document'
-    end
+    return if self.attachment.blank? || self.reason.blank?
+
+    self.errors[:reason] << 'Cannot have a reason not to have a document'
   end
 end
