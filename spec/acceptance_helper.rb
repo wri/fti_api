@@ -1,7 +1,6 @@
 module AcceptanceHelper
   ERRORS = {
     '401' => { status: '401', title: 'You are not authorized to access this page.' },
-    '401_unautorized' => { status: '401', title: 'Unauthorized' },
     '422' => { status: 422, title: 'Unprocessable entity.' },
     '422_undefined_user' => { status: 422, title: "Couldn't find the user with this email" },
   }.freeze

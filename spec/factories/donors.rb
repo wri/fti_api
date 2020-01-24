@@ -8,7 +8,7 @@
 #  category_type :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :donor do
     sequence(:name) { |n| "#{n} Donor #{Faker::Address.country}" }
   end

@@ -42,7 +42,7 @@ module V1
 
       it 'Request without valid authorization for current user' do
         get '/users/current-user', headers: non_api_webuser_headers
-        expect(parsed_body).to eq(default_status_errors('401_unautorized'))
+        expect(parsed_body).to eq(default_status_errors('401'))
       end
     end
   end

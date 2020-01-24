@@ -13,7 +13,7 @@ RSpec.describe Fmu, type: :model do
     it { is_expected.to have_many(:observations).inverse_of(:fmu) }
     it { is_expected.to have_many(:fmu_operators).inverse_of(:fmu).dependent(:destroy) }
     it { is_expected.to have_many(:operators).through(:fmu_operators) }
-    it { is_expected.to have_many(:operator_document_fmus).dependent(:destroy) }
+    it { is_expected.to have_many(:operator_document_fmus) }
   end
 
   it { is_expected.to accept_nested_attributes_for(:operators) }
