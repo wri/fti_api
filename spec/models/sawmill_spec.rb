@@ -33,7 +33,7 @@ RSpec.describe Sawmill, type: :model do
           'type' => 'Feature',
           'geometry' => {
             'type' => 'Point',
-            # ST_AsGeoJSON uses default value 9 for maxdecimaldigits argument.
+            # ST_AsGeoJSON: we use value 9 for maxdecimaldigits argument.
             'coordinates' => [sawmill.lng.round(9), sawmill.lat.round(9)]
           },
           'properties' => {
