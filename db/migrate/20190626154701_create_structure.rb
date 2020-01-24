@@ -3,12 +3,12 @@ class CreateStructure < ActiveRecord::Migration[5.0]
     return if table_exists?("active_admin_comments") # To make sure it's not executed
 
     # These are extensions that must be enabled in order to support this database
+    enable_extension "postgis"
     enable_extension "plpgsql"
     enable_extension "address_standardizer"
     enable_extension "address_standardizer_data_us"
     enable_extension "citext"
     enable_extension "fuzzystrmatch"
-    enable_extension "postgis"
     enable_extension "postgis_tiger_geocoder"
     enable_extension "postgis_topology"
 
