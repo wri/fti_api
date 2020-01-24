@@ -5,7 +5,8 @@ module V1
     it_behaves_like "jsonapi-resources", Operator, {
       show: {},
       create: {
-        success_roles: %i[admin user],
+        success_roles: %i[admin user webuser],
+        failure_roles: [],
         valid_params: { name: 'Operator one', 'operator-type': 'Other' },
         invalid_params: { name: '', 'operator-type': 'Other',  },
         error_attributes: [422, 100, { name: ["can't be blank"] }]
