@@ -295,9 +295,9 @@ ActiveAdmin.register Observation do
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
       f.input :law, input_html: { disabled: law },
-                    collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]}
+                    collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]} rescue ''
       f.input :severity, as: :select,
-                         collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]}
+                         collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]} rescue ''
       f.input :is_physical_place, input_html: { disabled: true }
       f.input :location_information  if f.object.observation_type == 'operator'
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
