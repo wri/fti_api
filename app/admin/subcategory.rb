@@ -6,7 +6,7 @@ ActiveAdmin.register Subcategory do
 
   menu false
 
-  actions :all, :except => [:destroy]
+  actions :all, except: [:destroy]
 
   config.order_clause
 
@@ -28,7 +28,7 @@ ActiveAdmin.register Subcategory do
          collection: Subcategory.with_translations(I18n.locale)
                          .order('subcategory_translations.name').pluck(:name)
   filter :category, as: :select,
-         collection: -> { Category.with_translations(I18n.locale).order('category_translations.name')}
+                    collection: -> { Category.with_translations(I18n.locale).order('category_translations.name')}
   filter :created_at
   filter :updated_at
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStructure < ActiveRecord::Migration[5.0]
   def change
     return if table_exists?("active_admin_comments") # To make sure it's not executed

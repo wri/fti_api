@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: countries
@@ -62,7 +63,7 @@ class Country < ApplicationRecord
 
   def update_valid_documents_percentages
     self.percentage_valid_documents =
-        gov_documents.valid.count.to_f / gov_documents.joins(:required_gov_document).required.count.to_f rescue 0
+      gov_documents.valid.count.to_f / gov_documents.joins(:required_gov_document).required.count.to_f rescue 0
     save!
   end
 

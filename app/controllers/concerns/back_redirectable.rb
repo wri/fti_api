@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BackRedirectable
   def back_redirect
     controller do

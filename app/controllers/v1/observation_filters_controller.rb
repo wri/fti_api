@@ -20,7 +20,8 @@ module V1
           { id: 0, name: I18n.t('filters.unknown') },
           { id: 1, name: I18n.t('filters.low') },
           { id: 2, name: I18n.t('filters.medium') },
-          { id: 3, name: I18n.t('filters.high') }]
+          { id: 3, name: I18n.t('filters.high') }
+]
       operator_ids = Operator.active.includes(:translations).map {|x| { id: x.id, name: x.name }}.sort_by { |x| x[:name] }
       reports_ids = ObservationReport.all.map { |x| { id: x.id, name: x.title }}.sort_by { |x| x[:title] }
 

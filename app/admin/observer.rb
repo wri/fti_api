@@ -52,10 +52,10 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   filter :is_active
   filter :countries, as: :select,
-         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
+                     collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
   filter :translations_name_eq,
          as: :select, label: 'Name',
-          collection: Observer.with_translations(I18n.locale)
+         collection: Observer.with_translations(I18n.locale)
                           .order('observer_translations.name').pluck(:name)
 
 

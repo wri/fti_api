@@ -6,7 +6,7 @@ ActiveAdmin.register Category do
 
   menu false
 
-  actions :all, :except => [:destroy]
+  actions :all, except: [:destroy]
 
   config.order_clause
   config.filters = false

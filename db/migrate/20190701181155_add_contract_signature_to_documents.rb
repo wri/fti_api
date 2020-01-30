@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddContractSignatureToDocuments < ActiveRecord::Migration[5.0]
   def change
     add_column :required_operator_documents, :contract_signature, :boolean, default: false, null: false

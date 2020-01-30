@@ -97,9 +97,9 @@ group :test do
   gem 'factory_bot_rails'
   gem 'rspec-activejob'
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 4.0.1'
   gem 'simplecov'
   gem 'timecop'
-  gem 'shoulda-matchers', '~> 4.0.1'
 end
 
 # Server

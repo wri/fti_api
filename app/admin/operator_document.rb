@@ -40,7 +40,7 @@ ActiveAdmin.register OperatorDocument do
     #if resource.reason.present?
     #  resource.update_attributes(status: OperatorDocument.statuses[:doc_not_provided], reason: nil)
     #else
-      resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
+    resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
     #end
 
     redirect_to collection_path, notice: 'Document rejected'
@@ -69,7 +69,7 @@ ActiveAdmin.register OperatorDocument do
     column :status
     column :id
     column :required_operator_document do |o|
-     o.required_operator_document.name
+      o.required_operator_document.name
     end
     column :country do |o|
       o.required_operator_document.country.name
@@ -175,11 +175,11 @@ ActiveAdmin.register OperatorDocument do
          collection: RequiredOperatorDocument.
              joins(country: :translations)
                          .order('required_operator_documents.name')
-                         .where(country_translations: {locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
+                         .where(country_translations: { locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
   filter :required_operator_document_country_id, label: 'Country', as: :select,
-         collection: Country.with_translations(I18n.locale).order('country_translations.name')
+                                                 collection: Country.with_translations(I18n.locale).order('country_translations.name')
   filter :operator, label: 'Operator', as: :select,
-         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :updated_at

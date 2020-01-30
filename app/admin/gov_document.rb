@@ -90,11 +90,11 @@ ActiveAdmin.register GovDocument do
   filter :id, as: :select
   filter :required_gov_document
   filter :required_gov_document_country_id, label: 'Country', as: :select,
-         collection: Country.with_translations(I18n.locale)
+                                            collection: Country.with_translations(I18n.locale)
                        .joins(:required_gov_documents).uniq.order('country_translations.name')
   filter :status, as: :select, collection: GovDocument.statuses
   filter :required_gov_document_document_type, label: 'Type', as: :select,
-         collection: RequiredGovDocument.document_types
+                                               collection: RequiredGovDocument.document_types
   filter :updated_at
 
 
@@ -104,12 +104,12 @@ ActiveAdmin.register GovDocument do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Government Document Details' do
       f.input :country, as: :string,
-              input_html: { disabled: true, value: resource&.required_gov_document&.country&.name }
+                        input_html: { disabled: true, value: resource&.required_gov_document&.country&.name }
       f.input :required_gov_document, input_html: { disabled: true }
       f.input :uploaded_by
       f.input :status, include_blank: false
       f.input :document_type, as: :string,
-              input_html: { disabled: true, value: resource&.required_gov_document&.document_type }
+                              input_html: { disabled: true, value: resource&.required_gov_document&.document_type }
       if resource.required_gov_document.document_type == 'link'
         f.input :link
       end
