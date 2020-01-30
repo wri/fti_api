@@ -23,7 +23,8 @@ AllCops:
     - 'lib/gitlab/upgrader.rb'
     - 'lib/gitlab/seeder.rb'
     - 'spec/**/*'
-    - "db/fixtures/**/*"
+    - 'db/fixtures/**/*'
+    - 'db/migrate/**/*'
 
 ##################### Style ##################################
 
@@ -92,6 +93,8 @@ Layout/BlockEndNewline:
 # ugly). Prefer {...} over do...end for single-line blocks.
 Style/BlockDelimiters:
   Enabled: true
+  Exclude:
+    - 'config/routes.rb'
 
 # Enforce braces style around hash parameters.
 Style/BracesAroundHashParameters:
@@ -697,6 +700,8 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Max: 150
+  Exclude:
+    - 'app/admin/*'
 
 # Avoid excessive block nesting.
 Metrics/BlockNesting:

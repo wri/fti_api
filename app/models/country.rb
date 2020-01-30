@@ -17,14 +17,18 @@
 
 class Country < ApplicationRecord
   include Translatable
+  # rubocop:disable Style/BlockDelimiters
   translates :name, :region_name, touch: true
+  # rubocop:enable Style/BlockDelimiters
   active_admin_translates :name, :region_name do
     validates_presence_of :name
   end
 
   has_many :users,           inverse_of: :country
   has_many :observations,    inverse_of: :country
+  # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :observers
+  # rubocop:enable Rails/HasAndBelongsToMany
   has_many :governments,     inverse_of: :country
   has_many :operators,       inverse_of: :country
   has_many :fmus,            inverse_of: :country

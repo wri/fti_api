@@ -104,11 +104,14 @@ ActiveAdmin.register OperatorDocument do
     column :attachment do |o|
       o.attachment&.filename
     end
+    # TODO: Reactivate rubocop and fix this
+    # rubocop:disable Rails/OutputSafety
     column 'Annexes' do |o|
       links = []
       o.operator_document_annexes.each {|a| links << a.name}
       links.join(' ').html_safe
     end
+    # rubocop:enable Rails/OutputSafety
     column :reason
     column :note
     column :response_date
@@ -154,11 +157,14 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
+    # TODO: Reactivate rubocop and fix this
+    # rubocop:disable Rails/OutputSafety
     column 'Annexes' do |od|
       links = []
       od.operator_document_annexes.each {|a| links << link_to(a.id, admin_operator_document_annex_path(a))}
       links.join(' ').html_safe
     end
+    # rubocop:enable Rails/OutputSafety
     column :reason
     column :note
     column :response_date

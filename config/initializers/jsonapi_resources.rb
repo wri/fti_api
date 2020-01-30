@@ -45,6 +45,7 @@ module JSONAPI
 
   class Resource
     class << self
+      # rubocop:disable Lint/UnderscorePrefixedVariableName
       def apply_sort(records, order_options, _context = {})
         if order_options.any?
           order_options.each_pair do |field, direction|
@@ -81,6 +82,7 @@ module JSONAPI
         end
         records
       end
+      # rubocop:enable Lint/UnderscorePrefixedVariableName
     end
   end
 

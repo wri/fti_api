@@ -63,6 +63,8 @@ ActiveAdmin.register GovDocument do
         RequiredGovDocument.unscoped.find(doc.required_gov_document_id).name
       end
     end
+    # TODO: Reactivate rubocop and fix this
+    # rubocop:disable Rails/OutputSafety
     column 'Data' do |doc|
       doc.link if doc.link
       "#{doc.value} #{doc.units}" if doc.value
@@ -72,6 +74,7 @@ ActiveAdmin.register GovDocument do
         links.join(' ').html_safe
       end
     end
+    # rubocop:enable Rails/OutputSafety
     column :user, sortable: 'users.name'
     column :expire_date
     column :start_date

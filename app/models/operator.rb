@@ -208,6 +208,7 @@ class Operator < ApplicationRecord
       end
     end
 
+    # rubocop:disable Rails/SkipsModelValidations
     def calculate_scores
       Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
 
@@ -220,6 +221,7 @@ class Operator < ApplicationRecord
       Operator.active.fa_operator.where.not(score_absolute: nil)
         .order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
     end
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
 
@@ -251,6 +253,7 @@ class Operator < ApplicationRecord
 
   private
 
+  # rubocop:disable Rails/SkipsModelValidations
   def create_operator_id
     if country_id.present?
       update_columns(operator_id: "#{country.iso}-unknown-#{id}")
@@ -258,6 +261,7 @@ class Operator < ApplicationRecord
       update_columns(operator_id: "na-unknown-#{id}")
     end
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   def create_documents
     return if fa_id.blank? || country_id.blank?
