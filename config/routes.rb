@@ -51,6 +51,8 @@ Rails.application.routes.draw do
       resources :fmus, only: [:index, :update]
       resources :contacts, only: [:create, :index]
 
+      resources :imports, only: :create
+
       get 'observation_filters', to: 'observation_filters#index'
     end
   end
