@@ -6,10 +6,7 @@ module V1
     def create
       importer.import
 
-      # render json: importer.results
-      { saved: [], errored: [] }
-
-      byebug
+      render json: importer.results
     end
 
     private
