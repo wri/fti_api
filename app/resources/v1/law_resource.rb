@@ -29,6 +29,14 @@ or apv is null or currency is null')
       super + [:'subcategory.name', :'country.name']
     end
 
+    def self.updatable_fields(context)
+      super - [:complete]
+    end
+
+    def self.creatable_fields(context)
+      super - [:complete]
+    end
+
     # When ordering by a translated table in a belongs_to relationship
     # we add the ordering by id to ensure that when limiting by 1 or 100
     # the order of the results is the same
