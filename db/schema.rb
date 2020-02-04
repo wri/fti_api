@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190930103120) do
+ActiveRecord::Schema.define(version: 20200203211539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -679,7 +679,7 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.string   "locale",         null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.string   "name"
+    t.text     "name"
     t.text     "details"
     t.index ["locale"], name: "index_subcategory_translations_on_locale", using: :btree
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
