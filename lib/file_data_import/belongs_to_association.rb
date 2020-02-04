@@ -2,7 +2,7 @@
 
 module FileDataImport
   class BelongsToAssociation
-    attr_accessor :class_name, :permited_attributes, :permited_translations, :raw_attributes, :abilities, :errors
+    attr_accessor :class_name, :permited_attributes, :permited_translations, :raw_attributes, :abilities, :errors, :required
 
     def initialize(class_name, raw_attributes, **options)
       @class_name = class_name
@@ -10,6 +10,7 @@ module FileDataImport
       @permited_translations = options[:permited_translations]&.map(&:to_sym) || []
       @raw_attributes = raw_attributes
       @abilities = options[:can]&.map(&:to_sym) || []
+      @required = options[:required]
       @errors = {}
     end
 
@@ -23,8 +24,7 @@ module FileDataImport
 
     def record
       @record ||= begin
-        return if attributes_for_finding.blank?
-        record = class_name.find_by(attributes_for_finding)
+        record = class_name.find_by(attributes_for_finding) if attributes_for_finding.present?
 
         if record.present?
           record
@@ -35,8 +35,8 @@ module FileDataImport
     end
 
     def save
-      unless record
-        errors[:presence] = "record is absent"
+      if record.blank?
+        errors[:presence] = "record is absent" if required
         return
       end
 

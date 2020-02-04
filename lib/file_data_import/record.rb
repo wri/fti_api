@@ -34,7 +34,9 @@ module FileDataImport
               results[:errors][singular_name] = belongs_to_association.errors
             end
 
-            results[:attributes][singular_name] = belongs_to_association.attributes
+            if belongs_to_association.attributes.present?
+              results[:attributes][singular_name] = belongs_to_association.attributes
+            end
           end
 
         record.assign_attributes(attributes_for_creation.merge(belongs_to_attributes))

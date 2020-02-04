@@ -14,7 +14,8 @@ class ObservationsImporter < FileDataImport::BaseImporter
 
   record Observation, permited_attributes: PERMITED_ATTRIBBUTES, permited_translations: PERMITED_TRANSLATES
 
-  belongs_to Country, permited_attributes: %i[iso],  permited_translations: %i[name]
+  belongs_to Country, permited_attributes: %i[iso],  permited_translations: %i[name], required: true
+  belongs_to Severity, permited_attributes: %i[level], permited_translations: %i[details]
 
   belongs_to Operator,
              permited_attributes: %i[approved operator_type concession is_active logo website address delete_logo],
