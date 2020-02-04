@@ -23,6 +23,7 @@ module FileDataImport
 
     def record
       @record ||= begin
+        return if attributes_for_finding.blank?
         record = class_name.find_by(attributes_for_finding)
 
         if record.present?
