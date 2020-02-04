@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operator_documents
@@ -38,7 +39,7 @@ class OperatorDocument < ApplicationRecord
   before_validation :set_expire_date, unless: :expire_date?
 
   validates_presence_of :start_date, if: :attachment?
-  validates_presence_of :expire_date, if: :attachment?
+  validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
   validate :reason_or_attachment
 
   before_save :update_current, on: %w[create update], if: :current_changed?
@@ -49,8 +50,10 @@ class OperatorDocument < ApplicationRecord
 
   before_destroy :ensure_unity
 
-  scope :to_expire, ->(date) { joins(:required_operator_document)
-                                .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
+  scope :to_expire, ->(date) { 
+    joins(:required_operator_document)
+              .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") 
+  }
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
@@ -123,11 +126,14 @@ class OperatorDocument < ApplicationRecord
   end
 
   def set_status
-    if attachment.present? || reason.present?
-      self.status = OperatorDocument.statuses[:doc_pending]
-    else
-      self.status = OperatorDocument.statuses[:doc_not_provided]
-    end
+    status =
+      if attachment.present? || reason.present?
+        :doc_pending
+      else
+        :doc_not_provided
+      end
+
+    self.status = OperatorDocument.statuses[status]
   end
 
   def delete_previous_pending_document
@@ -139,8 +145,8 @@ class OperatorDocument < ApplicationRecord
   end
 
   def reason_or_attachment
-    if self.attachment.present? && self.reason.present?
-      self.errors[:reason] << 'Cannot have a reason not to have a document'
-    end
+    return if self.attachment.blank? || self.reason.blank?
+
+    self.errors[:reason] << 'Cannot have a reason not to have a document'
   end
 end

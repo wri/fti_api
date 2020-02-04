@@ -31,8 +31,8 @@ ActiveAdmin.register Observation do
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :law_id, :fmu_id, observer_ids: [], relevant_operators: [],
-                                  observation_documents_attributes: [:id, :name, :attachment],
-                                  translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
+                                                         observation_documents_attributes: [:id, :name, :attachment],
+                                                         translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
 
 
   member_action :approve, method: :put do
@@ -113,11 +113,11 @@ ActiveAdmin.register Observation do
   filter :validation_status, as: :select, collection:
       Observation.validation_statuses.sort
   filter :country, as: :select,
-          collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
+                   collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
   filter :observers, label: 'Observers', as: :select,
-         collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
+                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
   filter :operator, label: 'Operator', as: :select,
-           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
   filter :government_translations_government_entity_contains,
          as: :select, label: 'Government Entity',
          collection: Government.with_translations(I18n.locale)
@@ -269,7 +269,7 @@ ActiveAdmin.register Observation do
       render partial: "fields",
              locals: { attributes: %w[active status country fmu location_information observers observation_type
                                       operator government relevant_operators subcategory law law_country
-                                      illegality_as_written_by_law  legal_reference_illegality legal_reference_penalties
+                                      illegality_as_written_by_law legal_reference_illegality legal_reference_penalties
                                       minimum_fine maximum_fine currency penal_servitude other_penalties indicator_apv severity
                                       publication_date actions_taken details evidence concern_opinion pv lat lng is_physical_place
                                       litigation_status report user modified_user created_at updated_at] }

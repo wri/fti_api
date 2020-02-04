@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gov_documents
@@ -85,7 +86,7 @@ module V1
 
     def hidden_document_status
       return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
-      return :doc_not_provided
+      :doc_not_provided
     end
   end
 end

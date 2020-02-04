@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gov_files
@@ -26,6 +27,5 @@ class GovFile < ApplicationRecord
     return if gov_document.status == 'doc_pending'
 
     gov_document.update(status: GovDocument.statuses[:doc_pending])
-    puts 'a'
   end
 end

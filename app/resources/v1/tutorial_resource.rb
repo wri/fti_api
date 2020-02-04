@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V1
   class TutorialResource < JSONAPI::Resource
     include CacheableByLocale
@@ -7,7 +9,7 @@ module V1
     attributes :position, :name, :description
 
     def self.default_sort
-      [{field: :position, direction: :asc}]
+      [{ field: :position, direction: :asc }]
     end
 
     def custom_links(_)

@@ -39,7 +39,9 @@ ActiveAdmin.register Tutorial do
                       },
                       placeholder: 'Type something...',
                       theme: 'snow'
-                    }}}
+                    }
+ }
+ }
       end
     end
     f.actions

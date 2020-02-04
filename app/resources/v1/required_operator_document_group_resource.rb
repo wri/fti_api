@@ -15,7 +15,7 @@ module V1
     end
 
     def self.default_sort
-      [{field: 'position', direction: :asc}]
+      [{ field: 'position', direction: :asc }]
     end
   end
 end

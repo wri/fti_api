@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CustomAdminHeader < ActiveAdmin::Views::Header
   include Rails.application.routes.url_helpers
 

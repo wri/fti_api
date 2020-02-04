@@ -9,14 +9,10 @@
 #  is_active  :boolean          default(TRUE)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :government do
-    government_entity 'A Government'
-    details           'Indicator one'
-
-    after(:create) do |government|
-      government.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                              iso: "C#{Faker::Lorem.sentence}"))
-    end
+    country
+    government_entity { 'A Government' }
+    details { 'Indicator one' }
   end
 end
