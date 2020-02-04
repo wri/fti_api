@@ -49,6 +49,7 @@ class Observation < ApplicationRecord
   belongs_to :modified_user,  class_name: 'User', foreign_key: 'modified_user_id', optional: true
   belongs_to :fmu,            inverse_of: :observations, optional: true
   belongs_to :law,            inverse_of: :observations, optional: true
+  belongs_to :observation_report
 
   belongs_to :subcategory, inverse_of: :observations, optional: true
 
@@ -64,7 +65,6 @@ class Observation < ApplicationRecord
   has_many :comments,  as: :commentable, dependent: :destroy
   has_many :photos,    as: :attacheable, dependent: :destroy
   has_many :observation_documents
-  belongs_to :observation_report
 
   accepts_nested_attributes_for :photos,                       allow_destroy: true
   accepts_nested_attributes_for :observation_documents,        allow_destroy: true

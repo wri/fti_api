@@ -2,7 +2,10 @@
 
 module FileDataImport
   class BelongsToAssociation
-    attr_accessor :class_name, :permited_attributes, :permited_translations, :raw_attributes, :abilities, :errors, :required
+    attr_accessor(
+      :class_name, :permited_attributes, :permited_translations,
+      :raw_attributes, :abilities, :errors, :required, :belongs_as
+    )
 
     def initialize(class_name, raw_attributes, **options)
       @class_name = class_name
@@ -11,11 +14,12 @@ module FileDataImport
       @raw_attributes = raw_attributes
       @abilities = options[:can]&.map(&:to_sym) || []
       @required = options[:required]
+      @belongs_as = options[:as]
       @errors = {}
     end
 
     def singular_name
-      class_name.model_name.singular.to_sym
+      @singular_name ||= belongs_as || class_name.model_name.singular.to_sym
     end
 
     def attributes
