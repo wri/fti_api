@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module FileDataImporter
+module FileDataImport
   module Parser
-    class Csv < FileDataImporter::Parser::Base
+    class Csv < FileDataImport::Parser::Base
       def foreach_with_line
         return unless block_given?
 

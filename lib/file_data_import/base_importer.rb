@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module FileDataImporter
-  class Base
+module FileDataImport
+  class BaseImporter
     class InvalidImporterError < NameError; end
     class InvalidParserError < NameError; end
 
@@ -20,7 +20,9 @@ module FileDataImporter
 
     def import
       parser.foreach_with_line do |attributes, line|
-        results[line] = self.class.record_builder.save(attributes)
+        record = self.class.record_builder.build(attributes)
+        record.save
+        results[line] = record.results
       end
     end
 
@@ -28,7 +30,7 @@ module FileDataImporter
 
     def parser
       @parser ||= begin
-        parser_name = "FileDataImporter::Parser::#{extension.capitalize}"
+        parser_name = "FileDataImport::Parser::#{extension.capitalize}"
         parser_name.constantize.new(file.path)
       rescue NameError
         raise InvalidParserError, "Undefined parser #{importer_name}."
@@ -44,25 +46,23 @@ module FileDataImporter
     end
 
     module ClassMethods
-      def build(importer_type:, file:)
+      def build(importer_type, file)
         importer_name = "#{importer_type.capitalize}Importer"
         importer_name.constantize.new(file)
       rescue NameError
         raise InvalidImporterError, "Undefined importer #{importer_name}."
       end
 
-      def define_record(class_name, permited_attributes = [], permited_translations = [])
-        record_builder.class_name = class_name
-        record_builder.permited_attributes = permited_attributes
-        record_builder.permited_translations = permited_translations
+      def record(class_name, **options)
+        record_builder.record(class_name, options)
       end
 
       def record_builder
         @record_builder ||= RecordBuilder.new
       end
 
-      def belongs_to(record_class, permited_attributes = [], permited_translations = [])
-        record_builder.belongs_to(record_class, permited_attributes, permited_translations)
+      def belongs_to(class_name, **options)
+        record_builder.belongs_to(class_name, options)
       end
     end
 

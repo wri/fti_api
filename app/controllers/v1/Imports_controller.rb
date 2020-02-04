@@ -2,7 +2,6 @@
 
 module V1
   class ImportsController < ApiController
-    # before action => check if importer present
     def create
       importer.import
 
@@ -20,7 +19,7 @@ module V1
     end
 
     def importer
-      @importer ||= FileDataImporter::Base.build(import_params.symbolize_keys)
+      @importer ||= FileDataImport::BaseImporter.build(import_params[:importer_type], import_params[:file])
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module FileDataImporter
+module FileDataImport
   module Parser
     class Base
       attr_reader :path_to_file
