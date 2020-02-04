@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Sawmill do
-  # menu parent: 'Operators', priority: 2
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause

@@ -2,6 +2,7 @@
 
 module V1
   class FmuResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     paginator :none
 
@@ -38,13 +39,5 @@ module V1
 
       records
     }
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
-    end
-
   end
 end

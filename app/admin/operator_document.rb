@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register OperatorDocument do
+  extend BackRedirectable
+  back_redirect
+
   menu false
   config.order_clause
 
@@ -37,7 +40,7 @@ ActiveAdmin.register OperatorDocument do
     #if resource.reason.present?
     #  resource.update_attributes(status: OperatorDocument.statuses[:doc_not_provided], reason: nil)
     #else
-      resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
+    resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
     #end
 
     redirect_to collection_path, notice: 'Document rejected'
@@ -66,7 +69,7 @@ ActiveAdmin.register OperatorDocument do
     column :status
     column :id
     column :required_operator_document do |o|
-     o.required_operator_document.name
+      o.required_operator_document.name
     end
     column :country do |o|
       o.required_operator_document.country.name
@@ -101,11 +104,14 @@ ActiveAdmin.register OperatorDocument do
     column :attachment do |o|
       o.attachment&.filename
     end
+    # TODO: Reactivate rubocop and fix this
+    # rubocop:disable Rails/OutputSafety
     column 'Annexes' do |o|
       links = []
       o.operator_document_annexes.each {|a| links << a.name}
       links.join(' ').html_safe
     end
+    # rubocop:enable Rails/OutputSafety
     column :reason
     column :note
     column :response_date
@@ -151,11 +157,14 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
+    # TODO: Reactivate rubocop and fix this
+    # rubocop:disable Rails/OutputSafety
     column 'Annexes' do |od|
       links = []
       od.operator_document_annexes.each {|a| links << link_to(a.id, admin_operator_document_annex_path(a))}
       links.join(' ').html_safe
     end
+    # rubocop:enable Rails/OutputSafety
     column :reason
     column :note
     column :response_date
@@ -172,11 +181,11 @@ ActiveAdmin.register OperatorDocument do
          collection: RequiredOperatorDocument.
              joins(country: :translations)
                          .order('required_operator_documents.name')
-                         .where(country_translations: {locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
+                         .where(country_translations: { locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
   filter :required_operator_document_country_id, label: 'Country', as: :select,
-         collection: Country.with_translations(I18n.locale).order('country_translations.name')
+                                                 collection: Country.with_translations(I18n.locale).order('country_translations.name')
   filter :operator, label: 'Operator', as: :select,
-         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :updated_at

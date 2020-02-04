@@ -71,3 +71,45 @@ form input.deploy-button {
     margin: 0 0 0 4px;
   }
 }
+
+.index_as_table {
+  font-size: 12px !important;
+}
+
+body.active_admin {
+  #hidden_active_admin_goto_page {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #sidebar {
+    .filter_numeric_range {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      label {
+        width: 100%;
+      }
+
+      input {
+        width: 36%;
+      }
+      .separator {
+        display: inline-block;
+        text-align: center;
+        width: 12px;
+      }
+    }
+  }
+
+  .observations-checkbox {
+    display: inline-block;
+    margin-right: 15px;
+    input {
+      display: inline-block;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+}

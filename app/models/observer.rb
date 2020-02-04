@@ -22,7 +22,9 @@
 
 class Observer < ApplicationRecord
   include Translatable
+  # rubocop:disable Style/BlockDelimiters
   translates :name, :organization, touch: true
+  # rubocop:enable Style/BlockDelimiters
 
   active_admin_translates :name do
     validates_presence_of :name
@@ -31,7 +33,9 @@ class Observer < ApplicationRecord
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
 
+  # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :countries
+  # rubocop:enable Rails/HasAndBelongsToMany
 
   has_many :observer_observations, dependent: :restrict_with_error
   has_many :observations, through: :observer_observations

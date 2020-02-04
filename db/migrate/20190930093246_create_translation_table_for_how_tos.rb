@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTranslationTableForHowTos < ActiveRecord::Migration[5.0]
   def change
     reversible do |dir|
@@ -10,7 +12,8 @@ class CreateTranslationTableForHowTos < ActiveRecord::Migration[5.0]
           {
             migrate_data: true,
             remove_source_columns: true
-          })
+          }
+        )
       end
 
       dir.down do

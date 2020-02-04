@@ -45,6 +45,7 @@ module JSONAPI
 
   class Resource
     class << self
+      # rubocop:disable Lint/UnderscorePrefixedVariableName
       def apply_sort(records, order_options, _context = {})
         if order_options.any?
           order_options.each_pair do |field, direction|
@@ -81,6 +82,7 @@ module JSONAPI
         end
         records
       end
+      # rubocop:enable Lint/UnderscorePrefixedVariableName
     end
   end
 
@@ -99,9 +101,9 @@ module JSONAPI
 
       # MONKEY PATCH : To allow the gem to work without links
       if content[:data].is_a?(Hash) && content.dig(:data, :links, :self).present?
-        render_options[:location] = content[:data]["links"][:self] if 
+        render_options[:location] = content[:data]["links"][:self] if
         response_doc.status == :created && content[:data].class != Array
-        
+
       end
 
       # For whatever reason, `render` ignores :status and :content_type when :body is set.

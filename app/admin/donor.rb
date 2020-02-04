@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Donor do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   controller do

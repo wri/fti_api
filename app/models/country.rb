@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: countries
@@ -16,14 +17,18 @@
 
 class Country < ApplicationRecord
   include Translatable
+  # rubocop:disable Style/BlockDelimiters
   translates :name, :region_name, touch: true
+  # rubocop:enable Style/BlockDelimiters
   active_admin_translates :name, :region_name do
     validates_presence_of :name
   end
 
   has_many :users,           inverse_of: :country
   has_many :observations,    inverse_of: :country
+  # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :observers
+  # rubocop:enable Rails/HasAndBelongsToMany
   has_many :governments,     inverse_of: :country
   has_many :operators,       inverse_of: :country
   has_many :fmus,            inverse_of: :country
@@ -31,7 +36,6 @@ class Country < ApplicationRecord
 
   has_many :species_countries
   has_many :species, through: :species_countries
-  has_many :operator_documents, dependent: :destroy
   has_many :required_operator_documents
   has_many :required_gov_documents
   has_many :gov_documents, -> { actual }
@@ -40,16 +44,18 @@ class Country < ApplicationRecord
 
   before_save :set_active
 
-  scope :by_name_asc, -> {
+  scope :by_name_asc, (-> {
     includes(:translations).with_translations(I18n.available_locales)
                            .order('country_translations.name ASC')
-  }
+  })
 
-  scope :with_observations, -> { left_outer_joins(:observations).where.not(observations: { id: nil }).uniq }
+  scope :with_observations, (-> {
+    left_outer_joins(:observations).where.not(observations: { id: nil }).uniq
+  })
 
-  scope :by_status, ->(status) { where(is_active: status) }
+  scope :by_status, (->(status) { where(is_active: status) })
 
-  scope :active, ->() { where(is_active: true) }
+  scope :active, (->() { where(is_active: true) })
 
   default_scope do
     includes(:translations)
@@ -61,13 +67,13 @@ class Country < ApplicationRecord
 
   def update_valid_documents_percentages
     self.percentage_valid_documents =
-        gov_documents.valid.count.to_f / gov_documents.joins(:required_gov_document).required.count.to_f rescue 0
+      gov_documents.valid.count.to_f / gov_documents.joins(:required_gov_document).required.count.to_f rescue 0
     save!
   end
 
   private
 
   def set_active
-    is_active = true unless is_active == true || is_active == false
+    self.is_active = true unless is_active.in? [true, false]
   end
 end

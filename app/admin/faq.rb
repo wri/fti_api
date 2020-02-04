@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Faq do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause
@@ -10,9 +13,9 @@ ActiveAdmin.register Faq do
 
   filter :position, as: :select
   filter :translations_question_contains, as: :select, label: 'Question',
-         collection: Faq.with_translations(I18n.locale).pluck(:question)
+                                          collection: Faq.with_translations(I18n.locale).pluck(:question)
   filter :translations_answer_contains, as: :select, label: 'Answer',
-         collection: Faq.with_translations(I18n.locale).pluck(:answer)
+                                        collection: Faq.with_translations(I18n.locale).pluck(:answer)
 
   controller do
     def scoped_collection
@@ -61,7 +64,9 @@ ActiveAdmin.register Faq do
                           },
                           placeholder: 'Type something...',
                           theme: 'snow'
-                      }}}
+                      }
+ }
+ }
     end
     f.actions
   end

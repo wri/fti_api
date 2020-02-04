@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredOperatorDocument do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   active_admin_paranoia
@@ -56,8 +59,8 @@ ActiveAdmin.register RequiredOperatorDocument do
       f.input :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu),
                      include_blank: false, input_html: { disabled: editing }
       f.input :forest_type, as: :select,
-              collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.first] },
-              include_blank: true, input_html: { disabled: editing }
+                            collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.first] },
+                            include_blank: true, input_html: { disabled: editing }
       f.input :name
       f.input :valid_period, label: 'Validity (days)'
       f.inputs 'Translated fields' do

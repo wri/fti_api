@@ -18,10 +18,10 @@
 #  organization_type :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :observer do
-    name          "Observer #{Faker::Lorem.sentence}"
-    observer_type 'External'
+    sequence(:name) { |n| "Observer #{n}" }
+    observer_type { 'External' }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
   end
 end

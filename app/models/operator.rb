@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operators
@@ -88,7 +89,7 @@ class Operator < ApplicationRecord
   class Translation
     after_save do
       if name_changed?
-        Operator.find(self.operator_id).fmus.find_each { |x| x.save }
+        Operator.find_by(id: operator_id)&.fmus&.find_each { |fmu| fmu.save }
       end
     end
   end
@@ -124,6 +125,7 @@ class Operator < ApplicationRecord
       # For the total number of documents, we take into account only the documents which
       # are required (current and not deleted) and whose required_operator_document
       # is also not deleted
+
       if approved
         percentage_approved
       else
@@ -146,7 +148,7 @@ class Operator < ApplicationRecord
     self.percentage_valid_documents_fmu =
       operator_document_fmus.valid.available.ns.count.to_f / operator_document_fmus.required.ns.count.to_f rescue 0
     self.percentage_valid_documents_country =
-      operator_document_countries.valid.available.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_document_countries.valid.available.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
   end
 
   # Calculates the percentage documents knowing they've all been approved
@@ -156,32 +158,34 @@ class Operator < ApplicationRecord
     self.percentage_valid_documents_fmu =
       operator_document_fmus.valid.ns.count.to_f / operator_document_fmus.ns.required.count.to_f rescue 0
     self.percentage_valid_documents_country =
-      operator_document_countries.valid.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_document_countries.valid.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
   end
 
   def calculate_observations_scores
-    if fa_id.present?
-      number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
-      number_of_visits = number_of_visits.keys.count
+    return if fa_id.blank?
 
-      # When there are no observations
-      if number_of_visits.zero?
-        self.obs_per_visit = nil
-        self.score_absolute = nil
-        save!
-        return
-      end
+    observations_query = observations.unscope(:joins)
+    number_of_visits = observations_query.select('date(publication_date)')
+                                         .group('date(publication_date)').count
+    number_of_visits = number_of_visits.keys.count
 
-      self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
-
-      high = observations.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
-      medium = observations.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
-      low = observations.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
-      unknown = observations.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
-      self.score_absolute  = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
-
+    # When there are no observations
+    if number_of_visits.zero?
+      self.obs_per_visit = nil
+      self.score_absolute = nil
       save!
+      return
     end
+
+    self.obs_per_visit = observations_query.count.to_f / number_of_visits rescue nil
+
+    high = observations_query.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
+    medium = observations_query.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
+    low = observations_query.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
+    unknown = observations_query.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
+    self.score_absolute = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
+
+    save!
   end
 
   class << self
@@ -204,22 +208,26 @@ class Operator < ApplicationRecord
       end
     end
 
+    # rubocop:disable Rails/SkipsModelValidations
     def calculate_scores
       Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
 
       number_operators = Operator.active.fa_operator.where.not(score_absolute: nil).count
       third_operators = (number_operators / 3).to_i
       Operator.active.fa_operator.where.not(score_absolute: nil).order(:score_absolute)
-          .limit(third_operators).update_all(score: 1)
+        .limit(third_operators).update_all(score: 1)
       Operator.active.fa_operator.where.not(score_absolute: nil)
-          .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
-      Operator.active.fa_operator.where.not(score_absolute: nil).order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
+        .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
+      Operator.active.fa_operator.where.not(score_absolute: nil)
+        .order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
     end
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
 
   def rebuild_documents
     return if fa_id.blank?
+
     country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
 
     # Country Documents
@@ -241,12 +249,11 @@ class Operator < ApplicationRecord
         end
       end
     end
-
-
   end
 
   private
 
+  # rubocop:disable Rails/SkipsModelValidations
   def create_operator_id
     if country_id.present?
       update_columns(operator_id: "#{country.iso}-unknown-#{id}")
@@ -254,6 +261,7 @@ class Operator < ApplicationRecord
       update_columns(operator_id: "na-unknown-#{id}")
     end
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   def create_documents
     return if fa_id.blank? || country_id.blank?

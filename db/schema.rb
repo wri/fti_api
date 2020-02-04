@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190930103120) do
+ActiveRecord::Schema.define(version: 20200203211539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -273,18 +273,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.string   "currency"
     t.index ["country_id"], name: "index_laws_on_country_id", using: :btree
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
-  end
-
-  create_table "layer", primary_key: ["topology_id", "layer_id"], force: :cascade do |t|
-    t.integer "topology_id",                null: false
-    t.integer "layer_id",                   null: false
-    t.string  "schema_name",                null: false
-    t.string  "table_name",                 null: false
-    t.string  "feature_column",             null: false
-    t.integer "feature_type",               null: false
-    t.integer "level",          default: 0, null: false
-    t.integer "child_id"
-    t.index ["schema_name", "table_name", "feature_column"], name: "layer_schema_name_table_name_feature_column_key", unique: true, using: :btree
   end
 
   create_table "observation_documents", force: :cascade do |t|
@@ -634,13 +622,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.index ["severity_id"], name: "index_severity_translations_on_severity_id", using: :btree
   end
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, force: :cascade do |t|
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
-  end
-
   create_table "species", force: :cascade do |t|
     t.string   "name"
     t.string   "species_class"
@@ -698,7 +679,7 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.string   "locale",         null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.string   "name"
+    t.text     "name"
     t.text     "details"
     t.index ["locale"], name: "index_subcategory_translations_on_locale", using: :btree
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
@@ -719,14 +700,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "topology", force: :cascade do |t|
-    t.string  "name",                      null: false
-    t.integer "srid",                      null: false
-    t.float   "precision",                 null: false
-    t.boolean "hasz",      default: false, null: false
-    t.index ["name"], name: "topology_name_key", unique: true, using: :btree
   end
 
   create_table "tutorial_translations", force: :cascade do |t|
@@ -753,27 +726,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
     t.string   "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "us_gaz", force: :cascade do |t|
-    t.integer "seq"
-    t.text    "word"
-    t.text    "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "us_lex", force: :cascade do |t|
-    t.integer "seq"
-    t.text    "word"
-    t.text    "stdword"
-    t.integer "token"
-    t.boolean "is_custom", default: true, null: false
-  end
-
-  create_table "us_rules", force: :cascade do |t|
-    t.text    "rule"
-    t.boolean "is_custom", default: true, null: false
   end
 
   create_table "user_permissions", force: :cascade do |t|
@@ -820,7 +772,6 @@ ActiveRecord::Schema.define(version: 20190930103120) do
   add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
-  add_foreign_key "layer", "topology", name: "layer_topology_id_fkey"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
   add_foreign_key "observation_operators", "observations"

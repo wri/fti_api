@@ -2,6 +2,7 @@
 
 module V1
   class RequiredOperatorDocumentResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     attributes :name, :valid_period, :explanation, :forest_type, :contract_signature
 

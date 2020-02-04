@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: required_operator_documents
@@ -18,7 +19,7 @@
 
 class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   include ForestTypeable
-  has_many :operator_document_fmus
+  has_many :operator_document_fmus, foreign_key: 'required_operator_document_id'
 
   validates :contract_signature, absence: true
 

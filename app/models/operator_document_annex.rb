@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operator_document_annexes
@@ -38,7 +39,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
 
   scope :valid,     ->()            { where(status: OperatorDocumentAnnex.statuses[:doc_valid])}
-  scope :from_user, ->(operator_id) { joins(:operator_document).where(operator_documents: {operator_id: operator_id})}
+  scope :from_user, ->(operator_id) { joins(:operator_document).where(operator_documents: { operator_id: operator_id })}
 
   def self.expire_document_annexes
     documents_to_expire =
