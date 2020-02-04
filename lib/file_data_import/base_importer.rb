@@ -5,13 +5,7 @@ module FileDataImport
     class InvalidImporterError < NameError; end
     class InvalidParserError < NameError; end
 
-    include ActiveModel::Validations
-
-    ALLOWED_EXTENSIONS = %w[csv].freeze
-
     attr_reader :file, :results
-
-    validates :extension, inclusion: { in: ALLOWED_EXTENSIONS }
 
     def initialize(file)
       @file = file

@@ -2,6 +2,8 @@
 
 module V1
   class ImportsController < ApiController
+    authorize_resource :file_data_import
+
     def create
       importer.import
 
@@ -20,6 +22,10 @@ module V1
 
     def importer
       @importer ||= FileDataImport::BaseImporter.build(import_params[:importer_type], import_params[:file])
+    end
+
+    def set_locale
+      I18n.locale = :en
     end
   end
 end

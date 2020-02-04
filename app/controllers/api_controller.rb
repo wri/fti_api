@@ -12,7 +12,7 @@ class ApiController < ActionController::API
       action: params[:action], locale: (params[:locale] || I18n.default_locale) }
   end
 
-  # before_action :check_access, :authenticate
+  before_action :check_access, :authenticate
   before_action :set_locale
 
   rescue_from ActiveRecord::RecordNotFound,   with: :record_not_found

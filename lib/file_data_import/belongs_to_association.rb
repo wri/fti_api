@@ -55,20 +55,18 @@ module FileDataImport
     end
 
     def extracted_attributes
-      @extracted_attributes ||= begin
-        permited_attributes.each_with_object({}) do |attribute, attributes|
-          value = raw_attributes["#{singular_name}__#{attribute}".to_sym]
-          attributes[attribute] = value if value.present?
-        end
-      end
+      @extracted_attributes ||= extract_attributes(permited_attributes)
     end
 
     def translations_attributes
-      @translations_attributes ||=
-        permited_translations.each_with_object({}) do |attribute, attributes|
-          value = raw_attributes["#{singular_name}__#{attribute}".to_sym]
-          attributes[attribute] = value if value
-        end
+      @translations_attributes ||= extract_attributes(permited_translations)
+    end
+
+    def extract_attributes(attrs)
+      attrs.each_with_object({}) do |attribute, attributes|
+        value = raw_attributes["#{singular_name}__#{attribute}".to_sym]
+        attributes[attribute] = value if value.present?
+      end
     end
   end
 end
