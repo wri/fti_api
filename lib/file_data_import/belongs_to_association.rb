@@ -3,14 +3,14 @@
 module FileDataImport
   class BelongsToAssociation
     attr_accessor(
-      :class_name, :permited_attributes, :permited_translations,
+      :class_name, :permitted_attributes, :permitted_translations,
       :raw_attributes, :abilities, :errors, :required, :belongs_as
     )
 
     def initialize(class_name, raw_attributes, **options)
       @class_name = class_name
-      @permited_attributes = options[:permited_attributes]&.map(&:to_sym) || []
-      @permited_translations = options[:permited_translations]&.map(&:to_sym) || []
+      @permitted_attributes = options[:permitted_attributes]&.map(&:to_sym) || []
+      @permitted_translations = options[:permitted_translations]&.map(&:to_sym) || []
       @raw_attributes = raw_attributes
       @abilities = options[:can]&.map(&:to_sym) || []
       @required = options[:required]
@@ -60,11 +60,11 @@ module FileDataImport
     end
 
     def extracted_attributes
-      @extracted_attributes ||= extract_attributes(permited_attributes)
+      @extracted_attributes ||= extract_attributes(permitted_attributes)
     end
 
     def translations_attributes
-      @translations_attributes ||= extract_attributes(permited_translations)
+      @translations_attributes ||= extract_attributes(permitted_translations)
     end
 
     def extract_attributes(attrs)

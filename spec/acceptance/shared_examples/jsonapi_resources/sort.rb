@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.shared_examples 'jsonapi-resources__sort' do |options|
   context "Sort" do
-    let(:jsonapi_attribbute) { options[:attribute].to_s.gsub('_', '-').to_sym }
+    let(:jsonapi_attribute) { options[:attribute].to_s.gsub('_', '-').to_sym }
     let(:expected_count) { options[:expected_count] || 6 }
     let(:desc) { options[:desc] || options[:sequence].call(expected_count - 1) }
     let(:asc) { options[:asc] || options[:sequence].call(0) }
@@ -24,7 +24,7 @@ RSpec.shared_examples 'jsonapi-resources__sort' do |options|
 
           expect(status).to eq(200)
           expect(parsed_data.size).to eq(expected_count)
-          expect(parsed_data[0][:attributes][jsonapi_attribbute]).to eq(asc)
+          expect(parsed_data[0][:attributes][jsonapi_attribute]).to eq(asc)
         end
 
         it "Show list sorted by #{options[:attribute]} DESC" do
@@ -32,7 +32,7 @@ RSpec.shared_examples 'jsonapi-resources__sort' do |options|
 
           expect(status).to eq(200)
           expect(parsed_data.size).to eq(expected_count)
-          expect(parsed_data[0][:attributes][jsonapi_attribbute]).to eq(desc)
+          expect(parsed_data[0][:attributes][jsonapi_attribute]).to eq(desc)
         end
       end
     end

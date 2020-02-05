@@ -2,13 +2,13 @@
 
 module FileDataImport
   class Record
-    attr_reader :class_name, :permited_attributes, :permited_translations, :raw_attributes, :results
+    attr_reader :class_name, :permitted_attributes, :permitted_translations, :raw_attributes, :results
 
     def initialize(class_name, raw_attributes, **options)
       @class_name = class_name
       @raw_attributes = raw_attributes
-      @permited_attributes = options[:permited_attributes] || []
-      @permited_translations = options[:permited_translations] || []
+      @permitted_attributes = options[:permitted_attributes] || []
+      @permitted_translations = options[:permitted_translations] || []
       @belongs_to_associations = []
       @results = { attributes: {}, errors: {} }
     end
@@ -64,11 +64,11 @@ module FileDataImport
     end
 
     def extracted_attributes
-      @extracted_attributes ||= raw_attributes.slice(*permited_attributes).compact
+      @extracted_attributes ||= raw_attributes.slice(*permitted_attributes).compact
     end
 
     def translations_attributes
-      @translations_attributes ||= raw_attributes.slice(*permited_translations).compact
+      @translations_attributes ||= raw_attributes.slice(*permitted_translations).compact
     end
   end
 end
