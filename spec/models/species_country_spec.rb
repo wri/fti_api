@@ -12,12 +12,14 @@
 require 'rails_helper'
 
 RSpec.describe SpeciesCountry, type: :model do
-  before :each do
-    @species = create(:species)
-    @country = create(:country, species: [@species])
+  subject(:species_country) { FactoryBot.build(:species_country) }
+
+  it 'is valid with valid attributes' do
+    expect(species_country).to be_valid
   end
 
-  it 'Count on country species' do
-    expect(@country.species.count).to eq(1)
+  describe 'Relations' do
+    it { is_expected.to belong_to(:country) }
+    it { is_expected.to belong_to(:species) }
   end
 end

@@ -12,12 +12,14 @@
 require 'rails_helper'
 
 RSpec.describe SpeciesObservation, type: :model do
-  before :each do
-    @species     = create(:species)
-    @observation = create(:observation_1, species: [@species])
+  subject(:species_observation) { FactoryBot.build(:species_observation) }
+
+  it 'is valid with valid attributes' do
+    expect(species_observation).to be_valid
   end
 
-  it 'Count on observation species' do
-    expect(@observation.species.count).to eq(1)
+  describe 'Relations' do
+    it { is_expected.to belong_to(:observation) }
+    it { is_expected.to belong_to(:species) }
   end
 end

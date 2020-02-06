@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Tool do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause
@@ -36,7 +39,9 @@ ActiveAdmin.register Tool do
                       },
                       placeholder: 'Type something...',
                       theme: 'snow'
-                    }}}
+                    }
+ }
+ }
       end
     end
     f.actions

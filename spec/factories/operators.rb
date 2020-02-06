@@ -25,14 +25,11 @@
 #  approved                           :boolean          default(TRUE), not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :operator do
-    name "Operator #{Faker::Lorem.sentence}"
+    country
+    sequence(:name) { |n| "Operator #{n}" }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
-
-    after(:create) do |operator|
-      operator.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                            iso: "C#{Faker::Lorem.sentence}"))
-    end
+    operator_type { Operator::TYPES.sample }
   end
 end

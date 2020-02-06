@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredGovDocument do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   active_admin_paranoia
@@ -50,7 +53,7 @@ ActiveAdmin.register RequiredGovDocument do
       f.input :required_gov_document_group
       f.input :country, input_html: { disabled: editing }
       f.input :document_type, as: :select, collection: RequiredGovDocument.document_types.keys,
-              include_blank: false, input_html: { disabled: editing }
+                              include_blank: false, input_html: { disabled: editing }
       f.input :name
       f.input :valid_period, label: 'Validity (days)'
       f.inputs 'Translated fields' do

@@ -65,7 +65,7 @@ class ApiController < ActionController::API
   end
 
   def authenticate
-    render json: { errors: [{ status: '401', title: 'Unauthorized' }] }, status: 401 unless logged_in?
+    render json: { errors: [{ status: '401', title: 'You are not authorized to access this page.' }] }, status: 401 unless logged_in?
   end
 
   def record_not_found

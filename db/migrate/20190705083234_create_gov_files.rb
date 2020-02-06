@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateGovFiles < ActiveRecord::Migration[5.0]
   def change
     create_table :gov_files do |t|

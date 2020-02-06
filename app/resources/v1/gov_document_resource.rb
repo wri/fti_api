@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: gov_documents
@@ -23,6 +24,8 @@
 
 module V1
   class GovDocumentResource < JSONAPI::Resource
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :required_gov_document_id,
                :expire_date, :start_date,
@@ -71,14 +74,6 @@ module V1
       { self: nil }
     end
 
-    # Caching conditions
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale],
-          owner: context[:current_user]
-      }
-    end
-
     def can_see_document?
       user = @context[:current_user]
       app = @context[:app]
@@ -91,7 +86,7 @@ module V1
 
     def hidden_document_status
       return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
-      return :doc_not_provided
+      :doc_not_provided
     end
   end
 end

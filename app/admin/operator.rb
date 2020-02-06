@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Operator, as: 'Producer' do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause
@@ -8,7 +11,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, :delete_logo, fmu_ids: [],
-                translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                                     translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update_attributes(is_active: true)
@@ -58,7 +61,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   scope :inactive
 
   filter :country, as: :select,
-          collection: -> { Country.joins(:operators).with_translations(I18n.locale) .order('country_translations.name') }
+                   collection: -> { Country.joins(:operators).with_translations(I18n.locale) .order('country_translations.name') }
   filter :translations_name_contains,
          as: :select, label: 'Name',
          collection: Operator.with_translations(I18n.locale)

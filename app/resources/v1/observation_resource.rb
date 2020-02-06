@@ -2,6 +2,7 @@
 
 module V1
   class ObservationResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
 
     attributes :observation_type, :publication_date,
@@ -85,6 +86,8 @@ module V1
     # This is called in an after save cause in the before save, there are still no relationships present
     # meaning that if there are more users, they'll override the current one
 
+    # TODO: Reactivate rubocop and fix the problem
+    # rubocop:disable Lint/RescueException
     def add_own_observer
       begin
         user = context[:current_user]
@@ -97,6 +100,7 @@ module V1
         Rails.logger.warn "Observation created without user: #{e.inspect}"
       end
     end
+    # rubocop:enable Lint/RescueException
 
     # Saves the last user who modified the observation
     def set_modified
@@ -130,13 +134,6 @@ module V1
       else
         Observation.active
       end
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end

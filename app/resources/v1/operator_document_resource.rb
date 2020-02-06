@@ -2,11 +2,14 @@
 
 module V1
   class OperatorDocumentResource < JSONAPI::Resource
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :current, :uploaded_by, :reason, :note, :response_date
+               :fmu_id, :current, :uploaded_by, :reason, :note, :response_date,
+                :public
 
     has_one :country
     has_one :fmu
@@ -77,14 +80,6 @@ module V1
       { self: nil }
     end
 
-    # Caching conditions
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale],
-          owner: context[:current_user]
-      }
-    end
-
     def document_public?
       @model.public || @model.operator.approved
     end
@@ -101,7 +96,7 @@ module V1
 
     def hidden_document_status
       return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
-      return :doc_not_provided
+      :doc_not_provided
     end
   end
 end

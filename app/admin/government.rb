@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Government do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause
@@ -36,7 +39,7 @@ ActiveAdmin.register Government do
   end
 
   filter :country, as: :select,
-          collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
+                   collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_government_entity_contains,
          as: :select, label: 'Entity',
          collection: Government.with_translations(I18n.locale)

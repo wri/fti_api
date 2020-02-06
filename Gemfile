@@ -94,9 +94,10 @@ group :test do
   gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rspec-activejob'
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 4.0.1'
   gem 'simplecov'
   gem 'timecop'
 end

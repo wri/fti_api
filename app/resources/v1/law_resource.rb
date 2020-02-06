@@ -13,7 +13,7 @@ module V1
     filters :country, :subcategory, :written_infraction, :infraction, :sanctions, :min_fine, :max_fine,
             :penal_servitude, :other_penalties, :apv
 
-    filter :complete, apply: -> (records, value, _options) {
+    filter :complete, apply: ->(records, value, _options) {
       if value[0] == "true"
         records.where('written_infraction is not null and infraction is not null and
 sanctions is not null and min_fine is not null and max_fine is not null and penal_servitude is not null

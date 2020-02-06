@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: required_operator_documents
@@ -30,9 +31,10 @@ class RequiredOperatorDocument < ApplicationRecord
   has_many :operator_document_countries
 
   validates :valid_period, numericality: { greater_than: 0 }
-  after_destroy :invalidate_operator_documents
 
   validate :fixed_fields_unchanged
+
+  after_destroy :invalidate_operator_documents
 
   scope :with_archived, ->() { unscope(where: :deleted_at) }
 

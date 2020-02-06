@@ -2,6 +2,7 @@
 
 module V1
   class RequiredGovDocumentGroupResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     attributes :name, :position
 
@@ -14,14 +15,7 @@ module V1
     end
 
     def self.default_sort
-      [{field: 'position', direction: :asc}]
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
+      [{ field: 'position', direction: :asc }]
     end
   end
 end

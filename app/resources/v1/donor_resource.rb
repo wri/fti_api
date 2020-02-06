@@ -2,6 +2,7 @@
 
 module V1
   class DonorResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     immutable
 

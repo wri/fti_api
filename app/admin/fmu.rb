@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Fmu do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :show, :edit, :index, :update
@@ -26,9 +29,9 @@ ActiveAdmin.register Fmu do
          as: :select, label: 'Name',
          collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name').pluck(:name) }
   filter :country, as: :select,
-          collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
+                   collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator_in_all, label: 'Operator', as: :select,
-         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
 
   csv do
     column :id

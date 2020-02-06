@@ -7,7 +7,7 @@ RSpec.describe PhotoUploader do
   before do
     PhotoUploader.enable_processing = true
     @photo    = create(:photo)
-    @uploader = PhotoUploader.new(@photo, Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))
+    @uploader = PhotoUploader.new(@photo, :attachment)
     @uploader.store!(File.open(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))
   end
 

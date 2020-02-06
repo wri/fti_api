@@ -2,6 +2,8 @@
 
 module V1
   class OperatorDocumentAnnexResource < JSONAPI::Resource
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :operator_document_id, :name,
                :start_date, :expire_date, :status, :attachment,
@@ -89,14 +91,6 @@ module V1
 
     def belongs_to_user
       context[:current_user]&.is_operator?(@model.operator_document.operator_id)
-    end
-
-    # Caching conditions
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale],
-          owner: context[:current_user]
-      }
     end
   end
 end

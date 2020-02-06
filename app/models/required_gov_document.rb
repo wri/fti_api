@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: required_gov_documents
@@ -19,7 +20,9 @@ class RequiredGovDocument < ApplicationRecord
   acts_as_paranoid
 
   translates :explanation, touch: true
+  # rubocop:disable Style/BlockDelimiters
   active_admin_translates :explanation do; end
+  # rubocop:enable Style/BlockDelimiters
 
   belongs_to :required_gov_document_group
   belongs_to :country, required: true
