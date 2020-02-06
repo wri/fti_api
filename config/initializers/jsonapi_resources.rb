@@ -14,6 +14,9 @@ JSONAPI.configure do |config|
   config.top_level_meta_record_count_key = :record_count
   config.top_level_meta_include_page_count = true
   config.top_level_meta_page_count_key = :page_count
+
+  # The endpoints ignore params that are not allowed
+  config.raise_if_parameters_not_allowed = false
 end
 
 # TODO: Not the perfect solution. Inspect the code of JSONAPIResources to find a better solution
