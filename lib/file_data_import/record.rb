@@ -2,6 +2,8 @@
 
 module FileDataImport
   class Record
+    include FileDataImport::Concerns::HasAttributes
+
     attr_reader :class_name, :permitted_attributes, :permitted_translations, :raw_attributes, :results
 
     def initialize(class_name, raw_attributes, **options)
@@ -34,8 +36,8 @@ module FileDataImport
               results[:errors][singular_name] = belongs_to_association.errors
             end
 
-            if belongs_to_association.attributes.present?
-              results[:attributes][singular_name] = belongs_to_association.attributes
+            if belongs_to_association.record_attributes.present?
+              results[:attributes][singular_name] = belongs_to_association.record_attributes
             end
           end
 
@@ -44,31 +46,11 @@ module FileDataImport
 
         record.save
         results[:errors][:record] = record.errors.messages unless record.errors.empty?
-        results[:attributes][:record] = attributes_for_finding
+        results[:attributes][:record] = record_attributes
         raise ActiveRecord::RecordInvalid if results[:errors].any?
       end
     rescue ActiveRecord::RecordInvalid
       nil
-    end
-
-    private
-
-    def attributes_for_creation
-      @attributes_for_creation ||= begin
-        extracted_attributes.merge({ translations_attributes: [translations_attributes.merge(locale: I18n.locale)] })
-      end
-    end
-
-    def attributes_for_finding
-      @attributes_for_finding ||= extracted_attributes.merge(translations_attributes)
-    end
-
-    def extracted_attributes
-      @extracted_attributes ||= raw_attributes.slice(*permitted_attributes).compact
-    end
-
-    def translations_attributes
-      @translations_attributes ||= raw_attributes.slice(*permitted_translations).compact
     end
   end
 end
