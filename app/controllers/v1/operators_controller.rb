@@ -15,5 +15,15 @@ module V1
       end
       super
     end
+
+    def create
+      results = super
+      parsed_results = JSON.parse(results)
+      unless parsed_results['errors']
+        operator = Operator.find parsed_results['data']['id']
+        MailService.notify_operator_creation(operator)
+      end
+      results
+    end
   end
 end
