@@ -2,6 +2,8 @@
 
 module FileDataImport
   class BelongsToAssociation
+    include FileDataImport::Concerns::HasAttributes
+
     attr_accessor(
       :class_name, :permitted_attributes, :permitted_translations,
       :raw_attributes, :abilities, :errors, :required, :belongs_as
@@ -48,16 +50,6 @@ module FileDataImport
     end
 
     private
-
-    def attributes_for_finding
-      @attributes_for_finding ||= extracted_attributes.merge(translations_attributes)
-    end
-
-    def attributes_for_creation
-      @attributes_for_creation ||= begin
-        extracted_attributes.merge({ translations_attributes: [translations_attributes.merge(locale: I18n.locale)] })
-      end
-    end
 
     def extracted_attributes
       @extracted_attributes ||= extract_attributes(permitted_attributes)

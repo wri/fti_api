@@ -18,6 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'acceptance_helper'
+require 'importer_helper'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -100,4 +101,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
   config.include AcceptanceHelper, type: :request
+  config.include ImporterHelper, type: :importer
 end
