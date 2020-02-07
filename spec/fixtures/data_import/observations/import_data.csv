@@ -1,0 +1,3 @@
+observation_type,publication_date,pv,is_active,details,evidence,concern_opinion,litigation_status,lat,lng,country_id,fmu_id,location_information,subcategory_id,severity_id,created_at,updated_at,actions_taken,validation_status,is_physical_place,country__name,country__iso,operator__name,operator__operator_type,modified_user__email,modified_user__nickname
+operator,12-12-2020,,FALSE,,,,,,,,,,,,,,,Created,FALSE,Ukraine,UA,operator_name,Other,modified_user@mail.com,modified_user_nickname
+operator,4-12-2020,,TRUE,,,,,,,,,,,,,,,Created,FALSE,Germany,DE,operator_name1,Other,modified_user1@mail.com,modified_user_nickname1

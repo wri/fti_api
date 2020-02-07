@@ -27,7 +27,7 @@ module FileDataImport
         parser_name = "FileDataImport::Parser::#{extension.capitalize}"
         parser_name.constantize.new(file.path)
       rescue NameError
-        raise InvalidParserError, "Undefined parser #{importer_name}."
+        raise InvalidParserError, "Undefined parser #{parser_name}."
       end
     end
 
