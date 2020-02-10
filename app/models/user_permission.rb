@@ -72,7 +72,8 @@ class UserPermission < ApplicationRecord
             fmu: { read: {}, update: {} },
             operator_document: { manage: {} },
             required_operator_document_group: { cru: {} },
-            required_operator_document: { cru: {} }
+            required_operator_document: { cru: {} },
+            file_data_import: { manage: {} }
         }
       when 'bo_manager'
         {
