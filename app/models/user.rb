@@ -74,6 +74,7 @@ class User < ApplicationRecord
   validate :user_integrity
 
   before_validation :create_from_request, on: :create
+  after_update :notify_user, if: 'is_active && is_active_changed?'
 
   include Activable
   include Roleable
@@ -193,5 +194,10 @@ class User < ApplicationRecord
       errors.add(:operator_id, 'Cannot have an Operator') if operator_id.present?
       errors.add(:observer_id, 'Cannot have an Observer') if observer_id.present?
     end
+  end
+
+  # Sends an email to the user when it is approved
+  def notify_user
+    MailService.notify_user_acceptance(self)
   end
 end

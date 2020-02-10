@@ -153,12 +153,39 @@ RSpec.describe User, type: :model do
 
   describe 'Hooks' do
     describe '#create_from_request' do
-      context 'when permision_request is present' do
+      context 'when permission_request is present' do
         it 'add user_permission which correspond to the permissions_request' do
           user = build(:user, permissions_request: 1)
 
           expect(user.user_permission).not_to eql nil
           expect(user.user_permission.user_role).to eql 'user'
+        end
+      end
+    end
+    describe 'sends notification email to the user' do
+      context 'when the active flag is not changed' do
+        it "doesn't send the email" do
+          created_user = FactoryBot.create(:user, is_active: false)
+          created_user.name = 'new name'
+          expect(created_user).not_to receive(:notify_user)
+          created_user.save
+        end
+      end
+      context 'when the active flag is changed to false' do
+        it "doesn't send the email" do
+          created_user = FactoryBot.create(:user, is_active: true)
+          created_user.is_active = false
+          expect(created_user).not_to receive(:notify_user)
+          created_user.save
+        end
+      end
+      context "when the active flag is changed to true" do
+        it 'sends the email' do
+          created_user = FactoryBot.create(:user, is_active: false)
+          created_user.is_active = true
+
+          expect(created_user).to receive(:notify_user)
+          created_user.save
         end
       end
     end
