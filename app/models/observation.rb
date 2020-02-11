@@ -180,10 +180,12 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
               governments.none? ||
               governments.select(:is_active).any?(&:is_active)
 
-    errors.add(:governments, 'At least one government should be active')
+    errors.add(:governments, "At least one government should be active")
   end
 
   def validate_governments_absences
-    return unless governments_observations.exists?
+    return if governments.none?
+
+    errors.add(:goverments, "Should have no governments with 'operator' observation type")
   end
 end
