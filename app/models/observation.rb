@@ -186,6 +186,6 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def validate_governments_absences
     return if governments.none?
 
-    errors.add(:goverments, "Should have no governments with 'operator' observation type")
+    errors.add(:goverments, "Should have no governments with 'operator' type")
   end
 end

@@ -67,7 +67,7 @@ module V1
     def self.sortable_fields(context)
       super + [:'country.iso', :'severity.level', :'subcategory.name',
                :'operator.name', :'country.name', :'law.written_infraction',
-               :'fmu.name', :'observation_report.title', :'governments.government_entity', :'subcategory.category.name'] #?
+               :'fmu.name', :'observation_report.title', :'governments.government_entity', :'subcategory.category.name']
     end
 
     def self.apply_sort(records, order_options, context = {})
