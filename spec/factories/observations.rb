@@ -35,6 +35,7 @@ FactoryBot.define do
     operator { build(:operator, name: "Operator #{Faker::Lorem.sentence}") }
     observation_type { 'operator' }
     is_active { true }
+    evidence_type { 'Photos' }
     evidence { 'Operator observation' }
     publication_date { DateTime.now.to_date }
     lng { 12.2222 }
