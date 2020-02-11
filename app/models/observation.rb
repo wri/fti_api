@@ -11,7 +11,6 @@
 #  publication_date      :datetime
 #  country_id            :integer
 #  operator_id           :integer
-#  government_id         :integer
 #  pv                    :string
 #  is_active             :boolean          default(TRUE)
 #  created_at            :datetime         not null
@@ -44,7 +43,6 @@ class Observation < ApplicationRecord
   belongs_to :country,        inverse_of: :observations
   belongs_to :severity,       inverse_of: :observations
   belongs_to :operator,       inverse_of: :observations, optional: true
-  belongs_to :government,     inverse_of: :observations, optional: true
   belongs_to :user,           inverse_of: :observations, optional: true
   belongs_to :modified_user,  class_name: 'User', foreign_key: 'modified_user_id', optional: true
   belongs_to :fmu,            inverse_of: :observations, optional: true
@@ -55,6 +53,9 @@ class Observation < ApplicationRecord
 
   has_many :species_observations, dependent: :destroy
   has_many :species, through: :species_observations
+
+  has_many :governments_observations, dependent: :destroy
+  has_many :governments, through: :governments_observations
 
   has_many :observer_observations, dependent: :destroy
   has_many :observers, through: :observer_observations
@@ -72,11 +73,20 @@ class Observation < ApplicationRecord
   accepts_nested_attributes_for :subcategory,                  allow_destroy: false
 
 
+  with_options if: :operator? do
+    validate :validate_governments_absences
+  end
+
+  with_options if: :government? do
+    validates :operator_id, absence: true
+    validate :active_government
+  end
+
+
   validates :country_id,       presence: true
   validates :publication_date, presence: true
   validates :validation_status, presence: true
   validates :observation_type, presence: true
-  validate :active_government
 
   before_save    :set_active_status
   before_save    :check_is_physical_place
@@ -97,7 +107,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   scope :by_category,       ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: { level: level }) }
-  scope :by_government,     ->(government_id) { joins(:government).where(governments: { id: government_id }) }
+  scope :by_government,     ->(government_id) { joins(:governments).where(governments: { id: government_id }) }
   scope :pending,           ->() { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
   scope :created,           ->() { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
 
@@ -167,10 +177,13 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   def active_government
     return if persisted? ||
-              observation_type != 'government' ||
-              government.nil? ||
-              government.is_active
+              governments.none? ||
+              governments.select(:is_active).any?(&:is_active)
 
-    errors.add(:government, 'The selected government is not active')
+    errors.add(:governments, 'At least one government should be active')
+  end
+
+  def validate_governments_absences
+    return unless governments_observations.exists?
   end
 end

@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200203211539) do
+ActiveRecord::Schema.define(version: 20200210223848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
+  enable_extension "postgis"
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
 
@@ -240,6 +240,17 @@ ActiveRecord::Schema.define(version: 20200203211539) do
     t.index ["country_id"], name: "index_governments_on_country_id", using: :btree
   end
 
+  create_table "governments_observations", force: :cascade do |t|
+    t.integer  "government_id"
+    t.integer  "observation_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["government_id", "observation_id"], name: "governments_observations_association_index", unique: true, using: :btree
+    t.index ["government_id"], name: "index_governments_observations_on_government_id", using: :btree
+    t.index ["observation_id", "government_id"], name: "observations_governments_association_index", unique: true, using: :btree
+    t.index ["observation_id"], name: "index_governments_observations_on_observation_id", using: :btree
+  end
+
   create_table "how_to_translations", force: :cascade do |t|
     t.integer  "how_to_id",   null: false
     t.string   "locale",      null: false
@@ -340,7 +351,6 @@ ActiveRecord::Schema.define(version: 20200203211539) do
     t.datetime "publication_date"
     t.integer  "country_id"
     t.integer  "operator_id"
-    t.integer  "government_id"
     t.string   "pv"
     t.boolean  "is_active",             default: true
     t.datetime "created_at",                           null: false
@@ -358,7 +368,6 @@ ActiveRecord::Schema.define(version: 20200203211539) do
     t.boolean  "is_physical_place",     default: true
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
-    t.index ["government_id"], name: "index_observations_on_government_id", using: :btree
     t.index ["is_active"], name: "index_observations_on_is_active", using: :btree
     t.index ["law_id"], name: "index_observations_on_law_id", using: :btree
     t.index ["observation_report_id"], name: "index_observations_on_observation_report_id", using: :btree
@@ -781,7 +790,6 @@ ActiveRecord::Schema.define(version: 20200203211539) do
   add_foreign_key "observation_reports", "users"
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"
-  add_foreign_key "observations", "governments"
   add_foreign_key "observations", "laws"
   add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"

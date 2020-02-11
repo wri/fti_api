@@ -20,7 +20,6 @@ class ObservationsImporter < FileDataImport::BaseImporter
 
   belongs_to Country, permitted_attributes: %i[iso],  permitted_translations: %i[name], required: true
   belongs_to Severity, permitted_attributes: %i[level], permitted_translations: %i[details]
-  belongs_to Government, permitted_attributes: %i[is_active], permitted_translations: %i[government_entity details]
   belongs_to ObservationReport, permitted_attributes: %i[title publication_date created_at updated_at attachment]
   belongs_to User, permitted_attributes: USER_PERMITTED_ATTRIBUTES
   belongs_to User, as: :modified_user, permitted_attributes: USER_PERMITTED_ATTRIBUTES
