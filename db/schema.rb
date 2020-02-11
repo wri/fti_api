@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200203211539) do
+ActiveRecord::Schema.define(version: 20200211080223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -356,6 +356,7 @@ ActiveRecord::Schema.define(version: 20200203211539) do
     t.integer  "law_id"
     t.string   "location_information"
     t.boolean  "is_physical_place",     default: true
+    t.integer  "evidence_type"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["government_id"], name: "index_observations_on_government_id", using: :btree

@@ -39,6 +39,7 @@ class Observation < ApplicationRecord
 
   enum observation_type: %w(operator government)
   enum validation_status: ['Created', 'Ready for revision', 'Under revision', 'Approved', 'Rejected']
+  enum evidence_type: ['Government Documents', 'Company Documents', 'Photos', 'Testimony from local communities', 'Other']
 
 
   belongs_to :country,        inverse_of: :observations
