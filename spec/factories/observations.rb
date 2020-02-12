@@ -39,6 +39,7 @@ FactoryBot.define do
     evidence_type { 'Photos' }
     evidence { 'Operator observation' }
     publication_date { DateTime.now.to_date }
+    location_accuracy { 'Estimated location' }
     lng { 12.2222 }
     lat { 12.3333 }
   end
