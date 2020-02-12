@@ -71,7 +71,7 @@ set :ssh_options, {
     password: fetch(:password)
 }
 
-set :branch, 'master'
+set :branch, 'staging'
 set :deploy_to, '~/fti-api-production-secondary'
 
 role :resque_worker, ENV['PRODUCTION_IP']

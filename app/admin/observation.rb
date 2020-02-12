@@ -30,9 +30,10 @@ ActiveAdmin.register Observation do
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
-                :location_information, :law_id, :fmu_id, observer_ids: [], relevant_operators: [],
-                                                         observation_documents_attributes: [:id, :name, :attachment],
-                                                         translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
+                :location_information, :evidence_type, :law_id, :fmu_id,
+                observer_ids: [], relevant_operators: [],
+                observation_documents_attributes: [:id, :name, :attachment],
+                translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
 
 
   member_action :approve, method: :put do
@@ -137,7 +138,6 @@ ActiveAdmin.register Observation do
   filter :updated_at
 
 
-
   csv do
     column :id
     column :is_active
@@ -175,6 +175,7 @@ ActiveAdmin.register Observation do
     column :publication_date
     column :actions_taken
     column :details
+    column :evidence_type
     column :evidence
     column :concern_opinion
     column :report do |observation|
@@ -241,6 +242,7 @@ ActiveAdmin.register Observation do
       o.actions_taken[0..100] + (o.actions_taken.length >= 100 ? '...' : '') if o.actions_taken
     end
     column :details
+    column :evidence_type
     column :evidence
     column :concern_opinion do |o|
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
@@ -269,9 +271,10 @@ ActiveAdmin.register Observation do
       render partial: "fields",
              locals: { attributes: %w[active status country fmu location_information observers observation_type
                                       operator government relevant_operators subcategory law law_country
-                                      illegality_as_written_by_law legal_reference_illegality legal_reference_penalties
-                                      minimum_fine maximum_fine currency penal_servitude other_penalties indicator_apv severity
-                                      publication_date actions_taken details evidence concern_opinion pv lat lng is_physical_place
+                                      illegality_as_written_by_law legal_reference_illegality
+                                      legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
+                                      other_penalties indicator_apv severity publication_date actions_taken
+                                      details evidence_type evidence concern_opinion pv lat lng is_physical_place
                                       litigation_status report user modified_user created_at updated_at] }
     end
   end
@@ -314,6 +317,7 @@ ActiveAdmin.register Observation do
       f.input :lng
       f.input :observation_report, as: :select
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
+        f.input :evidence_type, as: :select
         t.input :name
         t.input :attachment
       end

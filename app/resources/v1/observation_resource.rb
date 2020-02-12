@@ -6,8 +6,8 @@ module V1
     caching
 
     attributes :observation_type, :publication_date,
-               :pv, :is_active, :details, :evidence, :concern_opinion,
-               :litigation_status, :lat, :lng,
+               :pv, :is_active, :details, :evidence_type, :evidence,
+               :concern_opinion, :litigation_status, :lat, :lng,
                :country_id, :fmu_id, :location_information,
                :subcategory_id, :severity_id, :created_at, :updated_at,
                :actions_taken, :validation_status, :is_physical_place

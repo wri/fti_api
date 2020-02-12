@@ -87,8 +87,8 @@ RSpec.describe Observation, type: :model do
     it { is_expected.to validate_presence_of(:observation_type) }
 
     describe '#active_government' do
-      context 'when type is goverment and goverment is not specified' do
-        it 'add error on goverment' do
+      context 'when type is government and government is not specified' do
+        it 'add error on government' do
           observation = build(:observation, observation_type: 'government')
           observation.government.update_attributes(is_active: false)
           observation.save
