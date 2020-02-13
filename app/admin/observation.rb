@@ -30,7 +30,7 @@ ActiveAdmin.register Observation do
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
-                :location_information, :evidence_type, :law_id, :fmu_id,
+                :location_information, :evidence_type, :location_accuracy, :law_id, :fmu_id,
                 observer_ids: [], relevant_operators: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
@@ -250,6 +250,7 @@ ActiveAdmin.register Observation do
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
     end
     column :pv
+    column :location_accuracy
     column :lat
     column :lng
     column :is_physical_place
@@ -276,8 +277,9 @@ ActiveAdmin.register Observation do
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
-                                      details evidence_type evidence concern_opinion pv lat lng is_physical_place
-                                      litigation_status report user modified_user created_at updated_at] }
+                                      details evidence_type evidence concern_opinion pv location_accuracy
+                                      lat lng is_physical_place litigation_status report user
+                                      modified_user created_at updated_at] }
     end
   end
 
@@ -317,6 +319,7 @@ ActiveAdmin.register Observation do
       f.input :operator, input_html: { disabled: operator } if f.object.observation_type == 'operator'
       f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false }
       f.input :pv
+      f.input :location_accuracy, as: :select
       f.input :lat
       f.input :lng
       f.input :observation_report, as: :select
@@ -374,6 +377,7 @@ ActiveAdmin.register Observation do
       end
       row :publication_date
       row :pv
+      row :location_accuracy
       row :lat
       row :lng
       row :actions_taken
