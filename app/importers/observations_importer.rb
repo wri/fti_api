@@ -2,8 +2,9 @@
 
 class ObservationsImporter < FileDataImport::BaseImporter
   PERMITTED_ATTRIBUTES = %i[
-    observation_type publication_date pv is_active lat lng fmu_id evidence_type
-    location_information actions_taken validation_status is_physical_place
+    observation_type publication_date pv is_active location_accuracy
+    lat lng fmu_id evidence_type location_information actions_taken
+    validation_status is_physical_place
   ].freeze
 
   PERMITTED_TRANSLATES = %i[
@@ -20,7 +21,6 @@ class ObservationsImporter < FileDataImport::BaseImporter
 
   belongs_to Country, permitted_attributes: %i[iso],  permitted_translations: %i[name], required: true
   belongs_to Severity, permitted_attributes: %i[level], permitted_translations: %i[details]
-  belongs_to Government, permitted_attributes: %i[is_active], permitted_translations: %i[government_entity details]
   belongs_to ObservationReport, permitted_attributes: %i[title publication_date created_at updated_at attachment]
   belongs_to User, permitted_attributes: USER_PERMITTED_ATTRIBUTES
   belongs_to User, as: :modified_user, permitted_attributes: USER_PERMITTED_ATTRIBUTES

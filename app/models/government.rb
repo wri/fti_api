@@ -21,7 +21,9 @@ class Government < ApplicationRecord
   # rubocop:enable Style/BlockDelimiters
 
   belongs_to :country, inverse_of: :governments, optional: true
-  has_many :observations, inverse_of: :government, dependent: :restrict_with_error
+
+  has_many :governments_observations, dependent: :restrict_with_error
+  has_many :observations, through: :governments_observations
 
   validates :government_entity, presence: true
 
