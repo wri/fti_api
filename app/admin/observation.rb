@@ -308,7 +308,9 @@ ActiveAdmin.register Observation do
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
       if f.object.observation_type == 'government'
-        f.input :government_ids, label: "Governments", as: :select,
+        f.input :government_ids,
+                label: "Governments",
+                as: :select,
                 collection: Government.all.map {|g| [g.government_entity, g.id] },
                 input_html: { disabled: government, multiple: true }
       end
@@ -358,9 +360,11 @@ ActiveAdmin.register Observation do
       end
       if resource.governments.present?
         row :governments do |o|
-          o.governments.each_with_object([]) do |government, links|
+          list = o.governments.each_with_object([]) do |government, links|
             links << link_to(government.government_entity, admin_government_path(government.id))
-          end.join(" ").html_safe
+          end
+
+          safe_join(list, " ")
         end
       end
       if resource.relevant_operators.present?
