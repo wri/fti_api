@@ -21,7 +21,7 @@ ActiveAdmin.register Observation do
     def scoped_collection
       end_of_association_chain.includes([:translations, [country: :translations],
                                          :severity, [operator: :translations],
-                                         [government: :translations],
+                                         [governments: :translations],
                                          [subcategory: :translations], [observer_observations: [observer: :translations]],
                                          [fmu: :translations], :user, :observation_report])
     end
@@ -31,7 +31,7 @@ ActiveAdmin.register Observation do
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :evidence_type, :location_accuracy, :law_id, :fmu_id,
-                observer_ids: [], relevant_operators: [],
+                observer_ids: [], relevant_operators: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
 
@@ -119,7 +119,7 @@ ActiveAdmin.register Observation do
                      collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
-  filter :government_translations_government_entity_contains,
+  filter :governments_translations_government_entity_contains,
          as: :select, label: 'Government Entity',
          collection: Government.with_translations(I18n.locale)
                          .order('government_translations.government_entity')
@@ -158,7 +158,7 @@ ActiveAdmin.register Observation do
       observation.operator&.name # if observation.operator
     end
     column :government do |observation|
-      observation.government&.government_entity #if observation.government
+      observation.governments.map(&:government_entity)
     end
     column :relevant_operators do |observation|
       observation.relevant_operators.map(&:name).join(', ')
@@ -209,8 +209,10 @@ ActiveAdmin.register Observation do
     end
     column :observation_type, sortable: 'observation_type'
     column :operator, sortable: 'operator_translations.name'
-    column :government, sortable: 'government_translations.government_entity' do |o|
-      o.government.government_entity if o.government.present?
+    column :governments, sortable: 'government_translations.government_entity' do |o|
+      o.governments.each_with_object([]) do |government, links|
+        links << link_to(government.government_entity, admin_government_path(government.id))
+      end.reduce(:+)
     end
     column :relevant_operators do |o|
       links = []
@@ -271,7 +273,7 @@ ActiveAdmin.register Observation do
     panel 'Visible columns' do
       render partial: "fields",
              locals: { attributes: %w[active status country fmu location_information observers observation_type
-                                      operator government relevant_operators subcategory law law_country
+                                      operator governments relevant_operators subcategory law law_country
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
@@ -285,7 +287,7 @@ ActiveAdmin.register Observation do
     operator   = object.operator_id.present? ? true : false
     law        = object.law_id.present? ? true : false
     fmu        = object.fmu_id.present? ? true : false
-    government = object.government_id.present? ? true : false
+    government = object.government_ids.present? ? true : false
 
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Info' do
@@ -308,9 +310,11 @@ ActiveAdmin.register Observation do
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
       if f.object.observation_type == 'government'
-        f.input :government, as: :select,
-                             collection: Government.all.map {|g| [g.government_entity, g.id] },
-                             input_html: { disabled: government }
+        f.input :government_ids,
+                label: "Governments",
+                as: :select,
+                collection: Government.all.map {|g| [g.government_entity, g.id] },
+                input_html: { disabled: government, multiple: true }
       end
       f.input :operator, input_html: { disabled: operator } if f.object.observation_type == 'operator'
       f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false }
@@ -345,7 +349,7 @@ ActiveAdmin.register Observation do
       row :subcategory
       row :law
       row :severity do |o|
-        o.severity.details
+        o.severity&.details
       end
       row :is_physical_place
       if resource.location_information.present?
@@ -357,9 +361,17 @@ ActiveAdmin.register Observation do
       if resource.operator.present?
         row :operator
       end
-      if resource.government.present?
-        row :government do |o|
-          o.government.government_entity
+      if resource.governments.present?
+        row :governments do |o|
+          list = o.governments.each_with_object([]) do |government, links|
+            links << link_to(government.government_entity, admin_government_path(government.id))
+          end
+
+          safe_join(list, " ")
+        end
+      end
+      if resource.relevant_operators.present?
+        row :relevant_operators do |o|
           o.relevant_operators
         end
       end

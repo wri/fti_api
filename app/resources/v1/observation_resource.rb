@@ -18,6 +18,7 @@ module V1
     has_many :observation_documents
     has_many :observers
     has_many :relevant_operators
+    has_many :governments
 
     has_one :country
     has_one :subcategory
@@ -26,7 +27,6 @@ module V1
     has_one :modified_user
 
     has_one :operator
-    has_one :government
     has_one :law
     has_one :fmu
     has_one :observation_report
@@ -37,7 +37,7 @@ module V1
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
-            :observation_report, :law, :operator, :government,
+            :observation_report, :law, :operator,
             :subcategory, :is_active, :validation_status, :is_physical_place
 
     filter :category_id, apply: ->(records, value, _options) {
@@ -67,7 +67,7 @@ module V1
     def self.sortable_fields(context)
       super + [:'country.iso', :'severity.level', :'subcategory.name',
                :'operator.name', :'country.name', :'law.written_infraction',
-               :'fmu.name', :'observation_report.title', :'government.government_entity', :'subcategory.category.name']
+               :'fmu.name', :'observation_report.title', :'governments.government_entity', :'subcategory.category.name']
     end
 
     def self.apply_sort(records, order_options, context = {})

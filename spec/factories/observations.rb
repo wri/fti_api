@@ -9,7 +9,6 @@
 #  publication_date      :datetime
 #  country_id            :integer
 #  operator_id           :integer
-#  government_id         :integer
 #  pv                    :string
 #  is_active             :boolean          default(TRUE)
 #  created_at            :datetime         not null
@@ -46,8 +45,8 @@ FactoryBot.define do
 
   factory :observation_2, class: 'Observation' do
     severity
-    government
     country
+    governments { build_list(:government, 2) }
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     user { build(:admin) }
     observation_type { 'government' }
@@ -64,8 +63,7 @@ FactoryBot.define do
     user { build(:admin) }
     severity { build(:severity, subcategory: subcategory) }
     operator { build(:operator, country: country) }
-    government { build(:government, country: country) }
-    observation_type { %w[operator government].sample }
+    observation_type { 'operator' }
     observers { build_list(:observer, 1) }
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     is_active { true }

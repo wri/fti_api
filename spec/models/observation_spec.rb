@@ -54,7 +54,6 @@ RSpec.describe Observation, type: :model do
     it { is_expected.to belong_to(:country).inverse_of(:observations) }
     it { is_expected.to belong_to(:severity).inverse_of(:observations) }
     it { is_expected.to belong_to(:operator).inverse_of(:observations) }
-    it { is_expected.to belong_to(:government).inverse_of(:observations).optional }
     it { is_expected.to belong_to(:user).inverse_of(:observations).optional }
     it { is_expected.to belong_to(:modified_user).class_name('User').with_foreign_key('modified_user_id').optional }
     it { is_expected.to belong_to(:fmu).inverse_of(:observations).optional }
@@ -71,6 +70,8 @@ RSpec.describe Observation, type: :model do
     it { is_expected.to have_many(:comments) }
     it { is_expected.to have_many(:photos).dependent(:destroy) }
     it { is_expected.to have_many(:observation_documents) }
+    it { is_expected.to have_many(:governments_observations).dependent(:destroy) }
+    it { is_expected.to have_many(:governments).through(:governments_observations) }
   end
 
   describe 'Nested attributes' do
@@ -87,15 +88,17 @@ RSpec.describe Observation, type: :model do
     it { is_expected.to validate_presence_of(:observation_type) }
 
     describe '#active_government' do
+      let(:country) { create(:country) }
+
       context 'when type is government and government is not specified' do
         it 'add error on government' do
-          observation = build(:observation, observation_type: 'government')
-          observation.government.update_attributes(is_active: false)
+          observation = build(:observation_2, country: country, observation_type: 'government')
+          observation.governments.update(is_active: false)
           observation.save
 
           expect(observation.valid?).to eql false
-          expect(observation.errors[:government]).to eql(
-            ['The selected government is not active']
+          expect(observation.errors[:governments]).to eql(
+            ['At least one government should be active']
           )
         end
       end
