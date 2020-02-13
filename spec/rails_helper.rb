@@ -4,7 +4,24 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'codeclimate-test-reporter'
-SimpleCov.start
+SimpleCov.start 'rails' do
+  add_filter '/spec/'
+  add_filter 'app/channels'
+  add_filter 'app/constraints'
+
+  add_group 'Backoffice', 'app/admin'
+  add_group 'Models', 'app/models'
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Resources', 'app/resources'
+  add_group 'Uploaders', 'app/uploaders'
+  add_group 'Services', 'app/services'
+  add_group 'Serializers', 'app/serializers'
+  add_group 'Helpers', 'app/helpers'
+  add_group 'Importers', 'app/importers'
+  add_group 'Importers Lib', 'lib/file_data_import'
+  add_group 'Mailers', 'app/mailers'
+  add_group 'Initializers', 'config/initializers'
+end
 
 require 'spec_helper'
 require 'rspec/rails'
