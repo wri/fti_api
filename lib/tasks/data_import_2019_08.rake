@@ -66,33 +66,35 @@ namespace :import do
     desc 'Import all countries'
     task geojson: :environment do
       Fmu.transaction do
-        puts 'Updating fmus old names to the new ones'
-        if Rails.env.production?
-          fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'production_intersects_80_v2.json'))
-        else
-          fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'staging_intersects_80_v2.json'))
-        end
-        file = File.read fmunames_file
-        data_hash = JSON.parse(file)
-        data_hash['features'].each_with_index do |row, index|
-          properties = row['properties']
-          next if properties['old_fmunam']&.strip == properties['new_fmunam']&.strip
+        # TODO - I've commented out all the code to update old fmus and to import data that is not for GAB and CAF
 
-          begin
-            fmu = Fmu.with_translations.find(properties['old_fmuid'])
-            #next if fmu.country.iso == 'CMR' # Not importing Cameroon at the time
-            new_fmu_name = properties['new_fmunam']&.strip.presence || fmu.name.presence || fmu.geojson&.dig('properties', 'globalid')&.presence || "fmu-row-#{index}"
-            puts "[#{fmu.country.iso}] Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{new_fmu_name}'. ID: #{fmu.id}"
-
-            fmu.name = new_fmu_name
-            fmu.save
-          rescue NoMethodError
-            puts "-- Cannot find fmu named #{properties['old_fmunam']}"
-          end
-        end
-
-        puts "Going to update all the names of the fmus to remove the carriage returns"
-        ActiveRecord::Base.connection.execute("UPDATE \"fmu_translations\" SET \"name\" = regexp_replace(\"name\", E'(^[\\n\\r]+)|([\\n\\r]+$)', '', 'g' );")
+        #puts 'Updating fmus old names to the new ones'
+        #if Rails.env.production?
+        #  fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'production_intersects_80_v2.json'))
+        #else
+        #  fmunames_file = File.expand_path(File.join(Rails.root, 'db', 'files', '2019-08', 'staging_intersects_80_v2.json'))
+        #end
+        #file = File.read fmunames_file
+        #data_hash = JSON.parse(file)
+        #data_hash['features'].each_with_index do |row, index|
+        #  properties = row['properties']
+        #  next if properties['old_fmunam']&.strip == properties['new_fmunam']&.strip
+        #
+        #  begin
+        #    fmu = Fmu.with_translations.find(properties['old_fmuid'])
+        #    #next if fmu.country.iso == 'CMR' # Not importing Cameroon at the time
+        #    new_fmu_name = properties['new_fmunam']&.strip.presence || fmu.name.presence || fmu.geojson&.dig('properties', 'globalid')&.presence || "fmu-row-#{index}"
+        #    puts "[#{fmu.country.iso}] Going to change the FMU name from '#{properties['old_fmunam']&.strip}' to '#{new_fmu_name}'. ID: #{fmu.id}"
+        #
+        #    fmu.name = new_fmu_name
+        #    fmu.save
+        #  rescue NoMethodError
+        #    puts "-- Cannot find fmu named #{properties['old_fmunam']}"
+        #  end
+        #end
+        #
+        #puts "Going to update all the names of the fmus to remove the carriage returns"
+        #ActiveRecord::Base.connection.execute("UPDATE \"fmu_translations\" SET \"name\" = regexp_replace(\"name\", E'(^[\\n\\r]+)|([\\n\\r]+$)', '', 'g' );")
 
         fmus = { CMR: [], COD: [], CAF: [], COG: [], GAB: [] }
 
@@ -102,7 +104,7 @@ namespace :import do
         data_hash['features'].each_with_index do |row, index|
           properties = row['properties']
           country = Country.find_by(iso: properties['iso3_fmu'])
-          #next if properties['iso3_fmu'] == 'CMR' # Not importing Cameroon at the time
+          next unless %w(CAF GAB).include?(properties['iso3_fmu']) # TODO - Check point above
 
           puts "#{index.to_s.rjust(3, '0')}[#{country.iso}]>> Importing fmu: #{properties['fmu_name'].strip.rjust(30, ' ')}. Operator #{ properties['company_na']}"
 
@@ -161,15 +163,15 @@ namespace :import do
           end
         end
 
-        puts "---- Removing old fmus"
-        %i[CMR COD CAF COG GAB].each do |iso|
-          #next if iso == :CMR # Not importing Cameroon at the time
-          country = Country.find_by iso: iso
-          old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus[iso].include?(f.name) }
-
-          puts "[#{iso}] Removing #{old_fmus.count} fmus: #{old_fmus.map{|x| x.name}.join(', ')}"
-          old_fmus.each(&:destroy)
-        end
+        #puts "---- Removing old fmus"
+        #%i[CMR COD CAF COG GAB].each do |iso|
+        #  #next if iso == :CMR # Not importing Cameroon at the time
+        #  country = Country.find_by iso: iso
+        #  old_fmus = Fmu.where(country_id: country.id).select {|f| !fmus[iso].include?(f.name) }
+        #
+        #  puts "[#{iso}] Removing #{old_fmus.count} fmus: #{old_fmus.map{|x| x.name}.join(', ')}"
+        #  old_fmus.each(&:destroy)
+        #end
       end
     end
   end

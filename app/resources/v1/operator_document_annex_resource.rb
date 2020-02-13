@@ -48,17 +48,6 @@ module V1
       show_attribute('updated_at')
     end
 
-    # def self.records(options = {})
-    #   context = options[:context]
-    #   user = context[:current_user]
-    #   app = context[:app]
-    #   if app != 'observations-tool' && user.present? && context[:action] != 'destroy'
-    #     OperatorDocumentAnnex.from_user(user.operator_id)
-    #   else
-    #     OperatorDocumentAnnex.valid
-    #   end
-    # end
-
     def set_user_id
       if context[:current_user].present?
         @model.user_id = context[:current_user].id
@@ -90,7 +79,9 @@ module V1
     end
 
     def belongs_to_user
-      context[:current_user]&.is_operator?(@model.operator_document.operator_id)
+      user = context[:current_user]
+      user&.user_permission&.user_role =='admin' ||
+          user&.is_operator?(@model.operator_document.operator_id)
     end
   end
 end
