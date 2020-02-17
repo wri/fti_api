@@ -87,6 +87,7 @@ class Observation < ApplicationRecord
     validate :active_government
   end
 
+  validate :evidence_presented_in_the_report
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
@@ -192,5 +193,14 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if governments.none?
 
     errors.add(:goverments, "Should have no governments with 'operator' type")
+  end
+
+  def evidence_presented_in_the_report
+    if evidence_type == 'Evidence presented in the report' && evidence_on_report.blank?
+      errors.add(:evidence_on_report, 'You must add information on where to find the evidence on the report')
+    end
+    if evidence_type != 'Evidence presented in the report' && evidence_on_report.present?
+      errors.add(:evidence_on_report, 'This field can only be present when the evidence is presented on the report')
+    end
   end
 end

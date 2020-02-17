@@ -38,6 +38,12 @@ RSpec.describe Observation, type: :model do
     expect(observation).to be_valid
   end
 
+  it 'fails if there is evidence on the report but not listed where' do
+    observation = build(:observation, evidence_type: 'Evidence presented in the report')
+    observation.valid?
+    expect(observation.errors[:evidence_on_report]).to include('You must add information on where to find the evidence on the report')
+  end
+
   # #set_active_status breaks the test on activate method
   #it_should_behave_like 'activable', :observation, FactoryBot.build(:observation)
 

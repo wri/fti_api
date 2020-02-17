@@ -28,7 +28,7 @@ module V1
         observations << create(:observation, evidence: '00 Observation one', user_id: admin.id)
       }
 
-      describe 'Filter opbservations by user' do
+      describe 'Filter observations by user' do
         let(:ngo_headers) { authorize_headers(create(:ngo).id) }
 
         xit 'Get all observations by specific user' do
@@ -123,7 +123,7 @@ module V1
           expect(status).to eq(200)
         end
 
-        xit 'Allows to translate obervation' do
+        xit 'Allows to translate observation' do
           patch("/observations/#{observation.id}?locale=fr",
                 params: jsonapi_params('observations', observation.id, { evidence: "FR Observation one" }),
                 headers: admin_headers)
