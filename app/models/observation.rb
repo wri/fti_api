@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: observations
@@ -26,6 +25,9 @@
 #  law_id                :integer
 #  location_information  :string
 #  is_physical_place     :boolean          default(TRUE)
+#  evidence_type         :integer
+#  location_accuracy     :integer
+#  evidence_on_report    :text
 #
 
 class Observation < ApplicationRecord
@@ -38,7 +40,8 @@ class Observation < ApplicationRecord
 
   enum observation_type: %w(operator government)
   enum validation_status: ['Created', 'Ready for revision', 'Under revision', 'Approved', 'Rejected']
-  enum evidence_type: ['Government Documents', 'Company Documents', 'Photos', 'Testimony from local communities', 'Other']
+  enum evidence_type: ['Government Documents', 'Company Documents', 'Photos',
+                       'Testimony from local communities', 'Other', 'Evidence presented in the report']
   enum location_accuracy: ['Estimated location', 'GPS coordinates extracted from photo', 'Accurate GPS coordinates']
 
 

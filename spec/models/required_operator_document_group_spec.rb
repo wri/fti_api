@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: required_operator_document_groups
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  position   :integer
+#
+
 require 'rails_helper'
 
 RSpec.describe RequiredOperatorDocumentGroup, type: :model do

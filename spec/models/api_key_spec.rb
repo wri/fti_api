@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: api_keys
+#
+#  id           :integer          not null, primary key
+#  access_token :string
+#  expires_at   :datetime
+#  user_id      :integer
+#  is_active    :boolean          default(TRUE)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe APIKey, type: :model do

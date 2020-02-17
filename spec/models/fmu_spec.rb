@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: fmus
+#
+#  id                 :integer          not null, primary key
+#  country_id         :integer
+#  geojson            :jsonb
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  certification_fsc  :boolean          default(FALSE)
+#  certification_pefc :boolean          default(FALSE)
+#  certification_olb  :boolean          default(FALSE)
+#  certification_vlc  :boolean
+#  certification_vlo  :boolean
+#  certification_tltv :boolean
+#  forest_type        :integer          default("fmu"), not null
+#  geometry           :geometry
+#  properties         :jsonb
+#
+
 require 'rails_helper'
 
 RSpec.describe Fmu, type: :model do

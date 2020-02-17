@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: fmus
@@ -16,6 +15,8 @@
 #  certification_vlo  :boolean
 #  certification_tltv :boolean
 #  forest_type        :integer          default("fmu"), not null
+#  geometry           :geometry
+#  properties         :jsonb
 #
 
 class Fmu < ApplicationRecord

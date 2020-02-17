@@ -9,7 +9,6 @@
 #  publication_date      :datetime
 #  country_id            :integer
 #  operator_id           :integer
-#  government_id         :integer
 #  pv                    :string
 #  is_active             :boolean          default(TRUE)
 #  created_at            :datetime         not null
@@ -25,6 +24,9 @@
 #  law_id                :integer
 #  location_information  :string
 #  is_physical_place     :boolean          default(TRUE)
+#  evidence_type         :integer
+#  location_accuracy     :integer
+#  evidence_on_report    :text
 #
 
 require 'rails_helper'
