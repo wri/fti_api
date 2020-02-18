@@ -95,14 +95,17 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   
-  filter :operator_document_required_operator_document_name_equals, as: :select,
+  filter :operator_document_required_operator_document_name_equals,
+         as: :select,
          label: 'Operator Document',
          collection: RequiredOperatorDocument.order(:name).pluck(:name)
-  filter :operator_document_operator_translations_name_equals, as: :select,
+  filter :operator_document_operator_translations_name_equals,
+         as: :select,
          label: 'Operator',
          collection: Operator.with_translations(I18n.locale)
                          .order('operator_translations.name').pluck(:name)
-  filter :operator_document_fmu_translations_name_equals, as: :select,
+  filter :operator_document_fmu_translations_name_equals,
+         as: :select,
          label: 'FMU',
          collection: Fmu.with_translations(I18n.locale).order(:name).pluck(:name)
   filter :operator
