@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: required_operator_documents
+#
+#  id                                  :integer          not null, primary key
+#  type                                :string
+#  required_operator_document_group_id :integer
+#  name                                :string
+#  country_id                          :integer
+#  created_at                          :datetime         not null
+#  updated_at                          :datetime         not null
+#  valid_period                        :integer
+#  deleted_at                          :datetime
+#  forest_type                         :integer
+#  contract_signature                  :boolean          default(FALSE), not null
+#
+
 require 'rails_helper'
 
 RSpec.describe RequiredOperatorDocumentFmu, type: :model do

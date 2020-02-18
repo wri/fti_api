@@ -9,7 +9,6 @@
 #  publication_date      :datetime
 #  country_id            :integer
 #  operator_id           :integer
-#  government_id         :integer
 #  pv                    :string
 #  is_active             :boolean          default(TRUE)
 #  created_at            :datetime         not null
@@ -25,6 +24,9 @@
 #  law_id                :integer
 #  location_information  :string
 #  is_physical_place     :boolean          default(TRUE)
+#  evidence_type         :integer
+#  location_accuracy     :integer
+#  evidence_on_report    :text
 #
 
 require 'rails_helper'
@@ -34,6 +36,21 @@ RSpec.describe Observation, type: :model do
 
   it 'is valid with valid attributes' do
     expect(observation).to be_valid
+  end
+
+  it 'fails if there is evidence on the report but not listed where' do
+    observation = build(:observation, evidence_type: 'Evidence presented in the report')
+    observation.valid?
+    expect(observation.errors[:evidence_on_report]).to include('You must add information on where to find the evidence on the report')
+  end
+
+  it 'Removes old evidences when the evidence is on the report' do
+    FactoryBot.create(:observation_document, observation: subject)
+    expect(subject.observation_documents.count).to eql(1)
+    subject.evidence_type = 'Evidence presented in the report'
+    subject.evidence_on_report = '10'
+    subject.save
+    expect(subject.observation_documents.count).to eql(0)
   end
 
   # #set_active_status breaks the test on activate method

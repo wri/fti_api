@@ -24,6 +24,9 @@
 #  law_id                :integer
 #  location_information  :string
 #  is_physical_place     :boolean          default(TRUE)
+#  evidence_type         :integer
+#  location_accuracy     :integer
+#  evidence_on_report    :text
 #
 
 FactoryBot.define do

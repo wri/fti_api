@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200211134624) do
+ActiveRecord::Schema.define(version: 20200217172522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
-  enable_extension "postgis"
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
 
@@ -368,6 +368,7 @@ ActiveRecord::Schema.define(version: 20200211134624) do
     t.boolean  "is_physical_place",     default: true
     t.integer  "evidence_type"
     t.integer  "location_accuracy"
+    t.string   "evidence_on_report"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["is_active"], name: "index_observations_on_is_active", using: :btree

@@ -26,6 +26,9 @@
 #  law_id                :integer
 #  location_information  :string
 #  is_physical_place     :boolean          default(TRUE)
+#  evidence_type         :integer
+#  location_accuracy     :integer
+#  evidence_on_report    :text
 #
 
 class Observation < ApplicationRecord
@@ -38,7 +41,8 @@ class Observation < ApplicationRecord
 
   enum observation_type: %w(operator government)
   enum validation_status: ['Created', 'Ready for revision', 'Under revision', 'Approved', 'Rejected']
-  enum evidence_type: ['Government Documents', 'Company Documents', 'Photos', 'Testimony from local communities', 'Other']
+  enum evidence_type: ['Government Documents', 'Company Documents', 'Photos',
+                       'Testimony from local communities', 'Other', 'Evidence presented in the report']
   enum location_accuracy: ['Estimated location', 'GPS coordinates extracted from photo', 'Accurate GPS coordinates']
 
 
@@ -84,6 +88,7 @@ class Observation < ApplicationRecord
     validate :active_government
   end
 
+  validate :evidence_presented_in_the_report
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
@@ -98,6 +103,7 @@ class Observation < ApplicationRecord
   after_destroy  :update_operator_scores
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
   after_save     :update_reports_observers, if: 'observation_report_id_changed?'
+  after_save     :remove_documents
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, ->() { joins(:translations).where(is_active: true) }
@@ -189,5 +195,21 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if governments.none?
 
     errors.add(:goverments, "Should have no governments with 'operator' type")
+  end
+
+  def evidence_presented_in_the_report
+    if evidence_type == 'Evidence presented in the report' && evidence_on_report.blank?
+      errors.add(:evidence_on_report, 'You must add information on where to find the evidence on the report')
+    end
+    if evidence_type != 'Evidence presented in the report' && evidence_on_report.present?
+      errors.add(:evidence_on_report, 'This field can only be present when the evidence is presented on the report')
+    end
+  end
+
+  # Soft removes all the evidence if the evidence type is "Observation in the report"
+  def remove_documents
+    return if evidence_type != 'Evidence presented in the report'
+
+    ObservationDocument.where(observation_id: id).destroy_all
   end
 end

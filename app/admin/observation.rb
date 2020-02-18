@@ -30,7 +30,7 @@ ActiveAdmin.register Observation do
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
-                :location_information, :evidence_type, :location_accuracy, :law_id, :fmu_id,
+                :location_information, :evidence_type, :evidence_on_report, :location_accuracy, :law_id, :fmu_id,
                 observer_ids: [], relevant_operators: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
@@ -246,6 +246,14 @@ ActiveAdmin.register Observation do
     column :details
     column :evidence_type
     column :evidence
+    column :evidences do |o|
+      links = []
+      o.observation_documents.each do |d|
+        links << link_to(d.name, admin_evidences_path(d.id))
+      end
+      links.reduce(:+)
+    end
+    column :evidence_on_report
     column :concern_opinion do |o|
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
     end
@@ -277,7 +285,7 @@ ActiveAdmin.register Observation do
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
-                                      details evidence_type evidence concern_opinion pv location_accuracy
+                                      details evidence_type evidence evidences evidence_on_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report user
                                       modified_user created_at updated_at] }
     end
@@ -325,6 +333,7 @@ ActiveAdmin.register Observation do
       f.input :observation_report, as: :select
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
         f.input :evidence_type, as: :select
+        f.input :evidence_on_report
         t.input :name
         t.input :attachment
       end
