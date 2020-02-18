@@ -44,6 +44,15 @@ RSpec.describe Observation, type: :model do
     expect(observation.errors[:evidence_on_report]).to include('You must add information on where to find the evidence on the report')
   end
 
+  it 'Removes old evidences when the evidence is on the report' do
+    FactoryBot.create(:observation_document, observation: subject)
+    expect(subject.observation_documents.count).to eql(1)
+    subject.evidence_type = 'Evidence presented in the report'
+    subject.evidence_on_report = '10'
+    subject.save
+    expect(subject.observation_documents.count).to eql(0)
+  end
+
   # #set_active_status breaks the test on activate method
   #it_should_behave_like 'activable', :observation, FactoryBot.build(:observation)
 

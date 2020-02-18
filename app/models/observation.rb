@@ -103,6 +103,7 @@ class Observation < ApplicationRecord
   after_destroy  :update_operator_scores
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
   after_save     :update_reports_observers, if: 'observation_report_id_changed?'
+  after_save     :remove_documents
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, ->() { joins(:translations).where(is_active: true) }
@@ -203,5 +204,12 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     if evidence_type != 'Evidence presented in the report' && evidence_on_report.present?
       errors.add(:evidence_on_report, 'This field can only be present when the evidence is presented on the report')
     end
+  end
+
+  # Soft removes all the evidence if the evidence type is "Observation in the report"
+  def remove_documents
+    return if evidence_type != 'Evidence presented in the report'
+
+    ObservationDocument.where(observation_id: id).destroy_all
   end
 end

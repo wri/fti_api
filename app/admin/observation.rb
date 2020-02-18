@@ -246,6 +246,13 @@ ActiveAdmin.register Observation do
     column :details
     column :evidence_type
     column :evidence
+    column :evidences do |o|
+      links = []
+      o.observation_documents.each do |d|
+        links << link_to(d.name, admin_evidences_path(d.id))
+      end
+      links.reduce(:+)
+    end
     column :evidence_on_report
     column :concern_opinion do |o|
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
@@ -278,7 +285,7 @@ ActiveAdmin.register Observation do
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
-                                      details evidence_type evidence_on_report evidence concern_opinion pv location_accuracy
+                                      details evidence_type evidence evidences evidence_on_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report user
                                       modified_user created_at updated_at] }
     end
