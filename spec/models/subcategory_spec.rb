@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: subcategories
+#
+#  id                :integer          not null, primary key
+#  category_id       :integer
+#  subcategory_type  :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  location_required :boolean          default(TRUE)
+#
+
 require 'rails_helper'
 
 RSpec.describe Subcategory, type: :model do

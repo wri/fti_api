@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: sawmills
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  lat         :float
+#  lng         :float
+#  is_active   :boolean          default(TRUE), not null
+#  operator_id :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  geojson     :jsonb
+#
+
 require 'rails_helper'
 
 RSpec.describe Sawmill, type: :model do

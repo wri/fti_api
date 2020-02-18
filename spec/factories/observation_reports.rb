@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: observation_reports
+#
+#  id               :integer          not null, primary key
+#  title            :string
+#  publication_date :datetime
+#  attachment       :string
+#  user_id          :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  deleted_at       :datetime
+#
+
 FactoryBot.define do
   factory :observation_report do
     sequence(:title) { |n| "ObservationReportTitle#{n}" }
