@@ -78,6 +78,10 @@ ActiveAdmin.register OperatorDocumentAnnex do
       o = OperatorDocument.unscoped.find(od.operator_document_id).operator
       link_to(o.name, admin_producer_path(o.id))
     end
+    column :fmu, sortable: 'fmu_translations.name' do |od|
+      fmu = od.operator_document.fmu
+      link_to(fmu.name, admin_fmu_path(fmu.id)) if fmu
+    end
 
     column :user, sortable: 'users.name'
     column :expire_date
@@ -90,8 +94,20 @@ ActiveAdmin.register OperatorDocumentAnnex do
     actions
   end
 
-
-  filter :operator_document, as: :select, collection: OperatorDocument.pluck(:id)
+  
+  filter :operator_document_required_operator_document_name_equals,
+         as: :select,
+         label: 'Operator Document',
+         collection: RequiredOperatorDocument.order(:name).pluck(:name)
+  filter :operator_document_operator_translations_name_equals,
+         as: :select,
+         label: 'Operator',
+         collection: Operator.with_translations(I18n.locale)
+                         .order('operator_translations.name').pluck(:name)
+  filter :operator_document_fmu_translations_name_equals,
+         as: :select,
+         label: 'FMU',
+         collection: Fmu.with_translations(I18n.locale).order(:name).pluck(:name)
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
   filter :updated_at
