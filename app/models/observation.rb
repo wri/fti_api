@@ -39,11 +39,10 @@ class Observation < ApplicationRecord
   translates :details, :evidence, :concern_opinion, :litigation_status, touch: true
   active_admin_translates :details, :evidence, :concern_opinion, :litigation_status
 
-  enum observation_type: %w(operator government)
-  enum validation_status: ['Created', 'Ready for revision', 'Under revision', 'Approved', 'Rejected']
-  enum evidence_type: ['Government Documents', 'Company Documents', 'Photos',
-                       'Testimony from local communities', 'Other', 'Evidence presented in the report']
-  enum location_accuracy: ['Estimated location', 'GPS coordinates extracted from photo', 'Accurate GPS coordinates']
+  enum observation_type: { "operator" => 0, "government" => 1 }
+  enum validation_status: { "Created" => 0, "Ready for revision" => 1, "Under revision" => 2, "Approved" => 3, "Rejected" => 4 }
+  enum evidence_type: { "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2, "Testimony from local communities" => 3, "Other" => 4, "Evidence presented in the report" => 5 }
+  enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2 }
 
 
   belongs_to :country,        inverse_of: :observations
@@ -106,7 +105,7 @@ class Observation < ApplicationRecord
   after_save     :remove_documents
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
-  scope :active, ->() { joins(:translations).where(is_active: true) }
+  scope :active, -> { joins(:translations).where(is_active: true) }
   scope :own_with_inactive, ->(observer) {
     joins('INNER JOIN "observer_observations" ON "observer_observations"."observation_id" = "observations"."id"
 INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_id" = "all_observers"."id"')
@@ -116,8 +115,8 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :by_category,       ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: { level: level }) }
   scope :by_government,     ->(government_id) { joins(:governments).where(governments: { id: government_id }) }
-  scope :pending,           ->() { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
-  scope :created,           ->() { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
+  scope :pending,           -> { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
+  scope :created,           -> { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
 
 
   # TODO Check if there's a better way to order by category
@@ -173,7 +172,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def set_active_status
-    self.is_active = self.validation_status == 'Approved' ? true : false
+    self.is_active = self.validation_status == 'Approved'
     nil
   end
 

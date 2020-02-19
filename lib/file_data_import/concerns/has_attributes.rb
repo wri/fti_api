@@ -7,6 +7,7 @@ module FileDataImport
 
       def record_attributes
         return unless record
+
         record.attributes.symbolize_keys.slice(*attributes_for_serializing)
       end
 

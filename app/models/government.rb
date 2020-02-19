@@ -33,7 +33,7 @@ class Government < ApplicationRecord
   }
 
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
-  scope :active, ->() { where(is_active: true) }
+  scope :active, -> { where(is_active: true) }
 
   default_scope { includes(:translations) }
 

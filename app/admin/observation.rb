@@ -37,17 +37,17 @@ ActiveAdmin.register Observation do
 
 
   member_action :approve, method: :put do
-    resource.update_attributes(validation_status: Observation.validation_statuses['Approved'])
+    resource.update(validation_status: Observation.validation_statuses['Approved'])
     redirect_to collection_path, notice: 'Observation approved'
   end
 
   member_action :reject, method: :put do
-    resource.update_attributes(validation_status: Observation.validation_statuses['Rejected'])
+    resource.update(validation_status: Observation.validation_statuses['Rejected'])
     redirect_to collection_path, notice: 'Observation rejected'
   end
 
   member_action :start_review, method: :put do
-    resource.update_attributes(validation_status: Observation.validation_statuses['Under revision'])
+    resource.update(validation_status: Observation.validation_statuses['Under revision'])
     redirect_to collection_path, notice: 'Observation under revision'
   end
 
@@ -75,21 +75,21 @@ ActiveAdmin.register Observation do
 
   batch_action :approve, confirm: 'Are you sure you want to approve all this observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update_attributes(validation_status: Observation.validation_statuses['Approved'])
+      observation.update(validation_status: Observation.validation_statuses['Approved'])
     end
     redirect_to collection_path, notice: 'Documents approved!'
   end
 
   batch_action :reject, confirm: 'Are you sure you want to reject all this observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update_attributes(validation_status: Observation.validation_statuses['Rejected'])
+      observation.update(validation_status: Observation.validation_statuses['Rejected'])
     end
     redirect_to collection_path, notice: 'Documents rejected!'
   end
 
   batch_action :under_revision, confirm: 'Are you sure you want to put all this observations under revision?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update_attributes(validation_status: Observation.validation_statuses['Under revision'])
+      observation.update(validation_status: Observation.validation_statuses['Under revision'])
     end
     redirect_to collection_path, notice: 'Documents put under revision!'
   end
@@ -116,9 +116,9 @@ ActiveAdmin.register Observation do
   filter :country, as: :select,
                    collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
   filter :observers, label: 'Observers', as: :select,
-                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
+                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :operator, label: 'Operator', as: :select,
-                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
   filter :governments_translations_government_entity_contains,
          as: :select, label: 'Government Entity',
          collection: Government.with_translations(I18n.locale)
@@ -126,7 +126,7 @@ ActiveAdmin.register Observation do
                          .pluck(:government_entity)
   filter :subcategory,
          label: 'Subcategory', as: :select,
-         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name')}
+         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :observation_report,
          label: 'Report', as: :select,
@@ -310,9 +310,9 @@ ActiveAdmin.register Observation do
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
       f.input :law, input_html: { disabled: law },
-                    collection: object.subcategory.laws.map {|l| [l.written_infraction, l.id]} rescue ''
+                    collection: object.subcategory.laws.map { |l| [l.written_infraction, l.id] } rescue ''
       f.input :severity, as: :select,
-                         collection: object.subcategory.severities.map {|s| ["#{s.level} - #{s.details.first(80)}", s.id]} rescue ''
+                         collection: object.subcategory.severities.map { |s| ["#{s.level} - #{s.details.first(80)}", s.id] } rescue ''
       f.input :is_physical_place, input_html: { disabled: true }
       f.input :location_information  if f.object.observation_type == 'operator'
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
@@ -321,7 +321,7 @@ ActiveAdmin.register Observation do
         f.input :government_ids,
                 label: "Governments",
                 as: :select,
-                collection: Government.all.map {|g| [g.government_entity, g.id] },
+                collection: Government.all.map { |g| [g.government_entity, g.id] },
                 input_html: { disabled: government, multiple: true }
       end
       f.input :operator, input_html: { disabled: operator } if f.object.observation_type == 'operator'

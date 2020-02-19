@@ -15,7 +15,7 @@
 class GovFile < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :gov_document, ->() { with_archived }, required: true
+  belongs_to :gov_document, -> { with_archived }, required: true
 
   mount_base64_uploader :attachment, GovDocumentUploader
 

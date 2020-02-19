@@ -22,9 +22,8 @@
 
 class Observer < ApplicationRecord
   include Translatable
-  # rubocop:disable Style/BlockDelimiters
   translates :name, :organization, touch: true
-  # rubocop:enable Style/BlockDelimiters
+  
 
   active_admin_translates :name do
     validates_presence_of :name
@@ -49,8 +48,11 @@ class Observer < ApplicationRecord
 
   before_validation { self.remove_logo! if self.delete_logo == '1' }
   validates :name, presence: true
+
+  # rubocop:disable Style/FormatStringToken
   validates :observer_type, presence: true, inclusion: { in: %w(Mandated SemiMandated External Government),
                                                          message: "%{value} is not a valid observer type" }
+  # rubocop:enable Style/FormatStringToken
   validates :organization_type,
             inclusion: { in: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other'] }, if: :organization_type?
 

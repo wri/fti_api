@@ -24,7 +24,7 @@ ActiveAdmin.register ObservationReport do
   filter :attachment, as: :select
   filter :user, as: :select, collection: User.order(:name)
   filter :observers, label: 'Observers', as: :select,
-                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name')}
+                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :observations, as: :select, collection: Observation.order(:id).pluck(:id)
   filter :publication_date
 
@@ -37,11 +37,11 @@ ActiveAdmin.register ObservationReport do
       obsr.user&.name
     end
     column 'observations' do |obsr|
-      ids = obsr.observations.map {|o| o.id}
+      ids = obsr.observations.map { |o| o.id }
       ids.reduce(:+)
     end
     column 'observers' do |o|
-      names = o.observers.joins(:translations).map { |o| o.name}
+      names = o.observers.joins(:translations).map { |o| o.name }
       names.reduce(:+)
     end
     column :created_at

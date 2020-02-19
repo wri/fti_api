@@ -306,5 +306,5 @@ require 'active_admin/filter_saver/controller'
 
 ActiveAdmin.before_load do |app|
   # Add Filters Extensions
-  ActiveAdmin::BaseController.send :include, ActiveAdmin::FilterSaver::Controller
+  ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
 end

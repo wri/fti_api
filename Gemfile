@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.4.6'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -15,6 +15,7 @@ gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_
 gem 'activeadmin'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
 gem 'activeadmin_addons'
+gem "sassc-rails"
 
 # WYSIWYG
 gem 'activeadmin_quill_editor'
@@ -59,6 +60,7 @@ gem 'mini_magick'
 gem 'slim-rails'
 
 # Performance
+gem 'appsignal'
 gem 'newrelic_rpm'
 gem 'oink'
 
@@ -70,6 +72,8 @@ group :development, :test do
   gem 'faker'
   gem 'rails-erd'
   gem 'rubocop',                   require: false
+  gem 'rubocop-performance',       require: false
+  gem 'rubocop-rails',             require: false
   gem 'webmock'
 end
 
