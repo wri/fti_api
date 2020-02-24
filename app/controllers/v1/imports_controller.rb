@@ -5,7 +5,7 @@ module V1
     authorize_resource :file_data_import
 
     def create
-      importer.import
+      importer.import(user_id_params)
 
       render json: importer.results
     end
@@ -22,6 +22,10 @@ module V1
 
     def importer
       @importer ||= FileDataImport::BaseImporter.build(import_params[:importer_type], import_params[:file])
+    end
+
+    def user_id_params
+      current_user ? { user_id: current_user.id } : { user_id: nil }
     end
 
     def set_locale
