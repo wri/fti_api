@@ -12,9 +12,9 @@ module FileDataImport
       @results = {}
     end
 
-    def import
+    def import(extra_attributes = {})
       parser.foreach_with_line do |attributes, line|
-        record = self.class.record_builder.build(attributes)
+        record = self.class.record_builder.build(attributes.merge(extra_attributes))
         record.save
         results[line] = record.results
       end
