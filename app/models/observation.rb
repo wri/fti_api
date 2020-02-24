@@ -186,7 +186,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def active_government
     return if persisted? ||
               governments.none? ||
-              governments.select(:is_active).any?(&:is_active)
+              governments.select{ |g| g.is_active? }.any?(&:is_active)
 
     errors.add(:governments, "At least one government should be active")
   end
@@ -194,7 +194,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def validate_governments_absences
     return if governments.none?
 
-    errors.add(:goverments, "Should have no governments with 'operator' type")
+    errors.add(:governments, "Should have no governments with 'operator' type")
   end
 
   def evidence_presented_in_the_report
