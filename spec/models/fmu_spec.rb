@@ -82,6 +82,43 @@ RSpec.describe Fmu, type: :model do
           expect(fmu.geojson['properties']['certification_tltv']).to eql fmu.certification_tltv
         end
       end
+
+      context 'when a new observation is added' do
+        it 'number of observations should be in the geojson' do
+          country = create(:country)
+          operator = create(:operator, country: country, fa_id: 'fa_id')
+          fmu = create(:fmu, operator: operator, country: country, geojson: { properties: {}})
+          fmu.save
+          fmu.reload
+
+          expect(fmu.geojson['properties']['observations']).to eql 0
+
+          observation = create(:observation, operator: operator, fmu: fmu)
+          observation.save
+          fmu.reload
+
+          expect(fmu.geojson['properties']['observations']).to eql 1
+        end
+      end
+
+      context 'when an observation is removed' do
+        it 'number of observations should be in the geojson' do
+          country = create(:country)
+          operator = create(:operator, country: country, fa_id: 'fa_id')
+          fmu = create(:fmu, operator: operator, country: country, geojson: { properties: {}})
+          fmu.save
+          observation = create(:observation, operator: operator, fmu: fmu)
+          observation.save
+
+          fmu.reload
+          expect(fmu.geojson['properties']['observations']).to eql 1
+
+          observation.destroy
+          fmu.reload
+
+          expect(fmu.geojson['properties']['observations']).to eql 0
+        end
+      end
     end
 
     describe '#really_destroy_documents' do
