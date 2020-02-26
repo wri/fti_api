@@ -52,7 +52,7 @@ class Sawmill < ApplicationRecord
               where id = #{self.id}
               group by id)
             update sawmills
-            set geojson = subquery.geojson
+            set geojson = subquery.geojson::jsonb
             from subquery
             where subquery.id = sawmills.id;"
 
