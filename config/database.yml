@@ -15,7 +15,7 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['POSTGRES_USER'] %>

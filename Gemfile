@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.4.6'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -15,6 +15,9 @@ gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_
 gem 'activeadmin'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
 gem 'activeadmin_addons'
+
+gem 'sass-rails'
+gem 'sassc-rails'
 
 # WYSIWYG
 gem 'activeadmin_quill_editor'
@@ -30,6 +33,7 @@ gem 'active_skin'
 
 
 # Rails and DB
+gem 'activerecord-postgis-adapter'
 gem 'pg',    '~> 0.18'
 gem 'rails', '~> 5.0.2'
 
