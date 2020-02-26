@@ -65,6 +65,9 @@ gem 'oink'
 # Mail
 gem 'sendgrid-ruby'
 
+# file utilites
+gem 'rubyzip'
+
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'

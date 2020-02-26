@@ -19,6 +19,9 @@ addons:
       - postgresql-9.6-postgis-2.4
 
 before_install:
+  - gem install rubygems-update && update_rubygems
+  - yes | rvm @global do gem uninstall bundler --all
+  - yes | rvm @global do gem install bundler -v 1.17.3 || true
   - sudo /etc/init.d/postgresql stop
   - sudo apt-get install postgresql-contrib-9.6 postgis-2.4
   - sudo sh -c 'echo "local all postgres trust" > /etc/postgresql/9.6/main/pg_hba.conf'
