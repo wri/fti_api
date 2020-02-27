@@ -4,7 +4,8 @@ module V1
   class FmusController < ApiController
     include ErrorSerializer
 
-    skip_before_action :authenticate, only: :index
+    skip_before_action :authenticate, only: %w[index tiles]
+    skip_authorize_resource only: :tiles
     load_and_authorize_resource class: 'Fmu'
 
     def index
@@ -13,11 +14,13 @@ module V1
       if params[:format].present? && params[:format].include?('geojson')
         render json: build_json(fmus)
       else
-        # fmus_resources = fmus.map {|x| FmuResource.new(x, context)}
-        # render json: JSONAPI::ResourceSerializer.new(FmuResource)
-        #                  .serialize_to_hash(fmus_resources)
         super
       end
+    end
+
+    def tiles
+      tile = Fmu.vector_tiles params[:x], params[:y], params[:z]
+      send_data tile
     end
 
     private
