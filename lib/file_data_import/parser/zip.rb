@@ -13,13 +13,13 @@ module FileDataImport
         ::Zip::File.open(path_to_file) do |zip_file|
           zip_file.each do |file|
             file_path = File.join(folder_path, file.name)
-            zip_file.extract(file, file_path) unless File.exist?(file_path)
+            zip_file.extract(file, file_path)
           end
         end
       end
 
       def folder_path
-        @folder_path = path_to_file.chomp(File.extname(path_to_file))
+        @folder_path ||= Dir.mktmpdir
       end
 
       def parser
@@ -51,6 +51,13 @@ module FileDataImport
 
         extract_zip
         parser.foreach_with_line(&block)
+
+        clean_up_files
+      end
+
+      def clean_up_files
+        File.delete(path_to_file) if File.exist?(path_to_file)
+        FileUtils.remove_dir(folder_path) if File.directory?(folder_path)
       end
     end
   end
