@@ -20,6 +20,7 @@ addons:
 
 before_install:
   - gem install rubygems-update && update_rubygems
+  - sudo apt-get install gdal-bin
   - yes | rvm @global do gem uninstall bundler --all
   - yes | rvm @global do gem install bundler -v 1.17.3 || true
   - sudo /etc/init.d/postgresql stop
