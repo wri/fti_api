@@ -42,7 +42,7 @@ class Sawmill < ApplicationRecord
 
   def update_geojson
     query = "with subquery as(
-                select id, json_build_object(
+                select id, jsonb_build_object(
                         'type', 'Feature',
                         'id', id,
                         'geometry', ST_AsGeoJSON(ST_MakePoint(lng, lat), 9)::json,

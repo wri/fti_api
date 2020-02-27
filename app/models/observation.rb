@@ -104,6 +104,8 @@ class Observation < ApplicationRecord
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
   after_save     :update_reports_observers, if: 'observation_report_id_changed?'
   after_save     :remove_documents
+  after_save     :update_fmu_geojson
+  after_destroy  :update_fmu_geojson
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, ->() { joins(:translations).where(is_active: true) }
@@ -211,5 +213,13 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if evidence_type != 'Evidence presented in the report'
 
     ObservationDocument.where(observation_id: id).destroy_all
+  end
+
+  # If the observation is for an fmu, it updates its geojson with the new count
+  def update_fmu_geojson
+    return unless fmu_id
+
+    fmu.update_geojson
+    fmu.save
   end
 end
