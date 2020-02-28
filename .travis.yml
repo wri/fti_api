@@ -31,9 +31,6 @@ before_install:
   - sudo rm -rf /etc/postgresql/12 /var/lib/postgresql/12
   - sudo pg_createcluster -u postgres 12 main -- --auth-local trust --auth-host password
   - sudo /etc/init.d/postgresql start 12 || sudo journalctl -xe
-  - make
-  - sudo make install
-  - make installcheck
   - gem update --system
   - gem update bundler
 
