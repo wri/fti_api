@@ -14,15 +14,6 @@ GIT
       activeadmin (>= 1.0, < 1.2)
       globalize (>= 3.1.0, < 6.0)
 
-GIT
-  remote: https://github.com/globalize/globalize.git
-  revision: 8af95a12a0dc76bfdd88762f892dbf5c5a47c6af
-  specs:
-    globalize (5.3.0)
-      activemodel (>= 4.2, < 6.1)
-      activerecord (>= 4.2, < 6.1)
-      request_store (~> 1.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -196,6 +187,10 @@ GEM
       raabro (~> 1.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    globalize (5.1.0)
+      activemodel (>= 4.2, < 5.2)
+      activerecord (>= 4.2, < 5.2)
+      request_store (~> 1.0)
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
@@ -218,7 +213,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.3.0)
-    jsonapi-resources (0.10.2)
+    jsonapi-resources (0.9.0)
       activerecord (>= 4.1)
       concurrent-ruby
       railties (>= 4.1)
@@ -530,8 +525,8 @@ DEPENDENCIES
   email_spec
   factory_bot_rails
   faker
-  globalize!
-  jsonapi-resources
+  globalize (= 5.1.0)
+  jsonapi-resources (= 0.9.0)
   jwt
   listen (~> 3.0.5)
   mini_magick

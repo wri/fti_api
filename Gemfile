@@ -38,13 +38,13 @@ gem 'pg',    '~> 0.18'
 gem 'rails', '~> 5.0.2'
 
 # API
-gem 'jsonapi-resources'
+gem 'jsonapi-resources', '0.9.0'
 gem 'oj'
 gem 'oj_mimic_json'
 
 # Data
 gem 'activerecord-import'
-gem 'globalize',                   github: 'globalize/globalize'
+gem 'globalize', '5.1.0'
 gem 'seed-fu'
 
 # Validation
