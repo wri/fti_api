@@ -65,7 +65,7 @@ class Operator < ApplicationRecord
   before_destroy :really_destroy_documents
 
   validates :name, presence: true
-  validates :website, url: true, if: lambda {|x| x.website.present?}
+  validates :website, url: true, if: lambda { |x| x.website.present? }
   validates :operator_type, inclusion: { in: TYPES }
 
   scope :by_name_asc, -> {
@@ -81,9 +81,9 @@ class Operator < ApplicationRecord
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
   # TODO Refactor this when merging the branches
-  scope :fmus_with_certification_fsc,   ->()          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
-  scope :fmus_with_certification_pefc,  ->()          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
-  scope :fmus_with_certification_olb,   ->()          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
+  scope :fmus_with_certification_fsc,   ->          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
+  scope :fmus_with_certification_pefc,  ->          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
+  scope :fmus_with_certification_olb,   ->          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
 
 
   class Translation
@@ -144,7 +144,8 @@ class Operator < ApplicationRecord
   # This counts only public documents
   def percentage_non_approved
     self.percentage_valid_documents_all =
-      operator_documents.valid.available.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_documents.valid.available.ns.count.
+          / operator_documents.required.ns.count.to_f rescue 0
     self.percentage_valid_documents_fmu =
       operator_document_fmus.valid.available.ns.count.to_f / operator_document_fmus.required.ns.count.to_f rescue 0
     self.percentage_valid_documents_country =
@@ -202,8 +203,8 @@ class Operator < ApplicationRecord
           else
             rank = number_of_operators
           end
-          o.update_attributes(country_operators: number_of_operators,
-                              country_doc_rank: rank)
+          o.update(country_operators: number_of_operators,
+                   country_doc_rank: rank)
         end
       end
     end
@@ -271,7 +272,7 @@ class Operator < ApplicationRecord
     if operator_document_countries.none?
       RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).first_or_create do |odc|
-          odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+          odc.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
         end
       end
     end
@@ -280,7 +281,7 @@ class Operator < ApplicationRecord
       RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
         self.fmus.find_each do |fmu|
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
-            odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+            odf.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
           end
         end
       end

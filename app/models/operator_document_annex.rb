@@ -24,7 +24,7 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentAnnexUploader
 
-  belongs_to :operator_document, required: true
+  belongs_to :operator_document, optional: false
   belongs_to :user
 
   before_validation(on: :create) do
@@ -38,8 +38,8 @@ class OperatorDocumentAnnex < ApplicationRecord
   enum status: { doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
 
-  scope :valid,     ->()            { where(status: OperatorDocumentAnnex.statuses[:doc_valid])}
-  scope :from_user, ->(operator_id) { joins(:operator_document).where(operator_documents: { operator_id: operator_id })}
+  scope :valid,     ->            { where(status: OperatorDocumentAnnex.statuses[:doc_valid]) }
+  scope :from_user, ->(operator_id) { joins(:operator_document).where(operator_documents: { operator_id: operator_id }) }
 
   def self.expire_document_annexes
     documents_to_expire =
@@ -50,6 +50,6 @@ class OperatorDocumentAnnex < ApplicationRecord
   end
 
   def expire_document_annex
-    self.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_expired])
+    self.update(status: OperatorDocumentAnnex.statuses[:doc_expired])
   end
 end

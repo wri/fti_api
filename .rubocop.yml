@@ -249,6 +249,9 @@ Style/For:
 Style/FormatString:
   Enabled: false
 
+Style/FormatStringToken:
+  Enabled: false
+
 # Do not introduce global variables.
 Style/GlobalVars:
   Enabled: false
@@ -687,6 +690,15 @@ Style/ZeroLengthPredicate:
 Style/FloatDivision:
   Enabled: false
 
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
 #################### Metrics ################################
 
 # A calculated magnitude based on number of assignments,
@@ -1047,9 +1059,6 @@ Rails/TimeZone:
 
 # Use validates :attribute, hash of validations.
 Rails/Validation:
-  Enabled: false
-
-Documentation:
   Enabled: false
 
 Rails/LexicallyScopedActionFilter:

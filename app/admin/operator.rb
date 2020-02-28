@@ -14,7 +14,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
                                      translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
-    resource.update_attributes(is_active: true)
+    resource.update(is_active: true)
     redirect_to collection_path, notice: 'Operator activated'
   end
 
@@ -135,8 +135,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
       available_fmus = Fmu.filter_by_free
       if edit
         available_fmus = []
-        Fmu.filter_by_free.find_each{|x| available_fmus << x}
-        f.object.fmus.find_each{|x| available_fmus << x}
+        Fmu.filter_by_free.find_each{ |x| available_fmus << x }
+        f.object.fmus.find_each{ |x| available_fmus << x }
         f.input :fmus, collection: available_fmus
       else
         f.input :fmus, collection: available_fmus

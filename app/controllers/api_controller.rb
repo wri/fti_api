@@ -21,7 +21,7 @@ class ApiController < ActionController::API
 
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug "Access denied on #{exception.action} #{exception.subject.inspect}"
-    render json: { errors: [{ status: '401', title: exception.message }] }, status: 401
+    render json: { errors: [{ status: '401', title: exception.message }] }, status: :unauthorized
   end
 
   def valid_api_key?
@@ -36,11 +36,11 @@ class ApiController < ActionController::API
     begin
       if api_key_present?
         user = User.find(api_auth['user'])
-        if user && user.api_key_exists?
+        if user&.api_key_exists?
           @current_api_user ||= user
         end
       end
-    rescue
+    rescue StandardError
       @current_api_user = nil
     end
   end
@@ -49,11 +49,11 @@ class ApiController < ActionController::API
     begin
       if auth_present?
         user = User.find(auth['user'])
-        if user && user.is_active
+        if user&.is_active
           @current_user ||= user
         end
       end
-    rescue
+    rescue StandardError
       @current_user = nil
     end
   end
@@ -61,15 +61,15 @@ class ApiController < ActionController::API
   protected
 
   def check_access
-    render json: { errors: [{ status: '401', title: 'Sorry invalid API token' }] }, status: 401 unless valid_api_key?
+    render json: { errors: [{ status: '401', title: 'Sorry invalid API token' }] }, status: :unauthorized unless valid_api_key?
   end
 
   def authenticate
-    render json: { errors: [{ status: '401', title: 'You are not authorized to access this page.' }] }, status: 401 unless logged_in?
+    render json: { errors: [{ status: '401', title: 'You are not authorized to access this page.' }] }, status: :unauthorized unless logged_in?
   end
 
   def record_not_found
-    render json: { errors: [{ status: '404', title: 'Record not found' }] }, status: 404
+    render json: { errors: [{ status: '404', title: 'Record not found' }] }, status: :not_found
   end
 
   def token
@@ -97,11 +97,11 @@ class ApiController < ActionController::API
   end
 
   def bad_auth_key
-    render json: { errors: [{ status: '400', title: 'API Key/Authorization Key mal formed' }] }, status: 400
+    render json: { errors: [{ status: '400', title: 'API Key/Authorization Key mal formed' }] }, status: :bad_request
   end
 
   def set_locale
-    I18n.locale = if params[:locale].present? && I18n.available_locales.map{|x| x.to_s}.include?(params[:locale])
+    I18n.locale = if params[:locale].present? && I18n.available_locales.map{ |x| x.to_s }.include?(params[:locale])
                     params[:locale]
                   else
                     I18n.default_locale.to_s

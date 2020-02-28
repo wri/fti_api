@@ -56,14 +56,14 @@ class Fmu < ApplicationRecord
   scope :filter_by_operators,      ->(operator_ids) { joins(:fmu_operators).where(fmu_operators: { current: true, operator_id: operator_ids.split(',') }) }
   # this could also be done like: "id not in ( select fmu_id from fmu_operators where \"current\" = true)"
   # but it might break the method chaining
-  scope :filter_by_free,           ->()             { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
-  scope :with_certification_fsc,   ->()             { where certification_fsc: true }
-  scope :with_certification_pefc,  ->()             { where certification_pefc: true }
-  scope :with_certification_olb,   ->()             { where certification_olb: true }
-  scope :with_certification_vlc,   ->()             { where certification_vlc: true }
-  scope :with_certification_vlo,   ->()             { where certification_vlo: true }
-  scope :with_certification_tltv,  ->()             { where certification_tltv: true }
-  scope :current,                  ->()             { joins(:fmu_operators).where(fmu_operators: { current: true }) }
+  scope :filter_by_free,           ->             { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
+  scope :with_certification_fsc,   ->             { where certification_fsc: true }
+  scope :with_certification_pefc,  ->             { where certification_pefc: true }
+  scope :with_certification_olb,   ->             { where certification_olb: true }
+  scope :with_certification_vlc,   ->             { where certification_vlc: true }
+  scope :with_certification_vlo,   ->             { where certification_vlo: true }
+  scope :with_certification_tltv,  ->             { where certification_tltv: true }
+  scope :current,                  ->             { joins(:fmu_operators).where(fmu_operators: { current: true }) }
 
   class << self
     def fetch_all(options)
@@ -87,12 +87,12 @@ class Fmu < ApplicationRecord
       end
 
       query =
-          <<SQL
-SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
- FROM (SELECT id, properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(1,1,1), 4096, 256, true) AS mvtgeometry
-                          FROM (select *, st_transform(geometry, 3857) as the_geom_webmercator from fmus) as data 
-                        WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{x},#{y},#{z}),4096,0,true) IS NOT NULL) AS tile;
-SQL
+          <<~SQL
+            SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
+             FROM (SELECT id, properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(1,1,1), 4096, 256, true) AS mvtgeometry
+                                      FROM (select *, st_transform(geometry, 3857) as the_geom_webmercator from fmus) as data 
+                                    WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{x},#{y},#{z}),4096,0,true) IS NOT NULL) AS tile;
+          SQL
 
       tile = ActiveRecord::Base.connection.execute query
       ActiveRecord::Base.connection.unescape_bytea tile.getvalue(0, 0)
