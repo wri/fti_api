@@ -15,7 +15,7 @@ addons:
   apt:
     update: true
     packages:
-      - postgresql-server-dev-12
+      - postgresql-server-12
       - postgresql-12-postgis-3
       - postgresql-12-postgis-3-scripts
 
@@ -27,6 +27,7 @@ before_install:
   - sudo apt-get install -y --allow-unauthenticated --no-install-recommends --no-install-suggests postgresql-12 postgresql-client-12 postgresql-server-dev-12 postgresql-common
   - sudo apt-get install -y --allow-unauthenticated postgresql-12-postgis-3 postgresql-12-postgis-3-scripts postgis
   - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
+  - sudo cp /etc/postgresql/12/main/pg_hba.conf
   - sudo sh -c 'echo "local all postgres trust" > /etc/postgresql/12/main/pg_hba.conf'
   - sudo sh -c 'echo -n "host all all 127.0.0.1/32 trust" >> /etc/postgresql/12/main/pg_hba.conf'
   - sudo service postgresql stop
