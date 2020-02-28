@@ -17,23 +17,25 @@ addons:
     packages:
       - postgresql-server-dev-12
       - postgresql-12-postgis-3
+      - postgresql-12-postgis-3-scripts
 
 before_install:
   - gem install rubygems-update && update_rubygems
   - sudo apt-get install gdal-bin
   - yes | rvm @global do gem uninstall bundler --all
   - yes | rvm @global do gem install bundler -v 2.1.4 || true
-  - sudo /etc/init.d/postgresql stop
-  - sudo apt-get install postgresql-12-postgis-3 postgresql-12-postgis-3-scripts
-  - sudo sh -c 'echo "local all postgres trust" > /etc/postgresql/12/main/pg_hba.conf'
-  - sudo sh -c 'echo -n "host all all 127.0.0.1/32 trust" >> /etc/postgresql/12/main/pg_hba.conf'
-  - sudo /etc/init.d/postgresql start 12
+  - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
+  - sudo cp /etc/postgresql/12/main/pg_hba.conf
+  - sudo service postgresql stop
+  - sudo service postgresql start 12
   - gem update --system
   - gem update bundler
 
 before_script:
-  - psql -U postgres -c "create extension postgis"
   - psql --version
+  - psql -c 'SELECT version()'
+  - psql -U postgres -c "create extension postgis"
+  - psql -c 'SELECT PostGIS_full_version()' -U postgres
   - cp config/database.yml.travis config/database.yml
   - cp config/secrets.yml.sample config/secrets.yml
 
