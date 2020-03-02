@@ -22,6 +22,7 @@ ActiveAdmin.register Fmu do
 
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_vlc, :certification_vlo, :certification_tltv,
+                :esri_shapefiles_zip,
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
@@ -69,6 +70,7 @@ ActiveAdmin.register Fmu do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Fmu Details' do
       f.input :country,  input_html: { disabled: true }
+      f.input :esri_shapefiles_zip, as: :file
       # TODO This needs a better approach
       f.has_many :operators, new_record: false do |o|
         o.input :name, input_html: { disabled: true }
