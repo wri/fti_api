@@ -32,7 +32,7 @@ ActiveAdmin.register Fmu do
   filter :country, as: :select,
                    collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator_in_all, label: 'Operator', as: :select,
-                           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
 
   csv do
     column :id

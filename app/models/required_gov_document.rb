@@ -25,7 +25,7 @@ class RequiredGovDocument < ApplicationRecord
   # rubocop:enable Style/BlockDelimiters
 
   belongs_to :required_gov_document_group
-  belongs_to :country, required: true
+  belongs_to :country, optional: false
   has_many :gov_documents, dependent: :destroy
 
   enum document_type: { file: 1, link: 2, stats: 3 }
@@ -37,7 +37,7 @@ class RequiredGovDocument < ApplicationRecord
 
   after_create :create_gov_document
 
-  scope :with_archived, ->() { unscope(where: :deleted_at) }
+  scope :with_archived, -> { unscope(where: :deleted_at) }
 
   private
 

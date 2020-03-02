@@ -25,7 +25,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :approve, method: :put do
-    if resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_valid])
+    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_valid])
       redirect_to collection_path, notice: 'Annex approved'
     else
       redirect_to collection_path, alert: 'Annex could not be approved'
@@ -33,7 +33,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :reject, method: :put do
-    if resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_invalid])
+    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_invalid])
       redirect_to collection_path, notice: 'Annex rejected'
     else
       redirect_to collection_path, alert: 'Annex could not be rejected'
@@ -89,8 +89,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
-    column('Approve') { |annex| link_to 'Approve', approve_admin_operator_document_annex_path(annex), method: :put}
-    column('Reject') { |annex| link_to 'Reject', reject_admin_operator_document_annex_path(annex), method: :put}
+    column('Approve') { |annex| link_to 'Approve', approve_admin_operator_document_annex_path(annex), method: :put }
+    column('Reject') { |annex| link_to 'Reject', reject_admin_operator_document_annex_path(annex), method: :put }
     actions
   end
 

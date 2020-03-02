@@ -113,7 +113,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
     div class: 'c-nav' do
       div class: 'list' do
         ul class: 'user' do
-          li { link_to @arbre_context.assigns[:current_user].email, admin_user_path(@arbre_context.assigns[:current_user].id)}
+          li { link_to @arbre_context.assigns[:current_user].email, admin_user_path(@arbre_context.assigns[:current_user].id) }
         end
         ul class: 'logout' do
           li { link_to ' Logout', destroy_user_session_path }

@@ -12,7 +12,7 @@ ActiveAdmin.register Sawmill do
   permit_params :operator_id, :name, :lat, :lng, :is_active
 
   member_action :activate, method: :put do
-    resource.update_attributes(is_active: true)
+    resource.update(is_active: true)
     redirect_to collection_path, notice: 'Operator activated'
   end
 

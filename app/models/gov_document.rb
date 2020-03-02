@@ -28,7 +28,7 @@ class GovDocument < ApplicationRecord
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
 
-  belongs_to :required_gov_document, ->() { with_archived }, required: true
+  belongs_to :required_gov_document, -> { with_archived }, required: true
   has_many :gov_files
   accepts_nested_attributes_for :gov_files
 
@@ -46,7 +46,7 @@ class GovDocument < ApplicationRecord
 
   before_destroy :ensure_unity
 
-  scope :with_archived, ->() { unscope(where: :deleted_at) }
+  scope :with_archived, -> { unscope(where: :deleted_at) }
   scope :to_expire, ->(date) { where("expire_date < '#{date}'::date and status = #{GovDocument.statuses[:doc_valid]}") }
   scope :actual,       -> { where(current: true, deleted_at: nil) }
   scope :valid,        -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
@@ -65,11 +65,11 @@ class GovDocument < ApplicationRecord
       documents_to_update = GovDocument.where(required_gov_document_id: required_gov_document_id,
                                               current: true)
                               .where.not(id: id)
-      documents_to_update.find_each {|x| x.update_attributes!(current: false)}
+      documents_to_update.find_each { |x| x.update!(current: false) }
     else
       documents_to_update = GovDocument.where(required_gov_document_id: required_gov_document_id, current: true)
       unless documents_to_update.any?
-        self.update_attributes(current: false)
+        self.update(current: false)
       end
     end
   end
@@ -82,7 +82,7 @@ class GovDocument < ApplicationRecord
   end
 
   def expire_document
-    self.update_attributes(status: GovDocument.statuses[:doc_expired])
+    self.update(status: GovDocument.statuses[:doc_expired])
   end
 
   def has_data?

@@ -44,7 +44,7 @@ module V1
 
           expect(status).to eq(200)
           expect(parsed_attributes[:logo]).to_not be_empty
-          expect(parsed_attributes.dig(:logo, :url)).to include("operator/logo/#{operator.id}/logo.jpeg")
+          expect(parsed_attributes.dig(:logo, :url)).to include("operator/logo/#{operator.id}/logo.png")
         end
       end
     end

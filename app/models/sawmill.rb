@@ -20,8 +20,8 @@ class Sawmill < ApplicationRecord
   validates_numericality_of :lat, greater_than_or_equal_to: -90, less_than_or_equal_to: 90
   validates_numericality_of :lng, greater_than_or_equal_to: -180, less_than_or_equal_to: 180
 
-  scope :active, ->() { Sawmill.where(is_active: true) }
-  scope :inactive, ->() { Sawmill.where(is_active: false) }
+  scope :active, -> { Sawmill.where(is_active: true) }
+  scope :inactive, -> { Sawmill.where(is_active: false) }
 
   after_save :update_geojson
 
