@@ -28,7 +28,6 @@ before_install:
   - sudo apt-get install -y --allow-unauthenticated postgresql-12-postgis-3 postgresql-12-postgis-3-scripts postgis
   - sudo sed -i 's/port = 5433/port = 5432/' /etc/postgresql/12/main/postgresql.conf
   - sudo sh -c 'echo "local all postgres trust" > /etc/postgresql/12/main/pg_hba.conf'
-  - sudo sh -c 'echo "local all travis trust" > /etc/postgresql/12/main/pg_hba.conf'
   - sudo sh -c 'echo -n "host all all 127.0.0.1/32 trust" >> /etc/postgresql/12/main/pg_hba.conf'
   - sudo service postgresql stop
   - sudo service postgresql start 12
@@ -37,8 +36,8 @@ before_install:
 
 before_script:
   - psql --version
-  - psql -c 'SELECT version()'
-  - psql -U postgres -c "create extension postgis"
+  - psql -c 'SELECT version()' -U postgres
+  - psql -U postgres -c "create extension postgis" -U postgres
   - psql -c 'SELECT PostGIS_full_version()' -U postgres
   - cp config/database.yml.travis config/database.yml
   - cp config/secrets.yml.sample config/secrets.yml
