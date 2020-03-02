@@ -74,6 +74,8 @@ group :development, :test do
   gem 'faker'
   gem 'rails-erd'
   gem 'rubocop',                   require: false
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'webmock'
 end
 
