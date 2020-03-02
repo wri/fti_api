@@ -9,7 +9,7 @@ env:
   global:
     - RECOVER_URL="http://localhost:5000"
     - SENDGRID_API_KEY=asdf
-    - CONTACT_EMAIL=nomail@nomail.com
+    - CONTACT_EMAIL="nomail@nomail.com"
 
 addons:
   postgresql: 12
