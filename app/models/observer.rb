@@ -22,9 +22,8 @@
 
 class Observer < ApplicationRecord
   include Translatable
-  # rubocop:disable Style/BlockDelimiters
   translates :name, :organization, touch: true
-  # rubocop:enable Style/BlockDelimiters
+  
 
   active_admin_translates :name do
     validates_presence_of :name

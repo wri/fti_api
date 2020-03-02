@@ -17,9 +17,8 @@
 
 class Country < ApplicationRecord
   include Translatable
-  # rubocop:disable Style/BlockDelimiters
   translates :name, :region_name, touch: true
-  # rubocop:enable Style/BlockDelimiters
+  
   active_admin_translates :name, :region_name do
     validates_presence_of :name
   end
@@ -55,7 +54,7 @@ class Country < ApplicationRecord
 
   scope :by_status, (->(status) { where(is_active: status) })
 
-  scope :active, (->() { where(is_active: true) })
+  scope :active, (-> { where(is_active: true) })
 
   default_scope do
     includes(:translations)

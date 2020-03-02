@@ -158,6 +158,7 @@ class User < ApplicationRecord
 
   def create_from_request
     return if permissions_request.blank?
+
     self.user_permission = UserPermission.new(user_role: permissions_request)
     self.permissions_request = nil
   end
@@ -170,8 +171,10 @@ class User < ApplicationRecord
 
   def half_email
     return '' if email.blank?
+
     index = email.index('@')
     return '' if index.nil? || index.to_i.zero?
+
     email[0, index.to_i]
   end
 

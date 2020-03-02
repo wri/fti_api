@@ -81,11 +81,13 @@ module V1
       return false if app == 'observations-tool'
       return true if user&.user_permission&.user_role =='admin'
       return true if user&.is_government(@model.country_id)
+
       false
     end
 
     def hidden_document_status
       return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
+
       :doc_not_provided
     end
   end

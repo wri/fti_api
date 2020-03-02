@@ -63,8 +63,8 @@
 #   }
 
 server ENV['STAGING_IP'],
-user: ENV['SSH_USER'],
-roles: %w{web app db}, primary: true
+       user: ENV['SSH_USER'],
+       roles: %w{web app db}, primary: true
 
 set :ssh_options, {
   forward_agent: true,

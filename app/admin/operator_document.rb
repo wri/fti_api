@@ -29,9 +29,9 @@ ActiveAdmin.register OperatorDocument do
 
   member_action :approve, method: :put do
     if resource.reason.present?
-      resource.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
+      resource.update(status: OperatorDocument.statuses[:doc_not_required])
     else
-      resource.update_attributes(status: OperatorDocument.statuses[:doc_valid])
+      resource.update(status: OperatorDocument.statuses[:doc_valid])
     end
     redirect_to collection_path, notice: 'Document approved'
   end
@@ -40,7 +40,7 @@ ActiveAdmin.register OperatorDocument do
     #if resource.reason.present?
     #  resource.update_attributes(status: OperatorDocument.statuses[:doc_not_provided], reason: nil)
     #else
-    resource.update_attributes(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
+    resource.update(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
     #end
 
     redirect_to collection_path, notice: 'Document rejected'
@@ -108,7 +108,7 @@ ActiveAdmin.register OperatorDocument do
     # rubocop:disable Rails/OutputSafety
     column 'Annexes' do |o|
       links = []
-      o.operator_document_annexes.each {|a| links << a.name}
+      o.operator_document_annexes.each { |a| links << a.name }
       links.join(' ').html_safe
     end
     # rubocop:enable Rails/OutputSafety
@@ -161,15 +161,15 @@ ActiveAdmin.register OperatorDocument do
     # rubocop:disable Rails/OutputSafety
     column 'Annexes' do |od|
       links = []
-      od.operator_document_annexes.each {|a| links << link_to(a.id, admin_operator_document_annex_path(a))}
+      od.operator_document_annexes.each { |a| links << link_to(a.id, admin_operator_document_annex_path(a)) }
       links.join(' ').html_safe
     end
     # rubocop:enable Rails/OutputSafety
     column :reason
     column :note
     column :response_date
-    column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put}
-    column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put}
+    column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put }
+    column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put }
     actions
   end
 
@@ -181,11 +181,11 @@ ActiveAdmin.register OperatorDocument do
          collection: RequiredOperatorDocument.
              joins(country: :translations)
                          .order('required_operator_documents.name')
-                         .where(country_translations: { locale: I18n.locale }).all.map {|x| ["#{x.name} - #{x.country.name}", x.id]}
+                         .where(country_translations: { locale: I18n.locale }).all.map { |x| ["#{x.name} - #{x.country.name}", x.id] }
   filter :required_operator_document_country_id, label: 'Country', as: :select,
                                                  collection: Country.with_translations(I18n.locale).order('country_translations.name')
   filter :operator, label: 'Operator', as: :select,
-                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :updated_at

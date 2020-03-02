@@ -17,8 +17,8 @@
 class FmuOperator < ApplicationRecord
   include DateHelper
 
-  belongs_to :fmu,        required: true
-  belongs_to :operator,   required: true
+  belongs_to :fmu,        optional: false
+  belongs_to :operator,   optional: false
 
   before_validation     :set_current_start_date
   validates_presence_of :start_date
@@ -37,6 +37,7 @@ class FmuOperator < ApplicationRecord
   # Validates if the start date is earlier than the end date
   def start_date_is_earlier
     return if end_date.blank?
+
     unless start_date < end_date
       errors.add(:start_date, 'Start date must be earlier than end date')
     end
@@ -107,11 +108,12 @@ WHERE id = #{x.fmu_id};"
       Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator}"
 
       return unless current_operator
+
       RequiredOperatorDocumentFmu.where(country_id: fmu.country_id).each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
                                   operator_id: current_operator,
                                   fmu_id: fmu_id).first_or_create do |odf|
-          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true) unless odf.persisted?
+          odf.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true) unless odf.persisted?
         end
       end
       Rails.logger.info "Create the documents for operator #{current_operator} and FMU #{fmu_id}"

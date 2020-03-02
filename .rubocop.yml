@@ -1,3 +1,6 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
 AllCops:
   TargetRubyVersion: 2.4
   # Cop names are not displayed in offense messages by default. Change behavior
@@ -42,15 +45,15 @@ Style/Alias:
   Enabled: true
 
 # Align the elements of an array literal if they span more than one line.
-Layout/AlignArray:
+Layout/ArrayAlignment:
   Enabled: true
 
 # Align the elements of a hash literal if they span more than one line.
-Layout/AlignHash:
+Layout/HashAlignment:
   Enabled: true
 
 # Align the parameters of a method call if they span more than one line.
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   Enabled: false
 
 # Use &&/|| instead of and/or.
@@ -95,10 +98,6 @@ Style/BlockDelimiters:
   Enabled: true
   Exclude:
     - 'config/routes.rb'
-
-# Enforce braces style around hash parameters.
-Style/BracesAroundHashParameters:
-  Enabled: false
 
 # Avoid explicit use of the case equality operator(===).
 Style/CaseEquality:
@@ -239,7 +238,7 @@ Naming/FileName:
   Enabled: false
 
 # Checks for flip flops.
-Style/FlipFlop:
+Lint/FlipFlop:
   Enabled: false
 
 # Checks use of for or each in multiline loops.
@@ -248,6 +247,9 @@ Style/For:
 
 # Enforce the use of Kernel#sprintf, Kernel#format or String#%.
 Style/FormatString:
+  Enabled: false
+
+Style/FormatStringToken:
   Enabled: false
 
 # Do not introduce global variables.
@@ -282,7 +284,7 @@ Style/IdenticalConditionalBranches:
 
 # Checks the indentation of the first line of the right-hand-side of a
 # multi-line assignment.
-Layout/IndentAssignment:
+Layout/AssignmentIndentation:
   Enabled: false
 
 # Keep indentation straight.
@@ -294,11 +296,11 @@ Layout/IndentationWidth:
   Enabled: true
 
 # Checks the indentation of the first element in an array literal.
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   Enabled: false
 
 # Checks the indentation of the first key in a hash literal.
-Layout/IndentHash:
+Layout/FirstHashElementIndentation:
   Enabled: false
 
 # Use Kernel#loop for infinite loops.
@@ -559,14 +561,10 @@ Layout/SpaceBeforeFirstArg:
 Layout/SpaceBeforeSemicolon:
   Enabled: false
 
-# Checks that block braces have or don't have surrounding space.
-# For blocks taking parameters, checks that the left brace has or doesn't
-# have trailing space.
-Layout/SpaceInsideBlockBraces:
-  Enabled: false
-
 # No spaces after [ or before ].
-Style/SpaceInsideBrackets:
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: false
+Layout/SpaceInsideReferenceBrackets:
   Enabled: false
 
 # Use spaces inside hash literal braces - or don't.
@@ -619,7 +617,7 @@ Layout/Tab:
   Enabled: true
 
 # Checks trailing blank lines and final newline.
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Enabled: true
 
 # Checks for trailing comma in array and hash literals.
@@ -648,16 +646,16 @@ Style/UnlessElse:
   Enabled: false
 
 # Checks for %W when interpolation is not needed.
-Style/UnneededCapitalW:
+Style/RedundantCapitalW:
   Enabled: false
 
 # TODO: Enable UnneededInterpolation Cop.
 # Checks for strings that are just an interpolated expression.
-Style/UnneededInterpolation:
+Style/RedundantInterpolation:
   Enabled: false
 
 # Checks for %q/%Q when single quotes or double quotes would do.
-Style/UnneededPercentQ:
+Style/RedundantPercentQ:
   Enabled: false
 
 # Don't interpolate global, instance and class variables directly in strings.
@@ -689,6 +687,17 @@ Style/WordArray:
 Style/ZeroLengthPredicate:
   Enabled: false
 
+Style/FloatDivision:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
 
 #################### Metrics ################################
 
@@ -719,7 +728,7 @@ Metrics/CyclomaticComplexity:
   Max: 80
 
 # Limit lines to 80 characters.
-Metrics/LineLength:
+Layout/LineLength:
   Enabled: false
 
 # Avoid methods longer than 10 lines of code.
@@ -790,7 +799,7 @@ Lint/DuplicateMethods:
   Enabled: false
 
 # Check for duplicate keys in hash literals.
-Lint/DuplicatedKey:
+Lint/DuplicateHashKey:
   Enabled: false
 
 # Check for immutable argument given to each_with_object.
@@ -834,7 +843,7 @@ Lint/FormatParameterMismatch:
   Enabled: false
 
 # Don't suppress exception.
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Enabled: false
 
 # TODO: Enable ImplicitStringConcatenation Cop.
@@ -847,10 +856,6 @@ Lint/ImplicitStringConcatenation:
 # Checks for attempts to use `private` or `protected` to set the visibility
 # of a class method, which does not work.
 Lint/IneffectiveAccessModifier:
-  Enabled: false
-
-# Checks of literals used in conditions.
-Lint/LiteralInCondition:
   Enabled: false
 
 # Checks for literals used in interpolation.
@@ -893,18 +898,12 @@ Lint/ShadowingOuterLocalVariable:
   Enabled: false
 
 # 'Checks for Object#to_s usage in string interpolation.
-Lint/StringConversionInInterpolation:
+Lint/RedundantStringCoercion:
   Enabled: false
 
 # Do not use prefix `_` for a variable that is used.
 Lint/UnderscorePrefixedVariableName:
   Enabled: true
-
-# Checks for rubocop:disable comments that can be removed.
-# Note: this cop is not disabled when disabling all cops.
-# It must be explicitly disabled.
-Lint/UnneededDisable:
-  Enabled: false
 
 # Checks for unused block arguments.
 Lint/UnusedBlockArgument:
@@ -961,11 +960,6 @@ Performance/DoubleStartEndWith:
 Performance/EndWith:
   Enabled: false
 
-# TODO: Enable LstripRstrip Cop.
-# Use `strip` instead of `lstrip.rstrip`.
-Performance/LstripRstrip:
-  Enabled: false
-
 # TODO: Enable RangeInclude Cop.
 # Use `Range#cover?` instead of `Range#include?`.
 Performance/RangeInclude:
@@ -989,9 +983,8 @@ Performance/RedundantMerge:
   MaxKeyValuePairs: 2
   Enabled: false
 
-# TODO: Enable RedundantSortBy Cop.
 # Use `sort` instead of `sort_by { |x| x }`.
-Performance/RedundantSortBy:
+Style/RedundantSortBy:
   Enabled: false
 
 # TODO: Enable StartWith Cop.
@@ -1068,5 +1061,18 @@ Rails/TimeZone:
 Rails/Validation:
   Enabled: false
 
-Documentation:
+Rails/LexicallyScopedActionFilter:
+  Enabled: true
+  Exclude:
+    - 'app/controllers/concerns/**/*'
+    - 'app/controllers/v1/**/*'
+
+# TODO: Enable it
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/InverseOf:
+  Enabled: false
+Rails/FilePath:
+  Enabled: false
+Lint/BooleanSymbol:
   Enabled: false

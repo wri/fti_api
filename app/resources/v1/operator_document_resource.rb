@@ -9,7 +9,7 @@ module V1
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
                :fmu_id, :current, :uploaded_by, :reason, :note, :response_date,
-                :public
+               :public
 
     has_one :country
     has_one :fmu
@@ -48,6 +48,7 @@ module V1
     # TODO: Implement permissions system here
     def status
       return @model.status if can_see_document?
+
       # return :doc_not_provided unless document_public?
 
       hidden_document_status
@@ -91,11 +92,13 @@ module V1
       return false if app == 'observations-tool'
       return true if user&.user_permission&.user_role =='admin'
       return true if user&.is_operator?(@model.operator_id)
+
       false
     end
 
     def hidden_document_status
       return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
+
       :doc_not_provided
     end
   end
