@@ -17,7 +17,7 @@ set :default_env, {
 set :passenger_restart_with_touch, true
 
 set :rvm_type, :user
-set :rvm_ruby_version, '2.4.1'
+set :rvm_ruby_version, '2.4.6'
 set :rvm_roles, [:app, :web, :db]
 
 set :keep_releases, 5
