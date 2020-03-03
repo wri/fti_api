@@ -26,7 +26,7 @@
 #
 
 class OperatorDocumentFmu < OperatorDocument
-  belongs_to :required_operator_document_fmu, foreign_key: 'required_operator_document_id', required: true
-  belongs_to :fmu, required: true
+  belongs_to :required_operator_document_fmu, foreign_key: 'required_operator_document_id', optional: false
+  belongs_to :fmu, optional: false
 
 end

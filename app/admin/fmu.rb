@@ -6,7 +6,7 @@ ActiveAdmin.register Fmu do
 
   menu false
 
-  actions :show, :edit, :index, :update
+  actions :show, :edit, :index, :update, :new, :create
 
   config.order_clause
 
@@ -22,6 +22,7 @@ ActiveAdmin.register Fmu do
 
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_vlc, :certification_vlo, :certification_tltv,
+                :esri_shapefiles_zip, :country_id,
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
@@ -31,7 +32,7 @@ ActiveAdmin.register Fmu do
   filter :country, as: :select,
                    collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator_in_all, label: 'Operator', as: :select,
-                           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name')}
+                           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
 
   csv do
     column :id
@@ -68,7 +69,8 @@ ActiveAdmin.register Fmu do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Fmu Details' do
-      f.input :country,  input_html: { disabled: true }
+      f.input :country,  input_html: { disabled: object.persisted? }
+      f.input :esri_shapefiles_zip, as: :file
       # TODO This needs a better approach
       f.has_many :operators, new_record: false do |o|
         o.input :name, input_html: { disabled: true }

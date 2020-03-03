@@ -4,19 +4,29 @@ module FileDataImport
   class Record
     include FileDataImport::Concerns::HasAttributes
 
-    attr_reader :class_name, :permitted_attributes, :permitted_translations, :raw_attributes, :results
+    attr_reader :class_name, :permitted_attributes, :permitted_translations, :raw_attributes, :results, :abilities
 
     def initialize(class_name, raw_attributes, **options)
       @class_name = class_name
-      @raw_attributes = raw_attributes
+      @raw_attributes = raw_attributes.transform_values(&:presence)
       @permitted_attributes = options[:permitted_attributes] || []
       @permitted_translations = options[:permitted_translations] || []
+      @abilities = options[:can]&.map(&:to_sym) || %i[create update]
       @belongs_to_associations = []
       @results = { attributes: {}, errors: {} }
     end
 
+    def id
+      @id ||= raw_attributes[:id].to_i if raw_attributes[:id]
+    end
+
     def record
-      @record ||= class_name.new
+      @record ||=
+        if abilities.include?(:update) && id
+          class_name.find_by(id: id)
+        elsif abilities.include?(:create)
+          class_name.new
+        end
     end
 
     def belongs_to(association)
@@ -24,6 +34,11 @@ module FileDataImport
     end
 
     def save
+      unless record
+        results[:errors][:record] = ["record with #{id} id is not exists"]
+        return
+      end
+
       class_name.transaction do
         belongs_to_attributes =
           @belongs_to_associations.each_with_object({}) do |belongs_to_association, attributes|

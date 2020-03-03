@@ -74,10 +74,10 @@ ActiveAdmin.register_page "Dashboard" do
         panel "First 20 Pending Observations out of #{Observation.Created.count}" do
           table_for Observation.Created.order('updated_at DESC').limit(20).each do
             column('ID') { |obs| link_to obs.id, admin_observation_path(obs.id) }
-            column('Country') {|obs| obs.country }
-            column('Subcategory') {|obs| obs.subcategory }
-            column('Operator') {|obs| obs.operator }
-            column('Date') {|obs| obs.publication_date.strftime("%A, %d/%b/%Y") }
+            column('Country') { |obs| obs.country }
+            column('Subcategory') { |obs| obs.subcategory }
+            column('Operator') { |obs| obs.operator }
+            column('Date') { |obs| obs.publication_date.strftime("%A, %d/%b/%Y") }
 
           end
         end
@@ -107,5 +107,5 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
-  end # content
+  end
 end

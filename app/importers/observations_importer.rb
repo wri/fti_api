@@ -11,9 +11,9 @@ class ObservationsImporter < FileDataImport::BaseImporter
     details evidence concern_opinion litigation_status
   ].freeze
 
-  record Observation, permitted_attributes: PERMITTED_ATTRIBUTES, permitted_translations: PERMITTED_TRANSLATES
+  record Observation, permitted_attributes: PERMITTED_ATTRIBUTES, permitted_translations: PERMITTED_TRANSLATES, can: %i[create]
 
-  belongs_to Country, permitted_attributes: %i[iso],  permitted_translations: %i[name], required: true
+  belongs_to Country, permitted_attributes: %i[iso],  permitted_translations: %i[name], optional: false
   belongs_to Severity, permitted_attributes: %i[level], permitted_translations: %i[details]
   belongs_to ObservationReport, permitted_attributes: %i[title publication_date created_at updated_at attachment]
 

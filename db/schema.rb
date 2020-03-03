@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200217172522) do
+ActiveRecord::Schema.define(version: 20200226164909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,15 +178,17 @@ ActiveRecord::Schema.define(version: 20200217172522) do
   create_table "fmus", force: :cascade do |t|
     t.integer  "country_id"
     t.jsonb    "geojson"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-    t.boolean  "certification_fsc",  default: false
-    t.boolean  "certification_pefc", default: false
-    t.boolean  "certification_olb",  default: false
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
+    t.boolean  "certification_fsc",                                        default: false
+    t.boolean  "certification_pefc",                                       default: false
+    t.boolean  "certification_olb",                                        default: false
     t.boolean  "certification_vlc"
     t.boolean  "certification_vlo"
     t.boolean  "certification_tltv"
-    t.integer  "forest_type",        default: 0,     null: false
+    t.integer  "forest_type",                                              default: 0,     null: false
+    t.geometry "geometry",           limit: {:srid=>0, :type=>"geometry"}
+    t.jsonb    "properties"
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
     t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
   end

@@ -7,6 +7,7 @@ module FileDataImport
 
       def record_attributes
         return unless record
+
         record.attributes.symbolize_keys.slice(*attributes_for_serializing)
       end
 
@@ -18,6 +19,8 @@ module FileDataImport
 
       def attributes_for_creation
         @attributes_for_creation ||= begin
+          return extracted_attributes if translations_attributes.blank?
+
           extracted_attributes.merge({ translations_attributes: [translations_attributes.merge(locale: I18n.locale)] })
         end
       end

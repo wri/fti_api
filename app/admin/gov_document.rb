@@ -27,15 +27,15 @@ ActiveAdmin.register GovDocument do
 
   member_action :approve, method: :put do
     if resource.reason.present?
-      resource.update_attributes(status: :doc_not_required)
+      resource.update(status: :doc_not_required)
     else
-      resource.update_attributes(status: :doc_valid)
+      resource.update(status: :doc_valid)
     end
     redirect_to collection_path, notice: 'Document approved'
   end
 
   member_action :reject, method: :put do
-    resource.update_attributes(status: :doc_invalid, reason: nil)
+    resource.update(status: :doc_invalid, reason: nil)
 
     redirect_to collection_path, notice: 'Document rejected'
   end
@@ -66,7 +66,7 @@ ActiveAdmin.register GovDocument do
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
     column 'Data' do |doc|
-      doc.link if doc.link
+      doc.link
       "#{doc.value} #{doc.units}" if doc.value
       if doc.gov_files.any?
         links = []
@@ -83,8 +83,8 @@ ActiveAdmin.register GovDocument do
     column :reason
     column :note
     column :response_date
-    column('Approve') { |doc| link_to 'Approve', approve_admin_gov_document_path(doc), method: :put}
-    column('Reject') { |doc| link_to 'Reject', reject_admin_gov_document_path(doc), method: :put}
+    column('Approve') { |doc| link_to 'Approve', approve_admin_gov_document_path(doc), method: :put }
+    column('Reject') { |doc| link_to 'Reject', reject_admin_gov_document_path(doc), method: :put }
     actions
   end
 

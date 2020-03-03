@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.4.6'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -14,7 +14,10 @@ gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
 gem 'activeadmin'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
-gem 'activeadmin_addons'
+gem 'activeadmin_addons', '1.5'
+
+gem 'sass-rails'
+gem 'sassc-rails'
 
 # WYSIWYG
 gem 'activeadmin_quill_editor'
@@ -30,17 +33,18 @@ gem 'active_skin'
 
 
 # Rails and DB
+gem 'activerecord-postgis-adapter'
 gem 'pg',    '~> 0.18'
 gem 'rails', '~> 5.0.2'
 
 # API
-gem 'jsonapi-resources'
+gem 'jsonapi-resources', '0.9.0'
 gem 'oj'
 gem 'oj_mimic_json'
 
 # Data
 gem 'activerecord-import'
-gem 'globalize',                   github: 'globalize/globalize'
+gem 'globalize', '5.1.0'
 gem 'seed-fu'
 
 # Validation
@@ -65,11 +69,16 @@ gem 'oink'
 # Mail
 gem 'sendgrid-ruby'
 
+# file utilites
+gem 'rubyzip'
+
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
   gem 'rails-erd'
   gem 'rubocop',                   require: false
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'webmock'
 end
 
