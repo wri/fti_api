@@ -26,6 +26,8 @@ class Fmu < ApplicationRecord
   include ForestTypeable
   translates :name, touch: true
 
+  attr_reader :esri_shapefiles_zip
+
   active_admin_translates :name do
     validates_presence_of :name
   end
@@ -97,6 +99,16 @@ class Fmu < ApplicationRecord
       tile = ActiveRecord::Base.connection.execute query
       ActiveRecord::Base.connection.unescape_bytea tile.getvalue(0, 0)
     end
+  end
+
+  def esri_shapefiles_zip=(esri_shapefiles_zip)
+    FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, index|
+      # takes only the first feature from the Esri shapefile.
+      self.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
+      break
+    end
+
+    @esri_shapefiles_zip = esri_shapefiles_zip
   end
 
   def update_geojson

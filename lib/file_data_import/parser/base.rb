@@ -3,6 +3,8 @@
 module FileDataImport
   module Parser
     class Base
+      AVAILABLE_EXTENSIONS = %w[shp csv].freeze
+
       attr_reader :path_to_file
 
       def initialize(path_to_file)

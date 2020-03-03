@@ -13,7 +13,7 @@ module FileDataImport
       @class_name = class_name
       @permitted_attributes = options[:permitted_attributes]&.map(&:to_sym) || []
       @permitted_translations = options[:permitted_translations]&.map(&:to_sym) || []
-      @raw_attributes = raw_attributes
+      @raw_attributes = raw_attributes.transform_values(&:presence)
       @abilities = options[:can]&.map(&:to_sym) || []
       @required = options[:required]
       @belongs_as = options[:as]

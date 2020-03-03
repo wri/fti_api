@@ -32,6 +32,7 @@ before_install:
   - sudo sh -c 'echo -n "host all all 127.0.0.1/32 trust" >> /etc/postgresql/12/main/pg_hba.conf'
   - sudo service postgresql stop
   - sudo service postgresql start 12
+
   - gem update --system
   - gem update bundler
 
