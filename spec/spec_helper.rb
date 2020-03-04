@@ -103,11 +103,13 @@ RSpec.configure do |config|
 =end
   config.include IntegrationHelper, type: :request
   config.include ImporterHelper, type: :importer
+
+  # Creation of the webuser for documentation
+  FactoryBot.create :webuser
+  #config.before(:suite) { FactoryBot.create(:webuser) }
+  config.after(:suite) { User.destroy_all}
 end
 
 RspecApiDocumentation.configure do |config|
   config.format = [:openApi]
-
-  #config.before(:suite) { FactoryBot.create(:webuser) }
-  #config.after(:suite) { User.destroy_all}
 end
