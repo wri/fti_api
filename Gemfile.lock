@@ -251,6 +251,7 @@ GEM
     minitest (5.14.0)
     mono_logger (1.1.0)
     multi_json (1.14.1)
+    mustache (1.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     net-scp (2.0.0)
@@ -370,6 +371,10 @@ GEM
     rgeo-activerecord (6.2.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
     rspec-activejob (0.6.1)
       activejob (>= 4.2)
       rspec-mocks
@@ -390,6 +395,10 @@ GEM
       rspec-mocks (~> 3.9.0)
       rspec-support (~> 3.9.0)
     rspec-support (3.9.2)
+    rspec_api_documentation (6.1.0)
+      activesupport (>= 3.0.0)
+      mustache (~> 1.0, >= 0.99.4)
+      rspec (~> 3.0)
     rubocop (0.80.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -554,6 +563,7 @@ DEPENDENCIES
   resque_mailer
   rspec-activejob
   rspec-rails
+  rspec_api_documentation
   rubocop
   rubocop-performance
   rubocop-rails

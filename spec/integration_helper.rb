@@ -1,4 +1,4 @@
-module AcceptanceHelper
+module IntegrationHelper
   ERRORS = {
     '401' => { status: '401', title: 'You are not authorized to access this page.' },
     '422' => { status: 422, title: 'Unprocessable entity.' },

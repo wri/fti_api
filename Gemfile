@@ -40,6 +40,9 @@ gem 'jsonapi-resources', '0.9.0'
 gem 'oj'
 gem 'oj_mimic_json'
 
+# API Documentation
+gem 'rspec_api_documentation'
+
 # Data
 gem 'activerecord-import'
 gem 'globalize', '5.1.0'

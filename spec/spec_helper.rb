@@ -17,8 +17,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'acceptance_helper'
+require 'integration_helper'
 require 'importer_helper'
+require 'rails_helper'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -100,6 +101,13 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
-  config.include AcceptanceHelper, type: :request
+  config.include IntegrationHelper, type: :request
   config.include ImporterHelper, type: :importer
+end
+
+RspecApiDocumentation.configure do |config|
+  config.format = [:openApi]
+
+  #config.before(:suite) { FactoryBot.create(:webuser) }
+  #config.after(:suite) { User.destroy_all}
 end
