@@ -28,6 +28,90 @@
     "application/json",
     "application/xml"
   ],
-  "paths": {},
-  "tags": []
+  "paths": {
+    "/countries": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "summary": "",
+        "description": "",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Listing countries",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json"
+              },
+              "ETag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"d8fb907508f20ff94dc0f63bdabe92e5\""
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "5233fa4a-1daa-4a79-b2e1-394b1a94eca9"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.038651"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "219"
+              }
+            },
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "OTP-API-KEY": {
+      "type": "apiKey",
+      "description": "",
+      "name": "OTP-API-KEY",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Countries",
+      "description": "Countries resource"
+    }
+  ]
 }
