@@ -1,4 +1,4 @@
-$(document).on('ready', function() {
+$(document).ready(function() {
 
   var goto_page_val = $("#hidden_active_admin_per_page").val();
 
