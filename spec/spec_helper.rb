@@ -39,8 +39,8 @@ RSpec.configure do |config|
   # Creation of the webuser for documentation
   #User.destroy_all
   #FactoryBot.create :webuser
-  config.before(:suite) { FactoryBot.create(:webuser) if User.where(name: 'Web user').count == 0 }
-  config.after(:suite) { User.destroy_all}
+  #config.before(:suite) { FactoryBot.create(:webuser) if User.where(name: 'Web user').count == 0 }
+  #config.after(:suite) { User.destroy_all}
 end
 
 RspecApiDocumentation.configure do |config|
