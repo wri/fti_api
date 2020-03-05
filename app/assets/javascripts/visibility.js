@@ -1,4 +1,4 @@
-$(document).on('ready', function() {
+$(document).ready(function() {
 
   $(".observation-checkbox").on('change', function(elem) {
     const id = ".col-" + elem.target.id;

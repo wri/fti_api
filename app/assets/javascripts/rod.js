@@ -1,4 +1,4 @@
-$(document).on('ready', function() {
+$(document).ready(function() {
   updateFields();
   $('#required_operator_document_type_input').on('change', function(){
     updateFields();
