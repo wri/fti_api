@@ -45,4 +45,10 @@ end
 
 RspecApiDocumentation.configure do |config|
   config.format = [:openApi, :html]
+
+  config.configurations_dir = Rails.root.join("spec", "support", "docs")
+
+  config.api_name = 'Open Timber Portal API documentation'
+  config.api_explanation = 'API Documentation for the OTP API.'
+  config.io_docs_protocol = %w(http https)
 end
