@@ -29,20 +29,238 @@
     "application/xml"
   ],
   "paths": {
-    "/countries": {
+    "/countries/{id}": {
       "get": {
         "tags": [
           "Countries"
         ],
-        "summary": "",
-        "description": "",
+        "summary": "Fetches a country by id",
+        "description": "It fetches a country by id and implements the JSON API standard",
         "consumes": [
           "application/vnd.api+json"
         ],
         "produces": [
           "application/vnd.api+json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[countries]",
+            "in": "query",
+            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Country not found",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json; charset=utf-8"
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "9ba91046-ba0b-4e4a-ab05-2af1a0806cdd"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.028970"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "56"
+              }
+            },
+            "examples": {}
+          },
+          "200": {
+            "description": "Get one country",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json"
+              },
+              "ETag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"3e2f692d9a3a9ccd1c4ba023fb6f53df\""
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0b657e6c-a8ca-4ef1-bd2f-7406b7126fce"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.010383"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "489"
+              }
+            },
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/countries": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "summary": "Fetches all the countrie",
+        "description": "It fetches all the countries and it implements JSON API.\nIf the parameter \"is-active\" is absent, it will by default send only the active countries",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "is-active",
+            "in": "query",
+            "description": "true",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[iso]",
+            "in": "query",
+            "description": "filter by iso",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[is_active]",
+            "in": "query",
+            "description": "filter by is_active",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[countries]",
+            "in": "query",
+            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Listing countries",
@@ -60,7 +278,7 @@
               "ETag": {
                 "description": "",
                 "type": "string",
-                "x-example-value": "W/\"d8fb907508f20ff94dc0f63bdabe92e5\""
+                "x-example-value": "W/\"81e3402ab8d75cfbea13048d86f053cf\""
               },
               "Cache-Control": {
                 "description": "",
@@ -70,12 +288,12 @@
               "X-Request-Id": {
                 "description": "",
                 "type": "string",
-                "x-example-value": "5233fa4a-1daa-4a79-b2e1-394b1a94eca9"
+                "x-example-value": "d0deea8a-75a6-492d-8b45-46c4d1fab423"
               },
               "X-Runtime": {
                 "description": "",
                 "type": "string",
-                "x-example-value": "0.038651"
+                "x-example-value": "0.017234"
               },
               "Vary": {
                 "description": "",
@@ -85,7 +303,670 @@
               "Content-Length": {
                 "description": "",
                 "type": "string",
-                "x-example-value": "219"
+                "x-example-value": "2636"
+              }
+            },
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/operators": {
+      "get": {
+        "tags": [
+          "Operators"
+        ],
+        "summary": "Fetches the operators",
+        "description": "Fetches the operators using the JSON API standard",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[country]",
+            "in": "query",
+            "description": "filter by country",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[is_active]",
+            "in": "query",
+            "description": "filter by is_active",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[name]",
+            "in": "query",
+            "description": "filter by name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[operator_type]",
+            "in": "query",
+            "description": "filter by operator_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[fa]",
+            "in": "query",
+            "description": "filter by fa",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[certification]",
+            "in": "query",
+            "description": "filter by certification",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[country.name]",
+            "in": "query",
+            "description": "filter by country.name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[operators]",
+            "in": "query",
+            "description": "a comma separated list of operator attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing operators",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json"
+              },
+              "ETag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"4b2d37c190f035b6cd9ff4f363b6a676\""
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "d6fe22e0-d23b-4162-8b35-c0ce24e4d7e0"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.021286"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "5961"
+              }
+            },
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/operators/{id}": {
+      "get": {
+        "tags": [
+          "Operators"
+        ],
+        "summary": "Fetches an operator by id",
+        "description": "Fetches an operator by id and implements the JSON API spec",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[operators]",
+            "in": "query",
+            "description": "a comma separated list of operator attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Cannot find operator by id",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json; charset=utf-8"
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "96c9f530-a6a0-4863-9feb-7a5a0ae178fe"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.003769"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "56"
+              }
+            },
+            "examples": {}
+          },
+          "200": {
+            "description": "Fetches operator",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json"
+              },
+              "ETag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"49fc9eb7a01ce32ea604f3ecff8e1858\""
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "3d041bd6-0182-4e40-9762-1315bf193618"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.018501"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "1154"
+              }
+            },
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/fmus": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Lists all the fmus",
+        "description": "It fetches all the fmus.\nIf the parameter format=geojson is provided, the fmus will come in the geojson format and all the other parameters will be ignored.\nIf not, then the request is processed as a typical JSON API request.",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[country]",
+            "in": "query",
+            "description": "filter by country",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[free]",
+            "in": "query",
+            "description": "filter by free",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[certification]",
+            "in": "query",
+            "description": "filter by certification",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[fmus]",
+            "in": "query",
+            "description": "a comma separated list of fmu attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing fmus",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json"
+              },
+              "ETag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"5d5b22577cc3aca4c259ff0d02a38082\""
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "309edcdf-a665-4147-8a1d-7a4054d1b10b"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.010360"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "1512"
+              }
+            },
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/fmus/tiles/{x}/{y}/{z}": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Fetches the vector tiles",
+        "description": "It gets the vector tiles for the provided coordinates and Z index",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "path",
+            "description": "X coordinate",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "description": "Y coordinate",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "z",
+            "in": "path",
+            "description": "Z index",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "z",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Getting highest level tiles",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/octet-stream"
+              },
+              "Content-Disposition": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "attachment"
+              },
+              "Content-Transfer-Encoding": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "binary"
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "private"
+              },
+              "ETag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"36a9e7f1c95b82ffb99743e0c5c4ce95\""
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "721bd949-7feb-4780-9444-53240611a31d"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.003452"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "1"
+              }
+            },
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "fmus?format=geojson": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Lists all the fmus in geojson format",
+        "description": "All the fmus retrieved in the geojson format",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Listing fmus in geojson",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "Content-Type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/vnd.api+json; charset=utf-8"
+              },
+              "ETag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"9fb2fc2c63fa6e680177bc6181441d8f\""
+              },
+              "Cache-Control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "X-Request-Id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "54622dd4-9823-4a80-b0c6-a958e17bbcd2"
+              },
+              "X-Runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.013825"
+              },
+              "Vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "Content-Length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "66"
               }
             },
             "examples": {}
@@ -112,6 +993,14 @@
     {
       "name": "Countries",
       "description": "Countries resource"
+    },
+    {
+      "name": "Operators",
+      "description": "Operators resource"
+    },
+    {
+      "name": "Fmus",
+      "description": "FMUs resource"
     }
   ]
 }

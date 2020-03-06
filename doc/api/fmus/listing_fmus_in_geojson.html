@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>API Documentation</title>
-  <meta charset="utf-8">
-  <style>
-    
+  <head>
+    <title>Fmus API</title>
+    <meta charset="utf-8">
+    <style>
+      
 body {
   font-family: Helvetica,Arial,sans-serif;
   font-size: 13px;
@@ -39,7 +39,7 @@ pre {
 
 td.required .name:after {
   float: right;
-  content: &quot;required&quot;;
+  content: "required";
   font-weight: normal;
   color: #F08080;
 }
@@ -102,63 +102,50 @@ table th, table td {
   text-align: left;
 }
 
-  </style>
-</head>
-<body>
-<div class="container">
-  <h1>API Documentation</h1>
-  
-  <div class="article">
-    <h2>Countries</h2>
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Fmus API</h1>
 
-      <p class="explanation">Countries resource</p>
+        <p class="explanation">FMUs resource</p>
 
-    <ul>
-      <li>
-        <a href="countries/country_not_found.html">Country not found</a>
-      </li>
-      <li>
-        <a href="countries/get_one_country.html">Get one country</a>
-      </li>
-      <li>
-        <a href="countries/listing_countries.html">Listing countries</a>
-      </li>
-    </ul>
-  </div>
-  <div class="article">
-    <h2>Fmus</h2>
+      <div class="article">
+        <h2>Listing fmus in geojson</h2>
+        <h3>GET fmus?format=geojson</h3>
 
-      <p class="explanation">FMUs resource</p>
 
-    <ul>
-      <li>
-        <a href="fmus/getting_highest_level_tiles.html">Getting highest level tiles</a>
-      </li>
-      <li>
-        <a href="fmus/listing_fmus.html">Listing fmus</a>
-      </li>
-      <li>
-        <a href="fmus/listing_fmus_in_geojson.html">Listing fmus in geojson</a>
-      </li>
-    </ul>
-  </div>
-  <div class="article">
-    <h2>Operators</h2>
 
-      <p class="explanation">Operators resource</p>
+          <h3>Request</h3>
 
-    <ul>
-      <li>
-        <a href="operators/cannot_find_operator_by_id.html">Cannot find operator by id</a>
-      </li>
-      <li>
-        <a href="operators/fetches_operator.html">Fetches operator</a>
-      </li>
-      <li>
-        <a href="operators/listing_operators.html">Listing operators</a>
-      </li>
-    </ul>
-  </div>
-</div>
-</body>
+            <h4>Headers</h4>
+            <pre class="request headers">Content-Type: application/vnd.api+json
+Otp-API-Key: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo1fQ.yBNt_LJdsMlTHxp9vh7MPlK5Wju1_o-dLXNVtA1mq80
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">GET fmus?format=geojson</pre>
+
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">format: geojson</pre>
+
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">Content-Type: application/vnd.api+json; charset=utf-8
+ETag: W/&quot;9fb2fc2c63fa6e680177bc6181441d8f&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 54622dd4-9823-4a80-b0c6-a958e17bbcd2
+X-Runtime: 0.013825
+Vary: Origin
+Content-Length: 66</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">[binary data]</pre>
+      </div>
+    </div>
+  </body>
 </html>

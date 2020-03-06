@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Countries API</title>
+    <title>Operators API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,13 +106,13 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Countries API</h1>
+      <h1>Operators API</h1>
 
-        <p class="explanation">Countries resource</p>
+        <p class="explanation">Operators resource</p>
 
       <div class="article">
-        <h2>Listing countries</h2>
-        <h3>GET /countries</h3>
+        <h2>Fetches operator</h2>
+        <h3>GET /operators/:id</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -125,10 +125,10 @@ table th, table td {
             <tbody>
               <tr>
                 <td>
-                    <span class="name">is-active</span>
+                    <span class="name">id</span>
                 </td>
                 <td>
-                  <span class="description">true</span>
+                  <span class="description">id</span>
                 </td>
               </tr>
               <tr>
@@ -141,74 +141,10 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">filter[id]</span>
+                    <span class="name">fields[operators]</span>
                 </td>
                 <td>
-                  <span class="description">filter by id</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">filter[iso]</span>
-                </td>
-                <td>
-                  <span class="description">filter by iso</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">filter[is_active]</span>
-                </td>
-                <td>
-                  <span class="description">filter by is_active</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">fields[countries]</span>
-                </td>
-                <td>
-                  <span class="description">a comma separated list of country attributes you wish to limit (must be dasherized)</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">page[limit]</span>
-                </td>
-                <td>
-                  <span class="description">max number of items</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">page[offset]</span>
-                </td>
-                <td>
-                  <span class="description">page offset</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">page[number]</span>
-                </td>
-                <td>
-                  <span class="description">page number</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">page[size]</span>
-                </td>
-                <td>
-                  <span class="description">the number of resources to be returned per page</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                    <span class="name">sort</span>
-                </td>
-                <td>
-                  <span class="description">Sort order</span>
+                  <span class="description">a comma separated list of operator attributes you wish to limit (must be dasherized)</span>
                 </td>
               </tr>
             </tbody>
@@ -225,7 +161,7 @@ Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /countries?include</pre>
+          <pre class="request route highlight">GET /operators/11?include</pre>
 
             <h4>Query Parameters</h4>
             <pre class="request query_parameters highlight">include: </pre>
@@ -235,12 +171,12 @@ Cookie: </pre>
             <h3>Response</h3>
               <h4>Headers</h4>
               <pre class="response headers">Content-Type: application/vnd.api+json
-ETag: W/&quot;81e3402ab8d75cfbea13048d86f053cf&quot;
+ETag: W/&quot;49fc9eb7a01ce32ea604f3ecff8e1858&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: d0deea8a-75a6-492d-8b45-46c4d1fab423
-X-Runtime: 0.017234
+X-Request-Id: 3d041bd6-0182-4e40-9762-1315bf193618
+X-Runtime: 0.018501
 Vary: Origin
-Content-Length: 2636</pre>
+Content-Length: 1154</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>

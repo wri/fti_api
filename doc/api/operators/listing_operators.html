@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Countries API</title>
+    <title>Operators API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,13 +106,13 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Countries API</h1>
+      <h1>Operators API</h1>
 
-        <p class="explanation">Countries resource</p>
+        <p class="explanation">Operators resource</p>
 
       <div class="article">
-        <h2>Listing countries</h2>
-        <h3>GET /countries</h3>
+        <h2>Listing operators</h2>
+        <h3>GET /operators</h3>
 
           <h3>Parameters</h3>
           <table class="parameters table table-striped table-bordered table-condensed">
@@ -123,14 +123,6 @@ table th, table td {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                    <span class="name">is-active</span>
-                </td>
-                <td>
-                  <span class="description">true</span>
-                </td>
-              </tr>
               <tr>
                 <td>
                     <span class="name">include</span>
@@ -149,10 +141,10 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">filter[iso]</span>
+                    <span class="name">filter[country]</span>
                 </td>
                 <td>
-                  <span class="description">filter by iso</span>
+                  <span class="description">filter by country</span>
                 </td>
               </tr>
               <tr>
@@ -165,10 +157,50 @@ table th, table td {
               </tr>
               <tr>
                 <td>
-                    <span class="name">fields[countries]</span>
+                    <span class="name">filter[name]</span>
                 </td>
                 <td>
-                  <span class="description">a comma separated list of country attributes you wish to limit (must be dasherized)</span>
+                  <span class="description">filter by name</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">filter[operator_type]</span>
+                </td>
+                <td>
+                  <span class="description">filter by operator_type</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">filter[fa]</span>
+                </td>
+                <td>
+                  <span class="description">filter by fa</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">filter[certification]</span>
+                </td>
+                <td>
+                  <span class="description">filter by certification</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">filter[country.name]</span>
+                </td>
+                <td>
+                  <span class="description">filter by country.name</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <span class="name">fields[operators]</span>
+                </td>
+                <td>
+                  <span class="description">a comma separated list of operator attributes you wish to limit (must be dasherized)</span>
                 </td>
               </tr>
               <tr>
@@ -219,13 +251,13 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">Content-Type: application/vnd.api+json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo2fQ.Yf0ZpJZewYBG2ocIffhZmkUAA4YsAQsNhpfOgANmns0
-Otp-API-Key: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjo1fQ.yBNt_LJdsMlTHxp9vh7MPlK5Wju1_o-dLXNVtA1mq80
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoyfQ.JjkBlxC_vLdgW4ySGvjbaeCHNR3TrvSzugdSz0vbQ-w
+Otp-API-Key: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoxfQ.jwZTZNqnrW9irG5GtmAZyKPtt4nELvu07uECvvT8AYo
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /countries?include</pre>
+          <pre class="request route highlight">GET /operators?include</pre>
 
             <h4>Query Parameters</h4>
             <pre class="request query_parameters highlight">include: </pre>
@@ -235,12 +267,12 @@ Cookie: </pre>
             <h3>Response</h3>
               <h4>Headers</h4>
               <pre class="response headers">Content-Type: application/vnd.api+json
-ETag: W/&quot;81e3402ab8d75cfbea13048d86f053cf&quot;
+ETag: W/&quot;4b2d37c190f035b6cd9ff4f363b6a676&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: d0deea8a-75a6-492d-8b45-46c4d1fab423
-X-Runtime: 0.017234
+X-Request-Id: d6fe22e0-d23b-4162-8b35-c0ce24e4d7e0
+X-Runtime: 0.021286
 Vary: Origin
-Content-Length: 2636</pre>
+Content-Length: 5961</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>

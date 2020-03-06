@@ -81,6 +81,7 @@ RSpec.configure do |config|
     end
   end
 
+  config.extend APIDocsHelpers
   config.include FactoryBot::Syntax::Methods
   config.order = 'random'
   config.include Devise::Test::ControllerHelpers, :type => :controller
