@@ -15,7 +15,7 @@ resource 'Fmus' do
 
   let(:country) { FactoryBot.create(:country) }
   let!(:operator) { FactoryBot.create(:operator, country: country) }
-  let!(:fmu) { FactoryBot.create_list(:fmu, 5, { country: country, operator: operator }) }
+  let!(:fmus) { FactoryBot.create_list(:fmu, 5, { country: country, operator: operator }) }
 
   get "/fmus" do
     route_summary 'Lists all the fmus'
@@ -32,6 +32,7 @@ If not, then the request is processed as a typical JSON API request.'
     context '200' do
       example_request "Listing fmus" do
         expect(status).to eq 200
+        expect(JSON.parse(response_body)['data'].count).to eql(fmus.count)
       end
     end
   end

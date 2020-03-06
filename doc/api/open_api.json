@@ -17,7 +17,7 @@
   },
   "host": "",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/vnd.api+json"
@@ -26,6 +26,420 @@
     "application/vnd.api+json"
   ],
   "paths": {
+    "/countries/{id}": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "summary": "Fetches a country by id",
+        "description": "It fetches a country by id and implements the JSON API standard",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[countries]",
+            "in": "query",
+            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get one country",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          },
+          "404": {
+            "description": "Country not found",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/countries": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "summary": "Fetches all the countries",
+        "description": "It fetches all the countries and it implements JSON API.\nIf the parameter \"is-active\" is absent, it will by default send only the active countries",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "is-active",
+            "in": "query",
+            "description": "true",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[iso]",
+            "in": "query",
+            "description": "filter by iso",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[is_active]",
+            "in": "query",
+            "description": "filter by is_active",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[countries]",
+            "in": "query",
+            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TIAGOOO",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/fmus": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Lists all the fmus",
+        "description": "It fetches all the fmus.\nIf the parameter format=geojson is provided, the fmus will come in the geojson format and all the other parameters will be ignored.\nIf not, then the request is processed as a typical JSON API request.",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[country]",
+            "in": "query",
+            "description": "filter by country",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[free]",
+            "in": "query",
+            "description": "filter by free",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[certification]",
+            "in": "query",
+            "description": "filter by certification",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[fmus]",
+            "in": "query",
+            "description": "a comma separated list of fmu attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing fmus",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/fmus/tiles/{x}/{y}/{z}": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Fetches the vector tiles",
+        "description": "It gets the vector tiles for the provided coordinates and Z index",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "path",
+            "description": "X coordinate",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "description": "Y coordinate",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "z",
+            "in": "path",
+            "description": "Z index",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "z",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Getting highest level tiles",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "fmus?format=geojson": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Lists all the fmus in geojson format",
+        "description": "All the fmus retrieved in the geojson format",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Listing fmus in geojson",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
     "/operators/{id}": {
       "get": {
         "tags": [
@@ -77,38 +491,7 @@
               "type": "object",
               "properties": {}
             },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json; charset=utf-8"
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "no-cache"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "00774273-8587-410b-9279-6d49db478e87"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.033106"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "56"
-              }
-            },
+            "headers": {},
             "examples": {}
           },
           "200": {
@@ -118,43 +501,7 @@
               "type": "object",
               "properties": {}
             },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json"
-              },
-              "ETag": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "W/\"d9e73b463bc6d5e5d4cddee8e07990e7\""
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "max-age=0, private, must-revalidate"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "a073e2d6-092f-4433-935b-e71197ab3e05"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.010983"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "1151"
-              }
-            },
+            "headers": {},
             "examples": {}
           }
         },
@@ -294,678 +641,7 @@
               "type": "object",
               "properties": {}
             },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json"
-              },
-              "ETag": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "W/\"428bf787727c35ff1199093304c8fc2c\""
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "max-age=0, private, must-revalidate"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "46151452-cfda-4bee-9782-8e49bb325ac0"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.012222"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "5981"
-              }
-            },
-            "examples": {}
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "OTP-API-KEY": []
-          }
-        ]
-      }
-    },
-    "/countries/{id}": {
-      "get": {
-        "tags": [
-          "Countries"
-        ],
-        "summary": "Fetches a country by id",
-        "description": "It fetches a country by id and implements the JSON API standard",
-        "consumes": [
-          "application/vnd.api+json"
-        ],
-        "produces": [
-          "application/vnd.api+json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "description": "related relationships to include",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "fields[countries]",
-            "in": "query",
-            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Country not found",
-            "schema": {
-              "description": "",
-              "type": "object",
-              "properties": {}
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json; charset=utf-8"
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "no-cache"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "205108bb-40de-46c2-9b03-b417475faa31"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.004805"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "56"
-              }
-            },
-            "examples": {}
-          },
-          "200": {
-            "description": "Get one country",
-            "schema": {
-              "description": "",
-              "type": "object",
-              "properties": {}
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json"
-              },
-              "ETag": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "W/\"c95248802dcedf70788ba038c594a5d3\""
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "max-age=0, private, must-revalidate"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "29009917-1c6b-4263-bf32-6d23251dc9c0"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.011614"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "511"
-              }
-            },
-            "examples": {}
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "OTP-API-KEY": []
-          }
-        ]
-      }
-    },
-    "/countries": {
-      "get": {
-        "tags": [
-          "Countries"
-        ],
-        "summary": "Fetches all the countrie",
-        "description": "It fetches all the countries and it implements JSON API.\nIf the parameter \"is-active\" is absent, it will by default send only the active countries",
-        "consumes": [
-          "application/vnd.api+json"
-        ],
-        "produces": [
-          "application/vnd.api+json"
-        ],
-        "parameters": [
-          {
-            "name": "is-active",
-            "in": "query",
-            "description": "true",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "name": "include",
-            "in": "query",
-            "description": "related relationships to include",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filter[id]",
-            "in": "query",
-            "description": "filter by id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filter[iso]",
-            "in": "query",
-            "description": "filter by iso",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filter[is_active]",
-            "in": "query",
-            "description": "filter by is_active",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "fields[countries]",
-            "in": "query",
-            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "page[limit]",
-            "in": "query",
-            "description": "max number of items",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "page[offset]",
-            "in": "query",
-            "description": "page offset",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "page[number]",
-            "in": "query",
-            "description": "page number",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "page[size]",
-            "in": "query",
-            "description": "the number of resources to be returned per page",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "Sort order",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Listing countries",
-            "schema": {
-              "description": "",
-              "type": "object",
-              "properties": {}
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json"
-              },
-              "ETag": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "W/\"c763a0f35ca1140f49136a7b3dfaaace\""
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "max-age=0, private, must-revalidate"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "5ad81c2a-e0b8-4435-b67f-2f15e32895ff"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.014385"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "2672"
-              }
-            },
-            "examples": {}
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "OTP-API-KEY": []
-          }
-        ]
-      }
-    },
-    "/fmus": {
-      "get": {
-        "tags": [
-          "Fmus"
-        ],
-        "summary": "Lists all the fmus",
-        "description": "It fetches all the fmus.\nIf the parameter format=geojson is provided, the fmus will come in the geojson format and all the other parameters will be ignored.\nIf not, then the request is processed as a typical JSON API request.",
-        "consumes": [
-          "application/vnd.api+json"
-        ],
-        "produces": [
-          "application/vnd.api+json"
-        ],
-        "parameters": [
-          {
-            "name": "include",
-            "in": "query",
-            "description": "related relationships to include",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filter[id]",
-            "in": "query",
-            "description": "filter by id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filter[country]",
-            "in": "query",
-            "description": "filter by country",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filter[free]",
-            "in": "query",
-            "description": "filter by free",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "filter[certification]",
-            "in": "query",
-            "description": "filter by certification",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "fields[fmus]",
-            "in": "query",
-            "description": "a comma separated list of fmu attributes you wish to limit (must be dasherized)",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "page[limit]",
-            "in": "query",
-            "description": "max number of items",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "page[offset]",
-            "in": "query",
-            "description": "page offset",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "page[number]",
-            "in": "query",
-            "description": "page number",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "page[size]",
-            "in": "query",
-            "description": "the number of resources to be returned per page",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "Sort order",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Listing fmus",
-            "schema": {
-              "description": "",
-              "type": "object",
-              "properties": {}
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json"
-              },
-              "ETag": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "W/\"a5bd30c72964a9bbd71758cbb277e4a5\""
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "max-age=0, private, must-revalidate"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "16923a5e-e18b-4712-b76e-6f8d5d98bb4c"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.012927"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "1528"
-              }
-            },
-            "examples": {}
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "OTP-API-KEY": []
-          }
-        ]
-      }
-    },
-    "fmus?format=geojson": {
-      "get": {
-        "tags": [
-          "Fmus"
-        ],
-        "summary": "Lists all the fmus in geojson format",
-        "description": "All the fmus retrieved in the geojson format",
-        "consumes": [
-          "application/vnd.api+json"
-        ],
-        "produces": [
-          "application/vnd.api+json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Listing fmus in geojson",
-            "schema": {
-              "description": "",
-              "type": "object",
-              "properties": {}
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/vnd.api+json; charset=utf-8"
-              },
-              "ETag": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "W/\"9fb2fc2c63fa6e680177bc6181441d8f\""
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "max-age=0, private, must-revalidate"
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "3cc63dc7-8ac8-4072-abf4-2aec9e1605aa"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.015004"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "66"
-              }
-            },
-            "examples": {}
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "OTP-API-KEY": []
-          }
-        ]
-      }
-    },
-    "/fmus/tiles/{x}/{y}/{z}": {
-      "get": {
-        "tags": [
-          "Fmus"
-        ],
-        "summary": "Fetches the vector tiles",
-        "description": "It gets the vector tiles for the provided coordinates and Z index",
-        "consumes": [
-          "application/vnd.api+json"
-        ],
-        "produces": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "name": "x",
-            "in": "path",
-            "description": "X coordinate",
-            "required": true,
-            "type": "integer",
-            "default": 1,
-            "minimum": 1
-          },
-          {
-            "name": "y",
-            "in": "path",
-            "description": "Y coordinate",
-            "required": true,
-            "type": "integer",
-            "default": 1,
-            "minimum": 1
-          },
-          {
-            "name": "z",
-            "in": "path",
-            "description": "Z index",
-            "required": true,
-            "type": "integer",
-            "default": 1,
-            "minimum": 1
-          },
-          {
-            "name": "x",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "y",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "z",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Getting highest level tiles",
-            "schema": {
-              "description": "",
-              "type": "object",
-              "properties": {}
-            },
-            "headers": {
-              "Content-Type": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "application/octet-stream"
-              },
-              "Content-Disposition": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "attachment"
-              },
-              "Content-Transfer-Encoding": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "binary"
-              },
-              "Cache-Control": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "private"
-              },
-              "ETag": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "W/\"36a9e7f1c95b82ffb99743e0c5c4ce95\""
-              },
-              "X-Request-Id": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "3f15f6c0-88b0-4410-9ca8-9e2e221a162e"
-              },
-              "X-Runtime": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "0.003539"
-              },
-              "Vary": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "Origin"
-              },
-              "Content-Length": {
-                "description": "",
-                "type": "string",
-                "x-example-value": "1"
-              }
-            },
+            "headers": {},
             "examples": {}
           }
         },
@@ -988,16 +664,16 @@
   },
   "tags": [
     {
-      "name": "Operators",
-      "description": "Operators resource"
-    },
-    {
       "name": "Countries",
       "description": "Countries resource"
     },
     {
       "name": "Fmus",
       "description": "FMUs resource"
+    },
+    {
+      "name": "Operators",
+      "description": "Operators resource"
     }
   ]
 }

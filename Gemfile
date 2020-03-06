@@ -42,6 +42,9 @@ gem 'oj_mimic_json'
 
 # API Documentation
 gem 'rspec_api_documentation'
+gem 'rswag-api'
+gem 'rswag-ui'
+
 
 # Data
 gem 'activerecord-import'

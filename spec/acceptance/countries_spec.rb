@@ -19,7 +19,7 @@ resource 'Countries' do
   let!(:fmu) { FactoryBot.create_list(:fmu, 5, { country: countries.first }) }
 
   get "/countries" do
-    route_summary 'Fetches all the countrie'
+    route_summary 'Fetches all the countries'
     route_description 'It fetches all the countries and it implements JSON API.
 If the parameter "is-active" is absent, it will by default send only the active countries'
 
@@ -32,6 +32,7 @@ If the parameter "is-active" is absent, it will by default send only the active 
 
     example_request "Listing countries" do
       expect(status).to eq 200
+      expect(JSON.parse(response_body)['data'].count).to eql(countries.count)
     end
   end
 
@@ -48,6 +49,7 @@ If the parameter "is-active" is absent, it will by default send only the active 
     context '200' do
       example_request "Get one country" do
         expect(status).to eql 200
+        expect(JSON.parse(response_body)['data']['id']).to eql(id.to_s)
       end
     end
 

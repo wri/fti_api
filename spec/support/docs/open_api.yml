@@ -13,7 +13,7 @@ info:
   version: 'v1'
 host: ''
 schemes:
-  - https
+  - http
 consumes:
   - application/vnd.api+json
 produces:

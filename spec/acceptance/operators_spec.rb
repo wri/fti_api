@@ -31,6 +31,7 @@ resource 'Operators' do
 
     example_request "Listing operators" do
       expect(status).to eq 200
+      expect(JSON.parse(response_body)['data'].count).to eql(operators.count)
     end
   end
 
@@ -47,6 +48,7 @@ resource 'Operators' do
     context '200' do
       example_request 'Fetches operator' do
         expect(status).to eql 200
+        expect(JSON.parse(response_body)['data']['id']).to eql(id.to_s)
       end
     end
 

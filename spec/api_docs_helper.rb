@@ -33,12 +33,4 @@ module APIDocsHelpers
               "a comma separated list of #{model} attributes you wish to limit (must be dasherized)",
               type: :string, required: false
   end
-
-  def generate_examples_from_response
-    after do |example|
-      example.metadata[:response][:examples] = {
-          'application/vnd.api+json' => JSON.parse(response.body, symbolize_names: true)
-      }
-    end
-  end
 end

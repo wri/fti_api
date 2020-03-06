@@ -91,6 +91,18 @@ cd fti_api
   bin/rspec
 ```
 
+## DOCUMENTATION ##
+
+### API ###
+
+The API is documented used swagger and can be found in `/docs`.
+
+To regenerate the api documentation run:
+
+```ruby
+  rails docs:generate
+```
+
 ## DEPLOYMENT ##
 
 **To deploy the API to staging environment, just execute: cap staging deploy**

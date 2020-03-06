@@ -399,6 +399,11 @@ GEM
       activesupport (>= 3.0.0)
       mustache (~> 1.0, >= 0.99.4)
       rspec (~> 3.0)
+    rswag-api (2.2.0)
+      railties (>= 3.1, < 6.1)
+    rswag-ui (2.2.0)
+      actionpack (>= 3.1, < 6.1)
+      railties (>= 3.1, < 6.1)
     rubocop (0.80.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -564,6 +569,8 @@ DEPENDENCIES
   rspec-activejob
   rspec-rails
   rspec_api_documentation
+  rswag-api
+  rswag-ui
   rubocop
   rubocop-performance
   rubocop-rails
