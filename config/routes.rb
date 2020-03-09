@@ -57,5 +57,9 @@ Rails.application.routes.draw do
 
       get 'observation_filters', to: 'observation_filters#index'
     end
+
+    # Documentation
+    mount Rswag::Api::Engine => 'docs'
+    mount Rswag::Ui::Engine => 'docs'
   end
 end

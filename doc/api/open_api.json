@@ -1,0 +1,679 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Open Timber Portal API",
+    "description": "The documentation for the public OTP API",
+    "termsOfService": "https://opentimberportal.org/help",
+    "contact": {
+      "name": "Open Timber Portal API Support",
+      "url": "https://opentimberportal.org/help",
+      "email": "help@opentimberportal.org"
+    },
+    "license": {
+      "name": "",
+      "url": ""
+    },
+    "version": "v1"
+  },
+  "host": "",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/vnd.api+json"
+  ],
+  "produces": [
+    "application/vnd.api+json"
+  ],
+  "paths": {
+    "/countries/{id}": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "summary": "Fetches a country by id",
+        "description": "It fetches a country by id and implements the JSON API standard",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[countries]",
+            "in": "query",
+            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get one country",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          },
+          "404": {
+            "description": "Country not found",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/countries": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "summary": "Fetches all the countries",
+        "description": "It fetches all the countries and it implements JSON API.\nIf the parameter \"is-active\" is absent, it will by default send only the active countries",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "is-active",
+            "in": "query",
+            "description": "true",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[iso]",
+            "in": "query",
+            "description": "filter by iso",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[is_active]",
+            "in": "query",
+            "description": "filter by is_active",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[countries]",
+            "in": "query",
+            "description": "a comma separated list of country attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TIAGOOO",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/fmus": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Lists all the fmus",
+        "description": "It fetches all the fmus.\nIf the parameter format=geojson is provided, the fmus will come in the geojson format and all the other parameters will be ignored.\nIf not, then the request is processed as a typical JSON API request.",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[country]",
+            "in": "query",
+            "description": "filter by country",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[free]",
+            "in": "query",
+            "description": "filter by free",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[certification]",
+            "in": "query",
+            "description": "filter by certification",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[fmus]",
+            "in": "query",
+            "description": "a comma separated list of fmu attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing fmus",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/fmus/tiles/{x}/{y}/{z}": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Fetches the vector tiles",
+        "description": "It gets the vector tiles for the provided coordinates and Z index",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "x",
+            "in": "path",
+            "description": "X coordinate",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "description": "Y coordinate",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "z",
+            "in": "path",
+            "description": "Z index",
+            "required": true,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "y",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "z",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Getting highest level tiles",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "fmus?format=geojson": {
+      "get": {
+        "tags": [
+          "Fmus"
+        ],
+        "summary": "Lists all the fmus in geojson format",
+        "description": "All the fmus retrieved in the geojson format",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Listing fmus in geojson",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/operators/{id}": {
+      "get": {
+        "tags": [
+          "Operators"
+        ],
+        "summary": "Fetches an operator by id",
+        "description": "Fetches an operator by id and implements the JSON API spec",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[operators]",
+            "in": "query",
+            "description": "a comma separated list of operator attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Cannot find operator by id",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          },
+          "200": {
+            "description": "Fetches operator",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    },
+    "/operators": {
+      "get": {
+        "tags": [
+          "Operators"
+        ],
+        "summary": "Fetches the operators",
+        "description": "Fetches the operators using the JSON API standard",
+        "consumes": [
+          "application/vnd.api+json"
+        ],
+        "produces": [
+          "application/vnd.api+json"
+        ],
+        "parameters": [
+          {
+            "name": "include",
+            "in": "query",
+            "description": "related relationships to include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[id]",
+            "in": "query",
+            "description": "filter by id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[country]",
+            "in": "query",
+            "description": "filter by country",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[is_active]",
+            "in": "query",
+            "description": "filter by is_active",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[name]",
+            "in": "query",
+            "description": "filter by name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[operator_type]",
+            "in": "query",
+            "description": "filter by operator_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[fa]",
+            "in": "query",
+            "description": "filter by fa",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[certification]",
+            "in": "query",
+            "description": "filter by certification",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter[country.name]",
+            "in": "query",
+            "description": "filter by country.name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "fields[operators]",
+            "in": "query",
+            "description": "a comma separated list of operator attributes you wish to limit (must be dasherized)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page[limit]",
+            "in": "query",
+            "description": "max number of items",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[offset]",
+            "in": "query",
+            "description": "page offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[number]",
+            "in": "query",
+            "description": "page number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "page[size]",
+            "in": "query",
+            "description": "the number of resources to be returned per page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing operators",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {},
+            "examples": {}
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "OTP-API-KEY": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "OTP-API-KEY": {
+      "type": "apiKey",
+      "description": "",
+      "name": "OTP-API-KEY",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Countries",
+      "description": "Countries resource"
+    },
+    {
+      "name": "Fmus",
+      "description": "FMUs resource"
+    },
+    {
+      "name": "Operators",
+      "description": "Operators resource"
+    }
+  ]
+}
