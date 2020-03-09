@@ -85,6 +85,10 @@ FactoryBot.define do
     after(:build) do |random_admin|
       random_admin.user_permission = UserPermission.new(user_role: 3)
     end
+
+    after(:create) do |user|
+      user.regenerate_api_key
+    end
   end
 
   factory :webuser, class: User do

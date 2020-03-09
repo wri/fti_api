@@ -58,7 +58,7 @@ RSpec.describe Observation, type: :model do
 
   it_should_behave_like 'translatable',
     FactoryBot.create(:observation),
-    %i[details evidence concern_opinion litigation_status]
+    %i[details concern_opinion litigation_status]
 
   describe 'Enums' do
     it { is_expected.to define_enum_for(:observation_type).with_values(%w[operator government]) }

@@ -1,0 +1,20 @@
+swagger: '2.0'
+info:
+  title: Open Timber Portal API
+  description: The documentation for the public OTP API
+  termsOfService: 'https://opentimberportal.org/help'
+  contact:
+    name: Open Timber Portal API Support
+    url: 'https://opentimberportal.org/help'
+    email: help@opentimberportal.org
+  license:
+    name: ''
+    url: ''
+  version: 'v1'
+host: ''
+schemes:
+  - http
+consumes:
+  - application/vnd.api+json
+produces:
+  - application/vnd.api+json

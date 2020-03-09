@@ -19,18 +19,16 @@ gem 'activeadmin_addons', '1.5'
 gem 'sass-rails'
 gem 'sassc-rails'
 
+# Active Admin skins
+gem 'active_skin'
+
 # WYSIWYG
 gem 'activeadmin_quill_editor'
 
 gem 'devise'
 
-
 # Soft Delete
 gem 'paranoia', "~> 2.2"
-
-# Active Admin skins
-gem 'active_skin'
-
 
 # Rails and DB
 gem 'activerecord-postgis-adapter'
@@ -41,6 +39,12 @@ gem 'rails', '~> 5.0.2'
 gem 'jsonapi-resources', '0.9.0'
 gem 'oj'
 gem 'oj_mimic_json'
+
+# API Documentation
+gem 'rspec_api_documentation'
+gem 'rswag-api'
+gem 'rswag-ui'
+
 
 # Data
 gem 'activerecord-import'
