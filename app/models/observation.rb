@@ -36,12 +36,12 @@ class Observation < ApplicationRecord
   include Activable
   include ValidationHelper
 
-  translates :details, :evidence, :concern_opinion, :litigation_status, touch: true
-  active_admin_translates :details, :evidence, :concern_opinion, :litigation_status
+  translates :details, :concern_opinion, :litigation_status, touch: true
+  active_admin_translates :details, :concern_opinion, :litigation_status
 
   enum observation_type: { "operator" => 0, "government" => 1 }
   enum validation_status: { "Created" => 0, "Ready for revision" => 1, "Under revision" => 2, "Approved" => 3, "Rejected" => 4 }
-  enum evidence_type: { "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2, "Testimony from local communities" => 3, "Other" => 4, "Evidence presented in the report" => 5 }
+  enum evidence_type: { "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2, "Testimony from local communities" => 3, "Other" => 4, "Evidence presented in the report" => 5, "Maps" => 6 }
   enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2 }
 
 

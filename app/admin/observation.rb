@@ -33,7 +33,7 @@ ActiveAdmin.register Observation do
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy, :law_id, :fmu_id,
                 observer_ids: [], relevant_operators: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
-                translations_attributes: [:id, :locale, :details, :evidence, :concern_opinion, :litigation_status, :_destroy]
+                translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
 
   member_action :approve, method: :put do
@@ -176,7 +176,6 @@ ActiveAdmin.register Observation do
     column :actions_taken
     column :details
     column :evidence_type
-    column :evidence
     column :concern_opinion
     column :report do |observation|
       observation.observation_report&.title
@@ -245,7 +244,6 @@ ActiveAdmin.register Observation do
     end
     column :details
     column :evidence_type
-    column :evidence
     column :evidences do |o|
       links = []
       o.observation_documents.each do |d|
@@ -285,7 +283,7 @@ ActiveAdmin.register Observation do
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
-                                      details evidence_type evidence evidences evidence_on_report concern_opinion pv location_accuracy
+                                      details evidence_type evidences evidence_on_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report user
                                       modified_user created_at updated_at] }
     end
@@ -341,7 +339,6 @@ ActiveAdmin.register Observation do
     f.inputs 'Translated fields' do
       f.translated_inputs switch_locale: false do |t|
         t.input :details
-        t.input :evidence
         t.input :concern_opinion
         t.input :litigation_status
       end

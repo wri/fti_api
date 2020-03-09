@@ -39,7 +39,6 @@ FactoryBot.define do
     observation_type { 'operator' }
     is_active { true }
     evidence_type { 'Photos' }
-    evidence { 'Operator observation' }
     publication_date { DateTime.now.to_date }
     location_accuracy { 'Estimated location' }
     lng { 12.2222 }
@@ -54,7 +53,6 @@ FactoryBot.define do
     user { build(:admin) }
     observation_type { 'government' }
     is_active { true }
-    evidence { 'Governance observation' }
     publication_date { DateTime.now.yesterday.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
@@ -71,7 +69,6 @@ FactoryBot.define do
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     is_active { true }
     validation_status { 'Approved' }
-    evidence { 'Operator observation' }
     publication_date { DateTime.now.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
