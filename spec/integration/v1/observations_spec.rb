@@ -17,15 +17,15 @@ module V1
     let(:ngo_headers) { authorize_headers(create(:ngo).id) }
     let!(:country) { create(:country) }
 
-    let!(:observation) { create(:observation_1, evidence: '00 Observation one') }
+    let!(:observation) { create(:observation_1) }
 
     context 'Show observations' do
       let!(:observations) {
         observations = []
         observations << create_list(:observation, 4)
-        observations << create(:observation, evidence: 'ZZZ Next first one', user_id: ngo.id)
-        observations << create(:observation, evidence: 'AAA Next first one', user_id: ngo.id)
-        observations << create(:observation, evidence: '00 Observation one', user_id: admin.id)
+        observations << create(:observation, user_id: ngo.id)
+        observations << create(:observation, user_id: ngo.id)
+        observations << create(:observation, user_id: admin.id)
       }
 
       describe 'Filter observations by user' do
@@ -92,7 +92,7 @@ module V1
     end
 
     context 'Edit observations' do
-      let(:observation) { create(:observation_1, evidence: '00 Observation one') }
+      let(:observation) { create(:observation_1) }
 
       describe 'For admin user' do
         xit 'Returns error object when the observation cannot be updated by admin' do
@@ -125,18 +125,18 @@ module V1
 
         xit 'Allows to translate observation' do
           patch("/observations/#{observation.id}?locale=fr",
-                params: jsonapi_params('observations', observation.id, { evidence: "FR Observation one" }),
+                params: jsonapi_params('observations', observation.id, { details: "FR Observation one" }),
                 headers: admin_headers)
 
-          expect(observation.reload.evidence).to eq('FR Observation one')
+          expect(observation.reload.details).to eq('FR Observation one')
           I18n.locale = 'en'
-          expect(observation.reload.evidence).to eq('00 Observation one')
+          expect(observation.reload.details).to eq('00 Observation one')
           expect(status).to eq(200)
         end
       end
 
       describe 'For not admin user' do
-        let(:observation_by_user) { create(:observation_1, evidence: 'Observation by ngo', user_id: ngo.id) }
+        let(:observation_by_user) { create(:observation_1, user_id: ngo.id) }
 
         it 'Do not allows to update observation by not admin user' do
           patch("/observations/#{observation.id}",
@@ -170,7 +170,7 @@ module V1
         xit 'Upload image and returns success object when the observation was successfully created' do
           post('/observations',
                params: jsonapi_params('observations', nil, {
-                 evidence: "Observation with photo",
+                   details: "Observation with photo",
                  'country-id': country.id,
                  'observation-type': 'operator',
                  'publication-date': DateTime.now,
@@ -178,14 +178,14 @@ module V1
                 }),
                 headers: ngo_headers)
 
-          expect(Observation.find_by(evidence: 'Observation with photo').photos.first.attachment.present?).to be(true)
+          expect(Observation.find_by(details: 'Observation with photo').photos.first.attachment.present?).to be(true)
           expect(status).to eq(201)
         end
 
         xit 'Upload document and returns success object when the observation was successfully created' do
           post('/observations',
                params: jsonapi_params('observations', nil, {
-                 evidence: "Observation with document",
+                   details: "Observation with document",
                  'country-id': country.id,
                  'observation-type': 'operator',
                  'publication-date': DateTime.now,
@@ -193,7 +193,7 @@ module V1
                 }),
                 headers: ngo_headers)
 
-          expect(Observation.find_by(evidence: 'Observation with document').documents.first.attachment.present?).to be(true)
+          expect(Observation.find_by(details: 'Observation with document').documents.first.attachment.present?).to be(true)
           expect(status).to eq(201)
         end
       end
