@@ -19,7 +19,7 @@ module V1
     end
 
     def tiles
-      tile = Fmu.vector_tiles params[:x], params[:y], params[:z]
+      tile = Fmu.vector_tiles params[:z], params[:x], params[:y]
       send_data tile
     end
 
