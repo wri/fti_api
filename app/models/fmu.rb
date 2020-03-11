@@ -34,6 +34,7 @@ class Fmu < ApplicationRecord
 
   belongs_to :country, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu, dependent: :destroy
+  has_many :active_observations, ->{ active }, class_name: 'Observation'
 
   has_many :fmu_operators, inverse_of: :fmu, dependent: :destroy
   has_many :operators, through: :fmu_operators
@@ -49,6 +50,7 @@ class Fmu < ApplicationRecord
   validates :forest_type, presence: true
 
   before_save :update_geojson
+  after_save :update_geometry, if: :geojson_changed?
   before_destroy :really_destroy_documents
 
   default_scope { includes(:translations) }
@@ -125,10 +127,27 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['certification_vlc'] = self.certification_vlc
     temp_geojson['properties']['certification_vlo'] = self.certification_vlo
     temp_geojson['properties']['certification_tltv'] = self.certification_tltv
-    temp_geojson['properties']['observations'] = self.observations.count
+    temp_geojson['properties']['observations'] = self.active_observations.reload.uniq.count
     temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
 
     self.geojson = temp_geojson
+  end
+
+  def update_geometry
+    query =
+      <<~SQL
+        WITH g as (
+        SELECT *, x.properties as prop, ST_GeomFromGeoJSON(x.geometry) as the_geom
+        FROM fmus CROSS JOIN LATERAL
+        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb, properties jsonb )
+        )
+        update fmus
+        set geometry = g.the_geom , properties = g.prop
+        from g
+        where fmus.id = g.id;
+      SQL
+
+    ActiveRecord::Base.connection.execute query
   end
 
   def cache_key
