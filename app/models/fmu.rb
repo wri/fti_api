@@ -127,7 +127,7 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['certification_vlc'] = self.certification_vlc
     temp_geojson['properties']['certification_vlo'] = self.certification_vlo
     temp_geojson['properties']['certification_tltv'] = self.certification_tltv
-    temp_geojson['properties']['observations'] = self.active_observations.uniq.count
+    temp_geojson['properties']['observations'] = self.active_observations.reload.uniq.count
     temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
 
     self.geojson = temp_geojson
