@@ -34,12 +34,14 @@ class RequiredOperatorDocument < ApplicationRecord
 
   validate :fixed_fields_unchanged
 
-  after_destroy :invalidate_operator_documents
+  before_destroy :invalidate_operator_documents, prepend: true
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
 
   def invalidate_operator_documents
-    self.operator_documents.find_each{ |x| x.update(status: OperatorDocument.statuses[:doc_expired]) }
+    self.operator_documents.find_each do |x|
+      x.update(status: OperatorDocument.statuses[:doc_expired], deleted_at: Time.now)
+    end
   end
 
   private
