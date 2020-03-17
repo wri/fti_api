@@ -194,9 +194,9 @@ class Operator < ApplicationRecord
     # based on the percentage of documents uploaded
     def calculate_document_ranking
       Country.active.find_each do |country|
-        number_of_operators = country.operators.count
+        number_of_operators = country.fa_operators.count
         rank_position = 0
-        country.operators.order(percentage_valid_documents_all: :desc).each do |o|
+        country.fa_operators.order(percentage_valid_documents_all: :desc).each do |o|
           if o.percentage_valid_documents_all.present?
             rank = rank_position + 1
             rank_position += 1

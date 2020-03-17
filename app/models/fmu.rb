@@ -21,6 +21,8 @@
 #
 
 class Fmu < ApplicationRecord
+  acts_as_paranoid
+
   include ValidationHelper
   include Translatable
   include ForestTypeable

@@ -6,7 +6,7 @@ ActiveAdmin.register Fmu do
 
   menu false
 
-  actions :show, :edit, :index, :update, :new, :create
+  active_admin_paranoia
 
   config.order_clause
 
