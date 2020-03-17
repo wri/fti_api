@@ -30,6 +30,7 @@ class Country < ApplicationRecord
   # rubocop:enable Rails/HasAndBelongsToMany
   has_many :governments,     inverse_of: :country
   has_many :operators,       inverse_of: :country
+  has_many :fa_operators, ->{ fa_operator }, class_name: 'Operator'
   has_many :fmus,            inverse_of: :country
   has_many :laws,            inverse_of: :country
 
