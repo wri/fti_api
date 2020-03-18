@@ -106,6 +106,10 @@ class Observation < ApplicationRecord
   after_save     :update_fmu_geojson
   after_destroy  :update_fmu_geojson
 
+  after_save       :prepare_notify_observer
+  after_commit     :notify_observer
+
+
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, -> { joins(:translations).where(is_active: true) }
   scope :own_with_inactive, ->(observer) {
@@ -220,5 +224,17 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
     fmu.update_geojson
     fmu.save
+  end
+
+  def prepare_notify_observer
+    @notify_observer = true if validation_status_changed?
+  end
+
+  def notify_observer
+    return unless @notify_observer
+
+    observers.each do |observer|
+      MailService.notify_observer_status_changed(observer, self)
+    end
   end
 end
