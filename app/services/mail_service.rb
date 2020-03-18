@@ -39,7 +39,7 @@ TXT
     infractor_text = if observation.observation_type == 'government'
                        "Type: Government"
                      else
-                       "Producers: #{observation.operators.each(&:name).join(', ')}"
+                       "Producers: #{observation.operator&.name}"
                      end
 
     text =
