@@ -34,4 +34,32 @@ TXT
 TXT
     AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user.email, text, 'New operator created'
   end
+
+  def self.notify_observer_status_changed(observer, observation)
+    infractor_text = if observation.observation_type == 'government'
+                       "Type: Government"
+                     else
+                       "Producers: #{observation.operators.each(&:name).join(', ')}"
+                     end
+
+    text =
+<<~TXT
+  Hello #{observer.name},
+
+  There has been an update of status for an observation you made.
+  The status is now #{observation.validation_status}.
+
+  Observation details:
+  
+  Date: #{observation.publication_date}
+  #{infractor_text}
+  Infraction: #{observation.subcategory&.name}
+ 
+  Best,
+   Open Timber Portal
+TXT
+    observer.users.each do |user|
+      AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user.email, text, 'Observation has been updated'
+    end
+  end
 end
