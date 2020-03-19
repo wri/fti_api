@@ -21,8 +21,8 @@ ActiveAdmin.register Fmu do
   scope 'Free', :filter_by_free
 
   permit_params :id, :certification_fsc, :certification_pefc,
-                :certification_olb, :certification_vlc, :certification_vlo, :certification_tltv,
-                :esri_shapefiles_zip, :country_id,
+                :certification_olb, :certification_pafc, :certification_fsc, :certification_tlv,
+                :certification_ls, :esri_shapefiles_zip, :country_id,
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
@@ -46,9 +46,10 @@ ActiveAdmin.register Fmu do
     column :certification_fsc
     column :certification_pefc
     column :certification_olb
-    column :certification_vlc
-    column :certification_vlo
-    column :certification_tltv
+    column :certification_pafc
+    column :certification_fsc
+    column :certification_tlv
+    column :certification_ls
   end
 
   index do
@@ -59,9 +60,10 @@ ActiveAdmin.register Fmu do
     column 'FSC', :certification_fsc
     column 'PEFC', :certification_pefc
     column 'OLB', :certification_olb
-    column 'VLC', :certification_vlc
-    column 'VLO', :certification_vlo
-    column 'TLTV', :certification_tltv
+    column 'PAFC', :certification_pafc
+    column 'FSC', :certification_fsc
+    column 'TLV', :certification_tlv
+    column 'LS', :certification_ls
 
     actions
   end
@@ -78,9 +80,10 @@ ActiveAdmin.register Fmu do
       f.input :certification_fsc
       f.input :certification_pefc
       f.input :certification_olb
-      f.input :certification_vlc
-      f.input :certification_vlo
-      f.input :certification_tltv
+      f.input :certification_pafc
+      f.input :certification_fsc
+      f.input :certification_tlv
+      f.input :certification_fs
     end
 
     f.inputs 'Translated fields' do

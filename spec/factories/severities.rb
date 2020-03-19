@@ -7,6 +7,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  subcategory_id :integer
+#  details        :text
 #
 
 FactoryBot.define do

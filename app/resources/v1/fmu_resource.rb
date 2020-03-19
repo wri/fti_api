@@ -8,7 +8,8 @@ module V1
 
     attributes :name, :geojson, :forest_type,
                :certification_fsc, :certification_pefc, :certification_olb,
-               :certification_vlc, :certification_vlo, :certification_tltv
+               :certification_pafc, :certification_fsc_cw, :certification_tlv,
+               :certification_ls
 
     has_one :country
     has_one :operator
@@ -24,12 +25,15 @@ module V1
     end
 
     filter :certification, apply: ->(records, value, _options) {
-      records = records.with_certification_fsc       if value.include?('fsc')
-      records = records.with_certification_pefc      if value.include?('pefc')
-      records = records.with_certification_olb       if value.include?('olb')
-      records = records.with_certification_vlc       if value.include?('vlc')
-      records = records.with_certification_vlo       if value.include?('vlo')
-      records = records.with_certification_tltv      if value.include?('tltv')
+      values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
+      return records unless values.any?
+
+      certifications = []
+      values.each do |v|
+        certifications << "certification_#{v} = true"
+      end
+
+      records = records.where(certifications.join(' OR ')).distinct
 
       records
     }

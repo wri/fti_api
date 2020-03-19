@@ -9,8 +9,10 @@
 #  region_centroid            :jsonb
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
-#  is_active                  :boolean          default(FALSE), not null
+#  is_active                  :boolean          default("false"), not null
 #  percentage_valid_documents :float
+#  name                       :string
+#  region_name                :string
 #
 
 FactoryBot.define do

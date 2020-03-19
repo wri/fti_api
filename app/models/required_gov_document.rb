@@ -13,6 +13,8 @@
 #  country_id                     :integer
 #  created_at                     :datetime         not null
 #  updated_at                     :datetime         not null
+#  required_gov_document_id       :integer          not null
+#  explanation                    :text
 #
 
 class RequiredGovDocument < ApplicationRecord
