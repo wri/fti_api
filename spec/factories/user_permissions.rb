@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  user_id     :integer
-#  user_role   :integer          default("user"), not null
+#  user_role   :integer          default("0"), not null
 #  permissions :jsonb
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

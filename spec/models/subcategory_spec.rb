@@ -7,7 +7,9 @@
 #  subcategory_type  :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  location_required :boolean          default(TRUE)
+#  location_required :boolean          default("true")
+#  name              :text
+#  details           :text
 #
 
 require 'rails_helper'

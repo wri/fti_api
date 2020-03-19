@@ -29,7 +29,7 @@ module V1
     end
 
     filter :certification, apply: ->(records, value, _options) {
-      values = value.select { |c| %w(fsc pefc olb).include? c }
+      values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
       return records unless values.any?
 
       certifications = []

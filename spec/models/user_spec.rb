@@ -10,14 +10,14 @@
 #  name                   :string
 #  institution            :string
 #  web_url                :string
-#  is_active              :boolean          default(TRUE)
+#  is_active              :boolean          default("true")
 #  deactivated_at         :datetime
 #  permissions_request    :integer
 #  permissions_accepted   :datetime
 #  country_id             :integer
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
-#  sign_in_count          :integer          default(0), not null
+#  sign_in_count          :integer          default("0"), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :inet

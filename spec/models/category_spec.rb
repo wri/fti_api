@@ -6,6 +6,7 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  category_type :integer
+#  name          :string
 #
 
 require 'rails_helper'

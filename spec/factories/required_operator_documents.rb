@@ -12,7 +12,9 @@
 #  valid_period                        :integer
 #  deleted_at                          :datetime
 #  forest_type                         :integer
-#  contract_signature                  :boolean          default(FALSE), not null
+#  contract_signature                  :boolean          default("false"), not null
+#  required_operator_document_id       :integer          not null
+#  explanation                         :text
 #
 
 FactoryBot.define do

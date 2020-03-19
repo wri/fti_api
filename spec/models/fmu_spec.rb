@@ -2,20 +2,23 @@
 #
 # Table name: fmus
 #
-#  id                 :integer          not null, primary key
-#  country_id         :integer
-#  geojson            :jsonb
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  certification_fsc  :boolean          default(FALSE)
-#  certification_pefc :boolean          default(FALSE)
-#  certification_olb  :boolean          default(FALSE)
-#  certification_vlc  :boolean
-#  certification_vlo  :boolean
-#  certification_tltv :boolean
-#  forest_type        :integer          default("fmu"), not null
-#  geometry           :geometry
-#  properties         :jsonb
+#  id                   :integer          not null, primary key
+#  country_id           :integer
+#  geojson              :jsonb
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  certification_fsc    :boolean          default("false")
+#  certification_pefc   :boolean          default("false")
+#  certification_olb    :boolean          default("false")
+#  certification_pafc   :boolean          default("false")
+#  certification_fsc_cw :boolean          default("false")
+#  certification_tlv    :boolean          default("false")
+#  forest_type          :integer          default("0"), not null
+#  geometry             :geometry         geometry, 0
+#  properties           :jsonb
+#  deleted_at           :datetime
+#  certification_ls     :boolean          default("false")
+#  name                 :string
 #
 
 require 'rails_helper'
@@ -77,9 +80,10 @@ RSpec.describe Fmu, type: :model do
           expect(fmu.geojson['properties']['certification_fsc']).to eql fmu.certification_fsc
           expect(fmu.geojson['properties']['certification_pefc']).to eql fmu.certification_pefc
           expect(fmu.geojson['properties']['certification_olb']).to eql fmu.certification_olb
-          expect(fmu.geojson['properties']['certification_vlc']).to eql fmu.certification_vlc
-          expect(fmu.geojson['properties']['certification_vlo']).to eql fmu.certification_vlo
-          expect(fmu.geojson['properties']['certification_tltv']).to eql fmu.certification_tltv
+          expect(fmu.geojson['properties']['certification_pafc']).to eql fmu.certification_pafc
+          expect(fmu.geojson['properties']['certification_fsc_cw']).to eql fmu.certification_fsc_cw
+          expect(fmu.geojson['properties']['certification_tlv']).to eql fmu.certification_tlv
+          expect(fmu.geojson['properties']['certification_ls']).to eql fmu.certification_ls
         end
       end
 

@@ -10,23 +10,26 @@
 #  country_id            :integer
 #  operator_id           :integer
 #  pv                    :string
-#  is_active             :boolean          default(TRUE)
+#  is_active             :boolean          default("true")
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  lat                   :decimal(, )
 #  lng                   :decimal(, )
 #  fmu_id                :integer
 #  subcategory_id        :integer
-#  validation_status     :integer          default("Created"), not null
+#  validation_status     :integer          default("0"), not null
 #  observation_report_id :integer
 #  actions_taken         :text
 #  modified_user_id      :integer
 #  law_id                :integer
 #  location_information  :string
-#  is_physical_place     :boolean          default(TRUE)
+#  is_physical_place     :boolean          default("true")
 #  evidence_type         :integer
 #  location_accuracy     :integer
-#  evidence_on_report    :text
+#  evidence_on_report    :string
+#  details               :text
+#  concern_opinion       :text
+#  litigation_status     :string
 #
 
 require 'rails_helper'
