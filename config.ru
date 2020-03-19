@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 # This file is used by Rack-based servers to start the application.
-
-require_relative 'config/environment'
+begin
+  require_relative 'config/environment'
+rescue Exception => error
+  Appsignal.send_error(error)
+  raise
+end
 
 run Rails.application
