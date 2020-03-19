@@ -4,11 +4,13 @@
 #
 # Table name: governments
 #
-#  id         :integer          not null, primary key
-#  country_id :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  is_active  :boolean          default(TRUE)
+#  id                :integer          not null, primary key
+#  country_id        :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  is_active         :boolean          default("true")
+#  government_entity :string
+#  details           :text
 #
 
 class Government < ApplicationRecord

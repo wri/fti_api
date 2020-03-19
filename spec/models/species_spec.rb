@@ -14,6 +14,7 @@
 #  iucn_status     :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  common_name     :string
 #
 
 require 'rails_helper'

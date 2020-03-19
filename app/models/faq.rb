@@ -9,6 +9,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  image      :string
+#  question   :string
+#  answer     :text
 #
 
 class Faq < ApplicationRecord

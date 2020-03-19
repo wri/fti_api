@@ -4,10 +4,12 @@
 #
 # Table name: tools
 #
-#  id         :integer          not null, primary key
-#  position   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  position    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  name        :string
+#  description :text
 #
 
 class Tool < ApplicationRecord

@@ -10,7 +10,7 @@
 #  concession                         :string
 #  created_at                         :datetime         not null
 #  updated_at                         :datetime         not null
-#  is_active                          :boolean          default(TRUE)
+#  is_active                          :boolean          default("true")
 #  logo                               :string
 #  operator_id                        :string
 #  percentage_valid_documents_all     :float
@@ -24,7 +24,9 @@
 #  website                            :string
 #  country_doc_rank                   :integer
 #  country_operators                  :integer
-#  approved                           :boolean          default(TRUE), not null
+#  approved                           :boolean          default("true"), not null
+#  name                               :string
+#  details                            :text
 #
 
 class Operator < ApplicationRecord
@@ -81,9 +83,13 @@ class Operator < ApplicationRecord
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
   # TODO Refactor this when merging the branches
-  scope :fmus_with_certification_fsc,   ->          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
-  scope :fmus_with_certification_pefc,  ->          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
-  scope :fmus_with_certification_olb,   ->          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
+  scope :fmus_with_certification_fsc,     ->          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
+  scope :fmus_with_certification_pefc,    ->          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
+  scope :fmus_with_certification_olb,     ->          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
+  scope :fmus_with_certification_pafc,    ->          { joins(:fmus).where(fmus: { certification_pafc: true }).distinct }
+  scope :fmus_with_certification_fsc_cw,  ->          { joins(:fmus).where(fmus: { certification_fsc_cw: true }).distinct }
+  scope :fmus_with_certification_tlv,     ->          { joins(:fmus).where(fmus: { certification_tlv: true }).distinct }
+  scope :fmus_with_certification_ls,      ->          { joins(:fmus).where(fmus: { certification_ls: true }).distinct }
 
 
   class Translation

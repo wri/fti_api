@@ -22,7 +22,7 @@
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
-#  public                        :boolean          default(TRUE), not null
+#  public                        :boolean          default("true"), not null
 #
 
 class OperatorDocument < ApplicationRecord

@@ -4,20 +4,23 @@
 #
 # Table name: fmus
 #
-#  id                 :integer          not null, primary key
-#  country_id         :integer
-#  geojson            :jsonb
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  certification_fsc  :boolean          default(FALSE)
-#  certification_pefc :boolean          default(FALSE)
-#  certification_olb  :boolean          default(FALSE)
-#  certification_vlc  :boolean
-#  certification_vlo  :boolean
-#  certification_tltv :boolean
-#  forest_type        :integer          default("fmu"), not null
-#  geometry           :geometry
-#  properties         :jsonb
+#  id                   :integer          not null, primary key
+#  country_id           :integer
+#  geojson              :jsonb
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  certification_fsc    :boolean          default("false")
+#  certification_pefc   :boolean          default("false")
+#  certification_olb    :boolean          default("false")
+#  certification_pafc   :boolean          default("false")
+#  certification_fsc_cw :boolean          default("false")
+#  certification_tlv    :boolean          default("false")
+#  forest_type          :integer          default("0"), not null
+#  geometry             :geometry         geometry, 0
+#  properties           :jsonb
+#  deleted_at           :datetime
+#  certification_ls     :boolean          default("false")
+#  name                 :string
 #
 
 class Fmu < ApplicationRecord
@@ -62,14 +65,15 @@ class Fmu < ApplicationRecord
   scope :filter_by_operators,      ->(operator_ids) { joins(:fmu_operators).where(fmu_operators: { current: true, operator_id: operator_ids.split(',') }) }
   # this could also be done like: "id not in ( select fmu_id from fmu_operators where \"current\" = true)"
   # but it might break the method chaining
-  scope :filter_by_free,           ->             { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
-  scope :with_certification_fsc,   ->             { where certification_fsc: true }
-  scope :with_certification_pefc,  ->             { where certification_pefc: true }
-  scope :with_certification_olb,   ->             { where certification_olb: true }
-  scope :with_certification_vlc,   ->             { where certification_vlc: true }
-  scope :with_certification_vlo,   ->             { where certification_vlo: true }
-  scope :with_certification_tltv,  ->             { where certification_tltv: true }
-  scope :current,                  ->             { joins(:fmu_operators).where(fmu_operators: { current: true }) }
+  scope :filter_by_free,            ->            { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
+  scope :with_certification_fsc,    ->            { where certification_fsc:     true }
+  scope :with_certification_pefc,   ->            { where certification_pefc:    true }
+  scope :with_certification_olb,    ->            { where certification_olb:     true }
+  scope :with_certification_pafc,   ->            { where certification_pafc:    true }
+  scope :with_certification_fsc_cw, ->            { where certification_fsc_cw:  true }
+  scope :with_certification_tlv,    ->            { where certification_tlv:     true }
+  scope :with_certification_ls,     ->            { where certification_ls:      true }
+  scope :current,                   ->            { joins(:fmu_operators).where(fmu_operators: { current: true }) }
 
   class << self
     def fetch_all(options)
@@ -126,9 +130,10 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['certification_fsc'] = self.certification_fsc
     temp_geojson['properties']['certification_pefc'] = self.certification_pefc
     temp_geojson['properties']['certification_olb'] = self.certification_olb
-    temp_geojson['properties']['certification_vlc'] = self.certification_vlc
-    temp_geojson['properties']['certification_vlo'] = self.certification_vlo
-    temp_geojson['properties']['certification_tltv'] = self.certification_tltv
+    temp_geojson['properties']['certification_pafc'] = self.certification_pafc
+    temp_geojson['properties']['certification_fsc_cw'] = self.certification_fsc_cw
+    temp_geojson['properties']['certification_tlv'] = self.certification_tlv
+    temp_geojson['properties']['certification_ls'] = self.certification_ls
     temp_geojson['properties']['observations'] = self.active_observations.reload.uniq.count
     temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
 
