@@ -79,7 +79,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
       link_to(o.name, admin_producer_path(o.id))
     end
     column :fmu, sortable: 'fmu_translations.name' do |od|
-      fmu = od.operator_document.fmu
+      fmu = OperatorDocument.unscoped.find(od.operator_document_id).fmu
       link_to(fmu.name, admin_fmu_path(fmu.id)) if fmu
     end
 
