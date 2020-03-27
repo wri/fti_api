@@ -141,6 +141,7 @@ ActiveAdmin.register Observation do
   csv do
     column :id
     column :is_active
+    column :observation_type
     column 'Status' do |observation|
       observation.validation_status
     end
