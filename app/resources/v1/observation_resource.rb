@@ -10,7 +10,8 @@ module V1
                :concern_opinion, :litigation_status, :location_accuracy,
                :lat, :lng, :country_id, :fmu_id, :location_information,
                :subcategory_id, :severity_id, :created_at, :updated_at,
-               :actions_taken, :validation_status, :is_physical_place
+               :actions_taken, :validation_status, :is_physical_place,
+               :complete
 
     has_many :species
     has_many :comments
@@ -78,9 +79,18 @@ module V1
       super(records, order_options, context)
     end
 
-
     def custom_links(_)
       { self: nil }
+    end
+
+    # An observation is complete if it has evidence
+    def complete
+      return true if @model.observation_documents.any?
+      if(@model.evidence_type == 'Evidence presented in the report' &&
+          @model.evidence_on_report && @model.observation_report_id)
+        return true
+      end
+      false
     end
 
     # This is called in an after save cause in the before save, there are still no relationships present
