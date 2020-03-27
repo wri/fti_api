@@ -90,6 +90,7 @@ module V1
           @model.evidence_on_report && @model.observation_report_id)
         return true
       end
+
       false
     end
 
