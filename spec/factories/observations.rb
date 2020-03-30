@@ -27,6 +27,7 @@
 #  evidence_type         :integer
 #  location_accuracy     :integer
 #  evidence_on_report    :string
+#  hidden                :boolean          default("false")
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string

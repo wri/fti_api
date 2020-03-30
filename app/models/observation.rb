@@ -29,6 +29,7 @@
 #  evidence_type         :integer
 #  location_accuracy     :integer
 #  evidence_on_report    :string
+#  hidden                :boolean          default("false")
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string
@@ -126,11 +127,8 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :by_government,     ->(government_id) { joins(:governments).where(governments: { id: government_id }) }
   scope :pending,           -> { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
   scope :created,           -> { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
-
-
-  # TODO Check if there's a better way to order by category
-  # scope :order_by_category, ->(order = 'ASC') { joins(subcategory: :category).order("category_translations.name #{order}") }
-  # scope :order_by_category, ->(order = 'ASC') { joins(subcategory: :category).merge(Category.order(name: order)) }
+  scope :hidden,            -> { where(hidden: true) }
+  scope :visible,           -> { where(hidden: [false, nil]) }
   scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name #{order}") }
 
   class << self
@@ -181,12 +179,11 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def set_active_status
-    self.is_active = self.validation_status == 'Approved'
+    self.is_active = (self.validation_status == 'Approved' && self.hidden != true)
     nil
   end
 
   def destroy_documents
-    #observation_documents.find_each(&:really_destroy!)
     mark_for_destruction # Hack to work with the hard delete of operator documents
     ActiveRecord::Base.connection.execute("DELETE FROM observation_documents WHERE observation_id = #{id}")
   end
