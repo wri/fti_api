@@ -11,7 +11,7 @@ module V1
                :lat, :lng, :country_id, :fmu_id, :location_information,
                :subcategory_id, :severity_id, :created_at, :updated_at,
                :actions_taken, :validation_status, :is_physical_place,
-               :complete
+               :complete, :hidden
 
     has_many :species
     has_many :comments
@@ -38,7 +38,7 @@ module V1
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
-            :observation_report, :law, :operator,
+            :observation_report, :law, :operator, :hidden,
             :subcategory, :is_active, :validation_status, :is_physical_place
 
     filter :category_id, apply: ->(records, value, _options) {
@@ -92,6 +92,14 @@ module V1
       end
 
       false
+    end
+
+    def self.updatable_fields(context)
+      super - [:hidden]
+    end
+
+    def self.creatable_fields(context)
+      super - [:hidden]
     end
 
     # This is called in an after save cause in the before save, there are still no relationships present

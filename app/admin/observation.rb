@@ -30,7 +30,8 @@ ActiveAdmin.register Observation do
   actions :all, except: [:new, :create]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
-                :location_information, :evidence_type, :evidence_on_report, :location_accuracy, :law_id, :fmu_id,
+                :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
+                :law_id, :fmu_id, :hidden,
                 observer_ids: [], relevant_operators: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
@@ -73,25 +74,39 @@ ActiveAdmin.register Observation do
     end
   end
 
-  batch_action :approve, confirm: 'Are you sure you want to approve all this observations?' do |ids|
+  batch_action :approve, confirm: 'Are you sure you want to approve all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Approved'])
     end
     redirect_to collection_path, notice: 'Documents approved!'
   end
 
-  batch_action :reject, confirm: 'Are you sure you want to reject all this observations?' do |ids|
+  batch_action :reject, confirm: 'Are you sure you want to reject all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Rejected'])
     end
     redirect_to collection_path, notice: 'Documents rejected!'
   end
 
-  batch_action :under_revision, confirm: 'Are you sure you want to put all this observations under revision?' do |ids|
+  batch_action :under_revision, confirm: 'Are you sure you want to put all these observations under revision?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Under revision'])
     end
     redirect_to collection_path, notice: 'Documents put under revision!'
+  end
+
+  batch_action :hide, confirm: 'Are you sure you want to hide all the selected observations?' do |ids|
+    batch_action_collection.find(ids).each do |observation|
+      observation.update(hidden: true)
+    end
+    redirect_to collection_path, notice: 'Documents hidden!'
+  end
+
+  batch_action :unhide, confirm: 'Are you sure you want to un-hide all the selected observations?' do |ids|
+    batch_action_collection.find(ids).each do |observation|
+      observation.update(hidden: false)
+    end
+    redirect_to collection_path, notice: 'Documents un-hidden!'
   end
 
   sidebar 'Documents', only: :show do
@@ -109,6 +124,8 @@ ActiveAdmin.register Observation do
   scope :government
   scope :pending
   scope :created
+  scope :hidden
+  scope :visible
 
   filter :id, as: :numeric_range
   filter :validation_status, as: :select, collection:
@@ -141,6 +158,7 @@ ActiveAdmin.register Observation do
   csv do
     column :id
     column :is_active
+    column :hidden
     column :observation_type
     column 'Status' do |observation|
       observation.validation_status
@@ -196,6 +214,7 @@ ActiveAdmin.register Observation do
     selectable_column
     column :id
     column 'Active?', :is_active
+    column :hidden
     tag_column 'Status', :validation_status, sortable: 'validation_status'
     column :country, sortable: 'country_translations.name'
     column :fmu, sortable: 'fmu_translations.name'
@@ -279,7 +298,7 @@ ActiveAdmin.register Observation do
 
     panel 'Visible columns' do
       render partial: "fields",
-             locals: { attributes: %w[active status country fmu location_information observers observation_type
+             locals: { attributes: %w[active hidden status country fmu location_information observers observation_type
                                       operator governments relevant_operators subcategory law law_country
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
@@ -302,6 +321,7 @@ ActiveAdmin.register Observation do
     end
     f.inputs 'Status' do
       f.input :is_active
+      f.input :hidden
       f.input :validation_status
     end
     f.inputs 'Observation Details' do
@@ -350,6 +370,7 @@ ActiveAdmin.register Observation do
   show do
     attributes_table do
       row :is_active
+      row :hidden
       tag_row :validation_status
       row :country
       row :observation_type
@@ -396,5 +417,4 @@ ActiveAdmin.register Observation do
     end
     active_admin_comments
   end
-
 end
