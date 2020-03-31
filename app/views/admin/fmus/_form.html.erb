@@ -1,0 +1,47 @@
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+  .map-container { display: flex; justify-content: space-between; align-items: center }
+  .map { position: relative; height: 400px;  top: 0; bottom: 0; width: 100%; }
+  .map-wrapper { width: 100% }
+  .hidden { display: none }
+</style>
+
+<div class="map-container">
+  <div class="map-wrapper">
+    <h2>Current shape</h2>
+    <div id="current-map" class="map"></div>
+  </div>
+  <div class="map-wrapper hidden">
+    <h2>New shape</h2>
+    <div id="new-map" class="map"></div>
+  </div>
+</div>
+
+<script>
+  mapboxgl.accessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
+  var map = new mapboxgl.Map({
+    container: 'current-map', // container id
+    style: 'mapbox://styles/mapbox/streets-v11' // stylesheet location
+  });
+
+  map.on('load', function() {
+    map.fitBounds(<%= bbox %>, {
+      padding: 50
+    });
+    map.addSource('maine', {
+      'type': 'geojson',
+      'data': <%= raw(geojson.to_json) %>
+    });
+    map.addLayer({
+      'id': 'maine',
+      'type': 'fill',
+      'source': 'maine',
+      'layout': {},
+      'paint': {
+        'fill-color': '#088',
+        'fill-opacity': 0.8
+      }
+    });
+  });
+</script>

@@ -83,7 +83,7 @@ ActiveAdmin.register Fmu do
       f.input :certification_pafc
       f.input :certification_fsc
       f.input :certification_tlv
-      f.input :certification_fs
+      f.input :certification_ls
     end
 
     f.inputs 'Translated fields' do
@@ -91,7 +91,12 @@ ActiveAdmin.register Fmu do
         t.input :name
       end
     end
-
     f.actions
+
+    render partial: 'form',
+           locals: {
+             geojson: f.resource.geojson,
+             bbox: f.resource.bbox
+           }
   end
 end

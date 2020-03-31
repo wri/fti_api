@@ -140,6 +140,20 @@ class Fmu < ApplicationRecord
     self.geojson = temp_geojson
   end
 
+  def bbox
+    query = <<~SQL
+      SELECT st_astext(st_envelope(geometry))
+      FROM fmus
+      where id = #{self.id}
+    SQL
+    envelope =
+      ActiveRecord::Base.connection.execute(query)[0]['st_astext'][9..-3]
+          .split(/ |,/).map(&:to_f).each_slice(2).to_a
+      [envelope[0], envelope[2]]
+  rescue
+    nil
+  end
+
   def update_geometry
     query =
       <<~SQL
