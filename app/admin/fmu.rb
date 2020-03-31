@@ -103,7 +103,8 @@ ActiveAdmin.register Fmu do
     render partial: 'form',
            locals: {
              geojson: f.resource.geojson,
-             bbox: f.resource.bbox
+             bbox: f.resource.bbox,
+             present: f.resource.geojson.present?
            }
   end
 end

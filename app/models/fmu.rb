@@ -169,8 +169,7 @@ class Fmu < ApplicationRecord
     tmp_fmu.really_destroy!
     response
   rescue Exception => e
-    puts e
-    {}
+    nil
   end
 
   def update_geometry
