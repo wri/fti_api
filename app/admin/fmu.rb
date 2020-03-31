@@ -11,6 +11,13 @@ ActiveAdmin.register Fmu do
   config.order_clause
 
   controller do
+    def preview
+      response = Fmu.file_upload(params['file'])
+      respond_to do |format|
+        format.json { render json: response }
+      end
+    end
+
     def scoped_collection
       end_of_association_chain.includes([country: :translations])
       end_of_association_chain.with_translations(I18n.locale)
@@ -72,7 +79,7 @@ ActiveAdmin.register Fmu do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Fmu Details' do
       f.input :country,  input_html: { disabled: object.persisted? }
-      f.input :esri_shapefiles_zip, as: :file
+      f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
       # TODO This needs a better approach
       f.has_many :operators, new_record: false do |o|
         o.input :name, input_html: { disabled: true }

@@ -154,6 +154,25 @@ class Fmu < ApplicationRecord
     nil
   end
 
+  def self.file_upload(esri_shapefiles_zip)
+    tmp_fmu = Fmu.new(name: "Test #{Time.now.to_i}",country_id: Country.first.id)
+    FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, _index|
+      tmp_fmu.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
+      break
+    end
+    tmp_fmu.save(validate: false)
+
+    response = {
+        geojson: tmp_fmu.geojson,
+        bbox: tmp_fmu.bbox
+    }
+    tmp_fmu.really_destroy!
+    response
+  rescue Exception => e
+    puts e
+    {}
+  end
+
   def update_geometry
     query =
       <<~SQL

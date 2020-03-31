@@ -19,6 +19,42 @@
 </div>
 
 <script>
+  const inputElement = document.getElementById('fmu_esri_shapefiles_zip');
+  function handleFiles() {
+    console.log(this.files[0]);
+
+    const csrf = document.querySelector('meta[name="csrf-token"]').content;
+    const formData = new FormData();
+
+    formData.append("file", this.files[0], this.files[0].name);
+
+    $.ajax({
+      type: "POST",
+      url: "preview",
+      xhr: function () {
+        var myXhr = $.ajaxSettings.xhr();
+        myXhr.open("POST", "/admin/fmus/preview");
+        myXhr.setRequestHeader('X-CSRF-Token', csrf);
+        return myXhr;
+      },
+      success: function (data) {
+        console.log("Yeaaaa: " + JSON.stringify(data));
+      },
+      error: function (error) {
+        console.log("ERROR: " + JSON.stringify(error));
+      },
+      async: true,
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      timeout: 60000
+    });
+  }
+  inputElement.addEventListener("change", handleFiles, false);
+</script>
+
+<script>
   mapboxgl.accessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
   var map = new mapboxgl.Map({
     container: 'current-map', // container id
