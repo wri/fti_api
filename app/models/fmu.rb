@@ -150,7 +150,7 @@ class Fmu < ApplicationRecord
       ActiveRecord::Base.connection.execute(query)[0]['st_astext'][9..-3]
           .split(/ |,/).map(&:to_f).each_slice(2).to_a
       [envelope[0], envelope[2]]
-  rescue
+  rescue StandardError
     nil
   end
 
@@ -168,7 +168,7 @@ class Fmu < ApplicationRecord
     }
     tmp_fmu.really_destroy!
     response
-  rescue Exception => e
+  rescue StandardError
     nil
   end
 
