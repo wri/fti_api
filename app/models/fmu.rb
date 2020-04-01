@@ -140,6 +140,38 @@ class Fmu < ApplicationRecord
     self.geojson = temp_geojson
   end
 
+  def bbox
+    query = <<~SQL
+      SELECT st_astext(st_envelope(geometry))
+      FROM fmus
+      where id = #{self.id}
+    SQL
+    envelope =
+      ActiveRecord::Base.connection.execute(query)[0]['st_astext'][9..-3]
+          .split(/ |,/).map(&:to_f).each_slice(2).to_a
+      [envelope[0], envelope[2]]
+  rescue StandardError
+    nil
+  end
+
+  def self.file_upload(esri_shapefiles_zip)
+    tmp_fmu = Fmu.new(name: "Test #{Time.now.to_i}",country_id: Country.first.id)
+    FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, _index|
+      tmp_fmu.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
+      break
+    end
+    tmp_fmu.save(validate: false)
+
+    response = {
+        geojson: tmp_fmu.geojson,
+        bbox: tmp_fmu.bbox
+    }
+    tmp_fmu.really_destroy!
+    response
+  rescue StandardError
+    nil
+  end
+
   def update_geometry
     query =
       <<~SQL
