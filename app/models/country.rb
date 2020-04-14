@@ -55,6 +55,10 @@ class Country < ApplicationRecord
     left_outer_joins(:observations).where.not(observations: { id: nil }).uniq
   })
 
+  scope :with_active_observations, (-> {
+    left_outer_joins(:observations).active.where.not(observations: { id: nil }).uniq
+  })
+
   scope :by_status, (->(status) { where(is_active: status) })
 
   scope :active, (-> { where(is_active: true) })
