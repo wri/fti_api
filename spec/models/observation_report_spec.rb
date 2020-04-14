@@ -37,7 +37,7 @@ RSpec.describe ObservationReport, type: :model do
           'observation_report',
           'attachment',
           observation_report.id.to_s,
-          'observationreporttitle1-2015-09-01.png'
+          "observationreporttitle#{observation_report.id}-2015-09-01.png"
         )
 
         expect(File.exist?(filepath)).to eql true
