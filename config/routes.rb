@@ -58,6 +58,7 @@ Rails.application.routes.draw do
       resources :imports, only: :create
 
       get 'observation_filters', to: 'observation_filters#index'
+      get 'observation_filters_tree', to: 'observation_filters#tree'
     end
 
     # Documentation

@@ -31,6 +31,33 @@ module V1
         3 => { id: 3, name: I18n.t('filters.high') }
     }.freeze
 
+    def tree
+      years = Observation.pluck(:publication_date).map{ |x| x.year }.uniq.sort
+                  .map{ |x| { id: x, name: x } }
+
+      severities =[
+          { id: 0, name: I18n.t('filters.unknown') },
+          { id: 1, name: I18n.t('filters.low') },
+          { id: 2, name: I18n.t('filters.medium') },
+          { id: 3, name: I18n.t('filters.high') }
+      ]
+
+      filters = {
+          'observation_type': types,
+          'country_id': country_ids,
+          'fmu_id': fmu_ids,
+          'years': years,
+          'observer_id': observer_ids,
+          'category_id': category_ids,
+          'subcategory_id': subcategory_ids,
+          'severity_level': severities,
+          'operator': operator_ids,
+          'government': government_ids,
+          'observation-report': report_ids
+      }.to_json
+
+      render json: filters
+    end
 
     def index
       records = Observation.all.joins(:observers, :severity, :observation_report, subcategory: :category)
@@ -87,6 +114,62 @@ module V1
     end
 
     private
+
+    def types
+      categories_operator = Category.where(category_type: 'operator').pluck(:id)
+      categories_government = Category.where(category_type: 'government').pluck(:id)
+      [{ id: 'operator', name: I18n.t('filters.operator'), categories: categories_operator.uniq },
+       { id: 'government', name: I18n.t('filters.governance'), categories: categories_government.uniq }]
+    end
+
+    def report_ids
+      ObservationReport.all.map { |x| { id: x.id, name: x.title } }.sort_by { |x| x[:title] }
+    end
+
+    def government_ids
+      Government.active.with_translations.map do |x|
+        { id: x.id, name: x.government_entity }
+      end.sort_by { |x| x[:name] }
+    end
+
+    def operator_ids
+      Operator.active.with_translations.includes(:fmus).map do |x|
+        { id: x.id, name: x.name, fmus: x.fmus.pluck(:id) }
+      end.sort_by { |x| x[:name] }
+    end
+
+    def subcategory_ids
+      Subcategory.with_translations.map do |x|
+        { id: x.id, name: x.name }
+      end.sort_by { |x| x[:name] }
+    end
+
+    def category_ids
+      Category.all.with_translations.includes(:subcategories).map do |x|
+        { id: x.id, name: x.name, subcategories: x.subcategories.pluck(:id).uniq }
+      end.sort_by { |x| x[:name] }
+    end
+
+    def fmu_ids
+      Fmu.all.with_translations.map{ |x| { id: x.id, name: x.name } }.sort_by { |x| x[:name] }
+    end
+
+    def observer_ids
+      Observer.all.with_translations.map{ |x| { id: x.id, name: x.name } }.sort_by { |x| x[:name] }
+    end
+
+    def country_ids
+      Country.with_translations.with_active_observations
+          .map do  |x|
+            {
+              id: x.id, iso: x.iso, name: x.name,
+              operators: x.operators.pluck(:id).uniq,
+              observers: x.observers.pluck(:id).uniq,
+              fmus: x.fmus.pluck(:id).uniq,
+              governments: x.governments.pluck(:id).uniq
+            }
+          end.sort_by { |x| x[:name] }
+    end
 
     def valid_params(name, value)
       return false unless name.present? && value.present?
