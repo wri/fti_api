@@ -33,7 +33,6 @@
       url: "/admin/fmus/preview",
       headers: { 'X-CSRF-Token': csrf },
       success: function (data) {
-        console.log('AIAIAIAIA', data);
         if(data === null) {
           alert("The file you uploaded is erroneous.");
           return;

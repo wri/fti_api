@@ -23,6 +23,9 @@
 #  name                 :string
 #
 
+require_relative '../../lib/file_data_import/parser/zip'
+require_relative '../../lib/file_data_import/parser/shp'
+require_relative '../../lib/file_data_import/parser/base'
 class Fmu < ApplicationRecord
   acts_as_paranoid
 
