@@ -129,7 +129,7 @@ class User < ApplicationRecord
   def send_reset_password_instructions(url)
     reset_url  = url + '?reset_password_token=' + generate_reset_token(self)
 
-    result = PasswordMailer.password_email(display_name, email, reset_url).deliver_now
+    result = MailService.forgotten_password display_name, email, reset_url
     result
   end
 

@@ -2,6 +2,41 @@
 
 # Service to deal with emails
 class MailService
+  def self.forgotten_password(user_name, email, reset_url)
+    subject = 'Requested link to change your password'
+    body =
+    <<~TXT
+Dear #{user_name}
+
+Someone has requested a link to change your password. You can do this through the link below.
+
+#{reset_url}.
+
+If you didn't request this, please ignore this email.
+Your password won't change until you access the link above and create a new one.
+
+Best regards,
+OTP
+TXT
+    
+    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], email, subject, body
+  end
+
+  def self.newsletter(user_email)
+    subject = 'Welcome to the Open Timber Portal'
+    body =
+<<~TXT
+Hello,
+
+Thank you for subscribing the OTP newsletter.
+
+Best regards,
+OTP
+TXT
+    # Text user
+    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user_email, subject, body
+  end
+
   def self.notify_user_creation(user)
     text =
 <<~TXT
