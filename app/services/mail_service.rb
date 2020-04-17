@@ -23,15 +23,13 @@ TXT
   end
 
   def self.newsletter(user_email)
-    subject = 'Welcome to the Open Timber Portal'
+    subject = 'Registration confirmation'
     body =
 <<~TXT
-Hello,
+Thank you for subscribing to the Open Timber Portal (OTP) newsletter. 
 
-Thank you for subscribing the OTP newsletter.
-
-Best regards,
-OTP
+Best wishes,
+The OTP team.
 TXT
     # Text user
     AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user_email, subject, body
