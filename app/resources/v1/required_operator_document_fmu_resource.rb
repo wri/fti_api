@@ -2,6 +2,7 @@
 
 module V1
   class RequiredOperatorDocumentFmuResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     attributes :forest_type, :name, :valid_period, :explanation, :forest_type
 
