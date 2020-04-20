@@ -32,7 +32,9 @@
 class Operator < ApplicationRecord
   include Translatable
   translates :name, :details, touch: true
-  active_admin_translates :name, :details
+  active_admin_translates :name, :details do
+    validates_presence_of :name
+  end
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo

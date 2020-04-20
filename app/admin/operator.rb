@@ -114,13 +114,14 @@ ActiveAdmin.register Operator, as: 'Producer' do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Translated fields' do
+    #f.inputs 'Translated fields' do
+    #
+    #end
+    f.inputs 'Operator Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
         t.input :details
       end
-    end
-    f.inputs 'Operator Details' do
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type, as: :select,
                               collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
@@ -172,7 +173,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   controller do
     def scoped_collection
       end_of_association_chain.includes([country: :translations])
-      end_of_association_chain.with_translations(I18n.locale)
+      end_of_association_chain.includes([:translations])
     end
   end
 end
