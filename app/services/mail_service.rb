@@ -19,7 +19,7 @@ Best regards,
 OTP
 TXT
     
-    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], email, subject, body
+    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], email, body, subject
   end
 
   def self.newsletter(user_email)
@@ -32,7 +32,7 @@ Best wishes,
 The OTP team.
 TXT
     # Text user
-    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user_email, subject, body
+    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user_email, body, subject
   end
 
   def self.notify_user_creation(user)
