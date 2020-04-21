@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200330131044) do
+ActiveRecord::Schema.define(version: 20200421114412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -446,6 +446,8 @@ ActiveRecord::Schema.define(version: 20200330131044) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "name"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_fmu_translations_on_deleted_at", using: :btree
     t.index ["fmu_id"], name: "index_fmu_translations_on_fmu_id", using: :btree
     t.index ["locale"], name: "index_fmu_translations_on_locale", using: :btree
   end
@@ -924,6 +926,8 @@ ActiveRecord::Schema.define(version: 20200330131044) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.text     "explanation"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_required_gov_document_translations_on_deleted_at", using: :btree
     t.index ["locale"], name: "index_required_gov_document_translations_on_locale", using: :btree
     t.index ["required_gov_document_id"], name: "index_759a54fdd00cf06c291ffc4857fb904934dd47b9", using: :btree
   end
@@ -965,6 +969,8 @@ ActiveRecord::Schema.define(version: 20200330131044) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.text     "explanation"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_required_operator_document_translations_on_deleted_at", using: :btree
     t.index ["locale"], name: "index_required_operator_document_translations_on_locale", using: :btree
     t.index ["required_operator_document_id"], name: "index_eed74ed5a0934f32c4b075e5beee98f1ebf34d19", using: :btree
   end

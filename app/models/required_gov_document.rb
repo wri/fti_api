@@ -21,7 +21,7 @@ class RequiredGovDocument < ApplicationRecord
   includes Translatable
   acts_as_paranoid
 
-  translates :explanation, touch: true
+  translates :explanation, paranoia: true, touch: true
   # rubocop:disable Style/BlockDelimiters
   active_admin_translates :explanation do; end
   # rubocop:enable Style/BlockDelimiters

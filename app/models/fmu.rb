@@ -32,7 +32,7 @@ class Fmu < ApplicationRecord
   include ValidationHelper
   include Translatable
   include ForestTypeable
-  translates :name, touch: true
+  translates :name, paranoia: true, touch: true
 
   attr_reader :esri_shapefiles_zip
 
