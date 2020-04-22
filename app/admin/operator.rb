@@ -172,8 +172,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([country: :translations])
-      end_of_association_chain.includes([:translations])
+      end_of_association_chain.includes([:translations, country: :translations])
     end
   end
 end
