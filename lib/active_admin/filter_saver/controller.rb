@@ -48,8 +48,6 @@ module ActiveAdmin
         current_route = Rails.application.routes.recognize_path(current_path)
         current_route.sort.flatten.join('-').gsub(/\//, '_').to_sym
       end
-
     end
-
   end
 end
