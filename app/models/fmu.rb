@@ -69,6 +69,8 @@ class Fmu < ApplicationRecord
   # this could also be done like: "id not in ( select fmu_id from fmu_operators where \"current\" = true)"
   # but it might break the method chaining
   scope :filter_by_free,            ->            { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
+  # TODO remve the filter by free. This needs to be tested
+  scope :filter_by_free_aa,         ->            { where(' fmus.id not in (select fmu_id from fmu_operators where current = true)') }
   scope :with_certification_fsc,    ->            { where certification_fsc:     true }
   scope :with_certification_pefc,   ->            { where certification_pefc:    true }
   scope :with_certification_olb,    ->            { where certification_olb:     true }

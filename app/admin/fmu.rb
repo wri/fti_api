@@ -19,13 +19,12 @@ ActiveAdmin.register Fmu do
     end
 
     def scoped_collection
-      end_of_association_chain.includes([country: :translations])
-      end_of_association_chain.with_translations(I18n.locale)
+      end_of_association_chain.includes(:translations, [country: :translations])
     end
   end
 
   scope :all, default: true
-  scope 'Free', :filter_by_free
+  scope 'Free', :filter_by_free_aa
 
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
