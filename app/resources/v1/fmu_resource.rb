@@ -12,9 +12,9 @@ module V1
                :certification_ls
 
     has_one :country
-    has_one :operator
+    has_one :operator, foreign_key_on: :related
 
-    filters :country, :free, :certification
+    filters :country, :free, :certification, :operator
 
     def forest_type
       Fmu::FOREST_TYPES[@model.forest_type.to_sym][:geojson_label] if @model.forest_type

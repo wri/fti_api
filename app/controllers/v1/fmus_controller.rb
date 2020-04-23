@@ -9,9 +9,8 @@ module V1
     load_and_authorize_resource class: 'Fmu'
 
     def index
-      fmus = Fmu.fetch_all(options_filter)
-
       if params[:format].present? && params[:format].include?('geojson')
+        fmus = Fmu.fetch_all(options_filter)
         render json: build_json(fmus)
       else
         super
