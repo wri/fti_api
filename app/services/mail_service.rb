@@ -6,18 +6,18 @@ class MailService
     subject = 'Requested link to change your password'
     body =
     <<~TXT
-Dear #{user_name}
-
-Someone has requested a link to change your password. You can do this through the link below.
-
-#{reset_url}.
-
-If you didn't request this, please ignore this email.
-Your password won't change until you access the link above and create a new one.
-
-Best regards,
-OTP
-TXT
+      Dear #{user_name}
+      
+      Someone has requested a link to change your password. You can do this through the link below.
+      
+      #{reset_url}.
+      
+      If you didn't request this, please ignore this email.
+      Your password won't change until you access the link above and create a new one.
+      
+      Best regards,
+      OTP
+    TXT
     
     AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], email, body, subject
   end
@@ -26,10 +26,10 @@ TXT
     subject = 'Registration confirmation'
     body =
 <<~TXT
-Thank you for subscribing to the Open Timber Portal (OTP) newsletter. 
-
-Best wishes,
-The OTP team.
+  Thank you for subscribing to the Open Timber Portal (OTP) newsletter. 
+  
+  Best wishes,
+  The OTP team.
 TXT
     # Text user
     AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user_email, body, subject
