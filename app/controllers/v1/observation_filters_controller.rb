@@ -60,20 +60,7 @@ module V1
     end
 
     def index
-      records = Observation.all.joins(:observers, :severity, :observation_report, subcategory: :category)
-      params['filter']&.each do |k, v|
-        next unless valid_params(k, v)
-
-        # Different behavior for when the model attribute is an enum
-        if Observation.public_methods.include? k.pluralize.underscore.to_sym
-          enum_values = v.split(',').map { |e| Observation.public_send(k.pluralize.underscore.to_sym)[e.to_sym] }
-          records = records.where(k.underscore => enum_values)
-        elsif query = FILTER_TYPES[k.dasherize.to_sym][:query]
-          records = records.where(query + "(#{v})")
-        else
-          records = records.where(k.underscore => v.split(','))
-        end
-      end
+      records = filtered_records
 
       observation_types = records.pluck(:observation_type).uniq.map { |o| OBS_TYPES[o] }
 
@@ -113,7 +100,63 @@ module V1
       render json: filters
     end
 
+    def csv
+      records = filtered_records
+      send_data to_csv(records), filename: "observations-#{Date.today}.csv"
+    end
+
     private
+
+    def to_csv(records)
+      CSV.generate(headers: true) do |csv|
+        csv << %w(id is_active hidden observation_type
+                  status country fmu observers operator governments relevant_operators
+                  subcategory law severity publication_date actions_taken details
+                  evidence_type concern_opinion report user modified_user created_at updated_at)
+        records.each do |obs|
+          csv << [obs.id, obs.is_active, obs.hidden, obs.observation_type, obs.status, obs.country&.name,
+                  obs.fmu&.name, obs.observers.pluck(:name).join(' '), obs.operator&.name,
+                  obs.governments.pluck(:government_entity), obs.relevant_operators.pluck(:name).join(' '),
+                  obs.subcategory&.name, obs.law&.written_infraction, obs.severity&.level,
+                  obs.publication_date, obs.actions_taken, obs.details, obs.evidence_type,
+                  obs.concern_opinion, obs.observation_report&.title, obs.user&.name, obs.modified_user&.name,
+                  obs.created_at, obs.updated_at]
+        end
+      end
+    end
+
+
+    def filtered_records
+      # TODO: Improve this query
+      #records = Observation.all.joins(:observers, :severity, :observation_report, subcategory: :category)
+      records = Observation.all.includes(:translations, :law, :severity, :observation_report, country: :translations,
+                                         fmu: :translations,
+                                         subcategory: :translations,
+                                         operator: :translations,
+                                         governments: :translations,
+                                         observers: :translations)
+
+      #records = Observation.all.includes(:translations, :law, :severity, :observation_report, country: :translations,
+      #                                   fmu: :translations, subcategory: :translations,
+      #                                   observation_operators: {operator: :translations},
+      #                                   governments_observations: { government: :translations },
+      #                                   observer_observations: { observer: :translations})
+
+      params['filter']&.each do |k, v|
+        next unless valid_params(k, v)
+
+        # Different behavior for when the model attribute is an enum
+        if Observation.public_methods.include? k.pluralize.underscore.to_sym
+          enum_values = v.split(',').map { |e| Observation.public_send(k.pluralize.underscore.to_sym)[e.to_sym] }
+          records = records.where(k.underscore => enum_values)
+        elsif query = FILTER_TYPES[k.dasherize.to_sym][:query]
+          records = records.where(query + "(#{v})")
+        else
+          records = records.where(k.underscore => v.split(','))
+        end
+      end
+      records
+    end
 
     def types
       categories_operator = Category.where(category_type: 'operator').pluck(:id)
