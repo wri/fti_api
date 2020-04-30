@@ -101,46 +101,112 @@ module V1
     end
 
     def csv
-      records = filtered_records
-      send_data to_csv(records), filename: "observations-#{Date.today}.csv"
+      filters = observation_filters
+      send_data to_csv(filters), filename: "observations-#{Date.today}.csv"
     end
 
     private
 
-    def to_csv(records)
+    # TODO Redo this with AR. This code is a mess
+    def to_csv(filters)
+      observations = Observation.with_translations.where(filters).to_a
+      countries = model_hash(Country, [:id, :name], filters, true )
+      fmus = model_hash(Fmu, [:id, :name], filters, true )
+      observers = model_hash(Observer, [:observation_id, :name], filters, true, true )
+      operators = model_hash(Operator, [:id, :name], filters, true )
+      governments = model_hash(Government, [:observation_id, :government_entity], filters, true, true )
+      subcategories = model_hash(Subcategory, [:id, :name], filters, true)
+      laws = model_hash(Law, [:id, :written_infraction], filters, false)
+      severities = model_hash(Severity, [:id, :level], filters, true)
+      reports = model_hash(ObservationReport, [:id, :title], filters, false)
+      users = model_hash(User, [:id, :name], filters, false)
+
       CSV.generate(headers: true) do |csv|
         csv << %w(id is_active hidden observation_type
-                  status country fmu observers operator governments relevant_operators
+                  status country fmu observers operator governments
                   subcategory law severity publication_date actions_taken details
-                  evidence_type concern_opinion report user modified_user created_at updated_at)
-        records.each do |obs|
-          csv << [obs.id, obs.is_active, obs.hidden, obs.observation_type, obs.status, obs.country&.name,
-                  obs.fmu&.name, obs.observers.pluck(:name).join(' '), obs.operator&.name,
-                  obs.governments.pluck(:government_entity), obs.relevant_operators.pluck(:name).join(' '),
-                  obs.subcategory&.name, obs.law&.written_infraction, obs.severity&.level,
+                  evidence_type concern_opinion report user created_at updated_at)
+        observations.each do |obs|
+          csv << [obs.id, obs.is_active, obs.hidden, obs.observation_type, obs.status,
+                  v(countries, obs.country_id),
+                  v(fmus, obs.fmu_id),
+                  v(observers, obs.id),
+                  v(operators, obs.operator_id),
+                  v(governments, obs.id),
+                  v(subcategories, obs.subcategory_id),
+                  v(laws, obs.law_id),
+                  v(severities, obs.severity_id),
                   obs.publication_date, obs.actions_taken, obs.details, obs.evidence_type,
-                  obs.concern_opinion, obs.observation_report&.title, obs.user&.name, obs.modified_user&.name,
+                  obs.concern_opinion,
+                  v(reports, obs.observation_report_id),
+                  v(users, obs.user_id),
                   obs.created_at, obs.updated_at]
         end
       end
     end
 
+    def v(hash, key)
+      hash[key]
+    rescue
+      nil
+    end
+
+    def model_hash(model, fields, filters, translations = false, has_many = false)
+      if has_many
+        array = model.joins(:observations)
+                     .where(observations: filters)
+                     .pluck(*fields)
+                     .uniq
+                     .map{|x| {x[0] => x[1]}}
+        hash = {}
+        array.each do |elem|
+          if hash[elem.keys.first].blank?
+            hash[elem.keys.first] = elem.values.first
+          else
+            hash[elem.keys.first] = hash[elem.keys.first] + ' ' + elem.values.first
+          end
+        end
+        return hash
+      end
+      if translations
+        return model.with_translations.joins(:observations)
+          .where(observations: filters)
+          .pluck(*fields)
+          .map{|x| {x[0] => x[1]}}
+          .reduce(:merge)
+      end
+      model.joins(:observations)
+          .where(observations: filters)
+          .pluck(*fields)
+          .map{|x| {x[0] => x[1]}}
+          .reduce(:merge)
+    end
+
+    def observation_filters
+      filters = []
+
+      params['filter']&.each do |k, v|
+        next unless valid_params(k, v)
+
+        # Different behavior for when the model attribute is an enum
+        if Observation.public_methods.include? k.pluralize.underscore.to_sym
+          enum_values = v.split(',').map { |e| Observation.public_send(k.pluralize.underscore.to_sym)[e.to_sym] }
+          filters << { k.underscore => enum_values }
+        elsif query = FILTER_TYPES[k.dasherize.to_sym][:query]
+          filters <<  query + "(#{v})"
+        else
+          filters << { k.underscore => v.split(',') }
+        end
+      end
+    end
 
     def filtered_records
-      # TODO: Improve this query
-      #records = Observation.all.joins(:observers, :severity, :observation_report, subcategory: :category)
       records = Observation.all.includes(:translations, :law, :severity, :observation_report, country: :translations,
                                          fmu: :translations,
                                          subcategory: :translations,
                                          operator: :translations,
                                          governments: :translations,
                                          observers: :translations)
-
-      #records = Observation.all.includes(:translations, :law, :severity, :observation_report, country: :translations,
-      #                                   fmu: :translations, subcategory: :translations,
-      #                                   observation_operators: {operator: :translations},
-      #                                   governments_observations: { government: :translations },
-      #                                   observer_observations: { observer: :translations})
 
       params['filter']&.each do |k, v|
         next unless valid_params(k, v)
