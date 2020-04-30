@@ -147,7 +147,7 @@ module V1
 
     def v(hash, key)
       hash[key]
-    rescue
+    rescue StandardError
       nil
     end
 
@@ -157,7 +157,7 @@ module V1
                      .where(observations: filters)
                      .pluck(*fields)
                      .uniq
-                     .map{|x| {x[0] => x[1]}}
+                     .map{ |x| { x[0] => x[1] } }
         hash = {}
         array.each do |elem|
           if hash[elem.keys.first].blank?
@@ -172,13 +172,13 @@ module V1
         return model.with_translations.joins(:observations)
           .where(observations: filters)
           .pluck(*fields)
-          .map{|x| {x[0] => x[1]}}
+          .map{ |x| { x[0] => x[1] } }
           .reduce(:merge)
       end
       model.joins(:observations)
           .where(observations: filters)
           .pluck(*fields)
-          .map{|x| {x[0] => x[1]}}
+          .map{ |x| { x[0] => x[1] } }
           .reduce(:merge)
     end
 
@@ -202,11 +202,11 @@ module V1
 
     def filtered_records
       records = Observation.all.includes(:translations, :law, :severity, :observation_report, country: :translations,
-                                         fmu: :translations,
-                                         subcategory: :translations,
-                                         operator: :translations,
-                                         governments: :translations,
-                                         observers: :translations)
+                                                                                              fmu: :translations,
+                                                                                              subcategory: :translations,
+                                                                                              operator: :translations,
+                                                                                              governments: :translations,
+                                                                                              observers: :translations)
 
       params['filter']&.each do |k, v|
         next unless valid_params(k, v)
