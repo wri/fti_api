@@ -182,7 +182,7 @@ RSpec.describe Operator, type: :model do
           severity: severity,
           operator: @operator,
           country: @country,
-          validation_status: 'Approved')
+          validation_status: 'Published (no comments)')
       end
 
       # Operator without documents and observations to check empty values
