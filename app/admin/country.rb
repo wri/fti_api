@@ -12,7 +12,7 @@ ActiveAdmin.register Country do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:translations])
+      end_of_association_chain.with_translations
     end
   end
 

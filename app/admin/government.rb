@@ -13,7 +13,8 @@ ActiveAdmin.register Government do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:translations, [country: :translations]])
+      end_of_association_chain.with_translations.includes(country: :translations)
+        .where(country_translations: { locale: I18n.locale })
     end
   end
 

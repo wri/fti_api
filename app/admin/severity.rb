@@ -12,7 +12,7 @@ ActiveAdmin.register Severity do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:translations, [subcategory: :translations]])
+      end_of_association_chain.with_translations.includes(subcategory: :translations)
     end
   end
 
