@@ -130,7 +130,10 @@ module V1
 
     # Makes sure the validation status can be only one of the two: created, ready for revision
     def validate_status
-      @model.validation_status = 'Created' unless ['Created', 'Ready for revision'].include?(@model.validation_status)
+      acceptable_statuses =
+        ['Created', 'Ready for revision', 'Published (no comments)',
+         'Published (not modified)', 'Published (modified)']
+      @model.validation_status = 'Created' unless acceptable_statuses.include?(@model.validation_status)
     end
 
     # To allow the filtering of results according to the app and user
