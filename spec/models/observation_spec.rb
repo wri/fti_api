@@ -66,9 +66,6 @@ RSpec.describe Observation, type: :model do
 
   describe 'Enums' do
     it { is_expected.to define_enum_for(:observation_type).with_values(%w[operator government]) }
-    it { is_expected.to define_enum_for(:validation_status).with_values(
-      %w[Created Ready\ for\ revision Under\ revision Approved Rejected]
-    ) }
   end
 
   describe 'Relations' do
@@ -135,7 +132,7 @@ RSpec.describe Observation, type: :model do
     describe '#set_active_status' do
       context 'when validation_status is Approved' do
         it 'set is_active to true' do
-          observation = create(:observation, validation_status: 'Approved')
+          observation = create(:observation, validation_status: 'Published (no comments)')
 
           expect(observation.is_active).to eql true
         end
@@ -143,7 +140,7 @@ RSpec.describe Observation, type: :model do
 
       context 'when validation_status is not Approved' do
         it 'set is_active to false' do
-          observation = create(:observation, validation_status: 'Rejected')
+          observation = create(:observation, validation_status: 'Needs revision')
 
           expect(observation.is_active).to eql false
         end
@@ -184,7 +181,7 @@ RSpec.describe Observation, type: :model do
             severity: severity,
             operator: @operator,
             country: @country,
-            validation_status: 'Approved'
+            validation_status: 'Published (no comments)'
           )
         end
       end
@@ -196,7 +193,7 @@ RSpec.describe Observation, type: :model do
           operator: @operator,
           severity: severity,
           country: @country,
-          validation_status: 'Approved')
+          validation_status: 'Published (no comments)')
 
         expect(@operator.obs_per_visit).to eql(5.0)
         expect(@operator.score_absolute).to eql((4.0 + 4.0 + 2 + 1) / 9.0)

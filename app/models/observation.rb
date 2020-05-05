@@ -44,9 +44,15 @@ class Observation < ApplicationRecord
   active_admin_translates :details, :concern_opinion, :litigation_status
 
   enum observation_type: { "operator" => 0, "government" => 1 }
-  enum validation_status: { "Created" => 0, "Ready for revision" => 1, "Under revision" => 2, "Approved" => 3, "Rejected" => 4 }
-  enum evidence_type: { "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2, "Testimony from local communities" => 3, "Other" => 4, "Evidence presented in the report" => 5, "Maps" => 6 }
-  enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2 }
+  enum validation_status: { "Created" => 0, "Ready for QC" => 1, "QC in progress" => 2, "Approved" => 3,
+                            "Rejected" => 4, "Needs revision" => 5, "Ready for publication" => 6,
+                            "Published (no comments)" => 7, "Published (not modified)" => 8,
+                            "Published (modified)" => 9 }
+  enum evidence_type: { "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2,
+                        "Testimony from local communities" => 3, "Other" => 4, "Evidence presented in the report" => 5,
+                        "Maps" => 6 }
+  enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
+                            "Accurate GPS coordinates" => 2 }
 
 
   belongs_to :country,        inverse_of: :observations
@@ -125,8 +131,8 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :by_category,       ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: { level: level }) }
   scope :by_government,     ->(government_id) { joins(:governments).where(governments: { id: government_id }) }
-  scope :pending,           -> { joins(:translations).where(validation_status: ['Created', 'Under revision']) }
-  scope :created,           -> { joins(:translations).where(validation_status: ['Created', 'Ready for revision']) }
+  scope :pending,           -> { joins(:translations).where(validation_status: ['Created', 'QC in progress']) }
+  scope :created,           -> { joins(:translations).where(validation_status: ['Created', 'Ready for QC']) }
   scope :hidden,            -> { where(hidden: true) }
   scope :visible,           -> { where(hidden: [false, nil]) }
   scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name #{order}") }
@@ -179,7 +185,10 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def set_active_status
-    self.is_active = (self.validation_status == 'Approved' && self.hidden != true)
+    self.is_active = (
+      ["Published (no comments)", "Published (not modified)", "Published (modified)"].include?(validation_status) &&
+          self.hidden != true
+    )
     nil
   end
 
