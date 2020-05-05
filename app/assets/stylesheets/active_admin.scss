@@ -35,6 +35,17 @@ $skinLogo: image_url("logo.svg") no-repeat 0 0;
 // .ActiveAdmin Add-ons
 // ..Colors to enums
 
+// Observations
+$created-color: #c5e3ed;
+$ready-for-qc-color: #08a1cc;
+$qc-in-progress-color: #112ead;
+$needs-revision-color: #8a333a;
+$ready-for-publication-color: #7eb378;
+$published-no-comments-color: #0b6301;
+$published-not-modified-color: #77801b;
+$published-modified-color: #256103;
+
+// Documents
 $pending-color: #FF9900;
 $rejected-color: #FF0000;
 $approved-color: #08A510;
@@ -52,6 +63,17 @@ $to-be-reviewed: #99AA99;
   &.doc_expired { background: $expired-color; }
   &.doc_not_required { background: $not-required-color; }
   &.ready_for_revision { background: $to-be-reviewed; }
+
+  // Observations
+  &.created { background: $created-color; }
+  &.ready_for_qc { background: $ready-for-qc-color; }
+  &.qc_in_progress { background: $qc-in-progress-color; }
+  &.needs_revision { background: $needs-revision-color; }
+  &.ready_for_publication { background: $ready-for-publication-color; }
+  &.published\(no_comments\) { background: $published-no-comments-color; }
+  &.published\(not_modified\) { background: $published-not-modified-color; }
+  &.published\(modified\) { background: $published_modified-color; }
+
 }
 
 // To increase the width of observations-details

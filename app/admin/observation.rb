@@ -37,62 +37,63 @@ ActiveAdmin.register Observation do
                 translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
 
-  member_action :approve, method: :put do
-    resource.update(validation_status: Observation.validation_statuses['Approved'])
+  member_action :ready_for_publication, method: :put do
+    resource.update(validation_status: Observation.validation_statuses['Ready for publication'])
     redirect_to collection_path, notice: 'Observation approved'
   end
 
-  member_action :reject, method: :put do
-    resource.update(validation_status: Observation.validation_statuses['Rejected'])
-    redirect_to collection_path, notice: 'Observation rejected'
+  member_action :needs_revision, method: :put do
+    resource.update(validation_status: Observation.validation_statuses['Needs revision'])
+    redirect_to collection_path, notice: 'Observation needs revision'
   end
 
-  member_action :start_review, method: :put do
-    resource.update(validation_status: Observation.validation_statuses['Under revision'])
-    redirect_to collection_path, notice: 'Observation under revision'
+  member_action :start_qc, method: :put do
+    resource.update(validation_status: Observation.validation_statuses['QC in progress'])
+    redirect_to collection_path, notice: 'QC in progress for observations'
   end
 
-
-  action_item :approve, only: :show do
-    if ['Created', 'Under revision'].include? resource.validation_status
-      link_to 'Approve', approve_admin_observation_path(observation),
-              method: :put, data: { confirm: 'Do you want to APPROVE this observation?' }, notice: 'Observation Approved'
+  action_item :ready_for_publication, only: :show do
+    if resource.validation_status == 'QC in progress'
+      link_to 'Ready for publication', ready_for_publication_admin_observation_path(observation),
+              method: :put, data: { confirm: 'Do you want to mark this observation as ready for publication?' },
+              notice: 'Observation Approved'
     end
   end
 
-  action_item :reject, only: :show do
-    if ['Created', 'Under revision'].include? resource.validation_status
-      link_to 'Reject', reject_admin_observation_path(observation),
-              method: :put, data: { confirm: 'Do you want to REJECT this observation?' }, notice: 'Observation Rejected'
+  action_item :needs_revision, only: :show do
+    if resource.validation_status == 'QC in progress'
+      link_to 'Needs revision', needs_revision_admin_observation_path(observation),
+              method: :put, data: { confirm: 'Do you want to notify the IM this needs revision?' },
+              notice: 'Observation Needs revision'
     end
   end
 
-  action_item :start_review, only: :show do
-    if %w(Created Rejected Approved).include? resource.validation_status
-      link_to 'Start Revision', start_review_admin_observation_path(observation),
-              method: :put, notice: 'Observation Under Revision'
+  action_item :start_qc, only: :show do
+    if resource.validation_status == 'Ready for QC'
+      link_to 'Start QC', start_qc_admin_observation_path(observation),
+              method: :put, notice: 'Observation in QC'
     end
   end
 
-  batch_action :approve, confirm: 'Are you sure you want to approve all these observations?' do |ids|
+  batch_action :start_qc, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: Observation.validation_statuses['Approved'])
+      observation.update(validation_status: Observation.validation_statuses['QC in progress']) if observation.validation_status == 'Ready for QC'
     end
-    redirect_to collection_path, notice: 'Documents approved!'
+    redirect_to collection_path, notice: 'QC started'
   end
 
-  batch_action :reject, confirm: 'Are you sure you want to reject all these observations?' do |ids|
+  batch_action :require_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: Observation.validation_statuses['Rejected'])
+      observation.update(validation_status: Observation.validation_statuses['Needs revision']) if observation.validation_status == 'QC in progress'
     end
-    redirect_to collection_path, notice: 'Documents rejected!'
+    redirect_to collection_path, notice: 'Required revision for observations'
   end
 
-  batch_action :under_revision, confirm: 'Are you sure you want to put all these observations under revision?' do |ids|
+  batch_action :publish, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
     batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: Observation.validation_statuses['Under revision'])
+      observation.update(validation_status: Observation.validation_statuses['Ready for publication']) if observation.validation_status == 'QC in progress'
     end
-    redirect_to collection_path, notice: 'Documents put under revision!'
+    redirect_to collection_path, notice: 'Observations ready to be published'
   end
 
   batch_action :hide, confirm: 'Are you sure you want to hide all the selected observations?' do |ids|
@@ -290,9 +291,9 @@ ActiveAdmin.register Observation do
     column :created_at
     column :updated_at
     column('Actions') do |observation|
-      a 'Approve', href: approve_admin_observation_path(observation),      'data-method': :put if ['Ready for revision', 'Under revision', 'Rejected'].include?(observation.validation_status)
-      a 'Reject',  href: reject_admin_observation_path(observation),       'data-method': :put if ['Ready for revision', 'Under revision', 'Approved'].include?(observation.validation_status)
-      a 'Review',  href: start_review_admin_observation_path(observation), 'data-method': :put if ['Ready for revision', 'Approved', 'Rejected'].include?(observation.validation_status)
+      a 'Start QC', href: start_qc_admin_observation_path(observation),    'data-method': :put if observation.validation_status == 'Ready for QC'
+      a 'Needs revision', href: needs_revision_admin_observation_path(observation), 'data-method': :put if observation.validation_status == 'QC in progress'
+      a 'Ready to publish',  href: ready_for_publication_admin_observation_path(observation), 'data-method': :put if observation.validation_status == 'QC in progress'
     end
     actions
 
