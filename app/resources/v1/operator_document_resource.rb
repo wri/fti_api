@@ -20,6 +20,7 @@ module V1
     filters :type, :status, :operator_id, :current
 
     before_create :set_operator_id, :set_user_id, :set_public
+    before_update :set_status_pending
 
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?
@@ -30,6 +31,10 @@ module V1
 
     def set_public
       @model.public = false
+    end
+
+    def set_status_pending
+      @model.status = :doc_pending
     end
 
     def self.updatable_fields(context)
