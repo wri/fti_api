@@ -2,6 +2,8 @@
 
 # Service to deal with emails
 class MailService
+  extend ActionView::Helpers::TranslationHelper
+
   def self.forgotten_password(user_name, email, reset_url)
     subject = 'Requested link to change your password'
     body =
@@ -70,29 +72,17 @@ TXT
 
   def self.notify_observer_status_changed(observer, observation)
     infractor_text = if observation.observation_type == 'government'
-                       "Type: Government"
+                       t('backend.mail_service.observer_status_changed.government')
                      else
-                       "Producers: #{observation.operator&.name}"
+                       t('backend.mail_service.observer_status_changed.producers') + "#{observation.operator&.name}"
                      end
 
-    text =
-<<~TXT
-  Hello #{observer.name},
-
-  There has been an update of status for an observation you made.
-  The status is now #{observation.validation_status}.
-
-  Observation details:
-  
-  Date: #{observation.publication_date}
-  #{infractor_text}
-  Infraction: #{observation.subcategory&.name}
- 
-  Best,
-   Open Timber Portal
-TXT
+    text = t('backend.mail_service.observer_status_changed.text',
+             observer: observer.name, status: observation.validation_status, date: observation.publication_date,
+             infractor_text: infractor_text, infraction: observation.subcategory&.name)
     observer.users.each do |user|
-      AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user.email, text, 'Observation has been updated'
+      AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user.email, text,
+                                 t('backend.mail_service.observer_status_changed.subject')
     end
   end
 end

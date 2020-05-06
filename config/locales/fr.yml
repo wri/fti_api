@@ -286,7 +286,6 @@ fr:
     administration: 'Admin'
     operators: 'Operators'
     observers: 'Monitors'
-    categories: 'Categories'
     laws: 'Laws'
     governments: 'Governments'
     annex_operators: 'Annex (operators)'
@@ -384,3 +383,21 @@ fr:
     types: 'observation-type'
     info: 'observation-info'
     attachments: 'observation-attachments'
+
+  backend:
+    mail_service:
+      observer_status_changed:
+        producers: 'Exploitants: '
+        government: 'Gouvernance'
+        subject: 'Mise à jour du statut de votre observation'
+        text: "Bonjour %{observer},\n
+
+Le statut de votre observation ci-dessous a changé.\nNouveau statut : %{status}.\n
+
+Observations:\nDate: %{date}
+
+%{infractor_text}\nInfraction: #{infraction}\n
+
+N'hésitez pas à nous contacter si vous avez des questions,\n
+
+Cordialement,\nL'équipe OTP"
