@@ -109,17 +109,23 @@ module V1
 
     # TODO Redo this with AR. This code is a mess
     def to_csv(filters)
-      observations = Observation.with_translations.where(filters).to_a
-      countries = model_hash(Country, [:id, :name], filters, true )
-      fmus = model_hash(Fmu, [:id, :name], filters, true )
-      observers = model_hash(Observer, [:observation_id, :name], filters, true, true )
-      operators = model_hash(Operator, [:id, :name], filters, true )
-      governments = model_hash(Government, [:observation_id, :government_entity], filters, true, true )
-      subcategories = model_hash(Subcategory, [:id, :name], filters, true)
-      laws = model_hash(Law, [:id, :written_infraction], filters, false)
-      severities = model_hash(Severity, [:id, :level], filters, true)
-      reports = model_hash(ObservationReport, [:id, :title], filters, false)
-      users = model_hash(User, [:id, :name], filters, false)
+      records = Observation.with_translations.
+          joins(:severity, :observers, subcategory: :category)
+      filters.each do |filter|
+        records = records.where(filter)
+      end
+
+      observations = records.to_a
+      countries = model_hash(Country, [:id, :name], records, true )
+      fmus = model_hash(Fmu, [:id, :name], records, true )
+      observers = model_hash(Observer, ['observations.id', :name], records, true, true )
+      operators = model_hash(Operator, [:id, :name], records, true )
+      governments = model_hash(Government, ['observations.id', :government_entity], records, true, true )
+      subcategories = model_hash(Subcategory, [:id, :name], records, true)
+      laws = model_hash(Law, [:id, :written_infraction], records, false)
+      severities = model_hash(Severity, [:id, :level], records, true)
+      reports = model_hash(ObservationReport, [:id, :title], records, false)
+      users = model_hash(User, [:id, :name], records, false)
 
       CSV.generate(headers: true) do |csv|
         csv << %w(id is_active hidden observation_type
@@ -151,10 +157,10 @@ module V1
       nil
     end
 
-    def model_hash(model, fields, filters, translations = false, has_many = false)
+    def model_hash(model, fields, records, translations = false, has_many = false)
       if has_many
         array = model.joins(:observations)
-                     .where(observations: filters)
+                     .merge(records)
                      .pluck(*fields)
                      .uniq
                      .map{ |x| { x[0] => x[1] } }
@@ -170,13 +176,13 @@ module V1
       end
       if translations
         return model.with_translations.joins(:observations)
-          .where(observations: filters)
+          .merge(records)
           .pluck(*fields)
           .map{ |x| { x[0] => x[1] } }
           .reduce(:merge)
       end
       model.joins(:observations)
-          .where(observations: filters)
+          .merge(records)
           .pluck(*fields)
           .map{ |x| { x[0] => x[1] } }
           .reduce(:merge)
@@ -198,6 +204,7 @@ module V1
           filters << { k.underscore => v.split(',') }
         end
       end
+      filters
     end
 
     def filtered_records
