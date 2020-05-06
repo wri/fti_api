@@ -128,10 +128,10 @@ module V1
     end
 
 
-    # Makes sure the validation status can be only one of the two: created, ready for revision
+    # Makes sure the validation status can be an acceptable one
     def validate_status
       acceptable_statuses =
-        ['Created', 'Ready for revision', 'Published (no comments)',
+        ['Created', 'Ready for QC', 'Published (no comments)',
          'Published (not modified)', 'Published (modified)']
       @model.validation_status = 'Created' unless acceptable_statuses.include?(@model.validation_status)
     end
