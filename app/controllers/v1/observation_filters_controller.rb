@@ -7,6 +7,7 @@ module V1
     skip_before_action :authenticate
 
     FILTER_TYPES = {
+        'validation-status': { type: /Published \(no comments\)|Published \(not modified\)|Published \(modified\)/ },
         'observation-type': { type: /operator|government/ },
         'country-id': { type: Integer },
         'fmu-id': { type: Integer },
@@ -43,6 +44,7 @@ module V1
       ]
 
       filters = {
+          'validation_status': ["Published (no comments)", "Published (not modified)", "Published (modified)"],
           'observation_type': types,
           'country_id': country_ids,
           'fmu_id': fmu_ids,
