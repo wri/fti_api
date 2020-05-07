@@ -112,7 +112,7 @@ module V1
     # TODO Redo this with AR. This code is a mess
     def to_csv(filters)
       records = Observation.with_translations.
-          joins(:severity, :observers, subcategory: :category)
+          joins(:severity, :observers, subcategory: :category).active
       filters.each do |filter|
         records = records.where(filter)
       end
