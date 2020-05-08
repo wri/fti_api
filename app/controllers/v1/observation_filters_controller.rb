@@ -44,7 +44,7 @@ module V1
       ]
 
       filters = {
-          'validation_status': ["Published (no comments)", "Published (not modified)", "Published (modified)"],
+          'validation_status': validation_statuses,
           'observation_type': types,
           'country_id': country_ids,
           'fmu_id': fmu_ids,
@@ -242,6 +242,14 @@ module V1
 
     def report_ids
       ObservationReport.all.map { |x| { id: x.id, name: x.title } }.sort_by { |x| x[:title] }
+    end
+
+    def validation_statuses
+      [
+          { id: 7, name: "Published (no comments)" },
+          { id: 8, name: "Published (not modified)" },
+          { id: 9, name: "Published (modified)" }
+      ].sort_by { |x| x[:name]}
     end
 
     def government_ids
