@@ -42,13 +42,17 @@ RSpec.describe OperatorDocumentCountry, type: :model do
     describe '#invalidate_operator' do
       context 'when operator is approved' do
         it 'set approved field to false on the operator' do
-          operator = create(:operator, approved: true)
+          country = create(:country)
+          operator = create(:operator, approved: true, country: country)
           required_operator_document =
-            create(:required_operator_document, contract_signature: true)
-          create(:operator_document_country,
+            create(:required_operator_document_country, contract_signature: true, country: country)
+          operator_document = create(:operator_document_country,
                  required_operator_document: required_operator_document,
-                 operator: operator)
+                 operator: operator, current: true)
 
+          operator_document.status = :doc_valid
+          operator_document.save
+          expect(operator_document.status).to eql('doc_valid')
           operator.reload
           expect(operator.approved).to eql false
         end
