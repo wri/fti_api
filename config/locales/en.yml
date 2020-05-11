@@ -12,7 +12,7 @@ en:
         one: "Successfully deleted 1 %{model}"
         other: "Successfully deleted %{count} %{plural_model}"
       labels:
-        destroy: "Archive"
+        destroy: "Delete"
     fmus:
       esri_file_upload: "The zip file must contain at least the following files:\\n
       .shp — shape format; the feature geometry itself {content-type: x-gis/x-shapefile}\\n
