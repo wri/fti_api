@@ -36,6 +36,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     column :required_operator_document_group
     column :country
     column :type
+    column :forest_type
     column :name
 
     actions

@@ -249,7 +249,7 @@ module V1
           { id: 7, name: "Published (no comments)" },
           { id: 8, name: "Published (not modified)" },
           { id: 9, name: "Published (modified)" }
-      ].sort_by { |x| x[:name]}
+      ].sort_by { |x| x[:name] }
     end
 
     def government_ids
