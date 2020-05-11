@@ -12,7 +12,13 @@ fr:
         one: "Successfully deleted 1 %{model}"
         other: "Successfully deleted %{count} %{plural_model}"
       labels:
-        destroy: "Archive"
+        destroy: "Delete"
+    fmus:
+      esri_file_upload: "The zip file must contain at least the following files:\\n
+      .shp — shape format; the feature geometry itself {content-type: x-gis/x-shapefile}\\n
+      .shx — shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly {content-type: x-gis/x-shapefile}\\n
+      .dbf — attribute format; columnar attributes for each shape, in dBase IV format {content-type: application/octet-stream OR text/plain}\\n
+      .prj — projection description, using a well-known text representation of coordinate reference systems {content-type: text/plain OR application/text}"
     active_admin_paranoia:
       batch_actions:
         restore_confirmation: "Are you sure you want to restore these %{plural_model}?"
