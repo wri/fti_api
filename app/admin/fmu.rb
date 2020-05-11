@@ -80,6 +80,7 @@ ActiveAdmin.register Fmu do
     f.inputs 'Fmu Details' do
       f.input :country,  input_html: { disabled: object.persisted? }
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
+      render partial: 'zip_hint'
       # TODO This needs a better approach
       f.has_many :operators, new_record: false do |o|
         o.input :name, input_html: { disabled: true }
