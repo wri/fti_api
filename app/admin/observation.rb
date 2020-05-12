@@ -4,6 +4,9 @@ ActiveAdmin.register Observation do
   extend BackRedirectable
   back_redirect
 
+  extend Versionable
+  versionate
+
   menu false
 
   config.order_clause

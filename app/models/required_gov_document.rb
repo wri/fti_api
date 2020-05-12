@@ -18,10 +18,11 @@
 #
 
 class RequiredGovDocument < ApplicationRecord
+  has_paper_trail
   includes Translatable
   acts_as_paranoid
 
-  translates :explanation, paranoia: true, touch: true
+  translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
   # rubocop:disable Style/BlockDelimiters
   active_admin_translates :explanation do; end
   # rubocop:enable Style/BlockDelimiters

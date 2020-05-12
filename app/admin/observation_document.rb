@@ -4,6 +4,9 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   extend BackRedirectable
   back_redirect
 
+  extend Versionable
+  versionate
+
   menu false
 
   actions :show, :index

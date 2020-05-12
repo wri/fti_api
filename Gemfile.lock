@@ -193,6 +193,11 @@ GEM
       activemodel (>= 4.2, < 5.2)
       activerecord (>= 4.2, < 5.2)
       request_store (~> 1.0)
+    globalize-versioning (0.4.0)
+      activemodel (>= 4.2.0, < 6.1)
+      activerecord (>= 4.2.0, < 6.1)
+      globalize (>= 5.1.0, < 6)
+      paper_trail (>= 8, < 12)
     has_scope (0.7.2)
       actionpack (>= 4.1)
       activesupport (>= 4.1)
@@ -269,6 +274,9 @@ GEM
     oj (3.10.2)
     oj_mimic_json (1.0.1)
     orm_adapter (0.5.0)
+    paper_trail (10.3.1)
+      activerecord (>= 4.2)
+      request_store (~> 1.1)
     parallel (1.19.1)
     paranoia (2.4.2)
       activerecord (>= 4.0, < 6.1)
@@ -550,6 +558,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   globalize (= 5.1.0)
+  globalize-versioning
   jsonapi-resources (= 0.9.0)
   jwt
   listen (~> 3.0.5)
@@ -558,6 +567,7 @@ DEPENDENCIES
   oink
   oj
   oj_mimic_json
+  paper_trail
   paranoia (~> 2.2)
   pg (~> 0.18)
   pry-rails

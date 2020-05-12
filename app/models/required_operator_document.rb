@@ -20,10 +20,11 @@
 #
 
 class RequiredOperatorDocument < ApplicationRecord
+  has_paper_trail
   include ForestTypeable
   acts_as_paranoid
 
-  translates :explanation, paranoia: true, touch: true
+  translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
   active_admin_translates :explanation
 
   belongs_to :required_operator_document_group
