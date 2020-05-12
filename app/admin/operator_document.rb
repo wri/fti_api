@@ -9,6 +9,8 @@ ActiveAdmin.register OperatorDocument do
 
   active_admin_paranoia
 
+  sidebar :versionate, partial: 'layouts/version', only: :show
+
   scope_to do
     Class.new do
       def self.operator_documents
@@ -24,6 +26,13 @@ ActiveAdmin.register OperatorDocument do
                    [fmu: :translations],
                    [required_operator_document:
                       [required_operator_document_group: :translations, country: :translations]]])
+    end
+
+    def show
+      @operator_document = OperatorDocument.includes(versions: :item).find(params[:id])
+      @versions = @operator_document.versions
+      @operator_document = @operator_document.versions[params[:version].to_i].reify if params[:version]
+      show! #it seems to need this
     end
   end
 
