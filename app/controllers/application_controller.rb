@@ -2,6 +2,8 @@
 
 
 class ApplicationController < ActionController::Base
+  before_action :set_paper_trail_whodunnit
+
   protect_from_forgery
 
   # Active admin permissions
@@ -27,5 +29,11 @@ class ApplicationController < ActionController::Base
 
   def set_admin_locale
     I18n.locale = :en
+  end
+
+  protected
+
+  def user_for_paper_trail
+    current_user.present? ? current_user.try(:id) : 'Unknown user'
   end
 end

@@ -4,10 +4,15 @@ ActiveAdmin.register OperatorDocument do
   extend BackRedirectable
   back_redirect
 
+  extend Versionable
+  versionate
+
   menu false
   config.order_clause
 
   active_admin_paranoia
+
+  #sidebar :versionate, partial: 'layouts/version', only: :show
 
   scope_to do
     Class.new do

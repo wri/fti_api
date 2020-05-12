@@ -15,6 +15,7 @@
 #
 
 class ObservationReport < ApplicationRecord
+  has_paper_trail
   mount_base64_uploader :attachment, ObservationReportUploader
   acts_as_paranoid
 

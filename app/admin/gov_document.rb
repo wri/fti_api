@@ -4,6 +4,9 @@ ActiveAdmin.register GovDocument do
   extend BackRedirectable
   back_redirect
 
+  extend Versionable
+  versionate
+
   menu false
   config.order_clause
 

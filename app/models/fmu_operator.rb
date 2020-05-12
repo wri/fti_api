@@ -15,6 +15,7 @@
 #
 
 class FmuOperator < ApplicationRecord
+  has_paper_trail
   include DateHelper
 
   belongs_to :fmu,        optional: false

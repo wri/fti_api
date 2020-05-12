@@ -6,6 +6,9 @@ ActiveAdmin.register FmuOperator do
 
   menu false
 
+  extend Versionable
+  versionate
+
   actions :show, :edit, :index, :update, :new, :create
 
   permit_params :fmu_id, :operator_id, :current, :start_date, :end_date

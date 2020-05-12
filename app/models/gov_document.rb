@@ -23,6 +23,7 @@
 #
 
 class GovDocument < ApplicationRecord
+  has_paper_trail
   acts_as_paranoid
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }

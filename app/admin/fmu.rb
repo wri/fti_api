@@ -4,6 +4,9 @@ ActiveAdmin.register Fmu do
   extend BackRedirectable
   back_redirect
 
+  extend Versionable
+  versionate
+
   menu false
 
   active_admin_paranoia

@@ -12,6 +12,7 @@
 #
 
 class GovernmentsObservation < ApplicationRecord
+  has_paper_trail
   belongs_to :observation
   belongs_to :government
 end
