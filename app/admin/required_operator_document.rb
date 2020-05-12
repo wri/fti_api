@@ -4,6 +4,9 @@ ActiveAdmin.register RequiredOperatorDocument do
   extend BackRedirectable
   back_redirect
 
+  extend Versionable
+  versionate
+
   menu false
 
   active_admin_paranoia

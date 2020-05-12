@@ -80,8 +80,8 @@ gem 'sendgrid-ruby'
 gem 'rubyzip'
 
 # Changes monitoring
-gem 'paper_trail'
 gem 'globalize-versioning'
+gem 'paper_trail'
 
 group :development, :test do
   gem 'byebug',                    platform: :mri

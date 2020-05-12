@@ -11,7 +11,9 @@ module Versionable
         variable = model.includes(versions: :item).find(params[:id])
         @versions = variable.versions
         variable = variable.versions[params[:version].to_i].reify if params[:version]
-        eval("@#{var_name} = variable")
+        # rubocop:disable Security/Eval
+        binding.eval("@#{var_name} = variable")
+        # rubocop:enable Security/Eval
         show! #it seems to need this
       end
     end
