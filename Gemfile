@@ -76,8 +76,12 @@ gem 'appsignal'
 # Mail
 gem 'sendgrid-ruby'
 
-# file utilites
+# File utilities
 gem 'rubyzip'
+
+# Changes monitoring
+gem 'paper_trail'
+gem 'globalize-versioning'
 
 group :development, :test do
   gem 'byebug',                    platform: :mri

@@ -30,8 +30,9 @@
 #
 
 class Operator < ApplicationRecord
+  has_paper_trail
   include Translatable
-  translates :name, :details, touch: true
+  translates :name, :details, touch: true, versioning: :paper_trail
   active_admin_translates :name, :details do
     validates_presence_of :name
   end

@@ -20,6 +20,7 @@
 #
 
 class OperatorDocumentAnnex < ApplicationRecord
+  has_paper_trail
   acts_as_paranoid
 
   mount_base64_uploader :attachment, OperatorDocumentAnnexUploader

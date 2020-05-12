@@ -27,12 +27,13 @@ require_relative '../../lib/file_data_import/parser/zip'
 require_relative '../../lib/file_data_import/parser/shp'
 require_relative '../../lib/file_data_import/parser/base'
 class Fmu < ApplicationRecord
+  has_paper_trail
   acts_as_paranoid
 
   include ValidationHelper
   include Translatable
   include ForestTypeable
-  translates :name, paranoia: true, touch: true
+  translates :name, paranoia: true, touch: true, versioning: :paper_trail
 
   attr_reader :esri_shapefiles_zip
 

@@ -13,6 +13,7 @@
 #
 
 class GovFile < ApplicationRecord
+  has_paper_trail
   acts_as_paranoid
 
   belongs_to :gov_document, -> { with_archived }, required: true

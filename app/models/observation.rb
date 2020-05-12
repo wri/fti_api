@@ -36,11 +36,12 @@
 #
 
 class Observation < ApplicationRecord
+  has_paper_trail
   include Translatable
   include Activable
   include ValidationHelper
 
-  translates :details, :concern_opinion, :litigation_status, touch: true
+  translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail
   active_admin_translates :details, :concern_opinion, :litigation_status
 
   enum observation_type: { "operator" => 0, "government" => 1 }

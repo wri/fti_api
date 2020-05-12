@@ -23,8 +23,9 @@
 #
 
 class Observer < ApplicationRecord
+  has_paper_trail
   include Translatable
-  translates :name, :organization, touch: true
+  translates :name, :organization, touch: true, versioning: :paper_trail
   
 
   active_admin_translates :name do
