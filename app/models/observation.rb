@@ -30,6 +30,9 @@
 #  location_accuracy     :integer
 #  evidence_on_report    :string
 #  hidden                :boolean          default("false")
+#  admin_comment         :text
+#  monitor_comment       :text
+#  responsible_admin_id  :integer
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string
@@ -82,6 +85,8 @@ class Observation < ApplicationRecord
   has_many :comments,  as: :commentable, dependent: :destroy
   has_many :photos,    as: :attacheable, dependent: :destroy
   has_many :observation_documents
+
+  belongs_to :responsible_admin,  class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
 
   accepts_nested_attributes_for :photos,                       allow_destroy: true
   accepts_nested_attributes_for :observation_documents,        allow_destroy: true

@@ -11,7 +11,7 @@ module V1
                :lat, :lng, :country_id, :fmu_id, :location_information,
                :subcategory_id, :severity_id, :created_at, :updated_at,
                :actions_taken, :validation_status, :is_physical_place,
-               :complete, :hidden
+               :complete, :hidden, :admin_comment, :monitor_comment
 
     has_many :species
     has_many :comments
