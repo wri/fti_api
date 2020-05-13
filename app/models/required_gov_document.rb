@@ -15,6 +15,7 @@
 #  updated_at                     :datetime         not null
 #  required_gov_document_id       :integer          not null
 #  explanation                    :text
+#  deleted_at                     :datetime
 #
 
 class RequiredGovDocument < ApplicationRecord

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200512140241) do
+ActiveRecord::Schema.define(version: 20200513084250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -700,6 +700,9 @@ ActiveRecord::Schema.define(version: 20200512140241) do
     t.integer  "location_accuracy"
     t.string   "evidence_on_report"
     t.boolean  "hidden",                default: false
+    t.text     "admin_comment"
+    t.text     "monitor_comment"
+    t.integer  "responsible_admin_id"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["hidden"], name: "index_observations_on_hidden", using: :btree
@@ -1333,7 +1336,7 @@ ActiveRecord::Schema.define(version: 20200512140241) do
   add_foreign_key "observations", "laws"
   add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"
-  add_foreign_key "observations", "users", column: "modified_user_id"
+  add_foreign_key "observations", "users"
   add_foreign_key "operator_documents", "fmus"
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
