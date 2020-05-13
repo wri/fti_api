@@ -122,8 +122,8 @@ class Observation < ApplicationRecord
   after_save     :update_fmu_geojson
   after_destroy  :update_fmu_geojson
 
-  after_save       :prepare_notify_observer
-  after_commit     :notify_observer
+  after_save       :prepare_notifications
+  after_commit     :notify
 
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
@@ -241,15 +241,27 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     fmu.save
   end
 
-  def prepare_notify_observer
-    @notify_observer = true if validation_status_changed?
+  def prepare_notifications
+    @notify = true if validation_status_changed?
   end
 
-  def notify_observer
-    return unless @notify_observer
+  def notify
+    return unless @notify
 
+    notify_observers
+    notify_qc
+  end
+
+  def notify_observers
     observers.each do |observer|
       MailService.notify_observer_status_changed(observer, self)
     end
+  end
+
+  def notify_qc
+    return unless ["Published (not modified)", "Published (modified)"].include? validation_status
+    return unless responsible_admin&.email
+
+    MailService.notify_admin_published(self)
   end
 end

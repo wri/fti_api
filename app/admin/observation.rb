@@ -34,7 +34,7 @@ ActiveAdmin.register Observation do
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
-                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment,
+                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :responsible_admin_id,
                 observer_ids: [], relevant_operators: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
@@ -325,6 +325,10 @@ ActiveAdmin.register Observation do
     government = object.government_ids.present? ? true : false
 
     f.semantic_errors *f.object.errors.keys
+    f.inputs 'Management' do
+      f.input :responsible_admin, as: :select,
+                                  collection: User.joins(:user_permission).where(user_permissions: { user_role: :admin })
+    end
     f.inputs 'Info' do
       f.input :id, input_html: { disabled: true }
     end
@@ -360,7 +364,6 @@ ActiveAdmin.register Observation do
       f.input :lng
       f.input :admin_comment
       f.input :monitor_comment, input_html: { disabled: true }
-      f.input :responsible_admin, as: :select
       f.input :observation_report, as: :select
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
         f.input :evidence_type, as: :select
