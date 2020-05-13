@@ -85,4 +85,19 @@ TXT
                                  t('backend.mail_service.observer_status_changed.subject')
     end
   end
+
+  def self.notify_admin_published(observation)
+    subject = 'The operator responded to your requested changes'
+    text =
+<<~TXT
+  Hello,
+  
+  #{observation.operator&.name} has responded to your requested changes.
+  The status is now: #{observation.validation_status}.
+  
+  Please check it in the backoffice.
+TXT
+
+    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], observation.responsible_admin.email, text, subject
+  end
 end

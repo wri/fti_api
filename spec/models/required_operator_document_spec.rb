@@ -15,6 +15,7 @@
 #  contract_signature                  :boolean          default("false"), not null
 #  required_operator_document_id       :integer          not null
 #  explanation                         :text
+#  deleted_at                          :datetime
 #
 
 require 'rails_helper'

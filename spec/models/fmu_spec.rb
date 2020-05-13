@@ -19,6 +19,7 @@
 #  deleted_at           :datetime
 #  certification_ls     :boolean          default("false")
 #  name                 :string
+#  deleted_at           :datetime
 #
 
 require 'rails_helper'

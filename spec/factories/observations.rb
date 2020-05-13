@@ -28,6 +28,9 @@
 #  location_accuracy     :integer
 #  evidence_on_report    :string
 #  hidden                :boolean          default("false")
+#  admin_comment         :text
+#  monitor_comment       :text
+#  responsible_admin_id  :integer
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string

@@ -34,7 +34,7 @@ ActiveAdmin.register Observation do
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
-                :law_id, :fmu_id, :hidden,
+                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :responsible_admin_id,
                 observer_ids: [], relevant_operators: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
@@ -209,6 +209,8 @@ ActiveAdmin.register Observation do
     column :modified_user do |observation|
       observation.modified_user&.name
     end
+    column :admin_comment
+    column :monitor_comment
     column :created_at
     column :updated_at
   end
@@ -289,6 +291,9 @@ ActiveAdmin.register Observation do
       title = o.observation_report.title[0..100] + (o.observation_report.title.length >= 100 ? '...' : '') if o.observation_report&.title
       link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
+    column :admin_comment
+    column :monitor_comment
+    column :responsible_admin
     column :user, sortable: 'users.name'
     column :modified_user
     column :created_at
@@ -308,8 +313,8 @@ ActiveAdmin.register Observation do
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
                                       details evidence_type evidences evidence_on_report concern_opinion pv location_accuracy
-                                      lat lng is_physical_place litigation_status report user
-                                      modified_user created_at updated_at] }
+                                      lat lng is_physical_place litigation_status report admin_comment monitor_comment
+                                      responsible_admin user modified_user created_at updated_at] }
     end
   end
 
@@ -320,6 +325,10 @@ ActiveAdmin.register Observation do
     government = object.government_ids.present? ? true : false
 
     f.semantic_errors *f.object.errors.keys
+    f.inputs 'Management' do
+      f.input :responsible_admin, as: :select,
+                                  collection: User.joins(:user_permission).where(user_permissions: { user_role: :admin })
+    end
     f.inputs 'Info' do
       f.input :id, input_html: { disabled: true }
     end
@@ -353,6 +362,8 @@ ActiveAdmin.register Observation do
       f.input :location_accuracy, as: :select
       f.input :lat
       f.input :lng
+      f.input :admin_comment
+      f.input :monitor_comment, input_html: { disabled: true }
       f.input :observation_report, as: :select
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
         f.input :evidence_type, as: :select
@@ -414,6 +425,9 @@ ActiveAdmin.register Observation do
       row :lng
       row :actions_taken
       row :observation_report
+      row :admin_comment
+      row :monitor_comment
+      row :responsible_admin
       row :user
       row :modified_user
       row :created_at
