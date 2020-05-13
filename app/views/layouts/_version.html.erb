@@ -4,7 +4,7 @@
   <b>Created At:</b>
   <%= @versions.last.created_at%>
   <br>
-  <b>User</b>: <%= User.find(@versions.last.whodunnit).email %>
+  <b>User</b>: <%= User.find(@versions.last.whodunnit).email rescue '' %>
   <br>
   <% if @versions.length.to_i > 1 %>
     <% if params[:version].to_i > 1 || !params[:version] %>
@@ -18,7 +18,7 @@
       <%= @versions[(params[:version].to_i - 1)].created_at %>
       <br>
       <b>User</b>:
-      <%= User.find(@versions[(params[:version].to_i - 1)].whodunnit).email %>
+      <%= User.find(@versions[(params[:version].to_i - 1)].whodunnit).email rescue '' %>
       <br>
 
       <%= link_to "Go to current version"%>
