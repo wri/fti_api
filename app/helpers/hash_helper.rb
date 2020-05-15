@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HashHelper
   def self.aggregate(array)
     result = {}

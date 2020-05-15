@@ -139,11 +139,13 @@ ActiveAdmin.register Observation do
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
   filter :fmu, as: :select, label: 'Fmus',
-         collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name')}
+               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :governments, as: :select, label: 'Government Entity',
-         collection: -> { Government.with_translations(I18n.locale)
-                            .order('government_translations.government_entity')
-                            .pluck('government_translations.government_entity', :id)}
+                       collection: -> { 
+  Government.with_translations(I18n.locale)
+       .order('government_translations.government_entity')
+       .pluck('government_translations.government_entity', :id)
+}                     
   filter :subcategory_category_id_eq,
          label: 'Category', as: :select,
          collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
@@ -152,7 +154,7 @@ ActiveAdmin.register Observation do
          collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :observers, label: 'Observers', as: :select,
-         collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
+                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :observation_report,
          label: 'Report', as: :select,
          collection: ObservationReport.order(:title)
@@ -224,14 +226,14 @@ ActiveAdmin.register Observation do
     render partial: 'hidden_filters', locals: {
         filter: {
             categories: {
-                subcategories: HashHelper.aggregate(Subcategory.uniq.pluck(:category_id, :id).map{ |x| {x.first => x.last} })
+                subcategories: HashHelper.aggregate(Subcategory.uniq.pluck(:category_id, :id).map{ |x| { x.first => x.last } })
             },
             countries: {
-                government_entities: HashHelper.aggregate(Government.pluck(:country_id, :id).map{ |x| {x.first => x.last}}),
-                operators: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| {x.first => x.last}}),
-                fmus: HashHelper.aggregate(Fmu.pluck(:country_id, :id).map{ |x| {x.first => x.last}})
+                government_entities: HashHelper.aggregate(Government.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
+                operators: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
+                fmus: HashHelper.aggregate(Fmu.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
             },
-              operators: { fmus: HashHelper.aggregate(Fmu.joins(:operators).pluck('operators.id', :id).map{ |x| {x.first => x.last}}) }
+            operators: { fmus: HashHelper.aggregate(Fmu.joins(:operators).pluck('operators.id', :id).map{ |x| { x.first => x.last } }) }
         }
     }
     selectable_column
