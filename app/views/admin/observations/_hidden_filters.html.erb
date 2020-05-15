@@ -1,0 +1,108 @@
+<style>
+  li[aria-disabled='true'] {
+    display: none;
+  }
+</style>
+<script>
+const filters = <%= raw(filter.to_json) %>;
+
+$('#q_country_id').on('change', onChangeCountry);
+$('#q_subcategory_category_id_eq').on('change', onChangeCategory);
+$('#q_operator_id').on('change', onChangeOperator);
+
+function onChangeOperator(e) {
+  const operatorId = e.target.value;
+
+  // Update Fmus
+  const fmus = filters.operators.fmus[operatorId];
+  Array.from($('#q_fmu_id').select2()[0].options).forEach( fmu => {
+    if(operatorId === "") {
+      $(fmus).prop('disabled', false);
+    } else {
+      if (fmus === undefined || !fmus.includes(parseInt(fmu.value))) {
+        $(fmu).prop('disabled',true);
+      } else {
+        $(fmu).prop('disabled',false);
+      }
+    }
+  });
+  $('#q_fmu_id').val("");
+  $('#q_fmu_id').trigger('change');
+}
+
+
+function onChangeCategory(e) {
+  const categoryId = e.target.value;
+
+  // Update subcategory
+  const subcategories = filters.categories.subcategories[categoryId];
+
+  Array.from($('#q_subcategory_id').select2()[0].options).forEach( sub => {
+    if(categoryId === "") {
+      $(sub).prop('disabled',false);
+    } else {
+      if (subcategories === undefined || !subcategories.includes(parseInt(sub.value))) {
+        $(sub).prop('disabled',true);
+      } else {
+        $(sub).prop('disabled',false);
+      }
+    }
+  });
+  $('#q_subcategory_id').val("");
+  $('#q_subcategory_id').trigger('change');
+}
+
+function onChangeCountry(e) {
+  const countryId = e.target.value;
+
+  // Update Government
+  const governments = filters.countries.government_entities[countryId];
+  Array.from($('#q_government_ids').select2()[0].options).forEach( gov => {
+    if(countryId === "") {
+      $(gov).prop('disabled',false);
+    } else {
+      if (governments == undefined || !governments.includes(parseInt(gov.value))) {
+        $(gov).prop('disabled',true);
+      } else {
+        $(gov).prop('disabled',false);
+      }
+    }
+  });
+  $('#q_government_ids').val("");
+  $('#q_government_ids').trigger('change');
+
+  // Update Operator
+  const operators = filters.countries.operators[countryId];
+  Array.from($('#q_operator_id').select2()[0].options).forEach( op => {
+    if(countryId === "") {
+      $(op).prop('disabled', false);
+    } else {
+      if (operators == undefined || !operators.includes(parseInt(op.value))) {
+        $(op).prop('disabled',true);
+      } else {
+        $(op).prop('disabled',false);
+      }
+    }
+  });
+  $('#q_operator_id').val("");
+  $('#q_operator_id').trigger('change');
+
+  // Update FMU
+  const fmus = filters.countries.fmus[countryId];
+  Array.from($('#q_fmu_id').select2()[0].options).forEach( fmu => {
+    if(countryId === "") {
+      $(fmu).prop('disabled', false);
+    } else {
+      if (fmus === undefined || !fmus.includes(parseInt(fmu.value))) {
+        $(fmu).prop('disabled',true);
+      } else {
+        $(fmu).prop('disabled',false);
+      }
+    }
+  });
+
+  $('#q_fmu_id').val("");
+  $('#q_fmu_id').trigger('change');
+
+}
+</script>

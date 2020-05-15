@@ -123,6 +123,13 @@ ActiveAdmin.register OperatorDocument do
   end
 
   index do
+    render partial: 'hidden_filters', locals: {
+        filter: {
+            countries: {
+                operators: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
+            }
+        }
+    }
     bool_column :exists do |od|
       od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
     end
