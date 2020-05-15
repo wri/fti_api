@@ -1,0 +1,26 @@
+<script>
+const filters = <%= raw(filter.to_json) %>;
+
+$('#q_country_id').on('change', onChangeCountry);
+
+
+function onChangeCountry(e) {
+  console.log('entrou');
+  console.log(e);
+  const countryId = e.target.value;
+
+  // Update Government
+  const governments = filters.countries.government_entities[countryId];
+  Array.from($('#q_government_ids').select2()[0].options).forEach( gov => {
+    if (governments.includes(parseInt(gov.value))) {
+      $(gov).prop('disabled',false);
+    } else {
+      $(gov).prop('disabled',true);
+    }
+  });
+  // Update Producer
+
+  // Update FMU
+
+}
+</script>
