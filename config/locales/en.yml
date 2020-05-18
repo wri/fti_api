@@ -418,7 +418,7 @@ en:
         subject: 'Observation Status Update'
         text: "Hello %{observer},\n
 
-Your observation below has a new status.\nThe status is now %{status}.\n
+Your observation below (%{id}) has a new status.\nThe status is now %{status}.\n
 
 Observation details:\nDate: %{date}\n
 

@@ -420,7 +420,7 @@ fr:
         subject: 'Mise à jour du statut de votre observation'
         text: "Bonjour %{observer},\n
 
-Le statut de votre observation ci-dessous a changé.\nNouveau statut : %{status}.\n
+Le statut de votre observation (%{id}) ci-dessous a changé.\nNouveau statut : %{status}.\n
 
 Observations:\nDate: %{date}
 
