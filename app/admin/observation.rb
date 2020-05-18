@@ -12,6 +12,15 @@ ActiveAdmin.register Observation do
   config.order_clause
   config.per_page = [10, 20, 40, 80, 160, 360]
 
+  before_filter only: :index do
+    if params[:per_page]
+      @per_page = params[:per_page]
+      session[:obs_per_page] = @per_page
+    else
+      @per_page = session[:obs_per_page] || 10
+    end
+  end
+
   scope_to do
     Class.new do
       def self.observations
