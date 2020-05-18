@@ -78,8 +78,9 @@ TXT
                      end
 
     text = t('backend.mail_service.observer_status_changed.text',
-             observer: observer.name, status: observation.validation_status, date: observation.publication_date,
-             infractor_text: infractor_text, infraction: observation.subcategory&.name)
+             id: observation.id, observer: observer.name, status: observation.validation_status,
+             date: observation.publication_date, infractor_text: infractor_text,
+             infraction: observation.subcategory&.name)
     observer.users.each do |user|
       AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], user.email, text,
                                  t('backend.mail_service.observer_status_changed.subject')
