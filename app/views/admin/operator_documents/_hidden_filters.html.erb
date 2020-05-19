@@ -26,5 +26,21 @@
     });
     $('#q_operator_id').val("");
     $('#q_operator_id').trigger('change');
+
+    // Update Required Operator Documents
+    const rods = filters.countries.required_operator_documents[countryId];
+    Array.from($('#q_required_operator_document_id').select2()[0].options).forEach( rod => {
+      if(countryId === "") {
+        $(rod).prop('disabled', false);
+      } else {
+        if (rods == undefined || !rods.includes(parseInt(rod.value))) {
+          $(rod).prop('disabled',true);
+        } else {
+          $(rod).prop('disabled',false);
+        }
+      }
+    });
+    $('#q_required_operator_document_id').val("");
+    $('#q_required_operator_document_id').trigger('change');
   }
 </script>
