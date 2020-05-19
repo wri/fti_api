@@ -43,7 +43,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
   end
 
-  actions :all, except: [:destroy, :new, :create]
+  actions :all, except: [:destroy, :new]
   permit_params :name, :operator_document_id, :status, :expire_date, :start_date,
                 :attachment, :uploaded_by
 

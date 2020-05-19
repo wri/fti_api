@@ -39,7 +39,7 @@ ActiveAdmin.register Observation do
     end
   end
 
-  actions :all, except: [:new, :create]
+  actions :all, except: [:new]
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy,

@@ -44,7 +44,7 @@ ActiveAdmin.register GovDocument do
   end
 
 
-  actions :all, except: [:destroy, :new, :create]
+  actions :all, except: [:destroy, :new]
   permit_params :status, :reason, :start_date, :expire_date, :current,
                 :uploaded_by, :link, :value, :units,
                 gov_files_attributes: [:id, :attachment, :_destroy]

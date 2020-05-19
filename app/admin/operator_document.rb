@@ -61,7 +61,7 @@ ActiveAdmin.register OperatorDocument do
     end
   end
 
-  actions :all, except: [:destroy, :new, :create]
+  actions :all, except: [:destroy, :new]
   permit_params :name, :public, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
                 :attachment, :uploaded_by, :reason, :note, :response_date
