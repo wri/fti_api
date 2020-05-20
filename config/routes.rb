@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get '/api/admin', to: redirect('/admin') # TODO Temp fix for a server redirection
+
   devise_for :users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
 
   root to: "home#index"
 
   match 'admin/fmus/preview' => 'admin/fmus#preview', via: :post
-  get '/api/admin', to: redirect('/admin') # TODO Temp fix for a server redirection
 
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
