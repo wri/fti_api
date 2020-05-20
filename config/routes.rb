@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   match 'admin/fmus/preview' => 'admin/fmus#preview', via: :post
+  get '/api/admin', to: redirect('/admin') # TODO Temp fix for a server redirection
 
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
