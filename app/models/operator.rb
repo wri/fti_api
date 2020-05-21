@@ -208,9 +208,13 @@ class Operator < ApplicationRecord
         previous_percentage = nil
         country.fa_operators.order(percentage_valid_documents_all: :desc).each_with_index do |o, index|
           if o.percentage_valid_documents_all.present?
-            if o.percentage_valid_documents_all != previous_percentage
-              rank = index + 1
-              previous_percentage = o.percentage_valid_documents_all
+            if o.percentage_valid_documents_all == 0
+              rank = number_of_operators
+            else
+              if o.percentage_valid_documents_all != previous_percentage
+                rank = index + 1
+                previous_percentage = o.percentage_valid_documents_all
+              end
             end
           else
             rank = number_of_operators
