@@ -108,6 +108,27 @@ ActiveAdmin.register Observation do
     redirect_to collection_path, notice: 'Observations ready to be published'
   end
 
+  batch_action :publish_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
+    batch_action_collection.find(ids).each do |observation|
+      observation.update(validation_status: 'Published (no comments)')
+    end
+    redirect_to collection_path, notice: 'Observations published without comments'
+  end
+
+  batch_action :publish_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
+    batch_action_collection.find(ids).each do |observation|
+      observation.update(validation_status: 'Published (not modified)')
+    end
+    redirect_to collection_path, notice: 'Observations published without modifications'
+  end
+
+  batch_action :publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
+    batch_action_collection.find(ids).each do |observation|
+      observation.update(validation_status: 'Published (modified)')
+    end
+    redirect_to collection_path, notice: 'Observations published with modifications'
+  end
+
   batch_action :hide, confirm: 'Are you sure you want to hide all the selected observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(hidden: true)
