@@ -101,4 +101,19 @@ TXT
 
     AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], observation.responsible_admin.email, text, subject
   end
+
+  def self.notify_responsible(observation)
+    subject = "Observation created with id #{observation.id}"
+    text =
+<<~TXT
+Hello,
+
+The observation with the id #{observation.id} is ready for QC.
+Please check it in the back office.
+
+Best,
+OTP
+TXT
+    AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], ENV['RESPONSIBLE_EMAIL'], text, subject
+  end
 end

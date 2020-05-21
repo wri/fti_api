@@ -248,6 +248,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def notify
     return unless @notify
 
+    notify_responsible
     notify_observers
     notify_qc
   end
@@ -256,6 +257,12 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     observers.each do |observer|
       MailService.notify_observer_status_changed(observer, self)
     end
+  end
+
+  def notify_responsible
+    return unless validation_status == 'Ready for QC'
+
+    MailService.notify_responsible(self)
   end
 
   def notify_qc
