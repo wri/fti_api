@@ -6,7 +6,7 @@ ActiveAdmin.register Country do
 
   menu false
 
-  actions :show, :index, :edit, :update
+  actions :show, :index, :edit, :update, :create
 
   config.order_clause
 

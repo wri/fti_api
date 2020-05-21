@@ -44,7 +44,7 @@ ActiveAdmin.register RequiredGovDocument do
 
   filter :required_gov_document_group
   filter :country
-  filter :document_type, as: :select
+  filter :document_type, as: :select, collection: RequiredGovDocument.document_types
   filter :name, as: :select
   filter :updated_at
 

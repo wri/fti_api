@@ -9,7 +9,7 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
 
   menu false
 
-  actions :show, :index
+  actions :show, :index, :create
 
   config.order_clause
 

@@ -9,7 +9,7 @@ ActiveAdmin.register ObservationReport do
 
   menu false
 
-  actions :show, :index, :update, :edit
+  actions :show, :index, :update, :edit, :create
 
   permit_params :user_id, :title, :publication_date, :attachment
 
