@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       jsonapi_resources :tutorials, only: [:index, :show] do; end
       jsonapi_resources :how_tos, only: [:index, :show] do; end
       jsonapi_resources :tools, only: [:index, :show] do; end
+      jsonapi_resources :country_links, only: [:index, :show] do; end
       jsonapi_resources :required_gov_documents do; end
       jsonapi_resources :gov_documents do; end
       jsonapi_resources :gov_files, only: [:create, :destroy] do; end
