@@ -79,6 +79,7 @@ TXT
 
     text = t('backend.mail_service.observer_status_changed.text',
              id: observation.id, observer: observer.name, status: observation.validation_status,
+             status_fr: I18n.t("activerecord.enums.observation.statuses.#{observation.validation_status}", locale: :fr),
              date: observation.publication_date, infractor_text: infractor_text,
              infraction: observation.subcategory&.name)
     observer.users.each do |user|
