@@ -37,7 +37,7 @@ ActiveAdmin.register Sawmill do
   scope :inactive
 
   filter :operator, label: 'Operator', as: :select,
-         collection: -> { Operator.joins(:sawmills).with_translations(I18n.locale).order('operator_translations.name') }
+                    collection: -> { Operator.joins(:sawmills).with_translations(I18n.locale).order('operator_translations.name') }
   filter :name
 
 
