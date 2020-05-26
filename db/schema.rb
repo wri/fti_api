@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200513084250) do
+ActiveRecord::Schema.define(version: 20200526093602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,27 @@ ActiveRecord::Schema.define(version: 20200513084250) do
     t.index ["country_id", "observer_id"], name: "index_countries_observers_on_country_id_and_observer_id", using: :btree
     t.index ["country_id", "observer_id"], name: "index_unique_country_observer", unique: true, using: :btree
     t.index ["observer_id", "country_id"], name: "index_countries_observers_on_observer_id_and_country_id", using: :btree
+  end
+
+  create_table "country_link_translations", force: :cascade do |t|
+    t.integer  "country_link_id", null: false
+    t.string   "locale",          null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "name"
+    t.text     "description"
+    t.index ["country_link_id"], name: "index_country_link_translations_on_country_link_id", using: :btree
+    t.index ["locale"], name: "index_country_link_translations_on_locale", using: :btree
+  end
+
+  create_table "country_links", force: :cascade do |t|
+    t.string   "url"
+    t.boolean  "active",     default: true
+    t.integer  "position"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "country_id"
+    t.index ["country_id"], name: "index_country_links_on_country_id", using: :btree
   end
 
   create_table "country_translations", force: :cascade do |t|
@@ -1318,6 +1339,7 @@ ActiveRecord::Schema.define(version: 20200513084250) do
 
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
+  add_foreign_key "country_links", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
   add_foreign_key "gov_documents", "users", on_delete: :cascade

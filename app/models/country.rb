@@ -42,6 +42,8 @@ class Country < ApplicationRecord
   has_many :required_gov_documents
   has_many :gov_documents, -> { actual }
 
+  has_many :country_links, inverse_of: :country
+
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 
   before_save :set_active

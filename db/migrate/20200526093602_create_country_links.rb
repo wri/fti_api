@@ -12,23 +12,15 @@ class CreateCountryLinks < ActiveRecord::Migration[5.0]
                    index: true
     end
 
-    reversible do |dir|
-      dir.up do
-        CountryLink.create_translation_table!(
-            {
-                name: :string,
-                description: :text
-            },
-            {
-                migrate_data: true,
-                remove_source_columns: true
-            }
-        )
-      end
-
-      dir.down do
-        CountryLink.drop_translation_table! migrate_data: true
-      end
-    end
+    CountryLink.create_translation_table!(
+        {
+            name: :string,
+            description: :text
+        },
+        {
+            migrate_data: true,
+            remove_source_columns: true
+        }
+    )
   end
 end
