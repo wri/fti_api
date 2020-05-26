@@ -32,6 +32,19 @@ en:
     restore_confirmation: "Are you sure you want to restore this?"
     something_wrong: "Something went wrong. Please try again"
   activerecord:
+    enums:
+      observation:
+        statuses:
+          Created: "Created"
+          Ready for QC: "Ready for QC"
+          QC in progress: "QC in progress"
+          Approved: "Approved"
+          Rejected: "Rejected"
+          Needs revision: "Needs revision"
+          Ready for publication: "Ready for publication"
+          Published (no comments): "Published (no comments)"
+          Published (not modified): "Published (not modified)"
+          Published (modified): "Published (modified)"
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"
@@ -426,4 +439,21 @@ Observation details:\nDate: %{date}\n
 
 Feel free to contact us if you have any questions,\n
 
-Best,\nOTP Team"
+Best,\nOTP Team\n
+
+----------------------------------------------------\n
+
+Bonjour %{observer},\n
+
+Le statut de votre observation (%{id}) ci-dessous a changé.\nNouveau statut : %{status_fr}.\n
+
+Observations:\nDate: %{date}
+
+%{infractor_text}\nInfraction: #{infraction}\n
+
+N'hésitez pas à nous contacter si vous avez des questions,\n
+
+Cordialement,\nL'équipe OTP
+
+
+"

@@ -192,7 +192,7 @@ ActiveAdmin.register OperatorDocument do
   filter :public
   filter :id
   filter :required_operator_document_country_id, label: 'Country', as: :select,
-         collection: Country.with_translations(I18n.locale).order('country_translations.name')
+                                                 collection: Country.with_translations(I18n.locale).order('country_translations.name')
   filter :required_operator_document,
          collection: RequiredOperatorDocument.
              joins(country: :translations)

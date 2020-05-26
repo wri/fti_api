@@ -37,6 +37,19 @@ fr:
         fr: "Français"
         zh-CN: "Chinois"
   activerecord:
+    enums:
+      observation:
+        statuses:
+          Created: "Crée"
+          Ready for QC: "Prêt pour le contrôle de qualité"
+          QC in progress: "Contrôle de qualité en cours"
+          Approved: "Approuvé"
+          Rejected: "Rejeté"
+          Needs revision: "Necesite une revision"
+          Ready for publication: "Prêt pour le revision"
+          Published (no comments): "Publié (sans commentaire)"
+          Published (not modified): "Publié (sans modification)"
+          Published (modified): "Publié (modifié)"
     errors:
       messages:
         record_invalid: 'La validation a échoué : %{errors}'
