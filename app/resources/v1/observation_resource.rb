@@ -34,6 +34,7 @@ module V1
     after_create :add_own_observer
     before_save  :set_modified
     before_save  :validate_status
+    before_save  :set_publication_date
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
@@ -159,6 +160,13 @@ module V1
       else
         Observation.active
       end
+    end
+
+    def set_publication_date
+      return unless ['Published (no comments)', 'Published (not modified)',
+                     'Published (modified)'].include? @model.validation_status
+
+      @model.publication_date = Time.now
     end
   end
 end
