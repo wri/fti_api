@@ -15,8 +15,33 @@ ActiveAdmin.register_page "Dashboard" do
     redirect_to admin_dashboard_path, notice: 'Deploying IM Backoffice'
   end
 
+  page_action :hide_old_observations, method: :post do
+    system 'rake observations:hide' if current_user.user_permission.user_role == 'admin'
+    redirect_to admin_dashboard_path, notice: 'Hiding old observations'
+  end
+
   content title: proc{ I18n.t("active_admin.dashboard") } do
     if current_user.user_permission.user_role == 'admin'
+      obs_count = Observation.where('publication_date < ? and hidden = false', Date.today - 5.year).count
+
+      unless obs_count.zero?
+        columns do
+          button_to 'Hide old observations', '/admin/dashboard/hide_old_observations', method: :post,
+                                                                                       data: { confirm: 'Are you sure you want to hide old observations?' },
+                                                                                       class: 'deploy-button'
+        end
+        panel "Old observations (#{obs_count})" do
+          table_for Observation.where('publication_date < ?', Date.today - 5.year).order(publication_date: :desc).limit(20) do
+            column('ID') { |obs| link_to obs.id, admin_observation_path(obs.id) }
+            column('Publication Date') { |obs| obs.publication_date }
+            column('Country') { |obs| obs.country }
+            column('Subcategory') { |obs| obs.subcategory }
+            column('Operator') { |obs| obs.operator }
+            column('Date') { |obs| obs.publication_date.strftime("%A, %d/%b/%Y") }
+          end
+        end
+      end
+
       columns do
         column do
           panel 'Portal' do
@@ -78,7 +103,6 @@ ActiveAdmin.register_page "Dashboard" do
             column('Subcategory') { |obs| obs.subcategory }
             column('Operator') { |obs| obs.operator }
             column('Date') { |obs| obs.publication_date.strftime("%A, %d/%b/%Y") }
-
           end
         end
       end
@@ -106,7 +130,7 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
     end
-    section "Recently updated content" do
+    panel "Recently updated content" do
       table_for PaperTrail::Version.order(id: :desc).limit(20) do # Use PaperTrail::Version if this throws an error
         column("Item") { |v| v.item }
         # column ("Item") { |v| link_to v.item, [:admin, v.item] } # Uncomment to display as link
