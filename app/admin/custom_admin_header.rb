@@ -72,6 +72,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
               li { link_to 'Required Document Group',  admin_required_gov_document_groups_path }
               li { link_to 'Required Documents',       admin_required_gov_documents_path }
               li { link_to 'Documents',                admin_gov_documents_path }
+              li { link_to 'Links',                    admin_country_links_path }
             end
           end
         end
