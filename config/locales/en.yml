@@ -428,7 +428,7 @@ en:
       observer_status_changed:
         producers: 'Producers: '
         government: 'Type: Government'
-        subject: 'Observation Status Update'
+        subject: 'Observation Status Update / Mise à jour du statut de votre observation'
         text: "Hello %{observer},\n
 
 Your observation below (%{id}) has a new status.\nThe status is now %{status}.\n
