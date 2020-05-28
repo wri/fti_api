@@ -38,8 +38,12 @@ module V1
 
     filters :id, :observation_type, :fmu_id, :country_id,
             :publication_date, :observer_id, :subcategory_id, :years,
-            :observation_report, :law, :operator, :hidden,
-            :subcategory, :is_active, :validation_status, :is_physical_place
+            :observation_report, :law, :operator, :subcategory,
+            :is_active, :validation_status, :is_physical_place
+
+    filter :hidden, apply: ->(records, value, _options) {
+      records.unscope(where: :hidden).where(hidden: value)
+    }
 
     filter :category_id, apply: ->(records, value, _options) {
       records.by_category(value)
@@ -158,7 +162,7 @@ module V1
           Observation.active
         end
       else
-        Observation.active
+        Observation.active.where(hidden: false)
       end
     end
 
