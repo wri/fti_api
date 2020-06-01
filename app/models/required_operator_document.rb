@@ -62,7 +62,7 @@ class RequiredOperatorDocument < ApplicationRecord
     return unless self.persisted?
 
     errors.add(:contract_signature, 'Cannot change the contract signature') if contract_signature_changed?
-    errors.add(:forest_type, 'Cannot change the forest type') if forest_type_changed?
+    errors.add(:forest_types, 'Cannot change the forest type') if forest_types_changed?
     errors.add(:type, 'Cannot change document type') if type_changed?
     errors.add(:country_id, 'Cannot change the country') if country_id_changed?
   end
