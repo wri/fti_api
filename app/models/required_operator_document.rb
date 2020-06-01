@@ -22,7 +22,7 @@
 
 class RequiredOperatorDocument < ApplicationRecord
   has_paper_trail
-  include ForestTypeable
+  include ArrayForestTypeable
   acts_as_paranoid
 
   translates :explanation, paranoia: true, touch: true, versioning: :paper_trail

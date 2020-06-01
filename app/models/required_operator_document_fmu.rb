@@ -21,7 +21,7 @@
 #
 
 class RequiredOperatorDocumentFmu < RequiredOperatorDocument
-  include ForestTypeable
+  include ArrayForestTypeable
   has_many :operator_document_fmus, foreign_key: 'required_operator_document_id'
 
   validates :contract_signature, absence: true
