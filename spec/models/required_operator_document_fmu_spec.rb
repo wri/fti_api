@@ -27,8 +27,6 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
     expect(required_operator_document_fmu).to be_valid
   end
 
-  it_should_behave_like 'forest_typeable', RequiredOperatorDocumentFmu
-
   describe 'Relations' do
     it { is_expected.to have_many(:operator_document_fmus).with_foreign_key('required_operator_document_id') }
   end
@@ -55,7 +53,7 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
         expect(RequiredOperatorDocumentFmu.all.size).to eql 0
 
         create(:required_operator_document_fmu,
-          forest_type: nil,
+          forest_types: [],
           country: @country,
           required_operator_document_group: @required_operator_document_group)
 

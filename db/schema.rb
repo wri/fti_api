@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200526093602) do
+ActiveRecord::Schema.define(version: 20200601091015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1008,11 +1008,11 @@ ActiveRecord::Schema.define(version: 20200526093602) do
     t.datetime "updated_at",                                          null: false
     t.integer  "valid_period"
     t.datetime "deleted_at"
-    t.integer  "forest_type"
+    t.integer  "forest_types",                        default: [],                 array: true
     t.boolean  "contract_signature",                  default: false, null: false
     t.index ["contract_signature"], name: "index_required_operator_documents_on_contract_signature", using: :btree
     t.index ["deleted_at"], name: "index_required_operator_documents_on_deleted_at", using: :btree
-    t.index ["forest_type"], name: "index_required_operator_documents_on_forest_type", using: :btree
+    t.index ["forest_types"], name: "index_required_operator_documents_on_forest_types", using: :btree
     t.index ["required_operator_document_group_id"], name: "index_req_op_doc_group_id", using: :btree
     t.index ["type"], name: "index_required_operator_documents_on_type", using: :btree
   end

@@ -27,8 +27,6 @@ RSpec.describe RequiredOperatorDocument, type: :model do
     expect(required_operator_document).to be_valid
   end
 
-  it_should_behave_like 'forest_typeable', RequiredOperatorDocument
-
   it_should_behave_like 'translatable', FactoryBot.create(:required_operator_document), %i[explanation]
 
   describe 'Relations' do
@@ -48,7 +46,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
           @required_operator_document = create(
             :required_operator_document,
             contract_signature: false,
-            forest_type: 1,
+            forest_types: [:fmu],
             type: 'RequiredOperatorDocument')
         end
 
@@ -65,10 +63,10 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
         context 'when forest_type has changed' do
           it 'add an error on forest_type' do
-            @required_operator_document.update_attributes(forest_type: 0)
+            @required_operator_document.update_attributes(forest_types: [0])
 
             expect(@required_operator_document.valid?).to eql false
-            expect(@required_operator_document.errors[:forest_type]).to eql(
+            expect(@required_operator_document.errors[:forest_types]).to eql(
               ['Cannot change the forest type']
             )
           end
