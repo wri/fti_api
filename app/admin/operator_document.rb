@@ -32,6 +32,20 @@ ActiveAdmin.register OperatorDocument do
     end
   end
 
+  batch_action :make_private, confirm: 'Are you sure you want to make the selected documents PRIVATE?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(public: false)
+    end
+    redirect_to collection_path, notice: 'Documents are now private!'
+  end
+
+  batch_action :make_public, confirm: 'Are you sure you want to make the selected documents PUBLIC?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(public: true)
+    end
+    redirect_to collection_path, notice: 'Documents are now public!'
+  end
+
   member_action :approve, method: :put do
     if resource.reason.present?
       resource.update(status: OperatorDocument.statuses[:doc_not_required])
@@ -132,6 +146,7 @@ ActiveAdmin.register OperatorDocument do
             }
         }
     }
+    selectable_column
     bool_column :exists do |od|
       od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
     end
