@@ -10,6 +10,8 @@ module V1
 
     attributes :position, :url, :name, :description, :country_id
 
+    filter :country
+
     def self.default_sort
       [{ field: :position, direction: :asc }]
     end
