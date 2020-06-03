@@ -35,7 +35,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     bool_column :exists do |rod|
       rod.deleted_at.nil?
     end
-    column :contract_signature
+    column 'Public Authorization', :contract_signature
     column :required_operator_document_group
     column :country
     column :type
@@ -47,7 +47,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     actions
   end
 
-  filter :contract_signature, as: :select, collection: [['True', true], ['False', false]]
+  filter :contract_signature, label: 'public authorization', as: :select, collection: [['True', true], ['False', false]]
   filter :required_operator_document_group
   filter :country
   filter :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu)
@@ -60,7 +60,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     f.inputs 'Required Operator Document Details' do
       editing = object.new_record? ? false : true
       f.input :required_operator_document_group
-      f.input :contract_signature, input_html: { disabled: editing }
+      f.input :contract_signature, label: 'Public Authorization', input_html: { disabled: editing }
       f.input :country, input_html: { disabled: editing }
       f.input :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu),
                      include_blank: false, input_html: { disabled: editing }
