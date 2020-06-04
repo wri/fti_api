@@ -32,7 +32,7 @@ ActiveAdmin.register Fmu do
 
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
-                :certification_ls, :esri_shapefiles_zip, :country_id,
+                :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
@@ -84,6 +84,9 @@ ActiveAdmin.register Fmu do
       f.input :country,  input_html: { disabled: object.persisted? }
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
       render partial: 'zip_hint'
+      f.input :forest_type, as: :select,
+              collection: Fmu::FOREST_TYPES.map {|_, h| [h[:label], h[:index]]},
+              input_html: { disabled: object.persisted? }
       # TODO This needs a better approach
       f.has_many :operators, new_record: false do |o|
         o.input :name, input_html: { disabled: true }

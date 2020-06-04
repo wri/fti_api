@@ -22,7 +22,6 @@ function updateFields() {
       forestTypes.prop('disabled', false);
       forestTypes.parent().show();
 
-      console.log(countryList[country])
       Array.from(forestTypes.select2({width: '80%'})[0].options).forEach( op => {
         if (countryList[country].includes(parseInt(op.value))) {
           $(op).prop('disabled', false);
