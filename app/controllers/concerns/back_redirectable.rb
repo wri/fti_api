@@ -14,16 +14,20 @@ module BackRedirectable
       end
 
       def update
-        update! do |format|
-          redirect = session.delete(:return_to) || collection_path
-          format.html { redirect_to redirect, notice: "#{resource.model_name.human} was successfully updated." }
+        update! do |success, failure|
+          success.html do
+            redirect = session.delete(:return_to) || collection_path
+            redirect_to redirect, notice: "#{resource.model_name.human} was successfully updated."
+          end
         end
       end
 
       def create
-        create! do |format|
-          redirect = session.delete(:return_to) || collection_path
-          format.html { redirect_to redirect, notice: "#{resource.model_name.human} was successfully created." }
+        create! do |success, failure|
+          success.html do
+            redirect = session.delete(:return_to) || collection_path
+            redirect_to redirect, notice: "#{resource.model_name.human} was successfully created."
+          end
         end
       end
 
