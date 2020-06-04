@@ -17,7 +17,7 @@ module V1
     end
 
     def self.records(options = {})
-      CountryLink.where(active: true)
+      CountryVpa.where(active: true)
     end
 
     def custom_links(_)
