@@ -43,6 +43,7 @@ class Country < ApplicationRecord
   has_many :gov_documents, -> { actual }
 
   has_many :country_links, inverse_of: :country
+  has_many :country_vpas, inverse_of: :country
 
   validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
 
