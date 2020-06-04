@@ -18,7 +18,7 @@ class FmuOperator < ApplicationRecord
   has_paper_trail
   include DateHelper
 
-  belongs_to :fmu,        optional: false
+  belongs_to :fmu,        optional: true
   belongs_to :operator,   optional: false
 
   before_validation     :set_current_start_date
@@ -28,7 +28,6 @@ class FmuOperator < ApplicationRecord
   validate :non_colliding_dates
 
   after_save :update_documents_list
-
 
   # Sets the start date as today, if none is provided
   def set_current_start_date
@@ -46,13 +45,15 @@ class FmuOperator < ApplicationRecord
 
   # Ensures only one operator is active per fmu
   def one_active_per_fmu
-    return false if fmu.blank? || !current || fmu.fmu_operators.where(current: true).none?
+    return true if fmu.blank? || !current || fmu.fmu_operators.where(current: true).where.not(fmu_id: fmu_id).none?
+    return true unless fmu.persisted?
 
     errors.add(:current, 'There can only be one active operator at a time')
   end
 
   # Makes sure the dates don't collide
   def non_colliding_dates
+    return true if fmu.blank? || !fmu.persisted?
     dates = FmuOperator.where(fmu_id: self.fmu_id).where.not(id: self.id).pluck(:start_date, :end_date)
     dates << [self.start_date, self.end_date]
 

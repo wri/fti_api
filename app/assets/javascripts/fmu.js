@@ -7,30 +7,27 @@ $(document).ready(function() {
 
 function updateFmuFields() {
   const countryList = {
-    7: [0],
-    45: [0, 1, 2, 3],
-    47: [0],
-    53: [0, 4, 5]
+    45: ['ufa', 'cf', 'vdc'],
+    53: ['cpaet', 'cfad']
   }
   var forestTypes = $('#fmu_forest_type');
   var country = $('#fmu_country_id').val();
 
   if (country in countryList) {
-    forestTypes.prop('disabled', false);
-    forestTypes.parent().show();
-
-    Array.from(forestTypes.select2({width: '80%'})[0].options).forEach( op => {
-      if (countryList[country].includes(parseInt(op.value))) {
+    Array.from(forestTypes.select2({width: '80%'})[0].options).forEach(op => {
+      if (countryList[country].includes(op.value)) {
         $(op).prop('disabled', false);
       } else {
         $(op).prop('disabled', true);
       }
     })
-    forestTypes.val([])
-    forestTypes.select2({width: '80%'}).trigger('change')
+  } else{
+    Array.from(forestTypes.select2({width: '80%'})[0].options).forEach(op => {
+      $(op).prop('disabled', true);
+    })
   }
-  else {
-    forestTypes.prop('disabled', true);
-    forestTypes.parent().hide();
-  }
+  $(forestTypes.select2({width: '80%'})[0].options[1]).prop('disabled', false)
+
+  forestTypes.val([])
+  forestTypes.select2({width: '80%'}).trigger('change')
 }
