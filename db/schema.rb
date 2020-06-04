@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200601091015) do
+ActiveRecord::Schema.define(version: 20200604090002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -219,6 +219,27 @@ ActiveRecord::Schema.define(version: 20200601091015) do
     t.string   "region_name"
     t.index ["country_id"], name: "index_country_translations_on_country_id", using: :btree
     t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
+  end
+
+  create_table "country_vpa_translations", force: :cascade do |t|
+    t.integer  "country_vpa_id", null: false
+    t.string   "locale",         null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "name"
+    t.text     "description"
+    t.index ["country_vpa_id"], name: "index_country_vpa_translations_on_country_vpa_id", using: :btree
+    t.index ["locale"], name: "index_country_vpa_translations_on_locale", using: :btree
+  end
+
+  create_table "country_vpas", force: :cascade do |t|
+    t.string   "url"
+    t.boolean  "active",     default: true
+    t.integer  "position"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "country_id"
+    t.index ["country_id"], name: "index_country_vpas_on_country_id", using: :btree
   end
 
   create_table "county", primary_key: "cntyidfp", id: :string, limit: 5, force: :cascade do |t|
@@ -1340,6 +1361,7 @@ ActiveRecord::Schema.define(version: 20200601091015) do
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade
+  add_foreign_key "country_vpas", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
   add_foreign_key "gov_documents", "users", on_delete: :cascade
