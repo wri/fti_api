@@ -1,4 +1,7 @@
 $(document).ready(function() {
+  if (document.getElementById('fmu_forest_type') == null){
+    return
+  }
   updateFmuFields();
   $('#fmu_country_id').on('change', function(){
     updateFmuFields();

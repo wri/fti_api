@@ -64,9 +64,14 @@ ActiveAdmin.register RequiredOperatorDocument do
       f.input :country, input_html: { disabled: editing }
       f.input :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu),
                      include_blank: false, input_html: { disabled: editing }
-      f.input :forest_types, as: :select, multiple: true,
-                             collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] },
-                             include_blank: true, input_html: { disabled: editing }
+      if editing
+        f.input :forest_types, as: :string, input_html: { disabled: editing }
+      else
+        f.input :forest_types, as: :select, multiple: true,
+                collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] },
+                include_blank: true
+      end
+
       f.input :name
       f.input :valid_period, label: 'Validity (days)'
       f.inputs 'Translated fields' do

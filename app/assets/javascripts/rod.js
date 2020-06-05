@@ -1,14 +1,17 @@
 $(document).ready(function() {
-  updateFields();
+  if (document.getElementById('required_operator_document_country_id').getAttribute('disabled') == ""){
+    return;
+  }
+  updateRODFields();
   $('#required_operator_document_type_input').on('change', function(){
-    updateFields();
+    updateRODFields();
   })
   $('#required_operator_document_country_id').on('change', function(){
-    updateFields();
+    updateRODFields();
   })
 })
 
-function updateFields() {
+function updateRODFields() {
   const countryList = {
     53: [4, 5],
     45: [1, 2, 3]
