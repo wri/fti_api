@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredGovDocumentGroup do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :all, except: :destroy

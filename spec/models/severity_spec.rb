@@ -7,75 +7,46 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  subcategory_id :integer
+#  details        :text
 #
 
 require 'rails_helper'
 
 RSpec.describe Severity, type: :model do
-  context 'On annex governance' do
-    before :each do
-      I18n.locale = :en
-      @annex = create(:annex_governance)
-      FactoryGirl.create(:severity, severable: @annex, level: 2)
-      @severity = create(:severity, severable: @annex)
-    end
+  subject(:severity) { FactoryBot.build(:severity) }
 
-    it 'Count on severity' do
-      expect(Severity.count).to           eq(2)
-      expect(Severity.all.first.level).to eq(2)
-    end
+  it_should_behave_like 'translatable', FactoryBot.create(:severity), %i[details]
 
-    it 'Order by level asc' do
-      expect(Severity.by_level_asc.first.level).to eq(1)
-    end
-
-    it 'Access severable information' do
-      expect(@severity.severable.governance_pillar).to eq('Annex governance pillar')
-      expect(@severity.level_details).to               eq('1 - Lorem ipsum..')
-      expect(@annex.severities.size).to                eq(2)
-    end
-
-    it 'Fallbacks for empty translations on severity' do
-      I18n.locale = :fr
-      expect(@severity.details).to eq('Lorem ipsum..')
-      I18n.locale = :en
-    end
-
-    it 'Fetch all severities' do
-      expect(Severity.fetch_all(nil).count).to eq(2)
-    end
-
-    it 'Severity select for annex governance' do
-      expect(Severity.severity_select(annex_governance_id: @annex.id).size).to eq(2)
-    end
-
-    it 'Translate severity to fr' do
-      I18n.locale = :en
-      @severity.update(details: 'Lorem ipsum.. FR', locale: :fr)
-      I18n.locale = :fr
-      expect(@severity.details).to eq('Lorem ipsum.. FR')
-      I18n.locale = :en
-      expect(@severity.details).to eq('Lorem ipsum..')
-    end
-
-    it 'Level and details validation' do
-      @severity = Severity.new(level: '', details: '')
-
-      @severity.valid?
-      expect { @severity.save! }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Level can't be blank")
-    end
+  it 'is valid with valid attributes' do
+    expect(severity).to be_valid
   end
 
-  context 'On annex governance' do
-    before :each do
-      I18n.locale = :en
-      @annex = create(:annex_operator)
-      FactoryGirl.create(:severity, severable: @annex, level: 2)
-      @severity = create(:severity, severable: @annex)
+  describe 'Relations' do
+    it { is_expected.to belong_to(:subcategory).inverse_of(:severities).required }
+    it { is_expected.to have_many(:observations).inverse_of(:severity) }
+  end
+
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:level) }
+    it { is_expected.to validate_uniqueness_of(:level).scoped_to(:subcategory_id) }
+    it { is_expected.to validate_numericality_of(:level)
+      .is_greater_than_or_equal_to(0)
+      .is_less_than_or_equal_to(3)
+      .only_integer
+    }
+  end
+
+  describe 'Instance methods' do
+    describe '#level_details' do
+      it 'return level with details' do
+        expect(severity.level_details).to eql "#{severity.level} - #{severity.details}"
+      end
     end
 
-    it 'Severity select for annex governance' do
-      expect(Severity.severity_select(annex_operator_id: @annex.id).size).to eq(2)
+    describe '#cache_key' do
+      it 'return the default value with the locale' do
+        expect(severity.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+      end
     end
   end
 end

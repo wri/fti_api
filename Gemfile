@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.4.6'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -14,33 +14,41 @@ gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
 gem 'activeadmin'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
-gem 'activeadmin_addons'
+gem 'activeadmin_addons', '1.5'
+
+gem 'sass-rails'
+gem 'sassc-rails'
+
+# Active Admin skins
+gem 'active_skin'
 
 # WYSIWYG
 gem 'activeadmin_quill_editor'
 
 gem 'devise'
 
-
 # Soft Delete
 gem 'paranoia', "~> 2.2"
 
-# Active Admin skins
-gem 'active_skin'
-
-
 # Rails and DB
+gem 'activerecord-postgis-adapter'
 gem 'pg',    '~> 0.18'
 gem 'rails', '~> 5.0.2'
 
 # API
-gem 'jsonapi-resources'
+gem 'jsonapi-resources', '0.9.0'
 gem 'oj'
 gem 'oj_mimic_json'
 
+# API Documentation
+gem 'rspec_api_documentation'
+gem 'rswag-api'
+gem 'rswag-ui'
+
+
 # Data
 gem 'activerecord-import'
-gem 'globalize',                   github: 'globalize/globalize'
+gem 'globalize', '5.1.0'
 gem 'seed-fu'
 
 # Validation
@@ -62,14 +70,26 @@ gem 'slim-rails'
 gem 'newrelic_rpm'
 gem 'oink'
 
+# Monitoring
+gem 'appsignal'
+
 # Mail
 gem 'sendgrid-ruby'
+
+# File utilities
+gem 'rubyzip'
+
+# Changes monitoring
+gem 'globalize-versioning'
+gem 'paper_trail'
 
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
   gem 'rails-erd'
   gem 'rubocop',                   require: false
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'webmock'
 end
 
@@ -94,9 +114,10 @@ group :test do
   gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'rspec-activejob'
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 4.0.1'
   gem 'simplecov'
   gem 'timecop'
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: required_operator_documents
@@ -13,14 +14,18 @@
 #  valid_period                        :integer
 #  deleted_at                          :datetime
 #  forest_type                         :integer
-#  contract_signature                  :boolean          default(FALSE), not null
+#  contract_signature                  :boolean          default("false"), not null
+#  required_operator_document_id       :integer          not null
+#  explanation                         :text
+#  deleted_at                          :datetime
 #
 
 class RequiredOperatorDocument < ApplicationRecord
-  include ForestTypeable
+  has_paper_trail
+  include ArrayForestTypeable
   acts_as_paranoid
 
-  translates :explanation, touch: true
+  translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
   active_admin_translates :explanation
 
   belongs_to :required_operator_document_group
@@ -30,23 +35,34 @@ class RequiredOperatorDocument < ApplicationRecord
   has_many :operator_document_countries
 
   validates :valid_period, numericality: { greater_than: 0 }
-  after_destroy :invalidate_operator_documents
 
   validate :fixed_fields_unchanged
 
-  scope :with_archived, ->() { unscope(where: :deleted_at) }
+  before_destroy :invalidate_operator_documents, prepend: true
+  after_restore :set_documents_not_provided
+
+  scope :with_archived, -> { unscope(where: :deleted_at) }
 
   def invalidate_operator_documents
-    self.operator_documents.find_each{|x| x.update(status: OperatorDocument.statuses[:doc_expired])}
+    self.operator_documents.find_each do |x|
+      x.update(status: OperatorDocument.statuses[:doc_expired], deleted_at: Time.now)
+    end
   end
 
   private
+
+  def set_documents_not_provided
+    self.operator_documents.find_each do |x|
+      x.update(status: :doc_not_provided , deleted_at: nil)
+    end
+  end
+
 
   def fixed_fields_unchanged
     return unless self.persisted?
 
     errors.add(:contract_signature, 'Cannot change the contract signature') if contract_signature_changed?
-    errors.add(:forest_type, 'Cannot change the forest type') if forest_type_changed?
+    errors.add(:forest_types, 'Cannot change the forest type') if forest_types_changed?
     errors.add(:type, 'Cannot change document type') if type_changed?
     errors.add(:country_id, 'Cannot change the country') if country_id_changed?
   end

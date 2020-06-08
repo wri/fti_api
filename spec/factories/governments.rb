@@ -2,21 +2,19 @@
 #
 # Table name: governments
 #
-#  id         :integer          not null, primary key
-#  country_id :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  is_active  :boolean          default(TRUE)
+#  id                :integer          not null, primary key
+#  country_id        :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  is_active         :boolean          default("true")
+#  government_entity :string
+#  details           :text
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :government do
-    government_entity 'A Government'
-    details           'Indicator one'
-
-    after(:create) do |government|
-      government.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                              iso: "C#{Faker::Lorem.sentence}"))
-    end
+    country
+    government_entity { 'A Government' }
+    details { 'Indicator one' }
   end
 end

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
+  extend BackRedirectable
+  back_redirect
+
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,
                 :institution, :name, :nickname, :web_url, :is_active,
@@ -97,12 +100,12 @@ ActiveAdmin.register User do
   end
 
   member_action :activate, method: :put do
-    resource.update_attributes(is_active: true) unless resource.id == current_user.id
+    resource.update(is_active: true) unless resource.id == current_user.id
     redirect_to collection_path, notice: 'User activated'
   end
 
   member_action :deactivate, method: :put do
-    resource.update_attributes(is_active: false) unless (resource.id == current_user.id) || (resource.email == 'webuser@example.com')
+    resource.update(is_active: false) unless (resource.id == current_user.id) || (resource.email == 'webuser@example.com')
     redirect_to collection_path, notice: 'User deactivated'
   end
 end

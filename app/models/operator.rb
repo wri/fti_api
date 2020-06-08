@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operators
@@ -9,7 +10,7 @@
 #  concession                         :string
 #  created_at                         :datetime         not null
 #  updated_at                         :datetime         not null
-#  is_active                          :boolean          default(TRUE)
+#  is_active                          :boolean          default("true")
 #  logo                               :string
 #  operator_id                        :string
 #  percentage_valid_documents_all     :float
@@ -23,13 +24,18 @@
 #  website                            :string
 #  country_doc_rank                   :integer
 #  country_operators                  :integer
-#  approved                           :boolean          default(TRUE), not null
+#  approved                           :boolean          default("true"), not null
+#  name                               :string
+#  details                            :text
 #
 
 class Operator < ApplicationRecord
+  has_paper_trail
   include Translatable
-  translates :name, :details, touch: true
-  active_admin_translates :name, :details
+  translates :name, :details, touch: true, versioning: :paper_trail
+  active_admin_translates :name, :details do
+    validates_presence_of :name
+  end
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
@@ -64,7 +70,7 @@ class Operator < ApplicationRecord
   before_destroy :really_destroy_documents
 
   validates :name, presence: true
-  validates :website, url: true, if: lambda {|x| x.website.present?}
+  validates :website, url: true, if: lambda { |x| x.website.present? }
   validates :operator_type, inclusion: { in: TYPES }
 
   scope :by_name_asc, -> {
@@ -80,15 +86,19 @@ class Operator < ApplicationRecord
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
   # TODO Refactor this when merging the branches
-  scope :fmus_with_certification_fsc,   ->()          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
-  scope :fmus_with_certification_pefc,  ->()          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
-  scope :fmus_with_certification_olb,   ->()          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
+  scope :fmus_with_certification_fsc,     ->          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
+  scope :fmus_with_certification_pefc,    ->          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
+  scope :fmus_with_certification_olb,     ->          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
+  scope :fmus_with_certification_pafc,    ->          { joins(:fmus).where(fmus: { certification_pafc: true }).distinct }
+  scope :fmus_with_certification_fsc_cw,  ->          { joins(:fmus).where(fmus: { certification_fsc_cw: true }).distinct }
+  scope :fmus_with_certification_tlv,     ->          { joins(:fmus).where(fmus: { certification_tlv: true }).distinct }
+  scope :fmus_with_certification_ls,      ->          { joins(:fmus).where(fmus: { certification_ls: true }).distinct }
 
 
   class Translation
     after_save do
       if name_changed?
-        Operator.find(self.operator_id).fmus.find_each { |x| x.save }
+        Operator.find_by(id: operator_id)&.fmus&.find_each { |fmu| fmu.save }
       end
     end
   end
@@ -124,6 +134,7 @@ class Operator < ApplicationRecord
       # For the total number of documents, we take into account only the documents which
       # are required (current and not deleted) and whose required_operator_document
       # is also not deleted
+
       if approved
         percentage_approved
       else
@@ -142,11 +153,12 @@ class Operator < ApplicationRecord
   # This counts only public documents
   def percentage_non_approved
     self.percentage_valid_documents_all =
-      operator_documents.valid.available.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_documents.valid.available.ns.count.
+          / operator_documents.required.ns.count.to_f rescue 0
     self.percentage_valid_documents_fmu =
       operator_document_fmus.valid.available.ns.count.to_f / operator_document_fmus.required.ns.count.to_f rescue 0
     self.percentage_valid_documents_country =
-      operator_document_countries.valid.available.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_document_countries.valid.available.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
   end
 
   # Calculates the percentage documents knowing they've all been approved
@@ -156,32 +168,34 @@ class Operator < ApplicationRecord
     self.percentage_valid_documents_fmu =
       operator_document_fmus.valid.ns.count.to_f / operator_document_fmus.ns.required.count.to_f rescue 0
     self.percentage_valid_documents_country =
-      operator_document_countries.valid.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
+      operator_document_countries.valid.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
   end
 
   def calculate_observations_scores
-    if fa_id.present?
-      number_of_visits = observations.select('date(publication_date)').group('date(publication_date)').count
-      number_of_visits = number_of_visits.keys.count
+    return if fa_id.blank?
 
-      # When there are no observations
-      if number_of_visits.zero?
-        self.obs_per_visit = nil
-        self.score_absolute = nil
-        save!
-        return
-      end
+    observations_query = observations.unscope(:joins)
+    number_of_visits = observations_query.select('date(publication_date)')
+                                         .group('date(publication_date)').count
+    number_of_visits = number_of_visits.keys.count
 
-      self.obs_per_visit = observations.count.to_f / number_of_visits rescue nil
-
-      high = observations.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
-      medium = observations.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
-      low = observations.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
-      unknown = observations.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
-      self.score_absolute  = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
-
+    # When there are no observations
+    if number_of_visits.zero?
+      self.obs_per_visit = nil
+      self.score_absolute = nil
       save!
+      return
     end
+
+    self.obs_per_visit = observations_query.count.to_f / number_of_visits rescue nil
+
+    high = observations_query.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
+    medium = observations_query.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
+    low = observations_query.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
+    unknown = observations_query.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
+    self.score_absolute = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
+
+    save!
   end
 
   class << self
@@ -189,37 +203,48 @@ class Operator < ApplicationRecord
     # based on the percentage of documents uploaded
     def calculate_document_ranking
       Country.active.find_each do |country|
-        number_of_operators = country.operators.count
-        rank_position = 0
-        country.operators.order(percentage_valid_documents_all: :desc).each do |o|
+        number_of_operators = country.fa_operators.count
+        rank = 1
+        previous_percentage = nil
+        country.fa_operators.order(percentage_valid_documents_all: :desc).each_with_index do |o, index|
           if o.percentage_valid_documents_all.present?
-            rank = rank_position + 1
-            rank_position += 1
+            if o.percentage_valid_documents_all.zero?
+              rank = number_of_operators
+            else
+              if o.percentage_valid_documents_all != previous_percentage
+                rank = index + 1
+                previous_percentage = o.percentage_valid_documents_all
+              end
+            end
           else
             rank = number_of_operators
           end
-          o.update_attributes(country_operators: number_of_operators,
-                              country_doc_rank: rank)
+          o.update(country_operators: number_of_operators,
+                   country_doc_rank: rank)
         end
       end
     end
 
+    # rubocop:disable Rails/SkipsModelValidations
     def calculate_scores
       Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
 
       number_operators = Operator.active.fa_operator.where.not(score_absolute: nil).count
       third_operators = (number_operators / 3).to_i
       Operator.active.fa_operator.where.not(score_absolute: nil).order(:score_absolute)
-          .limit(third_operators).update_all(score: 1)
+        .limit(third_operators).update_all(score: 1)
       Operator.active.fa_operator.where.not(score_absolute: nil)
-          .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
-      Operator.active.fa_operator.where.not(score_absolute: nil).order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
+        .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
+      Operator.active.fa_operator.where.not(score_absolute: nil)
+        .order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
     end
+    # rubocop:enable Rails/SkipsModelValidations
   end
 
 
   def rebuild_documents
     return if fa_id.blank?
+
     country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
 
     # Country Documents
@@ -241,12 +266,11 @@ class Operator < ApplicationRecord
         end
       end
     end
-
-
   end
 
   private
 
+  # rubocop:disable Rails/SkipsModelValidations
   def create_operator_id
     if country_id.present?
       update_columns(operator_id: "#{country.iso}-unknown-#{id}")
@@ -254,6 +278,7 @@ class Operator < ApplicationRecord
       update_columns(operator_id: "na-unknown-#{id}")
     end
   end
+  # rubocop:enable Rails/SkipsModelValidations
 
   def create_documents
     return if fa_id.blank? || country_id.blank?
@@ -263,7 +288,7 @@ class Operator < ApplicationRecord
     if operator_document_countries.none?
       RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).first_or_create do |odc|
-          odc.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+          odc.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
         end
       end
     end
@@ -272,7 +297,7 @@ class Operator < ApplicationRecord
       RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
         self.fmus.find_each do |fmu|
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
-            odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+            odf.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
           end
         end
       end

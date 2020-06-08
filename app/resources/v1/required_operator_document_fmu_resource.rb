@@ -2,8 +2,9 @@
 
 module V1
   class RequiredOperatorDocumentFmuResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
-    attributes :forest_type, :name, :valid_period, :explanation, :forest_type
+    attributes :forest_types, :name, :valid_period, :explanation, :forest_types
 
     has_one :country
     has_one :required_operator_document_group
@@ -11,8 +12,12 @@ module V1
 
     filters :name, :type
 
-    def forest_type
-      Fmu::FOREST_TYPES[@model.forest_type.to_sym][:geojson_label] if @model.forest_type
+    def forest_types
+      return if @model.forest_types.blank?
+
+      @model.forest_types.map do |f|
+        Fmu::FOREST_TYPES[f.to_sym][:geojson_label]
+      end
     end
 
     def custom_links(_)

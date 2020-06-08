@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: fmu_operators
@@ -14,10 +15,11 @@
 #
 
 class FmuOperator < ApplicationRecord
+  has_paper_trail
   include DateHelper
 
-  belongs_to :fmu,        required: true
-  belongs_to :operator,   required: true
+  belongs_to :fmu,        optional: true
+  belongs_to :operator,   optional: false
 
   before_validation     :set_current_start_date
   validates_presence_of :start_date
@@ -27,7 +29,6 @@ class FmuOperator < ApplicationRecord
 
   after_save :update_documents_list
 
-
   # Sets the start date as today, if none is provided
   def set_current_start_date
     self.start_date = Date.today if self.start_date.blank?
@@ -36,6 +37,7 @@ class FmuOperator < ApplicationRecord
   # Validates if the start date is earlier than the end date
   def start_date_is_earlier
     return if end_date.blank?
+
     unless start_date < end_date
       errors.add(:start_date, 'Start date must be earlier than end date')
     end
@@ -43,16 +45,16 @@ class FmuOperator < ApplicationRecord
 
   # Ensures only one operator is active per fmu
   def one_active_per_fmu
-    return false if fmu.blank?
-    count = persisted? ? 1 : 0
-    unless fmu.fmu_operators.where(current: true).count <= count
-      errors.add(:current, 'There can only be one active operator at a time')
-    end
+    return true if fmu.blank? || !current || fmu.fmu_operators.where(current: true).where.not(fmu_id: fmu_id).none?
+    return true unless fmu.persisted?
+
+    errors.add(:current, 'There can only be one active operator at a time')
   end
 
   # Makes sure the dates don't collide
   def non_colliding_dates
-    dates = FmuOperator.where(fmu_id: self.fmu_id).where.not(fmu_id: self.fmu_id).pluck(:start_date, :end_date)
+    return true if fmu.blank? || !fmu.persisted?
+    dates = FmuOperator.where(fmu_id: self.fmu_id).where.not(id: self.id).pluck(:start_date, :end_date)
     dates << [self.start_date, self.end_date]
 
     for i in 0...(dates.count - 1)
@@ -98,7 +100,7 @@ WHERE id = #{x.fmu_id};"
   # Updates the list of documents for this FMU
   def update_documents_list
     current_operator = self.fmu.operator.id rescue nil
-    return unless self.operator.fa_id.present?
+    return if self.operator&.fa_id.blank?
 
     OperatorDocumentFmu.transaction do
       to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator)
@@ -108,11 +110,12 @@ WHERE id = #{x.fmu_id};"
       Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator}"
 
       return unless current_operator
+
       RequiredOperatorDocumentFmu.where(country_id: fmu.country_id).each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
                                   operator_id: current_operator,
                                   fmu_id: fmu_id).first_or_create do |odf|
-          odf.update_attributes!(status: OperatorDocument.statuses[:doc_not_provided], current: true) unless odf.persisted?
+          odf.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true) unless odf.persisted?
         end
       end
       Rails.logger.info "Create the documents for operator #{current_operator} and FMU #{fmu_id}"

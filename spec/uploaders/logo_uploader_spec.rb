@@ -7,7 +7,7 @@ RSpec.describe LogoUploader do
   before do
     LogoUploader.enable_processing = true
     @operator = create(:operator)
-    @uploader = LogoUploader.new(@operator, Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))
+    @uploader = LogoUploader.new(@operator, :logo)
     @uploader.store!(File.open(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')))
   end
 

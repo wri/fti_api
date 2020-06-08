@@ -1,0 +1,133 @@
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+  .map-container { display: flex; justify-content: space-between; align-items: center }
+  .map { position: relative; height: 400px;  top: 0; bottom: 0; width: 100%; }
+  .map-wrapper { width: 100%; padding: 16px; }
+  .hidden { display: none }
+</style>
+
+<div class="map-container">
+  <div class="map-wrapper">
+    <h2>Current shape</h2>
+    <div id="current-map" class="map"></div>
+  </div>
+  <div class="map-wrapper hidden">
+    <h2>New shape</h2>
+    <div id="new-map" class="map"></div>
+  </div>
+</div>
+
+<script>
+  const inputElement = document.getElementById('fmu_esri_shapefiles_zip');
+  function handleFiles() {
+    console.log(this.files[0]);
+
+    const csrf = document.querySelector('meta[name="csrf-token"]').content;
+    const formData = new FormData();
+
+    formData.append("file", this.files[0], this.files[0].name);
+
+    $.ajax({
+      type: "POST",
+      url: "/admin/fmus/preview",
+      headers: { 'X-CSRF-Token': csrf },
+      success: function (data) {
+        if(data === null) {
+          alert("The file you uploaded is erroneous.");
+          return;
+        }
+        if (<%= present %>) {
+          $("#new-map").parent().removeClass("hidden");
+          const map2 = new mapboxgl.Map({
+            container: 'new-map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11' // stylesheet location
+          });
+          map2.on('load', function() {
+            map2.fitBounds(data.bbox, {
+              padding: 50
+            });
+            map2.addSource('fmu', {
+              'type': 'geojson',
+              'data': data.geojson
+            });
+            map2.addLayer({
+              'id': 'fmu',
+              'type': 'fill',
+              'source': 'fmu',
+              'layout': {},
+              'paint': {
+                'fill-color': '#088',
+                'fill-opacity': 0.8
+              }
+            });
+            map.resize();
+          });
+        } else {
+          map.fitBounds(data.bbox, {
+            padding: 50
+          });
+          const source = map.getSource('fmu');
+
+          if(source) {
+            source.setData(data.geojson);
+          } else {
+            map.addSource('fmu', {
+              'type': 'geojson',
+              'data': data.geojson
+            });
+            map.addLayer({
+              'id': 'fmu',
+              'type': 'fill',
+              'source': 'fmu',
+              'layout': {},
+              'paint': {
+                'fill-color': '#088',
+                'fill-opacity': 0.8
+              }
+            });
+          }
+        }
+      },
+      error: function (error) {
+        console.log("ERROR: " + JSON.stringify(error));
+      },
+      async: true,
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      timeout: 60000
+    });
+  }
+  inputElement.addEventListener("change", handleFiles, false);
+
+  mapboxgl.accessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
+  const map = new mapboxgl.Map({
+    container: 'current-map', // container id
+    style: 'mapbox://styles/mapbox/streets-v11' // stylesheet location
+  });
+
+
+  map.on('load', function() {
+    if (<%= present %>) {
+      map.fitBounds(<%= bbox || [] %>, {
+        padding: 50
+      });
+      map.addSource('fmu', {
+        'type': 'geojson',
+        'data': <%= raw(geojson.to_json) %>
+      });
+      map.addLayer({
+        'id': 'fmu',
+        'type': 'fill',
+        'source': 'fmu',
+        'layout': {},
+        'paint': {
+          'fill-color': '#088',
+          'fill-opacity': 0.8
+        }
+      });
+    }
+  });
+</script>

@@ -8,7 +8,7 @@
 #  concession                         :string
 #  created_at                         :datetime         not null
 #  updated_at                         :datetime         not null
-#  is_active                          :boolean          default(TRUE)
+#  is_active                          :boolean          default("true")
 #  logo                               :string
 #  operator_id                        :string
 #  percentage_valid_documents_all     :float
@@ -22,17 +22,16 @@
 #  website                            :string
 #  country_doc_rank                   :integer
 #  country_operators                  :integer
-#  approved                           :boolean          default(TRUE), not null
+#  approved                           :boolean          default("true"), not null
+#  name                               :string
+#  details                            :text
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :operator do
-    name "Operator #{Faker::Lorem.sentence}"
+    country
+    sequence(:name) { |n| "Operator #{n}" }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
-
-    after(:create) do |operator|
-      operator.update(country: FactoryGirl.create(:country, name: "Country #{Faker::Lorem.sentence}",
-                                                            iso: "C#{Faker::Lorem.sentence}"))
-    end
+    operator_type { Operator::TYPES.sample }
   end
 end

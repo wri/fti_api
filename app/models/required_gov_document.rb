@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: required_gov_documents
@@ -12,17 +13,23 @@
 #  country_id                     :integer
 #  created_at                     :datetime         not null
 #  updated_at                     :datetime         not null
+#  required_gov_document_id       :integer          not null
+#  explanation                    :text
+#  deleted_at                     :datetime
 #
 
 class RequiredGovDocument < ApplicationRecord
+  has_paper_trail
   includes Translatable
   acts_as_paranoid
 
-  translates :explanation, touch: true
+  translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
+  # rubocop:disable Style/BlockDelimiters
   active_admin_translates :explanation do; end
+  # rubocop:enable Style/BlockDelimiters
 
   belongs_to :required_gov_document_group
-  belongs_to :country, required: true
+  belongs_to :country, optional: false
   has_many :gov_documents, dependent: :destroy
 
   enum document_type: { file: 1, link: 2, stats: 3 }
@@ -34,7 +41,7 @@ class RequiredGovDocument < ApplicationRecord
 
   after_create :create_gov_document
 
-  scope :with_archived, ->() { unscope(where: :deleted_at) }
+  scope :with_archived, -> { unscope(where: :deleted_at) }
 
   private
 

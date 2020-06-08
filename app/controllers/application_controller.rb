@@ -2,6 +2,8 @@
 
 
 class ApplicationController < ActionController::Base
+  before_action :exclude_whodunnit_from_login
+
   protect_from_forgery
 
   # Active admin permissions
@@ -26,6 +28,18 @@ class ApplicationController < ActionController::Base
   end
 
   def set_admin_locale
-    I18n.locale = :fr
+    I18n.locale = :en
+  end
+
+  protected
+
+  def exclude_whodunnit_from_login
+    return if request.fullpath == '/admin/login'
+
+    set_paper_trail_whodunnit
+  end
+
+  def user_for_paper_trail
+    user_signed_in?.present? ? current_user.try(:id) : 'Unknown user'
   end
 end

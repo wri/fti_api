@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Country do
-  #menu parent: 'Settings', priority: 6
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
-  actions :show, :index, :edit, :update
+  actions :show, :index, :edit, :update, :create
 
   config.order_clause
 
   controller do
     def scoped_collection
-      end_of_association_chain.with_translations(I18n.locale)
+      end_of_association_chain.with_translations
     end
   end
 

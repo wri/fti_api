@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register OperatorDocumentAnnex do
+  extend BackRedirectable
+  back_redirect
+
+  extend Versionable
+  versionate
+
   menu false
   config.order_clause
 
@@ -22,7 +28,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :approve, method: :put do
-    if resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_valid])
+    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_valid])
       redirect_to collection_path, notice: 'Annex approved'
     else
       redirect_to collection_path, alert: 'Annex could not be approved'
@@ -30,14 +36,14 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :reject, method: :put do
-    if resource.update_attributes(status: OperatorDocumentAnnex.statuses[:doc_invalid])
+    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_invalid])
       redirect_to collection_path, notice: 'Annex rejected'
     else
       redirect_to collection_path, alert: 'Annex could not be rejected'
     end
   end
 
-  actions :all, except: [:destroy, :new, :create]
+  actions :all, except: [:destroy, :new]
   permit_params :name, :operator_document_id, :status, :expire_date, :start_date,
                 :attachment, :uploaded_by
 
@@ -75,6 +81,10 @@ ActiveAdmin.register OperatorDocumentAnnex do
       o = OperatorDocument.unscoped.find(od.operator_document_id).operator
       link_to(o.name, admin_producer_path(o.id))
     end
+    column :fmu, sortable: 'fmu_translations.name' do |od|
+      fmu = OperatorDocument.unscoped.find(od.operator_document_id).fmu
+      link_to(fmu.name, admin_fmu_path(fmu.id)) if fmu
+    end
 
     column :user, sortable: 'users.name'
     column :expire_date
@@ -82,13 +92,25 @@ ActiveAdmin.register OperatorDocumentAnnex do
     column :created_at
     column :uploaded_by
     attachment_column :attachment
-    column('Approve') { |annex| link_to 'Approve', approve_admin_operator_document_annex_path(annex), method: :put}
-    column('Reject') { |annex| link_to 'Reject', reject_admin_operator_document_annex_path(annex), method: :put}
+    column('Approve') { |annex| link_to 'Approve', approve_admin_operator_document_annex_path(annex), method: :put }
+    column('Reject') { |annex| link_to 'Reject', reject_admin_operator_document_annex_path(annex), method: :put }
     actions
   end
 
-
-  filter :operator_document, as: :select, collection: OperatorDocument.pluck(:id)
+  
+  filter :operator_document_required_operator_document_name_equals,
+         as: :select,
+         label: 'Operator Document',
+         collection: RequiredOperatorDocument.order(:name).pluck(:name)
+  filter :operator_document_operator_translations_name_equals,
+         as: :select,
+         label: 'Operator',
+         collection: Operator.with_translations(I18n.locale)
+                         .order('operator_translations.name').pluck(:name)
+  filter :operator_document_fmu_translations_name_equals,
+         as: :select,
+         label: 'FMU',
+         collection: Fmu.with_translations(I18n.locale).order(:name).pluck(:name)
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
   filter :updated_at

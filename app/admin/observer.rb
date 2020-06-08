@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Observer, as: 'Monitor' do
+  extend BackRedirectable
+  back_redirect
+
+  extend Versionable
+  versionate
+
   menu false
 
   config.order_clause
@@ -21,7 +27,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   csv do
     column :is_active
     column :countries do |observer|
-      names = observer.countries.map {|c| c.name }
+      names = observer.countries.map { |c| c.name }
       names.join(' ').tr(',', ';')
     end
     column :observer_type
@@ -32,6 +38,8 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   index do
     column :is_active
+    # TODO: Reactivate rubocop and fix this
+    # rubocop:disable Rails/OutputSafety
     column :countries do |observer|
       links =[]
       observer.countries.each do |country|
@@ -39,6 +47,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       end
       links.join(' ').html_safe
     end
+    # rubocop:enable Rails/OutputSafety
     column :observer_type, sortable: true
     image_column :logo
     column :name, sortable: 'observer_translations.name'
@@ -49,10 +58,10 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   filter :is_active
   filter :countries, as: :select,
-         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name')}
+                     collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_name_eq,
          as: :select, label: 'Name',
-          collection: Observer.with_translations(I18n.locale)
+         collection: Observer.with_translations(I18n.locale)
                           .order('observer_translations.name').pluck(:name)
 
 
@@ -61,6 +70,8 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       row :is_active
       row :observer_type
       row :organization_type
+      # TODO: Reactivate rubocop and fix this
+      # rubocop:disable Rails/OutputSafety
       row :countries do |observer|
         links =[]
         observer.countries.each do |country|
@@ -68,6 +79,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
         end
         links.join(' ').html_safe
       end
+      # rubocop:enable Rails/OutputSafety
       image_row :logo
       row :address
       row :information_name

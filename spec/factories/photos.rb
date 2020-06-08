@@ -12,9 +12,9 @@
 #  user_id          :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :photo do
-    name 'Photo'
+    name { 'Photo' }
     attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
     association :attacheable, factory: :observation_1
   end

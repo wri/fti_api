@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operator_documents
@@ -21,13 +22,13 @@
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
-#  public                        :boolean          default(TRUE), not null
+#  public                        :boolean          default("true"), not null
 #
 
 class OperatorDocumentCountry < OperatorDocument
   belongs_to :required_operator_document_country, foreign_key: 'required_operator_document_id'
 
-  after_save :update_operator_approved, if: -> { required_operator_document.contract_signature && current }
+  after_update :update_operator_approved, if: -> { required_operator_document.contract_signature && current }
 
   protected
 

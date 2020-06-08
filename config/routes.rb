@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
+  match 'admin/fmus/preview' => 'admin/fmus#preview', via: :post
+
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
     post  '/login',                       to: 'sessions#create'
@@ -45,13 +47,25 @@ Rails.application.routes.draw do
       jsonapi_resources :tutorials, only: [:index, :show] do; end
       jsonapi_resources :how_tos, only: [:index, :show] do; end
       jsonapi_resources :tools, only: [:index, :show] do; end
+      jsonapi_resources :country_links, only: [:index, :show] do; end
+      jsonapi_resources :country_vpas, only: [:index, :show] do; end
       jsonapi_resources :required_gov_documents do; end
       jsonapi_resources :gov_documents do; end
       jsonapi_resources :gov_files, only: [:create, :destroy] do; end
-      resources :fmus, only: [:index, :update]
+      resources :fmus, only: [:index, :update] do
+        get 'tiles/:z/:x/:y', to: 'fmus#tiles', on: :collection
+      end
       resources :contacts, only: [:create, :index]
 
+      resources :imports, only: :create
+
       get 'observation_filters', to: 'observation_filters#index'
+      get 'observation_filters_tree', to: 'observation_filters#tree'
+      get 'observations-csv', to: 'observation_filters#csv'
     end
+
+    # Documentation
+    mount Rswag::Api::Engine => 'docs'
+    mount Rswag::Ui::Engine => 'docs'
   end
 end

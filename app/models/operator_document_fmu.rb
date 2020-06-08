@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operator_documents
@@ -21,11 +22,11 @@
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
-#  public                        :boolean          default(TRUE), not null
+#  public                        :boolean          default("true"), not null
 #
 
 class OperatorDocumentFmu < OperatorDocument
-  belongs_to :required_operator_document_fmu, foreign_key: 'required_operator_document_id', required: true
-  belongs_to :fmu, required: true
+  belongs_to :required_operator_document_fmu, foreign_key: 'required_operator_document_id', optional: false
+  belongs_to :fmu, optional: false
 
 end

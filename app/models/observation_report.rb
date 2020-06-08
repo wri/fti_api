@@ -15,6 +15,7 @@
 #
 
 class ObservationReport < ApplicationRecord
+  has_paper_trail
   mount_base64_uploader :attachment, ObservationReportUploader
   acts_as_paranoid
 
@@ -26,7 +27,7 @@ class ObservationReport < ApplicationRecord
   after_destroy :remove_attachment_id_directory
 
   def remove_attachment_id_directory
-    FileUtils.rm_rf(File.join('public', 'uploads', 'document', 'attachment', self.id.to_s)) if self.attachment
+    FileUtils.rm_rf(File.join('public', 'uploads', self.class.to_s.underscore, 'attachment', self.id.to_s)) if self.attachment
   end
 
 end

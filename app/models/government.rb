@@ -4,21 +4,29 @@
 #
 # Table name: governments
 #
-#  id         :integer          not null, primary key
-#  country_id :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  is_active  :boolean          default(TRUE)
+#  id                :integer          not null, primary key
+#  country_id        :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  is_active         :boolean          default("true")
+#  government_entity :string
+#  details           :text
 #
 
 class Government < ApplicationRecord
+  has_paper_trail
   include Translatable
-  translates :government_entity, :details, touch: true
+
+  # rubocop:disable Style/BlockDelimiters
+  translates :government_entity, :details, touch: true, versioning: :paper_trail
 
   active_admin_translates :government_entity, :details do; end
+  # rubocop:enable Style/BlockDelimiters
 
   belongs_to :country, inverse_of: :governments, optional: true
-  has_many :observations, inverse_of: :government, dependent: :restrict_with_error
+
+  has_many :governments_observations, dependent: :restrict_with_error
+  has_many :observations, through: :governments_observations
 
   validates :government_entity, presence: true
 
@@ -28,7 +36,7 @@ class Government < ApplicationRecord
   }
 
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
-  scope :active, ->() { where(is_active: true) }
+  scope :active, -> { where(is_active: true) }
 
   default_scope { includes(:translations) }
 

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Severity do
-  # menu parent: 'Settings', priority: 3
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   actions :show, :edit, :index, :update, :new, :create
@@ -10,7 +12,7 @@ ActiveAdmin.register Severity do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:translations, [subcategory: :translations]])
+      end_of_association_chain.with_translations.includes(subcategory: :translations)
     end
   end
 
@@ -22,7 +24,7 @@ ActiveAdmin.register Severity do
          collection: Severity.with_translations(I18n.locale)
                          .order('severity_translations.details').pluck(:details)
   filter :subcategory, as: :select,
-         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
+                       collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :level, as: :select, collection: 0..3
   filter :created_at
   filter :updated_at

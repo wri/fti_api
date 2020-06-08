@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Government do
+  extend BackRedirectable
+  back_redirect
+
+  extend Versionable
+  versionate
+
   menu false
 
   config.order_clause
@@ -10,7 +16,8 @@ ActiveAdmin.register Government do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:translations, [country: :translations]])
+      end_of_association_chain.with_translations.includes(country: :translations)
+        .where(country_translations: { locale: I18n.locale })
     end
   end
 
@@ -36,7 +43,7 @@ ActiveAdmin.register Government do
   end
 
   filter :country, as: :select,
-          collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
+                   collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_government_entity_contains,
          as: :select, label: 'Entity',
          collection: Government.with_translations(I18n.locale)

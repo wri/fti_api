@@ -3,9 +3,11 @@
 module ActiveAdmin
   module FilterSaver
 
+    # rubocop:disable Style/AsciiComments
     # Extends the ActiveAdmin controller to persist resource index filters between requests.
     #
     # @author David Daniell / тιηуηυмвєяѕ <info@tinynumbers.com>
+    # rubocop:enable Style/AsciiComments
     module Controller
 
       private
@@ -46,8 +48,6 @@ module ActiveAdmin
         current_route = Rails.application.routes.recognize_path(current_path)
         current_route.sort.flatten.join('-').gsub(/\//, '_').to_sym
       end
-
     end
-
   end
 end

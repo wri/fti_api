@@ -2,17 +2,19 @@
 
 module V1
   class FmuResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     paginator :none
 
     attributes :name, :geojson, :forest_type,
                :certification_fsc, :certification_pefc, :certification_olb,
-               :certification_vlc, :certification_vlo, :certification_tltv
+               :certification_pafc, :certification_fsc_cw, :certification_tlv,
+               :certification_ls
 
     has_one :country
-    has_one :operator
+    has_one :operator, foreign_key_on: :related
 
-    filters :country, :free, :certification
+    filters :country, :free, :certification, :operator
 
     def forest_type
       Fmu::FOREST_TYPES[@model.forest_type.to_sym][:geojson_label] if @model.forest_type
@@ -23,12 +25,15 @@ module V1
     end
 
     filter :certification, apply: ->(records, value, _options) {
-      records = records.with_certification_fsc       if value.include?('fsc')
-      records = records.with_certification_pefc      if value.include?('pefc')
-      records = records.with_certification_olb       if value.include?('olb')
-      records = records.with_certification_vlc       if value.include?('vlc')
-      records = records.with_certification_vlo       if value.include?('vlo')
-      records = records.with_certification_tltv      if value.include?('tltv')
+      values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
+      return records unless values.any?
+
+      certifications = []
+      values.each do |v|
+        certifications << "certification_#{v} = true"
+      end
+
+      records = records.where(certifications.join(' OR ')).distinct
 
       records
     }
@@ -38,13 +43,5 @@ module V1
 
       records
     }
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
-    end
-
   end
 end

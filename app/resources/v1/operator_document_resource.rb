@@ -2,11 +2,14 @@
 
 module V1
   class OperatorDocumentResource < JSONAPI::Resource
+    include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :current, :uploaded_by, :reason, :note, :response_date
+               :fmu_id, :current, :uploaded_by, :reason, :note, :response_date,
+               :public
 
     has_one :country
     has_one :fmu
@@ -17,6 +20,7 @@ module V1
     filters :type, :status, :operator_id, :current
 
     before_create :set_operator_id, :set_user_id, :set_public
+    before_update :set_status_pending
 
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?
@@ -27,6 +31,10 @@ module V1
 
     def set_public
       @model.public = false
+    end
+
+    def set_status_pending
+      @model.status = :doc_pending
     end
 
     def self.updatable_fields(context)
@@ -45,6 +53,7 @@ module V1
     # TODO: Implement permissions system here
     def status
       return @model.status if can_see_document?
+
       # return :doc_not_provided unless document_public?
 
       hidden_document_status
@@ -77,14 +86,6 @@ module V1
       { self: nil }
     end
 
-    # Caching conditions
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale],
-          owner: context[:current_user]
-      }
-    end
-
     def document_public?
       @model.public || @model.operator.approved
     end
@@ -96,12 +97,14 @@ module V1
       return false if app == 'observations-tool'
       return true if user&.user_permission&.user_role =='admin'
       return true if user&.is_operator?(@model.operator_id)
+
       false
     end
 
     def hidden_document_status
       return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
-      return :doc_not_provided
+
+      :doc_not_provided
     end
   end
 end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -70,7 +71,7 @@ set :ssh_options, {
     password: fetch(:password)
 }
 
-set :branch, 'master'
+set :branch, 'staging'
 set :deploy_to, '~/fti-api-production-secondary'
 
 role :resque_worker, ENV['PRODUCTION_IP']

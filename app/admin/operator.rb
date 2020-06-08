@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Operator, as: 'Producer' do
+  extend BackRedirectable
+  back_redirect
+
+  extend Versionable
+  versionate
+
   menu false
 
   config.order_clause
@@ -8,10 +14,10 @@ ActiveAdmin.register Operator, as: 'Producer' do
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, :delete_logo, fmu_ids: [],
-                translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                                     translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
-    resource.update_attributes(is_active: true)
+    resource.update(is_active: true)
     redirect_to collection_path, notice: 'Operator activated'
   end
 
@@ -58,7 +64,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   scope :inactive
 
   filter :country, as: :select,
-          collection: -> { Country.joins(:operators).with_translations(I18n.locale) .order('country_translations.name') }
+                   collection: -> { Country.joins(:operators).with_translations(I18n.locale) .order('country_translations.name') }
   filter :translations_name_contains,
          as: :select, label: 'Name',
          collection: Operator.with_translations(I18n.locale)
@@ -111,13 +117,14 @@ ActiveAdmin.register Operator, as: 'Producer' do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Translated fields' do
+    #f.inputs 'Translated fields' do
+    #
+    #end
+    f.inputs 'Operator Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
         t.input :details
       end
-    end
-    f.inputs 'Operator Details' do
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type, as: :select,
                               collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
@@ -132,8 +139,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
       available_fmus = Fmu.filter_by_free
       if edit
         available_fmus = []
-        Fmu.filter_by_free.find_each{|x| available_fmus << x}
-        f.object.fmus.find_each{|x| available_fmus << x}
+        Fmu.filter_by_free.find_each{ |x| available_fmus << x }
+        f.object.fmus.find_each{ |x| available_fmus << x }
         f.input :fmus, collection: available_fmus
       else
         f.input :fmus, collection: available_fmus
@@ -168,8 +175,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([country: :translations])
-      end_of_association_chain.with_translations(I18n.locale)
+      end_of_association_chain.with_translations.includes(country: :translations)
+          .where(country_translations: { locale: I18n.locale })
     end
   end
 end

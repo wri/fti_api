@@ -298,6 +298,7 @@ ActiveAdmin.setup do |config|
 
   # These two are defined in ActiveAdmin::FilterSaver::Controller, which is loaded below.
   config.before_filter :restore_search_filters, unless: :devise_controller?
+  config.before_filter :set_admin_locale
   config.after_filter :save_search_filters, unless: :devise_controller?
 end
 
@@ -305,5 +306,5 @@ require 'active_admin/filter_saver/controller'
 
 ActiveAdmin.before_load do |app|
   # Add Filters Extensions
-  ActiveAdmin::BaseController.send :include, ActiveAdmin::FilterSaver::Controller
+  ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
 end

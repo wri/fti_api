@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register ObservationDocument, as: 'Evidence' do
+  extend BackRedirectable
+  back_redirect
+
+  extend Versionable
+  versionate
+
   menu false
 
-  actions :show, :index
+  actions :show, :index, :create
 
   config.order_clause
 
@@ -34,7 +40,7 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   end
 
   filter :observation, as: :select,
-         collection: Observation.joins(:observation_documents)
+                       collection: Observation.joins(:observation_documents)
                          .distinct.order(:id).pluck(:id)
   filter :name, as: :select
   filter :attachment, as: :select

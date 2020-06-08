@@ -2,6 +2,7 @@
 
 module V1
   class OperatorResource < JSONAPI::Resource
+    include CacheableByLocale
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
@@ -28,9 +29,14 @@ module V1
     end
 
     filter :certification, apply: ->(records, value, _options) {
-      records = records.fmus_with_certification_fsc       if value.include?('fsc')
-      records = records.fmus_with_certification_pefc      if value.include?('pefc')
-      records = records.fmus_with_certification_olb       if value.include?('olb')
+      values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
+      return records unless values.any?
+
+      certifications = []
+      values.each do |v|
+        certifications << "fmus.certification_#{v} = true"
+      end
+      records = records.joins(:fmus).where(certifications.join(' OR ')).distinct
 
       records
     }
@@ -85,13 +91,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    # Adds the locale to the cache
-    def self.attribute_caching_context(context)
-      {
-          locale: context[:locale]
-      }
     end
   end
 end

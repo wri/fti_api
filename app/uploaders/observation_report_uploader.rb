@@ -40,13 +40,17 @@ class ObservationReportUploader < CarrierWave::Uploader::Base
     %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
   end
 
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
   def exists?
     file.present?
+  end
+
+  def filename
+    return if super.blank?
+
+    date = model.publication_date&.to_date&.to_s || model.created_at&.to_date&.to_s || Date.today.to_s
+    filename = '' + model.title[0...50]&.parameterize + '-' + date
+    filename += '.' + super.split('.').last if super.split('.').any?
+    filename
   end
 
   def original_filename

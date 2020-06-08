@@ -1,12 +1,16 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: required_gov_document_groups
 #
-#  id         :integer          not null, primary key
-#  position   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                             :integer          not null, primary key
+#  position                       :integer
+#  created_at                     :datetime         not null
+#  updated_at                     :datetime         not null
+#  required_gov_document_group_id :integer          not null
+#  name                           :string           not null
+#  description                    :text
 #
 
 class RequiredGovDocumentGroup < ApplicationRecord

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Sawmill do
-  # menu parent: 'Operators', priority: 2
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
   config.order_clause
@@ -10,7 +12,7 @@ ActiveAdmin.register Sawmill do
   permit_params :operator_id, :name, :lat, :lng, :is_active
 
   member_action :activate, method: :put do
-    resource.update_attributes(is_active: true)
+    resource.update(is_active: true)
     redirect_to collection_path, notice: 'Operator activated'
   end
 
@@ -34,10 +36,8 @@ ActiveAdmin.register Sawmill do
   scope :active
   scope :inactive
 
-  filter :operator_translations_name_contains,
-         as: :select, label: 'Operator',
-         collection: Operator.joins(:sawmills).with_translations(I18n.locale)
-                         .order('operator_translations.name').pluck('operator_translations.name')
+  filter :operator, label: 'Operator', as: :select,
+                    collection: -> { Operator.joins(:sawmills).with_translations(I18n.locale).order('operator_translations.name') }
   filter :name
 
 

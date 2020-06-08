@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register GovDocument do
+  extend BackRedirectable
+  back_redirect
+
+  extend Versionable
+  versionate
+
   menu false
   config.order_clause
 
@@ -24,21 +30,21 @@ ActiveAdmin.register GovDocument do
 
   member_action :approve, method: :put do
     if resource.reason.present?
-      resource.update_attributes(status: :doc_not_required)
+      resource.update(status: :doc_not_required)
     else
-      resource.update_attributes(status: :doc_valid)
+      resource.update(status: :doc_valid)
     end
     redirect_to collection_path, notice: 'Document approved'
   end
 
   member_action :reject, method: :put do
-    resource.update_attributes(status: :doc_invalid, reason: nil)
+    resource.update(status: :doc_invalid, reason: nil)
 
     redirect_to collection_path, notice: 'Document rejected'
   end
 
 
-  actions :all, except: [:destroy, :new, :create]
+  actions :all, except: [:destroy, :new]
   permit_params :status, :reason, :start_date, :expire_date, :current,
                 :uploaded_by, :link, :value, :units,
                 gov_files_attributes: [:id, :attachment, :_destroy]
@@ -60,8 +66,10 @@ ActiveAdmin.register GovDocument do
         RequiredGovDocument.unscoped.find(doc.required_gov_document_id).name
       end
     end
+    # TODO: Reactivate rubocop and fix this
+    # rubocop:disable Rails/OutputSafety
     column 'Data' do |doc|
-      doc.link if doc.link
+      doc.link
       "#{doc.value} #{doc.units}" if doc.value
       if doc.gov_files.any?
         links = []
@@ -69,6 +77,7 @@ ActiveAdmin.register GovDocument do
         links.join(' ').html_safe
       end
     end
+    # rubocop:enable Rails/OutputSafety
     column :user, sortable: 'users.name'
     column :expire_date
     column :start_date
@@ -77,8 +86,8 @@ ActiveAdmin.register GovDocument do
     column :reason
     column :note
     column :response_date
-    column('Approve') { |doc| link_to 'Approve', approve_admin_gov_document_path(doc), method: :put}
-    column('Reject') { |doc| link_to 'Reject', reject_admin_gov_document_path(doc), method: :put}
+    column('Approve') { |doc| link_to 'Approve', approve_admin_gov_document_path(doc), method: :put }
+    column('Reject') { |doc| link_to 'Reject', reject_admin_gov_document_path(doc), method: :put }
     actions
   end
 
@@ -87,11 +96,11 @@ ActiveAdmin.register GovDocument do
   filter :id, as: :select
   filter :required_gov_document
   filter :required_gov_document_country_id, label: 'Country', as: :select,
-         collection: Country.with_translations(I18n.locale)
+                                            collection: Country.with_translations(I18n.locale)
                        .joins(:required_gov_documents).uniq.order('country_translations.name')
   filter :status, as: :select, collection: GovDocument.statuses
   filter :required_gov_document_document_type, label: 'Type', as: :select,
-         collection: RequiredGovDocument.document_types
+                                               collection: RequiredGovDocument.document_types
   filter :updated_at
 
 
@@ -101,12 +110,12 @@ ActiveAdmin.register GovDocument do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Government Document Details' do
       f.input :country, as: :string,
-              input_html: { disabled: true, value: resource&.required_gov_document&.country&.name }
+                        input_html: { disabled: true, value: resource&.required_gov_document&.country&.name }
       f.input :required_gov_document, input_html: { disabled: true }
       f.input :uploaded_by
       f.input :status, include_blank: false
       f.input :document_type, as: :string,
-              input_html: { disabled: true, value: resource&.required_gov_document&.document_type }
+                              input_html: { disabled: true, value: resource&.required_gov_document&.document_type }
       if resource.required_gov_document.document_type == 'link'
         f.input :link
       end

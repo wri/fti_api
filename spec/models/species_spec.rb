@@ -14,48 +14,44 @@
 #  iucn_status     :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  common_name     :string
 #
 
 require 'rails_helper'
 
 RSpec.describe Species, type: :model do
-  before :each do
-    I18n.locale = :en
-    FactoryGirl.create(:species, name: 'Z Species')
-    @species = create(:species)
+  subject(:species) { FactoryBot.build(:species) }
+
+  it 'is valid with valid attributes' do
+    expect(species).to be_valid
   end
 
-  it 'Count on species' do
-    expect(Species.count).to          eq(2)
-    expect(Species.all.first.name).to eq('Z Species')
+  it_should_behave_like 'translatable', FactoryBot.create(:species), %i[common_name]
+
+  describe 'Relations' do
+    it { is_expected.to have_many(:species_observations) }
+    it { is_expected.to have_many(:species_countries) }
+    it { is_expected.to have_many(:observations).through(:species_observations) }
+    it { is_expected.to have_many(:countries).through(:species_countries) }
   end
 
-  it 'Order by name asc' do
-    expect(Species.by_name_asc.first.name).to eq('Spezie')
+  describe 'Validations' do
+    it { is_expected.to validate_presence_of(:name) }
   end
 
-  it 'Fallbacks for empty translations on species' do
-    I18n.locale = :fr
-    expect(@species.name).to eq('Spezie')
-    I18n.locale = :en
+  describe 'Instance methods' do
+    describe '#cache_key' do
+      it 'return the default value with the locale' do
+        expect(species.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+      end
+    end
   end
 
-  it 'Translate species to fr' do
-    @species.update(common_name: 'Species FR', locale: :fr)
-    I18n.locale = :fr
-    expect(@species.common_name).to eq('Species FR')
-    I18n.locale = :en
-    expect(@species.common_name).to eq('Species')
-  end
-
-  it 'Name validation' do
-    @species = Species.new(name: '')
-
-    @species.valid?
-    expect { @species.save! }.to raise_error(ActiveRecord::RecordInvalid, "Validation failed: Name can't be blank")
-  end
-
-  it 'Fetch all species' do
-    expect(Species.fetch_all(nil).count).to eq(2)
+  describe 'Class methods' do
+    describe '#fetch_all' do
+      it 'returns all species' do
+        expect(Species.fetch_all(nil).count).to eq(Species.all.size)
+      end
+    end
   end
 end

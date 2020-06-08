@@ -14,11 +14,12 @@
 #  iucn_status     :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  common_name     :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :species do
-    common_name 'Species'
-    name        'Spezie'
+    common_name { 'Species' }
+    name { 'Spezie' }
   end
 end

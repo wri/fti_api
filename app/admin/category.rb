@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Category do
+  extend BackRedirectable
+  back_redirect
+
   menu false
 
-  actions :all, :except => [:destroy]
+  actions :all, except: [:destroy]
 
   config.order_clause
   config.filters = false

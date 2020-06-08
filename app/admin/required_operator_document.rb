@@ -1,14 +1,20 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register RequiredOperatorDocument do
+  extend BackRedirectable
+  back_redirect
+
+  extend Versionable
+  versionate
+
   menu false
 
   active_admin_paranoia
 
   actions :all
-  permit_params :name, :type, :forest_type, :valid_period, :contract_signature,
-                :country, :required_operator_document_group_id, :country_id,
-                translations_attributes: [:id, :locale, :explanation]
+  permit_params :name, :type, :valid_period, :contract_signature, :country,
+                :required_operator_document_group_id, :country_id, forest_types: [],
+                                                                   translations_attributes: [:id, :locale, :explanation]
 
   csv do
     column 'exists' do |rod|
@@ -29,20 +35,23 @@ ActiveAdmin.register RequiredOperatorDocument do
     bool_column :exists do |rod|
       rod.deleted_at.nil?
     end
-    column :contract_signature
+    column 'Publication Authorization', :contract_signature
     column :required_operator_document_group
     column :country
     column :type
+    column :forest_types do |rod|
+      rod.forest_types.presence || ''
+    end
     column :name
 
     actions
   end
 
-  filter :contract_signature, as: :select, collection: [['True', true], ['False', false]]
+  filter :contract_signature, label: 'publication authorization', as: :select, collection: [['True', true], ['False', false]]
   filter :required_operator_document_group
   filter :country
   filter :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu)
-  filter :forest_type, as: :select
+  filter 'forest_types_contains_array', as: :select, collection: RequiredOperatorDocument::FOREST_TYPES.map{ |k,h| [k, h[:index]] }
   filter :name, as: :select
   filter :updated_at
 
@@ -51,13 +60,18 @@ ActiveAdmin.register RequiredOperatorDocument do
     f.inputs 'Required Operator Document Details' do
       editing = object.new_record? ? false : true
       f.input :required_operator_document_group
-      f.input :contract_signature, input_html: { disabled: editing }
+      f.input :contract_signature, label: 'Publication Authorization', input_html: { disabled: editing }
       f.input :country, input_html: { disabled: editing }
       f.input :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu),
                      include_blank: false, input_html: { disabled: editing }
-      f.input :forest_type, as: :select,
-              collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.first] },
-              include_blank: true, input_html: { disabled: editing }
+      if editing
+        f.input :forest_types, as: :string, input_html: { disabled: editing }
+      else
+        f.input :forest_types, as: :select, multiple: true,
+                collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] },
+                include_blank: true
+      end
+
       f.input :name
       f.input :valid_period, label: 'Validity (days)'
       f.inputs 'Translated fields' do

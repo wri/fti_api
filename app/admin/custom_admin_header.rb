@@ -1,10 +1,17 @@
+# frozen_string_literal: true
+
 class CustomAdminHeader < ActiveAdmin::Views::Header
   include Rails.application.routes.url_helpers
 
   def build(namespace, menu)
     div class: 'c-nav' do
       div class: 'logo' do
-        image_tag(image_url("logo.svg"))
+        div do
+          image_tag(image_url("logo.svg"))
+        end
+        div class: 'env' do
+          Rails.env.humanize
+        end
       end
       div class: 'list' do
         # Add one item without son.
@@ -65,6 +72,8 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
               li { link_to 'Required Document Group',  admin_required_gov_document_groups_path }
               li { link_to 'Required Documents',       admin_required_gov_documents_path }
               li { link_to 'Documents',                admin_gov_documents_path }
+              li { link_to 'Links',                    admin_country_links_path }
+              li { link_to 'Vpas',                     admin_country_vpas_path }
             end
           end
         end
@@ -106,7 +115,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
     div class: 'c-nav' do
       div class: 'list' do
         ul class: 'user' do
-          li { link_to @arbre_context.assigns[:current_user].email, admin_user_path(@arbre_context.assigns[:current_user].id)}
+          li { link_to @arbre_context.assigns[:current_user].email, admin_user_path(@arbre_context.assigns[:current_user].id) }
         end
         ul class: 'logout' do
           li { link_to ' Logout', destroy_user_session_path }

@@ -44,7 +44,7 @@ cd fti_api
 
 ### REQUIREMENTS ###
 
-  - **Ruby version:** 2.4.1
+  - **Ruby version:** 2.4.6
   - **PostgreSQL 9.4+** [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
 
 **Just execute the script file in `bin/setup`**
@@ -89,6 +89,18 @@ cd fti_api
 
 ```ruby
   bin/rspec
+```
+
+## DOCUMENTATION ##
+
+### API ###
+
+The API is documented used swagger and can be found in `/docs`.
+
+To regenerate the api documentation run:
+
+```ruby
+  rails docs:generate
 ```
 
 ## DEPLOYMENT ##

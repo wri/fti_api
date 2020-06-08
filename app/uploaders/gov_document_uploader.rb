@@ -17,6 +17,7 @@ class GovDocumentUploader < CarrierWave::Uploader::Base
 
   def filename
     return if super.blank?
+
     filename = '' + model.gov_document.required_gov_document.name + '-' + Date.today.to_s
     filename += '.' + super.split('.').last if super.split('.').any?
     filename

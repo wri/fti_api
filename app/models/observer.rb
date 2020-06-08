@@ -8,7 +8,7 @@
 #  observer_type     :string           not null
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  is_active         :boolean          default(TRUE)
+#  is_active         :boolean          default("true")
 #  logo              :string
 #  address           :string
 #  information_name  :string
@@ -18,11 +18,15 @@
 #  data_email        :string
 #  data_phone        :string
 #  organization_type :string
+#  name              :string
+#  organization      :string
 #
 
 class Observer < ApplicationRecord
+  has_paper_trail
   include Translatable
-  translates :name, :organization, touch: true
+  translates :name, :organization, touch: true, versioning: :paper_trail
+  
 
   active_admin_translates :name do
     validates_presence_of :name
@@ -31,7 +35,9 @@ class Observer < ApplicationRecord
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
 
+  # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :countries
+  # rubocop:enable Rails/HasAndBelongsToMany
 
   has_many :observer_observations, dependent: :restrict_with_error
   has_many :observations, through: :observer_observations
