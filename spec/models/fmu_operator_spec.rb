@@ -21,7 +21,6 @@ RSpec.describe FmuOperator, type: :model do
   end
 
   describe 'Relations' do
-    it { is_expected.to belong_to(:fmu).required }
     it { is_expected.to belong_to(:operator).required }
   end
 
