@@ -68,8 +68,8 @@ ActiveAdmin.register RequiredOperatorDocument do
         f.input :forest_types, as: :string, input_html: { disabled: editing }
       else
         f.input :forest_types, as: :select, multiple: true,
-                collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] },
-                include_blank: true
+                               collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] },
+                               include_blank: true
       end
 
       f.input :name
