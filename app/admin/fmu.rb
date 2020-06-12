@@ -33,7 +33,7 @@ ActiveAdmin.register Fmu do
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
                 :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
-                fmu_operator_attributes: [:operator_id, :start_date, :end_date],
+                fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date],
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
@@ -86,8 +86,8 @@ ActiveAdmin.register Fmu do
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
       render partial: 'zip_hint'
       f.input :forest_type, as: :select,
-              collection: Fmu::FOREST_TYPES.map {|k, h| [h[:label], k]},
-              input_html: { disabled: object.persisted? }
+                            collection: Fmu::FOREST_TYPES.map { |k, h| [h[:label], k] },
+                            input_html: { disabled: object.persisted? }
       f.input :certification_fsc
       f.input :certification_pefc
       f.input :certification_olb
@@ -99,8 +99,8 @@ ActiveAdmin.register Fmu do
 
     f.inputs 'Operator', for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
       fo.input :operator_id, label: 'name', as: :select,
-               collection: Operator.active.with_translations.map{ |o| [o.name, o.id]},
-               input_html: { disabled: object.persisted? }
+                             collection: Operator.active.with_translations.map{ |o| [o.name, o.id] },
+                             input_html: { disabled: object.persisted? }
       fo.input :start_date, input_html: { disabled: object.persisted? }
       fo.input :end_date, input_html: { disabled: object.persisted? }
     end
