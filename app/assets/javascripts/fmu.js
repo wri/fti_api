@@ -1,6 +1,6 @@
 $(document).ready(function() {
   const forestType = document.getElementById('fmu_forest_type');
-  if (forestType== null || forestType.prop('disabled') == true){
+  if (forestType== null || $(forestType).prop('disabled') == true){
     return
   }
   updateFmuFields();
@@ -30,7 +30,7 @@ function updateFmuFields() {
       $(op).prop('disabled', true);
     })
   }
-  $(forestTypes.select2({width: '80%'})[0].options[1]).prop('disabled', false)
+//  $(forestTypes.select2({width: '80%'})[0].options[1]).prop('disabled', false)
 
   forestTypes.val([])
   forestTypes.select2({width: '80%'}).trigger('change')
