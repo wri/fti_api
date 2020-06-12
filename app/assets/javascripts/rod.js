@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  if (document.getElementById('required_operator_document_country_id').getAttribute('disabled') == ""){
+  const rodCountryField = document.getElementById('required_operator_document_country_id');
+  if (rodCountryField == null ||  rod.getAttribute('disabled') == ""){
     return;
   }
   updateRODFields();
