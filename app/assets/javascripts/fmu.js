@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  if (document.getElementById('fmu_forest_type') == null){
+  const forestType = document.getElementById('fmu_forest_type');
+  if (forestType== null || forestType.prop('disabled') == true){
     return
   }
   updateFmuFields();
