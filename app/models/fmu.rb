@@ -54,7 +54,7 @@ class Fmu < ApplicationRecord
   has_many :operator_document_fmus
 
   accepts_nested_attributes_for :operators
-  accepts_nested_attributes_for :fmu_operator
+  accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
 
   validates :country_id, presence: true
   validates :name, presence: true
