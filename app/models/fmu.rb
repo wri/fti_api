@@ -54,13 +54,15 @@ class Fmu < ApplicationRecord
   has_many :operator_document_fmus
 
   accepts_nested_attributes_for :operators
-  accepts_nested_attributes_for :fmu_operator
+  accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
+
+  before_validation :update_geojson
 
   validates :country_id, presence: true
   validates :name, presence: true
   validates :forest_type, presence: true
+  validate :geojson_correctness, if: :geojson_changed?
 
-  before_save :update_geojson
   after_save :update_geometry, if: :geojson_changed?
   before_destroy :really_destroy_documents
 
@@ -176,8 +178,8 @@ class Fmu < ApplicationRecord
     }
     tmp_fmu.really_destroy!
     response
-  rescue StandardError
-    nil
+  rescue StandardError => e
+    { errors: e.message }
   end
 
   def update_geometry
@@ -216,5 +218,23 @@ class Fmu < ApplicationRecord
   def really_destroy_documents
     mark_for_destruction # Hack to work with the hard delete of operator documents
     ActiveRecord::Base.connection.execute("DELETE FROM operator_documents WHERE fmu_id = #{id}")
+  end
+
+  def geojson_correctness
+    return if geojson.blank?
+
+    temp_geometry = RGeo::GeoJSON.decode geojson
+    bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(temp_geometry.geometry)
+    validate_bbox bbox
+  rescue RGeo::Error::InvalidGeometry
+    errors.add(:geojson, 'Failed linear ring test')
+  rescue StandardError => e
+    errors.add(:geojson, "Error: #{e.message}")
+  end
+
+  def validate_bbox(bbox)
+    return if bbox.max_x <= 180 && bbox.min_x >= -180 && bbox.max_y <= 90 && bbox.min_y >= -90
+
+    errors.add(:geojson, 'The FMU\'s bbox is bigger than the globe. Please make sure your projection is 4096')
   end
 end
