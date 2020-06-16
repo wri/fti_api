@@ -166,11 +166,11 @@ RSpec.describe Observation, type: :model do
       context 'when there is fmu but lat and lng are not present' do
         it 'set lat and lng with the information of the fmu properties' do
           fmu =
-            create(:fmu, geojson: { properties: { centroid: { coordinates: [10.91, -4.32] } } })
+            create(:fmu_geojson)
           observation = create(:observation, fmu: fmu, lat: nil, lng: nil)
 
-          expect(observation.lat).to eql(10.91)
-          expect(observation.lng).to eql(-4.32)
+          expect(observation.lat).to eql(16.8545606240722)
+          expect(observation.lng).to eql(-3.33605202951116)
         end
       end
     end

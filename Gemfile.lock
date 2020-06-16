@@ -381,6 +381,8 @@ GEM
     rgeo-activerecord (6.2.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
+    rgeo-geojson (2.1.1)
+      rgeo (>= 1.0.0)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
@@ -579,6 +581,8 @@ DEPENDENCIES
   resque
   resque-scheduler
   resque_mailer
+  rgeo
+  rgeo-geojson
   rspec-activejob
   rspec-rails
   rspec_api_documentation

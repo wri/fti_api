@@ -164,7 +164,7 @@ RSpec.describe FmuOperator, type: :model do
   describe 'Class methods' do
     describe '#calculate_current' do
       before do
-        fmu = create(:fmu)
+        fmu = create(:fmu_geojson)
         @deactivate_fmu_operator = create(
           :fmu_operator,
           current: true,
@@ -172,7 +172,7 @@ RSpec.describe FmuOperator, type: :model do
           start_date: Date.yesterday - 1.day,
           end_date: Date.yesterday)
 
-        another_fmu = create(:fmu, geojson: { properties: {} })
+        another_fmu = create(:fmu_geojson)
         @activate_fmu_operator = create(
           :fmu_operator,
           current: false,
