@@ -41,7 +41,7 @@ TXT
     text =
 <<~TXT
   A new USER has been created through the portal and required approval.
-  It has the ID "#{user.id}" and the email "#{user.email}".
+  It has the ID "#{user.id}", the name "#{user.name}", and the email "#{user.email}".
   You can now validate it in the backoffice.
 TXT
     AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], ENV['CONTACT_EMAIL'], text, "New USER created: #{user.email}"
