@@ -226,7 +226,6 @@ class Fmu < ApplicationRecord
     temp_geometry = RGeo::GeoJSON.decode geojson
     bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(temp_geometry.geometry)
     validate_bbox bbox
-
   rescue RGeo::Error::InvalidGeometry
     errors.add(:geojson, 'Failed linear ring test')
   rescue StandardError => e
