@@ -70,7 +70,7 @@ RSpec.describe Fmu, type: :model do
         it 'fill geojson with properties from fmu' do
           country = create(:country)
           operator = create(:operator, country: country, fa_id: 'fa_id')
-          fmu = create(:fmu, geojson: {properties: {}}, country: country)
+          fmu = create(:fmu_geojson, country: country)
           create(:fmu_operator, fmu: fmu, operator: operator)
           fmu.reload
           fmu.save
@@ -92,7 +92,7 @@ RSpec.describe Fmu, type: :model do
         it 'number of observations should be in the geojson' do
           country = create(:country)
           operator = create(:operator, country: country, fa_id: 'fa_id')
-          fmu = create(:fmu, operator: operator, country: country, geojson: { properties: {}})
+          fmu = create(:fmu_geojson, operator: operator, country: country)
           fmu.save
           fmu.reload
 
@@ -110,7 +110,7 @@ RSpec.describe Fmu, type: :model do
         it 'number of observations should be in the geojson' do
           country = create(:country)
           operator = create(:operator, country: country, fa_id: 'fa_id')
-          fmu = create(:fmu, operator: operator, country: country, geojson: { properties: {}})
+          fmu = create(:fmu_geojson, operator: operator, country: country)
           fmu.save
           observation = create(:observation, operator: operator, fmu: fmu)
           observation.save
