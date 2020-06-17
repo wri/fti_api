@@ -70,7 +70,7 @@ FactoryBot.define do
     subcategory
     user { build(:admin) }
     severity { build(:severity, subcategory: subcategory) }
-    operator { build(:operator, country: country) }
+    operator { create(:operator, country: country) }
     observation_type { 'operator' }
     observers { build_list(:observer, 1) }
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }

@@ -33,5 +33,6 @@ FactoryBot.define do
     sequence(:name) { |n| "Operator #{n}" }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
     operator_type { Operator::TYPES.sample }
+    is_active { true }
   end
 end
