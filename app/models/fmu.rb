@@ -165,6 +165,8 @@ class Fmu < ApplicationRecord
   end
 
   def self.file_upload(esri_shapefiles_zip)
+    PaperTrail.request.disable_model(Fmu)
+    PaperTrail.request.disable_model(Fmu::Translation)
     tmp_fmu = Fmu.new(name: "Test #{Time.now.to_i}",country_id: Country.first.id)
     FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, _index|
       tmp_fmu.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
@@ -177,8 +179,12 @@ class Fmu < ApplicationRecord
         bbox: tmp_fmu.bbox
     }
     tmp_fmu.really_destroy!
+    PaperTrail.request.enable_model(Fmu)
+    PaperTrail.request.enable_model(Fmu::Translation)
     response
   rescue StandardError => e
+    PaperTrail.request.enable_model(Fmu)
+    PaperTrail.request.enable_model(Fmu::Translation)
     { errors: e.message }
   end
 
