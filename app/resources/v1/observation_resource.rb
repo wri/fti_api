@@ -159,12 +159,12 @@ module V1
         elsif user.user_permission.present? && user.user_permission.user_role == 'admin'
           Observation.joins(:translations)
         else
-          observations_g = Observation.active.government.left_joins(:operator)
-          observations_o = Observation.active.operator.left_joins(:operator).where(operators: { is_active: true })
-          observations_g.or(observations_o)
+          Observation.active
         end
       else
-        Observation.active.where(hidden: false)
+        observations_g = Observation.active.government.left_joins(:operator)
+        observations_o = Observation.active.operator.left_joins(:operator).where(operators: { is_active: true })
+        observations_g.or(observations_o).where(hidden: false)
       end
     end
 
