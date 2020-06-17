@@ -21,7 +21,10 @@
 <script>
   const inputElement = document.getElementById('fmu_esri_shapefiles_zip');
   function handleFiles() {
-    console.log(this.files[0]);
+    setMaxSize(inputElement);
+    if (this.files[0] === undefined) {
+      return;
+    }
 
     const csrf = document.querySelector('meta[name="csrf-token"]').content;
     const formData = new FormData();
@@ -130,4 +133,12 @@
       });
     }
   });
+
+  function setMaxSize(e) {
+    const file = e.files[0];
+    if (file.size > 100000){
+      alert('Shapes cannot be larger than 100KB');
+      e.value = "";
+    }
+  }
 </script>
