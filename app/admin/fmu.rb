@@ -19,9 +19,9 @@ ActiveAdmin.register Fmu do
     def preview
       file = params['file']
       response = if file.blank? || file.size > MAX_FILE_SIZE
-        { errors: "File must exist and be smaller than #{MAX_FILE_SIZE/1000} KB"}
-      else
-        Fmu.file_upload(file)
+                   { errors: "File must exist and be smaller than #{MAX_FILE_SIZE/1000} KB" }
+                 else
+                   Fmu.file_upload(file)
       end
       respond_to do |format|
         format.json { render json: response }
