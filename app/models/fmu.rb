@@ -241,6 +241,6 @@ class Fmu < ApplicationRecord
   def validate_bbox(bbox)
     return if bbox.max_x <= 180 && bbox.min_x >= -180 && bbox.max_y <= 90 && bbox.min_y >= -90
 
-    errors.add(:geojson, 'The FMU\'s bbox is bigger than the globe. Please make sure your projection is 4096')
+    errors.add(:geojson, 'The FMU\'s bbox is bigger than the globe. Please make sure your projection is 4326')
   end
 end
