@@ -290,7 +290,7 @@ module V1
             {
               id: x.id, iso: x.iso, name: x.name,
               operators: x.operators.pluck(:id).uniq,
-              observers: x.observers.pluck(:id).uniq,
+              observers: x.observations.joins(:observers).pluck(:observer_id).uniq,
               fmus: x.fmus.pluck(:id).uniq,
               governments: x.governments.pluck(:id).uniq
             }
