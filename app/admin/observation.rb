@@ -44,7 +44,7 @@ ActiveAdmin.register Observation do
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
                 :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :responsible_admin_id,
-                observer_ids: [], relevant_operators: [], government_ids: [],
+                observer_ids: [], relevant_operator_ids: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
@@ -398,7 +398,12 @@ ActiveAdmin.register Observation do
       f.input :location_information  if f.object.observation_type == 'operator'
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
+
       if f.object.observation_type == 'government'
+        f.input :relevant_operator_ids,
+                label: 'Relevant Operators',
+                as: :select, collection: Operator.all.map { |o| [o.name, o.id] },
+                input_html: { multiple: true }
         f.input :government_ids,
                 label: "Governments",
                 as: :select,
@@ -464,7 +469,11 @@ ActiveAdmin.register Observation do
       end
       if resource.relevant_operators.present?
         row :relevant_operators do |o|
-          o.relevant_operators
+          list = o.relevant_operators.each_with_object([]) do |operator, links|
+            links << link_to(operator.name, admin_producer_path(operator.id))
+          end
+
+          safe_join(list, " ")
         end
       end
       row :publication_date
