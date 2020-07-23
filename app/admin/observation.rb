@@ -399,11 +399,11 @@ ActiveAdmin.register Observation do
       f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
       f.input :observers
 
+      f.input :relevant_operator_ids,
+              label: 'Relevant Operators',
+              as: :select, collection: Operator.all.map { |o| [o.name, o.id] },
+              input_html: { multiple: true }
       if f.object.observation_type == 'government'
-        f.input :relevant_operator_ids,
-                label: 'Relevant Operators',
-                as: :select, collection: Operator.all.map { |o| [o.name, o.id] },
-                input_html: { multiple: true }
         f.input :government_ids,
                 label: "Governments",
                 as: :select,
