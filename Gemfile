@@ -43,7 +43,7 @@ gem 'oj'
 gem 'oj_mimic_json'
 
 # API Documentation
-gem 'rspec_api_documentation'
+gem 'rspec_api_documentation', github: 'tsubik/rspec_api_documentation', branch: 'fix/open-api-parameter-format'
 gem 'rswag-api'
 gem 'rswag-ui'
 
