@@ -13,7 +13,7 @@ resource 'Operators' do
   header "Content-Type", "application/vnd.api+json"
   header 'Authorization', :admin_token
 
-  let(:country) { FactoryBot.create :country }
+  let!(:country) { FactoryBot.create :country }
   let!(:operators) { FactoryBot.create_list(:operator, 5, country: country) }
   let!(:fmu) { FactoryBot.create_list(:fmu, 5, { country: country, operator: operators.first }) }
 
@@ -23,7 +23,7 @@ resource 'Operators' do
     route_summary 'Fetches the operators'
     route_description 'Fetches the operators using the JSON API standard'
 
-    add_include_parameter example: %w[country fmus]
+    add_include_parameter example: %w[country fmus operator-documents.required-operator-document operator-documents.operator-document-annexes]
     add_filter_parameters_for V1::OperatorResource
     add_field_parameter_for :operator
     add_paging_parameters
@@ -40,7 +40,7 @@ resource 'Operators' do
     route_description 'Fetches an operator by id and implements the JSON API spec'
 
     parameter :id, 'id', in: :path, type: :integer
-    add_include_parameter(example: %w[fmus country])
+    add_include_parameter example: %w[country fmus operator-documents.required-operator-document operator-documents.operator-document-annexes]
     add_field_parameter_for :operator
 
     let(:id) { Operator.first.id }

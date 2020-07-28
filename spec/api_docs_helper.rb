@@ -4,7 +4,7 @@ module APIDocsHelpers
   end
 
   def add_include_parameter(options = {})
-    parameter :include, 'related relationships to include',
+    parameter :include, 'related relationships to include: ' + options[:example].join(', '),
               type: :string,
               required: false,
               example: options[:example]
