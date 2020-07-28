@@ -135,6 +135,7 @@ class Fmu < ApplicationRecord
 
     temp_geojson['properties']['id'] = self.id
     temp_geojson['properties']['fmu_name'] = self.name
+    temp_geojson['properties']['iso3_fmu'] = self.country&.iso
     temp_geojson['properties']['company_na'] = self.operator.name if self.operator.present?
     temp_geojson['properties']['operator_id'] = self.operator.id if self.operator.present?
     temp_geojson['properties']['certification_fsc'] = self.certification_fsc
