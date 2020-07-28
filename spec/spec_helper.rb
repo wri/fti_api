@@ -27,6 +27,7 @@ RspecApiDocumentation.configure do |config|
   config.api_explanation = 'API Documentation for the OTP API.'
   config.io_docs_protocol = %w(http https)
 
+  config.response_headers_to_include = []
   config.keep_source_order = true
   config.request_body_formatter = :json
 end
