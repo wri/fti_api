@@ -419,9 +419,9 @@ ActiveAdmin.register Observation do
       f.input :admin_comment
       f.input :monitor_comment, input_html: { disabled: true }
       f.input :observation_report, as: :select
+      f.input :evidence_type, as: :select
+      f.input :evidence_on_report
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
-        f.input :evidence_type, as: :select
-        f.input :evidence_on_report
         t.input :name
         t.input :attachment
       end
