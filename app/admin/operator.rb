@@ -64,11 +64,11 @@ ActiveAdmin.register Operator, as: 'Producer' do
   scope :inactive
 
   filter :country, as: :select,
-                   collection: -> { Country.joins(:operators).with_translations(I18n.locale) .order('country_translations.name') }
-  filter :translations_name_contains,
+                   collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
+  filter :id,
          as: :select, label: 'Name',
          collection: Operator.with_translations(I18n.locale)
-                         .order('operator_translations.name').pluck(:name)
+                         .order('operator_translations.name').pluck(:name, :id)
   filter :concession, as: :select
   filter :score
   filter :score_absolute, label: 'Obs/Visit'
@@ -153,6 +153,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   show do
     attributes_table do
       row :is_active
+      row :name
       row :operator_type
       row :fa_id
       row :details
@@ -176,7 +177,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
   controller do
     def scoped_collection
       end_of_association_chain.with_translations.includes(country: :translations)
-          .where(country_translations: { locale: I18n.locale })
     end
   end
 end
