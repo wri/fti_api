@@ -18,6 +18,7 @@ function updateFmuFields() {
   var country = $('#fmu_country_id').val();
 
   if (country in countryList) {
+    forestTypes.prop('disabled', false);
     Array.from(forestTypes.select2({width: '80%'})[0].options).forEach(op => {
       if (countryList[country].includes(op.value)) {
         $(op).prop('disabled', false);
@@ -29,8 +30,8 @@ function updateFmuFields() {
     Array.from(forestTypes.select2({width: '80%'})[0].options).forEach(op => {
       $(op).prop('disabled', true);
     })
+    forestTypes.prop('disabled', true);
   }
-//  $(forestTypes.select2({width: '80%'})[0].options[1]).prop('disabled', false)
 
   forestTypes.val([])
   forestTypes.select2({width: '80%'}).trigger('change')
