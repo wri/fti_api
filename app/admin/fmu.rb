@@ -89,7 +89,7 @@ ActiveAdmin.register Fmu do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Fmu Details' do
-      f.input :country,  input_html: { disabled: object.persisted? }
+      f.input :country,  input_html: { disabled: object.persisted? }, required: true
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
       render partial: 'zip_hint'
       f.input :forest_type, as: :select,
@@ -107,8 +107,8 @@ ActiveAdmin.register Fmu do
     f.inputs 'Operator', for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
       fo.input :operator_id, label: 'name', as: :select,
                              collection: Operator.active.with_translations.map{ |o| [o.name, o.id] },
-                             input_html: { disabled: object.persisted? }
-      fo.input :start_date, input_html: { disabled: object.persisted? }
+                             input_html: { disabled: object.persisted? }, required: false
+      fo.input :start_date, input_html: { disabled: object.persisted? }, required: false
       fo.input :end_date, input_html: { disabled: object.persisted? }
     end
 
