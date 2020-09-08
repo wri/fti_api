@@ -111,7 +111,11 @@ WHERE id = #{x.fmu_id};"
 
       return unless current_operator
 
-      RequiredOperatorDocumentFmu.where(country_id: fmu.country_id).each do |rodf|
+      # Only the RODF for this fmu's forest_type should be created
+      rodf_query = "country_id = #{fmu.country_id} "
+      rodf_query += " AND '#{Fmu.forest_types[fmu.forest_type]}' = ANY (forest_types)" if fmu.forest_type != 'fmu'
+
+      RequiredOperatorDocumentFmu.where(rodf_query).each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
                                   operator_id: current_operator,
                                   fmu_id: fmu_id).first_or_create do |odf|

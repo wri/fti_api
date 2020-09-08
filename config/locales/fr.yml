@@ -36,6 +36,9 @@ fr:
         en: "Anglais"
         fr: "Français"
         zh-CN: "Chinois"
+        ja: 'Japonais'
+        ko: 'Coréen'
+        vi: 'Vietnamien'
   activerecord:
     enums:
       observation:
