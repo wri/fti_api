@@ -5,6 +5,9 @@ en:
     globalize:
       language:
         zh-CN: "Chinese"
+        ja: 'Japanese'
+        ko: 'Korean'
+        vi: 'Vietnamese'
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
