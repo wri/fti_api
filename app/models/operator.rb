@@ -219,7 +219,7 @@ class Operator < ApplicationRecord
           else
             rank = number_of_operators
           end
-          o.update(country_operators: number_of_operators,
+          o.update_columns(country_operators: number_of_operators,
                    country_doc_rank: rank)
         end
       end
