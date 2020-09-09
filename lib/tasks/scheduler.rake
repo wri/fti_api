@@ -12,6 +12,8 @@ namespace :scheduler do
 
   desc 'Calculate scores'
   task calculate_scores: :environment do
+    ActiveRecord::Base.logger = Logger.new STDOUT
+    Rails.logger = Logger.new STDOUT
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
     Rails.logger.info "Going to calculate operator scores documents at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
     time = Benchmark.ms do
