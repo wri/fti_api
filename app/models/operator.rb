@@ -97,7 +97,7 @@ class Operator < ApplicationRecord
 
   class Translation
     after_save do
-      if name_changed?
+      if name_changed? && locale == :en
         Operator.find_by(id: operator_id)&.fmus&.find_each { |fmu| fmu.save }
       end
     end
