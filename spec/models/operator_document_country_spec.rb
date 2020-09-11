@@ -15,7 +15,7 @@
 #  attachment                    :string
 #  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer
+#  uploaded_by                   :integer          not null
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text

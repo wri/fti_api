@@ -17,7 +17,7 @@
 #  attachment                    :string
 #  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer
+#  uploaded_by                   :integer          not null
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text
@@ -41,6 +41,7 @@ class OperatorDocument < ApplicationRecord
 
   validates_presence_of :start_date, if: :attachment?
   validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
+  validates_presence_of :uploaded_by
   validate :reason_or_attachment
 
   before_save :update_current, on: %w[create update], if: :current_changed?
