@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200604090002) do
+ActiveRecord::Schema.define(version: 20200911141353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -828,7 +828,7 @@ ActiveRecord::Schema.define(version: 20200604090002) do
     t.string   "attachment"
     t.boolean  "current"
     t.datetime "deleted_at"
-    t.integer  "uploaded_by"
+    t.integer  "uploaded_by",                                  null: false
     t.integer  "user_id"
     t.text     "reason"
     t.text     "note"

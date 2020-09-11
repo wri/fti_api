@@ -32,6 +32,8 @@ ActiveAdmin.register OperatorDocument do
     end
   end
 
+  # Here we're updating the documents one by one to make sure the callbacks to
+  # create a new version and to change the last modified (and the author) are called
   batch_action :make_private, confirm: 'Are you sure you want to make the selected documents PRIVATE?' do |ids|
     batch_action_collection.find(ids).each do |doc|
       doc.update(public: false)
@@ -45,6 +47,41 @@ ActiveAdmin.register OperatorDocument do
     end
     redirect_to collection_path, notice: 'Documents are now public!'
   end
+
+  batch_action :set_uploaded_by_operator,
+               confirm: 'Are you sure you want to set the selected documents as uploaded by the OPERATOR?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:operator])
+    end
+    redirect_to collection_path, notice: 'Documents were set to "uploaded by operator"'
+  end
+
+  batch_action :set_uploaded_by_monitor,
+               confirm: 'Are you sure you want to set the selected documents as uploaded by the MONITOR?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:monitor])
+    end
+    redirect_to collection_path, notice: 'Documents were set to "uploaded by MONITOR"'
+  end
+
+  batch_action :set_uploaded_by_admin,
+               confirm: 'Are you sure you want to set the selected documents as uploaded by the ADMIN?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:admin])
+    end
+    redirect_to collection_path, notice: 'Documents were set to "uploaded by admin"'
+  end
+
+  batch_action :set_uploaded_by_other,
+               confirm: 'Are you sure you want to set the selected documents as uploaded by the OTHER?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:other])
+    end
+    redirect_to collection_path, notice: 'Documents were set to "uploaded by other"'
+  end
+
+
+
 
   member_action :approve, method: :put do
     if resource.reason.present?
@@ -227,7 +264,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :required_operator_document, input_html: { disabled: true }
       f.input :operator, input_html: { disabled: true }
       f.input :type, input_html: { disabled: true }
-      f.input :uploaded_by
+      f.input :uploaded_by, default: OperatorDocument.uploaded_bies[:admin]
       f.input :status, include_blank: false
       f.input :public
       f.input :attachment
