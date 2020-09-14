@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200911141353) do
+ActiveRecord::Schema.define(version: 20200914140932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -834,6 +834,8 @@ ActiveRecord::Schema.define(version: 20200911141353) do
     t.text     "note"
     t.datetime "response_date"
     t.boolean  "public",                        default: true, null: false
+    t.integer  "source",                        default: 1,    null: false
+    t.string   "source_info"
     t.index ["current"], name: "index_operator_documents_on_current", using: :btree
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree
@@ -841,6 +843,7 @@ ActiveRecord::Schema.define(version: 20200911141353) do
     t.index ["operator_id"], name: "index_operator_documents_on_operator_id", using: :btree
     t.index ["public"], name: "index_operator_documents_on_public", using: :btree
     t.index ["required_operator_document_id"], name: "index_operator_documents_on_required_operator_document_id", using: :btree
+    t.index ["source"], name: "index_operator_documents_on_source", using: :btree
     t.index ["start_date"], name: "index_operator_documents_on_start_date", using: :btree
     t.index ["status"], name: "index_operator_documents_on_status", using: :btree
     t.index ["type"], name: "index_operator_documents_on_type", using: :btree
