@@ -40,6 +40,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   index do
     column 'Active?', :is_active
+    column :id
     column :country, sortable: 'country_translations.name'
     column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
