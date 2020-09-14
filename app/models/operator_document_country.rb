@@ -23,6 +23,8 @@
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
+#  source                        :integer          default("1"), not null
+#  source_info                   :string
 #
 
 class OperatorDocumentCountry < OperatorDocument

@@ -23,6 +23,8 @@
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
+#  source                        :integer          default("1"), not null
+#  source_info                   :string
 #
 
 class OperatorDocument < ApplicationRecord
@@ -41,7 +43,6 @@ class OperatorDocument < ApplicationRecord
 
   validates_presence_of :start_date, if: :attachment?
   validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
-  validates_presence_of :uploaded_by
   validate :reason_or_attachment
 
   before_save :update_current, on: %w[create update], if: :current_changed?
@@ -59,6 +60,7 @@ class OperatorDocument < ApplicationRecord
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
+  enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
   def update_operator_percentages
     operator.update_valid_documents_percentages

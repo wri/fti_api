@@ -48,40 +48,29 @@ ActiveAdmin.register OperatorDocument do
     redirect_to collection_path, notice: 'Documents are now public!'
   end
 
-  batch_action :set_uploaded_by_operator,
-               confirm: 'Are you sure you want to set the selected documents as uploaded by the OPERATOR?' do |ids|
+  batch_action :set_source_by_company,
+               confirm: 'Are you sure you want to set the source of the selected documents as COMPANY?' do |ids|
     batch_action_collection.find(ids).each do |doc|
-      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:operator])
+      doc.update(source: OperatorDocument.sources[:company])
     end
-    redirect_to collection_path, notice: 'Documents were set to "uploaded by operator"'
+    redirect_to collection_path, notice: 'Documents were set to "source: COMPANY"'
   end
 
-  batch_action :set_uploaded_by_monitor,
-               confirm: 'Are you sure you want to set the selected documents as uploaded by the MONITOR?' do |ids|
+  batch_action :set_source_by_forest_atlas,
+               confirm: 'Are you sure you want to set the source of the selected documents as FOREST ATLAS?' do |ids|
     batch_action_collection.find(ids).each do |doc|
-      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:monitor])
+      doc.update(source: OperatorDocument.sources[:forest_atlas])
     end
-    redirect_to collection_path, notice: 'Documents were set to "uploaded by MONITOR"'
+    redirect_to collection_path, notice: 'Documents were set to "source: FOREST_ATLAS"'
   end
 
-  batch_action :set_uploaded_by_admin,
-               confirm: 'Are you sure you want to set the selected documents as uploaded by the ADMIN?' do |ids|
+  batch_action :set_source_by_other,
+               confirm: 'Are you sure you want to set the source of the selected documents as OTHER?' do |ids|
     batch_action_collection.find(ids).each do |doc|
-      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:admin])
+      doc.update(source: OperatorDocument.sources[:other_source])
     end
-    redirect_to collection_path, notice: 'Documents were set to "uploaded by admin"'
+    redirect_to collection_path, notice: 'Documents were set to "source: OTHER"'
   end
-
-  batch_action :set_uploaded_by_other,
-               confirm: 'Are you sure you want to set the selected documents as uploaded by the OTHER?' do |ids|
-    batch_action_collection.find(ids).each do |doc|
-      doc.update(uploaded_by: OperatorDocument.uploaded_bies[:other])
-    end
-    redirect_to collection_path, notice: 'Documents were set to "uploaded by other"'
-  end
-
-
-
 
   member_action :approve, method: :put do
     if resource.reason.present?
@@ -115,7 +104,8 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new]
   permit_params :name, :public, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
-                :attachment, :uploaded_by, :reason, :note, :response_date
+                :attachment, :uploaded_by, :reason, :note, :response_date,
+                :source, :source_info
 
   csv do
     column :exists do |o|
@@ -222,6 +212,7 @@ ActiveAdmin.register OperatorDocument do
     column :start_date
     column :created_at
     column :uploaded_by
+    column :source
     attachment_column :attachment
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
@@ -254,6 +245,7 @@ ActiveAdmin.register OperatorDocument do
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
+  filter :source, as: :select, collection: OperatorDocument.sources
   filter :updated_at
 
   scope 'Pending', :doc_pending
@@ -265,6 +257,8 @@ ActiveAdmin.register OperatorDocument do
       f.input :operator, input_html: { disabled: true }
       f.input :type, input_html: { disabled: true }
       f.input :uploaded_by, default: OperatorDocument.uploaded_bies[:admin]
+      f.input :source
+      f.input :source_info
       f.input :status, include_blank: false
       f.input :public
       f.input :attachment
