@@ -9,7 +9,7 @@ module V1
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
                :fmu_id, :current, :uploaded_by, :reason, :note, :response_date,
-               :public
+               :public, :source, :source_info
 
     has_one :country
     has_one :fmu
@@ -19,7 +19,7 @@ module V1
 
     filters :type, :status, :operator_id, :current
 
-    before_create :set_operator_id, :set_user_id, :set_public
+    before_create :set_operator_id, :set_user_id, :set_public, :set_source
     before_update :set_status_pending
 
     def set_operator_id
@@ -33,15 +33,19 @@ module V1
       @model.public = false
     end
 
+    def set_source
+      @model.source = OperatorDocument.sources[:company]
+    end
+
     def set_status_pending
       @model.status = :doc_pending
     end
 
     def self.updatable_fields(context)
-      super - [:note, :response_date]
+      super - [:note, :response_date, :source]
     end
     def self.creatable_fields(context)
-      super - [:note, :response_date]
+      super - [:note, :response_date, :source]
     end
 
     def set_user_id

@@ -15,12 +15,14 @@
 #  attachment                    :string
 #  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer
+#  uploaded_by                   :integer          not null
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
+#  source                        :integer          default("1"), not null
+#  source_info                   :string
 #
 
 FactoryBot.define do

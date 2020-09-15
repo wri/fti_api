@@ -17,7 +17,8 @@ module V1
         'subcategory-id': { type: Integer },
         'severity-level': { type: Integer, query: 'severities.level IN ' },
         'operator': { type: Integer },
-        'observation-report.id': { type: Integer, query: 'observation_reports.id IN ' }
+        'observation-report.id': { type: Integer, query: 'observation_reports.id IN ' },
+        'source': { type: Integer }
     }.freeze
 
     OBS_TYPES = {
@@ -43,6 +44,12 @@ module V1
           { id: 3, name: I18n.t('filters.high') }
       ]
 
+      sources = [
+          { id: 1, name: I18n.t('filters.company') },
+          { id: 2, name: I18n.t('filters.forest_atlas') },
+          { id: 3, name: I18n.t('filters.other') }
+      ]
+
       filters = {
           'validation_status': validation_statuses,
           'observation_type': types,
@@ -55,7 +62,8 @@ module V1
           'severity_level': severities,
           'operator': operator_ids,
           'government': government_ids,
-          'observation-report': report_ids
+          'observation-report': report_ids,
+          'source': sources
       }.to_json
 
       render json: filters

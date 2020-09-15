@@ -4,16 +4,16 @@
 #
 # Table name: country_vpas
 #
-#  id              :integer          not null, primary key
-#  url             :string
-#  active          :boolean          default("true")
-#  position        :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  country_id      :integer
+#  id             :integer          not null, primary key
+#  url            :string
+#  active         :boolean          default("true")
+#  position       :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  country_id     :integer
 #  country_vpa_id :integer          not null
-#  name            :string
-#  description     :text
+#  name           :string
+#  description    :text
 #
 class CountryVpa < ApplicationRecord
   belongs_to :country
