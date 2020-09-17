@@ -211,9 +211,9 @@ RSpec.describe Operator, type: :model do
             @operator.update_attributes(fa_id: 'fa_id', approved: true)
             @operator.update_valid_documents_percentages
 
-            expect(@operator.percentage_valid_documents_all).to eql(6.0 / @operator_documents_required)
-            expect(@operator.percentage_valid_documents_country).to eql(2.0 / @operator_document_countries_required)
-            expect(@operator.percentage_valid_documents_fmu).to eql(2.0 / @operator_document_fmus_required)
+            expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
+            expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
+            expect(@operator.score_operator_document.fmu).to eql(2.0 / @operator_document_fmus_required)
           end
         end
 
@@ -222,9 +222,9 @@ RSpec.describe Operator, type: :model do
             @operator.update_attributes(fa_id: 'fa_id', approved: false)
             @operator.update_valid_documents_percentages
 
-            expect(@operator.percentage_valid_documents_all).to eql(3.0 / @operator_documents_required)
-            expect(@operator.percentage_valid_documents_country).to eql(1.0 / @operator_document_countries_required)
-            expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / @operator_document_fmus_required)
+            expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
+            expect(@operator.score_operator_document.country).to eql(1.0 / @operator_document_countries_required)
+            expect(@operator.score_operator_document.fmu).to eql(1.0 / @operator_document_fmus_required)
           end
         end
 
@@ -232,9 +232,9 @@ RSpec.describe Operator, type: :model do
           it 'update percentages with a 0 value' do
             @another_operator.update_valid_documents_percentages
 
-            expect(@another_operator.percentage_valid_documents_all).to eql 0.0
-            expect(@another_operator.percentage_valid_documents_fmu).to eql 0.0
-            expect(@another_operator.percentage_valid_documents_country).to eql 0.0
+            expect(@another_operator.score_operator_document.all).to eql 0.0
+            expect(@another_operator.score_operator_document.country).to eql 0.0
+            expect(@another_operator.score_operator_document.fmu).to eql 0.0
           end
         end
       end
@@ -244,9 +244,9 @@ RSpec.describe Operator, type: :model do
       it 'update the percentages of valid and available operator documents' do
         @operator.percentage_non_approved
 
-        expect(@operator.percentage_valid_documents_all).to eql(3.0 / @operator_documents_required)
-        expect(@operator.percentage_valid_documents_country).to eql(1.0 / @operator_document_countries_required)
-        expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / @operator_document_fmus_required)
+        expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
+        expect(@operator.score_operator_document.country).to eql(1.0 / @operator_document_countries_required)
+        expect(@operator.score_operator_document.fmu).to eql(1.0 / @operator_document_fmus_required)
       end
     end
 
@@ -254,9 +254,9 @@ RSpec.describe Operator, type: :model do
       it 'update the percentages of valid operator documents' do
         @operator.percentage_approved
 
-        expect(@operator.percentage_valid_documents_all).to eql(6.0 / @operator_documents_required)
-        expect(@operator.percentage_valid_documents_country).to eql(2.0 / @operator_document_countries_required)
-        expect(@operator.percentage_valid_documents_fmu).to eql(2.0 / @operator_document_fmus_required)
+        expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
+        expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
+        expect(@operator.score_operator_document.fmu).to eql(2.0 / @operator_document_fmus_required)
       end
     end
 

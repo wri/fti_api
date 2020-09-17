@@ -49,11 +49,17 @@ class OperatorDocument < ApplicationRecord
   before_save :set_type, on: %w[create update]
   before_create :set_status
   before_create :delete_previous_pending_document
-  after_save :update_operator_percentages, on: %w[create update],  if: :status_changed?
+  after_save ->{ ScoreOperatorDocument.recalculate!(operator) }, on: %w[create update],  if: :status_changed?
 
   before_destroy :ensure_unity
 
-  scope :to_expire, ->(date) { 
+  scope :actual,       -> { where(current: true, deleted_at: nil) }
+  scope :valid,        -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required,     -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
+  scope :available,    -> { where(public: true) }
+  scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+  scope :to_expire, ->(date) {
     joins(:required_operator_document)
               .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") 
   }
@@ -61,10 +67,6 @@ class OperatorDocument < ApplicationRecord
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
-
-  def update_operator_percentages
-    operator.update_valid_documents_percentages
-  end
 
   def set_expire_date
     self.expire_date = start_date + required_operator_document.valid_period.days rescue start_date
@@ -102,13 +104,6 @@ class OperatorDocument < ApplicationRecord
   def approved?
     %w(doc_not_required doc_valid).include?(status)
   end
-
-  scope :actual,       -> { where(current: true, deleted_at: nil) }
-  scope :valid,        -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required,     -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
-  scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
-  scope :available,    -> { where(public: true) }
-  scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
 
   private
 

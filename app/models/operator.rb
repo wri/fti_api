@@ -52,13 +52,15 @@ class Operator < ApplicationRecord
   has_many :all_fmu_operators, class_name: 'FmuOperator', inverse_of: :operator, dependent: :destroy
   has_many :all_fmus, through: :all_fmu_operators, source: :fmu
 
-  accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
-
   has_many :operator_documents, -> { actual }
   has_many :operator_document_countries, -> { actual }
   has_many :operator_document_fmus, -> { actual }
 
+  has_many :score_operator_documents
+  has_one :score_operator_document, ->{ active }, through: :score_operator_documents
   has_many :sawmills
+
+  accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
 
   before_validation { self.remove_logo! if self.delete_logo == '1' }
   after_create :create_operator_id
@@ -124,48 +126,6 @@ class Operator < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
-  end
-
-  def update_valid_documents_percentages
-    if fa_id.present?
-      # For the total number of documents, we take into account only the documents which
-      # are required (current and not deleted) and whose required_operator_document
-      # is also not deleted
-
-      if approved
-        percentage_approved
-      else
-        percentage_non_approved
-      end
-
-      self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all.nan?
-      self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country.nan?
-      self.percentage_valid_documents_fmu = 0 if self.percentage_valid_documents_fmu.nan?
-
-      self.save!
-    end
-  end
-
-  # Calculates the percentage of documents for when the operator hasn't been approved
-  # This counts only public documents
-  def percentage_non_approved
-    self.percentage_valid_documents_all =
-      operator_documents.valid.available.ns.count.
-          / operator_documents.required.ns.count.to_f rescue 0
-    self.percentage_valid_documents_fmu =
-      operator_document_fmus.valid.available.ns.count.to_f / operator_document_fmus.required.ns.count.to_f rescue 0
-    self.percentage_valid_documents_country =
-      operator_document_countries.valid.available.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
-  end
-
-  # Calculates the percentage documents knowing they've all been approved
-  def percentage_approved
-    self.percentage_valid_documents_all =
-      operator_documents.valid.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
-    self.percentage_valid_documents_fmu =
-      operator_document_fmus.valid.ns.count.to_f / operator_document_fmus.ns.required.count.to_f rescue 0
-    self.percentage_valid_documents_country =
-      operator_document_countries.valid.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
   end
 
   def calculate_observations_scores

@@ -196,7 +196,7 @@ RSpec.describe OperatorDocument, type: :model do
 
       it 'update valid operator percentages' do
         @operator.reload
-        expect(@operator.percentage_valid_documents_all.round(2)).to eql (1.0 / 3.0).round(2)
+        expect(@operator.score_operator_document.all.round(2)).to eql (1.0 / 3.0).round(2)
 
         operator_document = OperatorDocument.where(
           operator_id: @operator.id,
@@ -206,7 +206,7 @@ RSpec.describe OperatorDocument, type: :model do
         operator_document.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
 
         @operator.reload
-        expect(@operator.percentage_valid_documents_all).to eql 0.0
+        expect(@operator.score_operator_document.all).to eql 0.0
       end
     end
 
