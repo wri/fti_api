@@ -9,7 +9,8 @@ module V1
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
                :fmu_id, :current, :uploaded_by, :reason, :note, :response_date,
-               :public, :source, :source_info
+               :public, :source_info
+    attribute  :source_type, delegate: :source
 
     has_one :country
     has_one :fmu
