@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200915141455) do
+ActiveRecord::Schema.define(version: 20200918100528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -515,6 +515,11 @@ ActiveRecord::Schema.define(version: 20200915141455) do
     t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
   end
 
+  create_table "foobars", id: false, force: :cascade do |t|
+    t.text    "name"
+    t.integer "value"
+  end
+
   create_table "geocode_settings", primary_key: "name", id: :text, force: :cascade do |t|
     t.text "setting"
     t.text "unit"
@@ -864,9 +869,9 @@ ActiveRecord::Schema.define(version: 20200915141455) do
     t.string   "operator_type"
     t.integer  "country_id"
     t.string   "concession"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "is_active",         default: true
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "is_active",      default: true
     t.string   "logo"
     t.string   "operator_id"
     t.float    "score_absolute"
@@ -875,9 +880,7 @@ ActiveRecord::Schema.define(version: 20200915141455) do
     t.string   "fa_id"
     t.string   "address"
     t.string   "website"
-    t.integer  "country_doc_rank"
-    t.integer  "country_operators"
-    t.boolean  "approved",          default: true, null: false
+    t.boolean  "approved",       default: true, null: false
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
@@ -946,6 +949,20 @@ ActiveRecord::Schema.define(version: 20200915141455) do
     t.string  "name",    limit: 90
     t.index "soundex((name)::text)", name: "place_lookup_name_idx", using: :btree
     t.index ["state"], name: "place_lookup_state_idx", using: :btree
+  end
+
+  create_table "ranking_operator_documents", force: :cascade do |t|
+    t.date     "date",                       null: false
+    t.boolean  "current",     default: true, null: false
+    t.integer  "position",                   null: false
+    t.integer  "operator_id"
+    t.integer  "country_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["country_id"], name: "index_ranking_operator_documents_on_country_id", using: :btree
+    t.index ["current"], name: "index_ranking_operator_documents_on_current", using: :btree
+    t.index ["operator_id"], name: "index_ranking_operator_documents_on_operator_id", using: :btree
+    t.index ["position", "country_id", "current"], name: "index_rod_on_position_and_country_and_current", using: :btree
   end
 
   create_table "required_gov_document_group_translations", force: :cascade do |t|
@@ -1399,6 +1416,8 @@ ActiveRecord::Schema.define(version: 20200915141455) do
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "photos", "users"
+  add_foreign_key "ranking_operator_documents", "countries", on_delete: :cascade
+  add_foreign_key "ranking_operator_documents", "operators", on_delete: :cascade
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade
   add_foreign_key "required_operator_documents", "countries"

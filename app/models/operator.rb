@@ -4,26 +4,24 @@
 #
 # Table name: operators
 #
-#  id                :integer          not null, primary key
-#  operator_type     :string
-#  country_id        :integer
-#  concession        :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  is_active         :boolean          default("true")
-#  logo              :string
-#  operator_id       :string
-#  score_absolute    :float
-#  score             :integer
-#  obs_per_visit     :float
-#  fa_id             :string
-#  address           :string
-#  website           :string
-#  country_doc_rank  :integer
-#  country_operators :integer
-#  approved          :boolean          default("true"), not null
-#  name              :string
-#  details           :text
+#  id             :integer          not null, primary key
+#  operator_type  :string
+#  country_id     :integer
+#  concession     :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  is_active      :boolean          default("true")
+#  logo           :string
+#  operator_id    :string
+#  score_absolute :float
+#  score          :integer
+#  obs_per_visit  :float
+#  fa_id          :string
+#  address        :string
+#  website        :string
+#  approved       :boolean          default("true"), not null
+#  name           :string
+#  details        :text
 #
 
 class Operator < ApplicationRecord
@@ -156,34 +154,6 @@ class Operator < ApplicationRecord
   end
 
   class << self
-    # Calculates the ranking of each operator within its own country
-    # based on the percentage of documents uploaded
-    def calculate_document_ranking
-      Country.active.find_each do |country|
-        number_of_operators = country.fa_operators.count
-        rank = 1
-        previous_percentage = nil
-        country.fa_operators.order(percentage_valid_documents_all: :desc).each_with_index do |o, index|
-          if o.percentage_valid_documents_all.present?
-            if o.percentage_valid_documents_all.zero?
-              rank = number_of_operators
-            else
-              if o.percentage_valid_documents_all != previous_percentage
-                rank = index + 1
-                previous_percentage = o.percentage_valid_documents_all
-              end
-            end
-          else
-            rank = number_of_operators
-          end
-          # rubocop:disable Rails/SkipsModelValidations
-          o.update_columns(country_operators: number_of_operators,
-                           country_doc_rank: rank)
-          # rubocop:enable Rails/SkipsModelValidations
-        end
-      end
-    end
-
     # rubocop:disable Rails/SkipsModelValidations
     def calculate_scores
       Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
