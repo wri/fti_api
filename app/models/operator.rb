@@ -57,7 +57,7 @@ class Operator < ApplicationRecord
   has_many :operator_document_fmus, -> { actual }
 
   has_many :score_operator_documents
-  has_one :score_operator_document, ->{ active }, through: :score_operator_documents
+  has_one :score_operator_document, ->{ current }, through: :score_operator_documents
   has_many :sawmills
 
   accepts_nested_attributes_for :fmu_operators, :all_fmu_operators

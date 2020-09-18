@@ -6,7 +6,7 @@
 #
 #  id          :integer          not null, primary key
 #  date        :date             not null
-#  active      :boolean          default("true"), not null
+#  current     :boolean          default("true"), not null
 #  all         :float
 #  country     :float
 #  fmu         :float
@@ -18,8 +18,8 @@ class ScoreOperatorDocument < ApplicationRecord
   belongs_to :operator
   validates_presence_of :date
 
-  # Calculates the scores and if they're different from the active score
-  # it creates a new SOD as the active one
+  # Calculates the scores and if they're different from the current score
+  # it creates a new SOD as the current one
   # @note Only operators with fo_id have scores
   # @param [Operator] operator The operator for which to recalculate
   def self.recalculate!(operator)
@@ -34,20 +34,20 @@ class ScoreOperatorDocument < ApplicationRecord
   # @param [Operator] operator The operator
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator)
-    sod = ScoreOperatorDocument.new date: Date.today, operator: operator, active: true
+    sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
     queryBuilder = operator.approved ? RequiredDocumentsQuery : AvailableRequiredDocumentsQuery
     sod.calculate_scores(queryBuilder)
     sod
   end
 
   # Replaces the current SOD with a new one, if they're different
-  # Updates the current SOD so it's not active anymore, and creates a new one
+  # Updates the current SOD so it's not current anymore, and creates a new one
   # @param [ScoreOperatorDocument] current_sod The current SOD
   # @param [ScoreOperatorDocument] new_sod The new SOD
   def self.replace_sod(current_sod, new_sod)
     return if current_sod == new_sod
 
-    current_sod.update!(active: false)
+    current_sod.update!(current: false)
     new_sod.save!
   end
 

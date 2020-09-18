@@ -4,20 +4,20 @@ class CreateScoreOperatorDocuments < ActiveRecord::Migration[5.0]
       dir.up do
         create_table :score_operator_documents do |t|
           t.date :date, null: false
-          t.boolean :active, null: false, default: true
+          t.boolean :current, null: false, default: true
           t.float :all
           t.float :country
           t.float :fmu
 
           t.index :date
-          t.index :active
+          t.index :current
           t.references :operator,foreign_key: { on_delete: :cascade }, index: true
           t.timestamps
         end
 
         # After creating the table, let's copy the data there and remove the former fields
         Operator.unscoped.find_each do |operator|
-          ScoreOperatorDocument.create! date: Date.today, active: true, operator_id: operator.id,
+          ScoreOperatorDocument.create! date: Date.today, current: true, operator_id: operator.id,
                                         all: operator.percentage_valid_documents_all,
                                         country: operator.percentage_valid_documents_country,
                                         fmu: operator.percentage_valid_documents_fmu
