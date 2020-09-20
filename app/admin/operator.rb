@@ -71,7 +71,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
          collection: Operator.with_translations(I18n.locale)
                          .order('operator_translations.name').pluck(:name, :id)
   filter :concession, as: :select
-  filter :score
   filter :score_absolute, label: 'Obs/Visit'
   filter :percentage_valid_documents_all, label: '% Docs'
 
@@ -165,7 +164,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :fmus
       row :percentage_valid_documents_all
       row :obs_per_visit
-      row :score
       row :score_absolute
       row :created_at
       row :updated_at

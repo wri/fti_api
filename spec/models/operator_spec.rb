@@ -376,7 +376,6 @@ RSpec.describe Operator, type: :model do
       end
 
       it 'update score of the operators ordering by score and splitting then into 3 groups' do
-        Operator.calculate_scores
 
         third_operators =
           (Operator.active.fa_operator.where.not(score_absolute: nil).count / 3).to_i

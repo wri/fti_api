@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200918100528) do
+ActiveRecord::Schema.define(version: 20200918154735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -515,11 +515,6 @@ ActiveRecord::Schema.define(version: 20200918100528) do
     t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
   end
 
-  create_table "foobars", id: false, force: :cascade do |t|
-    t.text    "name"
-    t.integer "value"
-  end
-
   create_table "geocode_settings", primary_key: "name", id: :text, force: :cascade do |t|
     t.text "setting"
     t.text "unit"
@@ -875,7 +870,6 @@ ActiveRecord::Schema.define(version: 20200918100528) do
     t.string   "logo"
     t.string   "operator_id"
     t.float    "score_absolute"
-    t.integer  "score"
     t.float    "obs_per_visit"
     t.string   "fa_id"
     t.string   "address"

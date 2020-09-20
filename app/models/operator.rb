@@ -153,24 +153,6 @@ class Operator < ApplicationRecord
     save!
   end
 
-  class << self
-    # rubocop:disable Rails/SkipsModelValidations
-    def calculate_scores
-      Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
-
-      number_operators = Operator.active.fa_operator.where.not(score_absolute: nil).count
-      third_operators = (number_operators / 3).to_i
-      Operator.active.fa_operator.where.not(score_absolute: nil).order(:score_absolute)
-        .limit(third_operators).update_all(score: 1)
-      Operator.active.fa_operator.where.not(score_absolute: nil)
-        .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
-      Operator.active.fa_operator.where.not(score_absolute: nil)
-        .order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
-    end
-    # rubocop:enable Rails/SkipsModelValidations
-  end
-
-
   def rebuild_documents
     return if fa_id.blank?
 
