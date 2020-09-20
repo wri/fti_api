@@ -6,8 +6,8 @@ module V1
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
-               :percentage_valid_documents_all, :score, :obs_per_visit,
-               :website, :address, :fa_id, :country_doc_rank, :country_operators,
+               :percentage_valid_documents_all, :obs_per_visit,
+               :website, :address, :fa_id, :country_doc_rank,
                :delete_logo
 
     has_one :country
@@ -76,6 +76,22 @@ module V1
 
     def obs_per_visit
       sprintf('%.2f', @model.obs_per_visit) if @model.obs_per_visit.present?
+    end
+
+    def percentage_valid_documents_all
+      @model.score_operator_document&.all
+    end
+
+    def percentage_valid_documents_fmu
+      @model.score_operator_document&.fmu
+    end
+
+    def percentage_valid_documents_country
+      @model.score_operator_document&.country
+    end
+
+    def country_doc_rank
+      @model.ranking_operator_document&.position
     end
 
     def self.records(options = {})

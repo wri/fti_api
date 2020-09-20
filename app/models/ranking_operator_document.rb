@@ -13,7 +13,10 @@
 #
 class RankingOperatorDocument < ApplicationRecord
   belongs_to :country
-  belongs_to :operator
+  belongs_to :operator, touch: true
 
-  validates_presence_of :date, :current, :position
+  validates_presence_of :date, :position
+  validates_inclusion_of :current, in: [true, false]
+
+  scope :current, -> { where(current: true) }
 end

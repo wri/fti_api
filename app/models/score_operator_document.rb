@@ -15,10 +15,12 @@
 #  updated_at  :datetime         not null
 #
 class ScoreOperatorDocument < ApplicationRecord
-  belongs_to :operator
+  include MathHelper
+
+  belongs_to :operator, touch: true
   validates_presence_of :date
 
-  scope :current, -> { where(current: true)}
+  scope :current, -> { where(current: true) }
 
   # Calculates the scores and if they're different from the current score
   # it creates a new SOD as the current one
@@ -53,22 +55,18 @@ class ScoreOperatorDocument < ApplicationRecord
     new_sod.save!
   end
 
-  protected
-
-  def ==(obj)
-    self.all == obj.all && self.fmu == obj.fmu && self.country == obj.country
-  end
-
-  private
-
   # Calculates the SOD of an operator (all, fmu, and country)
   # @note Only required documents are used for this calculation (current and not deleted ones).
   # We also remove the one whose required_operator_documents have been deleted
   # @param [RequiredDocumentsQuery] queryBuilder the query method to use
   def calculate_scores(queryBuilder)
-    self.all = queryBuilder.call(operator.operator_documents).count.to_f / ValidDocumentsQuery.call(operator.operator_documents).count.to_f rescue 0
-    self.fmu = queryBuilder.call(operator.operator_document_fmu).count.to_f / ValidDocumentsQuery.call(operator.operator_document_fmus).count.to_f rescue 0
-    self.country = queryBuilder.call(operator.operator_document_countries).count.to_f / ValidDocumentsQuery.call(operator.operator_document_countries).count.to_f rescue 0
+    self.all = query_divider queryBuilder.new.call(operator.operator_documents), ValidDocumentsQuery.new.call(operator.operator_documents)
+    self.fmu = query_divider queryBuilder.new.call(operator.operator_document_fmus), ValidDocumentsQuery.new.call(operator.operator_document_fmus)
+    self.country = query_divider queryBuilder.new.call(operator.operator_document_countries), ValidDocumentsQuery.new.call(operator.operator_document_countries)
+  end
+
+  def ==(obj)
+    self.all == obj.all && self.fmu == obj.fmu && self.country == obj.country
   end
 end
 

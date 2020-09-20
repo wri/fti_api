@@ -55,6 +55,9 @@ class Operator < ApplicationRecord
 
   has_many :score_operator_documents
   has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
+  has_many :ranking_operator_documents
+  has_one :ranking_operator_document, -> { current }, class_name: 'RankingOperatorDocument', inverse_of: :operator
+
   has_many :sawmills
 
   accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
