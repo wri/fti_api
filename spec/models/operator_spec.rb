@@ -12,7 +12,6 @@
 #  logo           :string
 #  operator_id    :string
 #  score_absolute :float
-#  score          :integer
 #  obs_per_visit  :float
 #  fa_id          :string
 #  address        :string

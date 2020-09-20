@@ -18,6 +18,8 @@ class ScoreOperatorDocument < ApplicationRecord
   belongs_to :operator
   validates_presence_of :date
 
+  scope :current, -> { where(current: true)}
+
   # Calculates the scores and if they're different from the current score
   # it creates a new SOD as the current one
   # @note Only operators with fo_id have scores

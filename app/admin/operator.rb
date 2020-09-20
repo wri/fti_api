@@ -34,7 +34,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
     column :obs_per_visit
     column '% Docs' do |operator|
-      operator.percentage_valid_documents_all
+      operator.score_operator_document&.all
     end
   end
 
@@ -49,7 +49,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
       "#{'%.2f' % operator.score_absolute}" rescue nil
     end
     column 'Obs/Visit', :obs_per_visit, sortable: true
-    column '% Docs', :percentage_valid_documents_all, sortable: true
+    column '% Docs', :percentage_valid_documents_all, sortable: true do |operator|
+      operator.score_operator_document&.all
+    end
     column('Actions') do |operator|
       unless operator.is_active
         a 'Activate', href: activate_admin_producer_path(operator),
@@ -72,7 +74,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
                          .order('operator_translations.name').pluck(:name, :id)
   filter :concession, as: :select
   filter :score_absolute, label: 'Obs/Visit'
-  filter :percentage_valid_documents_all, label: '% Docs'
 
   sidebar 'Fmus', only: :show do
     attributes_table_for resource do
@@ -117,9 +118,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    #f.inputs 'Translated fields' do
-    #
-    #end
     f.inputs 'Operator Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
@@ -162,7 +160,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :address
       row :website
       row :fmus
-      row :percentage_valid_documents_all
+      row :percentage_valid_documents_all do |operator|
+        operator.score_operator_document&.all
+      end
       row :obs_per_visit
       row :score_absolute
       row :created_at

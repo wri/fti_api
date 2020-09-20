@@ -14,7 +14,6 @@
 #  logo           :string
 #  operator_id    :string
 #  score_absolute :float
-#  score          :integer
 #  obs_per_visit  :float
 #  fa_id          :string
 #  address        :string
@@ -55,7 +54,7 @@ class Operator < ApplicationRecord
   has_many :operator_document_fmus, -> { actual }
 
   has_many :score_operator_documents
-  has_one :score_operator_document, ->{ current }, through: :score_operator_documents
+  has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
   has_many :sawmills
 
   accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
