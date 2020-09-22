@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200918154735) do
+ActiveRecord::Schema.define(version: 20200921123907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,11 @@ ActiveRecord::Schema.define(version: 20200918154735) do
     t.datetime "updated_at",                  null: false
     t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true, using: :btree
     t.index ["user_id"], name: "index_api_keys_on_user_id", using: :btree
+  end
+
+  create_table "barfoos", id: false, force: :cascade do |t|
+    t.text    "name"
+    t.integer "rank"
   end
 
   create_table "bg", primary_key: "bg_id", id: :string, limit: 12, force: :cascade, comment: "block groups" do |t|
@@ -515,6 +520,11 @@ ActiveRecord::Schema.define(version: 20200918154735) do
     t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
   end
 
+  create_table "foobars", id: false, force: :cascade do |t|
+    t.text    "name"
+    t.integer "value"
+  end
+
   create_table "geocode_settings", primary_key: "name", id: :text, force: :cascade do |t|
     t.text "setting"
     t.text "unit"
@@ -864,17 +874,15 @@ ActiveRecord::Schema.define(version: 20200918154735) do
     t.string   "operator_type"
     t.integer  "country_id"
     t.string   "concession"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "is_active",      default: true
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "is_active",     default: true
     t.string   "logo"
     t.string   "operator_id"
-    t.float    "score_absolute"
-    t.float    "obs_per_visit"
     t.string   "fa_id"
     t.string   "address"
     t.string   "website"
-    t.boolean  "approved",       default: true, null: false
+    t.boolean  "approved",      default: true, null: false
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
@@ -1072,6 +1080,20 @@ ActiveRecord::Schema.define(version: 20200918154735) do
     t.index ["current"], name: "index_score_operator_documents_on_current", using: :btree
     t.index ["date"], name: "index_score_operator_documents_on_date", using: :btree
     t.index ["operator_id"], name: "index_score_operator_documents_on_operator_id", using: :btree
+  end
+
+  create_table "score_operator_observations", force: :cascade do |t|
+    t.date     "date",                         null: false
+    t.boolean  "current",       default: true, null: false
+    t.float    "score"
+    t.float    "obs_per_visit"
+    t.integer  "operator_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["current", "operator_id"], name: "index_score_operator_observations_on_current_and_operator_id", using: :btree
+    t.index ["current"], name: "index_score_operator_observations_on_current", using: :btree
+    t.index ["date"], name: "index_score_operator_observations_on_date", using: :btree
+    t.index ["operator_id"], name: "index_score_operator_observations_on_operator_id", using: :btree
   end
 
   create_table "secondary_unit_lookup", primary_key: "name", id: :string, limit: 20, force: :cascade do |t|
@@ -1418,6 +1440,7 @@ ActiveRecord::Schema.define(version: 20200918154735) do
   add_foreign_key "required_operator_documents", "required_operator_document_groups"
   add_foreign_key "sawmills", "operators"
   add_foreign_key "score_operator_documents", "operators", on_delete: :cascade
+  add_foreign_key "score_operator_observations", "operators", on_delete: :cascade
   add_foreign_key "severities", "subcategories"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"

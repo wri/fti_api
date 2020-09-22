@@ -113,8 +113,8 @@ class Observation < ApplicationRecord
   before_save    :set_active_status
   before_save    :check_is_physical_place
   before_save    :set_centroid
-  after_create   :update_operator_scores
   before_destroy :destroy_documents
+  after_create   :update_operator_scores
   after_destroy  :update_operator_scores
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
   after_save     :update_reports_observers, if: 'observation_report_id_changed?'
@@ -187,7 +187,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def update_operator_scores
-    operator&.calculate_observations_scores
+    ScoreOperatorObservation.recalculate! operator if operator.present?
   end
 
   def set_active_status

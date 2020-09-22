@@ -30,7 +30,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :name
     column :concession
     column :score_absolute do |operator|
-      "#{'%.2f' % operator.score_absolute}" rescue nil
+      "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
     column :obs_per_visit
     column '% Docs' do |operator|
@@ -46,7 +46,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :name, sortable: 'operator_translations.name'
     column :concession, sortable: true
     column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
-      "#{'%.2f' % operator.score_absolute}" rescue nil
+      "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
     column 'Obs/Visit', :obs_per_visit, sortable: true
     column '% Docs', :percentage_valid_documents_all, sortable: true do |operator|
@@ -73,7 +73,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
          collection: Operator.with_translations(I18n.locale)
                          .order('operator_translations.name').pluck(:name, :id)
   filter :concession, as: :select
-  filter :score_absolute, label: 'Obs/Visit'
+
 
   sidebar 'Fmus', only: :show do
     attributes_table_for resource do
@@ -164,7 +164,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
         operator.score_operator_document&.all
       end
       row :obs_per_visit
-      row :score_absolute
+      row :score_absolute do |operator|
+        operator.score_operator_observation&.score
+      end
       row :created_at
       row :updated_at
     end

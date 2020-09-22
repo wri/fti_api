@@ -6,7 +6,7 @@ module V1
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
-               :percentage_valid_documents_all, :obs_per_visit,
+               :percentage_valid_documents_all, :obs_per_visit, :score,
                :website, :address, :fa_id, :country_doc_rank,
                :delete_logo
 
@@ -92,6 +92,14 @@ module V1
 
     def country_doc_rank
       @model.ranking_operator_document&.position
+    end
+
+    def obs_per_visit
+      @model.score_operator_observation&.obs_per_visit
+    end
+
+    def score
+      @model..score_operator_observation&.score
     end
 
     def self.records(options = {})

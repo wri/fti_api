@@ -4,23 +4,21 @@
 #
 # Table name: operators
 #
-#  id             :integer          not null, primary key
-#  operator_type  :string
-#  country_id     :integer
-#  concession     :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  is_active      :boolean          default("true")
-#  logo           :string
-#  operator_id    :string
-#  score_absolute :float
-#  obs_per_visit  :float
-#  fa_id          :string
-#  address        :string
-#  website        :string
-#  approved       :boolean          default("true"), not null
-#  name           :string
-#  details        :text
+#  id            :integer          not null, primary key
+#  operator_type :string
+#  country_id    :integer
+#  concession    :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  is_active     :boolean          default("true")
+#  logo          :string
+#  operator_id   :string
+#  fa_id         :string
+#  address       :string
+#  website       :string
+#  approved      :boolean          default("true"), not null
+#  name          :string
+#  details       :text
 #
 
 class Operator < ApplicationRecord
@@ -57,6 +55,8 @@ class Operator < ApplicationRecord
   has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
   has_many :ranking_operator_documents
   has_one :ranking_operator_document, -> { current }, class_name: 'RankingOperatorDocument', inverse_of: :operator
+  has_many :score_operator_observations
+  has_one :score_operator_observation, -> { current }, class_name: 'ScoreOperatorObservation', inverse_of: :operator
 
   has_many :sawmills
 
@@ -126,33 +126,6 @@ class Operator < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
-  end
-
-  def calculate_observations_scores
-    return if fa_id.blank?
-
-    observations_query = observations.unscope(:joins)
-    number_of_visits = observations_query.select('date(publication_date)')
-                                         .group('date(publication_date)').count
-    number_of_visits = number_of_visits.keys.count
-
-    # When there are no observations
-    if number_of_visits.zero?
-      self.obs_per_visit = nil
-      self.score_absolute = nil
-      save!
-      return
-    end
-
-    self.obs_per_visit = observations_query.count.to_f / number_of_visits rescue nil
-
-    high = observations_query.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
-    medium = observations_query.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
-    low = observations_query.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
-    unknown = observations_query.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
-    self.score_absolute = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
-
-    save!
   end
 
   def rebuild_documents
