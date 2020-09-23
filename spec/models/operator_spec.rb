@@ -349,7 +349,10 @@ RSpec.describe Operator, type: :model do
     describe '#calculate_document_ranking' do
       it 'calculate the rank per country of the operators based on their documents' do
         RankingOperatorDocumentService.new.call
-        pending('Finish this test')
+        ScoreOperatorDocument.current.join(:operator)
+          .where(operators: {country_id: @country.id}).order(all: :desc) do |score, index|
+          expect(score.operator.ranking_operator_document.position).to eql(index + 1)
+        end
       end
     end
 

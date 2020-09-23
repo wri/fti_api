@@ -198,11 +198,13 @@ RSpec.describe Observation, type: :model do
           country: @country,
           validation_status: 'Published (no comments)')
 
+        @operator.reload
         expect(@operator.score_operator_observation.obs_per_visit).to eql(5.0)
         expect(@operator.score_operator_observation.score).to eql((4.0 + 4.0 + 2 + 1) / 9.0)
 
         observation.destroy
 
+        @operator.reload
         expect(@operator.score_operator_observation.obs_per_visit).to eql(4.0)
         expect(@operator.score_operator_observation.score).to eql((4.0 + 2.0 + 2 + 1) / 9.0)
       end

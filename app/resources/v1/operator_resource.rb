@@ -99,7 +99,7 @@ module V1
     end
 
     def score
-      @model..score_operator_observation&.score
+      @model.score_operator_observation&.score
     end
 
     def self.records(options = {})
