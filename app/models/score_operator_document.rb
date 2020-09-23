@@ -51,7 +51,7 @@ class ScoreOperatorDocument < ApplicationRecord
   def self.replace_sod(current_sod, new_sod)
     return if current_sod == new_sod
 
-    current_sod.update!(current: false)
+    current_sod.update!(current: false) if current_sod.present?
     new_sod.save!
   end
 
