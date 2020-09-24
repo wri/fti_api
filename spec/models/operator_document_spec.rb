@@ -186,11 +186,14 @@ RSpec.describe OperatorDocument, type: :model do
 
         # Generate one valid operator document and two pending operator documents of each type
         valid_op_doc = create(:operator_document, **common_data)
+        valid_op_doc.reload
         valid_op_doc.update_attributes(status: valid_status)
+        @operator.reload
 
         pending_op_docs = create_list(:operator_document, 2, **common_data)
         pending_op_docs.each do |pending_op_doc|
           pending_op_doc.update_attributes(status: pending_status)
+          @operator.reload
         end
       end
 
