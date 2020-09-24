@@ -186,6 +186,7 @@ RSpec.describe Observation, type: :model do
             country: @country,
             validation_status: 'Published (no comments)'
           )
+          @operator.reload
         end
       end
 

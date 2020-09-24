@@ -252,9 +252,10 @@ RSpec.describe Operator, type: :model do
     end
 
     describe '#calculate_observations_scores' do
-      context 'when there are not visits' do
+      context 'when there are no visits' do
         it 'update observations per visits and score with blank values' do
           ScoreOperatorObservation.recalculate! @another_operator
+          @another_operator.reload
 
           expect(@another_operator.score_operator_observation.obs_per_visit).to eql nil
           expect(@another_operator.score_operator_observation.score).to eql nil
@@ -264,6 +265,7 @@ RSpec.describe Operator, type: :model do
       context 'when there are visits' do
         it 'update observations per visits and calculate the score' do
           ScoreOperatorObservation.recalculate! @operator
+          @operator.reload
 
           expect(@operator.score_operator_observation.obs_per_visit).to eql(4.0)
           expect(@operator.score_operator_observation.score).to eql((4.0 + 2 + 2 + 1) / 9.0)
@@ -349,7 +351,7 @@ RSpec.describe Operator, type: :model do
     describe '#calculate_document_ranking' do
       it 'calculate the rank per country of the operators based on their documents' do
         RankingOperatorDocumentService.new.call
-        ScoreOperatorDocument.current.join(:operator)
+        ScoreOperatorDocument.current.joins(:operator)
           .where(operators: {country_id: @country.id}).order(all: :desc) do |score, index|
           expect(score.operator.ranking_operator_document.position).to eql(index + 1)
         end

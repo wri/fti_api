@@ -19,18 +19,30 @@ class ScoreOperatorObservation < ApplicationRecord
 
   attr_accessor :visits
 
+  # Recalculates the SOO for an operator
+  # @param [Operator] operator The operator for which to recalculate the SOO
   def self.recalculate!(operator)
     return if operator.fa_id.blank?
 
     soo = operator.score_operator_observation || ScoreOperatorObservation.new
-    soo.recalculate!(operator)
+    soo.replace(operator)
   end
 
-  def recalculate!(operator)
-    new_soo = ScoreOperatorObservation.build(operator)
-    replace(new_soo)
+
+  # Replaces the current SOO with a new on if there values of the SOO changed
+  # @param [Operator] operator The operator for which to replace the SOO
+  def replace(operator)
+    soo = ScoreOperatorObservation.build(operator)
+    return if self == soo && persisted?
+
+    update!(current: false) if present? && persisted?
+    soo.save!
   end
 
+
+  # Builds the new SOO for an operator
+  # @param [Operator] operator
+  # @return [ScoreOperatorObservation] The new SOO
   def self.build(operator)
     soo = ScoreOperatorObservation.new operator: operator, date: Date.today, current: true
     soo.count_visits
@@ -40,6 +52,9 @@ class ScoreOperatorObservation < ApplicationRecord
     soo
   end
 
+  # Updates the number of different visits an observer has made to an operator
+  # We consider "visit" as a day with observations, regardless of the number of observations on the same day
+  # So if there are 3 observations for the 1st of January and 10 for the 2nd, there were 2 visits
   def count_visits
     visits_query = observations.select('date(publication_date)').group('date(publication_date)').count
     self.visits = visits_query.keys.count
@@ -74,14 +89,5 @@ class ScoreOperatorObservation < ApplicationRecord
   # @return [Float] The number of observations per visit
   def severity_per_visit(level)
     observations.joins(:severity).where({severities: {level: level}}).count.to_f / visits
-  end
-
-  # Replaces the current SOO with the new one if it didn't change
-  # @param [ScoreOperatorObservation] soo The new SOO
-  def replace(soo)
-    return if self == soo && persisted?
-
-    update!(current: false) if present? && persisted?
-    soo.save!
   end
 end
