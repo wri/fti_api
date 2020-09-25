@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       jsonapi_resources :required_gov_documents do; end
       jsonapi_resources :gov_documents do; end
       jsonapi_resources :gov_files, only: [:create, :destroy] do; end
+      jsonapi_resources :score_operator_documents, only: [:index] do; end
       resources :fmus, only: [:index, :update] do
         get 'tiles/:z/:x/:y', to: 'fmus#tiles', on: :collection
       end
