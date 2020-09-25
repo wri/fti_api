@@ -175,6 +175,7 @@ RSpec.describe Operator, type: :model do
           operator: @operator,
           country: @country,
           validation_status: 'Published (no comments)')
+        @operator.reload
       end
 
       # Operator without documents and observations to check empty values
@@ -204,6 +205,7 @@ RSpec.describe Operator, type: :model do
         context 'when operator is approved' do
           it 'update approved percentages' do
             @operator.update_attributes(fa_id: 'fa_id', approved: true)
+            @operator.reload
             ScoreOperatorDocument.recalculate! @operator
 
             expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
@@ -215,6 +217,7 @@ RSpec.describe Operator, type: :model do
         context 'when operator is not approved' do
           it 'update non approved percentages' do
             @operator.update_attributes(fa_id: 'fa_id', approved: false)
+            @operator.reload
             ScoreOperatorDocument.recalculate! @operator
 
             expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
@@ -226,28 +229,13 @@ RSpec.describe Operator, type: :model do
         context 'when there are not documents' do
           it 'update percentages with a 0 value' do
             ScoreOperatorDocument.recalculate! @another_operator
+            @operator.reload
 
             expect(@another_operator.score_operator_document.all).to eql 0.0
             expect(@another_operator.score_operator_document.country).to eql 0.0
             expect(@another_operator.score_operator_document.fmu).to eql 0.0
           end
         end
-      end
-    end
-
-    describe '#percentage_non_approved' do
-      it 'update the percentages of valid and available operator documents' do
-        expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
-        expect(@operator.score_operator_document.country).to eql(1.0 / @operator_document_countries_required)
-        expect(@operator.score_operator_document.fmu).to eql(1.0 / @operator_document_fmus_required)
-      end
-    end
-
-    describe '#percentage_approved' do
-      it 'update the percentages of valid operator documents' do
-        expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
-        expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
-        expect(@operator.score_operator_document.fmu).to eql(2.0 / @operator_document_fmus_required)
       end
     end
 
@@ -265,7 +253,6 @@ RSpec.describe Operator, type: :model do
       context 'when there are visits' do
         it 'update observations per visits and calculate the score' do
           ScoreOperatorObservation.recalculate! @operator
-          @operator.reload
 
           expect(@operator.score_operator_observation.obs_per_visit).to eql(4.0)
           expect(@operator.score_operator_observation.score).to eql((4.0 + 2 + 2 + 1) / 9.0)

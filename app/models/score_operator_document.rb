@@ -38,7 +38,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator)
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    queryBuilder = operator.approved ? RequiredDocumentsQuery : AvailableRequiredDocumentsQuery
+    queryBuilder = operator.approved ? ValidDocumentsQuery : AvailableValidDocumentsQuery
     sod.calculate_scores(queryBuilder)
     sod
   end
@@ -60,9 +60,9 @@ class ScoreOperatorDocument < ApplicationRecord
   # We also remove the one whose required_operator_documents have been deleted
   # @param [RequiredDocumentsQuery] queryBuilder the query method to use
   def calculate_scores(queryBuilder)
-    self.all = query_divider ValidDocumentsQuery.new.call(operator.operator_documents), queryBuilder.new.call(operator.operator_documents)
-    self.fmu = query_divider ValidDocumentsQuery.new.call(operator.operator_document_fmus), queryBuilder.new.call(operator.operator_document_fmus)
-    self.country = query_divider ValidDocumentsQuery.new.call(operator.operator_document_countries), queryBuilder.new.call(operator.operator_document_countries)
+    self.all = query_divider queryBuilder.new.call(operator.operator_documents), RequiredDocumentsQuery.new.call(operator.operator_documents)
+    self.fmu = query_divider queryBuilder.new.call(operator.operator_document_fmus), RequiredDocumentsQuery.new.call(operator.operator_document_fmus)
+    self.country = query_divider queryBuilder.new.call(operator.operator_document_countries), RequiredDocumentsQuery.new.call(operator.operator_document_countries)
   end
 
   protected
