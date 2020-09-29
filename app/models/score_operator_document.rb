@@ -25,7 +25,7 @@ class ScoreOperatorDocument < ApplicationRecord
 
   scope :current, -> { where(current: true) }
 
-  VALUE_ATTRS = %w[@all @fmu @country @total @summary_public @summary_private].freeze
+  VALUE_ATTRS = %w[all fmu country total summary_public summary_private].freeze
 
   # Calculates the scores and if they're different from the current score
   # it creates a new SOD as the current one
@@ -84,7 +84,7 @@ class ScoreOperatorDocument < ApplicationRecord
 
   def ==(obj)
     VALUE_ATTRS.reject do |attr|
-      instance_variable_get(attr) == obj.instance_variable_get(attr)
+      read_attribute(attr) == obj.read_attribute(attr)
     end.none?
   end
 
@@ -102,7 +102,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # @param [ScoreOperatorDocument] sod The SOD with the new values
   def update_values(sod)
     VALUE_ATTRS.each do |attr|
-      instance_variable_set(attr, sod.instance_variable_get(attr))
+      write_attribute attr, sod.read_attribute(attr)
     end
     save!
   end
