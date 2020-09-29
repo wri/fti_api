@@ -8,6 +8,9 @@ class CreateScoreOperatorDocuments < ActiveRecord::Migration[5.0]
           t.float :all
           t.float :country
           t.float :fmu
+          t.jsonb :summary_public
+          t.jsonb :summary_private
+          t.integer :total
 
           t.index :date
           t.index :current
@@ -17,10 +20,7 @@ class CreateScoreOperatorDocuments < ActiveRecord::Migration[5.0]
 
         # After creating the table, let's copy the data there and remove the former fields
         Operator.unscoped.find_each do |operator|
-          ScoreOperatorDocument.create! date: Date.today, current: true, operator_id: operator.id,
-                                        all: operator.percentage_valid_documents_all,
-                                        country: operator.percentage_valid_documents_country,
-                                        fmu: operator.percentage_valid_documents_fmu
+          ScoreOperatorDocument.recalculate!(operator)
         end
 
         remove_columns :operators, :percentage_valid_documents_all,

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MathHelper
 
   # Divides the number of results of 2 queries
@@ -9,7 +11,7 @@ module MathHelper
     return 0 if denominator.count.zero?
 
     numerator.count.to_f / denominator.count.to_f
-  rescue
+  rescue StandardError
     0
   end
 end

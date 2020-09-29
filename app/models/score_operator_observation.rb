@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: score_operator_observations
@@ -88,6 +90,6 @@ class ScoreOperatorObservation < ApplicationRecord
   # @param [Integer] level The level of severity
   # @return [Float] The number of observations per visit
   def severity_per_visit(level)
-    observations.joins(:severity).where({severities: {level: level}}).count.to_f / visits
+    observations.joins(:severity).where({ severities: { level: level } }).count.to_f / visits
   end
 end

@@ -1069,14 +1069,17 @@ ActiveRecord::Schema.define(version: 20200921123907) do
   end
 
   create_table "score_operator_documents", force: :cascade do |t|
-    t.date     "date",                       null: false
-    t.boolean  "current",     default: true, null: false
+    t.date     "date",                           null: false
+    t.boolean  "current",         default: true, null: false
     t.float    "all"
     t.float    "country"
     t.float    "fmu"
+    t.jsonb    "summary_public"
+    t.jsonb    "summary_private"
+    t.integer  "total"
     t.integer  "operator_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["current"], name: "index_score_operator_documents_on_current", using: :btree
     t.index ["date"], name: "index_score_operator_documents_on_date", using: :btree
     t.index ["operator_id"], name: "index_score_operator_documents_on_operator_id", using: :btree

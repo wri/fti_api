@@ -2,15 +2,18 @@
 #
 # Table name: score_operator_documents
 #
-#  id          :integer          not null, primary key
-#  date        :date             not null
-#  current     :boolean          default("true"), not null
-#  all         :float
-#  country     :float
-#  fmu         :float
-#  operator_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id              :integer          not null, primary key
+#  date            :date             not null
+#  current         :boolean          default("true"), not null
+#  all             :float
+#  country         :float
+#  fmu             :float
+#  summary_public  :jsonb
+#  summary_private :jsonb
+#  total           :integer
+#  operator_id     :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 require 'rails_helper'
 

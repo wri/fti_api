@@ -8,7 +8,7 @@ module V1
     load_and_authorize_resource class: 'ScoreOperatorDocument'
 
     def index
-      return render json: { error: 'You must provide an operator' }, status: 400 unless params.dig(:filter, :operator).present?
+      return render json: { error: 'You must provide an operator' }, status: :bad_request if params.dig(:filter, :operator).blank?
 
       super
     end

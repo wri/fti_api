@@ -4,15 +4,18 @@
 #
 # Table name: score_operator_documents
 #
-#  id          :integer          not null, primary key
-#  date        :date             not null
-#  current     :boolean          default("true"), not null
-#  all         :float
-#  country     :float
-#  fmu         :float
-#  operator_id :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id              :integer          not null, primary key
+#  date            :date             not null
+#  current         :boolean          default("true"), not null
+#  all             :float
+#  country         :float
+#  fmu             :float
+#  summary_public  :jsonb
+#  summary_private :jsonb
+#  total           :integer
+#  operator_id     :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 class ScoreOperatorDocument < ApplicationRecord
   include MathHelper
@@ -21,6 +24,8 @@ class ScoreOperatorDocument < ApplicationRecord
   validates_presence_of :date
 
   scope :current, -> { where(current: true) }
+
+  VALUE_ATTRS = %w[@all @fmu @country @total @summary_public @summary_private].freeze
 
   # Calculates the scores and if they're different from the current score
   # it creates a new SOD as the current one
@@ -38,8 +43,9 @@ class ScoreOperatorDocument < ApplicationRecord
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator)
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    queryBuilder = operator.approved ? ValidDocumentsQuery : AvailableValidDocumentsQuery
-    sod.calculate_scores(queryBuilder)
+    query_builder = operator.approved ? ValidDocumentsQuery : AvailableValidDocumentsQuery
+    sod.calculate_scores(query_builder)
+    sod.save_counts(operator)
     sod
   end
 
@@ -58,17 +64,28 @@ class ScoreOperatorDocument < ApplicationRecord
   # Calculates the SOD of an operator (all, fmu, and country)
   # @note Only required documents are used for this calculation (current and not deleted ones).
   # We also remove the one whose required_operator_documents have been deleted
-  # @param [RequiredDocumentsQuery] queryBuilder the query method to use
-  def calculate_scores(queryBuilder)
-    self.all = query_divider queryBuilder.new.call(operator.operator_documents), RequiredDocumentsQuery.new.call(operator.operator_documents)
-    self.fmu = query_divider queryBuilder.new.call(operator.operator_document_fmus), RequiredDocumentsQuery.new.call(operator.operator_document_fmus)
-    self.country = query_divider queryBuilder.new.call(operator.operator_document_countries), RequiredDocumentsQuery.new.call(operator.operator_document_countries)
+  # @param [RequiredDocumentsQuery] query_builder the query method to use
+  def calculate_scores(query_builder)
+    self.all = query_divider query_builder.new.call(operator.operator_documents), RequiredDocumentsQuery.new.call(operator.operator_documents)
+    self.fmu = query_divider query_builder.new.call(operator.operator_document_fmus), RequiredDocumentsQuery.new.call(operator.operator_document_fmus)
+    self.country = query_divider query_builder.new.call(operator.operator_document_countries), RequiredDocumentsQuery.new.call(operator.operator_document_countries)
+  end
+
+  # Saves the counters for the selected operator (summary_private, summary_public, total)
+  # @param [Operator] operator The operator
+  def save_counts(operator)
+    presenter = OperatorPresenter.new(operator)
+    self.summary_private = presenter.summary_private
+    self.summary_public = presenter.summary_public
+    self.total = operator.operator_documents.count
   end
 
   protected
 
   def ==(obj)
-    self.all == obj.all && self.fmu == obj.fmu && self.country == obj.country
+    VALUE_ATTRS.reject do |attr|
+      instance_variable_get(attr) == obj.instance_variable_get(attr)
+    end.none?
   end
 
   private
@@ -84,10 +101,9 @@ class ScoreOperatorDocument < ApplicationRecord
   # This should be called when updating the values of the same day
   # @param [ScoreOperatorDocument] sod The SOD with the new values
   def update_values(sod)
-    self.all = sod.all
-    self.country = sod.country
-    self.fmu = sod.fmu
+    VALUE_ATTRS.each do |attr|
+      instance_variable_set(attr, sod.instance_variable_get(attr))
+    end
     save!
   end
 end
-
