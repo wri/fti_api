@@ -15,13 +15,13 @@
 #  attachment                    :string
 #  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer          not null
+#  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
-#  source                        :integer          default("1"), not null
+#  source                        :integer          default("1")
 #  source_info                   :string
 #
 
@@ -186,17 +186,20 @@ RSpec.describe OperatorDocument, type: :model do
 
         # Generate one valid operator document and two pending operator documents of each type
         valid_op_doc = create(:operator_document, **common_data)
+        valid_op_doc.reload
         valid_op_doc.update_attributes(status: valid_status)
+        @operator.reload
 
         pending_op_docs = create_list(:operator_document, 2, **common_data)
         pending_op_docs.each do |pending_op_doc|
           pending_op_doc.update_attributes(status: pending_status)
+          @operator.reload
         end
       end
 
       it 'update valid operator percentages' do
         @operator.reload
-        expect(@operator.percentage_valid_documents_all.round(2)).to eql (1.0 / 3.0).round(2)
+        expect(@operator.score_operator_document.all.round(2)).to eql (1.0 / 3.0).round(2)
 
         operator_document = OperatorDocument.where(
           operator_id: @operator.id,
@@ -206,7 +209,7 @@ RSpec.describe OperatorDocument, type: :model do
         operator_document.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
 
         @operator.reload
-        expect(@operator.percentage_valid_documents_all).to eql 0.0
+        expect(@operator.score_operator_document.all).to eql 0.0
       end
     end
 

@@ -4,29 +4,21 @@
 #
 # Table name: operators
 #
-#  id                                 :integer          not null, primary key
-#  operator_type                      :string
-#  country_id                         :integer
-#  concession                         :string
-#  created_at                         :datetime         not null
-#  updated_at                         :datetime         not null
-#  is_active                          :boolean          default("true")
-#  logo                               :string
-#  operator_id                        :string
-#  percentage_valid_documents_all     :float
-#  percentage_valid_documents_country :float
-#  percentage_valid_documents_fmu     :float
-#  score_absolute                     :float
-#  score                              :integer
-#  obs_per_visit                      :float
-#  fa_id                              :string
-#  address                            :string
-#  website                            :string
-#  country_doc_rank                   :integer
-#  country_operators                  :integer
-#  approved                           :boolean          default("true"), not null
-#  name                               :string
-#  details                            :text
+#  id            :integer          not null, primary key
+#  operator_type :string
+#  country_id    :integer
+#  concession    :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  is_active     :boolean          default("true")
+#  logo          :string
+#  operator_id   :string
+#  fa_id         :string
+#  address       :string
+#  website       :string
+#  approved      :boolean          default("true"), not null
+#  name          :string
+#  details       :text
 #
 
 class Operator < ApplicationRecord
@@ -55,13 +47,20 @@ class Operator < ApplicationRecord
   has_many :all_fmu_operators, class_name: 'FmuOperator', inverse_of: :operator, dependent: :destroy
   has_many :all_fmus, through: :all_fmu_operators, source: :fmu
 
-  accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
-
   has_many :operator_documents, -> { actual }
   has_many :operator_document_countries, -> { actual }
   has_many :operator_document_fmus, -> { actual }
 
+  has_many :score_operator_documents
+  has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
+  has_many :ranking_operator_documents
+  has_one :ranking_operator_document, -> { current }, class_name: 'RankingOperatorDocument', inverse_of: :operator
+  has_many :score_operator_observations
+  has_one :score_operator_observation, -> { current }, class_name: 'ScoreOperatorObservation', inverse_of: :operator
+
   has_many :sawmills
+
+  accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
 
   before_validation { self.remove_logo! if self.delete_logo == '1' }
   after_create :create_operator_id
@@ -128,121 +127,6 @@ class Operator < ApplicationRecord
   def cache_key
     super + '-' + Globalize.locale.to_s
   end
-
-  def update_valid_documents_percentages
-    if fa_id.present?
-      # For the total number of documents, we take into account only the documents which
-      # are required (current and not deleted) and whose required_operator_document
-      # is also not deleted
-
-      if approved
-        percentage_approved
-      else
-        percentage_non_approved
-      end
-
-      self.percentage_valid_documents_all = 0 if self.percentage_valid_documents_all.nan?
-      self.percentage_valid_documents_country = 0 if self.percentage_valid_documents_country.nan?
-      self.percentage_valid_documents_fmu = 0 if self.percentage_valid_documents_fmu.nan?
-
-      self.save!
-    end
-  end
-
-  # Calculates the percentage of documents for when the operator hasn't been approved
-  # This counts only public documents
-  def percentage_non_approved
-    self.percentage_valid_documents_all =
-      operator_documents.valid.available.ns.count.
-          / operator_documents.required.ns.count.to_f rescue 0
-    self.percentage_valid_documents_fmu =
-      operator_document_fmus.valid.available.ns.count.to_f / operator_document_fmus.required.ns.count.to_f rescue 0
-    self.percentage_valid_documents_country =
-      operator_document_countries.valid.available.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
-  end
-
-  # Calculates the percentage documents knowing they've all been approved
-  def percentage_approved
-    self.percentage_valid_documents_all =
-      operator_documents.valid.ns.count.to_f / operator_documents.required.ns.count.to_f rescue 0
-    self.percentage_valid_documents_fmu =
-      operator_document_fmus.valid.ns.count.to_f / operator_document_fmus.ns.required.count.to_f rescue 0
-    self.percentage_valid_documents_country =
-      operator_document_countries.valid.ns.count.to_f / operator_document_countries.required.ns.count.to_f rescue 0
-  end
-
-  def calculate_observations_scores
-    return if fa_id.blank?
-
-    observations_query = observations.unscope(:joins)
-    number_of_visits = observations_query.select('date(publication_date)')
-                                         .group('date(publication_date)').count
-    number_of_visits = number_of_visits.keys.count
-
-    # When there are no observations
-    if number_of_visits.zero?
-      self.obs_per_visit = nil
-      self.score_absolute = nil
-      save!
-      return
-    end
-
-    self.obs_per_visit = observations_query.count.to_f / number_of_visits rescue nil
-
-    high = observations_query.joins(:severity).where('severities.level = 3').count.to_f / number_of_visits
-    medium = observations_query.joins(:severity).where('severities.level = 2').count.to_f / number_of_visits
-    low = observations_query.joins(:severity).where('severities.level = 1').count.to_f / number_of_visits
-    unknown = observations_query.joins(:severity).where('severities.level = 0').count.to_f / number_of_visits
-    self.score_absolute = (4 * high + 2 * medium + 2 * unknown + low).to_f / 9
-
-    save!
-  end
-
-  class << self
-    # Calculates the ranking of each operator within its own country
-    # based on the percentage of documents uploaded
-    def calculate_document_ranking
-      Country.active.find_each do |country|
-        number_of_operators = country.fa_operators.count
-        rank = 1
-        previous_percentage = nil
-        country.fa_operators.order(percentage_valid_documents_all: :desc).each_with_index do |o, index|
-          if o.percentage_valid_documents_all.present?
-            if o.percentage_valid_documents_all.zero?
-              rank = number_of_operators
-            else
-              if o.percentage_valid_documents_all != previous_percentage
-                rank = index + 1
-                previous_percentage = o.percentage_valid_documents_all
-              end
-            end
-          else
-            rank = number_of_operators
-          end
-          # rubocop:disable Rails/SkipsModelValidations
-          o.update_columns(country_operators: number_of_operators,
-                           country_doc_rank: rank)
-          # rubocop:enable Rails/SkipsModelValidations
-        end
-      end
-    end
-
-    # rubocop:disable Rails/SkipsModelValidations
-    def calculate_scores
-      Operator.active.fa_operator.where(score_absolute: nil).update_all(score: 0)
-
-      number_operators = Operator.active.fa_operator.where.not(score_absolute: nil).count
-      third_operators = (number_operators / 3).to_i
-      Operator.active.fa_operator.where.not(score_absolute: nil).order(:score_absolute)
-        .limit(third_operators).update_all(score: 1)
-      Operator.active.fa_operator.where.not(score_absolute: nil)
-        .order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").update_all(score: 2)
-      Operator.active.fa_operator.where.not(score_absolute: nil)
-        .order("score_absolute OFFSET #{2 * third_operators}").update_all(score: 3)
-    end
-    # rubocop:enable Rails/SkipsModelValidations
-  end
-
 
   def rebuild_documents
     return if fa_id.blank?
