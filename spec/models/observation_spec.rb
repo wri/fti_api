@@ -69,6 +69,30 @@ RSpec.describe Observation, type: :model do
 
 
   describe 'Validations' do
+    describe 'Status changes' do
+      describe 'For a monitor' do
+        let(:country) { FactoryBot.create(:country)}
+        let(:observation) { FactoryBot.build(:observation, validation_status: 'Created',
+                                             user_type: :monitor, country: country)}
+        it 'Can create an observation'do
+          observation.save
+          expect(observation.persisted?).to be_truthy
+        end
+
+        it 'Can move from Created to Ready for QC' do
+          observation.save
+          observation.validation_status = 'Ready for QC'
+          expect(observation.save).to be_truthy
+        end
+
+        it 'Cannot go to QC in progress' do
+          observation.save
+          observation.validation_status = 'QC in progress'
+          expect(observation.save).to be_falsey
+        end
+      end
+    end
+
     describe '#active_government' do
       let(:country) { create(:country) }
 
