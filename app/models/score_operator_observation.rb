@@ -81,7 +81,7 @@ class ScoreOperatorObservation < ApplicationRecord
   # Overrides the ==. It's now true when the score and obs_per_visit have the same value
   # @param [ScoreOperatorObservation] obj
   def ==(obj)
-    self.score == obj.score && self.obs_per_visit == obj.obs_per_visit
+    obj.is_a? self.class && self.score == obj.score && self.obs_per_visit == obj.obs_per_visit
   end
 
   private
