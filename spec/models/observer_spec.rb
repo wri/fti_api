@@ -31,31 +31,6 @@ RSpec.describe Observer, type: :model do
 
   it_should_behave_like 'translatable', FactoryBot.create(:observer), %i[name organization]
 
-  describe 'Relations' do
-    it { is_expected.to have_and_belong_to_many(:countries) }
-    it { is_expected.to have_many(:observer_observations).dependent(:restrict_with_error) }
-    it { is_expected.to have_many(:observations).through(:observer_observations) }
-    it { is_expected.to have_many(:observation_report_observers).dependent(:restrict_with_error) }
-    it { is_expected.to have_many(:observation_reports).through(:observation_report_observers) }
-    it { is_expected.to have_many(:users).inverse_of(:observer) }
-  end
-
-  describe 'Validations' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:observer_type) }
-
-    it { is_expected.to validate_inclusion_of(:observer_type)
-      .in_array(%w[Mandated SemiMandated External Government])
-      .with_message(/is not a valid observer type/)
-    }
-    it { is_expected.to validate_inclusion_of(:organization_type)
-      .in_array(['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other'])
-    }
-
-    it { is_expected.to allow_value('email@email.com').for(:information_email) }
-    it { is_expected.to allow_value('email@email.com').for(:data_email) }
-  end
-
   describe 'Instance methods' do
     describe '#cache_key' do
       it 'return the default value with the locale' do

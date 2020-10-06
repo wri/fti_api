@@ -20,13 +20,6 @@ RSpec.describe ObservationReport, type: :model do
     expect(observation_report).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:user).inverse_of(:observation_reports) }
-    it { is_expected.to have_many(:observation_report_observers) }
-    it { is_expected.to have_many(:observers).through(:observation_report_observers) }
-    it { is_expected.to have_many(:observations) }
-  end
-
   describe 'Hooks' do
     describe '#remove_attachment_id_directory' do
       it 'removes all attached documents' do

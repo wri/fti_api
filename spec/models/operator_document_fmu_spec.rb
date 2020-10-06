@@ -33,12 +33,4 @@ RSpec.describe OperatorDocumentFmu, type: :model do
   it 'is valid with valid attributes' do
     expect(operator_document_fmu).to be_valid
   end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:required_operator_document_fmu)
-      .with_foreign_key('required_operator_document_id')
-      .required
-    }
-    it { is_expected.to belong_to(:fmu).required }
-  end
 end

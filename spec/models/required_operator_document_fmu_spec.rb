@@ -27,10 +27,6 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
     expect(required_operator_document_fmu).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to have_many(:operator_document_fmus).with_foreign_key('required_operator_document_id') }
-  end
-
   describe 'Validations' do
     it { is_expected.to validate_absence_of(:contract_signature) }
   end

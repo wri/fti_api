@@ -39,26 +39,6 @@ RSpec.describe User, type: :model do
 
   it_should_behave_like 'activable', :user, FactoryBot.build(:user)
 
-  describe 'Enums' do
-    it { is_expected.to define_enum_for(:permissions_request).with_values(
-      { operator: 1, ngo: 2, ngo_manager: 4, government: 6 }
-    ) }
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:country).inverse_of(:users).optional }
-    it { is_expected.to belong_to(:observer).optional }
-    it { is_expected.to belong_to(:operator).optional }
-    it { is_expected.to have_one(:api_key).dependent(:destroy) }
-    it { is_expected.to have_one(:user_permission) }
-    it { is_expected.to have_many(:observations).inverse_of(:user) }
-    it { is_expected.to have_many(:comments).inverse_of(:user).dependent(:destroy) }
-    it { is_expected.to have_many(:photos).inverse_of(:user) }
-    it { is_expected.to have_many(:observation_documents).inverse_of(:user) }
-    it { is_expected.to have_many(:observation_reports).inverse_of(:user) }
-    it { is_expected.to have_many(:operator_document_annexes).inverse_of(:user) }
-  end
-
   describe 'Nested attributes' do
     it { is_expected.to accept_nested_attributes_for(:user_permission) }
   end
