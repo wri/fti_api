@@ -34,14 +34,6 @@ RSpec.describe OperatorDocument, type: :model do
     expect(operator_document).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:operator).touch(true).required }
-    it { is_expected.to belong_to(:required_operator_document).required }
-    it { is_expected.to belong_to(:fmu) }
-    it { is_expected.to belong_to(:user) }
-    it { is_expected.to have_many(:operator_document_annexes) }
-  end
-
   describe 'Validations' do
     describe '#start_date' do
       context 'has an attachment' do
@@ -231,15 +223,6 @@ RSpec.describe OperatorDocument, type: :model do
         end
       end
     end
-  end
-
-  describe 'Enums' do
-    it { is_expected.to define_enum_for(:status).with_values(
-      { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
-    ) }
-    it { is_expected.to define_enum_for(:uploaded_by).with_values(
-      { operator: 1, monitor: 2, admin: 3, other: 4 }
-    ) }
   end
 
   describe 'Instance methods' do

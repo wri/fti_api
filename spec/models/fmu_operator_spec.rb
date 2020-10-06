@@ -20,10 +20,6 @@ RSpec.describe FmuOperator, type: :model do
     expect(fmu_operator).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:operator).required }
-  end
-
   describe 'Validations' do
     # We have a before_validation which sets start_date, so we cant test this
     #it { is_expected.to validate_presence_of(:start_date) }

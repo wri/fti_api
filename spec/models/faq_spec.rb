@@ -22,9 +22,4 @@ RSpec.describe Faq, type: :model do
 
   it_should_behave_like 'translatable', FactoryBot.create(:faq), %i[question answer]
 
-  describe 'Validations' do
-    it { is_expected.to validate_presence_of(:position) }
-
-    it { is_expected.to validate_uniqueness_of(:position) }
-  end
 end

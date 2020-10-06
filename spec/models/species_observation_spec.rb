@@ -17,9 +17,4 @@ RSpec.describe SpeciesObservation, type: :model do
   it 'is valid with valid attributes' do
     expect(species_observation).to be_valid
   end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:observation) }
-    it { is_expected.to belong_to(:species) }
-  end
 end
