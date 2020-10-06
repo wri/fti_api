@@ -50,31 +50,6 @@ RSpec.describe Operator, type: :model do
 
   it_should_behave_like 'translatable', FactoryBot.create(:operator), %i[name details]
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:country).inverse_of(:operators).optional }
-    it { is_expected.to have_many(:all_operator_documents).class_name('OperatorDocument') }
-
-    it { is_expected.to have_many(:observations).inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:all_observations).class_name('Observation').inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:users).inverse_of(:operator).dependent(:destroy) }
-
-    it { is_expected.to have_many(:fmu_operators).inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:fmus).through(:fmu_operators) }
-    it { is_expected.to have_many(:all_fmu_operators).class_name('FmuOperator').inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:all_fmus).through(:all_fmu_operators).source(:fmu) }
-
-    it { is_expected.to have_many(:operator_documents) }
-    it { is_expected.to have_many(:operator_document_countries) }
-    it { is_expected.to have_many(:operator_document_fmus) }
-
-    it { is_expected.to have_many(:sawmills) }
-  end
-
-  describe 'Validations' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_inclusion_of(:operator_type).in_array(Operator::TYPES) }
-  end
-
   describe 'Hooks' do
     describe '#create_operator_id' do
       context 'when country is present' do

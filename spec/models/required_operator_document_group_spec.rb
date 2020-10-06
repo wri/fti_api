@@ -20,10 +20,4 @@ RSpec.describe RequiredOperatorDocumentGroup, type: :model do
   end
 
   it_should_behave_like 'translatable', FactoryBot.create(:required_operator_document_group), %i[name]
-
-  describe 'Relations' do
-    it { is_expected.to have_many(:required_operator_documents).dependent(:destroy) }
-    it { is_expected.to have_many(:required_operator_document_countries) }
-    it { is_expected.to have_many(:required_operator_document_fmus) }
-  end
 end

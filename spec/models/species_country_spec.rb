@@ -17,9 +17,4 @@ RSpec.describe SpeciesCountry, type: :model do
   it 'is valid with valid attributes' do
     expect(species_country).to be_valid
   end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:country) }
-    it { is_expected.to belong_to(:species) }
-  end
 end

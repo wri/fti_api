@@ -100,16 +100,6 @@ RSpec.describe UserPermission, type: :model do
     expect(user_permission).to be_valid
   end
 
-  describe 'Enums' do
-    it { is_expected.to define_enum_for(:user_role).with_values(
-      { user: 0, operator: 1, ngo: 2, ngo_manager: 4, bo_manager: 5, admin: 3, government: 6 }
-    ) }
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:user) }
-  end
-
   describe 'Hooks' do
     describe '#change_permissions' do
       %i[admin operator ngo ngo_manager bo_manager user].each do |role|

@@ -27,24 +27,6 @@ RSpec.describe RequiredOperatorDocumentCountry, type: :model do
     expect(required_operator_document_country).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to have_many(:operator_document_countries).with_foreign_key('required_operator_document_id') }
-  end
-
-  describe 'Validations' do
-    describe '#contract_signature' do
-      context 'is a contract signature' do
-        before { allow(subject).to receive(:contract_signature?).and_return(true) }
-        it { is_expected.to validate_uniqueness_of(:contract_signature).scoped_to(:country_id) }
-      end
-
-      context 'is not a contract signature' do
-        before { allow(subject).to receive(:contract_signature?).and_return(false) }
-        it { is_expected.not_to validate_uniqueness_of(:contract_signature).scoped_to(:country_id) }
-      end
-    end
-  end
-
   describe 'Hooks' do
     describe '#create_operator_document_countries' do
       before do

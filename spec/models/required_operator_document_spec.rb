@@ -29,14 +29,6 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
   it_should_behave_like 'translatable', FactoryBot.create(:required_operator_document), %i[explanation]
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:required_operator_document_group) }
-    it { is_expected.to belong_to(:country) }
-    it { is_expected.to have_many(:operator_documents).dependent(:destroy) }
-    it { is_expected.to have_many(:operator_document_fmus) }
-    it { is_expected.to have_many(:operator_document_countries) }
-  end
-
   describe 'Validations' do
     it { is_expected.to validate_numericality_of(:valid_period).is_greater_than(0) }
 

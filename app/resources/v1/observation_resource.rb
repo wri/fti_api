@@ -138,10 +138,8 @@ module V1
 
     # Makes sure the validation status can be an acceptable one
     def validate_status
-      acceptable_statuses =
-        ['Created', 'Ready for QC', 'Published (no comments)',
-         'Published (not modified)', 'Published (modified)']
-      @model.validation_status = 'Created' unless acceptable_statuses.include?(@model.validation_status)
+      @model.validation_status = 'Created' unless @model.persisted? || @model.validation_status == 'Ready for QC'
+      @model.user_type = :monitor
     end
 
     # To allow the filtering of results according to the app and user

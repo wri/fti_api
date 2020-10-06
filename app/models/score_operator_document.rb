@@ -83,6 +83,8 @@ class ScoreOperatorDocument < ApplicationRecord
   protected
 
   def ==(obj)
+    return false unless obj.is_a? self.class
+
     VALUE_ATTRS.reject do |attr|
       read_attribute(attr) == obj.read_attribute(attr)
     end.none?

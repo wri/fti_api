@@ -58,6 +58,20 @@ class Observation < ApplicationRecord
   enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
                             "Accurate GPS coordinates" => 2 }
 
+  STATUS_TRANSITIONS={
+      monitor: {
+          nil => ['Created', 'Ready for QC'],
+          'Created' => ['Ready for QC'],
+          'Needs Revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
+          'Ready for publication' => ['Published (no comments)']
+      },
+      admin: {
+          'Ready for QC' => ['QC in progress'],
+          'QC in progress' => ['Needs Revision', 'Ready for publication']
+      }
+  }.freeze
+
+  attr_accessor :user_type
 
   belongs_to :country,        inverse_of: :observations
   belongs_to :severity,       inverse_of: :observations
@@ -93,7 +107,6 @@ class Observation < ApplicationRecord
   accepts_nested_attributes_for :observation_report,           allow_destroy: true
   accepts_nested_attributes_for :subcategory,                  allow_destroy: false
 
-
   with_options if: :operator? do
     validate :validate_governments_absences
   end
@@ -104,6 +117,7 @@ class Observation < ApplicationRecord
   end
 
   validate :evidence_presented_in_the_report
+  validate :status_changes, if: -> { user_type.present? }
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
@@ -214,6 +228,15 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if governments.none?
 
     errors.add(:governments, "Should have no governments with 'operator' type")
+  end
+
+  def status_changes
+    return unless @user_type
+    return if validation_status == validation_status_was
+    return if STATUS_TRANSITIONS.dig(@user_type, validation_status_was)&.include? validation_status
+
+    errors.add(:validation_status,
+               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}'' to ''#{validation_status}''")
   end
 
   def evidence_presented_in_the_report
