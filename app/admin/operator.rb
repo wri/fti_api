@@ -130,7 +130,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
                                            'Sawmill', 'Other', 'Unknown']
       f.input :country, input_html: { disabled: edit }
       f.input :concession
-      f.input :logo, as: :file, hint: f.template.image_tag(f.object.logo.url(:thumbnail))
+      f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail)).html_safe
       if f.object.logo.present?
         f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
       end
