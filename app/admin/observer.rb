@@ -20,12 +20,13 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     end
   end
 
-  permit_params :observer_type, :is_active, :logo, :address, :information_name, :information_email,
+  permit_params :observer_type, :is_active, :logo, :address, :information_name, :information_email, :public_info,
                 :information_phone, :data_name, :data_email, :data_phone, :organization_type, :delete_logo,
                 translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
   csv do
     column :is_active
+    column :public_info
     column :countries do |observer|
       names = observer.countries.map { |c| c.name }
       names.join(' ').tr(',', ';')
@@ -38,6 +39,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   index do
     column :is_active
+    column :public_info
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
     column :countries do |observer|
@@ -68,6 +70,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   show do
     attributes_table do
       row :is_active
+      row :public_info
       row :observer_type
       row :organization_type
       # TODO: Reactivate rubocop and fix this
@@ -103,6 +106,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       end
     end
     f.inputs 'Monitor Details' do
+      f.input :is_active
       f.input :countries, collection: Country.with_translations(I18n.locale).order('country_translations.name asc')
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
@@ -110,6 +114,9 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       if f.object.logo.present?
         f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
       end
+    end
+    f.inputs 'Public Info' do
+      f.input :public_info
       f.input :address
       f.input :information_name
       f.input :information_email
@@ -117,7 +124,6 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       f.input :data_name
       f.input :data_email
       f.input :data_phone
-      f.input :is_active
     end
     f.actions
   end
