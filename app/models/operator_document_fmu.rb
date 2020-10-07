@@ -23,6 +23,8 @@
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
+#  source                        :integer          default("1")
+#  source_info                   :string
 #
 
 class OperatorDocumentFmu < OperatorDocument

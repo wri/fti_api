@@ -22,10 +22,6 @@ RSpec.describe Sawmill, type: :model do
     expect(sawmill).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:operator) }
-  end
-
   describe 'Validations' do
     it { is_expected.to validate_numericality_of(:lat)
       .is_greater_than_or_equal_to(-90)

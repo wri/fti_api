@@ -20,18 +20,6 @@ RSpec.describe Comment, type: :model do
     expect(comment).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:commentable) }
-    it { is_expected.to belong_to(:user).inverse_of(:comments)}
-  end
-
-  describe 'Validations' do
-    it { is_expected.to validate_presence_of(:body) }
-    it { is_expected.to validate_presence_of(:user) }
-
-    it { is_expected.to validate_length_of(:body).is_at_most(Comment.body_max_length) }
-  end
-
   describe 'Class methods' do
     describe '#build' do
       context 'when commentable, user and body are present' do

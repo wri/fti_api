@@ -67,46 +67,31 @@ RSpec.describe Observation, type: :model do
     FactoryBot.create(:observation),
     %i[details concern_opinion litigation_status]
 
-  describe 'Enums' do
-    it { is_expected.to define_enum_for(:observation_type).with_values(%w[operator government]) }
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:country).inverse_of(:observations) }
-    it { is_expected.to belong_to(:severity).inverse_of(:observations) }
-    it { is_expected.to belong_to(:operator).inverse_of(:observations) }
-    it { is_expected.to belong_to(:user).inverse_of(:observations).optional }
-    it { is_expected.to belong_to(:modified_user).class_name('User').with_foreign_key('modified_user_id').optional }
-    it { is_expected.to belong_to(:fmu).inverse_of(:observations).optional }
-    it { is_expected.to belong_to(:law).inverse_of(:observations).optional }
-    it { is_expected.to belong_to(:subcategory).inverse_of(:observations).optional }
-    it { is_expected.to belong_to(:observation_report) }
-
-    it { is_expected.to have_many(:species_observations) }
-    it { is_expected.to have_many(:species).through(:species_observations) }
-    it { is_expected.to have_many(:observer_observations).dependent(:destroy) }
-    it { is_expected.to have_many(:observers).through(:observer_observations) }
-    it { is_expected.to have_many(:observation_operators).dependent(:destroy) }
-    it { is_expected.to have_many(:relevant_operators).through(:observation_operators).source(:operator) }
-    it { is_expected.to have_many(:comments) }
-    it { is_expected.to have_many(:photos).dependent(:destroy) }
-    it { is_expected.to have_many(:observation_documents) }
-    it { is_expected.to have_many(:governments_observations).dependent(:destroy) }
-    it { is_expected.to have_many(:governments).through(:governments_observations) }
-  end
-
-  describe 'Nested attributes' do
-    it { is_expected.to accept_nested_attributes_for(:photos).allow_destroy(true) }
-    it { is_expected.to accept_nested_attributes_for(:observation_documents).allow_destroy(true) }
-    it { is_expected.to accept_nested_attributes_for(:observation_report).allow_destroy(true) }
-    it { is_expected.to accept_nested_attributes_for(:subcategory).allow_destroy(false) }
-  end
 
   describe 'Validations' do
-    it { is_expected.to validate_presence_of(:country_id) }
-    it { is_expected.to validate_presence_of(:publication_date) }
-    it { is_expected.to validate_presence_of(:validation_status) }
-    it { is_expected.to validate_presence_of(:observation_type) }
+    describe 'Status changes' do
+      describe 'For a monitor' do
+        let(:country) { FactoryBot.create(:country)}
+        let(:observation) { FactoryBot.build(:observation, validation_status: 'Created',
+                                             user_type: :monitor, country: country)}
+        it 'Can create an observation'do
+          observation.save
+          expect(observation.persisted?).to be_truthy
+        end
+
+        it 'Can move from Created to Ready for QC' do
+          observation.save
+          observation.validation_status = 'Ready for QC'
+          expect(observation.save).to be_truthy
+        end
+
+        it 'Cannot go to QC in progress' do
+          observation.save
+          observation.validation_status = 'QC in progress'
+          expect(observation.save).to be_falsey
+        end
+      end
+    end
 
     describe '#active_government' do
       let(:country) { create(:country) }
@@ -186,6 +171,7 @@ RSpec.describe Observation, type: :model do
             country: @country,
             validation_status: 'Published (no comments)'
           )
+          @operator.reload
         end
       end
 
@@ -198,13 +184,15 @@ RSpec.describe Observation, type: :model do
           country: @country,
           validation_status: 'Published (no comments)')
 
-        expect(@operator.obs_per_visit).to eql(5.0)
-        expect(@operator.score_absolute).to eql((4.0 + 4.0 + 2 + 1) / 9.0)
+        @operator.reload
+        expect(@operator.score_operator_observation.obs_per_visit).to eql(5.0)
+        expect(@operator.score_operator_observation.score).to eql((4.0 + 4.0 + 2 + 1) / 9.0)
 
         observation.destroy
 
-        expect(@operator.obs_per_visit).to eql(4.0)
-        expect(@operator.score_absolute).to eql((4.0 + 2.0 + 2 + 1) / 9.0)
+        @operator.reload
+        expect(@operator.score_operator_observation.obs_per_visit).to eql(4.0)
+        expect(@operator.score_operator_observation.score).to eql((4.0 + 2.0 + 2 + 1) / 9.0)
       end
     end
 

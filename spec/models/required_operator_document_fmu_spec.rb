@@ -11,7 +11,7 @@
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
 #  deleted_at                          :datetime
-#  forest_type                         :integer
+#  forest_types                        :integer          default("{}"), is an Array
 #  contract_signature                  :boolean          default("false"), not null
 #  required_operator_document_id       :integer          not null
 #  explanation                         :text
@@ -25,10 +25,6 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
 
   it 'is valid with valid attributes' do
     expect(required_operator_document_fmu).to be_valid
-  end
-
-  describe 'Relations' do
-    it { is_expected.to have_many(:operator_document_fmus).with_foreign_key('required_operator_document_id') }
   end
 
   describe 'Validations' do

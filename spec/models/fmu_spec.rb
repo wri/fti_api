@@ -32,22 +32,6 @@ RSpec.describe Fmu, type: :model do
 
   it_should_behave_like 'translatable', FactoryBot.create(:fmu), %i[name]
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:country).inverse_of(:fmus) }
-    it { is_expected.to have_many(:observations).inverse_of(:fmu) }
-    it { is_expected.to have_many(:fmu_operators).inverse_of(:fmu).dependent(:destroy) }
-    it { is_expected.to have_many(:operators).through(:fmu_operators) }
-    it { is_expected.to have_many(:operator_document_fmus) }
-  end
-
-  it { is_expected.to accept_nested_attributes_for(:operators) }
-
-  describe 'Validations' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:country_id) }
-    it { is_expected.to validate_presence_of(:forest_type) }
-  end
-
   describe 'Methods' do
     describe '#cache_key' do
       it 'return the default value with the locale' do

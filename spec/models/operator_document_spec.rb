@@ -21,6 +21,8 @@
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
+#  source                        :integer          default("1")
+#  source_info                   :string
 #
 
 require 'rails_helper'
@@ -30,14 +32,6 @@ RSpec.describe OperatorDocument, type: :model do
 
   it 'is valid with valid attributes' do
     expect(operator_document).to be_valid
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:operator).touch(true).required }
-    it { is_expected.to belong_to(:required_operator_document).required }
-    it { is_expected.to belong_to(:fmu) }
-    it { is_expected.to belong_to(:user) }
-    it { is_expected.to have_many(:operator_document_annexes) }
   end
 
   describe 'Validations' do
@@ -184,17 +178,20 @@ RSpec.describe OperatorDocument, type: :model do
 
         # Generate one valid operator document and two pending operator documents of each type
         valid_op_doc = create(:operator_document, **common_data)
+        valid_op_doc.reload
         valid_op_doc.update_attributes(status: valid_status)
+        @operator.reload
 
         pending_op_docs = create_list(:operator_document, 2, **common_data)
         pending_op_docs.each do |pending_op_doc|
           pending_op_doc.update_attributes(status: pending_status)
+          @operator.reload
         end
       end
 
       it 'update valid operator percentages' do
         @operator.reload
-        expect(@operator.percentage_valid_documents_all.round(2)).to eql (1.0 / 3.0).round(2)
+        expect(@operator.score_operator_document.all.round(2)).to eql (1.0 / 3.0).round(2)
 
         operator_document = OperatorDocument.where(
           operator_id: @operator.id,
@@ -204,7 +201,7 @@ RSpec.describe OperatorDocument, type: :model do
         operator_document.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
 
         @operator.reload
-        expect(@operator.percentage_valid_documents_all).to eql 0.0
+        expect(@operator.score_operator_document.all).to eql 0.0
       end
     end
 
@@ -226,15 +223,6 @@ RSpec.describe OperatorDocument, type: :model do
         end
       end
     end
-  end
-
-  describe 'Enums' do
-    it { is_expected.to define_enum_for(:status).with_values(
-      { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
-    ) }
-    it { is_expected.to define_enum_for(:uploaded_by).with_values(
-      { operator: 1, monitor: 2, admin: 3, other: 4 }
-    ) }
   end
 
   describe 'Instance methods' do

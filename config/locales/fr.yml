@@ -36,6 +36,9 @@ fr:
         en: "Anglais"
         fr: "Français"
         zh-CN: "Chinois"
+        ja: 'Japonais'
+        ko: 'Coréen'
+        vi: 'Vietnamien'
   activerecord:
     enums:
       observation:
@@ -419,6 +422,8 @@ fr:
     low: 'Faible'
     medium: 'Moyenne'
     high: 'Haute'
+    company: 'Operateur'
+    forest_atlas: 'Forest Atlas'
 
   wicked:
     types: 'observation-type'

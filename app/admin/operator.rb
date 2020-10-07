@@ -30,25 +30,28 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :name
     column :concession
     column :score_absolute do |operator|
-      "#{'%.2f' % operator.score_absolute}" rescue nil
+      "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
     column :obs_per_visit
     column '% Docs' do |operator|
-      operator.percentage_valid_documents_all
+      operator.score_operator_document&.all
     end
   end
 
   index do
     column 'Active?', :is_active
+    column :id
     column :country, sortable: 'country_translations.name'
     column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
     column :concession, sortable: true
     column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
-      "#{'%.2f' % operator.score_absolute}" rescue nil
+      "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
     column 'Obs/Visit', :obs_per_visit, sortable: true
-    column '% Docs', :percentage_valid_documents_all, sortable: true
+    column '% Docs', :percentage_valid_documents_all, sortable: true do |operator|
+      operator.score_operator_document&.all
+    end
     column('Actions') do |operator|
       unless operator.is_active
         a 'Activate', href: activate_admin_producer_path(operator),
@@ -64,15 +67,13 @@ ActiveAdmin.register Operator, as: 'Producer' do
   scope :inactive
 
   filter :country, as: :select,
-                   collection: -> { Country.joins(:operators).with_translations(I18n.locale) .order('country_translations.name') }
-  filter :translations_name_contains,
+                   collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
+  filter :id,
          as: :select, label: 'Name',
          collection: Operator.with_translations(I18n.locale)
-                         .order('operator_translations.name').pluck(:name)
+                         .order('operator_translations.name').pluck(:name, :id)
   filter :concession, as: :select
-  filter :score
-  filter :score_absolute, label: 'Obs/Visit'
-  filter :percentage_valid_documents_all, label: '% Docs'
+
 
   sidebar 'Fmus', only: :show do
     attributes_table_for resource do
@@ -117,9 +118,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    #f.inputs 'Translated fields' do
-    #
-    #end
     f.inputs 'Operator Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
@@ -132,7 +130,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
                                            'Sawmill', 'Other', 'Unknown']
       f.input :country, input_html: { disabled: edit }
       f.input :concession
-      f.input :logo, as: :file, hint: f.template.image_tag(f.object.logo.url(:thumbnail))
+      f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail)).html_safe
       if f.object.logo.present?
         f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
       end
@@ -153,6 +151,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   show do
     attributes_table do
       row :is_active
+      row :name
       row :operator_type
       row :fa_id
       row :details
@@ -161,10 +160,13 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :address
       row :website
       row :fmus
-      row :percentage_valid_documents_all
+      row :percentage_valid_documents_all do |operator|
+        operator.score_operator_document&.all
+      end
       row :obs_per_visit
-      row :score
-      row :score_absolute
+      row :score_absolute do |operator|
+        operator.score_operator_observation&.score
+      end
       row :created_at
       row :updated_at
     end
@@ -176,7 +178,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
   controller do
     def scoped_collection
       end_of_association_chain.with_translations.includes(country: :translations)
-          .where(country_translations: { locale: I18n.locale })
     end
   end
 end

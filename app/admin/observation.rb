@@ -297,9 +297,6 @@ ActiveAdmin.register Observation do
     end
     column :subcategory, sortable: 'subcategory_translations.name'
 
-    column :law
-    column(:law_country, sortable: 'country_translations.name') { |o| o.law&.country }
-    column(:subcategory, sortable: 'subcategory_translations.name') { |o| o.law&.subcategory }
     column('Illegality as written by law', sortable: true) { |o| o.law&.written_infraction }
     column('Legal reference: Illegality', sortable: true) { |o| o.law&.infraction }
     column('Legal reference: Penalties', sortable: true) { |o| o.law&.sanctions }
@@ -357,7 +354,7 @@ ActiveAdmin.register Observation do
     panel 'Visible columns' do
       render partial: "fields",
              locals: { attributes: %w[active hidden status country fmu location_information observers observation_type
-                                      operator governments relevant_operators subcategory law law_country
+                                      operator governments relevant_operators subcategory
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
@@ -419,9 +416,9 @@ ActiveAdmin.register Observation do
       f.input :admin_comment
       f.input :monitor_comment, input_html: { disabled: true }
       f.input :observation_report, as: :select
+      f.input :evidence_type, as: :select
+      f.input :evidence_on_report
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
-        f.input :evidence_type, as: :select
-        f.input :evidence_on_report
         t.input :name
         t.input :attachment
       end

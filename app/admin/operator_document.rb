@@ -32,6 +32,8 @@ ActiveAdmin.register OperatorDocument do
     end
   end
 
+  # Here we're updating the documents one by one to make sure the callbacks to
+  # create a new version and to change the last modified (and the author) are called
   batch_action :make_private, confirm: 'Are you sure you want to make the selected documents PRIVATE?' do |ids|
     batch_action_collection.find(ids).each do |doc|
       doc.update(public: false)
@@ -44,6 +46,30 @@ ActiveAdmin.register OperatorDocument do
       doc.update(public: true)
     end
     redirect_to collection_path, notice: 'Documents are now public!'
+  end
+
+  batch_action :set_source_by_company,
+               confirm: 'Are you sure you want to set the source of the selected documents as COMPANY?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(source: OperatorDocument.sources[:company])
+    end
+    redirect_to collection_path, notice: 'Documents were set to "source: COMPANY"'
+  end
+
+  batch_action :set_source_by_forest_atlas,
+               confirm: 'Are you sure you want to set the source of the selected documents as FOREST ATLAS?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(source: OperatorDocument.sources[:forest_atlas])
+    end
+    redirect_to collection_path, notice: 'Documents were set to "source: FOREST_ATLAS"'
+  end
+
+  batch_action :set_source_by_other,
+               confirm: 'Are you sure you want to set the source of the selected documents as OTHER?' do |ids|
+    batch_action_collection.find(ids).each do |doc|
+      doc.update(source: OperatorDocument.sources[:other_source])
+    end
+    redirect_to collection_path, notice: 'Documents were set to "source: OTHER"'
   end
 
   member_action :approve, method: :put do
@@ -78,7 +104,8 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new]
   permit_params :name, :public, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
-                :attachment, :uploaded_by, :reason, :note, :response_date
+                :attachment, :uploaded_by, :reason, :note, :response_date,
+                :source, :source_info
 
   csv do
     column :exists do |o|
@@ -185,6 +212,7 @@ ActiveAdmin.register OperatorDocument do
     column :start_date
     column :created_at
     column :uploaded_by
+    column :source
     attachment_column :attachment
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
@@ -217,6 +245,7 @@ ActiveAdmin.register OperatorDocument do
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
+  filter :source, as: :select, collection: OperatorDocument.sources
   filter :updated_at
 
   scope 'Pending', :doc_pending
@@ -227,7 +256,9 @@ ActiveAdmin.register OperatorDocument do
       f.input :required_operator_document, input_html: { disabled: true }
       f.input :operator, input_html: { disabled: true }
       f.input :type, input_html: { disabled: true }
-      f.input :uploaded_by
+      f.input :uploaded_by, default: OperatorDocument.uploaded_bies[:admin]
+      f.input :source
+      f.input :source_info
       f.input :status, include_blank: false
       f.input :public
       f.input :attachment
