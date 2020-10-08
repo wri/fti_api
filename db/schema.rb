@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201007071236) do
+ActiveRecord::Schema.define(version: 20201008122204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -884,6 +884,7 @@ ActiveRecord::Schema.define(version: 20201007071236) do
     t.string   "address"
     t.string   "website"
     t.boolean  "approved",      default: true, null: false
+    t.string   "email"
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree

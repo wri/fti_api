@@ -13,8 +13,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
-                :logo, :delete_logo, fmu_ids: [],
-                                     translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                :logo, :delete_logo, :email, fmu_ids: [],
+                translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -28,6 +28,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
     column :fa_id
     column :name
+    column :email
     column :concession
     column :score_absolute do |operator|
       "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
@@ -44,6 +45,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :country, sortable: 'country_translations.name'
     column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
+    column :email
     column :concession, sortable: true
     column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
       "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
@@ -123,6 +125,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
         t.input :name
         t.input :details
       end
+      f.input :email
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type, as: :select,
                               collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
@@ -152,6 +155,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     attributes_table do
       row :is_active
       row :name
+      row :email
       row :operator_type
       row :fa_id
       row :details
