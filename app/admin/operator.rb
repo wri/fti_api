@@ -14,7 +14,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, :delete_logo, :email, fmu_ids: [],
-                translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                                             translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update(is_active: true)

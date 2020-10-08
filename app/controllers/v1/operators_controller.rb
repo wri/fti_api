@@ -21,7 +21,7 @@ module V1
       parsed_results = JSON.parse(results)
       unless parsed_results['errors']
         operator = Operator.find parsed_results['data']['id']
-        MailService.notify_operator_creation(operator)
+        MailService.new.notify_operator_creation(operator).send
       end
       results
     end

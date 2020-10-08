@@ -15,7 +15,7 @@ module V1
       contact = Contact.new(contact_params)
       if contact.save
         begin
-          MailService.newsletter contact.email
+          MailService.new.newsletter(contact.email).send
         rescue Exception => e
           Rails.logger.error "Error sending the email: #{e}"
         end

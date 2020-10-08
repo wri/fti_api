@@ -17,7 +17,7 @@ RSpec.describe MailService do
         mail.notify_operator_expired_document(operator, [document1, document2])
         expect(mail.to).to eq('test@mail.com')
         expect(mail.subject).to eq('You have 2 documents expiring in 1 day')
-        expect(mail.text).to eq("The following documents are going to expire:\n\\n#{rod1.name}\\n#{rod2.name}\\nBest,\nOTP Team")
+        expect(mail.body).to eq("The following documents are going to expire:\n\\n#{rod1.name}\\n#{rod2.name}\\nBest,\nOTP Team")
       end
     end
   end
