@@ -26,9 +26,8 @@ module FtiApi
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('app', 'models', 'indexes')
 
-    #config.i18n.fallbacks                 = true
-    #config.i18n.enforce_available_locales = true
-    #config.i18n.fallbacks                 = { 'en' => 'fr', 'fr' => 'en' }
+    # ActiveJob
+    config.active_job.queue_adapter = :sidekiq
 
     config.api_only = false
 

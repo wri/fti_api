@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   match 'admin/fmus/preview' => 'admin/fmus#preview', via: :post
 
+  require 'sidekiq/web'
+  authenticate :user, ->(user) { user&.user_permission&.user_role == 'admin' } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
     post  '/login',                       to: 'sessions#create'

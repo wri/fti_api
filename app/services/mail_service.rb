@@ -3,6 +3,7 @@
 # Service to deal with emails
 class MailService
   extend ActionView::Helpers::TranslationHelper
+  include ActionView::Helpers::DateHelper
 
   def self.forgotten_password(user_name, email, reset_url)
     subject = 'Requested link to change your password'
@@ -117,5 +118,20 @@ TXT
   OTP
 TXT
     AsyncMailer.new.send_email ENV['CONTACT_EMAIL'], ENV['RESPONSIBLE_EMAIL'], text, subject
+  end
+
+  # Send an email to the operator notifying that there are documents abouts to expire
+  # @param [Operator] operator
+  # @param [OperatorDocument] documents the documents for which to notify
+  def self.notify_operator_expired_document(operator, documents)
+    num_documents = documents.count
+    time_to_expire = distance_of_time_in_words(documents.first.expire_date, Time.now)
+    subject = t('backend.mail_service.expire_documents.title', count: num_documents) +
+      time_to_expire
+    text = [t('backend.mail_service.expire_documents.text')]
+    documents.each { |d|  text << "#{d&.required_operator_document&.name}" }
+    text << t('backend.mail_service.expire_documents.salutation')
+
+    AsyncMailer.new.send_mail ENV['CONTACT_EMAIL'], operator.email, text.join('\n'), subject
   end
 end

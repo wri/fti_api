@@ -47,6 +47,8 @@ gem 'rspec_api_documentation', github: 'tsubik/rspec_api_documentation', branch:
 gem 'rswag-api'
 gem 'rswag-ui'
 
+# Activejob
+gem 'sidekiq'
 
 # Data
 gem 'activerecord-import'
