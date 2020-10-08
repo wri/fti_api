@@ -277,20 +277,20 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   def notify_observers
     observers.each do |observer|
-      MailService.new.notify_observers_status_changed(observer, self).send
+      MailService.notify_observers_status_changed(observer, self)
     end
   end
 
   def notify_responsible
     return unless validation_status == 'Ready for QC'
 
-    MailService.new.notify_responsible(self).send
+    MailService.new.notify_responsible(self).deliver
   end
 
   def notify_qc
     return unless ["Published (not modified)", "Published (modified)"].include? validation_status
     return unless responsible_admin&.email
 
-    MailService.new.notify_admin_published(self).send
+    MailService.new.notify_admin_published(self).deliver
   end
 end

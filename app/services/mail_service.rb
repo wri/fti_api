@@ -5,12 +5,12 @@ class MailService
   include ActionView::Helpers::TranslationHelper
   include ActionView::Helpers::DateHelper
 
-  attr_reader :from, :to, :subject, :text
+  attr_reader :from, :to, :subject, :body
 
   def initialize; end
 
-  def send
-    AsyncMailer.new.send_mail @from, @to, @body, @subject
+  def deliver
+    AsyncMailer.new.send_email @from, @to, @body, @subject
   end
 
   def forgotten_password(user_name, email, reset_url)
@@ -31,6 +31,8 @@ class MailService
     TXT
     @from = ENV['CONTACT_EMAIL']
     @to = email
+
+    self
   end
 
   def newsletter(user_email)
@@ -44,6 +46,8 @@ class MailService
 TXT
     @from = ENV['CONTACT_EMAIL']
     @to = user_email
+
+    self
   end
 
   def notify_user_creation(user)
@@ -56,6 +60,8 @@ TXT
     @to = ENV['CONTACT_EMAIL']
     @from = ENV['CONTACT_EMAIL']
     @subject = "New USER created: #{user.email}"
+
+    self
   end
 
   def notify_operator_creation(operator)
@@ -68,6 +74,8 @@ TXT
     @to = ENV['CONTACT_EMAIL']
     @from = ENV['CONTACT_EMAIL']
     @subject = "New OPERATOR created: #{operator.name}"
+
+    self
   end
 
   def notify_user_acceptance(user)
@@ -83,11 +91,13 @@ TXT
     @from = ENV['CONTACT_EMAIL']
     @to = user.email
     @subject = 'New operator created'
+
+    self
   end
 
   def self.notify_observers_status_changed(observer, observation)
     observer.users.each do |user|
-      MailService.new.notify_observer_status_changed(observer, observation, user).send
+      MailService.new.notify_observer_status_changed(observer, observation, user).deliver
     end
   end
 
@@ -107,6 +117,8 @@ TXT
     @from = ENV['CONTACT_EMAIL']
     @to = user.email
     @subject = t('backend.mail_service.observer_status_changed.subject')
+
+    self
   end
 
   def notify_admin_published(observation)
@@ -123,6 +135,8 @@ TXT
 
     @from = ENV['CONTACT_EMAIL']
     @to = observation.responsible_admin.email
+
+    self
   end
 
   def notify_responsible(observation)
@@ -139,6 +153,8 @@ TXT
 TXT
     @from = ENV['CONTACT_EMAIL']
     @to = ENV['RESPONSIBLE_EMAIL']
+
+    self
   end
 
   # Send an email to the operator notifying that there are documents abouts to expire
@@ -157,5 +173,7 @@ TXT
     @to = operator.email
     @body = text.join('\n')
     @subject = subject
+
+    self
   end
 end
