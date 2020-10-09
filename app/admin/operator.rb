@@ -22,6 +22,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   end
 
   csv do
+    column :id
     column :is_active
     column :country do |operator|
       operator.country.name rescue nil
