@@ -16,6 +16,7 @@
 #  data_email        :string
 #  data_phone        :string
 #  organization_type :string
+#  public_info       :boolean          default("false")
 #  name              :string
 #  organization      :string
 #
@@ -25,5 +26,11 @@ FactoryBot.define do
     sequence(:name) { |n| "Observer #{n}" }
     observer_type { 'External' }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+    sequence(:information_name) { |n| "Information name #{n}" }
+    sequence(:information_email) { |n| "info_email#{n}@mail.com" }
+    sequence(:information_phone) { |n| ("#{n}" * 9).first(9) }
+    sequence(:data_name) { |n| "Data name #{n}" }
+    sequence(:data_email) { |n| "data_email#{n}@mail.com" }
+    sequence(:data_phone) { |n| ("#{n}" * 9).first(9) }
   end
 end

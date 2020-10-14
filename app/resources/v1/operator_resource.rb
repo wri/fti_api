@@ -8,7 +8,7 @@ module V1
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
                :percentage_valid_documents_all, :obs_per_visit, :score,
                :website, :address, :fa_id, :country_doc_rank,
-               :delete_logo
+               :delete_logo, :email
 
     has_one :country
     has_many :fmus
