@@ -107,6 +107,7 @@ group :development do
   gem 'capistrano-rails',          '~> 1.2'
   gem 'capistrano-resque',         require: false
   gem 'capistrano-rvm'
+  gem 'guard'
   gem 'listen',                    '~> 3.0.5'
   gem 'pry-rails'
   gem 'spring'
