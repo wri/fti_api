@@ -25,7 +25,7 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentAnnexUploader
 
-  belongs_to :operator_document, optional: false
+  belongs_to :documentable, polymorphic: true
   belongs_to :user
 
   before_validation(on: :create) do

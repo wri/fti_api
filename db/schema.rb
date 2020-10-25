@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201023133947) do
+ActiveRecord::Schema.define(version: 20201025132137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -814,7 +814,6 @@ ActiveRecord::Schema.define(version: 20201023133947) do
   end
 
   create_table "operator_document_annexes", force: :cascade do |t|
-    t.integer  "operator_document_id"
     t.string   "name"
     t.date     "start_date"
     t.date     "expire_date"
@@ -823,14 +822,50 @@ ActiveRecord::Schema.define(version: 20201023133947) do
     t.string   "attachment"
     t.integer  "uploaded_by"
     t.integer  "user_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.boolean  "public",               default: true, null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "public",            default: true, null: false
+    t.integer  "documentable_id"
+    t.string   "documentable_type"
     t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at", using: :btree
-    t.index ["operator_document_id"], name: "index_operator_document_annexes_on_operator_document_id", using: :btree
+    t.index ["documentable_id"], name: "index_operator_document_annexes_on_documentable_id", using: :btree
+    t.index ["documentable_type"], name: "index_operator_document_annexes_on_documentable_type", using: :btree
     t.index ["public"], name: "index_operator_document_annexes_on_public", using: :btree
     t.index ["status"], name: "index_operator_document_annexes_on_status", using: :btree
     t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
+  end
+
+  create_table "operator_document_histories", force: :cascade do |t|
+    t.string   "type"
+    t.date     "expire_date"
+    t.integer  "status"
+    t.integer  "uploaded_by"
+    t.text     "reason"
+    t.text     "note"
+    t.datetime "response_date"
+    t.boolean  "public"
+    t.integer  "source"
+    t.string   "source_info"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "operator_document_id"
+    t.integer  "fmu_id"
+    t.integer  "operator_id"
+    t.integer  "user_id"
+    t.integer  "index_odh_on_rod_id_id"
+    t.integer  "document_file_id"
+    t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id", using: :btree
+    t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date", using: :btree
+    t.index ["fmu_id"], name: "index_operator_document_histories_on_fmu_id", using: :btree
+    t.index ["index_odh_on_rod_id_id"], name: "index_operator_document_histories_on_index_odh_on_rod_id_id", using: :btree
+    t.index ["operator_document_id"], name: "index_operator_document_histories_on_operator_document_id", using: :btree
+    t.index ["operator_id"], name: "index_operator_document_histories_on_operator_id", using: :btree
+    t.index ["public"], name: "index_operator_document_histories_on_public", using: :btree
+    t.index ["response_date"], name: "index_operator_document_histories_on_response_date", using: :btree
+    t.index ["source"], name: "index_operator_document_histories_on_source", using: :btree
+    t.index ["status"], name: "index_operator_document_histories_on_status", using: :btree
+    t.index ["type"], name: "index_operator_document_histories_on_type", using: :btree
+    t.index ["user_id"], name: "index_operator_document_histories_on_user_id", using: :btree
   end
 
   create_table "operator_documents", force: :cascade do |t|
@@ -1442,6 +1477,12 @@ ActiveRecord::Schema.define(version: 20201023133947) do
   add_foreign_key "observations", "observation_reports"
   add_foreign_key "observations", "operators"
   add_foreign_key "observations", "users"
+  add_foreign_key "operator_document_histories", "document_files", on_delete: :cascade
+  add_foreign_key "operator_document_histories", "fmus", on_delete: :cascade
+  add_foreign_key "operator_document_histories", "operator_documents", on_delete: :cascade
+  add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
+  add_foreign_key "operator_document_histories", "required_operator_documents", column: "index_odh_on_rod_id_id", on_delete: :cascade
+  add_foreign_key "operator_document_histories", "users", on_delete: :cascade
   add_foreign_key "operator_documents", "fmus"
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
