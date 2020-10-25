@@ -77,7 +77,7 @@ class OperatorDocument < ApplicationRecord
     mapping = self.attributes.except *NON_HISTORICAL_ATTRIBUTES
     mapping['operator_document_id'] = self.id
     mapping['type'] += 'History'
-    attrs.select! { |x| self.attributes.keys.include? x }
+    attrs.select! { |x| OperatorDocumentHistory.new.attributes.keys.include? x }
 
     OperatorDocumentHistory.create mapping.merge(attrs)
   end
