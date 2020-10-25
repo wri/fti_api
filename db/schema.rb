@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201008122204) do
+ActiveRecord::Schema.define(version: 20201023133947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -317,6 +317,13 @@ ActiveRecord::Schema.define(version: 20201008122204) do
   create_table "direction_lookup", primary_key: "name", id: :string, limit: 20, force: :cascade do |t|
     t.string "abbrev", limit: 3
     t.index ["abbrev"], name: "direction_lookup_abbrev_idx", using: :btree
+  end
+
+  create_table "document_files", force: :cascade do |t|
+    t.string   "attachment"
+    t.string   "file_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "edges", primary_key: "gid", force: :cascade do |t|
@@ -847,8 +854,10 @@ ActiveRecord::Schema.define(version: 20201008122204) do
     t.boolean  "public",                        default: true, null: false
     t.integer  "source",                        default: 1
     t.string   "source_info"
+    t.integer  "document_file_id"
     t.index ["current"], name: "index_operator_documents_on_current", using: :btree
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
+    t.index ["document_file_id"], name: "index_operator_documents_on_document_file_id", using: :btree
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree
     t.index ["fmu_id"], name: "index_operator_documents_on_fmu_id", using: :btree
     t.index ["operator_id"], name: "index_operator_documents_on_operator_id", using: :btree

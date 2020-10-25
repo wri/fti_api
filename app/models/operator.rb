@@ -17,6 +17,7 @@
 #  address       :string
 #  website       :string
 #  approved      :boolean          default("true"), not null
+#  email         :string
 #  name          :string
 #  details       :text
 #

@@ -25,6 +25,7 @@
 #  public                        :boolean          default("true"), not null
 #  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 class OperatorDocument < ApplicationRecord
@@ -35,6 +36,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :required_operator_document, -> { with_archived }, required: true
   belongs_to :fmu
   belongs_to :user
+  belongs_to :document_file, required: :false
   has_many :operator_document_annexes
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
@@ -104,6 +106,8 @@ class OperatorDocument < ApplicationRecord
   def approved?
     %w(doc_not_required doc_valid).include?(status)
   end
+
+  def create_history; end
 
   private
 

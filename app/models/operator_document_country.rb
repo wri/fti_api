@@ -25,6 +25,7 @@
 #  public                        :boolean          default("true"), not null
 #  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 class OperatorDocumentCountry < OperatorDocument
