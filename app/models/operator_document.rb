@@ -70,6 +70,18 @@ class OperatorDocument < ApplicationRecord
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
+  NON_HISTORICAL_ATTRIBUTES = %w[id attachment current deleted_at].freeze
+
+  # Creates an OperatorDocumentHistory for the current OperatorDocument
+  def create_history(attrs = {})
+    mapping = self.attributes.except *NON_HISTORICAL_ATTRIBUTES
+    mapping['operator_document_id'] = self.id
+    mapping['type'] += 'History'
+    attrs.select! { |x| self.attributes.keys.include? x }
+
+    OperatorDocumentHistory.create mapping.merge(attrs)
+  end
+
   def set_expire_date
     self.expire_date = start_date + required_operator_document.valid_period.days rescue start_date
   end
@@ -106,8 +118,6 @@ class OperatorDocument < ApplicationRecord
   def approved?
     %w(doc_not_required doc_valid).include?(status)
   end
-
-  def create_history; end
 
   private
 

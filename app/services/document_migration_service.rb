@@ -32,9 +32,24 @@ class DocumentMigrationService
   def migrate_documents
     return unless @documents
 
-    # TODO Finish this
-    OperatorDocument.find_each do |od|
-      od.create_history
+    not_saved = []
+    OperatorDocument.unscoped.find_each do |od|
+      history = od.create_history
+      unless history.persisted?
+        Rails.logger.warn "Couldn't create history for document #{od.id}"
+        not_saved << od.id
+        next
+      end
+      next if od.operator_document_annexes.none?
+
+      update_annexes od, history
     end
+    OperatorDocument.unscoped.where(current: false).where.not(id: not_saved).delete_all
+  end
+
+  private
+
+  def update_annexes(document, history)
+    document.operator_document_annexes.update_all documentable_type: 'OperatorDocumentHistory', documentable_id: history.id
   end
 end

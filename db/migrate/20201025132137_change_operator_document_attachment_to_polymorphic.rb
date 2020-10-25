@@ -8,13 +8,14 @@ class ChangeOperatorDocumentAttachmentToPolymorphic < ActiveRecord::Migration[5.
         OperatorDocumentAnnex.unscoped.update_all documentable_type: 'OperatorDocument'
         OperatorDocumentAnnex.unscoped.update_all('documentable_id = operator_document_id')
 
-        add_index :operator_document_annexes, :documentable_type
-        add_index :operator_document_annexes, :documentable_id
+        add_index :operator_document_annexes, :documentable_type, where: 'documentable_type IS NOT NULL'
+        add_index :operator_document_annexes, :documentable_id, where: 'documentable_id IS NOT NULL'
         remove_column :operator_document_annexes, :operator_document_id
       end
 
       dir.down do
-        add_reference :operator_document_annexes, :operator_document_id, foreign_key: {on_delete: :cascade}, index: true
+        add_reference :operator_document_annexes,
+                      :operator_document, foreign_key: { on_delete: :cascade }, index: true
         OperatorDocumentAnnex.unscoped.update_all('operator_document_id = documentable_id')
 
         remove_column :operator_document_annexes, :documentable_id
