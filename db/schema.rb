@@ -546,7 +546,6 @@ ActiveRecord::Schema.define(version: 20201025193753) do
     t.integer  "status"
     t.integer  "operator_id"
     t.string   "attachment"
-    t.boolean  "current"
     t.datetime "deleted_at"
     t.integer  "uploaded_by"
     t.integer  "user_id"
@@ -557,7 +556,6 @@ ActiveRecord::Schema.define(version: 20201025193753) do
     t.integer  "source",                        default: 1
     t.string   "source_info"
     t.integer  "document_file_id"
-    t.index ["current"], name: "index_operator_documents_on_current", using: :btree
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
     t.index ["document_file_id"], name: "index_operator_documents_on_document_file_id", using: :btree
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree
