@@ -14,7 +14,6 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -38,13 +37,11 @@ class OperatorDocument < ApplicationRecord
   belongs_to :document_file, optional: :true
   has_many :operator_document_annexes, as: :documentable
 
-  mount_base64_uploader :attachment, OperatorDocumentUploader
-
   before_validation :set_expire_date, unless: :expire_date?
 
   validates_presence_of :start_date, if: :attachment?
   validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
-  validate :reason_or_attachment
+  validate :reason_or_file
 
   before_save :set_type, on: %w[create update]
   before_create :set_status
@@ -141,8 +138,8 @@ class OperatorDocument < ApplicationRecord
     pending_documents.each { |x| x.destroy }
   end
 
-  def reason_or_attachment
-    return if self.attachment.blank? || self.reason.blank?
+  def reason_or_file
+    return if self.document_file_id.blank? || self.reason.blank?
 
     self.errors[:reason] << 'Cannot have a reason not to have a document'
   end
