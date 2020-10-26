@@ -49,18 +49,8 @@ class DocumentMigrationService
       unless history.persisted?
         Rails.logger.warn "Couldn't create history for document #{od.id}"
         not_to_destroy << od.id
-        next
       end
-      next if od.operator_document_annexes.none?
-
-      update_annexes od, history
     end
     OperatorDocument.unscoped.where.not(current: true, id: not_to_destroy).delete_all
-  end
-
-  private
-
-  def update_annexes(document, history)
-    document.operator_document_annexes.update_all documentable_type: 'OperatorDocumentHistory', documentable_id: history.id
   end
 end

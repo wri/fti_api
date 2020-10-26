@@ -26,8 +26,8 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentAnnexUploader
 
-  belongs_to :documentable, polymorphic: true
   belongs_to :user
+  has_many :annex_documents
 
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
@@ -49,6 +49,10 @@ class OperatorDocumentAnnex < ApplicationRecord
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} document annexes"
+  end
+
+  def documentables
+    annex_documents.map {|x| x.documentable }
   end
 
   def expire_document_annex

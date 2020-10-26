@@ -29,7 +29,8 @@ class OperatorDocumentHistory < ApplicationRecord
   belongs_to :fmu, required: false
   belongs_to :user, required: false
   belongs_to :document_file, optional: :true
-  has_many :operator_document_annexes, as: :documentable
+  has_many :annex_documents, as: :documentable
+  has_many :operator_document_annexes, through: :annex_documents
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }

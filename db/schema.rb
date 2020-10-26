@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20201026084627) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
 
+  create_table "annex_documents", force: :cascade do |t|
+    t.string   "documentable_type",          null: false
+    t.integer  "documentable_id",            null: false
+    t.integer  "operator_document_annex_id", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["documentable_id"], name: "index_annex_documents_on_documentable_id", using: :btree
+    t.index ["documentable_type"], name: "index_annex_documents_on_documentable_type", using: :btree
+    t.index ["operator_document_annex_id"], name: "index_annex_documents_on_operator_document_annex_id", using: :btree
+  end
+
   create_table "api_keys", force: :cascade do |t|
     t.string   "access_token"
     t.datetime "expires_at"
@@ -488,14 +499,10 @@ ActiveRecord::Schema.define(version: 20201026084627) do
     t.string   "attachment"
     t.integer  "uploaded_by"
     t.integer  "user_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.boolean  "public",            default: true, null: false
-    t.integer  "documentable_id"
-    t.string   "documentable_type"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "public",      default: true, null: false
     t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at", using: :btree
-    t.index ["documentable_id"], name: "index_operator_document_annexes_on_documentable_id", where: "(documentable_id IS NOT NULL)", using: :btree
-    t.index ["documentable_type"], name: "index_operator_document_annexes_on_documentable_type", where: "(documentable_type IS NOT NULL)", using: :btree
     t.index ["public"], name: "index_operator_document_annexes_on_public", using: :btree
     t.index ["status"], name: "index_operator_document_annexes_on_status", using: :btree
     t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
@@ -930,6 +937,7 @@ ActiveRecord::Schema.define(version: 20201026084627) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
 
+  add_foreign_key "annex_documents", "operator_document_annexes", on_delete: :cascade
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade

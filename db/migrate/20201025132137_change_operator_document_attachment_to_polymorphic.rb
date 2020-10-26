@@ -2,24 +2,35 @@ class ChangeOperatorDocumentAttachmentToPolymorphic < ActiveRecord::Migration[5.
   def change
     reversible do |dir|
       dir.up do
-        add_column :operator_document_annexes, :documentable_id, :integer
-        add_column :operator_document_annexes, :documentable_type, :string
+        create_table :annex_documents do |t|
+          t.string :documentable_type, null: false
+          t.integer :documentable_id, null: false
 
-        OperatorDocumentAnnex.unscoped.update_all documentable_type: 'OperatorDocument'
-        OperatorDocumentAnnex.unscoped.update_all('documentable_id = operator_document_id')
+          t.references :operator_document_annex,
+                       foreign_key: { on_delete: :cascade }, index: true, null: false
+          t.index :documentable_id
+          t.index :documentable_type
 
-        add_index :operator_document_annexes, :documentable_type, where: 'documentable_type IS NOT NULL'
-        add_index :operator_document_annexes, :documentable_id, where: 'documentable_id IS NOT NULL'
+          t.timestamps
+        end
+
+        OperatorDocumentAnnex.unscoped.find_each do |oda|
+          AnnexDocument.create! documentable_type: 'OperatorDocument',
+                                documentable_id: oda.operator_document_id,
+                                operator_document_annex_id: oda.id
+        end
+
         remove_column :operator_document_annexes, :operator_document_id
+
       end
 
       dir.down do
-        add_reference :operator_document_annexes,
-                      :operator_document, foreign_key: { on_delete: :cascade }, index: true
-        OperatorDocumentAnnex.unscoped.update_all('operator_document_id = documentable_id')
+        add_column :operator_document_annexes, :operator_document_id, :integer
+        AnnexDocument.find_each do |ad|
+          OperatorDocumentAnnex.unscoped.find(ad.operator_document_annex_id).update(operator_document_id: ad.documentable_id)
+        end
 
-        remove_column :operator_document_annexes, :documentable_id
-        remove_column :operator_document_annexes, :documentable_type
+        drop_table :annex_documents
       end
     end
   end

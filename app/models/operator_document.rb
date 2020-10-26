@@ -37,8 +37,11 @@ class OperatorDocument < ApplicationRecord
   belongs_to :fmu
   belongs_to :user
   belongs_to :document_file, optional: :true
-  has_many :operator_document_annexes, as: :documentable
+  has_many :annex_documents, as: :documentable
+  has_many :operator_document_annexes, through: :annex_documents
   accepts_nested_attributes_for :document_file
+
+  mount_base64_uploader :attachment, OperatorDocumentUploader # TODO Remove this after migrating
 
   before_validation :set_expire_date, unless: :expire_date?
 
@@ -84,7 +87,11 @@ class OperatorDocument < ApplicationRecord
     mapping['type'] += 'History'
     attrs.select! { |x| OperatorDocumentHistory.new.attributes.keys.include? x }
 
-    OperatorDocumentHistory.create mapping.merge(attrs)
+    odh = OperatorDocumentHistory.create mapping.merge(attrs)
+    return odh unless odh.persisted?
+
+    odh.operator_document_annexes = self.operator_document_annexes
+    odh
   end
 
   def set_expire_date
