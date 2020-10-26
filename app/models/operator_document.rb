@@ -15,7 +15,6 @@
 #  status                        :integer
 #  operator_id                   :integer
 #  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -36,7 +35,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :required_operator_document, -> { with_archived }, required: true
   belongs_to :fmu
   belongs_to :user
-  belongs_to :document_file, required: :false
+  belongs_to :document_file, optional: :true
   has_many :operator_document_annexes, as: :documentable
 
   mount_base64_uploader :attachment, OperatorDocumentUploader
@@ -47,17 +46,16 @@ class OperatorDocument < ApplicationRecord
   validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
   validate :reason_or_attachment
 
-  before_save :update_current, on: %w[create update], if: :current_changed?
   before_save :set_type, on: %w[create update]
   before_create :set_status
   before_create :delete_previous_pending_document
   after_save ->{ ScoreOperatorDocument.recalculate!(operator) }, on: %w[create update],  if: :status_changed?
+  after_save :create_history
 
-  before_destroy :ensure_unity
+  after_destroy :regenerate
 
-  scope :actual,       -> { where(current: true, deleted_at: nil) }
-  scope :valid,        -> { actual.where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required,     -> { actual.where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :valid,        -> { where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required,     -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
   scope :available,    -> { where(public: true) }
   scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
@@ -71,6 +69,13 @@ class OperatorDocument < ApplicationRecord
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
   NON_HISTORICAL_ATTRIBUTES = %w[id attachment current deleted_at].freeze
+
+  def self.expire_documents
+    documents_to_expire = OperatorDocument.to_expire(Date.today)
+    number_of_documents = documents_to_expire.count
+    documents_to_expire.find_each(&:expire_document)
+    Rails.logger.info "Expired #{number_of_documents} documents"
+  end
 
   # Creates an OperatorDocumentHistory for the current OperatorDocument
   def create_history(attrs = {})
@@ -86,30 +91,6 @@ class OperatorDocument < ApplicationRecord
     self.expire_date = start_date + required_operator_document.valid_period.days rescue start_date
   end
 
-  def update_current
-    return if (operator.present? && operator.marked_for_destruction?) || fmu&.marked_for_destruction?
-
-    if current == true
-      documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                                                   required_operator_document_id: self.required_operator_document_id, current: true)
-                                .where.not(id: self.id)
-      documents_to_update.find_each { |x| x.update!(current: false) }
-    else
-      documents_to_update = OperatorDocument.where(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                                                   required_operator_document_id: self.required_operator_document_id, current: true)
-      unless documents_to_update.any?
-        self.update(current: false)
-      end
-    end
-  end
-
-  def self.expire_documents
-    documents_to_expire = OperatorDocument.to_expire(Date.today)
-    number_of_documents = documents_to_expire.count
-    documents_to_expire.find_each(&:expire_document)
-    Rails.logger.info "Expired #{number_of_documents} documents"
-  end
-
   def expire_document
     self.update(status: OperatorDocument.statuses[:doc_expired])
   end
@@ -121,17 +102,17 @@ class OperatorDocument < ApplicationRecord
 
   private
 
-  def ensure_unity
+  def regenerate
     return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
     return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
 
-    if self.current && self.required_operator_document.present?
-      od = OperatorDocument.new(fmu_id: self.fmu_id, operator_id: self.operator_id,
-                                required_operator_document_id: self.required_operator_document_id,
-                                status: OperatorDocument.statuses[:doc_not_provided], type: self.type,
-                                current: true)
-      od.save!(validate: false)
-    end
+    update status: OperatorDocument.statuses[:doc_not_provided], document_file_id: nil,
+           expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
+           deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
+           source: nil, source_info: nil, document_file_id: nil
+
+
+    true
   end
 
   def set_type

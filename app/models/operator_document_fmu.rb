@@ -15,7 +15,6 @@
 #  status                        :integer
 #  operator_id                   :integer
 #  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
