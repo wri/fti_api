@@ -17,6 +17,7 @@ class DocumentFileUploader < CarrierWave::Uploader::Base
 
   def filename
     filename = model.file_name
+    filename ||= super&.split('.')&.first
     extension = super&.split('.')&.last
     extension = extension.blank? ? '' : '.' + extension
     filename + extension

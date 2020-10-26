@@ -30,17 +30,20 @@ class OperatorDocument < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
+  #  delegate :attachment, to: :document_file
+
   belongs_to :operator, optional: false, touch: true
   belongs_to :required_operator_document, -> { with_archived }, required: true
   belongs_to :fmu
   belongs_to :user
   belongs_to :document_file, optional: :true
   has_many :operator_document_annexes, as: :documentable
+  accepts_nested_attributes_for :document_file
 
   before_validation :set_expire_date, unless: :expire_date?
 
-  validates_presence_of :start_date, if: :attachment?
-  validates_presence_of :expire_date, if: :attachment? # TODO We set expire_date on before_validation
+  validates_presence_of :start_date, if: :document_file_id?
+  validates_presence_of :expire_date, if: :document_file_id # TODO We set expire_date on before_validation
   validate :reason_or_file
 
   before_save :set_type, on: %w[create update]
@@ -108,7 +111,6 @@ class OperatorDocument < ApplicationRecord
            deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
            source: nil, source_info: nil, document_file_id: nil
 
-
     true
   end
 
@@ -121,7 +123,7 @@ class OperatorDocument < ApplicationRecord
 
   def set_status
     status =
-      if attachment.present? || reason.present?
+      if document_file_id.present? || reason.present?
         :doc_pending
       else
         :doc_not_provided
