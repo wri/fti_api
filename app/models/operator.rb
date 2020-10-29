@@ -48,9 +48,9 @@ class Operator < ApplicationRecord
   has_many :all_fmu_operators, class_name: 'FmuOperator', inverse_of: :operator, dependent: :destroy
   has_many :all_fmus, through: :all_fmu_operators, source: :fmu
 
-  has_many :operator_documents, -> { actual }
-  has_many :operator_document_countries, -> { actual }
-  has_many :operator_document_fmus, -> { actual }
+  has_many :operator_documents
+  has_many :operator_document_countries
+  has_many :operator_document_fmus
 
   has_many :score_operator_documents
   has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
@@ -138,8 +138,7 @@ class Operator < ApplicationRecord
     RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
       if OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).blank?
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id,
-                                      status: OperatorDocument.statuses[:doc_not_provided],
-                                      current: true).create!
+                                      status: OperatorDocument.statuses[:doc_not_provided]).create!
       end
     end
 
@@ -148,8 +147,7 @@ class Operator < ApplicationRecord
       Fmu.joins(:fmu_operators).where(fmu_operators: { operator_id: id, current: true }).find_each do |fmu|
         unless OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).any?
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id,
-                                    status: OperatorDocument.statuses[:doc_not_provided],
-                                    current: true).create!
+                                    status: OperatorDocument.statuses[:doc_not_provided]).create!
         end
       end
     end
@@ -175,7 +173,7 @@ class Operator < ApplicationRecord
     if operator_document_countries.none?
       RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
         OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).first_or_create do |odc|
-          odc.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+          odc.update!(status: OperatorDocument.statuses[:doc_not_provided])
         end
       end
     end
@@ -184,7 +182,7 @@ class Operator < ApplicationRecord
       RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
         self.fmus.find_each do |fmu|
           OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
-            odf.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true)
+            odf.update!(status: OperatorDocument.statuses[:doc_not_provided])
           end
         end
       end

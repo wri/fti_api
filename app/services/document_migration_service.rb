@@ -51,6 +51,11 @@ class DocumentMigrationService
         not_to_destroy << od.id
       end
     end
+
+    AnnexDocument.where(documentable_type: 'OperatorDocument')
+      .joins('join operator_documents on operator_documents.id = annex_documents.documentable_id')
+      .where('operator_documents.current != true AND operator_documents.id not in (?)', not_to_destroy)
+      .delete_all
     OperatorDocument.unscoped.where.not(current: true, id: not_to_destroy).delete_all
   end
 end

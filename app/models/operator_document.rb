@@ -30,8 +30,6 @@ class OperatorDocument < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  #  delegate :attachment, to: :document_file
-
   belongs_to :operator, optional: false, touch: true
   belongs_to :required_operator_document, -> { with_archived }, required: true
   belongs_to :fmu
@@ -41,7 +39,10 @@ class OperatorDocument < ApplicationRecord
   has_many :operator_document_annexes, through: :annex_documents
   accepts_nested_attributes_for :document_file
 
-  mount_base64_uploader :attachment, OperatorDocumentUploader # TODO Remove this after migrating
+  # TODO: Remove this. This hack was put here so that the factory can create user documents
+  unless Rails.env.test?
+    mount_base64_uploader :attachment, OperatorDocumentUploader # TODO Remove this after migrating
+  end
 
   before_validation :set_expire_date, unless: :expire_date?
 
@@ -113,7 +114,7 @@ class OperatorDocument < ApplicationRecord
     return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
     return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
 
-    update status: OperatorDocument.statuses[:doc_not_provided], document_file_id: nil,
+    update status: OperatorDocument.statuses[:doc_not_provided],
            expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
            deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
            source: nil, source_info: nil, document_file_id: nil
@@ -130,7 +131,7 @@ class OperatorDocument < ApplicationRecord
 
   def set_status
     status =
-      if document_file_id.present? || reason.present?
+      if document_file.present? || reason.present?
         :doc_pending
       else
         :doc_not_provided
@@ -148,7 +149,7 @@ class OperatorDocument < ApplicationRecord
   end
 
   def reason_or_file
-    return if self.document_file_id.blank? || self.reason.blank?
+    return if self.document_file.blank? || self.reason.blank?
 
     self.errors[:reason] << 'Cannot have a reason not to have a document'
   end

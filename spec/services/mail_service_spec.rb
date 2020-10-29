@@ -4,11 +4,11 @@ RSpec.describe MailService do
   context '#notify_operator_expired_document' do
     let(:country) { FactoryBot.create(:country)}
     let(:operator) { FactoryBot.create(:operator, country_id: country.id, email: 'test@mail.com')}
-    let(:rod1) { FactoryBot.create(:required_operator_document, country_id: country.id)}
-    let(:rod2) { FactoryBot.create(:required_operator_document, country_id: country.id)}
-    let(:document1) { FactoryBot.create(:operator_document, required_operator_document_id: rod1.id,
+    let(:rod1) { FactoryBot.create(:required_operator_document_country, country_id: country.id)}
+    let(:rod2) { FactoryBot.create(:required_operator_document_country, country_id: country.id)}
+    let(:document1) { FactoryBot.create(:operator_document_country, required_operator_document_id: rod1.id,
                                         operator_id: operator, expire_date: Date.today)}
-    let(:document2) { FactoryBot.create(:operator_document, required_operator_document_id: rod2.id,
+    let(:document2) { FactoryBot.create(:operator_document_country, required_operator_document_id: rod2.id,
                                         operator_id: operator, expire_date: Date.today)}
 
     context 'Has documents expiring today' do

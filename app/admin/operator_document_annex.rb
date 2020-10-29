@@ -16,14 +16,14 @@ ActiveAdmin.register OperatorDocumentAnnex do
   scope_to do
     Class.new do
       def self.operator_document_annexes
-        OperatorDocumentAnnex.unscoped
+        OperatorDocumentAnnex.unscoped.uniq
       end
     end
   end
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:user, [operator_document: [operator: :translations, required_operator_document: :translations]]])
+      end_of_association_chain.includes([:user, annex_documents: [documentable: [operator: :translations, required_operator_document: :translations]]])
     end
   end
 
@@ -52,11 +52,16 @@ ActiveAdmin.register OperatorDocumentAnnex do
       annex.deleted_at.nil?
     end
     column :status
-    column 'operator_document' do |annex|
-      OperatorDocument.unscoped.find(annex.operator_document_id)&.required_operator_document&.name
+
+    column 'documents' do |annex|
+      documents = []
+      annex.annex_documents.each do |ad|
+        documents << ad.documentable
+      end
+      documents.split(' ')
     end
     column 'operator' do |annex|
-      OperatorDocument.unscoped.find(annex.operator_document_id)&.operator&.name
+      annex.annex_documents.first&.documentable&.operator&.name
     end
 
     column 'user' do |annex|
@@ -73,16 +78,28 @@ ActiveAdmin.register OperatorDocumentAnnex do
       od.deleted_at.nil?
     end
     tag_column :status
-    column :operator_document, sortable: 'required_operator_documents.name' do |od|
-      rod = OperatorDocument.unscoped.find(od.operator_document_id)
-      link_to(rod.required_operator_document.name, admin_operator_document_path(rod.id))
+    column :operator_documents do |od|
+      od.annex_documents_actual.each_with_object([]) do |ad, links|
+        doc = OperatorDocument.unscoped.find(ad.documentable_id)
+        links << link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
+      end.reduce(:+)
+    end
+    column :operator_documents_history do |od|
+      od.annex_documents_history.each_with_object([]) do |ad, links|
+        doc = OperatorDocumentHistory.unscoped.find(ad.documentable_id)
+        links << link_to(doc.required_operator_document.name, admin_operator_document_history_path(doc.id))
+      end.reduce(:+)
     end
     column :operator, sortable: 'operator_translations.name' do |od|
-      o = OperatorDocument.unscoped.find(od.operator_document_id).operator
-      link_to(o.name, admin_producer_path(o.id))
+      begin
+        o = od.annex_documents_history.first.documentable.operator
+        link_to(o.name, admin_producer_path(o.id))
+      rescue
+      end
     end
     column :fmu, sortable: 'fmu_translations.name' do |od|
-      fmu = OperatorDocument.unscoped.find(od.operator_document_id).fmu
+      doc = od.annex_documents.first
+      fmu = doc.documentable_type.constantize.unscoped.find(doc.documentable_id).fmu
       link_to(fmu.name, admin_fmu_path(fmu.id)) if fmu
     end
 
@@ -97,17 +114,18 @@ ActiveAdmin.register OperatorDocumentAnnex do
     actions
   end
 
-  
-  filter :operator_document_required_operator_document_name_equals,
-         as: :select,
-         label: 'Operator Document',
-         collection: RequiredOperatorDocument.order(:name).pluck(:name)
-  filter :operator_document_operator_translations_name_equals,
-         as: :select,
-         label: 'Operator',
-         collection: Operator.with_translations(I18n.locale)
-                         .order('operator_translations.name').pluck(:name)
-  filter :operator_document_fmu_translations_name_equals,
+
+  filter :annex_documents_documentable_of_OperatorDocument_type_required_operator_document_name_equals,
+          as: :select,
+          label: 'Operator Document',
+          collection: RequiredOperatorDocument.order(:name).pluck(:name)
+
+  filter :annex_documents_documentable_of_OperatorDocument_type_operator_translations_name_equals,
+          as: :select,
+          label: 'Operator',
+          collection: Operator.with_translations(I18n.locale)
+                          .order('operator_translations.name').pluck(:name)
+  filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
          as: :select,
          label: 'FMU',
          collection: Fmu.with_translations(I18n.locale).order(:name).pluck(:name)

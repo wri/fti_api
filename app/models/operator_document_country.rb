@@ -29,7 +29,7 @@
 class OperatorDocumentCountry < OperatorDocument
   belongs_to :required_operator_document_country, foreign_key: 'required_operator_document_id'
 
-  after_update :update_operator_approved, if: -> { required_operator_document.contract_signature && current }
+  after_update :update_operator_approved, if: -> { required_operator_document.contract_signature }
 
   protected
 

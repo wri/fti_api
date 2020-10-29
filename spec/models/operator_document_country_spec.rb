@@ -43,7 +43,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
             create(:required_operator_document_country, contract_signature: true, country: country)
           operator_document = create(:operator_document_country,
                  required_operator_document: required_operator_document,
-                 operator: operator, current: true)
+                 operator: operator)
 
           operator_document.status = :doc_valid
           operator_document.save

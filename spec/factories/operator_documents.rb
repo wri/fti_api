@@ -29,8 +29,9 @@ FactoryBot.define do
     user
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
-    current { true }
-    attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+    type { 'OperatorDocumentCountry' } # This can be overwritten by the children.
+    document_file { FactoryBot.build :document_file }
+
 
     after(:build) do |random_operator_document|
       country = random_operator_document&.operator&.country ||

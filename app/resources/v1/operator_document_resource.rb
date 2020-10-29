@@ -20,8 +20,8 @@ module V1
 
     filters :type, :status, :operator_id, :current
 
-    before_create :set_operator_id, :set_user_id, :set_public, :set_source
-    before_update :set_status_pending
+    before_create :set_public, :set_source
+    before_update :set_operator_id, :set_user_id, :set_status_pending
 
     def set_operator_id
       if context[:current_user].present? && context[:current_user].operator_id.present?
@@ -72,19 +72,6 @@ module V1
 
     def self.records(options = {})
       OperatorDocument.all
-
-      # TODO : This code is faulty. I'm not sure if any of this is necessary.
-      # It could be that when logged in, the operator could see his old
-      # documents and that those should be added to the list of documents
-
-      # context = options[:context]
-      # user = context[:current_user]
-      # app = context[:app]
-      # if app != 'observations-tool' && user.present? && user.operator_id && context[:action] != 'destroy'
-      #   OperatorDocument.actual.from_user(user.operator_id)
-      # else
-      #   OperatorDocument.all
-      # end
     end
 
     def custom_links(_)
