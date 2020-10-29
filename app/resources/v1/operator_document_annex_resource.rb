@@ -12,7 +12,7 @@ module V1
     has_one :operator_document
     has_one :user
 
-    filters :status, :operator_document_id
+    filters :status
 
     before_create :set_user_id, :set_status, :set_public
 
