@@ -20,6 +20,10 @@ module V1
     has_many :operator_document_fmus
     has_many :operator_document_countries
 
+    has_many :operator_document_histories
+    has_many :operator_document_country_histories
+    has_many :operator_document_fmu_histories
+
     filters :country, :is_active, :name, :operator_type, :fa
 
     before_create :set_active

@@ -52,6 +52,10 @@ class Operator < ApplicationRecord
   has_many :operator_document_countries
   has_many :operator_document_fmus
 
+  has_many :operator_document_histories
+  has_many :operator_document_country_histories
+  has_many :operator_document_fmu_histories
+
   has_many :score_operator_documents
   has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
   has_many :ranking_operator_documents

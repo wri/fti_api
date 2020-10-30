@@ -23,6 +23,12 @@ module OperatorDocumentable
       { self: nil }
     end
 
+    def attachment
+      return @model&.document_file&.attachment if can_see_document? || document_public?
+
+      { url: nil }
+    end
+
     def document_public?
       @model.public || @model.operator.approved
     end

@@ -47,12 +47,6 @@ module V1
       hidden_document_status
     end
 
-    def attachment
-      return @model&.document_file&.attachment if can_see_document? || document_public?
-
-      { url: nil }
-    end
-
     def self.records(options = {})
       OperatorDocument.all
     end
