@@ -7,7 +7,7 @@ module OperatorDocumentable
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :current, :uploaded_by, :reason, :note, :response_date,
+               :fmu_id, :uploaded_by, :reason, :note, :response_date,
                :public, :source_info
     attribute  :source_type, delegate: :source
 
@@ -15,9 +15,9 @@ module OperatorDocumentable
     has_one :fmu
     has_one :operator
     has_one :required_operator_document
-    has_many :operator_document_annexes
+    has_many :operator_document_annexes, foreign_key_on: :related
 
-    filters :type, :status, :operator_id, :current
+    filters :type, :status, :operator_id
 
     def custom_links(_)
       { self: nil }

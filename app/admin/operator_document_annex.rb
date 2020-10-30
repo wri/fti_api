@@ -44,7 +44,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   actions :all, except: [:destroy, :new]
-  permit_params :name, :operator_document_id, :status, :expire_date, :start_date,
+  permit_params :name, :status, :expire_date, :start_date,
                 :attachment, :uploaded_by
 
   csv do
@@ -79,10 +79,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     tag_column :status
     column :operator_documents do |od|
-      od.annex_documents_actual.each_with_object([]) do |ad, links|
-        doc = OperatorDocument.unscoped.find(ad.documentable_id)
-        links << link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
-      end.reduce(:+)
+      doc = OperatorDocument.unscoped.find(annex_document.documentable_id)
+      link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
     end
     column :operator_documents_history do |od|
       od.annex_documents_history.each_with_object([]) do |ad, links|

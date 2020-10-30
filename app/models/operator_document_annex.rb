@@ -26,8 +26,9 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   belongs_to :user
   has_many :annex_documents
-  has_many :annex_documents_actual, -> { where(documentable_type: 'OperatorDocument')},
-           class_name: 'AnnexDocument'
+  has_one :annex_document, -> { where(documentable_type: 'OperatorDocument')},
+          class_name: 'AnnexDocument'
+  has_one :operator_document, through: :annex_document, required: false, source: 'documentable', source_type: 'OperatorDocument'
   has_many :annex_documents_history, -> { where(documentable_type: 'OperatorDocumentHistory')},
            class_name: 'AnnexDocument'
 

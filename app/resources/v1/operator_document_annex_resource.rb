@@ -5,11 +5,11 @@ module V1
     include CacheableByLocale
     include CacheableByCurrentUser
     caching
-    attributes :operator_document_id, :name,
+    attributes :name,
                :start_date, :expire_date, :status, :attachment,
                :uploaded_by, :created_at, :updated_at
 
-    has_one :operator_document
+    has_one :operator_document, foreign_key_on: :related
     has_one :user
 
     filters :status
