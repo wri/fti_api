@@ -79,7 +79,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     tag_column :status
     column :operator_documents do |od|
-      doc = OperatorDocument.unscoped.find(annex_document.documentable_id)
+      doc = OperatorDocument.unscoped.find(od.annex_document.documentable_id)
       link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
     end
     column :operator_documents_history do |od|
