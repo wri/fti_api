@@ -8,20 +8,25 @@ module V1
     caching
     immutable
 
+    filter :date
+
+    # The filter doesn't do anything. This is already implemented under the "records" method
+    filter :date, apply: ->(records, value, _options) {
+      records
+    }
+
     # TODO
     def self.records(options = {})
       context = options[:context]
-      user = context[:current_user]
-      operator = user&.operator
-      return OperatorDocumentHistory.where('true = false') unless operator
+      operator = context.dig(:filters, 'operator-id')
+      date = context.dig(:filters, 'date')
+      return OperatorDocumentHistory.where('true = false') unless operator && date
 
-      date = "AND updated_at < '2017-10-06'"
-      # date = ''
       query = <<~SQL
         (select * from
         (select row_number() over (partition by required_operator_document_id, fmu_id order by created_at asc), *
         from operator_document_histories
-        where operator_id = #{operator.id} #{date}) as sq
+        where operator_id = #{operator} AND updated_at < '#{date}') as sq
         where sq.row_number = 1) as operator_document_histories
       SQL
 
