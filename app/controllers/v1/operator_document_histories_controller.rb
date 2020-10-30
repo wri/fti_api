@@ -7,8 +7,8 @@ module V1
 
     def index
 
-      return render json: { error: 'You must provide an operator-id' }, status: :bad_request unless params.dig('filter', 'operator-id').present?
-      return render json: { error: 'You must provide a date' }, status: :bad_request unless params.dig('filter', 'date').present?
+      return render json: { error: 'You must provide an operator-id' }, status: :bad_request if params.dig('filter', 'operator-id').blank?
+      return render json: { error: 'You must provide a date' }, status: :bad_request if params.dig('filter', 'date').blank?
 
       super
     end

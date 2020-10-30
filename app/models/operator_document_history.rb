@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: operator_document_histories
@@ -26,8 +28,8 @@
 class OperatorDocumentHistory < ApplicationRecord
   belongs_to :operator, optional: false
   belongs_to :required_operator_document, -> { with_archived }, required: true
-  belongs_to :fmu, required: false
-  belongs_to :user, required: false
+  belongs_to :fmu, optional: true
+  belongs_to :user, optional: true
   belongs_to :document_file, optional: :true
   has_many :annex_documents, as: :documentable
   has_many :operator_document_annexes, through: :annex_documents

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: annex_documents
@@ -15,7 +17,7 @@ class AnnexDocument < ApplicationRecord
 
   # An annex can only belong to one Operator Document
   validates_uniqueness_of :documentable_id,
-                          conditions: -> { where(documentable_type: 'OperatorDocument')},
+                          conditions: -> { where(documentable_type: 'OperatorDocument') },
                           scope: :operator_document_annex_id
 
   # A Documentable cannot have the same annex more than once

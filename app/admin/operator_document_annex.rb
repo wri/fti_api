@@ -92,7 +92,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
       begin
         o = od.annex_documents_history.first.documentable.operator
         link_to(o.name, admin_producer_path(o.id))
-      rescue
+      rescue StandardError
       end
     end
     column :fmu, sortable: 'fmu_translations.name' do |od|
@@ -114,15 +114,15 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
 
   filter :annex_documents_documentable_of_OperatorDocument_type_required_operator_document_name_equals,
-          as: :select,
-          label: 'Operator Document',
-          collection: RequiredOperatorDocument.order(:name).pluck(:name)
+         as: :select,
+         label: 'Operator Document',
+         collection: RequiredOperatorDocument.order(:name).pluck(:name)
 
   filter :annex_documents_documentable_of_OperatorDocument_type_operator_translations_name_equals,
-          as: :select,
-          label: 'Operator',
-          collection: Operator.with_translations(I18n.locale)
-                          .order('operator_translations.name').pluck(:name)
+         as: :select,
+         label: 'Operator',
+         collection: Operator.with_translations(I18n.locale)
+                         .order('operator_translations.name').pluck(:name)
   filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
          as: :select,
          label: 'FMU',
