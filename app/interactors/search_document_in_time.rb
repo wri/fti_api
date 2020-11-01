@@ -5,7 +5,7 @@ class SearchDocumentInTime
 
   def call
     filter = context.filter
-    context.fail!(message: 'Please add the date and operator-id filters') unless filter.present?
+    context.fail!(message: 'Please add the date and operator-id filters') if filter.blank?
     context.fail!(message: 'You must provide an operator-id') if filter['operator-id'].blank?
     context.fail!(message: 'You must provide a date') if filter['date'].blank?
 

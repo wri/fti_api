@@ -11,7 +11,7 @@ module V1
       if result.success?
         super
       else
-        return render json: { error: result.message }, status: :bad_request
+        render json: { error: result.message }, status: :bad_request
       end
     end
   end

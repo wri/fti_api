@@ -43,11 +43,11 @@ class OperatorDocumentHistory < ApplicationRecord
   # @param String date the date at which to fetch the state
   def self.from_operator_at_date(operator_id, date)
     query = <<~SQL
-        (select * from
-        (select row_number() over (partition by required_operator_document_id, fmu_id order by updated_at desc), *
-        from operator_document_histories
-        where operator_id = #{operator_id} AND updated_at < '#{date.to_date.to_s(:db)}') as sq
-        where sq.row_number = 1) as operator_document_histories
+      (select * from
+      (select row_number() over (partition by required_operator_document_id, fmu_id order by updated_at desc), *
+      from operator_document_histories
+      where operator_id = #{operator_id} AND updated_at < '#{date.to_date.to_s(:db)}') as sq
+      where sq.row_number = 1) as operator_document_histories
     SQL
 
     from(query)

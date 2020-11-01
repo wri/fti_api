@@ -22,7 +22,7 @@ module V1
       date = context.dig(:filters, 'date').to_date
 
       OperatorDocumentHistory.from_operator_at_date(operator, date)
-    rescue
+    rescue StandardError
       return OperatorDocumentHistory.where('true = false') unless operator && date
     end
   end
