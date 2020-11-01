@@ -6,11 +6,13 @@ module V1
     load_and_authorize_resource class: 'OperatorDocumentHistory'
 
     def index
+      result = SearchDocumentInTime.call(params)
 
-      return render json: { error: 'You must provide an operator-id' }, status: :bad_request if params.dig('filter', 'operator-id').blank?
-      return render json: { error: 'You must provide a date' }, status: :bad_request if params.dig('filter', 'date').blank?
-
-      super
+      if result.success?
+        super
+      else
+        return render json: { error: result.message }, status: :bad_request
+      end
     end
   end
 end
