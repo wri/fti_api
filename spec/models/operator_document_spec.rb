@@ -12,8 +12,6 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -23,12 +21,13 @@
 #  public                        :boolean          default("true"), not null
 #  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 require 'rails_helper'
 
 RSpec.describe OperatorDocument, type: :model do
-  subject(:operator_document) { FactoryBot.build(:operator_document) }
+  subject(:operator_document) { FactoryBot.build(:operator_document_country) }
 
   it 'is valid with valid attributes' do
     expect(operator_document).to be_valid
@@ -37,12 +36,12 @@ RSpec.describe OperatorDocument, type: :model do
   describe 'Validations' do
     describe '#start_date' do
       context 'has an attachment' do
-        before { allow(subject).to receive(:attachment?).and_return(true) }
+        before { allow(subject).to receive(:document_file_id?).and_return(true) }
         it { is_expected.to validate_presence_of(:start_date) }
       end
 
       context 'has not an attachment' do
-        before { allow(subject).to receive(:attachment?).and_return(false) }
+        before { allow(subject).to receive(:document_file_id?).and_return(false) }
         it { is_expected.not_to validate_presence_of(:start_date) }
       end
     end
@@ -50,7 +49,7 @@ RSpec.describe OperatorDocument, type: :model do
     describe '#set_expire_date' do
       context 'when there is not expire_date' do
         it 'set expire_date with the start_date plus the valid_period days' do
-          operator_document = build(:operator_document, expire_date: nil)
+          operator_document = build(:operator_document_country, expire_date: nil)
           operator_document.valid?
 
           expect(operator_document.expire_date).to eql(
@@ -64,7 +63,7 @@ RSpec.describe OperatorDocument, type: :model do
     describe '#reason_or_attachment' do
       context 'when there is attachment and reason' do
         it 'add an error on reason' do
-          operator_document = build(:operator_document, reason: 'aaa')
+          operator_document = build(:operator_document_country, reason: 'aaa')
 
           expect(operator_document.valid?).to eql false
           expect(operator_document.errors[:reason]).to eql(
@@ -94,74 +93,27 @@ RSpec.describe OperatorDocument, type: :model do
     describe '#update_current' do
       context 'when there is not operator or he/she is marked for destruction' do
         before do
-          create(:operator_document,
+          create(:operator_document_country,
                  operator: @operator,
                  required_operator_document: @required_operator_document,
-                 fmu: @fmu,
-                 current: true)
+                 fmu: @fmu)
 
           @operator_document = build(
-            :operator_document,
+            :operator_document_country,
             operator: @operator,
             required_operator_document: @required_operator_document,
             fmu: @fmu)
-        end
-
-        context 'when operator_document is the current one' do
-          it 'update related operator_document with current false' do
-            @operator_document.save
-
-            expect(@operator_document.current).to eql true
-            OperatorDocument.where.not(id: @operator_document.id).each do |operator_document|
-              expect(operator_document.current).to eql false
-            end
-          end
         end
       end
     end
 
     describe '#set_status' do
-      context 'when attachment or reason are present' do
-        it 'update status as doc_pending' do
-          operator_document = create(:operator_document)
-
-          expect(operator_document.status).to eql 'doc_pending'
-        end
-      end
-
       context 'when attachment or reason are not present' do
         it 'update status as doc_not_provided' do
-          operator_document = create(:operator_document, attachment: nil, reason: nil)
+          operator_document = create(:operator_document_country, reason: nil, document_file: nil)
 
           expect(operator_document.status).to eql 'doc_not_provided'
         end
-      end
-    end
-
-    describe '#delete_previous_pending_document' do
-      it 'deletes previous pending operator_documents' do
-        another_operator = create(:operator, country: @country, fa_id: 'fa_id')
-        create(
-          :operator_document,
-          operator: another_operator,
-          fmu: @fmu,
-          required_operator_document: @required_operator_document)
-
-        create(
-          :operator_document,
-          operator: @operator,
-          fmu: @fmu,
-          required_operator_document: @required_operator_document)
-
-        expect(OperatorDocument.all.size).to eql 2
-
-        create(
-          :operator_document,
-          operator: @operator,
-          fmu: @fmu,
-          required_operator_document: @required_operator_document)
-
-        expect(OperatorDocument.all.size).to eql 2
       end
     end
 
@@ -171,18 +123,17 @@ RSpec.describe OperatorDocument, type: :model do
         pending_status = OperatorDocument.statuses[:doc_pending]
         common_data = {
           operator_id: @operator.id,
-          current: true,
           required_operator_document_id: @required_operator_document.id,
           public: true
         }
 
         # Generate one valid operator document and two pending operator documents of each type
-        valid_op_doc = create(:operator_document, **common_data)
+        valid_op_doc = create(:operator_document_country, **common_data)
         valid_op_doc.reload
         valid_op_doc.update_attributes(status: valid_status)
         @operator.reload
 
-        pending_op_docs = create_list(:operator_document, 2, **common_data)
+        pending_op_docs = create_list(:operator_document_country, 2, **common_data)
         pending_op_docs.each do |pending_op_doc|
           pending_op_doc.update_attributes(status: pending_status)
           @operator.reload
@@ -210,10 +161,9 @@ RSpec.describe OperatorDocument, type: :model do
               'for destruction, not current operator document and not required operator document' do
         it 'creates a new operator document' do
           operator_document = create(
-            :operator_document,
+            :operator_document_country,
             operator: @operator,
-            required_operator_document: @required_operator_document,
-            current: true)
+            required_operator_document: @required_operator_document)
 
           expect(OperatorDocument.count).to eql 1
 
@@ -228,7 +178,7 @@ RSpec.describe OperatorDocument, type: :model do
   describe 'Instance methods' do
     describe '#expire_document' do
       it 'update status as doc_expired' do
-        operator_document = create(:operator_document)
+        operator_document = create(:operator_document_country)
 
         expect(operator_document.status).not_to eql 'doc_expired'
 
@@ -245,7 +195,7 @@ RSpec.describe OperatorDocument, type: :model do
         required_operator_document =
           create(:required_operator_document, contract_signature: false)
         create(
-          :operator_document,
+          :operator_document_country,
           required_operator_document: required_operator_document,
           status: OperatorDocument.statuses[:doc_valid],
           expire_date: Date.yesterday)

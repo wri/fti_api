@@ -14,8 +14,6 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -25,12 +23,13 @@
 #  public                        :boolean          default("true"), not null
 #  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 class OperatorDocumentCountry < OperatorDocument
   belongs_to :required_operator_document_country, foreign_key: 'required_operator_document_id'
 
-  after_update :update_operator_approved, if: -> { required_operator_document.contract_signature && current }
+  after_update :update_operator_approved, if: -> { required_operator_document.contract_signature }
 
   protected
 

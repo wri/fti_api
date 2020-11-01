@@ -51,3 +51,6 @@ erd.png
 
 # Ignore IDE files
 .idea
+
+# Ignore test tasks
+/lib/tasks/test.rake

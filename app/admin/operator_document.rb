@@ -104,14 +104,13 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new]
   permit_params :name, :public, :required_operator_document_id,
                 :operator_id, :type, :status, :expire_date, :start_date,
-                :attachment, :uploaded_by, :reason, :note, :response_date,
-                :source, :source_info
+                :uploaded_by, :reason, :note, :response_date,
+                :source, :source_info, document_file_attributes: [:id, :attachment, :filename]
 
   csv do
     column :exists do |o|
       o.deleted_at.nil? && o.required_operator_document.deleted_at.nil?
     end
-    column :current
     column :status
     column :id
     column :required_operator_document do |o|
@@ -213,7 +212,11 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     column :source
-    attachment_column :attachment
+    column 'attachment' do |od|
+      if od&.document_file&.attachment
+        link_to od.document_file.attachment.identifier, od.document_file.attachment.url
+      end
+    end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
     column 'Annexes' do |od|
@@ -261,7 +264,9 @@ ActiveAdmin.register OperatorDocument do
       f.input :source_info
       f.input :status, include_blank: false
       f.input :public
-      f.input :attachment
+      f.inputs for: [:document_file_attributes, f.object.document_file || DocumentFile.new] do |df|
+        df.input :attachment
+      end
       f.input :reason
       f.input :note
       f.input :response_date, as: :date_picker
@@ -280,8 +285,8 @@ ActiveAdmin.register OperatorDocument do
       row :operator
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :uploaded_by
-      if resource.attachment.present?
-        attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
+      row 'attachment' do |r|
+        link_to r.document_file.attachment.identifier, r.document_file.attachment.url
       end
       row :reason
       row :start_date
