@@ -87,6 +87,9 @@ gem 'rubyzip'
 gem 'globalize-versioning'
 gem 'paper_trail'
 
+# Interactors
+gem "interactor", "~> 3.0"
+
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
@@ -124,7 +127,6 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 4.0.1'
   gem 'simplecov'
-  gem 'timecop'
 end
 
 # Server
