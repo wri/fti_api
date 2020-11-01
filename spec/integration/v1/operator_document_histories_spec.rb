@@ -39,7 +39,7 @@ module V1
       end
       describe 'Invalid date' do
         it 'Fails with a descriptive message' do
-          get("/operator-document-histories?filter[operator-id]=1&filter[date]=#{Date.today}",
+          get("/operator-document-histories?filter[operator-id]=1&filter[date]=wrong-date",
               headers: admin_headers)
           expect(status).to eql(400)
           expect(parsed_error).to eql('Invalid date format. Use: YYYY-MM-DD')
