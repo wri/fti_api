@@ -19,18 +19,11 @@ module V1
     def self.records(options = {})
       context = options[:context]
       operator = context.dig(:filters, 'operator-id')
-      date = context.dig(:filters, 'date')
+      date = context.dig(:filters, 'date').to_date
+
+      OperatorDocumentHistory.from_operator_at_date(operator, date)
+    rescue
       return OperatorDocumentHistory.where('true = false') unless operator && date
-
-      query = <<~SQL
-        (select * from
-        (select row_number() over (partition by required_operator_document_id, fmu_id order by created_at asc), *
-        from operator_document_histories
-        where operator_id = #{operator} AND updated_at < '#{date}') as sq
-        where sq.row_number = 1) as operator_document_histories
-      SQL
-
-      OperatorDocumentHistory.from(query)
     end
   end
 end

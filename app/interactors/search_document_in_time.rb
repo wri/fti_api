@@ -4,12 +4,18 @@ class SearchDocumentInTime
   include Interactor
 
   def call
-    context.fail!(message: 'You must provide an operator-id') if params.dig('filter', 'operator-id').blank?
-    context.fail!(message: 'You must provide a date') if params.dig('filter', 'date').blank?
-    context.fail!(message: 'Operator must be an integer') unless params['filter']['operator-id'].is_a?(Integer)
+    filter = context.filter
+    context.fail!(message: 'Please add the date and operator-id filters') unless filter.present?
+    context.fail!(message: 'You must provide an operator-id') if filter['operator-id'].blank?
+    context.fail!(message: 'You must provide a date') if filter['date'].blank?
 
     begin
-      params['filter']['operator-id'].to_date
+      Integer(filter['operator-id'])
+    rescue ArgumentError
+      context.fail!(message: 'Operator must be an integer')
+    end
+    begin
+      filter['date'].to_date
     rescue ArgumentError
       context.fail!(message: 'Invalid date format. Use: YYYY-MM-DD')
     end
