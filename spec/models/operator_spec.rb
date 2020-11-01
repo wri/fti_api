@@ -15,6 +15,7 @@
 #  address       :string
 #  website       :string
 #  approved      :boolean          default("true"), not null
+#  email         :string
 #  name          :string
 #  details       :text
 #
@@ -92,12 +93,10 @@ RSpec.describe Operator, type: :model do
           expect(@other_operator.operator_document_countries.size).to eql 1
           operator_document_country = @other_operator.operator_document_countries.first
           expect(operator_document_country.status).to eql 'doc_not_provided'
-          expect(operator_document_country.current).to eql true
 
           expect(@other_operator.operator_document_fmus.size).to eql 1
           operator_document_fmu = @other_operator.operator_document_fmus.first
           expect(operator_document_fmu.status).to eql 'doc_not_provided'
-          expect(operator_document_fmu.current).to eql true
         end
       end
     end
@@ -105,7 +104,7 @@ RSpec.describe Operator, type: :model do
     describe '#really_destroy_documents' do
       it 'destroy operator_documents associated with the operator' do
         another_operator = create(:operator)
-        operator_document = create(:operator_document, operator: another_operator)
+        operator_document = create(:operator_document_country, operator: another_operator)
         another_operator.send(:really_destroy_documents)
 
         expect(OperatorDocument.where(id: operator_document.id).first).to be_nil
@@ -119,13 +118,12 @@ RSpec.describe Operator, type: :model do
       pending_status = OperatorDocument.statuses[:doc_pending]
       common_data = {
         operator_id: @operator.id,
-        current: true,
         required_operator_document_id: @required_operator_document.id,
         public: true
       }
 
       # Generate one valid operator document and two pending operator documents of each type
-      %i[operator_document operator_document_fmu operator_document_country].each do |op_doc_type|
+      %i[operator_document_country operator_document_fmu operator_document_country].each do |op_doc_type|
         [false, true].each do |public|
           common_data[:public] = public
           common_data[:required_operator_document_id] =
@@ -184,7 +182,7 @@ RSpec.describe Operator, type: :model do
             ScoreOperatorDocument.recalculate! @operator
 
             expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
-            expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
+            expect(@operator.score_operator_document.country).to eql(4.0 / @operator_document_countries_required)
             expect(@operator.score_operator_document.fmu).to eql(2.0 / @operator_document_fmus_required)
           end
         end
@@ -196,7 +194,7 @@ RSpec.describe Operator, type: :model do
             ScoreOperatorDocument.recalculate! @operator
 
             expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
-            expect(@operator.score_operator_document.country).to eql(1.0 / @operator_document_countries_required)
+            expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
             expect(@operator.score_operator_document.fmu).to eql(1.0 / @operator_document_fmus_required)
           end
         end
@@ -259,12 +257,10 @@ RSpec.describe Operator, type: :model do
           expect(@other_operator.operator_document_countries.size).to eql 1
           operator_document_country = @other_operator.operator_document_countries.first
           expect(operator_document_country.status).to eql 'doc_not_provided'
-          expect(operator_document_country.current).to eql true
 
           expect(@other_operator.operator_document_fmus.size).to eql 1
           operator_document_fmu = @other_operator.operator_document_fmus.first
           expect(operator_document_fmu.status).to eql 'doc_not_provided'
-          expect(operator_document_fmu.current).to eql true
         end
       end
     end

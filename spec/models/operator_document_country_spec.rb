@@ -12,8 +12,6 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -23,6 +21,7 @@
 #  public                        :boolean          default("true"), not null
 #  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 require 'rails_helper'
@@ -44,7 +43,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
             create(:required_operator_document_country, contract_signature: true, country: country)
           operator_document = create(:operator_document_country,
                  required_operator_document: required_operator_document,
-                 operator: operator, current: true)
+                 operator: operator)
 
           operator_document.status = :doc_valid
           operator_document.save
