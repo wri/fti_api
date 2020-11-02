@@ -415,6 +415,18 @@ fr:
     ? "Trader"
     : "Trader"
 
+  operator_documents:
+    filters:
+      country: 'Pays'
+      fmu: 'Fmu'
+      doc_not_provided: 'Not Provided Document'
+      doc_expired: 'Expired Document '
+      doc_valid: 'Valid Document'
+      doc_not_required: 'Not Required Document'
+
+
+
+
   filters:
     operator: 'Operateur'
     governance: 'Gouvernance'
