@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200914160521) do
+ActiveRecord::Schema.define(version: 20201104135131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.string   "name"
     t.index ["category_id"], name: "index_category_translations_on_category_id", using: :btree
     t.index ["locale"], name: "index_category_translations_on_locale", using: :btree
+    t.index ["name", "category_id"], name: "index_category_translations_on_name_and_category_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -154,6 +155,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.string   "region_name"
     t.index ["country_id"], name: "index_country_translations_on_country_id", using: :btree
     t.index ["locale"], name: "index_country_translations_on_locale", using: :btree
+    t.index ["name", "country_id"], name: "index_country_translations_on_name_and_country_id", using: :btree
   end
 
   create_table "country_vpa_translations", force: :cascade do |t|
@@ -217,6 +219,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.index ["deleted_at"], name: "index_fmu_translations_on_deleted_at", using: :btree
     t.index ["fmu_id"], name: "index_fmu_translations_on_fmu_id", using: :btree
     t.index ["locale"], name: "index_fmu_translations_on_locale", using: :btree
+    t.index ["name", "fmu_id"], name: "index_fmu_translations_on_name_and_fmu_id", using: :btree
   end
 
   create_table "fmus", force: :cascade do |t|
@@ -277,6 +280,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.datetime "updated_at",        null: false
     t.string   "government_entity"
     t.text     "details"
+    t.index ["government_entity", "government_id"], name: "index_gvt_t_on_government_entity_and_government_id", using: :btree
     t.index ["government_id"], name: "index_government_translations_on_government_id", using: :btree
     t.index ["locale"], name: "index_government_translations_on_locale", using: :btree
   end
@@ -332,6 +336,8 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.integer  "country_id"
     t.string   "currency"
     t.index ["country_id"], name: "index_laws_on_country_id", using: :btree
+    t.index ["max_fine"], name: "index_laws_on_max_fine", using: :btree
+    t.index ["min_fine"], name: "index_laws_on_min_fine", using: :btree
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
   end
 
@@ -422,14 +428,21 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.text     "monitor_comment"
     t.integer  "responsible_admin_id"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
+    t.index ["created_at"], name: "index_observations_on_created_at", using: :btree
+    t.index ["evidence_type"], name: "index_observations_on_evidence_type", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["hidden"], name: "index_observations_on_hidden", using: :btree
     t.index ["is_active"], name: "index_observations_on_is_active", using: :btree
+    t.index ["is_physical_place"], name: "index_observations_on_is_physical_place", using: :btree
     t.index ["law_id"], name: "index_observations_on_law_id", using: :btree
+    t.index ["location_accuracy"], name: "index_observations_on_location_accuracy", using: :btree
     t.index ["observation_report_id"], name: "index_observations_on_observation_report_id", using: :btree
     t.index ["observation_type"], name: "index_observations_on_observation_type", using: :btree
     t.index ["operator_id"], name: "index_observations_on_operator_id", using: :btree
+    t.index ["publication_date"], name: "index_observations_on_publication_date", using: :btree
+    t.index ["responsible_admin_id"], name: "index_observations_on_responsible_admin_id", using: :btree
     t.index ["severity_id"], name: "index_observations_on_severity_id", using: :btree
+    t.index ["updated_at"], name: "index_observations_on_updated_at", using: :btree
     t.index ["user_id"], name: "index_observations_on_user_id", using: :btree
     t.index ["validation_status"], name: "index_observations_on_validation_status", using: :btree
   end
@@ -451,6 +464,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.string   "name"
     t.string   "organization"
     t.index ["locale"], name: "index_observer_translations_on_locale", using: :btree
+    t.index ["name", "observer_id"], name: "index_observer_translations_on_name_and_observer_id", using: :btree
     t.index ["observer_id"], name: "index_observer_translations_on_observer_id", using: :btree
   end
 
@@ -533,6 +547,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.string   "name"
     t.text     "details"
     t.index ["locale"], name: "index_operator_translations_on_locale", using: :btree
+    t.index ["name", "operator_id"], name: "index_operator_translations_on_name_and_operator_id", using: :btree
     t.index ["operator_id"], name: "index_operator_translations_on_operator_id", using: :btree
   end
 
@@ -680,7 +695,9 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "subcategory_id"
+    t.index ["level", "id"], name: "index_severities_on_level_and_id", using: :btree
     t.index ["level", "subcategory_id"], name: "index_severities_on_level_and_subcategory_id", using: :btree
+    t.index ["level"], name: "index_severities_on_level", using: :btree
     t.index ["subcategory_id", "level"], name: "index_severities_on_subcategory_id_and_level", using: :btree
   end
 
@@ -754,6 +771,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.text     "name"
     t.text     "details"
     t.index ["locale"], name: "index_subcategory_translations_on_locale", using: :btree
+    t.index ["name", "subcategory_id"], name: "index_subcategory_translations_on_name_and_subcategory_id", using: :btree
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id", using: :btree
   end
 
@@ -833,6 +851,7 @@ ActiveRecord::Schema.define(version: 20200914160521) do
     t.integer  "observer_id"
     t.integer  "operator_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["name"], name: "index_users_on_name", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
