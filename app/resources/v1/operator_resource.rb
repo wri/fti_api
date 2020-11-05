@@ -6,9 +6,9 @@ module V1
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
-               :percentage_valid_documents_all, :score, :obs_per_visit,
-               :website, :address, :fa_id, :country_doc_rank, :country_operators,
-               :delete_logo
+               :percentage_valid_documents_all, :obs_per_visit, :score,
+               :website, :address, :fa_id, :country_doc_rank,
+               :delete_logo, :email
 
     has_one :country
     has_many :fmus
@@ -19,6 +19,10 @@ module V1
     has_many :operator_documents
     has_many :operator_document_fmus
     has_many :operator_document_countries
+
+    has_many :operator_document_histories
+    has_many :operator_document_country_histories
+    has_many :operator_document_fmu_histories
 
     filters :country, :is_active, :name, :operator_type, :fa
 
@@ -76,6 +80,30 @@ module V1
 
     def obs_per_visit
       sprintf('%.2f', @model.obs_per_visit) if @model.obs_per_visit.present?
+    end
+
+    def percentage_valid_documents_all
+      @model.score_operator_document&.all
+    end
+
+    def percentage_valid_documents_fmu
+      @model.score_operator_document&.fmu
+    end
+
+    def percentage_valid_documents_country
+      @model.score_operator_document&.country
+    end
+
+    def country_doc_rank
+      @model.ranking_operator_document&.position
+    end
+
+    def obs_per_visit
+      @model.score_operator_observation&.obs_per_visit
+    end
+
+    def score
+      @model.score_operator_observation&.score
     end
 
     def self.records(options = {})

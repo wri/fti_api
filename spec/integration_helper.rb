@@ -17,8 +17,16 @@ module IntegrationHelper
     parsed_data[:attributes]
   end
 
+  def first_parsed_attributes
+    parsed_data.first[:attributes]
+  end
+
   def parsed_body
     Oj.load(response.body, symbol_keys: true)
+  end
+
+  def parsed_error
+    parsed_body[:error]
   end
 
   def login_user(user)

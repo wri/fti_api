@@ -12,17 +12,16 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer          not null
+#  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
-#  source                        :integer          default("1"), not null
+#  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 FactoryBot.define do
@@ -30,8 +29,9 @@ FactoryBot.define do
     user
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
-    current { true }
-    attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+    type { 'OperatorDocumentCountry' } # This can be overwritten by the children.
+    document_file { FactoryBot.build :document_file }
+
 
     after(:build) do |random_operator_document|
       country = random_operator_document&.operator&.country ||

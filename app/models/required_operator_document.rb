@@ -30,9 +30,14 @@ class RequiredOperatorDocument < ApplicationRecord
 
   belongs_to :required_operator_document_group
   belongs_to :country
+
   has_many :operator_documents, dependent: :destroy
   has_many :operator_document_fmus
   has_many :operator_document_countries
+
+  has_many :operator_document_histories
+  has_many :operator_document_country_histories
+  has_many :operator_document_fmu_histories
 
   validates :valid_period, numericality: { greater_than: 0 }
 

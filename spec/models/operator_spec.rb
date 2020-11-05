@@ -2,29 +2,22 @@
 #
 # Table name: operators
 #
-#  id                                 :integer          not null, primary key
-#  operator_type                      :string
-#  country_id                         :integer
-#  concession                         :string
-#  created_at                         :datetime         not null
-#  updated_at                         :datetime         not null
-#  is_active                          :boolean          default("true")
-#  logo                               :string
-#  operator_id                        :string
-#  percentage_valid_documents_all     :float
-#  percentage_valid_documents_country :float
-#  percentage_valid_documents_fmu     :float
-#  score_absolute                     :float
-#  score                              :integer
-#  obs_per_visit                      :float
-#  fa_id                              :string
-#  address                            :string
-#  website                            :string
-#  country_doc_rank                   :integer
-#  country_operators                  :integer
-#  approved                           :boolean          default("true"), not null
-#  name                               :string
-#  details                            :text
+#  id            :integer          not null, primary key
+#  operator_type :string
+#  country_id    :integer
+#  concession    :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  is_active     :boolean          default("true")
+#  logo          :string
+#  operator_id   :string
+#  fa_id         :string
+#  address       :string
+#  website       :string
+#  approved      :boolean          default("true"), not null
+#  email         :string
+#  name          :string
+#  details       :text
 #
 
 require 'rails_helper'
@@ -57,31 +50,6 @@ RSpec.describe Operator, type: :model do
   end
 
   it_should_behave_like 'translatable', FactoryBot.create(:operator), %i[name details]
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:country).inverse_of(:operators).optional }
-    it { is_expected.to have_many(:all_operator_documents).class_name('OperatorDocument') }
-
-    it { is_expected.to have_many(:observations).inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:all_observations).class_name('Observation').inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:users).inverse_of(:operator).dependent(:destroy) }
-
-    it { is_expected.to have_many(:fmu_operators).inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:fmus).through(:fmu_operators) }
-    it { is_expected.to have_many(:all_fmu_operators).class_name('FmuOperator').inverse_of(:operator).dependent(:destroy) }
-    it { is_expected.to have_many(:all_fmus).through(:all_fmu_operators).source(:fmu) }
-
-    it { is_expected.to have_many(:operator_documents) }
-    it { is_expected.to have_many(:operator_document_countries) }
-    it { is_expected.to have_many(:operator_document_fmus) }
-
-    it { is_expected.to have_many(:sawmills) }
-  end
-
-  describe 'Validations' do
-    it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_inclusion_of(:operator_type).in_array(Operator::TYPES) }
-  end
 
   describe 'Hooks' do
     describe '#create_operator_id' do
@@ -125,12 +93,10 @@ RSpec.describe Operator, type: :model do
           expect(@other_operator.operator_document_countries.size).to eql 1
           operator_document_country = @other_operator.operator_document_countries.first
           expect(operator_document_country.status).to eql 'doc_not_provided'
-          expect(operator_document_country.current).to eql true
 
           expect(@other_operator.operator_document_fmus.size).to eql 1
           operator_document_fmu = @other_operator.operator_document_fmus.first
           expect(operator_document_fmu.status).to eql 'doc_not_provided'
-          expect(operator_document_fmu.current).to eql true
         end
       end
     end
@@ -138,7 +104,7 @@ RSpec.describe Operator, type: :model do
     describe '#really_destroy_documents' do
       it 'destroy operator_documents associated with the operator' do
         another_operator = create(:operator)
-        operator_document = create(:operator_document, operator: another_operator)
+        operator_document = create(:operator_document_country, operator: another_operator)
         another_operator.send(:really_destroy_documents)
 
         expect(OperatorDocument.where(id: operator_document.id).first).to be_nil
@@ -152,13 +118,12 @@ RSpec.describe Operator, type: :model do
       pending_status = OperatorDocument.statuses[:doc_pending]
       common_data = {
         operator_id: @operator.id,
-        current: true,
         required_operator_document_id: @required_operator_document.id,
         public: true
       }
 
       # Generate one valid operator document and two pending operator documents of each type
-      %i[operator_document operator_document_fmu operator_document_country].each do |op_doc_type|
+      %i[operator_document_country operator_document_fmu operator_document_country].each do |op_doc_type|
         [false, true].each do |public|
           common_data[:public] = public
           common_data[:required_operator_document_id] =
@@ -183,6 +148,7 @@ RSpec.describe Operator, type: :model do
           operator: @operator,
           country: @country,
           validation_status: 'Published (no comments)')
+        @operator.reload
       end
 
       # Operator without documents and observations to check empty values
@@ -212,73 +178,57 @@ RSpec.describe Operator, type: :model do
         context 'when operator is approved' do
           it 'update approved percentages' do
             @operator.update_attributes(fa_id: 'fa_id', approved: true)
-            @operator.update_valid_documents_percentages
+            @operator.reload
+            ScoreOperatorDocument.recalculate! @operator
 
-            expect(@operator.percentage_valid_documents_all).to eql(6.0 / @operator_documents_required)
-            expect(@operator.percentage_valid_documents_country).to eql(2.0 / @operator_document_countries_required)
-            expect(@operator.percentage_valid_documents_fmu).to eql(2.0 / @operator_document_fmus_required)
+            expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
+            expect(@operator.score_operator_document.country).to eql(4.0 / @operator_document_countries_required)
+            expect(@operator.score_operator_document.fmu).to eql(2.0 / @operator_document_fmus_required)
           end
         end
 
         context 'when operator is not approved' do
           it 'update non approved percentages' do
             @operator.update_attributes(fa_id: 'fa_id', approved: false)
-            @operator.update_valid_documents_percentages
+            @operator.reload
+            ScoreOperatorDocument.recalculate! @operator
 
-            expect(@operator.percentage_valid_documents_all).to eql(3.0 / @operator_documents_required)
-            expect(@operator.percentage_valid_documents_country).to eql(1.0 / @operator_document_countries_required)
-            expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / @operator_document_fmus_required)
+            expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
+            expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
+            expect(@operator.score_operator_document.fmu).to eql(1.0 / @operator_document_fmus_required)
           end
         end
 
         context 'when there are not documents' do
           it 'update percentages with a 0 value' do
-            @another_operator.update_valid_documents_percentages
+            ScoreOperatorDocument.recalculate! @another_operator
+            @operator.reload
 
-            expect(@another_operator.percentage_valid_documents_all).to eql 0.0
-            expect(@another_operator.percentage_valid_documents_fmu).to eql 0.0
-            expect(@another_operator.percentage_valid_documents_country).to eql 0.0
+            expect(@another_operator.score_operator_document.all).to eql 0.0
+            expect(@another_operator.score_operator_document.country).to eql 0.0
+            expect(@another_operator.score_operator_document.fmu).to eql 0.0
           end
         end
       end
     end
 
-    describe '#percentage_non_approved' do
-      it 'update the percentages of valid and available operator documents' do
-        @operator.percentage_non_approved
-
-        expect(@operator.percentage_valid_documents_all).to eql(3.0 / @operator_documents_required)
-        expect(@operator.percentage_valid_documents_country).to eql(1.0 / @operator_document_countries_required)
-        expect(@operator.percentage_valid_documents_fmu).to eql(1.0 / @operator_document_fmus_required)
-      end
-    end
-
-    describe '#percentage_approved' do
-      it 'update the percentages of valid operator documents' do
-        @operator.percentage_approved
-
-        expect(@operator.percentage_valid_documents_all).to eql(6.0 / @operator_documents_required)
-        expect(@operator.percentage_valid_documents_country).to eql(2.0 / @operator_document_countries_required)
-        expect(@operator.percentage_valid_documents_fmu).to eql(2.0 / @operator_document_fmus_required)
-      end
-    end
-
     describe '#calculate_observations_scores' do
-      context 'when there are not visits' do
+      context 'when there are no visits' do
         it 'update observations per visits and score with blank values' do
-          @another_operator.calculate_observations_scores
+          ScoreOperatorObservation.recalculate! @another_operator
+          @another_operator.reload
 
-          expect(@another_operator.obs_per_visit).to eql nil
-          expect(@another_operator.score_absolute).to eql nil
+          expect(@another_operator.score_operator_observation.obs_per_visit).to eql nil
+          expect(@another_operator.score_operator_observation.score).to eql nil
         end
       end
 
       context 'when there are visits' do
         it 'update observations per visits and calculate the score' do
-          @operator.calculate_observations_scores
+          ScoreOperatorObservation.recalculate! @operator
 
-          expect(@operator.obs_per_visit).to eql(4.0)
-          expect(@operator.score_absolute).to eql((4.0 + 2 + 2 + 1) / 9.0)
+          expect(@operator.score_operator_observation.obs_per_visit).to eql(4.0)
+          expect(@operator.score_operator_observation.score).to eql((4.0 + 2 + 2 + 1) / 9.0)
         end
       end
     end
@@ -307,12 +257,10 @@ RSpec.describe Operator, type: :model do
           expect(@other_operator.operator_document_countries.size).to eql 1
           operator_document_country = @other_operator.operator_document_countries.first
           expect(operator_document_country.status).to eql 'doc_not_provided'
-          expect(operator_document_country.current).to eql true
 
           expect(@other_operator.operator_document_fmus.size).to eql 1
           operator_document_fmu = @other_operator.operator_document_fmus.first
           expect(operator_document_fmu.status).to eql 'doc_not_provided'
-          expect(operator_document_fmu.current).to eql true
         end
       end
     end
@@ -360,42 +308,24 @@ RSpec.describe Operator, type: :model do
 
     describe '#calculate_document_ranking' do
       it 'calculate the rank per country of the operators based on their documents' do
-        Operator.calculate_document_ranking
-
-        @country.operators.order(percentage_valid_documents_all: :desc).each_with_index do |operator, index|
-          expect(operator.country_operators).to eql @country.operators.count
-          expect(operator.country_doc_rank).to eql(index + 1)
+        RankingOperatorDocumentService.new.call
+        ScoreOperatorDocument.current.joins(:operator)
+          .where(operators: {country_id: @country.id}).order(all: :desc) do |score, index|
+          expect(score.operator.ranking_operator_document.position).to eql(index + 1)
         end
       end
     end
 
     describe '#calculate_scores' do
       before do
-        Operator.all.map { |operator| operator.calculate_observations_scores }
+        Operator.all.map { |operator| ScoreOperatorObservation.recalculate!(operator) }
 
         5.times do |t|
           country = create(:country)
           operator = create(:operator, country: country, is_active: true, fa_id: "fa_#{t}")
-          operator.update_attribute(:score_absolute, t / 10.to_f)
+          ScoreOperatorObservation.recalculate!(operator)
+          operator.score_operator_observation.update_attribute(:score, t / 10.to_f)
         end
-      end
-
-      it 'update score of the operators ordering by score and splitting then into 3 groups' do
-        Operator.calculate_scores
-
-        third_operators =
-          (Operator.active.fa_operator.where.not(score_absolute: nil).count / 3).to_i
-
-        query =
-          Operator
-            .active
-            .fa_operator
-            .where
-            .not(score_absolute: nil)
-
-        expect(query.order("score_absolute LIMIT #{third_operators}").map(&:score).uniq.first).to eql 1
-        expect(query.order("score_absolute LIMIT #{third_operators} OFFSET #{third_operators}").map(&:score).uniq.first).to eql 2
-        expect(query.order("score_absolute OFFSET #{2 * third_operators}").map(&:score).uniq.first).to eql 3
       end
     end
   end

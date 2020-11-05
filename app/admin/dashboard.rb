@@ -112,7 +112,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "First 20 Pending Documents out of #{OperatorDocument.doc_pending.count}" do
-          table_for OperatorDocument.actual.doc_pending.order('updated_at DESC').limit(20).each do
+          table_for OperatorDocument.doc_pending.order('updated_at DESC').limit(20).each do
             column('Operator') { |od| link_to od.operator.name, admin_producer_path(od.operator_id) }
             column('Name') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
             column('Creation Date') { |od| od.created_at.strftime("%A, %d/%b/%Y") }

@@ -415,6 +415,18 @@ fr:
     ? "Trader"
     : "Trader"
 
+  operator_documents:
+    filters:
+      country: 'Pays'
+      fmu: 'Fmu'
+      doc_not_provided: 'Not Provided Document'
+      doc_expired: 'Expired Document '
+      doc_valid: 'Valid Document'
+      doc_not_required: 'Not Required Document'
+
+
+
+
   filters:
     operator: 'Operateur'
     governance: 'Gouvernance'
@@ -432,6 +444,12 @@ fr:
 
   backend:
     mail_service:
+      expire_documents:
+        title:
+          one: "You have 1 document expiring in "
+          other:  "You have %{count} documents expiring in "
+        text: "The following documents are going to expire:\n"
+        salutation: "Cordialement,\nL'équipe OTP"
       observer_status_changed:
         producers: 'Exploitants: '
         government: 'Gouvernance'

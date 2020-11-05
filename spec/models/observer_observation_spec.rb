@@ -17,9 +17,4 @@ RSpec.describe ObserverObservation, type: :model do
   it 'is valid with valid attributes' do
     expect(observer_observation).to be_valid
   end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:observer).touch(true) }
-    it { is_expected.to belong_to(:observation).touch(true) }
-  end
 end

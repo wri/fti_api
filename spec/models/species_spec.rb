@@ -28,13 +28,6 @@ RSpec.describe Species, type: :model do
 
   it_should_behave_like 'translatable', FactoryBot.create(:species), %i[common_name]
 
-  describe 'Relations' do
-    it { is_expected.to have_many(:species_observations) }
-    it { is_expected.to have_many(:species_countries) }
-    it { is_expected.to have_many(:observations).through(:species_observations) }
-    it { is_expected.to have_many(:countries).through(:species_countries) }
-  end
-
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:name) }
   end
