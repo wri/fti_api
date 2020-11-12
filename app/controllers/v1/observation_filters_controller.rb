@@ -267,9 +267,9 @@ module V1
     end
 
     def operator_ids
-      Operator.active.with_translations.includes(:fmus).map do |x|
-        { id: x.id, name: x.name, fmus: x.fmus.pluck(:id) }
-      end.sort_by { |x| x[:name] }
+      Operator.active_with_fmus_array.map do |x|
+        {id: x[0], name: x[1], fmus: x[2]}
+      end
     end
 
     def subcategory_ids
@@ -285,7 +285,8 @@ module V1
     end
 
     def fmu_ids
-      Fmu.all.with_translations.map{ |x| { id: x.id, name: x.name } }.sort_by { |x| x[:name] }
+      name_column = Arel.sql("fmu_translations.name")
+      Fmu.all.with_translations.order('fmu_translations.name asc').pluck(:id, name_column).map{ |x| {id: x[0], name: x[1] }}
     end
 
     def observer_ids

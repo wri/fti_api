@@ -9,15 +9,18 @@ ActiveAdmin.register Observation do
 
   menu false
 
+  PER_PAGE = [10, 20, 40, 60].freeze
+
   config.order_clause
-  config.per_page = [10, 20, 40, 80, 160, 360]
+  config.per_page = PER_PAGE
 
   before_filter only: :index do
-    if params[:per_page]
+    if PER_PAGE.include? params[:per_page]
       @per_page = params[:per_page]
       session[:obs_per_page] = @per_page
     else
-      @per_page = session[:obs_per_page] || 10
+      session[:obs_per_page] = PER_PAGE.include?(session[:obs_per_page]) ? session[:obs_per_page] : 10
+      @per_page = session[:obs_per_page]
     end
   end
 
@@ -26,16 +29,6 @@ ActiveAdmin.register Observation do
       def self.observations
         Observation.unscoped
       end
-    end
-  end
-
-  controller do
-    def scoped_collection
-      end_of_association_chain.includes([:translations, [country: :translations],
-                                         :severity, [operator: :translations],
-                                         [governments: :translations],
-                                         [subcategory: :translations], [observer_observations: [observer: :translations]],
-                                         [fmu: :translations], :user, :observation_report])
     end
   end
 
@@ -174,7 +167,7 @@ ActiveAdmin.register Observation do
                        collection: -> { 
   Government.with_translations(I18n.locale)
        .order('government_translations.government_entity')
-       .pluck('government_translations.government_entity', :id)
+       .pluck('government_translations.government_entity', 'government_translations.government_id')
 }                     
   filter :subcategory_category_id_eq,
          label: 'Category', as: :select,
@@ -271,10 +264,10 @@ ActiveAdmin.register Observation do
     column 'Active?', :is_active
     column :hidden
     tag_column 'Status', :validation_status, sortable: 'validation_status'
-    column :country, sortable: 'country_translations.name'
-    column :fmu, sortable: 'fmu_translations.name'
-    column :location_information, sortable: true
-    column :observers, sortable: 'observer_translations.name' do |o|
+    column :country, sortable: false
+    column :fmu, sortable: false
+    column :location_information, sortable: false
+    column :observers, sortable: false do |o|
       links = []
       o.observers.with_translations(I18n.locale).each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
@@ -282,8 +275,8 @@ ActiveAdmin.register Observation do
       links.reduce(:+)
     end
     column :observation_type, sortable: 'observation_type'
-    column :operator, sortable: 'operator_translations.name'
-    column :governments, sortable: 'government_translations.government_entity' do |o|
+    column :operator, sortable: false
+    column :governments, sortable: false do |o|
       o.governments.each_with_object([]) do |government, links|
         links << link_to(government.government_entity, admin_government_path(government.id))
       end.reduce(:+)
@@ -295,23 +288,23 @@ ActiveAdmin.register Observation do
       end
       links.reduce(:+)
     end
-    column :subcategory, sortable: 'subcategory_translations.name'
+    column :subcategory, sortable: false
 
-    column('Illegality as written by law', sortable: true) { |o| o.law&.written_infraction }
-    column('Legal reference: Illegality', sortable: true) { |o| o.law&.infraction }
-    column('Legal reference: Penalties', sortable: true) { |o| o.law&.sanctions }
-    column('Minimum fine', sortable: true) { |o| o.law&.min_fine }
-    column('Maximum fine', sortable: true) { |o| o.law&.max_fine }
+    column('Illegality as written by law', sortable: false) { |o| o.law&.written_infraction }
+    column('Legal reference: Illegality', sortable: false) { |o| o.law&.infraction }
+    column('Legal reference: Penalties', sortable: false) { |o| o.law&.sanctions }
+    column('Minimum fine', sortable: false) { |o| o.law&.min_fine }
+    column('Maximum fine', sortable: false) { |o| o.law&.max_fine }
     column(:currency) { |o| o.law&.currency }
-    column(:penal_servitude, sortable: true) { |o| o.law&.penal_servitude }
-    column(:other_penalties, sortable: true) { |o| o.law&.other_penalties }
-    column('Indicator APV', sortable: true) { |o| o.law&.apv }
+    column(:penal_servitude, sortable: false) { |o| o.law&.penal_servitude }
+    column(:other_penalties, sortable: false) { |o| o.law&.other_penalties }
+    column('Indicator APV', sortable: false) { |o| o.law&.apv }
 
-    column :severity, sortable: 'severities.level' do |o|
+    column :severity, sortable: false do |o|
       o&.severity&.level
     end
     column :publication_date, sortable: true
-    column :actions_taken do |o|
+    column :actions_taken, sortable: false do |o|
       o.actions_taken[0..100] + (o.actions_taken.length >= 100 ? '...' : '') if o.actions_taken
     end
     column :details
@@ -323,25 +316,25 @@ ActiveAdmin.register Observation do
       end
       links.reduce(:+)
     end
-    column :evidence_on_report
+    column :evidence_on_report, sortable: false
     column :concern_opinion do |o|
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
     end
-    column :pv
-    column :location_accuracy
-    column :lat
-    column :lng
-    column :is_physical_place
+    column :pv, sortable: false
+    column :location_accuracy, sortable: false
+    column :lat, sortable: false
+    column :lng, sortable: false
+    column :is_physical_place, sortable: false
     column :litigation_status
-    column :report, sortable: 'observation_reports.title' do |o|
+    column :report, sortable: false do |o|
       title = o.observation_report.title[0..100] + (o.observation_report.title.length >= 100 ? '...' : '') if o.observation_report&.title
       link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
-    column :admin_comment
-    column :monitor_comment
+    column :admin_comment, sortable: false
+    column :monitor_comment, sortable: false
     column :responsible_admin
-    column :user, sortable: 'users.name'
-    column :modified_user
+    column :user, sortable: false
+    column :modified_user, sortable: false
     column :created_at
     column :updated_at
     column('Actions') do |observation|
