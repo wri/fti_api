@@ -14,17 +14,16 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer          not null
+#  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
-#  source                        :integer          default("1"), not null
+#  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 class OperatorDocumentFmu < OperatorDocument

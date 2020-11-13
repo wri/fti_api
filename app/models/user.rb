@@ -129,7 +129,7 @@ class User < ApplicationRecord
   def send_reset_password_instructions(url)
     reset_url  = url + '?reset_password_token=' + generate_reset_token(self)
 
-    result = MailService.forgotten_password display_name, email, reset_url
+    result = MailService.new.forgotten_password(display_name, email, reset_url).deliver
     result
   end
 
@@ -201,6 +201,6 @@ class User < ApplicationRecord
 
   # Sends an email to the user when it is approved
   def notify_user
-    MailService.notify_user_acceptance(self)
+    MailService.new.notify_user_acceptance(self).deliver
   end
 end

@@ -20,10 +20,6 @@ RSpec.describe FmuOperator, type: :model do
     expect(fmu_operator).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:operator).required }
-  end
-
   describe 'Validations' do
     # We have a before_validation which sets start_date, so we cant test this
     #it { is_expected.to validate_presence_of(:start_date) }
@@ -105,7 +101,7 @@ RSpec.describe FmuOperator, type: :model do
       context 'the operator has fa_id' do
         before do
           country = create(:country)
-          @fmu = create(:fmu, country: country)
+          @fmu = create(:fmu, country: country, forest_type: 1)
           operator = create(:operator, country: country, fa_id: 'fa_id')
           create(:fmu_operator, operator: operator, fmu: @fmu)
           another_operator = create(:operator, country: country, fa_id: 'fa_id')
@@ -119,7 +115,7 @@ RSpec.describe FmuOperator, type: :model do
               end_date: Date.yesterday)
 
           required_operator_document =
-            create(:required_operator_document_fmu, country: country)
+            create(:required_operator_document_fmu, country: country, forest_types: [1])
 
           create(
             :operator_document_fmu,
@@ -127,7 +123,7 @@ RSpec.describe FmuOperator, type: :model do
             fmu: @fmu,
             required_operator_document: required_operator_document)
 
-          create_list(:required_operator_document_fmu, 3, country: country)
+          create_list(:required_operator_document_fmu, 3, country: country, forest_types: [1])
         end
 
         it 'update the list of documents attached on itself' do

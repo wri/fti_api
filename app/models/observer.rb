@@ -18,6 +18,7 @@
 #  data_email        :string
 #  data_phone        :string
 #  organization_type :string
+#  public_info       :boolean          default("false")
 #  name              :string
 #  organization      :string
 #

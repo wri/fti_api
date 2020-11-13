@@ -58,6 +58,20 @@ class Observation < ApplicationRecord
   enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
                             "Accurate GPS coordinates" => 2 }
 
+  STATUS_TRANSITIONS={
+      monitor: {
+          nil => ['Created', 'Ready for QC'],
+          'Created' => ['Ready for QC'],
+          'Needs Revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
+          'Ready for publication' => ['Published (no comments)']
+      },
+      admin: {
+          'Ready for QC' => ['QC in progress'],
+          'QC in progress' => ['Needs Revision', 'Ready for publication']
+      }
+  }.freeze
+
+  attr_accessor :user_type
 
   belongs_to :country,        inverse_of: :observations
   belongs_to :severity,       inverse_of: :observations
@@ -93,7 +107,6 @@ class Observation < ApplicationRecord
   accepts_nested_attributes_for :observation_report,           allow_destroy: true
   accepts_nested_attributes_for :subcategory,                  allow_destroy: false
 
-
   with_options if: :operator? do
     validate :validate_governments_absences
   end
@@ -104,6 +117,7 @@ class Observation < ApplicationRecord
   end
 
   validate :evidence_presented_in_the_report
+  validate :status_changes, if: -> { user_type.present? }
 
   validates :country_id,       presence: true
   validates :publication_date, presence: true
@@ -113,7 +127,6 @@ class Observation < ApplicationRecord
   before_save    :set_active_status
   before_save    :check_is_physical_place
   before_save    :set_centroid
-  after_create   :update_operator_scores
   before_destroy :destroy_documents
   after_destroy  :update_operator_scores
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
@@ -187,7 +200,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def update_operator_scores
-    operator&.calculate_observations_scores
+    ScoreOperatorObservation.recalculate! operator if operator.present?
   end
 
   def set_active_status
@@ -215,6 +228,15 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if governments.none?
 
     errors.add(:governments, "Should have no governments with 'operator' type")
+  end
+
+  def status_changes
+    return unless @user_type
+    return if validation_status == validation_status_was
+    return if STATUS_TRANSITIONS.dig(@user_type, validation_status_was)&.include? validation_status
+
+    errors.add(:validation_status,
+               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}'' to ''#{validation_status}''")
   end
 
   def evidence_presented_in_the_report
@@ -255,20 +277,20 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   def notify_observers
     observers.each do |observer|
-      MailService.notify_observer_status_changed(observer, self)
+      MailService.notify_observers_status_changed(observer, self)
     end
   end
 
   def notify_responsible
     return unless validation_status == 'Ready for QC'
 
-    MailService.notify_responsible(self)
+    MailService.new.notify_responsible(self).deliver
   end
 
   def notify_qc
     return unless ["Published (not modified)", "Published (modified)"].include? validation_status
     return unless responsible_admin&.email
 
-    MailService.notify_admin_published(self)
+    MailService.new.notify_admin_published(self).deliver
   end
 end

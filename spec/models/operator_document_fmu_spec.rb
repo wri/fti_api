@@ -12,17 +12,16 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer          not null
+#  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
-#  source                        :integer          default("1"), not null
+#  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 require 'rails_helper'
@@ -32,13 +31,5 @@ RSpec.describe OperatorDocumentFmu, type: :model do
 
   it 'is valid with valid attributes' do
     expect(operator_document_fmu).to be_valid
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:required_operator_document_fmu)
-      .with_foreign_key('required_operator_document_id')
-      .required
-    }
-    it { is_expected.to belong_to(:fmu).required }
   end
 end

@@ -18,7 +18,8 @@ class OperatorDocumentAnnexUploader < CarrierWave::Uploader::Base
   def filename
     return if super.blank?
 
-    filename = "Annex_#{Time.now.to_i}_" + model.operator_document&.attachment&.file&.basename&.parameterize
+    suffix = model&.operator_document&.attachment&.file&.basename&.parameterize || 'no_document'
+    filename = "Annex_#{Time.now.to_i}_" + suffix
     filename += '.' + super.split('.').last if super.split('.').any?
     filename
   end
