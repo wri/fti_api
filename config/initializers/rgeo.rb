@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Monkey patches this method (it's super slow)
 module RGeo
   module Cartesian
