@@ -7,7 +7,7 @@ ActiveAdmin.register User do
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,
                 :institution, :name, :nickname, :web_url, :is_active,
-                :observer_id, :operator_id,
+                :observer_id, :operator_id, :holding_id,
                 user_permission_attributes: [:user_role]
 
   filter :name, as: :select
@@ -48,6 +48,9 @@ ActiveAdmin.register User do
     column 'operator' do |user|
       user.operator&.name
     end
+    column 'holding' do |user|
+      user.holding&.name
+    end
     column :current_sign_in_at
     column :sign_in_count
   end
@@ -73,6 +76,7 @@ ActiveAdmin.register User do
     column :email
     column :observer
     column :operator
+    column :holding
     column :current_sign_in_at
     column :sign_in_count
 
@@ -87,6 +91,7 @@ ActiveAdmin.register User do
       end
       f.input :observer
       f.input :operator
+      f.input :holding
       f.input :country
       f.input :name
       f.input :nickname
