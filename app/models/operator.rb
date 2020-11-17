@@ -18,6 +18,7 @@
 #  website       :string
 #  approved      :boolean          default("true"), not null
 #  email         :string
+#  holding_id    :integer
 #  name          :string
 #  details       :text
 #

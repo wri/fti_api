@@ -28,6 +28,7 @@
 #  remember_created_at    :datetime
 #  observer_id            :integer
 #  operator_id            :integer
+#  holding_id             :integer
 #
 
 class User < ApplicationRecord
