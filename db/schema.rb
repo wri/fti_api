@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201104135131) do
+ActiveRecord::Schema.define(version: 20201117133540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -322,6 +322,13 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.index ["observation_id"], name: "index_governments_observations_on_observation_id", using: :btree
   end
 
+  create_table "holdings", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_holdings_on_name", using: :btree
+  end
+
   create_table "how_to_translations", force: :cascade do |t|
     t.integer  "how_to_id",   null: false
     t.string   "locale",      null: false
@@ -615,6 +622,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.string   "website"
     t.boolean  "approved",      default: true, null: false
     t.string   "email"
+    t.integer  "holding_id"
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
@@ -989,6 +997,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "operator_documents", "users", on_delete: :nullify
+  add_foreign_key "operators", "holdings", on_delete: :nullify
   add_foreign_key "photos", "users"
   add_foreign_key "ranking_operator_documents", "countries", on_delete: :cascade
   add_foreign_key "ranking_operator_documents", "operators", on_delete: :cascade
