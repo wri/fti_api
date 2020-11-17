@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201117133540) do
+ActiveRecord::Schema.define(version: 20201117145551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -946,6 +946,7 @@ ActiveRecord::Schema.define(version: 20201117133540) do
     t.datetime "remember_created_at"
     t.integer  "observer_id"
     t.integer  "operator_id"
+    t.integer  "holding_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["name"], name: "index_users_on_name", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -1012,4 +1013,5 @@ ActiveRecord::Schema.define(version: 20201117133540) do
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "users", "countries"
+  add_foreign_key "users", "holdings", on_delete: :nullify
 end
