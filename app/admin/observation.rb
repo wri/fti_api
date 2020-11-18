@@ -215,11 +215,41 @@ ActiveAdmin.register Observation do
     column :relevant_operators do |observation|
       observation.relevant_operators.map(&:name).join(', ')
     end
+    column :category do |observation|
+      observation.subcategory&.category&.name
+    end
     column :subcategory do |observation|
       observation.subcategory&.name
     end
     column :law do |observation|
       observation.law_id
+    end
+    column :written_infraction do |observation|
+      observation.law&.written_infraction
+    end
+    column :infraction do |observation|
+      observation.law&.infraction
+    end
+    column :sanctions do |observation|
+      observation.law&.sanctions
+    end
+    column :min_fine do |observation|
+      observation.law&.min_fine
+    end
+    column :max_fine do |observation|
+      observation.law&.max_fine
+    end
+    column :currency do |observation|
+      observation.law&.currency
+    end
+    column :penal_servitude do |observation|
+      observation.law&.penal_servitude
+    end
+    column :other_penalties do |observation|
+      observation.law&.other_penalties
+    end
+    column :indicator_apv do |observation|
+      observation.law&.apv
     end
     column :severity do |observation|
       observation.severity&.level
@@ -228,18 +258,33 @@ ActiveAdmin.register Observation do
     column :actions_taken
     column :details
     column :evidence_type
+    column :evidences do |observation|
+      evidences = []
+      observation.observation_documents.each do |d|
+        evidences << d.name
+      end
+      evidences.join(' | ')
+    end
+    column :evidence_on_report
     column :concern_opinion
+    column :pv
+    column :location_accuracy
+    column :lat
+    column :lng
+    column :is_physical_place
+    column :litigation_status
     column :report do |observation|
       observation.observation_report&.title
     end
+    column :admin_comment
+    column :monitor_comment
+    column :responsible_admin
     column :user do |observation|
       observation.user&.name
     end
     column :modified_user do |observation|
       observation.modified_user&.name
     end
-    column :admin_comment
-    column :monitor_comment
     column :created_at
     column :updated_at
   end
