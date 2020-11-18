@@ -100,7 +100,7 @@ class User < ApplicationRecord
   def is_operator?(operator_id)
     return true if (self&.user_permission&.user_role == 'operator' && self.operator_id == operator_id)
 
-    is_operator_holding?
+    is_operator_holding? operator_id
   end
 
   def is_operator_holding?(operator_id)
