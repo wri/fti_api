@@ -20,6 +20,9 @@ ActiveAdmin.register RequiredOperatorDocument do
     column 'exists' do |rod|
       rod.deleted_at.nil?
     end
+    column 'publication_authorization' do |rod|
+      rod.contract_signature
+    end
     column 'required_operator_document_group' do |rod|
       rod.required_operator_document_group&.name
     end
@@ -28,7 +31,9 @@ ActiveAdmin.register RequiredOperatorDocument do
     end
     column :type
     column :name
-
+    column :forest_types do |rod|
+      rod.forest_types.presence || ''
+    end
   end
 
   index do
