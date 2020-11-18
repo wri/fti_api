@@ -6,7 +6,9 @@ ActiveAdmin.register RequiredGovDocumentGroup do
 
   menu false
 
-  actions :all, except: :destroy
+  active_admin_paranoia
+
+  actions :all
   permit_params :position, translations_attributes: [:id, :locale, :name, :description]
 
   sidebar :required_gov_documents, only: :show do

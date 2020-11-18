@@ -15,6 +15,7 @@
 
 class RequiredGovDocumentGroup < ApplicationRecord
   include Translatable
+  acts_as_paranoid
 
   translates :name, touch: true
   translates :description
@@ -23,5 +24,5 @@ class RequiredGovDocumentGroup < ApplicationRecord
   end
 
   validates_presence_of :position
-  has_many :required_gov_documents, dependent: :destroy
+  has_many :required_gov_documents, dependent: :nullify
 end
