@@ -28,6 +28,7 @@
 #  remember_created_at    :datetime
 #  observer_id            :integer
 #  operator_id            :integer
+#  holding_id             :integer
 #
 
 class User < ApplicationRecord
@@ -40,7 +41,7 @@ class User < ApplicationRecord
   TEMP_EMAIL_REGEX = /\Achange@tmp/
   PERMISSIONS = %w(operator ngo ngo_manager government)
   PROTECTED_NICKNAMES = %w(admin superuser about root fti otp faq contact user operator ngo).freeze
-  enum permissions_request: { operator: 1, ngo: 2, ngo_manager: 4, government: 6 }
+  enum permissions_request: { operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7 }
 
   belongs_to :country, inverse_of: :users, optional: true
 
@@ -55,6 +56,7 @@ class User < ApplicationRecord
 
   belongs_to :observer, optional: true
   belongs_to :operator,  optional: true
+  belongs_to :holding, optional: true
 
   accepts_nested_attributes_for :user_permission
 
@@ -96,7 +98,22 @@ class User < ApplicationRecord
   end
 
   def is_operator?(operator_id)
-    self&.user_permission&.user_role == 'operator' && self.operator_id == operator_id
+    return true if self&.user_permission&.user_role == 'operator' && self.operator_id == operator_id
+
+    is_operator_holding? operator_id
+  end
+
+  def is_operator_holding?(operator_id)
+    return false unless self&.user_permission&.user_role == 'holding'
+
+    Operator.find_by(id: operator_id)&.holding_id == self.holding_id
+  end
+
+  def operator_ids
+    return [operator_id] if operator_id.present?
+    return holding.operators.pluck(:id) if holding_id.present?
+
+    []
   end
 
   def display_name
@@ -186,12 +203,16 @@ class User < ApplicationRecord
 
     case user_permission.user_role
     when 'operator'
-      if operator_id.blank? || observer_id.present?
-        errors.add(:operator_id, 'User of type Operator must have an operator and no observer')
+      if operator_id.blank? || observer_id.present? || holding_id.present?
+        errors.add(:operator_id, 'User of type Operator must have an operator and no observer or holding')
       end
     when 'ngo', 'ngo_manager'
-      if operator_id.present? || observer_id.blank?
-        errors.add(:observer_id, 'User of type NGO must have an observer and no operator')
+      if operator_id.present? || observer_id.blank? || holding_id.present?
+        errors.add(:observer_id, 'User of type NGO must have an observer and no operator or holding')
+      end
+    when 'holding'
+      if holding_id.blank? || observer_id.present? || operator_id.present?
+        errors.add(:holding_id, 'User of type Holding must have a holding and no operator or observer')
       end
     else
       errors.add(:operator_id, 'Cannot have an Operator') if operator_id.present?

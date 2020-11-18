@@ -13,7 +13,8 @@
 #
 
 class UserPermission < ApplicationRecord
-  enum user_role: { user: 0, operator: 1, ngo: 2, ngo_manager: 4, bo_manager: 5, admin: 3, government: 6 }.freeze
+  enum user_role: { user: 0, operator: 1, ngo: 2, ngo_manager: 4,
+                    bo_manager: 5, admin: 3, government: 6, holding: 7 }.freeze
 
   belongs_to :user
 
@@ -38,6 +39,14 @@ class UserPermission < ApplicationRecord
         fmu: { ru: {} },
         operator: { ru: { id: user.operator_id } },
         sawmill: { create: {}, ud: { operator_id: user.operator_id } } }
+    when 'holding'
+      { user: { manage: { id: user.id } } ,
+        operator_document: { manage: { operator: { holding_id: user.holding_id } } },
+        operator_document_annex: { ud: { operator_document: { operator: { holding_id: user.holding_id } } }, create: {} },
+        observation: { read: {} },
+        fmu: { ru: {} },
+        operator: { ru: { holding_id: user.holding_id } },
+        sawmill: { create: {}, ud: { operator: { holding_id: user.holding_id } } } }
     when 'ngo'
       { user: { manage: { id: user.id } },
         observation: { manage: { observers: { id: user.observer_id } },  create: {} },

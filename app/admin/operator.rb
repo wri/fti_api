@@ -12,7 +12,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   config.order_clause
 
   actions :all
-  permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
+  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, :delete_logo, :email, fmu_ids: [],
                                              translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
@@ -23,6 +23,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   csv do
     column :id
+    column :holding_id
     column :is_active
     column :country do |operator|
       operator.country.name rescue nil
@@ -43,6 +44,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   index do
     column 'Active?', :is_active
     column :id
+    column :holding
     column :country, sortable: 'country_translations.name'
     column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
@@ -126,6 +128,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
         t.input :name
         t.input :details
       end
+      f.input :holding, as: :select
       f.input :email
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type, as: :select,
@@ -154,7 +157,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   show do
     attributes_table do
+      row :id
       row :is_active
+      row :holding
       row :name
       row :email
       row :operator_type
