@@ -98,13 +98,22 @@ class User < ApplicationRecord
   end
 
   def is_operator?(operator_id)
-    self&.user_permission&.user_role == 'operator' && self.operator_id == operator_id
+    return true if (self&.user_permission&.user_role == 'operator' && self.operator_id == operator_id)
+
+    is_operator_holding?
   end
 
   def is_operator_holding?(operator_id)
     return false unless self&.user_permission&.user_role == 'holding'
 
     Operator.find_by(id: operator_id)&.holding_id == self.holding_id
+  end
+
+  def operator_ids
+    return [operator_id] if operator_id.present?
+    return holding.operators.pluck(:id) if holding_id.present?
+
+    []
   end
 
   def display_name

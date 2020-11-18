@@ -13,7 +13,7 @@ module V1
         @user.update_tracked_fields!(request)
         render json: { token: token, role: @user.user_permission.user_role,
                        user_id: @user.id, country: @user.country_id,
-                       operator: @user.operator_id, observer: @user.observer_id }, status: :ok
+                       operator_ids: @user.operator_id, observer: @user.observer_id }, status: :ok
       else
         render json: { errors: [{ status: '401', title: 'Incorrect email or password' }] }, status: :unauthorized
       end
