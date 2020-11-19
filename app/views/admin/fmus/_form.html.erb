@@ -30,7 +30,6 @@
     const formData = new FormData();
 
     formData.append("file", this.files[0], this.files[0].name);
-
     $.ajax({
       type: "POST",
       url: "/admin/fmus/preview",
@@ -89,6 +88,17 @@
                 'fill-opacity': 0.8
               }
             });
+
+            map.addLayer({
+              'id': 'fmus',
+              'type': 'fill',
+              'source': 'fmus',
+              'layout': {},
+              'paint': {
+                'fill-color': '#088',
+                'fill-opacity': 0.8
+              }
+            });
           }
         }
       },
@@ -108,9 +118,134 @@
   mapboxgl.accessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
   const map = new mapboxgl.Map({
     container: 'current-map', // container id
-    style: 'mapbox://styles/mapbox/streets-v11' // stylesheet location
+    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+    transformRequest: (url, resourceType) => {
+      if (
+        url.startsWith('http://localhost:3000')
+      ) {
+        return {
+          url,
+          headers: {
+            'Content-Type': 'application/json',
+            'OTP-API-KEY': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjozfQ.NIaND_laj_MyPzoufe7dCPioByEg_CgWq1zsM3STZQ0'
+          }
+        };
+      }
+      return null;
+    }
   });
 
+  const fmuLayers = [
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerCOD',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'COD']
+      ],
+      paint: {
+        'fill-color': '#5ca2d1',
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerCOG',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'COG']
+      ],
+      paint: {
+        'fill-color': '#7B287D',
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      id: 'layerCMR',
+      source: 'fmus',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'CMR']
+      ],
+      paint: {
+        'fill-color': {
+          property: 'fmu_type_label',
+          type: 'categorical',
+          stops: [
+            ['ventes_de_coupe', '#8BC2B5'],
+            ['ufa', '#007A5E'],
+            ['communal', '#00382B']
+          ],
+          default: '#007A5E'
+        },
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerGAB',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'GAB']
+      ],
+      paint: {
+        'fill-color': {
+          property: 'fmu_type_label',
+          type: 'categorical',
+          stops: [
+            ['CPAET', '#e95800'],
+            ['CFAD', '#e9A600']
+          ],
+          default: '#e95800'
+        },
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerCAF',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'CAF']
+      ],
+      paint: {
+        'fill-color': '#e9D400',
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'line',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerLine',
+      paint: {
+        'line-color': '#000000',
+        'line-opacity': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          1,
+          0.1
+        ],
+        'line-width': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          2,
+          1
+        ],
+        'line-dasharray': [3, 1]
+      }
+    }
+  ];
 
   map.on('load', function() {
     if (<%= present %>) {
@@ -121,6 +256,11 @@
         'type': 'geojson',
         'data': <%= raw(geojson.to_json) %>
       });
+      map.addSource('fmus', {
+        'type': 'vector',
+        tiles: [`<%= 'http://localhost:3000' %>/fmus/tiles/{z}/{x}/{y}`],
+        promoteId: 'id'
+      });
       map.addLayer({
         'id': 'fmu',
         'type': 'fill',
@@ -130,6 +270,9 @@
           'fill-color': '#088',
           'fill-opacity': 0.8
         }
+      });
+      fmuLayers.forEach((layer) => {
+        map.addLayer(layer);
       });
     }
   });
