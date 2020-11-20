@@ -18,6 +18,7 @@
 #  website       :string
 #  approved      :boolean          default("true"), not null
 #  email         :string
+#  holding_id    :integer
 #  name          :string
 #  details       :text
 #
@@ -37,6 +38,7 @@ class Operator < ApplicationRecord
            'Sawmill', 'Other', 'Unknown'].freeze
 
   belongs_to :country, inverse_of: :operators, optional: true
+  belongs_to :holding, inverse_of: :operators, optional: true
   has_many :all_operator_documents, class_name: 'OperatorDocument'
 
   has_many :observations, -> { active.uniq },  inverse_of: :operator, dependent: :destroy

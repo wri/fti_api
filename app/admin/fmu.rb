@@ -123,7 +123,9 @@ ActiveAdmin.register Fmu do
            locals: {
              geojson: f.resource.geojson,
              bbox: f.resource.bbox,
-             present: f.resource.geojson.present?
+             present: f.resource.geojson.present?,
+             host: request.base_url,
+             api_key: ENV['API_KEY']
            }
   end
 end

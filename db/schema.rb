@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201104135131) do
+ActiveRecord::Schema.define(version: 20201118141952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -322,6 +322,13 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.index ["observation_id"], name: "index_governments_observations_on_observation_id", using: :btree
   end
 
+  create_table "holdings", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_holdings_on_name", using: :btree
+  end
+
   create_table "how_to_translations", force: :cascade do |t|
     t.integer  "how_to_id",   null: false
     t.string   "locale",      null: false
@@ -615,6 +622,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.string   "website"
     t.boolean  "approved",      default: true, null: false
     t.string   "email"
+    t.integer  "holding_id"
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
@@ -661,6 +669,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_required_gov_document_groups_on_deleted_at", using: :btree
   end
 
   create_table "required_gov_document_translations", force: :cascade do |t|
@@ -938,6 +948,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "remember_created_at"
     t.integer  "observer_id"
     t.integer  "operator_id"
+    t.integer  "holding_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["name"], name: "index_users_on_name", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -989,6 +1000,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "operator_documents", "users", on_delete: :nullify
+  add_foreign_key "operators", "holdings", on_delete: :nullify
   add_foreign_key "photos", "users"
   add_foreign_key "ranking_operator_documents", "countries", on_delete: :cascade
   add_foreign_key "ranking_operator_documents", "operators", on_delete: :cascade
@@ -1003,4 +1015,5 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "users", "countries"
+  add_foreign_key "users", "holdings", on_delete: :nullify
 end

@@ -111,6 +111,7 @@ ActiveAdmin.register OperatorDocument do
     column :exists do |o|
       o.deleted_at.nil? && o.required_operator_document.deleted_at.nil?
     end
+    column :public
     column :status
     column :id
     column :required_operator_document do |o|

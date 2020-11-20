@@ -268,7 +268,7 @@ module V1
 
     def operator_ids
       Operator.active_with_fmus_array.map do |x|
-        {id: x[0], name: x[1], fmus: x[2]}
+        { id: x[0], name: x[1], fmus: x[2] }
       end
     end
 
@@ -286,7 +286,7 @@ module V1
 
     def fmu_ids
       name_column = Arel.sql("fmu_translations.name")
-      Fmu.all.with_translations.order('fmu_translations.name asc').pluck(:id, name_column).map{ |x| {id: x[0], name: x[1] }}
+      Fmu.all.with_translations.order('fmu_translations.name asc').pluck(:id, name_column).map{ |x| { id: x[0], name: x[1] } }
     end
 
     def observer_ids

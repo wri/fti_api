@@ -19,7 +19,7 @@ module V1
         token: JWT.encode({ user: user.id }, ENV['AUTH_SECRET'], 'HS256'),
         role: 'user',
         user_id: user.id,
-        country: nil, operator: nil, observer: nil
+        country: nil, operator_ids: [], observer: nil
       })
     end
 
