@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201118141952) do
+ActiveRecord::Schema.define(version: 20201120110425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -452,8 +452,10 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.text     "admin_comment"
     t.text     "monitor_comment"
     t.integer  "responsible_admin_id"
+    t.datetime "deleted_at"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["created_at"], name: "index_observations_on_created_at", using: :btree
+    t.index ["deleted_at"], name: "index_observations_on_deleted_at", using: :btree
     t.index ["evidence_type"], name: "index_observations_on_evidence_type", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["hidden"], name: "index_observations_on_hidden", using: :btree
