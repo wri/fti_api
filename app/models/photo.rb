@@ -12,6 +12,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  user_id          :integer
+#  deleted_at       :datetime
 #
 
 class Photo < ApplicationRecord
@@ -21,6 +22,8 @@ class Photo < ApplicationRecord
   belongs_to :attacheable, polymorphic: true
 
   after_destroy :remove_attachment_id_directory
+
+  acts_as_paranoid
 
   def remove_attachment_id_directory
     FileUtils.rm_rf(File.join('public', 'uploads', 'photo', 'attachment', self.id.to_s)) if self.attachment

@@ -7,6 +7,8 @@ ActiveAdmin.register Observation do
   extend Versionable
   versionate
 
+  active_admin_paranoia
+
   menu false
 
   PER_PAGE = [10, 20, 40, 60].freeze
@@ -186,6 +188,7 @@ ActiveAdmin.register Observation do
   filter :is_active
   filter :publication_date
   filter :updated_at
+  filter :deleted_at
 
 
   csv do
@@ -287,6 +290,7 @@ ActiveAdmin.register Observation do
     end
     column :created_at
     column :updated_at
+    column :deleted_at
   end
 
 
@@ -382,6 +386,7 @@ ActiveAdmin.register Observation do
     column :modified_user, sortable: false
     column :created_at
     column :updated_at
+    column :deleted_at
     column('Actions') do |observation|
       a 'Start QC', href: start_qc_admin_observation_path(observation),    'data-method': :put if observation.validation_status == 'Ready for QC'
       a 'Needs revision', href: needs_revision_admin_observation_path(observation), 'data-method': :put if observation.validation_status == 'QC in progress'
@@ -398,7 +403,7 @@ ActiveAdmin.register Observation do
                                       other_penalties indicator_apv severity publication_date actions_taken
                                       details evidence_type evidences evidence_on_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report admin_comment monitor_comment
-                                      responsible_admin user modified_user created_at updated_at] }
+                                      responsible_admin user modified_user created_at updated_at deleted_at] }
     end
   end
 
@@ -525,6 +530,7 @@ ActiveAdmin.register Observation do
       row :modified_user
       row :created_at
       row :updated_at
+      row :deleted_at
     end
     active_admin_comments
   end

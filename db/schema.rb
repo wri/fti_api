@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201118141952) do
+ActiveRecord::Schema.define(version: 20201120113714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -316,6 +316,8 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.integer  "observation_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_governments_observations_on_deleted_at", using: :btree
     t.index ["government_id", "observation_id"], name: "governments_observations_association_index", unique: true, using: :btree
     t.index ["government_id"], name: "index_governments_observations_on_government_id", using: :btree
     t.index ["observation_id", "government_id"], name: "observations_governments_association_index", unique: true, using: :btree
@@ -385,6 +387,8 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.integer  "operator_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observation_operators_on_deleted_at", using: :btree
     t.index ["observation_id"], name: "index_observation_operators_on_observation_id", using: :btree
     t.index ["operator_id"], name: "index_observation_operators_on_operator_id", using: :btree
   end
@@ -419,6 +423,8 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.text     "details"
     t.text     "concern_opinion"
     t.string   "litigation_status"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observation_translations_on_deleted_at", using: :btree
     t.index ["locale"], name: "index_observation_translations_on_locale", using: :btree
     t.index ["observation_id"], name: "index_observation_translations_on_observation_id", using: :btree
   end
@@ -452,8 +458,10 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.text     "admin_comment"
     t.text     "monitor_comment"
     t.integer  "responsible_admin_id"
+    t.datetime "deleted_at"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["created_at"], name: "index_observations_on_created_at", using: :btree
+    t.index ["deleted_at"], name: "index_observations_on_deleted_at", using: :btree
     t.index ["evidence_type"], name: "index_observations_on_evidence_type", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["hidden"], name: "index_observations_on_hidden", using: :btree
@@ -477,6 +485,8 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.integer  "observation_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observer_observations_on_deleted_at", using: :btree
     t.index ["observation_id"], name: "index_observer_observations_on_observation_id", using: :btree
     t.index ["observer_id"], name: "index_observer_observations_on_observer_id", using: :btree
   end
@@ -637,7 +647,9 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
+    t.datetime "deleted_at"
     t.index ["attacheable_id", "attacheable_type"], name: "photos_attacheable_index", using: :btree
+    t.index ["deleted_at"], name: "index_photos_on_deleted_at", using: :btree
   end
 
   create_table "ranking_operator_documents", force: :cascade do |t|
@@ -837,6 +849,8 @@ ActiveRecord::Schema.define(version: 20201118141952) do
     t.integer  "species_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_species_observations_on_deleted_at", using: :btree
     t.index ["observation_id"], name: "index_species_observations_on_observation_id", using: :btree
     t.index ["species_id"], name: "index_species_observations_on_species_id", using: :btree
   end

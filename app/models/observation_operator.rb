@@ -9,9 +9,12 @@
 #  operator_id    :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  deleted_at     :datetime
 #
 
 class ObservationOperator < ApplicationRecord
   belongs_to :operator
   belongs_to :observation
+
+  acts_as_paranoid
 end
