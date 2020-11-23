@@ -148,7 +148,7 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     column :attachment do |o|
-      o.attachment&.filename
+      o&.document_file&.attachment
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
