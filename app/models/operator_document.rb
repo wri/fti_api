@@ -39,8 +39,7 @@ class OperatorDocument < ApplicationRecord
   has_many :operator_document_annexes, through: :annex_documents
   accepts_nested_attributes_for :document_file
 
-  # TODO: Remove this. This hack was put here so that the factory can create user documents
-  unless Rails.env.test?
+  if attribute_names.include? :attachment
     mount_base64_uploader :attachment, OperatorDocumentUploader # TODO Remove this after migrating
   end
 
