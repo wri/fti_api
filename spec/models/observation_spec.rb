@@ -35,6 +35,7 @@
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string
+#  deleted_at            :datetime
 #
 
 require 'rails_helper'

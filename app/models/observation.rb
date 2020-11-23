@@ -37,15 +37,18 @@
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string
+#  deleted_at            :datetime
 #
 
 class Observation < ApplicationRecord
   has_paper_trail
+  acts_as_paranoid
+
   include Translatable
   include Activable
   include ValidationHelper
 
-  translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail
+  translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
 
   enum observation_type: { "operator" => 0, "government" => 1 }
@@ -99,7 +102,7 @@ class Observation < ApplicationRecord
 
   has_many :comments,  as: :commentable, dependent: :destroy
   has_many :photos,    as: :attacheable, dependent: :destroy
-  has_many :observation_documents
+  has_many :observation_documents, dependent: :destroy
 
   belongs_to :responsible_admin,  class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
 
@@ -128,7 +131,6 @@ class Observation < ApplicationRecord
   before_save    :set_active_status
   before_save    :check_is_physical_place
   before_save    :set_centroid
-  before_destroy :destroy_documents
   after_destroy  :update_operator_scores
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
   after_save     :update_reports_observers, if: 'observation_report_id_changed?'
@@ -210,11 +212,6 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
           self.hidden != true
     )
     nil
-  end
-
-  def destroy_documents
-    mark_for_destruction # Hack to work with the hard delete of operator documents
-    ActiveRecord::Base.connection.execute("DELETE FROM observation_documents WHERE observation_id = #{id}")
   end
 
   def active_government
