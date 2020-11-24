@@ -15,6 +15,12 @@ module V1
       records
     }
 
+    def status
+      return @model.status if can_see_document?
+
+      hidden_document_status
+    end
+
     # TODO
     def self.records(options = {})
       context = options[:context]
