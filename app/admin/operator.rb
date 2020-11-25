@@ -180,7 +180,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :created_at
       row :updated_at
       if resource.fa_id.present?
-        grouped_sod = ScoreOperatorDocument.where(operator_id: resource.id).group_by_day(:date)
+        grouped_sod = ScoreOperatorDocument.where(operator_id: resource.id).group_by_day(:date, series: false)
         row :total_documents do
           render partial: 'score_evolution', locals: {
             scores: grouped_sod.maximum(:total)
