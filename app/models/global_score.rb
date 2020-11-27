@@ -23,8 +23,8 @@ class GlobalScore < ApplicationRecord
   # @param [Country] country The country for which to calculate the global score (if nil, will calculate all)
   def self.calculate(country = nil)
     GlobalScore.transaction do
-      gs = GlobalScore.first_or_create(country: country, date: Date.current)
-      all = country.present? ? OperatorDocument.where(country: country) : OperatorDocument.all
+      gs = GlobalScore.find_or_create_by(country: country, date: Date.current)
+      all = country.present? ? OperatorDocument.by_country(country&.id) : OperatorDocument.all
       gs.total_required = all.count
       gs.general_status = all.group(:status).count
       gs.country_status = all.country_type.group(:status).count
@@ -32,7 +32,7 @@ class GlobalScore < ApplicationRecord
       gs.doc_group_status = all.joins(required_operator_document: :required_operator_document_group)
                                 .group('required_operator_document_groups.id').count
       gs.fmu_type_status = all.fmu_type.joins(:fmu).group('fmus.forest_type').count
-      gs.save
+      gs.save!
     end
   end
 end
