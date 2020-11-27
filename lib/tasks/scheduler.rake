@@ -31,4 +31,13 @@ namespace :scheduler do
     Rails.logger.info "Active FMU Operators set calculated. It took #{time} ms."
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
+
+  desc 'Calculate the Global Scores'
+  task global_scores: :environment do
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "Going to update the global scores. at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    time = Benchmark.ms { GlobalScoreService.new.call }
+    Rails.logger.info "Finished updating the global scores. It took #{time} ms."
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+  end
 end

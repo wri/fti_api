@@ -11,8 +11,6 @@ class GlobalScoreService
 
   private
 
-  # Calculates the score for a given day
-  # @param [Country] country The country for which to calculate the global score
   def calculate(country = nil)
     GlobalScore.calculate(country)
   end
