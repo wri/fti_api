@@ -58,6 +58,8 @@ class OperatorDocument < ApplicationRecord
 
   after_destroy :regenerate
 
+  scope :fmu_type,     -> { where(type: 'OperatorDocumentFmu')}
+  scope :country_type, -> { where(type: 'OperatorDocumentFmu')}
   scope :valid,        -> { where(status: OperatorDocument.statuses[:doc_valid]) }
   scope :required,     -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
