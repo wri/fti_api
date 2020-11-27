@@ -63,7 +63,7 @@ RSpec.describe GlobalScoreService do
         end
       end
       context 'After changing one document' do
-        let!(:od) { OperatorDocument.find_by(operator: operator_1a, required_operator_document_id: rodg_1)}
+        let!(:od) { OperatorDocument.find_by(operator: operator_1a, required_operator_document_id: rod_1a) }
         it 'The global status for today should reflect those changes' do
           od.update status: 'doc_valid'
 
