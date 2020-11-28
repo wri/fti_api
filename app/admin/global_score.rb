@@ -23,5 +23,18 @@ ActiveAdmin.register GlobalScore do
     column :created_at
     column :updated_at
     actions
+
+    grouped_sod = GlobalScore.group_by_day(:date, series: false)
+    render partial: 'score_evolution', locals: {
+        scores: [
+            { name: 'all', data: grouped_sod.maximum(:total_required) },
+            { name: 'Not Provided', data: grouped_sod.maximum("general_status->>'doc_not_provided'") },
+            { name: 'Pending', data: grouped_sod.maximum("general_status->>'doc_pending'") },
+            { name: 'Invalid', data: grouped_sod.maximum("general_status->>'doc_invalid'") },
+            { name: 'Valid', data: grouped_sod.maximum("general_status->>'doc_valid'") },
+            { name: 'Expired', data: grouped_sod.maximum("general_status->>'doc_expired'") },
+            { name: 'Not Required', data: grouped_sod.maximum("general_status->>'doc_not_required'") },
+        ]
+    }
   end
 end
