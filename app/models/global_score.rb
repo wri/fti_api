@@ -19,6 +19,10 @@ class GlobalScore < ApplicationRecord
   validates_presence_of :date
   validates_uniqueness_of :date, scope: :country_id
 
+  def self.headers
+    @@headers ||= initialize_headers
+  end
+
   # Calculates the score for a given day
   # @param [Country] country The country for which to calculate the global score (if nil, will calculate all)
   def self.calculate(country = nil)
@@ -34,5 +38,43 @@ class GlobalScore < ApplicationRecord
       gs.fmu_type_status = all.fmu_type.joins(:fmu).group('fmus.forest_type').count
       gs.save!
     end
+  end
+
+  def self.to_csv
+    CSV.generate(headers: true, force_quotes: true) do |csv|
+      csv << headers.map{ |x| x.is_a?(Hash) ? x.values.first.map{ |y| "#{x.keys.first}-#{y[0]}" }  : x }.flatten
+
+      find_each do |score|
+        tmp_row = []
+        headers.each do |h|
+          if h.is_a?(Hash)
+            h.values.first.each { |k| tmp_row << score[h.keys.first][k.last.to_s] }
+          else
+            tmp_row << score[h]
+          end
+        end
+        csv << tmp_row
+      end
+    end
+  end
+
+
+  private
+
+  def self.initialize_headers
+    rodg_name = Arel.sql("required_operator_document_group_translations.name")
+    statuses = {}
+    OperatorDocument.statuses.keys.each {|v| statuses[v] = v}
+    [
+      :date,
+      :country,
+      :total_required,
+      { general_status: statuses },
+      { country_status: statuses },
+      { fmu_status: statuses },
+      { doc_group_status: RequiredOperatorDocumentGroup.with_translations(I18n.locale)
+                              .pluck(:id, rodg_name).map{|x| {x[1] => x[0]}}.inject({}, :merge) },
+      { fmu_type_status: Fmu.forest_types }
+    ]
   end
 end
