@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: global_scores
@@ -64,7 +66,7 @@ class GlobalScore < ApplicationRecord
   def self.initialize_headers
     rodg_name = Arel.sql("required_operator_document_group_translations.name")
     statuses = {}
-    OperatorDocument.statuses.keys.each {|v| statuses[v] = v}
+    OperatorDocument.statuses.each_key { |v| statuses[v] = v }
     [
       :date,
       :country,
@@ -73,7 +75,7 @@ class GlobalScore < ApplicationRecord
       { country_status: statuses },
       { fmu_status: statuses },
       { doc_group_status: RequiredOperatorDocumentGroup.with_translations(I18n.locale)
-                              .pluck(:id, rodg_name).map{|x| {x[1] => x[0]}}.inject({}, :merge) },
+                              .pluck(:id, rodg_name).map{ |x| { x[1] => x[0] } }.inject({}, :merge) },
       { fmu_type_status: Fmu.forest_types }
     ]
   end
