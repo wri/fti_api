@@ -25,6 +25,10 @@ gem 'active_skin'
 # WYSIWYG
 gem 'activeadmin_quill_editor'
 
+# Graphs
+gem 'chartkick'
+gem 'groupdate'
+
 gem 'devise'
 
 # Soft Delete
