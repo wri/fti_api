@@ -23,5 +23,31 @@ class GlobalObservationScore < ApplicationRecord
   validates_presence_of :date
   validates_uniqueness_of :date
 
+  # Calculates the observation score for a given day
+  # @param [Date] date The date for which to calculate
+  def calculate(date)
+    return unless date.is_a? Date
 
+    GlobalObservationScore.transaction do
+      observations = Observation.bigger_date(date)
+      reports = ObservationReport.bigger_date(date)
+
+      gos = GlobalObservationScore.find_or_create_by(date: date)
+
+      gos.obs_total = observations.count
+      gos.rep_total = reports.count
+      gos.rep_country = reports.joins(:observations).group(:country_id).count
+      gos.rep_monitor = reports.joins(:observer_observations).group(:observer_id).count
+      gos.obs_country = observations.group(:country_id).count
+      gos.obs_status = observations.group(:validation_status)
+      gos.obs_producer = observations.joins(:operator).group('operators.id').count
+      gos.obs_severity = observations.joins(:severity).group('severities.level').count
+      gos.obs_category = observations.joins(subcategory: :category).group('categories.id').count
+      gos.obs_subcategory = observations.joins(:subcategory).group('subcategories.id').count
+      gos.obs_fmus = observations.joins(:fmu).group('fmus.id').count
+      gos.obs_forest_type = observations.joins(:fmu).group(:forest_type).count
+
+      gos.save
+    end
+  end
 end
