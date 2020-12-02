@@ -147,6 +147,7 @@ GEM
       carrierwave (>= 0.8.0)
       mime-types (~> 3.0)
       mimemagic (~> 0.3.2)
+    chartkick (3.4.2)
     choice (0.2.0)
     codeclimate-test-reporter (1.0.9)
       simplecov (<= 0.13)
@@ -210,6 +211,8 @@ GEM
       activerecord (>= 4.2.0, < 6.1)
       globalize (>= 5.1.0, < 6)
       paper_trail (>= 8, < 12)
+    groupdate (5.2.1)
+      activesupport (>= 5)
     guard (2.16.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -580,6 +583,7 @@ DEPENDENCIES
   capistrano-resque
   capistrano-rvm
   carrierwave-base64
+  chartkick
   codeclimate-test-reporter (~> 1.0.0)
   database_cleaner
   devise
@@ -589,6 +593,7 @@ DEPENDENCIES
   faker
   globalize (= 5.1.0)
   globalize-versioning
+  groupdate
   guard
   interactor (~> 3.0)
   jsonapi-resources (= 0.9.0)

@@ -179,6 +179,23 @@ ActiveAdmin.register Operator, as: 'Producer' do
       end
       row :created_at
       row :updated_at
+      if resource.fa_id.present?
+        grouped_sod = ScoreOperatorDocument.where(operator_id: resource.id).group_by_day(:date, series: false)
+        row :total_documents do
+          render partial: 'score_evolution', locals: {
+            scores: grouped_sod.maximum(:total)
+          }
+        end
+        row :percentage_by_type do
+          render partial: 'score_evolution', locals: {
+            scores: [
+              { name: 'all', data: grouped_sod.maximum(:all) },
+              { name: 'per_country', data: grouped_sod.maximum(:country) },
+              { name: 'per_fmus', data: grouped_sod.maximum(:fmu) }
+            ]
+          }
+        end
+      end
     end
     active_admin_comments
   end

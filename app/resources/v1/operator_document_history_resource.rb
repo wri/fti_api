@@ -10,6 +10,8 @@ module V1
 
     filter :date
 
+    attributes :operator_document_id
+
     # The filter doesn't do anything. This is already implemented under the "records" method
     filter :date, apply: ->(records, value, _options) {
       records

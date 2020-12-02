@@ -14,10 +14,15 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
         end
       end
       div class: 'list' do
-        # Add one item without son.
         ul do
-          # Replace route_destination_path for the route you want to follow when you receive the item click.
-          li { link_to 'Dashboard', admin_dashboard_path }
+          li do
+            text_node content_tag 'a', 'Dashboard'
+            ul do
+              li { link_to 'Start Page', admin_dashboard_path }
+              li { link_to 'Global Scores', admin_global_scores_path }
+
+            end
+          end
         end
 
         ul do
