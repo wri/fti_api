@@ -20,7 +20,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             ul do
               li { link_to 'Start Page', admin_dashboard_path }
               li { link_to 'Global Scores', admin_global_scores_path }
-
+              li { link_to 'Global Observation Scores', admin_global_observation_scores_path }
             end
           end
         end
