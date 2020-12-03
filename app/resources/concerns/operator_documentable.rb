@@ -32,7 +32,7 @@ module OperatorDocumentable
     def attachment=(attachment)
       df = DocumentFile.new(attachment: attachment)
       @model.document_file = df
-      return nil
+      nil
     end
 
     def document_public?
