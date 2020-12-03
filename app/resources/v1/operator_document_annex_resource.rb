@@ -20,7 +20,7 @@ module V1
       od = OperatorDocument.find operator_document_id
       ad = AnnexDocument.new(documentable: od)
       @model.annex_document = ad
-      return nil
+      nil
     end
 
     def name
@@ -85,10 +85,17 @@ module V1
       end
     end
 
+    # TODO: Refactor this
     def belongs_to_user
       user = context[:current_user]
-      user&.user_permission&.user_role =='admin' ||
-          user&.is_operator?(@model.operator_document.operator_id)
+      return true if user&.user_permission&.user_role =='admin'
+
+      annex_document_id =
+        AnnexDocument.find_by(documentable_type: 'OperatorDocument',
+                              operator_document_annex_id: @model.id)&.documentable_id
+      operator_id = OperatorDocument.find_by(id: annex_document_id)&.operator_id
+
+      user&.is_operator?(operator_id)
     end
   end
 end
