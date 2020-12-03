@@ -158,7 +158,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :hidden,            -> { where(hidden: true) }
   scope :visible,           -> { where(hidden: [false, nil]) }
   scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name #{order}") }
-  scope :bigger_date,       ->(date) { where('observations.created_at <= ?', date) }
+  scope :bigger_date,       ->(date) { where('observations.created_at <= ?', date + 1.day) }
 
   class << self
     def translated_types

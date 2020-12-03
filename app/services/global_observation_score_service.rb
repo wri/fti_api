@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GlobalScoreService
+class GlobalObservationScoreService
   def initialize(date = Date.today)
     @date = date
   end
@@ -13,6 +13,6 @@ class GlobalScoreService
   private
 
   def calculate
-    GlobalObservationScore.calculate(date)
+    GlobalObservationScore.calculate(@date)
   end
 end
