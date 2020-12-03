@@ -16,13 +16,6 @@ module V1
 
     before_create :set_user_id, :set_status, :set_public
 
-    def operator_document_id=(operator_document_id)
-      od = OperatorDocument.find operator_document_id
-      ad = AnnexDocument.new(documentable: od)
-      @model.annex_document = ad
-      return nil
-    end
-
     def name
       show_attribute('name')
     end
