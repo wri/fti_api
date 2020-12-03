@@ -42,13 +42,19 @@ class OperatorDocumentHistory < ApplicationRecord
   # @param String operator_id The operator id
   # @param String date the date at which to fetch the state
   def self.from_operator_at_date(operator_id, date)
+    # .INFO.
+    # The reason why we're adding a day to the date, is that when comparing datetime fields with a date,
+    # the datetime will will always be bigger. For example '2020-01-01 02:00:00' > '2020-01-01'
+    # We could use a sql function to extract the day, but this approach is more performant
+    db_date = (date.to_date + 1.day).to_s(:db)
     query = <<~SQL
       (select * from
       (select row_number() over (partition by required_operator_document_id, fmu_id order by updated_at desc), *
       from operator_document_histories
-      where operator_id = #{operator_id} AND updated_at <= '#{date.to_date.to_s(:db)}') as sq
+      where operator_id = #{operator_id} AND updated_at <= '#{db_date}') as sq
       where sq.row_number = 1) as operator_document_histories
     SQL
+
 
     from(query)
   end
