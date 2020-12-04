@@ -35,7 +35,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :fmu
   belongs_to :user
   belongs_to :document_file, optional: :true
-  has_many :annex_documents, as: :documentable
+  has_many :annex_documents, as: :documentable, dependent: :destroy
   has_many :operator_document_annexes, through: :annex_documents
   accepts_nested_attributes_for :document_file
 
