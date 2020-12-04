@@ -26,6 +26,8 @@ class ObservationReport < ApplicationRecord
 
   after_destroy :remove_attachment_id_directory
 
+  scope :bigger_date, ->(date) { where('observation_reports.created_at <= ?', date + 1.day) }
+
   def remove_attachment_id_directory
     FileUtils.rm_rf(File.join('public', 'uploads', self.class.to_s.underscore, 'attachment', self.id.to_s)) if self.attachment
   end
