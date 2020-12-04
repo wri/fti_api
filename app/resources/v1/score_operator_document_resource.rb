@@ -3,6 +3,7 @@
 module V1
   class ScoreOperatorDocumentResource < JSONAPI::Resource
     include CacheableByLocale
+    include CacheableByCurrentUser
     caching
     immutable
 
