@@ -22,7 +22,7 @@ class GlobalScore < ApplicationRecord
   validates_uniqueness_of :date, scope: :country_id
 
   def self.headers
-    @@headers ||= initialize_headers
+    @headers ||= initialize_headers
   end
 
   # Calculates the score for a given day
