@@ -118,7 +118,7 @@ ActiveAdmin.register OperatorDocument do
       o.required_operator_document.name
     end
     column :country do |o|
-      o.required_operator_document.country.name
+      o.required_operator_document&.country&.name
     end
     column :Type do |o|
       if o.required_operator_document.present?
