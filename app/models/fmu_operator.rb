@@ -120,7 +120,7 @@ WHERE id = #{x.fmu_id};"
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
                                   operator_id: current_operator,
                                   fmu_id: fmu_id).first_or_create do |odf|
-          odf.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true) unless odf.persisted?
+          odf.update!(status: OperatorDocument.statuses[:doc_not_provided]) unless odf.persisted?
         end
       end
       Rails.logger.info "Create the documents for operator #{current_operator} and FMU #{fmu_id}"
