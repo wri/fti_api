@@ -66,12 +66,12 @@ class Observation < ApplicationRecord
       monitor: {
           nil => ['Created', 'Ready for QC'],
           'Created' => ['Ready for QC'],
-          'Needs Revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
+          'Needs revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
           'Ready for publication' => ['Published (no comments)']
       },
       admin: {
           'Ready for QC' => ['QC in progress'],
-          'QC in progress' => ['Needs Revision', 'Ready for publication']
+          'QC in progress' => ['Needs revision', 'Ready for publication']
       }
   }.freeze
 
@@ -235,7 +235,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if STATUS_TRANSITIONS.dig(@user_type, validation_status_was)&.include? validation_status
 
     errors.add(:validation_status,
-               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}'' to ''#{validation_status}''")
+               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}'' to '#{validation_status}'")
   end
 
   def evidence_presented_in_the_report
