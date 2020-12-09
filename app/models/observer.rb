@@ -100,9 +100,9 @@ class Observer < ApplicationRecord
   private
 
   def valid_responsible_user
-    return if responsible_user_id.blank?
+    return if responsible_user.blank?
     return if responsible_user.observer_id == id
 
-    errors.add(:responsible_user_id, 'The user must be an observer for this organizations')
+    errors.add(:responsible_user, 'The user must be an observer for this organizations')
   end
 end

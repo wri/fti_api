@@ -128,6 +128,7 @@ class Observation < ApplicationRecord
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
+  before_create  :set_responsible_admin
   before_save    :set_active_status
   before_save    :check_is_physical_place
   before_save    :set_centroid
@@ -215,6 +216,20 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     nil
   end
 
+  # Sets the responsible admin for an observation
+  # It starts by checking the monitor organization of the uploader to find its responsible person
+  # And if it doesn't find any, it iterates through all the monitors
+  def set_responsible_admin
+    self.responsible_admin = user&.observer&.responsible_user&.id
+    return if self.responsible_admin
+
+    observers.each do |observer|
+      if observer.responsible_user.present?
+        self.responsible_admin = observer.responsible_user&.id
+      end
+    end
+  end
+
   def active_government
     return if persisted? ||
               governments.none? ||
@@ -235,7 +250,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if STATUS_TRANSITIONS.dig(@user_type, validation_status_was)&.include? validation_status
 
     errors.add(:validation_status,
-               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}'' to '#{validation_status}'")
+               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}' to '#{validation_status}'")
   end
 
   def evidence_presented_in_the_report
