@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201129171722) do
+ActiveRecord::Schema.define(version: 20201209131235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -708,6 +708,8 @@ ActiveRecord::Schema.define(version: 20201129171722) do
     t.datetime "updated_at",                     null: false
     t.string   "name",                           null: false
     t.text     "description"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_required_gov_document_group_translations_on_deleted_at", using: :btree
     t.index ["locale"], name: "index_required_gov_document_group_translations_on_locale", using: :btree
     t.index ["required_gov_document_group_id"], name: "index_d5783e31f1865cb8918d628281b44e29621b4216", using: :btree
   end

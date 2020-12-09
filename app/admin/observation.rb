@@ -318,7 +318,8 @@ ActiveAdmin.register Observation do
     column :location_information, sortable: false
     column :observers, sortable: false do |o|
       links = []
-      o.observers.with_translations(I18n.locale).each do |observer|
+      observers = params['scope'].eql?('recycle_bin') ? o.observers.unscope(where: :deleted_at) : o.observers
+      observers.with_translations(I18n.locale).each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
       end
       links.reduce(:+)
@@ -326,13 +327,15 @@ ActiveAdmin.register Observation do
     column :observation_type, sortable: 'observation_type'
     column :operator, sortable: false
     column :governments, sortable: false do |o|
-      o.governments.each_with_object([]) do |government, links|
+      governments = params['scope'].eql?('recycle_bin') ? o.governments.unscope(where: :deleted_at) : o.governments
+      governments.each_with_object([]) do |government, links|
         links << link_to(government.government_entity, admin_government_path(government.id))
       end.reduce(:+)
     end
     column :relevant_operators do |o|
       links = []
-      o.relevant_operators.each do |operator|
+      relevant_operators = params['scope'].eql?('recycle_bin') ? o.relevant_operators.unscope(where: :deleted_at) : o.relevant_operators
+      relevant_operators.each do |operator|
         links << link_to(operator.name, admin_producer_path(operator.id))
       end
       links.reduce(:+)
