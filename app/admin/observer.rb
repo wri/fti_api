@@ -22,7 +22,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   permit_params :observer_type, :is_active, :logo, :address, :information_name, :information_email, :public_info,
                 :information_phone, :data_name, :data_email, :data_phone, :organization_type, :delete_logo,
-                translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
+                :responsible_user_id, translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
   csv do
     column :is_active
@@ -53,6 +53,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     column :observer_type, sortable: true
     image_column :logo
     column :name, sortable: 'observer_translations.name'
+    column :responsible_user
     column :created_at
     column :updated_at
     actions
@@ -73,6 +74,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       row :public_info
       row :observer_type
       row :organization_type
+      row :responsible_user
       # TODO: Reactivate rubocop and fix this
       # rubocop:disable Rails/OutputSafety
       row :countries do |observer|
@@ -107,6 +109,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     end
     f.inputs 'Monitor Details' do
       f.input :is_active
+      f.input :responsible_user, as: :select, collection: User.where(observer_id: f.object.id)
       f.input :countries, collection: Country.with_translations(I18n.locale).order('country_translations.name asc')
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
