@@ -368,7 +368,7 @@ ActiveAdmin.register Observation do
       end
       links.reduce(:+)
     end
-    column :evidence_on_report, sortable: false
+    column 'Evidence in the report', :evidence_on_report, sortable: false
     column :concern_opinion do |o|
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
     end
@@ -404,7 +404,7 @@ ActiveAdmin.register Observation do
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
-                                      details evidence_type evidences evidence_on_report concern_opinion pv location_accuracy
+                                      details evidence_type evidences evidence_in_the_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report admin_comment monitor_comment
                                       responsible_admin user modified_user created_at updated_at deleted_at] }
     end
@@ -463,7 +463,7 @@ ActiveAdmin.register Observation do
       f.input :monitor_comment, input_html: { disabled: true }
       f.input :observation_report, as: :select
       f.input :evidence_type, as: :select
-      f.input :evidence_on_report
+      f.input :evidence_on_report, label: 'Evidence in the report'
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
         t.input :name
         t.input :attachment
