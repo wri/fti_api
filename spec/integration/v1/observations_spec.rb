@@ -173,7 +173,7 @@ module V1
                   params: jsonapi_params('observations', observation.id, { 'validation-status': 'Needs revision'}),
                   headers: admin_headers)
 
-            expect(parsed_body[:errors].first[:title]).to eq("Invalid validation change for monitor. Can't move from 'Created'' to ''Needs revision''")
+            expect(parsed_body[:errors].first[:title]).to eq("Invalid validation change for monitor. Can't move from 'Created' to 'Needs revision'")
             expect(status).to eq(422)
           end
         end

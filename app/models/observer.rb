@@ -4,23 +4,24 @@
 #
 # Table name: observers
 #
-#  id                :integer          not null, primary key
-#  observer_type     :string           not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  is_active         :boolean          default("true")
-#  logo              :string
-#  address           :string
-#  information_name  :string
-#  information_email :string
-#  information_phone :string
-#  data_name         :string
-#  data_email        :string
-#  data_phone        :string
-#  organization_type :string
-#  public_info       :boolean          default("false")
-#  name              :string
-#  organization      :string
+#  id                  :integer          not null, primary key
+#  observer_type       :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  is_active           :boolean          default("true")
+#  logo                :string
+#  address             :string
+#  information_name    :string
+#  information_email   :string
+#  information_phone   :string
+#  data_name           :string
+#  data_email          :string
+#  data_phone          :string
+#  organization_type   :string
+#  public_info         :boolean          default("false")
+#  responsible_user_id :integer
+#  name                :string
+#  organization        :string
 #
 
 class Observer < ApplicationRecord
@@ -47,6 +48,7 @@ class Observer < ApplicationRecord
   has_many :observation_reports, through: :observation_report_observers
 
   has_many :users, inverse_of: :observer
+  belongs_to :responsible_user, class_name: 'User', foreign_key: 'responsible_user_id'
 
   EMAIL_VALIDATOR = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
@@ -59,6 +61,8 @@ class Observer < ApplicationRecord
 
   validates_format_of :information_email, with: EMAIL_VALIDATOR, if: :information_email?
   validates_format_of :data_email, with: EMAIL_VALIDATOR, if: :data_email?
+
+  validate :valid_responsible_user
 
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
@@ -91,5 +95,14 @@ class Observer < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  private
+
+  def valid_responsible_user
+    return if responsible_user.blank?
+    return if responsible_user.observer_id == id
+
+    errors.add(:responsible_user, 'The user must be an observer for this organizations')
   end
 end

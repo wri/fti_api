@@ -82,42 +82,42 @@ ActiveAdmin.register Observation do
     end
   end
 
-  batch_action :start_qc, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
+  batch_action :move_to_qc_in_progress, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['QC in progress']) if observation.validation_status == 'Ready for QC'
     end
     redirect_to collection_path, notice: 'QC started'
   end
 
-  batch_action :require_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
+  batch_action :move_to_needs_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Needs revision']) if observation.validation_status == 'QC in progress'
     end
     redirect_to collection_path, notice: 'Required revision for observations'
   end
 
-  batch_action :publish, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
+  batch_action :move_to_ready_for_publication, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Ready for publication']) if observation.validation_status == 'QC in progress'
     end
     redirect_to collection_path, notice: 'Observations ready to be published'
   end
 
-  batch_action :publish_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
+  batch_action :move_to_published_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (no comments)')
     end
     redirect_to collection_path, notice: 'Observations published without comments'
   end
 
-  batch_action :publish_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
+  batch_action :move_to_published_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (not modified)')
     end
     redirect_to collection_path, notice: 'Observations published without modifications'
   end
 
-  batch_action :publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
+  batch_action :move_to_publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (modified)')
     end
@@ -368,7 +368,7 @@ ActiveAdmin.register Observation do
       end
       links.reduce(:+)
     end
-    column :evidence_on_report, sortable: false
+    column 'Evidence in the report', :evidence_on_report, sortable: false
     column :concern_opinion do |o|
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
     end
@@ -404,7 +404,7 @@ ActiveAdmin.register Observation do
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
-                                      details evidence_type evidences evidence_on_report concern_opinion pv location_accuracy
+                                      details evidence_type evidences evidence_in_the_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report admin_comment monitor_comment
                                       responsible_admin user modified_user created_at updated_at deleted_at] }
     end
@@ -425,7 +425,7 @@ ActiveAdmin.register Observation do
       f.input :id, input_html: { disabled: true }
     end
     f.inputs 'Status' do
-      f.input :is_active
+      f.input :is_active, input_html: { disabled: true }
       f.input :hidden
       f.input :validation_status
     end
@@ -463,7 +463,7 @@ ActiveAdmin.register Observation do
       f.input :monitor_comment, input_html: { disabled: true }
       f.input :observation_report, as: :select
       f.input :evidence_type, as: :select
-      f.input :evidence_on_report
+      f.input :evidence_on_report, label: 'Evidence in the report'
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
         t.input :name
         t.input :attachment
