@@ -4,6 +4,8 @@ ActiveAdmin.register FmuOperator do
   extend BackRedirectable
   back_redirect
 
+  active_admin_paranoia
+
   menu false
 
   extend Versionable
