@@ -425,7 +425,7 @@ ActiveAdmin.register Observation do
       f.input :id, input_html: { disabled: true }
     end
     f.inputs 'Status' do
-      f.input :is_active
+      f.input :is_active, input_html: { disabled: true }
       f.input :hidden
       f.input :validation_status
     end
