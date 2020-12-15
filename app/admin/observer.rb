@@ -119,7 +119,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       end
     end
     f.inputs 'Public Info' do
-      f.input :public_info
+      f.input :public_info, input_html: { disabled: true }
       f.input :address
       f.input :information_name
       f.input :information_email
