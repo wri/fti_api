@@ -2,6 +2,7 @@ namespace :environment_migration_v2 do
   desc 'Generates a sql dump with the previous database'
   task export: :environment do |_task, args|
     MAX_ID = 100_000
+    MIN_ID = 20_000
     country_ids = "(188, 53)"
     Rails.logger.level = Logger::DEBUG
     ActiveRecord::Base.logger = Logger.new STDOUT
@@ -36,10 +37,18 @@ namespace :environment_migration_v2 do
       ActiveRecord::Base.connection.execute("DELETE FROM api_keys where id < #{MAX_ID}")
       ActiveRecord::Base.connection.execute("DELETE FROM users where id < #{MAX_ID}")
 
+      # Removes the operators that are not needed (don't belong to the countries selected)
       ActiveRecord::Base.connection.execute("DELETE FROM operators where country_id not in #{country_ids}")
       ActiveRecord::Base.connection.execute("DELETE FROM operator_translations where operator_id not in (SELECT id from operators)")
-      ActiveRecord::Base.connection.execute("UPDATE operators set id = (id + 120000) where id < #{MAX_ID}")
-      ActiveRecord::Base.connection.execute("UPDATE operator_translations set operator_id = (operator_id + 120000) where operator_id < #{MAX_ID}")
+      # Updates the ids of the operators that are smaller than MAX_ID
+      ActiveRecord::Base.connection.execute("UPDATE operators set id = (id + #{MAX_ID + MIN_ID}) where id < #{MAX_ID}")
+      ActiveRecord::Base.connection.execute("UPDATE operator_translations set operator_id = (operator_id + #{MAX_ID + MIN_ID}) where operator_id < #{MAX_ID}")
+      ActiveRecord::Base.connection.execute("UPDATE operator_documents set operator_id = (operator_id + #{MAX_ID + MIN_ID}) where operator_id < #{MAX_ID}")
+      ActiveRecord::Base.connection.execute("UPDATE fmu_operators set operator_id = (operator_id + #{MAX_ID + MIN_ID}) where operator_id < #{MAX_ID}")
+
+      # Updates the operator translations id not to collide
+      ActiveRecord::Base.connection.execute("UPDATE operator_translations set id = (id + #{MAX_ID + MIN_ID}) where id < #{MAX_ID}")
+
 
       ActiveRecord::Base.connection.execute("SET session_replication_role = 'origin'")
 
@@ -67,7 +76,6 @@ namespace :environment_migration_v2 do
     ActiveRecord::Base.transaction do
 
       operators_to_remove = []
-      fmus_to_remove = []
       # Moves the observations to the imported operator
       Operator.where("country_id in #{country_ids} and id < #{MAX_ID}").find_each do |operator|
         operator.all_observations.find_each do |obs|
@@ -75,8 +83,8 @@ namespace :environment_migration_v2 do
 
           new_operator = Operator.with_translations.where(name: operator.name).order(:id).last
           next if new_operator.id == operator.id
-          obs.operator = new_operator
-          obs.save
+
+          obs.update_columns(operator_id: new_operator.id)
           operators_to_remove << operator.id
         end
       end
@@ -91,7 +99,7 @@ namespace :environment_migration_v2 do
 
       # Remove duplicated operators
       Operator.where("country_id in #{country_ids} and id < #{MAX_ID}").find_each do |operator|
-        next if operator.observations.any?
+        next if ObservationOperator.where(operator_id: operator.id).any?
         operator.destroy!
       end
 
