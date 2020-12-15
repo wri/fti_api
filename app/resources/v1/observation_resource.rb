@@ -166,11 +166,13 @@ module V1
       end
     end
 
+    # The date is set to the report date or to today
     def set_publication_date
       return unless ['Published (no comments)', 'Published (not modified)',
                      'Published (modified)'].include? @model.validation_status
 
-      @model.publication_date = Time.now
+
+      @model.publication_date = @model.observation_report&.publication_date || Time.now
     end
   end
 end
