@@ -12,10 +12,13 @@
 #  end_date    :date
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  deleted_at  :datetime
 #
 
 class FmuOperator < ApplicationRecord
   has_paper_trail
+  acts_as_paranoid
+
   include DateHelper
 
   belongs_to :fmu,        optional: true
@@ -106,7 +109,7 @@ WHERE id = #{x.fmu_id};"
     OperatorDocumentFmu.transaction do
       to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator)
       destroyed_count = to_destroy.count
-      to_destroy.each { |x| x.delete }
+      to_destroy.each { |x| x.destroy }
 
       Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator}"
 
