@@ -82,42 +82,42 @@ ActiveAdmin.register Observation do
     end
   end
 
-  batch_action :start_qc, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
+  batch_action :move_to_qc_in_progress, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['QC in progress']) if observation.validation_status == 'Ready for QC'
     end
     redirect_to collection_path, notice: 'QC started'
   end
 
-  batch_action :require_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
+  batch_action :move_to_needs_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Needs revision']) if observation.validation_status == 'QC in progress'
     end
     redirect_to collection_path, notice: 'Required revision for observations'
   end
 
-  batch_action :publish, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
+  batch_action :move_to_ready_for_publication, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Ready for publication']) if observation.validation_status == 'QC in progress'
     end
     redirect_to collection_path, notice: 'Observations ready to be published'
   end
 
-  batch_action :publish_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
+  batch_action :move_to_published_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (no comments)')
     end
     redirect_to collection_path, notice: 'Observations published without comments'
   end
 
-  batch_action :publish_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
+  batch_action :move_to_published_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (not modified)')
     end
     redirect_to collection_path, notice: 'Observations published without modifications'
   end
 
-  batch_action :publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
+  batch_action :move_to_publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (modified)')
     end
