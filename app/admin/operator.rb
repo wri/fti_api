@@ -203,12 +203,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
 
   controller do
-    # def show
-    #   @operator = Operator.with_translations(I18n.locale).find(params[:id])
-    # end
-    # def edit
-    #   @operator = Operator.with_translations.find(params[:id])
-    # end
     def find_resource
       scoped_collection.unscope(:joins).with_translations.where(id: params[:id]).first!
     end
