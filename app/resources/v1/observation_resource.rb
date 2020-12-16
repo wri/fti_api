@@ -98,6 +98,11 @@ module V1
       false
     end
 
+    # The publication date should be the date of the report and fallback to created_at
+    def publication_date
+      @model.observation_report&.publication_date || @model.created_at
+    end
+
     def validation_status_id
       Observation.validation_statuses[@model.validation_status]
     end
@@ -166,13 +171,12 @@ module V1
       end
     end
 
-    # The date is set to the report date or to today
     def set_publication_date
       return unless ['Published (no comments)', 'Published (not modified)',
                      'Published (modified)'].include? @model.validation_status
 
 
-      @model.publication_date = @model.observation_report&.publication_date || Time.now
+      @model.publication_date = Time.now
     end
   end
 end
