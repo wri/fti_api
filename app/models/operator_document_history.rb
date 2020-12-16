@@ -31,6 +31,7 @@ class OperatorDocumentHistory < ApplicationRecord
   belongs_to :fmu, optional: true
   belongs_to :user, optional: true
   belongs_to :document_file, optional: :true
+  belongs_to :operator_document
   has_many :annex_documents, as: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 

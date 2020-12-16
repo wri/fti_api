@@ -287,7 +287,7 @@ ActiveAdmin.register OperatorDocument do
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :uploaded_by
       row 'attachment' do |r|
-        link_to r.document_file.attachment.identifier, r.document_file.attachment.url
+        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url
       end
       row :reason
       row :start_date

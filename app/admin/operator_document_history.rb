@@ -25,8 +25,12 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :status
     column :id
-    column :required_operator_document do |o|
-      o.required_operator_document.name
+    column :operator_document do |o|
+      o.operator_document&.name
+    end
+    column :updated_at
+    column :operator_document do |o|
+      o.operator_document&.required_operator_document&.name
     end
     column :country do |o|
       o.required_operator_document.country.name
@@ -78,6 +82,10 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :public
     tag_column :status
     column :id
+    column :operator_document do |od|
+      link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
+    end
+    column :updated_at
     column :country do |od|
       od.required_operator_document.country
     end
@@ -133,11 +141,9 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :id
   filter :required_operator_document_country_id, label: 'Country', as: :select,
                                                  collection: Country.with_translations(I18n.locale).order('country_translations.name')
-  filter :required_operator_document,
-         collection: RequiredOperatorDocument.
-             joins(country: :translations)
-                         .order('required_operator_documents.name')
-                         .where(country_translations: { locale: I18n.locale }).all.map { |x| ["#{x.name} - #{x.country.name}", x.id] }
+  filter :operator_document_id_eq, label: 'Operator Document Id'
+  filter :operator_document_required_operator_document_id_eq,
+         collection: RequiredOperatorDocument.with_translations.all, as: :select, label: 'Required Operator Document'
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
