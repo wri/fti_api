@@ -387,6 +387,9 @@ ActiveAdmin.register Observation do
     column :responsible_admin
     column :user, sortable: false
     column :modified_user, sortable: false
+    column :modified_user_language, sortable: false do |o|
+      o.modified_user&.locale
+    end
     column :created_at
     column :updated_at
     column :deleted_at
@@ -406,7 +409,7 @@ ActiveAdmin.register Observation do
                                       other_penalties indicator_apv severity publication_date actions_taken
                                       details evidence_type evidences evidence_in_the_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report admin_comment monitor_comment
-                                      responsible_admin user modified_user created_at updated_at deleted_at] }
+                                      responsible_admin user modified_user modified_user_language created_at updated_at deleted_at] }
     end
   end
 
@@ -531,6 +534,9 @@ ActiveAdmin.register Observation do
       row :responsible_admin
       row :user
       row :modified_user
+      row :modified_user_language do |o|
+        o.modified_user&.locale
+      end
       row :created_at
       row :updated_at
       row :deleted_at

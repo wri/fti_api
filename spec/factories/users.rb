@@ -27,6 +27,7 @@
 #  observer_id            :integer
 #  operator_id            :integer
 #  holding_id             :integer
+#  locale                 :string
 #
 
 FactoryBot.define do

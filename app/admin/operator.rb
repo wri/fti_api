@@ -21,6 +21,23 @@ ActiveAdmin.register Operator, as: 'Producer' do
     redirect_to collection_path, notice: 'Operator activated'
   end
 
+  config.clear_action_items!
+
+  action_item only: [:show] do
+    link_to 'Edit Producer', edit_admin_producer_path(operator)
+  end
+
+  action_item only: [:show] do
+    confirmation_text =
+      if operator&.all_observations&.any?
+        "The operator has the observations with the ids: #{operator.all_observations.pluck(:id).join(', ')}.\nIf you want to keep them associated to the operator, please archive the operator instead."
+      else
+        'Are you sure you want to delete the producer?'
+      end
+    link_to 'Delete Producer', admin_producer_path(operator), method: :delete, data: { confirm: confirmation_text }
+  end
+
+
   csv do
     column :id
     column :holding_id
@@ -64,7 +81,19 @@ ActiveAdmin.register Operator, as: 'Producer' do
       end
     end
 
-    actions
+    actions defaults: false do |operator|
+      item "View", admin_producer_path(operator)
+      text_node "<br/>".html_safe
+      item "Edit", edit_admin_producer_path(operator)
+      text_node "<br/>".html_safe
+      confirmation_text =
+          if operator&.all_observations&.any?
+            "The operator has the observations with the ids: #{operator.all_observations.pluck(:id).join(', ')}.\nIf you want to keep them associated to the operator, please archive the operator instead."
+          else
+            'Are you sure you want to delete the producer?'
+          end
+      link_to 'Delete', admin_producer_path(operator), method: :delete, data: { confirm: confirmation_text }
+    end
   end
 
   scope :all, default: true

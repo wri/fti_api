@@ -67,7 +67,10 @@ class Observation < ApplicationRecord
           nil => ['Created', 'Ready for QC'],
           'Created' => ['Ready for QC'],
           'Needs revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
-          'Ready for publication' => ['Published (no comments)']
+          'Ready for publication' => ['Published (no comments)'],
+          'Published (modified)' => ['Ready for QC'],
+          'Published (not modified)' => ['Ready for QC'],
+          'Published (no comments)' => ['Ready for QC']
       },
       admin: {
           'Ready for QC' => ['QC in progress'],
