@@ -7,7 +7,7 @@ ActiveAdmin.register User do
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,
                 :institution, :name, :nickname, :web_url, :is_active,
-                :observer_id, :operator_id, :holding_id,
+                :observer_id, :operator_id, :holding_id, :locale,
                 user_permission_attributes: [:user_role]
 
   filter :name, as: :select
@@ -71,6 +71,7 @@ ActiveAdmin.register User do
     column 'Role', :user_permission do |user|
       user.user_permission&.user_role
     end
+    column :locale
     column :name
     column :nickname
     column :email
@@ -93,6 +94,7 @@ ActiveAdmin.register User do
       f.input :operator
       f.input :holding
       f.input :country
+      f.input :locale, as: :select, collection: I18n.available_locales
       f.input :name
       f.input :nickname
       f.input :email
