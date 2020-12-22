@@ -147,6 +147,13 @@ TXT
   
   The observation with the id #{observation.id} is ready for QC.
   Please check it in the back office.
+
+  Info:
+  - Country: #{observation.country&.name}.
+  - Observer: #{observation.observer&.name}
+  - User 
+    -Name: #{observation.modified_user_id&.name}
+    -Email: #{observation.modified_user_id&.email}
   
   Best,
   OTP
