@@ -38,8 +38,8 @@ ActiveAdmin.register Observation do
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
-                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :responsible_admin_id,
-                observer_ids: [], relevant_operator_ids: [], government_ids: [],
+                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :actions_taken,
+                :responsible_admin_id, observer_ids: [], relevant_operator_ids: [], government_ids: [],
                 observation_documents_attributes: [:id, :name, :attachment],
                 translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
@@ -415,7 +415,6 @@ ActiveAdmin.register Observation do
 
   form do |f|
     operator   = object.operator_id.present? ? true : false
-    law        = object.law_id.present? ? true : false
     fmu        = object.fmu_id.present? ? true : false
     government = object.government_ids.present? ? true : false
 
@@ -436,8 +435,7 @@ ActiveAdmin.register Observation do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
-      f.input :law, input_html: { disabled: law },
-                    collection: object.subcategory.laws.map { |l| [l.written_infraction, l.id] } rescue ''
+      f.input :law, collection: object.subcategory.laws.map { |l| [l.written_infraction, l.id] } rescue ''
       f.input :severity, as: :select,
                          collection: object.subcategory.severities.map { |s| ["#{s.level} - #{s.details.first(80)}", s.id] } rescue ''
       f.input :is_physical_place, input_html: { disabled: true }
@@ -462,6 +460,7 @@ ActiveAdmin.register Observation do
       f.input :location_accuracy, as: :select
       f.input :lat
       f.input :lng
+      f.input :actions_taken
       f.input :admin_comment
       f.input :monitor_comment, input_html: { disabled: true }
       f.input :observation_report, as: :select
@@ -528,6 +527,7 @@ ActiveAdmin.register Observation do
       row :lat
       row :lng
       row :actions_taken
+      row :concern_opinion
       row :observation_report
       row :admin_comment
       row :monitor_comment

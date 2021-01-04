@@ -150,10 +150,10 @@ TXT
 
   Info:
   - Country: #{observation.country&.name}.
-  - Observer: #{observation.observer&.name}
+  - Observer: #{observation.modified_user&.observer&.name}
   - User 
-    -Name: #{observation.modified_user_id&.name}
-    -Email: #{observation.modified_user_id&.email}
+    -Name: #{observation.modified_user&.name}
+    -Email: #{observation.modified_user&.email}
   
   Best,
   OTP

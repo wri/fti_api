@@ -7,6 +7,7 @@ module V1
         success_roles: %i[admin]
       },
       delete: {
+        factory: :created_observation,
         success_roles: %i[admin],
         failure_roles: %i[user]
       },
