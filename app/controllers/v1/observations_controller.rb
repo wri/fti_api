@@ -16,7 +16,7 @@ module V1
                       status: :forbidden
       end
       if @observation.destroy
-        render status: :ok
+        render status: :no_content
       else
         render json: { error: "Couldn't delete the observation: #{u.errors&.messages}"}
       end

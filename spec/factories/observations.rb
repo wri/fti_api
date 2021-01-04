@@ -82,6 +82,10 @@ FactoryBot.define do
     lng { 12.2222 }
     lat { 12.3333 }
 
+    factory :created_observation, class: 'Observation' do
+      validation_status { 'Created' }
+    end
+
     after(:build) do |observation|
       observation.observers.each { |observer| observer.translation.name = observer.name  }
     end
