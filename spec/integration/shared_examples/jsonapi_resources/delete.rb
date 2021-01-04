@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.shared_examples 'jsonapi-resources__delete' do |options|
   context "Delete" do
-    let(:resource) { create(@singular.to_sym) }
+    let(:resource) { create(options[:factory] || @singular.to_sym) }
     let(:route) { "/#{@route_key}/#{resource.id}" }
 
     (options[:success_roles] || [:webuser]).each do |role|

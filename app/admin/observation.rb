@@ -415,7 +415,6 @@ ActiveAdmin.register Observation do
 
   form do |f|
     operator   = object.operator_id.present? ? true : false
-    law        = object.law_id.present? ? true : false
     fmu        = object.fmu_id.present? ? true : false
     government = object.government_ids.present? ? true : false
 
@@ -436,8 +435,7 @@ ActiveAdmin.register Observation do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
-      f.input :law, input_html: { disabled: law },
-                    collection: object.subcategory.laws.map { |l| [l.written_infraction, l.id] } rescue ''
+      f.input :law, collection: object.subcategory.laws.map { |l| [l.written_infraction, l.id] } rescue ''
       f.input :severity, as: :select,
                          collection: object.subcategory.severities.map { |s| ["#{s.level} - #{s.details.first(80)}", s.id] } rescue ''
       f.input :is_physical_place, input_html: { disabled: true }
