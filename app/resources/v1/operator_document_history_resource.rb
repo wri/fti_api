@@ -12,6 +12,10 @@ module V1
 
     attributes :operator_document_id
 
+    # The frontend is not sending the page size so we'll remove it here to make sure everything works.
+    # Since we are enforcing the operator-id to be sent, there's no risk that this request will overflow
+    paginator :none
+
     # The filter doesn't do anything. This is already implemented under the "records" method
     filter :date, apply: ->(records, value, _options) {
       records
