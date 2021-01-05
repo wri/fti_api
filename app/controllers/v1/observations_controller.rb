@@ -12,13 +12,13 @@ module V1
     # Only observations with the status "Needs revision" and "Created" can be destroyed
     def destroy
       unless ['Created', 'Needs revision'].include? @observation.validation_status
-        return render json: { error: 'You can only delete observations that are in state <Created> or <Needs revision>'},
+        return render json: { error: 'You can only delete observations that are in state <Created> or <Needs revision>' },
                       status: :forbidden
       end
       if @observation.destroy
         render status: :no_content
       else
-        render json: { error: "Couldn't delete the observation: #{u.errors&.messages}"}
+        render json: { error: "Couldn't delete the observation: #{u.errors&.messages}" }
       end
     end
 

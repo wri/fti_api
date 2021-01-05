@@ -40,8 +40,8 @@ ActiveAdmin.register Observation do
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
                 :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :actions_taken,
                 :responsible_admin_id, observer_ids: [], relevant_operator_ids: [], government_ids: [],
-                observation_documents_attributes: [:id, :name, :attachment],
-                translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
+                                       observation_documents_attributes: [:id, :name, :attachment],
+                                       translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
 
   member_action :ready_for_publication, method: :put do
@@ -435,7 +435,7 @@ ActiveAdmin.register Observation do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
-      f.input :law, collection: object.subcategory.laws.map { |l| [l.written_infraction, l.id] } rescue ''
+      f.input :law, collection: Law.by_country_subcategory(object).map { |l| [l.written_infraction, l.id] } rescue ''
       f.input :severity, as: :select,
                          collection: object.subcategory.severities.map { |s| ["#{s.level} - #{s.details.first(80)}", s.id] } rescue ''
       f.input :is_physical_place, input_html: { disabled: true }

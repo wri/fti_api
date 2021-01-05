@@ -27,4 +27,6 @@ class Law < ApplicationRecord
 
   validates :min_fine, numericality: { greater_than_or_equal_to: 0 }, if: :min_fine?
   validates :max_fine, numericality: { greater_than_or_equal_to: 0 }, if: :max_fine?
+
+  scope :by_country_subcategory, ->(observation) { where(country_id: observation.country_id, subcategory_id: observation.subcategory_id) }
 end
