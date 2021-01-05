@@ -20,8 +20,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     end
   end
 
-  permit_params :observer_type, :is_active, :logo, :address, :information_name, :information_email, :public_info,
-                :information_phone, :data_name, :data_email, :data_phone, :organization_type, :delete_logo,
+  permit_params :observer_type, :is_active, :logo, :organization_type, :delete_logo,
                 :responsible_user_id, translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
   csv do
@@ -120,13 +119,13 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     end
     f.inputs 'Public Info' do
       f.input :public_info, input_html: { disabled: true }
-      f.input :address
-      f.input :information_name
-      f.input :information_email
-      f.input :information_phone
-      f.input :data_name
-      f.input :data_email
-      f.input :data_phone
+      f.input :address, input_html: { disabled: true }
+      f.input :information_name, input_html: { disabled: true }
+      f.input :information_email, input_html: { disabled: true }
+      f.input :information_phone, input_html: { disabled: true }
+      f.input :data_name, input_html: { disabled: true }
+      f.input :data_email, input_html: { disabled: true }
+      f.input :data_phone, input_html: { disabled: true }
     end
     f.actions
   end
