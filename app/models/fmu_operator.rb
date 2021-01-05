@@ -103,17 +103,17 @@ WHERE id = #{x.fmu_id};"
 
   # Updates the list of documents for this FMU
   def update_documents_list
-    current_operator = self.fmu.operator.id rescue nil
-    return if self.operator&.fa_id.blank?
+    current_operator = self&.fmu&.operator
 
     OperatorDocumentFmu.transaction do
-      to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator)
+      to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator&.id)
       destroyed_count = to_destroy.count
       to_destroy.each { |x| x.destroy }
 
-      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator}"
+      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id}"
 
-      return unless current_operator
+
+      return if current_operator.blank? || current_operator.fa_id.blank?
 
       # Only the RODF for this fmu's forest_type should be created
       rodf_query = "country_id = #{fmu.country_id} "
@@ -121,12 +121,12 @@ WHERE id = #{x.fmu_id};"
 
       RequiredOperatorDocumentFmu.where(rodf_query).each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
-                                  operator_id: current_operator,
+                                  operator_id: current_operator.id,
                                   fmu_id: fmu_id).first_or_create do |odf|
           odf.update!(status: OperatorDocument.statuses[:doc_not_provided]) unless odf.persisted?
         end
       end
-      Rails.logger.info "Create the documents for operator #{current_operator} and FMU #{fmu_id}"
+      Rails.logger.info "Create the documents for operator #{current_operator.id} and FMU #{fmu_id}"
     end
   end
 
