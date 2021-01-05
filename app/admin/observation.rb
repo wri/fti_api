@@ -512,15 +512,14 @@ ActiveAdmin.register Observation do
           safe_join(list, " ")
         end
       end
-      if resource.relevant_operators.present?
-        row :relevant_operators do |o|
-          list = o.relevant_operators.each_with_object([]) do |operator, links|
-            links << link_to(operator.name, admin_producer_path(operator.id))
-          end
-
-          safe_join(list, " ")
+      row :relevant_operators do |o|
+        list = o.relevant_operators.each_with_object([]) do |operator, links|
+          links << link_to(operator.name, admin_producer_path(operator.id))
         end
+
+        safe_join(list, " ")
       end
+
       row :publication_date
       row :pv
       row :location_accuracy
