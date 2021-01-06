@@ -7,8 +7,6 @@ ActiveAdmin.register OperatorDocumentHistory do
   menu false
   config.order_clause
 
-  active_admin_paranoia
-
   sidebar 'Annexes', only: :show do
     attributes_table_for resource do
       ul do
@@ -118,6 +116,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :expire_date
     column :start_date
     column :created_at
+    column :deleted_at
     column :uploaded_by
     column :source
     column 'attachment' do |od|
