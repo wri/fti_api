@@ -26,12 +26,14 @@
 #  required_operator_document_id :integer
 #
 class OperatorDocumentHistory < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :operator, optional: false
   belongs_to :required_operator_document, -> { with_archived }, required: true
-  belongs_to :fmu, optional: true
+  belongs_to :fmu , -> { with_deleted },  optional: true
   belongs_to :user, optional: true
   belongs_to :document_file, optional: :true
-  belongs_to :operator_document
+  belongs_to :operator_document, -> { with_deleted }
   has_many :annex_documents, as: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 
