@@ -7,6 +7,8 @@ ActiveAdmin.register OperatorDocumentHistory do
   menu false
   config.order_clause
 
+  active_admin_paranoia
+
   sidebar 'Annexes', only: :show do
     attributes_table_for resource do
       ul do

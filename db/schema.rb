@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201222142314) do
+ActiveRecord::Schema.define(version: 20210106151820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -597,6 +597,8 @@ ActiveRecord::Schema.define(version: 20201222142314) do
     t.integer  "operator_id"
     t.integer  "user_id"
     t.integer  "required_operator_document_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_operator_document_histories_on_deleted_at", using: :btree
     t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id", using: :btree
     t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date", using: :btree
     t.index ["fmu_id"], name: "index_operator_document_histories_on_fmu_id", using: :btree
