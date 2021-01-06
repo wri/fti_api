@@ -74,7 +74,7 @@ class OperatorDocument < ApplicationRecord
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
-  NON_HISTORICAL_ATTRIBUTES = %w[id attachment current deleted_at].freeze
+  NON_HISTORICAL_ATTRIBUTES = %w[id attachment current].freeze
 
   def self.expire_documents
     documents_to_expire = OperatorDocument.to_expire(Date.today)
@@ -118,9 +118,10 @@ class OperatorDocument < ApplicationRecord
     # 2 - The Fmu was deleted
     # 3 - The Required Operator Document was deleted
     # 4 - The Operator is no longer active for this Fmu
-    return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
-    return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
-    return if fmu_id && (operator_id != fmu.operator&.id)
+
+    create_history and return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
+    create_history and return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
+    create_history and return if fmu_id && (operator_id != fmu.operator&.id)
 
     update status: OperatorDocument.statuses[:doc_not_provided],
            expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
