@@ -58,7 +58,10 @@ class OperatorDocumentHistory < ApplicationRecord
       where sq.row_number = 1) as operator_document_histories
     SQL
 
+    all_document_histories = from(query)
+    opt = Operator.find(operator_id)
+    rejected = all_document_histories.pluck(:operator_document_id).reject{ |x| opt.operator_documents.pluck(:id).include? x }
 
-    from(query)
+    all_document_histories.where.not(operator_document_id:rejected)
   end
 end
