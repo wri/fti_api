@@ -77,7 +77,7 @@ class ScoreOperatorDocument < ApplicationRecord
     presenter = OperatorPresenter.new(operator)
     self.summary_private = presenter.summary_private
     self.summary_public = presenter.summary_public
-    self.total = operator.operator_documents.count
+    self.total = operator.operator_documents.non_signature.count
   end
 
   protected
