@@ -16,6 +16,10 @@ module V1
     filter :date, apply: ->(records, value, _options) {
       records.where('date < ?', value).limit(1)
     }
+
+    def total
+      @model.operator.operator_documents.required.non_signature.count
+    end
     
     def self.default_sort
       [{ field: 'date', direction: :desc }, { field: 'id', direction: :desc }]
