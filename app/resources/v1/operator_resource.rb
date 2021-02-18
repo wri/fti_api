@@ -3,6 +3,7 @@
 module V1
   class OperatorResource < JSONAPI::Resource
     include CacheableByLocale
+    include MathHelper
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
@@ -83,7 +84,8 @@ module V1
     end
 
     def percentage_valid_documents_all
-      @model.score_operator_document&.all
+      filtered_data = @model.operator_documents.where.not(status: 'doc_not_required').non_signature
+      filtered_data.where(status: 'doc_valid').count.to_f / filtered_data.count.to_f
     end
 
     def percentage_valid_documents_fmu

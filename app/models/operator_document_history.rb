@@ -37,6 +37,8 @@ class OperatorDocumentHistory < ApplicationRecord
   has_many :annex_documents, as: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 
+  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
@@ -59,9 +61,21 @@ class OperatorDocumentHistory < ApplicationRecord
     SQL
 
     all_document_histories = from(query)
-    opt = Operator.find(operator_id)
-    rejected = all_document_histories.pluck(:operator_document_id).reject{ |x| opt.operator_documents.pluck(:id).include? x }
 
-    all_document_histories.where.not(operator_document_id:rejected)
+    OperatorDocumentHistory.clean_document_histories(operator_id, all_document_histories)
+  end
+
+  def self.clean_document_histories(operator_id, all_document_histories)
+    opt = Operator.find(operator_id)
+    opt_docs = opt.operator_documents
+
+    filtered_operator_documents = opt_docs.where.not(status: 'doc_not_required').non_signature
+    non_existing_documents = all_document_histories.pluck(:operator_document_id).reject{ |x| opt_docs.pluck(:id).include? x }
+
+    all_document_histories_clean = all_document_histories.non_signature.where.not(operator_document_id:non_existing_documents)
+
+    discord_documents = all_document_histories_clean.pluck(:operator_document_id).reject{ |x| filtered_operator_documents.pluck(:id).include? x }
+
+    all_document_histories_clean.where.not(operator_document_id:discord_documents)
   end
 end
