@@ -69,7 +69,7 @@ class OperatorDocumentHistory < ApplicationRecord
     opt = Operator.find(operator_id)
     opt_docs = opt.operator_documents
     non_existing_documents = all_document_histories.pluck(:operator_document_id).reject{ |x| opt_docs.pluck(:id).include? x }
-    all_document_histories_clean = all_document_histories.where.not(operator_document_id:non_existing_documents)
+    all_document_histories_clean = all_document_histories.non_signature.where.not(operator_document_id:non_existing_documents)
 
     # filtered_operator_documents = opt_docs.required.non_signature
     # discord_documents = all_document_histories_clean.pluck(:operator_document_id).reject{ |x| filtered_operator_documents.pluck(:id).include? x }
