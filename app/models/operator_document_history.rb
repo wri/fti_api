@@ -38,6 +38,7 @@ class OperatorDocumentHistory < ApplicationRecord
   has_many :operator_document_annexes, through: :annex_documents
 
   scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+  scope :valid, -> { joins(:operator_document).where(operator_documents: { status: OperatorDocument.statuses[:doc_valid] }) } # valid doc
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
@@ -55,7 +56,7 @@ class OperatorDocumentHistory < ApplicationRecord
     db_date = (date.to_date + 1.day).to_s(:db)
 
     # TODO check why for Pete's sake do we have OperatorDocumentHistory with operator_document_id nil?!?!?!
-    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date)
+    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
     all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
 
     # Removes older OperatorDocumentHistory for the same operator_document_id because we only want the latest one
