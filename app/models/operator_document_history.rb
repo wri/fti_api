@@ -43,7 +43,8 @@ class OperatorDocumentHistory < ApplicationRecord
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
-  # Returns the operator documents for an operator at a point in time
+  # Returns the collection of OperatorDocumentHistory for a given operator at a point in time
+  #
   # @param String operator_id The operator id
   # @param String date the date at which to fetch the state
   def self.from_operator_at_date(operator_id, date)
@@ -52,28 +53,24 @@ class OperatorDocumentHistory < ApplicationRecord
     # the datetime will will always be bigger. For example '2020-01-01 02:00:00' > '2020-01-01'
     # We could use a sql function to extract the day, but this approach is more performant
     db_date = (date.to_date + 1.day).to_s(:db)
-    query = <<~SQL
-      (select * from
-      (select row_number() over (partition by required_operator_document_id, fmu_id order by updated_at desc), *
-      from operator_document_histories
-      where operator_id = #{operator_id} AND updated_at <= '#{db_date}') as sq
-      where sq.row_number = 1) as operator_document_histories
-    SQL
 
-    all_document_histories = from(query)
+    # TODO check why for Pete's sake do we have OperatorDocumentHistory with operator_document_id nil?!?!?!
+    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date)
+    all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
 
-    OperatorDocumentHistory.clean_document_histories(operator_id, all_document_histories)
-  end
+    # Removes older OperatorDocumentHistory for the same operator_document_id because we only want the latest one
+    all_operator_document_ids.each do |operator_document_id|
+      all_for_this_doc = all_document_histories.where(operator_document_id: operator_document_id).order({updated_at: :desc})
+      if all_for_this_doc.count > 1 then all_document_histories.delete(all_for_this_doc[1..-1]) end
+    end
 
-  def self.clean_document_histories(operator_id, all_document_histories)
-    opt = Operator.find(operator_id)
-    opt_docs = opt.operator_documents
-    non_existing_documents = all_document_histories.pluck(:operator_document_id).reject{ |x| opt_docs.pluck(:id).include? x }
-    all_document_histories_clean = all_document_histories.non_signature.where.not(operator_document_id:non_existing_documents)
+    # Removes OperatorDocumentHistory where operator_document_id has no record in operator_documents because bugs happens
+    all_document_histories.each do |odh|
+      unless OperatorDocument.exists?(odh.operator_document_id)
+        all_document_histories.delete(odh)
+      end
+    end
 
-    # filtered_operator_documents = opt_docs.required.non_signature
-    # discord_documents = all_document_histories_clean.pluck(:operator_document_id).reject{ |x| filtered_operator_documents.pluck(:id).include? x }
-
-    # all_document_histories_clean.where.not(operator_document_id:discord_documents)
+    all_document_histories
   end
 end

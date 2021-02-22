@@ -84,8 +84,7 @@ module V1
     end
 
     def percentage_valid_documents_all
-      filtered_data = @model.operator_documents.where.not(status: 'doc_not_required').non_signature
-      filtered_data.where(status: 'doc_valid').count.to_f / filtered_data.count.to_f
+      @model.score_operator_document&.all
     end
 
     def percentage_valid_documents_fmu
