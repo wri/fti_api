@@ -8,7 +8,7 @@ module V1
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
                :percentage_valid_documents_all, :obs_per_visit, :score,
-               :website, :address, :fa_id, :country_doc_rank,
+               :website, :address, :fa_id, :country_doc_rank, :country_operators,
                :delete_logo, :email
 
     has_one :country
@@ -97,6 +97,10 @@ module V1
 
     def country_doc_rank
       @model.ranking_operator_document&.position
+    end
+
+    def country_operators
+      @model.country&.operators.count
     end
 
     def obs_per_visit
