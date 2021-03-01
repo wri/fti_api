@@ -42,7 +42,6 @@ class ScoreOperatorDocument < ApplicationRecord
   # @param [Operator] operator The operator
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator)
-    puts "build"
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
     query_builder = operator.approved ? ValidDocumentsQuery : AvailableValidDocumentsQuery
     sod.calculate_scores(query_builder)
@@ -55,7 +54,6 @@ class ScoreOperatorDocument < ApplicationRecord
   # If the dates are the same, it just updates the values
   # @param [Operator] operator The operator
   def replace(operator)
-    puts "replace"
     sod = ScoreOperatorDocument.build(operator)
     return if self == sod && persisted?
     return update_values(sod) if date == sod.date && persisted?
@@ -97,7 +95,6 @@ class ScoreOperatorDocument < ApplicationRecord
   # Adds a new SOD and makes marks the old one as not current
   # @param [ScoreOperatorDocument] sod The new sod
   def add_new(sod)
-    puts "add_new"
     update!(current: false) if persisted?
     sod.save!
   end
