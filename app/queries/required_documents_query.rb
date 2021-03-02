@@ -2,6 +2,6 @@
 
 class RequiredDocumentsQuery
   def call(relation)
-    relation.required.ns
+    relation.required.non_signature
   end
 end

@@ -57,15 +57,15 @@ class OperatorDocument < ApplicationRecord
 
   after_destroy :regenerate
 
-  scope :fmu_type,     -> { where(type: 'OperatorDocumentFmu') }
-  scope :country_type, -> { where(type: 'OperatorDocumentCountry') }
-  scope :by_country,   ->(country_id) { joins(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
-  scope :valid,        -> { where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required,     -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
-  scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
-  scope :available,    -> { where(public: true) }
-  scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
-  scope :to_expire, ->(date) {
+  scope :fmu_type,      -> { where(type: 'OperatorDocumentFmu') }
+  scope :country_type,  -> { where(type: 'OperatorDocumentCountry') }
+  scope :by_country,    ->(country_id) { joins(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
+  scope :valid,         -> { where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required,      -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :from_user,     ->(operator_id) { where(operator_id: operator_id) }
+  scope :available,     -> { where(public: true) }
+  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+  scope :to_expire,     ->(date) {
     joins(:required_operator_document)
               .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") 
   }
