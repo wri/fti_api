@@ -18,6 +18,9 @@ module OperatorDocumentable
     has_many :operator_document_annexes, foreign_key_on: :related
 
     filters :type, :status, :operator_id
+    filter :country_ids, apply: ->(records, value, _options) {
+      records_by_country = records.by_country(value.map(&:to_i))
+    }
 
     def custom_links(_)
       { self: nil }
