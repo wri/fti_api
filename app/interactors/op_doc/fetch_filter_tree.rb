@@ -32,7 +32,7 @@ module OpDoc
       context.tree = {
           type: TYPES,
           status: STATUSES,
-          country_ids: country_ids,
+          country_id: country_ids,
           operator_id: operator_ids,
           fmu_id: fmu_ids,
           required_operator_document_id: required_operator_document_ids,
