@@ -436,6 +436,7 @@ fr:
     high: 'Haute'
     company: 'Operateur'
     forest_atlas: 'Forest Atlas'
+    others: 'Autres'
 
   wicked:
     types: 'observation-type'
