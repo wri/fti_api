@@ -11,7 +11,7 @@ module OpDoc
     private
 
     TYPES = [
-      { id: 'OperatorDocumentCountry', name: I18n.t('operator_documents.filters.country') },
+      { id: 'OperatorDocumentCountry', name: I18n.t('operator_documents.filters.producer') },
       { id: 'OperatorDocumentFmu', name: I18n.t('operator_documents.filters.fmu') }
     ].freeze
 
