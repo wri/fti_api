@@ -24,6 +24,12 @@ module OperatorDocumentable
     filter :source, apply: ->(records, value, _options) {
       records_by_source = records.by_source(value.map(&:to_i))
     }
+    filter :legal_categories, apply: ->(records, value, _options) {
+      records_by_required_operator_document_group_id = records.by_required_operator_document_group(value.map(&:to_i))
+    }
+    filter :forest_types, apply: ->(records, value, _options) {
+      records_by_forest_types = records.fmu_type.by_forest_types(value.map(&:to_i))
+    }
 
     def custom_links(_)
       { self: nil }
