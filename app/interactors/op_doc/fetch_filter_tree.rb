@@ -30,7 +30,7 @@ module OpDoc
 
     def tree
       context.tree = {
-          type: TYPES,
+          forest_types: forest_types,
           status: STATUSES,
           country_ids: country_ids,
           operator_id: operator_ids,
@@ -38,6 +38,10 @@ module OpDoc
           required_operator_document_id: required_operator_document_ids,
           source: SOURCES
       }
+    end
+
+    def forest_types
+      ConstForestTypes::FOREST_TYPES.map{ |key, value| { key: key, id: value[:index], name: value[:label] } }
     end
 
     def fmu_ids
