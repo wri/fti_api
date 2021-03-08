@@ -36,12 +36,21 @@ module OpDoc
           operator_id: operator_ids,
           fmu_id: fmu_ids,
           required_operator_document_id: required_operator_document_ids,
-          source: SOURCES
+          source: SOURCES,
+          legal_categories: legal_categories
       }
     end
 
+    def legal_categories
+      RequiredOperatorDocumentGroup.with_translations.map do |x|
+        { id: x.id, name: x.name }
+      end.sort_by { |x| x[:name] }
+    end
+
     def forest_types
-      ConstForestTypes::FOREST_TYPES.map{ |key, value| { key: key, id: value[:index], name: value[:label] } }
+      ConstForestTypes::FOREST_TYPES.map do |key, value| 
+        { key: key, id: value[:index], name: value[:label] }
+      end.sort_by { |x| x[:name] }
     end
 
     def fmu_ids
