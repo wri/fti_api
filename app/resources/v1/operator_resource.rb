@@ -29,6 +29,10 @@ module V1
 
     before_create :set_active
 
+    def type
+      @model.type
+    end
+    
     def set_active
       @model.is_active = false
     end

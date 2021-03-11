@@ -57,21 +57,19 @@ class OperatorDocument < ApplicationRecord
 
   after_destroy :regenerate
 
-  scope :fmu_type,      -> { where(type: 'OperatorDocumentFmu') }
-  scope :country_type,  -> { where(type: 'OperatorDocumentCountry') }
+  scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmu') }
+  scope :country_type,                           -> { where(type: 'OperatorDocumentCountry') }
   scope :by_required_operator_document_group,    ->(required_operator_document_group_id) { joins(:required_operator_document).where(required_operator_documents: { required_operator_document_group_id: required_operator_document_group_id }) }
-  scope :by_forest_types,    ->(forest_type_id) { joins(:fmu).where(fmus: { forest_type: forest_type_id }) }
-  scope :by_country,    ->(country_id) { joins(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
-  scope :valid,         -> { where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required,      -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
-  scope :from_user,     ->(operator_id) { where(operator_id: operator_id) }
-  scope :by_source,     ->(source_id) { where(source: source_id) }
-  scope :available,     -> { where(public: true) }
-  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
-  scope :to_expire,     ->(date) {
-    joins(:required_operator_document)
-              .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") 
-  }
+  scope :from_active_operators,                  -> { joins(:operator).where(operators: { is_active: true }) }
+  scope :by_forest_types,                        ->(forest_type_id) { joins(:fmu).where(fmus: { forest_type: forest_type_id }) }
+  scope :by_country,                             ->(country_id) { joins(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
+  scope :valid,                                  -> { where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required,                               -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :from_user,                              ->(operator_id) { where(operator_id: operator_id) }
+  scope :by_source,                              ->(source_id) { where(source: source_id) }
+  scope :available,                              -> { where(public: true) }
+  scope :non_signature,                          -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+  scope :to_expire,                              ->(date) { joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
