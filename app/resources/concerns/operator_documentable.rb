@@ -17,19 +17,7 @@ module OperatorDocumentable
     has_one :required_operator_document
     has_many :operator_document_annexes, foreign_key_on: :related
 
-    filters :type, :status, :operator_id, :fmu_id, :required_operator_document_id
-    filter :country_ids, apply: ->(records, value, _options) {
-      records_by_country = records.by_country(value.map(&:to_i))
-    }
-    filter :source, apply: ->(records, value, _options) {
-      records_by_source = records.by_source(value.map(&:to_i))
-    }
-    filter :legal_categories, apply: ->(records, value, _options) {
-      records_by_required_operator_document_group_id = records.by_required_operator_document_group(value.map(&:to_i))
-    }
-    filter :forest_types, apply: ->(records, value, _options) {
-      records_by_forest_types = records.fmu_type.by_forest_types(value.map(&:to_i))
-    }
+    filters :type, :status, :operator_id, :fmu_id, :required_operator_document_id, :country_ids, :source, :legal_categories, :forest_types
 
     def custom_links(_)
       { self: nil }

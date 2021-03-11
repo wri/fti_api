@@ -57,12 +57,12 @@ class OperatorDocument < ApplicationRecord
 
   after_destroy :regenerate
 
+  scope :by_forest_types,                        ->(forest_type_id) { includes(:fmu).where(fmus: { forest_type: forest_type_id }) }
+  scope :by_country,                             ->(country_id) { includes(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
+  scope :by_required_operator_document_group,    ->(required_operator_document_group_id) { includes(:required_operator_document).where(required_operator_documents: { required_operator_document_group_id: required_operator_document_group_id }) }
   scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmu') }
   scope :country_type,                           -> { where(type: 'OperatorDocumentCountry') }
-  scope :by_required_operator_document_group,    ->(required_operator_document_group_id) { joins(:required_operator_document).where(required_operator_documents: { required_operator_document_group_id: required_operator_document_group_id }) }
   scope :from_active_operators,                  -> { joins(:operator).where(operators: { is_active: true }) }
-  scope :by_forest_types,                        ->(forest_type_id) { joins(:fmu).where(fmus: { forest_type: forest_type_id }) }
-  scope :by_country,                             ->(country_id) { joins(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
   scope :valid,                                  -> { where(status: OperatorDocument.statuses[:doc_valid]) }
   scope :required,                               -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
   scope :from_user,                              ->(operator_id) { where(operator_id: operator_id) }

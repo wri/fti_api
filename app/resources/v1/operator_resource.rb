@@ -26,6 +26,7 @@ module V1
     has_many :operator_document_fmu_histories
 
     filters :country, :is_active, :name, :operator_type, :fa
+    filters :is_active, :name, :operator_type, :fa
 
     before_create :set_active
 

@@ -54,5 +54,26 @@ module V1
     def custom_links(_)
       { self: nil }
     end
+
+    def self.apply_filter(records, filter, value, options)
+      custom_filters = [:country_ids, :source, :legal_categories, :forest_types]
+      if custom_filters.include?(filter)
+        case filter
+        when :country_ids
+          records.by_country(value.map(&:to_i))
+        when :source
+          records.by_source(value.map(&:to_i))
+        when :legal_categories
+          records.by_required_operator_document_group(value.map(&:to_i))
+        when :forest_types
+          records.fmu_type.by_forest_types(value.map(&:to_i))
+        else
+          super(records, filter, value)
+        end
+      else
+        super(records, filter, value)
+      end
+    end
+
   end
 end
