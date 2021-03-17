@@ -70,7 +70,7 @@ class OperatorDocument < ApplicationRecord
   scope :available,                              -> { where(public: true) }
   scope :non_signature,                          -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :to_expire,                              ->(date) { joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
-  scope :provided,                               -> { where.not(status: OperatorDocument.statuses[:doc_not_provided])}
+    
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }

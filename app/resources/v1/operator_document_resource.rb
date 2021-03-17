@@ -48,7 +48,7 @@ module V1
     end
 
     def self.records(options = {})
-      OperatorDocument.provided.from_active_operators
+      OperatorDocument.from_active_operators
     end
 
     def custom_links(_)
