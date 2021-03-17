@@ -24,7 +24,6 @@ module JSONAPI
   class ResourceSerializer
 
     def link_object_to_many(source, relationship, include_linkage)
-      #byebug
       include_linkage = include_linkage | relationship.always_include_linkage_data
       link_object_hash = {}
       # MONKEY_PATCH to show the links only if there's linkage data
@@ -36,7 +35,6 @@ module JSONAPI
     end
 
     def link_object_to_one(source, relationship, include_linkage)
-      #byebug
       include_linkage = include_linkage | @always_include_to_one_linkage_data | relationship.always_include_linkage_data
       link_object_hash = {}
       # MONKEY PATCH to show the links only if there's linkage data
@@ -46,132 +44,6 @@ module JSONAPI
       link_object_hash[:data] = to_one_linkage(source, relationship) if include_linkage
       link_object_hash
     end
-
-    # def add_resource(source, include_directives, primary = false)
-    #   #byebug
-    #   type = source.is_a?(JSONAPI::CachedResourceFragment) ? source.type : source.class._type
-    #   id = source.id
-
-    #   @included_objects[type] ||= {}
-    #   existing = @included_objects[type][id]
-
-    #   if existing.nil?
-    #     obj_hash = object_hash(source, include_directives)
-    #     #aqui peta!!!
-    #     @included_objects[type][id] = {
-    #         primary: primary,
-    #         object_hash: obj_hash,
-    #         includes: Set.new(include_directives[:include_related].keys)
-    #     }
-    #   else
-    #     include_related = Set.new(include_directives[:include_related].keys)
-    #     unless existing[:includes].superset?(include_related)
-    #       obj_hash = object_hash(source, include_directives)
-    #       @included_objects[type][id][:object_hash].deep_merge!(obj_hash)
-    #       @included_objects[type][id][:includes].add(include_related)
-    #       @included_objects[type][id][:primary] = existing[:primary] | primary
-    #     end
-    #   end
-    # end
-
-    # def object_hash(source, include_directives = {})
-    #   #byebug
-    #   obj_hash = {}
-    #   #return obj_hash if source[1].nil?
-
-    #   if source.is_a?(JSONAPI::CachedResourceFragment)
-    #     obj_hash['id'] = source.id
-    #     obj_hash['type'] = source.type
-
-    #     obj_hash['links'] = source.links_json if source.links_json
-    #     obj_hash['attributes'] = source.attributes_json if source.attributes_json
-
-    #     relationships = cached_relationships_hash(source, include_directives)
-    #     obj_hash['relationships'] = relationships unless relationships.empty?
-
-    #     obj_hash['meta'] = source.meta_json if source.meta_json
-    #   else
-    #     fetchable_fields = Set.new(source.fetchable_fields)
-
-    #     # TODO Should this maybe be using @id_formatter instead, for consistency?
-    #     id_format = source.class._attribute_options(:id)[:format]
-    #     # protect against ids that were declared as an attribute, but did not have a format set.
-    #     id_format = 'id' if id_format == :default
-    #     obj_hash['id'] = format_value(source.id, id_format)
-
-    #     obj_hash['type'] = format_key(source.class._type.to_s)
-
-    #     links = links_hash(source)
-    #     obj_hash['links'] = links unless links.empty?
-
-    #     attributes = attributes_hash(source, fetchable_fields)
-    #     obj_hash['attributes'] = attributes unless attributes.empty?
-
-    #     relationships = relationships_hash(source, fetchable_fields, include_directives)
-    #     obj_hash['relationships'] = relationships unless relationships.nil? || relationships.empty?
-
-    #     meta = meta_hash(source)
-    #     obj_hash['meta'] = meta unless meta.empty?
-    #   end
-
-    #   obj_hash
-    # end
-
-    # def cached_relationships_hash(source, include_directives)
-    #   h = source.relationships || {}
-    #   return h unless include_directives.has_key?(:include_related)
-
-    #   relationships = source.resource_klass._relationships.select do |k,v|
-    #     source.fetchable_fields.include?(k)
-    #   end
-
-    #   real_res = nil
-    #   relationships.each do |rel_name, relationship|
-    #     key = @key_formatter.format(rel_name)
-    #     to_many = relationship.is_a? JSONAPI::Relationship::ToMany
-
-    #     ia = include_directives[:include_related][rel_name]
-    #     if ia
-    #       if h.has_key?(key)
-    #         h[key][:data] = to_many ? [] : nil
-    #       end
-    #       #byebug
-    #       fragments = source.preloaded_fragments[key]
-
-          
-    #       if fragments.nil?
-    #         # The resources we want were not preloaded, we'll have to bypass the cache.
-    #         # This happens when including through belongs_to polymorphic relationships
-    #         if real_res.nil?
-    #           real_res = source.to_real_resource
-    #         end
-    #         relation_resources = [real_res.public_send(rel_name)].flatten(1).compact
-    #         fragments = relation_resources.map{|r| [r.id, r]}.to_h
-    #       end
-    #       fragments.each do |id, f|
-    #         next if f.nil?
-    #         add_resource(f, ia)
-
-    #         if h.has_key?(key)
-    #           # The hash already has everything we need except the :data field
-    #           data = {
-    #             type: format_key(f.is_a?(Resource) ? f.class._type : f.type),
-    #             id: @id_formatter.format(id)
-    #           }
-
-    #           if to_many
-    #             h[key][:data] << data
-    #           else
-    #             h[key][:data] = data
-    #           end
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   return h
-    # end
-
   end
 
   class Resource
