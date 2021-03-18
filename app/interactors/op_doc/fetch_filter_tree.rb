@@ -61,7 +61,7 @@ module OpDoc
 
     def required_operator_document_ids
       RequiredOperatorDocument.with_translations.map do |x|
-        { id: x.id, name: x.name }
+        { id: x.id, name: beautify_name(x.name) }
       end.sort_by { |x| x[:name] }
     end
 
@@ -81,5 +81,20 @@ module OpDoc
         }
       end.sort_by { |x| x[:name] }
     end
+
+    def beautify_name(name)
+      name.split(" ").each_with_index.map do |word, index|
+        if index == 0
+          word.capitalize
+        else
+          if word == word.upcase
+            word
+          else
+            word.downcase
+          end
+        end
+      end.join(" ")
+    end
+
   end
 end
