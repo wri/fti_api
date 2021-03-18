@@ -26,14 +26,26 @@ module V1
                 expect(parsed_body[:included].any?).to eql(true)
 
             end
-            it 'returns only provided OperatorDocuments' do
-                operator_document_not_provided = FactoryBot.create(:operator_document)
-                operator_document_not_provided.status = OperatorDocument.statuses[:doc_not_provided]
-                operator_document_not_provided.save!
+            it 'returns OperatorDocuments status when admin' do
+                operator_document_invalid = operator_documents.first
+                operator_document_invalid.status = OperatorDocument.statuses[:doc_invalid]
+                operator_document_invalid.save!
+
                 get(operator_documents_url_with_included, headers: admin_headers)
 
                 expect(parsed_data.count).to eql(operator_documents.count)
-                expect(parsed_data.find { |item| item[:id] == operator_document_not_provided.id }).to be_nil
+                expect(parsed_data.find { |item| item[:id] == operator_document_invalid.id.to_s and item[:attributes][:status] == 'doc_invalid' }.any?).to be true
+            end
+
+            it 'hides OperatorDocuments status when not admin' do
+                operator_document_invalid = operator_documents.first
+                operator_document_invalid.status = OperatorDocument.statuses[:doc_invalid]
+                operator_document_invalid.save!
+
+                get(operator_documents_url_with_included, headers: user_headers)
+
+                expect(parsed_data.count).to eql(operator_documents.count)
+                expect(parsed_data.find { |item| item[:id] == operator_document_invalid.id.to_s and item[:attributes][:status] == 'doc_not_provided' }.any?).to be true
             end
         end
     end
