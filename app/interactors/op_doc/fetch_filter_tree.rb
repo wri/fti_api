@@ -44,7 +44,9 @@ module OpDoc
     def legal_categories
       RequiredOperatorDocumentGroup.with_translations.map do |x|
         unless x.name == "Publication Authorization"
-          { id: x.id, name: x.name }
+          { id: x.id, name: x.name,
+          required_operator_document_ids: x.required_operator_documents.pluck(:id)
+         }
         end
       end.compact.sort_by { |x| x[:name] }
     end
