@@ -60,6 +60,7 @@ class OperatorDocument < ApplicationRecord
   scope :by_forest_types,                        ->(forest_type_id) { includes(:fmu).where(fmus: { forest_type: forest_type_id }) }
   scope :by_country,                             ->(country_id) { includes(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
   scope :by_required_operator_document_group,    ->(required_operator_document_group_id) { includes(:required_operator_document).where(required_operator_documents: { required_operator_document_group_id: required_operator_document_group_id }) }
+  scope :exclude_by_required_operator_document_group,    ->(required_operator_document_group_id) { includes(:required_operator_document).where.not(required_operator_documents: { required_operator_document_group_id: required_operator_document_group_id }) }
   scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmu') }
   scope :country_type,                           -> { where(type: 'OperatorDocumentCountry') }
   scope :from_active_operators,                  -> { joins(:operator).where(operators: { is_active: true }) }

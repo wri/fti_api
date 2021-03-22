@@ -48,7 +48,8 @@ module V1
     end
 
     def self.records(options = {})
-      OperatorDocument.from_active_operators
+      group_id_to_exclude = RequiredOperatorDocumentGroup.where(name: "Publication Authorization").first.id
+      OperatorDocument.exclude_by_required_operator_document_group(group_id_to_exclude).from_active_operators
     end
 
     def custom_links(_)

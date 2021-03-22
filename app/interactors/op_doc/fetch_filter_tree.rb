@@ -43,8 +43,10 @@ module OpDoc
 
     def legal_categories
       RequiredOperatorDocumentGroup.with_translations.map do |x|
-        { id: x.id, name: x.name }
-      end.sort_by { |x| x[:name] }
+        unless x.name == "Publication Authorization"
+          { id: x.id, name: x.name }
+        end
+      end.compact.sort_by { |x| x[:name] }
     end
 
     def forest_types
