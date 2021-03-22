@@ -77,6 +77,7 @@ module OpDoc
             id: x.id, iso: x.iso, name: x.name,
             operators: x.operators.pluck(:id).uniq,
             fmus: x.fmus.pluck(:id).uniq,
+            forest_types: forest_types_by_country(x),
             required_operator_document_ids: x.required_operator_documents.pluck(:id).uniq
         }
       end.sort_by { |x| x[:name] }
@@ -96,5 +97,13 @@ module OpDoc
       end.join(" ")
     end
 
+    def forest_types_by_country(country)
+      country_forest_types = country.forest_types
+      ConstForestTypes::FOREST_TYPES.map do |key, value|
+        if  country_forest_types.include?(key.to_s)
+          { key: key, id: value[:index], name: value[:label] }
+        end
+      end.compact
+    end
   end
 end
