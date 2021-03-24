@@ -42,8 +42,9 @@ module OpDoc
     end
 
     def legal_categories
+      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first.id
       RequiredOperatorDocumentGroup.with_translations.map do |x|
-        unless x.name == "Publication Authorization"
+        unless x.id == group_id_to_exclude
           { id: x.id, name: x.name,
           required_operator_document_ids: x.required_operator_documents.pluck(:id)
          }
