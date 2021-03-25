@@ -106,7 +106,7 @@ module V1
 
     def country_operators
       country_operators = @model.country&.operators
-      country_operators.count
+      country_operators&.count
     end
 
     def obs_per_visit
