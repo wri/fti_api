@@ -65,8 +65,11 @@ module OpDoc
     end
 
     def required_operator_document_ids
+      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first.id
       RequiredOperatorDocument.with_translations.map do |x|
-        { id: x.id, name: beautify_name(x.name) }
+        unless x.required_operator_document_group_id == group_id_to_exclude
+          { id: x.id, name: beautify_name(x.name) }
+        end
       end.sort_by { |x| x[:name] }
     end
 
