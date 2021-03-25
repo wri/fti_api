@@ -70,7 +70,7 @@ module OpDoc
         unless x.required_operator_document_group_id == group_id_to_exclude
           { id: x.id, name: beautify_name(x.name) }
         end
-      end.sort_by { |x| x[:name] }
+      end.compact.sort_by { |x| x[:name] }
     end
 
     def operator_ids
