@@ -61,7 +61,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
                 text_node content_tag 'a', 'Producer Documents', class: '-with-children'
                 ul do
                   li { link_to 'Producer Documents',     admin_operator_documents_path }
-                  li { link_to 'Old Producer Documents', admin_operator_document_histories_path }
+                  li { link_to 'Producer Document Histories', admin_operator_document_histories_path }
                 end
               end
               li { link_to 'Annexes',              admin_operator_document_annexes_path }
