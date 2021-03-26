@@ -74,7 +74,7 @@ module OpDoc
     end
 
     def operator_ids
-      Operator.filter_by_country_ids(country_ids.pluck(:id)).active.with_translations.includes(:fmu_operators).map do |x|
+      Operator.filter_by_country_ids(country_ids.pluck(:id)).active.fa_operator.with_translations.includes(:fmu_operators).map do |x|
         { id: x.id, name: x.name, fmus: x.fmu_operators.pluck(:fmu_id) }
       end.sort_by { |x| x[:name] }
     end
