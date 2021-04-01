@@ -1,0 +1,4 @@
+:logfile: ./log/sidekiq.log
+:queues:
+  - expiration_emails
+  - scheduled_tasks

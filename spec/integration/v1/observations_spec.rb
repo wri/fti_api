@@ -158,45 +158,68 @@ module V1
         end
       end
 
-      describe 'User can upload attachment to observation' do
-        let(:photo_data) {
-          "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'image.jpg')))}"
-        }
+      describe 'For all users' do
+        describe 'Modify status' do
+          it 'Status goes from Created to Ready for QC' do
+            patch("/observations/#{observation.id}?app=observations-tool",
+                  params: jsonapi_params('observations', observation.id, { 'validation-status': 'Ready for QC'}),
+                  headers: admin_headers)
+            expect(status).to eq(200)
+            expect(parsed_body[:data][:attributes][:'validation-status']).to eq('Ready for QC')
+          end
 
-        let(:document_data) {
-          "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')))}"
-        }
+          it 'Status cannot go to Needs revision' do
+            patch("/observations/#{observation.id}?app=observations-tool",
+                  params: jsonapi_params('observations', observation.id, { 'validation-status': 'Needs revision'}),
+                  headers: admin_headers)
 
-        xit 'Upload image and returns success object when the observation was successfully created' do
-          post('/observations',
-               params: jsonapi_params('observations', nil, {
-                   details: "Observation with photo",
-                 'country-id': country.id,
-                 'observation-type': 'operator',
-                 'publication-date': DateTime.now,
-                 'photos-attributes': [{ name: 'observation photo', attachment: "#{photo_data}" }]
-                }),
-                headers: ngo_headers)
-
-          expect(Observation.find_by(details: 'Observation with photo').photos.first.attachment.present?).to be(true)
-          expect(status).to eq(201)
+            expect(parsed_body[:errors].first[:title]).to eq("Invalid validation change for monitor. Can't move from 'Created'' to ''Needs revision''")
+            expect(status).to eq(422)
+          end
         end
 
-        xit 'Upload document and returns success object when the observation was successfully created' do
-          post('/observations',
-               params: jsonapi_params('observations', nil, {
-                   details: "Observation with document",
-                 'country-id': country.id,
-                 'observation-type': 'operator',
-                 'publication-date': DateTime.now,
-                 'documents-attributes': [{ name: 'observation doc', attachment: "#{document_data}", 'document-type': 'Doumentation' }]
-                }),
-                headers: ngo_headers)
+        describe 'User can upload attachment to observation' do
+          let(:photo_data) {
+            "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'image.jpg')))}"
+          }
 
-          expect(Observation.find_by(details: 'Observation with document').documents.first.attachment.present?).to be(true)
-          expect(status).to eq(201)
+          let(:document_data) {
+            "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')))}"
+          }
+
+          xit 'Upload image and returns success object when the observation was successfully created' do
+            post('/observations',
+                 params: jsonapi_params('observations', nil, {
+                     details: "Observation with photo",
+                     'country-id': country.id,
+                     'observation-type': 'operator',
+                     'publication-date': DateTime.now,
+                     'photos-attributes': [{ name: 'observation photo', attachment: "#{photo_data}" }]
+                 }),
+                 headers: ngo_headers)
+
+            expect(Observation.find_by(details: 'Observation with photo').photos.first.attachment.present?).to be(true)
+            expect(status).to eq(201)
+          end
+
+          xit 'Upload document and returns success object when the observation was successfully created' do
+            post('/observations',
+                 params: jsonapi_params('observations', nil, {
+                     details: "Observation with document",
+                     'country-id': country.id,
+                     'observation-type': 'operator',
+                     'publication-date': DateTime.now,
+                     'documents-attributes': [{ name: 'observation doc', attachment: "#{document_data}", 'document-type': 'Doumentation' }]
+                 }),
+                 headers: ngo_headers)
+
+            expect(Observation.find_by(details: 'Observation with document').documents.first.attachment.present?).to be(true)
+            expect(status).to eq(201)
+          end
         end
       end
+
+
     end
   end
 end

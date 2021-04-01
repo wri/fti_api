@@ -12,17 +12,16 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
-#  current                       :boolean
 #  deleted_at                    :datetime
-#  uploaded_by                   :integer          not null
+#  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default("true"), not null
-#  source                        :integer          default("1"), not null
+#  source                        :integer          default("1")
 #  source_info                   :string
+#  document_file_id              :integer
 #
 
 require 'rails_helper'
@@ -32,12 +31,6 @@ RSpec.describe OperatorDocumentCountry, type: :model do
 
   it 'is valid with valid attributes' do
     expect(operator_document_country).to be_valid
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:required_operator_document_country)
-      .with_foreign_key('required_operator_document_id')
-    }
   end
 
   describe 'Validations' do
@@ -50,7 +43,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
             create(:required_operator_document_country, contract_signature: true, country: country)
           operator_document = create(:operator_document_country,
                  required_operator_document: required_operator_document,
-                 operator: operator, current: true)
+                 operator: operator)
 
           operator_document.status = :doc_valid
           operator_document.save

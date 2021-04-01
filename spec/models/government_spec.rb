@@ -22,16 +22,6 @@ RSpec.describe Government, type: :model do
 
   it_should_behave_like 'translatable', FactoryBot.create(:government), %i[details]
 
-  describe 'Validations' do
-    it { is_expected.to validate_presence_of(:government_entity) }
-  end
-
-  describe 'Relations' do
-    it { is_expected.to belong_to(:country).inverse_of(:governments).optional }
-    it { is_expected.to have_many(:governments_observations).dependent(:restrict_with_error) }
-    it { is_expected.to have_many(:observations).through(:governments_observations) }
-  end
-
   describe 'Instance methods' do
     describe '#cache_key' do
       it 'return the default value with the locale' do

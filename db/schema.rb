@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201104135131) do
+ActiveRecord::Schema.define(version: 20201026084627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  end
+
+  create_table "annex_documents", force: :cascade do |t|
+    t.string   "documentable_type",          null: false
+    t.integer  "documentable_id",            null: false
+    t.integer  "operator_document_annex_id", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["documentable_id"], name: "index_annex_documents_on_documentable_id", using: :btree
+    t.index ["documentable_type"], name: "index_annex_documents_on_documentable_type", using: :btree
+    t.index ["operator_document_annex_id"], name: "index_annex_documents_on_operator_document_annex_id", using: :btree
   end
 
   create_table "api_keys", force: :cascade do |t|
@@ -177,6 +188,13 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "updated_at",                null: false
     t.integer  "country_id"
     t.index ["country_id"], name: "index_country_vpas_on_country_id", using: :btree
+  end
+
+  create_table "document_files", force: :cascade do |t|
+    t.string   "attachment"
+    t.string   "file_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "faq_translations", force: :cascade do |t|
@@ -469,9 +487,9 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   end
 
   create_table "observers", force: :cascade do |t|
-    t.string   "observer_type",                    null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.string   "observer_type",                     null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.boolean  "is_active",         default: true
     t.string   "logo"
     t.string   "address"
@@ -482,11 +500,11 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.string   "data_email"
     t.string   "data_phone"
     t.string   "organization_type"
+    t.boolean  "public_info",       default: false
     t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
   end
 
   create_table "operator_document_annexes", force: :cascade do |t|
-    t.integer  "operator_document_id"
     t.string   "name"
     t.date     "start_date"
     t.date     "expire_date"
@@ -495,14 +513,47 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.string   "attachment"
     t.integer  "uploaded_by"
     t.integer  "user_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.boolean  "public",               default: true, null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "public",      default: true, null: false
     t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at", using: :btree
-    t.index ["operator_document_id"], name: "index_operator_document_annexes_on_operator_document_id", using: :btree
     t.index ["public"], name: "index_operator_document_annexes_on_public", using: :btree
     t.index ["status"], name: "index_operator_document_annexes_on_status", using: :btree
     t.index ["user_id"], name: "index_operator_document_annexes_on_user_id", using: :btree
+  end
+
+  create_table "operator_document_histories", force: :cascade do |t|
+    t.string   "type"
+    t.date     "expire_date"
+    t.date     "start_date"
+    t.integer  "status"
+    t.integer  "uploaded_by"
+    t.text     "reason"
+    t.text     "note"
+    t.datetime "response_date"
+    t.boolean  "public"
+    t.integer  "source"
+    t.string   "source_info"
+    t.integer  "fmu_id"
+    t.integer  "document_file_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "operator_document_id"
+    t.integer  "operator_id"
+    t.integer  "user_id"
+    t.integer  "required_operator_document_id"
+    t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id", using: :btree
+    t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date", using: :btree
+    t.index ["fmu_id"], name: "index_operator_document_histories_on_fmu_id", using: :btree
+    t.index ["operator_document_id"], name: "index_operator_document_histories_on_operator_document_id", using: :btree
+    t.index ["operator_id"], name: "index_operator_document_histories_on_operator_id", using: :btree
+    t.index ["public"], name: "index_operator_document_histories_on_public", using: :btree
+    t.index ["required_operator_document_id"], name: "index_odh_on_rod_id_id", using: :btree
+    t.index ["response_date"], name: "index_operator_document_histories_on_response_date", using: :btree
+    t.index ["source"], name: "index_operator_document_histories_on_source", using: :btree
+    t.index ["status"], name: "index_operator_document_histories_on_status", using: :btree
+    t.index ["type"], name: "index_operator_document_histories_on_type", using: :btree
+    t.index ["user_id"], name: "index_operator_document_histories_on_user_id", using: :btree
   end
 
   create_table "operator_documents", force: :cascade do |t|
@@ -515,8 +566,6 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "updated_at",                                   null: false
     t.integer  "status"
     t.integer  "operator_id"
-    t.string   "attachment"
-    t.boolean  "current"
     t.datetime "deleted_at"
     t.integer  "uploaded_by"
     t.integer  "user_id"
@@ -526,8 +575,9 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.boolean  "public",                        default: true, null: false
     t.integer  "source",                        default: 1
     t.string   "source_info"
-    t.index ["current"], name: "index_operator_documents_on_current", using: :btree
+    t.integer  "document_file_id"
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at", using: :btree
+    t.index ["document_file_id"], name: "index_operator_documents_on_document_file_id", using: :btree
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date", using: :btree
     t.index ["fmu_id"], name: "index_operator_documents_on_fmu_id", using: :btree
     t.index ["operator_id"], name: "index_operator_documents_on_operator_id", using: :btree
@@ -555,23 +605,16 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.string   "operator_type"
     t.integer  "country_id"
     t.string   "concession"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-    t.boolean  "is_active",                          default: true
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "is_active",     default: true
     t.string   "logo"
     t.string   "operator_id"
-    t.float    "percentage_valid_documents_all"
-    t.float    "percentage_valid_documents_country"
-    t.float    "percentage_valid_documents_fmu"
-    t.float    "score_absolute"
-    t.integer  "score"
-    t.float    "obs_per_visit"
     t.string   "fa_id"
     t.string   "address"
     t.string   "website"
-    t.integer  "country_doc_rank"
-    t.integer  "country_operators"
-    t.boolean  "approved",                           default: true, null: false
+    t.boolean  "approved",      default: true, null: false
+    t.string   "email"
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
@@ -587,6 +630,20 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
     t.index ["attacheable_id", "attacheable_type"], name: "photos_attacheable_index", using: :btree
+  end
+
+  create_table "ranking_operator_documents", force: :cascade do |t|
+    t.date     "date",                       null: false
+    t.boolean  "current",     default: true, null: false
+    t.integer  "position",                   null: false
+    t.integer  "operator_id"
+    t.integer  "country_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["country_id"], name: "index_ranking_operator_documents_on_country_id", using: :btree
+    t.index ["current"], name: "index_ranking_operator_documents_on_current", using: :btree
+    t.index ["operator_id"], name: "index_ranking_operator_documents_on_operator_id", using: :btree
+    t.index ["position", "country_id", "current"], name: "index_rod_on_position_and_country_and_current", using: :btree
   end
 
   create_table "required_gov_document_group_translations", force: :cascade do |t|
@@ -688,6 +745,37 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.jsonb    "geojson"
+  end
+
+  create_table "score_operator_documents", force: :cascade do |t|
+    t.date     "date",                           null: false
+    t.boolean  "current",         default: true, null: false
+    t.float    "all"
+    t.float    "country"
+    t.float    "fmu"
+    t.jsonb    "summary_public"
+    t.jsonb    "summary_private"
+    t.integer  "total"
+    t.integer  "operator_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["current"], name: "index_score_operator_documents_on_current", using: :btree
+    t.index ["date"], name: "index_score_operator_documents_on_date", using: :btree
+    t.index ["operator_id"], name: "index_score_operator_documents_on_operator_id", using: :btree
+  end
+
+  create_table "score_operator_observations", force: :cascade do |t|
+    t.date     "date",                         null: false
+    t.boolean  "current",       default: true, null: false
+    t.float    "score"
+    t.float    "obs_per_visit"
+    t.integer  "operator_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["current", "operator_id"], name: "index_score_operator_observations_on_current_and_operator_id", using: :btree
+    t.index ["current"], name: "index_score_operator_observations_on_current", using: :btree
+    t.index ["date"], name: "index_score_operator_observations_on_date", using: :btree
+    t.index ["operator_id"], name: "index_score_operator_observations_on_operator_id", using: :btree
   end
 
   create_table "severities", force: :cascade do |t|
@@ -868,6 +956,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
 
+  add_foreign_key "annex_documents", "operator_document_annexes", on_delete: :cascade
   add_foreign_key "api_keys", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade
@@ -892,15 +981,24 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "observations", "operators"
   add_foreign_key "observations", "users"
   add_foreign_key "observations", "users", column: "modified_user_id"
+  add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
+  add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
+  add_foreign_key "operator_document_histories", "required_operator_documents", on_delete: :cascade
+  add_foreign_key "operator_document_histories", "users", on_delete: :nullify
   add_foreign_key "operator_documents", "fmus"
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
+  add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "photos", "users"
+  add_foreign_key "ranking_operator_documents", "countries", on_delete: :cascade
+  add_foreign_key "ranking_operator_documents", "operators", on_delete: :cascade
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade
   add_foreign_key "required_operator_documents", "countries"
   add_foreign_key "required_operator_documents", "required_operator_document_groups"
   add_foreign_key "sawmills", "operators"
+  add_foreign_key "score_operator_documents", "operators", on_delete: :cascade
+  add_foreign_key "score_operator_observations", "operators", on_delete: :cascade
   add_foreign_key "severities", "subcategories"
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"

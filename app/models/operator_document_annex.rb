@@ -4,19 +4,18 @@
 #
 # Table name: operator_document_annexes
 #
-#  id                   :integer          not null, primary key
-#  operator_document_id :integer
-#  name                 :string
-#  start_date           :date
-#  expire_date          :date
-#  deleted_at           :date
-#  status               :integer
-#  attachment           :string
-#  uploaded_by          :integer
-#  user_id              :integer
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  public               :boolean          default("true"), not null
+#  id          :integer          not null, primary key
+#  name        :string
+#  start_date  :date
+#  expire_date :date
+#  deleted_at  :date
+#  status      :integer
+#  attachment  :string
+#  uploaded_by :integer
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  public      :boolean          default("true"), not null
 #
 
 class OperatorDocumentAnnex < ApplicationRecord
@@ -25,14 +24,18 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentAnnexUploader
 
-  belongs_to :operator_document, optional: false
   belongs_to :user
+  has_many :annex_documents
+  has_one :annex_document, -> { where(documentable_type: 'OperatorDocument') },
+          class_name: 'AnnexDocument'
+  has_one :operator_document, through: :annex_document, required: false, source: 'documentable', source_type: 'OperatorDocument'
+  has_many :annex_documents_history, -> { where(documentable_type: 'OperatorDocumentHistory') },
+           class_name: 'AnnexDocument'
 
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
 
-  validates_presence_of :operator_document_id
   validates_presence_of :start_date
   validates_presence_of :status
 
@@ -48,6 +51,10 @@ class OperatorDocumentAnnex < ApplicationRecord
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} document annexes"
+  end
+
+  def documentables
+    annex_documents.map { |x| x.documentable }
   end
 
   def expire_document_annex

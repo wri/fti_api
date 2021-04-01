@@ -8,28 +8,6 @@ module GlobalizeFallback
   # TODO: Try to optimize it
   included do
     scope :with_fallback_translations, -> {
-
-
-      # joins(
-      #     "INNER JOIN (
-      #         SELECT #{self.table_name}.id, #{coalesce_string}
-      #         FROM #{self.table_name}
-      #         LEFT JOIN #{self.translations_table_name} original ON #{self.table_name}.id = original.#{fk_column} AND original.locale = '#{Globalize.fallbacks[0]}'
-      #         LEFT JOIN #{self.translations_table_name} fallback ON #{self.table_name}.id = fallback.#{fk_column} AND fallback.locale = '#{Globalize.fallbacks[1]}'
-      #       ) #{self.translations_table_name} ON #{self.translations_table_name}.id = #{self.table_name}.id
-      #     ")
-
-      # joins(
-      #     "INNER JOIN (
-      #         SELECT #{self.table_name}.id, #{coalesce_string}
-      #         FROM #{self.table_name}
-      #         LEFT JOIN #{self.translations_table_name} original ON #{self.table_name}.id = original.#{fk_column} AND original.locale = '#{Globalize.fallbacks[0]}'
-      #         LEFT JOIN #{self.translations_table_name} fallback ON #{self.table_name}.id = fallback.#{fk_column} AND fallback.locale = '#{Globalize.fallbacks[1]}'
-      #       ) pref ON pref.id = #{self.table_name}.id
-      #     ")
-
-
-
       joins(:translations)
           .joins("INNER JOIN (
                SELECT #{fk_column},
@@ -44,8 +22,6 @@ module GlobalizeFallback
                FROM #{self.translations_table_name}
               GROUP BY #{fk_column} ) pref ON pref.#{fk_column}= #{translations_table_name}.#{fk_column}
                                           AND pref.pref_loc = #{translations_table_name}.locale")
-
-
     }
 
     def self.fk_column

@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   match 'admin/fmus/preview' => 'admin/fmus#preview', via: :post
 
+  require 'sidekiq/web'
+  authenticate :user, ->(user) { user&.user_permission&.user_role == 'admin' } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
     post  '/login',                       to: 'sessions#create'
@@ -35,8 +40,9 @@ Rails.application.routes.draw do
       jsonapi_resources :observation_documents do; end
       jsonapi_resources :observation_reports do; end
       jsonapi_resources :operator_documents, except: [:create, :update] do; end
-      jsonapi_resources :operator_document_fmus do; end
-      jsonapi_resources :operator_document_countries do; end
+      jsonapi_resources :operator_document_histories do; end
+      jsonapi_resources :operator_document_fmus, except: [:create] do; end
+      jsonapi_resources :operator_document_countries, except: [:create] do; end
       jsonapi_resources :required_operator_documents do; end
       jsonapi_resources :required_operator_document_groups do; end
       jsonapi_resources :partners do; end
@@ -52,6 +58,7 @@ Rails.application.routes.draw do
       jsonapi_resources :required_gov_documents do; end
       jsonapi_resources :gov_documents do; end
       jsonapi_resources :gov_files, only: [:create, :destroy] do; end
+      jsonapi_resources :score_operator_documents, only: [:index] do; end
       resources :fmus, only: [:index, :update] do
         get 'tiles/:z/:x/:y', to: 'fmus#tiles', on: :collection
       end

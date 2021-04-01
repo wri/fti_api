@@ -13,8 +13,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   actions :all
   permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
-                :logo, :delete_logo, fmu_ids: [],
-                                     translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                :logo, :delete_logo, :email, fmu_ids: [],
+                                             translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -29,13 +29,14 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
     column :fa_id
     column :name
+    column :email
     column :concession
     column :score_absolute do |operator|
-      "#{'%.2f' % operator.score_absolute}" rescue nil
+      "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
     column :obs_per_visit
     column '% Docs' do |operator|
-      operator.percentage_valid_documents_all
+      operator.score_operator_document&.all
     end
   end
 
@@ -45,12 +46,15 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :country, sortable: 'country_translations.name'
     column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
+    column :email
     column :concession, sortable: true
     column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
-      "#{'%.2f' % operator.score_absolute}" rescue nil
+      "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
     column 'Obs/Visit', :obs_per_visit, sortable: true
-    column '% Docs', :percentage_valid_documents_all, sortable: true
+    column '% Docs', :percentage_valid_documents_all, sortable: true do |operator|
+      operator.score_operator_document&.all
+    end
     column('Actions') do |operator|
       unless operator.is_active
         a 'Activate', href: activate_admin_producer_path(operator),
@@ -72,9 +76,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
          collection: Operator.with_translations(I18n.locale)
                          .order('operator_translations.name').pluck(:name, :id)
   filter :concession, as: :select
-  filter :score
-  filter :score_absolute, label: 'Obs/Visit'
-  filter :percentage_valid_documents_all, label: '% Docs'
+
 
   sidebar 'Fmus', only: :show do
     attributes_table_for resource do
@@ -119,14 +121,12 @@ ActiveAdmin.register Operator, as: 'Producer' do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    #f.inputs 'Translated fields' do
-    #
-    #end
     f.inputs 'Operator Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
         t.input :details
       end
+      f.input :email
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type, as: :select,
                               collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
@@ -134,7 +134,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
                                            'Sawmill', 'Other', 'Unknown']
       f.input :country, input_html: { disabled: edit }
       f.input :concession
-      f.input :logo, as: :file, hint: f.template.image_tag(f.object.logo.url(:thumbnail))
+      f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
       if f.object.logo.present?
         f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
       end
@@ -156,6 +156,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     attributes_table do
       row :is_active
       row :name
+      row :email
       row :operator_type
       row :fa_id
       row :details
@@ -164,10 +165,13 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :address
       row :website
       row :fmus
-      row :percentage_valid_documents_all
+      row :percentage_valid_documents_all do |operator|
+        operator.score_operator_document&.all
+      end
       row :obs_per_visit
-      row :score
-      row :score_absolute
+      row :score_absolute do |operator|
+        operator.score_operator_observation&.score
+      end
       row :created_at
       row :updated_at
     end

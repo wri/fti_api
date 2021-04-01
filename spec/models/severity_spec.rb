@@ -21,11 +21,6 @@ RSpec.describe Severity, type: :model do
     expect(severity).to be_valid
   end
 
-  describe 'Relations' do
-    it { is_expected.to belong_to(:subcategory).inverse_of(:severities).required }
-    it { is_expected.to have_many(:observations).inverse_of(:severity) }
-  end
-
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:level) }
     it { is_expected.to validate_uniqueness_of(:level).scoped_to(:subcategory_id) }
