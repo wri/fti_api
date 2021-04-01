@@ -1,8 +1,7 @@
-class CopyOperatorDocumentsToHistory < ActiveRecord::Migration[5.0]
+class RemoveCurrentFromOperatorDocuments < ActiveRecord::Migration[5.0]
   def change
     reversible do |dir|
       dir.up do
-        DocumentMigrationService.new(:documents).call
         remove_column :operator_documents, :current
       end
       dir.down do
