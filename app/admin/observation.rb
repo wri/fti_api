@@ -7,6 +7,8 @@ ActiveAdmin.register Observation do
   extend Versionable
   versionate
 
+  active_admin_paranoia
+
   menu false
 
   PER_PAGE = [10, 20, 40, 60].freeze
@@ -36,10 +38,10 @@ ActiveAdmin.register Observation do
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
                 :validation_status, :publication_date, :is_active, :observation_report_id,
                 :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
-                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :responsible_admin_id,
-                observer_ids: [], relevant_operator_ids: [], government_ids: [],
-                observation_documents_attributes: [:id, :name, :attachment],
-                translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
+                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :actions_taken,
+                :responsible_admin_id, observer_ids: [], relevant_operator_ids: [], government_ids: [],
+                                       observation_documents_attributes: [:id, :name, :attachment],
+                                       translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
 
   member_action :ready_for_publication, method: :put do
@@ -80,42 +82,42 @@ ActiveAdmin.register Observation do
     end
   end
 
-  batch_action :start_qc, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
+  batch_action :move_to_qc_in_progress, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['QC in progress']) if observation.validation_status == 'Ready for QC'
     end
     redirect_to collection_path, notice: 'QC started'
   end
 
-  batch_action :require_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
+  batch_action :move_to_needs_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Needs revision']) if observation.validation_status == 'QC in progress'
     end
     redirect_to collection_path, notice: 'Required revision for observations'
   end
 
-  batch_action :publish, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
+  batch_action :move_to_ready_for_publication, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: Observation.validation_statuses['Ready for publication']) if observation.validation_status == 'QC in progress'
     end
     redirect_to collection_path, notice: 'Observations ready to be published'
   end
 
-  batch_action :publish_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
+  batch_action :move_to_published_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (no comments)')
     end
     redirect_to collection_path, notice: 'Observations published without comments'
   end
 
-  batch_action :publish_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
+  batch_action :move_to_published_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (not modified)')
     end
     redirect_to collection_path, notice: 'Observations published without modifications'
   end
 
-  batch_action :publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
+  batch_action :move_to_publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (modified)')
     end
@@ -186,6 +188,7 @@ ActiveAdmin.register Observation do
   filter :is_active
   filter :publication_date
   filter :updated_at
+  filter :deleted_at
 
 
   csv do
@@ -215,11 +218,41 @@ ActiveAdmin.register Observation do
     column :relevant_operators do |observation|
       observation.relevant_operators.map(&:name).join(', ')
     end
+    column :category do |observation|
+      observation.subcategory&.category&.name
+    end
     column :subcategory do |observation|
       observation.subcategory&.name
     end
     column :law do |observation|
       observation.law_id
+    end
+    column :written_infraction do |observation|
+      observation.law&.written_infraction
+    end
+    column :infraction do |observation|
+      observation.law&.infraction
+    end
+    column :sanctions do |observation|
+      observation.law&.sanctions
+    end
+    column :min_fine do |observation|
+      observation.law&.min_fine
+    end
+    column :max_fine do |observation|
+      observation.law&.max_fine
+    end
+    column :currency do |observation|
+      observation.law&.currency
+    end
+    column :penal_servitude do |observation|
+      observation.law&.penal_servitude
+    end
+    column :other_penalties do |observation|
+      observation.law&.other_penalties
+    end
+    column :indicator_apv do |observation|
+      observation.law&.apv
     end
     column :severity do |observation|
       observation.severity&.level
@@ -228,20 +261,36 @@ ActiveAdmin.register Observation do
     column :actions_taken
     column :details
     column :evidence_type
+    column :evidences do |observation|
+      evidences = []
+      observation.observation_documents.each do |d|
+        evidences << d.name
+      end
+      evidences.join(' | ')
+    end
+    column :evidence_on_report
     column :concern_opinion
+    column :pv
+    column :location_accuracy
+    column :lat
+    column :lng
+    column :is_physical_place
+    column :litigation_status
     column :report do |observation|
       observation.observation_report&.title
     end
+    column :admin_comment
+    column :monitor_comment
+    column :responsible_admin
     column :user do |observation|
       observation.user&.name
     end
     column :modified_user do |observation|
       observation.modified_user&.name
     end
-    column :admin_comment
-    column :monitor_comment
     column :created_at
     column :updated_at
+    column :deleted_at
   end
 
 
@@ -269,7 +318,8 @@ ActiveAdmin.register Observation do
     column :location_information, sortable: false
     column :observers, sortable: false do |o|
       links = []
-      o.observers.with_translations(I18n.locale).each do |observer|
+      observers = params['scope'].eql?('recycle_bin') ? o.observers.unscope(where: :deleted_at) : o.observers
+      observers.with_translations(I18n.locale).each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
       end
       links.reduce(:+)
@@ -277,13 +327,15 @@ ActiveAdmin.register Observation do
     column :observation_type, sortable: 'observation_type'
     column :operator, sortable: false
     column :governments, sortable: false do |o|
-      o.governments.each_with_object([]) do |government, links|
+      governments = params['scope'].eql?('recycle_bin') ? o.governments.unscope(where: :deleted_at) : o.governments
+      governments.each_with_object([]) do |government, links|
         links << link_to(government.government_entity, admin_government_path(government.id))
       end.reduce(:+)
     end
     column :relevant_operators do |o|
       links = []
-      o.relevant_operators.each do |operator|
+      relevant_operators = params['scope'].eql?('recycle_bin') ? o.relevant_operators.unscope(where: :deleted_at) : o.relevant_operators
+      relevant_operators.each do |operator|
         links << link_to(operator.name, admin_producer_path(operator.id))
       end
       links.reduce(:+)
@@ -316,7 +368,7 @@ ActiveAdmin.register Observation do
       end
       links.reduce(:+)
     end
-    column :evidence_on_report, sortable: false
+    column 'Evidence in the report', :evidence_on_report, sortable: false
     column :concern_opinion do |o|
       o.concern_opinion[0..100] + (o.concern_opinion.length >= 100 ? '...' : '') if o.concern_opinion
     end
@@ -335,8 +387,12 @@ ActiveAdmin.register Observation do
     column :responsible_admin
     column :user, sortable: false
     column :modified_user, sortable: false
+    column :modified_user_language, sortable: false do |o|
+      o.modified_user&.locale
+    end
     column :created_at
     column :updated_at
+    column :deleted_at
     column('Actions') do |observation|
       a 'Start QC', href: start_qc_admin_observation_path(observation),    'data-method': :put if observation.validation_status == 'Ready for QC'
       a 'Needs revision', href: needs_revision_admin_observation_path(observation), 'data-method': :put if observation.validation_status == 'QC in progress'
@@ -351,15 +407,14 @@ ActiveAdmin.register Observation do
                                       illegality_as_written_by_law legal_reference_illegality
                                       legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
                                       other_penalties indicator_apv severity publication_date actions_taken
-                                      details evidence_type evidences evidence_on_report concern_opinion pv location_accuracy
+                                      details evidence_type evidences evidence_in_the_report concern_opinion pv location_accuracy
                                       lat lng is_physical_place litigation_status report admin_comment monitor_comment
-                                      responsible_admin user modified_user created_at updated_at] }
+                                      responsible_admin user modified_user modified_user_language created_at updated_at deleted_at] }
     end
   end
 
   form do |f|
     operator   = object.operator_id.present? ? true : false
-    law        = object.law_id.present? ? true : false
     fmu        = object.fmu_id.present? ? true : false
     government = object.government_ids.present? ? true : false
 
@@ -372,7 +427,7 @@ ActiveAdmin.register Observation do
       f.input :id, input_html: { disabled: true }
     end
     f.inputs 'Status' do
-      f.input :is_active
+      f.input :is_active, input_html: { disabled: true }
       f.input :hidden
       f.input :validation_status
     end
@@ -380,8 +435,7 @@ ActiveAdmin.register Observation do
       f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
       f.input :subcategory, input_html: { disabled: true }
-      f.input :law, input_html: { disabled: law },
-                    collection: object.subcategory.laws.map { |l| [l.written_infraction, l.id] } rescue ''
+      f.input :law, collection: Law.by_country_subcategory(object).map { |l| [l.written_infraction, l.id] } rescue ''
       f.input :severity, as: :select,
                          collection: object.subcategory.severities.map { |s| ["#{s.level} - #{s.details.first(80)}", s.id] } rescue ''
       f.input :is_physical_place, input_html: { disabled: true }
@@ -406,11 +460,12 @@ ActiveAdmin.register Observation do
       f.input :location_accuracy, as: :select
       f.input :lat
       f.input :lng
+      f.input :actions_taken
       f.input :admin_comment
       f.input :monitor_comment, input_html: { disabled: true }
       f.input :observation_report, as: :select
       f.input :evidence_type, as: :select
-      f.input :evidence_on_report
+      f.input :evidence_on_report, label: 'Evidence in the report'
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
         t.input :name
         t.input :attachment
@@ -457,29 +512,33 @@ ActiveAdmin.register Observation do
           safe_join(list, " ")
         end
       end
-      if resource.relevant_operators.present?
-        row :relevant_operators do |o|
-          list = o.relevant_operators.each_with_object([]) do |operator, links|
-            links << link_to(operator.name, admin_producer_path(operator.id))
-          end
-
-          safe_join(list, " ")
+      row :relevant_operators do |o|
+        list = o.relevant_operators.each_with_object([]) do |operator, links|
+          links << link_to(operator.name, admin_producer_path(operator.id))
         end
+
+        safe_join(list, " ")
       end
+
       row :publication_date
       row :pv
       row :location_accuracy
       row :lat
       row :lng
       row :actions_taken
+      row :concern_opinion
       row :observation_report
       row :admin_comment
       row :monitor_comment
       row :responsible_admin
       row :user
       row :modified_user
+      row :modified_user_language do |o|
+        o.modified_user&.locale
+      end
       row :created_at
       row :updated_at
+      row :deleted_at
     end
     active_admin_comments
   end

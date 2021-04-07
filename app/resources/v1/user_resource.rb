@@ -4,7 +4,7 @@ module V1
   class UserResource < JSONAPI::Resource
     caching
     attributes :name, :email, :nickname, :institution,
-               :is_active, :deactivated_at, :web_url,
+               :is_active, :deactivated_at, :web_url, :locale,
                :permissions_request, :permissions_accepted, :password, :password_confirmation
 
     has_one :country

@@ -49,7 +49,6 @@ FactoryBot.define do
         )
       end
       random_operator_document.user ||= FactoryBot.create(:user)
-      random_operator_document.fmu ||= FactoryBot.create(:fmu, country: country)
     end
 
     factory :operator_document_country, class: OperatorDocumentCountry do
@@ -60,6 +59,10 @@ FactoryBot.define do
       fmu
       required_operator_document_fmu
       type { 'OperatorDocumentFmu' }
+
+      after(:build) do |random_operator_document|
+        random_operator_document.fmu ||= FactoryBot.create(:fmu, country: country)
+      end
     end
   end
 end

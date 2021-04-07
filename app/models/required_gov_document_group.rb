@@ -8,20 +8,22 @@
 #  position                       :integer
 #  created_at                     :datetime         not null
 #  updated_at                     :datetime         not null
+#  deleted_at                     :datetime
 #  required_gov_document_group_id :integer          not null
 #  name                           :string           not null
 #  description                    :text
+#  deleted_at                     :datetime
 #
 
 class RequiredGovDocumentGroup < ApplicationRecord
   include Translatable
+  acts_as_paranoid
 
-  translates :name, touch: true
-  translates :description
+  translates :name, :description, paranoia: true, touch: true
   active_admin_translates :name do
     validates_presence_of :name
   end
 
   validates_presence_of :position
-  has_many :required_gov_documents, dependent: :destroy
+  has_many :required_gov_documents, dependent: :nullify
 end

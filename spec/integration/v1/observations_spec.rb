@@ -7,6 +7,7 @@ module V1
         success_roles: %i[admin]
       },
       delete: {
+        factory: :created_observation,
         success_roles: %i[admin],
         failure_roles: %i[user]
       },
@@ -173,7 +174,7 @@ module V1
                   params: jsonapi_params('observations', observation.id, { 'validation-status': 'Needs revision'}),
                   headers: admin_headers)
 
-            expect(parsed_body[:errors].first[:title]).to eq("Invalid validation change for monitor. Can't move from 'Created'' to ''Needs revision''")
+            expect(parsed_body[:errors].first[:title]).to eq("Invalid validation change for monitor. Can't move from 'Created' to 'Needs revision'")
             expect(status).to eq(422)
           end
         end

@@ -19,27 +19,4 @@ RSpec.describe ObservationDocument, type: :model do
     observation_document = build(:observation_document)
     expect(observation_document).to be_valid
   end
-
-  describe 'Hooks' do
-    describe '#remove_attachment_id_directory' do
-      it 'removes all attached documents' do
-        observation_document = create(:observation_document)
-        filepath = File.join(
-          'spec',
-          'support',
-          'uploads',
-          'observation_document',
-          'attachment',
-          observation_document.id.to_s,
-          'image.png'
-        )
-
-        expect(File.exist?(filepath)).to eql true
-
-        observation_document.destroy
-
-        expect(File.exist?(filepath)).to eql false
-      end
-    end
-  end
 end

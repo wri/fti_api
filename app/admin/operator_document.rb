@@ -111,13 +111,14 @@ ActiveAdmin.register OperatorDocument do
     column :exists do |o|
       o.deleted_at.nil? && o.required_operator_document.deleted_at.nil?
     end
+    column :public
     column :status
     column :id
     column :required_operator_document do |o|
       o.required_operator_document.name
     end
     column :country do |o|
-      o.required_operator_document.country.name
+      o.required_operator_document&.country&.name
     end
     column :Type do |o|
       if o.required_operator_document.present?
@@ -147,7 +148,7 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     column :attachment do |o|
-      o.attachment&.filename
+      o&.document_file&.attachment
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
@@ -286,7 +287,7 @@ ActiveAdmin.register OperatorDocument do
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :uploaded_by
       row 'attachment' do |r|
-        link_to r.document_file.attachment.identifier, r.document_file.attachment.url
+        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url
       end
       row :reason
       row :start_date

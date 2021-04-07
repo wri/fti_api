@@ -12,10 +12,13 @@
 #  end_date    :date
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  deleted_at  :datetime
 #
 
 class FmuOperator < ApplicationRecord
   has_paper_trail
+  acts_as_paranoid
+
   include DateHelper
 
   belongs_to :fmu,        optional: true
@@ -28,6 +31,7 @@ class FmuOperator < ApplicationRecord
   validate :non_colliding_dates
 
   after_save :update_documents_list
+  after_save :update_fmu_geojson
 
   # Sets the start date as today, if none is provided
   def set_current_start_date
@@ -99,17 +103,17 @@ WHERE id = #{x.fmu_id};"
 
   # Updates the list of documents for this FMU
   def update_documents_list
-    current_operator = self.fmu.operator.id rescue nil
-    return if self.operator&.fa_id.blank?
+    current_operator = self&.fmu&.operator
 
     OperatorDocumentFmu.transaction do
-      to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator)
+      to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator&.id)
       destroyed_count = to_destroy.count
-      to_destroy.each { |x| x.delete }
+      to_destroy.each { |x| x.destroy }
 
-      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator}"
+      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id}"
 
-      return unless current_operator
+
+      return if current_operator.blank? || current_operator.fa_id.blank?
 
       # Only the RODF for this fmu's forest_type should be created
       rodf_query = "country_id = #{fmu.country_id} "
@@ -117,12 +121,20 @@ WHERE id = #{x.fmu_id};"
 
       RequiredOperatorDocumentFmu.where(rodf_query).each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
-                                  operator_id: current_operator,
+                                  operator_id: current_operator.id,
                                   fmu_id: fmu_id).first_or_create do |odf|
-          odf.update!(status: OperatorDocument.statuses[:doc_not_provided], current: true) unless odf.persisted?
+          odf.update!(status: OperatorDocument.statuses[:doc_not_provided]) unless odf.persisted?
         end
       end
-      Rails.logger.info "Create the documents for operator #{current_operator} and FMU #{fmu_id}"
+      Rails.logger.info "Create the documents for operator #{current_operator.id} and FMU #{fmu_id}"
     end
+  end
+
+  def update_fmu_geojson
+    return unless current
+    return if end_date && (end_date < Date.today)
+    return if start_date > Date.today
+
+    fmu.save
   end
 end

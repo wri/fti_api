@@ -1,8 +1,0 @@
-production:
-  active: true
-  push_api_key: <%=ENV['APPSIGNAL_PUSH_API_KEY']%>
-  name: "OTP"
-staging:
-  active: true
-  push_api_key: <%=ENV['APPSIGNAL_PUSH_API_KEY']%>
-  name: "OTP-staging"

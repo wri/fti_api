@@ -14,10 +14,15 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
         end
       end
       div class: 'list' do
-        # Add one item without son.
         ul do
-          # Replace route_destination_path for the route you want to follow when you receive the item click.
-          li { link_to 'Dashboard', admin_dashboard_path }
+          li do
+            text_node content_tag 'a', 'Dashboard'
+            ul do
+              li { link_to 'Start Page', admin_dashboard_path }
+              li { link_to 'Global Scores', admin_global_scores_path }
+              li { link_to 'Global Observation Scores', admin_global_observation_scores_path }
+            end
+          end
         end
 
         ul do
@@ -47,6 +52,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
           li do
             text_node content_tag 'a', 'Private Sector'
             ul do
+              li { link_to 'Holdings',             admin_holdings_path }
               li { link_to 'Producers',            admin_producers_path }
               li { link_to 'Sawmills',             admin_sawmills_path }
               li { link_to 'Document Categories',  admin_required_operator_document_groups_path }

@@ -29,6 +29,12 @@ module OperatorDocumentable
       { url: nil }
     end
 
+    def attachment=(attachment)
+      df = DocumentFile.new(attachment: attachment)
+      @model.document_file = df
+      nil
+    end
+
     def document_public?
       @model.public || @model.operator.approved
     end

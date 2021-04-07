@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201104135131) do
+ActiveRecord::Schema.define(version: 20210106151820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -223,6 +223,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.date     "end_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_fmu_operators_on_deleted_at", using: :btree
     t.index ["fmu_id", "operator_id"], name: "index_fmu_operators_on_fmu_id_and_operator_id", using: :btree
     t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id", using: :btree
   end
@@ -259,6 +261,41 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at", using: :btree
     t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
+  end
+
+  create_table "global_observation_scores", force: :cascade do |t|
+    t.date     "date",            null: false
+    t.integer  "obs_total"
+    t.integer  "rep_total"
+    t.jsonb    "rep_country"
+    t.jsonb    "rep_monitor"
+    t.jsonb    "obs_country"
+    t.jsonb    "obs_status"
+    t.jsonb    "obs_producer"
+    t.jsonb    "obs_severity"
+    t.jsonb    "obs_category"
+    t.jsonb    "obs_subcategory"
+    t.jsonb    "obs_fmu"
+    t.jsonb    "obs_forest_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["date"], name: "index_global_observation_scores_on_date", unique: true, using: :btree
+  end
+
+  create_table "global_scores", force: :cascade do |t|
+    t.datetime "date",             null: false
+    t.integer  "total_required"
+    t.jsonb    "general_status"
+    t.jsonb    "country_status"
+    t.jsonb    "fmu_status"
+    t.jsonb    "doc_group_status"
+    t.jsonb    "fmu_type_status"
+    t.integer  "country_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["country_id"], name: "index_global_scores_on_country_id", using: :btree
+    t.index ["date", "country_id"], name: "index_global_scores_on_date_and_country_id", unique: true, using: :btree
+    t.index ["date"], name: "index_global_scores_on_date", using: :btree
   end
 
   create_table "gov_documents", force: :cascade do |t|
@@ -316,10 +353,19 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.integer  "observation_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_governments_observations_on_deleted_at", using: :btree
     t.index ["government_id", "observation_id"], name: "governments_observations_association_index", unique: true, using: :btree
     t.index ["government_id"], name: "index_governments_observations_on_government_id", using: :btree
     t.index ["observation_id", "government_id"], name: "observations_governments_association_index", unique: true, using: :btree
     t.index ["observation_id"], name: "index_governments_observations_on_observation_id", using: :btree
+  end
+
+  create_table "holdings", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_holdings_on_name", using: :btree
   end
 
   create_table "how_to_translations", force: :cascade do |t|
@@ -378,6 +424,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.integer  "operator_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observation_operators_on_deleted_at", using: :btree
     t.index ["observation_id"], name: "index_observation_operators_on_observation_id", using: :btree
     t.index ["operator_id"], name: "index_observation_operators_on_operator_id", using: :btree
   end
@@ -412,6 +460,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.text     "details"
     t.text     "concern_opinion"
     t.string   "litigation_status"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observation_translations_on_deleted_at", using: :btree
     t.index ["locale"], name: "index_observation_translations_on_locale", using: :btree
     t.index ["observation_id"], name: "index_observation_translations_on_observation_id", using: :btree
   end
@@ -445,8 +495,10 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.text     "admin_comment"
     t.text     "monitor_comment"
     t.integer  "responsible_admin_id"
+    t.datetime "deleted_at"
     t.index ["country_id"], name: "index_observations_on_country_id", using: :btree
     t.index ["created_at"], name: "index_observations_on_created_at", using: :btree
+    t.index ["deleted_at"], name: "index_observations_on_deleted_at", using: :btree
     t.index ["evidence_type"], name: "index_observations_on_evidence_type", using: :btree
     t.index ["fmu_id"], name: "index_observations_on_fmu_id", using: :btree
     t.index ["hidden"], name: "index_observations_on_hidden", using: :btree
@@ -470,6 +522,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.integer  "observation_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observer_observations_on_deleted_at", using: :btree
     t.index ["observation_id"], name: "index_observer_observations_on_observation_id", using: :btree
     t.index ["observer_id"], name: "index_observer_observations_on_observer_id", using: :btree
   end
@@ -487,10 +541,10 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   end
 
   create_table "observers", force: :cascade do |t|
-    t.string   "observer_type",                     null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "is_active",         default: true
+    t.string   "observer_type",                       null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "is_active",           default: true
     t.string   "logo"
     t.string   "address"
     t.string   "information_name"
@@ -500,7 +554,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.string   "data_email"
     t.string   "data_phone"
     t.string   "organization_type"
-    t.boolean  "public_info",       default: false
+    t.boolean  "public_info",         default: false
+    t.integer  "responsible_user_id"
     t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
   end
 
@@ -542,6 +597,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.integer  "operator_id"
     t.integer  "user_id"
     t.integer  "required_operator_document_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_operator_document_histories_on_deleted_at", using: :btree
     t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id", using: :btree
     t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date", using: :btree
     t.index ["fmu_id"], name: "index_operator_document_histories_on_fmu_id", using: :btree
@@ -616,6 +673,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.string   "website"
     t.boolean  "approved",      default: true, null: false
     t.string   "email"
+    t.integer  "holding_id"
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree
@@ -630,7 +688,9 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "user_id"
+    t.datetime "deleted_at"
     t.index ["attacheable_id", "attacheable_type"], name: "photos_attacheable_index", using: :btree
+    t.index ["deleted_at"], name: "index_photos_on_deleted_at", using: :btree
   end
 
   create_table "ranking_operator_documents", force: :cascade do |t|
@@ -654,6 +714,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "updated_at",                     null: false
     t.string   "name",                           null: false
     t.text     "description"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_required_gov_document_group_translations_on_deleted_at", using: :btree
     t.index ["locale"], name: "index_required_gov_document_group_translations_on_locale", using: :btree
     t.index ["required_gov_document_group_id"], name: "index_d5783e31f1865cb8918d628281b44e29621b4216", using: :btree
   end
@@ -662,6 +724,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.integer  "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_required_gov_document_groups_on_deleted_at", using: :btree
   end
 
   create_table "required_gov_document_translations", force: :cascade do |t|
@@ -828,6 +892,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.integer  "species_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_species_observations_on_deleted_at", using: :btree
     t.index ["observation_id"], name: "index_species_observations_on_observation_id", using: :btree
     t.index ["species_id"], name: "index_species_observations_on_species_id", using: :btree
   end
@@ -939,6 +1005,8 @@ ActiveRecord::Schema.define(version: 20201104135131) do
     t.datetime "remember_created_at"
     t.integer  "observer_id"
     t.integer  "operator_id"
+    t.integer  "holding_id"
+    t.string   "locale"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["name"], name: "index_users_on_name", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -962,6 +1030,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "comments", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade
   add_foreign_key "country_vpas", "countries", on_delete: :cascade
+  add_foreign_key "global_scores", "countries", on_delete: :nullify
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
   add_foreign_key "gov_documents", "users", on_delete: :cascade
@@ -982,6 +1051,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "observations", "operators"
   add_foreign_key "observations", "users"
   add_foreign_key "observations", "users", column: "modified_user_id"
+  add_foreign_key "observers", "users", column: "responsible_user_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
   add_foreign_key "operator_document_histories", "required_operator_documents", on_delete: :cascade
@@ -990,6 +1060,7 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "operator_documents", "operators"
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "operator_documents", "users", on_delete: :nullify
+  add_foreign_key "operators", "holdings", on_delete: :nullify
   add_foreign_key "photos", "users"
   add_foreign_key "ranking_operator_documents", "countries", on_delete: :cascade
   add_foreign_key "ranking_operator_documents", "operators", on_delete: :cascade
@@ -1004,4 +1075,5 @@ ActiveRecord::Schema.define(version: 20201104135131) do
   add_foreign_key "subcategories", "categories"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "users", "countries"
+  add_foreign_key "users", "holdings", on_delete: :nullify
 end

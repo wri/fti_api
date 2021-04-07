@@ -26,6 +26,8 @@
 #  remember_created_at    :datetime
 #  observer_id            :integer
 #  operator_id            :integer
+#  holding_id             :integer
+#  locale                 :string
 #
 
 require 'rails_helper'
@@ -82,7 +84,7 @@ RSpec.describe User, type: :model do
 
           expect(user.valid?).to eql false
           expect(user.errors[:operator_id]).to eql(
-            ['User of type Operator must have an operator and no observer']
+            ['User of type Operator must have an operator and no observer or holding']
           )
         end
       end
@@ -94,7 +96,7 @@ RSpec.describe User, type: :model do
 
           expect(user.valid?).to eql false
           expect(user.errors[:observer_id]).to eql(
-            ['User of type NGO must have an observer and no operator']
+            ['User of type NGO must have an observer and no operator or holding']
           )
         end
       end

@@ -33,18 +33,22 @@
 #  admin_comment         :text
 #  monitor_comment       :text
 #  responsible_admin_id  :integer
+#  deleted_at            :datetime
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string
+#  deleted_at            :datetime
 #
 
 class Observation < ApplicationRecord
   has_paper_trail
+  acts_as_paranoid
+
   include Translatable
   include Activable
   include ValidationHelper
 
-  translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail
+  translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
 
   enum observation_type: { "operator" => 0, "government" => 1 }
@@ -62,12 +66,15 @@ class Observation < ApplicationRecord
       monitor: {
           nil => ['Created', 'Ready for QC'],
           'Created' => ['Ready for QC'],
-          'Needs Revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
-          'Ready for publication' => ['Published (no comments)']
+          'Needs revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
+          'Ready for publication' => ['Published (no comments)'],
+          'Published (modified)' => ['Ready for QC'],
+          'Published (not modified)' => ['Ready for QC'],
+          'Published (no comments)' => ['Ready for QC']
       },
       admin: {
           'Ready for QC' => ['QC in progress'],
-          'QC in progress' => ['Needs Revision', 'Ready for publication']
+          'QC in progress' => ['Needs revision', 'Ready for publication']
       }
   }.freeze
 
@@ -98,7 +105,7 @@ class Observation < ApplicationRecord
 
   has_many :comments,  as: :commentable, dependent: :destroy
   has_many :photos,    as: :attacheable, dependent: :destroy
-  has_many :observation_documents
+  has_many :observation_documents, dependent: :destroy
 
   belongs_to :responsible_admin,  class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
 
@@ -124,10 +131,10 @@ class Observation < ApplicationRecord
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
+  before_create  :set_responsible_admin
   before_save    :set_active_status
   before_save    :check_is_physical_place
   before_save    :set_centroid
-  before_destroy :destroy_documents
   after_destroy  :update_operator_scores
   after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
   after_save     :update_reports_observers, if: 'observation_report_id_changed?'
@@ -155,6 +162,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :hidden,            -> { where(hidden: true) }
   scope :visible,           -> { where(hidden: [false, nil]) }
   scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name #{order}") }
+  scope :bigger_date,       ->(date) { where('observations.created_at <= ?', date + 1.day) }
 
   class << self
     def translated_types
@@ -211,9 +219,18 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     nil
   end
 
-  def destroy_documents
-    mark_for_destruction # Hack to work with the hard delete of operator documents
-    ActiveRecord::Base.connection.execute("DELETE FROM observation_documents WHERE observation_id = #{id}")
+  # Sets the responsible admin for an observation
+  # It starts by checking the monitor organization of the uploader to find its responsible person
+  # And if it doesn't find any, it iterates through all the monitors
+  def set_responsible_admin
+    self.responsible_admin = user&.observer&.responsible_user&.id
+    return if self.responsible_admin
+
+    observers.each do |observer|
+      if observer.responsible_user.present?
+        self.responsible_admin = observer.responsible_user&.id
+      end
+    end
   end
 
   def active_government
@@ -236,7 +253,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     return if STATUS_TRANSITIONS.dig(@user_type, validation_status_was)&.include? validation_status
 
     errors.add(:validation_status,
-               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}'' to ''#{validation_status}''")
+               "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}' to '#{validation_status}'")
   end
 
   def evidence_presented_in_the_report

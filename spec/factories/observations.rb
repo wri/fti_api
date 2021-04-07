@@ -31,9 +31,11 @@
 #  admin_comment         :text
 #  monitor_comment       :text
 #  responsible_admin_id  :integer
+#  deleted_at            :datetime
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string
+#  deleted_at            :datetime
 #
 
 FactoryBot.define do
@@ -79,6 +81,10 @@ FactoryBot.define do
     publication_date { DateTime.now.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
+
+    factory :created_observation, class: 'Observation' do
+      validation_status { 'Created' }
+    end
 
     after(:build) do |observation|
       observation.observers.each { |observer| observer.translation.name = observer.name  }

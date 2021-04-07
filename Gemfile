@@ -25,6 +25,10 @@ gem 'active_skin'
 # WYSIWYG
 gem 'activeadmin_quill_editor'
 
+# Graphs
+gem 'chartkick'
+gem 'groupdate'
+
 gem 'devise'
 
 # Soft Delete
@@ -73,9 +77,6 @@ gem 'slim-rails'
 # Performance
 gem 'newrelic_rpm'
 gem 'oink'
-
-# Monitoring
-gem 'appsignal'
 
 # Mail
 gem 'sendgrid-ruby'

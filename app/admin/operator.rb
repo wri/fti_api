@@ -12,7 +12,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   config.order_clause
 
   actions :all
-  permit_params :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
+  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, :delete_logo, :email, fmu_ids: [],
                                              translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
@@ -21,8 +21,26 @@ ActiveAdmin.register Operator, as: 'Producer' do
     redirect_to collection_path, notice: 'Operator activated'
   end
 
+  config.clear_action_items!
+
+  action_item only: [:show] do
+    link_to 'Edit Producer', edit_admin_producer_path(operator)
+  end
+
+  action_item only: [:show] do
+    confirmation_text =
+      if operator&.all_observations&.any?
+        "The operator has the observations with the ids: #{operator.all_observations.pluck(:id).join(', ')}.\nIf you want to keep them associated to the operator, please archive the operator instead."
+      else
+        'Are you sure you want to delete the producer?'
+      end
+    link_to 'Delete Producer', admin_producer_path(operator), method: :delete, data: { confirm: confirmation_text }
+  end
+
+
   csv do
     column :id
+    column :holding_id
     column :is_active
     column :country do |operator|
       operator.country.name rescue nil
@@ -43,6 +61,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   index do
     column 'Active?', :is_active
     column :id
+    column :holding
     column :country, sortable: 'country_translations.name'
     column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
@@ -62,7 +81,19 @@ ActiveAdmin.register Operator, as: 'Producer' do
       end
     end
 
-    actions
+    actions defaults: false do |operator|
+      item "View", admin_producer_path(operator)
+      text_node "<br/>".html_safe
+      item "Edit", edit_admin_producer_path(operator)
+      text_node "<br/>".html_safe
+      confirmation_text =
+          if operator&.all_observations&.any?
+            "The operator has the observations with the ids: #{operator.all_observations.pluck(:id).join(', ')}.\nIf you want to keep them associated to the operator, please archive the operator instead."
+          else
+            'Are you sure you want to delete the producer?'
+          end
+      link_to 'Delete', admin_producer_path(operator), method: :delete, data: { confirm: confirmation_text }
+    end
   end
 
   scope :all, default: true
@@ -126,6 +157,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
         t.input :name
         t.input :details
       end
+      f.input :holding, as: :select
       f.input :email
       f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
       f.input :operator_type, as: :select,
@@ -154,7 +186,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   show do
     attributes_table do
+      row :id
       row :is_active
+      row :holding
       row :name
       row :email
       row :operator_type
@@ -174,6 +208,23 @@ ActiveAdmin.register Operator, as: 'Producer' do
       end
       row :created_at
       row :updated_at
+      if resource.fa_id.present?
+        grouped_sod = ScoreOperatorDocument.where(operator_id: resource.id).group_by_day(:date, series: false)
+        row :total_documents do
+          render partial: 'score_evolution', locals: {
+            scores: grouped_sod.maximum(:total)
+          }
+        end
+        row :percentage_by_type do
+          render partial: 'score_evolution', locals: {
+            scores: [
+              { name: 'all', data: grouped_sod.maximum(:all) },
+              { name: 'per_country', data: grouped_sod.maximum(:country) },
+              { name: 'per_fmus', data: grouped_sod.maximum(:fmu) }
+            ]
+          }
+        end
+      end
     end
     active_admin_comments
   end
@@ -181,8 +232,11 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
 
   controller do
+    def find_resource
+      scoped_collection.unscope(:joins).with_translations.where(id: params[:id]).first!
+    end
     def scoped_collection
-      end_of_association_chain.with_translations.includes(country: :translations)
+      end_of_association_chain.with_translations(I18n.locale).includes(country: :translations)
     end
   end
 end

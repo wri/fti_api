@@ -35,12 +35,11 @@ class OperatorDocument < ApplicationRecord
   belongs_to :fmu
   belongs_to :user
   belongs_to :document_file, optional: :true
-  has_many :annex_documents, as: :documentable
+  has_many :annex_documents, as: :documentable, dependent: :destroy
   has_many :operator_document_annexes, through: :annex_documents
   accepts_nested_attributes_for :document_file
 
-  # TODO: Remove this. This hack was put here so that the factory can create user documents
-  unless Rails.env.test?
+  if attribute_names.include? :attachment
     mount_base64_uploader :attachment, OperatorDocumentUploader # TODO Remove this after migrating
   end
 
@@ -58,12 +57,15 @@ class OperatorDocument < ApplicationRecord
 
   after_destroy :regenerate
 
-  scope :valid,        -> { where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required,     -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
-  scope :from_user,    ->(operator_id) { where(operator_id: operator_id) }
-  scope :available,    -> { where(public: true) }
-  scope :ns,           -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
-  scope :to_expire, ->(date) {
+  scope :fmu_type,      -> { where(type: 'OperatorDocumentFmu') }
+  scope :country_type,  -> { where(type: 'OperatorDocumentCountry') }
+  scope :by_country,    ->(country_id) { joins(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
+  scope :valid,         -> { where(status: OperatorDocument.statuses[:doc_valid]) }
+  scope :required,      -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :from_user,     ->(operator_id) { where(operator_id: operator_id) }
+  scope :available,     -> { where(public: true) }
+  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+  scope :to_expire,     ->(date) {
     joins(:required_operator_document)
               .where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") 
   }
@@ -72,7 +74,7 @@ class OperatorDocument < ApplicationRecord
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
-  NON_HISTORICAL_ATTRIBUTES = %w[id attachment current deleted_at].freeze
+  NON_HISTORICAL_ATTRIBUTES = %w[id attachment current].freeze
 
   def self.expire_documents
     documents_to_expire = OperatorDocument.to_expire(Date.today)
@@ -111,8 +113,15 @@ class OperatorDocument < ApplicationRecord
   private
 
   def regenerate
-    return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
-    return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
+    # It only allows for (soft) deletion of the operator documents when:
+    # 1 - The Operator was deleted
+    # 2 - The Fmu was deleted
+    # 3 - The Required Operator Document was deleted
+    # 4 - The Operator is no longer active for this Fmu
+
+    create_history and return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
+    create_history and return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
+    create_history and return if fmu_id && (operator_id != fmu.operator&.id)
 
     update status: OperatorDocument.statuses[:doc_not_provided],
            expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
