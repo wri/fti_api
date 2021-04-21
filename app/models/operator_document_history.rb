@@ -56,7 +56,7 @@ class OperatorDocumentHistory < ApplicationRecord
     db_date = (date.to_date + 1.day).to_s(:db)
 
     # TODO check why for Pete's sake do we have OperatorDocumentHistory with operator_document_id nil?!?!?!
-    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date)
+    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
     # all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
     all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
 
