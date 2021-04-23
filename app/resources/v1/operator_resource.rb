@@ -84,8 +84,7 @@ module V1
     end
 
     def percentage_valid_documents_all
-      #@model.score_operator_document&.all
-      ScoreOperatorPresenter.new(@model.score_operator_document).all
+      @model.score_operator_document&.all
     end
 
     def percentage_valid_documents_fmu
