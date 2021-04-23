@@ -3,7 +3,15 @@
 class ScoreOperatorPresenter
   def initialize(score_operator_document)
     @score_operator_document = score_operator_document
-    @docs = OperatorDocumentHistory.from_operator_at_date(@score_operator_document.operator.id, @score_operator_document.date)
+    @docs = OperatorDocumentHistory.from_operator_at_date(@score_operator_document.operator.id, @score_operator_document.date).non_signature
+  end
+
+  def all
+    @docs.doc_valid.count.to_f / (@docs.count - @docs.doc_not_required.count).to_f
+  end
+    
+  def total
+    @docs.count
   end
 
   def summary_public
@@ -20,7 +28,7 @@ class ScoreOperatorPresenter
   # This information should only be shown to the own authenticated operator
   # @return [Hash]
   def create_summary_private
-    docs = @docs.non_signature
+    docs = @docs
     {
         doc_not_provided: docs.doc_not_provided.count,
         doc_pending: docs.doc_pending.count,
@@ -36,7 +44,7 @@ class ScoreOperatorPresenter
   # The documents in the states `doc_not_provided`, `doc_pending` and `doc_invalid` will be summed together
   # @return [Hash]
   def create_summary_public
-    docs = @docs.non_signature
+    docs = @docs
     non_visible_document_number = docs.doc_not_provided.count +
         docs.doc_pending.count + docs.doc_invalid.count
     {
