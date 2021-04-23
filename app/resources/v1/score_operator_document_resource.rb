@@ -23,7 +23,9 @@ module V1
 
     # Shows summary_private or summary_public depending on the authenticated user
     def summary
-      can_see_documents? ? @model.summary_private : @model.summary_public
+      #can_see_documents? ? @model.summary_private : @model.summary_public
+      presenter = ScoreOperatorPresenter.new(@model)
+      can_see_documents? ? presenter.summary_private : presenter.summary_public
     end
 
     def custom_links(_)
