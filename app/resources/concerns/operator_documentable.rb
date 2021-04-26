@@ -24,7 +24,7 @@ module OperatorDocumentable
     end
 
     def attachment
-      return @model&.document_file&.attachment if can_see_document? || document_public?
+      return @model&.attachment if can_see_document? || document_public?
 
       { url: nil }
     end
