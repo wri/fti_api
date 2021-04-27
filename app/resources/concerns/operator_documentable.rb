@@ -24,7 +24,11 @@ module OperatorDocumentable
     end
 
     def attachment
-      return @model&.document_file&.attachment if can_see_document? || document_public?
+      unless @model.attachment.nil?
+        return { url: @model&.document_file&.attachment.store_dir.gsub("_file","").gsub(@model.document_file.id.to_s,"") + @model.id.to_s + "/" + @model.attachment } if can_see_document? || document_public?
+      end
+      #doc.document_file.attachment.store_dir.gsub("_file","").gsub(doc.document_file.id.to_s,"") + doc.id.to_s + "/" + doc.attachment
+      #return @model&.document_file&.attachment if can_see_document? || document_public?
 
       { url: nil }
     end
