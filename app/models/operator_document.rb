@@ -52,8 +52,9 @@ class OperatorDocument < ApplicationRecord
   before_save :set_type, on: %w[create update]
   before_create :set_status
   before_create :delete_previous_pending_document
-  after_save ->{ ScoreOperatorDocument.recalculate!(operator) }, on: %w[create update],  if: :status_changed?
   after_save :create_history
+  after_save ->{ ScoreOperatorDocument.recalculate!(operator) }, on: %w[create update],  if: :status_changed?
+  
 
   after_destroy :regenerate
 

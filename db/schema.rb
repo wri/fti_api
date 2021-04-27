@@ -623,6 +623,7 @@ ActiveRecord::Schema.define(version: 20210106151820) do
     t.datetime "updated_at",                                   null: false
     t.integer  "status"
     t.integer  "operator_id"
+    t.string   "attachment"
     t.datetime "deleted_at"
     t.integer  "uploaded_by"
     t.integer  "user_id"
