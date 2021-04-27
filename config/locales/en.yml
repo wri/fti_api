@@ -416,6 +416,7 @@ en:
       doc_expired: 'Expired Document '
       doc_valid: 'Valid Document'
       doc_not_required: 'Not Required Document'
+      producer: 'Producer'
 
   filters:
     operator: 'Operator'
@@ -426,6 +427,7 @@ en:
     high: 'High'
     company: 'Company'
     forest_atlas: 'Forest Atlas'
+    other: 'Others'
 
 
 

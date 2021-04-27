@@ -42,6 +42,7 @@ gem 'rgeo'
 gem 'rgeo-geojson'
 
 # API
+#gem 'jsonapi-resources', '0.10.0'
 gem 'jsonapi-resources', '0.9.0'
 gem 'oj'
 gem 'oj_mimic_json'

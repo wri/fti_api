@@ -52,5 +52,16 @@ RSpec.describe Country, type: :model do
         expect(country.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
       end
     end
+    describe '#forest_types' do
+      it 'returns a list of forest types' do
+        country = create(:country)
+        fmu1 = FactoryBot.create(:fmu)
+        fmu2 = FactoryBot.create(:fmu)
+        country.fmus << fmu1
+        country.fmus << fmu2
+        country.save
+        expect(country.forest_types).to eql([fmu1.forest_type, fmu2.forest_type])
+      end
+    end
   end
 end

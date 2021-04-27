@@ -80,6 +80,10 @@ class Country < ApplicationRecord
     save!
   end
 
+  def forest_types
+    fmus.map { |fmu| fmu.forest_type }.compact.uniq
+  end
+
   private
 
   def set_active

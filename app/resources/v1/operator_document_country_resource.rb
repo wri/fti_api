@@ -16,5 +16,9 @@ module V1
     def self.creatable_fields(context)
       super - [:fmu_id]
     end
+
+    def type
+      @model.type
+    end
   end
 end

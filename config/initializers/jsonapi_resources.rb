@@ -72,10 +72,10 @@ module JSONAPI
               end
             else
               # Hack to work with Globalize
-              if @model_class.attribute_names.include?(field)
+              if @model_class&.attribute_names&.include?(field)
                 records = records.order(field => direction)
               else
-                if @model_class.new.attributes.key?(field) # To check if it exists in the translations table
+                if @model_class&.new&.attributes&.key?(field) # To check if it exists in the translations table
                   records = records.joins(:translations).with_translations(_context[:locale])
                               .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
                 end
