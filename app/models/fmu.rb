@@ -64,7 +64,7 @@ class Fmu < ApplicationRecord
   validate :geojson_correctness, if: :geojson_changed?
 
   after_save :update_geometry, if: :geojson_changed?
-  after_save :update_properties
+  before_save :update_properties
   before_destroy :really_destroy_documents
 
   default_scope { includes(:translations) }
@@ -158,7 +158,6 @@ class Fmu < ApplicationRecord
       self.properties['company_na'] = nil
       self.properties['operator_id'] = nil
     end
-    self.save
   end
 
   def bbox
