@@ -148,6 +148,7 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['certification_ls'] = self.certification_ls
     temp_geojson['properties']['observations'] = self.active_observations.reload.uniq.count
     temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
+  end
 
   def update_properties
     if self.operator.present?
