@@ -111,7 +111,7 @@ class Fmu < ApplicationRecord
           <<~SQL
             SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
              FROM (SELECT id, properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}), 4096, 256, true) AS mvtgeometry
-                                      FROM (select *, st_transform(geometry, 3857) as the_geom_webmercator from fmus) as data 
+                                      FROM (select *, st_transform(geometry, 3857) as the_geom_webmercator from fmus WHERE deleted_at IS NULL) as data 
                                     WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}),4096,0,true) IS NOT NULL) AS tile;
           SQL
 
