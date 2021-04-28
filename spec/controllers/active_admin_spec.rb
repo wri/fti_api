@@ -15,7 +15,7 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
 
     if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:index)
       describe "GET index" do
-        it "returns http success" do
+        xit "returns http success" do
           get :index
 
           expect(response.status).to eq(200)
@@ -26,7 +26,7 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
 
     if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:show)
       describe "GET index" do
-        it "returns http success" do
+        xit "returns http success" do
           get :index
 
           expect(response.status).to eq(200)

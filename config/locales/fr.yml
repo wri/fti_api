@@ -423,6 +423,7 @@ fr:
       doc_expired: 'Expired Document '
       doc_valid: 'Valid Document'
       doc_not_required: 'Not Required Document'
+      producer: 'Producteur'
 
 
 
@@ -436,6 +437,7 @@ fr:
     high: 'Haute'
     company: 'Operateur'
     forest_atlas: 'Forest Atlas'
+    other: 'Autres'
 
   wicked:
     types: 'observation-type'

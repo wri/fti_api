@@ -37,11 +37,15 @@ class OperatorDocumentHistory < ApplicationRecord
   has_many :annex_documents, as: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 
+  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+  scope :valid, -> { joins(:operator_document).where(operator_documents: { status: OperatorDocument.statuses[:doc_valid] }) } # valid doc
+
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
-  # Returns the operator documents for an operator at a point in time
+  # Returns the collection of OperatorDocumentHistory for a given operator at a point in time
+  #
   # @param String operator_id The operator id
   # @param String date the date at which to fetch the state
   def self.from_operator_at_date(operator_id, date)
@@ -50,15 +54,25 @@ class OperatorDocumentHistory < ApplicationRecord
     # the datetime will will always be bigger. For example '2020-01-01 02:00:00' > '2020-01-01'
     # We could use a sql function to extract the day, but this approach is more performant
     db_date = (date.to_date + 1.day).to_s(:db)
-    query = <<~SQL
-      (select * from
-      (select row_number() over (partition by required_operator_document_id, fmu_id order by updated_at desc), *
-      from operator_document_histories
-      where operator_id = #{operator_id} AND updated_at <= '#{db_date}') as sq
-      where sq.row_number = 1) as operator_document_histories
-    SQL
 
+    # TODO check why for Pete's sake do we have OperatorDocumentHistory with operator_document_id nil?!?!?!
+    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
+    # all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
+    all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
 
-    from(query)
+    # Removes older OperatorDocumentHistory for the same operator_document_id because we only want the latest one
+    all_operator_document_ids.each do |operator_document_id|
+      all_for_this_doc = all_document_histories.where(operator_document_id: operator_document_id).order({ updated_at: :desc })
+      if all_for_this_doc.count > 1 then all_document_histories.delete(all_for_this_doc[1..-1]) end
+    end
+
+    # Removes OperatorDocumentHistory where operator_document_id has no record in operator_documents because bugs happens
+    all_document_histories.each do |odh|
+      unless OperatorDocument.exists?(odh.operator_document_id)
+        all_document_histories.delete(odh)
+      end
+    end
+
+    all_document_histories
   end
 end

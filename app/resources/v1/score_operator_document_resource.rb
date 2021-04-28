@@ -21,9 +21,18 @@ module V1
       [{ field: 'date', direction: :desc }, { field: 'id', direction: :desc }]
     end
 
-    # Shows summary_private or summary_public depending on the authenticated user
+    def all
+      ScoreOperatorPresenter.new(@model).all
+    end
+
+    def total
+      ScoreOperatorPresenter.new(@model).total
+    end
+
     def summary
-      can_see_documents? ? @model.summary_private : @model.summary_public
+      #can_see_documents? ? @model.summary_private : @model.summary_public
+      presenter = ScoreOperatorPresenter.new(@model)
+      can_see_documents? ? presenter.summary_private : presenter.summary_public
     end
 
     def custom_links(_)

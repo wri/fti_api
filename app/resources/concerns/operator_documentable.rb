@@ -17,13 +17,16 @@ module OperatorDocumentable
     has_one :required_operator_document
     has_many :operator_document_annexes, foreign_key_on: :related
 
-    filters :type, :status, :operator_id
+    filters :type, :status, :operator_id, :fmu_id, :required_operator_document_id, :country_ids, :source, :legal_categories, :forest_types
 
     def custom_links(_)
       { self: nil }
     end
 
     def attachment
+      # unless @model.attachment.nil?
+      #   return { url: @model&.document_file&.attachment.store_dir.gsub("_file","").gsub(@model.document_file.id.to_s,"") + @model.id.to_s + "/" + @model.attachment } if can_see_document? || document_public?
+      # end
       return @model&.document_file&.attachment if can_see_document? || document_public?
 
       { url: nil }

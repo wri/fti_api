@@ -66,7 +66,8 @@ class ScoreOperatorDocument < ApplicationRecord
   # We also remove the one whose required_operator_documents have been deleted
   # @param [RequiredDocumentsQuery] query_builder the query method to use
   def calculate_scores(query_builder)
-    self.all = query_divider query_builder.new.call(operator.operator_documents), RequiredDocumentsQuery.new.call(operator.operator_documents)
+    self.all = ScoreOperatorPresenter.new(self).all
+    #self.all = query_builder.new.call(operator.operator_documents.non_signature).count.to_f / RequiredDocumentsQuery.new.call(operator.operator_documents.non_signature).count.to_f
     self.fmu = query_divider query_builder.new.call(operator.operator_document_fmus), RequiredDocumentsQuery.new.call(operator.operator_document_fmus)
     self.country = query_divider query_builder.new.call(operator.operator_document_countries), RequiredDocumentsQuery.new.call(operator.operator_document_countries)
   end
@@ -77,7 +78,7 @@ class ScoreOperatorDocument < ApplicationRecord
     presenter = OperatorPresenter.new(operator)
     self.summary_private = presenter.summary_private
     self.summary_public = presenter.summary_public
-    self.total = operator.operator_documents.count
+    self.total = operator.operator_documents.non_signature.count
   end
 
   protected
