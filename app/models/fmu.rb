@@ -64,6 +64,7 @@ class Fmu < ApplicationRecord
   validate :geojson_correctness, if: :geojson_changed?
 
   after_save :update_geometry, if: :geojson_changed?
+  after_save :update_properties
   before_destroy :really_destroy_documents
 
   default_scope { includes(:translations) }
@@ -148,7 +149,15 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['observations'] = self.active_observations.reload.uniq.count
     temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
 
-    self.geojson = temp_geojson
+  def update_properties
+    if self.operator.present?
+      self.properties['company_na'] = self.operator.name
+      self.properties['operator_id'] = self.operator.id
+    else
+      self.properties['company_na'] = nil
+      self.properties['operator_id'] = nil
+    end
+    self.save
   end
 
   def bbox
