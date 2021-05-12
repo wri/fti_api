@@ -59,21 +59,14 @@ class OperatorDocumentHistory < ApplicationRecord
     all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
     all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
 
-    those_that_i_dont_want =  []
+    previous_versions =  []
     
     # Removes older OperatorDocumentHistory for the same operator_document_id because we only want the latest one
     all_operator_document_ids.each do |operator_document_id|
-      all_for_this_doc = all_document_histories.where(operator_document_id: operator_document_id).order({ updated_at: :asc })
-      if all_for_this_doc.count > 1 then those_that_i_dont_want.push(all_for_this_doc[1..-1].pluck(:id)) end
+      all_for_this_doc = all_document_histories.where(operator_document_id: operator_document_id).order({ updated_at: :desc })
+      if all_for_this_doc.count > 1 then previous_versions.push(all_for_this_doc[1..-1].pluck(:id)) end
     end
-
-    # Removes OperatorDocumentHistory where operator_document_id has no record in operator_documents because bugs happens
-    all_document_histories.each do |odh|
-      unless OperatorDocument.exists?(odh.operator_document_id)
-        all_document_histories.delete(odh)
-      end
-    end
-
-    all_document_histories= OperatorDocumentHistory.where.not(id: those_that_i_dont_want.flatten).where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
+    
+    all_document_histories= OperatorDocumentHistory.where.not(id: previous_versions.flatten).where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
   end
 end

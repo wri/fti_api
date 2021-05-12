@@ -59,7 +59,7 @@ module V1
         let(:time1) { Time.local(2020, 10, 10, 0, 0, 0) }
         let(:time2) { Time.local(2020, 10, 15, 0, 0, 0) }
         let(:time3) { Time.local(2020, 10, 20, 0, 0, 0)}
-        it 'Fetches the old state of the operator' do
+        it 'Fetches the old state of the operator document' do
           operator_document = FactoryBot.create :operator_document_country
           attachment = operator_document.document_file.attachment_url
           travel_to time1
@@ -75,6 +75,43 @@ module V1
           expect(status).to eql(200)
           expect(first_parsed_attributes[:status]).to eql('doc_valid')
           expect(first_parsed_attributes[:attachment][:url]).to eql(attachment)
+        end
+
+        it 'Fetches the current state of the operator document' do
+          operator_document = FactoryBot.create :operator_document_country
+          attachment = operator_document.document_file.attachment_url
+          travel_to time1
+          operator_document.update(status: 'doc_invalid')
+          travel_to time2
+          operator_document.update note: 'new note'
+          travel_to time3
+          operator_document.update(status: 'doc_valid')
+
+          search_time = (time3).to_date.to_s(:db)
+          get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
+              headers: admin_headers)
+          expect(status).to eql(200)
+          expect(first_parsed_attributes[:status]).to eql('doc_valid')
+          expect(first_parsed_attributes[:attachment][:url]).to eql(attachment)
+        end
+
+        it 'Fetches only one history per operator document' do
+          operator_document = FactoryBot.create :operator_document_country
+          other_operator_document = FactoryBot.create :operator_document_country, operator_id: operator_document.operator_id
+          attachment = operator_document.document_file.attachment_url
+          travel_to time1
+          operator_document.update(status: 'doc_invalid')
+          travel_to time2
+          operator_document.update note: 'new note'
+          travel_to time3
+          operator_document.update(status: 'doc_valid')
+
+          search_time = (time3).to_date.to_s(:db)
+          get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
+              headers: admin_headers)  
+          expect(status).to eql(200)
+          expect(extract_operator_document_id.include?(operator_document.id)).to eql(true)
+          expect(extract_operator_document_id.count(operator_document.id)).to eql(1)
         end
       end
     end

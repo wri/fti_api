@@ -25,6 +25,10 @@ module IntegrationHelper
     Oj.load(response.body, symbol_keys: true)
   end
 
+  def extract_operator_document_id
+    parsed_data.map{|h| h[:attributes][:"operator-document-id"]}.compact
+  end
+
   def parsed_error
     parsed_body[:error]
   end
