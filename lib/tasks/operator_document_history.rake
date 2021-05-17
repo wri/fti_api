@@ -37,7 +37,8 @@ namespace :operator_documents_histories do
       odhs.each do |odh|
           od = odh.operator_document
           unless odh.status == od.status
-              od.create_history
+              od.updated_at = DateTime.now
+              od.save!
               ScoreOperatorDocument.recalculate!(opt)
           end
       end
@@ -51,7 +52,8 @@ namespace :operator_documents_histories do
     odhs.each do |odh|
         od = odh.operator_document
         unless odh.status == od.status
-            od.create_history
+            od.updated_at = DateTime.now
+            od.save!
             ScoreOperatorDocument.recalculate!(opt)
         end
     end
