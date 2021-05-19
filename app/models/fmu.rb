@@ -56,7 +56,7 @@ class Fmu < ApplicationRecord
   accepts_nested_attributes_for :operators
   accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
 
-  before_validation :update_geojson
+  before_validation :update_geojson, :update_properties
 
   validates :country_id, presence: true
   validates :name, presence: true
@@ -64,7 +64,7 @@ class Fmu < ApplicationRecord
   validate :geojson_correctness, if: :geojson_changed?
 
   after_save :update_geometry, if: :geojson_changed?
-  before_save :update_properties
+
   before_destroy :really_destroy_documents
 
   default_scope { includes(:translations) }
@@ -111,7 +111,7 @@ class Fmu < ApplicationRecord
           <<~SQL
             SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
              FROM (SELECT id, properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}), 4096, 256, true) AS mvtgeometry
-                                      FROM (select *, st_transform(geometry, 3857) as the_geom_webmercator from fmus WHERE deleted_at IS NULL) as data 
+                                      FROM (select *, st_transform(geometry, 3857) as the_geom_webmercator from fmus WHERE deleted_at IS NULL) as data
                                     WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}),4096,0,true) IS NOT NULL) AS tile;
           SQL
 
@@ -150,13 +150,18 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
   end
 
+    self.geojson = temp_geojson
+  end
+
   def update_properties
-    if self.operator.present?
-      self.properties['company_na'] = self.operator.name
-      self.properties['operator_id'] = self.operator.id
+    self.properties = {} if properties.blank?
+
+    if operator.present?
+      properties['company_na'] = operator.name
+      properties['operator_id'] = operator.id
     else
-      self.properties['company_na'] = nil
-      self.properties['operator_id'] = nil
+      properties['company_na'] = nil
+      properties['operator_id'] = nil
     end
   end
 
