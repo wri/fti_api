@@ -30,6 +30,7 @@ class DocumentMigrationService
   # Creates an OperatorDocumentHistory for the last current version of the operator document
   # and deletes the ones that aren't current but do have a current version with an existing OperatorDocumentHistory
   #
+  # rubocop:disable Rails/Output
   def migrate_documents
     return unless @documents
 
@@ -43,8 +44,8 @@ class DocumentMigrationService
 
     operator_documents_unscoped.find_each do |od|
       current = operator_documents_unscoped.where(current: true, operator_id: od.operator_id,
-                                                required_operator_document_id: od.required_operator_document_id,
-                                                fmu_id: od.fmu_id).order(updated_at: :desc)
+                                                  required_operator_document_id: od.required_operator_document_id,
+                                                  fmu_id: od.fmu_id).order(updated_at: :desc)
 
       if current.none?
         not_to_destroy.push(od.id)
@@ -71,4 +72,5 @@ class DocumentMigrationService
 
     operator_documents_destroyable.delete_all
   end
+  # rubocop:enable Rails/Output
 end
