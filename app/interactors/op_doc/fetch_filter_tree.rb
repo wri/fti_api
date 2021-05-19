@@ -42,7 +42,7 @@ module OpDoc
     end
 
     def legal_categories
-      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first.id
+      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
       RequiredOperatorDocumentGroup.with_translations.map do |x|
         unless x.id == group_id_to_exclude
           { id: x.id, name: x.name,
@@ -64,7 +64,7 @@ module OpDoc
     end
 
     def required_operator_document_ids
-      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first.id
+      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
       RequiredOperatorDocument.with_translations.map do |x|
         unless x.required_operator_document_group_id == group_id_to_exclude
           { id: x.id, name: beautify_name(x.name) }
