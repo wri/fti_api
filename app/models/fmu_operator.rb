@@ -30,7 +30,7 @@ class FmuOperator < ApplicationRecord
   validate :one_active_per_fmu
   validate :non_colliding_dates
 
-  after_save :update_documents_list
+  # after_save :update_documents_list
   after_save :update_fmu_geojson
 
   # Sets the start date as today, if none is provided
