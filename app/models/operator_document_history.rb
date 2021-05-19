@@ -55,8 +55,11 @@ class OperatorDocumentHistory < ApplicationRecord
     # We could use a sql function to extract the day, but this approach is more performant
     db_date = (date.to_date + 1.day).to_s(:db)
 
+    #TODO improve the fmu filters to work with an historical approach
+    operator_fmus_ids = Operator.find(operator_id).fmus.pluck(:id)
+
     # TODO check why for Pete's sake do we have OperatorDocumentHistory with operator_document_id nil?!?!?!
-    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
+    all_document_histories= OperatorDocumentHistory.where(operator_id: operator_id).where(fmu_id: operator_fmus_ids).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
     all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
 
     previous_versions =  []
@@ -67,6 +70,6 @@ class OperatorDocumentHistory < ApplicationRecord
       if all_for_this_doc.count > 1 then previous_versions.push(all_for_this_doc[1..-1].pluck(:id)) end
     end
     
-    all_document_histories= OperatorDocumentHistory.where.not(id: previous_versions.flatten).where(operator_id: operator_id).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
+    all_document_histories= OperatorDocumentHistory.where.not(id: previous_versions.flatten).where(operator_id: operator_id).where(fmu_id: operator_fmus_ids).where.not(operator_document_id: nil).where('operator_document_histories.updated_at <= ?', db_date).non_signature
   end
 end
