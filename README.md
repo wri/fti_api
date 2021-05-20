@@ -26,18 +26,21 @@ cd fti_api
 - [Docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
 
-### EXECUTING ###
+### RUNNING DB IN DOCKER ###
 
-  To setup the project on docker:
+PostgreSQL database with PostGIS will run on standard 5432 port, so make sure it's not already taken.
 
-```
-./service develop
-```
-
-  To run the tests on docker:
+Do not forget to setup those env variables for the database
 
 ```
-./service test
+POSTGRES_PORT_5432_TCP_ADDR=localhost
+POSTGRES_USER=postgres
+```
+
+And run container
+
+```
+docker-compose up
 ```
 
 ## NATIVELY ##
@@ -45,7 +48,7 @@ cd fti_api
 ### REQUIREMENTS ###
 
   - **Ruby version:** 2.4.6
-  - **PostgreSQL 9.4+** [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
+  - **PostgreSQL 12.1+** [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
 
 **Just execute the script file in `bin/setup`**
 

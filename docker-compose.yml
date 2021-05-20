@@ -1,25 +1,10 @@
 version: "3.8"
 services:
-  # web:
-  #   build: .
-  #   command: develop
-  #   volumes:
-  #     - .:/fti_api
-  #   ports:
-  #     - '3000:3000'
-  #   depends_on:
-  #     - db
-  #   env_file: dev.env
-
   db:
     image: postgis/postgis:12-3.1-alpine
     container_name: postgres_fti_api
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
-    # environment:
-    #   - POSTGRES_PASSWORD=example
-    #   - POSTGRES_USER=postgres
-    #   - POSTGRES_DB=tota
     ports:
       - 5432:5432
     volumes:
@@ -27,7 +12,3 @@ services:
 
 volumes:
   fti_api_db:
-
-# redis:
-#   image: redis
-#   container_name: redis_fti_api
