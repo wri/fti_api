@@ -9,7 +9,7 @@ class ScoreOperatorPresenter
   def all
     @docs.doc_valid.count.to_f / (@docs.count - @docs.doc_not_required.count).to_f
   end
-    
+
   def total
     @docs.count
   end
