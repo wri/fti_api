@@ -30,8 +30,8 @@ FactoryBot.define do
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
     type { 'OperatorDocumentCountry' } # This can be overwritten by the children.
-    document_file { FactoryBot.build :document_file }
 
+    document_file
 
     after(:build) do |random_operator_document|
       country = random_operator_document&.operator&.country ||
