@@ -38,7 +38,7 @@ class OperatorPresenter
     docs = @operator.operator_documents.non_signature
     non_visible_document_number = docs.doc_not_provided.count +
         docs.doc_pending.count + docs.doc_invalid.count
-        # what should we do with doc_valid but yes_signature?
+    # what should we do with doc_valid but yes_signature?
     {
         doc_not_provided: non_visible_document_number,
         doc_valid: docs.doc_valid.count,

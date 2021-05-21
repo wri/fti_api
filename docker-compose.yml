@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  db:
+    image: postgis/postgis:12-3.1-alpine
+    container_name: postgres_fti_api
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 5432:5432
+    volumes:
+      - fti_api_db:/var/lib/postgresql/data
+
+volumes:
+  fti_api_db:

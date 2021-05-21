@@ -92,6 +92,9 @@ gem 'paper_trail'
 # Interactors
 gem "interactor", "~> 3.0"
 
+# Mimemagic temporary fix before upgrading to Rails 5.2
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
+
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
@@ -129,6 +132,7 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 4.0.1'
   gem 'simplecov'
+  gem 'super_diff'
 end
 
 # Server

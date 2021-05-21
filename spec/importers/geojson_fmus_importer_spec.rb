@@ -10,9 +10,9 @@ describe GeojsonFmusImporter, type: :importer do
   let(:importer) { FileDataImport::BaseImporter.build(importer_type, uploaded_file) }
 
   context "ZIP with Esri shape files" do
-    xit "returns right result" do
+    it "returns right result" do
       importer.import
-      expect(importer.results.to_json).to eq(results.strip)
+      expect(importer.results.as_json).to eq(JSON.parse(results))
     end
   end
 end

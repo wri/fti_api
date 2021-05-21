@@ -54,3 +54,6 @@ erd.png
 
 # Ignore test tasks
 /lib/tasks/test.rake
+
+# Ignore uploads in specs
+/spec/support/uploads

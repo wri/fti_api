@@ -161,8 +161,10 @@ RSpec.describe FmuOperator, type: :model do
         before do
           country = create(:country)
           @fmu = create(:fmu, country: country, forest_type: 1)
+
           operator = create(:operator, country: country, fa_id: 'fa_id')
           create(:fmu_operator, operator: operator, fmu: @fmu)
+
           another_operator = create(:operator, country: country, fa_id: 'fa_id')
           @fmu_operator =
             create(
@@ -183,10 +185,15 @@ RSpec.describe FmuOperator, type: :model do
             required_operator_document: required_operator_document)
 
           create_list(:required_operator_document_fmu, 3, country: country, forest_types: [1])
+
+          @fmu.reload
         end
 
         it 'update the list of documents attached on itself' do
-          @fmu_operator.save
+          # I think initally this test was testing callback in this model
+          # but it is not needed as there are another callbacks when creating required document fmu object
+          # just in case I'm leaving this comment
+          # @fmu_operator.save!
 
           # TODO: Check if this makes sense
           # expect(

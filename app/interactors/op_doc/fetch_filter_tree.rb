@@ -42,18 +42,17 @@ module OpDoc
     end
 
     def legal_categories
-      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first.id
+      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
       RequiredOperatorDocumentGroup.with_translations.map do |x|
         unless x.id == group_id_to_exclude
           { id: x.id, name: x.name,
-          required_operator_document_ids: x.required_operator_documents.pluck(:id)
-         }
+            required_operator_document_ids: x.required_operator_documents.pluck(:id) }
         end
       end.compact.sort_by { |x| x[:name] }
     end
 
     def forest_types
-      ConstForestTypes::FOREST_TYPES.map do |key, value| 
+      ConstForestTypes::FOREST_TYPES.map do |key, value|
         { key: key, id: value[:index], name: value[:label] }
       end.sort_by { |x| x[:name] }
     end
@@ -65,7 +64,7 @@ module OpDoc
     end
 
     def required_operator_document_ids
-      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first.id
+      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
       RequiredOperatorDocument.with_translations.map do |x|
         unless x.required_operator_document_group_id == group_id_to_exclude
           { id: x.id, name: beautify_name(x.name) }
@@ -93,7 +92,7 @@ module OpDoc
 
     def beautify_name(name)
       name.split(" ").each_with_index.map do |word, index|
-        if index == 0
+        if index.zero?
           word.capitalize
         else
           if word == word.upcase

@@ -18,7 +18,7 @@
 require 'rails_helper'
 
 RSpec.describe Country, type: :model do
-  subject(:country) { FactoryBot.build(:country) }
+  subject(:country) { build(:country) }
 
   it 'is valid with valid attributes' do
     country = build(:country)
@@ -55,8 +55,8 @@ RSpec.describe Country, type: :model do
     describe '#forest_types' do
       it 'returns a list of forest types' do
         country = create(:country)
-        fmu1 = FactoryBot.create(:fmu)
-        fmu2 = FactoryBot.create(:fmu)
+        fmu1 = create(:fmu, forest_type: 1)
+        fmu2 = create(:fmu, forest_type: 2)
         country.fmus << fmu1
         country.fmus << fmu2
         country.save
