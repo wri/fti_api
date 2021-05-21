@@ -6,13 +6,6 @@ if Rails.env.test?
     config.enable_processing = false
   end
 
-  # Make sure your tested uploaders are included:
-  PhotoUploader
-  ObservationDocumentUploader
-  LogoUploader
-  OperatorDocumentUploader
-  PartnerLogoUploader
-
   CarrierWave::Uploader::Base.descendants.each do |klass|
     next if klass.anonymous?
 
