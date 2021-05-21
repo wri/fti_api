@@ -34,14 +34,10 @@ class OperatorDocument < ApplicationRecord
   belongs_to :required_operator_document, -> { with_archived }, required: true
   belongs_to :fmu
   belongs_to :user
-  belongs_to :document_file, optional: :true
+  belongs_to :document_file, optional: :true, inverse_of: :operator_document
   has_many :annex_documents, as: :documentable, dependent: :destroy
   has_many :operator_document_annexes, through: :annex_documents
   accepts_nested_attributes_for :document_file
-
-  if attribute_names.include? :attachment
-    mount_base64_uploader :attachment, OperatorDocumentUploader # TODO Remove this after migrating
-  end
 
   before_validation :set_expire_date, unless: :expire_date?
 
@@ -54,7 +50,7 @@ class OperatorDocument < ApplicationRecord
   before_create :delete_previous_pending_document
   after_save :create_history
   after_save ->{ ScoreOperatorDocument.recalculate!(operator) }, on: %w[create update],  if: :status_changed?
-  
+
 
   after_destroy :regenerate
 
@@ -72,7 +68,7 @@ class OperatorDocument < ApplicationRecord
   scope :available,                              -> { where(public: true) }
   scope :non_signature,                          -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :to_expire,                              ->(date) { joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
-    
+
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
