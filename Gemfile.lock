@@ -15,13 +15,6 @@ GIT
       globalize (>= 3.1.0, < 6.0)
 
 GIT
-  remote: https://github.com/mimemagicrb/mimemagic.git
-  revision: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
-  ref: 01f92d86d15d85cfd0f20dabd025dcbd36a8a60f
-  specs:
-    mimemagic (0.3.5)
-
-GIT
   remote: https://github.com/tsubik/rspec_api_documentation.git
   revision: a0f70af60c16737577818ca4ff01475da71958e5
   branch: fix/open-api-parameter-format
@@ -613,7 +606,6 @@ DEPENDENCIES
   jsonapi-resources (= 0.9.0)
   jwt
   listen (~> 3.0.5)
-  mimemagic!
   mini_magick
   newrelic_rpm
   oink
