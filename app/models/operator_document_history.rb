@@ -66,13 +66,13 @@ class OperatorDocumentHistory < ApplicationRecord
     all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
 
     previous_versions =  []
-    
+
     # Removes older OperatorDocumentHistory for the same operator_document_id because we only want the latest one
     all_operator_document_ids.each do |operator_document_id|
       all_for_this_doc = all_document_histories.where(operator_document_id: operator_document_id).order({ updated_at: :desc })
       if all_for_this_doc.count > 1 then previous_versions.push(all_for_this_doc[1..-1].pluck(:id)) end
     end
-    
-    result = all_document_histories.where.not(id: previous_versions.flatten)
+
+    all_document_histories.where.not(id: previous_versions.flatten)
   end
 end
