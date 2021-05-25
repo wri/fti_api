@@ -16,11 +16,15 @@ class DocumentFileUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    filename = model.file_name
-    filename ||= super&.split('.')&.first
-    extension = super&.split('.')&.last
-    extension = extension.blank? ? '' : '.' + extension
-    filename + extension
+    return super if model.operator_document.nil?
+
+    filename = [
+      model.operator_document.operator.name[0...30]&.parameterize,
+      model.operator_document.required_operator_document.name[0...100]&.parameterize,
+      Date.today.to_s
+    ].compact.join('-')
+
+    filename + File.extname(super)
   end
 
   def original_filename

@@ -28,7 +28,7 @@ require 'rails_helper'
 RSpec.describe OperatorDocumentHistory, type: :model do
 
   describe 'Existence' do
-    let (:od) { FactoryBot.create(:operator_document_country) }
+    let! (:od) { create(:operator_document_country) }
     context 'Creating an OperatorDocument' do
       it 'Adds an OperatorDocumentHistory' do
         odh = OperatorDocumentHistory.find_by(operator_document_id: od.id)

@@ -33,8 +33,7 @@ module OperatorDocumentable
     end
 
     def attachment=(attachment)
-      df = DocumentFile.new(attachment: attachment)
-      @model.document_file = df
+      @model.build_document_file(attachment: attachment)
       nil
     end
 
