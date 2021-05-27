@@ -24,6 +24,7 @@
 #  operator_id                   :integer
 #  user_id                       :integer
 #  required_operator_document_id :integer
+#  deleted_at                    :datetime
 #
 class OperatorDocumentHistory < ApplicationRecord
   acts_as_paranoid
