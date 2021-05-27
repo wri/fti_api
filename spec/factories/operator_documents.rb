@@ -12,6 +12,7 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
+#  attachment                    :string
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
