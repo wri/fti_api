@@ -17,6 +17,7 @@ class DocumentFileUploader < CarrierWave::Uploader::Base
 
   def filename
     return super if model.operator_document.nil?
+    return if super.blank?
 
     filename = [
       model.operator_document.operator.name[0...30]&.parameterize,
