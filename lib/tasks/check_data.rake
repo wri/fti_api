@@ -1,7 +1,7 @@
 namespace :check do
   task operator_approved: :environment do
     Operator.find_each do |operator|
-      valid_approved_status = operator.operator_documents.signature.valid.any?
+      valid_approved_status = operator.operator_documents.signature.approved.any?
 
       next if valid_approved_status == operator.approved?
 
