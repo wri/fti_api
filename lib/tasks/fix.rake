@@ -29,7 +29,13 @@ namespace :fix do
       start_name = operator.name[0...30]&.parameterize
       next if df.attachment.identifier.start_with?(start_name)
 
-      puts "WRONG NAME #{df.attachment.identifier}"
+      new_name = [
+        operator.name[0...30]&.parameterize,
+        df.owner.required_operator_document.name[0...100]&.parameterize,
+        df.created_at.strftime('%Y-%m-%d')
+      ].compact.join('-') + File.extname(filename)
+
+      puts "WRONG NAME #{df.attachment.identifier} will be changed to #{new_name}"
       count_wrong_name += 1
     end
 
