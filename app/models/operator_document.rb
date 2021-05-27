@@ -66,6 +66,7 @@ class OperatorDocument < ApplicationRecord
   scope :from_user,                              ->(operator_id) { where(operator_id: operator_id) }
   scope :by_source,                              ->(source_id) { where(source: source_id) }
   scope :available,                              -> { where(public: true) }
+  scope :signature,                              -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: true }) }
   scope :non_signature,                          -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :to_expire,                              ->(date) { joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
 

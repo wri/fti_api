@@ -35,19 +35,16 @@ RSpec.describe OperatorDocumentCountry, type: :model do
 
   describe 'Validations' do
     describe '#invalidate_operator' do
-      context 'when operator is approved' do
+      context 'when operator was approved' do
         it 'set approved field to false on the operator' do
           country = create(:country)
           operator = create(:operator, approved: true, country: country)
-          required_operator_document =
-            create(:required_operator_document_country, contract_signature: true, country: country)
+          required_operator_document = create(:required_operator_document_country, contract_signature: true, country: country)
           operator_document = create(:operator_document_country,
-                 required_operator_document: required_operator_document,
-                 operator: operator)
-
-          operator_document.status = :doc_valid
-          operator_document.save
-          expect(operator_document.status).to eql('doc_valid')
+                                     required_operator_document: required_operator_document,
+                                     operator: operator)
+          operator_document.update!(status: :doc_invalid)
+          expect(operator_document.status).to eql('doc_invalid')
           operator.reload
           expect(operator.approved).to eql false
         end
@@ -55,7 +52,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
     end
 
     describe '#validate_operator' do
-      context 'when operator is not approved' do
+      context 'when operator was not approved' do
         it 'set approved field to true on the operator' do
           operator = create(:operator, approved: false)
           required_operator_document =
@@ -65,7 +62,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
             required_operator_document: required_operator_document,
             operator: operator)
 
-          operator_document_country.update_attributes(status: :doc_valid)
+          operator_document_country.update!(status: :doc_valid)
 
           operator.reload
           expect(operator.approved).to eql true
