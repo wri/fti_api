@@ -14,7 +14,7 @@ resource 'Countries' do
   header 'Authorization', :admin_token
   authentication :apiKey, :web_token , name: 'OTP-API-KEY'
 
-  let(:countries) { FactoryBot.create_list(:country, 5) }
+  let!(:countries) { FactoryBot.create_list(:country, 5, is_active: true) }
   let!(:operator) { FactoryBot.create_list(:operator, 3, country: countries.first) }
   let!(:fmu) { FactoryBot.create_list(:fmu, 5, { country: countries.first }) }
 
