@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'translatable' do |model, fields|
   fields.each do |field|
     context "##{field}" do
