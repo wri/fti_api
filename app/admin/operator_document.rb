@@ -8,7 +8,7 @@ ActiveAdmin.register OperatorDocument do
   versionate
 
   menu false
-  config.order_clause
+  config.sort_order = 'updated_at_desc'
 
   active_admin_paranoia
 
