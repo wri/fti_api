@@ -19,13 +19,20 @@ jobs:
         ports: ["5432:5432"]
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
       - name: Install dependencies
         run: |
-          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev gdal-bin
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Setup gems cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-use-ruby-${{ hashFiles('**/Gemfile.lock') }}
+      - name: Install gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
       - name: Setup test database
         env:
           RAILS_ENV: test
@@ -34,7 +41,7 @@ jobs:
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
         run: |
-          bin/rails db:create db:structure:load
+          bin/rails db:create db:schema:load
       - name: Run tests
         env:
           RAILS_ENV: test
@@ -42,6 +49,12 @@ jobs:
           POSTGRES_PORT_5432_TCP_PORT: 5432
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          RECOVER_URL: http://localhost:5000
+          SENDGRID_API_KEY: asdf
+          CONTACT_EMAIL: nomail@nomail.com
+          RESPONSIBLE_EMAIL: test@nomail.com
+          AUTH_SECRET: secret
+          ADMIN_PASSWORD: password
         run: bundle exec rspec spec
       - name: Upload Code Coverage
         uses: actions/upload-artifact@v2
