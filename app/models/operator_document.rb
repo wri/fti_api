@@ -14,6 +14,7 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
+#  attachment                    :string
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -61,11 +62,13 @@ class OperatorDocument < ApplicationRecord
   scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmu') }
   scope :country_type,                           -> { where(type: 'OperatorDocumentCountry') }
   scope :from_active_operators,                  -> { joins(:operator).where(operators: { is_active: true }) }
-  scope :valid,                                  -> { where(status: OperatorDocument.statuses[:doc_valid]) }
-  scope :required,                               -> { where.not(status: OperatorDocument.statuses[:doc_not_required]) }
+  scope :approved,                               -> { where(status: %i[doc_valid doc_not_required]) }
+  scope :valid,                                  -> { where(status: :doc_valid) }
+  scope :required,                               -> { where.not(status: :doc_not_required) }
   scope :from_user,                              ->(operator_id) { where(operator_id: operator_id) }
   scope :by_source,                              ->(source_id) { where(source: source_id) }
   scope :available,                              -> { where(public: true) }
+  scope :signature,                              -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: true }) }
   scope :non_signature,                          -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :to_expire,                              ->(date) { joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
 

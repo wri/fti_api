@@ -14,6 +14,7 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
+#  attachment                    :string
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -29,12 +30,11 @@
 class OperatorDocumentCountry < OperatorDocument
   belongs_to :required_operator_document_country, foreign_key: 'required_operator_document_id'
 
-  after_update :update_operator_approved, if: -> { required_operator_document.contract_signature }
+  after_update :update_operator_approved, if: -> { required_operator_document.contract_signature? }
 
   protected
 
   def update_operator_approved
-    Operator.where(id: operator.id).update(approved: approved?) unless operator.approved == approved?
+    operator.update(approved: approved?) unless operator.approved == approved?
   end
-
 end
