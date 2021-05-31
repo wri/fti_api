@@ -56,13 +56,14 @@ class Fmu < ApplicationRecord
   accepts_nested_attributes_for :operators
   accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
 
-  before_validation :update_geojson, :update_properties
+  before_validation :update_geojson
 
   validates :country_id, presence: true
   validates :name, presence: true
   validates :forest_type, presence: true
   validate :geojson_correctness, if: :geojson_changed?
 
+  before_save :update_properties
   after_save :update_geometry, if: :geojson_changed?
 
   before_destroy :really_destroy_documents
@@ -139,8 +140,8 @@ class Fmu < ApplicationRecord
     temp_geojson['properties']['id'] = self.id
     temp_geojson['properties']['fmu_name'] = self.name
     temp_geojson['properties']['iso3_fmu'] = self.country&.iso
-    temp_geojson['properties']['company_na'] = self.operator.name if self.operator.present?
-    temp_geojson['properties']['operator_id'] = self.operator.id if self.operator.present?
+    temp_geojson['properties']['company_na'] = self.operator&.name
+    temp_geojson['properties']['operator_id'] = self.operator&.id
     temp_geojson['properties']['certification_fsc'] = self.certification_fsc
     temp_geojson['properties']['certification_pefc'] = self.certification_pefc
     temp_geojson['properties']['certification_olb'] = self.certification_olb
@@ -156,14 +157,8 @@ class Fmu < ApplicationRecord
 
   def update_properties
     self.properties = {} if properties.blank?
-
-    if operator.present?
-      properties['company_na'] = operator.name
-      properties['operator_id'] = operator.id
-    else
-      properties['company_na'] = nil
-      properties['operator_id'] = nil
-    end
+    properties['company_na'] = operator&.name
+    properties['operator_id'] = operator&.id
   end
 
   def bbox
@@ -208,16 +203,15 @@ class Fmu < ApplicationRecord
     query =
       <<~SQL
         WITH g as (
-        SELECT *, x.properties as prop, ST_GeomFromGeoJSON(x.geometry) as the_geom
+        SELECT *, ST_GeomFromGeoJSON(x.geometry) as the_geom
         FROM fmus CROSS JOIN LATERAL
         jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb, properties jsonb )
         )
         update fmus
-        set geometry = g.the_geom , properties = g.prop
+        set geometry = g.the_geom
         from g
         where fmus.id = g.id;
       SQL
-
     ActiveRecord::Base.connection.execute query
   end
 
