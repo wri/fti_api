@@ -1,0 +1,50 @@
+env:
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+
+name: Tests
+on: push
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-20.04
+
+    services:
+      postgres:
+        image: postgis/postgis:12-3.1-alpine
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        ports: ["5432:5432"]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Install dependencies
+        run: |
+          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          POSTGRES_PORT_5432_TCP_ADDR: localhost
+          POSTGRES_PORT_5432_TCP_PORT: 5432
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        run: |
+          bin/rails db:create db:structure:load
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          POSTGRES_PORT_5432_TCP_ADDR: localhost
+          POSTGRES_PORT_5432_TCP_PORT: 5432
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        run: bundle exec rspec spec
+      - name: Upload Code Coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: coverage/
