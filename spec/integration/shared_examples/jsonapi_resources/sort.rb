@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources__sort' do |options|
   context "Sort" do
     let(:jsonapi_attribute) { options[:attribute].to_s.gsub('_', '-').to_sym }

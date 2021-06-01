@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources__edit' do |options|
   context "Edit" do
     let(:resource) { create(@singular.to_sym) }
