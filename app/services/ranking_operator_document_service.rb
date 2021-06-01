@@ -25,7 +25,7 @@ class RankingOperatorDocumentService
       # Updates the ranking operator documents for operators with more than 0 documents
       insert_ranking country
       # Updates the ranking operator documents for the operators that have 0 documents
-      operator_count = Operator.where(country: country).fa_operator.count
+      operator_count = Operator.where(country: country).active.fa_operator.count
       insert_ranking country, operator_count
     end
   end
@@ -48,11 +48,12 @@ class RankingOperatorDocumentService
     # Operators that have 0 documents should all be last with the ranking equal to the number of operators
     query = <<~SQL
       INSERT INTO ranking_operator_documents(operator_id, position, country_id, current, date, created_at, updated_at)
-      SELECT operators.id, #{select}, #{country.id}, true, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP 
+      SELECT operators.id, #{select}, #{country.id}, true, CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
       FROM score_operator_documents
       INNER JOIN operators on operators.id = score_operator_documents.operator_id
       WHERE country_id = #{country.id}
       AND operators.fa_id <> 'NULL'
+      AND operators.is_active = true
       AND score_operator_documents.current = true
       AND "all" #{equal} 0
     SQL
