@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources__translations' do |options|
   context "Translations" do
     let(:locales) { options[:locales] || [] }

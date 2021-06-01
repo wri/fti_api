@@ -1,4 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'spec_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -7,26 +9,9 @@ require 'codeclimate-test-reporter'
 
 require 'paper_trail/frameworks/rspec'
 
-SimpleCov.start 'rails' do
-  add_filter '/spec/'
-  add_filter 'app/channels'
-  add_filter 'app/constraints'
+require 'integration_helper'
+require 'importer_helper'
 
-  add_group 'Backoffice', 'app/admin'
-  add_group 'Models', 'app/models'
-  add_group 'Controllers', 'app/controllers'
-  add_group 'Resources', 'app/resources'
-  add_group 'Uploaders', 'app/uploaders'
-  add_group 'Services', 'app/services'
-  add_group 'Serializers', 'app/serializers'
-  add_group 'Helpers', 'app/helpers'
-  add_group 'Importers', 'app/importers'
-  add_group 'Importers Lib', 'lib/file_data_import'
-  add_group 'Mailers', 'app/mailers'
-  add_group 'Initializers', 'config/initializers'
-end
-
-require 'spec_helper'
 require 'rspec/rails'
 require 'super_diff/rspec-rails'
 
@@ -54,7 +39,25 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+RspecApiDocumentation.configure do |config|
+  config.format = [:openApi]
+
+  config.configurations_dir = Rails.root.join("spec", "support", "docs")
+
+  config.api_name = 'Open Timber Portal API documentation'
+  config.api_explanation = 'API Documentation for the OTP API.'
+  config.io_docs_protocol = %w(http https)
+
+  config.response_headers_to_include = []
+  config.keep_source_order = true
+  config.request_body_formatter = :json
+end
+
 RSpec.configure do |config|
+  config.include IntegrationHelper, type: :request
+  config.include ImporterHelper, type: :importer
+  config.extend APIDocsHelpers
+
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true

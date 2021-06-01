@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources__filter' do |options|
   context "Filter" do
     let(:headers) { options[:success_role] ? authorize_headers(create(options[:success_role]).id) : webuser_headers }
