@@ -103,7 +103,7 @@ WHERE id = #{x.fmu_id};"
 
   # Updates the list of documents for this FMU
   def update_documents_list
-    current_operator = self&.fmu&.operator
+    current_operator = self&.fmu&.reload&.operator
 
     OperatorDocumentFmu.transaction do
       to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator&.id)
@@ -111,7 +111,6 @@ WHERE id = #{x.fmu_id};"
       to_destroy.each { |x| x.destroy }
 
       Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id}"
-
 
       return if current_operator.blank? || current_operator.fa_id.blank?
 
