@@ -30,20 +30,21 @@ class RankingOperatorDocument
       query =
       <<~SQL
         SELECT
-          operators.id as operator_id,
-          country_id,
+          o.id as operator_id,
+          o.country_id,
           CASE
           WHEN "all" = 0 THEN
-            COUNT(*) OVER (PARTITION BY country_id)
+            COUNT(*) OVER (PARTITION BY o.country_id)
           ELSE
-            RANK() OVER (PARTITION BY country_id ORDER BY "all" DESC)
+            RANK() OVER (PARTITION BY o.country_id ORDER BY "all" DESC)
           END as position,
-          COUNT(*) OVER (PARTITION BY country_id) as total
-        FROM score_operator_documents
-          INNER JOIN operators on operators.id = score_operator_documents.operator_id
-            AND operators.fa_id <> 'NULL'
-            AND operators.is_active = true
-            AND score_operator_documents.current = true
+          COUNT(*) OVER (PARTITION BY o.country_id) as total
+        FROM score_operator_documents sod
+          INNER JOIN operators o on o.id = sod.operator_id
+            AND o.fa_id <> 'NULL'
+            AND o.is_active = true
+            AND sod.current = true
+          INNER JOIN countries c on c.id = o.country_id AND c.is_active = true
       SQL
 
       @calculated_ranking ||= ActiveRecord::Base.connection.execute(query).to_a
