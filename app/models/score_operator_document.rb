@@ -22,6 +22,7 @@ class ScoreOperatorDocument < ApplicationRecord
 
   belongs_to :operator, touch: true
   validates_presence_of :date
+  validates_uniqueness_of :current, scope: :operator_id, if: :current?
 
   scope :current, -> { where(current: true) }
 
