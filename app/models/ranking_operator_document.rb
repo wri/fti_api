@@ -1,24 +1,48 @@
-# frozen_string_literal: true
+class RankingOperatorDocument
+  include ActiveModel::Model
 
-# == Schema Information
-#
-# Table name: ranking_operator_documents
-#
-#  id          :integer          not null, primary key
-#  date        :date             not null
-#  current     :boolean          default("true"), not null
-#  position    :integer          not null
-#  operator_id :integer
-#  country_id  :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
-class RankingOperatorDocument < ApplicationRecord
-  belongs_to :country
-  belongs_to :operator, touch: true
+  attr_accessor :operator_id, :country_id, :position, :total
 
-  validates_presence_of :date, :position
-  validates_inclusion_of :current, in: [true, false]
+  class << self
+    def for_operator(operator)
+      return unless operator.present?
 
-  scope :current, -> { where(current: true) }
+      calculated_ranking
+        .select { |ranking| ranking['operator_id'] == operator.id }
+        .map { |ranking| RankingOperatorDocument.new(ranking) }
+        .first
+    end
+
+    def reload
+      @calculated_ranking = nil
+    end
+
+    private
+
+    def calculated_ranking
+      # Rules: COPIED OVER from old service
+      # Operators must have FA_ID
+      # Operators that have 0 documents should all be last with the ranking equal to the number of operators
+      query =
+      <<~SQL
+        SELECT
+          operators.id as operator_id,
+          country_id,
+          CASE
+          WHEN "all" = 0 THEN
+            COUNT(*) OVER (PARTITION BY country_id)
+          ELSE
+            RANK() OVER (PARTITION BY country_id ORDER BY "all" DESC)
+          END as position,
+          COUNT(*) OVER (PARTITION BY country_id) as total
+        FROM score_operator_documents
+          INNER JOIN operators on operators.id = score_operator_documents.operator_id
+            AND operators.fa_id <> 'NULL'
+            AND operators.is_active = true
+            AND score_operator_documents.current = true
+      SQL
+
+      @calculated_ranking ||= ActiveRecord::Base.connection.execute(query).to_a
+    end
+  end
 end

@@ -60,8 +60,6 @@ class Operator < ApplicationRecord
 
   has_many :score_operator_documents
   has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
-  has_many :ranking_operator_documents
-  has_one :ranking_operator_document, -> { current }, class_name: 'RankingOperatorDocument', inverse_of: :operator
   has_many :score_operator_observations
   has_one :score_operator_observation, -> { current }, class_name: 'ScoreOperatorObservation', inverse_of: :operator
 
@@ -133,6 +131,10 @@ class Operator < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  def ranking_operator_document
+    RankingOperatorDocument.for_operator(self)
   end
 
   def rebuild_documents

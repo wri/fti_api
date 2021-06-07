@@ -105,7 +105,7 @@ module V1
     end
 
     def country_operators
-      RankingOperatorDocument.current.where(country_id: @model.country_id).count
+      @model.ranking_operator_document&.total
     end
 
     def obs_per_visit
