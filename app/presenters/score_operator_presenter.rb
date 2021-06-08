@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class ScoreOperatorPresenter
-  def initialize(score_operator_document)
-    @score_operator_document = score_operator_document
-    @docs = OperatorDocumentHistory.from_operator_at_date(@score_operator_document.operator.id, @score_operator_document.date).non_signature
+  def initialize(docs)
+    @docs = docs
   end
 
   def all
@@ -15,11 +14,11 @@ class ScoreOperatorPresenter
   end
 
   def summary_public
-    @summary_public = create_summary_public
+    @summary_public ||= create_summary_public
   end
 
   def summary_private
-    @summary_private = create_summary_private
+    @summary_private ||= create_summary_private
   end
 
   private

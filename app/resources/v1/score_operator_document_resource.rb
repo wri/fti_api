@@ -16,23 +16,21 @@ module V1
     filter :date, apply: ->(records, value, _options) {
       records.where('date < ?', value).limit(1)
     }
-    
+
     def self.default_sort
       [{ field: 'date', direction: :desc }, { field: 'id', direction: :desc }]
     end
 
     def all
-      ScoreOperatorPresenter.new(@model).all
+      score_operator_presenter.all
     end
 
     def total
-      ScoreOperatorPresenter.new(@model).total
+      score_operator_presenter.total
     end
 
     def summary
-      #can_see_documents? ? @model.summary_private : @model.summary_public
-      presenter = ScoreOperatorPresenter.new(@model)
-      can_see_documents? ? presenter.summary_private : presenter.summary_public
+      can_see_documents? ? score_operator_presenter.summary_private : score_operator_presenter.summary_public
     end
 
     def custom_links(_)
@@ -40,6 +38,11 @@ module V1
     end
 
     private
+
+    def score_operator_presenter
+      docs = OperatorDocumentHistory.from_operator_at_date(@model.operator.id, @model.date).non_signature
+      score_operator_presenter ||= ScoreOperatorPresenter.new(docs)
+    end
 
     def can_see_documents?
       user = @context[:current_user]

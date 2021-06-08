@@ -1,6 +1,16 @@
 require 'csv'
 
 namespace :fix do
+  desc 'Fixing score operator document history'
+  task score_operator_documents: :environment do
+    ScoreOperatorDocument.find_each do |sod|
+      all = sod.summary_public['doc_valid'] / (sod.total.to_f - sod.summary_public['doc_not_required'])
+      if all != sod.all
+        puts "BUG #{sod.id} - is #{sod.all} and should be #{all}"
+      end
+    end
+  end
+
   desc 'Fixing operator document generated names'
   task operator_documents_names: :environment do
     count_no_relation = 0
