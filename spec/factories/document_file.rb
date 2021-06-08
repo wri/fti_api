@@ -12,7 +12,6 @@
 #
 FactoryBot.define do
   factory :document_file do
-    file_name { 'image'}
     attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
   end
 end
