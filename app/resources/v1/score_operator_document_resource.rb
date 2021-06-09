@@ -41,7 +41,7 @@ module V1
 
     def score_operator_presenter
       docs = OperatorDocumentHistory.from_operator_at_date(@model.operator.id, @model.date).non_signature
-      score_operator_presenter ||= ScoreOperatorPresenter.new(docs)
+      @score_operator_presenter ||= ScoreOperatorPresenter.new(docs)
     end
 
     def can_see_documents?
