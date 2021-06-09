@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources__show' do |options|
   context "Show" do
     let!(:resource) { create(@singular.to_sym) }
