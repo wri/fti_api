@@ -3,12 +3,51 @@ require 'csv'
 namespace :fix do
   desc 'Fixing score operator document history'
   task score_operator_documents: :environment do
-    ScoreOperatorDocument.find_each do |sod|
-      all = sod.summary_public['doc_valid'] / (sod.total.to_f - sod.summary_public['doc_not_required'])
-      if all != sod.all
-        puts "BUG #{sod.id} - is #{sod.all} and should be #{all}"
+    ActiveRecord::Base.transaction do
+      Operator.find_each do |operator|
+        # How to fix the history?
+        # fix current, change current to be the added as  the last one
+        # take the latest from the day if there are multiple, recalculate 'all' field based on summary
+        # remove the rest from the same day, in that way we will get rid of duplicates from the same day
+        # now for each operator get the whole history and starting from the beginning check if
+        # next entry have to same value, if yes then remove it
+        # THINK ABOUT IT: if on some day, value changes, but then goes back to the previous value, the entry will stay
+        # maybe that is ok, and also removing those values is ok too
+
+        current_scores = operator.score_operator_documents.current.order(:created_at)
+
+        # fixing current scores, keep only the last one
+        if current_scores.count > 1
+          puts "FOUND #{current_scores.count} current scores for operator #{operator.id}, will keep the last created one"
+
+          kept_score = current_scores.last
+          current_scores.where.not(id: kept_score.id).delete_all
+
+          operator.reload
+
+          correct_all = calculate_all_score(kept_score)
+          if correct_all != kept_score.all
+            puts "BUG #{kept_score.id} - is #{kept_score.all} and should be #{correct_all}"
+            kept_score.all = correct_all
+            kept_score.save!(touch: false) # do not update timestamps
+          end
+
+          # sane check
+          if operator.score_operator_documents.current.count != 1
+            puts "SANE CHECK - STILL SMTH WRONG"
+            raise ActiveRecord::Rollback
+          end
+        end
+
+        scores = operator.score_operator_documents.order(:date)
       end
+
+      raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
     end
+  end
+
+  def calculate_all_score(sod)
+    sod.summary_public['doc_valid'] / (sod.total.to_f - sod.summary_public['doc_not_required'])
   end
 
   desc 'Fixing operator document generated names'
