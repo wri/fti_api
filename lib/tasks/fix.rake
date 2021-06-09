@@ -80,11 +80,21 @@ namespace :fix do
       ScoreOperatorDocument.find_each do |sod|
         correct_all = calculate_all_score(sod)
         if correct_all != sod.all
-          puts "BUG - all should be #{correct_all} for #{print_score(sod)}"
+          puts "BUG - all should be #{correct_all} for #{print_score(sod)} - FIXING!"
+          sod.update_columns(all: correct_all)
         end
       end
       puts "========== END OF FIXING INCORRECT SCORES =================="
 
+      # SANE CHECK
+      ScoreOperatorDocument.find_each do |sod|
+        correct_all = calculate_all_score(sod)
+        if correct_all != sod.all
+          puts "SANE CHECK WHEN CHECKING ALL VALUE - STILL SMTH WRONG"
+          raise ActiveRecord::Rollback
+        end
+      end
+      puts "ALL GOOD!!"
       # still fmu, and country precalculated values would be wrong :/
 
       raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
