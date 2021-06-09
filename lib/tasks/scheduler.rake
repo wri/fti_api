@@ -12,15 +12,7 @@ namespace :scheduler do
 
   desc 'Calculate scores'
   task calculate_scores: :environment do
-    ActiveRecord::Base.logger = Logger.new STDOUT
-    Rails.logger = Logger.new STDOUT
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to calculate operator scores documents at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
-    time = Benchmark.ms do
-      RankingOperatorDocumentService.new.call
-    end
-    Rails.logger.info "Scores calculated. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    # TODO: REMOVE THIS job after deploy
   end
 
   desc 'Change current active FMU Operators'

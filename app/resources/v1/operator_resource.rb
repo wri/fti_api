@@ -33,7 +33,7 @@ module V1
     def type
       @model.type
     end
-    
+
     def set_active
       @model.is_active = false
     end
@@ -105,8 +105,7 @@ module V1
     end
 
     def country_operators
-      country_operators = @model.country&.operators
-      country_operators&.count
+      @model.ranking_operator_document&.total
     end
 
     def obs_per_visit

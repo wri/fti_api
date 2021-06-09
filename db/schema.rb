@@ -690,20 +690,6 @@ ActiveRecord::Schema.define(version: 20210607152721) do
     t.index ["deleted_at"], name: "index_photos_on_deleted_at", using: :btree
   end
 
-  create_table "ranking_operator_documents", force: :cascade do |t|
-    t.date     "date",                       null: false
-    t.boolean  "current",     default: true, null: false
-    t.integer  "position",                   null: false
-    t.integer  "operator_id"
-    t.integer  "country_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.index ["country_id"], name: "index_ranking_operator_documents_on_country_id", using: :btree
-    t.index ["current"], name: "index_ranking_operator_documents_on_current", using: :btree
-    t.index ["operator_id"], name: "index_ranking_operator_documents_on_operator_id", using: :btree
-    t.index ["position", "country_id", "current"], name: "index_rod_on_position_and_country_and_current", using: :btree
-  end
-
   create_table "required_gov_document_group_translations", force: :cascade do |t|
     t.integer  "required_gov_document_group_id", null: false
     t.string   "locale",                         null: false
@@ -1060,8 +1046,6 @@ ActiveRecord::Schema.define(version: 20210607152721) do
   add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "operators", "holdings", on_delete: :nullify
   add_foreign_key "photos", "users"
-  add_foreign_key "ranking_operator_documents", "countries", on_delete: :cascade
-  add_foreign_key "ranking_operator_documents", "operators", on_delete: :cascade
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade
   add_foreign_key "required_operator_documents", "countries"
