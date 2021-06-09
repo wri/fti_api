@@ -43,8 +43,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator)
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    query_builder = operator.approved ? ValidDocumentsQuery : AvailableValidDocumentsQuery
-    sod.calculate_scores(query_builder)
+    sod.calculate_scores(ValidDocumentsQuery)
     sod.save_counts(operator)
     sod
   end
