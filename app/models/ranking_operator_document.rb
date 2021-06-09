@@ -43,7 +43,7 @@ class RankingOperatorDocument
           COUNT(*) OVER (PARTITION BY o.country_id) as total
         FROM score_operator_documents sod
           INNER JOIN operators o on o.id = sod.operator_id
-            AND o.fa_id <> 'NULL'
+            AND o.fa_id <> ''
             AND o.is_active = true
             AND sod.current = true
           INNER JOIN countries c on c.id = o.country_id AND c.is_active = true
