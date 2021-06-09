@@ -43,8 +43,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator)
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    query_builder = operator.approved ? ValidDocumentsQuery : AvailableValidDocumentsQuery
-    sod.calculate_scores(query_builder)
+    sod.calculate_scores(ValidDocumentsQuery)
     sod.save_counts(operator)
     sod
   end
@@ -74,10 +73,10 @@ class ScoreOperatorDocument < ApplicationRecord
   # Saves the counters for the selected operator (summary_private, summary_public, total)
   # @param [Operator] operator The operator
   def save_counts(operator)
-    presenter = OperatorPresenter.new(operator)
+    presenter = ScoreOperatorPresenter.new(operator.operator_documents.non_signature)
     self.summary_private = presenter.summary_private
     self.summary_public = presenter.summary_public
-    self.total = operator.operator_documents.non_signature.count
+    self.total = presenter.total
   end
 
   protected
