@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210528085923) do
-
+ActiveRecord::Schema.define(version: 20210607152721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -824,6 +823,7 @@ ActiveRecord::Schema.define(version: 20210528085923) do
     t.datetime "updated_at",                     null: false
     t.index ["current"], name: "index_score_operator_documents_on_current", using: :btree
     t.index ["date"], name: "index_score_operator_documents_on_date", using: :btree
+    t.index ["operator_id", "current"], name: "index_score_operator_documents_on_operator_id_and_current", unique: true, where: "current", using: :btree
     t.index ["operator_id"], name: "index_score_operator_documents_on_operator_id", using: :btree
   end
 
