@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RankingOperatorDocument
   include ActiveModel::Model
 
@@ -5,7 +7,7 @@ class RankingOperatorDocument
 
   class << self
     def for_operator(operator)
-      return unless operator.present?
+      return if operator.blank?
 
       calculated_ranking
         .select { |ranking| ranking['operator_id'] == operator.id }
