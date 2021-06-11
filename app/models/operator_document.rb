@@ -93,6 +93,7 @@ class OperatorDocument < ApplicationRecord
     attrs.select! { |x| OperatorDocumentHistory.new.attributes.key?(x) }
 
     odh = OperatorDocumentHistory.create mapping.merge(attrs)
+
     return odh unless odh.persisted?
 
     odh.operator_document_annexes = self.operator_document_annexes
