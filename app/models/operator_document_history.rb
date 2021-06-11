@@ -38,6 +38,8 @@ class OperatorDocumentHistory < ApplicationRecord
   has_many :annex_documents, as: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 
+  scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmuHistory') }
+  scope :country_type,                           -> { where(type: 'OperatorDocumentCountryHistory') }
   scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :valid, -> { joins(:operator_document).where(operator_documents: { status: OperatorDocument.statuses[:doc_valid] }) } # valid doc
 
@@ -91,15 +93,17 @@ class OperatorDocumentHistory < ApplicationRecord
     # We could use a sql function to extract the day, but this approach is more performant
     db_date = (date.to_date + 1.day).to_s(:db)
 
+    # TODO: not working for all historic ones :/ paper trail is not great in terms of changes in model
+    # operator_fmu_ids = Operator.find(operator_id).paper_trail.version_at(date).fmus.pluck(:id)
     operator_fmu_ids = Operator.find(operator_id).fmus.pluck(:id)
 
-    fmu_sql = operator_fmu_ids.count > 0 ? "(fmu_id IS NULL OR fmu_id IN(#{filtered_fmus_ids.join(',')})) AND" : ""
+    fmu_sql = operator_fmu_ids.count > 0 ? "(fmu_id IS NULL OR fmu_id IN(#{operator_fmu_ids.join(',')})) AND" : ""
 
     query = <<~SQL
       (select * from
-        (select row_number() over (partition by required_document_group_id, fmu_id order by updated_at desc), *
+        (select row_number() over (partition by required_operator_document_id, fmu_id order by updated_at desc), *
          from operator_document_histories
-         where operator_id = #{operator_id} AND updated_at <= '#{db_date}' and operator_document_id is not null
+         where #{fmu_sql} operator_id = #{operator_id} AND updated_at <= '#{db_date}'
         ) as sq
         where sq.row_number = 1
       ) as operator_document_histories
@@ -112,6 +116,6 @@ class OperatorDocumentHistory < ApplicationRecord
     # rejected = all_document_histories.pluck(:operator_document_id).reject{ |x| opt.operator_documents.pluck(:id).include? x }
 
     # all_document_histories.where.not(operator_document_id: rejected)
-    from(query)
+    from(query).non_signature
   end
 end
