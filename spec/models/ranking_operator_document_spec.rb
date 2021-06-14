@@ -14,7 +14,7 @@
 require 'rails_helper'
 
 RSpec.describe RankingOperatorDocument, type: :model do
-  before :all do
+  before do
     @country = create(:country)
     @country_2 = create(:country)
     @operator = create(:operator, country: @country, fa_id: 'fa-id')
