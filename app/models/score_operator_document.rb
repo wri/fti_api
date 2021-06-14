@@ -18,8 +18,6 @@
 #  updated_at      :datetime         not null
 #
 class ScoreOperatorDocument < ApplicationRecord
-  include MathHelper
-
   belongs_to :operator, touch: true
   validates_presence_of :date
   validates_uniqueness_of :current, scope: :operator_id, if: :current?

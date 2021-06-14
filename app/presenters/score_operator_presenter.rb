@@ -8,19 +8,15 @@ class ScoreOperatorPresenter
   end
 
   def all
-    docs.doc_valid.count.to_f / (total - docs.doc_not_required.count).to_f
+    divide docs.doc_valid.count, total - docs.doc_not_required.count
   end
 
   def fmu
-    return 0 if fmu_docs.count - fmu_docs.doc_not_required.count == 0
-
-    fmu_docs.doc_valid.count.to_f / (fmu_docs.count - fmu_docs.doc_not_required.count).to_f
+    divide fmu_docs.doc_valid.count, fmu_docs.count - fmu_docs.doc_not_required.count
   end
 
   def country
-    return 0 if country_docs.count - country_docs.doc_not_required.count == 0
-
-    country_docs.doc_valid.count.to_f / (country_docs.count - country_docs.doc_not_required.count).to_f
+    divide country_docs.doc_valid.count, country_docs.count - country_docs.doc_not_required.count
   end
 
   def total
@@ -36,6 +32,12 @@ class ScoreOperatorPresenter
   end
 
   private
+
+  def divide(numerator, denominator)
+    return 0 if denominator.to_f.zero?
+
+    numerator.to_f / denominator.to_f
+  end
 
   def fmu_docs
     docs.fmu_type
