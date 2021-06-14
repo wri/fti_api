@@ -12,13 +12,13 @@ class SyncTasks
           docs = OperatorDocumentHistory.from_operator_at_date(score.operator_id, score.date)
 
           sod = ScoreOperatorDocument.new date: Date.today, operator: score.operator, current: true
-          presenter = ScoreOperatorPresenter.new(docs)
-          sod.all = presenter.all
-          sod.fmu = presenter.fmu
-          sod.country = presenter.country
-          sod.total = presenter.total
-          sod.summary_private = presenter.summary_private
-          sod.summary_public = presenter.summary_public
+          calculator = ScoreOperatorCalculator.new(docs)
+          sod.all = calculator.all
+          sod.fmu = calculator.fmu
+          sod.country = calculator.country
+          sod.total = calculator.total
+          sod.summary_private = calculator.summary_private
+          sod.summary_public = calculator.summary_public
 
           if sod != score
             puts "SOD DIFFERENT: id: #{score.id}"

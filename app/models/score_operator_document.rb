@@ -42,13 +42,13 @@ class ScoreOperatorDocument < ApplicationRecord
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator)
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    presenter = ScoreOperatorPresenter.new(operator.operator_documents.non_signature)
-    sod.all = presenter.all
-    sod.fmu = presenter.fmu
-    sod.country = presenter.country
-    sod.total = presenter.total
-    sod.summary_private = presenter.summary_private
-    sod.summary_public = presenter.summary_public
+    calculator = ScoreOperatorCalculator.new(operator.operator_documents.non_signature)
+    sod.all = calculator.all
+    sod.fmu = calculator.fmu
+    sod.country = calculator.country
+    sod.total = calculator.total
+    sod.summary_private = calculator.summary_private
+    sod.summary_public = calculator.summary_public
     sod
   end
 

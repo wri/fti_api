@@ -21,16 +21,8 @@ module V1
       [{ field: 'date', direction: :desc }, { field: 'id', direction: :desc }]
     end
 
-    def all
-      score_operator_presenter.all
-    end
-
-    def total
-      score_operator_presenter.total
-    end
-
     def summary
-      can_see_documents? ? score_operator_presenter.summary_private : score_operator_presenter.summary_public
+      can_see_documents? ? @model.summary_private : @model.summary_public
     end
 
     def custom_links(_)
@@ -38,11 +30,6 @@ module V1
     end
 
     private
-
-    def score_operator_presenter
-      docs = OperatorDocumentHistory.from_operator_at_date(@model.operator.id, @model.date).non_signature
-      @score_operator_presenter ||= ScoreOperatorPresenter.new(docs)
-    end
 
     def can_see_documents?
       user = @context[:current_user]
