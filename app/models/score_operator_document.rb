@@ -40,9 +40,10 @@ class ScoreOperatorDocument < ApplicationRecord
   # Builds a SOD for an operator
   # @param [Operator] operator The operator
   # @return [ScoreOperatorDocument] The SOD created
-  def self.build(operator)
+  def self.build(operator, docs = nil)
+    docs ||= operator.operator_documents.non_signature
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    calculator = ScoreOperatorCalculator.new(operator.operator_documents.non_signature)
+    calculator = ScoreOperatorCalculator.new(docs)
     sod.all = calculator.all
     sod.fmu = calculator.fmu
     sod.country = calculator.country
@@ -50,6 +51,19 @@ class ScoreOperatorDocument < ApplicationRecord
     sod.summary_private = calculator.summary_private
     sod.summary_public = calculator.summary_public
     sod
+  end
+
+  # Resync the score using operator document history
+  def resync!
+    docs = OperatorDocumentHistory.from_operator_at_date(operator_id, date)
+    new_score = ScoreOperatorDocument.build(operator, docs)
+    self.all = new_score.all
+    self.fmu = new_score.fmu
+    self.country = new_score.country
+    self.total = new_score.total
+    self.summary_private = new_score.summary_private
+    self.summary_public = new_score.summary_public
+    save!
   end
 
   # Replaces the current SOD with a new one, if they're different
