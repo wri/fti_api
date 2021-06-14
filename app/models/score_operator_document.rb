@@ -66,16 +66,6 @@ class ScoreOperatorDocument < ApplicationRecord
     add_new(sod)
   end
 
-  # # Calculates the SOD of an operator (all, fmu, and country)
-  # # @note Only required documents are used for this calculation (current and not deleted ones).
-  # # We also remove the one whose required_operator_documents have been deleted
-  # # @param [RequiredDocumentsQuery] query_builder the query method to use
-  # def calculate_scores(query_builder)
-  #   self.all = query_builder.new.call(operator.operator_documents.non_signature).count.to_f / RequiredDocumentsQuery.new.call(operator.operator_documents.non_signature).count.to_f
-  #   self.fmu = query_divider query_builder.new.call(operator.operator_document_fmus), RequiredDocumentsQuery.new.call(operator.operator_document_fmus)
-  #   self.country = query_divider query_builder.new.call(operator.operator_document_countries), RequiredDocumentsQuery.new.call(operator.operator_document_countries)
-  # end
-
   def ==(obj)
     return false unless obj.is_a? self.class
 

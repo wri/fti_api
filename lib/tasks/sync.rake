@@ -6,6 +6,7 @@ class SyncTasks
       desc 'Sync scores saved in score operator document'
       task scores: :environment do
         different_scores = 0
+
         # This helps to recalculate scores taking document history how it was a the date of the score to be saved
         ScoreOperatorDocument.find_each do |score|
           docs = OperatorDocumentHistory.from_operator_at_date(score.operator_id, score.date)
@@ -26,6 +27,16 @@ class SyncTasks
 
             compare(score_json, sod_json)
             different_scores += 1
+
+            if ENV["FOR_REAL"].present?
+              score.all = sod.all
+              score.fmu = sod.fmu
+              score.country = sod.country
+              score.total = sod.total
+              score.summary_private = sod.summary_private
+              score.summary_public = sod.summary_public
+              score.save!
+            end
           end
         end
 
@@ -35,9 +46,13 @@ class SyncTasks
     end
   end
 
-  def compare(score_json, sod_json)
-    score_json.each do |key, value|
-      puts "#{key} - expected: #{value}, actual: #{sod_json[key]} " if value != sod_json[key]
+  def compare(actual_json, expected_json)
+    actual_json.each do |key, value|
+      if value.is_a? Hash
+        compare(value, expected_json[key])
+      else
+        puts "#{key}: + #{value}, - #{expected_json[key]} " if value != expected_json[key]
+      end
     end
   end
 end
