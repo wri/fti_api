@@ -26,7 +26,12 @@ class SyncTasks
       expected = ScoreOperatorDocument.build(score.operator, docs)
 
       if expected != score
-        puts "SOD DIFFERENT: id: #{score.id} - #{score.date}, OPERATOR: #{score.operator_id}"
+        # if operator was not approved at the day, then different algorithm was used
+        # for calculating score, but should be the same
+        # that could be one reason why the score is off
+        # rescue because paper trail is not great, and the model could be already not matching old data
+        approved_at_the_day = score.operator.paper_trail.version_at(score.date).approved rescue nil
+        puts "SOD DIFFERENT: id: #{score.id} - #{score.date}, OPERATOR: #{score.operator_id} - approved status at date: #{approved_at_the_day}"
         score_json = score.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
         expected_json = expected.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
 
