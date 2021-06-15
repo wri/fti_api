@@ -143,6 +143,8 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :required_operator_document_country_id, label: 'Country', as: :select,
                                                  collection: Country.with_translations(I18n.locale).order('country_translations.name')
   filter :operator_document_id_eq, label: 'Operator Document Id'
+  filter :required_operator_document_contract_signature_eq,
+         label: 'Contract Signature?',as: :select, collection: [['Yes', true], ['No', false]]
   filter :operator_document_required_operator_document_id_eq,
          collection: RequiredOperatorDocument.with_translations.all, as: :select, label: 'Required Operator Document'
   filter :operator, label: 'Operator', as: :select,
