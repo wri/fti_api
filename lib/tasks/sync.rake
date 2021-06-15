@@ -18,6 +18,7 @@ class SyncTasks
   def sync_scores(date = nil)
     scores = ScoreOperatorDocument.all
     scores = scores.where('date > ?', date) if date.present?
+    scores = scores.where(operator_id: ENV['OPERATOR_ID']) if ENV['OPERATOR_ID'].present?
 
     different_scores = 0
     scores.find_each do |score|
@@ -25,7 +26,7 @@ class SyncTasks
       expected = ScoreOperatorDocument.build(score.operator, docs)
 
       if expected != score
-        puts "SOD DIFFERENT: id: #{score.id}"
+        puts "SOD DIFFERENT: id: #{score.id} - #{score.date}, OPERATOR: #{score.operator_id}"
         score_json = score.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
         expected_json = expected.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
 
