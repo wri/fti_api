@@ -51,7 +51,11 @@ class SyncTasks
       if value.is_a? Hash
         compare(value, expected_json[key])
       else
-        puts "#{key}: actual: #{value}, expected: #{expected_json[key]} " if value != expected_json[key]
+        if value != expected_json[key]
+          puts "#{key}: actual: #{value}, expected: #{expected_json[key]}"
+        else
+          puts "#{key}: #{value}"
+        end
       end
     end
   end
