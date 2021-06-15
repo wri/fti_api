@@ -11,6 +11,7 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
     )
   end
 
+  # rubocop:disable Rails/OutputSafety
   def summary_diff(prev_score)
     return print_summary(model.summary_private) if prev_score.blank?
 
@@ -19,6 +20,7 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
       model.summary_private
     ).html_safe
   end
+  # rubocop:enable Rails/OutputSafety
 
   def print_diff(prev, current)
     current.map do |key, value|
@@ -33,8 +35,8 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
     end.join(', ')
   end
 
-  def print_summary(s)
-    s.map do |key, value|
+  def print_summary(sum)
+    sum.map do |key, value|
       "#{key.gsub('doc_','')}: #{value}"
     end.join(', ')
   end

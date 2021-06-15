@@ -227,7 +227,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
         # tools to debug scores locally
         if Rails.env.development?
-          row :score_history do
+          row 'Score History Only visible in DEVELOPMENT MODE!' do
             scores = ScoreOperatorDocument.where(operator_id: resource.id).order(:date).to_a
             table_for ScoreOperatorDocumentDecorator.decorate_collection(scores, self) do
               column :date
