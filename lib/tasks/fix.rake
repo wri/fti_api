@@ -1,6 +1,23 @@
 require 'csv'
 
 namespace :fix do
+  desc 'fix doc history'
+  task fix_doc_history: :environment do
+    OperatorDocument.unscoped.find_each do |odh|
+      date = '2021-04-27 20:13:11.166133'
+      od = odh.paper_trail.version_at(date)
+
+      next if od.blank?
+      next if od.deleted_at
+
+      history = OperatorDocumentHistory.where(operator_document_id: od.id).where('updated_at < ?', date)
+
+      unless history.any?
+        puts "HISTORY DOES NOT EXISTS #{od.id}"
+      end
+    end
+  end
+
   desc 'Fixing score operator document history'
   task score_operator_documents: :environment do
     puts "FOR REAL!!!" if ENV['FOR_REAL'].present?
