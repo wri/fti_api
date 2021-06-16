@@ -19,11 +19,11 @@ class RankingOperatorDocument
       calculated_ranking.map { |ranking| RankingOperatorDocument.new(ranking) }
     end
 
-    private
-
     def reload
       @calculated_ranking = nil
     end
+
+    private
 
     def calculated_ranking
       # Rules: COPIED OVER from old service
