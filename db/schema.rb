@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210607152721) do
+ActiveRecord::Schema.define(version: 20210616145404) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -596,6 +597,8 @@ ActiveRecord::Schema.define(version: 20210607152721) do
     t.integer  "user_id"
     t.integer  "required_operator_document_id"
     t.datetime "deleted_at"
+    t.datetime "operator_document_updated_at",  null: false
+    t.datetime "operator_document_created_at",  null: false
     t.index ["deleted_at"], name: "index_operator_document_histories_on_deleted_at", using: :btree
     t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id", using: :btree
     t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date", using: :btree

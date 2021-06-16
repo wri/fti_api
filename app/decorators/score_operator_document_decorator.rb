@@ -4,7 +4,7 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
   def document_history_link
     h.link_to 'Documents', admin_operator_document_histories_path(
       q: {
-        updated_at_lteq_datetime: model.date,
+        operator_document_updated_at_lteq_datetime: model.date,
         required_operator_document_contract_signature_eq: false,
         operator_id_eq: model.operator_id
       }

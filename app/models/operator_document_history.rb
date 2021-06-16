@@ -60,9 +60,9 @@ class OperatorDocumentHistory < ApplicationRecord
 
     query = <<~SQL
       (select * from
-        (select row_number() over (partition by required_operator_document_id, fmu_id order by updated_at desc), *
+        (select row_number() over (partition by required_operator_document_id, fmu_id order by operator_document_updated_at desc), *
          from operator_document_histories
-         where operator_id = #{operator_id} AND updated_at <= '#{db_date}'
+         where operator_id = #{operator_id} AND operator_document_updated_at <= '#{db_date}'
         ) as sq
         where sq.row_number = 1
       ) as operator_document_histories

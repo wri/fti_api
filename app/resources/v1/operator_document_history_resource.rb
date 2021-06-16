@@ -21,6 +21,14 @@ module V1
       records
     }
 
+    def updated_at
+      @model.operator_document_updated_at
+    end
+
+    def created_at
+      @model.operator_document_created_at
+    end
+
     def status
       return @model.status if can_see_document?
 

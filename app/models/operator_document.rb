@@ -76,7 +76,7 @@ class OperatorDocument < ApplicationRecord
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
-  NON_HISTORICAL_ATTRIBUTES = %w[id attachment].freeze
+  NON_HISTORICAL_ATTRIBUTES = %w[id attachment updated_at created_at].freeze
 
   def self.expire_documents
     documents_to_expire = OperatorDocument.to_expire(Date.today)
@@ -89,6 +89,8 @@ class OperatorDocument < ApplicationRecord
   def create_history
     mapping = self.attributes.except(*NON_HISTORICAL_ATTRIBUTES)
     mapping['operator_document_id'] = id
+    mapping['operator_document_updated_at'] = updated_at
+    mapping['operator_document_created_at'] = created_at
     mapping['type'] += 'History'
 
     odh = OperatorDocumentHistory.create! mapping.merge(attrs)
