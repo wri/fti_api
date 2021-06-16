@@ -3,18 +3,35 @@ require 'csv'
 namespace :fix do
   desc 'fix doc history'
   task fix_doc_history: :environment do
-    OperatorDocument.unscoped.find_each do |odh|
-      date = '2021-04-27 20:13:11.166133'
-      od = odh.paper_trail.version_at(date)
+    date = '2021-04-01'
 
-      next if od.blank?
-      next if od.deleted_at
+    OperatorDocumentUploader = Class.new # to fix initialization of old document which used this
 
-      history = OperatorDocumentHistory.where(operator_document_id: od.id).where('updated_at < ?', date)
+    ActiveRecord::Base.transaction do
+      puts "HistoryCount before: #{OperatorDocumentHistory.count}"
 
-      unless history.any?
-        puts "HISTORY DOES NOT EXISTS #{od.id}"
+      OperatorDocumentHistory.delete_all
+
+      OperatorDocument.unscoped.find_each do |odh|
+        start_version = odh.paper_trail.version_at(date)
+
+        next if start_version.blank?
+        next if start_version.deleted_at
+
+        puts "Recreating history for operator document #{odh.id}"
+
+        version = start_version
+
+        loop do
+          version.create_history
+          version = version.paper_trail.next_version
+          break if version.nil?
+        end
       end
+
+      puts "HistoryCount after: #{OperatorDocumentHistory.count}"
+
+      raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
     end
   end
 

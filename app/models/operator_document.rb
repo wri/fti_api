@@ -93,7 +93,7 @@ class OperatorDocument < ApplicationRecord
     mapping['operator_document_created_at'] = created_at
     mapping['type'] += 'History'
 
-    odh = OperatorDocumentHistory.create! mapping.merge(attrs)
+    odh = OperatorDocumentHistory.create! mapping
     odh.operator_document_annexes = operator_document_annexes
     odh
   end
