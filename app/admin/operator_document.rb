@@ -177,7 +177,6 @@ ActiveAdmin.register OperatorDocument do
     bool_column :exists do |od|
       od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
     end
-    column :current
     column :public
     tag_column :status
     column :id
@@ -234,8 +233,6 @@ ActiveAdmin.register OperatorDocument do
     actions
   end
 
-
-  filter :current
   filter :public
   filter :id
   filter :required_operator_document_country_id, label: 'Country', as: :select,
@@ -281,7 +278,6 @@ ActiveAdmin.register OperatorDocument do
 
   show title: proc{ "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
     attributes_table do
-      row :current
       row :public
       tag_row :status
       row :required_operator_document
