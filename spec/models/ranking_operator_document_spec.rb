@@ -14,7 +14,7 @@
 require 'rails_helper'
 
 RSpec.describe RankingOperatorDocument, type: :model do
-  before do
+  before :all do
     @country = create(:country)
     @country_2 = create(:country)
     @operator = create(:operator, country: @country, fa_id: 'fa-id')
@@ -47,6 +47,7 @@ RSpec.describe RankingOperatorDocument, type: :model do
   end
 
   it 'should calculate correct ranking per country' do
+    RankingOperatorDocument.reload
     op_rank = RankingOperatorDocument.for_operator(@operator)
     op2_rank = RankingOperatorDocument.for_operator(@operator_2)
     op3_rank = RankingOperatorDocument.for_operator(@operator_3)
