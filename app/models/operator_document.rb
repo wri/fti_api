@@ -86,17 +86,13 @@ class OperatorDocument < ApplicationRecord
   end
 
   # Creates an OperatorDocumentHistory for the current OperatorDocument
-  def create_history(attrs = {})
-    mapping = self.attributes.except *NON_HISTORICAL_ATTRIBUTES
-    mapping['operator_document_id'] = self.id
+  def create_history
+    mapping = self.attributes.except(*NON_HISTORICAL_ATTRIBUTES)
+    mapping['operator_document_id'] = id
     mapping['type'] += 'History'
-    attrs.select! { |x| OperatorDocumentHistory.new.attributes.key?(x) }
 
-    odh = OperatorDocumentHistory.create mapping.merge(attrs)
-
-    return odh unless odh.persisted?
-
-    odh.operator_document_annexes = self.operator_document_annexes
+    odh = OperatorDocumentHistory.create! mapping.merge(attrs)
+    odh.operator_document_annexes = operator_document_annexes
     odh
   end
 
