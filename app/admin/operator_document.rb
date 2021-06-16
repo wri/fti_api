@@ -246,9 +246,9 @@ ActiveAdmin.register OperatorDocument do
                          .order('required_operator_documents.name')
                          .where(country_translations: { locale: I18n.locale }).all.map { |x| ["#{x.name} - #{x.country.name}", x.id] }
   filter :operator, label: 'Operator', as: :select,
-    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
-  filter :fmu, as: :select, label: 'Fmus',
-    collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
+                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+  filter :fmu, label: 'Fmus', as: :select,
+               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
