@@ -103,8 +103,8 @@ ActiveAdmin.register OperatorDocumentHistory do
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).type
       end
     end
-    column :operator, sortable: 'operator_translations.name'
-    column :fmu, sortable: 'fmu_translations.name'
+    column :operator, sortable: false
+    column :fmu, sortable: false
     column 'Legal Category' do |od|
       if od.required_operator_document.present?
         od.required_operator_document.required_operator_document_group.name
@@ -112,7 +112,7 @@ ActiveAdmin.register OperatorDocumentHistory do
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).required_operator_document_group.name
       end
     end
-    column :user, sortable: 'users.name'
+    column :user, sortable: false
     column :expire_date
     column :start_date
     column :created_at
@@ -143,6 +143,8 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :required_operator_document_country_id, label: 'Country', as: :select,
                                                  collection: Country.with_translations(I18n.locale).order('country_translations.name')
   filter :operator_document_id_eq, label: 'Operator Document Id'
+  filter :required_operator_document_contract_signature_eq,
+         label: 'Contract Signature?',as: :select, collection: [['Yes', true], ['No', false]]
   filter :operator_document_required_operator_document_id_eq,
          collection: RequiredOperatorDocument.with_translations.all, as: :select, label: 'Required Operator Document'
   filter :operator, label: 'Operator', as: :select,
@@ -151,4 +153,12 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
   filter :updated_at
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(
+        :required_operator_document
+      )
+    end
+  end
 end

@@ -18,8 +18,6 @@
 #  updated_at      :datetime         not null
 #
 class ScoreOperatorDocument < ApplicationRecord
-  include MathHelper
-
   belongs_to :operator, touch: true
   validates_presence_of :date
   validates_uniqueness_of :current, scope: :operator_id, if: :current?
@@ -42,11 +40,30 @@ class ScoreOperatorDocument < ApplicationRecord
   # Builds a SOD for an operator
   # @param [Operator] operator The operator
   # @return [ScoreOperatorDocument] The SOD created
-  def self.build(operator)
+  def self.build(operator, docs = nil)
+    docs ||= operator.operator_documents.non_signature
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    sod.calculate_scores(ValidDocumentsQuery)
-    sod.save_counts(operator)
+    calculator = ScoreOperatorCalculator.new(docs)
+    sod.all = calculator.all
+    sod.fmu = calculator.fmu
+    sod.country = calculator.country
+    sod.total = calculator.total
+    sod.summary_private = calculator.summary_private
+    sod.summary_public = calculator.summary_public
     sod
+  end
+
+  # Resync the score using operator document history
+  def resync!
+    docs = OperatorDocumentHistory.from_operator_at_date(operator_id, date)
+    new_score = ScoreOperatorDocument.build(operator, docs)
+    self.all = new_score.all
+    self.fmu = new_score.fmu
+    self.country = new_score.country
+    self.total = new_score.total
+    self.summary_private = new_score.summary_private
+    self.summary_public = new_score.summary_public
+    save!
   end
 
   # Replaces the current SOD with a new one, if they're different
@@ -60,27 +77,6 @@ class ScoreOperatorDocument < ApplicationRecord
 
     add_new(sod)
   end
-
-  # Calculates the SOD of an operator (all, fmu, and country)
-  # @note Only required documents are used for this calculation (current and not deleted ones).
-  # We also remove the one whose required_operator_documents have been deleted
-  # @param [RequiredDocumentsQuery] query_builder the query method to use
-  def calculate_scores(query_builder)
-    self.all = query_builder.new.call(operator.operator_documents.non_signature).count.to_f / RequiredDocumentsQuery.new.call(operator.operator_documents.non_signature).count.to_f
-    self.fmu = query_divider query_builder.new.call(operator.operator_document_fmus), RequiredDocumentsQuery.new.call(operator.operator_document_fmus)
-    self.country = query_divider query_builder.new.call(operator.operator_document_countries), RequiredDocumentsQuery.new.call(operator.operator_document_countries)
-  end
-
-  # Saves the counters for the selected operator (summary_private, summary_public, total)
-  # @param [Operator] operator The operator
-  def save_counts(operator)
-    presenter = ScoreOperatorPresenter.new(operator.operator_documents.non_signature)
-    self.summary_private = presenter.summary_private
-    self.summary_public = presenter.summary_public
-    self.total = presenter.total
-  end
-
-  protected
 
   def ==(obj)
     return false unless obj.is_a? self.class

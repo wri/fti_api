@@ -91,23 +91,6 @@ RSpec.describe OperatorDocument, type: :model do
         required_operator_document_group: @required_operator_document_group)
     end
 
-    describe '#update_current' do
-      context 'when there is not operator or he/she is marked for destruction' do
-        before do
-          create(:operator_document_country,
-                 operator: @operator,
-                 required_operator_document: @required_operator_document,
-                 fmu: @fmu)
-
-          @operator_document = build(
-            :operator_document_country,
-            operator: @operator,
-            required_operator_document: @required_operator_document,
-            fmu: @fmu)
-        end
-      end
-    end
-
     describe '#set_status' do
       context 'when attachment or reason are not present' do
         it 'update status as doc_not_provided' do
@@ -150,7 +133,10 @@ RSpec.describe OperatorDocument, type: :model do
           required_operator_document_id: @required_operator_document.id,
           status: OperatorDocument.statuses[:doc_valid]
         ).first
-        operator_document.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
+
+        expect {
+          operator_document.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
+        }.to change { OperatorDocumentHistory.count }.by(1)
 
         @operator.reload
         expect(@operator.score_operator_document.all).to eql 0.0
@@ -168,7 +154,9 @@ RSpec.describe OperatorDocument, type: :model do
 
           expect(OperatorDocument.count).to eql 1
 
-          operator_document.destroy
+          expect {
+            operator_document.destroy
+          }.to change { OperatorDocumentHistory.count }.by(1)
 
           expect(OperatorDocument.count).to eql 1
         end
@@ -183,7 +171,9 @@ RSpec.describe OperatorDocument, type: :model do
 
         expect(operator_document.status).not_to eql 'doc_expired'
 
-        operator_document.expire_document
+        expect {
+          operator_document.expire_document
+        }.to change { OperatorDocumentHistory.count }.by(1)
 
         expect(operator_document.status).to eql 'doc_expired'
       end
@@ -201,7 +191,9 @@ RSpec.describe OperatorDocument, type: :model do
           status: OperatorDocument.statuses[:doc_valid],
           expire_date: Date.yesterday)
 
-        OperatorDocument.expire_documents
+        expect {
+          OperatorDocument.expire_documents
+        }.to change { OperatorDocumentHistory.count }.by(OperatorDocument.to_expire(Date.today).count)
 
         OperatorDocument.to_expire(Date.today).each do |operator_document|
           expect(operator_document.status).to eql 'doc_expired'

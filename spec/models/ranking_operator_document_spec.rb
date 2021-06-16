@@ -47,6 +47,7 @@ RSpec.describe RankingOperatorDocument, type: :model do
   end
 
   it 'should calculate correct ranking per country' do
+    RankingOperatorDocument.reload
     op_rank = RankingOperatorDocument.for_operator(@operator)
     op2_rank = RankingOperatorDocument.for_operator(@operator_2)
     op3_rank = RankingOperatorDocument.for_operator(@operator_3)
