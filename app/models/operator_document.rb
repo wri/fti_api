@@ -85,17 +85,21 @@ class OperatorDocument < ApplicationRecord
     Rails.logger.info "Expired #{number_of_documents} documents"
   end
 
-  # Creates an OperatorDocumentHistory for the current OperatorDocument
-  def create_history
+  def build_history
     mapping = self.attributes.except(*NON_HISTORICAL_ATTRIBUTES)
     mapping['operator_document_id'] = id
     mapping['operator_document_updated_at'] = updated_at
     mapping['operator_document_created_at'] = created_at
     mapping['type'] += 'History'
-
-    odh = OperatorDocumentHistory.create! mapping
+    odh = OperatorDocumentHistory.new mapping
     odh.operator_document_annexes = operator_document_annexes
     odh
+  end
+
+  # Creates an OperatorDocumentHistory for the current OperatorDocument
+  def create_history
+    odh = build_history
+    odh.save!
   end
 
   def set_expire_date

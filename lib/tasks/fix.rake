@@ -1,3 +1,4 @@
+require 'benchmark'
 require 'csv'
 
 namespace :fix do
@@ -7,32 +8,48 @@ namespace :fix do
 
     OperatorDocumentUploader = Class.new # to fix initialization of old document which used this
 
-    ActiveRecord::Base.transaction do
-      puts "HistoryCount before: #{OperatorDocumentHistory.count}"
+    docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
+    docs_no_history = OperatorDocument.where.not(id: docs_in_history)
 
-      OperatorDocumentHistory.delete_all
+    new_history = []
 
-      OperatorDocument.unscoped.find_each do |odh|
-        start_version = odh.paper_trail.version_at(date)
+    puts "Docs no history count: #{docs_no_history.count}"
 
-        next if start_version.blank?
-        next if start_version.deleted_at
+    time = Benchmark.ms do
+      ActiveRecord::Base.transaction do
+        puts "HistoryCount before: #{OperatorDocumentHistory.count}"
 
-        puts "Recreating history for operator document #{odh.id}"
+        OperatorDocumentHistory.delete_all
+        AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').delete_all
 
-        version = start_version
+        OperatorDocument.unscoped.find_each do |od|
+          start_version = od.paper_trail.version_at(date) || od.versions.where('created_at >= ?', date).order(:created_at).first&.reify || od
 
-        loop do
-          version.create_history
-          version = version.paper_trail.next_version
-          break if version.nil?
+          next if start_version.blank?
+          next if start_version.deleted_at.present?
+
+          puts "Recreating history for operator document #{od.id}"
+
+          version = start_version
+
+          loop do
+            version.user_id = nil if version.user_id.in? [100001, 100002, 100008, 100010, 100011, 100013]
+            new_history << version.build_history
+            version = version.paper_trail.next_version
+            break if version.nil?
+          end
         end
+
+        OperatorDocumentHistory.import new_history, recursive: true
+
+        puts "HistoryCount after: #{OperatorDocumentHistory.count}"
+        puts "Docs no history count: #{docs_no_history.reload.count}"
+
+        raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
       end
-
-      puts "HistoryCount after: #{OperatorDocumentHistory.count}"
-
-      raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
     end
+
+    puts "History recreated in #{time} ms."
   end
 
   desc 'Fixing score operator document history'
