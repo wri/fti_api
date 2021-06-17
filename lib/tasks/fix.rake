@@ -34,6 +34,8 @@ namespace :fix do
 
           loop do
             version.user_id = nil if version.user_id.in? [100001, 100002, 100008, 100010, 100011, 100013]
+            # TODO: figure out how to correctly recreate relations with annexes
+            #       as now it will take current version of annexes even for old history, this is not correct
             new_history << version.build_history
             version = version.paper_trail.next_version
             break if version.nil?
@@ -42,6 +44,7 @@ namespace :fix do
 
         OperatorDocumentHistory.import new_history, recursive: true
 
+        # TODO: think about more indicators of healthy history
         puts "HistoryCount after: #{OperatorDocumentHistory.count}"
         puts "Docs no history count: #{docs_no_history.reload.count}"
 
