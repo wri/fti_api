@@ -133,10 +133,6 @@ class Operator < ApplicationRecord
     super + '-' + Globalize.locale.to_s
   end
 
-  def ranking_operator_document
-    RankingOperatorDocument.for_operator(self)
-  end
-
   def rebuild_documents
     return if fa_id.blank?
 

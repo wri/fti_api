@@ -6,29 +6,38 @@ class RankingOperatorDocument
   attr_accessor :operator_id, :country_id, :position, :total
 
   class << self
-    def for_operator(operator)
-      return if operator.blank?
-
-      calculated_ranking
-        .select { |ranking| ranking['operator_id'] == operator.id }
-        .map { |ranking| RankingOperatorDocument.new(ranking) }
-        .first
+    def refresh_for_country(country)
+      new_ranking = ranking(country.id)
+      Operator.active.fa_operator.where(country: country).find_each do |operator|
+        refresh_operator_rank(operator, new_ranking)
+      end
     end
 
-    def all
-      calculated_ranking.map { |ranking| RankingOperatorDocument.new(ranking) }
-    end
-
-    def reload
-      Rails.cache.delete(cache_key)
+    def refresh
+      new_ranking = ranking
+      Operator.active.fa_operator.find_each do |operator|
+        refresh_operator_rank(operator, new_ranking)
+      end
     end
 
     private
 
-    def calculated_ranking
+    def refresh_operator_rank(operator, new_ranking)
+      new_rank = new_ranking.find { |r| r.operator_id == operator.id }
+      return if new_rank.nil?
+      return if new_rank.position == operator.country_doc_rank && new_rank.total == operator.country_operators
+
+      operator.update_attributes(
+        country_doc_rank: new_rank.position,
+        country_operators: new_rank.total
+      )
+    end
+
+    def ranking(country_id = nil)
       # Rules: COPIED OVER from old service
       # Operators must have FA_ID
       # Operators that have 0 documents should all be last with the ranking equal to the number of operators
+      country_query = country_id.nil? ? "" : " AND c.id = #{country_id}"
       query =
       <<~SQL
         SELECT
@@ -46,17 +55,10 @@ class RankingOperatorDocument
             AND o.fa_id <> ''
             AND o.is_active = true
             AND sod.current = true
-          INNER JOIN countries c on c.id = o.country_id AND c.is_active = true
+          INNER JOIN countries c on c.id = o.country_id AND c.is_active = true #{country_query}
       SQL
 
-      Rails.cache.fetch(cache_key, expires_in: 12.hours) do
-        ActiveRecord::Base.connection.execute(query).to_a
-      end
-    end
-
-    def cache_key
-      documents_last_change = OperatorDocument.order(updated_at: :desc).select(:updated_at).first&.updated_at
-      "ranking_operator_document_cache_#{documents_last_change}"
+      ActiveRecord::Base.connection.execute(query).map { |ranking| RankingOperatorDocument.new(ranking) }
     end
   end
 end
