@@ -91,14 +91,13 @@ class OperatorDocument < ApplicationRecord
     mapping['operator_document_updated_at'] = updated_at
     mapping['operator_document_created_at'] = created_at
     mapping['type'] += 'History'
-    odh = OperatorDocumentHistory.new mapping
-    odh.operator_document_annexes = operator_document_annexes
-    odh
+    OperatorDocumentHistory.new mapping
   end
 
   # Creates an OperatorDocumentHistory for the current OperatorDocument
   def create_history
     odh = build_history
+    odh.operator_document_annexes = operator_document_annexes
     odh.save!
   end
 

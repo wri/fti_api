@@ -11,9 +11,10 @@ namespace :fix do
     docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
     docs_no_history = OperatorDocument.where.not(id: docs_in_history)
 
-    new_history = []
+    new_history_list = []
 
     puts "Docs no history count: #{docs_no_history.count}"
+    puts "Annex history relation: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
 
     time = Benchmark.ms do
       ActiveRecord::Base.transaction do
@@ -30,23 +31,41 @@ namespace :fix do
 
           puts "Recreating history for operator document #{od.id}"
 
+          current_annexes = od.operator_document_annexes
+
           version = start_version
 
           loop do
             version.user_id = nil if version.user_id.in? [100001, 100002, 100008, 100010, 100011, 100013]
-            # TODO: figure out how to correctly recreate relations with annexes
-            #       as now it will take current version of annexes even for old history, this is not correct
-            new_history << version.build_history
-            version = version.paper_trail.next_version
-            break if version.nil?
+
+            new_history = version.build_history
+            next_version = version.paper_trail.next_version
+
+            # doc_not_provided, no way to have any annex
+            # history version will have all previously created annexes for that document
+            # and also all annexes created between this version and the next version of document if there is next version
+            unless new_history.doc_not_provided?
+              prev_annexes = current_annexes.select { |a| a.created_at < version.updated_at }
+              next_annexes = current_annexes.select { |a| a.created_at >= version.updated_at && (next_version.nil? || a.created_at < next_version.updated_at) }
+
+              new_history.operator_document_annexes = prev_annexes + next_annexes
+            end
+            new_history_list << new_history
+
+            break if next_version.nil?
+
+            version = next_version
           end
         end
 
-        OperatorDocumentHistory.import new_history, recursive: true
+        puts "Bulk import history data..."
+        OperatorDocumentHistory.import new_history_list, recursive: true
 
         # TODO: think about more indicators of healthy history
+        # TODO: what about document_file and attachments, check if all documents have correct attachments
         puts "HistoryCount after: #{OperatorDocumentHistory.count}"
         puts "Docs no history count: #{docs_no_history.reload.count}"
+        puts "Annex history relation after: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
 
         raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
       end
