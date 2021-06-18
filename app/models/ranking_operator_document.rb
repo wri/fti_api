@@ -20,7 +20,7 @@ class RankingOperatorDocument
     end
 
     def reload
-      @calculated_ranking = nil
+      Rails.cache.delete(cache_key)
     end
 
     private
@@ -49,7 +49,14 @@ class RankingOperatorDocument
           INNER JOIN countries c on c.id = o.country_id AND c.is_active = true
       SQL
 
-      @calculated_ranking ||= ActiveRecord::Base.connection.execute(query).to_a
+      Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+        ActiveRecord::Base.connection.execute(query).to_a
+      end
+    end
+
+    def cache_key
+      documents_last_change = OperatorDocument.order(updated_at: :desc).select(:updated_at).first&.updated_at
+      "ranking_operator_document_cache_#{documents_last_change}"
     end
   end
 end
