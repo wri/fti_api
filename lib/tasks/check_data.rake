@@ -16,6 +16,22 @@ namespace :check do
     end
   end
 
+  task fmu_docs: :environment do
+    RequiredOperatorDocumentFmu.find_each do |rodf|
+      FmuOperator.where(fmu: rodf.fmus).find_each do |fo|
+        puts "Operator #{fo.operator_id} does not have required doc #{rodf.id}}" unless OperatorDocument.where(required_operator_document: rodf, operator_id: fo.operator_id)
+      end
+    end
+  end
+
+  task country_docs: :environment do
+    RequiredOperatorDocumentCountry.find_each do |rodc|
+      Operator.where(country: rodc.country).pluck(:operator_id).each do |id|
+        puts "Operator #{id} does not have required doc #{rodc.id}" unless OperatorDocument.where(required_operator_document: rodc, operator_id: id)
+      end
+    end
+  end
+
   task operator_approved: :environment do
     Operator.find_each do |operator|
       next unless operator.operator_documents.signature.any?

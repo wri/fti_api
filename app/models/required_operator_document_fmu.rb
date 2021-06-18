@@ -29,10 +29,7 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   after_create :create_operator_document_fmus
 
   def create_operator_document_fmus
-    fmu_attributes = { country_id: self.country_id }
-    fmu_attributes[:forest_type] = self.forest_types if self.forest_types.present?
-
-    Fmu.where(fmu_attributes).find_each do |fmu|
+    fmus.find_each do |fmu|
       if fmu.operator.present? # This is to prevent faulty situations when the fmu has no operator id
         OperatorDocumentFmu.where(required_operator_document_id: self.id,
                                   operator_id: fmu.operator.id,
@@ -41,5 +38,11 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
         end
       end
     end
+  end
+
+  def fmus
+    fmu_attributes = { country_id: self.country_id }
+    fmu_attributes[:forest_type] = self.forest_types if self.forest_types.present?
+    Fmu.where(fmu_attributes)
   end
 end
