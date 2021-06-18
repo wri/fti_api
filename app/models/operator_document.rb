@@ -88,6 +88,8 @@ class OperatorDocument < ApplicationRecord
   def build_history
     mapping = self.attributes.except(*NON_HISTORICAL_ATTRIBUTES)
     mapping['operator_document_id'] = id
+    # we will copy object timestamps and keep using Rails timestamps
+    # as how they normally are used, to know when history was created
     mapping['operator_document_updated_at'] = updated_at
     mapping['operator_document_created_at'] = created_at
     mapping['type'] += 'History'
@@ -131,8 +133,6 @@ class OperatorDocument < ApplicationRecord
            expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
            deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
            source: nil, source_info: nil, document_file_id: nil
-
-    true
   end
 
   def set_type
