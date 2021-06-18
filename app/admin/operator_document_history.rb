@@ -28,7 +28,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :operator_document do |o|
       o.operator_document&.name
     end
-    column :updated_at
+    column :operator_document_updated_at
     column :operator_document do |o|
       o.operator_document&.required_operator_document&.name
     end
@@ -60,7 +60,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :expire_date
     column :start_date
-    column :created_at
+    column :operator_document_created_at
     column :uploaded_by
     column :attachment do |o|
       o.attachment&.filename
@@ -85,7 +85,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :operator_document do |od|
       link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
     end
-    column :updated_at
+    column :operator_document_updated_at
     column :country do |od|
       od.required_operator_document.country
     end
@@ -115,7 +115,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :user, sortable: false
     column :expire_date
     column :start_date
-    column :created_at
+    column :operator_document_created_at
     column :deleted_at
     column :uploaded_by
     column :source
@@ -152,7 +152,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
-  filter :updated_at
+  filter :operator_document_updated_at
 
   controller do
     def scoped_collection
