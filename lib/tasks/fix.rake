@@ -9,11 +9,10 @@ namespace :fix do
     OperatorDocumentUploader = Class.new # to fix initialization of old document which used this
 
     docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
-    docs_no_history = OperatorDocument.where.not(id: docs_in_history)
 
     new_history_list = []
 
-    puts "Docs no history count: #{docs_no_history.count}"
+    puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
     puts "Annex history relation: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
 
     time = Benchmark.ms do
@@ -63,8 +62,10 @@ namespace :fix do
 
         # TODO: think about more indicators of healthy history
         # TODO: what about document_file and attachments, check if all documents have correct attachments
+        docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
+
         puts "HistoryCount after: #{OperatorDocumentHistory.count}"
-        puts "Docs no history count: #{docs_no_history.reload.count}"
+        puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
         puts "Annex history relation after: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
 
         raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
