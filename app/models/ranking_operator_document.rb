@@ -3,6 +3,8 @@
 class RankingOperatorDocument
   class << self
     def refresh_for_country(country)
+      return if country.blank?
+
       new_ranking = ranking(country.id)
       rankable_country_operators = rankable_operators.where(country: country)
       rankable_country_operators.find_each do |operator|
