@@ -1,34 +1,59 @@
 # frozen_string_literal: true
 
 class RankingOperatorDocument
-  include ActiveModel::Model
-
-  attr_accessor :operator_id, :country_id, :position, :total
-
   class << self
-    def for_operator(operator)
-      return if operator.blank?
+    def refresh_for_country(country)
+      return if country.blank?
 
-      calculated_ranking
-        .select { |ranking| ranking['operator_id'] == operator.id }
-        .map { |ranking| RankingOperatorDocument.new(ranking) }
-        .first
+      new_ranking = ranking(country.id)
+      rankable_country_operators = rankable_operators.where(country: country)
+      rankable_country_operators.find_each do |operator|
+        refresh_operator_rank(operator, new_ranking)
+      end
+
+      # cleanup ranking for non rankable operators which has ranking
+      Operator
+        .where(country: country)
+        .where.not(id: rankable_country_operators)
+        .where.not(country_doc_rank: nil)
+        .find_each do |operator|
+          operator.update(country_doc_rank: nil, country_operators: nil)
+        end
     end
 
-    def all
-      calculated_ranking.map { |ranking| RankingOperatorDocument.new(ranking) }
+    def refresh
+      new_ranking = ranking
+      rankable_operators.find_each do |operator|
+        refresh_operator_rank(operator, new_ranking)
+      end
+
+      # cleanup ranking for non rankable operators which has ranking
+      Operator.where.not(id: rankable_operators).where.not(country_doc_rank: nil).find_each do |operator|
+        operator.update(country_doc_rank: nil, country_operators: nil)
+      end
     end
 
-    def reload
-      Rails.cache.delete(cache_key)
+    def rankable_operators
+      Operator.active.fa_operator
     end
 
-    private
+    def refresh_operator_rank(operator, new_ranking)
+      new_rank = new_ranking.find { |r| r[:operator_id] == operator.id }
+      return if new_rank.nil?
 
-    def calculated_ranking
+      operator.country_doc_rank = new_rank[:country_doc_rank]
+      operator.country_operators = new_rank[:country_operators]
+
+      return unless operator.country_doc_rank_changed? || operator.country_operators_changed?
+
+      operator.save
+    end
+
+    def ranking(country_id = nil)
       # Rules: COPIED OVER from old service
       # Operators must have FA_ID
       # Operators that have 0 documents should all be last with the ranking equal to the number of operators
+      country_query = country_id.nil? ? "" : " AND c.id = #{country_id}"
       query =
       <<~SQL
         SELECT
@@ -39,24 +64,17 @@ class RankingOperatorDocument
             COUNT(*) OVER (PARTITION BY o.country_id)
           ELSE
             RANK() OVER (PARTITION BY o.country_id ORDER BY "all" DESC)
-          END as position,
-          COUNT(*) OVER (PARTITION BY o.country_id) as total
+          END as country_doc_rank,
+          COUNT(*) OVER (PARTITION BY o.country_id) as country_operators
         FROM score_operator_documents sod
           INNER JOIN operators o on o.id = sod.operator_id
             AND o.fa_id <> ''
             AND o.is_active = true
             AND sod.current = true
-          INNER JOIN countries c on c.id = o.country_id AND c.is_active = true
+          INNER JOIN countries c on c.id = o.country_id AND c.is_active = true #{country_query}
       SQL
 
-      Rails.cache.fetch(cache_key, expires_in: 12.hours) do
-        ActiveRecord::Base.connection.execute(query).to_a
-      end
-    end
-
-    def cache_key
-      documents_last_change = OperatorDocument.order(updated_at: :desc).select(:updated_at).first&.updated_at
-      "ranking_operator_document_cache_#{documents_last_change}"
+      ActiveRecord::Base.connection.execute(query).to_a.map(&:with_indifferent_access)
     end
   end
 end
