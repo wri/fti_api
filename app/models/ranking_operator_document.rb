@@ -8,15 +8,27 @@ class RankingOperatorDocument
   class << self
     def refresh_for_country(country)
       new_ranking = ranking(country.id)
-      Operator.active.fa_operator.where(country: country).find_each do |operator|
+      rankable_operators = Operator.active.fa_operator.where(country: country)
+      rankable_operators.find_each do |operator|
         refresh_operator_rank(operator, new_ranking)
+      end
+
+      # cleanup ranking for non rankable operators which has ranking
+      Operator.where.not(id: rankable_operators).where.not(country_doc_rank: nil).find_each do |operator|
+        operator.update_attributes(country_doc_rank: nil, country_operators: nil)
       end
     end
 
     def refresh
       new_ranking = ranking
-      Operator.active.fa_operator.find_each do |operator|
+      rankable_operators = Operator.active.fa_operator
+      rankable_operators.find_each do |operator|
         refresh_operator_rank(operator, new_ranking)
+      end
+
+      # cleanup ranking for non rankable operators which has ranking
+      Operator.where.not(id: rankable_operators).where.not(country_doc_rank: nil).find_each do |operator|
+        operator.update_attributes(country_doc_rank: nil, country_operators: nil)
       end
     end
 
