@@ -56,14 +56,11 @@ class Fmu < ApplicationRecord
   accepts_nested_attributes_for :operators
   accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
 
-  before_validation :update_geojson
-
   validates :country_id, presence: true
   validates :name, presence: true
   validates :forest_type, presence: true
   validate :geojson_correctness, if: :geojson_changed?
 
-  before_save :update_properties
   after_save :update_geometry, if: :geojson_changed?
 
   before_destroy :really_destroy_documents
@@ -133,34 +130,29 @@ class Fmu < ApplicationRecord
     @esri_shapefiles_zip = esri_shapefiles_zip
   end
 
-  def update_geojson
-    temp_geojson = self.geojson
-    return if temp_geojson.blank?
+  def properties
+    temp_properties = read_attribute(:properties)
 
-    temp_geojson['properties']['id'] = self.id
-    temp_geojson['properties']['fmu_name'] = self.name
-    temp_geojson['properties']['iso3_fmu'] = self.country&.iso
-    temp_geojson['properties']['company_na'] = self.operator&.name
-    temp_geojson['properties']['operator_id'] = self.operator&.id
-    temp_geojson['properties']['certification_fsc'] = self.certification_fsc
-    temp_geojson['properties']['certification_pefc'] = self.certification_pefc
-    temp_geojson['properties']['certification_olb'] = self.certification_olb
-    temp_geojson['properties']['certification_pafc'] = self.certification_pafc
-    temp_geojson['properties']['certification_fsc_cw'] = self.certification_fsc_cw
-    temp_geojson['properties']['certification_tlv'] = self.certification_tlv
-    temp_geojson['properties']['certification_ls'] = self.certification_ls
-    temp_geojson['properties']['observations'] = self.active_observations.reload.uniq.count
-    temp_geojson['properties']['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
+    temp_properties['id'] = self.id
+    temp_properties['fmu_name'] = self.name
+    temp_properties['iso3_fmu'] = self.country&.iso
+    temp_properties['company_na'] = self.operator&.name
+    temp_properties['operator_id'] = self.operator&.id
+    temp_properties['certification_fsc'] = self.certification_fsc
+    temp_properties['certification_pefc'] = self.certification_pefc
+    temp_properties['certification_olb'] = self.certification_olb
+    temp_properties['certification_pafc'] = self.certification_pafc
+    temp_properties['certification_fsc_cw'] = self.certification_fsc_cw
+    temp_properties['certification_tlv'] = self.certification_tlv
+    temp_properties['certification_ls'] = self.certification_ls
+    temp_properties['observations'] = self.active_observations.reload.uniq.count
+    temp_properties['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
 
-    self.geojson = temp_geojson
+    temp_properties
   end
 
-  def update_properties
-    self.properties = {} if properties.blank?
-    properties['company_na'] = operator&.name
-    properties['operator_id'] = operator&.id
-    
-    self.properties
+  def geojson
+    read_attribute(:geojson).merge("properties" => properties) 
   end
 
   def bbox

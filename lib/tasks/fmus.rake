@@ -1,48 +1,19 @@
 namespace :fmus do
-  desc 'Checks sync between properties and fmu_operator current'
-  task current: :environment do
-    with_current_but_not_sync = []
-    without_current_and_not_sync = []
+  desc 'remove_geojson_proerties'
+  task remove_geojson_properties: :environment do
+  
     Fmu.all.each do |fmu|
-      #has current in fmu_operator
-      if fmu.fmu_operator&.operator_id
-        unless fmu.fmu_operator&.operator_id == fmu.properties['operator_id']
-          with_current_but_not_sync.push(fmu.id)
-          puts "fmu.id >> #{fmu.id} has current NOT sync with properties"
-          if ENV["FOR_REAL"]
-            fmu.save
-            fmu.reload
-            if fmu.fmu_operator&.operator_id == fmu.properties['operator_id']
-              puts "fixed as expected" 
-            else
-              puts "something went wrong my friend!"
-            end
-          end
-        end
-      else
-        #has no current in fmu_operator
-        unless fmu.properties['operator_id'].nil? or fmu.properties['company_na'].nil?
-          without_current_and_not_sync.push(fmu.id)
-          puts "fmu.id >> #{fmu.id} has NO current but"
-          puts " has operator_id in properties >>  #{fmu.properties['operator_id']}" unless fmu.properties['operator_id'].nil?
-          puts " has company_na in properties >>  #{fmu.properties['company_na']}" unless fmu.properties['company_na'].nil?
-          if ENV["FOR_REAL"]
-            fmu.save
-            fmu.reload
-            if fmu.properties['operator_id'].nil? and fmu.properties['company_na'].nil?
-              puts "fixed as expected" 
-            else
-              puts "something went wrong my friend!"
-            end
-          end
-        end
-      end
+      fmu.geojson = fmu.geojson.except!('properties')
+      fmu.save! 
     end
+  end
 
-    puts "with_current_but_not_sync"
-    puts with_current_but_not_sync
+  desc 'remove_duplicated_properties'
+  task remove_duplicated_properties: :environment do
 
-    puts "without_current_and_not_sync"
-    puts without_current_and_not_sync
+    Fmu.all.each do |fmu|
+      fmu.properties = fmu.properties.except!('id', 'fmu_name', 'iso3_fmu', 'company_na', 'operator_id', 'certification_fsc', 'certification_pefc', 'certification_olb', 'certification_pafc', 'certification_fsc_cw', 'certification_tlv', 'certification_ls', 'observations', 'fmu_type_label')
+      fmu.save!
+    end
   end
 end
