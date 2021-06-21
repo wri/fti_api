@@ -8,41 +8,49 @@ class RankingOperatorDocument
   class << self
     def refresh_for_country(country)
       new_ranking = ranking(country.id)
-      rankable_operators = Operator.active.fa_operator.where(country: country)
-      rankable_operators.find_each do |operator|
+      rankable_country_operators = rankable_operators.where(country: country)
+      rankable_country_operators.find_each do |operator|
         refresh_operator_rank(operator, new_ranking)
       end
 
       # cleanup ranking for non rankable operators which has ranking
-      Operator.where.not(id: rankable_operators).where.not(country_doc_rank: nil).find_each do |operator|
-        operator.update_attributes(country_doc_rank: nil, country_operators: nil)
-      end
+      Operator
+        .where(country: country)
+        .where.not(id: rankable_country_operators)
+        .where.not(country_doc_rank: nil)
+        .find_each do |operator|
+          operator.update(country_doc_rank: nil, country_operators: nil)
+        end
     end
 
     def refresh
       new_ranking = ranking
-      rankable_operators = Operator.active.fa_operator
       rankable_operators.find_each do |operator|
         refresh_operator_rank(operator, new_ranking)
       end
 
       # cleanup ranking for non rankable operators which has ranking
       Operator.where.not(id: rankable_operators).where.not(country_doc_rank: nil).find_each do |operator|
-        operator.update_attributes(country_doc_rank: nil, country_operators: nil)
+        operator.update(country_doc_rank: nil, country_operators: nil)
       end
     end
 
     private
 
+    def rankable_operators
+      Operator.active.fa_operator
+    end
+
     def refresh_operator_rank(operator, new_ranking)
       new_rank = new_ranking.find { |r| r.operator_id == operator.id }
       return if new_rank.nil?
-      return if new_rank.position == operator.country_doc_rank && new_rank.total == operator.country_operators
 
-      operator.update_attributes(
-        country_doc_rank: new_rank.position,
-        country_operators: new_rank.total
-      )
+      operator.country_doc_rank = new_rank.position
+      operator.country_operators = new_rank.total
+
+      return unless operator.country_doc_rank_changed? || operator.country_operators_changed?
+
+      operator.save
     end
 
     def ranking(country_id = nil)

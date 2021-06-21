@@ -10,9 +10,13 @@ namespace :scheduler do
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
 
-  desc 'Calculate scores'
+  desc 'Refresh ranking'
   task calculate_scores: :environment do
-    # TODO: REMOVE THIS job after deploy
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "Going to recalculate ranking for the whole database: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    time = Benchmark.ms { RankingOperatorDocument.refresh }
+    Rails.logger.info "Ranking refreshed. It took #{time} ms."
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
 
   desc 'Change current active FMU Operators'

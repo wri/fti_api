@@ -47,22 +47,13 @@ RSpec.describe RankingOperatorDocument, type: :model do
   end
 
   it 'should calculate correct ranking per country' do
-    RankingOperatorDocument.reload
-    op_rank = RankingOperatorDocument.for_operator(@operator)
-    op2_rank = RankingOperatorDocument.for_operator(@operator_2)
-    op3_rank = RankingOperatorDocument.for_operator(@operator_3)
-    op4_rank = RankingOperatorDocument.for_operator(@operator_4)
-    op5_rank = RankingOperatorDocument.for_operator(@operator_5)
-    op6_rank = RankingOperatorDocument.for_operator(@operator_6)
-    op_inactive_rank = RankingOperatorDocument.for_operator(@operator_inactive)
+    expect(@operator.reload.country_doc_rank).to eq(2)
+    expect(@operator_2.reload.country_doc_rank).to eq(1) # this operator has all documents valid, all: 1.0
+    expect(@operator_3.reload.country_doc_rank).to eq(4)
+    expect(@operator_4.reload.country_doc_rank).to eq(4)
+    expect(@operator_6.reload.country_doc_rank).to eq(1)
 
-    expect(op_rank.position).to eq(2)
-    expect(op2_rank.position).to eq(1) # this operator has all documents valid, all: 1.0
-    expect(op3_rank.position).to eq(4)
-    expect(op4_rank.position).to eq(4)
-    expect(op6_rank.position).to eq(1)
-
-    expect(op5_rank).to be_nil
-    expect(op_inactive_rank).to be_nil
+    expect(@operator_5.reload.country_doc_rank).to be_nil
+    expect(@operator_inactive.reload.country_doc_rank).to be_nil
   end
 end
