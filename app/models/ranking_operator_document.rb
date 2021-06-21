@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 class RankingOperatorDocument
-  include ActiveModel::Model
-
-  attr_accessor :operator_id, :country_id, :position, :total
-
   class << self
     def refresh_for_country(country)
       new_ranking = ranking(country.id)
@@ -35,18 +31,16 @@ class RankingOperatorDocument
       end
     end
 
-    private
-
     def rankable_operators
       Operator.active.fa_operator
     end
 
     def refresh_operator_rank(operator, new_ranking)
-      new_rank = new_ranking.find { |r| r.operator_id == operator.id }
+      new_rank = new_ranking.find { |r| r[:operator_id] == operator.id }
       return if new_rank.nil?
 
-      operator.country_doc_rank = new_rank.position
-      operator.country_operators = new_rank.total
+      operator.country_doc_rank = new_rank[:country_doc_rank]
+      operator.country_operators = new_rank[:country_operators]
 
       return unless operator.country_doc_rank_changed? || operator.country_operators_changed?
 
@@ -68,8 +62,8 @@ class RankingOperatorDocument
             COUNT(*) OVER (PARTITION BY o.country_id)
           ELSE
             RANK() OVER (PARTITION BY o.country_id ORDER BY "all" DESC)
-          END as position,
-          COUNT(*) OVER (PARTITION BY o.country_id) as total
+          END as country_doc_rank,
+          COUNT(*) OVER (PARTITION BY o.country_id) as country_operators
         FROM score_operator_documents sod
           INNER JOIN operators o on o.id = sod.operator_id
             AND o.fa_id <> ''
@@ -78,7 +72,7 @@ class RankingOperatorDocument
           INNER JOIN countries c on c.id = o.country_id AND c.is_active = true #{country_query}
       SQL
 
-      ActiveRecord::Base.connection.execute(query).map { |ranking| RankingOperatorDocument.new(ranking) }
+      ActiveRecord::Base.connection.execute(query).to_a.map(&:with_indifferent_access)
     end
   end
 end
