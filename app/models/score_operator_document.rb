@@ -22,6 +22,8 @@ class ScoreOperatorDocument < ApplicationRecord
   validates_presence_of :date
   validates_uniqueness_of :current, scope: :operator_id, if: :current?
 
+  after_commit :refresh_ranking
+
   scope :current, -> { where(current: true) }
 
   VALUE_ATTRS = %w[all fmu country total summary_public summary_private].freeze
@@ -43,7 +45,7 @@ class ScoreOperatorDocument < ApplicationRecord
   def self.build(operator, docs = nil)
     docs ||= operator.operator_documents.non_signature
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    calculator = ScoreOperatorCalculator.new(docs)
+    calculator = ScoreOperatorPresenter.new(docs)
     sod.all = calculator.all
     sod.fmu = calculator.fmu
     sod.country = calculator.country
@@ -87,6 +89,10 @@ class ScoreOperatorDocument < ApplicationRecord
   end
 
   private
+
+  def refresh_ranking
+    RankingOperatorDocument.refresh_for_country(operator.country)
+  end
 
   # Adds a new SOD and makes marks the old one as not current
   # @param [ScoreOperatorDocument] sod The new sod

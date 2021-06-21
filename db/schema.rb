@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210607152721) do
+ActiveRecord::Schema.define(version: 20210618175920) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
@@ -596,6 +597,8 @@ ActiveRecord::Schema.define(version: 20210607152721) do
     t.integer  "user_id"
     t.integer  "required_operator_document_id"
     t.datetime "deleted_at"
+    t.datetime "operator_document_updated_at",  null: false
+    t.datetime "operator_document_created_at",  null: false
     t.index ["deleted_at"], name: "index_operator_document_histories_on_deleted_at", using: :btree
     t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id", using: :btree
     t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date", using: :btree
@@ -660,17 +663,19 @@ ActiveRecord::Schema.define(version: 20210607152721) do
     t.string   "operator_type"
     t.integer  "country_id"
     t.string   "concession"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "is_active",     default: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "is_active",         default: true
     t.string   "logo"
     t.string   "operator_id"
     t.string   "fa_id"
     t.string   "address"
     t.string   "website"
-    t.boolean  "approved",      default: true, null: false
+    t.boolean  "approved",          default: true, null: false
     t.string   "email"
     t.integer  "holding_id"
+    t.integer  "country_doc_rank"
+    t.integer  "country_operators"
     t.index ["approved"], name: "index_operators_on_approved", using: :btree
     t.index ["country_id"], name: "index_operators_on_country_id", using: :btree
     t.index ["fa_id"], name: "index_operators_on_fa_id", using: :btree

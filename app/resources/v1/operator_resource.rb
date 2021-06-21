@@ -99,14 +99,6 @@ module V1
       @model.score_operator_document&.country
     end
 
-    def country_doc_rank
-      @model.ranking_operator_document&.position
-    end
-
-    def country_operators
-      @model.ranking_operator_document&.total
-    end
-
     def obs_per_visit
       @model.score_operator_observation&.obs_per_visit
     end

@@ -17,6 +17,9 @@ RSpec.describe RankingOperatorDocument, type: :model do
   before :all do
     @country = create(:country)
     @country_2 = create(:country)
+  end
+
+  before :each do
     @operator = create(:operator, country: @country, fa_id: 'fa-id')
     @operator_2 = create(:operator, country: @country, fa_id: 'fa-id2')
     @operator_3 = create(:operator, country: @country, fa_id: 'fa-id3')
@@ -47,22 +50,41 @@ RSpec.describe RankingOperatorDocument, type: :model do
   end
 
   it 'should calculate correct ranking per country' do
-    RankingOperatorDocument.reload
-    op_rank = RankingOperatorDocument.for_operator(@operator)
-    op2_rank = RankingOperatorDocument.for_operator(@operator_2)
-    op3_rank = RankingOperatorDocument.for_operator(@operator_3)
-    op4_rank = RankingOperatorDocument.for_operator(@operator_4)
-    op5_rank = RankingOperatorDocument.for_operator(@operator_5)
-    op6_rank = RankingOperatorDocument.for_operator(@operator_6)
-    op_inactive_rank = RankingOperatorDocument.for_operator(@operator_inactive)
+    expect(@operator.reload.country_doc_rank).to eq(2)
+    expect(@operator_2.reload.country_doc_rank).to eq(1) # this operator has all documents valid, all: 1.0
+    expect(@operator_3.reload.country_doc_rank).to eq(4)
+    expect(@operator_4.reload.country_doc_rank).to eq(4)
+    expect(@operator_6.reload.country_doc_rank).to eq(1)
 
-    expect(op_rank.position).to eq(2)
-    expect(op2_rank.position).to eq(1) # this operator has all documents valid, all: 1.0
-    expect(op3_rank.position).to eq(4)
-    expect(op4_rank.position).to eq(4)
-    expect(op6_rank.position).to eq(1)
+    expect(@operator_5.reload.country_doc_rank).to be_nil
+    expect(@operator_inactive.reload.country_doc_rank).to be_nil
+  end
 
-    expect(op5_rank).to be_nil
-    expect(op_inactive_rank).to be_nil
+  describe 'operator changes' do
+    it 'should remove ranking from old operator that become inactive' do
+      @operator_2.update(is_active: false)
+
+      expect(@operator.reload.country_doc_rank).to eq(1)
+      expect(@operator_2.reload.country_doc_rank).to be_nil
+      expect(@operator_3.reload.country_doc_rank).to eq(3)
+      expect(@operator_4.reload.country_doc_rank).to eq(3)
+      expect(@operator_6.reload.country_doc_rank).to eq(1)
+
+      expect(@operator_5.reload.country_doc_rank).to be_nil
+      expect(@operator_inactive.reload.country_doc_rank).to be_nil
+    end
+
+    it 'should remove ranking from operator that is not longer fa operator' do
+      @operator_2.update(fa_id: nil)
+
+      expect(@operator.reload.country_doc_rank).to eq(1)
+      expect(@operator_2.reload.country_doc_rank).to be_nil
+      expect(@operator_3.reload.country_doc_rank).to eq(3)
+      expect(@operator_4.reload.country_doc_rank).to eq(3)
+      expect(@operator_6.reload.country_doc_rank).to eq(1)
+
+      expect(@operator_5.reload.country_doc_rank).to be_nil
+      expect(@operator_inactive.reload.country_doc_rank).to be_nil
+    end
   end
 end

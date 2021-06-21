@@ -76,7 +76,7 @@ class OperatorDocument < ApplicationRecord
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
-  NON_HISTORICAL_ATTRIBUTES = %w[id attachment].freeze
+  NON_HISTORICAL_ATTRIBUTES = %w[id attachment updated_at created_at].freeze
 
   def self.expire_documents
     documents_to_expire = OperatorDocument.to_expire(Date.today)
@@ -85,19 +85,22 @@ class OperatorDocument < ApplicationRecord
     Rails.logger.info "Expired #{number_of_documents} documents"
   end
 
-  # Creates an OperatorDocumentHistory for the current OperatorDocument
-  def create_history(attrs = {})
-    mapping = self.attributes.except *NON_HISTORICAL_ATTRIBUTES
-    mapping['operator_document_id'] = self.id
+  def build_history
+    mapping = self.attributes.except(*NON_HISTORICAL_ATTRIBUTES)
+    mapping['operator_document_id'] = id
+    # we will copy object timestamps and keep using Rails timestamps
+    # as how they normally are used, to know when history was created
+    mapping['operator_document_updated_at'] = updated_at
+    mapping['operator_document_created_at'] = created_at
     mapping['type'] += 'History'
-    attrs.select! { |x| OperatorDocumentHistory.new.attributes.key?(x) }
+    OperatorDocumentHistory.new mapping
+  end
 
-    odh = OperatorDocumentHistory.create mapping.merge(attrs)
-
-    return odh unless odh.persisted?
-
-    odh.operator_document_annexes = self.operator_document_annexes
-    odh
+  # Creates an OperatorDocumentHistory for the current OperatorDocument
+  def create_history
+    odh = build_history
+    odh.operator_document_annexes = operator_document_annexes
+    odh.save!
   end
 
   def set_expire_date
@@ -130,8 +133,6 @@ class OperatorDocument < ApplicationRecord
            expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
            deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
            source: nil, source_info: nil, document_file_id: nil
-
-    true
   end
 
   def set_type
