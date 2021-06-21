@@ -43,7 +43,7 @@ class ScoreOperatorDocument < ApplicationRecord
   def self.build(operator, docs = nil)
     docs ||= operator.operator_documents.non_signature
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    calculator = ScoreOperatorCalculator.new(docs)
+    calculator = ScoreOperatorPresenter.new(docs)
     sod.all = calculator.all
     sod.fmu = calculator.fmu
     sod.country = calculator.country

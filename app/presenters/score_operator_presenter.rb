@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ScoreOperatorCalculator
+class ScoreOperatorPresenter
   attr_reader :docs
 
   def initialize(docs)
