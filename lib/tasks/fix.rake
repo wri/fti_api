@@ -23,7 +23,7 @@ namespace :fix do
         AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').delete_all
 
         OperatorDocument.unscoped.find_each do |od|
-          start_version = od.paper_trail.version_at(date) || od.versions.where('created_at >= ?', date).order(:created_at).first&.reify || od
+          start_version = od.paper_trail.version_at(date) || od.versions.where(event: 'update').where('created_at >= ?', date).order(:created_at).first&.reify || od
 
           next if start_version.blank?
           next if start_version.deleted_at.present?
