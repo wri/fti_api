@@ -7,6 +7,8 @@ ActiveAdmin.register OperatorDocumentHistory do
   menu false
   config.order_clause
 
+  scope :with_deleted, default: true
+
   sidebar 'Annexes', only: :show do
     attributes_table_for resource do
       ul do
@@ -149,6 +151,8 @@ ActiveAdmin.register OperatorDocumentHistory do
          collection: RequiredOperatorDocument.with_translations.all, as: :select, label: 'Required Operator Document'
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+  filter :fmu, label: 'Fmus', as: :select,
+               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
