@@ -40,6 +40,7 @@ class OperatorDocumentHistory < ApplicationRecord
 
   scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmuHistory') }
   scope :country_type,                           -> { where(type: 'OperatorDocumentCountryHistory') }
+  scope :available,                              -> { where(public: true) }
   scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :valid, -> { joins(:operator_document).where(operator_documents: { status: OperatorDocument.statuses[:doc_valid] }) } # valid doc
 

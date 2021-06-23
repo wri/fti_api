@@ -30,7 +30,7 @@ module V1
     end
 
     def status
-      return @model.status if can_see_document?
+      return @model.status if can_see_document? || document_public?
 
       hidden_document_status
     end
