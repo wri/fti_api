@@ -41,12 +41,6 @@ module V1
       end
     end
 
-    def status
-      return @model.status if can_see_document? || document_public?
-
-      hidden_document_status
-    end
-
     def self.records(options = {})
       group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
       OperatorDocument.exclude_by_required_operator_document_group(group_id_to_exclude).from_active_operators

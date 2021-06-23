@@ -22,17 +22,15 @@ module V1
     }
 
     def updated_at
+      return nil unless document_visible?
+
       @model.operator_document_updated_at
     end
 
     def created_at
+      return nil unless document_visible?
+
       @model.operator_document_created_at
-    end
-
-    def status
-      return @model.status if can_see_document? || document_public?
-
-      hidden_document_status
     end
 
     # TODO
