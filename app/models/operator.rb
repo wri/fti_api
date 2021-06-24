@@ -70,6 +70,7 @@ class Operator < ApplicationRecord
   before_validation { self.remove_logo! if self.delete_logo == '1' }
   after_create :create_operator_id
   after_create :create_documents
+  after_update :recalculate_scores, if: :approved_changed?
   after_update :create_documents, if: :fa_id_changed?
   after_update :refresh_ranking, if: -> { fa_id_changed? || is_active_changed? }
   before_destroy :really_destroy_documents
@@ -165,6 +166,10 @@ class Operator < ApplicationRecord
   end
 
   private
+
+  def recalculate_scores
+    ScoreOperatorDocument.recalculate!(self)
+  end
 
   def refresh_ranking
     RankingOperatorDocument.refresh_for_country(country)
