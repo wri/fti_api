@@ -39,7 +39,7 @@ module V1
       operator = context.dig(:filters, 'operator-id')
       date = context.dig(:filters, 'date').to_date
 
-      OperatorDocumentHistory.from_operator_at_date(operator, date)
+      OperatorDocumentHistory.from_operator_at_date(operator, date).non_signature
     rescue StandardError
       return OperatorDocumentHistory.where('true = false') unless operator && date
     end

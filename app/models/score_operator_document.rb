@@ -43,9 +43,10 @@ class ScoreOperatorDocument < ApplicationRecord
   # @param [Operator] operator The operator
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator, docs = nil)
-    docs ||= operator.operator_documents.non_signature
+    docs ||= operator.operator_documents
+    signed_publication_authorization = docs.signature.approved.any?
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    calculator = ScoreOperatorPresenter.new(docs, operator.approved)
+    calculator = ScoreOperatorPresenter.new(docs.non_signature, signed_publication_authorization)
     sod.all = calculator.all
     sod.fmu = calculator.fmu
     sod.country = calculator.country
@@ -58,8 +59,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # Resync the score using operator document history
   def resync!
     docs = OperatorDocumentHistory.from_operator_at_date(operator_id, date)
-    operator_at_the_day = operator.paper_trail.version_at(Date.parse(date).end_of_day) rescue operator
-    new_score = ScoreOperatorDocument.build(operator_at_the_day, docs)
+    new_score = ScoreOperatorDocument.build(operator, docs)
     self.all = new_score.all
     self.fmu = new_score.fmu
     self.country = new_score.country

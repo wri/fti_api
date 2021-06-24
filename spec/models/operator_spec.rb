@@ -38,6 +38,7 @@ RSpec.describe Operator, type: :model do
       country: @country,
       required_operator_document_group: @required_operator_document_group
     }
+    @signature_document = create(:required_operator_document_country, country: @country, contract_signature: true)
     @required_operator_document =
       create(:required_operator_document, **required_operator_document_data)
     @required_operator_document_country =
@@ -161,11 +162,11 @@ RSpec.describe Operator, type: :model do
       # callbacks which appears on Operator and OperatorDocument. For this, we get the
       # number of required operator_documents on each test
       @operator_documents_required =
-        @operator.operator_documents.joins(:required_operator_document).required.count.to_f
+        @operator.operator_documents.joins(:required_operator_document).non_signature.required.count.to_f
       @operator_document_countries_required =
-        @operator.operator_document_countries.joins(:required_operator_document).required.count.to_f
+        @operator.operator_document_countries.joins(:required_operator_document).non_signature.required.count.to_f
       @operator_document_fmus_required =
-        @operator.operator_document_fmus.joins(:required_operator_document).required.count.to_f
+        @operator.operator_document_fmus.joins(:required_operator_document).non_signature.required.count.to_f
     end
 
     describe '#cache_key' do
@@ -176,11 +177,10 @@ RSpec.describe Operator, type: :model do
 
     describe '#update_valid_documents_percentages' do
       context 'when fa_id is present' do
-        context 'when operator is approved' do
+        context 'when operator is approved/signed contract' do
           it 'update approved percentages' do
-            @operator.update_attributes(fa_id: 'fa_id', approved: true)
+            @operator.operator_documents.signature.first.update(status: 'doc_valid') # sign contract
             @operator.reload
-            ScoreOperatorDocument.recalculate! @operator
 
             expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
             expect(@operator.score_operator_document.country).to eql(4.0 / @operator_document_countries_required)
@@ -188,12 +188,8 @@ RSpec.describe Operator, type: :model do
           end
         end
 
-        context 'when operator is not approved' do
+        context 'when operator is not approved/not signed contract' do
           it 'update non approved percentages' do
-            @operator.update_attributes(fa_id: 'fa_id', approved: false)
-            @operator.reload
-            ScoreOperatorDocument.recalculate! @operator
-
             expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
             expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
             expect(@operator.score_operator_document.fmu).to eql(1.0 / @operator_document_fmus_required)

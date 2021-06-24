@@ -41,6 +41,8 @@ class OperatorDocumentHistory < ApplicationRecord
   scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmuHistory') }
   scope :country_type,                           -> { where(type: 'OperatorDocumentCountryHistory') }
   scope :available,                              -> { where(public: true) }
+  scope :approved,                               -> { where(status: %i[doc_valid doc_not_required]) }
+  scope :signature,                              -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: true }) }
   scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :valid, -> { joins(:operator_document).where(operator_documents: { status: OperatorDocument.statuses[:doc_valid] }) } # valid doc
 
@@ -72,6 +74,6 @@ class OperatorDocumentHistory < ApplicationRecord
     # will only return not deleted
     # deleted document history is created when document is destroyed, when country, fmu is unattributed
     # it will not return destroyed documents
-    from(query).non_signature
+    from(query)
   end
 end
