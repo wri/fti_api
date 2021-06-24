@@ -12,6 +12,11 @@ class SyncTasks
       task scores_last_week: :environment do
         sync_scores(1.week.ago)
       end
+
+      desc 'Refresh ranking'
+      task ranking: :environment do
+        RankingOperatorDocument.refresh
+      end
     end
   end
 
