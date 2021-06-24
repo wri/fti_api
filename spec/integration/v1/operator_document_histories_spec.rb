@@ -108,7 +108,7 @@ module V1
 
           search_time = (time3).to_date.to_s(:db)
           get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
-              headers: admin_headers)  
+              headers: admin_headers)
           expect(status).to eql(200)
           expect(extract_operator_document_id.include?(operator_document.id)).to eql(true)
           expect(extract_operator_document_id.count(operator_document.id)).to eql(1)
