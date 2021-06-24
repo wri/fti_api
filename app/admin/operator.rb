@@ -228,17 +228,22 @@ ActiveAdmin.register Operator, as: 'Producer' do
         # tools to debug scores locally
         if Rails.env.development?
           row 'Score History Only visible in DEVELOPMENT MODE!' do
-            scores = ScoreOperatorDocument.where(operator_id: resource.id).order(:date).to_a
+            scores = ScoreOperatorDocument.where(operator_id: resource.id).order(date: :desc).to_a
             table_for ScoreOperatorDocumentDecorator.decorate_collection(scores, self) do
               column :date
               column :all
               column :fmu
               column :country
               column :total
-              column :summary_diff do |score|
+              column :public_summary_diff do |score|
                 idx = scores.index(score.model)
-                prev_score = idx.zero? ? nil : scores[idx - 1]
-                score.summary_diff(prev_score)
+                prev_score = scores[idx + 1]
+                score.public_summary_diff(prev_score)
+              end
+              column :private_summary_diff do |score|
+                idx = scores.index(score.model)
+                prev_score = scores[idx + 1]
+                score.private_summary_diff(prev_score)
               end
               column 'Documents', &:document_history_link
             end
