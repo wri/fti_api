@@ -3,9 +3,9 @@
 class ScoreOperatorPresenter
   attr_reader :docs, :signed_publication_authorization
 
-  def initialize(docs, signed_publication_authorization)
-    @docs = docs
-    @signed_publication_authorization = signed_publication_authorization
+  def initialize(docs)
+    @docs = docs.non_signature
+    @signed_publication_authorization = docs.signature.approved.any?
   end
 
   def all

@@ -44,9 +44,8 @@ class ScoreOperatorDocument < ApplicationRecord
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator, docs = nil)
     docs ||= operator.operator_documents
-    signed_publication_authorization = docs.signature.approved.any?
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
-    calculator = ScoreOperatorPresenter.new(docs.non_signature, signed_publication_authorization)
+    calculator = ScoreOperatorPresenter.new(docs)
     sod.all = calculator.all
     sod.fmu = calculator.fmu
     sod.country = calculator.country
