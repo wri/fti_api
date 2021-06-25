@@ -190,13 +190,16 @@ RSpec.describe Operator, type: :model do
 
         context 'when operator is not approved/not signed contract' do
           it 'update non approved percentages' do
+            @operator.operator_documents.signature.first.update(status: 'doc_invalid') # contract invalid
+            @operator.reload
+
             expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
             expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
             expect(@operator.score_operator_document.fmu).to eql(1.0 / @operator_document_fmus_required)
           end
         end
 
-        context 'when there are not documents' do
+        context 'when there are no documents' do
           it 'update percentages with a 0 value' do
             ScoreOperatorDocument.recalculate! @another_operator
             @operator.reload
