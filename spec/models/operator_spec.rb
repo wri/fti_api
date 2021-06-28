@@ -2,23 +2,25 @@
 #
 # Table name: operators
 #
-#  id            :integer          not null, primary key
-#  operator_type :string
-#  country_id    :integer
-#  concession    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_active     :boolean          default("true")
-#  logo          :string
-#  operator_id   :string
-#  fa_id         :string
-#  address       :string
-#  website       :string
-#  approved      :boolean          default("true"), not null
-#  email         :string
-#  holding_id    :integer
-#  name          :string
-#  details       :text
+#  id                :integer          not null, primary key
+#  operator_type     :string
+#  country_id        :integer
+#  concession        :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  is_active         :boolean          default("true")
+#  logo              :string
+#  operator_id       :string
+#  fa_id             :string
+#  address           :string
+#  website           :string
+#  approved          :boolean          default("true"), not null
+#  email             :string
+#  holding_id        :integer
+#  country_doc_rank  :integer
+#  country_operators :integer
+#  name              :string
+#  details           :text
 #
 
 require 'rails_helper'
