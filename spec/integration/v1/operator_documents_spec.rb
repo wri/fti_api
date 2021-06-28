@@ -6,7 +6,10 @@ module V1
     let(:operator_documents_url_with_included) { '/operator-documents?locale=en&include=operator,operator.country,fmu,operator-document-annexes,required-operator-document'}
 
     before :all do
-      @operator_documents = create_list(:operator_document, 8)
+      @signature_group = create(:required_operator_document_group, name: 'Publication Authorization')
+      @signature_document = create(:required_operator_document_country, required_operator_document_group: @signature_group, contract_signature: true)
+      @operator_documents = create_list(:operator_document, 7)
+      @doc_signature = create(:operator_document, required_operator_document: @signature_document)
       @doc_invalid = create(:operator_document)
       @doc_valid_private = create(
         :operator_document,
@@ -29,7 +32,7 @@ module V1
         get('/operator-documents?locale=en', headers: admin_headers)
         expect(parsed_data.count).to eql(10)
       end
-      it 'returns all with included' do
+      it 'rebturns all with included' do
         get(operator_documents_url_with_included, headers: admin_headers)
 
         expect(parsed_data.count).to eql(10)
