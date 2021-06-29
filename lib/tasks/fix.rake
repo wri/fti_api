@@ -23,7 +23,7 @@ namespace :fix do
         AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').delete_all
 
         OperatorDocument.unscoped.find_each do |od|
-          start_version = od.paper_trail.version_at(date) || od.versions.where(event: 'update').where('created_at >= ?', date).order(:created_at).first&.reify || od
+          start_version = od.paper_trail.version_at(date) || od.versions.where(event: 'update').where('created_at >= ?', date).where_object(deleted_at: nil).order(:created_at).first&.reify || od
 
           next if start_version.blank?
           next if start_version.deleted_at.present?
@@ -49,6 +49,7 @@ namespace :fix do
 
               new_history.operator_document_annexes = prev_annexes + next_annexes
             end
+
             new_history_list << new_history
 
             break if next_version.nil?
@@ -66,6 +67,7 @@ namespace :fix do
 
         puts "HistoryCount after: #{OperatorDocumentHistory.count}"
         puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
+        puts "Docs no history ids: #{OperatorDocument.where.not(id: docs_in_history).pluck(:id)}"
         puts "Annex history relation after: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
 
         raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
