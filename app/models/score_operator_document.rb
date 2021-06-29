@@ -43,7 +43,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # @param [Operator] operator The operator
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator, docs = nil)
-    docs ||= operator.operator_documents.non_signature
+    docs ||= operator.operator_documents
     sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
     calculator = ScoreOperatorPresenter.new(docs)
     sod.all = calculator.all

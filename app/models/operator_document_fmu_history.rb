@@ -25,6 +25,8 @@
 #  user_id                       :integer
 #  required_operator_document_id :integer
 #  deleted_at                    :datetime
+#  operator_document_updated_at  :datetime         not null
+#  operator_document_created_at  :datetime         not null
 #
 class OperatorDocumentFmuHistory < OperatorDocumentHistory
 

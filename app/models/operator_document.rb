@@ -14,7 +14,6 @@
 #  updated_at                    :datetime         not null
 #  status                        :integer
 #  operator_id                   :integer
-#  attachment                    :string
 #  deleted_at                    :datetime
 #  uploaded_by                   :integer
 #  user_id                       :integer
@@ -51,7 +50,7 @@ class OperatorDocument < ApplicationRecord
   before_create :delete_previous_pending_document
 
   after_save :create_history, if: :changed?
-  after_save ->{ ScoreOperatorDocument.recalculate!(operator) }, on: %w[create update],  if: :status_changed?
+  after_save :recalculate_scores, if: :score_related_attribute_changed?
 
   after_destroy :regenerate
 
@@ -117,6 +116,14 @@ class OperatorDocument < ApplicationRecord
   end
 
   private
+
+  def recalculate_scores
+    ScoreOperatorDocument.recalculate!(operator)
+  end
+
+  def score_related_attribute_changed?
+    status_changed? || (!operator.approved? && public_changed?)
+  end
 
   def regenerate
     # It only allows for (soft) deletion of the operator documents when:

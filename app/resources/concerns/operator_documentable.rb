@@ -4,6 +4,8 @@ module OperatorDocumentable
   extend ActiveSupport::Concern
 
   included do
+    include Privateable
+
     attributes :expire_date, :start_date,
                :status, :created_at, :updated_at,
                :attachment, :operator_id, :required_operator_document_id,
@@ -19,12 +21,27 @@ module OperatorDocumentable
 
     filters :type, :status, :operator_id, :fmu_id, :required_operator_document_id, :country_ids, :source, :legal_categories, :forest_types
 
+    privateable :document_visible?, [:start_date, :expire_date, :note, :reason, :response_date, :source_info, :uploaded_by, :created_at, :updated_at]
+
     def custom_links(_)
       { self: nil }
     end
 
+    def source_type
+      return nil unless document_visible?
+
+      @model.source
+    end
+
+    def status
+      return @model.status if can_see_document?
+      return @model.status if document_public? && %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
+
+      :doc_not_provided
+    end
+
     def attachment
-      return @model&.document_file&.attachment if can_see_document? || document_public?
+      return @model&.document_file&.attachment if document_visible?
 
       { url: nil }
     end
@@ -32,6 +49,10 @@ module OperatorDocumentable
     def attachment=(attachment)
       @model.build_document_file(attachment: attachment)
       nil
+    end
+
+    def document_visible?
+      can_see_document? || document_public?
     end
 
     def document_public?
@@ -47,12 +68,6 @@ module OperatorDocumentable
       return true if user&.is_operator?(@model.operator_id)
 
       false
-    end
-
-    def hidden_document_status
-      return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
-
-      :doc_not_provided
     end
   end
 

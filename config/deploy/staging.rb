@@ -72,7 +72,7 @@ set :ssh_options, {
   password: fetch(:password)
 }
 
-set :branch, 'staging'
+set :branch, ENV.fetch('BRANCH') { 'staging' }
 set :deploy_to, '~/fti-api-staging'
 
 role :resque_worker, ENV['STAGING_IP']
