@@ -65,7 +65,9 @@ module OpDoc
 
     def required_operator_document_ids
       group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
-      RequiredOperatorDocument.with_translations.map do |x|
+      # TODO: after fixing bad data remove that filter
+      # required operator document should always have a country, I think
+      RequiredOperatorDocument.with_translations.where.not(country_id: nil).map do |x|
         unless x.required_operator_document_group_id == group_id_to_exclude
           { id: x.id, name: beautify_name(x.name) }
         end
@@ -81,11 +83,11 @@ module OpDoc
     def country_ids
       Country.active.with_translations.map do  |x|
         {
-            id: x.id, iso: x.iso, name: x.name,
-            operators: x.operators.pluck(:id).uniq,
-            fmus: x.fmus.pluck(:id).uniq,
-            forest_types: forest_types_by_country(x),
-            required_operator_document_ids: x.required_operator_documents.pluck(:id).uniq
+          id: x.id, iso: x.iso, name: x.name,
+          operators: x.operators.pluck(:id).uniq,
+          fmus: x.fmus.pluck(:id).uniq,
+          forest_types: forest_types_by_country(x),
+          required_operator_document_ids: x.required_operator_documents.pluck(:id).uniq
         }
       end.sort_by { |x| x[:name] }
     end
