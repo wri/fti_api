@@ -7,7 +7,7 @@
   <b>User</b>: <%= User.find(@versions.last.whodunnit).email rescue '' %>
   <br>
   <% if @versions.length.to_i > 1 %>
-    <% if params[:version].to_i > 1 || !params[:version] %>
+    <% if params[:version].to_i > 0 || !params[:version] %>
       <%= link_to "Previous version", {:version => (params[:version] || @versions.length).to_i - 1}%>
       <br>
     <% end %>

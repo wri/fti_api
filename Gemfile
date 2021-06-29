@@ -96,7 +96,7 @@ group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
   gem 'rails-erd'
-  gem 'rubocop',                   require: false
+  gem 'rubocop', require: false
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'webmock'

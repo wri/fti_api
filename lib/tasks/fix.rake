@@ -1,6 +1,80 @@
+require 'benchmark'
 require 'csv'
 
 namespace :fix do
+  desc 'fix doc history'
+  task fix_doc_history: :environment do
+    date = '2021-04-01'
+
+    OperatorDocumentUploader = Class.new # to fix initialization of old document which used this
+
+    docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
+
+    new_history_list = []
+
+    puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
+    puts "Annex history relation: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
+
+    time = Benchmark.ms do
+      ActiveRecord::Base.transaction do
+        puts "HistoryCount before: #{OperatorDocumentHistory.count}"
+
+        OperatorDocumentHistory.delete_all
+        AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').delete_all
+
+        OperatorDocument.unscoped.find_each do |od|
+          start_version = od.paper_trail.version_at(date) || od.versions.where(event: 'update').where('created_at >= ?', date).order(:created_at).first&.reify || od
+
+          next if start_version.blank?
+          next if start_version.deleted_at.present?
+
+          puts "Recreating history for operator document #{od.id}"
+
+          current_annexes = od.operator_document_annexes
+
+          version = start_version
+
+          loop do
+            version.user_id = nil if version.user_id.in? [100001, 100002, 100008, 100010, 100011, 100013]
+
+            new_history = version.build_history
+            next_version = version.paper_trail.next_version
+
+            # doc_not_provided, no way to have any annex
+            # history version will have all previously created annexes for that document
+            # and also all annexes created between this version and the next version of document if there is next version
+            unless new_history.doc_not_provided?
+              prev_annexes = current_annexes.select { |a| a.created_at < version.updated_at }
+              next_annexes = current_annexes.select { |a| a.created_at >= version.updated_at && (next_version.nil? || a.created_at < next_version.updated_at) }
+
+              new_history.operator_document_annexes = prev_annexes + next_annexes
+            end
+            new_history_list << new_history
+
+            break if next_version.nil?
+
+            version = next_version
+          end
+        end
+
+        puts "Bulk import history data..."
+        OperatorDocumentHistory.import new_history_list, recursive: true
+
+        # TODO: think about more indicators of healthy history
+        # TODO: what about document_file and attachments, check if all documents have correct attachments
+        docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
+
+        puts "HistoryCount after: #{OperatorDocumentHistory.count}"
+        puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
+        puts "Annex history relation after: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
+
+        raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
+      end
+    end
+
+    puts "History recreated in #{time} ms."
+  end
+
   desc 'Fixing score operator document history'
   task score_operator_documents: :environment do
     puts "FOR REAL!!!" if ENV['FOR_REAL'].present?

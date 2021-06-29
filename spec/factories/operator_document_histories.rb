@@ -52,8 +52,9 @@ FactoryBot.define do
       unless history.operator_document
         history.operator_document ||= FactoryBot.create(:operator_document_country,
             required_operator_document: history.required_operator_document)
-
       end
+      history.operator_document_updated_at = history.operator_document.updated_at
+      history.operator_document_created_at = history.operator_document.created_at
       history.user ||= FactoryBot.create(:user)
     end
 

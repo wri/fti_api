@@ -60,8 +60,6 @@ class Operator < ApplicationRecord
 
   has_many :score_operator_documents
   has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
-  has_many :ranking_operator_documents
-  has_one :ranking_operator_document, -> { current }, class_name: 'RankingOperatorDocument', inverse_of: :operator
   has_many :score_operator_observations
   has_one :score_operator_observation, -> { current }, class_name: 'ScoreOperatorObservation', inverse_of: :operator
 
@@ -73,6 +71,7 @@ class Operator < ApplicationRecord
   after_create :create_operator_id
   after_create :create_documents
   after_update :create_documents, if: :fa_id_changed?
+  after_update :refresh_ranking, if: -> { fa_id_changed? || is_active_changed? }
   before_destroy :really_destroy_documents
 
   validates :name, presence: true
@@ -166,6 +165,10 @@ class Operator < ApplicationRecord
   end
 
   private
+
+  def refresh_ranking
+    RankingOperatorDocument.refresh_for_country(country)
+  end
 
   # rubocop:disable Rails/SkipsModelValidations
   def create_operator_id

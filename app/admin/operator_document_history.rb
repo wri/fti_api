@@ -7,6 +7,8 @@ ActiveAdmin.register OperatorDocumentHistory do
   menu false
   config.order_clause
 
+  scope :with_deleted, default: true
+
   sidebar 'Annexes', only: :show do
     attributes_table_for resource do
       ul do
@@ -28,7 +30,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :operator_document do |o|
       o.operator_document&.name
     end
-    column :updated_at
+    column :operator_document_updated_at
     column :operator_document do |o|
       o.operator_document&.required_operator_document&.name
     end
@@ -60,7 +62,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :expire_date
     column :start_date
-    column :created_at
+    column :operator_document_created_at
     column :uploaded_by
     column :attachment do |o|
       o.attachment&.filename
@@ -85,7 +87,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :operator_document do |od|
       link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
     end
-    column :updated_at
+    column :operator_document_updated_at
     column :country do |od|
       od.required_operator_document.country
     end
@@ -103,8 +105,8 @@ ActiveAdmin.register OperatorDocumentHistory do
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).type
       end
     end
-    column :operator, sortable: 'operator_translations.name'
-    column :fmu, sortable: 'fmu_translations.name'
+    column :operator, sortable: false
+    column :fmu, sortable: false
     column 'Legal Category' do |od|
       if od.required_operator_document.present?
         od.required_operator_document.required_operator_document_group.name
@@ -112,10 +114,10 @@ ActiveAdmin.register OperatorDocumentHistory do
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).required_operator_document_group.name
       end
     end
-    column :user, sortable: 'users.name'
+    column :user, sortable: false
     column :expire_date
     column :start_date
-    column :created_at
+    column :operator_document_created_at
     column :deleted_at
     column :uploaded_by
     column :source
@@ -143,12 +145,24 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :required_operator_document_country_id, label: 'Country', as: :select,
                                                  collection: Country.with_translations(I18n.locale).order('country_translations.name')
   filter :operator_document_id_eq, label: 'Operator Document Id'
+  filter :required_operator_document_contract_signature_eq,
+         label: 'Contract Signature?',as: :select, collection: [['Yes', true], ['No', false]]
   filter :operator_document_required_operator_document_id_eq,
          collection: RequiredOperatorDocument.with_translations.all, as: :select, label: 'Required Operator Document'
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+  filter :fmu, label: 'Fmus', as: :select,
+               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
-  filter :updated_at
+  filter :operator_document_updated_at
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(
+        :required_operator_document
+      )
+    end
+  end
 end
