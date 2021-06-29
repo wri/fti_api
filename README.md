@@ -94,6 +94,23 @@ docker-compose up
   bin/rspec
 ```
 
+### RSPEC snapshots
+
+Some tests are using [rspec snapshots gem](https://github.com/CareMessagePlatform/rspec-request_snapshot)
+
+To update snapshots:
+
+```
+CONSERVATIVE_UPDATE_SNAPSHOTS=true bundle exec rspec
+```
+
+or to regenerate them from scratch
+
+```
+REPLACE_SNAPSHOTS=true bundle exec rspec
+```
+
+
 ## DOCUMENTATION ##
 
 ### API ###

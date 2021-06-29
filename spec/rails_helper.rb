@@ -58,6 +58,7 @@ RSpec.configure do |config|
   config.include ImporterHelper, type: :importer
   config.extend APIDocsHelpers
 
+  config.request_snapshots_dir = 'spec/fixtures/snapshots'
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.use_transactional_fixtures = true

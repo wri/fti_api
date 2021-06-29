@@ -3,21 +3,33 @@ require 'rails_helper'
 module V1
   describe 'Operator Document Filters', type: :request do
     describe 'Tree' do
-      it 'Returns the filters\' tree' do
-        get '/operator_document_filters_tree', headers: non_api_webuser_headers
+      before :all do
+        country_1 = create(:country, name: 'Poland', iso: 'PL')
+        country_2 = create(:country, name: 'Spain', iso: 'ES')
+        operator_1 = create(:operator, country: country_1, fa_id: 'fa_id1')
+        operator_2 = create(:operator, country: country_1, fa_id: 'fa_id2')
+        operator_3 = create(:operator, country: country_2, fa_id: 'fa_id3')
 
-        expect(status).to eql(200)
+        fmu_1 = create(:fmu, country: country_1, forest_type: 1)
+        fmu_2 = create(:fmu, country: country_1, forest_type: 2)
+        fmu_3 = create(:fmu, country: country_2, forest_type: 1)
+
+        create(:fmu_operator, operator: operator_1, fmu: fmu_1)
+        create(:fmu_operator, operator: operator_2, fmu: fmu_2)
+        create(:fmu_operator, operator: operator_3, fmu: fmu_3)
       end
-      it 'has operators_id' do
-        # TODO
-        # Needs seeds with the use case whit active operator from diferent countries, some of them from not active countries
-        # or restoring test database with staging/development real data to have some value
-        active_country_ids = Country.active.pluck(:id)
 
-        get '/operator_document_filters_tree', headers: non_api_webuser_headers
+      subject { get '/operator_document_filters_tree', headers: non_api_webuser_headers }
 
-        expect(parsed_body[:operator_id].count == Operator.filter_by_country_ids(active_country_ids).active.count).to eql(true)
-        expect(parsed_body[:operator_id].count <= Operator.active.count).to eql(true)
+      it 'performs correctly' do
+        subject
+        expect(response).to have_http_status(:ok)
+      end
+
+      it 'returns correct filter tree' do
+        subject
+
+        expect(response.body).to match_snapshot('v1/operator_document_filters_tree')
       end
     end
   end

@@ -1,0 +1,178 @@
+{
+  "forest_types": [
+    {
+      "key": "cfad",
+      "id": 5,
+      "name": "CFAD"
+    },
+    {
+      "key": "cpaet",
+      "id": 4,
+      "name": "CPAET"
+    },
+    {
+      "key": "cf",
+      "id": 2,
+      "name": "Communal Forest"
+    },
+    {
+      "key": "fmu",
+      "id": 0,
+      "name": "FMU"
+    },
+    {
+      "key": "pea",
+      "id": 6,
+      "name": "PEA"
+    },
+    {
+      "key": "ufa",
+      "id": 1,
+      "name": "UFA"
+    },
+    {
+      "key": "vdc",
+      "id": 3,
+      "name": "Vente de Coupe"
+    }
+  ],
+  "status": [
+    {
+      "id": "doc_not_provided",
+      "name": "Not Provided Document"
+    },
+    {
+      "id": "doc_valid",
+      "name": "Valid Document"
+    },
+    {
+      "id": "doc_expired",
+      "name": "Expired Document "
+    },
+    {
+      "id": "doc_not_required",
+      "name": "Not Required Document"
+    }
+  ],
+  "country_ids": [
+    {
+      "id": 1,
+      "iso": "PL",
+      "name": "Poland",
+      "operators": [
+        1,
+        2
+      ],
+      "fmus": [
+        1,
+        2
+      ],
+      "forest_types": [
+        {
+          "key": "ufa",
+          "id": 1,
+          "name": "UFA"
+        },
+        {
+          "key": "cf",
+          "id": 2,
+          "name": "Communal Forest"
+        }
+      ],
+      "required_operator_document_ids": []
+    },
+    {
+      "id": 2,
+      "iso": "ES",
+      "name": "Spain",
+      "operators": [
+        3
+      ],
+      "fmus": [
+        3
+      ],
+      "forest_types": [
+        {
+          "key": "ufa",
+          "id": 1,
+          "name": "UFA"
+        }
+      ],
+      "required_operator_document_ids": []
+    }
+  ],
+  "operator_id": [
+    {
+      "id": 1,
+      "name": "Operator 1",
+      "fmus": [
+        1
+      ],
+      "forest_types": [
+        {
+          "key": "ufa",
+          "id": 1,
+          "name": "UFA"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Operator 2",
+      "fmus": [
+        2
+      ],
+      "forest_types": [
+        {
+          "key": "cf",
+          "id": 2,
+          "name": "Communal Forest"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Operator 3",
+      "fmus": [
+        3
+      ],
+      "forest_types": [
+        {
+          "key": "ufa",
+          "id": 1,
+          "name": "UFA"
+        }
+      ]
+    }
+  ],
+  "fmu_id": [
+    {
+      "id": 1,
+      "name": "FMU1"
+    },
+    {
+      "id": 2,
+      "name": "FMU2"
+    },
+    {
+      "id": 3,
+      "name": "FMU3"
+    }
+  ],
+  "required_operator_document_id": [],
+  "source": [
+    {
+      "id": 1,
+      "name": "Company"
+    },
+    {
+      "id": 2,
+      "name": "Forest Atlas"
+    },
+    {
+      "id": 3,
+      "name": "Others"
+    }
+  ],
+  "legal_categories": []
+}
