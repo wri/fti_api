@@ -79,7 +79,10 @@
           "name": "Communal Forest"
         }
       ],
-      "required_operator_document_ids": []
+      "required_operator_document_ids": [
+        1,
+        3
+      ]
     },
     {
       "id": 2,
@@ -98,7 +101,10 @@
           "name": "UFA"
         }
       ],
-      "required_operator_document_ids": []
+      "required_operator_document_ids": [
+        2,
+        4
+      ]
     }
   ],
   "operator_id": [
@@ -159,7 +165,16 @@
       "name": "fmu 3"
     }
   ],
-  "required_operator_document_id": [],
+  "required_operator_document_id": [
+    {
+      "id": 4,
+      "name": "Req doc2"
+    },
+    {
+      "id": 3,
+      "name": "Req_doc1"
+    }
+  ],
   "source": [
     {
       "id": 1,
