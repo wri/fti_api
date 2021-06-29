@@ -104,7 +104,7 @@
   "operator_id": [
     {
       "id": 1,
-      "name": "Operator 1",
+      "name": "operator 1",
       "fmus": [
         1
       ],
@@ -118,7 +118,7 @@
     },
     {
       "id": 2,
-      "name": "Operator 2",
+      "name": "operator 2",
       "fmus": [
         2
       ],
@@ -132,7 +132,7 @@
     },
     {
       "id": 3,
-      "name": "Operator 3",
+      "name": "operator 3",
       "fmus": [
         3
       ],
@@ -148,15 +148,15 @@
   "fmu_id": [
     {
       "id": 1,
-      "name": "FMU1"
+      "name": "fmu 1"
     },
     {
       "id": 2,
-      "name": "FMU2"
+      "name": "fmu 2"
     },
     {
       "id": 3,
-      "name": "FMU3"
+      "name": "fmu 3"
     }
   ],
   "required_operator_document_id": [],
