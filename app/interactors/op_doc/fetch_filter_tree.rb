@@ -16,28 +16,28 @@ module OpDoc
     ].freeze
 
     STATUSES = [
-        { id: 'doc_not_provided', name: I18n.t('operator_documents.filters.doc_not_provided') },
-        { id: 'doc_valid', name: I18n.t('operator_documents.filters.doc_valid') },
-        { id: 'doc_expired', name: I18n.t('operator_documents.filters.doc_expired') },
-        { id: 'doc_not_required', name: I18n.t('operator_documents.filters.doc_not_required') }
+      { id: 'doc_not_provided', name: I18n.t('operator_documents.filters.doc_not_provided') },
+      { id: 'doc_valid', name: I18n.t('operator_documents.filters.doc_valid') },
+      { id: 'doc_expired', name: I18n.t('operator_documents.filters.doc_expired') },
+      { id: 'doc_not_required', name: I18n.t('operator_documents.filters.doc_not_required') }
     ].freeze
 
     SOURCES = [
-        { id: 1, name: I18n.t('filters.company') },
-        { id: 2, name: I18n.t('filters.forest_atlas') },
-        { id: 3, name: I18n.t('filters.other') }
+      { id: 1, name: I18n.t('filters.company') },
+      { id: 2, name: I18n.t('filters.forest_atlas') },
+      { id: 3, name: I18n.t('filters.other') }
     ].freeze
 
     def tree
       context.tree = {
-          forest_types: forest_types,
-          status: STATUSES,
-          country_ids: country_ids,
-          operator_id: operator_ids,
-          fmu_id: fmu_ids,
-          required_operator_document_id: required_operator_document_ids,
-          source: SOURCES,
-          legal_categories: legal_categories
+        forest_types: forest_types,
+        status: STATUSES,
+        country_ids: country_ids,
+        operator_id: operator_ids,
+        fmu_id: fmu_ids,
+        required_operator_document_id: required_operator_document_ids,
+        source: SOURCES,
+        legal_categories: legal_categories
       }
     end
 
@@ -75,9 +75,23 @@ module OpDoc
     end
 
     def operator_ids
-      Operator.filter_by_country_ids(country_ids.pluck(:id)).active.fa_operator.with_translations.includes(:fmu_operators).map do |x|
-        { id: x.id, name: x.name, fmus: x.fmu_operators.pluck(:fmu_id) }
-      end.sort_by { |x| x[:name] }
+      fmu_forest_types = Fmu.pluck(:id, :forest_type).to_h
+
+      Operator
+        .filter_by_country_ids(country_ids.pluck(:id))
+        .active.fa_operator
+        .with_translations
+        .includes(:fmu_operators).map do |x| # Beware includes :fmus is pretty slow, something with translations
+          fmu_ids = x.fmu_operators.pluck(:fmu_id)
+          {
+            id: x.id,
+            name: x.name,
+            fmus: fmu_ids,
+            forest_types: serialize_forest_types(
+              fmu_forest_types.slice(*fmu_ids).values.uniq
+            )
+          }
+        end.sort_by { |x| x[:name] }
     end
 
     def country_ids
@@ -86,7 +100,7 @@ module OpDoc
           id: x.id, iso: x.iso, name: x.name,
           operators: x.operators.pluck(:id).uniq,
           fmus: x.fmus.pluck(:id).uniq,
-          forest_types: forest_types_by_country(x),
+          forest_types: serialize_forest_types(x.forest_types),
           required_operator_document_ids: x.required_operator_documents.pluck(:id).uniq
         }
       end.sort_by { |x| x[:name] }
@@ -106,10 +120,9 @@ module OpDoc
       end.join(" ")
     end
 
-    def forest_types_by_country(country)
-      country_forest_types = country.forest_types
+    def serialize_forest_types(forest_types)
       ConstForestTypes::FOREST_TYPES.map do |key, value|
-        if  country_forest_types.include?(key.to_s)
+        if forest_types.include?(key.to_s)
           { key: key, id: value[:index], name: value[:label] }
         end
       end.compact
