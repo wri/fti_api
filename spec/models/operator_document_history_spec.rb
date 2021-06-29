@@ -23,6 +23,8 @@
 #  user_id                       :integer
 #  required_operator_document_id :integer
 #  deleted_at                    :datetime
+#  operator_document_updated_at  :datetime         not null
+#  operator_document_created_at  :datetime         not null
 #
 require 'rails_helper'
 
@@ -46,8 +48,8 @@ RSpec.describe OperatorDocumentHistory, type: :model do
         expect(odh.source_info).to eql(od.source_info)
         expect(odh.fmu_id).to eql(od.fmu_id)
         expect(odh.document_file_id).to eql(od.document_file_id)
-        expect(odh.created_at.to_i).to eql(od.created_at.to_i)
-        expect(odh.updated_at.to_i).to eql(od.updated_at.to_i)
+        expect(odh.operator_document_created_at.to_i).to eql(od.created_at.to_i)
+        expect(odh.operator_document_updated_at.to_i).to eql(od.updated_at.to_i)
         expect(odh.operator_id).to eql(od.operator_id)
         expect(odh.user_id).to eql(od.user_id)
         expect(odh.required_operator_document_id).to eql(od.required_operator_document_id)
@@ -57,10 +59,11 @@ RSpec.describe OperatorDocumentHistory, type: :model do
       it 'Adds a new version of the OperatorDocumentHistory' do
         od.update(note: 'new note')
         od.reload
-        odhs = OperatorDocumentHistory.where(operator_document_id: od.id).order({updated_at: :desc})
+        odhs = OperatorDocumentHistory.where(operator_document_id: od.id).order({operator_document_updated_at: :desc})
         expect(odhs.count).to eql(2)
         expect(odhs.first.note).to eql('new note')
-        expect(odhs.first.updated_at.to_i).to eql(od.updated_at.to_i)
+        expect(odhs.first.operator_document_updated_at.to_i).to eql(od.updated_at.to_i)
+        expect(odhs.first.operator_document_created_at.to_i).to eql(od.created_at.to_i)
         expect(odhs.last.note).to be_nil
       end
     end
@@ -69,7 +72,7 @@ RSpec.describe OperatorDocumentHistory, type: :model do
         document_file = od.document_file
         od.destroy
         od.reload
-        odhs = OperatorDocumentHistory.where(operator_document_id: od.id).order({updated_at: :desc})
+        odhs = OperatorDocumentHistory.where(operator_document_id: od.id).order({operator_document_updated_at: :desc})
         expect(odhs.count).to eql(2)
         expect(odhs.first.status).to eql('doc_not_provided')
         expect(odhs.last.document_file_id).to eql(document_file.id)

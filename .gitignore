@@ -51,6 +51,7 @@ erd.png
 
 # Ignore IDE files
 .idea
+.dir-locals.el
 
 # Ignore test tasks
 /lib/tasks/test.rake

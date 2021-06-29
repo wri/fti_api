@@ -1,22 +1,23 @@
 # frozen_string_literal: true
 
 class ScoreOperatorPresenter
-  attr_reader :docs
+  attr_reader :docs, :signed_publication_authorization
 
   def initialize(docs)
-    @docs = docs
+    @docs = docs.non_signature
+    @signed_publication_authorization = docs.signature.approved.any?
   end
 
   def all
-    divide docs.doc_valid.count, total - docs.doc_not_required.count
+    divide public_docs(docs.doc_valid).count, total - public_docs(docs.doc_not_required).count
   end
 
   def fmu
-    divide fmu_docs.doc_valid.count, fmu_docs.count - fmu_docs.doc_not_required.count
+    divide public_docs(fmu_docs.doc_valid).count, fmu_docs.count - public_docs(fmu_docs.doc_not_required).count
   end
 
   def country
-    divide country_docs.doc_valid.count, country_docs.count - country_docs.doc_not_required.count
+    divide public_docs(country_docs.doc_valid).count, country_docs.count - public_docs(country_docs.doc_not_required).count
   end
 
   def total
@@ -32,6 +33,12 @@ class ScoreOperatorPresenter
   end
 
   private
+
+  def public_docs(docs)
+    return docs if signed_publication_authorization
+
+    docs.available
+  end
 
   def divide(numerator, denominator)
     return 0 if denominator.to_f.zero?
@@ -66,13 +73,16 @@ class ScoreOperatorPresenter
   # The documents in the states `doc_not_provided`, `doc_pending` and `doc_invalid` will be summed together
   # @return [Hash]
   def create_summary_public
-    non_visible_document_number = docs.doc_not_provided.count +
-        docs.doc_pending.count + docs.doc_invalid.count
+    public_docs = signed_publication_authorization ? docs : docs.available
+    non_public_docs = docs - public_docs
+
+    non_visible_document_number = public_docs.doc_not_provided.count +
+        public_docs.doc_pending.count + public_docs.doc_invalid.count + non_public_docs.count
     {
       doc_not_provided: non_visible_document_number,
-      doc_valid: docs.doc_valid.count,
-      doc_expired: docs.doc_expired.count,
-      doc_not_required: docs.doc_not_required.count
+      doc_valid: public_docs.doc_valid.count,
+      doc_expired: public_docs.doc_expired.count,
+      doc_not_required: public_docs.doc_not_required.count
     }
   end
 end

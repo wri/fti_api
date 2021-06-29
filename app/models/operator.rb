@@ -4,23 +4,25 @@
 #
 # Table name: operators
 #
-#  id            :integer          not null, primary key
-#  operator_type :string
-#  country_id    :integer
-#  concession    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_active     :boolean          default("true")
-#  logo          :string
-#  operator_id   :string
-#  fa_id         :string
-#  address       :string
-#  website       :string
-#  approved      :boolean          default("true"), not null
-#  email         :string
-#  holding_id    :integer
-#  name          :string
-#  details       :text
+#  id                :integer          not null, primary key
+#  operator_type     :string
+#  country_id        :integer
+#  concession        :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  is_active         :boolean          default("true")
+#  logo              :string
+#  operator_id       :string
+#  fa_id             :string
+#  address           :string
+#  website           :string
+#  approved          :boolean          default("true"), not null
+#  email             :string
+#  holding_id        :integer
+#  country_doc_rank  :integer
+#  country_operators :integer
+#  name              :string
+#  details           :text
 #
 
 class Operator < ApplicationRecord
@@ -70,6 +72,7 @@ class Operator < ApplicationRecord
   before_validation { self.remove_logo! if self.delete_logo == '1' }
   after_create :create_operator_id
   after_create :create_documents
+  after_update :recalculate_scores, if: :approved_changed?
   after_update :create_documents, if: :fa_id_changed?
   after_update :refresh_ranking, if: -> { fa_id_changed? || is_active_changed? }
   before_destroy :really_destroy_documents
@@ -165,6 +168,10 @@ class Operator < ApplicationRecord
   end
 
   private
+
+  def recalculate_scores
+    ScoreOperatorDocument.recalculate!(self)
+  end
 
   def refresh_ranking
     RankingOperatorDocument.refresh_for_country(country)
