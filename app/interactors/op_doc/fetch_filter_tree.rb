@@ -42,13 +42,13 @@ module OpDoc
     end
 
     def legal_categories
-      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
-      RequiredOperatorDocumentGroup.with_translations.map do |x|
-        unless x.id == group_id_to_exclude
-          { id: x.id, name: x.name,
-            required_operator_document_ids: x.required_operator_documents.pluck(:id) }
-        end
-      end.compact.sort_by { |x| x[:name] }
+      RequiredOperatorDocumentGroup.with_translations.where.not(id: required_operator_group_id_to_exclude).map do |x|
+        {
+          id: x.id,
+          name: x.name,
+          required_operator_document_ids: x.required_operator_documents.pluck(:id)
+        }
+      end.sort_by { |x| x[:name] }
     end
 
     def forest_types
@@ -64,14 +64,14 @@ module OpDoc
     end
 
     def required_operator_document_ids
-      group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
       # TODO: after fixing bad data remove that filter
       # required operator document should always have a country, I think
-      RequiredOperatorDocument.with_translations.where.not(country_id: nil).map do |x|
-        unless x.required_operator_document_group_id == group_id_to_exclude
+      RequiredOperatorDocument
+        .with_translations
+        .where.not(country_id: nil, required_operator_document_group_id: required_operator_group_id_to_exclude)
+        .map do |x|
           { id: x.id, name: beautify_name(x.name) }
-        end
-      end.compact.sort_by { |x| x[:name] }
+        end.sort_by { |x| x[:name] }
     end
 
     def operator_ids
@@ -95,13 +95,17 @@ module OpDoc
     end
 
     def country_ids
+      required_operator_doc_ids_to_exclude = RequiredOperatorDocument
+        .where(required_operator_document_group_id: required_operator_group_id_to_exclude)
+        .pluck(:id)
+
       Country.active.with_translations.map do  |x|
         {
           id: x.id, iso: x.iso, name: x.name,
           operators: x.operators.pluck(:id).uniq,
           fmus: x.fmus.pluck(:id).uniq,
           forest_types: serialize_forest_types(x.forest_types),
-          required_operator_document_ids: x.required_operator_documents.pluck(:id).uniq
+          required_operator_document_ids: x.required_operator_documents.pluck(:id).uniq - required_operator_doc_ids_to_exclude
         }
       end.sort_by { |x| x[:name] }
     end
@@ -126,6 +130,12 @@ module OpDoc
           { key: key, id: value[:index], name: value[:label] }
         end
       end.compact
+    end
+
+    private
+
+    def required_operator_group_id_to_exclude
+      RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization").first&.id
     end
   end
 end

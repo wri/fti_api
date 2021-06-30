@@ -444,8 +444,6 @@ GEM
       rspec-expectations (~> 3.9)
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
-    rspec-request_snapshot (0.7.3)
-      rspec (~> 3.0)
     rspec-support (3.9.2)
     rswag-api (2.2.0)
       railties (>= 3.1, < 6.1)
@@ -634,7 +632,6 @@ DEPENDENCIES
   rgeo-geojson
   rspec-activejob
   rspec-rails
-  rspec-request_snapshot
   rspec_api_documentation!
   rswag-api
   rswag-ui
