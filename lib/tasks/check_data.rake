@@ -32,6 +32,21 @@ namespace :check do
     end
   end
 
+  task docs_forest_type_mismatch: :environment do
+    mismatch_count = 0
+
+    OperatorDocumentFmu.all.includes(:operator, :required_operator_document).find_each do |od|
+      next if od.fmu.forest_type == 'fmu'
+
+      unless od.required_operator_document.forest_types.include?(od.fmu.forest_type.to_sym)
+        mismatch_count += 1
+        puts "Mismatch for document id: #{od.id} - status: #{od.status} versions: #{od.versions.count} operator: #{od.operator.name} (id: #{od.operator.id}) FMU forest type: #{od.fmu.forest_type} but document for forest types: #{od.required_operator_document.forest_types.map(&:to_s).join(', ')}"
+      end
+    end
+
+    puts "Mismatch count: #{mismatch_count}"
+  end
+
   task operator_approved: :environment do
     Operator.find_each do |operator|
       next unless operator.operator_documents.signature.any?
