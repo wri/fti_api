@@ -23,6 +23,7 @@ FactoryBot.define do
     sequence(:name) { |n| "RequiredOperatorDocument#{n}" }
     valid_period { DateTime.current + 1.year }
     forest_types { [rand(0..3)] }
+    explanation { 'Some explanation' }
 
     after(:build) do |random_required_operator_document|
       random_required_operator_document.country ||=
