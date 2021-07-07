@@ -44,6 +44,7 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   scope :valid,     ->            { where(status: OperatorDocumentAnnex.statuses[:doc_valid]) }
   scope :from_user, ->(operator_id) { joins(:operator_document).where(operator_documents: { operator_id: operator_id }) }
+  scope :orphaned, -> { left_joins(:annex_documents).where(annex_documents: { id: nil }) }
 
   def self.expire_document_annexes
     documents_to_expire =

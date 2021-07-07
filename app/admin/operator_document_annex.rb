@@ -79,6 +79,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     tag_column :status
     column :operator_documents do |od|
+      next if od.annex_document.nil?
+
       doc = OperatorDocument.unscoped.find(od.annex_document.documentable_id)
       link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
     end
@@ -97,6 +99,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     column :fmu, sortable: 'fmu_translations.name' do |od|
       doc = od.annex_documents.first
+      next if doc.nil?
+
       fmu = doc.documentable_type.constantize.unscoped.find(doc.documentable_id).fmu
       link_to(fmu.name, admin_fmu_path(fmu.id)) if fmu
     end
@@ -127,11 +131,13 @@ ActiveAdmin.register OperatorDocumentAnnex do
          as: :select,
          label: 'FMU',
          collection: Fmu.with_translations(I18n.locale).order(:name).pluck(:name)
+
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
   filter :updated_at
 
   scope 'Pending', :doc_pending
+  scope 'Orphaned', :orphaned
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
