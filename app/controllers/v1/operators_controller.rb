@@ -25,11 +25,5 @@ module V1
       end
       results
     end
-
-    protected
-
-    def set_locale(&action)
-      I18n.with_locale(:en, &action)
-    end
   end
 end
