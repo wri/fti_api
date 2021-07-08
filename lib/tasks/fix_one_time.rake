@@ -43,6 +43,11 @@ namespace :fix_one_time do
       puts "Removing histories... #{histories.delete_all} affected"
       puts "Removing docs... #{docs.delete_all} affected"
 
+      puts "Syncing scores..."
+      SyncTasks.new(as_rake_task: false).sync_scores
+      puts "Refreshing ranking..."
+      RankingOperatorDocument.refresh
+
       raise ActiveRecord::Rollback unless for_real
     end
   end
