@@ -21,10 +21,16 @@ module V1
       records
     }
 
-    def status
-      return @model.status if can_see_document?
+    def updated_at
+      return nil unless document_visible?
 
-      hidden_document_status
+      @model.operator_document_updated_at
+    end
+
+    def created_at
+      return nil unless document_visible?
+
+      @model.operator_document_created_at
     end
 
     # TODO
@@ -33,7 +39,7 @@ module V1
       operator = context.dig(:filters, 'operator-id')
       date = context.dig(:filters, 'date').to_date
 
-      OperatorDocumentHistory.from_operator_at_date(operator, date)
+      OperatorDocumentHistory.from_operator_at_date(operator, date).non_signature
     rescue StandardError
       return OperatorDocumentHistory.where('true = false') unless operator && date
     end

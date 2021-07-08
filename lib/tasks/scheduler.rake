@@ -10,16 +10,12 @@ namespace :scheduler do
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
 
-  desc 'Calculate scores'
+  desc 'Refresh ranking'
   task calculate_scores: :environment do
-    ActiveRecord::Base.logger = Logger.new STDOUT
-    Rails.logger = Logger.new STDOUT
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to calculate operator scores documents at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
-    time = Benchmark.ms do
-      RankingOperatorDocumentService.new.call
-    end
-    Rails.logger.info "Scores calculated. It took #{time} ms."
+    Rails.logger.info "Going to recalculate ranking for the whole database: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    time = Benchmark.ms { RankingOperatorDocument.refresh }
+    Rails.logger.info "Ranking refreshed. It took #{time} ms."
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
 

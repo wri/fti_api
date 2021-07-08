@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources' do |model_class, options = {}|
   before(:all) do
     @model_class = model_class

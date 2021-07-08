@@ -42,7 +42,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     end
     column 'Publication Authorization', :contract_signature
     column :required_operator_document_group
-    column :country
+    column :country, sortable: 'country_translations.name'
     column :type
     column :forest_types do |rod|
       rod.forest_types.presence || ''
@@ -89,6 +89,10 @@ ActiveAdmin.register RequiredOperatorDocument do
   end
 
   controller do
+    def scoped_collection
+      end_of_association_chain.includes(country: :translations)
+    end
+
     def create
       super do |format|
         redirect_to collection_url and return if resource.valid?

@@ -45,7 +45,6 @@ module V1
           expect(parsed_error).to eql('Invalid date format. Use: YYYY-MM-DD')
         end
       end
-
     end
     context 'Fetch History of changed document' do
       describe 'Modify operator document' do
@@ -72,6 +71,7 @@ module V1
           search_time = (time1 + 2.day).to_date.to_s(:db)
           get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
               headers: admin_headers)
+
           expect(status).to eql(200)
           expect(first_parsed_attributes[:status]).to eql('doc_valid')
           expect(first_parsed_attributes[:attachment][:url]).to eql(attachment)
@@ -108,10 +108,97 @@ module V1
 
           search_time = (time3).to_date.to_s(:db)
           get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
-              headers: admin_headers)  
+              headers: admin_headers)
           expect(status).to eql(200)
           expect(extract_operator_document_id.include?(operator_document.id)).to eql(true)
           expect(extract_operator_document_id.count(operator_document.id)).to eql(1)
+        end
+      end
+    end
+
+    context 'hide or change status' do
+      before :all do
+        @operator = create(:operator)
+        @doc_invalid = create(:operator_document, operator: @operator)
+        @doc_valid_private = create(
+          :operator_document,
+          operator: @operator,
+          start_date: 10.days.ago,
+          expire_date: 10.days.from_now,
+          response_date: 10.days.ago,
+          public: false,
+          note: 'notes'
+        )
+        @doc_invalid.update(status: 'doc_invalid')
+        @doc_valid_private.update(status: 'doc_valid')
+      end
+
+      context 'when admin' do
+        subject do
+          get("/operator-document-histories?filter[date]=#{Date.today}&filter[operator-id]=#{@operator.id}", headers: admin_headers)
+        end
+
+        it 'returns provided status' do
+          subject
+
+          returned_document = parsed_data.find { |d| d[:attributes][:'operator-document-id'] == @doc_invalid.id }[:attributes]
+
+          expect(parsed_data.count).to eql(2)
+          expect(returned_document[:status]).to eq('doc_invalid')
+        end
+      end
+
+      context 'when not admin' do
+        subject do
+          get("/operator-document-histories?filter[date]=#{Date.today}&filter[operator-id]=#{@operator.id}", headers: user_headers)
+        end
+
+        it 'hides OperatorDocuments status' do
+          subject
+
+          returned_document = parsed_data.find { |d| d[:attributes][:'operator-document-id'] == @doc_invalid.id }[:attributes]
+
+          expect(parsed_data.count).to eql(2)
+          expect(returned_document[:status]).to eq('doc_not_provided')
+        end
+
+        context 'with signed publication authorization' do
+          # approved is by default true (??? weird but no need to reset it back to true)
+          before(:each) { @doc_valid_private.operator.update(approved: true) }
+
+          it 'returns status if document not public' do
+            subject
+
+            returned_document = parsed_data.find { |d| d[:attributes][:'operator-document-id'] == @doc_valid_private.id }[:attributes]
+
+            expect(parsed_data.count).to eql(2)
+            expect(returned_document[:status]).to eq('doc_valid')
+            expect(returned_document[:'start-date']).to eq(@doc_valid_private.start_date.to_s)
+            expect(returned_document[:'expire-date']).to eq(@doc_valid_private.expire_date.to_s)
+            expect(returned_document[:note]).to eq('notes')
+            expect(returned_document[:'response-date']).to eq(@doc_valid_private.response_date.iso8601(3))
+            expect(returned_document[:'updated-at']).not_to be_nil
+            expect(returned_document[:'created-at']).not_to be_nil
+          end
+        end
+
+        context 'with not signed publication authorization' do
+          before(:each) { @doc_valid_private.operator.update(approved: false) }
+          after(:each) { @doc_valid_private.operator.update(approved: true) }
+
+          it 'returns not provided and hides attributes if document not public' do
+            subject
+
+            returned_document = parsed_data.find { |d| d[:attributes][:'operator-document-id'] == @doc_valid_private.id }[:attributes]
+            expect(parsed_data.count).to eql(2)
+            expect(returned_document[:status]).to eq('doc_not_provided')
+            expect(returned_document[:'start-date']).to be_nil
+            expect(returned_document[:'expire-date']).to be_nil
+            expect(returned_document[:'response-date']).to be_nil
+            expect(returned_document[:note]).to be_nil
+            expect(returned_document[:'updated-at']).to be_nil
+            expect(returned_document[:'created-at']).to be_nil
+          end
         end
       end
     end

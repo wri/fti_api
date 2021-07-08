@@ -3,7 +3,6 @@
 module V1
   class OperatorResource < JSONAPI::Resource
     include CacheableByLocale
-    include MathHelper
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
@@ -33,9 +32,13 @@ module V1
     def type
       @model.type
     end
-    
+
     def set_active
       @model.is_active = false
+    end
+
+    def name
+      I18n.with_locale(:en) { @model.name }
     end
 
     filter :certification, apply: ->(records, value, _options) {
@@ -98,15 +101,6 @@ module V1
 
     def percentage_valid_documents_country
       @model.score_operator_document&.country
-    end
-
-    def country_doc_rank
-      @model.ranking_operator_document&.position
-    end
-
-    def country_operators
-      country_operators = @model.country&.operators
-      country_operators&.count
     end
 
     def obs_per_visit

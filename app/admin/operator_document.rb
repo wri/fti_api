@@ -177,7 +177,6 @@ ActiveAdmin.register OperatorDocument do
     bool_column :exists do |od|
       od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
     end
-    column :current
     column :public
     tag_column :status
     column :id
@@ -234,8 +233,6 @@ ActiveAdmin.register OperatorDocument do
     actions
   end
 
-
-  filter :current
   filter :public
   filter :id
   filter :required_operator_document_country_id, label: 'Country', as: :select,
@@ -243,10 +240,12 @@ ActiveAdmin.register OperatorDocument do
   filter :required_operator_document,
          collection: RequiredOperatorDocument.
              joins(country: :translations)
-                         .order('required_operator_documents.name')
-                         .where(country_translations: { locale: I18n.locale }).all.map { |x| ["#{x.name} - #{x.country.name}", x.id] }
+             .order('required_operator_documents.name')
+             .where(country_translations: { locale: I18n.locale }).all.map { |x| ["#{x.name} - #{x.country.name}", x.id] }
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+  filter :fmu, label: 'Fmus', as: :select,
+               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
@@ -279,7 +278,6 @@ ActiveAdmin.register OperatorDocument do
 
   show title: proc{ "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
     attributes_table do
-      row :current
       row :public
       tag_row :status
       row :required_operator_document

@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
-      - 5432:5432
+      - '${POSTGRES_PORT_5432_TCP_PORT}:5432'
     volumes:
       - fti_api_db:/var/lib/postgresql/data
 
