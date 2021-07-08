@@ -1,7 +1,9 @@
 class SyncTasks
   include Rake::DSL
 
-  def initialize
+  def initialize(as_rake_task: true)
+    return unless as_rake_task
+
     namespace :sync do
       desc 'Sync scores saved in score operator document'
       task scores_all: :environment do
@@ -31,14 +33,14 @@ class SyncTasks
       expected = ScoreOperatorDocument.build(score.operator, docs)
 
       if expected != score
-        puts "SOD DIFFERENT: id: #{score.id} - #{score.date}, OPERATOR: #{score.operator_id}"
+        puts "SOD DIFFERENT: id: #{score.id} - #{score.date}, OPERATOR: #{score.operator.name} (#{score.operator_id})"
         score_json = score.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
         expected_json = expected.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
 
         compare(score_json, expected_json)
         different_scores += 1
 
-        score.resync! if ENV["FOR_REAL"].present?
+        score.resync! if ENV["FOR_REAL"] == 'true'
       end
     end
 
