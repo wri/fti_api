@@ -28,7 +28,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   has_many :annex_documents
   has_one :annex_document, -> { where(documentable_type: 'OperatorDocument') },
           class_name: 'AnnexDocument'
-  has_one :operator_document, through: :annex_document, required: false, source: 'documentable', source_type: 'OperatorDocument'
+  has_one :operator_document, through: :annex_document, required: false, source: :documentable, source_type: 'OperatorDocument'
   has_many :annex_documents_history, -> { where(documentable_type: 'OperatorDocumentHistory') },
            class_name: 'AnnexDocument'
 
@@ -52,6 +52,10 @@ class OperatorDocumentAnnex < ApplicationRecord
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} document annexes"
+  end
+
+  def operator_document_name
+    operator_document&.required_operator_document&.name
   end
 
   def documentables

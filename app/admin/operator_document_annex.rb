@@ -142,7 +142,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Operator Document Annex Details' do
-      f.input :operator_document, as: :select, collection: OperatorDocument.pluck(:id), input_html: { disabled: true }
+      f.input :operator_document_name, label: 'Operator Document', input_html: { disabled: true }
       f.input :uploaded_by
       f.input :name
       f.input :status, include_blank: false
