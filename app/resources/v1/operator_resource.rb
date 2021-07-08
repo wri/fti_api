@@ -37,6 +37,10 @@ module V1
       @model.is_active = false
     end
 
+    def name
+      I18n.with_locale(:en) { @model.name }
+    end
+
     filter :certification, apply: ->(records, value, _options) {
       values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
       return records unless values.any?
