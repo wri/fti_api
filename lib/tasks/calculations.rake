@@ -1,6 +1,6 @@
 namespace :documents do
   desc 'Updates the percentage'
   task percentages: :environment do
-    Operator.find_each { |x| x.update_valid_documents_percentages }
+    Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }
   end
 end

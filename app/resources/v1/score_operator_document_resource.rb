@@ -16,23 +16,13 @@ module V1
     filter :date, apply: ->(records, value, _options) {
       records.where('date < ?', value).limit(1)
     }
-    
+
     def self.default_sort
       [{ field: 'date', direction: :desc }, { field: 'id', direction: :desc }]
     end
 
-    def all
-      ScoreOperatorPresenter.new(@model).all
-    end
-
-    def total
-      ScoreOperatorPresenter.new(@model).total
-    end
-
     def summary
-      #can_see_documents? ? @model.summary_private : @model.summary_public
-      presenter = ScoreOperatorPresenter.new(@model)
-      can_see_documents? ? presenter.summary_private : presenter.summary_public
+      can_see_documents? ? @model.summary_private : @model.summary_public
     end
 
     def custom_links(_)

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources__delete' do |options|
   context "Delete" do
     let(:resource) { create(options[:factory] || @singular.to_sym) }

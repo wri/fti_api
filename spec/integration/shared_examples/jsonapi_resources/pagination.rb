@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'jsonapi-resources__pagination' do |options|
   context "Pagination" do
     let(:attributes) { options[:attributes] || {} }

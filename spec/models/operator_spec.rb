@@ -2,23 +2,25 @@
 #
 # Table name: operators
 #
-#  id            :integer          not null, primary key
-#  operator_type :string
-#  country_id    :integer
-#  concession    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  is_active     :boolean          default("true")
-#  logo          :string
-#  operator_id   :string
-#  fa_id         :string
-#  address       :string
-#  website       :string
-#  approved      :boolean          default("true"), not null
-#  email         :string
-#  holding_id    :integer
-#  name          :string
-#  details       :text
+#  id                :integer          not null, primary key
+#  operator_type     :string
+#  country_id        :integer
+#  concession        :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  is_active         :boolean          default("true")
+#  logo              :string
+#  operator_id       :string
+#  fa_id             :string
+#  address           :string
+#  website           :string
+#  approved          :boolean          default("true"), not null
+#  email             :string
+#  holding_id        :integer
+#  country_doc_rank  :integer
+#  country_operators :integer
+#  name              :string
+#  details           :text
 #
 
 require 'rails_helper'
@@ -38,6 +40,7 @@ RSpec.describe Operator, type: :model do
       country: @country,
       required_operator_document_group: @required_operator_document_group
     }
+    @signature_document = create(:required_operator_document_country, country: @country, contract_signature: true)
     @required_operator_document =
       create(:required_operator_document, **required_operator_document_data)
     @required_operator_document_country =
@@ -161,11 +164,11 @@ RSpec.describe Operator, type: :model do
       # callbacks which appears on Operator and OperatorDocument. For this, we get the
       # number of required operator_documents on each test
       @operator_documents_required =
-        @operator.operator_documents.joins(:required_operator_document).required.count.to_f
+        @operator.operator_documents.joins(:required_operator_document).non_signature.required.count.to_f
       @operator_document_countries_required =
-        @operator.operator_document_countries.joins(:required_operator_document).required.count.to_f
+        @operator.operator_document_countries.joins(:required_operator_document).non_signature.required.count.to_f
       @operator_document_fmus_required =
-        @operator.operator_document_fmus.joins(:required_operator_document).required.count.to_f
+        @operator.operator_document_fmus.joins(:required_operator_document).non_signature.required.count.to_f
     end
 
     describe '#cache_key' do
@@ -176,11 +179,10 @@ RSpec.describe Operator, type: :model do
 
     describe '#update_valid_documents_percentages' do
       context 'when fa_id is present' do
-        context 'when operator is approved' do
+        context 'when operator is approved/signed contract' do
           it 'update approved percentages' do
-            @operator.update_attributes(fa_id: 'fa_id', approved: true)
+            @operator.operator_documents.signature.first.update(status: 'doc_valid') # sign contract
             @operator.reload
-            ScoreOperatorDocument.recalculate! @operator
 
             expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
             expect(@operator.score_operator_document.country).to eql(4.0 / @operator_document_countries_required)
@@ -188,11 +190,10 @@ RSpec.describe Operator, type: :model do
           end
         end
 
-        context 'when operator is not approved' do
+        context 'when operator is not approved/not signed contract' do
           it 'update non approved percentages' do
-            @operator.update_attributes(fa_id: 'fa_id', approved: false)
+            @operator.operator_documents.signature.first.update(status: 'doc_invalid') # contract invalid
             @operator.reload
-            ScoreOperatorDocument.recalculate! @operator
 
             expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
             expect(@operator.score_operator_document.country).to eql(2.0 / @operator_document_countries_required)
@@ -200,7 +201,7 @@ RSpec.describe Operator, type: :model do
           end
         end
 
-        context 'when there are not documents' do
+        context 'when there are no documents' do
           it 'update percentages with a 0 value' do
             ScoreOperatorDocument.recalculate! @another_operator
             @operator.reload
@@ -309,7 +310,6 @@ RSpec.describe Operator, type: :model do
 
     describe '#calculate_document_ranking' do
       it 'calculate the rank per country of the operators based on their documents' do
-        RankingOperatorDocumentService.new.call
         ScoreOperatorDocument.current.joins(:operator)
           .where(operators: {country_id: @country.id}).order(all: :desc) do |score, index|
           expect(score.operator.ranking_operator_document.position).to eql(index + 1)

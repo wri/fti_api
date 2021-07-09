@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.shared_examples 'activable' do |model_name, model|
   if model.attributes.key? 'deactivated_at'
     context 'hooks' do

@@ -24,6 +24,9 @@
 #  operator_id                   :integer
 #  user_id                       :integer
 #  required_operator_document_id :integer
+#  deleted_at                    :datetime
+#  operator_document_updated_at  :datetime         not null
+#  operator_document_created_at  :datetime         not null
 #
 class OperatorDocumentHistory < ApplicationRecord
   acts_as_paranoid
@@ -37,6 +40,11 @@ class OperatorDocumentHistory < ApplicationRecord
   has_many :annex_documents, as: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 
+  scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmuHistory') }
+  scope :country_type,                           -> { where(type: 'OperatorDocumentCountryHistory') }
+  scope :available,                              -> { where(public: true) }
+  scope :approved,                               -> { where(status: %i[doc_valid doc_not_required]) }
+  scope :signature,                              -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: true }) }
   scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
   scope :valid, -> { joins(:operator_document).where(operator_documents: { status: OperatorDocument.statuses[:doc_valid] }) } # valid doc
 
@@ -55,24 +63,19 @@ class OperatorDocumentHistory < ApplicationRecord
     # We could use a sql function to extract the day, but this approach is more performant
     db_date = (date.to_date + 1.day).to_s(:db)
 
-    #TODO improve the fmu filters to work with an historical approach
+    query = <<~SQL
+      (select * from
+        (select row_number() over (partition by required_operator_document_id, fmu_id order by operator_document_updated_at desc), *
+         from operator_document_histories
+         where operator_id = #{operator_id} AND operator_document_updated_at <= '#{db_date}'
+        ) as sq
+        where sq.row_number = 1
+      ) as operator_document_histories
+    SQL
 
-    # Targeting OperatorDocumentFmuHistory with forest_type 'vente de coupe' to not show them
-    filtered_fmus_ids = Operator.find(operator_id).fmus.pluck(:id)
-    docs_from_unattributed_fmus_ids = OperatorDocumentFmuHistory.where(operator_id: operator_id).where.not(fmu_id: filtered_fmus_ids).pluck(:id)
-
-    # TODO check why for Pete's sake do we have OperatorDocumentHistory with operator_document_id nil?!?!?!
-    all_document_histories = OperatorDocumentHistory.where(operator_id: operator_id).where.not(operator_document_id: nil).where.not(id:docs_from_unattributed_fmus_ids).where('operator_document_histories.updated_at <= ?', db_date).non_signature
-    all_operator_document_ids = all_document_histories.pluck(:operator_document_id).uniq
-
-    previous_versions =  []
-
-    # Removes older OperatorDocumentHistory for the same operator_document_id because we only want the latest one
-    all_operator_document_ids.each do |operator_document_id|
-      all_for_this_doc = all_document_histories.where(operator_document_id: operator_document_id).order({ updated_at: :desc })
-      if all_for_this_doc.count > 1 then previous_versions.push(all_for_this_doc[1..-1].pluck(:id)) end
-    end
-
-    all_document_histories.where.not(id: previous_versions.flatten)
+    # will only return not deleted
+    # deleted document history is created when document is destroyed, when country, fmu is unattributed
+    # it will not return destroyed documents
+    from(query)
   end
 end

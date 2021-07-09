@@ -22,6 +22,9 @@
 #  operator_id                   :integer
 #  user_id                       :integer
 #  required_operator_document_id :integer
+#  deleted_at                    :datetime
+#  operator_document_updated_at  :datetime         not null
+#  operator_document_created_at  :datetime         not null
 #
 
 FactoryBot.define do
@@ -51,8 +54,9 @@ FactoryBot.define do
       unless history.operator_document
         history.operator_document ||= FactoryBot.create(:operator_document_country,
             required_operator_document: history.required_operator_document)
-
       end
+      history.operator_document_updated_at = history.operator_document.updated_at
+      history.operator_document_created_at = history.operator_document.created_at
       history.user ||= FactoryBot.create(:user)
     end
 

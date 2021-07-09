@@ -115,8 +115,8 @@ To regenerate the api documentation run:
 **There are two tasks that should be executed in the server, with a cron job. Below there0s a suggestion on how to set up the jobs:**
 
 ```
-* */8 * * * sleep $(( RANDOM \% 1000 )); cd ~/fti-api-development/current; RAILS_ENV=staging bundle exec rails scheduler:calculate_scores
-* 0 * * * sleep $(( RANDOM \% 10000 )); cd ~/fti-api-development/current; RAILS_ENV=staging bundle exec rails scheduler:calculate_scores
+* */8 * * * sleep $(( RANDOM \% 1000 )); cd ~/fti-api-development/current; RAILS_ENV=staging bundle exec rails scheduler:expire
+* 0 * * * sleep $(( RANDOM \% 10000 )); cd ~/fti-api-development/current; RAILS_ENV=staging bundle exec rails scheduler:expire
 
 ```
 

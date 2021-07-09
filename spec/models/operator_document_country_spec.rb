@@ -35,19 +35,12 @@ RSpec.describe OperatorDocumentCountry, type: :model do
 
   describe 'Validations' do
     describe '#invalidate_operator' do
-      context 'when operator is approved' do
+      context 'when operator was approved' do
         it 'set approved field to false on the operator' do
           country = create(:country)
           operator = create(:operator, approved: true, country: country)
-          required_operator_document =
-            create(:required_operator_document_country, contract_signature: true, country: country)
-          operator_document = create(:operator_document_country,
-                 required_operator_document: required_operator_document,
-                 operator: operator)
-
-          operator_document.status = :doc_valid
-          operator_document.save
-          expect(operator_document.status).to eql('doc_valid')
+          # below should already create not_provided signature document which should invalidate approved status of operator
+          required_operator_document = create(:required_operator_document_country, contract_signature: true, country: country)
           operator.reload
           expect(operator.approved).to eql false
         end
@@ -55,7 +48,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
     end
 
     describe '#validate_operator' do
-      context 'when operator is not approved' do
+      context 'when operator was not approved' do
         it 'set approved field to true on the operator' do
           operator = create(:operator, approved: false)
           required_operator_document =
@@ -64,34 +57,8 @@ RSpec.describe OperatorDocumentCountry, type: :model do
             :operator_document_country,
             required_operator_document: required_operator_document,
             operator: operator)
-
-          operator_document_country.update_attributes(status: :doc_valid)
-
+          operator_document_country.update!(status: :doc_valid)
           operator.reload
-          expect(operator.approved).to eql true
-        end
-      end
-    end
-  end
-
-  describe 'Instance methods' do
-    describe '#update_operator_approved' do
-      context 'when there are current documents of contract signature not valid or required' do
-        it 'set operator as non approved' do
-          operator = create(:operator, approved: false)
-          required_operator_document =
-            create(:required_operator_document, contract_signature: true)
-          operator_document_country = create(
-            :operator_document_country,
-            required_operator_document: required_operator_document,
-            operator: operator)
-
-          operator_document_country.update_attributes(status: :doc_valid)
-          operator_document_country.send('update_operator_approved')
-
-          operator.reload
-
-          expect(operator.operator_id).to eql("#{operator.country.iso}-unknown-#{operator.id}")
           expect(operator.approved).to eql true
         end
       end

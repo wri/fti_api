@@ -56,6 +56,8 @@ class Fmu < ApplicationRecord
   accepts_nested_attributes_for :operators
   accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
 
+  before_validation :update_geojson
+
   validates :country_id, presence: true
   validates :name, presence: true
   validates :forest_type, presence: true
@@ -129,30 +131,33 @@ class Fmu < ApplicationRecord
 
     @esri_shapefiles_zip = esri_shapefiles_zip
   end
+  
+  def update_geojson
+    update_properties
 
-  def properties
-    temp_properties = read_attribute(:properties)
+    temp_geojson = self.geojson
+    return if temp_geojson.blank?
 
-    temp_properties['id'] = self.id
-    temp_properties['fmu_name'] = self.name
-    temp_properties['iso3_fmu'] = self.country&.iso
-    temp_properties['company_na'] = self.operator&.name
-    temp_properties['operator_id'] = self.operator&.id
-    temp_properties['certification_fsc'] = self.certification_fsc
-    temp_properties['certification_pefc'] = self.certification_pefc
-    temp_properties['certification_olb'] = self.certification_olb
-    temp_properties['certification_pafc'] = self.certification_pafc
-    temp_properties['certification_fsc_cw'] = self.certification_fsc_cw
-    temp_properties['certification_tlv'] = self.certification_tlv
-    temp_properties['certification_ls'] = self.certification_ls
-    temp_properties['observations'] = self.active_observations.reload.uniq.count
-    temp_properties['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
-
-    temp_properties
+    temp_geojson['properties'] = temp_geojson['properties'].merge(self.properties)
+    self.geojson = temp_geojson
   end
 
-  def geojson
-    read_attribute(:geojson).merge("properties" => properties) 
+  def update_properties
+    self.properties = {} if properties.blank?
+    self.properties['id'] = self.id
+    self.properties['fmu_name'] = self.name
+    self.properties['iso3_fmu'] = self.country&.iso
+    self.properties['company_na'] = self.operator&.name
+    self.properties['operator_id'] = self.operator&.id
+    self.properties['certification_fsc'] = self.certification_fsc
+    self.properties['certification_pefc'] = self.certification_pefc
+    self.properties['certification_olb'] = self.certification_olb
+    self.properties['certification_pafc'] = self.certification_pafc
+    self.properties['certification_fsc_cw'] = self.certification_fsc_cw
+    self.properties['certification_tlv'] = self.certification_tlv
+    self.properties['certification_ls'] = self.certification_ls
+    self.properties['observations'] = self.active_observations.reload.uniq.count
+    self.properties['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
   end
 
   def bbox
@@ -199,15 +204,21 @@ class Fmu < ApplicationRecord
         WITH g as (
         SELECT *, ST_GeomFromGeoJSON(x.geometry) as the_geom
         FROM fmus CROSS JOIN LATERAL
-        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb, properties jsonb )
+        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb)
         )
         update fmus
         set geometry = g.the_geom
         from g
-        where fmus.id = g.id;
+        where fmus.id = :fmu_id;
       SQL
-    ActiveRecord::Base.connection.execute query
+    Fmu.execute_sql(query, self.id)
   end
+
+  def self.execute_sql(sql_command, fmu_id)     
+    ActiveRecord::Base.connection.update(sanitize_sql_for_assignment([sql_command, fmu_id: fmu_id]))
+  end
+
+  
 
   def cache_key
     super + '-' + Globalize.locale.to_s
