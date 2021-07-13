@@ -175,7 +175,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
         available_fmus = []
         Fmu.filter_by_free.find_each{ |x| available_fmus << x }
         f.object.fmus.find_each{ |x| available_fmus << x }
-        f.input :fmus, collection: available_fmus
+        f.input :fmus, collection: available_fmus, input_html: { disabled: true }
       else
         f.input :fmus, collection: available_fmus
       end
