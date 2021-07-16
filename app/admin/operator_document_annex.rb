@@ -90,14 +90,14 @@ ActiveAdmin.register OperatorDocumentAnnex do
         links << link_to(doc.required_operator_document.name, admin_operator_document_history_path(doc.id))
       end.reduce(:+)
     end
-    column :operator, sortable: 'operator_translations.name' do |od|
+    column :operator do |od|
       begin
         o = od.annex_documents_history.first.documentable.operator
         link_to(o.name, admin_producer_path(o.id))
       rescue StandardError
       end
     end
-    column :fmu, sortable: 'fmu_translations.name' do |od|
+    column :fmu do |od|
       doc = od.annex_documents.first
       next if doc.nil?
 

@@ -10,20 +10,25 @@ namespace :fix do
       puts "Orhpaned annexes before: #{orphaned_before}"
 
       # expect to have 46 less orphaned annexes
-      strip_converter = ->(field) { field&.strip }
-      rows = CSV.parse(
-        File.read(File.join(Rails.root, 'tmp', 'annexes_46_remove_rest.csv')),
-        headers: true,
-        converters: [strip_converter],
-        header_converters: :symbol
-      )
+      parse_csv = ->(filepath) do
+        strip_converter = ->(field) { field&.strip }
+        CSV.parse(
+          File.read(File.join(Rails.root, 'tmp', filepath)),
+          headers: true,
+          converters: [strip_converter],
+          header_converters: :symbol
+        )
+      end
+      annexes_connections_before_migration = parse_csv.call('annexes_before_migration.csv')
+      annexes_orphaned_after_history_clean = parse_csv.call('annexes_46_before_clean.csv')
 
       ods_ids = OperatorDocumentHistory.
         where(id: AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').pluck(:documentable_id)).
         pluck(:operator_document_id).
         uniq
 
-      all_backup = rows.map(&:to_h)
+      all_backup = (annexes_connections_before_migration.map(&:to_h) +
+                    annexes_orphaned_after_history_clean.map(&:to_h)).uniq
 
       operator_annexes_backup = all_backup.reject { |x| x[:operator_document_id].blank? }
 
@@ -32,19 +37,20 @@ namespace :fix do
 
       puts "Annex history relation before: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
 
-      to_remove = all_backup.select { |x| x[:operator_document_id].blank? }.map { |x| x[:operator_document_annex_id] }.uniq
-      annexes_to_remove = OperatorDocumentAnnex.where(id: to_remove)
-      versions = PaperTrail::Version.where(item: annexes_to_remove)
+      # code below can remove annexes if csv file with nulls provided
+      # to_remove = all_backup.select { |x| x[:operator_document_id].blank? }.map { |x| x[:operator_document_annex_id] }.uniq
+      # annexes_to_remove = OperatorDocumentAnnex.where(id: to_remove)
+      # versions = PaperTrail::Version.where(item: annexes_to_remove)
 
-      if for_real
-        PaperTrail.enabled = false
-        annexes_to_remove.each(&:really_destroy!)
-        PaperTrail.enabled = true
-      else
-        annexes_to_remove.delete_all
-      end
+      # if for_real
+      #   PaperTrail.enabled = false
+      #   annexes_to_remove.each(&:really_destroy!)
+      #   PaperTrail.enabled = true
+      # else
+      #   annexes_to_remove.delete_all
+      # end
 
-      versions.delete_all
+      # versions.delete_all
 
       OperatorDocument.unscoped.where(id: doc_ids).find_each do |od|
         annexes_ids = operator_annexes_backup
@@ -84,9 +90,7 @@ namespace :fix do
       puts "Annex history relation after: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
 
       orphaned_after = OperatorDocumentAnnex.unscoped.orphaned.count
-      expected = orphaned_before - 46
-
-      puts "Orhpaned annexes after: #{orphaned_after}, expected: #{expected}"
+      puts "Orhpaned annexes after: #{orphaned_after}"
 
       still_orphaned = OperatorDocumentAnnex.unscoped.orphaned.where(id: all_annexes_ids)
 
@@ -95,12 +99,17 @@ namespace :fix do
       still_orphaned.each do |annex|
         doc_ids = operator_annexes_backup.select { |x| x[:operator_document_annex_id].to_i == annex.id }.map { |x| x[:operator_document_id] }.uniq
 
-        puts "BAD DATA for annex #{annex.id}" if doc_ids.count != 1
-        doc_id = doc_ids[0]
+        puts "BAD DATA for annex #{annex.id}: connected with #{doc_ids.join(',')}" if doc_ids.count != 1
+        doc_ids.each do |doc_id|
+          doc = OperatorDocument.unscoped.where(id: doc_id).first
+          doc_his = OperatorDocumentHistory.unscoped.where(operator_document: doc)
 
-        doc = OperatorDocument.find(doc_id)
-        doc_his = OperatorDocumentHistory.unscoped.where(operator_document: doc)
-        puts "Orphaned annex: #{annex.id}, should be connected with doc: #{doc.id}, #{doc.status} (updated_at: #{doc.updated_at}), versions: #{doc.versions.count}, histories: #{doc_his.count}"
+          if doc.nil? && doc_his.empty?
+            puts "Orphaned annex: #{annex.id} but document with id: #{doc_id} does not exist in DB"
+          else
+            puts "Orphaned annex: #{annex.id}, should be connected with doc: #{doc.id}, #{doc.status} (updated_at: #{doc.updated_at}), versions: #{doc.versions.count}, histories: #{doc_his.count}"
+          end
+        end
       end
 
       raise ActiveRecord::Rollback unless for_real
