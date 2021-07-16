@@ -13,7 +13,7 @@ namespace :fix do
       parse_csv = ->(filepath) do
         strip_converter = ->(field) { field&.strip }
         CSV.parse(
-          File.read(File.join(Rails.root, 'tmp', filepath)),
+          File.read(File.join(Rails.root, 'db', 'files', 'annex_fix', filepath)),
           headers: true,
           converters: [strip_converter],
           header_converters: :symbol
