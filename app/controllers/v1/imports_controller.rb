@@ -28,8 +28,8 @@ module V1
       current_user ? { user_id: current_user.id } : { user_id: nil }
     end
 
-    def set_locale
-      I18n.locale = :en
+    def set_locale(&action)
+      I18n.with_locale(:en, &action)
     end
   end
 end

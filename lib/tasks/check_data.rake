@@ -32,6 +32,31 @@ namespace :check do
     end
   end
 
+  task docs_forest_type_mismatch: :environment do
+    mismatch_count = 0
+
+    OperatorDocumentFmu.all.includes(:operator, :required_operator_document).find_each do |od|
+      next if od.fmu.forest_type == 'fmu'
+
+      fmu = od.fmu
+      rod = od.required_operator_document
+
+      unless rod.forest_types.include?(fmu.forest_type.to_sym)
+        mismatch_count += 1
+
+        expected_forest_types = rod.forest_types.map(&:to_s).join(', ')
+        fmu_any_version_with_forest_type = rod.forest_types.any? { |ftype| fmu.versions.where_object(forest_type: ftype).exists? }
+        rod_any_version_with_forest_type = rod.versions.any? { |v| v.reify.forest_types.include?(fmu.forest_type.to_sym) }
+
+        puts "Document id: #{od.id} - status: #{od.status}, last updated at: #{od.updated_at} versions: #{od.versions.count} operator: #{od.operator.name} (id: #{od.operator.id}) Country: #{od.operator.country.name} FMU forest type: #{fmu.forest_type} but document for forest types: #{expected_forest_types}"
+        puts "======> FMU: #{od.fmu.id}, versions: #{fmu.versions.count}, any version with any of #{expected_forest_types} type: #{fmu_any_version_with_forest_type}"
+        puts "======> Required Document: #{rod.id}, versions: #{rod.versions.count}, any with #{fmu.forest_type} type: #{rod_any_version_with_forest_type}"
+      end
+    end
+
+    puts "Mismatch count: #{mismatch_count}"
+  end
+
   task operator_approved: :environment do
     Operator.find_each do |operator|
       next unless operator.operator_documents.signature.any?
