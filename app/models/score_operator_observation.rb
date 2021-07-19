@@ -27,7 +27,7 @@ class ScoreOperatorObservation < ApplicationRecord
   def self.recalculate!(operator)
     return if operator.fa_id.blank?
 
-    soo = operator.score_operator_observation || ScoreOperatorObservation.new
+    soo = operator.reload.score_operator_observation || ScoreOperatorObservation.new
     soo.replace(operator)
   end
 
