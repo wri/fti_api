@@ -16,6 +16,7 @@
 class ScoreOperatorObservation < ApplicationRecord
   belongs_to :operator, touch: true
   validates_presence_of :date
+  validates_uniqueness_of :current, scope: :operator_id, if: :current?
 
   scope :current, -> { where(current: true) }
 
@@ -30,7 +31,6 @@ class ScoreOperatorObservation < ApplicationRecord
     soo.replace(operator)
   end
 
-
   # Replaces the current SOO with a new on if there values of the SOO changed
   # @param [Operator] operator The operator for which to replace the SOO
   def replace(operator)
@@ -40,7 +40,6 @@ class ScoreOperatorObservation < ApplicationRecord
     update!(current: false) if present? && persisted?
     soo.save!
   end
-
 
   # Builds the new SOO for an operator
   # @param [Operator] operator

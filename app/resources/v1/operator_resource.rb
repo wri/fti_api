@@ -87,10 +87,6 @@ module V1
       records.fa_operator
     }
 
-    def obs_per_visit
-      sprintf('%.2f', @model.obs_per_visit) if @model.obs_per_visit.present?
-    end
-
     def percentage_valid_documents_all
       @model.score_operator_document&.all
     end
@@ -104,7 +100,7 @@ module V1
     end
 
     def obs_per_visit
-      @model.score_operator_observation&.obs_per_visit
+      sprintf('%.2f', @model.score_operator_observation&.obs_per_visit) if @model.score_operator_observation&.obs_per_visit.present?
     end
 
     def score
