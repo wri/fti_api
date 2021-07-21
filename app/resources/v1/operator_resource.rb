@@ -100,7 +100,7 @@ module V1
     end
 
     def obs_per_visit
-      sprintf('%.2f', @model.score_operator_observation&.obs_per_visit) if @model.score_operator_observation&.obs_per_visit.present?
+      @model.score_operator_observation&.obs_per_visit
     end
 
     def score
