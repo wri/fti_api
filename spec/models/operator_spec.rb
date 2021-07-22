@@ -246,15 +246,16 @@ RSpec.describe Operator, type: :model do
               operator: @operator,
               country: @country,
               publication_date: 10.days.ago,
-              validation_status: 'Published (no comments)'
+              validation_status: 'Published (no comments)',
+              observation_report: build(:observation_report, publication_date: 10.days.ago)
             )
             create(
               :observation,
               severity: severity,
               operator: @operator,
               country: @country,
-              publication_date: 3.days.ago,
-              validation_status: 'Published (no comments)'
+              validation_status: 'Published (no comments)',
+              observation_report: build(:observation_report, publication_date: 3.days.ago)
             )
           end
 
