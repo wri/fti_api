@@ -225,7 +225,9 @@ module V1
     end
 
     def observer_ids
-      Observer.all.with_translations.map{ |x| { id: x.id, name: x.name } }.sort_by { |x| x[:name] }
+      having_active_observations = Observation.active.joins(:observers).select(:observer_id).distinct.pluck(:observer_id)
+
+      Observer.active.where(id: having_active_observations).with_translations.map{ |x| { id: x.id, name: x.name } }.sort_by { |x| x[:name] }
     end
 
     def country_ids
