@@ -21,8 +21,49 @@ class GlobalScore < ApplicationRecord
   validates_presence_of :date
   validates_uniqueness_of :date, scope: :country_id
 
+  attr_accessor :active_filters
+
+  # below scopes are to hack around ransack
+  # maybe better instead to create custom index in active admin
+  def self.ransackable_scopes(auth_object = nil)
+    [:by_document_group, :by_document_type, :by_fmu_type]
+  end
+  scope :by_document_group, ->(_param) { all }
+  scope :by_document_type, ->(_param) { all }
+  scope :by_fmu_type, ->(_param) { all }
+
   def self.headers
     @headers ||= initialize_headers
+  end
+
+  def pending
+    status['doc_pending']
+  end
+
+  def expired
+    status['doc_expired']
+  end
+
+  def invalid
+    status['doc_invalid']
+  end
+
+  def valid
+    status['doc_valid']
+  end
+
+  def not_provided
+    status['doc_not_provided']
+  end
+
+  def not_required
+    status['doc_not_required']
+  end
+
+  def status
+    return general_status if @active_filters.blank?
+
+    general_status
   end
 
   # Calculates the score for a given day

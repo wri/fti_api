@@ -8,18 +8,29 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
 
   actions :index, :show
 
+  filter :country
+  filter :by_document_group, as: :select, collection: RequiredOperatorDocumentGroup.all
+  filter :by_document_type, as: :select, collection: [['FMU', :fmu], ['Country', :country]]
+  filter :by_fmu_type, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  filter :date
+  filter :updated_at
+  filter :created_at
+
   index title: 'Producer Documents Dashboard' do
-    GlobalScore.headers.each do |h|
-      if h.is_a?(Hash)
-        h.values.first.each do |k|
-          column "#{h.keys.first} #{k.first}" do |gs|
-            gs[h.keys.first][k.last.to_s]
-          end
-        end
+    column :date
+    column :country do |resource|
+      if resource.country.nil?
+        'Total'
       else
-        column h.to_sym, sortable: false
+        link_to resource.country.name, admin_country_path(resource.country)
       end
     end
+    column :valid, sortable: false
+    column :expired, sortable: false
+    column :pending, sortable: false
+    column :invalid, sortable: false
+    column :not_required, sortable: false
+    column :not_provided, sortable: false
     column :created_at
     column :updated_at
     actions
@@ -37,7 +48,20 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
         ]
       }
     panel 'Visible columns' do
-      render partial: "fields", locals: { attributes: GlobalScore.headers.reject { |h| h.is_a?(Hash) }.map(&:to_s) }
+      render partial: "fields", locals: { attributes: %w[date country valid expired invalid pending not_provided not_required] }
+    end
+  end
+
+  controller do
+    def index
+      collection.each do |resource|
+        resource.active_filters = active_filters
+      end
+      super
+    end
+
+    def active_filters
+      params[:q]&.permit(:by_document_group, :by_document_type).to_h
     end
   end
 end
