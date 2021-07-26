@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register GlobalScore do
+ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   extend BackRedirectable
   back_redirect
 
@@ -8,7 +8,7 @@ ActiveAdmin.register GlobalScore do
 
   actions :index, :show
 
-  index do
+  index title: 'Producer Documents Dashboard' do
     GlobalScore.headers.each do |h|
       if h.is_a?(Hash)
         h.values.first.each do |k|
@@ -35,6 +35,9 @@ ActiveAdmin.register GlobalScore do
             { name: 'Expired', data: grouped_sod.maximum("general_status->>'doc_expired'") },
             { name: 'Not Required', data: grouped_sod.maximum("general_status->>'doc_not_required'") },
         ]
-    }
+      }
+    panel 'Visible columns' do
+      render partial: "fields", locals: { attributes: GlobalScore.headers.reject { |h| h.is_a?(Hash) }.map(&:to_s) }
+    end
   end
 end
