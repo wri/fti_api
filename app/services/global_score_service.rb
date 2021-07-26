@@ -6,7 +6,10 @@ class GlobalScoreService
   # Calculates the global scores based on the documents
   def call
     Country.active.find_each { |country| calculate(country) }
-    calculate
+
+    # [1.month.ago..Date.today].each do |day|
+
+    # end
   end
 
   private

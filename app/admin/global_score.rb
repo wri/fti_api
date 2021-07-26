@@ -9,18 +9,20 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   actions :index, :show
 
   filter :country
-  filter :by_document_group, as: :select, collection: RequiredOperatorDocumentGroup.all
-  filter :by_document_type, as: :select, collection: [['FMU', :fmu], ['Country', :country]]
-  filter :by_fmu_type, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  filter :by_document_group, label: 'Document Group', as: :select, collection: RequiredOperatorDocumentGroup.all
+  filter :by_document_type, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
+  filter :by_forest_type, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :date
   filter :updated_at
   filter :created_at
 
   index title: 'Producer Documents Dashboard' do
-    column :date
+    column :date do |resource|
+      resource.date.to_date
+    end
     column :country do |resource|
       if resource.country.nil?
-        'Total'
+        'All Countries'
       else
         link_to resource.country.name, admin_country_path(resource.country)
       end
@@ -35,16 +37,15 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     column :updated_at
     actions
 
-    grouped_sod = GlobalScore.group_by_day(:date, series: false)
+    grouped_sod = collection.group_by(&:date)
     render partial: 'score_evolution', locals: {
         scores: [
-            { name: 'all', data: grouped_sod.maximum(:total_required) },
-            { name: 'Not Provided', data: grouped_sod.maximum("general_status->>'doc_not_provided'") },
-            { name: 'Pending', data: grouped_sod.maximum("general_status->>'doc_pending'") },
-            { name: 'Invalid', data: grouped_sod.maximum("general_status->>'doc_invalid'") },
-            { name: 'Valid', data: grouped_sod.maximum("general_status->>'doc_valid'") },
-            { name: 'Expired', data: grouped_sod.maximum("general_status->>'doc_expired'") },
-            { name: 'Not Required', data: grouped_sod.maximum("general_status->>'doc_not_required'") },
+          { name: 'Not Provided', data: grouped_sod.map { |date, data| { date => data.map(&:not_provided).max } }.reduce(&:merge) },
+          { name: 'Pending', data: grouped_sod.map { |date, data| { date => data.map(&:pending).max } }.reduce(&:merge) },
+          { name: 'Invalid', data: grouped_sod.map { |date, data| { date => data.map(&:invalid).max } }.reduce(&:merge) },
+          { name: 'Valid', data: grouped_sod.map { |date, data| { date => data.map(&:valid).max } }.reduce(&:merge) },
+          { name: 'Expired', data: grouped_sod.map { |date, data| { date => data.map(&:expired).max } }.reduce(&:merge) },
+          { name: 'Not Required', data: grouped_sod.map { |date, data| { date => data.map(&:not_required).max } }.reduce(&:merge) },
         ]
       }
     panel 'Visible columns' do
@@ -61,7 +62,7 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     end
 
     def active_filters
-      params[:q]&.permit(:by_document_group, :by_document_type).to_h
+      params[:q]&.permit(:by_document_group, :by_document_type, :by_forest_type).to_h
     end
   end
 end

@@ -26,59 +26,68 @@ class GlobalScore < ApplicationRecord
   # below scopes are to hack around ransack
   # maybe better instead to create custom index in active admin
   def self.ransackable_scopes(auth_object = nil)
-    [:by_document_group, :by_document_type, :by_fmu_type]
+    [:by_document_group, :by_document_type, :by_forest_type]
   end
-  scope :by_document_group, ->(_param) { all }
-  scope :by_document_type, ->(_param) { all }
-  scope :by_fmu_type, ->(_param) { all }
+  scope :by_document_group, ->(_param = nil) { all }
+  scope :by_document_type, ->(_param = nil) { all }
+  scope :by_forest_type, ->(_param = nil) { all }
 
   def self.headers
     @headers ||= initialize_headers
   end
 
   def pending
-    status['doc_pending']
+    count_by_status 'doc_pending'
   end
 
   def expired
-    status['doc_expired']
+    count_by_status 'doc_expired'
   end
 
   def invalid
-    status['doc_invalid']
+    count_by_status 'doc_invalid'
   end
 
   def valid
-    status['doc_valid']
+    count_by_status 'doc_valid'
   end
 
   def not_provided
-    status['doc_not_provided']
+    count_by_status 'doc_not_provided'
   end
 
   def not_required
-    status['doc_not_required']
+    count_by_status 'doc_not_required'
   end
 
-  def status
-    return general_status if @active_filters.blank?
+  def count_by_status(status)
+    docs = general_status.select { |d| d['s'] == OperatorDocument.statuses[status] }
+    docs = docs.select { |d| d['t'] == active_filters[:by_document_type].downcase } if active_filters[:by_document_type].present?
+    docs = docs.select { |d| d['g'] == active_filters[:by_document_group].to_i } if active_filters[:by_document_group].present?
+    docs = docs.select { |d| d['f'] == active_filters[:by_forest_type].to_i } if active_filters[:by_forest_type].present?
+    docs.count
+  end
 
-    general_status
+  def active_filters
+    @active_filters || {}
   end
 
   # Calculates the score for a given day
   # @param [Country] country The country for which to calculate the global score (if nil, will calculate all)
   def self.calculate(country = nil)
     GlobalScore.transaction do
-      gs = GlobalScore.find_or_create_by(country: country, date: Date.current)
+      gs = GlobalScore.find_or_create_by(country: country, date: Date.yesterday)
       all = country.present? ? OperatorDocument.by_country(country&.id) : OperatorDocument.all
-      gs.total_required = all.count
-      gs.general_status = all.group(:status).count
-      gs.country_status = all.country_type.group(:status).count
-      gs.fmu_status     = all.fmu_type.group(:status).count
-      gs.doc_group_status = all.joins(required_operator_document: :required_operator_document_group)
-                                .group('required_operator_document_groups.id').count
-      gs.fmu_type_status = all.fmu_type.joins(:fmu).group('fmus.forest_type').count
+      gs.general_status = all
+        .includes(:fmu, :required_operator_document)
+        .map do |d|
+          {
+            t: d.type === 'OperatorDocumentCountry' ? 'country' : 'fmu',
+            g: d.required_operator_document.required_operator_document_group_id,
+            f: Fmu.forest_types[d.fmu&.forest_type],
+            s: OperatorDocument.statuses[d.status]
+          }
+        end
       gs.save!
     end
   end
