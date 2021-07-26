@@ -6,15 +6,13 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
 
   menu false
 
-  actions :index, :show
+  actions :index
 
   filter :country
   filter :by_document_group, label: 'Document Group', as: :select, collection: RequiredOperatorDocumentGroup.all
   filter :by_document_type, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
   filter :by_forest_type, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :date
-  filter :updated_at
-  filter :created_at
 
   index title: 'Producer Documents Dashboard' do
     column :date do |resource|
@@ -33,9 +31,6 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     column :invalid, sortable: false
     column :not_required, sortable: false
     column :not_provided, sortable: false
-    column :created_at
-    column :updated_at
-    actions
 
     grouped_sod = collection.group_by(&:date)
     render partial: 'score_evolution', locals: {

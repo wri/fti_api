@@ -75,20 +75,22 @@ class GlobalScore < ApplicationRecord
   # Calculates the score for a given day
   # @param [Country] country The country for which to calculate the global score (if nil, will calculate all)
   def self.calculate(country = nil)
-    GlobalScore.transaction do
-      gs = GlobalScore.find_or_create_by(country: country, date: Date.yesterday)
-      all = country.present? ? OperatorDocument.by_country(country&.id) : OperatorDocument.all
-      gs.general_status = all
-        .includes(:fmu, :required_operator_document)
-        .map do |d|
-          {
-            t: d.type === 'OperatorDocumentCountry' ? 'country' : 'fmu',
-            g: d.required_operator_document.required_operator_document_group_id,
-            f: Fmu.forest_types[d.fmu&.forest_type],
-            s: OperatorDocument.statuses[d.status]
-          }
-        end
-      gs.save!
+    (10.days.ago.to_date..Date.today.to_date).each do |day|
+      GlobalScore.transaction do
+        gs = GlobalScore.find_or_create_by(country: country, date: day)
+        all = country.present? ? OperatorDocument.by_country(country&.id) : OperatorDocument.all
+        gs.general_status = all
+          .includes(:fmu, :required_operator_document)
+          .map do |d|
+            {
+              t: d.type === 'OperatorDocumentCountry' ? 'country' : 'fmu',
+              g: d.required_operator_document.required_operator_document_group_id,
+              f: Fmu.forest_types[d.fmu&.forest_type],
+              s: OperatorDocument.statuses[d.status]
+            }
+          end
+        gs.save!
+      end
     end
   end
 

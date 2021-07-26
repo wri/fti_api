@@ -78,4 +78,6 @@ class OperatorDocumentHistory < ApplicationRecord
     # it will not return destroyed documents
     from(query)
   end
+
+
 end
