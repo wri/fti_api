@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210719162546) do
+ActiveRecord::Schema.define(version: 20210727132151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -402,6 +402,25 @@ ActiveRecord::Schema.define(version: 20210719162546) do
     t.index ["max_fine"], name: "index_laws_on_max_fine", using: :btree
     t.index ["min_fine"], name: "index_laws_on_min_fine", using: :btree
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
+  end
+
+  create_table "new_global_scores", force: :cascade do |t|
+    t.date     "date",                                null: false
+    t.integer  "doc_valid"
+    t.integer  "doc_invalid"
+    t.integer  "doc_pending"
+    t.integer  "doc_not_provided"
+    t.integer  "doc_not_required"
+    t.integer  "doc_expired"
+    t.integer  "fmu_forest_type"
+    t.string   "document_type"
+    t.integer  "country_id"
+    t.integer  "required_operator_document_group_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["country_id"], name: "index_new_global_scores_on_country_id", using: :btree
+    t.index ["date"], name: "index_new_global_scores_on_date", using: :btree
+    t.index ["required_operator_document_group_id"], name: "index_new_global_scores_on_required_operator_document_group_id", using: :btree
   end
 
   create_table "observation_documents", force: :cascade do |t|
@@ -1027,6 +1046,8 @@ ActiveRecord::Schema.define(version: 20210719162546) do
   add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
+  add_foreign_key "new_global_scores", "countries", on_delete: :cascade
+  add_foreign_key "new_global_scores", "required_operator_document_groups", on_delete: :cascade
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
   add_foreign_key "observation_operators", "observations"
