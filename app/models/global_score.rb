@@ -73,12 +73,16 @@ class GlobalScore < ApplicationRecord
   end
 
   def count_by_status(status)
-    docs = general_status.select do |d|
-      d['s'] == OperatorDocument.statuses[status] &&
-        (active_filters[:by_document_type].blank? || d['t'] == active_filters[:by_document_type].downcase) &&
-        (active_filters[:by_document_group].blank? || d['g'] == active_filters[:by_document_group].to_i) &&
-        (active_filters[:by_forest_type].blank? || d['f'] == active_filters[:by_forest_type].to_i)
+    document_type = active_filters[:by_document_type]&.downcase
+    document_group = active_filters[:by_document_group]&.to_i
+    forest_type = active_filters[:by_forest_type]&.to_i
+
+    docs = (general_status[status] || []).select do |d|
+      (document_type.blank? || d['t'] == document_type) &&
+        (document_group.blank? || d['g'] == document_group) &&
+        (forest_type.blank? || d['f'] == forest_type)
     end
+
     docs.count
   end
 
@@ -89,7 +93,8 @@ class GlobalScore < ApplicationRecord
   def ==(obj)
     return false unless obj.is_a? self.class
 
-    %w[country_id pending expired invalid valid not_provided not_required].reject do |attr|
+    # %w[country_id pending expired invalid valid not_provided not_required].reject do |attr|
+    %w[country_id general_status].reject do |attr|
       send(attr) == obj.send(attr)
     end.none?
   end

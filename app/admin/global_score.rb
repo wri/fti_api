@@ -92,5 +92,9 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     def active_filters
       params[:q]&.slice(:by_document_group, :by_document_type, :by_forest_type)&.to_unsafe_h
     end
+
+    def scoped_collection
+      super.includes(country: :translations)
+    end
   end
 end

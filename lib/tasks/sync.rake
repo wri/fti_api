@@ -39,15 +39,18 @@ class SyncTasks
             .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
           docs = docs.where(required_operator_documents: { country_id: country_id }) if country_id.present?
 
-          gs.general_status = docs
-            .map do |d|
-              {
-                t: d.type === 'OperatorDocumentCountryHistory' ? 'country' : 'fmu',
-                g: d.required_operator_document_group_id,
-                f: d.forest_type,
-                s: OperatorDocument.statuses[d.status]
-              }
-            end
+          gs.general_status = docs.group_by(&:status).map do |status, docs|
+            {
+              status => docs.map do |d|
+                {
+                  t: d.type === 'OperatorDocumentCountryHistory' ? 'country' : 'fmu',
+                  g: d.required_operator_document_group_id,
+                  f: d.forest_type
+                }
+              end
+            }
+          end.reduce(&:merge)
+
           prev_score = gs.previous_score
           next if prev_score.present? && prev_score == gs
 
