@@ -4,11 +4,14 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   extend BackRedirectable
   back_redirect
 
+  config.sort_order = 'date_desc'
+
   menu false
 
   actions :index
 
-  filter :country
+  filter :country_id_null, label: 'Only Show Total for Countries', as: :boolean
+  filter :country, as: :select, collection: Country.active
   filter :by_document_group, label: 'Document Group', as: :select, collection: RequiredOperatorDocumentGroup.all
   filter :by_document_type, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
   filter :by_forest_type, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
@@ -46,6 +49,17 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     panel 'Visible columns' do
       render partial: "fields", locals: { attributes: %w[date country valid expired invalid pending not_provided not_required] }
     end
+  end
+
+  csv do
+    column :date
+    column :country_name
+    column :valid
+    column :expired
+    column :pending
+    column :invalid
+    column :not_required
+    column :not_provided
   end
 
   controller do

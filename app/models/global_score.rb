@@ -32,8 +32,10 @@ class GlobalScore < ApplicationRecord
   scope :by_document_type, ->(_param = nil) { all }
   scope :by_forest_type, ->(_param = nil) { all }
 
-  def self.headers
-    @headers ||= initialize_headers
+  def country_name
+    return country.name if country.present?
+
+    'All Countries'
   end
 
   def pending
@@ -60,11 +62,21 @@ class GlobalScore < ApplicationRecord
     count_by_status 'doc_not_required'
   end
 
+  # def count_by_status(status)
+  #   docs = general_status.select { |d| d['s'] == OperatorDocument.statuses[status] }
+  #   docs = docs.select { |d| d['t'] == active_filters[:by_document_type].downcase } if active_filters[:by_document_type].present?
+  #   docs = docs.select { |d| d['g'] == active_filters[:by_document_group].to_i } if active_filters[:by_document_group].present?
+  #   docs = docs.select { |d| d['f'] == active_filters[:by_forest_type].to_i } if active_filters[:by_forest_type].present?
+  #   docs.count
+  # end
+
   def count_by_status(status)
-    docs = general_status.select { |d| d['s'] == OperatorDocument.statuses[status] }
-    docs = docs.select { |d| d['t'] == active_filters[:by_document_type].downcase } if active_filters[:by_document_type].present?
-    docs = docs.select { |d| d['g'] == active_filters[:by_document_group].to_i } if active_filters[:by_document_group].present?
-    docs = docs.select { |d| d['f'] == active_filters[:by_forest_type].to_i } if active_filters[:by_forest_type].present?
+    docs = general_status.select do |d|
+      d['s'] == OperatorDocument.statuses[status] &&
+        (active_filters[:by_document_type].blank? || d['t'] == active_filters[:by_document_type].downcase) &&
+        (active_filters[:by_document_group].blank? || d['g'] == active_filters[:by_document_group].to_i) &&
+        (active_filters[:by_forest_type].blank? || d['f'] == active_filters[:by_forest_type].to_i)
+    end
     docs.count
   end
 
@@ -92,43 +104,5 @@ class GlobalScore < ApplicationRecord
         gs.save!
       end
     end
-  end
-
-  def self.to_csv
-    CSV.generate(headers: true, force_quotes: true) do |csv|
-      csv << headers.map{ |x| x.is_a?(Hash) ? x.values.first.map{ |y| "#{x.keys.first}-#{y[0]}" }  : x }.flatten
-
-      find_each do |score|
-        tmp_row = []
-        headers.each do |h|
-          if h.is_a?(Hash)
-            h.values.first.each { |k| tmp_row << score[h.keys.first][k.last.to_s] }
-          else
-            tmp_row << score[h]
-          end
-        end
-        csv << tmp_row
-      end
-    end
-  end
-
-
-  private
-
-  def self.initialize_headers
-    rodg_name = Arel.sql("required_operator_document_group_translations.name")
-    statuses = {}
-    OperatorDocument.statuses.each_key { |v| statuses[v] = v }
-    [
-      :date,
-      :country,
-      :total_required,
-      { general_status: statuses },
-      { country_status: statuses },
-      { fmu_status: statuses },
-      { doc_group_status: RequiredOperatorDocumentGroup.with_translations(I18n.locale)
-                              .pluck(:id, rodg_name).map{ |x| { x[1] => x[0] } }.inject({}, :merge) },
-      { fmu_type_status: Fmu.forest_types }
-    ]
   end
 end

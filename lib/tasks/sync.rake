@@ -19,6 +19,37 @@ class SyncTasks
       task ranking: :environment do
         RankingOperatorDocument.refresh
       end
+
+      task global_scores: :environment do
+        # sync_global_scores(Date.new(2021,4,1))
+        sync_global_scores(Date.new(2021,4,1))
+      end
+    end
+  end
+
+  def sync_global_scores(from_date)
+    (from_date..Date.new(2021,6,1)).each do |day|
+      countries = Country.active.pluck(:id) + [nil]
+      countries.each do |country_id|
+        GlobalScore.transaction do
+          gs = GlobalScore.find_or_create_by(country_id: country_id, date: day)
+          docs = OperatorDocumentHistory.at_date(day)
+            .left_joins(:required_operator_document, :fmu)
+            .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
+          docs = docs.where(required_operator_documents: { country_id: country_id }) if country_id.present?
+
+          gs.general_status = docs
+            .map do |d|
+              {
+                t: d.type === 'OperatorDocumentCountryHistory' ? 'country' : 'fmu',
+                g: d.required_operator_document_group_id,
+                f: Fmu.forest_types[d.forest_type],
+                s: OperatorDocument.statuses[d.status]
+              }
+            end
+          gs.save!
+        end
+      end
     end
   end
 
