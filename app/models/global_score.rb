@@ -26,11 +26,17 @@ class GlobalScore < ApplicationRecord
   # below scopes are to hack around ransack
   # maybe better instead to create custom index in active admin
   def self.ransackable_scopes(auth_object = nil)
-    [:by_document_group, :by_document_type, :by_forest_type]
+    [:by_country, :by_document_group, :by_document_type, :by_forest_type]
   end
   scope :by_document_group, ->(_param = nil) { all }
   scope :by_document_type, ->(_param = nil) { all }
   scope :by_forest_type, ->(_param = nil) { all }
+  def self.by_country(country_id = nil)
+    return all if country_id.nil?
+    return where(country_id: nil) if country_id == 'null'
+
+    where(country_id: country_id)
+  end
 
   def previous_score
     GlobalScore.where(country_id: country_id).where('date < ?', date).order(:date).last
@@ -65,14 +71,6 @@ class GlobalScore < ApplicationRecord
   def not_required
     count_by_status 'doc_not_required'
   end
-
-  # def count_by_status(status)
-  #   docs = general_status.select { |d| d['s'] == OperatorDocument.statuses[status] }
-  #   docs = docs.select { |d| d['t'] == active_filters[:by_document_type].downcase } if active_filters[:by_document_type].present?
-  #   docs = docs.select { |d| d['g'] == active_filters[:by_document_group].to_i } if active_filters[:by_document_group].present?
-  #   docs = docs.select { |d| d['f'] == active_filters[:by_forest_type].to_i } if active_filters[:by_forest_type].present?
-  #   docs.count
-  # end
 
   def count_by_status(status)
     docs = general_status.select do |d|
