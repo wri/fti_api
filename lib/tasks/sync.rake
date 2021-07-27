@@ -35,7 +35,8 @@ class SyncTasks
         GlobalScore.transaction do
           gs = GlobalScore.find_or_initialize_by(country_id: country_id, date: day)
           docs = OperatorDocumentHistory.at_date(day)
-            .left_joins(:required_operator_document, :fmu)
+            .non_signature
+            .left_joins(:fmu)
             .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
           docs = docs.where(required_operator_documents: { country_id: country_id }) if country_id.present?
 
