@@ -50,7 +50,7 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
 
     grouped_sod = collection.group_by(&:date)
     hidden = { dataset: { hidden: true } }
-    get_data = ->(&block) { grouped_sod.map { |date, data| { date => data.map(&block).max } }.reduce(&:merge)  }
+    get_data = ->(&block) { grouped_sod.map { |date, data| { date.to_date => data.map(&block).max } }.reduce(&:merge)  }
     render partial: 'score_evolution', locals: {
         scores: [
           { name: 'Not Provided', **hidden, data: get_data.call(&:not_provided) },
