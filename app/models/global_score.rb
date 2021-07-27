@@ -32,6 +32,10 @@ class GlobalScore < ApplicationRecord
   scope :by_document_type, ->(_param = nil) { all }
   scope :by_forest_type, ->(_param = nil) { all }
 
+  def previous_score
+    GlobalScore.where(country_id: country_id).where('date < ?', date).order(:date).last
+  end
+
   def country_name
     return country.name if country.present?
 
@@ -82,6 +86,14 @@ class GlobalScore < ApplicationRecord
 
   def active_filters
     @active_filters || {}
+  end
+
+  def ==(obj)
+    return false unless obj.is_a? self.class
+
+    %w[country_id pending expired invalid valid not_provided not_required].reject do |attr|
+      send(attr) == obj.send(attr)
+    end.none?
   end
 
   # Calculates the score for a given day

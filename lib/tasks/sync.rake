@@ -28,11 +28,12 @@ class SyncTasks
   end
 
   def sync_global_scores(from_date)
-    (from_date..Date.new(2021,6,1)).each do |day|
-      countries = Country.active.pluck(:id) + [nil]
+    (from_date..Date.new(2021,7,1)).each do |day|
+      countries = Country.active.pluck(:id).uniq + [nil]
       countries.each do |country_id|
+        puts "Checking score for country: #{country_id} and #{day}"
         GlobalScore.transaction do
-          gs = GlobalScore.find_or_create_by(country_id: country_id, date: day)
+          gs = GlobalScore.find_or_initialize_by(country_id: country_id, date: day)
           docs = OperatorDocumentHistory.at_date(day)
             .left_joins(:required_operator_document, :fmu)
             .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
@@ -43,10 +44,14 @@ class SyncTasks
               {
                 t: d.type === 'OperatorDocumentCountryHistory' ? 'country' : 'fmu',
                 g: d.required_operator_document_group_id,
-                f: Fmu.forest_types[d.forest_type],
+                f: d.forest_type,
                 s: OperatorDocument.statuses[d.status]
               }
             end
+          prev_score = gs.previous_score
+          next if prev_score.present? && prev_score == gs
+
+          puts "Adding score for country: #{country_id} and #{day}"
           gs.save!
         end
       end

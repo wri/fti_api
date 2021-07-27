@@ -28,6 +28,19 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
         link_to resource.country.name, admin_country_path(resource.country)
       end
     end
+    (active_filters || {}).each do |filter_name, value|
+      column_name, column_value = case filter_name
+                                  when 'by_document_group'
+                                    ['Document Group', RequiredOperatorDocumentGroup.find(value.to_i).name]
+                                  when 'by_document_type'
+                                    ['Document Type', value]
+                                  when 'by_forest_type'
+                                    ['Forest Type', Fmu.forest_types.key(value.to_i)]
+                                  end
+      column column_name do
+        column_value
+      end
+    end
     column :valid, sortable: false
     column :expired, sortable: false
     column :pending, sortable: false
@@ -36,14 +49,16 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     column :not_provided, sortable: false
 
     grouped_sod = collection.group_by(&:date)
+    hidden = { dataset: { hidden: true } }
+    get_data = ->(&block) { grouped_sod.map { |date, data| { date => data.map(&block).max } }.reduce(&:merge)  }
     render partial: 'score_evolution', locals: {
         scores: [
-          { name: 'Not Provided', data: grouped_sod.map { |date, data| { date => data.map(&:not_provided).max } }.reduce(&:merge) },
-          { name: 'Pending', data: grouped_sod.map { |date, data| { date => data.map(&:pending).max } }.reduce(&:merge) },
-          { name: 'Invalid', data: grouped_sod.map { |date, data| { date => data.map(&:invalid).max } }.reduce(&:merge) },
-          { name: 'Valid', data: grouped_sod.map { |date, data| { date => data.map(&:valid).max } }.reduce(&:merge) },
-          { name: 'Expired', data: grouped_sod.map { |date, data| { date => data.map(&:expired).max } }.reduce(&:merge) },
-          { name: 'Not Required', data: grouped_sod.map { |date, data| { date => data.map(&:not_required).max } }.reduce(&:merge) },
+          { name: 'Not Provided', **hidden, data: get_data.call(&:not_provided) },
+          { name: 'Pending', **hidden, data: get_data.call(&:pending) },
+          { name: 'Invalid', **hidden, data: get_data.call(&:invalid) },
+          { name: 'Valid', data: get_data.call(&:valid) },
+          { name: 'Expired', data: get_data.call(&:expired) },
+          { name: 'Not Required', **hidden, data: get_data.call(&:not_required) },
         ]
       }
     panel 'Visible columns' do
@@ -63,6 +78,8 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   end
 
   controller do
+    helper_method :active_filters
+
     def index
       collection.each do |resource|
         resource.active_filters = active_filters
@@ -71,7 +88,7 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     end
 
     def active_filters
-      params[:q]&.permit(:by_document_group, :by_document_type, :by_forest_type).to_h
+      params[:q]&.slice(:by_document_group, :by_document_type, :by_forest_type)&.to_unsafe_h
     end
   end
 end
