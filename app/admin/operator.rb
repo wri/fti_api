@@ -37,6 +37,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
     link_to 'Delete Producer', admin_producer_path(operator), method: :delete, data: { confirm: confirmation_text }
   end
 
+  action_item only: [:index] do
+    link_to 'New Producer', new_admin_producer_path
+  end
 
   csv do
     column :id
@@ -175,7 +178,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
         available_fmus = []
         Fmu.filter_by_free.find_each{ |x| available_fmus << x }
         f.object.fmus.find_each{ |x| available_fmus << x }
-        f.input :fmus, collection: available_fmus
+        f.input :fmus, collection: available_fmus, input_html: { disabled: true }
       else
         f.input :fmus, collection: available_fmus
       end

@@ -16,6 +16,7 @@
 class ScoreOperatorObservation < ApplicationRecord
   belongs_to :operator, touch: true
   validates_presence_of :date
+  validates_uniqueness_of :current, scope: :operator_id, if: :current?
 
   scope :current, -> { where(current: true) }
 
@@ -26,10 +27,9 @@ class ScoreOperatorObservation < ApplicationRecord
   def self.recalculate!(operator)
     return if operator.fa_id.blank?
 
-    soo = operator.score_operator_observation || ScoreOperatorObservation.new
+    soo = operator.reload.score_operator_observation || ScoreOperatorObservation.new
     soo.replace(operator)
   end
-
 
   # Replaces the current SOO with a new on if there values of the SOO changed
   # @param [Operator] operator The operator for which to replace the SOO
@@ -40,7 +40,6 @@ class ScoreOperatorObservation < ApplicationRecord
     update!(current: false) if present? && persisted?
     soo.save!
   end
-
 
   # Builds the new SOO for an operator
   # @param [Operator] operator
@@ -58,7 +57,11 @@ class ScoreOperatorObservation < ApplicationRecord
   # We consider "visit" as a day with observations, regardless of the number of observations on the same day
   # So if there are 3 observations for the 1st of January and 10 for the 2nd, there were 2 visits
   def count_visits
-    visits_query = observations.select('date(publication_date)').group('date(publication_date)').count
+    visits_query = observations
+      .joins(:observation_report)
+      .select('date(observation_reports.publication_date)')
+      .group('date(observation_reports.publication_date)')
+      .count
     self.visits = visits_query.keys.count
   end
 
