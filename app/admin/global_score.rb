@@ -80,6 +80,9 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   end
 
   controller do
+    skip_before_action :restore_search_filters
+    skip_after_action :save_search_filters
+
     helper_method :active_filters
 
     def index

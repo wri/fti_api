@@ -28,7 +28,9 @@ class SyncTasks
   end
 
   def sync_global_scores(from_date)
-    (from_date..Date.new(2021,7,1)).each do |day|
+    GlobalScore.delete_all
+
+    (from_date..Date.today.to_date).select(&:sunday?).each do |day|
       countries = Country.active.pluck(:id).uniq + [nil]
       countries.each do |country_id|
         puts "Checking score for country: #{country_id} and #{day}"
@@ -53,7 +55,11 @@ class SyncTasks
           end.reduce(&:merge)
 
           prev_score = gs.previous_score
-          next if prev_score.present? && prev_score == gs
+          if prev_score.present? && prev_score == gs && prev_score.previous_score.present?
+            puts "Prev score the same, update date of prev score"
+            prev_score.update(date: day)
+            next
+          end
 
           puts "Adding score for country: #{country_id} and #{day}"
           gs.save!
