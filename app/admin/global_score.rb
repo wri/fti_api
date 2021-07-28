@@ -11,7 +11,7 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   actions :index
 
   filter :by_country, label: 'Country', as: :select, collection: [['All Countries', 'null']] + Country.active.map { |c| [c.name, c.id] }
-  filter :by_document_group, label: 'Document Group', as: :select, collection: RequiredOperatorDocumentGroup.all
+  filter :by_document_group, label: 'Document Group', as: :select, collection: RequiredOperatorDocumentGroup.without_publication_authorization
   filter :by_document_type, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
   filter :by_forest_type, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :date

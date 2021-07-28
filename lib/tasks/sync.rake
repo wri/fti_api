@@ -54,12 +54,12 @@ class SyncTasks
             }
           end.reduce(&:merge)
 
-          prev_score = gs.previous_score
-          if prev_score.present? && prev_score == gs && prev_score.previous_score.present?
-            puts "Prev score the same, update date of prev score"
-            prev_score.update(date: day)
-            next
-          end
+          # prev_score = gs.previous_score
+          # if prev_score.present? && prev_score == gs && prev_score.previous_score.present?
+          #   puts "Prev score the same, update date of prev score"
+          #   prev_score.update(date: day)
+          #   next
+          # end
 
           puts "Adding score for country: #{country_id} and #{day}"
           gs.save!
