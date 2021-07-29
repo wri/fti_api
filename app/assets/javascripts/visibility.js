@@ -2,7 +2,7 @@ $(document).ready(function() {
   function updateChart(elemId, checked) {
     const chart = Chartkick.charts['chart-1'].chart;
     const dataset = chart.data.datasets.find(
-      x => x.label.replace('&', '').replace(' ', '').toLowerCase() === elemId.replace('_', '')
+      x => x.label.replace('&', '').replace(/\s/g, '').toLowerCase() === elemId.replace('_', '')
     );
     if (dataset) {
       dataset.hidden = !checked;
