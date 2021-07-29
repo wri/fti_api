@@ -21,7 +21,7 @@ class SyncTasks
       end
 
       task global_scores: :environment do
-        sync_global_scores(Date.new(2021,4,1))
+        sync_global_scores(Date.new(2021,5,1))
       end
     end
   end

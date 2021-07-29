@@ -4,6 +4,8 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   extend BackRedirectable
   back_redirect
 
+  config.sort_order = 'date_desc'
+
   menu false
 
   actions :index
@@ -35,8 +37,12 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     column :invalid, sortable: false, &:invalid_count
     column :not_required, sortable: false, &:not_required_count
     column :not_provided, sortable: false, &:not_provided_count
-
-    grouped_sod = collection.group_by(&:date)
+    show_on_chart = if params.dig(:q, :by_country).present?
+                      collection
+                    else
+                      collection.select { |r| r.country_id.nil? }
+                    end
+    grouped_sod = show_on_chart.group_by(&:date)
     hidden = { dataset: { hidden: true } }
     get_data = ->(&block) { grouped_sod.map { |date, data| { date.to_date => data.map(&block).max } }.reduce(&:merge)  }
     render partial: 'score_evolution', locals: {
@@ -66,7 +72,7 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     active_filter_columns.each do |name, value|
       column(name) { value }
     end
-    column :valid_&_expired, &:valid_and_expired_count
+    column 'Valid & Expired', &:valid_and_expired_count
     column :valid, &:valid_count
     column :expired, &:expired_count
     column :pending, &:pending_count
