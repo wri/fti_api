@@ -27,18 +27,8 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
         link_to resource.country.name, admin_country_path(resource.country)
       end
     end
-    (active_filters || {}).each do |filter_name, value|
-      column_name, column_value = case filter_name
-                                  when 'by_document_group'
-                                    ['Document Group', RequiredOperatorDocumentGroup.find(value.to_i).name]
-                                  when 'by_document_type'
-                                    ['Document Type', value]
-                                  when 'by_forest_type'
-                                    ['Forest Type', Fmu.forest_types.key(value.to_i)]
-                                  end
-      column column_name do
-        column_value
-      end
+    active_filter_columns.each do |name, value|
+      column(name) { value }
     end
     column :valid, sortable: false
     column :expired, sortable: false
@@ -69,8 +59,13 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   end
 
   csv do
-    column :date
-    column :country_name
+    column :date do |resource|
+      resource.date.strftime('%d/%m/%Y')
+    end
+    column :country, &:country_name
+    active_filter_columns.each do |name, value|
+      column(name) { value }
+    end
     column :valid
     column :expired
     column :pending
@@ -83,7 +78,7 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     skip_before_action :restore_search_filters
     skip_after_action :save_search_filters
 
-    helper_method :active_filters
+    helper_method :active_filter_columns
 
     def index
       collection.each do |resource|
@@ -94,6 +89,19 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
 
     def active_filters
       params[:q]&.slice(:by_document_group, :by_document_type, :by_forest_type)&.to_unsafe_h
+    end
+
+    def active_filter_columns
+      (active_filters || {}).map do |filter_name, value|
+        case filter_name
+        when 'by_document_group'
+          ['Document Group', RequiredOperatorDocumentGroup.find(value.to_i).name]
+        when 'by_document_type'
+          ['Document Type', value]
+        when 'by_forest_type'
+          ['Forest Type', Fmu.forest_types.key(value.to_i)]
+        end
+      end
     end
 
     def scoped_collection
