@@ -103,24 +103,36 @@ class GlobalScore < ApplicationRecord
   end
 
   # Calculates the score for a given day
-  # @param [Country] country The country for which to calculate the global score (if nil, will calculate all)
-  def self.calculate(country = nil)
-    (10.days.ago.to_date..Date.today.to_date).each do |day|
-      GlobalScore.transaction do
-        gs = GlobalScore.find_or_create_by(country: country, date: day)
-        all = country.present? ? OperatorDocument.by_country(country&.id) : OperatorDocument.all
-        gs.general_status = all
-          .includes(:fmu, :required_operator_document)
-          .map do |d|
-            {
-              t: d.type === 'OperatorDocumentCountry' ? 'country' : 'fmu',
-              g: d.required_operator_document.required_operator_document_group_id,
-              f: Fmu.forest_types[d.fmu&.forest_type],
-              s: OperatorDocument.statuses[d.status]
-            }
-          end
-        gs.save!
-      end
+  # @param [Country_id] country The country for which to calculate the global score (if nil, will calculate all)
+  # @param [day] day for which to calculate
+  def self.calculate(country_id = nil, day = Date.yesterday.to_date)
+    Rails.logger.info "Checking score for country: #{country_id} and #{day}"
+    gs = GlobalScore.find_or_initialize_by(country_id: country_id, date: day)
+    docs = OperatorDocumentHistory.at_date(day)
+      .non_signature
+      .left_joins(:fmu)
+      .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
+    docs = docs.where(required_operator_documents: { country_id: country_id }) if country_id.present?
+
+    gs.general_status = docs.group_by(&:status).map do |status, docs|
+      {
+        status => docs.map do |d|
+          {
+            t: d.type === 'OperatorDocumentCountryHistory' ? 'country' : 'fmu',
+            g: d.required_operator_document_group_id,
+            f: d.forest_type
+          }
+        end
+      }
+    end.reduce(&:merge)
+
+    prev_score = gs.previous_score
+    if prev_score.present? && prev_score == gs && prev_score.previous_score.present?
+      Rails.logger.info "Prev score the same, update date of prev score"
+      prev_score.update(date: day)
+    else
+      Rails.logger.info "Adding score for country: #{country_id} and #{day}"
+      gs.save!
     end
   end
 end

@@ -21,7 +21,6 @@ class SyncTasks
       end
 
       task global_scores: :environment do
-        # sync_global_scores(Date.new(2021,4,1))
         sync_global_scores(Date.new(2021,4,1))
       end
     end
@@ -30,40 +29,10 @@ class SyncTasks
   def sync_global_scores(from_date)
     GlobalScore.delete_all
 
-    (from_date..Date.today.to_date).select(&:sunday?).each do |day|
+    (from_date..Date.today.to_date).each do |day|
       countries = Country.active.pluck(:id).uniq + [nil]
       countries.each do |country_id|
-        puts "Checking score for country: #{country_id} and #{day}"
-        GlobalScore.transaction do
-          gs = GlobalScore.find_or_initialize_by(country_id: country_id, date: day)
-          docs = OperatorDocumentHistory.at_date(day)
-            .non_signature
-            .left_joins(:fmu)
-            .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
-          docs = docs.where(required_operator_documents: { country_id: country_id }) if country_id.present?
-
-          gs.general_status = docs.group_by(&:status).map do |status, docs|
-            {
-              status => docs.map do |d|
-                {
-                  t: d.type === 'OperatorDocumentCountryHistory' ? 'country' : 'fmu',
-                  g: d.required_operator_document_group_id,
-                  f: d.forest_type
-                }
-              end
-            }
-          end.reduce(&:merge)
-
-          # prev_score = gs.previous_score
-          # if prev_score.present? && prev_score == gs && prev_score.previous_score.present?
-          #   puts "Prev score the same, update date of prev score"
-          #   prev_score.update(date: day)
-          #   next
-          # end
-
-          puts "Adding score for country: #{country_id} and #{day}"
-          gs.save!
-        end
+        GlobalScore.calculate(country_id, day)
       end
     end
   end

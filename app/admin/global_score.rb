@@ -4,8 +4,6 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
   extend BackRedirectable
   back_redirect
 
-  config.sort_order = 'date_desc'
-
   menu false
 
   actions :index
