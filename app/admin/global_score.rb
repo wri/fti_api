@@ -30,29 +30,31 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     active_filter_columns.each do |name, value|
       column(name) { value }
     end
-    column :valid, sortable: false
-    column :expired, sortable: false
-    column :pending, sortable: false
-    column :invalid, sortable: false
-    column :not_required, sortable: false
-    column :not_provided, sortable: false
+    column 'Valid & Expired', sortable: false, &:valid_and_expired_count
+    column :valid, sortable: false, &:valid_count
+    column :expired, sortable: false, &:expired_count
+    column :pending, sortable: false, &:pending_count
+    column :invalid, sortable: false, &:invalid_count
+    column :not_required, sortable: false, &:not_required_count
+    column :not_provided, sortable: false, &:not_provided_count
 
     grouped_sod = collection.group_by(&:date)
     hidden = { dataset: { hidden: true } }
     get_data = ->(&block) { grouped_sod.map { |date, data| { date.to_date => data.map(&block).max } }.reduce(&:merge)  }
     render partial: 'score_evolution', locals: {
         scores: [
-          { name: 'Not Provided', **hidden, data: get_data.call(&:not_provided) },
-          { name: 'Pending', **hidden, data: get_data.call(&:pending) },
-          { name: 'Invalid', **hidden, data: get_data.call(&:invalid) },
-          { name: 'Valid', data: get_data.call(&:valid) },
-          { name: 'Expired', data: get_data.call(&:expired) },
-          { name: 'Not Required', **hidden, data: get_data.call(&:not_required) },
+          { name: 'Not Provided', **hidden, data: get_data.call(&:not_provided_count) },
+          { name: 'Pending', **hidden, data: get_data.call(&:pending_count) },
+          { name: 'Invalid', **hidden, data: get_data.call(&:invalid_count) },
+          { name: 'Valid & Expired', data: get_data.call(&:valid_and_expired_count) },
+          { name: 'Valid', data: get_data.call(&:valid_count) },
+          { name: 'Expired', data: get_data.call(&:expired_count) },
+          { name: 'Not Required', **hidden, data: get_data.call(&:not_required_count) },
         ]
       }
     panel 'Visible columns' do
       render partial: "fields", locals: {
-        attributes: %w[date country valid expired invalid pending not_provided not_required],
+        attributes: %w[date country valid_&_expired valid expired invalid pending not_provided not_required],
         unchecked: %w[invalid pending not_provided not_required]
       }
     end
@@ -66,12 +68,13 @@ ActiveAdmin.register GlobalScore, as: 'Producer Documents Dashboard' do
     active_filter_columns.each do |name, value|
       column(name) { value }
     end
-    column :valid
-    column :expired
-    column :pending
-    column :invalid
-    column :not_required
-    column :not_provided
+    column :valid_&_expired, &:valid_and_expired_count
+    column :valid, &:valid_count
+    column :expired, &:expired_count
+    column :pending, &:pending_count
+    column :invalid, &:invalid_count
+    column :not_required, &:not_required_count
+    column :not_provided, &:not_provided_count
   end
 
   controller do

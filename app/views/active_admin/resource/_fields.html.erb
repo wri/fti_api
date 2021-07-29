@@ -1,9 +1,10 @@
 <div class="observation-attributes">
   <% unchecked ||= [] %>
   <% attributes.each do |column| %>
-    <div class="observations-checkbox" id="attribute-<%= column %>">
+    <% column_id = column.gsub('_&_', '_') %>
+    <div class="observations-checkbox" id="attribute-<%= column_id  %>">
       <label>
-        <input type="checkbox" class="observation-checkbox" id="<%= column %>" <%= unchecked.exclude?(column) ? 'checked' : '' %>>
+        <input type="checkbox" class="observation-checkbox" id="<%= column_id %>" <%= unchecked.exclude?(column) ? 'checked' : '' %>>
         <%=column.humanize %>
       </label>
     </div>

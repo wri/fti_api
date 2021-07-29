@@ -48,28 +48,32 @@ class GlobalScore < ApplicationRecord
     'All Countries'
   end
 
-  def pending
-    count_by_status 'doc_pending'
+  def valid_count
+    @valid_count ||= count_by_status 'doc_valid'
   end
 
-  def expired
-    count_by_status 'doc_expired'
+  def expired_count
+    @expired_count ||= count_by_status 'doc_expired'
   end
 
-  def invalid
-    count_by_status 'doc_invalid'
+  def valid_and_expired_count
+    valid_count + expired_count
   end
 
-  def valid
-    count_by_status 'doc_valid'
+  def pending_count
+    @pending_count ||= count_by_status 'doc_pending'
   end
 
-  def not_provided
-    count_by_status 'doc_not_provided'
+  def invalid_count
+    @invalid_count ||= count_by_status 'doc_invalid'
   end
 
-  def not_required
-    count_by_status 'doc_not_required'
+  def not_provided_count
+    @not_provided_count ||= count_by_status 'doc_not_provided'
+  end
+
+  def not_required_count
+    @not_required_count ||= count_by_status 'doc_not_required'
   end
 
   def count_by_status(status)
@@ -93,7 +97,6 @@ class GlobalScore < ApplicationRecord
   def ==(obj)
     return false unless obj.is_a? self.class
 
-    # %w[country_id pending expired invalid valid not_provided not_required].reject do |attr|
     %w[country_id general_status].reject do |attr|
       send(attr) == obj.send(attr)
     end.none?
