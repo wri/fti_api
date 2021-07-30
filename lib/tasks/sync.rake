@@ -25,7 +25,7 @@ class SyncTasks
       end
 
       task global_scores_alt: :environment do
-        sync_global_scores_alt(Date.new(2021,4,1))
+        sync_global_scores_alt(Date.new(2021,5,1))
       end
     end
   end
@@ -42,14 +42,14 @@ class SyncTasks
   end
 
   def sync_global_scores_alt(from_date)
-    NewGlobalScore.delete_all
+    OperatorDocumentStatistic.delete_all
 
     (from_date..Date.new(2021,7,1)).each do |day|
       countries = Country.active.pluck(:id).uniq + [nil]
       countries.each do |country_id|
         puts "Checking score for country: #{country_id} and #{day}"
-        NewGlobalScore.transaction do
-          gs = NewGlobalScore.find_or_initialize_by(country_id: country_id, date: day)
+        OperatorDocumentStatistic.transaction do
+          gs = OperatorDocumentStatistic.find_or_initialize_by(country_id: country_id, date: day)
           docs = OperatorDocumentHistory.at_date(day)
             .left_joins(:required_operator_document, :fmu)
             .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
@@ -60,6 +60,7 @@ class SyncTasks
           groups = (docs.pluck(:required_operator_document_group_id) + [nil]).uniq
 
           to_save = []
+          to_update = []
           types.each do |type|
             forest_types.each do |forest_type|
               groups.each do |group_id|
@@ -67,34 +68,50 @@ class SyncTasks
                   (forest_type.nil? || d.forest_type == forest_type) &&
                     (type.nil? || d.type == type) &&
                     (group_id.nil? || d.required_operator_document_group_id == group_id)
-                end
+                end.group_by(&:status)
+                # unless filtered.count.zero?
+                new_score = OperatorDocumentStatistic.new(
+                  document_type: case type
+                                 when 'OperatorDocumentFmuHistory'
+                                   'fmu'
+                                 when 'OperatorDocumentCountryHistory'
+                                   'country'
+                                 end,
+                  fmu_forest_type: forest_type,
+                  required_operator_document_group_id: group_id,
+                  country_id: country_id,
+                  date: day,
+                  pending_count: filtered['doc_pending']&.count || 0,
+                  invalid_count: filtered['doc_invalid']&.count || 0,
+                  valid_count: filtered['doc_valid']&.count || 0,
+                  expired_count: filtered['doc_expired']&.count || 0,
+                  not_required_count: filtered['doc_not_required']&.count || 0,
+                  not_provided_count: filtered['doc_not_provided']&.count || 0,
+                  # doc_pending: filtered.select(&:doc_pending?).count,
+                  # doc_invalid: filtered.select(&:doc_invalid?).count,
+                  # doc_valid: filtered.select(&:doc_valid?).count,
+                  # doc_expired: filtered.select(&:doc_expired?).count,
+                  # doc_not_required: filtered.select(&:doc_not_required?).count,
+                  # doc_not_provided: filtered.select(&:doc_not_provided?).count,
+                )
 
-                unless filtered.count.zero?
-                  to_save << NewGlobalScore.new(
-                    document_type: case type
-                                   when 'OperatorDocumentFmuHistory'
-                                     'fmu'
-                                   when 'OperatorDocumentCountryHistory'
-                                     'country'
-                                   end,
-                    fmu_forest_type: forest_type,
-                    required_operator_document_group_id: group_id,
-                    country_id: country_id,
-                    date: day,
-                    doc_pending: filtered.select { |d| d.status == 'doc_pending' }.count,
-                    doc_invalid: filtered.select { |d| d.status == 'doc_invalid' }.count,
-                    doc_valid: filtered.select { |d| d.status == 'doc_valid' }.count,
-                    doc_expired: filtered.select { |d| d.status == 'doc_expired' }.count,
-                    doc_not_required: filtered.select { |d| d.status == 'doc_not_required' }.count,
-                    doc_not_provided: filtered.select { |d| d.status == 'doc_not_provided' }.count,
-                  )
+                prev_score = new_score.previous_score
+                if prev_score.present? && prev_score == new_score && prev_score.previous_score.present?
+                  Rails.logger.info "Prev score the same, update date of prev score"
+                  prev_score.date = day
+                  prev_score.updated_at = DateTime.current
+                  to_update << prev_score
+                else
+                  Rails.logger.info "Adding score for country: #{country_id} and #{day}"
+                  to_save << new_score
                 end
               end
             end
           end
 
           puts "Adding score for country: #{country_id} and #{day}, count: #{to_save.count}"
-          NewGlobalScore.import! to_save
+          OperatorDocumentStatistic.import! to_save
+          OperatorDocumentStatistic.import! to_update, on_duplicate_key_update: { columns: %i[date updated_at] }
 
           # gs.general_status = docs
           #   .map do |d|
