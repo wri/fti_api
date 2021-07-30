@@ -11,10 +11,10 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Alternat
 
   actions :index
 
-  filter :by_country, label: 'Country', as: :select, multiple: true, collection: [['All Countries', 'null']] + Country.active.map { |c| [c.name, c.id] }
-  filter :required_operator_document_group, as: :select, multiple: true, collection: RequiredOperatorDocumentGroup.without_publication_authorization
+  filter :by_country, label: 'Country', as: :select, collection: [['All Countries', 'null']] + Country.active.map { |c| [c.name, c.id] }
+  filter :required_operator_document_group, as: :select, collection: RequiredOperatorDocumentGroup.without_publication_authorization
   filter :document_type_eq, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
-  filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  # filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :date
 
   index title: 'Producer Documents Dashboard' do
@@ -79,7 +79,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Alternat
 
     panel 'Visible columns' do
       render partial: "fields", locals: {
-        attributes: %w[date country required_operator_document_group document_type valid_&_expired valid expired invalid pending not_provided not_required],
+        attributes: %w[date country required_operator_document_group fmu_forest_type document_type valid_&_expired valid expired invalid pending not_provided not_required],
         unchecked: %w[required_operator_document_group fmu_forest_type document_type invalid pending not_provided not_required]
       }
     end
@@ -127,9 +127,9 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Alternat
 
     def set_default_filters
       params[:q] ||= {}
-      params[:q][:required_operator_document_group_id_null] = true if params.dig(:q, :required_operator_document_group_id).blank?
-      params[:q][:fmu_forest_type_null] = true if params.dig(:q, :fmu_forest_type).blank?
-      params[:q][:document_type_null] = true if params.dig(:q, :document_type).blank?
+      params[:q][:required_operator_document_group_id_null] = true if params.dig(:q, :required_operator_document_group_id_eq).blank?
+      params[:q][:fmu_forest_type_null] = true if params.dig(:q, :fmu_forest_type_eq).blank?
+      params[:q][:document_type_null] = true if params.dig(:q, :document_type_eq).blank?
     end
 
     def scoped_collection

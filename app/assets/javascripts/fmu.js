@@ -14,7 +14,7 @@ function updateFmuFields() {
     45: ['ufa', 'cf', 'vdc'],
     53: ['cpaet', 'cfad']
   }
-  var forestTypes = $('#fmu_forest_type');
+  var forestTypes = $('#fmu_forest_type:not([type="checkbox"])');
   var country = $('#fmu_country_id').val();
 
   if (country in countryList) {

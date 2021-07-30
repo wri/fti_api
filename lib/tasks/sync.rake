@@ -90,32 +90,6 @@ class SyncTasks
                   not_provided_count: filtered['doc_not_provided']&.count || 0,
                 )
 
-                # filtered = docs
-                # filtered = filtered.where(fmus: { forest_type: forest_type }) if forest_type.present?
-                # filtered = filtered.where(required_operator_documents: { required_operator_document_group_id: group_id }) if group_id.present?
-                # filtered = filtered.where(type: type) if type.present?
-
-                # statuses = filtered.unscope(:select).group(:status).count
-
-                # new_score = OperatorDocumentStatistic.new(
-                #   document_type: case type
-                #                  when 'OperatorDocumentFmuHistory'
-                #                    'fmu'
-                #                  when 'OperatorDocumentCountryHistory'
-                #                    'country'
-                #                  end,
-                #   fmu_forest_type: forest_type,
-                #   required_operator_document_group_id: group_id,
-                #   country_id: country_id,
-                #   date: day,
-                #   pending_count: statuses[OperatorDocument.statuses['doc_pending']] || 0,
-                #   invalid_count: statuses[OperatorDocument.statuses['doc_invalid']] || 0,
-                #   valid_count: statuses[OperatorDocument.statuses['doc_valid']] || 0,
-                #   expired_count: statuses[OperatorDocument.statuses['doc_expired']] || 0,
-                #   not_required_count: statuses[OperatorDocument.statuses['doc_not_required']] || 0,
-                #   not_provided_count: statuses[OperatorDocument.statuses['doc_not_provided']] || 0
-                # )
-
                 prev_score = new_score.previous_score
                 if prev_score.present? && prev_score == new_score && prev_score.previous_score.present?
                   Rails.logger.info "Prev score the same, update date of prev score"
@@ -130,24 +104,15 @@ class SyncTasks
             end
           end
 
-          puts "Adding score for country: #{country_id} and #{day}, count: #{to_save.count}"
-          OperatorDocumentStatistic.import! to_save
-          OperatorDocumentStatistic.import! to_update, on_duplicate_key_update: { columns: %i[date updated_at] }
+          if to_save.count > 0
+            puts "Adding score for country: #{country_id} and #{day}, count: #{to_save.count}"
+            OperatorDocumentStatistic.import! to_save
+          end
 
-          # gs.general_status = docs
-          #   .map do |d|
-          #     {
-          #       t: d.type === 'OperatorDocumentCountryHistory' ? 'country' : 'fmu',
-          #       g: d.required_operator_document_group_id,
-          #       f: d.forest_type,
-          #       s: OperatorDocument.statuses[d.status]
-          #     }
-          #   end
-          # prev_score = gs.previous_score
-          # next if prev_score.present? && prev_score == gs
-
-          # puts "Adding score for country: #{country_id} and #{day}"
-          # gs.save!
+          if to_update.count > 0
+            puts "Updating scores for country: #{country_id} and #{day}, count: #{to_update.count}"
+            OperatorDocumentStatistic.import! to_update, on_duplicate_key_update: { columns: %i[date updated_at] }
+          end
         end
       end
     end
