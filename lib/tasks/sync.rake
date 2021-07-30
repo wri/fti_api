@@ -44,14 +44,14 @@ class SyncTasks
   def sync_global_scores_alt(from_date)
     OperatorDocumentStatistic.delete_all
 
-    (from_date..Date.new(2021,7,1)).each do |day|
+    (from_date..Date.today.to_date).each do |day|
       countries = Country.active.pluck(:id).uniq + [nil]
       countries.each do |country_id|
         puts "Checking score for country: #{country_id} and #{day}"
         OperatorDocumentStatistic.transaction do
-          gs = OperatorDocumentStatistic.find_or_initialize_by(country_id: country_id, date: day)
           docs = OperatorDocumentHistory.at_date(day)
-            .left_joins(:required_operator_document, :fmu)
+            .non_signature
+            .left_joins(:fmu)
             .select(:status, 'operator_document_histories.type', 'fmus.forest_type', 'required_operator_documents.required_operator_document_group_id')
           docs = docs.where(required_operator_documents: { country_id: country_id }) if country_id.present?
 
@@ -61,6 +61,7 @@ class SyncTasks
 
           to_save = []
           to_update = []
+
           types.each do |type|
             forest_types.each do |forest_type|
               groups.each do |group_id|
@@ -69,7 +70,7 @@ class SyncTasks
                     (type.nil? || d.type == type) &&
                     (group_id.nil? || d.required_operator_document_group_id == group_id)
                 end.group_by(&:status)
-                # unless filtered.count.zero?
+
                 new_score = OperatorDocumentStatistic.new(
                   document_type: case type
                                  when 'OperatorDocumentFmuHistory'
@@ -87,13 +88,33 @@ class SyncTasks
                   expired_count: filtered['doc_expired']&.count || 0,
                   not_required_count: filtered['doc_not_required']&.count || 0,
                   not_provided_count: filtered['doc_not_provided']&.count || 0,
-                  # doc_pending: filtered.select(&:doc_pending?).count,
-                  # doc_invalid: filtered.select(&:doc_invalid?).count,
-                  # doc_valid: filtered.select(&:doc_valid?).count,
-                  # doc_expired: filtered.select(&:doc_expired?).count,
-                  # doc_not_required: filtered.select(&:doc_not_required?).count,
-                  # doc_not_provided: filtered.select(&:doc_not_provided?).count,
                 )
+
+                # filtered = docs
+                # filtered = filtered.where(fmus: { forest_type: forest_type }) if forest_type.present?
+                # filtered = filtered.where(required_operator_documents: { required_operator_document_group_id: group_id }) if group_id.present?
+                # filtered = filtered.where(type: type) if type.present?
+
+                # statuses = filtered.unscope(:select).group(:status).count
+
+                # new_score = OperatorDocumentStatistic.new(
+                #   document_type: case type
+                #                  when 'OperatorDocumentFmuHistory'
+                #                    'fmu'
+                #                  when 'OperatorDocumentCountryHistory'
+                #                    'country'
+                #                  end,
+                #   fmu_forest_type: forest_type,
+                #   required_operator_document_group_id: group_id,
+                #   country_id: country_id,
+                #   date: day,
+                #   pending_count: statuses[OperatorDocument.statuses['doc_pending']] || 0,
+                #   invalid_count: statuses[OperatorDocument.statuses['doc_invalid']] || 0,
+                #   valid_count: statuses[OperatorDocument.statuses['doc_valid']] || 0,
+                #   expired_count: statuses[OperatorDocument.statuses['doc_expired']] || 0,
+                #   not_required_count: statuses[OperatorDocument.statuses['doc_not_required']] || 0,
+                #   not_provided_count: statuses[OperatorDocument.statuses['doc_not_provided']] || 0
+                # )
 
                 prev_score = new_score.previous_score
                 if prev_score.present? && prev_score == new_score && prev_score.previous_score.present?

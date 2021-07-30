@@ -57,7 +57,6 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Alternat
     column :not_required, sortable: false, &:not_required_count
     column :not_provided, sortable: false, &:not_provided_count
 
-
     show_on_chart = if params.dig(:q, :by_country).present?
                       collection
                     else
