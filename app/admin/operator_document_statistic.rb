@@ -5,19 +5,24 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Alternat
   back_redirect
 
   config.sort_order = 'date_desc'
-  config.per_page = [30, 50, 100]
+  # config.per_page = [30, 50, 100]
+
+  config.paginate = false
 
   menu false
 
   actions :index
 
   filter :by_country, label: 'Country', as: :select, collection: [['All Countries', 'null']] + Country.active.map { |c| [c.name, c.id] }
+  # filter :country, label: 'Country', as: :select, multiple: true, collection: [['All Countries', 'null']] + Country.active.map { |c| [c.name, c.id] }
+  # filter :by_required_operator_document_group, as: :select, multiple: true, collection: [['All groups', 'null']] + RequiredOperatorDocumentGroup.without_publication_authorization.map { |r| [r.name, r.id] }
   filter :required_operator_document_group, as: :select, collection: RequiredOperatorDocumentGroup.without_publication_authorization
+  # filter :required_operator_document_group, as: :select, multiple: true, collection: RequiredOperatorDocumentGroup.without_publication_authorization
   filter :document_type_eq, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
   filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :date
 
-  index title: 'Producer Documents Dashboard' do
+  index title: 'Producer Documents Dashboard', pagination_total: false do
     column :date do |resource|
       resource.date.to_date
     end
@@ -128,12 +133,19 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Alternat
     def set_default_filters
       params[:q] ||= {}
       params[:q][:required_operator_document_group_id_null] = true if params.dig(:q, :required_operator_document_group_id_eq).blank?
+      # params[:q][:required_operator_document_group_id_null] = true if params.dig(:q, :by_required_operator_document_group).blank?
+      # params[:q][:required_operator_document_group_id_null] = true if params.dig(:q, :by_required_operator_document_group).blank?
       params[:q][:fmu_forest_type_null] = true if params.dig(:q, :fmu_forest_type_eq).blank?
       params[:q][:document_type_null] = true if params.dig(:q, :document_type_eq).blank?
     end
 
     def scoped_collection
-      super.includes(:required_operator_document_group, country: :translations)
+      col = if params.dig(:q, :date_gteq).present?
+              super.from_date(params[:q][:date_gteq])
+            else
+              super
+            end
+      col.includes(:required_operator_document_group, country: :translations)
     end
   end
 end

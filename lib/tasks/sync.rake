@@ -44,6 +44,8 @@ class SyncTasks
   def sync_global_scores_alt(from_date)
     OperatorDocumentStatistic.delete_all
 
+    first_day = from_date.to_date
+
     (from_date..Date.today.to_date).each do |day|
       countries = Country.active.pluck(:id).uniq + [nil]
       countries.each do |country_id|
@@ -71,7 +73,7 @@ class SyncTasks
                     (group_id.nil? || d.required_operator_document_group_id == group_id)
                 end.group_by(&:status)
 
-                new_score = OperatorDocumentStatistic.new(
+                new_stat = OperatorDocumentStatistic.new(
                   document_type: case type
                                  when 'OperatorDocumentFmuHistory'
                                    'fmu'
@@ -90,15 +92,15 @@ class SyncTasks
                   not_provided_count: filtered['doc_not_provided']&.count || 0,
                 )
 
-                prev_score = new_score.previous_score
-                if prev_score.present? && prev_score == new_score && prev_score.previous_score.present?
+                prev_stat = new_stat.previous_stat
+                if prev_stat.present? && prev_stat == new_stat && prev_stat.date != first_day
                   Rails.logger.info "Prev score the same, update date of prev score"
-                  prev_score.date = day
-                  prev_score.updated_at = DateTime.current
-                  to_update << prev_score
-                else
+                  prev_stat.date = day
+                  prev_stat.updated_at = DateTime.current
+                  to_update << prev_stat
+                elsif prev_stat.blank? || prev_stat != new_stat
                   Rails.logger.info "Adding score for country: #{country_id} and #{day}"
-                  to_save << new_score
+                  to_save << new_stat
                 end
               end
             end
