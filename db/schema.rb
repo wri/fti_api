@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210802170503) do
+ActiveRecord::Schema.define(version: 20210803150359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
-  enable_extension "postgis"
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
 
@@ -462,6 +462,27 @@ ActiveRecord::Schema.define(version: 20210802170503) do
     t.index ["deleted_at"], name: "index_observation_reports_on_deleted_at", using: :btree
     t.index ["title"], name: "index_observation_reports_on_title", using: :btree
     t.index ["user_id"], name: "index_observation_reports_on_user_id", using: :btree
+  end
+
+  create_table "observation_statistics", force: :cascade do |t|
+    t.date     "date",                          null: false
+    t.integer  "country_id"
+    t.integer  "operator_id"
+    t.integer  "subcategory_id"
+    t.integer  "category_id"
+    t.integer  "fmu_id"
+    t.integer  "severity_level"
+    t.integer  "validation_status"
+    t.integer  "fmu_forest_type"
+    t.integer  "total_count",       default: 0
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["category_id"], name: "index_observation_statistics_on_category_id", using: :btree
+    t.index ["country_id"], name: "index_observation_statistics_on_country_id", using: :btree
+    t.index ["date"], name: "index_observation_statistics_on_date", using: :btree
+    t.index ["fmu_id"], name: "index_observation_statistics_on_fmu_id", using: :btree
+    t.index ["operator_id"], name: "index_observation_statistics_on_operator_id", using: :btree
+    t.index ["subcategory_id"], name: "index_observation_statistics_on_subcategory_id", using: :btree
   end
 
   create_table "observation_translations", force: :cascade do |t|
@@ -1069,6 +1090,11 @@ ActiveRecord::Schema.define(version: 20210802170503) do
   add_foreign_key "observation_report_statistics", "countries", on_delete: :cascade
   add_foreign_key "observation_report_statistics", "observers", on_delete: :cascade
   add_foreign_key "observation_reports", "users"
+  add_foreign_key "observation_statistics", "categories", on_delete: :cascade
+  add_foreign_key "observation_statistics", "countries", on_delete: :cascade
+  add_foreign_key "observation_statistics", "fmus", on_delete: :cascade
+  add_foreign_key "observation_statistics", "operators", on_delete: :cascade
+  add_foreign_key "observation_statistics", "subcategories", on_delete: :cascade
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"
   add_foreign_key "observations", "laws"

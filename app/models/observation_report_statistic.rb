@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: observation_report_statistics
+#
+#  id          :integer          not null, primary key
+#  date        :date             not null
+#  country_id  :integer
+#  observer_id :integer
+#  total_count :integer          default("0")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
 class ObservationReportStatistic < ApplicationRecord
   belongs_to :country, optional: true
   belongs_to :observer, optional: true

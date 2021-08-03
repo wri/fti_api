@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register ObservationReportStatistic, as: 'Observation Report Dashboard' do
+ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashboard' do
   extend BackRedirectable
   back_redirect
 
