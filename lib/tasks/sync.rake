@@ -140,7 +140,7 @@ class SyncTasks
         reports = reports.joins(:observations).where(observations: { country_id: country_id }) if country_id.present?
         reports = reports.distinct
 
-        grouped = reports.joins(:observation_report_observers).group(:observer_id).count.merge(nil => reports.count).
+        grouped = reports.joins(:observation_report_observers).group(:observer_id).count.merge(nil => reports.count)
         grouped.each do |observer_id, count|
           new_stat = ObservationReportStatistic.new(
             date: day,
