@@ -19,6 +19,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :validation_status, as: :select, collection: Observation.validation_statuses.sort
+  filter :date
 
   index do
     column :date, sortable: false do |resource|
@@ -123,7 +124,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     skip_after_action :save_search_filters
 
     def find_collection(options = {})
-      date_from = params.dig(:q, :date_gteq) || 1.year.ago.to_date
+      date_from = params.dig(:q, :date_gteq) || Observation.order(:created_at).first.created_at.to_date
       date_to = params.dig(:q, :date_lteq) || Date.today.to_date
       country_id = params.dig(:q, :by_country)
       operator_id = params.dig(:q, :operator_id_eq)
@@ -188,7 +189,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
             from grouped
         ) as total_c
         where
-          (prev_total is null or prev_total != total_count)
+          (prev_total is null or prev_total != total_count or date = '#{date_to.to_s(:db)}}')
           AND (#{country_id.nil? || country_id == 'null' ? '1=1' : 'country_id is not null'})
           AND (#{country_id == 'null' ? 'country_id is null' : '1=1'})
         order by date desc
