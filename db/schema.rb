@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210803150359) do
+ActiveRecord::Schema.define(version: 20210803154953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,6 +416,35 @@ ActiveRecord::Schema.define(version: 20210803150359) do
     t.index ["name"], name: "index_observation_documents_on_name", using: :btree
     t.index ["observation_id"], name: "index_observation_documents_on_observation_id", using: :btree
     t.index ["user_id"], name: "index_observation_documents_on_user_id", using: :btree
+  end
+
+  create_table "observation_histories", force: :cascade do |t|
+    t.integer  "validation_status"
+    t.integer  "observation_type"
+    t.integer  "evidence_type"
+    t.integer  "location_accuracy"
+    t.integer  "severity_level"
+    t.integer  "fmu_forest_type"
+    t.datetime "observation_updated_at"
+    t.datetime "observation_created_at"
+    t.datetime "deleted_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "observation_id"
+    t.integer  "fmu_id"
+    t.integer  "category_id"
+    t.integer  "subcategory_id"
+    t.integer  "country_id"
+    t.integer  "operator_id"
+    t.index ["category_id"], name: "index_observation_histories_on_category_id", using: :btree
+    t.index ["country_id"], name: "index_observation_histories_on_country_id", using: :btree
+    t.index ["fmu_forest_type"], name: "index_observation_histories_on_fmu_forest_type", using: :btree
+    t.index ["fmu_id"], name: "index_observation_histories_on_fmu_id", using: :btree
+    t.index ["observation_id"], name: "index_observation_histories_on_observation_id", using: :btree
+    t.index ["operator_id"], name: "index_observation_histories_on_operator_id", using: :btree
+    t.index ["severity_level"], name: "index_observation_histories_on_severity_level", using: :btree
+    t.index ["subcategory_id"], name: "index_observation_histories_on_subcategory_id", using: :btree
+    t.index ["validation_status"], name: "index_observation_histories_on_validation_status", using: :btree
   end
 
   create_table "observation_operators", force: :cascade do |t|
@@ -1083,6 +1112,12 @@ ActiveRecord::Schema.define(version: 20210803150359) do
   add_foreign_key "laws", "subcategories"
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
+  add_foreign_key "observation_histories", "categories", on_delete: :cascade
+  add_foreign_key "observation_histories", "countries", on_delete: :cascade
+  add_foreign_key "observation_histories", "fmus", on_delete: :cascade
+  add_foreign_key "observation_histories", "observations", on_delete: :nullify
+  add_foreign_key "observation_histories", "operators", on_delete: :cascade
+  add_foreign_key "observation_histories", "subcategories", on_delete: :cascade
   add_foreign_key "observation_operators", "observations"
   add_foreign_key "observation_operators", "operators"
   add_foreign_key "observation_report_observers", "observation_reports"
