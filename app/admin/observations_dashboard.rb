@@ -134,11 +134,11 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       forest_type = params.dig(:q, :fmu_forest_type_eq)
 
       filters = [
-        country_id.nil? || country_id == 'null' ? nil : "country_id = #{country_id}",
+        country_id.nil? || country_id == 'null' ? 'country_id is not null' : "country_id = #{country_id}",
         operator_id.nil? ? nil : "operator_id = #{operator_id}",
         validation_status.nil? ? nil : "validation_status = #{validation_status}",
-        forest_type.nil? ? nil : "forest_type = #{forest_type}",
-        severity_level.nil? ? nil : "level = #{severity_level}",
+        forest_type.nil? ? nil : "fmu_forest_type = #{forest_type}",
+        severity_level.nil? ? nil : "severity_level = #{severity_level}",
         subcategory_id.nil? ? nil : "subcategory_id = #{subcategory_id}"
       ].compact.join(' AND ')
       select = [
@@ -166,10 +166,12 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
           dates
           left join lateral
             (
-              select o.*, s.level, f.forest_type from observations o
-              left join fmus f on f.id = o.fmu_id
-              inner join severities s on s.id = o.severity_id
-              where o.created_at <= dates.date
+              select * from (
+                select row_number() over (partition by observation_id order by observation_updated_at desc), *
+                  from observation_histories
+                where observation_updated_at <= dates.date
+              ) as sq
+              where sq.row_number = 1
             ) as observations_by_date on 1=1
           #{filters.present? ? 'where ' + filters : ''}
           group by date, rollup(country_id)
