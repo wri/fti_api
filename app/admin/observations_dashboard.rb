@@ -189,7 +189,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
             from grouped
         ) as total_c
         where
-          (prev_total is null or prev_total != total_count or date = '#{date_to.to_s(:db)}}')
+          (prev_total is null or prev_total != total_count or date = '#{date_to.to_s(:db)}}' or date = '#{date_from.to_s(:db)}}')
           AND (#{country_id.nil? || country_id == 'null' ? '1=1' : 'country_id is not null'})
           AND (#{country_id == 'null' ? 'country_id is null' : '1=1'})
         order by date desc
