@@ -27,6 +27,12 @@ class SyncTasks
       task global_scores_alt: :environment do
         sync_global_scores_alt(Date.new(2021,5,1))
       end
+
+      task observation_report: :environment do
+        date = ObservationReport.order(created_at: :asc).first.created_at.to_date
+        sync_observation_reports(date)
+        # sync_observation_reports(1.year.ago.to_date)
+      end
     end
   end
 
@@ -114,6 +120,44 @@ class SyncTasks
           if to_update.count > 0
             puts "Updating scores for country: #{country_id} and #{day}, count: #{to_update.count}"
             OperatorDocumentStatistic.import! to_update, on_duplicate_key_update: { columns: %i[date updated_at] }
+          end
+        end
+      end
+    end
+  end
+
+  def sync_observation_reports(from_date)
+    ObservationReportStatistic.delete_all
+
+    first_day = from_date.to_date
+
+    (from_date..Date.today.to_date).each do |day|
+      countries = Country.active.pluck(:id).uniq + [nil]
+      countries.each do |country_id|
+        puts "Checking observation reports for country: #{country_id || 'all'} and #{day}"
+
+        reports = ObservationReport.bigger_date(day)
+        reports = reports.joins(:observations).where(observations: { country_id: country_id }) if country_id.present?
+        reports = reports.distinct
+
+        grouped = reports.joins(:observation_report_observers).group(:observer_id).count.merge(nil => reports.count).
+        grouped.each do |observer_id, count|
+          new_stat = ObservationReportStatistic.new(
+            date: day,
+            country_id: country_id,
+            observer_id: observer_id,
+            total_count: count
+          )
+
+          prev_stat = new_stat.previous_stat
+
+          if prev_stat.present? && prev_stat == new_stat && prev_stat.date != first_day
+            Rails.logger.info "Prev score the same, update date of prev score"
+            prev_stat.date = day
+            prev_stat.save!
+          else
+            Rails.logger.info "Adding score for country: #{country_id} and #{day}"
+            new_stat.save!
           end
         end
       end

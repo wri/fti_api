@@ -23,12 +23,12 @@ class ObservationReportStatistic < ApplicationRecord
         id,
         '#{date_obj.to_s(:db)}'::date as date,
         country_id,
-        observer_id
+        observer_id,
         total_count,
         created_at,
         updated_at
        from
-       (select row_number() over (partition by country_id, observer_id by date desc), *
+       (select row_number() over (partition by country_id, observer_id order by date desc), *
         from observation_report_statistics ors
         where date <= '#{date_obj.to_s(:db)}'
        ) as stats_by_date
@@ -48,6 +48,12 @@ class ObservationReportStatistic < ApplicationRecord
     return where(country_id: nil) if country_id == 'null'
 
     where(country_id: country_id)
+  end
+
+  def country_name
+    return country.name if country.present?
+
+    'All Countries'
   end
 
   def previous_stat

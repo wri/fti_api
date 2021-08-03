@@ -28,7 +28,7 @@ class Observer < ApplicationRecord
   has_paper_trail
   include Translatable
   translates :name, :organization, touch: true, versioning: :paper_trail
-  
+
 
   active_admin_translates :name do
     validates_presence_of :name
@@ -71,6 +71,7 @@ class Observer < ApplicationRecord
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
+  scope :with_at_least_one_report, -> { where(id: ObservationReportStatistic.select(:observer_id).distinct.pluck(:observer_id).compact) }
 
   default_scope { includes(:translations) }
 

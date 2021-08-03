@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210730114703) do
+ActiveRecord::Schema.define(version: 20210802170503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
+  enable_extension "postgis"
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
 
@@ -436,6 +436,19 @@ ActiveRecord::Schema.define(version: 20210730114703) do
     t.datetime "updated_at",            null: false
     t.index ["observation_report_id", "observer_id"], name: "index_obs_rep_id_and_observer_id", using: :btree
     t.index ["observer_id", "observation_report_id"], name: "index_observer_id_and_obs_rep_id", using: :btree
+  end
+
+  create_table "observation_report_statistics", force: :cascade do |t|
+    t.date     "date",                    null: false
+    t.integer  "country_id"
+    t.integer  "observer_id"
+    t.integer  "total_count", default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["country_id"], name: "index_observation_report_statistics_on_country_id", using: :btree
+    t.index ["date", "country_id", "observer_id"], name: "index_observation_report_statistics_on_filters", unique: true, using: :btree
+    t.index ["date"], name: "index_observation_report_statistics_on_date", using: :btree
+    t.index ["observer_id"], name: "index_observation_report_statistics_on_observer_id", using: :btree
   end
 
   create_table "observation_reports", force: :cascade do |t|
@@ -1053,6 +1066,8 @@ ActiveRecord::Schema.define(version: 20210730114703) do
   add_foreign_key "observation_operators", "operators"
   add_foreign_key "observation_report_observers", "observation_reports"
   add_foreign_key "observation_report_observers", "observers"
+  add_foreign_key "observation_report_statistics", "countries", on_delete: :cascade
+  add_foreign_key "observation_report_statistics", "observers", on_delete: :cascade
   add_foreign_key "observation_reports", "users"
   add_foreign_key "observations", "countries"
   add_foreign_key "observations", "fmus"

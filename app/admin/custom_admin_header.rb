@@ -22,6 +22,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
               li { link_to 'Producer Documents Dashboard', admin_producer_documents_dashboards_path }
               li { link_to 'Producer Documents Alternative Dashboard', admin_producer_documents_alternative_dashboards_path }
               li { link_to 'Global Observation Scores', admin_global_observation_scores_path }
+              li { link_to 'Observation Report Dashboard', admin_observation_report_dashboards_path }
             end
           end
         end
