@@ -16,6 +16,7 @@
 #  deleted_at             :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  observation_id         :integer
 #  fmu_id                 :integer
 #  category_id            :integer
 #  subcategory_id         :integer

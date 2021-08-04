@@ -17,8 +17,9 @@
 #  total_count       :integer          default("0")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  hidden            :boolean
+#  is_active         :boolean
 #
-# This model wont have any data in DB, sql query will provide data for active admin dashboard
 class ObservationStatistic < ApplicationRecord
   belongs_to :country, optional: true
   belongs_to :fmu, optional: true

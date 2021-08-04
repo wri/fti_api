@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210804092749) do
+ActiveRecord::Schema.define(version: 20210804145351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -471,6 +471,8 @@ ActiveRecord::Schema.define(version: 20210804092749) do
     t.integer  "total_count",       default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.boolean  "hidden"
+    t.boolean  "is_active"
     t.index ["category_id"], name: "index_observation_statistics_on_category_id", using: :btree
     t.index ["country_id"], name: "index_observation_statistics_on_country_id", using: :btree
     t.index ["date"], name: "index_observation_statistics_on_date", using: :btree
