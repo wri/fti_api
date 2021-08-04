@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Alternative Dashboard' do
+ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboard' do
   extend BackRedirectable
   back_redirect
 

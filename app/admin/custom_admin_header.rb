@@ -19,7 +19,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             text_node content_tag 'a', 'Dashboard'
             ul do
               li { link_to 'Start Page', admin_dashboard_path }
-              li { link_to 'Producer Documents Dashboard', admin_producer_documents_alternative_dashboards_path }
+              li { link_to 'Producer Documents Dashboard', admin_producer_documents_dashboards_path }
               li { link_to 'Observation Reports Dashboard', admin_observation_reports_dashboards_path }
               li { link_to 'Observations Dashboard', admin_observations_dashboards_path }
             end
