@@ -20,10 +20,6 @@ class SyncTasks
         RankingOperatorDocument.refresh
       end
 
-      task global_scores: :environment do
-        sync_global_scores(Date.new(2021,5,1))
-      end
-
       task global_scores_alt: :environment do
         sync_global_scores_alt(Date.new(2021,5,1))
       end
@@ -32,17 +28,6 @@ class SyncTasks
         date = ObservationReport.order(created_at: :asc).first.created_at.to_date
         sync_observation_reports(date)
         # sync_observation_reports(1.year.ago.to_date)
-      end
-    end
-  end
-
-  def sync_global_scores(from_date)
-    GlobalScore.delete_all
-
-    (from_date..Date.today.to_date).each do |day|
-      countries = Country.active.pluck(:id).uniq + [nil]
-      countries.each do |country_id|
-        GlobalScore.calculate(country_id, day)
       end
     end
   end

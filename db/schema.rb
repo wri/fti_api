@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210803154953) do
+ActiveRecord::Schema.define(version: 20210804084139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -279,22 +279,6 @@ ActiveRecord::Schema.define(version: 20210803154953) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["date"], name: "index_global_observation_scores_on_date", unique: true, using: :btree
-  end
-
-  create_table "global_scores", force: :cascade do |t|
-    t.datetime "date",             null: false
-    t.integer  "total_required"
-    t.jsonb    "general_status"
-    t.jsonb    "country_status"
-    t.jsonb    "fmu_status"
-    t.jsonb    "doc_group_status"
-    t.jsonb    "fmu_type_status"
-    t.integer  "country_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["country_id"], name: "index_global_scores_on_country_id", using: :btree
-    t.index ["date", "country_id"], name: "index_global_scores_on_date_and_country_id", unique: true, using: :btree
-    t.index ["date"], name: "index_global_scores_on_date", using: :btree
   end
 
   create_table "gov_documents", force: :cascade do |t|
@@ -1103,7 +1087,6 @@ ActiveRecord::Schema.define(version: 20210803154953) do
   add_foreign_key "comments", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade
   add_foreign_key "country_vpas", "countries", on_delete: :cascade
-  add_foreign_key "global_scores", "countries", on_delete: :nullify
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
   add_foreign_key "gov_documents", "users", on_delete: :cascade
