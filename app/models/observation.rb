@@ -190,7 +190,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
       observation_report.observations.map(&:observers).map(&:ids).flatten
   end
 
-  HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type evidence_type location_accuracy validation_status is_active hidden]
+  HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type evidence_type location_accuracy validation_status is_active hidden deleted_at]
 
   # Creates an ObservationHistory for the current Observation
   def create_history

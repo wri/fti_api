@@ -21,6 +21,8 @@
 #  is_active         :boolean
 #
 class ObservationStatistic < ApplicationRecord
+  # this record has table, but there should be no data, as it's used
+  # for active admin dashboard, kinda ugly workaround I know
   belongs_to :country, optional: true
   belongs_to :fmu, optional: true
   belongs_to :category, optional: true
@@ -107,7 +109,7 @@ class ObservationStatistic < ApplicationRecord
             ) as sq
             where sq.row_number = 1
           ) as observations_by_date on 1=1
-        #{filters.present? ? 'where ' + filters : ''}
+        where deleted_at is null #{filters.present? ? 'AND ' + filters : ''}
         group by date, rollup(country_id)
       )
       select

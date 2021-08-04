@@ -19,7 +19,7 @@ namespace :observations do
       total_obs = Observation.count
       index = 1
       puts "Total observations: #{total_obs}"
-      Observation.find_each do |observation|
+      Observation.unscoped.find_each do |observation|
         puts "Recreating history for observation #{index} with id: #{observation.id}"
         observation.versions.each do |version|
           o = version.reify
