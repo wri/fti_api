@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210804145351) do
+ActiveRecord::Schema.define(version: 20210804150811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -401,10 +401,14 @@ ActiveRecord::Schema.define(version: 20210804145351) do
     t.integer  "subcategory_id"
     t.integer  "country_id"
     t.integer  "operator_id"
+    t.boolean  "hidden"
+    t.boolean  "is_active"
     t.index ["category_id"], name: "index_observation_histories_on_category_id", using: :btree
     t.index ["country_id"], name: "index_observation_histories_on_country_id", using: :btree
     t.index ["fmu_forest_type"], name: "index_observation_histories_on_fmu_forest_type", using: :btree
     t.index ["fmu_id"], name: "index_observation_histories_on_fmu_id", using: :btree
+    t.index ["hidden"], name: "index_observation_histories_on_hidden", using: :btree
+    t.index ["is_active"], name: "index_observation_histories_on_is_active", using: :btree
     t.index ["observation_id"], name: "index_observation_histories_on_observation_id", using: :btree
     t.index ["operator_id"], name: "index_observation_histories_on_operator_id", using: :btree
     t.index ["severity_level"], name: "index_observation_histories_on_severity_level", using: :btree

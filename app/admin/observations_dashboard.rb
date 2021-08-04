@@ -19,6 +19,8 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
          collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :validation_status, as: :select, collection: ObservationStatistic.validation_statuses.sort
+  filter :hidden
+  filter :is_active
   filter :date
 
   index do
@@ -47,18 +49,10 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       end
     end
     column :severity_level, sortable: false do |r|
-      if r.severity_level.nil?
-        'All Levels'
-      else
-        r.severity_level
-      end
+      r.severity_level.presence || 'All Levels'
     end
     column :validation_status, sortable: false do |r|
-      if r.validation_status.nil?
-        'All Statuses'
-      else
-        r.validation_status
-      end
+      r.validation_status.presence || 'All Statuses'
     end
     column :category do |r|
       if r.category.nil?
@@ -73,6 +67,12 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       else
         link_to r.subcategory.name, admin_subcategory_path(r.subcategory)
       end
+    end
+    column :is_active do |r|
+      r.is_active.presence || 'Any'
+    end
+    column :hidden do |r|
+      r.hidden.presence || 'Any'
     end
     column :total_count, sortable: false
     show_on_chart = if params.dig(:q, :by_country).present?

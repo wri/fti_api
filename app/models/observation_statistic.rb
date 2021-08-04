@@ -63,6 +63,8 @@ class ObservationStatistic < ApplicationRecord
     validation_status = search[:validation_status_eq]
     severity_level = search[:severity_level_eq]
     forest_type = search[:fmu_forest_type_eq]
+    is_active = search[:is_active_eq]
+    hidden = search[:hidden_eq]
 
     validation_status_filter = validation_status.to_i === 789 ? '7,8,9' : validation_status
 
@@ -73,7 +75,9 @@ class ObservationStatistic < ApplicationRecord
       forest_type.nil? ? nil : "fmu_forest_type = #{forest_type}",
       severity_level.nil? ? nil : "severity_level = #{severity_level}",
       subcategory_id.nil? ? nil : "subcategory_id = #{subcategory_id}",
-      category_id.nil? ? nil : "category_id = #{category_id}"
+      category_id.nil? ? nil : "category_id = #{category_id}",
+      hidden.nil? ? nil : "hidden = #{hidden}",
+      is_active.nil? ? nil : "is_active = #{is_active}"
     ].compact.join(' AND ')
 
     sql = <<~SQL
@@ -112,6 +116,8 @@ class ObservationStatistic < ApplicationRecord
         #{subcategory_id.presence || 'null'} as subcategory_id,
         #{category_id.presence || 'null'} as category_id,
         #{forest_type.presence || 'null'} as fmu_forest_type,
+        #{is_actitve.presence || 'null'} as is_active,
+        #{hidden.presence || 'null'} as hidden,
         total_count
       from (
         select
