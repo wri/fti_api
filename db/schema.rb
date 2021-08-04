@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210804084139) do
+ActiveRecord::Schema.define(version: 20210804092749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,25 +260,6 @@ ActiveRecord::Schema.define(version: 20210804084139) do
     t.index ["country_id"], name: "index_fmus_on_country_id", using: :btree
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at", using: :btree
     t.index ["forest_type"], name: "index_fmus_on_forest_type", using: :btree
-  end
-
-  create_table "global_observation_scores", force: :cascade do |t|
-    t.date     "date",            null: false
-    t.integer  "obs_total"
-    t.integer  "rep_total"
-    t.jsonb    "rep_country"
-    t.jsonb    "rep_monitor"
-    t.jsonb    "obs_country"
-    t.jsonb    "obs_status"
-    t.jsonb    "obs_producer"
-    t.jsonb    "obs_severity"
-    t.jsonb    "obs_category"
-    t.jsonb    "obs_subcategory"
-    t.jsonb    "obs_fmu"
-    t.jsonb    "obs_forest_type"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["date"], name: "index_global_observation_scores_on_date", unique: true, using: :btree
   end
 
   create_table "gov_documents", force: :cascade do |t|
