@@ -12,11 +12,11 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
   filter :operator, label: 'Operator', as: :select, collection: Operator.where(id: Observation.pluck(:operator_id))
   filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :category,
-    label: 'Category', as: :select,
-    collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
+         label: 'Category', as: :select,
+         collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
   filter :subcategory,
-    label: 'Subcategory', as: :select,
-    collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
+         label: 'Subcategory', as: :select,
+         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
   filter :validation_status, as: :select, collection: Observation.validation_statuses.sort
   filter :date
