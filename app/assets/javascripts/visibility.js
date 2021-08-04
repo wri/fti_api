@@ -32,14 +32,18 @@ $(document).ready(function() {
   });
 
   if ($('.observation-attributes').length > 0) {
+    const saveToLocalStorage = $('.observation-attributes').data('saveToLocalStorage');
+
     $('.observation-attributes').children().each((_idx, elem) => {
       const id = elem.id.split('-')[1];
-      const storage = localStorage.getItem(id);
-      if (storage !== null) {
-        if(storage === "true") {
-          $('#' + id).prop("checked", true);
-        } else {
-          $('#' + id).prop("checked", false);
+      if (saveToLocalStorage) {
+        const storage = localStorage.getItem(id);
+        if (storage !== null) {
+          if(storage === "true") {
+            $('#' + id).prop("checked", true);
+          } else {
+            $('#' + id).prop("checked", false);
+          }
         }
       }
       const column = $(`.col-${id}`);

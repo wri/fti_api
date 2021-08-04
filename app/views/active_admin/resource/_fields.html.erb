@@ -1,4 +1,5 @@
-<div class="observation-attributes">
+<% save_to_localstorage ||= true %>
+<div class="observation-attributes" data-save-to-localstorage="<%= save_to_localstorage %>">
   <% unchecked ||= [] %>
   <% attributes.each do |column| %>
     <% column_id = column.gsub('_&_', '_') %>
