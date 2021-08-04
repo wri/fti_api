@@ -13,25 +13,27 @@ namespace :observations do
   end
 
   task recreate_history: :environment do
-    ObservationHistory.delete_all
+    ActiveRecord::Base.transaction do
+      ObservationHistory.delete_all
 
-    total_obs = Observation.count
-    index = 1
-    puts "Total observations: #{total_obs}"
-    Observation.find_each do |observation|
-      puts "Recreating history for observation #{index} with id: #{observation.id}"
-      observation.versions.each do |version|
-        o = version.reify
-        next if o.nil?
+      total_obs = Observation.count
+      index = 1
+      puts "Total observations: #{total_obs}"
+      Observation.find_each do |observation|
+        puts "Recreating history for observation #{index} with id: #{observation.id}"
+        observation.versions.each do |version|
+          o = version.reify
+          next if o.nil?
 
-        if o.operator_id.present? && Operator.unscoped.where(id: o.operator_id).count.zero?
-          puts "operator #{o.operator_id} does not exist, skipping"
-          next
+          if o.operator_id.present? && Operator.unscoped.where(id: o.operator_id).count.zero?
+            puts "operator #{o.operator_id} does not exist, skipping"
+            next
+          end
+
+          o.create_history
         end
-
-        o.create_history
+        index = index + 1
       end
-      index = index + 1
     end
   end
 end
