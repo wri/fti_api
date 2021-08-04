@@ -1,3 +1,5 @@
+<% options ||= { library: {tooltips:{intersect:false, mode: 'nearest'}} } %>
+
 <div>
-  <%= line_chart scores, library: {tooltips:{intersect:false, mode: 'x'}} %>
+  <%= line_chart scores, options %>
 </div>

@@ -18,7 +18,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
          label: 'Subcategory', as: :select,
          collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :validation_status, as: :select, collection: Observation.validation_statuses.sort
+  filter :validation_status, as: :select, collection: ObservationStatistic.validation_statuses.sort
   filter :date
 
   index do
@@ -32,28 +32,28 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
         link_to resource.country.name, admin_country_path(resource.country)
       end
     end
-    column :operator do |r|
+    column :operator, sortable: false do |r|
       if r.operator.nil?
         'All Operators'
       else
         link_to r.operator.name, admin_producer_path(r.operator)
       end
     end
-    column :fmu_forest_type do |r|
+    column :fmu_forest_type, sortable: false do |r|
       if r.fmu_forest_type.nil?
         'All Forest Types'
       else
         Fmu.forest_types.key(r.fmu_forest_type)
       end
     end
-    column :severity_level do |r|
+    column :severity_level, sortable: false do |r|
       if r.severity_level.nil?
         'All Levels'
       else
         r.severity_level
       end
     end
-    column :validation_status do |r|
+    column :validation_status, sortable: false do |r|
       if r.validation_status.nil?
         'All Statuses'
       else
