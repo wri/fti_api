@@ -82,11 +82,14 @@ class ObservationStatistic < ApplicationRecord
 
     sql = <<~SQL
       with dates as (
-        SELECT date_trunc('day', dd)::date as date
-        FROM generate_series
-            ( '#{date_from}'::timestamp
-            , '#{date_to}'::timestamp
-            , '1 day'::interval) dd
+        select distinct date from (
+          select '#{date_from}'::date
+          union
+          select distinct date(observation_updated_at + interval '1' day) from observation_histories
+          union
+          select '#{date_to}'::date
+        ) as important_dates
+        where date between '#{date_from}' and '#{date_to}'
       ),
       grouped as (
         select
