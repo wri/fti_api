@@ -41,14 +41,6 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
         { name: 'Reports', data: grouped_sod.map { |date, data| { date.to_date => data.map(&:total_count).max } }.reduce(&:merge) }
       ]
     }
-    # observers_attrs = returned_observers.map { |o| o.name.parameterize(separator: "_") }
-    # panel 'Visible columns' do
-    #   render partial: "fields", locals: {
-    #     attributes: observers_attrs,
-    #     unchecked: params.dig(:q, :observer_id_in).nil? ? observers_attrs : [],
-    #     save_to_localstorage: false
-    #   }
-    # end
   end
 
   csv do
@@ -72,6 +64,8 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
     helper_method :returned_observers
 
     def set_default_filters
+      return unless request.format.html?
+
       params[:q] ||= {}
       params[:q][:observer_id_null] = true if params.dig(:q, :observer_id_in).blank?
     end
