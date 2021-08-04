@@ -32,6 +32,7 @@ namespace :observations do
 
           o.create_history
         end
+        observation.create_history
         index = index + 1
       end
     end
