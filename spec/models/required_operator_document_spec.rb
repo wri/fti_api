@@ -27,7 +27,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
     expect(required_operator_document).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:required_operator_document), %i[explanation]
+  it_should_behave_like 'translatable', :required_operator_document, %i[explanation]
 
   describe 'Validations' do
     it { is_expected.to validate_numericality_of(:valid_period).is_greater_than(0) }

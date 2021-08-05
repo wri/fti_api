@@ -20,6 +20,6 @@ RSpec.describe Faq, type: :model do
     expect(faq).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:faq), %i[question answer]
+  it_should_behave_like 'translatable', :faq, %i[question answer]
 
 end

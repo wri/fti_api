@@ -26,7 +26,7 @@ RSpec.describe Species, type: :model do
     expect(species).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:species), %i[common_name]
+  it_should_behave_like 'translatable', :species, %i[common_name]
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:name) }

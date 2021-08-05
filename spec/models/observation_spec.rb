@@ -66,7 +66,7 @@ RSpec.describe Observation, type: :model do
   #it_should_behave_like 'activable', :observation, FactoryBot.build(:observation)
 
   it_should_behave_like 'translatable',
-    FactoryBot.create(:observation),
+    :observation,
     %i[details concern_opinion litigation_status]
 
 
@@ -77,7 +77,9 @@ RSpec.describe Observation, type: :model do
         let(:observation) { FactoryBot.build(:observation, validation_status: 'Created',
                                              user_type: :monitor, country: country)}
         it 'Can create an observation'do
-          observation.save
+          expect {
+            observation.save
+          }.to change { ObservationHistory.count }.by(1)
           expect(observation.persisted?).to be_truthy
         end
 

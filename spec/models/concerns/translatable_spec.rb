@@ -1,4 +1,6 @@
-RSpec.shared_examples 'translatable' do |model, fields|
+RSpec.shared_examples 'translatable' do |factory_key, fields|
+  let(:model) { create(factory_key) }
+
   fields.each do |field|
     context "##{field}" do
       it 'is a translatable field' do

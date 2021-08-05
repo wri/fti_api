@@ -23,5 +23,5 @@ RSpec.describe Contributor, type: :model do
     expect(contributor).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:contributor), %i[name description]
+  it_should_behave_like 'translatable', :contributor, %i[name description]
 end

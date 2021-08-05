@@ -20,7 +20,7 @@ RSpec.describe Government, type: :model do
     expect(government).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:government), %i[details]
+  it_should_behave_like 'translatable', :government, %i[details]
 
   describe 'Instance methods' do
     describe '#cache_key' do
