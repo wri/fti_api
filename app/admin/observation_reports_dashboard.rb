@@ -98,7 +98,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
         end
       )
         .group(:date, :country_id)
-        .order(date: :desc)
+        .order('date desc, country_id NULLS first')
         .includes(country: :translations)
         .page(params[:page])
         .per(10000)

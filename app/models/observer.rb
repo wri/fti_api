@@ -71,7 +71,7 @@ class Observer < ApplicationRecord
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
-  scope :with_at_least_one_report, -> { where(id: ObservationReportStatistic.select(:observer_id).distinct.pluck(:observer_id).compact) }
+  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observers).select('observers.id').distinct.pluck('observers.id')) }
 
   default_scope { includes(:translations) }
 
