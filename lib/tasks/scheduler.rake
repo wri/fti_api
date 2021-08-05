@@ -33,7 +33,7 @@ namespace :scheduler do
     Rails.logger.info "Going to generate document statistics at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
     time = Benchmark.ms {
       countries = Country.active.pluck(:id).uniq + [nil]
-      day = Date.today.to_date
+      day = Date.yesterday.to_date
       countries.each do |country_id|
         OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, true)
       end
@@ -48,7 +48,7 @@ namespace :scheduler do
     Rails.logger.info "Going to generate observation reports statistics at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
     time = Benchmark.ms {
       countries = Country.with_at_least_one_report.pluck(:id).uniq + [nil]
-      day = Date.today.to_date
+      day = Date.yesterday.to_date
       countries.each do |country_id|
         ObservationReportStatistic.generate_for_country_and_day(country_id, day, true)
       end
