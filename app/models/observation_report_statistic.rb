@@ -22,7 +22,7 @@ class ObservationReportStatistic < ApplicationRecord
   def self.from_date(date)
     date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
     from_date_sql = self.where("date > '#{date_obj.to_s(:db)}'").to_sql
-    first_rows_sql = self.at_date(date_obj).to_sql
+    first_rows_sql = self.at_date(dateb_obj).to_sql
 
     self.from("(#{from_date_sql} UNION #{first_rows_sql}) as observation_report_statistics")
   end
@@ -51,6 +51,37 @@ class ObservationReportStatistic < ApplicationRecord
     SQL
 
     ObservationReportStatistic.from(query)
+  end
+
+  def self.generate_for_country_and_day(country_id, day, delete_old = false)
+    ObservationReportStatistic.transaction do
+      ObservationReportStatistic.where(country_id: country_id, date: day).delete_all if delete_old
+
+      reports = ObservationReport.bigger_date(day)
+      reports = reports.joins(:observations).where(observations: { country_id: country_id }) if country_id.present?
+      reports = reports.distinct
+
+      grouped = reports.joins(:observation_report_observers).group(:observer_id).count.merge(nil => reports.count)
+      grouped.each do |observer_id, count|
+        new_stat = ObservationReportStatistic.new(
+          date: day,
+          country_id: country_id,
+          observer_id: observer_id,
+          total_count: count
+        )
+
+        prev_stat = new_stat.previous_stat
+
+        if prev_stat.present? && prev_stat == new_stat && prev_stat.date != first_day
+          Rails.logger.info "Prev score the same, update date of prev score"
+          prev_stat.date = day
+          prev_stat.save!
+        else
+          Rails.logger.info "Adding score for country: #{country_id} and #{day}"
+          new_stat.save!
+        end
+      end
+    end
   end
 
   def self.ransackable_scopes(auth_object = nil)
