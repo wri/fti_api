@@ -37,11 +37,16 @@ class SyncTasks
     first_day = from_date.to_date
     countries = Country.active.pluck(:id).uniq + [nil]
 
-    (from_date..Date.today.to_date).each do |day|
+    (from_date.to_date..Date.today.to_date).each do |day|
       countries.each do |country_id|
         puts "Checking score for country: #{country_id} and #{day}"
         OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, false)
       end
+    end
+    # after generating all we need to ensure we have stats for first point in time, regenerate for first day only
+    countries.each do |country_id|
+      puts "FIRST POINT: Checking score for country: #{country_id} and #{first_day}"
+      OperatorDocumentStatistic.generate_for_country_and_day(country_id, first_day, true)
     end
   end
 
@@ -49,13 +54,18 @@ class SyncTasks
     ObservationReportStatistic.delete_all
 
     first_day = from_date.to_date
-    countries = Country.active.pluck(:id).uniq + [nil]
+    countries = Country.with_at_least_one_report.pluck(:id).uniq + [nil]
 
     (from_date..Date.today.to_date).each do |day|
       countries.each do |country_id|
         puts "Checking observation reports for country: #{country_id || 'all'} and #{day}"
         ObservationReportStatistic.generate_for_country_and_day(country_id, day, false)
       end
+    end
+    # after generating all we need to ensure we have stats for first point in time, regenerate for first day only
+    countries.each do |country_id|
+      puts "FIRST POINT: Checking observation reports for country: #{country_id || 'all'} and #{first_day}"
+      ObservationReportStatistic.generate_for_country_and_day(country_id, first_day, true)
     end
   end
 

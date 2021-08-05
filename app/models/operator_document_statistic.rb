@@ -113,7 +113,7 @@ class OperatorDocumentStatistic < ApplicationRecord
             )
 
             prev_stat = new_stat.previous_stat
-            if prev_stat.present? && prev_stat == new_stat && prev_stat.date != first_day
+            if prev_stat.present? && prev_stat == new_stat
               Rails.logger.info "Prev score the same, update date of prev score"
               prev_stat.date = day
               prev_stat.updated_at = DateTime.current
