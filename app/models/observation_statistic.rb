@@ -121,8 +121,8 @@ class ObservationStatistic < ApplicationRecord
         #{subcategory_id.presence || 'null'} as subcategory_id,
         #{category_id.presence || 'null'} as category_id,
         #{forest_type.presence || 'null'} as fmu_forest_type,
-        #{is_active.presence || 'null'} as is_active,
-        #{hidden.presence || 'null'} as hidden,
+        #{is_active.nil? ? 'null' : is_active} as is_active,
+        #{hidden.nil? ? 'null' : hidden} as hidden,
         total_count
       from (
         select

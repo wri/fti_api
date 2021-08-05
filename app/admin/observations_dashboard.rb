@@ -69,10 +69,10 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       end
     end
     column :is_active do |r|
-      r.is_active.presence || 'Any'
+      r.is_active.nil? ? 'Any' : r.is_active
     end
     column :hidden do |r|
-      r.hidden.presence || 'Any'
+      r.hidden.nil? ? 'Any' : r.hidden
     end
     column :total_count, sortable: false
     show_on_chart = if params.dig(:q, :by_country).present?
