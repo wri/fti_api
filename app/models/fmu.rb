@@ -202,23 +202,18 @@ class Fmu < ApplicationRecord
     query =
       <<~SQL
         WITH g as (
-        SELECT *, ST_GeomFromGeoJSON(x.geometry) as the_geom
+        SELECT *, x.properties as prop, ST_GeomFromGeoJSON(x.geometry) as the_geom
         FROM fmus CROSS JOIN LATERAL
-        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb)
+        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb, properties jsonb )
         )
         update fmus
-        set geometry = g.the_geom
+        set geometry = g.the_geom , properties = g.prop
         from g
-        where fmus.id = :fmu_id;
+        where fmus.id = g.id;
       SQL
-    Fmu.execute_sql(query, self.id)
-  end
 
-  def self.execute_sql(sql_command, fmu_id)     
-    ActiveRecord::Base.connection.update(sanitize_sql_for_assignment([sql_command, fmu_id: fmu_id]))
+    ActiveRecord::Base.connection.execute query
   end
-
-  
 
   def cache_key
     super + '-' + Globalize.locale.to_s
