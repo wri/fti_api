@@ -6,6 +6,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
 
   config.sort_order = 'date_desc'
   config.paginate = false
+  config.per_page = 10000
 
   menu false
 
