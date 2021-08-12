@@ -82,7 +82,6 @@ namespace :fix_one_time do
 
         filename_in_storage = report_filename_hash[report.id]
         next if filename_in_storage.nil?
-        # filepath_in_storage = "/uploads/observation_report/attachment/#{report.id}/#{filename_in_storage}"
         next if filename_in_storage == report.read_attribute(:attachment)
 
         puts "WRONG attachment name for report #{report.id}: is: #{report.read_attribute(:attachment)}, should be: #{filename_in_storage}"
