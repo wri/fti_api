@@ -2,6 +2,9 @@ namespace :fix_one_time do
   desc 'Fix translation duplications 08.2021'
   task translation_duplicates: :environment do
     for_real = ENV['FOR_REAL'] == 'true'
+
+    puts "RUNNING FOR REAL" if for_real
+    puts "DRY RUN" unless for_real
     # this is one time script to fix translation duplications
     # First time I ran the scripts that removed only duplicates that had same values
     # using that kind of script
