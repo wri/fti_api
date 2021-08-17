@@ -62,6 +62,8 @@ class Observation < ApplicationRecord
   enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
                             "Accurate GPS coordinates" => 2 }
 
+  validate_enum_attributes :observation_type, :evidence_type, :location_accuracy
+
   STATUS_TRANSITIONS={
       monitor: {
           nil => ['Created', 'Ready for QC'],
