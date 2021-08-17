@@ -1,5 +1,23 @@
 require 'benchmark'
 namespace :translations do
+  desc 'Will remove duplicated translations'
+  task find_duplicates: :environment do
+    translation_tables = ActiveRecord::Base.connection.tables.select { |table_name| table_name.ends_with?('_translations') }
+
+    translation_tables.each do |translation_table|
+      model_table = translation_table.gsub('_translations', '')
+      model_id = model_table.singularize + '_id'
+      query = <<~SQL
+        SELECT DISTINCT #{model_id}
+        FROM #{translation_table}
+        group by #{model_id}, locale
+        having count(*) > 1
+        order by #{model_id}
+      SQL
+
+      puts ActiveRecord::Base.connection.execute(query).to_a
+    end
+  end
 
   desc 'Translates all fields to chinese'
   task chinese: :environment do
