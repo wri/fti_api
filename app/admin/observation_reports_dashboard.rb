@@ -9,7 +9,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
   actions :index
 
   filter :by_country, label: 'Country', as: :select, collection: [['All Countries', 'null']] + Country.with_at_least_one_report.order(:name).map { |c| [c.name, c.id] }
-  filter :observer, label: 'Monitor', as: :select, multiple: true, collection: Observer.with_at_least_one_report.order(:name)
+  filter :observer, label: 'Monitor', as: :select, multiple: true, collection: Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name)
   filter :date
 
   index do

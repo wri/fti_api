@@ -56,7 +56,9 @@ class SyncTasks
     first_day = from_date.to_date
     countries = Country.with_at_least_one_report.pluck(:id).uniq + [nil]
 
-    (from_date..Date.today.to_date).each do |day|
+    important_dates = ObservationReport.pluck(:created_at).sort.map(&:to_date).uniq
+
+    [from_date, *important_dates, Date.today.to_date].uniq.each do |day|
       countries.each do |country_id|
         puts "Checking observation reports for country: #{country_id || 'all'} and #{day}"
         ObservationReportStatistic.generate_for_country_and_day(country_id, day, false)

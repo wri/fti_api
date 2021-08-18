@@ -57,11 +57,23 @@ class ObservationReportStatistic < ApplicationRecord
     ObservationReportStatistic.transaction do
       ObservationReportStatistic.where(country_id: country_id, date: day).delete_all if delete_old
 
-      reports = ObservationReport.bigger_date(day)
-      reports = reports.joins(:observations).where(observations: { country_id: country_id }) if country_id.present?
-      reports = reports.distinct
+      observations_with_active_observers = Observation.joins(:observers).where(observers: { is_active: true }).pluck(:observation_id).uniq
+      observations_with_inactive_observers = Observation.joins(:observers).where(observers: { is_active: false }).pluck(:observation_id).uniq
+      exclude_observations = observations_with_inactive_observers - observations_with_active_observers
 
-      grouped = reports.joins(:observation_report_observers).group(:observer_id).count.merge(nil => reports.count)
+      reports = ObservationReport.bigger_date(day)
+      reports = reports.joins(
+        "LEFT OUTER JOIN observations ON observations.observation_report_id = observation_reports.id AND observations.id NOT IN (#{exclude_observations.join(', ')})"
+      )
+      reports = reports.left_joins(:observers).where(observers: { is_active: [nil, true] })
+
+      reports = reports.where(observations: { country_id: country_id }) if country_id.present?
+
+      grouped = reports
+        .group(:observer_id)
+        .count
+        .merge(nil => reports.distinct.count) # add total reports count
+
       grouped.each do |observer_id, count|
         new_stat = ObservationReportStatistic.new(
           date: day,
