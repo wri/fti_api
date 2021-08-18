@@ -12,8 +12,8 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
 
   actions :index
 
-  filter :by_country, label: 'Country', as: :select, collection: [['All Countries', 'null']] + Country.active.order(:name).map { |c| [c.name, c.id] }
-  filter :required_operator_document_group, as: :select, collection: RequiredOperatorDocumentGroup.without_publication_authorization.order(:name)
+  filter :by_country, label: 'Country', as: :select, collection: -> { [['All Countries', 'null']] + Country.active.order(:name).map { |c| [c.name, c.id] } }
+  filter :required_operator_document_group, as: :select, collection: -> { RequiredOperatorDocumentGroup.without_publication_authorization.order(:name) }
   filter :document_type_eq, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
   filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :date

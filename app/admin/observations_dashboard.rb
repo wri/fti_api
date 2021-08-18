@@ -8,8 +8,8 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
 
   actions :index
 
-  filter :by_country, label: 'Country', as: :select, collection: [['All Countries', 'null']] + Country.where(id: Observation.pluck(:country_id)).order(:name).map { |c| [c.name, c.id] }
-  filter :operator, label: 'Operator', as: :select, collection: Operator.where(id: Observation.pluck(:operator_id)).order(:name)
+  filter :by_country, label: 'Country', as: :select, collection: -> { [['All Countries', 'null']] + Country.where(id: Observation.pluck(:country_id)).order(:name).map { |c| [c.name, c.id] } }
+  filter :operator, label: 'Operator', as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
   filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :category,
          label: 'Category', as: :select,
