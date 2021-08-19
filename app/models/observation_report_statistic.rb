@@ -68,11 +68,12 @@ class ObservationReportStatistic < ApplicationRecord
       reports = reports.left_joins(:observers).where(observers: { is_active: [nil, true] })
 
       reports = reports.where(observations: { country_id: country_id }) if country_id.present?
+      reports = reports.distinct
 
       grouped = reports
         .group(:observer_id)
         .count
-        .merge(nil => reports.distinct.count) # add total reports count
+        .merge(nil => reports.count) # add total reports count
 
       grouped.each do |observer_id, count|
         new_stat = ObservationReportStatistic.new(
