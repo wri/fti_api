@@ -18,7 +18,6 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
          label: 'Subcategory', as: :select,
          collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :validation_status, as: :select, collection: ObservationStatistic.validation_statuses.sort
   filter :hidden
   filter :is_active
   filter :date
@@ -51,9 +50,6 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     column :severity_level, sortable: false do |r|
       r.severity_level.presence || 'All Levels'
     end
-    column :validation_status, sortable: false do |r|
-      r.validation_status.presence || 'All Statuses'
-    end
     column :category do |r|
       if r.category.nil?
         'All Categories'
@@ -74,6 +70,17 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     column :hidden do |r|
       r.hidden.nil? ? 'Any' : r.hidden
     end
+    column :created
+    column :ready_for_qc
+    column :qc_in_progress
+    column :approved
+    column :rejected
+    column :needs_revision
+    column :ready_for_publication
+    column :published_no_comments
+    column :published_not_modified
+    column :published_modified
+    column :published_all
     column :total_count, sortable: false
     show_on_chart = if params.dig(:q, :by_country).present?
                       collection
@@ -81,12 +88,38 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
                       collection.select { |r| r.country_id.nil? }
                     end
     grouped_sod = show_on_chart.group_by(&:date)
-
+    hidden = { dataset: { hidden: true } }
+    get_data = ->(&block) { grouped_sod.map { |date, data| { date.to_date => data.map(&block).max } }.reduce(&:merge)  }
     render partial: 'score_evolution', locals: {
       scores: [
-        { name: 'Observations', data: grouped_sod.map { |date, data| { date.to_date => data.map(&:total_count).max } }.reduce(&:merge) }
+        { name: 'Created', **hidden, data: get_data.call(&:created) },
+        { name: 'Ready for QC', **hidden, data: get_data.call(&:ready_for_qc) },
+        { name: 'QC in Progress', **hidden, data: get_data.call(&:qc_in_progress) },
+        { name: 'Approved', **hidden, data: get_data.call(&:approved) },
+        { name: 'Rejected', **hidden, data: get_data.call(&:rejected) },
+        { name: 'Needs Revision', **hidden, data: get_data.call(&:needs_revision) },
+        { name: 'Ready for publication', **hidden, data: get_data.call(&:ready_for_publication) },
+        { name: 'Published no comments', **hidden, data: get_data.call(&:published_no_comments) },
+        { name: 'Published not modified', **hidden, data: get_data.call(&:published_not_modified) },
+        { name: 'Published modified', **hidden, data: get_data.call(&:published_modified) },
+        { name: 'Published all', **hidden, data: get_data.call(&:published_all) },
       ]
     }
+
+    panel 'Visible columns' do
+      render partial: "fields", locals: {
+        attributes: %w[
+                       date country is_active is_hidden operator severity_level category subcategory fmu_forest_type
+                       created ready_for_qc qc_in_progress approved
+                       rejected needs_revision ready_for_publication published_no_comments published_modified
+                       published_not_modified published_all total_count
+                      ],
+        unchecked: %w[
+                      operator severity_level category subcategory fmu_forest_type ready_for_qc approved rejected needs_revision ready_for_publication
+                      published_no_comments published_modified published_not_modified total_count
+                     ]
+      }
+    end
   end
 
   csv do
@@ -130,6 +163,17 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       end
     end
     column :severity_level
+    column :created
+    column :ready_for_qc
+    column :qc_in_progress
+    column :approved
+    column :rejected
+    column :needs_revision
+    column :ready_for_publication
+    column :published_no_comments
+    column :published_not_modified
+    column :published_modified
+    column :published_all
     column :total_count
   end
 

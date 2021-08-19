@@ -97,7 +97,8 @@ class ObservationStatistic < ApplicationRecord
         select
           date,
           country_id,
-          count(*) as total_count
+          validation_status,
+          count(*)::integer as total_count
         from
         dates
         left join lateral
@@ -110,20 +111,31 @@ class ObservationStatistic < ApplicationRecord
             where sq.row_number = 1
           ) as observations_by_date on 1=1
         where deleted_at is null #{filters.present? ? 'AND ' + filters : ''}
-        group by date, rollup(country_id)
+        group by date, validation_status, rollup(country_id)
       )
       select
         date,
         country_id,
         #{operator_id.presence || 'null'} as operator_id,
-        #{validation_status.presence || 'null'} as validation_status,
+        sum(total_count) filter (where validation_status = 0) as created,
+        sum(total_count) filter (where validation_status = 1) as ready_for_qc,
+        sum(total_count) filter (where validation_status = 2) as qc_in_progress,
+        sum(total_count) filter (where validation_status = 3) as approved,
+        sum(total_count) filter (where validation_status = 4) as rejected,
+        sum(total_count) filter (where validation_status = 5) as needs_revision,
+        sum(total_count) filter (where validation_status = 6) as ready_for_publication,
+        sum(total_count) filter (where validation_status = 7) as published_no_comments,
+        sum(total_count) filter (where validation_status = 8) as published_not_modified,
+        sum(total_count) filter (where validation_status = 9) as published_modified,
+        sum(total_count) filter (where validation_status IN (7,8, 9)) as published_all,
+        sum(total_count) as total_count,
+        null as validation_status,
         #{severity_level.presence || 'null'} as severity_level,
         #{subcategory_id.presence || 'null'} as subcategory_id,
         #{category_id.presence || 'null'} as category_id,
         #{forest_type.presence || 'null'} as fmu_forest_type,
         #{is_active.nil? ? 'null' : is_active} as is_active,
-        #{hidden.nil? ? 'null' : hidden} as hidden,
-        total_count
+        #{hidden.nil? ? 'null' : hidden} as hidden
       from (
         select
           *,
@@ -137,6 +149,7 @@ class ObservationStatistic < ApplicationRecord
         (prev_total is null or prev_total != total_count or date = '#{date_to}' or date = '#{date_from}')
         AND (#{country_id.nil? || country_id == 'null' ? '1=1' : 'country_id is not null'})
         AND (#{country_id == 'null' ? 'country_id is null' : '1=1'})
+      group by date, country_id
       order by date desc, country_id asc nulls first
     SQL
 

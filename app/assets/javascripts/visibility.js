@@ -2,7 +2,7 @@ $(document).ready(function() {
   function updateChart(elemId, checked) {
     const chart = Chartkick.charts['chart-1'].chart;
     const dataset = chart.data.datasets.find(
-      x => x.label.replace('&', '').replace(/\s/g, '').toLowerCase() === elemId.replace('_', '')
+      x => x.label.replaceAll('&', '').replace(/\s/g, '').toLowerCase() === elemId.replaceAll('_', '')
     );
     if (dataset) {
       dataset.hidden = !checked;
@@ -14,7 +14,8 @@ $(document).ready(function() {
     const chart = Chartkick.charts['chart-1'].chart;
     const oldOnClick = chart.options.legend.onClick;
     const newLegendClickHandler = function (e, legendItem) {
-      const id = legendItem.text.replace(' & ', ' ').replace(' ', '_').toLowerCase();
+      const id = legendItem.text.replaceAll(' & ', ' ').replaceAll(' ', '_').toLowerCase();
+      console.log('lookinf for id', id)
       const column = $(`.col-${id}`);
       $('#' + id).prop('checked', legendItem.hidden);
       column.toggleClass('hide', !legendItem.hidden);
