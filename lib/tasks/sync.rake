@@ -37,7 +37,14 @@ class SyncTasks
     first_day = from_date.to_date
     countries = Country.active.pluck(:id).uniq + [nil]
 
-    (from_date.to_date..Date.today.to_date).each do |day|
+    important_dates = OperatorDocumentHistory
+      .where('operator_document_updated_at > ?', first_day)
+      .select('DATE(operator_document_updated_at')
+      .distinct
+      .pluck('DATE(operator_document_updated_at)')
+      .sort
+
+    [from_date, *important_dates, Date.today.to_date].uniq.each do |day|
       countries.each do |country_id|
         puts "Checking score for country: #{country_id} and #{day}"
         OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, false)
