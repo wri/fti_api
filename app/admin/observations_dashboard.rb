@@ -109,7 +109,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     panel 'Visible columns' do
       render partial: "fields", locals: {
         attributes: %w[
-                       date country is_active is_hidden operator severity_level category subcategory fmu_forest_type
+                       date country is_active hidden operator severity_level category subcategory fmu_forest_type
                        created ready_for_qc qc_in_progress approved
                        rejected needs_revision ready_for_publication published_no_comments published_modified
                        published_not_modified published_all total_count
