@@ -116,7 +116,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
                       ],
         unchecked: %w[
                       operator severity_level category subcategory fmu_forest_type ready_for_qc approved rejected needs_revision ready_for_publication
-                      published_no_comments published_modified published_not_modified total_count
+                      published_no_comments published_modified published_not_modified total_count created qc_in_progress
                      ]
       }
     end
@@ -181,10 +181,17 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     skip_before_action :restore_search_filters
     skip_after_action :save_search_filters
     before_action :set_default_filters
+    before_action :set_paging
 
     def set_default_filters
       params[:q] ||= {}
       params[:q][:date_gteq] = 1.year.ago if params.dig(:q, :date_gteq).blank?
+    end
+
+    # config.per_page didn't work, but this does probably related to use of paginate_array? dunno
+    def set_paging
+      @page = params[:page]
+      @per_page = 500
     end
 
     def find_collection(options = {})
@@ -192,7 +199,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       # keep the ransack to maintain filters in active admin
       @search = ObservationStatistic.search(params[:q] || {})
       # collection must be paged otherwise aa is complaining
-      Kaminari.paginate_array(collection).page(1).per(10000)
+      Kaminari.paginate_array(collection).page(@page).per(@per_page)
     end
   end
 end
