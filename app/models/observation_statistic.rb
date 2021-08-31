@@ -42,6 +42,7 @@ class ObservationStatistic < ApplicationRecord
     "Published (modified)" => 9,
     "Published (all)" => 789 # extra state for looking for all published
   }
+  enum observation_type: { "operator" => 0, "government" => 1 }
 
   validates_presence_of :date
 
@@ -65,6 +66,7 @@ class ObservationStatistic < ApplicationRecord
     validation_status = search[:validation_status_eq]
     severity_level = search[:severity_level_eq]
     forest_type = search[:fmu_forest_type_eq]
+    observation_type = search[:observation_type_eq]
     is_active = search[:is_active_eq]
     hidden = search[:hidden_eq]
 
@@ -73,6 +75,7 @@ class ObservationStatistic < ApplicationRecord
     filters = [
       country_id.nil? || country_id == 'null' ? 'country_id is not null' : "country_id = #{country_id}",
       operator_id.nil? ? nil : "operator_id = #{operator_id}",
+      observation_type.nil? ? nil : "observation_type = #{observation_type}",
       validation_status.nil? ? nil : "validation_status IN (#{validation_status_filter})",
       forest_type.nil? ? nil : "fmu_forest_type = #{forest_type}",
       severity_level.nil? ? nil : "severity_level = #{severity_level}",
@@ -133,6 +136,7 @@ class ObservationStatistic < ApplicationRecord
         #{severity_level.presence || 'null'} as severity_level,
         #{subcategory_id.presence || 'null'} as subcategory_id,
         #{category_id.presence || 'null'} as category_id,
+        #{observation_type.presence || 'null'} as observation_type,
         #{forest_type.presence || 'null'} as fmu_forest_type,
         #{is_active.nil? ? 'null' : is_active} as is_active,
         #{hidden.nil? ? 'null' : hidden} as hidden

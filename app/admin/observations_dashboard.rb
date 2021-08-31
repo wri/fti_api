@@ -9,8 +9,9 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
   actions :index
 
   filter :by_country, label: 'Country', as: :select, collection: -> { [['All Countries', 'null']] + Country.where(id: Observation.pluck(:country_id)).order(:name).map { |c| [c.name, c.id] } }
+  filter :observation_type, as: :select, collection: ObservationStatistic.observation_types.sort
   filter :operator, label: 'Operator', as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
-  filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  filter :fmu_forest_type, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :category,
          label: 'Category', as: :select,
          collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
@@ -32,6 +33,9 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       else
         link_to resource.country.name, admin_country_path(resource.country)
       end
+    end
+    column :observation_type, sortable: false do |r|
+      r.observation_type.presence || 'All Types'
     end
     column :operator, sortable: false do |r|
       if r.operator.nil?
@@ -109,13 +113,13 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     panel 'Visible columns' do
       render partial: "fields", locals: {
         attributes: %w[
-                       date country is_active hidden operator severity_level category subcategory fmu_forest_type
+                       date country is_active hidden observation_type operator severity_level category subcategory fmu_forest_type
                        created ready_for_qc qc_in_progress approved
                        rejected needs_revision ready_for_publication published_no_comments published_modified
                        published_not_modified published_all total_count
                       ],
         unchecked: %w[
-                      operator severity_level category subcategory fmu_forest_type ready_for_qc approved rejected needs_revision ready_for_publication
+                      operator severity_level observation_type category subcategory fmu_forest_type ready_for_qc approved rejected needs_revision ready_for_publication
                       published_no_comments published_modified published_not_modified total_count created qc_in_progress
                      ]
       }
@@ -132,6 +136,13 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
         'All Operators'
       else
         r.operator.name
+      end
+    end
+    column :observation_type do |r|
+      if r.observation_type.nil?
+        'All Types'
+      else
+        r.observation_type
       end
     end
     column :fmu_forest_type do |r|
