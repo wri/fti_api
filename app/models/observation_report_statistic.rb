@@ -22,7 +22,7 @@ class ObservationReportStatistic < ApplicationRecord
   def self.from_date(date)
     date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
     from_date_sql = self.where("date > '#{date_obj.to_s(:db)}'").to_sql
-    first_rows_sql = self.at_date(dateb_obj).to_sql
+    first_rows_sql = self.at_date(date_obj).to_sql
 
     self.from("(#{from_date_sql} UNION #{first_rows_sql}) as observation_report_statistics")
   end
