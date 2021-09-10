@@ -15,7 +15,7 @@ require 'rails_helper'
 RSpec.describe Severity, type: :model do
   subject(:severity) { FactoryBot.build(:severity) }
 
-  it_should_behave_like 'translatable', FactoryBot.create(:severity), %i[details]
+  it_should_behave_like 'translatable', :severity, %i[details]
 
   it 'is valid with valid attributes' do
     expect(severity).to be_valid

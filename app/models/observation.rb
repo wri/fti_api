@@ -144,6 +144,7 @@ class Observation < ApplicationRecord
   after_save     :remove_documents
   after_save     :update_fmu_geojson
   after_destroy  :update_fmu_geojson
+  after_save     :create_history, if: :changed?
 
   after_save       :prepare_notifications
   after_commit     :notify
@@ -192,6 +193,21 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
       observation_report.observations.map(&:observers).map(&:ids).flatten
   end
 
+  HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type evidence_type location_accuracy validation_status is_active hidden deleted_at]
+
+  # Creates an ObservationHistory for the current Observation
+  def create_history
+    mapping = self.attributes.slice(*HISTORICAL_ATTRIBUTES)
+    mapping['observation_id'] = id
+    mapping['category_id'] = subcategory&.category_id
+    mapping['severity_level'] = severity&.level
+    mapping['fmu_forest_type'] = fmu&.forest_type
+    # we will copy object timestamps and keep using Rails timestamps
+    # as how they normally are used, to know when history was created
+    mapping['observation_updated_at'] = updated_at
+    mapping['observation_created_at'] = created_at
+    ObservationHistory.create! mapping
+  end
 
   private
 

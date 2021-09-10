@@ -25,7 +25,7 @@ RSpec.describe Country, type: :model do
     expect(country).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:country), %i[name region_name]
+  it_should_behave_like 'translatable', :country, %i[name region_name]
 
   context 'Hooks' do
     describe '#set_active' do

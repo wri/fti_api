@@ -20,7 +20,7 @@
 class Country < ApplicationRecord
   include Translatable
   translates :name, :region_name, touch: true
-  
+
   active_admin_translates :name, :region_name do
     validates_presence_of :name
   end
@@ -61,6 +61,7 @@ class Country < ApplicationRecord
   scope :with_active_observations, (-> {
     joins(:observations).merge(Observation.active).where.not(observations: { id: nil }).uniq
   })
+  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select('observations.country_id').distinct.pluck('observations.country_id')) }
 
   scope :by_status, (->(status) { where(is_active: status) })
 
