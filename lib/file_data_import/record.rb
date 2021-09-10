@@ -44,7 +44,9 @@ module FileDataImport
           @belongs_to_associations.each_with_object({}) do |belongs_to_association, attributes|
             belongs_to_association.use_shared_belongs_to.each do |attribute|
               use_belongs_to = @belongs_to_associations.find { |b| b.singular_name == attribute }
-              belongs_to_association.record.send("#{attribute}=", use_belongs_to.record) if use_belongs_to.present?
+              if belongs_to_association.record.present? && use_belongs_to.present?
+                belongs_to_association.record.send("#{attribute}=", use_belongs_to.record)
+              end
             end
             belongs_to_association.save
             singular_name = belongs_to_association.singular_name

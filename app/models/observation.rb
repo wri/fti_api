@@ -133,6 +133,7 @@ class Observation < ApplicationRecord
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
+  before_create  :set_default_observer
   before_create  :set_responsible_admin
   before_save    :set_active_status
   before_save    :check_is_physical_place
@@ -219,6 +220,16 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
           self.hidden != true
     )
     nil
+  end
+
+  # If user is set for observation and user has observer account
+  # then it becomes default observer if not set
+  def set_default_observer
+    return if observers.present?
+    return if user.nil?
+    return if user.observer.nil?
+
+    observers << user.observer
   end
 
   # Sets the responsible admin for an observation
