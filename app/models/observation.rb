@@ -222,8 +222,8 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def set_centroid
     return if fmu.blank? || lat.present? || lng.present?
 
-    self.lat = fmu.geojson.dig('properties', 'centroid', 'coordinates').first rescue nil
-    self.lng = fmu.geojson.dig('properties', 'centroid', 'coordinates').second rescue nil
+    self.lng = fmu.geojson.dig('properties', 'centroid', 'coordinates').first rescue nil
+    self.lat = fmu.geojson.dig('properties', 'centroid', 'coordinates').second rescue nil
   end
 
   def update_operator_scores
