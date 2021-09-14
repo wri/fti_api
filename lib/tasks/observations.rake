@@ -37,4 +37,15 @@ namespace :observations do
       end
     end
   end
+
+  desc 'Task that will rename existing evidence document files'
+  task rename_evidence_files: :environment do
+    ObservationDocument.find_each do |od|
+      next unless od.attachment?
+
+      od.attachment.recreate_versions!
+      od.save!
+      puts "Evidence document #{od.id} new filename #{od.attachment.filename}"
+    end
+  end
 end

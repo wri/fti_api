@@ -15,6 +15,22 @@ class ObservationDocumentUploader < CarrierWave::Uploader::Base
     file.present?
   end
 
+  def filename
+    return super if model.observation.nil?
+    return if super.blank?
+
+    filename = if model.name.present?
+                 model.name[0...100]&.parameterize
+               else
+                 [
+                   model.id,
+                   (model.observation.evidence_type || 'other').parameterize
+                 ].join('-')
+               end
+
+    filename + File.extname(super)
+  end
+
   def original_filename
     if file.present?
       file.filename
