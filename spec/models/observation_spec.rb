@@ -158,8 +158,8 @@ RSpec.describe Observation, type: :model do
             create(:fmu_geojson)
           observation = create(:observation, fmu: fmu, lat: nil, lng: nil)
 
-          expect(observation.lat).to eql(16.8545606240722)
-          expect(observation.lng).to eql(-3.33605202951116)
+          expect(observation.lng).to eql(16.8545606240722)
+          expect(observation.lat).to eql(-3.33605202951116)
         end
       end
     end
