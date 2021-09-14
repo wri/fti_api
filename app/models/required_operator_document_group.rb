@@ -21,4 +21,6 @@ class RequiredOperatorDocumentGroup < ApplicationRecord
   has_many :required_operator_documents, dependent: :destroy
   has_many :required_operator_document_countries
   has_many :required_operator_document_fmus
+
+  scope :without_publication_authorization, -> { where.not(id: RequiredOperatorDocumentGroup.with_translations('en').where(name: "Publication Authorization")) }
 end

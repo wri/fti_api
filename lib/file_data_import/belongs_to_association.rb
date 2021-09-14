@@ -35,7 +35,7 @@ module FileDataImport
 
         if record.present?
           record
-        elsif abilities.include?(:create)
+        elsif abilities.include?(:create) && attributes_for_creation.present?
           class_name.new(attributes_for_creation)
         end
       end

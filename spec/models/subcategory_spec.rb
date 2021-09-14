@@ -21,7 +21,7 @@ RSpec.describe Subcategory, type: :model do
     expect(subcategory).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:subcategory), %i[name details]
+  it_should_behave_like 'translatable', :subcategory, %i[name details]
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of(:category) }

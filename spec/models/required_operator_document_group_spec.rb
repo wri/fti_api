@@ -19,5 +19,5 @@ RSpec.describe RequiredOperatorDocumentGroup, type: :model do
     expect(required_operator_document_group).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:required_operator_document_group), %i[name]
+  it_should_behave_like 'translatable', :required_operator_document_group, %i[name]
 end

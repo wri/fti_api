@@ -31,7 +31,7 @@ RSpec.describe Observer, type: :model do
     expect(observer).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:observer), %i[name organization]
+  it_should_behave_like 'translatable', :observer, %i[name organization]
 
   describe 'Instance methods' do
     describe '#cache_key' do
