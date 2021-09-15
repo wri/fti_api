@@ -18,10 +18,25 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
-    redirect_to collection_path, notice: 'Operator activated'
+    redirect_to :back, notice: 'Producer activated'
+  end
+
+  member_action :deactivate, method: :put do
+    resource.update(is_active: false)
+    redirect_to :back, notice: 'Producer deactivated'
   end
 
   config.clear_action_items!
+
+  action_item only: [:show] do
+    if operator.is_active
+      link_to 'Deactivate', deactivate_admin_producer_path(operator),
+              method: :put, data: { confirm: "Are you sure you want to DEACTIVATE the producer #{operator.name}?" }
+    else
+      link_to 'Activate', activate_admin_producer_path(operator),
+              method: :put, data: { confirm: "Are you sure you want to ACTIVATE the producer #{operator.name}?" }
+    end
+  end
 
   action_item only: [:show] do
     link_to 'Edit Producer', edit_admin_producer_path(operator)
@@ -78,9 +93,12 @@ ActiveAdmin.register Operator, as: 'Producer' do
       operator.score_operator_document&.all
     end
     column('Actions') do |operator|
-      unless operator.is_active
-        a 'Activate', href: activate_admin_producer_path(operator),
-                      'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the operator #{operator.name}?"
+      if operator.is_active
+        link_to 'Deactivate', deactivate_admin_producer_path(operator),
+                method: :put, data: { confirm: "Are you sure you want to DEACTIVATE the producer #{operator.name}?" }
+      else
+        link_to 'Activate', activate_admin_producer_path(operator),
+                method: :put, data: { confirm: "Are you sure you want to ACTIVATE the producer #{operator.name}?" }
       end
     end
 
