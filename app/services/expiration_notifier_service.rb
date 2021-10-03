@@ -16,9 +16,11 @@ class ExpirationNotifierService
 
   def documents_to_notify
     @notification_dates.each do |date|
-      OperatorDocument.where(expire_date: date).select(:operator_id).group(:operator_id) do |operator|
-        documents = OperatorDocument.active.where(expire_date: date, operator_id: operator.id)
-        SendExpirationEmailJob.perform_later(operator, documents)
+      OperatorDocument.where(expire_date: date).select(:operator_id).group(:operator_id).each do |operator_document|
+        documents = OperatorDocument.where(expire_date: date, operator_id: operator_document.operator_id)
+        operator = Operator.find(operator_document.operator_id)
+        SendExpirationEmailJob.perform_now(operator, documents)
+        # SendExpirationEmailJob.perform_later(operator, documents)
       end
     end
   end

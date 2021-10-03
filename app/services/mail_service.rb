@@ -140,6 +140,7 @@ TXT
   end
 
   def notify_responsible(observation)
+    byebug
     @subject = "Observation created with id #{observation.id}"
     @body =
 <<~TXT
@@ -177,7 +178,8 @@ TXT
     text << t('backend.mail_service.expire_documents.salutation')
 
     @from = ENV['CONTACT_EMAIL']
-    @to = operator.email
+    @to = ENV['CONTACT_EMAIL']
+    # @to = operator.email
     @body = text.join('\n')
     @subject = subject
 
