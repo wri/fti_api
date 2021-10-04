@@ -49,6 +49,7 @@ class Observer < ApplicationRecord
 
   has_many :users, inverse_of: :observer
   belongs_to :responsible_user, class_name: 'User', foreign_key: 'responsible_user_id'
+  belongs_to :responsible_admin, class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
 
   EMAIL_VALIDATOR = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
@@ -96,6 +97,13 @@ class Observer < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  # Sets the default responsible admin for an observer
+  # 
+  def set_responsible_admin
+    #self.responsible_admin = User.joins(:user_permission).where(user_permissions: { user_role: :admin }).first
+    self.responsible_admin = User.where(email: "ibrahim.lachguer@vizzuality.com").first
   end
 
   private
