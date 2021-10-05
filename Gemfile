@@ -43,6 +43,9 @@ gem 'rgeo-geojson'
 
 # API
 #gem 'jsonapi-resources', '0.10.0'
+# TODO: version 0.9.12 has problems with including nested relationships, did not work on observation endpoint
+# leaving it as it is now. Better to bring up code coverage first as this gem is VERY unstable
+# I included another MONKEY PATCH to fix error with nil relationships (that is fixed by this commit https://github.com/cerebris/jsonapi-resources/commit/0280f70ae481ac18b7abc659a6580a82b71d4175)
 gem 'jsonapi-resources', '0.9.0'
 gem 'oj'
 gem 'oj_mimic_json'
