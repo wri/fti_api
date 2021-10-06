@@ -144,17 +144,17 @@ RSpec.describe Fmu, type: :model do
   end
 
   describe 'Class methods' do
-    before :all do
+    before :each do
       @country = create(:country)
       operator = create(:operator, fa_id: 'fa-id')
       @operator = create(:operator, country: @country, fa_id: 'fa_id')
 
-      FactoryBot.create(:fmu, country: @country)
+      create(:fmu, country: @country)
       fmu1 = create(:fmu, country: operator.country)
       fmu2 = create(:fmu, country: @country)
 
-      FactoryBot.create(:fmu_operator, fmu: fmu1, operator: operator)
-      FactoryBot.create(:fmu_operator, fmu: fmu2, operator: @operator)
+      create(:fmu_operator, fmu: fmu1, operator: operator)
+      create(:fmu_operator, fmu: fmu2, operator: @operator)
     end
 
     context 'when country_ids and operator_ids are not specified' do
