@@ -51,6 +51,21 @@ RSpec.describe Fmu, type: :model do
       end
 
       context 'when geojson is present' do
+        it 'updates geometry and centroid' do
+          country = create(:country)
+          fmu = create(:fmu, :geojson_no_props, country: country)
+          fmu.reload
+
+          expect(fmu.geometry).not_to be_nil
+          expect(fmu.geojson['properties']['centroid']).to eql({
+            "type" => "Point",
+            "coordinates" => [
+              18.777923313,
+              50.50818234
+            ]
+          })
+        end
+
         it 'fill geojson with properties from fmu' do
           country = create(:country)
           operator = create(:operator, country: country, fa_id: 'fa_id')
@@ -77,7 +92,6 @@ RSpec.describe Fmu, type: :model do
           country = create(:country)
           operator = create(:operator, country: country, fa_id: 'fa_id')
           fmu = create(:fmu_geojson, operator: operator, country: country)
-          fmu.save
           fmu.reload
 
           expect(fmu.geojson['properties']['observations']).to eql 0
@@ -95,7 +109,6 @@ RSpec.describe Fmu, type: :model do
           country = create(:country)
           operator = create(:operator, country: country, fa_id: 'fa_id')
           fmu = create(:fmu_geojson, operator: operator, country: country)
-          fmu.save
           observation = create(:observation, operator: operator, fmu: fmu)
           observation.save
 
