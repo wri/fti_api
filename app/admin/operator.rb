@@ -70,7 +70,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :score_absolute do |operator|
       "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
-    column :obs_per_visit
+    column :obs_per_visit do |operator|
+      operator.score_operator_observation&.obs_per_visit
+    end
     column '% Docs' do |operator|
       operator.score_operator_document&.all
     end
@@ -88,7 +90,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
       "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
     end
-    column 'Obs/Visit', :obs_per_visit, sortable: true
+    column 'Obs/Visit', :obs_per_visit, sortable: true do |operator|
+      operator.score_operator_observation&.obs_per_visit
+    end
     column '% Docs', :percentage_valid_documents_all, sortable: true do |operator|
       operator.score_operator_document&.all
     end
@@ -223,7 +227,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :percentage_valid_documents_all do |operator|
         operator.score_operator_document&.all
       end
-      row :obs_per_visit
+      row :obs_per_visit do |operator|
+        operator.score_operator_observation&.obs_per_visit
+      end
       row :score_absolute do |operator|
         operator.score_operator_observation&.score
       end
