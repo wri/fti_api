@@ -102,8 +102,7 @@ class Observer < ApplicationRecord
   # Sets the default responsible admin for an observer
   # 
   def set_responsible_admin
-    #self.responsible_admin = User.joins(:user_permission).where(user_permissions: { user_role: :admin }).first
-    self.responsible_admin = User.where(email: "ibrahim.lachguer@vizzuality.com").first
+    self.responsible_admin = User.where(email: ENV['RESPONSIBLE_EMAIL'].downcase).first
   end
 
   private
