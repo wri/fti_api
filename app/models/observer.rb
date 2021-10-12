@@ -65,6 +65,8 @@ class Observer < ApplicationRecord
 
   validate :valid_responsible_user
 
+  before_create  :set_responsible_admin
+
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
                            .order('observer_translations.name ASC')
