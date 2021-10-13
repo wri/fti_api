@@ -48,4 +48,20 @@ namespace :observations do
       puts "Evidence document #{od.id} new filename #{od.attachment.filename}"
     end
   end
+
+  desc 'Set resposible admin by default'
+  task set_responsible_admin: :environment do
+    Observer.unscoped.find_each do |observer|
+      puts "Setting responsible admin by default for observer with id: #{observer.id}"
+      observer.set_responsible_admin
+      observer.save!
+    end
+
+    Observation.unscoped.find_each do |observation|
+      puts "Setting responsible admin by default for observation with id: #{observation.id}"
+      observation.set_default_responsible_admin
+      puts observation.responsible_admin_id
+      observation.save!
+    end
+  end
 end

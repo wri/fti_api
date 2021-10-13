@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210831112401) do
+ActiveRecord::Schema.define(version: 20211003145842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -575,10 +575,10 @@ ActiveRecord::Schema.define(version: 20210831112401) do
   end
 
   create_table "observers", force: :cascade do |t|
-    t.string   "observer_type",                       null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.boolean  "is_active",           default: true
+    t.string   "observer_type",                        null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "is_active",            default: true
     t.string   "logo"
     t.string   "address"
     t.string   "information_name"
@@ -588,8 +588,9 @@ ActiveRecord::Schema.define(version: 20210831112401) do
     t.string   "data_email"
     t.string   "data_phone"
     t.string   "organization_type"
-    t.boolean  "public_info",         default: false
+    t.boolean  "public_info",          default: false
     t.integer  "responsible_user_id"
+    t.integer  "responsible_admin_id"
     t.index ["is_active"], name: "index_observers_on_is_active", using: :btree
   end
 
@@ -1108,6 +1109,7 @@ ActiveRecord::Schema.define(version: 20210831112401) do
   add_foreign_key "observations", "operators"
   add_foreign_key "observations", "users"
   add_foreign_key "observations", "users", column: "modified_user_id"
+  add_foreign_key "observers", "users", column: "responsible_admin_id", on_delete: :nullify
   add_foreign_key "observers", "users", column: "responsible_user_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
