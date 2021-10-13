@@ -104,6 +104,7 @@ class Observer < ApplicationRecord
   # Sets the default responsible admin for an observer
   # 
   def set_responsible_admin
+    return if self.responsible_admin.present?
     self.responsible_admin = User.where(email: ENV['RESPONSIBLE_EMAIL'].downcase).first
   end
 
