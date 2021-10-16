@@ -5,12 +5,12 @@ class MailService
   include ActionView::Helpers::TranslationHelper
   include ActionView::Helpers::DateHelper
 
-  attr_reader :from, :to, :subject, :body
+  attr_reader :from, :to, :subject, :body, :content_type
 
   def initialize; end
 
   def deliver
-    AsyncMailer.new.send_email @from, @to, @body, @subject
+    AsyncMailer.new.send_email @from, @to, @body, @subject, @content_type
   end
 
   def forgotten_password(user_name, email, reset_url)
@@ -140,7 +140,6 @@ TXT
   end
 
   def notify_responsible(observation)
-    byebug
     @subject = "Observation created with id #{observation.id}"
     @body =
 <<~TXT
@@ -170,18 +169,19 @@ TXT
   # @param [Array] documents the documents for which to notify
   def notify_operator_expired_document(operator, documents)
     num_documents = documents.count
-    time_to_expire = distance_of_time_in_words(documents.first.expire_date, Date.tomorrow)
+    time_to_expire = distance_of_time_in_words(documents.first.expire_date, Date.today)
     subject = t('backend.mail_service.expire_documents.title', count: num_documents) +
       time_to_expire
     text = [t('backend.mail_service.expire_documents.text')]
-    documents.each { |d|  text << "#{d&.required_operator_document&.name}" }
+    documents.each { |document|  text << "<br><a href='#{ENV['APP_URL']}#{Rails.application.routes.url_helpers.url_for(:controller => "admin/operator_documents", :action => "show", :id => document.id, :only_path => true)}'>#{document&.required_operator_document&.name}</a>" }
     text << t('backend.mail_service.expire_documents.salutation')
 
     @from = ENV['CONTACT_EMAIL']
-    @to = ENV['CONTACT_EMAIL']
-    # @to = operator.email
-    @body = text.join('\n')
+    #@to = ENV['CONTACT_EMAIL']
+    @to = operator.email
+    @body = text.join('')
     @subject = subject
+    @content_type = "text/html"
 
     self
   end

@@ -450,8 +450,8 @@ fr:
         title:
           one: "You have 1 document expiring in "
           other:  "You have %{count} documents expiring in "
-        text: "The following documents are going to expire:\n"
-        salutation: "Cordialement,\nL'équipe OTP"
+        text: "The following documents are going to expire:"
+        salutation: "Cordialement,<br>L'équipe OTP"
       observer_status_changed:
         producers: 'Exploitants: '
         government: 'Gouvernance'

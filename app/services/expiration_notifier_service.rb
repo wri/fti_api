@@ -5,7 +5,7 @@ class ExpirationNotifierService
 
   # @param [Date] date The date for which to notify the users
   def initialize(date = Date.today)
-    @notification_dates = NOTIFICATION_PERIODS.map { |x| date - x }
+    @notification_dates = NOTIFICATION_PERIODS.map { |x| date + x }
   end
 
   def call

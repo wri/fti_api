@@ -443,8 +443,8 @@ en:
         title:
           one: "You have 1 document expiring in "
           other: "You have %{count} documents expiring in "
-        text: "The following documents are going to expire:\n"
-        salutation: "\nBest,\nOTP Team"
+        text: "The following documents are going to expire:"
+        salutation: "Best,<br>OTP Team"
       observer_status_changed:
         producers: 'Producers: '
         government: 'Type: Government'
