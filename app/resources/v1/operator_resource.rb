@@ -111,7 +111,10 @@ module V1
       context = options[:context]
       user = context[:current_user]
       app = context[:app]
-      if app == 'observations-tool' && user.present?
+      controller = context[:controller]
+
+      # not great to filter by controller here, but not sure how to do it in observation resource only
+      if (app == 'observations-tool' && user.present?) || controller == 'v1/observations'
         super(options)
       else
         Operator.active

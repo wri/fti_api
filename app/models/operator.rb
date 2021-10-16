@@ -79,7 +79,7 @@ class Operator < ApplicationRecord
 
   validates :name, presence: true
   validates :website, url: true, if: lambda { |x| x.website.present? }
-  validates :operator_type, inclusion: { in: TYPES }
+  validates :operator_type, inclusion: { in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(', ')} " }
   validates :country, presence: true, on: :create
 
   scope :by_name_asc, -> {
@@ -162,9 +162,9 @@ class Operator < ApplicationRecord
     end
   end
 
-  def self.active_with_fmus_array
+  def self.with_fmus_array
     name_column = Arel.sql('operator_translations.name')
-    Operator.active.with_translations.includes(:fmus).group(:id, name_column).order(name_column)
+    Operator.with_translations.includes(:fmus).group(:id, name_column).order(name_column)
         .pluck(:id, name_column, 'array_agg(fmus.id) fmu_ids')
   end
 

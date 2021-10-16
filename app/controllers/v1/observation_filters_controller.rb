@@ -202,7 +202,7 @@ module V1
     end
 
     def operator_ids
-      Operator.active_with_fmus_array.map do |x|
+      Operator.with_fmus_array.map do |x|
         { id: x[0], name: x[1], fmus: x[2] }
       end
     end

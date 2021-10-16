@@ -19,6 +19,62 @@ class SyncTasks
       task ranking: :environment do
         RankingOperatorDocument.refresh
       end
+
+      task operator_documents_stats: :environment do
+        sync_operator_documents_stats(Date.new(2021,5,1))
+      end
+
+      task observation_reports_stats: :environment do
+        date = ObservationReport.order(created_at: :asc).first.created_at.to_date
+        sync_observation_reports_stats(date)
+      end
+    end
+  end
+
+  def sync_operator_documents_stats(from_date)
+    OperatorDocumentStatistic.delete_all
+
+    first_day = from_date.to_date
+    countries = Country.active.pluck(:id).uniq + [nil]
+
+    important_dates = OperatorDocumentHistory
+      .where('operator_document_updated_at > ?', first_day)
+      .select('DATE(operator_document_updated_at')
+      .distinct
+      .pluck('DATE(operator_document_updated_at)')
+      .sort
+
+    [from_date, *important_dates, Date.today.to_date].uniq.each do |day|
+      countries.each do |country_id|
+        puts "Checking score for country: #{country_id} and #{day}"
+        OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, false)
+      end
+    end
+    # after generating all we need to ensure we have stats for first point in time, regenerate for first day only
+    countries.each do |country_id|
+      puts "FIRST POINT: Checking score for country: #{country_id} and #{first_day}"
+      OperatorDocumentStatistic.generate_for_country_and_day(country_id, first_day, true)
+    end
+  end
+
+  def sync_observation_reports_stats(from_date)
+    ObservationReportStatistic.delete_all
+
+    first_day = from_date.to_date
+    countries = Country.with_at_least_one_report.pluck(:id).uniq + [nil]
+
+    important_dates = ObservationReport.pluck(:created_at).sort.map(&:to_date).uniq
+
+    [from_date, *important_dates, Date.today.to_date].uniq.each do |day|
+      countries.each do |country_id|
+        puts "Checking observation reports for country: #{country_id || 'all'} and #{day}"
+        ObservationReportStatistic.generate_for_country_and_day(country_id, day, false)
+      end
+    end
+    # after generating all we need to ensure we have stats for first point in time, regenerate for first day only
+    countries.each do |country_id|
+      puts "FIRST POINT: Checking observation reports for country: #{country_id || 'all'} and #{first_day}"
+      ObservationReportStatistic.generate_for_country_and_day(country_id, first_day, true)
     end
   end
 

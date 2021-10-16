@@ -57,6 +57,10 @@ class OperatorDocumentHistory < ApplicationRecord
   # @param String operator_id The operator id
   # @param String date the date at which to fetch the state
   def self.from_operator_at_date(operator_id, date)
+    self.at_date(date).where(operator_id: operator_id)
+  end
+
+  def self.at_date(date)
     # .INFO.
     # The reason why we're adding a day to the date, is that when comparing datetime fields with a date,
     # the datetime will will always be bigger. For example '2020-01-01 02:00:00' > '2020-01-01'
@@ -65,15 +69,15 @@ class OperatorDocumentHistory < ApplicationRecord
 
     query = <<~SQL
       (select * from
-        (select row_number() over (partition by required_operator_document_id, fmu_id order by operator_document_updated_at desc), *
+        (select row_number() over (partition by operator_id, required_operator_document_id, fmu_id order by operator_document_updated_at desc), *
          from operator_document_histories
-         where operator_id = #{operator_id} AND operator_document_updated_at <= '#{db_date}'
+         where operator_document_updated_at <= '#{db_date}'
         ) as sq
         where sq.row_number = 1
       ) as operator_document_histories
     SQL
 
-    # will only return not deleted
+    # coupled with default not deleted scope will only return not deleted
     # deleted document history is created when document is destroyed, when country, fmu is unattributed
     # it will not return destroyed documents
     from(query)

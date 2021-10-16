@@ -75,7 +75,7 @@ class Fmu < ApplicationRecord
   # this could also be done like: "id not in ( select fmu_id from fmu_operators where \"current\" = true)"
   # but it might break the method chaining
   scope :filter_by_free,                  ->               { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
-  # TODO remve the filter by free. This needs to be tested 
+  # TODO remve the filter by free. This needs to be tested
   scope :filter_by_free_aa,               ->               { where(' fmus.id not in (select fmu_id from fmu_operators where current = true)') }
   scope :with_certification_fsc,          ->               { where certification_fsc:     true }
   scope :with_certification_pefc,         ->               { where certification_pefc:    true }
@@ -131,14 +131,14 @@ class Fmu < ApplicationRecord
 
     @esri_shapefiles_zip = esri_shapefiles_zip
   end
-  
+
   def update_geojson
     update_properties
 
     temp_geojson = self.geojson
     return if temp_geojson.blank?
 
-    temp_geojson['properties'] = temp_geojson['properties'].merge(self.properties)
+    temp_geojson['properties'] = temp_geojson.fetch('properties', {}).merge(self.properties)
     self.geojson = temp_geojson
   end
 
@@ -199,6 +199,11 @@ class Fmu < ApplicationRecord
   end
 
   def update_geometry
+    # Atention! changing this query to update only the geom
+    # using the current fmu_id will end up in massive mess up
+    # of missmatched fmus and geometries.
+    # https://github.com/Vizzuality/fti_api/commit/0993ccc728c5304b5a33f54c358cb828888457f9
+    # you can check it using fmus:update_geometry
     query =
       <<~SQL
         WITH g as (
@@ -211,8 +216,21 @@ class Fmu < ApplicationRecord
         from g
         where fmus.id = g.id;
       SQL
-
     ActiveRecord::Base.connection.execute query
+    update_centroid
+  end
+
+  def update_centroid
+    query = <<~SQL
+      update fmus
+        set geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)
+      where fmus.id = :fmu_id;
+    SQL
+    Fmu.execute_sql(query, self.id)
+  end
+
+  def self.execute_sql(sql_command, fmu_id)
+    ActiveRecord::Base.connection.update(sanitize_sql_for_assignment([sql_command, fmu_id: fmu_id]))
   end
 
   def cache_key

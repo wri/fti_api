@@ -1,30 +1,64 @@
 $(document).ready(function() {
-
-  $(".observation-checkbox").on('change', function(elem) {
-    const id = ".col-" + elem.target.id;
-    const column = $(id)
-    if (elem.target.checked === true ) {
-      column.removeClass('hide')
-      localStorage.setItem(elem.target.id, true)
-    } else {
-      column.addClass('hide')
-      localStorage.setItem(elem.target.id, false)
+  function updateChart(elemId, checked) {
+    const chart = Chartkick.charts['chart-1'].chart;
+    const dataset = chart.data.datasets.find(
+      x => x.label.replaceAll('&', '').replace(/\s/g, '').toLowerCase() === elemId.replaceAll('_', '')
+    );
+    if (dataset) {
+      dataset.hidden = !checked;
+      chart.update();
     }
-  })
-
-  if ($('.observation-attributes').length > 0) {
-    Array.from($('.observation-attributes').children()).forEach(elem => {
-      const id = elem.id.split('-')[1];
-      const storage = localStorage.getItem(id);
-      if (storage !== null) {
-        if(storage === "true") {
-          $('#' + id).prop("checked", true);
-        } else {
-          $('#' + id).prop("checked", false);
-          const column = $('.col-' + id)
-          column.addClass('hide')
-        }
-      }
-    });
   }
+
+  setTimeout(function() {
+    Chartkick.charts['chart-1'].redraw();
+    setTimeout(updateColumnVisiblity, 100);
+  }, 50);
+
+  setTimeout(function() {
+    const chart = Chartkick.charts['chart-1'].chart;
+    const oldOnClick = chart.options.legend.onClick;
+    const newLegendClickHandler = function (e, legendItem) {
+      const id = legendItem.text.replaceAll(' & ', ' ').replaceAll(' ', '_').toLowerCase();
+      const column = $(`.col-${id}`);
+      $('#' + id).prop('checked', legendItem.hidden);
+      column.toggleClass('hide', !legendItem.hidden);
+      oldOnClick.apply(this, [e, legendItem]);
+    };
+    chart.options.legend.onClick = newLegendClickHandler;
+  }, 300)
+
+  $(".observation-checkbox").on('change', function(event) {
+    const elem = event.target;
+    const column = $(`.col-${elem.id}`);
+    column.toggleClass('hide', !elem.checked);
+    localStorage.setItem(elem.id, elem.checked);
+    updateChart(elem.id, elem.checked);
+  });
+
+  function updateColumnVisiblity() {
+    if ($('.observation-attributes').length > 0) {
+      const saveToLocalStorage = $('.observation-attributes').data('saveToLocalStorage');
+
+      $('.observation-attributes').children().each((_idx, elem) => {
+        const id = elem.id.split('-')[1];
+        if (saveToLocalStorage) {
+          const storage = localStorage.getItem(id);
+          if (storage !== null) {
+            if(storage === "true") {
+              $('#' + id).prop("checked", true);
+            } else {
+              $('#' + id).prop("checked", false);
+            }
+          }
+        }
+        const column = $(`.col-${id}`);
+        const checked = $('#' + id).prop('checked');
+        column.toggleClass('hide', !checked);
+        updateChart(id, checked);
+      })
+    }
+  }
+
+  updateColumnVisiblity();
 });

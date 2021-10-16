@@ -88,7 +88,6 @@ ActiveAdmin.register ObservationReport do
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
 
       f.actions
-
     end
   end
 

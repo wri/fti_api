@@ -18,7 +18,7 @@ RSpec.describe Category, type: :model do
     expect(category).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:category), %i[name]
+  it_should_behave_like 'translatable', :category, %i[name]
 
   describe 'Relations' do
     it { is_expected.to have_many(:subcategories).dependent(:destroy) }

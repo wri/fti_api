@@ -36,16 +36,19 @@
             }
         },
         "errors": {
-            "operator": {
-                "country": [
-                    "can't be blank"
-                ]
-            },
-            "record": {
-                "country_id": [
-                    "can't be blank"
-                ]
-            }
+          "country": {
+            "presence": "record is absent"
+          },
+          "operator": {
+            "country": [
+              "can't be blank"
+            ]
+          },
+          "record": {
+            "country_id": [
+              "can't be blank"
+            ]
+          }
         }
     },
     "2": {

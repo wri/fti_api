@@ -53,7 +53,7 @@ RSpec.describe Operator, type: :model do
     expect(operator).to be_valid
   end
 
-  it_should_behave_like 'translatable', FactoryBot.create(:operator), %i[name details]
+  it_should_behave_like 'translatable', :operator, %i[name details]
 
   describe 'Hooks' do
     describe '#create_operator_id' do

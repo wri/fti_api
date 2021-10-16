@@ -28,7 +28,7 @@ class Observer < ApplicationRecord
   has_paper_trail
   include Translatable
   translates :name, :organization, touch: true, versioning: :paper_trail
-  
+
 
   active_admin_translates :name do
     validates_presence_of :name
@@ -49,6 +49,7 @@ class Observer < ApplicationRecord
 
   has_many :users, inverse_of: :observer
   belongs_to :responsible_user, class_name: 'User', foreign_key: 'responsible_user_id'
+  belongs_to :responsible_admin, class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
 
   EMAIL_VALIDATOR = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
@@ -64,6 +65,8 @@ class Observer < ApplicationRecord
 
   validate :valid_responsible_user
 
+  before_create  :set_responsible_admin
+
   scope :by_name_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
                            .order('observer_translations.name ASC')
@@ -71,6 +74,7 @@ class Observer < ApplicationRecord
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
+  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observers).select('observers.id').distinct.pluck('observers.id')) }
 
   default_scope { includes(:translations) }
 
@@ -95,6 +99,14 @@ class Observer < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
+  end
+
+  # Sets the default responsible admin for an observer
+  #
+  def set_responsible_admin
+    return if self.responsible_admin.present?
+
+    self.responsible_admin = User.where(email: ENV['RESPONSIBLE_EMAIL'].downcase).first
   end
 
   private

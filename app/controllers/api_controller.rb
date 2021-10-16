@@ -11,6 +11,7 @@ class ApiController < ActionController::API
     { current_user: current_user,
       app: params[:app],
       action: params[:action],
+      controller: params[:controller],
       filters: params[:filter],
       locale: (params[:locale] || I18n.default_locale) }
   end

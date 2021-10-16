@@ -1,6 +1,5 @@
 require 'benchmark'
 namespace :scheduler do
-
   desc 'Expires documents'
   task expire: :environment do
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
@@ -28,12 +27,33 @@ namespace :scheduler do
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
 
-  desc 'Calculate the Global Scores'
-  task global_scores: :environment do
+  desc 'Generate Documents Statistics'
+  task generate_documents_stats: :environment do
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to update the global scores. at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
-    time = Benchmark.ms { GlobalScoreService.new.call }
-    Rails.logger.info "Finished updating the global scores. It took #{time} ms."
+    Rails.logger.info "Going to generate document statistics at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    time = Benchmark.ms {
+      countries = Country.active.pluck(:id).uniq + [nil]
+      day = Date.yesterday.to_date
+      countries.each do |country_id|
+        OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, true)
+      end
+    }
+    Rails.logger.info "Document statistics generated. It took #{time} ms."
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+  end
+
+  desc 'Generate Observation Reports Statistics'
+  task generate_observation_reports_stats: :environment do
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "Going to generate observation reports statistics at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    time = Benchmark.ms {
+      countries = Country.with_at_least_one_report.pluck(:id).uniq + [nil]
+      day = Date.yesterday.to_date
+      countries.each do |country_id|
+        ObservationReportStatistic.generate_for_country_and_day(country_id, day, true)
+      end
+    }
+    Rails.logger.info "Observation resports statistics generated. It took #{time} ms."
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
 end
