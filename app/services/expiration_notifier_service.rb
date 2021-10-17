@@ -23,8 +23,7 @@ class ExpirationNotifierService
         # Almost all the operator have email == nil
         # we could use the document.user.email but
         # also a huge number of document.user_id are nil
-        SendExpirationEmailJob.perform_now(operator, documents) unless operator.email == nil 
-        # SendExpirationEmailJob.perform_later(operator, documents)
+        SendExpirationEmailJob.perform_now(operator, documents) unless operator.email == nil
       end
     end
   end
