@@ -164,20 +164,30 @@ TXT
     self
   end
 
-  # Send an email to the operator notifying that there are documents abouts to expire
+  # Send an email to the operator notifying that there are documents  expired or about to expire
   # @param [Operator] operator
   # @param [Array] documents the documents for which to notify
-  def notify_operator_expired_document(operator, documents)
+  def notify_operator_expiring_document(operator, documents)
     num_documents = documents.count
-    time_to_expire = distance_of_time_in_words(documents.first.expire_date, Date.today)
-    subject = t('backend.mail_service.expire_documents.title', count: num_documents) +
-      time_to_expire
-    text = [t('backend.mail_service.expire_documents.text')]
-    documents.each { |document|  text << "<br><a href='#{ENV['APP_URL']}#{Rails.application.routes.url_helpers.url_for(:controller => "admin/operator_documents", :action => "show", :id => document.id, :only_path => true)}'>#{document&.required_operator_document&.name}</a>" }
-    text << t('backend.mail_service.expire_documents.salutation')
+    expire_date = documents.first.expire_date
+    if expire_date > Date.today
+      # expiring documents
+      time_to_expire = distance_of_time_in_words(expire_date, Date.today)
+      subject = t('backend.mail_service.expiring_documents.title', count: num_documents) +
+        time_to_expire
+      text = [t('backend.mail_service.expiring_documents.text', company_name: operator.name, count: num_documents)]
+      text << time_to_expire
+      documents.each { |document|  text << "<br><a href='#{ENV['APP_URL']}#{Rails.application.routes.url_helpers.url_for(:controller => "admin/operator_documents", :action => "show", :id => document.id, :only_path => true)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t('backend.mail_service.expiring_documents.salutation')
+    else
+      # expired documents
+      subject = t('backend.mail_service.expired_documents.title', count: num_documents)
+      text = [t('backend.mail_service.expired_documents.text', company_name: operator.name, count: num_documents)]
+      documents.each { |document|  text << "<br><a href='#{ENV['APP_URL']}#{Rails.application.routes.url_helpers.url_for(:controller => "admin/operator_documents", :action => "show", :id => document.id, :only_path => true)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t('backend.mail_service.expired_documents.salutation')
+    end
 
     @from = ENV['CONTACT_EMAIL']
-    #@to = ENV['CONTACT_EMAIL']
     @to = operator.email
     @body = text.join('')
     @subject = subject

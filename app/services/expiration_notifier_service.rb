@@ -5,7 +5,7 @@ class ExpirationNotifierService
 
   # @param [Date] date The date for which to notify the users
   def initialize(date = Date.today)
-    @notification_dates = NOTIFICATION_PERIODS.map { |x| date + x }
+    @notification_dates = NOTIFICATION_PERIODS.map { |x| date + x }.push(Date.yesterday)
   end
 
   def call
@@ -19,7 +19,11 @@ class ExpirationNotifierService
       OperatorDocument.where(expire_date: date).select(:operator_id).group(:operator_id).each do |operator_document|
         documents = OperatorDocument.where(expire_date: date, operator_id: operator_document.operator_id)
         operator = Operator.find(operator_document.operator_id)
-        SendExpirationEmailJob.perform_now(operator, documents)
+        # We need an email adress to send the email
+        # Almost all the operator have email == nil
+        # we could use the document.user.email but
+        # also a huge number of document.user_id are nil
+        SendExpirationEmailJob.perform_now(operator, documents) unless operator.email == nil 
         # SendExpirationEmailJob.perform_later(operator, documents)
       end
     end
