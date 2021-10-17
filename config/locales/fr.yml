@@ -462,7 +462,7 @@ Le statut de votre observation (%{id}) ci-dessous a changé.\nNouveau statut : %
 
 Observations:\nDate: %{date}
 
-%{infractor_text}\nInfraction: #{infraction}\n
+%{infractor_text}\nInfraction: #{infraction_fr}\n
 
 N'hésitez pas à nous contacter si vous avez des questions,\n
 
