@@ -199,19 +199,24 @@ class Fmu < ApplicationRecord
   end
 
   def update_geometry
+    # Atention! changing this query to update only the geom
+    # using the current fmu_id will end up in massive mess up
+    # of missmatched fmus and geometries.
+    # https://github.com/Vizzuality/fti_api/commit/0993ccc728c5304b5a33f54c358cb828888457f9
+    # you can check it using fmus:update_geometry
     query =
       <<~SQL
         WITH g as (
-        SELECT *, ST_GeomFromGeoJSON(x.geometry) as the_geom
+        SELECT *, x.properties as prop, ST_GeomFromGeoJSON(x.geometry) as the_geom
         FROM fmus CROSS JOIN LATERAL
-        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb)
+        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb, properties jsonb )
         )
         update fmus
-        set geometry = g.the_geom
+        set geometry = g.the_geom , properties = g.prop
         from g
-        where fmus.id = :fmu_id;
+        where fmus.id = g.id;
       SQL
-    Fmu.execute_sql(query, self.id)
+    ActiveRecord::Base.connection.execute query
     update_centroid
   end
 
