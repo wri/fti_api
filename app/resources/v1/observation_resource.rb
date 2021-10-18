@@ -165,9 +165,7 @@ module V1
           Observation.active
         end
       else
-        observations_g = Observation.active.government.joins('LEFT OUTER JOIN "operators" as "op_joins" ON "op_joins"."id" = "observations"."operator_id"')
-        observations_o = Observation.active.operator.joins('LEFT OUTER JOIN "operators" as "op_joins" ON "op_joins"."id" = "observations"."operator_id"').where(op_joins: { is_active: true })
-        observations_g.or(observations_o).where(hidden: false)
+        Observation.active
       end
     end
 

@@ -5,12 +5,12 @@ class MailService
   include ActionView::Helpers::TranslationHelper
   include ActionView::Helpers::DateHelper
 
-  attr_reader :from, :to, :subject, :body
+  attr_reader :from, :to, :subject, :body, :content_type
 
   def initialize; end
 
   def deliver
-    AsyncMailer.new.send_email @from, @to, @body, @subject
+    AsyncMailer.new.send_email @from, @to, @body, @subject, @content_type
   end
 
   def forgotten_password(user_name, email, reset_url)
@@ -140,7 +140,7 @@ TXT
   end
 
   def notify_responsible(observation)
-    @subject = "Observation created with id #{observation.id}"
+    @subject = "Observation created with id #{observation.id} / Observation créée avec l'id #{observation.id}"
     @body =
 <<~TXT
   Hello,
@@ -157,6 +157,22 @@ TXT
   
   Best,
   OTP
+  --------------------------------------------------------------
+
+  Bonjour,
+  
+  L'observation avec l'identifiant #{observation.id} est prête pour le contrôle qualité.
+   Veuillez le vérifier dans le back-office.
+
+   Info:
+   - Pays : #{observation.country&.name}.
+   - Observateur : #{observation.modified_user&.observer&.name}
+   - Utilisateur
+     -Nom : #{observation.modified_user&.name}
+     -Email : #{observation.modified_user&.email}
+  
+  Cordialement,
+   OTP 
 TXT
     @from = ENV['CONTACT_EMAIL']
     @to = ENV['RESPONSIBLE_EMAIL']
@@ -164,23 +180,48 @@ TXT
     self
   end
 
-  # Send an email to the operator notifying that there are documents abouts to expire
+  # Send an email to the operator notifying that there are documents  expired or about to expire
   # @param [Operator] operator
   # @param [Array] documents the documents for which to notify
-  def notify_operator_expired_document(operator, documents)
+  def notify_operator_expiring_document(operator, documents)
     num_documents = documents.count
-    time_to_expire = distance_of_time_in_words(documents.first.expire_date, Date.tomorrow)
-    subject = t('backend.mail_service.expire_documents.title', count: num_documents) +
-      time_to_expire
-    text = [t('backend.mail_service.expire_documents.text')]
-    documents.each { |d|  text << "#{d&.required_operator_document&.name}" }
-    text << t('backend.mail_service.expire_documents.salutation')
+    expire_date = documents.first.expire_date
+    if expire_date > Date.today
+      # expiring documents
+      time_to_expire = distance_of_time_in_words(expire_date, Date.today)
+      subject = t('backend.mail_service.expiring_documents.title', count: num_documents) +
+        time_to_expire
+      text = [t('backend.mail_service.expiring_documents.text', company_name: operator.name, count: num_documents)]
+      text << time_to_expire
+      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t('backend.mail_service.expiring_documents.salutation')
+    else
+      # expired documents
+      subject = t('backend.mail_service.expired_documents.title', count: num_documents)
+      text = [t('backend.mail_service.expired_documents.text', company_name: operator.name, count: num_documents)]
+      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t('backend.mail_service.expired_documents.salutation')
+    end
 
     @from = ENV['CONTACT_EMAIL']
     @to = operator.email
-    @body = text.join('\n')
+    @body = text.join('')
     @subject = subject
+    @content_type = "text/html"
 
     self
+  end
+
+  private
+
+  def document_admin_url(document)
+    ENV['APP_URL'] + Rails.application.routes.url_helpers.url_for(
+      {
+        controller: "admin/operator_documents",
+        action: "show",
+        id: document.id,
+        only_path: true
+      }
+    )
   end
 end

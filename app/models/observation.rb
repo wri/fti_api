@@ -209,6 +209,10 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     ObservationHistory.create! mapping
   end
 
+  def set_default_responsible_admin
+    set_responsible_admin
+  end
+
   private
 
   def check_is_physical_place
@@ -252,12 +256,12 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   # It starts by checking the monitor organization of the uploader to find its responsible person
   # And if it doesn't find any, it iterates through all the monitors
   def set_responsible_admin
-    self.responsible_admin = user&.observer&.responsible_user&.id
-    return if self.responsible_admin
+    self.responsible_admin_id = user&.observer&.responsible_admin&.id
+    return if self.responsible_admin_id
 
     observers.each do |observer|
-      if observer.responsible_user.present?
-        self.responsible_admin = observer.responsible_user&.id
+      if observer.responsible_admin.present?
+        self.responsible_admin_id = observer.responsible_admin&.id
       end
     end
   end
