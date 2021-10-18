@@ -199,6 +199,13 @@ TXT
   private
 
   def document_admin_url(document)
-    ENV['APP_URL'] + Rails.application.routes.url_helpers.url_for(:controller => "admin/operator_documents", :action => "show", :id => document.id, :only_path => true)
+    ENV['APP_URL'] + Rails.application.routes.url_helpers.url_for(
+      {
+        controller: "admin/operator_documents",
+        action: "show",
+        id: document.id,
+        only_path: true
+      }
+    )
   end
 end

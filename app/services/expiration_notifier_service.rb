@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ExpirationNotifierService
-  NOTIFICATION_PERIODS = [1.day, 1.week, 1.month]
+  NOTIFICATION_PERIODS = [-1.day, 1.day, 1.week, 1.month]
 
   # @param [Date] date The date for which to notify the users
   def initialize(date = Date.today)
-    @notification_dates = NOTIFICATION_PERIODS.map { |x| date + x }.push(Date.yesterday)
+    @notification_dates = NOTIFICATION_PERIODS.map { |x| date + x }
   end
 
   def call
@@ -23,7 +23,7 @@ class ExpirationNotifierService
         # Almost all the operator have email == nil
         # we could use the document.user.email but
         # also a huge number of document.user_id are nil
-        SendExpirationEmailJob.perform_now(operator, documents) unless operator.email == nil
+        SendExpirationEmailJob.perform_now(operator, documents) if operator.email.present?
       end
     end
   end
