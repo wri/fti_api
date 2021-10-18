@@ -1,6 +1,7 @@
 env:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
+  APP_URL: https://otp.vizzuality.org
 
 name: Tests
 on: push
