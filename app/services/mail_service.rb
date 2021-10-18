@@ -140,7 +140,7 @@ TXT
   end
 
   def notify_responsible(observation)
-    @subject = "Observation created with id #{observation.id}"
+    @subject = "Observation created with id #{observation.id} / Observation créée avec l'id #{observation.id}"
     @body =
 <<~TXT
   Hello,
@@ -157,6 +157,22 @@ TXT
   
   Best,
   OTP
+  --------------------------------------------------------------
+
+  Bonjour,
+  
+  L'observation avec l'identifiant #{observation.id} est prête pour le contrôle qualité.
+   Veuillez le vérifier dans le back-office.
+
+   Info:
+   - Pays : #{observation.country&.name}.
+   - Observateur : #{observation.modified_user&.observer&.name}
+   - Utilisateur
+     -Nom : #{observation.modified_user&.name}
+     -Email : #{observation.modified_user&.email}
+  
+  Cordialement,
+   OTP 
 TXT
     @from = ENV['CONTACT_EMAIL']
     @to = ENV['RESPONSIBLE_EMAIL']
