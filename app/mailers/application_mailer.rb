@@ -8,10 +8,10 @@ class ApplicationMailer < ActionMailer::Base
   default from: 'from@example.com'
   layout 'mailer'
 
-  def send_email(from, to, content, subject)
+  def send_email(from, to, content, subject, content_type = 'text/plain')
     email_from = Email.new(email: from)
     email_to = Email.new(email: to)
-    email_content = Content.new(type: 'text/plain', value: content)
+    email_content = Content.new(type: content_type, value: content)
     mail = Mail.new(email_from, subject, email_to, email_content)
 
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])

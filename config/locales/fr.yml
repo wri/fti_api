@@ -446,12 +446,18 @@ fr:
 
   backend:
     mail_service:
-      expire_documents:
+      expiring_documents:
         title:
-          one: "You have 1 document expiring in "
-          other:  "You have %{count} documents expiring in "
-        text: "The following documents are going to expire:\n"
-        salutation: "Cordialement,\nL'équipe OTP"
+          one: "Vous avez 1 document expirant dans "
+          other: "Vous avez %{count} documents expirant en "
+        text: "%{company_name} a %{count} document(s) qui va/vont expirer en "
+        salutation: "<br>Cordialement,<br>L'équipe OTP"
+      expired_documents:
+        title:
+          one: "Vous avez 1 document expiré sur l'OTP."
+          other: "Vous avez %{count} documents expiré sur l'OTP"
+        text: "%{company_name} a %{count} document(s) qui sont expiré. Veuillez le mettre à jour ou contacter l’équipe OTP si vous avez des questions."
+        salutation: "<br>Cordialement,<br>L'équipe OTP"
       observer_status_changed:
         producers: 'Exploitants: '
         government: 'Gouvernance'
