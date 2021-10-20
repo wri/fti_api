@@ -194,7 +194,7 @@ TXT
         time_to_expire
       text = [t('backend.mail_service.expiring_documents.text', company_name: operator.name, count: num_documents)]
       text << time_to_expire
-      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      documents.each { |document|  text << "<br><a href='#{documentation_url(document)}'>#{document&.required_operator_document&.name}</a>" }
       text << t('backend.mail_service.expiring_documents.salutation')
       text << "<br>--------------------------------------------<br>"
       I18n.locale = :fr
@@ -203,20 +203,20 @@ TXT
         time_to_expire
       text << [t('backend.mail_service.expiring_documents.text', company_name: operator.name, count: num_documents)]
       text << time_to_expire
-      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      documents.each { |document|  text << "<br><a href='#{documentation_url(document)}'>#{document&.required_operator_document&.name}</a>" }
       text << t('backend.mail_service.expiring_documents.salutation')
     else
       # expired documents
       I18n.locale = :en
       subject = t('backend.mail_service.expired_documents.title', count: num_documents)
       text = [t('backend.mail_service.expired_documents.text', company_name: operator.name, count: num_documents)]
-      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      documents.each { |document|  text << "<br><a href='#{documentation_url(document)}'>#{document&.required_operator_document&.name}</a>" }
       text << t('backend.mail_service.expired_documents.salutation')
       text << "<br>--------------------------------------------<br>"
       I18n.locale = :fr
       subject << " / " + t('backend.mail_service.expired_documents.title', count: num_documents)
       text << [t('backend.mail_service.expired_documents.text', company_name: operator.name, count: num_documents)]
-      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      documents.each { |document|  text << "<br><a href='#{documentation_url(document)}'>#{document&.required_operator_document&.name}</a>" }
       text << t('backend.mail_service.expired_documents.salutation')
     end
 
@@ -231,14 +231,7 @@ TXT
 
   private
 
-  def document_admin_url(document)
-    ENV['APP_URL'] + Rails.application.routes.url_helpers.url_for(
-      {
-        controller: "admin/operator_documents",
-        action: "show",
-        id: document.id,
-        only_path: true
-      }
-    )
+  def documentation_url(document)
+    ENV['APP_URL'] + "/operators/#{document.operator.id}/documentation"
   end
 end
