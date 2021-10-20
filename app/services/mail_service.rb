@@ -188,6 +188,7 @@ TXT
     expire_date = documents.first.expire_date
     if expire_date > Date.today
       # expiring documents
+      I18n.locale = :en
       time_to_expire = distance_of_time_in_words(expire_date, Date.today)
       subject = t('backend.mail_service.expiring_documents.title', count: num_documents) +
         time_to_expire
@@ -195,16 +196,32 @@ TXT
       text << time_to_expire
       documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
       text << t('backend.mail_service.expiring_documents.salutation')
+      text << "<br>--------------------------------------------<br>"
+      I18n.locale = :fr
+      time_to_expire = distance_of_time_in_words(expire_date, Date.today)
+      subject << " / " + t('backend.mail_service.expiring_documents.title', count: num_documents) +
+        time_to_expire
+      text << [t('backend.mail_service.expiring_documents.text', company_name: operator.name, count: num_documents)]
+      text << time_to_expire
+      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t('backend.mail_service.expiring_documents.salutation')
     else
       # expired documents
+      I18n.locale = :en
       subject = t('backend.mail_service.expired_documents.title', count: num_documents)
       text = [t('backend.mail_service.expired_documents.text', company_name: operator.name, count: num_documents)]
+      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t('backend.mail_service.expired_documents.salutation')
+      text << "<br>--------------------------------------------<br>"
+      I18n.locale = :fr
+      subject << " / " + t('backend.mail_service.expired_documents.title', count: num_documents)
+      text << [t('backend.mail_service.expired_documents.text', company_name: operator.name, count: num_documents)]
       documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
       text << t('backend.mail_service.expired_documents.salutation')
     end
 
     @from = ENV['CONTACT_EMAIL']
-    @to = operator.email
+    @to = ENV['RESPONSIBLE_EMAIL']
     @body = text.join('')
     @subject = subject
     @content_type = "text/html"

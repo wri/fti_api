@@ -8,7 +8,8 @@ class ApplicationMailer < ActionMailer::Base
   default from: 'from@example.com'
   layout 'mailer'
 
-  def send_email(from, to, content, subject, content_type = 'text/plain')
+  def send_email(from, to, content, subject, content_type)
+    content_type = 'text/plain' if content_type.nil?
     email_from = Email.new(email: from)
     email_to = Email.new(email: to)
     email_content = Content.new(type: content_type, value: content)
