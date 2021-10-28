@@ -78,6 +78,7 @@ class ScoreOperatorDocument < ApplicationRecord
     return update_values(sod) if date == sod.date && persisted?
 
     add_new(sod)
+    operator.reload # specifically reloads operator score_operator_document relation after changing current
   end
 
   def ==(obj)
