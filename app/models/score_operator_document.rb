@@ -35,7 +35,7 @@ class ScoreOperatorDocument < ApplicationRecord
   def self.recalculate!(operator)
     return if operator.fa_id.blank?
 
-    current_sod = operator.score_operator_document || ScoreOperatorDocument.new
+    current_sod = operator.reload_score_operator_document || ScoreOperatorDocument.new
     current_sod.replace(operator)
   end
 
@@ -78,7 +78,6 @@ class ScoreOperatorDocument < ApplicationRecord
     return update_values(sod) if date == sod.date && persisted?
 
     add_new(sod)
-    operator.reload # specifically reloads operator score_operator_document relation after changing current
   end
 
   def ==(obj)
