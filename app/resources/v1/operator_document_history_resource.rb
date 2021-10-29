@@ -5,6 +5,8 @@ module V1
     include CacheableByLocale
     include CacheableByCurrentUser
     include OperatorDocumentable
+    # removing caching is causing errors, more info here https://github.com/Vizzuality/fti_api/issues/284
+    # TODO: probably bug in api library
     caching
     immutable
 
