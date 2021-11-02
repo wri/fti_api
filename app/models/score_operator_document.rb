@@ -35,7 +35,7 @@ class ScoreOperatorDocument < ApplicationRecord
   def self.recalculate!(operator)
     return if operator.fa_id.blank?
 
-    current_sod = operator.score_operator_document || ScoreOperatorDocument.new
+    current_sod = operator.reload_score_operator_document || ScoreOperatorDocument.new
     current_sod.replace(operator)
   end
 
