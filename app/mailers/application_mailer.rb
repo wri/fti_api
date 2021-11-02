@@ -11,7 +11,7 @@ class ApplicationMailer < ActionMailer::Base
   def send_email(from, to, content, subject, content_type)
     content_type = 'text/plain' if content_type.nil?
     email_from = Email.new(email: from)
-    if Rails.env.production?
+    if Rails.env.production? or Rails.env.test?
       email_to = Email.new(email: to)
     else
       email_to = Email.new(email: ENV['RESPONSIBLE_EMAIL'])

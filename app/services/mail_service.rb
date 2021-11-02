@@ -232,8 +232,7 @@ TXT
     end
 
     @from = ENV['CONTACT_EMAIL']
-    @to = ENV['CONTACT_EMAIL']
-    # @to = operator.email
+    @to = operator.email
     @body = text.join('')
     @subject = subject
     @content_type = "text/html"
