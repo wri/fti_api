@@ -11,10 +11,13 @@ class ApplicationMailer < ActionMailer::Base
   def send_email(from, to, content, subject, content_type)
     content_type = 'text/plain' if content_type.nil?
     email_from = Email.new(email: from)
-    email_to = Email.new(email: to)
+    if Rails.env.production?
+      email_to = Email.new(email: to)
+    else
+      email_to = Email.new(email: ENV['RESPONSIBLE_EMAIL'])
+    end
     email_content = Content.new(type: content_type, value: content)
-    mail = Mail.new(email_from, subject, email_to, email_content)
-
+    mail = SendGrid::Mail.new(email_from, subject, email_to, email_content)
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
 
     sg.client.mail._('send').post(request_body: mail.to_json)
