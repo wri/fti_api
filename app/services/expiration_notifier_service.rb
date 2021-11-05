@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExpirationNotifierService
-  NOTIFICATION_PERIODS = [-1.day, 1.day, 1.week, 1.month]
+  NOTIFICATION_PERIODS = [-1.day, 1.week, 1.month]
 
   # @param [Date] date The date for which to notify the users
   def initialize(date = Date.today)
@@ -23,7 +23,11 @@ class ExpirationNotifierService
         # Almost all the operator have email == nil
         # we could use the document.user.email but
         # also a huge number of document.user_id are nil
-        SendExpirationEmailJob.perform_now(operator, documents) if operator.email.present?
+        if Rails.env.production?
+          SendExpirationEmailJob.perform_now(operator, documents) if operator.email.present?
+        else
+          SendExpirationEmailJob.perform_now(operator, documents)
+        end
       end
     end
   end

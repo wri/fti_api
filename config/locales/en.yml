@@ -441,9 +441,12 @@ en:
     mail_service:
       expiring_documents:
         title:
-          one: "You have 1 document expiring in "
-          other: "You have %{count} documents expiring in "
-        text: "%{company_name} has %{count} document(s) that are going to expire in "
+            month: "You have documents expiring on the OTP next month"
+            week: "You have documents expiring on the OTP next week"
+        text: 
+          month: "%{company_name} has %{count} document(s) that will expire next month. Please update accordingly or contact the OTP team if you have any questions<br>"
+          week: "%{company_name} has %{count} document(s) that will expire next week. Please update accordingly or contact the OTP team if you have any questions<br>"
+          list: "The following documents on your profile are expiring soon:<br>"
         salutation: "<br>Best,<br>OTP Team"
       expired_documents:
         title:
