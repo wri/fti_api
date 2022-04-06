@@ -72,5 +72,8 @@ module OperatorDocumentable
   end
 
   module ClassMethods
+    def apply_includes(records, directives)
+      super.includes(:document_file)
+    end
   end
 end

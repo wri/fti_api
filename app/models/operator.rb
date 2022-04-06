@@ -61,7 +61,7 @@ class Operator < ApplicationRecord
   has_many :operator_document_fmu_histories
 
   has_many :score_operator_documents
-  has_one :score_operator_document, ->{ current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
+  has_one :score_operator_document, -> { current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
   has_many :score_operator_observations
   has_one :score_operator_observation, -> { current }, class_name: 'ScoreOperatorObservation', inverse_of: :operator
 
