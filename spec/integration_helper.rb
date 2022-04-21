@@ -81,6 +81,14 @@ module IntegrationHelper
     @user_headers ||= authorize_headers(user.id)
   end
 
+  def operator_user
+    @operator_user ||= create(:operator_user)
+  end
+
+  def operator_user_headers
+    @operator_user_headers ||= authorize_headers(operator_user.id)
+  end
+
   def authorize_headers(id, jsonapi: true)
     headers = {
       'Authorization' => "Bearer #{generate_token(id)}",
