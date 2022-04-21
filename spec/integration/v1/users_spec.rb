@@ -28,17 +28,18 @@ module V1
       edit: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        excluded_params: %i[password password-confirmation permissions-request],
+        excluded_params: %i[password password-confirmation permissions-request current-password],
         valid_params: {
           email: 'test@gmail.com',
           nickname: 'sebanew',
           password: 'password',
           'password-confirmation': 'password',
+          'current-password': 'password',
           name: 'Test user new',
           'permissions-request': 'government'
         },
         invalid_params: { name: '', email: 'test@gmail.com', password: 'password', 'permissions-request': 'government' },
-        error_attributes: [422, 100, { 'name': ["can't be blank"] }]
+        error_attributes: [422, 100, { 'name': ["can't be blank"], 'current-password': ["can't be blank"] }]
       },
       delete: {
         success_roles: %i[admin],

@@ -14,7 +14,7 @@ module V1
     has_one :operator
 
     def self.fields
-      super - [:password, :password_confirmation]
+      super - [:password, :password_confirmation, :current_password]
     end
 
     filters :is_active, :email, :name, :nickname, :institution
