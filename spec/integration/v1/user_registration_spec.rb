@@ -2,8 +2,7 @@ require 'rails_helper'
 
 module V1
   describe 'Register users', type: :request do
-    let(:error) { { errors: [{ status: 422, title: "nickname can't be blank" },
-                              { status: 422, title: "nickname is invalid"},
+    let(:error) { { errors: [
                               { status: 422, title: "name can't be blank"},
                               { status: 422, title: "password_confirmation can't be blank" }]}}
 
@@ -19,7 +18,6 @@ module V1
         password: 'password',
         password_confirmation: 'password',
         permissions_request: 'government',
-        nickname: 'sebanew',
         name: 'Test user new'
       }
     end
