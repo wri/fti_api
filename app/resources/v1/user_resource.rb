@@ -8,11 +8,10 @@ module V1
                :permissions_request, :permissions_accepted, :password, :password_confirmation
 
     has_one :country
-    has_one    :user_permission, foreign_key_on: :related
-    has_many   :comments
+    has_one :user_permission, foreign_key_on: :related
+    has_many :comments
     has_one :observer
     has_one :operator
-
 
     def self.fields
       super - [:password, :password_confirmation]

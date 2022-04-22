@@ -28,17 +28,18 @@ module V1
       edit: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        excluded_params: %i[password password-confirmation permissions-request],
+        excluded_params: %i[password password-confirmation permissions-request current-password],
         valid_params: {
           email: 'test@gmail.com',
           nickname: 'sebanew',
           password: 'password',
           'password-confirmation': 'password',
+          'current-password': 'password',
           name: 'Test user new',
           'permissions-request': 'government'
         },
         invalid_params: { name: '', email: 'test@gmail.com', password: 'password', 'permissions-request': 'government' },
-        error_attributes: [422, 100, { 'name': ["can't be blank"] }]
+        error_attributes: [422, 100, { 'name': ["can't be blank"], 'current-password': ["can't be blank"] }]
       },
       delete: {
         success_roles: %i[admin],
@@ -85,6 +86,35 @@ module V1
 
           expect(status).to eq(401)
           expect(user.reload.ngo?).to eq(false)
+        end
+
+        describe 'Current Password validation' do
+          it 'requires current password when changing password' do
+            patch("/users/#{operator_user.id}",
+                  params: jsonapi_params('users', operator_user.id, { password: 'new_password' }),
+                  headers: operator_user_headers)
+
+            expect(status).to eq(422)
+            expect(parsed_body[:errors].first[:detail]).to eq("current-password - can't be blank")
+          end
+
+          it 'requires current password when changing email' do
+            patch("/users/#{operator_user.id}",
+                  params: jsonapi_params('users', operator_user.id, { email: 'newemail@example.com' }),
+                  headers: operator_user_headers)
+
+            expect(status).to eq(422)
+            expect(parsed_body[:errors].first[:detail]).to eq("current-password - can't be blank")
+          end
+
+          it 'does not require current password when changing password in observation tool' do
+            patch("/users/#{operator_user.id}?app=observations-tool",
+                  params: jsonapi_params('users', operator_user.id, { password: 'new_password' }),
+                  headers: operator_user_headers)
+
+            expect(status).to eq(200)
+            expect(operator_user.reload.valid_password?('new_password')).to eq(true)
+          end
         end
       end
     end
