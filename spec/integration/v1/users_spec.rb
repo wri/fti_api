@@ -20,7 +20,6 @@ module V1
         },
         invalid_params: { email: 'test@gmail.com', password: 'password', 'permissions-request': 'government' },
         error_attributes: [422, 100, {
-          nickname: ["can't be blank", 'is invalid'],
           name: ["can't be blank"],
           'password-confirmation': ["can't be blank"],
         }]

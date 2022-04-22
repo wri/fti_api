@@ -46,7 +46,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Validations' do
-    it { is_expected.to validate_presence_of(:nickname) }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:password_confirmation) }
 
