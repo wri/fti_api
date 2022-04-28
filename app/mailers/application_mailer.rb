@@ -10,7 +10,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def send_email(from, to, content, subject, content_type = 'text/plain')
     email_from = Email.new(email: from)
-    email_to = Email.new(email: to)
+    email_to = Email.new(email: Rails.env.staging? ? ENV['RESPONSIBLE_EMAIL'] : to)
     email_content = Content.new(type: content_type, value: content)
     mail = Mail.new(email_from, subject, email_to, email_content)
 
