@@ -1067,6 +1067,13 @@ Rails/LexicallyScopedActionFilter:
     - 'app/controllers/concerns/**/*'
     - 'app/controllers/v1/**/*'
 
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - staging
+
 # TODO: Enable it
 Rails/HasManyOrHasOneDependent:
   Enabled: false
