@@ -19,6 +19,7 @@
 #  updated_at        :datetime         not null
 #  hidden            :boolean
 #  is_active         :boolean
+#  observation_type  :integer
 #
 class ObservationStatistic < ApplicationRecord
   # this record has table, but there should be no data, as it's used
