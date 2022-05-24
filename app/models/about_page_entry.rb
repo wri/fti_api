@@ -17,7 +17,7 @@ class AboutPageEntry < ApplicationRecord
   validates_presence_of :position
 
   active_admin_translates :title do
-   validates_presence_of :title
+    validates_presence_of :title
   end
 
   active_admin_translates :body do
