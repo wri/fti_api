@@ -17,16 +17,16 @@
 
 class Sawmill < ApplicationRecord
   belongs_to :operator
+
+  validates_presence_of :name
   validates_numericality_of :lat, greater_than_or_equal_to: -90, less_than_or_equal_to: 90
   validates_numericality_of :lng, greater_than_or_equal_to: -180, less_than_or_equal_to: 180
 
   scope :active, -> { Sawmill.where(is_active: true) }
   scope :inactive, -> { Sawmill.where(is_active: false) }
+  scope :filter_by_operators, ->(operator_ids) { where( operator_id: operator_ids.split(',')) }
 
   after_save :update_geojson
-
-
-  scope :filter_by_operators,      ->(operator_ids) { where( operator_id: operator_ids.split(','))  }
 
   def self.fetch_all(options)
     operator_ids  = options['operator_ids'] if options.present? && options['operator_ids'].present? && ValidationHelper.ids?(options['operator_ids'])
