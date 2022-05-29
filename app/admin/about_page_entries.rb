@@ -34,7 +34,11 @@ ActiveAdmin.register AboutPageEntry do
   index do
     column :position
     column :title
-    column :body
+    # rubocop:disable Rails/OutputSafety
+    column :body do |entry|
+      entry.body.html_safe
+    end
+    # rubocop:enable Rails/OutputSafety
     column :created_at
     column :updated_at
 
@@ -70,7 +74,11 @@ ActiveAdmin.register AboutPageEntry do
     attributes_table do
       row :position
       row :title
-      row :body
+      # rubocop:disable Rails/OutputSafety
+      row :body do |entry|
+        entry.body.html_safe
+      end
+      # rubocop:enable Rails/OutputSafety
       row :created_at
       row :updated_at
     end
