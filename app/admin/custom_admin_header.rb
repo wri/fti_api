@@ -97,6 +97,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             ul do
               li { link_to 'Partners',           admin_partners_path }
               li { link_to 'Donors',             admin_donors_path }
+              li { link_to 'About Page',         admin_about_page_entries_path }
               li do
                 text_node content_tag 'a', 'Help page', class: '-with-children'
                 ul do
