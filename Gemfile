@@ -95,6 +95,10 @@ gem 'paper_trail'
 # Interactors
 gem "interactor", "~> 3.0"
 
+# Error Management
+gem 'sentry-rails'
+gem 'sentry-ruby'
+
 group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
