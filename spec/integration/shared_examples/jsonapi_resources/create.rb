@@ -23,6 +23,7 @@ RSpec.shared_examples 'jsonapi-resources__create' do |options|
                params: jsonapi_params(@collection, nil, valid_params),
                headers: headers)
 
+          expect(parsed_body[:errors]).to be_nil
           expect(parsed_data[:id]).not_to be_empty
           valid_params
             .except(:relationships)
