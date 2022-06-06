@@ -7,6 +7,10 @@ RSpec.shared_examples 'jsonapi-resources__pagination' do |options|
       @collection = create_list(@singular.to_sym, 6, options[:attributes] || {})
     end
 
+    after(:context) do
+      @model_class.destroy_all
+    end
+
     (options[:success_roles] || [:webuser]).each do |role|
       describe "For user with #{role} role" do
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
