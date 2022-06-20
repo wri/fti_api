@@ -70,6 +70,28 @@ ActiveAdmin.register Fmu do
     column :certification_ls
   end
 
+  show do
+    attributes_table do
+      row :id
+      row :name
+      row :forest_type
+      row :country
+      row :operator
+      row :certification_fsc
+      row :certification_pefc
+      row :certification_olb
+      row :certification_pafc
+      row :certification_fsc_cw
+      row :certification_tlv
+      row :certification_ls
+      row(:geojson) { |fmu| fmu.geojson.to_json }
+      row :properties
+      row :created_at
+      row :updated_at
+      row :deleted_at
+    end
+  end
+
   index do
     column :id, sortable: true
     column :name, sortable: 'fmu_translations.name'

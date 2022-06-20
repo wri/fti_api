@@ -18,7 +18,7 @@ module V1
     end
 
     def tiles
-      tile = Fmu.vector_tiles params[:z], params[:x], params[:y]
+      tile = Fmu.vector_tiles params[:z], params[:x], params[:y], params[:operator_id]
       send_data tile
     end
 
@@ -30,10 +30,9 @@ module V1
 
     def build_json(fmus)
       {
-          "type": "FeatureCollection",
-          "features": fmus.map(&:geojson)
+        "type": "FeatureCollection",
+        "features": fmus.map(&:geojson)
       }
     end
-
   end
 end

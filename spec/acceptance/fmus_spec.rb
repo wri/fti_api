@@ -58,6 +58,9 @@ If not, then the request is processed as a typical JSON API request.'
               type: :integer, with_example: true, default: 1, minimum: 1
     parameter :z, 'Z index', in: 'path',
               type: :integer, with_example: true, default: 1, minimum: 1
+    parameter :operator_id, 'Operator Id', in: 'query', type: :integer
+
+    let(:operator_id) { operator.id }
 
     context '200' do
       example_request 'Getting highest level tiles' do
