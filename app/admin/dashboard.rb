@@ -6,18 +6,30 @@ ActiveAdmin.register_page "Dashboard" do
   menu false
 
   page_action :deploy_portal, method: :post do
-    system 'rake deploy:portal' if current_user.user_permission.user_role == 'admin'
-    redirect_to admin_dashboard_path, notice: 'Deploying Portal'
+    authorize! :deploy_portal
+    if system 'rake deploy:portal'
+      redirect_to admin_dashboard_path, notice: 'Portal deployed'
+    else
+      redirect_to admin_dashboard_path, alert: 'Error while deploying Portal'
+    end
   end
 
   page_action :deploy_ot, method: :post do
-    system 'rake deploy:tools' if current_user.user_permission.user_role == 'admin'
-    redirect_to admin_dashboard_path, notice: 'Deploying IM Backoffice'
+    authorize! :deploy_ot
+    if system 'rake deploy:tools'
+      redirect_to admin_dashboard_path, notice: 'IM Backoffice deployed'
+    else
+      redirect_to admin_dashboard_path, alert: 'Error while deploying IM Backoffice'
+    end
   end
 
   page_action :hide_old_observations, method: :post do
-    system 'rake observations:hide' if current_user.user_permission.user_role == 'admin'
-    redirect_to admin_dashboard_path, notice: 'Hiding old observations'
+    authorize! :hide_old_observations
+    if system 'rake observations:hide'
+      redirect_to admin_dashboard_path, notice: 'Old observations hidden'
+    else
+      redirect_to admin_dashboard_path, notice: 'Error while hidding old observations'
+    end
   end
 
   content title: proc{ I18n.t("active_admin.dashboard") } do

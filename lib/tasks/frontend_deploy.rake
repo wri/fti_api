@@ -13,10 +13,12 @@ namespace :deploy do
     rescue Exception => e
       Sentry.capture_exception e
       Rails.logger.error e.inspect
+      raise
+    ensure
+      Rails.logger.debug stdout
+      Rails.logger.debug stderr
+      Rails.logger.debug status
     end
-    Rails.logger.debug stdout
-    Rails.logger.debug stderr
-    Rails.logger.debug status
     Rails.logger.warn ':::: Finished redeploying the observations tool :::::'
   end
 
@@ -33,10 +35,12 @@ namespace :deploy do
     rescue Exception => e
       Sentry.capture_exception e
       Rails.logger.error e.inspect
+      raise
+    ensure
+      Rails.logger.debug stdout
+      Rails.logger.debug stderr
+      Rails.logger.debug status
     end
-    Rails.logger.debug stdout
-    Rails.logger.debug stderr
-    Rails.logger.debug status
     Rails.logger.warn ':::: Finished redeploying the portal :::::'
   end
 end
