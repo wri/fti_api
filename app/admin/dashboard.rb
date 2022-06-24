@@ -31,7 +31,7 @@ ActiveAdmin.register_page "Dashboard" do
                                                                                        class: 'deploy-button'
         end
         panel "Old observations (#{obs_count})" do
-          table_for Observation.where('publication_date < ?', Date.today - 5.year).order(publication_date: :desc).limit(20) do
+          table_for Observation.includes(:subcategory, :operator, country: :translations).where('publication_date < ?', Date.today - 5.year).order(publication_date: :desc).limit(20) do
             column('ID') { |obs| link_to obs.id, admin_observation_path(obs.id) }
             column('Publication Date') { |obs| obs.publication_date }
             column('Country') { |obs| obs.country }
@@ -66,7 +66,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel 'New Producers' do
-          table_for Operator.inactive.order('updated_at DESC').limit(20).each do
+          table_for Operator.inactive.includes(country: :translations).order('updated_at DESC').limit(20).each do
             column('Name') { |o| link_to o.name, admin_producer_path(o.id) }
             column('Country') { |o| o.country.present? ? o.country.name : 'No country' }
           end
@@ -75,7 +75,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel 'New IMs' do
-          table_for Observer.inactive.order('updated_at DESC').limit(20).each do
+          table_for Observer.inactive.includes(countries: :translations).order('updated_at DESC').limit(20).each do
             column('Name') { |o| link_to o.name, admin_monitor_path(o.id) }
             column('Countries') { |o| o.countries.each{ |x| x.name }.join(', ') }
           end
@@ -87,7 +87,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel 'New User Accounts' do
-          table_for User.inactive.order('updated_at DESC').limit(20).each do
+          table_for User.inactive.includes(:user_permission, country: :translations).order('updated_at DESC').limit(20).each do
             column('Name')    { |o| link_to o.name, admin_user_path(o.id) }
             column('Country') { |o| o.country.name  if o.country.present? }
             column('Role')    { |o| o.user_permission.user_role if o.user_permission.present? }
@@ -97,7 +97,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel "First 20 Pending Observations out of #{Observation.Created.count}" do
-          table_for Observation.Created.order('updated_at DESC').limit(20).each do
+          table_for Observation.Created.includes(:country, :subcategory, :operator).order('updated_at DESC').limit(20).each do
             column('ID') { |obs| link_to obs.id, admin_observation_path(obs.id) }
             column('Country') { |obs| obs.country }
             column('Subcategory') { |obs| obs.subcategory }
@@ -112,7 +112,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "First 20 Pending Documents out of #{OperatorDocument.doc_pending.count}" do
-          table_for OperatorDocument.doc_pending.order('updated_at DESC').limit(20).each do
+          table_for OperatorDocument.doc_pending.includes(:operator, :required_operator_document).order('updated_at DESC').limit(20).each do
             column('Operator') { |od| link_to od.operator.name, admin_producer_path(od.operator_id) }
             column('Name') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
             column('Creation Date') { |od| od.created_at.strftime("%A, %d/%b/%Y") }
