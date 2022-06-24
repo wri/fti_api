@@ -39,7 +39,10 @@ ActiveAdmin.register_page "Dashboard" do
       unless obs_count.zero?
         columns do
           button_to 'Hide old observations', '/admin/dashboard/hide_old_observations', method: :post,
-                                                                                       data: { confirm: 'Are you sure you want to hide old observations?' },
+                                                                                       data: {
+                                                                                         disable_with: 'Hidding old observations...',
+                                                                                         confirm: 'Are you sure you want to hide old observations?'
+                                                                                       },
                                                                                        class: 'deploy-button'
         end
         panel "Old observations (#{obs_count})" do
@@ -58,7 +61,10 @@ ActiveAdmin.register_page "Dashboard" do
         column do
           panel 'Portal' do
             button_to 'Deploy Portal', '/admin/dashboard/deploy_portal', method: :post,
-                                                                         data: { confirm: 'Are you sure you want to deploy the PORTAL?' },
+                                                                         data: {
+                                                                           disable_with: 'Deploying Portal...',
+                                                                           confirm: 'Are you sure you want to deploy the PORTAL?'
+                                                                         },
                                                                          class: 'deploy-button'
             #style: 'font-size: 1.5em'
           end
@@ -67,7 +73,10 @@ ActiveAdmin.register_page "Dashboard" do
         column do
           panel 'IM Backoffice' do
             button_to 'Deploy IM Backoffice', '/admin/dashboard/deploy_ot', method: :post,
-                                                                            data: { confirm: 'Are you sure you want to deploy the IM BACKOFFICE?' },
+                                                                            data: {
+                                                                              disable_with: 'Deploying IM Backoffice...',
+                                                                              confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'
+                                                                            },
                                                                             class: 'deploy-button'
             #style: 'font-size: 1.5em'
           end
