@@ -6,18 +6,30 @@ ActiveAdmin.register_page "Dashboard" do
   menu false
 
   page_action :deploy_portal, method: :post do
-    system 'rake deploy:portal' if current_user.user_permission.user_role == 'admin'
-    redirect_to admin_dashboard_path, notice: 'Deploying Portal'
+    authorize! :deploy_portal
+    if system 'rake deploy:portal'
+      redirect_to admin_dashboard_path, notice: 'Portal deployed'
+    else
+      redirect_to admin_dashboard_path, alert: 'Error while deploying Portal'
+    end
   end
 
   page_action :deploy_ot, method: :post do
-    system 'rake deploy:tools' if current_user.user_permission.user_role == 'admin'
-    redirect_to admin_dashboard_path, notice: 'Deploying IM Backoffice'
+    authorize! :deploy_ot
+    if system 'rake deploy:tools'
+      redirect_to admin_dashboard_path, notice: 'IM Backoffice deployed'
+    else
+      redirect_to admin_dashboard_path, alert: 'Error while deploying IM Backoffice'
+    end
   end
 
   page_action :hide_old_observations, method: :post do
-    system 'rake observations:hide' if current_user.user_permission.user_role == 'admin'
-    redirect_to admin_dashboard_path, notice: 'Hiding old observations'
+    authorize! :hide_old_observations
+    if system 'rake observations:hide'
+      redirect_to admin_dashboard_path, notice: 'Old observations hidden'
+    else
+      redirect_to admin_dashboard_path, notice: 'Error while hidding old observations'
+    end
   end
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
@@ -27,11 +39,14 @@ ActiveAdmin.register_page "Dashboard" do
       unless obs_count.zero?
         columns do
           button_to 'Hide old observations', '/admin/dashboard/hide_old_observations', method: :post,
-                                                                                       data: { confirm: 'Are you sure you want to hide old observations?' },
+                                                                                       data: {
+                                                                                         disable_with: 'Hidding old observations...',
+                                                                                         confirm: 'Are you sure you want to hide old observations?'
+                                                                                       },
                                                                                        class: 'deploy-button'
         end
         panel "Old observations (#{obs_count})" do
-          table_for Observation.where('publication_date < ?', Date.today - 5.year).order(publication_date: :desc).limit(20) do
+          table_for Observation.includes(:subcategory, :operator, country: :translations).where('publication_date < ?', Date.today - 5.year).order(publication_date: :desc).limit(20) do
             column('ID') { |obs| link_to obs.id, admin_observation_path(obs.id) }
             column('Publication Date') { |obs| obs.publication_date }
             column('Country') { |obs| obs.country }
@@ -46,7 +61,10 @@ ActiveAdmin.register_page "Dashboard" do
         column do
           panel 'Portal' do
             button_to 'Deploy Portal', '/admin/dashboard/deploy_portal', method: :post,
-                                                                         data: { confirm: 'Are you sure you want to deploy the PORTAL?' },
+                                                                         data: {
+                                                                           disable_with: 'Deploying Portal...',
+                                                                           confirm: 'Are you sure you want to deploy the PORTAL?'
+                                                                         },
                                                                          class: 'deploy-button'
             #style: 'font-size: 1.5em'
           end
@@ -55,7 +73,10 @@ ActiveAdmin.register_page "Dashboard" do
         column do
           panel 'IM Backoffice' do
             button_to 'Deploy IM Backoffice', '/admin/dashboard/deploy_ot', method: :post,
-                                                                            data: { confirm: 'Are you sure you want to deploy the IM BACKOFFICE?' },
+                                                                            data: {
+                                                                              disable_with: 'Deploying IM Backoffice...',
+                                                                              confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'
+                                                                            },
                                                                             class: 'deploy-button'
             #style: 'font-size: 1.5em'
           end
@@ -66,7 +87,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel 'New Producers' do
-          table_for Operator.inactive.order('updated_at DESC').limit(20).each do
+          table_for Operator.inactive.includes(country: :translations).order('updated_at DESC').limit(20).each do
             column('Name') { |o| link_to o.name, admin_producer_path(o.id) }
             column('Country') { |o| o.country.present? ? o.country.name : 'No country' }
           end
@@ -75,7 +96,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel 'New IMs' do
-          table_for Observer.inactive.order('updated_at DESC').limit(20).each do
+          table_for Observer.inactive.includes(countries: :translations).order('updated_at DESC').limit(20).each do
             column('Name') { |o| link_to o.name, admin_monitor_path(o.id) }
             column('Countries') { |o| o.countries.each{ |x| x.name }.join(', ') }
           end
@@ -87,7 +108,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel 'New User Accounts' do
-          table_for User.inactive.order('updated_at DESC').limit(20).each do
+          table_for User.inactive.includes(:user_permission, country: :translations).order('updated_at DESC').limit(20).each do
             column('Name')    { |o| link_to o.name, admin_user_path(o.id) }
             column('Country') { |o| o.country.name  if o.country.present? }
             column('Role')    { |o| o.user_permission.user_role if o.user_permission.present? }
@@ -97,7 +118,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel "First 20 Pending Observations out of #{Observation.Created.count}" do
-          table_for Observation.Created.order('updated_at DESC').limit(20).each do
+          table_for Observation.Created.includes(:country, :subcategory, :operator).order('updated_at DESC').limit(20).each do
             column('ID') { |obs| link_to obs.id, admin_observation_path(obs.id) }
             column('Country') { |obs| obs.country }
             column('Subcategory') { |obs| obs.subcategory }
@@ -112,7 +133,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "First 20 Pending Documents out of #{OperatorDocument.doc_pending.count}" do
-          table_for OperatorDocument.doc_pending.order('updated_at DESC').limit(20).each do
+          table_for OperatorDocument.doc_pending.includes(:operator, :required_operator_document).order('updated_at DESC').limit(20).each do
             column('Operator') { |od| link_to od.operator.name, admin_producer_path(od.operator_id) }
             column('Name') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
             column('Creation Date') { |od| od.created_at.strftime("%A, %d/%b/%Y") }
