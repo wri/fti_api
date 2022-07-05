@@ -29,5 +29,4 @@ set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
 
 namespace :deploy do
   after :finishing, 'deploy:cleanup'
-  after 'deploy:publishing', 'deploy:symlink:linked_files', 'deploy:symlink:linked_dirs', 'deploy:restart', 'resque:restart'
 end
