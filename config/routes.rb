@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   require 'sidekiq/web'
   authenticate :user, ->(user) { user&.user_permission&.user_role == 'admin' } do
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web => '/admin/sidekiq'
   end
 
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
