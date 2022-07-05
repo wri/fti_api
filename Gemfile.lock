@@ -283,7 +283,6 @@ GEM
     net-scp (2.0.0)
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
-    newrelic_rpm (6.9.0.363)
     nio4r (2.5.8)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -578,7 +577,6 @@ DEPENDENCIES
   jwt
   listen (~> 3.0.5)
   mini_magick
-  newrelic_rpm
   oink
   oj
   oj_mimic_json

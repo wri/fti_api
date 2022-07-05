@@ -79,7 +79,6 @@ gem 'mini_magick'
 gem 'slim-rails'
 
 # Performance
-gem 'newrelic_rpm'
 gem 'oink'
 
 # Mail
