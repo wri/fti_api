@@ -17,6 +17,11 @@ class ApplicationMailer < ActionMailer::Base
 
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
 
-    sg.client.mail._('send').post(request_body: mail.to_json)
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+    if response.status_code.to_i < 200 || response.status_code.to_i >= 300
+      raise "Sendgrid Error: status_code #{response.status_code}, message: #{response.body}"
+    end
+
+    response
   end
 end
