@@ -74,10 +74,3 @@ set :ssh_options, {
 
 set :branch, ENV.fetch('BRANCH') { 'staging' }
 set :deploy_to, '~/fti-api-staging'
-
-role :resque_worker, ENV['STAGING_IP']
-role :resque_scheduler, ENV['STAGING_IP']
-
-set :workers, {
-    ENV['STAGING_IP'] => { 'mailer' => 2 }
-}

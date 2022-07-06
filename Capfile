@@ -38,7 +38,6 @@ require 'capistrano/env-config'
 # require 'capistrano/secrets_yml'
 # require 'capistrano/postgresql'
 # require 'whenever/capistrano'
-require 'capistrano-resque'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }

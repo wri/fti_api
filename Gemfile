@@ -79,7 +79,6 @@ gem 'mini_magick'
 gem 'slim-rails'
 
 # Performance
-gem 'newrelic_rpm'
 gem 'oink'
 
 # Mail
@@ -117,7 +116,6 @@ group :development do
   gem 'capistrano-env-config'
   gem 'capistrano-passenger'
   gem 'capistrano-rails',          '~> 1.2'
-  gem 'capistrano-resque',         require: false
   gem 'capistrano-rvm'
   gem 'guard'
   gem 'listen',                    '~> 3.0.5'
@@ -144,7 +142,4 @@ gem 'dotenv-rails'
 gem 'puma'
 gem 'rack-cors'
 gem 'redis-rails'
-gem 'resque'
-gem 'resque-scheduler'
-gem 'resque_mailer'
 gem 'tzinfo-data'
