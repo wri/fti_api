@@ -18,14 +18,14 @@ class MailService
     @body =
     <<~TXT
       Dear #{user_name}
-      
+
       Someone has requested a link to change your password. You can do this through the link below.
-      
+
       #{reset_url}.
-      
+
       If you didn't request this, please ignore this email.
       Your password won't change until you access the link above and create a new one.
-      
+
       Best regards,
       OTP
     TXT
@@ -39,8 +39,8 @@ class MailService
     @subject = 'Registration confirmation'
     @body =
 <<~TXT
-  Thank you for subscribing to the Open Timber Portal (OTP) newsletter. 
-  
+  Thank you for subscribing to the Open Timber Portal (OTP) newsletter.
+
   Best wishes,
   The OTP team.
 TXT
@@ -126,10 +126,10 @@ TXT
     @body =
 <<~TXT
   Hello,
-  
+
   #{observation.operator&.name} has responded to your requested changes.
   The status is now: #{observation.validation_status}.
-  
+
   Please check it in the backoffice.
 TXT
 
@@ -144,23 +144,23 @@ TXT
     @body =
 <<~TXT
   Hello,
-  
+
   The observation with the id #{observation.id} is ready for QC.
   Please check it in the back office.
 
   Info:
   - Country: #{observation.country&.name}.
   - Observer: #{observation.modified_user&.observer&.name}
-  - User 
+  - User
     -Name: #{observation.modified_user&.name}
     -Email: #{observation.modified_user&.email}
-  
+
   Best,
   OTP
   --------------------------------------------------------------
 
   Bonjour,
-  
+
   L'observation avec l'identifiant #{observation.id} est prête pour le contrôle qualité.
    Veuillez le vérifier dans le back-office.
 
@@ -170,9 +170,9 @@ TXT
    - Utilisateur
      -Nom : #{observation.modified_user&.name}
      -Email : #{observation.modified_user&.email}
-  
+
   Cordialement,
-   OTP 
+   OTP
 TXT
     @from = ENV['CONTACT_EMAIL']
     @to = ENV['RESPONSIBLE_EMAIL']

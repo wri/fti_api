@@ -73,10 +73,3 @@ set :ssh_options, {
 
 set :branch, 'master'
 set :deploy_to, '~/fti-api-production'
-
-role :resque_worker, ENV['PRODUCTION_IP']
-role :resque_scheduler, ENV['PRODUCTION_IP']
-
-set :workers, {
-    ENV['STAGING_IP'] => { 'mailer' => 2 }
-}

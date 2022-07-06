@@ -73,10 +73,3 @@ set :ssh_options, {
 
 set :branch, 'migration_fase_four'
 set :deploy_to, '~/fti-api-production-secondary'
-
-role :resque_worker, ENV['SECONDARY_IP']
-role :resque_scheduler, ENV['SECONDARY_IP']
-
-set :workers, {
-    ENV['SECONDARY_IP'] => { 'mailer' => 2 }
-}
