@@ -28,6 +28,10 @@ class ApiController < ActionController::API
     render json: { errors: [{ status: '401', title: exception.message }] }, status: :unauthorized
   end
 
+  on_server_error do |error|
+    Sentry.capture_exception(error)
+  end
+
   def valid_api_key?
     !!web_user
   end
