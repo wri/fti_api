@@ -144,6 +144,16 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
   end
 
+  sidebar 'Observations', only: :show do
+    attributes_table_for resource do
+      ul do
+        resource.all_observations.collect do |observation|
+          li link_to(observation.id, admin_observation_path(observation.id))
+        end
+      end
+    end
+  end
+
   sidebar 'Sawmills', only: :show do
     attributes_table_for resource do
       ul do
