@@ -9,6 +9,10 @@ class BaseDecorator < SimpleDelegator
     collection.map { |item| new(item, view_context) }
   end
 
+  def self.decorate(model, view_context = nil)
+    new(model, view_context)
+  end
+
   def initialize(model, view_context = nil)
     super(model)
     @model = model
