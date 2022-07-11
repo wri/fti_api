@@ -147,7 +147,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   sidebar 'Observations', only: :show do
     attributes_table_for resource do
       div do
-        resource.all_observations.collect do |observation|
+        resource.all_observations.order(:id).collect do |observation|
           link_to(observation.id, admin_observation_path(observation.id))
         end.join(', ').html_safe
       end
