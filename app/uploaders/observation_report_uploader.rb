@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ObservationReportUploader < CarrierWave::Uploader::Base
-  storage :file
-
+class ObservationReportUploader < ApplicationUploader
   def store_dir
     directory = model.deleted? ? 'private_uploads' : 'uploads'
     "#{directory}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -18,10 +16,6 @@ class ObservationReportUploader < CarrierWave::Uploader::Base
     %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
   end
 
-  def exists?
-    file.present?
-  end
-
   def filename
     return if super.blank?
 
@@ -29,13 +23,5 @@ class ObservationReportUploader < CarrierWave::Uploader::Base
     filename = '' + model.title[0...50]&.parameterize + '-' + date
     filename += '.' + super.split('.').last if super.split('.').any?
     filename
-  end
-
-  def original_filename
-    if file.present?
-      file.filename
-    else
-      super
-    end
   end
 end
