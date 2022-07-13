@@ -15,10 +15,11 @@ class ApplicationMailer < ActionMailer::Base
     email_content = Content.new(type: content_type, value: content)
     mail = Mail.new(email_from, subject, email_to, email_content)
 
-    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
-
     # TODO: this should be refactored to use SMTP so I will not bother with trying to test it
     return if Rails.env.test?
+    return if Rails.env.development? && ENV['SEND_EMAILS_IN_DEV'] != 'true'
+
+    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
 
     response = sg.client.mail._('send').post(request_body: mail.to_json)
     if response.status_code.to_i < 200 || response.status_code.to_i >= 300
