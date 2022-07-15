@@ -144,6 +144,18 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
   end
 
+  sidebar 'Observations', only: :show do
+    attributes_table_for resource do
+      # rubocop:disable Rails/OutputSafety
+      div do
+        resource.all_observations.order(:id).collect do |observation|
+          link_to(observation.id, admin_observation_path(observation.id))
+        end.join(', ').html_safe
+      end
+      # rubocop:enable Rails/OutputSafety
+    end
+  end
+
   sidebar 'Sawmills', only: :show do
     attributes_table_for resource do
       ul do
