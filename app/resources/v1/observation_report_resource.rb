@@ -17,7 +17,7 @@ module V1
     end
 
     filter :observer_id, apply: ->(records, value, _options) {
-      records.joins(:observers).where('observers.id = ?', value[0].to_i).distinct
+      records.where(id: ObservationReportObserver.where(observer_id: value[0].to_i).pluck(:observation_report_id))
     }
 
     # TODO: Reactivate rubocop and fix this
