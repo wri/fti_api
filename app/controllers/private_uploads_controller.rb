@@ -5,7 +5,7 @@ class PrivateUploadsController < ApplicationController
 
   def download
     filepath = "#{params[:rest]}.#{params[:format]}"
-    send_file_inside File.join(Rails.root, 'private_uploads'), filepath, disposition: :inline
+    send_file_inside File.join(Rails.root, 'private', 'uploads'), filepath, disposition: :inline
   end
 
   private

@@ -1,17 +1,6 @@
 # frozen_string_literal: true
 
 class ObservationReportUploader < ApplicationUploader
-  def store_dir
-    directory = model.deleted? ? 'private_uploads' : 'uploads'
-    "#{directory}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-
-  def root
-    return Rails.root if model.deleted?
-
-    Rails.root.join('public')
-  end
-
   def extension_whitelist
     %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
   end
@@ -23,5 +12,9 @@ class ObservationReportUploader < ApplicationUploader
     filename = '' + model.title[0...50]&.parameterize + '-' + date
     filename += '.' + super.split('.').last if super.split('.').any?
     filename
+  end
+
+  def private_upload?
+    model.deleted?
   end
 end

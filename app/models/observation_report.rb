@@ -33,23 +33,23 @@ class ObservationReport < ApplicationRecord
   private
 
   def move_attachment_to_private_directory
-    move_attachment(
-      from: File.join('public', 'uploads', self.class.to_s.underscore, 'attachment', id.to_s),
-      to: File.join('private_uploads', self.class.to_s.underscore, 'attachment')
-    )
+    return unless attachment
+
+    from = File.dirname(attachment.file.file.gsub('/private/', '/public/'))
+    to = File.dirname(from.gsub('/public/', '/private/'))
+    move_attachment(from: from, to: to)
   end
 
   def move_attachment_to_public_directory
-    move_attachment(
-      from: File.join('private_uploads', self.class.to_s.underscore, 'attachment', id.to_s),
-      to: File.join('public', 'uploads', self.class.to_s.underscore, 'attachment')
-    )
+    return unless attachment
+
+    from = File.dirname(attachment.file.file.gsub('/public/', '/private/'))
+    to = File.dirname(from.gsub('/private/', '/public/'))
+    move_attachment(from: from, to: to)
   end
 
   def move_attachment(from:, to:)
-    return unless attachment
-
     FileUtils.makedirs(to)
-    FileUtils.mv(from, to)
+    FileUtils.mv(from, to, force: true)
   end
 end
