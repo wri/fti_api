@@ -1,21 +1,12 @@
 require 'rails_helper'
 
-describe 'Private Uploads', type: :request do
+describe 'Private Uploads', :realistic_error_responses, type: :request do
   let(:admin) { create(:admin) }
 
   before do
     @observation_report = create(:observation_report)
     @observation_report.destroy!
     @observation_report.reload
-    @old_show_exceptions_value = Rails.application.config.action_dispatch.show_exceptions
-    @old_consider_all_requests_local_value = Rails.application.config.consider_all_requests_local
-    Rails.application.config.action_dispatch.show_exceptions = true
-    Rails.application.config.consider_all_requests_local = false
-  end
-
-  after do
-    Rails.application.config.action_dispatch.show_exceptions = @old_show_exceptions_value
-    Rails.application.config.consider_all_requests_local = @old_consider_all_requests_local_value
   end
 
   context 'as admin user' do

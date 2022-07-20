@@ -54,6 +54,7 @@ RspecApiDocumentation.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include ErrorResponses
   config.include IntegrationHelper, type: :request
   config.include ImporterHelper, type: :importer
   config.extend APIDocsHelpers
@@ -75,6 +76,10 @@ RSpec.configure do |config|
     if Rails.env.test? || Rails.env.cucumber?
       FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
     end
+  end
+
+  config.around(realistic_error_responses: true) do |example|
+    respond_without_detailed_exceptions(&example)
   end
 
   if Bullet.enable?
