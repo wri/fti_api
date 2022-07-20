@@ -17,6 +17,7 @@
 class ObservationReport < ApplicationRecord
   has_paper_trail
   mount_base64_uploader :attachment, ObservationReportUploader
+  include MoveableAttachment
 
   acts_as_paranoid
 
@@ -29,27 +30,4 @@ class ObservationReport < ApplicationRecord
   after_restore :move_attachment_to_public_directory
 
   scope :bigger_date, ->(date) { where('observation_reports.created_at <= ?', date + 1.day) }
-
-  private
-
-  def move_attachment_to_private_directory
-    return unless attachment
-
-    from = File.dirname(attachment.file.file.gsub('/private/', '/public/'))
-    to = File.dirname(from.gsub('/public/', '/private/'))
-    move_attachment(from: from, to: to)
-  end
-
-  def move_attachment_to_public_directory
-    return unless attachment
-
-    from = File.dirname(attachment.file.file.gsub('/public/', '/private/'))
-    to = File.dirname(from.gsub('/private/', '/public/'))
-    move_attachment(from: from, to: to)
-  end
-
-  def move_attachment(from:, to:)
-    FileUtils.makedirs(to)
-    FileUtils.mv(from, to, force: true)
-  end
 end
