@@ -21,9 +21,9 @@ class ObservationReport < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user, inverse_of: :observation_reports
-  has_many :observation_report_observers
+  has_many :observation_report_observers, dependent: :destroy
   has_many :observers, through: :observation_report_observers
-  has_many :observations
+  has_many :observations, dependent: :destroy
 
   after_destroy :move_attachment_to_private_directory
   after_restore :move_attachment_to_public_directory

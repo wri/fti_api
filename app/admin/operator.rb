@@ -102,10 +102,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
     actions defaults: false do |operator|
       item "View", admin_producer_path(operator)
-      text_node "<br/>".html_safe
       item "Edit", edit_admin_producer_path(operator)
-      text_node "<br/>".html_safe
-      link_to 'Delete', admin_producer_path(operator), method: :delete, data: { confirm: OperatorDecorator.new(operator).delete_confirmation_text }
+      item 'Delete', admin_producer_path(operator), method: :delete, data: { confirm: OperatorDecorator.new(operator).delete_confirmation_text }
     end
   end
 

@@ -23,6 +23,15 @@ ActiveAdmin.register ObservationReport do
     end
   end
 
+  member_action :really_destroy, method: :delete do
+    if resource.deleted?
+      resource.really_destroy!
+      redirect_to :back, notice: 'Report removed!'
+    else
+      redirect_to :back, notice: 'Report must be moved to recycle bin first!'
+    end
+  end
+
   filter :title, as: :select
   filter :attachment, as: :select
   filter :user, as: :select, collection: User.order(:name)
@@ -93,14 +102,14 @@ ActiveAdmin.register ObservationReport do
 
     actions defaults: false do |report|
       if report.deleted?
-        link_to "Restore", restore_admin_observation_report_path(report), method: :put
+        item 'Restore', restore_admin_observation_report_path(report), method: :put
+        item 'Remove Completely', really_destroy_admin_observation_report_path(report),
+             method: :delete, data: { confirm: 'Are you sure you want to remove the report completely? This action is not reversible.' }
       else
-        item "View", admin_observation_report_path(report)
-        text_node "<br/>".html_safe
-        item "Edit", edit_admin_observation_report_path(report)
-        text_node "<br/>".html_safe
-        link_to 'Delete', admin_observation_report_path(report),
-                method: :delete, data: { confirm: ObservationReportDecorator.new(report).delete_confirmation_text }
+        item 'View', admin_observation_report_path(report)
+        item 'Edit', edit_admin_observation_report_path(report)
+        item 'Delete', admin_observation_report_path(report),
+             method: :delete, data: { confirm: ObservationReportDecorator.new(report).delete_confirmation_text }
       end
     end
   end
