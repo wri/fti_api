@@ -186,4 +186,37 @@ namespace :fix_one_time do
       end
     end
   end
+
+  desc 'Tasks to move already deleted reports attachments and evidences to private directory'
+  task make_deleted_evidences_private: :environment do
+    for_real = ENV['FOR_REAL'] == 'true'
+
+    puts "RUNNING FOR REAL" if for_real
+    puts "DRY RUN" unless for_real
+
+    puts "Deleted Observation documents/evidence: #{ObservationDocument.deleted.count}"
+    puts "With attachment: #{ObservationDocument.deleted.where.not(attachment: ['', nil]).count}"
+
+    missing = 0
+    moved = 0
+
+    ObservationDocument.deleted.where.not(attachment: ['', nil]).find_each do |doc|
+      next if doc.attachment.exists?
+
+      public_filepath = File.dirname(doc.attachment.file.file.gsub('/private/', '/public/'))
+      unless File.exists?(public_filepath)
+        puts "missing file: #{public_filepath}"
+        missing += 1
+        next
+      end
+
+      puts "moving file: #{public_filepath}"
+
+      doc.send(:move_attachment_to_private_directory) if for_real
+      moved += 1
+    end
+
+    puts "Missing files: #{missing}"
+    puts "Moved files: #{moved}"
+  end
 end

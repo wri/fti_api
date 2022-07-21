@@ -26,7 +26,7 @@ module MoveableAttachment
 
     def move_attachment(from:, to:)
       FileUtils.makedirs(to)
-      FileUtils.mv(from, to, force: true)
+      system "mv -f #{from} #{to}"
     end
   end
 end
