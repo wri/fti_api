@@ -26,7 +26,8 @@ module MoveableAttachment
 
     def move_attachment(from:, to:)
       FileUtils.makedirs(to)
-      system "mv -f #{from} #{to}"
+      system "rsync -a #{from} #{to}"
+      system "rm -rf #{from}"
     end
   end
 end
