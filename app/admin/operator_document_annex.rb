@@ -120,17 +120,16 @@ ActiveAdmin.register OperatorDocumentAnnex do
   filter :annex_documents_documentable_of_OperatorDocument_type_required_operator_document_name_equals,
          as: :select,
          label: 'Operator Document',
-         collection: RequiredOperatorDocument.order(:name).pluck(:name)
+         collection: -> { RequiredOperatorDocument.order(:name).pluck(:name) }
 
   filter :annex_documents_documentable_of_OperatorDocument_type_operator_translations_name_equals,
          as: :select,
          label: 'Operator',
-         collection: Operator.with_translations(I18n.locale)
-                         .order('operator_translations.name').pluck(:name)
+         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name) }
   filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
          as: :select,
          label: 'FMU',
-         collection: Fmu.with_translations(I18n.locale).order(:name).pluck(:name)
+         collection: -> { Fmu.with_translations(I18n.locale).order(:name).pluck(:name) }
 
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses

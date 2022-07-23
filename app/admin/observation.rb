@@ -157,8 +157,7 @@ ActiveAdmin.register Observation do
   scope :visible
 
   filter :id, as: :numeric_range
-  filter :validation_status, as: :select, collection:
-      Observation.validation_statuses.sort
+  filter :validation_status, as: :select, collection: -> { Observation.validation_statuses.sort }
   filter :country, as: :select,
                    collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator, label: 'Operator', as: :select,
@@ -166,11 +165,11 @@ ActiveAdmin.register Observation do
   filter :fmu, as: :select, label: 'Fmus',
                collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :governments, as: :select, label: 'Government Entity',
-                       collection: -> { 
-  Government.with_translations(I18n.locale)
-       .order('government_translations.government_entity')
-       .pluck('government_translations.government_entity', 'government_translations.government_id')
-}                     
+                       collection: -> {
+                         Government.with_translations(I18n.locale)
+                           .order('government_translations.government_entity')
+                           .pluck('government_translations.government_entity', 'government_translations.government_id')
+                       }
   filter :subcategory_category_id_eq,
          label: 'Category', as: :select,
          collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
@@ -182,9 +181,9 @@ ActiveAdmin.register Observation do
                      collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :observation_report,
          label: 'Report', as: :select,
-         collection: ObservationReport.order(:title)
-  filter :user, label: 'User who created', as: :select, collection: User.order(:name)
-  filter :modified_user, label: 'User who modified', as: :select, collection: User.order(:name)
+         collection: -> { ObservationReport.order(:title) }
+  filter :user, label: 'User who created', as: :select, collection: -> { User.order(:name) }
+  filter :modified_user, label: 'User who modified', as: :select, collection: -> { User.order(:name) }
   filter :is_active
   filter :publication_date
   filter :updated_at

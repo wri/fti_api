@@ -129,8 +129,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
                    collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
   filter :id,
          as: :select, label: 'Name',
-         collection: Operator.with_translations(I18n.locale)
-                         .order('operator_translations.name').pluck(:name, :id)
+         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name, :id) }
   filter :concession, as: :select
 
 

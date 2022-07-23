@@ -31,8 +31,11 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
 
   filter :translations_name_contains,
          as: :select,
-         collection: RequiredOperatorDocumentGroup.with_translations(I18n.locale)
-                         .order('required_operator_document_group_translations.name').pluck(:name)
+         collection: -> {
+           RequiredOperatorDocumentGroup.with_translations(I18n.locale)
+             .order('required_operator_document_group_translations.name')
+             .pluck(:name)
+         }
   filter :updated_at
 
   form do |f|

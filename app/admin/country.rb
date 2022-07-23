@@ -20,8 +20,7 @@ ActiveAdmin.register Country do
   scope :active
 
   filter :iso, as: :select
-  filter :translations_name_contains, as: :select, label: 'Name',
-                                      collection: Country.order(:name).pluck(:name)
+  filter :translations_name_contains, as: :select, label: 'Name', collection: -> { Country.order(:name).pluck(:name) }
   filter :region_iso, as: :select
   filter :region_name
   filter :is_active

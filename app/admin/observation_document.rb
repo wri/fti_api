@@ -39,9 +39,7 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
     actions
   end
 
-  filter :observation, as: :select,
-                       collection: Observation.joins(:observation_documents)
-                         .distinct.order(:id).pluck(:id)
+  filter :observation, as: :select, collection: -> { Observation.joins(:observation_documents).distinct.order(:id).pluck(:id) }
   filter :name, as: :select
   filter :attachment, as: :select
   filter :user

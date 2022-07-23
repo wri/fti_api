@@ -235,20 +235,24 @@ ActiveAdmin.register OperatorDocument do
 
   filter :public
   filter :id
-  filter :required_operator_document_country_id, label: 'Country', as: :select,
-                                                 collection: Country.with_translations(I18n.locale).order('country_translations.name')
+  filter :required_operator_document_country_id,
+         label: 'Country',
+         as: :select,
+         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :required_operator_document,
-         collection: RequiredOperatorDocument.
-             joins(country: :translations)
+         collection: -> {
+           RequiredOperatorDocument
+             .joins(country: :translations)
              .order('required_operator_documents.name')
              .where(country_translations: { locale: I18n.locale }).all.map { |x| ["#{x.name} - #{x.country.name}", x.id] }
+         }
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
   filter :fmu, label: 'Fmus', as: :select,
                collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
-  filter :status, as: :select, collection: OperatorDocument.statuses
+  filter :status, as: :select, collection: -> { OperatorDocument.statuses }
   filter :type, as: :select
-  filter :source, as: :select, collection: OperatorDocument.sources
+  filter :source, as: :select, collection: -> { OperatorDocument.sources }
   filter :updated_at
 
   scope 'Pending', :doc_pending
