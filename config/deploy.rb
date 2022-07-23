@@ -6,18 +6,20 @@ lock '3.12.0'
 set :application, 'OtpAPI'
 set :repo_url, 'git@github.com:Vizzuality/fti_api.git'
 
+ruby_version = File.read('.ruby-version').strip
+
 set :default_env, {
-  'PATH' => "/home/ubuntu/.rvm/gems/ruby-2.4.6/bin:/home/ubuntu/.rvm/bin:$PATH",
-  'RUBY_VERSION' => 'ruby-2.4.6',
-  'GEM_HOME' => '/home/ubuntu/.rvm/gems/ruby-2.4.6',
-  'GEM_PATH' => '/home/ubuntu/.rvm/gems/ruby-2.4.6',
-  'BUNDLE_PATH' => '/home/ubuntu/.rvm/gems/ruby-2.4.6'
+  'PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby-version}/bin:/home/ubuntu/.rvm/bin:$PATH",
+  'RUBY_VERSION' => "ruby-#{ruby_version}",
+  'GEM_HOME' => "/home/ubuntu/.rvm/gems/ruby-#{ruby-version}",
+  'GEM_PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby-version}",
+  'BUNDLE_PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}"
 }
 
 set :passenger_restart_with_touch, true
 
 set :rvm_type, :user
-set :rvm_ruby_version, '2.4.6'
+set :rvm_ruby_version, ruby_version
 set :rvm_roles, [:app, :web, :db]
 
 set :keep_releases, 5
