@@ -45,7 +45,7 @@ docker-compose up
 
 ### REQUIREMENTS ###
 
-  - **Ruby version:** 2.4.6
+  - **Ruby version:** 2.7.6
   - **PostgreSQL 12.1+** [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
 
 **Just execute the script file in `bin/setup`**
