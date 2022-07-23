@@ -78,9 +78,6 @@ gem 'mini_magick'
 # Templating
 gem 'slim-rails'
 
-# Performance
-gem 'oink'
-
 # Mail
 gem 'sendgrid-ruby'
 
@@ -126,7 +123,6 @@ end
 
 group :test do
   gem 'bullet'
-  gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'factory_bot_rails'

@@ -145,8 +145,6 @@ GEM
       mime-types (~> 3.0)
     chartkick (3.4.2)
     choice (0.2.0)
-    codeclimate-test-reporter (1.0.9)
-      simplecov (<= 0.13)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -222,7 +220,6 @@ GEM
       actionpack (>= 4.1)
       activesupport (>= 4.1)
     hashdiff (1.0.1)
-    hodel_3000_compliant_logger (0.1.1)
     htmlentities (4.3.4)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -289,9 +286,6 @@ GEM
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    oink (0.10.1)
-      activerecord
-      hodel_3000_compliant_logger
     oj (3.10.2)
     oj_mimic_json (1.0.1)
     optimist (3.0.1)
@@ -561,7 +555,6 @@ DEPENDENCIES
   capistrano-rvm
   carrierwave-base64
   chartkick
-  codeclimate-test-reporter (~> 1.0.0)
   database_cleaner
   devise
   dotenv-rails
@@ -577,7 +570,6 @@ DEPENDENCIES
   jwt
   listen (~> 3.0.5)
   mini_magick
-  oink
   oj
   oj_mimic_json
   paper_trail
