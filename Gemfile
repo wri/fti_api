@@ -79,7 +79,7 @@ gem 'mini_magick'
 gem 'sendgrid-ruby'
 
 # File utilities
-gem 'rubyzip'
+gem 'rubyzip', '~> 2.3.0'
 
 # Changes monitoring
 gem 'globalize-versioning'
@@ -96,9 +96,9 @@ group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
   gem 'rails-erd'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
+  gem 'rubocop', '~> 0.80.0', require: false
+  gem 'rubocop-performance', '~> 1.5.2'
+  gem 'rubocop-rails', '~> 2.4.2'
   gem 'webmock'
 end
 
