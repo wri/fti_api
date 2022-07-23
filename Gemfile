@@ -75,9 +75,6 @@ gem 'jwt'
 gem 'carrierwave-base64'
 gem 'mini_magick'
 
-# Templating
-gem 'slim-rails'
-
 # Mail
 gem 'sendgrid-ruby'
 
