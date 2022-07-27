@@ -3,6 +3,8 @@
 module V1
   class OperatorResource < JSONAPI::Resource
     include CacheableByLocale
+    include ObsToolFilter
+
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
@@ -39,6 +41,12 @@ module V1
 
     def name
       I18n.with_locale(:en) { @model.name }
+    end
+
+    def self.obs_tool_filter_scope(records, user)
+      records.where(
+        id: Observation.own_with_inactive(user.observer_id).select(:operator_id).distinct.pluck(:operator_id)
+      )
     end
 
     filter :certification, apply: ->(records, value, _options) {

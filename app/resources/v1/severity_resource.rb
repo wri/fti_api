@@ -19,6 +19,19 @@ module V1
       records.joins(:subcategory).where('subcategories.subcategory_type = ?', value[0].to_i)
     }
 
+    filter :for_obs_tool_filter, apply: ->(records, value, options) {
+      context = options[:context]
+      user = context[:current_user]
+      app = context[:app]
+
+      next records unless app == 'observations-tool'
+      next records unless user.present? || user.observer_id.present?
+
+      records.where(
+        id: Observation.own_with_inactive(user.observer_id).select(:severity_id).distinct.pluck(:severity_id)
+      )
+    }
+
     def custom_links(_)
       { self: nil }
     end

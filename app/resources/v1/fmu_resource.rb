@@ -3,6 +3,8 @@
 module V1
   class FmuResource < JSONAPI::Resource
     include CacheableByLocale
+    include ObsToolFilter
+
     caching
     paginator :none
 
@@ -43,5 +45,11 @@ module V1
 
       records
     }
+
+    def self.obs_tool_filter_scope(records, user)
+      records.where(
+        id: Observation.own_with_inactive(user.observer_id).select(:fmu_id).distinct.pluck(:fmu_id)
+      )
+    end
   end
 end
