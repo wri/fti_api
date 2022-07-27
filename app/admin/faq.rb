@@ -64,9 +64,9 @@ ActiveAdmin.register Faq do
                           },
                           placeholder: 'Type something...',
                           theme: 'snow'
-                      }
- }
- }
+                        }
+                    }
+                }
     end
     f.actions
   end

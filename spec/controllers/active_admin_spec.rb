@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
-  resource_name = resource.resource_name.singular
+  # resource_name will be empty for custom pages not backed by models
+  resource_name = resource.resource_name.instance_variable_get(:@klass)&.name&.underscore
 
   describe resource.controller, type: :controller do
     let(:admin) { create(:admin) }
@@ -15,22 +16,34 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
 
     if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:index)
       describe "GET index" do
-        it "returns http success" do
-          get :index
+        subject { get :index }
 
-          expect(response.status).to eq(200)
-          expect(response).to have_http_status(:success)
+        it { is_expected.to be_successful }
+
+        if resource_name
+          it 'responds to csv' do
+            get :index, format: :csv
+            expect(response.body).to be_present # otherwise it does not invoke csv code
+            expect(response.content_type).to include('text/csv')
+          end
         end
       end
     end
 
-    if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:show)
-      describe "GET index" do
-        it "returns http success" do
-          get :index
+    if FactoryBot.factories.registered?(resource_name)
+      if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:show)
+        describe "GET show" do
+          subject { get :show, params: { id: model.id }}
 
-          expect(response.status).to eq(200)
-          expect(response).to be_success
+          it { is_expected.to be_successful }
+        end
+      end
+
+      if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:edit)
+        describe "GET edit" do
+          subject { get :edit, params: { id: model.id }}
+
+          it { is_expected.to be_successful }
         end
       end
     end

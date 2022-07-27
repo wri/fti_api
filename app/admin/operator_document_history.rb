@@ -27,9 +27,6 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :status
     column :id
-    column :operator_document do |o|
-      o.operator_document&.name
-    end
     column :operator_document_updated_at
     column :operator_document do |o|
       o.operator_document&.required_operator_document&.name
@@ -45,7 +42,7 @@ ActiveAdmin.register OperatorDocumentHistory do
       end
     end
     column :operator do |o|
-      o.operator.name
+      o.operator&.name
     end
     column :fmu do |o|
       o.fmu&.name
@@ -65,7 +62,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :operator_document_created_at
     column :uploaded_by
     column :attachment do |o|
-      o.attachment&.filename
+      o&.document_file&.attachment&.filename
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
