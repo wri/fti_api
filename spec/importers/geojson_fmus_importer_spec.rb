@@ -21,7 +21,13 @@ describe GeojsonFmusImporter, type: :importer do
     it "returns right result" do
       importer.import
 
-      expect(importer.results.to_json).to match_snapshot("importers/geojson_fmus_importer")
+      expect(importer.results.to_json).to match_snapshot(
+        "importers/geojson_fmus_importer",
+        # because of the problem on CI that ogr2 returns dates in different formats
+        # and I'm not sure how to restrict format using that tool
+        # in that case I would just ignore those properties by treating them as dynamic ones
+        dynamic_attributes: %w[end_date last_updat start_date]
+      )
     end
   end
 end
