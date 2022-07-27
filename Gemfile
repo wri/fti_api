@@ -125,6 +125,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'rspec-activejob'
   gem 'rspec-rails'
+  gem 'rspec-request_snapshot', github: 'tsubik/rspec-request_snapshot', branch: 'fix/ignore-order'
   gem 'shoulda-matchers', '~> 4.0.1'
   gem 'simplecov'
   gem 'super_diff'

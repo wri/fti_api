@@ -59,6 +59,10 @@ RSpec.configure do |config|
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+  config.request_snapshots_dir = "spec/fixtures/snapshots"
+  # adding dynamic attributes for snapshots, small medium original are for active storage links
+  config.request_snapshots_dynamic_attributes = %w[id created_at updated_at]
+
   config.use_transactional_fixtures = true
 
   config.infer_spec_type_from_file_location!

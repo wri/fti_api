@@ -15,6 +15,14 @@ GIT
       globalize (>= 3.1.0, < 6.0)
 
 GIT
+  remote: https://github.com/tsubik/rspec-request_snapshot.git
+  revision: 86775ed811110a71df75605440ca41deae07cf26
+  branch: fix/ignore-order
+  specs:
+    rspec-request_snapshot (0.7.3)
+      rspec (~> 3.0)
+
+GIT
   remote: https://github.com/tsubik/rspec_api_documentation.git
   revision: a0f70af60c16737577818ca4ff01475da71958e5
   branch: fix/open-api-parameter-format
@@ -574,6 +582,7 @@ DEPENDENCIES
   rgeo-geojson
   rspec-activejob
   rspec-rails
+  rspec-request_snapshot!
   rspec_api_documentation!
   rswag-api
   rswag-ui
