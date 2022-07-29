@@ -15,22 +15,35 @@
 require 'rails_helper'
 
 RSpec.describe ObservationReport, type: :model do
+  subject { build(:observation_report) }
+
   it 'is valid with valid attributes' do
-    observation_report = build(:observation_report)
-    expect(observation_report).to be_valid
+    expect(subject).to be_valid
   end
 
-  describe 'Hooks' do
-    describe '#remove_attachment_id_directory' do
-      it 'removes all attached documents' do
-        observation_report = create(:observation_report)
-        filepath = File.join "public", observation_report.attachment_url
+  describe 'soft delete' do
+    let!(:report) { create(:observation_report) }
 
-        expect(File.exist?(filepath)).to eql true
+    context 'when deleting' do
+      it 'moves attachment to private directory' do
+        expect(report.attachment.file.file).to match('/public/uploads')
+        report.destroy!
+        report.reload
+        expect(report.attachment.file.file).to match('/private/uploads')
+      end
+    end
 
-        observation_report.destroy
+    context 'when restoring' do
+      before do
+        report.destroy!
+        report.reload
+      end
 
-        expect(File.exist?(filepath)).to eql false
+      it 'moves attachment back to public directory' do
+        expect(report.attachment.file.file).to match('/private/uploads')
+        report.restore
+        report.reload
+        expect(report.attachment.file.file).to match('/public/uploads')
       end
     end
   end
