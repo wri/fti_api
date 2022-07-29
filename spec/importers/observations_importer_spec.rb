@@ -12,7 +12,6 @@ describe ObservationsImporter, type: :importer do
       importer.import
 
       expect(importer.results.to_json).to match_snapshot("importers/observations_importer")
-      # expect(importer.results.as_json).to eq(JSON.parse(results))
     end
   end
 end
