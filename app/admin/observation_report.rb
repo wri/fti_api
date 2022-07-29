@@ -9,7 +9,7 @@ ActiveAdmin.register ObservationReport do
 
   menu false
 
-  actions :show, :index, :update, :edit, :create
+  actions :all, except: [:new]
 
   permit_params :user_id, :title, :publication_date, :attachment
 
@@ -23,6 +23,15 @@ ActiveAdmin.register ObservationReport do
     end
   end
 
+  member_action :really_destroy, method: :delete do
+    if resource.deleted?
+      resource.really_destroy!
+      redirect_to :back, notice: 'Report removed!'
+    else
+      redirect_to :back, notice: 'Report must be moved to recycle bin first!'
+    end
+  end
+
   filter :title, as: :select
   filter :attachment, as: :select
   filter :user, as: :select, collection: User.order(:name)
@@ -30,6 +39,17 @@ ActiveAdmin.register ObservationReport do
                      collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :observations, as: :select, collection: Observation.order(:id).pluck(:id)
   filter :publication_date
+
+  config.clear_action_items!
+
+  action_item only: [:show] do
+    link_to 'Edit Report', edit_admin_observation_report_path(observation_report)
+  end
+
+  action_item only: [:show], unless: -> { observation_report.deleted? } do
+    link_to 'Delete Report', admin_observation_report_path(observation_report),
+            method: :delete, data: { confirm: ObservationReportDecorator.new(observation_report).delete_confirmation_text }
+  end
 
   csv do
     column :id
@@ -54,7 +74,11 @@ ActiveAdmin.register ObservationReport do
   index do
     column :id
     column :title do |report|
-      link_to(report.title, admin_observation_report_path(report.id))
+      if report.deleted?
+        report.title
+      else
+        link_to(report.title, admin_observation_report_path(report.id))
+      end
     end
     column :publication_date
     attachment_column :attachment
@@ -76,7 +100,18 @@ ActiveAdmin.register ObservationReport do
     column :created_at
     column :updated_at
 
-    actions
+    actions defaults: false do |report|
+      if report.deleted?
+        item 'Restore', restore_admin_observation_report_path(report), method: :put
+        item 'Remove Completely', really_destroy_admin_observation_report_path(report),
+             method: :delete, data: { confirm: 'Are you sure you want to remove the report completely? This action is not reversible.' }
+      else
+        item 'View', admin_observation_report_path(report)
+        item 'Edit', edit_admin_observation_report_path(report)
+        item 'Delete', admin_observation_report_path(report),
+             method: :delete, data: { confirm: ObservationReportDecorator.new(report).delete_confirmation_text }
+      end
+    end
   end
 
   form do |f|

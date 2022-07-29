@@ -54,6 +54,7 @@ RspecApiDocumentation.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include ErrorResponses
   config.include IntegrationHelper, type: :request
   config.include ImporterHelper, type: :importer
   config.extend APIDocsHelpers
@@ -77,6 +78,10 @@ RSpec.configure do |config|
     end
   end
 
+  config.around(realistic_error_responses: true) do |example|
+    respond_without_detailed_exceptions(&example)
+  end
+
   if Bullet.enable?
     config.before(:each, type: :controller) do
       Bullet.start_request
@@ -91,5 +96,7 @@ RSpec.configure do |config|
   config.extend APIDocsHelpers
   config.include FactoryBot::Syntax::Methods
   config.order = 'random'
-  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Warden::Test::Helpers
 end

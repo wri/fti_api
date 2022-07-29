@@ -17,9 +17,13 @@
 class ObservationDocument < ApplicationRecord
   has_paper_trail
   mount_base64_uploader :attachment, ObservationDocumentUploader
+  include MoveableAttachment
 
   acts_as_paranoid
 
   belongs_to :user, inverse_of: :observation_documents, touch: true
   belongs_to :observation, inverse_of: :observation_documents, touch: true
+
+  after_destroy :move_attachment_to_private_directory
+  after_restore :move_attachment_to_public_directory
 end
