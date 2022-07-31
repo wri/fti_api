@@ -40,6 +40,7 @@ Rails.application.routes.draw do
       jsonapi_resources :gov_files, only: [:create, :destroy] do; end
       jsonapi_resources :how_tos, only: [:index, :show] do; end
       jsonapi_resources :laws do; end
+      jsonapi_resources :notifications, only: [:index, :update] do; end
       jsonapi_resources :observations do; end
       jsonapi_resources :observation_documents do; end
       jsonapi_resources :observation_reports do; end

@@ -21,9 +21,16 @@ class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :operator_document
 
+  # The number of months a notification is still fetchable
+  # TODO: move this to an environment variable
+  MONTHS_TO_FETCH = 1
+
   scope :newly_created, -> { where(last_displayed_at: nil, solved_at: nil) }
   scope :seen,          -> { where.not(last_displayed_at: nil).where(dismissed_at: nil, solved_at: nil) }
   scope :dismissed,     -> { where.not(dismissed_at: nil).where(solved_at: nil) }
   scope :solved,        -> { where.not(solved_at: nil) }
   scope :unsolved,      -> { where(solved_at: nil) }
+  scope :visible,       -> { where(dismissed_at: nil, solved_at: nil) }
+  scope :current,       -> { where("created_at > 'now'::timestamp - '#{MONTHS_TO_FETCH} month'::interval") }
+  scope :none,          -> { where('1 <> 1') } # Hack not to fetch notifications for unauthenticated users
 end
