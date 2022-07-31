@@ -25,5 +25,5 @@ class Notification < ApplicationRecord
   scope :seen,          -> { where.not(last_displayed_at: nil).where(dismissed_at: nil, solved_at: nil) }
   scope :dismissed,     -> { where.not(dismissed_at: nil).where(solved_at: nil) }
   scope :solved,        -> { where.not(solved_at: nil) }
-  scope :unsolved,      -> { !solved }
+  scope :unsolved,      -> { where(solved_at: nil) }
 end

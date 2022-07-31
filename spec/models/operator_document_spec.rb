@@ -100,6 +100,32 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
+    describe '#remove_notifications' do
+      let!(:notification) { create :notification, operator_document: operator_document }
+      let!(:notification2) { create :notification, operator_document: operator_document, solved_at: Date.yesterday }
+      subject { operator_document.save! }
+
+      context 'when not updating the expire date' do
+        it 'does not remove the notification' do
+          expect { subject }.not_to change { notification.reload.solved_at }
+        end
+      end
+
+      context 'when updating the expire date' do
+        before do
+          operator_document.expire_date = Date.today + 1.month
+        end
+
+        it 'sets the `solved at` for the notification' do
+          expect { subject }.to change { notification.reload.solved_at }
+        end
+
+        it 'does not updated `solved at` for notifications that were already solved' do
+          expect { subject }.not_to change { notification2.reload.solved_at }
+        end
+      end
+    end
+
     describe '#update_operator_percentages' do
       before do
         valid_status = OperatorDocument.statuses[:doc_valid]

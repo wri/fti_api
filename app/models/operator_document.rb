@@ -51,6 +51,7 @@ class OperatorDocument < ApplicationRecord
 
   after_save :create_history, if: :changed?
   after_save :recalculate_scores, if: :score_related_attribute_changed?
+  after_save :remove_notifications, if: :expire_date_changed?
 
   after_destroy :regenerate
 
@@ -147,6 +148,10 @@ class OperatorDocument < ApplicationRecord
 
     self.type = 'OperatorDocumentFmu' if required_operator_document.is_a?(RequiredOperatorDocumentFmu)
     self.type = 'OperatorDocumentCountry' if required_operator_document.is_a?(RequiredOperatorDocumentCountry)
+  end
+
+  def remove_notifications
+    Notification.unsolved.where(operator_document_id: id).update(solved_at: Time.now)
   end
 
   def set_status

@@ -10,6 +10,7 @@
 #
 FactoryBot.define do
   factory :notification_group do
+    sequence(:name) { |n| "Notification Group #{n}" }
     days { 10 }
   end
 end

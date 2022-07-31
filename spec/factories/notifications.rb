@@ -17,7 +17,7 @@ FactoryBot.define do
   factory :notification do
     operator_document
     user
-    producer
+    operator
     notification_group
   end
 end
