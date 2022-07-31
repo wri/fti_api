@@ -119,6 +119,14 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
               li { link_to 'Users',              admin_users_path }
               li { link_to 'Access Control',     admin_access_control_path }
               li { link_to 'Comments',           admin_comments_path }
+              li do
+                text_node content_tag 'a', 'Notifications', class: '-with-children'
+                ul do
+                  li { link_to 'Notification Groups', admin_notification_groups_path }
+                  li { link_to 'Notifications', admin_notifications_path }
+                end
+              end
+
             end
           end
         end
