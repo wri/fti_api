@@ -56,7 +56,7 @@ Rails.application.routes.draw do
       jsonapi_resources :required_operator_document_groups do; end
       jsonapi_resources :sawmills do; end
       jsonapi_resources :score_operator_documents, only: [:index] do; end
-      jsonapi_resources :severities do; end
+      jsonapi_resources :severities, only: [:index, :show] do; end
       jsonapi_resources :species do; end
       jsonapi_resources :subcategories do; end
       jsonapi_resources :tools, only: [:index, :show] do; end
