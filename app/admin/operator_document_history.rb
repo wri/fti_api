@@ -27,9 +27,6 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :status
     column :id
-    column :operator_document do |o|
-      o.operator_document&.name
-    end
     column :operator_document_updated_at
     column :operator_document do |o|
       o.operator_document&.required_operator_document&.name
@@ -45,7 +42,7 @@ ActiveAdmin.register OperatorDocumentHistory do
       end
     end
     column :operator do |o|
-      o.operator.name
+      o.operator&.name
     end
     column :fmu do |o|
       o.fmu&.name
@@ -65,7 +62,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :operator_document_created_at
     column :uploaded_by
     column :attachment do |o|
-      o.attachment&.filename
+      o&.document_file&.attachment&.filename
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
@@ -142,17 +139,22 @@ ActiveAdmin.register OperatorDocumentHistory do
 
   filter :public
   filter :id
-  filter :required_operator_document_country_id, label: 'Country', as: :select,
-                                                 collection: Country.with_translations(I18n.locale).order('country_translations.name')
+  filter :required_operator_document_country_id,
+         label: 'Country',
+         as: :select,
+         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :operator_document_id_eq, label: 'Operator Document Id'
   filter :required_operator_document_contract_signature_eq,
          label: 'Contract Signature?',as: :select, collection: [['Yes', true], ['No', false]]
   filter :operator_document_required_operator_document_id_eq,
-         collection: RequiredOperatorDocument.with_translations.all, as: :select, label: 'Required Operator Document'
-  filter :operator, label: 'Operator', as: :select,
-                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
-  filter :fmu, label: 'Fmus', as: :select,
-               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
+         label: 'Required Operator Document',
+         as: :select,
+         collection: -> { RequiredOperatorDocument.with_translations.all }
+  filter :operator,
+         label: 'Operator',
+         as: :select,
+         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+  filter :fmu, label: 'Fmus', as: :select, collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources

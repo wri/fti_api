@@ -25,8 +25,10 @@ ActiveAdmin.register Subcategory do
 
   filter :translations_name_eq,
          as: :select, label: 'Name',
-         collection: Subcategory.with_translations(I18n.locale)
-                         .order('subcategory_translations.name').pluck(:name)
+         collection: -> {
+           Subcategory.with_translations(I18n.locale)
+             .order('subcategory_translations.name').pluck(:name)
+         }
   filter :category, as: :select,
                     collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
   filter :created_at

@@ -13,9 +13,9 @@ ActiveAdmin.register AboutPageEntry do
 
   filter :position, as: :select
   filter :translations_title_contains, as: :select, label: 'Title',
-                                       collection: AboutPageEntry.with_translations(I18n.locale).pluck(:title)
+                                       collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:title) }
   filter :translations_body_contains, as: :select, label: 'Body',
-                                      collection: AboutPageEntry.with_translations(I18n.locale).pluck(:body)
+                                      collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:body) }
 
   controller do
     def scoped_collection

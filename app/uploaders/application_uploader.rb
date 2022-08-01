@@ -16,7 +16,7 @@ class ApplicationUploader < CarrierWave::Uploader::Base
     super
   end
 
-  def url
+  def url(*args)
     return "/private#{super}" if private_upload?
 
     super

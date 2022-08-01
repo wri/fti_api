@@ -5,7 +5,6 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'codeclimate-test-reporter'
 
 require 'paper_trail/frameworks/rspec'
 
@@ -60,6 +59,10 @@ RSpec.configure do |config|
   config.extend APIDocsHelpers
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  config.request_snapshots_dir = "spec/fixtures/snapshots"
+  # adding dynamic attributes for snapshots, small medium original are for active storage links
+  config.request_snapshots_dynamic_attributes = %w[id created_at updated_at]
 
   config.use_transactional_fixtures = true
 

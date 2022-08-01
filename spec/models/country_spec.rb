@@ -38,7 +38,7 @@ RSpec.describe Country, type: :model do
 
       context 'when is_active has been initialized' do
         it 'keep the value of is_active' do
-          country = Country.create(is_active: false)
+          country = create(:country, is_active: false)
           expect(country.is_active).to eql false
         end
       end
