@@ -9,10 +9,10 @@ set :repo_url, 'git@github.com:Vizzuality/fti_api.git'
 ruby_version = File.read('.ruby-version').strip
 
 set :default_env, {
-  'PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby-version}/bin:/home/ubuntu/.rvm/bin:$PATH",
+  'PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}/bin:/home/ubuntu/.rvm/bin:$PATH",
   'RUBY_VERSION' => "ruby-#{ruby_version}",
-  'GEM_HOME' => "/home/ubuntu/.rvm/gems/ruby-#{ruby-version}",
-  'GEM_PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby-version}",
+  'GEM_HOME' => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}",
+  'GEM_PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}",
   'BUNDLE_PATH' => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}"
 }
 
