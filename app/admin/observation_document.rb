@@ -40,14 +40,14 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   end
 
   index do
-    column :id, sortable: true
-    column :observation, sortable: true
-    column :name, sortable: true
+    column :id
+    column :observation, sortable: 'observation_id'
+    column :name
     attachment_column :attachment
-    column :user, sortable: true
-    column :created_at, sortable: true
-    column :updated_at, sortable: :true
-    column :deleted_at, sortable: true
+    column :user, sortable: 'users.name'
+    column :created_at
+    column :updated_at
+    column :deleted_at
 
     actions defaults: false do |evidence|
       if evidence.deleted?
@@ -94,5 +94,11 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
       row :deleted_at
     end
     active_admin_comments
+  end
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:user)
+    end
   end
 end
