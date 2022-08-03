@@ -66,7 +66,6 @@ Rails.application.routes.draw do
       resources :fmus, only: [:index, :update] do
         get 'tiles/:z/:x/:y', to: 'fmus#tiles', on: :collection
       end
-      resources :contacts, only: [:create, :index]
 
       resources :imports, only: :create
 
