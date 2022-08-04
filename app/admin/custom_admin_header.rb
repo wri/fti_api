@@ -118,7 +118,6 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             ul do
               li { link_to 'Users',              admin_users_path }
               li { link_to 'Access Control',     admin_access_control_path }
-              li { link_to 'Contacts',           admin_contacts_path }
               li { link_to 'Comments',           admin_comments_path }
             end
           end
