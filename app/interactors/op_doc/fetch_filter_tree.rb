@@ -82,7 +82,7 @@ module OpDoc
         .active.fa_operator
         .with_translations
         .includes(:fmu_operators).map do |x| # Beware includes :fmus is pretty slow, something with translations
-          fmu_ids = x.fmu_operators.pluck(:fmu_id)
+          fmu_ids = x.fmu_operators.pluck(:fmu_id).sort
           {
             id: x.id,
             name: x.name,
@@ -102,10 +102,10 @@ module OpDoc
       Country.active.with_translations.map do  |x|
         {
           id: x.id, iso: x.iso, name: x.name,
-          operators: x.operators.pluck(:id).uniq,
-          fmus: x.fmus.pluck(:id).uniq,
+          operators: x.operators.pluck(:id).uniq.sort,
+          fmus: x.fmus.pluck(:id).uniq.sort,
           forest_types: serialize_forest_types(x.forest_types),
-          required_operator_document_ids: x.required_operator_documents.pluck(:id).uniq - required_operator_doc_ids_to_exclude
+          required_operator_document_ids: (x.required_operator_documents.pluck(:id).uniq - required_operator_doc_ids_to_exclude).sort
         }
       end.sort_by { |x| x[:name] }
     end
