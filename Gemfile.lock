@@ -163,6 +163,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
+    countries (5.1.1)
+      sixarm_ruby_unaccent (~> 1.1)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -481,6 +483,7 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.3)
+    sixarm_ruby_unaccent (1.2.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -552,6 +555,7 @@ DEPENDENCIES
   capistrano-rvm
   carrierwave-base64
   chartkick
+  countries
   database_cleaner
   devise
   dotenv-rails
