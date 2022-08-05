@@ -5,7 +5,6 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'codeclimate-test-reporter'
 
 require 'paper_trail/frameworks/rspec'
 
@@ -54,11 +53,16 @@ RspecApiDocumentation.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include ErrorResponses
   config.include IntegrationHelper, type: :request
   config.include ImporterHelper, type: :importer
   config.extend APIDocsHelpers
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  config.request_snapshots_dir = "spec/fixtures/snapshots"
+  # adding dynamic attributes for snapshots, small medium original are for active storage links
+  config.request_snapshots_dynamic_attributes = %w[id created_at updated_at]
 
   config.use_transactional_fixtures = true
 
@@ -77,6 +81,10 @@ RSpec.configure do |config|
     end
   end
 
+  config.around(realistic_error_responses: true) do |example|
+    respond_without_detailed_exceptions(&example)
+  end
+
   if Bullet.enable?
     config.before(:each, type: :controller) do
       Bullet.start_request
@@ -91,5 +99,7 @@ RSpec.configure do |config|
   config.extend APIDocsHelpers
   config.include FactoryBot::Syntax::Methods
   config.order = 'random'
-  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Warden::Test::Helpers
 end

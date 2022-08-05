@@ -13,6 +13,8 @@
 
 FactoryBot.define do
   factory :faq do
-    position { rand(0..10) }
+    sequence :position
+    question { 'Question' }
+    answer { 'Answer' }
   end
 end

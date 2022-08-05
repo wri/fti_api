@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/admin/sidekiq'
   end
 
+  get '/private/uploads/*rest', controller: 'private_uploads', action: 'download'
+
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
     post  '/login',                       to: 'sessions#create'
@@ -54,7 +56,7 @@ Rails.application.routes.draw do
       jsonapi_resources :required_operator_document_groups do; end
       jsonapi_resources :sawmills do; end
       jsonapi_resources :score_operator_documents, only: [:index] do; end
-      jsonapi_resources :severities do; end
+      jsonapi_resources :severities, only: [:index, :show] do; end
       jsonapi_resources :species do; end
       jsonapi_resources :subcategories do; end
       jsonapi_resources :tools, only: [:index, :show] do; end
@@ -64,7 +66,6 @@ Rails.application.routes.draw do
       resources :fmus, only: [:index, :update] do
         get 'tiles/:z/:x/:y', to: 'fmus#tiles', on: :collection
       end
-      resources :contacts, only: [:create, :index]
 
       resources :imports, only: :create
 

@@ -13,5 +13,7 @@
 FactoryBot.define do
   factory :about_page_entry do
     sequence :position
+    title { 'Title' }
+    body { 'Body' }
   end
 end

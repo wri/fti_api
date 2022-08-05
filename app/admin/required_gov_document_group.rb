@@ -35,8 +35,10 @@ ActiveAdmin.register RequiredGovDocumentGroup do
 
   filter :translations_name_contains,
          as: :select,
-         collection: RequiredGovDocumentGroup.with_translations(I18n.locale)
-                         .order('required_gov_document_group_translations.name').pluck(:name)
+         collection: -> {
+           RequiredGovDocumentGroup.with_translations(I18n.locale)
+             .order('required_gov_document_group_translations.name').pluck(:name)
+         }
   filter :updated_at
 
   form do |f|

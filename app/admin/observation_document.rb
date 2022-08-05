@@ -9,9 +9,21 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
 
   menu false
 
-  actions :show, :index, :create
+  actions :all, except: [:new]
 
   config.order_clause
+  active_admin_paranoia
+
+  permit_params :name, :attachment
+
+  member_action :really_destroy, method: :delete do
+    if resource.deleted?
+      resource.really_destroy!
+      redirect_to :back, notice: 'Evidence removed!'
+    else
+      redirect_to :back, notice: 'Evidence must be moved to recycle bin first!'
+    end
+  end
 
   csv do
     column :id
@@ -28,20 +40,30 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   end
 
   index do
-    column :id, sortable: true
-    column :observation, sortable: true
-    column :name, sortable: true
+    column :id
+    column :observation, sortable: 'observation_id'
+    column :name
     attachment_column :attachment
-    column :user, sortable: true
-    column :created_at, sortable: true
-    column :updated_at, sortable: :true
-    column :deleted_at, sortable: true
-    actions
+    column :user, sortable: 'users.name'
+    column :created_at
+    column :updated_at
+    column :deleted_at
+
+    actions defaults: false do |evidence|
+      if evidence.deleted?
+        item 'Restore', restore_admin_evidence_path(evidence), method: :put
+        item 'Remove Completely', really_destroy_admin_evidence_path(evidence),
+             method: :delete, data: { confirm: 'Are you sure you want to remove the evidence completely? This action is not reversible.' }
+      else
+        item 'View', admin_evidence_path(evidence)
+        item 'Edit', edit_admin_evidence_path(evidence)
+        item 'Delete', admin_evidence_path(evidence),
+             method: :delete, data: { confirm: 'Are you sure you want to move evidence to the recycle bin?' }
+      end
+    end
   end
 
-  filter :observation, as: :select,
-                       collection: Observation.joins(:observation_documents)
-                         .distinct.order(:id).pluck(:id)
+  filter :observation, as: :select, collection: -> { Observation.joins(:observation_documents).distinct.order(:id).pluck(:id) }
   filter :name, as: :select
   filter :attachment, as: :select
   filter :user
@@ -49,6 +71,17 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   filter :updated_at
   filter :deleted_at
 
+  form do |f|
+    f.semantic_errors *f.object.errors.keys
+    f.inputs 'Evidence Details' do
+      f.input :observation, collection: Observation.all.map { |o| [o.id, o.id] }, input_html: { disabled: true }
+      f.input :user, input_html: { disabled: true }
+      f.input :name
+      f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
+
+      f.actions
+    end
+  end
 
   show do
     attributes_table do
@@ -61,5 +94,11 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
       row :deleted_at
     end
     active_admin_comments
+  end
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:user)
+    end
   end
 end

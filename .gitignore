@@ -27,6 +27,7 @@ spec/.DS_Store
 /vendor/bundle
 /public/assets
 /public/uploads
+/private
 /public/system
 /coverage
 /db/files/.~*

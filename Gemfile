@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.6'
+ruby '2.7.6'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
@@ -60,6 +60,7 @@ gem 'sidekiq'
 
 # Data
 gem 'activerecord-import'
+gem 'countries', require: false # for update translations job, so require only there
 gem 'globalize', '5.1.0'
 gem 'seed-fu'
 
@@ -75,17 +76,11 @@ gem 'jwt'
 gem 'carrierwave-base64'
 gem 'mini_magick'
 
-# Templating
-gem 'slim-rails'
-
-# Performance
-gem 'oink'
-
 # Mail
 gem 'sendgrid-ruby'
 
 # File utilities
-gem 'rubyzip'
+gem 'rubyzip', '~> 2.3.0'
 
 # Changes monitoring
 gem 'globalize-versioning'
@@ -102,9 +97,9 @@ group :development, :test do
   gem 'byebug',                    platform: :mri
   gem 'faker'
   gem 'rails-erd'
-  gem 'rubocop', require: false
-  gem 'rubocop-performance'
-  gem 'rubocop-rails'
+  gem 'rubocop', '~> 0.80.0', require: false
+  gem 'rubocop-performance', '~> 1.5.2'
+  gem 'rubocop-rails', '~> 2.4.2'
   gem 'webmock'
 end
 
@@ -126,12 +121,12 @@ end
 
 group :test do
   gem 'bullet'
-  gem 'codeclimate-test-reporter', '~> 1.0.0'
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'factory_bot_rails'
   gem 'rspec-activejob'
   gem 'rspec-rails'
+  gem 'rspec-request_snapshot', github: 'tsubik/rspec-request_snapshot', branch: 'fix/ignore-order'
   gem 'shoulda-matchers', '~> 4.0.1'
   gem 'simplecov'
   gem 'super_diff'
