@@ -150,8 +150,15 @@ class OperatorDocument < ApplicationRecord
     self.type = 'OperatorDocumentCountry' if required_operator_document.is_a?(RequiredOperatorDocumentCountry)
   end
 
+  # Removes the existing notifications for an operator document
+  # as long as the new expire date is longer than the notification period or the group has been removed
   def remove_notifications
-    Notification.unsolved.where(operator_document_id: id).update(solved_at: Time.now)
+    Notification.left_joins(:notification_group).unsolved.where(operator_document_id: id).each do |notification|
+      notification.solve! and next if notification.notification_group.blank?
+      next if Date.now + notification.notification_group.days > expire_date
+
+      notification.solve!
+    end
   end
 
   def set_status

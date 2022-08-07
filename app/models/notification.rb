@@ -32,5 +32,8 @@ class Notification < ApplicationRecord
   scope :unsolved,      -> { where(solved_at: nil) }
   scope :visible,       -> { where(dismissed_at: nil, solved_at: nil) }
   scope :current,       -> { where("created_at > 'now'::timestamp - '#{MONTHS_TO_FETCH} month'::interval") }
-  scope :none,          -> { where('1 <> 1') } # Hack not to fetch notifications for unauthenticated users
+
+  def solve!
+    update(solved_at: Time.now)
+  end
 end
