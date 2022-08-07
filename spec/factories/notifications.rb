@@ -19,5 +19,19 @@ FactoryBot.define do
     user
     operator
     notification_group
+
+    trait :seen do
+      last_displayed_at { Date.yesterday }
+    end
+
+    trait :dismissed do
+      seen
+      dismissed_at { Date.yesterday }
+    end
+
+    trait :solved do
+      dismissed
+      solved_at { Date.yesterday }
+    end
   end
 end

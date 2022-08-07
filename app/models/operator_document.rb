@@ -37,6 +37,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :document_file, optional: :true, inverse_of: :operator_document
   has_many :annex_documents, as: :documentable, dependent: :destroy
   has_many :operator_document_annexes, through: :annex_documents
+  has_many :notifications
   accepts_nested_attributes_for :document_file
 
   before_validation :set_expire_date, unless: :expire_date?
@@ -68,9 +69,15 @@ class OperatorDocument < ApplicationRecord
   scope :from_user,                              ->(operator_id) { where(operator_id: operator_id) }
   scope :by_source,                              ->(source_id) { where(source: source_id) }
   scope :available,                              -> { where(public: true) }
-  scope :signature,                              -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: true }) }
-  scope :non_signature,                          -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
-  scope :to_expire,                              ->(date) { joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
+  scope :signature,                              -> {
+    joins(:required_operator_document).where(required_operator_documents: { contract_signature: true }) }
+  scope :non_signature,                          -> {
+    joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
+  scope :to_expire,                              ->(date) {
+    joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false") }
+  scope :without_notification_groups,            ->(group_ids) {
+    left_joins(:notifications)
+      .where("notification.notification_group_id IN (#{group_ids.split(', ')}) AND notifications.solved_at is NULL AND notifications.id is NULL") }
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
