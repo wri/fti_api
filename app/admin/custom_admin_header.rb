@@ -3,7 +3,8 @@
 class CustomAdminHeader < ActiveAdmin::Views::Header
   include Rails.application.routes.url_helpers
 
-  def build(namespace, menu)
+
+  def build(namespace, menu) # rubocop:disable Metrics/AbcSize
     div class: 'c-nav' do
       div class: 'logo' do
         div do
