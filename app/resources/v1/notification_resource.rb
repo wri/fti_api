@@ -5,21 +5,15 @@ module V1
     include CacheableByCurrentUser
     caching
 
-    attributes :dismissed_at, :operator_document_name, :expiration_date, :url
+    attributes :operator_document_name, :expiration_date, :operator_document_id, :notification_name
 
     def self.records(options = {})
-      user = @context[:current_user]
+      user = options.dig(:context, :current_user)
       return Notification.none unless user
 
       # We update the last displayed at when showing the notification
       Notification.visible.current.where(user: user).update_all(last_displayed_at: Time.now) # rubocop:disable Rails/SkipsModelValidations
       Notification.visible.current.where(user: user)
-    end
-
-    private
-
-    def self.updatable_fields(context)
-      super - [:operator_document_name, :expiration_date, :url]
     end
 
     def operator_document_name
@@ -30,8 +24,8 @@ module V1
       @model.operator_document.expire_date
     end
 
-    def url
-      operator_document_path(@model.operator_document.id)
+    def notification_name
+      @model.notification_group&.name
     end
   end
 end

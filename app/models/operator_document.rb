@@ -159,7 +159,7 @@ class OperatorDocument < ApplicationRecord
   def remove_notifications
     Notification.left_joins(:notification_group).unsolved.where(operator_document_id: id).each do |notification|
       notification.solve! and next if notification.notification_group.blank?
-      next if Date.now + notification.notification_group.days > expire_date
+      next if Date.today + notification.notification_group.days > expire_date
 
       notification.solve!
     end
