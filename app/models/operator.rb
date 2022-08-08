@@ -177,8 +177,8 @@ class Operator < ApplicationRecord
 
   def clean_document_cache
     # TODO: try different technique for jsonapi cache invalidation, this is undocumented way for cleaning cache of jsonapi resources
-    operator_document_ids.each { |id| Rails.cache.delete_matched("operator_documents/#{id}/*") }
-    operator_document_history_ids.each { |id| Rails.cache.delete_matched("operator_document_histories/#{id}/*") }
+    Rails.cache.delete_matched /operator_documents\/(#{operator_document_ids.join('|')})\//
+    Rails.cache.delete_matched /operator_document_histories\/(#{operator_document_history_ids.join('|')})\//
   end
 
   def refresh_ranking
