@@ -6,9 +6,8 @@
 #  last_displayed_at     :datetime
 #  dismissed_at          :datetime
 #  solved_at             :datetime
-#  operator_document_id  :integer
-#  user_id               :integer
-#  operator_id           :integer
+#  operator_document_id  :integer          not null
+#  user_id               :integer          not null
 #  notification_group_id :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null

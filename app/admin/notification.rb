@@ -11,15 +11,32 @@ ActiveAdmin.register Notification do
   scope :dismissed
   scope :solved
 
+  filter :notification_group
+  filter :operator_document_operator_id,
+         as: :select,
+         label: 'Operator',
+         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+  filter :user
+  filter :last_displayed_at
+  filter :dismissed_at
+  filter :solved_at
+
   actions :all, except: [:new, :edit, :update]
+
+  def scoped_collection
+    super.includes(operator_document: [:operator, :required_operator_document])
+  end
 
   index do
     selectable_column
     column :user
-    column :operator
+    column :operator do |resource|
+      link_to(resource.operator_document.operator.name,
+              admin_producer_path(resource.operator_document.operator))
+    end
     column :operator_document do |resource|
       link_to(resource.operator_document.required_operator_document.name,
-              admin_operator_document_path(resource.operator_document.id))
+              admin_operator_document_path(resource.operator_document))
     end
     column :notification_group
     column :last_displayed_at

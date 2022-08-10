@@ -391,9 +391,8 @@ ActiveRecord::Schema.define(version: 20220803123657) do
     t.datetime "last_displayed_at"
     t.datetime "dismissed_at"
     t.datetime "solved_at"
-    t.integer  "operator_document_id"
-    t.integer  "user_id"
-    t.integer  "operator_id"
+    t.integer  "operator_document_id",  null: false
+    t.integer  "user_id",               null: false
     t.integer  "notification_group_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
@@ -401,7 +400,6 @@ ActiveRecord::Schema.define(version: 20220803123657) do
     t.index ["last_displayed_at"], name: "index_notifications_on_last_displayed_at", using: :btree
     t.index ["notification_group_id"], name: "index_notifications_on_notification_group_id", using: :btree
     t.index ["operator_document_id"], name: "index_notifications_on_operator_document_id", using: :btree
-    t.index ["operator_id"], name: "index_notifications_on_operator_id", using: :btree
     t.index ["solved_at"], name: "index_notifications_on_solved_at", using: :btree
     t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
@@ -1121,7 +1119,6 @@ ActiveRecord::Schema.define(version: 20220803123657) do
   add_foreign_key "laws", "subcategories"
   add_foreign_key "notifications", "notification_groups", on_delete: :nullify
   add_foreign_key "notifications", "operator_documents", on_delete: :cascade
-  add_foreign_key "notifications", "operators", on_delete: :cascade
   add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
