@@ -4,7 +4,7 @@ Rails.application.load_tasks
 
 describe 'notifications_create' do
   after(:each) do
-    Rake::Task['notifications:create'].reenable
+    Rake::Task['scheduler:create_notifications'].reenable
   end
 
   let(:country) { create :country }
@@ -12,7 +12,7 @@ describe 'notifications_create' do
   let(:operator) { create :operator, country: country }
   let!(:user1) { create :operator_user, country: country, operator: operator }
   let!(:user2) { create :operator_user, country: country, operator: operator }
-  subject { Rake::Task["notifications:create"].invoke }
+  subject { Rake::Task["scheduler:create_notifications"].invoke }
 
   shared_examples 'no notifications change' do
     it { expect{ subject }.not_to change{ Notification.count } }

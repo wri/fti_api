@@ -28,7 +28,7 @@ class Ability
           can :create, ActiveAdmin::Comment
           can :manage, ActiveAdmin::Comment, author_id: user.id
         end
-
+        can :ru, Notification, user_id: user.id
       else
         can [:read], User, id: user.id
       end
@@ -44,6 +44,5 @@ class Ability
     can :read, Observer, is_active: true
     can :read, Operator, is_active: true
     can :create, Operator, is_active: false
-    can :ru, Notification, user_id: user.id
   end
 end
