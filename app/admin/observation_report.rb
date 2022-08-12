@@ -21,6 +21,10 @@ ActiveAdmin.register ObservationReport do
       end_of_association_chain.includes([[observation_report_observers: [observer: :translations]],
                                          [observations: :translations]])
     end
+
+    def apply_filtering(chain)
+      super(chain).distinct
+    end
   end
 
   member_action :really_destroy, method: :delete do
