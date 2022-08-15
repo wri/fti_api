@@ -23,9 +23,14 @@ ActiveAdmin.register Notification do
 
   actions :all, except: [:new, :edit, :update]
 
-  def scoped_collection
-    super.includes(operator_document: [:operator, :required_operator_document])
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes(:user, :notification_group,
+                                        operator_document: [operator: [:translations],
+                                                            required_operator_document: [:translations]])
+    end
   end
+
 
   index do
     selectable_column

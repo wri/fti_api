@@ -16,7 +16,6 @@ FactoryBot.define do
   factory :notification do
     operator_document
     user
-    operator
     notification_group
 
     trait :seen do

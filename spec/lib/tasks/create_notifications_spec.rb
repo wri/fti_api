@@ -62,7 +62,7 @@ describe 'notifications_create' do
           let!(:notification) {
             create :notification,
                    operator_document: operator_document, user: user1,
-                   operator: operator, notification_group: notification_group
+                   notification_group: notification_group
           }
           it_behaves_like 'no notifications change'
         end
@@ -71,7 +71,7 @@ describe 'notifications_create' do
           let!(:notification) {
             create :notification, :seen,
                    operator_document: operator_document, user: user1,
-                   operator: operator, notification_group: notification_group
+                   notification_group: notification_group
           }
           it_behaves_like 'no notifications change'
         end
@@ -80,7 +80,7 @@ describe 'notifications_create' do
           let!(:notification) {
             create :notification, :dismissed,
                    operator_document: operator_document, user: user1,
-                   operator: operator, notification_group: notification_group
+                   notification_group: notification_group
           }
           it_behaves_like 'no notifications change'
         end
@@ -89,7 +89,7 @@ describe 'notifications_create' do
           let!(:notification) {
             create :notification, :solved,
                    operator_document: operator_document, user: user1,
-                   operator: operator, notification_group: notification_group
+                   notification_group: notification_group
           }
           it { expect { subject }.to change { Notification.count }.by(2) }
 
@@ -114,7 +114,7 @@ describe 'notifications_create' do
           context 'when the notification is active' do
             let!(:notification) {
               create :notification,
-                     operator: operator, user: user1, operator_document: operator_document,
+                     user: user1, operator_document: operator_document,
                      notification_group: notification_group_large
             }
             it { expect { subject }.to change { Notification.count }.by(2) } # TODO
@@ -122,7 +122,7 @@ describe 'notifications_create' do
           context 'when the notification is solved' do
             let!(:notification) {
               create :notification, :solved,
-                     operator: operator, user: user1, operator_document: operator_document,
+                     user: user1, operator_document: operator_document,
                      notification_group: notification_group_large
             }
             it { expect { subject }.to change { Notification.count }.by(2) } # TODO
@@ -133,7 +133,7 @@ describe 'notifications_create' do
           context 'when the notification is active' do
             let!(:notification) {
               create :notification,
-                     operator: operator, user: user1, operator_document: operator_document,
+                     user: user1, operator_document: operator_document,
                      notification_group: notification_group
             }
             it_behaves_like 'no notifications change'
@@ -142,7 +142,7 @@ describe 'notifications_create' do
           context 'when the notification is solved' do
             let!(:notification) {
               create :notification, :solved,
-                     operator: operator, user: user1, operator_document: operator_document,
+                     user: user1, operator_document: operator_document,
                      notification_group: notification_group
             }
             it { expect { subject }.to change { Notification.count }.by(2) } # TODO

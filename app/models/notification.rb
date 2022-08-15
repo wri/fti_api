@@ -16,9 +16,9 @@
 #
 class Notification < ApplicationRecord
   belongs_to :notification_group
-  belongs_to :operator
-  belongs_to :user
-  belongs_to :operator_document
+  belongs_to :user, optional: false
+  belongs_to :operator_document, optional: false
+  delegate :operator, to: :operator_document
 
   # The number of months a notification is still fetchable
   # TODO: move this to an environment variable
