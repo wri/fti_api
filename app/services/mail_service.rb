@@ -35,21 +35,6 @@ class MailService
     self
   end
 
-  def newsletter(user_email)
-    @subject = 'Registration confirmation'
-    @body =
-<<~TXT
-  Thank you for subscribing to the Open Timber Portal (OTP) newsletter.
-
-  Best wishes,
-  The OTP team.
-TXT
-    @from = ENV['CONTACT_EMAIL']
-    @to = user_email
-
-    self
-  end
-
   def notify_user_creation(user)
     @body =
 <<~TXT
