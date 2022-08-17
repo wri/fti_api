@@ -50,5 +50,27 @@ module V1
         end
       end
     end
+
+    context 'filters' do
+      describe 'by observer_id' do
+        let(:observer) { create(:observer) }
+        let(:user) { create(:ngo, observer: observer) }
+        let(:operator) { create(:operator, country: country) }
+        let(:headers) { authorize_headers(user.id) }
+
+        before do
+          create_list(:operator, 3, country: country) # those should not be returned
+          create(:observation, operator: operator, observers: [observer])
+        end
+
+        it 'returns only operators linked with observer observations' do
+          get "/operators?filter[observer_id]=#{observer.id}", headers: headers
+
+          expect(status).to eq(200)
+          expect(parsed_data.size).to eq(1)
+          expect(parsed_data.first[:id].to_i).to eq(operator.id)
+        end
+      end
+    end
   end
 end

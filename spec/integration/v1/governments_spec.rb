@@ -39,5 +39,28 @@ module V1
         ]
       }
     }
+
+    context 'filters' do
+      describe 'by observer_id' do
+        let(:country) { create(:country) }
+        let(:observer) { create(:observer) }
+        let(:gov) { create(:government, country: country) }
+        let(:user) { create(:ngo, observer: observer) }
+        let(:headers) { authorize_headers(user.id) }
+
+        before do
+          create_list(:government, 3, country: country) # those should not be returned
+          create(:gov_observation, observers: [observer], governments: [gov])
+        end
+
+        it 'returns only governments linked with observer observations' do
+          get "/governments?filter[observer_id]=#{observer.id}", headers: headers
+
+          expect(status).to eq(200)
+          expect(parsed_data.size).to eq(1)
+          expect(parsed_data.first[:id].to_i).to eq(gov.id)
+        end
+      end
+    end
   end
 end

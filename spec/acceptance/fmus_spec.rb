@@ -29,10 +29,28 @@ If not, then the request is processed as a typical JSON API request.'
     add_paging_parameters
     add_sort_parameter
 
+    let(:observer) { create(:observer) }
+    let(:fmu_with_obs) { create(:fmu, country: country) }
+
+    before do
+      create(:fmu_operator, fmu: fmu_with_obs, operator: operator)
+      create(:observation, operator: operator, fmu: fmu_with_obs, observers: [observer])
+    end
+
     context '200' do
       example_request "Listing fmus" do
         expect(status).to eq 200
-        expect(JSON.parse(response_body)['data'].count).to eql(fmus.count)
+        expect(JSON.parse(response_body)['data'].count).to eql(fmus.count + 1)
+      end
+
+      example "Filter by observer id", document: false do
+        do_request 'filter[observer_id]': observer.id
+
+        parsed_data = JSON.parse(response_body)['data']
+
+        expect(status).to eq(200)
+        expect(parsed_data.size).to eq(1)
+        expect(parsed_data.first['id'].to_i).to eq(fmu_with_obs.id)
       end
     end
   end

@@ -102,7 +102,7 @@ RSpec.describe Observation, type: :model do
 
       context 'when type is government and government is not specified' do
         it 'add error on government' do
-          observation = build(:observation_2, country: country, observation_type: 'government')
+          observation = build(:gov_observation, country: country, observation_type: 'government')
           observation.governments.update(is_active: false)
           observation.save
 
