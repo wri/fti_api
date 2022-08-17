@@ -3,6 +3,8 @@
 module V1
   class SeverityResource < JSONAPI::Resource
     include CacheableByLocale
+    include ObsToolFilter
+
     caching
     attributes :level, :details
 
@@ -19,21 +21,14 @@ module V1
       records.joins(:subcategory).where('subcategories.subcategory_type = ?', value[0].to_i)
     }
 
-    filter :for_obs_tool_filter, apply: ->(records, value, options) {
-      context = options[:context]
-      user = context[:current_user]
-      app = context[:app]
+    def custom_links(_)
+      { self: nil }
+    end
 
-      next records unless app == 'observations-tool'
-      next records unless user.present? || user.observer_id.present?
-
+    def self.obs_tool_filter_scope(records, user)
       records.where(
         id: Observation.own_with_inactive(user.observer_id).select(:severity_id).distinct.pluck(:severity_id)
       )
-    }
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

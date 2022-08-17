@@ -18,6 +18,7 @@ module ObsToolFilter
   end
 
   class_methods do
+    # to apply scope only for observation tool requests
     def obs_tool_filter_scope(records, user)
       raise NotImplementedError
     end
