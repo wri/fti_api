@@ -9,13 +9,15 @@ RSpec.shared_examples 'jsonapi-resources__edit' do |options|
       describe "For user with #{role} role" do
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
-        it "Returns error object when cannot be updated by admin" do
-          patch(route,
-                params: jsonapi_params(@collection, resource.id, invalid_params),
-                headers: headers)
+        if options[:invalid_params].present?
+          it "Returns error object when cannot be updated by admin" do
+            patch(route,
+                  params: jsonapi_params(@collection, resource.id, invalid_params),
+                  headers: headers)
 
-          expect(parsed_body).to eq(jsonapi_errors(*options[:error_attributes]))
-          expect(status).to eq(422)
+            expect(parsed_body).to eq(jsonapi_errors(*options[:error_attributes]))
+            expect(status).to eq(422)
+          end
         end
 
         it "Returns success object when was successfully updated by admin" do

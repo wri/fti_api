@@ -12,7 +12,7 @@ RSpec.shared_examples 'jsonapi-resources__show' do |options|
         end
 
         it "Get specific" do
-          get "/#{@plural}/#{resource.id}", headers: headers
+          get "/#{@route_key}/#{resource.id}", headers: headers
           expect(status).to eq(200)
         end
       end
