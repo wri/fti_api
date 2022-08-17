@@ -3,7 +3,6 @@
 module V1
   class OperatorResource < JSONAPI::Resource
     include CacheableByLocale
-    include ObsToolFilter
 
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
@@ -43,12 +42,6 @@ module V1
       I18n.with_locale(:en) { @model.name }
     end
 
-    def self.obs_tool_filter_scope(records, user)
-      records.where(
-        id: Observation.own_with_inactive(user.observer_id).select(:operator_id).distinct.pluck(:operator_id)
-      )
-    end
-
     filter :certification, apply: ->(records, value, _options) {
       values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
       return records unless values.any?
@@ -60,6 +53,12 @@ module V1
       records = records.joins(:fmus).where(certifications.join(' OR ')).distinct
 
       records
+    }
+
+    filter :observer_id, apply: ->(records, value, _options) {
+      records.where(
+        id: Observation.own_with_inactive(value[0].to_i).select(:operator_id).distinct.pluck(:operator_id)
+      )
     }
 
     def fetchable_fields

@@ -3,8 +3,6 @@
 module V1
   class SeverityResource < JSONAPI::Resource
     include CacheableByLocale
-    include ObsToolFilter
-
     caching
     attributes :level, :details
 
@@ -23,12 +21,6 @@ module V1
 
     def custom_links(_)
       { self: nil }
-    end
-
-    def self.obs_tool_filter_scope(records, user)
-      records.where(
-        id: Observation.own_with_inactive(user.observer_id).select(:severity_id).distinct.pluck(:severity_id)
-      )
     end
   end
 end

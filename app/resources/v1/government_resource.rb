@@ -3,7 +3,6 @@
 module V1
   class GovernmentResource < JSONAPI::Resource
     include CacheableByLocale
-    include ObsToolFilter
     caching
 
     attributes :government_entity, :details, :is_active
@@ -25,15 +24,15 @@ module V1
       end
     }
 
-    def self.obs_tool_filter_scope(records, user)
+    filter :observer_id, apply: ->(records, value, _options) {
       records.where(
-        id: Observation.own_with_inactive(user.observer_id)
+        id: Observation.own_with_inactive(value[0].to_i)
           .joins(:governments)
           .select('governments.id')
           .distinct
           .pluck('governments.id')
       )
-    end
+    }
 
     def custom_links(_)
       { self: nil }
