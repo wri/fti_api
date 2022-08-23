@@ -43,5 +43,11 @@ module V1
 
       records
     }
+
+    filter :observer_id, apply: ->(records, value, _options) {
+      records.where(
+        id: Observation.own_with_inactive(value[0].to_i).select(:fmu_id).distinct.pluck(:fmu_id)
+      )
+    }
   end
 end

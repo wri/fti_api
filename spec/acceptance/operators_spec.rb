@@ -29,9 +29,26 @@ resource 'Operators' do
     add_paging_parameters
     add_sort_parameter
 
+    let(:observer) { create(:observer) }
+    let(:operator_with_obs) { create(:operator, country: country) }
+
+    before do
+      create(:observation, operator: operator_with_obs, observers: [observer])
+    end
+
     example_request "Listing operators" do
       expect(status).to eq 200
-      expect(JSON.parse(response_body)['data'].count).to eql(operators.count)
+      expect(JSON.parse(response_body)['data'].count).to eql(operators.count + 1)
+    end
+
+    example "Filter by observer id", document: false do
+      do_request 'filter[observer_id]': observer.id
+
+      parsed_data = JSON.parse(response_body)['data']
+
+      expect(status).to eq(200)
+      expect(parsed_data.size).to eq(1)
+      expect(parsed_data.first['id'].to_i).to eq(operator_with_obs.id)
     end
   end
 

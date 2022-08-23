@@ -8,9 +8,6 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 
 require 'paper_trail/frameworks/rspec'
 
-require 'integration_helper'
-require 'importer_helper'
-
 require 'rspec/rails'
 require 'super_diff/rspec-rails'
 
@@ -18,8 +15,6 @@ require 'super_diff/rspec-rails'
 require 'factory_bot_rails'
 require 'shoulda/matchers'
 require 'devise'
-
-require 'api_docs_helper'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 Dir[Rails.root.join('spec/models/concerns/**/*.rb')].each {|f| require f}

@@ -24,6 +24,16 @@ module V1
       end
     }
 
+    filter :observer_id, apply: ->(records, value, _options) {
+      records.where(
+        id: Observation.own_with_inactive(value[0].to_i)
+          .joins(:governments)
+          .select('governments.id')
+          .distinct
+          .pluck('governments.id')
+      )
+    }
+
     def custom_links(_)
       { self: nil }
     end

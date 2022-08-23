@@ -54,7 +54,7 @@ FactoryBot.define do
     lat { 12.3333 }
   end
 
-  factory :observation_2, class: 'Observation' do
+  factory :gov_observation, class: 'Observation' do
     severity
     country
     governments { build_list(:government, 2) }
