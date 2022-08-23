@@ -3,6 +3,7 @@
 module V1
   class OperatorResource < JSONAPI::Resource
     include CacheableByLocale
+
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
                :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
@@ -52,6 +53,12 @@ module V1
       records = records.joins(:fmus).where(certifications.join(' OR ')).distinct
 
       records
+    }
+
+    filter :observer_id, apply: ->(records, value, _options) {
+      records.where(
+        id: Observation.own_with_inactive(value[0].to_i).select(:operator_id).distinct.pluck(:operator_id)
+      )
     }
 
     def fetchable_fields
