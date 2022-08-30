@@ -19,6 +19,8 @@ require 'carrierwave'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+ActiveSupport::Deprecation.silenced = true
+
 module FtiApi
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('lib')
