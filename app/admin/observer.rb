@@ -113,9 +113,11 @@ ActiveAdmin.register Observer, as: 'Monitor' do
       f.input :countries, collection: Country.with_translations(I18n.locale).order('country_translations.name asc')
       f.input :observer_type, as: :select, collection: %w(Mandated SemiMandated External Government)
       f.input :organization_type, as: :select, collection: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other']
-      f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
       if f.object.logo.present?
+        f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
         f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
+      else
+        f.input :logo, as: :file
       end
     end
     f.inputs 'Public Info' do
