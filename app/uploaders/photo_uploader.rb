@@ -9,10 +9,6 @@ class PhotoUploader < ApplicationUploader
     %w(jpg jpeg gif png)
   end
 
-  def default_url(*args)
-    ActionController::Base.helpers.asset_path('' + [version_name, 'placeholder.png'].compact.join('_'))
-  end
-
   process resize_to_fit: [1200, 1200]
 
   version :thumbnail do
