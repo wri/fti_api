@@ -37,7 +37,7 @@ gem 'paranoia', "~> 2.2"
 # Rails and DB
 gem 'activerecord-postgis-adapter'
 gem 'pg',    '~> 0.18'
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.1.7'
 gem 'rgeo'
 gem 'rgeo-geojson'
 
