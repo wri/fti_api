@@ -3,7 +3,7 @@
 class LogoUploader < ApplicationUploader
   include CarrierWave::MiniMagick
 
-  def extension_whitelist
+  def extension_allowlist
     %w(jpg jpeg gif png)
   end
 

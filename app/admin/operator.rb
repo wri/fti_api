@@ -28,7 +28,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   config.clear_action_items!
 
-  action_item only: [:show] do
+  action_item :toggle_active, only: [:show] do
     if operator.is_active
       link_to 'Deactivate', deactivate_admin_producer_path(operator),
               method: :put, data: { confirm: "Are you sure you want to DEACTIVATE the producer #{operator.name}?" }
@@ -38,15 +38,15 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
   end
 
-  action_item only: [:show] do
+  action_item :edit, only: [:show] do
     link_to 'Edit Producer', edit_admin_producer_path(operator)
   end
 
-  action_item only: [:show] do
+  action_item :delete, only: [:show] do
     link_to 'Delete Producer', admin_producer_path(operator), method: :delete, data: { confirm: OperatorDecorator.new(operator).delete_confirmation_text }
   end
 
-  action_item only: [:index] do
+  action_item :new, only: [:index] do
     link_to 'New Producer', new_admin_producer_path
   end
 

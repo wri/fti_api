@@ -5,7 +5,7 @@ require 'carrierwave/processing/mini_magick'
 class PhotoUploader < ApplicationUploader
   include CarrierWave::MiniMagick
 
-  def extension_whitelist
+  def extension_allowlist
     %w(jpg jpeg gif png)
   end
 
