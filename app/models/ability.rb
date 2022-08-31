@@ -27,15 +27,12 @@ class Ability
           can :read, ActiveAdmin::Comment
           can :create, ActiveAdmin::Comment
           can :manage, ActiveAdmin::Comment, author_id: user.id
-
         end
-
+        can :ru, Notification, user_id: user.id
       else
         can [:read], User, id: user.id
       end
     end
-
-
 
     can :read, [Country, Fmu, Category, Subcategory, Law, Species,
                 OperatorDocument, OperatorDocumentHistory, RequiredOperatorDocument,
