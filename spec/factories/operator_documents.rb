@@ -32,22 +32,22 @@ FactoryBot.define do
     type { 'OperatorDocumentCountry' } # This can be overwritten by the children.
     document_file { build :document_file }
 
-    after(:build) do |random_operator_document|
-      country = random_operator_document&.operator&.country ||
-                random_operator_document&.required_operator_document&.country ||
-                FactoryBot.create(:country)
+    after(:build) do |doc|
+      country = doc&.operator&.country ||
+        doc&.required_operator_document&.country ||
+        FactoryBot.create(:country)
 
-      random_operator_document.operator ||= FactoryBot.create(:operator, country: country)
+      doc.operator ||= FactoryBot.create(:operator, country: country)
 
-      unless random_operator_document.required_operator_document
+      unless doc.required_operator_document
         required_operator_document_group = FactoryBot.create(:required_operator_document_group)
-        random_operator_document.required_operator_document ||= FactoryBot.create(
-          :required_operator_document,
+        doc.required_operator_document ||= FactoryBot.create(
+          :required_operator_document_country,
           country: country,
           required_operator_document_group: required_operator_document_group
         )
       end
-      random_operator_document.user ||= FactoryBot.create(:user)
+      doc.user ||= FactoryBot.create(:user)
     end
 
     factory :operator_document_country, class: OperatorDocumentCountry do
@@ -59,8 +59,8 @@ FactoryBot.define do
       required_operator_document_fmu
       type { 'OperatorDocumentFmu' }
 
-      after(:build) do |random_operator_document|
-        random_operator_document.fmu ||= FactoryBot.create(:fmu, country: country)
+      after(:build) do |doc|
+        doc.fmu ||= FactoryBot.create(:fmu, country: country)
       end
     end
   end

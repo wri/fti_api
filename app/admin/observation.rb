@@ -16,7 +16,7 @@ ActiveAdmin.register Observation do
   config.order_clause
   config.per_page = PER_PAGE
 
-  before_filter only: :index do
+  before_action only: :index do
     if PER_PAGE.include? params[:per_page]
       @per_page = params[:per_page]
       session[:obs_per_page] = @per_page

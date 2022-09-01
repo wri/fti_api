@@ -21,15 +21,14 @@ FactoryBot.define do
     start_date { Date.yesterday }
     expire_date { Date.tomorrow }
 
-    after(:create) do |random_operator_document_annex|
+    after(:build) do |random_operator_document_annex|
       if random_operator_document_annex.documentables.none?
         od = FactoryBot.create :operator_document_country
         AnnexDocument.create documentable_id: od.id,
                              documentable_type: 'OperatorDocument',
                              operator_document_annex_id: random_operator_document_annex.id
       end
-      random_operator_document_annex.user ||=
-        FactoryBot.create :admin
+      random_operator_document_annex.user ||= FactoryBot.create :admin
     end
   end
 end

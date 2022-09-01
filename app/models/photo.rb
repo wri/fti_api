@@ -18,7 +18,7 @@
 class Photo < ApplicationRecord
   mount_base64_uploader :attachment, PhotoUploader
 
-  belongs_to :user, inverse_of: :photos
+  belongs_to :user, inverse_of: :photos, optional: true # TODO: I think this is model is not used could be removed
   belongs_to :attacheable, polymorphic: true
 
   after_destroy :remove_attachment_id_directory

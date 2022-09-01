@@ -20,17 +20,13 @@
 
 FactoryBot.define do
   factory :required_operator_document do
+    country
+    required_operator_document_group
+
     sequence(:name) { |n| "RequiredOperatorDocument#{n}" }
     valid_period { DateTime.current + 1.year }
     forest_types { [rand(0..3)] }
     explanation { 'Some explanation' }
-
-    after(:build) do |random_required_operator_document|
-      random_required_operator_document.country ||=
-        FactoryBot.create(:country)
-      random_required_operator_document.required_operator_document_group ||=
-        FactoryBot.create(:required_operator_document_group)
-    end
 
     factory :required_operator_document_country, class: RequiredOperatorDocumentCountry do
       type { 'RequiredOperatorDocumentCountry' }

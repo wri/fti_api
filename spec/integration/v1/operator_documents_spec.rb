@@ -32,7 +32,7 @@ module V1
         get('/operator-documents?locale=en', headers: admin_headers)
         expect(parsed_data.count).to eql(10)
       end
-      it 'rebturns all with included' do
+      it 'returns all with included' do
         get(operator_documents_url_with_included, headers: admin_headers)
 
         expect(parsed_data.count).to eql(10)

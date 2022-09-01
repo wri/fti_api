@@ -34,7 +34,7 @@ FactoryBot.define do
     start_date { Date.yesterday }
     document_file { FactoryBot.build :document_file}
     operator { FactoryBot.build :operator }
-    required_operator_document { FactoryBot.build :required_operator_document}
+    required_operator_document { FactoryBot.build :required_operator_document_country}
 
     after(:build) do |history|
       country = history&.operator&.country ||
@@ -46,14 +46,16 @@ FactoryBot.define do
       unless history.required_operator_document
         required_operator_document_group = FactoryBot.create(:required_operator_document_group)
         history.required_operator_document ||= FactoryBot.create(
-            :required_operator_document,
+            :required_operator_document_country,
             country: country,
             required_operator_document_group: required_operator_document_group
         )
       end
       unless history.operator_document
-        history.operator_document ||= FactoryBot.create(:operator_document_country,
-            required_operator_document: history.required_operator_document)
+        history.operator_document ||= FactoryBot.create(
+          :operator_document_country,
+          required_operator_document_country: history.required_operator_document
+        )
       end
       history.operator_document_updated_at = history.operator_document.updated_at
       history.operator_document_created_at = history.operator_document.created_at
