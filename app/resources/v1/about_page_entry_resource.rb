@@ -6,7 +6,7 @@ module V1
     immutable
     caching
 
-    attributes :position, :title, :body
+    attributes :position, :title, :body, :code
 
     def self.default_sort
       [{ field: :position, direction: :asc }]

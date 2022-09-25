@@ -9,7 +9,7 @@ ActiveAdmin.register AboutPageEntry do
 
   config.order_clause
 
-  permit_params :position, translations_attributes: [:id, :locale, :title, :body, :_destroy]
+  permit_params :position, :code, translations_attributes: [:id, :locale, :title, :body, :_destroy]
 
   filter :position, as: :select
   filter :translations_title_contains, as: :select, label: 'Title',
@@ -26,6 +26,7 @@ ActiveAdmin.register AboutPageEntry do
   csv do
     column :position
     column :title
+    column :code
     column :body
     column :created_at
     column :updated_at
@@ -34,6 +35,7 @@ ActiveAdmin.register AboutPageEntry do
   index do
     column :position
     column :title
+    column :code
     # rubocop:disable Rails/OutputSafety
     column :body do |entry|
       entry.body.html_safe
@@ -49,6 +51,7 @@ ActiveAdmin.register AboutPageEntry do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'About Page Entries' do
       f.input :position
+      f.input :code
     end
     f.translated_inputs switch_locale: false do |t|
       t.input :title
@@ -74,6 +77,7 @@ ActiveAdmin.register AboutPageEntry do
     attributes_table do
       row :position
       row :title
+      row :code
       # rubocop:disable Rails/OutputSafety
       row :body do |entry|
         entry.body.html_safe
