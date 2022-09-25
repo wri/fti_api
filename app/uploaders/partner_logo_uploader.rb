@@ -7,10 +7,6 @@ class PartnerLogoUploader < ApplicationUploader
     %w(jpg jpeg gif png svg tiff)
   end
 
-  def default_url(*args)
-    ActionController::Base.helpers.asset_path('' + [version_name, 'placeholder.png'].compact.join('_'))
-  end
-
   version :unmodified
 
   # This is just for active admin
