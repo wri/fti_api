@@ -25,6 +25,7 @@ class ScoreOperatorDocument < ApplicationRecord
   after_commit :refresh_ranking
 
   scope :current, -> { where(current: true) }
+  scope :at_date, ->(date) { where("date <= ?", date) }
 
   VALUE_ATTRS = %w[all fmu country total summary_public summary_private].freeze
 

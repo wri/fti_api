@@ -59,7 +59,24 @@ namespace :scheduler do
         ObservationReportStatistic.generate_for_country_and_day(country_id, day, true)
       end
     }
-    Rails.logger.info "Observation resports statistics generated. It took #{time} ms."
+    Rails.logger.info "Observation reports statistics generated. It took #{time} ms."
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+  end
+
+  desc 'Send quarterly newsletters to operators'
+  task send_quarterly_newsletters: :environment do
+    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "Going to send quarterly newsletters: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    time = Benchmark.ms do
+      Operator.active.fa_operator.find_each do |operator|
+        begin
+          MailService.new.quarterly_newsletter(operator).deliver
+        rescue StandardError => e
+          Sentry.capture_exception(e, extra: { 'operator_id' => operator.id })
+        end
+      end
+    end
+    Rails.logger.info "Sent quarterly newsletters to operators. It took #{time} ms."
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
 end
