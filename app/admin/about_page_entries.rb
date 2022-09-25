@@ -7,7 +7,7 @@ ActiveAdmin.register AboutPageEntry do
 
   menu false
 
-  config.order_clause
+  config.sort_order = 'position_asc'
 
   permit_params :position, :code, translations_attributes: [:id, :locale, :title, :body, :_destroy]
 
@@ -50,8 +50,8 @@ ActiveAdmin.register AboutPageEntry do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'About Page Entries' do
-      f.input :position
-      f.input :code
+      f.input :position, hint: 'leaving empty will assign last position'
+      f.input :code, hint: 'must be "partners" for Partners and "donors" for Donors section'
     end
     f.translated_inputs switch_locale: false do |t|
       t.input :title
