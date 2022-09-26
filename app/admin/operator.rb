@@ -188,9 +188,12 @@ ActiveAdmin.register Operator, as: 'Producer' do
                                            'Sawmill', 'Other', 'Unknown']
       f.input :country, input_html: { disabled: edit }
       f.input :concession
-      f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
+
       if f.object.logo.present?
+        f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
         f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
+      else
+        f.input :logo, as: :file
       end
       available_fmus = Fmu.filter_by_free
       if edit

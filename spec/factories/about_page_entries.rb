@@ -15,5 +15,6 @@ FactoryBot.define do
     sequence :position
     title { 'Title' }
     body { 'Body' }
+    code { 'body' }
   end
 end

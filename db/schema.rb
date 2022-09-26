@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220803123657) do
+ActiveRecord::Schema.define(version: 20220925103640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20220803123657) do
     t.integer  "position",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "code"
     t.index ["position"], name: "index_about_page_entries_on_position", using: :btree
   end
 
@@ -378,6 +379,30 @@ ActiveRecord::Schema.define(version: 20220803123657) do
     t.index ["max_fine"], name: "index_laws_on_max_fine", using: :btree
     t.index ["min_fine"], name: "index_laws_on_min_fine", using: :btree
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id", using: :btree
+  end
+
+  create_table "notification_groups", force: :cascade do |t|
+    t.integer  "days",       null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "last_displayed_at"
+    t.datetime "dismissed_at"
+    t.datetime "solved_at"
+    t.integer  "operator_document_id",  null: false
+    t.integer  "user_id",               null: false
+    t.integer  "notification_group_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["dismissed_at"], name: "index_notifications_on_dismissed_at", using: :btree
+    t.index ["last_displayed_at"], name: "index_notifications_on_last_displayed_at", using: :btree
+    t.index ["notification_group_id"], name: "index_notifications_on_notification_group_id", using: :btree
+    t.index ["operator_document_id"], name: "index_notifications_on_operator_document_id", using: :btree
+    t.index ["solved_at"], name: "index_notifications_on_solved_at", using: :btree
+    t.index ["user_id"], name: "index_notifications_on_user_id", using: :btree
   end
 
   create_table "observation_documents", force: :cascade do |t|
@@ -1093,6 +1118,9 @@ ActiveRecord::Schema.define(version: 20220803123657) do
   add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
+  add_foreign_key "notifications", "notification_groups", on_delete: :nullify
+  add_foreign_key "notifications", "operator_documents", on_delete: :cascade
+  add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
   add_foreign_key "observation_histories", "categories", on_delete: :cascade

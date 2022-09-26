@@ -255,7 +255,7 @@ module V1
     # TODO: Hack. Modify to use refinements
     def self.is_of_type(type, value)
       if type == Integer
-        return true if value.to_i.to_s == self
+        return true if value.to_i.to_s == value
       end
       type === value
     end

@@ -46,9 +46,11 @@ ActiveAdmin.register Faq do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'FAQ Details' do
       f.input :position
-      f.input :image, as: :file, hint: image_tag(f.object.image.url(:thumbnail))
       if f.object.image.present?
+        f.input :image, as: :file, hint: image_tag(f.object.image.url(:thumbnail))
         f.input :delete_image, as: :boolean, required: false, label: 'Remove image'
+      else
+        f.input :image, as: :file
       end
     end
     f.translated_inputs switch_locale: false do |t|
