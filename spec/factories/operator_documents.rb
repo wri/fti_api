@@ -40,11 +40,10 @@ FactoryBot.define do
       doc.operator ||= FactoryBot.create(:operator, country: country)
 
       unless doc.required_operator_document
-        required_operator_document_group = FactoryBot.create(:required_operator_document_group)
         doc.required_operator_document ||= FactoryBot.create(
           :required_operator_document_country,
           country: country,
-          required_operator_document_group: required_operator_document_group,
+          required_operator_document_group: FactoryBot.create(:required_operator_document_group),
           disable_document_creation: true
         )
       end

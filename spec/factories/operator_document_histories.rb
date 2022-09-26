@@ -32,9 +32,9 @@ FactoryBot.define do
     user
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
-    document_file { FactoryBot.build :document_file}
-    operator { FactoryBot.build :operator }
-    required_operator_document { FactoryBot.build :required_operator_document_country, disable_document_creation: true }
+    document_file
+    operator
+    required_operator_document factory: :required_operator_document_country, disable_document_creation: true
     type { 'OperatorDocumentCountryHistory' }
 
     after(:build) do |history|
@@ -56,6 +56,7 @@ FactoryBot.define do
       unless history.operator_document
         history.operator_document ||= FactoryBot.create(
           :operator_document_country,
+          required_operator_document: history.required_operator_document,
           required_operator_document_country: history.required_operator_document
         )
       end
@@ -66,7 +67,7 @@ FactoryBot.define do
 
     factory :operator_document_fmu_history, class: OperatorDocumentFmuHistory do
       fmu
-      required_operator_document_fmu
+      required_operator_document factory: :required_operator_document_fmu, disable_document_creation: true
       type { 'OperatorDocumentFmuHistory' }
     end
   end

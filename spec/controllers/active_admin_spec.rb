@@ -4,8 +4,6 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
   # resource_name will be empty for custom pages not backed by models
   resource_name = resource.resource_name.instance_variable_get(:@klass)&.name&.underscore
 
-  next if resource_name != 'operator_document_history'
-
   describe resource.controller, type: :controller do
     let(:admin) { create(:admin) }
     let!(:model) { create(resource_name) if FactoryBot.factories.registered?(resource_name) }
