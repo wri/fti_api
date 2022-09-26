@@ -45,8 +45,8 @@
         ]
       },
       "record": {
-        "country_id": [
-          "can't be blank"
+        "country": [
+          "must exist"
         ]
       }
     }

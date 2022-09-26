@@ -21,11 +21,13 @@
 #
 
 class RequiredOperatorDocumentCountry < RequiredOperatorDocument
+  attr_accessor :disable_document_creation
+
   has_many :operator_document_countries, foreign_key: 'required_operator_document_id'
 
   validates_uniqueness_of :contract_signature, scope: :country_id, if: :contract_signature?
 
-  after_create :create_operator_document_countries
+  after_create :create_operator_document_countries, unless: :disable_document_creation
 
   def create_operator_document_countries
     Operator.where(country_id: self.country_id).find_each do |operator|

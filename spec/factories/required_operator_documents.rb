@@ -19,7 +19,7 @@
 #
 
 FactoryBot.define do
-  factory :required_operator_document do
+  factory :required_operator_document, class: RequiredOperatorDocumentCountry, aliases: [:required_operator_document_country] do
     country
     required_operator_document_group
 
@@ -27,10 +27,7 @@ FactoryBot.define do
     valid_period { DateTime.current + 1.year }
     forest_types { [rand(0..3)] }
     explanation { 'Some explanation' }
-
-    factory :required_operator_document_country, class: RequiredOperatorDocumentCountry do
-      type { 'RequiredOperatorDocumentCountry' }
-    end
+    type { 'RequiredOperatorDocumentCountry' }
 
     factory :required_operator_document_fmu, class: RequiredOperatorDocumentFmu do
       type { 'RequiredOperatorDocumentFmu' }

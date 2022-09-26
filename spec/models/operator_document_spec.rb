@@ -84,10 +84,10 @@ RSpec.describe OperatorDocument, type: :model do
     end
 
     before do
-      # this creates one operator_document already
       @required_operator_document = create(
         :required_operator_document_country,
         country: @country,
+        disable_document_creation: true
       )
     end
 

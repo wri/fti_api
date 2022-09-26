@@ -18,7 +18,6 @@ RSpec.describe ScoreOperatorPresenter do
     }
     create(:required_operator_document_country, country: country, contract_signature: true)
 
-    create(:required_operator_document, **required_operator_document_data)
     create_list(:required_operator_document_country, 4, **required_operator_document_data)
     create_list(
       :required_operator_document_fmu,

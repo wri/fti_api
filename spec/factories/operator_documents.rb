@@ -42,17 +42,14 @@ FactoryBot.define do
       unless doc.required_operator_document
         required_operator_document_group = FactoryBot.create(:required_operator_document_group)
         doc.required_operator_document ||= FactoryBot.create(
-          :required_operator_document_country, # TODO: changing this to _country breaks many places as country + this generates documents in callbacks
+          :required_operator_document_country,
           country: country,
-          required_operator_document_group: required_operator_document_group
+          required_operator_document_group: required_operator_document_group,
+          disable_document_creation: true
         )
       end
       doc.user ||= FactoryBot.create(:user)
     end
-
-    # factory :operator_document_country, class: OperatorDocumentCountry do
-    #   type { 'OperatorDocumentCountry' }
-    # end
 
     factory :operator_document_fmu, class: OperatorDocumentFmu do
       fmu

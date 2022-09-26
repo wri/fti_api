@@ -2,12 +2,14 @@ require 'rails_helper'
 
 module V1
   describe 'Observation Reports', type: :request do
+    let(:user) { create(:user) }
+
     it_behaves_like "jsonapi-resources", ObservationReport, {
       show: {},
       create: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: { title: 'Report one' },
+        valid_params: -> { { title: 'Report one', relationships: { user: user.id } } },
       },
       edit: {
         success_roles: %i[admin],
