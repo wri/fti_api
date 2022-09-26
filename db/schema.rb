@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220803123657) do
+ActiveRecord::Schema.define(version: 20220925103640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
+  enable_extension "postgis"
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20220803123657) do
     t.integer  "position",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "code"
     t.index ["position"], name: "index_about_page_entries_on_position", using: :btree
   end
 

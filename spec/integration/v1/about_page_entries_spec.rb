@@ -7,10 +7,6 @@ module V1
         locales: [:en, :fr],
         attributes: { title: 'Title', body: 'Body' }
       },
-      sort: {
-        attribute: :position,
-        sequence: -> (i) { i }
-      },
       route_key: 'about-page-entries'
     }
   end

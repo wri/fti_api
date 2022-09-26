@@ -10,11 +10,10 @@
 #  updated_at :datetime         not null
 #
 class AboutPageEntry < ApplicationRecord
+  acts_as_list
+
   include Translatable
   translates :title, :body, touch: true
-
-  validates_uniqueness_of :position
-  validates_presence_of :position
 
   active_admin_translates :title do
     validates_presence_of :title
