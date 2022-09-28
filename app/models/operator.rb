@@ -74,7 +74,7 @@ class Operator < ApplicationRecord
   after_create :create_documents
   after_update :recalculate_scores, if: :approved_changed?
   after_update :clean_document_cache, if: :approved_changed?
-  after_update :create_documents, if: :fa_id_changed?
+  after_update :create_documents, if: -> { fa_id_changed? && fa_id_was.blank? }
   after_update :refresh_ranking, if: -> { fa_id_changed? || is_active_changed? }
   before_destroy :really_destroy_documents
 
@@ -137,30 +137,6 @@ class Operator < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
-  end
-
-  def rebuild_documents
-    return if fa_id.blank?
-
-    country = RequiredOperatorDocument.where(country_id: country_id).any? ? country_id : nil
-
-    # Country Documents
-    RequiredOperatorDocumentCountry.where(country_id: country).find_each do |rodc|
-      if OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id).blank?
-        OperatorDocumentCountry.where(required_operator_document_id: rodc.id, operator_id: id,
-                                      status: OperatorDocument.statuses[:doc_not_provided]).create!
-      end
-    end
-
-    # FMU Documents
-    RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
-      Fmu.joins(:fmu_operators).where(fmu_operators: { operator_id: id, current: true }).find_each do |fmu|
-        unless OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).any?
-          OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id,
-                                    status: OperatorDocument.statuses[:doc_not_provided]).create!
-        end
-      end
-    end
   end
 
   def self.with_fmus_array

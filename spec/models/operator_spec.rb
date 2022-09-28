@@ -272,38 +272,6 @@ RSpec.describe Operator, type: :model do
         end
       end
     end
-
-    describe '#rebuild_documents' do
-      context 'when fa_id is present and there are operator_documents' do
-        before do
-          # Need to create another data to really check the creation of the documents
-          other_country = create(:country)
-          @other_operator = create(:operator, country: other_country, fa_id: 'fa-id')
-
-          fmu = create(:fmu, country: other_country)
-          create(:fmu_operator, fmu: fmu, operator: @other_operator)
-
-          required_operator_document_data = {
-            country: other_country,
-            required_operator_document_group: @required_operator_document_group
-          }
-          create(:required_operator_document_country, **required_operator_document_data)
-          create(:required_operator_document_fmu, **required_operator_document_data)
-        end
-
-        it 'set :doc_not_provided status for related OperatorDocumentCountry and OperatorDocumentFmu' do
-          @other_operator.rebuild_documents
-
-          expect(@other_operator.operator_document_countries.size).to eql 1
-          operator_document_country = @other_operator.operator_document_countries.first
-          expect(operator_document_country.status).to eql 'doc_not_provided'
-
-          expect(@other_operator.operator_document_fmus.size).to eql 1
-          operator_document_fmu = @other_operator.operator_document_fmus.first
-          expect(operator_document_fmu.status).to eql 'doc_not_provided'
-        end
-      end
-    end
   end
 
   describe 'Class methods' do
