@@ -7,7 +7,8 @@ module V1
     load_and_authorize_resource class: 'Notification'
 
     def dismiss
-      @notification.update(dismissed_at: Time.now)
+      @notification.update!(dismissed_at: Time.now)
+      head :ok
     end
   end
 end
