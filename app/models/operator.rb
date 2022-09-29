@@ -185,13 +185,7 @@ class Operator < ApplicationRecord
     end
 
     if operator_document_fmus.none?
-      RequiredOperatorDocumentFmu.where(country_id: country).find_each do |rodf|
-        self.fmus.find_each do |fmu|
-          OperatorDocumentFmu.where(required_operator_document_id: rodf.id, operator_id: id, fmu_id: fmu.id).first_or_create do |odf|
-            odf.update!(status: OperatorDocument.statuses[:doc_not_provided])
-          end
-        end
-      end
+      fmu_operators.each(&:update_documents_list)
     end
   end
 
