@@ -4,6 +4,7 @@ SimpleCov.start 'rails' do
   add_filter '/spec/'
   add_filter 'app/channels'
   add_filter 'app/constraints'
+  add_filter 'lib/tasks'
 
   add_group 'Backoffice', 'app/admin'
   add_group 'Models', 'app/models'
