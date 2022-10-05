@@ -18,6 +18,7 @@ gem 'activeadmin_addons', '1.5'
 
 gem 'sass-rails'
 gem 'sassc-rails'
+gem 'uglifier'
 
 # Active Admin skins
 gem 'active_skin'

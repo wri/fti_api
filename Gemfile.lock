@@ -514,6 +514,8 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2022.1)
       tzinfo (>= 1.0.0)
+    uglifier (4.1.18)
+      execjs (>= 0.3.0, < 3)
     unicode-display_width (1.6.1)
     uniform_notifier (1.16.0)
     valid_url (0.0.4)
@@ -612,6 +614,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   super_diff
   tzinfo-data
+  uglifier
   valid_url
   webmock
 
