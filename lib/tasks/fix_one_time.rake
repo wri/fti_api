@@ -56,10 +56,10 @@ namespace :fix_one_time do
     end
   end
 
-  desc 'Remove couple not provided docs'
-  task remove_mismatched_docs: :environment do
+  desc 'Removing documents completely'
+  task remove_docs: :environment do
     for_real = ENV['FOR_REAL'] == 'true'
-    docs_to_remove = [22791, 22792, 22797, 22798, 22799, 22800, 22808, 22809, 22810, 23751, 23759]
+    docs_to_remove = (ENV['DOCS'] || '').split(',')
 
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
@@ -101,7 +101,8 @@ namespace :fix_one_time do
       puts "Removing docs... #{docs.delete_all} affected"
 
       puts "Syncing scores..."
-      SyncTasks.new(as_rake_task: false).sync_scores
+      puts "Only for operator #{ENV['OPERATOR_ID']}" if ENV['OPERATOR_ID'].present?
+      SyncTasks.new(as_rake_task: false).sync_scores(operator_id: ENV['OPERATOR_ID'])
       puts "Refreshing ranking..."
       RankingOperatorDocument.refresh
 
