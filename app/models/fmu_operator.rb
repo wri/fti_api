@@ -99,8 +99,6 @@ WHERE id = #{x.fmu_id};"
     end
   end
 
-  private
-
   # Updates the list of documents for this FMU
   def update_documents_list
     current_operator = self&.fmu&.reload&.operator
@@ -128,6 +126,8 @@ WHERE id = #{x.fmu_id};"
       Rails.logger.info "Create the documents for operator #{current_operator.id} and FMU #{fmu_id}"
     end
   end
+
+  private
 
   def update_fmu_geojson
     return unless current

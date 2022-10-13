@@ -7,12 +7,12 @@ class SyncTasks
     namespace :sync do
       desc 'Sync scores saved in score operator document'
       task scores_all: :environment do
-        sync_scores
+        sync_scores(operator_id: ENV['OPERATOR_ID'])
       end
 
       desc 'Sync scores saved in score operator document only within last week'
       task scores_last_week: :environment do
-        sync_scores(1.week.ago)
+        sync_scores(from_date: 1.week.ago, operator_id: ENV['OPERATOR_ID'])
       end
 
       desc 'Refresh ranking'
@@ -78,10 +78,13 @@ class SyncTasks
     end
   end
 
-  def sync_scores(date = nil)
+  def sync_scores(options = {})
+    date = options[:from_date]
+    operator_id = options[:operator_id]
+
     scores = ScoreOperatorDocument.all
     scores = scores.where('date > ?', date) if date.present?
-    scores = scores.where(operator_id: ENV['OPERATOR_ID']) if ENV['OPERATOR_ID'].present?
+    scores = scores.where(operator_id: operator_id) if operator_id.present?
 
     different_scores = 0
     scores.find_each do |score|

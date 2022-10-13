@@ -29,6 +29,7 @@ class Ability
           can :manage, ActiveAdmin::Comment, author_id: user.id
         end
         can :ru, Notification, user_id: user.id
+        can :dismiss, Notification, user_id: user.id
       else
         can [:read], User, id: user.id
       end
