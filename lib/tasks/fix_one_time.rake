@@ -56,10 +56,10 @@ namespace :fix_one_time do
     end
   end
 
-  desc 'Remove couple not provided docs'
-  task remove_mismatched_docs: :environment do
+  desc 'Removing documents completely'
+  task remove_docs: :environment do
     for_real = ENV['FOR_REAL'] == 'true'
-    docs_to_remove = [22791, 22792, 22797, 22798, 22799, 22800, 22808, 22809, 22810, 23751, 23759]
+    docs_to_remove = (ENV['DOCS'] || '').split(',')
 
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
@@ -68,6 +68,7 @@ namespace :fix_one_time do
 
     ActiveRecord::Base.transaction do
       docs = OperatorDocument.unscoped.where(id: docs_to_remove)
+      operator_ids = docs.pluck(:operator_id).uniq
       histories = OperatorDocumentHistory.unscoped.where(operator_document_id: docs_to_remove)
       versions = PaperTrail::Version.where(item: docs)
 
@@ -75,7 +76,7 @@ namespace :fix_one_time do
       if for_real
         files.each do |file|
           puts "Removing file #{file.id}"
-          file.really_destroy!
+          file.destroy!
         end
       else
         puts "Removing files... #{files.delete_all} affected"
@@ -101,7 +102,8 @@ namespace :fix_one_time do
       puts "Removing docs... #{docs.delete_all} affected"
 
       puts "Syncing scores..."
-      SyncTasks.new(as_rake_task: false).sync_scores
+      puts "Only for operators: #{operator_ids.join(', ')}"
+      SyncTasks.new(as_rake_task: false).sync_scores(operator_id: operator_ids)
       puts "Refreshing ranking..."
       RankingOperatorDocument.refresh
 

@@ -72,13 +72,13 @@ RSpec.describe Operator, type: :model do
     end
 
     describe '#create_documents' do
-      context 'when fa_id is present and there are operator_documents' do
+      context 'when setting fa_id for operator' do
         before do
           # Having a random order, @operator data can differ depending on the order
           other_country = create(:country)
-          @other_operator = create(:operator, country: other_country, fa_id: 'fa-id')
+          @other_operator = create(:operator, country: other_country, fa_id: nil)
 
-          fmu = create(:fmu, country: other_country)
+          fmu = create(:fmu, forest_type: 'ufa', country: other_country)
           FactoryBot.create(:fmu_operator, fmu: fmu, operator: @other_operator)
 
           required_operator_document_data = {
@@ -86,13 +86,22 @@ RSpec.describe Operator, type: :model do
             required_operator_document_group: @required_operator_document_group
           }
           FactoryBot.create(:required_operator_document_country, **required_operator_document_data)
-          FactoryBot.create(:required_operator_document_fmu, **required_operator_document_data)
-
+          FactoryBot.create(
+            :required_operator_document_fmu,
+            forest_types: [Fmu::FOREST_TYPES[:ufa][:index], Fmu::FOREST_TYPES[:cf][:index]],
+            **required_operator_document_data
+          )
+          # won't create for this one as not matching forest type
+          FactoryBot.create(
+            :required_operator_document_fmu,
+            forest_types: [Fmu::FOREST_TYPES[:vdc][:index]],
+            **required_operator_document_data
+          )
           @other_operator.operator_documents.destroy_all
         end
 
-        it 'set :doc_not_provided status for related OperatorDocumentCountry and OperatorDocumentFmu' do
-          @other_operator.update_attributes(fa_id: 'another_fa_id')
+        it 'creates related OperatorDocumentCountry and OperatorDocumentFmu if those does not exist' do
+          @other_operator.update_attributes(fa_id: 'fa_id')
 
           expect(@other_operator.operator_document_countries.size).to eql 1
           operator_document_country = @other_operator.operator_document_countries.first
@@ -269,38 +278,6 @@ RSpec.describe Operator, type: :model do
               ((4.0 * 1) / visits + (2.0 * 1) / visits + (2.0 * 1) / visits + (1.0 * 3) / visits) / 9.0
             )
           end
-        end
-      end
-    end
-
-    describe '#rebuild_documents' do
-      context 'when fa_id is present and there are operator_documents' do
-        before do
-          # Need to create another data to really check the creation of the documents
-          other_country = create(:country)
-          @other_operator = create(:operator, country: other_country, fa_id: 'fa-id')
-
-          fmu = create(:fmu, country: other_country)
-          create(:fmu_operator, fmu: fmu, operator: @other_operator)
-
-          required_operator_document_data = {
-            country: other_country,
-            required_operator_document_group: @required_operator_document_group
-          }
-          create(:required_operator_document_country, **required_operator_document_data)
-          create(:required_operator_document_fmu, **required_operator_document_data)
-        end
-
-        it 'set :doc_not_provided status for related OperatorDocumentCountry and OperatorDocumentFmu' do
-          @other_operator.rebuild_documents
-
-          expect(@other_operator.operator_document_countries.size).to eql 1
-          operator_document_country = @other_operator.operator_document_countries.first
-          expect(operator_document_country.status).to eql 'doc_not_provided'
-
-          expect(@other_operator.operator_document_fmus.size).to eql 1
-          operator_document_fmu = @other_operator.operator_document_fmus.first
-          expect(operator_document_fmu.status).to eql 'doc_not_provided'
         end
       end
     end
