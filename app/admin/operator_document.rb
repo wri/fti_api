@@ -183,22 +183,22 @@ ActiveAdmin.register OperatorDocument do
     column :country do |od|
       od.required_operator_document.country
     end
-    column 'Required Document', :required_operator_document, sortable: 'required_operator_documents.name' do |od|
+    column 'Required Document', :required_operator_document, sortable: 'required_operator_document_id' do |od|
       if od.required_operator_document.present?
         link_to od.required_operator_document.name, admin_required_operator_document_path(od.required_operator_document)
       else
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).name
       end
     end
-    column :Type, sortable: 'required_operator_documents.type' do |od|
+    column :Type, sortable: false do |od|
       if od.required_operator_document.present?
         od.required_operator_document.type == 'RequiredOperatorDocumentFmu' ? 'Fmu' : 'Operator'
       else
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).type
       end
     end
-    column :operator, sortable: 'operator_translations.name'
-    column :fmu, sortable: 'fmu_translations.name'
+    column :operator, sortable: 'operator_id'
+    column :fmu, sortable: 'fmu_id'
     column 'Legal Category' do |od|
       if od.required_operator_document.present?
         od.required_operator_document.required_operator_document_group.name
@@ -206,7 +206,7 @@ ActiveAdmin.register OperatorDocument do
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).required_operator_document_group.name
       end
     end
-    column :user, sortable: 'users.name'
+    column :user, sortable: 'user_id'
     column :expire_date
     column :start_date
     column :created_at
