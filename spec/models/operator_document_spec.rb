@@ -75,12 +75,12 @@ RSpec.describe OperatorDocument, type: :model do
   end
 
   describe 'Hooks' do
-    before :all do
+    before do
       @country = create(:country)
       @operator = create(:operator, country: @country, fa_id: 'fa_id')
 
       @fmu = create(:fmu, country: @country)
-      create(:fmu_operator, fmu: @fmu, operator: @operator)
+      @fmu_operator = create(:fmu_operator, fmu: @fmu, operator: @operator)
     end
 
     before do
@@ -143,6 +143,38 @@ RSpec.describe OperatorDocument, type: :model do
             expect { subject }.not_to change { notification.reload.solved_at }
             expect { subject }.not_to change { notification2.reload.solved_at }
           end
+        end
+      end
+    end
+
+    describe '#recalculate operator score' do
+      before { @document = create(:operator_document_fmu, fmu: @fmu, operator: @operator) }
+      before { expect(ScoreOperatorDocument).to receive(:recalculate!).with(@operator) }
+
+      context 'when removing document' do
+        it 'updates operator score' do
+          @document.destroy
+        end
+
+        context 'while fmu does not belong to operator anymore' do
+          it 'updates operator score' do
+            @fmu_operator.update(current: false) # this should invoke document deletion and invoke recalculation
+            expect(@document.reload.deleted?).to be(true)
+          end
+        end
+      end
+
+      context 'when changing document status' do
+        it 'updates operator score' do
+          @document.update!(status: :doc_valid)
+        end
+      end
+
+      context 'when operator not approved and changing public state' do
+        before { @operator.update(approved: false) }
+
+        it 'updates operator score' do
+          @document.update!(public: @document.public)
         end
       end
     end

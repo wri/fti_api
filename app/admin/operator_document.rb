@@ -209,6 +209,7 @@ ActiveAdmin.register OperatorDocument do
     column :user, sortable: 'user_id'
     column :expire_date
     column :start_date
+    column :deleted_at
     column :created_at
     column :uploaded_by
     column :source

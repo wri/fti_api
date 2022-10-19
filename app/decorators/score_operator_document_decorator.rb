@@ -41,8 +41,14 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
       elsif value < prev[key]
         color = 'red'
       end
+      diff = value - prev[key]
+      diff_text = if diff.negative?
+                    "(#{diff})"
+                  elsif diff.positive?
+                    "(+#{diff})"
+                  end
 
-      "#{key.gsub('doc_','')}: <span style='color: #{color}'>#{value}</span>"
+      "#{key.gsub('doc_','')}: <span style='color: #{color}'>#{value} #{diff_text}</span>"
     end.join('<br/>')
   end
 

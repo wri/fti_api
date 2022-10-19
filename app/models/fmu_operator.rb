@@ -99,14 +99,19 @@ WHERE id = #{x.fmu_id};"
     end
   end
 
-  # Updates the list of documents for this FMU
+  # Updates the list of documents for this FMU, TODO: move it to some service object
   def update_documents_list
     current_operator = self&.fmu&.reload&.operator
 
     OperatorDocumentFmu.transaction do
-      to_destroy = OperatorDocumentFmu.where(fmu_id: fmu_id).where.not(operator_id: current_operator&.id)
+      to_destroy = OperatorDocumentFmu.includes(:operator).where(fmu_id: fmu_id)
+      to_destroy = to_destroy.where.not(operator_id: current_operator.id) if current_operator.present?
       destroyed_count = to_destroy.count
-      to_destroy.each { |x| x.destroy }
+      to_destroy.each do |doc|
+        doc.skip_score_recalculation = true # just do it once for each operator at the end
+        doc.destroy
+      end
+      to_destroy.map(&:operator).uniq.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
 
       Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id}"
 
@@ -120,9 +125,11 @@ WHERE id = #{x.fmu_id};"
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
                                   operator_id: current_operator.id,
                                   fmu_id: fmu_id).first_or_create do |odf|
+          odf.skip_score_recalculation = true # just do it once at the end
           odf.update!(status: OperatorDocument.statuses[:doc_not_provided]) unless odf.persisted?
         end
       end
+      ScoreOperatorDocument.recalculate!(current_operator)
       Rails.logger.info "Create the documents for operator #{current_operator.id} and FMU #{fmu_id}"
     end
   end
