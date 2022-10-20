@@ -51,7 +51,7 @@ class Fmu < ApplicationRecord
   has_one :fmu_operator, ->{ where(current: true) }
   has_one :operator, through: :fmu_operator
 
-  has_many :operator_document_fmus
+  has_many :operator_document_fmus, dependent: :destroy
 
   accepts_nested_attributes_for :operators
   accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
@@ -65,7 +65,7 @@ class Fmu < ApplicationRecord
 
   after_save :update_geometry, if: :geojson_changed?
 
-  before_destroy :really_destroy_documents
+  before_destroy :mark_for_destruction, prepend: true
 
   default_scope { includes(:translations) }
 
@@ -256,11 +256,6 @@ class Fmu < ApplicationRecord
   end
 
   private
-
-  def really_destroy_documents
-    mark_for_destruction # Hack to work with the hard delete of operator documents
-    ActiveRecord::Base.connection.execute("DELETE FROM operator_documents WHERE fmu_id = #{id}")
-  end
 
   def geojson_correctness
     return if geojson.blank?

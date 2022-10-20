@@ -143,18 +143,19 @@ class OperatorDocument < ApplicationRecord
     # It only allows for (soft) deletion of the operator documents when:
     # 1 - The Operator was deleted
     # 2 - The Fmu was deleted
-    # 3 - The Required Operator Document was deleted
+    # 3 - The Required Operator Document was deleted # TODO: looks like dependent destroy is not set on that model so I removed that condition
     # 4 - The Operator is no longer active for this Fmu
 
-    create_history and return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
-    create_history and return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
+    create_history and return if operator.present? && operator.marked_for_destruction?
+    create_history and return if fmu_id && fmu.marked_for_destruction?
     create_history and return if fmu_id && (operator_id != fmu.operator&.id)
 
-    update status: OperatorDocument.statuses[:doc_not_provided],
-           expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
-           deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
-           source: nil, source_info: nil, document_file_id: nil
-
+    update!(
+      status: OperatorDocument.statuses[:doc_not_provided],
+      expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
+      deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
+      source: nil, source_info: nil, document_file_id: nil
+    )
     self.skip_score_recalculation = true
   end
 

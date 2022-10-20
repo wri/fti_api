@@ -147,13 +147,14 @@ RSpec.describe Fmu, type: :model do
       end
     end
 
-    describe '#really_destroy_documents' do
+    describe '#destroy' do
       it 'destroy operator_documents associated with the fmu' do
         another_fmu = create(:fmu)
         operator_document = create(:operator_document_fmu, fmu: another_fmu)
         another_fmu.destroy
 
         expect(OperatorDocument.where(id: operator_document.id).first).to be_nil
+        expect(OperatorDocument.unscoped.where(id: operator_document.id).first).to be_present
       end
     end
   end

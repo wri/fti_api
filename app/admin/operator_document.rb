@@ -198,7 +198,13 @@ ActiveAdmin.register OperatorDocument do
       end
     end
     column :operator, sortable: 'operator_id'
-    column :fmu, sortable: 'fmu_id'
+    column :fmu, sortable: 'fmu_id' do |od|
+      if od.fmu.present?
+        link_to od.fmu.name, admin_fmu_path(od.fmu)
+      elsif od.fmu_id.present?
+        Fmu.unscoped.find(od.fmu_id).name
+      end
+    end
     column 'Legal Category' do |od|
       if od.required_operator_document.present?
         od.required_operator_document.required_operator_document_group.name
