@@ -141,13 +141,12 @@ class OperatorDocument < ApplicationRecord
 
   def regenerate
     # It only allows for (soft) deletion of the operator documents when:
-    # 1 - The Operator was deleted
-    # 2 - The Fmu was deleted
-    # 3 - The Required Operator Document was deleted # TODO: looks like dependent destroy is not set on that model so I removed that condition
+    # 1 - The Operator was deleted  (destroyed_by_association)
+    # 2 - The Fmu was deleted (destroyed_by_association)
+    # 3 - The Required Operator Document was deleted (destroyed_by_association)
     # 4 - The Operator is no longer active for this Fmu
 
-    create_history and return if operator.present? && operator.marked_for_destruction?
-    create_history and return if fmu_id && fmu.marked_for_destruction?
+    create_history and return if destroyed_by_association
     create_history and return if fmu_id && (operator_id != fmu.operator&.id)
 
     update!(

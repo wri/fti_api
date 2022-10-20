@@ -89,4 +89,30 @@ RSpec.describe RequiredOperatorDocument, type: :model do
       end
     end
   end
+
+  describe 'Hooks' do
+    describe '#destroy' do
+      before do
+        country = create(:country)
+        create(:operator, country: country)
+        create(:operator, country: country)
+
+        @required_operator_document = create(
+          :required_operator_document_country,
+          contract_signature: false,
+          country: country
+        )
+      end
+
+      it 'destroy operator_documents associated with the document' do
+        expect(OperatorDocument.count).to eq(2) # for operator1 and operator2
+        expect(OperatorDocument.deleted.count).to eq(0)
+
+        @required_operator_document.destroy
+
+        expect(OperatorDocument.deleted.count).to eq(2)
+        expect(OperatorDocument.count).to eq(0)
+      end
+    end
+  end
 end

@@ -65,8 +65,6 @@ class Fmu < ApplicationRecord
 
   after_save :update_geometry, if: :geojson_changed?
 
-  before_destroy :mark_for_destruction, prepend: true
-
   default_scope { includes(:translations) }
 
   # TODO Redo all of those
