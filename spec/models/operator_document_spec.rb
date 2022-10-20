@@ -221,24 +221,26 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
-    describe '#ensure_unity' do
-      context 'when operator and required_operator_document exist and are not marked '\
-              'for destruction, not current operator document and not required operator document' do
-        it 'creates a new operator document' do
-          operator_document = create(
-            :operator_document_country,
-            operator: @operator,
-            required_operator_document: @required_operator_document
-          )
+    describe '#destroy' do
+      it 'regenerates document state to not provided and creates history for current document' do
+        operator_document = create(
+          :operator_document_country,
+          operator: @operator,
+          status: :doc_valid,
+          required_operator_document: @required_operator_document
+        )
 
-          expect(OperatorDocument.count).to eql 1
+        expect(OperatorDocument.count).to eql 1
 
-          expect {
-            operator_document.destroy
-          }.to change { OperatorDocumentHistory.count }.by(1)
+        expect {
+          operator_document.destroy
+        }.to change { OperatorDocumentHistory.count }.by(1)
 
-          expect(OperatorDocument.count).to eql 1
-        end
+        operator_document.reload
+
+        expect(OperatorDocument.count).to eql 1
+        expect(operator_document.deleted?).to be(false)
+        expect(operator_document.status).to eq('doc_not_provided')
       end
     end
   end
