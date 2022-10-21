@@ -24,7 +24,7 @@ module V1
     end
 
     def current
-      user = User.find(context[:current_user])
+      user = User.find(context[:current_user].id)
       include_resources = %w[user_permission observer operator country observer.country]
       render json: JSONAPI::ResourceSerializer.new(
         UserResource,
@@ -62,7 +62,7 @@ module V1
           :locale,
         )
       # better in this way to keep actioncontroller::parameters object, this rails version has some bugs
-      p.deep_transform_keys!(&:underscore)
+      p.transform_keys!(&:underscore)
       p
     end
   end

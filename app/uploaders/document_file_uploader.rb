@@ -5,7 +5,7 @@ class DocumentFileUploader < ApplicationUploader
     "uploads/operator_document_file/#{mounted_as}/#{model.id}"
   end
 
-  def extension_whitelist
+  def extension_allowlist
     %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
   end
 

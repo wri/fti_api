@@ -55,11 +55,11 @@ class Country < ApplicationRecord
   })
 
   scope :with_observations, (-> {
-    left_outer_joins(:observations).where.not(observations: { id: nil }).uniq
+    left_outer_joins(:observations).where.not(observations: { id: nil }).distinct
   })
 
   scope :with_active_observations, (-> {
-    joins(:observations).merge(Observation.active).where.not(observations: { id: nil }).uniq
+    joins(:observations).merge(Observation.active).where.not(observations: { id: nil }).distinct
   })
   scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select('observations.country_id').distinct.pluck('observations.country_id')) }
 

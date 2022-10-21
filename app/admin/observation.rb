@@ -16,7 +16,7 @@ ActiveAdmin.register Observation do
   config.order_clause
   config.per_page = PER_PAGE
 
-  before_filter only: :index do
+  before_action only: :index do
     if PER_PAGE.include? params[:per_page]
       @per_page = params[:per_page]
       session[:obs_per_page] = @per_page
@@ -297,7 +297,7 @@ ActiveAdmin.register Observation do
     render partial: 'hidden_filters', locals: {
         filter: {
             categories: {
-                subcategories: HashHelper.aggregate(Subcategory.uniq.pluck(:category_id, :id).map{ |x| { x.first => x.last } })
+                subcategories: HashHelper.aggregate(Subcategory.distinct.pluck(:category_id, :id).map{ |x| { x.first => x.last } })
             },
             countries: {
                 government_entities: HashHelper.aggregate(Government.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),

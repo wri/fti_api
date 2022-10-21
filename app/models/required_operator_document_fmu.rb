@@ -26,7 +26,7 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
 
   validates :contract_signature, absence: true
 
-  after_create :create_operator_document_fmus
+  after_create :create_operator_document_fmus, unless: :disable_document_creation
 
   def create_operator_document_fmus
     fmus.find_each do |fmu|

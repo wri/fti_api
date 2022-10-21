@@ -20,7 +20,7 @@ class Severity < ApplicationRecord
   active_admin_translates :details do; end
   # rubocop:enable Style/BlockDelimiters
 
-  belongs_to :subcategory, inverse_of: :severities, required: :true
+  belongs_to :subcategory, inverse_of: :severities
   has_many :observations, inverse_of: :severity
 
   def level_details

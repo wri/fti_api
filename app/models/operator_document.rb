@@ -30,11 +30,11 @@ class OperatorDocument < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  belongs_to :operator, optional: false, touch: true
-  belongs_to :required_operator_document, -> { with_archived }, required: true
-  belongs_to :fmu
-  belongs_to :user
-  belongs_to :document_file, optional: :true, inverse_of: :operator_document
+  belongs_to :operator, touch: true
+  belongs_to :required_operator_document, -> { with_archived }
+  belongs_to :fmu, optional: true
+  belongs_to :user, optional: true
+  belongs_to :document_file, optional: true, inverse_of: :operator_document
   has_many :annex_documents, as: :documentable, dependent: :destroy
   has_many :operator_document_annexes, through: :annex_documents
   has_many :notifications

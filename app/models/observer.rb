@@ -49,7 +49,7 @@ class Observer < ApplicationRecord
   has_many :observation_reports, through: :observation_report_observers
 
   has_many :users, inverse_of: :observer
-  belongs_to :responsible_user, class_name: 'User', foreign_key: 'responsible_user_id'
+  belongs_to :responsible_user, class_name: 'User', foreign_key: 'responsible_user_id', optional: true
   belongs_to :responsible_admin, class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
 
   EMAIL_VALIDATOR = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i

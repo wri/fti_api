@@ -56,7 +56,7 @@ class User < ApplicationRecord
   has_many :operator_document_annexes,  inverse_of: :user
 
   belongs_to :observer, optional: true
-  belongs_to :operator,  optional: true
+  belongs_to :operator, optional: true
   belongs_to :holding, optional: true
 
   accepts_nested_attributes_for :user_permission

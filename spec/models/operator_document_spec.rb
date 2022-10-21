@@ -85,9 +85,10 @@ RSpec.describe OperatorDocument, type: :model do
 
     before do
       @required_operator_document = create(
-        :required_operator_document,
+        :required_operator_document_country,
         country: @country,
-        required_operator_document_group: @required_operator_document_group)
+        disable_document_creation: true
+      )
     end
 
     describe '#set_status' do
@@ -188,14 +189,15 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
-    describe '#insure_unity' do
+    describe '#ensure_unity' do
       context 'when operator and required_operator_document exist and are not marked '\
               'for destruction, not current operator document and not required operator document' do
         it 'creates a new operator document' do
           operator_document = create(
             :operator_document_country,
             operator: @operator,
-            required_operator_document: @required_operator_document)
+            required_operator_document: @required_operator_document
+          )
 
           expect(OperatorDocument.count).to eql 1
 
@@ -228,13 +230,13 @@ RSpec.describe OperatorDocument, type: :model do
   describe 'Class methods' do
     describe '#expire_documents' do
       it 'update status as doc_expired which expire_date is lower than today' do
-        required_operator_document =
-          create(:required_operator_document, contract_signature: false)
+        required_operator_document = create(:required_operator_document_country, contract_signature: false)
         create(
           :operator_document_country,
           required_operator_document: required_operator_document,
           status: OperatorDocument.statuses[:doc_valid],
-          expire_date: Date.yesterday)
+          expire_date: Date.yesterday
+        )
 
         expect {
           OperatorDocument.expire_documents

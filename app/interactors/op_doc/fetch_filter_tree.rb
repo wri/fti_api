@@ -46,7 +46,7 @@ module OpDoc
         {
           id: x.id,
           name: x.name,
-          required_operator_document_ids: x.required_operator_documents.pluck(:id)
+          required_operator_document_ids: x.required_operator_documents.pluck(:id).sort
         }
       end.sort_by { |x| x[:name] }
     end

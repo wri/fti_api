@@ -29,7 +29,7 @@ class RequiredGovDocument < ApplicationRecord
   # rubocop:enable Style/BlockDelimiters
 
   belongs_to :required_gov_document_group
-  belongs_to :country, optional: false
+  belongs_to :country
   has_many :gov_documents, dependent: :destroy
 
   enum document_type: { file: 1, link: 2, stats: 3 }

@@ -59,7 +59,7 @@ module V1
                params: jsonapi_params('observations', nil, { 'country-id': '', 'observation-type': 'operator', 'publication-date': DateTime.now }),
                headers: admin_headers)
 
-          expect(parsed_body).to eq(jsonapi_errors(422, 100, { 'country-id': ["can't be blank"] }))
+          expect(parsed_body).to eq(jsonapi_errors(422, 100, { 'relationships_country': ["must exist"] }))
           expect(status).to eq(422)
         end
 

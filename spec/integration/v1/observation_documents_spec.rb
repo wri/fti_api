@@ -2,12 +2,15 @@ require 'rails_helper'
 
 module V1
   describe 'Observation Documents', type: :request do
+    let(:user) { create(:user) }
+    let(:observation) { create(:observation) }
+
     it_behaves_like "jsonapi-resources", ObservationDocument, {
       show: {},
       create: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: { name: 'Document one' },
+        valid_params: -> { { name: 'Document one', relationships: { user: user.id, observation: observation.id } } },
       },
       edit: {
         success_roles: %i[admin],
