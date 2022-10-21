@@ -8,8 +8,7 @@ ActiveAdmin.register Faq do
 
   config.order_clause
 
-
-  permit_params :position, :image, translations_attributes: [:id, :locale, :question, :answer, :_destroy]
+  permit_params :position, translations_attributes: [:id, :locale, :question, :answer, :_destroy]
 
   filter :position, as: :select
   filter :translations_question_contains, as: :select, label: 'Question',
@@ -35,7 +34,6 @@ ActiveAdmin.register Faq do
     column :position
     column :question
     column :answer
-    image_column :image
     column :created_at
     column :updated_at
 
@@ -46,29 +44,23 @@ ActiveAdmin.register Faq do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'FAQ Details' do
       f.input :position
-      if f.object.image.present?
-        f.input :image, as: :file, hint: image_tag(f.object.image.url(:thumbnail))
-        f.input :delete_image, as: :boolean, required: false, label: 'Remove image'
-      else
-        f.input :image, as: :file
-      end
     end
     f.translated_inputs switch_locale: false do |t|
       t.input :question
       t.input :answer,
               as: :quill_editor,
               input_html: {
-                  data: {
-                      options: {
-                          modules: {
-                              toolbar: [['bold', 'italic', 'underline'],
-                                        ['link', 'video']]
-                          },
-                          placeholder: 'Type something...',
-                          theme: 'snow'
-                        }
-                    }
+                data: {
+                  options: {
+                    modules: {
+                      toolbar: [['bold', 'italic', 'underline'],
+                                ['link', 'video']]
+                    },
+                    placeholder: 'Type something...',
+                    theme: 'snow'
+                  }
                 }
+              }
     end
     f.actions
   end
@@ -79,7 +71,6 @@ ActiveAdmin.register Faq do
       row :position
       row :question
       row :answer
-      image_row :image
       row :created_at
       row :updated_at
     end

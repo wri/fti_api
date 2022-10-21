@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220925103640) do
+ActiveRecord::Schema.define(version: 20221021144945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -774,19 +774,6 @@ ActiveRecord::Schema.define(version: 20220925103640) do
     t.index ["is_active"], name: "index_operators_on_is_active"
   end
 
-  create_table "photos", force: :cascade do |t|
-    t.string "name"
-    t.string "attachment"
-    t.integer "attacheable_id"
-    t.string "attacheable_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.datetime "deleted_at"
-    t.index ["attacheable_id", "attacheable_type"], name: "photos_attacheable_index"
-    t.index ["deleted_at"], name: "index_photos_on_deleted_at"
-  end
-
   create_table "required_gov_document_group_translations", force: :cascade do |t|
     t.integer "required_gov_document_group_id", null: false
     t.string "locale", null: false
@@ -1161,7 +1148,6 @@ ActiveRecord::Schema.define(version: 20220925103640) do
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "operators", "holdings", on_delete: :nullify
-  add_foreign_key "photos", "users"
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade
   add_foreign_key "required_operator_documents", "countries"

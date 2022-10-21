@@ -14,7 +14,6 @@ module V1
 
     has_many :species
     has_many :comments
-    has_many :photos
     has_many :observation_documents
     has_many :observers
     has_many :relevant_operators

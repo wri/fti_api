@@ -180,28 +180,9 @@ module V1
         end
 
         describe 'User can upload attachment to observation' do
-          let(:photo_data) {
-            "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'image.jpg')))}"
-          }
-
           let(:document_data) {
             "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')))}"
           }
-
-          xit 'Upload image and returns success object when the observation was successfully created' do
-            post('/observations',
-                 params: jsonapi_params('observations', nil, {
-                     details: "Observation with photo",
-                     'country-id': country.id,
-                     'observation-type': 'operator',
-                     'publication-date': DateTime.now,
-                     'photos-attributes': [{ name: 'observation photo', attachment: "#{photo_data}" }]
-                 }),
-                 headers: ngo_headers)
-
-            expect(Observation.find_by(details: 'Observation with photo').photos.first.attachment.present?).to be(true)
-            expect(status).to eq(201)
-          end
 
           xit 'Upload document and returns success object when the observation was successfully created' do
             post('/observations',
@@ -219,8 +200,6 @@ module V1
           end
         end
       end
-
-
     end
   end
 end
