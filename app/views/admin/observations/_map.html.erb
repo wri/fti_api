@@ -26,6 +26,13 @@
 
   map.on('load', function() {
     <% if bbox.present? %>
+    map.once('moveend', () => {
+      setTimeout(() => {
+        const newBounds = map.getBounds();
+        newBounds.extend(<%= center %>)
+        map.fitBounds(newBounds, { padding: 50 });
+      }, 500);
+    })
     map.fitBounds(<%= bbox || [] %>, {
       padding: 50
     });
