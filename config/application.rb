@@ -18,13 +18,14 @@ require 'carrierwave'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-GC::Profiler.enable
+
 ActiveSupport::Deprecation.silenced = true
 
 module FtiApi
   class Application < Rails::Application
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
+    config.load_defaults 5.1
 
     # ActiveJob
     config.active_job.queue_adapter = :sidekiq

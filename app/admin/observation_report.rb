@@ -46,11 +46,11 @@ ActiveAdmin.register ObservationReport do
 
   config.clear_action_items!
 
-  action_item only: [:show] do
+  action_item :edit_report, only: [:show] do
     link_to 'Edit Report', edit_admin_observation_report_path(observation_report)
   end
 
-  action_item only: [:show], unless: -> { observation_report.deleted? } do
+  action_item :delete_report, only: [:show], unless: -> { observation_report.deleted? } do
     link_to 'Delete Report', admin_observation_report_path(observation_report),
             method: :delete, data: { confirm: ObservationReportDecorator.new(observation_report).delete_confirmation_text }
   end

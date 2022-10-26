@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GovDocumentUploader < ApplicationUploader
-  def extension_whitelist
+  def extension_allowlist
     %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
   end
 

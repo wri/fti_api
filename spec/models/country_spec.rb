@@ -60,7 +60,7 @@ RSpec.describe Country, type: :model do
         country.fmus << fmu1
         country.fmus << fmu2
         country.save
-        expect(country.forest_types).to eql([fmu1.forest_type, fmu2.forest_type])
+        expect(country.forest_types).to match_array [fmu1.forest_type, fmu2.forest_type]
       end
     end
   end

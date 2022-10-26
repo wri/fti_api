@@ -25,6 +25,8 @@ class RequiredOperatorDocument < ApplicationRecord
   include ArrayForestTypeable
   acts_as_paranoid
 
+  attr_accessor :disable_document_creation
+
   translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
   active_admin_translates :explanation
 

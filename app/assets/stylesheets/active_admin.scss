@@ -1,5 +1,4 @@
-//= require activeadmin_addons/all
-
+@import 'activeadmin_addons/all';
 @import 'activeadmin/quill_editor_input';
 
 @import 'active_admin/active_admin_globalize';
@@ -30,6 +29,8 @@ $panelHeaderBck: #317a4b;
 
 $skinLogo: image_url("logo.svg") no-repeat 0 0;
 @import "active_skin";
+
+@import "new_menu.sass";
 
 
 // .ActiveAdmin Add-ons

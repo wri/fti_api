@@ -462,6 +462,9 @@ Style/RedundantException:
 Style/RedundantFreeze:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 # TODO: Enable RedundantParentheses Cop.
 # Checks for parentheses that seem not to serve any purpose.
 Style/RedundantParentheses:

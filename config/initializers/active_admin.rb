@@ -233,7 +233,6 @@ ActiveAdmin.setup do |config|
   #   end
 
   config.view_factory.header = CustomAdminHeader
-  config.register_stylesheet 'new_menu.css'
 
   # == Download Links
   #

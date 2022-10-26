@@ -23,9 +23,7 @@ FactoryBot.define do
     min_fine { rand(0..10) }
     max_fine { rand(0..10) }
 
-    after(:build) do |law|
-      law.subcategory ||= FactoryBot.create :subcategory
-      law.country ||= FactoryBot.create :country
-    end
+    subcategory
+    country
   end
 end

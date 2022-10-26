@@ -83,13 +83,13 @@ class Observation < ApplicationRecord
   attr_accessor :user_type
 
   belongs_to :country,        inverse_of: :observations
-  belongs_to :severity,       inverse_of: :observations
+  belongs_to :severity,       inverse_of: :observations, optional: true
   belongs_to :operator,       inverse_of: :observations, optional: true
   belongs_to :user,           inverse_of: :observations, optional: true
   belongs_to :modified_user,  class_name: 'User', foreign_key: 'modified_user_id', optional: true
   belongs_to :fmu,            inverse_of: :observations, optional: true
   belongs_to :law,            inverse_of: :observations, optional: true
-  belongs_to :observation_report
+  belongs_to :observation_report, optional: true
 
   belongs_to :subcategory, inverse_of: :observations, optional: true
 
@@ -106,12 +106,10 @@ class Observation < ApplicationRecord
   has_many :relevant_operators, through: :observation_operators, source: :operator
 
   has_many :comments,  as: :commentable, dependent: :destroy
-  has_many :photos,    as: :attacheable, dependent: :destroy
   has_many :observation_documents, dependent: :destroy
 
   belongs_to :responsible_admin,  class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
 
-  accepts_nested_attributes_for :photos,                       allow_destroy: true
   accepts_nested_attributes_for :observation_documents,        allow_destroy: true
   accepts_nested_attributes_for :observation_report,           allow_destroy: true
   accepts_nested_attributes_for :subcategory,                  allow_destroy: false
@@ -128,7 +126,6 @@ class Observation < ApplicationRecord
   validate :evidence_presented_in_the_report
   validate :status_changes, if: -> { user_type.present? }
 
-  validates :country_id,       presence: true
   validates :publication_date, presence: true
   validates :validation_status, presence: true
   validates :observation_type, presence: true

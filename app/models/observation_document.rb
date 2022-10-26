@@ -21,7 +21,8 @@ class ObservationDocument < ApplicationRecord
 
   acts_as_paranoid
 
-  belongs_to :user, inverse_of: :observation_documents, touch: true
+  # TODO: only nils in the database, maybe that should be removed?
+  belongs_to :user, inverse_of: :observation_documents, touch: true, optional: true
   belongs_to :observation, inverse_of: :observation_documents, touch: true
 
   after_destroy :move_attachment_to_private_directory

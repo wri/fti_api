@@ -7,63 +7,63 @@ module V1
     skip_before_action :authenticate
 
     FILTER_TYPES = {
-        'validation-status': { type: /Published \(no comments\)|Published \(not modified\)|Published \(modified\)/ },
-        'observation-type': { type: /operator|government/ },
-        'country-id': { type: Integer },
-        'fmu-id': { type: Integer },
-        'year': { type: Integer, query: 'EXTRACT(year FROM observations.publication_date) IN ' },
-        'observer-id': { type: Integer, query: 'observers.id IN ' },
-        'category-id': { type: Integer, query: 'categories.id IN ' },
-        'subcategory-id': { type: Integer },
-        'severity-level': { type: Integer, query: 'severities.level IN ' },
-        'operator': { type: Integer },
-        'observation-report.id': { type: Integer, query: 'observation_reports.id IN ' },
-        'source': { type: Integer }
+      'validation-status': { type: /Published \(no comments\)|Published \(not modified\)|Published \(modified\)/ },
+      'observation-type': { type: /operator|government/ },
+      'country-id': { type: Integer },
+      'fmu-id': { type: Integer },
+      'year': { type: Integer, query: 'EXTRACT(year FROM observations.publication_date) IN ' },
+      'observer-id': { type: Integer, query: 'observers.id IN ' },
+      'category-id': { type: Integer, query: 'categories.id IN ' },
+      'subcategory-id': { type: Integer },
+      'severity-level': { type: Integer, query: 'severities.level IN ' },
+      'operator': { type: Integer },
+      'observation-report.id': { type: Integer, query: 'observation_reports.id IN ' },
+      'source': { type: Integer }
     }.freeze
 
     OBS_TYPES = {
-        'operator' => { id: 'operator', name: I18n.t('filters.operator') },
-        'government' => { id: 'government', name: I18n.t('filters.governance') }
+      'operator' => { id: 'operator', name: I18n.t('filters.operator') },
+      'government' => { id: 'government', name: I18n.t('filters.governance') }
     }.freeze
 
     SEVERITIES = {
-        0 => { id: 0, name: I18n.t('filters.unknown') },
-        1 => { id: 1, name: I18n.t('filters.low') },
-        2 => { id: 2, name: I18n.t('filters.medium') },
-        3 => { id: 3, name: I18n.t('filters.high') }
+      0 => { id: 0, name: I18n.t('filters.unknown') },
+      1 => { id: 1, name: I18n.t('filters.low') },
+      2 => { id: 2, name: I18n.t('filters.medium') },
+      3 => { id: 3, name: I18n.t('filters.high') }
     }.freeze
 
     def tree
       years = Observation.pluck(:publication_date).map{ |x| x.year }.uniq.sort
-                  .map{ |x| { id: x, name: x } }
+        .map{ |x| { id: x, name: x } }
 
       severities =[
-          { id: 0, name: I18n.t('filters.unknown') },
-          { id: 1, name: I18n.t('filters.low') },
-          { id: 2, name: I18n.t('filters.medium') },
-          { id: 3, name: I18n.t('filters.high') }
+        { id: 0, name: I18n.t('filters.unknown') },
+        { id: 1, name: I18n.t('filters.low') },
+        { id: 2, name: I18n.t('filters.medium') },
+        { id: 3, name: I18n.t('filters.high') }
       ]
 
       sources = [
-          { id: 1, name: I18n.t('filters.company') },
-          { id: 2, name: I18n.t('filters.forest_atlas') },
-          { id: 3, name: I18n.t('filters.other') }
+        { id: 1, name: I18n.t('filters.company') },
+        { id: 2, name: I18n.t('filters.forest_atlas') },
+        { id: 3, name: I18n.t('filters.other') }
       ]
 
       filters = {
-          'validation_status': validation_statuses,
-          'observation_type': types,
-          'country_id': country_ids,
-          'fmu_id': fmu_ids,
-          'years': years,
-          'observer_id': observer_ids,
-          'category_id': category_ids,
-          'subcategory_id': subcategory_ids,
-          'severity_level': severities,
-          'operator': operator_ids,
-          'government': government_ids,
-          'observation-report': report_ids,
-          'source': sources
+        'validation_status': validation_statuses,
+        'observation_type': types,
+        'country_id': country_ids,
+        'fmu_id': fmu_ids,
+        'years': years,
+        'observer_id': observer_ids,
+        'category_id': category_ids,
+        'subcategory_id': subcategory_ids,
+        'severity_level': severities,
+        'operator': operator_ids,
+        'government': government_ids,
+        'observation-report': report_ids,
+        'source': sources
       }.to_json
 
       render json: filters

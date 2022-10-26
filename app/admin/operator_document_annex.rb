@@ -16,7 +16,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   scope_to do
     Class.new do
       def self.operator_document_annexes
-        OperatorDocumentAnnex.unscoped.uniq
+        OperatorDocumentAnnex.unscoped.distinct
       end
     end
   end

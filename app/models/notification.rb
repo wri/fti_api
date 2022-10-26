@@ -15,9 +15,10 @@
 #  updated_at            :datetime         not null
 #
 class Notification < ApplicationRecord
-  belongs_to :notification_group
-  belongs_to :user, optional: false
-  belongs_to :operator_document, optional: false
+  belongs_to :notification_group, optional: true
+  belongs_to :user
+  belongs_to :operator_document
+
   delegate :operator, to: :operator_document
 
   # The number of months a notification is still fetchable
