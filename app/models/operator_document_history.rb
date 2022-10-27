@@ -37,7 +37,7 @@ class OperatorDocumentHistory < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :document_file, optional: true
   belongs_to :operator_document, -> { with_deleted }
-  has_many :annex_documents, as: :documentable
+  has_many :annex_documents, as: :documentable, inverse_of: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 
   scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmuHistory') }

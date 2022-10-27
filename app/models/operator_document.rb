@@ -38,7 +38,7 @@ class OperatorDocument < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :document_file, optional: true, inverse_of: :operator_document
 
-  has_many :annex_documents, as: :documentable, dependent: :destroy
+  has_many :annex_documents, as: :documentable, dependent: :destroy, inverse_of: :documentable
   has_many :operator_document_annexes, through: :annex_documents
   has_many :notifications
   accepts_nested_attributes_for :document_file
