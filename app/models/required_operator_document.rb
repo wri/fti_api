@@ -45,25 +45,17 @@ class RequiredOperatorDocument < ApplicationRecord
 
   validate :fixed_fields_unchanged
 
-  before_destroy :invalidate_operator_documents, prepend: true
   after_restore :set_documents_not_provided
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
-
-  def invalidate_operator_documents
-    self.operator_documents.find_each do |x|
-      x.update(status: OperatorDocument.statuses[:doc_expired], deleted_at: Time.now)
-    end
-  end
 
   private
 
   def set_documents_not_provided
     self.operator_documents.find_each do |x|
-      x.update(status: :doc_not_provided , deleted_at: nil)
+      x.update(status: :doc_not_provided, deleted_at: nil)
     end
   end
-
 
   def fixed_fields_unchanged
     return unless self.persisted?

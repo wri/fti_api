@@ -30,11 +30,14 @@ class OperatorDocument < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
+  attr_accessor :skip_score_recalculation
+
   belongs_to :operator, touch: true
   belongs_to :required_operator_document, -> { with_archived }
   belongs_to :fmu, optional: true
   belongs_to :user, optional: true
   belongs_to :document_file, optional: true, inverse_of: :operator_document
+
   has_many :annex_documents, as: :documentable, dependent: :destroy
   has_many :operator_document_annexes, through: :annex_documents
   has_many :notifications
@@ -55,6 +58,7 @@ class OperatorDocument < ApplicationRecord
   after_save :remove_notifications, if: :expire_date_changed?
 
   after_destroy :regenerate
+  after_destroy :recalculate_scores
 
   scope :by_forest_types,                        ->(forest_type_id) { includes(:fmu).where(fmus: { forest_type: forest_type_id }) }
   scope :by_country,                             ->(country_id) { includes(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
@@ -126,6 +130,8 @@ class OperatorDocument < ApplicationRecord
   private
 
   def recalculate_scores
+    return if skip_score_recalculation
+
     ScoreOperatorDocument.recalculate!(operator)
   end
 
@@ -135,19 +141,21 @@ class OperatorDocument < ApplicationRecord
 
   def regenerate
     # It only allows for (soft) deletion of the operator documents when:
-    # 1 - The Operator was deleted
-    # 2 - The Fmu was deleted
-    # 3 - The Required Operator Document was deleted
+    # 1 - The Operator was deleted  (destroyed_by_association)
+    # 2 - The Fmu was deleted (destroyed_by_association)
+    # 3 - The Required Operator Document was deleted (destroyed_by_association)
     # 4 - The Operator is no longer active for this Fmu
 
-    create_history and return if (operator.present? && operator.marked_for_destruction?) || (required_operator_document.present? && required_operator_document.marked_for_destruction?)
-    create_history and return if fmu_id && Fmu.find(fmu_id).present? && Fmu.find(fmu_id).marked_for_destruction?
+    create_history and return if destroyed_by_association
     create_history and return if fmu_id && (operator_id != fmu.operator&.id)
 
-    update status: OperatorDocument.statuses[:doc_not_provided],
-           expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
-           deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
-           source: nil, source_info: nil, document_file_id: nil
+    update!(
+      status: OperatorDocument.statuses[:doc_not_provided],
+      expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
+      deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
+      source: nil, source_info: nil, document_file_id: nil
+    )
+    self.skip_score_recalculation = true
   end
 
   def set_type

@@ -75,12 +75,12 @@ RSpec.describe OperatorDocument, type: :model do
   end
 
   describe 'Hooks' do
-    before :all do
+    before do
       @country = create(:country)
       @operator = create(:operator, country: @country, fa_id: 'fa_id')
 
       @fmu = create(:fmu, country: @country)
-      create(:fmu_operator, fmu: @fmu, operator: @operator)
+      @fmu_operator = create(:fmu_operator, fmu: @fmu, operator: @operator)
     end
 
     before do
@@ -147,6 +147,38 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
+    describe '#recalculate operator score' do
+      before { @document = create(:operator_document_fmu, fmu: @fmu, operator: @operator) }
+      before { expect(ScoreOperatorDocument).to receive(:recalculate!).with(@operator) }
+
+      context 'when removing document' do
+        it 'updates operator score' do
+          @document.destroy
+        end
+
+        context 'while fmu does not belong to operator anymore' do
+          it 'updates operator score' do
+            @fmu_operator.update(current: false) # this should invoke document deletion and invoke recalculation
+            expect(@document.reload.deleted?).to be(true)
+          end
+        end
+      end
+
+      context 'when changing document status' do
+        it 'updates operator score' do
+          @document.update!(status: :doc_valid)
+        end
+      end
+
+      context 'when operator not approved and changing public state' do
+        before { @operator.update(approved: false) }
+
+        it 'updates operator score' do
+          @document.update!(public: @document.public)
+        end
+      end
+    end
+
     describe '#update_operator_percentages' do
       before do
         valid_status = OperatorDocument.statuses[:doc_valid]
@@ -189,24 +221,26 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
-    describe '#ensure_unity' do
-      context 'when operator and required_operator_document exist and are not marked '\
-              'for destruction, not current operator document and not required operator document' do
-        it 'creates a new operator document' do
-          operator_document = create(
-            :operator_document_country,
-            operator: @operator,
-            required_operator_document: @required_operator_document
-          )
+    describe '#destroy' do
+      it 'regenerates document state to not provided and creates history for current document' do
+        operator_document = create(
+          :operator_document_country,
+          operator: @operator,
+          status: :doc_valid,
+          required_operator_document: @required_operator_document
+        )
 
-          expect(OperatorDocument.count).to eql 1
+        expect(OperatorDocument.count).to eql 1
 
-          expect {
-            operator_document.destroy
-          }.to change { OperatorDocumentHistory.count }.by(1)
+        expect {
+          operator_document.destroy
+        }.to change { OperatorDocumentHistory.count }.by(1)
 
-          expect(OperatorDocument.count).to eql 1
-        end
+        operator_document.reload
+
+        expect(OperatorDocument.count).to eql 1
+        expect(operator_document.deleted?).to be(false)
+        expect(operator_document.status).to eq('doc_not_provided')
       end
     end
   end

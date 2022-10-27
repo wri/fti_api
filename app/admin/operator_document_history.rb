@@ -82,7 +82,11 @@ ActiveAdmin.register OperatorDocumentHistory do
     tag_column :status
     column :id
     column :operator_document do |od|
-      link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
+      if od.operator_document.present?
+        link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
+      else
+        od.operator_document&.required_operator_document&.name
+      end
     end
     column :operator_document_updated_at
     column :country do |od|
