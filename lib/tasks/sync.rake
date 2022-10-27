@@ -103,6 +103,25 @@ class SyncTasks
       end
     end
 
+    operators = Operator.all
+    operators = operators.where(operator_id: operator_id) if operator_id.present?
+
+    operators.find_each do |operator|
+      expected = ScoreOperatorDocument.build(operator, operator.operator_documents)
+      score = operator.score_operator_document
+
+      if score.present? && expected != score
+        puts "SOD NOT CURRENT: last score: #{score.date} OPERATOR: #{score.operator.name} (#{score.operator_id})"
+        score_json = score.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
+        expected_json = expected.as_json(only: [:all, :fmu, :country, :total, :summary_public, :summary_private])
+
+        compare(score_json, expected_json)
+        different_scores += 1
+
+        ScoreOperatorDocument.recalculate_scores!(operator) if ENV["FOR_REAL"] == 'true'
+      end
+    end
+
     puts "TOTAL: #{scores.count}"
     puts "DIFFERENT: #{different_scores}"
   end
