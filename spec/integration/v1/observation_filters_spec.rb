@@ -19,29 +19,5 @@ module V1
         expect(status).to eql(200)
       end
     end
-
-    describe 'csv' do
-      it 'returns csv file' do
-        get '/observations-csv', headers: non_api_webuser_headers
-
-        csv_rows = CSV.parse(response.body)
-
-        expect(response.header['Content-Type']).to include('text/csv')
-        expect(status).to eql(200)
-        expect(csv_rows.count).to eq(3 + 2 + 1) # +1 because of header
-      end
-
-      context 'filters' do
-        it 'returns filtered csv' do
-          get "/observations-csv?filter[country_id]=#{country2.id}", headers: non_api_webuser_headers
-
-          csv_rows = CSV.parse(response.body)
-
-          expect(response.header['Content-Type']).to include('text/csv')
-          expect(status).to eql(200)
-          expect(csv_rows.count).to eq(2 + 1) # +1 because of header
-        end
-      end
-    end
   end
 end

@@ -73,8 +73,6 @@ Rails.application.routes.draw do
       resources :imports, only: :create
 
       get 'observation_filters_tree', to: 'observation_filters#tree'
-      get 'observations-csv', to: 'observation_filters#csv'
-
       get 'operator_document_filters_tree', to: 'operator_document_filters#tree'
     end
 
