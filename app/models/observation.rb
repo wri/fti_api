@@ -218,7 +218,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def published?
-    PUBLISHED_STATES.include?(status)
+    PUBLISHED_STATES.include?(validation_status)
   end
 
   private
