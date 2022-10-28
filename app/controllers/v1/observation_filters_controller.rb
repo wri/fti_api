@@ -93,22 +93,30 @@ module V1
     end
 
     def observer_ids
-      having_active_observations = Observation.active.joins(:observers).select(:observer_id).distinct.pluck(:observer_id)
+      having_published_observations = Observation.published.joins(:observers).select(:observer_id).distinct.pluck(:observer_id)
 
-      Observer.active.where(id: having_active_observations).with_translations.map{ |x| { id: x.id, name: x.name } }.sort_by { |x| x[:name] }
+      Observer
+        .active
+        .where(id: having_published_observations)
+        .with_translations
+        .map{ |x| { id: x.id, name: x.name } }
+        .sort_by { |x| x[:name] }
     end
 
     def country_ids
-      Country.with_translations.with_active_observations
-          .map do  |x|
-            {
-              id: x.id, iso: x.iso, name: x.name,
-              operators: x.operators.pluck(:id).uniq,
-              observers: x.observations.joins(:observers).pluck(:observer_id).uniq,
-              fmus: x.fmus.pluck(:id).uniq,
-              governments: x.governments.pluck(:id).uniq
-            }
-          end.sort_by { |x| x[:name] }
+      Country
+        .with_translations
+        .with_observations(Observation.published)
+        .map do  |x|
+          {
+            id: x.id, iso: x.iso, name: x.name,
+            operators: x.operators.pluck(:id).uniq,
+            observers: x.observations.joins(:observers).pluck(:observer_id).uniq,
+            fmus: x.fmus.pluck(:id).uniq,
+            governments: x.governments.pluck(:id).uniq
+          }
+        end
+        .sort_by { |x| x[:name] }
     end
   end
 end
