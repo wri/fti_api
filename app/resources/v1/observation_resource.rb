@@ -40,8 +40,10 @@ module V1
             :observation_report, :law, :operator, :subcategory,
             :is_active, :validation_status, :is_physical_place
 
-    filter :hidden, apply: ->(records, value, _options) {
-      records.unscope(where: :hidden).where(hidden: value)
+    filter :hidden, default: 'false', apply: ->(records, value, options) {
+      return records if value.include?('all')
+
+      records.where(hidden: value)
     }
 
     filter :category_id, apply: ->(records, value, _options) {
@@ -143,7 +145,6 @@ module V1
       @model.modified_user_id = user.id
     end
 
-
     # Makes sure the validation status can be an acceptable one
     def validate_status
       @model.validation_status = 'Created' unless @model.persisted? || @model.validation_status == 'Ready for QC'
@@ -159,6 +160,7 @@ module V1
       context = options[:context]
       user = context[:current_user]
       app = context[:app]
+
       if app == 'observations-tool' && user.present?
         if user.observer_id.present?
           Observation.own_with_inactive(user.observer_id)
@@ -168,7 +170,7 @@ module V1
           Observation.active
         end
       else
-        Observation.active
+        Observation.published
       end
     end
 

@@ -18,7 +18,8 @@ module V1
       'severity-level': { type: Integer, query: 'severities.level IN ' },
       'operator': { type: Integer },
       'observation-report.id': { type: Integer, query: 'observation_reports.id IN ' },
-      'source': { type: Integer }
+      'source': { type: Integer },
+      'hidden': { type: /true|false|all/ }
     }.freeze
 
     OBS_TYPES = {
@@ -189,9 +190,9 @@ module V1
 
     def validation_statuses
       [
-          { id: 7, name: "Published (no comments)" },
-          { id: 8, name: "Published (not modified)" },
-          { id: 9, name: "Published (modified)" }
+        { id: 7, name: "Published (no comments)" },
+        { id: 8, name: "Published (not modified)" },
+        { id: 9, name: "Published (modified)" }
       ].sort_by { |x| x[:name] }
     end
 
