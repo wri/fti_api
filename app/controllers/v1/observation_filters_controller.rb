@@ -70,7 +70,9 @@ module V1
     end
 
     def operator_ids
-      Operator.with_fmus_array.map do |x|
+      having_published_observations = Observation.published.select(:operator_id).distinct.pluck(:operator_id)
+
+      Operator.where(id: having_published_observations).with_fmus_array.map do |x|
         { id: x[0], name: x[1], fmus: x[2] }
       end
     end
