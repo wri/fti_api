@@ -64,34 +64,42 @@ module V1
     end
 
     def government_ids
-      Government.active.with_translations.map do |x|
+      Government.active.with_translations(I18n.locale).map do |x|
         { id: x.id, name: x.government_entity }
       end.sort_by { |x| x[:name] }
     end
 
     def operator_ids
       having_published_observations = Observation.published.select(:operator_id).distinct.pluck(:operator_id)
+      name_column = Arel.sql('operator_translations.name')
 
-      Operator.where(id: having_published_observations).with_fmus_array.map do |x|
-        { id: x[0], name: x[1], fmus: x[2] }
-      end
+      Operator
+        .where(id: having_published_observations)
+        .includes(:fmus)
+        .with_translations(I18n.locale)
+        .group(:id, name_column)
+        .order(name_column)
+        .pluck(:id, name_column, 'array_agg(fmus.id) fmu_ids')
+        .map do |x|
+          { id: x[0], name: x[1], fmus: x[2] }
+        end
     end
 
     def subcategory_ids
-      Subcategory.with_translations.map do |x|
+      Subcategory.with_translations(I18n.locale).map do |x|
         { id: x.id, name: x.name }
       end.sort_by { |x| x[:name] }
     end
 
     def category_ids
-      Category.all.with_translations.includes(:subcategories).map do |x|
+      Category.all.with_translations(I18n.locale).includes(:subcategories).map do |x|
         { id: x.id, name: x.name, subcategories: x.subcategories.pluck(:id).uniq }
       end.sort_by { |x| x[:name] }
     end
 
     def fmu_ids
       name_column = Arel.sql("fmu_translations.name")
-      Fmu.all.with_translations.order('fmu_translations.name asc').pluck(:id, name_column).map{ |x| { id: x[0], name: x[1] } }
+      Fmu.all.with_translations(I18n.locale).order('fmu_translations.name asc').pluck(:id, name_column).map{ |x| { id: x[0], name: x[1] } }
     end
 
     def observer_ids
@@ -100,14 +108,14 @@ module V1
       Observer
         .active
         .where(id: having_published_observations)
-        .with_translations
+        .with_translations(I18n.locale)
         .map{ |x| { id: x.id, name: x.name } }
         .sort_by { |x| x[:name] }
     end
 
     def country_ids
       Country
-        .with_translations
+        .with_translations(I18n.locale)
         .with_observations(Observation.published)
         .map do  |x|
           {
