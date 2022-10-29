@@ -83,7 +83,7 @@ module V1
     end
 
     def self.apply_includes(records, directives)
-      super.includes(:observation_report, :observation_documents)
+      super.includes(:observation_report, :observation_documents, :translations)
     end
 
     def custom_links(_)
