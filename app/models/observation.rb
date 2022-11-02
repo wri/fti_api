@@ -65,19 +65,19 @@ class Observation < ApplicationRecord
   validate_enum_attributes :observation_type, :evidence_type, :location_accuracy
 
   STATUS_TRANSITIONS={
-      monitor: {
-          nil => ['Created', 'Ready for QC'],
-          'Created' => ['Ready for QC'],
-          'Needs revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
-          'Ready for publication' => ['Published (no comments)'],
-          'Published (modified)' => ['Ready for QC'],
-          'Published (not modified)' => ['Ready for QC'],
-          'Published (no comments)' => ['Ready for QC']
-      },
-      admin: {
-          'Ready for QC' => ['QC in progress'],
-          'QC in progress' => ['Needs revision', 'Ready for publication']
-      }
+    monitor: {
+      nil => ['Created', 'Ready for QC'],
+      'Created' => ['Ready for QC'],
+      'Needs revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
+      'Ready for publication' => ['Published (no comments)'],
+      'Published (modified)' => ['Ready for QC'],
+      'Published (not modified)' => ['Ready for QC'],
+      'Published (no comments)' => ['Ready for QC']
+    },
+    admin: {
+      'Ready for QC' => ['QC in progress'],
+      'QC in progress' => ['Needs revision', 'Ready for publication']
+    }
   }.freeze
 
   attr_accessor :user_type

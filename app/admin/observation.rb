@@ -524,6 +524,11 @@ ActiveAdmin.register Observation do
       row :location_accuracy
       row :lat
       row :lng
+      if resource.lat.present? && resource.lng.present?
+        row :location_on_map do |r|
+          render partial: 'map', locals: { center: [r.lng, r.lat], geojson: r.fmu&.geojson, bbox: r.fmu&.bbox }
+        end
+      end
       row :actions_taken
       row :concern_opinion
       row :observation_report
@@ -539,6 +544,7 @@ ActiveAdmin.register Observation do
       row :updated_at
       row :deleted_at
     end
+
     active_admin_comments
   end
 end
