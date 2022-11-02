@@ -82,6 +82,10 @@ module V1
       super(records, order_options, context)
     end
 
+    def self.apply_includes(records, directives)
+      super.includes(:observation_report, :observation_documents, :translations)
+    end
+
     def custom_links(_)
       { self: nil }
     end
