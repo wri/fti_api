@@ -148,6 +148,7 @@ class Observation < ApplicationRecord
 
   after_create   :create_history
   after_update   :create_history, if: :saved_changes?
+
   after_save     :remove_documents, if: -> { evidence_type == 'Evidence presented in the report' }
   after_save     :update_fmu_geojson
 
