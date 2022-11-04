@@ -57,28 +57,25 @@ module JSONAPI
               association = _lookup_association_chain([records.model.to_s, *model_names]).last
 
               # MONKEY_PATCH to work with Globalize
-              if association.klass.attribute_names.include?(column_name)
+              if defined?(association.klass.translated_attribute_names) &&
+                  association.klass.translated_attribute_names.map(&:to_s).include?(column_name.to_s)
+                joins_query = _build_joins([records.model, *association])
+                joins_query << " LEFT JOIN #{association.name}_translations ON #{association.name}_translations.#{association.name}_id = #{association.name}_sorting.id AND #{association.name}_translations.locale = '#{_context[:locale]}'"
+                order_by_query = "#{association.name}_translations.#{column_name} #{direction}"
+                records = records.joins(joins_query).order(order_by_query)
+              else
                 joins_query = _build_joins([records.model, *association])
                 # _sorting is appended to avoid name clashes with manual joins eg. overridden filters
                 order_by_query = "#{association.name}_sorting.#{column_name} #{direction}"
                 records = records.joins(joins_query).order(order_by_query)
-              else
-                if association.klass.new.attributes.key?(column_name)
-                  joins_query = _build_joins([records.model, *association])
-                  joins_query << " LEFT JOIN #{association.name}_translations ON #{association.name}_translations.#{association.name}_id = #{association.name}_sorting.id AND #{association.name}_translations.locale = '#{_context[:locale]}'"
-                  order_by_query = "#{association.name}_translations.#{column_name} #{direction}"
-                  records = records.joins(joins_query).order(order_by_query)
-                end
               end
             else
-              # Hack to work with Globalize
-              if @model_class&.attribute_names&.include?(field)
-                records = records.order(field => direction)
+              if @model_class.present? && defined?(@model_class.translated_attribute_names) &&
+                  @model_class.translated_attribute_names.map(&:to_s).include?(field.to_s)
+                records = records.joins(:translations).with_translations(_context[:locale])
+                  .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
               else
-                if @model_class&.new&.attributes&.key?(field) # To check if it exists in the translations table
-                  records = records.joins(:translations).with_translations(_context[:locale])
-                              .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
-                end
+                records = records.order(field => direction)
               end
             end
           end
