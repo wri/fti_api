@@ -114,6 +114,10 @@ module V1
       @model.score_operator_observation&.score
     end
 
+    def self.apply_includes(records, directives)
+      super.includes(:score_operator_document, :score_operator_observation)
+    end
+
     def self.records(options = {})
       context = options[:context]
       user = context[:current_user]
