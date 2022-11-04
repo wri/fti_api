@@ -72,10 +72,11 @@ class Operator < ApplicationRecord
   before_validation { self.remove_logo! if self.delete_logo == '1' }
   after_create :create_operator_id
   after_create :create_documents
-  after_update :recalculate_scores, if: :approved_changed?
-  after_update :clean_document_cache, if: :approved_changed?
-  after_update :create_documents, if: -> { fa_id_changed? && fa_id_was.blank? }
-  after_update :refresh_ranking, if: -> { fa_id_changed? || is_active_changed? }
+
+  after_update :recalculate_scores, if: :saved_change_to_approved?
+  after_update :clean_document_cache, if: :saved_change_to_approved?
+  after_update :create_documents, if: -> { saved_change_to_fa_id? && fa_id_before_last_save.blank? }
+  after_update :refresh_ranking, if: -> { saved_change_to_fa_id? || saved_change_to_is_active? }
 
   validates :name, presence: true
   validates :website, url: true, if: lambda { |x| x.website.present? }
@@ -115,7 +116,7 @@ class Operator < ApplicationRecord
 
   class Translation
     after_save do
-      if name_changed? && locale == :en
+      if saved_change_to_name? && locale == :en
         Operator.find_by(id: operator_id)&.fmus&.find_each { |fmu| fmu.save }
       end
     end

@@ -18,19 +18,19 @@ module Activable
     end
 
     def deactivated?
-      !self.is_active?
+      !is_active?
     end
 
     def activated?
-      self.is_active?
+      is_active?
     end
 
     def set_deactivated_at
-      self.deactivated_at = Time.now if attributes.key?('deactivated_at') && self.is_active_changed? && self.deactivated?
+      self.deactivated_at = Time.now if attributes.key?('deactivated_at') && is_active_changed? && deactivated?
     end
 
     def status
-      self.is_active? ? 'activated' : 'deactivated'
+      is_active? ? 'activated' : 'deactivated'
     end
   end
 

@@ -208,9 +208,9 @@ GEM
     formtastic_i18n (0.7.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    globalize (5.1.0)
-      activemodel (>= 4.2, < 5.2)
-      activerecord (>= 4.2, < 5.2)
+    globalize (5.2.0)
+      activemodel (>= 4.2, < 5.3)
+      activerecord (>= 4.2, < 5.3)
       request_store (~> 1.0)
     globalize-versioning (0.4.0)
       activemodel (>= 4.2.0, < 6.1)
@@ -569,7 +569,7 @@ DEPENDENCIES
   email_spec
   factory_bot_rails
   faker
-  globalize (= 5.1.0)
+  globalize (= 5.2.0)
   globalize-versioning
   groupdate
   guard

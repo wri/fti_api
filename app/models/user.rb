@@ -76,7 +76,7 @@ class User < ApplicationRecord
   validate :user_integrity
 
   before_validation :create_from_request, on: :create
-  after_update :notify_user, if: 'is_active && is_active_changed?'
+  after_update :notify_user, if: -> { is_active && saved_change_to_is_active? }
 
   include Activable
   include Roleable

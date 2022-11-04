@@ -63,7 +63,7 @@ gem 'sidekiq'
 gem 'activerecord-import'
 gem 'acts_as_list'
 gem 'countries', require: false # for update translations job, so require only there
-gem 'globalize', '5.1.0'
+gem 'globalize', '5.2.0'
 gem 'seed-fu'
 
 # Validation

@@ -86,7 +86,9 @@ RSpec.describe Observation, type: :model do
         it 'Can move from Created to Ready for QC' do
           observation.save
           observation.validation_status = 'Ready for QC'
-          expect(observation.save).to be_truthy
+          expect {
+            expect(observation.save).to be_truthy
+          }.to change { ObservationHistory.count }.by(1)
         end
 
         it 'Cannot go to QC in progress' do

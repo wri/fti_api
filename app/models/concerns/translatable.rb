@@ -17,6 +17,7 @@ module Translatable
           first_translation = translation.first.second
           (I18n.available_locales - [I18n.locale]).each do |locale|
             if translation[locale].blank? && first_translation.present?
+              # assign_attributes
               self.attributes = { attr => first_translation, locale: locale }
             end
           end

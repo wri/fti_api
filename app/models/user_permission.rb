@@ -19,7 +19,7 @@ class UserPermission < ApplicationRecord
   belongs_to :user
 
   before_create :change_permissions
-  before_update :change_permissions,         if: 'user_role_changed?'
+  before_update :change_permissions, if: :user_role_changed?
 
   def change_permissions
     self.permissions = role_permissions

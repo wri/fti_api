@@ -63,7 +63,7 @@ class Fmu < ApplicationRecord
   validates :forest_type, presence: true
   validate :geojson_correctness, if: :geojson_changed?
 
-  after_save :update_geometry, if: :geojson_changed?
+  after_save :update_geometry, if: :saved_change_to_geojson?
 
   default_scope { includes(:translations) }
 
