@@ -263,22 +263,45 @@ RSpec.describe OperatorDocument, type: :model do
 
   describe 'Class methods' do
     describe '#expire_documents' do
-      it 'update status as doc_expired which expire_date is lower than today' do
-        required_operator_document = create(:required_operator_document_country, contract_signature: false)
+      let!(:rod) { create(:required_operator_document_country, contract_signature: false) }
+      let!(:od) {
         create(
           :operator_document_country,
-          required_operator_document: required_operator_document,
-          status: OperatorDocument.statuses[:doc_valid],
-          expire_date: Date.yesterday
+          required_operator_document: rod,
+          force_status: status,
+          expire_date: expire_date
         )
+      }
 
-        expect {
-          OperatorDocument.expire_documents
-        }.to change { OperatorDocumentHistory.count }.by(OperatorDocument.to_expire(Date.today).count)
+      subject { OperatorDocument.expire_documents }
 
-        OperatorDocument.to_expire(Date.today).each do |operator_document|
-          expect(operator_document.status).to eql 'doc_expired'
+      context 'when the date is in the past' do
+        let(:expire_date) { Date.today - 1.year }
+
+        context 'when the status is valid' do
+          let(:status) { :doc_valid }
+
+          it { expect { subject }.to change { od.reload.status }.from('doc_valid').to('doc_expired') }
         end
+
+        context 'when the status is not required' do
+          let(:status) { :doc_not_required }
+
+          it { expect { subject }.to change { od.reload.status }.from('doc_not_required').to('doc_expired') }
+        end
+
+        context 'when the status is pending' do
+          let(:status) { :doc_pending }
+
+          it { expect { subject }.to_not change { od.reload.status } }
+        end
+
+      end
+      context 'when the date is in the future' do
+        let(:expire_date) { Date.today + 1.year }
+        let(:status) { :doc_valid }
+
+        it { expect { subject }.to_not change { od.reload.status } }
       end
     end
   end

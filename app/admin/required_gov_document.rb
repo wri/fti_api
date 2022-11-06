@@ -20,12 +20,11 @@ ActiveAdmin.register RequiredGovDocument do
       rd.deleted_at.nil?
     end
     column 'required_gov_document_group' do |rd|
-      rd.required_operator_document_group&.name
+      rd.required_gov_document_group&.name
     end
     column 'country' do |rd|
       rd.country&.name
     end
-    column :type
     column :name
 
   end
