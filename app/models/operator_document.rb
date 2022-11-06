@@ -80,7 +80,10 @@ class OperatorDocument < ApplicationRecord
   joins(:required_operator_document).where(required_operator_documents: { contract_signature: false })
 }                                                  # non signature
   scope :to_expire,                              ->(date) {
-  joins(:required_operator_document).where("expire_date < '#{date}'::date and status = #{OperatorDocument.statuses[:doc_valid]} and required_operator_documents.contract_signature = false")
+  joins(:required_operator_document)
+    .where('expire_date < ?', date)
+    .where(status: EXPIRABLE_STATUSES)
+    .where(required_operator_documents: { contract_signature: false })
 }
 
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
@@ -88,6 +91,7 @@ class OperatorDocument < ApplicationRecord
   enum source: { company: 1, forest_atlas: 2, other_source: 3 }
 
   NON_HISTORICAL_ATTRIBUTES = %w[id attachment updated_at created_at].freeze
+  EXPIRABLE_STATUSES = statuses.slice(:doc_valid, :doc_expired).values.freeze
 
   def self.expire_documents
     documents_to_expire = OperatorDocument.to_expire(Date.today)
