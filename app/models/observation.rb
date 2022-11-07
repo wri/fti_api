@@ -169,8 +169,8 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :by_category,       ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: { level: level }) }
   scope :by_government,     ->(government_id) { joins(:governments).where(governments: { id: government_id }) }
-  scope :pending,           -> { joins(:translations).where(validation_status: ['Created', 'QC in progress']) }
-  scope :created,           -> { joins(:translations).where(validation_status: ['Created', 'Ready for QC']) }
+  scope :pending,           -> { where(validation_status: ['Created', 'QC in progress']) }
+  scope :created,           -> { where(validation_status: ['Created', 'Ready for QC']) }
   scope :published,         -> { where(validation_status: PUBLISHED_STATES) }
   scope :hidden,            -> { where(hidden: true) }
   scope :visible,           -> { where(hidden: [false, nil]) }
