@@ -6,25 +6,24 @@ module Translatable
   extend ActiveSupport::Concern
 
   included do
-    attr_accessor :skip_translate
-    after_save :translate
-    skip_callback :save, :after, :translate, if: :skip_translate
+    before_save :copy_translation_to_all_languages
+  end
 
-    def translate
-      translated_attribute_names.each do |attr|
-        translation = translated_attribute_by_locale(attr)
-        if translation.any?
-          first_translation = translation.first.second
-          (I18n.available_locales - [I18n.locale]).each do |locale|
-            if translation[locale].blank? && first_translation.present?
-              # assign_attributes
-              self.attributes = { attr => first_translation, locale: locale }
-            end
+  private
+
+  def copy_translation_to_all_languages
+    translated_attribute_names.each do |attr|
+      # translated_attribute_by_locale contains all translations but not the fresh ones
+      # that is why merging fresh translation with that hash
+      translation = translated_attribute_by_locale(attr).merge(I18n.locale.to_s => translated_attributes[attr.to_s])
+      if translation.any?
+        first_translation = translation.first.second
+        (I18n.available_locales - [I18n.locale]).each do |locale|
+          if translation[locale].blank? && first_translation.present?
+            self.attributes = { attr => first_translation, locale: locale }
           end
         end
       end
-      self.skip_translate = true
-      self.save
     end
   end
 end

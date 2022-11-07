@@ -28,6 +28,7 @@ class RequiredOperatorDocument < ApplicationRecord
 
   attr_accessor :disable_document_creation
 
+  include Translatable
   translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
   active_admin_translates :explanation
 

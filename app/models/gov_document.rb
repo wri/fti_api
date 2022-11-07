@@ -43,7 +43,8 @@ class GovDocument < ApplicationRecord
   before_create :set_status
   before_create :set_country
   before_create :delete_previous_pending_document
-  after_save :update_percentages, on: %w[create update],  if: :saved_change_to_status?
+  after_create :update_percentages
+  after_update :update_percentages, if: :saved_change_to_status?
 
   before_destroy :ensure_unity
 

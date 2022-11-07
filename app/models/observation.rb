@@ -146,8 +146,7 @@ class Observation < ApplicationRecord
   after_update   :update_operator_scores,   if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? }
   after_update   :update_reports_observers, if: :saved_change_to_observation_report_id?
 
-  after_create   :create_history
-  after_update   :create_history, if: :saved_changes?
+  after_save :create_history, if: :saved_changes?
 
   after_save     :remove_documents, if: -> { evidence_type == 'Evidence presented in the report' }
   after_save     :update_fmu_geojson
