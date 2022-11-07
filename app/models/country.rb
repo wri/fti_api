@@ -54,13 +54,9 @@ class Country < ApplicationRecord
                            .order('country_translations.name ASC')
   })
 
-  scope :with_observations, (-> {
-    left_outer_joins(:observations).where.not(observations: { id: nil }).distinct
-  })
-
-  scope :with_active_observations, (-> {
-    joins(:observations).merge(Observation.active).where.not(observations: { id: nil }).distinct
-  })
+  scope :with_observations, ->(scope = Observation.all) {
+    joins(:observations).merge(scope).where.not(observations: { id: nil }).distinct
+  }
   scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select('observations.country_id').distinct.pluck('observations.country_id')) }
 
   scope :by_status, (->(status) { where(is_active: status) })

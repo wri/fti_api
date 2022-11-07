@@ -80,6 +80,12 @@ class Observation < ApplicationRecord
     }
   }.freeze
 
+  PUBLISHED_STATES = [
+    'Published (modified)',
+    'Published (not modified)',
+    'Published (no comments)'
+  ].freeze
+
   attr_accessor :user_type
 
   belongs_to :country,        inverse_of: :observations
@@ -160,6 +166,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :by_government,     ->(government_id) { joins(:governments).where(governments: { id: government_id }) }
   scope :pending,           -> { joins(:translations).where(validation_status: ['Created', 'QC in progress']) }
   scope :created,           -> { joins(:translations).where(validation_status: ['Created', 'Ready for QC']) }
+  scope :published,         -> { where(validation_status: PUBLISHED_STATES) }
   scope :hidden,            -> { where(hidden: true) }
   scope :visible,           -> { where(hidden: [false, nil]) }
   scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name #{order}") }
@@ -210,6 +217,10 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     set_responsible_admin
   end
 
+  def published?
+    PUBLISHED_STATES.include?(validation_status)
+  end
+
   private
 
   def check_is_physical_place
@@ -232,11 +243,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def set_active_status
-    self.is_active = (
-      ["Published (no comments)", "Published (not modified)", "Published (modified)"].include?(validation_status) &&
-          self.hidden != true
-    )
-    nil
+    self.is_active = published? && hidden != true
   end
 
   # If user is set for observation and user has observer account

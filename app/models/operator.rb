@@ -139,12 +139,6 @@ class Operator < ApplicationRecord
     super + '-' + Globalize.locale.to_s
   end
 
-  def self.with_fmus_array
-    name_column = Arel.sql('operator_translations.name')
-    Operator.with_translations.includes(:fmus).group(:id, name_column).order(name_column)
-        .pluck(:id, name_column, 'array_agg(fmus.id) fmu_ids')
-  end
-
   private
 
   def recalculate_scores
