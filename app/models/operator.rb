@@ -95,14 +95,6 @@ class Operator < ApplicationRecord
   default_scope { includes(:translations) }
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
-  # TODO Refactor this when merging the branches
-  scope :fmus_with_certification_fsc,     ->          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
-  scope :fmus_with_certification_pefc,    ->          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
-  scope :fmus_with_certification_olb,     ->          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
-  scope :fmus_with_certification_pafc,    ->          { joins(:fmus).where(fmus: { certification_pafc: true }).distinct }
-  scope :fmus_with_certification_fsc_cw,  ->          { joins(:fmus).where(fmus: { certification_fsc_cw: true }).distinct }
-  scope :fmus_with_certification_tlv,     ->          { joins(:fmus).where(fmus: { certification_tlv: true }).distinct }
-  scope :fmus_with_certification_ls,      ->          { joins(:fmus).where(fmus: { certification_ls: true }).distinct }
 
   # Returns the operators that should have documents for a particular country
   # When that country is null, it returns the list of operators that should have generic documents

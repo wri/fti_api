@@ -75,13 +75,6 @@ class Fmu < ApplicationRecord
   scope :filter_by_free,                  ->               { where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id) }
   # TODO remve the filter by free. This needs to be tested
   scope :filter_by_free_aa,               ->               { where(' fmus.id not in (select fmu_id from fmu_operators where current = true)') }
-  scope :with_certification_fsc,          ->               { where certification_fsc:     true }
-  scope :with_certification_pefc,         ->               { where certification_pefc:    true }
-  scope :with_certification_olb,          ->               { where certification_olb:     true }
-  scope :with_certification_pafc,         ->               { where certification_pafc:    true }
-  scope :with_certification_fsc_cw,       ->               { where certification_fsc_cw:  true }
-  scope :with_certification_tlv,          ->               { where certification_tlv:     true }
-  scope :with_certification_ls,           ->               { where certification_ls:      true }
   scope :current,                         ->               { joins(:fmu_operators).where(fmu_operators: { current: true }) }
   scope :filter_by_forest_type,           ->(forest_type)  { where(forest_type: forest_type) }
   scope :discriminate_by_forest_type,     ->(forest_type)  { where.not(forest_type: forest_type) }
