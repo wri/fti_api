@@ -32,6 +32,10 @@ FactoryBot.define do
     type { 'OperatorDocumentCountry' } # This can be overwritten by the children.
     document_file { build :document_file }
 
+    transient do
+      force_status { nil }
+    end
+
     after(:build) do |doc|
       country = doc&.operator&.country ||
         doc&.required_operator_document&.country ||
@@ -58,6 +62,10 @@ FactoryBot.define do
       after(:build) do |doc|
         doc.fmu ||= FactoryBot.create(:fmu, country: country)
       end
+    end
+
+    after(:create) do |doc, evaluator|
+      doc.update_attributes(status: evaluator.force_status) if evaluator.force_status
     end
   end
 end

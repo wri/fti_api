@@ -48,10 +48,15 @@ class GovDocument < ApplicationRecord
   before_destroy :ensure_unity
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
-  scope :to_expire, ->(date) { where("expire_date < '#{date}'::date and status = #{GovDocument.statuses[:doc_valid]}") }
+  scope :to_expire, ->(date) {
+    where('expire_date < ?', date)
+      .where(status: EXPIRABLE_STATUSES)
+  }
   scope :actual,       -> { where(current: true, deleted_at: nil) }
   scope :valid,        -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
   scope :required,     -> { actual.where.not(status: GovDocument.statuses[:doc_not_required]) }
+
+  EXPIRABLE_STATUSES = %w[doc_valid doc_not_required]
 
   def update_percentages
     required_gov_document.country.update_valid_documents_percentages

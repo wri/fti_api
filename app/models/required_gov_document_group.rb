@@ -9,7 +9,6 @@
 #  created_at                     :datetime         not null
 #  updated_at                     :datetime         not null
 #  deleted_at                     :datetime
-#  required_gov_document_group_id :integer          not null
 #  name                           :string           not null
 #  description                    :text
 #  deleted_at                     :datetime
