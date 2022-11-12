@@ -7,15 +7,13 @@ module V1
 
     before :all do
       @signature_group = create(:required_operator_document_group, name: 'Publication Authorization')
-      # below generates one document
-      @signature_document = create(:required_operator_document_country, required_operator_document_group: @signature_group, contract_signature: true)
       country = create(:country)
-      operator = create(:operator, country: country)
+      # below generates one document
+      @signature_document = create(:required_operator_document_country, required_operator_document_group: @signature_group, contract_signature: true, country: country)
+      operator = create(:operator, country: country, fa_id: 'fa_id')
       document_group = create(:required_operator_document_group, name: 'Some group')
       # below creates 7 country documents for operator
       create_list(:required_operator_document_country, 7, required_operator_document_group: document_group, country: country)
-      # @operator_documents = create_list(:operator_document, 7)
-      @doc_signature = create(:operator_document_country, required_operator_document: @signature_document)
       @doc_invalid = create(:operator_document_fmu)
       @doc_valid_private = create(
         :operator_document_fmu,

@@ -104,6 +104,15 @@ class Operator < ApplicationRecord
   scope :fmus_with_certification_tlv,     ->          { joins(:fmus).where(fmus: { certification_tlv: true }).distinct }
   scope :fmus_with_certification_ls,      ->          { joins(:fmus).where(fmus: { certification_ls: true }).distinct }
 
+  # Returns the operators that should have documents for a particular country
+  # When that country is null, it returns the list of operators that should have generic documents
+  scope :for_document_country, ->(country_id) {
+    if country_id.nil?
+      fa_operator.where.not(country_id: Country.active.uniq.pluck(:id))
+    else
+      fa_operator.where(country_id: country_id)
+    end
+  }
 
   class Translation
     after_save do

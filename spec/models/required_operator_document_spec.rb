@@ -94,8 +94,8 @@ RSpec.describe RequiredOperatorDocument, type: :model do
     describe '#destroy' do
       before do
         country = create(:country)
-        create(:operator, country: country)
-        create(:operator, country: country)
+        create(:operator, country: country, fa_id: 'fa_id')
+        create(:operator, country: country, fa_id: 'fa_id')
 
         @required_operator_document = create(
           :required_operator_document_country,

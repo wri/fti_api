@@ -31,7 +31,7 @@ RSpec.describe RequiredOperatorDocumentCountry, type: :model do
     describe '#create_operator_document_countries' do
       before do
         @country = create(:country)
-        create_list(:operator, 3, country: @country)
+        create_list(:operator, 3, country: @country, fa_id: 'fa_id')
 
         @required_operator_document_group = create(:required_operator_document_group)
       end

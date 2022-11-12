@@ -59,9 +59,9 @@ class Country < ApplicationRecord
   }
   scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select('observations.country_id').distinct.pluck('observations.country_id')) }
 
-  scope :by_status, (->(status) { where(is_active: status) })
+  scope :by_status, ->(status) { where(is_active: status) }
 
-  scope :active, (-> { where(is_active: true) })
+  scope :active, -> { where(is_active: true) }
 
   default_scope do
     includes(:translations)
