@@ -107,7 +107,9 @@ ActiveAdmin.register OperatorDocumentAnnex do
     column :start_date
     column :created_at
     column :uploaded_by
-    attachment_column :attachment
+    column :attachment do |o|
+      link_to o.attachment&.identifier, o.attachment&.url
+    end
     column('Approve') { |annex| link_to 'Approve', approve_admin_operator_document_annex_path(annex), method: :put }
     column('Reject') { |annex| link_to 'Reject', reject_admin_operator_document_annex_path(annex), method: :put }
     actions
@@ -163,7 +165,9 @@ ActiveAdmin.register OperatorDocumentAnnex do
       row :uploaded_by
       row :user
       if resource.attachment.present?
-        attachment_row('Attachment', :attachment, label: "#{resource.attachment.file.filename}", truncate: false)
+        row :attachment do |o|
+          link_to o.attachment&.identifier, o.attachment&.url
+        end
       end
       row :start_date
       row :expire_date

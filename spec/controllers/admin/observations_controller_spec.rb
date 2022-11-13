@@ -43,34 +43,34 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
   describe 'member actions' do
     describe 'PUT ready_for_publication' do
-      let(:observation) { create(:observation) }
+      let(:observation) { create(:observation, force_status: 'QC in progress') }
 
       before { put :ready_for_publication, params: {id: observation.id} }
 
       it 'is successful' do
-        expect(flash[:notice]).to match('Observation approved')
+        expect(flash[:notice]).to match('Observation moved to Ready for Publication')
         expect(observation.reload.validation_status).to eq('Ready for publication')
       end
     end
 
     describe 'PUT needs_revision' do
-      let(:observation) { create(:observation) }
+      let(:observation) { create(:observation, force_status: 'QC in progress') }
 
       before { put :needs_revision, params: {id: observation.id} }
 
       it 'is successful' do
-        expect(flash[:notice]).to match('Observation needs revision')
+        expect(flash[:notice]).to match('Observation moved to Needs Revision')
         expect(observation.reload.validation_status).to eq('Needs revision')
       end
     end
 
     describe 'PUT start_qc' do
-      let(:observation) { create(:observation) }
+      let(:observation) { create(:observation, force_status: 'Ready for QC') }
 
       before { put :start_qc, params: {id: observation.id} }
 
       it 'is successful' do
-        expect(flash[:notice]).to match('QC in progress for observation')
+        expect(flash[:notice]).to match('Observation moved to QC in Progress')
         expect(observation.reload.validation_status).to eq('QC in progress')
       end
     end
@@ -134,66 +134,6 @@ RSpec.describe Admin::ObservationsController, type: :controller do
         expect(observation1.reload.validation_status).to eq('Ready for publication')
         expect(observation2.reload.validation_status).to eq('Created') # only can change if it was QC in progress
         expect(flash[:notice]).to match('Observations ready to be published')
-      end
-    end
-
-    describe 'move_to_published_no_comments' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
-      let(:obs_ids) { [observation1.id, observation2.id] }
-
-      before do
-        post :batch_action,
-          params: {
-            batch_action: 'move_to_published_no_comments',
-            collection_selection: obs_ids
-          }
-      end
-
-      it 'is successful' do
-        expect(observation1.reload.validation_status).to eq('Published (no comments)')
-        expect(observation2.reload.validation_status).to eq('Published (no comments)')
-        expect(flash[:notice]).to match('Observations published without comment')
-      end
-    end
-
-    describe 'move_to_published_not_modified' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
-      let(:obs_ids) { [observation1.id, observation2.id] }
-
-      before do
-        post :batch_action,
-          params: {
-            batch_action: 'move_to_published_not_modified',
-            collection_selection: obs_ids
-          }
-      end
-
-      it 'is successful' do
-        expect(observation1.reload.validation_status).to eq('Published (not modified)')
-        expect(observation2.reload.validation_status).to eq('Published (not modified)')
-        expect(flash[:notice]).to match('Observations published without modifications')
-      end
-    end
-
-    describe 'move_to_published_modified' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
-      let(:obs_ids) { [observation1.id, observation2.id] }
-
-      before do
-        post :batch_action,
-          params: {
-            batch_action: 'move_to_published_modified',
-            collection_selection: obs_ids
-          }
-      end
-
-      it 'is successful' do
-        expect(observation1.reload.validation_status).to eq('Published (modified)')
-        expect(observation2.reload.validation_status).to eq('Published (modified)')
-        expect(flash[:notice]).to match('Observations published with modifications')
       end
     end
 

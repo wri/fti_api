@@ -13,6 +13,23 @@ ActiveAdmin.register Fmu do
   MAX_FILE_SIZE = 200_000
 
   controller do
+    def index
+      # Hack that allows handling ransack grouping queries.
+      # Ranksack does not support grouping queries on globalize tables, so when we get that type of request, we don't
+      # use ransack.
+      # https://github.com/activerecord-hackery/ransack/blob/main/lib/ransack/adapters/active_record/context.rb#L66
+
+      return super if params.dig(:q, :groupings).blank?
+
+      operator_id = params[:q]['operator_id_eq']
+      fmu_name = params[:q][:groupings]['0']['name_contains']
+
+      render json: Fmu.with_translations(I18n.locale)
+                      .filter_by_operators([operator_id])
+                      .where('fmu_translations.name ilike ?', "%#{fmu_name}%")
+                      .order('fmu_translations.name asc')
+                      .to_json
+    end
     def preview
       file = params['file']
       response = if file.blank? || file.size > MAX_FILE_SIZE

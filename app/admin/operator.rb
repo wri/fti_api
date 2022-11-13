@@ -221,7 +221,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :fa_id
       row :details
       row :country
-      image_row :logo
+      row :logo do |o|
+        link_to o.logo&.identifier, o.logo&.url
+      end
       row :address
       row :website
       row :fmus
@@ -280,6 +282,24 @@ ActiveAdmin.register Operator, as: 'Producer' do
   end
 
   controller do
+    def index
+      # Hack that allows handling ransack grouping queries.
+      # Ranksack does not support grouping queries on globalize tables, so when we get that type of request, we don't
+      # use ransack.
+      # https://github.com/activerecord-hackery/ransack/blob/main/lib/ransack/adapters/active_record/context.rb#L66
+
+      return super if params.dig(:q, :groupings).blank?
+
+      country_id = params[:q]['country_id_eq']
+      operator_name = params[:q][:groupings]['0']['name_contains']
+
+      render json: Operator.with_translations(I18n.locale)
+        .where(country_id: country_id)
+        .where('operator_translations.name ilike ?', "%#{operator_name}%")
+        .by_name_asc
+        .to_json
+    end
+
     def find_resource
       scoped_collection.unscope(:joins).with_translations.where(id: params[:id]).first!
     end
