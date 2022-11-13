@@ -11,9 +11,9 @@
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
 #  deleted_at                          :datetime
-#  forest_types                        :integer          default("{}"), is an Array
-#  contract_signature                  :boolean          default("false"), not null
-#  required_operator_document_id       :integer          not null
+#  forest_types                        :integer          default([]), is an Array
+#  contract_signature                  :boolean          default(FALSE), not null
+#  position                            :integer
 #  explanation                         :text
 #  deleted_at                          :datetime
 #

@@ -14,7 +14,7 @@
 #  severity_level    :integer
 #  validation_status :integer
 #  fmu_forest_type   :integer
-#  total_count       :integer          default("0")
+#  total_count       :integer          default(0)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  hidden            :boolean

@@ -8,7 +8,6 @@
 #  position    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  how_to_id   :integer          not null
 #  name        :string
 #  description :text
 #

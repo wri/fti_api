@@ -8,7 +8,7 @@
 #  date        :date             not null
 #  country_id  :integer
 #  observer_id :integer
-#  total_count :integer          default("0")
+#  total_count :integer          default(0)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

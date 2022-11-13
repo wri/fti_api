@@ -10,12 +10,12 @@
 #  required_operator_document_group_id :integer
 #  fmu_forest_type                     :integer
 #  document_type                       :string
-#  valid_count                         :integer          default("0")
-#  invalid_count                       :integer          default("0")
-#  pending_count                       :integer          default("0")
-#  not_provided_count                  :integer          default("0")
-#  not_required_count                  :integer          default("0")
-#  expired_count                       :integer          default("0")
+#  valid_count                         :integer          default(0)
+#  invalid_count                       :integer          default(0)
+#  pending_count                       :integer          default(0)
+#  not_provided_count                  :integer          default(0)
+#  not_required_count                  :integer          default(0)
+#  expired_count                       :integer          default(0)
 #  created_at                          :datetime         not null
 #  updated_at                          :datetime         not null
 #

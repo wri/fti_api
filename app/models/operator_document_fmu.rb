@@ -20,8 +20,8 @@
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
-#  public                        :boolean          default("true"), not null
-#  source                        :integer          default("1")
+#  public                        :boolean          default(TRUE), not null
+#  source                        :integer          default("company")
 #  source_info                   :string
 #  document_file_id              :integer
 #

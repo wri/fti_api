@@ -9,17 +9,17 @@
 #  geojson              :jsonb
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  certification_fsc    :boolean          default("false")
-#  certification_pefc   :boolean          default("false")
-#  certification_olb    :boolean          default("false")
-#  certification_pafc   :boolean          default("false")
-#  certification_fsc_cw :boolean          default("false")
-#  certification_tlv    :boolean          default("false")
-#  forest_type          :integer          default("0"), not null
+#  certification_fsc    :boolean          default(FALSE)
+#  certification_pefc   :boolean          default(FALSE)
+#  certification_olb    :boolean          default(FALSE)
+#  certification_pafc   :boolean          default(FALSE)
+#  certification_fsc_cw :boolean          default(FALSE)
+#  certification_tlv    :boolean          default(FALSE)
+#  forest_type          :integer          default("fmu"), not null
 #  geometry             :geometry         geometry, 0
 #  properties           :jsonb
 #  deleted_at           :datetime
-#  certification_ls     :boolean          default("false")
+#  certification_ls     :boolean          default(FALSE)
 #  name                 :string
 #  deleted_at           :datetime
 #

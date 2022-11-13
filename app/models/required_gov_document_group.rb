@@ -4,14 +4,14 @@
 #
 # Table name: required_gov_document_groups
 #
-#  id                             :integer          not null, primary key
-#  position                       :integer
-#  created_at                     :datetime         not null
-#  updated_at                     :datetime         not null
-#  deleted_at                     :datetime
-#  name                           :string           not null
-#  description                    :text
-#  deleted_at                     :datetime
+#  id          :integer          not null, primary key
+#  position    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  deleted_at  :datetime
+#  name        :string           not null
+#  description :text
+#  deleted_at  :datetime
 #
 
 class RequiredGovDocumentGroup < ApplicationRecord

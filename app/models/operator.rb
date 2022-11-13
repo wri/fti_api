@@ -10,13 +10,13 @@
 #  concession        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  is_active         :boolean          default("true")
+#  is_active         :boolean          default(TRUE)
 #  logo              :string
 #  operator_id       :string
 #  fa_id             :string
 #  address           :string
 #  website           :string
-#  approved          :boolean          default("true"), not null
+#  approved          :boolean          default(TRUE), not null
 #  email             :string
 #  holding_id        :integer
 #  country_doc_rank  :integer

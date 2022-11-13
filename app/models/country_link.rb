@@ -4,16 +4,15 @@
 #
 # Table name: country_links
 #
-#  id              :integer          not null, primary key
-#  url             :string
-#  active          :boolean          default("true")
-#  position        :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  country_id      :integer
-#  country_link_id :integer          not null
-#  name            :string
-#  description     :text
+#  id          :integer          not null, primary key
+#  url         :string
+#  active      :boolean          default(TRUE)
+#  position    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  country_id  :integer
+#  name        :string
+#  description :text
 #
 class CountryLink < ApplicationRecord
   belongs_to :country
