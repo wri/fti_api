@@ -22,6 +22,7 @@ class RequiredGovDocument < ApplicationRecord
   has_paper_trail
   includes Translatable
   acts_as_paranoid
+  acts_as_list scope: [:country_id, :required_gov_document_group_id, deleted_at: nil]
 
   translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
   # rubocop:disable Style/BlockDelimiters

@@ -22,7 +22,7 @@ module V1
     caching
     immutable
     attributes :name, :valid_period, :document_type,
-               :required_gov_document_group_id
+               :required_gov_document_group_id, :position
 
     has_one :country
     has_one :required_gov_document_group

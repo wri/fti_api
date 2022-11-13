@@ -12,7 +12,7 @@ ActiveAdmin.register RequiredGovDocument do
   active_admin_paranoia
 
   actions :all
-  permit_params :required_gov_document_group_id, :document_type, :country_id,
+  permit_params :required_gov_document_group_id, :document_type, :country_id, :position,
                 :name, :valid_period, translations_attributes: [:id, :locale, :explanation]
 
   csv do
@@ -35,6 +35,7 @@ ActiveAdmin.register RequiredGovDocument do
     end
     column :required_gov_document_group
     column :country
+    column :position
     column :name
     column :document_type
 
@@ -54,6 +55,7 @@ ActiveAdmin.register RequiredGovDocument do
       editing = object.new_record? ? false : true
       f.input :required_gov_document_group
       f.input :country, input_html: { disabled: editing }
+      f.input :position
       f.input :document_type, as: :select, collection: RequiredGovDocument.document_types.keys,
                               include_blank: false, input_html: { disabled: editing }
       f.input :name
