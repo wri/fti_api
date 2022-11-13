@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221021144945) do
+ActiveRecord::Schema.define(version: 20221112185114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
 
-  create_table "about_page_entries", force: :cascade do |t|
+  create_table "about_page_entries", id: :serial, force: :cascade do |t|
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["position"], name: "index_about_page_entries_on_position"
   end
 
-  create_table "about_page_entry_translations", force: :cascade do |t|
+  create_table "about_page_entry_translations", id: :serial, force: :cascade do |t|
     t.integer "about_page_entry_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["locale"], name: "index_about_page_entry_translations_on_locale"
   end
 
-  create_table "active_admin_comments", force: :cascade do |t|
+  create_table "active_admin_comments", id: :serial, force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
-  create_table "annex_documents", force: :cascade do |t|
+  create_table "annex_documents", id: :serial, force: :cascade do |t|
     t.string "documentable_type", null: false
     t.integer "documentable_id", null: false
     t.integer "operator_document_annex_id", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["operator_document_annex_id"], name: "index_annex_documents_on_operator_document_annex_id"
   end
 
-  create_table "api_keys", force: :cascade do |t|
+  create_table "api_keys", id: :serial, force: :cascade do |t|
     t.string "access_token"
     t.datetime "expires_at"
     t.integer "user_id"
@@ -77,13 +77,13 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_type"
   end
 
-  create_table "category_translations", force: :cascade do |t|
+  create_table "category_translations", id: :serial, force: :cascade do |t|
     t.integer "category_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["name", "category_id"], name: "index_category_translations_on_name_and_category_id"
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", id: :serial, force: :cascade do |t|
     t.integer "commentable_id"
     t.string "commentable_type"
     t.text "body"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "contributor_translations", force: :cascade do |t|
+  create_table "contributor_translations", id: :serial, force: :cascade do |t|
     t.integer "contributor_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["locale"], name: "index_contributor_translations_on_locale"
   end
 
-  create_table "contributors", force: :cascade do |t|
+  create_table "contributors", id: :serial, force: :cascade do |t|
     t.string "website"
     t.string "logo"
     t.integer "priority"
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["type"], name: "index_contributors_on_type"
   end
 
-  create_table "countries", force: :cascade do |t|
+  create_table "countries", id: :serial, force: :cascade do |t|
     t.string "iso"
     t.string "region_iso"
     t.jsonb "country_centroid"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["observer_id", "country_id"], name: "index_countries_observers_on_observer_id_and_country_id"
   end
 
-  create_table "country_link_translations", force: :cascade do |t|
+  create_table "country_link_translations", id: :serial, force: :cascade do |t|
     t.integer "country_link_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["locale"], name: "index_country_link_translations_on_locale"
   end
 
-  create_table "country_links", force: :cascade do |t|
+  create_table "country_links", id: :serial, force: :cascade do |t|
     t.string "url"
     t.boolean "active", default: true
     t.integer "position"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["country_id"], name: "index_country_links_on_country_id"
   end
 
-  create_table "country_translations", force: :cascade do |t|
+  create_table "country_translations", id: :serial, force: :cascade do |t|
     t.integer "country_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["name", "country_id"], name: "index_country_translations_on_name_and_country_id"
   end
 
-  create_table "country_vpa_translations", force: :cascade do |t|
+  create_table "country_vpa_translations", id: :serial, force: :cascade do |t|
     t.integer "country_vpa_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["locale"], name: "index_country_vpa_translations_on_locale"
   end
 
-  create_table "country_vpas", force: :cascade do |t|
+  create_table "country_vpas", id: :serial, force: :cascade do |t|
     t.string "url"
     t.boolean "active", default: true
     t.integer "position"
@@ -202,13 +202,13 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["country_id"], name: "index_country_vpas_on_country_id"
   end
 
-  create_table "document_files", force: :cascade do |t|
+  create_table "document_files", id: :serial, force: :cascade do |t|
     t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "faq_translations", force: :cascade do |t|
+  create_table "faq_translations", id: :serial, force: :cascade do |t|
     t.integer "faq_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -219,14 +219,14 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["locale"], name: "index_faq_translations_on_locale"
   end
 
-  create_table "faqs", force: :cascade do |t|
+  create_table "faqs", id: :serial, force: :cascade do |t|
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
   end
 
-  create_table "fmu_operators", force: :cascade do |t|
+  create_table "fmu_operators", id: :serial, force: :cascade do |t|
     t.integer "fmu_id", null: false
     t.integer "operator_id", null: false
     t.boolean "current", null: false
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id"
   end
 
-  create_table "fmu_translations", force: :cascade do |t|
+  create_table "fmu_translations", id: :serial, force: :cascade do |t|
     t.integer "fmu_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -253,7 +253,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["name", "fmu_id"], name: "index_fmu_translations_on_name_and_fmu_id"
   end
 
-  create_table "fmus", force: :cascade do |t|
+  create_table "fmus", id: :serial, force: :cascade do |t|
     t.integer "country_id"
     t.jsonb "geojson"
     t.datetime "created_at", null: false
@@ -274,7 +274,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["forest_type"], name: "index_fmus_on_forest_type"
   end
 
-  create_table "gov_documents", force: :cascade do |t|
+  create_table "gov_documents", id: :serial, force: :cascade do |t|
     t.integer "status", null: false
     t.text "reason"
     t.date "start_date"
@@ -295,7 +295,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_gov_documents_on_user_id"
   end
 
-  create_table "gov_files", force: :cascade do |t|
+  create_table "gov_files", id: :serial, force: :cascade do |t|
     t.string "attachment"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
@@ -304,7 +304,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["gov_document_id"], name: "index_gov_files_on_gov_document_id"
   end
 
-  create_table "government_translations", force: :cascade do |t|
+  create_table "government_translations", id: :serial, force: :cascade do |t|
     t.integer "government_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -316,7 +316,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["locale"], name: "index_government_translations_on_locale"
   end
 
-  create_table "governments", force: :cascade do |t|
+  create_table "governments", id: :serial, force: :cascade do |t|
     t.integer "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -324,7 +324,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["country_id"], name: "index_governments_on_country_id"
   end
 
-  create_table "governments_observations", force: :cascade do |t|
+  create_table "governments_observations", id: :serial, force: :cascade do |t|
     t.integer "government_id"
     t.integer "observation_id"
     t.datetime "created_at", null: false
@@ -337,14 +337,14 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["observation_id"], name: "index_governments_observations_on_observation_id"
   end
 
-  create_table "holdings", force: :cascade do |t|
+  create_table "holdings", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_holdings_on_name"
   end
 
-  create_table "how_to_translations", force: :cascade do |t|
+  create_table "how_to_translations", id: :serial, force: :cascade do |t|
     t.integer "how_to_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -355,13 +355,13 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["locale"], name: "index_how_to_translations_on_locale"
   end
 
-  create_table "how_tos", force: :cascade do |t|
+  create_table "how_tos", id: :serial, force: :cascade do |t|
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "laws", force: :cascade do |t|
+  create_table "laws", id: :serial, force: :cascade do |t|
     t.text "written_infraction"
     t.text "infraction"
     t.text "sanctions"
@@ -381,14 +381,14 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id"
   end
 
-  create_table "notification_groups", force: :cascade do |t|
+  create_table "notification_groups", id: :serial, force: :cascade do |t|
     t.integer "days", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", id: :serial, force: :cascade do |t|
     t.datetime "last_displayed_at"
     t.datetime "dismissed_at"
     t.datetime "solved_at"
@@ -405,7 +405,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "observation_documents", force: :cascade do |t|
+  create_table "observation_documents", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "attachment"
     t.datetime "created_at", null: false
@@ -419,7 +419,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_observation_documents_on_user_id"
   end
 
-  create_table "observation_histories", force: :cascade do |t|
+  create_table "observation_histories", id: :serial, force: :cascade do |t|
     t.integer "validation_status"
     t.integer "observation_type"
     t.integer "evidence_type"
@@ -452,7 +452,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["validation_status"], name: "index_observation_histories_on_validation_status"
   end
 
-  create_table "observation_operators", force: :cascade do |t|
+  create_table "observation_operators", id: :serial, force: :cascade do |t|
     t.integer "observation_id"
     t.integer "operator_id"
     t.datetime "created_at", null: false
@@ -463,7 +463,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["operator_id"], name: "index_observation_operators_on_operator_id"
   end
 
-  create_table "observation_report_observers", force: :cascade do |t|
+  create_table "observation_report_observers", id: :serial, force: :cascade do |t|
     t.integer "observation_report_id"
     t.integer "observer_id"
     t.datetime "created_at", null: false
@@ -472,7 +472,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["observer_id", "observation_report_id"], name: "index_observer_id_and_obs_rep_id"
   end
 
-  create_table "observation_report_statistics", force: :cascade do |t|
+  create_table "observation_report_statistics", id: :serial, force: :cascade do |t|
     t.date "date", null: false
     t.integer "country_id"
     t.integer "observer_id"
@@ -485,7 +485,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["observer_id"], name: "index_observation_report_statistics_on_observer_id"
   end
 
-  create_table "observation_reports", force: :cascade do |t|
+  create_table "observation_reports", id: :serial, force: :cascade do |t|
     t.string "title"
     t.datetime "publication_date"
     t.string "attachment"
@@ -498,7 +498,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_observation_reports_on_user_id"
   end
 
-  create_table "observation_statistics", force: :cascade do |t|
+  create_table "observation_statistics", id: :serial, force: :cascade do |t|
     t.date "date", null: false
     t.integer "country_id"
     t.integer "operator_id"
@@ -522,7 +522,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["subcategory_id"], name: "index_observation_statistics_on_subcategory_id"
   end
 
-  create_table "observation_translations", force: :cascade do |t|
+  create_table "observation_translations", id: :serial, force: :cascade do |t|
     t.integer "observation_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -536,7 +536,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["observation_id"], name: "index_observation_translations_on_observation_id"
   end
 
-  create_table "observations", force: :cascade do |t|
+  create_table "observations", id: :serial, force: :cascade do |t|
     t.integer "severity_id"
     t.integer "observation_type", null: false
     t.integer "user_id"
@@ -587,7 +587,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["validation_status"], name: "index_observations_on_validation_status"
   end
 
-  create_table "observer_observations", force: :cascade do |t|
+  create_table "observer_observations", id: :serial, force: :cascade do |t|
     t.integer "observer_id"
     t.integer "observation_id"
     t.datetime "created_at", null: false
@@ -598,7 +598,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["observer_id"], name: "index_observer_observations_on_observer_id"
   end
 
-  create_table "observer_translations", force: :cascade do |t|
+  create_table "observer_translations", id: :serial, force: :cascade do |t|
     t.integer "observer_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -610,7 +610,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["observer_id"], name: "index_observer_translations_on_observer_id"
   end
 
-  create_table "observers", force: :cascade do |t|
+  create_table "observers", id: :serial, force: :cascade do |t|
     t.string "observer_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -630,7 +630,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["is_active"], name: "index_observers_on_is_active"
   end
 
-  create_table "operator_document_annexes", force: :cascade do |t|
+  create_table "operator_document_annexes", id: :serial, force: :cascade do |t|
     t.string "name"
     t.date "start_date"
     t.date "expire_date"
@@ -648,7 +648,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_operator_document_annexes_on_user_id"
   end
 
-  create_table "operator_document_histories", force: :cascade do |t|
+  create_table "operator_document_histories", id: :serial, force: :cascade do |t|
     t.string "type"
     t.date "expire_date"
     t.date "start_date"
@@ -686,7 +686,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["user_id"], name: "index_operator_document_histories_on_user_id"
   end
 
-  create_table "operator_document_statistics", force: :cascade do |t|
+  create_table "operator_document_statistics", id: :serial, force: :cascade do |t|
     t.date "date", null: false
     t.integer "country_id"
     t.integer "required_operator_document_group_id"
@@ -706,7 +706,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["required_operator_document_group_id"], name: "index_operator_document_statistics_rodg"
   end
 
-  create_table "operator_documents", force: :cascade do |t|
+  create_table "operator_documents", id: :serial, force: :cascade do |t|
     t.string "type"
     t.date "expire_date"
     t.date "start_date"
@@ -739,7 +739,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["type"], name: "index_operator_documents_on_type"
   end
 
-  create_table "operator_translations", force: :cascade do |t|
+  create_table "operator_translations", id: :serial, force: :cascade do |t|
     t.integer "operator_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -751,7 +751,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["operator_id"], name: "index_operator_translations_on_operator_id"
   end
 
-  create_table "operators", force: :cascade do |t|
+  create_table "operators", id: :serial, force: :cascade do |t|
     t.string "operator_type"
     t.integer "country_id"
     t.string "concession"
@@ -774,7 +774,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["is_active"], name: "index_operators_on_is_active"
   end
 
-  create_table "required_gov_document_group_translations", force: :cascade do |t|
+  create_table "required_gov_document_group_translations", id: :serial, force: :cascade do |t|
     t.integer "required_gov_document_group_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -787,7 +787,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["required_gov_document_group_id"], name: "index_d5783e31f1865cb8918d628281b44e29621b4216"
   end
 
-  create_table "required_gov_document_groups", force: :cascade do |t|
+  create_table "required_gov_document_groups", id: :serial, force: :cascade do |t|
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -795,7 +795,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["deleted_at"], name: "index_required_gov_document_groups_on_deleted_at"
   end
 
-  create_table "required_gov_document_translations", force: :cascade do |t|
+  create_table "required_gov_document_translations", id: :serial, force: :cascade do |t|
     t.integer "required_gov_document_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -807,7 +807,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["required_gov_document_id"], name: "index_759a54fdd00cf06c291ffc4857fb904934dd47b9"
   end
 
-  create_table "required_gov_documents", force: :cascade do |t|
+  create_table "required_gov_documents", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.integer "document_type", null: false
     t.integer "valid_period"
@@ -816,13 +816,15 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.integer "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position"
+    t.index ["country_id", "required_gov_document_group_id", "position"], name: "index_rgd_on_country_id_and_rgdg_id_and_position"
     t.index ["country_id"], name: "index_required_gov_documents_on_country_id"
     t.index ["deleted_at"], name: "index_required_gov_documents_on_deleted_at"
     t.index ["document_type"], name: "index_required_gov_documents_on_document_type"
     t.index ["required_gov_document_group_id"], name: "index_required_gov_documents_on_required_gov_document_group_id"
   end
 
-  create_table "required_operator_document_group_translations", force: :cascade do |t|
+  create_table "required_operator_document_group_translations", id: :serial, force: :cascade do |t|
     t.integer "required_operator_document_group_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -832,13 +834,13 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["required_operator_document_group_id"], name: "index_64b55c0cec158f1717cc5d775ae87c7a48f1cc59"
   end
 
-  create_table "required_operator_document_groups", force: :cascade do |t|
+  create_table "required_operator_document_groups", id: :serial, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position"
   end
 
-  create_table "required_operator_document_translations", force: :cascade do |t|
+  create_table "required_operator_document_translations", id: :serial, force: :cascade do |t|
     t.integer "required_operator_document_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -850,7 +852,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["required_operator_document_id"], name: "index_eed74ed5a0934f32c4b075e5beee98f1ebf34d19"
   end
 
-  create_table "required_operator_documents", force: :cascade do |t|
+  create_table "required_operator_documents", id: :serial, force: :cascade do |t|
     t.string "type"
     t.integer "required_operator_document_group_id"
     t.string "name"
@@ -861,14 +863,16 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.datetime "deleted_at"
     t.integer "forest_types", default: [], array: true
     t.boolean "contract_signature", default: false, null: false
+    t.integer "position"
     t.index ["contract_signature"], name: "index_required_operator_documents_on_contract_signature"
+    t.index ["country_id", "required_operator_document_group_id", "position"], name: "index_rod_on_country_id_and_rodg_id_and_position"
     t.index ["deleted_at"], name: "index_required_operator_documents_on_deleted_at"
     t.index ["forest_types"], name: "index_required_operator_documents_on_forest_types"
     t.index ["required_operator_document_group_id"], name: "index_req_op_doc_group_id"
     t.index ["type"], name: "index_required_operator_documents_on_type"
   end
 
-  create_table "sawmills", force: :cascade do |t|
+  create_table "sawmills", id: :serial, force: :cascade do |t|
     t.string "name"
     t.float "lat"
     t.float "lng"
@@ -879,7 +883,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.jsonb "geojson"
   end
 
-  create_table "score_operator_documents", force: :cascade do |t|
+  create_table "score_operator_documents", id: :serial, force: :cascade do |t|
     t.date "date", null: false
     t.boolean "current", default: true, null: false
     t.float "all"
@@ -897,7 +901,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["operator_id"], name: "index_score_operator_documents_on_operator_id"
   end
 
-  create_table "score_operator_observations", force: :cascade do |t|
+  create_table "score_operator_observations", id: :serial, force: :cascade do |t|
     t.date "date", null: false
     t.boolean "current", default: true, null: false
     t.float "score"
@@ -912,7 +916,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["operator_id"], name: "index_score_operator_observations_on_operator_id"
   end
 
-  create_table "severities", force: :cascade do |t|
+  create_table "severities", id: :serial, force: :cascade do |t|
     t.integer "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -923,7 +927,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["subcategory_id", "level"], name: "index_severities_on_subcategory_id_and_level"
   end
 
-  create_table "severity_translations", force: :cascade do |t|
+  create_table "severity_translations", id: :serial, force: :cascade do |t|
     t.integer "severity_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -933,7 +937,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["severity_id"], name: "index_severity_translations_on_severity_id"
   end
 
-  create_table "species", force: :cascade do |t|
+  create_table "species", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "species_class"
     t.string "sub_species"
@@ -947,7 +951,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "species_countries", force: :cascade do |t|
+  create_table "species_countries", id: :serial, force: :cascade do |t|
     t.integer "country_id"
     t.integer "species_id"
     t.datetime "created_at", null: false
@@ -956,7 +960,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["species_id"], name: "index_species_countries_on_species_id"
   end
 
-  create_table "species_observations", force: :cascade do |t|
+  create_table "species_observations", id: :serial, force: :cascade do |t|
     t.integer "observation_id"
     t.integer "species_id"
     t.datetime "created_at", null: false
@@ -967,7 +971,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["species_id"], name: "index_species_observations_on_species_id"
   end
 
-  create_table "species_translations", force: :cascade do |t|
+  create_table "species_translations", id: :serial, force: :cascade do |t|
     t.integer "species_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -977,7 +981,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["species_id"], name: "index_species_translations_on_species_id"
   end
 
-  create_table "subcategories", force: :cascade do |t|
+  create_table "subcategories", id: :serial, force: :cascade do |t|
     t.integer "category_id"
     t.integer "subcategory_type"
     t.datetime "created_at", null: false
@@ -987,7 +991,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["subcategory_type"], name: "index_subcategories_on_subcategory_type"
   end
 
-  create_table "subcategory_translations", force: :cascade do |t|
+  create_table "subcategory_translations", id: :serial, force: :cascade do |t|
     t.integer "subcategory_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -999,7 +1003,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["subcategory_id"], name: "index_subcategory_translations_on_subcategory_id"
   end
 
-  create_table "tool_translations", force: :cascade do |t|
+  create_table "tool_translations", id: :serial, force: :cascade do |t|
     t.integer "tool_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -1010,13 +1014,13 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["tool_id"], name: "index_tool_translations_on_tool_id"
   end
 
-  create_table "tools", force: :cascade do |t|
+  create_table "tools", id: :serial, force: :cascade do |t|
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tutorial_translations", force: :cascade do |t|
+  create_table "tutorial_translations", id: :serial, force: :cascade do |t|
     t.integer "tutorial_id", null: false
     t.string "locale", null: false
     t.datetime "created_at", null: false
@@ -1027,13 +1031,13 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["tutorial_id"], name: "index_tutorial_translations_on_tutorial_id"
   end
 
-  create_table "tutorials", force: :cascade do |t|
+  create_table "tutorials", id: :serial, force: :cascade do |t|
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "uploaded_documents", force: :cascade do |t|
+  create_table "uploaded_documents", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "author"
     t.string "caption"
@@ -1042,7 +1046,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_permissions", force: :cascade do |t|
+  create_table "user_permissions", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "user_role", default: 0, null: false
     t.jsonb "permissions", default: {}
@@ -1050,7 +1054,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1081,7 +1085,7 @@ ActiveRecord::Schema.define(version: 20221021144945) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "versions", force: :cascade do |t|
+  create_table "versions", id: :serial, force: :cascade do |t|
     t.string "item_type", null: false
     t.bigint "item_id", null: false
     t.string "event", null: false
