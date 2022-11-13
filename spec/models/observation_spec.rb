@@ -72,7 +72,7 @@ RSpec.describe Observation, type: :model do
 
   describe 'Validations' do
     describe '#status_changes' do
-      let(:country) { FactoryBot.create(:country) }
+      let(:country) { create(:country) }
       let(:status) { 'Created' }
       let(:observation) {
         build :observation,

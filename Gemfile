@@ -16,7 +16,7 @@ gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
 gem 'activeadmin', '~> 1.3.0'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'coingecko/activeadmin-globalize', branch: 'develop'
-gem 'activeadmin_addons', '1.5'
+gem 'activeadmin_addons'
 
 gem 'sass-rails'
 gem 'sassc-rails'
