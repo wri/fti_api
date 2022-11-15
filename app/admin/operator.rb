@@ -42,8 +42,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
     link_to 'Edit Producer', edit_admin_producer_path(operator)
   end
 
-  action_item :delete, only: [:show] do
-    link_to 'Delete Producer', admin_producer_path(operator), method: :delete, data: { confirm: OperatorDecorator.new(operator).delete_confirmation_text }
+  action_item :delete, only: [:show], if: -> { resource.can_hard_delete? } do
+    link_to 'Delete Producer', admin_producer_path(operator), method: :delete, data: { confirm: 'Are you sure you want to hard delete the producer?' }
   end
 
   action_item :new, only: [:index] do
@@ -103,7 +103,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
     actions defaults: false do |operator|
       item "View", admin_producer_path(operator)
       item "Edit", edit_admin_producer_path(operator)
-      item 'Delete', admin_producer_path(operator), method: :delete, data: { confirm: OperatorDecorator.new(operator).delete_confirmation_text }
+      if operator.can_hard_delete?
+        item 'Delete', admin_producer_path(operator), method: :delete, data: { confirm: 'Are you sure you want to hard delete the producer?' }
+      end
     end
   end
 

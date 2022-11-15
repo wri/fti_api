@@ -76,7 +76,6 @@ class Operator < ApplicationRecord
   after_update :clean_document_cache, if: :approved_changed?
   after_update :create_documents, if: -> { fa_id_changed? && fa_id_was.blank? }
   after_update :refresh_ranking, if: -> { fa_id_changed? || is_active_changed? }
-  before_destroy :really_destroy_documents
 
   validates :name, presence: true
   validates :website, url: true, if: lambda { |x| x.website.present? }
@@ -139,6 +138,13 @@ class Operator < ApplicationRecord
     super + '-' + Globalize.locale.to_s
   end
 
+  def can_hard_delete?
+    all_fmus.with_deleted.none? &&
+      all_observations.with_deleted.none? &&
+      users.none? &&
+      operator_documents.with_deleted.none?
+  end
+
   private
 
   def recalculate_scores
@@ -181,10 +187,5 @@ class Operator < ApplicationRecord
     if operator_document_fmus.none?
       fmu_operators.each(&:update_documents_list)
     end
-  end
-
-  def really_destroy_documents
-    mark_for_destruction # Hack to work with the hard delete of operator documents
-    ActiveRecord::Base.connection.execute("DELETE FROM operator_documents WHERE operator_id = #{id}")
   end
 end

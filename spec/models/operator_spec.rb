@@ -113,16 +113,6 @@ RSpec.describe Operator, type: :model do
         end
       end
     end
-
-    describe '#really_destroy_documents' do
-      it 'destroy operator_documents associated with the operator' do
-        another_operator = create(:operator)
-        operator_document = create(:operator_document_country, operator: another_operator)
-        another_operator.send(:really_destroy_documents)
-
-        expect(OperatorDocument.where(id: operator_document.id).first).to be_nil
-      end
-    end
   end
 
   describe 'Instance methods' do
