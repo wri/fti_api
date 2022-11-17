@@ -105,15 +105,6 @@ module V1
             expect(status).to eq(422)
             expect(parsed_body[:errors].first[:detail]).to eq("current-password - can't be blank")
           end
-
-          it 'does not require current password when changing password in observation tool' do
-            patch("/users/#{operator_user.id}?app=observations-tool",
-                  params: jsonapi_params('users', operator_user.id, { password: 'new_password' }),
-                  headers: operator_user_headers)
-
-            expect(status).to eq(200)
-            expect(operator_user.reload.valid_password?('new_password')).to eq(true)
-          end
         end
       end
     end
