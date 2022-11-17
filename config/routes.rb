@@ -29,11 +29,11 @@ Rails.application.routes.draw do
     scope '(:locale)', locale: /en|fr/ do
       # Resources
       jsonapi_resources :about_page_entries, only: [:index, :show]
-      jsonapi_resources :categories
-      jsonapi_resources :countries
+      jsonapi_resources :categories, only: [:index, :show]
+      jsonapi_resources :countries, only: [:index, :show]
       jsonapi_resources :country_links, only: [:index, :show]
       jsonapi_resources :country_vpas, only: [:index, :show]
-      jsonapi_resources :donors
+      jsonapi_resources :donors, only: [:index, :show]
       jsonapi_resources :faqs, only: [:index, :show]
       jsonapi_resources :governments
       jsonapi_resources :gov_documents
@@ -46,22 +46,22 @@ Rails.application.routes.draw do
       jsonapi_resources :observations
       jsonapi_resources :observation_documents
       jsonapi_resources :observation_reports
-      jsonapi_resources :observers
+      jsonapi_resources :observers, only: [:index, :show]
       jsonapi_resources :operators
       jsonapi_resources :operator_documents, except: [:create, :update]
       jsonapi_resources :operator_document_annexes
       jsonapi_resources :operator_document_countries, except: [:create]
       jsonapi_resources :operator_document_fmus, except: [:create]
       jsonapi_resources :operator_document_histories
-      jsonapi_resources :partners
+      jsonapi_resources :partners, only: [:index, :show]
       jsonapi_resources :required_gov_documents
       jsonapi_resources :required_operator_documents
       jsonapi_resources :required_operator_document_groups
       jsonapi_resources :sawmills
       jsonapi_resources :score_operator_documents, only: [:index]
       jsonapi_resources :severities, only: [:index, :show]
-      jsonapi_resources :species
-      jsonapi_resources :subcategories
+      jsonapi_resources :species, only: [:index, :show]
+      jsonapi_resources :subcategories, only: [:index, :show]
       jsonapi_resources :tools, only: [:index, :show]
       jsonapi_resources :tutorials, only: [:index, :show]
       jsonapi_resources :users
