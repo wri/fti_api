@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class SubcategoryResource < JSONAPI::Resource
+  class SubcategoryResource < BaseResource
     include CacheableByLocale
     caching
 
@@ -19,10 +19,6 @@ module V1
 
     def self.sortable_fields(context)
       super + [:'category.name']
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

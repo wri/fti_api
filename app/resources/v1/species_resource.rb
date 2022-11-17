@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class SpeciesResource < JSONAPI::Resource
+  class SpeciesResource < BaseResource
     include CacheableByLocale
     caching
 
@@ -10,9 +10,5 @@ module V1
                :cites_status, :cites_id, :iucn_status
 
     has_many :countries
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

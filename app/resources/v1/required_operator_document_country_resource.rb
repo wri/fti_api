@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class RequiredOperatorDocumentCountryResource < JSONAPI::Resource
+  class RequiredOperatorDocumentCountryResource < BaseResource
     include CacheableByLocale
     caching
     attributes :name, :valid_period, :explanation, :forest_types, :contract_signature
@@ -11,9 +11,5 @@ module V1
     has_many :operator_document_countries
 
     filters :name, :type
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

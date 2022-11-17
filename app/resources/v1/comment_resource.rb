@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
 module V1
-  class CommentResource < JSONAPI::Resource
+  class CommentResource < BaseResource
     caching
 
     attributes :body
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

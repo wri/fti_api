@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class NotificationResource < JSONAPI::Resource
+  class NotificationResource < BaseResource
     include CacheableByCurrentUser
     caching
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class CountryResource < JSONAPI::Resource
+  class CountryResource < BaseResource
     include CacheableByLocale
     caching
 
@@ -23,9 +23,5 @@ module V1
                records
              end
            }
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ObservationResource < JSONAPI::Resource
+  class ObservationResource < BaseResource
     include CacheableByLocale
     #caching
 
@@ -86,10 +86,6 @@ module V1
 
     def self.apply_includes(records, directives)
       super.includes(:observation_report, :observation_documents, :translations)
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
 
     # An observation is complete if it has evidence

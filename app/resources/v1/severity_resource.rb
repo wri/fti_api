@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class SeverityResource < JSONAPI::Resource
+  class SeverityResource < BaseResource
     include CacheableByLocale
     caching
     attributes :level, :details
@@ -18,9 +18,5 @@ module V1
     filter :subcategory_type, apply: ->(records, value, _options) {
       records.joins(:subcategory).where('subcategories.subcategory_type = ?', value[0].to_i)
     }
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

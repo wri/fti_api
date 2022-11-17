@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class FmuResource < JSONAPI::Resource
+  class FmuResource < BaseResource
     include CacheableByLocale
     caching
     paginator :none
@@ -18,10 +18,6 @@ module V1
 
     def forest_type
       Fmu::FOREST_TYPES[@model.forest_type.to_sym][:geojson_label] if @model.forest_type
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
 
     filter :certification, apply: ->(records, value, _options) {

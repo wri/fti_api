@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ObserverResource < JSONAPI::Resource
+  class ObserverResource < BaseResource
     include CacheableByLocale
     #caching
 
@@ -19,10 +19,6 @@ module V1
 
     def inactivate
       @model.is_active = false
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
 
     def fetchable_fields

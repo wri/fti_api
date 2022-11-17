@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class OperatorDocumentHistoryResource < JSONAPI::Resource
+  class OperatorDocumentHistoryResource < BaseResource
     include CacheableByLocale
     include CacheableByCurrentUser
     include OperatorDocumentable

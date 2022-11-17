@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ScoreOperatorDocumentResource < JSONAPI::Resource
+  class ScoreOperatorDocumentResource < BaseResource
     include CacheableByLocale
     include CacheableByCurrentUser
     caching
@@ -23,10 +23,6 @@ module V1
 
     def summary
       can_see_documents? ? @model.summary_private : @model.summary_public
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
 
     private

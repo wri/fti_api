@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class SawmillResource < JSONAPI::Resource
+  class SawmillResource < BaseResource
     include CacheableByLocale
     caching
     attributes :name, :lat, :lng, :is_active, :geojson
@@ -38,10 +38,6 @@ module V1
 
     def self.creatable_fields(context)
       super - [:geojson]
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

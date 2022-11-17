@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class OperatorResource < JSONAPI::Resource
+  class OperatorResource < BaseResource
     include CacheableByLocale
 
     caching
@@ -130,10 +130,6 @@ module V1
       else
         Operator.active
       end
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class RequiredGovDocumentGroupResource < JSONAPI::Resource
+  class RequiredGovDocumentGroupResource < BaseResource
     include CacheableByLocale
     caching
     attributes :name, :position
@@ -9,10 +9,6 @@ module V1
     has_many :required_gov_documents
 
     filter :name
-
-    def custom_links(_)
-      { self: nil }
-    end
 
     def self.default_sort
       [{ field: 'position', direction: :asc }]

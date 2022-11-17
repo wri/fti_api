@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ObservationDocumentResource < JSONAPI::Resource
+  class ObservationDocumentResource < BaseResource
     caching
 
     attributes :name, :attachment, :created_at, :updated_at
@@ -10,9 +10,5 @@ module V1
     has_one :user
 
     filters :observation_id, :name, :user_id
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end
