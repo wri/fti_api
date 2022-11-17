@@ -9,7 +9,6 @@ module V1
 
     has_one :category
     has_many :severities
-    has_many :country_subcategories
     has_many :observations
 
     filters :id, :name, :subcategory_type, :category_id

@@ -16,14 +16,14 @@ module V1
     has_many :comments
     has_many :observation_documents
     has_many :observers
-    has_many :relevant_operators
+    has_many :relevant_operators, class_name: 'Operator'
     has_many :governments
 
     has_one :country
     has_one :subcategory
     has_one :severity
     has_one :user
-    has_one :modified_user
+    has_one :modified_user, class_name: 'User'
 
     has_one :operator
     has_one :law

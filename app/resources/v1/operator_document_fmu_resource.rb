@@ -3,7 +3,6 @@
 module V1
   class OperatorDocumentFmuResource < OperatorDocumentResource
     has_one :required_operator_document_fmu
-    has_many :documents
 
     def type
       @model.type
