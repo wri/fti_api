@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ToolResource < JSONAPI::Resource
+  class ToolResource < BaseResource
     include CacheableByLocale
     immutable
     caching
@@ -10,10 +10,6 @@ module V1
 
     def self.default_sort
       [{ field: :position, direction: :asc }]
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

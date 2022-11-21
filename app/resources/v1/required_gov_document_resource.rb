@@ -17,7 +17,7 @@
 #
 
 module V1
-  class RequiredGovDocumentResource < JSONAPI::Resource
+  class RequiredGovDocumentResource < BaseResource
     include CacheableByLocale
     caching
     immutable
@@ -28,11 +28,6 @@ module V1
     has_one :required_gov_document_group
     has_many :gov_documents
 
-
     filters :name, :document_type
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

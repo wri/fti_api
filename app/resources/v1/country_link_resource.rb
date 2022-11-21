@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class CountryLinkResource < JSONAPI::Resource
+  class CountryLinkResource < BaseResource
     include CacheableByLocale
     immutable
     caching
@@ -18,10 +18,6 @@ module V1
 
     def self.records(options = {})
       CountryLink.where(active: true)
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ObservationReportResource < JSONAPI::Resource
+  class ObservationReportResource < BaseResource
     caching
 
     attributes :title, :publication_date, :created_at, :updated_at, :attachment
@@ -11,10 +11,6 @@ module V1
     has_many :observations
 
     after_create :add_observers
-
-    def custom_links(_)
-      { self: nil }
-    end
 
     filter :observer_id, apply: ->(records, value, _options) {
       records.where(id: ObservationReportObserver.where(observer_id: value[0].to_i).pluck(:observation_report_id))

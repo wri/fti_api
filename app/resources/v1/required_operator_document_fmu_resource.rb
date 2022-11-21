@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class RequiredOperatorDocumentFmuResource < JSONAPI::Resource
+  class RequiredOperatorDocumentFmuResource < BaseResource
     include CacheableByLocale
     caching
     attributes :forest_types, :name, :valid_period, :explanation, :forest_types
@@ -18,10 +18,6 @@ module V1
       @model.forest_types.map do |f|
         Fmu::FOREST_TYPES[f.to_sym][:geojson_label]
       end
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

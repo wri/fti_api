@@ -28,12 +28,16 @@ Rails.application.routes.draw do
 
     scope '(:locale)', locale: /en|fr/ do
       # Resources
+      # keep empty blocks to not generate relationships routes
+      # https://jsonapi-resources.com/v0.9/guide/routing.html#Nested-Routes
+      # Big plus of generating relationships routes is that it validates configured
+      # relationships, but it's better to keep API smaller
       jsonapi_resources :about_page_entries, only: [:index, :show] do; end
-      jsonapi_resources :categories do; end
-      jsonapi_resources :countries do; end
+      jsonapi_resources :categories, only: [:index, :show] do; end
+      jsonapi_resources :countries, only: [:index, :show] do; end
       jsonapi_resources :country_links, only: [:index, :show] do; end
       jsonapi_resources :country_vpas, only: [:index, :show] do; end
-      jsonapi_resources :donors do; end
+      jsonapi_resources :donors, only: [:index, :show] do; end
       jsonapi_resources :faqs, only: [:index, :show] do; end
       jsonapi_resources :governments do; end
       jsonapi_resources :gov_documents do; end
@@ -46,22 +50,22 @@ Rails.application.routes.draw do
       jsonapi_resources :observations do; end
       jsonapi_resources :observation_documents do; end
       jsonapi_resources :observation_reports do; end
-      jsonapi_resources :observers do; end
+      jsonapi_resources :observers, only: [:index, :show] do; end
       jsonapi_resources :operators do; end
       jsonapi_resources :operator_documents, except: [:create, :update] do; end
       jsonapi_resources :operator_document_annexes do; end
       jsonapi_resources :operator_document_countries, except: [:create] do; end
       jsonapi_resources :operator_document_fmus, except: [:create] do; end
       jsonapi_resources :operator_document_histories do; end
-      jsonapi_resources :partners do; end
+      jsonapi_resources :partners, only: [:index, :show] do; end
       jsonapi_resources :required_gov_documents do; end
       jsonapi_resources :required_operator_documents do; end
       jsonapi_resources :required_operator_document_groups do; end
       jsonapi_resources :sawmills do; end
       jsonapi_resources :score_operator_documents, only: [:index] do; end
       jsonapi_resources :severities, only: [:index, :show] do; end
-      jsonapi_resources :species do; end
-      jsonapi_resources :subcategories do; end
+      jsonapi_resources :species, only: [:index, :show] do; end
+      jsonapi_resources :subcategories, only: [:index, :show] do; end
       jsonapi_resources :tools, only: [:index, :show] do; end
       jsonapi_resources :tutorials, only: [:index, :show] do; end
       jsonapi_resources :users do; end

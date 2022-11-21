@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class RequiredOperatorDocumentResource < JSONAPI::Resource
+  class RequiredOperatorDocumentResource < BaseResource
     include CacheableByLocale
     caching
     attributes :name, :valid_period, :explanation, :forest_types, :contract_signature
@@ -16,10 +16,6 @@ module V1
     has_many :operator_document_fmu_histories
 
     filters :name, :type
-
-    def custom_links(_)
-      { self: nil }
-    end
 
     def self.records(options={})
       RequiredOperatorDocument.unscoped

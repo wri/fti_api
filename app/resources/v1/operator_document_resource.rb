@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class OperatorDocumentResource < JSONAPI::Resource
+  class OperatorDocumentResource < BaseResource
     include CacheableByLocale
     include CacheableByCurrentUser
     include OperatorDocumentable
@@ -43,10 +43,6 @@ module V1
 
     def self.records(options = {})
       OperatorDocument.from_active_operators
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
 
     def self.apply_filter(records, filter, value, options)

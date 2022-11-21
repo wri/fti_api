@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class LawResource < JSONAPI::Resource
+  class LawResource < BaseResource
     caching
     attributes :written_infraction, :infraction, :sanctions, :min_fine, :max_fine,
                :penal_servitude, :other_penalties, :apv, :complete, :currency
@@ -56,10 +56,6 @@ or apv is null or currency is null')
           @model.penal_servitude.present? &&
           @model.apv.present? &&
           @model.currency.present?
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
   end
 end

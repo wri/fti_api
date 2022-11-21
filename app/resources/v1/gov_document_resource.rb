@@ -23,7 +23,7 @@
 #
 
 module V1
-  class GovDocumentResource < JSONAPI::Resource
+  class GovDocumentResource < BaseResource
     include CacheableByLocale
     include CacheableByCurrentUser
     caching
@@ -68,10 +68,6 @@ module V1
       return @model.status if can_see_document?
 
       hidden_document_status
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
 
     def can_see_document?

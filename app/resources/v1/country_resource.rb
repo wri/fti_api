@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class CountryResource < JSONAPI::Resource
+  class CountryResource < BaseResource
     include CacheableByLocale
     caching
 
@@ -13,7 +13,6 @@ module V1
     has_many :required_operator_documents
     has_many :required_gov_documents
     has_many :governments
-    has_many :monitors
 
     filter :iso
     filter :is_active, default: 'true',
@@ -24,9 +23,5 @@ module V1
                records
              end
            }
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

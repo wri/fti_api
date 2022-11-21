@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class OperatorDocumentAnnexResource < JSONAPI::Resource
+  class OperatorDocumentAnnexResource < BaseResource
     include CacheableByLocale
     include CacheableByCurrentUser
     caching
@@ -72,10 +72,6 @@ module V1
 
     def set_status
       @model.status = OperatorDocumentAnnex.statuses[:doc_pending]
-    end
-
-    def custom_links(_)
-      { self: nil }
     end
 
     private

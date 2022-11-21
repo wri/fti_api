@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class UserResource < JSONAPI::Resource
+  class UserResource < BaseResource
     caching
     attributes :name, :email, :nickname, :institution,
                :is_active, :deactivated_at, :web_url, :locale,
@@ -18,9 +18,5 @@ module V1
     end
 
     filters :is_active, :email, :name, :nickname, :institution
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end

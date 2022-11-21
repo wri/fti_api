@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class GovernmentResource < JSONAPI::Resource
+  class GovernmentResource < BaseResource
     include CacheableByLocale
     caching
 
@@ -33,9 +33,5 @@ module V1
           .pluck('governments.id')
       )
     }
-
-    def custom_links(_)
-      { self: nil }
-    end
   end
 end
