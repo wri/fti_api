@@ -30,9 +30,9 @@ ActiveAdmin.register ObservationReport do
   member_action :really_destroy, method: :delete do
     if resource.deleted?
       resource.really_destroy!
-      redirect_to :back, notice: 'Report removed!'
+      redirect_back fallback_location: admin_observation_report_path, notice: 'Report removed!'
     else
-      redirect_to :back, notice: 'Report must be moved to recycle bin first!'
+      redirect_back fallback_location: admin_observation_report_path, notice: 'Report must be moved to recycle bin first!'
     end
   end
 
