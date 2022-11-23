@@ -119,6 +119,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
          as: :select, label: 'Name',
          collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name, :id) }
   filter :concession, as: :select
+  filter :fa_id_present, as: :boolean, label: 'With FA UUID'
   filter :fmus_id_null, as: :boolean, label: 'Without active FMUs'
 
   sidebar 'Fmus', only: :show do
