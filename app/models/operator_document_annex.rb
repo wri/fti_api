@@ -25,19 +25,17 @@ class OperatorDocumentAnnex < ApplicationRecord
   mount_base64_uploader :attachment, OperatorDocumentAnnexUploader
 
   belongs_to :user
-  has_many :annex_documents
-  has_one :annex_document, -> { where(documentable_type: 'OperatorDocument') },
-          class_name: 'AnnexDocument'
+  has_many :annex_documents, inverse_of: :operator_document_annex
+  has_one :annex_document, -> { where(documentable_type: 'OperatorDocument') }, inverse_of: :operator_document_annex
   has_one :operator_document, through: :annex_document, required: false, source: :documentable, source_type: 'OperatorDocument'
   has_many :annex_documents_history, -> { where(documentable_type: 'OperatorDocumentHistory') },
-           class_name: 'AnnexDocument'
+           class_name: 'AnnexDocument', inverse_of: :operator_document_annex
 
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
 
-  validates_presence_of :start_date
-  validates_presence_of :status
+  validates_presence_of :name, :start_date, :status
 
   enum status: { doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
   enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
@@ -56,10 +54,6 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   def operator_document_name
     operator_document&.required_operator_document&.name
-  end
-
-  def documentables
-    annex_documents.map { |x| x.documentable }
   end
 
   def expire_document_annex
