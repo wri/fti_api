@@ -8,7 +8,7 @@
 #  name        :string
 #  lat         :float
 #  lng         :float
-#  is_active   :boolean          default("true"), not null
+#  is_active   :boolean          default(TRUE), not null
 #  operator_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

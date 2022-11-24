@@ -8,6 +8,9 @@
 #  position   :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  code       :string
+#  title      :string
+#  body       :text
 #
 class AboutPageEntry < ApplicationRecord
   acts_as_list

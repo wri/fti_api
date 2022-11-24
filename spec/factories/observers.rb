@@ -6,7 +6,7 @@
 #  observer_type        :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  is_active            :boolean          default("true")
+#  is_active            :boolean          default(TRUE)
 #  logo                 :string
 #  address              :string
 #  information_name     :string
@@ -16,7 +16,7 @@
 #  data_email           :string
 #  data_phone           :string
 #  organization_type    :string
-#  public_info          :boolean          default("false")
+#  public_info          :boolean          default(FALSE)
 #  responsible_user_id  :integer
 #  responsible_admin_id :integer
 #  name                 :string

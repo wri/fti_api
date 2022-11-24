@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: gov_documents
+#
+#  id                       :integer          not null, primary key
+#  status                   :integer          not null
+#  reason                   :text
+#  start_date               :date
+#  expire_date              :date
+#  current                  :boolean          not null
+#  uploaded_by              :integer
+#  link                     :string
+#  value                    :string
+#  units                    :string
+#  deleted_at               :datetime
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  required_gov_document_id :integer
+#  country_id               :integer
+#  user_id                  :integer
+#
 require 'rails_helper'
 
 RSpec.describe GovDocument, type: :model do

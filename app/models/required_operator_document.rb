@@ -13,9 +13,9 @@
 #  updated_at                          :datetime         not null
 #  valid_period                        :integer
 #  deleted_at                          :datetime
-#  forest_types                        :integer          default("{}"), is an Array
-#  contract_signature                  :boolean          default("false"), not null
-#  required_operator_document_id       :integer          not null
+#  forest_types                        :integer          default([]), is an Array
+#  contract_signature                  :boolean          default(FALSE), not null
+#  position                            :integer
 #  explanation                         :text
 #  deleted_at                          :datetime
 #
@@ -24,6 +24,7 @@ class RequiredOperatorDocument < ApplicationRecord
   has_paper_trail
   include ArrayForestTypeable
   acts_as_paranoid
+  acts_as_list scope: [:country_id, :required_operator_document_group_id, deleted_at: nil]
 
   attr_accessor :disable_document_creation
 
@@ -42,6 +43,7 @@ class RequiredOperatorDocument < ApplicationRecord
   has_many :operator_document_fmu_histories
 
   validates :valid_period, numericality: { greater_than: 0 }
+
 
   validate :fixed_fields_unchanged
 

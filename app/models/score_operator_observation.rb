@@ -6,7 +6,7 @@
 #
 #  id            :integer          not null, primary key
 #  date          :date             not null
-#  current       :boolean          default("true"), not null
+#  current       :boolean          default(TRUE), not null
 #  score         :float
 #  obs_per_visit :float
 #  operator_id   :integer

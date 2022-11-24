@@ -4,7 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  date            :date             not null
-#  current         :boolean          default("true"), not null
+#  current         :boolean          default(TRUE), not null
 #  all             :float
 #  country         :float
 #  fmu             :float
