@@ -6,14 +6,18 @@ RSpec.shared_examples 'jsonapi-resources__show' do |options|
       describe "For user with #{role} role" do
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
-        it "Get list" do
-          get "/#{@route_key}", headers: headers
-          expect(status).to eq(200)
+        if options.fetch(:index, true)
+          it "Get list" do
+            get "/#{@route_key}", headers: headers
+            expect(status).to eq(200)
+          end
         end
 
-        it "Get specific" do
-          get "/#{@route_key}/#{resource.id}", headers: headers
-          expect(status).to eq(200)
+        if options.fetch(:show, true)
+          it "Get specific" do
+            get "/#{@route_key}/#{resource.id}", headers: headers
+            expect(status).to eq(200)
+          end
         end
       end
     end
