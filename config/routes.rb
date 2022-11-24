@@ -54,8 +54,6 @@ Rails.application.routes.draw do
       jsonapi_resources :operators do; end
       jsonapi_resources :operator_documents, except: [:create, :update] do; end
       jsonapi_resources :operator_document_annexes do; end
-      jsonapi_resources :operator_document_countries, except: [:create] do; end
-      jsonapi_resources :operator_document_fmus, except: [:create] do; end
       jsonapi_resources :operator_document_histories do; end
       jsonapi_resources :partners, only: [:index, :show] do; end
       jsonapi_resources :required_gov_documents do; end
