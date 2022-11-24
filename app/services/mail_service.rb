@@ -197,6 +197,58 @@ TXT
     self
   end
 
+  # An email that contains the a quarterly report of an operator
+  # It lists:
+  # 1. Current transparency score
+  # 2. Change of score in the last quarter
+  # 3. List of documents expiring in the next quarter
+  # It's sent every quarter to all users of an operator
+  #
+  # TODO: Currently we don't have a way to know the language of the operator, so we send it in both French and English
+  # In the future this should be refactored:
+  # 1. To send it in the language of the user and use I18n
+  # 2. To send it using the html template
+  def quarterly_newsletter(operator)
+    current_score = operator.score_operator_document
+    last_score = operator.score_operator_documents.at_date(Date.today - 3.months).order(:date).last
+    expiring_docs = operator.operator_documents.to_expire(Date.today + 3.months)
+
+    subject = "Your quarterly report. / Votre rapport trimestriel."
+
+    current_score_percentage = NumberHelper.float_to_percentage(current_score.all)
+
+    text_en = ["Your current score is #{current_score_percentage}."]
+    text_fr = ["Votre score actuel est de #{current_score_percentage}."]
+
+    if last_score.present?
+      last_score_percentage = NumberHelper.float_to_percentage(last_score.all)
+
+      score_change = NumberHelper.float_to_percentage(current_score.all - last_score.all)
+      text_en << "Your score on #{last_score.date} was #{last_score_percentage}. This means a variation of #{score_change}."
+      text_fr << "Votre dernier score en #{last_score.date} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}."
+    end
+
+    expiring_docs.each do |document|
+      text_en << "Document #{document.required_operator_document.name} expires on #{document.expire_date}."
+      text_fr << "Le document #{document.required_operator_document.name} expire en #{document.expire_date}."
+    end
+
+    text_en << ['', 'Best,', 'OTP Team', '']
+    text_fr << ['', 'Cordialement,', "L'équipe OTP", '']
+
+    body = text_en.join("\n")
+    body << "\n----------------------------------------------------\n"
+    body << text_fr.join("\n")
+
+    @from = ENV['CONTACT_EMAIL']
+    @to = operator.users.pluck(:email).join(', ')
+    @body = body
+    @subject = subject
+    @content_type = "text/html"
+
+    self
+  end
+
   private
 
   def document_admin_url(document)
