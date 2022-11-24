@@ -32,7 +32,7 @@ ActiveAdmin.register OperatorDocumentHistory do
       o.operator_document&.required_operator_document&.name
     end
     column :country do |o|
-      o.required_operator_document.country.name
+      o.required_operator_document.country&.name
     end
     column :Type do |o|
       if o.required_operator_document.present?
@@ -90,7 +90,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :operator_document_updated_at
     column :country do |od|
-      od.required_operator_document.country
+      od.required_operator_document&.country
     end
     column 'Required Document', :required_operator_document, sortable: 'required_operator_document_id' do |od|
       if od.required_operator_document.present?

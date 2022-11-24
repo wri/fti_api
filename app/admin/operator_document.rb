@@ -248,10 +248,17 @@ ActiveAdmin.register OperatorDocument do
          collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :required_operator_document,
          collection: -> {
-           RequiredOperatorDocument
-             .joins(country: :translations)
-             .order('required_operator_documents.name')
-             .where(country_translations: { locale: I18n.locale }).all.map { |x| ["#{x.name} - #{x.country.name}", x.id] }
+           rod_table = RequiredOperatorDocument.arel_table
+           country_t_table = Country::Translation.arel_table
+           country_name = Arel::Nodes::NamedFunction.new('coalesce', [country_t_table[:name], Arel::Nodes::SqlLiteral.new("'Generic'")]).as('country_name')
+
+           query =
+             RequiredOperatorDocument
+               .select(rod_table[:name], country_name, rod_table[:id])
+               .left_joins(country: :translations)
+               .on("country_translations.country_id = countries.id and country_translations.locale = '#{I18n.locale}'")
+               .order('required_operator_documents.name')
+           RequiredOperatorDocument.find_by_sql(query.to_sql).map { ["#{_1[:name]} - #{_1[:country_name]}", _1[:id]] }
          }
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }

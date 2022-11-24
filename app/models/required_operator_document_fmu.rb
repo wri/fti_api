@@ -41,6 +41,8 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   end
 
   def fmus
+    return Fmu.where.not(country_id: Country.active) if country_id.blank?
+
     fmu_attributes = { country_id: self.country_id }
     fmu_attributes[:forest_type] = self.forest_types if self.forest_types.present?
     Fmu.where(fmu_attributes)

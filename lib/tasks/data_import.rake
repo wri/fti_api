@@ -55,6 +55,26 @@ namespace :import do
   end
 
 
+  desc 'Import Generic Operator Documents'
+  task generic_operator_documents: :environment do
+    filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'generic operator documents.csv'))
+    RequiredOperatorDocumentGroup.transaction do
+      CSV.foreach(filename, col_sep: ',', row_sep: :auto, headers: true, encoding: 'UTF-8').with_index do |row, i|
+        puts "Line #{i} - #{row}"
+
+        rodg = RequiredOperatorDocumentGroup.find_by!(name: row['Legal category'])
+        rod = row['Type'] == 'FMU' ? RequiredOperatorDocumentFmu : RequiredOperatorDocumentCountry
+
+        rod.create!(
+          required_operator_document_group: rodg,
+          valid_period: 365,
+          name: row['Generic document']
+        )
+      end
+    end
+  end
+
+
   desc 'Import Operator Documents Types'
   task operator_document_types: :environment do
     filename = File.expand_path(File.join(Rails.root, 'db', 'files', 'operator_document_types.csv'))
@@ -199,7 +219,7 @@ namespace :import do
                                         category_id: category.id).first_or_create!
 
         subcategory.save!
-        
+
         subcategory.update_attributes(name: data_row['governance_problem_fr'], locale: :fr)
         if subcategory.severities.empty?
           (0..3).each do |s|

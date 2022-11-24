@@ -28,8 +28,11 @@ class RequiredOperatorDocumentCountry < RequiredOperatorDocument
   after_create :create_operator_document_countries, unless: :disable_document_creation
 
   def create_operator_document_countries
-    Operator.where(country_id: self.country_id).find_each do |operator|
-      OperatorDocumentCountry.where(required_operator_document_id: self.id, operator_id: operator.id).first_or_create do |odc|
+    Operator.for_document_country(country_id).find_each do |operator|
+      OperatorDocumentCountry.where(
+        required_operator_document_id: self.id,
+        operator_id: operator.id
+      ).first_or_create do |odc|
         odc.update!(status: OperatorDocument.statuses[:doc_not_provided])
       end
     end

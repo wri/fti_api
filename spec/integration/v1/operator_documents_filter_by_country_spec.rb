@@ -6,7 +6,7 @@ module V1
     let!(:operator_documents) { create_list(:operator_document, 10)}
 
     let!(:country) { create(:country) }
-    let!(:operator) { create(:operator, country: country) }
+    let!(:operator) { create(:operator, country: country, fa_id: 'fa_id') }
     let!(:required_operator_document_group) { create(:required_operator_document_group) }
     let!(:required_operator_document_same_country) {
       create_list(
@@ -17,7 +17,7 @@ module V1
     }
 
     let!(:other_country) { create(:country) }
-    let!(:other_operator) { create(:operator, country: other_country) }
+    let!(:other_operator) { create(:operator, country: other_country, fa_id: 'fa_id') }
     let!(:other_required_operator_document_group) { create(:required_operator_document_group) }
     let!(:other_required_operator_document) {
       create(
