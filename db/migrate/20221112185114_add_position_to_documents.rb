@@ -17,10 +17,10 @@ class AddPositionToDocuments < ActiveRecord::Migration[5.1]
     end
 
     RequiredGovDocument.group(:country_id).pluck(:country_id).each do |country_id|
-      RequiredOperatorDocumentGroup.find_each do |rodg|
+      RequiredGovDocumentGroup.find_each do |rgdg|
         RequiredGovDocument
           .with_translations
-          .where(country_id: country_id, required_operator_document_group: rodg)
+          .where(country_id: country_id, required_gov_document_group: rgdg)
           .order(:name)
           .each.with_index do |rgd, index|
           rgd.update_column(:position, index + 1)
