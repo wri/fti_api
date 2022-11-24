@@ -67,15 +67,18 @@ namespace :scheduler do
   task send_quarterly_newsletters: :environment do
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
     Rails.logger.info "Going to send quarterly newsletters: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    failed = false
     time = Benchmark.ms do
       Operator.active.fa_operator.find_each do |operator|
         begin
           MailService.new.quarterly_newsletter(operator).deliver
         rescue StandardError => e
+          failed = true
           Sentry.capture_exception(e, extra: { 'operator_id' => operator.id })
         end
       end
     end
+    raise 'Error while sending quarterly newsletter' if failed
     Rails.logger.info "Sent quarterly newsletters to operators. It took #{time} ms."
     Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
   end
