@@ -5,6 +5,11 @@ module V1
     let(:user) { create(:user) }
     let(:observation) { create(:observation) }
 
+    # TODO: add attachment
+    let(:document_data) {
+      "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')))}"
+    }
+
     it_behaves_like "jsonapi-resources", ObservationDocument, {
       show: {},
       create: {
