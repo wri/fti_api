@@ -117,7 +117,7 @@ ActiveAdmin.register Observation do
     redirect_to collection_path, notice: 'Observations published without modifications'
   end
 
-  batch_action :move_to_publish_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
+  batch_action :move_to_published_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
     batch_action_collection.find(ids).each do |observation|
       observation.update(validation_status: 'Published (modified)')
     end
@@ -142,8 +142,8 @@ ActiveAdmin.register Observation do
     attributes_table_for resource do
       ul do
         resource.observation_documents.collect do |od|
-        li link_to(od.name, admin_evidence_path(od.id))
-      end
+          li link_to(od.name, admin_evidence_path(od.id))
+        end
       end
     end
   end
