@@ -119,7 +119,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
          as: :select, label: 'Name',
          collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name, :id) }
   filter :concession, as: :select
-
+  filter :fa_id_present, as: :boolean, label: 'With FA UUID'
+  filter :fmus_id_null, as: :boolean, label: 'Without active FMUs'
 
   sidebar 'Fmus', only: :show do
     attributes_table_for resource do
@@ -285,7 +286,13 @@ ActiveAdmin.register Operator, as: 'Producer' do
       scoped_collection.unscope(:joins).with_translations.where(id: params[:id]).first!
     end
     def scoped_collection
-      end_of_association_chain.with_translations(I18n.locale).includes(country: :translations)
+      end_of_association_chain
+        .with_translations(I18n.locale)
+        .includes(
+          :score_operator_document,
+          :score_operator_observation,
+          country: :translations,
+        )
     end
   end
 end
