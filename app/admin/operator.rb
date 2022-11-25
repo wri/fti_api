@@ -18,12 +18,12 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
-    redirect_to :back, notice: 'Producer activated'
+    redirect_back fallback_location: admin_producers_path, notice: 'Producer activated'
   end
 
   member_action :deactivate, method: :put do
     resource.update(is_active: false)
-    redirect_to :back, notice: 'Producer deactivated'
+    redirect_back fallback_location: admin_producers_path, notice: 'Producer deactivated'
   end
 
   config.clear_action_items!
