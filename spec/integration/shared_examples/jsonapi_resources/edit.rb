@@ -1,6 +1,6 @@
 RSpec.shared_examples 'jsonapi-resources__edit' do |options|
   context "Edit" do
-    let(:resource) { create(@singular.to_sym) }
+    let(:resource) { try_to_call(options[:resource]) || create(@singular.to_sym) }
     let(:route) { "/#{@route_key}/#{resource.id}" }
     let(:valid_params) { try_to_call(options[:valid_params]) }
     let(:invalid_params) { try_to_call(options[:invalid_params]) }
@@ -10,7 +10,7 @@ RSpec.shared_examples 'jsonapi-resources__edit' do |options|
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
         if options[:invalid_params].present?
-          it "Returns error object when cannot be updated by admin" do
+          it "Returns error object when cannot be updated by #{role}" do
             patch(route,
                   params: jsonapi_params(@collection, resource.id, invalid_params),
                   headers: headers)
@@ -20,7 +20,7 @@ RSpec.shared_examples 'jsonapi-resources__edit' do |options|
           end
         end
 
-        it "Returns success object when was successfully updated by admin" do
+        it "Returns success object when was successfully updated by #{role}" do
           patch(route,
                 params: jsonapi_params(@collection, resource.id, valid_params),
                 headers: headers)
@@ -38,7 +38,7 @@ RSpec.shared_examples 'jsonapi-resources__edit' do |options|
       describe "For user with #{role} role" do
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
-        it "Do not allows to update by not admin user" do
+        it "Do not allows to update by not #{role}" do
           patch(route,
                 params: jsonapi_params(@collection, resource.id, valid_params),
                 headers: headers)

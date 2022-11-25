@@ -10,7 +10,7 @@ RSpec.shared_examples 'jsonapi-resources__create' do |options|
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
         if options[:invalid_params].present?
-          it "Returns error object when cannot be created by admin" do
+          it "Returns error object when cannot be created by #{role}" do
             post(route,
                  params: jsonapi_params(@collection, nil, invalid_params),
                  headers: headers)
@@ -20,18 +20,18 @@ RSpec.shared_examples 'jsonapi-resources__create' do |options|
           end
         end
 
-        it "Returns success object when was successfully created by admin" do
+        it "Returns success object when was successfully created by #{role}" do
           post(route,
                params: jsonapi_params(@collection, nil, valid_params),
                headers: headers)
 
           expect(parsed_body[:errors]).to be_nil
           expect(parsed_data[:id]).not_to be_empty
+          expect(status).to eq(201)
           valid_params
             .except(:relationships)
             .except(*options[:excluded_params])
             .each { |name, value| expect(parsed_attributes[name]).to eq(value) }
-          expect(status).to eq(201)
         end
       end
     end
@@ -40,7 +40,7 @@ RSpec.shared_examples 'jsonapi-resources__create' do |options|
       describe "For user with #{role} role" do
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
-        it "Do not allows to create by not admin user" do
+        it "Do not allows to create by #{role}" do
           post(route,
                params: jsonapi_params(@collection, nil, valid_params),
                headers: headers)
