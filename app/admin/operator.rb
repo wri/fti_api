@@ -77,18 +77,19 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :id
     column :holding
     column :country, sortable: 'country_translations.name'
-    column 'FA UUID', :fa_id
     column :name, sortable: 'operator_translations.name'
-    column :email
-    column :concession, sortable: true
-    column 'Score', :score_absolute, sortable: 'score_absolute' do |operator|
-      "#{'%.2f' % operator.score_operator_observation&.score}" rescue nil
+    column :fmu do |operator|
+      fmus = []
+      operator.fmus.each do |fmu|
+        fmus << (link_to fmu.name, admin_fmu_path(fmu))
+      end
+      fmus.reduce(:+)
     end
     column 'Obs/Visit', :obs_per_visit, sortable: true do |operator|
       operator.score_operator_observation&.obs_per_visit
     end
     column '% Docs', :percentage_valid_documents_all, sortable: true do |operator|
-      operator.score_operator_document&.all
+      (operator.score_operator_document.all * 100).to_i rescue nil
     end
     column('Actions') do |operator|
       if operator.is_active

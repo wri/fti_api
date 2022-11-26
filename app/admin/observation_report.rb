@@ -19,7 +19,7 @@ ActiveAdmin.register ObservationReport do
   controller do
     def scoped_collection
       end_of_association_chain.includes([[observation_report_observers: [observer: :translations]],
-                                         [observations: :translations]])
+                                         [observations: :translations], [observations: [country: :translations]]])
     end
 
     def apply_filtering(chain)
@@ -39,6 +39,10 @@ ActiveAdmin.register ObservationReport do
   filter :title, as: :select
   filter :attachment, as: :select
   filter :user, as: :select, collection: -> { User.order(:name) }
+  filter :observations_country_id_eq,
+         label: 'Country',
+         as: :select,
+         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :observers, label: 'Observers', as: :select,
                      collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
@@ -87,6 +91,10 @@ ActiveAdmin.register ObservationReport do
     column :publication_date
     attachment_column :attachment
     column :user
+    column :country do |o|
+      country = o.observations.first&.country
+      link_to(country.name, admin_country_path(country.id)) if country
+    end
     column :observations do |o|
       links = []
       o.observations.each do |obs|

@@ -21,7 +21,7 @@ module V1
     private
 
     def user_params
-      params.require(:user).permit(:name, :nickname, :email, :password, :password_confirmation,
+      params.require(:user).permit(:name, :email, :password, :password_confirmation,
                                    :permissions_request, :country_id, :observer_id, :operator_id).tap do |user_params|
         user_params[:permissions_request] = params[:user][:permissions_request].downcase if params[:user][:permissions_request].present?
       end

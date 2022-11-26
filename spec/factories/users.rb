@@ -6,7 +6,6 @@
 #  email                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  nickname               :string
 #  name                   :string
 #  institution            :string
 #  web_url                :string
@@ -33,7 +32,6 @@
 FactoryBot.define do
   factory :user do
     sequence(:email)    { |n| "pepe#{n}@vizzuality.com" }
-    sequence(:nickname) { |n| "pepe#{n}"                }
 
     password { 'password' }
     password_confirmation { |u| u.password }
@@ -47,7 +45,6 @@ FactoryBot.define do
 
   factory :ngo, class: User do
     sequence(:email)    { |n| "ngo#{n}@vizzuality.com" }
-    sequence(:nickname) { |n| "ngo#{n}"                }
 
     password { 'password' }
     password_confirmation { |u| u.password }
@@ -62,7 +59,6 @@ FactoryBot.define do
 
   factory :operator_user, class: User do
     sequence(:email)    { |n| "operator#{n}@vizzuality.com" }
-    sequence(:nickname) { |n| "operator#{n}"                }
 
     password { 'password' }
     password_confirmation { |u| u.password }
@@ -77,7 +73,6 @@ FactoryBot.define do
 
   factory :admin, class: User do
     sequence(:email)    { |n| Faker::Internet.email }
-    sequence(:nickname) { |n| "admin#{n}" }
 
     password { 'password' }
     password_confirmation { |u| u.password }
@@ -95,7 +90,6 @@ FactoryBot.define do
 
   factory :webuser, class: User do
     sequence(:email)    { |n| "webuser#{n}@vizzuality.com" }
-    sequence(:nickname) { |n| "webuser#{n}"                }
 
     password { 'password' }
     password_confirmation { |u| u.password }

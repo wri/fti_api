@@ -12,7 +12,6 @@ module V1
         excluded_params: %i[password password-confirmation permissions-request],
         valid_params: {
           email: 'test@gmail.com',
-          nickname: 'sebanew',
           password: 'password',
           'password-confirmation': 'password',
           name: 'Test user new',
@@ -30,7 +29,6 @@ module V1
         excluded_params: %i[password password-confirmation permissions-request current-password],
         valid_params: {
           email: 'test@gmail.com',
-          nickname: 'sebanew',
           password: 'password',
           'password-confirmation': 'password',
           'current-password': 'password',
@@ -71,7 +69,7 @@ module V1
       describe "Can't update profile" do
         it 'Returns error when update user by owner' do
           patch("/users/#{user.id}",
-                params: jsonapi_params('users', user.id, { nickname: 'sebanew', name: 'Test user new' }),
+                params: jsonapi_params('users', user.id, { name: 'Test user new' }),
                 headers: user_headers)
 
           expect(parsed_body).to eq(default_status_errors(401))

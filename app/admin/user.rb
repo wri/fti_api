@@ -6,14 +6,18 @@ ActiveAdmin.register User do
 
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,
-                :institution, :name, :nickname, :web_url, :is_active,
+                :institution, :name, :web_url, :is_active,
                 :observer_id, :operator_id, :holding_id, :locale,
                 user_permission_attributes: [:user_role]
 
+  filter :operator
+  filter :observer
+  filter :user_permission_user_role_eq,
+         label: 'Role',
+         as: :select,
+         collection: -> { UserPermission.user_roles }
   filter :name, as: :select
-  filter :nickname, as: :select
   filter :email, as: :select
-  filter :current_sign_in_at
   filter :created_at
 
   controller do
@@ -40,7 +44,6 @@ ActiveAdmin.register User do
       user.user_permission&.user_role
     end
     column :name
-    column :nickname
     column :email
     column 'observer' do |user|
       user.observer&.name
@@ -51,8 +54,7 @@ ActiveAdmin.register User do
     column 'holding' do |user|
       user.holding&.name
     end
-    column :current_sign_in_at
-    column :sign_in_count
+    column :created_at
   end
 
   index do
@@ -71,15 +73,14 @@ ActiveAdmin.register User do
     column 'Role', :user_permission do |user|
       user.user_permission&.user_role
     end
-    column :locale
+    column :country
     column :name
-    column :nickname
     column :email
     column :observer
     column :operator
     column :holding
-    column :current_sign_in_at
-    column :sign_in_count
+    column 'Last sign-in on', :current_sign_in_at
+    column :created_at
 
     actions
   end
@@ -96,7 +97,6 @@ ActiveAdmin.register User do
       f.input :country
       f.input :locale, as: :select, collection: I18n.available_locales
       f.input :name
-      f.input :nickname
       f.input :email
       f.input :password
       f.input :password_confirmation

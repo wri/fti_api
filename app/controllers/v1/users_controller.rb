@@ -48,7 +48,6 @@ module V1
           :'password-confirmation',
           :'current-password',
           :name,
-          :nickname,
           :email,
           :locale,
         )

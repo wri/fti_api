@@ -8,7 +8,6 @@
 #  email                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  nickname               :string
 #  name                   :string
 #  institution            :string
 #  web_url                :string
@@ -60,15 +59,10 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :user_permission
 
-  validates :nickname, uniqueness: { case_sensitive: false, allow_blank: true }
   validates_uniqueness_of :email
   validates_format_of     :email, without: TEMP_EMAIL_REGEX, on: :update
   validates :name,        presence: true
   validates :locale, inclusion: { in: I18n.available_locales.map(&:to_s), allow_blank: true }
-  validates_format_of :nickname, with: /\A[a-z0-9_\.][-a-z0-9]{1,19}\Z/i,
-                                 multiline: true,
-                                 allow_blank: true
-  validates :nickname, exclusion: { in: PROTECTED_NICKNAMES }
   validates :password, confirmation: true,
                        length: { within: 8..20 },
                        on: :create
@@ -83,7 +77,6 @@ class User < ApplicationRecord
   include Sanitizable
 
   scope :recent,          -> { order('users.updated_at DESC') }
-  scope :by_nickname_asc, -> { order('users.nickname ASC')    }
   scope :inactive,        -> { where(is_active: false) }
 
   class << self
