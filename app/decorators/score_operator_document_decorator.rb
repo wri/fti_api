@@ -33,6 +33,8 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
   end
   # rubocop:enable Rails/OutputSafety
 
+  private
+
   def print_diff(prev, current)
     current.map do |key, value|
       color = nil
@@ -47,8 +49,14 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
                   elsif diff.positive?
                     "(+#{diff})"
                   end
+      doc_name = key.gsub('doc_','')
+      value_diff = "#{value} #{diff_text}"
 
-      "#{key.gsub('doc_','')}: <span style='color: #{color}'>#{value} #{diff_text}</span>"
+      if color
+        "#{doc_name}: <span style='color: #{color}'>#{value_diff}</span>"
+      else
+        "#{doc_name}: #{value_diff}"
+      end
     end.join('<br/>')
   end
 
