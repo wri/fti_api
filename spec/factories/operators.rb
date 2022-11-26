@@ -30,5 +30,21 @@ FactoryBot.define do
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
     operator_type { Operator::TYPES.sample }
     is_active { true }
+
+    trait :with_sawmills do
+      after(:create) do |op|
+        create_list(:sawmill, 2, operator: op)
+      end
+    end
+
+    trait :with_documents do
+      after(:create) do |op|
+        op.update!(fa_id: 'FA_UUID') unless op.fa_id.present?
+        # create one country document
+        create(:operator_document_country, operator: op)
+        create(:operator_document_fmu, operator: op, force_status: 'doc_valid')
+        create(:operator_document_fmu, operator: op, force_status: 'doc_invalid')
+      end
+    end
   end
 end

@@ -1,6 +1,6 @@
 RSpec.shared_examples 'jsonapi-resources__show' do |options|
   context "Show" do
-    let!(:resource) { create(@singular.to_sym) }
+    let!(:resource) { try_to_call(options[:resource]) || create(@singular.to_sym) }
 
     (options[:success_roles] || [:webuser]).each do |role|
       describe "For user with #{role} role" do
