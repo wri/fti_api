@@ -147,7 +147,7 @@ ActiveAdmin.setup do |config|
   end
 
   # Set default locale for active admin
-  #config.before_action :set_admin_locale
+  config.before_action :set_admin_locale
 
   # == Localize Date/Time Format
   #

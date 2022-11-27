@@ -136,6 +136,15 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
 
     div class: 'c-nav' do
       div class: 'list' do
+        ul do
+          li do
+            text_node content_tag 'a', 'Language'
+            ul do
+              li { link_to 'English', admin_dashboard_change_language_path(locale: :en), method: :post }
+              li { link_to 'French', admin_dashboard_change_language_path(locale: :fr), method: :post }
+            end
+          end
+        end
         ul class: 'user' do
           li { link_to @arbre_context.assigns[:current_user].email, admin_user_path(@arbre_context.assigns[:current_user].id) }
         end
