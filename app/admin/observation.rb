@@ -4,6 +4,20 @@ ActiveAdmin.register Observation do
   extend BackRedirectable
   extend Versionable
 
+  controller do
+    def scoped_collection
+      end_of_association_chain.with_translations(I18n.locale).includes(
+        [
+          [country: :translations],
+          [operator: :translations],
+          [severity: :translations],
+          [subcategory: [category: :translations]],
+          :observers
+        ]
+      )
+    end
+  end
+
   active_admin_paranoia
 
   menu false

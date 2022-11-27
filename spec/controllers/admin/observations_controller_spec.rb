@@ -78,8 +78,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
   describe 'batch actions' do
     describe 'move_to_qc_in_progress' do
-      let(:observation1) { create(:observation, validation_status: 'Ready for QC') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'Ready for QC') }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created') }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -98,8 +98,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe 'move_to_needs_revision' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress') }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created') }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -118,8 +118,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe 'move_to_ready_for_publication' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress') }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created') }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -138,8 +138,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe 'hide' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress', hidden: false) }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created', hidden: false) }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress', hidden: false) }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created', hidden: false) }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -158,8 +158,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe 'unhide' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress', hidden: true) }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created', hidden: true) }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress', hidden: true) }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created', hidden: true) }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
