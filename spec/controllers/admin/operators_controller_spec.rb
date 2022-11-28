@@ -8,12 +8,18 @@ RSpec.describe Admin::ProducersController, type: :controller do
 
   before { sign_in admin }
 
+  describe 'GET show' do
+    let!(:operator) { create(:operator, :with_documents, :with_sawmills) }
+
+    subject { get :show, params: { id: operator.id }}
+
+    it { is_expected.to be_successful }
+  end
+
   describe 'PUT activate' do
     let!(:operator) { create(:operator, is_active: false) }
 
-    subject { put :activate, params: {id: operator.id} }
-
-    before { subject }
+    before { put :activate, params: {id: operator.id} }
 
     it 'is successful' do
       expect(flash[:notice]).to match('Producer activated')
@@ -24,9 +30,7 @@ RSpec.describe Admin::ProducersController, type: :controller do
   describe 'PUT deactivate' do
     let!(:operator) { create(:operator, is_active: true) }
 
-    subject { put :deactivate, params: {id: operator.id} }
-
-    before { subject }
+    before { put :deactivate, params: {id: operator.id} }
 
     it 'is successful' do
       expect(flash[:notice]).to match('Producer deactivated')

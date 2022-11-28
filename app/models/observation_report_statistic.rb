@@ -60,10 +60,11 @@ class ObservationReportStatistic < ApplicationRecord
       observations_with_active_observers = Observation.joins(:observers).where(observers: { is_active: true }).pluck(:observation_id).uniq
       observations_with_inactive_observers = Observation.joins(:observers).where(observers: { is_active: false }).pluck(:observation_id).uniq
       exclude_observations = observations_with_inactive_observers - observations_with_active_observers
+      exclude_observations_sql = exclude_observations.any? ? "AND observations.id NOT IN (#{exclude_observations.join(', ')})" : ""
 
       reports = ObservationReport.bigger_date(day)
       reports = reports.joins(
-        "LEFT OUTER JOIN observations ON observations.observation_report_id = observation_reports.id AND observations.id NOT IN (#{exclude_observations.join(', ')})"
+        "LEFT OUTER JOIN observations ON observations.observation_report_id = observation_reports.id #{exclude_observations_sql}"
       )
       reports = reports.left_joins(:observers).where(observers: { is_active: [nil, true] })
 
