@@ -21,7 +21,9 @@ class ObservationReport < ApplicationRecord
 
   acts_as_paranoid
 
-  belongs_to :user, inverse_of: :observation_reports
+  # TODO: in DB user is nil in most records, is that a bug or not? Adding optional otherwise
+  # API creating report fails as it's not providing user. Thing to investigate
+  belongs_to :user, inverse_of: :observation_reports, optional: true
   has_many :observation_report_observers, dependent: :destroy
   has_many :observers, through: :observation_report_observers
   has_many :observations, dependent: :destroy
