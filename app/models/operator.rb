@@ -72,10 +72,11 @@ class Operator < ApplicationRecord
   before_validation { self.remove_logo! if self.delete_logo == '1' }
   after_create :create_operator_id
   after_create :create_documents
-  after_update :recalculate_scores, if: :approved_changed?
-  after_update :clean_document_cache, if: :approved_changed?
-  after_update :create_documents, if: -> { fa_id_changed? && fa_id_was.blank? }
-  after_update :refresh_ranking, if: -> { fa_id_changed? || is_active_changed? }
+
+  after_update :recalculate_scores, if: :saved_change_to_approved?
+  after_update :clean_document_cache, if: :saved_change_to_approved?
+  after_update :create_documents, if: -> { saved_change_to_fa_id? && fa_id_before_last_save.blank? }
+  after_update :refresh_ranking, if: -> { saved_change_to_fa_id? || saved_change_to_is_active? }
 
   validates :name, presence: true
   validates :website, url: true, if: lambda { |x| x.website.present? }
@@ -94,14 +95,6 @@ class Operator < ApplicationRecord
   default_scope { includes(:translations) }
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
-  # TODO Refactor this when merging the branches
-  scope :fmus_with_certification_fsc,     ->          { joins(:fmus).where(fmus: { certification_fsc: true }).distinct }
-  scope :fmus_with_certification_pefc,    ->          { joins(:fmus).where(fmus: { certification_pefc: true }).distinct }
-  scope :fmus_with_certification_olb,     ->          { joins(:fmus).where(fmus: { certification_olb: true }).distinct }
-  scope :fmus_with_certification_pafc,    ->          { joins(:fmus).where(fmus: { certification_pafc: true }).distinct }
-  scope :fmus_with_certification_fsc_cw,  ->          { joins(:fmus).where(fmus: { certification_fsc_cw: true }).distinct }
-  scope :fmus_with_certification_tlv,     ->          { joins(:fmus).where(fmus: { certification_tlv: true }).distinct }
-  scope :fmus_with_certification_ls,      ->          { joins(:fmus).where(fmus: { certification_ls: true }).distinct }
 
   # Returns the operators that should have documents for a particular country
   # When that country is null, it returns the list of operators that should have generic documents
@@ -115,7 +108,7 @@ class Operator < ApplicationRecord
 
   class Translation
     after_save do
-      if name_changed? && locale == :en
+      if saved_change_to_name? && locale == :en
         Operator.find_by(id: operator_id)&.fmus&.find_each { |fmu| fmu.save }
       end
     end

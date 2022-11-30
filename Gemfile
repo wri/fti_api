@@ -9,11 +9,13 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'bootsnap'
+
 # Active admin
 gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
-gem 'activeadmin'
-gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
+gem 'activeadmin', '~> 1.3.0'
+gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'coingecko/activeadmin-globalize', branch: 'develop'
 gem 'activeadmin_addons', '1.5'
 
 gem 'sass-rails'
@@ -38,7 +40,7 @@ gem 'paranoia', "~> 2.2"
 # Rails and DB
 gem 'activerecord-postgis-adapter'
 gem 'pg',    '~> 0.18'
-gem 'rails', '~> 5.1.7'
+gem 'rails', '~> 5.2.8'
 gem 'rgeo'
 gem 'rgeo-geojson'
 
@@ -63,7 +65,7 @@ gem 'sidekiq'
 gem 'activerecord-import'
 gem 'acts_as_list'
 gem 'countries', require: false # for update translations job, so require only there
-gem 'globalize', '5.1.0'
+gem 'globalize', '5.2.0'
 gem 'seed-fu'
 
 # Validation

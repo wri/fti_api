@@ -6,7 +6,7 @@ module Roleable
   included do
     has_one :user_permission, dependent: :destroy
 
-    after_create :set_permissions, if: '!self.user_permission'
+    after_create :set_permissions, unless: :user_permission
 
     scope :filter_admins,    -> { joins(:user_permission).where(user_permissions: { user_role: 'admin' })    }
     scope :filter_ngos,      -> { joins(:user_permission).where(user_permissions: { user_role: 'ngo' })      }

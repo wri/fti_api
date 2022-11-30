@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
-  it_should_behave_like 'activable', :user, FactoryBot.build(:user)
+  it_should_behave_like 'activable', :user, FactoryBot.create(:user)
 
   describe 'Nested attributes' do
     it { is_expected.to accept_nested_attributes_for(:user_permission) }

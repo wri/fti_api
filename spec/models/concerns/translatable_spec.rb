@@ -7,9 +7,12 @@ RSpec.shared_examples 'translatable' do |factory_key, fields|
         expect(model.translated_attribute_names).to include(field)
       end
 
-      context 'when translation does not exist' do
-        it 'fallback for empty translation' do
-          expect(model.send(field)).to match(model.send(field))
+      it 'creates fallback for all languages' do
+        (I18n.available_locales - [I18n.locale]).each do |locale|
+          field_in_default_locale = model.send(field)
+          I18n.with_locale(locale) do
+            expect(model.send(field)).to eq(field_in_default_locale)
+          end
         end
       end
 

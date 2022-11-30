@@ -114,7 +114,7 @@ module V1
     end
 
     it 'returns fmus' do
-      expect(parsed_body[:fmu_id]).to match_array(Fmu.with_translations.map { |f| f.slice(:id, :name).transform_keys(&:to_sym) })
+      expect(parsed_body[:fmu_id]).to match_array(Fmu.with_translations.map { |f| f.slice(:id, :name).symbolize_keys.to_h })
     end
 
     it 'returns required operator documents' do

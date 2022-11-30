@@ -59,5 +59,5 @@ RSpec.describe APIKey, type: :model do
     end
   end
 
-  it_should_behave_like 'activable', :api_key, FactoryBot.build(:api_key)
+  it_should_behave_like 'activable', :api_key, FactoryBot.create(:api_key)
 end

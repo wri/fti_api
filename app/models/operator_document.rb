@@ -53,9 +53,9 @@ class OperatorDocument < ApplicationRecord
   before_create :set_status
   before_create :delete_previous_pending_document
 
-  after_save :create_history, if: :changed?
-  after_save :recalculate_scores, if: :score_related_attribute_changed?
-  after_save :remove_notifications, if: :expire_date_changed?
+  after_save :create_history, if: :saved_changes?
+  after_save :recalculate_scores, if: :saved_change_to_score_related_attributes?
+  after_save :remove_notifications, if: :saved_change_to_expire_date?
 
   after_destroy :regenerate
   after_destroy :recalculate_scores
@@ -139,8 +139,8 @@ class OperatorDocument < ApplicationRecord
     ScoreOperatorDocument.recalculate!(operator)
   end
 
-  def score_related_attribute_changed?
-    status_changed? || (!operator.approved? && public_changed?)
+  def saved_change_to_score_related_attributes?
+    saved_change_to_status? || (!operator.approved? && saved_change_to_public?)
   end
 
   def regenerate

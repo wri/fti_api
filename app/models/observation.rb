@@ -141,13 +141,18 @@ class Observation < ApplicationRecord
   before_save    :set_active_status
   before_save    :check_is_physical_place
   before_save    :set_centroid
-  after_destroy  :update_operator_scores
-  after_save     :update_operator_scores,   if: 'publication_date_changed? || severity_id_changed? || is_active_changed?'
-  after_save     :update_reports_observers, if: 'observation_report_id_changed?'
-  after_save     :remove_documents
+
+  after_create   :update_operator_scores, if: :is_active?
+  after_update   :update_operator_scores,   if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? }
+  after_update   :update_reports_observers, if: :saved_change_to_observation_report_id?
+
+  after_save :create_history, if: :saved_changes?
+
+  after_save     :remove_documents, if: -> { evidence_type == 'Evidence presented in the report' }
   after_save     :update_fmu_geojson
+
+  after_destroy  :update_operator_scores
   after_destroy  :update_fmu_geojson
-  after_save     :create_history, if: :changed?
 
   after_save       :prepare_notifications
   after_commit     :notify
@@ -164,8 +169,8 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :by_category,       ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: { level: level }) }
   scope :by_government,     ->(government_id) { joins(:governments).where(governments: { id: government_id }) }
-  scope :pending,           -> { joins(:translations).where(validation_status: ['Created', 'QC in progress']) }
-  scope :created,           -> { joins(:translations).where(validation_status: ['Created', 'Ready for QC']) }
+  scope :pending,           -> { where(validation_status: ['Created', 'QC in progress']) }
+  scope :created,           -> { where(validation_status: ['Created', 'Ready for QC']) }
   scope :published,         -> { where(validation_status: PUBLISHED_STATES) }
   scope :hidden,            -> { where(hidden: true) }
   scope :visible,           -> { where(hidden: [false, nil]) }
@@ -302,10 +307,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     end
   end
 
-  # Soft removes all the evidence if the evidence type is "Observation in the report"
   def remove_documents
-    return if evidence_type != 'Evidence presented in the report'
-
     ObservationDocument.where(observation_id: id).destroy_all
   end
 
@@ -318,7 +320,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def prepare_notifications
-    @notify = true if validation_status_changed?
+    @notify = true if saved_change_to_validation_status?
   end
 
   def notify

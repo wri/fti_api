@@ -26,7 +26,7 @@
 require 'rails_helper'
 
 RSpec.describe Operator, type: :model do
-  subject(:operator) { FactoryBot.build(:operator) }
+  subject(:operator) { build(:operator) }
 
   before :all do
     @country = create(:country)
@@ -228,6 +228,7 @@ RSpec.describe Operator, type: :model do
         context 'all on the same day' do
           it 'update observations per visits and calculate the score' do
             ScoreOperatorObservation.recalculate! @operator
+            @operator.reload
 
             expect(@operator.score_operator_observation.obs_per_visit).to eql(4.0)
             expect(@operator.score_operator_observation.score).to eql((4.0 + 2 + 2 + 1) / 9.0)
@@ -260,6 +261,7 @@ RSpec.describe Operator, type: :model do
 
           it 'update observations per visits and calculate the score' do
             ScoreOperatorObservation.recalculate! @operator
+            @operator.reload
 
             visits = 3
 
