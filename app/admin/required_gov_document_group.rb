@@ -18,15 +18,16 @@ ActiveAdmin.register RequiredGovDocumentGroup do
     safe_join(sidebar, content_tag('br'))
   end
 
-
   csv do
     column :position
+    column :parent
     column :name
     column :description
   end
 
   index do
     translation_status
+    column :parent
     column :position, sortable: true
     column :name, sortable: 'required_gov_document_group_translations.name'
 
@@ -45,6 +46,8 @@ ActiveAdmin.register RequiredGovDocumentGroup do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Required Gov Document Group Details' do
       f.input :position
+      f.input :parent
+      #, collection: RequiredGovDocumentGroup.top_level
       f.translated_inputs switch_locale: false do |t|
         t.input :name
         t.input :description

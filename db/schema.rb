@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20221130214853) do
+ActiveRecord::Schema.define(version: 2022_12_06_154335) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
+  enable_extension "plpgsql"
+  enable_extension "postgis"
   enable_extension "postgis_tiger_geocoder"
   enable_extension "postgis_topology"
 
@@ -792,7 +792,9 @@ ActiveRecord::Schema.define(version: 20221130214853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "parent_id"
     t.index ["deleted_at"], name: "index_required_gov_document_groups_on_deleted_at"
+    t.index ["parent_id"], name: "index_required_gov_document_groups_on_parent_id"
   end
 
   create_table "required_gov_document_translations", id: :serial, force: :cascade do |t|
@@ -1151,6 +1153,7 @@ ActiveRecord::Schema.define(version: 20221130214853) do
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "operators", "holdings", on_delete: :nullify
+  add_foreign_key "required_gov_document_groups", "required_gov_document_groups", column: "parent_id"
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade
   add_foreign_key "required_operator_documents", "countries"
