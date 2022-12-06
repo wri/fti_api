@@ -30,5 +30,9 @@ class RequiredGovDocumentGroup < ApplicationRecord
 
   scope :top_level, -> { where(parent: nil) }
 
-  validates_presence_of :position
+  def full_name
+    return name if parent.nil?
+
+    "#{parent.name} - #{name}"
+  end
 end
