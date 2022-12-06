@@ -3,7 +3,7 @@
 module V1
   class UserResource < BaseResource
     caching
-    attributes :name, :email, :nickname, :institution,
+    attributes :name, :email, :institution,
                :is_active, :deactivated_at, :web_url, :locale,
                :permissions_request, :permissions_accepted, :password, :password_confirmation
 
@@ -17,6 +17,6 @@ module V1
       super - [:password, :password_confirmation]
     end
 
-    filters :is_active, :email, :name, :nickname, :institution
+    filters :is_active, :email, :name, :institution
   end
 end

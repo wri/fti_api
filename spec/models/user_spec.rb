@@ -6,7 +6,6 @@
 #  email                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  nickname               :string
 #  name                   :string
 #  institution            :string
 #  web_url                :string
@@ -49,15 +48,10 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:password_confirmation) }
 
-    it { is_expected.to validate_uniqueness_of(:nickname).case_insensitive }
     it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
 
     it { is_expected.to allow_value('email@email.com').for(:email).on(:update) }
     it { is_expected.not_to allow_value('change@tmp.com').for(:email).on(:update) }
-    it { is_expected.to allow_value('random').for(:nickname) }
-    it { is_expected.to validate_exclusion_of(:nickname).in_array(
-      %w[admin superuser about root fti otp faq contact user operator ngo]
-    ) }
 
     it { is_expected.to validate_confirmation_of(:password) }
 

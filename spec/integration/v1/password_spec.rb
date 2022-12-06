@@ -2,8 +2,8 @@ require 'rails_helper'
 
 module V1
   describe 'Password', type: :request do
-    let(:user)   { create(:user, email: 'test@email.com',  password: 'password', password_confirmation: 'password', nickname: 'test', name: '00 User one') }
-    let(:user_2) { create(:user, email: 'test2@email.com', password: 'password', password_confirmation: 'password', nickname: 'test2', name: '00 User two') }
+    let(:user)   { create(:user, email: 'test@email.com',  password: 'password', password_confirmation: 'password', name: '00 User one') }
+    let(:user_2) { create(:user, email: 'test2@email.com', password: 'password', password_confirmation: 'password', name: '00 User two') }
 
     context 'Request reset password token' do
       describe 'Valid request' do

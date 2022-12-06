@@ -152,12 +152,16 @@ ActiveAdmin.register Observation do
   scope :operator
   scope :government
   scope :pending
+  scope :published
   scope :created
   scope :hidden
   scope :visible
 
   filter :id, as: :numeric_range
-  filter :validation_status, as: :select, collection: -> { Observation.validation_statuses.sort }
+  filter :validation_status,
+         as: :select,
+         input_html: { multiple: true },
+         collection: -> { Observation.validation_statuses.sort }
   filter :country, as: :select,
                    collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator, label: 'Operator', as: :select,
