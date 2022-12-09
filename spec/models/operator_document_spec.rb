@@ -247,16 +247,42 @@ RSpec.describe OperatorDocument, type: :model do
 
   describe 'Instance methods' do
     describe '#expire_document' do
-      it 'update status as doc_expired' do
-        operator_document = create(:operator_document_country)
+      let!(:operator_document) { create(:operator_document_country, force_status: status) }
 
-        expect(operator_document.status).not_to eql 'doc_expired'
+      context 'when document status is valid' do
+        let(:status) { :doc_valid }
 
-        expect {
-          operator_document.expire_document
-        }.to change { OperatorDocumentHistory.count }.by(1)
+        it 'update status as doc_expired' do
+          expect {
+            operator_document.expire_document
+          }.to change { OperatorDocumentHistory.count }.by(1)
 
-        expect(operator_document.status).to eql 'doc_expired'
+          expect(operator_document.status).to eql 'doc_expired'
+        end
+      end
+
+      context 'when document status is not required' do
+        let(:status) { :doc_not_required }
+
+        it 'update status as doc_not_provided' do
+          expect {
+            operator_document.expire_document
+          }.to change { OperatorDocumentHistory.count }.by(1)
+
+          expect(operator_document.status).to eql 'doc_not_provided'
+        end
+      end
+
+      context 'with other statuses' do
+        let(:status) { :doc_pending }
+
+        it 'does not do anything' do
+          expect {
+            operator_document.expire_document
+          }.not_to change { OperatorDocumentHistory.count }
+
+          expect(operator_document.status).to eql 'doc_pending'
+        end
       end
     end
   end
@@ -287,7 +313,7 @@ RSpec.describe OperatorDocument, type: :model do
         context 'when the status is not required' do
           let(:status) { :doc_not_required }
 
-          it { expect { subject }.to change { od.reload.status }.from('doc_not_required').to('doc_expired') }
+          it { expect { subject }.to change { od.reload.status }.from('doc_not_required').to('doc_not_provided') }
         end
 
         context 'when the status is pending' do
@@ -295,8 +321,8 @@ RSpec.describe OperatorDocument, type: :model do
 
           it { expect { subject }.to_not change { od.reload.status } }
         end
-
       end
+
       context 'when the date is in the future' do
         let(:expire_date) { Date.today + 1.year }
         let(:status) { :doc_valid }

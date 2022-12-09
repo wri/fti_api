@@ -89,7 +89,8 @@ class GovDocument < ApplicationRecord
   end
 
   def expire_document
-    self.update(status: GovDocument.statuses[:doc_expired])
+    destroy! if status == 'doc_not_required'
+    update!(status: 'doc_expired') if status == 'doc_valid'
   end
 
   def has_data?

@@ -123,7 +123,8 @@ class OperatorDocument < ApplicationRecord
   end
 
   def expire_document
-    self.update(status: OperatorDocument.statuses[:doc_expired])
+    destroy! if status == 'doc_not_required' # that would regenerate with not_provided state
+    update!(status: 'doc_expired') if status == 'doc_valid'
   end
 
   # When a doc is valid or not required
