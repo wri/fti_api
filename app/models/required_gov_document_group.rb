@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  deleted_at  :datetime
+#  parent_id   :bigint
 #  name        :string           not null
 #  description :text
 #  deleted_at  :datetime
@@ -22,7 +23,16 @@ class RequiredGovDocumentGroup < ApplicationRecord
   active_admin_translates :name do
     validates_presence_of :name
   end
+  acts_as_list scope: [:parent_id]
 
-  validates_presence_of :position
+  belongs_to :parent, class_name: 'RequiredGovDocumentGroup', optional: true
   has_many :required_gov_documents, dependent: :nullify
+
+  scope :top_level, -> { where(parent: nil) }
+
+  def full_name
+    return name if parent.nil?
+
+    "#{parent.name} - #{name}"
+  end
 end

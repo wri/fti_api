@@ -7,6 +7,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  deleted_at  :datetime
+#  parent_id   :bigint
 #  name        :string           not null
 #  description :text
 #  deleted_at  :datetime

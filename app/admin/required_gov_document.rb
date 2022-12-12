@@ -42,18 +42,25 @@ ActiveAdmin.register RequiredGovDocument do
     actions
   end
 
-  filter :required_gov_document_group
+  filter :required_gov_document_group, collection: -> {
+    RequiredGovDocumentGroup
+      .all
+      .left_joins(:parent)
+      .order('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)')
+  }
   filter :country
   filter :document_type, as: :select, collection: RequiredGovDocument.document_types
   filter :name, as: :select
   filter :updated_at
 
-
   form do |f|
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Required Gov Document Details' do
       editing = object.new_record? ? false : true
-      f.input :required_gov_document_group
+      f.input :required_gov_document_group, collection: RequiredGovDocumentGroup
+        .all
+        .left_joins(:parent)
+        .order('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)')
       f.input :country, input_html: { disabled: editing }
       f.input :position
       f.input :document_type, as: :select, collection: RequiredGovDocument.document_types.keys,

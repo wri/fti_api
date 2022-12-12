@@ -7,6 +7,7 @@ module V1
     attributes :name, :position
 
     has_many :required_gov_documents
+    has_one :parent, class_name: 'RequiredGovDocumentGroup'
 
     filter :name
 
