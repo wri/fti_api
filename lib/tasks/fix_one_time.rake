@@ -247,13 +247,17 @@ namespace :fix_one_time do
       puts "FOUND #{docs.count} docs expired that were not required before"
       puts "DOC_IDS: #{docs.map(&:id).join(',')}"
 
+      operators = docs.map(&:operator).uniq
+      puts "OPERATORS:"
+      operators.each { |op| puts "#{op.name} (#{op.id})" }
+
       # that will regenerate documents to not provided state
       puts "REGENERATING DOCS..."
       docs.each do |doc|
         doc.skip_score_recalculation = true # just do it once for each operator at the end
         doc.destroy!
       end
-      docs.map(&:operator).uniq.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
+      operators.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
 
       if docs.each(&:reload).select { |d| d.status == 'doc_not_provided' }.count == docs_count
         puts "ALL GOOD :)"
