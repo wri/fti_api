@@ -221,4 +221,51 @@ namespace :fix_one_time do
     puts "Missing files: #{missing}"
     puts "Moved files: #{moved}"
   end
+
+  desc 'Mark expired documents there were expired from not required state as not provided'
+  task not_required_expired_move_to_not_provided: :environment do
+    for_real = ENV['FOR_REAL'] == 'true'
+
+    puts "RUNNING FOR REAL" if for_real
+    puts "DRY RUN" unless for_real
+
+    ActiveRecord::Base.transaction do
+      docs = OperatorDocument
+        .where(status: 'doc_expired', updated_at: 1.month.ago..Date.today)
+        .select do |o|
+          prev_version_not_required = false
+          o.versions.reverse.each do |version|
+            next if version.reify.status == 'doc_expired'
+
+            prev_version_not_required = version.reify.status == 'doc_not_required'
+            break
+          end
+          prev_version_not_required
+        end
+
+      docs_count = docs.count
+      puts "FOUND #{docs.count} docs expired that were not required before"
+      puts "DOC_IDS: #{docs.map(&:id).join(',')}"
+
+      operators = docs.map(&:operator).uniq
+      puts "OPERATORS:"
+      operators.each { |op| puts "#{op.name} (#{op.id})" }
+
+      # that will regenerate documents to not provided state
+      puts "REGENERATING DOCS..."
+      docs.each do |doc|
+        doc.skip_score_recalculation = true # just do it once for each operator at the end
+        doc.destroy!
+      end
+      operators.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
+
+      if docs.each(&:reload).select { |d| d.status == 'doc_not_provided' }.count == docs_count
+        puts "ALL GOOD :)"
+      else
+        puts "ERROR: doc count after docs regenerate does not match"
+      end
+
+      raise ActiveRecord::Rollback unless for_real
+    end
+  end
 end
