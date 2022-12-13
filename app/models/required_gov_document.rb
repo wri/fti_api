@@ -55,8 +55,9 @@ class RequiredGovDocument < ApplicationRecord
   end
 
   def create_gov_document
-    GovDocument.create(required_gov_document: self,
-                       status: GovDocument.statuses[:doc_not_provided],
-                       current: true)
+    GovDocument.create(
+      required_gov_document: self,
+      status: GovDocument.statuses[:doc_not_provided]
+    )
   end
 end

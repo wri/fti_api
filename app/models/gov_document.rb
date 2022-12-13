@@ -39,7 +39,6 @@ class GovDocument < ApplicationRecord
   validates_presence_of :start_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
   validates_presence_of :expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
 
-  before_save :update_current, on: %w[create update], if: :current_changed?
   before_create :set_status
   before_create :set_country
   before_create :delete_previous_pending_document
@@ -53,7 +52,6 @@ class GovDocument < ApplicationRecord
     where('expire_date < ?', date)
       .where(status: EXPIRABLE_STATUSES)
   }
-  scope :actual,       -> { where(current: true, deleted_at: nil) }
   scope :valid,        -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
   scope :required,     -> { actual.where.not(status: GovDocument.statuses[:doc_not_required]) }
 
@@ -65,20 +63,6 @@ class GovDocument < ApplicationRecord
 
   def set_expire_date
     self.expire_date = start_date + required_gov_document.valid_period.days rescue nil
-  end
-
-  def update_current
-    if current == true
-      documents_to_update = GovDocument.where(required_gov_document_id: required_gov_document_id,
-                                              current: true)
-                              .where.not(id: id)
-      documents_to_update.find_each { |x| x.update!(current: false) }
-    else
-      documents_to_update = GovDocument.where(required_gov_document_id: required_gov_document_id, current: true)
-      unless documents_to_update.any?
-        self.update(current: false)
-      end
-    end
   end
 
   def self.expire_documents
@@ -102,11 +86,10 @@ class GovDocument < ApplicationRecord
 
   def ensure_unity
     return if required_gov_document&.marked_for_destruction?
-    return unless current && required_gov_document.present?
+    return if required_gov_document.nil?
 
     doc = GovDocument.new(required_gov_document_id: required_gov_document_id,
-                          status: GovDocument.statuses[:doc_not_provided],
-                          current: true)
+                          status: GovDocument.statuses[:doc_not_provided])
     doc.save!(validate: false)
   end
 

@@ -40,7 +40,7 @@ class Country < ApplicationRecord
   has_many :species, through: :species_countries
   has_many :required_operator_documents
   has_many :required_gov_documents
-  has_many :gov_documents, -> { actual }
+  has_many :gov_documents
 
   has_many :country_links, inverse_of: :country
   has_many :country_vpas, inverse_of: :country

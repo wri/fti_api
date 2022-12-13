@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_06_154335) do
+ActiveRecord::Schema.define(version: 2022_12_13_143029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -279,7 +279,6 @@ ActiveRecord::Schema.define(version: 2022_12_06_154335) do
     t.text "reason"
     t.date "start_date"
     t.date "expire_date"
-    t.boolean "current", null: false
     t.integer "uploaded_by"
     t.string "link"
     t.string "value"

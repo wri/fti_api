@@ -50,9 +50,8 @@ RSpec.describe GovDocument, type: :model do
             expect { subject }.to \
               change { GovDocument.unscoped.count }.by(1).and \
               change { gd.reload.deleted? }.from(false).to(true).and \
-              change { gd.current }.from(true).to(false)
 
-            current_doc = GovDocument.find_by(required_gov_document: gd.required_gov_document, current: true)
+            current_doc = GovDocument.find_by(required_gov_document: gd.required_gov_document)
             expect(current_doc.status).to eq('doc_not_provided')
           end
         end

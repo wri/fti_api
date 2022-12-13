@@ -24,7 +24,6 @@ FactoryBot.define do
     required_gov_document
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
-    current { true }
 
     transient do
       force_status { nil }

@@ -30,21 +30,20 @@ module V1
     attributes :required_gov_document_id,
                :expire_date, :start_date,
                :status, :created_at, :updated_at,
-               :current, :uploaded_by, :reason,
+               :uploaded_by, :reason,
                :link, :value, :units
 
     has_one :required_gov_document
     has_one :country
     has_many :gov_files
 
-    filters :type, :status, :operator_id, :current
+    filters :type, :status, :operator_id
 
-    before_create :set_user_id, :set_country_id, :set_current
+    before_update :set_user_id, :set_country_id, :set_status_pending
 
-    def set_current
-      @model.current = true
+    def set_status_pending
+      @model.status = :doc_pending
     end
-
 
     def self.updatable_fields(context)
       super - [:created_at, :updated_at, :deleted_at, :status]

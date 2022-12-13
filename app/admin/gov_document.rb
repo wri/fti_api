@@ -42,7 +42,7 @@ ActiveAdmin.register GovDocument do
 
 
   actions :all, except: [:destroy, :new]
-  permit_params :status, :reason, :start_date, :expire_date, :current,
+  permit_params :status, :reason, :start_date, :expire_date,
                 :uploaded_by, :link, :value, :units,
                 gov_files_attributes: [:id, :attachment, :_destroy]
 
@@ -50,7 +50,6 @@ ActiveAdmin.register GovDocument do
     bool_column :exists do |doc|
       doc.deleted_at.nil? && doc.required_gov_document.deleted_at.nil?
     end
-    column :current
     tag_column :status
     column :id
     column :country do |doc|
@@ -89,7 +88,6 @@ ActiveAdmin.register GovDocument do
   end
 
 
-  filter :current
   filter :id, as: :select
   filter :required_gov_document
   filter :required_gov_document_country_id,
@@ -134,7 +132,6 @@ ActiveAdmin.register GovDocument do
 
   show title: proc{ "#{resource.required_gov_document.country.name} - #{resource.required_gov_document.name}" } do
     attributes_table do
-      row :current
       tag_row :status
       row :required_gov_document
       row :country do |doc|
