@@ -28,14 +28,14 @@ module V1
     include CacheableByCurrentUser
     caching
     attributes :required_gov_document_id,
+               :attachment,
                :expire_date, :start_date,
                :status, :created_at, :updated_at,
-               :uploaded_by, :reason,
+               :uploaded_by,
                :link, :value, :units
 
     has_one :required_gov_document
     has_one :country
-    has_many :gov_files
 
     filters :type, :status, :operator_id
 
@@ -43,6 +43,17 @@ module V1
 
     def set_status_pending
       @model.status = :doc_pending
+    end
+
+    def attachment
+      return @model&.gov_file&.attachment if can_see_document?
+
+      { url: nil }
+    end
+
+    def attachment=(attachment)
+      @model.build_gov_file(attachment: attachment)
+      nil
     end
 
     def self.updatable_fields(context)
@@ -81,7 +92,7 @@ module V1
     end
 
     def hidden_document_status
-      return @model.status if %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
+      return @model.status if %w[doc_not_provided doc_valid doc_expired].include?(@model.status)
 
       :doc_not_provided
     end

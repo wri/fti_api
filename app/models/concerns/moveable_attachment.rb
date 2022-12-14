@@ -8,7 +8,7 @@ module MoveableAttachment
 
     uploaders.each_key do |uploader|
       define_method "move_#{uploader}_to_public_directory" do
-        return if attachment.blank?
+        return if attachment.nil?
 
         from = File.dirname(attachment.file.file.gsub('/public/', '/private/'))
         to = File.dirname(from.gsub('/private/', '/public/'))
@@ -16,7 +16,7 @@ module MoveableAttachment
       end
 
       define_method "move_#{uploader}_to_private_directory" do
-        return if attachment.blank?
+        return if attachment.nil?
 
         from = File.dirname(attachment.file.file.gsub('/private/', '/public/'))
         to = File.dirname(from.gsub('/public/', '/private/'))

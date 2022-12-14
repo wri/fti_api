@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_13_143029) do
+ActiveRecord::Schema.define(version: 2022_12_14_090504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -276,7 +276,6 @@ ActiveRecord::Schema.define(version: 2022_12_13_143029) do
 
   create_table "gov_documents", id: :serial, force: :cascade do |t|
     t.integer "status", null: false
-    t.text "reason"
     t.date "start_date"
     t.date "expire_date"
     t.integer "uploaded_by"
@@ -286,8 +285,8 @@ ActiveRecord::Schema.define(version: 2022_12_13_143029) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "required_gov_document_id"
-    t.integer "country_id"
+    t.integer "required_gov_document_id", null: false
+    t.integer "country_id", null: false
     t.integer "user_id"
     t.index ["country_id"], name: "index_gov_documents_on_country_id"
     t.index ["required_gov_document_id"], name: "index_gov_documents_on_required_gov_document_id"

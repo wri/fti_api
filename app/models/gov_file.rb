@@ -13,16 +13,27 @@
 #
 
 class GovFile < ApplicationRecord
-  has_paper_trail
   acts_as_paranoid
 
   belongs_to :gov_document, -> { with_archived }
 
   mount_base64_uploader :attachment, GovDocumentUploader
+  include MoveableAttachment
 
   after_create :update_gov_doc_status
 
+  after_destroy :move_attachment_to_private_directory
+  after_restore :move_attachment_to_public_directory
+
+  before_update :create_copy_and_destroy
+
   private
+
+  def create_copy_and_destroy
+    GovFile.create!(attachment: attachment, gov_document: gov_document)
+    reload
+    destroy!
+  end
 
   def update_gov_doc_status
     return if gov_document.status == 'doc_pending'

@@ -26,12 +26,14 @@ class GovDocument < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
-  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
+  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
+  enum uploaded_by: { government: 1, admin: 2 }
 
+  belongs_to :country
   belongs_to :required_gov_document, -> { with_archived }
-  has_many :gov_files
-  accepts_nested_attributes_for :gov_files
+  has_one :gov_file
+
+  accepts_nested_attributes_for :gov_file
 
   before_validation :set_expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? }
   before_validation :clear_wrong_fields
@@ -78,7 +80,7 @@ class GovDocument < ApplicationRecord
   end
 
   def has_data?
-    gov_files.any? || link.present? || (value.present? && units.present?) || reason.present?
+    gov_files.any? || link.present? || (value.present? && units.present?)
   end
 
 
@@ -112,12 +114,6 @@ class GovDocument < ApplicationRecord
   end
 
   def clear_wrong_fields
-    if reason.present?
-      self.link = self.value = self.units = nil
-      self.gov_files.each(&:destroy)
-      return
-    end
-
     case required_gov_document.document_type
     when 'file'
       self.link = self.value = self.units = nil

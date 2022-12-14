@@ -12,4 +12,8 @@ class GovDocumentUploader < ApplicationUploader
     filename += '.' + super.split('.').last if super.split('.').any?
     filename
   end
+
+  def private_upload?
+    model.deleted?
+  end
 end

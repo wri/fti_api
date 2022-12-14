@@ -42,9 +42,9 @@ ActiveAdmin.register GovDocument do
 
 
   actions :all, except: [:destroy, :new]
-  permit_params :status, :reason, :start_date, :expire_date,
+  permit_params :status, :start_date, :expire_date,
                 :uploaded_by, :link, :value, :units,
-                gov_files_attributes: [:id, :attachment, :_destroy]
+                gov_file_attributes: [:id, :attachment]
 
   index do
     bool_column :exists do |doc|
@@ -67,11 +67,7 @@ ActiveAdmin.register GovDocument do
     column 'Data' do |doc|
       doc.link
       "#{doc.value} #{doc.units}" if doc.value
-      if doc.gov_files.any?
-        links = []
-        doc.gov_files.each{ |f| links << f.attachment_url }
-        links.join(' ').html_safe
-      end
+      link_to doc.gov_file.attachment.file.identifier, doc.gov_file.attachment.url if doc.gov_file.present?
     end
     # rubocop:enable Rails/OutputSafety
     column :user, sortable: 'users.name'
@@ -79,9 +75,6 @@ ActiveAdmin.register GovDocument do
     column :start_date
     column :created_at
     column :uploaded_by
-    column :reason
-    column :note
-    column :response_date
     column('Approve') { |doc| link_to 'Approve', approve_admin_gov_document_path(doc), method: :put }
     column('Reject') { |doc| link_to 'Reject', reject_admin_gov_document_path(doc), method: :put }
     actions
@@ -119,11 +112,10 @@ ActiveAdmin.register GovDocument do
         f.input :units
       end
       if resource.required_gov_document.document_type == 'file'
-        f.has_many :gov_files do |file|
-          file.input :attachment, as: :file
+        f.fields_for :gov_file, f.object.gov_file || f.object.build_gov_file do |file|
+          file.input :attachment, as: :file, hint: preview_file_tag(file.object.attachment)
         end
       end
-      f.input :reason
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
     end
@@ -152,7 +144,6 @@ ActiveAdmin.register GovDocument do
           end
         end
       end
-      row :reason
       row :start_date
       row :expire_date
       row :created_at
