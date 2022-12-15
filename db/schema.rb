@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_14_090504) do
+ActiveRecord::Schema.define(version: 2022_12_15_120659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(version: 2022_12_14_090504) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_active", default: false, null: false
-    t.float "percentage_valid_documents"
     t.index ["is_active"], name: "index_countries_on_is_active"
     t.index ["iso"], name: "index_countries_on_iso"
   end

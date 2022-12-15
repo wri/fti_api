@@ -4,17 +4,16 @@
 #
 # Table name: countries
 #
-#  id                         :integer          not null, primary key
-#  iso                        :string
-#  region_iso                 :string
-#  country_centroid           :jsonb
-#  region_centroid            :jsonb
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  is_active                  :boolean          default(FALSE), not null
-#  percentage_valid_documents :float
-#  name                       :string
-#  region_name                :string
+#  id               :integer          not null, primary key
+#  iso              :string
+#  region_iso       :string
+#  country_centroid :jsonb
+#  region_centroid  :jsonb
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  is_active        :boolean          default(FALSE), not null
+#  name             :string
+#  region_name      :string
 #
 
 class Country < ApplicationRecord
@@ -69,12 +68,6 @@ class Country < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
-  end
-
-  def update_valid_documents_percentages
-    self.percentage_valid_documents =
-      gov_documents.valid.count.to_f / gov_documents.joins(:required_gov_document).required.count.to_f rescue 0
-    save!
   end
 
   def forest_types

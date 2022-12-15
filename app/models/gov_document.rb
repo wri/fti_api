@@ -6,10 +6,8 @@
 #
 #  id                       :integer          not null, primary key
 #  status                   :integer          not null
-#  reason                   :text
 #  start_date               :date
 #  expire_date              :date
-#  current                  :boolean          not null
 #  uploaded_by              :integer
 #  link                     :string
 #  value                    :string
@@ -17,9 +15,10 @@
 #  deleted_at               :datetime
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  required_gov_document_id :integer
-#  country_id               :integer
+#  required_gov_document_id :integer          not null
+#  country_id               :integer          not null
 #  user_id                  :integer
+#  attachment               :string
 #
 
 class GovDocument < ApplicationRecord
@@ -43,9 +42,6 @@ class GovDocument < ApplicationRecord
   validates_presence_of :start_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
   validates_presence_of :expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
 
-  after_create :update_percentages
-  after_update :update_percentages, if: :saved_change_to_status?
-
   after_update :move_previous_attachment_to_private_folder, if: :saved_change_to_attachment?
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
@@ -56,10 +52,6 @@ class GovDocument < ApplicationRecord
   scope :valid,        -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
 
   EXPIRABLE_STATUSES = %w[doc_valid]
-
-  def update_percentages
-    required_gov_document.country.update_valid_documents_percentages
-  end
 
   def set_expire_date
     self.expire_date = start_date + required_gov_document.valid_period.days rescue nil
