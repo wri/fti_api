@@ -20,7 +20,6 @@
 #
 FactoryBot.define do
   factory :gov_document, class: GovDocument do
-    required_gov_document
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
 
@@ -35,6 +34,18 @@ FactoryBot.define do
 
     after(:create) do |doc, evaluator|
       doc.update_attributes(status: evaluator.force_status) if evaluator.force_status
+    end
+
+    trait :with_file do
+      attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+    end
+
+    after(:build) do |doc|
+      document_type = :link
+      document_type = :file if doc.attachment.present?
+      document_type = :stats if doc.value.present?
+
+      doc.required_gov_document ||= FactoryBot.create(:required_gov_document, document_type: document_type)
     end
   end
 end

@@ -43,7 +43,10 @@ class GovDocument < ApplicationRecord
   validates_presence_of :start_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
   validates_presence_of :expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
 
-  after_update :move_previous_attachment_to_private_folder, if: :saved_change_to_attachment?
+  after_update :move_previous_attachment_to_private_directory, if: :saved_change_to_attachment?
+
+  after_destroy :move_attachment_to_private_directory
+  after_restore :move_attachment_to_public_directory
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
   scope :to_expire, ->(date) {
@@ -92,13 +95,24 @@ class GovDocument < ApplicationRecord
     self.country_id = required_gov_document.country_id
   end
 
-  def move_previous_attachment_to_private_folder
+  def move_previous_attachment_to_private_directory
     previous_attachment_filename = previous_changes[:attachment][0]
     return if previous_attachment_filename.blank?
 
     from = File.join(attachment.root, attachment.store_dir, previous_attachment_filename)
     to = from.gsub('/public/', '/private/')
     FileUtils.makedirs(File.dirname(to))
+    system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
+  end
+
+  # we only want to move current attachment back to public directory
+  def move_attachment_to_public_directory
+    attachment_attr = read_attribute(:attachment)
+    return if attachment_attr.nil?
+
+    to = File.join(attachment.root, attachment.store_dir, attachment_attr)
+    from = to.gsub('/public/', '/private/')
+    FileUtils.makedirs(File.dirname(from))
     system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
   end
 
