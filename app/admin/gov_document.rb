@@ -38,6 +38,8 @@ ActiveAdmin.register GovDocument do
     link_to 'Edit Document', edit_resource_path(resource)
   end
 
+  scope 'Pending', :doc_pending
+
   index do
     tag_column :status
     column :id
@@ -51,14 +53,11 @@ ActiveAdmin.register GovDocument do
         RequiredGovDocument.unscoped.find(doc.required_gov_document_id).name
       end
     end
-    # TODO: Reactivate rubocop and fix this
-    # rubocop:disable Rails/OutputSafety
     column 'Data' do |doc|
       doc.link
       "#{doc.value} #{doc.units}" if doc.value
       link_to doc.attachment.file.identifier, doc.attachment.url if doc.attachment.present?
     end
-    # rubocop:enable Rails/OutputSafety
     column :user, sortable: 'users.name'
     column :start_date
     column :expire_date
@@ -81,7 +80,6 @@ ActiveAdmin.register GovDocument do
     end
   end
 
-
   filter :id, as: :select
   filter :required_gov_document
   filter :required_gov_document_country_id,
@@ -91,9 +89,6 @@ ActiveAdmin.register GovDocument do
   filter :status, as: :select, collection: -> { GovDocument.statuses }
   filter :required_gov_document_document_type, label: 'Type', as: :select, collection: -> { RequiredGovDocument.document_types }
   filter :updated_at
-
-
-  scope 'Pending', :doc_pending
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
