@@ -67,10 +67,10 @@ ActiveAdmin.register GovDocument do
       column :deleted_at
     else
       column('Approve') do |doc|
-        link_to 'Approve', approve_admin_gov_document_path(doc), method: :put
+        link_to 'Approve', approve_admin_gov_document_path(doc), method: :put if %w[doc_pending doc_invalid].include? doc.status
       end
       column('Reject') do |doc|
-        link_to 'Reject', reject_admin_gov_document_path(doc), method: :put
+        link_to 'Reject', reject_admin_gov_document_path(doc), method: :put if %w[doc_pending doc_valid].include? doc.status
       end
 
       actions defaults: false do |doc|
@@ -124,6 +124,7 @@ ActiveAdmin.register GovDocument do
         doc.required_gov_document.country.name
       end
       row :uploaded_by
+      row :user
       if resource.required_gov_document.document_type == 'link'
         row :link
       end

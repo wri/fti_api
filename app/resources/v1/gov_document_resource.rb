@@ -52,10 +52,7 @@ module V1
     end
 
     def self.updatable_fields(context)
-      super - [:created_at, :updated_at, :deleted_at, :status]
-    end
-    def self.creatable_fields(context)
-      super - [:created_at, :updated_at, :deleted_at, :status]
+      [:expire_date, :start_date, :attachment, :link, :value, :units]
     end
 
     def set_user_id

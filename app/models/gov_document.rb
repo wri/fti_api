@@ -28,6 +28,7 @@ class GovDocument < ApplicationRecord
   enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
   enum uploaded_by: { government: 1, admin: 2 }
 
+  belongs_to :user, optional: true
   belongs_to :country
   belongs_to :required_gov_document, -> { with_archived }
 
@@ -84,11 +85,7 @@ class GovDocument < ApplicationRecord
   private
 
   def set_status
-    if has_data?
-      self.status = GovDocument.statuses[:doc_pending]
-    else
-      self.status = GovDocument.statuses[:doc_not_provided]
-    end
+    self.status = GovDocument.statuses[:doc_not_provided]
   end
 
   def set_country
