@@ -9,14 +9,6 @@ ActiveAdmin.register GovDocument do
 
   active_admin_paranoia
 
-  scope_to do
-    Class.new do
-      def self.gov_documents
-        GovDocument.unscoped
-      end
-    end
-  end
-
   controller do
     def scoped_collection
       end_of_association_chain
@@ -42,14 +34,16 @@ ActiveAdmin.register GovDocument do
 
 
   actions :all, except: [:destroy, :new]
-  permit_params :status, :start_date, :expire_date,
-                :uploaded_by, :link, :value, :units,
-                gov_file_attributes: [:id, :attachment]
+  permit_params :status, :start_date, :expire_date, :attachment,
+                :uploaded_by, :link, :value, :units
+
+  config.clear_action_items!
+
+  action_item :edit_gov_document, only: [:show] do
+    link_to 'Edit Document', edit_resource_path(resource)
+  end
 
   index do
-    bool_column :exists do |doc|
-      doc.deleted_at.nil? && doc.required_gov_document.deleted_at.nil?
-    end
     tag_column :status
     column :id
     column :country do |doc|
@@ -67,17 +61,29 @@ ActiveAdmin.register GovDocument do
     column 'Data' do |doc|
       doc.link
       "#{doc.value} #{doc.units}" if doc.value
-      link_to doc.gov_file.attachment.file.identifier, doc.gov_file.attachment.url if doc.gov_file.present?
+      link_to doc.attachment.file.identifier, doc.attachment.url if doc.attachment.present?
     end
     # rubocop:enable Rails/OutputSafety
     column :user, sortable: 'users.name'
-    column :expire_date
     column :start_date
+    column :expire_date
     column :created_at
-    column :uploaded_by
-    column('Approve') { |doc| link_to 'Approve', approve_admin_gov_document_path(doc), method: :put }
-    column('Reject') { |doc| link_to 'Reject', reject_admin_gov_document_path(doc), method: :put }
-    actions
+
+    if current_scope.id == 'recycle_bin'
+      column :deleted_at
+    else
+      column('Approve') do |doc|
+        link_to 'Approve', approve_admin_gov_document_path(doc), method: :put
+      end
+      column('Reject') do |doc|
+        link_to 'Reject', reject_admin_gov_document_path(doc), method: :put
+      end
+
+      actions defaults: false do |doc|
+        item 'View', resource_path(doc)
+        item 'Edit', edit_resource_path(doc)
+      end
+    end
   end
 
 
@@ -112,9 +118,7 @@ ActiveAdmin.register GovDocument do
         f.input :units
       end
       if resource.required_gov_document.document_type == 'file'
-        f.fields_for :gov_file, f.object.gov_file || f.object.build_gov_file do |file|
-          file.input :attachment, as: :file, hint: preview_file_tag(file.object.attachment)
-        end
+        f.input :attachment, as: :file, hint: preview_file_tag(f.object.attachment)
       end
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
@@ -138,10 +142,8 @@ ActiveAdmin.register GovDocument do
         row :units
       end
       if resource.required_gov_document.document_type == 'file'
-        attributes_table_for resource.gov_files do
-          row :attachment do |a|
-            link_to a.attachment.file.identifier, a.attachment.url
-          end
+        row :attachment do |doc|
+          link_to doc.attachment.file.identifier, doc.attachment.url if doc.attachment.present?
         end
       end
       row :start_date

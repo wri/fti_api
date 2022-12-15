@@ -288,18 +288,10 @@ ActiveRecord::Schema.define(version: 2022_12_14_090504) do
     t.integer "required_gov_document_id", null: false
     t.integer "country_id", null: false
     t.integer "user_id"
+    t.string "attachment"
     t.index ["country_id"], name: "index_gov_documents_on_country_id"
     t.index ["required_gov_document_id"], name: "index_gov_documents_on_required_gov_document_id"
     t.index ["user_id"], name: "index_gov_documents_on_user_id"
-  end
-
-  create_table "gov_files", id: :serial, force: :cascade do |t|
-    t.string "attachment"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "gov_document_id"
-    t.index ["gov_document_id"], name: "index_gov_files_on_gov_document_id"
   end
 
   create_table "government_translations", id: :serial, force: :cascade do |t|
@@ -1105,7 +1097,6 @@ ActiveRecord::Schema.define(version: 2022_12_14_090504) do
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
   add_foreign_key "gov_documents", "users", on_delete: :cascade
-  add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
   add_foreign_key "notifications", "notification_groups", on_delete: :nullify

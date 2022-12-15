@@ -46,14 +46,9 @@ module V1
     end
 
     def attachment
-      return @model&.gov_file&.attachment if can_see_document?
+      return @model.attachment if can_see_document?
 
       { url: nil }
-    end
-
-    def attachment=(attachment)
-      @model.build_gov_file(attachment: attachment)
-      nil
     end
 
     def self.updatable_fields(context)
@@ -66,6 +61,7 @@ module V1
     def set_user_id
       if context[:current_user].present?
         @model.user_id = context[:current_user].id
+        @model.uploaded_by = :government
       end
     end
 
@@ -95,6 +91,13 @@ module V1
       return @model.status if %w[doc_not_provided doc_valid doc_expired].include?(@model.status)
 
       :doc_not_provided
+    end
+
+    def remove
+      run_callbacks :remove do
+        @model.reset_to_not_provided!
+        :completed
+      end
     end
   end
 end

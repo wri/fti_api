@@ -44,6 +44,12 @@ class RequiredGovDocument < ApplicationRecord
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
 
+  def create_gov_document
+    GovDocument
+      .create_with(status: GovDocument.statuses[:doc_not_provided])
+      .find_or_create_by!(required_gov_document: self)
+  end
+
   private
 
   def fixed_fields_unchanged
@@ -52,12 +58,5 @@ class RequiredGovDocument < ApplicationRecord
     errors.add(:required_gov_document_groups_id, 'Cannot change the group') if required_gov_document_group_id_changed?
     errors.add(:document_type, 'Cannot change the document type') if document_type_changed?
     errors.add(:country_id, 'Cannot change the country') if country_id_changed?
-  end
-
-  def create_gov_document
-    GovDocument.create(
-      required_gov_document: self,
-      status: GovDocument.statuses[:doc_not_provided]
-    )
   end
 end

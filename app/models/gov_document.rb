@@ -31,23 +31,22 @@ class GovDocument < ApplicationRecord
 
   belongs_to :country
   belongs_to :required_gov_document, -> { with_archived }
-  has_one :gov_file
 
-  accepts_nested_attributes_for :gov_file
+  mount_base64_uploader :attachment, GovDocumentUploader
+  include MoveableAttachment
 
   before_validation :set_expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? }
   before_validation :clear_wrong_fields
+  before_validation :set_status, on: :create
+  before_validation :set_country, on: :create
 
   validates_presence_of :start_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
   validates_presence_of :expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
 
-  before_create :set_status
-  before_create :set_country
-  before_create :delete_previous_pending_document
   after_create :update_percentages
   after_update :update_percentages, if: :saved_change_to_status?
 
-  before_destroy :ensure_unity
+  after_update :move_previous_attachment_to_private_folder, if: :saved_change_to_attachment?
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
   scope :to_expire, ->(date) {
@@ -75,25 +74,24 @@ class GovDocument < ApplicationRecord
   end
 
   def expire_document
-    destroy! if status == 'doc_not_required'
+    reset_to_not_provided! if status == 'doc_not_required'
     update!(status: 'doc_expired') if status == 'doc_valid'
   end
 
   def has_data?
-    gov_files.any? || link.present? || (value.present? && units.present?)
+    attachment.present? || link.present? || (value.present? && units.present?)
   end
 
+  def reset_to_not_provided!
+    remove_attachment!
+    update!(
+      status: OperatorDocument.statuses[:doc_not_provided],
+      expire_date: nil, start_date: nil, uploaded_by: nil, user_id: nil,
+      value: nil, link: nil
+    )
+  end
 
   private
-
-  def ensure_unity
-    return if required_gov_document&.marked_for_destruction?
-    return if required_gov_document.nil?
-
-    doc = GovDocument.new(required_gov_document_id: required_gov_document_id,
-                          status: GovDocument.statuses[:doc_not_provided])
-    doc.save!(validate: false)
-  end
 
   def set_status
     if has_data?
@@ -107,10 +105,14 @@ class GovDocument < ApplicationRecord
     self.country_id = required_gov_document.country_id
   end
 
-  def delete_previous_pending_document
-    pending_documents = GovDocument.where(required_gov_document_id: required_gov_document_id,
-                                          status: GovDocument.statuses[:doc_pending])
-    pending_documents.each { |x| x.destroy }
+  def move_previous_attachment_to_private_folder
+    previous_attachment_filename = previous_changes[:attachment][0]
+    return if previous_attachment_filename.blank?
+
+    from = File.join(attachment.root, attachment.store_dir, previous_attachment_filename)
+    to = from.gsub('/public/', '/private/')
+    FileUtils.makedirs(File.dirname(to))
+    system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
   end
 
   def clear_wrong_fields
@@ -119,10 +121,10 @@ class GovDocument < ApplicationRecord
       self.link = self.value = self.units = nil
     when 'link'
       self.value = self.units = nil
-      self.gov_files.each(&:destroy)
+      self.attachment = nil # TODO
     when 'stats'
       self.link = nil
-      self.gov_files.each(&:destroy)
+      self.attachment = nil # TODO
     end
   end
 end
