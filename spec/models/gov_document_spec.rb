@@ -43,19 +43,6 @@ RSpec.describe GovDocument, type: :model do
           it { expect { subject }.to change { gd.reload.status }.from('doc_valid').to('doc_expired') }
         end
 
-        context 'when the status is not required' do
-          let(:status) { :doc_not_required }
-
-          it 'destroys old document, generates a new not provided one' do
-            expect { subject }.to \
-              change { GovDocument.unscoped.count }.by(1).and \
-              change { gd.reload.deleted? }.from(false).to(true).and \
-
-            current_doc = GovDocument.find_by(required_gov_document: gd.required_gov_document)
-            expect(current_doc.status).to eq('doc_not_provided')
-          end
-        end
-
         context 'when the status is pending' do
           let(:status) { :doc_pending }
 

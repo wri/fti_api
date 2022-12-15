@@ -54,9 +54,8 @@ class GovDocument < ApplicationRecord
       .where(status: EXPIRABLE_STATUSES)
   }
   scope :valid,        -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
-  scope :required,     -> { actual.where.not(status: GovDocument.statuses[:doc_not_required]) }
 
-  EXPIRABLE_STATUSES = %w[doc_valid doc_not_required]
+  EXPIRABLE_STATUSES = %w[doc_valid]
 
   def update_percentages
     required_gov_document.country.update_valid_documents_percentages
@@ -74,8 +73,7 @@ class GovDocument < ApplicationRecord
   end
 
   def expire_document
-    reset_to_not_provided! if status == 'doc_not_required'
-    update!(status: 'doc_expired') if status == 'doc_valid'
+    update!(status: 'doc_expired')
   end
 
   def has_data?
@@ -121,10 +119,10 @@ class GovDocument < ApplicationRecord
       self.link = self.value = self.units = nil
     when 'link'
       self.value = self.units = nil
-      self.attachment = nil # TODO
+      remove_attachment!
     when 'stats'
       self.link = nil
-      self.attachment = nil # TODO
+      remove_attachment!
     end
   end
 end

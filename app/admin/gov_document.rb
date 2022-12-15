@@ -18,17 +18,12 @@ ActiveAdmin.register GovDocument do
   end
 
   member_action :approve, method: :put do
-    if resource.reason.present?
-      resource.update(status: :doc_not_required)
-    else
-      resource.update(status: :doc_valid)
-    end
+    resource.update(status: :doc_valid)
     redirect_to collection_path, notice: 'Document approved'
   end
 
   member_action :reject, method: :put do
-    resource.update(status: :doc_invalid, reason: nil)
-
+    resource.update(status: :doc_invalid)
     redirect_to collection_path, notice: 'Document rejected'
   end
 
