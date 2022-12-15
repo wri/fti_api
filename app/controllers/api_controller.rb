@@ -17,6 +17,7 @@ class ApiController < ActionController::API
   end
 
   before_action :check_access, :authenticate
+  before_action :set_paper_trail_whodunnit
   around_action :set_locale
 
   rescue_from ActiveRecord::RecordNotFound,   with: :record_not_found
@@ -64,6 +65,10 @@ class ApiController < ActionController::API
     rescue StandardError
       @current_user = nil
     end
+  end
+
+  def user_for_paper_trail
+    current_user&.id
   end
 
   protected
