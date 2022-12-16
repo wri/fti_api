@@ -22,7 +22,7 @@ require 'rails_helper'
 
 RSpec.describe GovDocument, type: :model do
   describe 'changing attachment' do
-    let!(:document) { create(:gov_document, :with_file) }
+    let!(:document) { create(:gov_document, :file) }
 
     with_versioning do
       context 'when removing attachment' do
@@ -90,7 +90,7 @@ RSpec.describe GovDocument, type: :model do
   end
 
   describe 'soft delete' do
-    let!(:document) { create(:gov_document, :with_file) }
+    let!(:document) { create(:gov_document, :file) }
 
     with_versioning do
       context 'when deleting' do

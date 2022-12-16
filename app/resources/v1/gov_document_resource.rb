@@ -26,13 +26,12 @@ module V1
   class GovDocumentResource < BaseResource
     include CacheableByLocale
     include CacheableByCurrentUser
+    include Privateable
     caching
     attributes :required_gov_document_id,
                :attachment,
                :expire_date, :start_date,
-               :status, :created_at, :updated_at,
-               :uploaded_by,
-               :link, :value, :units
+               :status, :link, :value, :units
 
     has_one :required_gov_document
     has_one :country
@@ -40,6 +39,8 @@ module V1
     filters :type, :status, :operator_id
 
     before_update :set_user_id, :set_country_id, :set_status_pending
+
+    privateable :can_see_document?, [:start_date, :expire_date, :link, :value, :units]
 
     def set_status_pending
       @model.status = :doc_pending
@@ -80,6 +81,7 @@ module V1
       return false if app == 'observations-tool'
       return true if user&.user_permission&.user_role =='admin'
       return true if user&.is_government(@model.country_id)
+      return true if @model.doc_valid?
 
       false
     end

@@ -36,8 +36,17 @@ FactoryBot.define do
       doc.update_attributes(status: evaluator.force_status) if evaluator.force_status
     end
 
-    trait :with_file do
+    trait :file do
       attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+    end
+
+    trait :stats do
+      value { 100 }
+      units { 'km2' }
+    end
+
+    trait :link do
+      link { 'https://example.com' }
     end
 
     after(:build) do |doc|
@@ -45,7 +54,7 @@ FactoryBot.define do
       document_type = :file if doc.attachment.present?
       document_type = :stats if doc.value.present?
 
-      doc.required_gov_document ||= FactoryBot.create(:required_gov_document, document_type: document_type)
+      doc.required_gov_document ||= create(:required_gov_document, document_type: document_type, country: doc.country || create(:country))
     end
   end
 end
