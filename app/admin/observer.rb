@@ -3,7 +3,6 @@
 ActiveAdmin.register Observer, as: 'Monitor' do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
 

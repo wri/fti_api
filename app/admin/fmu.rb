@@ -3,7 +3,6 @@
 ActiveAdmin.register Fmu do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
 

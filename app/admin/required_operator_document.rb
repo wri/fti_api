@@ -3,7 +3,6 @@
 ActiveAdmin.register RequiredOperatorDocument do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
 

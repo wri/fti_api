@@ -3,7 +3,6 @@
 ActiveAdmin.register ObservationReport do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
 

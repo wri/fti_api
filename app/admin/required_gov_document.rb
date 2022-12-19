@@ -3,7 +3,6 @@
 ActiveAdmin.register RequiredGovDocument do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
 

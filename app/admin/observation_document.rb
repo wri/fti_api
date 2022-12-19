@@ -3,7 +3,6 @@
 ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
 

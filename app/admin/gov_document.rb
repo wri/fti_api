@@ -3,7 +3,6 @@
 ActiveAdmin.register GovDocument do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
   config.order_clause

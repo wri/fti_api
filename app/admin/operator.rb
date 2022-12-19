@@ -3,7 +3,6 @@
 ActiveAdmin.register Operator, as: 'Producer' do
   extend BackRedirectable
   extend Versionable
-  versionate
 
   menu false
 

@@ -2,13 +2,11 @@
 
 ActiveAdmin.register FmuOperator do
   extend BackRedirectable
+  extend Versionable
 
   active_admin_paranoia
 
   menu false
-
-  extend Versionable
-  versionate
 
   actions :show, :edit, :index, :update, :new, :create
 

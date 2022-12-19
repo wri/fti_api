@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module Versionable
-  def versionate
-    sidebar :versionate, partial: 'layouts/version', only: :show
-    controller do
+  def self.extended(base)
+    base.sidebar :versionate, partial: 'layouts/version', only: :show
+    base.controller do
       def show
         model = self.resource.class.base_class
         var_name = self.resource.class.base_class.to_s.underscore
