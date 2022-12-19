@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Severity do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

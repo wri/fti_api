@@ -2,8 +2,6 @@
 
 ActiveAdmin.register Observer, as: 'Monitor' do
   extend BackRedirectable
-  back_redirect
-
   extend Versionable
   versionate
 

@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Tutorial do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

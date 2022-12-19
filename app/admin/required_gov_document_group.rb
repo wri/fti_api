@@ -2,7 +2,6 @@
 
 ActiveAdmin.register RequiredGovDocumentGroup do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

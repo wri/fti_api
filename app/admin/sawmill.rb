@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Sawmill do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

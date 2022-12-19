@@ -2,7 +2,6 @@
 
 ActiveAdmin.register UploadedDocument do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

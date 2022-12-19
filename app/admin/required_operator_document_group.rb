@@ -2,7 +2,6 @@
 
 ActiveAdmin.register RequiredOperatorDocumentGroup do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

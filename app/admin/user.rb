@@ -2,7 +2,6 @@
 
 ActiveAdmin.register User do
   extend BackRedirectable
-  back_redirect
 
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,

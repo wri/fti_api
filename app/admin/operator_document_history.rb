@@ -2,7 +2,6 @@
 
 ActiveAdmin.register OperatorDocumentHistory do
   extend BackRedirectable
-  back_redirect
 
   menu false
   config.order_clause

@@ -2,8 +2,6 @@
 
 ActiveAdmin.register RequiredGovDocument do
   extend BackRedirectable
-  back_redirect
-
   extend Versionable
   versionate
 

@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Notification do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

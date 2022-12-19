@@ -2,8 +2,6 @@
 
 ActiveAdmin.register RequiredOperatorDocument do
   extend BackRedirectable
-  back_redirect
-
   extend Versionable
   versionate
 

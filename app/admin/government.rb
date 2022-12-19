@@ -2,8 +2,6 @@
 
 ActiveAdmin.register Government do
   extend BackRedirectable
-  back_redirect
-
   extend Versionable
   versionate
 

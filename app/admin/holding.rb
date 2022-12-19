@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Holding do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

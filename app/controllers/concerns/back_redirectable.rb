@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module BackRedirectable
-  def back_redirect
-    controller do
+  def self.extended(base)
+    base.controller do
       def update
         update! do |success, failure|
           success.html do

@@ -2,7 +2,6 @@
 
 ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashboard' do
   extend BackRedirectable
-  back_redirect
 
   menu false
 
