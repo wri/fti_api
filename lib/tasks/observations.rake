@@ -79,11 +79,10 @@ namespace :observations do
           temp.id,
           temp.operator_id,
           temp.operator_name,
-          ST_CONTAINS(geometry, point) as inside_fmu,
-          ST_CONTAINS(geometry, pointSwapped) as swapped_inside_fmu
+          ST_DISTANCE(pointSwapped, centroid) < ST_DISTANCE(point, centroid) as swapped_closer_to_centroid
         from
         (
-          select o.*, ot.name as operator_name, f.geometry,
+          select o.*, ot.name as operator_name, f.geometry, ST_CENTROID(f.geometry) as centroid,
             ST_SetSRID(ST_POINT(o.lng, o.lat), 4326) as point,
             ST_SetSRID(ST_POINT(o.lat, o.lng), 4326) as pointSwapped
           from
@@ -93,7 +92,7 @@ namespace :observations do
           where f.geojson is not null
         ) as temp
       ) as temp2
-      where inside_fmu = false and swapped_inside_fmu = true
+      where swapped_closer_to_centroid = true
     SQL
 
     results = ActiveRecord::Base.connection.execute(query).to_a
