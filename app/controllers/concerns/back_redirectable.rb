@@ -4,21 +4,11 @@ module BackRedirectable
   def self.extended(base)
     base.controller do
       def update
-        update! do |success, failure|
-          success.html do
-            redirect = params[:return_to] || collection_path
-            redirect_to redirect, notice: "#{resource.model_name.human} was successfully updated."
-          end
-        end
+        update! { params[:return_to] || collection_path }
       end
 
       def create
-        create! do |success, failure|
-          success.html do
-            redirect = params[:return_to] || collection_path
-            redirect_to redirect, notice: "#{resource.model_name.human} was successfully created."
-          end
-        end
+        create! { params[:return_to] || collection_path }
       end
     end
   end
