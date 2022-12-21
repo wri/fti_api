@@ -154,6 +154,10 @@ class Fmu < ApplicationRecord
     })
   end
 
+  def properties
+    geojson['properties']
+  end
+
   def bbox
     query = <<~SQL
       SELECT st_astext(st_envelope(geometry))
