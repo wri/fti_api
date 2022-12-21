@@ -99,6 +99,7 @@ namespace :observations do
     puts "#{results.count} results with swapped lng lat inside fmu"
     puts "Observation ids: #{results.map { |r| r['id'] }.join(', ')}"
     ActiveRecord::Base.transaction do
+      Observation.skip_callback(:save, :after, :update_fmu_geojson)
       results.each do |res|
         observation = Observation.find(res['id'])
         lng = observation.lat
@@ -106,6 +107,7 @@ namespace :observations do
         puts "Updating lng/lat for observation #{observation.id}"
         observation.update!(lng: lng, lat: lat)
       end
+      Observation.set_callback(:save, :after, :update_fmu_geojson)
 
       raise ActiveRecord::Rollback unless for_real
     end
