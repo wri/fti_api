@@ -319,7 +319,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def update_fmu_geojson
     return unless fmu_id
 
-    fmu.update_geojson
+    fmu.update_geojson_properties
     fmu.save
   end
 
