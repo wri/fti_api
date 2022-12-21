@@ -252,10 +252,10 @@ RSpec.describe FmuOperator, type: :model do
 
         @activate_fmu_operator.reload
         expect(@activate_fmu_operator.current).to eql true
-        expect(@activate_fmu_operator.fmu.geojson['properties']['properties']['company_na']).to eql(
+        expect(@activate_fmu_operator.fmu.geojson['properties']['company_na']).to eql(
           @activate_fmu_operator.operator.name,
         )
-        expect(@activate_fmu_operator.fmu.geojson['properties']['properties']['operator_id']).to eql(
+        expect(@activate_fmu_operator.fmu.geojson['properties']['operator_id']).to eql(
            @activate_fmu_operator.operator_id
         )
       end

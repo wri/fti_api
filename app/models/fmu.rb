@@ -192,29 +192,6 @@ class Fmu < ApplicationRecord
     { errors: e.message }
   end
 
-  def update_geometry
-    query = <<~SQL
-      update fmus
-        set geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')
-      where fmus.id = :fmu_id
-    SQL
-    Fmu.execute_sql(query, id)
-    update_centroid
-  end
-
-  def update_centroid
-    query = <<~SQL
-      update fmus
-        set geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)
-      where fmus.id = :fmu_id;
-    SQL
-    Fmu.execute_sql(query, id)
-  end
-
-  def self.execute_sql(sql_command, fmu_id)
-    ActiveRecord::Base.connection.update(sanitize_sql_for_assignment([sql_command, fmu_id: fmu_id]))
-  end
-
   def cache_key
     super + '-' + Globalize.locale.to_s
   end
@@ -230,6 +207,25 @@ class Fmu < ApplicationRecord
   end
 
   private
+
+  def update_geometry
+    query = <<~SQL
+      update fmus
+        set geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')
+      where fmus.id = :fmu_id
+    SQL
+    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
+    update_centroid
+  end
+
+  def update_centroid
+    query = <<~SQL
+      update fmus
+        set geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)
+      where fmus.id = :fmu_id;
+    SQL
+    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
+  end
 
   def geojson_correctness
     return if geojson.blank?
