@@ -69,11 +69,14 @@ ActiveAdmin.register ObservationReport do
     end
     column 'observations' do |obsr|
       ids = obsr.observations.map { |o| o.id }
-      ids.reduce(:+)
+      ids.sort.join(', ')
+    end
+    column :country do |o|
+      o.observations.first&.country&.name
     end
     column 'observers' do |o|
       names = o.observers.joins(:translations).map { |o| o.name }
-      names.reduce(:+)
+      names.sort.join(', ')
     end
     column :created_at
     column :updated_at
