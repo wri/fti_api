@@ -2,7 +2,6 @@
 
 ActiveAdmin.register CountryVpa do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

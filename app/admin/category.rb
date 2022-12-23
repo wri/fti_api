@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Category do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

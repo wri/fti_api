@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register AboutPageEntry do
-
   extend BackRedirectable
-  back_redirect
 
   menu false
 

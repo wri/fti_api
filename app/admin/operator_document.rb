@@ -2,17 +2,12 @@
 
 ActiveAdmin.register OperatorDocument do
   extend BackRedirectable
-  back_redirect
-
   extend Versionable
-  versionate
 
   menu false
   config.sort_order = 'updated_at_desc'
 
   active_admin_paranoia
-
-  #sidebar :versionate, partial: 'layouts/version', only: :show
 
   scope_to do
     Class.new do

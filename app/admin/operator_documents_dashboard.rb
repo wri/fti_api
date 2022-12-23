@@ -2,7 +2,6 @@
 
 ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboard' do
   extend BackRedirectable
-  back_redirect
 
   config.sort_order = 'date_desc'
   config.paginate = false

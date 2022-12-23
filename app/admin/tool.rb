@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Tool do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

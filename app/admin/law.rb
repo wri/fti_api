@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Law do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

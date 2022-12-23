@@ -2,10 +2,7 @@
 
 ActiveAdmin.register Observation do
   extend BackRedirectable
-  back_redirect
-
   extend Versionable
-  versionate
 
   active_admin_paranoia
 

@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Partner do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

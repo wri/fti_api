@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Donor do
   extend BackRedirectable
-  back_redirect
 
   menu false
 

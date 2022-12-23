@@ -2,7 +2,6 @@
 
 ActiveAdmin.register Country do
   extend BackRedirectable
-  back_redirect
 
   menu false
 
