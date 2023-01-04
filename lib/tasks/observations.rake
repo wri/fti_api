@@ -64,4 +64,53 @@ namespace :observations do
       observation.save!
     end
   end
+
+  desc 'Finds obs with swapped coords and fixing them'
+  task fix_swapped_coords: :environment do
+    for_real = ENV['FOR_REAL'] == 'true'
+
+    puts "RUNNING FOR REAL" if for_real
+    puts "DRY RUN" unless for_real
+
+    query = <<~SQL
+      select temp2.* from
+      (
+        select
+          temp.id,
+          temp.operator_id,
+          temp.operator_name,
+          ST_DISTANCE(pointSwapped, centroid) < ST_DISTANCE(point, centroid) as swapped_closer_to_centroid
+        from
+        (
+          select o.*, ot.name as operator_name, f.geometry, ST_CENTROID(f.geometry) as centroid,
+            ST_SetSRID(ST_POINT(o.lng, o.lat), 4326) as point,
+            ST_SetSRID(ST_POINT(o.lat, o.lng), 4326) as pointSwapped
+          from
+            observations o
+          inner join fmus f on f.id = o.fmu_id
+          left join operator_translations ot on ot.operator_id = o.operator_id and ot.locale = 'en'
+          where f.geojson is not null
+        ) as temp
+      ) as temp2
+      where swapped_closer_to_centroid = true
+    SQL
+
+    results = ActiveRecord::Base.connection.execute(query).to_a
+    puts "#{results.count} results with swapped lng lat inside fmu"
+    puts "Observation ids: #{results.map { |r| r['id'] }.join(', ')}"
+    ActiveRecord::Base.transaction do
+      Observation.skip_callback(:save, :after, :update_fmu_geojson)
+      results.each do |res|
+        observation = Observation.find(res['id'])
+        lng = observation.lat
+        lat = observation.lng
+        puts "Updating lng/lat for observation #{observation.id}"
+        observation.update!(lng: lng, lat: lat)
+      end
+      Observation.set_callback(:save, :after, :update_fmu_geojson)
+
+      raise ActiveRecord::Rollback unless for_real
+    end
+    puts "Done :)"
+  end
 end

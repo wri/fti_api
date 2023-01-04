@@ -159,36 +159,6 @@ namespace :fix_one_time do
     end
   end
 
-  desc 'Fixes the bug with wrong observation lnglat'
-  task observation_lnglat: :environment do
-    for_real = ENV['FOR_REAL'] == 'true'
-
-    puts "RUNNING FOR REAL" if for_real
-    puts "DRY RUN" unless for_real
-
-    observations = Observation.where.not(fmu: nil)
-    observations.find_each do |observation|
-      fmu_lng = observation.fmu.geojson.dig('properties', 'centroid', 'coordinates')&.first
-      fmu_lat = observation.fmu.geojson.dig('properties', 'centroid', 'coordinates')&.second
-
-      next if fmu_lng.nil? || fmu_lat.nil?
-
-      if observation.lng.nil? || observation.lat.nil?
-        puts "NO lng lat for #{observation.id}, fixing"
-
-        observation.lng = fmu_lng
-        observation.lat = fmu_lat
-        observation.save! if for_real
-      elsif observation.lng.round(3) == fmu_lat.round(3) && observation.lat.round(3) == fmu_lng.round(3)
-        puts "FOUND wrong lng lat for #{observation.id}, fixing"
-
-        observation.lng = fmu_lng
-        observation.lat = fmu_lat
-        observation.save! if for_real
-      end
-    end
-  end
-
   desc 'Tasks to move already deleted reports attachments and evidences to private directory'
   task make_deleted_evidences_private: :environment do
     for_real = ENV['FOR_REAL'] == 'true'
