@@ -297,10 +297,12 @@ ActiveAdmin.setup do |config|
 end
 
 require 'active_admin/filter_saver/controller'
+require 'active_admin/paper_trail/show_page_extension'
 
 ActiveAdmin.before_load do |app|
   # Add Filters Extensions
   ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
+  ActiveAdmin::Views::Pages::Show.prepend ActiveAdmin::PaperTrail::ShowPageExtension
 end
 
 # Modifies the display of the CSVs so that it shows on to download an English and a French versions.
