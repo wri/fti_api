@@ -24,10 +24,10 @@ class RequiredGovDocument < ApplicationRecord
   acts_as_paranoid
   acts_as_list scope: [:country_id, :required_gov_document_group_id, deleted_at: nil]
 
-  translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
-  # rubocop:disable Style/BlockDelimiters
-  active_admin_translates :explanation do; end
-  # rubocop:enable Style/BlockDelimiters
+  translates :explanation, :name, paranoia: true, touch: true, versioning: :paper_trail
+  active_admin_translates :explanation, :name do
+    validates_presence_of :name
+  end
 
   belongs_to :required_gov_document_group
   belongs_to :country
@@ -35,7 +35,6 @@ class RequiredGovDocument < ApplicationRecord
 
   enum document_type: { file: 1, link: 2, stats: 3 }
 
-  validates_presence_of :name
   validates_inclusion_of :document_type, in: RequiredGovDocument.document_types.keys
   validates :valid_period, numericality: { greater_than: 0 }, if: :valid_period?
   validate :fixed_fields_unchanged

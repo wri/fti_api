@@ -12,6 +12,27 @@ ActiveAdmin.register RequiredGovDocument do
   permit_params :required_gov_document_group_id, :document_type, :country_id, :position,
                 :name, :valid_period, translations_attributes: [:id, :locale, :explanation]
 
+  filter :required_gov_document_group, collection: -> {
+    RequiredGovDocumentGroup
+      .all
+      .left_joins(:parent)
+      .order('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)')
+  }
+  filter :country
+  filter :document_type, as: :select, collection: RequiredGovDocument.document_types
+  filter :translations_name_eq,
+         as: :select, label: 'Name',
+         collection: -> {
+           RequiredGovDocument.with_translations(I18n.locale).order('required_gov_document_translations.name').pluck(:name)
+         }
+  filter :updated_at
+
+  controller do
+    def scoped_collection
+      end_of_association_chain.with_translations(I18n.locale)
+    end
+  end
+
   csv do
     column 'exists' do |rd|
       rd.deleted_at.nil?
@@ -23,7 +44,6 @@ ActiveAdmin.register RequiredGovDocument do
       rd.country&.name
     end
     column :name
-
   end
 
   index do
@@ -33,22 +53,11 @@ ActiveAdmin.register RequiredGovDocument do
     column :required_gov_document_group
     column :country
     column :position
-    column :name
+    column :name, sortable: 'required_gov_document_translations.name'
     column :document_type
 
     actions
   end
-
-  filter :required_gov_document_group, collection: -> {
-    RequiredGovDocumentGroup
-      .all
-      .left_joins(:parent)
-      .order('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)')
-  }
-  filter :country
-  filter :document_type, as: :select, collection: RequiredGovDocument.document_types
-  filter :name, as: :select
-  filter :updated_at
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -62,10 +71,10 @@ ActiveAdmin.register RequiredGovDocument do
       f.input :position
       f.input :document_type, as: :select, collection: RequiredGovDocument.document_types.keys,
                               include_blank: false, input_html: { disabled: editing }
-      f.input :name
       f.input :valid_period, label: 'Validity (days)'
       f.inputs 'Translated fields' do
         f.translated_inputs switch_locale: false do |t|
+          t.input :name
           t.input :explanation
         end
       end

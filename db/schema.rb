@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_15_120659) do
+ActiveRecord::Schema.define(version: 2023_01_05_111508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -793,13 +793,13 @@ ActiveRecord::Schema.define(version: 2022_12_15_120659) do
     t.datetime "updated_at", null: false
     t.text "explanation"
     t.datetime "deleted_at"
+    t.string "name"
     t.index ["deleted_at"], name: "index_required_gov_document_translations_on_deleted_at"
     t.index ["locale"], name: "index_required_gov_document_translations_on_locale"
     t.index ["required_gov_document_id"], name: "index_759a54fdd00cf06c291ffc4857fb904934dd47b9"
   end
 
   create_table "required_gov_documents", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
     t.integer "document_type", null: false
     t.integer "valid_period"
     t.datetime "deleted_at"
