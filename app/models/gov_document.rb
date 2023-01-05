@@ -40,8 +40,8 @@ class GovDocument < ApplicationRecord
   before_validation :set_status, on: :create
   before_validation :set_country, on: :create
 
-  validates_presence_of :start_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
-  validates_presence_of :expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
+  validates :start_date, presence: true, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
+  validates :expire_date, presence: true, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
 
   after_update :move_previous_attachment_to_private_directory, if: :saved_change_to_attachment?
 
@@ -49,11 +49,8 @@ class GovDocument < ApplicationRecord
   after_restore :move_attachment_to_public_directory
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
-  scope :to_expire, ->(date) {
-    where('expire_date < ?', date)
-      .where(status: EXPIRABLE_STATUSES)
-  }
-  scope :valid,        -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
+  scope :to_expire, ->(date) { where('expire_date < ?', date).where(status: EXPIRABLE_STATUSES) }
+  scope :valid, -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
 
   EXPIRABLE_STATUSES = %w[doc_valid]
 
