@@ -10,7 +10,7 @@ ActiveAdmin.register RequiredGovDocument do
 
   actions :all
   permit_params :required_gov_document_group_id, :document_type, :country_id, :position,
-                :name, :valid_period, translations_attributes: [:id, :locale, :explanation]
+                :valid_period, translations_attributes: [:id, :name, :locale, :explanation]
 
   filter :required_gov_document_group, collection: -> {
     RequiredGovDocumentGroup
@@ -35,9 +35,6 @@ ActiveAdmin.register RequiredGovDocument do
   end
 
   csv do
-    column 'exists' do |rd|
-      rd.deleted_at.nil?
-    end
     column 'required_gov_document_group' do |rd|
       rd.required_gov_document_group&.name
     end
@@ -48,9 +45,6 @@ ActiveAdmin.register RequiredGovDocument do
   end
 
   index do
-    bool_column :exists do |rod|
-      rod.deleted_at.nil?
-    end
     column :required_gov_document_group
     column :country
     column :position
