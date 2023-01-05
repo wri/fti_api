@@ -30,6 +30,7 @@ ActiveAdmin.register RequiredGovDocument do
   controller do
     def scoped_collection
       end_of_association_chain.with_translations(I18n.locale)
+        .includes(country: :translations, required_gov_document_group: [:translations, parent: :translations])
     end
   end
 
