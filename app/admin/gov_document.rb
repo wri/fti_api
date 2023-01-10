@@ -54,8 +54,9 @@ ActiveAdmin.register GovDocument do
       end
     end
     column 'Data' do |doc|
-      doc.link
-      "#{doc.value} #{doc.units}" if doc.value
+      next doc.link if doc.required_gov_document.link?
+      next "#{doc.value} #{doc.units}" if doc.value
+
       link_to doc.attachment.file.identifier, doc.attachment.url if doc.attachment.present?
     end
     column :user, sortable: 'users.name'
@@ -106,6 +107,7 @@ ActiveAdmin.register GovDocument do
       if resource.required_gov_document.document_type == 'stats'
         f.input :value
         f.input :units
+        f.input :link, label: 'Source link'
       end
       if resource.required_gov_document.document_type == 'file'
         f.input :attachment, as: :file, hint: preview_file_tag(f.object.attachment)
@@ -131,6 +133,7 @@ ActiveAdmin.register GovDocument do
       if resource.required_gov_document.document_type == 'stats'
         row :value
         row :units
+        row :source, &:link
       end
       if resource.required_gov_document.document_type == 'file'
         row :attachment do |doc|

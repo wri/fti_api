@@ -121,7 +121,6 @@ class GovDocument < ApplicationRecord
       self.value = self.units = nil
       remove_attachment!
     when 'stats'
-      self.link = nil
       remove_attachment!
     end
   end
