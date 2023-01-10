@@ -21,7 +21,7 @@ module V1
     include CacheableByLocale
     caching
     immutable
-    attributes :name, :valid_period, :document_type,
+    attributes :name, :explanation, :valid_period, :document_type,
                :required_gov_document_group_id, :position
 
     has_one :country
