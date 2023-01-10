@@ -215,13 +215,13 @@ TXT
 
     subject = "Your quarterly report. / Votre rapport trimestriel."
 
-    current_score_percentage = NumberHelper.float_to_percentage(current_score.all)
+    current_score_percentage = NumberHelper.float_to_percentage(current_score.all) rescue 0
 
     text_en = ["Your current score is #{current_score_percentage}."]
     text_fr = ["Votre score actuel est de #{current_score_percentage}."]
 
     if last_score.present?
-      last_score_percentage = NumberHelper.float_to_percentage(last_score.all)
+      last_score_percentage = NumberHelper.float_to_percentage(last_score.all) rescue 0
 
       score_change = NumberHelper.float_to_percentage(current_score.all - last_score.all)
       text_en << "Your score on #{last_score.date} was #{last_score_percentage}. This means a variation of #{score_change}."
@@ -236,9 +236,9 @@ TXT
     text_en << ['', 'Best,', 'OTP Team', '']
     text_fr << ['', 'Cordialement,', "L'équipe OTP", '']
 
-    body = text_en.join("\n")
-    body << "\n----------------------------------------------------\n"
-    body << text_fr.join("\n")
+    body = text_en.join("<br>")
+    body << "<br>----------------------------------------------------<br>"
+    body << text_fr.join("<br>")
 
     @from = ENV['CONTACT_EMAIL']
     @to = operator.users.pluck(:email).join(', ')
