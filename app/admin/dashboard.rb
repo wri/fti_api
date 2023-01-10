@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register_page "Dashboard" do
-
-  # menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
   menu false
+
+  page_action :change_language, method: :post do
+    if current_user.update(locale: params[:locale])
+      redirect_back fallback_location: admin_dashboard_path, notice: 'Language changed'
+    else
+      redirect_back fallback_location: admin_dashboard_path, notice: 'Language unchanged'
+    end
+  end
 
   page_action :deploy_portal, method: :post do
     authorize! :deploy_portal
