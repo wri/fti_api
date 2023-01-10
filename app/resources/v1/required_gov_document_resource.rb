@@ -29,5 +29,9 @@ module V1
     has_many :gov_documents
 
     filters :name, :document_type
+
+    def self.apply_includes(records, directives)
+      super.with_translations(I18n.locale)
+    end
   end
 end
