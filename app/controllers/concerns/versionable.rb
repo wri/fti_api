@@ -9,9 +9,9 @@ module Versionable
         def show
           model = resource.class.base_class
           variable = model.includes(versions: :item).find(params[:id])
-          @versions = variable.versions
+          @versions = variable.versions.where.not(event: 'create')
           begin
-            variable = variable.versions[params[:version].to_i].reify if params[:version]
+            variable = @versions[params[:version].to_i].reify if params[:version]
           rescue StandardError => e
             Sentry.capture_exception e
           end

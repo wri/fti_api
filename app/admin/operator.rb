@@ -11,7 +11,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   actions :all
   permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
                 :logo, :delete_logo, :email, fmu_ids: [],
-                translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                                             translations_attributes: [:id, :locale, :name, :details, :_destroy]
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -222,6 +222,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :fa_id
       row :details
       row :country
+      row :concession
       row :logo do |o|
         link_to o.logo&.identifier, o.logo&.url
       end
