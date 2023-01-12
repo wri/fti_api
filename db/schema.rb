@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_05_111508) do
+ActiveRecord::Schema.define(version: 2023_01_12_102606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -175,6 +175,8 @@ ActiveRecord::Schema.define(version: 2023_01_05_111508) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "region_name"
+    t.text "overview"
+    t.text "vpa_overview"
     t.index ["country_id"], name: "index_country_translations_on_country_id"
     t.index ["locale"], name: "index_country_translations_on_locale"
     t.index ["name", "country_id"], name: "index_country_translations_on_name_and_country_id"

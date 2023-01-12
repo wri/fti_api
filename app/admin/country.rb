@@ -24,7 +24,7 @@ ActiveAdmin.register Country do
   filter :region_name
   filter :is_active
 
-  permit_params translations_attributes: [:id, :locale, :name, :_destroy]
+  permit_params translations_attributes: [:id, :locale, :name, :overview, :vpa_overview, :_destroy]
 
   csv do
     column :is_active
@@ -51,6 +51,8 @@ ActiveAdmin.register Country do
     f.inputs 'Country Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
+        t.input :overview
+        t.input :vpa_overview
       end
 
       f.actions
@@ -63,6 +65,8 @@ ActiveAdmin.register Country do
       row :iso
       row :region_iso
       row :is_active
+      row :overview
+      row :vpa_overview
       row :created_at
       row :updated_at
     end

@@ -5,7 +5,6 @@
 # Table name: required_gov_documents
 #
 #  id                             :integer          not null, primary key
-#  name                           :string           not null
 #  document_type                  :integer          not null
 #  valid_period                   :integer
 #  deleted_at                     :datetime
@@ -16,6 +15,7 @@
 #  position                       :integer
 #  explanation                    :text
 #  deleted_at                     :datetime
+#  name                           :string
 #
 
 class RequiredGovDocument < ApplicationRecord

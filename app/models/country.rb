@@ -12,15 +12,17 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  is_active        :boolean          default(FALSE), not null
+#  overview         :text
+#  vpa_overview     :text
 #  name             :string
 #  region_name      :string
 #
 
 class Country < ApplicationRecord
   include Translatable
-  translates :name, :region_name, touch: true
+  translates :name, :region_name, :overview, :vpa_overview, touch: true
 
-  active_admin_translates :name, :region_name do
+  active_admin_translates :name, :region_name, :overview, :vpa_overview do
     validates_presence_of :name
   end
 

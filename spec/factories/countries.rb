@@ -10,6 +10,8 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  is_active        :boolean          default(FALSE), not null
+#  overview         :text
+#  vpa_overview     :text
 #  name             :string
 #  region_name      :string
 #
