@@ -51,8 +51,42 @@ ActiveAdmin.register Country do
     f.inputs 'Country Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
-        t.input :overview
-        t.input :vpa_overview
+        t.input :overview,
+          as: :quill_editor,
+          input_html: {
+            data: {
+              options: {
+                modules: {
+                  toolbar: [['bold', 'italic', 'underline'],
+                            ['link', 'video'],
+                            [{ 'script': 'sub' }, { 'script': 'super' }],
+                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                            [{ 'color': [] }, { 'background': [] }],
+                            ['clean']]
+                },
+                placeholder: 'Type something...',
+                theme: 'snow'
+              }
+            }
+          }
+        t.input :vpa_overview,
+          as: :quill_editor,
+          input_html: {
+            data: {
+              options: {
+                modules: {
+                  toolbar: [['bold', 'italic', 'underline'],
+                            ['link', 'video'],
+                            [{ 'script': 'sub' }, { 'script': 'super' }],
+                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                            [{ 'color': [] }, { 'background': [] }],
+                            ['clean']]
+                },
+                placeholder: 'Type something...',
+                theme: 'snow'
+              }
+            }
+          }
       end
 
       f.actions
@@ -65,8 +99,10 @@ ActiveAdmin.register Country do
       row :iso
       row :region_iso
       row :is_active
-      row :overview
-      row :vpa_overview
+      # rubocop:disable Rails/OutputSafety
+      row(:overview) { |c| c.overview&.html_safe }
+      row(:vpa_overview) { |c| c.vpa_overview&.html_safe }
+      # rubocop:enable Rails/OutputSafety
       row :created_at
       row :updated_at
     end
