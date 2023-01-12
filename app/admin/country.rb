@@ -51,42 +51,8 @@ ActiveAdmin.register Country do
     f.inputs 'Country Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
-        t.input :overview,
-          as: :quill_editor,
-          input_html: {
-            data: {
-              options: {
-                modules: {
-                  toolbar: [['bold', 'italic', 'underline'],
-                            ['link', 'video'],
-                            [{ 'script': 'sub' }, { 'script': 'super' }],
-                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                            [{ 'color': [] }, { 'background': [] }],
-                            ['clean']]
-                },
-                placeholder: 'Type something...',
-                theme: 'snow'
-              }
-            }
-          }
-        t.input :vpa_overview,
-          as: :quill_editor,
-          input_html: {
-            data: {
-              options: {
-                modules: {
-                  toolbar: [['bold', 'italic', 'underline'],
-                            ['link', 'video'],
-                            [{ 'script': 'sub' }, { 'script': 'super' }],
-                            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                            [{ 'color': [] }, { 'background': [] }],
-                            ['clean']]
-                },
-                placeholder: 'Type something...',
-                theme: 'snow'
-              }
-            }
-          }
+        t.input :overview, as: :html_editor
+        t.input :vpa_overview, as: :html_editor
       end
 
       f.actions

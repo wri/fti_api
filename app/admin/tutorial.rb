@@ -27,20 +27,7 @@ ActiveAdmin.register Tutorial do
       f.input :position
       f.translated_inputs switch_locale: false do |t|
         t.input :name
-        t.input :description,
-                as: :quill_editor,
-                input_html: {
-                  data: {
-                    options: {
-                      modules: {
-                        toolbar: [['bold', 'italic', 'underline'],
-                                  ['link', 'video']]
-                      },
-                      placeholder: 'Type something...',
-                      theme: 'snow'
-                    }
- }
- }
+        t.input :description, as: :html_editor
       end
     end
     f.actions
