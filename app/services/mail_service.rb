@@ -213,7 +213,7 @@ TXT
     last_score = operator.score_operator_documents.at_date(Date.today - 3.months).order(:date).last
     expiring_docs = operator.operator_documents.to_expire(Date.today + 3.months)
 
-    subject = "Your quarterly report. / Votre rapport trimestriel."
+    subject = "Your OTP quarterly report. / Votre rapport trimestriel de OTP."
 
     current_score_percentage = NumberHelper.float_to_percentage(current_score.all) rescue 0
 
