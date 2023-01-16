@@ -106,6 +106,8 @@ class Operator < ApplicationRecord
     end
   }
 
+  ransacker(:name) { Arel.sql('operator_translations.name') } # for nested_select in observation form
+
   class Translation
     after_save do
       if saved_change_to_name? && locale == :en

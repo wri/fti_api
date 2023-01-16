@@ -79,6 +79,8 @@ class Fmu < ApplicationRecord
   scope :filter_by_forest_type,           ->(forest_type)  { where(forest_type: forest_type) }
   scope :discriminate_by_forest_type,     ->(forest_type)  { where.not(forest_type: forest_type) }
 
+  ransacker(:name) { Arel.sql('fmu_translations.name') } # for nested_select in observation form
+
   class << self
     def fetch_all(options)
       country_ids  = options['country_ids'] if options.present? && options['country_ids'].present? && ValidationHelper.ids?(options['country_ids'])
