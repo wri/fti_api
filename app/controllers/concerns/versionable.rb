@@ -10,6 +10,7 @@ module Versionable
           model = resource.class.base_class
           variable = model.includes(versions: :item).find(params[:id])
           @versions = variable.versions.where.not(event: 'create')
+          @create_version = variable.versions.where(event: 'create').first
           begin
             variable = @versions[params[:version].to_i].reify if params[:version]
           rescue StandardError => e
