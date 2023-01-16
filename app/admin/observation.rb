@@ -455,10 +455,13 @@ ActiveAdmin.register Observation do
                   },
                   level_2: {
                     attribute: :operator_id,
+                    order: 'operator_translations.name_asc',
+                    minimum_input_length: 0,
                     url: '/admin/producers'
                   },
                   level_3: {
-                    attribute: :fmu_id
+                    attribute: :fmu_id,
+                    minimum_input_length: 0
                   }
         else
           f.input :country
@@ -470,16 +473,20 @@ ActiveAdmin.register Observation do
                 level_1: {
                   attribute: :category_id,
                   display_name: :name,
-                  fields: ['category_translations.name']
+                  minimum_input_length: 0,
+                  order: 'category_translations.name_asc'
                 },
                 level_2: {
                   attribute: :subcategory_id,
                   display_name: :name,
-                  fields: ['subcategory_translations.name']
+                  minimum_input_length: 0,
+                  order: 'subcategory_translations.name_asc'
                 },
                 level_3: {
                   attribute: :severity_id,
-                  fields: ['severity_translations.details']
+                  minimum_input_length: 0,
+                  fields: [:details],
+                  order: 'severity_translations.details_asc'
                 }
         f.input :law, collection:
           Law.with_country_subcategory.map {

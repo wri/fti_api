@@ -29,6 +29,8 @@ class Category < ApplicationRecord
                            .order('category_translations.name ASC')
   }
 
+  ransacker(:name) { Arel.sql('category_translations.name') } # for nested_select in observation form
+
   def cache_key
     super + '-' + Globalize.locale.to_s
   end

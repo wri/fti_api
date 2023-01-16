@@ -33,6 +33,8 @@ class Severity < ApplicationRecord
 
   default_scope { includes(:translations) }
 
+  ransacker(:details) { Arel.sql('severity_translations.details') } # for nested_select in observation form
+
   def cache_key
     super + '-' + Globalize.locale.to_s
   end

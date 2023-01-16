@@ -30,6 +30,8 @@ class Subcategory < ApplicationRecord
   has_many :observations, inverse_of: :subcategory, dependent: :destroy
   has_many :laws, inverse_of: :subcategory
 
+  ransacker(:name) { Arel.sql('subcategory_translations.name') } # for nested_select in observation form
+
   default_scope do
     includes(:translations)
   end
