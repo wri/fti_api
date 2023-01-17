@@ -19,6 +19,6 @@ class DocumentFileUploader < ApplicationUploader
       Date.today.to_s
     ].compact.join('-')
 
-    filename + File.extname(super)
+    sanitize_filename(filename + File.extname(super))
   end
 end

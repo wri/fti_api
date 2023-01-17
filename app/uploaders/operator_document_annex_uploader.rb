@@ -12,9 +12,9 @@ class OperatorDocumentAnnexUploader < ApplicationUploader
   def filename
     return if super.blank?
 
-    suffix = model&.operator_document&.attachment&.file&.basename&.parameterize || 'no_document'
+    suffix = model&.operator_document&.attachment&.file&.basename&.parameterize&.first(200) || 'no_document'
     filename = "Annex_#{Time.now.to_i}_" + suffix
     filename += '.' + super.split('.').last if super.split('.').any?
-    filename
+    sanitize_filename(filename)
   end
 end

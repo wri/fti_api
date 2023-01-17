@@ -12,9 +12,9 @@ class GovDocumentUploader < ApplicationUploader
   def filename
     return if super.blank?
 
-    filename = '' + model.required_gov_document.name + '-' + random_token + '-' + Date.today.to_s
+    filename = '' + model.required_gov_document.name.first(200) + '-' + random_token + '-' + Date.today.to_s
     filename += '.' + super.split('.').last if super.split('.').any?
-    filename
+    sanitize_filename(filename)
   end
 
   def private_upload?
