@@ -221,7 +221,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :fa_id
       row :details
       row :country
-      image_row :logo
+      row :logo do |o|
+        link_to o.logo&.identifier, o.logo&.url
+      end
       row :address
       row :website
       row :fmus

@@ -89,7 +89,9 @@ ActiveAdmin.register ObservationReport do
       end
     end
     column :publication_date
-    attachment_column :attachment
+    column :attachment do |o|
+      link_to o.attachment&.identifier, o.attachment&.url
+    end
     column :user
     column :country do |o|
       country = o.observations.first&.country
@@ -146,7 +148,9 @@ ActiveAdmin.register ObservationReport do
       row :created_at
       row :updated_at
       row :deleted_at
-      attachment_row('File', :attachment, label: 'Download File')
+      row :attachment do |o|
+        link_to o.attachment&.identifier, o.attachment&.url
+      end
     end
     active_admin_comments
   end

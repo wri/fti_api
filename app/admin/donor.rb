@@ -27,7 +27,9 @@ ActiveAdmin.register Donor do
   index do
     column :name
     column :website
-    image_column :logo
+    column :logo do |d|
+      link_to d.logo&.identifier, d.logo&.url
+    end
     column :priority
     column :description
 
@@ -55,7 +57,9 @@ ActiveAdmin.register Donor do
     attributes_table do
       row :name
       row :website
-      image_row :logo
+      row :logo do |d|
+        link_to d.logo&.identifier, d.logo&.url
+      end
       row :priority
       row :description
       row :created_at

@@ -23,6 +23,12 @@ ActiveAdmin.register Observation do
     end
   end
 
+  before_action do
+    if %w[POST PATCH].include?(request.method) && action_name != 'batch_action'
+      resource.user_type = :admin
+    end
+  end
+
   scope_to do
     Class.new do
       def self.observations
@@ -32,28 +38,42 @@ ActiveAdmin.register Observation do
   end
 
   actions :all, except: [:new]
-  permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :operator_id,
-                :validation_status, :publication_date, :is_active, :observation_report_id,
-                :location_information, :evidence_type, :evidence_on_report, :location_accuracy,
-                :law_id, :fmu_id, :hidden, :admin_comment, :monitor_comment, :actions_taken,
-                :responsible_admin_id, observer_ids: [], relevant_operator_ids: [], government_ids: [],
-                                       observation_documents_attributes: [:id, :name, :attachment],
-                                       translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
-
+  controller do
+    def permitted_params
+      if current_user.user_permission.user_role == 'bo_manager'
+        params.permit(observation: [:validation_status, :admin_comment])
+      else
+        params.permit(
+          observation: [
+            :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
+            :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
+            :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :admin_comment,
+            :monitor_comment, :actions_taken, :responsible_admin_id, :is_physical_place,
+            observer_ids: [], relevant_operator_ids: [], government_ids: [],
+            observation_documents_attributes: [:id, :name, :attachment],
+            translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
+          ]
+        )
+      end
+    end
+  end
 
   member_action :ready_for_publication, method: :put do
-    resource.update(validation_status: Observation.validation_statuses['Ready for publication'])
-    redirect_to collection_path, notice: 'Observation approved'
+    resource.validation_status = Observation.validation_statuses['Ready for publication']
+    notice = resource.save ?  'Observation moved to Ready for Publication' : 'Observation NOT modified'
+    redirect_to collection_path, notice: notice
   end
 
   member_action :needs_revision, method: :put do
-    resource.update(validation_status: Observation.validation_statuses['Needs revision'])
-    redirect_to collection_path, notice: 'Observation needs revision'
+    resource.validation_status = Observation.validation_statuses['Needs revision']
+    notice = resource.save ?  'Observation moved to Needs Revision' : 'Observation NOT modified'
+    redirect_to collection_path, notice: notice
   end
 
   member_action :start_qc, method: :put do
-    resource.update(validation_status: Observation.validation_statuses['QC in progress'])
-    redirect_to collection_path, notice: 'QC in progress for observations'
+    resource.validation_status = Observation.validation_statuses['QC in progress']
+    notice = resource.save ?  'Observation moved to QC in Progress' : 'Observation not modified'
+    redirect_to collection_path, notice: notice
   end
 
   action_item :ready_for_publication, only: :show do
@@ -79,60 +99,48 @@ ActiveAdmin.register Observation do
     end
   end
 
-  batch_action :move_to_qc_in_progress, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: Observation.validation_statuses['QC in progress']) if observation.validation_status == 'Ready for QC'
-    end
-    redirect_to collection_path, notice: 'QC started'
-  end
+  # Bulk actions should be available only if this env flag is set to `true`
+  if ENV.fetch('BULK_EDIT_OBSERVATIONS', 'TRUE').upcase == 'TRUE'
+    batch_action :move_to_qc_in_progress, confirm: 'Are you sure you want to start QC for all these observations?' do |ids|
+      batch_action_collection.find(ids).each do |observation|
+        next unless observation.validation_status == 'Ready for QC'
 
-  batch_action :move_to_needs_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: Observation.validation_statuses['Needs revision']) if observation.validation_status == 'QC in progress'
+        observation.update(validation_status: 'QC in progress')
+      end
+      redirect_to collection_path, notice: 'QC started'
     end
-    redirect_to collection_path, notice: 'Required revision for observations'
-  end
 
-  batch_action :move_to_ready_for_publication, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: Observation.validation_statuses['Ready for publication']) if observation.validation_status == 'QC in progress'
-    end
-    redirect_to collection_path, notice: 'Observations ready to be published'
-  end
+    batch_action :move_to_needs_revision, confirm: 'Are you sure you want to require revision for all these observations?' do |ids|
+      batch_action_collection.find(ids).each do |observation|
+        next unless observation.validation_status == 'QC in progress'
 
-  batch_action :move_to_published_no_comments, confirm: 'Are you sure you want to mark these publications as published without comments? No validation will be done!!' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: 'Published (no comments)')
+        observation.update(validation_status: 'Needs revision')
+      end
+      redirect_to collection_path, notice: 'Required revision for observations'
     end
-    redirect_to collection_path, notice: 'Observations published without comments'
-  end
 
-  batch_action :move_to_published_not_modified, confirm: 'Are you sure you want to mark these publications as published without modifications? No validation will be done!!' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: 'Published (not modified)')
-    end
-    redirect_to collection_path, notice: 'Observations published without modifications'
-  end
+    batch_action :move_to_ready_for_publication, confirm: 'Are you sure you want to mark these publications as ready to publish?' do |ids|
+      batch_action_collection.find(ids).each do |observation|
+        next unless observation.validation_status == 'QC in progress'
 
-  batch_action :move_to_published_modified, confirm: 'Are you sure you want to mark these publications as published with modifications? No validation will be done!!' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(validation_status: 'Published (modified)')
+        observation.update(validation_status: 'Ready for publication')
+      end
+      redirect_to collection_path, notice: 'Observations ready to be published'
     end
-    redirect_to collection_path, notice: 'Observations published with modifications'
-  end
 
-  batch_action :hide, confirm: 'Are you sure you want to hide all the selected observations?' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(hidden: true)
+    batch_action :hide, confirm: 'Are you sure you want to hide all the selected observations?' do |ids|
+      batch_action_collection.find(ids).each do |observation|
+        observation.update(hidden: true)
+      end
+      redirect_to collection_path, notice: 'Documents hidden!'
     end
-    redirect_to collection_path, notice: 'Documents hidden!'
-  end
 
-  batch_action :unhide, confirm: 'Are you sure you want to un-hide all the selected observations?' do |ids|
-    batch_action_collection.find(ids).each do |observation|
-      observation.update(hidden: false)
+    batch_action :unhide, confirm: 'Are you sure you want to un-hide all the selected observations?' do |ids|
+      batch_action_collection.find(ids).each do |observation|
+        observation.update(hidden: false)
+      end
+      redirect_to collection_path, notice: 'Documents un-hidden!'
     end
-    redirect_to collection_path, notice: 'Documents un-hidden!'
   end
 
   sidebar 'Documents', only: :show do
@@ -189,7 +197,6 @@ ActiveAdmin.register Observation do
   filter :publication_date
   filter :updated_at
   filter :deleted_at
-
 
   csv do
     column :id
@@ -414,68 +421,129 @@ ActiveAdmin.register Observation do
   end
 
   form do |f|
-    operator   = object.operator_id.present? ? true : false
-    fmu        = object.fmu_id.present? ? true : false
-    government = object.government_ids.present? ? true : false
+    allow_override = current_user.user_permission.user_role == 'admin'
+    visibility = { input_html: { disabled: !allow_override } }
 
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Management' do
-      f.input :responsible_admin, as: :select,
-                                  collection: User.joins(:user_permission).where(user_permissions: { user_role: :admin })
+      f.input :responsible_admin, **visibility,
+              as: :select,
+              collection: User.joins(:user_permission).where(user_permissions: { user_role: :admin })
     end
     f.inputs 'Info' do
       f.input :id, input_html: { disabled: true }
     end
     f.inputs 'Status' do
       f.input :is_active, input_html: { disabled: true }
-      f.input :hidden
-      f.input :validation_status
+      f.input :hidden, **visibility
+      if Observation::STATUS_TRANSITIONS[:admin].key?(f.object.validation_status)
+        valid_statuses = [Observation::STATUS_TRANSITIONS[:admin][f.object.validation_status], f.object.validation_status].flatten
+        f.input :validation_status, collection: valid_statuses
+      else
+        f.input :validation_status, { input_html: { disabled: true } }
+      end
     end
     f.inputs 'Observation Details' do
-      f.input :country, input_html: { disabled: true }
       f.input :observation_type, input_html: { disabled: true }
-      f.input :subcategory, input_html: { disabled: true }
-      f.input :law, collection: Law.by_country_subcategory(object).map { |l| [l.written_infraction, l.id] } rescue ''
-      f.input :severity, as: :select,
-                         collection: object.subcategory.severities.map { |s| ["#{s.level} - #{s.details.first(80)}", s.id] } rescue ''
-      f.input :is_physical_place, input_html: { disabled: true }
-      f.input :location_information  if f.object.observation_type == 'operator'
-      f.input :fmu, input_html: { disabled: fmu } if f.object.observation_type == 'operator'
-      f.input :observers
+      if allow_override
+        if f.object.observation_type == 'operator'
+          f.input :fmu_id,
+                  as: :nested_select,
+                  level_1: {
+                    attribute: :country_id,
+                    collection: Country.with_translations(I18n.locale)
+                  },
+                  level_2: {
+                    attribute: :operator_id,
+                    order: 'operator_translations.name_asc',
+                    minimum_input_length: 0,
+                    url: '/admin/producers'
+                  },
+                  level_3: {
+                    attribute: :fmu_id,
+                    minimum_input_length: 0,
+                    order: 'fmu_translations.name_asc'
+                  }
+        else
+          f.input :country
+        end
+
+        f.input :severity_id,
+                as: :nested_select,
+                display_name: :details,
+                level_1: {
+                  attribute: :category_id,
+                  display_name: :name,
+                  minimum_input_length: 0,
+                  order: 'category_translations.name_asc'
+                },
+                level_2: {
+                  attribute: :subcategory_id,
+                  display_name: :name,
+                  minimum_input_length: 0,
+                  order: 'subcategory_translations.name_asc'
+                },
+                level_3: {
+                  attribute: :severity_id,
+                  minimum_input_length: 0,
+                  fields: [:details],
+                  order: 'severity_translations.details_asc'
+                }
+        f.input :law, collection:
+          Law.with_country_subcategory.map {
+            ["#{_1.country.name} - #{_1.subcategory.name} - #{_1.written_infraction}", _1.id]
+        }
+      else
+        f.input :country, input_html: { disabled: true }
+        f.input :operator, input_html: { disabled: true } if f.object.observation_type == 'operator'
+        f.input :fmu, input_html: { disabled: true } if f.object.observation_type == 'operator'
+        f.input :subcategory, input_html: { disabled: true }
+        f.input :severity, as: :string, input_html: {
+          disabled: true, value: "#{f.object.severity&.level} - #{f.object.severity&.details&.first(80)}"
+        }
+        f.input :law, as: :string, input_html: { disabled: true, value: f.object.law&.written_infraction }
+      end
+
+      f.input :is_physical_place, **visibility
+      f.input :location_information, **visibility if f.object.observation_type == 'operator'
+      f.input :observers, **visibility
 
       f.input :relevant_operator_ids,
               label: 'Relevant Operators',
               as: :select, collection: Operator.all.map { |o| [o.name, o.id] },
-              input_html: { multiple: true }
+              input_html: { multiple: true, disabled: !allow_override }
       if f.object.observation_type == 'government'
         f.input :government_ids,
                 label: "Governments",
                 as: :select,
                 collection: Government.all.map { |g| [g.government_entity, g.id] },
-                input_html: { disabled: government, multiple: true }
+                input_html: { disabled: !allow_override, multiple: true }
       end
-      f.input :operator, input_html: { disabled: operator } if f.object.observation_type == 'operator'
-      f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false }
-      f.input :pv
-      f.input :location_accuracy, as: :select
-      f.input :lat
-      f.input :lng
-      f.input :actions_taken
+      f.input :publication_date,
+              as: :date_time_picker,
+              picker_options: { timepicker: false },
+              **visibility
+      f.input :pv, **visibility
+      f.input :location_accuracy, as: :select, **visibility
+      f.input :lat, **visibility
+      f.input :lng, **visibility
+      f.input :actions_taken, **visibility
       f.input :admin_comment
-      f.input :monitor_comment, input_html: { disabled: true }
-      f.input :observation_report, as: :select
-      f.input :evidence_type, as: :select
-      f.input :evidence_on_report, label: 'Evidence in the report'
+      f.input :monitor_comment, **visibility
+      f.input :observation_report, as: :select, **visibility
+      f.input :evidence_type, as: :select, **visibility
+      f.input :evidence_on_report, label: 'Evidence in the report', **visibility
       f.has_many :observation_documents, new_record: 'Add evidence', heading: 'Evidence' do |t|
-        t.input :name
-        t.input :attachment
+        t.input :name, input_html: { disabled: !allow_override }
+        t.input :attachment, **visibility
       end
     end
+
     f.inputs 'Translated fields' do
       f.translated_inputs switch_locale: false do |t|
-        t.input :details
-        t.input :concern_opinion
-        t.input :litigation_status
+        t.input :details, **visibility
+        t.input :concern_opinion, **visibility
+        t.input :litigation_status, **visibility
       end
     end
     f.actions

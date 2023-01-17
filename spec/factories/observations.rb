@@ -83,12 +83,20 @@ FactoryBot.define do
     lng { 12.2222 }
     lat { 12.3333 }
 
+    transient do
+      force_status { nil }
+    end
+
     factory :created_observation, class: 'Observation' do
       validation_status { 'Created' }
     end
 
     after(:build) do |observation|
       observation.observers.each { |observer| observer.translation.name = observer.name  }
+    end
+
+    after(:create) do |doc, evaluator|
+      doc.update_attributes(validation_status: evaluator.force_status) if evaluator.force_status
     end
   end
 end

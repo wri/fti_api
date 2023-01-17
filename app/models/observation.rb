@@ -143,7 +143,7 @@ class Observation < ApplicationRecord
   before_save    :set_centroid
 
   after_create   :update_operator_scores, if: :is_active?
-  after_update   :update_operator_scores,   if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? }
+  after_update   :update_operator_scores,   if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? || saved_change_to_operator_id? || saved_change_to_fmu_id? }
   after_update   :update_reports_observers, if: :saved_change_to_observation_report_id?
 
   after_save :create_history, if: :saved_changes?
@@ -156,7 +156,6 @@ class Observation < ApplicationRecord
 
   after_save       :prepare_notifications
   after_commit     :notify
-
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, -> { includes(:translations).where(is_active: true).visible }
@@ -245,6 +244,10 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
 
   def update_operator_scores
     ScoreOperatorObservation.recalculate! operator if operator.present?
+    return unless operator_id_was == operator_id
+
+    old_operator = Operator.find_by id: operator_id_was
+    ScoreOperatorObservation.recalculate! old_operator if old_operator.present?
   end
 
   def set_active_status
@@ -289,8 +292,9 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
     errors.add(:governments, "Should have no governments with 'operator' type")
   end
 
+  # Validates the statuses transitions.
+  # This method makes sure the state machine of observations' statuses is enforced.
   def status_changes
-    return unless @user_type
     return if validation_status == validation_status_was
     return if STATUS_TRANSITIONS.dig(@user_type, validation_status_was)&.include? validation_status
 
