@@ -17,7 +17,6 @@
 #  certification_tlv    :boolean          default(FALSE)
 #  forest_type          :integer          default("fmu"), not null
 #  geometry             :geometry         geometry, 0
-#  properties           :jsonb
 #  deleted_at           :datetime
 #  certification_ls     :boolean          default(FALSE)
 #  name                 :string
@@ -56,7 +55,7 @@ class Fmu < ApplicationRecord
   accepts_nested_attributes_for :operators
   accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes['operator_id'].blank? }
 
-  before_validation :update_geojson
+  before_validation :update_geojson_properties
 
   validates :country_id, presence: true
   validates :name, presence: true
@@ -107,7 +106,7 @@ class Fmu < ApplicationRecord
       query = <<~SQL
         SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
           FROM (
-            SELECT id, properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}), 4096, 256, true) AS mvtgeometry
+            SELECT id, geojson -> 'properties' as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}), 4096, 256, true) AS mvtgeometry
             FROM (
               SELECT fmus.*, st_transform(geometry, 3857) as the_geom_webmercator
               FROM fmus
@@ -133,32 +132,30 @@ class Fmu < ApplicationRecord
     @esri_shapefiles_zip = esri_shapefiles_zip
   end
 
-  def update_geojson
-    update_properties
+  def update_geojson_properties
+    return if geojson.blank?
 
-    temp_geojson = self.geojson
-    return if temp_geojson.blank?
-
-    temp_geojson['properties'] = temp_geojson.fetch('properties', {}).merge(self.properties)
-    self.geojson = temp_geojson
+    fmu_type_label = Fmu::FOREST_TYPES[forest_type.to_sym][:geojson_label] rescue ''
+    geojson['properties'] = (geojson['properties'] || {}).merge({
+      'id' => id,
+      'fmu_name' => name,
+      'iso3_fmu' => country&.iso,
+      'company_na' => operator&.name,
+      'operator_id' => operator&.id,
+      'certification_fsc' => certification_fsc,
+      'certification_pefc' => certification_pefc,
+      'certification_olb' => certification_olb,
+      'certification_pafc' => certification_pafc,
+      'certification_fsc_cw' => certification_fsc_cw,
+      'certification_tlv' => certification_tlv,
+      'certification_ls' => certification_ls,
+      'observations' => active_observations.reload.uniq.count,
+      'fmu_type_label' => fmu_type_label
+    })
   end
 
-  def update_properties
-    self.properties = {} if properties.blank?
-    self.properties['id'] = self.id
-    self.properties['fmu_name'] = self.name
-    self.properties['iso3_fmu'] = self.country&.iso
-    self.properties['company_na'] = self.operator&.name
-    self.properties['operator_id'] = self.operator&.id
-    self.properties['certification_fsc'] = self.certification_fsc
-    self.properties['certification_pefc'] = self.certification_pefc
-    self.properties['certification_olb'] = self.certification_olb
-    self.properties['certification_pafc'] = self.certification_pafc
-    self.properties['certification_fsc_cw'] = self.certification_fsc_cw
-    self.properties['certification_tlv'] = self.certification_tlv
-    self.properties['certification_ls'] = self.certification_ls
-    self.properties['observations'] = self.active_observations.reload.uniq.count
-    self.properties['fmu_type_label'] = Fmu::FOREST_TYPES[self.forest_type.to_sym][:geojson_label] rescue ''
+  def properties
+    geojson['properties']
   end
 
   def bbox
@@ -199,41 +196,6 @@ class Fmu < ApplicationRecord
     { errors: e.message }
   end
 
-  def update_geometry
-    # Atention! changing this query to update only the geom
-    # using the current fmu_id will end up in massive mess up
-    # of missmatched fmus and geometries.
-    # https://github.com/Vizzuality/fti_api/commit/0993ccc728c5304b5a33f54c358cb828888457f9
-    # you can check it using fmus:update_geometry
-    query =
-      <<~SQL
-        WITH g as (
-        SELECT *, x.properties as prop, ST_GeomFromGeoJSON(x.geometry) as the_geom
-        FROM fmus CROSS JOIN LATERAL
-        jsonb_to_record(geojson) AS x("type" TEXT, geometry jsonb, properties jsonb )
-        )
-        update fmus
-        set geometry = g.the_geom , properties = g.prop
-        from g
-        where fmus.id = g.id;
-      SQL
-    ActiveRecord::Base.connection.execute query
-    update_centroid
-  end
-
-  def update_centroid
-    query = <<~SQL
-      update fmus
-        set geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)
-      where fmus.id = :fmu_id;
-    SQL
-    Fmu.execute_sql(query, self.id)
-  end
-
-  def self.execute_sql(sql_command, fmu_id)
-    ActiveRecord::Base.connection.update(sanitize_sql_for_assignment([sql_command, fmu_id: fmu_id]))
-  end
-
   def cache_key
     super + '-' + Globalize.locale.to_s
   end
@@ -249,6 +211,25 @@ class Fmu < ApplicationRecord
   end
 
   private
+
+  def update_geometry
+    query = <<~SQL
+      update fmus
+        set geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')
+      where fmus.id = :fmu_id
+    SQL
+    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
+    update_centroid
+  end
+
+  def update_centroid
+    query = <<~SQL
+      update fmus
+        set geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)
+      where fmus.id = :fmu_id;
+    SQL
+    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
+  end
 
   def geojson_correctness
     return if geojson.blank?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_06_154335) do
+ActiveRecord::Schema.define(version: 2022_12_21_130502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -266,7 +266,6 @@ ActiveRecord::Schema.define(version: 2022_12_06_154335) do
     t.boolean "certification_tlv", default: false
     t.integer "forest_type", default: 0, null: false
     t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
-    t.jsonb "properties"
     t.datetime "deleted_at"
     t.boolean "certification_ls", default: false
     t.index ["country_id"], name: "index_fmus_on_country_id"
