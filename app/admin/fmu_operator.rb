@@ -8,6 +8,12 @@ ActiveAdmin.register FmuOperator do
 
   menu false
 
+  controller do
+    def scoped_collection
+      end_of_association_chain.includes([[operator: :translations], [fmu: :translations]])
+    end
+  end
+
   actions :show, :edit, :index, :update, :new, :create
 
   permit_params :fmu_id, :operator_id, :current, :start_date, :end_date

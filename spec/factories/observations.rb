@@ -99,4 +99,10 @@ FactoryBot.define do
       doc.update_attributes(validation_status: evaluator.force_status) if evaluator.force_status
     end
   end
+
+  trait :with_translations do
+    details { 'details' }
+    concern_opinion { 'concern opinion' }
+    litigation_status { 'litigation status' }
+  end
 end
