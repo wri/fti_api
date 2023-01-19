@@ -3,6 +3,7 @@ require 'rails_helper'
 module V1
   describe 'Operator', type: :request do
     let(:country) { create(:country) }
+    let(:existing_operator) { create(:operator, name: 'Existing') }
 
     it_behaves_like "jsonapi-resources", Operator, {
       show: {},
@@ -10,8 +11,8 @@ module V1
         success_roles: %i[admin user webuser],
         failure_roles: [],
         valid_params: -> { { name: 'Operator one', 'operator-type': 'Other', relationships: { country: country.id } } },
-        invalid_params: { name: '', 'operator-type': 'Other' },
-        error_attributes: [422, 100, { name: ["can't be blank"], relationships_country: ["can't be blank"] }]
+        invalid_params: -> { { name: existing_operator.name.downcase, 'operator-type': 'Other' } },
+        error_attributes: [422, 100, { name: ["has already been taken"], relationships_country: ["can't be blank"] }]
       },
       edit: {
         success_roles: %i[admin],
