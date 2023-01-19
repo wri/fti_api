@@ -29,6 +29,7 @@ module V1
     filters :is_active, :name, :operator_type, :fa
 
     before_create :set_active
+    after_create :send_notification
 
     def type
       @model.type
@@ -130,6 +131,12 @@ module V1
       else
         Operator.active
       end
+    end
+
+    private
+
+    def send_notification
+      MailService.new.notify_operator_creation(@model).deliver
     end
   end
 end
