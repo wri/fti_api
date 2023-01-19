@@ -241,7 +241,7 @@ TXT
     body << text_fr.join("<br>")
 
     @from = ENV['CONTACT_EMAIL']
-    @to = operator.users.pluck(:email).join(', ')
+    @to = operator.users.pluck(:email)
     @body = body
     @subject = subject
     @content_type = "text/html"
