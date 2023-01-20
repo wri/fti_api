@@ -87,21 +87,23 @@ TXT
   end
 
   def notify_observer_status_changed(observer, observation, user)
-    infractor_text = if observation.observation_type == 'government'
-                       t('backend.mail_service.observer_status_changed.government')
-                     else
-                       t('backend.mail_service.observer_status_changed.producers') + "#{observation.operator&.name}"
-                     end
+    I18n.with_locale(user.locale.presence || :en) do
+      infractor_text = if observation.observation_type == 'government'
+                         t('backend.mail_service.observer_status_changed.government')
+                       else
+                         t('backend.mail_service.observer_status_changed.producers') + "#{observation.operator&.name}"
+                       end
 
-    @body = t('backend.mail_service.observer_status_changed.text',
-              id: observation.id, observer: observer.name, status: observation.validation_status,
-              status_fr: I18n.t("activerecord.enums.observation.statuses.#{observation.validation_status}", locale: :fr),
-              date: observation.publication_date, infractor_text: infractor_text,
-              infraction: observation.subcategory&.name,
-              infraction_fr: Subcategory.with_translations(:fr).where(id: observation.subcategory_id).pluck(:name)&.first)
-    @from = ENV['CONTACT_EMAIL']
-    @to = user.email
-    @subject = t('backend.mail_service.observer_status_changed.subject')
+      @body = t('backend.mail_service.observer_status_changed.text',
+                id: observation.id, observer: observer.name, status: observation.validation_status,
+                status_fr: I18n.t("activerecord.enums.observation.statuses.#{observation.validation_status}", locale: :fr),
+                date: observation.publication_date, infractor_text: infractor_text,
+                infraction: observation.subcategory&.name,
+                infraction_fr: Subcategory.with_translations(:fr).where(id: observation.subcategory_id).pluck(:name)&.first)
+      @from = ENV['CONTACT_EMAIL']
+      @to = user.email
+      @subject = t('backend.mail_service.observer_status_changed.subject')
+    end
 
     self
   end
