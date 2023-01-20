@@ -29,8 +29,10 @@ class Operator < ApplicationRecord
   has_paper_trail
   include Translatable
   translates :name, :details, touch: true, versioning: :paper_trail
+
   active_admin_translates :name, :details do
-    validates_presence_of :name
+    validates :name, presence: true
+    validates :name, uniqueness: { case_sensitive: false, scope: :locale }, on: :create
   end
 
   mount_base64_uploader :logo, LogoUploader
@@ -79,6 +81,7 @@ class Operator < ApplicationRecord
   after_update :refresh_ranking, if: -> { saved_change_to_fa_id? || saved_change_to_is_active? }
 
   validates :name, presence: true
+  validates :name, uniqueness: { case_sensitive: false }, on: :create # TODO: after dealing with duplicates remove on: :create
   validates :website, url: true, if: lambda { |x| x.website.present? }
   validates :operator_type, inclusion: { in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(', ')} " }
   validates :country, presence: true, on: :create
