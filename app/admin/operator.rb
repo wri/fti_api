@@ -26,21 +26,21 @@ ActiveAdmin.register Operator, as: 'Producer' do
   config.clear_action_items!
 
   action_item :toggle_active, only: [:show] do
-    if operator.is_active
-      link_to 'Deactivate', deactivate_admin_producer_path(operator),
-              method: :put, data: { confirm: "Are you sure you want to DEACTIVATE the producer #{operator.name}?" }
+    if resource.is_active
+      link_to 'Deactivate', deactivate_admin_producer_path(resource),
+              method: :put, data: { confirm: "Are you sure you want to DEACTIVATE the producer #{resource.name}?" }
     else
-      link_to 'Activate', activate_admin_producer_path(operator),
-              method: :put, data: { confirm: "Are you sure you want to ACTIVATE the producer #{operator.name}?" }
+      link_to 'Activate', activate_admin_producer_path(resource),
+              method: :put, data: { confirm: "Are you sure you want to ACTIVATE the producer #{resource.name}?" }
     end
   end
 
   action_item :edit, only: [:show] do
-    link_to 'Edit Producer', edit_admin_producer_path(operator)
+    link_to 'Edit Producer', edit_admin_producer_path(resource)
   end
 
   action_item :delete, only: [:show], if: -> { resource.can_hard_delete? } do
-    link_to 'Delete Producer', admin_producer_path(operator), method: :delete, data: { confirm: 'Are you sure you want to hard delete the producer?' }
+    link_to 'Delete Producer', admin_producer_path(resource), method: :delete, data: { confirm: 'Are you sure you want to hard delete the producer?' }
   end
 
   action_item :new, only: [:index] do
@@ -111,8 +111,9 @@ ActiveAdmin.register Operator, as: 'Producer' do
   scope :active
   scope :inactive
 
-  filter :country, as: :select,
-                   collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
+  filter :country,
+         as: :select,
+         collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
   filter :id,
          as: :select, label: 'Name',
          collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name, :id) }
@@ -221,6 +222,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :fa_id
       row :details
       row :country
+      row :concession
       row :logo do |o|
         link_to o.logo&.identifier, o.logo&.url
       end
@@ -285,6 +287,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     def find_resource
       scoped_collection.unscope(:joins).with_translations.where(id: params[:id]).first!
     end
+
     def scoped_collection
       end_of_association_chain
         .with_translations(I18n.locale)
