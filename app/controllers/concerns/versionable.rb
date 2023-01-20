@@ -8,7 +8,7 @@ module Versionable
       controller do
         def show
           model = resource.class.base_class
-          variable = model.includes(versions: :item).find(params[:id])
+          variable = current = model.includes(versions: :item).find(params[:id])
           @versions = variable.versions.where.not(event: 'create')
           @create_version = variable.versions.where(event: 'create').first
           begin
@@ -16,6 +16,8 @@ module Versionable
           rescue StandardError => e
             Sentry.capture_exception e
           end
+          # not sure why sometimes id is nil after reify
+          variable.id = current.id if variable.id.nil?
           instance_variable_set("@#{resource_instance_name}", variable)
           show! #it seems to need this
         end
