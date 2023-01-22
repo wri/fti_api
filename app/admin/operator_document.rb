@@ -29,42 +29,42 @@ ActiveAdmin.register OperatorDocument do
 
   # Here we're updating the documents one by one to make sure the callbacks to
   # create a new version and to change the last modified (and the author) are called
-  batch_action :make_private, confirm: 'Are you sure you want to make the selected documents PRIVATE?' do |ids|
+  batch_action :make_private, confirm: I18n.t('active_admin.operator_documents_page.confirm_private') do |ids|
     batch_action_collection.find(ids).each do |doc|
       doc.update(public: false)
     end
-    redirect_to collection_path, notice: 'Documents are now private!'
+    redirect_to collection_path, notice: I18n.t('active_admin.operator_documents_page.private_confirmed')
   end
 
-  batch_action :make_public, confirm: 'Are you sure you want to make the selected documents PUBLIC?' do |ids|
+  batch_action :make_public, confirm: I18n.t('active_admin.operator_documents_page.confirm_public') do |ids|
     batch_action_collection.find(ids).each do |doc|
       doc.update(public: true)
     end
-    redirect_to collection_path, notice: 'Documents are now public!'
+    redirect_to collection_path, notice: I18n.t('active_admin.operator_documents_page.public_confirmed')
   end
 
   batch_action :set_source_by_company,
-               confirm: 'Are you sure you want to set the source of the selected documents as COMPANY?' do |ids|
+               confirm: I18n.t('active_admin.operator_documents_page.confirm_company') do |ids|
     batch_action_collection.find(ids).each do |doc|
       doc.update(source: OperatorDocument.sources[:company])
     end
-    redirect_to collection_path, notice: 'Documents were set to "source: COMPANY"'
+    redirect_to collection_path, notice: I18n.t('active_admin.operator_documents_page.company_confirmed')
   end
 
   batch_action :set_source_by_forest_atlas,
-               confirm: 'Are you sure you want to set the source of the selected documents as FOREST ATLAS?' do |ids|
+               confirm: I18n.t('active_admin.operator_documents_page.confirm_fa') do |ids|
     batch_action_collection.find(ids).each do |doc|
       doc.update(source: OperatorDocument.sources[:forest_atlas])
     end
-    redirect_to collection_path, notice: 'Documents were set to "source: FOREST_ATLAS"'
+    redirect_to collection_path, notice: I18n.t('active_admin.operator_documents_page.fa_confirmed')
   end
 
   batch_action :set_source_by_other,
-               confirm: 'Are you sure you want to set the source of the selected documents as OTHER?' do |ids|
+               confirm: I18n.t('active_admin.operator_documents_page.confirm_other') do |ids|
     batch_action_collection.find(ids).each do |doc|
       doc.update(source: OperatorDocument.sources[:other_source])
     end
-    redirect_to collection_path, notice: 'Documents were set to "source: OTHER"'
+    redirect_to collection_path, notice: I18n.t('active_admin.operator_documents_page.other_confirmed')
   end
 
   member_action :approve, method: :put do
@@ -73,16 +73,16 @@ ActiveAdmin.register OperatorDocument do
     else
       resource.update(status: OperatorDocument.statuses[:doc_valid])
     end
-    redirect_to collection_path, notice: 'Document approved'
+    redirect_to collection_path, notice: I18n.t('active_admin.operator_documents_page.approved')
   end
 
   member_action :reject, method: :put do
     resource.update(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
 
-    redirect_to collection_path, notice: 'Document rejected'
+    redirect_to collection_path, notice: I18n.t('active_admin.operator_documents_page.rejected')
   end
 
-  sidebar 'Annexes', only: :show do
+  sidebar I18n.t('active_admin.operator_documents_page.annexes'), only: :show do
     attributes_table_for resource do
       ul do
         resource.operator_document_annexes.collect do |annex|
@@ -124,7 +124,7 @@ ActiveAdmin.register OperatorDocument do
     column :fmu do |o|
       o.fmu&.name
     end
-    column 'Legal Category' do |o|
+    column I18n.t('active_admin.operator_documents_page.legal_category') do |o|
       if o.required_operator_document.present?
         o.required_operator_document.required_operator_document_group.name
       else
@@ -143,7 +143,7 @@ ActiveAdmin.register OperatorDocument do
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
-    column 'Annexes' do |o|
+    column I18n.t('active_admin.operator_documents_page.annexes') do |o|
       links = []
       o.operator_document_annexes.each { |a| links << a.name }
       links.join(' ').html_safe
@@ -165,7 +165,7 @@ ActiveAdmin.register OperatorDocument do
         }
     }
     selectable_column
-    bool_column :exists do |od|
+    bool_column I18n.t('active_admin.required_operator_document_page.exists') do |od|
       od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
     end
     column :public
@@ -174,7 +174,7 @@ ActiveAdmin.register OperatorDocument do
     column :country do |od|
       od.required_operator_document.country
     end
-    column 'Required Document', :required_operator_document, sortable: 'required_operator_document_id' do |od|
+    column I18n.t('active_admin.operator_documents_page.required'), :required_operator_document, sortable: 'required_operator_document_id' do |od|
       if od.required_operator_document.present?
         link_to od.required_operator_document.name, admin_required_operator_document_path(od.required_operator_document)
       else
@@ -196,7 +196,7 @@ ActiveAdmin.register OperatorDocument do
         Fmu.unscoped.find(od.fmu_id).name
       end
     end
-    column 'Legal Category' do |od|
+    column I18n.t('active_admin.operator_documents_page.legal_category') do |od|
       if od.required_operator_document.present?
         od.required_operator_document.required_operator_document_group.name
       else
@@ -210,14 +210,14 @@ ActiveAdmin.register OperatorDocument do
     column :created_at
     column :uploaded_by
     column :source
-    column 'attachment' do |od|
+    column I18n.t('active_admin.operator_documents_page.attachment') do |od|
       if od&.document_file&.attachment
         link_to od.document_file.attachment.identifier, od.document_file.attachment.url
       end
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
-    column 'Annexes' do |od|
+    column I18n.t('active_admin.operator_documents_page.annexes') do |od|
       links = []
       od.operator_document_annexes.each { |a| links << link_to(a.id, admin_operator_document_annex_path(a)) }
       links.join(' ').html_safe
@@ -226,15 +226,15 @@ ActiveAdmin.register OperatorDocument do
     column :reason
     column :note
     column :response_date
-    column('Approve') { |observation| link_to 'Approve', approve_admin_operator_document_path(observation), method: :put }
-    column('Reject') { |observation| link_to 'Reject', reject_admin_operator_document_path(observation), method: :put }
+    column(I18n.t('active_admin.approve')) { |observation| link_to I18n.t('active_admin.approve'), approve_admin_operator_document_path(observation), method: :put }
+    column(I18n.t('active_admin.reject')) { |observation| link_to I18n.t('active_admin.reject'), reject_admin_operator_document_path(observation), method: :put }
     actions
   end
 
   filter :public
   filter :id
   filter :required_operator_document_country_id,
-         label: 'Country',
+         label: I18n.t('activerecord.models.country.one'),
          as: :select,
          collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :required_operator_document,
@@ -251,20 +251,20 @@ ActiveAdmin.register OperatorDocument do
                .order('required_operator_documents.name')
            RequiredOperatorDocument.find_by_sql(query.to_sql).map { ["#{_1[:name]} - #{_1[:country_name]}", _1[:id]] }
          }
-  filter :operator, label: 'Operator', as: :select,
+  filter :operator, as: :select,
                     collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
-  filter :fmu, label: 'Fmus', as: :select,
+  filter :fmu, label: I18n.t('activerecord.models.fmu.other'), as: :select,
                collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: -> { OperatorDocument.statuses }
   filter :type, as: :select
   filter :source, as: :select, collection: -> { OperatorDocument.sources }
   filter :updated_at
 
-  scope 'Pending', :doc_pending
+  scope I18n.t('active_admin.operator_documents_page.pending'), :doc_pending
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Operator Document Details' do
+    f.inputs I18n.t('active_admin.operator_documents_page.details') do
       f.input :required_operator_document, input_html: { disabled: true }
       f.input :operator, input_html: { disabled: true }
       f.input :type, input_html: { disabled: true }
@@ -293,7 +293,7 @@ ActiveAdmin.register OperatorDocument do
       row :operator
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :uploaded_by
-      row 'attachment' do |r|
+      row I18n.t('active_admin.operator_documents_page.attachment') do |r|
         link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url
       end
       row :reason

@@ -2,15 +2,424 @@
 en:
   locale_name: "English"
   active_admin:
+    true: 'True'
+    false: 'False'
+    approve: 'Approve'
+    reject: 'Reject'
+    all: 'All'
+    free: 'Free'
+    view: "View"
+    edit: "Edit"
+    create_another: "Create another %{model}"
+    new_model: "New %{model}"
+    edit_model: "Edit %{model}"
+    details: "%{model} Details"
+    cancel: "Cancel"
+    empty: "Empty"
+    previous: "Previous"
+    next: "Next"
+    download: "Download:"
+    has_many_new: "Add New %{model}"
+    has_many_delete: "Delete"
+    has_many_remove: "Remove"
+    move: "Move"
+    filters:
+      buttons:
+        filter: "Filter"
+        clear: "Clear Filters"
+      predicates:
+        contains: "Contains"
+        equals: "Equals"
+        starts_with: "Starts with"
+        ends_with: "Ends with"
+        greater_than: "Greater than"
+        less_than: "Less than"
+        gteq_datetime: "Greater or equal to"
+        lteq_datetime: "Lesser or equal to"
+        from: "From"
+        to: "To"
+    scopes:
+      all: "All"
+    search_status:
+      headline: "Search status:"
+      current_scope: "Scope:"
+      current_filters: "Current filters:"
+      no_current_filters: "None"
+    status_tag:
+      "yes": "Yes"
+      "no": "No"
+      "unset": "No"
+    main_content: "Please implement %{model}#main_content to display content."
+    logout: "Logout"
+    sidebars:
+      filters: "Filters"
+      search_status: "Search Status"
+    pagination:
+      empty: "No %{model} found"
+      one: "Displaying <b>1</b> %{model}"
+      one_page: "Displaying <b>all %{n}</b> %{model}"
+      multiple: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{total}</b> in total"
+      multiple_without_total: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
+      per_page: "Per page: "
+      entry:
+        one: "entry"
+        other: "entries"
+    any: "Any"
+    blank_slate:
+      content: "There are no %{resource_name} yet."
+      link: "Create one"
+    dropdown_actions:
+      button_label: "Actions"
+    comments:
+      created_at: "Created"
+      resource_type: "Resource Type"
+      author_type: "Author Type"
+      body: "Body"
+      author: "Author"
+      add: "Add Comment"
+      delete: "Delete Comment"
+      delete_confirmation: "Are you sure you want to delete these comments?"
+      resource: "Resource"
+      no_comments_yet: "No comments yet."
+      author_missing: "Anonymous"
+      title_content: "Comments (%{count})"
+      errors:
+        empty_text: "Comment wasn't saved, text was empty."
+    devise:
+      username:
+        title: "Username"
+      email:
+        title: "Email"
+      subdomain:
+        title: "Subdomain"
+      password:
+        title: "Password"
+      password_confirmation:
+        title: "Confirm Password"
+      sign_up:
+        title: "Sign up"
+        submit: "Sign up"
+      login:
+        title: "Login"
+        remember_me: "Remember me"
+        submit: "Login"
+      reset_password:
+        title: "Forgot your password?"
+        submit: "Reset My Password"
+      change_password:
+        title: "Change your password"
+        submit: "Change my password"
+      unlock:
+        title: "Resend unlock instructions"
+        submit: "Resend unlock instructions"
+      resend_confirmation_instructions:
+        title: "Resend confirmation instructions"
+        submit: "Resend confirmation instructions"
+      links:
+        sign_up: "Sign up"
+        sign_in: "Sign in"
+        forgot_your_password: "Forgot your password?"
+        sign_in_with_omniauth_provider: "Sign in with %{provider}"
+        resend_unlock_instructions: "Resend unlock instructions"
+        resend_confirmation_instructions: "Resend confirmation instructions"
+    unsupported_browser:
+      headline: "Please note that ActiveAdmin no longer supports Internet Explorer versions 8 or less."
+      recommendation: "We recommend that you <a href=\"http://browsehappy.com/\">upgrade your browser</a> to improve your experience."
+      turn_off_compatibility_view: "If you are using IE 9 or later, make sure you <a href=\"https://support.microsoft.com/en-us/help/17471\">turn off \"Compatibility View\"</a>."
+    access_denied:
+      message: "You are not authorized to perform this action."
+    index_list:
+      table: "Table"
+      block: "List"
+      grid: "Grid"
+      blog: "Blog"
+    versionate:
+      current_version: 'Current Version: '
+      previous_version: 'Previous version'
+      this_is_version: "This is %{number} version"
+      created_at: 'Created at: '
+      modified_at: 'Modified at: '
+      user: 'User: '
+      go_to_current_version: 'Go to current version'
+      no_versions: 'This item does not have any registered version.'
+    shared:
+      translated_fields: 'Translated Fields'
+      monitor_details: 'Monitor Details'
+      edit_report: 'Edit Report'
+      delete_report: 'Delete Report'
+      report_removed: 'Report removed!'
+      recycle_report: 'Report must be moved to recycle bin first!'
+      restore: 'Restore'
+      remove_completely: 'Remove Completely'
+      sure_want_to_remove: 'Are you sure you want to remove the report completely? This action is not reversible.'
+      view: 'View'
+      edit: 'Edit'
+      delete: 'Delete'
+      actions: 'Actions'
+      active: 'Active'
+      inactive: 'Inactive'
+      report_details: 'Report Details'
+      category_details: 'Category Details'
+      subcategory_details: 'Subcategory Details'
+      severity_details: 'Severity Details'
+      government_details: 'Government Details'
+      country_details: 'Country Details'
+      fmu_details: 'FMU details'
+    menu:
+      dashboard:
+        dashboard: 'Dashboard'
+        start_page: 'Start page'
+        producer_documents_dashboard: 'Producer documents dashboard'
+        observation_reports_dashboard: 'Observation reports dashboard'
+        observations_dashboard: 'Observations dashboard'
+      independent_monitoring:
+        independent_monitoring: 'Independent Monitoring'
+        monitors: 'Monitors'
+        observations: 'Observations'
+        reports: 'Reports'
+        evidence: 'Evidence'
+        settings:
+          settings: 'Settings'
+          categories: 'Categories'
+          subcategories: 'Subcategories'
+          severities: 'Severities'
+          laws: 'Laws'
+          government_entities: 'Government entities'
+          species: 'Species'
+      private_sector:
+        private_sector: 'Private sector'
+        holdings: 'Holdings'
+        producers: 'Producers'
+        sawmills: 'Sawmills'
+        document_categories: 'Document categories'
+        required_documents: 'Required documents'
+        producer_documents:
+          producer_documents: 'Producer documents'
+          producer_documents_history: 'Producer documents history'
+        annexes: 'Annexes'
+        settings:
+          settings: 'Settings'
+          countries: 'Countries'
+          fmus: 'Fmus'
+          fmu_allocations: 'Fmu allocations'
+      government_sector:
+        government_sector: 'Government sector'
+        required_document_group: 'Required document group'
+        required_documents: 'Required Documents'
+        documents: 'Documents'
+        links: 'Links'
+        vpas: 'Vpas'
+      static_content:
+        static_content: 'Static content'
+        partners: 'Partners'
+        donors: 'Donors'
+        about_page: 'About page'
+        help_page:
+          help_page: 'Help page'
+          faqs: 'Faqs'
+          how_tos: 'How tos'
+          tools: 'Tools'
+          tutorials: 'Tutorials'
+          uploaded_documents: 'Uploaded documents'
+      user_management:
+        user_management: 'User management'
+        users: 'Users'
+        access_control: 'Access control'
+        comments: 'Comments'
+        notifications:
+          notifications: 'Notifications'
+          notification_groups: 'Notification groups'
+      language:
+        language: 'Language'
+        english: 'English'
+        french: 'French'
+      logout: 'Logout'
+    dashboard_page:
+      columns:
+        operator: 'Operator'
+        name: 'Name'
+        country: 'Country'
+        countries: 'Countries'
+        date: 'Date'
+        subcategory: 'Subcategory'
+        role: 'Role'
+        creation_date: 'Creation Date'
+        item: 'Item'
+        type: 'Type'
+        modified_at: 'Modified at'
+        admin: 'Admin'
+        publication_date: 'Publication date'
+      change_language:
+        language_changed: 'Language changed'
+        language_unchanged: 'Language unchanged'
+      deploy_portal:
+        portal: 'Portal'
+        deploy_portal: 'Deploy Portal'
+        deployed: 'Portal deployed'
+        error: 'Error while deploying portal'
+        disable_with: 'Deploying Portal...'
+        confirm: 'Are you sure you want to deploy the PORTAL?'
+      deploy_ot:
+        ot: 'IM Backoffice'
+        deploy_ot: 'Deploy IM Backoffice'
+        deployed: 'IM Backoffice deployed'
+        error: 'Error while deploying IM Backoffice'
+        disable_with: 'Deploying IM Backoffice...'
+        confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'
+      hide_observations:
+        hide_observations: 'Hide old observations'
+        hidden: 'Old observations hidden'
+        error: 'Error while hiding old observations'
+        disable_with: 'Hiding old observations...'
+        confirm: 'Are you sure you want to hide old observations?'
+      old_observations:
+        old_observations: "Old observations (%{count})"
+        publication_date: 'Publication date'
+      new_producers:
+        new_producers: 'New Producers'
+        no_country: 'No country'
+      new_ims:  'New IMs'
+      new_user_accounts: 'New User Accounts'
+      pending_observations: 'First 20 Pending Observations out of %{count}'
+      pending_documents:  'First 20 Pending documents out of %{count}'
+      recently_updated_content: 'Recently updated content'
+    producer_documents_dashboard_page:
+      name: 'Producer Documents Dashboard'
+      visible_columns: 'Visible Columns'
+      all_countries: 'All Countries'
+      all_groups: 'All Groups'
+      all_forest_types: 'All Forest Types'
+      fmu_country: 'Fmu/Country'
+      valid_expired: 'Valid & Expired'
+      not_provided: 'Not Provided'
+      pending: 'Pending'
+      invalid: 'Invalid'
+      valid: 'Valid'
+      expired: 'Expired'
+      not_required: 'Not Required'
+    observation_reports_dashboard_page:
+      name: 'Observation Reports Dashboard'
+      reports: 'Reports'
+      total_count: 'Total Count'
+    observations_dashboard_page:
+      name: 'Observations Dashboard'
+      all_types: 'All Types'
+      all_operators: 'All Operators'
+      all_levels: 'All Levels'
+      all_categories: 'All Categories'
+      all_subcategories: 'All Subcategories'
+      any: 'Any'
+      all_statuses: 'All statuses'
+      published_all: 'Published All'
+    laws_page:
+      written_infraction: 'Illegality as written by law'
+      infraction: 'Legal reference: Illegality'
+      sanctions: 'Legal reference: Penalties'
+      max_fine: 'Maximum Fine'
+      min_fine: 'Minimum Fine'
+      indicator_apv: 'Indicator APV'
+      law_details: 'Law details'
+    operator_page:
+      producer: 'Producer'
+      producer_activated: 'Producer activated'
+      producer_deactivated: 'Producer deactivated'
+      confirm_deactivate: 'Are you sure you want to DEACTIVATE the producer %{name}?'
+      confirm_activate: 'Are you sure you want to ACTIVATE the producer %{name}?'
+      confirm_delete: 'Are you sure you want to hard delete the producer?'
+      edit: 'Edit Producer'
+      delete: 'Delete producer'
+      new: 'New Producer'
+      docs_perc: '% Docs'
+      obs_visit: 'Obs/Visit'
+      with_fa_uuid: 'With FA UUID'
+      fmus_id_null: 'Without active FMUs'
+      valid_documents: 'Valid Documents'
+      pending_documents: 'Pending Documents'
+      invalid_documents: 'Invalid Documents'
+      operator_details: 'Operator Details'
+      fa_id: 'Forest Atlas UUID'
+      score_history_table: 'Score History Table'
+      remove_logo: 'Remove logo'
+      documents: 'Documents'
+    required_operator_document_page:
+      exists: 'Exists'
+      publication_authorization: 'Publication Authorization'
+      details: 'Required Operator Document Details'
+      validity: 'Validity (days)'
+    operator_documents_page:
+      confirm_private: 'Are you sure you want to make the selected documents PRIVATE?'
+      private_confirmed: 'Documents are now private!'
+      confirm_public: 'Are you sure you want to make the selected documents PUBLIC?'
+      public_confirmed: 'Documents are now public!'
+      confirm_company: 'Are you sure you want to set the source of the selected documents as COMPANY?'
+      company_confirmed: 'Documents were set to "source: COMPANY"'
+      confirm_fa: 'Are you sure you want to set the source of the selected documents as FOREST ATLAS?'
+      fa_confirmed: 'Documents were set to "source: FOREST_ATLAS"'
+      confirm_other: 'Are you sure you want to set the source of the selected documents as OTHER?'
+      other_confirmed: 'Documents were set to "source: OTHER"'
+      approved: 'Document approved'
+      rejected: 'Document rejected'
+      legal_category: 'Legal Category'
+      required: 'Required Document'
+      attachment: 'Attachment'
+      pending: 'Pending'
+      details: 'Operator Document Details'
+      annexes: 'Annexes'
+      operator_document_id: 'Operator Document ID'
+      with_deleted: 'With deleted'
+    operator_document_annexes_page:
+      approved: 'Annex approved'
+      not_approved: 'Annex could not be approved'
+      rejected: 'Annex rejected'
+      not_rejected: 'Annex could not be rejected'
+      operator_document: 'Operator Document'
+      orphaned: 'Orphaned'
+      details: 'Operator Document Annex Details'
+    observations_page:
+      not_modified: 'Observation NOT modified'
+      moved_ready: 'Observation moved to Ready for Publication'
+      moved_needs_revision: 'Observation moved to Needs Revision'
+      moved_qc_in_progress: 'Observation moved to QC in Progress'
+      ready_for_publication: 'Ready for publication'
+      confirm_ready_publication: 'Do you want to mark this observation as ready for publication?'
+      approved: 'Observation Approved'
+      needs_revision: 'Needs revision'
+      confirm_needs_revision: 'Do you want to notify the IM this needs revision?'
+      obs_needs_revision: 'Observation Needs revision'
+      start_qc: 'Start QC'
+      qc_started: 'QC started'
+      in_qc: 'Observation in QC'
+      bulk_confirm_qc: 'Are you sure you want to start QC for all these observations?'
+      bulk_require_revision: 'Are you sure you want to require revision for all these observations?'
+      required_revision: 'Required revision for observations'
+      bulk_ready_for_publication: 'Are you sure you want to mark these publications as ready to publish?'
+      ready_to_publish: 'Observations ready to be published'
+      bulk_hide: 'Are you sure you want to hide all the selected observations?'
+      hidden: 'Documents hidden!'
+      bulk_unhide: 'Are you sure you want to un-hide all the selected observations?'
+      unhidden: 'Documents unhidden!'
+      created_user: 'User who created'
+      modified_user: 'User who modified'
+      modified_user_language: 'Modified User Language'
+      management: 'Management'
+      details: 'Observation Details'
+      add_evidence: 'Add evidence'
+      location_on_map: 'Location on map'
+      visible: 'Visible'
+      scope_hidden: 'Hidden'
     powered_by: "Admin Backoffice"
     delete_model: "Delete %{model}"
     delete: "Delete"
     delete_confirmation: "Are you sure you want to delete this?"
     batch_actions:
+      button_label: "Batch Actions"
+      default_confirmation: "Are you sure you want to do this?"
       delete_confirmation: "Are you sure you want to delete these %{plural_model}?"
       succesfully_destroyed:
         one: "Successfully deleted 1 %{model}"
         other: "Successfully deleted %{count} %{plural_model}"
+      selection_toggle_explanation: "(Toggle Selection)"
+      action_label: "%{title} Selected"
       labels:
         destroy: "Delete"
     fmus:
@@ -19,6 +428,8 @@ en:
       .shx — shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly {content-type: x-gis/x-shapefile}\\n
       .dbf — attribute format; columnar attributes for each shape, in dBase IV format {content-type: application/octet-stream OR text/plain}\\n
       .prj — projection description, using a well-known text representation of coordinate reference systems {content-type: text/plain OR application/text}"
+    js:
+      jump_to_page: 'Jump to page'
   active_admin_paranoia:
     batch_actions:
       restore_confirmation: "Are you sure you want to restore these %{plural_model}?"
@@ -32,6 +443,986 @@ en:
     restore_confirmation: "Are you sure you want to restore this?"
     something_wrong: "Something went wrong. Please try again"
   activerecord:
+    models:
+      about_page_entry: About page entry  #g
+      about_page_entry/translation: About page entry/translation  #g
+      active_admin/comment: Active admin/comment  #g
+      annex_document: Annex document  #g
+      api_key: API key  #g
+      category: Category  #g
+      category/translation: Category/translation  #g
+      comment: Comment  #g
+      contributor: Contributor  #g
+      contributor/translation: Contributor/translation  #g
+      country:
+        one: 'Country'
+        other: 'Countries'
+      country/translation: Country/translation  #g
+      country_link: Country link  #g
+      country_link/translation: Country link/translation  #g
+      country_vpa: Country vpa  #g
+      country_vpa/translation: Country vpa/translation  #g
+      document_file: Document file  #g
+      donor: Donor  #g
+      faq: Faq  #g
+      faq/translation: Faq/translation  #g
+      fmu: Fmu  #g
+      fmu/translation: Fmu/translation  #g
+      fmu_operator: Fmu operator  #g
+      gov_document: Gov document  #g
+      gov_file: Gov file  #g
+      government: Government  #g
+      government/translation: Government/translation  #g
+      governments_observation: Governments observation  #g
+      habtm_countries: Habtm countries  #g
+      habtm_observers: Habtm observers  #g
+      holding: Holding  #g
+      how_to: How to  #g
+      how_to/translation: How to/translation  #g
+      law: Law  #g
+      notification: Notification  #g
+      notification_group: Notification group  #g
+      observation: Observation  #g
+      observation/translation: Observation/translation  #g
+      observation_document: Observation document  #g
+      observation_history: Observation history  #g
+      observation_operator: Observation operator  #g
+      observation_report: Observation report  #g
+      observation_report_observer: Observation report observer  #g
+      observation_report_statistic: Observation report statistic  #g
+      observation_statistic: Observation statistic  #g
+      observer: Observer  #g
+      observer/translation: Observer/translation  #g
+      observer_observation: Observer observation  #g
+      operator: Operator  #g
+      operator/translation: Operator/translation  #g
+      operator_document: Operator document  #g
+      operator_document_annex: Operator document annex  #g
+      operator_document_country: Operator document country  #g
+      operator_document_country_history: Operator document country history  #g
+      operator_document_fmu: Operator document fmu  #g
+      operator_document_fmu_history: Operator document fmu history  #g
+      operator_document_history: Operator document history  #g
+      operator_document_statistic: Operator document statistic  #g
+      paper_trail/version: Paper trail/version  #g
+      partner: Partner  #g
+      required_gov_document: Required gov document  #g
+      required_gov_document/translation: Required gov document/translation  #g
+      required_gov_document_group: Required gov document group  #g
+      required_gov_document_group/translation: Required gov document group/translation  #g
+      required_operator_document: Required operator document  #g
+      required_operator_document/translation: Required operator document/translation  #g
+      required_operator_document_country: Required operator document country  #g
+      required_operator_document_fmu: Required operator document fmu  #g
+      required_operator_document_group: Required operator document group  #g
+      required_operator_document_group/translation: Required operator document group/translation  #g
+      sawmill: Sawmill  #g
+      score_operator_document: Score operator document  #g
+      score_operator_observation: Score operator observation  #g
+      severity: Severity  #g
+      severity/translation: Severity/translation  #g
+      species: Species  #g
+      species/translation: Species/translation  #g
+      species_country: Species country  #g
+      species_observation: Species observation  #g
+      subcategory: Subcategory  #g
+      subcategory/translation: Subcategory/translation  #g
+      tool: Tool  #g
+      tool/translation: Tool/translation  #g
+      tutorial: Tutorial  #g
+      tutorial/translation: Tutorial/translation  #g
+      uploaded_document: Uploaded document  #g
+      user: User  #g
+      user_permission: User permission  #g
+    attributes:
+      about_page_entry:
+        code: Code  #g
+        position: Position  #g
+        translations: Translations  #g
+
+      about_page_entry/translation:
+        body: Body  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        title: Title  #g
+
+      active_admin/comment:
+        author: :activerecord.models.author  #g
+        author_type: Author type  #g
+        body: Body  #g
+        namespace: Namespace  #g
+        resource: :activerecord.models.resource  #g
+        resource_type: Resource type  #g
+
+      annex_document:
+        documentable: :activerecord.models.documentable  #g
+        documentable_type: Documentable type  #g
+        operator_document_annex: :activerecord.models.operator_document_annex  #g
+
+      api_key:
+        access_token: Access token  #g
+        expires_at: Expires at  #g
+        is_active: Is active  #g
+        user: :activerecord.models.user  #g
+
+      category:
+        category_type: Category type  #g
+        subcategories: Subcategories  #g
+        translations: Translations  #g
+
+      category/translation:
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      comment:
+        body: Body  #g
+        commentable: :activerecord.models.commentable  #g
+        commentable_type: Commentable type  #g
+        user: :activerecord.models.user  #g
+
+      contributor:
+        category: Category  #g
+        logo: Logo  #g
+        priority: Priority  #g
+        translations: Translations  #g
+        website: Website  #g
+
+      contributor/translation:
+        description: Description  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      country:
+        country_centroid: Country centroid  #g
+        country_links: Country links  #g
+        country_vpas: Country vpas  #g
+        fa_operators: Fa operators  #g
+        fmus: Fmus  #g
+        gov_documents: Gov documents  #g
+        governments: Governments  #g
+        is_active: Is active  #g
+        iso: Iso  #g
+        laws: Laws  #g
+        observations: Observations  #g
+        observers: Observers  #g
+        operators: Operators  #g
+        percentage_valid_documents: Percentage valid documents  #g
+        region_centroid: Region centroid  #g
+        region_iso: Region iso  #g
+        required_gov_documents: Required gov documents  #g
+        required_operator_documents: Required operator documents  #g
+        species: Species  #g
+        species_countries: Species countries  #g
+        translations: Translations  #g
+        users: Users  #g
+
+      country/translation:
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+        region_name: Region name  #g
+
+      country_link:
+        active: Active  #g
+        country: :activerecord.models.country  #g
+        position: Position  #g
+        translations: Translations  #g
+        url: Url  #g
+
+      country_link/translation:
+        description: Description  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      country_vpa:
+        active: Active  #g
+        country: :activerecord.models.country  #g
+        position: Position  #g
+        translations: Translations  #g
+        url: Url  #g
+
+      country_vpa/translation:
+        description: Description  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      document_file:
+        attachment: Attachment  #g
+        operator_document: :activerecord.models.operator_document  #g
+        operator_document_history: :activerecord.models.operator_document_history  #g
+
+      donor:
+        category: Category  #g
+        logo: logo  #g
+        priority: priority  #g
+        translations: Translations  #g
+        website: Website  #g
+
+      faq:
+        image: Image  #g
+        position: Position  #g
+        translations: Translations  #g
+
+      faq/translation:
+        answer: Answer  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        question: Question  #g
+
+      fmu:
+        active_observations: Active observations  #g
+        certification_fsc: Certification fsc  #g
+        certification_fsc_cw: Certification fsc cw  #g
+        certification_ls: Certification ls  #g
+        certification_olb: Certification olb  #g
+        certification_pafc: Certification pafc  #g
+        certification_pefc: Certification pefc  #g
+        certification_tlv: Certification tlv  #g
+        country: :activerecord.models.country  #g
+        deleted_at: Deleted at  #g
+        fmu_operator: :activerecord.models.fmu_operator  #g
+        fmu_operators: Fmu operators  #g
+        forest_type: Forest type  #g
+        geojson: Geojson  #g
+        geometry: Geometry  #g
+        observations: Observations  #g
+        operator: :activerecord.models.operator  #g
+        operator_document_fmus: Operator document fmus  #g
+        operators: Operators  #g
+        translations: Translations  #g
+        versions: Versions  #g
+
+      fmu/translation:
+        deleted_at: Deleted at  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+        versions: Versions  #g
+
+      fmu_operator:
+        current: Current  #g
+        deleted_at: Deleted at  #g
+        end_date: End date  #g
+        fmu: :activerecord.models.fmu  #g
+        operator: :activerecord.models.operator  #g
+        start_date: Start date  #g
+        versions: Versions  #g
+
+      gov_document:
+        current: Current  #g
+        deleted_at: Deleted at  #g
+        expire_date: Expire date  #g
+        gov_files: Gov files  #g
+        link: Link  #g
+        reason: Reason  #g
+        required_gov_document: :activerecord.models.required_gov_document  #g
+        start_date: Start date  #g
+        status: Status  #g
+        units: Units  #g
+        uploaded_by: Uploaded by  #g
+        value: Value  #g
+        versions: Versions  #g
+
+      gov_file:
+        attachment: Attachment  #g
+        deleted_at: Deleted at  #g
+        gov_document: :activerecord.models.gov_document  #g
+        versions: Versions  #g
+
+      government:
+        country: :activerecord.models.country  #g
+        governments_observations: Governments observations  #g
+        is_active: Is active  #g
+        observations: Observations  #g
+        translations: Translations  #g
+        versions: Versions  #g
+        details: Details  #g
+        government_entity: Government entity  #g
+
+      government/translation:
+        details: Details  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        government_entity: Government entity  #g
+        locale: Locale  #g
+        versions: Versions  #g
+
+      governments_observation:
+        deleted_at: Deleted at  #g
+        government: :activerecord.models.government  #g
+        observation: :activerecord.models.observation  #g
+        versions: Versions  #g
+
+      habtm_countries:
+        country: :activerecord.models.country  #g
+        left_side: :activerecord.models.left_side  #g
+
+      habtm_observers:
+        left_side: :activerecord.models.left_side  #g
+        observer: :activerecord.models.observer  #g
+
+      holding:
+        name: Name  #g
+        operators: Operators  #g
+
+      how_to:
+        position: Position  #g
+        translations: Translations  #g
+
+      how_to/translation:
+        description: Description  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      law:
+        apv: Apv  #g
+        country: :activerecord.models.country  #g
+        currency: Currency  #g
+        infraction: Infraction  #g
+        max_fine: Max fine  #g
+        min_fine: Min fine  #g
+        observations: Observations  #g
+        other_penalties: Other penalties  #g
+        penal_servitude: Penal servitude  #g
+        sanctions: Sanctions  #g
+        subcategory: :activerecord.models.subcategory  #g
+        written_infraction: Written infraction  #g
+
+      notification:
+        dismissed_at: Dismissed at  #g
+        last_displayed_at: Last displayed at  #g
+        notification_group: :activerecord.models.notification_group  #g
+        operator_document: :activerecord.models.operator_document  #g
+        solved_at: Solved at  #g
+        user: :activerecord.models.user  #g
+
+      notification_group:
+        days: Days  #g
+        name: Name  #g
+
+      observation:
+        actions_taken: Actions taken  #g
+        admin_comment: Admin comment  #g
+        comments: Comments  #g
+        country: :activerecord.models.country  #g
+        deleted_at: Deleted at  #g
+        evidence_on_report: Evidence on report  #g
+        evidence_type: Evidence type  #g
+        fmu: :activerecord.models.fmu  #g
+        governments: Governments  #g
+        governments_observations: Governments observations  #g
+        hidden: Hidden  #g
+        is_active: Is active  #g
+        is_physical_place: Is physical place  #g
+        lat: Lat  #g
+        law: :activerecord.models.law  #g
+        lng: Lng  #g
+        location_accuracy: Location accuracy  #g
+        location_information: Location information  #g
+        modified_user: :activerecord.models.modified_user  #g
+        monitor_comment: Monitor comment  #g
+        observation_documents: Observation documents  #g
+        observation_operators: Observation operators  #g
+        observation_report: :activerecord.models.observation_report  #g
+        observation_type: Observation type  #g
+        observer_observations: Observer observations  #g
+        observers: Observers  #g
+        operator: :activerecord.models.operator  #g
+        publication_date: Publication date  #g
+        pv: Pv  #g
+        relevant_operators: Relevant operators  #g
+        responsible_admin: :activerecord.models.responsible_admin  #g
+        severity: :activerecord.models.severity  #g
+        species: Species  #g
+        species_observations: Species observations  #g
+        subcategory: :activerecord.models.subcategory  #g
+        translations: Translations  #g
+        user: :activerecord.models.user  #g
+        validation_status: Validation status  #g
+        versions: Versions  #g
+
+      observation/translation:
+        concern_opinion: Concern opinion  #g
+        deleted_at: Deleted at  #g
+        details: Details  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        litigation_status: Litigation status  #g
+        locale: Locale  #g
+        versions: Versions  #g
+
+      observation_document:
+        attachment: Attachment  #g
+        deleted_at: Deleted at  #g
+        name: Name  #g
+        observation: :activerecord.models.observation  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+
+      observation_history:
+        category: :activerecord.models.category  #g
+        country: :activerecord.models.country  #g
+        deleted_at: deleted_at  #g
+        evidence_type: Evidence type  #g
+        fmu: :activerecord.models.fmu  #g
+        fmu_forest_type: Fmu forest type  #g
+        hidden: hidden  #g
+        is_active: is_active  #g
+        location_accuracy: Location accuracy  #g
+        observation: :activerecord.models.observation  #g
+        observation_created_at: observation_created_at  #g
+        observation_type: Observation type  #g
+        observation_updated_at: Observation updated at  #g
+        operator: :activerecord.models.operator  #g
+        severity_level: severity_level  #g
+        subcategory: :activerecord.models.subcategory  #g
+        validation_status: Validation status  #g
+
+      observation_operator:
+        deleted_at: Deleted at  #g
+        observation: :activerecord.models.observation  #g
+        operator: :activerecord.models.operator  #g
+
+      observation_report:
+        attachment: Attachment  #g
+        deleted_at: Deleted at  #g
+        observation_report_observers: Observation report observers  #g
+        observations: Observations  #g
+        observers: Observers  #g
+        publication_date: Publication date  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+
+      observation_report_observer:
+        observation_report: :activerecord.models.observation_report  #g
+        observer: :activerecord.models.observer  #g
+
+      observation_report_statistic:
+        country: :activerecord.models.country  #g
+        date: Date  #g
+        observer: :activerecord.models.observer  #g
+
+      observation_statistic:
+        category: :activerecord.models.category  #g
+        country: :activerecord.models.country  #g
+        date: Date  #g
+        fmu: :activerecord.models.fmu  #g
+        fmu_forest_type: Fmu forest type  #g
+        hidden: Hidden  #g
+        is_active: Is active  #g
+        observation_type: Observation type  #g
+        operator: :activerecord.models.operator  #g
+        severity_level: Severity level  #g
+        subcategory: :activerecord.models.subcategory  #g
+        validation_status: Validation status  #g
+
+      observer:
+        address: Address  #g
+        countries: Countries  #g
+        data_email: Data email  #g
+        data_name: Data name  #g
+        data_phone: Data phone  #g
+        information_email: Information email  #g
+        information_name: Information name  #g
+        information_phone: Information phone  #g
+        is_active: Is active  #g
+        logo: Logo  #g
+        observation_report_observers: Observation report observers  #g
+        observation_reports: Observation reports  #g
+        observations: Observations  #g
+        observer_observations: Observer observations  #g
+        observer_type: Observer type  #g
+        organization_type: Organization type  #g
+        public_info: Public info  #g
+        responsible_admin: :activerecord.models.responsible_admin  #g
+        responsible_user: :activerecord.models.responsible_user  #g
+        translations: Translations  #g
+        users: Users  #g
+        versions: Versions  #g
+
+      observer/translation:
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+        organization: Organization  #g
+        versions: Versions  #g
+
+      observer_observation:
+        deleted_at: Deleted at  #g
+        observation: :activerecord.models.observation  #g
+        observer: :activerecord.models.observer  #g
+
+      operator:
+        address: Address  #g
+        all_fmu_operators: All fmu operators  #g
+        all_fmus: All fmus  #g
+        all_observations: All observations  #g
+        all_operator_documents: All operator documents  #g
+        approved: Approved  #g
+        concession: Concession  #g
+        country: :activerecord.models.country  #g
+        country_doc_rank: Country doc rank  #g
+        country_operators: Country operators  #g
+        email: Email  #g
+        fmu_operators: Fmu operators  #g
+        fmus: Fmus  #g
+        holding: :activerecord.models.holding  #g
+        is_active: Is active  #g
+        logo: Logo  #g
+        observations: Observations  #g
+        operator_document_countries: Operator document countries  #g
+        operator_document_country_histories: Operator document country histories  #g
+        operator_document_fmu_histories: Operator document fmu histories  #g
+        operator_document_fmus: Operator document fmus  #g
+        operator_document_histories: Operator document histories  #g
+        operator_documents: Operator documents  #g
+        operator_type: Operator type  #g
+        sawmills: Sawmills  #g
+        score_operator_document: :activerecord.models.score_operator_document  #g
+        score_operator_documents: Score operator documents  #g
+        score_operator_observation: :activerecord.models.score_operator_observation  #g
+        score_operator_observations: Score operator observations  #g
+        translations: Translations  #g
+        users: Users  #g
+        versions: Versions  #g
+        website: Website  #g
+
+      operator/translation:
+        details: Details  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+        versions: Versions  #g
+
+      operator_document:
+        annex_documents: Annex documents  #g
+        deleted_at: Deleted at  #g
+        document_file: :activerecord.models.document_file  #g
+        expire_date: Expire date  #g
+        fmu: :activerecord.models.fmu  #g
+        note: Note  #g
+        notifications: Notifications  #g
+        operator: :activerecord.models.operator  #g
+        operator_document_annexes: Operator document annexes  #g
+        public: Public  #g
+        reason: Reason  #g
+        required_operator_document: :activerecord.models.required_operator_document  #g
+        response_date: Response date  #g
+        source: Source  #g
+        source_info: Source info  #g
+        start_date: Start date  #g
+        status: Status  #g
+        uploaded_by: Uploaded by  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+
+      operator_document_annex:
+        annex_document: :activerecord.models.annex_document  #g
+        annex_documents: Annex documents  #g
+        annex_documents_history: Annex documents history  #g
+        attachment: Attachment  #g
+        deleted_at: Deleted at  #g
+        expire_date: Expire date  #g
+        name: Name  #g
+        operator_document: :activerecord.models.operator_document  #g
+        public: Public  #g
+        start_date: Start date  #g
+        status: Status  #g
+        uploaded_by: Uploaded by  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+
+      operator_document_country:
+        annex_documents: Annex documents  #g
+        deleted_at: Deleted at  #g
+        document_file: :activerecord.models.document_file  #g
+        expire_date: expire_date  #g
+        fmu: :activerecord.models.fmu  #g
+        note: Note  #g
+        notifications: Notifications  #g
+        operator: :activerecord.models.operator  #g
+        operator_document_annexes: Operator document annexes  #g
+        public: public  #g
+        reason: reason  #g
+        required_operator_document: :activerecord.models.required_operator_document  #g
+        required_operator_document_country: :activerecord.models.required_operator_document_country  #g
+        response_date: response_date  #g
+        source: source  #g
+        source_info: source_info  #g
+        start_date: start_date  #g
+        status: status  #g
+        uploaded_by: Uploaded by  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+
+      operator_document_country_history:
+        annex_documents: Annex documents  #g
+        deleted_at: Deleted at  #g
+        document_file: :activerecord.models.document_file  #g
+        expire_date: Expire date  #g
+        fmu: :activerecord.models.fmu  #g
+        note: Note  #g
+        operator: :activerecord.models.operator  #g
+        operator_document: :activerecord.models.operator_document  #g
+        operator_document_annexes: Operator document annexes  #g
+        operator_document_created_at: Operator document created at  #g
+        operator_document_updated_at: Operator document updated at  #g
+        public: Public  #g
+        reason: Reason  #g
+        required_operator_document: :activerecord.models.required_operator_document  #g
+        response_date: Response date  #g
+        source: Source  #g
+        source_info: Source info  #g
+        start_date: Start date  #g
+        status: Status  #g
+        uploaded_by: Uploaded by  #g
+        user: :activerecord.models.user  #g
+
+      operator_document_fmu:
+        annex_documents: Annex documents  #g
+        deleted_at: Deleted at  #g
+        document_file: :activerecord.models.document_file  #g
+        expire_date: expire_date  #g
+        fmu: :activerecord.models.fmu  #g
+        note: note  #g
+        notifications: Notifications  #g
+        operator: :activerecord.models.operator  #g
+        operator_document_annexes: Operator document annexes  #g
+        public: public  #g
+        reason: reason  #g
+        required_operator_document: :activerecord.models.required_operator_document  #g
+        required_operator_document_fmu: :activerecord.models.required_operator_document_fmu  #g
+        response_date: response_date  #g
+        source: source  #g
+        source_info: source_info  #g
+        start_date: start_date  #g
+        status: Status  #g
+        uploaded_by: Uploaded by  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+
+      operator_document_fmu_history:
+        annex_documents: Annex documents  #g
+        deleted_at: deleted_at  #g
+        document_file: :activerecord.models.document_file  #g
+        expire_date: Expire date  #g
+        fmu: :activerecord.models.fmu  #g
+        note: Note  #g
+        operator: :activerecord.models.operator  #g
+        operator_document: :activerecord.models.operator_document  #g
+        operator_document_annexes: Operator document annexes  #g
+        operator_document_created_at: Operator document created at  #g
+        operator_document_updated_at: Operator document updated at  #g
+        public: public  #g
+        reason: Reason  #g
+        required_operator_document: :activerecord.models.required_operator_document  #g
+        response_date: response_date  #g
+        source: source  #g
+        source_info: source_info  #g
+        start_date: Start date  #g
+        status: Status  #g
+        uploaded_by: Uploaded by  #g
+        user: :activerecord.models.user  #g
+
+      operator_document_history:
+        annex_documents: Annex documents  #g
+        deleted_at: Deleted at  #g
+        document_file: :activerecord.models.document_file  #g
+        expire_date: Expire date  #g
+        fmu: :activerecord.models.fmu  #g
+        note: Note  #g
+        operator: :activerecord.models.operator  #g
+        operator_document: :activerecord.models.operator_document  #g
+        operator_document_annexes: Operator document annexes  #g
+        operator_document_created_at: Operator document created at  #g
+        operator_document_updated_at: Operator document updated at  #g
+        public: Public  #g
+        reason: Reason  #g
+        required_operator_document: :activerecord.models.required_operator_document  #g
+        response_date: Response date  #g
+        source: Source  #g
+        source_info: Source info  #g
+        start_date: Start date  #g
+        status: Status  #g
+        uploaded_by: Uploaded by  #g
+        user: :activerecord.models.user  #g
+
+      operator_document_statistic:
+        country: :activerecord.models.country  #g
+        date: Date  #g
+        document_type: Document type  #g
+        fmu_forest_type: Fmu forest type  #g
+        required_operator_document_group: :activerecord.models.required_operator_document_group  #g
+
+      paper_trail/version:
+        event: Event  #g
+        item: :activerecord.models.item  #g
+        item_type: Item type  #g
+        locale: Locale  #g
+        object: Object  #g
+        object_changes: Object changes  #g
+        whodunnit: Whodunnit  #g
+
+      partner:
+        category: Category  #g
+        logo: Logo  #g
+        priority: Priority  #g
+        translations: Translations  #g
+        website: Website  #g
+
+      required_gov_document:
+        country: :activerecord.models.country  #g
+        deleted_at: Deleted at  #g
+        document_type: Document type  #g
+        gov_documents: Gov documents  #g
+        name: Name  #g
+        position: Position  #g
+        required_gov_document_group: :activerecord.models.required_gov_document_group  #g
+        translations: Translations  #g
+        valid_period: Valid period  #g
+        versions: Versions  #g
+
+      required_gov_document/translation:
+        deleted_at: Deleted at  #g
+        explanation: Explanation  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        versions: Versions  #g
+
+      required_gov_document_group:
+        deleted_at: Deleted at  #g
+        parent: :activerecord.models.parent  #g
+        position: Position  #g
+        required_gov_documents: Required gov documents  #g
+        translations: Translations  #g
+
+      required_gov_document_group/translation:
+        deleted_at: Deleted at  #g
+        description: Description  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      required_operator_document:
+        contract_signature: Contract signature  #g
+        country: :activerecord.models.country  #g
+        deleted_at: Deleted at  #g
+        forest_types: Forest types  #g
+        name: Name  #g
+        operator_document_countries: Operator document countries  #g
+        operator_document_country_histories: Operator document country histories  #g
+        operator_document_fmu_histories: Operator document fmu histories  #g
+        operator_document_fmus: Operator document fmus  #g
+        operator_document_histories: Operator document histories  #g
+        operator_documents: Operator documents  #g
+        position: Position  #g
+        required_operator_document_group: :activerecord.models.required_operator_document_group  #g
+        translations: Translations  #g
+        valid_period: Valid period  #g
+        versions: Versions  #g
+
+      required_operator_document/translation:
+        deleted_at: Deleted at  #g
+        explanation: Explanation  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        versions: Versions  #g
+
+      required_operator_document_country:
+        contract_signature: Contract signature  #g
+        country: :activerecord.models.country  #g
+        deleted_at: Deleted at  #g
+        forest_types: Forest types  #g
+        name: Name  #g
+        operator_document_countries: Operator document countries  #g
+        operator_document_country_histories: Operator document country histories  #g
+        operator_document_fmu_histories: Operator document fmu histories  #g
+        operator_document_fmus: Operator document fmus  #g
+        operator_document_histories: Operator document histories  #g
+        operator_documents: Operator documents  #g
+        position: Position  #g
+        required_operator_document_group: :activerecord.models.required_operator_document_group  #g
+        translations: Translations  #g
+        valid_period: Valid period  #g
+        versions: Versions  #g
+
+      required_operator_document_fmu:
+        contract_signature: Contract signature  #g
+        country: :activerecord.models.country  #g
+        deleted_at: Deleted at  #g
+        forest_types: Forest types  #g
+        name: Name  #g
+        operator_document_countries: Operator document countries  #g
+        operator_document_country_histories: Operator document country histories  #g
+        operator_document_fmu_histories: Operator document fmu histories  #g
+        operator_document_fmus: Operator document fmus  #g
+        operator_document_histories: Operator document histories  #g
+        operator_documents: Operator documents  #g
+        position: Position  #g
+        required_operator_document_group: :activerecord.models.required_operator_document_group  #g
+        translations: Translations  #g
+        valid_period: Valid period  #g
+        versions: Versions  #g
+
+      required_operator_document_group:
+        position: Position  #g
+        required_operator_document_countries: Required operator document countries  #g
+        required_operator_document_fmus: Required operator document fmus  #g
+        required_operator_documents: Required operator documents  #g
+        translations: Translations  #g
+
+      required_operator_document_group/translation:
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      sawmill:
+        geojson: Geojson  #g
+        is_active: Is active  #g
+        lat: Lat  #g
+        lng: Lng  #g
+        name: Name  #g
+        operator: :activerecord.models.operator  #g
+
+      score_operator_document:
+        all: All  #g
+        country: Country  #g
+        current: Current  #g
+        date: Date  #g
+        fmu: Fmu  #g
+        operator: :activerecord.models.operator  #g
+        summary_private: Summary private  #g
+        summary_public: Summary public  #g
+        total: Total  #g
+
+      score_operator_observation:
+        current: Current  #g
+        date: Date  #g
+        obs_per_visit: Obs per visit  #g
+        operator: :activerecord.models.operator  #g
+        score: Score  #g
+
+      severity:
+        level: Level  #g
+        observations: Observations  #g
+        subcategory: :activerecord.models.subcategory  #g
+        translations: Translations  #g
+        details: Details
+
+      severity/translation:
+        details: Details  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+
+      species:
+        cites_status: Cites status  #g
+        countries: Countries  #g
+        iucn_status: Iucn status  #g
+        name: Name  #g
+        observations: Observations  #g
+        scientific_name: Scientific name  #g
+        species_class: Species class  #g
+        species_countries: Species countries  #g
+        species_family: Species family  #g
+        species_kingdom: Species kingdom  #g
+        species_observations: Species observations  #g
+        sub_species: Sub species  #g
+        translations: Translations  #g
+
+      species/translation:
+        common_name: Common name  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+
+      species_country:
+        country: :activerecord.models.country  #g
+        species: :activerecord.models.species  #g
+
+      species_observation:
+        deleted_at: Deleted at  #g
+        observation: :activerecord.models.observation  #g
+        species: :activerecord.models.species  #g
+
+      subcategory:
+        category: :activerecord.models.category  #g
+        laws: Laws  #g
+        location_required: Location required  #g
+        observations: Observations  #g
+        severities: Severities  #g
+        subcategory_type: Subcategory type  #g
+        translations: Translations  #g
+        name: Name
+
+      subcategory/translation:
+        details: Details  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      tool:
+        position: Position  #g
+        translations: Translations  #g
+
+      tool/translation:
+        description: Description  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      tutorial:
+        position: Position  #g
+        translations: Translations  #g
+
+      tutorial/translation:
+        description: Description  #g
+        globalized_model: :activerecord.models.globalized_model  #g
+        locale: Locale  #g
+        name: Name  #g
+
+      uploaded_document:
+        author: Author  #g
+        caption: Caption  #g
+        file: File  #g
+        name: Name  #g
+
+      user:
+        api_key: :activerecord.models.api_key  #g
+        comments: Comments  #g
+        country: :activerecord.models.country  #g
+        current_sign_in_at: Current sign in at  #g
+        current_sign_in_ip: Current sign in ip  #g
+        deactivated_at: Deactivated at  #g
+        email: Email  #g
+        encrypted_password: Encrypted password  #g
+        holding: :activerecord.models.holding  #g
+        institution: Institution  #g
+        is_active: Is active  #g
+        last_sign_in_at: Last sign in at  #g
+        last_sign_in_ip: Last sign in ip  #g
+        locale: Locale  #g
+        name: Name  #g
+        observation_documents: Observation documents  #g
+        observation_reports: Observation reports  #g
+        observations: Observations  #g
+        observer: :activerecord.models.observer  #g
+        operator: :activerecord.models.operator  #g
+        operator_document_annexes: Operator document annexes  #g
+        permissions_accepted: Permissions accepted  #g
+        permissions_request: Permissions request  #g
+        remember_created_at: Remember created at  #g
+        reset_password_sent_at: Reset password sent at  #g
+        reset_password_token: Reset password token  #g
+        user_permission: :activerecord.models.user_permission  #g
+        web_url: Web url  #g
+
+      user_permission:
+        permissions: Permissions  #g
+        user: :activerecord.models.user  #g
+        user_role: User role  #g
     enums:
       observation:
         statuses:
@@ -45,6 +1436,12 @@ en:
           Published (no comments): "Published (no comments)"
           Published (not modified): "Published (not modified)"
           Published (modified): "Published (modified)"
+      operator_document:
+        types:
+          name: 'Document Type'
+          fmu: 'FMU'
+          country: 'Country'
+
     errors:
       messages:
         record_invalid: "Validation failed: %{errors}"

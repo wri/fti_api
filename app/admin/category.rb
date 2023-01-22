@@ -10,9 +10,9 @@ ActiveAdmin.register Category do
   config.order_clause
   config.filters = false
 
-  scope :all, default: true
-  scope :operator
-  scope :government
+  scope I18n.t('active_admin.all'), :all, default: true
+  scope I18n.t('activerecord.models.operator'), :operator
+  scope I18n.t('activerecord.models.government'), :government
 
   permit_params :category_type, translations_attributes: [:id, :locale, :name, :_destroy]
 
@@ -48,7 +48,7 @@ ActiveAdmin.register Category do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Category Details' do
+    f.inputs I18n.t('active_admin.shared.category_details') do
       f.input :category_type, input_html: { disabled: edit }
     end
     f.translated_inputs switch_locale: false do |t|

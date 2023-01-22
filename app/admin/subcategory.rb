@@ -18,12 +18,12 @@ ActiveAdmin.register Subcategory do
   permit_params :location_required, :category_id, :subcategory_type,
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
-  scope :all, default: true
-  scope :operator
-  scope :government
+  scope I18n.t('active_admin.all'), :all, default: true
+  scope I18n.t('activerecord.models.operator'), :operator
+  scope I18n.t('activerecord.models.government'), :government
 
   filter :translations_name_eq,
-         as: :select, label: 'Name',
+         as: :select, label: I18n.t('activerecord.attributes.subcategory.name'),
          collection: -> {
            Subcategory.with_translations(I18n.locale)
              .order('subcategory_translations.name').pluck(:name)
@@ -49,7 +49,7 @@ ActiveAdmin.register Subcategory do
 
   csv do
     column :name
-    column 'category' do |s|
+    column I18n.t('activerecord.models.category.one') do |s|
       s.category&.name
     end
     column :subcategory_type
@@ -72,13 +72,13 @@ ActiveAdmin.register Subcategory do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     edit = f.object.new_record? ? false : true
-    f.inputs 'Subcategory Details' do
+    f.inputs I18n.t('active_admin.shared.subcategory_details') do
       f.input :category,          input_html: { disabled: edit }
       f.input :subcategory_type,  input_html: { disabled: edit }
       f.input :location_required
     end
 
-    f.inputs 'Translated fields' do
+    f.inputs I18n.t('active_admin.shared.translated_fields') do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
       end

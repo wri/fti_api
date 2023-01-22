@@ -7,22 +7,26 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
 
   actions :index
 
-  filter :by_country, label: 'Country', as: :select, collection: -> { [['All Countries', 'null']] + Country.with_at_least_one_report.order(:name).map { |c| [c.name, c.id] } }
-  filter :observer, label: 'Monitor', as: :select, multiple: true, collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
+  filter :by_country, label: proc{ I18n.t('activerecord.models.country.one') }, as: :select,
+                      collection: -> {
+           [[I18n.t('active_admin.producer_documents_dashboard_page.all_countries'), 'null']] +
+             Country.with_at_least_one_report.order(:name).map { |c| [c.name, c.id] }
+         }
+  filter :observer, label: proc{ I18n.t('activerecord.models.observer') }, as: :select, multiple: true, collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
   filter :date
 
-  index do
+  index title: I18n.t('active_admin.observation_reports_dashboard_page.name') do
     column :date, sortable: false do |resource|
       resource.date.to_date
     end
     column :country do |resource|
       if resource.country.nil?
-        'All Countries'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_countries')
       else
         link_to resource.country.name, admin_country_path(resource.country)
       end
     end
-    column :total_count, sortable: false
+    column :total_count, label: I18n.t('active_admin.observation_reports_dashboard_page.total_count'), sortable: false
     returned_observers.map do |o|
       column o.name, "o_#{o.id}" do |res|
         res.send("o_#{o.id}") || '0'
@@ -37,7 +41,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
 
     render partial: 'score_evolution', locals: {
       scores: [
-        { name: 'Reports', data: grouped_sod.map { |date, data| { date.to_date => data.map(&:total_count).max } }.reduce(&:merge) }
+        { name: I18n.t('active_admin.observation_reports_dashboard_page.reports'), data: grouped_sod.map { |date, data| { date.to_date => data.map(&:total_count).max } }.reduce(&:merge) }
       ]
     }
   end

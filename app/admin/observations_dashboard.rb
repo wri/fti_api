@@ -7,71 +7,78 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
 
   actions :index
 
-  filter :by_country, label: 'Country', as: :select, collection: -> { [['All Countries', 'null']] + Country.where(id: Observation.pluck(:country_id)).order(:name).map { |c| [c.name, c.id] } }
+  filter :by_country, label: proc{ I18n.t('activerecord.models.country.one') }, as: :select,
+                      collection: -> {
+           [[I18n.t('active_admin.producer_documents_dashboard_page.all_countries'), 'null']] +
+             Country.active.order(:name).map { |c| [c.name, c.id] }
+         }
   filter :observation_type, as: :select, collection: ObservationStatistic.observation_types.sort
-  filter :operator, label: 'Operator', as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
-  filter :fmu_forest_type, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
-  filter :category,
-         label: 'Category', as: :select,
-         collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
-  filter :subcategory,
-         label: 'Subcategory', as: :select,
-         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
+  filter :operator, as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
+  filter :fmu_forest_type, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  filter :category, as: :select,
+                    collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
+  filter :subcategory, as: :select,
+                       collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
+  filter :severity_level, as: :select, collection: [
+    [I18n.t('filters.unknown'), 0],
+    [I18n.t('filters.low'), 1],
+    [I18n.t('filters.medium'), 2],
+    [I18n.t('filters.high'), 3]
+  ]
   filter :hidden
   filter :is_active
   filter :date
 
-  index do
+  index title: I18n.t('active_admin.observations_dashboard_page.name') do
     column :date, sortable: false do |resource|
       resource.date.to_date
     end
     column :country, sortable: false do |resource|
       if resource.country.nil?
-        'All Countries'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_countries')
       else
         link_to resource.country.name, admin_country_path(resource.country)
       end
     end
     column :observation_type, sortable: false do |r|
-      r.observation_type.presence || 'All Types'
+      r.observation_type.presence || I18n.t('active_admin.observations_dashboard_page.all_types')
     end
     column :operator, sortable: false do |r|
       if r.operator.nil?
-        'All Operators'
+        I18n.t('active_admin.observations_dashboard_page.all_operators')
       else
         link_to r.operator.name, admin_producer_path(r.operator)
       end
     end
     column :fmu_forest_type, sortable: false do |r|
       if r.fmu_forest_type.nil?
-        'All Forest Types'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
         Fmu.forest_types.key(r.fmu_forest_type)
       end
     end
     column :severity_level, sortable: false do |r|
-      r.severity_level.presence || 'All Levels'
+      r.severity_level.presence || I18n.t('active_admin.observations_dashboard_page.all_levels')
     end
     column :category do |r|
       if r.category.nil?
-        'All Categories'
+        I18n.t('active_admin.observations_dashboard_page.all_categories')
       else
         link_to r.category.name, admin_category_path(r.category)
       end
     end
     column :subcategory do |r|
       if r.subcategory.nil?
-        'All Subcategories'
+        I18n.t('active_admin.observations_dashboard_page.all_subcategories')
       else
         link_to r.subcategory.name, admin_subcategory_path(r.subcategory)
       end
     end
     column :is_active do |r|
-      r.is_active.nil? ? 'Any' : r.is_active
+      r.is_active.nil? ? I18n.t('active_admin.observations_dashboard_page.any') : r.is_active
     end
     column :hidden do |r|
-      r.hidden.nil? ? 'Any' : r.hidden
+      r.hidden.nil? ? I18n.t('active_admin.observations_dashboard_page.any') : r.hidden
     end
     column :created
     column :ready_for_qc
@@ -111,16 +118,49 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
 
     panel 'Visible columns' do
       render partial: "fields", locals: {
-        attributes: %w[
-                       date country is_active hidden observation_type operator severity_level category subcategory fmu_forest_type
-                       created ready_for_qc qc_in_progress approved
-                       rejected needs_revision ready_for_publication published_no_comments published_modified
-                       published_not_modified published_all total_count
-                      ],
-        unchecked: %w[
-                      operator severity_level observation_type category subcategory fmu_forest_type ready_for_qc approved rejected needs_revision ready_for_publication
-                      published_no_comments published_modified published_not_modified total_count created qc_in_progress
-                     ]
+        attributes: [
+          ['date',I18n.t('activerecord.attributes.operator_document_statistic.date')],
+          ['country',I18n.t('activerecord.attributes.operator_document_statistic.country.one')],
+          ['is_active',I18n.t('activerecord.attributes.observation.is_active')],
+          ['hidden',I18n.t('activerecord.attributes.observation.hidden')],
+          ['observation_type',I18n.t('activerecord.attributes.observation.observation_type')],
+          ['operator',I18n.t('activerecord.models.fmu_operator.one')],
+          ['severity_level',I18n.t('activerecord.attributes.severity.level')],
+          ['category',I18n.t('activerecord.models.category.one')],
+          ['subcategory',I18n.t('activerecord.models.subcategory')],
+          ['fmu_forest_type',I18n.t('activerecord.attributes.observation_history.fmu_forest_type')],
+          ['created',I18n.t('shared.created')],
+          ['ready_for_qc',I18n.t('activerecord.enums.observation.statuses.Ready for QC')],
+          ['qc_in_progress',I18n.t('activerecord.enums.observation.statuses.QC in progress')],
+          ['approved',I18n.t('activerecord.enums.observation.statuses.Approved')],
+          ['rejected',I18n.t('activerecord.enums.observation.statuses.Rejected')],
+          ['needs_revision',I18n.t('activerecord.enums.observation.statuses.Needs revision')],
+          ['ready_for_publication',I18n.t('activerecord.enums.observation.statuses.Ready for publication')],
+          ['published_no_comments',I18n.t('activerecord.enums.observation.statuses.Published (no comments)')],
+          ['published_modified',I18n.t('activerecord.enums.observation.statuses.Published (modified)')],
+          ['published_not_modified',I18n.t('activerecord.enums.observation.statuses.Published (not modified)')],
+          ['published_all',I18n.t('active_admin.observations_dashboard_page.published_all')],
+          ['total_count',I18n.t('active_admin.observation_reports_dashboard_page.total_count')],
+        ],
+        unchecked: [
+          ['operator',I18n.t('activerecord.models.fmu_operator.one')],
+          ['severity_level',I18n.t('activerecord.attributes.observation_history.severity_level')],
+          ['observation_type',I18n.t('activerecord.attributes.observation.observation_type')],
+          ['category',I18n.t('activerecord.models.category.one')],
+          ['subcategory',I18n.t('activerecord.models.subcategory')],
+          ['fmu_forest_type',I18n.t('activerecord.attributes.observation_history.fmu_forest_type')],
+          ['ready_for_qc',I18n.t('activerecord.enums.observation.statuses.Ready for QC')],
+          ['approved',I18n.t('activerecord.enums.observation.statuses.Approved')],
+          ['rejected',I18n.t('activerecord.enums.observation.statuses.Rejected')],
+          ['needs_revision',I18n.t('activerecord.enums.observation.statuses.Needs revision')],
+          ['ready_for_publication',I18n.t('activerecord.enums.observation.statuses.Ready for publication')],
+          ['published_no_comments',I18n.t('activerecord.enums.observation.statuses.Published (no comments)')],
+          ['published_modified',I18n.t('activerecord.enums.observation.statuses.Published (modified)')],
+          ['published_not_modified',I18n.t('activerecord.enums.observation.statuses.Published (not modified)')],
+          ['total_count',I18n.t('active_admin.observation_reports_dashboard_page.total_count')],
+          ['created',I18n.t('shared.created')],
+          ['qc_in_progress',I18n.t('activerecord.enums.observation.statuses.QC in progress')],
+        ]
       }
     end
   end
@@ -132,42 +172,42 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     column :country, &:country_name
     column :operator do |r|
       if r.operator.nil?
-        'All Operators'
+        I18n.t('active_admin.observations_dashboard_page.all_operators')
       else
         r.operator.name
       end
     end
     column :observation_type do |r|
       if r.observation_type.nil?
-        'All Types'
+        I18n.t('active_admin.observations_dashboard_page.all_types')
       else
         r.observation_type
       end
     end
     column :fmu_forest_type do |r|
       if r.fmu_forest_type.nil?
-        'All Forest Types'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
         Fmu.forest_types.key(r.fmu_forest_type)
       end
     end
     column :validation_status do |r|
       if r.validation_status.nil?
-        'All Statuses'
+        I18n.t('active_admin.observations_dashboard_page.all_statuses')
       else
         r.validation_status
       end
     end
     column :category do |r|
       if r.category.nil?
-        'All Categories'
+        I18n.t('active_admin.observations_dashboard_page.all_categories')
       else
         r.category.name
       end
     end
     column :subcategory do |r|
       if r.subcategory.nil?
-        'All Subcategories'
+        I18n.t('active_admin.observations_dashboard_page.all_subcategories')
       else
         r.subcategory.name
       end

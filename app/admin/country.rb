@@ -15,11 +15,13 @@ ActiveAdmin.register Country do
     end
   end
 
-  scope :all
-  scope :active
+  scope I18n.t('active_admin.all'), :all
+  scope I18n.t('active_admin.shared.active'), :active
 
   filter :iso, as: :select
-  filter :translations_name_contains, as: :select, label: 'Name', collection: -> { Country.order(:name).pluck(:name) }
+  filter :translations_name_contains, as: :select,
+                                      label: I18n.t('activerecord.attributes.country.name'),
+                                      collection: -> { Country.order(:name).pluck(:name) }
   filter :region_iso, as: :select
   filter :region_name
   filter :is_active
@@ -36,7 +38,7 @@ ActiveAdmin.register Country do
   end
 
   index do
-    column 'Active?', :is_active, sortable: true
+    column :is_active, sortable: true
     column :id, sortable: true
     column :iso, sortable: true
     column :name, sortable: 'country_translations.name'
@@ -48,7 +50,7 @@ ActiveAdmin.register Country do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Country Details' do
+    f.inputs I18n.t('active_admin.shared.country_details') do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
       end

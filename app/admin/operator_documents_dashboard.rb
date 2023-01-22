@@ -11,51 +11,60 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
 
   actions :index
 
-  filter :by_country, label: 'Country', as: :select, collection: -> { [['All Countries', 'null']] + Country.active.order(:name).map { |c| [c.name, c.id] } }
-  filter :required_operator_document_group, as: :select, collection: -> { RequiredOperatorDocumentGroup.without_publication_authorization.order(:name) }
-  filter :document_type_eq, label: 'Document Type', as: :select, collection: [['FMU', :fmu], ['Country', :country]]
-  filter :fmu_forest_type_eq, label: 'Forest Type', as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  filter :by_country, label: proc{ I18n.t('activerecord.models.country.one') }, as: :select,
+                      collection: -> {
+           [[I18n.t('active_admin.producer_documents_dashboard_page.all_countries'), 'null']] +
+             Country.active.order(:name).map { |c| [c.name, c.id] }
+         }
+  filter :required_operator_document_group, as: :select,
+                                            collection: -> { RequiredOperatorDocumentGroup.without_publication_authorization.order(:name) }
+  filter :document_type_eq, label: proc{ I18n.t('activerecord.enums.operator_document.types.name') }, as: :select,
+                            collection: [
+           [I18n.t('activerecord.enums.operator_document.types.fmu'), :fmu],
+           [I18n.t('activerecord.enums.operator_document.types.country'), :country]
+         ]
+  filter :fmu_forest_type_eq, label: proc{ I18n.t('activerecord.attributes.fmu.forest_type') }, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :date
 
-  index title: 'Producer Documents Dashboard', pagination_total: false do
+  index title: I18n.t('active_admin.producer_documents_dashboard_page.name'), pagination_total: false do
     column :date do |resource|
       resource.date.to_date
     end
     column :country do |resource|
       if resource.country.nil?
-        'All Countries'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_countries')
       else
         link_to resource.country.name, admin_country_path(resource.country)
       end
     end
     column :required_operator_document_group do |r|
       if r.required_operator_document_group.nil?
-        'All Groups'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_groups')
       else
         link_to r.required_operator_document_group.name, admin_required_operator_document_group_path(r.required_operator_document_group)
       end
     end
     column :fmu_forest_type do |r|
       if r.fmu_forest_type.nil?
-        'All Forest Types'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
         Fmu.forest_types.key(r.fmu_forest_type)
       end
     end
     column :document_type do |r|
       if r.document_type.nil?
-        'Fmu/Country'
+        I18n.t('active_admin.producer_documents_dashboard_page.fmu_country')
       else
         r.document_type.humanize
       end
     end
-    column 'Valid & Expired', sortable: false, &:valid_and_expired_count
-    column :valid, sortable: false, &:valid_count
-    column :expired, sortable: false, &:expired_count
-    column :pending, sortable: false, &:pending_count
-    column :invalid, sortable: false, &:invalid_count
-    column :not_required, sortable: false, &:not_required_count
-    column :not_provided, sortable: false, &:not_provided_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.valid_expired'), sortable: false, &:valid_and_expired_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.valid'), sortable: false, &:valid_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.expired'), sortable: false, &:expired_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.pending'), sortable: false, &:pending_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.invalid'), sortable: false, &:invalid_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.not_required'), sortable: false, &:not_required_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.not_provided'), sortable: false, &:not_provided_count
 
     show_on_chart = if params.dig(:q, :by_country).present?
                       collection
@@ -73,14 +82,35 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
           { name: 'Valid & Expired', data: get_data.call(&:valid_and_expired_count) },
           { name: 'Valid', data: get_data.call(&:valid_count) },
           { name: 'Expired', data: get_data.call(&:expired_count) },
-          { name: 'Not Required', **hidden, data: get_data.call(&:not_required_count) },
-        ]
+          { name: 'Not Required', **hidden, data: get_data.call(&:not_required_count) },        
+]
       }
 
-    panel 'Visible columns' do
+    panel I18n.t('active_admin.producer_documents_dashboard_page.visible_columns') do
       render partial: "fields", locals: {
-        attributes: %w[date country required_operator_document_group fmu_forest_type document_type valid_&_expired valid expired invalid pending not_provided not_required],
-        unchecked: %w[required_operator_document_group fmu_forest_type document_type invalid pending not_provided not_required]
+        attributes: [
+          ['date', I18n.t('activerecord.attributes.operator_document_statistic.date')],
+          ['country', I18n.t('activerecord.attributes.operator_document_statistic.country.one')],
+          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group.one')],
+          ['fmu_forest_type', I18n.t('activerecord.attributes.fmu.forest_type')],
+          ['document_type', I18n.t('activerecord.attributes.required_gov_document.document_type')],
+          ['valid_expired', I18n.t('active_admin.producer_documents_dashboard_page.valid_expired')],
+          ['valid', I18n.t('active_admin.producer_documents_dashboard_page.valid')],
+          ['expired', I18n.t('active_admin.producer_documents_dashboard_page.expired')],
+          ['invalid', I18n.t('active_admin.producer_documents_dashboard_page.invalid')],
+          ['pending', I18n.t('active_admin.producer_documents_dashboard_page.pending')],
+          ['not_provided', I18n.t('active_admin.producer_documents_dashboard_page.not_provided')],
+          ['not_required', I18n.t('active_admin.producer_documents_dashboard_page.not_required')]
+        ],
+        unchecked: [
+          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group.one')],
+          ['fmu_forest_type', I18n.t('activerecord.attributes.observation_history.fmu_forest_type')],
+          ['document_type', I18n.t('activerecord.attributes.required_gov_document.document_type')],
+          ['invalid', I18n.t('active_admin.producer_documents_dashboard_page.invalid')],
+          ['pending', I18n.t('active_admin.producer_documents_dashboard_page.pending')],
+          ['not_provided', I18n.t('active_admin.producer_documents_dashboard_page.not_provided')],
+          ['not_required', I18n.t('active_admin.producer_documents_dashboard_page.not_required')],
+        ]
       }
     end
   end
@@ -92,32 +122,32 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
     column :country, &:country_name
     column :required_operator_document_group do |r|
       if r.required_operator_document_group.nil?
-        'All Groups'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_groups')
       else
         r.required_operator_document_group.name
       end
     end
     column :fmu_forest_type do |r|
       if r.fmu_forest_type.nil?
-        'All Forest Types'
+        I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
         Fmu.forest_types.key(r.fmu_forest_type)
       end
     end
     column :document_type do |r|
       if r.document_type.nil?
-        'Fmu/Country'
+        I18n.t('active_admin.producer_documents_dashboard_page.fmu_country')
       else
         r.document_type.humanize
       end
     end
-    column 'Valid & Expired', &:valid_and_expired_count
-    column :valid, &:valid_count
-    column :expired, &:expired_count
-    column :pending, &:pending_count
-    column :invalid, &:invalid_count
-    column :not_required, &:not_required_count
-    column :not_provided, &:not_provided_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.valid_expired'), &:valid_and_expired_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.valid'), &:valid_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.expired'), &:expired_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.pending'), &:pending_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.invalid'), &:invalid_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.not_required'), &:not_required_count
+    column I18n.t('active_admin.producer_documents_dashboard_page.not_provided'), &:not_provided_count
   end
 
   controller do

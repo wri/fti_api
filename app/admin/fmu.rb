@@ -31,8 +31,8 @@ ActiveAdmin.register Fmu do
     end
   end
 
-  scope :all, default: true
-  scope 'Free', :filter_by_free_aa
+  scope I18n.t('active_admin.all'), :all, default: true
+  scope I18n.t('active_admin.free'), :filter_by_free_aa
 
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
@@ -42,20 +42,20 @@ ActiveAdmin.register Fmu do
 
   filter :id, as: :select
   filter :translations_name_contains,
-         as: :select, label: 'Name',
+         as: :select, label: I18n.t('activerecord.attributes.fmu.name'),
          collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name').pluck(:name) }
   filter :country, as: :select,
                    collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
-  filter :operator_in_all, label: 'Operator', as: :select,
+  filter :operator_in_all, label: I18n.t('activerecord.attributes.fmu.operator'), as: :select,
                            collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
 
   csv do
     column :id
     column :name
-    column 'country' do |fmu|
+    column I18n.t('activerecord.models.country.one') do |fmu|
       fmu.country&.name
     end
-    column 'operator' do |fmu|
+    column I18n.t('activerecord.models.operator') do |fmu|
       fmu.operator&.name
     end
     column :certification_fsc
@@ -107,7 +107,7 @@ ActiveAdmin.register Fmu do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Fmu Details' do
+    f.inputs I18n.t('active_admin.shared.fmu_details') do
       f.input :country,  input_html: { disabled: object.persisted? }, required: true
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
       render partial: 'zip_hint'
@@ -123,17 +123,17 @@ ActiveAdmin.register Fmu do
       f.input :certification_ls
     end
 
-    f.inputs 'Operator', for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
-      fo.input :operator_id, label: 'name', as: :select,
+    f.inputs I18n.t('activerecord.models.operator'), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
+      fo.input :operator_id, label: I18n.t('activerecord.attributes.fmu.name'), as: :select,
                              collection: Operator.active.with_translations.map{ |o| [o.name, o.id] },
                              input_html: { disabled: object.persisted? }, required: false
       fo.input :start_date, input_html: { disabled: object.persisted? }, required: false
       fo.input :end_date, input_html: { disabled: object.persisted? }
     end
 
-    f.inputs "Translated fields" do
+    f.inputs I18n.t('active_admin.shared.translated_fields') do
       f.translated_inputs switch_locale: false do |t|
-        t.input :name, label: "Fmu's name"
+        t.input :name, label: I18n.t('activerecord.attributes.fmu.name')
       end
     end
     f.actions
