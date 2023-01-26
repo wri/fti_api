@@ -82,7 +82,7 @@ ActiveAdmin.register Fmu do
       row :certification_tlv
       row :certification_ls
       row(:geojson) { |fmu| fmu.geojson.to_json }
-      row :properties
+      row(:properties) { |fmu| fmu.geojson&.dig('properties') }
       row :created_at
       row :updated_at
       row :deleted_at

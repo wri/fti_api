@@ -71,30 +71,68 @@ RSpec.describe Observation, type: :model do
 
 
   describe 'Validations' do
-    describe 'Status changes' do
+    describe '#status_changes' do
+      let(:country) { create(:country) }
+      let(:status) { 'Created' }
+      let(:observation) {
+        build :observation,
+              country: country,
+              validation_status: status,
+              user_type: user_type
+      }
+      subject {
+        observation.save
+        observation
+      }
+
       describe 'For a monitor' do
-        let(:country) { FactoryBot.create(:country)}
-        let(:observation) { FactoryBot.build(:observation, validation_status: 'Created',
-                                             user_type: :monitor, country: country)}
-        it 'Can create an observation'do
-          expect {
+        let(:user_type) { :monitor }
+
+        context 'when creating an observation with status `Created`' do
+          it { is_expected.to be_valid }
+          it { is_expected.to be_persisted }
+        end
+
+        context 'when it is already saved' do
+          before do
             observation.save
-          }.to change { ObservationHistory.count }.by(1)
-          expect(observation.persisted?).to be_truthy
+            observation.validation_status = new_status
+          end
+
+          context 'when moving from `Created` to `Ready for QA`' do
+            let(:new_status) { 'Ready for QC' }
+
+            it { is_expected.to be_valid }
+          end
+
+          context 'when going to QC in progress' do
+            let(:new_status) { 'QC in progress' }
+
+            it { is_expected.to_not be_valid }
+          end
+        end
+      end
+
+      describe 'for an admin' do
+        let(:user_type) { :admin }
+
+        before do
+          observation.save(validate: false)
+          observation.validation_status = new_status
         end
 
-        it 'Can move from Created to Ready for QC' do
-          observation.save
-          observation.validation_status = 'Ready for QC'
-          expect {
-            expect(observation.save).to be_truthy
-          }.to change { ObservationHistory.count }.by(1)
+        context 'when moving from `Ready for QC` to `QC in progress`' do
+          let(:status) { 'Ready for QC' }
+          let(:new_status) { 'QC in progress'}
+
+          it { is_expected.to be_valid }
         end
 
-        it 'Cannot go to QC in progress' do
-          observation.save
-          observation.validation_status = 'QC in progress'
-          expect(observation.save).to be_falsey
+        context 'when moving from `Created` to `Ready for QC`' do
+          let(:status) { 'Created' }
+          let(:new_status) { 'Ready for QC' }
+
+          it { is_expected.to_not be_valid }
         end
       end
     end

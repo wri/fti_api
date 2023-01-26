@@ -43,34 +43,34 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
   describe 'member actions' do
     describe 'PUT ready_for_publication' do
-      let(:observation) { create(:observation) }
+      let(:observation) { create(:observation, force_status: 'QC in progress') }
 
       before { put :ready_for_publication, params: {id: observation.id} }
 
       it 'is successful' do
-        expect(flash[:notice]).to match('Observation approved')
+        expect(flash[:notice]).to match('Observation moved to Ready for Publication')
         expect(observation.reload.validation_status).to eq('Ready for publication')
       end
     end
 
     describe 'PUT needs_revision' do
-      let(:observation) { create(:observation) }
+      let(:observation) { create(:observation, force_status: 'QC in progress') }
 
       before { put :needs_revision, params: {id: observation.id} }
 
       it 'is successful' do
-        expect(flash[:notice]).to match('Observation needs revision')
+        expect(flash[:notice]).to match('Observation moved to Needs Revision')
         expect(observation.reload.validation_status).to eq('Needs revision')
       end
     end
 
     describe 'PUT start_qc' do
-      let(:observation) { create(:observation) }
+      let(:observation) { create(:observation, force_status: 'Ready for QC') }
 
       before { put :start_qc, params: {id: observation.id} }
 
       it 'is successful' do
-        expect(flash[:notice]).to match('QC in progress for observation')
+        expect(flash[:notice]).to match('Observation moved to QC in Progress')
         expect(observation.reload.validation_status).to eq('QC in progress')
       end
     end
@@ -78,8 +78,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
   describe 'batch actions' do
     describe 'move_to_qc_in_progress' do
-      let(:observation1) { create(:observation, validation_status: 'Ready for QC') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'Ready for QC') }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created') }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -98,8 +98,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe 'move_to_needs_revision' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress') }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created') }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -118,8 +118,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe 'move_to_ready_for_publication' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress') }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created') }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -137,69 +137,9 @@ RSpec.describe Admin::ObservationsController, type: :controller do
       end
     end
 
-    describe 'move_to_published_no_comments' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
-      let(:obs_ids) { [observation1.id, observation2.id] }
-
-      before do
-        post :batch_action,
-          params: {
-            batch_action: 'move_to_published_no_comments',
-            collection_selection: obs_ids
-          }
-      end
-
-      it 'is successful' do
-        expect(observation1.reload.validation_status).to eq('Published (no comments)')
-        expect(observation2.reload.validation_status).to eq('Published (no comments)')
-        expect(flash[:notice]).to match('Observations published without comment')
-      end
-    end
-
-    describe 'move_to_published_not_modified' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
-      let(:obs_ids) { [observation1.id, observation2.id] }
-
-      before do
-        post :batch_action,
-          params: {
-            batch_action: 'move_to_published_not_modified',
-            collection_selection: obs_ids
-          }
-      end
-
-      it 'is successful' do
-        expect(observation1.reload.validation_status).to eq('Published (not modified)')
-        expect(observation2.reload.validation_status).to eq('Published (not modified)')
-        expect(flash[:notice]).to match('Observations published without modifications')
-      end
-    end
-
-    describe 'move_to_published_modified' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress') }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created') }
-      let(:obs_ids) { [observation1.id, observation2.id] }
-
-      before do
-        post :batch_action,
-          params: {
-            batch_action: 'move_to_published_modified',
-            collection_selection: obs_ids
-          }
-      end
-
-      it 'is successful' do
-        expect(observation1.reload.validation_status).to eq('Published (modified)')
-        expect(observation2.reload.validation_status).to eq('Published (modified)')
-        expect(flash[:notice]).to match('Observations published with modifications')
-      end
-    end
-
     describe 'hide' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress', hidden: false) }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created', hidden: false) }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress', hidden: false) }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created', hidden: false) }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do
@@ -218,8 +158,8 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe 'unhide' do
-      let(:observation1) { create(:observation, validation_status: 'QC in progress', hidden: true) }
-      let(:observation2) { create(:gov_observation, validation_status: 'Created', hidden: true) }
+      let(:observation1) { create(:observation, :with_translations, validation_status: 'QC in progress', hidden: true) }
+      let(:observation2) { create(:gov_observation, :with_translations, validation_status: 'Created', hidden: true) }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
       before do

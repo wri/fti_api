@@ -87,21 +87,23 @@ TXT
   end
 
   def notify_observer_status_changed(observer, observation, user)
-    infractor_text = if observation.observation_type == 'government'
-                       t('backend.mail_service.observer_status_changed.government')
-                     else
-                       t('backend.mail_service.observer_status_changed.producers') + "#{observation.operator&.name}"
-                     end
+    I18n.with_locale(user.locale.presence || :en) do
+      infractor_text = if observation.observation_type == 'government'
+                         t('backend.mail_service.observer_status_changed.government')
+                       else
+                         t('backend.mail_service.observer_status_changed.producers') + "#{observation.operator&.name}"
+                       end
 
-    @body = t('backend.mail_service.observer_status_changed.text',
-              id: observation.id, observer: observer.name, status: observation.validation_status,
-              status_fr: I18n.t("activerecord.enums.observation.statuses.#{observation.validation_status}", locale: :fr),
-              date: observation.publication_date, infractor_text: infractor_text,
-              infraction: observation.subcategory&.name,
-              infraction_fr: Subcategory.with_translations(:fr).where(id: observation.subcategory_id).pluck(:name)&.first)
-    @from = ENV['CONTACT_EMAIL']
-    @to = user.email
-    @subject = t('backend.mail_service.observer_status_changed.subject')
+      @body = t('backend.mail_service.observer_status_changed.text',
+                id: observation.id, observer: observer.name, status: observation.validation_status,
+                status_fr: I18n.t("activerecord.enums.observation.statuses.#{observation.validation_status}", locale: :fr),
+                date: observation.publication_date, infractor_text: infractor_text,
+                infraction: observation.subcategory&.name,
+                infraction_fr: Subcategory.with_translations(:fr).where(id: observation.subcategory_id).pluck(:name)&.first)
+      @from = ENV['CONTACT_EMAIL']
+      @to = user.email
+      @subject = t('backend.mail_service.observer_status_changed.subject')
+    end
 
     self
   end
@@ -213,35 +215,42 @@ TXT
     last_score = operator.score_operator_documents.at_date(Date.today - 3.months).order(:date).last
     expiring_docs = operator.operator_documents.to_expire(Date.today + 3.months)
 
-    subject = "Your quarterly report. / Votre rapport trimestriel."
+    subject = "Your quarterly OTP report. / Votre rapport trimestriel sur l'OTP."
 
-    current_score_percentage = NumberHelper.float_to_percentage(current_score.all)
+    current_score_percentage = NumberHelper.float_to_percentage(current_score.all) rescue 0
 
-    text_en = ["Your current score is #{current_score_percentage}."]
-    text_fr = ["Votre score actuel est de #{current_score_percentage}."]
+    text_en = ['Dear producer,', '']
+    text_fr = ['Cher exploitant,', '']
+    text_en << ["Your current score is #{current_score_percentage}.", '']
+    text_fr << ["Votre score actuel est de #{current_score_percentage}.", '']
 
     if last_score.present?
-      last_score_percentage = NumberHelper.float_to_percentage(last_score.all)
+      last_score_percentage = NumberHelper.float_to_percentage(last_score.all) rescue 0
 
       score_change = NumberHelper.float_to_percentage(current_score.all - last_score.all)
-      text_en << "Your score on #{last_score.date} was #{last_score_percentage}. This means a variation of #{score_change}."
-      text_fr << "Votre dernier score en #{last_score.date} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}."
+      text_en << ["Your score on #{last_score.date} was #{last_score_percentage}. This means a variation of #{score_change}.", '']
+      text_fr << ["Votre dernier score en #{last_score.date} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}.", '']
     end
 
-    expiring_docs.each do |document|
-      text_en << "Document #{document.required_operator_document.name} expires on #{document.expire_date}."
-      text_fr << "Le document #{document.required_operator_document.name} expire en #{document.expire_date}."
+    if expiring_docs.any?
+      text_en << ['Please note that the following documents on your profile are expiring this quarter and will need to be updated:']
+      text_fr << ['Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour :']
+      expiring_docs.each do |document|
+        text_en << "- #{document.required_operator_document.name} expires on #{document.expire_date}."
+        text_fr << "- #{document.required_operator_document.name} expire en #{document.expire_date}."
+      end
     end
+
 
     text_en << ['', 'Best,', 'OTP Team', '']
     text_fr << ['', 'Cordialement,', "L'équipe OTP", '']
 
-    body = text_en.join("\n")
-    body << "\n----------------------------------------------------\n"
-    body << text_fr.join("\n")
+    body = text_en.join("<br>")
+    body << "<br>----------------------------------------------------<br>"
+    body << text_fr.join("<br>")
 
     @from = ENV['CONTACT_EMAIL']
-    @to = operator.users.pluck(:email).join(', ')
+    @to = operator.users.pluck(:email)
     @body = body
     @subject = subject
     @content_type = "text/html"

@@ -40,7 +40,9 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
     column :id
     column :observation, sortable: 'observation_id'
     column :name
-    attachment_column :attachment
+    column :attachment do |o|
+      link_to o&.name, o.attachment&.url
+    end
     column :user, sortable: 'users.name'
     column :created_at
     column :updated_at
@@ -84,7 +86,9 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
     attributes_table do
       row :id
       row :observation
-      attachment_row :attachment
+      row :attachment do |o|
+        link_to o&.name, o.attachment&.url
+      end
       row :user
       row :created_at
       row :updated_at

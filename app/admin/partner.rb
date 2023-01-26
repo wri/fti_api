@@ -26,7 +26,9 @@ ActiveAdmin.register Partner do
   index do
     column :name
     column :website
-    image_column :logo
+    column :logo do |p|
+      link_to p.logo&.identifier, p.logo&.url
+    end
     column :priority
     column :description
 
@@ -54,7 +56,9 @@ ActiveAdmin.register Partner do
     attributes_table do
       row :name
       row :website
-      image_row :logo
+      row :logo do |p|
+        link_to p.logo&.identifier, p.logo&.url
+      end
       row :priority
       row :description
       row :created_at

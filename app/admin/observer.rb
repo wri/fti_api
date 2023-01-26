@@ -47,7 +47,9 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     end
     # rubocop:enable Rails/OutputSafety
     column :observer_type, sortable: true
-    image_column :logo
+    column :logo do |o|
+      link_to o.logo&.identifier, o.logo&.url
+    end
     column :name, sortable: 'observer_translations.name'
     column :responsible_user
     column :responsible_admin
@@ -81,7 +83,9 @@ ActiveAdmin.register Observer, as: 'Monitor' do
         links.join(' ').html_safe
       end
       # rubocop:enable Rails/OutputSafety
-      image_row :logo
+      row :logo do |o|
+        link_to o.logo&.identifier, o.logo&.url
+      end
       row :address
       row :information_name
       row :information_email

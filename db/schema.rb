@@ -267,7 +267,6 @@ ActiveRecord::Schema.define(version: 2023_01_12_102606) do
     t.boolean "certification_tlv", default: false
     t.integer "forest_type", default: 0, null: false
     t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
-    t.jsonb "properties"
     t.datetime "deleted_at"
     t.boolean "certification_ls", default: false
     t.index ["country_id"], name: "index_fmus_on_country_id"

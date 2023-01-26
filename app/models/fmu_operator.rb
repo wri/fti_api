@@ -86,16 +86,6 @@ class FmuOperator < ApplicationRecord
     to_activate.find_each do |x|
       x.current = true
       x.save!(validate: false)
-
-      query = "
-update fmus
-set geojson = jsonb_set(geojson, '{properties}',
-    (SELECT JSONB_BUILD_OBJECT('properties', geojson->'properties' || '{\"company_na\": \"#{x.operator&.name}\", \"operator_id\": #{x.operator_id}}'::JSONB)
-    FROM fmus
-    where fmus.id = #{x.fmu_id}), true)
-WHERE id = #{x.fmu_id};"
-
-      ActiveRecord::Base.connection.execute(query)
     end
   end
 

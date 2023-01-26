@@ -13,7 +13,7 @@ namespace :fmus do
           if ENV["FOR_REAL"]
             fmu.save
             if fmu.fmu_operator&.operator_id == fmu.properties['operator_id']
-              puts "fixed as expected" 
+              puts "fixed as expected"
             else
               puts "something went wrong my friend!"
             end
@@ -29,7 +29,7 @@ namespace :fmus do
           if ENV["FOR_REAL"]
             fmu.save
             if fmu.properties['operator_id'].nil? and fmu.properties['company_na'].nil?
-              puts "fixed as expected" 
+              puts "fixed as expected"
             else
               puts "something went wrong my friend!"
               puts " has operator_id in properties >>  #{fmu.properties['operator_id']}" unless fmu.properties['operator_id'].nil?

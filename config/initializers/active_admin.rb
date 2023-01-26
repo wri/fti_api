@@ -147,7 +147,11 @@ ActiveAdmin.setup do |config|
   end
 
   # Set default locale for active admin
-  #config.before_action :set_admin_locale
+  def set_admin_locale
+    return I18n.locale = params[:locale] if params[:locale] && params[:format] == 'csv'
+
+    super
+  end
 
   # == Localize Date/Time Format
   #
@@ -235,25 +239,10 @@ ActiveAdmin.setup do |config|
   config.view_factory.header = CustomAdminHeader
 
   # == Download Links
-  #
-  # You can disable download links on resource listing pages,
-  # or customize the formats shown per namespace/globally
-  #
-  # To disable/customize for the :admin namespace:
-  #
-  #   config.namespace :admin do |admin|
-  #
-  #     # Disable the links entirely
-  #     admin.download_links = false
-  #
-  #     # Only show XML & PDF options
-  #     admin.download_links = [:xml, :pdf]
-  #
-  #     # Enable/disable the links based on block
-  #     #   (for example, with cancan)
-  #     admin.download_links = proc { can?(:view_download_links) }
-  #
-  #   end
+
+  config.namespace :admin do |admin|
+    admin.download_links = [:csv, :json]
+  end
 
   # == Pagination
   #
@@ -297,13 +286,39 @@ ActiveAdmin.setup do |config|
 
   # These two are defined in ActiveAdmin::FilterSaver::Controller, which is loaded below.
   config.before_action :restore_search_filters, unless: :devise_controller?
-  config.before_action :set_admin_locale
+  config.before_action do
+    if params[:locale] && params[:format] == 'csv'
+      I18n.locale = params[:locale]
+    else
+      set_admin_locale
+    end
+  end
   config.after_action :save_search_filters, unless: :devise_controller?
 end
 
 require 'active_admin/filter_saver/controller'
+require 'active_admin/paper_trail/show_page_extension'
 
 ActiveAdmin.before_load do |app|
   # Add Filters Extensions
   ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
+  ActiveAdmin::Views::Pages::Show.prepend ActiveAdmin::PaperTrail::ShowPageExtension
+end
+
+# Modifies the display of the CSVs so that it shows on to download an English and a French versions.
+module ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper
+  def build_download_format_links(formats = self.class.formats)
+    params = request.query_parameters.except :format, :commit
+
+    div class: "download_links" do
+      span I18n.t('active_admin.download')
+      formats.each do |format|
+        if format == :csv
+          a 'CSV EN', href: url_for(params: params.merge!(locale: 'en'), format: :csv)
+        else
+          a 'CSV FR', href: url_for(params: params.merge!(locale: 'fr'), format: :csv)
+        end
+      end
+    end
+  end
 end

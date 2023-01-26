@@ -1,29 +1,48 @@
 <% if !@versions.empty? %>
   <h3>Current Version: <%= @versions.length %></h3>
 
-  <b>Created At:</b>
-  <%= @versions.last.created_at%>
+  <% last_version = @versions.last %>
+
+  <b>Created At:</b> <%= last_version.created_at%>
   <br>
-  <b>User</b>: <%= User.find(@versions.last.whodunnit).email rescue '' %>
+  <b>User</b>: <%= User.find(last_version.whodunnit).email rescue '' %>
   <br>
-  <% if @versions.length.to_i > 1 %>
+  <% if @versions.length.to_i > 0 %>
     <% if params[:version].to_i > 0 || !params[:version] %>
       <%= link_to "Previous version", {:version => (params[:version] || @versions.length).to_i - 1}%>
       <br>
     <% end %>
     <% if params[:version] %>
-      <h3>This is <%= "#{params[:version]}"%> version</h3>
+      <% version = @versions[params[:version].to_i] %>
 
-      <b>Modify at:</b>
-      <%= @versions[(params[:version].to_i - 1)].created_at %>
-      <br>
-      <b>User</b>:
-      <%= User.find(@versions[(params[:version].to_i - 1)].whodunnit).email rescue '' %>
-      <br>
+      <% if version %>
+        <h3>This is <%= "#{params[:version]}"%> version</h3>
 
-      <%= link_to "Go to current version"%>
+        <% reify_version_info = version.previous %>
+        <!-- We are showing reify version which is object before changes -->
+        <% if reify_version_info %>
+          <b>Created at:</b> <%= reify_version_info.created_at %>
+          <br>
+          <b>User</b>: <%= User.find(reify_version_info.whodunnit).email rescue '' %>
+          <br>
+          <br>
+        <% end %>
+        <b>Modified at:</b> <%= version.created_at %>
+        <br>
+        <b>User</b>: <%= User.find(version.whodunnit).email rescue '' %>
+        <br>
+
+        <%= link_to "Go to current version"%>
+      <% end %>
     <% end %>
   <% end %>
+<% elsif @create_version %>
+  <h3>Current Version: 0</h3>
+
+  <b>Created At:</b>
+  <%= @create_version.created_at%>
+  <br>
+  <b>User</b>: <%= User.find(@create_version.whodunnit).email rescue '' %>
 <% else %>
   <p>This item does not have any registered version.</p>
 <% end %>
