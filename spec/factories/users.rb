@@ -41,71 +41,70 @@ FactoryBot.define do
     after(:build) do |random_user|
       random_user.user_permission = UserPermission.new(user_role: 0)
     end
-  end
 
-  factory :ngo, class: User do
-    sequence(:email)    { |n| "ngo#{n}@vizzuality.com" }
+    factory :ngo do
+      sequence(:email) { |n| "ngo#{n}@vizzuality.com" }
 
-    password { 'password' }
-    password_confirmation { |u| u.password }
-    name { 'Test ngo' }
-    is_active { true }
+      name { 'Test ngo' }
 
-    after(:build) do |random_ngo|
-      random_ngo.observer ||= FactoryBot.create(:observer)
-      random_ngo.user_permission = UserPermission.new(user_role: 2)
-    end
-  end
-
-  factory :operator_user, class: User do
-    sequence(:email)    { |n| "operator#{n}@vizzuality.com" }
-
-    password { 'password' }
-    password_confirmation { |u| u.password }
-    name { 'Test operator' }
-    is_active { true }
-
-    after(:build) do |random_operator|
-      random_operator.operator ||= FactoryBot.create(:operator)
-      random_operator.user_permission = UserPermission.new(user_role: 1)
-    end
-  end
-
-  factory :admin, class: User do
-    sequence(:email)    { |n| Faker::Internet.email }
-
-    password { 'password' }
-    password_confirmation { |u| u.password }
-    name { 'Admin user' }
-    is_active { true }
-
-    after(:build) do |random_admin|
-      random_admin.user_permission = UserPermission.new(user_role: 3)
+      after(:build) do |random_ngo|
+        random_ngo.observer ||= FactoryBot.create(:observer)
+        random_ngo.user_permission = UserPermission.new(user_role: 2)
+      end
     end
 
-    after(:create) do |user|
-      user.regenerate_api_key
-    end
-  end
+    factory :operator_user do
+      sequence(:email) { |n| "operator#{n}@vizzuality.com" }
 
-  factory :webuser, class: User do
-    sequence(:email)    { |n| "webuser#{n}@vizzuality.com" }
+      name { 'Test operator' }
 
-    password { 'password' }
-    password_confirmation { |u| u.password }
-    name { 'Web user' }
-    is_active { true }
-
-    after(:build) do |random_webuser|
-      random_webuser.user_permission = UserPermission.new(user_role: 0)
+      after(:build) do |random_operator|
+        random_operator.operator ||= FactoryBot.create(:operator)
+        random_operator.user_permission = UserPermission.new(user_role: 1)
+      end
     end
 
-    after(:create) do |user|
-      user.regenerate_api_key
+    factory :government_user do
+      sequence(:email) { |n| "gov#{n}@vizzuality.com" }
+
+      name { 'Test government' }
+
+      after(:build) do |random_gov_user|
+        random_gov_user.country ||= FactoryBot.create(:country)
+        random_gov_user.user_permission = UserPermission.new(user_role: 'government')
+      end
     end
 
-    after(:build) do |random_admin|
-      random_admin.user_permission = UserPermission.new(user_role: 0)
+    factory :admin do
+      sequence(:email) { |n| Faker::Internet.email }
+
+      name { 'Admin user' }
+
+      after(:build) do |random_admin|
+        random_admin.user_permission = UserPermission.new(user_role: 3)
+      end
+
+      after(:create) do |user|
+        user.regenerate_api_key
+      end
+    end
+
+    factory :webuser do
+      sequence(:email) { |n| "webuser#{n}@vizzuality.com" }
+
+      name { 'Web user' }
+
+      after(:build) do |random_webuser|
+        random_webuser.user_permission = UserPermission.new(user_role: 0)
+      end
+
+      after(:create) do |user|
+        user.regenerate_api_key
+      end
+
+      after(:build) do |random_admin|
+        random_admin.user_permission = UserPermission.new(user_role: 0)
+      end
     end
   end
 end

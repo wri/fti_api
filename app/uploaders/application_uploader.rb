@@ -41,4 +41,8 @@ class ApplicationUploader < CarrierWave::Uploader::Base
       super
     end
   end
+
+  def sanitize_filename(filename)
+    filename.encode(Encoding::UTF_8, invalid: :replace, undef: :replace, replace: "�").strip.tr("\u{202E}%$|:;/\t\r\n\\", "-")
+  end
 end

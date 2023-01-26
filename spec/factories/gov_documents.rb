@@ -4,10 +4,8 @@
 #
 #  id                       :integer          not null, primary key
 #  status                   :integer          not null
-#  reason                   :text
 #  start_date               :date
 #  expire_date              :date
-#  current                  :boolean          not null
 #  uploaded_by              :integer
 #  link                     :string
 #  value                    :string
@@ -15,16 +13,15 @@
 #  deleted_at               :datetime
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  required_gov_document_id :integer
-#  country_id               :integer
+#  required_gov_document_id :integer          not null
+#  country_id               :integer          not null
 #  user_id                  :integer
+#  attachment               :string
 #
 FactoryBot.define do
   factory :gov_document, class: GovDocument do
-    required_gov_document
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
-    current { true }
 
     transient do
       force_status { nil }
@@ -37,6 +34,27 @@ FactoryBot.define do
 
     after(:create) do |doc, evaluator|
       doc.update_attributes(status: evaluator.force_status) if evaluator.force_status
+    end
+
+    trait :file do
+      attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+    end
+
+    trait :stats do
+      value { 100 }
+      units { 'km2' }
+    end
+
+    trait :link do
+      link { 'https://example.com' }
+    end
+
+    after(:build) do |doc|
+      document_type = :link
+      document_type = :file if doc.attachment.present?
+      document_type = :stats if doc.value.present?
+
+      doc.required_gov_document ||= create(:required_gov_document, document_type: document_type, country: doc.country || create(:country))
     end
   end
 end

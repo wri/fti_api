@@ -9,14 +9,6 @@ ActiveAdmin.register GovDocument do
 
   active_admin_paranoia
 
-  scope_to do
-    Class.new do
-      def self.gov_documents
-        GovDocument.unscoped
-      end
-    end
-  end
-
   controller do
     def scoped_collection
       end_of_association_chain
@@ -26,31 +18,29 @@ ActiveAdmin.register GovDocument do
   end
 
   member_action :approve, method: :put do
-    if resource.reason.present?
-      resource.update(status: :doc_not_required)
-    else
-      resource.update(status: :doc_valid)
-    end
+    resource.update(status: :doc_valid)
     redirect_to collection_path, notice: 'Document approved'
   end
 
   member_action :reject, method: :put do
-    resource.update(status: :doc_invalid, reason: nil)
-
+    resource.update(status: :doc_invalid)
     redirect_to collection_path, notice: 'Document rejected'
   end
 
 
   actions :all, except: [:destroy, :new]
-  permit_params :status, :reason, :start_date, :expire_date, :current,
-                :uploaded_by, :link, :value, :units,
-                gov_files_attributes: [:id, :attachment, :_destroy]
+  permit_params :status, :start_date, :expire_date, :attachment,
+                :uploaded_by, :link, :value, :units
+
+  config.clear_action_items!
+
+  action_item :edit_gov_document, only: [:show] do
+    link_to 'Edit Document', edit_resource_path(resource)
+  end
+
+  scope 'Pending', :doc_pending
 
   index do
-    bool_column :exists do |doc|
-      doc.deleted_at.nil? && doc.required_gov_document.deleted_at.nil?
-    end
-    column :current
     tag_column :status
     column :id
     column :country do |doc|
@@ -63,33 +53,34 @@ ActiveAdmin.register GovDocument do
         RequiredGovDocument.unscoped.find(doc.required_gov_document_id).name
       end
     end
-    # TODO: Reactivate rubocop and fix this
-    # rubocop:disable Rails/OutputSafety
     column 'Data' do |doc|
-      doc.link
-      "#{doc.value} #{doc.units}" if doc.value
-      if doc.gov_files.any?
-        links = []
-        doc.gov_files.each{ |f| links << f.attachment_url }
-        links.join(' ').html_safe
+      next doc.link if doc.required_gov_document.link?
+      next "#{doc.value} #{doc.units}" if doc.value
+
+      link_to doc.attachment.file.identifier, doc.attachment.url if doc.attachment.present?
+    end
+    column :user, sortable: 'users.name'
+    column :start_date
+    column :expire_date
+    column :created_at
+
+    if current_scope.id == 'recycle_bin'
+      column :deleted_at
+    else
+      column('Approve') do |doc|
+        link_to 'Approve', approve_admin_gov_document_path(doc), method: :put if %w[doc_pending doc_invalid].include? doc.status
+      end
+      column('Reject') do |doc|
+        link_to 'Reject', reject_admin_gov_document_path(doc), method: :put if %w[doc_pending doc_valid].include? doc.status
+      end
+
+      actions defaults: false do |doc|
+        item 'View', resource_path(doc)
+        item 'Edit', edit_resource_path(doc)
       end
     end
-    # rubocop:enable Rails/OutputSafety
-    column :user, sortable: 'users.name'
-    column :expire_date
-    column :start_date
-    column :created_at
-    column :uploaded_by
-    column :reason
-    column :note
-    column :response_date
-    column('Approve') { |doc| link_to 'Approve', approve_admin_gov_document_path(doc), method: :put }
-    column('Reject') { |doc| link_to 'Reject', reject_admin_gov_document_path(doc), method: :put }
-    actions
   end
 
-
-  filter :current
   filter :id, as: :select
   filter :required_gov_document
   filter :required_gov_document_country_id,
@@ -99,9 +90,6 @@ ActiveAdmin.register GovDocument do
   filter :status, as: :select, collection: -> { GovDocument.statuses }
   filter :required_gov_document_document_type, label: 'Type', as: :select, collection: -> { RequiredGovDocument.document_types }
   filter :updated_at
-
-
-  scope 'Pending', :doc_pending
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
@@ -119,13 +107,11 @@ ActiveAdmin.register GovDocument do
       if resource.required_gov_document.document_type == 'stats'
         f.input :value
         f.input :units
+        f.input :link, label: 'Source link'
       end
       if resource.required_gov_document.document_type == 'file'
-        f.has_many :gov_files do |file|
-          file.input :attachment, as: :file
-        end
+        f.input :attachment, as: :file, hint: preview_file_tag(f.object.attachment)
       end
-      f.input :reason
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
     end
@@ -134,28 +120,26 @@ ActiveAdmin.register GovDocument do
 
   show title: proc{ "#{resource.required_gov_document.country.name} - #{resource.required_gov_document.name}" } do
     attributes_table do
-      row :current
       tag_row :status
       row :required_gov_document
       row :country do |doc|
         doc.required_gov_document.country.name
       end
       row :uploaded_by
+      row :user
       if resource.required_gov_document.document_type == 'link'
         row :link
       end
       if resource.required_gov_document.document_type == 'stats'
         row :value
         row :units
+        row :source, &:link
       end
       if resource.required_gov_document.document_type == 'file'
-        attributes_table_for resource.gov_files do
-          row :attachment do |a|
-            link_to a.attachment.file.identifier, a.attachment.url
-          end
+        row :attachment do |doc|
+          link_to doc.attachment.file.identifier, doc.attachment.url if doc.attachment.present?
         end
       end
-      row :reason
       row :start_date
       row :expire_date
       row :created_at

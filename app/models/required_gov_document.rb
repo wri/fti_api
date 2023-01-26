@@ -5,7 +5,6 @@
 # Table name: required_gov_documents
 #
 #  id                             :integer          not null, primary key
-#  name                           :string           not null
 #  document_type                  :integer          not null
 #  valid_period                   :integer
 #  deleted_at                     :datetime
@@ -16,6 +15,7 @@
 #  position                       :integer
 #  explanation                    :text
 #  deleted_at                     :datetime
+#  name                           :string
 #
 
 class RequiredGovDocument < ApplicationRecord
@@ -24,10 +24,10 @@ class RequiredGovDocument < ApplicationRecord
   acts_as_paranoid
   acts_as_list scope: [:country_id, :required_gov_document_group_id, deleted_at: nil]
 
-  translates :explanation, paranoia: true, touch: true, versioning: :paper_trail
-  # rubocop:disable Style/BlockDelimiters
-  active_admin_translates :explanation do; end
-  # rubocop:enable Style/BlockDelimiters
+  translates :explanation, :name, paranoia: true, touch: true, versioning: :paper_trail
+  active_admin_translates :explanation, :name do
+    validates_presence_of :name
+  end
 
   belongs_to :required_gov_document_group
   belongs_to :country
@@ -35,7 +35,6 @@ class RequiredGovDocument < ApplicationRecord
 
   enum document_type: { file: 1, link: 2, stats: 3 }
 
-  validates_presence_of :name
   validates_inclusion_of :document_type, in: RequiredGovDocument.document_types.keys
   validates :valid_period, numericality: { greater_than: 0 }, if: :valid_period?
   validate :fixed_fields_unchanged
@@ -43,6 +42,12 @@ class RequiredGovDocument < ApplicationRecord
   after_create :create_gov_document
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
+
+  def create_gov_document
+    GovDocument
+      .create_with(status: GovDocument.statuses[:doc_not_provided])
+      .find_or_create_by!(required_gov_document: self)
+  end
 
   private
 
@@ -52,11 +57,5 @@ class RequiredGovDocument < ApplicationRecord
     errors.add(:required_gov_document_groups_id, 'Cannot change the group') if required_gov_document_group_id_changed?
     errors.add(:document_type, 'Cannot change the document type') if document_type_changed?
     errors.add(:country_id, 'Cannot change the country') if country_id_changed?
-  end
-
-  def create_gov_document
-    GovDocument.create(required_gov_document: self,
-                       status: GovDocument.statuses[:doc_not_provided],
-                       current: true)
   end
 end

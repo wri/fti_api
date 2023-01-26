@@ -4,10 +4,8 @@
 #
 #  id                       :integer          not null, primary key
 #  status                   :integer          not null
-#  reason                   :text
 #  start_date               :date
 #  expire_date              :date
-#  current                  :boolean          not null
 #  uploaded_by              :integer
 #  link                     :string
 #  value                    :string
@@ -15,13 +13,45 @@
 #  deleted_at               :datetime
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  required_gov_document_id :integer
-#  country_id               :integer
+#  required_gov_document_id :integer          not null
+#  country_id               :integer          not null
 #  user_id                  :integer
+#  attachment               :string
 #
 require 'rails_helper'
 
 RSpec.describe GovDocument, type: :model do
+  describe 'changing attachment' do
+    let!(:document) { create(:gov_document, :file) }
+
+    with_versioning do
+      context 'when removing attachment' do
+        it 'moves previous attachment to private folder' do
+          expect(document.attachment.file.file).to match('/public/uploads')
+          document.remove_attachment!
+          document.save!
+          document.reload
+          expect(document.read_attribute(:attachment)).to be_nil
+          prev_version = document.versions.last.reify
+          expect(prev_version.attachment.file.file).to match('/private/uploads')
+        end
+      end
+
+      context 'when changing attachment' do
+        it 'moves previous attachment to private folder' do
+          expect(document.attachment.file.file).to match('/public/uploads')
+          document.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf'))
+          document.save!
+          document.reload
+          expect(document.read_attribute(:attachment)).to match('.pdf')
+          prev_version = document.versions.last.reify
+          expect(prev_version.attachment.file.file).to match('/private/uploads')
+          expect(prev_version.attachment.file.file).to match('.png')
+        end
+      end
+    end
+  end
+
   describe 'Class methods' do
     describe '#expire_documents' do
       let!(:gd) {
@@ -43,20 +73,6 @@ RSpec.describe GovDocument, type: :model do
           it { expect { subject }.to change { gd.reload.status }.from('doc_valid').to('doc_expired') }
         end
 
-        context 'when the status is not required' do
-          let(:status) { :doc_not_required }
-
-          it 'destroys old document, generates a new not provided one' do
-            expect { subject }.to \
-              change { GovDocument.unscoped.count }.by(1).and \
-              change { gd.reload.deleted? }.from(false).to(true).and \
-              change { gd.current }.from(true).to(false)
-
-            current_doc = GovDocument.find_by(required_gov_document: gd.required_gov_document, current: true)
-            expect(current_doc.status).to eq('doc_not_provided')
-          end
-        end
-
         context 'when the status is pending' do
           let(:status) { :doc_pending }
 
@@ -69,6 +85,41 @@ RSpec.describe GovDocument, type: :model do
         let(:status) { :doc_valid }
 
         it { expect { subject }.to_not change { gd.reload.status } }
+      end
+    end
+  end
+
+  describe 'soft delete' do
+    let!(:document) { create(:gov_document, :file) }
+
+    with_versioning do
+      context 'when deleting' do
+        it 'moves attachment to private directory' do
+          expect(document.attachment.file.file).to match('/public/uploads')
+          document.destroy!
+          document.reload
+          expect(document.attachment.file.file).to match('/private/uploads')
+        end
+      end
+
+      context 'when restoring' do
+        before do
+          # change attachment to move previous to private directory
+          document.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf'))
+          document.save!
+          document.destroy!
+          document.reload
+        end
+
+        it 'moves attachment back to public directory' do
+          expect(document.attachment.file.file).to match('/private/uploads')
+          document.restore
+          reloaded_doc = GovDocument.find(document.id) # as reload does not reload paper_trail.live? weird
+          expect(reloaded_doc.attachment.file.file).to match('/public/uploads')
+          # first version should stay in private directory
+          prev_version = reloaded_doc.versions[-2].reify
+          expect(prev_version.attachment.file.file).to match('/private/uploads')
+        end
       end
     end
   end

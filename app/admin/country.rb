@@ -24,7 +24,7 @@ ActiveAdmin.register Country do
   filter :region_name
   filter :is_active
 
-  permit_params translations_attributes: [:id, :locale, :name, :_destroy]
+  permit_params translations_attributes: [:id, :locale, :name, :overview, :vpa_overview, :_destroy]
 
   csv do
     column :is_active
@@ -51,6 +51,8 @@ ActiveAdmin.register Country do
     f.inputs 'Country Details' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
+        t.input :overview, as: :html_editor
+        t.input :vpa_overview, as: :html_editor
       end
 
       f.actions
@@ -63,6 +65,10 @@ ActiveAdmin.register Country do
       row :iso
       row :region_iso
       row :is_active
+      # rubocop:disable Rails/OutputSafety
+      row(:overview) { |c| c.overview&.html_safe }
+      row(:vpa_overview) { |c| c.vpa_overview&.html_safe }
+      # rubocop:enable Rails/OutputSafety
       row :created_at
       row :updated_at
     end

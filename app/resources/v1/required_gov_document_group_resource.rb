@@ -14,5 +14,9 @@ module V1
     def self.default_sort
       [{ field: 'position', direction: :asc }]
     end
+
+    def self.apply_includes(records, directives)
+      super.with_translations(I18n.locale)
+    end
   end
 end

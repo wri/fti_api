@@ -6,8 +6,8 @@ module V1
     caching
 
     attributes :iso, :region_iso, :country_centroid,
-               :region_centroid, :is_active, :region_name, :name,
-               :percentage_valid_documents
+               :region_centroid, :is_active, :region_name,
+               :name, :overview, :vpa_overview
 
     has_many :fmus
     has_many :required_operator_documents

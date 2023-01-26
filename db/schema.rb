@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_21_130502) do
+ActiveRecord::Schema.define(version: 2023_01_12_102606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(version: 2022_12_21_130502) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_active", default: false, null: false
-    t.float "percentage_valid_documents"
     t.index ["is_active"], name: "index_countries_on_is_active"
     t.index ["iso"], name: "index_countries_on_iso"
   end
@@ -176,6 +175,8 @@ ActiveRecord::Schema.define(version: 2022_12_21_130502) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "region_name"
+    t.text "overview"
+    t.text "vpa_overview"
     t.index ["country_id"], name: "index_country_translations_on_country_id"
     t.index ["locale"], name: "index_country_translations_on_locale"
     t.index ["name", "country_id"], name: "index_country_translations_on_name_and_country_id"
@@ -275,10 +276,8 @@ ActiveRecord::Schema.define(version: 2022_12_21_130502) do
 
   create_table "gov_documents", id: :serial, force: :cascade do |t|
     t.integer "status", null: false
-    t.text "reason"
     t.date "start_date"
     t.date "expire_date"
-    t.boolean "current", null: false
     t.integer "uploaded_by"
     t.string "link"
     t.string "value"
@@ -286,21 +285,13 @@ ActiveRecord::Schema.define(version: 2022_12_21_130502) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "required_gov_document_id"
-    t.integer "country_id"
+    t.integer "required_gov_document_id", null: false
+    t.integer "country_id", null: false
     t.integer "user_id"
+    t.string "attachment"
     t.index ["country_id"], name: "index_gov_documents_on_country_id"
     t.index ["required_gov_document_id"], name: "index_gov_documents_on_required_gov_document_id"
     t.index ["user_id"], name: "index_gov_documents_on_user_id"
-  end
-
-  create_table "gov_files", id: :serial, force: :cascade do |t|
-    t.string "attachment"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "gov_document_id"
-    t.index ["gov_document_id"], name: "index_gov_files_on_gov_document_id"
   end
 
   create_table "government_translations", id: :serial, force: :cascade do |t|
@@ -803,13 +794,13 @@ ActiveRecord::Schema.define(version: 2022_12_21_130502) do
     t.datetime "updated_at", null: false
     t.text "explanation"
     t.datetime "deleted_at"
+    t.string "name"
     t.index ["deleted_at"], name: "index_required_gov_document_translations_on_deleted_at"
     t.index ["locale"], name: "index_required_gov_document_translations_on_locale"
     t.index ["required_gov_document_id"], name: "index_759a54fdd00cf06c291ffc4857fb904934dd47b9"
   end
 
   create_table "required_gov_documents", id: :serial, force: :cascade do |t|
-    t.string "name", null: false
     t.integer "document_type", null: false
     t.integer "valid_period"
     t.datetime "deleted_at"
@@ -1106,7 +1097,6 @@ ActiveRecord::Schema.define(version: 2022_12_21_130502) do
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
   add_foreign_key "gov_documents", "users", on_delete: :cascade
-  add_foreign_key "gov_files", "gov_documents", on_delete: :cascade
   add_foreign_key "laws", "countries"
   add_foreign_key "laws", "subcategories"
   add_foreign_key "notifications", "notification_groups", on_delete: :nullify

@@ -106,8 +106,7 @@ class UserPermission < ApplicationRecord
     when 'government'
       {
           user: { manage: { id: user.id } },
-          gov_document: { rud: { country_id: user.country_id }, create: {} },
-          gov_file: { rud: { gov_document: { required_gov_document: { country_id: user.country_id  } } }, create: {} }
+          gov_document: { rud: { country_id: user.country_id }, create: {} }
       }
     else
       { user: { current: { id: user.id }, read: { id: user.id } }, observations: { read: {} } }

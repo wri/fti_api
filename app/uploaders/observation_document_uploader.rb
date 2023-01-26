@@ -18,7 +18,7 @@ class ObservationDocumentUploader < ApplicationUploader
                  ].join('-')
                end
 
-    filename + File.extname(super)
+    sanitize_filename(filename + File.extname(super))
   end
 
   def private_upload?

@@ -53,20 +53,7 @@ ActiveAdmin.register AboutPageEntry do
     end
     f.translated_inputs switch_locale: false do |t|
       t.input :title
-      t.input :body,
-              as: :quill_editor,
-              input_html: {
-                data: {
-                  options: {
-                    modules: {
-                      toolbar: [['bold', 'italic', 'underline'],
-                                ['link', 'video']]
-                    },
-                    placeholder: 'Type something...',
-                    theme: 'snow'
-                  }
-                }
-              }
+      t.input :body, as: :html_editor
     end
     f.actions
   end

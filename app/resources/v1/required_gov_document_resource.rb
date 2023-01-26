@@ -21,7 +21,7 @@ module V1
     include CacheableByLocale
     caching
     immutable
-    attributes :name, :valid_period, :document_type,
+    attributes :name, :explanation, :valid_period, :document_type,
                :required_gov_document_group_id, :position
 
     has_one :country
@@ -29,5 +29,9 @@ module V1
     has_many :gov_documents
 
     filters :name, :document_type
+
+    def self.apply_includes(records, directives)
+      super.with_translations(I18n.locale)
+    end
   end
 end

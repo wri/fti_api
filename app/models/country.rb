@@ -4,24 +4,25 @@
 #
 # Table name: countries
 #
-#  id                         :integer          not null, primary key
-#  iso                        :string
-#  region_iso                 :string
-#  country_centroid           :jsonb
-#  region_centroid            :jsonb
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  is_active                  :boolean          default(FALSE), not null
-#  percentage_valid_documents :float
-#  name                       :string
-#  region_name                :string
+#  id               :integer          not null, primary key
+#  iso              :string
+#  region_iso       :string
+#  country_centroid :jsonb
+#  region_centroid  :jsonb
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  is_active        :boolean          default(FALSE), not null
+#  overview         :text
+#  vpa_overview     :text
+#  name             :string
+#  region_name      :string
 #
 
 class Country < ApplicationRecord
   include Translatable
-  translates :name, :region_name, touch: true
+  translates :name, :region_name, :overview, :vpa_overview, touch: true
 
-  active_admin_translates :name, :region_name do
+  active_admin_translates :name, :region_name, :overview, :vpa_overview do
     validates_presence_of :name
   end
 
@@ -40,7 +41,7 @@ class Country < ApplicationRecord
   has_many :species, through: :species_countries
   has_many :required_operator_documents
   has_many :required_gov_documents
-  has_many :gov_documents, -> { actual }
+  has_many :gov_documents
 
   has_many :country_links, inverse_of: :country
   has_many :country_vpas, inverse_of: :country
@@ -69,12 +70,6 @@ class Country < ApplicationRecord
 
   def cache_key
     super + '-' + Globalize.locale.to_s
-  end
-
-  def update_valid_documents_percentages
-    self.percentage_valid_documents =
-      gov_documents.valid.count.to_f / gov_documents.joins(:required_gov_document).required.count.to_f rescue 0
-    save!
   end
 
   def forest_types
