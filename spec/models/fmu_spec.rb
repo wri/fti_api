@@ -15,7 +15,6 @@
 #  certification_tlv    :boolean          default(FALSE)
 #  forest_type          :integer          default("fmu"), not null
 #  geometry             :geometry         geometry, 0
-#  properties           :jsonb
 #  deleted_at           :datetime
 #  certification_ls     :boolean          default(FALSE)
 #  name                 :string
