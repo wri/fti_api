@@ -28,7 +28,7 @@ ActiveAdmin.register Donor do
     column :name
     column :website
     column :logo do |d|
-      link_to d.logo&.identifier, d.logo&.url
+      link_to d.logo&.identifier, d.logo&.url if d.logo&.url
     end
     column :priority
     column :description
@@ -58,7 +58,7 @@ ActiveAdmin.register Donor do
       row :name
       row :website
       row :logo do |d|
-        link_to d.logo&.identifier, d.logo&.url
+        link_to d.logo&.identifier, d.logo&.url if d.logo&.url
       end
       row :priority
       row :description
