@@ -77,8 +77,8 @@ gem 'carrierwave-base64'
 gem 'mini_magick'
 
 # Mail
-gem 'sendgrid-actionmailer'
 gem 'letter_opener_web'
+gem 'sendgrid-actionmailer'
 
 # File utilities
 gem 'rubyzip', '~> 2.3.0'

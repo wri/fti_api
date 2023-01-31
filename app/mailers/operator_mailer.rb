@@ -1,4 +1,6 @@
 class OperatorMailer < ApplicationMailer
+  include ActionView::Helpers::DateHelper
+
   def expiring_documents_notifications(operator, documents)
     num_documents = documents.count
     expire_date = documents.first.expire_date
@@ -68,7 +70,7 @@ class OperatorMailer < ApplicationMailer
     body << "<br>----------------------------------------------------<br>"
     body << text_fr.join("<br>")
 
-    mail to: operator.users.pluck(:email).join(', '),
+    mail bcc: operator.users.pluck(:email).join(', '),
          subject: subject,
          body: body,
          content_type: 'text/html'

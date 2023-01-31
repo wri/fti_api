@@ -268,8 +268,10 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   # It starts by checking the monitor organization of the uploader to find its responsible person
   # And if it doesn't find any, it iterates through all the monitors
   def set_responsible_admin
+    return if responsible_admin_id
+
     self.responsible_admin_id = user&.observer&.responsible_admin&.id
-    return if self.responsible_admin_id
+    return if responsible_admin_id
 
     observers.each do |observer|
       if observer.responsible_admin.present?
