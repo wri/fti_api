@@ -136,7 +136,7 @@ module V1
     private
 
     def send_notification
-      MailService.new.notify_operator_creation(@model).deliver
+      SystemMailer.operator_created(@model).deliver_now
     end
   end
 end

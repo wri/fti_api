@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   authenticate :user, ->(user) { user&.user_permission&.user_role == 'admin' } do
     mount Sidekiq::Web => '/admin/sidekiq'
+    mount LetterOpenerWeb::Engine, at: '/admin/letter_opener' if Rails.env.development? || Rails.env.staging?
   end
 
   get '/private/uploads/*rest', controller: 'private_uploads', action: 'download'

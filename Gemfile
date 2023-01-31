@@ -77,7 +77,8 @@ gem 'carrierwave-base64'
 gem 'mini_magick'
 
 # Mail
-gem 'sendgrid-ruby'
+gem 'sendgrid-actionmailer'
+gem 'letter_opener_web'
 
 # File utilities
 gem 'rubyzip', '~> 2.3.0'
@@ -95,6 +96,7 @@ gem 'sentry-ruby'
 
 group :development, :test do
   gem 'byebug',                    platform: :mri
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'rails-erd'
   gem 'rubocop', '~> 0.80.0', require: false
@@ -124,7 +126,6 @@ group :test do
   gem 'bullet'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'factory_bot_rails'
   gem 'rspec-activejob'
   gem 'rspec-rails'
   gem 'rspec-request_snapshot', github: 'tsubik/rspec-request_snapshot', branch: 'fix/ignore-order'

@@ -71,7 +71,7 @@ namespace :scheduler do
     time = Benchmark.ms do
       Operator.active.fa_operator.find_each do |operator|
         begin
-          MailService.new.quarterly_newsletter(operator).deliver
+          OperatorMailer.quarterly_newsletter(operator).deliver_now
         rescue StandardError => e
           failed = true
           Sentry.capture_exception(e, extra: { 'operator_id' => operator.id })

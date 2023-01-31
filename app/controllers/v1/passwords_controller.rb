@@ -9,7 +9,7 @@ module V1
 
     def create
       if @user.errors.empty?
-        @user.send_reset_password_instructions(ENV['RECOVER_URL'])
+        @user.send_reset_password_instructions
         render json: { messages: [{ status: 200, title: 'Reset password email sent!' }] }, status: :ok
       else
         render json: ErrorSerializer.serialize(@user.errors, 422), status: :unprocessable_entity

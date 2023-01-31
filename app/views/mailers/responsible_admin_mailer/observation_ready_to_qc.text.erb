@@ -1,0 +1,30 @@
+Hello,
+
+The observation with the id <%= @observation.id %> is ready for QC.
+Please check it in the back office.
+
+Info:
+- Country: <%= @observation.country&.name %>.
+- Observer: <%= @observation.modified_user&.observer&.name %>
+- User
+-Name: <%= @observation.modified_user&.name %>
+-Email: <%= @observation.modified_user&.email %>
+
+Best,
+OTP
+--------------------------------------------------------------
+
+Bonjour,
+
+L'observation avec l'identifiant <%= @observation.id %> est prête pour le contrôle qualité.
+Veuillez le vérifier dans le back-office.
+
+Info:
+- Pays : <%= @observation.country&.name %>.
+- Observateur : <%= @observation.modified_user&.observer&.name %>
+- Utilisateur
+-Nom : <%= @observation.modified_user&.name %>
+-Email : <%= @observation.modified_user&.email %>
+
+Cordialement,
+OTP

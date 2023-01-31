@@ -32,6 +32,7 @@ module FtiApi
     config.active_job.queue_adapter = :sidekiq
 
     config.api_only = false
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
     config.generators do |g|
       g.template_engine nil
