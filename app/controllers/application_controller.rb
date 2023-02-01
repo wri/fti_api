@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_admin_locale
-    I18n.locale = current_user&.locale || :en
+    I18n.locale = current_user&.locale&.presence || :en
   end
 
   protected
