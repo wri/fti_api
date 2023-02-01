@@ -29,6 +29,8 @@ class Government < ApplicationRecord
   has_many :observations, through: :governments_observations
 
   validates :government_entity, presence: true
+  # TODO: change unique validation to not only on create, after cleaning up the data
+  validates :government_entity, uniqueness: { case_sensitive: false }, on: :create
 
   scope :by_entity_asc, -> {
     includes(:translations).with_translations(I18n.available_locales)
