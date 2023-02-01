@@ -14,6 +14,7 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "rails/test_unit/railtie"
 require 'carrierwave'
+require_relative '../lib/rack/health_check'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -40,5 +41,7 @@ module FtiApi
                        controller_specs: false,
                        request_specs: true
     end
+
+    config.middleware.insert_after Rails::Rack::Logger, Rack::HealthCheck
   end
 end
