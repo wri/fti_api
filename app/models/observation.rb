@@ -340,18 +340,18 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def notify_observers
     observers.each do |observer|
       observer.users.each do |user|
-        ObserverMailer.observation_status_changed(observer, user, self).deliver_now
+        ObserverMailer.observation_status_changed(observer, user, self).deliver_later
       end
     end
   end
 
   def notify_ready_for_qc
-    ResponsibleAdminMailer.observation_ready_to_qc(self).deliver_now
+    ResponsibleAdminMailer.observation_ready_to_qc(self).deliver_later
   end
 
   def notify_published
     return unless responsible_admin&.email
 
-    ObservationMailer.notify_admin_published(self).deliver_now
+    ObservationMailer.notify_admin_published(self).deliver_later
   end
 end

@@ -4,6 +4,7 @@ RSpec.shared_examples 'jsonapi-resources__create' do |options|
     let(:route) { "/#{@route_key}" }
     let(:valid_params) { try_to_call(options[:valid_params]) }
     let(:invalid_params) { try_to_call(options[:invalid_params]) }
+    let(:expect_on_success) { try_to_call(options[:expect_on_success]) }
 
     (options[:success_roles] || [:webuser]).each do |role|
       describe "For user with #{role} role" do
@@ -32,6 +33,7 @@ RSpec.shared_examples 'jsonapi-resources__create' do |options|
             .except(:relationships)
             .except(*options[:excluded_params])
             .each { |name, value| expect(parsed_attributes[name]).to eq(value) }
+          expect_on_success
         end
       end
     end

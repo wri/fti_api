@@ -76,6 +76,14 @@ RSpec.configure do |config|
     end
   end
 
+  config.after do
+    # Clear ActiveJob jobs
+    if defined?(ActiveJob) && ActiveJob::QueueAdapters::TestAdapter == ActiveJob::Base.queue_adapter
+      ActiveJob::Base.queue_adapter.enqueued_jobs.clear
+      ActiveJob::Base.queue_adapter.performed_jobs.clear
+    end
+  end
+
   config.around(realistic_error_responses: true) do |example|
     respond_without_detailed_exceptions(&example)
   end

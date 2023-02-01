@@ -161,6 +161,43 @@ RSpec.describe Observation, type: :model do
       @operator = create(:operator, country: @country, fa_id: 'fa-id')
     end
 
+    describe 'notifications' do
+      let(:observer1) { create(:observer) }
+      let(:observer2) { create(:observer) }
+      let(:observation) {
+        create(
+          :observation,
+          validation_status: 'Created',
+          responsible_admin: create(:user),
+          observers: [observer1, observer2]
+        )
+      }
+
+      before do
+        create(:user, user_role: :ngo_manager, observer: observer1)
+        create(:user, user_role: :ngo_manager, observer: observer2)
+        create(:user, user_role: :ngo_manager, observer: observer2)
+      end
+
+      context 'when validation status is changed to `Ready for QC`' do
+        it 'sends an email to the main responsible admin and observer users' do
+          expect {
+            observation.update!(validation_status: 'Ready for QC')
+          }.to have_enqueued_mail(ResponsibleAdminMailer, :observation_ready_to_qc)
+          .and have_enqueued_mail(ObserverMailer, :observation_status_changed).exactly(3).times
+        end
+      end
+
+      context 'when validation status is changed to published' do
+        it 'sends an email to the observation responsible admin and observer users' do
+          expect {
+            observation.update(validation_status: 'Published (no comments)')
+          }.to have_enqueued_mail(ObservationMailer, :notify_admin_published)
+          .and have_enqueued_mail(ObserverMailer, :observation_status_changed).exactly(3).times
+        end
+      end
+    end
+
     describe '#set_active_status' do
       context 'when validation_status is Approved' do
         it 'set is_active to true' do

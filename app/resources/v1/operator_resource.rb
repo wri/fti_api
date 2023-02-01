@@ -136,7 +136,7 @@ module V1
     private
 
     def send_notification
-      SystemMailer.operator_created(@model).deliver_now
+      SystemMailer.operator_created(@model).deliver_later
     end
   end
 end

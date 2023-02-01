@@ -137,7 +137,7 @@ class User < ApplicationRecord
   end
 
   def send_reset_password_instructions
-    UserMailer.forgotten_password(self).deliver_now
+    UserMailer.forgotten_password(self).deliver_later
   end
 
   def reset_password_by_token(options)
@@ -212,7 +212,7 @@ class User < ApplicationRecord
 
   # Sends an email to the user when it is approved
   def notify_user
-    UserMailer.user_acceptance(self).deliver_now
+    UserMailer.user_acceptance(self).deliver_later
   end
 
   # Devise ActiveJob integration
