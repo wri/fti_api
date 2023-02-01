@@ -14,7 +14,7 @@
 FactoryBot.define do
   factory :government do
     country
-    government_entity { 'A Government' }
+    sequence(:government_entity) { |n| "A Government #{n}" }
     details { 'Indicator one' }
   end
 end
