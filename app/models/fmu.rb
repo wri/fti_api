@@ -150,7 +150,8 @@ class Fmu < ApplicationRecord
       'certification_tlv' => certification_tlv,
       'certification_ls' => certification_ls,
       'observations' => active_observations.reload.uniq.count,
-      'fmu_type_label' => fmu_type_label
+      'forest_type' => forest_type,
+      'fmu_type_label' => fmu_type_label # old one deprecated, to be removed in the future
     })
   end
 

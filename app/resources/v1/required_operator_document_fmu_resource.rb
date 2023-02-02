@@ -11,13 +11,5 @@ module V1
     has_many :operator_document_fmus
 
     filters :name, :type
-
-    def forest_types
-      return if @model.forest_types.blank?
-
-      @model.forest_types.map do |f|
-        Fmu::FOREST_TYPES[f.to_sym][:geojson_label]
-      end
-    end
   end
 end
