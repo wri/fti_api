@@ -43,6 +43,7 @@
             "operator_id": 10624,
             "observations": 0,
             "fmu_type_label": "communal",
+            "forest_type": "cf",
             "certification_ls": false,
             "certification_fsc": false,
             "certification_olb": false,
