@@ -27,7 +27,7 @@ ActiveAdmin.register Partner do
     column :name
     column :website
     column :logo do |p|
-      link_to p.logo&.identifier, p.logo&.url
+      link_to p.logo&.identifier, p.logo&.url if p.logo&.url
     end
     column :priority
     column :description
@@ -57,7 +57,7 @@ ActiveAdmin.register Partner do
       row :name
       row :website
       row :logo do |p|
-        link_to p.logo&.identifier, p.logo&.url
+        link_to p.logo&.identifier, p.logo&.url if p.logo&.url
       end
       row :priority
       row :description

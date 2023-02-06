@@ -225,7 +225,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
       row :country
       row :concession
       row :logo do |o|
-        link_to o.logo&.identifier, o.logo&.url
+        link_to o.logo&.identifier, o.logo&.url if o.logo&.url
       end
       row :address
       row :website

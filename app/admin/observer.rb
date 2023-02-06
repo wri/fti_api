@@ -48,7 +48,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     # rubocop:enable Rails/OutputSafety
     column :observer_type, sortable: true
     column :logo do |o|
-      link_to o.logo&.identifier, o.logo&.url
+      link_to o.logo&.identifier, o.logo&.url if o.logo&.url
     end
     column :name, sortable: 'observer_translations.name'
     column :responsible_user
