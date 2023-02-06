@@ -110,7 +110,7 @@ class Fmu < ApplicationRecord
             FROM (
               SELECT fmus.*, st_transform(geometry, 3857) as the_geom_webmercator
               FROM fmus
-                LEFT JOIN fmu_operators fo on fo.fmu_id = fmus.id
+                LEFT JOIN fmu_operators fo on fo.fmu_id = fmus.id and fo.current = true
               WHERE fmus.deleted_at IS NULL #{operator_condition}
             ) as data
             WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}),4096,0,true) IS NOT NULL
