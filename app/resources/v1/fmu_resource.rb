@@ -16,10 +16,6 @@ module V1
 
     filters :country, :free, :certification, :operator
 
-    def forest_type
-      Fmu::FOREST_TYPES[@model.forest_type.to_sym][:geojson_label] if @model.forest_type
-    end
-
     filter :certification, apply: ->(records, value, _options) {
       values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
       return records unless values.any?
