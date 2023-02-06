@@ -18,12 +18,12 @@ ActiveAdmin.register Government do
     end
   end
 
-  scope :all
-  scope :active, default: true
+  scope I18n.t('active_admin.all'), :all
+  scope I18n.t('active_admin.shared.active'), :active, default: true
 
   csv do
     column :is_active
-    column 'country' do |g|
+    column I18n.t('activerecord.models.country.one') do |g|
       g.country&.name
     end
     column :government_entity
@@ -31,7 +31,7 @@ ActiveAdmin.register Government do
   end
 
   index do
-    column 'Active?', :is_active
+    column :is_active
     column :country, sortable: 'country_translations.name'
     column :government_entity, sortable: 'government_translations.government_entity'
     column :details, sortable: 'government_translations.details'
@@ -43,17 +43,17 @@ ActiveAdmin.register Government do
          as: :select,
          collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_government_entity_contains,
-         as: :select, label: 'Entity',
+         as: :select, label: I18n.t('activerecord.attributes.government/translation.government_entity'),
          collection: -> {
            Government.with_translations(I18n.locale).order('government_translations.government_entity').pluck(:government_entity).uniq
          }
   filter :translations_details_contains,
-         as: :select, label: 'Details',
+         as: :select, label: I18n.t('activerecord.attributes.government/translation.details'),
          collection: -> {
            Government.with_translations(I18n.locale).order('government_translations.details').pluck(:details).uniq
          }
 
-  sidebar 'Observations', only: :show do
+  sidebar I18n.t('activerecord.models.observation.other'), only: :show do
     attributes_table_for resource do
       ul do
         resource.observations.collect do |obs|
@@ -66,12 +66,12 @@ ActiveAdmin.register Government do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Government Details' do
+    f.inputs I18n.t('active_admin.shared.government_details') do
       f.input :is_active
       f.input :country, input_html: { disabled: edit }
     end
 
-    f.inputs 'Translated fields' do
+    f.inputs I18n.t('active_admin.shared.translated_fields') do
       f.translated_inputs switch_locale: false do |t|
         t.input :government_entity
         t.input :details

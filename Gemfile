@@ -117,6 +117,7 @@ group :development do
   gem 'capistrano-rails',          '~> 1.2'
   gem 'capistrano-rvm'
   gem 'guard'
+  gem 'i18n_generators'
   gem 'listen',                    '~> 3.0.5'
   gem 'pry-rails'
   gem 'spring'

@@ -1,12 +1,15 @@
 <% save_to_localstorage ||= true %>
 <div class="observation-attributes" data-save-to-localstorage="<%= save_to_localstorage %>">
   <% unchecked ||= [] %>
-  <% attributes.each do |column| %>
-    <% column_id = column.gsub('_&_', '_') %>
+  <% attributes.each do |column, name| %>
+    <%
+      column_id = column.gsub('_&_', '_')
+      name = column if name.blank?
+    %>
     <div class="observations-checkbox" id="attribute-<%= column_id  %>">
       <label>
         <input type="checkbox" class="observation-checkbox" id="<%= column_id %>" <%= unchecked.exclude?(column) ? 'checked' : '' %>>
-        <%=column.humanize %>
+        <%=name %>
       </label>
     </div>
   <% end %>

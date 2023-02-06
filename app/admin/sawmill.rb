@@ -16,7 +16,7 @@ ActiveAdmin.register Sawmill do
   end
 
   index do
-    column 'Active?', :is_active
+    column :is_active
     column :name
     column :operator, sortable: 'operator_translations.name'
     column 'Latitude', :lat
@@ -31,9 +31,9 @@ ActiveAdmin.register Sawmill do
     actions
   end
 
-  scope :all, default: true
-  scope :active
-  scope :inactive
+  scope I18n.t('active_admin.all'), :all, default: true
+  scope I18n.t('active_admin.shared.active'), :active
+  scope I18n.t('active_admin.shared.inactive'), :inactive
 
   filter :operator, label: 'Operator', as: :select,
                     collection: -> { Operator.joins(:sawmills).with_translations(I18n.locale).order('operator_translations.name') }

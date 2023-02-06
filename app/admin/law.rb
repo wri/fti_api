@@ -23,11 +23,11 @@ ActiveAdmin.register Law do
                    collection: -> { Country.joins(:laws).with_translations(I18n.locale).order('country_translations.name') }
   filter :subcategory, as: :select,
                        collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :written_infraction, label: 'Illegality as written by law', as: :select
-  filter :infraction, label: 'Legal reference: Illegality', as: :select
-  filter :sanctions, label: 'Legal reference: Penalties', as: :select
-  filter :max_fine, label: 'Maximum Fine'
-  filter :min_fine, label: 'Minimum Fine'
+  filter :written_infraction, label: I18n.t('active_admin.laws_page.written_infraction'), as: :select
+  filter :infraction, label: I18n.t('active_admin.laws_page.infraction'), as: :select
+  filter :sanctions, label: I18n.t('active_admin.laws_page.sanctions'), as: :select
+  filter :max_fine, label: I18n.t('active_admin.laws_page.max_fine')
+  filter :min_fine, label: I18n.t('active_admin.laws_page.min_fine')
 
   csv do
     column :country do |l|
@@ -36,13 +36,13 @@ ActiveAdmin.register Law do
     column :subcategory do |l|
       l.subcategory&.name
     end
-    column 'Illegality as written by law' do |l|
+    column I18n.t('active_admin.laws_page.written_infraction') do |l|
       l.written_infraction
     end
-    column 'Legal reference: Illegality' do |l|
+    column I18n.t('active_admin.laws_page.infraction') do |l|
       l.infraction
     end
-    column 'Legal reference: Penalties' do |l|
+    column I18n.t('active_admin.laws_page.sanctions') do |l|
       l.sanctions
     end
     column :min_fine
@@ -58,15 +58,15 @@ ActiveAdmin.register Law do
   index do
     column :country, sortable: 'country_translations.name'
     column :subcategory, sortable: 'subcategory_translations.name'
-    column 'Illegality as written by law', :written_infraction, sortable: true
-    column 'Legal reference: Illegality', :infraction, sortable: true
-    column 'Legal reference: Penalties', :sanctions, sortable: true
-    column 'Minimum fine', :min_fine, sortable: true
-    column 'Maximum fine', :max_fine, sortable: true
+    column I18n.t('active_admin.laws_page.written_infraction'), :written_infraction, sortable: true
+    column I18n.t('active_admin.laws_page.infraction'), :infraction, sortable: true
+    column I18n.t('active_admin.laws_page.sanctions'), :sanctions, sortable: true
+    column I18n.t('active_admin.laws_page.min_fine'), :min_fine, sortable: true
+    column I18n.t('active_admin.laws_page.max_fine'), :max_fine, sortable: true
     column :currency
     column :penal_servitude, sortable: true
     column :other_penalties, sortable: true
-    column 'Indicator APV', :apv, sortable: true
+    column I18n.t('active_admin.laws_page.indicator_apv'), :apv, sortable: true
     column :created_at, sortable: true
     column :updated_at, sortable: true
 
@@ -76,7 +76,7 @@ ActiveAdmin.register Law do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Law Details' do
+    f.inputs I18n.t('active_admin.laws_page.law_details') do
       if f.object.new_record?
         f.input :country
         f.input :subcategory, as: :select,
@@ -86,15 +86,15 @@ ActiveAdmin.register Law do
         f.input :subcategory, input_html: { disabled: true }
       end
 
-      f.input :written_infraction, label: 'Illegality as written by law'
-      f.input :infraction,         label: 'Legal reference: Illegality'
-      f.input :sanctions,          label: 'Legal reference: Penalties'
-      f.input :min_fine,           label: 'Minimum Fine'
-      f.input :max_fine,           label: 'Maximum Fine'
+      f.input :written_infraction, label: I18n.t('active_admin.laws_page.written_infraction')
+      f.input :infraction,         label: I18n.t('active_admin.laws_page.infraction')
+      f.input :sanctions,          label: I18n.t('active_admin.laws_page.sanctions')
+      f.input :min_fine,           label: I18n.t('active_admin.laws_page.min_fine')
+      f.input :max_fine,           label: I18n.t('active_admin.laws_page.max_fine')
       f.input :currency
       f.input :penal_servitude
       f.input :other_penalties
-      f.input :apv, label: 'Indicateur APV'
+      f.input :apv, label: I18n.t('active_admin.laws_page.indicator_apv')
 
       f.actions
     end

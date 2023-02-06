@@ -15,36 +15,39 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
-    redirect_back fallback_location: admin_producers_path, notice: 'Producer activated'
+    redirect_back fallback_location: admin_producers_path, notice: I18n.t('active_admin.operator_page.producer_activated')
   end
 
   member_action :deactivate, method: :put do
     resource.update(is_active: false)
-    redirect_back fallback_location: admin_producers_path, notice: 'Producer deactivated'
+    redirect_back fallback_location: admin_producers_path, notice: I18n.t('active_admin.operator_page.producer_deactivated')
   end
 
   config.clear_action_items!
 
   action_item :toggle_active, only: [:show] do
     if resource.is_active
-      link_to 'Deactivate', deactivate_admin_producer_path(resource),
-              method: :put, data: { confirm: "Are you sure you want to DEACTIVATE the producer #{resource.name}?" }
+      link_to I18n.t('shared.deactivate'), deactivate_admin_producer_path(resource),
+              method: :put, data: { confirm:  I18n.t('active_admin.operator_page.confirm_deactivate', name: resource.name)  }
     else
-      link_to 'Activate', activate_admin_producer_path(resource),
-              method: :put, data: { confirm: "Are you sure you want to ACTIVATE the producer #{resource.name}?" }
+      link_to I18n.t('shared.activate'), activate_admin_producer_path(resource),
+              method: :put, data: { confirm: I18n.t('active_admin.operator_page.confirm_activate', name: resource.name) }
     end
   end
 
   action_item :edit, only: [:show] do
-    link_to 'Edit Producer', edit_admin_producer_path(resource)
+    link_to I18n.t('active_admin.operator_page.edit'), edit_admin_producer_path(resource)
   end
 
   action_item :delete, only: [:show], if: -> { resource.can_hard_delete? } do
-    link_to 'Delete Producer', admin_producer_path(resource), method: :delete, data: { confirm: 'Are you sure you want to hard delete the producer?' }
+    link_to I18n.t('active_admin.operator_page.delete'),
+            admin_producer_path(resource),
+            method: :delete,
+            data: { confirm: I18n.t('active_admin.operator_page.confirm_delete') }
   end
 
   action_item :new, only: [:index] do
-    link_to 'New Producer', new_admin_producer_path
+    link_to I18n.t('active_admin.operator_page.new'), new_admin_producer_path
   end
 
   csv do
@@ -65,13 +68,13 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :obs_per_visit do |operator|
       operator.score_operator_observation&.obs_per_visit
     end
-    column '% Docs' do |operator|
+    column I18n.t('active_admin.operator_page.docs_perc') do |operator|
       operator.score_operator_document&.all
     end
   end
 
-  index do
-    column 'Active?', :is_active
+  index title: I18n.t('active_admin.operator_page.producer') do
+    column :is_active
     column :id
     column :holding
     column :country, sortable: 'country_translations.name'
@@ -83,46 +86,46 @@ ActiveAdmin.register Operator, as: 'Producer' do
       end
       fmus.reduce(:+)
     end
-    column 'Obs/Visit', :obs_per_visit, sortable: true do |operator|
+    column I18n.t('active_admin.operator_page.obs_visit'), :obs_per_visit, sortable: true do |operator|
       operator.score_operator_observation&.obs_per_visit
     end
-    column '% Docs', :percentage_valid_documents_all, sortable: true do |operator|
+    column I18n.t('active_admin.operator_page.docs_perc'), :percentage_valid_documents_all, sortable: true do |operator|
       (operator.score_operator_document.all * 100).to_i rescue nil
     end
-    column('Actions') do |operator|
+    column(I18n.t('active_admin.shared.actions')) do |operator|
       if operator.is_active
-        link_to 'Deactivate', deactivate_admin_producer_path(operator),
-                method: :put, data: { confirm: "Are you sure you want to DEACTIVATE the producer #{operator.name}?" }
+        link_to I18n.t('shared.deactivate'), deactivate_admin_producer_path(operator),
+                method: :put, data: { confirm: I18n.t('active_admin.operator_page.confirm_deactivate', name: operator.name) }
       else
-        link_to 'Activate', activate_admin_producer_path(operator),
-                method: :put, data: { confirm: "Are you sure you want to ACTIVATE the producer #{operator.name}?" }
+        link_to I18n.t('shared.activate'), activate_admin_producer_path(operator),
+                method: :put, data: { confirm: I18n.t('active_admin.operator_page.confirm_activate', name: operator.name) }
       end
     end
 
     actions defaults: false do |operator|
-      item "View", admin_producer_path(operator)
-      item "Edit", edit_admin_producer_path(operator)
+      item I18n.t('active_admin.view'), admin_producer_path(operator)
+      item I18n.t('active_admin.edit'), edit_admin_producer_path(operator)
       if operator.can_hard_delete?
-        item 'Delete', admin_producer_path(operator), method: :delete, data: { confirm: 'Are you sure you want to hard delete the producer?' }
+        item I18n.t('active_admin.delete'), admin_producer_path(operator), method: :delete, data: { confirm: I18n.t('active_admin.operator_page.confirm_delete') }
       end
     end
   end
 
-  scope :all, default: true
-  scope :active
-  scope :inactive
+  scope I18n.t('active_admin.all'), :all, default: true
+  scope I18n.t('active_admin.shared.active'), :active
+  scope I18n.t('active_admin.shared.inactive'), :inactive
 
   filter :country,
          as: :select,
          collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
   filter :id,
-         as: :select, label: 'Name',
+         as: :select, label: I18n.t('activerecord.attributes.operator/translation.name'),
          collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name, :id) }
   filter :concession, as: :select
-  filter :fa_id_present, as: :boolean, label: 'With FA UUID'
-  filter :fmus_id_null, as: :boolean, label: 'Without active FMUs'
+  filter :fa_id_present, as: :boolean, label: I18n.t('active_admin.operator_page.with_fa_uuid')
+  filter :fmus_id_null, as: :boolean, label: I18n.t('active_admin.operator_page.fmus_id_null')
 
-  sidebar 'Fmus', only: :show do
+  sidebar I18n.t('activerecord.models.fmu.other'), only: :show do
     attributes_table_for resource do
       ul do
         resource.fmus.collect do |fmu|
@@ -132,7 +135,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
   end
 
-  sidebar 'Observations', only: :show do
+  sidebar I18n.t('activerecord.models.observation.other'), only: :show do
     attributes_table_for resource do
       # rubocop:disable Rails/OutputSafety
       div do
@@ -144,7 +147,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
   end
 
-  sidebar 'Sawmills', only: :show do
+  sidebar I18n.t('activerecord.models.sawmill'), only: :show do
     attributes_table_for resource do
       ul do
         resource.sawmills.collect do |sawmill|
@@ -154,20 +157,20 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
   end
 
-  sidebar 'Valid Documents', only: :show, if: proc{ resource.operator_documents.where(status: 'doc_valid').any? } do
+  sidebar I18n.t('active_admin.operator_page.valid_documents'), only: :show, if: proc{ resource.operator_documents.where(status: 'doc_valid').any? } do
     table_for resource.operator_documents.where(status: 'doc_valid').collect do |od|
       column('') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
   end
 
-  sidebar 'Pending Documents', only: :show, if: proc{ resource.operator_documents.where(status: 'doc_pending').any? } do
+  sidebar I18n.t('active_admin.operator_page.pending_documents'), only: :show, if: proc{ resource.operator_documents.where(status: 'doc_pending').any? } do
     table_for resource.operator_documents.where(status: 'doc_pending').collect do |od|
       column('') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
   end
 
-  sidebar 'Invalid Documents', only: :show,
-                               if: proc{ resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).any? } do
+  sidebar I18n.t('active_admin.operator_page.invalid_documents'), only: :show,
+                                                                  if: proc{ resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).any? } do
     table_for resource.operator_documents.where(status: %w(doc_not_provided doc_invalid doc_expired)).collect do |od|
       column('') { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
@@ -177,14 +180,14 @@ ActiveAdmin.register Operator, as: 'Producer' do
   form do |f|
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Operator Details' do
+    f.inputs I18n.t('active_admin.operator_page.operator_details') do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
         t.input :details
       end
       f.input :holding, as: :select
       f.input :email
-      f.input :fa_id, as: :string, label: 'Forest Atlas UUID'
+      f.input :fa_id, as: :string, label: I18n.t('active_admin.operator_page.with_fa_uuid')
       f.input :operator_type, as: :select,
                               collection: ['Logging company', 'Artisanal', 'Community forest', 'Estate',
                                            'Industrial agriculture', 'Mining company',
@@ -194,7 +197,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
       if f.object.logo.present?
         f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
-        f.input :delete_logo, as: :boolean, required: false, label: 'Remove logo'
+        f.input :delete_logo, as: :boolean, required: false, label: I18n.t('active_admin.operator_page.remove_logo')
       else
         f.input :logo, as: :file
       end
@@ -258,7 +261,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
           }
         end
 
-        row 'Score History Table' do
+        row I18n.t('active_admin.operator_page.score_history_table') do
           scores = ScoreOperatorDocument.where(operator_id: resource.id).order(date: :desc).to_a
           table_for ScoreOperatorDocumentDecorator.decorate_collection(scores, self) do
             column :date
@@ -276,7 +279,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
               prev_score = scores[idx + 1]
               score.private_summary_diff(prev_score)
             end
-            column 'Documents', &:document_history_link
+            column I18n.t('active_admin.operator_page.documents'), &:document_history_link
           end
         end
       end

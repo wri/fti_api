@@ -33,7 +33,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     column :updated_at
   end
 
-  index do
+  index title: I18n.t('activerecord.models.observer') do
     column :is_active
     column :public_info
     # TODO: Reactivate rubocop and fix this
@@ -50,7 +50,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
     column :logo do |o|
       link_to o.logo&.identifier, o.logo&.url if o.logo&.url
     end
-    column :name, sortable: 'observer_translations.name'
+    column :name, label: I18n.t('activerecord.attributes.observer/translation.name'), sortable: 'observer_translations.name'
     column :responsible_user
     column :responsible_admin
     column :created_at
@@ -62,7 +62,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   filter :countries, as: :select,
                      collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_name_eq,
-         as: :select, label: 'Name',
+         as: :select, label:  I18n.t('activerecord.attributes.observer/translation.name'),
          collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name').pluck(:name) }
 
   show do
@@ -102,12 +102,12 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   form do |f|
     f.semantic_errors *f.object.errors.keys
-    f.inputs 'Translated fields' do
+    f.inputs I18n.t('active_admin.shared.translated_fields') do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
       end
     end
-    f.inputs 'Monitor Details' do
+    f.inputs I18n.t('active_admin.shared.monitor_details') do
       f.input :is_active
       f.input :responsible_user, as: :select, collection: User.where(observer_id: f.object.id)
       f.input :responsible_admin, as: :select, collection: User.joins(:user_permission).where(user_permissions: { user_role: :admin })
@@ -121,7 +121,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
         f.input :logo, as: :file
       end
     end
-    f.inputs 'Public Info' do
+    f.inputs I18n.t('activerecord.attributes.observer.public_info') do
       f.input :public_info, input_html: { disabled: true }
       f.input :address, input_html: { disabled: true }
       f.input :information_name, input_html: { disabled: true }

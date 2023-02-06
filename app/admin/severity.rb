@@ -19,7 +19,7 @@ ActiveAdmin.register Severity do
 
 
   filter :translations_details_contains,
-         as: :select, label: 'Details',
+         as: :select, label: I18n.t('activerecord.attributes.severity.details'),
          collection: -> { Severity.with_translations(I18n.locale).order('severity_translations.details').pluck(:details) }
   filter :subcategory, as: :select,
                        collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
@@ -36,7 +36,7 @@ ActiveAdmin.register Severity do
 
   csv do
     column :details
-    column 'subcategory' do |s|
+    column I18n.t('activerecord.models.subcategory') do |s|
       s.subcategory&.name
     end
     column :level
@@ -57,12 +57,12 @@ ActiveAdmin.register Severity do
   form do |f|
     f.semantic_errors *f.object.errors.keys
     editing = object.new_record? ? false : true
-    f.inputs 'Severity Details' do
+    f.inputs I18n.t('active_admin.shared.severity_details') do
       f.input :subcategory,  input_html: { disabled: editing }
       f.input :level, input_html: { disabled: editing }
     end
 
-    f.inputs 'Translated fields' do
+    f.inputs I18n.t('active_admin.shared.translated_fields') do
       f.translated_inputs switch_locale: false do |t|
         t.input :details
       end
