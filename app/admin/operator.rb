@@ -56,6 +56,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     end
     column :fa_id
     column :name
+    column :details
     column :email
     column :concession
     column :score_absolute do |operator|
