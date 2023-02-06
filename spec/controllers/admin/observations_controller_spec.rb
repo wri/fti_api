@@ -173,7 +173,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
       it 'is successful' do
         expect(observation1.reload.hidden).to eq(false)
         expect(observation2.reload.hidden).to eq(false)
-        expect(flash[:notice]).to match('Documents un-hidden!')
+        expect(flash[:notice]).to match('Documents unhidden!')
       end
     end
   end
