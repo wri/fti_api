@@ -219,8 +219,8 @@ TXT
 
     current_score_percentage = NumberHelper.float_to_percentage(current_score.all) rescue 0
 
-    text_en = ['Dear producer,', '']
-    text_fr = ['Cher exploitant,', '']
+    text_en = ['Dear OTP user,', '']
+    text_fr = ["Cher utilisateur d'OTP,", '']
     text_en << ["Your current score is #{current_score_percentage}.", '']
     text_fr << ["Votre score actuel est de #{current_score_percentage}.", '']
 
