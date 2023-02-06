@@ -39,8 +39,9 @@ ActiveAdmin.register Government do
     actions
   end
 
-  filter :country, as: :select,
-                   collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
+  filter :country,
+         as: :select,
+         collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_government_entity_contains,
          as: :select, label: 'Entity',
          collection: -> {
@@ -56,7 +57,7 @@ ActiveAdmin.register Government do
     attributes_table_for resource do
       ul do
         resource.observations.collect do |obs|
-          li link_to(obs.id, admin_observations_path(obs.id))
+          li link_to(obs.id, admin_observation_path(obs.id))
         end
       end
     end
