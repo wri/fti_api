@@ -8,6 +8,7 @@
 //= require active_admin_sidebar
 //= require pagination
 //= require visibility
+//= require dynamic_filters
 
 //= require activeadmin/quill_editor/quill
 //= require activeadmin/quill_editor_input
