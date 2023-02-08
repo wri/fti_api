@@ -20,11 +20,17 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
 
         it { is_expected.to be_successful }
 
+        it 'does not include empty translations' do
+          subject
+          expect(response.body).not_to include('translation missing')
+        end
+
         if resource_name
           it 'responds to csv' do
             get :index, format: :csv
             expect(response.body).to be_present # otherwise it does not invoke csv code
             expect(response.content_type).to include('text/csv')
+            expect(response.body).not_to include('translation missing')
           end
         end
       end
@@ -36,6 +42,11 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
           subject { get :show, params: { id: model.id }}
 
           it { is_expected.to be_successful }
+
+          it 'does not include empty translations' do
+            subject
+            expect(response.body).not_to include('translation missing')
+          end
         end
       end
 
@@ -44,6 +55,11 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
           subject { get :edit, params: { id: model.id }}
 
           it { is_expected.to be_successful }
+
+          it 'does not include empty translations' do
+            subject
+            expect(response.body).not_to include('translation missing')
+          end
         end
       end
     end
