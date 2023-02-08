@@ -82,7 +82,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
           { name: 'Valid & Expired', data: get_data.call(&:valid_and_expired_count) },
           { name: 'Valid', data: get_data.call(&:valid_count) },
           { name: 'Expired', data: get_data.call(&:expired_count) },
-          { name: 'Not Required', **hidden, data: get_data.call(&:not_required_count) },        
+          { name: 'Not Required', **hidden, data: get_data.call(&:not_required_count) },
 ]
       }
 
@@ -91,7 +91,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
         attributes: [
           ['date', I18n.t('activerecord.attributes.operator_document_statistic.date')],
           ['country', I18n.t('activerecord.attributes.operator_document_statistic.country.one')],
-          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group.one')],
+          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group')],
           ['fmu_forest_type', I18n.t('activerecord.attributes.fmu.forest_type')],
           ['document_type', I18n.t('activerecord.attributes.required_gov_document.document_type')],
           ['valid_expired', I18n.t('active_admin.producer_documents_dashboard_page.valid_expired')],
@@ -103,7 +103,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
           ['not_required', I18n.t('active_admin.producer_documents_dashboard_page.not_required')]
         ],
         unchecked: [
-          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group.one')],
+          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group')],
           ['fmu_forest_type', I18n.t('activerecord.attributes.observation_history.fmu_forest_type')],
           ['document_type', I18n.t('activerecord.attributes.required_gov_document.document_type')],
           ['invalid', I18n.t('active_admin.producer_documents_dashboard_page.invalid')],

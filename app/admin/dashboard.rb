@@ -102,7 +102,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel t('active_admin.dashboard_page.new_producers.new_producers') do
           table_for Operator.inactive.includes(country: :translations).order('updated_at DESC').limit(20).each do
             column(t('active_admin.dashboard_page.columns.name')) { |o| link_to o.name, admin_producer_path(o.id) }
-            column(t('active_admin.columns.country')) { |o| o.country.present? ? o.country.name : t('active_admin.dashboard_page.new_producers.no_country') }
+            column(t('active_admin.dashboard_page.columns.country')) { |o| o.country.present? ? o.country.name : t('active_admin.dashboard_page.new_producers.no_country') }
           end
         end
       end

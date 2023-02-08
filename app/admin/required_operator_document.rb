@@ -20,7 +20,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     column I18n.t('active_admin.required_operator_document_page.publication_authorization') do |rod|
       rod.contract_signature
     end
-    column I18n.t('activerecord.models.required_operator_document_group.one') do |rod|
+    column I18n.t('activerecord.models.required_operator_document_group') do |rod|
       rod.required_operator_document_group&.name
     end
     column I18n.t('activerecord.models.country.one') do |rod|

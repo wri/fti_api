@@ -42,7 +42,7 @@ ActiveAdmin.register Fmu do
 
   filter :id, as: :select
   filter :translations_name_contains,
-         as: :select, label: I18n.t('activerecord.attributes.fmu.name'),
+         as: :select, label: I18n.t('activerecord.attributes.fmu/translation.name'),
          collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name').pluck(:name) }
   filter :country, as: :select,
                    collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
@@ -124,7 +124,7 @@ ActiveAdmin.register Fmu do
     end
 
     f.inputs I18n.t('activerecord.models.operator'), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
-      fo.input :operator_id, label: I18n.t('activerecord.attributes.fmu.name'), as: :select,
+      fo.input :operator_id, label: I18n.t('activerecord.attributes.fmu/translation.name'), as: :select,
                              collection: Operator.active.with_translations.map{ |o| [o.name, o.id] },
                              input_html: { disabled: object.persisted? }, required: false
       fo.input :start_date, input_html: { disabled: object.persisted? }, required: false
@@ -133,7 +133,7 @@ ActiveAdmin.register Fmu do
 
     f.inputs I18n.t('active_admin.shared.translated_fields') do
       f.translated_inputs switch_locale: false do |t|
-        t.input :name, label: I18n.t('activerecord.attributes.fmu.name')
+        t.input :name, label: I18n.t('activerecord.attributes.fmu/translation.name')
       end
     end
     f.actions
