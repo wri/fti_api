@@ -29,6 +29,22 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
 
+namespace :sidekiq do
+  task :quiet do
+    on roles(:app) do
+      puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
+    end
+  end
+  task :restart do
+    on roles(:app) do
+      execute :sudo, :systemctl, :restart, :sidekiq
+    end
+  end
+end
+
 namespace :deploy do
+  after :starting, 'sidekiq:quiet'
   after :finishing, 'deploy:cleanup'
+  after :reverted, 'sidekiq:restart'
+  after :published, 'sidekiq:restart'
 end
