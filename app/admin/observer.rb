@@ -67,12 +67,12 @@ ActiveAdmin.register Observer, as: 'Monitor' do
          as: :dependent_select,
          label: I18n.t('activerecord.attributes.observer/translation.name'),
          url: -> { admin_monitors_path },
-         query: 'translations_name_cont',
-         field: 'name',
-         dependent_on: {
-           country_ids: 'countries_id_eq',
-           is_active: 'is_active_eq'
-         }
+         query: {
+           translations_name_cont: 'search_term',
+           countries_id_eq: 'q_country_ids_value',
+           is_active_eq: 'q_is_active_value'
+         },
+         field: 'name'
 
   show do
     attributes_table do

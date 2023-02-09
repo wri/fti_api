@@ -13,9 +13,8 @@ var dependentFilterInitializer = function() {
 
     function setupSelect2(el) {
       const select = $(el);
-      const dependentOn = select.data('dependent-on');
       const url = select.data('url');
-      const query = select.data('q');
+      const queryObject = select.data('q') || {};
       const idField = select.data('id-field');
       const textField = select.data('text-field');
       const order = select.data('order');
@@ -31,12 +30,26 @@ var dependentFilterInitializer = function() {
           cache: true,
           data: function (params) {
             const q = {};
-            q[query] = params.term;
-            Object.keys(dependentOn).forEach((dependentFilterId) => {
-              const key = `q_${dependentFilterId}`;
-              const ransackQuery = dependentOn[dependentFilterId];
-              const dependentFilterValue = $(`#${key}`).val();
-              if (dependentFilterValue) q[ransackQuery] = dependentFilterValue;
+            // example of queryObject
+            // query: {
+            //  translations_name_cont: 'search_term',
+            //  countries_id_eq: 'q_country_ids_value',
+            //  is_active_eq: 'q_is_active_value'
+            // }
+            // ransack search matcher is the key and the value is either:
+            // 1.  'search_term'
+            // 2. arbitrary value
+            // 3. current value of input field when id is provided with pattern {ID}_value
+            Object.keys(queryObject).forEach((ransackQuery) => {
+              const queryElement = queryObject[ransackQuery];
+              if (queryElement === 'search_term') {
+                q[ransackQuery] = params.term;
+              } else if (queryElement.endsWith('_value')) {
+                const elementValue = $(`#${queryElement.replace('_value', '')}`).val();
+                if (elementValue) q[ransackQuery] = elementValue;
+              } else {
+                q[ransackQuery] = queryElement;
+              }
             });
 
             return {

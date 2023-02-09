@@ -4,7 +4,6 @@ class DependentSelectInput < ActiveAdmin::Inputs::Filters::SelectInput
       # default-select class to not initialize select2 from activeadmin_addons
       class: 'default-select dependent-select',
       data: {
-        dependent_on: options[:dependent_on],
         q: options[:query],
         url: url_from_options,
         order: order_from_options,
