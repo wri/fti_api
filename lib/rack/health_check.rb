@@ -21,8 +21,9 @@ module Rack
     def message
       {
         "status": healthy? ? 'ok' : 'error',
-        "database": database_connected?
-        # "redis": redis_connected?
+        "database": database_connected?,
+        "redis": redis_connected?,
+        "sidekiq": sidekiq_running?
       }.to_json
     end
 
@@ -36,10 +37,16 @@ module Rack
       false
     end
 
-    # def redis_connected?
-    #   Redis.current.ping == 'PONG'
-    # rescue StandardError
-    #   false
-    # end
+    def redis_connected?
+      Redis.current.ping == 'PONG'
+    rescue StandardError
+      false
+    end
+
+    def sidekiq_running?
+      Sidekiq::ProcessSet.new.size.positive?
+    rescue StandardError
+      false
+    end
   end
 end
