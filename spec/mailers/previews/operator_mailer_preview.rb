@@ -1,6 +1,4 @@
 class OperatorMailerPreview < ActionMailer::Preview
-  include FactoryBot::Syntax::Methods
-
   def expiring_documents_notifications
     OperatorMailer.expiring_documents_notifications operator, documents
   end

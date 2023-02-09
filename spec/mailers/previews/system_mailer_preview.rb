@@ -1,13 +1,9 @@
 class SystemMailerPreview < ActionMailer::Preview
-  include FactoryBot::Syntax::Methods
-
   def user_created
-    SystemMailer.user_created build(:user)
+    SystemMailer.user_created User.last
   end
 
   def operator_created
-    operator = build(:operator)
-    operator.id = 1
-    SystemMailer.operator_created(operator)
+    SystemMailer.operator_created Operator.last
   end
 end

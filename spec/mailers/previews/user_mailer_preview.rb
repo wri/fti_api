@@ -1,8 +1,6 @@
 class UserMailerPreview < ActionMailer::Preview
-  include FactoryBot::Syntax::Methods
-
   def user_acceptance
-    UserMailer.user_acceptance build(:user)
+    UserMailer.user_acceptance User.last
   end
 
   def forgotten_password
