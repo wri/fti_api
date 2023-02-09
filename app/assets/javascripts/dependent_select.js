@@ -34,7 +34,7 @@ var dependentFilterInitializer = function() {
             // query: {
             //  translations_name_cont: 'search_term',
             //  countries_id_eq: 'q_country_ids_value',
-            //  is_active_eq: 'q_is_active_value'
+            //  is_active: 'q_is_active_value'
             // }
             // ransack search matcher is the key and the value is either:
             // 1.  'search_term'
@@ -58,11 +58,21 @@ var dependentFilterInitializer = function() {
             };
           },
           processResults: function (data) {
+            const idText = {};
+            const results = [];
+
+            data.forEach((item) => {
+              if (!idText[item[idField]]) {
+                idText[item[idField]] = true;
+                results.push({
+                  id: item[idField],
+                  text: item[textField]
+                });
+              }
+            });
+
             return {
-              results: data.map((item) => ({
-                id: item[idField],
-                text: item[textField]
-              }))
+              results
             };
           }
         }

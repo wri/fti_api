@@ -19,13 +19,42 @@ ActiveAdmin.register Law do
   permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :currency,
                 :penal_servitude, :other_penalties, :apv, :written_infraction, :country_id
 
-  filter :country, as: :select,
-                   collection: -> { Country.joins(:laws).with_translations(I18n.locale).order('country_translations.name') }
-  filter :subcategory, as: :select,
-                       collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :written_infraction, label: I18n.t('active_admin.laws_page.written_infraction'), as: :select
-  filter :infraction, label: I18n.t('active_admin.laws_page.infraction'), as: :select
-  filter :sanctions, label: I18n.t('active_admin.laws_page.sanctions'), as: :select
+  filter :country,
+         as: :select,
+         collection: -> { Country.joins(:laws).with_translations(I18n.locale).order('country_translations.name') }
+  filter :subcategory,
+         as: :select,
+         collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
+  filter :written_infraction,
+         as: :dependent_select,
+         label: I18n.t('active_admin.laws_page.written_infraction'),
+         url: -> { admin_laws_path },
+         field: :written_infraction,
+         query: {
+           written_infraction_cont: 'search_term',
+           country_id_eq: 'q_country_id_value',
+           subcategory_id_eq: 'q_subcategory_id_value'
+         }
+  filter :infraction,
+         as: :dependent_select,
+         label: I18n.t('active_admin.laws_page.infraction'),
+         url: -> { admin_laws_path },
+         field: :infraction,
+         query: {
+           infraction_cont: 'search_term',
+           country_id_eq: 'q_country_id_value',
+           subcategory_id_eq: 'q_subcategory_id_value'
+         }
+  filter :sanctions,
+         as: :dependent_select,
+         label: I18n.t('active_admin.laws_page.sanctions'),
+         url: -> { admin_laws_path },
+         field: :sanctions,
+         query: {
+           sanctions_cont: 'search_term',
+           country_id_eq: 'q_country_id_value',
+           subcategory_id_eq: 'q_subcategory_id_value'
+         }
   filter :max_fine, label: I18n.t('active_admin.laws_page.max_fine')
   filter :min_fine, label: I18n.t('active_admin.laws_page.min_fine')
 

@@ -117,9 +117,15 @@ ActiveAdmin.register Operator, as: 'Producer' do
   filter :country,
          as: :select,
          collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
-  filter :id,
-         as: :select, label: I18n.t('activerecord.attributes.operator.name'),
-         collection: -> { Operator.order(:name).pluck(:name, :id) }
+  filter :name_eq,
+         as: :dependent_select,
+         label: I18n.t('activerecord.attributes.operator.name'),
+         url: -> { admin_producers_path },
+         field: :name,
+         query: {
+           name_cont: 'search_term',
+           country_id_eq: 'q_country_id_value'
+         }
   filter :concession, as: :select
   filter :fa_id_present, as: :boolean, label: I18n.t('active_admin.operator_page.with_fa_uuid')
   filter :fmus_id_null, as: :boolean, label: I18n.t('active_admin.operator_page.fmus_id_null')
