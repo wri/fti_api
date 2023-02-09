@@ -13,7 +13,17 @@ class DependentSelectInput < ActiveAdmin::Inputs::Filters::SelectInput
     )
   end
 
+  def collection
+    return [] if input_value.blank?
+
+    [[input_value, input_value]]
+  end
+
   private
+
+  def input_value
+    @object.send(input_name)
+  end
 
   def order_from_options
     return options[:order] if options[:order].present?
