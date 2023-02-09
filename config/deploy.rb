@@ -32,7 +32,7 @@ set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
 namespace :sidekiq do
   task :quiet do
     on roles(:app) do
-      puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
+      $stdout.puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
     end
   end
   task :restart do
