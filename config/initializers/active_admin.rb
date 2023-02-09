@@ -354,6 +354,7 @@ end
 ActiveAdmin.before_load do |app|
   # Add Filters Extensions
   ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
+  ActiveAdmin::BaseController.include ActiveAdmin::JsonControllerExtension
   ActiveAdmin::Views::Pages::Show.prepend ActiveAdmin::PaperTrail::ShowPageExtension
 end
 

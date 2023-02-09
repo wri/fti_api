@@ -24,7 +24,7 @@ var dependentFilterInitializer = function() {
         placeholder: '',
         allowClear: true,
         ajax: {
-          url,
+          url: `${url}.json`,
           dataType: 'json',
           delay: 250,
           cache: true,
@@ -54,7 +54,9 @@ var dependentFilterInitializer = function() {
 
             return {
               order,
-              q
+              q,
+              fields: [idField, textField].join(','),
+              per_page: 500
             };
           },
           processResults: function (data) {
