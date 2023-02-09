@@ -18,11 +18,13 @@ var dependentFilterInitializer = function() {
       const idField = select.data('id-field');
       const textField = select.data('text-field');
       const order = select.data('order');
+      const tags = select.data('tags');
 
       select.select2({
         minimumInputLength: 0,
         placeholder: '',
         allowClear: true,
+        tags,
         ajax: {
           url: `${url}.json`,
           dataType: 'json',

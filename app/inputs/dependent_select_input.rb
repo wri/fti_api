@@ -7,6 +7,7 @@ class DependentSelectInput < ActiveAdmin::Inputs::Filters::SelectInput
         q: options[:query],
         url: url_from_options,
         order: order_from_options,
+        tags: options[:free_text_search],
         id_field: options[:id_field] || options[:field],
         text_field: options[:text_field] || options[:field]
       }.compact
