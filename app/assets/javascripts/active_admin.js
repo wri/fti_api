@@ -9,6 +9,7 @@
 //= require pagination
 //= require visibility
 //= require dynamic_filters
+//= require dependent_select
 
 //= require activeadmin/quill_editor/quill
 //= require activeadmin/quill_editor_input

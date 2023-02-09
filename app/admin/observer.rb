@@ -64,9 +64,15 @@ ActiveAdmin.register Observer, as: 'Monitor' do
          label: I18n.t('activerecord.models.country.one'),
          collection: -> { Country.joins(:observers).with_translations(I18n.locale).order('country_translations.name').distinct }
   filter :translations_name_eq,
-         as: :select,
+         as: :dependent_select,
          label: I18n.t('activerecord.attributes.observer/translation.name'),
-         collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name').pluck(:name) }
+         url: -> { admin_monitors_path },
+         query: 'translations_name_cont',
+         field: 'name',
+         dependent_on: {
+           country_ids: 'countries_id_eq',
+           is_active: 'is_active_eq'
+         }
 
   show do
     attributes_table do

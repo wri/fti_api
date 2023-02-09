@@ -1,16 +1,16 @@
 $(document).ready(function() {
   const dependantFilters = {
-    '.admin_monitors #q_translations_name_eq': {
-      url: '/admin/monitors',
-      query: 'translations_name_cont',
-      order: 'name_asc',
-      idField: 'name',
-      textField: 'name',
-      dependentOn: {
-        q_country_ids: 'countries_id_eq',
-        q_is_active: 'is_active_eq'
-      }
-    },
+    // '.admin_monitors #q_translations_name_eq': {
+    //   url: '/admin/monitors',
+    //   query: 'translations_name_cont',
+    //   order: 'name_asc',
+    //   idField: 'name',
+    //   textField: 'name',
+    //   dependentOn: {
+    //     q_country_ids: 'countries_id_eq',
+    //     q_is_active: 'is_active_eq'
+    //   }
+    // },
     '.admin_producers #q_translations_name_eq': {
       url: '/admin/producers',
       query: 'translations_name_cont',
