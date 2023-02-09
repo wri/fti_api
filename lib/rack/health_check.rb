@@ -28,7 +28,7 @@ module Rack
     end
 
     def healthy?
-      database_connected? # && redis_connected?
+      database_connected? && redis_connected? && sidekiq_running?
     end
 
     def database_connected?
