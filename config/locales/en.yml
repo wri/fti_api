@@ -466,7 +466,9 @@ en:
       donor: Donor  #g
       faq: Faq  #g
       faq/translation: Faq/translation  #g
-      fmu: Fmu  #g
+      fmu:
+        one: FMU  #g
+        other: FMUs
       fmu/translation: Fmu/translation  #g
       fmu_operator: Fmu operator  #g
       gov_document: Gov document  #g

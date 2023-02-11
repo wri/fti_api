@@ -151,7 +151,7 @@ ActiveAdmin.register OperatorDocumentHistory do
          label: I18n.t('activerecord.attributes.required_operator_document.contract_signature'),
          as: :select, collection: [[I18n.t('active_admin.status_tag.yes'), true], [I18n.t('active_admin.status_tag.no'), false]]
   filter :operator_document_required_operator_document_id_eq,
-         label: I18n.t('activerecord.models.required_operator_document_group.one'),
+         label: I18n.t('activerecord.models.required_operator_document_group'),
          as: :select,
          collection: -> { RequiredOperatorDocument.with_translations.all }
   filter :operator,
