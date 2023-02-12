@@ -484,7 +484,9 @@ en:
       law: Law  #g
       notification: Notification  #g
       notification_group: Notification group  #g
-      observation: Observation  #g
+      observation:
+        one: 'Observation'
+        other: 'Observations'
       observation/translation: Observation/translation  #g
       observation_document: Observation document  #g
       observation_history: Observation history  #g
@@ -497,7 +499,6 @@ en:
       observer/translation: Observer/translation  #g
       observer_observation: Observer observation  #g
       operator: Operator  #g
-      operator/translation: Operator/translation  #g
       operator_document: Operator document  #g
       operator_document_annex: Operator document annex  #g
       operator_document_country: Operator document country  #g
@@ -969,12 +970,14 @@ en:
         country: :activerecord.models.country  #g
         country_doc_rank: Country doc rank  #g
         country_operators: Country operators  #g
+        details: 'Details'
         email: Email  #g
         fmu_operators: Fmu operators  #g
         fmus: Fmus  #g
         holding: :activerecord.models.holding  #g
         is_active: Is active  #g
         logo: Logo  #g
+        name: 'Name'
         observations: Observations  #g
         operator_document_countries: Operator document countries  #g
         operator_document_country_histories: Operator document country histories  #g
@@ -992,13 +995,6 @@ en:
         users: Users  #g
         versions: Versions  #g
         website: Website  #g
-
-      operator/translation:
-        details: Details  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
-        versions: Versions  #g
 
       operator_document:
         annex_documents: Annex documents  #g

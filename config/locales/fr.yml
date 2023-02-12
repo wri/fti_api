@@ -880,12 +880,14 @@ fr:
         country: :activerecord.models.country  #g
         country_doc_rank: Classement des documents du pays  #g
         country_operators: Opérateurs nationaux  #g
+        details: 'Détails'
         email: E-mail  #g
         fmu_operators: Opérateurs Fmu  #g
         fmus: Fmus  #g
         holding: :activerecord.models.holding  #g
         is_active: C'est actif  #g
         logo: Logo  #g
+        name: 'Nom'
         observations: Observations  #g
         operator_document_countries: Pays du document opérateur  #g
         operator_document_country_histories: Historiques des pays des documents de l'opérateur  #g
@@ -903,13 +905,6 @@ fr:
         users: Utilisateurs  #g
         versions: Versions  #g
         website: Site Internet  #g
-
-      operator/translation:
-        details: Des détails  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
-        versions: Versions  #g
 
       operator_document:
         annex_documents: Documents annexes  #g

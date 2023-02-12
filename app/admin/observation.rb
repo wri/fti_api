@@ -9,7 +9,6 @@ ActiveAdmin.register Observation do
       end_of_association_chain.with_translations(I18n.locale).includes(
         [
           [country: :translations],
-          [operator: :translations],
           [severity: :translations],
           [subcategory: [category: :translations]],
           :observers
@@ -184,7 +183,7 @@ ActiveAdmin.register Observation do
   filter :country, as: :select,
                    collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator, as: :select,
-                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+                    collection: -> { Operator.order(:name) }
   filter :fmu, as: :select,
                collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :governments, as: :select, label: I18n.t('activerecord.attributes.government.government_entity'),
@@ -470,7 +469,7 @@ ActiveAdmin.register Observation do
                   },
                   level_2: {
                     attribute: :operator_id,
-                    order: 'operator_translations.name_asc',
+                    order: 'operators.name_asc',
                     minimum_input_length: 0,
                     url: '/admin/producers'
                   },

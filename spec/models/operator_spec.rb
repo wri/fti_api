@@ -53,8 +53,6 @@ RSpec.describe Operator, type: :model do
     expect(operator).to be_valid
   end
 
-  it_should_behave_like 'translatable', :operator, %i[name details]
-
   describe 'Hooks' do
     describe '#create_operator_id' do
       context 'when country is present' do
@@ -168,12 +166,6 @@ RSpec.describe Operator, type: :model do
         @operator.operator_document_countries.joins(:required_operator_document).non_signature.required.count.to_f
       @operator_document_fmus_required =
         @operator.operator_document_fmus.joins(:required_operator_document).non_signature.required.count.to_f
-    end
-
-    describe '#cache_key' do
-      it 'return the default value with the locale' do
-        expect(@operator.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
-      end
     end
 
     describe '#update_valid_documents_percentages' do

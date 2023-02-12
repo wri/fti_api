@@ -18,7 +18,7 @@ ActiveAdmin.register Sawmill do
   index do
     column :is_active
     column :name
-    column :operator, sortable: 'operator_translations.name'
+    column :operator, sortable: :name
     column 'Latitude', :lat
     column 'Longitude', :lng
     column('Actions') do |sawmill|
@@ -36,7 +36,7 @@ ActiveAdmin.register Sawmill do
   scope I18n.t('active_admin.shared.inactive'), :inactive
 
   filter :operator, label: 'Operator', as: :select,
-                    collection: -> { Operator.joins(:sawmills).with_translations(I18n.locale).order('operator_translations.name') }
+                    collection: -> { Operator.joins(:sawmills).order(name: :asc) }
   filter :name
 
 
@@ -83,7 +83,7 @@ ActiveAdmin.register Sawmill do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([operator: :translations])
+      end_of_association_chain.includes(:operator)
     end
   end
 end

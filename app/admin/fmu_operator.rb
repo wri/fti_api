@@ -10,7 +10,7 @@ ActiveAdmin.register FmuOperator do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([[operator: :translations], [fmu: :translations]])
+      end_of_association_chain.includes([:operator, [fmu: :translations]])
     end
   end
 
@@ -19,7 +19,7 @@ ActiveAdmin.register FmuOperator do
   permit_params :fmu_id, :operator_id, :current, :start_date, :end_date
 
   filter :operator, label: I18n.t('activerecord.models.operator'), as: :select,
-                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+                    collection: -> { Operator.order(:name) }
   filter :fmu, label: I18n.t('activerecord.models.fmu.one'), as: :select,
                collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :current

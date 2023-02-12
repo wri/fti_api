@@ -20,7 +20,7 @@ ActiveAdmin.register OperatorDocument do
   controller do
     def scoped_collection
       end_of_association_chain
-        .includes([:required_operator_document, :user, [operator: :translations],
+        .includes([:required_operator_document, :user, :operator,
                    [fmu: :translations],
                    [required_operator_document:
                       [required_operator_document_group: :translations, country: :translations]]])
@@ -252,7 +252,7 @@ ActiveAdmin.register OperatorDocument do
            RequiredOperatorDocument.find_by_sql(query.to_sql).map { ["#{_1[:name]} - #{_1[:country_name]}", _1[:id]] }
          }
   filter :operator, as: :select,
-                    collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+                    collection: -> { Operator.order(:name) }
   filter :fmu, label: I18n.t('activerecord.models.fmu.other'), as: :select,
                collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: -> { OperatorDocument.statuses }

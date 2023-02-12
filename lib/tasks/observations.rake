@@ -82,13 +82,12 @@ namespace :observations do
           ST_DISTANCE(pointSwapped, centroid) < ST_DISTANCE(point, centroid) as swapped_closer_to_centroid
         from
         (
-          select o.*, ot.name as operator_name, f.geometry, ST_CENTROID(f.geometry) as centroid,
+          select o.*, o.name as operator_name, f.geometry, ST_CENTROID(f.geometry) as centroid,
             ST_SetSRID(ST_POINT(o.lng, o.lat), 4326) as point,
             ST_SetSRID(ST_POINT(o.lat, o.lng), 4326) as pointSwapped
           from
             observations o
           inner join fmus f on f.id = o.fmu_id
-          left join operator_translations ot on ot.operator_id = o.operator_id and ot.locale = 'en'
           where f.geojson is not null
         ) as temp
       ) as temp2

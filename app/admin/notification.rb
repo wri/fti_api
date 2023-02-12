@@ -14,7 +14,7 @@ ActiveAdmin.register Notification do
   filter :operator_document_operator_id,
          as: :select,
          label: 'Operator',
-         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+         collection: -> { Operator.order(:name) }
   filter :user
   filter :last_displayed_at
   filter :dismissed_at
@@ -25,8 +25,7 @@ ActiveAdmin.register Notification do
   controller do
     def scoped_collection
       end_of_association_chain.includes(:user, :notification_group,
-                                        operator_document: [operator: [:translations],
-                                                            required_operator_document: [:translations]])
+                                        operator_document: [:operator, required_operator_document: [:translations]])
     end
   end
 
