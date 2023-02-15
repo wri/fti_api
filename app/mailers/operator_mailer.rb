@@ -43,26 +43,32 @@ class OperatorMailer < ApplicationMailer
     last_score = operator.score_operator_documents.at_date(Date.today - 3.months).order(:date).last
     expiring_docs = operator.operator_documents.to_expire(Date.today + 3.months)
 
-    subject = "Your OTP quarterly report. / Votre rapport trimestriel de OTP."
+    subject = "Your quarterly OTP report / Votre rapport trimestriel sur l'OTP"
 
     current_score_percentage = NumberHelper.float_to_percentage(current_score.all) rescue 0
 
     text_en = ['Dear OTP user,', '']
     text_fr = ["Cher utilisateur de l'OTP,", '']
-    text_en << ["Your current score is #{current_score_percentage}."]
-    text_fr << ["Votre score actuel est de #{current_score_percentage}."]
+    text_en << ["Your current score is #{current_score_percentage}.", '']
+    text_fr << ["Votre score actuel est de #{current_score_percentage}.", '']
 
     if last_score.present?
       last_score_percentage = NumberHelper.float_to_percentage(last_score.all) rescue 0
 
       score_change = NumberHelper.float_to_percentage(current_score.all - last_score.all)
-      text_en << "Your score on #{last_score.date} was #{last_score_percentage}. This means a variation of #{score_change}."
-      text_fr << "Votre dernier score en #{last_score.date} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}."
+      text_en << ["Your score on #{localized_date(:en, last_score.date)} was #{last_score_percentage}. This means a variation of #{score_change}.", '']
+      text_fr << ["Votre dernier score en #{localized_date(:fr, last_score.date)} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}.", '']
     end
 
-    expiring_docs.each do |document|
-      text_en << "Document #{document.required_operator_document.name} expires on #{document.expire_date}."
-      text_fr << "Le document #{document.required_operator_document.name} expire en #{document.expire_date}."
+    if expiring_docs.any?
+      text_en << ['Please note that the following documents on your profile are expiring this quarter and will need to be updated:']
+      text_fr << ['Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour :']
+      expiring_docs.each do |document|
+        text_en << "- #{document.required_operator_document.name} expires on #{localized_date(:en, document.expire_date)}."
+        text_fr << "- #{document.required_operator_document.name} expire le #{localized_date(:fr, document.expire_date)}."
+      end
+      text_en << 'You can update these documents by logging on to your OTP profile at www.opentimberportal.org<br>'
+      text_fr << "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: www.opentimberportal.org<br>"
     end
 
     text_en << ['', 'Best,', 'OTP Team', '']
@@ -89,5 +95,11 @@ class OperatorMailer < ApplicationMailer
         only_path: true
       }
     )
+  end
+
+  # Temporary helper method to display the date localized.
+  # TODO: Remove this when using the user's locale for the email
+  def localized_date(locale, date)
+    I18n.with_locale(locale) { I18n.l(date) }
   end
 end

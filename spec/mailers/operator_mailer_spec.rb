@@ -34,7 +34,7 @@ RSpec.describe OperatorMailer, type: :mailer do
     let(:mail) { OperatorMailer.quarterly_newsletter(operator) }
 
     it 'renders the headers' do
-      expect(mail.subject).to eq('Your OTP quarterly report. / Votre rapport trimestriel de OTP.')
+      expect(mail.subject).to eq("Your quarterly OTP report / Votre rapport trimestriel sur l'OTP")
       expect(mail.to).to eq(nil)
       expect(mail.bcc).to eq(operator.users.pluck(:email))
     end
