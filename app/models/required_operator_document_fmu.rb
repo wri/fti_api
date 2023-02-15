@@ -30,7 +30,7 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
 
   def create_operator_document_fmus
     fmus.find_each do |fmu|
-      if fmu.operator.present? # This is to prevent faulty situations when the fmu has no operator id
+      if fmu.operator.present? && fmu.operator.fa_id.present? # This is to prevent faulty situations when the fmu has no operator id
         OperatorDocumentFmu.where(required_operator_document_id: self.id,
                                   operator_id: fmu.operator.id,
                                   fmu_id: fmu.id).first_or_create do |odf|

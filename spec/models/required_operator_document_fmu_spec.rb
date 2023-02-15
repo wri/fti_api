@@ -33,27 +33,29 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
 
   describe 'Hooks' do
     describe '#create_operator_document_fmus' do
-      before do
-        @country = create(:country)
-        3.times do
-          operator = create(:operator, country: @country)
-          fmu = create(:fmu, country: @country)
-          create(:fmu_operator, fmu: fmu, operator: operator)
-        end
+      let(:operator_country) { create :country }
+      let(:document_country) { operator_country }
+      let(:fa_id) { 'FA_ID' }
+      let(:operator) { create :operator, country: operator_country, fa_id: fa_id }
+      let(:fmu) { create :fmu, country: operator_country }
+      let!(:fmu_operator) { create :fmu_operator, fmu: fmu, operator: operator }
+      let(:rod) { create :required_operator_document_fmu, country: document_country, forest_types: (1..6).to_a }
 
-        @required_operator_document_group = create(:required_operator_document_group)
+      subject { rod.save }
+
+      it { expect{subject}.to change{OperatorDocument.count}.from(0).to(1) }
+      it { expect{subject}.to change{OperatorDocument.first&.status}.from(NilClass).to('doc_not_provided') }
+
+      context "when the operator country is not the same as the document's country" do
+        let(:document_country) { create :country }
+
+        it { expect{subject}.to_not change{OperatorDocument.count} }
       end
 
+      context 'when the operator does not have an FA_ID' do
+        let(:fa_id) { nil }
 
-      it 'create or update status of operator_document_fmu to be doc_not_provided' do
-        expect(RequiredOperatorDocumentFmu.all.size).to eql 0
-
-        create(:required_operator_document_fmu,
-          forest_types: [],
-          country: @country,
-          required_operator_document_group: @required_operator_document_group)
-
-        expect(OperatorDocumentFmu.all.size).to eql 3
+        it { expect{subject}.to_not change{OperatorDocument.count} }
       end
     end
   end
