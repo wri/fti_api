@@ -116,7 +116,7 @@ module V1
     end
 
     def self.apply_includes(records, directives)
-      super.includes(:score_operator_document, :score_operator_observation)
+      super.includes(:score_operator_document, :score_operator_observation) if super.present?
     end
 
     def self.records(options = {})
