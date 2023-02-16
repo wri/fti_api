@@ -14,8 +14,8 @@ gem 'bootsnap'
 # Active admin
 gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
-gem 'activeadmin', '~> 1.3.0'
-gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'coingecko/activeadmin-globalize', branch: 'develop'
+gem 'activeadmin'
+gem 'activeadmin-globalize', github: 'tsubik/activeadmin-globalize', branch: 'rails-7'
 gem 'activeadmin_addons'
 
 gem 'sass-rails'
@@ -61,7 +61,7 @@ gem 'sidekiq'
 gem 'activerecord-import'
 gem 'acts_as_list'
 gem 'countries', require: false # for update translations job, so require only there
-gem 'globalize', '5.2.0'
+gem 'globalize', '~> 5.3'
 gem 'seed-fu'
 
 # Validation
