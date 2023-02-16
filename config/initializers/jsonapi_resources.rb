@@ -32,7 +32,7 @@ module JSONAPI
 
       include_directives[:include_related] ||= {}
 
-      relationships = source.class._relationships.select{|k,v| fetchable_fields.include?(k) }
+      relationships = source.class._relationships.select{ |k,v| fetchable_fields.include?(k) }
       field_set = supplying_relationship_fields(source.class) & relationships.keys
 
       relationships.each_with_object({}) do |(name, relationship), hash|
@@ -54,14 +54,15 @@ module JSONAPI
         # but it's possible all children won't have been captured. So we must still go
         # through the relationships.
         if include_linkage || include_linked_children
-          resources = if source.preloaded_fragments.has_key?(format_key(name))
-            source.preloaded_fragments[format_key(name)].values
-          else
-            options = { filters: ia && ia[:include_filters] || {} }
-            [source.public_send(name, options)].flatten(1).compact
-          end
+          resources = if source.preloaded_fragments.key?(format_key(name))
+                        source.preloaded_fragments[format_key(name)].values
+                      else
+                        options = { filters: ia && ia[:include_filters] || {} }
+                        [source.public_send(name, options)].flatten(1).compact
+                      end
           resources.each do |resource|
             next if self_referential_and_already_in_source(resource)
+
             id = resource.id
             relationships_only = already_serialized?(relationship.type, id)
             if include_linkage && !relationships_only
