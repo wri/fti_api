@@ -19,20 +19,45 @@ module V1
     let(:ngo_headers) { authorize_headers(ngo.id) }
     let!(:country) { create(:country) }
 
-    let!(:observation) { create(:observation_1) }
+    let(:observation) { create(:observation_1) }
 
     context 'Show observations' do
       before do
-        create_list(:observation, 4)
-        create(:observation, observers: [ngo_observer], user_id: ngo.id)
-        create(:observation, observers: [ngo_observer], user_id: ngo.id)
-        create(:observation, user_id: admin.id)
+        poland = create(:country, name: 'Poland', iso: 'POL')
+        spain = create(:country, name: 'Spain', iso: 'ESP')
+        create_list(:observation, 4, country: poland)
+        create(:observation, observers: [ngo_observer], user_id: ngo.id, country: spain)
+        create(:observation, observers: [ngo_observer], user_id: ngo.id, country: spain, fmu: create(:fmu))
+        create(:gov_observation, user_id: admin.id, country: poland)
       end
 
       it 'Get all observations list' do
         get '/observations', headers: webuser_headers
         expect(status).to eq(200)
         expect(parsed_data.size).to eq(7)
+      end
+
+      it 'Get all observations and include relationships' do
+        include = %w[operator subcategory subcategory.category observers governments law.country fmu severity]
+        get "/observations?include=#{include.join(',')}", headers: webuser_headers
+        expect(status).to eq(200)
+        expect(parsed_data.size).to eq(7)
+        included_types = parsed_body[:included].map { |obj| obj[:type] }.uniq
+        expect(included_types).to include('countries')
+        expect(included_types).to include('operators')
+        expect(included_types).to include('subcategories')
+        expect(included_types).to include('governments')
+        expect(included_types).to include('categories')
+        expect(included_types).to include('observers')
+        expect(included_types).to include('fmus')
+        expect(included_types).to include('laws')
+        expect(included_types).to include('severities')
+        # jsonapi resources in newer version has problems with including nested relations
+        law = parsed_body[:included].find { |obj| obj[:type] == 'laws' }
+        expect(law[:relationships][:country][:data]).to be_present
+
+        subcategory = parsed_body[:included].find { |obj| obj[:type] == 'subcategories' }
+        expect(subcategory[:relationships][:category][:data]).to be_present
       end
 
       context 'Observations tool' do

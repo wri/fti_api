@@ -14,8 +14,8 @@
 
 FactoryBot.define do
   factory :subcategory, class: 'Subcategory' do
-    sequence(:name) { |n| "Subcategory#{n}" }
-    subcategory_type { rand(0..1) }
+    name { "Subcategory name" }
+    subcategory_type { "operator" }
 
     after(:build) do |random_subcategory|
       random_subcategory.category ||= FactoryBot.create(:category)
