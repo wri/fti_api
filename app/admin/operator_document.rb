@@ -247,6 +247,7 @@ ActiveAdmin.register OperatorDocument do
              RequiredOperatorDocument
                .select(rod_table[:name], country_name, rod_table[:id])
                .left_joins(country: :translations)
+               .arel
                .on("country_translations.country_id = countries.id and country_translations.locale = '#{I18n.locale}'")
                .order('required_operator_documents.name')
            RequiredOperatorDocument.find_by_sql(query.to_sql).map { ["#{_1[:name]} - #{_1[:country_name]}", _1[:id]] }

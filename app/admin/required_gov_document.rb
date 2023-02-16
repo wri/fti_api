@@ -16,7 +16,7 @@ ActiveAdmin.register RequiredGovDocument do
     RequiredGovDocumentGroup
       .all
       .left_joins(:parent)
-      .order('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)')
+      .order(Arel.sql('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)'))
   }
   filter :country
   filter :document_type, as: :select, collection: RequiredGovDocument.document_types
@@ -61,7 +61,7 @@ ActiveAdmin.register RequiredGovDocument do
       f.input :required_gov_document_group, collection: RequiredGovDocumentGroup
         .all
         .left_joins(:parent)
-        .order('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)')
+        .order(Arel.sql('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)'))
       f.input :country, input_html: { disabled: editing }
       f.input :position
       f.input :document_type, as: :select, collection: RequiredGovDocument.document_types.keys,

@@ -20,7 +20,7 @@ require_relative '../lib/rack/health_check'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-ActiveSupport::Deprecation.silenced = true
+# ActiveSupport::Deprecation.silenced = true
 
 module FtiApi
   class Application < Rails::Application
