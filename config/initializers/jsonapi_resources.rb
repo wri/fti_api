@@ -8,6 +8,7 @@ JSONAPI.configure do |config|
   config.resource_cache = Rails.cache
   config.always_include_to_one_linkage_data = false
   config.warn_on_missing_routes = false
+  config.default_exclude_links = :default
 
   # Metadata
   # Output record count in top level meta for find operation
