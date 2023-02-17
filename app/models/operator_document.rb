@@ -49,7 +49,7 @@ class OperatorDocument < ApplicationRecord
   validates_presence_of :expire_date, if: :document_file_id # TODO We set expire_date on before_validation
   validate :reason_or_file
 
-  before_save :set_type, on: %w[create update]
+  before_save :set_type
   before_create :set_status
   before_create :delete_previous_pending_document
 
