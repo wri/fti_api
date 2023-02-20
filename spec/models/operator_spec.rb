@@ -99,7 +99,7 @@ RSpec.describe Operator, type: :model do
         end
 
         it 'creates related OperatorDocumentCountry and OperatorDocumentFmu if those does not exist' do
-          @other_operator.update_attributes(fa_id: 'fa_id')
+          @other_operator.update(fa_id: 'fa_id')
 
           expect(@other_operator.operator_document_countries.size).to eql 1
           operator_document_country = @other_operator.operator_document_countries.first
@@ -131,11 +131,11 @@ RSpec.describe Operator, type: :model do
             instance_variable_get("@required_#{op_doc_type}").id
 
           valid_op_doc = create(op_doc_type, **common_data)
-          valid_op_doc.update_attributes(status: valid_status)
+          valid_op_doc.update(status: valid_status)
 
           pending_op_docs = create_list(op_doc_type, 2, **common_data)
           pending_op_docs.each do |pending_op_doc|
-            pending_op_doc.update_attributes(status: pending_status)
+            pending_op_doc.update(status: pending_status)
           end
         end
       end

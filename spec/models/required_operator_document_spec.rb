@@ -44,7 +44,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
         context 'when contract_signature has changed' do
           it 'add an error on contract_signature' do
-            @required_operator_document.update_attributes(contract_signature: true)
+            @required_operator_document.update(contract_signature: true)
 
             expect(@required_operator_document.valid?).to eql false
             expect(@required_operator_document.errors[:contract_signature]).to eql(
@@ -55,7 +55,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
         context 'when forest_type has changed' do
           it 'add an error on forest_type' do
-            @required_operator_document.update_attributes(forest_types: [0])
+            @required_operator_document.update(forest_types: [0])
 
             expect(@required_operator_document.valid?).to eql false
             expect(@required_operator_document.errors[:forest_types]).to eql(
@@ -66,7 +66,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
 
         context 'when type has changed' do
           it 'add an error on type' do
-            @required_operator_document.update_attributes(type: 'RequiredOperatorDocumentCountry')
+            @required_operator_document.update(type: 'RequiredOperatorDocumentCountry')
 
             expect(@required_operator_document.valid?).to eql false
             expect(@required_operator_document.errors[:type]).to eql(
@@ -78,7 +78,7 @@ RSpec.describe RequiredOperatorDocument, type: :model do
         context 'when country_id has changed' do
           it 'add an error on country_id' do
             another_country = create(:country)
-            @required_operator_document.update_attributes(country_id: another_country.id)
+            @required_operator_document.update(country_id: another_country.id)
 
             expect(@required_operator_document.valid?).to eql false
             expect(@required_operator_document.errors[:country_id]).to eql(

@@ -68,7 +68,8 @@ module OpDoc
       # required operator document should always have a country, I think
       RequiredOperatorDocument
         .with_translations
-        .where.not(country_id: nil, required_operator_document_group_id: required_operator_group_id_to_exclude)
+        .where.not(country_id: nil)
+        .where.not(required_operator_document_group_id: required_operator_group_id_to_exclude)
         .map do |x|
           { id: x.id, name: beautify_name(x.name) }
         end.sort_by { |x| x[:name] }

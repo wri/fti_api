@@ -100,7 +100,7 @@ RSpec.describe User, type: :model do
             operator = create(:operator)
             user_permission = create(:user_permission, user_role: 3)
             user = user_permission.user
-            user.update_attributes(operator_id: operator.id)
+            user.update(operator_id: operator.id)
 
             expect(user.valid?).to eql false
             expect(user.errors[:operator_id]).to eql(
@@ -114,7 +114,7 @@ RSpec.describe User, type: :model do
             observer = create(:observer)
             user_permission = create(:user_permission, user_role: 3)
             user = user_permission.user
-            user.update_attributes(observer_id: observer.id)
+            user.update(observer_id: observer.id)
 
             expect(user.valid?).to eql false
             expect(user.errors[:observer_id]).to eql(

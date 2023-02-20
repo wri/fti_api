@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'paranoia'
-require 'globalize'
-
 Globalize::ActiveRecord::ActMacro.module_eval do
   def setup_translates_with_paranoia!(options)
     setup_translates_without_paranoia!(options)
