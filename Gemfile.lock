@@ -269,7 +269,7 @@ GEM
       activerecord (>= 4.1)
       concurrent-ruby
       railties (>= 4.1)
-    jwt (2.7.0)
+    jwt (2.3.0)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -614,7 +614,7 @@ DEPENDENCIES
   i18n_generators
   interactor (~> 3.0)
   jsonapi-resources (= 0.9.12)
-  jwt
+  jwt (= 2.3.0)
   letter_opener_web
   listen (~> 3.0.5)
   mini_magick

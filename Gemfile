@@ -73,7 +73,8 @@ gem 'valid_url'
 # Auth and Omniauth
 gem 'bcrypt'
 gem 'cancancan'
-gem 'jwt'
+
+gem 'jwt', '2.3.0' # TODO: updating this requires updating SECRETS across frontend applications
 
 # Uploads
 gem 'carrierwave-base64'
