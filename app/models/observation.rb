@@ -183,7 +183,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   end
 
   def user_name
-    self.try(:user).try(:name)
+    user&.name
   end
 
   def translated_type

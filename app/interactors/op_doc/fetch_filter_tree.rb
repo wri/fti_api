@@ -58,9 +58,7 @@ module OpDoc
     end
 
     def fmu_ids
-      fmu_id = Fmu.arel_table[:id]
-      fmu_name = Arel::Table.new(:fmu_translations)[:name]
-      Fmu.all.with_translations.order(:name).pluck(fmu_id, fmu_name).map{ |x| { id: x[0], name: x[1] } }
+      Fmu.all.with_translations.order(:name).pluck(:id, :name).map{ |x| { id: x[0], name: x[1] } }
     end
 
     def required_operator_document_ids

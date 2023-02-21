@@ -29,12 +29,12 @@ RSpec.describe Notification, type: :model do
   context 'when there is no user_id' do
     let(:notification) { build :notification, user: nil }
     it { is_expected.not_to be_valid }
-    it { expect{ subject.valid? }.to change { subject.errors&.first }.from(nil).to([:user, 'must exist'])}
+    it { expect{ subject.valid? }.to change { subject.errors&.messages&.first }.from(nil).to([:user, ['must exist']])}
   end
 
   context 'when there is no operator document' do
     let(:notification) { build :notification, operator_document: nil }
     it { is_expected.not_to be_valid }
-    it { expect{ subject.valid? }.to change { subject.errors&.first }.from(nil).to([:operator_document, 'must exist'])}
+    it { expect{ subject.valid? }.to change { subject.errors&.messages&.first }.from(nil).to([:operator_document, ['must exist']])}
   end
 end
