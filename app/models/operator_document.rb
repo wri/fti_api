@@ -201,8 +201,8 @@ class OperatorDocument < ApplicationRecord
   end
 
   def reason_or_file
-    return if self.document_file.blank? || self.reason.blank?
+    return if document_file.blank? || reason.blank?
 
-    self.errors[:reason] << 'Cannot have a reason not to have a document'
+    errors.add(:reason, 'Cannot have a reason not to have a document')
   end
 end

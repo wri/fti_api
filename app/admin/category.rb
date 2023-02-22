@@ -47,7 +47,7 @@ ActiveAdmin.register Category do
 
   form do |f|
     edit = f.object.new_record? ? false : true
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.shared.category_details') do
       f.input :category_type, input_html: { disabled: edit }
     end

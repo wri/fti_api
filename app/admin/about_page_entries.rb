@@ -46,7 +46,7 @@ ActiveAdmin.register AboutPageEntry do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'About Page Entries' do
       f.input :position, hint: 'leaving empty will assign last position'
       f.input :code, hint: 'must be "partners" for Partners and "donors" for Donors section'

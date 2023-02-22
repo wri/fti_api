@@ -43,7 +43,7 @@ ActiveAdmin.register RequiredGovDocumentGroup do
   filter :updated_at
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Required Gov Document Group Details' do
       f.input :position
       f.input :parent, collection: RequiredGovDocumentGroup.top_level

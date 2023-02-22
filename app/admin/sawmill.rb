@@ -43,7 +43,7 @@ ActiveAdmin.register Sawmill do
 
   form do |f|
     edit = f.object.new_record? ? false : true
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Sawmill Details' do
       f.input :operator, input_html: { disabled: edit }
       f.input :name

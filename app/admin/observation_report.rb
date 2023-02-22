@@ -129,7 +129,7 @@ ActiveAdmin.register ObservationReport do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.shared.report_details') do
       f.input :user
       f.input :title

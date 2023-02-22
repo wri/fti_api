@@ -31,7 +31,7 @@ ActiveAdmin.register CountryVpa do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Country Vpas Details' do
       f.input :country
       f.input :active

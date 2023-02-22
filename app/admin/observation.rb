@@ -438,7 +438,7 @@ ActiveAdmin.register Observation do
     allow_override = current_user.user_permission.user_role == 'admin'
     visibility = { input_html: { disabled: !allow_override } }
 
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.observations_page.management') do
       f.input :responsible_admin, **visibility,
               as: :select,

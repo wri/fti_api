@@ -38,7 +38,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   filter :updated_at
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Required Operator Document Group Details' do
       f.input :position
       f.translated_inputs switch_locale: false do |t|

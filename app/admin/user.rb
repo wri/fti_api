@@ -85,7 +85,7 @@ ActiveAdmin.register User do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Admin Details' do
       f.inputs for: [:user_permission, f.object.user_permission || UserPermission.new] do |p|
         p.input :user_role, as: :select, collection: UserPermission.user_roles.keys, include_blank: false

@@ -49,7 +49,7 @@ ActiveAdmin.register Country do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.shared.country_details') do
       f.translated_inputs switch_locale: false do |t|
         t.input :name

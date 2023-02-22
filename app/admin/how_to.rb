@@ -22,7 +22,7 @@ ActiveAdmin.register HowTo do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'How To Details' do
       f.input :position
       f.translated_inputs switch_locale: false do |t|

@@ -264,7 +264,7 @@ ActiveAdmin.register OperatorDocument do
   scope I18n.t('active_admin.operator_documents_page.pending'), :doc_pending
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.operator_documents_page.details') do
       f.input :required_operator_document, input_html: { disabled: true }
       f.input :operator, input_html: { disabled: true }

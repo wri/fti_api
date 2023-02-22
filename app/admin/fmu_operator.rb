@@ -50,7 +50,7 @@ ActiveAdmin.register FmuOperator do
 
   form do |f|
     edit = f.object.new_record? ? false : true
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
 
     f.inputs do
       f.input :fmu, as: :select, input_html: { disabled: edit }

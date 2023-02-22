@@ -55,7 +55,7 @@ ActiveAdmin.register RequiredGovDocument do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Required Gov Document Details' do
       editing = object.new_record? ? false : true
       f.input :required_gov_document_group, collection: RequiredGovDocumentGroup
