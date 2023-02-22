@@ -66,7 +66,6 @@ class Observation < ApplicationRecord
 
   STATUS_TRANSITIONS={
     monitor: {
-      nil => ['Created', 'Ready for QC'],
       'Created' => ['Ready for QC'],
       'Needs revision' => ['Ready for QC', 'Published (not modified)', 'Published (modified)'],
       'Ready for publication' => ['Published (no comments)'],

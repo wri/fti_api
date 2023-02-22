@@ -77,10 +77,10 @@ RSpec.describe Observation, type: :model do
       let(:observation) {
         build :observation,
               country: country,
-              validation_status: status,
-              user_type: user_type
+              validation_status: status
       }
       subject {
+        observation.user_type = user_type
         observation.save
         observation
       }
@@ -117,7 +117,17 @@ RSpec.describe Observation, type: :model do
         let(:user_type) { :admin }
 
         before do
-          observation.save(validate: false)
+          # looks like validate: false does not work correctly from Rails 6.0,
+          # and below code breaks in Rails 6.1 because of new active_record.has_many_inversing = true value
+          # belongs_to country is required for observation and as inverse is working then if country is invalid
+          # then observation is invalid, country is invalid because it checks if observations are valid now. I know it's confusing
+          # and I got to that with trial and error
+          # https://github.com/rails/rails/issues/43400
+          # https://github.com/rails/rails/pull/42748
+          #
+          # to not have invalid object I moved
+          # setting user_type to subject to not invoke status_changes validation
+          observation.save # save(validate: false)
           observation.validation_status = new_status
         end
 
@@ -323,7 +333,7 @@ RSpec.describe Observation, type: :model do
       context 'when there is not an user' do
         it 'return nil' do
           observation = create(:observation)
-          observation.update(user_id: nil)
+          observation.update(user: nil)
 
           expect(observation.user_name).to eql nil
         end
