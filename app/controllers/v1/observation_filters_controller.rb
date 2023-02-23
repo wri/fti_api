@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ObservationFiltersController < ApiController
+  class ObservationFiltersController < APIController
     include ErrorSerializer
 
     skip_before_action :authenticate

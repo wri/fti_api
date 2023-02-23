@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class SessionsController < ApiController
+  class SessionsController < APIController
     include ErrorSerializer
 
     skip_before_action :authenticate, only: [:create]

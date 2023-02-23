@@ -30,7 +30,6 @@ module FtiApi
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
     config.load_defaults 6.1
-    config.autoloader = :classic
 
     # ActiveJob
     config.active_job.queue_adapter = :sidekiq

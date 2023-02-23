@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ImportsController < ApiController
+  class ImportsController < APIController
     authorize_resource :file_data_import
 
     def create

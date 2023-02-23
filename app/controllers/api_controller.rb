@@ -3,7 +3,7 @@
 require 'oj'
 require 'auth'
 
-class ApiController < ActionController::API
+class APIController < ActionController::API
   include CanCan::ControllerAdditions
   include JSONAPI::ActsAsResourceController
 

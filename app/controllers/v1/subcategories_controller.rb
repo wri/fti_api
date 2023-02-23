@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class SubcategoriesController < ApiController
+  class SubcategoriesController < APIController
     include ErrorSerializer
 
     skip_before_action :authenticate, only: [:index, :show]

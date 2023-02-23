@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ApiUploads
+module APIUploads
   extend ActiveSupport::Concern
 
   included do
