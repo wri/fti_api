@@ -1401,6 +1401,7 @@ fr:
       default: "%d/%m/%Y"
       short: "%e %b"
       long: "%e %B %Y"
+      standard: "%d/%m/%Y"
     month_names:
     -
     - janvier

@@ -229,7 +229,7 @@ TXT
 
       score_change = NumberHelper.float_to_percentage(current_score.all - last_score.all)
       text_en << ["Your score on #{localized_date(:en, last_score.date)} was #{last_score_percentage}. This means a variation of #{score_change}.", '']
-      text_fr << ["Votre dernier score en #{localized_date(:fr, last_score.date)} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}.", '']
+      text_fr << ["Votre dernier score le #{localized_date(:fr, last_score.date)} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}.", '']
     end
 
     if expiring_docs.any?
@@ -276,6 +276,6 @@ TXT
   # Temporary helper method to display the date localized.
   # TODO: Remove this when using the user's locale for the email
   def localized_date(locale, date)
-    I18n.with_locale(locale) { I18n.l(date) }
+    I18n.with_locale(locale) { I18n.l(date, format: :standard) }
   end
 end

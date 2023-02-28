@@ -1485,6 +1485,7 @@ en:
       default: "%Y-%m-%d"
       long: "%B %d, %Y"
       short: "%b %d"
+      standard: '%d-%m-%Y'
     month_names:
     -
     - January
