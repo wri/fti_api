@@ -34,6 +34,13 @@ module FtiApi
     config.api_only = false
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
+    app_url = URI.parse(ENV.fetch('APP_URL', 'http://localhost:3000'))
+    Rails.application.routes.default_url_options = {
+      host: app_url.host,
+      port: app_url.port,
+      protocol: app_url.scheme
+    }
+
     config.generators do |g|
       g.template_engine nil
       g.test_framework :rspec,

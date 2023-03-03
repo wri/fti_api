@@ -9,9 +9,15 @@ Rails.application.routes.draw do
   match 'admin/fmus/preview' => 'admin/fmus#preview', via: :post
 
   require 'sidekiq/web'
-  authenticate :user, ->(user) { user&.user_permission&.user_role == 'admin' } do
+
+  if Rails.env.development?
     mount Sidekiq::Web => '/admin/sidekiq'
-    mount LetterOpenerWeb::Engine, at: '/admin/letter_opener' if Rails.env.development? || Rails.env.staging?
+    mount LetterOpenerWeb::Engine, at: '/admin/letter_opener'
+  else
+    authenticate :user, ->(user) { user&.user_permission&.user_role == 'admin' } do
+      mount Sidekiq::Web => '/admin/sidekiq'
+      mount LetterOpenerWeb::Engine, at: '/admin/letter_opener' if Rails.env.staging?
+    end
   end
 
   get '/private/uploads/*rest', controller: 'private_uploads', action: 'download'

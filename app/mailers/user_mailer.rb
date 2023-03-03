@@ -1,6 +1,8 @@
 class UserMailer < ApplicationMailer
+  include Rails.application.routes.url_helpers
+
   def forgotten_password(user)
-    @reset_url = ENV['RECOVER_URL'] + '?reset_password_token=' + generate_reset_token(user)
+    @reset_url = generate_reset_url(user)
     @user = user
     mail(to: user.email, subject: 'Requested link to change your password')
   end
@@ -12,10 +14,15 @@ class UserMailer < ApplicationMailer
 
   private
 
+  def generate_reset_url(user)
+    return edit_user_password_url(reset_password_token: generate_reset_token(user)) if user.admin?
+
+    ENV['RECOVER_URL'] + '?reset_password_token=' + generate_reset_token(user)
+  end
+
   def generate_reset_token(user)
-    raw, hashed = Devise.token_generator.generate(User, :reset_password_token)
-    @token = raw
+    token, hashed = Devise.token_generator.generate(User, :reset_password_token)
     user.update(reset_password_token: hashed, reset_password_sent_at: DateTime.now)
-    user.reset_password_token
+    token
   end
 end
