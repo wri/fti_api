@@ -268,8 +268,10 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   # It starts by checking the monitor organization of the uploader to find its responsible person
   # And if it doesn't find any, it iterates through all the monitors
   def set_responsible_admin
+    return if responsible_admin_id
+
     self.responsible_admin_id = user&.observer&.responsible_admin&.id
-    return if self.responsible_admin_id
+    return if responsible_admin_id
 
     observers.each do |observer|
       if observer.responsible_admin.present?
@@ -330,27 +332,26 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   def notify
     return unless @notify
 
-    notify_responsible
+    notify_ready_for_qc if validation_status == 'Ready for QC'
+    notify_published if published?
     notify_observers
-    notify_qc
   end
 
   def notify_observers
     observers.each do |observer|
-      MailService.notify_observers_status_changed(observer, self)
+      observer.users.each do |user|
+        ObserverMailer.observation_status_changed(observer, user, self).deliver_later
+      end
     end
   end
 
-  def notify_responsible
-    return unless validation_status == 'Ready for QC'
-
-    MailService.new.notify_responsible(self).deliver
+  def notify_ready_for_qc
+    ResponsibleAdminMailer.observation_ready_to_qc(self).deliver_later
   end
 
-  def notify_qc
-    return unless ["Published (not modified)", "Published (modified)"].include? validation_status
+  def notify_published
     return unless responsible_admin&.email
 
-    MailService.new.notify_admin_published(self).deliver
+    ObservationMailer.notify_admin_published(self).deliver_later
   end
 end

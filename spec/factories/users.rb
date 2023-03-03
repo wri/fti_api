@@ -38,8 +38,12 @@ FactoryBot.define do
     name { 'Test user' }
     is_active { true }
 
-    after(:build) do |random_user|
-      random_user.user_permission = UserPermission.new(user_role: 0)
+    transient do
+      user_role { :user }
+    end
+
+    after(:build) do |random_user, evaluator|
+      random_user.user_permission = UserPermission.new(user_role: evaluator.user_role)
     end
 
     factory :ngo do

@@ -66,6 +66,17 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
 
+      if Rails.env.staging? || Rails.env.development?
+        columns do
+          column do
+            panel "Email tools" do
+              div { link_to "Check email previews", "/rails/mailers"  }
+              div { link_to "Display all sent emails", letter_opener_web_path }
+            end
+          end
+        end
+      end
+
       columns do
         column do
           panel t('active_admin.dashboard_page.deploy_portal.portal') do

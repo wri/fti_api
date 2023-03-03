@@ -40,17 +40,21 @@ module V1
       end
 
       it 'Register valid user' do
-        post '/register', params: { user: valid_user_params },
-                          headers: non_api_webuser_headers
+        expect {
+          post '/register', params: { user: valid_user_params }, headers: non_api_webuser_headers
+        }.to have_enqueued_mail(SystemMailer, :user_created)
 
         expect(parsed_body).to eq({ messages: [{ status: 201, title: 'User successfully registered!' }] })
         expect(status).to eq(201)
       end
 
       it 'Register valid user with ngo role request' do
-        post('/register',
-             params: { user: valid_user_params.merge(permissions_request: 'ngo', observer_id: create(:observer).id) },
-             headers: non_api_webuser_headers)
+        expect {
+          post('/register',
+            params: { user: valid_user_params.merge(permissions_request: 'ngo', observer_id: create(:observer).id) },
+            headers: non_api_webuser_headers
+          )
+        }.to have_enqueued_mail(SystemMailer, :user_created)
 
         expect(parsed_body).to eq({ messages: [{ status: 201, title: 'User successfully registered!' }] })
         expect(status).to eq(201)

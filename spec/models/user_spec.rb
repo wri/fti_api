@@ -142,25 +142,21 @@ RSpec.describe User, type: :model do
         it "doesn't send the email" do
           created_user = FactoryBot.create(:user, is_active: false)
           created_user.name = 'new name'
-          expect(created_user).not_to receive(:notify_user)
-          created_user.save
+          expect { created_user.save }.not_to have_enqueued_mail(UserMailer, :user_acceptance)
         end
       end
       context 'when the active flag is changed to false' do
         it "doesn't send the email" do
           created_user = FactoryBot.create(:user, is_active: true)
           created_user.is_active = false
-          expect(created_user).not_to receive(:notify_user)
-          created_user.save
+          expect { created_user.save }.not_to have_enqueued_mail(UserMailer, :user_acceptance)
         end
       end
       context "when the active flag is changed to true" do
         it 'sends the email' do
           created_user = FactoryBot.create(:user, is_active: false)
           created_user.is_active = true
-
-          expect(created_user).to receive(:notify_user)
-          created_user.save
+          expect { created_user.save }.to have_enqueued_mail(UserMailer, :user_acceptance)
         end
       end
     end

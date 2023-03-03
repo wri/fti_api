@@ -136,11 +136,8 @@ class User < ApplicationRecord
     APIKey.where(user_id: self.id).delete_all if self.api_key
   end
 
-  def send_reset_password_instructions(url)
-    reset_url  = url + '?reset_password_token=' + generate_reset_token(self)
-
-    result = MailService.new.forgotten_password(display_name, email, reset_url).deliver
-    result
+  def send_reset_password_instructions
+    UserMailer.forgotten_password(self).deliver_later
   end
 
   def reset_password_by_token(options)
@@ -215,6 +212,11 @@ class User < ApplicationRecord
 
   # Sends an email to the user when it is approved
   def notify_user
-    MailService.new.notify_user_acceptance(self).deliver
+    UserMailer.user_acceptance(self).deliver_later
+  end
+
+  # Devise ActiveJob integration
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
   end
 end

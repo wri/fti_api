@@ -1,4 +1,5 @@
 :logfile: ./log/sidekiq.log
+:concurrency: 2
 :queues:
-  - expiration_emails
-  - scheduled_tasks
+  - default
+  - mailers

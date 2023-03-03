@@ -8,9 +8,12 @@ module V1
     context 'Request reset password token' do
       describe 'Valid request' do
         it 'Request password reset token by user' do
-          post('/reset-password',
-               params: { password: { email: user.email }},
-               headers: non_api_webuser_headers)
+          expect {
+            post('/reset-password',
+              params: { password: { email: user.email }},
+              headers: non_api_webuser_headers
+            )
+          }.to have_enqueued_mail(UserMailer, :forgotten_password)
 
           expect(parsed_body).to eq({ messages: [{ status: 200, title: 'Reset password email sent!' }] })
           expect(status).to eq(200)
@@ -19,18 +22,24 @@ module V1
 
       describe 'Not valid request' do
         it 'Returns error object when the user email is not valid' do
-          post('/reset-password',
-               params: { password: { email: 'invalid@gmai.com' }},
-               headers: non_api_webuser_headers)
+          expect {
+            post('/reset-password',
+              params: { password: { email: 'invalid@gmai.com' }},
+              headers: non_api_webuser_headers
+            )
+          }.not_to have_enqueued_mail(UserMailer, :forgotten_password)
 
           expect(parsed_body).to eq(default_status_errors('422_undefined_user'))
           expect(status).to eq(422)
         end
 
         it 'Returns error object when the user email is not valid' do
-          post('/reset-password',
-               params: { password: { any_attribute: '' }},
-               headers: non_api_webuser_headers)
+          expect {
+            post('/reset-password',
+              params: { password: { any_attribute: '' }},
+              headers: non_api_webuser_headers
+            )
+          }.not_to have_enqueued_mail(UserMailer, :forgotten_password)
 
           expect(status).to eq(422)
           expect(parsed_body).to eq(default_status_errors('422_undefined_user'))

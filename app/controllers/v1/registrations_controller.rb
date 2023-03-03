@@ -11,7 +11,7 @@ module V1
       @user = User.new(user_params)
       @user.is_active = false
       if @user.save
-        MailService.new.notify_user_creation(@user).deliver
+        SystemMailer.user_created(@user).deliver_later
         render json: { messages: [{ status: 201, title: 'User successfully registered!' }] }, status: :created
       else
         render json: ErrorSerializer.serialize(@user.errors, 422), status: :unprocessable_entity
