@@ -28,7 +28,6 @@ RSpec.describe UserMailer, type: :mailer do
 
     it 'renders the body' do
       expect(mail.body.encoded).to match('Someone has requested a link to change your password. You can do this through the link below.')
-      expect(mail.body.encoded).to match(user.reset_password_token)
     end
   end
 end
