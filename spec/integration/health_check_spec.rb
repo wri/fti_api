@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Health Check', type: :request do
   describe 'GET #health_check' do
     context 'when all is good' do
-      before { allow(Redis).to receive(:current).and_return(double(ping: 'PONG')) }
+      before { allow(Redis).to receive(:new).and_return(double(ping: 'PONG')) }
       before { allow(Sidekiq::ProcessSet).to receive(:new).and_return(double(size: 1)) }
 
       before { get '/health_check' }
@@ -15,7 +15,7 @@ RSpec.describe 'Health Check', type: :request do
     end
 
     context 'when redis is down' do
-      before { allow(Redis).to receive(:current).and_raise(StandardError) }
+      before { allow(Redis).to receive(:new).and_raise(StandardError) }
 
       before { get '/health_check' }
 
@@ -26,7 +26,7 @@ RSpec.describe 'Health Check', type: :request do
     end
 
     context 'when sidekiq is down' do
-      before { allow(Redis).to receive(:current).and_return(double(ping: 'PONG')) }
+      before { allow(Redis).to receive(:new).and_return(double(ping: 'PONG')) }
       before { allow(Sidekiq::ProcessSet).to receive(:new).and_return(double(size: 0)) }
 
       before { get '/health_check' }
@@ -38,7 +38,7 @@ RSpec.describe 'Health Check', type: :request do
     end
 
     context 'when database is down' do
-      before { allow(Redis).to receive(:current).and_return(double(ping: 'PONG')) }
+      before { allow(Redis).to receive(:new).and_return(double(ping: 'PONG')) }
       before { allow(Sidekiq::ProcessSet).to receive(:new).and_return(double(size: 1)) }
       before { allow(ApplicationRecord).to receive(:connection).and_raise(StandardError) }
 
