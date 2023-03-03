@@ -80,7 +80,6 @@ module OpDoc
       Operator
         .filter_by_country_ids(country_ids.pluck(:id))
         .active.fa_operator
-        .with_translations
         .includes(:fmu_operators).map do |x| # Beware includes :fmus is pretty slow, something with translations
           fmu_ids = x.fmu_operators.pluck(:fmu_id).sort
           {

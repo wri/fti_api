@@ -27,13 +27,9 @@
 
 class Operator < ApplicationRecord
   has_paper_trail
-  include Translatable
-  translates :name, :details, touch: true, versioning: :paper_trail
 
-  active_admin_translates :name, :details do
-    validates :name, presence: true
-    validates :name, uniqueness: { case_sensitive: false, scope: :locale }, on: :create
-  end
+  validates :name, presence: true
+  validates :name, uniqueness: { case_sensitive: false }, on: :create
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
@@ -80,22 +76,19 @@ class Operator < ApplicationRecord
   after_update :create_documents, if: -> { saved_change_to_fa_id? && fa_id_before_last_save.blank? }
   after_update :refresh_ranking, if: -> { saved_change_to_fa_id? || saved_change_to_is_active? }
 
+  after_save :update_operator_name_on_fmus, if: :saved_change_to_name?
+
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }, on: :create # TODO: after dealing with duplicates remove on: :create
   validates :website, url: true, if: lambda { |x| x.website.present? }
   validates :operator_type, inclusion: { in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(', ')} " }
   validates :country, presence: true, on: :create
 
-  scope :by_name_asc, -> {
-    includes(:translations).with_translations(I18n.available_locales)
-                           .order('operator_translations.name ASC')
-  }
+  scope :by_name_asc, -> { order(name: :asc) }
 
   scope :active,   -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
   scope :fa_operator, -> { where("fa_id <> ''") }
-
-  default_scope { includes(:translations) }
 
   scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
 
@@ -108,16 +101,6 @@ class Operator < ApplicationRecord
       fa_operator.where(country_id: country_id)
     end
   }
-
-  ransacker(:name) { Arel.sql('operator_translations.name') } # for nested_select in observation form
-
-  class Translation
-    after_save do
-      if saved_change_to_name? && locale == :en
-        Operator.find_by(id: operator_id)&.fmus&.find_each { |fmu| fmu.save }
-      end
-    end
-  end
 
   class << self
     def fetch_all(options)
@@ -141,10 +124,6 @@ class Operator < ApplicationRecord
     end
   end
 
-  def cache_key
-    super + '-' + Globalize.locale.to_s
-  end
-
   def can_hard_delete?
     all_fmus.with_deleted.none? &&
       all_observations.with_deleted.none? &&
@@ -153,6 +132,12 @@ class Operator < ApplicationRecord
   end
 
   private
+
+  # Saves the fmus of the operator to update the operator's name.
+  # This is called in an `after_save` to keep the name of the operator in the fmu's geojson property in sync
+  def update_operator_name_on_fmus
+    fmus.find_each(&:save)
+  end
 
   def recalculate_scores
     ScoreOperatorDocument.recalculate!(self)

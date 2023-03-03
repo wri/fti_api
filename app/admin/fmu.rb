@@ -47,7 +47,7 @@ ActiveAdmin.register Fmu do
   filter :country, as: :select,
                    collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
   filter :operator_in_all, label: I18n.t('activerecord.attributes.fmu.operator'), as: :select,
-                           collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name') }
+                           collection: -> { Operator.order(:name) }
 
   csv do
     column :id
@@ -125,7 +125,7 @@ ActiveAdmin.register Fmu do
 
     f.inputs I18n.t('activerecord.models.operator'), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
       fo.input :operator_id, label: I18n.t('activerecord.attributes.fmu/translation.name'), as: :select,
-                             collection: Operator.active.with_translations.map{ |o| [o.name, o.id] },
+                             collection: Operator.active.map{ |o| [o.name, o.id] },
                              input_html: { disabled: object.persisted? }, required: false
       fo.input :start_date, input_html: { disabled: object.persisted? }, required: false
       fo.input :end_date, input_html: { disabled: object.persisted? }

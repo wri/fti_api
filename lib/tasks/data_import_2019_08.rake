@@ -110,7 +110,7 @@ namespace :import do
 
           name = properties['fmu_name'].strip
           operator_name = properties['company_na']&.strip
-          operator =  Operator.with_translations.find_by("lower(trim(name)) = ?", operator_name.downcase)
+          operator =  Operator.find_by("lower(trim(name)) = ?", operator_name.downcase)
           puts "Creating Operator: #{operator_name}" unless (operator.present? || operator_name.blank?)
           operator ||= Operator.create!(name:operator_name,
                                         country_id: country.id,

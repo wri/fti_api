@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_12_102606) do
+ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
@@ -729,18 +729,6 @@ ActiveRecord::Schema.define(version: 2023_01_12_102606) do
     t.index ["type"], name: "index_operator_documents_on_type"
   end
 
-  create_table "operator_translations", id: :serial, force: :cascade do |t|
-    t.integer "operator_id", null: false
-    t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-    t.text "details"
-    t.index ["locale"], name: "index_operator_translations_on_locale"
-    t.index ["name", "operator_id"], name: "index_operator_translations_on_name_and_operator_id"
-    t.index ["operator_id"], name: "index_operator_translations_on_operator_id"
-  end
-
   create_table "operators", id: :serial, force: :cascade do |t|
     t.string "operator_type"
     t.integer "country_id"
@@ -758,6 +746,8 @@ ActiveRecord::Schema.define(version: 2023_01_12_102606) do
     t.integer "holding_id"
     t.integer "country_doc_rank"
     t.integer "country_operators"
+    t.string "name"
+    t.string "details"
     t.index ["approved"], name: "index_operators_on_approved"
     t.index ["country_id"], name: "index_operators_on_country_id"
     t.index ["fa_id"], name: "index_operators_on_fa_id"

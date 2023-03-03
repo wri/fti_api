@@ -20,7 +20,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:user, annex_documents: [documentable: [operator: :translations, required_operator_document: :translations]]])
+      end_of_association_chain.includes([:user, annex_documents: [documentable: [:operator, required_operator_document: :translations]]])
     end
   end
 
@@ -121,10 +121,10 @@ ActiveAdmin.register OperatorDocumentAnnex do
          label: I18n.t('active_admin.operator_document_annexes_page.operator_document'),
          collection: -> { RequiredOperatorDocument.order(:name).pluck(:name) }
 
-  filter :annex_documents_documentable_of_OperatorDocument_type_operator_translations_name_equals,
+  filter :annex_documents_documentable_of_OperatorDocument_type_operator_name_equals,
          as: :select,
          label: I18n.t('activerecord.models.operator'),
-         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name) }
+         collection: -> { Operator.order(:name).pluck(:name) }
   filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
          as: :select,
          label: I18n.t('activerecord.models.fmu.one'),

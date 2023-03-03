@@ -10,8 +10,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   actions :all
   permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
-                :logo, :delete_logo, :email, fmu_ids: [],
-                                             translations_attributes: [:id, :locale, :name, :details, :_destroy]
+                :logo, :delete_logo, :email, fmu_ids: []
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -78,7 +77,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
     column :id
     column :holding
     column :country, sortable: 'country_translations.name'
-    column :name, sortable: 'operator_translations.name'
+    column :name, sortable: :name
     column :fmu do |operator|
       fmus = []
       operator.fmus.each do |fmu|
@@ -119,8 +118,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
          as: :select,
          collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
   filter :id,
-         as: :select, label: I18n.t('activerecord.attributes.operator/translation.name'),
-         collection: -> { Operator.with_translations(I18n.locale).order('operator_translations.name').pluck(:name, :id) }
+         as: :select, label: I18n.t('activerecord.attributes.operator.name'),
+         collection: -> { Operator.order(:name).pluck(:name, :id) }
   filter :concession, as: :select
   filter :fa_id_present, as: :boolean, label: I18n.t('active_admin.operator_page.with_fa_uuid')
   filter :fmus_id_null, as: :boolean, label: I18n.t('active_admin.operator_page.fmus_id_null')
@@ -181,10 +180,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
     edit = f.object.new_record? ? false : true
     f.semantic_errors *f.object.errors.keys
     f.inputs I18n.t('active_admin.operator_page.operator_details') do
-      f.translated_inputs switch_locale: false do |t|
-        t.input :name
-        t.input :details
-      end
+      f.input :name
+      f.input :details
       f.input :holding, as: :select
       f.input :email
       f.input :fa_id, as: :string, label: I18n.t('active_admin.operator_page.with_fa_uuid')
@@ -289,12 +286,11 @@ ActiveAdmin.register Operator, as: 'Producer' do
 
   controller do
     def find_resource
-      scoped_collection.unscope(:joins).with_translations.where(id: params[:id]).first!
+      scoped_collection.unscope(:joins).where(id: params[:id]).first!
     end
 
     def scoped_collection
       end_of_association_chain
-        .with_translations(I18n.locale)
         .includes(
           :score_operator_document,
           :score_operator_observation,
