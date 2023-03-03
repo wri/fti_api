@@ -71,15 +71,13 @@ module V1
 
     def operator_ids
       having_published_observations = Observation.published.select(:operator_id).distinct.pluck(:operator_id)
-      name_column = Arel.sql('operator_translations.name')
 
       Operator
         .where(id: having_published_observations)
         .includes(:fmus)
-        .with_translations(I18n.locale)
-        .group(:id, name_column)
-        .order(name_column)
-        .pluck(:id, name_column, Arel.sql('array_agg(fmus.id) fmu_ids'))
+        .group(:id, :name)
+        .order(:name)
+        .pluck(:id, :name, Arel.sql('array_agg(fmus.id) fmu_ids'))
         .map do |x|
           { id: x[0], name: x[1], fmus: x[2] }
         end
