@@ -23,10 +23,6 @@ module OperatorDocumentable
 
     privateable :document_visible?, [:start_date, :expire_date, :note, :reason, :response_date, :source_info, :uploaded_by, :created_at, :updated_at]
 
-    def custom_links(_)
-      { self: nil }
-    end
-
     def source_type
       return nil unless document_visible?
 

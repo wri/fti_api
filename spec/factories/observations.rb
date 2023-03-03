@@ -61,6 +61,7 @@ FactoryBot.define do
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     user { build(:admin) }
     observation_type { 'government' }
+    validation_status { 'Published (no comments)' }
     is_active { true }
     publication_date { DateTime.now.yesterday.to_date }
     lng { 12.2222 }
@@ -71,6 +72,7 @@ FactoryBot.define do
     country
     subcategory
     observation_report
+    law
     user { build(:admin) }
     severity { build(:severity, subcategory: subcategory) }
     operator { create(:operator, country: country) }

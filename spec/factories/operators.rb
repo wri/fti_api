@@ -28,7 +28,7 @@ FactoryBot.define do
     country
     sequence(:name) { |n| "Operator #{n}" }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
-    operator_type { Operator::TYPES.sample }
+    operator_type { 'Logging company' }
     is_active { true }
 
     trait :with_sawmills do

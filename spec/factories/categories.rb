@@ -11,7 +11,7 @@
 
 FactoryBot.define do
   factory :category do
-    sequence(:name) { |n| "#{n} Category #{Faker::Address.country}" }
-    category_type { rand(0..1) }
+    name { "Category name" }
+    category_type { "operator" }
   end
 end
