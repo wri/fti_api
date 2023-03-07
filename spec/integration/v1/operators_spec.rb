@@ -14,7 +14,7 @@ module V1
         invalid_params: -> { { name: existing_operator.name.downcase, 'operator-type': 'Other' } },
         error_attributes: [422, 100, { name: ["has already been taken"], relationships_country: ["can't be blank"] }],
         expect_on_success: -> {
-          expect(ActionMailer::DeliveryJob).to have_been_enqueued.with('SystemMailer', 'operator_created', 'deliver_now', Operator.last)
+          expect(ActionMailer::MailDeliveryJob).to have_been_enqueued.with('SystemMailer', 'operator_created', 'deliver_now', { args: [Operator.last] })
         }
       },
       edit: {

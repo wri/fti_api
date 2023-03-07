@@ -247,7 +247,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     def find_collection(options = {})
       collection = ObservationStatistic.query_dashboard_report(params[:q] || {})
       # keep the ransack to maintain filters in active admin
-      @search = ObservationStatistic.search(params[:q] || {})
+      @search = ObservationStatistic.ransack(params[:q] || {})
       # collection must be paged otherwise aa is complaining
       Kaminari.paginate_array(collection).page(@page).per(@per_page)
     end

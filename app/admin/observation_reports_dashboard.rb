@@ -81,7 +81,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
             end
       observer_ids = Observer.with_at_least_one_report.pluck(:id)
 
-      @search = col.search(params[:q] || {})
+      @search = col.ransack(params[:q] || {})
       @search.result.select(
         :date,
         :country_id,

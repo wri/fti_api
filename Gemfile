@@ -14,8 +14,8 @@ gem 'bootsnap'
 # Active admin
 gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
-gem 'activeadmin', '~> 1.3.0'
-gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'coingecko/activeadmin-globalize', branch: 'develop'
+gem 'activeadmin'
+gem 'activeadmin-globalize', github: 'tsubik/activeadmin-globalize', branch: 'rails-7'
 gem 'activeadmin_addons'
 
 gem 'sass-rails'
@@ -35,12 +35,15 @@ gem 'groupdate'
 gem 'devise'
 
 # Soft Delete
-gem 'paranoia', "~> 2.2"
+# version 2.6.0 will not work in this app because until the way operator document is regenerated after destroy is changed
+# here is the reason https://github.com/rubysherpas/paranoia/pull/485/files#diff-11d24643784dae175b47e4df1207f1184300711d4f728e730c06fbecf300cd7fR76-R77
+# if model is not deleted in destroy action then everything is rolled back
+gem 'paranoia', '~> 2.5.3'
 
 # Rails and DB
 gem 'activerecord-postgis-adapter'
 gem 'pg',    '~> 0.18'
-gem 'rails', '~> 5.2.8'
+gem 'rails', '~> 6.0.6'
 gem 'rgeo'
 gem 'rgeo-geojson'
 
@@ -55,13 +58,13 @@ gem 'rswag-api'
 gem 'rswag-ui'
 
 # Activejob
-gem 'sidekiq'
+gem 'sidekiq', '~> 5'
 
 # Data
 gem 'activerecord-import'
 gem 'acts_as_list'
 gem 'countries', require: false # for update translations job, so require only there
-gem 'globalize', '5.2.0'
+gem 'globalize', '~> 5.3'
 gem 'seed-fu'
 
 # Validation

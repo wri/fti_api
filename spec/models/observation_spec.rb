@@ -298,7 +298,7 @@ RSpec.describe Observation, type: :model do
           observation_report = create(:observation_report)
           observation = create(:observation)
 
-          observation.update_attributes(observation_report_id: observation_report.id)
+          observation.update(observation_report_id: observation_report.id)
 
           # To avoid unscope joins
           expect(observation_report.observer_ids.uniq).to eql(
@@ -323,7 +323,7 @@ RSpec.describe Observation, type: :model do
       context 'when there is not an user' do
         it 'return nil' do
           observation = create(:observation)
-          observation.update_attributes(user_id: nil)
+          observation.update(user_id: nil)
 
           expect(observation.user_name).to eql nil
         end

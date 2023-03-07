@@ -65,7 +65,7 @@ FactoryBot.define do
     end
 
     after(:create) do |doc, evaluator|
-      doc.update_attributes(status: evaluator.force_status) if evaluator.force_status
+      doc.update(status: evaluator.force_status) if evaluator.force_status
     end
   end
 end

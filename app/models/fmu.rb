@@ -23,9 +23,6 @@
 #  deleted_at           :datetime
 #
 
-require_relative '../../lib/file_data_import/parser/zip'
-require_relative '../../lib/file_data_import/parser/shp'
-require_relative '../../lib/file_data_import/parser/base'
 class Fmu < ApplicationRecord
   has_paper_trail
   acts_as_paranoid

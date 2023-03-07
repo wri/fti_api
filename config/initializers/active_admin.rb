@@ -153,11 +153,21 @@ ActiveAdmin.setup do |config|
     super
   end
 
+  # == Attribute Filters
+  #
+  # You can exclude possibly sensitive model attributes from being displayed,
+  # added to forms, or exported by default by ActiveAdmin
+  #
+  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+
   # == Localize Date/Time Format
   #
   # Set the localize format to display dates and times.
   # To understand how to localize your app with I18n, read more at
-  # https://github.com/svenfuchs/i18n/blob/master/lib%2Fi18n%2Fbackend%2Fbase.rb#L52
+  # https://guides.rubyonrails.org/i18n.html
+  #
+  # You can run `bin/rails runner 'puts I18n.t("date.formats")'` to see the
+  # available formats in your application.
   #
   config.localize_format = :long
 
@@ -236,9 +246,28 @@ ActiveAdmin.setup do |config|
   #     end
   #   end
 
-  config.view_factory.header = CustomAdminHeader
+  config.view_factory.register header: CustomAdminHeader
 
   # == Download Links
+  #
+  # You can disable download links on resource listing pages,
+  # or customize the formats shown per namespace/globally
+  #
+  # To disable/customize for the :admin namespace:
+  #
+  #   config.namespace :admin do |admin|
+  #
+  #     # Disable the links entirely
+  #     admin.download_links = false
+  #
+  #     # Only show XML & PDF options
+  #     admin.download_links = [:xml, :pdf]
+  #
+  #     # Enable/disable the links based on block
+  #     #   (for example, with cancan)
+  #     admin.download_links = proc { can?(:view_download_links) }
+  #
+  #   end
 
   config.namespace :admin do |admin|
     admin.download_links = [:csv, :json]
@@ -264,11 +293,30 @@ ActiveAdmin.setup do |config|
   # config.filters = true
   #
   # By default the filters include associations in a select, which means
-  # that every record will be loaded for each association.
+  # that every record will be loaded for each association (up
+  # to the value of config.maximum_association_filter_arity).
   # You can enabled or disable the inclusion
   # of those filters by default here.
   #
   # config.include_default_association_filters = true
+  # config.maximum_association_filter_arity = 256 # default value of :unlimited will change to 256 in a future version
+  # config.filter_columns_for_large_association = [
+  #    :display_name,
+  #    :full_name,
+  #    :name,
+  #    :username,
+  #    :login,
+  #    :title,
+  #    :email,
+  #  ]
+  # config.filter_method_for_large_association = '_starts_with'
+
+  # == Head
+  #
+  # You can add your own content to the site head like analytics. Make sure
+  # you only pass content you trust.
+  #
+  # config.head = ''.html_safe
 
   # == Footer
   #
@@ -284,6 +332,13 @@ ActiveAdmin.setup do |config|
   #
   # config.order_clause = MyOrderClause
 
+  # == Webpacker
+  #
+  # By default, Active Admin uses Sprocket's asset pipeline.
+  # You can switch to using Webpacker here.
+  #
+  # config.webpacker = true
+
   # These two are defined in ActiveAdmin::FilterSaver::Controller, which is loaded below.
   config.before_action :restore_search_filters, unless: :devise_controller?
   config.before_action do
@@ -295,9 +350,6 @@ ActiveAdmin.setup do |config|
   end
   config.after_action :save_search_filters, unless: :devise_controller?
 end
-
-require 'active_admin/filter_saver/controller'
-require 'active_admin/paper_trail/show_page_extension'
 
 ActiveAdmin.before_load do |app|
   # Add Filters Extensions

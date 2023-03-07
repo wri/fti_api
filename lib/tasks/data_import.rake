@@ -93,7 +93,7 @@ namespace :import do
           rodg = RequiredOperatorDocumentGroup.where(name: data_row['group_en']).first
           if rodg.blank?
             rodg =  RequiredOperatorDocumentGroup.new(name: data_row['group_en'])
-            rodg.update_attributes!(name: data_row['group_fr'], locale: :fr)
+            rodg.update!(name: data_row['group_fr'], locale: :fr)
           end
         end
 
@@ -170,7 +170,7 @@ namespace :import do
           subcategory = Subcategory.where(name: data_row['illegality'],
                                           subcategory_type: Subcategory.subcategory_types[:operator],
                                           category_id: category.id).first_or_create!
-          subcategory.update_attributes(name: data_row['illegality_fr'], locale: :fr)
+          subcategory.attributes = {name: data_row['illegality_fr'], locale: :fr}
 
           subcategory.save!
 
@@ -220,7 +220,7 @@ namespace :import do
 
         subcategory.save!
 
-        subcategory.update_attributes(name: data_row['governance_problem_fr'], locale: :fr)
+        subcategory.attributes = {name: data_row['governance_problem_fr'], locale: :fr}
         if subcategory.severities.empty?
           (0..3).each do |s|
             sev = subcategory.severities.build(level: s, details: data_row["severity_#{s}"] || 'Not specified')
@@ -295,10 +295,10 @@ namespace :import do
 
         oo = Observation.create(data_oo)
         severity_id = oo.subcategory.severities.find_by(level: data_row['severities']).id
-        oo.update_attributes!(severity_id: severity_id)
+        oo.assign_attributes(severity_id: severity_id)
 
         fmu = Fmu.find_by(name: data_row['concession'])
-        oo.update_attributes(fmu_id: fmu.id) if fmu.present?
+        oo.assign_attributes(fmu_id: fmu.id) if fmu.present?
 
         oo.observation_report = report if report.present?
         oo.save

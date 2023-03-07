@@ -192,12 +192,12 @@ RSpec.describe OperatorDocument, type: :model do
         # Generate one valid operator document and two pending operator documents of each type
         valid_op_doc = create(:operator_document_country, **common_data)
         valid_op_doc.reload
-        valid_op_doc.update_attributes(status: valid_status)
+        valid_op_doc.update(status: valid_status)
         @operator.reload
 
         pending_op_docs = create_list(:operator_document_country, 2, **common_data)
         pending_op_docs.each do |pending_op_doc|
-          pending_op_doc.update_attributes(status: pending_status)
+          pending_op_doc.update(status: pending_status)
           @operator.reload
         end
       end
@@ -213,7 +213,7 @@ RSpec.describe OperatorDocument, type: :model do
         ).first
 
         expect {
-          operator_document.update_attributes(status: OperatorDocument.statuses[:doc_not_required])
+          operator_document.update(status: OperatorDocument.statuses[:doc_not_required])
         }.to change { OperatorDocumentHistory.count }.by(1)
 
         @operator.reload

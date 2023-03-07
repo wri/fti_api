@@ -77,7 +77,7 @@ module V1
         .includes(:fmus)
         .group(:id, :name)
         .order(:name)
-        .pluck(:id, :name, 'array_agg(fmus.id) fmu_ids')
+        .pluck(:id, :name, Arel.sql('array_agg(fmus.id) fmu_ids'))
         .map do |x|
           { id: x[0], name: x[1], fmus: x[2] }
         end
