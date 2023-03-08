@@ -133,7 +133,7 @@ ActiveAdmin.register ObservationReport do
     f.inputs I18n.t('active_admin.shared.report_details') do
       f.input :user
       f.input :title
-      f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false }
+      f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false, format: 'Y-m-d' }
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
 
       f.actions

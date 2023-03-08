@@ -535,7 +535,7 @@ ActiveAdmin.register Observation do
       end
       f.input :publication_date,
               as: :date_time_picker,
-              picker_options: { timepicker: false },
+              picker_options: { timepicker: false, format: 'Y-m-d' },
               **visibility
       f.input :pv, **visibility
       f.input :location_accuracy, as: :select, **visibility
