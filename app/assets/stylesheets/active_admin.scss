@@ -30,7 +30,7 @@ $panelHeaderBck: #317a4b;
 $skinLogo: image_url("logo.svg") no-repeat 0 0;
 @import "active_skin";
 
-@import "new_menu.sass";
+@import "new_menu";
 
 
 // .ActiveAdmin Add-ons
@@ -86,6 +86,7 @@ $to-be-reviewed: #99AA99;
 form input.deploy-button {
   font-size: 1.5em;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .form-control-checkbox {
@@ -161,4 +162,19 @@ body.active_admin {
   *:after {
     box-sizing: unset;
   }
+}
+
+// trying to revert this https://github.com/activeadmin/activeadmin/commit/7dd9bc89716603ba602985baf720c7d4623fbe07
+#title_bar {
+  box-sizing: border-box;
+}
+
+.filter_date_range {
+  input[type=text] {
+    box-sizing: border-box;
+  }
+}
+
+.ui-datepicker-header {
+  width: 147px !important;
 }
