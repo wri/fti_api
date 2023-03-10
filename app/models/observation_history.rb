@@ -38,6 +38,7 @@ class ObservationHistory < ApplicationRecord
                         "Maps" => 6 }
   enum location_accuracy: { "Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
                             "Accurate GPS coordinates" => 2 }
+  enum fmu_forest_type: Fmu::FOREST_TYPES.map { |x| { x.first => x.last[:index] } }.reduce({}, :merge)
 
   belongs_to :observation
   belongs_to :country

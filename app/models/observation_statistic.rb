@@ -44,6 +44,7 @@ class ObservationStatistic < ApplicationRecord
     "Published (all)" => 789 # extra state for looking for all published
   }
   enum observation_type: { "operator" => 0, "government" => 1 }
+  enum fmu_forest_type: Fmu::FOREST_TYPES.map { |x| { x.first => x.last[:index] } }.reduce({}, :merge)
 
   validates_presence_of :date
 
