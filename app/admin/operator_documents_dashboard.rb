@@ -23,7 +23,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
            [I18n.t('activerecord.enums.operator_document.types.fmu'), :fmu],
            [I18n.t('activerecord.enums.operator_document.types.country'), :country]
          ]
-  filter :fmu_forest_type_eq, label: proc{ I18n.t('activerecord.attributes.fmu.forest_type') }, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  filter :fmu_forest_type_eq, label: proc{ I18n.t('activerecord.attributes.fmu.forest_type') }, as: :select, collection: -> { ForestType.select_collection }
   filter :date
 
   index title: I18n.t('active_admin.producer_documents_dashboard_page.name'), pagination_total: false do
@@ -48,7 +48,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
       if r.fmu_forest_type.nil?
         I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
-        Fmu.forest_types.key(r.fmu_forest_type)
+        ForestType::TYPES[r.fmu_forest_type][:label]
       end
     end
     column :document_type do |r|
@@ -131,7 +131,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
       if r.fmu_forest_type.nil?
         I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
-        Fmu.forest_types.key(r.fmu_forest_type)
+        ForestType::TYPES[r.fmu_forest_type][:label]
       end
     end
     column :document_type do |r|

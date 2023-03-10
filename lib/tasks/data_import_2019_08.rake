@@ -134,7 +134,7 @@ namespace :import do
             if properties['iso3_fmu'] == 'CAF'
               fmu.forest_type = :pea
             else
-              fmu.forest_type = (Fmu::FOREST_TYPES.select{|_,v| v[:geojson_label] == properties['fmu_type_label']}).first.first rescue 'fmu'
+              fmu.forest_type = (ForestType::TYPES.select{|_,v| v[:geojson_label] == properties['fmu_type_label']}).first.first rescue 'fmu'
             end
           end
           fmus[country.iso.to_sym] << fmu.name
