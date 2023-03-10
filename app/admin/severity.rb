@@ -55,7 +55,7 @@ ActiveAdmin.register Severity do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     editing = object.new_record? ? false : true
     f.inputs I18n.t('active_admin.shared.severity_details') do
       f.input :subcategory,  input_html: { disabled: editing }

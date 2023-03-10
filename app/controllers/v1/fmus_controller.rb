@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class FmusController < ApiController
+  class FmusController < APIController
     include ErrorSerializer
 
     skip_before_action :authenticate, only: %w[index tiles]

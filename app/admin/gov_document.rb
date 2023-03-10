@@ -92,7 +92,7 @@ ActiveAdmin.register GovDocument do
   filter :updated_at
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Government Document Details' do
       f.input :country, as: :string,
                         input_html: { disabled: true, value: resource&.required_gov_document&.country&.name }

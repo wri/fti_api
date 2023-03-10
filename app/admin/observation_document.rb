@@ -71,7 +71,7 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   filter :deleted_at
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Evidence Details' do
       f.input :observation, collection: Observation.all.map { |o| [o.id, o.id] }, input_html: { disabled: true }
       f.input :user, input_html: { disabled: true }

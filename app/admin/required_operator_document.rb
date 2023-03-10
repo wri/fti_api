@@ -64,7 +64,7 @@ ActiveAdmin.register RequiredOperatorDocument do
   filter :updated_at
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.required_operator_document_page.details') do
       editing = object.new_record? ? false : true
       f.input :required_operator_document_group

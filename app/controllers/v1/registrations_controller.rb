@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class RegistrationsController < ApiController
+  class RegistrationsController < APIController
     include ErrorSerializer
 
     skip_before_action :authenticate

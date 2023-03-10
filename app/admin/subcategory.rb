@@ -70,7 +70,7 @@ ActiveAdmin.register Subcategory do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     edit = f.object.new_record? ? false : true
     f.inputs I18n.t('active_admin.shared.subcategory_details') do
       f.input :category,          input_html: { disabled: edit }

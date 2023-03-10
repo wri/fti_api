@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class FaqsController < ApiController
+  class FaqsController < APIController
     include ErrorSerializer
 
     skip_before_action :authenticate, only: [:index, :show]

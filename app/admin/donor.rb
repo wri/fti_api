@@ -37,7 +37,7 @@ ActiveAdmin.register Donor do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs 'Translated fields' do
       f.translated_inputs switch_locale: false do |t|
         t.input :name

@@ -138,7 +138,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   scope I18n.t('active_admin.operator_document_annexes_page.orphaned'), :orphaned
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.operator_document_annexes_page.details') do
       f.input :operator_document_name, label: I18n.t('active_admin.operator_document_annexes_page.operator_document'),
                                        input_html: { disabled: true }

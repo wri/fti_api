@@ -1,4 +1,5 @@
 @import 'activeadmin_addons/all';
+@import 'activeadmin/quill_editor/quill.snow';
 @import 'activeadmin/quill_editor_input';
 
 @import 'active_admin/active_admin_globalize';
@@ -30,7 +31,7 @@ $panelHeaderBck: #317a4b;
 $skinLogo: image_url("logo.svg") no-repeat 0 0;
 @import "active_skin";
 
-@import "new_menu.sass";
+@import "new_menu";
 
 
 // .ActiveAdmin Add-ons
@@ -86,6 +87,7 @@ $to-be-reviewed: #99AA99;
 form input.deploy-button {
   font-size: 1.5em;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .form-control-checkbox {
@@ -152,3 +154,33 @@ body.active_admin {
 .select2-container--default .select2-results__option[aria-disabled=true] {
   display: none;
 }
+
+
+// fixing layout issues https://github.com/activeadmin/activeadmin/issues/7667
+body.active_admin {
+  *,
+  *:before,
+  *:after {
+    box-sizing: unset;
+  }
+}
+
+// trying to revert this https://github.com/activeadmin/activeadmin/commit/7dd9bc89716603ba602985baf720c7d4623fbe07
+#title_bar {
+  box-sizing: border-box;
+}
+
+.filter_date_range {
+  input[type=text] {
+    box-sizing: border-box;
+  }
+}
+
+.ui-datepicker-header {
+  width: 147px !important;
+}
+
+.xdsoft_datetimepicker * {
+  box-sizing: border-box !important;
+}
+

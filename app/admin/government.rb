@@ -65,7 +65,7 @@ ActiveAdmin.register Government do
 
   form do |f|
     edit = f.object.new_record? ? false : true
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.shared.government_details') do
       f.input :is_active
       f.input :country, input_html: { disabled: edit }

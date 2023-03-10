@@ -9,7 +9,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'bootsnap'
+gem 'bootsnap', require: false
 
 # Active admin
 gem 'active_admin_paranoia'
@@ -42,8 +42,8 @@ gem 'paranoia', '~> 2.5.3'
 
 # Rails and DB
 gem 'activerecord-postgis-adapter'
-gem 'pg',    '~> 0.18'
-gem 'rails', '~> 6.0.6'
+gem 'pg'
+gem 'rails', '~> 6.1.7'
 gem 'rgeo'
 gem 'rgeo-geojson'
 
@@ -64,7 +64,7 @@ gem 'sidekiq', '~> 5'
 gem 'activerecord-import'
 gem 'acts_as_list'
 gem 'countries', require: false # for update translations job, so require only there
-gem 'globalize', '~> 5.3'
+gem 'globalize'
 gem 'seed-fu'
 
 # Validation
@@ -119,10 +119,13 @@ group :development do
   gem 'capistrano-rvm'
   gem 'guard'
   gem 'i18n_generators'
-  gem 'listen',                    '~> 3.0.5'
+  gem 'listen', '~> 3.3'
   gem 'pry-rails'
+  # Display performance information such as SQL time and flame graphs for each request in your browser.
+  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  gem 'rack-mini-profiler', '~> 2.0'
   gem 'spring'
-  gem 'spring-watcher-listen',     '~> 2.0.0'
+  gem 'web-console', '>= 4.1.0'
 end
 
 group :test do

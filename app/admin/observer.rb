@@ -101,7 +101,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.shared.translated_fields') do
       f.translated_inputs switch_locale: false do |t|
         t.input :name

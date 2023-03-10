@@ -50,13 +50,13 @@ ActiveAdmin.register FmuOperator do
 
   form do |f|
     edit = f.object.new_record? ? false : true
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
 
     f.inputs do
       f.input :fmu, as: :select, input_html: { disabled: edit }
       f.input :operator, as: :select, input_html: { disabled: edit }
-      f.input :start_date, as: :date_time_picker, picker_options: { timepicker: false }
-      f.input :end_date, as: :date_time_picker, picker_options: { timepicker: false }
+      f.input :start_date, as: :date_time_picker, picker_options: { timepicker: false, format: 'Y-m-d' }
+      f.input :end_date, as: :date_time_picker, picker_options: { timepicker: false, format: 'Y-m-d' }
       f.input :current
     end
 

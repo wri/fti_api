@@ -106,7 +106,7 @@ ActiveAdmin.register Fmu do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.keys
+    f.semantic_errors *f.object.errors.attribute_names
     f.inputs I18n.t('active_admin.shared.fmu_details') do
       f.input :country,  input_html: { disabled: object.persisted? }, required: true
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
