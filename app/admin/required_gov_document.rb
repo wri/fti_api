@@ -18,10 +18,11 @@ ActiveAdmin.register RequiredGovDocument do
       .left_joins(:parent)
       .order(Arel.sql('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)'))
   }
-  filter :country
+  filter :country, collection: -> { Country.by_name_asc.where(id: RequiredGovDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :document_type, as: :select, collection: RequiredGovDocument.document_types
   filter :translations_name_eq,
-         as: :select, label: 'Name',
+         as: :select,
+         label: I18n.t('activerecord.attributes.required_gov_document.name'),
          collection: -> {
            RequiredGovDocument.with_translations(I18n.locale).order('required_gov_document_translations.name').pluck(:name)
          }

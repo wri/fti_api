@@ -145,7 +145,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :required_operator_document_country_id,
          label: I18n.t('activerecord.models.country.one'),
          as: :select,
-         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
+         collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :operator_document_id_eq, label: I18n.t('active_admin.operator_documents_page.operator_document_id')
   filter :required_operator_document_contract_signature_eq,
          label: I18n.t('activerecord.attributes.required_operator_document.contract_signature'),

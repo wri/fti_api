@@ -73,7 +73,6 @@ ActiveAdmin.register Law do
     column :updated_at, sortable: true
 
     actions
-
   end
 
   form do |f|

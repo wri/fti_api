@@ -35,6 +35,7 @@ ActiveAdmin.register RequiredGovDocumentGroup do
 
   filter :translations_name_contains,
          as: :select,
+         label: I18n.t('activerecord.attributes.required_gov_document_group/translation.name'),
          collection: -> {
            RequiredGovDocumentGroup.with_translations(I18n.locale)
              .order('required_gov_document_group_translations.name').pluck(:name)
