@@ -25,39 +25,9 @@ ActiveAdmin.register Law do
   filter :subcategory,
          as: :select,
          collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :written_infraction_cont,
-         as: :dependent_select,
-         label: I18n.t('active_admin.laws_page.written_infraction'),
-         url: -> { admin_laws_path },
-         field: :written_infraction,
-         free_text_search: true,
-         query: {
-           written_infraction_cont: 'search_term',
-           country_id_eq: 'q_country_id_value',
-           subcategory_id_eq: 'q_subcategory_id_value'
-         }
-  filter :infraction_cont,
-         as: :dependent_select,
-         label: I18n.t('active_admin.laws_page.infraction'),
-         url: -> { admin_laws_path },
-         field: :infraction,
-         free_text_search: true,
-         query: {
-           infraction_cont: 'search_term',
-           country_id_eq: 'q_country_id_value',
-           subcategory_id_eq: 'q_subcategory_id_value'
-         }
-  filter :sanctions_cont,
-         as: :dependent_select,
-         label: I18n.t('active_admin.laws_page.sanctions'),
-         url: -> { admin_laws_path },
-         field: :sanctions,
-         free_text_search: true,
-         query: {
-           sanctions_cont: 'search_term',
-           country_id_eq: 'q_country_id_value',
-           subcategory_id_eq: 'q_subcategory_id_value'
-         }
+  filter :written_infraction_cont, label: I18n.t('active_admin.laws_page.written_infraction')
+  filter :infraction_cont, label: I18n.t('active_admin.laws_page.infraction')
+  filter :sanctions_cont, label: I18n.t('active_admin.laws_page.sanctions')
   filter :max_fine, label: I18n.t('active_admin.laws_page.max_fine')
   filter :min_fine, label: I18n.t('active_admin.laws_page.min_fine')
 
