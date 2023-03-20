@@ -8,29 +8,33 @@ class DependentSelectInput < ActiveAdmin::Inputs::Filters::SelectInput
         url: url_from_options,
         order: order_from_options,
         tags: options[:free_text_search],
-        id_field: options[:id_field] || options[:field],
-        text_field: options[:text_field] || options[:field]
+        id_field: options[:id_field] || options[:field] || 'id',
+        text_field: text_field_from_options
       }.compact
     )
   end
 
-  def collection
-    return [] if input_value.blank?
+  def raw_collection
+    field_value = begin
+                    object.send(method)
+                  rescue NoMethodError
+                    nil
+                  end
 
-    [[input_value, input_value]]
+    field_value.present? ? (super.to_a << field_value).uniq : super
   end
 
   private
 
-  def input_value
-    @object.send(input_name)
-  end
-
   def order_from_options
     return options[:order] if options[:order].present?
-    return "#{options[:field]}_asc" if options[:field].present?
+    return "#{text_field_from_options}_asc" if text_field_from_options.present?
 
     nil
+  end
+
+  def text_field_from_options
+    options[:text_field] || options[:field] || 'name'
   end
 
   def url_from_options

@@ -7,13 +7,21 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
 
   actions :index
 
-  filter :by_country, label: proc{ I18n.t('activerecord.models.country.one') }, as: :select,
-                      collection: -> {
+  filter :country_id,
+         as: :select,
+         label: proc{ I18n.t('activerecord.models.country.one') },
+         collection: -> {
            [[I18n.t('active_admin.producer_documents_dashboard_page.all_countries'), 'null']] +
              Country.active.order(:name).map { |c| [c.name, c.id] }
          }
   filter :observation_type, as: :select, collection: ObservationStatistic.observation_types.sort
-  filter :operator, as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
+  filter :operator,
+         as: :dependent_select,
+         url: -> { admin_producers_path },
+         query: {
+           name_cont: 'search_term',
+           country_id_eq: 'q_country_id_value'
+         }
   filter :fmu_forest_type, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :category, as: :select,
                     collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
@@ -92,7 +100,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
     column :published_modified
     column :published_all
     column :total_count, sortable: false
-    show_on_chart = if params.dig(:q, :by_country).present?
+    show_on_chart = if params.dig(:q, :country_id_eq).present?
                       collection
                     else
                       collection.select { |r| r.country_id.nil? }
