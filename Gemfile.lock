@@ -87,10 +87,9 @@ GEM
       kaminari (~> 1.0, >= 1.2.1)
       railties (>= 6.1, < 7.1)
       ransack (>= 2.1.1, < 4)
-    activeadmin_addons (1.10.0)
+    activeadmin_addons (1.9.0)
       active_material
       railties
-      redcarpet
       require_all
       sassc
       sassc-rails
@@ -418,7 +417,6 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redcarpet (3.6.0)
     redis (4.5.1)
     redis-actionpack (5.3.0)
       actionpack (>= 5, < 8)
@@ -596,7 +594,7 @@ DEPENDENCIES
   active_skin
   activeadmin
   activeadmin-globalize!
-  activeadmin_addons
+  activeadmin_addons (~> 1.9.0)
   activeadmin_quill_editor
   activerecord-import
   activerecord-postgis-adapter

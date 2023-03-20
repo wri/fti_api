@@ -16,7 +16,8 @@ gem 'active_admin_paranoia'
 gem 'active_admin_sidebar', git: 'https://github.com/activeadmin-plugins/active_admin_sidebar.git'
 gem 'activeadmin'
 gem 'activeadmin-globalize', github: 'tsubik/activeadmin-globalize', branch: 'rails-7'
-gem 'activeadmin_addons'
+# looks like merging this https://github.com/platanus/activeadmin_addons/pull/442/files caused raising Formtastic::UnsupportedEnumCollection for multiple selects with enum values
+gem 'activeadmin_addons', '~> 1.9.0'
 
 gem 'sass-rails'
 gem 'sassc-rails'
