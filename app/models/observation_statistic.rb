@@ -73,18 +73,22 @@ class ObservationStatistic < ApplicationRecord
 
     validation_status_filter = validation_status.to_i === 789 ? '7,8,9' : validation_status
 
-    filters = [
-      country_id.nil? || country_id == 'null' ? 'country_id is not null' : "country_id = #{country_id}",
-      operator_id.nil? ? nil : "operator_id = #{operator_id}",
-      observation_type.nil? ? nil : "observation_type = #{observation_type}",
-      validation_status.nil? ? nil : "validation_status IN (#{validation_status_filter})",
-      forest_type.nil? ? nil : "fmu_forest_type = #{forest_type}",
-      severity_level.nil? ? nil : "severity_level = #{severity_level}",
-      subcategory_id.nil? ? nil : "subcategory_id = #{subcategory_id}",
-      category_id.nil? ? nil : "category_id = #{category_id}",
-      hidden.nil? ? nil : "hidden = #{hidden}",
-      is_active.nil? ? nil : "is_active = #{is_active}"
-    ].compact.join(' AND ')
+    filters = []
+    if country_id.nil? || country_id == 'null'
+      filters.push(['country_id is not null', nil])
+    else
+      filters.push(["country_id = ?", country_id])
+    end
+    filters.push(["operator_id = ?", operator_id]) if operator_id.present?
+    filters.push(["observation_type = ?", observation_type]) if observation_type.present?
+    filters.push(["validation_status IN (?)", validation_status_filter]) if validation_status.present?
+    filters.push(["fmu_forest_type = ?", forest_type]) if forest_type.present?
+    filters.push(["severity_level = ?", severity_level]) if severity_level.present?
+    filters.push(["subcategory_id = ?", subcategory_id]) if subcategory_id.present?
+    filters.push(["category_id = ?", category_id]) if category_id.present?
+    filters.push(["hidden = ?", hidden]) if hidden.present?
+    filters.push(["is_active = ?", is_active]) if is_active.present?
+    filters_sql = ActiveRecord::Base.sanitize_sql_for_conditions([filters.map(&:first).join(' AND '), *filters.map(&:last).compact])
 
     sql = <<~SQL
       with dates as (
@@ -114,7 +118,7 @@ class ObservationStatistic < ApplicationRecord
             ) as sq
             where sq.row_number = 1
           ) as observations_by_date on 1=1
-        where deleted_at is null #{filters.present? ? 'AND ' + filters : ''}
+        where deleted_at is null #{filters_sql.present? ? 'AND ' + filters_sql : ''}
         group by date, validation_status, rollup(country_id)
       )
       select

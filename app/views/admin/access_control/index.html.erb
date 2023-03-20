@@ -1,8 +1,10 @@
 <%=
   Arbre::Context.new({}, self) do
-    table_for(User.joins(:user_permission).
-        where("user_permissions.user_role = #{UserPermission.user_roles[:bo_manager]}"),
-              sortable: true, class: 'index_table') do
+    table_for(
+      User.joins(:user_permission).where(user_permissions: {user_role: :bo_manager}),
+      sortable: true,
+      class: 'index_table'
+    ) do
       column :id
       column :name do |resource|
         link_to resource.name, admin_access_control_edit_path(resource.id)
