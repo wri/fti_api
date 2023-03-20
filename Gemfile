@@ -110,7 +110,8 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'brakeman',                  require: false
+  gem 'brakeman', require: false
+  gem 'bundler-audit', require: false
   gem 'capistrano',                '~> 3.6'
   gem 'capistrano-bundler'
   gem 'capistrano-env-config'

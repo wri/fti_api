@@ -1,0 +1,16 @@
+name: Security
+
+on: push
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run Bundle Audit
+        run: bundle exec bundle audit --update
