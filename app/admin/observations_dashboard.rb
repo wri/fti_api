@@ -37,7 +37,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
         },
         category_id: {
           subcategory_id: HashHelper.aggregate(Subcategory.pluck(:category_id, :id))
-        },
+        }
       }
     }
 

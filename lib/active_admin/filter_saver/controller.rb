@@ -15,8 +15,6 @@ module ActiveAdmin
       SAVED_FILTER_KEY = :last_search_filter
 
       def restore_search_filters
-        return if request.format.json?
-
         filter_storage = session[SAVED_FILTER_KEY]
         if params[:clear_filters].present?
           params.delete :clear_filters
@@ -38,8 +36,6 @@ module ActiveAdmin
       end
 
       def save_search_filters
-        return if request.format.json?
-
         if params[:action].to_sym == :index
           session[SAVED_FILTER_KEY] ||= Hash.new
           session[SAVED_FILTER_KEY][controller_key] = params[:q]
