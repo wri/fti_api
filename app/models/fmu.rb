@@ -74,6 +74,7 @@ class Fmu < ApplicationRecord
   scope :current,                         ->               { joins(:fmu_operators).where(fmu_operators: { current: true }) }
   scope :filter_by_forest_type,           ->(forest_type)  { where(forest_type: forest_type) }
   scope :discriminate_by_forest_type,     ->(forest_type)  { where.not(forest_type: forest_type) }
+  scope :by_name_asc,                     ->               { with_translations(I18n.locale).order('fmu_translations.name') }
 
   ransacker(:name) { Arel.sql('fmu_translations.name') } # for nested_select in observation form
 

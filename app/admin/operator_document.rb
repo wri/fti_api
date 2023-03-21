@@ -157,8 +157,12 @@ ActiveAdmin.register OperatorDocument do
   index do
     render partial: 'hidden_filters', locals: {
       filter: {
-        countries: {
-          required_operator_documents: HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
+        q_required_operator_document_country_id: {
+          q_required_operator_document_id: HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
+          q_operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
+        },
+        q_operator_id: {
+          q_fmu_id: HashHelper.aggregate(FmuOperator.where(current: true).pluck(:operator_id, :fmu_id).map{ |x| { x.first => x.last } })
         }
       }
     }
@@ -237,21 +241,8 @@ ActiveAdmin.register OperatorDocument do
          collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :required_operator_document,
          collection: -> { RequiredOperatorDocument.with_generic.map { |r| [r.name_with_country, r.id] } }
-  filter :operator,
-         as: :dependent_select,
-         url: -> { admin_producers_path },
-         query: {
-          country_id_eq: 'q_required_operator_document_country_id_value'
-        }
-  filter :fmu,
-         as: :dependent_select,
-         label: I18n.t('activerecord.models.fmu.other'),
-         url: -> { admin_fmus_path },
-         order: 'fmu_translations.name_asc',
-         query: {
-           translations_name_cont: 'search_term',
-           operator_id_eq: 'q_operator_id_value'
-         }
+  filter :operator, as: :select, collection: -> { Operator.by_name_asc }
+  filter :fmu, as: :select, label: I18n.t('activerecord.models.fmu.other'), collection: -> { Fmu.by_name_asc }
   filter :status, as: :select, collection: -> { OperatorDocument.statuses }
   filter :type, as: :select
   filter :source, as: :select, collection: -> { OperatorDocument.sources }

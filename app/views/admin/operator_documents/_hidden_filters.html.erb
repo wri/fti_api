@@ -6,25 +6,29 @@
 <script>
   const filters = <%= raw(filter.to_json) %>;
 
-  $('#q_required_operator_document_country_id').on('change', onChangeCountry);
+  Object.keys(filters).forEach(key => {
+    $(`#${key}`).on('change', onFilterChange.bind(null, key));
+  });
 
-  function onChangeCountry(e) {
-    const countryId = e.target.value;
+  function onFilterChange(filterKey, e) {
+    const id = e.target.value;
 
-    // Update Required Operator Documents
-    const rods = filters.countries.required_operator_documents[countryId];
-    Array.from($('#q_required_operator_document_id').select2()[0].options).forEach( rod => {
-      if(countryId === "") {
-        $(rod).prop('disabled', false);
-      } else {
-        if (rods == undefined || !rods.includes(parseInt(rod.value))) {
-          $(rod).prop('disabled',true);
+    Object.keys(filters[filterKey]).forEach(key => {
+      const allowedIds = filters[filterKey][key][id];
+      const $select = $(`#${key}`);
+      Array.from($select.select2()[0].options).forEach(option => {
+        if(id === "") {
+          $(option).prop('disabled', false);
         } else {
-          $(rod).prop('disabled',false);
+          if (allowedIds == undefined || !allowedIds.includes(parseInt(option.value))) {
+            $(option).prop('disabled',true);
+          } else {
+            $(option).prop('disabled',false);
+          }
         }
-      }
+      });
+      $select.val("");
+      $select.trigger('change');
     });
-    $('#q_required_operator_document_id').val("");
-    $('#q_required_operator_document_id').trigger('change');
   }
 </script>
