@@ -26,8 +26,7 @@ ActiveAdmin.register Fmu do
     end
 
     def scoped_collection
-      end_of_association_chain.with_translations.includes(country: :translations)
-        .where(country_translations: { locale: I18n.locale })
+      end_of_association_chain.with_translations(I18n.locale).includes(:country, :operator)
     end
   end
 

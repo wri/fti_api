@@ -20,6 +20,10 @@ var dependentFilterInitializer = function() {
       const order = select.data('order');
       const tags = select.data('tags');
 
+      if (!Object.values(queryObject).includes('search_term')) {
+        queryObject[`${textField}_cont`] = 'search_term';
+      }
+
       select.select2({
         minimumInputLength: 0,
         placeholder: '',
@@ -42,6 +46,8 @@ var dependentFilterInitializer = function() {
             // 1.  'search_term'
             // 2. arbitrary value
             // 3. current value of input field when id is provided with pattern {ID}_value
+            // default value in query is [textField]_cont: 'search_term
+
             Object.keys(queryObject).forEach((ransackQuery) => {
               const queryElement = queryObject[ransackQuery];
               if (queryElement === 'search_term') {

@@ -123,7 +123,6 @@ ActiveAdmin.register Operator, as: 'Producer' do
          url: -> { admin_producers_path },
          field: :name,
          query: {
-           name_cont: 'search_term',
            country_id_eq: 'q_country_id_value'
          }
   filter :concession, as: :select

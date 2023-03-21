@@ -1,4 +1,9 @@
 class DependentSelectInput < ActiveAdmin::Inputs::Filters::SelectInput
+  def initialize(*args)
+    super
+    options[:collection] = [] if options[:collection].nil?
+  end
+
   def input_html_options
     super.merge(
       # default-select class to not initialize select2 from activeadmin_addons

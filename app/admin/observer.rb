@@ -12,8 +12,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([countries: :translations])
-      end_of_association_chain.with_translations(I18n.locale)
+      end_of_association_chain.with_translations(I18n.locale).includes(:responsible_admin, :countries)
     end
   end
 

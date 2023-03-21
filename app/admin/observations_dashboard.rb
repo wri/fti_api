@@ -19,14 +19,11 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
          as: :dependent_select,
          url: -> { admin_producers_path },
          query: {
-           name_cont: 'search_term',
            country_id_eq: 'q_country_id_value'
          }
   filter :fmu_forest_type, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
-  filter :category, as: :select,
-                    collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
-  filter :subcategory, as: :select,
-                       collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
+  filter :category, as: :select, collection: -> { Category.by_name_asc }
+  filter :subcategory, as: :select, collection: -> { Subcategory.by_name_asc }
   filter :severity_level, as: :select, collection: [
     [I18n.t('filters.unknown'), 0],
     [I18n.t('filters.low'), 1],

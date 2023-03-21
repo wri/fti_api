@@ -24,10 +24,7 @@ class Category < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :by_name_asc, -> {
-    includes(:translations).with_translations(I18n.available_locales)
-                           .order('category_translations.name ASC')
-  }
+  scope :by_name_asc, -> { with_translations(I18n.locale).order('category_translations.name ASC') }
 
   ransacker(:name) { Arel.sql('category_translations.name') } # for nested_select in observation form
 

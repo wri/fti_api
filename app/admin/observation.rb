@@ -180,30 +180,60 @@ ActiveAdmin.register Observation do
          as: :select,
          input_html: { multiple: true },
          collection: -> { Observation.validation_statuses.sort }
-  filter :country, as: :select,
-                   collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
-  filter :operator, as: :select,
-                    collection: -> { Operator.order(:name) }
-  filter :fmu, as: :select,
-               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
-  filter :governments, as: :select, label: I18n.t('activerecord.attributes.government.government_entity'),
-                       collection: -> {
-                         Government.with_translations(I18n.locale)
-                           .order('government_translations.government_entity')
-                           .pluck('government_translations.government_entity', 'government_translations.government_id')
-                       }
+  filter :country, as: :select, collection: -> { Country.with_observations.by_name_asc }
+  filter :operator,
+         as: :dependent_select,
+         url: -> { admin_producers_path },
+         query: {
+           country_id_eq: 'q_country_id_value'
+         }
+  filter :fmu,
+         as: :dependent_select,
+         url: -> { admin_fmus_path },
+         order: 'fmu_translations.name_asc',
+         query: {
+           translations_name_cont: 'search_term',
+           country_id_eq: 'q_country_id_value'
+         }
+  filter :governments,
+         as: :dependent_select,
+         label: I18n.t('activerecord.attributes.government.government_entity'),
+         url: -> { admin_governments_path },
+         text_field: 'government_entity',
+         query: {
+           translations_government_entity_cont: 'search_term',
+           country_id_eq: 'q_country_id_value'
+         }
   filter :subcategory_category_id_eq,
          label: I18n.t('activerecord.models.category'), as: :select,
-         collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
+         collection: -> { Category.by_name_asc }
   filter :subcategory,
-         label: I18n.t('activerecord.models.subcategory'), as: :select,
-         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
+         as: :dependent_select,
+         label: I18n.t('activerecord.models.subcategory'),
+         url: -> { admin_subcategories_path },
+         order: 'subcategory_translations.name_asc',
+         query: {
+           translations_name_cont: 'search_term',
+           category_id_eq: 'q_subcategory_category_id_eq_value'
+         }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :observers, label: I18n.t('activerecord.models.observer'), as: :select,
-                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
+  filter :observers,
+         as: :dependent_select,
+         label: I18n.t('activerecord.models.observer'),
+         url: -> { admin_monitors_path },
+         order: 'observer_translations.name_asc',
+         query: {
+          translations_name_cont: 'search_term',
+          countries_id_eq: 'q_country_id_value'
+        }
   filter :observation_report,
-         label: I18n.t('activerecord.models.observation_report'), as: :select,
-         collection: -> { ObservationReport.order(:title) }
+         as: :dependent_select,
+         label: I18n.t('activerecord.models.observation_report'),
+         url: -> { admin_observation_reports_path },
+         text_field: 'title',
+         query: {
+           'observation_report_observers_observer_id_eq': 'q_observer_ids_value',
+         }
   filter :user, label: I18n.t('active_admin.observations_page.created_user'), as: :select, collection: -> { User.order(:name) }
   filter :modified_user, label: I18n.t('active_admin.observations_page.modified_user'), as: :select, collection: -> { User.order(:name) }
   filter :is_active
@@ -313,21 +343,7 @@ ActiveAdmin.register Observation do
     column :deleted_at
   end
 
-
   index do
-    render partial: 'hidden_filters', locals: {
-        filter: {
-            categories: {
-                subcategories: HashHelper.aggregate(Subcategory.distinct.pluck(:category_id, :id).map{ |x| { x.first => x.last } })
-            },
-            countries: {
-                government_entities: HashHelper.aggregate(Government.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
-                operators: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
-                fmus: HashHelper.aggregate(Fmu.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
-            },
-            operators: { fmus: HashHelper.aggregate(Fmu.joins(:operators).pluck('operators.id', :id).map{ |x| { x.first => x.last } }) }
-        }
-    }
     selectable_column
     column :id
     column :is_active
