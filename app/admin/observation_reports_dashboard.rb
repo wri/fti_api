@@ -15,18 +15,21 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
              Country.with_at_least_one_report.order(:name).map { |c| [c.name, c.id] }
          }
   filter :observer,
-         as: :dependent_select,
+         as: :select,
          multiple: true,
          label: I18n.t('activerecord.models.observer'),
-         url: -> { admin_monitors_path },
-         order: 'observer_translations.name_asc',
-         query: {
-           translations_name_cont: 'search_term',
-           countries_id_eq: 'q_country_id_value'
-         }
+         collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
   filter :date
 
   index title: I18n.t('active_admin.observation_reports_dashboard_page.name') do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        country_id: {
+          observer_id: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))
+        }
+      }
+    }
+
     column :date, sortable: false do |resource|
       resource.date.to_date
     end

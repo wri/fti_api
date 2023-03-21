@@ -155,14 +155,14 @@ ActiveAdmin.register OperatorDocument do
   end
 
   index do
-    render partial: 'hidden_filters', locals: {
+    render partial: 'dependant_filters', locals: {
       filter: {
-        q_required_operator_document_country_id: {
-          q_required_operator_document_id: HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
-          q_operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
+        required_operator_document_country_id: {
+          required_operator_document_id: HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id)),
+          operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id))
         },
-        q_operator_id: {
-          q_fmu_id: HashHelper.aggregate(FmuOperator.where(current: true).pluck(:operator_id, :fmu_id).map{ |x| { x.first => x.last } })
+        operator_id: {
+          fmu_id: HashHelper.aggregate(FmuOperator.where(current: true).pluck(:operator_id, :fmu_id))
         }
       }
     }

@@ -181,59 +181,16 @@ ActiveAdmin.register Observation do
          input_html: { multiple: true },
          collection: -> { Observation.validation_statuses.sort }
   filter :country, as: :select, collection: -> { Country.with_observations.by_name_asc }
-  filter :operator,
-         as: :dependent_select,
-         url: -> { admin_producers_path },
-         query: {
-           country_id_eq: 'q_country_id_value'
-         }
-  filter :fmu,
-         as: :dependent_select,
-         url: -> { admin_fmus_path },
-         order: 'fmu_translations.name_asc',
-         query: {
-           translations_name_cont: 'search_term',
-           country_id_eq: 'q_country_id_value'
-         }
-  filter :governments,
-         as: :dependent_select,
-         label: I18n.t('activerecord.attributes.government.government_entity'),
-         url: -> { admin_governments_path },
-         text_field: 'government_entity',
-         query: {
-           translations_government_entity_cont: 'search_term',
-           country_id_eq: 'q_country_id_value'
-         }
-  filter :subcategory_category_id_eq,
-         label: I18n.t('activerecord.models.category'), as: :select,
-         collection: -> { Category.by_name_asc }
-  filter :subcategory,
-         as: :dependent_select,
-         label: I18n.t('activerecord.models.subcategory'),
-         url: -> { admin_subcategories_path },
-         order: 'subcategory_translations.name_asc',
-         query: {
-           translations_name_cont: 'search_term',
-           category_id_eq: 'q_subcategory_category_id_eq_value'
-         }
+  filter :operator, as: :select, collection: -> { Operator.by_name_asc }
+  filter :fmu, as: :select, collection: -> { Fmu.by_name_asc }
+  filter :governments, as: :select, label: I18n.t('activerecord.attributes.government.government_entity'), collection: -> { Government.by_entity_asc }
+  filter :subcategory_category_id, label: I18n.t('activerecord.models.category'), as: :select, collection: -> { Category.by_name_asc }
+  filter :subcategory, as: :select, label: I18n.t('activerecord.models.subcategory'), collection: -> { Subcategory.by_name_asc }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :observers,
-         as: :dependent_select,
-         label: I18n.t('activerecord.models.observer'),
-         url: -> { admin_monitors_path },
-         order: 'observer_translations.name_asc',
-         query: {
-          translations_name_cont: 'search_term',
-          countries_id_eq: 'q_country_id_value'
-        }
+  filter :observers, as: :select, label: I18n.t('activerecord.models.observer'), collection: -> { Observer.by_name_asc }
   filter :observation_report,
-         as: :dependent_select,
-         label: I18n.t('activerecord.models.observation_report'),
-         url: -> { admin_observation_reports_path },
-         text_field: 'title',
-         query: {
-           'observation_report_observers_observer_id_eq': 'q_observer_ids_value',
-         }
+         label: I18n.t('activerecord.models.observation_report'), as: :select,
+         collection: -> { ObservationReport.order(:title) }
   filter :user, label: I18n.t('active_admin.observations_page.created_user'), as: :select, collection: -> { User.order(:name) }
   filter :modified_user, label: I18n.t('active_admin.observations_page.modified_user'), as: :select, collection: -> { User.order(:name) }
   filter :is_active
@@ -344,6 +301,23 @@ ActiveAdmin.register Observation do
   end
 
   index do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        country_id: {
+          operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id)),
+          fmu_id: HashHelper.aggregate(Fmu.pluck(:country_id, :id)),
+          government_id: HashHelper.aggregate(Government.pluck(:country_id, :id)),
+          observer_ids: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))
+        },
+        subcategory_category_id: {
+          subcategory_id: HashHelper.aggregate(Subcategory.pluck(:category_id, :id))
+        },
+        observer_ids: {
+          observation_report_id: HashHelper.aggregate(ObservationReport.joins(:observers).pluck(:observer_id, :id))
+        }
+      }
+    }
+
     selectable_column
     column :id
     column :is_active

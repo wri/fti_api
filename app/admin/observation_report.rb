@@ -33,20 +33,12 @@ ActiveAdmin.register ObservationReport do
     end
   end
 
-  filter :observations_country_id_eq,
+  filter :observations_country_id,
          as: :select,
          label: I18n.t('activerecord.models.country.one'),
          collection: -> { Country.with_observations.by_name_asc }
   filter :title, as: :select
-  filter :observers,
-         as: :dependent_select,
-         label: I18n.t('activerecord.attributes.observation.observers'),
-         url: -> { admin_monitors_path },
-         order: 'observer_translations.name_asc',
-         query: {
-          translations_name_cont: 'search_term',
-          countries_id_eq: 'q_observations_country_id_eq_value'
-        }
+  filter :observers, as: :select, label: I18n.t('activerecord.attributes.observation.observers'), collection: -> { Observer.by_name_asc }
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
   filter :publication_date
 
@@ -85,6 +77,14 @@ ActiveAdmin.register ObservationReport do
   end
 
   index do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        observations_country_id: {
+          observer_ids: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))
+        }
+      }
+    }
+
     column :id
     column :title do |report|
       if report.deleted?

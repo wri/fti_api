@@ -33,8 +33,7 @@ class Government < ApplicationRecord
   validates :government_entity, uniqueness: { case_sensitive: false }, on: :create
 
   scope :by_entity_asc, -> {
-    includes(:translations).with_translations(I18n.available_locales)
-        .order('government_translations.government_entity ASC')
+    with_translations(I18n.locale).order('government_translations.government_entity ASC')
   }
 
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
@@ -51,6 +50,8 @@ class Government < ApplicationRecord
       governments
     end
   end
+
+  alias_method :to_s, :government_entity
 
   def cache_key
     super + '-' + Globalize.locale.to_s

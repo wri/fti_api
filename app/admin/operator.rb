@@ -73,6 +73,14 @@ ActiveAdmin.register Operator, as: 'Producer' do
   end
 
   index title: I18n.t('active_admin.operator_page.producer') do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        country_id: {
+          name_eq: HashHelper.aggregate(Operator.pluck(:country_id, :name))
+        }
+      }
+    }
+
     column :is_active
     column :id
     column :holding
@@ -118,13 +126,8 @@ ActiveAdmin.register Operator, as: 'Producer' do
          as: :select,
          collection: -> { Country.joins(:operators).with_translations(I18n.locale).order('country_translations.name') }
   filter :name_eq,
-         as: :dependent_select,
-         label: I18n.t('activerecord.attributes.operator.name'),
-         url: -> { admin_producers_path },
-         field: :name,
-         query: {
-           country_id_eq: 'q_country_id_value'
-         }
+         as: :select, label: I18n.t('activerecord.attributes.operator.name'),
+         collection: -> { Operator.order(:name).pluck(:name) }
   filter :concession, as: :select
   filter :fa_id_present, as: :boolean, label: I18n.t('active_admin.operator_page.with_fa_uuid')
   filter :fmus_id_null, as: :boolean, label: I18n.t('active_admin.operator_page.fmus_id_null')

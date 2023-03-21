@@ -1,0 +1,68 @@
+<style>
+  li[aria-disabled='true'] {
+    display: none;
+  }
+</style>
+<script>
+  const filters = <%= raw(filter.to_json) %>;
+
+  // Create a map of dependent filters
+  // e.g. { "city_id": ["state_id"], "area_id": ["city_id", "state_id"] }
+  // this is reverse of the filters object
+  const dependantFilters = {};
+  Object.keys(filters).forEach(key => {
+    Object.keys(filters[key]).forEach(key2 => {
+      if (dependantFilters[key2] == undefined) {
+        dependantFilters[key2] = [];
+      }
+      if (!dependantFilters[key2].includes(key)) {
+        dependantFilters[key2].push(key);
+      }
+    });
+  });
+
+  Object.keys(filters).forEach(parentFilterKey => {
+    $(`#q_${parentFilterKey}`).on('change', onFilterChange.bind(null, parentFilterKey));
+    // trigger change after load for initial values
+    setTimeout(() => {
+      $(`#q_${parentFilterKey}`).trigger('change');
+    }, 300);
+  });
+
+  function getCommonElements(...arrays) {
+    if (arrays.length <= 1) return arrays[0];
+
+    const referenceArray = arrays.shift();
+    return referenceArray.filter((element) => {
+      return arrays.every((array) => {
+        return array.includes(element);
+      });
+    });
+  }
+
+  function onFilterChange(parentKey, e) {
+    const id = e.target.value;
+
+    Object.keys(filters[parentKey]).forEach(key => {
+      const parentIds = dependantFilters[key];
+      const allowedIdsFromAllFilters = parentIds.map(parentId => {
+        const selectedValue = $(`#q_${parentId}`).val();
+        return filters[parentId][key][selectedValue]?.map(x => x.toString());
+      }).filter(x => x);
+      const allowedIds = getCommonElements(...allowedIdsFromAllFilters);
+
+      const $select = $(`#q_${key}`);
+      Array.from($select.select2()[0].options).forEach(option => {
+        if (allowedIds == undefined || allowedIds.includes(option.value.toString())) {
+          $(option).prop('disabled', false);
+        } else {
+          $(option).prop('disabled', true);
+        }
+      });
+      if (allowedIds && !allowedIds.includes($select.val())) {
+        $select.val("");
+      }
+      $select.trigger('change');
+    });
+  }
+</script>

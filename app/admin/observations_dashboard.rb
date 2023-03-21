@@ -15,12 +15,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
              Country.active.order(:name).map { |c| [c.name, c.id] }
          }
   filter :observation_type, as: :select, collection: ObservationStatistic.observation_types.sort
-  filter :operator,
-         as: :dependent_select,
-         url: -> { admin_producers_path },
-         query: {
-           country_id_eq: 'q_country_id_value'
-         }
+  filter :operator, as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
   filter :fmu_forest_type, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
   filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :subcategory, as: :select, collection: -> { Subcategory.by_name_asc }
@@ -35,6 +30,17 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
   filter :date
 
   index title: I18n.t('active_admin.observations_dashboard_page.name') do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        country_id: {
+          operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id))
+        },
+        category_id: {
+          subcategory_id: HashHelper.aggregate(Subcategory.pluck(:category_id, :id))
+        },
+      }
+    }
+
     column :date, sortable: false do |resource|
       resource.date.to_date
     end

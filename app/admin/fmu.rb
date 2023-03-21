@@ -42,11 +42,9 @@ ActiveAdmin.register Fmu do
   filter :id, as: :select
   filter :translations_name_contains,
          as: :select, label: I18n.t('activerecord.attributes.fmu/translation.name'),
-         collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name').pluck(:name) }
-  filter :country, as: :select,
-                   collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
-  filter :operator_in_all, label: I18n.t('activerecord.attributes.fmu.operator'), as: :select,
-                           collection: -> { Operator.order(:name) }
+         collection: -> { Fmu.by_name_asc.pluck(:name) }
+  filter :country, as: :select, collection: -> { Country.joins(:fmus).by_name_asc }
+  filter :operator_in_all, label: I18n.t('activerecord.attributes.fmu.operator'), as: :select, collection: -> { Operator.order(:name) }
 
   csv do
     column :id
