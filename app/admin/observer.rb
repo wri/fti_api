@@ -67,6 +67,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
          label: I18n.t('activerecord.attributes.observer/translation.name'),
          url: -> { admin_monitors_path },
          field: :name,
+         order: 'observer_translations.name_asc',
          query: {
            translations_name_cont: 'search_term',
            countries_id_eq: 'q_country_ids_value',

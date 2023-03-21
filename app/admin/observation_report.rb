@@ -33,15 +33,20 @@ ActiveAdmin.register ObservationReport do
     end
   end
 
-  filter :title, as: :select
-  filter :attachment, as: :select
-  filter :user, as: :select, collection: -> { User.order(:name) }
   filter :observations_country_id_eq,
-         label: I18n.t('activerecord.models.country.one'),
          as: :select,
-         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
-  filter :observers, label: I18n.t('activerecord.attributes.observation.observers'), as: :select,
-                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
+         label: I18n.t('activerecord.models.country.one'),
+         collection: -> { Country.with_observations.by_name_asc }
+  filter :title, as: :select
+  filter :observers,
+         as: :dependent_select,
+         label: I18n.t('activerecord.attributes.observation.observers'),
+         url: -> { admin_monitors_path },
+         order: 'observer_translations.name_asc',
+         query: {
+          translations_name_cont: 'search_term',
+          countries_id_eq: 'q_observations_country_id_eq_value'
+        }
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
   filter :publication_date
 

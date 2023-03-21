@@ -45,12 +45,23 @@ class RequiredOperatorDocument < ApplicationRecord
 
   validates :valid_period, numericality: { greater_than: 0 }
 
-
   validate :fixed_fields_unchanged
 
   after_restore :set_documents_not_provided
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
+  scope :with_generic, -> {
+    join = RequiredOperatorDocument.left_joins(country: :translations)
+      .arel
+      .on("country_translations.country_id = countries.id and country_translations.locale = '#{I18n.locale}'")
+      .join_sources
+
+    joins(join).order('required_operator_documents.name')
+  }
+
+  def name_with_country
+    "#{name} - #{country&.name || 'Generic'}"
+  end
 
   private
 

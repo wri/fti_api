@@ -19,6 +19,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
          multiple: true,
          label: I18n.t('activerecord.models.observer'),
          url: -> { admin_monitors_path },
+         order: 'observer_translations.name_asc',
          query: {
            translations_name_cont: 'search_term',
            countries_id_eq: 'q_country_id_value'
