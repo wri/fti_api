@@ -203,7 +203,7 @@ ActiveAdmin.register Observation do
       country_id: {
         operator_id: Operator.pluck(:country_id, :id),
         fmu_id: Fmu.pluck(:country_id, :id),
-        government_id: Government.pluck(:country_id, :id),
+        government_ids: Government.pluck(:country_id, :id),
         observer_ids: Observer.joins(:countries).pluck(:country_id, :id)
       },
       subcategory_category_id: {
