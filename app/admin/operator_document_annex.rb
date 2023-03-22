@@ -71,6 +71,17 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   index do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        annex_documents_documentable_of_OperatorDocument_type_operator_name_equals: {
+          annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals:
+            HashHelper.aggregate(
+              Operator.joins(fmus: :translations).where(fmu_translations: { locale: I18n.locale }).pluck(:name, 'fmu_translations.name')
+            )
+        }
+      }
+    }
+
     bool_column I18n.t('active_admin.required_operator_document_page.exists') do |od|
       od.deleted_at.nil?
     end
@@ -128,7 +139,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
          as: :select,
          label: I18n.t('activerecord.models.fmu.one'),
-         collection: -> { Fmu.with_translations(I18n.locale).order(:name).pluck(:name) }
+         collection: -> { Fmu.by_name_asc.pluck(:name) }
 
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses

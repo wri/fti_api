@@ -31,6 +31,16 @@ ActiveAdmin.register Government do
   end
 
   index do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        country_id: {
+          translations_government_entity_contains: HashHelper.aggregate(
+            Government.by_entity_asc.distinct.pluck(:country_id, :government_entity)
+          )
+        }
+      }
+    }
+
     column :is_active
     column :country, sortable: 'country_translations.name'
     column :government_entity, sortable: 'government_translations.government_entity'
@@ -39,19 +49,10 @@ ActiveAdmin.register Government do
     actions
   end
 
-  filter :country,
-         as: :select,
-         collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
+  filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc }
   filter :translations_government_entity_contains,
          as: :select, label: I18n.t('activerecord.attributes.government/translation.government_entity'),
-         collection: -> {
-           Government.with_translations(I18n.locale).order('government_translations.government_entity').pluck(:government_entity).uniq
-         }
-  filter :translations_details_contains,
-         as: :select, label: I18n.t('activerecord.attributes.government/translation.details'),
-         collection: -> {
-           Government.with_translations(I18n.locale).order('government_translations.details').pluck(:details).uniq
-         }
+         collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
 
   sidebar I18n.t('activerecord.models.observation.other'), only: :show do
     attributes_table_for resource do

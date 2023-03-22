@@ -77,6 +77,18 @@ ActiveAdmin.register OperatorDocumentHistory do
   end
 
   index do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        required_operator_document_country_id: {
+          operator_document_required_operator_document_id: HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id)),
+          operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id))
+        },
+        operator_id: {
+          fmu_id: HashHelper.aggregate(FmuOperator.where(current: true).pluck(:operator_id, :fmu_id))
+        }
+      }
+    }
+
     column :public
     tag_column :status
     column :id
@@ -150,7 +162,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :required_operator_document_contract_signature_eq,
          label: I18n.t('activerecord.attributes.required_operator_document.contract_signature'),
          as: :select, collection: [[I18n.t('active_admin.status_tag.yes'), true], [I18n.t('active_admin.status_tag.no'), false]]
-  filter :operator_document_required_operator_document_id_eq,
+  filter :operator_document_required_operator_document_id,
          label: I18n.t('activerecord.models.required_operator_document_group'),
          as: :select,
          collection: -> { RequiredOperatorDocument.with_translations.all }

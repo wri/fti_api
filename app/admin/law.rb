@@ -58,6 +58,14 @@ ActiveAdmin.register Law do
   end
 
   index do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        country_id: {
+          subcategory_id: HashHelper.aggregate(Law.distinct.pluck(:country_id, :subcategory_id))
+        }
+      }
+    }
+
     column :country, sortable: 'country_translations.name'
     column :subcategory, sortable: 'subcategory_translations.name'
     column I18n.t('active_admin.laws_page.written_infraction'), :written_infraction, sortable: true

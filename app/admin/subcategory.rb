@@ -22,14 +22,11 @@ ActiveAdmin.register Subcategory do
   scope I18n.t('activerecord.models.operator'), :operator
   scope I18n.t('activerecord.models.government'), :government
 
+
+  filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :translations_name_eq,
          as: :select, label: I18n.t('activerecord.attributes.subcategory.name'),
-         collection: -> {
-           Subcategory.with_translations(I18n.locale)
-             .order('subcategory_translations.name').pluck(:name)
-         }
-  filter :category, as: :select,
-                    collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
+         collection: -> { Subcategory.by_name_asc.pluck(:name) }
   filter :created_at
   filter :updated_at
 
@@ -59,6 +56,14 @@ ActiveAdmin.register Subcategory do
   end
 
   index do
+    render partial: 'dependant_filters', locals: {
+      filter: {
+        category_id: {
+          translations_name_eq: HashHelper.aggregate(Subcategory.by_name_asc.pluck(:category_id, 'subcategory_translations.name'))
+        }
+      }
+    }
+
     column :name, sortable: 'subcategory_translations.name'
     column :category, sortable: 'category_translations.name'
     column :subcategory_type
