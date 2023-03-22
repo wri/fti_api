@@ -71,7 +71,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         annex_documents_documentable_of_OperatorDocument_type_operator_name_equals: {
           annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals:

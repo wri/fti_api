@@ -73,7 +73,7 @@ ActiveAdmin.register Operator, as: 'Producer' do
   end
 
   index title: I18n.t('active_admin.operator_page.producer') do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         country_id: {
           name_eq: HashHelper.aggregate(Operator.pluck(:country_id, :name))

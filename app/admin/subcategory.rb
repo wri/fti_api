@@ -56,7 +56,7 @@ ActiveAdmin.register Subcategory do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         category_id: {
           translations_name_eq: HashHelper.aggregate(Subcategory.by_name_asc.pluck(:category_id, 'subcategory_translations.name'))

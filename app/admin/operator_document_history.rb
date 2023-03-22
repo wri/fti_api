@@ -77,7 +77,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         required_operator_document_country_id: {
           operator_document_required_operator_document_id: HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id)),

@@ -31,7 +31,7 @@ ActiveAdmin.register Government do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         country_id: {
           translations_government_entity_contains: HashHelper.aggregate(

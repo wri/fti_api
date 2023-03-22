@@ -33,7 +33,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   index title: I18n.t('activerecord.models.observer') do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         is_active: {
           translations_name_eq: HashHelper.aggregate(Observer.by_name_asc.pluck(:is_active, :name))

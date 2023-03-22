@@ -58,7 +58,7 @@ ActiveAdmin.register Law do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         country_id: {
           subcategory_id: HashHelper.aggregate(Law.distinct.pluck(:country_id, :subcategory_id))

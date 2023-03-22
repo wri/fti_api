@@ -77,7 +77,7 @@ ActiveAdmin.register ObservationReport do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         observations_country_id: {
           observer_ids: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))

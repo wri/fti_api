@@ -37,7 +37,7 @@ ActiveAdmin.register FmuOperator do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         operator_id: {
           fmu_id: HashHelper.aggregate(FmuOperator.where(current: true).pluck(:operator_id, :fmu_id))

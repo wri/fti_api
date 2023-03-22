@@ -22,7 +22,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
   filter :date
 
   index title: I18n.t('active_admin.observation_reports_dashboard_page.name') do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         country_id: {
           observer_id: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))

@@ -9,14 +9,14 @@
   // Create a map of dependent filters
   // e.g. { "city_id": ["state_id"], "area_id": ["city_id", "state_id"] }
   // this is reverse of the filters object
-  const dependantFilters = {};
+  const dependentFilters = {};
   Object.keys(filters).forEach(key => {
     Object.keys(filters[key]).forEach(key2 => {
-      if (dependantFilters[key2] == undefined) {
-        dependantFilters[key2] = [];
+      if (dependentFilters[key2] == undefined) {
+        dependentFilters[key2] = [];
       }
-      if (!dependantFilters[key2].includes(key)) {
-        dependantFilters[key2].push(key);
+      if (!dependentFilters[key2].includes(key)) {
+        dependentFilters[key2].push(key);
       }
     });
   });
@@ -44,7 +44,7 @@
     const id = e.target.value;
 
     Object.keys(filters[parentKey]).forEach(key => {
-      const parentIds = dependantFilters[key];
+      const parentIds = dependentFilters[key];
       const allowedIdsFromAllFilters = parentIds.map(parentId => {
         const selectedValue = $(`#q_${parentId}`).val();
         return filters[parentId][key][selectedValue]?.map(x => x.toString());

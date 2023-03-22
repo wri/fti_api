@@ -87,7 +87,7 @@ ActiveAdmin.register Fmu do
   end
 
   index do
-    render partial: 'dependant_filters', locals: {
+    render partial: 'dependent_filters', locals: {
       filter: {
         country_id: {
           operator_in_all: HashHelper.aggregate(Operator.pluck(:country_id, :id))
