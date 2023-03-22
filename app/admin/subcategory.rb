@@ -30,6 +30,14 @@ ActiveAdmin.register Subcategory do
   filter :created_at
   filter :updated_at
 
+  dependent_filters do
+    {
+      category_id: {
+        translations_name_eq: Subcategory.pluck(:category_id, :name)
+      }
+    }
+  end
+
   sidebar :laws, only: :show do
     sidebar = Law.where(subcategory: resource).collect do |law|
       auto_link(law, law.written_infraction&.camelize)
@@ -56,14 +64,6 @@ ActiveAdmin.register Subcategory do
   end
 
   index do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        category_id: {
-          translations_name_eq: HashHelper.aggregate(Subcategory.by_name_asc.pluck(:category_id, 'subcategory_translations.name'))
-        }
-      }
-    }
-
     column :name, sortable: 'subcategory_translations.name'
     column :category, sortable: 'category_translations.name'
     column :subcategory_type

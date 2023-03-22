@@ -355,6 +355,7 @@ ActiveAdmin.before_load do |app|
   # Add Filters Extensions
   ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
   ActiveAdmin::Views::Pages::Show.prepend ActiveAdmin::PaperTrail::ShowPageExtension
+  ActiveAdmin::ResourceDSL.include ActiveAdmin::DependentFiltersExtension
 end
 
 # Modifies the display of the CSVs so that it shows on to download an English and a French versions.

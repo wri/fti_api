@@ -77,18 +77,6 @@ ActiveAdmin.register OperatorDocumentHistory do
   end
 
   index do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        required_operator_document_country_id: {
-          operator_document_required_operator_document_id: HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id)),
-          operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id))
-        },
-        operator_id: {
-          fmu_id: HashHelper.aggregate(FmuOperator.where(current: true).pluck(:operator_id, :fmu_id))
-        }
-      }
-    }
-
     column :public
     tag_column :status
     column :id
@@ -175,6 +163,18 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
   filter :operator_document_updated_at
+
+  dependent_filters do
+    {
+      required_operator_document_country_id: {
+        operator_document_required_operator_document_id: RequiredOperatorDocument.pluck(:country_id, :id),
+        operator_id: Operator.pluck(:country_id, :id)
+      },
+      operator_id: {
+        fmu_id: FmuOperator.where(current: true).pluck(:operator_id, :fmu_id)
+      }
+    }
+  end
 
   controller do
     def scoped_collection

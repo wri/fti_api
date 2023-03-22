@@ -21,15 +21,15 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
          collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
   filter :date
 
-  index title: I18n.t('active_admin.observation_reports_dashboard_page.name') do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        country_id: {
-          observer_id: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))
-        }
+  dependent_filters do
+    {
+      country_id: {
+        observer_id: Observer.joins(:countries).distinct.pluck(:country_id, :id)
       }
     }
+  end
 
+  index title: I18n.t('active_admin.observation_reports_dashboard_page.name') do
     column :date, sortable: false do |resource|
       resource.date.to_date
     end

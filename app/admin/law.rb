@@ -31,6 +31,14 @@ ActiveAdmin.register Law do
   filter :max_fine, label: I18n.t('active_admin.laws_page.max_fine')
   filter :min_fine, label: I18n.t('active_admin.laws_page.min_fine')
 
+  dependent_filters do
+    {
+      country_id: {
+        subcategory_id: Law.distinct.pluck(:country_id, :subcategory_id)
+      }
+    }
+  end
+
   csv do
     column :country do |l|
       l.country&.name
@@ -58,14 +66,6 @@ ActiveAdmin.register Law do
   end
 
   index do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        country_id: {
-          subcategory_id: HashHelper.aggregate(Law.distinct.pluck(:country_id, :subcategory_id))
-        }
-      }
-    }
-
     column :country, sortable: 'country_translations.name'
     column :subcategory, sortable: 'subcategory_translations.name'
     column I18n.t('active_admin.laws_page.written_infraction'), :written_infraction, sortable: true

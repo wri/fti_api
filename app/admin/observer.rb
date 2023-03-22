@@ -33,17 +33,6 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   index title: I18n.t('activerecord.models.observer') do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        is_active: {
-          translations_name_eq: HashHelper.aggregate(Observer.by_name_asc.pluck(:is_active, :name))
-        },
-        country_ids: {
-          translations_name_eq: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :name))
-        }
-      }
-    }
-
     column :is_active
     column :public_info
     # TODO: Reactivate rubocop and fix this
@@ -77,6 +66,17 @@ ActiveAdmin.register Observer, as: 'Monitor' do
          as: :select,
          label: I18n.t('activerecord.attributes.observer/translation.name'),
          collection: -> { Observer.by_name_asc.pluck(:name) }
+
+  dependent_filters do
+    {
+      is_active: {
+        translations_name_eq: Observer.pluck(:is_active, :name)
+      },
+      country_ids: {
+        translations_name_eq: Observer.joins(:countries).pluck(:country_id, :name)
+      }
+    }
+  end
 
   show do
     attributes_table do

@@ -42,6 +42,14 @@ ActiveAdmin.register ObservationReport do
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
   filter :publication_date
 
+  dependent_filters do
+    {
+      observations_country_id: {
+        observer_ids: Observer.joins(:countries).pluck(:country_id, :id)
+      }
+    }
+  end
+
   config.clear_action_items!
 
   action_item :edit_report, only: [:show] do
@@ -77,14 +85,6 @@ ActiveAdmin.register ObservationReport do
   end
 
   index do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        observations_country_id: {
-          observer_ids: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))
-        }
-      }
-    }
-
     column :id
     column :title do |report|
       if report.deleted?

@@ -46,6 +46,17 @@ ActiveAdmin.register Fmu do
          as: :select, label: I18n.t('activerecord.attributes.fmu/translation.name'),
          collection: -> { Fmu.by_name_asc.pluck(:name) }
 
+  dependent_filters do
+    {
+      country_id: {
+        operator_in_all: Operator.pluck(:country_id, :id)
+      },
+      operator_in_all: {
+        translations_name_contains: Operator.joins(fmus: :translations).where(fmu_translations: { locale: I18n.locale }).pluck(:id, 'fmu_translations.name')
+      }
+    }
+  end
+
   csv do
     column :id
     column :name
@@ -87,19 +98,6 @@ ActiveAdmin.register Fmu do
   end
 
   index do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        country_id: {
-          operator_in_all: HashHelper.aggregate(Operator.pluck(:country_id, :id))
-        },
-        operator_in_all: {
-          translations_name_contains: HashHelper.aggregate(
-            Operator.joins(fmus: :translations).where(fmu_translations: { locale: I18n.locale }).pluck(:id, 'fmu_translations.name')
-          )
-        }
-      }
-    }
-
     column :id, sortable: true
     column :name, sortable: 'fmu_translations.name'
     column :country, sortable: 'country_translations.name'

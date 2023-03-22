@@ -29,18 +29,18 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
   filter :is_active
   filter :date
 
-  index title: I18n.t('active_admin.observations_dashboard_page.name') do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        country_id: {
-          operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id))
-        },
-        category_id: {
-          subcategory_id: HashHelper.aggregate(Subcategory.pluck(:category_id, :id))
-        }
+  dependent_filters do
+    {
+      country_id: {
+        operator_id: Operator.pluck(:country_id, :id)
+      },
+      category_id: {
+        subcategory_id: Subcategory.pluck(:category_id, :id)
       }
     }
+  end
 
+  index title: I18n.t('active_admin.observations_dashboard_page.name') do
     column :date, sortable: false do |resource|
       resource.date.to_date
     end

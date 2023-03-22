@@ -198,6 +198,23 @@ ActiveAdmin.register Observation do
   filter :updated_at
   filter :deleted_at
 
+  dependent_filters do
+    {
+      country_id: {
+        operator_id: Operator.pluck(:country_id, :id),
+        fmu_id: Fmu.pluck(:country_id, :id),
+        government_id: Government.pluck(:country_id, :id),
+        observer_ids: Observer.joins(:countries).pluck(:country_id, :id)
+      },
+      subcategory_category_id: {
+        subcategory_id: Subcategory.pluck(:category_id, :id)
+      },
+      observer_ids: {
+        observation_report_id: ObservationReport.joins(:observers).pluck(:observer_id, :id)
+      }
+    }
+  end
+
   csv do
     column :id
     column :is_active
@@ -301,23 +318,6 @@ ActiveAdmin.register Observation do
   end
 
   index do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        country_id: {
-          operator_id: HashHelper.aggregate(Operator.pluck(:country_id, :id)),
-          fmu_id: HashHelper.aggregate(Fmu.pluck(:country_id, :id)),
-          government_id: HashHelper.aggregate(Government.pluck(:country_id, :id)),
-          observer_ids: HashHelper.aggregate(Observer.joins(:countries).pluck(:country_id, :id))
-        },
-        subcategory_category_id: {
-          subcategory_id: HashHelper.aggregate(Subcategory.pluck(:category_id, :id))
-        },
-        observer_ids: {
-          observation_report_id: HashHelper.aggregate(ObservationReport.joins(:observers).pluck(:observer_id, :id))
-        }
-      }
-    }
-
     selectable_column
     column :id
     column :is_active

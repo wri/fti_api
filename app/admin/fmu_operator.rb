@@ -24,6 +24,14 @@ ActiveAdmin.register FmuOperator do
   filter :start_date
   filter :end_date
 
+  dependent_filters do
+    {
+      operator_id: {
+        fmu_id: FmuOperator.where(current: true).distinct.pluck(:operator_id, :fmu_id)
+      }
+    }
+  end
+
   csv do
     column :current
     column I18n.t('activerecord.models.fmu.one') do |fo|
@@ -37,14 +45,6 @@ ActiveAdmin.register FmuOperator do
   end
 
   index do
-    render partial: 'dependent_filters', locals: {
-      filter: {
-        operator_id: {
-          fmu_id: HashHelper.aggregate(FmuOperator.where(current: true).pluck(:operator_id, :fmu_id))
-        }
-      }
-    }
-
     column :current
     column :fmu
     column :operator
