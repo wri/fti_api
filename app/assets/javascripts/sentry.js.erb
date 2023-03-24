@@ -1,0 +1,3 @@
+<% if Sentry.configuration.dsn %>
+  Sentry.init({ dsn: '<%= Sentry.configuration.dsn %>' });
+<% end %>
