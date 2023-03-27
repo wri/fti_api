@@ -1,5 +1,6 @@
 const dependentFiltersInitializer = function() {
   function getCommonElements(...arrays) {
+    if (arrays.length === 0) return [];
     if (arrays.length <= 1) return arrays[0];
 
     const referenceArray = arrays.shift();
@@ -37,7 +38,7 @@ const dependentFiltersInitializer = function() {
       // trigger change after load for initial values
       setTimeout(() => {
         $(`#q_${parentFilterKey}`).trigger('change');
-      }, 300);
+      }, 200);
     });
 
     function onFilterChange(parentKey, e) {
@@ -48,12 +49,15 @@ const dependentFiltersInitializer = function() {
         let anyParentSelectedValue = false;
         const allowedIdsFromAllFilters = parentIds.map(parentId => {
           const selectedValue = $(`#q_${parentId}`).val();
-          anyParentSelectedValue = anyParentSelectedValue || ![null, undefined, ''].includes(selectedValue);
+          const isValueSelected = ![null, undefined, ''].includes(selectedValue);
+          anyParentSelectedValue = anyParentSelectedValue || isValueSelected;
           return filters[parentId][key][selectedValue] && filters[parentId][key][selectedValue].map(x => x.toString());
         }).filter(x => x);
         const allowedIds = getCommonElements(...allowedIdsFromAllFilters);
 
         const $select = $(`#q_${key}`);
+        const selectedValues = [$select.val()].flat();
+
         Array.from($select[0].options).forEach(option => {
           if (!anyParentSelectedValue || (allowedIds && allowedIds.includes(option.value.toString()))) {
             $(option).prop('disabled', false);
@@ -62,9 +66,15 @@ const dependentFiltersInitializer = function() {
           }
         });
 
-        if (!anyParentSelectedValue || (allowedIds && !allowedIds.includes($select.val()))) {
-          $select.val(null);
+        if (allowedIds) {
+          const selectedValuesAllowed = getCommonElements(selectedValues, allowedIds);
+          if (selectedValuesAllowed.length === 0) {
+            $select.val(null);
+          } else if (selectedValuesAllowed.length < selectedValues.length) {
+            $select.val(selectedValuesAllowed);
+          }
         }
+
         $select.trigger('change');
       });
     }
