@@ -35,5 +35,10 @@ RSpec.describe 'Admin: Dependent Filters', type: :system do
     # should keep the observer selected, but available options should be only observer 3
     expect(select2_selected_options(from: 'Name')).to match_array([observer3.name])
     expect(select2_options(from: 'Name')).to match_array([observer3.name])
+    select2_clear(from: 'Is active')
+    select2_clear(from: 'Country')
+    # should keep the observer selected, but available options should be all observers
+    expect(select2_selected_options(from: 'Name')).to match_array([observer3.name])
+    expect(select2_options(from: 'Name')).to match_array([observer1.name, observer2.name, observer3.name, observer4.name])
   end
 end

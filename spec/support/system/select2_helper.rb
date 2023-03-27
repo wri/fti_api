@@ -6,6 +6,11 @@ module Select2Helper
     container.find(:xpath, "//span[contains(@class, 'select2-container--open')]//li[contains(text(), '#{value}')]").click # find the option and select
   end
 
+  def select2_clear(options = {})
+    container = find(:xpath, "//label[contains(text(), '#{options[:from]}')]/following-sibling::span[contains(@class, 'select2-container')]")
+    container.find(:xpath, ".//span[contains(@class, 'select2-selection__clear')]").click
+  end
+
   def select2_options(options = {})
     container = find(:xpath, "//label[contains(text(), '#{options[:from]}')]/following-sibling::span[contains(@class, 'select2-container')]")
     container.click # to open the dropdown

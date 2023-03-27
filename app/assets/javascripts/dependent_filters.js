@@ -49,7 +49,7 @@ const dependentFiltersInitializer = function() {
         let anyParentSelectedValue = false;
         const allowedIdsFromAllFilters = parentIds.map(parentId => {
           const selectedValue = $(`#q_${parentId}`).val();
-          const isValueSelected = ![null, undefined, ''].includes(selectedValue);
+          const isValueSelected = ![null, undefined, '', 'null'].includes(selectedValue);
           anyParentSelectedValue = anyParentSelectedValue || isValueSelected;
           return filters[parentId][key][selectedValue] && filters[parentId][key][selectedValue].map(x => x.toString());
         }).filter(x => x);
@@ -66,7 +66,7 @@ const dependentFiltersInitializer = function() {
           }
         });
 
-        if (allowedIds) {
+        if (allowedIds && anyParentSelectedValue) {
           const selectedValuesAllowed = getCommonElements(selectedValues, allowedIds);
           if (selectedValuesAllowed.length === 0) {
             $select.val(null);
