@@ -16,9 +16,9 @@ module FileDataImport
     end
 
     def build(raw_attributes = {})
-      record = Record.new(@class_name, raw_attributes, @options)
+      record = Record.new(@class_name, raw_attributes, **@options)
       @belongs_to.each do |class_name, options|
-        record.belongs_to(BelongsToAssociation.new(class_name, raw_attributes, options))
+        record.belongs_to(BelongsToAssociation.new(class_name, raw_attributes, **options))
       end
 
       record

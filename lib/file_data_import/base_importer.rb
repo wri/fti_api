@@ -49,7 +49,7 @@ module FileDataImport
       end
 
       def record(class_name, **options)
-        record_builder.record(class_name, options)
+        record_builder.record(class_name, **options)
       end
 
       def record_builder
@@ -57,7 +57,7 @@ module FileDataImport
       end
 
       def belongs_to(class_name, **options)
-        record_builder.belongs_to(class_name, options)
+        record_builder.belongs_to(class_name, **options)
       end
     end
 
