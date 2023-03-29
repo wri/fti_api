@@ -103,9 +103,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rails-erd'
-  gem 'rubocop', '~> 0.80.0', require: false
-  gem 'rubocop-performance', '~> 1.5.2'
-  gem 'rubocop-rails', '~> 2.4.2'
+  gem 'rubocop-rails'
+  gem 'standard'
   gem 'webmock'
 end
 
