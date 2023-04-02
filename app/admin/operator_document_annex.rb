@@ -118,24 +118,24 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   filter :annex_documents_documentable_of_OperatorDocument_type_required_operator_document_name_equals,
          as: :select,
-         label: I18n.t('active_admin.operator_document_annexes_page.operator_document'),
+         label: proc { I18n.t('active_admin.operator_document_annexes_page.operator_document') },
          collection: -> { RequiredOperatorDocument.order(:name).pluck(:name) }
 
   filter :annex_documents_documentable_of_OperatorDocument_type_operator_name_equals,
          as: :select,
-         label: I18n.t('activerecord.models.operator'),
+         label: proc { I18n.t('activerecord.models.operator') },
          collection: -> { Operator.order(:name).pluck(:name) }
   filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
          as: :select,
-         label: I18n.t('activerecord.models.fmu.one'),
+         label: proc { I18n.t('activerecord.models.fmu.one') },
          collection: -> { Fmu.with_translations(I18n.locale).order(:name).pluck(:name) }
 
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
   filter :updated_at
 
-  scope I18n.t('active_admin.operator_documents_page.pending'), :doc_pending
-  scope I18n.t('active_admin.operator_document_annexes_page.orphaned'), :orphaned
+  scope ->{ I18n.t('active_admin.operator_documents_page.pending') }, :doc_pending
+  scope ->{ I18n.t('active_admin.operator_document_annexes_page.orphaned') }, :orphaned
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names

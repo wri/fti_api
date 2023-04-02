@@ -13,7 +13,8 @@ ActiveAdmin.register Partner do
 
   permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
-  filter :translations_name_contains, as: :select, label: 'Name', collection: -> { Partner.with_translations(I18n.locale).pluck(:name) }
+  filter :translations_name_contains, as: :select, label: proc { I18n.t('activerecord.attributes.partner.name') },
+                                      collection: -> { Partner.with_translations(I18n.locale).pluck(:name) }
   filter :website, as: :select
 
   csv do

@@ -6,7 +6,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   menu false
   config.order_clause
 
-  scope I18n.t('active_admin.operator_documents_page.with_deleted'), :with_deleted, default: true
+  scope ->{ I18n.t('active_admin.operator_documents_page.with_deleted') }, :with_deleted, default: true
 
   sidebar I18n.t('active_admin.operator_documents_page.annexes'), only: :show do
     attributes_table_for resource do
@@ -88,7 +88,7 @@ ActiveAdmin.register OperatorDocumentHistory do
       end
     end
     column :operator_document_updated_at
-    column :country do |od|
+    column I18n.t('activerecord.models.country.one') do |od|
       od.required_operator_document&.country
     end
     column I18n.t('activerecord.models.required_operator_document'), :required_operator_document, sortable: 'required_operator_document_id' do |od|
@@ -143,22 +143,23 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :public
   filter :id
   filter :required_operator_document_country_id,
-         label: I18n.t('activerecord.models.country.one'),
+         label: proc { I18n.t('activerecord.models.country.one') },
          as: :select,
          collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
-  filter :operator_document_id_eq, label: I18n.t('active_admin.operator_documents_page.operator_document_id')
+  filter :operator_document_id_eq, label: proc { I18n.t('active_admin.operator_documents_page.operator_document_id') }
   filter :required_operator_document_contract_signature_eq,
-         label: I18n.t('activerecord.attributes.required_operator_document.contract_signature'),
+         label: proc { I18n.t('activerecord.attributes.required_operator_document.contract_signature') },
          as: :select, collection: [[I18n.t('active_admin.status_tag.yes'), true], [I18n.t('active_admin.status_tag.no'), false]]
   filter :operator_document_required_operator_document_id_eq,
-         label: I18n.t('activerecord.models.required_operator_document_group'),
+         label: proc { I18n.t('activerecord.models.required_operator_document_group.one') },
          as: :select,
          collection: -> { RequiredOperatorDocument.with_translations.all }
   filter :operator,
-         label: I18n.t('activerecord.models.operator'),
+         label: proc { I18n.t('activerecord.models.operator') },
          as: :select,
          collection: -> { Operator.order(:name) }
-  filter :fmu, label: I18n.t('activerecord.models.fmu.other'), as: :select, collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
+  filter :fmu, label: proc { I18n.t('activerecord.models.fmu.other') },
+               as: :select, collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources

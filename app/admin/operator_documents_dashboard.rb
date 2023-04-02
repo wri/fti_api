@@ -91,7 +91,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: 'Producer Documents Dashboar
         attributes: [
           ['date', I18n.t('activerecord.attributes.operator_document_statistic.date')],
           ['country', I18n.t('activerecord.attributes.operator_document_statistic.country.one')],
-          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group')],
+          ['required_operator_document_group', I18n.t('activerecord.models.required_operator_document_group.one')],
           ['fmu_forest_type', I18n.t('activerecord.attributes.fmu.forest_type')],
           ['document_type', I18n.t('activerecord.attributes.required_gov_document.document_type')],
           ['valid_expired', I18n.t('active_admin.producer_documents_dashboard_page.valid_expired')],

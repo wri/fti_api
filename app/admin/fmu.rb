@@ -31,8 +31,8 @@ ActiveAdmin.register Fmu do
     end
   end
 
-  scope I18n.t('active_admin.all'), :all, default: true
-  scope I18n.t('active_admin.free'), :filter_by_free_aa
+  scope ->{ I18n.t('active_admin.all') }, :all, default: true
+  scope ->{ I18n.t('active_admin.free') }, :filter_by_free_aa
 
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
@@ -42,11 +42,11 @@ ActiveAdmin.register Fmu do
 
   filter :id, as: :select
   filter :translations_name_contains,
-         as: :select, label: I18n.t('activerecord.attributes.fmu/translation.name'),
+         as: :select, label: proc{ I18n.t('activerecord.attributes.fmu.name') },
          collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name').pluck(:name) }
-  filter :country, as: :select,
+  filter :country, as: :select, label: proc { I18n.t('activerecord.models.country.one') },
                    collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
-  filter :operator_in_all, label: I18n.t('activerecord.attributes.fmu.operator'), as: :select,
+  filter :operator_in_all, label: proc{ I18n.t('activerecord.models.operator') }, as: :select,
                            collection: -> { Operator.order(:name) }
 
   csv do

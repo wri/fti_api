@@ -51,14 +51,14 @@ ActiveAdmin.register RequiredOperatorDocument do
   end
 
   filter :contract_signature,
-         label: I18n.t('active_admin.required_operator_document_page.publication_authorization'),
+         label: proc { I18n.t('active_admin.required_operator_document_page.publication_authorization') },
          as: :select, collection: [[I18n.t('active_admin.true'), true], [I18n.t('active_admin.false'), false]]
   filter :required_operator_document_group
   filter :country
   filter :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu)
   filter 'forest_types_contains_array',
          as: :select,
-         label: I18n.t('activerecord.attributes.fmu.forest_type'),
+         label: proc { I18n.t('activerecord.attributes.fmu.forest_type') },
          collection: RequiredOperatorDocument::FOREST_TYPES.map{ |k,h| [k, h[:index]] }
   filter :name, as: :select
   filter :updated_at

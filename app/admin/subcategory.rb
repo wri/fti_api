@@ -18,12 +18,12 @@ ActiveAdmin.register Subcategory do
   permit_params :location_required, :category_id, :subcategory_type,
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
-  scope I18n.t('active_admin.all'), :all, default: true
-  scope I18n.t('activerecord.models.operator'), :operator
-  scope I18n.t('activerecord.models.government'), :government
+  scope ->{ I18n.t('active_admin.all') }, :all, default: true
+  scope ->{ I18n.t('activerecord.models.operator') }, :operator
+  scope ->{ I18n.t('activerecord.models.government') }, :government
 
   filter :translations_name_eq,
-         as: :select, label: I18n.t('activerecord.attributes.subcategory.name'),
+         as: :select, label: proc { I18n.t('activerecord.attributes.subcategory.name') },
          collection: -> {
            Subcategory.with_translations(I18n.locale)
              .order('subcategory_translations.name').pluck(:name)
