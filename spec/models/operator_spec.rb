@@ -86,13 +86,13 @@ RSpec.describe Operator, type: :model do
           FactoryBot.create(:required_operator_document_country, **required_operator_document_data)
           FactoryBot.create(
             :required_operator_document_fmu,
-            forest_types: [Fmu::FOREST_TYPES[:ufa][:index], Fmu::FOREST_TYPES[:cf][:index]],
+            forest_types: [ForestType::TYPES_WITH_CODE[:ufa], ForestType::TYPES_WITH_CODE[:cf]],
             **required_operator_document_data
           )
           # won't create for this one as not matching forest type
           FactoryBot.create(
             :required_operator_document_fmu,
-            forest_types: [Fmu::FOREST_TYPES[:vdc][:index]],
+            forest_types: [ForestType::TYPES_WITH_CODE[:vdc]],
             **required_operator_document_data
           )
           @other_operator.operator_documents.destroy_all

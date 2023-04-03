@@ -112,7 +112,7 @@ ActiveAdmin.register Fmu do
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
       render partial: 'zip_hint'
       f.input :forest_type, as: :select,
-                            collection: Fmu::FOREST_TYPES.map { |k, h| [h[:label], k] },
+                            collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
                             input_html: { disabled: object.persisted? }
       f.input :certification_fsc
       f.input :certification_pefc

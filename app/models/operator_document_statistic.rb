@@ -23,6 +23,8 @@ class OperatorDocumentStatistic < ApplicationRecord
   belongs_to :country, optional: true
   belongs_to :required_operator_document_group, optional: true
 
+  enum fmu_forest_type: ForestType::TYPES_WITH_CODE
+
   validates_presence_of :date
   validates_uniqueness_of :date, scope: [:country_id, :required_operator_document_group_id, :fmu_forest_type, :document_type]
 

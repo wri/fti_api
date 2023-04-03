@@ -59,7 +59,7 @@ ActiveAdmin.register RequiredOperatorDocument do
   filter 'forest_types_contains_array',
          as: :select,
          label: proc { I18n.t('activerecord.attributes.fmu.forest_type') },
-         collection: RequiredOperatorDocument::FOREST_TYPES.map{ |k,h| [k, h[:index]] }
+         collection: -> { ForestType.select_collection }
   filter :name, as: :select
   filter :updated_at
 
@@ -79,7 +79,7 @@ ActiveAdmin.register RequiredOperatorDocument do
         f.input :forest_types, as: :string, input_html: { disabled: editing }
       else
         f.input :forest_types, as: :select, multiple: true,
-                               collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] },
+                               collection: -> { ForestType.select_collection },
                                include_blank: true
       end
 
