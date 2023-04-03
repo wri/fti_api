@@ -52,7 +52,7 @@ module OpDoc
     end
 
     def forest_types
-      ConstForestTypes::FOREST_TYPES.map do |key, value|
+      ForestType::TYPES.map do |key, value|
         { key: key, id: value[:index], name: value[:label] }
       end.sort_by { |x| x[:name] }
     end
@@ -123,7 +123,7 @@ module OpDoc
     end
 
     def serialize_forest_types(forest_types)
-      ConstForestTypes::FOREST_TYPES.map do |key, value|
+      ForestType::TYPES.map do |key, value|
         if forest_types.include?(key.to_s)
           { key: key, id: value[:index], name: value[:label] }
         end

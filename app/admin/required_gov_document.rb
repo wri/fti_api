@@ -22,7 +22,7 @@ ActiveAdmin.register RequiredGovDocument do
   filter :document_type, as: :select, collection: RequiredGovDocument.document_types
   filter :translations_name_eq,
          as: :select,
-         label: I18n.t('activerecord.attributes.required_gov_document.name'),
+         label: -> { I18n.t('activerecord.attributes.required_gov_document.name') },
          collection: -> {
            RequiredGovDocument.with_translations(I18n.locale).order('required_gov_document_translations.name').pluck(:name)
          }

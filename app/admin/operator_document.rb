@@ -162,7 +162,7 @@ ActiveAdmin.register OperatorDocument do
     column :public
     tag_column :status
     column :id
-    column :country do |od|
+    column I18n.t('activerecord.models.country.one') do |od|
       od.required_operator_document.country
     end
     column I18n.t('active_admin.operator_documents_page.required'), :required_operator_document, sortable: 'required_operator_document_id' do |od|
@@ -225,13 +225,13 @@ ActiveAdmin.register OperatorDocument do
   filter :public
   filter :id
   filter :required_operator_document_country_id,
-         label: I18n.t('activerecord.models.country.one'),
+         label: proc { I18n.t('activerecord.models.country.one') },
          as: :select,
          collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :required_operator_document,
          collection: -> { RequiredOperatorDocument.with_generic.map { |r| [r.name_with_country, r.id] } }
   filter :operator, as: :select, collection: -> { Operator.by_name_asc }
-  filter :fmu, as: :select, label: I18n.t('activerecord.models.fmu.other'), collection: -> { Fmu.by_name_asc }
+  filter :fmu, as: :select, label: -> { I18n.t('activerecord.models.fmu.other') }, collection: -> { Fmu.by_name_asc }
   filter :status, as: :select, collection: -> { OperatorDocument.statuses }
   filter :type, as: :select
   filter :source, as: :select, collection: -> { OperatorDocument.sources }
@@ -249,7 +249,7 @@ ActiveAdmin.register OperatorDocument do
     }
   end
 
-  scope I18n.t('active_admin.operator_documents_page.pending'), :doc_pending
+  scope -> { I18n.t('active_admin.operator_documents_page.pending') }, :doc_pending
 
   form do |f|
     f.semantic_errors *f.object.errors.attribute_names

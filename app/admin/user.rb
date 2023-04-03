@@ -12,7 +12,7 @@ ActiveAdmin.register User do
   filter :operator
   filter :observer
   filter :user_permission_user_role_eq,
-         label: 'Role',
+         label: proc { I18n.t('shared.role') },
          as: :select,
          collection: -> { UserPermission.user_roles }
   filter :name, as: :select
@@ -69,7 +69,7 @@ ActiveAdmin.register User do
       end
     end
     column :is_active
-    column 'Role', :user_permission do |user|
+    column I18n.t('shared.role'), :user_permission do |user|
       user.user_permission&.user_role
     end
     column :country
@@ -78,7 +78,7 @@ ActiveAdmin.register User do
     column :observer
     column :operator
     column :holding
-    column 'Last sign-in on', :current_sign_in_at
+    column :current_sign_in_at
     column :created_at
 
     actions

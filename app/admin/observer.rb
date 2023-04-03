@@ -64,7 +64,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
          collection: -> { Country.joins(:observers).with_translations(I18n.locale).order('country_translations.name').distinct }
   filter :translations_name_eq,
          as: :select,
-         label: I18n.t('activerecord.attributes.observer/translation.name'),
+         label: -> { I18n.t('activerecord.attributes.observer/translation.name') },
          collection: -> { Observer.by_name_asc.pluck(:name) }
 
   dependent_filters do

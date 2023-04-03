@@ -25,11 +25,11 @@ ActiveAdmin.register Law do
   filter :subcategory,
          as: :select,
          collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :written_infraction_cont, label: I18n.t('active_admin.laws_page.written_infraction')
-  filter :infraction_cont, label: I18n.t('active_admin.laws_page.infraction')
-  filter :sanctions_cont, label: I18n.t('active_admin.laws_page.sanctions')
-  filter :max_fine, label: I18n.t('active_admin.laws_page.max_fine')
-  filter :min_fine, label: I18n.t('active_admin.laws_page.min_fine')
+  filter :written_infraction_cont, label: proc { I18n.t('active_admin.laws_page.written_infraction') }
+  filter :infraction_cont, label: proc { I18n.t('active_admin.laws_page.infraction') }
+  filter :sanctions_cont, label: proc { I18n.t('active_admin.laws_page.sanctions') }
+  filter :max_fine, label: proc { I18n.t('active_admin.laws_page.max_fine') }
+  filter :min_fine, label: proc { I18n.t('active_admin.laws_page.min_fine') }
 
   dependent_filters do
     {

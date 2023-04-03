@@ -22,7 +22,7 @@ RSpec.describe ScoreOperatorPresenter do
     create_list(
       :required_operator_document_fmu,
       4,
-      forest_types: [Fmu::FOREST_TYPES[:vdc][:index], Fmu::FOREST_TYPES[:ufa][:index]],
+      forest_types: [ForestType::TYPES_WITH_CODE[:vdc], ForestType::TYPES_WITH_CODE[:ufa]],
       **required_operator_document_data
     )
 

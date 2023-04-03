@@ -10,9 +10,9 @@ ActiveAdmin.register Faq do
   permit_params :position, translations_attributes: [:id, :locale, :question, :answer, :_destroy]
 
   filter :position, as: :select
-  filter :translations_question_contains, as: :select, label: 'Question',
+  filter :translations_question_contains, as: :select, label: proc { I18n.t('activerecord.attributes.faq.question') },
                                           collection: -> { Faq.with_translations(I18n.locale).pluck(:question) }
-  filter :translations_answer_contains, as: :select, label: 'Answer',
+  filter :translations_answer_contains, as: :select, label: proc { I18n.t('activerecord.attributes.faq.answer') },
                                         collection: -> { Faq.with_translations(I18n.locale).pluck(:answer) }
 
   controller do

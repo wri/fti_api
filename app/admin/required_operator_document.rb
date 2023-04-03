@@ -51,15 +51,15 @@ ActiveAdmin.register RequiredOperatorDocument do
   end
 
   filter :contract_signature,
-         label: I18n.t('active_admin.required_operator_document_page.publication_authorization'),
+         label: proc { I18n.t('active_admin.required_operator_document_page.publication_authorization') },
          as: :select, collection: [[I18n.t('active_admin.true'), true], [I18n.t('active_admin.false'), false]]
   filter :required_operator_document_group
   filter :country, collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :type, as: :select, collection: %w(RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu)
   filter 'forest_types_contains_array',
          as: :select,
-         label: I18n.t('activerecord.attributes.fmu.forest_type'),
-         collection: RequiredOperatorDocument::FOREST_TYPES.map{ |k,h| [k, h[:index]] }
+         label: proc { I18n.t('activerecord.attributes.fmu.forest_type') },
+         collection: -> { ForestType.select_collection }
   filter :name, as: :select
   filter :updated_at
 
@@ -79,7 +79,7 @@ ActiveAdmin.register RequiredOperatorDocument do
         f.input :forest_types, as: :string, input_html: { disabled: editing }
       else
         f.input :forest_types, as: :select, multiple: true,
-                               collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] },
+                               collection: -> { ForestType.select_collection },
                                include_blank: true
       end
 

@@ -16,7 +16,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
          }
   filter :observation_type, as: :select, collection: ObservationStatistic.observation_types.sort
   filter :operator, as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
-  filter :fmu_forest_type, as: :select, collection: Fmu::FOREST_TYPES.map { |ft| [ft.last[:label], ft.last[:index]] }
+  filter :fmu_forest_type, as: :select, collection: -> { ForestType.select_collection }
   filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :subcategory, as: :select, collection: -> { Subcategory.by_name_asc }
   filter :severity_level, as: :select, collection: [
@@ -65,7 +65,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       if r.fmu_forest_type.nil?
         I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
-        Fmu.forest_types.key(r.fmu_forest_type)
+        ForestType::TYPES[r.fmu_forest_type][:label]
       end
     end
     column :severity_level, sortable: false do |r|
@@ -137,7 +137,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
           ['observation_type',I18n.t('activerecord.attributes.observation.observation_type')],
           ['operator',I18n.t('activerecord.models.operator')],
           ['severity_level',I18n.t('activerecord.attributes.severity.level')],
-          ['category',I18n.t('activerecord.models.category')],
+          ['category',I18n.t('activerecord.models.category.one')],
           ['subcategory',I18n.t('activerecord.models.subcategory')],
           ['fmu_forest_type',I18n.t('activerecord.attributes.observation_history.fmu_forest_type')],
           ['created',I18n.t('shared.created')],
@@ -157,7 +157,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
           ['operator',I18n.t('activerecord.models.operator')],
           ['severity_level',I18n.t('activerecord.attributes.observation_history.severity_level')],
           ['observation_type',I18n.t('activerecord.attributes.observation.observation_type')],
-          ['category',I18n.t('activerecord.models.category')],
+          ['category',I18n.t('activerecord.models.category.one')],
           ['subcategory',I18n.t('activerecord.models.subcategory')],
           ['fmu_forest_type',I18n.t('activerecord.attributes.observation_history.fmu_forest_type')],
           ['ready_for_qc',I18n.t('activerecord.enums.observation.statuses.Ready for QC')],
@@ -199,7 +199,7 @@ ActiveAdmin.register ObservationStatistic, as: 'Observations Dashboard' do
       if r.fmu_forest_type.nil?
         I18n.t('active_admin.producer_documents_dashboard_page.all_forest_types')
       else
-        Fmu.forest_types.key(r.fmu_forest_type)
+        ForestType::TYPES[r.fmu_forest_type][:label]
       end
     end
     column :validation_status do |r|

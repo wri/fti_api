@@ -166,14 +166,14 @@ ActiveAdmin.register Observation do
     end
   end
 
-  scope I18n.t('active_admin.all'), :all, default: true
-  scope I18n.t('activerecord.models.operator'), :operator
-  scope I18n.t('activerecord.models.government'), :government
-  scope I18n.t('active_admin.operator_documents_page.pending'), :pending
-  scope I18n.t('active_admin.observations_dashboard_page.published_all'), :published
-  scope I18n.t('shared.created'), :created
-  scope I18n.t('active_admin.observations_page.scope_hidden'), :hidden
-  scope I18n.t('active_admin.observations_page.visible'), :visible
+  scope -> { I18n.t('active_admin.all') }, :all, default: true
+  scope -> { I18n.t('activerecord.models.operator') }, :operator
+  scope -> { I18n.t('activerecord.models.government') }, :government
+  scope -> { I18n.t('active_admin.operator_documents_page.pending') }, :pending
+  scope -> { I18n.t('active_admin.observations_dashboard_page.published_all') }, :published
+  scope -> { I18n.t('shared.created') }, :created
+  scope -> { I18n.t('active_admin.observations_page.scope_hidden') }, :hidden
+  scope -> { I18n.t('active_admin.observations_page.visible') }, :visible
 
   filter :id, as: :numeric_range
   filter :validation_status,
@@ -183,16 +183,16 @@ ActiveAdmin.register Observation do
   filter :country, as: :select, collection: -> { Country.with_observations.by_name_asc }
   filter :operator, as: :select, collection: -> { Operator.by_name_asc }
   filter :fmu, as: :select, collection: -> { Fmu.by_name_asc }
-  filter :governments, as: :select, label: I18n.t('activerecord.attributes.government.government_entity'), collection: -> { Government.by_entity_asc }
-  filter :subcategory_category_id, label: I18n.t('activerecord.models.category'), as: :select, collection: -> { Category.by_name_asc }
-  filter :subcategory, as: :select, label: I18n.t('activerecord.models.subcategory'), collection: -> { Subcategory.by_name_asc }
+  filter :governments, as: :select, label: -> { I18n.t('activerecord.attributes.government.government_entity') }, collection: -> { Government.by_entity_asc }
+  filter :subcategory_category_id, label: -> { I18n.t('activerecord.models.category') }, as: :select, collection: -> { Category.by_name_asc }
+  filter :subcategory, as: :select, label: -> { I18n.t('activerecord.models.subcategory') }, collection: -> { Subcategory.by_name_asc }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :observers, as: :select, label: I18n.t('activerecord.models.observer'), collection: -> { Observer.by_name_asc }
+  filter :observers, as: :select, label: -> { I18n.t('activerecord.models.observer') }, collection: -> { Observer.by_name_asc }
   filter :observation_report,
-         label: I18n.t('activerecord.models.observation_report'), as: :select,
+         label: -> { I18n.t('activerecord.models.observation_report') }, as: :select,
          collection: -> { ObservationReport.order(:title) }
-  filter :user, label: I18n.t('active_admin.observations_page.created_user'), as: :select, collection: -> { User.order(:name) }
-  filter :modified_user, label: I18n.t('active_admin.observations_page.modified_user'), as: :select, collection: -> { User.order(:name) }
+  filter :user, label: -> { I18n.t('active_admin.observations_page.created_user') }, as: :select, collection: -> { User.order(:name) }
+  filter :modified_user, label: -> { I18n.t('active_admin.observations_page.modified_user') }, as: :select, collection: -> { User.order(:name) }
   filter :is_active
   filter :publication_date
   filter :updated_at

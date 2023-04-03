@@ -30,8 +30,8 @@ ActiveAdmin.register Fmu do
     end
   end
 
-  scope I18n.t('active_admin.all'), :all, default: true
-  scope I18n.t('active_admin.free'), :filter_by_free_aa
+  scope ->{ I18n.t('active_admin.all') }, :all, default: true
+  scope ->{ I18n.t('active_admin.free') }, :filter_by_free_aa
 
   permit_params :id, :certification_fsc, :certification_pefc,
                 :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
@@ -40,10 +40,10 @@ ActiveAdmin.register Fmu do
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
-  filter :country, as: :select, collection: -> { Country.joins(:fmus).by_name_asc }
-  filter :operator_in_all, label: I18n.t('activerecord.attributes.fmu.operator'), as: :select, collection: -> { Operator.order(:name) }
+  filter :country, as: :select, label: proc { I18n.t('activerecord.models.country.one') }, collection: -> { Country.joins(:fmus).by_name_asc }
+  filter :operator_in_all, as: :select, label: proc { I18n.t('activerecord.attributes.fmu.operator') }, collection: -> { Operator.order(:name) }
   filter :translations_name_contains,
-         as: :select, label: I18n.t('activerecord.attributes.fmu/translation.name'),
+         as: :select, label: proc { I18n.t('activerecord.attributes.fmu/translation.name') },
          collection: -> { Fmu.by_name_asc.pluck(:name) }
 
   dependent_filters do
@@ -120,7 +120,7 @@ ActiveAdmin.register Fmu do
       f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
       render partial: 'zip_hint'
       f.input :forest_type, as: :select,
-                            collection: Fmu::FOREST_TYPES.map { |k, h| [h[:label], k] },
+                            collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
                             input_html: { disabled: object.persisted? }
       f.input :certification_fsc
       f.input :certification_pefc

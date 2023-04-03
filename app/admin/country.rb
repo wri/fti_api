@@ -15,12 +15,12 @@ ActiveAdmin.register Country do
     end
   end
 
-  scope I18n.t('active_admin.all'), :all
-  scope I18n.t('active_admin.shared.active'), :active
+  scope ->{ I18n.t('active_admin.all') }, :all
+  scope ->{ I18n.t('active_admin.shared.active') }, :active
 
   filter :iso, as: :select
   filter :translations_name_contains, as: :select,
-                                      label: I18n.t('activerecord.attributes.country/translation.name'),
+                                      label: -> { I18n.t('activerecord.attributes.country.name') },
                                       collection: -> { Country.order(:name).pluck(:name) }
   filter :region_iso, as: :select
   filter :region_name

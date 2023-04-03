@@ -18,8 +18,10 @@ ActiveAdmin.register FmuOperator do
 
   permit_params :fmu_id, :operator_id, :current, :start_date, :end_date
 
-  filter :operator, label: I18n.t('activerecord.models.operator'), as: :select, collection: -> { Operator.order(:name) }
-  filter :fmu, label: I18n.t('activerecord.models.fmu.one'), as: :select, collection: -> { Fmu.by_name_asc }
+  filter :operator, label: -> { I18n.t('activerecord.models.operator') }, as: :select,
+                    collection: -> { Operator.order(:name) }
+  filter :fmu, label: -> { I18n.t('activerecord.models.fmu.one') }, as: :select,
+               collection: -> { Fmu.by_name_asc }
   filter :current
   filter :start_date
   filter :end_date

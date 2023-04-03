@@ -9,6 +9,7 @@
 //= require pagination
 //= require visibility
 //= require dependent_filters
+//= require sentry
 
 //= require activeadmin/quill_editor/quill
 //= require activeadmin/quill_editor_input

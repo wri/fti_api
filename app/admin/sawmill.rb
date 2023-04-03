@@ -23,19 +23,19 @@ ActiveAdmin.register Sawmill do
     column 'Longitude', :lng
     column('Actions') do |sawmill|
       unless sawmill.is_active
-        a 'Activate', href: activate_admin_sawmill_path(sawmill),
-                      'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the sawmill #{sawmill.name}?"
+        a I18n.t('shared.activate'), href: activate_admin_sawmill_path(sawmill),
+                                     'data-method': :put, 'data-confirm': "Are you sure you want to ACTIVATE the sawmill #{sawmill.name}?"
       end
     end
 
     actions
   end
 
-  scope I18n.t('active_admin.all'), :all, default: true
-  scope I18n.t('active_admin.shared.active'), :active
-  scope I18n.t('active_admin.shared.inactive'), :inactive
+  scope -> { I18n.t('active_admin.all') }, :all, default: true
+  scope -> { I18n.t('active_admin.shared.active') }, :active
+  scope -> { I18n.t('active_admin.shared.inactive') }, :inactive
 
-  filter :operator, label: 'Operator', as: :select,
+  filter :operator, label: proc { I18n.t('filters.operator') }, as: :select,
                     collection: -> { Operator.joins(:sawmills).order(name: :asc) }
   filter :name
 

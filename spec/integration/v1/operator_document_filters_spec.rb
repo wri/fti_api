@@ -142,13 +142,13 @@ module V1
     end
 
     def forest_types
-      ConstForestTypes::FOREST_TYPES.map do |key, _value|
+      ForestType::TYPES.map do |key, _value|
         forest_type_entry(key)
       end
     end
 
     def forest_type_entry(key)
-      value = ConstForestTypes::FOREST_TYPES[key]
+      value = ForestType::TYPES[key]
       { key: key.to_s, id: value[:index], name: value[:label] }
     end
   end

@@ -29,6 +29,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
   end
 
   filter :translations_name_contains,
+         label: proc { I18n.t('activerecord.attributes.required_operator_document_group.name') },
          as: :select,
          collection: -> {
            RequiredOperatorDocumentGroup.with_translations(I18n.locale)

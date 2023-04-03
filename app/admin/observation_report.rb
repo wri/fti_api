@@ -35,10 +35,10 @@ ActiveAdmin.register ObservationReport do
 
   filter :observations_country_id,
          as: :select,
-         label: I18n.t('activerecord.models.country.one'),
+         label: -> { I18n.t('activerecord.models.country.one') },
          collection: -> { Country.with_observations.by_name_asc }
   filter :title, as: :select
-  filter :observers, as: :select, label: I18n.t('activerecord.attributes.observation.observers'), collection: -> { Observer.by_name_asc }
+  filter :observers, as: :select, label: -> { I18n.t('activerecord.attributes.observation.observers') }, collection: -> { Observer.by_name_asc }
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
   filter :publication_date
 

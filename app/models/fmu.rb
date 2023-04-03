@@ -29,7 +29,6 @@ class Fmu < ApplicationRecord
 
   include ValidationHelper
   include Translatable
-  include ForestTypeable
   translates :name, paranoia: true, touch: true, versioning: :paper_trail
 
   attr_reader :esri_shapefiles_zip
@@ -37,6 +36,8 @@ class Fmu < ApplicationRecord
   active_admin_translates :name do
     validates_presence_of :name
   end
+
+  enum forest_type: ForestType::TYPES_WITH_CODE
 
   belongs_to :country, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu, dependent: :destroy
@@ -133,7 +134,7 @@ class Fmu < ApplicationRecord
   def update_geojson_properties
     return if geojson.blank?
 
-    fmu_type_label = Fmu::FOREST_TYPES[forest_type.to_sym][:geojson_label] rescue ''
+    fmu_type_label = ForestType::TYPES[forest_type.to_sym][:geojson_label] rescue ''
     geojson['properties'] = (geojson['properties'] || {}).merge({
       'id' => id,
       'fmu_name' => name,

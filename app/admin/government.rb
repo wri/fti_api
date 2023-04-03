@@ -18,8 +18,8 @@ ActiveAdmin.register Government do
     end
   end
 
-  scope I18n.t('active_admin.all'), :all
-  scope I18n.t('active_admin.shared.active'), :active, default: true
+  scope ->{ I18n.t('active_admin.all') }, :all
+  scope ->{ I18n.t('active_admin.shared.active') }, :active, default: true
 
   csv do
     column :is_active
@@ -41,7 +41,7 @@ ActiveAdmin.register Government do
 
   filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc }
   filter :translations_government_entity_contains,
-         as: :select, label: I18n.t('activerecord.attributes.government/translation.government_entity'),
+         as: :select, label: -> { I18n.t('activerecord.attributes.government/translation.government_entity') },
          collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
 
   dependent_filters do
