@@ -316,7 +316,16 @@ ActiveAdmin.setup do |config|
   # You can add your own content to the site head like analytics. Make sure
   # you only pass content you trust.
   #
-  # config.head = ''.html_safe
+  # rubocop:disable Rails/OutputSafety
+  config.head = <<~HTML
+    <script
+     src="https://browser.sentry-cdn.com/7.45.0/bundle.min.js"
+     integrity="sha384-eB2/mQAt3oY62hGYFXiPg18greyp8WT/GvKHlsvdYbvSxBRGEhBqEX8L7giHxzvp"
+     crossorigin="anonymous"
+    ></script>
+  HTML
+    .html_safe
+  # rubocop:enable Rails/OutputSafety
 
   # == Footer
   #
