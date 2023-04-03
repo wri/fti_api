@@ -159,9 +159,12 @@ class Observation < ApplicationRecord
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, -> { includes(:translations).where(is_active: true).visible }
   scope :own_with_inactive, ->(observer) {
-    joins('INNER JOIN "observer_observations" ON "observer_observations"."observation_id" = "observations"."id"
-INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_id" = "all_observers"."id"')
-        .where("all_observers.id = #{observer}")
+    joins(
+      <<~SQL
+        INNER JOIN "observer_observations" ON "observer_observations"."observation_id" = "observations"."id"
+        INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_id" = "all_observers"."id"
+      SQL
+    ).where(all_observers: { id: observer })
   }
 
   scope :by_category,       ->(category_id) { joins(:subcategory).where(subcategories: { category_id: category_id }) }
@@ -172,7 +175,7 @@ INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_i
   scope :published,         -> { where(validation_status: PUBLISHED_STATES) }
   scope :hidden,            -> { where(hidden: true) }
   scope :visible,           -> { where(hidden: [false, nil]) }
-  scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name #{order}") }
+  scope :order_by_category, ->(order = 'ASC') { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order('ct.name' => order) }
   scope :bigger_date,       ->(date) { where('observations.created_at <= ?', date + 1.day) }
 
   class << self

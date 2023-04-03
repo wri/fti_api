@@ -53,7 +53,7 @@ class RankingOperatorDocument
       # Rules: COPIED OVER from old service
       # Operators must have FA_ID
       # Operators that have 0 documents should all be last with the ranking equal to the number of operators
-      country_query = country_id.nil? ? "" : " AND c.id = #{country_id}"
+      country_query = country_id.nil? ? "" : " AND c.id = #{country_id.to_i}"
       query =
       <<~SQL
         SELECT
