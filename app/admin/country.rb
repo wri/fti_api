@@ -20,7 +20,7 @@ ActiveAdmin.register Country do
 
   filter :iso, as: :select
   filter :translations_name_contains, as: :select,
-                                      label: I18n.t('activerecord.attributes.country.name'),
+                                      label: -> { I18n.t('activerecord.attributes.country.name') },
                                       collection: -> { Country.order(:name).pluck(:name) }
   filter :region_iso, as: :select
   filter :region_name

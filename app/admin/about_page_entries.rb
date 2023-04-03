@@ -10,9 +10,9 @@ ActiveAdmin.register AboutPageEntry do
   permit_params :position, :code, translations_attributes: [:id, :locale, :title, :body, :_destroy]
 
   filter :position, as: :select
-  filter :translations_title_contains, as: :select, label: I18n.t('activerecord.attributes.about_page_entry.title'),
+  filter :translations_title_contains, as: :select, label: -> { I18n.t('activerecord.attributes.about_page_entry.title') },
                                        collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:title) }
-  filter :translations_body_contains, as: :select, label: I18n.t('activerecord.attributes.about_page_entry.body'),
+  filter :translations_body_contains, as: :select, label: -> { I18n.t('activerecord.attributes.about_page_entry.body') },
                                       collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:body) }
 
   controller do
