@@ -64,7 +64,6 @@ docker-compose up
 
 ### Set up the database ###
 
-    cp config/database.yml.sample config/database.yml
     cp env.sample .env
 
     bundle exec rake db:create
