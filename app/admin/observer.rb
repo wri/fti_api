@@ -62,7 +62,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   filter :countries, as: :select,
                      collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
   filter :translations_name_eq,
-         as: :select, label:  I18n.t('activerecord.attributes.observer/translation.name'),
+         as: :select, label:  proc { I18n.t('activerecord.attributes.observer/translation.name') },
          collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name').pluck(:name) }
 
   show do

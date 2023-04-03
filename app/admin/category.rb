@@ -10,9 +10,9 @@ ActiveAdmin.register Category do
   config.order_clause
   config.filters = false
 
-  scope I18n.t('active_admin.all'), :all, default: true
-  scope I18n.t('activerecord.models.operator'), :operator
-  scope I18n.t('activerecord.models.government'), :government
+  scope -> { I18n.t('active_admin.all') }, :all, default: true
+  scope -> { I18n.t('activerecord.models.operator') }, :operator
+  scope -> { I18n.t('activerecord.models.government') }, :government
 
   permit_params :category_type, translations_attributes: [:id, :locale, :name, :_destroy]
 

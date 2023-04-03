@@ -37,6 +37,7 @@ fr:
     has_many_new: "Ajouter un(e) %{model}"
     has_many_delete: "Supprimer"
     has_many_remove: "Enlever"
+    data: 'Données'
     filters:
       buttons:
         filter: "Filtrer"
@@ -175,6 +176,10 @@ fr:
       government_details: 'Détails du gouvernement'
       country_details: 'Détails du pays'
       fmu_details: "Détails de l'UFA"
+      government_document_details: 'Détails des documents gouvernementaux'
+      edit_document: 'Modifier le document'
+      document_approved: 'Document approuvé'
+      document_rejected: 'Document rejeté'
     menu:
       dashboard:
         dashboard: 'Tableau de bord'
@@ -198,7 +203,7 @@ fr:
           species: 'Espèces'
       private_sector:
         private_sector: 'Secteur privé'
-        holdings: 'Avoirs'
+        holdings: 'Holdings'
         producers: 'Producteurs'
         sawmills: 'Scieries'
         document_categories: 'Document categories'
@@ -446,6 +451,7 @@ fr:
         ja: 'Japonais'
         ko: 'Coréen'
         vi: 'Vietnamien'
+        pt: 'Portugais'
     js:
       jump_to_page: 'Aller à la page'
   activerecord:
@@ -589,6 +595,7 @@ fr:
         position: 'Position'
         name: 'Nom'
         description: 'Description'
+        country: 'Pays'
 
       country_vpa:
         url: 'URL'
@@ -596,6 +603,7 @@ fr:
         position: 'Position'
         name: 'Nom'
         description: 'Description'
+        country: 'Pays'
 
       document_file:
         attachment: 'Attachement'
@@ -608,6 +616,7 @@ fr:
         type: 'Type'
         name: 'Nom'
         description: 'Description'
+        name: 'Nom'
 
       faq:
         position: 'Position'
@@ -616,15 +625,18 @@ fr:
         answer: 'Réponse'
 
       fmu:
+        country: 'Pays'
         geojson: 'Geojson'
         forest_type: 'Type de forêt'
         geometry: 'Géométrie'
         name: 'Nom'
+        operator: 'Opérateur'
 
       fmu_operator:
         current: 'Courant'
         start_date: 'Date de début'
         end_date: 'Date de fin'
+        operator: :activerecord.models.operator
 
       gov_document:
         status: 'Statut'
@@ -637,6 +649,7 @@ fr:
         link: 'Lien'
         value: 'Valeur'
         units: 'Unités'
+        user: 'Utilisateur'
         versions: Versions  #g
 
       gov_file:
@@ -681,8 +694,9 @@ fr:
         operators: Les opérateurs  #g
 
       how_to:
-        position: Positionner  #g
+        position: Position  #g
         translations: Traductions  #g
+        name: Nom
 
       how_to/translation:
         description: La description  #g
@@ -775,7 +789,7 @@ fr:
         versions: Versions  #g
 
       observation_history:
-        category: :activerecord.models.category  #g
+        category: :activerecord.models.category.one
         country: :activerecord.models.country  #g
         deleted_at: Supprimé à  #g
         evidence_type: Type de preuve  #g
@@ -819,7 +833,7 @@ fr:
         observer: :activerecord.models.observer  #g
 
       observation_statistic:
-        category: :activerecord.models.category  #g
+        category: :activerecord.models.category.one
         country: :activerecord.models.country  #g
         date: Date  #g
         fmu: :activerecord.models.fmu  #g
@@ -924,7 +938,7 @@ fr:
         source_info: Informations sur la source  #g
         start_date: Date de début  #g
         status: Statut  #g
-        uploaded_by: telechargé par  #g
+        uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
         versions: Versions  #g
 
@@ -940,7 +954,7 @@ fr:
         public: Public  #g
         start_date: Date de début  #g
         status: Statut  #g
-        uploaded_by: telechargé par  #g
+        uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
         versions: Versions  #g
 
@@ -963,7 +977,7 @@ fr:
         source_info: Informations sur la source  #g
         start_date: Date de début  #g
         status: Statut  #g
-        uploaded_by: telechargé par  #g
+        uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
         versions: Versions  #g
 
@@ -987,7 +1001,7 @@ fr:
         source_info: Informations sur la source  #g
         start_date: Date de début  #g
         status: Statut  #g
-        uploaded_by: telechargé par  #g
+        uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
 
       operator_document_fmu:
@@ -1009,7 +1023,7 @@ fr:
         source_info: Informations sur la source  #g
         start_date: Date de début  #g
         status: Statut  #g
-        uploaded_by: telechargé par  #g
+        uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
         versions: Versions  #g
 
@@ -1033,7 +1047,7 @@ fr:
         source_info: Informations sur la source  #g
         start_date: Date de début  #g
         status: Statut  #g
-        uploaded_by: telechargé par  #g
+        uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
 
       operator_document_history:
@@ -1056,7 +1070,7 @@ fr:
         source_info: Informations sur la source  #g
         start_date: Date de début  #g
         status: Statut  #g
-        uploaded_by: telechargé par  #g
+        uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
 
       operator_document_statistic:
@@ -1081,6 +1095,7 @@ fr:
         priority: Priorité  #g
         translations: Traductions  #g
         website: Site Internet  #g
+        name: Nom
 
       required_gov_document:
         country: :activerecord.models.country  #g
@@ -1088,7 +1103,7 @@ fr:
         document_type: Type de document  #g
         gov_documents: Documents gouvernementaux  #g
         name: Nom  #g
-        position: Positionner  #g
+        position: Position  #g
         required_gov_document_group: :activerecord.models.required_gov_document_group  #g
         translations: Traductions  #g
         valid_period: Période de validité  #g
@@ -1104,9 +1119,10 @@ fr:
       required_gov_document_group:
         deleted_at: Supprimé à  #g
         parent: :activerecord.models.parent  #g
-        position: Positionner  #g
+        position: Position  #g
         required_gov_documents: Documents gouvernementaux requis  #g
         translations: Traductions  #g
+        name: Nom
 
       required_gov_document_group/translation:
         deleted_at: Supprimé à  #g
@@ -1127,7 +1143,7 @@ fr:
         operator_document_fmus: Document opérateur fmus  #g
         operator_document_histories: Historiques des documents de l'opérateur  #g
         operator_documents: Documents de l'opérateur  #g
-        position: Positionner  #g
+        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
         translations: Traductions  #g
         valid_period: Période de validité  #g
@@ -1152,7 +1168,7 @@ fr:
         operator_document_fmus: Document opérateur fmus  #g
         operator_document_histories: Historiques des documents de l'opérateur  #g
         operator_documents: Documents de l'opérateur  #g
-        position: Positionner  #g
+        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
         translations: Traductions  #g
         valid_period: Période de validité  #g
@@ -1170,14 +1186,14 @@ fr:
         operator_document_fmus: Document opérateur fmus  #g
         operator_document_histories: Historiques des documents de l'opérateur  #g
         operator_documents: Documents de l'opérateur  #g
-        position: Positionner  #g
+        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
         translations: Traductions  #g
         valid_period: Période de validité  #g
         versions: Versions  #g
 
       required_operator_document_group:
-        position: Positionner  #g
+        position: Position  #g
         required_operator_document_countries: Pays requis pour le document de l'opérateur  #g
         required_operator_document_fmus: Document d'opérateur requis fmus  #g
         required_operator_documents: Documents de l'opérateur requis  #g
@@ -1257,7 +1273,7 @@ fr:
         species: :activerecord.models.species  #g
 
       subcategory:
-        category: :activerecord.models.category  #g
+        category: :activerecord.models.category.one
         laws: Lois  #g
         location_required: Lieu requis  #g
         observations: Observations  #g
@@ -1273,8 +1289,10 @@ fr:
         name: Nom  #g
 
       tool:
-        position: Positionner  #g
+        position: Position  #g
         translations: Traductions  #g
+        name: Nom
+        description: Description
 
       tool/translation:
         description: La description  #g
@@ -1283,8 +1301,10 @@ fr:
         name: Nom  #g
 
       tutorial:
-        position: Positionner  #g
+        position: Position  #g
         translations: Traductions  #g
+        name: Nom
+        description: Description
 
       tutorial/translation:
         description: La description  #g
@@ -1302,7 +1322,7 @@ fr:
         api_key: :activerecord.models.api_key  #g
         comments: commentaires  #g
         country: :activerecord.models.country  #g
-        current_sign_in_at: Connexion actuelle à  #g
+        current_sign_in_at: Dernière connexion à
         current_sign_in_ip: IP de connexion actuelle  #g
         deactivated_at: Désactivé à  #g
         email: E-mail  #g

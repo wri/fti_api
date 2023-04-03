@@ -37,10 +37,10 @@ ActiveAdmin.register ObservationReport do
   filter :attachment, as: :select
   filter :user, as: :select, collection: -> { User.order(:name) }
   filter :observations_country_id_eq,
-         label: I18n.t('activerecord.models.country.one'),
+         label: proc { I18n.t('activerecord.models.country.one') },
          as: :select,
          collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
-  filter :observers, label: I18n.t('activerecord.attributes.observation.observers'), as: :select,
+  filter :observers, label: proc { I18n.t('activerecord.attributes.observation.observers') }, as: :select,
                      collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
   filter :publication_date

@@ -166,14 +166,14 @@ ActiveAdmin.register Observation do
     end
   end
 
-  scope I18n.t('active_admin.all'), :all, default: true
-  scope I18n.t('activerecord.models.operator'), :operator
-  scope I18n.t('activerecord.models.government'), :government
-  scope I18n.t('active_admin.operator_documents_page.pending'), :pending
-  scope I18n.t('active_admin.observations_dashboard_page.published_all'), :published
-  scope I18n.t('shared.created'), :created
-  scope I18n.t('active_admin.observations_page.scope_hidden'), :hidden
-  scope I18n.t('active_admin.observations_page.visible'), :visible
+  scope -> { I18n.t('active_admin.all') }, :all, default: true
+  scope -> { I18n.t('activerecord.models.operator') }, :operator
+  scope -> { I18n.t('activerecord.models.government') }, :government
+  scope -> { I18n.t('active_admin.operator_documents_page.pending') }, :pending
+  scope -> { I18n.t('active_admin.observations_dashboard_page.published_all') }, :published
+  scope -> { I18n.t('shared.created') }, :created
+  scope -> { I18n.t('active_admin.observations_page.scope_hidden') }, :hidden
+  scope -> { I18n.t('active_admin.observations_page.visible') }, :visible
 
   filter :id, as: :numeric_range
   filter :validation_status,
@@ -186,26 +186,26 @@ ActiveAdmin.register Observation do
                     collection: -> { Operator.order(:name) }
   filter :fmu, as: :select,
                collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
-  filter :governments, as: :select, label: I18n.t('activerecord.attributes.government.government_entity'),
+  filter :governments, as: :select, label: proc { I18n.t('activerecord.attributes.government.government_entity') },
                        collection: -> {
                          Government.with_translations(I18n.locale)
                            .order('government_translations.government_entity')
                            .pluck('government_translations.government_entity', 'government_translations.government_id')
                        }
   filter :subcategory_category_id_eq,
-         label: I18n.t('activerecord.models.category'), as: :select,
+         label: proc { I18n.t('activerecord.models.category.one') }, as: :select,
          collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
   filter :subcategory,
-         label: I18n.t('activerecord.models.subcategory'), as: :select,
+         as: :select,
          collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :observers, label: I18n.t('activerecord.models.observer'), as: :select,
+  filter :observers, label: proc { I18n.t('activerecord.models.observer') }, as: :select,
                      collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
   filter :observation_report,
-         label: I18n.t('activerecord.models.observation_report'), as: :select,
+         label: proc { I18n.t('activerecord.models.observation_report') }, as: :select,
          collection: -> { ObservationReport.order(:title) }
-  filter :user, label: I18n.t('active_admin.observations_page.created_user'), as: :select, collection: -> { User.order(:name) }
-  filter :modified_user, label: I18n.t('active_admin.observations_page.modified_user'), as: :select, collection: -> { User.order(:name) }
+  filter :user, label: proc { I18n.t('active_admin.observations_page.created_user') }, as: :select, collection: -> { User.order(:name) }
+  filter :modified_user, label: proc { I18n.t('active_admin.observations_page.modified_user') }, as: :select, collection: -> { User.order(:name) }
   filter :is_active
   filter :publication_date
   filter :updated_at

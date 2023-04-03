@@ -23,11 +23,11 @@ ActiveAdmin.register Law do
                    collection: -> { Country.joins(:laws).with_translations(I18n.locale).order('country_translations.name') }
   filter :subcategory, as: :select,
                        collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :written_infraction, label: I18n.t('active_admin.laws_page.written_infraction'), as: :select
-  filter :infraction, label: I18n.t('active_admin.laws_page.infraction'), as: :select
-  filter :sanctions, label: I18n.t('active_admin.laws_page.sanctions'), as: :select
-  filter :max_fine, label: I18n.t('active_admin.laws_page.max_fine')
-  filter :min_fine, label: I18n.t('active_admin.laws_page.min_fine')
+  filter :written_infraction, label: proc { I18n.t('active_admin.laws_page.written_infraction') }, as: :select
+  filter :infraction, label: proc { I18n.t('active_admin.laws_page.infraction') }, as: :select
+  filter :sanctions, label: proc { I18n.t('active_admin.laws_page.sanctions') }, as: :select
+  filter :max_fine, label: proc { I18n.t('active_admin.laws_page.max_fine') }
+  filter :min_fine, label: proc { I18n.t('active_admin.laws_page.min_fine') }
 
   csv do
     column :country do |l|

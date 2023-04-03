@@ -23,6 +23,7 @@ en:
     has_many_delete: "Delete"
     has_many_remove: "Remove"
     move: "Move"
+    data: 'Data'
     filters:
       buttons:
         filter: "Filter"
@@ -165,6 +166,10 @@ en:
       government_details: 'Government Details'
       country_details: 'Country Details'
       fmu_details: 'FMU details'
+      government_document_details: 'Government document details'
+      edit_document: 'Edit document'
+      document_approved: 'Document approved'
+      document_rejected: 'Document rejected'
     menu:
       dashboard:
         dashboard: 'Dashboard'
@@ -449,7 +454,9 @@ en:
       active_admin/comment: Active admin/comment  #g
       annex_document: Annex document  #g
       api_key: API key  #g
-      category: Category  #g
+      category:
+        one: Category
+        other: Categories
       category/translation: Category/translation  #g
       comment: Comment  #g
       contributor: Contributor  #g
@@ -517,7 +524,9 @@ en:
       required_operator_document/translation: Required operator document/translation  #g
       required_operator_document_country: Required operator document country  #g
       required_operator_document_fmu: Required operator document fmu  #g
-      required_operator_document_group: Required operator document group  #g
+      required_operator_document_group:
+        one: Required operator document group
+        other : Required operator document groups
       required_operator_document_group/translation: Required operator document group/translation  #g
       sawmill: Sawmill  #g
       score_operator_document: Score operator document  #g
@@ -542,6 +551,8 @@ en:
         code: Code  #g
         position: Position  #g
         translations: Translations  #g
+        title: Title
+        body: Body
 
       about_page_entry/translation:
         body: Body  #g
@@ -608,6 +619,7 @@ en:
         is_active: Is active  #g
         iso: Iso  #g
         laws: Laws  #g
+        name: Name
         observations: Observations  #g
         observers: Observers  #g
         operators: Operators  #g
@@ -664,11 +676,14 @@ en:
         priority: priority  #g
         translations: Translations  #g
         website: Website  #g
+        name: Name
 
       faq:
         image: Image  #g
         position: Position  #g
         translations: Translations  #g
+        answer: Answer  #g
+        question: Question  #g
 
       faq/translation:
         answer: Answer  #g
@@ -692,6 +707,7 @@ en:
         forest_type: Forest type  #g
         geojson: Geojson  #g
         geometry: Geometry  #g
+        name: Name
         observations: Observations  #g
         operator: :activerecord.models.operator  #g
         operator_document_fmus: Operator document fmus  #g
@@ -866,7 +882,7 @@ en:
         versions: Versions  #g
 
       observation_history:
-        category: :activerecord.models.category  #g
+        category: :activerecord.models.category.one
         country: :activerecord.models.country  #g
         deleted_at: deleted_at  #g
         evidence_type: Evidence type  #g
@@ -910,7 +926,7 @@ en:
         observer: :activerecord.models.observer  #g
 
       observation_statistic:
-        category: :activerecord.models.category  #g
+        category: :activerecord.models.category.one
         country: :activerecord.models.country  #g
         date: Date  #g
         fmu: :activerecord.models.fmu  #g
@@ -1171,6 +1187,7 @@ en:
         priority: Priority  #g
         translations: Translations  #g
         website: Website  #g
+        name: Name
 
       required_gov_document:
         country: :activerecord.models.country  #g
@@ -1272,6 +1289,7 @@ en:
         required_operator_document_fmus: Required operator document fmus  #g
         required_operator_documents: Required operator documents  #g
         translations: Translations  #g
+        name: Name
 
       required_operator_document_group/translation:
         globalized_model: :activerecord.models.globalized_model  #g
@@ -1346,7 +1364,7 @@ en:
         species: :activerecord.models.species  #g
 
       subcategory:
-        category: :activerecord.models.category  #g
+        category: :activerecord.models.category.one
         laws: Laws  #g
         location_required: Location required  #g
         observations: Observations  #g
@@ -1391,7 +1409,7 @@ en:
         api_key: :activerecord.models.api_key  #g
         comments: Comments  #g
         country: :activerecord.models.country  #g
-        current_sign_in_at: Current sign in at  #g
+        current_sign_in_at: Last sign-in on
         current_sign_in_ip: Current sign in ip  #g
         deactivated_at: Deactivated at  #g
         email: Email  #g
