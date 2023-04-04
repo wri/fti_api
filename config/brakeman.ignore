@@ -47,6 +47,29 @@
       "note": ""
     },
     {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "37663cbc804847d06c2aa3d166001f776d5f236e17c53d1a7da83540650b280d",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/operator_document_statistic.rb",
+      "line": 33,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "where(\"date > '#{(date or Date.parse(date)).to_s(:db)}'\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "OperatorDocumentStatistic",
+        "method": "OperatorDocumentStatistic.from_date"
+      },
+      "user_input": "date",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Command Injection",
       "warning_code": 14,
       "fingerprint": "38623cc840f776cf5570955ff366c35a012bfdb28fd9a8103e4d3df5fea22f41",
@@ -131,6 +154,29 @@
       "confidence": "Medium",
       "cwe_id": [
         1104
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "719fd3ec422a1f659e331c798bc77e5220290db6cb82dfa8214e933eebebe628",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/observation_report_statistic.rb",
+      "line": 24,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "where(\"date > '#{(date or Date.parse(date)).to_s(:db)}'\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ObservationReportStatistic",
+        "method": "ObservationReportStatistic.from_date"
+      },
+      "user_input": "date",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
       ],
       "note": ""
     },
@@ -302,7 +348,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "config/initializers/jsonapi_resources.rb",
-      "line": 95,
+      "line": 98,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "records.joins((_build_joins([records.model, *_lookup_association_chain([records.model.to_s, *model_names]).last]) << \" LEFT JOIN #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_translations ON #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_translations.#{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_id = #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_sorting.id AND #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_translations.locale = '#{_context[:locale]}'\"))",
       "render_path": null,
@@ -404,6 +450,6 @@
       "note": ""
     }
   ],
-  "updated": "2023-04-03 12:25:51 +0200",
+  "updated": "2023-04-04 13:18:31 +0200",
   "brakeman_version": "5.4.1"
 }
