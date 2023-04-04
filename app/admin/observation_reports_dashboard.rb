@@ -9,7 +9,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
 
   filter :country_id,
          as: :select,
-         label: I18n.t('activerecord.models.country.one'),
+         label: -> { I18n.t('activerecord.models.country.one') },
          collection: -> {
            [[I18n.t('active_admin.producer_documents_dashboard_page.all_countries'), 'null']] +
              Country.with_at_least_one_report.order(:name).map { |c| [c.name, c.id] }
@@ -17,7 +17,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
   filter :observer,
          as: :select,
          multiple: true,
-         label: I18n.t('activerecord.models.observer'),
+         label: -> { I18n.t('activerecord.models.observer') },
          collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
   filter :date
 

@@ -6,7 +6,6 @@ module ActiveAdmin
         filter_tree = block.call
         filter_tree.each_value { |v| v.transform_values! { |collection| HashHelper.aggregate(collection) } }
 
-        # div class: 'dependent-filters', data: { filters: filter_tree }
         content_tag :div, nil, class: 'dependent-filters', data: { filters: filter_tree }
       end
     end
