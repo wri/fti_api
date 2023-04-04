@@ -3,7 +3,7 @@ namespace :update do
   task geojson: :environment do
     Fmu.find_each do |fmu|
       fmu.save!
-    rescue Exception => e
+    rescue => e
       puts "FMU ID: #{fmu.id}. Error: #{e.inspect}"
     end
   end

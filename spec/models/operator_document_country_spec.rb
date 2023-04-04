@@ -40,7 +40,7 @@ RSpec.describe OperatorDocumentCountry, type: :model do
           country = create(:country)
           operator = create(:operator, approved: true, country: country, fa_id: "fa_id")
           # below should already create not_provided signature document which should invalidate approved status of operator
-          required_operator_document = create(:required_operator_document_country, contract_signature: true, country: country)
+          create(:required_operator_document_country, contract_signature: true, country: country)
           operator.reload
           expect(operator.approved).to eql false
         end

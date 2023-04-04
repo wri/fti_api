@@ -10,7 +10,7 @@ module V1
       country = create(:country)
       # below generates one document
       @signature_document = create(:required_operator_document_country, required_operator_document_group: @signature_group, contract_signature: true, country: country)
-      operator = create(:operator, country: country, fa_id: "fa_id")
+      create(:operator, country: country, fa_id: "fa_id")
       document_group = create(:required_operator_document_group, name: "Some group")
       # below creates 7 country documents for operator
       create_list(:required_operator_document_country, 7, required_operator_document_group: document_group, country: country)

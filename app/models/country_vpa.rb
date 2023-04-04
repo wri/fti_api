@@ -23,7 +23,7 @@ class CountryVpa < ApplicationRecord
   active_admin_translates :name do
     validates_presence_of :name
   end
-  # rubocop:disable Style/BlockDelimiters
+  # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :description do; end
-  # rubocop:enable Style/BlockDelimiters
+  # rubocop:enable Standard/BlockSingleLineBraces
 end

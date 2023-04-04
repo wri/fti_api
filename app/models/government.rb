@@ -17,11 +17,11 @@ class Government < ApplicationRecord
   has_paper_trail
   include Translatable
 
-  # rubocop:disable Style/BlockDelimiters
   translates :government_entity, :details, touch: true, versioning: :paper_trail
 
+  # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :government_entity, :details do; end
-  # rubocop:enable Style/BlockDelimiters
+  # rubocop:enable Standard/BlockSingleLineBraces
 
   belongs_to :country, inverse_of: :governments, optional: true
 

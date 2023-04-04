@@ -21,7 +21,7 @@ module V1
     def add_observers
       @model.observer_ids = @model.observations.map(&:observers).map(&:ids).flatten if @model.observations.any?
       @model.save
-    rescue Exception => e
+    rescue => e
       Rails.logger.warn "ObservationReport created without observers: #{e.inspect}"
     end
     # rubocop:enable Lint/RescueException

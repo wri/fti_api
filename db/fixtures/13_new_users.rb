@@ -1,7 +1,5 @@
 unless User.find_by(nickname: "testngo")
-  assign_country_id = if country = Country.find_by(iso: "COG")
-    country.id
-  end
+  assign_country_id = Country.find_by(iso: "COG")&.id
 
   @user = User.new(email: "testngo@ngo.com", password: "testpassword!ng0",
     password_confirmation: "testpassword!ng0", name: "testngo",

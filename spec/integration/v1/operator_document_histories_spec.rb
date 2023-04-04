@@ -97,8 +97,8 @@ module V1
 
         it "Fetches only one history per operator document" do
           operator_document = FactoryBot.create :operator_document_country
-          other_operator_document = FactoryBot.create :operator_document_country, operator_id: operator_document.operator_id
-          attachment = operator_document.document_file.attachment_url
+          FactoryBot.create :operator_document_country, operator_id: operator_document.operator_id
+          operator_document.document_file.attachment_url
           travel_to time1
           operator_document.update(status: "doc_invalid")
           travel_to time2

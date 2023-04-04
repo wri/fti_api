@@ -22,10 +22,10 @@ namespace :fix do
       annexes_connections_before_migration = parse_csv.call("annexes_before_migration.csv")
       annexes_orphaned_after_history_clean = parse_csv.call("annexes_46_before_clean.csv")
 
-      ods_ids = OperatorDocumentHistory
-        .where(id: AnnexDocument.where(documentable_type: "OperatorDocumentHistory").pluck(:documentable_id))
-        .pluck(:operator_document_id)
-        .uniq
+      # ods_ids = OperatorDocumentHistory
+      #   .where(id: AnnexDocument.where(documentable_type: "OperatorDocumentHistory").pluck(:documentable_id))
+      #   .pluck(:operator_document_id)
+      #   .uniq
 
       all_backup = (annexes_connections_before_migration.map(&:to_h) +
                     annexes_orphaned_after_history_clean.map(&:to_h)).uniq
@@ -120,7 +120,9 @@ namespace :fix do
   task fix_doc_history: :environment do
     date = "2021-04-01"
 
+    # rubocop:disable Lint/ConstantDefinitionInBlock
     OperatorDocumentUploader = Class.new # to fix initialization of old document which used this
+    # rubocop:enable Lint/ConstantDefinitionInBlock
 
     docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
 

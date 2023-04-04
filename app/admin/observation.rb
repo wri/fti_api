@@ -21,17 +21,17 @@ ActiveAdmin.register Observation do
 
   menu false
 
-  PER_PAGE = [10, 20, 40, 60].freeze
+  per_page = [10, 20, 40, 60].freeze
 
   config.order_clause
-  config.per_page = PER_PAGE
+  config.per_page = per_page
 
   before_action only: :index do
-    if PER_PAGE.include? params[:per_page]
+    if per_page.include? params[:per_page]
       @per_page = params[:per_page]
       session[:obs_per_page] = @per_page
     else
-      session[:obs_per_page] = PER_PAGE.include?(session[:obs_per_page]) ? session[:obs_per_page] : 10
+      session[:obs_per_page] = per_page.include?(session[:obs_per_page]) ? session[:obs_per_page] : 10
       @per_page = session[:obs_per_page]
     end
   end

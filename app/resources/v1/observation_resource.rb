@@ -134,7 +134,7 @@ module V1
       @model.save
       # This is added because of the order of the callbacks in JAR
       @model.update_reports_observers
-    rescue Exception => e
+    rescue => e
       Rails.logger.warn "Observation created without user: #{e.inspect}"
     end
     # rubocop:enable Lint/RescueException

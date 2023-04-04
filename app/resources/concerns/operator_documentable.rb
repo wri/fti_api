@@ -44,7 +44,6 @@ module OperatorDocumentable
 
     def attachment=(attachment)
       @model.build_document_file(attachment: attachment)
-      nil
     end
 
     def document_visible?

@@ -76,9 +76,11 @@ namespace :import do
     filename = File.expand_path(File.join(Rails.root, "db", "files", "operator_document_types.csv"))
 
     puts "* Operator document types... *"
-    country_congo = Country.find_by(iso: "COG").id
-    country_drc = Country.find_by(iso: "COD").id
-    country_generic = nil
+    countries = {
+      "congo" => Country.find_by(iso: "COG").id,
+      "drc" => Country.find_by(iso: "COD").id,
+      "generic" => nil
+    }
 
     rodg = nil
 
@@ -99,8 +101,7 @@ namespace :import do
             if rod_name.present?
               RequiredOperatorDocument.where(required_operator_document_group_id: rodg.id, valid_period: 365,
                 name: rod_name, type: "RequiredOperatorDocument#{doc_type.capitalize}",
-                country_id: eval("country_#{country}")).first_or_create!
-
+                country_id: countries[country]).first_or_create!
             end
           end
         end
@@ -147,10 +148,12 @@ namespace :import do
     filename = File.expand_path(File.join(Rails.root, "db", "files", "subcategory_operators.csv"))
     puts "* Subcategories operators... *"
     Subcategory.transaction do
-      congo = Country.find_by(name: "Congo")
-      drc = Country.find_by(name: "Democratic Republic of the Congo")
-      cameroon = Country.find_by(name: "Cameroon")
-      ci = Country.find_by(name: "Cote d'Ivoire")
+      countries = {
+        "congo" => Country.find_by(name: "Congo"),
+        "drc" => Country.find_by(name: "Democratic Republic of the Congo"),
+        "cameroon" => Country.find_by(name: "Cameroon"),
+        "ci" => Country.find_by(name: "Cote d'Ivoire")
+      }
 
       subcategory = nil
 
@@ -186,9 +189,9 @@ namespace :import do
           apv = data_row["#{country} apv"]
 
           if written_infraction.present? || infraction.present?
-            law = Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
+            Law.where(subcategory_id: subcategory.id, written_infraction: written_infraction, infraction: infraction,
               sanctions: sanctions, min_fine: min_fine, max_fine: max_fine, penal_servitude: penal_servitude,
-              other_penalties: other_penalties, apv: apv, country_id: eval("#{country}.id")).first_or_create
+              other_penalties: other_penalties, apv: apv, country_id: countries[country].id).first_or_create
           end
         end
       end
@@ -258,7 +261,7 @@ namespace :import do
               report.observers = Observer.where(id: monitor_ids)
               report.save
             end
-          rescue Exception => e
+          rescue => e
             puts "-------Couldn't load #{report_name}: #{e.inspect}"
           end
         end
@@ -336,7 +339,7 @@ namespace :import do
               report.observers = Observer.where(id: monitor_ids)
               report.save
             end
-          rescue Exception => e
+          rescue => e
             puts "-------Couldn't load #{report_name}: #{e.inspect}"
           end
         end
@@ -425,7 +428,7 @@ namespace :import do
             fmu.operator_id = operator.id
             fmu.save
           end
-        rescue Exception => e
+        rescue => e
           puts "Error in operator id fmu: #{e.inspect} - #{data_row["fmu"]}"
         end
       end
@@ -459,7 +462,7 @@ namespace :import do
   end
 
   # Imports the operator document files
-  desc "Import Operator Documents"" Files"
+  desc "Import Operator Documents Files"
   task operator_document_files: :environment do
     filename = File.expand_path(File.join(Rails.root, "db", "files", "operator_documents.csv"))
     puts "* Operator Documents Files... *"
@@ -499,7 +502,7 @@ namespace :import do
         begin
           next if operator_document.status == OperatorDocument.statuses[:doc_pending]
           operator_document.remote_attachment_url = link
-        rescue Exception => e
+        rescue => e
           puts "-------Couldn't load Operator Document: #{link}: #{e.inspect}"
         end
 
@@ -515,7 +518,7 @@ namespace :import do
   end
 
   # Imports the operator document files
-  desc "Import Operator Documents"" Files V2"
+  desc "Import Operator Documents Files V2"
   task operator_document_files_v2: :environment do
     filename = File.expand_path(File.join(Rails.root, "db", "files", "operator_documents_v2.csv"))
     puts "* Operator Documents Files... *"
@@ -564,7 +567,7 @@ namespace :import do
           unless operator_document.status == OperatorDocument.statuses[:doc_pending]
             operator_document.attachment = File.open(File.join(Rails.root, "db", "files", "operator_document_files", file))
           end
-        rescue Exception => e
+        rescue => e
           puts "-------Couldn't load Operator Document: #{file}: #{e.inspect}"
         end
 

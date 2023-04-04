@@ -10,7 +10,7 @@ namespace :deploy do
     begin
       stdout, stderr, status = Open3.capture3(command)
       raise stderr unless status.success?
-    rescue Exception => e
+    rescue => e
       Sentry.capture_exception e
       Rails.logger.error e.inspect
       raise
@@ -33,7 +33,7 @@ namespace :deploy do
     begin
       stdout, stderr, status = Open3.capture3(command)
       raise stderr unless status.success?
-    rescue Exception => e
+    rescue => e
       Sentry.capture_exception e
       Rails.logger.error e.inspect
       raise

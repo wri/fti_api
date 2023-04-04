@@ -128,7 +128,7 @@ namespace :import do
     end
 
     # Imports the operator document files
-    desc "Import Operator Documents"" Files"
+    desc "Import Operator Documents Files"
     task operator_document_files: :environment do
       filename = File.expand_path(File.join(Rails.root, "db", "files", "v2", "documents.csv"))
       puts "* Operator Documents Files... *"
@@ -171,7 +171,7 @@ namespace :import do
           begin
             next if operator_document.status == OperatorDocument.statuses[:doc_pending]
             operator_document.remote_attachment_url = link
-          rescue Exception => e
+          rescue => e
             puts "-------Couldn't load Operator Document: #{link}: #{e.inspect}"
           end
 

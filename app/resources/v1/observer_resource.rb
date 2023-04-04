@@ -21,10 +21,6 @@ module V1
       @model.is_active = false
     end
 
-    def fetchable_fields
-      super - [:delete_logo]
-    end
-
     def self.updatable_fields(context)
       super - [:is_active]
     end
@@ -39,9 +35,9 @@ module V1
 
     def fetchable_fields
       if (context[:app] == "observations-tool") || @model.public_info
-        super
+        super - [:delete_logo]
       else
-        super - [:address, :information_name, :information_email, :information_phone, :data_email, :data_phone, :data_name]
+        super - [:delete_logo, :address, :information_name, :information_email, :information_phone, :data_email, :data_phone, :data_name]
       end
     end
   end

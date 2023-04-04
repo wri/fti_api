@@ -63,10 +63,10 @@ class FmuOperator < ApplicationRecord
 
     (0...(dates.count - 1)).each do |i|
       ((i + 1)...(dates.count)).each do |j|
-        errors.add(:end_date, "Cannot have two operators without end date") and return if dates[i][1].nil? && dates[j][1].nil?
+        errors.add(:end_date, "Cannot have two operators without end date") and return false if dates[i][1].nil? && dates[j][1].nil?
 
         if intersects?(dates[i], dates[j])
-          errors.add(:start_date, "Colliding dates") and return
+          errors.add(:start_date, "Colliding dates") and return false
         end
       end
     end

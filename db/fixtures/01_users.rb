@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 unless User.find_by(nickname: "admin")
-  assign_country_id = if country = Country.find_by(iso: "USA")
-    country.id
-  end
+  assign_country_id = Country.find_by(iso: "USA")&.id
 
   @user = User.new(email: "admin@example.com", password: "password", password_confirmation: "password", name: "Admin", nickname: "admin", country_id: assign_country_id)
   @user.build_user_permission(user_role: "admin")
@@ -19,9 +17,7 @@ end
 
 # frozen_string_literal: true
 unless User.find_by(nickname: "user")
-  assign_country_id = if country = Country.find_by(iso: "USA")
-    country.id
-  end
+  assign_country_id = Country.find_by(iso: "USA")&.id
 
   @user = User.new(email: "user@example.com", password: "password", password_confirmation: "password", name: "User", nickname: "user", country_id: assign_country_id, is_active: true)
   @user.build_user_permission(user_role: "user")
@@ -35,9 +31,7 @@ unless User.find_by(nickname: "user")
 end
 
 unless User.find_by(nickname: "webuser")
-  assign_country_id = if country = Country.find_by(iso: "USA")
-    country.id
-  end
+  assign_country_id = Country.find_by(iso: "USA")&.id
 
   @user = User.new(email: "webuser@example.com", password: "password", password_confirmation: "password", name: "Web", nickname: "webuser", country_id: assign_country_id, is_active: true)
   @user.build_user_permission(user_role: "user")

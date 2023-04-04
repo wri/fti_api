@@ -14,11 +14,11 @@
 
 class Severity < ApplicationRecord
   include Translatable
-  # rubocop:disable Style/BlockDelimiters
-  translates :details, touch: true
 
+  translates :details, touch: true
+  # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :details do; end
-  # rubocop:enable Style/BlockDelimiters
+  # rubocop:enable Standard/BlockSingleLineBraces
 
   belongs_to :subcategory, inverse_of: :severities
   has_many :observations, inverse_of: :severity

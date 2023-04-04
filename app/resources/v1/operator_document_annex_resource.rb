@@ -24,7 +24,6 @@ module V1
       odh = OperatorDocumentHistory.where(operator_document_id: operator_document_id).order(operator_document_updated_at: :desc).first
       adh = AnnexDocument.new(documentable: odh)
       @model.annex_documents_history << adh
-      nil
     end
 
     def name

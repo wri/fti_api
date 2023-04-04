@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module BackRedirectable
+  # rubocop:disable Lint/NestedMethodDefinition
   def self.extended(base)
     base.controller do
       def update
@@ -12,6 +13,7 @@ module BackRedirectable
       end
     end
   end
+  # rubocop:enable Lint/NestedMethodDefinition
 
   def form(options = {}, &block)
     if block.present?

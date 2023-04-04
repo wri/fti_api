@@ -19,9 +19,9 @@ class Subcategory < ApplicationRecord
   enum subcategory_type: {operator: 0, government: 1}
   translates :name, :details, touch: true
 
-  # rubocop:disable Style/BlockDelimiters
+  # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :name do; end
-  # rubocop:enable Style/BlockDelimiters
+  # rubocop:enable Standard/BlockSingleLineBraces
 
   validates_presence_of :category, :subcategory_type
 

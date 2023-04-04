@@ -10,13 +10,12 @@ ActiveAdmin.register Fmu do
 
   config.order_clause
 
-  MAX_FILE_SIZE = 200_000
-
   controller do
     def preview
       file = params["file"]
-      response = if file.blank? || file.size > MAX_FILE_SIZE
-        {errors: "File must exist and be smaller than #{MAX_FILE_SIZE / 1000} KB"}
+      max_file_size = 200_000
+      response = if file.blank? || file.size > max_file_size
+        {errors: "File must exist and be smaller than #{max_file_size / 1000} KB"}
       else
         Fmu.file_upload(file)
       end
