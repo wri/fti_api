@@ -132,6 +132,8 @@ end
 
 group :test do
   gem 'bullet'
+  gem 'capybara'
+  gem 'cuprite'
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'rspec-activejob'

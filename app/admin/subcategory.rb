@@ -11,7 +11,7 @@ ActiveAdmin.register Subcategory do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([category: :translations])
+      end_of_association_chain.with_translations(I18n.locale).includes([category: :translations])
     end
   end
 
@@ -22,16 +22,21 @@ ActiveAdmin.register Subcategory do
   scope ->{ I18n.t('activerecord.models.operator') }, :operator
   scope ->{ I18n.t('activerecord.models.government') }, :government
 
+
+  filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :translations_name_eq,
-         as: :select, label: proc { I18n.t('activerecord.attributes.subcategory.name') },
-         collection: -> {
-           Subcategory.with_translations(I18n.locale)
-             .order('subcategory_translations.name').pluck(:name)
-         }
-  filter :category, as: :select,
-                    collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
+         as: :select, label: -> { I18n.t('activerecord.attributes.subcategory.name') },
+         collection: -> { Subcategory.by_name_asc.pluck(:name) }
   filter :created_at
   filter :updated_at
+
+  dependent_filters do
+    {
+      category_id: {
+        translations_name_eq: Subcategory.pluck(:category_id, :name)
+      }
+    }
+  end
 
   sidebar :laws, only: :show do
     sidebar = Law.where(subcategory: resource).collect do |law|

@@ -180,36 +180,40 @@ ActiveAdmin.register Observation do
          as: :select,
          input_html: { multiple: true },
          collection: -> { Observation.validation_statuses.sort }
-  filter :country, as: :select,
-                   collection: -> { Country.joins(:observations).with_translations(I18n.locale).order('country_translations.name') }
-  filter :operator, as: :select,
-                    collection: -> { Operator.order(:name) }
-  filter :fmu, as: :select,
-               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
-  filter :governments, as: :select, label: proc { I18n.t('activerecord.attributes.government.government_entity') },
-                       collection: -> {
-                         Government.with_translations(I18n.locale)
-                           .order('government_translations.government_entity')
-                           .pluck('government_translations.government_entity', 'government_translations.government_id')
-                       }
-  filter :subcategory_category_id_eq,
-         label: proc { I18n.t('activerecord.models.category.one') }, as: :select,
-         collection: -> { Category.with_translations(I18n.locale).order('category_translations.name') }
-  filter :subcategory,
-         as: :select,
-         collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
+  filter :country, as: :select, collection: -> { Country.with_observations.by_name_asc }
+  filter :operator, as: :select, collection: -> { Operator.by_name_asc }
+  filter :fmu, as: :select, collection: -> { Fmu.by_name_asc }
+  filter :governments, as: :select, label: -> { I18n.t('activerecord.attributes.government.government_entity') }, collection: -> { Government.by_entity_asc }
+  filter :subcategory_category_id, label: -> { I18n.t('activerecord.models.category') }, as: :select, collection: -> { Category.by_name_asc }
+  filter :subcategory, as: :select, label: -> { I18n.t('activerecord.models.subcategory') }, collection: -> { Subcategory.by_name_asc }
   filter :severity_level, as: :select, collection: [['Unknown', 0],['Low', 1], ['Medium', 2], ['High', 3]]
-  filter :observers, label: proc { I18n.t('activerecord.models.observer') }, as: :select,
-                     collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name') }
+  filter :observers, as: :select, label: -> { I18n.t('activerecord.models.observer') }, collection: -> { Observer.by_name_asc }
   filter :observation_report,
-         label: proc { I18n.t('activerecord.models.observation_report') }, as: :select,
+         label: -> { I18n.t('activerecord.models.observation_report') }, as: :select,
          collection: -> { ObservationReport.order(:title) }
-  filter :user, label: proc { I18n.t('active_admin.observations_page.created_user') }, as: :select, collection: -> { User.order(:name) }
-  filter :modified_user, label: proc { I18n.t('active_admin.observations_page.modified_user') }, as: :select, collection: -> { User.order(:name) }
+  filter :user, label: -> { I18n.t('active_admin.observations_page.created_user') }, as: :select, collection: -> { User.order(:name) }
+  filter :modified_user, label: -> { I18n.t('active_admin.observations_page.modified_user') }, as: :select, collection: -> { User.order(:name) }
   filter :is_active
   filter :publication_date
   filter :updated_at
   filter :deleted_at
+
+  dependent_filters do
+    {
+      country_id: {
+        operator_id: Operator.pluck(:country_id, :id),
+        fmu_id: Fmu.pluck(:country_id, :id),
+        government_ids: Government.pluck(:country_id, :id),
+        observer_ids: Observer.joins(:countries).pluck(:country_id, :id)
+      },
+      subcategory_category_id: {
+        subcategory_id: Subcategory.pluck(:category_id, :id)
+      },
+      observer_ids: {
+        observation_report_id: ObservationReport.joins(:observers).pluck(:observer_id, :id)
+      }
+    }
+  end
 
   csv do
     column :id
@@ -313,21 +317,7 @@ ActiveAdmin.register Observation do
     column :deleted_at
   end
 
-
   index do
-    render partial: 'hidden_filters', locals: {
-        filter: {
-            categories: {
-                subcategories: HashHelper.aggregate(Subcategory.distinct.pluck(:category_id, :id).map{ |x| { x.first => x.last } })
-            },
-            countries: {
-                government_entities: HashHelper.aggregate(Government.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
-                operators: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
-                fmus: HashHelper.aggregate(Fmu.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
-            },
-            operators: { fmus: HashHelper.aggregate(Fmu.joins(:operators).pluck('operators.id', :id).map{ |x| { x.first => x.last } }) }
-        }
-    }
     selectable_column
     column :id
     column :is_active

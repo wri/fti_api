@@ -19,15 +19,25 @@ ActiveAdmin.register Law do
   permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :currency,
                 :penal_servitude, :other_penalties, :apv, :written_infraction, :country_id
 
-  filter :country, as: :select,
-                   collection: -> { Country.joins(:laws).with_translations(I18n.locale).order('country_translations.name') }
-  filter :subcategory, as: :select,
-                       collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
-  filter :written_infraction, label: proc { I18n.t('active_admin.laws_page.written_infraction') }, as: :select
-  filter :infraction, label: proc { I18n.t('active_admin.laws_page.infraction') }, as: :select
-  filter :sanctions, label: proc { I18n.t('active_admin.laws_page.sanctions') }, as: :select
+  filter :country,
+         as: :select,
+         collection: -> { Country.joins(:laws).with_translations(I18n.locale).order('country_translations.name') }
+  filter :subcategory,
+         as: :select,
+         collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order('subcategory_translations.name') }
+  filter :written_infraction_cont, label: proc { I18n.t('active_admin.laws_page.written_infraction') }
+  filter :infraction_cont, label: proc { I18n.t('active_admin.laws_page.infraction') }
+  filter :sanctions_cont, label: proc { I18n.t('active_admin.laws_page.sanctions') }
   filter :max_fine, label: proc { I18n.t('active_admin.laws_page.max_fine') }
   filter :min_fine, label: proc { I18n.t('active_admin.laws_page.min_fine') }
+
+  dependent_filters do
+    {
+      country_id: {
+        subcategory_id: Law.distinct.pluck(:country_id, :subcategory_id)
+      }
+    }
+  end
 
   csv do
     column :country do |l|
@@ -71,7 +81,6 @@ ActiveAdmin.register Law do
     column :updated_at, sortable: true
 
     actions
-
   end
 
   form do |f|

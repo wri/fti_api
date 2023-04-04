@@ -13,7 +13,7 @@ ActiveAdmin.register Government do
 
   controller do
     def scoped_collection
-      end_of_association_chain.with_translations.includes(country: :translations)
+      end_of_association_chain.with_translations(I18n.locale).includes(country: :translations)
         .where(country_translations: { locale: I18n.locale })
     end
   end
@@ -39,19 +39,18 @@ ActiveAdmin.register Government do
     actions
   end
 
-  filter :country,
-         as: :select,
-         collection: -> { Country.joins(:governments).with_translations(I18n.locale).order('country_translations.name') }
+  filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc }
   filter :translations_government_entity_contains,
-         as: :select, label: proc { I18n.t('activerecord.attributes.government/translation.government_entity') },
-         collection: -> {
-           Government.with_translations(I18n.locale).order('government_translations.government_entity').pluck(:government_entity).uniq
-         }
-  filter :translations_details_contains,
-         as: :select, label: proc { I18n.t('activerecord.attributes.government/translation.details') },
-         collection: -> {
-           Government.with_translations(I18n.locale).order('government_translations.details').pluck(:details).uniq
-         }
+         as: :select, label: -> { I18n.t('activerecord.attributes.government/translation.government_entity') },
+         collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
+
+  dependent_filters do
+    {
+      country_id: {
+        translations_government_entity_contains: Government.distinct.pluck(:country_id, :government_entity)
+      }
+    }
+  end
 
   sidebar I18n.t('activerecord.models.observation.other'), only: :show do
     attributes_table_for resource do

@@ -155,15 +155,6 @@ ActiveAdmin.register OperatorDocument do
   end
 
   index do
-    render partial: 'hidden_filters', locals: {
-        filter: {
-            countries: {
-                operators: HashHelper.aggregate(Operator.pluck(:country_id, :id).map{ |x| { x.first => x.last } }),
-                required_operator_documents:
-                  HashHelper.aggregate(RequiredOperatorDocument.pluck(:country_id, :id).map{ |x| { x.first => x.last } })
-            }
-        }
-    }
     selectable_column
     bool_column I18n.t('active_admin.required_operator_document_page.exists') do |od|
       od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
@@ -236,30 +227,27 @@ ActiveAdmin.register OperatorDocument do
   filter :required_operator_document_country_id,
          label: proc { I18n.t('activerecord.models.country.one') },
          as: :select,
-         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
+         collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :required_operator_document,
-         collection: -> {
-           rod_table = RequiredOperatorDocument.arel_table
-           country_t_table = Country::Translation.arel_table
-           country_name = Arel::Nodes::NamedFunction.new('coalesce', [country_t_table[:name], Arel::Nodes::SqlLiteral.new("'Generic'")]).as('country_name')
-
-           query =
-             RequiredOperatorDocument
-               .select(rod_table[:name], country_name, rod_table[:id])
-               .left_joins(country: :translations)
-               .arel
-               .on("country_translations.country_id = countries.id and country_translations.locale = '#{I18n.locale}'")
-               .order('required_operator_documents.name')
-           RequiredOperatorDocument.find_by_sql(query.to_sql).map { ["#{_1[:name]} - #{_1[:country_name]}", _1[:id]] }
-         }
-  filter :operator, as: :select,
-                    collection: -> { Operator.order(:name) }
-  filter :fmu, label: proc { I18n.t('activerecord.models.fmu.other') }, as: :select,
-               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
+         collection: -> { RequiredOperatorDocument.with_generic.map { |r| [r.name_with_country, r.id] } }
+  filter :operator, as: :select, collection: -> { Operator.by_name_asc }
+  filter :fmu, as: :select, label: -> { I18n.t('activerecord.models.fmu.other') }, collection: -> { Fmu.by_name_asc }
   filter :status, as: :select, collection: -> { OperatorDocument.statuses }
   filter :type, as: :select
   filter :source, as: :select, collection: -> { OperatorDocument.sources }
   filter :updated_at
+
+  dependent_filters do
+    {
+      required_operator_document_country_id: {
+        required_operator_document_id: RequiredOperatorDocument.pluck(:country_id, :id),
+        operator_id: Operator.pluck(:country_id, :id)
+      },
+      operator_id: {
+        fmu_id: FmuOperator.where(current: true).distinct.pluck(:operator_id, :fmu_id)
+      }
+    }
+  end
 
   scope -> { I18n.t('active_admin.operator_documents_page.pending') }, :doc_pending
 

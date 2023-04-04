@@ -68,10 +68,7 @@ class Observer < ApplicationRecord
 
   before_create  :set_responsible_admin
 
-  scope :by_name_asc, -> {
-    includes(:translations).with_translations(I18n.available_locales)
-                           .order('observer_translations.name ASC')
-  }
+  scope :by_name_asc, -> { with_translations(I18n.locale).order('observer_translations.name ASC') }
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }

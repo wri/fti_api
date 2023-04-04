@@ -21,10 +21,18 @@ ActiveAdmin.register FmuOperator do
   filter :operator, label: -> { I18n.t('activerecord.models.operator') }, as: :select,
                     collection: -> { Operator.order(:name) }
   filter :fmu, label: -> { I18n.t('activerecord.models.fmu.one') }, as: :select,
-               collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
+               collection: -> { Fmu.by_name_asc }
   filter :current
   filter :start_date
   filter :end_date
+
+  dependent_filters do
+    {
+      operator_id: {
+        fmu_id: FmuOperator.where(current: true).distinct.pluck(:operator_id, :fmu_id)
+      }
+    }
+  end
 
   csv do
     column :current

@@ -26,8 +26,7 @@ ActiveAdmin.register Fmu do
     end
 
     def scoped_collection
-      end_of_association_chain.with_translations.includes(country: :translations)
-        .where(country_translations: { locale: I18n.locale })
+      end_of_association_chain.with_translations(I18n.locale).includes(:country, :operator)
     end
   end
 
@@ -41,13 +40,22 @@ ActiveAdmin.register Fmu do
                 translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
+  filter :country, as: :select, label: proc { I18n.t('activerecord.models.country.one') }, collection: -> { Country.joins(:fmus).by_name_asc }
+  filter :operator_in_all, as: :select, label: proc { I18n.t('activerecord.attributes.fmu.operator') }, collection: -> { Operator.order(:name) }
   filter :translations_name_contains,
-         as: :select, label: proc{ I18n.t('activerecord.attributes.fmu.name') },
-         collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name').pluck(:name) }
-  filter :country, as: :select, label: proc { I18n.t('activerecord.models.country.one') },
-                   collection: -> { Country.joins(:fmus).with_translations(I18n.locale).order('country_translations.name') }
-  filter :operator_in_all, label: proc{ I18n.t('activerecord.models.operator') }, as: :select,
-                           collection: -> { Operator.order(:name) }
+         as: :select, label: proc { I18n.t('activerecord.attributes.fmu/translation.name') },
+         collection: -> { Fmu.by_name_asc.pluck(:name) }
+
+  dependent_filters do
+    {
+      country_id: {
+        operator_in_all: Operator.pluck(:country_id, :id)
+      },
+      operator_in_all: {
+        translations_name_contains: Operator.joins(fmus: :translations).where(fmu_translations: { locale: I18n.locale }).pluck(:id, 'fmu_translations.name')
+      }
+    }
+  end
 
   csv do
     column :id

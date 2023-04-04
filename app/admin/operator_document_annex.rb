@@ -127,12 +127,21 @@ ActiveAdmin.register OperatorDocumentAnnex do
          collection: -> { Operator.order(:name).pluck(:name) }
   filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
          as: :select,
-         label: proc { I18n.t('activerecord.models.fmu.one') },
-         collection: -> { Fmu.with_translations(I18n.locale).order(:name).pluck(:name) }
+         label: -> { I18n.t('activerecord.models.fmu.one') },
+         collection: -> { Fmu.by_name_asc.pluck(:name) }
 
   filter :operator
   filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
   filter :updated_at
+
+  dependent_filters do
+    {
+      annex_documents_documentable_of_OperatorDocument_type_operator_name_equals: {
+        annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals:
+          Operator.joins(fmus: :translations).where(fmu_translations: { locale: I18n.locale }).pluck(:name, 'fmu_translations.name')
+      }
+    }
+  end
 
   scope ->{ I18n.t('active_admin.operator_documents_page.pending') }, :doc_pending
   scope ->{ I18n.t('active_admin.operator_document_annexes_page.orphaned') }, :orphaned

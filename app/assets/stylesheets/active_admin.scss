@@ -184,3 +184,8 @@ body.active_admin {
   box-sizing: border-box !important;
 }
 
+// Dependent filters
+#dependent_filters_sidebar_section {
+  visibility: hidden;
+}
+

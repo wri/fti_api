@@ -8,6 +8,7 @@
 //= require active_admin_sidebar
 //= require pagination
 //= require visibility
+//= require dependent_filters
 //= require sentry
 
 //= require activeadmin/quill_editor/quill

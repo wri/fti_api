@@ -145,7 +145,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :required_operator_document_country_id,
          label: proc { I18n.t('activerecord.models.country.one') },
          as: :select,
-         collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
+         collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :operator_document_id_eq, label: proc { I18n.t('active_admin.operator_documents_page.operator_document_id') }
   filter :required_operator_document_contract_signature_eq,
          label: proc { I18n.t('activerecord.attributes.required_operator_document.contract_signature') },
@@ -164,6 +164,18 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources
   filter :operator_document_updated_at
+
+  dependent_filters do
+    {
+      required_operator_document_country_id: {
+        operator_document_required_operator_document_id: RequiredOperatorDocument.pluck(:country_id, :id),
+        operator_id: Operator.pluck(:country_id, :id)
+      },
+      operator_id: {
+        fmu_id: FmuOperator.where(current: true).pluck(:operator_id, :fmu_id)
+      }
+    }
+  end
 
   controller do
     def scoped_collection

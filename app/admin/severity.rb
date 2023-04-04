@@ -17,10 +17,7 @@ ActiveAdmin.register Severity do
 
   permit_params :subcategory_id, :level, translations_attributes: [:id, :locale, :details, :_destroy]
 
-
-  filter :translations_details_contains,
-         as: :select, label: proc { I18n.t('activerecord.attributes.severity.details') },
-         collection: -> { Severity.with_translations(I18n.locale).order('severity_translations.details').pluck(:details) }
+  filter :translations_details_contains, label: -> { I18n.t('activerecord.attributes.severity.details') }
   filter :subcategory, as: :select,
                        collection: -> { Subcategory.with_translations(I18n.locale).order('subcategory_translations.name') }
   filter :level, as: :select, collection: 0..3

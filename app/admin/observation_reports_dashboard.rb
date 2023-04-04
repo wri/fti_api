@@ -7,13 +7,27 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
 
   actions :index
 
-  filter :by_country, label: proc{ I18n.t('activerecord.models.country.one') }, as: :select,
-                      collection: -> {
+  filter :country_id,
+         as: :select,
+         label: -> { I18n.t('activerecord.models.country.one') },
+         collection: -> {
            [[I18n.t('active_admin.producer_documents_dashboard_page.all_countries'), 'null']] +
              Country.with_at_least_one_report.order(:name).map { |c| [c.name, c.id] }
          }
-  filter :observer, label: proc{ I18n.t('activerecord.models.observer') }, as: :select, multiple: true, collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
+  filter :observer,
+         as: :select,
+         multiple: true,
+         label: -> { I18n.t('activerecord.models.observer') },
+         collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
   filter :date
+
+  dependent_filters do
+    {
+      country_id: {
+        observer_id: Observer.joins(:countries).distinct.pluck(:country_id, :id)
+      }
+    }
+  end
 
   index title: I18n.t('active_admin.observation_reports_dashboard_page.name') do
     column :date, sortable: false do |resource|
@@ -32,7 +46,7 @@ ActiveAdmin.register ObservationReportStatistic, as: 'Observation Reports Dashbo
         res.send("o_#{o.id}") || '0'
       end
     end
-    show_on_chart = if params.dig(:q, :by_country).present?
+    show_on_chart = if params.dig(:q, :country_id_eq).present?
                       collection
                     else
                       collection.select { |r| r.country_id.nil? }

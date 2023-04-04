@@ -12,8 +12,7 @@ ActiveAdmin.register Observer, as: 'Monitor' do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([countries: :translations])
-      end_of_association_chain.with_translations(I18n.locale)
+      end_of_association_chain.with_translations(I18n.locale).includes(:responsible_admin, :countries)
     end
   end
 
@@ -59,11 +58,25 @@ ActiveAdmin.register Observer, as: 'Monitor' do
   end
 
   filter :is_active
-  filter :countries, as: :select,
-                     collection: -> { Country.with_translations(I18n.locale).order('country_translations.name') }
+  filter :countries,
+         as: :select,
+         label: I18n.t('activerecord.models.country.one'),
+         collection: -> { Country.joins(:observers).with_translations(I18n.locale).order('country_translations.name').distinct }
   filter :translations_name_eq,
-         as: :select, label:  proc { I18n.t('activerecord.attributes.observer/translation.name') },
-         collection: -> { Observer.with_translations(I18n.locale).order('observer_translations.name').pluck(:name) }
+         as: :select,
+         label: -> { I18n.t('activerecord.attributes.observer/translation.name') },
+         collection: -> { Observer.by_name_asc.pluck(:name) }
+
+  dependent_filters do
+    {
+      is_active: {
+        translations_name_eq: Observer.pluck(:is_active, :name)
+      },
+      country_ids: {
+        translations_name_eq: Observer.joins(:countries).pluck(:country_id, :name)
+      }
+    }
+  end
 
   show do
     attributes_table do

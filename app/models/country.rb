@@ -50,10 +50,7 @@ class Country < ApplicationRecord
 
   before_save :set_active
 
-  scope :by_name_asc, (-> {
-    includes(:translations).with_translations(I18n.available_locales)
-                           .order('country_translations.name ASC')
-  })
+  scope :by_name_asc, -> { with_translations(I18n.locale).order('country_translations.name ASC') }
 
   scope :with_observations, ->(scope = Observation.all) {
     joins(:observations).merge(scope).where.not(observations: { id: nil }).distinct
