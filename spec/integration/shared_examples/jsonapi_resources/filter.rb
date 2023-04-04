@@ -1,4 +1,4 @@
-RSpec.shared_examples 'jsonapi-resources__filter' do |options|
+RSpec.shared_examples "jsonapi-resources__filter" do |options|
   context "Filter" do
     let(:headers) { options[:success_role] ? authorize_headers(create(options[:success_role]).id) : webuser_headers }
 
@@ -22,9 +22,9 @@ RSpec.shared_examples 'jsonapi-resources__filter' do |options|
 
         options[:filters].each do |filter|
           context "attributes: " do
-            let(:route_params) { filter[:attributes].map { |k, v| "#{k}=#{v}" }.join('&') }
+            let(:route_params) { filter[:attributes].map { |k, v| "#{k}=#{v}" }.join("&") }
 
-            it filter[:attributes].map { |k, v| "#{k}=#{v}" }.join('&') do
+            it filter[:attributes].map { |k, v| "#{k}=#{v}" }.join("&") do
               get "/#{@route_key}?#{route_params}", headers: headers
 
               expect(status).to eq(200)
@@ -34,6 +34,5 @@ RSpec.shared_examples 'jsonapi-resources__filter' do |options|
         end
       end
     end
-
   end
 end

@@ -43,11 +43,11 @@ module FileDataImport
       end
 
       def extracted_file_extname
-        @extracted_file_extname = File.extname(path_to_extracted_file)[1..-1]
+        @extracted_file_extname = File.extname(path_to_extracted_file)[1..]
       end
 
       def foreach_with_line(&block)
-        return unless block_given?
+        return unless block
 
         extract_zip
         parser.foreach_with_line(&block)

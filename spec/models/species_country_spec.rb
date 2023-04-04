@@ -9,12 +9,12 @@
 #  updated_at :datetime         not null
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SpeciesCountry, type: :model do
   subject(:species_country) { FactoryBot.build(:species_country) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(species_country).to be_valid
   end
 end

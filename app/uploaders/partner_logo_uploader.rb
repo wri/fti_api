@@ -4,7 +4,7 @@ class PartnerLogoUploader < ApplicationUploader
   include CarrierWave::MiniMagick
 
   def extension_allowlist
-    %w(jpg jpeg gif png svg tiff)
+    %w[jpg jpeg gif png svg tiff]
   end
 
   version :unmodified

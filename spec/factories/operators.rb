@@ -27,8 +27,8 @@ FactoryBot.define do
   factory :operator do
     country
     sequence(:name) { |n| "Operator #{n}" }
-    logo { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
-    operator_type { 'Logging company' }
+    logo { Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "image.png")) }
+    operator_type { "Logging company" }
     is_active { true }
 
     trait :with_sawmills do
@@ -39,11 +39,11 @@ FactoryBot.define do
 
     trait :with_documents do
       after(:create) do |op|
-        op.update!(fa_id: 'FA_UUID') unless op.fa_id.present?
+        op.update!(fa_id: "FA_UUID") unless op.fa_id.present?
         # create one country document
         create(:operator_document_country, operator: op)
-        create(:operator_document_fmu, operator: op, force_status: 'doc_valid')
-        create(:operator_document_fmu, operator: op, force_status: 'doc_invalid')
+        create(:operator_document_fmu, operator: op, force_status: "doc_valid")
+        create(:operator_document_fmu, operator: op, force_status: "doc_invalid")
       end
     end
   end

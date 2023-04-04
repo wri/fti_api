@@ -23,52 +23,52 @@
 #  organization         :string
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Observer, type: :model do
   subject(:observer) { FactoryBot.build(:observer) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(observer).to be_valid
   end
 
-  it_should_behave_like 'translatable', :observer, %i[name organization]
+  it_should_behave_like "translatable", :observer, %i[name organization]
 
-  describe 'Instance methods' do
-    describe '#cache_key' do
-      it 'return the default value with the locale' do
-        expect(observer.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+  describe "Instance methods" do
+    describe "#cache_key" do
+      it "return the default value with the locale" do
+        expect(observer.cache_key).to match(/-#{Globalize.locale}\z/)
       end
     end
   end
 
-  describe 'Class methods' do
+  describe "Class methods" do
     before do
       create_list(:observer, 3)
     end
 
-    describe '#fetch_all' do
-      it 'fetch all operators' do
+    describe "#fetch_all" do
+      it "fetch all operators" do
         expect(Observer.fetch_all(nil)).to eq(Observer.includes(:countries, :users))
       end
     end
 
-    describe '#observer_select' do
-      it 'return formatted information of observer sorted by name asc' do
+    describe "#observer_select" do
+      it "return formatted information of observer sorted by name asc" do
         expect(Observer.observer_select).to eql(
           Observer.by_name_asc.map { |c| ["#{c.name} (#{c.observer_type})", c.id] }
         )
       end
     end
 
-    describe '#types' do
-      it 'return types for the observers' do
-        expect(Observer.types).to eql %w(Mandated SemiMandated External Government).freeze
+    describe "#types" do
+      it "return types for the observers" do
+        expect(Observer.types).to eql %w[Mandated SemiMandated External Government].freeze
       end
     end
 
-    describe '#translated_types' do
-      it 'return transated types for the observers' do
+    describe "#translated_types" do
+      it "return transated types for the observers" do
         translated_types =
           Observer.types.map { |t| [I18n.t("observer_types.#{t}", default: t), t.camelize] }
 

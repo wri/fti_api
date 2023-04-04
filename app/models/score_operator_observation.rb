@@ -59,8 +59,8 @@ class ScoreOperatorObservation < ApplicationRecord
   def count_visits
     visits_query = observations
       .joins(:observation_report)
-      .select('date(observation_reports.publication_date)')
-      .group('date(observation_reports.publication_date)')
+      .select("date(observation_reports.publication_date)")
+      .group("date(observation_reports.publication_date)")
       .count
     self.visits = visits_query.keys.count
   end
@@ -83,8 +83,8 @@ class ScoreOperatorObservation < ApplicationRecord
 
   # Overrides the ==. It's now true when the score and obs_per_visit have the same value
   # @param [ScoreOperatorObservation] obj
-  def ==(obj)
-    obj.is_a?(self.class) && self.score == obj.score && self.obs_per_visit == obj.obs_per_visit
+  def ==(other)
+    other.is_a?(self.class) && score == other.score && obs_per_visit == other.obs_per_visit
   end
 
   private
@@ -93,6 +93,6 @@ class ScoreOperatorObservation < ApplicationRecord
   # @param [Integer] level The level of severity
   # @return [Float] The number of observations per visit
   def severity_per_visit(level)
-    observations.joins(:severity).where({ severities: { level: level } }).count.to_f / visits
+    observations.joins(:severity).where({severities: {level: level}}).count.to_f / visits
   end
 end

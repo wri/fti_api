@@ -21,10 +21,10 @@ class ObservationReportStatistic < ApplicationRecord
 
   def self.from_date(date)
     date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
-    from_date_sql = self.where("date > '#{date_obj.to_s(:db)}'").to_sql
-    first_rows_sql = self.at_date(date_obj).to_sql
+    from_date_sql = where("date > '#{date_obj.to_s(:db)}'").to_sql
+    first_rows_sql = at_date(date_obj).to_sql
 
-    self.from("(#{from_date_sql} UNION #{first_rows_sql}) as observation_report_statistics")
+    from("(#{from_date_sql} UNION #{first_rows_sql}) as observation_report_statistics")
   end
 
   def self.at_date(date)
@@ -57,18 +57,18 @@ class ObservationReportStatistic < ApplicationRecord
     ObservationReportStatistic.transaction do
       ObservationReportStatistic.where(country_id: country_id, date: day).delete_all if delete_old
 
-      observations_with_active_observers = Observation.joins(:observers).where(observers: { is_active: true }).pluck(:observation_id).uniq
-      observations_with_inactive_observers = Observation.joins(:observers).where(observers: { is_active: false }).pluck(:observation_id).uniq
+      observations_with_active_observers = Observation.joins(:observers).where(observers: {is_active: true}).pluck(:observation_id).uniq
+      observations_with_inactive_observers = Observation.joins(:observers).where(observers: {is_active: false}).pluck(:observation_id).uniq
       exclude_observations = observations_with_inactive_observers - observations_with_active_observers
-      exclude_observations_sql = exclude_observations.any? ? "AND observations.id NOT IN (#{exclude_observations.join(', ')})" : ""
+      exclude_observations_sql = exclude_observations.any? ? "AND observations.id NOT IN (#{exclude_observations.join(", ")})" : ""
 
       reports = ObservationReport.bigger_date(day)
       reports = reports.joins(
         "LEFT OUTER JOIN observations ON observations.observation_report_id = observation_reports.id #{exclude_observations_sql}"
       )
-      reports = reports.left_joins(:observers).where(observers: { is_active: [nil, true] })
+      reports = reports.left_joins(:observers).where(observers: {is_active: [nil, true]})
 
-      reports = reports.where(observations: { country_id: country_id }) if country_id.present?
+      reports = reports.where(observations: {country_id: country_id}) if country_id.present?
       reports = reports.distinct
 
       grouped = reports
@@ -103,7 +103,7 @@ class ObservationReportStatistic < ApplicationRecord
 
   def self.by_country(country_id)
     return all if country_id.nil?
-    return where(country_id: nil) if country_id == 'null'
+    return where(country_id: nil) if country_id == "null"
 
     where(country_id: country_id)
   end
@@ -111,21 +111,21 @@ class ObservationReportStatistic < ApplicationRecord
   def country_name
     return country.name if country.present?
 
-    'All Countries'
+    "All Countries"
   end
 
   def previous_stat
     ObservationReportStatistic.where(
       country_id: country_id,
       observer_id: observer_id
-    ).where('date < ?', date).order(:date).last
+    ).where("date < ?", date).order(:date).last
   end
 
-  def ==(obj)
-    return false unless obj.is_a? self.class
+  def ==(other)
+    return false unless other.is_a? self.class
 
     %w[country_id observer_id total_count].reject do |attr|
-      send(attr) == obj.send(attr)
+      send(attr) == other.send(attr)
     end.none?
   end
 end

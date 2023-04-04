@@ -14,12 +14,12 @@ class CreateObservationHistories < ActiveRecord::Migration[5.0]
 
       t.timestamps
 
-      t.references :observation, foreign_key: { on_delete: :nullify }, index: true
-      t.references :fmu, foreign_key: { on_delete: :cascade }, index: true
-      t.references :category, foreign_key: { on_delete: :cascade }, index: true
-      t.references :subcategory, foreign_key: { on_delete: :cascade }, index: true
-      t.references :country, foreign_key: { on_delete: :cascade }, index: true
-      t.references :operator, foreign_key: { on_delete: :cascade }, index: true
+      t.references :observation, foreign_key: {on_delete: :nullify}, index: true
+      t.references :fmu, foreign_key: {on_delete: :cascade}, index: true
+      t.references :category, foreign_key: {on_delete: :cascade}, index: true
+      t.references :subcategory, foreign_key: {on_delete: :cascade}, index: true
+      t.references :country, foreign_key: {on_delete: :cascade}, index: true
+      t.references :operator, foreign_key: {on_delete: :cascade}, index: true
 
       t.index :severity_level
       t.index :fmu_forest_type

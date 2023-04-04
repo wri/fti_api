@@ -8,8 +8,8 @@ module ActiveAdmin
       end
 
       def version_error_message
-        panel 'Error' do
-          'There is a problem with displaying this version.'
+        panel "Error" do
+          "There is a problem with displaying this version."
         end
       end
     end

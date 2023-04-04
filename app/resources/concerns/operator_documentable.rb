@@ -7,11 +7,11 @@ module OperatorDocumentable
     include Privateable
 
     attributes :expire_date, :start_date,
-               :status, :created_at, :updated_at,
-               :attachment, :operator_id, :required_operator_document_id,
-               :fmu_id, :uploaded_by, :reason, :note, :response_date,
-               :public, :source_info
-    attribute  :source_type, delegate: :source
+      :status, :created_at, :updated_at,
+      :attachment, :operator_id, :required_operator_document_id,
+      :fmu_id, :uploaded_by, :reason, :note, :response_date,
+      :public, :source_info
+    attribute :source_type, delegate: :source
 
     has_one :country
     has_one :fmu
@@ -39,7 +39,7 @@ module OperatorDocumentable
     def attachment
       return @model&.document_file&.attachment if document_visible?
 
-      { url: nil }
+      {url: nil}
     end
 
     def attachment=(attachment)
@@ -59,8 +59,8 @@ module OperatorDocumentable
       user = @context[:current_user]
       app = @context[:app]
 
-      return false if app == 'observations-tool'
-      return true if user&.user_permission&.user_role =='admin'
+      return false if app == "observations-tool"
+      return true if user&.user_permission&.user_role == "admin"
       return true if user&.is_operator?(@model.operator_id)
 
       false

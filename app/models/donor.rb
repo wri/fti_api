@@ -17,5 +17,4 @@
 #
 
 class Donor < Contributor
-
 end

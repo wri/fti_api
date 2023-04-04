@@ -15,9 +15,9 @@ module Ransack
 end
 
 Ransack.configure do |config|
-  config.add_predicate 'contains_array',
-                       arel_predicate: 'contains',
-                       formatter: proc { |v| "{#{v.join(',')}}" },
-                       validator: proc { |v| v.present? },
-                       type: :array
+  config.add_predicate "contains_array",
+    arel_predicate: "contains",
+    formatter: proc { |v| "{#{v.join(",")}}" },
+    validator: proc { |v| v.present? },
+    type: :array
 end

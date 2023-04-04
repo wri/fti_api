@@ -7,7 +7,6 @@ ActiveAdmin.register UploadedDocument do
 
   config.order_clause
 
-
   permit_params :file, :name, :author, :caption
 
   filter :name
@@ -22,8 +21,8 @@ ActiveAdmin.register UploadedDocument do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'Uploaded Document Details' do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "Uploaded Document Details" do
       f.input :name
       f.input :author
       f.input :caption
@@ -31,7 +30,6 @@ ActiveAdmin.register UploadedDocument do
     end
     f.actions
   end
-
 
   show do
     attributes_table do
@@ -42,5 +40,4 @@ ActiveAdmin.register UploadedDocument do
     end
     active_admin_comments
   end
-
 end

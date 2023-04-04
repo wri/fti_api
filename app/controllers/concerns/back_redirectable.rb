@@ -15,7 +15,7 @@ module BackRedirectable
 
   def form(options = {}, &block)
     if block.present?
-      extended = Proc.new do |f|
+      extended = proc do |f|
         return_to = request.params[:return_to] || request.referer
         f.hidden_field :return_to, name: :return_to, value: return_to if return_to.present?
         instance_eval(&block)

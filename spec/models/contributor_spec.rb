@@ -14,14 +14,14 @@
 #  description :text
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Contributor, type: :model do
   subject(:contributor) { FactoryBot.build(:contributor) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(contributor).to be_valid
   end
 
-  it_should_behave_like 'translatable', :contributor, %i[name description]
+  it_should_behave_like "translatable", :contributor, %i[name description]
 end

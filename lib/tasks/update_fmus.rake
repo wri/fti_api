@@ -1,17 +1,14 @@
 namespace :update do
-
-  desc 'Updates FMUs geojsons'
+  desc "Updates FMUs geojsons"
   task geojson: :environment do
     Fmu.find_each do |fmu|
-      begin
-        fmu.save!
-      rescue Exception => e
-        puts "FMU ID: #{fmu.id}. Error: #{e.inspect}"
-      end
+      fmu.save!
+    rescue Exception => e
+      puts "FMU ID: #{fmu.id}. Error: #{e.inspect}"
     end
   end
 
-  desc 'Updates FMUs geojsons\' centroid'
+  desc "Updates FMUs geojsons' centroid"
   task centroid: :environment do
     query = "with subquery as (select id, ST_AsGeoJSON(st_centroid(ST_GeomFromGeoJSON(to_json(geojson->'geometry')::TEXT))) as centro from fmus)
 update fmus
@@ -24,9 +21,8 @@ WHERE subquery.id = fmus.id"
     puts result.inspect
   end
 
-  desc 'Updates the Sawmill geojson\'s'
+  desc "Updates the Sawmill geojson's"
   task sawmills: :environment do
-
     query = "with subquery as
               (select id, json_build_object(
                         'type', 'Feature',

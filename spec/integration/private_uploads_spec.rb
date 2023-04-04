@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-describe 'Private Uploads', :realistic_error_responses, type: :request do
+describe "Private Uploads", :realistic_error_responses, type: :request do
   let(:admin) { create(:admin) }
 
   before do
@@ -9,31 +9,31 @@ describe 'Private Uploads', :realistic_error_responses, type: :request do
     @observation_report.reload
   end
 
-  context 'as admin user' do
+  context "as admin user" do
     before { sign_in admin }
 
-    context 'with valid parameters' do
+    context "with valid parameters" do
       before { get @observation_report.attachment.url }
 
-      it 'downloads expected file' do
+      it "downloads expected file" do
         expect(response).to have_http_status(:success)
       end
     end
 
-    context 'with wrong parameters' do
-      before { get '/private/uploads/../../../file' }
+    context "with wrong parameters" do
+      before { get "/private/uploads/../../../file" }
 
-      it 'returns error' do
+      it "returns error" do
         expect(response).to have_http_status(:not_found)
       end
     end
   end
 
-  context 'as not admin user' do
-    context 'with valid parameters' do
+  context "as not admin user" do
+    context "with valid parameters" do
       before { get @observation_report.attachment.url }
 
-      it 'does not download expected file' do
+      it "does not download expected file" do
         expect(response).to have_http_status(:not_found)
       end
     end

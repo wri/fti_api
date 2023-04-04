@@ -9,11 +9,11 @@ class CreateRequiredGovDocument < ActiveRecord::Migration[5.0]
       t.datetime :deleted_at, null: true
 
       t.references :required_gov_document_group,
-                   foreign_key: { on_delete: :cascade },
-                   index: true, null: true
+        foreign_key: {on_delete: :cascade},
+        index: true, null: true
       t.references :country,
-                   foreign_key: { on_delete: :cascade },
-                   index: true, null: true
+        foreign_key: {on_delete: :cascade},
+        index: true, null: true
 
       t.index :document_type
       t.index :deleted_at

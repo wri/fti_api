@@ -21,7 +21,7 @@
 #
 
 class RequiredOperatorDocumentCountry < RequiredOperatorDocument
-  has_many :operator_document_countries, foreign_key: 'required_operator_document_id'
+  has_many :operator_document_countries, foreign_key: "required_operator_document_id"
 
   validates_uniqueness_of :contract_signature, scope: :country_id, if: :contract_signature?
 
@@ -30,7 +30,7 @@ class RequiredOperatorDocumentCountry < RequiredOperatorDocument
   def create_operator_document_countries
     Operator.for_document_country(country_id).find_each do |operator|
       OperatorDocumentCountry.where(
-        required_operator_document_id: self.id,
+        required_operator_document_id: id,
         operator_id: operator.id
       ).first_or_create do |odc|
         odc.update!(status: OperatorDocument.statuses[:doc_not_provided])

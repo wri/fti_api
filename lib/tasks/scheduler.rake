@@ -1,42 +1,42 @@
-require 'benchmark'
+require "benchmark"
 namespace :scheduler do
-  desc 'Expires documents'
+  desc "Expires documents"
   task expire: :environment do
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to expire operator documents at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to expire operator documents at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { OperatorDocument.expire_documents }
     Rails.logger.info "Operator documents expired. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
 
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to expire government documents at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to expire government documents at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { GovDocument.expire_documents }
     Rails.logger.info "Government documents expired. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 
-  desc 'Refresh ranking'
+  desc "Refresh ranking"
   task calculate_scores: :environment do
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to recalculate ranking for the whole database: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to recalculate ranking for the whole database: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { RankingOperatorDocument.refresh }
     Rails.logger.info "Ranking refreshed. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 
-  desc 'Change current active FMU Operators'
+  desc "Change current active FMU Operators"
   task set_active_fmu_operator: :environment do
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to set the active FMU Operator at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to set the active FMU Operator at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { FmuOperator.calculate_current }
     Rails.logger.info "Active FMU Operators set calculated. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 
-  desc 'Generate Documents Statistics'
+  desc "Generate Documents Statistics"
   task generate_documents_stats: :environment do
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to generate document statistics at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to generate document statistics at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms {
       countries = Country.active.pluck(:id).uniq + [nil]
       day = Date.yesterday.to_date
@@ -45,13 +45,13 @@ namespace :scheduler do
       end
     }
     Rails.logger.info "Document statistics generated. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 
-  desc 'Generate Observation Reports Statistics'
+  desc "Generate Observation Reports Statistics"
   task generate_observation_reports_stats: :environment do
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to generate observation reports statistics at: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to generate observation reports statistics at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms {
       countries = Country.with_at_least_one_report.pluck(:id).uniq + [nil]
       day = Date.yesterday.to_date
@@ -60,26 +60,24 @@ namespace :scheduler do
       end
     }
     Rails.logger.info "Observation reports statistics generated. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 
-  desc 'Send quarterly newsletters to operators'
+  desc "Send quarterly newsletters to operators"
   task send_quarterly_newsletters: :environment do
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-    Rails.logger.info "Going to send quarterly newsletters: #{Time.now.strftime('%d/%m/%Y %H:%M')}"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to send quarterly newsletters: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
     failed = false
     time = Benchmark.ms do
       Operator.active.fa_operator.find_each do |operator|
-        begin
-          OperatorMailer.quarterly_newsletter(operator).deliver_now
-        rescue StandardError => e
-          failed = true
-          Sentry.capture_exception(e, extra: { 'operator_id' => operator.id })
-        end
+        OperatorMailer.quarterly_newsletter(operator).deliver_now
+      rescue => e
+        failed = true
+        Sentry.capture_exception(e, extra: {"operator_id" => operator.id})
       end
     end
-    raise 'Error while sending quarterly newsletter' if failed
+    raise "Error while sending quarterly newsletter" if failed
     Rails.logger.info "Sent quarterly newsletters to operators. It took #{time} ms."
-    Rails.logger.info '::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 end

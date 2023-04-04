@@ -1,13 +1,13 @@
-require 'rails_helper'
+require "rails_helper"
 
 module V1
-  describe 'Observation Documents', type: :request do
+  describe "Observation Documents", type: :request do
     let(:user) { create(:user) }
     let(:observation) { create(:observation) }
 
     # TODO: add attachment
     let(:document_data) {
-      "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, 'spec', 'support', 'files', 'doc.pdf')))}"
+      "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
     }
 
     it_behaves_like "jsonapi-resources", ObservationDocument, {
@@ -15,12 +15,12 @@ module V1
       create: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: -> { { name: 'Document one', relationships: { user: user.id, observation: observation.id } } },
+        valid_params: -> { {name: "Document one", relationships: {user: user.id, observation: observation.id}} }
       },
       edit: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: { name: 'Document one' },
+        valid_params: {name: "Document one"}
       },
       delete: {
         success_roles: %i[admin],
@@ -29,9 +29,9 @@ module V1
       pagination: {},
       sort: {
         attribute: :name,
-        sequence: -> (i) { "#{i} document name" }
+        sequence: ->(i) { "#{i} document name" }
       },
-      route_key: 'observation-documents'
+      route_key: "observation-documents"
     }
   end
 end

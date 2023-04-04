@@ -14,11 +14,11 @@ ActiveAdmin.register Fmu do
 
   controller do
     def preview
-      file = params['file']
+      file = params["file"]
       response = if file.blank? || file.size > MAX_FILE_SIZE
-                   { errors: "File must exist and be smaller than #{MAX_FILE_SIZE/1000} KB" }
-                 else
-                   Fmu.file_upload(file)
+        {errors: "File must exist and be smaller than #{MAX_FILE_SIZE / 1000} KB"}
+      else
+        Fmu.file_upload(file)
       end
       respond_to do |format|
         format.json { render json: response }
@@ -30,21 +30,21 @@ ActiveAdmin.register Fmu do
     end
   end
 
-  scope ->{ I18n.t('active_admin.all') }, :all, default: true
-  scope ->{ I18n.t('active_admin.free') }, :filter_by_free_aa
+  scope -> { I18n.t("active_admin.all") }, :all, default: true
+  scope -> { I18n.t("active_admin.free") }, :filter_by_free_aa
 
   permit_params :id, :certification_fsc, :certification_pefc,
-                :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
-                :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
-                fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date],
-                translations_attributes: [:id, :locale, :name, :_destroy]
+    :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
+    :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
+    fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date],
+    translations_attributes: [:id, :locale, :name, :_destroy]
 
   filter :id, as: :select
-  filter :country, as: :select, label: proc { I18n.t('activerecord.models.country.one') }, collection: -> { Country.joins(:fmus).by_name_asc }
-  filter :operator_in_all, as: :select, label: proc { I18n.t('activerecord.attributes.fmu.operator') }, collection: -> { Operator.order(:name) }
+  filter :country, as: :select, label: proc { I18n.t("activerecord.models.country.one") }, collection: -> { Country.joins(:fmus).by_name_asc }
+  filter :operator_in_all, as: :select, label: proc { I18n.t("activerecord.attributes.fmu.operator") }, collection: -> { Operator.order(:name) }
   filter :translations_name_contains,
-         as: :select, label: proc { I18n.t('activerecord.attributes.fmu/translation.name') },
-         collection: -> { Fmu.by_name_asc.pluck(:name) }
+    as: :select, label: proc { I18n.t("activerecord.attributes.fmu/translation.name") },
+    collection: -> { Fmu.by_name_asc.pluck(:name) }
 
   dependent_filters do
     {
@@ -52,7 +52,7 @@ ActiveAdmin.register Fmu do
         operator_in_all: Operator.pluck(:country_id, :id)
       },
       operator_in_all: {
-        translations_name_contains: Operator.joins(fmus: :translations).where(fmu_translations: { locale: I18n.locale }).pluck(:id, 'fmu_translations.name')
+        translations_name_contains: Operator.joins(fmus: :translations).where(fmu_translations: {locale: I18n.locale}).pluck(:id, "fmu_translations.name")
       }
     }
   end
@@ -60,10 +60,10 @@ ActiveAdmin.register Fmu do
   csv do
     column :id
     column :name
-    column I18n.t('activerecord.models.country.one') do |fmu|
+    column I18n.t("activerecord.models.country.one") do |fmu|
       fmu.country&.name
     end
-    column I18n.t('activerecord.models.operator') do |fmu|
+    column I18n.t("activerecord.models.operator") do |fmu|
       fmu.operator&.name
     end
     column :certification_fsc
@@ -90,7 +90,7 @@ ActiveAdmin.register Fmu do
       row :certification_tlv
       row :certification_ls
       row(:geojson) { |fmu| fmu.geojson.to_json }
-      row(:properties) { |fmu| fmu.geojson&.dig('properties') }
+      row(:properties) { |fmu| fmu.geojson&.dig("properties") }
       row :created_at
       row :updated_at
       row :deleted_at
@@ -99,29 +99,29 @@ ActiveAdmin.register Fmu do
 
   index do
     column :id, sortable: true
-    column :name, sortable: 'fmu_translations.name'
-    column :country, sortable: 'country_translations.name'
+    column :name, sortable: "fmu_translations.name"
+    column :country, sortable: "country_translations.name"
     column :operator
-    column 'FSC', :certification_fsc
-    column 'PEFC', :certification_pefc
-    column 'OLB', :certification_olb
-    column 'PAFC', :certification_pafc
-    column 'FSC CW', :certification_fsc_cw
-    column 'TLV', :certification_tlv
-    column 'LS', :certification_ls
+    column "FSC", :certification_fsc
+    column "PEFC", :certification_pefc
+    column "OLB", :certification_olb
+    column "PAFC", :certification_pafc
+    column "FSC CW", :certification_fsc_cw
+    column "TLV", :certification_tlv
+    column "LS", :certification_ls
 
     actions
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs I18n.t('active_admin.shared.fmu_details') do
-      f.input :country,  input_html: { disabled: object.persisted? }, required: true
-      f.input :esri_shapefiles_zip, as: :file, input_html: { accept: '.zip' }
-      render partial: 'zip_hint'
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs I18n.t("active_admin.shared.fmu_details") do
+      f.input :country, input_html: {disabled: object.persisted?}, required: true
+      f.input :esri_shapefiles_zip, as: :file, input_html: {accept: ".zip"}
+      render partial: "zip_hint"
       f.input :forest_type, as: :select,
-                            collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
-                            input_html: { disabled: object.persisted? }
+        collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
+        input_html: {disabled: object.persisted?}
       f.input :certification_fsc
       f.input :certification_pefc
       f.input :certification_olb
@@ -131,28 +131,28 @@ ActiveAdmin.register Fmu do
       f.input :certification_ls
     end
 
-    f.inputs I18n.t('activerecord.models.operator'), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
-      fo.input :operator_id, label: I18n.t('activerecord.attributes.fmu/translation.name'), as: :select,
-                             collection: Operator.active.map{ |o| [o.name, o.id] },
-                             input_html: { disabled: object.persisted? }, required: false
-      fo.input :start_date, input_html: { disabled: object.persisted? }, required: false
-      fo.input :end_date, input_html: { disabled: object.persisted? }
+    f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
+      fo.input :operator_id, label: I18n.t("activerecord.attributes.fmu/translation.name"), as: :select,
+        collection: Operator.active.map { |o| [o.name, o.id] },
+        input_html: {disabled: object.persisted?}, required: false
+      fo.input :start_date, input_html: {disabled: object.persisted?}, required: false
+      fo.input :end_date, input_html: {disabled: object.persisted?}
     end
 
-    f.inputs I18n.t('active_admin.shared.translated_fields') do
+    f.inputs I18n.t("active_admin.shared.translated_fields") do
       f.translated_inputs switch_locale: false do |t|
-        t.input :name, label: I18n.t('activerecord.attributes.fmu/translation.name')
+        t.input :name, label: I18n.t("activerecord.attributes.fmu/translation.name")
       end
     end
     f.actions
 
-    render partial: 'form',
-           locals: {
-             geojson: f.resource.geojson,
-             bbox: f.resource.bbox,
-             present: f.resource.geojson.present?,
-             host: Rails.env.development? ? request.base_url : request.base_url + '/api' ,
-             api_key: ENV['API_KEY']
-           }
+    render partial: "form",
+      locals: {
+        geojson: f.resource.geojson,
+        bbox: f.resource.bbox,
+        present: f.resource.geojson.present?,
+        host: Rails.env.development? ? request.base_url : request.base_url + "/api",
+        api_key: ENV["API_KEY"]
+      }
   end
 end

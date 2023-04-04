@@ -1,10 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 module V1
-
-  describe 'OperatorDocumentsFilterByLegalCategory', type: :request do
-
-    let!(:operator_documents) { create_list(:operator_document, 10)}
+  describe "OperatorDocumentsFilterByLegalCategory", type: :request do
+    let!(:operator_documents) { create_list(:operator_document, 10) }
 
     let!(:other_required_operator_document_group) { create(:required_operator_document_group) }
     let!(:other_required_operator_document) {
@@ -22,26 +20,26 @@ module V1
     }
 
     let(:operator_documents_url_with_included_and_filter_by_legal_categories) {
-      operator_documents_url + '?locale=en&include=operator,operator.country,fmu,operator-document-annexes,required-operator-document&filter[legal_categories]='
+      operator_documents_url + "?locale=en&include=operator,operator.country,fmu,operator-document-annexes,required-operator-document&filter[legal_categories]="
     }
 
-    describe 'GET all OperatorDocuments filtered by legal category id' do
-      it 'is successful' do
+    describe "GET all OperatorDocuments filtered by legal category id" do
+      it "is successful" do
         get(operator_documents_url_with_included_and_filter_by_legal_categories + other_required_operator_document_group.id.to_s, headers: admin_headers)
 
         expect(status).to eql(200)
       end
-      it 'returns only filtered' do
+      it "returns only filtered" do
         get(operator_documents_url_with_included_and_filter_by_legal_categories + other_required_operator_document_group.id.to_s, headers: admin_headers)
 
         expect(parsed_data.count).to eql(1)
         expect(parsed_body[:included].any?).to eql(true)
       end
-      it 'works with more than one legal category' do
+      it "works with more than one legal category" do
         required_operator_document_group_id = operator_documents.first.required_operator_document.required_operator_document_group.id
-        cranky_url = operator_documents_url_with_included_and_filter_by_legal_categories + other_required_operator_document_group.id.to_s + ','  + required_operator_document_group_id.to_s
+        cranky_url = operator_documents_url_with_included_and_filter_by_legal_categories + other_required_operator_document_group.id.to_s + "," + required_operator_document_group_id.to_s
         records_count = 1 + OperatorDocument.by_required_operator_document_group(required_operator_document_group_id).count
-        get(cranky_url , headers: admin_headers)
+        get(cranky_url, headers: admin_headers)
 
         expect(parsed_data.count).to eql(records_count)
         expect(parsed_body[:included].any?).to eql(true)

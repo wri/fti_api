@@ -24,7 +24,6 @@ end
 # TODO: Not the perfect solution. Inspect the code of JSONAPIResources to find a better solution
 module JSONAPI
   class ResourceSerializer
-
     def relationships_hash(source, fetchable_fields, include_directives = {})
       if source.is_a?(CachedResourceFragment)
         return cached_relationships_hash(source, include_directives)
@@ -32,7 +31,7 @@ module JSONAPI
 
       include_directives[:include_related] ||= {}
 
-      relationships = source.class._relationships.select{ |k,v| fetchable_fields.include?(k) }
+      relationships = source.class._relationships.select { |k, v| fetchable_fields.include?(k) }
       field_set = supplying_relationship_fields(source.class) & relationships.keys
 
       relationships.each_with_object({}) do |(name, relationship), hash|
@@ -55,11 +54,11 @@ module JSONAPI
         # through the relationships.
         if include_linkage || include_linked_children
           resources = if source.preloaded_fragments.key?(format_key(name))
-                        source.preloaded_fragments[format_key(name)].values
-                      else
-                        options = { filters: ia && ia[:include_filters] || {} }
-                        [source.public_send(name, options)].flatten(1).compact
-                      end
+            source.preloaded_fragments[format_key(name)].values
+          else
+            options = {filters: ia && ia[:include_filters] || {}}
+            [source.public_send(name, options)].flatten(1).compact
+          end
           resources.each do |resource|
             next if self_referential_and_already_in_source(resource)
 
@@ -87,25 +86,23 @@ module JSONAPI
               association = _lookup_association_chain([records.model.to_s, *model_names]).last
 
               # MONKEY_PATCH to work with Globalize
+              joins_query = _build_joins([records.model, *association])
               if defined?(association.klass.translated_attribute_names) &&
                   association.klass.translated_attribute_names.map(&:to_s).include?(column_name.to_s)
-                joins_query = _build_joins([records.model, *association])
                 joins_query << " LEFT JOIN #{association.name}_translations ON #{association.name}_translations.#{association.name}_id = #{association.name}_sorting.id AND #{association.name}_translations.locale = '#{_context[:locale]}'"
                 order_by_query = "#{association.name}_translations.#{column_name} #{direction}"
-                records = records.joins(joins_query).order(order_by_query)
               else
-                joins_query = _build_joins([records.model, *association])
                 # _sorting is appended to avoid name clashes with manual joins eg. overridden filters
                 order_by_query = "#{association.name}_sorting.#{column_name} #{direction}"
-                records = records.joins(joins_query).order(order_by_query)
               end
+              records = records.joins(joins_query).order(order_by_query)
             else
-              if @model_class.present? && defined?(@model_class.translated_attribute_names) &&
+              records = if @model_class.present? && defined?(@model_class.translated_attribute_names) &&
                   @model_class.translated_attribute_names.map(&:to_s).include?(field.to_s)
-                records = records.joins(:translations).with_translations(_context[:locale])
+                records.joins(:translations).with_translations(_context[:locale])
                   .order("#{records.klass.translation_class.table_name}.#{field} #{direction}")
               else
-                records = records.order(field => direction)
+                records.order(field => direction)
               end
             end
           end

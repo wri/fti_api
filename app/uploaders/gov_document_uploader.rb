@@ -6,14 +6,14 @@ class GovDocumentUploader < ApplicationUploader
   end
 
   def extension_allowlist
-    %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
+    %w[pdf doc docx txt csv xml jpg jpeg png exif tiff bmp]
   end
 
   def filename
     return if super.blank?
 
-    filename = '' + model.required_gov_document.name.first(200) + '-' + random_token + '-' + Date.today.to_s
-    filename += '.' + super.split('.').last if super.split('.').any?
+    filename = "" + model.required_gov_document.name.first(200) + "-" + random_token + "-" + Date.today.to_s
+    filename += "." + super.split(".").last if super.split(".").any?
     sanitize_filename(filename)
   end
 

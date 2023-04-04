@@ -1,1 +1,1 @@
-Rake::Task['import:government_observations'].invoke  unless Observation.government.any?
+Rake::Task["import:government_observations"].invoke unless Observation.government.any?

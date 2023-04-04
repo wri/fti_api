@@ -3,7 +3,7 @@ class ChangeRequiredOperatorDocumentFmuType < ActiveRecord::Migration[5.0]
     reversible do |dir|
       dir.up do
         change_column :required_operator_documents, :forest_type,
-                      'integer[] USING array[forest_type]::integer[]', default: []
+          "integer[] USING array[forest_type]::integer[]", default: []
         rename_column :required_operator_documents, :forest_type, :forest_types
         ActiveRecord::Base.connection.execute "UPDATE required_operator_documents set forest_types = '{}' where forest_types = '{NULL}'"
       end

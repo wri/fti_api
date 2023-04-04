@@ -12,18 +12,18 @@
 #  details           :text
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Subcategory, type: :model do
   subject(:subcategory) { FactoryBot.build(:subcategory) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(subcategory).to be_valid
   end
 
-  it_should_behave_like 'translatable', :subcategory, %i[name details]
+  it_should_behave_like "translatable", :subcategory, %i[name details]
 
-  describe 'Validations' do
+  describe "Validations" do
     it { is_expected.to validate_presence_of(:category) }
     it { is_expected.to validate_presence_of(:subcategory_type) }
   end

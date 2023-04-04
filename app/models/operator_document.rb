@@ -60,35 +60,35 @@ class OperatorDocument < ApplicationRecord
   after_destroy :regenerate
   after_destroy :recalculate_scores
 
-  scope :by_forest_types,                        ->(forest_type_id) { includes(:fmu).where(fmus: { forest_type: forest_type_id }) }
-  scope :by_country,                             ->(country_id) { includes(:required_operator_document).where(required_operator_documents: { country_id: country_id }) }
-  scope :by_required_operator_document_group,    ->(required_operator_document_group_id) { includes(:required_operator_document).where(required_operator_documents: { required_operator_document_group_id: required_operator_document_group_id }) }
-  scope :exclude_by_required_operator_document_group,    ->(required_operator_document_group_id) { includes(:required_operator_document).where.not(required_operator_documents: { required_operator_document_group_id: required_operator_document_group_id }) }
-  scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmu') }
-  scope :country_type,                           -> { where(type: 'OperatorDocumentCountry') }
-  scope :from_active_operators,                  -> { joins(:operator).where(operators: { is_active: true }) }
-  scope :approved,                               -> { where(status: %i[doc_valid doc_not_required]) }
-  scope :valid,                                  -> { where(status: :doc_valid) }
-  scope :required,                               -> { where.not(status: :doc_not_required) }
-  scope :from_user,                              ->(operator_id) { where(operator_id: operator_id) }
-  scope :by_source,                              ->(source_id) { where(source: source_id) }
-  scope :available,                              -> { where(public: true) }
-  scope :signature,                              -> {
-  joins(:required_operator_document).where(required_operator_documents: { contract_signature: true })
-}
-  scope :non_signature,                          -> {
-  joins(:required_operator_document).where(required_operator_documents: { contract_signature: false })
-}                                                  # non signature
-  scope :to_expire,                              ->(date) {
-  joins(:required_operator_document)
-    .where('expire_date < ?', date)
-    .where(status: EXPIRABLE_STATUSES)
-    .where(required_operator_documents: { contract_signature: false })
-}
+  scope :by_forest_types, ->(forest_type_id) { includes(:fmu).where(fmus: {forest_type: forest_type_id}) }
+  scope :by_country, ->(country_id) { includes(:required_operator_document).where(required_operator_documents: {country_id: country_id}) }
+  scope :by_required_operator_document_group, ->(required_operator_document_group_id) { includes(:required_operator_document).where(required_operator_documents: {required_operator_document_group_id: required_operator_document_group_id}) }
+  scope :exclude_by_required_operator_document_group, ->(required_operator_document_group_id) { includes(:required_operator_document).where.not(required_operator_documents: {required_operator_document_group_id: required_operator_document_group_id}) }
+  scope :fmu_type, -> { where(type: "OperatorDocumentFmu") }
+  scope :country_type, -> { where(type: "OperatorDocumentCountry") }
+  scope :from_active_operators, -> { joins(:operator).where(operators: {is_active: true}) }
+  scope :approved, -> { where(status: %i[doc_valid doc_not_required]) }
+  scope :valid, -> { where(status: :doc_valid) }
+  scope :required, -> { where.not(status: :doc_not_required) }
+  scope :from_user, ->(operator_id) { where(operator_id: operator_id) }
+  scope :by_source, ->(source_id) { where(source: source_id) }
+  scope :available, -> { where(public: true) }
+  scope :signature, -> {
+                      joins(:required_operator_document).where(required_operator_documents: {contract_signature: true})
+                    }
+  scope :non_signature, -> {
+                          joins(:required_operator_document).where(required_operator_documents: {contract_signature: false})
+                        }                                                  # non signature
+  scope :to_expire, ->(date) {
+                      joins(:required_operator_document)
+                        .where("expire_date < ?", date)
+                        .where(status: EXPIRABLE_STATUSES)
+                        .where(required_operator_documents: {contract_signature: false})
+                    }
 
-  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
-  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
-  enum source: { company: 1, forest_atlas: 2, other_source: 3 }
+  enum status: {doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5}
+  enum uploaded_by: {operator: 1, monitor: 2, admin: 3, other: 4}
+  enum source: {company: 1, forest_atlas: 2, other_source: 3}
 
   NON_HISTORICAL_ATTRIBUTES = %w[id attachment updated_at created_at].freeze
   EXPIRABLE_STATUSES = %w[doc_valid doc_not_required]
@@ -101,13 +101,13 @@ class OperatorDocument < ApplicationRecord
   end
 
   def build_history
-    mapping = self.attributes.except(*NON_HISTORICAL_ATTRIBUTES)
-    mapping['operator_document_id'] = id
+    mapping = attributes.except(*NON_HISTORICAL_ATTRIBUTES)
+    mapping["operator_document_id"] = id
     # we will copy object timestamps and keep using Rails timestamps
     # as how they normally are used, to know when history was created
-    mapping['operator_document_updated_at'] = updated_at
-    mapping['operator_document_created_at'] = created_at
-    mapping['type'] += 'History'
+    mapping["operator_document_updated_at"] = updated_at
+    mapping["operator_document_created_at"] = created_at
+    mapping["type"] += "History"
     OperatorDocumentHistory.new mapping
   end
 
@@ -119,17 +119,21 @@ class OperatorDocument < ApplicationRecord
   end
 
   def set_expire_date
-    self.expire_date = start_date + required_operator_document.valid_period.days rescue start_date
+    self.expire_date = begin
+      start_date + required_operator_document.valid_period.days
+    rescue
+      start_date
+    end
   end
 
   def expire_document
-    destroy! if status == 'doc_not_required' # that would regenerate with not_provided state
-    update!(status: 'doc_expired') if status == 'doc_valid'
+    destroy! if status == "doc_not_required" # that would regenerate with not_provided state
+    update!(status: "doc_expired") if status == "doc_valid"
   end
 
   # When a doc is valid or not required
   def approved?
-    %w(doc_not_required doc_valid).include?(status)
+    %w[doc_not_required doc_valid].include?(status)
   end
 
   private
@@ -166,8 +170,8 @@ class OperatorDocument < ApplicationRecord
   def set_type
     return if type.present?
 
-    self.type = 'OperatorDocumentFmu' if required_operator_document.is_a?(RequiredOperatorDocumentFmu)
-    self.type = 'OperatorDocumentCountry' if required_operator_document.is_a?(RequiredOperatorDocumentCountry)
+    self.type = "OperatorDocumentFmu" if required_operator_document.is_a?(RequiredOperatorDocumentFmu)
+    self.type = "OperatorDocumentCountry" if required_operator_document.is_a?(RequiredOperatorDocumentCountry)
   end
 
   # Removes the existing notifications for an operator document
@@ -193,16 +197,16 @@ class OperatorDocument < ApplicationRecord
   end
 
   def delete_previous_pending_document
-    pending_documents = OperatorDocument.where(operator_id: self.operator_id,
-                                               fmu_id: self.fmu_id,
-                                               required_operator_document_id: self.required_operator_document_id,
-                                               status: OperatorDocument.statuses[:doc_pending])
+    pending_documents = OperatorDocument.where(operator_id: operator_id,
+      fmu_id: fmu_id,
+      required_operator_document_id: required_operator_document_id,
+      status: OperatorDocument.statuses[:doc_pending])
     pending_documents.each { |x| x.destroy }
   end
 
   def reason_or_file
     return if document_file.blank? || reason.blank?
 
-    errors.add(:reason, 'Cannot have a reason not to have a document')
+    errors.add(:reason, "Cannot have a reason not to have a document")
   end
 end

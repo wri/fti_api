@@ -24,18 +24,18 @@ class Severity < ApplicationRecord
   has_many :observations, inverse_of: :severity
 
   def level_details
-    "#{self.level} - #{self.details}"
+    "#{level} - #{details}"
   end
 
-  validates_presence_of   :level
+  validates_presence_of :level
   validates_uniqueness_of :level, scope: :subcategory_id
-  validates :level, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 3 }
+  validates :level, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 3}
 
   default_scope { includes(:translations) }
 
-  ransacker(:details) { Arel.sql('severity_translations.details') } # for nested_select in observation form
+  ransacker(:details) { Arel.sql("severity_translations.details") } # for nested_select in observation form
 
   def cache_key
-    super + '-' + Globalize.locale.to_s
+    super + "-" + Globalize.locale.to_s
   end
 end

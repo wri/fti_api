@@ -13,7 +13,6 @@ class AddPositionToDocuments < ActiveRecord::Migration[5.1]
           rod.update_column(:position, index + 1)
         end
       end
-
     end
 
     RequiredGovDocument.group(:country_id).pluck(:country_id).each do |country_id|
@@ -29,10 +28,10 @@ class AddPositionToDocuments < ActiveRecord::Migration[5.1]
     end
 
     add_index :required_operator_documents,
-              [:country_id, :required_operator_document_group_id, :position],
-              name: 'index_rod_on_country_id_and_rodg_id_and_position'
+      [:country_id, :required_operator_document_group_id, :position],
+      name: "index_rod_on_country_id_and_rodg_id_and_position"
     add_index :required_gov_documents,
-              [:country_id, :required_gov_document_group_id, :position],
-              name: 'index_rgd_on_country_id_and_rgdg_id_and_position'
+      [:country_id, :required_gov_document_group_id, :position],
+      name: "index_rgd_on_country_id_and_rgdg_id_and_position"
   end
 end

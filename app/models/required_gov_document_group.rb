@@ -25,7 +25,7 @@ class RequiredGovDocumentGroup < ApplicationRecord
   end
   acts_as_list scope: [:parent_id]
 
-  belongs_to :parent, class_name: 'RequiredGovDocumentGroup', optional: true
+  belongs_to :parent, class_name: "RequiredGovDocumentGroup", optional: true
   has_many :required_gov_documents, dependent: :nullify
 
   scope :top_level, -> { where(parent: nil) }

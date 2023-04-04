@@ -33,31 +33,31 @@ class OperatorDocumentHistory < ApplicationRecord
 
   belongs_to :operator
   belongs_to :required_operator_document, -> { with_archived }
-  belongs_to :fmu , -> { with_deleted },  optional: true
+  belongs_to :fmu, -> { with_deleted }, optional: true
   belongs_to :user, optional: true
   belongs_to :document_file, optional: true
   belongs_to :operator_document, -> { with_deleted }
   has_many :annex_documents, as: :documentable, inverse_of: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 
-  scope :fmu_type,                               -> { where(type: 'OperatorDocumentFmuHistory') }
-  scope :country_type,                           -> { where(type: 'OperatorDocumentCountryHistory') }
-  scope :available,                              -> { where(public: true) }
-  scope :approved,                               -> { where(status: %i[doc_valid doc_not_required]) }
-  scope :signature,                              -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: true }) }
-  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: { contract_signature: false }) } # non signature
-  scope :valid, -> { joins(:operator_document).where(operator_documents: { status: OperatorDocument.statuses[:doc_valid] }) } # valid doc
+  scope :fmu_type, -> { where(type: "OperatorDocumentFmuHistory") }
+  scope :country_type, -> { where(type: "OperatorDocumentCountryHistory") }
+  scope :available, -> { where(public: true) }
+  scope :approved, -> { where(status: %i[doc_valid doc_not_required]) }
+  scope :signature, -> { joins(:required_operator_document).where(required_operator_documents: {contract_signature: true}) }
+  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: {contract_signature: false}) } # non signature
+  scope :valid, -> { joins(:operator_document).where(operator_documents: {status: OperatorDocument.statuses[:doc_valid]}) } # valid doc
 
-  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5 }
-  enum uploaded_by: { operator: 1, monitor: 2, admin: 3, other: 4 }
-  enum source: { company: 1, forest_atlas: 2, other_source: 3 }
+  enum status: {doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4, doc_not_required: 5}
+  enum uploaded_by: {operator: 1, monitor: 2, admin: 3, other: 4}
+  enum source: {company: 1, forest_atlas: 2, other_source: 3}
 
   # Returns the collection of OperatorDocumentHistory for a given operator at a point in time
   #
   # @param String operator_id The operator id
   # @param String date the date at which to fetch the state
   def self.from_operator_at_date(operator_id, date)
-    self.at_date(date).where(operator_id: operator_id)
+    at_date(date).where(operator_id: operator_id)
   end
 
   def self.at_date(date)

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class ApplicationController < ActionController::Base
   before_action :exclude_whodunnit_from_login
 
@@ -10,7 +9,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     if current_user.present?
       unless current_user.user_permission.present? &&
-          %w(admin bo_manager).include?(current_user.user_permission.user_role) &&
+          %w[admin bo_manager].include?(current_user.user_permission.user_role) &&
           current_user.is_active
         raise SecurityError
       end
@@ -34,12 +33,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def exclude_whodunnit_from_login
-    return if request.fullpath == '/admin/login'
+    return if request.fullpath == "/admin/login"
 
     set_paper_trail_whodunnit
   end
 
   def user_for_paper_trail
-    user_signed_in?.present? ? current_user.try(:id) : 'Unknown user'
+    user_signed_in?.present? ? current_user.try(:id) : "Unknown user"
   end
 end

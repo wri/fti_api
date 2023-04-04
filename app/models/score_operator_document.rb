@@ -81,11 +81,11 @@ class ScoreOperatorDocument < ApplicationRecord
     add_new(sod)
   end
 
-  def ==(obj)
-    return false unless obj.is_a? self.class
+  def ==(other)
+    return false unless other.is_a? self.class
 
     VALUE_ATTRS.reject do |attr|
-      read_attribute(attr) == obj.read_attribute(attr)
+      read_attribute(attr) == other.read_attribute(attr)
     end.none?
   end
 

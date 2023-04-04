@@ -11,31 +11,31 @@
 #  updated_at       :datetime         not null
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Comment, type: :model do
   subject(:comment) { FactoryBot.build(:comment) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(comment).to be_valid
   end
 
-  describe 'Class methods' do
-    describe '#build' do
-      context 'when commentable, user and body are present' do
-        it 'build(a new Comment with the specified data' do
+  describe "Class methods" do
+    describe "#build" do
+      context "when commentable, user and body are present" do
+        it "build(a new Comment with the specified data" do
           user = create(:user)
           observation = create(:observation)
           comment = Comment.build({
-            'commentable_type' => 'Observation',
-            'commentable_id' => observation.id,
-            'user' => user,
-            'body' => 'body'
+            "commentable_type" => "Observation",
+            "commentable_id" => observation.id,
+            "user" => user,
+            "body" => "body"
           })
 
           expect(comment.commentable).to eql observation
           expect(comment.user_id).to eql user.id
-          expect(comment.body).to eql 'body'
+          expect(comment.body).to eql "body"
         end
       end
     end

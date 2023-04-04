@@ -31,5 +31,5 @@ class ObservationReport < ApplicationRecord
   after_destroy :move_attachment_to_private_directory
   after_restore :move_attachment_to_public_directory
 
-  scope :bigger_date, ->(date) { where('observation_reports.created_at <= ?', date + 1.day) }
+  scope :bigger_date, ->(date) { where("observation_reports.created_at <= ?", date + 1.day) }
 end

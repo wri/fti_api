@@ -8,7 +8,7 @@ class CreateHoldings < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_column :operators, :holding_id, :integer, index: :true
+    add_column :operators, :holding_id, :integer, index: true
     add_foreign_key :operators, :holdings, on_delete: :nullify
   end
 end

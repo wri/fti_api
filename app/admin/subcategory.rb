@@ -16,17 +16,16 @@ ActiveAdmin.register Subcategory do
   end
 
   permit_params :location_required, :category_id, :subcategory_type,
-                translations_attributes: [:id, :locale, :name, :_destroy]
+    translations_attributes: [:id, :locale, :name, :_destroy]
 
-  scope ->{ I18n.t('active_admin.all') }, :all, default: true
-  scope ->{ I18n.t('activerecord.models.operator') }, :operator
-  scope ->{ I18n.t('activerecord.models.government') }, :government
-
+  scope -> { I18n.t("active_admin.all") }, :all, default: true
+  scope -> { I18n.t("activerecord.models.operator") }, :operator
+  scope -> { I18n.t("activerecord.models.government") }, :government
 
   filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :translations_name_eq,
-         as: :select, label: -> { I18n.t('activerecord.attributes.subcategory.name') },
-         collection: -> { Subcategory.by_name_asc.pluck(:name) }
+    as: :select, label: -> { I18n.t("activerecord.attributes.subcategory.name") },
+    collection: -> { Subcategory.by_name_asc.pluck(:name) }
   filter :created_at
   filter :updated_at
 
@@ -42,19 +41,19 @@ ActiveAdmin.register Subcategory do
     sidebar = Law.where(subcategory: resource).collect do |law|
       auto_link(law, law.written_infraction&.camelize)
     end
-    safe_join(sidebar, content_tag('br'))
+    safe_join(sidebar, content_tag("br"))
   end
 
   sidebar :severities, only: :show do
     sidebar = Severity.where(subcategory: resource).collect do |sev|
       auto_link(sev, sev.level)
     end
-    safe_join(sidebar, content_tag('br'))
+    safe_join(sidebar, content_tag("br"))
   end
 
   csv do
     column :name
-    column I18n.t('activerecord.models.category.one') do |s|
+    column I18n.t("activerecord.models.category.one") do |s|
       s.category&.name
     end
     column :subcategory_type
@@ -64,8 +63,8 @@ ActiveAdmin.register Subcategory do
   end
 
   index do
-    column :name, sortable: 'subcategory_translations.name'
-    column :category, sortable: 'category_translations.name'
+    column :name, sortable: "subcategory_translations.name"
+    column :category, sortable: "category_translations.name"
     column :subcategory_type
     column :location_required
     column :created_at
@@ -75,15 +74,15 @@ ActiveAdmin.register Subcategory do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    edit = f.object.new_record? ? false : true
-    f.inputs I18n.t('active_admin.shared.subcategory_details') do
-      f.input :category,          input_html: { disabled: edit }
-      f.input :subcategory_type,  input_html: { disabled: edit }
+    f.semantic_errors(*f.object.errors.attribute_names)
+    edit = !f.object.new_record?
+    f.inputs I18n.t("active_admin.shared.subcategory_details") do
+      f.input :category, input_html: {disabled: edit}
+      f.input :subcategory_type, input_html: {disabled: edit}
       f.input :location_required
     end
 
-    f.inputs I18n.t('active_admin.shared.translated_fields') do
+    f.inputs I18n.t("active_admin.shared.translated_fields") do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
       end

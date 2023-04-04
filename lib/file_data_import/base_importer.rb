@@ -3,6 +3,7 @@
 module FileDataImport
   class BaseImporter
     class InvalidImporterError < NameError; end
+
     class InvalidParserError < NameError; end
 
     attr_reader :file, :results
@@ -26,13 +27,13 @@ module FileDataImport
       @parser ||= begin
         parser_name = "FileDataImport::Parser::#{extension.capitalize}"
         parser_name.constantize.new(file.path)
-                  rescue NameError
-                    raise InvalidParserError, "Undefined parser #{parser_name}."
+      rescue NameError
+        raise InvalidParserError, "Undefined parser #{parser_name}."
       end
     end
 
     def extension
-      @extension ||= File.extname(basename)[1..-1]
+      @extension ||= File.extname(basename)[1..]
     end
 
     def basename

@@ -1,4 +1,4 @@
-RSpec.shared_examples 'jsonapi-resources__show' do |options|
+RSpec.shared_examples "jsonapi-resources__show" do |options|
   context "Show" do
     let!(:resource) { try_to_call(options[:resource]) || create(@singular.to_sym) }
 

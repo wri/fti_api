@@ -17,7 +17,7 @@ module V1
 
     filters :name, :type
 
-    def self.records(options={})
+    def self.records(options = {})
       RequiredOperatorDocument.unscoped
     end
   end

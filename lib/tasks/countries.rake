@@ -1,9 +1,9 @@
-require 'countries/iso3166'
+require "countries/iso3166"
 
 namespace :countries do
-  desc 'Update existing country translations using countries gem'
+  desc "Update existing country translations using countries gem"
   task update_translations: :environment do
-    for_real = ENV['FOR_REAL'] == 'true'
+    for_real = ENV["FOR_REAL"] == "true"
     puts "DRY RUN" unless for_real
 
     Country.find_each do |country|

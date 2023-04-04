@@ -35,12 +35,12 @@ FactoryBot.define do
     document_file
     operator
     required_operator_document factory: :required_operator_document_country, disable_document_creation: true
-    type { 'OperatorDocumentCountryHistory' }
+    type { "OperatorDocumentCountryHistory" }
 
     after(:build) do |history|
       country = history&.operator&.country ||
-          history&.required_operator_document&.country ||
-          FactoryBot.create(:country)
+        history&.required_operator_document&.country ||
+        FactoryBot.create(:country)
 
       history.operator ||= FactoryBot.create(:operator, country: country)
 
@@ -68,7 +68,7 @@ FactoryBot.define do
     factory :operator_document_fmu_history, class: OperatorDocumentFmuHistory do
       fmu
       required_operator_document factory: :required_operator_document_fmu, disable_document_creation: true
-      type { 'OperatorDocumentFmuHistory' }
+      type { "OperatorDocumentFmuHistory" }
     end
   end
 end

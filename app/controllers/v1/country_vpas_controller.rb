@@ -5,7 +5,6 @@ module V1
     include ErrorSerializer
 
     skip_before_action :authenticate, only: [:index, :show]
-    load_and_authorize_resource class: 'CountryVpa'
-
+    load_and_authorize_resource class: "CountryVpa"
   end
 end

@@ -18,24 +18,24 @@
 #  deleted_at                          :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RequiredOperatorDocumentFmu, type: :model do
   subject(:required_operator_document_fmu) { FactoryBot.build(:required_operator_document_fmu) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(required_operator_document_fmu).to be_valid
   end
 
-  describe 'Validations' do
+  describe "Validations" do
     it { is_expected.to validate_absence_of(:contract_signature) }
   end
 
-  describe 'Hooks' do
-    describe '#create_operator_document_fmus' do
+  describe "Hooks" do
+    describe "#create_operator_document_fmus" do
       let(:operator_country) { create :country }
       let(:document_country) { operator_country }
-      let(:fa_id) { 'FA_ID' }
+      let(:fa_id) { "FA_ID" }
       let(:operator) { create :operator, country: operator_country, fa_id: fa_id }
       let(:fmu) { create :fmu, country: operator_country }
       let!(:fmu_operator) { create :fmu_operator, fmu: fmu, operator: operator }
@@ -43,19 +43,19 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
 
       subject { rod.save }
 
-      it { expect{subject}.to change{OperatorDocument.count}.from(0).to(1) }
-      it { expect{subject}.to change{OperatorDocument.first&.status}.from(NilClass).to('doc_not_provided') }
+      it { expect { subject }.to change { OperatorDocument.count }.from(0).to(1) }
+      it { expect { subject }.to change { OperatorDocument.first&.status }.from(NilClass).to("doc_not_provided") }
 
       context "when the operator country is not the same as the document's country" do
         let(:document_country) { create :country }
 
-        it { expect{subject}.to_not change{OperatorDocument.count} }
+        it { expect { subject }.to_not change { OperatorDocument.count } }
       end
 
-      context 'when the operator does not have an FA_ID' do
+      context "when the operator does not have an FA_ID" do
         let(:fa_id) { nil }
 
-        it { expect{subject}.to_not change{OperatorDocument.count} }
+        it { expect { subject }.to_not change { OperatorDocument.count } }
       end
     end
   end

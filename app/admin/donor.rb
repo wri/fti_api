@@ -13,8 +13,8 @@ ActiveAdmin.register Donor do
 
   permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
-  filter :translations_name_contains, as: :select, label: -> { I18n.t('activerecord.attributes.donor.name') },
-                                      collection: -> { Donor.with_translations(I18n.locale).pluck(:name) }
+  filter :translations_name_contains, as: :select, label: -> { I18n.t("activerecord.attributes.donor.name") },
+    collection: -> { Donor.with_translations(I18n.locale).pluck(:name) }
   filter :website, as: :select
 
   csv do
@@ -37,21 +37,20 @@ ActiveAdmin.register Donor do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'Translated fields' do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "Translated fields" do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
         t.input :description
       end
     end
-    f.inputs 'Donor Details' do
+    f.inputs "Donor Details" do
       f.input :website
       f.input :priority
       f.input :logo
     end
     f.actions
   end
-
 
   show do
     attributes_table do
@@ -66,6 +65,5 @@ ActiveAdmin.register Donor do
       row :updated_at
     end
     active_admin_comments
-
   end
 end

@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 module V1
-  describe 'Observation Reports', type: :request do
+  describe "Observation Reports", type: :request do
     let(:user) { create(:user) }
 
     it_behaves_like "jsonapi-resources", ObservationReport, {
@@ -9,12 +9,12 @@ module V1
       create: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: -> { { title: 'Report one', relationships: { user: user.id } } },
+        valid_params: -> { {title: "Report one", relationships: {user: user.id}} }
       },
       edit: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: { title: 'Report one' },
+        valid_params: {title: "Report one"}
       },
       delete: {
         success_roles: %i[admin],
@@ -23,9 +23,9 @@ module V1
       pagination: {},
       sort: {
         attribute: :title,
-        sequence: -> (i) { "#{i} report name" }
+        sequence: ->(i) { "#{i} report name" }
       },
-      route_key: 'observation-reports'
+      route_key: "observation-reports"
     }
   end
 end

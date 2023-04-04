@@ -43,7 +43,7 @@ class ObservationStatistic < ApplicationRecord
     "Published (modified)" => 9,
     "Published (all)" => 789 # extra state for looking for all published
   }
-  enum observation_type: { "operator" => 0, "government" => 1 }
+  enum observation_type: {"operator" => 0, "government" => 1}
   enum fmu_forest_type: ForestType::TYPES_WITH_CODE
 
   validates_presence_of :date
@@ -72,11 +72,11 @@ class ObservationStatistic < ApplicationRecord
     is_active = search[:is_active_eq]
     hidden = search[:hidden_eq]
 
-    validation_status_filter = validation_status.to_i === 789 ? '7,8,9' : validation_status
+    validation_status_filter = (validation_status.to_i === 789) ? "7,8,9" : validation_status
 
     filters = []
-    if country_id.nil? || country_id == 'null'
-      filters.push(['country_id is not null', nil])
+    if country_id.nil? || country_id == "null"
+      filters.push(["country_id is not null", nil])
     else
       filters.push(["country_id = ?", country_id])
     end
@@ -89,7 +89,7 @@ class ObservationStatistic < ApplicationRecord
     filters.push(["category_id = ?", category_id]) if category_id.present?
     filters.push(["hidden = ?", hidden]) if hidden.present?
     filters.push(["is_active = ?", is_active]) if is_active.present?
-    filters_sql = ActiveRecord::Base.sanitize_sql_for_conditions([filters.map(&:first).join(' AND '), *filters.map(&:last).compact])
+    filters_sql = ActiveRecord::Base.sanitize_sql_for_conditions([filters.map(&:first).join(" AND "), *filters.map(&:last).compact])
 
     sql = <<~SQL
       with dates as (
@@ -119,13 +119,13 @@ class ObservationStatistic < ApplicationRecord
             ) as sq
             where sq.row_number = 1
           ) as observations_by_date on 1=1
-        where deleted_at is null #{filters_sql.present? ? 'AND ' + filters_sql : ''}
+        where deleted_at is null #{filters_sql.present? ? "AND " + filters_sql : ""}
         group by date, validation_status, rollup(country_id)
       )
       select
         date,
         country_id,
-        #{operator_id.presence || 'null'} as operator_id,
+        #{operator_id.presence || "null"} as operator_id,
         sum(total_count) filter (where validation_status = 0) as created,
         sum(total_count) filter (where validation_status = 1) as ready_for_qc,
         sum(total_count) filter (where validation_status = 2) as qc_in_progress,
@@ -139,13 +139,13 @@ class ObservationStatistic < ApplicationRecord
         sum(total_count) filter (where validation_status IN (7,8, 9)) as published_all,
         sum(total_count) as total_count,
         null as validation_status,
-        #{severity_level.presence || 'null'} as severity_level,
-        #{subcategory_id.presence || 'null'} as subcategory_id,
-        #{category_id.presence || 'null'} as category_id,
-        #{observation_type.presence || 'null'} as observation_type,
-        #{forest_type.presence || 'null'} as fmu_forest_type,
-        #{is_active.nil? ? 'null' : is_active} as is_active,
-        #{hidden.nil? ? 'null' : hidden} as hidden
+        #{severity_level.presence || "null"} as severity_level,
+        #{subcategory_id.presence || "null"} as subcategory_id,
+        #{category_id.presence || "null"} as category_id,
+        #{observation_type.presence || "null"} as observation_type,
+        #{forest_type.presence || "null"} as fmu_forest_type,
+        #{is_active.nil? ? "null" : is_active} as is_active,
+        #{hidden.nil? ? "null" : hidden} as hidden
       from (
         select
           *,
@@ -157,8 +157,8 @@ class ObservationStatistic < ApplicationRecord
       ) as total_c
       where
         (prev_total is null or prev_total != total_count or date = '#{date_to}' or date = '#{date_from}')
-        AND (#{country_id.nil? || country_id == 'null' ? '1=1' : 'country_id is not null'})
-        AND (#{country_id == 'null' ? 'country_id is null' : '1=1'})
+        AND (#{(country_id.nil? || country_id == "null") ? "1=1" : "country_id is not null"})
+        AND (#{(country_id == "null") ? "country_id is null" : "1=1"})
       group by date, country_id
       order by date desc, country_id asc nulls first
     SQL
@@ -171,7 +171,7 @@ class ObservationStatistic < ApplicationRecord
   def country_name
     return country.name if country.present?
 
-    'All Countries'
+    "All Countries"
   end
 
   def readonly?

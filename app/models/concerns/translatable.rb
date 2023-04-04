@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'active_support/concern'
+require "active_support/concern"
 
 module Translatable
   extend ActiveSupport::Concern
@@ -20,7 +20,7 @@ module Translatable
         first_translation = translation.first.second
         (I18n.available_locales - [I18n.locale]).each do |locale|
           if translation[locale].blank? && first_translation.present?
-            self.attributes = { attr => first_translation, locale: locale }
+            self.attributes = {attr => first_translation, :locale => locale}
           end
         end
       end

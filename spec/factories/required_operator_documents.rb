@@ -26,11 +26,11 @@ FactoryBot.define do
     sequence(:name) { |n| "RequiredOperatorDocument#{n}" }
     valid_period { DateTime.current + 1.year }
     forest_types { [rand(0..3)] }
-    explanation { 'Some explanation' }
-    type { 'RequiredOperatorDocumentCountry' }
+    explanation { "Some explanation" }
+    type { "RequiredOperatorDocumentCountry" }
 
     factory :required_operator_document_fmu, class: RequiredOperatorDocumentFmu do
-      type { 'RequiredOperatorDocumentFmu' }
+      type { "RequiredOperatorDocumentFmu" }
     end
   end
 end

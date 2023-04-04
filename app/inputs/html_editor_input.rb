@@ -4,15 +4,15 @@ class HtmlEditorInput < Formtastic::Inputs::QuillEditorInput
       data: {
         options: {
           modules: {
-            toolbar: [['bold', 'italic', 'underline'],
-                      ['link', 'video'],
-                      [{ 'script': 'sub' }, { 'script': 'super' }],
-                      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-                      [{ 'color': [] }, { 'background': [] }],
-                      ['clean']]
+            toolbar: [["bold", "italic", "underline"],
+              ["link", "video"],
+              [{script: "sub"}, {script: "super"}],
+              [{list: "ordered"}, {list: "bullet"}],
+              [{color: []}, {background: []}],
+              ["clean"]]
           },
-          placeholder: 'Type something...',
-          theme: 'snow'
+          placeholder: "Type something...",
+          theme: "snow"
         }
       }
     }.merge(super)

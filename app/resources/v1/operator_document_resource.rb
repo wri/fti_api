@@ -31,6 +31,7 @@ module V1
     def self.updatable_fields(context)
       super - [:note, :response_date, :source]
     end
+
     def self.creatable_fields(context)
       super - [:note, :response_date, :source]
     end
@@ -64,6 +65,5 @@ module V1
         super(records, filter, value)
       end
     end
-
   end
 end

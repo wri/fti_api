@@ -18,26 +18,25 @@
 #  deleted_at                          :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RequiredOperatorDocumentCountry, type: :model do
   subject(:required_operator_document_country) { FactoryBot.build(:required_operator_document_country) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(required_operator_document_country).to be_valid
   end
 
-  describe 'Hooks' do
-    describe '#create_operator_document_countries' do
+  describe "Hooks" do
+    describe "#create_operator_document_countries" do
       before do
         @country = create(:country)
-        create_list(:operator, 3, country: @country, fa_id: 'fa_id')
+        create_list(:operator, 3, country: @country, fa_id: "fa_id")
 
         @required_operator_document_group = create(:required_operator_document_group)
       end
 
-
-      it 'create or update status of operator_document_country to be doc_not_provided' do
+      it "create or update status of operator_document_country to be doc_not_provided" do
         expect(RequiredOperatorDocumentCountry.all.size).to eql 0
 
         create(:required_operator_document_country,

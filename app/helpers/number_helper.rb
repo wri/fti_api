@@ -4,6 +4,6 @@
 # When updating rails, this should be removed
 module NumberHelper
   def self.float_to_percentage(number)
-    (number * 100).to_i.to_s + '%'
+    (number * 100).to_i.to_s + "%"
   end
 end

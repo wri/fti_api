@@ -22,7 +22,7 @@
 
 class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   include ArrayForestTypeable
-  has_many :operator_document_fmus, foreign_key: 'required_operator_document_id'
+  has_many :operator_document_fmus, foreign_key: "required_operator_document_id"
 
   validates :contract_signature, absence: true
 
@@ -31,9 +31,9 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   def create_operator_document_fmus
     fmus.find_each do |fmu|
       if fmu.operator.present? && fmu.operator.fa_id.present? # This is to prevent faulty situations when the fmu has no operator id
-        OperatorDocumentFmu.where(required_operator_document_id: self.id,
-                                  operator_id: fmu.operator.id,
-                                  fmu_id: fmu.id).first_or_create do |odf|
+        OperatorDocumentFmu.where(required_operator_document_id: id,
+          operator_id: fmu.operator.id,
+          fmu_id: fmu.id).first_or_create do |odf|
           odf.update!(status: OperatorDocument.statuses[:doc_not_provided])
         end
       end
@@ -43,8 +43,8 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   def fmus
     return Fmu.where.not(country_id: Country.active) if country_id.blank?
 
-    fmu_attributes = { country_id: self.country_id }
-    fmu_attributes[:forest_type] = self.forest_types if self.forest_types.present?
+    fmu_attributes = {country_id: country_id}
+    fmu_attributes[:forest_type] = forest_types if forest_types.present?
     Fmu.where(fmu_attributes)
   end
 end

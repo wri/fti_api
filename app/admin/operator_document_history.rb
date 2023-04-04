@@ -6,9 +6,9 @@ ActiveAdmin.register OperatorDocumentHistory do
   menu false
   config.order_clause
 
-  scope ->{ I18n.t('active_admin.operator_documents_page.with_deleted') }, :with_deleted, default: true
+  scope -> { I18n.t("active_admin.operator_documents_page.with_deleted") }, :with_deleted, default: true
 
-  sidebar I18n.t('active_admin.operator_documents_page.annexes'), only: :show do
+  sidebar I18n.t("active_admin.operator_documents_page.annexes"), only: :show do
     attributes_table_for resource do
       ul do
         resource.operator_document_annexes.collect do |annex|
@@ -21,7 +21,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   actions :index, :show
 
   csv do
-    column I18n.t('active_admin.required_operator_document_page.exists') do |o|
+    column I18n.t("active_admin.required_operator_document_page.exists") do |o|
       o.deleted_at.nil? && o.required_operator_document.deleted_at.nil?
     end
     column :status
@@ -30,12 +30,12 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :operator_document do |o|
       o.operator_document&.required_operator_document&.name
     end
-    column I18n.t('activerecord.models.country.one') do |o|
+    column I18n.t("activerecord.models.country.one") do |o|
       o.required_operator_document.country&.name
     end
     column :Type do |o|
       if o.required_operator_document.present?
-        o.required_operator_document.type == 'RequiredOperatorDocumentFmu' ? 'Fmu' : 'Operator'
+        (o.required_operator_document.type == "RequiredOperatorDocumentFmu") ? "Fmu" : "Operator"
       else
         RequiredOperatorDocument.unscoped.find(o.required_operator_document_id).type
       end
@@ -46,7 +46,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :fmu do |o|
       o.fmu&.name
     end
-    column I18n.t('active_admin.operator_documents_page.legal_category') do |o|
+    column I18n.t("active_admin.operator_documents_page.legal_category") do |o|
       if o.required_operator_document.present?
         o.required_operator_document.required_operator_document_group.name
       else
@@ -65,10 +65,10 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
-    column I18n.t('active_admin.operator_documents_page.annexes') do |o|
+    column I18n.t("active_admin.operator_documents_page.annexes") do |o|
       links = []
       o.operator_document_annexes.each { |a| links << a.name }
-      links.join(' ').html_safe
+      links.join(" ").html_safe
     end
     # rubocop:enable Rails/OutputSafety
     column :reason
@@ -88,10 +88,10 @@ ActiveAdmin.register OperatorDocumentHistory do
       end
     end
     column :operator_document_updated_at
-    column I18n.t('activerecord.models.country.one') do |od|
+    column I18n.t("activerecord.models.country.one") do |od|
       od.required_operator_document&.country
     end
-    column I18n.t('activerecord.models.required_operator_document'), :required_operator_document, sortable: 'required_operator_document_id' do |od|
+    column I18n.t("activerecord.models.required_operator_document"), :required_operator_document, sortable: "required_operator_document_id" do |od|
       if od.required_operator_document.present?
         link_to od.required_operator_document.name, admin_required_operator_document_path(od.required_operator_document)
       else
@@ -100,14 +100,14 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :Type, sortable: false do |od|
       if od.required_operator_document.present?
-        od.required_operator_document.type == 'RequiredOperatorDocumentFmu' ? 'Fmu' : 'Operator'
+        (od.required_operator_document.type == "RequiredOperatorDocumentFmu") ? "Fmu" : "Operator"
       else
         RequiredOperatorDocument.unscoped.find(od.required_operator_document_id).type
       end
     end
     column :operator, sortable: false
     column :fmu, sortable: false
-    column I18n.t('active_admin.operator_documents_page.legal_category') do |od|
+    column I18n.t("active_admin.operator_documents_page.legal_category") do |od|
       if od.required_operator_document.present?
         od.required_operator_document.required_operator_document_group.name
       else
@@ -121,17 +121,17 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :deleted_at
     column :uploaded_by
     column :source
-    column I18n.t('active_admin.operator_documents_page.attachment') do |od|
+    column I18n.t("active_admin.operator_documents_page.attachment") do |od|
       if od&.document_file&.attachment
         link_to od.document_file.attachment.identifier, od.document_file.attachment.url
       end
     end
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Rails/OutputSafety
-    column I18n.t('active_admin.operator_documents_page.annexes') do |od|
+    column I18n.t("active_admin.operator_documents_page.annexes") do |od|
       links = []
       od.operator_document_annexes.each { |a| links << link_to(a.id, admin_operator_document_annex_path(a)) }
-      links.join(' ').html_safe
+      links.join(" ").html_safe
     end
     # rubocop:enable Rails/OutputSafety
     column :reason
@@ -143,23 +143,23 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :public
   filter :id
   filter :required_operator_document_country_id,
-         label: proc { I18n.t('activerecord.models.country.one') },
-         as: :select,
-         collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
-  filter :operator_document_id_eq, label: proc { I18n.t('active_admin.operator_documents_page.operator_document_id') }
+    label: proc { I18n.t("activerecord.models.country.one") },
+    as: :select,
+    collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
+  filter :operator_document_id_eq, label: proc { I18n.t("active_admin.operator_documents_page.operator_document_id") }
   filter :required_operator_document_contract_signature_eq,
-         label: proc { I18n.t('activerecord.attributes.required_operator_document.contract_signature') },
-         as: :select, collection: [[I18n.t('active_admin.status_tag.yes'), true], [I18n.t('active_admin.status_tag.no'), false]]
+    label: proc { I18n.t("activerecord.attributes.required_operator_document.contract_signature") },
+    as: :select, collection: [[I18n.t("active_admin.status_tag.yes"), true], [I18n.t("active_admin.status_tag.no"), false]]
   filter :operator_document_required_operator_document_id_eq,
-         label: proc { I18n.t('activerecord.models.required_operator_document_group.one') },
-         as: :select,
-         collection: -> { RequiredOperatorDocument.with_translations.all }
+    label: proc { I18n.t("activerecord.models.required_operator_document_group.one") },
+    as: :select,
+    collection: -> { RequiredOperatorDocument.with_translations.all }
   filter :operator,
-         label: proc { I18n.t('activerecord.models.operator') },
-         as: :select,
-         collection: -> { Operator.order(:name) }
-  filter :fmu, label: proc { I18n.t('activerecord.models.fmu.other') },
-               as: :select, collection: -> { Fmu.with_translations(I18n.locale).order('fmu_translations.name') }
+    label: proc { I18n.t("activerecord.models.operator") },
+    as: :select,
+    collection: -> { Operator.order(:name) }
+  filter :fmu, label: proc { I18n.t("activerecord.models.fmu.other") },
+    as: :select, collection: -> { Fmu.with_translations(I18n.locale).order("fmu_translations.name") }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources

@@ -11,15 +11,14 @@
 #  answer     :text
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Faq, type: :model do
   subject(:faq) { FactoryBot.build(:faq) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(faq).to be_valid
   end
 
-  it_should_behave_like 'translatable', :faq, %i[question answer]
-
+  it_should_behave_like "translatable", :faq, %i[question answer]
 end

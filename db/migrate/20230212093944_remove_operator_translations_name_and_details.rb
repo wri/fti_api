@@ -6,12 +6,12 @@ class RemoveOperatorTranslationsNameAndDetails < ActiveRecord::Migration[5.2]
     add_column :operators, :details, :string
 
     query = <<~SQL
-    UPDATE operators o
-      SET name = t.name, details = t.details 
-    FROM
-      operator_translations t
-    WHERE
-      o.id = t.operator_id and t.locale = 'en'
+      UPDATE operators o
+        SET name = t.name, details = t.details 
+      FROM
+        operator_translations t
+      WHERE
+        o.id = t.operator_id and t.locale = 'en'
     SQL
 
     ActiveRecord::Base.connection.execute query

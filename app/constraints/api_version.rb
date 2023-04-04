@@ -13,7 +13,7 @@ class APIVersion
   private
 
   def check_headers(headers)
-    accept = headers['Accept']
+    accept = headers["Accept"]
     accept&.include?("application/fti-api-v#{@version}+json")
   end
 end

@@ -77,7 +77,7 @@ class ScoreOperatorPresenter
     non_public_docs = docs - public_docs
 
     non_visible_document_number = public_docs.doc_not_provided.count +
-        public_docs.doc_pending.count + public_docs.doc_invalid.count + non_public_docs.count
+      public_docs.doc_pending.count + public_docs.doc_invalid.count + non_public_docs.count
     {
       doc_not_provided: non_visible_document_number,
       doc_valid: public_docs.doc_valid.count,

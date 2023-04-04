@@ -43,7 +43,7 @@ class RequiredOperatorDocument < ApplicationRecord
   has_many :operator_document_country_histories
   has_many :operator_document_fmu_histories
 
-  validates :valid_period, numericality: { greater_than: 0 }
+  validates :valid_period, numericality: {greater_than: 0}
 
   validate :fixed_fields_unchanged
 
@@ -56,27 +56,27 @@ class RequiredOperatorDocument < ApplicationRecord
       .on("country_translations.country_id = countries.id and country_translations.locale = '#{I18n.locale}'")
       .join_sources
 
-    joins(join).order('required_operator_documents.name')
+    joins(join).order("required_operator_documents.name")
   }
 
   def name_with_country
-    "#{name} - #{country&.name || 'Generic'}"
+    "#{name} - #{country&.name || "Generic"}"
   end
 
   private
 
   def set_documents_not_provided
-    self.operator_documents.find_each do |x|
+    operator_documents.find_each do |x|
       x.update(status: :doc_not_provided, deleted_at: nil)
     end
   end
 
   def fixed_fields_unchanged
-    return unless self.persisted?
+    return unless persisted?
 
-    errors.add(:contract_signature, 'Cannot change the contract signature') if contract_signature_changed?
-    errors.add(:forest_types, 'Cannot change the forest type') if forest_types_changed?
-    errors.add(:type, 'Cannot change document type') if type_changed?
-    errors.add(:country_id, 'Cannot change the country') if country_id_changed?
+    errors.add(:contract_signature, "Cannot change the contract signature") if contract_signature_changed?
+    errors.add(:forest_types, "Cannot change the forest type") if forest_types_changed?
+    errors.add(:type, "Cannot change document type") if type_changed?
+    errors.add(:country_id, "Cannot change the country") if country_id_changed?
   end
 end

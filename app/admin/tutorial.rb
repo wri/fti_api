@@ -7,7 +7,6 @@ ActiveAdmin.register Tutorial do
 
   config.order_clause
 
-
   permit_params :position, translations_attributes: [:id, :locale, :name, :description, :_destroy]
 
   filter :position, as: :select
@@ -22,8 +21,8 @@ ActiveAdmin.register Tutorial do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'Tutorial Details' do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "Tutorial Details" do
       f.input :position
       f.translated_inputs switch_locale: false do |t|
         t.input :name
@@ -32,7 +31,6 @@ ActiveAdmin.register Tutorial do
     end
     f.actions
   end
-
 
   show do
     attributes_table do
@@ -43,5 +41,4 @@ ActiveAdmin.register Tutorial do
 
     active_admin_comments
   end
-
 end

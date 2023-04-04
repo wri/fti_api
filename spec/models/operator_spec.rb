@@ -23,14 +23,14 @@
 #  details           :text
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Operator, type: :model do
   subject(:operator) { build(:operator) }
 
   before :all do
     @country = create(:country)
-    @operator = create(:operator, country: @country, fa_id: 'fa-id')
+    @operator = create(:operator, country: @country, fa_id: "fa-id")
     @required_operator_document_group = create(:required_operator_document_group)
 
     fmu = create(:fmu, country: @country)
@@ -49,34 +49,34 @@ RSpec.describe Operator, type: :model do
       create(:required_operator_document_fmu, **required_operator_document_data)
   end
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(operator).to be_valid
   end
 
-  describe 'Hooks' do
-    describe '#create_operator_id' do
-      context 'when country is present' do
-        it 'update operator_id using the country and id' do
+  describe "Hooks" do
+    describe "#create_operator_id" do
+      context "when country is present" do
+        it "update operator_id using the country and id" do
           expect(@operator.operator_id).to eql "#{@country.iso}-unknown-#{@operator.id}"
         end
       end
 
-      context 'when country is not present' do
-        it 'update the id' do
+      context "when country is not present" do
+        it "update the id" do
           operator = create(:operator)
           expect(operator.operator_id).to eql "#{operator.country.iso}-unknown-#{operator.id}"
         end
       end
     end
 
-    describe '#create_documents' do
-      context 'when setting fa_id for operator' do
+    describe "#create_documents" do
+      context "when setting fa_id for operator" do
         before do
           # Having a random order, @operator data can differ depending on the order
           other_country = create(:country)
           @other_operator = create(:operator, country: other_country, fa_id: nil)
 
-          fmu = create(:fmu, forest_type: 'ufa', country: other_country)
+          fmu = create(:fmu, forest_type: "ufa", country: other_country)
           FactoryBot.create(:fmu_operator, fmu: fmu, operator: @other_operator)
 
           required_operator_document_data = {
@@ -98,22 +98,22 @@ RSpec.describe Operator, type: :model do
           @other_operator.operator_documents.destroy_all
         end
 
-        it 'creates related OperatorDocumentCountry and OperatorDocumentFmu if those does not exist' do
-          @other_operator.update(fa_id: 'fa_id')
+        it "creates related OperatorDocumentCountry and OperatorDocumentFmu if those does not exist" do
+          @other_operator.update(fa_id: "fa_id")
 
           expect(@other_operator.operator_document_countries.size).to eql 1
           operator_document_country = @other_operator.operator_document_countries.first
-          expect(operator_document_country.status).to eql 'doc_not_provided'
+          expect(operator_document_country.status).to eql "doc_not_provided"
 
           expect(@other_operator.operator_document_fmus.size).to eql 1
           operator_document_fmu = @other_operator.operator_document_fmus.first
-          expect(operator_document_fmu.status).to eql 'doc_not_provided'
+          expect(operator_document_fmu.status).to eql "doc_not_provided"
         end
       end
     end
   end
 
-  describe 'Instance methods' do
+  describe "Instance methods" do
     before :all do
       valid_status = OperatorDocument.statuses[:doc_valid]
       pending_status = OperatorDocument.statuses[:doc_pending]
@@ -141,19 +141,20 @@ RSpec.describe Operator, type: :model do
       end
 
       # Observations
-      (0..3).each do |level|
+      4.times do |level|
         severity = create(:severity, level: level)
         create(
           :observation,
           severity: severity,
           operator: @operator,
           country: @country,
-          validation_status: 'Published (no comments)')
+          validation_status: "Published (no comments)"
+        )
         @operator.reload
       end
 
       # Operator without documents and observations to check empty values
-      @another_operator = create(:operator, country: @country, fa_id: 'fa-id')
+      @another_operator = create(:operator, country: @country, fa_id: "fa-id")
     end
 
     before do
@@ -168,11 +169,11 @@ RSpec.describe Operator, type: :model do
         @operator.operator_document_fmus.joins(:required_operator_document).non_signature.required.count.to_f
     end
 
-    describe '#update_valid_documents_percentages' do
-      context 'when fa_id is present' do
-        context 'when operator is approved/signed contract' do
-          it 'update approved percentages' do
-            @operator.operator_documents.signature.first.update(status: 'doc_valid') # sign contract
+    describe "#update_valid_documents_percentages" do
+      context "when fa_id is present" do
+        context "when operator is approved/signed contract" do
+          it "update approved percentages" do
+            @operator.operator_documents.signature.first.update(status: "doc_valid") # sign contract
             @operator.reload
 
             expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
@@ -181,9 +182,9 @@ RSpec.describe Operator, type: :model do
           end
         end
 
-        context 'when operator is not approved/not signed contract' do
-          it 'update non approved percentages' do
-            @operator.operator_documents.signature.first.update(status: 'doc_invalid') # contract invalid
+        context "when operator is not approved/not signed contract" do
+          it "update non approved percentages" do
+            @operator.operator_documents.signature.first.update(status: "doc_invalid") # contract invalid
             @operator.reload
 
             expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
@@ -192,8 +193,8 @@ RSpec.describe Operator, type: :model do
           end
         end
 
-        context 'when there are no documents' do
-          it 'update percentages with a 0 value' do
+        context "when there are no documents" do
+          it "update percentages with a 0 value" do
             ScoreOperatorDocument.recalculate! @another_operator
             @operator.reload
 
@@ -205,9 +206,9 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    describe '#calculate_observations_scores' do
-      context 'when there are no visits' do
-        it 'update observations per visits and score with blank values' do
+    describe "#calculate_observations_scores" do
+      context "when there are no visits" do
+        it "update observations per visits and score with blank values" do
           ScoreOperatorObservation.recalculate! @another_operator
           @another_operator.reload
 
@@ -216,9 +217,9 @@ RSpec.describe Operator, type: :model do
         end
       end
 
-      context 'when there are visits' do
-        context 'all on the same day' do
-          it 'update observations per visits and calculate the score' do
+      context "when there are visits" do
+        context "all on the same day" do
+          it "update observations per visits and calculate the score" do
             ScoreOperatorObservation.recalculate! @operator
             @operator.reload
 
@@ -227,7 +228,7 @@ RSpec.describe Operator, type: :model do
           end
         end
 
-        context 'on different days' do
+        context "on different days" do
           before :each do
             severity = create(:severity, level: 1)
             # 4 observations already added in before :all for this operator on the same day
@@ -238,7 +239,7 @@ RSpec.describe Operator, type: :model do
               operator: @operator,
               country: @country,
               publication_date: 10.days.ago,
-              validation_status: 'Published (no comments)',
+              validation_status: "Published (no comments)",
               observation_report: build(:observation_report, publication_date: 10.days.ago)
             )
             create(
@@ -246,12 +247,12 @@ RSpec.describe Operator, type: :model do
               severity: severity,
               operator: @operator,
               country: @country,
-              validation_status: 'Published (no comments)',
+              validation_status: "Published (no comments)",
               observation_report: build(:observation_report, publication_date: 3.days.ago)
             )
           end
 
-          it 'update observations per visits and calculate the score' do
+          it "update observations per visits and calculate the score" do
             ScoreOperatorObservation.recalculate! @operator
             @operator.reload
 
@@ -267,39 +268,38 @@ RSpec.describe Operator, type: :model do
     end
   end
 
-  describe 'Class methods' do
-    describe '#fetch_all' do
-      context 'when country_ids is not specified' do
-        it 'fetch all operators' do
+  describe "Class methods" do
+    describe "#fetch_all" do
+      context "when country_ids is not specified" do
+        it "fetch all operators" do
           expect(Operator.fetch_all(nil).count).to eq(Operator.all.size)
         end
       end
 
-      context 'when country is specified' do
-        it 'fetch operators filtered by country' do
-          expect(Operator.fetch_all({'country_ids' => [@country.id]}).to_a).to eql(
+      context "when country is specified" do
+        it "fetch operators filtered by country" do
+          expect(Operator.fetch_all({"country_ids" => [@country.id]}).to_a).to eql(
             Operator.where(country_id: @country.id).to_a
           )
         end
       end
     end
 
-    describe '#operator_select' do
-      it 'select operators ordered asd by name' do
+    describe "#operator_select" do
+      it "select operators ordered asd by name" do
         result = Operator.by_name_asc.map { |c| [c.name, c.id] }
         expect(Operator.operator_select).to eq(result)
-
       end
     end
 
-    describe '#types' do
-      it 'return operator types' do
+    describe "#types" do
+      it "return operator types" do
         expect(Operator.types).to eql Operator::TYPES
       end
     end
 
-    describe '#translated_types' do
-      it 'return translated operator types' do
+    describe "#translated_types" do
+      it "return translated operator types" do
         translated_types = Operator.types.map do |t|
           [I18n.t("operator_types.#{t}", default: t), t.camelize]
         end
@@ -307,8 +307,8 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    describe '#calculate_document_ranking' do
-      it 'calculate the rank per country of the operators based on their documents' do
+    describe "#calculate_document_ranking" do
+      it "calculate the rank per country of the operators based on their documents" do
         ScoreOperatorDocument.current.joins(:operator)
           .where(operators: {country_id: @country.id}).order(all: :desc) do |score, index|
           expect(score.operator.ranking_operator_document.position).to eql(index + 1)
@@ -316,7 +316,7 @@ RSpec.describe Operator, type: :model do
       end
     end
 
-    describe '#calculate_scores' do
+    describe "#calculate_scores" do
       before do
         Operator.all.map { |operator| ScoreOperatorObservation.recalculate!(operator) }
 

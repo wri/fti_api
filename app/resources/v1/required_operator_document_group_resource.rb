@@ -11,7 +11,7 @@ module V1
     filter :name
 
     def self.default_sort
-      [{ field: 'position', direction: :asc }]
+      [{field: "position", direction: :asc}]
     end
   end
 end

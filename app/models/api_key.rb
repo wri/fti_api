@@ -19,6 +19,6 @@ class APIKey < ApplicationRecord
   include Activable
 
   def expired?
-    DateTime.now >= self.expires_at || user.deactivated? || deactivated?
+    DateTime.now >= expires_at || user.deactivated? || deactivated?
   end
 end

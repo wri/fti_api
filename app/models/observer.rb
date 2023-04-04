@@ -30,7 +30,6 @@ class Observer < ApplicationRecord
   include Translatable
   translates :name, :organization, touch: true, versioning: :paper_trail
 
-
   active_admin_translates :name do
     validates_presence_of :name
   end
@@ -49,37 +48,36 @@ class Observer < ApplicationRecord
   has_many :observation_reports, through: :observation_report_observers
 
   has_many :users, inverse_of: :observer
-  belongs_to :responsible_user, class_name: 'User', foreign_key: 'responsible_user_id', optional: true
-  belongs_to :responsible_admin, class_name: 'User', foreign_key: 'responsible_admin_id', optional: true
+  belongs_to :responsible_user, class_name: "User", foreign_key: "responsible_user_id", optional: true
+  belongs_to :responsible_admin, class_name: "User", foreign_key: "responsible_admin_id", optional: true
 
-  EMAIL_VALIDATOR = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  EMAIL_VALIDATOR = /\A([\w+-].?)+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
 
-  before_validation { self.remove_logo! if self.delete_logo == '1' }
+  before_validation { remove_logo! if delete_logo == "1" }
   validates :name, presence: true
-  validates :observer_type, presence: true, inclusion: { in: %w(Mandated SemiMandated External Government),
-                                                         message: "%{value} is not a valid observer type" }
+  validates :observer_type, presence: true, inclusion: {in: %w[Mandated SemiMandated External Government],
+                                                        message: "%{value} is not a valid observer type"}
   validates :organization_type,
-            inclusion: { in: ['NGO', 'Academic', 'Research Institute', 'Private Company', 'Other'] }, if: :organization_type?
+    inclusion: {in: ["NGO", "Academic", "Research Institute", "Private Company", "Other"]}, if: :organization_type?
 
   validates_format_of :information_email, with: EMAIL_VALIDATOR, if: :information_email?
   validates_format_of :data_email, with: EMAIL_VALIDATOR, if: :data_email?
 
   validate :valid_responsible_user
 
-  before_create  :set_responsible_admin
+  before_create :set_responsible_admin
 
-  scope :by_name_asc, -> { with_translations(I18n.locale).order('observer_translations.name ASC') }
+  scope :by_name_asc, -> { with_translations(I18n.locale).order("observer_translations.name ASC") }
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
-  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observers).select('observers.id').distinct.pluck('observers.id')) }
+  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observers).select("observers.id").distinct.pluck("observers.id")) }
 
   default_scope { includes(:translations) }
 
   class << self
     def fetch_all(options)
-      observers = includes(:countries, :users)
-      observers
+      includes(:countries, :users)
     end
 
     def observer_select
@@ -87,7 +85,7 @@ class Observer < ApplicationRecord
     end
 
     def types
-      %w(Mandated SemiMandated External Government).freeze
+      %w[Mandated SemiMandated External Government].freeze
     end
 
     def translated_types
@@ -96,15 +94,15 @@ class Observer < ApplicationRecord
   end
 
   def cache_key
-    super + '-' + Globalize.locale.to_s
+    super + "-" + Globalize.locale.to_s
   end
 
   # Sets the default responsible admin for an observer
   #
   def set_responsible_admin
-    return if self.responsible_admin.present?
+    return if responsible_admin.present?
 
-    self.responsible_admin = User.where(email: ENV['RESPONSIBLE_EMAIL'].downcase).first
+    self.responsible_admin = User.where(email: ENV["RESPONSIBLE_EMAIL"].downcase).first
   end
 
   private
@@ -113,6 +111,6 @@ class Observer < ApplicationRecord
     return if responsible_user.blank?
     return if responsible_user.observer_id == id
 
-    errors.add(:responsible_user, 'The user must be an observer for this organizations')
+    errors.add(:responsible_user, "The user must be an observer for this organizations")
   end
 end

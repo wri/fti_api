@@ -11,7 +11,7 @@ class ChangesForGovDocuments < ActiveRecord::Migration[5.2]
       t.timestamp :deleted_at
       t.timestamps
       t.references :gov_document,
-        foreign_key: { on_delete: :cascade },
+        foreign_key: {on_delete: :cascade},
         index: true
     end
   end

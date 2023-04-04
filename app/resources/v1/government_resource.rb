@@ -10,12 +10,12 @@ module V1
     has_one :country
 
     def self.sortable_fields(context)
-      super + [:'country.name']
+      super + [:"country.name"]
     end
 
     filters :country, :is_active
 
-    filter :'country.name', apply: ->(records, value, _options) {
+    filter :"country.name", apply: ->(records, value, _options) {
       if value.present?
         sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
         records.joins(:country).joins([country: :translations]).where("lower(country_translations.name) like #{sanitized_value}")
@@ -28,9 +28,9 @@ module V1
       records.where(
         id: Observation.own_with_inactive(value[0].to_i)
           .joins(:governments)
-          .select('governments.id')
+          .select("governments.id")
           .distinct
-          .pluck('governments.id')
+          .pluck("governments.id")
       )
     }
   end

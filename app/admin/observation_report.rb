@@ -16,7 +16,7 @@ ActiveAdmin.register ObservationReport do
   controller do
     def scoped_collection
       end_of_association_chain.includes([[observation_report_observers: [observer: :translations]],
-                                         [observations: :translations], [observations: [country: :translations]]])
+        [observations: :translations], [observations: [country: :translations]]])
     end
 
     def apply_filtering(chain)
@@ -27,18 +27,18 @@ ActiveAdmin.register ObservationReport do
   member_action :really_destroy, method: :delete do
     if resource.deleted?
       resource.really_destroy!
-      redirect_back fallback_location: admin_observation_report_path, notice: I18n.t('active_admin.shared.report_removed')
+      redirect_back fallback_location: admin_observation_report_path, notice: I18n.t("active_admin.shared.report_removed")
     else
-      redirect_back fallback_location: admin_observation_report_path, notice: I18n.t('active_admin.shared.recycle_report')
+      redirect_back fallback_location: admin_observation_report_path, notice: I18n.t("active_admin.shared.recycle_report")
     end
   end
 
   filter :observations_country_id,
-         as: :select,
-         label: -> { I18n.t('activerecord.models.country.one') },
-         collection: -> { Country.with_observations.by_name_asc }
+    as: :select,
+    label: -> { I18n.t("activerecord.models.country.one") },
+    collection: -> { Country.with_observations.by_name_asc }
   filter :title, as: :select
-  filter :observers, as: :select, label: -> { I18n.t('activerecord.attributes.observation.observers') }, collection: -> { Observer.by_name_asc }
+  filter :observers, as: :select, label: -> { I18n.t("activerecord.attributes.observation.observers") }, collection: -> { Observer.by_name_asc }
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
   filter :publication_date
 
@@ -53,12 +53,12 @@ ActiveAdmin.register ObservationReport do
   config.clear_action_items!
 
   action_item :edit_report, only: [:show] do
-    link_to I18n.t('active_admin.shared.edit_report'), edit_admin_observation_report_path(observation_report)
+    link_to I18n.t("active_admin.shared.edit_report"), edit_admin_observation_report_path(observation_report)
   end
 
   action_item :delete_report, only: [:show], unless: -> { observation_report.deleted? } do
-    link_to I18n.t('active_admin.shared.delete_report'), admin_observation_report_path(observation_report),
-            method: :delete, data: { confirm: ObservationReportDecorator.new(observation_report).delete_confirmation_text }
+    link_to I18n.t("active_admin.shared.delete_report"), admin_observation_report_path(observation_report),
+      method: :delete, data: {confirm: ObservationReportDecorator.new(observation_report).delete_confirmation_text}
   end
 
   csv do
@@ -66,19 +66,19 @@ ActiveAdmin.register ObservationReport do
     column :title
     column :publication_date
     column :attachment
-    column I18n.t('activerecord.models.user') do |obsr|
+    column I18n.t("activerecord.models.user") do |obsr|
       obsr.user&.name
     end
-    column I18n.t('activerecord.models.observation.other') do |obsr|
+    column I18n.t("activerecord.models.observation.other") do |obsr|
       ids = obsr.observations.map { |o| o.id }
-      ids.sort.join(', ')
+      ids.sort.join(", ")
     end
     column :country do |o|
       o.observations.first&.country&.name
     end
-    column I18n.t('activerecord.attributes.observation_report.observers') do |o|
+    column I18n.t("activerecord.attributes.observation_report.observers") do |o|
       names = o.observers.joins(:translations).map { |o| o.name }
-      names.sort.join(', ')
+      names.sort.join(", ")
     end
     column :created_at
     column :updated_at
@@ -121,24 +121,24 @@ ActiveAdmin.register ObservationReport do
 
     actions defaults: false do |report|
       if report.deleted?
-        item I18n.t('active_admin.shared.restore'), restore_admin_observation_report_path(report), method: :put
-        item I18n.t('active_admin.shared.remove_completely'), really_destroy_admin_observation_report_path(report),
-             method: :delete, data: { confirm: 'Are you sure you want to remove the report completely? This action is not reversible.' }
+        item I18n.t("active_admin.shared.restore"), restore_admin_observation_report_path(report), method: :put
+        item I18n.t("active_admin.shared.remove_completely"), really_destroy_admin_observation_report_path(report),
+          method: :delete, data: {confirm: "Are you sure you want to remove the report completely? This action is not reversible."}
       else
-        item I18n.t('active_admin.shared.view'), admin_observation_report_path(report)
-        item I18n.t('active_admin.shared.edit'), edit_admin_observation_report_path(report)
-        item I18n.t('active_admin.shared.delete'), admin_observation_report_path(report),
-             method: :delete, data: { confirm: ObservationReportDecorator.new(report).delete_confirmation_text }
+        item I18n.t("active_admin.shared.view"), admin_observation_report_path(report)
+        item I18n.t("active_admin.shared.edit"), edit_admin_observation_report_path(report)
+        item I18n.t("active_admin.shared.delete"), admin_observation_report_path(report),
+          method: :delete, data: {confirm: ObservationReportDecorator.new(report).delete_confirmation_text}
       end
     end
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs I18n.t('active_admin.shared.report_details') do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs I18n.t("active_admin.shared.report_details") do
       f.input :user
       f.input :title
-      f.input :publication_date, as: :date_time_picker, picker_options: { timepicker: false, format: 'Y-m-d' }
+      f.input :publication_date, as: :date_time_picker, picker_options: {timepicker: false, format: "Y-m-d"}
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
 
       f.actions

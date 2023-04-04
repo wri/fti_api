@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register ObservationDocument, as: 'Evidence' do
+ActiveAdmin.register ObservationDocument, as: "Evidence" do
   extend BackRedirectable
   extend Versionable
 
@@ -16,9 +16,9 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   member_action :really_destroy, method: :delete do
     if resource.deleted?
       resource.really_destroy!
-      redirect_back fallback_location: admin_evidences_path, notice: 'Evidence removed!'
+      redirect_back fallback_location: admin_evidences_path, notice: "Evidence removed!"
     else
-      redirect_back fallback_location: admin_evidences_path, notice: 'Evidence must be moved to recycle bin first!'
+      redirect_back fallback_location: admin_evidences_path, notice: "Evidence must be moved to recycle bin first!"
     end
   end
 
@@ -38,26 +38,26 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
 
   index do
     column :id
-    column :observation, sortable: 'observation_id'
+    column :observation, sortable: "observation_id"
     column :name
     column :attachment do |o|
       link_to o&.name, o.attachment&.url if o.attachment&.url
     end
-    column :user, sortable: 'users.name'
+    column :user, sortable: "users.name"
     column :created_at
     column :updated_at
     column :deleted_at
 
     actions defaults: false do |evidence|
       if evidence.deleted?
-        item 'Restore', restore_admin_evidence_path(evidence), method: :put
-        item 'Remove Completely', really_destroy_admin_evidence_path(evidence),
-             method: :delete, data: { confirm: 'Are you sure you want to remove the evidence completely? This action is not reversible.' }
+        item "Restore", restore_admin_evidence_path(evidence), method: :put
+        item "Remove Completely", really_destroy_admin_evidence_path(evidence),
+          method: :delete, data: {confirm: "Are you sure you want to remove the evidence completely? This action is not reversible."}
       else
-        item 'View', admin_evidence_path(evidence)
-        item 'Edit', edit_admin_evidence_path(evidence)
-        item 'Delete', admin_evidence_path(evidence),
-             method: :delete, data: { confirm: 'Are you sure you want to move evidence to the recycle bin?' }
+        item "View", admin_evidence_path(evidence)
+        item "Edit", edit_admin_evidence_path(evidence)
+        item "Delete", admin_evidence_path(evidence),
+          method: :delete, data: {confirm: "Are you sure you want to move evidence to the recycle bin?"}
       end
     end
   end
@@ -71,10 +71,10 @@ ActiveAdmin.register ObservationDocument, as: 'Evidence' do
   filter :deleted_at
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'Evidence Details' do
-      f.input :observation, collection: Observation.all.map { |o| [o.id, o.id] }, input_html: { disabled: true }
-      f.input :user, input_html: { disabled: true }
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "Evidence Details" do
+      f.input :observation, collection: Observation.all.map { |o| [o.id, o.id] }, input_html: {disabled: true}
+      f.input :user, input_html: {disabled: true}
       f.input :name
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
 

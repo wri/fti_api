@@ -24,12 +24,12 @@
 #  document_file_id              :integer
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe OperatorDocumentFmu, type: :model do
   subject(:operator_document_fmu) { FactoryBot.create(:operator_document_fmu) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(operator_document_fmu).to be_valid
   end
 end

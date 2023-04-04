@@ -26,16 +26,16 @@ class Country < ApplicationRecord
     validates_presence_of :name
   end
 
-  has_many :users,           inverse_of: :country
-  has_many :observations,    inverse_of: :country
+  has_many :users, inverse_of: :country
+  has_many :observations, inverse_of: :country
   # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :observers
   # rubocop:enable Rails/HasAndBelongsToMany
-  has_many :governments,     inverse_of: :country
-  has_many :operators,       inverse_of: :country
-  has_many :fa_operators, ->{ fa_operator }, class_name: 'Operator'
-  has_many :fmus,            inverse_of: :country
-  has_many :laws,            inverse_of: :country
+  has_many :governments, inverse_of: :country
+  has_many :operators, inverse_of: :country
+  has_many :fa_operators, -> { fa_operator }, class_name: "Operator"
+  has_many :fmus, inverse_of: :country
+  has_many :laws, inverse_of: :country
 
   has_many :species_countries
   has_many :species, through: :species_countries
@@ -46,16 +46,16 @@ class Country < ApplicationRecord
   has_many :country_links, inverse_of: :country
   has_many :country_vpas, inverse_of: :country
 
-  validates :name, :iso, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, :iso, presence: true, uniqueness: {case_sensitive: false}
 
   before_save :set_active
 
-  scope :by_name_asc, -> { with_translations(I18n.locale).order('country_translations.name ASC') }
+  scope :by_name_asc, -> { with_translations(I18n.locale).order("country_translations.name ASC") }
 
   scope :with_observations, ->(scope = Observation.all) {
-    joins(:observations).merge(scope).where.not(observations: { id: nil }).distinct
+    joins(:observations).merge(scope).where.not(observations: {id: nil}).distinct
   }
-  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select('observations.country_id').distinct.pluck('observations.country_id')) }
+  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select("observations.country_id").distinct.pluck("observations.country_id")) }
 
   scope :by_status, ->(status) { where(is_active: status) }
 
@@ -66,7 +66,7 @@ class Country < ApplicationRecord
   end
 
   def cache_key
-    super + '-' + Globalize.locale.to_s
+    super + "-" + Globalize.locale.to_s
   end
 
   def forest_types

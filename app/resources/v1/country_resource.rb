@@ -6,8 +6,8 @@ module V1
     caching
 
     attributes :iso, :region_iso, :country_centroid,
-               :region_centroid, :is_active, :region_name,
-               :name, :overview, :vpa_overview
+      :region_centroid, :is_active, :region_name,
+      :name, :overview, :vpa_overview
 
     has_many :fmus
     has_many :required_operator_documents
@@ -15,13 +15,13 @@ module V1
     has_many :governments
 
     filter :iso
-    filter :is_active, default: 'true',
-                       apply: ->(records, value, _options) {
-             if %w(true false).include?(value.first)
-               records.where(is_active: value.first)
-             else
-               records
-             end
-           }
+    filter :is_active, default: "true",
+      apply: ->(records, value, _options) {
+               if %w[true false].include?(value.first)
+                 records.where(is_active: value.first)
+               else
+                 records
+               end
+             }
   end
 end

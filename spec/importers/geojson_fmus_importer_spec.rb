@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe GeojsonFmusImporter, type: :importer do
   let!(:country) { create(:country, iso: "CMR", name: "Cameroon") }
-  let!(:operator)  { create(:operator, id: 10624, name: "SEPFCO", country: country)}
+  let!(:operator) { create(:operator, id: 10624, name: "SEPFCO", country: country) }
   let!(:fmu) { create(:fmu, id: 100187, name: "asdf", forest_type: 2, country: country) }
   let!(:fmu_operator) {
     create(

@@ -15,7 +15,7 @@ module Privateable
         define_method(attr) do
           return nil unless public_send(validation_attr.to_s)
 
-          instance_variable_get('@model').public_send(attr)
+          instance_variable_get(:@model).public_send(attr)
         end
       end
     end

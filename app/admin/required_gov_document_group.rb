@@ -14,7 +14,7 @@ ActiveAdmin.register RequiredGovDocumentGroup do
     sidebar = RequiredGovDocument.where(required_gov_document_group: resource).collect do |rd|
       auto_link(rd, rd.name.camelize)
     end
-    safe_join(sidebar, content_tag('br'))
+    safe_join(sidebar, content_tag("br"))
   end
 
   csv do
@@ -28,24 +28,24 @@ ActiveAdmin.register RequiredGovDocumentGroup do
     translation_status
     column :parent
     column :position, sortable: true
-    column :name, sortable: 'required_gov_document_group_translations.name'
+    column :name, sortable: "required_gov_document_group_translations.name"
 
     actions
   end
 
   filter :translations_name_contains,
-         as: :select,
-         label: -> { I18n.t('activerecord.attributes.required_gov_document_group/translation.name') },
-         collection: -> {
-           RequiredGovDocumentGroup.with_translations(I18n.locale)
-             .order('required_gov_document_group_translations.name').pluck(:name)
-         }
+    as: :select,
+    label: -> { I18n.t("activerecord.attributes.required_gov_document_group/translation.name") },
+    collection: -> {
+      RequiredGovDocumentGroup.with_translations(I18n.locale)
+        .order("required_gov_document_group_translations.name").pluck(:name)
+    }
   filter :parent, collection: -> { RequiredGovDocumentGroup.top_level }
   filter :updated_at
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'Required Gov Document Group Details' do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "Required Gov Document Group Details" do
       f.input :position
       f.input :parent, collection: RequiredGovDocumentGroup.top_level
       f.translated_inputs switch_locale: false do |t|

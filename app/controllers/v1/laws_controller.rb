@@ -6,7 +6,6 @@ module V1
     include APIUploads
 
     skip_before_action :authenticate, only: [:index, :show]
-    load_and_authorize_resource class: 'Law'
-
+    load_and_authorize_resource class: "Law"
   end
 end

@@ -1,6 +1,5 @@
 namespace :convert do
-
-  desc 'Converts the current 1-M relationship of FMU-Operator to M-N'
+  desc "Converts the current 1-M relationship of FMU-Operator to M-N"
   task fmu_operator: :environment do
     Fmu.find_each do |fmu|
       next unless fmu.operator_id.present?

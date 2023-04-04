@@ -11,7 +11,7 @@ module Arel
     private
 
     def visit_Arel_Nodes_ContainsArray(obj, collector)
-      infix_value obj, collector, ' @> '
+      infix_value obj, collector, " @> "
     end
   end
 

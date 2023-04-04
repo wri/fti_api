@@ -22,7 +22,7 @@ module FileDataImport
 
         features.each.with_index(1) do |feature, line|
           id = feature.dig("properties", "id")
-          yield({ id: id, geojson: feature }, line)
+          yield({id: id, geojson: feature}, line)
         end
       end
     end

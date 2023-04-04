@@ -1,17 +1,17 @@
-require 'rails_helper'
+require "rails_helper"
 
 module V1
-  describe 'Tutorials', type: :request do
+  describe "Tutorials", type: :request do
     it_behaves_like "jsonapi-resources", Tutorial, {
       translations: {
         locales: [:en, :fr],
-        attributes: { name: 'Name', description: 'Description' }
+        attributes: {name: "Name", description: "Description"}
       },
       sort: {
         attribute: :position,
-        sequence: -> (i) { i }
+        sequence: ->(i) { i }
       },
-      route_key: 'tutorials'
+      route_key: "tutorials"
     }
   end
 end

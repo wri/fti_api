@@ -19,12 +19,10 @@ module V1
     # TODO: Reactivate rubocop and fix this
     # rubocop:disable Lint/RescueException
     def add_observers
-      begin
-        @model.observer_ids = @model.observations.map(&:observers).map(&:ids).flatten if @model.observations.any?
-        @model.save
-      rescue Exception => e
-        Rails.logger.warn "ObservationReport created without observers: #{e.inspect}"
-      end
+      @model.observer_ids = @model.observations.map(&:observers).map(&:ids).flatten if @model.observations.any?
+      @model.save
+    rescue Exception => e
+      Rails.logger.warn "ObservationReport created without observers: #{e.inspect}"
     end
     # rubocop:enable Lint/RescueException
   end

@@ -13,7 +13,7 @@
 #
 
 FactoryBot.define do
-  factory :subcategory, class: 'Subcategory' do
+  factory :subcategory, class: "Subcategory" do
     name { "Subcategory name" }
     subcategory_type { "operator" }
 

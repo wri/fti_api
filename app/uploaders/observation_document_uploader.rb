@@ -2,7 +2,7 @@
 
 class ObservationDocumentUploader < ApplicationUploader
   def extension_allowlist
-    %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
+    %w[pdf doc docx txt csv xml jpg jpeg png exif tiff bmp]
   end
 
   def filename
@@ -10,13 +10,13 @@ class ObservationDocumentUploader < ApplicationUploader
     return if super.blank?
 
     filename = if model.name.present?
-                 model.name[0...100]&.parameterize
-               else
-                 [
-                   model.id,
-                   (model.observation.evidence_type || 'other').parameterize
-                 ].join('-')
-               end
+      model.name[0...100]&.parameterize
+    else
+      [
+        model.id,
+        (model.observation.evidence_type || "other").parameterize
+      ].join("-")
+    end
 
     sanitize_filename(filename + File.extname(super))
   end

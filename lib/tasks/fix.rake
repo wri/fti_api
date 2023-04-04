@@ -1,10 +1,10 @@
-require 'benchmark'
-require 'csv'
+require "benchmark"
+require "csv"
 
 namespace :fix do
   task annexes: :environment do
     ActiveRecord::Base.transaction do
-      for_real = ENV['FOR_REAL'] == 'true'
+      for_real = ENV["FOR_REAL"] == "true"
 
       orphaned_before = OperatorDocumentAnnex.unscoped.orphaned.count
       puts "Orhpaned annexes before: #{orphaned_before}"
@@ -13,19 +13,19 @@ namespace :fix do
       parse_csv = ->(filepath) do
         strip_converter = ->(field) { field&.strip }
         CSV.parse(
-          File.read(File.join(Rails.root, 'db', 'files', 'annex_fix', filepath)),
+          File.read(File.join(Rails.root, "db", "files", "annex_fix", filepath)),
           headers: true,
           converters: [strip_converter],
           header_converters: :symbol
         )
       end
-      annexes_connections_before_migration = parse_csv.call('annexes_before_migration.csv')
-      annexes_orphaned_after_history_clean = parse_csv.call('annexes_46_before_clean.csv')
+      annexes_connections_before_migration = parse_csv.call("annexes_before_migration.csv")
+      annexes_orphaned_after_history_clean = parse_csv.call("annexes_46_before_clean.csv")
 
-      ods_ids = OperatorDocumentHistory.
-        where(id: AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').pluck(:documentable_id)).
-        pluck(:operator_document_id).
-        uniq
+      ods_ids = OperatorDocumentHistory
+        .where(id: AnnexDocument.where(documentable_type: "OperatorDocumentHistory").pluck(:documentable_id))
+        .pluck(:operator_document_id)
+        .uniq
 
       all_backup = (annexes_connections_before_migration.map(&:to_h) +
                     annexes_orphaned_after_history_clean.map(&:to_h)).uniq
@@ -35,7 +35,7 @@ namespace :fix do
       doc_ids = operator_annexes_backup.map { |x| x[:operator_document_id] }.uniq
       all_annexes_ids = operator_annexes_backup.map { |x| x[:operator_document_annex_id] }.uniq
 
-      puts "Annex history relation before: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
+      puts "Annex history relation before: #{AnnexDocument.where(documentable_type: "OperatorDocumentHistory").count}"
 
       # code below can remove annexes if csv file with nulls provided
       # to_remove = all_backup.select { |x| x[:operator_document_id].blank? }.map { |x| x[:operator_document_annex_id] }.uniq
@@ -87,7 +87,7 @@ namespace :fix do
         end
       end
 
-      puts "Annex history relation after: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
+      puts "Annex history relation after: #{AnnexDocument.where(documentable_type: "OperatorDocumentHistory").count}"
 
       orphaned_after = OperatorDocumentAnnex.unscoped.orphaned.count
       puts "Orhpaned annexes after: #{orphaned_after}"
@@ -99,7 +99,7 @@ namespace :fix do
       still_orphaned.each do |annex|
         doc_ids = operator_annexes_backup.select { |x| x[:operator_document_annex_id].to_i == annex.id }.map { |x| x[:operator_document_id] }.uniq
 
-        puts "BAD DATA for annex #{annex.id}: connected with #{doc_ids.join(',')}" if doc_ids.count != 1
+        puts "BAD DATA for annex #{annex.id}: connected with #{doc_ids.join(",")}" if doc_ids.count != 1
         doc_ids.each do |doc_id|
           doc = OperatorDocument.unscoped.where(id: doc_id).first
           doc_his = OperatorDocumentHistory.unscoped.where(operator_document: doc)
@@ -116,9 +116,9 @@ namespace :fix do
     end
   end
 
-  desc 'fix doc history'
+  desc "fix doc history"
   task fix_doc_history: :environment do
-    date = '2021-04-01'
+    date = "2021-04-01"
 
     OperatorDocumentUploader = Class.new # to fix initialization of old document which used this
 
@@ -127,17 +127,17 @@ namespace :fix do
     new_history_list = []
 
     puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
-    puts "Annex history relation: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
+    puts "Annex history relation: #{AnnexDocument.where(documentable_type: "OperatorDocumentHistory").count}"
 
     time = Benchmark.ms do
       ActiveRecord::Base.transaction do
         puts "HistoryCount before: #{OperatorDocumentHistory.count}"
 
         OperatorDocumentHistory.delete_all
-        AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').delete_all
+        AnnexDocument.where(documentable_type: "OperatorDocumentHistory").delete_all
 
         OperatorDocument.unscoped.find_each do |od|
-          start_version = od.paper_trail.version_at(date) || od.versions.where(event: 'update').where('created_at >= ?', date).where_object(deleted_at: nil).order(:created_at).first&.reify || od
+          start_version = od.paper_trail.version_at(date) || od.versions.where(event: "update").where("created_at >= ?", date).where_object(deleted_at: nil).order(:created_at).first&.reify || od
 
           next if start_version.blank?
           next if start_version.deleted_at.present?
@@ -182,18 +182,18 @@ namespace :fix do
         puts "HistoryCount after: #{OperatorDocumentHistory.count}"
         puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
         puts "Docs no history ids: #{OperatorDocument.where.not(id: docs_in_history).pluck(:id)}"
-        puts "Annex history relation after: #{AnnexDocument.where(documentable_type: 'OperatorDocumentHistory').count}"
+        puts "Annex history relation after: #{AnnexDocument.where(documentable_type: "OperatorDocumentHistory").count}"
 
-        raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
+        raise ActiveRecord::Rollback unless ENV["FOR_REAL"].present?
       end
     end
 
     puts "History recreated in #{time} ms."
   end
 
-  desc 'Fixing score operator document history'
+  desc "Fixing score operator document history"
   task score_operator_documents: :environment do
-    puts "FOR REAL!!!" if ENV['FOR_REAL'].present?
+    puts "FOR REAL!!!" if ENV["FOR_REAL"].present?
 
     ActiveRecord::Base.transaction do
       scores_to_remove_ids = []
@@ -287,7 +287,7 @@ namespace :fix do
       puts "ALL GOOD!!"
       # still fmu, and country precalculated values would be wrong :/
 
-      raise ActiveRecord::Rollback unless ENV['FOR_REAL'].present?
+      raise ActiveRecord::Rollback unless ENV["FOR_REAL"].present?
     end
   end
 
@@ -296,10 +296,10 @@ namespace :fix do
   end
 
   def calculate_all_score(sod)
-    sod.summary_public['doc_valid'] / (sod.total.to_f - sod.summary_public['doc_not_required'])
+    sod.summary_public["doc_valid"] / (sod.total.to_f - sod.summary_public["doc_not_required"])
   end
 
-  desc 'Fixing operator document generated names'
+  desc "Fixing operator document generated names"
   task operator_documents_names: :environment do
     count_no_relation = 0
     count_no_operator = 0
@@ -309,7 +309,7 @@ namespace :fix do
     DocumentFile.find_each do |df|
       if df.owner.nil?
         puts "NO relation for document #{df.id}"
-        count_no_relation +=1
+        count_no_relation += 1
         next
       end
 
@@ -321,7 +321,7 @@ namespace :fix do
       end
 
       filename = df.attachment.identifier
-      next if filename.match(/\d{4}-\d{2}-\d{2}/) # have date in filename then I would say it is ok
+      next if /\d{4}-\d{2}-\d{2}/.match?(filename) # have date in filename then I would say it is ok
 
       start_name = operator.name[0...30]&.parameterize
       next if df.attachment.identifier.start_with?(start_name)
@@ -329,8 +329,8 @@ namespace :fix do
       new_name = [
         operator.name[0...30]&.parameterize,
         df.owner.required_operator_document.name[0...100]&.parameterize,
-        df.created_at.strftime('%Y-%m-%d')
-      ].compact.join('-') + File.extname(filename)
+        df.created_at.strftime("%Y-%m-%d")
+      ].compact.join("-") + File.extname(filename)
 
       file_dirname = File.dirname(df.attachment.file.file)
       new_file_path = File.join(file_dirname, new_name)

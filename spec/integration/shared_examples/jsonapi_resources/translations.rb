@@ -1,4 +1,4 @@
-RSpec.shared_examples 'jsonapi-resources__translations' do |options|
+RSpec.shared_examples "jsonapi-resources__translations" do |options|
   context "Translations" do
     let(:locales) { options[:locales] || [] }
 
@@ -8,7 +8,7 @@ RSpec.shared_examples 'jsonapi-resources__translations' do |options|
       locales.each do |locale|
         resource.attributes =
           options[:attributes].map { |key, value| [key, "#{value} #{locale}"] }
-                              .to_h.merge(locale: locale)
+            .to_h.merge(locale: locale)
       end
 
       resource.save

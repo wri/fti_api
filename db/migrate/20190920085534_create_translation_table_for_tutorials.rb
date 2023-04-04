@@ -8,10 +8,10 @@ class CreateTranslationTableForTutorials < ActiveRecord::Migration[5.0]
           name: :string,
           description: :text
         },
-        {
-          migrate_data: true,
-          remove_source_columns: true
-        })
+          {
+            migrate_data: true,
+            remove_source_columns: true
+          })
       end
 
       dir.down do

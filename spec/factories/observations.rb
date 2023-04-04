@@ -39,36 +39,36 @@
 #
 
 FactoryBot.define do
-  factory :observation_1, class: 'Observation' do
+  factory :observation_1, class: "Observation" do
     severity
     country
     species { build_list(:species, 1) }
     user { build(:admin) }
     operator { build(:operator, name: "Operator #{Faker::Lorem.sentence}") }
-    observation_type { 'operator' }
+    observation_type { "operator" }
     is_active { true }
-    evidence_type { 'Photos' }
+    evidence_type { "Photos" }
     publication_date { DateTime.now.to_date }
-    location_accuracy { 'Estimated location' }
+    location_accuracy { "Estimated location" }
     lng { 12.2222 }
     lat { 12.3333 }
   end
 
-  factory :gov_observation, class: 'Observation' do
+  factory :gov_observation, class: "Observation" do
     severity
     country
     governments { build_list(:government, 2) }
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     user { build(:admin) }
-    observation_type { 'government' }
-    validation_status { 'Published (no comments)' }
+    observation_type { "government" }
+    validation_status { "Published (no comments)" }
     is_active { true }
     publication_date { DateTime.now.yesterday.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
   end
 
-  factory :observation, class: 'Observation' do
+  factory :observation, class: "Observation" do
     country
     subcategory
     observation_report
@@ -76,11 +76,11 @@ FactoryBot.define do
     user { build(:admin) }
     severity { build(:severity, subcategory: subcategory) }
     operator { create(:operator, country: country) }
-    observation_type { 'operator' }
+    observation_type { "operator" }
     observers { build_list(:observer, 1) }
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     is_active { true }
-    validation_status { 'Published (no comments)' }
+    validation_status { "Published (no comments)" }
     publication_date { DateTime.now.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
@@ -89,12 +89,12 @@ FactoryBot.define do
       force_status { nil }
     end
 
-    factory :created_observation, class: 'Observation' do
-      validation_status { 'Created' }
+    factory :created_observation, class: "Observation" do
+      validation_status { "Created" }
     end
 
     after(:build) do |observation|
-      observation.observers.each { |observer| observer.translation.name = observer.name  }
+      observation.observers.each { |observer| observer.translation.name = observer.name }
     end
 
     after(:create) do |doc, evaluator|
@@ -103,8 +103,8 @@ FactoryBot.define do
   end
 
   trait :with_translations do
-    details { 'details' }
-    concern_opinion { 'concern opinion' }
-    litigation_status { 'litigation status' }
+    details { "details" }
+    concern_opinion { "concern opinion" }
+    litigation_status { "litigation status" }
   end
 end

@@ -1,7 +1,7 @@
 namespace :operator_ids do
-  desc 'Creates the new operator id'
+  desc "Creates the new operator id"
   task create: :environment do
-    puts 'Going to update the operator_ids'
+    puts "Going to update the operator_ids"
     operators = Operator.where(operator_id: nil)
     operators.each do |operator|
       if operator.country_id.present?

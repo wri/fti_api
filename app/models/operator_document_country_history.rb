@@ -29,5 +29,4 @@
 #  operator_document_created_at  :datetime         not null
 #
 class OperatorDocumentCountryHistory < OperatorDocumentHistory
-
 end

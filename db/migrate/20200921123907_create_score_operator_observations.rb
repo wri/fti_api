@@ -6,7 +6,7 @@ class CreateScoreOperatorObservations < ActiveRecord::Migration[5.0]
       t.float :score
       t.float :obs_per_visit
 
-      t.references :operator, foreign_key: { on_delete: :cascade }, index: true
+      t.references :operator, foreign_key: {on_delete: :cascade}, index: true
       t.index :date
       t.index :current
       t.index [:current, :operator_id]

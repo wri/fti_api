@@ -30,10 +30,10 @@ class Government < ApplicationRecord
 
   validates :government_entity, presence: true
   # TODO: change unique validation to not only on create, after cleaning up the data
-  validates :government_entity, uniqueness: { case_sensitive: false }, on: :create
+  validates :government_entity, uniqueness: {case_sensitive: false}, on: :create
 
   scope :by_entity_asc, -> {
-    with_translations(I18n.locale).order('government_translations.government_entity ASC')
+    with_translations(I18n.locale).order("government_translations.government_entity ASC")
   }
 
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
@@ -43,7 +43,7 @@ class Government < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      country_id  = options['country'] if options.present? && options['country'].present?
+      country_id = options["country"] if options.present? && options["country"].present?
 
       governments = includes(:country)
       governments = governments.filter_by_country(country_id) if country_id.present?
@@ -54,6 +54,6 @@ class Government < ApplicationRecord
   alias_method :to_s, :government_entity
 
   def cache_key
-    super + '-' + Globalize.locale.to_s
+    super + "-" + Globalize.locale.to_s
   end
 end

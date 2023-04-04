@@ -15,23 +15,23 @@
 
 class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
-  belongs_to :user,        inverse_of: :comments
+  belongs_to :user, inverse_of: :comments
 
   validates :body, presence: true
   validates :user, presence: true
 
   validate :validate_body_length
 
-  scope :recent,             -> { order('comments.id DESC')                 }
-  scope :sort_by_created_at, -> { order('comments.sort_by_created_at DESC') }
+  scope :recent, -> { order("comments.id DESC") }
+  scope :sort_by_created_at, -> { order("comments.sort_by_created_at DESC") }
 
   class << self
     def build(options)
-      commentable = options['commentable_type'].classify.constantize if options['commentable_type'].present?
-      user        = options['user']                                  if options['user'].present?
-      body        = options['body']                                  if options['body'].present?
+      commentable = options["commentable_type"].classify.constantize if options["commentable_type"].present?
+      user = options["user"] if options["user"].present?
+      body = options["body"] if options["body"].present?
       if commentable.present? && user.present? && body.present?
-        commentable = commentable.find(options['commentable_id'].to_i)
+        commentable = commentable.find(options["commentable_id"].to_i)
 
         new(commentable: commentable, user_id: user.id, body: body)
       end

@@ -14,7 +14,7 @@
 FactoryBot.define do
   factory :faq do
     sequence :position
-    question { 'Question' }
-    answer { 'Answer' }
+    question { "Question" }
+    answer { "Answer" }
   end
 end

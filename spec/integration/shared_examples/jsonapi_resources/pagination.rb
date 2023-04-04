@@ -1,4 +1,4 @@
-RSpec.shared_examples 'jsonapi-resources__pagination' do |options|
+RSpec.shared_examples "jsonapi-resources__pagination" do |options|
   context "Pagination" do
     let(:attributes) { options[:attributes] || {} }
 
@@ -15,14 +15,14 @@ RSpec.shared_examples 'jsonapi-resources__pagination' do |options|
       describe "For user with #{role} role" do
         let(:headers) { respond_to?("#{role}_headers") ? send("#{role}_headers") : authorize_headers(create(role).id) }
 
-        it 'Show list for first page with per pege param' do
+        it "Show list for first page with per pege param" do
           get "/#{@route_key}?page[number]=1&page[size]=3", headers: headers
 
           expect(status).to eq(200)
           expect(parsed_data.size).to eq(3)
         end
 
-        it 'Show list second page with per pege param' do
+        it "Show list second page with per pege param" do
           get "/#{@route_key}?page[number]=2&page[size]=3", headers: headers
 
           expect(status).to eq(200)
@@ -30,6 +30,5 @@ RSpec.shared_examples 'jsonapi-resources__pagination' do |options|
         end
       end
     end
-
   end
 end
