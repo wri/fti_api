@@ -32,6 +32,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
   dependent_filters do
     {
       country_id: {
+        fmu_forest_type: Fmu.distinct.pluck(:country_id, :forest_type).map { |c, f| [c, ForestType::TYPES[f][:index]] },
         operator_id: Operator.pluck(:country_id, :id)
       },
       category_id: {
