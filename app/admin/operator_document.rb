@@ -229,7 +229,7 @@ ActiveAdmin.register OperatorDocument do
     as: :select,
     collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :required_operator_document,
-    collection: -> { RequiredOperatorDocument.with_generic.map { |r| [r.name_with_country, r.id] } }
+    collection: -> { RequiredOperatorDocument.with_generic.order(:country_id, :name).map { |r| [r.name_with_country, r.id] } }
   filter :operator, as: :select, collection: -> { Operator.by_name_asc }
   filter :fmu, as: :select, label: -> { I18n.t("activerecord.models.fmu.other") }, collection: -> { Fmu.by_name_asc }
   filter :status, as: :select, collection: -> { OperatorDocument.statuses }
