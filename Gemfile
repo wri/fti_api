@@ -88,7 +88,7 @@ gem "sendgrid-actionmailer"
 gem "rubyzip", "~> 2.3.0"
 
 # Changes monitoring
-gem "globalize-versioning"
+gem "globalize-versioning", github: "globalize/globalize-versioning", branch: "main"
 gem "paper_trail"
 
 # Interactors
