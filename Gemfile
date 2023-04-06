@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.0.5"
+ruby "3.2.2"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -99,7 +99,7 @@ gem "sentry-rails"
 gem "sentry-ruby"
 
 group :development, :test do
-  gem "byebug", platform: :mri
+  gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
   gem "faker"
   gem "rails-erd"
@@ -121,7 +121,6 @@ group :development do
   gem "guard"
   gem "i18n_generators"
   gem "listen", "~> 3.3"
-  gem "pry-rails"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "rack-mini-profiler", "~> 2.0"
