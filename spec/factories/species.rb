@@ -19,7 +19,7 @@
 
 FactoryBot.define do
   factory :species do
-    common_name { 'Species' }
-    name { 'Spezie' }
+    common_name { "Species" }
+    name { "Spezie" }
   end
 end

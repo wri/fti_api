@@ -1,1 +1,1 @@
-Rake::Task['import:subcategory_governments'].invoke  unless Subcategory.government.any?
+Rake::Task["import:subcategory_governments"].invoke unless Subcategory.government.any?

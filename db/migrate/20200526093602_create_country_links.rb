@@ -8,19 +8,19 @@ class CreateCountryLinks < ActiveRecord::Migration[5.0]
       t.timestamps
 
       t.references :country,
-                   foreign_key: { on_delete: :cascade },
-                   index: true
+        foreign_key: {on_delete: :cascade},
+        index: true
     end
 
     CountryLink.create_translation_table!(
-        {
-            name: :string,
-            description: :text
-        },
-        {
-            migrate_data: true,
-            remove_source_columns: true
-        }
+      {
+        name: :string,
+        description: :text
+      },
+      {
+        migrate_data: true,
+        remove_source_columns: true
+      }
     )
   end
 end

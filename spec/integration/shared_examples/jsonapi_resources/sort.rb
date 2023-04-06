@@ -1,6 +1,6 @@
-RSpec.shared_examples 'jsonapi-resources__sort' do |options|
+RSpec.shared_examples "jsonapi-resources__sort" do |options|
   context "Sort" do
-    let(:jsonapi_attribute) { options[:attribute].to_s.gsub('_', '-').to_sym }
+    let(:jsonapi_attribute) { options[:attribute].to_s.tr("_", "-").to_sym }
     let(:expected_count) { options[:expected_count] || 6 }
     let(:desc) { options[:desc] || options[:sequence].call(expected_count - 1) }
     let(:asc) { options[:asc] || options[:sequence].call(0) }
@@ -38,6 +38,5 @@ RSpec.shared_examples 'jsonapi-resources__sort' do |options|
         end
       end
     end
-
   end
 end

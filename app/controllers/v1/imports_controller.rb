@@ -25,7 +25,7 @@ module V1
     end
 
     def user_id_params
-      current_user ? { user_id: current_user.id } : { user_id: nil }
+      current_user ? {user_id: current_user.id} : {user_id: nil}
     end
 
     def set_locale(&action)

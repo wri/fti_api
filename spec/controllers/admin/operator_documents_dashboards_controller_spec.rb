@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 # Base specs for admin default actions are done in active_admin_spec.rb
 RSpec.describe Admin::ProducerDocumentsDashboardsController, type: :controller do
@@ -24,20 +24,20 @@ RSpec.describe Admin::ProducerDocumentsDashboardsController, type: :controller d
 
   before { sign_in admin }
 
-  describe 'GET index' do
+  describe "GET index" do
     subject { get :index }
 
     it { is_expected.to be_successful }
   end
 
-  describe 'GET index with .csv format' do
+  describe "GET index with .csv format" do
     before do
-      get :index, format: 'csv'
+      get :index, format: "csv"
     end
 
-    it('returns CSV file') do
+    it("returns CSV file") do
       expect(response).to have_http_status(:success)
-      expect(response.header['Content-Type']).to include('text/csv')
+      expect(response.header["Content-Type"]).to include("text/csv")
     end
   end
 end

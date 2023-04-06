@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'boot'
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
@@ -16,8 +16,8 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "rails/test_unit/railtie"
 require "sprockets/railtie"
-require 'carrierwave'
-require_relative '../lib/rack/health_check'
+require "carrierwave"
+require_relative "../lib/rack/health_check"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -27,8 +27,8 @@ Bundler.require(*Rails.groups)
 
 module FtiApi
   class Application < Rails::Application
-    config.autoload_paths << Rails.root.join('lib')
-    config.eager_load_paths << Rails.root.join('lib')
+    config.autoload_paths << Rails.root.join("lib")
+    config.eager_load_paths << Rails.root.join("lib")
     config.load_defaults 6.1
 
     # ActiveJob
@@ -37,7 +37,7 @@ module FtiApi
     config.api_only = false
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
-    app_url = URI.parse(ENV.fetch('APP_URL', 'http://localhost:3000'))
+    app_url = URI.parse(ENV.fetch("APP_URL", "http://localhost:3000"))
     Rails.application.routes.default_url_options = {
       host: app_url.host,
       port: app_url.port,
@@ -47,10 +47,10 @@ module FtiApi
     config.generators do |g|
       g.template_engine nil
       g.test_framework :rspec,
-                       fixtures: true,
-                       routing_specs: true,
-                       controller_specs: false,
-                       request_specs: true
+        fixtures: true,
+        routing_specs: true,
+        controller_specs: false,
+        request_specs: true
     end
 
     config.middleware.insert_after Rails::Rack::Logger, Rack::HealthCheck

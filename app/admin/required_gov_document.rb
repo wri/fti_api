@@ -10,22 +10,22 @@ ActiveAdmin.register RequiredGovDocument do
 
   actions :all
   permit_params :required_gov_document_group_id, :document_type, :country_id, :position,
-                :valid_period, translations_attributes: [:id, :name, :locale, :explanation]
+    :valid_period, translations_attributes: [:id, :name, :locale, :explanation]
 
   filter :required_gov_document_group, collection: -> {
     RequiredGovDocumentGroup
       .all
       .left_joins(:parent)
-      .order(Arel.sql('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)'))
+      .order(Arel.sql("coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)"))
   }
   filter :country, collection: -> { Country.by_name_asc.where(id: RequiredGovDocument.select(:country_id).distinct.pluck(:country_id)) }
   filter :document_type, as: :select, collection: RequiredGovDocument.document_types
   filter :translations_name_eq,
-         as: :select,
-         label: -> { I18n.t('activerecord.attributes.required_gov_document.name') },
-         collection: -> {
-           RequiredGovDocument.with_translations(I18n.locale).order('required_gov_document_translations.name').pluck(:name)
-         }
+    as: :select,
+    label: -> { I18n.t("activerecord.attributes.required_gov_document.name") },
+    collection: -> {
+      RequiredGovDocument.with_translations(I18n.locale).order("required_gov_document_translations.name").pluck(:name)
+    }
   filter :updated_at
 
   controller do
@@ -36,10 +36,10 @@ ActiveAdmin.register RequiredGovDocument do
   end
 
   csv do
-    column 'required_gov_document_group' do |rd|
+    column "required_gov_document_group" do |rd|
       rd.required_gov_document_group&.name
     end
-    column 'country' do |rd|
+    column "country" do |rd|
       rd.country&.name
     end
     column :name
@@ -49,26 +49,26 @@ ActiveAdmin.register RequiredGovDocument do
     column :required_gov_document_group
     column :country
     column :position
-    column :name, sortable: 'required_gov_document_translations.name'
+    column :name, sortable: "required_gov_document_translations.name"
     column :document_type
 
     actions
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'Required Gov Document Details' do
-      editing = object.new_record? ? false : true
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "Required Gov Document Details" do
+      editing = !object.new_record?
       f.input :required_gov_document_group, collection: RequiredGovDocumentGroup
         .all
         .left_joins(:parent)
-        .order(Arel.sql('coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)'))
-      f.input :country, input_html: { disabled: editing }
+        .order(Arel.sql("coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)"))
+      f.input :country, input_html: {disabled: editing}
       f.input :position
       f.input :document_type, as: :select, collection: RequiredGovDocument.document_types.keys,
-                              include_blank: false, input_html: { disabled: editing }
-      f.input :valid_period, label: 'Validity (days)'
-      f.inputs 'Translated fields' do
+        include_blank: false, input_html: {disabled: editing}
+      f.input :valid_period, label: "Validity (days)"
+      f.inputs "Translated fields" do
         f.translated_inputs switch_locale: false do |t|
           t.input :name
           t.input :explanation

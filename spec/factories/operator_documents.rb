@@ -29,7 +29,7 @@ FactoryBot.define do
     user
     expire_date { Date.tomorrow }
     start_date { Date.yesterday }
-    type { 'OperatorDocumentCountry' } # This can be overwritten by the children.
+    type { "OperatorDocumentCountry" } # This can be overwritten by the children.
     document_file { build :document_file }
 
     transient do
@@ -57,7 +57,7 @@ FactoryBot.define do
     factory :operator_document_fmu, class: OperatorDocumentFmu do
       fmu
       required_operator_document_fmu
-      type { 'OperatorDocumentFmu' }
+      type { "OperatorDocumentFmu" }
 
       after(:build) do |doc|
         doc.fmu ||= FactoryBot.create(:fmu, country: country)

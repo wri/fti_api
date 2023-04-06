@@ -9,7 +9,7 @@ class DropGlobalScores < ActiveRecord::Migration[5.0]
       t.jsonb :doc_group_status
       t.jsonb :fmu_type_status
 
-      t.references :country, foreign_key: { on_delete: :nullify }, index: true
+      t.references :country, foreign_key: {on_delete: :nullify}, index: true
       t.index :date
       t.index [:date, :country_id], unique: true
 

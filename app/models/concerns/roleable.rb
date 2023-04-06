@@ -8,25 +8,25 @@ module Roleable
 
     after_create :set_permissions, unless: :user_permission
 
-    scope :filter_admins,    -> { joins(:user_permission).where(user_permissions: { user_role: 'admin' })    }
-    scope :filter_ngos,      -> { joins(:user_permission).where(user_permissions: { user_role: 'ngo' })      }
-    scope :filter_operators, -> { joins(:user_permission).where(user_permissions: { user_role: 'operator' }) }
-    scope :filter_users,     -> { joins(:user_permission).where(user_permissions: { user_role: 'user' })     }
+    scope :filter_admins, -> { joins(:user_permission).where(user_permissions: {user_role: "admin"}) }
+    scope :filter_ngos, -> { joins(:user_permission).where(user_permissions: {user_role: "ngo"}) }
+    scope :filter_operators, -> { joins(:user_permission).where(user_permissions: {user_role: "operator"}) }
+    scope :filter_users, -> { joins(:user_permission).where(user_permissions: {user_role: "user"}) }
 
     def admin?
-      user_permission.user_role.in?('admin')
+      user_permission.user_role.in?("admin")
     end
 
     def ngo?
-      user_permission.user_role.in?('ngo')
+      user_permission.user_role.in?("ngo")
     end
 
     def operator?
-      user_permission.user_role.in?('operator')
+      user_permission.user_role.in?("operator")
     end
 
     def user?
-      user_permission.user_role.in?('user')
+      user_permission.user_role.in?("user")
     end
 
     def is_active_admin?
@@ -47,19 +47,19 @@ module Roleable
 
     def role_name
       case user_permission.user_role
-      when 'admin'    then 'Admin'
-      when 'ngo'      then 'NGO'
-      when 'operator' then 'Operator'
+      when "admin" then "Admin"
+      when "ngo" then "NGO"
+      when "operator" then "Operator"
       else
-        'User'
+        "User"
       end
     end
 
     private
 
-      def set_permissions
-        self.create_user_permission(user_role: :user, permissions: { user: { id: [:manage] }, observation: { all: [:read] }  })
-      end
+    def set_permissions
+      create_user_permission(user_role: :user, permissions: {user: {id: [:manage]}, observation: {all: [:read]}})
+    end
   end
 
   class_methods do

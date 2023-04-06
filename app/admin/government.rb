@@ -14,16 +14,16 @@ ActiveAdmin.register Government do
   controller do
     def scoped_collection
       end_of_association_chain.with_translations(I18n.locale).includes(country: :translations)
-        .where(country_translations: { locale: I18n.locale })
+        .where(country_translations: {locale: I18n.locale})
     end
   end
 
-  scope ->{ I18n.t('active_admin.all') }, :all
-  scope ->{ I18n.t('active_admin.shared.active') }, :active, default: true
+  scope -> { I18n.t("active_admin.all") }, :all
+  scope -> { I18n.t("active_admin.shared.active") }, :active, default: true
 
   csv do
     column :is_active
-    column I18n.t('activerecord.models.country.one') do |g|
+    column I18n.t("activerecord.models.country.one") do |g|
       g.country&.name
     end
     column :government_entity
@@ -32,17 +32,17 @@ ActiveAdmin.register Government do
 
   index do
     column :is_active
-    column :country, sortable: 'country_translations.name'
-    column :government_entity, sortable: 'government_translations.government_entity'
-    column :details, sortable: 'government_translations.details'
+    column :country, sortable: "country_translations.name"
+    column :government_entity, sortable: "government_translations.government_entity"
+    column :details, sortable: "government_translations.details"
 
     actions
   end
 
   filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc }
   filter :translations_government_entity_contains,
-         as: :select, label: -> { I18n.t('activerecord.attributes.government/translation.government_entity') },
-         collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
+    as: :select, label: -> { I18n.t("activerecord.attributes.government/translation.government_entity") },
+    collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
 
   dependent_filters do
     {
@@ -52,7 +52,7 @@ ActiveAdmin.register Government do
     }
   end
 
-  sidebar I18n.t('activerecord.models.observation.other'), only: :show do
+  sidebar I18n.t("activerecord.models.observation.other"), only: :show do
     attributes_table_for resource do
       ul do
         resource.observations.collect do |obs|
@@ -63,14 +63,14 @@ ActiveAdmin.register Government do
   end
 
   form do |f|
-    edit = f.object.new_record? ? false : true
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs I18n.t('active_admin.shared.government_details') do
+    edit = !f.object.new_record?
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs I18n.t("active_admin.shared.government_details") do
       f.input :is_active
-      f.input :country, input_html: { disabled: edit }
+      f.input :country, input_html: {disabled: edit}
     end
 
-    f.inputs I18n.t('active_admin.shared.translated_fields') do
+    f.inputs I18n.t("active_admin.shared.translated_fields") do
       f.translated_inputs switch_locale: false do |t|
         t.input :government_entity
         t.input :details
@@ -79,7 +79,7 @@ ActiveAdmin.register Government do
     f.actions
   end
 
-  show title: proc{ "#{resource.government_entity}" }do
+  show title: proc { resource.government_entity.to_s } do
     attributes_table do
       row :is_active
       row :country

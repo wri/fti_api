@@ -4,14 +4,14 @@ module V1
   class LawResource < BaseResource
     caching
     attributes :written_infraction, :infraction, :sanctions, :min_fine, :max_fine,
-               :penal_servitude, :other_penalties, :apv, :complete, :currency
+      :penal_servitude, :other_penalties, :apv, :complete, :currency
 
     has_one :subcategory
     has_one :country
-    has_many   :observations
+    has_many :observations
 
     filters :country, :subcategory, :written_infraction, :infraction, :sanctions, :min_fine, :max_fine,
-            :penal_servitude, :other_penalties, :apv
+      :penal_servitude, :other_penalties, :apv
 
     filter :complete, apply: ->(records, value, _options) {
       if value[0] == "true"
@@ -26,7 +26,7 @@ or apv is null or currency is null')
     }
 
     def self.sortable_fields(context)
-      super + [:'subcategory.name', :'country.name']
+      super + [:"subcategory.name", :"country.name"]
     end
 
     def self.updatable_fields(context)
@@ -41,21 +41,21 @@ or apv is null or currency is null')
     # we add the ordering by id to ensure that when limiting by 1 or 100
     # the order of the results is the same
     def self.apply_sort(records, order_options, context = {})
-      if order_options['country.name'].present? || order_options['subcategory.name'].present?
-        order_options['id'] =  'DESC'
+      if order_options["country.name"].present? || order_options["subcategory.name"].present?
+        order_options["id"] = "DESC"
       end
       super(records, order_options, context)
     end
 
     def complete
       @model.written_infraction.present? &&
-          @model.infraction.present? &&
-          @model.sanctions.present? &&
-          @model.min_fine.present? &&
-          @model.max_fine.present? &&
-          @model.penal_servitude.present? &&
-          @model.apv.present? &&
-          @model.currency.present?
+        @model.infraction.present? &&
+        @model.sanctions.present? &&
+        @model.min_fine.present? &&
+        @model.max_fine.present? &&
+        @model.penal_servitude.present? &&
+        @model.apv.present? &&
+        @model.currency.present?
     end
   end
 end

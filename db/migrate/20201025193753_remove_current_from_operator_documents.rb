@@ -8,6 +8,5 @@ class RemoveCurrentFromOperatorDocuments < ActiveRecord::Migration[5.0]
         add_column :operator_documents, :current, :boolean, index: true
       end
     end
-
   end
 end

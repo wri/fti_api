@@ -15,13 +15,13 @@ ActiveAdmin.register Country do
     end
   end
 
-  scope ->{ I18n.t('active_admin.all') }, :all
-  scope ->{ I18n.t('active_admin.shared.active') }, :active
+  scope -> { I18n.t("active_admin.all") }, :all
+  scope -> { I18n.t("active_admin.shared.active") }, :active
 
   filter :iso, as: :select
   filter :translations_name_contains, as: :select,
-                                      label: -> { I18n.t('activerecord.attributes.country.name') },
-                                      collection: -> { Country.order(:name).pluck(:name) }
+    label: -> { I18n.t("activerecord.attributes.country.name") },
+    collection: -> { Country.order(:name).pluck(:name) }
   filter :region_iso, as: :select
   filter :region_name
   filter :is_active
@@ -41,16 +41,16 @@ ActiveAdmin.register Country do
     column :is_active, sortable: true
     column :id, sortable: true
     column :iso, sortable: true
-    column :name, sortable: 'country_translations.name'
+    column :name, sortable: "country_translations.name"
     column :region_iso, sortable: true
-    column :region_name, sortable: 'country_translations.region_name'
+    column :region_name, sortable: "country_translations.region_name"
 
     actions
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs I18n.t('active_admin.shared.country_details') do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs I18n.t("active_admin.shared.country_details") do
       f.translated_inputs switch_locale: false do |t|
         t.input :name
         t.input :overview, as: :html_editor

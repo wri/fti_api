@@ -5,6 +5,6 @@ module V1
     include ErrorSerializer
 
     skip_before_action :authenticate, only: [:index, :show]
-    load_and_authorize_resource class: 'Species'
+    load_and_authorize_resource class: "Species"
   end
 end

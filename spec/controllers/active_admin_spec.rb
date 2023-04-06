@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
   # resource_name will be empty for custom pages not backed by models
@@ -20,17 +20,17 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
 
         it { is_expected.to be_successful }
 
-        it 'does not include empty translations' do
+        it "does not include empty translations" do
           subject
-          expect(response.body).not_to include('translation missing')
+          expect(response.body).not_to include("translation missing")
         end
 
         if resource_name
-          it 'responds to csv' do
+          it "responds to csv" do
             get :index, format: :csv
             expect(response.body).to be_present # otherwise it does not invoke csv code
-            expect(response.content_type).to include('text/csv')
-            expect(response.body).not_to include('translation missing')
+            expect(response.content_type).to include("text/csv")
+            expect(response.body).not_to include("translation missing")
           end
         end
       end
@@ -39,26 +39,26 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
     if FactoryBot.factories.registered?(resource_name)
       if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:show)
         describe "GET show" do
-          subject { get :show, params: { id: model.id }}
+          subject { get :show, params: {id: model.id} }
 
           it { is_expected.to be_successful }
 
-          it 'does not include empty translations' do
+          it "does not include empty translations" do
             subject
-            expect(response.body).not_to include('translation missing')
+            expect(response.body).not_to include("translation missing")
           end
         end
       end
 
       if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:edit)
         describe "GET edit" do
-          subject { get :edit, params: { id: model.id }}
+          subject { get :edit, params: {id: model.id} }
 
           it { is_expected.to be_successful }
 
-          it 'does not include empty translations' do
+          it "does not include empty translations" do
             subject
-            expect(response.body).not_to include('translation missing')
+            expect(response.body).not_to include("translation missing")
           end
         end
       end

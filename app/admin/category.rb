@@ -10,9 +10,9 @@ ActiveAdmin.register Category do
   config.order_clause
   config.filters = false
 
-  scope -> { I18n.t('active_admin.all') }, :all, default: true
-  scope -> { I18n.t('activerecord.models.operator') }, :operator
-  scope -> { I18n.t('activerecord.models.government') }, :government
+  scope -> { I18n.t("active_admin.all") }, :all, default: true
+  scope -> { I18n.t("activerecord.models.operator") }, :operator
+  scope -> { I18n.t("activerecord.models.government") }, :government
 
   permit_params :category_type, translations_attributes: [:id, :locale, :name, :_destroy]
 
@@ -20,7 +20,7 @@ ActiveAdmin.register Category do
     sidebar = Subcategory.joins(:translations).where(category: resource).collect do |s|
       auto_link(s, s.name.camelize)
     end
-    safe_join(sidebar, content_tag('br'))
+    safe_join(sidebar, content_tag("br"))
   end
 
   controller do
@@ -46,10 +46,10 @@ ActiveAdmin.register Category do
   end
 
   form do |f|
-    edit = f.object.new_record? ? false : true
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs I18n.t('active_admin.shared.category_details') do
-      f.input :category_type, input_html: { disabled: edit }
+    edit = !f.object.new_record?
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs I18n.t("active_admin.shared.category_details") do
+      f.input :category_type, input_html: {disabled: edit}
     end
     f.translated_inputs switch_locale: false do |t|
       t.input :name

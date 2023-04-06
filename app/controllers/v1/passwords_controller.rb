@@ -10,7 +10,7 @@ module V1
     def create
       if @user.errors.empty?
         @user.send_reset_password_instructions
-        render json: { messages: [{ status: 200, title: 'Reset password email sent!' }] }, status: :ok
+        render json: {messages: [{status: 200, title: "Reset password email sent!"}]}, status: :ok
       else
         render json: ErrorSerializer.serialize(@user.errors, 422), status: :unprocessable_entity
       end
@@ -19,7 +19,7 @@ module V1
     def update_by_token
       if @user.reset_password_by_token(user_params)
         if @user.errors.empty?
-          render json: { messages: [{ status: 200, title: 'Password successfully updated!' }] }, status: :ok
+          render json: {messages: [{status: 200, title: "Password successfully updated!"}]}, status: :ok
         else
           render json: ErrorSerializer.serialize(@user.errors, 422), status: :unprocessable_entity
         end
@@ -31,7 +31,7 @@ module V1
     def update
       if @user.reset_password_by_current_user(user_params)
         if @user.errors.empty?
-          render json: { messages: [{ status: 200, title: 'Password successfully updated!' }] }, status: :ok
+          render json: {messages: [{status: 200, title: "Password successfully updated!"}]}, status: :ok
         else
           render json: ErrorSerializer.serialize(@user.errors, 422), status: :unprocessable_entity
         end
@@ -44,14 +44,14 @@ module V1
 
     def set_user
       @user = if logged_in?
-                @current_user
-              elsif user_params[:reset_password_token].present?
-                User.find_by(reset_password_token: user_params[:reset_password_token])
-              else
-                User.find_by(email: user_params[:email]) if user_params[:email].present?
-              end
+        @current_user
+      elsif user_params[:reset_password_token].present?
+        User.find_by(reset_password_token: user_params[:reset_password_token])
+      elsif user_params[:email].present?
+        User.find_by(email: user_params[:email])
+      end
 
-      render json: { errors: [{ status: 422, title: 'Couldn\'t find the user with this email' }] }, status: :unprocessable_entity if @user.nil?
+      render json: {errors: [{status: 422, title: "Couldn't find the user with this email"}]}, status: :unprocessable_entity if @user.nil?
     end
 
     def user_params

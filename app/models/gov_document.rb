@@ -25,8 +25,8 @@ class GovDocument < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
-  enum status: { doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4 }
-  enum uploaded_by: { government: 1, admin: 2 }
+  enum status: {doc_not_provided: 0, doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4}
+  enum uploaded_by: {government: 1, admin: 2}
 
   belongs_to :user, optional: true
   belongs_to :country
@@ -35,13 +35,13 @@ class GovDocument < ApplicationRecord
   mount_base64_uploader :attachment, GovDocumentUploader
   include MoveableAttachment
 
-  before_validation :set_expire_date, if: Proc.new { |d| d.required_gov_document.valid_period? }
+  before_validation :set_expire_date, if: proc { |d| d.required_gov_document.valid_period? }
   before_validation :clear_wrong_fields
   before_validation :set_status, on: :create
   before_validation :set_country, on: :create
 
-  validates :start_date, presence: true, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
-  validates :expire_date, presence: true, if: Proc.new { |d| d.required_gov_document.valid_period? && d.has_data? }
+  validates :start_date, presence: true, if: proc { |d| d.required_gov_document.valid_period? && d.has_data? }
+  validates :expire_date, presence: true, if: proc { |d| d.required_gov_document.valid_period? && d.has_data? }
 
   after_update :move_previous_attachment_to_private_directory, if: :saved_change_to_attachment?
 
@@ -49,13 +49,17 @@ class GovDocument < ApplicationRecord
   after_restore :move_attachment_to_public_directory
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
-  scope :to_expire, ->(date) { where('expire_date < ?', date).where(status: EXPIRABLE_STATUSES) }
+  scope :to_expire, ->(date) { where("expire_date < ?", date).where(status: EXPIRABLE_STATUSES) }
   scope :valid, -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
 
   EXPIRABLE_STATUSES = %w[doc_valid]
 
   def set_expire_date
-    self.expire_date = start_date + required_gov_document.valid_period.days rescue nil
+    self.expire_date = begin
+      start_date + required_gov_document.valid_period.days
+    rescue
+      nil
+    end
   end
 
   def self.expire_documents
@@ -66,7 +70,7 @@ class GovDocument < ApplicationRecord
   end
 
   def expire_document
-    update!(status: 'doc_expired')
+    update!(status: "doc_expired")
   end
 
   def has_data?
@@ -97,7 +101,7 @@ class GovDocument < ApplicationRecord
     return if previous_attachment_filename.blank?
 
     from = File.join(attachment.root, attachment.store_dir, previous_attachment_filename)
-    to = from.gsub('/public/', '/private/')
+    to = from.gsub("/public/", "/private/")
     FileUtils.makedirs(File.dirname(to))
     system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
   end
@@ -108,19 +112,19 @@ class GovDocument < ApplicationRecord
     return if attachment_attr.nil?
 
     to = File.join(attachment.root, attachment.store_dir, attachment_attr)
-    from = to.gsub('/public/', '/private/')
+    from = to.gsub("/public/", "/private/")
     FileUtils.makedirs(File.dirname(from))
     system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
   end
 
   def clear_wrong_fields
     case required_gov_document.document_type
-    when 'file'
+    when "file"
       self.link = self.value = self.units = nil
-    when 'link'
+    when "link"
       self.value = self.units = nil
       remove_attachment!
-    when 'stats'
+    when "stats"
       remove_attachment!
     end
   end

@@ -18,12 +18,12 @@
 #  currency           :string
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Law, type: :model do
   subject(:law) { FactoryBot.build(:law) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(law).to be_valid
   end
 end

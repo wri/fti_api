@@ -21,43 +21,43 @@
 #  deleted_at           :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Fmu, type: :model do
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     fmu = build(:fmu)
     expect(fmu).to be_valid
   end
 
-  it_should_behave_like 'translatable', :fmu, %i[name]
+  it_should_behave_like "translatable", :fmu, %i[name]
 
-  describe 'Methods' do
-    describe '#cache_key' do
-      it 'return the default value with the locale' do
+  describe "Methods" do
+    describe "#cache_key" do
+      it "return the default value with the locale" do
         fmu = build(:fmu)
-        expect(fmu.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+        expect(fmu.cache_key).to match(/-#{Globalize.locale}\z/)
       end
     end
   end
 
-  describe 'Hooks' do
-    describe '#update_geojson' do
-      context 'when geojson is blank' do
-        it 'return nil' do
+  describe "Hooks" do
+    describe "#update_geojson" do
+      context "when geojson is blank" do
+        it "return nil" do
           fmu = create(:fmu, geojson: nil)
           expect(fmu.geojson).to eql nil
         end
       end
 
-      context 'when geojson is present' do
-        it 'updates geometry and centroid' do
+      context "when geojson is present" do
+        it "updates geometry and centroid" do
           country = create(:country)
           fmu = create(:fmu, :geojson_no_props, country: country)
           fmu.reload
 
           expect(fmu.geometry).not_to be_nil
-          expect(fmu.geojson['geometry']['coordinates']).to eql (fmu.geometry.coordinates)
-          expect(fmu.geojson['properties']['centroid']).to eql({
+          expect(fmu.geojson["geometry"]["coordinates"]).to eql(fmu.geometry.coordinates)
+          expect(fmu.geojson["properties"]["centroid"]).to eql({
             "type" => "Point",
             "coordinates" => [
               18.777923313,
@@ -66,77 +66,77 @@ RSpec.describe Fmu, type: :model do
           })
         end
 
-        it 'fill geojson with properties from fmu' do
+        it "fill geojson with properties from fmu" do
           country = create(:country)
-          operator = create(:operator, country: country, fa_id: 'fa_id')
+          operator = create(:operator, country: country, fa_id: "fa_id")
           fmu = create(:fmu_geojson, country: country)
           create(:fmu_operator, fmu: fmu, operator: operator)
           fmu.reload
           fmu.save
 
-          expect(fmu.geojson['properties']['fmu_name']).to eql fmu.name
-          expect(fmu.geojson['properties']['company_na']).to eql fmu.operator.name
-          expect(fmu.geojson['properties']['operator_id']).to eql fmu.operator.id
-          expect(fmu.geojson['properties']['certification_fsc']).to eql fmu.certification_fsc
-          expect(fmu.geojson['properties']['certification_pefc']).to eql fmu.certification_pefc
-          expect(fmu.geojson['properties']['certification_olb']).to eql fmu.certification_olb
-          expect(fmu.geojson['properties']['certification_pafc']).to eql fmu.certification_pafc
-          expect(fmu.geojson['properties']['certification_fsc_cw']).to eql fmu.certification_fsc_cw
-          expect(fmu.geojson['properties']['certification_tlv']).to eql fmu.certification_tlv
-          expect(fmu.geojson['properties']['certification_ls']).to eql fmu.certification_ls
+          expect(fmu.geojson["properties"]["fmu_name"]).to eql fmu.name
+          expect(fmu.geojson["properties"]["company_na"]).to eql fmu.operator.name
+          expect(fmu.geojson["properties"]["operator_id"]).to eql fmu.operator.id
+          expect(fmu.geojson["properties"]["certification_fsc"]).to eql fmu.certification_fsc
+          expect(fmu.geojson["properties"]["certification_pefc"]).to eql fmu.certification_pefc
+          expect(fmu.geojson["properties"]["certification_olb"]).to eql fmu.certification_olb
+          expect(fmu.geojson["properties"]["certification_pafc"]).to eql fmu.certification_pafc
+          expect(fmu.geojson["properties"]["certification_fsc_cw"]).to eql fmu.certification_fsc_cw
+          expect(fmu.geojson["properties"]["certification_tlv"]).to eql fmu.certification_tlv
+          expect(fmu.geojson["properties"]["certification_ls"]).to eql fmu.certification_ls
         end
       end
 
-      context 'when a new observation is added' do
-        it 'number of observations should be in the geojson' do
+      context "when a new observation is added" do
+        it "number of observations should be in the geojson" do
           country = create(:country)
-          operator = create(:operator, country: country, fa_id: 'fa_id')
+          operator = create(:operator, country: country, fa_id: "fa_id")
           fmu = create(:fmu_geojson, operator: operator, country: country)
           fmu.reload
 
-          expect(fmu.geojson['properties']['observations']).to eql 0
+          expect(fmu.geojson["properties"]["observations"]).to eql 0
 
           observation = create(:observation, operator: operator, fmu: fmu)
           observation.save
           fmu.reload
 
-          expect(fmu.geojson['properties']['observations']).to eql 1
+          expect(fmu.geojson["properties"]["observations"]).to eql 1
         end
       end
 
-      context 'when an observation is removed' do
-        it 'number of observations should be in the geojson' do
+      context "when an observation is removed" do
+        it "number of observations should be in the geojson" do
           country = create(:country)
-          operator = create(:operator, country: country, fa_id: 'fa_id')
+          operator = create(:operator, country: country, fa_id: "fa_id")
           fmu = create(:fmu_geojson, operator: operator, country: country)
           observation = create(:observation, operator: operator, fmu: fmu)
           observation.save
 
           fmu.reload
-          expect(fmu.geojson['properties']['observations']).to eql 1
+          expect(fmu.geojson["properties"]["observations"]).to eql 1
 
           observation.destroy
           fmu.reload
 
-          expect(fmu.geojson['properties']['observations']).to eql 0
+          expect(fmu.geojson["properties"]["observations"]).to eql 0
         end
       end
     end
 
-    describe '#update_geometry' do
-      it 'sets same coordinates than the ones provided in geojson' do
+    describe "#update_geometry" do
+      it "sets same coordinates than the ones provided in geojson" do
         country = create(:country)
-        operator = create(:operator, country: country, fa_id: 'fa_id')
+        operator = create(:operator, country: country, fa_id: "fa_id")
         fmu = create(:fmu_geojson, operator: operator, country: country)
         fmu.save
 
         fmu.reload
-        expect(fmu.geojson['geometry']['coordinates']).to eql (fmu.geometry.coordinates)
+        expect(fmu.geojson["geometry"]["coordinates"]).to eql(fmu.geometry.coordinates)
       end
     end
 
-    describe '#destroy' do
-      it 'destroy operator_documents associated with the fmu' do
+    describe "#destroy" do
+      it "destroy operator_documents associated with the fmu" do
         another_fmu = create(:fmu)
         operator_document = create(:operator_document_fmu, fmu: another_fmu)
         another_fmu.destroy
@@ -147,20 +147,20 @@ RSpec.describe Fmu, type: :model do
     end
   end
 
-  describe 'Instance methods' do
-    describe '#cache_key' do
-      it 'return the default value with the locale' do
+  describe "Instance methods" do
+    describe "#cache_key" do
+      it "return the default value with the locale" do
         fmu = create(:fmu)
-        expect(fmu.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+        expect(fmu.cache_key).to match(/-#{Globalize.locale}\z/)
       end
     end
   end
 
-  describe 'Class methods' do
+  describe "Class methods" do
     before :each do
       @country = create(:country)
-      operator = create(:operator, fa_id: 'fa-id')
-      @operator = create(:operator, country: @country, fa_id: 'fa_id')
+      operator = create(:operator, fa_id: "fa-id")
+      @operator = create(:operator, country: @country, fa_id: "fa_id")
 
       create(:fmu, country: @country)
       fmu1 = create(:fmu, country: operator.country)
@@ -170,32 +170,32 @@ RSpec.describe Fmu, type: :model do
       create(:fmu_operator, fmu: fmu2, operator: @operator)
     end
 
-    context 'when country_ids and operator_ids are not specified' do
-      it 'fetch all fmu' do
+    context "when country_ids and operator_ids are not specified" do
+      it "fetch all fmu" do
         expect(Fmu.fetch_all(nil).count).to eq(Fmu.all.size)
       end
     end
 
-    context 'when country_ids is specified' do
-      it 'fetch fmus filtered by country' do
-        expect(Fmu.fetch_all({'country_ids' => @country.id.to_s}).to_a).to eql(
+    context "when country_ids is specified" do
+      it "fetch fmus filtered by country" do
+        expect(Fmu.fetch_all({"country_ids" => @country.id.to_s}).to_a).to eql(
           Fmu.where(country_id: @country.id).to_a
         )
       end
     end
 
-    context 'when operator_ids is specified' do
-      it 'fetch fmus filtered by operator' do
-        expect(Fmu.fetch_all({'operator_ids' => @operator.id.to_s}).to_a).to eql(
+    context "when operator_ids is specified" do
+      it "fetch fmus filtered by operator" do
+        expect(Fmu.fetch_all({"operator_ids" => @operator.id.to_s}).to_a).to eql(
           Fmu.joins(:fmu_operators).where(fmu_operators: {current: true, operator_id: @operator.id}).to_a
         )
       end
     end
 
-    context 'when free is specified' do
-      it 'fetch fmus filtered by free' do
-        expect(Fmu.fetch_all({'free' => 'true'}).to_a).to eql(
-          Fmu.where.not(id: FmuOperator.where(current: :true).pluck(:fmu_id)).group(:id).to_a
+    context "when free is specified" do
+      it "fetch fmus filtered by free" do
+        expect(Fmu.fetch_all({"free" => "true"}).to_a).to eql(
+          Fmu.where.not(id: FmuOperator.where(current: true).pluck(:fmu_id)).group(:id).to_a
         )
       end
     end

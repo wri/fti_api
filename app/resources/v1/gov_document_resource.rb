@@ -29,9 +29,9 @@ module V1
     include Privateable
     caching
     attributes :required_gov_document_id,
-               :attachment,
-               :expire_date, :start_date,
-               :status, :link, :value, :units
+      :attachment,
+      :expire_date, :start_date,
+      :status, :link, :value, :units
 
     has_one :required_gov_document
     has_one :country
@@ -49,7 +49,7 @@ module V1
     def attachment
       return @model.attachment if can_see_document?
 
-      { url: nil }
+      {url: nil}
     end
 
     def self.updatable_fields(context)
@@ -78,8 +78,8 @@ module V1
       user = @context[:current_user]
       app = @context[:app]
 
-      return false if app == 'observations-tool'
-      return true if user&.user_permission&.user_role =='admin'
+      return false if app == "observations-tool"
+      return true if user&.user_permission&.user_role == "admin"
       return true if user&.is_government(@model.country_id)
       return true if @model.doc_valid?
 

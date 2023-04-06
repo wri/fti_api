@@ -1,5 +1,5 @@
 class ResponsibleAdminMailer < ApplicationMailer
-  default to: ENV['RESPONSIBLE_EMAIL']
+  default to: ENV["RESPONSIBLE_EMAIL"]
 
   def observation_ready_to_qc(observation)
     @observation = observation

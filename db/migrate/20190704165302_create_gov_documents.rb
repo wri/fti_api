@@ -17,14 +17,14 @@ class CreateGovDocuments < ActiveRecord::Migration[5.0]
       t.timestamps
 
       t.references :required_gov_document,
-                   foreign_key: { on_delete: :cascade },
-                   index: true
+        foreign_key: {on_delete: :cascade},
+        index: true
       t.references :country,
-                   foreign_key: { on_delete: :cascade },
-                   index: true
+        foreign_key: {on_delete: :cascade},
+        index: true
       t.references :user,
-                   foreign_key: { on_delete: :cascade },
-                   index: true
+        foreign_key: {on_delete: :cascade},
+        index: true
     end
   end
 end

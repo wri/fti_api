@@ -24,39 +24,40 @@
 #  document_file_id              :integer
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe OperatorDocumentCountry, type: :model do
   subject(:operator_document_country) { FactoryBot.build(:operator_document_country) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(operator_document_country).to be_valid
   end
 
-  describe 'Validations' do
-    describe '#invalidate_operator' do
-      context 'when operator was approved' do
-        it 'set approved field to false on the operator' do
+  describe "Validations" do
+    describe "#invalidate_operator" do
+      context "when operator was approved" do
+        it "set approved field to false on the operator" do
           country = create(:country)
-          operator = create(:operator, approved: true, country: country, fa_id: 'fa_id')
+          operator = create(:operator, approved: true, country: country, fa_id: "fa_id")
           # below should already create not_provided signature document which should invalidate approved status of operator
-          required_operator_document = create(:required_operator_document_country, contract_signature: true, country: country)
+          create(:required_operator_document_country, contract_signature: true, country: country)
           operator.reload
           expect(operator.approved).to eql false
         end
       end
     end
 
-    describe '#validate_operator' do
-      context 'when operator was not approved' do
-        it 'set approved field to true on the operator' do
+    describe "#validate_operator" do
+      context "when operator was not approved" do
+        it "set approved field to true on the operator" do
           operator = create(:operator, approved: false)
           required_operator_document =
             create(:required_operator_document, contract_signature: true)
           operator_document_country = create(
             :operator_document_country,
             required_operator_document: required_operator_document,
-            operator: operator)
+            operator: operator
+          )
           operator_document_country.update!(status: :doc_valid)
           operator.reload
           expect(operator.approved).to eql true

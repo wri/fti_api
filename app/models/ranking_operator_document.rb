@@ -55,24 +55,24 @@ class RankingOperatorDocument
       # Operators that have 0 documents should all be last with the ranking equal to the number of operators
       country_query = country_id.nil? ? "" : " AND c.id = #{country_id.to_i}"
       query =
-      <<~SQL
-        SELECT
-          o.id as operator_id,
-          o.country_id,
-          CASE
-          WHEN "all" = 0 THEN
-            COUNT(*) OVER (PARTITION BY o.country_id)
-          ELSE
-            RANK() OVER (PARTITION BY o.country_id ORDER BY "all" DESC)
-          END as country_doc_rank,
-          COUNT(*) OVER (PARTITION BY o.country_id) as country_operators
-        FROM score_operator_documents sod
-          INNER JOIN operators o on o.id = sod.operator_id
-            AND o.fa_id <> ''
-            AND o.is_active = true
-            AND sod.current = true
-          INNER JOIN countries c on c.id = o.country_id AND c.is_active = true #{country_query}
-      SQL
+        <<~SQL
+          SELECT
+            o.id as operator_id,
+            o.country_id,
+            CASE
+            WHEN "all" = 0 THEN
+              COUNT(*) OVER (PARTITION BY o.country_id)
+            ELSE
+              RANK() OVER (PARTITION BY o.country_id ORDER BY "all" DESC)
+            END as country_doc_rank,
+            COUNT(*) OVER (PARTITION BY o.country_id) as country_operators
+          FROM score_operator_documents sod
+            INNER JOIN operators o on o.id = sod.operator_id
+              AND o.fa_id <> ''
+              AND o.is_active = true
+              AND sod.current = true
+            INNER JOIN countries c on c.id = o.country_id AND c.is_active = true #{country_query}
+        SQL
 
       ActiveRecord::Base.connection.execute(query).to_a.map(&:with_indifferent_access)
     end

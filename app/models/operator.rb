@@ -29,25 +29,25 @@ class Operator < ApplicationRecord
   has_paper_trail
 
   validates :name, presence: true
-  validates :name, uniqueness: { case_sensitive: false }, on: :create
+  validates :name, uniqueness: {case_sensitive: false}, on: :create
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
 
-  TYPES = ['Logging company', 'Artisanal', 'Community forest', 'Estate', 'Industrial agriculture', 'Mining company',
-           'Sawmill', 'Other', 'Unknown'].freeze
+  TYPES = ["Logging company", "Artisanal", "Community forest", "Estate", "Industrial agriculture", "Mining company",
+    "Sawmill", "Other", "Unknown"].freeze
 
   belongs_to :country, inverse_of: :operators, optional: true
   belongs_to :holding, inverse_of: :operators, optional: true
-  has_many :all_operator_documents, class_name: 'OperatorDocument'
+  has_many :all_operator_documents, class_name: "OperatorDocument"
 
-  has_many :observations, -> { active.distinct },  inverse_of: :operator, dependent: :nullify
-  has_many :all_observations, class_name: 'Observation', inverse_of: :operator, dependent: :nullify
+  has_many :observations, -> { active.distinct }, inverse_of: :operator, dependent: :nullify
+  has_many :all_observations, class_name: "Observation", inverse_of: :operator, dependent: :nullify
   has_many :users, inverse_of: :operator, dependent: :destroy
 
   has_many :fmu_operators, -> { where(current: true) }, inverse_of: :operator, dependent: :destroy
   has_many :fmus, through: :fmu_operators
-  has_many :all_fmu_operators, class_name: 'FmuOperator', inverse_of: :operator, dependent: :destroy
+  has_many :all_fmu_operators, class_name: "FmuOperator", inverse_of: :operator, dependent: :destroy
   has_many :all_fmus, through: :all_fmu_operators, source: :fmu
 
   has_many :operator_documents
@@ -59,15 +59,15 @@ class Operator < ApplicationRecord
   has_many :operator_document_fmu_histories
 
   has_many :score_operator_documents
-  has_one :score_operator_document, -> { current }, class_name: 'ScoreOperatorDocument', inverse_of: :operator
+  has_one :score_operator_document, -> { current }, class_name: "ScoreOperatorDocument", inverse_of: :operator
   has_many :score_operator_observations
-  has_one :score_operator_observation, -> { current }, class_name: 'ScoreOperatorObservation', inverse_of: :operator
+  has_one :score_operator_observation, -> { current }, class_name: "ScoreOperatorObservation", inverse_of: :operator
 
   has_many :sawmills
 
   accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
 
-  before_validation { self.remove_logo! if self.delete_logo == '1' }
+  before_validation { remove_logo! if delete_logo == "1" }
   after_create :create_operator_id
   after_create :create_documents
 
@@ -79,18 +79,18 @@ class Operator < ApplicationRecord
   after_save :update_operator_name_on_fmus, if: :saved_change_to_name?
 
   validates :name, presence: true
-  validates :name, uniqueness: { case_sensitive: false }, on: :create # TODO: after dealing with duplicates remove on: :create
+  validates :name, uniqueness: {case_sensitive: false}, on: :create # TODO: after dealing with duplicates remove on: :create
   validates :website, url: true, if: lambda { |x| x.website.present? }
-  validates :operator_type, inclusion: { in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(', ')} " }
+  validates :operator_type, inclusion: {in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(", ")} "}
   validates :country, presence: true, on: :create
 
   scope :by_name_asc, -> { order(name: :asc) }
 
-  scope :active,   -> { where(is_active: true) }
+  scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
   scope :fa_operator, -> { where("fa_id <> ''") }
 
-  scope :filter_by_country_ids,   ->(country_ids)     { where(country_id: country_ids.split(',')) }
+  scope :filter_by_country_ids, ->(country_ids) { where(country_id: country_ids.split(",")) }
 
   # Returns the operators that should have documents for a particular country
   # When that country is null, it returns the list of operators that should have generic documents
@@ -104,10 +104,10 @@ class Operator < ApplicationRecord
 
   class << self
     def fetch_all(options)
-      country_ids = options['country_ids']    if options.present? && options['country_ids'].present?
+      country_ids = options["country_ids"] if options.present? && options["country_ids"].present?
 
       operators = includes(:country, :users)
-      operators = operators.filter_by_country_ids(country_ids)    if country_ids.present?
+      operators = operators.filter_by_country_ids(country_ids) if country_ids.present?
       operators
     end
 
@@ -145,8 +145,8 @@ class Operator < ApplicationRecord
 
   def clean_document_cache
     # TODO: try different technique for jsonapi cache invalidation, this is undocumented way for cleaning cache of jsonapi resources
-    Rails.cache.delete_matched /operator_documents\/(#{operator_document_ids.join('|')})\//
-    Rails.cache.delete_matched /operator_document_histories\/(#{operator_document_history_ids.join('|')})\//
+    Rails.cache.delete_matched(/operator_documents\/(#{operator_document_ids.join('|')})\//)
+    Rails.cache.delete_matched(/operator_document_histories\/(#{operator_document_history_ids.join('|')})\//)
   end
 
   def refresh_ranking

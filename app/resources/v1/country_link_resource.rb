@@ -13,7 +13,7 @@ module V1
     filter :country
 
     def self.default_sort
-      [{ field: :position, direction: :asc }]
+      [{field: :position, direction: :asc}]
     end
 
     def self.records(options = {})

@@ -7,24 +7,24 @@ class OperatorMailer < ApplicationMailer
     if expire_date > Date.today
       # expiring documents
       time_to_expire = distance_of_time_in_words(expire_date, Date.today)
-      subject = t('backend.mail_service.expiring_documents.title', count: num_documents) +
+      subject = t("backend.mail_service.expiring_documents.title", count: num_documents) +
         time_to_expire
-      text = [t('backend.mail_service.expiring_documents.text', company_name: operator.name, count: num_documents)]
+      text = [t("backend.mail_service.expiring_documents.text", company_name: operator.name, count: num_documents)]
       text << time_to_expire
-      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
-      text << t('backend.mail_service.expiring_documents.salutation')
+      documents.each { |document| text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t("backend.mail_service.expiring_documents.salutation")
     else
       # expired documents
-      subject = t('backend.mail_service.expired_documents.title', count: num_documents)
-      text = [t('backend.mail_service.expired_documents.text', company_name: operator.name, count: num_documents)]
-      documents.each { |document|  text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
-      text << t('backend.mail_service.expired_documents.salutation')
+      subject = t("backend.mail_service.expired_documents.title", count: num_documents)
+      text = [t("backend.mail_service.expired_documents.text", company_name: operator.name, count: num_documents)]
+      documents.each { |document| text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
+      text << t("backend.mail_service.expired_documents.salutation")
     end
 
     mail to: operator.email,
-         subject: subject,
-         body: text.join(''),
-         content_type: 'text/html'
+      subject: subject,
+      body: text.join(""),
+      content_type: "text/html"
   end
 
   # An email that contains the a quarterly report of an operator
@@ -45,49 +45,57 @@ class OperatorMailer < ApplicationMailer
 
     subject = "Your quarterly OTP report / Votre rapport trimestriel sur l'OTP"
 
-    current_score_percentage = NumberHelper.float_to_percentage(current_score.all) rescue 0
+    current_score_percentage = begin
+      NumberHelper.float_to_percentage(current_score.all)
+    rescue
+      0
+    end
 
-    text_en = ['Dear OTP user,', '']
-    text_fr = ["Cher utilisateur de l'OTP,", '']
-    text_en << ["Your current score is #{current_score_percentage}.", '']
-    text_fr << ["Votre score actuel est de #{current_score_percentage}.", '']
+    text_en = ["Dear OTP user,", ""]
+    text_fr = ["Cher utilisateur de l'OTP,", ""]
+    text_en << ["Your current score is #{current_score_percentage}.", ""]
+    text_fr << ["Votre score actuel est de #{current_score_percentage}.", ""]
 
     if last_score.present?
-      last_score_percentage = NumberHelper.float_to_percentage(last_score.all) rescue 0
+      last_score_percentage = begin
+        NumberHelper.float_to_percentage(last_score.all)
+      rescue
+        0
+      end
 
       score_change = NumberHelper.float_to_percentage(current_score.all - last_score.all)
-      text_en << ["Your score on #{localized_date(:en, last_score.date)} was #{last_score_percentage}. This means a variation of #{score_change}.", '']
-      text_fr << ["Votre dernier score le #{localized_date(:fr, last_score.date)} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}.", '']
+      text_en << ["Your score on #{localized_date(:en, last_score.date)} was #{last_score_percentage}. This means a variation of #{score_change}.", ""]
+      text_fr << ["Votre dernier score le #{localized_date(:fr, last_score.date)} était de #{last_score_percentage}. Cela signifie une variation de #{score_change}.", ""]
     end
 
     if expiring_docs.any?
-      text_en << ['Please note that the following documents on your profile are expiring this quarter and will need to be updated:']
-      text_fr << ['Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour :']
+      text_en << ["Please note that the following documents on your profile are expiring this quarter and will need to be updated:"]
+      text_fr << ["Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour :"]
       expiring_docs.each do |document|
         text_en << "- #{document.required_operator_document.name} expires on #{localized_date(:en, document.expire_date)}."
         text_fr << "- #{document.required_operator_document.name} expire le #{localized_date(:fr, document.expire_date)}."
       end
-      text_en << 'You can update these documents by logging on to your OTP profile at www.opentimberportal.org<br>'
+      text_en << "You can update these documents by logging on to your OTP profile at www.opentimberportal.org<br>"
       text_fr << "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: www.opentimberportal.org<br>"
     end
 
-    text_en << ['', 'Best,', 'OTP Team', '']
-    text_fr << ['', 'Cordialement,', "L'équipe OTP", '']
+    text_en << ["", "Best,", "OTP Team", ""]
+    text_fr << ["", "Cordialement,", "L'équipe OTP", ""]
 
     body = text_en.join("<br>")
     body << "<br>----------------------------------------------------<br>"
     body << text_fr.join("<br>")
 
-    mail bcc: operator.users.pluck(:email).join(', '),
-         subject: subject,
-         body: body,
-         content_type: 'text/html'
+    mail bcc: operator.users.pluck(:email).join(", "),
+      subject: subject,
+      body: body,
+      content_type: "text/html"
   end
 
   private
 
   def document_admin_url(document)
-    ENV['APP_URL'] + Rails.application.routes.url_helpers.url_for(
+    ENV["APP_URL"] + Rails.application.routes.url_helpers.url_for(
       {
         controller: "admin/operator_documents",
         action: "show",

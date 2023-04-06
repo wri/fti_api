@@ -11,42 +11,42 @@
 #  details           :text
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Government, type: :model do
   subject(:government) { FactoryBot.build(:government) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(government).to be_valid
   end
 
-  it_should_behave_like 'translatable', :government, %i[details]
+  it_should_behave_like "translatable", :government, %i[details]
 
-  describe 'Instance methods' do
-    describe '#cache_key' do
-      it 'return the default value with the locale' do
-        expect(government.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+  describe "Instance methods" do
+    describe "#cache_key" do
+      it "return the default value with the locale" do
+        expect(government.cache_key).to match(/-#{Globalize.locale}\z/)
       end
     end
   end
 
-  describe 'Class methods' do
-    describe '#fetch_all' do
+  describe "Class methods" do
+    describe "#fetch_all" do
       before do
         @country = create(:country)
         create(:government, country: @country)
         create(:government)
       end
 
-      context 'when country_ids is not specified' do
-        it 'fetch all operators' do
+      context "when country_ids is not specified" do
+        it "fetch all operators" do
           expect(Government.fetch_all(nil).count).to eq(Government.all.size)
         end
       end
 
-      context 'when country is specified' do
-        it 'fetch operators filtered by country' do
-          expect(Government.fetch_all({'country' => [@country.id]}).to_a).to eql(
+      context "when country is specified" do
+        it "fetch operators filtered by country" do
+          expect(Government.fetch_all({"country" => [@country.id]}).to_a).to eql(
             Government.where(country_id: @country.id).includes(:country).to_a
           )
         end

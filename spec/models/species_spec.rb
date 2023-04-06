@@ -17,32 +17,32 @@
 #  common_name     :string
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Species, type: :model do
   subject(:species) { FactoryBot.build(:species) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(species).to be_valid
   end
 
-  it_should_behave_like 'translatable', :species, %i[common_name]
+  it_should_behave_like "translatable", :species, %i[common_name]
 
-  describe 'Validations' do
+  describe "Validations" do
     it { is_expected.to validate_presence_of(:name) }
   end
 
-  describe 'Instance methods' do
-    describe '#cache_key' do
-      it 'return the default value with the locale' do
-        expect(species.cache_key).to match(/-#{Globalize.locale.to_s}\z/)
+  describe "Instance methods" do
+    describe "#cache_key" do
+      it "return the default value with the locale" do
+        expect(species.cache_key).to match(/-#{Globalize.locale}\z/)
       end
     end
   end
 
-  describe 'Class methods' do
-    describe '#fetch_all' do
-      it 'returns all species' do
+  describe "Class methods" do
+    describe "#fetch_all" do
+      it "returns all species" do
         expect(Species.fetch_all(nil).count).to eq(Species.all.size)
       end
     end

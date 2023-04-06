@@ -1,1 +1,1 @@
-Rake::Task['import:fmus'].invoke                     unless Fmu.any?
+Rake::Task["import:fmus"].invoke unless Fmu.any?

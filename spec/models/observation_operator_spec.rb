@@ -10,10 +10,10 @@
 #  deleted_at     :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ObservationOperator, type: :model do
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     observation_operator = build(:observation_operator)
     expect(observation_operator).to be_valid
   end

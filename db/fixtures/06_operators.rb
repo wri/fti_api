@@ -1,1 +1,1 @@
-Rake::Task['import:operators'].invoke                unless Operator.any?
+Rake::Task["import:operators"].invoke unless Operator.any?

@@ -6,7 +6,7 @@ class DocumentFileUploader < ApplicationUploader
   end
 
   def extension_allowlist
-    %w(pdf doc docx txt csv xml jpg jpeg png exif tiff bmp)
+    %w[pdf doc docx txt csv xml jpg jpeg png exif tiff bmp]
   end
 
   def filename
@@ -17,7 +17,7 @@ class DocumentFileUploader < ApplicationUploader
       model.operator_document.operator.name[0...30]&.parameterize,
       model.operator_document.required_operator_document.name[0...100]&.parameterize,
       Date.today.to_s
-    ].compact.join('-')
+    ].compact.join("-")
 
     sanitize_filename(filename + File.extname(super))
   end

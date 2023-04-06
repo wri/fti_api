@@ -6,10 +6,10 @@ module V1
 
     caching
     attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
-               :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
-               :percentage_valid_documents_all, :obs_per_visit, :score,
-               :website, :address, :fa_id, :country_doc_rank, :country_operators,
-               :delete_logo, :email
+      :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
+      :percentage_valid_documents_all, :obs_per_visit, :score,
+      :website, :address, :fa_id, :country_doc_rank, :country_operators,
+      :delete_logo, :email
 
     has_one :country
     has_many :fmus
@@ -44,14 +44,14 @@ module V1
     end
 
     filter :certification, apply: ->(records, value, _options) {
-      values = value.select { |c| %w(fsc pefc olb pafc fsc_cw tlv ls).include? c }
+      values = value.select { |c| %w[fsc pefc olb pafc fsc_cw tlv ls].include? c }
       return records unless values.any?
 
       certifications = []
       values.each do |v|
         certifications << "fmus.certification_#{v} = true"
       end
-      records = records.joins(:fmus).where(certifications.join(' OR ')).distinct
+      records = records.joins(:fmus).where(certifications.join(" OR ")).distinct
 
       records
     }
@@ -68,21 +68,21 @@ module V1
 
     def self.updatable_fields(context)
       super - [:score, :obs_per_visit, :fa_id,
-               :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all,
-               :country_doc_rank, :country_operators]
+        :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all,
+        :country_doc_rank, :country_operators]
     end
 
     def self.creatable_fields(context)
       super - [:score, :obs_per_visit, :fa_id,
-               :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all,
-               :country_doc_rank, :country_operators]
+        :percentage_valid_documents_fmu, :percentage_valid_documents_country, :percentage_valid_documents_all,
+        :country_doc_rank, :country_operators]
     end
 
     def self.sortable_fields(context)
-      super + [:'country.name']
+      super + [:"country.name"]
     end
 
-    filter :'country.name', apply: ->(records, value, _options) {
+    filter :"country.name", apply: ->(records, value, _options) {
       if value.present?
         sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
         records.joins(:country).joins([country: :translations]).where("lower(country_translations.name) like #{sanitized_value}")
@@ -126,7 +126,7 @@ module V1
       controller = context[:controller]
 
       # not great to filter by controller here, but not sure how to do it in observation resource only
-      if (app == 'observations-tool' && user.present?) || controller == 'v1/observations'
+      if (app == "observations-tool" && user.present?) || controller == "v1/observations"
         super(options)
       else
         Operator.active

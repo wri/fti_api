@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 module V1
-  describe 'Severities', type: :request do
+  describe "Severities", type: :request do
     it_behaves_like "jsonapi-resources", Severity, {
       show: {
-        success_roles: %i[admin],
+        success_roles: %i[admin]
       },
       pagination: {
         success_roles: %i[admin]
@@ -12,12 +12,12 @@ module V1
       sort: {
         success_roles: %i[admin],
         attribute: :details,
-        sequence: -> (i) { "Details #{i}" }
+        sequence: ->(i) { "Details #{i}" }
       },
       filter: {
         success_roles: %i[admin],
         filters: [
-          { attributes: { subcategory_id: FactoryBot.create(:subcategory).id } }
+          {attributes: {subcategory_id: FactoryBot.create(:subcategory).id}}
         ]
       }
     }

@@ -5,13 +5,13 @@ class ApplicationUploader < CarrierWave::Uploader::Base
 
   def root
     result = super
-    result = Rails.root.join('private') if private_upload?
-    result = result.to_s.gsub(Rails.root.to_s, Rails.root.join('tmp').to_s) if Rails.env.test?
+    result = Rails.root.join("private") if private_upload?
+    result = result.to_s.gsub(Rails.root.to_s, Rails.root.join("tmp").to_s) if Rails.env.test?
     result
   end
 
   def cache_dir
-    return Rails.root.join('tmp', 'uploads', 'cache') if Rails.env.test?
+    return Rails.root.join("tmp", "uploads", "cache") if Rails.env.test?
 
     super
   end

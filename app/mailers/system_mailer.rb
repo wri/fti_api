@@ -1,5 +1,5 @@
 class SystemMailer < ApplicationMailer
-  default to: ENV['CONTACT_EMAIL']
+  default to: ENV["CONTACT_EMAIL"]
 
   def user_created(user)
     @user = user

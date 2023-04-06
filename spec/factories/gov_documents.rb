@@ -37,16 +37,16 @@ FactoryBot.define do
     end
 
     trait :file do
-      attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'image.png')) }
+      attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "image.png")) }
     end
 
     trait :stats do
       value { 100 }
-      units { 'km2' }
+      units { "km2" }
     end
 
     trait :link do
-      link { 'https://example.com' }
+      link { "https://example.com" }
     end
 
     after(:build) do |doc|

@@ -7,7 +7,6 @@ ActiveAdmin.register CountryLink do
 
   config.order_clause
 
-
   permit_params :active, :position, :url, :country_id, translations_attributes: [:id, :locale, :name, :description, :_destroy]
 
   filter :position, as: :select
@@ -31,8 +30,8 @@ ActiveAdmin.register CountryLink do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'Country Links Details' do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "Country Links Details" do
       f.input :country
       f.input :active
       f.input :position
@@ -41,11 +40,9 @@ ActiveAdmin.register CountryLink do
     f.translated_inputs switch_locale: false do |t|
       t.input :name
       t.input :description
-
     end
     f.actions
   end
-
 
   show do
     attributes_table do

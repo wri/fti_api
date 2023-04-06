@@ -6,10 +6,10 @@ module V1
 
     skip_before_action :authenticate, only: %w[index tiles]
     skip_authorize_resource only: :tiles
-    load_and_authorize_resource class: 'Fmu'
+    load_and_authorize_resource class: "Fmu"
 
     def index
-      if params[:format].present? && params[:format].include?('geojson')
+      if params[:format].present? && params[:format].include?("geojson")
         fmus = Fmu.fetch_all(options_filter)
         render json: build_json(fmus)
       else
@@ -30,8 +30,8 @@ module V1
 
     def build_json(fmus)
       {
-        "type": "FeatureCollection",
-        "features": fmus.map(&:geojson)
+        type: "FeatureCollection",
+        features: fmus.map(&:geojson)
       }
     end
   end

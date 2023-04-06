@@ -2,43 +2,48 @@
 
 Rails.application.routes.draw do
   devise_for :users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self) rescue ActiveAdmin::DatabaseHitDuringLoad
+  begin
+    ActiveAdmin.routes(self)
+  rescue
+    ActiveAdmin::DatabaseHitDuringLoad
+  end
 
-  root to: 'home#index'
+  root to: "home#index"
 
-  match 'admin/fmus/preview' => 'admin/fmus#preview', via: :post
+  match "admin/fmus/preview" => "admin/fmus#preview", :via => :post
 
-  require 'sidekiq/web'
+  require "sidekiq/web"
 
   if Rails.env.development?
-    mount Sidekiq::Web => '/admin/sidekiq'
-    mount LetterOpenerWeb::Engine, at: '/admin/letter_opener'
+    mount Sidekiq::Web => "/admin/sidekiq"
+    mount LetterOpenerWeb::Engine, at: "/admin/letter_opener"
   else
-    authenticate :user, ->(user) { user&.user_permission&.user_role == 'admin' } do
-      mount Sidekiq::Web => '/admin/sidekiq'
-      mount LetterOpenerWeb::Engine, at: '/admin/letter_opener' if Rails.env.staging?
+    authenticate :user, ->(user) { user&.user_permission&.user_role == "admin" } do
+      mount Sidekiq::Web => "/admin/sidekiq"
+      mount LetterOpenerWeb::Engine, at: "/admin/letter_opener" if Rails.env.staging?
     end
   end
 
-  get '/private/uploads/*rest', controller: 'private_uploads', action: 'download'
+  get "/private/uploads/*rest", controller: "private_uploads", action: "download"
 
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
-    post  '/login',                       to: 'sessions#create'
-    post  '/register',                    to: 'registrations#create'
-    post  '/reset-password',              to: 'passwords#create'
-    post  '/users/password',              to: 'passwords#update_by_token'
-    patch '/users/current-user/password', to: 'passwords#update'
+    post "/login", to: "sessions#create"
+    post "/register", to: "registrations#create"
+    post "/reset-password", to: "passwords#create"
+    post "/users/password", to: "passwords#update_by_token"
+    patch "/users/current-user/password", to: "passwords#update"
 
     # Helper requests
-    get '/users/current-user',  to: 'users#current'
+    get "/users/current-user", to: "users#current"
 
-    scope '(:locale)', locale: /en|fr/ do
+    scope "(:locale)", locale: /en|fr/ do
       # Resources
       # keep empty blocks to not generate relationships routes
       # https://jsonapi-resources.com/v0.9/guide/routing.html#Nested-Routes
       # Big plus of generating relationships routes is that it validates configured
       # relationships, but it's better to keep API smaller
+      # rubocop:disable Standard/BlockSingleLineBraces
       jsonapi_resources :about_page_entries, only: [:index, :show] do; end
       jsonapi_resources :categories, only: [:index, :show] do; end
       jsonapi_resources :countries, only: [:index, :show] do; end
@@ -72,19 +77,20 @@ Rails.application.routes.draw do
       jsonapi_resources :tools, only: [:index, :show] do; end
       jsonapi_resources :tutorials, only: [:index, :show] do; end
       jsonapi_resources :users do; end
+      # rubocop:enable Standard/BlockSingleLineBraces
 
       resources :fmus, only: [:index, :update] do
-        get 'tiles/:z/:x/:y', to: 'fmus#tiles', on: :collection
+        get "tiles/:z/:x/:y", to: "fmus#tiles", on: :collection
       end
 
       resources :imports, only: :create
 
-      get 'observation_filters_tree', to: 'observation_filters#tree'
-      get 'operator_document_filters_tree', to: 'operator_document_filters#tree'
+      get "observation_filters_tree", to: "observation_filters#tree"
+      get "operator_document_filters_tree", to: "operator_document_filters#tree"
     end
 
     # Documentation
-    mount Rswag::Api::Engine => 'docs'
-    mount Rswag::Ui::Engine => 'docs'
+    mount Rswag::Api::Engine => "docs"
+    mount Rswag::Ui::Engine => "docs"
   end
 end

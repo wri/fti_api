@@ -7,12 +7,12 @@ module V1
     attributes :name, :position
 
     has_many :required_gov_documents
-    has_one :parent, class_name: 'RequiredGovDocumentGroup'
+    has_one :parent, class_name: "RequiredGovDocumentGroup"
 
     filter :name
 
     def self.default_sort
-      [{ field: 'position', direction: :asc }]
+      [{field: "position", direction: :asc}]
     end
 
     def self.apply_includes(records, directives)

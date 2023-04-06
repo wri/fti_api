@@ -1,12 +1,12 @@
-require 'benchmark'
+require "benchmark"
 namespace :translations do
-  desc 'Will remove duplicated translations'
+  desc "Will remove duplicated translations"
   task find_duplicates: :environment do
-    translation_tables = ActiveRecord::Base.connection.tables.select { |table_name| table_name.ends_with?('_translations') }
+    translation_tables = ActiveRecord::Base.connection.tables.select { |table_name| table_name.ends_with?("_translations") }
 
     translation_tables.each do |translation_table|
-      model_table = translation_table.gsub('_translations', '')
-      model_id = model_table.singularize + '_id'
+      model_table = translation_table.gsub("_translations", "")
+      model_id = model_table.singularize + "_id"
       query = <<~SQL
         SELECT DISTINCT #{model_id}
         FROM #{translation_table}
@@ -20,7 +20,7 @@ namespace :translations do
   end
 
   task create_portuguese_fallback: :environment do
-    Rake::Task['translations:create_fallback'].invoke(:pt)
+    Rake::Task["translations:create_fallback"].invoke(:pt)
   end
 
   task :create_fallback, [:language] => :environment do |_, args|
@@ -62,8 +62,8 @@ namespace :translations do
         attributes = model.translated_attribute_names
 
         query = <<~SQL
-          INSERT INTO #{translation_table} (#{foreign_key}, locale, #{attributes.join(', ')}, created_at, updated_at)
-            SELECT #{foreign_key}, '#{locale}', #{attributes.join(', ')}, NOW(), NOW()
+          INSERT INTO #{translation_table} (#{foreign_key}, locale, #{attributes.join(", ")}, created_at, updated_at)
+            SELECT #{foreign_key}, '#{locale}', #{attributes.join(", ")}, NOW(), NOW()
             FROM #{translation_table} t1
             WHERE locale = '#{default_locale}' AND NOT EXISTS (
               SELECT * from #{translation_table} WHERE locale = '#{locale}' AND #{foreign_key} = t1.#{foreign_key}

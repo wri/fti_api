@@ -33,10 +33,10 @@ class RequiredGovDocument < ApplicationRecord
   belongs_to :country
   has_many :gov_documents, dependent: :destroy
 
-  enum document_type: { file: 1, link: 2, stats: 3 }
+  enum document_type: {file: 1, link: 2, stats: 3}
 
   validates_inclusion_of :document_type, in: RequiredGovDocument.document_types.keys
-  validates :valid_period, numericality: { greater_than: 0 }, if: :valid_period?
+  validates :valid_period, numericality: {greater_than: 0}, if: :valid_period?
   validate :fixed_fields_unchanged
 
   after_create :create_gov_document
@@ -52,10 +52,10 @@ class RequiredGovDocument < ApplicationRecord
   private
 
   def fixed_fields_unchanged
-    return unless self.persisted?
+    return unless persisted?
 
-    errors.add(:required_gov_document_groups_id, 'Cannot change the group') if required_gov_document_group_id_changed?
-    errors.add(:document_type, 'Cannot change the document type') if document_type_changed?
-    errors.add(:country_id, 'Cannot change the country') if country_id_changed?
+    errors.add(:required_gov_document_groups_id, "Cannot change the group") if required_gov_document_group_id_changed?
+    errors.add(:document_type, "Cannot change the document type") if document_type_changed?
+    errors.add(:country_id, "Cannot change the country") if country_id_changed?
   end
 end

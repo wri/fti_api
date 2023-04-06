@@ -3,6 +3,6 @@
 module V1
   class OperatorDocumentsController < APIController
     skip_before_action :authenticate, only: [:index, :show]
-    load_and_authorize_resource class: 'OperatorDocument'
+    load_and_authorize_resource class: "OperatorDocument"
   end
 end

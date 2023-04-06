@@ -1,7 +1,7 @@
 namespace :fix_one_time do
-  desc 'Fix translation duplications 08.2021'
+  desc "Fix translation duplications 08.2021"
   task translation_duplicates: :environment do
-    for_real = ENV['FOR_REAL'] == 'true'
+    for_real = ENV["FOR_REAL"] == "true"
 
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
@@ -56,10 +56,10 @@ namespace :fix_one_time do
     end
   end
 
-  desc 'Removing documents completely'
+  desc "Removing documents completely"
   task remove_docs: :environment do
-    for_real = ENV['FOR_REAL'] == 'true'
-    docs_to_remove = (ENV['DOCS'] || '').split(',')
+    for_real = ENV["FOR_REAL"] == "true"
+    docs_to_remove = (ENV["DOCS"] || "").split(",")
 
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
@@ -85,8 +85,7 @@ namespace :fix_one_time do
       annexes = OperatorDocumentAnnex.where(id: AnnexDocument
                                             .where(documentable: histories)
                                             .or(AnnexDocument.where(documentable: docs))
-                                            .pluck(:operator_document_annex_id)
-                                           )
+                                            .pluck(:operator_document_annex_id))
 
       if for_real
         annexes.each do |annex|
@@ -102,7 +101,7 @@ namespace :fix_one_time do
       puts "Removing docs... #{docs.delete_all} affected"
 
       puts "Syncing scores..."
-      puts "Only for operators: #{operator_ids.join(', ')}"
+      puts "Only for operators: #{operator_ids.join(", ")}"
       SyncTasks.new(as_rake_task: false).sync_scores(operator_id: operator_ids)
       puts "Refreshing ranking..."
       RankingOperatorDocument.refresh
@@ -111,29 +110,29 @@ namespace :fix_one_time do
     end
   end
 
-  desc 'Re-assign uploaded attachment to observation reports'
+  desc "Re-assign uploaded attachment to observation reports"
   task observation_report_attachments: :environment do
     # context
     # some reports were renamed couple months ago, files were moved, but after that DB was recreated from backup
     # files now have different name then what is in attachment column
     # I'm going to just check what are the files in uploads directory
     # and update attachment column in DB with the real filename
-    for_real = ENV['FOR_REAL'] == 'true'
+    for_real = ENV["FOR_REAL"] == "true"
 
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
 
-    path = Rails.root.join('public', 'uploads', 'observation_report', 'attachment')
+    path = Rails.root.join("public", "uploads", "observation_report", "attachment")
     report_filename_hash = Dir.glob("#{path}/**/*")
-      .reject {|fn| File.directory?(fn) }
-      .map { |file| file.gsub(path.to_s + '/', '') }
-      .map { |file| file.split('/') }
+      .reject { |fn| File.directory?(fn) }
+      .map { |file| file.gsub(path.to_s + "/", "") }
+      .map { |file| file.split("/") }
       .sort_by { |report_id, filename| report_id.to_i }
       .to_h
 
     report_filename_hash.transform_keys!(&:to_i)
 
-    puts "COUNT with not existing attachments: #{ObservationReport.all.select { |r| r.read_attribute(:attachment).present? && !r.attachment.exists? }.count}"
+    puts "COUNT with not existing attachments: #{ObservationReport.all.count { |r| r.read_attribute(:attachment).present? && !r.attachment.exists? }}"
 
     ActiveRecord::Base.transaction do
       ObservationReport.find_each do |report|
@@ -152,31 +151,31 @@ namespace :fix_one_time do
       puts "COUNT with not existing attachments: #{still_without.count}"
 
       still_without.each do |report|
-        puts "REPORT #{report.id} still without attachment: #{report.attachment.to_s}"
+        puts "REPORT #{report.id} still without attachment: #{report.attachment}"
       end
 
       raise ActiveRecord::Rollback unless for_real
     end
   end
 
-  desc 'Tasks to move already deleted reports attachments and evidences to private directory'
+  desc "Tasks to move already deleted reports attachments and evidences to private directory"
   task make_deleted_evidences_private: :environment do
-    for_real = ENV['FOR_REAL'] == 'true'
+    for_real = ENV["FOR_REAL"] == "true"
 
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
 
     puts "Deleted Observation documents/evidence: #{ObservationDocument.deleted.count}"
-    puts "With attachment: #{ObservationDocument.deleted.where.not(attachment: ['', nil]).count}"
+    puts "With attachment: #{ObservationDocument.deleted.where.not(attachment: ["", nil]).count}"
 
     missing = 0
     moved = 0
 
-    ObservationDocument.deleted.where.not(attachment: ['', nil]).find_each do |doc|
+    ObservationDocument.deleted.where.not(attachment: ["", nil]).find_each do |doc|
       next if doc.attachment.exists?
 
-      public_filepath = File.dirname(doc.attachment.file.file.gsub('/private/', '/public/'))
-      unless File.exists?(public_filepath)
+      public_filepath = File.dirname(doc.attachment.file.file.gsub("/private/", "/public/"))
+      unless File.exist?(public_filepath)
         puts "missing file: #{public_filepath}"
         missing += 1
         next
@@ -192,22 +191,22 @@ namespace :fix_one_time do
     puts "Moved files: #{moved}"
   end
 
-  desc 'Mark expired documents there were expired from not required state as not provided'
+  desc "Mark expired documents there were expired from not required state as not provided"
   task not_required_expired_move_to_not_provided: :environment do
-    for_real = ENV['FOR_REAL'] == 'true'
+    for_real = ENV["FOR_REAL"] == "true"
 
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
 
     ActiveRecord::Base.transaction do
       docs = OperatorDocument
-        .where(status: 'doc_expired', updated_at: 1.month.ago..Date.today)
+        .where(status: "doc_expired", updated_at: 1.month.ago..Date.today)
         .select do |o|
           prev_version_not_required = false
           o.versions.reverse.each do |version|
-            next if version.reify.status == 'doc_expired'
+            next if version.reify.status == "doc_expired"
 
-            prev_version_not_required = version.reify.status == 'doc_not_required'
+            prev_version_not_required = version.reify.status == "doc_not_required"
             break
           end
           prev_version_not_required
@@ -215,7 +214,7 @@ namespace :fix_one_time do
 
       docs_count = docs.count
       puts "FOUND #{docs.count} docs expired that were not required before"
-      puts "DOC_IDS: #{docs.map(&:id).join(',')}"
+      puts "DOC_IDS: #{docs.map(&:id).join(",")}"
 
       operators = docs.map(&:operator).uniq
       puts "OPERATORS:"
@@ -229,7 +228,7 @@ namespace :fix_one_time do
       end
       operators.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
 
-      if docs.each(&:reload).select { |d| d.status == 'doc_not_provided' }.count == docs_count
+      if docs.each(&:reload).count { |d| d.status == "doc_not_provided" } == docs_count
         puts "ALL GOOD :)"
       else
         puts "ERROR: doc count after docs regenerate does not match"

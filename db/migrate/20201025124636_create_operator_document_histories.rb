@@ -17,10 +17,10 @@ class CreateOperatorDocumentHistories < ActiveRecord::Migration[5.0]
 
       t.timestamps
 
-      t.references :operator_document, foreign_key: { on_delete: :nullify }, index: true
-      t.references :operator, foreign_key: { on_delete: :cascade }, index: true
-      t.references :user, foreign_key: { on_delete: :nullify }, index: true
-      t.references :required_operator_document, foreign_key: { on_delete: :cascade }, index: { name: 'index_odh_on_rod_id_id' }
+      t.references :operator_document, foreign_key: {on_delete: :nullify}, index: true
+      t.references :operator, foreign_key: {on_delete: :cascade}, index: true
+      t.references :user, foreign_key: {on_delete: :nullify}, index: true
+      t.references :required_operator_document, foreign_key: {on_delete: :cascade}, index: {name: "index_odh_on_rod_id_id"}
 
       t.index :fmu_id
       t.index :document_file_id

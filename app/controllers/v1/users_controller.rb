@@ -4,7 +4,7 @@ module V1
   class UsersController < APIController
     include ErrorSerializer
 
-    load_and_authorize_resource class: 'User'
+    load_and_authorize_resource class: "User"
 
     def update
       user = User.find(params[:id])
@@ -45,11 +45,11 @@ module V1
         .require(:attributes)
         .permit(
           :password,
-          :'password-confirmation',
-          :'current-password',
+          :"password-confirmation",
+          :"current-password",
           :name,
           :email,
-          :locale,
+          :locale
         )
       # better in this way to keep actioncontroller::parameters object, this rails version has some bugs
       p.transform_keys!(&:underscore)

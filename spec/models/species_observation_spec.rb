@@ -10,12 +10,12 @@
 #  deleted_at     :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SpeciesObservation, type: :model do
   subject(:species_observation) { FactoryBot.build(:species_observation) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(species_observation).to be_valid
   end
 end

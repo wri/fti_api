@@ -1,4 +1,4 @@
-RSpec.shared_examples 'jsonapi-resources__delete' do |options|
+RSpec.shared_examples "jsonapi-resources__delete" do |options|
   context "Delete" do
     let(:resource) { try_to_call(options[:resource]) || create(options[:factory] || @singular.to_sym) }
     let(:route) { "/#{@route_key}/#{resource.id}" }
@@ -29,6 +29,5 @@ RSpec.shared_examples 'jsonapi-resources__delete' do |options|
         end
       end
     end
-
   end
 end

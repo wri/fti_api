@@ -4,8 +4,8 @@ module V1
   class UserResource < BaseResource
     caching
     attributes :name, :email, :institution,
-               :is_active, :deactivated_at, :web_url, :locale,
-               :permissions_request, :permissions_accepted, :password, :password_confirmation
+      :is_active, :deactivated_at, :web_url, :locale,
+      :permissions_request, :permissions_accepted, :password, :password_confirmation
 
     has_one :country
     has_one :user_permission, foreign_key_on: :related

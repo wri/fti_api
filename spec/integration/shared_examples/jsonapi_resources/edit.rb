@@ -1,4 +1,4 @@
-RSpec.shared_examples 'jsonapi-resources__edit' do |options|
+RSpec.shared_examples "jsonapi-resources__edit" do |options|
   context "Edit" do
     let(:resource) { try_to_call(options[:resource]) || create(@singular.to_sym) }
     let(:route) { "/#{@route_key}/#{resource.id}" }
@@ -12,8 +12,8 @@ RSpec.shared_examples 'jsonapi-resources__edit' do |options|
         if options[:invalid_params].present?
           it "Returns error object when cannot be updated by #{role}" do
             patch(route,
-                  params: jsonapi_params(@collection, resource.id, invalid_params),
-                  headers: headers)
+              params: jsonapi_params(@collection, resource.id, invalid_params),
+              headers: headers)
 
             expect(parsed_body).to eq(jsonapi_errors(*options[:error_attributes]))
             expect(status).to eq(422)
@@ -22,8 +22,8 @@ RSpec.shared_examples 'jsonapi-resources__edit' do |options|
 
         it "Returns success object when was successfully updated by #{role}" do
           patch(route,
-                params: jsonapi_params(@collection, resource.id, valid_params),
-                headers: headers)
+            params: jsonapi_params(@collection, resource.id, valid_params),
+            headers: headers)
 
           expect(status).to eq(200)
           valid_params
@@ -40,14 +40,13 @@ RSpec.shared_examples 'jsonapi-resources__edit' do |options|
 
         it "Do not allows to update by not #{role}" do
           patch(route,
-                params: jsonapi_params(@collection, resource.id, valid_params),
-                headers: headers)
+            params: jsonapi_params(@collection, resource.id, valid_params),
+            headers: headers)
 
           expect(parsed_body).to eq(default_status_errors(401))
           expect(status).to eq(401)
         end
       end
     end
-
   end
 end

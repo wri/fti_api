@@ -24,13 +24,13 @@ class Sawmill < ApplicationRecord
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
-  scope :filter_by_operators, ->(operator_ids) { where( operator_id: operator_ids.split(',')) }
+  scope :filter_by_operators, ->(operator_ids) { where(operator_id: operator_ids.split(",")) }
 
   after_save :update_geojson
 
   def self.fetch_all(options)
-    operator_ids  = options['operator_ids'] if options.present? && options['operator_ids'].present? && ValidationHelper.ids?(options['operator_ids'])
-    active  = true if options.present? && !options['active'].nil?
+    operator_ids = options["operator_ids"] if options.present? && options["operator_ids"].present? && ValidationHelper.ids?(options["operator_ids"])
+    active = true if options.present? && !options["active"].nil?
 
     sawmills = includes(:operator)
     sawmills = sawmills.active if active
@@ -49,7 +49,7 @@ class Sawmill < ApplicationRecord
                        'properties', (select row_to_json(sub) from (select name, is_active, operator_id) as sub)
               ) as geojson
               from sawmills
-              where id = #{self.id}
+              where id = #{id}
               group by id)
             update sawmills
             set geojson = subquery.geojson

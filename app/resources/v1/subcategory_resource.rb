@@ -14,11 +14,11 @@ module V1
     filters :id, :name, :subcategory_type, :category_id
 
     filter :observation_type, apply: ->(records, value, _options) {
-      records.joins(:observations).where('observations.observation_type = ?', value[0].to_i)
+      records.joins(:observations).where("observations.observation_type = ?", value[0].to_i)
     }
 
     def self.sortable_fields(context)
-      super + [:'category.name']
+      super + [:"category.name"]
     end
   end
 end

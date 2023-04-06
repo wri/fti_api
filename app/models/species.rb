@@ -26,22 +26,21 @@ class Species < ApplicationRecord
   has_many :species_observations
   has_many :species_countries
   has_many :observations, through: :species_observations
-  has_many :countries,    through: :species_countries
+  has_many :countries, through: :species_countries
 
   validates :name, presence: true
 
-  scope :by_name_asc, -> { order('species.name ASC') }
+  scope :by_name_asc, -> { order("species.name ASC") }
 
   default_scope { includes(:translations) }
 
   class << self
     def fetch_all(options)
-      species = includes(:countries)
-      species
+      includes(:countries)
     end
   end
 
   def cache_key
-    super + '-' + Globalize.locale.to_s
+    super + "-" + Globalize.locale.to_s
   end
 end

@@ -4,7 +4,7 @@ class AddGeometryFieldsToFmus < ActiveRecord::Migration[5.0]
     add_column :fmus, :properties, :jsonb
 
     query =
-<<SQL
+      <<SQL
   WITH g as (
   SELECT *, x.properties as prop, ST_GeomFromGeoJSON(x.geometry) as the_geom
   FROM fmus CROSS JOIN LATERAL

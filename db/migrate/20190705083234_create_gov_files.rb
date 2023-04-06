@@ -9,8 +9,8 @@ class CreateGovFiles < ActiveRecord::Migration[5.0]
       t.timestamps
 
       t.references :gov_document,
-                   foreign_key: { on_delete: :cascade },
-                   index: true
+        foreign_key: {on_delete: :cascade},
+        index: true
     end
   end
 end

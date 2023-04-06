@@ -1,61 +1,48 @@
 # frozen_string_literal: true
-unless User.find_by(nickname: 'admin')
-  assign_country_id = if country = Country.find_by(iso: 'USA')
-                        country.id
-                      else
-                        nil
-                      end
 
-  @user = User.new(email: 'admin@example.com', password: 'password', password_confirmation: 'password', name: 'Admin', nickname: 'admin', country_id: assign_country_id)
-  @user.build_user_permission(user_role: 'admin')
+unless User.find_by(nickname: "admin")
+  assign_country_id = Country.find_by(iso: "USA")&.id
+
+  @user = User.new(email: "admin@example.com", password: "password", password_confirmation: "password", name: "Admin", nickname: "admin", country_id: assign_country_id)
+  @user.build_user_permission(user_role: "admin")
   @user.save
 
-  puts '*************************************************************************'
-  puts '*                                                                       *'
+  puts "*************************************************************************"
+  puts "*                                                                       *"
   puts "* Admin user created (email: 'admin@example.com', password: 'password'  *"
-  puts '* visit http://localhost:3000/                                          *'
-  puts '*                                                                       *'
-  puts '*************************************************************************'
+  puts "* visit http://localhost:3000/                                          *"
+  puts "*                                                                       *"
+  puts "*************************************************************************"
 end
 
 # frozen_string_literal: true
-unless User.find_by(nickname: 'user')
-  assign_country_id = if country = Country.find_by(iso: 'USA')
-                        country.id
-                      else
-                        nil
-                      end
+unless User.find_by(nickname: "user")
+  assign_country_id = Country.find_by(iso: "USA")&.id
 
-  @user = User.new(email: 'user@example.com', password: 'password', password_confirmation: 'password', name: 'User', nickname: 'user', country_id: assign_country_id, is_active: true)
-  @user.build_user_permission(user_role: 'user')
+  @user = User.new(email: "user@example.com", password: "password", password_confirmation: "password", name: "User", nickname: "user", country_id: assign_country_id, is_active: true)
+  @user.build_user_permission(user_role: "user")
   @user.save
 
-  puts '*************************************************************************'
-  puts '*                                                                       *'
+  puts "*************************************************************************"
+  puts "*                                                                       *"
   puts "* User created (email: 'user@example.com', password: 'password'         *"
-  puts '*                                                                       *'
-  puts '*************************************************************************'
+  puts "*                                                                       *"
+  puts "*************************************************************************"
 end
 
+unless User.find_by(nickname: "webuser")
+  assign_country_id = Country.find_by(iso: "USA")&.id
 
-
-unless User.find_by(nickname: 'webuser')
-  assign_country_id = if country = Country.find_by(iso: 'USA')
-                        country.id
-                      else
-                        nil
-                      end
-
-  @user = User.new(email: 'webuser@example.com', password: 'password', password_confirmation: 'password', name: 'Web', nickname: 'webuser', country_id: assign_country_id, is_active: true)
-  @user.build_user_permission(user_role: 'user')
+  @user = User.new(email: "webuser@example.com", password: "password", password_confirmation: "password", name: "Web", nickname: "webuser", country_id: assign_country_id, is_active: true)
+  @user.build_user_permission(user_role: "user")
   @user.save
   @user.regenerate_api_key
 
-  puts '*************************************************************************'
-  puts '*                                                                       *'
+  puts "*************************************************************************"
+  puts "*                                                                       *"
   puts "* Web user created (email: 'webuser@example.com', password: 'password'  *"
-  puts '*                                                                       *'
+  puts "*                                                                       *"
   puts "* API Key created (SC_API_KEY: Bearer #{@user.api_key.access_token})"
-  puts '*                                                                       *'
-  puts '*************************************************************************'
+  puts "*                                                                       *"
+  puts "*************************************************************************"
 end

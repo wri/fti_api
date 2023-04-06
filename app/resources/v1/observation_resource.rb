@@ -3,27 +3,27 @@
 module V1
   class ObservationResource < BaseResource
     include CacheableByLocale
-    #caching
+    # caching
 
     attributes :observation_type, :publication_date, :pv, :is_active,
-               :details, :evidence_type, :evidence_on_report, :concern_opinion,
-               :litigation_status, :location_accuracy, :lat, :lng, :country_id,
-               :fmu_id, :location_information, :subcategory_id, :severity_id,
-               :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
-               :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment
+      :details, :evidence_type, :evidence_on_report, :concern_opinion,
+      :litigation_status, :location_accuracy, :lat, :lng, :country_id,
+      :fmu_id, :location_information, :subcategory_id, :severity_id,
+      :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
+      :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment
 
     has_many :species
     has_many :comments
     has_many :observation_documents
     has_many :observers
-    has_many :relevant_operators, class_name: 'Operator'
+    has_many :relevant_operators, class_name: "Operator"
     has_many :governments
 
     has_one :country
     has_one :subcategory
     has_one :severity
     has_one :user
-    has_one :modified_user, class_name: 'User'
+    has_one :modified_user, class_name: "User"
 
     has_one :operator
     has_one :law
@@ -31,17 +31,17 @@ module V1
     has_one :observation_report
 
     after_create :add_own_observer
-    before_save  :set_modified
-    before_save  :validate_status
-    before_save  :set_publication_date
+    before_save :set_modified
+    before_save :validate_status
+    before_save :set_publication_date
 
     filters :id, :observation_type, :fmu_id, :country_id,
-            :publication_date, :observer_id, :subcategory_id, :years,
-            :observation_report, :law, :operator, :subcategory,
-            :is_active, :validation_status, :is_physical_place
+      :publication_date, :observer_id, :subcategory_id, :years,
+      :observation_report, :law, :operator, :subcategory,
+      :is_active, :validation_status, :is_physical_place
 
-    filter :hidden, default: 'false', apply: ->(records, value, options) {
-      return records if value.include?('all')
+    filter :hidden, default: "false", apply: ->(records, value, options) {
+      return records if value.include?("all")
 
       records.where(hidden: value)
     }
@@ -59,27 +59,33 @@ module V1
     }
 
     filter :years, apply: ->(records, value, _options) {
-      records.where("extract(year from observations.publication_date) in (#{value.map{ |x| x.to_i rescue nil }.join(', ')})")
+      records.where("extract(year from observations.publication_date) in (#{value.map { |x|
+                                                                              begin
+                                                                                x.to_i
+                                                                              rescue
+                                                                                nil
+                                                                              end
+                                                                            }.join(", ")})")
     }
 
-    filter :'observation_report.id', apply: ->(records, value, _options) {
-      records.joins(:observation_report).where(observation_reports: { id: value })
+    filter :"observation_report.id", apply: ->(records, value, _options) {
+      records.joins(:observation_report).where(observation_reports: {id: value})
     }
 
     filter :observer_id, apply: ->(records, value, _options) {
-      records.joins(:observers).where(observers: { id: value })
+      records.joins(:observers).where(observers: {id: value})
     }
 
     def self.sortable_fields(context)
-      super + [:'country.iso', :'severity.level', :'subcategory.name',
-               :'operator.name', :'country.name', :'law.written_infraction',
-               :'fmu.name', :'observation_report.title', :'governments.government_entity', :'subcategory.category.name']
+      super + [:"country.iso", :"severity.level", :"subcategory.name",
+        :"operator.name", :"country.name", :"law.written_infraction",
+        :"fmu.name", :"observation_report.title", :"governments.government_entity", :"subcategory.category.name"]
     end
 
     def self.apply_sort(records, order_options, context = {})
-      if order_options.key?('subcategory.category.name')
-        records = records.order_by_category(order_options['subcategory.category.name'])
-        order_options.except!('subcategory.category.name')
+      if order_options.key?("subcategory.category.name")
+        records = records.order_by_category(order_options["subcategory.category.name"])
+        order_options.except!("subcategory.category.name")
       end
       super(records, order_options, context)
     end
@@ -91,8 +97,8 @@ module V1
     # An observation is complete if it has evidence
     def complete
       return true if @model.observation_documents.any?
-      if(@model.evidence_type == 'Evidence presented in the report' &&
-          @model.evidence_on_report && @model.observation_report_id)
+      if @model.evidence_type == "Evidence presented in the report" &&
+          @model.evidence_on_report && @model.observation_report_id
         return true
       end
 
@@ -122,16 +128,14 @@ module V1
     # TODO: Reactivate rubocop and fix the problem
     # rubocop:disable Lint/RescueException
     def add_own_observer
-      begin
-        user = context[:current_user]
-        @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
-        @model.user_id = user.id
-        @model.save
-        # This is added because of the order of the callbacks in JAR
-        @model.update_reports_observers
-      rescue Exception => e
-        Rails.logger.warn "Observation created without user: #{e.inspect}"
-      end
+      user = context[:current_user]
+      @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
+      @model.user_id = user.id
+      @model.save
+      # This is added because of the order of the callbacks in JAR
+      @model.update_reports_observers
+    rescue => e
+      Rails.logger.warn "Observation created without user: #{e.inspect}"
     end
     # rubocop:enable Lint/RescueException
 
@@ -143,7 +147,7 @@ module V1
 
     # Makes sure the validation status can be an acceptable one
     def validate_status
-      @model.validation_status = 'Created' unless @model.persisted? || @model.validation_status == 'Ready for QC'
+      @model.validation_status = "Created" unless @model.persisted? || @model.validation_status == "Ready for QC"
       @model.user_type = :monitor
     end
 
@@ -157,10 +161,10 @@ module V1
       user = context[:current_user]
       app = context[:app]
 
-      if app == 'observations-tool' && user.present?
+      if app == "observations-tool" && user.present?
         if user.observer_id.present?
           Observation.own_with_inactive(user.observer_id)
-        elsif user.user_permission.present? && user.user_permission.user_role == 'admin'
+        elsif user.user_permission.present? && user.user_permission.user_role == "admin"
           Observation.all
         else
           Observation.active
@@ -171,9 +175,8 @@ module V1
     end
 
     def set_publication_date
-      return unless ['Published (no comments)', 'Published (not modified)',
-                     'Published (modified)'].include? @model.validation_status
-
+      return unless ["Published (no comments)", "Published (not modified)",
+        "Published (modified)"].include? @model.validation_status
 
       @model.publication_date = Time.now
     end

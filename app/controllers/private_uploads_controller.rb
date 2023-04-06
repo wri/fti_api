@@ -21,14 +21,14 @@ class PrivateUploadsController < ApplicationController
   end
 
   def allowed_filepath
-    return File.join(Rails.root, 'tmp', 'private', 'uploads') if Rails.env.test?
+    return File.join(Rails.root, "tmp", "private", "uploads") if Rails.env.test?
 
-    File.join(Rails.root, 'private', 'uploads')
+    File.join(Rails.root, "private", "uploads")
   end
 
   def send_file_inside(allowed_path, filename, options = {})
     path = File.expand_path(File.join(allowed_path, filename))
-    if path.match Regexp.new('^' + Regexp.escape(allowed_path))
+    if path.match Regexp.new("^" + Regexp.escape(allowed_path))
       send_file path, options
     else
       raise_not_found_exception
@@ -36,6 +36,6 @@ class PrivateUploadsController < ApplicationController
   end
 
   def raise_not_found_exception
-    raise ActionController::RoutingError, 'Not Found'
+    raise ActionController::RoutingError, "Not Found"
   end
 end

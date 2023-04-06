@@ -1,24 +1,24 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require 'spec_helper'
+require "spec_helper"
 
-ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path("../../config/environment", __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 
-require 'paper_trail/frameworks/rspec'
+require "paper_trail/frameworks/rspec"
 
-require 'rspec/rails'
-require 'super_diff/rspec-rails'
+require "rspec/rails"
+require "super_diff/rspec-rails"
 
 # Add additional requires below this line. Rails is not loaded until this point!
-require 'factory_bot_rails'
-require 'shoulda/matchers'
-require 'devise'
+require "factory_bot_rails"
+require "shoulda/matchers"
+require "devise"
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-Dir[Rails.root.join('spec/models/concerns/**/*.rb')].each {|f| require f}
-Dir[Rails.root.join('spec/integration/shared_examples/**/*.rb')].each {|f| require f}
+Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
+Dir[Rails.root.join("spec/models/concerns/**/*.rb")].sort.each { |f| require f }
+Dir[Rails.root.join("spec/integration/shared_examples/**/*.rb")].sort.each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -38,9 +38,9 @@ RspecApiDocumentation.configure do |config|
 
   config.configurations_dir = Rails.root.join("spec", "support", "docs")
 
-  config.api_name = 'Open Timber Portal API documentation'
-  config.api_explanation = 'API Documentation for the OTP API.'
-  config.io_docs_protocol = %w(http https)
+  config.api_name = "Open Timber Portal API documentation"
+  config.api_explanation = "API Documentation for the OTP API."
+  config.io_docs_protocol = %w[http https]
 
   config.response_headers_to_include = []
   config.keep_source_order = true
@@ -67,7 +67,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 
   config.when_first_matching_example_defined(:db) do
-    require 'support/db'
+    require "support/db"
   end
 
   config.after(:each) do
@@ -78,7 +78,7 @@ RSpec.configure do |config|
 
   config.after do
     # Clear ActiveJob jobs
-    if defined?(ActiveJob) && ActiveJob::QueueAdapters::TestAdapter == ActiveJob::Base.queue_adapter
+    if defined?(ActiveJob) && ActiveJob::Base.queue_adapter == ActiveJob::QueueAdapters::TestAdapter
       ActiveJob::Base.queue_adapter.enqueued_jobs.clear
       ActiveJob::Base.queue_adapter.performed_jobs.clear
     end
@@ -101,7 +101,7 @@ RSpec.configure do |config|
 
   config.extend APIDocsHelpers
   config.include FactoryBot::Syntax::Methods
-  config.order = 'random'
+  config.order = "random"
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Warden::Test::Helpers

@@ -1,1 +1,1 @@
-Rake::Task['import:monitors'].invoke                 unless Observer.any?
+Rake::Task["import:monitors"].invoke unless Observer.any?

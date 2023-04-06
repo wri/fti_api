@@ -13,7 +13,7 @@ module FileDataImport
       @permitted_translations = options[:permitted_translations] || []
       @abilities = options[:can]&.map(&:to_sym) || %i[create update]
       @belongs_to_associations = []
-      @results = { attributes: {}, errors: {} }
+      @results = {attributes: {}, errors: {}}
     end
 
     def id
@@ -63,7 +63,6 @@ module FileDataImport
           end
 
         record.assign_attributes(attributes_for_creation.merge(belongs_to_attributes))
-
 
         record.save
         results[:errors][:record] = record.errors.messages unless record.errors.empty?

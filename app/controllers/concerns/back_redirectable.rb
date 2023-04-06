@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module BackRedirectable
+  # rubocop:disable Lint/NestedMethodDefinition
   def self.extended(base)
     base.controller do
       def update
@@ -12,10 +13,11 @@ module BackRedirectable
       end
     end
   end
+  # rubocop:enable Lint/NestedMethodDefinition
 
   def form(options = {}, &block)
     if block.present?
-      extended = Proc.new do |f|
+      extended = proc do |f|
         return_to = request.params[:return_to] || request.referer
         f.hidden_field :return_to, name: :return_to, value: return_to if return_to.present?
         instance_eval(&block)

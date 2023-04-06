@@ -19,10 +19,10 @@ module V1
     end
 
     def self.sortable_fields(context)
-      super + [:'operator.name']
+      super + [:"operator.name"]
     end
 
-    filter :'operator.name', apply: ->(records, value, _options) {
+    filter :"operator.name", apply: ->(records, value, _options) {
       if value.present?
         sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
         records.joins(:operator).joins([operator: :translations]).where("lower(operator_translations.name) like #{sanitized_value}")
@@ -30,7 +30,6 @@ module V1
         records
       end
     }
-
 
     def self.updatable_fields(context)
       super - [:geojson]

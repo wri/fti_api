@@ -148,7 +148,7 @@ ActiveAdmin.setup do |config|
 
   # Set default locale for active admin
   def set_admin_locale
-    return I18n.locale = params[:locale] if params[:locale] && params[:format] == 'csv'
+    return I18n.locale = params[:locale] if params[:locale] && params[:format] == "csv"
 
     super
   end
@@ -351,7 +351,7 @@ ActiveAdmin.setup do |config|
   # These two are defined in ActiveAdmin::FilterSaver::Controller, which is loaded below.
   config.before_action :restore_search_filters, unless: :devise_controller?
   config.before_action do
-    if params[:locale] && params[:format] == 'csv'
+    if params[:locale] && params[:format] == "csv"
       I18n.locale = params[:locale]
     else
       set_admin_locale
@@ -373,12 +373,12 @@ module ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper
     params = request.query_parameters.except :format, :commit
 
     div class: "download_links" do
-      span I18n.t('active_admin.download')
+      span I18n.t("active_admin.download")
       formats.each do |format|
         if format == :csv
-          a 'CSV EN', href: url_for(params: params.merge!(locale: 'en'), format: :csv)
+          a "CSV EN", href: url_for(params: params.merge!(locale: "en"), format: :csv)
         else
-          a 'CSV FR', href: url_for(params: params.merge!(locale: 'fr'), format: :csv)
+          a "CSV FR", href: url_for(params: params.merge!(locale: "fr"), format: :csv)
         end
       end
     end

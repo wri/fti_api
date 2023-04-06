@@ -7,13 +7,13 @@ module ArrayForestTypeable
     validate :validate_forest_types
 
     def validate_forest_types
-      if !forest_types.is_a?(Array) || forest_types.detect{ |d| !ForestType::TYPES.key?(d) }
+      if !forest_types.is_a?(Array) || forest_types.detect { |d| !ForestType::TYPES.key?(d) }
         errors.add(:forest_types, :invalid)
       end
     end
 
     def forest_types
-      super.map{ |x| ForestType::TYPES.select{ |_,h| h[:index] == x }.keys[0] }
+      super.map { |x| ForestType::TYPES.select { |_, h| h[:index] == x }.keys[0] }
     end
 
     def forest_types=(array)

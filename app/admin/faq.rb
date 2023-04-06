@@ -10,10 +10,10 @@ ActiveAdmin.register Faq do
   permit_params :position, translations_attributes: [:id, :locale, :question, :answer, :_destroy]
 
   filter :position, as: :select
-  filter :translations_question_contains, as: :select, label: proc { I18n.t('activerecord.attributes.faq.question') },
-                                          collection: -> { Faq.with_translations(I18n.locale).pluck(:question) }
-  filter :translations_answer_contains, as: :select, label: proc { I18n.t('activerecord.attributes.faq.answer') },
-                                        collection: -> { Faq.with_translations(I18n.locale).pluck(:answer) }
+  filter :translations_question_contains, as: :select, label: proc { I18n.t("activerecord.attributes.faq.question") },
+    collection: -> { Faq.with_translations(I18n.locale).pluck(:question) }
+  filter :translations_answer_contains, as: :select, label: proc { I18n.t("activerecord.attributes.faq.answer") },
+    collection: -> { Faq.with_translations(I18n.locale).pluck(:answer) }
 
   controller do
     def scoped_collection
@@ -40,8 +40,8 @@ ActiveAdmin.register Faq do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'FAQ Details' do
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "FAQ Details" do
       f.input :position
     end
     f.translated_inputs switch_locale: false do |t|
@@ -50,7 +50,6 @@ ActiveAdmin.register Faq do
     end
     f.actions
   end
-
 
   show do
     attributes_table do
@@ -62,5 +61,4 @@ ActiveAdmin.register Faq do
     end
     active_admin_comments
   end
-
 end

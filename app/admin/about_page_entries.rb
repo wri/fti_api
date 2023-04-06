@@ -5,15 +5,15 @@ ActiveAdmin.register AboutPageEntry do
 
   menu false
 
-  config.sort_order = 'position_asc'
+  config.sort_order = "position_asc"
 
   permit_params :position, :code, translations_attributes: [:id, :locale, :title, :body, :_destroy]
 
   filter :position, as: :select
-  filter :translations_title_contains, as: :select, label: -> { I18n.t('activerecord.attributes.about_page_entry.title') },
-                                       collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:title) }
-  filter :translations_body_contains, as: :select, label: -> { I18n.t('activerecord.attributes.about_page_entry.body') },
-                                      collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:body) }
+  filter :translations_title_contains, as: :select, label: -> { I18n.t("activerecord.attributes.about_page_entry.title") },
+    collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:title) }
+  filter :translations_body_contains, as: :select, label: -> { I18n.t("activerecord.attributes.about_page_entry.body") },
+    collection: -> { AboutPageEntry.with_translations(I18n.locale).pluck(:body) }
 
   controller do
     def scoped_collection
@@ -46,9 +46,9 @@ ActiveAdmin.register AboutPageEntry do
   end
 
   form do |f|
-    f.semantic_errors *f.object.errors.attribute_names
-    f.inputs 'About Page Entries' do
-      f.input :position, hint: 'leaving empty will assign last position'
+    f.semantic_errors(*f.object.errors.attribute_names)
+    f.inputs "About Page Entries" do
+      f.input :position, hint: "leaving empty will assign last position"
       f.input :code, hint: 'must be "partners" for Partners and "donors" for Donors section'
     end
     f.translated_inputs switch_locale: false do |t|
@@ -73,5 +73,4 @@ ActiveAdmin.register AboutPageEntry do
     end
     active_admin_comments
   end
-
 end

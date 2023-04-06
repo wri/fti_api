@@ -3,11 +3,11 @@
 module V1
   class ObserverResource < BaseResource
     include CacheableByLocale
-    #caching
+    # caching
 
     attributes :observer_type, :name, :organization, :is_active, :logo, :address,
-               :information_name, :information_email, :information_phone, :data_name,
-               :data_email, :data_phone, :organization_type, :delete_logo, :public_info
+      :information_name, :information_email, :information_phone, :data_name,
+      :data_email, :data_phone, :organization_type, :delete_logo, :public_info
 
     has_many :countries
     has_many :users
@@ -19,10 +19,6 @@ module V1
 
     def inactivate
       @model.is_active = false
-    end
-
-    def fetchable_fields
-      super - [:delete_logo]
     end
 
     def self.updatable_fields(context)
@@ -38,10 +34,10 @@ module V1
     end
 
     def fetchable_fields
-      if context[:app] == 'observations-tool' or @model.public_info
-        super
+      if (context[:app] == "observations-tool") || @model.public_info
+        super - [:delete_logo]
       else
-        super - [:address, :information_name, :information_email, :information_phone, :data_email, :data_phone, :data_name]
+        super - [:delete_logo, :address, :information_name, :information_email, :information_phone, :data_email, :data_phone, :data_name]
       end
     end
   end

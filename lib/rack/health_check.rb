@@ -7,11 +7,11 @@ module Rack
     end
 
     def call(env)
-      return @app.call(env) unless env['PATH_INFO'] == '/health_check'
+      return @app.call(env) unless env["PATH_INFO"] == "/health_check"
 
       [
         healthy? ? 200 : 503,
-        { 'Content-Type' => 'application/json' },
+        {"Content-Type" => "application/json"},
         [message]
       ]
     end
@@ -20,10 +20,10 @@ module Rack
 
     def message
       {
-        "status": healthy? ? 'ok' : 'error',
-        "database": database_connected?,
-        "redis": redis_connected?,
-        "sidekiq": sidekiq_running?
+        status: healthy? ? "ok" : "error",
+        database: database_connected?,
+        redis: redis_connected?,
+        sidekiq: sidekiq_running?
       }.to_json
     end
 
@@ -32,20 +32,20 @@ module Rack
     end
 
     def database_connected?
-      ApplicationRecord.connection.select_value('SELECT 1') == 1
-    rescue StandardError
+      ApplicationRecord.connection.select_value("SELECT 1") == 1
+    rescue
       false
     end
 
     def redis_connected?
-      Redis.new.ping == 'PONG'
-    rescue StandardError
+      Redis.new.ping == "PONG"
+    rescue
       false
     end
 
     def sidekiq_running?
       Sidekiq::ProcessSet.new.size.positive?
-    rescue StandardError
+    rescue
       false
     end
   end

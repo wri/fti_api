@@ -24,31 +24,31 @@
 #  document_file_id              :integer
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe OperatorDocument, type: :model do
   subject(:operator_document) { FactoryBot.build(:operator_document_country) }
 
-  it 'is valid with valid attributes' do
+  it "is valid with valid attributes" do
     expect(operator_document).to be_valid
   end
 
-  describe 'Validations' do
-    describe '#start_date' do
-      context 'has an attachment' do
+  describe "Validations" do
+    describe "#start_date" do
+      context "has an attachment" do
         before { allow(subject).to receive(:document_file_id?).and_return(true) }
         it { is_expected.to validate_presence_of(:start_date) }
       end
 
-      context 'has not an attachment' do
+      context "has not an attachment" do
         before { allow(subject).to receive(:document_file_id?).and_return(false) }
         it { is_expected.not_to validate_presence_of(:start_date) }
       end
     end
 
-    describe '#set_expire_date' do
-      context 'when there is not expire_date' do
-        it 'set expire_date with the start_date plus the valid_period days' do
+    describe "#set_expire_date" do
+      context "when there is not expire_date" do
+        it "set expire_date with the start_date plus the valid_period days" do
           operator_document = build(:operator_document_country, expire_date: nil)
           operator_document.valid?
 
@@ -60,24 +60,24 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
-    describe '#reason_or_attachment' do
-      context 'when there is attachment and reason' do
-        it 'add an error on reason' do
-          operator_document = build(:operator_document_country, reason: 'aaa')
+    describe "#reason_or_attachment" do
+      context "when there is attachment and reason" do
+        it "add an error on reason" do
+          operator_document = build(:operator_document_country, reason: "aaa")
 
           expect(operator_document.valid?).to eql false
           expect(operator_document.errors[:reason]).to eql(
-            ['Cannot have a reason not to have a document']
+            ["Cannot have a reason not to have a document"]
           )
         end
       end
     end
   end
 
-  describe 'Hooks' do
+  describe "Hooks" do
     before do
       @country = create(:country)
-      @operator = create(:operator, country: @country, fa_id: 'fa_id')
+      @operator = create(:operator, country: @country, fa_id: "fa_id")
 
       @fmu = create(:fmu, country: @country)
       @fmu_operator = create(:fmu_operator, fmu: @fmu, operator: @operator)
@@ -91,17 +91,17 @@ RSpec.describe OperatorDocument, type: :model do
       )
     end
 
-    describe '#set_status' do
-      context 'when attachment or reason are not present' do
-        it 'update status as doc_not_provided' do
+    describe "#set_status" do
+      context "when attachment or reason are not present" do
+        it "update status as doc_not_provided" do
           operator_document = create(:operator_document_country, reason: nil, document_file: nil)
 
-          expect(operator_document.status).to eql 'doc_not_provided'
+          expect(operator_document.status).to eql "doc_not_provided"
         end
       end
     end
 
-    describe '#remove_notifications' do
+    describe "#remove_notifications" do
       let(:notification_days) { 10 }
       let(:notification_group) { create :notification_group, days: notification_days }
       let!(:notification) {
@@ -110,36 +110,36 @@ RSpec.describe OperatorDocument, type: :model do
       let!(:notification2) { create :notification, operator_document: operator_document, solved_at: Date.yesterday }
       subject { operator_document.save! }
 
-      context 'when not updating the expire date' do
+      context "when not updating the expire date" do
         before do
-          operator_document.note = 'test'
+          operator_document.note = "test"
         end
-        it 'does not remove the notification' do
+        it "does not remove the notification" do
           expect { subject }.not_to change { notification.reload.solved_at }
         end
       end
 
-      context 'when updating the expire date' do
+      context "when updating the expire date" do
         before do
           operator_document.expire_date = Date.today + 1.month
         end
 
-        context 'when the expire date is bigger than the notification date' do
+        context "when the expire date is bigger than the notification date" do
           let(:notification_days) { 1 }
 
-          it 'sets the `solved at` for the notification' do
+          it "sets the `solved at` for the notification" do
             expect { subject }.to change { notification.reload.solved_at }
           end
 
-          it 'does not updated `solved at` for notifications that were already solved' do
+          it "does not updated `solved at` for notifications that were already solved" do
             expect { subject }.not_to change { notification2.reload.solved_at }
           end
         end
 
-        context 'when the expire date is smaller than the notification date' do
+        context "when the expire date is smaller than the notification date" do
           let(:notification_days) { 365 }
 
-          it 'does not update the notifications' do
+          it "does not update the notifications" do
             expect { subject }.not_to change { notification.reload.solved_at }
             expect { subject }.not_to change { notification2.reload.solved_at }
           end
@@ -147,39 +147,39 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
-    describe '#recalculate operator score' do
+    describe "#recalculate operator score" do
       before { @document = create(:operator_document_fmu, fmu: @fmu, operator: @operator) }
       before { expect(ScoreOperatorDocument).to receive(:recalculate!).with(@operator) }
 
-      context 'when removing document' do
-        it 'updates operator score' do
+      context "when removing document" do
+        it "updates operator score" do
           @document.destroy
         end
 
-        context 'while fmu does not belong to operator anymore' do
-          it 'updates operator score' do
+        context "while fmu does not belong to operator anymore" do
+          it "updates operator score" do
             @fmu_operator.update(current: false) # this should invoke document deletion and invoke recalculation
             expect(@document.reload.deleted?).to be(true)
           end
         end
       end
 
-      context 'when changing document status' do
-        it 'updates operator score' do
+      context "when changing document status" do
+        it "updates operator score" do
           @document.update!(status: :doc_valid)
         end
       end
 
-      context 'when operator not approved and changing public state' do
+      context "when operator not approved and changing public state" do
         before { @operator.update(approved: false) }
 
-        it 'updates operator score' do
+        it "updates operator score" do
           @document.update!(public: @document.public)
         end
       end
     end
 
-    describe '#update_operator_percentages' do
+    describe "#update_operator_percentages" do
       before do
         valid_status = OperatorDocument.statuses[:doc_valid]
         pending_status = OperatorDocument.statuses[:doc_pending]
@@ -202,7 +202,7 @@ RSpec.describe OperatorDocument, type: :model do
         end
       end
 
-      it 'update valid operator percentages' do
+      it "update valid operator percentages" do
         @operator.reload
         expect(@operator.score_operator_document.all.round(2)).to eql (1.0 / 3.0).round(2)
 
@@ -221,8 +221,8 @@ RSpec.describe OperatorDocument, type: :model do
       end
     end
 
-    describe '#destroy' do
-      it 'regenerates document state to not provided and creates history for current document' do
+    describe "#destroy" do
+      it "regenerates document state to not provided and creates history for current document" do
         operator_document = create(
           :operator_document_country,
           operator: @operator,
@@ -240,55 +240,55 @@ RSpec.describe OperatorDocument, type: :model do
 
         expect(OperatorDocument.count).to eql 1
         expect(operator_document.deleted?).to be(false)
-        expect(operator_document.status).to eq('doc_not_provided')
+        expect(operator_document.status).to eq("doc_not_provided")
       end
     end
   end
 
-  describe 'Instance methods' do
-    describe '#expire_document' do
+  describe "Instance methods" do
+    describe "#expire_document" do
       let!(:operator_document) { create(:operator_document_country, force_status: status) }
 
-      context 'when document status is valid' do
+      context "when document status is valid" do
         let(:status) { :doc_valid }
 
-        it 'update status as doc_expired' do
+        it "update status as doc_expired" do
           expect {
             operator_document.expire_document
           }.to change { OperatorDocumentHistory.count }.by(1)
 
-          expect(operator_document.status).to eql 'doc_expired'
+          expect(operator_document.status).to eql "doc_expired"
         end
       end
 
-      context 'when document status is not required' do
+      context "when document status is not required" do
         let(:status) { :doc_not_required }
 
-        it 'update status as doc_not_provided' do
+        it "update status as doc_not_provided" do
           expect {
             operator_document.expire_document
           }.to change { OperatorDocumentHistory.count }.by(1)
 
-          expect(operator_document.status).to eql 'doc_not_provided'
+          expect(operator_document.status).to eql "doc_not_provided"
         end
       end
 
-      context 'with other statuses' do
+      context "with other statuses" do
         let(:status) { :doc_pending }
 
-        it 'does not do anything' do
+        it "does not do anything" do
           expect {
             operator_document.expire_document
           }.not_to change { OperatorDocumentHistory.count }
 
-          expect(operator_document.status).to eql 'doc_pending'
+          expect(operator_document.status).to eql "doc_pending"
         end
       end
     end
   end
 
-  describe 'Class methods' do
-    describe '#expire_documents' do
+  describe "Class methods" do
+    describe "#expire_documents" do
       let!(:rod) { create(:required_operator_document_country, contract_signature: false) }
       let!(:od) {
         create(
@@ -301,29 +301,29 @@ RSpec.describe OperatorDocument, type: :model do
 
       subject { OperatorDocument.expire_documents }
 
-      context 'when the date is in the past' do
+      context "when the date is in the past" do
         let(:expire_date) { Date.today - 1.year }
 
-        context 'when the status is valid' do
+        context "when the status is valid" do
           let(:status) { :doc_valid }
 
-          it { expect { subject }.to change { od.reload.status }.from('doc_valid').to('doc_expired') }
+          it { expect { subject }.to change { od.reload.status }.from("doc_valid").to("doc_expired") }
         end
 
-        context 'when the status is not required' do
+        context "when the status is not required" do
           let(:status) { :doc_not_required }
 
-          it { expect { subject }.to change { od.reload.status }.from('doc_not_required').to('doc_not_provided') }
+          it { expect { subject }.to change { od.reload.status }.from("doc_not_required").to("doc_not_provided") }
         end
 
-        context 'when the status is pending' do
+        context "when the status is pending" do
           let(:status) { :doc_pending }
 
           it { expect { subject }.to_not change { od.reload.status } }
         end
       end
 
-      context 'when the date is in the future' do
+      context "when the date is in the future" do
         let(:expire_date) { Date.today + 1.year }
         let(:status) { :doc_valid }
 

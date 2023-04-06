@@ -2,7 +2,7 @@
 
 module FileDataImport
   class RecordBuilder
-    def initialize()
+    def initialize
       @belongs_to = []
     end
 

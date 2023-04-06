@@ -11,7 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RankingOperatorDocument, type: :model do
   before :all do
@@ -20,13 +20,13 @@ RSpec.describe RankingOperatorDocument, type: :model do
   end
 
   before :each do
-    @operator = create(:operator, country: @country, fa_id: 'fa-id')
-    @operator_2 = create(:operator, country: @country, fa_id: 'fa-id2')
-    @operator_3 = create(:operator, country: @country, fa_id: 'fa-id3')
-    @operator_4 = create(:operator, country: @country, fa_id: 'fa-id4')
-    @operator_inactive = create(:operator, country: @country, fa_id: 'fa-id-inactive', is_active: false) # this one does not count
+    @operator = create(:operator, country: @country, fa_id: "fa-id")
+    @operator_2 = create(:operator, country: @country, fa_id: "fa-id2")
+    @operator_3 = create(:operator, country: @country, fa_id: "fa-id3")
+    @operator_4 = create(:operator, country: @country, fa_id: "fa-id4")
+    @operator_inactive = create(:operator, country: @country, fa_id: "fa-id-inactive", is_active: false) # this one does not count
     @operator_5 = create(:operator, country: @country, fa_id: nil) # this one does not count
-    @operator_6 = create(:operator, country: @country_2, fa_id: 'fa-id5')
+    @operator_6 = create(:operator, country: @country_2, fa_id: "fa-id5")
 
     @dg = create(:required_operator_document_group)
 
@@ -49,7 +49,7 @@ RSpec.describe RankingOperatorDocument, type: :model do
     @operator_2.reload.operator_documents.each { |od| od.update(status: :doc_valid) }
   end
 
-  it 'should calculate correct ranking per country' do
+  it "should calculate correct ranking per country" do
     expect(@operator.reload.country_doc_rank).to eq(2)
     expect(@operator_2.reload.country_doc_rank).to eq(1) # this operator has all documents valid, all: 1.0
     expect(@operator_3.reload.country_doc_rank).to eq(4)
@@ -60,8 +60,8 @@ RSpec.describe RankingOperatorDocument, type: :model do
     expect(@operator_inactive.reload.country_doc_rank).to be_nil
   end
 
-  describe 'operator changes' do
-    it 'should remove ranking from old operator that become inactive' do
+  describe "operator changes" do
+    it "should remove ranking from old operator that become inactive" do
       @operator_2.update(is_active: false)
 
       expect(@operator.reload.country_doc_rank).to eq(1)
@@ -74,7 +74,7 @@ RSpec.describe RankingOperatorDocument, type: :model do
       expect(@operator_inactive.reload.country_doc_rank).to be_nil
     end
 
-    it 'should remove ranking from operator that is not longer fa operator' do
+    it "should remove ranking from operator that is not longer fa operator" do
       @operator_2.update(fa_id: nil)
 
       expect(@operator.reload.country_doc_rank).to eq(1)

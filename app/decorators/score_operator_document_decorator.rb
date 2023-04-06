@@ -2,7 +2,7 @@
 
 class ScoreOperatorDocumentDecorator < BaseDecorator
   def document_history_link
-    h.link_to 'Documents', admin_operator_document_histories_path(
+    h.link_to "Documents", admin_operator_document_histories_path(
       q: {
         operator_document_updated_at_lteq_datetime: model.date,
         required_operator_document_contract_signature_eq: false,
@@ -39,17 +39,17 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
     current.map do |key, value|
       color = nil
       if value > prev[key]
-        color = 'green'
+        color = "green"
       elsif value < prev[key]
-        color = 'red'
+        color = "red"
       end
       diff = value - prev[key]
       diff_text = if diff.negative?
-                    "(#{diff})"
-                  elsif diff.positive?
-                    "(+#{diff})"
-                  end
-      doc_name = key.gsub('doc_','')
+        "(#{diff})"
+      elsif diff.positive?
+        "(+#{diff})"
+      end
+      doc_name = key.gsub("doc_", "")
       value_diff = "#{value} #{diff_text}"
 
       if color
@@ -57,12 +57,12 @@ class ScoreOperatorDocumentDecorator < BaseDecorator
       else
         "#{doc_name}: #{value_diff}"
       end
-    end.join('<br/>')
+    end.join("<br/>")
   end
 
   def print_summary(sum)
     sum.map do |key, value|
-      "#{key.gsub('doc_','')}: #{value}"
-    end.join('<br/>')
+      "#{key.gsub("doc_", "")}: #{value}"
+    end.join("<br/>")
   end
 end

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # == Schema Information
 #
 # Table name: required_gov_documents
@@ -22,7 +21,7 @@ module V1
     caching
     immutable
     attributes :name, :explanation, :valid_period, :document_type,
-               :required_gov_document_group_id, :position
+      :required_gov_document_group_id, :position
 
     has_one :country
     has_one :required_gov_document_group

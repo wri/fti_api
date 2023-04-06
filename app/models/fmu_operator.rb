@@ -21,10 +21,10 @@ class FmuOperator < ApplicationRecord
 
   include DateHelper
 
-  belongs_to :fmu,        optional: true
-  belongs_to :operator,   optional: false
+  belongs_to :fmu, optional: true
+  belongs_to :operator, optional: false
 
-  before_validation     :set_current_start_date
+  before_validation :set_current_start_date
   validates_presence_of :start_date
   validate :start_date_is_earlier
   validate :one_active_per_fmu
@@ -35,7 +35,7 @@ class FmuOperator < ApplicationRecord
 
   # Sets the start date as today, if none is provided
   def set_current_start_date
-    self.start_date = Date.today if self.start_date.blank?
+    self.start_date = Date.today if start_date.blank?
   end
 
   # Validates if the start date is earlier than the end date
@@ -43,7 +43,7 @@ class FmuOperator < ApplicationRecord
     return if end_date.blank?
 
     unless start_date < end_date
-      errors.add(:start_date, 'Start date must be earlier than end date')
+      errors.add(:start_date, "Start date must be earlier than end date")
     end
   end
 
@@ -51,22 +51,22 @@ class FmuOperator < ApplicationRecord
   def one_active_per_fmu
     return true if fmu.blank? || !current || fmu.fmu_operators.where(current: true).where.not(id: id).none?
 
-    errors.add(:current, 'There can only be one active operator at a time')
+    errors.add(:current, "There can only be one active operator at a time")
   end
 
   # Makes sure the dates don't collide
   def non_colliding_dates
     return true if fmu.blank? || !fmu.persisted?
 
-    dates = FmuOperator.where(fmu_id: self.fmu_id).where.not(id: self.id).pluck(:start_date, :end_date)
-    dates << [self.start_date, self.end_date]
+    dates = FmuOperator.where(fmu_id: fmu_id).where.not(id: id).pluck(:start_date, :end_date)
+    dates << [start_date, end_date]
 
-    for i in 0...(dates.count - 1)
-      for j in (i + 1)...(dates.count)
-        errors.add(:end_date, 'Cannot have two operators without end date') and return if dates[i][1].nil? && dates[j][1].nil?
+    (0...(dates.count - 1)).each do |i|
+      ((i + 1)...(dates.count)).each do |j|
+        errors.add(:end_date, "Cannot have two operators without end date") and return false if dates[i][1].nil? && dates[j][1].nil?
 
         if intersects?(dates[i], dates[j])
-          errors.add(:start_date, 'Colliding dates') and return
+          errors.add(:start_date, "Colliding dates") and return false
         end
       end
     end
@@ -78,11 +78,14 @@ class FmuOperator < ApplicationRecord
   def self.calculate_current
     # Checks which one should be active
     to_deactivate = FmuOperator.where("current = 'TRUE' AND end_date < '#{Date.today}'::date")
-    to_activate   = FmuOperator.
-        where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date IS NULL OR end_date >= '#{Date.today}'::date)")
+    to_activate = FmuOperator
+      .where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date IS NULL OR end_date >= '#{Date.today}'::date)")
 
     # Updates the operator documents
-    to_deactivate.find_each{ |x| x.current = false; x.save!(validate: false) }
+    to_deactivate.find_each { |x|
+      x.current = false
+      x.save!(validate: false)
+    }
     to_activate.find_each do |x|
       x.current = true
       x.save!(validate: false)
@@ -109,12 +112,12 @@ class FmuOperator < ApplicationRecord
 
       # Only the RODF for this fmu's forest_type should be created
       rodf_query = "country_id = #{fmu.country_id} "
-      rodf_query += " AND '#{Fmu.forest_types[fmu.forest_type]}' = ANY (forest_types)" if fmu.forest_type != 'fmu'
+      rodf_query += " AND '#{Fmu.forest_types[fmu.forest_type]}' = ANY (forest_types)" if fmu.forest_type != "fmu"
 
       RequiredOperatorDocumentFmu.where(rodf_query).each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
-                                  operator_id: current_operator.id,
-                                  fmu_id: fmu_id).first_or_create do |odf|
+          operator_id: current_operator.id,
+          fmu_id: fmu_id).first_or_create do |odf|
           odf.skip_score_recalculation = true # just do it once at the end
           odf.update!(status: OperatorDocument.statuses[:doc_not_provided]) unless odf.persisted?
         end
