@@ -59,8 +59,8 @@ class ObservationStatistic < ApplicationRecord
   end
 
   def self.query_dashboard_report(search = {})
-    date_from = (search[:date_gteq] || Observation.order(:created_at).first.created_at).to_date.to_s(:db)
-    date_to = (search[:date_lteq] || Date.today).to_date.to_s(:db)
+    date_from = (search[:date_gteq] || Observation.order(:created_at).first.created_at).to_date.to_fs(:db)
+    date_to = (search[:date_lteq] || Date.today).to_date.to_fs(:db)
     country_id = search[:by_country]
     operator_id = search[:operator_id_eq]
     subcategory_id = search[:subcategory_id_eq]

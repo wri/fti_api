@@ -65,7 +65,7 @@ class OperatorDocumentHistory < ApplicationRecord
     # The reason why we're adding a day to the date, is that when comparing datetime fields with a date,
     # the datetime will will always be bigger. For example '2020-01-01 02:00:00' > '2020-01-01'
     # We could use a sql function to extract the day, but this approach is more performant
-    db_date = (date.to_date + 1.day).to_s(:db)
+    db_date = (date.to_date + 1.day).to_fs(:db)
 
     query = <<~SQL
       (select * from

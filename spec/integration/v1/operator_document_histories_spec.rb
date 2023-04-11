@@ -23,7 +23,7 @@ module V1
       end
       describe "No operator-id" do
         it "Fails with a descriptive message" do
-          get("/operator-document-histories?filter[date]=#{Date.today.to_s(:db)}",
+          get("/operator-document-histories?filter[date]=#{Date.today.to_fs(:db)}",
             headers: admin_headers)
           expect(status).to eql(400)
           expect(parsed_error).to eql("You must provide an operator-id")
@@ -31,7 +31,7 @@ module V1
       end
       describe "operator-id is not an integer" do
         it "Fails with a descriptive message" do
-          get("/operator-document-histories?filter[operator-id]=aa&filter[date]=#{Date.today.to_s(:db)}",
+          get("/operator-document-histories?filter[operator-id]=aa&filter[date]=#{Date.today.to_fs(:db)}",
             headers: admin_headers)
           expect(status).to eql(400)
           expect(parsed_error).to eql("Operator must be an integer")
@@ -68,7 +68,7 @@ module V1
           travel_to time3
           operator_document.destroy
 
-          search_time = (time1 + 2.day).to_date.to_s(:db)
+          search_time = (time1 + 2.day).to_date.to_fs(:db)
           get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
             headers: admin_headers)
 
@@ -87,7 +87,7 @@ module V1
           travel_to time3
           operator_document.update(status: "doc_valid")
 
-          search_time = time3.to_date.to_s(:db)
+          search_time = time3.to_date.to_fs(:db)
           get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
             headers: admin_headers)
           expect(status).to eql(200)
@@ -106,7 +106,7 @@ module V1
           travel_to time3
           operator_document.update(status: "doc_valid")
 
-          search_time = time3.to_date.to_s(:db)
+          search_time = time3.to_date.to_fs(:db)
           get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
             headers: admin_headers)
           expect(status).to eql(200)
