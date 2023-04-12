@@ -185,6 +185,26 @@
       "note": ""
     },
     {
+      "warning_type": "Remote Code Execution",
+      "warning_code": 110,
+      "fingerprint": "9ae68e59cfee3e5256c0540dadfeb74e6b72c91997fdb60411063a6e8518144a",
+      "check_name": "CookieSerialization",
+      "message": "Use of unsafe cookie serialization strategy `:hybrid` might lead to remote code execution",
+      "file": "config/initializers/cookies_serializer.rb",
+      "line": 5,
+      "link": "https://brakemanscanner.org/docs/warning_types/unsafe_deserialization",
+      "code": "Rails.application.config.action_dispatch.cookies_serializer = :hybrid",
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        565,
+        502
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "SQL Injection",
       "warning_code": 0,
       "fingerprint": "9c8fd264be900a7a2cde0d46d1dae1ae97668111671d68b52960dd4b7451192f",
@@ -344,28 +364,8 @@
         89
       ],
       "note": ""
-    },
-    {
-      "warning_type": "Remote Code Execution",
-      "warning_code": 110,
-      "fingerprint": "d882f63ce96c28fb6c6e0982f2a171460e4b933bfd9b9a5421dca21eef3f76da",
-      "check_name": "CookieSerialization",
-      "message": "Use of unsafe cookie serialization strategy `:marshal` might lead to remote code execution",
-      "file": "config/initializers/cookies_serializer.rb",
-      "line": 5,
-      "link": "https://brakemanscanner.org/docs/warning_types/unsafe_deserialization",
-      "code": "Rails.application.config.action_dispatch.cookies_serializer = :marshal",
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        565,
-        502
-      ],
-      "note": "TODO: change cookie serializer to JSON"
     }
   ],
-  "updated": "2023-04-12 10:20:58 +0200",
+  "updated": "2023-04-12 11:04:04 +0200",
   "brakeman_version": "5.4.1"
 }
