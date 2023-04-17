@@ -7,7 +7,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/models/fmu.rb",
-      "line": 118,
+      "line": 119,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "ActiveRecord::Base.connection.execute(\"SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile\\n  FROM (\\n    SELECT id, geojson -> 'properties' as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}), 4096, 256, true) AS mvtgeometry\\n    FROM (\\n      SELECT fmus.*, st_transform(geometry, 3857) as the_geom_webmercator\\n      FROM fmus\\n        LEFT JOIN fmu_operators fo on fo.fmu_id = fmus.id and fo.current = true\\n      WHERE fmus.deleted_at IS NULL #{(sanitize_sql([\"AND operator_id=?\", operator_id]) or \"\")}\\n    ) as data\\n    WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}),4096,0,true) IS NOT NULL\\n  ) AS tile;\\n\")",
       "render_path": null,
@@ -17,29 +17,6 @@
         "method": "vector_tiles"
       },
       "user_input": "Integer(param_z)",
-      "confidence": "Medium",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "2eb03d59186e87cd546231f29d4c8682f9460d2d54d7a1e381e839290fade0e3",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/models/operator_document_statistic.rb",
-      "line": 33,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "self.where(\"date > '#{(date or Date.parse(date)).to_s(:db)}'\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "OperatorDocumentStatistic",
-        "method": "OperatorDocumentStatistic.from_date"
-      },
-      "user_input": "date",
       "confidence": "Medium",
       "cwe_id": [
         89
@@ -135,25 +112,6 @@
       "confidence": "Medium",
       "cwe_id": [
         89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 123,
-      "fingerprint": "40be17ee84017c91503dab23873e24bdd71665ab665bf6f351cfc09ff83e6582",
-      "check_name": "EOLRuby",
-      "message": "Support for Ruby 2.7.6 ends on 2023-03-31",
-      "file": ".ruby-version",
-      "line": 1,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        1104
       ],
       "note": ""
     },
@@ -388,29 +346,6 @@
       "note": ""
     },
     {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "c1a2cfdcf22acb45683576c48a11a35497ddcff1cfe2a8955b110070e6f4742e",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/models/observation_report_statistic.rb",
-      "line": 24,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "self.where(\"date > '#{(date or Date.parse(date)).to_s(:db)}'\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "ObservationReportStatistic",
-        "method": "ObservationReportStatistic.from_date"
-      },
-      "user_input": "date",
-      "confidence": "Medium",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
       "warning_type": "Remote Code Execution",
       "warning_code": 110,
       "fingerprint": "d882f63ce96c28fb6c6e0982f2a171460e4b933bfd9b9a5421dca21eef3f76da",
@@ -429,27 +364,8 @@
         502
       ],
       "note": "TODO: change cookie serializer to JSON"
-    },
-    {
-      "warning_type": "Unmaintained Dependency",
-      "warning_code": 121,
-      "fingerprint": "edf687f759ec9765bd5db185dbc615c80af77d6e7e19386fc42934e7a80307af",
-      "check_name": "EOLRuby",
-      "message": "Support for Ruby 2.7.6 ended on 2023-03-31",
-      "file": ".ruby-version",
-      "line": 1,
-      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
-      "code": null,
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "High",
-      "cwe_id": [
-        1104
-      ],
-      "note": ""
     }
   ],
-  "updated": "2023-04-04 13:18:31 +0200",
+  "updated": "2023-04-06 11:24:36 +0200",
   "brakeman_version": "5.4.1"
 }
