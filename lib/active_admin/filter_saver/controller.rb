@@ -44,7 +44,7 @@ module ActiveAdmin
       def controller_key
         current_path = request.env["PATH_INFO"]
         current_route = Rails.application.routes.recognize_path(current_path)
-        current_route.sort.flatten.join("-").tr("/", "_").to_sym
+        current_route.sort.flatten.join("-").tr("/", "_")
       end
     end
   end

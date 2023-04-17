@@ -246,8 +246,6 @@ ActiveAdmin.setup do |config|
   #     end
   #   end
 
-  config.view_factory.register header: CustomAdminHeader
-
   # == Download Links
   #
   # You can disable download links on resource listing pages,
@@ -365,6 +363,10 @@ ActiveAdmin.before_load do |app|
   ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
   ActiveAdmin::Views::Pages::Show.prepend ActiveAdmin::PaperTrail::ShowPageExtension
   ActiveAdmin::ResourceDSL.include ActiveAdmin::DependentFiltersExtension
+end
+
+ActiveAdmin.after_load do |app|
+  app.view_factory.register header: CustomAdminHeader
 end
 
 # Modifies the display of the CSVs so that it shows on to download an English and a French versions.

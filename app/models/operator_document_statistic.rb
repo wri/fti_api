@@ -30,7 +30,7 @@ class OperatorDocumentStatistic < ApplicationRecord
 
   def self.from_date(date)
     date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
-    from_date_sql = where("date > '#{date_obj.to_s(:db)}'").to_sql
+    from_date_sql = where("date > '#{date_obj.to_fs(:db)}'").to_sql
     first_rows_sql = at_date(date_obj).to_sql
 
     from("(#{from_date_sql} UNION #{first_rows_sql}) as operator_document_statistics")
@@ -44,7 +44,7 @@ class OperatorDocumentStatistic < ApplicationRecord
     query = <<~SQL
       (select
         id,
-        '#{date_obj.to_s(:db)}'::date as date,
+        '#{date_obj.to_fs(:db)}'::date as date,
         country_id,
         required_operator_document_group_id,
         fmu_forest_type,
@@ -60,7 +60,7 @@ class OperatorDocumentStatistic < ApplicationRecord
        from
        (select row_number() over (partition by country_id, required_operator_document_group_id, fmu_forest_type, document_type order by date desc), *
         from operator_document_statistics ods
-        where date <= '#{date_obj.to_s(:db)}'
+        where date <= '#{date_obj.to_fs(:db)}'
        ) as stats_by_date
        where stats_by_date.row_number = 1
       ) as operator_document_statistics

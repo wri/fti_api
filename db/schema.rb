@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_12_093944) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -24,8 +23,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "about_page_entries", id: :serial, force: :cascade do |t|
     t.integer "position", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "code"
     t.index ["position"], name: "index_about_page_entries_on_position"
   end
@@ -33,8 +32,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "about_page_entry_translations", id: :serial, force: :cascade do |t|
     t.integer "about_page_entry_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "title"
     t.text "body"
     t.index ["about_page_entry_id"], name: "index_about_page_entry_translations_on_about_page_entry_id"
@@ -48,8 +47,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "resource_id"
     t.string "author_type"
     t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
@@ -59,8 +58,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "documentable_type", null: false
     t.integer "documentable_id", null: false
     t.integer "operator_document_annex_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["documentable_id"], name: "index_annex_documents_on_documentable_id"
     t.index ["documentable_type"], name: "index_annex_documents_on_documentable_type"
     t.index ["operator_document_annex_id"], name: "index_annex_documents_on_operator_document_annex_id"
@@ -68,26 +67,26 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "api_keys", id: :serial, force: :cascade do |t|
     t.string "access_token"
-    t.datetime "expires_at"
+    t.datetime "expires_at", precision: nil
     t.integer "user_id"
     t.boolean "is_active", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
   create_table "categories", id: :serial, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "category_type"
   end
 
   create_table "category_translations", id: :serial, force: :cascade do |t|
     t.integer "category_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.index ["category_id"], name: "index_category_translations_on_category_id"
     t.index ["locale"], name: "index_category_translations_on_locale"
@@ -99,8 +98,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "commentable_type"
     t.text "body"
     t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -108,8 +107,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "contributor_translations", id: :serial, force: :cascade do |t|
     t.integer "contributor_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name", null: false
     t.text "description"
     t.index ["contributor_id"], name: "index_contributor_translations_on_contributor_id"
@@ -121,8 +120,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "logo"
     t.integer "priority"
     t.integer "category"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "type", default: "Partner"
     t.index ["type"], name: "index_contributors_on_type"
   end
@@ -132,8 +131,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "region_iso"
     t.jsonb "country_centroid"
     t.jsonb "region_centroid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "is_active", default: false, null: false
     t.index ["is_active"], name: "index_countries_on_is_active"
     t.index ["iso"], name: "index_countries_on_iso"
@@ -150,8 +149,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "country_link_translations", id: :serial, force: :cascade do |t|
     t.integer "country_link_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.text "description"
     t.index ["country_link_id"], name: "index_country_link_translations_on_country_link_id"
@@ -162,8 +161,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "url"
     t.boolean "active", default: true
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "country_id"
     t.index ["country_id"], name: "index_country_links_on_country_id"
   end
@@ -171,8 +170,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "country_translations", id: :serial, force: :cascade do |t|
     t.integer "country_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.string "region_name"
     t.text "overview"
@@ -185,8 +184,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "country_vpa_translations", id: :serial, force: :cascade do |t|
     t.integer "country_vpa_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.text "description"
     t.index ["country_vpa_id"], name: "index_country_vpa_translations_on_country_vpa_id"
@@ -197,23 +196,23 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "url"
     t.boolean "active", default: true
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "country_id"
     t.index ["country_id"], name: "index_country_vpas_on_country_id"
   end
 
   create_table "document_files", id: :serial, force: :cascade do |t|
     t.string "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "faq_translations", id: :serial, force: :cascade do |t|
     t.integer "faq_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "question"
     t.text "answer"
     t.index ["faq_id"], name: "index_faq_translations_on_faq_id"
@@ -222,8 +221,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "faqs", id: :serial, force: :cascade do |t|
     t.integer "position", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "image"
   end
 
@@ -233,9 +232,9 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.boolean "current", null: false
     t.date "start_date"
     t.date "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_fmu_operators_on_deleted_at"
     t.index ["fmu_id", "operator_id"], name: "index_fmu_operators_on_fmu_id_and_operator_id"
     t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id"
@@ -244,10 +243,10 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "fmu_translations", id: :serial, force: :cascade do |t|
     t.integer "fmu_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_fmu_translations_on_deleted_at"
     t.index ["fmu_id"], name: "index_fmu_translations_on_fmu_id"
     t.index ["locale"], name: "index_fmu_translations_on_locale"
@@ -257,8 +256,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "fmus", id: :serial, force: :cascade do |t|
     t.integer "country_id"
     t.jsonb "geojson"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "certification_fsc", default: false
     t.boolean "certification_pefc", default: false
     t.boolean "certification_olb", default: false
@@ -267,7 +266,7 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.boolean "certification_tlv", default: false
     t.integer "forest_type", default: 0, null: false
     t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.boolean "certification_ls", default: false
     t.index ["country_id"], name: "index_fmus_on_country_id"
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at"
@@ -282,9 +281,9 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "link"
     t.string "value"
     t.string "units"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "required_gov_document_id", null: false
     t.integer "country_id", null: false
     t.integer "user_id"
@@ -297,8 +296,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "government_translations", id: :serial, force: :cascade do |t|
     t.integer "government_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "government_entity"
     t.text "details"
     t.index ["government_entity", "government_id"], name: "index_gvt_t_on_government_entity_and_government_id"
@@ -308,8 +307,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "governments", id: :serial, force: :cascade do |t|
     t.integer "country_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "is_active", default: true
     t.index ["country_id"], name: "index_governments_on_country_id"
   end
@@ -317,9 +316,9 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "governments_observations", id: :serial, force: :cascade do |t|
     t.integer "government_id"
     t.integer "observation_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_governments_observations_on_deleted_at"
     t.index ["government_id", "observation_id"], name: "governments_observations_association_index", unique: true
     t.index ["government_id"], name: "index_governments_observations_on_government_id"
@@ -329,16 +328,16 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "holdings", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["name"], name: "index_holdings_on_name"
   end
 
   create_table "how_to_translations", id: :serial, force: :cascade do |t|
     t.integer "how_to_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.text "description"
     t.index ["how_to_id"], name: "index_how_to_translations_on_how_to_id"
@@ -347,8 +346,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "how_tos", id: :serial, force: :cascade do |t|
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "laws", id: :serial, force: :cascade do |t|
@@ -361,8 +360,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.text "other_penalties"
     t.text "apv"
     t.integer "subcategory_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "country_id"
     t.string "currency"
     t.index ["country_id"], name: "index_laws_on_country_id"
@@ -374,19 +373,19 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "notification_groups", id: :serial, force: :cascade do |t|
     t.integer "days", null: false
     t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "notifications", id: :serial, force: :cascade do |t|
-    t.datetime "last_displayed_at"
-    t.datetime "dismissed_at"
-    t.datetime "solved_at"
+    t.datetime "last_displayed_at", precision: nil
+    t.datetime "dismissed_at", precision: nil
+    t.datetime "solved_at", precision: nil
     t.integer "operator_document_id", null: false
     t.integer "user_id", null: false
     t.integer "notification_group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["dismissed_at"], name: "index_notifications_on_dismissed_at"
     t.index ["last_displayed_at"], name: "index_notifications_on_last_displayed_at"
     t.index ["notification_group_id"], name: "index_notifications_on_notification_group_id"
@@ -398,10 +397,10 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "observation_documents", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.integer "observation_id"
     t.index ["deleted_at"], name: "index_observation_documents_on_deleted_at"
     t.index ["name"], name: "index_observation_documents_on_name"
@@ -416,11 +415,11 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "location_accuracy"
     t.integer "severity_level"
     t.integer "fmu_forest_type"
-    t.datetime "observation_updated_at"
-    t.datetime "observation_created_at"
-    t.datetime "deleted_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "observation_updated_at", precision: nil
+    t.datetime "observation_created_at", precision: nil
+    t.datetime "deleted_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "observation_id"
     t.integer "fmu_id"
     t.integer "category_id"
@@ -445,9 +444,9 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "observation_operators", id: :serial, force: :cascade do |t|
     t.integer "observation_id"
     t.integer "operator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_observation_operators_on_deleted_at"
     t.index ["observation_id"], name: "index_observation_operators_on_observation_id"
     t.index ["operator_id"], name: "index_observation_operators_on_operator_id"
@@ -456,8 +455,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "observation_report_observers", id: :serial, force: :cascade do |t|
     t.integer "observation_report_id"
     t.integer "observer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["observation_report_id", "observer_id"], name: "index_obs_rep_id_and_observer_id"
     t.index ["observer_id", "observation_report_id"], name: "index_observer_id_and_obs_rep_id"
   end
@@ -467,8 +466,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "country_id"
     t.integer "observer_id"
     t.integer "total_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["country_id"], name: "index_observation_report_statistics_on_country_id"
     t.index ["date", "country_id", "observer_id"], name: "index_observation_report_statistics_on_filters", unique: true
     t.index ["date"], name: "index_observation_report_statistics_on_date"
@@ -477,12 +476,12 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "observation_reports", id: :serial, force: :cascade do |t|
     t.string "title"
-    t.datetime "publication_date"
+    t.datetime "publication_date", precision: nil
     t.string "attachment"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_observation_reports_on_deleted_at"
     t.index ["title"], name: "index_observation_reports_on_title"
     t.index ["user_id"], name: "index_observation_reports_on_user_id"
@@ -499,8 +498,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "validation_status"
     t.integer "fmu_forest_type"
     t.integer "total_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "hidden"
     t.boolean "is_active"
     t.integer "observation_type"
@@ -515,12 +514,12 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "observation_translations", id: :serial, force: :cascade do |t|
     t.integer "observation_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "details"
     t.text "concern_opinion"
     t.string "litigation_status"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_observation_translations_on_deleted_at"
     t.index ["locale"], name: "index_observation_translations_on_locale"
     t.index ["observation_id"], name: "index_observation_translations_on_observation_id"
@@ -530,13 +529,13 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "severity_id"
     t.integer "observation_type", null: false
     t.integer "user_id"
-    t.datetime "publication_date"
+    t.datetime "publication_date", precision: nil
     t.integer "country_id"
     t.integer "operator_id"
     t.string "pv"
     t.boolean "is_active", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.decimal "lat"
     t.decimal "lng"
     t.integer "fmu_id"
@@ -555,7 +554,7 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.text "admin_comment"
     t.text "monitor_comment"
     t.integer "responsible_admin_id"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.index ["country_id"], name: "index_observations_on_country_id"
     t.index ["created_at"], name: "index_observations_on_created_at"
     t.index ["deleted_at"], name: "index_observations_on_deleted_at"
@@ -580,9 +579,9 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "observer_observations", id: :serial, force: :cascade do |t|
     t.integer "observer_id"
     t.integer "observation_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_observer_observations_on_deleted_at"
     t.index ["observation_id"], name: "index_observer_observations_on_observation_id"
     t.index ["observer_id"], name: "index_observer_observations_on_observer_id"
@@ -591,8 +590,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "observer_translations", id: :serial, force: :cascade do |t|
     t.integer "observer_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.string "organization"
     t.index ["locale"], name: "index_observer_translations_on_locale"
@@ -602,8 +601,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "observers", id: :serial, force: :cascade do |t|
     t.string "observer_type", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "is_active", default: true
     t.string "logo"
     t.string "address"
@@ -629,8 +628,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "attachment"
     t.integer "uploaded_by"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "public", default: true, null: false
     t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at"
     t.index ["public"], name: "index_operator_document_annexes_on_public"
@@ -646,21 +645,21 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "uploaded_by"
     t.text "reason"
     t.text "note"
-    t.datetime "response_date"
+    t.datetime "response_date", precision: nil
     t.boolean "public"
     t.integer "source"
     t.string "source_info"
     t.integer "fmu_id"
     t.integer "document_file_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "operator_document_id"
     t.integer "operator_id"
     t.integer "user_id"
     t.integer "required_operator_document_id"
-    t.datetime "deleted_at"
-    t.datetime "operator_document_updated_at", null: false
-    t.datetime "operator_document_created_at", null: false
+    t.datetime "deleted_at", precision: nil
+    t.datetime "operator_document_updated_at", precision: nil, null: false
+    t.datetime "operator_document_created_at", precision: nil, null: false
     t.index ["deleted_at"], name: "index_operator_document_histories_on_deleted_at"
     t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id"
     t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date"
@@ -688,8 +687,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "not_provided_count", default: 0
     t.integer "not_required_count", default: 0
     t.integer "expired_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["country_id"], name: "index_operator_document_statistics_on_country_id"
     t.index ["date", "country_id", "required_operator_document_group_id", "fmu_forest_type", "document_type"], name: "index_operator_document_statistics_on_filters", unique: true
     t.index ["date"], name: "index_operator_document_statistics_on_date"
@@ -702,16 +701,16 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.date "start_date"
     t.integer "fmu_id"
     t.integer "required_operator_document_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "status"
     t.integer "operator_id"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.integer "uploaded_by"
     t.integer "user_id"
     t.text "reason"
     t.text "note"
-    t.datetime "response_date"
+    t.datetime "response_date", precision: nil
     t.boolean "public", default: true, null: false
     t.integer "source", default: 1
     t.string "source_info"
@@ -733,8 +732,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "operator_type"
     t.integer "country_id"
     t.string "concession"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "is_active", default: true
     t.string "logo"
     t.string "operator_id"
@@ -757,11 +756,11 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "required_gov_document_group_translations", id: :serial, force: :cascade do |t|
     t.integer "required_gov_document_group_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name", null: false
     t.text "description"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_required_gov_document_group_translations_on_deleted_at"
     t.index ["locale"], name: "index_required_gov_document_group_translations_on_locale"
     t.index ["required_gov_document_group_id"], name: "index_d5783e31f1865cb8918d628281b44e29621b4216"
@@ -769,9 +768,9 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "required_gov_document_groups", id: :serial, force: :cascade do |t|
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.bigint "parent_id"
     t.index ["deleted_at"], name: "index_required_gov_document_groups_on_deleted_at"
     t.index ["parent_id"], name: "index_required_gov_document_groups_on_parent_id"
@@ -780,10 +779,10 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "required_gov_document_translations", id: :serial, force: :cascade do |t|
     t.integer "required_gov_document_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "explanation"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.string "name"
     t.index ["deleted_at"], name: "index_required_gov_document_translations_on_deleted_at"
     t.index ["locale"], name: "index_required_gov_document_translations_on_locale"
@@ -793,11 +792,11 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "required_gov_documents", id: :serial, force: :cascade do |t|
     t.integer "document_type", null: false
     t.integer "valid_period"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.integer "required_gov_document_group_id"
     t.integer "country_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "position"
     t.index ["country_id", "required_gov_document_group_id", "position"], name: "index_rgd_on_country_id_and_rgdg_id_and_position"
     t.index ["country_id"], name: "index_required_gov_documents_on_country_id"
@@ -809,26 +808,26 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "required_operator_document_group_translations", id: :serial, force: :cascade do |t|
     t.integer "required_operator_document_group_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.index ["locale"], name: "index_required_operator_document_group_translations_on_locale"
     t.index ["required_operator_document_group_id"], name: "index_64b55c0cec158f1717cc5d775ae87c7a48f1cc59"
   end
 
   create_table "required_operator_document_groups", id: :serial, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "position"
   end
 
   create_table "required_operator_document_translations", id: :serial, force: :cascade do |t|
     t.integer "required_operator_document_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "explanation"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_required_operator_document_translations_on_deleted_at"
     t.index ["locale"], name: "index_required_operator_document_translations_on_locale"
     t.index ["required_operator_document_id"], name: "index_eed74ed5a0934f32c4b075e5beee98f1ebf34d19"
@@ -839,10 +838,10 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.integer "required_operator_document_group_id"
     t.string "name"
     t.integer "country_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "valid_period"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.integer "forest_types", default: [], array: true
     t.boolean "contract_signature", default: false, null: false
     t.integer "position"
@@ -860,8 +859,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.float "lng"
     t.boolean "is_active", default: true, null: false
     t.integer "operator_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.jsonb "geojson"
   end
 
@@ -875,8 +874,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.jsonb "summary_private"
     t.integer "total"
     t.integer "operator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["current"], name: "index_score_operator_documents_on_current"
     t.index ["date"], name: "index_score_operator_documents_on_date"
     t.index ["operator_id", "current"], name: "index_score_operator_documents_on_operator_id_and_current", unique: true, where: "current"
@@ -889,8 +888,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.float "score"
     t.float "obs_per_visit"
     t.integer "operator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["current", "operator_id"], name: "index_score_operator_observations_on_current_and_operator_id"
     t.index ["current"], name: "index_score_operator_observations_on_current"
     t.index ["date"], name: "index_score_operator_observations_on_date"
@@ -900,8 +899,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "severities", id: :serial, force: :cascade do |t|
     t.integer "level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "subcategory_id"
     t.index ["level", "id"], name: "index_severities_on_level_and_id"
     t.index ["level", "subcategory_id"], name: "index_severities_on_level_and_subcategory_id"
@@ -912,8 +911,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "severity_translations", id: :serial, force: :cascade do |t|
     t.integer "severity_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "details"
     t.index ["locale"], name: "index_severity_translations_on_locale"
     t.index ["severity_id"], name: "index_severity_translations_on_severity_id"
@@ -929,15 +928,15 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "cites_status"
     t.integer "cites_id"
     t.integer "iucn_status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "species_countries", id: :serial, force: :cascade do |t|
     t.integer "country_id"
     t.integer "species_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["country_id"], name: "index_species_countries_on_country_id"
     t.index ["species_id"], name: "index_species_countries_on_species_id"
   end
@@ -945,9 +944,9 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "species_observations", id: :serial, force: :cascade do |t|
     t.integer "observation_id"
     t.integer "species_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "deleted_at", precision: nil
     t.index ["deleted_at"], name: "index_species_observations_on_deleted_at"
     t.index ["observation_id"], name: "index_species_observations_on_observation_id"
     t.index ["species_id"], name: "index_species_observations_on_species_id"
@@ -956,8 +955,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "species_translations", id: :serial, force: :cascade do |t|
     t.integer "species_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "common_name"
     t.index ["locale"], name: "index_species_translations_on_locale"
     t.index ["species_id"], name: "index_species_translations_on_species_id"
@@ -966,8 +965,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "subcategories", id: :serial, force: :cascade do |t|
     t.integer "category_id"
     t.integer "subcategory_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "location_required", default: true
     t.index ["category_id"], name: "index_subcategories_on_category_id"
     t.index ["subcategory_type"], name: "index_subcategories_on_subcategory_type"
@@ -976,8 +975,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "subcategory_translations", id: :serial, force: :cascade do |t|
     t.integer "subcategory_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "name"
     t.text "details"
     t.index ["locale"], name: "index_subcategory_translations_on_locale"
@@ -988,8 +987,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
   create_table "tool_translations", id: :serial, force: :cascade do |t|
     t.integer "tool_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.text "description"
     t.index ["locale"], name: "index_tool_translations_on_locale"
@@ -998,15 +997,15 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "tools", id: :serial, force: :cascade do |t|
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "tutorial_translations", id: :serial, force: :cascade do |t|
     t.integer "tutorial_id", null: false
     t.string "locale", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.text "description"
     t.index ["locale"], name: "index_tutorial_translations_on_locale"
@@ -1015,8 +1014,8 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
 
   create_table "tutorials", id: :serial, force: :cascade do |t|
     t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "uploaded_documents", id: :serial, force: :cascade do |t|
@@ -1024,39 +1023,39 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "author"
     t.string "caption"
     t.string "file"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "user_permissions", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "user_role", default: 0, null: false
     t.jsonb "permissions", default: {}
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.string "institution"
     t.string "web_url"
     t.boolean "is_active", default: true
-    t.datetime "deactivated_at"
+    t.datetime "deactivated_at", precision: nil
     t.integer "permissions_request"
-    t.datetime "permissions_accepted"
+    t.datetime "permissions_accepted", precision: nil
     t.integer "country_id"
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
+    t.datetime "reset_password_sent_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "encrypted_password", default: "", null: false
-    t.datetime "remember_created_at"
+    t.datetime "remember_created_at", precision: nil
     t.integer "observer_id"
     t.integer "operator_id"
     t.integer "holding_id"
@@ -1073,7 +1072,7 @@ ActiveRecord::Schema.define(version: 2023_02_12_093944) do
     t.string "whodunnit"
     t.text "object"
     t.string "locale"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.text "object_changes"
     t.index ["item_type", "item_id", "locale"], name: "index_versions_on_item_type_and_item_id_and_locale"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
