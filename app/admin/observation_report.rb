@@ -45,6 +45,7 @@ ActiveAdmin.register ObservationReport do
   dependent_filters do
     {
       observations_country_id: {
+        title: ObservationReport.joins(observations: :country).distinct.pluck(:country_id, :title),
         observer_ids: Observer.joins(:countries).pluck(:country_id, :id)
       }
     }

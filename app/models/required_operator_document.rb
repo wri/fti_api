@@ -56,7 +56,7 @@ class RequiredOperatorDocument < ApplicationRecord
       .on("country_translations.country_id = countries.id and country_translations.locale = '#{I18n.locale}'")
       .join_sources
 
-    joins(join).order("required_operator_documents.name")
+    joins(join)
   }
 
   def name_with_country

@@ -18,6 +18,10 @@ const dependentFiltersInitializer = function() {
   function setupDependentFilters(el) {
     const filters = $(el).data('filters');
 
+    if (!filters) {
+      throw new Error('No filters found in data-filters attribute');
+    }
+
     // Create a map of dependent filters
     // e.g. { "city_id": ["state_id"], "area_id": ["city_id", "state_id"] }
     // this is reverse of the filters object
@@ -34,10 +38,14 @@ const dependentFiltersInitializer = function() {
     });
 
     Object.keys(filters).forEach(parentFilterKey => {
-      $(`#q_${parentFilterKey}`).on('change', onFilterChange.bind(null, parentFilterKey));
+      const $parentFilter = $(`#q_${parentFilterKey}`);
+      if ($parentFilter.length === 0) {
+        throw new Error(`No filter found with id #q_${parentFilterKey}`);
+      }
+      $parentFilter.on('change', onFilterChange.bind(null, parentFilterKey));
       // trigger change after load for initial values
       setTimeout(() => {
-        $(`#q_${parentFilterKey}`).trigger('change');
+        $parentFilter.trigger('change');
       }, 200);
     });
 
@@ -56,6 +64,9 @@ const dependentFiltersInitializer = function() {
         const allowedIds = getCommonElements(...allowedIdsFromAllFilters);
 
         const $select = $(`#q_${key}`);
+        if ($select.length === 0) {
+          throw new Error(`No filter found with id #q_${key}`);
+        }
         const selectedValues = [$select.val()].flat();
 
         Array.from($select[0].options).forEach(option => {

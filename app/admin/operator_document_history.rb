@@ -153,7 +153,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   filter :operator_document_required_operator_document_id_eq,
     label: proc { I18n.t("activerecord.models.required_operator_document_group.one") },
     as: :select,
-    collection: -> { RequiredOperatorDocument.with_translations.all }
+    collection: -> { RequiredOperatorDocument.with_generic.order(:country_id, :name).map { |r| [r.name_with_country, r.id] } }
   filter :operator,
     label: proc { I18n.t("activerecord.models.operator") },
     as: :select,
@@ -168,7 +168,7 @@ ActiveAdmin.register OperatorDocumentHistory do
   dependent_filters do
     {
       required_operator_document_country_id: {
-        operator_document_required_operator_document_id: RequiredOperatorDocument.pluck(:country_id, :id),
+        operator_document_required_operator_document_id_eq: RequiredOperatorDocument.pluck(:country_id, :id),
         operator_id: Operator.pluck(:country_id, :id)
       },
       operator_id: {
