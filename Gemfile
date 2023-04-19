@@ -22,6 +22,7 @@ gem "activeadmin_addons", "~> 1.9.0"
 gem "sass-rails"
 gem "sassc-rails"
 gem "uglifier"
+gem "sprockets-rails"
 
 # Active Admin skins
 gem "active_skin"

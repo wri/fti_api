@@ -11,22 +11,28 @@ $(document).ready(function() {
   }
 
   setTimeout(function() {
-    Chartkick.charts['chart-1'].redraw();
-    setTimeout(updateColumnVisiblity, 100);
+    if (Chartkick && Chartkick.charts['chart-1']) {
+      Chartkick.charts['chart-1'].redraw();
+      setTimeout(updateColumnVisiblity, 100);
+    }
   }, 50);
 
   setTimeout(function() {
-    const chart = Chartkick.charts['chart-1'].chart;
-    const oldOnClick = chart.options.legend.onClick;
-    const newLegendClickHandler = function (e, legendItem) {
-      const id = legendItem.text.replaceAll(' & ', ' ').replaceAll(' ', '_').toLowerCase();
-      const column = $(`.col-${id}`);
-      $('#' + id).prop('checked', legendItem.hidden);
-      column.toggleClass('hide', !legendItem.hidden);
-      oldOnClick.apply(this, [e, legendItem]);
-    };
-    chart.options.legend.onClick = newLegendClickHandler;
-  }, 300)
+    if (Chartkick && Chartkick.charts['chart-1']) {
+      const chart = Chartkick.charts['chart-1'].chart;
+      const oldOnClick = chart.legend.options.onClick;
+
+      const newLegendClickHandler = function (e, legendItem, legend) {
+        const id = legendItem.text.replaceAll(' & ', ' ').replaceAll(' ', '_').toLowerCase();
+        const column = $(`.col-${id}`);
+
+        $('#' + id).prop('checked', legendItem.hidden);
+        column.toggleClass('hide', !legendItem.hidden);
+        oldOnClick.apply(this, [e, legendItem, legend]);
+      };
+      chart.legend.options.onClick = newLegendClickHandler;
+    }
+  }, 1000)
 
   $(".observation-checkbox").on('change', function(event) {
     const elem = event.target;

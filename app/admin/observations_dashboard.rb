@@ -104,14 +104,14 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     column :published_modified
     column :published_all
     column :total_count, sortable: false
-    show_on_chart = if params.dig(:q, :country_id_eq).present?
+    chart_collection = if params.dig(:q, :country_id_eq).present?
       collection
     else
       collection.select { |r| r.country_id.nil? }
     end
-    grouped_sod = show_on_chart.group_by(&:date)
+    chart_collection_by_date = chart_collection.group_by(&:date)
     hidden = {dataset: {hidden: true}}
-    get_data = ->(&block) { grouped_sod.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
+    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
     render partial: "score_evolution", locals: {
       scores: [
         {name: "Created", **hidden, data: get_data.call(&:created)},
@@ -154,24 +154,9 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
           ["published_all", I18n.t("active_admin.observations_dashboard_page.published_all")],
           ["total_count", I18n.t("active_admin.observation_reports_dashboard_page.total_count")]
         ],
-        unchecked: [
-          ["operator", I18n.t("activerecord.models.operator")],
-          ["severity_level", I18n.t("activerecord.attributes.observation_history.severity_level")],
-          ["observation_type", I18n.t("activerecord.attributes.observation.observation_type")],
-          ["category", I18n.t("activerecord.models.category.one")],
-          ["subcategory", I18n.t("activerecord.models.subcategory")],
-          ["fmu_forest_type", I18n.t("activerecord.attributes.observation_history.fmu_forest_type")],
-          ["ready_for_qc", I18n.t("activerecord.enums.observation.statuses.Ready for QC")],
-          ["approved", I18n.t("activerecord.enums.observation.statuses.Approved")],
-          ["rejected", I18n.t("activerecord.enums.observation.statuses.Rejected")],
-          ["needs_revision", I18n.t("activerecord.enums.observation.statuses.Needs revision")],
-          ["ready_for_publication", I18n.t("activerecord.enums.observation.statuses.Ready for publication")],
-          ["published_no_comments", I18n.t("activerecord.enums.observation.statuses.Published (no comments)")],
-          ["published_modified", I18n.t("activerecord.enums.observation.statuses.Published (modified)")],
-          ["published_not_modified", I18n.t("activerecord.enums.observation.statuses.Published (not modified)")],
-          ["total_count", I18n.t("active_admin.observation_reports_dashboard_page.total_count")],
-          ["created", I18n.t("shared.created")],
-          ["qc_in_progress", I18n.t("activerecord.enums.observation.statuses.QC in progress")]
+        unchecked: %w[
+          operator severity_level observation_type category subcategory fmu_forest_type ready_for_qc approved rejected needs_revision ready_for_publication
+          published_no_comments published_modified published_not_modified total_count created qc_in_progress
         ]
       }
     end

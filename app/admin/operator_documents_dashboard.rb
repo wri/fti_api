@@ -66,14 +66,14 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
     column I18n.t("active_admin.producer_documents_dashboard_page.not_required"), sortable: false, &:not_required_count
     column I18n.t("active_admin.producer_documents_dashboard_page.not_provided"), sortable: false, &:not_provided_count
 
-    show_on_chart = if params.dig(:q, :by_country).present?
+    chart_collection = if params.dig(:q, :by_country).present?
       collection
     else
       collection.select { |r| r.country_id.nil? }
     end
-    grouped_sod = show_on_chart.group_by(&:date)
+    chart_collection_by_date = chart_collection.group_by(&:date)
     hidden = {dataset: {hidden: true}}
-    get_data = ->(&block) { grouped_sod.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
+    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
     render partial: "score_evolution", locals: {
       scores: [
         {name: "Not Provided", **hidden, data: get_data.call(&:not_provided_count)},
@@ -102,15 +102,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
           ["not_provided", I18n.t("active_admin.producer_documents_dashboard_page.not_provided")],
           ["not_required", I18n.t("active_admin.producer_documents_dashboard_page.not_required")]
         ],
-        unchecked: [
-          ["required_operator_document_group", I18n.t("activerecord.models.required_operator_document_group")],
-          ["fmu_forest_type", I18n.t("activerecord.attributes.observation_history.fmu_forest_type")],
-          ["document_type", I18n.t("activerecord.attributes.required_gov_document.document_type")],
-          ["invalid", I18n.t("active_admin.producer_documents_dashboard_page.invalid")],
-          ["pending", I18n.t("active_admin.producer_documents_dashboard_page.pending")],
-          ["not_provided", I18n.t("active_admin.producer_documents_dashboard_page.not_provided")],
-          ["not_required", I18n.t("active_admin.producer_documents_dashboard_page.not_required")]
-        ]
+        unchecked: %w[required_operator_document_group fmu_forest_type document_type invalid pending not_provided not_required]
       }
     end
   end
