@@ -1,12 +1,18 @@
 $(document).ready(function() {
   function updateChart(elemId, checked) {
     const chart = Chartkick.charts['chart-1'].chart;
-    const dataset = chart.data.datasets.find(
-      x => x.label.replaceAll('&', '').replace(/\s/g, '').toLowerCase() === elemId.replaceAll('_', '')
+    const lookupId = elemId.replaceAll('_', '');
+    const legendItem = chart.legend.legendItems.find(
+      x => x.text.replaceAll('&', '').replace(/\s/g, '').toLowerCase() === lookupId
     );
-    if (dataset) {
-      dataset.hidden = !checked;
-      chart.update();
+    if (legendItem) {
+      legendItem.hidden = !checked;
+
+      if (checked) {
+        chart.show(legendItem.datasetIndex);
+      } else {
+        chart.hide(legendItem.datasetIndex);
+      }
     }
   }
 
