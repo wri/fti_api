@@ -131,10 +131,10 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     panel "Visible columns" do
       render partial: "fields", locals: {
         attributes: [
-          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date")],
-          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one")],
-          ["is_active", I18n.t("activerecord.attributes.observation.is_active")],
-          ["hidden", I18n.t("activerecord.attributes.observation.hidden")],
+          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date"), :checked],
+          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one"), :checked],
+          ["is_active", I18n.t("activerecord.attributes.observation.is_active"), :checked],
+          ["hidden", I18n.t("activerecord.attributes.observation.hidden"), :checked],
           ["observation_type", I18n.t("activerecord.attributes.observation.observation_type")],
           ["operator", I18n.t("activerecord.models.operator")],
           ["severity_level", I18n.t("activerecord.attributes.severity.level")],
@@ -151,12 +151,8 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
           ["published_no_comments", I18n.t("activerecord.enums.observation.statuses.Published (no comments)")],
           ["published_modified", I18n.t("activerecord.enums.observation.statuses.Published (modified)")],
           ["published_not_modified", I18n.t("activerecord.enums.observation.statuses.Published (not modified)")],
-          ["published_all", I18n.t("active_admin.observations_dashboard_page.published_all")],
+          ["published_all", I18n.t("active_admin.observations_dashboard_page.published_all"), :checked],
           ["total_count", I18n.t("active_admin.observation_reports_dashboard_page.total_count")]
-        ],
-        unchecked: %w[
-          operator severity_level observation_type category subcategory fmu_forest_type ready_for_qc approved rejected needs_revision ready_for_publication
-          published_no_comments published_modified published_not_modified total_count created qc_in_progress
         ]
       }
     end

@@ -89,20 +89,19 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
     panel I18n.t("active_admin.producer_documents_dashboard_page.visible_columns") do
       render partial: "fields", locals: {
         attributes: [
-          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date")],
-          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one")],
+          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date"), :checked],
+          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one"), :checked],
           ["required_operator_document_group", I18n.t("activerecord.models.required_operator_document_group.one")],
           ["fmu_forest_type", I18n.t("activerecord.attributes.fmu.forest_type")],
           ["document_type", I18n.t("activerecord.attributes.required_gov_document.document_type")],
-          ["valid_expired", I18n.t("active_admin.producer_documents_dashboard_page.valid_expired")],
-          ["valid", I18n.t("active_admin.producer_documents_dashboard_page.valid")],
-          ["expired", I18n.t("active_admin.producer_documents_dashboard_page.expired")],
+          ["valid_expired", I18n.t("active_admin.producer_documents_dashboard_page.valid_expired"), :checked],
+          ["valid", I18n.t("active_admin.producer_documents_dashboard_page.valid"), :checked],
+          ["expired", I18n.t("active_admin.producer_documents_dashboard_page.expired"), :checked],
           ["invalid", I18n.t("active_admin.producer_documents_dashboard_page.invalid")],
           ["pending", I18n.t("active_admin.producer_documents_dashboard_page.pending")],
           ["not_provided", I18n.t("active_admin.producer_documents_dashboard_page.not_provided")],
           ["not_required", I18n.t("active_admin.producer_documents_dashboard_page.not_required")]
-        ],
-        unchecked: %w[required_operator_document_group fmu_forest_type document_type invalid pending not_provided not_required]
+        ]
       }
     end
   end
