@@ -62,6 +62,19 @@ ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
           end
         end
       end
+
+      if resource.is_a?(ActiveAdmin::Page) || resource.defined_actions.include?(:new)
+        describe "GET new" do
+          subject { get :new }
+
+          it { is_expected.to be_successful }
+
+          it "does not include empty translations" do
+            subject
+            expect(response.body).not_to include("translation missing")
+          end
+        end
+      end
     end
   end
 end
