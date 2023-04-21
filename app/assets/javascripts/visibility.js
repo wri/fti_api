@@ -40,7 +40,7 @@ $(document).ready(function() {
     }
   }, 1000)
 
-  $(".observation-checkbox").on('change', function(event) {
+  $(".visible-column__checkbox").on('change', function(event) {
     const elem = event.target;
     const column = $(`.col-${elem.id}`);
     column.toggleClass('hide', !elem.checked);
@@ -49,10 +49,10 @@ $(document).ready(function() {
   });
 
   function updateColumnVisiblity() {
-    if ($('.observation-attributes').length > 0) {
-      const saveToLocalStorage = $('.observation-attributes').data('saveToLocalStorage');
+    if ($('.visible-columns').length > 0) {
+      const saveToLocalStorage = $('.visible-columns').data('saveToLocalStorage');
 
-      $('.observation-attributes').children().each((_idx, elem) => {
+      $('.visible-columns').children().each((_idx, elem) => {
         const id = elem.id.split('-')[1];
         if (saveToLocalStorage) {
           const storage = localStorage.getItem(id);
@@ -71,6 +71,19 @@ $(document).ready(function() {
       })
     }
   }
+
+  function getCursorPosition(canvas, event) {
+    const rect = canvas.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+    console.log("x: " + x + " y: " + y)
+    console.log("clientX: " + event.clientX + " clientY: " + event.clientY);
+}
+
+const canvas = document.querySelector('#chart-1')
+canvas.addEventListener('mousedown', function(e) {
+    getCursorPosition(canvas, e)
+})
 
   updateColumnVisiblity();
 });

@@ -1,13 +1,13 @@
 <% save_to_localstorage ||= true %>
-<div class="observation-attributes" data-save-to-localstorage="<%= save_to_localstorage %>">
+<div class="visible-columns" data-save-to-localstorage="<%= save_to_localstorage %>">
   <% attributes.each do |column, name, checked| %>
     <%
       column_id = column.gsub('_&_', '_')
       name = column if name.blank?
     %>
-    <div class="observations-checkbox" id="attribute-<%= column_id  %>">
+    <div class="visible-column" id="attribute-<%= column_id  %>">
       <label>
-        <input type="checkbox" class="observation-checkbox" id="<%= column_id %>" <%= checked == :checked ? 'checked' : '' %>>
+        <input type="checkbox" class="visible-column__checkbox" id="<%= column_id %>" <%= checked == :checked ? 'checked' : '' %>>
         <%=name %>
       </label>
     </div>
