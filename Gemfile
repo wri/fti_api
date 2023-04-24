@@ -59,7 +59,7 @@ gem "rswag-api"
 gem "rswag-ui"
 
 # Activejob
-gem "sidekiq", "~> 5"
+gem "sidekiq", "~> 7"
 
 # Data
 gem "activerecord-import"
