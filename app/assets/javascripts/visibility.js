@@ -1,6 +1,9 @@
 $(document).ready(function() {
   function updateChart(elemId, checked) {
+    if (!Chartkick || !Chartkick.charts['chart-1']) return;
+
     const chart = Chartkick.charts['chart-1'].chart;
+
     const lookupId = elemId.replaceAll('_', '');
     const legendItem = chart.legend.legendItems.find(
       x => x.text.replaceAll('&', '').replace(/\s/g, '').toLowerCase() === lookupId
