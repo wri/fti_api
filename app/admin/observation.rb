@@ -326,7 +326,7 @@ ActiveAdmin.register Observation do
     column :country, sortable: false
     column :fmu, sortable: false
     column :location_information, sortable: false
-    column :monitors, I18n.t("observers.observers"), sortable: false do |o|
+    column I18n.t("observers.observers"), class: "col-monitors", sortable: false do |o|
       links = []
       observers = params["scope"].eql?("recycle_bin") ? o.observers.unscope(where: :deleted_at) : o.observers
       observers.with_translations(I18n.locale).each do |observer|
@@ -336,13 +336,13 @@ ActiveAdmin.register Observation do
     end
     column :observation_type, sortable: "observation_type"
     column :operator, sortable: false
-    column :governments, I18n.t("governments.governments"), sortable: false do |o|
+    column I18n.t("governments.governments"), class: "col-governments", sortable: false do |o|
       governments = params["scope"].eql?("recycle_bin") ? o.governments.unscope(where: :deleted_at) : o.governments
       governments.each_with_object([]) do |government, links|
         links << link_to(government.government_entity, admin_government_path(government.id))
       end.reduce(:+)
     end
-    column :relevant_operators, I18n.t("activerecord.attributes.observation.relevant_operators") do |o|
+    column :relevant_operators do |o|
       links = []
       relevant_operators = params["scope"].eql?("recycle_bin") ? o.relevant_operators.unscope(where: :deleted_at) : o.relevant_operators
       relevant_operators.each do |operator|
@@ -352,26 +352,26 @@ ActiveAdmin.register Observation do
     end
     column :subcategory, sortable: false
 
-    column(:written_infraction, I18n.t("active_admin.laws_page.written_infraction"), sortable: false) { |o| o.law&.written_infraction }
-    column(:infraction, I18n.t("active_admin.laws_page.infraction"), sortable: false) { |o| o.law&.infraction }
-    column(:sanctions, I18n.t("active_admin.laws_page.sanctions"), sortable: false) { |o| o.law&.sanctions }
-    column(:minimum_fine, I18n.t("active_admin.laws_page.min_fine"), sortable: false) { |o| o.law&.min_fine }
-    column(:maximum_fine, I18n.t("active_admin.laws_page.max_fine"), sortable: false) { |o| o.law&.max_fine }
-    column(:currency) { |o| o.law&.currency }
-    column(:penal_servitude, sortable: false) { |o| o.law&.penal_servitude }
-    column(:other_penalties, sortable: false) { |o| o.law&.other_penalties }
-    column(:indicator_apv, I18n.t("active_admin.laws_page.indicator_apv"), sortable: false) { |o| o.law&.apv }
+    column(I18n.t("active_admin.laws_page.written_infraction"), class: "col-written_infraction", sortable: false) { |o| o.law&.written_infraction }
+    column(I18n.t("active_admin.laws_page.infraction"), class: "col-infration", sortable: false) { |o| o.law&.infraction }
+    column(I18n.t("active_admin.laws_page.sanctions"), class: "col-sanctions", sortable: false) { |o| o.law&.sanctions }
+    column(I18n.t("active_admin.laws_page.min_fine"), class: "col-minimum_fine", sortable: false) { |o| o.law&.min_fine }
+    column(I18n.t("active_admin.laws_page.max_fine"), class: "col-maximum_fine", sortable: false) { |o| o.law&.max_fine }
+    column(I18n.t("activerecord.attributes.law.currency"), class: "col-currency") { |o| o.law&.currency }
+    column(I18n.t("activerecord.attributes.law.penal_servitude"), class: "col-penal_servitude", sortable: false) { |o| o.law&.penal_servitude }
+    column(I18n.t("activerecord.attributes.law.other_penalties"), class: "col-other_penalties", sortable: false) { |o| o.law&.other_penalties }
+    column(I18n.t("active_admin.laws_page.indicator_apv"), class: "col-indicator_apv", sortable: false) { |o| o.law&.apv }
 
-    column :severity, I18n.t("activerecord.models.severity"), sortable: false do |o|
+    column I18n.t("activerecord.models.severity"), class: "col-severity", sortable: false do |o|
       o&.severity&.level
     end
     column :publication_date, sortable: true
-    column :actions_taken, I18n.t("activerecord.attributes.observation.actions_taken"), sortable: false do |o|
+    column :actions_taken, sortable: false do |o|
       o.actions_taken[0..100] + ((o.actions_taken.length >= 100) ? "..." : "") if o.actions_taken
     end
-    column :details
+    column I18n.t("activerecord.attributes.observation/translation.details"), class: "col-details", &:details
     column :evidence_type
-    column :evidence, I18n.t("active_admin.menu.independent_monitoring.evidence") do |o|
+    column I18n.t("active_admin.menu.independent_monitoring.evidence"), class: "col-evidence" do |o|
       links = []
       o.observation_documents.each do |d|
         links << link_to(d.name, admin_evidences_path(d.id))
@@ -379,7 +379,7 @@ ActiveAdmin.register Observation do
       links.reduce(:+)
     end
     column :evidence_on_report, sortable: false
-    column :concern_opinion, I18n.t("activerecord.attributes.observation/translation.concern_opinion") do |o|
+    column I18n.t("activerecord.attributes.observation/translation.concern_opinion"), class: "col-concern_opinion" do |o|
       o.concern_opinion[0..100] + ((o.concern_opinion.length >= 100) ? "..." : "") if o.concern_opinion
     end
     column :pv, sortable: false
@@ -388,7 +388,7 @@ ActiveAdmin.register Observation do
     column :lng, sortable: false
     column :is_physical_place, sortable: false
     column :litigation_status
-    column :report, I18n.t("document_types.Report"), sortable: false do |o|
+    column I18n.t("document_types.Report"), class: "col-report", sortable: false do |o|
       title = o.observation_report.title[0..100] + ((o.observation_report.title.length >= 100) ? "..." : "") if o.observation_report&.title
       link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
@@ -397,7 +397,7 @@ ActiveAdmin.register Observation do
     column :responsible_admin
     column :user, sortable: false
     column :modified_user, sortable: false
-    column :modified_user_language, I18n.t("active_admin.observations_page.modified_user_language"), sortable: false do |o|
+    column I18n.t("active_admin.observations_page.modified_user_language"), class: "col-modified_user_language", sortable: false do |o|
       o.modified_user&.locale
     end
     column :created_at
