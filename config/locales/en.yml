@@ -295,13 +295,6 @@ en:
       all_groups: 'All Groups'
       all_forest_types: 'All Forest Types'
       fmu_country: 'Fmu/Country'
-      valid_expired: 'Valid & Expired'
-      not_provided: 'Not Provided'
-      pending: 'Pending'
-      invalid: 'Invalid'
-      valid: 'Valid'
-      expired: 'Expired'
-      not_required: 'Not Required'
     observation_reports_dashboard_page:
       name: 'Observation Reports Dashboard'
       reports: 'Reports'
@@ -1183,6 +1176,13 @@ en:
         document_type: Document type  #g
         fmu_forest_type: Fmu forest type  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
+        valid_and_expired_count: Valid & Expired
+        not_provided_count: Not Provided
+        pending_count: Pending
+        invalid_count: Invalid
+        valid_count: Valid
+        expired_count: Expired
+        not_required_count: Not Required
 
       paper_trail/version:
         event: Event  #g

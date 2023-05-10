@@ -304,13 +304,6 @@ fr:
       all_groups: 'Tous les groupes'
       all_forest_types: 'Tous types de forêts'
       fmu_country: 'Fmu/Pays'
-      valid_expired: 'Valide & Expiré'
-      not_provided: 'Non fourni'
-      pending: 'En attente'
-      invalid: 'Invalide'
-      valid: 'Valide'
-      expired: 'Expiré'
-      not_required: 'Not Requis'
     observation_reports_dashboard_page:
       name: "Tableau de bord du rapport d'observation"
       reports: 'Rapports'
@@ -1091,6 +1084,13 @@ fr:
         document_type: Type de document  #g
         fmu_forest_type: Type de forêt Fmu  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
+        valid_and_expired_count: 'Valide & Expiré'
+        not_provided_count: 'Non fourni'
+        pending_count: 'En attente'
+        invalid_count: 'Invalide'
+        valid_count: 'Valide'
+        expired_count: 'Expiré'
+        not_required_count: 'Not Requis'
 
       paper_trail/version:
         event: Événement  #g

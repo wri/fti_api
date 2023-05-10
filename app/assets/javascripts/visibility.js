@@ -9,12 +9,11 @@ $(document).ready(function() {
     if (!Chartkick || !Chartkick.charts['chart-1']) return;
 
     const chart = Chartkick.charts['chart-1'].chart;
+    const dataset = chart.data.datasets.find(x => x.id === elemId);
 
-    const lookupId = elemId.replaceAll('_', '');
-    const legendItem = chart.legend.legendItems.find(
-      x => x.text.replaceAll('&', '').replace(/\s/g, '').toLowerCase() === lookupId
-    );
-    if (legendItem) {
+    if (dataset) {
+      const datasetIndex = chart.data.datasets.indexOf(dataset);
+      const legendItem = chart.legend.legendItems.find(x => x.datasetIndex === datasetIndex);
       legendItem.hidden = !checked;
 
       if (checked) {
@@ -38,7 +37,8 @@ $(document).ready(function() {
       const oldOnClick = chart.legend.options.onClick;
 
       const newLegendClickHandler = function (e, legendItem, legend) {
-        const id = legendItem.text.replaceAll(' & ', ' ').replaceAll(' ', '_').toLowerCase();
+        const dataset = chart.data.datasets[legendItem.datasetIndex];
+        const id = dataset.id;
         const column = $(`.col-${id}`);
 
         $('#' + id).prop('checked', legendItem.hidden);
