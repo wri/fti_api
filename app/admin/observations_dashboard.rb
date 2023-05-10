@@ -130,6 +130,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
 
     panel "Visible columns" do
       render partial: "fields", locals: {
+        page: "observations_dashboard",
         attributes: [
           ["date", I18n.t("activerecord.attributes.operator_document_statistic.date"), :checked],
           ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one"), :checked],

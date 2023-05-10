@@ -88,6 +88,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
 
     panel I18n.t("active_admin.producer_documents_dashboard_page.visible_columns") do
       render partial: "fields", locals: {
+        page: "producer_documents_dashboard",
         attributes: [
           ["date", I18n.t("activerecord.attributes.operator_document_statistic.date"), :checked],
           ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one"), :checked],

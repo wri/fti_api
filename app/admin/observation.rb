@@ -414,6 +414,7 @@ ActiveAdmin.register Observation do
       # TODO Translate this
       render partial: "fields",
         locals: {
+          page: "observations",
           attributes: [
             ["is_active", I18n.t("activerecord.attributes.observation.is_active"), :checked],
             ["hidden", I18n.t("activerecord.attributes.observation.hidden"), :checked],
