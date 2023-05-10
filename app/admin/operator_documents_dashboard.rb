@@ -58,13 +58,13 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
         r.document_type.humanize
       end
     end
-    column I18n.t("active_admin.producer_documents_dashboard_page.valid_expired"), sortable: false, &:valid_and_expired_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.valid"), sortable: false, &:valid_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.expired"), sortable: false, &:expired_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.pending"), sortable: false, &:pending_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.invalid"), sortable: false, &:invalid_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.not_required"), sortable: false, &:not_required_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.not_provided"), sortable: false, &:not_provided_count
+    column I18n.t("active_admin.producer_documents_dashboard_page.valid_expired"), class: "col-valid_expired", sortable: false, &:valid_and_expired_count
+    column I18n.t("active_admin.producer_documents_dashboard_page.valid"), class: "col-valid", sortable: false, &:valid_count
+    column I18n.t("active_admin.producer_documents_dashboard_page.expired"), class: "col-expired", sortable: false, &:expired_count
+    column I18n.t("active_admin.producer_documents_dashboard_page.pending"), class: "col-pending", sortable: false, &:pending_count
+    column I18n.t("active_admin.producer_documents_dashboard_page.invalid"), class: "col-invalid", sortable: false, &:invalid_count
+    column I18n.t("active_admin.producer_documents_dashboard_page.not_required"), class: "col-not_required", sortable: false, &:not_required_count
+    column I18n.t("active_admin.producer_documents_dashboard_page.not_provided"), class: "col-not_provided", sortable: false, &:not_provided_count
 
     chart_collection = if params.dig(:q, :by_country).present?
       collection

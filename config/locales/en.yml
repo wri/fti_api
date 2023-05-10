@@ -938,6 +938,18 @@ en:
         severity_level: Severity level  #g
         subcategory: :activerecord.models.subcategory  #g
         validation_status: Validation status  #g
+        created: :shared.created
+        ready_for_qc: :activerecord.enums.observation.statuses.Ready for QC
+        qc_in_progress: :activerecord.enums.observation.statuses.QC in progress
+        approved: :activerecord.enums.observation.statuses.Approved
+        rejected: :activerecord.enums.observation.statuses.Rejected
+        needs_revision: :activerecord.enums.observation.statuses.Needs Revision
+        ready_for_publication: :activerecord.enums.observation.statuses.Ready for publication
+        published_no_comments: :activerecord.enums.observation.statuses.Published (no comments)
+        published_not_modified: :activerecord.enums.observation.statuses.Published (modified)
+        published_modified: :activerecord.enums.observation.statuses.Published (not modified)
+        published_all: :active_admin.observations_dashboard_page.published_all
+        total_count: :active_admin.observation_reports_dashboard_page.total_count
 
       observer:
         address: Address  #g
