@@ -76,7 +76,7 @@ ActiveAdmin.register Operator, as: "Producer" do
     end
   end
 
-  index title: I18n.t("active_admin.operator_page.producer") do
+  index title: proc { I18n.t("active_admin.operator_page.producer") } do
     column :is_active
     column :id
     column :holding

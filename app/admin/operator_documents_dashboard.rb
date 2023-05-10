@@ -26,7 +26,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
   filter :fmu_forest_type_eq, label: proc { I18n.t("activerecord.attributes.fmu.forest_type") }, as: :select, collection: -> { ForestType.select_collection }
   filter :date
 
-  index title: I18n.t("active_admin.producer_documents_dashboard_page.name"), pagination_total: false do
+  index title: proc { I18n.t("active_admin.producer_documents_dashboard_page.name") }, pagination_total: false do
     column :date do |resource|
       resource.date.to_date
     end

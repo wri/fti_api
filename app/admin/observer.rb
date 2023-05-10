@@ -32,7 +32,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
     column :updated_at
   end
 
-  index title: I18n.t("activerecord.models.observer") do
+  index title: proc { I18n.t("activerecord.models.observer") } do
     column :is_active
     column :public_info
     # TODO: Reactivate rubocop and fix this

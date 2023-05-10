@@ -29,7 +29,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
     }
   end
 
-  index title: I18n.t("active_admin.observation_reports_dashboard_page.name") do
+  index title: proc { I18n.t("active_admin.observation_reports_dashboard_page.name") } do
     column :date, sortable: false do |resource|
       resource.date.to_date
     end
