@@ -37,12 +37,12 @@ RSpec.describe "Admin: Visible Columns and Charts", type: :system do
     sleep 1 # wait for chart to be rendered
     # toggle valid visible column and see if column disappear/appear in table and on the chart
     # expect input checkbox to be checked
-    expect(page).to have_field("valid", checked: true)
+    expect(page).to have_checked_field("valid")
     expect(page).to have_selector("th.col-valid", visible: true)
     expect(get_legend_item("Valid")["hidden"]).to eq(false)
     page.uncheck("valid")
-    expect(page).to have_field("valid", checked: false)
-    expect(page).to have_selector("th.col-valid", visible: false)
+    expect(page).not_to have_checked_field("valid")
+    expect(page).not_to have_selector("th.col-valid", visible: true)
     expect(get_legend_item("Valid")["hidden"]).to eq(true)
     # toggle valid in chart legend and see if column disappear/appear in table and on the chart and checkbox is changed as well
     legend_item_valid_hitbox = get_legend_item_hitbox("Valid")
@@ -51,14 +51,30 @@ RSpec.describe "Admin: Visible Columns and Charts", type: :system do
     legend_item_valid_x = chart_x + legend_item_valid_hitbox["left"] + 10
     legend_item_valid_y = chart_y + legend_item_valid_hitbox["top"] + 3
     page.driver.click(legend_item_valid_x, legend_item_valid_y)
-    expect(page).to have_field("valid", checked: true)
+    expect(page).to have_checked_field("valid")
     expect(page).to have_selector("th.col-valid", visible: true)
     expect(get_legend_item("Valid")["hidden"]).to eq(false)
     # once there was something wrong after clicking on the legend item, so test clicking on checkbox again
     page.uncheck("valid")
-    expect(page).to have_field("valid", checked: false)
-    expect(page).to have_selector("th.col-valid", visible: false)
+    expect(page).not_to have_checked_field("valid")
+    expect(page).not_to have_selector("th.col-valid", visible: true)
     expect(get_legend_item("Valid")["hidden"]).to eq(true)
+  end
+
+  it "should save columns visibility in local storage" do
+    sleep 1 # wait for chart to be rendered
+    # expect input checkbox to be checked
+    expect(page).to have_checked_field("valid")
+    expect(page).to have_selector("th.col-valid", visible: true)
+    page.uncheck("valid")
+    expect(page).not_to have_checked_field("valid")
+    expect(page).not_to have_selector("th.col-valid", visible: true)
+    # reload page
+    page.evaluate_script("window.location.reload()")
+    sleep 1 # wait for chart to be rendered
+    # expect checkbox to still be unchecked
+    expect(page).not_to have_checked_field("valid")
+    expect(page).not_to have_selector("th.col-valid", visible: true)
   end
 
   def get_legend_item(name)
