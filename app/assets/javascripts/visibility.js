@@ -26,13 +26,6 @@ $(document).ready(function() {
 
   setTimeout(function() {
     if (Chartkick && Chartkick.charts['chart-1']) {
-      Chartkick.charts['chart-1'].redraw();
-      setTimeout(updateColumnVisiblity, 100);
-    }
-  }, 50);
-
-  setTimeout(function() {
-    if (Chartkick && Chartkick.charts['chart-1']) {
       const chart = Chartkick.charts['chart-1'].chart;
       const oldOnClick = chart.legend.options.onClick;
 
