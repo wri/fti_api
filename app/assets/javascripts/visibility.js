@@ -40,9 +40,15 @@ $(document).ready(function() {
         const dataset = chart.data.datasets[legendItem.datasetIndex];
         const id = dataset.id;
         const column = $(`.col-${id}`);
+        const checked = legendItem.hidden;
 
-        $('#' + id).prop('checked', legendItem.hidden);
-        column.toggleClass('hide', !legendItem.hidden);
+        $('#' + id).prop('checked', checked);
+        column.toggleClass('hide', !checked);
+
+        if (saveToLocalStorage) {
+          const savedColumns = JSON.parse(localStorage.getItem(localStorageKey) || "{}");
+          localStorage.setItem(localStorageKey, JSON.stringify({ ...savedColumns, [id]: checked }));
+        }
         oldOnClick.apply(this, [e, legendItem, legend]);
       };
       chart.legend.options.onClick = newLegendClickHandler;

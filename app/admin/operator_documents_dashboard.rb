@@ -88,7 +88,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
         get_score.call(:invalid_count, hidden),
         get_score.call(:valid_and_expired_count),
         get_score.call(:valid_count),
-        get_score.call(:expired_count, hidden),
+        get_score.call(:expired_count),
         get_score.call(:not_required_count, hidden)
       ]
     }
