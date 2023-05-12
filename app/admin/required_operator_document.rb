@@ -79,7 +79,7 @@ ActiveAdmin.register RequiredOperatorDocument do
         f.input :forest_types, as: :string, input_html: {disabled: editing}
       else
         f.input :forest_types, as: :select, multiple: true,
-          collection: -> { ForestType.select_collection },
+          collection: ForestType.select_collection,
           include_blank: true
       end
 
