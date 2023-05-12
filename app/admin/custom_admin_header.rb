@@ -151,6 +151,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
         end
       end
     end
-    div id: "jump-to-page", "data-value": I18n.t("active_admin.js.jump_to_page")
+    # workaround for translating jump to page string
+    div id: "jump-to-page", style: "display: none;", "data-value": I18n.t("active_admin.js.jump_to_page")
   end
 end

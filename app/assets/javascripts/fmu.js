@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  const forestType = document.getElementById('fmu_forest_type');
-  if (forestType== null || $(forestType).prop('disabled') == true){
+  const forestType = $('#fmu_forest_type:not([type="checkbox"])');
+  if (forestType.length === 0 || forestType.prop('disabled') == true){
     return
   }
   updateFmuFields();

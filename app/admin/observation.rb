@@ -326,7 +326,7 @@ ActiveAdmin.register Observation do
     column :country, sortable: false
     column :fmu, sortable: false
     column :location_information, sortable: false
-    column I18n.t("observers.observers"), sortable: false do |o|
+    column I18n.t("observers.observers"), class: "col-monitors", sortable: false do |o|
       links = []
       observers = params["scope"].eql?("recycle_bin") ? o.observers.unscope(where: :deleted_at) : o.observers
       observers.with_translations(I18n.locale).each do |observer|
@@ -336,13 +336,13 @@ ActiveAdmin.register Observation do
     end
     column :observation_type, sortable: "observation_type"
     column :operator, sortable: false
-    column I18n.t("governments.governments"), sortable: false do |o|
+    column I18n.t("governments.governments"), class: "col-governments", sortable: false do |o|
       governments = params["scope"].eql?("recycle_bin") ? o.governments.unscope(where: :deleted_at) : o.governments
       governments.each_with_object([]) do |government, links|
         links << link_to(government.government_entity, admin_government_path(government.id))
       end.reduce(:+)
     end
-    column I18n.t("activerecord.attributes.observation.relevant_operators") do |o|
+    column :relevant_operators do |o|
       links = []
       relevant_operators = params["scope"].eql?("recycle_bin") ? o.relevant_operators.unscope(where: :deleted_at) : o.relevant_operators
       relevant_operators.each do |operator|
@@ -352,26 +352,26 @@ ActiveAdmin.register Observation do
     end
     column :subcategory, sortable: false
 
-    column(I18n.t("active_admin.laws_page.written_infraction"), sortable: false) { |o| o.law&.written_infraction }
-    column(I18n.t("active_admin.laws_page.infraction"), sortable: false) { |o| o.law&.infraction }
-    column(I18n.t("active_admin.laws_page.sanctions"), sortable: false) { |o| o.law&.sanctions }
-    column(I18n.t("active_admin.laws_page.min_fine"), sortable: false) { |o| o.law&.min_fine }
-    column(I18n.t("active_admin.laws_page.max_fine"), sortable: false) { |o| o.law&.max_fine }
-    column(:currency) { |o| o.law&.currency }
-    column(:penal_servitude, sortable: false) { |o| o.law&.penal_servitude }
-    column(:other_penalties, sortable: false) { |o| o.law&.other_penalties }
-    column(I18n.t("active_admin.laws_page.indicator_apv"), sortable: false) { |o| o.law&.apv }
+    column(I18n.t("active_admin.laws_page.written_infraction"), class: "col-written_infraction", sortable: false) { |o| o.law&.written_infraction }
+    column(I18n.t("active_admin.laws_page.infraction"), class: "col-infration", sortable: false) { |o| o.law&.infraction }
+    column(I18n.t("active_admin.laws_page.sanctions"), class: "col-sanctions", sortable: false) { |o| o.law&.sanctions }
+    column(I18n.t("active_admin.laws_page.min_fine"), class: "col-minimum_fine", sortable: false) { |o| o.law&.min_fine }
+    column(I18n.t("active_admin.laws_page.max_fine"), class: "col-maximum_fine", sortable: false) { |o| o.law&.max_fine }
+    column(I18n.t("activerecord.attributes.law.currency"), class: "col-currency") { |o| o.law&.currency }
+    column(I18n.t("activerecord.attributes.law.penal_servitude"), class: "col-penal_servitude", sortable: false) { |o| o.law&.penal_servitude }
+    column(I18n.t("activerecord.attributes.law.other_penalties"), class: "col-other_penalties", sortable: false) { |o| o.law&.other_penalties }
+    column(I18n.t("active_admin.laws_page.indicator_apv"), class: "col-indicator_apv", sortable: false) { |o| o.law&.apv }
 
-    column I18n.t("activerecord.models.severity"), sortable: false do |o|
+    column I18n.t("activerecord.models.severity"), class: "col-severity", sortable: false do |o|
       o&.severity&.level
     end
     column :publication_date, sortable: true
-    column I18n.t("activerecord.attributes.observation.actions_taken"), sortable: false do |o|
+    column :actions_taken, sortable: false do |o|
       o.actions_taken[0..100] + ((o.actions_taken.length >= 100) ? "..." : "") if o.actions_taken
     end
-    column :details
+    column I18n.t("activerecord.attributes.observation/translation.details"), class: "col-details", &:details
     column :evidence_type
-    column I18n.t("active_admin.menu.independent_monitoring.evidence") do |o|
+    column I18n.t("active_admin.menu.independent_monitoring.evidence"), class: "col-evidence" do |o|
       links = []
       o.observation_documents.each do |d|
         links << link_to(d.name, admin_evidences_path(d.id))
@@ -379,7 +379,7 @@ ActiveAdmin.register Observation do
       links.reduce(:+)
     end
     column :evidence_on_report, sortable: false
-    column I18n.t("activerecord.attributes.observation/translation.concern_opinion") do |o|
+    column I18n.t("activerecord.attributes.observation/translation.concern_opinion"), class: "col-concern_opinion" do |o|
       o.concern_opinion[0..100] + ((o.concern_opinion.length >= 100) ? "..." : "") if o.concern_opinion
     end
     column :pv, sortable: false
@@ -388,7 +388,7 @@ ActiveAdmin.register Observation do
     column :lng, sortable: false
     column :is_physical_place, sortable: false
     column :litigation_status
-    column I18n.t("document_types.Report"), sortable: false do |o|
+    column I18n.t("document_types.Report"), class: "col-report", sortable: false do |o|
       title = o.observation_report.title[0..100] + ((o.observation_report.title.length >= 100) ? "..." : "") if o.observation_report&.title
       link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
@@ -397,7 +397,7 @@ ActiveAdmin.register Observation do
     column :responsible_admin
     column :user, sortable: false
     column :modified_user, sortable: false
-    column I18n.t("active_admin.observations_page.modified_user_language"), sortable: false do |o|
+    column I18n.t("active_admin.observations_page.modified_user_language"), class: "col-modified_user_language", sortable: false do |o|
       o.modified_user&.locale
     end
     column :created_at
@@ -413,14 +413,56 @@ ActiveAdmin.register Observation do
     panel I18n.t("active_admin.producer_documents_dashboard_page.visible_columns") do
       # TODO Translate this
       render partial: "fields",
-        locals: {attributes: %w[active hidden status country fmu location_information observers observation_type
-          operator governments relevant_operators subcategory
-          illegality_as_written_by_law legal_reference_illegality
-          legal_reference_penalties minimum_fine maximum_fine currency penal_servitude
-          other_penalties indicator_apv severity publication_date actions_taken
-          details evidence_type evidences evidence_in_the_report concern_opinion pv location_accuracy
-          lat lng is_physical_place litigation_status report admin_comment monitor_comment
-          responsible_admin user modified_user modified_user_language created_at updated_at deleted_at]}
+        locals: {
+          page: "observations",
+          attributes: [
+            ["is_active", I18n.t("activerecord.attributes.observation.is_active"), :checked],
+            ["hidden", I18n.t("activerecord.attributes.observation.hidden"), :checked],
+            ["status", I18n.t("shared.status"), :checked],
+            ["country", I18n.t("activerecord.attributes.observation.country.one"), :checked],
+            ["fmu", I18n.t("activerecord.attributes.observation.fmu.one"), :checked],
+            ["location_information", I18n.t("activerecord.attributes.observation.location_information"), :checked],
+            ["monitors", I18n.t("observers.observers"), :checked],
+            ["observation_type", I18n.t("activerecord.attributes.observation.observation_type"), :checked],
+            ["operator", I18n.t("activerecord.attributes.observation.operator"), :checked],
+            ["governments", I18n.t("activerecord.attributes.observation.governments"), :checked],
+            ["relevant_operators", I18n.t("activerecord.attributes.observation.relevant_operators"), :checked],
+            ["subcategory", I18n.t("activerecord.attributes.observation.subcategory"), :checked],
+            ["written_infraction", I18n.t("active_admin.laws_page.written_infraction"), :checked],
+            ["infraction", I18n.t("active_admin.laws_page.infraction"), :checked],
+            ["sanctions", I18n.t("active_admin.laws_page.sanctions"), :checked],
+            ["minimum_fine", I18n.t("active_admin.laws_page.min_fine"), :checked],
+            ["maximum_fine", I18n.t("active_admin.laws_page.max_fine"), :checked],
+            ["currency", I18n.t("activerecord.attributes.law.currency"), :checked],
+            ["penal_servitude", I18n.t("activerecord.attributes.law.penal_servitude"), :checked],
+            ["other_penalties", I18n.t("activerecord.attributes.law.other_penalties"), :checked],
+            ["indicator_apv", I18n.t("active_admin.laws_page.indicator_apv"), :checked],
+            ["severity", I18n.t("activerecord.models.severity"), :checked],
+            ["publication_date", I18n.t("activerecord.attributes.observation.publication_date"), :checked],
+            ["actions_taken", I18n.t("activerecord.attributes.observation.actions_taken"), :checked],
+            ["details", I18n.t("activerecord.attributes.observation/translation.details"), :checked],
+            ["evidence_type", I18n.t("activerecord.attributes.observation.evidence_type"), :checked],
+            ["evidence", I18n.t("active_admin.menu.independent_monitoring.evidence"), :checked],
+            ["evidence_on_report", I18n.t("activerecord.attributes.observation.evidence_on_report"), :checked],
+            ["concern_opinion", I18n.t("activerecord.attributes.observation/translation.concern_opinion"), :checked],
+            ["pv", I18n.t("activerecord.attributes.observation.pv"), :checked],
+            ["location_accuracy", I18n.t("activerecord.attributes.observation.location_accuracy"), :checked],
+            ["lat", I18n.t("activerecord.attributes.observation.lat"), :checked],
+            ["lng", I18n.t("activerecord.attributes.observation.lng"), :checked],
+            ["is_physical_place", I18n.t("activerecord.attributes.observation.is_physical_place"), :checked],
+            ["litigation_status", I18n.t("activerecord.attributes.observation/translation.litigation_status"), :checked],
+            ["report", I18n.t("document_types.Report"), :checked],
+            ["admin_comment", I18n.t("activerecord.attributes.observation.admin_comment"), :checked],
+            ["monitor_comment", I18n.t("activerecord.attributes.observation.monitor_comment"), :checked],
+            ["responsible_admin", Observation.human_attribute_name(:responsible_admin), :checked],
+            ["user", I18n.t("activerecord.attributes.observation.user"), :checked],
+            ["modified_user", Observation.human_attribute_name(:modified_user), :checked],
+            ["modified_user_language", I18n.t("active_admin.observations_page.modified_user_language"), :checked],
+            ["created_at", Observation.human_attribute_name(:created_at), :checked],
+            ["updated_at", Observation.human_attribute_name(:updated_at), :checked],
+            ["deleted_at", Observation.human_attribute_name(:deleted_at), :checked]
+          ]
+        }
     end
   end
 

@@ -304,13 +304,6 @@ fr:
       all_groups: 'Tous les groupes'
       all_forest_types: 'Tous types de forêts'
       fmu_country: 'Fmu/Pays'
-      valid_expired: 'Valide & Expiré'
-      not_provided: 'Non fourni'
-      pending: 'En attente'
-      invalid: 'Invalide'
-      valid: 'Valide'
-      expired: 'Expiré'
-      not_required: 'Not Requis'
     observation_reports_dashboard_page:
       name: "Tableau de bord du rapport d'observation"
       reports: 'Rapports'
@@ -845,6 +838,18 @@ fr:
         severity_level: Degré de gravité  #g
         subcategory: :activerecord.models.subcategory  #g
         validation_status: Statut de validation  #g
+        created: :shared.created
+        ready_for_qc: :activerecord.enums.observation.statuses.Ready for QC
+        qc_in_progress: :activerecord.enums.observation.statuses.QC in progress
+        approved: :activerecord.enums.observation.statuses.Approved
+        rejected: :activerecord.enums.observation.statuses.Rejected
+        needs_revision: :activerecord.enums.observation.statuses.Needs revision
+        ready_for_publication: :activerecord.enums.observation.statuses.Ready for publication
+        published_no_comments: :activerecord.enums.observation.statuses.Published (no comments)
+        published_not_modified: :activerecord.enums.observation.statuses.Published (modified)
+        published_modified: :activerecord.enums.observation.statuses.Published (not modified)
+        published_all: :active_admin.observations_dashboard_page.published_all
+        total_count: :active_admin.observation_reports_dashboard_page.total_count
 
       observer:
         address: Adresse  #g
@@ -1079,6 +1084,13 @@ fr:
         document_type: Type de document  #g
         fmu_forest_type: Type de forêt Fmu  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
+        valid_and_expired_count: 'Valide & Expiré'
+        not_provided_count: 'Non fourni'
+        pending_count: 'En attente'
+        invalid_count: 'Invalide'
+        valid_count: 'Valide'
+        expired_count: 'Expiré'
+        not_required_count: 'Not Requis'
 
       paper_trail/version:
         event: Événement  #g

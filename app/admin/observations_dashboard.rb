@@ -41,7 +41,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     }
   end
 
-  index title: I18n.t("active_admin.observations_dashboard_page.name") do
+  index title: proc { I18n.t("active_admin.observations_dashboard_page.name") } do
     column :date, sortable: false do |resource|
       resource.date.to_date
     end
@@ -104,74 +104,64 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     column :published_modified
     column :published_all
     column :total_count, sortable: false
-    show_on_chart = if params.dig(:q, :country_id_eq).present?
+    chart_collection = if params.dig(:q, :country_id_eq).present?
       collection
     else
       collection.select { |r| r.country_id.nil? }
     end
-    grouped_sod = show_on_chart.group_by(&:date)
+    chart_collection_by_date = chart_collection.group_by(&:date)
     hidden = {dataset: {hidden: true}}
-    get_data = ->(&block) { grouped_sod.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
+    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
+    get_score = ->(score_key, options = {}) {
+      {
+        name: ObservationStatistic.human_attribute_name(score_key),
+        data: get_data.call(&score_key),
+        **{dataset: {id: score_key.to_s}}.deep_merge(options)
+      }
+    }
+
     render partial: "score_evolution", locals: {
       scores: [
-        {name: "Created", **hidden, data: get_data.call(&:created)},
-        {name: "Ready for QC", **hidden, data: get_data.call(&:ready_for_qc)},
-        {name: "QC in Progress", **hidden, data: get_data.call(&:qc_in_progress)},
-        {name: "Approved", **hidden, data: get_data.call(&:approved)},
-        {name: "Rejected", **hidden, data: get_data.call(&:rejected)},
-        {name: "Needs Revision", **hidden, data: get_data.call(&:needs_revision)},
-        {name: "Ready for publication", **hidden, data: get_data.call(&:ready_for_publication)},
-        {name: "Published no comments", **hidden, data: get_data.call(&:published_no_comments)},
-        {name: "Published not modified", **hidden, data: get_data.call(&:published_not_modified)},
-        {name: "Published modified", **hidden, data: get_data.call(&:published_modified)},
-        {name: "Published all", **hidden, data: get_data.call(&:published_all)}
+        get_score.call(:created, hidden),
+        get_score.call(:ready_for_qc, hidden),
+        get_score.call(:qc_in_progress, hidden),
+        get_score.call(:approved, hidden),
+        get_score.call(:rejected, hidden),
+        get_score.call(:needs_revision, hidden),
+        get_score.call(:ready_for_publication, hidden),
+        get_score.call(:published_no_comments, hidden),
+        get_score.call(:published_not_modified, hidden),
+        get_score.call(:published_modified, hidden),
+        get_score.call(:published_all, hidden)
       ]
     }
 
     panel "Visible columns" do
       render partial: "fields", locals: {
+        page: "observations_dashboard",
         attributes: [
-          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date")],
-          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one")],
-          ["is_active", I18n.t("activerecord.attributes.observation.is_active")],
-          ["hidden", I18n.t("activerecord.attributes.observation.hidden")],
+          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date"), :checked],
+          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one"), :checked],
           ["observation_type", I18n.t("activerecord.attributes.observation.observation_type")],
           ["operator", I18n.t("activerecord.models.operator")],
+          ["fmu_forest_type", I18n.t("activerecord.attributes.observation_history.fmu_forest_type")],
           ["severity_level", I18n.t("activerecord.attributes.severity.level")],
           ["category", I18n.t("activerecord.models.category.one")],
           ["subcategory", I18n.t("activerecord.models.subcategory")],
-          ["fmu_forest_type", I18n.t("activerecord.attributes.observation_history.fmu_forest_type")],
-          ["created", I18n.t("shared.created")],
-          ["ready_for_qc", I18n.t("activerecord.enums.observation.statuses.Ready for QC")],
-          ["qc_in_progress", I18n.t("activerecord.enums.observation.statuses.QC in progress")],
-          ["approved", I18n.t("activerecord.enums.observation.statuses.Approved")],
-          ["rejected", I18n.t("activerecord.enums.observation.statuses.Rejected")],
-          ["needs_revision", I18n.t("activerecord.enums.observation.statuses.Needs revision")],
-          ["ready_for_publication", I18n.t("activerecord.enums.observation.statuses.Ready for publication")],
-          ["published_no_comments", I18n.t("activerecord.enums.observation.statuses.Published (no comments)")],
-          ["published_modified", I18n.t("activerecord.enums.observation.statuses.Published (modified)")],
-          ["published_not_modified", I18n.t("activerecord.enums.observation.statuses.Published (not modified)")],
-          ["published_all", I18n.t("active_admin.observations_dashboard_page.published_all")],
-          ["total_count", I18n.t("active_admin.observation_reports_dashboard_page.total_count")]
-        ],
-        unchecked: [
-          ["operator", I18n.t("activerecord.models.operator")],
-          ["severity_level", I18n.t("activerecord.attributes.observation_history.severity_level")],
-          ["observation_type", I18n.t("activerecord.attributes.observation.observation_type")],
-          ["category", I18n.t("activerecord.models.category.one")],
-          ["subcategory", I18n.t("activerecord.models.subcategory")],
-          ["fmu_forest_type", I18n.t("activerecord.attributes.observation_history.fmu_forest_type")],
-          ["ready_for_qc", I18n.t("activerecord.enums.observation.statuses.Ready for QC")],
-          ["approved", I18n.t("activerecord.enums.observation.statuses.Approved")],
-          ["rejected", I18n.t("activerecord.enums.observation.statuses.Rejected")],
-          ["needs_revision", I18n.t("activerecord.enums.observation.statuses.Needs revision")],
-          ["ready_for_publication", I18n.t("activerecord.enums.observation.statuses.Ready for publication")],
-          ["published_no_comments", I18n.t("activerecord.enums.observation.statuses.Published (no comments)")],
-          ["published_modified", I18n.t("activerecord.enums.observation.statuses.Published (modified)")],
-          ["published_not_modified", I18n.t("activerecord.enums.observation.statuses.Published (not modified)")],
-          ["total_count", I18n.t("active_admin.observation_reports_dashboard_page.total_count")],
-          ["created", I18n.t("shared.created")],
-          ["qc_in_progress", I18n.t("activerecord.enums.observation.statuses.QC in progress")]
+          ["is_active", I18n.t("activerecord.attributes.observation.is_active"), :checked],
+          ["hidden", I18n.t("activerecord.attributes.observation.hidden"), :checked],
+          ["created", ObservationStatistic.human_attribute_name(:created)],
+          ["ready_for_qc", ObservationStatistic.human_attribute_name(:ready_for_qc)],
+          ["qc_in_progress", ObservationStatistic.human_attribute_name(:qc_in_progress)],
+          ["approved", ObservationStatistic.human_attribute_name(:approved)],
+          ["rejected", ObservationStatistic.human_attribute_name(:rejected)],
+          ["needs_revision", ObservationStatistic.human_attribute_name(:needs_revision)],
+          ["ready_for_publication", ObservationStatistic.human_attribute_name(:ready_for_publication)],
+          ["published_no_comments", ObservationStatistic.human_attribute_name(:published_no_comments)],
+          ["published_modified", ObservationStatistic.human_attribute_name(:published_modified)],
+          ["published_not_modified", ObservationStatistic.human_attribute_name(:published_not_modified)],
+          ["published_all", ObservationStatistic.human_attribute_name(:published_all), :checked],
+          ["total_count", ObservationStatistic.human_attribute_name(:total_count)]
         ]
       }
     end

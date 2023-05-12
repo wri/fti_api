@@ -26,7 +26,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
   filter :fmu_forest_type_eq, label: proc { I18n.t("activerecord.attributes.fmu.forest_type") }, as: :select, collection: -> { ForestType.select_collection }
   filter :date
 
-  index title: I18n.t("active_admin.producer_documents_dashboard_page.name"), pagination_total: false do
+  index title: proc { I18n.t("active_admin.producer_documents_dashboard_page.name") }, pagination_total: false do
     column :date do |resource|
       resource.date.to_date
     end
@@ -58,58 +58,57 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
         r.document_type.humanize
       end
     end
-    column I18n.t("active_admin.producer_documents_dashboard_page.valid_expired"), sortable: false, &:valid_and_expired_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.valid"), sortable: false, &:valid_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.expired"), sortable: false, &:expired_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.pending"), sortable: false, &:pending_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.invalid"), sortable: false, &:invalid_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.not_required"), sortable: false, &:not_required_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.not_provided"), sortable: false, &:not_provided_count
+    column :valid_and_expired_count, sortable: false
+    column :valid_count, sortable: false
+    column :expired_count, sortable: false
+    column :pending_count, sortable: false
+    column :invalid_count, sortable: false
+    column :not_required_count, sortable: false
+    column :not_provided_count, sortable: false
 
-    show_on_chart = if params.dig(:q, :by_country).present?
+    chart_collection = if params.dig(:q, :by_country).present?
       collection
     else
       collection.select { |r| r.country_id.nil? }
     end
-    grouped_sod = show_on_chart.group_by(&:date)
+    chart_collection_by_date = chart_collection.group_by(&:date)
     hidden = {dataset: {hidden: true}}
-    get_data = ->(&block) { grouped_sod.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
+    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
+    get_score = ->(score_key, options = {}) {
+      {
+        name: OperatorDocumentStatistic.human_attribute_name(score_key),
+        data: get_data.call(&score_key),
+        **{dataset: {id: score_key.to_s}}.deep_merge(options)
+      }
+    }
     render partial: "score_evolution", locals: {
       scores: [
-        {name: "Not Provided", **hidden, data: get_data.call(&:not_provided_count)},
-        {name: "Pending", **hidden, data: get_data.call(&:pending_count)},
-        {name: "Invalid", **hidden, data: get_data.call(&:invalid_count)},
-        {name: "Valid & Expired", data: get_data.call(&:valid_and_expired_count)},
-        {name: "Valid", data: get_data.call(&:valid_count)},
-        {name: "Expired", data: get_data.call(&:expired_count)},
-        {name: "Not Required", **hidden, data: get_data.call(&:not_required_count)}
+        get_score.call(:not_provided_count, hidden),
+        get_score.call(:pending_count, hidden),
+        get_score.call(:invalid_count, hidden),
+        get_score.call(:valid_and_expired_count),
+        get_score.call(:valid_count),
+        get_score.call(:expired_count),
+        get_score.call(:not_required_count, hidden)
       ]
     }
 
     panel I18n.t("active_admin.producer_documents_dashboard_page.visible_columns") do
       render partial: "fields", locals: {
+        page: "producer_documents_dashboard",
         attributes: [
-          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date")],
-          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one")],
+          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date"), :checked],
+          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one"), :checked],
           ["required_operator_document_group", I18n.t("activerecord.models.required_operator_document_group.one")],
           ["fmu_forest_type", I18n.t("activerecord.attributes.fmu.forest_type")],
           ["document_type", I18n.t("activerecord.attributes.required_gov_document.document_type")],
-          ["valid_expired", I18n.t("active_admin.producer_documents_dashboard_page.valid_expired")],
-          ["valid", I18n.t("active_admin.producer_documents_dashboard_page.valid")],
-          ["expired", I18n.t("active_admin.producer_documents_dashboard_page.expired")],
-          ["invalid", I18n.t("active_admin.producer_documents_dashboard_page.invalid")],
-          ["pending", I18n.t("active_admin.producer_documents_dashboard_page.pending")],
-          ["not_provided", I18n.t("active_admin.producer_documents_dashboard_page.not_provided")],
-          ["not_required", I18n.t("active_admin.producer_documents_dashboard_page.not_required")]
-        ],
-        unchecked: [
-          ["required_operator_document_group", I18n.t("activerecord.models.required_operator_document_group")],
-          ["fmu_forest_type", I18n.t("activerecord.attributes.observation_history.fmu_forest_type")],
-          ["document_type", I18n.t("activerecord.attributes.required_gov_document.document_type")],
-          ["invalid", I18n.t("active_admin.producer_documents_dashboard_page.invalid")],
-          ["pending", I18n.t("active_admin.producer_documents_dashboard_page.pending")],
-          ["not_provided", I18n.t("active_admin.producer_documents_dashboard_page.not_provided")],
-          ["not_required", I18n.t("active_admin.producer_documents_dashboard_page.not_required")]
+          ["valid_and_expired_count", OperatorDocumentStatistic.human_attribute_name(:valid_and_expired_count), :checked],
+          ["valid_count", OperatorDocumentStatistic.human_attribute_name(:valid_count), :checked],
+          ["expired_count", OperatorDocumentStatistic.human_attribute_name(:expired_count), :checked],
+          ["invalid_count", OperatorDocumentStatistic.human_attribute_name(:invalid_count)],
+          ["pending_count", OperatorDocumentStatistic.human_attribute_name(:pending_count)],
+          ["not_provided_count", OperatorDocumentStatistic.human_attribute_name(:not_provided_count)],
+          ["not_required_count", OperatorDocumentStatistic.human_attribute_name(:not_required_count)]
         ]
       }
     end
@@ -141,13 +140,13 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
         r.document_type.humanize
       end
     end
-    column I18n.t("active_admin.producer_documents_dashboard_page.valid_expired"), &:valid_and_expired_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.valid"), &:valid_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.expired"), &:expired_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.pending"), &:pending_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.invalid"), &:invalid_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.not_required"), &:not_required_count
-    column I18n.t("active_admin.producer_documents_dashboard_page.not_provided"), &:not_provided_count
+    column :valid_and_expired_count
+    column :valid_count
+    column :expired_count
+    column :pending_count
+    column :invalid_count
+    column :not_required_count
+    column :not_provided_count
   end
 
   controller do
