@@ -7,22 +7,6 @@ module V1
     skip_before_action :authenticate
 
     def tree
-      years = Observation.pluck(:publication_date).map { |x| x.year }.uniq.sort
-        .map { |x| {id: x, name: x} }
-
-      severities = [
-        {id: 0, name: I18n.t("filters.unknown")},
-        {id: 1, name: I18n.t("filters.low")},
-        {id: 2, name: I18n.t("filters.medium")},
-        {id: 3, name: I18n.t("filters.high")}
-      ]
-
-      sources = [
-        {id: 1, name: I18n.t("filters.company")},
-        {id: 2, name: I18n.t("filters.forest_atlas")},
-        {id: 3, name: I18n.t("filters.other")}
-      ]
-
       filters = {
         validation_status: validation_statuses,
         observation_type: types,
@@ -44,15 +28,35 @@ module V1
 
     private
 
+    def years
+      Observation.published.pluck(:publication_date).map { |x| x.year }.uniq.sort.reverse
+        .map { |x| {id: x, name: x} }
+    end
+
+    def severities
+      [
+        {id: 0, name: I18n.t("filters.unknown")},
+        {id: 1, name: I18n.t("filters.low")},
+        {id: 2, name: I18n.t("filters.medium")},
+        {id: 3, name: I18n.t("filters.high")}
+      ]
+    end
+
+    def sources
+      [
+        {id: 1, name: I18n.t("filters.company")},
+        {id: 2, name: I18n.t("filters.forest_atlas")},
+        {id: 3, name: I18n.t("filters.other")}
+      ]
+    end
+
     def types
       categories_operator = Category.where(category_type: "operator").pluck(:id)
       categories_government = Category.where(category_type: "government").pluck(:id)
-      [{id: "operator", name: I18n.t("filters.operator"), categories: categories_operator.uniq},
-        {id: "government", name: I18n.t("filters.governance"), categories: categories_government.uniq}]
-    end
-
-    def report_ids
-      ObservationReport.all.map { |x| {id: x.id, name: x.title} }.sort_by { |x| x[:title] }
+      [
+        {id: "operator", name: I18n.t("filters.operator"), categories: categories_operator.uniq},
+        {id: "government", name: I18n.t("filters.governance"), categories: categories_government.uniq}
+      ]
     end
 
     def validation_statuses
@@ -63,14 +67,8 @@ module V1
       ].sort_by { |x| x[:name] }
     end
 
-    def government_ids
-      Government.active.with_translations(I18n.locale).map do |x|
-        {id: x.id, name: x.government_entity}
-      end.sort_by { |x| x[:name] }
-    end
-
     def operator_ids
-      having_published_observations = Observation.published.select(:operator_id).distinct.pluck(:operator_id)
+      having_published_observations = Observation.published.distinct.pluck(:operator_id)
 
       Operator
         .where(id: having_published_observations)
@@ -81,6 +79,18 @@ module V1
         .map do |x|
           {id: x[0], name: x[1], fmus: x[2]}
         end
+    end
+
+    def government_ids
+      Government.active.with_translations(I18n.locale).map do |x|
+        {id: x.id, name: x.government_entity}
+      end.sort_by { |x| x[:name] }
+    end
+
+    def report_ids
+      having_published_observations = Observation.published.distinct.pluck(:observation_report_id)
+
+      ObservationReport.where(id: having_published_observations).map { |x| {id: x.id, name: x.title} }.sort_by { |x| x[:title] }
     end
 
     def subcategory_ids
@@ -96,12 +106,19 @@ module V1
     end
 
     def fmu_ids
+      having_published_observations = Observation.published.distinct.pluck(:fmu_id)
       name_column = Arel.sql("fmu_translations.name")
-      Fmu.all.with_translations(I18n.locale).order("fmu_translations.name asc").pluck(:id, name_column).map { |x| {id: x[0], name: x[1]} }
+
+      Fmu
+        .where(id: having_published_observations)
+        .with_translations(I18n.locale)
+        .order("fmu_translations.name asc")
+        .pluck(:id, name_column)
+        .map { |x| {id: x[0], name: x[1]} }
     end
 
     def observer_ids
-      having_published_observations = Observation.published.joins(:observers).select(:observer_id).distinct.pluck(:observer_id)
+      having_published_observations = Observation.published.joins(:observers).distinct.pluck(:observer_id)
 
       Observer
         .active
