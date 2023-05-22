@@ -59,13 +59,8 @@ module V1
     }
 
     filter :years, apply: ->(records, value, _options) {
-      records.where("extract(year from observations.publication_date) in (#{value.map { |x|
-                                                                              begin
-                                                                                x.to_i
-                                                                              rescue
-                                                                                nil
-                                                                              end
-                                                                            }.join(", ")})")
+      years = value.map(&:to_i).compact.join(", ")
+      records.joins(:observation_report).where("extract(year from observation_reports.publication_date) in (#{years})")
     }
 
     filter :"observation_report.id", apply: ->(records, value, _options) {
