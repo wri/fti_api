@@ -11,7 +11,7 @@ ActiveAdmin.register Subcategory do
 
   controller do
     def scoped_collection
-      end_of_association_chain.with_translations(I18n.locale).includes([category: :translations])
+      end_of_association_chain.includes([category: :translations])
     end
   end
 
