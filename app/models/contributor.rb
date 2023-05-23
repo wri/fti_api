@@ -19,7 +19,7 @@
 class Contributor < ApplicationRecord
   include Translatable
   mount_base64_uploader :logo, PartnerLogoUploader
-  translates :name, :description
+  translates :name, :description, touch: true
 
   active_admin_translates :name do
     validates_presence_of :name
