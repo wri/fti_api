@@ -1,12 +1,7 @@
 namespace :observations do
   desc "Hide observations older than 5 year"
   task hide: :environment do
-    Observation
-      .published
-      .where(hidden: [nil, false])
-      .joins(:observation_report)
-      .where(observation_reports: {publication_date: ...5.years.ago})
-      .update_all(hidden: true, updated_at: DateTime.now)
+    Observation.to_be_hidden.update_all(hidden: true, updated_at: DateTime.now)
   end
 
   desc "Recalculate observation scores for operators"

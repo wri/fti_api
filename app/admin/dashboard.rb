@@ -55,9 +55,9 @@ ActiveAdmin.register_page "Dashboard" do
             class: "deploy-button"
         end
         panel t("active_admin.dashboard_page.old_observations.old_observations", count: obs_count) do
-          table_for Observation.includes(:subcategory, :operator, country: :translations).where("publication_date < ?", Date.today - 5.year).order(publication_date: :desc).limit(20) do
+          table_for Observation.includes(:subcategory, :operator, country: :translations).to_be_hidden.order("observation_reports.publication_date desc").limit(20) do
             column("ID") { |obs| link_to obs.id, admin_observation_path(obs.id) }
-            column(t("active_admin.dashboard_page.columns.publication_date")) { |obs| obs.publication_date }
+            column(t("active_admin.dashboard_page.columns.publication_date")) { |obs| obs.observation_report&.publication_date }
             column(t("active_admin.dashboard_page.columns.country")) { |obs| obs.country }
             column(t("active_admin.dashboard_page.columns.subcategory")) { |obs| obs.subcategory }
             column(t("active_admin.dashboard_page.columns.operator")) { |obs| obs.operator }
