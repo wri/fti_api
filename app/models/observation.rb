@@ -177,6 +177,7 @@ class Observation < ApplicationRecord
   scope :visible, -> { where(hidden: [false, nil]) }
   scope :order_by_category, ->(order = "ASC") { joins("inner join subcategories s on observations.subcategory_id = s.id inner join categories c on s.category_id = c.id inner join category_translations ct on ct.category_id = c.id and ct.locale = '#{I18n.locale}'").order("ct.name" => order) }
   scope :bigger_date, ->(date) { where("observations.created_at <= ?", date + 1.day) }
+  scope :to_be_hidden, -> { published.where(hidden: [nil, false]).joins(:observation_report).where(observation_reports: {publication_date: ...5.years.ago}) }
 
   class << self
     def translated_types
