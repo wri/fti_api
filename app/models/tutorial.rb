@@ -13,6 +13,6 @@
 #
 
 class Tutorial < ApplicationRecord
-  translates :name, :description
+  translates :name, :description, touch: true
   active_admin_translates :name, :description
 end
