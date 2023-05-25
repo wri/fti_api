@@ -20,5 +20,9 @@ module V1
     def self.sortable_fields(context)
       super + [:"category.name"]
     end
+
+    def self.apply_includes(records, directives)
+      super.with_translations(I18n.locale)
+    end
   end
 end
