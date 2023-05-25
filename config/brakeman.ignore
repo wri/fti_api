@@ -3,6 +3,29 @@
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
+      "fingerprint": "13a416289a6f639419b4a05b8209a8c4fb60746d0e65d20f7b0fed7bdb420c9e",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/resources/v1/observation_resource.rb",
+      "line": 63,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "records.joins(:observation_report).where(\"extract(year from observation_reports.publication_date) in (#{years})\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ObservationResource",
+        "method": null
+      },
+      "user_input": "years",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
       "fingerprint": "23d495db5516c045871325ae5e92b8e853e562ebeb5a87bc3486378ded9ae019",
       "check_name": "SQL",
       "message": "Possible SQL injection",
@@ -207,29 +230,6 @@
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
-      "fingerprint": "9c8fd264be900a7a2cde0d46d1dae1ae97668111671d68b52960dd4b7451192f",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/resources/v1/observation_resource.rb",
-      "line": 62,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "records.where(\"extract(year from observations.publication_date) in (#{value.map do\n x.to_i rescue nil\n end.join(\", \")})\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "ObservationResource",
-        "method": null
-      },
-      "user_input": "value.map do\n x.to_i rescue nil\n end.join(\", \")",
-      "confidence": "Weak",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
       "fingerprint": "a03813ee749021e589a4c9a253bafbd56731d269fb74c43dd03def169aeff2c7",
       "check_name": "SQL",
       "message": "Possible SQL injection",
@@ -366,6 +366,6 @@
       "note": ""
     }
   ],
-  "updated": "2023-04-12 11:04:04 +0200",
+  "updated": "2023-05-22 13:10:57 +0200",
   "brakeman_version": "5.4.1"
 }
