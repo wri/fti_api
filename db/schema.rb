@@ -748,11 +748,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_140933) do
     t.integer "country_operators"
     t.string "name"
     t.string "details"
+    t.string "slug"
     t.index "btrim(lower((name)::text))", name: "index_operators_on_btrim_lower_name", unique: true
     t.index ["approved"], name: "index_operators_on_approved"
     t.index ["country_id"], name: "index_operators_on_country_id"
     t.index ["fa_id"], name: "index_operators_on_fa_id"
     t.index ["is_active"], name: "index_operators_on_is_active"
+    t.index ["slug"], name: "index_operators_on_slug", unique: true
   end
 
   create_table "required_gov_document_group_translations", id: :serial, force: :cascade do |t|
