@@ -32,7 +32,7 @@ class Law < ApplicationRecord
   scope :with_country_subcategory, -> {
     includes(country: :translations)
       .includes(subcategory: :translations)
-      .where("country_translations.locale = ?", I18n.locale)
-      .where("subcategory_translations.locale = ?", I18n.locale).order("country_translations.name, subcategory_translations.name")
+      .where(country_translations: {locale: I18n.locale})
+      .where(subcategory_translations: {locale: I18n.locale}).order("country_translations.name, subcategory_translations.name")
   }
 end

@@ -21,7 +21,7 @@ class RequiredGovDocumentGroup < ApplicationRecord
 
   translates :name, :description, paranoia: true, touch: true
   active_admin_translates :name do
-    validates_presence_of :name
+    validates :name, presence: true
   end
   acts_as_list scope: [:parent_id]
 

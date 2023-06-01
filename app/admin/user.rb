@@ -86,7 +86,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs "Admin Details" do
+    f.inputs do
       f.inputs for: [:user_permission, f.object.user_permission || UserPermission.new] do |p|
         p.input :user_role, as: :select, collection: UserPermission.user_roles.keys, include_blank: false
       end
@@ -107,11 +107,11 @@ ActiveAdmin.register User do
 
   member_action :activate, method: :put do
     resource.update(is_active: true) unless resource.id == current_user.id
-    redirect_to collection_path, notice: "User activated"
+    redirect_to collection_path, notice: I18n.t("active_admin.shared.user_activated")
   end
 
   member_action :deactivate, method: :put do
     resource.update(is_active: false) unless (resource.id == current_user.id) || (resource.email == "webuser@example.com")
-    redirect_to collection_path, notice: "User deactivated"
+    redirect_to collection_path, notice: I18n.t("active_admin.shared.user_deactivated")
   end
 end

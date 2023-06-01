@@ -79,7 +79,7 @@ class Operator < ApplicationRecord
   after_save :update_operator_name_on_fmus, if: :saved_change_to_name?
 
   validates :name, presence: true
-  validates :name, uniqueness: {case_sensitive: false}, on: :create # TODO: after dealing with duplicates remove on: :create
+  validates :name, uniqueness: {case_sensitive: false}
   validates :website, url: true, if: lambda { |x| x.website.present? }
   validates :operator_type, inclusion: {in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(", ")} "}
   validates :country, presence: true, on: :create

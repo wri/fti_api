@@ -43,7 +43,7 @@ module V1
 
     it "returns statuses" do
       expected_statuses_ids = %w[doc_not_provided doc_valid doc_expired doc_not_required]
-      expect(parsed_body[:status].map { |x| x[:id] }).to match_array(expected_statuses_ids)
+      expect(parsed_body[:status].pluck(:id)).to match_array(expected_statuses_ids)
     end
 
     it "return sources" do
@@ -126,8 +126,8 @@ module V1
     end
 
     it "does not return publication authorization document group" do
-      expect(parsed_body[:required_operator_document_id].map { |x| x[:id] }).not_to include(@pb_1.id)
-      expect(parsed_body[:required_operator_document_id].map { |x| x[:id] }).not_to include(@pb_2.id)
+      expect(parsed_body[:required_operator_document_id].pluck(:id)).not_to include(@pb_1.id)
+      expect(parsed_body[:required_operator_document_id].pluck(:id)).not_to include(@pb_2.id)
     end
 
     it "returns legal categories" do

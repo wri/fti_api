@@ -24,7 +24,7 @@ module V1
         valid_params: -> {
                         {
                           name: "Annex name",
-                          "start-date": Date.today.to_s,
+                          "start-date": Time.zone.today.to_s,
                           attachment: document_data,
                           relationships: {"operator-document": operator_document.id}
                         }
@@ -40,7 +40,7 @@ module V1
         valid_params: -> {
                         {
                           name: "New Annex name",
-                          "start-date": Date.today.to_s
+                          "start-date": Time.zone.today.to_s
                         }
                       },
         excluded_params: %i[attachment],

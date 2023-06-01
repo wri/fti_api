@@ -3,13 +3,13 @@ namespace :scheduler do
   desc "Expires documents"
   task expire: :environment do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    Rails.logger.info "Going to expire operator documents at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
+    Rails.logger.info "Going to expire operator documents at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { OperatorDocument.expire_documents }
     Rails.logger.info "Operator documents expired. It took #{time} ms."
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
 
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    Rails.logger.info "Going to expire government documents at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
+    Rails.logger.info "Going to expire government documents at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { GovDocument.expire_documents }
     Rails.logger.info "Government documents expired. It took #{time} ms."
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
@@ -18,7 +18,7 @@ namespace :scheduler do
   desc "Refresh ranking"
   task calculate_scores: :environment do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    Rails.logger.info "Going to recalculate ranking for the whole database: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
+    Rails.logger.info "Going to recalculate ranking for the whole database: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { RankingOperatorDocument.refresh }
     Rails.logger.info "Ranking refreshed. It took #{time} ms."
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
@@ -27,7 +27,7 @@ namespace :scheduler do
   desc "Change current active FMU Operators"
   task set_active_fmu_operator: :environment do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    Rails.logger.info "Going to set the active FMU Operator at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
+    Rails.logger.info "Going to set the active FMU Operator at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms { FmuOperator.calculate_current }
     Rails.logger.info "Active FMU Operators set calculated. It took #{time} ms."
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
@@ -36,7 +36,7 @@ namespace :scheduler do
   desc "Generate Documents Statistics"
   task generate_documents_stats: :environment do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    Rails.logger.info "Going to generate document statistics at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
+    Rails.logger.info "Going to generate document statistics at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms {
       countries = Country.active.pluck(:id).uniq + [nil]
       day = Date.yesterday.to_date
@@ -51,7 +51,7 @@ namespace :scheduler do
   desc "Generate Observation Reports Statistics"
   task generate_observation_reports_stats: :environment do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    Rails.logger.info "Going to generate observation reports statistics at: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
+    Rails.logger.info "Going to generate observation reports statistics at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     time = Benchmark.ms {
       countries = Country.with_at_least_one_report.pluck(:id).uniq + [nil]
       day = Date.yesterday.to_date
@@ -66,7 +66,7 @@ namespace :scheduler do
   desc "Send quarterly newsletters to operators"
   task send_quarterly_newsletters: :environment do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-    Rails.logger.info "Going to send quarterly newsletters: #{Time.now.strftime("%d/%m/%Y %H:%M")}"
+    Rails.logger.info "Going to send quarterly newsletters: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     failed = false
     time = Benchmark.ms do
       Operator.active.fa_operator.find_each do |operator|

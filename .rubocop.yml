@@ -1,12 +1,15 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - standard
-  # - rubocop-rails
+  - rubocop-rails
 
 inherit_gem:
   standard: config/base.yml
 
 AllCops:
   TargetRubyVersion: 3.2
+  NewCops: enable
   Exclude:
     - 'vendor/**/*'
     - 'db/schema.rb'
@@ -19,12 +22,61 @@ AllCops:
 # Rails:
 #   Enabled: true
 
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - staging
+    - development
+    - test
+
+Rails/EagerEvaluationLogMessage:
+  Enabled: false
+  Severity: warning
+
+Rails/SquishedSQLHeredocs:
+  Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false # change to true later
+
+Rails/AddColumnIndex:
+  Enabled: false # change to true later
+
+Rails/ThreeStateBooleanColumn:
+  Enabled: false # change to true later
+
+Rails/RedundantTravelBack:
+  Enabled: false
+
+Rails/Pluck:
+  Enabled: true
+
+Rails/RootPathnameMethods:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/PluckInWhere:
+  Enabled: true
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: true
+  Exclude:
+    - 'app/controllers/v1/**/*'
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
 # # Enforces consistent use of action filter methods.
 # Rails/ActionFilter:
 #   Enabled: true
 #   EnforcedStyle: action
 
-# # Checks the correct usage of date aware methods, such as `Date.today`,
+# # Checks the correct usage of date aware methods, such as `Time.zone.today`,
 # # `Date.current`, etc.
 # Rails/Date:
 #   Enabled: false

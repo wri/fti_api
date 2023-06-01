@@ -7,12 +7,12 @@ unless User.find_by(nickname: "admin")
   @user.build_user_permission(user_role: "admin")
   @user.save
 
-  puts "*************************************************************************"
-  puts "*                                                                       *"
-  puts "* Admin user created (email: 'admin@example.com', password: 'password'  *"
-  puts "* visit http://localhost:3000/                                          *"
-  puts "*                                                                       *"
-  puts "*************************************************************************"
+  Rails.logger.debug "*************************************************************************"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "* Admin user created (email: 'admin@example.com', password: 'password'  *"
+  Rails.logger.debug "* visit http://localhost:3000/                                          *"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "*************************************************************************"
 end
 
 # frozen_string_literal: true
@@ -23,11 +23,11 @@ unless User.find_by(nickname: "user")
   @user.build_user_permission(user_role: "user")
   @user.save
 
-  puts "*************************************************************************"
-  puts "*                                                                       *"
-  puts "* User created (email: 'user@example.com', password: 'password'         *"
-  puts "*                                                                       *"
-  puts "*************************************************************************"
+  Rails.logger.debug "*************************************************************************"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "* User created (email: 'user@example.com', password: 'password'         *"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "*************************************************************************"
 end
 
 unless User.find_by(nickname: "webuser")
@@ -38,11 +38,11 @@ unless User.find_by(nickname: "webuser")
   @user.save
   @user.regenerate_api_key
 
-  puts "*************************************************************************"
-  puts "*                                                                       *"
-  puts "* Web user created (email: 'webuser@example.com', password: 'password'  *"
-  puts "*                                                                       *"
-  puts "* API Key created (SC_API_KEY: Bearer #{@user.api_key.access_token})"
-  puts "*                                                                       *"
-  puts "*************************************************************************"
+  Rails.logger.debug "*************************************************************************"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "* Web user created (email: 'webuser@example.com', password: 'password'  *"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "* API Key created (SC_API_KEY: Bearer #{@user.api_key.access_token})"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "*************************************************************************"
 end

@@ -12,7 +12,7 @@ ActiveAdmin.register Sawmill do
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
-    redirect_to collection_path, notice: "Operator activated"
+    redirect_to collection_path, notice: I18n.t("active_admin.shared.operator_activated")
   end
 
   index do

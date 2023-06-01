@@ -46,7 +46,7 @@ class ObservationStatistic < ApplicationRecord
   enum observation_type: {"operator" => 0, "government" => 1}
   enum fmu_forest_type: ForestType::TYPES_WITH_CODE
 
-  validates_presence_of :date
+  validates :date, presence: true
 
   # just to hack around active admin
   def self.ransackable_scopes(auth_object = nil)
@@ -60,7 +60,7 @@ class ObservationStatistic < ApplicationRecord
 
   def self.query_dashboard_report(search = {})
     date_from = (search[:date_gteq] || Observation.order(:created_at).first.created_at).to_date.to_fs(:db)
-    date_to = (search[:date_lteq] || Date.today).to_date.to_fs(:db)
+    date_to = (search[:date_lteq] || Time.zone.today).to_date.to_fs(:db)
     country_id = search[:by_country]
     operator_id = search[:operator_id_eq]
     subcategory_id = search[:subcategory_id_eq]

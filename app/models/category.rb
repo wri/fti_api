@@ -17,7 +17,7 @@ class Category < ApplicationRecord
 
   translates :name, touch: true
   active_admin_translates :name do
-    validates_presence_of :name
+    validates :name, presence: true
   end
 
   has_many :subcategories, dependent: :destroy

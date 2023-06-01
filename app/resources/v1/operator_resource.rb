@@ -58,7 +58,7 @@ module V1
 
     filter :observer_id, apply: ->(records, value, _options) {
       records.where(
-        id: Observation.own_with_inactive(value[0].to_i).select(:operator_id).distinct.pluck(:operator_id)
+        id: Observation.own_with_inactive(value[0].to_i).select(:operator_id).distinct.select(:operator_id)
       )
     }
 

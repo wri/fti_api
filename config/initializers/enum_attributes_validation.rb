@@ -49,4 +49,4 @@ module EnumAttributesValidation
 end
 
 # include the extension in active record
-ActiveRecord::Base.include EnumAttributesValidation
+ActiveSupport.on_load(:active_record) { include EnumAttributesValidation }

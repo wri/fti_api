@@ -116,7 +116,7 @@ namespace :import do
 
           operator = Operator.where(name: data_row["attributai"]).first
           Fmu.where("geojson @> '{\"properties\": {\"nom_conces\": \"#{data_row["nom_conces"]}\"}}'").each do |fmu|
-            start_date = Time.at(data_row["date_attr"].to_f / 1000) if data_row["date_attr"].present?
+            start_date = Time.zone.at(data_row["date_attr"].to_f / 1000) if data_row["date_attr"].present?
 
             if operator.present? && fmu.present?
               FmuOperator.create operator: operator, fmu: fmu, start_date: start_date, current: true
@@ -157,7 +157,7 @@ namespace :import do
           data_row = row.to_h
           fmu = Fmu.with_translations(I18n.locale).find_by(name: data_row["nom_foret"])
 
-          next unless OperatorDocumentFmu.find_by(required_operator_document: rod1, fmu: fmu).present?
+          next if OperatorDocumentFmu.find_by(required_operator_document: rod1, fmu: fmu).blank?
 
           operator_document = if OperatorDocumentFmu.find_by(required_operator_document: rod1, fmu: fmu).status.eql? "doc_not_provided"
             OperatorDocumentFmu.where(required_operator_document: rod1, fmu: fmu).first
@@ -166,7 +166,7 @@ namespace :import do
           end
 
           link = data_row["url"]
-          start_date = Date.today
+          start_date = Time.zone.today
 
           begin
             next if operator_document.status == OperatorDocument.statuses[:doc_pending]

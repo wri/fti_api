@@ -15,7 +15,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
         Country.active.order(:name).map { |c| [c.name, c.id] }
     }
   filter :observation_type, as: :select, collection: ObservationStatistic.observation_types.sort
-  filter :operator, as: :select, collection: -> { Operator.where(id: Observation.pluck(:operator_id)).order(:name) }
+  filter :operator, as: :select, collection: -> { Operator.where(id: Observation.select(:operator_id)).order(:name) }
   filter :fmu_forest_type, as: :select, collection: -> { ForestType.select_collection }
   filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :subcategory, as: :select, collection: -> { Subcategory.by_name_asc }

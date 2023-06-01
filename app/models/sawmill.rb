@@ -18,9 +18,9 @@
 class Sawmill < ApplicationRecord
   belongs_to :operator
 
-  validates_presence_of :name
-  validates_numericality_of :lat, greater_than_or_equal_to: -90, less_than_or_equal_to: 90
-  validates_numericality_of :lng, greater_than_or_equal_to: -180, less_than_or_equal_to: 180
+  validates :name, presence: true
+  validates :lat, numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90}
+  validates :lng, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180}
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }

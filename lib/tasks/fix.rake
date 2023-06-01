@@ -32,8 +32,8 @@ namespace :fix do
 
       operator_annexes_backup = all_backup.reject { |x| x[:operator_document_id].blank? }
 
-      doc_ids = operator_annexes_backup.map { |x| x[:operator_document_id] }.uniq
-      all_annexes_ids = operator_annexes_backup.map { |x| x[:operator_document_annex_id] }.uniq
+      doc_ids = operator_annexes_backup.pluck(:operator_document_id).uniq
+      all_annexes_ids = operator_annexes_backup.pluck(:operator_document_annex_id).uniq
 
       puts "Annex history relation before: #{AnnexDocument.where(documentable_type: "OperatorDocumentHistory").count}"
 
@@ -55,7 +55,7 @@ namespace :fix do
       OperatorDocument.unscoped.where(id: doc_ids).find_each do |od|
         annexes_ids = operator_annexes_backup
           .select { |x| x[:operator_document_id] == od.id.to_s }
-          .map { |x| x[:operator_document_annex_id] }
+          .pluck(:operator_document_annex_id)
           .uniq
         annexes = OperatorDocumentAnnex.unscoped.where(id: annexes_ids)
         histories = OperatorDocumentHistory.unscoped.where(operator_document_id: od.id).order(:operator_document_updated_at).to_a
@@ -97,7 +97,7 @@ namespace :fix do
       puts "still orphaned: #{still_orphaned.count}"
 
       still_orphaned.each do |annex|
-        doc_ids = operator_annexes_backup.select { |x| x[:operator_document_annex_id].to_i == annex.id }.map { |x| x[:operator_document_id] }.uniq
+        doc_ids = operator_annexes_backup.select { |x| x[:operator_document_annex_id].to_i == annex.id }.pluck(:operator_document_id).uniq
 
         puts "BAD DATA for annex #{annex.id}: connected with #{doc_ids.join(",")}" if doc_ids.count != 1
         doc_ids.each do |doc_id|
@@ -124,7 +124,7 @@ namespace :fix do
     OperatorDocumentUploader = Class.new # to fix initialization of old document which used this
     # rubocop:enable Lint/ConstantDefinitionInBlock
 
-    docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
+    docs_in_history = OperatorDocumentHistory.distinct.pluck(:operator_document_id)
 
     new_history_list = []
 
@@ -179,14 +179,14 @@ namespace :fix do
 
         # TODO: think about more indicators of healthy history
         # TODO: what about document_file and attachments, check if all documents have correct attachments
-        docs_in_history = OperatorDocumentHistory.pluck(:operator_document_id).uniq
+        docs_in_history = OperatorDocumentHistory.distinct.pluck(:operator_document_id)
 
         puts "HistoryCount after: #{OperatorDocumentHistory.count}"
         puts "Docs no history count: #{OperatorDocument.where.not(id: docs_in_history).count}"
         puts "Docs no history ids: #{OperatorDocument.where.not(id: docs_in_history).pluck(:id)}"
         puts "Annex history relation after: #{AnnexDocument.where(documentable_type: "OperatorDocumentHistory").count}"
 
-        raise ActiveRecord::Rollback unless ENV["FOR_REAL"].present?
+        raise ActiveRecord::Rollback if ENV["FOR_REAL"].blank?
       end
     end
 
@@ -289,7 +289,7 @@ namespace :fix do
       puts "ALL GOOD!!"
       # still fmu, and country precalculated values would be wrong :/
 
-      raise ActiveRecord::Rollback unless ENV["FOR_REAL"].present?
+      raise ActiveRecord::Rollback if ENV["FOR_REAL"].blank?
     end
   end
 
@@ -340,7 +340,7 @@ namespace :fix do
       puts "WRONG NAME for #{df.id} #{df.attachment.identifier} will be changed to #{new_name}"
       count_wrong_name += 1
 
-      unless df.attachment.present?
+      if df.attachment.blank?
         puts "NO file for #{df.id}"
         count_file_not_exists += 1
         next

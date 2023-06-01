@@ -21,9 +21,9 @@
 #
 
 class RequiredOperatorDocumentCountry < RequiredOperatorDocument
-  has_many :operator_document_countries, foreign_key: "required_operator_document_id"
+  has_many :operator_document_countries, foreign_key: "required_operator_document_id", inverse_of: :required_operator_document_country
 
-  validates_uniqueness_of :contract_signature, scope: :country_id, if: :contract_signature?
+  validates :contract_signature, uniqueness: {scope: :country_id, if: :contract_signature?}
 
   after_create :create_operator_document_countries, unless: :disable_document_creation
 

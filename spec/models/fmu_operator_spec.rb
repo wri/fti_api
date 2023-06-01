@@ -30,7 +30,7 @@ RSpec.describe FmuOperator, type: :model do
         context "when start_date is greater or equal to the end_date" do
           it "add an error on start_date" do
             fmu_operator = build(:fmu_operator,
-              start_date: Date.today,
+              start_date: Time.zone.today,
               end_date: Date.yesterday)
 
             expect(fmu_operator.valid?).to eql false
@@ -86,7 +86,7 @@ RSpec.describe FmuOperator, type: :model do
           fmu_operator = build(
             :fmu_operator,
             fmu: fmu,
-            start_date: Date.today,
+            start_date: Time.zone.today,
             end_date: Date.tomorrow
           )
 
@@ -121,8 +121,8 @@ RSpec.describe FmuOperator, type: :model do
       end
       context "the fmu already has an operator before updating" do
         before do
-          time_a = Time.local(2020, 10, 5, 0, 0, 0)
-          time_b = Time.local(2020, 10, 20, 0, 0, 0)
+          time_a = Time.zone.local(2020, 10, 5, 0, 0, 0)
+          time_b = Time.zone.local(2020, 10, 20, 0, 0, 0)
 
           country = create(:country)
           operator_a = create(:operator, country: country, fa_id: "a")
@@ -222,7 +222,7 @@ RSpec.describe FmuOperator, type: :model do
           fmu_operator = create(:fmu_operator, start_date: nil)
           fmu_operator.set_current_start_date
 
-          expect(fmu_operator.start_date).to eql Date.today
+          expect(fmu_operator.start_date).to eql Time.zone.today
         end
       end
     end
@@ -245,7 +245,7 @@ RSpec.describe FmuOperator, type: :model do
           :fmu_operator,
           current: false,
           fmu: another_fmu,
-          start_date: Date.today,
+          start_date: Time.zone.today,
           end_date: Date.tomorrow
         )
       end

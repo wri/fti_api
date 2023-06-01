@@ -19,10 +19,10 @@ class AboutPageEntry < ApplicationRecord
   translates :title, :body, touch: true
 
   active_admin_translates :title do
-    validates_presence_of :title
+    validates :title, presence: true
   end
 
   active_admin_translates :body do
-    validates_presence_of :body
+    validates :body, presence: true
   end
 end

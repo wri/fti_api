@@ -15,7 +15,7 @@
 
 FactoryBot.define do
   factory :fmu_operator do
-    start_date { Date.today }
+    start_date { Time.zone.today }
     end_date { Date.tomorrow }
     current { true }
 

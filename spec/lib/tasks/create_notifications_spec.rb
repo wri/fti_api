@@ -29,7 +29,7 @@ describe "notifications_create" do
   end
 
   context "when there are no notification groups" do
-    let(:expire_date) { Date.today + 1.year }
+    let(:expire_date) { Time.zone.today + 1.year }
     include_context "with document"
     it_behaves_like "no notifications change"
   end
@@ -42,14 +42,14 @@ describe "notifications_create" do
     end
 
     context "when the date to expire is bigger than document's expire date" do
-      let(:expire_date) { Date.today + 1.year }
+      let(:expire_date) { Time.zone.today + 1.year }
       include_context "with document"
       it_behaves_like "no notifications change"
     end
 
     context "when the date to expire is smaller than the document's expire date" do
       context "when there are no associated notifications" do
-        let(:expire_date) { Date.today }
+        let(:expire_date) { Time.zone.today }
         include_context "with document"
         it { expect { subject }.to change { Notification.count }.by(2) }
       end
@@ -94,7 +94,7 @@ describe "notifications_create" do
           it { expect { subject }.to change { Notification.count }.by(2) }
 
           context "when the document did not expire" do
-            let(:expire_date) { Date.today + 1.year }
+            let(:expire_date) { Time.zone.today + 1.year }
             include_context "with document"
             it_behaves_like "no notifications change"
           end
@@ -106,7 +106,7 @@ describe "notifications_create" do
       let!(:notification_group_large) { create :notification_group, days: 20 }
 
       context "when both notification groups' date to expire are smaller than the document's expire date" do
-        let(:expire_date) { Date.today }
+        let(:expire_date) { Time.zone.today }
         include_context "with document"
         it { expect { subject }.to change { Notification.count }.by(2) } # TODO: update to check if it's the right group
 

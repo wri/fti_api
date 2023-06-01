@@ -4,7 +4,7 @@ namespace :operator_documents do
     puts "Going to destroy operator documents"
 
     RequiredOperatorDocument.only_deleted.find_each do |rod|
-      rod.operator_documents.update_all deleted_at: Time.now
+      rod.operator_documents.update_all deleted_at: Time.zone.now
     end
   end
 end

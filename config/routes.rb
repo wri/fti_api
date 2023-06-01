@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  match "admin/fmus/preview" => "admin/fmus#preview", :via => :post
+  post "admin/fmus/preview" => "admin/fmus#preview"
 
   require "sidekiq/web"
 

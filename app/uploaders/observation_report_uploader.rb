@@ -8,7 +8,7 @@ class ObservationReportUploader < ApplicationUploader
   def filename
     return if super.blank?
 
-    date = model.publication_date&.to_date&.to_s || model.created_at&.to_date&.to_s || Date.today.to_s
+    date = model.publication_date&.to_date&.to_s || model.created_at&.to_date&.to_s || Time.zone.today.to_s
     filename = "" + model.title[0...50]&.parameterize + "-" + date
     filename += "." + super.split(".").last if super.split(".").any?
     sanitize_filename(filename)

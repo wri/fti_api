@@ -70,7 +70,7 @@ module V1
         before(:each) do
           @token = "9aa2da60-1f58-4c63-a765-282baf7a873c"
           @token_2 = "9aa2da60-1f58-4c63-a765-282baf7a8732"
-          user.update(reset_password_token: @token, reset_password_sent_at: DateTime.now - 1.days)
+          user.update(reset_password_token: @token, reset_password_sent_at: DateTime.now - 1.day)
           user_2.update(reset_password_token: @token_2, reset_password_sent_at: DateTime.now)
         end
 

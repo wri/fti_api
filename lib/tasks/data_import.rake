@@ -235,7 +235,7 @@ namespace :import do
         data_row = row.to_h
 
         country_names = data_row["countries"].split(",") if data_row["countries"].present?
-        country_id = Country.where(name: country_names).pluck(:id).first
+        country_id = Country.where(name: country_names).pick(:id)
 
         monitor_names = data_row["monitor_name"].split("/")
         monitor_ids = Observer.where(name: monitor_names).pluck(:id) if monitor_names.any?
@@ -244,7 +244,7 @@ namespace :import do
         operator_id = Operator.where(name: operator_name, country_id: country_id).pluck(:id) if operator_name.present?
 
         subcategory_name = data_row["illegality"]
-        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pluck(:id).first if subcategory_name.present?
+        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:operator]).pick(:id) if subcategory_name.present?
 
         report_link = data_row["document_link"]
         report_name = data_row["document_name"]
@@ -266,7 +266,7 @@ namespace :import do
           end
         end
 
-        unless subcategory_id.present?
+        if subcategory_id.blank?
           puts "Couldn't load subcategory ::#{subcategory_name}::"
           next
         end
@@ -310,7 +310,7 @@ namespace :import do
         data_row = row.to_h
 
         country_names = data_row["countries"].split(",") if data_row["countries"].present?
-        country_id = Country.where(name: country_names).pluck(:id).first
+        country_id = Country.where(name: country_names).pick(:id)
 
         monitor_names = data_row["monitor_name"].split("/")
         monitor_ids = Observer.where(name: monitor_names).pluck(:id) if monitor_names.any?
@@ -322,7 +322,7 @@ namespace :import do
         government_id = Government.where(government_entity: government_entity, country_id: country_id).first_or_create.id if government_entity.present?
 
         subcategory_name = data_row["governance_problem"]
-        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:government]).pluck(:id).first if subcategory_name.present?
+        subcategory_id = Subcategory.where(name: subcategory_name, subcategory_type: Subcategory.subcategory_types[:government]).pick(:id) if subcategory_name.present?
 
         report_link = data_row["document_link"]
         report_name = data_row["document_name"]
@@ -360,7 +360,7 @@ namespace :import do
 
         go = Observation.create!(data_go)
         severity_id = go.subcategory.severities.find_by(level: data_row["severities"]).id
-        go.update_attributes!(severity_id: severity_id)
+        go.update!(severity_id: severity_id)
 
         go.observation_report = report if report.present?
         go.save

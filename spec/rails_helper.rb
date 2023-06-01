@@ -71,7 +71,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    if Rails.env.test? || Rails.env.cucumber?
+    if Rails.env.test?
       FileUtils.rm_rf(Dir["#{Rails.root}/spec/support/uploads"])
     end
   end

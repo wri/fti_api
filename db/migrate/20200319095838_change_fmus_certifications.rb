@@ -4,9 +4,9 @@ class ChangeFmusCertifications < ActiveRecord::Migration[5.0]
     rename_column :fmus, :certification_vlc, :certification_pafc
     rename_column :fmus, :certification_vlo, :certification_fsc_cw
 
-    change_column_default :fmus, :certification_tlv, false
-    change_column_default :fmus, :certification_pafc, false
-    change_column_default :fmus, :certification_fsc_cw, false
+    change_column_default :fmus, :certification_tlv, from: nil, to: false
+    change_column_default :fmus, :certification_pafc, from: nil, to: false
+    change_column_default :fmus, :certification_fsc_cw, from: nil, to: false
 
     add_column :fmus, :certification_ls, :boolean, default: false
   end

@@ -40,7 +40,7 @@ ActiveAdmin.register_page "Dashboard" do
 
   content title: proc { I18n.t("active_admin.dashboard") } do
     if current_user.user_permission.user_role == "admin"
-      obs_count = Observation.where("publication_date < ? and hidden = false", Date.today - 5.year).count
+      obs_count = Observation.where("publication_date < ? and hidden = false", Time.zone.today - 5.years).count
 
       unless obs_count.zero?
         columns do
@@ -167,7 +167,7 @@ ActiveAdmin.register_page "Dashboard" do
       table_for PaperTrail::Version.order(id: :desc).limit(20) do # Use PaperTrail::Version if this throws an error
         column(t("active_admin.dashboard_page.columns.item")) { |v| v.item }
         column(t("active_admin.dashboard_page.columns.type")) { |v| v.item_type.underscore.humanize }
-        column(t("active_admin.dashboard_page.columns.modified_at")) { |v| v.created_at.to_s :long }
+        column(t("active_admin.dashboard_page.columns.modified_at")) { |v| v.created_at.to_fs :long }
         column(t("active_admin.dashboard_page.columns.admin")) { |v|
           begin
             link_to User.find(v.whodunnit).email, [:admin, User.find(v.whodunnit)]

@@ -24,7 +24,7 @@ namespace :db do
   end
 
   desc "Rebuilds and imports the database"
-  task :destroy_and_rebuild do
+  task destroy_and_rebuild: :environment do
     puts 'Are you sure you want to destroy and rebuild the database? (type "yes" to continue)'
     input = $stdin.gets.chomp
     return unless input == "yes"

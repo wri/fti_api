@@ -18,10 +18,10 @@ class CountryLink < ApplicationRecord
   belongs_to :country
   translates :name, :description, touch: true
 
-  validates_presence_of :position, :url
+  validates :position, :url, presence: true
 
   active_admin_translates :name do
-    validates_presence_of :name
+    validates :name, presence: true
   end
   # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :description do; end

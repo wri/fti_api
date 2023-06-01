@@ -152,7 +152,8 @@ en:
       recycle_report: 'Report must be moved to recycle bin first!'
       restore: 'Restore'
       remove_completely: 'Remove Completely'
-      sure_want_to_remove: 'Are you sure you want to remove the report completely? This action is not reversible.'
+      sure_want_to_remove: 'Are you sure you want to remove this record completely? This action is not reversible.'
+      sure_want_to_recycle: 'Are you sure you want to move this record to recycle bin?'
       view: 'View'
       edit: 'Edit'
       delete: 'Delete'
@@ -170,6 +171,10 @@ en:
       edit_document: 'Edit document'
       document_approved: 'Document approved'
       document_rejected: 'Document rejected'
+      user_activated: 'User activated'
+      user_deactivated: 'User deactivated'
+      permissions_changed: 'Permissions changed'
+      operator_activated: 'Operator activated'
     menu:
       dashboard:
         dashboard: 'Dashboard'
@@ -309,6 +314,9 @@ en:
       any: 'Any'
       all_statuses: 'All statuses'
       published_all: 'Published All'
+    evidence_page:
+      evidence_removed: 'Evidence removed!'
+      evidence_must_be_recycled: 'Evidence must be moved to recycle bin first!'
     laws_page:
       written_infraction: 'Illegality as written by law'
       infraction: 'Legal reference: Illegality'

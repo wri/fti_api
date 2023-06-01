@@ -17,7 +17,7 @@ module ArrayForestTypeable
     end
 
     def forest_types=(array)
-      array.reject!(&:blank?)
+      array.compact_blank!
       array.uniq!
       super
     end

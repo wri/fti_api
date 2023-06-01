@@ -27,8 +27,8 @@ class Severity < ApplicationRecord
     "#{level} - #{details}"
   end
 
-  validates_presence_of :level
-  validates_uniqueness_of :level, scope: :subcategory_id
+  validates :level, presence: true
+  validates :level, uniqueness: {scope: :subcategory_id}
   validates :level, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 3}
 
   default_scope { includes(:translations) }

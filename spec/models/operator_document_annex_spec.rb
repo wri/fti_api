@@ -46,7 +46,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
       it "set all operator_document_annex statuses to doc_expired" do
         OperatorDocumentAnnex.expire_document_annexes
 
-        OperatorDocumentAnnex.where("expire_date IS NOT NULL and expire_date < '#{Date.today}'::date and status = 3").each do |operator_document_annex|
+        OperatorDocumentAnnex.where("expire_date IS NOT NULL and expire_date < '#{Time.zone.today}'::date and status = 3").each do |operator_document_annex|
           expect(operator_document_annex.status).to eql "doc_expired"
         end
       end

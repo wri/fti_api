@@ -30,7 +30,7 @@ class GovDocument < ApplicationRecord
 
   belongs_to :user, optional: true
   belongs_to :country
-  belongs_to :required_gov_document, -> { with_archived }
+  belongs_to :required_gov_document, -> { with_archived }, inverse_of: :gov_documents
 
   mount_base64_uploader :attachment, GovDocumentUploader
   include MoveableAttachment
@@ -63,7 +63,7 @@ class GovDocument < ApplicationRecord
   end
 
   def self.expire_documents
-    documents_to_expire = GovDocument.to_expire(Date.today)
+    documents_to_expire = GovDocument.to_expire(Time.zone.today)
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} government documents"
@@ -108,7 +108,7 @@ class GovDocument < ApplicationRecord
 
   # we only want to move current attachment back to public directory
   def move_attachment_to_public_directory
-    attachment_attr = read_attribute(:attachment)
+    attachment_attr = self[:attachment]
     return if attachment_attr.nil?
 
     to = File.join(attachment.root, attachment.store_dir, attachment_attr)

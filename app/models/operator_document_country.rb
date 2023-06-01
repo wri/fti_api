@@ -27,7 +27,7 @@
 #
 
 class OperatorDocumentCountry < OperatorDocument
-  belongs_to :required_operator_document_country, foreign_key: "required_operator_document_id"
+  belongs_to :required_operator_document_country, foreign_key: "required_operator_document_id", inverse_of: :operator_document_countries
 
   after_update :update_operator_approved, if: -> { required_operator_document.contract_signature? }
 

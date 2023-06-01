@@ -1,6 +1,6 @@
 class RemoveEvidenceFromObservation < ActiveRecord::Migration[5.0]
   def change
-    evidence_mapping = HashWithIndifferentAccess.new({
+    evidence_mapping = ActiveSupport::HashWithIndifferentAccess.new({
       "Document de la compagnie": "Company Documents",
       "Photographies / film": "Photos",
       "Observation sur le terrain": "Other",

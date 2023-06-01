@@ -32,11 +32,11 @@ class OperatorDocumentHistory < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :operator
-  belongs_to :required_operator_document, -> { with_archived }
-  belongs_to :fmu, -> { with_deleted }, optional: true
+  belongs_to :required_operator_document, -> { with_archived }, inverse_of: false
+  belongs_to :fmu, -> { with_deleted }, optional: true, inverse_of: false
   belongs_to :user, optional: true
   belongs_to :document_file, optional: true
-  belongs_to :operator_document, -> { with_deleted }
+  belongs_to :operator_document, -> { with_deleted }, inverse_of: false
   has_many :annex_documents, as: :documentable, inverse_of: :documentable
   has_many :operator_document_annexes, through: :annex_documents
 

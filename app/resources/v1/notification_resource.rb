@@ -12,7 +12,7 @@ module V1
       return Notification.none unless user
 
       # We update the last displayed at when showing the notification
-      Notification.visible.current.where(user: user).update_all(last_displayed_at: Time.now) # rubocop:disable Rails/SkipsModelValidations
+      Notification.visible.current.where(user: user).update_all(last_displayed_at: Time.zone.now) # rubocop:disable Rails/SkipsModelValidations
       Notification.visible.current.where(user: user)
     end
 

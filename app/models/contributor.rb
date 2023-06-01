@@ -22,9 +22,9 @@ class Contributor < ApplicationRecord
   translates :name, :description, touch: true
 
   active_admin_translates :name do
-    validates_presence_of :name
+    validates :name, presence: true
   end
 
   validates :priority, numericality: {only_integer: true, greater_than_or_equal_to: 0}, if: :priority?
-  validates_presence_of :name
+  validates :name, presence: true
 end

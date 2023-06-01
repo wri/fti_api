@@ -15,8 +15,8 @@
 #
 class ScoreOperatorObservation < ApplicationRecord
   belongs_to :operator, touch: true
-  validates_presence_of :date
-  validates_uniqueness_of :current, scope: :operator_id, if: :current?
+  validates :date, presence: true
+  validates :current, uniqueness: {scope: :operator_id, if: :current?}
 
   scope :current, -> { where(current: true) }
 
@@ -45,7 +45,7 @@ class ScoreOperatorObservation < ApplicationRecord
   # @param [Operator] operator
   # @return [ScoreOperatorObservation] The new SOO
   def self.build(operator)
-    soo = ScoreOperatorObservation.new operator: operator, date: Date.today, current: true
+    soo = ScoreOperatorObservation.new operator: operator, date: Time.zone.today, current: true
     soo.count_visits
     return soo if soo.visits.zero?
 

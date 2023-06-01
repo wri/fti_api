@@ -11,5 +11,5 @@
 #  updated_at :datetime         not null
 #
 class NotificationGroup < ApplicationRecord
-  validates_presence_of :days, :name
+  validates :days, :name, presence: true
 end

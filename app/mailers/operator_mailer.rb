@@ -4,9 +4,9 @@ class OperatorMailer < ApplicationMailer
   def expiring_documents_notifications(operator, documents)
     num_documents = documents.count
     expire_date = documents.first.expire_date
-    if expire_date > Date.today
+    if expire_date > Time.zone.today
       # expiring documents
-      time_to_expire = distance_of_time_in_words(expire_date, Date.today)
+      time_to_expire = distance_of_time_in_words(expire_date, Time.zone.today)
       subject = t("backend.mail_service.expiring_documents.title", count: num_documents) +
         time_to_expire
       text = [t("backend.mail_service.expiring_documents.text", company_name: operator.name, count: num_documents)]
@@ -40,8 +40,8 @@ class OperatorMailer < ApplicationMailer
   # 2. To send it using the html template
   def quarterly_newsletter(operator)
     current_score = operator.score_operator_document
-    last_score = operator.score_operator_documents.at_date(Date.today - 3.months).order(:date).last
-    expiring_docs = operator.operator_documents.to_expire(Date.today + 3.months)
+    last_score = operator.score_operator_documents.at_date(Time.zone.today - 3.months).order(:date).last
+    expiring_docs = operator.operator_documents.to_expire(Time.zone.today + 3.months)
 
     subject = "Your quarterly OTP report / Votre rapport trimestriel sur l'OTP"
 

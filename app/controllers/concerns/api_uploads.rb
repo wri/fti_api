@@ -4,7 +4,9 @@ module APIUploads
   extend ActiveSupport::Concern
 
   included do
+    # rubocop:disable Rails/LexicallyScopedActionFilter
     after_action :clean_file_tmp, only: [:update, :create]
+    # rubocop:enable Rails/LexicallyScopedActionFilter
 
     private
 

@@ -23,7 +23,7 @@ class Subcategory < ApplicationRecord
   active_admin_translates :name do; end
   # rubocop:enable Standard/BlockSingleLineBraces
 
-  validates_presence_of :category, :subcategory_type
+  validates :subcategory_type, presence: true
 
   belongs_to :category
   has_many :severities, dependent: :destroy

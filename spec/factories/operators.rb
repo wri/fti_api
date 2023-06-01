@@ -39,7 +39,7 @@ FactoryBot.define do
 
     trait :with_documents do
       after(:create) do |op|
-        op.update!(fa_id: "FA_UUID") unless op.fa_id.present?
+        op.update!(fa_id: "FA_UUID") if op.fa_id.blank?
         # create one country document
         create(:operator_document_country, operator: op)
         create(:operator_document_fmu, operator: op, force_status: "doc_valid")

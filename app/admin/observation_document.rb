@@ -16,9 +16,9 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   member_action :really_destroy, method: :delete do
     if resource.deleted?
       resource.really_destroy!
-      redirect_back fallback_location: admin_evidences_path, notice: "Evidence removed!"
+      redirect_back fallback_location: admin_evidences_path, notice: I18n.t("active_admin.evidence_page.evidence_removed")
     else
-      redirect_back fallback_location: admin_evidences_path, notice: "Evidence must be moved to recycle bin first!"
+      redirect_back fallback_location: admin_evidences_path, notice: I18n.t("active_admin.evidence_page.evidence_must_be_recycled")
     end
   end
 
@@ -50,14 +50,14 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
     actions defaults: false do |evidence|
       if evidence.deleted?
-        item "Restore", restore_admin_evidence_path(evidence), method: :put
-        item "Remove Completely", really_destroy_admin_evidence_path(evidence),
-          method: :delete, data: {confirm: "Are you sure you want to remove the evidence completely? This action is not reversible."}
+        item I18n.t("active_admin.shared.restore"), restore_admin_evidence_path(evidence), method: :put
+        item I18n.t("active_admin.shared.remove_completely"), really_destroy_admin_evidence_path(evidence),
+          method: :delete, data: {confirm: I18n.t("active_admin.shared.sure_want_to_remove")}
       else
-        item "View", admin_evidence_path(evidence)
-        item "Edit", edit_admin_evidence_path(evidence)
-        item "Delete", admin_evidence_path(evidence),
-          method: :delete, data: {confirm: "Are you sure you want to move evidence to the recycle bin?"}
+        item I18n.t("active_admin.shared.view"), admin_evidence_path(evidence)
+        item I18n.t("active_admin.shared.edit"), edit_admin_evidence_path(evidence)
+        item I18n.t("active_admin.shared.delete"), admin_evidence_path(evidence),
+          method: :delete, data: {confirm: I18n.t("active_admin.shared.sure_want_to_recycle")}
       end
     end
   end
@@ -72,7 +72,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs "Evidence Details" do
+    f.inputs do
       f.input :observation, collection: Observation.all.map { |o| [o.id, o.id] }, input_html: {disabled: true}
       f.input :user, input_html: {disabled: true}
       f.input :name

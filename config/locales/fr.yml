@@ -162,7 +162,8 @@ fr:
       recycle_report: "Le rapport doit d'abord être déplacé vers la corbeille!"
       restore: 'Restaurer'
       remove_completely: 'Supprimer complètement'
-      sure_want_to_remove: "Voulez-vous vraiment supprimer complètement le rapport ? Cette action n'est pas réversible."
+      sure_want_to_remove: "Voulez-vous vraiment supprimer complètement cet enregistrement? Cette action n'est pas réversible."
+      sure_want_to_recycle: 'Are you sure you want to move this record to recycle bin?'
       view: 'Voir'
       edit: 'Éditer'
       delete: 'Supprimer'
@@ -180,6 +181,10 @@ fr:
       edit_document: 'Modifier le document'
       document_approved: 'Document approuvé'
       document_rejected: 'Document rejeté'
+      user_activated: 'User activated'
+      user_deactivated: 'User deactivated'
+      permissions_changed: 'Permissions changed'
+      operator_activated: 'Operator activated'
     menu:
       dashboard:
         dashboard: 'Tableau de bord'
@@ -318,6 +323,9 @@ fr:
       any: 'Any'
       all_statuses: 'Tous les statuts'
       published_all: 'Publié (tous)'
+    evidence_page:
+      evidence_removed: 'Evidence removed!'
+      evidence_must_be_recycled: 'Evidence must be moved to recycle bin first!'
     operator_page:
       producer: 'Producteur'
       producer_activated: 'Producteur activé'

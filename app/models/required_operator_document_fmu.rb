@@ -22,7 +22,7 @@
 
 class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   include ArrayForestTypeable
-  has_many :operator_document_fmus, foreign_key: "required_operator_document_id"
+  has_many :operator_document_fmus, foreign_key: "required_operator_document_id", inverse_of: :required_operator_document_fmu
 
   validates :contract_signature, absence: true
 
