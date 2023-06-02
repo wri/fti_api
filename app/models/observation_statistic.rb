@@ -17,8 +17,8 @@
 #  total_count       :integer          default(0)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  hidden            :boolean
-#  is_active         :boolean
+#  hidden            :boolean          default(FALSE), not null
+#  is_active         :boolean          default(FALSE), not null
 #  observation_type  :integer
 #
 class ObservationStatistic < ApplicationRecord

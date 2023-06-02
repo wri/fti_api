@@ -13,7 +13,7 @@
 #  reason                        :text
 #  note                          :text
 #  response_date                 :datetime
-#  public                        :boolean
+#  public                        :boolean          default(FALSE), not null
 #  source                        :integer
 #  source_info                   :string
 #  fmu_id                        :integer

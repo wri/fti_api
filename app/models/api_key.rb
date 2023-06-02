@@ -8,7 +8,7 @@
 #  access_token :string
 #  expires_at   :datetime
 #  user_id      :integer
-#  is_active    :boolean          default(TRUE)
+#  is_active    :boolean          default(TRUE), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

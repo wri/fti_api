@@ -9,7 +9,7 @@
 #  subcategory_type  :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  location_required :boolean          default(TRUE)
+#  location_required :boolean          default(TRUE), not null
 #  name              :text
 #  details           :text
 #

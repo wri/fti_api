@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  url         :string
-#  active      :boolean          default(TRUE)
+#  active      :boolean          default(TRUE), not null
 #  position    :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

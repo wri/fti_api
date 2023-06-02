@@ -11,7 +11,7 @@
 #  name                   :string
 #  institution            :string
 #  web_url                :string
-#  is_active              :boolean          default(TRUE)
+#  is_active              :boolean          default(TRUE), not null
 #  deactivated_at         :datetime
 #  permissions_request    :integer
 #  permissions_accepted   :datetime

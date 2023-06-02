@@ -12,7 +12,7 @@
 #  country_id            :integer
 #  operator_id           :integer
 #  pv                    :string
-#  is_active             :boolean          default(TRUE)
+#  is_active             :boolean          default(TRUE), not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  lat                   :decimal(, )
@@ -25,11 +25,11 @@
 #  modified_user_id      :integer
 #  law_id                :integer
 #  location_information  :string
-#  is_physical_place     :boolean          default(TRUE)
+#  is_physical_place     :boolean          default(TRUE), not null
 #  evidence_type         :integer
 #  location_accuracy     :integer
 #  evidence_on_report    :string
-#  hidden                :boolean          default(FALSE)
+#  hidden                :boolean          default(FALSE), not null
 #  admin_comment         :text
 #  monitor_comment       :text
 #  responsible_admin_id  :integer

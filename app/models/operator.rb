@@ -10,7 +10,7 @@
 #  concession        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  is_active         :boolean          default(TRUE)
+#  is_active         :boolean          default(TRUE), not null
 #  logo              :string
 #  operator_id       :string
 #  fa_id             :string
@@ -22,7 +22,7 @@
 #  country_doc_rank  :integer
 #  country_operators :integer
 #  name              :string
-#  details           :text
+#  details           :string
 #
 
 class Operator < ApplicationRecord

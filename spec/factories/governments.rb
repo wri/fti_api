@@ -6,7 +6,7 @@
 #  country_id        :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  is_active         :boolean          default(TRUE)
+#  is_active         :boolean          default(TRUE), not null
 #  government_entity :string
 #  details           :text
 #

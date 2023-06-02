@@ -7,7 +7,7 @@
 #  id          :integer          not null, primary key
 #  fmu_id      :integer          not null
 #  operator_id :integer          not null
-#  current     :boolean          not null
+#  current     :boolean          default(FALSE), not null
 #  start_date  :date
 #  end_date    :date
 #  created_at  :datetime         not null

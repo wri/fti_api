@@ -22,8 +22,8 @@
 #  subcategory_id         :integer
 #  country_id             :integer
 #  operator_id            :integer
-#  hidden                 :boolean
-#  is_active              :boolean
+#  hidden                 :boolean          default(FALSE), not null
+#  is_active              :boolean          default(FALSE), not null
 #
 class ObservationHistory < ApplicationRecord
   acts_as_paranoid
