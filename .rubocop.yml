@@ -33,17 +33,11 @@ Rails/SquishedSQLHeredocs:
 Rails/RedundantTravelBack:
   Enabled: false
 
-Rails/Pluck:
-  Enabled: true
-
 Rails/RootPathnameMethods:
   Enabled: false
 
 Rails/FilePath:
   Enabled: false
-
-Rails/PluckInWhere:
-  Enabled: true
 
 Rails/LexicallyScopedActionFilter:
   Enabled: true
