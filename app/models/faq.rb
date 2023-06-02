@@ -14,10 +14,10 @@
 #
 
 class Faq < ApplicationRecord
+  acts_as_list
+
   include Translatable
   translates :question, :answer, touch: true
-
-  validates :position, presence: true, uniqueness: true
 
   active_admin_translates :question do
     validates :question, presence: true

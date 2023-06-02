@@ -16,12 +16,6 @@ AllCops:
     - 'tmp/**/*'
     - 'bin/**/*'
 
-##################### Rails ##################################
-
-# # Enables Rails cops.
-# Rails:
-#   Enabled: true
-
 Rails/UnknownEnv:
   Environments:
     - production
@@ -35,9 +29,6 @@ Rails/EagerEvaluationLogMessage:
 
 Rails/SquishedSQLHeredocs:
   Enabled: false
-
-Rails/UniqueValidationWithoutIndex:
-  Enabled: false # change to true later
 
 Rails/RedundantTravelBack:
   Enabled: false
@@ -65,76 +56,3 @@ Rails/SkipsModelValidations:
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
-# # Enforces consistent use of action filter methods.
-# Rails/ActionFilter:
-#   Enabled: true
-#   EnforcedStyle: action
-
-# # Checks the correct usage of date aware methods, such as `Time.zone.today`,
-# # `Date.current`, etc.
-# Rails/Date:
-#   Enabled: false
-
-# # Prefer delegate method for delegations.
-# Rails/Delegate:
-#   Enabled: false
-
-# # Prefer `find_by` over `where.first`.
-# Rails/FindBy:
-#   Enabled: false
-
-# # Prefer `all.find_each` over `all.find`.
-# Rails/FindEach:
-#   Enabled: false
-
-# # Prefer has_many :through to has_and_belongs_to_many.
-# Rails/HasAndBelongsToMany:
-#   Enabled: true
-
-# # Checks for calls to puts, print, etc.
-# Rails/Output:
-#   Enabled: true
-
-# # Checks for incorrect grammar when using methods like `3.day.ago`.
-# Rails/PluralizationGrammar:
-#   Enabled: false
-
-# # Checks for `read_attribute(:attr)` and `write_attribute(:attr, val)`.
-# Rails/ReadWriteAttribute:
-#   Enabled: false
-
-# # Checks the arguments of ActiveRecord scopes.
-# Rails/ScopeArgs:
-#   Enabled: false
-
-# # Checks the correct usage of time zone aware methods.
-# # http://danilenko.org/2012/7/6/rails_timezones
-# Rails/TimeZone:
-#   Enabled: false
-
-# # Use validates :attribute, hash of validations.
-# Rails/Validation:
-#   Enabled: false
-
-# Rails/LexicallyScopedActionFilter:
-#   Enabled: true
-#   Exclude:
-#     - 'app/controllers/concerns/**/*'
-#     - 'app/controllers/v1/**/*'
-
-# Rails/UnknownEnv:
-#   Environments:
-#     - production
-#     - development
-#     - test
-#     - staging
-
-# # TODO: Enable it
-# Rails/HasManyOrHasOneDependent:
-#   Enabled: false
-# Rails/InverseOf:
-#   Enabled: false
-# Rails/FilePath:
-#   Enabled: false
-# Lint/BooleanSymbol:
-#   Enabled: false

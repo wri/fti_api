@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_123744) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_140933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -224,6 +224,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_123744) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "image"
+    t.index ["position"], name: "index_faqs_on_position", unique: true
   end
 
   create_table "fmu_operators", id: :serial, force: :cascade do |t|
@@ -747,6 +748,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_123744) do
     t.integer "country_operators"
     t.string "name"
     t.string "details"
+    t.index "btrim(lower((name)::text))", name: "index_operators_on_btrim_lower_name", unique: true
     t.index ["approved"], name: "index_operators_on_approved"
     t.index ["country_id"], name: "index_operators_on_country_id"
     t.index ["fa_id"], name: "index_operators_on_fa_id"
@@ -903,9 +905,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_123744) do
     t.datetime "updated_at", precision: nil, null: false
     t.integer "subcategory_id"
     t.index ["level", "id"], name: "index_severities_on_level_and_id"
-    t.index ["level", "subcategory_id"], name: "index_severities_on_level_and_subcategory_id"
+    t.index ["level", "subcategory_id"], name: "index_severities_on_level_and_subcategory_id", unique: true
     t.index ["level"], name: "index_severities_on_level"
-    t.index ["subcategory_id", "level"], name: "index_severities_on_subcategory_id_and_level"
   end
 
   create_table "severity_translations", id: :serial, force: :cascade do |t|

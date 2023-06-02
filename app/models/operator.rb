@@ -28,8 +28,7 @@
 class Operator < ApplicationRecord
   has_paper_trail
 
-  validates :name, presence: true
-  validates :name, uniqueness: {case_sensitive: false}, on: :create
+  validates :name, presence: true, uniqueness: {case_sensitive: false}
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
