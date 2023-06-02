@@ -39,9 +39,6 @@ Rails/SquishedSQLHeredocs:
 Rails/UniqueValidationWithoutIndex:
   Enabled: false # change to true later
 
-Rails/AddColumnIndex:
-  Enabled: false # change to true later
-
 Rails/RedundantTravelBack:
   Enabled: false
 
