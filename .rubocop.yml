@@ -42,9 +42,6 @@ Rails/UniqueValidationWithoutIndex:
 Rails/AddColumnIndex:
   Enabled: false # change to true later
 
-Rails/ThreeStateBooleanColumn:
-  Enabled: false # change to true later
-
 Rails/RedundantTravelBack:
   Enabled: false
 
