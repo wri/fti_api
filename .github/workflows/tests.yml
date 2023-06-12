@@ -44,7 +44,7 @@ jobs:
           POSTGRES_PORT_5432_TCP_PORT: 5432
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-          RECOVER_URL: http://localhost:5000
+          FRONTEND_URL: http://localhost:5000
           SENDGRID_API_KEY: asdf
           CONTACT_EMAIL: nomail@nomail.com
           RESPONSIBLE_EMAIL: test@nomail.com

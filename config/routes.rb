@@ -31,8 +31,7 @@ Rails.application.routes.draw do
     post "/login", to: "sessions#create"
     post "/register", to: "registrations#create"
     post "/reset-password", to: "passwords#create"
-    post "/users/password", to: "passwords#update_by_token"
-    patch "/users/current-user/password", to: "passwords#update"
+    post "/users/password", to: "passwords#update"
 
     # Helper requests
     get "/users/current-user", to: "users#current"

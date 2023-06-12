@@ -288,41 +288,6 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe "#reset_password_by_token" do
-      context "when reset_password_send_at is present and is within time" do
-        it "update the password with the specified options" do
-          user = create(:user, reset_password_sent_at: DateTime.current)
-
-          expect do
-            user.reset_password_by_token({password: "foobarfoo", password_confirmation: "foobarfoo"})
-          end.to change(user, :password)
-        end
-      end
-
-      context "when reset_password_send_at is not present or is too late" do
-        it "add an error on reset_password_token" do
-          user = create(:user)
-
-          expect do
-            user.reset_password_by_token({password: "foobarfoo", password_confirmation: "foobarfoo"})
-          end.not_to change(user, :password)
-          expect(user.errors[:reset_password_token]).to eql(["link expired."])
-        end
-      end
-    end
-
-    describe "#reset_password_by_current_user" do
-      context "when password and password_confirmation are valid" do
-        it "return the user instance" do
-          user = create(:user)
-
-          expect do
-            user.reset_password_by_current_user({password: "foobarfoo", password_confirmation: "foobarfoo"})
-          end.to change(user, :password)
-        end
-      end
-    end
-
     describe "#generate_reset_token" do
       it "generate a random reset password token" do
         user = create(:user)

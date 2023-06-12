@@ -139,26 +139,6 @@ class User < ApplicationRecord
     UserMailer.forgotten_password(self).deliver_later
   end
 
-  def reset_password_by_token(options)
-    if reset_password_sent_at.present? && DateTime.now <= reset_password_sent_at + 2.hours
-      update(password: options[:password],
-        password_confirmation: options[:password_confirmation],
-        reset_password_sent_at: nil)
-    else
-      errors.add(:reset_password_token, "link expired.")
-      self
-    end
-  end
-
-  def reset_password_by_current_user(options)
-    if update(password: options[:password],
-      password_confirmation: options[:password_confirmation])
-    else
-      errors.add(:password, "could not be updated!")
-    end
-    self
-  end
-
   private
 
   def create_from_request

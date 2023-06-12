@@ -17,7 +17,7 @@ class UserMailer < ApplicationMailer
   def generate_reset_url(user)
     return edit_user_password_url(reset_password_token: generate_reset_token(user)) if user.admin?
 
-    ENV["RECOVER_URL"] + "?reset_password_token=" + generate_reset_token(user)
+    ENV["FRONTEND_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
   end
 
   def generate_reset_token(user)
