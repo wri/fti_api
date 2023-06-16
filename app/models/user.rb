@@ -136,7 +136,9 @@ class User < ApplicationRecord
   end
 
   def send_reset_password_instructions
-    UserMailer.forgotten_password(self).deliver_later
+    I18n.with_locale(locale.presence || I18n.default_locale) do
+      UserMailer.forgotten_password(self).deliver_later
+    end
   end
 
   private

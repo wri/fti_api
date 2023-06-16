@@ -22,12 +22,12 @@ RSpec.describe UserMailer, type: :mailer do
     let(:mail) { UserMailer.forgotten_password(user) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Requested link to change your password")
+      expect(mail.subject).to eq(I18n.t("user_mailer.forgotten_password.subject"))
       expect(mail.to).to eq([user.email])
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Someone has requested a link to change your password. You can do this through the link below.")
+      expect(mail.body.encoded).to match(I18n.t("user_mailer.forgotten_password.message"))
     end
   end
 end

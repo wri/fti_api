@@ -1862,8 +1862,6 @@ en:
     forest_atlas: 'Forest Atlas'
     other: 'Others'
 
-
-
   wicked:
     types: 'observation-type'
     info: 'observation-info'

@@ -37,6 +37,8 @@ module FtiApi
     config.api_only = false
     config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
+    config.i18n.fallbacks = [I18n.default_locale]
+
     app_url = URI.parse(ENV.fetch("APP_URL", "http://localhost:3000"))
     Rails.application.routes.default_url_options = {
       host: app_url.host,

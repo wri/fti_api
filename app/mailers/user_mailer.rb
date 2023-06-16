@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
   def forgotten_password(user)
     @reset_url = generate_reset_url(user)
     @user = user
-    mail(to: user.email, subject: "Requested link to change your password")
+    mail(to: user.email, subject: I18n.t("user_mailer.forgotten_password.subject"))
   end
 
   def user_acceptance(user)
