@@ -29,7 +29,9 @@ module V1
     private
 
     def years
-      Observation.published.pluck(:publication_date).map { |x| x.year }.uniq.sort.reverse
+      Observation.published.joins(:observation_report)
+        .distinct.pluck(Arel.sql("extract(year from observation_reports.publication_date)::int"))
+        .sort.reverse
         .map { |x| {id: x, name: x} }
     end
 
