@@ -10,7 +10,7 @@
 #  concession        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  is_active         :boolean          default(TRUE)
+#  is_active         :boolean          default(TRUE), not null
 #  logo              :string
 #  operator_id       :string
 #  fa_id             :string
@@ -22,14 +22,13 @@
 #  country_doc_rank  :integer
 #  country_operators :integer
 #  name              :string
-#  details           :text
+#  details           :string
 #
 
 class Operator < ApplicationRecord
   has_paper_trail
 
-  validates :name, presence: true
-  validates :name, uniqueness: {case_sensitive: false}, on: :create
+  validates :name, presence: true, uniqueness: {case_sensitive: false}
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
@@ -79,7 +78,7 @@ class Operator < ApplicationRecord
   after_save :update_operator_name_on_fmus, if: :saved_change_to_name?
 
   validates :name, presence: true
-  validates :name, uniqueness: {case_sensitive: false}, on: :create # TODO: after dealing with duplicates remove on: :create
+  validates :name, uniqueness: {case_sensitive: false}
   validates :website, url: true, if: lambda { |x| x.website.present? }
   validates :operator_type, inclusion: {in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(", ")} "}
   validates :country, presence: true, on: :create

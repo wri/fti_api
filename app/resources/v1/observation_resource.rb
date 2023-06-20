@@ -173,7 +173,7 @@ module V1
       return unless ["Published (no comments)", "Published (not modified)",
         "Published (modified)"].include? @model.validation_status
 
-      @model.publication_date = Time.now
+      @model.publication_date = Time.zone.now
     end
   end
 end

@@ -121,7 +121,7 @@ RSpec.describe OperatorDocument, type: :model do
 
       context "when updating the expire date" do
         before do
-          operator_document.expire_date = Date.today + 1.month
+          operator_document.expire_date = Time.zone.today + 1.month
         end
 
         context "when the expire date is bigger than the notification date" do
@@ -302,7 +302,7 @@ RSpec.describe OperatorDocument, type: :model do
       subject { OperatorDocument.expire_documents }
 
       context "when the date is in the past" do
-        let(:expire_date) { Date.today - 1.year }
+        let(:expire_date) { Time.zone.today - 1.year }
 
         context "when the status is valid" do
           let(:status) { :doc_valid }
@@ -324,7 +324,7 @@ RSpec.describe OperatorDocument, type: :model do
       end
 
       context "when the date is in the future" do
-        let(:expire_date) { Date.today + 1.year }
+        let(:expire_date) { Time.zone.today + 1.year }
         let(:status) { :doc_valid }
 
         it { expect { subject }.to_not change { od.reload.status } }

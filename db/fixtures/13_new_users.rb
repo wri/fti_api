@@ -9,11 +9,11 @@ unless User.find_by(nickname: "testngo")
   @user.save
   @user.regenerate_api_key
 
-  puts "*************************************************************************"
-  puts "*                                                                       *"
-  puts "* Observer user created (email: 'testngo@ngo.com', password: 'password' *"
-  puts "*                                                                       *"
-  puts "* API Key created (SC_API_KEY: Bearer #{@user.api_key.access_token})"
-  puts "*                                                                       *"
-  puts "*************************************************************************"
+  Rails.logger.debug "*************************************************************************"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "* Observer user created (email: 'testngo@ngo.com', password: 'password' *"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "* API Key created (SC_API_KEY: Bearer #{@user.api_key.access_token})"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "*************************************************************************"
 end

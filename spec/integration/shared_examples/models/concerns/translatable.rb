@@ -21,11 +21,13 @@ RSpec.shared_examples "translatable" do |factory_key, fields|
           original_value = model.send(field)
           model.update(field => "New translation FR", :locale => :fr)
 
-          I18n.locale = :fr
-          expect(model.send(field)).to eq("New translation FR")
+          I18n.with_locale(:fr) do
+            expect(model.send(field)).to eq("New translation FR")
+          end
 
-          I18n.locale = :en
-          expect(model.send(field)).to eq(original_value)
+          I18n.with_locale(:en) do
+            expect(model.send(field)).to eq(original_value)
+          end
         end
       end
     end

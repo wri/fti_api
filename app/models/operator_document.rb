@@ -33,7 +33,7 @@ class OperatorDocument < ApplicationRecord
   attr_accessor :skip_score_recalculation
 
   belongs_to :operator, touch: true
-  belongs_to :required_operator_document, -> { with_archived }
+  belongs_to :required_operator_document, -> { with_archived }, inverse_of: :operator_documents
   belongs_to :fmu, optional: true
   belongs_to :user, optional: true
   belongs_to :document_file, optional: true, inverse_of: :operator_document
@@ -45,20 +45,19 @@ class OperatorDocument < ApplicationRecord
 
   before_validation :set_expire_date, unless: :expire_date?
 
-  validates_presence_of :start_date, if: :document_file_id?
-  validates_presence_of :expire_date, if: :document_file_id # TODO We set expire_date on before_validation
+  validates :start_date, presence: {if: :document_file_id?}
+  validates :expire_date, presence: {if: :document_file_id} # TODO We set expire_date on before_validation
   validate :reason_or_file
 
   before_save :set_type
   before_create :set_status
   before_create :delete_previous_pending_document
 
+  after_destroy :regenerate
+  after_destroy :recalculate_scores
   after_save :create_history, if: :saved_changes?
   after_save :recalculate_scores, if: :saved_change_to_score_related_attributes?
   after_save :remove_notifications, if: :saved_change_to_expire_date?
-
-  after_destroy :regenerate
-  after_destroy :recalculate_scores
 
   scope :by_forest_types, ->(forest_type_id) { includes(:fmu).where(fmus: {forest_type: forest_type_id}) }
   scope :by_country, ->(country_id) { includes(:required_operator_document).where(required_operator_documents: {country_id: country_id}) }
@@ -94,7 +93,7 @@ class OperatorDocument < ApplicationRecord
   EXPIRABLE_STATUSES = %w[doc_valid doc_not_required]
 
   def self.expire_documents
-    documents_to_expire = OperatorDocument.to_expire(Date.today)
+    documents_to_expire = OperatorDocument.to_expire(Time.zone.today)
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} documents"
@@ -160,7 +159,7 @@ class OperatorDocument < ApplicationRecord
 
     update!(
       status: OperatorDocument.statuses[:doc_not_provided],
-      expire_date: nil, start_date: Date.today, created_at: DateTime.now, updated_at: DateTime.now,
+      expire_date: nil, start_date: Time.zone.today, created_at: DateTime.now, updated_at: DateTime.now,
       deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
       source: nil, source_info: nil, document_file_id: nil
     )
@@ -177,9 +176,9 @@ class OperatorDocument < ApplicationRecord
   # Removes the existing notifications for an operator document
   # as long as the new expire date is longer than the notification period or the group has been removed
   def remove_notifications
-    Notification.includes(:notification_group).unsolved.where(operator_document_id: id).each do |notification|
+    Notification.includes(:notification_group).unsolved.where(operator_document_id: id).find_each do |notification|
       notification.solve! and next unless notification.notification_group_id
-      next if Date.today + notification.notification_group.days > expire_date
+      next if Time.zone.today + notification.notification_group.days > expire_date
 
       notification.solve!
     end

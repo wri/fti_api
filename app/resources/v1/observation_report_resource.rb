@@ -13,7 +13,7 @@ module V1
     after_create :add_observers
 
     filter :observer_id, apply: ->(records, value, _options) {
-      records.where(id: ObservationReportObserver.where(observer_id: value[0].to_i).pluck(:observation_report_id))
+      records.where(id: ObservationReportObserver.where(observer_id: value[0].to_i).select(:observation_report_id))
     }
 
     # TODO: Reactivate rubocop and fix this

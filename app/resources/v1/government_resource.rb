@@ -30,7 +30,7 @@ module V1
           .joins(:governments)
           .select("governments.id")
           .distinct
-          .pluck("governments.id")
+          .select("governments.id")
       )
     }
   end

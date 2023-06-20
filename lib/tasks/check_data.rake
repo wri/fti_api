@@ -1,8 +1,8 @@
 namespace :check do
   task document_files: :environment do
     doc_files = DocumentFile.all
-    od_doc_files = DocumentFile.where(id: OperatorDocument.unscoped.pluck(:document_file_id))
-    odh_doc_files = DocumentFile.where(id: OperatorDocumentHistory.unscoped.pluck(:document_file_id))
+    od_doc_files = DocumentFile.where(id: OperatorDocument.unscoped.select(:document_file_id))
+    odh_doc_files = DocumentFile.where(id: OperatorDocumentHistory.unscoped.select(:document_file_id))
 
     doc_files_orph = DocumentFile.where.not(id: (od_doc_files.pluck(:id) + odh_doc_files.pluck(:id)).uniq)
 

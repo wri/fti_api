@@ -15,7 +15,7 @@ class RequiredOperatorDocumentGroup < ApplicationRecord
   include Translatable
   translates :name, touch: true
   active_admin_translates :name do
-    validates_presence_of :name
+    validates :name, presence: true
   end
   has_many :required_operator_documents, dependent: :destroy
   has_many :required_operator_document_countries

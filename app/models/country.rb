@@ -23,7 +23,7 @@ class Country < ApplicationRecord
   translates :name, :region_name, :overview, :vpa_overview, touch: true
 
   active_admin_translates :name, :region_name, :overview, :vpa_overview do
-    validates_presence_of :name
+    validates :name, presence: true
   end
 
   has_many :users, inverse_of: :country
@@ -33,7 +33,6 @@ class Country < ApplicationRecord
   # rubocop:enable Rails/HasAndBelongsToMany
   has_many :governments, inverse_of: :country
   has_many :operators, inverse_of: :country
-  has_many :fa_operators, -> { fa_operator }, class_name: "Operator"
   has_many :fmus, inverse_of: :country
   has_many :laws, inverse_of: :country
 
@@ -55,7 +54,7 @@ class Country < ApplicationRecord
   scope :with_observations, ->(scope = Observation.all) {
     joins(:observations).merge(scope).where.not(observations: {id: nil}).distinct
   }
-  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select("observations.country_id").distinct.pluck("observations.country_id")) }
+  scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select("observations.country_id").distinct.select("observations.country_id")) }
 
   scope :by_status, ->(status) { where(is_active: status) }
 

@@ -18,7 +18,6 @@ class Comment < ApplicationRecord
   belongs_to :user, inverse_of: :comments
 
   validates :body, presence: true
-  validates :user, presence: true
 
   validate :validate_body_length
 

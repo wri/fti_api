@@ -7,7 +7,7 @@
 #  id          :integer          not null, primary key
 #  fmu_id      :integer          not null
 #  operator_id :integer          not null
-#  current     :boolean          not null
+#  current     :boolean          default(FALSE), not null
 #  start_date  :date
 #  end_date    :date
 #  created_at  :datetime         not null
@@ -25,7 +25,7 @@ class FmuOperator < ApplicationRecord
   belongs_to :operator, optional: false
 
   before_validation :set_current_start_date
-  validates_presence_of :start_date
+  validates :start_date, presence: true
   validate :start_date_is_earlier
   validate :one_active_per_fmu
   validate :non_colliding_dates
@@ -35,7 +35,7 @@ class FmuOperator < ApplicationRecord
 
   # Sets the start date as today, if none is provided
   def set_current_start_date
-    self.start_date = Date.today if start_date.blank?
+    self.start_date = Time.zone.today if start_date.blank?
   end
 
   # Validates if the start date is earlier than the end date
@@ -77,9 +77,9 @@ class FmuOperator < ApplicationRecord
   # Calculates and sets all the current operator_fmus on a given day
   def self.calculate_current
     # Checks which one should be active
-    to_deactivate = FmuOperator.where("current = 'TRUE' AND end_date < '#{Date.today}'::date")
+    to_deactivate = FmuOperator.where("current = 'TRUE' AND end_date < '#{Time.zone.today}'::date")
     to_activate = FmuOperator
-      .where("current = 'FALSE' AND start_date <= '#{Date.today}'::date AND (end_date IS NULL OR end_date >= '#{Date.today}'::date)")
+      .where("current = 'FALSE' AND start_date <= '#{Time.zone.today}'::date AND (end_date IS NULL OR end_date >= '#{Time.zone.today}'::date)")
 
     # Updates the operator documents
     to_deactivate.find_each { |x|
@@ -108,13 +108,14 @@ class FmuOperator < ApplicationRecord
 
       Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id}"
 
-      return if current_operator.blank? || current_operator.fa_id.blank?
+      # commit current transaction
+      next if current_operator.blank? || current_operator.fa_id.blank?
 
       # Only the RODF for this fmu's forest_type should be created
       rodf_query = "country_id = #{fmu.country_id} "
       rodf_query += " AND '#{Fmu.forest_types[fmu.forest_type]}' = ANY (forest_types)" if fmu.forest_type != "fmu"
 
-      RequiredOperatorDocumentFmu.where(rodf_query).each do |rodf|
+      RequiredOperatorDocumentFmu.where(rodf_query).find_each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
           operator_id: current_operator.id,
           fmu_id: fmu_id).first_or_create do |odf|
@@ -131,8 +132,8 @@ class FmuOperator < ApplicationRecord
 
   def update_fmu_geojson
     return unless current
-    return if end_date && (end_date < Date.today)
-    return if start_date > Date.today
+    return if end_date && (end_date < Time.zone.today)
+    return if start_date > Time.zone.today
 
     fmu.save
   end

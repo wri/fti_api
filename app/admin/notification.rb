@@ -49,7 +49,7 @@ ActiveAdmin.register Notification do
     end
     column :on_time? do |resource|
       expire_date = resource.operator_document.expire_date
-      resource.solved_at || expire_date.blank? || expire_date > Date.today
+      resource.solved_at || expire_date.blank? || expire_date > Time.zone.today
     end
     column :created_at
     column :updated_at

@@ -34,6 +34,6 @@ class Notification < ApplicationRecord
   scope :current, -> { where("created_at > 'now'::timestamp - '#{MONTHS_TO_FETCH} month'::interval") }
 
   def solve!
-    update(solved_at: Time.now)
+    update(solved_at: Time.zone.now)
   end
 end

@@ -4,7 +4,7 @@ namespace :scheduler do
     group_ids = []
     NotificationGroup.order(days: :asc).each do |notification_group|
       group_ids << notification_group.id
-      notification_date = Date.today + notification_group.days
+      notification_date = Time.zone.today + notification_group.days
       OperatorDocument.includes(operator: :users).find_by_sql(sql(notification_date, group_ids.join(", "))).each do |od|
         od.operator.users.each do |user|
           Notification.create!(notification_group: notification_group, operator_document: od, user: user)

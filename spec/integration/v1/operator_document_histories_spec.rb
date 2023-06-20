@@ -23,7 +23,7 @@ module V1
       end
       describe "No operator-id" do
         it "Fails with a descriptive message" do
-          get("/operator-document-histories?filter[date]=#{Date.today.to_fs(:db)}",
+          get("/operator-document-histories?filter[date]=#{Time.zone.today.to_fs(:db)}",
             headers: admin_headers)
           expect(status).to eql(400)
           expect(parsed_error).to eql("You must provide an operator-id")
@@ -31,7 +31,7 @@ module V1
       end
       describe "operator-id is not an integer" do
         it "Fails with a descriptive message" do
-          get("/operator-document-histories?filter[operator-id]=aa&filter[date]=#{Date.today.to_fs(:db)}",
+          get("/operator-document-histories?filter[operator-id]=aa&filter[date]=#{Time.zone.today.to_fs(:db)}",
             headers: admin_headers)
           expect(status).to eql(400)
           expect(parsed_error).to eql("Operator must be an integer")
@@ -49,15 +49,15 @@ module V1
     context "Fetch History of changed document" do
       describe "Modify operator document" do
         before do
-          travel_to Time.local(2020, 10, 5, 0, 0, 0)
+          travel_to Time.zone.local(2020, 10, 5, 0, 0, 0)
         end
 
         after do
           travel_back
         end
-        let(:time1) { Time.local(2020, 10, 10, 0, 0, 0) }
-        let(:time2) { Time.local(2020, 10, 15, 0, 0, 0) }
-        let(:time3) { Time.local(2020, 10, 20, 0, 0, 0) }
+        let(:time1) { Time.zone.local(2020, 10, 10, 0, 0, 0) }
+        let(:time2) { Time.zone.local(2020, 10, 15, 0, 0, 0) }
+        let(:time3) { Time.zone.local(2020, 10, 20, 0, 0, 0) }
         it "Fetches the old state of the operator document" do
           operator_document = FactoryBot.create :operator_document_country
           attachment = operator_document.document_file.attachment_url
@@ -68,7 +68,7 @@ module V1
           travel_to time3
           operator_document.destroy
 
-          search_time = (time1 + 2.day).to_date.to_fs(:db)
+          search_time = (time1 + 2.days).to_date.to_fs(:db)
           get("/operator-document-histories?filter[date]=#{search_time}&filter[operator-id]=#{operator_document.operator_id}",
             headers: admin_headers)
 
@@ -135,7 +135,7 @@ module V1
 
       context "when admin" do
         subject do
-          get("/operator-document-histories?filter[date]=#{Date.today}&filter[operator-id]=#{@operator.id}", headers: admin_headers)
+          get("/operator-document-histories?filter[date]=#{Time.zone.today}&filter[operator-id]=#{@operator.id}", headers: admin_headers)
         end
 
         it "returns provided status" do
@@ -150,7 +150,7 @@ module V1
 
       context "when not admin" do
         subject do
-          get("/operator-document-histories?filter[date]=#{Date.today}&filter[operator-id]=#{@operator.id}", headers: user_headers)
+          get("/operator-document-histories?filter[date]=#{Time.zone.today}&filter[operator-id]=#{@operator.id}", headers: user_headers)
         end
 
         it "hides OperatorDocuments status" do

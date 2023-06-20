@@ -9,16 +9,16 @@
 #  geojson              :jsonb
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  certification_fsc    :boolean          default(FALSE)
-#  certification_pefc   :boolean          default(FALSE)
-#  certification_olb    :boolean          default(FALSE)
-#  certification_pafc   :boolean          default(FALSE)
-#  certification_fsc_cw :boolean          default(FALSE)
-#  certification_tlv    :boolean          default(FALSE)
+#  certification_fsc    :boolean          default(FALSE), not null
+#  certification_pefc   :boolean          default(FALSE), not null
+#  certification_olb    :boolean          default(FALSE), not null
+#  certification_pafc   :boolean          default(FALSE), not null
+#  certification_fsc_cw :boolean          default(FALSE), not null
+#  certification_tlv    :boolean          default(FALSE), not null
 #  forest_type          :integer          default("fmu"), not null
 #  geometry             :geometry         geometry, 0
 #  deleted_at           :datetime
-#  certification_ls     :boolean          default(FALSE)
+#  certification_ls     :boolean          default(FALSE), not null
 #  name                 :string
 #  deleted_at           :datetime
 #
@@ -34,18 +34,18 @@ class Fmu < ApplicationRecord
   attr_reader :esri_shapefiles_zip
 
   active_admin_translates :name do
-    validates_presence_of :name
+    validates :name, presence: true
   end
 
   enum forest_type: ForestType::TYPES_WITH_CODE
 
   belongs_to :country, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu, dependent: :destroy
-  has_many :active_observations, -> { active }, class_name: "Observation"
+  has_many :active_observations, -> { active }, class_name: "Observation", inverse_of: :fmu
 
   has_many :fmu_operators, inverse_of: :fmu, dependent: :destroy
   has_many :operators, through: :fmu_operators
-  has_one :fmu_operator, -> { where(current: true) }
+  has_one :fmu_operator, -> { where(current: true) }, inverse_of: :fmu
   has_one :operator, through: :fmu_operator
 
   has_many :operator_document_fmus, dependent: :destroy
@@ -55,7 +55,6 @@ class Fmu < ApplicationRecord
 
   before_validation :update_geojson_properties
 
-  validates :country_id, presence: true
   validates :name, presence: true
   validates :forest_type, presence: true
   validate :geojson_correctness, if: :geojson_changed?

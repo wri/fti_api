@@ -54,7 +54,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     label: proc { I18n.t("active_admin.required_operator_document_page.publication_authorization") },
     as: :select, collection: [[I18n.t("active_admin.true"), true], [I18n.t("active_admin.false"), false]]
   filter :required_operator_document_group
-  filter :country, collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.pluck(:country_id)) }
+  filter :country, collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.select(:country_id)) }
   filter :type, as: :select, collection: %w[RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu]
   filter "forest_types_contains_array",
     as: :select,

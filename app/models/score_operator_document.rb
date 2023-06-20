@@ -19,8 +19,8 @@
 #
 class ScoreOperatorDocument < ApplicationRecord
   belongs_to :operator, touch: true
-  validates_presence_of :date
-  validates_uniqueness_of :current, scope: :operator_id, if: :current?
+  validates :date, presence: true
+  validates :current, uniqueness: {scope: :operator_id, if: :current?}
 
   after_commit :refresh_ranking
 
@@ -45,7 +45,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # @return [ScoreOperatorDocument] The SOD created
   def self.build(operator, docs = nil)
     docs ||= operator.operator_documents
-    sod = ScoreOperatorDocument.new date: Date.today, operator: operator, current: true
+    sod = ScoreOperatorDocument.new date: Time.zone.today, operator: operator, current: true
     calculator = ScoreOperatorPresenter.new(docs)
     sod.all = calculator.all
     sod.fmu = calculator.fmu
@@ -85,7 +85,7 @@ class ScoreOperatorDocument < ApplicationRecord
     return false unless other.is_a? self.class
 
     VALUE_ATTRS.reject do |attr|
-      read_attribute(attr) == other.read_attribute(attr)
+      self[attr] == other.read_attribute(attr)
     end.none?
   end
 
@@ -107,7 +107,7 @@ class ScoreOperatorDocument < ApplicationRecord
   # @param [ScoreOperatorDocument] sod The SOD with the new values
   def update_values(sod)
     VALUE_ATTRS.each do |attr|
-      write_attribute attr, sod.read_attribute(attr)
+      self[attr] = sod.read_attribute(attr)
     end
     save!
   end

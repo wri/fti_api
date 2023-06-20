@@ -8,7 +8,7 @@
 #  concession        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  is_active         :boolean          default(TRUE)
+#  is_active         :boolean          default(TRUE), not null
 #  logo              :string
 #  operator_id       :string
 #  fa_id             :string
@@ -20,7 +20,7 @@
 #  country_doc_rank  :integer
 #  country_operators :integer
 #  name              :string
-#  details           :text
+#  details           :string
 #
 
 FactoryBot.define do
@@ -39,7 +39,7 @@ FactoryBot.define do
 
     trait :with_documents do
       after(:create) do |op|
-        op.update!(fa_id: "FA_UUID") unless op.fa_id.present?
+        op.update!(fa_id: "FA_UUID") if op.fa_id.blank?
         # create one country document
         create(:operator_document_country, operator: op)
         create(:operator_document_fmu, operator: op, force_status: "doc_valid")

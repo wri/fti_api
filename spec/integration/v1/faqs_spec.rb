@@ -7,10 +7,6 @@ module V1
         locales: [:en, :fr],
         attributes: {question: "FAQ Question", answer: "Answer"}
       },
-      sort: {
-        attribute: :position,
-        sequence: ->(i) { i }
-      },
       route_key: "faqs"
     }
   end

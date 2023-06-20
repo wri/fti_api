@@ -12,7 +12,7 @@ class GovDocumentUploader < ApplicationUploader
   def filename
     return if super.blank?
 
-    filename = "" + model.required_gov_document.name.first(200) + "-" + random_token + "-" + Date.today.to_s
+    filename = "" + model.required_gov_document.name.first(200) + "-" + random_token + "-" + Time.zone.today.to_s
     filename += "." + super.split(".").last if super.split(".").any?
     sanitize_filename(filename)
   end

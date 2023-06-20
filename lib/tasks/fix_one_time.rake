@@ -85,7 +85,7 @@ namespace :fix_one_time do
       annexes = OperatorDocumentAnnex.where(id: AnnexDocument
                                             .where(documentable: histories)
                                             .or(AnnexDocument.where(documentable: docs))
-                                            .pluck(:operator_document_annex_id))
+                                            .select(:operator_document_annex_id))
 
       if for_real
         annexes.each do |annex|
@@ -122,7 +122,7 @@ namespace :fix_one_time do
     puts "RUNNING FOR REAL" if for_real
     puts "DRY RUN" unless for_real
 
-    path = Rails.root.join("public", "uploads", "observation_report", "attachment")
+    path = Rails.public_path.join("uploads", "observation_report", "attachment")
     report_filename_hash = Dir.glob("#{path}/**/*")
       .reject { |fn| File.directory?(fn) }
       .map { |file| file.gsub(path.to_s + "/", "") }
@@ -200,7 +200,7 @@ namespace :fix_one_time do
 
     ActiveRecord::Base.transaction do
       docs = OperatorDocument
-        .where(status: "doc_expired", updated_at: 1.month.ago..Date.today)
+        .where(status: "doc_expired", updated_at: 1.month.ago..Time.zone.today)
         .select do |o|
           prev_version_not_required = false
           o.versions.reverse.each do |version|

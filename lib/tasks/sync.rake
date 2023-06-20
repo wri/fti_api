@@ -44,7 +44,7 @@ class SyncTasks
       .pluck("DATE(operator_document_updated_at)")
       .sort
 
-    [from_date, *important_dates, Date.today.to_date].uniq.each do |day|
+    [from_date, *important_dates, Time.zone.today.to_date].uniq.each do |day|
       countries.each do |country_id|
         puts "Checking score for country: #{country_id} and #{day}"
         OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, false)
@@ -65,7 +65,7 @@ class SyncTasks
 
     important_dates = ObservationReport.pluck(:created_at).sort.map(&:to_date).uniq
 
-    [from_date, *important_dates, Date.today.to_date].uniq.each do |day|
+    [from_date, *important_dates, Time.zone.today.to_date].uniq.each do |day|
       countries.each do |country_id|
         puts "Checking observation reports for country: #{country_id || "all"} and #{day}"
         ObservationReportStatistic.generate_for_country_and_day(country_id, day, false)

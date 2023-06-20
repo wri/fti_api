@@ -16,7 +16,7 @@ class DocumentFileUploader < ApplicationUploader
     filename = [
       model.operator_document.operator.name[0...30]&.parameterize,
       model.operator_document.required_operator_document.name[0...100]&.parameterize,
-      Date.today.to_s
+      Time.zone.today.to_s
     ].compact.join("-")
 
     sanitize_filename(filename + File.extname(super))

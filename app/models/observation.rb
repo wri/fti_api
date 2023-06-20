@@ -12,7 +12,7 @@
 #  country_id            :integer
 #  operator_id           :integer
 #  pv                    :string
-#  is_active             :boolean          default(TRUE)
+#  is_active             :boolean          default(TRUE), not null
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  lat                   :decimal(, )
@@ -25,11 +25,11 @@
 #  modified_user_id      :integer
 #  law_id                :integer
 #  location_information  :string
-#  is_physical_place     :boolean          default(TRUE)
+#  is_physical_place     :boolean          default(TRUE), not null
 #  evidence_type         :integer
 #  location_accuracy     :integer
 #  evidence_on_report    :string
-#  hidden                :boolean          default(FALSE)
+#  hidden                :boolean          default(FALSE), not null
 #  admin_comment         :text
 #  monitor_comment       :text
 #  responsible_admin_id  :integer
@@ -91,7 +91,7 @@ class Observation < ApplicationRecord
   belongs_to :severity, inverse_of: :observations, optional: true
   belongs_to :operator, inverse_of: :observations, optional: true
   belongs_to :user, inverse_of: :observations, optional: true
-  belongs_to :modified_user, class_name: "User", foreign_key: "modified_user_id", optional: true
+  belongs_to :modified_user, class_name: "User", optional: true
   belongs_to :fmu, inverse_of: :observations, optional: true
   belongs_to :law, inverse_of: :observations, optional: true
   belongs_to :observation_report, optional: true
@@ -113,7 +113,7 @@ class Observation < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :observation_documents, dependent: :destroy
 
-  belongs_to :responsible_admin, class_name: "User", foreign_key: "responsible_admin_id", optional: true
+  belongs_to :responsible_admin, class_name: "User", optional: true
 
   accepts_nested_attributes_for :observation_documents, allow_destroy: true
   accepts_nested_attributes_for :observation_report, allow_destroy: true
@@ -135,23 +135,22 @@ class Observation < ApplicationRecord
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
-  before_create :set_default_observer
-  before_create :set_responsible_admin
   before_save :set_active_status
   before_save :check_is_physical_place
   before_save :set_centroid
+  before_create :set_default_observer
+  before_create :set_responsible_admin
 
   after_create :update_operator_scores, if: :is_active?
   after_update :update_operator_scores, if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? || saved_change_to_operator_id? || saved_change_to_fmu_id? }
   after_update :update_reports_observers, if: :saved_change_to_observation_report_id?
 
+  after_destroy :update_operator_scores
+  after_destroy :update_fmu_geojson
   after_save :create_history, if: :saved_changes?
 
   after_save :remove_documents, if: -> { evidence_type == "Evidence presented in the report" }
   after_save :update_fmu_geojson
-
-  after_destroy :update_operator_scores
-  after_destroy :update_fmu_geojson
 
   after_save :prepare_notifications
   after_commit :notify

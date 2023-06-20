@@ -42,7 +42,7 @@ module V1
         get "/observations?include=#{include.join(",")}", headers: webuser_headers
         expect(status).to eq(200)
         expect(parsed_data.size).to eq(7)
-        included_types = parsed_body[:included].map { |obj| obj[:type] }.uniq
+        included_types = parsed_body[:included].pluck(:type).uniq
         expect(included_types).to include("countries")
         expect(included_types).to include("operators")
         expect(included_types).to include("subcategories")
@@ -147,8 +147,9 @@ module V1
             headers: admin_headers)
 
           expect(observation.reload.details).to eq("FR Observation one")
-          I18n.locale = "en"
-          expect(observation.reload.details).to eq("00 Observation one")
+          I18n.with_locale(:en) do
+            expect(observation.reload.details).to eq("00 Observation one")
+          end
           expect(status).to eq(200)
         end
       end

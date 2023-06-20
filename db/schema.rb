@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_140933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -69,7 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.string "access_token"
     t.datetime "expires_at", precision: nil
     t.integer "user_id"
-    t.boolean "is_active", default: true
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
@@ -159,7 +159,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
 
   create_table "country_links", id: :serial, force: :cascade do |t|
     t.string "url"
-    t.boolean "active", default: true
+    t.boolean "active", default: true, null: false
     t.integer "position"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
@@ -194,7 +194,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
 
   create_table "country_vpas", id: :serial, force: :cascade do |t|
     t.string "url"
-    t.boolean "active", default: true
+    t.boolean "active", default: true, null: false
     t.integer "position"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
@@ -224,12 +224,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "image"
+    t.index ["position"], name: "index_faqs_on_position", unique: true
   end
 
   create_table "fmu_operators", id: :serial, force: :cascade do |t|
     t.integer "fmu_id", null: false
     t.integer "operator_id", null: false
-    t.boolean "current", null: false
+    t.boolean "current", default: false, null: false
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", precision: nil, null: false
@@ -258,16 +259,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.jsonb "geojson"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.boolean "certification_fsc", default: false
-    t.boolean "certification_pefc", default: false
-    t.boolean "certification_olb", default: false
-    t.boolean "certification_pafc", default: false
-    t.boolean "certification_fsc_cw", default: false
-    t.boolean "certification_tlv", default: false
+    t.boolean "certification_fsc", default: false, null: false
+    t.boolean "certification_pefc", default: false, null: false
+    t.boolean "certification_olb", default: false, null: false
+    t.boolean "certification_pafc", default: false, null: false
+    t.boolean "certification_fsc_cw", default: false, null: false
+    t.boolean "certification_tlv", default: false, null: false
     t.integer "forest_type", default: 0, null: false
     t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
     t.datetime "deleted_at", precision: nil
-    t.boolean "certification_ls", default: false
+    t.boolean "certification_ls", default: false, null: false
     t.index ["country_id"], name: "index_fmus_on_country_id"
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at"
     t.index ["forest_type"], name: "index_fmus_on_forest_type"
@@ -309,7 +310,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.integer "country_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.boolean "is_active", default: true
+    t.boolean "is_active", default: true, null: false
     t.index ["country_id"], name: "index_governments_on_country_id"
   end
 
@@ -426,8 +427,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.integer "subcategory_id"
     t.integer "country_id"
     t.integer "operator_id"
-    t.boolean "hidden"
-    t.boolean "is_active"
+    t.boolean "hidden", default: false, null: false
+    t.boolean "is_active", default: false, null: false
     t.index ["category_id"], name: "index_observation_histories_on_category_id"
     t.index ["country_id"], name: "index_observation_histories_on_country_id"
     t.index ["fmu_forest_type"], name: "index_observation_histories_on_fmu_forest_type"
@@ -500,8 +501,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.integer "total_count", default: 0
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.boolean "hidden"
-    t.boolean "is_active"
+    t.boolean "hidden", default: false, null: false
+    t.boolean "is_active", default: false, null: false
     t.integer "observation_type"
     t.index ["category_id"], name: "index_observation_statistics_on_category_id"
     t.index ["country_id"], name: "index_observation_statistics_on_country_id"
@@ -533,7 +534,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.integer "country_id"
     t.integer "operator_id"
     t.string "pv"
-    t.boolean "is_active", default: true
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.decimal "lat"
@@ -546,11 +547,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.integer "modified_user_id"
     t.integer "law_id"
     t.string "location_information"
-    t.boolean "is_physical_place", default: true
+    t.boolean "is_physical_place", default: true, null: false
     t.integer "evidence_type"
     t.integer "location_accuracy"
     t.string "evidence_on_report"
-    t.boolean "hidden", default: false
+    t.boolean "hidden", default: false, null: false
     t.text "admin_comment"
     t.text "monitor_comment"
     t.integer "responsible_admin_id"
@@ -603,7 +604,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.string "observer_type", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.boolean "is_active", default: true
+    t.boolean "is_active", default: true, null: false
     t.string "logo"
     t.string "address"
     t.string "information_name"
@@ -613,7 +614,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.string "data_email"
     t.string "data_phone"
     t.string "organization_type"
-    t.boolean "public_info", default: false
+    t.boolean "public_info", default: false, null: false
     t.integer "responsible_user_id"
     t.integer "responsible_admin_id"
     t.index ["is_active"], name: "index_observers_on_is_active"
@@ -646,7 +647,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.text "reason"
     t.text "note"
     t.datetime "response_date", precision: nil
-    t.boolean "public"
+    t.boolean "public", default: false, null: false
     t.integer "source"
     t.string "source_info"
     t.integer "fmu_id"
@@ -734,7 +735,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.string "concession"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.boolean "is_active", default: true
+    t.boolean "is_active", default: true, null: false
     t.string "logo"
     t.string "operator_id"
     t.string "fa_id"
@@ -747,6 +748,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.integer "country_operators"
     t.string "name"
     t.string "details"
+    t.index "btrim(lower((name)::text))", name: "index_operators_on_btrim_lower_name", unique: true
     t.index ["approved"], name: "index_operators_on_approved"
     t.index ["country_id"], name: "index_operators_on_country_id"
     t.index ["fa_id"], name: "index_operators_on_fa_id"
@@ -903,9 +905,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.datetime "updated_at", precision: nil, null: false
     t.integer "subcategory_id"
     t.index ["level", "id"], name: "index_severities_on_level_and_id"
-    t.index ["level", "subcategory_id"], name: "index_severities_on_level_and_subcategory_id"
+    t.index ["level", "subcategory_id"], name: "index_severities_on_level_and_subcategory_id", unique: true
     t.index ["level"], name: "index_severities_on_level"
-    t.index ["subcategory_id", "level"], name: "index_severities_on_subcategory_id_and_level"
   end
 
   create_table "severity_translations", id: :serial, force: :cascade do |t|
@@ -967,7 +968,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.integer "subcategory_type"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.boolean "location_required", default: true
+    t.boolean "location_required", default: true, null: false
     t.index ["category_id"], name: "index_subcategories_on_category_id"
     t.index ["subcategory_type"], name: "index_subcategories_on_subcategory_type"
   end
@@ -1042,7 +1043,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_093944) do
     t.string "name"
     t.string "institution"
     t.string "web_url"
-    t.boolean "is_active", default: true
+    t.boolean "is_active", default: true, null: false
     t.datetime "deactivated_at", precision: nil
     t.integer "permissions_request"
     t.datetime "permissions_accepted", precision: nil

@@ -6,7 +6,7 @@ namespace :observations do
 
   desc "Recalculate observation scores for operators"
   task recalculate_scores: :environment do
-    operators = Operator.where(id: ScoreOperatorObservation.pluck(:operator_id).uniq)
+    operators = Operator.where(id: ScoreOperatorObservation.distinct.select(:operator_id))
     operators.each do |op|
       ScoreOperatorObservation.recalculate!(op)
     end
@@ -96,7 +96,7 @@ namespace :observations do
 
     results = ActiveRecord::Base.connection.execute(query).to_a
     puts "#{results.count} results with swapped lng lat inside fmu"
-    puts "Observation ids: #{results.map { |r| r["id"] }.join(", ")}"
+    puts "Observation ids: #{results.pluck("id").join(", ")}"
     ActiveRecord::Base.transaction do
       Observation.skip_callback(:save, :after, :update_fmu_geojson)
       results.each do |res|

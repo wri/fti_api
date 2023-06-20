@@ -16,7 +16,7 @@ module V1
     end
 
     filter :subcategory_type, apply: ->(records, value, _options) {
-      records.joins(:subcategory).where("subcategories.subcategory_type = ?", value[0].to_i)
+      records.joins(:subcategory).where(subcategories: {subcategory_type: value[0].to_i})
     }
   end
 end

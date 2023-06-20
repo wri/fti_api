@@ -25,8 +25,8 @@ class OperatorDocumentStatistic < ApplicationRecord
 
   enum fmu_forest_type: ForestType::TYPES_WITH_CODE
 
-  validates_presence_of :date
-  validates_uniqueness_of :date, scope: [:country_id, :required_operator_document_group_id, :fmu_forest_type, :document_type]
+  validates :date, presence: true
+  validates :date, uniqueness: {scope: [:country_id, :required_operator_document_group_id, :fmu_forest_type, :document_type]}
 
   def self.from_date(date)
     date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)

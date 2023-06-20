@@ -40,7 +40,7 @@ namespace :import do
         puts ">>>>>>>>>>>>>>>>>> #{iso} >>>>>>>>>>>>>>>>>>>"
 
         country = Country.find_by iso: iso
-        old_fmus = Fmu.where(country_id: country.id).select { |f| !fmus[iso].include?(f.name) }
+        old_fmus = Fmu.where(country_id: country.id).select { |f| fmus[iso].exclude?(f.name) }
 
         puts "..... New FMUs"
         new_fmus[iso].sort.each { |k, v| puts "Line #{k} - #{v}" }
@@ -111,7 +111,7 @@ namespace :import do
           operator_name = properties["company_na"]&.strip
           operator = Operator.find_by("lower(trim(name)) = ?", operator_name.downcase)
           puts "Creating Operator: #{operator_name}" unless operator.present? || operator_name.blank?
-          unless operator_name.blank?
+          if operator_name.present?
             operator ||= Operator.create!(name: operator_name,
               country_id: country.id,
               fa_id: "CMR/UNKNOWN/#{index.to_s.rjust(4, "0")}",
@@ -119,7 +119,7 @@ namespace :import do
           end
 
           fmu = Fmu.where(name: name, country_id: country.id).first if name.present?
-          fmu = Fmu.where(country_id: country.id, name: "#{country.iso}-row-#{index}").first unless name.present?
+          fmu = Fmu.where(country_id: country.id, name: "#{country.iso}-row-#{index}").first if name.blank?
           unless fmu
             globalid = properties["globalid"]
             fmu = Fmu.where(country_id: country.id).where("geojson->'properties'->>'globalid' = '#{globalid}'").first if globalid.present?
@@ -130,7 +130,7 @@ namespace :import do
             puts "Creating FMU: #{name}"
             fmu = Fmu.new
             fmu.country = country
-            fmu.name = name.blank? ? "#{country.iso}-row-#{index}" : name
+            fmu.name = (name.presence || "#{country.iso}-row-#{index}")
             fmu.forest_type = if properties["iso3_fmu"] == "CAF"
               :pea
             else
@@ -148,7 +148,7 @@ namespace :import do
 
           if fmu.operator != operator
             if operator.blank? # Ends the fmus contracts yesterday
-              fmu.fmu_operator.update(end_date: Date.today - 1.day, current: false)
+              fmu.fmu_operator.update(end_date: Time.zone.today - 1.day, current: false)
             else
               begin
                 puts "Changing operator. FMU: #{name.rjust(27, " ")}. Operator: #{operator.name}"
@@ -157,7 +157,7 @@ namespace :import do
                   end_date = begin
                     Date.parse(properties["start_date"]) - 1.day
                   rescue
-                    Date.today
+                    Time.zone.today
                   end
                   FmuOperator.where(fmu_id: fmu.id, current: true).find_each do |fo|
                     fo.update!(current: false, end_date: end_date)

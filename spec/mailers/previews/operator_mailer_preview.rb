@@ -10,7 +10,7 @@ class OperatorMailerPreview < ActionMailer::Preview
   private
 
   def documents
-    OperatorDocument.where(operator_id: operator_id).to_expire(Date.today)
+    OperatorDocument.where(operator_id: operator_id).to_expire(Time.zone.today)
   end
 
   def operator
@@ -18,6 +18,6 @@ class OperatorMailerPreview < ActionMailer::Preview
   end
 
   def operator_id
-    OperatorDocument.to_expire(Date.today).pluck(:operator_id).take(1).first
+    OperatorDocument.to_expire(Time.zone.today).pluck(:operator_id).take(1).first
   end
 end

@@ -20,7 +20,7 @@ RSpec.describe "Admin: Visible Columns and Charts", type: :system do
       create(:operator_document_country, operator: operator1, force_status: "doc_valid")
     end
 
-    [2.days.ago, Date.yesterday, Date.today].each do |date|
+    [2.days.ago, Date.yesterday, Time.zone.today].each do |date|
       # nil represents all countries
       [country1.id, country2.id, nil].each do |country_id|
         OperatorDocumentStatistic.generate_for_country_and_day(country_id, date)

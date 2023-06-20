@@ -4,7 +4,7 @@ namespace :operator_documents_histories do
     unsync_docs = {}
     Operator.all.each do |opt|
       docs = []
-      odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Date.today)
+      odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Time.zone.today)
       odhs.each do |odh|
         od = odh.operator_document
         unless odh.status == od.status
@@ -20,7 +20,7 @@ namespace :operator_documents_histories do
   task :check_sync_opt, [:id] => :environment do |_, args|
     unsync_docs = []
     opt = Operator.find(args[:id])
-    odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Date.today)
+    odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Time.zone.today)
     odhs.each do |odh|
       od = odh.operator_document
       unless odh.status == od.status
@@ -33,7 +33,7 @@ namespace :operator_documents_histories do
   desc "Creates new ODHs for those unsync"
   task resync: :environment do
     Operator.all.each do |opt|
-      odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Date.today)
+      odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Time.zone.today)
       odhs.each do |odh|
         od = odh.operator_document
         unless odh.status == od.status
@@ -48,7 +48,7 @@ namespace :operator_documents_histories do
   desc "Creates new ODHs for those unsync for a given operator"
   task :resync_opt, [:id] => :environment do |_, args|
     opt = Operator.find(args[:id])
-    odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Date.today)
+    odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Time.zone.today)
     odhs.each do |odh|
       od = odh.operator_document
       unless odh.status == od.status

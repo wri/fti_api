@@ -65,7 +65,7 @@ RSpec.describe GovDocument, type: :model do
       subject { GovDocument.expire_documents }
 
       context "when the date is in the past" do
-        let(:expire_date) { Date.today - 1.year }
+        let(:expire_date) { Time.zone.today - 1.year }
 
         context "when the status is valid" do
           let(:status) { :doc_valid }
@@ -80,7 +80,7 @@ RSpec.describe GovDocument, type: :model do
         end
       end
       context "when the date is in the future" do
-        let(:expire_date) { Date.today + 1.year }
+        let(:expire_date) { Time.zone.today + 1.year }
         let(:status) { :doc_valid }
 
         it { expect { subject }.to_not change { gd.reload.status } }

@@ -30,7 +30,7 @@ ActiveAdmin.register UserPermission do
         params["user_permission"]["permissions"] = parsed_permissions
       end
       super do
-        redirect_to admin_access_control_path, notice: "Permissions changed" and return if resource.valid?
+        redirect_to admin_access_control_path, notice: I18n.t("active_admin.shared.permissions_changed") and return if resource.valid?
       end
     end
   end

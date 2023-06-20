@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 if Country.count.zero?
-  puts "* Creating Countries...                                                 *"
+  Rails.logger.debug "* Creating Countries...                                                 *"
 
   Country.create!([
     {name: "Australia", region_name: "Australia/New Zealand", iso: "AUS", region_iso: "AZ", country_centroid: {type: "Point", coordinates: [-25, 135]}, region_centroid: {type: "Point", coordinates: [-26.3793465342288, 135.977532183695]}},
@@ -241,9 +241,9 @@ if Country.count.zero?
     {name: "Kosovo", region_name: "Southern Europe", iso: "RKS", region_iso: "SE", country_centroid: {type: "Point", coordinates: [42.58333, 20.91667]}, region_centroid: {type: "Point", coordinates: [41.4578362811151, 7.38956543946488]}}
   ])
 
-  puts "*************************************************************************"
-  puts "*                                                                       *"
-  puts "* Countries successfully created!                                       *"
-  puts "*                                                                       *"
-  puts "*************************************************************************"
+  Rails.logger.debug "*************************************************************************"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "* Countries successfully created!                                       *"
+  Rails.logger.debug "*                                                                       *"
+  Rails.logger.debug "*************************************************************************"
 end

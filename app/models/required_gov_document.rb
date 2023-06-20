@@ -26,7 +26,7 @@ class RequiredGovDocument < ApplicationRecord
 
   translates :explanation, :name, paranoia: true, touch: true, versioning: :paper_trail
   active_admin_translates :explanation, :name do
-    validates_presence_of :name
+    validates :name, presence: true
   end
 
   belongs_to :required_gov_document_group
@@ -35,7 +35,7 @@ class RequiredGovDocument < ApplicationRecord
 
   enum document_type: {file: 1, link: 2, stats: 3}
 
-  validates_inclusion_of :document_type, in: RequiredGovDocument.document_types.keys
+  validates :document_type, inclusion: {in: RequiredGovDocument.document_types.keys}
   validates :valid_period, numericality: {greater_than: 0}, if: :valid_period?
   validate :fixed_fields_unchanged
 

@@ -11,7 +11,7 @@
 #  name                   :string
 #  institution            :string
 #  web_url                :string
-#  is_active              :boolean          default(TRUE)
+#  is_active              :boolean          default(TRUE), not null
 #  deactivated_at         :datetime
 #  permissions_request    :integer
 #  permissions_accepted   :datetime
@@ -59,8 +59,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :user_permission
 
-  validates_uniqueness_of :email
-  validates_format_of :email, without: TEMP_EMAIL_REGEX, on: :update
+  validates :email, uniqueness: true
+  validates :email, format: {without: TEMP_EMAIL_REGEX, on: :update}
   validates :name, presence: true
   validates :locale, inclusion: {in: I18n.available_locales.map(&:to_s), allow_blank: true}
   validates :password, confirmation: true,

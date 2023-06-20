@@ -17,7 +17,7 @@ module V1
       filter: {
         success_roles: %i[admin],
         filters: [
-          {attributes: {subcategory_id: FactoryBot.create(:subcategory).id}}
+          {expected_count: 1, attributes: {subcategory_id: FactoryBot.create(:subcategory).id}}
         ]
       }
     }

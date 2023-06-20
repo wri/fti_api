@@ -16,8 +16,8 @@ class ObservationReportStatistic < ApplicationRecord
   belongs_to :country, optional: true
   belongs_to :observer, optional: true
 
-  validates_presence_of :date
-  validates_uniqueness_of :date, scope: [:country_id, :observer_id]
+  validates :date, presence: true
+  validates :date, uniqueness: {scope: [:country_id, :observer_id]}
 
   def self.from_date(date)
     date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)

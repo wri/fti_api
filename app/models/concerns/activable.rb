@@ -27,7 +27,7 @@ module Activable
   end
 
   def set_deactivated_at
-    self.deactivated_at = Time.now if attributes.key?("deactivated_at") && is_active_changed? && deactivated?
+    self.deactivated_at = Time.zone.now if attributes.key?("deactivated_at") && is_active_changed? && deactivated?
   end
 
   def status

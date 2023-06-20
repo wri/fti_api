@@ -7,7 +7,7 @@ class RemoveOperatorTranslationsNameAndDetails < ActiveRecord::Migration[5.2]
 
     query = <<~SQL
       UPDATE operators o
-        SET name = t.name, details = t.details 
+        SET name = t.name, details = t.details
       FROM
         operator_translations t
       WHERE
@@ -19,6 +19,8 @@ class RemoveOperatorTranslationsNameAndDetails < ActiveRecord::Migration[5.2]
     change_column_null :operators, :name, true
     PaperTrail.request.enable_model(Operator)
 
+    # rubocop:disable Rails/ReversibleMigration
     drop_table :operator_translations
+    # rubocop:enable Rails/ReversibleMigration
   end
 end

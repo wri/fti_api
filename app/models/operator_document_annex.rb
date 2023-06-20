@@ -35,7 +35,7 @@ class OperatorDocumentAnnex < ApplicationRecord
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
 
-  validates_presence_of :name, :start_date, :status
+  validates :name, :start_date, :status, presence: true
 
   enum status: {doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4}
   enum uploaded_by: {operator: 1, monitor: 2, admin: 3, other: 4}
@@ -46,7 +46,7 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   def self.expire_document_annexes
     documents_to_expire =
-      OperatorDocumentAnnex.where("expire_date IS NOT NULL and expire_date < '#{Date.today}'::date and status = 3")
+      OperatorDocumentAnnex.where("expire_date IS NOT NULL and expire_date < '#{Time.zone.today}'::date and status = 3")
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} document annexes"
