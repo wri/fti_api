@@ -67,6 +67,9 @@ class Operator < ApplicationRecord
   accepts_nested_attributes_for :fmu_operators, :all_fmu_operators
 
   before_validation { remove_logo! if delete_logo == "1" }
+
+  before_save :set_slug, if: :name_changed?
+
   after_create :create_operator_id
   after_create :create_documents
 
@@ -128,6 +131,10 @@ class Operator < ApplicationRecord
       all_observations.with_deleted.none? &&
       users.none? &&
       operator_documents.with_deleted.none?
+  end
+
+  def set_slug
+    self.slug = name.parameterize
   end
 
   private

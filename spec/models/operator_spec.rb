@@ -54,6 +54,21 @@ RSpec.describe Operator, type: :model do
   end
 
   describe "Hooks" do
+    describe "#set_slug" do
+      it "sets slug for a new operator" do
+        operator.name = "New Operator"
+        operator.save!
+        expect(operator.slug).to eql "new-operator"
+      end
+
+      it "sets slug after changing name" do
+        operator.save!
+        operator.name = "New Operator Name"
+        operator.save!
+        expect(operator.slug).to eql "new-operator-name"
+      end
+    end
+
     describe "#create_operator_id" do
       context "when country is present" do
         it "update operator_id using the country and id" do

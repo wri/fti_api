@@ -5,7 +5,7 @@ module V1
     include CacheableByLocale
 
     caching
-    attributes :name, :approved, :operator_type, :concession, :is_active, :logo,
+    attributes :name, :slug, :approved, :operator_type, :concession, :is_active, :logo,
       :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
       :percentage_valid_documents_all, :obs_per_visit, :score,
       :website, :address, :fa_id, :country_doc_rank, :country_operators,
@@ -25,8 +25,7 @@ module V1
     has_many :operator_document_country_histories
     has_many :operator_document_fmu_histories
 
-    filters :country, :is_active, :name, :operator_type, :fa
-    filters :is_active, :name, :operator_type, :fa
+    filters :country, :is_active, :name, :operator_type, :fa, :slug
 
     before_create :set_active
     after_create :send_notification
@@ -62,6 +61,19 @@ module V1
       )
     }
 
+    filter :"country.name", apply: ->(records, value, _options) {
+      if value.present?
+        sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
+        records.joins(:country).joins([country: :translations]).where("lower(country_translations.name) like #{sanitized_value}")
+      else
+        records
+      end
+    }
+
+    filter :fa, apply: ->(records, _value, _options) {
+      records.fa_operator
+    }
+
     def fetchable_fields
       super - [:delete_logo]
     end
@@ -81,19 +93,6 @@ module V1
     def self.sortable_fields(context)
       super + [:"country.name"]
     end
-
-    filter :"country.name", apply: ->(records, value, _options) {
-      if value.present?
-        sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
-        records.joins(:country).joins([country: :translations]).where("lower(country_translations.name) like #{sanitized_value}")
-      else
-        records
-      end
-    }
-
-    filter :fa, apply: ->(records, _value, _options) {
-      records.fa_operator
-    }
 
     def percentage_valid_documents_all
       @model.score_operator_document&.all
@@ -116,7 +115,7 @@ module V1
     end
 
     def self.apply_includes(records, directives)
-      super.includes(:score_operator_document, :score_operator_observation) if super.present?
+      super&.includes(:score_operator_document, :score_operator_observation)
     end
 
     def self.records(options = {})

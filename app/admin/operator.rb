@@ -231,6 +231,7 @@ ActiveAdmin.register Operator, as: "Producer" do
       row :is_active
       row :holding
       row :name
+      row :slug
       row :email
       row :operator_type
       row :fa_id
