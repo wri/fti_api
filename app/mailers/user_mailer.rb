@@ -4,7 +4,16 @@ class UserMailer < ApplicationMailer
   def forgotten_password(user)
     @reset_url = generate_reset_url(user)
     @user = user
-    mail(to: user.email, subject: "Requested link to change your password")
+    mail(
+      to: user.email,
+      subject: I18n.t("user_mailer.forgotten_password.subject"),
+      tracking_settings: {
+        click_tracking: {
+          enable: false,
+          enable_text: false
+        }
+      }
+    )
   end
 
   def user_acceptance(user)
@@ -17,7 +26,7 @@ class UserMailer < ApplicationMailer
   def generate_reset_url(user)
     return edit_user_password_url(reset_password_token: generate_reset_token(user)) if user.admin?
 
-    ENV["RECOVER_URL"] + "?reset_password_token=" + generate_reset_token(user)
+    ENV["FRONTEND_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
   end
 
   def generate_reset_token(user)
