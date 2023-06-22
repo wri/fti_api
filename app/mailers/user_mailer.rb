@@ -4,7 +4,16 @@ class UserMailer < ApplicationMailer
   def forgotten_password(user)
     @reset_url = generate_reset_url(user)
     @user = user
-    mail(to: user.email, subject: I18n.t("user_mailer.forgotten_password.subject"))
+    mail(
+      to: user.email,
+      subject: I18n.t("user_mailer.forgotten_password.subject"),
+      tracking_settings: {
+        click_tracking: {
+          enable: false,
+          enable_text: false
+        }
+      }
+    )
   end
 
   def user_acceptance(user)
