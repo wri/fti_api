@@ -5,7 +5,7 @@ fr:
   user_mailer:
     forgotten_password:
       subject: Réinitialisation de votre mot de passe pour l’Open Timber Portal
-      greeting: "Dear %{name},"
+      greeting: "%{name},"
       message: Veuillez cliquer sur le lien afin de réinitialiser votre mot de passe pour vous connecter à l’Open Timber Portal
       link_expiration: Le lien ci-dessus expire après 6 heures. Si vous avez fait plusieurs demandes de réinitialisation, veuillez vous assurer de cliquer sur le lien qui figure dans le mail le plus récent.
       outro: Si vous n’avez pas fait cette demande de réinitialisation, veuillez ignorer cet e-mail. Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur le lien ci-dessus et créé un nouveau mot de passe.
