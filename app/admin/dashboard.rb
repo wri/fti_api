@@ -29,43 +29,8 @@ ActiveAdmin.register_page "Dashboard" do
     end
   end
 
-  page_action :hide_old_observations, method: :post do
-    authorize! :hide_old_observations
-    if system "rake observations:hide"
-      redirect_to admin_dashboard_path, notice: t("active_admin.dashboard_page.hide_observations.hidden")
-    else
-      redirect_to admin_dashboard_path, notice: t("active_admin.dashboard_page.hide_observations.error")
-    end
-  end
-
   content title: proc { I18n.t("active_admin.dashboard") } do
     if current_user.user_permission.user_role == "admin"
-      obs_count = Observation.where("publication_date < ? and hidden = false", Time.zone.today - 5.years).count
-
-      unless obs_count.zero?
-        columns do
-          button_to t("active_admin.dashboard_page.hide_observations.hide_observations"),
-            "/admin/dashboard/hide_old_observations",
-            method: :post,
-            data:
-            {
-              disable_with: t("active_admin.dashboard_page.hide_observations.disable_with"),
-              confirm: t("active_admin.dashboard_page.hide_observations.confirm")
-            },
-            class: "deploy-button"
-        end
-        panel t("active_admin.dashboard_page.old_observations.old_observations", count: obs_count) do
-          table_for Observation.includes(:subcategory, :operator, country: :translations).to_be_hidden.order("observation_reports.publication_date desc").limit(20) do
-            column("ID") { |obs| link_to obs.id, admin_observation_path(obs.id) }
-            column(t("active_admin.dashboard_page.columns.publication_date")) { |obs| obs.observation_report&.publication_date }
-            column(t("active_admin.dashboard_page.columns.country")) { |obs| obs.country }
-            column(t("active_admin.dashboard_page.columns.subcategory")) { |obs| obs.subcategory }
-            column(t("active_admin.dashboard_page.columns.operator")) { |obs| obs.operator }
-            column(t("active_admin.dashboard_page.columns.date")) { |obs| obs.publication_date.strftime("%A, %d/%b/%Y") }
-          end
-        end
-      end
-
       if Rails.env.staging? || Rails.env.development?
         columns do
           column do

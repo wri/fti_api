@@ -276,15 +276,6 @@ en:
         error: 'Error while deploying IM Backoffice'
         disable_with: 'Deploying IM Backoffice...'
         confirm: 'Are you sure you want to deploy the IM BACKOFFICE?'
-      hide_observations:
-        hide_observations: 'Hide old observations'
-        hidden: 'Old observations hidden'
-        error: 'Error while hiding old observations'
-        disable_with: 'Hiding old observations...'
-        confirm: 'Are you sure you want to hide old observations?'
-      old_observations:
-        old_observations: "Old observations (%{count})"
-        publication_date: 'Publication date'
       new_producers:
         new_producers: 'New Producers'
         no_country: 'No country'
