@@ -140,33 +140,43 @@ ActiveAdmin.register Operator, as: "Producer" do
   end
 
   sidebar I18n.t("activerecord.models.fmu.other"), only: :show do
-    attributes_table_for resource do
-      ul do
-        resource.fmus.collect do |fmu|
-          li link_to(fmu.name, admin_fmu_path(fmu.id))
-        end
+    ul do
+      resource.fmus.collect do |fmu|
+        li link_to(fmu.name, admin_fmu_path(fmu.id))
       end
     end
   end
 
   sidebar I18n.t("activerecord.models.observation.other"), only: :show do
-    attributes_table_for resource do
-      # rubocop:disable Rails/OutputSafety
-      div do
-        resource.all_observations.order(:id).collect do |observation|
-          link_to(observation.id, admin_observation_path(observation.id))
-        end.join(", ").html_safe
+    # rubocop:disable Rails/OutputSafety
+    get_observation_list = proc do |scope|
+      parts = []
+      parts << scope.order(:id).collect do |observation|
+        link_to(observation.id, admin_observation_path(observation.id))
+      end.join(", ").html_safe
+      parts << " "
+      if scope.deleted.any?
+        parts << "("
+        parts << I18n.t("active_admin.shared.deleted")
+        parts << ": "
+        parts << scope.deleted.pluck(:id).join(", ").html_safe
+        parts << ")"
       end
-      # rubocop:enable Rails/OutputSafety
+      parts.join.html_safe
     end
+
+    div { get_observation_list.call resource.all_observations }
+    if resource.relevant_observations.with_deleted.any?
+      h6 I18n.t("active_admin.operator_page.marked_as_relevant"), class: "my-5px"
+      div { get_observation_list.call resource.relevant_observations }
+    end
+    # rubocop:enable Rails/OutputSafety
   end
 
   sidebar I18n.t("activerecord.models.sawmill"), only: :show do
-    attributes_table_for resource do
-      ul do
-        resource.sawmills.collect do |sawmill|
-          li link_to(sawmill.name, admin_sawmill_path(sawmill.id))
-        end
+    ul do
+      resource.sawmills.collect do |sawmill|
+        li link_to(sawmill.name, admin_sawmill_path(sawmill.id))
       end
     end
   end

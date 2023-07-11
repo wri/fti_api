@@ -167,6 +167,7 @@ fr:
       view: 'Voir'
       edit: 'Modifier'
       delete: 'Supprimer'
+      deleted: 'Supprimé'
       actions: 'Actions'
       active: 'Actif'
       inactive: 'Inactif'
@@ -340,6 +341,7 @@ fr:
       score_history_table: "Tableau d'historique des scores"
       remove_logo: 'Supprimer le logo'
       documents: 'Documents'
+      marked_as_relevant: 'Marqué comme exploitant concerné'
     laws_page:
       written_infraction: "L'illégalité telle qu'écrite par la loi"
       infraction: 'Référence légale : Illégalité'
