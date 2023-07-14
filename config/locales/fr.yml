@@ -2,8 +2,8 @@
 fr:
   locale_name: "Français"
   attributes:
-    created_at: 'Créé à'
-    updated_at: 'Mis à jour à'
+    created_at: 'Créé le'
+    updated_at: 'Mis à jour le'
   active_admin_paranoia:
     batch_actions:
       restore_confirmation: "Voulez-vous vraiment restaurer ces %{plural_model}?"
@@ -148,14 +148,14 @@ fr:
       current_version: 'Version actuelle: '
       previous_version: 'Version précédente'
       this_is_version: "This is %{number} version"
-      created_at: 'Créé à: '
-      modified_at: 'Modifié à: '
+      created_at: 'Créé le: '
+      modified_at: 'Modifié le: '
       user: 'Utilisateur: '
       go_to_current_version: 'Aller à la version actuelle'
       no_versions: "Cet article n'a pas de version enregistrée."
     shared:
       translated_fields: 'Champs traduits'
-      monitor_details: 'Détails du observateur'
+      monitor_details: 'Détails de l’observateur'
       edit_report: 'Modifier le rapport'
       delete_report: 'Supprimer le rapport'
       report_removed: 'Rapport supprimé!'
@@ -165,7 +165,7 @@ fr:
       sure_want_to_remove: "Voulez-vous vraiment supprimer complètement cet enregistrement? Cette action n'est pas réversible."
       sure_want_to_recycle: 'Are you sure you want to move this record to recycle bin?'
       view: 'Voir'
-      edit: 'Éditer'
+      edit: 'Modifier'
       delete: 'Supprimer'
       actions: 'Actions'
       active: 'Actif'
@@ -193,11 +193,11 @@ fr:
         observation_reports_dashboard: "Tableau de bord des rapports d'observation"
         observations_dashboard: 'Tableau de bord des observations'
       independent_monitoring:
-        independent_monitoring: 'Contrôle indépendant'
+        independent_monitoring: 'Observation indépendante'
         monitors: 'Moniteurs'
         observations: 'Observations'
         reports: 'Rapports'
-        evidence: 'Preuve'
+        evidence: 'Preuves'
         settings:
           settings: 'Paramètres'
           categories: 'Catégories'
@@ -211,8 +211,8 @@ fr:
         holdings: 'Holdings'
         producers: 'Producteurs'
         sawmills: 'Scieries'
-        document_categories: 'Document categories'
-        required_documents: 'Catégories de documents'
+        document_categories: 'Catégories de documents'
+        required_documents: 'Documents requis'
         producer_documents:
           producer_documents: 'Documents du producteur'
           producer_documents_history: 'Historique des documents du producteur'
@@ -220,20 +220,20 @@ fr:
         settings:
           settings: 'Paramètres'
           countries: 'Pays'
-          fmus: 'Fmus'
-          fmu_allocations: 'Allocations des fmu'
+          fmus: 'UFA'
+          fmu_allocations: 'Attribution des UFA'
       government_sector:
-        government_sector: 'Secteur gouvernemental'
+        government_sector: 'Gouvernement'
         required_document_group: 'Groupe de documents requis'
         required_documents: 'Documents requis'
         documents: 'Documents'
         links: 'Links'
-        vpas: 'Vpas'
+        vpas: 'APV'
       static_content:
         static_content: 'Contenu statique'
         partners: 'Partenaires'
-        donors: 'Donateurs'
-        about_page: 'About page'
+        donors: 'Bailleurs'
+        about_page: 'A propos'
         help_page:
           help_page: "Page d'aide"
           faqs: 'Faqs'
@@ -266,7 +266,7 @@ fr:
         creation_date: 'Date de Création'
         item: 'Article'
         type: 'Type'
-        modified_at: 'Modifié à'
+        modified_at: 'Modifié le'
         admin: 'Administrateur'
         publication_date: 'Date de publication'
       change_language:
@@ -413,8 +413,8 @@ fr:
       hidden: 'Documents cachés!'
       bulk_unhide: 'Voulez-vous vraiment afficher toutes les observations sélectionnées?'
       unhidden: 'Documents non masqués!'
-      created_user: 'Utilisateur qui a créé'
-      modified_user: 'Utilisateur qui a modifié'
+      created_user: 'Créé par'
+      modified_user: 'Modifié par'
       modified_user_language: "Langue de l'utilisateur qui a modifié"
       management: 'Management'
       details: 'Détails des observations'
@@ -585,7 +585,7 @@ fr:
         region_iso: 'ISO de la région'
         country_centroid: 'Barycentre du pays'
         region_centroid: 'Centroïde de région'
-        is_active: "C'est actif?"
+        is_active: "Actif?"
         percentage_valid_document: 'Pourcentage de documents valides'
         name: 'Nom'
         region_name: 'Nom de la région'
@@ -644,9 +644,9 @@ fr:
         reason: 'Raison'
         start_date: 'Date de début'
         expire_date: "Date d'expiration"
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         current: 'Courant'
-        uploaded_by: 'Telechargé par'
+        uploaded_by: 'Téléchargé par'
         link: 'Lien'
         value: 'Valeur'
         units: 'Unités'
@@ -655,14 +655,14 @@ fr:
 
       gov_file:
         attachment: Pièce jointe  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         gov_document: :activerecord.models.gov_document  #g
         versions: Versions  #g
 
       government:
         country: :activerecord.models.country  #g
         governments_observations: Observations des gouvernements  #g
-        is_active: C'est actif  #g
+        is_active: Actif ?  #g
         observations: Observations  #g
         translations: Traductions  #g
         versions: Versions  #g
@@ -677,7 +677,7 @@ fr:
         versions: Versions  #g
 
       governments_observation:
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         government: :activerecord.models.government  #g
         observation: :activerecord.models.observation  #g
         versions: Versions  #g
@@ -721,10 +721,10 @@ fr:
 
       notification:
         dismissed_at: Licencié à  #g
-        last_displayed_at: Dernier affichage à  #g
+        last_displayed_at: Dernier affichage le  #g
         notification_group: :activerecord.models.notification_group  #g
         operator_document: :activerecord.models.operator_document  #g
-        solved_at: Résolu à  #g
+        solved_at: Résolu le  #g
         user: :activerecord.models.user  #g
 
       notification_group:
@@ -736,14 +736,14 @@ fr:
         admin_comment: Commentaire de l'administrateur  #g
         comments: commentaires  #g
         country: :activerecord.models.country  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le #g
         evidence_on_report: Preuve sur le rapport  #g
         evidence_type: Type de preuve  #g
         fmu: :activerecord.models.fmu  #g
         governments: Gouvernements  #g
         governments_observations: Observations des gouvernements  #g
         hidden: Invisible  #g
-        is_active: C'est actif  #g
+        is_active: Actif ? #g
         is_physical_place: Est un lieu physique  #g
         lat: Lat  #g
         law: :activerecord.models.law  #g
@@ -769,12 +769,12 @@ fr:
         subcategory: :activerecord.models.subcategory  #g
         translations: Traductions  #g
         user: :activerecord.models.user  #g
-        validation_status: Statut de validation  #g
+        validation_status: Statut #g
         versions: Versions  #g
 
       observation/translation:
         concern_opinion: Avis de préoccupation  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         details: Des détails  #g
         globalized_model: :activerecord.models.globalized_model  #g
         litigation_status: Statut du litige  #g
@@ -792,12 +792,12 @@ fr:
       observation_history:
         category: :activerecord.models.category.one
         country: :activerecord.models.country  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         evidence_type: Type de preuve  #g
         fmu: :activerecord.models.fmu  #g
-        fmu_forest_type: Type de forêt Fmu  #g
+        fmu_forest_type: Type de forêt #g
         hidden: Caché  #g
-        is_active: C'est actif  #g
+        is_active: Actif ? #g
         location_accuracy: Précision de localisation  #g
         observation: :activerecord.models.observation  #g
         observation_created_at: Observation créée à  #g
@@ -809,13 +809,13 @@ fr:
         validation_status: Statut de validation  #g
 
       observation_operator:
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         observation: :activerecord.models.observation  #g
         operator: :activerecord.models.operator  #g
 
       observation_report:
         attachment: Pièce jointe  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         observation_report_observers: Rapport d'observation observateurs  #g
         observations: Observations  #g
         observers: Observateurs  #g
@@ -840,7 +840,7 @@ fr:
         fmu: :activerecord.models.fmu  #g
         fmu_forest_type: Type de forêt Fmu  #g
         hidden: Caché  #g
-        is_active: C'est actif  #g
+        is_active: Actif ? #g
         observation_type: Type d'observation  #g
         operator: :activerecord.models.operator  #g
         severity_level: Degré de gravité  #g
@@ -868,7 +868,7 @@ fr:
         information_email: Courriel d'information  #g
         information_name: Nom de l'information  #g
         information_phone: Téléphone d'information  #g
-        is_active: C'est actif?  #g
+        is_active: Actif ? #g
         logo: Logo  #g
         observation_report_observers: Rapport d'observation observateurs  #g
         observation_reports: Rapports d'observation  #g
@@ -892,7 +892,7 @@ fr:
         versions: Versions  #g
 
       observer_observation:
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         observation: :activerecord.models.observation  #g
         observer: :activerecord.models.observer  #g
 
@@ -912,7 +912,7 @@ fr:
         fmu_operators: Opérateurs Fmu  #g
         fmus: Fmus  #g
         holding: :activerecord.models.holding  #g
-        is_active: C'est actif  #g
+        is_active: Actif ? #g
         logo: Logo  #g
         name: 'Nom'
         observations: Observations  #g
@@ -934,8 +934,8 @@ fr:
         website: Site Internet  #g
 
       operator_document:
-        annex_documents: Documents annexes  #g
-        deleted_at: Supprimé à  #g
+        annex_documents: Annexes  #g
+        deleted_at: Supprimé le  #g
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
@@ -958,9 +958,9 @@ fr:
       operator_document_annex:
         annex_document: :activerecord.models.annex_document  #g
         annex_documents: Documents annexes  #g
-        annex_documents_history: Historique des documents annexes  #g
+        annex_documents_history: Historique des annexes  #g
         attachment: Pièce jointe  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         expire_date: Date d'expiration  #g
         name: Nom  #g
         operator_document: :activerecord.models.operator_document  #g
@@ -972,8 +972,8 @@ fr:
         versions: Versions  #g
 
       operator_document_country:
-        annex_documents: Documents annexes  #g
-        deleted_at: Supprimé à  #g
+        annex_documents: Annexes  #g
+        deleted_at: Supprimé le  #g
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
@@ -995,8 +995,8 @@ fr:
         versions: Versions  #g
 
       operator_document_country_history:
-        annex_documents: Documents annexes  #g
-        deleted_at: Supprimé à  #g
+        annex_documents: Annexes  #g
+        deleted_at: Supprimé le  #g
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
@@ -1004,8 +1004,8 @@ fr:
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
-        operator_document_created_at: Document opérateur créé à  #g
-        operator_document_updated_at: Document opérateur mis à jour à  #g
+        operator_document_created_at: Document opérateur créé le  #g
+        operator_document_updated_at: Document opérateur mis à jour le  #g
         public: Public  #g
         reason: Raison  #g
         required_operator_document: :activerecord.models.required_operator_document  #g
@@ -1019,7 +1019,7 @@ fr:
 
       operator_document_fmu:
         annex_documents: Documents annexes  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
@@ -1042,7 +1042,7 @@ fr:
 
       operator_document_fmu_history:
         annex_documents: Documents annexes  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
@@ -1050,8 +1050,8 @@ fr:
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
-        operator_document_created_at: Document opérateur créé à  #g
-        operator_document_updated_at: Document opérateur mis à jour à  #g
+        operator_document_created_at: Document opérateur créé le  #g
+        operator_document_updated_at: Document opérateur mis à jour le  #g
         public: Public  #g
         reason: Raison  #g
         required_operator_document: :activerecord.models.required_operator_document  #g
@@ -1065,7 +1065,7 @@ fr:
 
       operator_document_history:
         annex_documents: Documents annexes  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
@@ -1073,8 +1073,8 @@ fr:
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
-        operator_document_created_at: Document opérateur créé à  #g
-        operator_document_updated_at: Document opérateur mis à jour à  #g
+        operator_document_created_at: Document opérateur créé le  #g
+        operator_document_updated_at: Document opérateur mis à jour le  #g
         public: Public  #g
         reason: Raison  #g
         required_operator_document: :activerecord.models.required_operator_document  #g
@@ -1119,7 +1119,7 @@ fr:
 
       required_gov_document:
         country: :activerecord.models.country  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         document_type: Type de document  #g
         gov_documents: Documents gouvernementaux  #g
         name: Nom  #g
@@ -1130,14 +1130,14 @@ fr:
         versions: Versions  #g
 
       required_gov_document/translation:
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         explanation: Explication  #g
         globalized_model: :activerecord.models.globalized_model  #g
         locale: Lieu  #g
         versions: Versions  #g
 
       required_gov_document_group:
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         parent: :activerecord.models.parent  #g
         position: Position  #g
         required_gov_documents: Documents gouvernementaux requis  #g
@@ -1145,7 +1145,7 @@ fr:
         name: Nom
 
       required_gov_document_group/translation:
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         description: La description  #g
         globalized_model: :activerecord.models.globalized_model  #g
         locale: Lieu  #g
@@ -1154,7 +1154,7 @@ fr:
       required_operator_document:
         contract_signature: Signature du contrat  #g
         country: :activerecord.models.country  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         forest_types: Types de forêts  #g
         name: Nom  #g
         operator_document_countries: Pays du document opérateur  #g
@@ -1170,7 +1170,7 @@ fr:
         versions: Versions  #g
 
       required_operator_document/translation:
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         explanation: Explication  #g
         globalized_model: :activerecord.models.globalized_model  #g
         locale: Lieu  #g
@@ -1179,7 +1179,7 @@ fr:
       required_operator_document_country:
         contract_signature: Signature du contrat  #g
         country: :activerecord.models.country  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         forest_types: Types de forêts  #g
         name: Nom  #g
         operator_document_countries: Pays du document opérateur  #g
@@ -1197,7 +1197,7 @@ fr:
       required_operator_document_fmu:
         contract_signature: Signature du contrat  #g
         country: :activerecord.models.country  #g
-        deleted_at: Supprimé à  #g
+        deleted_at: Supprimé le  #g
         forest_types: Types de forêts  #g
         name: Nom  #g
         operator_document_countries: Pays du document opérateur  #g
@@ -1227,7 +1227,7 @@ fr:
 
       sawmill:
         geojson: Géojson  #g
-        is_active: C'est actif  #g
+        is_active: Actif ? #g
         lat: Lat  #g
         lng: Lng  #g
         name: Nom  #g
@@ -1349,7 +1349,7 @@ fr:
         encrypted_password: Mot de passe crypté  #g
         holding: :activerecord.models.holding  #g
         institution: Institution  #g
-        is_active: C'est actif  #g
+        is_active: Actif ? #g
         last_sign_in_at: Dernière connexion à  #g
         last_sign_in_ip: IP de la dernière connexion  #g
         locale: Lieu  #g
@@ -1362,7 +1362,7 @@ fr:
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
         permissions_accepted: Autorisations acceptées  #g
         permissions_request: Demande d'autorisations  #g
-        remember_created_at: Rappelez-vous créé à  #g
+        remember_created_at: Rappelez-vous créé le  #g
         reset_password_sent_at: Réinitialiser le mot de passe envoyé à  #g
         reset_password_token: Réinitialiser le jeton de mot de passe  #g
         user_permission: :activerecord.models.user_permission  #g
@@ -1371,7 +1371,7 @@ fr:
       user_permission:
         permissions: Autorisations  #g
         user: :activerecord.models.user  #g
-        user_role: Rôle d'utilisateur  #g
+        user_role: Rôle de l’utilisateur  #g
 
     enums:
       observation:
@@ -1792,3 +1792,4 @@ Observations:\nDate: %{date}
 N'hésitez pas à nous contacter si vous avez des questions,\n
 
 Cordialement,\nL'équipe OTP"
+
