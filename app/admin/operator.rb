@@ -6,7 +6,7 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   menu false
 
-  config.order_clause
+  config.sort_order = "created_at_desc"
 
   actions :all
   permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
@@ -97,6 +97,7 @@ ActiveAdmin.register Operator, as: "Producer" do
     rescue
       nil
     end
+    column(:created_at) { |o| o.created_at.to_date }
     column(I18n.t("active_admin.shared.actions")) do |operator|
       if operator.is_active
         link_to I18n.t("shared.deactivate"), deactivate_admin_producer_path(operator),
