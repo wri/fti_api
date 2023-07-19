@@ -1,7 +1,7 @@
 namespace :observations do
   desc "Hide observations older than 5 year"
   task hide: :environment do
-    Observation.to_be_hidden.update_all(hidden: true, updated_at: DateTime.now)
+    Observation.to_be_hidden.update_all(hidden: true, is_active: false, updated_at: DateTime.now)
   end
 
   desc "Recalculate observation scores for operators"
