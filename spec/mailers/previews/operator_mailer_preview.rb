@@ -4,13 +4,13 @@ class OperatorMailerPreview < ActionMailer::Preview
   end
 
   def quarterly_newsletter
-    OperatorMailer.quarterly_newsletter operator
+    OperatorMailer.quarterly_newsletter operator, operator.users.filter_actives.first
   end
 
   private
 
   def documents
-    OperatorDocument.where(operator_id: operator_id).to_expire(Time.zone.today)
+    OperatorDocument.where(operator_id: operator_id).to_expire(1.month.from_now)
   end
 
   def operator
@@ -18,6 +18,6 @@ class OperatorMailerPreview < ActionMailer::Preview
   end
 
   def operator_id
-    OperatorDocument.to_expire(Time.zone.today).pluck(:operator_id).take(1).first
+    OperatorDocument.to_expire(1.month.from_now).pluck(:operator_id).take(1).first
   end
 end

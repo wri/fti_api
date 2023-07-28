@@ -69,8 +69,16 @@ namespace :scheduler do
     Rails.logger.info "Going to send quarterly newsletters: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
     failed = false
     time = Benchmark.ms do
-      Operator.active.fa_operator.find_each do |operator|
-        OperatorMailer.quarterly_newsletter(operator).deliver_now
+      operators = Operator.newsletter_eligible
+      operators = operators.where(id: ENV["OPERATOR_IDS"].split(",")) if ENV["OPERATOR_IDS"].present?
+
+      operators.find_each do |operator|
+        users = operator.users.filter_actives
+        users = users.where(id: ENV["USER_IDS"].split(",")) if ENV["USER_IDS"].present?
+
+        users.each do |user|
+          OperatorMailer.quarterly_newsletter(operator, user).deliver_now
+        end
       rescue => e
         failed = true
         Sentry.capture_exception(e, extra: {"operator_id" => operator.id})

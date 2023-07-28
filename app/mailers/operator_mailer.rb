@@ -38,7 +38,11 @@ class OperatorMailer < ApplicationMailer
   # In the future this should be refactored:
   # 1. To send it in the language of the user and use I18n
   # 2. To send it using the html template
-  def quarterly_newsletter(operator)
+  def quarterly_newsletter(operator, user)
+    return if operator.users.filter_actives.empty?
+    return if user.nil?
+    raise "User is not eligible to receive this newsletter" unless operator.users.filter_actives.include?(user)
+
     current_score = operator.score_operator_document
     last_score = operator.score_operator_documents.at_date(Time.zone.today - 3.months).order(:date).last
     expiring_docs = operator.operator_documents.to_expire(Time.zone.today + 3.months)
@@ -86,7 +90,7 @@ class OperatorMailer < ApplicationMailer
     body << "<br>----------------------------------------------------<br>"
     body << text_fr.join("<br>")
 
-    mail bcc: operator.users.pluck(:email).join(", "),
+    mail to: user.email,
       subject: subject,
       body: body,
       content_type: "text/html"

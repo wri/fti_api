@@ -91,6 +91,8 @@ class Operator < ApplicationRecord
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
   scope :fa_operator, -> { where("fa_id <> ''") }
+  scope :approved, -> { where(approved: true) }
+  scope :newsletter_eligible, -> { active.approved.fa_operator }
 
   scope :filter_by_country_ids, ->(country_ids) { where(country_id: country_ids.split(",")) }
 
