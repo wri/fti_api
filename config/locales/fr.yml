@@ -286,14 +286,6 @@ fr:
         error: 'Erreur lors du déploiement de IM Backoffice'
         disable_with: 'Déploiement du backoffice IM...'
         confirm: 'Êtes-vous sûr de vouloir déployer le BACKOFFICE IM?'
-      hide_observations:
-        hide_observations: 'Cacher les vieilles observations'
-        hidden: 'Vielles observations cachées'
-        error: "Erreur lors du masquage des vielles observations"
-        disable_with: 'Cacher de vieilles observations...'
-        confirm: 'Voulez-vous vraiment masquer les vielles observations?'
-      old_observations:
-        old_observations: "Observations vieilles (%{count})"
       new_producers:
         new_producers: 'Nouveaux producteurs'
         no_country: 'Aucun pays'
