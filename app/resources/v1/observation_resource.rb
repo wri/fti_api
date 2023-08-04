@@ -5,7 +5,7 @@ module V1
     include CacheableByLocale
     # caching
 
-    attributes :observation_type, :publication_date, :pv, :is_active,
+    attributes :observation_type, :publication_date, :report_publication_date, :pv, :is_active,
       :details, :evidence_type, :evidence_on_report, :concern_opinion,
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
@@ -33,7 +33,6 @@ module V1
     after_create :add_own_observer
     before_save :set_modified
     before_save :validate_status
-    before_save :set_publication_date
 
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
@@ -100,9 +99,8 @@ module V1
       false
     end
 
-    # The publication date should be the date of the report and fallback to created_at
-    def publication_date
-      @model.observation_report&.publication_date || @model.created_at
+    def report_publication_date
+      @model.observation_report&.publication_date
     end
 
     def validation_status_id
@@ -110,11 +108,11 @@ module V1
     end
 
     def self.updatable_fields(context)
-      super - [:hidden]
+      super - [:hidden, :publication_date]
     end
 
     def self.creatable_fields(context)
-      super - [:hidden]
+      super - [:hidden, :publication_date]
     end
 
     # This is called in an after save cause in the before save, there are still no relationships present
@@ -167,13 +165,6 @@ module V1
       else
         Observation.published
       end
-    end
-
-    def set_publication_date
-      return unless ["Published (no comments)", "Published (not modified)",
-        "Published (modified)"].include? @model.validation_status
-
-      @model.publication_date = Time.zone.now
     end
   end
 end

@@ -81,7 +81,6 @@ FactoryBot.define do
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     is_active { true }
     validation_status { "Published (no comments)" }
-    publication_date { DateTime.now.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
 

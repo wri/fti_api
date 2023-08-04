@@ -25,6 +25,7 @@ ActiveAdmin.register Observation do
 
   config.order_clause
   config.per_page = per_page
+  config.sort_order = "updated_at_desc"
 
   before_action only: :index do
     if per_page.include? params[:per_page]
@@ -568,7 +569,7 @@ ActiveAdmin.register Observation do
       f.input :publication_date,
         as: :date_time_picker,
         picker_options: {timepicker: false, format: "Y-m-d"},
-        **visibility
+        input_html: {disabled: true}
       f.input :pv, **visibility
       f.input :location_accuracy, as: :select, **visibility
       f.input :lat, **visibility
