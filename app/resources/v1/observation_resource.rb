@@ -5,7 +5,7 @@ module V1
     include CacheableByLocale
     # caching
 
-    attributes :observation_type, :publication_date, :report_publication_date, :pv, :is_active,
+    attributes :observation_type, :publication_date, :pv, :is_active,
       :details, :evidence_type, :evidence_on_report, :concern_opinion,
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
@@ -97,10 +97,6 @@ module V1
       end
 
       false
-    end
-
-    def report_publication_date
-      @model.observation_report&.publication_date
     end
 
     def validation_status_id
