@@ -222,6 +222,7 @@ en:
         vpas: 'Vpas'
       static_content:
         static_content: 'Static content'
+        pages: 'Pages'
         partners: 'Partners'
         donors: 'Donors'
         about_page: 'About page'

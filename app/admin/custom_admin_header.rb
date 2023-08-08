@@ -95,6 +95,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
           li do
             text_node content_tag "a", t("active_admin.menu.static_content.static_content")
             ul do
+              li { link_to t("active_admin.menu.static_content.pages"), admin_pages_path }
               li { link_to t("active_admin.menu.static_content.partners"), admin_partners_path }
               li { link_to t("active_admin.menu.static_content.donors"), admin_donors_path }
               li { link_to t("active_admin.menu.static_content.about_page"), admin_about_page_entries_path }

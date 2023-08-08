@@ -1,6 +1,4 @@
 @import 'activeadmin_addons/all';
-@import 'activeadmin/quill_editor/quill.snow';
-@import 'activeadmin/quill_editor_input';
 
 @import 'active_admin/active_admin_globalize';
 // SASS variable overrides must be declared before loading up Active Admin's styles.
@@ -33,7 +31,7 @@ $skinLogo: image_url("logo.svg") no-repeat 0 0;
 
 @import "new_menu";
 @import "helpers";
-
+@import "editor";
 
 // .ActiveAdmin Add-ons
 // ..Colors to enums
