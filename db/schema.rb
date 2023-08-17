@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_121003) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_162810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -772,6 +772,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_121003) do
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "available_in_languages", array: true
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 

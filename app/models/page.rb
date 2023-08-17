@@ -10,11 +10,12 @@ class Page < ApplicationRecord
 
   validates :slug, presence: true, uniqueness: true
 
-  class << self
-    def available_locales_for(page_slug)
-      {
-        "terms" => [:en]
-      }[page_slug] || I18n.available_locales
-    end
+  before_validation :fix_blank_available_in_languages
+
+  private
+
+  def fix_blank_available_in_languages
+    available_in_languages&.reject!(&:blank?)
+    self.available_in_languages = nil if available_in_languages.blank?
   end
 end
