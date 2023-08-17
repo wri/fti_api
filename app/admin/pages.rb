@@ -36,7 +36,7 @@ ActiveAdmin.register Page do
     f.inputs do
       f.input :slug
     end
-    f.translated_inputs switch_locale: false do |t|
+    f.translated_inputs "Translations", switch_locale: false, available_locales: Page.available_locales_for(f.object.slug) do |t|
       t.input :title
       t.input :body, as: :html_editor, input_html: {class: "ql-editor-big"}
     end

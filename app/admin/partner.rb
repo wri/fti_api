@@ -39,7 +39,7 @@ ActiveAdmin.register Partner do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs "Translated fields" do
-      f.translated_inputs switch_locale: false do |t|
+      f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :name
         t.input :description
       end

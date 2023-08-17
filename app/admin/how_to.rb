@@ -24,7 +24,7 @@ ActiveAdmin.register HowTo do
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs "How To Details" do
       f.input :position
-      f.translated_inputs switch_locale: false do |t|
+      f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :name
         t.input :description, as: :html_editor
       end

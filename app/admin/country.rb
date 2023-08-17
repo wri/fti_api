@@ -51,7 +51,7 @@ ActiveAdmin.register Country do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs I18n.t("active_admin.shared.country_details") do
-      f.translated_inputs switch_locale: false do |t|
+      f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :name
         t.input :overview, as: :html_editor
         t.input :vpa_overview, as: :html_editor

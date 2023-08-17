@@ -44,7 +44,7 @@ ActiveAdmin.register Faq do
     f.inputs "FAQ Details" do
       f.input :position
     end
-    f.translated_inputs switch_locale: false do |t|
+    f.translated_inputs "Translations", switch_locale: false do |t|
       t.input :question
       t.input :answer, as: :html_editor
     end

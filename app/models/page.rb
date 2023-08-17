@@ -9,4 +9,12 @@ class Page < ApplicationRecord
   active_admin_translates :body do; end
 
   validates :slug, presence: true, uniqueness: true
+
+  class << self
+    def available_locales_for(page_slug)
+      {
+        "terms" => [:en]
+      }[page_slug] || I18n.available_locales
+    end
+  end
 end

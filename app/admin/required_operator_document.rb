@@ -86,7 +86,7 @@ ActiveAdmin.register RequiredOperatorDocument do
       f.input :name
       f.input :valid_period, label: I18n.t("active_admin.required_operator_document_page.validity")
       f.inputs I18n.t("active_admin.shared.translated_fields") do
-        f.translated_inputs switch_locale: false do |t|
+        f.translated_inputs "Translations", switch_locale: false do |t|
           t.input :explanation
         end
       end

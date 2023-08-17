@@ -42,7 +42,7 @@ ActiveAdmin.register RequiredOperatorDocumentGroup do
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs "Required Operator Document Group Details" do
       f.input :position
-      f.translated_inputs switch_locale: false do |t|
+      f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :name
       end
     end
