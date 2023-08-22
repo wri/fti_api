@@ -1,13 +1,31 @@
 fr:
   mailers:
+    greeting: "%{name},"
     salutation: Cordialement,
     signature: "L’équipe OTP"
   user_mailer:
+    user_acceptance:
+      subject: Bienvenue sur la plateforme Open Timber Portal
+      welcome: Bienvenue sur la plateforme Open Timber Portal!
+      message: Votre compte a été activé et vous pouvez maintenant vous connecter en utilisant l’identifiant et le mot de passe que vous avez sélectionnés.
+      message_portal: Pour se connecter, il suffit de se rendre sur le site web de la plateforme et de cliquer sur le bouton pour se connecter.
+      message_tutorial: "Nous vous invitons à consulter les tutoriels disponibles sur l'Open Timber Portal qui vous fourniront des informations supplémentaires sur l'utilisation de la plateforme: %{link}"
+      message_obs_tool: "Pour accéder à l’observations tools, veuillez cliquer sur ce lien: %{link}"
+      contact_us: Vous pouvez toujours nous connecter à l’adresse %{link} si vous avez des questions.
     forgotten_password:
       subject: Réinitialisation de votre mot de passe pour l’Open Timber Portal
-      greeting: "%{name},"
       message: Veuillez cliquer sur le lien afin de réinitialiser votre mot de passe pour vous connecter à l’Open Timber Portal
       link_expiration: Le lien ci-dessus expire après 6 heures. Si vous avez fait plusieurs demandes de réinitialisation, veuillez vous assurer de cliquer sur le lien qui figure dans le mail le plus récent.
       outro: Si vous n’avez pas fait cette demande de réinitialisation, veuillez ignorer cet e-mail. Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur le lien ci-dessus et créé un nouveau mot de passe.
-
+  observation_mailer:
+    notify_admin_published:
+      subject:
+  observer_mailer:
+    observation_status_changed:
+      subject:
+  operator_mailer:
+    quarterly_newsletter:
+      subject:
+    expiring_documents_notifications:
+      subject:
 

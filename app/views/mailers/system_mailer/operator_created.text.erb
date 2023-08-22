@@ -1,3 +1,6 @@
-A new OPERATOR has been created through the portal and requires approval.
-It has the ID "<%= @operator.id %>" and the name "<%= @operator.name %>"
-You can now validate it in the backoffice.
+<%= t(".paragraph1") %>
+
+<%= User.human_attribute_name(:name) %>: <%= @operator.name %>
+<%= User.human_attribute_name(:country) %>: <%= @operator.country.name %>
+
+<%= t(".paragraph2", link: admin_producer_url(@operator.id)) %>

@@ -1,0 +1,56 @@
+<mj-section background-color="#fff" border="1px solid black">
+  <mj-column>
+    <mj-text font-family="Helvetica" font-size="16px" line-height="1.5">
+      <h2>
+        <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+      </h2>
+
+      <p>
+        <%= t(".welcome") %>
+      </p>
+
+      <p>
+        <%= t(".message") %>
+      </p>
+
+      <% if @user.user_permission.operator? %>
+        <p>
+          <%= t(".message_portal") %>
+        </p>
+      <% elsif @user.user_permission.user_role.starts_with?("ngo") %>
+        <p>
+          <%= t(".message_obs_tool", link: link_to(nil, "https://opentimberportal.org/observations-tool", target: "_blank")).html_safe %>
+        </p>
+      <% end %>
+
+      <p>
+        <%= t(".message_tutorial", link: "https://opentimberportal.org/help/tutorials") %>
+      </p>
+
+      <p>
+        <%= t(".contact_us", link: link_to("opentimberportal@wri.org", "mailto:opentimberportal@wri.org")).html_safe %>
+      </p>
+
+      <p>
+        <%= t("mailers.salutation") %> <br/>
+        <%= t("mailers.signature") %>
+      </p>
+    </mj-text>
+  </mj-column>
+</mj-section>
+
+
+
+
+
+
+
+
+
+<%= t(".message_obs_tool") %>
+
+
+<%= t(".contact_us") %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

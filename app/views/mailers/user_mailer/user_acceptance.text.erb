@@ -1,6 +1,18 @@
-Hello <%= @user.name %>,
+<%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
 
-Your user has been accepted on OTP. You can now use it to login.
+<%= t(".welcome") %>
 
-Best,
-Open Timber Portal
+<%= t(".message") %>
+
+<% if @user.user_permission.operator? %>
+<%= t(".message_portal") %>
+<% elsif @user.user_permission.user_role.starts_with?("ngo") %>
+<%= t(".message_obs_tool", link: "https://opentimberportal.org/observations-tool") %>
+<% end %>
+
+<%= t(".message_tutorial", link: "https://opentimberportal.org/help/tutorials") %>
+
+<%= t(".contact_us", link: "opentimberportal@wri.org") %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

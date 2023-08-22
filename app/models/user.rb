@@ -78,6 +78,7 @@ class User < ApplicationRecord
 
   scope :recent, -> { order("users.updated_at DESC") }
   scope :inactive, -> { where(is_active: false) }
+  scope :with_user_role, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
   class << self
     def fetch_all(options)
@@ -139,6 +140,14 @@ class User < ApplicationRecord
     I18n.with_locale(locale.presence || I18n.default_locale) do
       UserMailer.forgotten_password(self).deliver_later
     end
+  end
+
+  def organization_name
+    return operator.name if operator.present? && user_permission&.user_role&.operator?
+    return observer.name if observer.present? && user_permission&.user_role&.starts_with?("ngo")
+    return country.name if country.present? && user_permission&.user_role&.government?
+
+    nil
   end
 
   private
