@@ -20,6 +20,7 @@ module V1
         email: "test@gmail.com",
         password: "password",
         password_confirmation: "password",
+        locale: "en",
         permissions_request: "government",
         name: "Test user new"
       }
@@ -48,6 +49,7 @@ module V1
         }.to have_enqueued_mail(SystemMailer, :user_created)
 
         expect(parsed_body).to eq({messages: [{status: 201, title: "User successfully registered!"}]})
+        expect(User.find_by(email: "test@gmail.com").locale).to eq("en")
         expect(status).to eq(201)
       end
 
