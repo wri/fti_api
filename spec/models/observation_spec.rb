@@ -40,6 +40,8 @@
 
 require "rails_helper"
 
+RSpec::Matchers.define_negated_matcher :have_not_enqueued_mail, :have_enqueued_mail
+
 RSpec.describe Observation, type: :model do
   subject(:observation) { FactoryBot.create(:observation) }
 
@@ -181,8 +183,17 @@ RSpec.describe Observation, type: :model do
           observers: [observer1, observer2]
         )
       }
+      let(:observation2) {
+        create(
+          :observation,
+          validation_status: "Created",
+          responsible_admin: create(:user, is_active: false),
+          observers: [observer1]
+        )
+      }
 
       before do
+        @inactive_user = create(:user, user_role: :ngo_manager, observer: observer1, is_active: false)
         create(:user, user_role: :ngo_manager, observer: observer1)
         create(:user, user_role: :ngo_manager, observer: observer2)
         create(:user, user_role: :ngo_manager, observer: observer2)
@@ -195,6 +206,12 @@ RSpec.describe Observation, type: :model do
           }.to have_enqueued_mail(ResponsibleAdminMailer, :observation_ready_to_qc)
             .and have_enqueued_mail(ObserverMailer, :observation_status_changed).exactly(3).times
         end
+
+        it "does not send email to inactive users" do
+          expect {
+            observation.update!(validation_status: "Ready for QC")
+          }.to have_not_enqueued_mail(ObserverMailer, :observation_status_changed).with(observer1, @inactive_user, observation)
+        end
       end
 
       context "when validation status is changed to published" do
@@ -203,6 +220,14 @@ RSpec.describe Observation, type: :model do
             observation.update(validation_status: "Published (no comments)")
           }.to have_enqueued_mail(ObservationMailer, :notify_admin_published)
             .and have_enqueued_mail(ObserverMailer, :observation_status_changed).exactly(3).times
+        end
+
+        it "does not send email to inactive users" do
+          expect {
+            observation2.update(validation_status: "Published (no comments)")
+          }.to have_not_enqueued_mail(ObservationMailer, :notify_admin_published)
+            .and have_enqueued_mail(ObserverMailer, :observation_status_changed).once
+            .and have_not_enqueued_mail(ObserverMailer, :observation_status_changed).with(observer1, @inactive_user, observation2)
         end
       end
     end

@@ -355,7 +355,7 @@ class Observation < ApplicationRecord
 
   def notify_observers
     observers.each do |observer|
-      observer.users.each do |user|
+      observer.users.filter_actives.each do |user|
         ObserverMailer.observation_status_changed(observer, user, self).deliver_later
       end
     end
@@ -366,7 +366,9 @@ class Observation < ApplicationRecord
   end
 
   def notify_published
-    return unless responsible_admin&.email
+    return if responsible_admin.blank?
+    return if responsible_admin.deactivated?
+    return unless responsible_admin.email
 
     ObservationMailer.notify_admin_published(self).deliver_later
   end
