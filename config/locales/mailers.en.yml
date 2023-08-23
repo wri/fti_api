@@ -3,6 +3,9 @@ en:
     greeting: "Dear %{name},"
     salutation: Best regards,
     signature: The OTP team
+    contact_us: Feel free to contact us if you have any questions.
+    observation_id: Observation ID
+    report_name: Report name
   user_mailer:
     user_acceptance:
       subject: Welcome to the Open Timber Portal!
@@ -18,11 +21,37 @@ en:
       link_expiration: The above link will expire in 6 hours. If you made multiple requests to reset your password, please make sure to click on the link in the most recent e-mail.
       outro: If you didn't request this password reset, please ignore this email. Your password will not change until you access the link above and create a new password.
   observation_mailer:
-    notify_admin_published:
-      subject:
-  observer_mailer:
-    observation_status_changed:
-      subject:
+    observation_created:
+      subject: Observation [ID %{id}] was successfully created
+      paragraph1: Your observation was successfully created on the Open Timber Portal.
+      paragraph2: The observation will not be reviewed by the OTP team until you submit it for review.
+      paragraph3: "To submit your observation and to make any edits, go to: %{link}"
+    observation_submitted_for_qc:
+      subject: Observation [ID %{id}] was successfully submitted for quality control
+      paragraph1: The following observation was successfully submitted for quality control.
+      paragraph2: The observation will reviewed by the OTP team and you will receive an e-mail notification when the observation is ready to be published or if there any edits to be made.
+    observation_needs_revision:
+      subject: Observation [ID %{id}] needs revision before it can be published
+      paragraph1: The following observation needs to be reviewed before it can be published.
+      paragraph2: "The reviewer made the following comment(s):"
+      paragraph3: "You can make edits to the observation by clicking on the following link: %{link}"
+    observation_ready_for_publication:
+      subject: Observation [ID %{id}] is ready for publication
+      paragraph1: Observation [ID %{id}] is has been reviewed and is ready for publication.
+      paragraph2: "Please click on the following link and publish the observation: %{link}"
+    observation_published:
+      subject: Observation [ID %{id}] is now published
+      paragraph1: The observation [ID %{id}] is now published and appears on the list of observations on the Open Timber Portal.
+      paragraph2: "You can view it in the list of observations on the platform: %{link}"
+    admin_observation_ready_for_qc:
+      subject: Observation [ID %{id}] is ready for quality control
+      paragraph1: "%{observer} has been submitted an observation through the portal that is ready be reviewed."
+      paragraph2: "To review the observation, go to: %{link}"
+    admin_observation_published_not_modified:
+      subject: "%{observer} published observation [ID %{id}] without modifications"
+      paragraph1: "%{observer} has decided to publish observation [ID %{id}] without making any edits."
+      paragraph2: "To the comment(s) you had made, %{observer} replied:"
+      paragraph3: "To review the observation, go to: %{link}"
   operator_mailer:
     quarterly_newsletter:
       subject:

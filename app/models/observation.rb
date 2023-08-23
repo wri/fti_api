@@ -154,8 +154,8 @@ class Observation < ApplicationRecord
   after_save :remove_documents, if: -> { evidence_type == "Evidence presented in the report" }
   after_save :update_fmu_geojson
 
-  after_save :prepare_notifications
-  after_commit :notify
+  after_commit :notify_about_creation, on: :create
+  after_commit :notify_about_changes, if: :saved_change_to_validation_status?
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, -> { includes(:translations).where(is_active: true).visible }
@@ -341,35 +341,40 @@ class Observation < ApplicationRecord
     fmu.save
   end
 
-  def prepare_notifications
-    @notify = true if saved_change_to_validation_status?
+  def notify_about_creation
+    notify_observers "observation_created" if validation_status == "Created"
   end
 
-  def notify
-    return unless @notify
-
-    notify_ready_for_qc if validation_status == "Ready for QC"
-    notify_published if published?
-    notify_observers
+  def notify_about_changes
+    notify_admin_ready_for_qc if validation_status == "Ready for QC"
+    notify_admin_published_not_modified if validation_status == "Published (not modified)"
+    notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC"
+    notify_observers "observation_needs_revision" if validation_status == "Needs revision"
+    notify_observers "observation_ready_for_publication" if validation_status == "Ready for publication"
+    notify_observers "observation_published" if published?
   end
 
-  def notify_observers
+  def notify_observers(mail_template)
     observers.each do |observer|
       observer.users.filter_actives.each do |user|
-        ObserverMailer.observation_status_changed(observer, user, self).deliver_later
+        ObservationMailer.send(mail_template, observer, user, self).deliver_later
       end
     end
   end
 
-  def notify_ready_for_qc
-    ResponsibleAdminMailer.observation_ready_to_qc(self).deliver_later
-  end
-
-  def notify_published
+  def notify_admin_ready_for_qc
     return if responsible_admin.blank?
     return if responsible_admin.deactivated?
     return unless responsible_admin.email
 
-    ObservationMailer.notify_admin_published(self).deliver_later
+    ObservationMailer.admin_observation_ready_for_qc(self).deliver_later
+  end
+
+  def notify_admin_published_not_modified
+    return if responsible_admin.blank?
+    return if responsible_admin.deactivated?
+    return unless responsible_admin.email
+
+    ObservationMailer.admin_observation_published_not_modified(self).deliver_later
   end
 end

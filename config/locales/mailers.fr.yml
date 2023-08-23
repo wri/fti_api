@@ -3,6 +3,9 @@ fr:
     greeting: "%{name},"
     salutation: Cordialement,
     signature: "L’équipe OTP"
+    contact_us: N'hésitez pas à nous contacter si vous avez des questions.
+    observation_id: Identifiant de l’observation
+    report_name: Nom du rapport
   user_mailer:
     user_acceptance:
       subject: Bienvenue sur la plateforme Open Timber Portal
@@ -18,11 +21,37 @@ fr:
       link_expiration: Le lien ci-dessus expire après 6 heures. Si vous avez fait plusieurs demandes de réinitialisation, veuillez vous assurer de cliquer sur le lien qui figure dans le mail le plus récent.
       outro: Si vous n’avez pas fait cette demande de réinitialisation, veuillez ignorer cet e-mail. Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur le lien ci-dessus et créé un nouveau mot de passe.
   observation_mailer:
-    notify_admin_published:
-      subject:
-  observer_mailer:
-    observation_status_changed:
-      subject:
+    observation_created:
+      subject: L’observation [ID %{id}] a été créé avec succès
+      paragraph1: Votre observation a été créée avec succès sur l’Open Timber Portal.
+      paragraph2: L'observation ne sera pas passée en revue par l'équipe OTP tant que vous ne l'aurez pas soumise pour le contrôle qualité.
+      paragraph3: "Pour soumettre votre observation ou y apporter des modifications, veuillez consulter: %{link}"
+    observation_submitted_for_qc:
+      subject: L’observation [ID %{id}] a été soumise pour le contrôle qualité
+      paragraph1: L’observation ci-dessous a été soumise pour être passée en revue.
+      paragraph2: L'observation sera passée en revue par l'équipe d'OTP et vous recevrez une notification mail lorsque l'observation sera prête à être publiée ou s'il y a des modifications à apporter.
+    observation_needs_revision:
+      subject: L’observation [ID %{id}] nécessite une révision avant d’être publiée
+      paragraph1: L’observation ci-dessous a été passée en revue et nécessite une révision avant de pouvoir être publiée.
+      paragraph2: "L'évaluateur a fait le(s) commentaire(s) suivant(s):"
+      paragraph3: "Vous pouvez modifier cette observation en cliquant sur le lien suivant: %{link}"
+    observation_ready_for_publication:
+      subject: L’observation [ID %{id}] nécessite une révision avant d’être publiée
+      paragraph1: L’observation ci-dessous a été passée en revue et nécessite une révision avant de pouvoir être publiée.
+      paragraph2: "Please click on the following link and publish the observation: %{link}"
+    observation_published:
+      subject: L’observation [ID %{id}] nécessite une révision avant d’être publiée
+      paragraph1: L’observation [ID %{id}] est maintenant publiée et apparait dans la liste des observations qui sont publiées sur l’Open Timber Portal.
+      paragraph2: "Vous pouvez la consulter dans la liste des observations sur la plateforme: %{link}"
+    admin_observation_ready_for_qc:
+      subject: L’observation [ID %{id}] est prête pour le contrôle qualité
+      paragraph1: "%{observer} a soumis une observation qui est prête à être passée en revue."
+      paragraph2: "Pour consulter l’observation, veuillez consulter: %{link}"
+    admin_observation_published_not_modified:
+      subject: "%{observer} a publié l’observation [ID %{id}] sans effectuer de modifications"
+      paragraph1: "%{observer} a décidé de publier l'observation [ID %{id}] sans y apporter de modifications."
+      paragraph2: "Aux commentaires que vous aviez fait(s), %{observer} a répondu:"
+      paragraph3: "Pour consulter l’observation, veuillez consulter: %{link}"
   operator_mailer:
     quarterly_newsletter:
       subject:
