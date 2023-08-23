@@ -9,12 +9,12 @@ RSpec.describe UserMailer, type: :mailer do
     let(:mail) { UserMailer.user_acceptance(user) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("New operator created")
+      expect(mail.subject).to eq("Welcome to the Open Timber Portal!")
       expect(mail.to).to eq([user.email])
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Your user has been accepted on OTP. You can now use it to login.")
+      expect(mail.body.encoded).to match("Your account has been activated and you can now login using the credentials that you selected.")
     end
   end
 

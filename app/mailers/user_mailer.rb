@@ -18,7 +18,7 @@ class UserMailer < ApplicationMailer
 
   def user_acceptance(user)
     @user = user
-    mail(to: user.email, subject: "New operator created") # TODO: weird subject
+    mail(to: user.email, subject: I18n.t("user_mailer.user_acceptance.subject"))
   end
 
   private

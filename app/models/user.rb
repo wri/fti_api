@@ -145,7 +145,7 @@ class User < ApplicationRecord
   def organization_name
     return operator.name if operator.present? && user_permission&.user_role&.operator?
     return observer.name if observer.present? && user_permission&.user_role&.starts_with?("ngo")
-    return country.name if country.present? && user_permission&.user_role&.government?
+    return country.name if country.present? && user_permission&.government?
 
     nil
   end
