@@ -16,12 +16,12 @@
 </p>
 <% elsif @user.user_permission.user_role.starts_with?("ngo") %>
 <p>
-  <%= t(".message_obs_tool", link: link_to(nil, "https://opentimberportal.org/observations-tool", target: "_blank")).html_safe %>
+  <%= t(".message_obs_tool", link: link_to(nil, "#{ENV["FRONTEND_URL"]}/observations-tool", target: "_blank")).html_safe %>
 </p>
 <% end %>
 
 <p>
-  <%= t(".message_tutorial", link: "https://opentimberportal.org/help/tutorials") %>
+  <%= t(".message_tutorial", link: link_to(nil, "#{ENV["FRONTEND_URL"]}/help/tutorials", target: "_blank")).html_safe %>
 </p>
 
 <p>

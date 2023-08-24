@@ -7,10 +7,10 @@
 <% if @user.user_permission.operator? %>
 <%= t(".message_portal") %>
 <% elsif @user.user_permission.user_role.starts_with?("ngo") %>
-<%= t(".message_obs_tool", link: "https://opentimberportal.org/observations-tool") %>
+<%= t(".message_obs_tool", link: "#{ENV["FRONTEND_URL"]}/observations-tool") %>
 <% end %>
 
-<%= t(".message_tutorial", link: "https://opentimberportal.org/help/tutorials") %>
+<%= t(".message_tutorial", link: "#{ENV["FRONTEND_URL"]}/help/tutorials") %>
 
 <%= t(".contact_us", link: "opentimberportal@wri.org") %>
 

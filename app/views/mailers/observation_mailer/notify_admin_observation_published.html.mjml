@@ -1,0 +1,14 @@
+<p>
+  <%= t(".paragraph1", observer: @observer.name) %>
+</p>
+
+<p>
+  <%= t("mailers.observation_id") %>: <%= @observation.id %><br/>
+  <%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.observation_type %><br/>>
+  <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %><br/>
+  <%= t("mailers.signature") %>
+</p>

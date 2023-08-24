@@ -1,0 +1,20 @@
+<p>
+  <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+</p>
+
+<p>
+  <%= t(".paragraph1", id: @observation.id) %>
+</p>
+
+<p>
+  <%= t(".paragraph2", link: link_to(nil, "#{ENV["FRONTEND_URL"]}/observations", target: "_blank")).html_safe %>
+</p>
+
+<p>
+  <%= t("mailers.contact_us") %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %><br/>
+  <%= t("mailers.signature") %>
+</p>

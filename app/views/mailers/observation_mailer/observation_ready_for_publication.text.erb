@@ -2,7 +2,7 @@
 
 <%= t(".paragraph1", id: @observation.id) %>
 
-<%= t(".paragraph2", link: "https://opentimberportal.org/observations-tool/private/observations/edit/#{@observation.id}") %>
+<%= t(".paragraph2", link: "#{ENV["FRONTEND_URL"]}/observations-tool/private/observations/edit/#{@observation.id}") %>
 
 <%= t("mailers.contact_us") %>
 
