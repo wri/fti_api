@@ -24,6 +24,7 @@ jobs:
         run: |
           sudo apt update --fix-missing
           sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev gdal-bin
+          npm install -g mjml
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
