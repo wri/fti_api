@@ -111,7 +111,7 @@ ActiveAdmin.register_page "Dashboard" do
             column(t("active_admin.dashboard_page.columns.country")) { |obs| obs.country }
             column(t("active_admin.dashboard_page.columns.subcategory")) { |obs| obs.subcategory }
             column(t("active_admin.dashboard_page.columns.operator")) { |obs| obs.operator }
-            column(t("active_admin.dashboard_page.columns.date")) { |obs| obs.publication_date.strftime("%A, %d/%b/%Y") }
+            column(t("active_admin.dashboard_page.columns.date")) { |obs| obs&.publication_date&.strftime("%A, %d/%b/%Y") }
           end
         end
       end

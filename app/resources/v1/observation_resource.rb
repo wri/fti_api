@@ -33,7 +33,6 @@ module V1
     after_create :add_own_observer
     before_save :set_modified
     before_save :validate_status
-    before_save :set_publication_date
 
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
@@ -100,21 +99,16 @@ module V1
       false
     end
 
-    # The publication date should be the date of the report and fallback to created_at
-    def publication_date
-      @model.observation_report&.publication_date || @model.created_at
-    end
-
     def validation_status_id
       Observation.validation_statuses[@model.validation_status]
     end
 
     def self.updatable_fields(context)
-      super - [:hidden]
+      super - [:hidden, :publication_date]
     end
 
     def self.creatable_fields(context)
-      super - [:hidden]
+      super - [:hidden, :publication_date]
     end
 
     # This is called in an after save cause in the before save, there are still no relationships present
@@ -167,13 +161,6 @@ module V1
       else
         Observation.published
       end
-    end
-
-    def set_publication_date
-      return unless ["Published (no comments)", "Published (not modified)",
-        "Published (modified)"].include? @model.validation_status
-
-      @model.publication_date = Time.zone.now
     end
   end
 end

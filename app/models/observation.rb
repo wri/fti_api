@@ -131,13 +131,13 @@ class Observation < ApplicationRecord
   validate :evidence_presented_in_the_report
   validate :status_changes, if: -> { user_type.present? }
 
-  validates :publication_date, presence: true
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
   before_save :set_active_status
   before_save :check_is_physical_place
   before_save :set_centroid
+  before_save :set_publication_date, if: :validation_status_changed?
   before_create :set_default_observer
   before_create :set_responsible_admin
 
@@ -235,6 +235,10 @@ class Observation < ApplicationRecord
     self.lat = nil
     self.lng = nil
     self.fmu = nil
+  end
+
+  def set_publication_date
+    self.publication_date = Time.zone.now if published?
   end
 
   def set_centroid

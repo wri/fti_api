@@ -73,7 +73,7 @@ module V1
       describe "For admin user" do
         it "Returns error object when the observation cannot be created by admin" do
           post("/observations",
-            params: jsonapi_params("observations", nil, {"country-id": "", "observation-type": "operator", "publication-date": DateTime.now}),
+            params: jsonapi_params("observations", nil, {"country-id": "", "observation-type": "operator"}),
             headers: admin_headers)
 
           expect(parsed_body).to eq(jsonapi_errors(422, 100, {relationships_country: ["must exist"]}))

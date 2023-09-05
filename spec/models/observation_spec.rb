@@ -207,6 +207,17 @@ RSpec.describe Observation, type: :model do
       end
     end
 
+    describe "#set_publication_date" do
+      context "when publishing an observation" do
+        it "set publication_date with the current date" do
+          observation = create(:observation, validation_status: "Created")
+          expect(observation.publication_date).to eql nil
+          observation.update!(validation_status: "Published (no comments)")
+          expect(observation.publication_date.to_date).to eql Date.current
+        end
+      end
+    end
+
     describe "#set_active_status" do
       context "when validation_status is Approved" do
         it "set is_active to true" do
