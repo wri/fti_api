@@ -12,7 +12,8 @@ class HtmlEditorInput < Formtastic::Inputs::QuillEditorInput
               [{script: "sub"}, {script: "super"}],
               [{list: "ordered"}, {list: "bullet"}],
               [{color: []}, {background: []}],
-              ["clean"]]
+              ["clean"]
+            ]
           },
           placeholder: "Type something...",
           theme: "snow"
