@@ -44,6 +44,9 @@ class Operator < ApplicationRecord
   has_many :all_observations, class_name: "Observation", inverse_of: :operator, dependent: :nullify
   has_many :users, inverse_of: :operator, dependent: :destroy
 
+  has_many :observation_operators, dependent: :destroy
+  has_many :relevant_observations, through: :observation_operators, source: :observation
+
   has_many :fmu_operators, -> { where(current: true) }, inverse_of: :operator, dependent: :destroy
   has_many :fmus, through: :fmu_operators
   has_many :all_fmu_operators, class_name: "FmuOperator", inverse_of: :operator, dependent: :destroy
@@ -131,6 +134,7 @@ class Operator < ApplicationRecord
   def can_hard_delete?
     all_fmus.with_deleted.none? &&
       all_observations.with_deleted.none? &&
+      relevant_observations.with_deleted.none? &&
       users.none? &&
       operator_documents.with_deleted.none?
   end

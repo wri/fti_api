@@ -157,6 +157,7 @@ en:
       view: 'View'
       edit: 'Edit'
       delete: 'Delete'
+      deleted: 'Deleted'
       actions: 'Actions'
       active: 'Active'
       inactive: 'Inactive'
@@ -338,6 +339,7 @@ en:
       score_history_table: 'Score History Table'
       remove_logo: 'Remove logo'
       documents: 'Documents'
+      marked_as_relevant: 'Marked as relevant'
     required_operator_document_page:
       exists: 'Exists'
       publication_authorization: 'Publication Authorization'
