@@ -37,7 +37,7 @@ ActiveAdmin.register CountryVpa do
       f.input :position
       f.input :url
     end
-    f.translated_inputs switch_locale: false do |t|
+    f.translated_inputs "Translations", switch_locale: false do |t|
       t.input :name
       t.input :description
     end

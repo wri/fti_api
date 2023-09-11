@@ -4,12 +4,16 @@ class HtmlEditorInput < Formtastic::Inputs::QuillEditorInput
       data: {
         options: {
           modules: {
-            toolbar: [["bold", "italic", "underline"],
+            # htmlEditButton: {},
+            toolbar: [
+              [{header: 1}, {header: 2}],
+              ["bold", "italic", "underline"],
               ["link", "video"],
               [{script: "sub"}, {script: "super"}],
               [{list: "ordered"}, {list: "bullet"}],
               [{color: []}, {background: []}],
-              ["clean"]]
+              ["clean"]
+            ]
           },
           placeholder: "Type something...",
           theme: "snow"

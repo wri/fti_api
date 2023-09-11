@@ -51,7 +51,7 @@ ActiveAdmin.register AboutPageEntry do
       f.input :position, hint: "leaving empty will assign last position"
       f.input :code, hint: 'must be "partners" for Partners and "donors" for Donors section'
     end
-    f.translated_inputs switch_locale: false do |t|
+    f.translated_inputs "Translations", switch_locale: false do |t|
       t.input :title
       t.input :body, as: :html_editor
     end

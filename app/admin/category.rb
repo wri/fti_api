@@ -51,7 +51,7 @@ ActiveAdmin.register Category do
     f.inputs I18n.t("active_admin.shared.category_details") do
       f.input :category_type, input_html: {disabled: edit}
     end
-    f.translated_inputs switch_locale: false do |t|
+    f.translated_inputs "Translations", switch_locale: false do |t|
       t.input :name
     end
     f.actions

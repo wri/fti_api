@@ -48,7 +48,7 @@ ActiveAdmin.register RequiredGovDocumentGroup do
     f.inputs "Required Gov Document Group Details" do
       f.input :position
       f.input :parent, collection: RequiredGovDocumentGroup.top_level
-      f.translated_inputs switch_locale: false do |t|
+      f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :name
         t.input :description
       end

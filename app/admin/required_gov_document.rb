@@ -69,7 +69,7 @@ ActiveAdmin.register RequiredGovDocument do
         include_blank: false, input_html: {disabled: editing}
       f.input :valid_period, label: "Validity (days)"
       f.inputs "Translated fields" do
-        f.translated_inputs switch_locale: false do |t|
+        f.translated_inputs "Translations", switch_locale: false do |t|
           t.input :name
           t.input :explanation
         end

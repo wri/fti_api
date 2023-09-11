@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_140933) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_17_162810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -755,6 +755,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_140933) do
     t.index ["fa_id"], name: "index_operators_on_fa_id"
     t.index ["is_active"], name: "index_operators_on_is_active"
     t.index ["slug"], name: "index_operators_on_slug", unique: true
+  end
+
+  create_table "page_translations", force: :cascade do |t|
+    t.bigint "page_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "body"
+    t.index ["locale"], name: "index_page_translations_on_locale"
+    t.index ["page_id"], name: "index_page_translations_on_page_id"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "available_in_languages", array: true
+    t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
   create_table "required_gov_document_group_translations", id: :serial, force: :cascade do |t|

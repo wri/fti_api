@@ -1,6 +1,7 @@
 //= require active_admin/base
 //= require activeadmin_addons/all
 //= require access_control
+//= require editor
 //= require users
 //= require rod
 //= require fmu
@@ -11,8 +12,9 @@
 //= require dependent_filters
 //= require sentry
 
-//= require activeadmin/quill_editor/quill
-//= require activeadmin/quill_editor_input
 //= require active_admin/active_admin_globalize
 //= require chartkick
 //= require Chart.bundle
+
+
+

@@ -60,7 +60,7 @@ ActiveAdmin.register Severity do
     end
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
-      f.translated_inputs switch_locale: false do |t|
+      f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :details
       end
     end
