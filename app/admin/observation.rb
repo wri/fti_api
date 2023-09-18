@@ -72,6 +72,23 @@ ActiveAdmin.register Observation do
     end
   end
 
+  member_action :perform_qc, method: :put do
+    case params[:button]
+    when "needs_revision"
+      resource.validation_status = Observation.validation_statuses["Needs revision"]
+    when "ready_to_publish"
+      resource.validation_status = Observation.validation_statuses["Ready for publication"]
+    else
+      return # TODO: Probably we don't need this
+    end
+    resource.admin_comment = params[:observation][:admin_comment]
+    if resource.save
+      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.performed_qc")
+    else
+      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
+    end
+  end
+
   member_action :ready_for_publication, method: :put do
     resource.validation_status = Observation.validation_statuses["Ready for publication"]
     notice = resource.save ? I18n.t("active_admin.observations_page.moved_ready") : I18n.t("active_admin.observations_page.not_modified")
@@ -87,7 +104,7 @@ ActiveAdmin.register Observation do
   member_action :start_qc, method: :put do
     resource.validation_status = Observation.validation_statuses["QC in progress"]
     notice = resource.save ? I18n.t("active_admin.observations_page.moved_qc_in_progress") : I18n.t("active_admin.observations_page.not_modified")
-    redirect_to collection_path, notice: notice
+    redirect_to admin_observation_path(resource, qc: true), notice: notice
   end
 
   action_item :ready_for_publication, only: :show do
@@ -597,6 +614,8 @@ ActiveAdmin.register Observation do
   end
 
   show do
+    render partial: "qc_form", locals: {observation: resource} if params["qc"].present?
+
     attributes_table do
       row :is_active
       row :hidden
@@ -648,7 +667,9 @@ ActiveAdmin.register Observation do
       row :actions_taken
       row :concern_opinion
       row :observation_report
-      row :admin_comment
+      if params["qc"].blank?
+        row :admin_comment
+      end
       row :monitor_comment
       row :responsible_admin
       row :user

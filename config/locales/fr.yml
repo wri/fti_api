@@ -386,6 +386,8 @@ fr:
       details: "Détails de l'annexe du document de l'opérateur"
     observations_page:
       not_modified: 'Observation NON modifiée'
+      perform_qc: 'Effectuer un contrôle qualité'
+      performed_qc: 'Contrôle qualité effectué'
       moved_ready: 'Observation déplacée vers Prêt pour publication'
       moved_needs_revision: 'Observation déplacée vers Nécessite une révision'
       moved_qc_in_progress: 'Observation déplacée au CQ en cours'

@@ -1,0 +1,15 @@
+<%= form_for observation, url: perform_qc_admin_observation_path(observation), method: :put do |f| %>
+  <fieldset class="inputs">
+    <legend>
+      <span><%= I18n.t("active_admin.observations_page.perform_qc") %></span>
+    </legend>
+    <ol>
+      <li class="select input">
+        <%= f.label :admin_comment %>
+        <%= f.text_area :admin_comment, rows: 8 %>
+        <%= f.button I18n.t("active_admin.observations_page.ready_to_publish"), value: 'ready_to_publish' %>
+        <%= f.button I18n.t("active_admin.observations_page.needs_revision"), value: 'needs_revision' %>
+      </li>
+    </ol>
+  </fieldset>
+<% end %>
