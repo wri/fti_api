@@ -357,7 +357,7 @@ class Observation < ApplicationRecord
   def notify_observers(mail_template)
     observers.each do |observer|
       observer.users.filter_actives.each do |user|
-        ObservationMailer.send(mail_template, observer, user, self).deliver_later
+        ObservationMailer.send(mail_template, self, user).deliver_later
       end
     end
   end
