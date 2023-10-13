@@ -73,14 +73,7 @@ ActiveAdmin.register Observation do
   end
 
   member_action :perform_qc, method: :put do
-    case params[:button]
-    when "needs_revision"
-      resource.validation_status = Observation.validation_statuses["Needs revision"]
-    when "ready_to_publish"
-      resource.validation_status = Observation.validation_statuses["Ready for publication"]
-    else
-      return # TODO: Probably we don't need this
-    end
+    resource.validation_status = params[:validation_status]
     resource.admin_comment = params[:observation][:admin_comment]
     if resource.save
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.performed_qc")
@@ -614,7 +607,7 @@ ActiveAdmin.register Observation do
   end
 
   show do
-    render partial: "qc_form", locals: {observation: resource} if params["qc"].present?
+    render partial: "qc_form", locals: {observation: resource} if params["qc"].present? && resource.validation_status == "QC in progress"
 
     attributes_table do
       row :is_active

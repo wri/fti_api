@@ -77,6 +77,20 @@ $to-be-reviewed: #99AA99;
 
 }
 
+.button {
+  @include no-shadow();
+  @include rounded(0);
+  background: $skinActiveColor;
+  color: #fff;
+  border: none;
+  text-shadow: none;
+  padding: 10px 20px;
+
+  &:hover {
+    background: lighten( $skinActiveColor, 10% ) !important;
+  }
+}
+
 // To increase the width of observations-details
 .col-details {
   min-width: 500px;

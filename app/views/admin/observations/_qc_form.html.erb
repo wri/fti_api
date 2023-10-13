@@ -7,8 +7,8 @@
       <li class="select input">
         <%= f.label :admin_comment %>
         <%= f.text_area :admin_comment, rows: 8 %>
-        <%= f.button I18n.t("active_admin.observations_page.ready_to_publish"), value: 'ready_to_publish' %>
-        <%= f.button I18n.t("active_admin.observations_page.needs_revision"), value: 'needs_revision' %>
+        <%= f.button I18n.t("active_admin.observations_page.ready_to_publish"), class: "button", name: "validation_status", value: "Ready for publication" %>
+        <%= f.button I18n.t("active_admin.observations_page.needs_revision"), class: "button", name: "validation_status", value: "Needs revision" %>
       </li>
     </ol>
   </fieldset>
