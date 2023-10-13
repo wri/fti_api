@@ -124,9 +124,9 @@ ActiveAdmin.register Operator, as: "Producer" do
   filter :country,
     as: :select,
     collection: -> { Country.joins(:operators).with_translations(I18n.locale).order("country_translations.name") }
-  filter :name_eq,
+  filter :id,
     as: :select, label: -> { I18n.t("activerecord.attributes.operator.name") },
-    collection: -> { Operator.order(:name).pluck(:name) }
+    collection: -> { Operator.order(:name).pluck(:name, :id) }
   filter :concession, as: :select
   filter :fa_id_present, as: :boolean, label: proc { I18n.t("active_admin.operator_page.with_fa_uuid") }
   filter :fmus_id_null, as: :boolean, label: proc { I18n.t("active_admin.operator_page.fmus_id_null") }
@@ -134,7 +134,7 @@ ActiveAdmin.register Operator, as: "Producer" do
   dependent_filters do
     {
       country_id: {
-        name_eq: Operator.pluck(:country_id, :name)
+        id: Operator.pluck(:country_id, :id)
       }
     }
   end
