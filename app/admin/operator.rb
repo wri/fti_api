@@ -134,7 +134,7 @@ ActiveAdmin.register Operator, as: "Producer" do
   dependent_filters do
     {
       country_id: {
-        name_eq: Operator.pluck(:country_id, :name)
+        id: Operator.pluck(:country_id, :id)
       }
     }
   end
