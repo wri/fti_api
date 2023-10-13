@@ -60,7 +60,7 @@ Rails.application.routes.draw do
       jsonapi_resources :observations do; end
       jsonapi_resources :observation_documents do; end
       jsonapi_resources :observation_reports do; end
-      jsonapi_resources :observers, only: [:index, :show] do; end
+      jsonapi_resources :observers, only: [:index, :show, :update] do; end
       jsonapi_resources :operators do; end
       jsonapi_resources :operator_documents, except: [:create, :update] do; end
       jsonapi_resources :operator_document_countries, except: [:create] do; end
