@@ -17,6 +17,14 @@ GIT
       paper_trail (>= 8, < 13)
 
 GIT
+  remote: https://github.com/tsubik/active_admin_paranoia.git
+  revision: 3f3fd26962ae4d8aee139a3b8f7256e2d1d340dc
+  specs:
+    active_admin_paranoia (1.0.11)
+      paranoia (>= 1.0)
+      rails (>= 4.0)
+
+GIT
   remote: https://github.com/tsubik/activeadmin-globalize.git
   revision: 57061edaf07d04136fa1693602251bfd37e59e4b
   branch: rails-7
@@ -91,9 +99,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_admin_paranoia (1.0.11)
-      paranoia (>= 1.0)
-      rails (>= 4.0)
     active_material (1.5.2)
     active_skin (0.0.13)
     activeadmin (2.14.0)
@@ -625,7 +630,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_admin_paranoia
+  active_admin_paranoia!
   active_admin_sidebar!
   active_skin
   activeadmin
