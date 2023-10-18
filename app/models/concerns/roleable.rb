@@ -17,8 +17,16 @@ module Roleable
       user_permission.user_role.in?("admin")
     end
 
+    def holding?
+      user_permission.user_role.in?("holding")
+    end
+
     def ngo?
       user_permission.user_role.in?("ngo")
+    end
+
+    def ngo_manager?
+      user_permission.user_role.in?("ngo_manager")
     end
 
     def operator?

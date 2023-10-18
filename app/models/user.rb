@@ -53,6 +53,8 @@ class User < ApplicationRecord
   has_many :observation_reports, inverse_of: :user
   has_many :operator_document_annexes, inverse_of: :user
 
+  has_and_belongs_to_many :managed_observers, join_table: "observer_managers", class_name: "Observer", dependent: :destroy
+
   belongs_to :observer, optional: true
   belongs_to :operator, optional: true
   belongs_to :holding, optional: true
@@ -100,6 +102,10 @@ class User < ApplicationRecord
     return false unless self&.user_permission&.user_role == "holding"
 
     Operator.find_by(id: operator_id)&.holding_id == holding_id
+  end
+
+  def all_managed_observer_ids
+    [observer_id, *managed_observer_ids].compact.uniq
   end
 
   def operator_ids

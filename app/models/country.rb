@@ -28,9 +28,7 @@ class Country < ApplicationRecord
 
   has_many :users, inverse_of: :country
   has_many :observations, inverse_of: :country
-  # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :observers
-  # rubocop:enable Rails/HasAndBelongsToMany
   has_many :governments, inverse_of: :country
   has_many :operators, inverse_of: :country
   has_many :fmus, inverse_of: :country

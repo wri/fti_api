@@ -37,9 +37,7 @@ class Observer < ApplicationRecord
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
 
-  # rubocop:disable Rails/HasAndBelongsToMany
   has_and_belongs_to_many :countries
-  # rubocop:enable Rails/HasAndBelongsToMany
 
   has_many :observer_observations, dependent: :restrict_with_error
   has_many :observations, through: :observer_observations
@@ -48,6 +46,8 @@ class Observer < ApplicationRecord
   has_many :observation_reports, through: :observation_report_observers
 
   has_many :users, inverse_of: :observer
+  has_and_belongs_to_many :managers, join_table: "observer_managers", class_name: "User", dependent: :destroy
+
   belongs_to :responsible_user, class_name: "User", optional: true
   belongs_to :responsible_admin, class_name: "User", optional: true
 

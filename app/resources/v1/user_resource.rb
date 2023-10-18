@@ -10,6 +10,7 @@ module V1
     has_one :country
     has_one :user_permission, foreign_key_on: :related
     has_many :comments
+    has_many :managed_observers, class_name: "Observer"
     has_one :observer
     has_one :operator
 

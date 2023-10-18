@@ -32,9 +32,9 @@ RSpec.describe UserPermission, type: :model do
 
   let(:ngo_permissions) {
     {user: {manage: {id: @user.id}},
-     observation: {manage: {observers: {id: @user.observer_id}}, create: {}},
-     observation_report: {update: {observers: {id: @user.observer_id}}, create: {}},
-     observation_documents: {ud: {observation: {is_active: false, observers: {id: @user.observer_id}}}, create: {}},
+     observation: {manage: {observers: {id: @user.all_managed_observer_ids}}, create: {}},
+     observation_report: {update: {observers: {id: @user.all_managed_observer_ids}}, create: {}},
+     observation_documents: {ud: {observation: {is_active: false, observers: {id: @user.all_managed_observer_ids}}}, create: {}},
      category: {read: {}},
      subcategory: {read: {}},
      government: {cru: {}},
@@ -42,7 +42,7 @@ RSpec.describe UserPermission, type: :model do
      operator: {cru: {}},
      law: {read: {}},
      severity: {read: {}},
-     observer: {read: {}, update: {id: @user.observer_id}},
+     observer: {read: {}, update: {id: @user.all_managed_observer_ids}},
      fmu: {read: {}},
      operator_document: {read: {}},
      required_operator_document_group: {read: {}},
@@ -52,9 +52,9 @@ RSpec.describe UserPermission, type: :model do
   let(:ngo_manager_permissions) {
     {
       user: {manage: {id: @user.id}},
-      observation: {manage: {observers: {id: @user.observer_id}}, create: {}},
-      observation_report: {update: {observers: {id: @user.observer_id}}, create: {}},
-      observation_documents: {ud: {observation: {is_active: false, observers: {id: @user.observer_id}}}, create: {}},
+      observation: {manage: {observers: {id: @user.all_managed_observer_ids}}, create: {}},
+      observation_report: {update: {observers: {id: @user.all_managed_observer_ids}}, create: {}},
+      observation_documents: {ud: {observation: {is_active: false, observers: {id: @user.all_managed_observer_ids}}}, create: {}},
       category: {cru: {}},
       subcategory: {cru: {}},
       government: {cru: {}},
@@ -62,7 +62,7 @@ RSpec.describe UserPermission, type: :model do
       operator: {cru: {}},
       law: {cru: {}},
       severity: {cru: {}},
-      observer: {read: {}, update: {id: @user.observer_id}},
+      observer: {read: {}, update: {id: @user.all_managed_observer_ids}},
       fmu: {read: {}, update: {}},
       operator_document: {manage: {}},
       required_operator_document_group: {cru: {}},

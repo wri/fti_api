@@ -20,7 +20,7 @@ module V1
 
     def current
       user = User.find(context[:current_user].id)
-      include_resources = %w[user_permission observer operator country observer.country]
+      include_resources = %w[user_permission observer managed_observers operator country observer.country]
       render json: JSONAPI::ResourceSerializer.new(
         UserResource,
         include: include_resources
