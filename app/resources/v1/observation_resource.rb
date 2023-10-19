@@ -37,7 +37,7 @@ module V1
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
       :observation_report, :law, :operator, :subcategory,
-      :is_active, :validation_status, :is_physical_place
+      :is_active, :validation_status, :is_physical_place, :new_observer_id
 
     filter :hidden, default: "false", apply: ->(records, value, options) {
       return records if value.include?("all")
@@ -67,7 +67,7 @@ module V1
     }
 
     filter :observer_id, apply: ->(records, value, _options) {
-      records.joins(:observers).where(observers: {id: value})
+      records.where(id: records.joins(:observers).where(observers: {id: value}).pluck(:id))
     }
 
     def self.sortable_fields(context)
@@ -118,7 +118,8 @@ module V1
     # rubocop:disable Lint/RescueException
     def add_own_observer
       user = context[:current_user]
-      @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
+      # debugger
+      # @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
       @model.user_id = user.id
       @model.save
       # This is added because of the order of the callbacks in JAR
@@ -151,12 +152,10 @@ module V1
       app = context[:app]
 
       if app == "observations-tool" && user.present?
-        if user.observer_id.present?
-          Observation.own_with_inactive(user.observer_id)
-        elsif user.user_permission.present? && user.user_permission.user_role == "admin"
+        if user.user_permission.present? && user.user_permission.user_role == "admin"
           Observation.all
-        else
-          Observation.active
+        elsif user.all_managed_observer_ids.any?
+          Observation.own_with_inactive(user.all_managed_observer_ids)
         end
       else
         Observation.published

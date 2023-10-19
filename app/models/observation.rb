@@ -131,6 +131,7 @@ class Observation < ApplicationRecord
   validate :evidence_presented_in_the_report
   validate :status_changes, if: -> { user_type.present? }
 
+  validates :observers, presence: true
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
@@ -159,13 +160,13 @@ class Observation < ApplicationRecord
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, -> { includes(:translations).where(is_active: true).visible }
-  scope :own_with_inactive, ->(observer) {
+  scope :own_with_inactive, ->(observer_id) {
     joins(
       <<~SQL
         INNER JOIN "observer_observations" ON "observer_observations"."observation_id" = "observations"."id"
         INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_id" = "all_observers"."id"
       SQL
-    ).where(all_observers: {id: observer})
+    ).where(all_observers: {id: observer_id})
   }
 
   scope :by_category, ->(category_id) { joins(:subcategory).where(subcategories: {category_id: category_id}) }
