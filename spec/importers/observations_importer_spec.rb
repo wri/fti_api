@@ -6,11 +6,11 @@ describe ObservationsImporter, type: :importer do
   let(:importer_type) { "observations" }
   let(:uploaded_file) { fixture_file_upload("#{importer_type}/import_data.csv", Mime[:csv].to_s) }
   let(:importer) { FileDataImport::BaseImporter.build(importer_type, uploaded_file) }
+  let(:observer) { create(:observer) }
 
   context "CSV" do
-    # TODO: fix importer or remove it
-    xit "returns right result" do
-      importer.import
+    it "returns right result" do
+      importer.import observer_ids: [observer.id]
 
       expect(importer.results.to_json).to match_snapshot("importers/observations_importer")
     end

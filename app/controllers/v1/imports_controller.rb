@@ -5,7 +5,7 @@ module V1
     authorize_resource :file_data_import
 
     def create
-      importer.import(user_id_params)
+      importer.import(user_id_params.merge(importer_params))
 
       render json: importer.results
     end
@@ -17,11 +17,15 @@ module V1
     end
 
     def import_params
-      params.fetch(:import).permit(:importer_type, :file)
+      params.fetch(:import).permit(:importer_type, :file, :importer_params)
     end
 
     def importer
       @importer ||= FileDataImport::BaseImporter.build(import_params[:importer_type], import_params[:file])
+    end
+
+    def importer_params
+      JSON.parse(import_params[:importer_params] || {}).symbolize_keys
     end
 
     def user_id_params
