@@ -73,7 +73,7 @@ module V1
       describe "For admin user" do
         it "Returns error object when the observation cannot be created by admin" do
           post("/observations",
-            params: jsonapi_params("observations", nil, {"country-id": "", "observation-type": "operator"}),
+            params: jsonapi_params("observations", nil, {"country-id": "", "observation-type": "operator", relationships: {observers: [ngo_observer.id]}}),
             headers: admin_headers)
 
           expect(parsed_body).to eq(jsonapi_errors(422, 100, {relationships_country: ["must exist"]}))
@@ -81,16 +81,23 @@ module V1
         end
 
         it "Returns success object when the observation was successfully created by admin" do
-          params = {"country-id": country.id, "observation-type": "operator", "publication-date": DateTime.now, lat: 123.4444, lng: 12.4444}
+          params = {
+            "country-id": country.id,
+            "observation-type": "operator",
+            lat: 123.4444,
+            lng: 12.4444,
+            relationships: {
+              observers: [ngo_observer.id]
+            }
+          }
 
           post("/observations",
             params: jsonapi_params("observations", nil, params),
             headers: admin_headers)
 
           expect(parsed_data[:id]).not_to be_empty
-          params.except(:"publication-date", :lat, :lng).each do |name, value|
-            expect(parsed_attributes[name]).to eq(value)
-          end
+          expect(parsed_attributes[:"observation-type"]).to eq(params[:"observation-type"])
+          expect(parsed_attributes[:"country-id"]).to eq(params[:"country-id"])
           expect(parsed_attributes[:lat]).to eq(params[:lat].to_s)
           expect(parsed_attributes[:lng]).to eq(params[:lng].to_s)
           expect(status).to eq(201)

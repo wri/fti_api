@@ -143,14 +143,27 @@ module IntegrationHelper
 
       if relationships.present?
         params[:data][:relationships] = relationships.map do |model, value|
-          {
-            model => {
-              data: {
-                type: model.to_s.pluralize,
-                id: value.to_s
+          if value.is_a? Array
+            {
+              model => {
+                data: value.map do |v|
+                  {
+                    type: model.to_s.pluralize,
+                    id: v.to_s
+                  }
+                end
               }
             }
-          }
+          else
+            {
+              model => {
+                data: {
+                  type: model.to_s.pluralize,
+                  id: value.to_s
+                }
+              }
+            }
+          end
         end.reduce(&:merge)
       end
     end
