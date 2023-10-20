@@ -82,6 +82,7 @@ Rails.application.routes.draw do
       resources :fmus, only: [:index, :update] do
         get "tiles/:z/:x/:y", to: "fmus#tiles", on: :collection
       end
+      get "protected_areas/tiles/:z/:x/:y", to: "protected_areas#tiles"
 
       resources :imports, only: :create
 
