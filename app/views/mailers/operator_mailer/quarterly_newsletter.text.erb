@@ -1,0 +1,19 @@
+<%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+
+<%= t(".paragraph1", score: @score) %>
+
+<% if @old_score.present? %>
+<%= t(".paragraph2", old_score_date: localized_date(I18n.locale, @old_score_date), old_score: @old_score, score_variation: @score_variation) %>
+<% end %>
+
+<% if @expiring_docs.any? %>
+<%= t(".paragraph3") %>
+<% @expiring_docs.each do |doc| %>
+- <%= t(".doc_expires", document: doc.required_operator_document.name, date: localized_date(I18n.locale, doc.expire_date)) %>
+<% end %>
+<% end %>
+
+<%= t(".paragraph4", link: "www.opentimberportal.org") %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

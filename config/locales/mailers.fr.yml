@@ -54,7 +54,22 @@ fr:
       paragraph3: "Pour consulter l’observation, veuillez consulter: %{link}"
   operator_mailer:
     quarterly_newsletter:
+      subject: Votre rapport trimestriel sur l’OTP
+      paragraph1: Votre score actuel est de %{score}.
+      paragraph2: Votre dernier score le %{old_score_date} était de %{old_score}. Cela signifie une variation de %{score_variation}.
+      paragraph3: "Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour:"
+      paragraph4: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
+      doc_expires: "%{document} expire le %{date}"
+    expiring_documents:
       subject:
-    expiring_documents_notifications:
+        one: "Vous avez 1 document expirant dans %{days}"
+        other: "Vous avez %{count} documents expirant en %{days}"
+      paragraph1: "%{company} a %{count} document(s) qui va/vont expirer en %{days}:"
+      paragraph2: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
+    expired_documents:
       subject:
+        one: "Vous avez 1 document expiré sur l'OTP."
+        other: "Vous avez %{count} documents expiré sur l'OTP"
+      paragraph1: "%{company} a %{count} document(s) qui sont expiré:"
+      paragraph2: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
 

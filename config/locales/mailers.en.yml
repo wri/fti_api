@@ -54,9 +54,24 @@ en:
       paragraph3: "To review the observation, go to: %{link}"
   operator_mailer:
     quarterly_newsletter:
+      subject: Your quarterly OTP report
+      paragraph1: Your current score is %{score}.
+      paragraph2: Your score on %{old_score_date} was %{old_score}. This means a variation of %{score_variation}.
+      paragraph3: "Please note that the following documents on your profile are expiring this quarter and will need to be updated:"
+      paragraph4: You can update these documents by logging on to your OTP profile at %{link}.
+      doc_expires: "%{document} expires on %{date}"
+    expiring_documents:
       subject:
-    expiring_documents_notifications:
+        one: "You have 1 document expiring in %{days}"
+        other: "You have %{count} documents expiring in %{days}"
+      paragraph1: "%{company} has %{count} document(s) that are going to expire in %{days}:"
+      paragraph2: You can update these documents by logging on to your OTP profile at %{link}.
+    expired_documents:
       subject:
+        one: "You have 1 document expired on the OTP"
+        other: "You have %{count} documents expired on the OTP"
+      paragraph1: "%{company} has %{count} document(s) that are expired:"
+      paragraph2: You can update these documents by logging on to your OTP profile at %{link}.
   system_mailer:
     user_created:
       subject: New account created

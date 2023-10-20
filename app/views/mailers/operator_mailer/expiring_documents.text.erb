@@ -1,0 +1,11 @@
+<%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+
+<%= t(".paragraph1", company: @operator.name, count: @documents.count, days: distance_of_time_in_words(@documents[0].expire_date, Time.zone.today)) %>
+<% @documents.each do |doc| %>
+- <%= doc.required_operator_document.name %>
+<% end %>
+
+<%= t(".paragraph2", link: "www.opentimberportal.org") %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>
