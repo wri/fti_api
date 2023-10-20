@@ -583,4 +583,29 @@ namespace :import do
       end
     end
   end
+
+  desc "Loads protected areas from GFW data API"
+  task protected_areas: :environment do
+    countries = Country.active.pluck(:iso).uniq.map { |iso| "'#{iso}'" }.join(", ")
+    sql = "SELECT wdpa_pid, name, gfw_geojson, iso3 FROM data where marine = '0' and iso3 IN (#{countries})"
+
+    ProtectedArea.delete_all
+
+    response = RestClient.post(
+      "https://data-api.globalforestwatch.org/dataset/wdpa_protected_areas/v202302/query/json",
+      {sql: sql}.to_json,
+      {content_type: :json}
+    )
+    response_json = JSON.parse(response)
+    response_json["data"].each do |protected_area|
+      country = Country.find_by(iso: protected_area["iso3"])
+      ProtectedArea.create!(
+        name: protected_area["name"],
+        geojson: JSON.parse(protected_area["gfw_geojson"]),
+        wdpa_pid: protected_area["wdpa_pid"],
+        country: country
+      )
+      puts "Country #{country.name} protected area #{protected_area["name"]} imported"
+    end
+  end
 end

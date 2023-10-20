@@ -240,6 +240,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -279,6 +281,9 @@ GEM
       activesupport (>= 5.2)
     hashdiff (1.0.1)
     htmlentities (4.3.4)
+    http-accept (1.7.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     i18n_generators (2.2.2)
@@ -362,6 +367,7 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     net-ssh (7.1.0)
+    netrc (0.11.0)
     nio4r (2.5.9)
     nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
@@ -463,6 +469,11 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rexml (3.2.5)
     rgeo (3.0.0)
     rgeo-activerecord (7.0.1)
@@ -598,6 +609,9 @@ GEM
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unaccent (0.4.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
     uniform_notifier (1.16.0)
     valid_url (0.0.4)
@@ -686,6 +700,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rails-erd
   redis-rails
+  rest-client
   rgeo
   rgeo-geojson
   rspec-activejob

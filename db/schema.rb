@@ -781,6 +781,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
     t.index ["slug"], name: "index_pages_on_slug", unique: true
   end
 
+  create_table "protected_areas", force: :cascade do |t|
+    t.bigint "country_id", null: false
+    t.string "name", null: false
+    t.string "wdpa_pid", null: false
+    t.jsonb "geojson", null: false
+    t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
+    t.virtual "centroid", type: :geometry, limit: {:srid=>0, :type=>"st_point"}, as: "st_centroid(geometry)", stored: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_protected_areas_on_country_id"
+  end
+
   create_table "required_gov_document_group_translations", id: :serial, force: :cascade do |t|
     t.integer "required_gov_document_group_id", null: false
     t.string "locale", null: false
@@ -1157,6 +1169,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "operators", "holdings", on_delete: :nullify
+  add_foreign_key "protected_areas", "countries", on_delete: :cascade
   add_foreign_key "required_gov_document_groups", "required_gov_document_groups", column: "parent_id"
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade

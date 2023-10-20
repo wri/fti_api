@@ -100,6 +100,9 @@ gem "interactor", "~> 3.0"
 gem "sentry-rails"
 gem "sentry-ruby"
 
+# Utilities
+gem "rest-client"
+
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "factory_bot_rails"
