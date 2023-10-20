@@ -5,7 +5,7 @@ ActiveAdmin.register ProtectedArea do
 
   menu false
 
-  permit_params [:name, :geojson, :wdpa_id]
+  permit_params [:name, :country_id, :geojson, :wdpa_id]
 
   filter :wdpa_pid
   filter :name

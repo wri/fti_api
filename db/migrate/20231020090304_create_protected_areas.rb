@@ -8,7 +8,7 @@ class CreateProtectedAreas < ActiveRecord::Migration[7.0]
 
       t.jsonb :geojson, null: false
       t.geometry :geometry
-      t.virtual :centroid, type: :st_point, as: 'ST_Centroid(geometry)', stored: true
+      t.virtual :centroid, type: :st_point, as: "ST_Centroid(geometry)", stored: true
 
       t.timestamps
     end
