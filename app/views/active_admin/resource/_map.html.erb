@@ -39,16 +39,16 @@
     <% end %>
 
     <% if geojson.present? %>
-    map.addSource('fmu', {
+    map.addSource('feature', {
       'type': 'geojson',
       'data': <%= raw(geojson.to_json) %>
     });
     <% end %>
 
     map.addLayer({
-      'id': 'fmu-fill',
+      'id': 'feature-fill',
       'type': 'fill',
-      'source': 'fmu',
+      'source': 'feature',
       'layout': {},
       'paint': {
         'fill-color': '#AAA',
@@ -56,9 +56,9 @@
       }
     });
     map.addLayer({
-      'id': 'fmu-line',
+      'id': 'feature-line',
       'type': 'line',
-      'source': 'fmu',
+      'source': 'feature',
       'layout': {},
       'paint': {
         'line-color': '#000000',

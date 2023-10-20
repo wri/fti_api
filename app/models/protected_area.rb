@@ -8,7 +8,8 @@ class ProtectedArea < ApplicationRecord
   after_save :update_geometry, if: :saved_change_to_geojson?
 
   def bbox
-    RGeo::Cartesian::BoundingBox.create_from_geometry(geometry)
+    bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(geometry)
+    [bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y]
   end
 
   private
