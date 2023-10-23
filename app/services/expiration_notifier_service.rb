@@ -19,7 +19,7 @@ class ExpirationNotifierService
       OperatorDocument.where(expire_date: date).select(:operator_id).group(:operator_id).each do |operator_document|
         documents = OperatorDocument.where(expire_date: date, operator_id: operator_document.operator_id)
         operator = Operator.find(operator_document.operator_id)
-        operator.users.filter_active.each do |user|
+        operator.users.filter_actives.each do |user|
           OperatorMailer.expiring_documents(operator, user, documents).deliver_now
         end
       end
