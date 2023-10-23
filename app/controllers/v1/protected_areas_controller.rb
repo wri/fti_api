@@ -5,8 +5,7 @@ module V1
     skip_before_action :authenticate, only: [:tiles]
 
     def tiles
-      tile = ProtectedArea.vector_tiles params[:z], params[:x], params[:y]
-      send_data tile
+      send_data ProtectedAreaVectorTile.fetch params[:z], params[:x], params[:y]
     end
   end
 end

@@ -7,7 +7,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/resources/v1/observation_resource.rb",
-      "line": 63,
+      "line": 62,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "records.joins(:observation_report).where(\"extract(year from observation_reports.publication_date) in (#{years})\")",
       "render_path": null,
@@ -26,18 +26,18 @@
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
-      "fingerprint": "23d495db5516c045871325ae5e92b8e853e562ebeb5a87bc3486378ded9ae019",
+      "fingerprint": "27286ce5352a110cc3f1c9ebd509311407e55c697f3abc47e6896a0cd5bfecc0",
       "check_name": "SQL",
       "message": "Possible SQL injection",
-      "file": "app/models/fmu.rb",
-      "line": 118,
+      "file": "app/models/protected_area_vector_tile.rb",
+      "line": 21,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "ActiveRecord::Base.connection.execute(\"SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile\\n  FROM (\\n    SELECT id, geojson -> 'properties' as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}), 4096, 256, true) AS mvtgeometry\\n    FROM (\\n      SELECT fmus.*, st_transform(geometry, 3857) as the_geom_webmercator\\n      FROM fmus\\n        LEFT JOIN fmu_operators fo on fo.fmu_id = fmus.id and fo.current = true\\n      WHERE fmus.deleted_at IS NULL #{(sanitize_sql([\"AND operator_id=?\", operator_id]) or \"\")}\\n    ) as data\\n    WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}),4096,0,true) IS NOT NULL\\n  ) AS tile;\\n\")",
+      "code": "ActiveRecord::Base.connection.execute(\"SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile\\n  FROM (\\n    SELECT id, json_build_object('name', name) as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}), 4096, 256, true) AS mvtgeometry\\n    FROM (\\n      SELECT protected_areas.*, st_transform(geometry, 3857) as the_geom_webmercator\\n      FROM protected_areas\\n    ) as data\\n    WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}),4096,0,true) IS NOT NULL\\n  ) AS tile;\\n\")",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Fmu",
-        "method": "vector_tiles"
+        "class": "ProtectedAreaVectorTile",
+        "method": "ProtectedAreaVectorTile.fetch"
       },
       "user_input": "Integer(param_z)",
       "confidence": "Medium",
@@ -191,7 +191,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/resources/v1/operator_resource.rb",
-      "line": 88,
+      "line": 67,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "records.joins(:country).joins([{ :country => :translations }]).where(\"lower(country_translations.name) like #{sanitized_value}\")",
       "render_path": null,
@@ -227,6 +227,29 @@
       "confidence": "Medium",
       "cwe_id": [
         77
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "8937590e45197aa63be9b198ccaba444e8b3e3019d177a1631690439fa5f8e50",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/fmu_vector_tile.rb",
+      "line": 25,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "ActiveRecord::Base.connection.execute(\"SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile\\n  FROM (\\n    SELECT id, geojson -> 'properties' as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}), 4096, 256, true) AS mvtgeometry\\n    FROM (\\n      SELECT fmus.*, st_transform(geometry, 3857) as the_geom_webmercator\\n      FROM fmus\\n        LEFT JOIN fmu_operators fo on fo.fmu_id = fmus.id and fo.current = true\\n      WHERE fmus.deleted_at IS NULL #{(sanitize_sql([\"AND operator_id=?\", operator_id]) or \"\")}\\n    ) as data\\n    WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{Integer(param_z)},#{Integer(param_x)},#{Integer(param_y)}),4096,0,true) IS NOT NULL\\n  ) AS tile;\\n\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FmuVectorTile",
+        "method": "FmuVectorTile.fetch"
+      },
+      "user_input": "Integer(param_z)",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
       ],
       "note": ""
     },
@@ -435,6 +458,6 @@
       "note": ""
     }
   ],
-  "updated": "2023-06-02 14:31:06 +0200",
-  "brakeman_version": "5.4.1"
+  "updated": "2023-10-23 16:04:59 +0200",
+  "brakeman_version": "6.0.0"
 }
