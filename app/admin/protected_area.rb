@@ -5,7 +5,7 @@ ActiveAdmin.register ProtectedArea do
 
   menu false
 
-  permit_params [:name, :country_id, :geojson, :wdpa_id]
+  permit_params [:name, :country_id, :geojson, :wdpa_pid]
 
   filter :wdpa_pid
   filter :name
@@ -28,7 +28,7 @@ ActiveAdmin.register ProtectedArea do
       f.input :wdpa_pid
       f.input :country
       f.input :name
-      f.input :geojson
+      f.input :geojson, input_html: {value: f.object.geojson.to_json}
 
       f.actions
     end
@@ -42,7 +42,9 @@ ActiveAdmin.register ProtectedArea do
       row :map do |r|
         render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], geojson: r.geojson, bbox: r.bbox}
       end
-      row :geojson
+      row :geojson do |r|
+        r.geojson.to_json
+      end
     end
     active_admin_comments
   end

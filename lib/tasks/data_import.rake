@@ -601,7 +601,7 @@ namespace :import do
       country = Country.find_by(iso: protected_area["iso3"])
       ProtectedArea.create!(
         name: protected_area["name"],
-        geojson: JSON.parse(protected_area["gfw_geojson"]),
+        geojson: protected_area["gfw_geojson"],
         wdpa_pid: protected_area["wdpa_pid"],
         country: country
       )

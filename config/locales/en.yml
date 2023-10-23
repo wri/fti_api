@@ -213,6 +213,7 @@ en:
           countries: 'Countries'
           fmus: 'Fmus'
           fmu_allocations: 'Fmu allocations'
+          protected_areas: 'Protected areas'
       government_sector:
         government_sector: 'Government sector'
         required_document_group: 'Required document group'

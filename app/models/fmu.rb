@@ -57,7 +57,7 @@ class Fmu < ApplicationRecord
 
   validates :name, presence: true
   validates :forest_type, presence: true
-  validate :geojson_correctness, if: :geojson_changed?
+  validates :geojson, geojson: true, if: :geojson_changed?
 
   after_save :update_geometry, if: :saved_change_to_geojson?
 
@@ -232,23 +232,5 @@ class Fmu < ApplicationRecord
       where fmus.id = :fmu_id;
     SQL
     ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
-  end
-
-  def geojson_correctness
-    return if geojson.blank?
-
-    temp_geometry = RGeo::GeoJSON.decode geojson
-    bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(temp_geometry.geometry)
-    validate_bbox bbox
-  rescue RGeo::Error::InvalidGeometry
-    errors.add(:geojson, "Failed linear ring test")
-  rescue => e
-    errors.add(:geojson, "Error: #{e.message}")
-  end
-
-  def validate_bbox(bbox)
-    return if bbox.max_x <= 180 && bbox.min_x >= -180 && bbox.max_y <= 90 && bbox.min_y >= -90
-
-    errors.add(:geojson, "The FMU's bbox is bigger than the globe. Please make sure your projection is 4326")
   end
 end

@@ -223,6 +223,7 @@ fr:
           countries: 'Pays'
           fmus: 'UFA'
           fmu_allocations: 'Attribution des UFA'
+          protected_areas: 'Zones protégées'
       government_sector:
         government_sector: 'Gouvernement'
         required_document_group: 'Groupe de documents requis'
