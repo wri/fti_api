@@ -134,17 +134,10 @@ class Fmu < ApplicationRecord
   end
 
   def bbox
-    query = <<~SQL
-      SELECT st_astext(st_envelope(geometry))
-      FROM fmus
-      where id = #{id}
-    SQL
-    envelope =
-      ActiveRecord::Base.connection.execute(query)[0]["st_astext"][9..-3]
-        .split(/ |,/).map(&:to_f).each_slice(2).to_a
-    [envelope[0], envelope[2]]
-  rescue
-    nil
+    return nil if geometry.nil?
+
+    bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(geometry)
+    [bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y]
   end
 
   def self.file_upload(esri_shapefiles_zip)
@@ -188,21 +181,11 @@ class Fmu < ApplicationRecord
   private
 
   def update_geometry
-    query = <<~SQL
-      update fmus
-        set geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')
-      where fmus.id = :fmu_id
-    SQL
-    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
+    self.class.unscoped.where(id: id).update_all("geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')")
     update_centroid
   end
 
   def update_centroid
-    query = <<~SQL
-      update fmus
-        set geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)
-      where fmus.id = :fmu_id;
-    SQL
-    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
+    self.class.unscoped.where(id: id).update_all("geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)")
   end
 end

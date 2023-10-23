@@ -27,6 +27,8 @@ class ProtectedArea < ApplicationRecord
   end
 
   def bbox
+    return nil if geometry.nil?
+
     bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(geometry)
     [bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y]
   end
@@ -34,11 +36,6 @@ class ProtectedArea < ApplicationRecord
   private
 
   def update_geometry
-    query = <<~SQL
-      update protected_areas
-      set geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')
-      where protected_areas.id = :protected_area_id
-    SQL
-    ActiveRecord::Base.connection.update(ProtectedArea.sanitize_sql_for_assignment([query, protected_area_id: id]))
+    self.class.unscoped.where(id: id).update_all("geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')")
   end
 end
