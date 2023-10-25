@@ -9,7 +9,7 @@
 <ul>
 <% @documents.each do |doc| %>
   <li>
-    <%= doc.required_operator_document.name %>
+    <%= doc.name_with_fmu %>
   </li>
 <% end %>
 </ul>

@@ -135,6 +135,12 @@ class OperatorDocument < ApplicationRecord
     %w[doc_not_required doc_valid].include?(status)
   end
 
+  def name_with_fmu
+    return required_operator_document.name if fmu.nil?
+
+    "#{required_operator_document.name} (#{fmu.name})"
+  end
+
   private
 
   def recalculate_scores

@@ -30,7 +30,7 @@ class OperatorMailer < ApplicationMailer
   end
 
   def expiring_documents(operator, user, documents)
-    @documents = documents
+    @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
     @user = user
     @operator = operator
     days_to_expire = distance_of_time_in_words(documents.first.expire_date, Time.zone.today)
@@ -40,7 +40,7 @@ class OperatorMailer < ApplicationMailer
   end
 
   def expired_documents(operator, user, documents)
-    @documents = documents
+    @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
     @user = user
     @operator = operator
 

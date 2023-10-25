@@ -2,7 +2,7 @@
 
 <%= t(".paragraph1", company: @operator.name, count: @documents.count) %>
 <% @documents.each do |doc| %>
-- <%= doc.required_operator_document.name %>
+- <%= doc.name_with_fmu %>
 <% end %>
 
 <%= t(".paragraph2", link: "www.opentimberportal.org") %>
