@@ -1759,34 +1759,3 @@ fr:
     types: 'observation-type'
     info: 'observation-info'
     attachments: 'observation-attachments'
-
-  backend:
-    mail_service:
-      expiring_documents:
-        title:
-          one: "Vous avez 1 document expirant dans "
-          other: "Vous avez %{count} documents expirant en "
-        text: "%{company_name} a %{count} document(s) qui va/vont expirer en "
-        salutation: "<br>Cordialement,<br>L'équipe OTP"
-      expired_documents:
-        title:
-          one: "Vous avez 1 document expiré sur l'OTP."
-          other: "Vous avez %{count} documents expiré sur l'OTP"
-        text: "%{company_name} a %{count} document(s) qui sont expiré. Veuillez le mettre à jour ou contacter l’équipe OTP si vous avez des questions."
-        salutation: "<br>Cordialement,<br>L'équipe OTP"
-      observer_status_changed:
-        producers: 'Exploitants: '
-        government: 'Gouvernance'
-        subject: 'Mise à jour du statut de votre observation'
-        text: "Bonjour %{observer},\n
-
-Le statut de votre observation (%{id}) ci-dessous a changé.\nNouveau statut : %{status}.\n
-
-Observations:\nDate: %{date}
-
-%{infractor_text}\nInfraction: %{infraction_fr}\n
-
-N'hésitez pas à nous contacter si vous avez des questions,\n
-
-Cordialement,\nL'équipe OTP"
-

@@ -3,32 +3,6 @@ class OperatorMailer < ApplicationMailer
 
   helper :date
 
-  def expiring_documents_notifications(operator, documents)
-    num_documents = documents.count
-    expire_date = documents.first.expire_date
-    if expire_date > Time.zone.today
-      # expiring documents
-      time_to_expire = distance_of_time_in_words(expire_date, Time.zone.today)
-      subject = t("backend.mail_service.expiring_documents.title", count: num_documents) +
-        time_to_expire
-      text = [t("backend.mail_service.expiring_documents.text", company_name: operator.name, count: num_documents)]
-      text << time_to_expire
-      documents.each { |document| text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
-      text << t("backend.mail_service.expiring_documents.salutation")
-    else
-      # expired documents
-      subject = t("backend.mail_service.expired_documents.title", count: num_documents)
-      text = [t("backend.mail_service.expired_documents.text", company_name: operator.name, count: num_documents)]
-      documents.each { |document| text << "<br><a href='#{document_admin_url(document)}'>#{document&.required_operator_document&.name}</a>" }
-      text << t("backend.mail_service.expired_documents.salutation")
-    end
-
-    mail to: operator.email,
-      subject: subject,
-      body: text.join(""),
-      content_type: "text/html"
-  end
-
   def expiring_documents(operator, user, documents)
     @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
     @user = user
@@ -80,18 +54,5 @@ class OperatorMailer < ApplicationMailer
     end
 
     mail to: user.email, subject: I18n.t("operator_mailer.quarterly_newsletter.subject")
-  end
-
-  private
-
-  def document_admin_url(document)
-    ENV["APP_URL"] + Rails.application.routes.url_helpers.url_for(
-      {
-        controller: "admin/operator_documents",
-        action: "show",
-        id: document.id,
-        only_path: true
-      }
-    )
   end
 end
