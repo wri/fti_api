@@ -134,6 +134,8 @@ class Observation < ApplicationRecord
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
+  validates :admin_comment, presence: true, if: -> { validation_status == "Needs revision" }
+
   before_save :set_active_status
   before_save :check_is_physical_place
   before_save :set_centroid

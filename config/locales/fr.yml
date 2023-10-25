@@ -402,6 +402,7 @@ fr:
       in_qc: 'Observation au CQ'
       bulk_confirm_qc: 'Êtes-vous sûr de vouloir démarrer le CQ pour toutes ces observations?'
       bulk_require_revision: 'Voulez-vous vraiment exiger une révision pour toutes ces observations?'
+      not_in_qc_in_progress: 'Observation is not in QC in progress status'
       required_revision: 'Révision requise pour les observations'
       bulk_ready_for_publication: 'Voulez-vous vraiment marquer ces publications comme prêtes à être publiées?'
       ready_to_publish: 'Observations prêtes à être publiées'

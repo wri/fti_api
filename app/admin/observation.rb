@@ -72,13 +72,18 @@ ActiveAdmin.register Observation do
     end
   end
 
-  member_action :perform_qc, method: :put do
-    resource.validation_status = params[:validation_status]
-    resource.admin_comment = params[:observation][:admin_comment]
-    if resource.save
+  member_action :perform_qc, method: [:put, :get] do
+    @page_title = I18n.t("active_admin.observations_page.perform_qc")
+    if request.get?
+      if resource.validation_status == "QC in progress"
+        render "perform_qc"
+      else
+        redirect_to collection_path, alert: I18n.t("active_admin.observations_page.not_in_qc_in_progress")
+      end
+    elsif resource.update permitted_params[:observation]
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.performed_qc")
     else
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
+      render "perform_qc"
     end
   end
 
@@ -88,16 +93,13 @@ ActiveAdmin.register Observation do
     redirect_to collection_path, notice: notice
   end
 
-  member_action :needs_revision, method: :put do
-    resource.validation_status = Observation.validation_statuses["Needs revision"]
-    notice = resource.save ? I18n.t("active_admin.observations_page.moved_needs_revision") : I18n.t("active_admin.observations_page.not_modified")
-    redirect_to collection_path, notice: notice
-  end
-
   member_action :start_qc, method: :put do
     resource.validation_status = Observation.validation_statuses["QC in progress"]
-    notice = resource.save ? I18n.t("active_admin.observations_page.moved_qc_in_progress") : I18n.t("active_admin.observations_page.not_modified")
-    redirect_to admin_observation_path(resource, qc: true), notice: notice
+    if resource.save
+      redirect_to perform_qc_admin_observation_path(resource), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
+    else
+      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
+    end
   end
 
   action_item :ready_for_publication, only: :show do
@@ -110,9 +112,7 @@ ActiveAdmin.register Observation do
 
   action_item :needs_revision, only: :show do
     if resource.validation_status == "QC in progress"
-      link_to I18n.t("active_admin.observations_page.needs_revision"), needs_revision_admin_observation_path(observation),
-        method: :put, data: {confirm: I18n.t("active_admin.observations_page.confirm_needs_revision")},
-        notice: I18n.t("active_admin.observations_page.obs_needs_revision")
+      link_to I18n.t("active_admin.observations_page.needs_revision"), perform_qc_admin_observation_path(observation)
     end
   end
 
@@ -132,15 +132,6 @@ ActiveAdmin.register Observation do
         observation.update(validation_status: "QC in progress")
       end
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.qc_started")
-    end
-
-    batch_action :move_to_needs_revision, confirm: I18n.t("active_admin.observations_page.bulk_require_revision") do |ids|
-      batch_action_collection.find(ids).each do |observation|
-        next unless observation.validation_status == "QC in progress"
-
-        observation.update(validation_status: "Needs revision")
-      end
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.required_revision")
     end
 
     batch_action :move_to_ready_for_publication, confirm: I18n.t("active_admin.observations_page.bulk_ready_for_publication") do |ids|
@@ -167,7 +158,7 @@ ActiveAdmin.register Observation do
     end
   end
 
-  sidebar I18n.t("active_admin.operator_page.documents"), only: :show do
+  sidebar I18n.t("active_admin.operator_page.documents"), only: [:show, :perform_qc] do
     attributes_table_for resource do
       ul do
         resource.observation_documents.collect do |od|
@@ -416,7 +407,7 @@ ActiveAdmin.register Observation do
     column :deleted_at
     column(I18n.t("active_admin.shared.actions")) do |observation|
       a I18n.t("active_admin.observations_page.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC"
-      a I18n.t("active_admin.observations_page.needs_revision"), href: needs_revision_admin_observation_path(observation), "data-method": :put if observation.validation_status == "QC in progress"
+      a I18n.t("active_admin.observations_page.needs_revision"), href: perform_qc_admin_observation_path(observation) if observation.validation_status == "QC in progress"
       a I18n.t("active_admin.observations_page.ready_to_publish"), href: ready_for_publication_admin_observation_path(observation), "data-method": :put if observation.validation_status == "QC in progress"
     end
     actions
@@ -607,73 +598,7 @@ ActiveAdmin.register Observation do
   end
 
   show do
-    render partial: "qc_form", locals: {observation: resource} if params["qc"].present? && resource.validation_status == "QC in progress"
-
-    attributes_table do
-      row :is_active
-      row :hidden
-      tag_row :validation_status
-      row :country
-      row :observation_type
-      row :subcategory
-      row :law
-      row :severity do |o|
-        o.severity&.details
-      end
-      row :is_physical_place
-      if resource.location_information.present?
-        row :location_information
-      end
-      if resource.fmu.present?
-        row :fmu
-      end
-      if resource.operator.present?
-        row :operator
-      end
-      if resource.governments.present?
-        row I18n.t("governments.governments") do |o|
-          list = o.governments.each_with_object([]) do |government, links|
-            links << link_to(government.government_entity, admin_government_path(government.id))
-          end
-
-          safe_join(list, " ")
-        end
-      end
-      row I18n.t("activerecord.attributes.observation.relevant_operators") do |o|
-        list = o.relevant_operators.each_with_object([]) do |operator, links|
-          links << link_to(operator.name, admin_producer_path(operator.id))
-        end
-
-        safe_join(list, " ")
-      end
-
-      row :publication_date
-      row :pv
-      row :location_accuracy
-      row :lat
-      row :lng
-      if resource.lat.present? && resource.lng.present?
-        row I18n.t("active_admin.observations_page.location_on_map") do |r|
-          render partial: "map", locals: {center: [r.lng, r.lat], geojson: r.fmu&.geojson, bbox: r.fmu&.bbox}
-        end
-      end
-      row :actions_taken
-      row :concern_opinion
-      row :observation_report
-      if params["qc"].blank?
-        row :admin_comment
-      end
-      row :monitor_comment
-      row :responsible_admin
-      row :user
-      row :modified_user
-      row :modified_user_language do |o|
-        o.modified_user&.locale
-      end
-      row :created_at
-      row :updated_at
-      row :deleted_at
-    end
+    render partial: "attributes_table", locals: {observation: resource}
 
     active_admin_comments
   end

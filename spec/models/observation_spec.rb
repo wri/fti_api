@@ -229,7 +229,7 @@ RSpec.describe Observation, type: :model do
 
       context "when validation_status is not Approved" do
         it "set is_active to false" do
-          observation = create(:observation, validation_status: "Needs revision")
+          observation = create(:observation, validation_status: "Needs revision", admin_comment: "Comment")
 
           expect(observation.is_active).to eql false
         end
