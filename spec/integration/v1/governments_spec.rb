@@ -7,15 +7,15 @@ module V1
         success_roles: %i[admin]
       },
       create: {
-        success_roles: %i[admin],
+        success_roles: %i[admin ngo],
         failure_roles: %i[user],
         valid_params: {"government-entity": "Government one"},
         invalid_params: {"government-entity": ""},
         error_attributes: [422, 100, {"government-entity": ["can't be blank"]}]
       },
       edit: {
-        success_roles: %i[admin],
-        failure_roles: %i[ngo],
+        success_roles: %i[admin ngo],
+        failure_roles: %i[user],
         valid_params: {"government-entity": "Government one"},
         invalid_params: {"government-entity": ""},
         error_attributes: [422, 100, {"government-entity": ["can't be blank"]}]
