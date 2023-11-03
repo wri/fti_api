@@ -161,7 +161,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
       it "is successful" do
         expect(observation1.reload.validation_status).to eq("Ready for publication")
         expect(observation2.reload.validation_status).to eq("Created") # only can change if it was QC in progress
-        expect(flash[:notice]).to match("Observations ready to be published")
+        expect(flash[:notice]).to match("Observation is ready to be published")
       end
     end
 

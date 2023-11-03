@@ -396,7 +396,7 @@ en:
       not_in_qc_in_progress: 'Observation is not in QC in progress status'
       required_revision: 'Required revision for observations'
       bulk_ready_for_publication: 'Are you sure you want to mark these publications as ready to publish?'
-      ready_to_publish: 'Observations ready to be published'
+      ready_to_publish: 'Observation is ready to be published'
       bulk_hide: 'Are you sure you want to hide all the selected observations?'
       hidden: 'Documents hidden!'
       bulk_unhide: 'Are you sure you want to un-hide all the selected observations?'
