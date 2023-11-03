@@ -62,13 +62,31 @@ RSpec.describe OperatorDocument, type: :model do
 
     describe "#reason_or_attachment" do
       context "when there is attachment and reason" do
-        it "add an error on reason" do
+        it "adds an error on base" do
           operator_document = build(:operator_document_country, reason: "aaa")
-
           expect(operator_document.valid?).to eql false
-          expect(operator_document.errors[:reason]).to eql(
-            ["Cannot have a reason not to have a document"]
+          expect(operator_document.errors[:base]).to eql(
+            ["Could either have uploaded file or reason of document non applicability"]
           )
+        end
+      end
+
+      context "when there is no attachment or reason" do
+        context "when status is doc_not_provided" do
+          it "is valid" do
+            operator_document = create(:operator_document_country, reason: nil, document_file: nil, force_status: "doc_not_provided")
+            expect(operator_document.valid?).to eql true
+          end
+        end
+
+        context "when status is not doc_not_provided" do
+          it "adds an error on base" do
+            operator_document = create(:operator_document_country, reason: nil, document_file: nil, force_status: "doc_pending")
+            expect(operator_document.valid?).to eql false
+            expect(operator_document.errors[:base]).to eql(
+              ["File must be present or reason when document is non applicable"]
+            )
+          end
         end
       end
     end

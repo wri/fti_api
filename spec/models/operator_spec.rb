@@ -188,7 +188,9 @@ RSpec.describe Operator, type: :model do
       context "when fa_id is present" do
         context "when operator is approved/signed contract" do
           it "update approved percentages" do
-            @operator.operator_documents.signature.first.update(status: "doc_valid") # sign contract
+            @operator.operator_documents.signature.first.update!(
+              status: "doc_valid", document_file: create(:document_file), start_date: Time.zone.today
+            ) # sign contract
             @operator.reload
 
             expect(@operator.score_operator_document.all).to eql(6.0 / @operator_documents_required)
@@ -199,7 +201,9 @@ RSpec.describe Operator, type: :model do
 
         context "when operator is not approved/not signed contract" do
           it "update non approved percentages" do
-            @operator.operator_documents.signature.first.update(status: "doc_invalid") # contract invalid
+            @operator.operator_documents.signature.first.update!(
+              status: "doc_invalid", document_file: create(:document_file), start_date: Time.zone.today
+            ) # contract invalid
             @operator.reload
 
             expect(@operator.score_operator_document.all).to eql(3.0 / @operator_documents_required)
