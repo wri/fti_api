@@ -1,18 +1,19 @@
 require "rails_helper"
 
 RSpec.describe ObservationMailer, type: :mailer do
-  let(:user) { create(:user) }
-  let(:modified_user) { create(:ngo) }
-  let(:observation) { create(:observation, responsible_admin: user, modified_user: modified_user) }
+  let(:admin) { create(:admin) }
+  let(:observer) { create(:observer, responsible_admin: admin) }
+  let(:user) { create(:ngo, observer: observer) }
+  let(:observation) { create(:observation, observers: [user.observer], modified_user: user) }
 
   describe "admin_observation_published_not_modified" do
-    let(:mail) { ObservationMailer.admin_observation_published_not_modified(observation) }
+    let(:mail) { ObservationMailer.admin_observation_published_not_modified(observation, admin) }
 
     it "renders the headers" do
       expect(mail.subject).to eq(
         "#{observation.modified_user.observer.name} published observation [ID #{observation.id}] without modifications"
       )
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq([admin.email])
     end
 
     it "renders the body" do
@@ -23,13 +24,13 @@ RSpec.describe ObservationMailer, type: :mailer do
   end
 
   describe "admin_observation_ready_for_qc" do
-    let(:mail) { ObservationMailer.admin_observation_ready_for_qc(observation) }
+    let(:mail) { ObservationMailer.admin_observation_ready_for_qc(observation, admin) }
 
     it "renders the headers" do
       expect(mail.subject).to eq(
         "Observation [ID #{observation.id}] is ready for quality control"
       )
-      expect(mail.to).to eq([user.email])
+      expect(mail.to).to eq([admin.email])
     end
 
     it "renders the body" do

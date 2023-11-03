@@ -173,13 +173,14 @@ RSpec.describe Observation, type: :model do
     end
 
     describe "notifications" do
-      let(:observer1) { create(:observer) }
-      let(:observer2) { create(:observer) }
+      let(:admin1) { create(:admin) }
+      let(:admin2) { create(:admin) }
+      let(:observer1) { create(:observer, responsible_admin: admin1) }
+      let(:observer2) { create(:observer, responsible_admin: admin2) }
       let(:observation) {
         create(
           :observation,
           validation_status: "Created",
-          responsible_admin: create(:user),
           observers: [observer1, observer2]
         )
       }
@@ -206,12 +207,13 @@ RSpec.describe Observation, type: :model do
           expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_submitted_for_qc).exactly(3).times
         end
 
-        it "sends an email to the observer responsible admin" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_ready_for_qc)
+        it "sends an email to all observers responsible admins" do
+          expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_ready_for_qc).with(observation, admin1)
+            .and have_enqueued_mail(ObservationMailer, :admin_observation_ready_for_qc).with(observation, admin2)
         end
 
         it "does not send email to inactive users" do
-          expect { subject }.to have_not_enqueued_mail(ObservationMailer, :observation_submitted_to_qc).with(observer1, @inactive_user, observation)
+          expect { subject }.to have_not_enqueued_mail(ObservationMailer, :observation_submitted_to_qc).with(observation, @inactive_user)
         end
       end
 
@@ -238,8 +240,9 @@ RSpec.describe Observation, type: :model do
           expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_published).exactly(3).times
         end
 
-        it "sends an email to the observer responsible admin" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_published_not_modified)
+        it "sends an email to all observers responsible admins" do
+          expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_published_not_modified).with(observation, admin1)
+            .and have_enqueued_mail(ObservationMailer, :admin_observation_published_not_modified).with(observation, admin2)
         end
       end
     end

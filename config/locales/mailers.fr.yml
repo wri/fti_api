@@ -36,11 +36,11 @@ fr:
       paragraph2: "L'évaluateur a fait le(s) commentaire(s) suivant(s):"
       paragraph3: "Vous pouvez modifier cette observation en cliquant sur le lien suivant: %{link}"
     observation_ready_for_publication:
-      subject: L’observation [ID %{id}] nécessite une révision avant d’être publiée
+      subject: L’observation [ID %{id}] est prête à être publiée
       paragraph1: L’observation [ID %{id}] a été passée en revue et peut maintenant être publiée.
       paragraph2: "Veuillez cliquer sur le lien ci-dessous et publier l’observation:"
     observation_published:
-      subject: L’observation [ID %{id}] nécessite une révision avant d’être publiée
+      subject: L’observation [ID %{id}] est maintenant publiée
       paragraph1: L’observation [ID %{id}] est maintenant publiée et apparait dans la liste des observations qui sont publiées sur l’Open Timber Portal.
       paragraph2: "Vous pouvez la consulter dans la liste des observations sur la plateforme: %{link}"
     admin_observation_ready_for_qc:

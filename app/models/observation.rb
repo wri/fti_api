@@ -346,8 +346,8 @@ class Observation < ApplicationRecord
   end
 
   def notify_about_changes
-    notify_admin_ready_for_qc if validation_status == "Ready for QC"
-    notify_admin_published_not_modified if validation_status == "Published (not modified)"
+    notify_admins "admin_observation_ready_for_qc" if validation_status == "Ready for QC"
+    notify_admins "admin_observation_published_not_modified" if validation_status == "Published (not modified)"
     notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC"
     notify_observers "observation_needs_revision" if validation_status == "Needs revision"
     notify_observers "observation_ready_for_publication" if validation_status == "Ready for publication"
@@ -362,19 +362,13 @@ class Observation < ApplicationRecord
     end
   end
 
-  def notify_admin_ready_for_qc
-    return if responsible_admin.blank?
-    return if responsible_admin.deactivated?
-    return unless responsible_admin.email
+  def notify_admins(mail_template)
+    observers.each do |observer|
+      next if observer.responsible_admin.blank?
+      next if observer.responsible_admin.deactivated?
+      next if observer.responsible_admin.email.blank?
 
-    ObservationMailer.admin_observation_ready_for_qc(self).deliver_later
-  end
-
-  def notify_admin_published_not_modified
-    return if responsible_admin.blank?
-    return if responsible_admin.deactivated?
-    return unless responsible_admin.email
-
-    ObservationMailer.admin_observation_published_not_modified(self).deliver_later
+      ObservationMailer.send(mail_template, self, observer.responsible_admin).deliver_later
+    end
   end
 end
