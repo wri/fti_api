@@ -1,10 +1,10 @@
 class ObservationMailerPreview < ActionMailer::Preview
   def admin_observation_published_not_modified
-    ObservationMailer.admin_observation_published_not_modified admin_observation
+    ObservationMailer.admin_observation_published_not_modified admin_observation, User.last
   end
 
   def admin_observation_ready_for_qc
-    ObservationMailer.admin_observation_ready_for_qc admin_observation
+    ObservationMailer.admin_observation_ready_for_qc admin_observation, User.last
   end
 
   def observation_created
