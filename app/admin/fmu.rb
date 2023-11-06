@@ -108,8 +108,7 @@ ActiveAdmin.register Fmu do
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs I18n.t("active_admin.shared.fmu_details") do
       f.input :country, input_html: {disabled: object.persisted?}, required: true
-      f.input :esri_shapefiles_zip, as: :file, input_html: {accept: ".zip"}
-      render partial: "zip_hint"
+      f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
       f.input :forest_type, as: :select,
         collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
         input_html: {disabled: object.persisted?}

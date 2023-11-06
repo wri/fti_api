@@ -426,8 +426,8 @@ en:
       action_label: "%{title} Selected"
       labels:
         destroy: "Delete"
-    fmus:
-      esri_file_upload: "The zip file must contain at least the following files:\\n
+    esri_shapefile_zip_input:
+      hint: "The zip file must contain at least the following files:\\n
       .shp — shape format; the feature geometry itself {content-type: x-gis/x-shapefile}\\n
       .shx — shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly {content-type: x-gis/x-shapefile}\\n
       .dbf — attribute format; columnar attributes for each shape, in dBase IV format {content-type: application/octet-stream OR text/plain}\\n
