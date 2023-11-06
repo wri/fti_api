@@ -1,4 +1,6 @@
 class ProtectedArea < ApplicationRecord
+  include EsriShapefileUpload
+
   belongs_to :country
 
   validates :wdpa_pid, presence: true

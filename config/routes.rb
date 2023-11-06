@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  post "admin/fmus/preview" => "admin/fmus#preview"
+  namespace :admin do
+    resources :geometry_previews, only: [:create]
+  end
 
   require "sidekiq/web"
 

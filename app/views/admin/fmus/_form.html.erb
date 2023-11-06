@@ -145,7 +145,7 @@
     formData.append("file", this.files[0], this.files[0].name);
     $.ajax({
       type: "POST",
-      url: "/admin/fmus/preview",
+      url: "/admin/geometry_previews",
       headers: { 'X-CSRF-Token': csrf },
       success: function (data) {
         if(data === null || data.errors !== undefined) {

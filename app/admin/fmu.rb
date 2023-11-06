@@ -11,19 +11,6 @@ ActiveAdmin.register Fmu do
   config.order_clause
 
   controller do
-    def preview
-      file = params["file"]
-      max_file_size = 200_000
-      response = if file.blank? || file.size > max_file_size
-        {errors: "File must exist and be smaller than #{max_file_size / 1000} KB"}
-      else
-        Fmu.file_upload(file)
-      end
-      respond_to do |format|
-        format.json { render json: response }
-      end
-    end
-
     def scoped_collection
       end_of_association_chain.with_translations(I18n.locale).includes(:country, :operator)
     end

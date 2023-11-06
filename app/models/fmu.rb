@@ -27,11 +27,10 @@ class Fmu < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
+  include EsriShapefileUpload
   include ValidationHelper
   include Translatable
   translates :name, paranoia: true, touch: true, versioning: :paper_trail
-
-  attr_reader :esri_shapefiles_zip
 
   active_admin_translates :name do
     validates :name, presence: true
@@ -92,16 +91,6 @@ class Fmu < ApplicationRecord
     end
   end
 
-  def esri_shapefiles_zip=(esri_shapefiles_zip)
-    FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, index|
-      # takes only the first feature from the Esri shapefile.
-      self.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
-      break
-    end
-
-    @esri_shapefiles_zip = esri_shapefiles_zip
-  end
-
   def update_geojson_properties
     return if geojson.blank?
 
@@ -138,30 +127,6 @@ class Fmu < ApplicationRecord
 
     bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(geometry)
     [bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y]
-  end
-
-  def self.file_upload(esri_shapefiles_zip)
-    PaperTrail.request.disable_model(Fmu)
-    PaperTrail.request.disable_model(Fmu::Translation)
-    tmp_fmu = Fmu.new(name: "Test #{Time.now.to_i}", country_id: Country.first.id)
-    FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, _index|
-      tmp_fmu.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
-      break
-    end
-    tmp_fmu.save(validate: false)
-
-    response = {
-      geojson: tmp_fmu.geojson,
-      bbox: tmp_fmu.bbox
-    }
-    tmp_fmu.really_destroy!
-    PaperTrail.request.enable_model(Fmu)
-    PaperTrail.request.enable_model(Fmu::Translation)
-    response
-  rescue => e
-    PaperTrail.request.enable_model(Fmu)
-    PaperTrail.request.enable_model(Fmu::Translation)
-    {errors: e.message}
   end
 
   def cache_key
