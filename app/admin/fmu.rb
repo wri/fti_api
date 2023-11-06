@@ -75,8 +75,13 @@ ActiveAdmin.register Fmu do
       row :certification_fsc_cw
       row :certification_tlv
       row :certification_ls
+      if resource.geojson && resource.centroid.present?
+        row :map do |r|
+          render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
+        end
+      end
       row(:geojson) { |fmu| fmu.geojson.to_json }
-      row(:properties) { |fmu| fmu.geojson&.dig("properties") }
+      row(:properties) { |fmu| fmu.geojson&.dig("properties")&.to_json }
       row :created_at
       row :updated_at
       row :deleted_at

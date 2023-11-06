@@ -122,6 +122,12 @@ class Fmu < ApplicationRecord
     geojson["properties"]
   end
 
+  def centroid
+    RGeo::GeoJSON.decode(geojson["properties"]["centroid"])
+  rescue
+    nil
+  end
+
   def bbox
     return nil if geometry.nil?
 

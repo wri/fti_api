@@ -40,7 +40,7 @@ ActiveAdmin.register ProtectedArea do
       row :name
       row :country
       row :map do |r|
-        render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], geojson: r.geojson, bbox: r.bbox}
+        render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
       end
       row :geojson do |r|
         r.geojson.to_json

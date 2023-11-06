@@ -6,6 +6,8 @@
   .map-wrapper { width: 100%; padding: 16px; }
 </style>
 
+<% show_center_marker = true unless local_assigns.key?(:center_marker) %>
+
 <div class="map-container">
   <div class="map-wrapper">
     <div id="map" class="map"></div>
@@ -20,9 +22,12 @@
     center: <%= center %>,
     zoom: 8
   });
-  const marker1 = new mapboxgl.Marker()
+
+  <% if show_center_marker %>
+  new mapboxgl.Marker()
     .setLngLat(<%= center %>)
     .addTo(map);
+  <% end %>
 
   map.on('load', function() {
     <% if bbox.present? %>
