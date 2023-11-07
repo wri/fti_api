@@ -38,7 +38,7 @@ fr:
     observation_ready_for_publication:
       subject: L’observation %{id} est prête à être publiée
       paragraph1: L’observation %{id} a été passée en revue et peut maintenant être publiée.
-      paragraph2: "Veuillez cliquer sur le lien ci-dessous et publier l’observation:"
+      paragraph2: "Veuillez cliquer sur le lien ci-dessous et publier l’observation: %{link}"
     observation_published:
       subject: L’observation %{id} est maintenant publiée
       paragraph1: L’observation %{id} est maintenant publiée et apparait dans la liste des observations qui sont visibles sur l’Open Timber Portal.
