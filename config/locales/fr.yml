@@ -1694,10 +1694,8 @@ fr:
 
   # Page specific entries
   observation_types:
-    ? "AnnexGovernance"
-    : "Illégalité de gouvernance"
-    ? "AnnexOperator"
-    : "Illégalité de l'opérateur"
+    government: Gouvernement
+    operator: Exploitant
 
   document_types:
     ? "Report"

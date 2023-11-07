@@ -1,7 +1,7 @@
 <%= t(".paragraph1", observer: @observer.name, id: @observation.id) %>
 
 <%= t("mailers.observation_id") %>: <%= @observation.id %>
-<%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.observation_type %>
+<%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.translated_type %>
 <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
 
 <%= t(".paragraph2", observer: @observer.name) %>

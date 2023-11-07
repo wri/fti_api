@@ -1801,10 +1801,8 @@ en:
 
   # Page specific entries
   observation_types:
-    ? "AnnexGovernance"
-    : "Governance illegality"
-    ? "AnnexOperator"
-    : "Illegality"
+    government: Government
+    operator: Producer
 
   document_types:
     ? "Report"

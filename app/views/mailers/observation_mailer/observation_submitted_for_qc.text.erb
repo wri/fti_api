@@ -3,7 +3,7 @@
 <%= t(".paragraph1") %>
 
 <%= t("mailers.observation_id") %>: <%= @observation.id %>.
-<%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.observation_type %>
+<%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.translated_type %>
 <%= Law.human_attribute_name(:infraction) %>: <%= @observation.subcategory&.name %>
 <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
 

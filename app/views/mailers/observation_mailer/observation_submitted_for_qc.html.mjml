@@ -8,7 +8,7 @@
 
 <p>
   <%= t("mailers.observation_id") %>: <%= @observation.id %><br/>
-  <%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.observation_type %><br/>
+  <%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.translated_type %><br/>
   <%= Law.human_attribute_name(:infraction) %>: <%= @observation.subcategory&.name %><br/>
   <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
 </p>

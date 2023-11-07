@@ -4,7 +4,7 @@
 
 <p>
   <%= t("mailers.observation_id") %>: <%= @observation.id %><br/>
-  <%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.observation_type %><br/>
+  <%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.translated_type %><br/>
   <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
 </p>
 
