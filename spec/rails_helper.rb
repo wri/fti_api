@@ -19,6 +19,7 @@ require "devise"
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 Dir[Rails.root.join("spec/models/concerns/**/*.rb")].sort.each { |f| require f }
 Dir[Rails.root.join("spec/integration/shared_examples/**/*.rb")].sort.each { |f| require f }
+Dir[Rails.root.join("spec/mailers/shared_examples/**/*.rb")].sort.each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
