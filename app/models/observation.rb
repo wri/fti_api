@@ -365,14 +365,12 @@ class Observation < ApplicationRecord
   end
 
   def notify_admins(mail_template)
-    observers.each do |observer|
-      next if observer.responsible_admin.blank?
-      next if observer.responsible_admin.deactivated?
-      next if observer.responsible_admin.email.blank?
-
-      I18n.with_locale(observer.responsible_admin.locale.presence || I18n.default_locale) do
-        ObservationMailer.send(mail_template, self, observer.responsible_admin).deliver_later
+    User
+      .where(id: observers.distinct.pluck(:responsible_admin_id)).filter_actives.where.not(email: [nil, ""])
+      .find_each do |responsible_admin|
+        I18n.with_locale(responsible_admin.locale.presence || I18n.default_locale) do
+          ObservationMailer.send(mail_template, self, responsible_admin).deliver_later
+        end
       end
-    end
   end
 end
