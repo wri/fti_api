@@ -11,7 +11,7 @@ en:
       subject: Welcome to the Open Timber Portal!
       welcome: Welcome to Open Timber Portal!
       message: Your account has been activated and you can now login using the credentials that you selected.
-      message_portal: To access the platform, simply go to the website and click on the Sign-in button.
+      message_portal: To log in to your platform, simply go to %{link} and click on the Sign-in button on the top-right corner.
       message_tutorial: "We invite you to take a look at the tutorials available on the Open Timber Portal that will provide with some additional information on how to use the platform: %{link}"
       message_obs_tool: "To access the observations tool, simply go to: %{link}"
       contact_us: You can always contact us at %{link} if you have any questions.
@@ -22,34 +22,34 @@ en:
       outro: If you didn't request this password reset, please ignore this email. Your password will not change until you access the link above and create a new password.
   observation_mailer:
     observation_created:
-      subject: Observation [ID %{id}] was successfully created
+      subject: Observation %{id} was successfully created
       paragraph1: Your observation was successfully created on the Open Timber Portal.
       paragraph2: The observation will not be reviewed by the OTP team until you submit it for review.
       paragraph3: "To submit your observation and to make any edits, go to: %{link}"
     observation_submitted_for_qc:
-      subject: Observation [ID %{id}] was successfully submitted for quality control
+      subject: Observation %{id} was successfully submitted for quality control
       paragraph1: The following observation was successfully submitted for quality control.
-      paragraph2: The observation will reviewed by the OTP team and you will receive an e-mail notification when the observation is ready to be published or if there any edits to be made.
+      paragraph2: The observation will be reviewed by the OTP team and you will receive an e-mail notification when the observation is ready to be published or if there are any edits to be made.
     observation_needs_revision:
-      subject: Observation [ID %{id}] needs revision before it can be published
+      subject: Observation %{id} needs revision before it can be published
       paragraph1: The following observation needs to be reviewed before it can be published.
       paragraph2: "The reviewer made the following comment(s):"
       paragraph3: "You can make edits to the observation by clicking on the following link: %{link}"
     observation_ready_for_publication:
-      subject: Observation [ID %{id}] is ready for publication
-      paragraph1: Observation [ID %{id}] is has been reviewed and is ready for publication.
+      subject: Observation %{id} is ready for publication
+      paragraph1: Observation %{id} has been reviewed and is ready for publication.
       paragraph2: "Please click on the following link and publish the observation: %{link}"
     observation_published:
-      subject: Observation [ID %{id}] is now published
-      paragraph1: The observation [ID %{id}] is now published and appears on the list of observations on the Open Timber Portal.
+      subject: Observation %{id} is now published
+      paragraph1: The observation %{id} is now published and appears on the list of observations on the Open Timber Portal.
       paragraph2: "You can view it in the list of observations on the platform: %{link}"
     admin_observation_ready_for_qc:
-      subject: Observation [ID %{id}] is ready for quality control
+      subject: Observation %{id} is ready for quality control
       paragraph1: "%{observer} has been submitted an observation through the portal that is ready be reviewed."
       paragraph2: "To review the observation, go to: %{link}"
     admin_observation_published_not_modified:
-      subject: "%{observer} published observation [ID %{id}] without modifications"
-      paragraph1: "%{observer} has decided to publish observation [ID %{id}] without making any edits."
+      subject: "%{observer} published observation %{id} without modifications"
+      paragraph1: "%{observer} has decided to publish observation %{id} without making any edits."
       paragraph2: "To the comment(s) you had made, %{observer} replied:"
       paragraph3: "To review the observation, go to: %{link}"
   operator_mailer:
@@ -61,10 +61,8 @@ en:
       paragraph4: You can update these documents by logging on to your OTP profile at %{link}.
       doc_expires: "%{document} expires on %{date}"
     expiring_documents:
-      subject:
-        one: "You have 1 document expiring in %{days}"
-        other: "You have %{count} documents expiring in %{days}"
-      paragraph1: "%{company} has %{count} document(s) that are going to expire in %{days}:"
+      subject: Expiring document(s) on the Open Timber Portal
+      paragraph1: "The following document(s) from %{company} is/are expiring in %{days}:"
       paragraph2: You can update these documents by logging on to your OTP profile at %{link}.
     expired_documents:
       subject:

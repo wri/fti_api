@@ -5,7 +5,7 @@
 <%= t(".message") %>
 
 <% if @user.user_permission.operator? %>
-<%= t(".message_portal") %>
+<%= t(".message_portal", link: "www.opentimberportal.org") %>
 <% elsif @user.user_permission.user_role.starts_with?("ngo") %>
 <%= t(".message_obs_tool", link: "#{ENV["FRONTEND_URL"]}/observations-tool") %>
 <% end %>

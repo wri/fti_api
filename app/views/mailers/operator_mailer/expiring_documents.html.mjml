@@ -3,7 +3,7 @@
 </p>
 
 <p>
-  <%= t(".paragraph1", company: @operator.name, count: @documents.count, days: distance_of_time_in_words(@documents[0].expire_date, Time.zone.today)) %>
+  <%= t(".paragraph1", company: @operator.name, days: distance_of_time_in_words(@documents[0].expire_date, Time.zone.today)) %>
 </p>
 
 <ul>

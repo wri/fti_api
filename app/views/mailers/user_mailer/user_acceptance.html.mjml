@@ -12,7 +12,7 @@
 
 <% if @user.user_permission.operator? %>
 <p>
-  <%= t(".message_portal") %>
+  <%= t(".message_portal", link: link_to("www.opentimberportal.org", "https://opentimberportal.org", target: "_blank")).html_safe %>
 </p>
 <% elsif @user.user_permission.user_role.starts_with?("ngo") %>
 <p>

@@ -9,8 +9,7 @@ class OperatorMailer < ApplicationMailer
     @operator = operator
     days_to_expire = distance_of_time_in_words(documents.first.expire_date, Time.zone.today)
 
-    mail to: user.email,
-      subject: I18n.t("operator_mailer.expiring_documents.subject", count: @documents.count, days: days_to_expire)
+    mail to: user.email, subject: I18n.t("operator_mailer.expiring_documents.subject")
   end
 
   def expired_documents(operator, user, documents)

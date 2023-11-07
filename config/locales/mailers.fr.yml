@@ -11,10 +11,10 @@ fr:
       subject: Bienvenue sur la plateforme Open Timber Portal
       welcome: Bienvenue sur la plateforme Open Timber Portal!
       message: Votre compte a été activé et vous pouvez maintenant vous connecter en utilisant l’identifiant et le mot de passe que vous avez sélectionnés.
-      message_portal: Pour se connecter, il suffit de se rendre sur le site web de la plateforme et de cliquer sur le bouton pour se connecter.
+      message_portal: Afin de vous connecter, veuillez vous rendre sur le site web de la plateforme (%{link}) et de cliquer sur le bouton pour se connecter.
       message_tutorial: "Nous vous invitons à consulter les tutoriels disponibles sur l'Open Timber Portal qui vous fourniront des informations supplémentaires sur l'utilisation de la plateforme: %{link}"
-      message_obs_tool: "Pour accéder à l’observations tools, veuillez cliquer sur ce lien: %{link}"
-      contact_us: Vous pouvez toujours nous connecter à l’adresse %{link} si vous avez des questions.
+      message_obs_tool: "Pour accéder à l’observations tool, veuillez cliquer sur ce lien: %{link}"
+      contact_us: Vous pouvez toujours nous contacter à l’adresse %{link} si vous avez des questions.
     forgotten_password:
       subject: Réinitialisation de votre mot de passe pour l’Open Timber Portal
       message: Veuillez cliquer sur le lien afin de réinitialiser votre mot de passe pour vous connecter à l’Open Timber Portal
@@ -22,49 +22,47 @@ fr:
       outro: Si vous n’avez pas fait cette demande de réinitialisation, veuillez ignorer cet e-mail. Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur le lien ci-dessus et créé un nouveau mot de passe.
   observation_mailer:
     observation_created:
-      subject: L’observation [ID %{id}] a été créé avec succès
-      paragraph1: Votre observation a été créée avec succès sur l’Open Timber Portal.
+      subject: L’observation %{id} a été créée
+      paragraph1: Votre observation a été créée sur l’Open Timber Portal.
       paragraph2: L'observation ne sera pas passée en revue par l'équipe OTP tant que vous ne l'aurez pas soumise pour le contrôle qualité.
       paragraph3: "Pour soumettre votre observation ou y apporter des modifications, veuillez consulter: %{link}"
     observation_submitted_for_qc:
-      subject: L’observation [ID %{id}] a été soumise pour le contrôle qualité
+      subject: L’observation %{id} a été soumise pour le contrôle qualité
       paragraph1: L’observation ci-dessous a été soumise pour être passée en revue.
-      paragraph2: L'observation sera passée en revue par l'équipe d'OTP et vous recevrez une notification mail lorsque l'observation sera prête à être publiée ou s'il y a des modifications à apporter.
+      paragraph2: L'observation sera passée en revue par l'équipe de l'OTP et vous recevrez une notification par mail lorsque l'observation sera prête à être publiée ou s'il y a des modifications à apporter.
     observation_needs_revision:
-      subject: L’observation [ID %{id}] nécessite une révision avant d’être publiée
+      subject: L’observation %{id} a besoin d’une révision avant d’être publiée
       paragraph1: L’observation ci-dessous a été passée en revue et nécessite une révision avant de pouvoir être publiée.
       paragraph2: "L'évaluateur a fait le(s) commentaire(s) suivant(s):"
       paragraph3: "Vous pouvez modifier cette observation en cliquant sur le lien suivant: %{link}"
     observation_ready_for_publication:
-      subject: L’observation [ID %{id}] est prête à être publiée
-      paragraph1: L’observation [ID %{id}] a été passée en revue et peut maintenant être publiée.
+      subject: L’observation %{id} est prête à être publiée
+      paragraph1: L’observation %{id} a été passée en revue et peut maintenant être publiée.
       paragraph2: "Veuillez cliquer sur le lien ci-dessous et publier l’observation:"
     observation_published:
-      subject: L’observation [ID %{id}] est maintenant publiée
-      paragraph1: L’observation [ID %{id}] est maintenant publiée et apparait dans la liste des observations qui sont publiées sur l’Open Timber Portal.
+      subject: L’observation %{id} est maintenant publiée
+      paragraph1: L’observation %{id} est maintenant publiée et apparait dans la liste des observations qui sont visibles sur l’Open Timber Portal.
       paragraph2: "Vous pouvez la consulter dans la liste des observations sur la plateforme: %{link}"
     admin_observation_ready_for_qc:
-      subject: L’observation [ID %{id}] est prête pour le contrôle qualité
+      subject: L’observation %{id} est prête pour le contrôle qualité
       paragraph1: "%{observer} a soumis une observation qui est prête à être passée en revue."
       paragraph2: "Pour consulter l’observation, veuillez consulter: %{link}"
     admin_observation_published_not_modified:
-      subject: "%{observer} a publié l’observation [ID %{id}] sans effectuer de modifications"
-      paragraph1: "%{observer} a décidé de publier l'observation [ID %{id}] sans y apporter de modifications."
-      paragraph2: "Aux commentaires que vous aviez fait(s), %{observer} a répondu:"
-      paragraph3: "Pour consulter l’observation, veuillez consulter: %{link}"
+      subject: "%{observer} a publié l’observation %{id} sans effectuer de modifications"
+      paragraph1: "%{observer} a décidé de publier l'observation %{id} sans y apporter de modifications."
+      paragraph2: "Au(x) commentaire(s) que vous aviez fait(s), %{observer} a répondu:"
+      paragraph3: "Pour accéder l’observation, veuillez consulter: %{link}"
   operator_mailer:
     quarterly_newsletter:
       subject: Votre rapport trimestriel sur l’OTP
       paragraph1: Votre score actuel est de %{score}.
-      paragraph2: Votre dernier score le %{old_score_date} était de %{old_score}. Cela signifie une variation de %{score_variation}.
+      paragraph2: Votre dernier score était de %{old_score} le %{old_score_date}. Cela signifie une variation de %{score_variation}.
       paragraph3: "Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour:"
       paragraph4: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
       doc_expires: "%{document} expire le %{date}"
     expiring_documents:
-      subject:
-        one: "Vous avez 1 document expirant dans %{days}"
-        other: "Vous avez %{count} documents expirant en %{days}"
-      paragraph1: "%{company} a %{count} document(s) qui va/vont expirer en %{days}:"
+      subject: Document(s) qui vont expirer sur l’Open Timber Portal
+      paragraph1: "Le(s) document(s) de %{company} ci-dessous expire(nt) dans %{days}:"
       paragraph2: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
     expired_documents:
       subject:
