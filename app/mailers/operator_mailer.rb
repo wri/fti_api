@@ -7,7 +7,6 @@ class OperatorMailer < ApplicationMailer
     @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
     @user = user
     @operator = operator
-    days_to_expire = distance_of_time_in_words(documents.first.expire_date, Time.zone.today)
 
     mail to: user.email, subject: I18n.t("operator_mailer.expiring_documents.subject")
   end

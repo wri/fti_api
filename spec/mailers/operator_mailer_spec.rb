@@ -7,7 +7,7 @@ RSpec.describe OperatorMailer, type: :mailer do
     let(:operator) { create(:operator) }
 
     let(:country) { create(:country) }
-    let(:operator) { create(:operator, country_id: country.id, email: "test@mail.com") }
+    let(:operator) { create(:operator, country_id: country.id) }
     let(:user) { create(:operator_user, operator: operator) }
     let(:rod1) { create(:required_operator_document_country, country_id: country.id) }
     let(:rod2) { create(:required_operator_document_country, country_id: country.id) }
