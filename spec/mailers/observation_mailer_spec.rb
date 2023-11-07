@@ -11,14 +11,14 @@ RSpec.describe ObservationMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq(
-        "#{observation.modified_user.observer.name} published observation [ID #{observation.id}] without modifications"
+        "#{observation.modified_user.observer.name} published observation #{observation.id} without modifications"
       )
       expect(mail.to).to eq([admin.email])
     end
 
     it "renders the body" do
       expect(mail.body.encoded).to include(
-        "#{observation.modified_user.observer.name} has decided to publish observation [ID #{observation.id}] without making any edits."
+        "#{observation.modified_user.observer.name} has decided to publish observation #{observation.id} without making any edits."
       )
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe ObservationMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq(
-        "Observation [ID #{observation.id}] is ready for quality control"
+        "Observation #{observation.id} is ready for quality control"
       )
       expect(mail.to).to eq([admin.email])
     end
@@ -45,7 +45,7 @@ RSpec.describe ObservationMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq(
-        "Observation [ID #{observation.id}] was successfully created"
+        "Observation #{observation.id} was successfully created"
       )
       expect(mail.to).to eq([user.email])
     end
@@ -62,7 +62,7 @@ RSpec.describe ObservationMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq(
-        "Observation [ID #{observation.id}] was successfully submitted for quality control"
+        "Observation #{observation.id} was successfully submitted for quality control"
       )
       expect(mail.to).to eq([user.email])
     end
@@ -79,7 +79,7 @@ RSpec.describe ObservationMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq(
-        "Observation [ID #{observation.id}] needs revision before it can be published"
+        "Observation #{observation.id} needs revision before it can be published"
       )
       expect(mail.to).to eq([user.email])
     end
@@ -96,7 +96,7 @@ RSpec.describe ObservationMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq(
-        "Observation [ID #{observation.id}] is ready for publication"
+        "Observation #{observation.id} is ready for publication"
       )
       expect(mail.to).to eq([user.email])
     end
@@ -113,7 +113,7 @@ RSpec.describe ObservationMailer, type: :mailer do
 
     it "renders the headers" do
       expect(mail.subject).to eq(
-        "Observation [ID #{observation.id}] is now published"
+        "Observation #{observation.id} is now published"
       )
       expect(mail.to).to eq([user.email])
     end

@@ -21,12 +21,12 @@ RSpec.describe OperatorMailer, type: :mailer do
     let(:mail) { OperatorMailer.expiring_documents(operator, user, documents) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("You have 2 documents expiring in 1 day")
+      expect(mail.subject).to eq("Expiring document(s) on the Open Timber Portal")
       expect(mail.to).to eq([user.email])
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match(/#{operator.name} has 2 document\(s\) that are going to expire in 1 day/)
+      expect(mail.body.encoded).to match(/The following document\(s\) from #{operator.name} is\/are expiring in 1 day/)
     end
   end
 
