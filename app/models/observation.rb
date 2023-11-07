@@ -357,7 +357,9 @@ class Observation < ApplicationRecord
   def notify_observers(mail_template)
     observers.each do |observer|
       observer.users.filter_actives.each do |user|
-        ObservationMailer.send(mail_template, self, user).deliver_later
+        I18n.with_locale(user.locale.presence || I18n.default_locale) do
+          ObservationMailer.send(mail_template, self, user).deliver_later
+        end
       end
     end
   end
@@ -368,7 +370,9 @@ class Observation < ApplicationRecord
       next if observer.responsible_admin.deactivated?
       next if observer.responsible_admin.email.blank?
 
-      ObservationMailer.send(mail_template, self, observer.responsible_admin).deliver_later
+      I18n.with_locale(observer.responsible_admin.locale.presence || I18n.default_locale) do
+        ObservationMailer.send(mail_template, self, observer.responsible_admin).deliver_later
+      end
     end
   end
 end

@@ -201,7 +201,9 @@ class User < ApplicationRecord
 
   # Sends an email to the user when it is approved
   def notify_user
-    UserMailer.user_acceptance(self).deliver_later
+    I18n.with_locale(locale.presence || I18n.default_locale) do
+      UserMailer.user_acceptance(self).deliver_later
+    end
   end
 
   # Devise ActiveJob integration

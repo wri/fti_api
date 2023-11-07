@@ -20,7 +20,9 @@ class ExpirationNotifierService
         documents = OperatorDocument.where(expire_date: date, operator_id: operator_document.operator_id)
         operator = Operator.find(operator_document.operator_id)
         operator.users.filter_actives.each do |user|
-          OperatorMailer.expiring_documents(operator, user, documents).deliver_now
+          I18n.with_locale(user.locale.presence || I18n.default_locale) do
+            OperatorMailer.expiring_documents(operator, user, documents).deliver_now
+          end
         end
       end
     end

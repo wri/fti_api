@@ -77,7 +77,9 @@ namespace :scheduler do
         users = users.where(id: ENV["USER_IDS"].split(",")) if ENV["USER_IDS"].present?
 
         users.each do |user|
-          OperatorMailer.quarterly_newsletter(operator, user).deliver_now
+          I18n.with_locale(user.locale.presence || I18n.default_locale) do
+            OperatorMailer.quarterly_newsletter(operator, user).deliver_now
+          end
         end
       rescue => e
         failed = true
