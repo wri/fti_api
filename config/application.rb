@@ -35,7 +35,7 @@ module FtiApi
     config.active_job.queue_adapter = :sidekiq
 
     config.api_only = false
-    config.action_mailer.preview_path = "#{Rails.root}/app/mailers/previews"
+    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
     config.i18n.fallbacks = [I18n.default_locale]
 
