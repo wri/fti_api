@@ -1,0 +1,65 @@
+panel I18n.t("active_admin.observations_page.details") do
+  attributes_table_for observation do
+    row :is_active
+    row :hidden
+    tag_row :validation_status
+    row :country
+    row :observation_type
+    row :subcategory
+    row :law
+    row :severity do |o|
+      o.severity&.details
+    end
+    row :is_physical_place
+    if observation.location_information.present?
+      row :location_information
+    end
+    if observation.fmu.present?
+      row :fmu
+    end
+    if observation.operator.present?
+      row :operator
+    end
+    if observation.governments.present?
+      row I18n.t("governments.governments") do |o|
+        list = o.governments.each_with_object([]) do |government, links|
+          links << link_to(government.government_entity, admin_government_path(government.id))
+        end
+
+        safe_join(list, " ")
+      end
+    end
+    row I18n.t("activerecord.attributes.observation.relevant_operators") do |o|
+      list = o.relevant_operators.each_with_object([]) do |operator, links|
+        links << link_to(operator.name, admin_producer_path(operator.id))
+      end
+
+      safe_join(list, " ")
+    end
+
+    row :publication_date
+    row :pv
+    row :location_accuracy
+    row :lat
+    row :lng
+    if observation.lat.present? && observation.lng.present?
+      row I18n.t("active_admin.observations_page.location_on_map") do |r|
+        render partial: "map", locals: {center: [r.lng, r.lat], geojson: r.fmu&.geojson, bbox: r.fmu&.bbox}
+      end
+    end
+    row :actions_taken
+    row :concern_opinion
+    row :observation_report
+    row :admin_comment
+    row :monitor_comment
+    row :responsible_admin
+    row :user
+    row :modified_user
+    row :modified_user_language do |o|
+      o.modified_user&.locale
+    end
+    row :created_at
+    row :updated_at
+    row :deleted_at
+  end
+end

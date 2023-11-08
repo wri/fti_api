@@ -386,6 +386,8 @@ fr:
       details: "Détails de l'annexe du document de l'opérateur"
     observations_page:
       not_modified: 'Observation NON modifiée'
+      perform_qc: 'Effectuer un contrôle qualité'
+      performed_qc: 'Contrôle qualité effectué'
       moved_ready: 'Observation déplacée vers Prêt pour publication'
       moved_needs_revision: 'Observation déplacée vers Nécessite une révision'
       moved_qc_in_progress: 'Observation déplacée au CQ en cours'
@@ -400,6 +402,7 @@ fr:
       in_qc: 'Observation au CQ'
       bulk_confirm_qc: 'Êtes-vous sûr de vouloir démarrer le CQ pour toutes ces observations?'
       bulk_require_revision: 'Voulez-vous vraiment exiger une révision pour toutes ces observations?'
+      not_in_qc_in_progress: L'observation n'a pas le statut "prête pour le QC"
       required_revision: 'Révision requise pour les observations'
       bulk_ready_for_publication: 'Voulez-vous vraiment marquer ces publications comme prêtes à être publiées?'
       ready_to_publish: 'Observations prêtes à être publiées'
