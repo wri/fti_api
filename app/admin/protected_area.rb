@@ -5,7 +5,7 @@ ActiveAdmin.register ProtectedArea do
 
   menu false
 
-  permit_params [:name, :country_id, :geojson, :wdpa_pid]
+  permit_params [:name, :country_id, :esri_shapefiles_zip, :geojson, :wdpa_pid]
 
   filter :wdpa_pid
   filter :name
@@ -28,10 +28,19 @@ ActiveAdmin.register ProtectedArea do
       f.input :wdpa_pid
       f.input :country
       f.input :name
-      f.input :geojson, input_html: {value: f.object.geojson.to_json}
-
-      f.actions
+      f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
+      render partial: "upload_geometry_map",
+        locals: {
+          file_input_id: "protected_area_esri_shapefiles_zip",
+          geojson: f.resource.geojson,
+          bbox: f.resource.bbox,
+          present: f.resource.geojson.present?,
+          host: Rails.env.development? ? request.base_url : request.base_url + "/api",
+          show_fmus: false,
+          api_key: ENV["API_KEY"]
+        }
     end
+    f.actions
   end
 
   show do

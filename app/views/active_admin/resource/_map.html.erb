@@ -48,8 +48,6 @@
       'type': 'geojson',
       'data': <%= raw(geojson.to_json) %>
     });
-    <% end %>
-
     map.addLayer({
       'id': 'feature-fill',
       'type': 'fill',
@@ -71,5 +69,6 @@
         'line-width': 4
       }
     });
+    <% end %>
   });
 </script>

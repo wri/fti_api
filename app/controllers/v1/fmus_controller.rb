@@ -18,7 +18,7 @@ module V1
     end
 
     def tiles
-      send_data FmuVectorTile.fetch params[:z], params[:x], params[:y], params[:operator_id]
+      send_data FmuVectorTile.fetch params[:x], params[:y], params[:z], params[:operator_id]
     end
 
     private

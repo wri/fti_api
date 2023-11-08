@@ -136,12 +136,14 @@ ActiveAdmin.register Fmu do
     end
     f.actions
 
-    render partial: "form",
+    render partial: "upload_geometry_map",
       locals: {
+        file_input_id: "fmu_esri_shapefiles_zip",
         geojson: f.resource.geojson,
         bbox: f.resource.bbox,
         present: f.resource.geojson.present?,
         host: Rails.env.development? ? request.base_url : request.base_url + "/api",
+        show_fmus: true,
         api_key: ENV["API_KEY"]
       }
   end
