@@ -1,0 +1,12 @@
+<p>
+  <%= t(".paragraph1") %>
+</p>
+
+<p>
+  <%= User.human_attribute_name(:name) %>: <%= @operator.name %><br />
+  <%= User.human_attribute_name(:country) %>: <%= @operator.country.name %>
+</p>
+
+<p>
+  <%= t(".paragraph2", link: link_to(nil, admin_producer_url(@operator.id), target: "_blank")).html_safe %>
+</p>

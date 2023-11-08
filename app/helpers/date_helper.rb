@@ -9,4 +9,8 @@ module DateHelper
     !((date1[1].present? && date1[0] < date2[0] && date1[1] < date2[0]) ||
         (date2[1].present? && date2[0] < date1[0] && date2[1] < date1[0]))
   end
+
+  def localized_date(locale, date)
+    I18n.with_locale(locale) { I18n.l(date, format: :standard) }
+  end
 end

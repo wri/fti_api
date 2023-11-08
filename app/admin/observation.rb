@@ -38,7 +38,7 @@ ActiveAdmin.register Observation do
   end
 
   before_action do
-    if %w[POST PATCH].include?(request.method) && action_name != "batch_action"
+    if %w[POST PATCH PUT].include?(request.method) && action_name != "batch_action"
       resource.user_type = :admin
     end
   end
@@ -93,7 +93,8 @@ ActiveAdmin.register Observation do
     redirect_to collection_path, notice: notice
   end
 
-  member_action :start_qc, method: :put do
+  member_action :start_qc, method: [:put, :get] do
+    resource.user_type = :admin
     resource.validation_status = Observation.validation_statuses["QC in progress"]
     if resource.save
       redirect_to perform_qc_admin_observation_path(resource), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")

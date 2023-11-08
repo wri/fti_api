@@ -1,0 +1,14 @@
+<p>
+  <%= t(".paragraph1", user_role: @user_role) %>
+</p>
+
+<p>
+  <%= User.human_attribute_name(:name) %>: <%= @user.name %><br />
+  <%= User.human_attribute_name(:email) %>: <%= @user.email %><br />
+  <%= User.human_attribute_name(:country) %>: <%= @user.country.name %><br />
+  <%= User.human_attribute_name(:organization) %>: <%= @user.organization_name %>
+</p>
+
+<p>
+  <%= t(".paragraph2", link: link_to(nil, admin_user_url(@user), target: "_blank")).html_safe %>
+</p>

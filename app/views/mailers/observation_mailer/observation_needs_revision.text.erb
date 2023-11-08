@@ -1,0 +1,18 @@
+<%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+
+<%= t(".paragraph1") %>
+
+<%= t("mailers.observation_id") %>: <%= @observation.id %>
+<%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.translated_type %>
+<%= Law.human_attribute_name(:infraction) %>: <%= @observation.subcategory&.name %>
+<%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
+
+<%= t(".paragraph2") %>
+<%= @observation.admin_comment %>
+
+<%= t(".paragraph3", link: "#{ENV["FRONTEND_URL"]}/observations-tool/private/observations/edit/#{@observation.id}") %>
+
+<%= t("mailers.contact_us") %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

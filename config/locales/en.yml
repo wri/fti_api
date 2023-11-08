@@ -1801,10 +1801,8 @@ en:
 
   # Page specific entries
   observation_types:
-    ? "AnnexGovernance"
-    : "Governance illegality"
-    ? "AnnexOperator"
-    : "Illegality"
+    government: Government
+    operator: Producer
 
   document_types:
     ? "Report"
@@ -1863,50 +1861,3 @@ en:
     types: 'observation-type'
     info: 'observation-info'
     attachments: 'observation-attachments'
-
-  backend:
-    mail_service:
-      expiring_documents:
-        title:
-          one: "You have 1 document expiring in "
-          other: "You have %{count} documents expiring in "
-        text: "%{company_name} has %{count} document(s) that are going to expire in "
-        salutation: "<br>Best,<br>OTP Team"
-      expired_documents:
-        title:
-          one: "You have 1 document expired on the OTP"
-          other: "You have %{count} documents expired on the OTP"
-        text: "%{company_name} has %{count} document(s) that are expired. Please update accordingly or contact the OTP team if you have any questions."
-        salutation: "<br>Best,<br>OTP Team"
-      observer_status_changed:
-        producers: 'Producers: '
-        government: 'Type: Government'
-        subject: 'Observation Status Update / Mise à jour du statut de votre observation'
-        text: "Hello %{observer},\n
-
-Your observation below (%{id}) has a new status.\nThe status is now %{status}.\n
-
-Observation details:\nDate: %{date}\n
-
-%{infractor_text}\nInfraction: %{infraction}\n
-
-Feel free to contact us if you have any questions,\n
-
-Best,\nOTP Team\n
-
-----------------------------------------------------\n
-
-Bonjour %{observer},\n
-
-Le statut de votre observation (%{id}) ci-dessous a changé.\nNouveau statut : %{status_fr}.\n
-
-Observations:\nDate: %{date}
-
-%{infractor_text}\nInfraction: %{infraction_fr}\n
-
-N'hésitez pas à nous contacter si vous avez des questions,\n
-
-Cordialement,\nL'équipe OTP
-
-
-"

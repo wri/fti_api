@@ -19,11 +19,11 @@ class ExpirationNotifierService
       OperatorDocument.where(expire_date: date).select(:operator_id).group(:operator_id).each do |operator_document|
         documents = OperatorDocument.where(expire_date: date, operator_id: operator_document.operator_id)
         operator = Operator.find(operator_document.operator_id)
-        # We need an email adress to send the email
-        # Almost all the operator have email == nil
-        # we could use the document.user.email but
-        # also a huge number of document.user_id are nil
-        OperatorMailer.expiring_documents_notifications(operator, documents).deliver_now if operator.email.present?
+        operator.users.filter_actives.each do |user|
+          I18n.with_locale(user.locale.presence || I18n.default_locale) do
+            OperatorMailer.expiring_documents(operator, user, documents).deliver_now
+          end
+        end
       end
     end
   end

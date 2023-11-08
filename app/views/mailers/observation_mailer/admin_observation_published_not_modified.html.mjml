@@ -1,0 +1,25 @@
+<p>
+  <%= t(".paragraph1", observer: @observer.name, id: @observation.id) %>
+</p>
+
+<p>
+  <%= t("mailers.observation_id") %>: <%= @observation.id %><br/>
+  <%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.translated_type %><br/>
+  <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
+</p>
+
+<p>
+  <%= t(".paragraph2", observer: @observer.name) %>
+</p>
+<p style="background-color: #f7f6ed; padding: 20px">
+  <em><%= @observation.monitor_comment %></em>
+</p>
+
+<p>
+  <%= t(".paragraph3", link: link_to(nil, admin_observation_url(@observation), target: "_blank")).html_safe %>
+<p>
+
+<p>
+  <%= t("mailers.salutation") %><br/>
+  <%= t("mailers.signature") %>
+</p>

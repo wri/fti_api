@@ -1,0 +1,35 @@
+<p>
+  <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+</p>
+
+<p>
+  <%= t(".paragraph1", score: @score) %>
+</p>
+
+<% if @old_score.present? %>
+<p>
+  <%= t(".paragraph2", old_score_date: localized_date(I18n.locale, @old_score_date), old_score: @old_score, score_variation: @score_variation) %>
+</p>
+<% end %>
+
+<% if @expiring_docs.any? %>
+<p>
+  <%= t(".paragraph3") %>
+</p>
+<ul>
+<% @expiring_docs.each do |doc| %>
+  <li>
+    <%= t(".doc_expires", document: doc.required_operator_document.name, date: localized_date(I18n.locale, doc.expire_date)) %>
+  </li>
+<% end %>
+</ul>
+<% end %>
+
+<p>
+  <%= t(".paragraph4", link: link_to("www.opentimberportal.org", "https://opentimberportal.org", target: "_blank")).html_safe %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %> <br/>
+  <%= t("mailers.signature") %>
+</p>

@@ -82,6 +82,7 @@ gem "carrierwave-base64"
 gem "mini_magick"
 
 # Mail
+gem "mjml-rails"
 gem "letter_opener_web"
 gem "sendgrid-actionmailer"
 

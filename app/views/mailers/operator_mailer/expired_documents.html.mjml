@@ -1,0 +1,24 @@
+<p>
+  <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+</p>
+
+<p>
+  <%= t(".paragraph1", company: @operator.name, count: @documents.count) %>
+</p>
+
+<ul>
+<% @documents.each do |doc| %>
+  <li>
+    <%= doc.name_with_fmu %>
+  </li>
+<% end %>
+</ul>
+
+<p>
+  <%= t(".paragraph2", link: link_to("www.opentimberportal.org", "https://opentimberportal.org", target: "_blank")).html_safe %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %> <br/>
+  <%= t("mailers.signature") %>
+</p>
