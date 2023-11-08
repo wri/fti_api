@@ -18,11 +18,7 @@ class OperatorMailerPreview < ActionMailer::Preview
   end
 
   def documents_expiring
-    OperatorDocument.where(operator_id: operator_id).to_expire(1.month.from_now)
-  end
-
-  def documents
-    OperatorDocument.where(operator_id: operator_id).to_expire(1.month.from_now)
+    documents_expired.each { |d| d.expire_date = 30.days.from_now } # workaround just in preview
   end
 
   def operator
@@ -31,8 +27,8 @@ class OperatorMailerPreview < ActionMailer::Preview
 
   def operator_id
     operators_with_expired = OperatorDocument.doc_expired.pluck(:operator_id).uniq
-    operators_with_expiring = OperatorDocument.to_expire(1.month.from_now).pluck(:operator_id).uniq
+    operators_with_active_users = User.filter_actives.pluck(:operator_id).uniq
 
-    (operators_with_expired & operators_with_expiring).first
+    (operators_with_expired & operators_with_active_users).first
   end
 end

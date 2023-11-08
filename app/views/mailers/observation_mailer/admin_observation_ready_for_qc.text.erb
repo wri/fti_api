@@ -4,7 +4,7 @@
 <%= Observation.human_attribute_name(:observation_type) %>: <%= @observation.translated_type %>
 <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
 
-<%= t(".paragraph2", link: admin_observation_url(@observation)) %>
+<%= t(".paragraph2", link: start_qc_admin_observation_url(@observation)) %>
 
 <%= t("mailers.salutation") %>
 <%= t("mailers.signature") %>
