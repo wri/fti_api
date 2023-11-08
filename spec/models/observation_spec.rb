@@ -218,7 +218,7 @@ RSpec.describe Observation, type: :model do
       end
 
       context "when validation status is changed to `Needs revision`" do
-        subject { observation.update!(validation_status: "Needs revision") }
+        subject { observation.update!(validation_status: "Needs revision", admin_comment: "Some comment") }
 
         it "sends an email to observer users" do
           expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
