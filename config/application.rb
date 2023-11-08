@@ -45,6 +45,7 @@ module FtiApi
       port: app_url.port,
       protocol: app_url.scheme
     }
+    config.asset_host = app_url.to_s unless Rails.env.test?
 
     config.generators do |g|
       g.template_engine nil
