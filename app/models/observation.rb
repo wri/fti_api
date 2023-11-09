@@ -145,11 +145,14 @@ class Observation < ApplicationRecord
   before_create :set_responsible_admin
 
   after_create :update_operator_scores, if: :is_active?
+  after_create :update_reports_observers
   after_update :update_operator_scores, if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? || saved_change_to_operator_id? || saved_change_to_fmu_id? }
   after_update :update_reports_observers, if: :saved_change_to_observation_report_id?
 
   after_destroy :update_operator_scores
   after_destroy :update_fmu_geojson
+  after_destroy :update_reports_observers
+
   after_save :create_history, if: :saved_changes?
 
   after_save :remove_documents, if: -> { evidence_type == "Evidence presented in the report" }
@@ -202,8 +205,7 @@ class Observation < ApplicationRecord
   def update_reports_observers
     return if observation_report.blank?
 
-    observation_report.observer_ids =
-      observation_report.observations.map(&:observers).map(&:ids).flatten
+    observation_report.update_observers
   end
 
   HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type evidence_type location_accuracy validation_status is_active hidden deleted_at]

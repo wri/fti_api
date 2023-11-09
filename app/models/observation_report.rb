@@ -32,4 +32,8 @@ class ObservationReport < ApplicationRecord
   after_restore :move_attachment_to_public_directory
 
   scope :bigger_date, ->(date) { where("observation_reports.created_at <= ?", date + 1.day) }
+
+  def update_observers
+    self.observer_ids = observations.map(&:observers).map(&:ids).flatten.uniq if observations.any?
+  end
 end
