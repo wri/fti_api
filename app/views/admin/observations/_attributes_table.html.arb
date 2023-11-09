@@ -29,6 +29,13 @@ panel I18n.t("active_admin.observations_page.details") do
         safe_join(list, " ")
       end
     end
+    row :observers do |o|
+      list = o.observers.map do |observer|
+        link_to(observer.name, admin_monitor_path(observer.id))
+      end
+
+      safe_join(list, " ")
+    end
     row I18n.t("activerecord.attributes.observation.relevant_operators") do |o|
       list = o.relevant_operators.each_with_object([]) do |operator, links|
         links << link_to(operator.name, admin_producer_path(operator.id))
