@@ -60,7 +60,7 @@ RSpec.describe Observation, type: :model do
     expect(subject.observation_documents.count).to eql(1)
     subject.evidence_type = "Evidence presented in the report"
     subject.evidence_on_report = "10"
-    subject.save
+    subject.save!
     expect(subject.observation_documents.count).to eql(0)
   end
 
@@ -96,7 +96,7 @@ RSpec.describe Observation, type: :model do
 
         context "when it is already saved" do
           before do
-            observation.save
+            observation.save!
             observation.validation_status = new_status
           end
 
@@ -178,7 +178,7 @@ RSpec.describe Observation, type: :model do
       let(:observer1) { create(:observer, responsible_admin: admin1) }
       let(:observer2) { create(:observer, responsible_admin: admin2) }
       let(:observation) {
-        create(
+        build(
           :observation,
           validation_status: "Created",
           observers: [observer1, observer2]
@@ -187,62 +187,71 @@ RSpec.describe Observation, type: :model do
 
       before do
         @inactive_user = create(:user, user_role: :ngo_manager, observer: observer1, is_active: false)
-        create(:user, user_role: :ngo_manager, observer: observer1)
-        create(:user, user_role: :ngo_manager, observer: observer2)
-        create(:user, user_role: :ngo_manager, observer: observer2)
+        @user1 = create(:user, user_role: :ngo_manager, observer: observer1)
+        @user2 = create(:user, user_role: :ngo_manager, observer: observer2)
+        @user3 = create(:user, user_role: :ngo_manager, observer: observer2)
+        @observers_manager = create(:user, user_role: :ngo_manager, observer: create(:observer), managed_observers: [observer1, observer2])
       end
 
       context "when observation is created" do
-        subject { observation }
+        subject { observation.save! }
 
         it "sends an email to observer users" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_created).exactly(3).times
+          expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_created).exactly(4).times
+            .and have_enqueued_mail(ObservationMailer, :observation_created).with(observation, @user1)
+            .and have_enqueued_mail(ObservationMailer, :observation_created).with(observation, @user2)
+            .and have_enqueued_mail(ObservationMailer, :observation_created).with(observation, @user3)
+            .and have_enqueued_mail(ObservationMailer, :observation_created).with(observation, @observers_manager)
         end
       end
 
-      context "when validation status is changed to `Ready for QC`" do
-        subject { observation.update!(validation_status: "Ready for QC") }
+      context "when was created before" do
+        before { observation.save! }
 
-        it "sends an email to observer users" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_submitted_for_qc).exactly(3).times
+        context "when validation status is changed to `Ready for QC`" do
+          subject { observation.update!(validation_status: "Ready for QC") }
+
+          it "sends an email to observer users" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_submitted_for_qc).exactly(3).times
+          end
+
+          it "sends an email to all observers responsible admins" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_ready_for_qc).with(observation, admin1)
+              .and have_enqueued_mail(ObservationMailer, :admin_observation_ready_for_qc).with(observation, admin2)
+          end
+
+          it "does not send email to inactive users" do
+            expect { subject }.to have_not_enqueued_mail(ObservationMailer, :observation_submitted_to_qc).with(observation, @inactive_user)
+          end
         end
 
-        it "sends an email to all observers responsible admins" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_ready_for_qc).with(observation, admin1)
-            .and have_enqueued_mail(ObservationMailer, :admin_observation_ready_for_qc).with(observation, admin2)
+        context "when validation status is changed to `Needs revision`" do
+          subject { observation.update!(validation_status: "Needs revision", admin_comment: "Some comment") }
+
+          it "sends an email to observer users" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
+          end
         end
 
-        it "does not send email to inactive users" do
-          expect { subject }.to have_not_enqueued_mail(ObservationMailer, :observation_submitted_to_qc).with(observation, @inactive_user)
-        end
-      end
+        context "when validation status is changed to `Ready for publication`" do
+          subject { observation.update!(validation_status: "Ready for publication") }
 
-      context "when validation status is changed to `Needs revision`" do
-        subject { observation.update!(validation_status: "Needs revision", admin_comment: "Some comment") }
-
-        it "sends an email to observer users" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
-        end
-      end
-
-      context "when validation status is changed to `Ready for publication`" do
-        subject { observation.update!(validation_status: "Ready for publication") }
-
-        it "sends an email to observer users" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_ready_for_publication).exactly(3).times
-        end
-      end
-
-      context "when validation status is changed to `Published (not modified)`" do
-        subject { observation.update!(validation_status: "Published (not modified)") }
-
-        it "sends an email to observer users" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_published).exactly(3).times
+          it "sends an email to observer users" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_ready_for_publication).exactly(3).times
+          end
         end
 
-        it "sends an email to all observers responsible admins" do
-          expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_published_not_modified).with(observation, admin1)
-            .and have_enqueued_mail(ObservationMailer, :admin_observation_published_not_modified).with(observation, admin2)
+        context "when validation status is changed to `Published (not modified)`" do
+          subject { observation.update!(validation_status: "Published (not modified)") }
+
+          it "sends an email to observer users" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_published).exactly(3).times
+          end
+
+          it "sends an email to all observers responsible admins" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :admin_observation_published_not_modified).with(observation, admin1)
+              .and have_enqueued_mail(ObservationMailer, :admin_observation_published_not_modified).with(observation, admin2)
+          end
         end
       end
     end

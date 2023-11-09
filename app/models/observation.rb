@@ -343,7 +343,10 @@ class Observation < ApplicationRecord
   end
 
   def notify_about_creation
-    notify_observers "observation_created" if validation_status == "Created"
+    return unless validation_status == "Created"
+
+    notify_observers "observation_created"
+    notify_observer_managers "observation_created"
   end
 
   def notify_about_changes
@@ -356,22 +359,31 @@ class Observation < ApplicationRecord
   end
 
   def notify_observers(mail_template)
-    observers.each do |observer|
-      observer.users.filter_actives.each do |user|
-        I18n.with_locale(user.locale.presence || I18n.default_locale) do
-          ObservationMailer.send(mail_template, self, user).deliver_later
-        end
-      end
-    end
+    notify_users(
+      User.where(id: observers.joins(:users).distinct.pluck("users.id")),
+      mail_template
+    )
+  end
+
+  def notify_observer_managers(mail_template)
+    notify_users(
+      User.where(id: observers.joins(:managers).distinct.pluck("observer_managers.user_id")),
+      mail_template
+    )
   end
 
   def notify_admins(mail_template)
-    User
-      .where(id: observers.distinct.pluck(:responsible_admin_id)).filter_actives.where.not(email: [nil, ""])
-      .find_each do |responsible_admin|
-        I18n.with_locale(responsible_admin.locale.presence || I18n.default_locale) do
-          ObservationMailer.send(mail_template, self, responsible_admin).deliver_later
-        end
+    notify_users(
+      User.where(id: observers.distinct.pluck(:responsible_admin_id)),
+      mail_template
+    )
+  end
+
+  def notify_users(users, mail_template)
+    users.filter_actives.where.not(email: [nil, ""]).find_each do |user|
+      I18n.with_locale(user.locale.presence || I18n.default_locale) do
+        ObservationMailer.send(mail_template, self, user).deliver_later
       end
+    end
   end
 end
