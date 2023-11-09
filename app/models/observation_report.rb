@@ -34,6 +34,6 @@ class ObservationReport < ApplicationRecord
   scope :bigger_date, ->(date) { where("observation_reports.created_at <= ?", date + 1.day) }
 
   def update_observers
-    self.observer_ids = observations.map(&:observers).map(&:ids).flatten.uniq if observations.any?
+    self.observer_ids = observations.joins(:observers).distinct.pluck("observers.id") if observations.any?
   end
 end

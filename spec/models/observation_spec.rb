@@ -43,20 +43,11 @@ require "rails_helper"
 RSpec::Matchers.define_negated_matcher :have_not_enqueued_mail, :have_enqueued_mail
 
 RSpec.describe Observation, type: :model do
-  subject(:observation) { FactoryBot.create(:observation) }
-
-  it "is valid with valid attributes" do
-    expect(observation).to be_valid
-  end
-
-  it "fails if there is evidence on the report but not listed where" do
-    observation = build(:observation, evidence_type: "Evidence presented in the report")
-    observation.valid?
-    expect(observation.errors[:evidence_on_report]).to include("You must add information on where to find the evidence on the report")
-  end
+  subject(:observation) { build(:observation) }
 
   it "Removes old evidences when the evidence is on the report" do
-    FactoryBot.create(:observation_document, observation: subject)
+    subject.save!
+    create(:observation_document, observation: subject)
     expect(subject.observation_documents.count).to eql(1)
     subject.evidence_type = "Evidence presented in the report"
     subject.evidence_on_report = "10"
@@ -72,6 +63,35 @@ RSpec.describe Observation, type: :model do
     %i[details concern_opinion litigation_status]
 
   describe "Validations" do
+    it "is valid with valid attributes" do
+      expect(subject).to be_valid
+    end
+
+    it "is invalid there is evidence on the report but not listed where" do
+      subject.evidence_type = "Evidence presented in the report"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:evidence_on_report]).to include("You must add information on where to find the evidence on the report")
+    end
+
+    it "is invalid without observers" do
+      subject.observers = []
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:observers]).to include("can't be blank")
+    end
+
+    it "is invalid without admin comment if status is needs revision" do
+      subject.validation_status = "Needs revision"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:admin_comment]).to include("can't be blank")
+    end
+
+    it "is invalid with governments if is of operator type" do
+      subject.governments = build_list(:government, 1)
+      subject.observation_type = :operator
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:governments]).to include("Should have no governments with 'operator' type")
+    end
+
     describe "#status_changes" do
       let(:country) { create(:country) }
       let(:status) { "Created" }

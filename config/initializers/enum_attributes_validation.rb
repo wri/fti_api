@@ -2,6 +2,8 @@
 
 # copy paste from https://github.com/CristiRazvi/enum_attributes_validation/blob/master/lib/enum_attributes_validation.rb
 # just removed default message, could do a fork but the gem is really small so easy to include
+
+# TODO: we can remove this after upgrading to Rails 7.1, here are details https://github.com/rails/rails/pull/49100
 module EnumAttributesValidation
   extend ActiveSupport::Concern
 
