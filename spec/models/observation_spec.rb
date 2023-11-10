@@ -276,6 +276,20 @@ RSpec.describe Observation, type: :model do
       end
     end
 
+    describe "#update_reports_observers" do
+      let(:observation_report) { create(:observation_report) }
+      let(:observer1) { create(:observer) }
+      let(:observer2) { create(:observer) }
+
+      context "when creating observation with the report" do
+        it "assigns reports to observers associated with observation" do
+          create(:observation, observers: [observer1, observer2], observation_report: observation_report)
+
+          expect(observation_report.observer_ids.sort).to eql([observer1.id, observer2.id].sort)
+        end
+      end
+    end
+
     describe "#set_publication_date" do
       context "when publishing an observation" do
         it "set publication_date with the current date" do

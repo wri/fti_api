@@ -147,12 +147,11 @@ class Observation < ApplicationRecord
   after_create :update_operator_scores, if: :is_active?
   after_create :update_reports_observers
   after_update :update_operator_scores, if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? || saved_change_to_operator_id? || saved_change_to_fmu_id? }
-  after_update :update_reports_observers, if: :saved_change_to_observation_report_id?
 
   after_destroy :update_operator_scores
   after_destroy :update_fmu_geojson
-  after_destroy :update_reports_observers
 
+  after_save :update_reports_observers, if: :saved_change_to_observation_report_id?
   after_save :create_history, if: :saved_changes?
 
   after_save :remove_documents, if: -> { evidence_type == "Evidence presented in the report" }
