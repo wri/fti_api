@@ -992,7 +992,6 @@ en:
         all_observations: All observations  #g
         all_operator_documents: All operator documents  #g
         approved: Approved  #g
-        concession: Concession  #g
         country: :activerecord.models.country  #g
         country_doc_rank: Country doc rank  #g
         country_operators: Country operators  #g

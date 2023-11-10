@@ -5,7 +5,6 @@
 #  id                :integer          not null, primary key
 #  operator_type     :string
 #  country_id        :integer
-#  concession        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  is_active         :boolean          default(TRUE), not null

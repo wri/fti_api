@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_10_130452) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_10_134447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -742,7 +742,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_130452) do
   create_table "operators", id: :serial, force: :cascade do |t|
     t.string "operator_type"
     t.integer "country_id"
-    t.string "concession"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "is_active", default: true, null: false

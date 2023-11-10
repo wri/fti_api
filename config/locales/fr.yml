@@ -900,7 +900,6 @@ fr:
         all_observations: Toutes les observations  #g
         all_operator_documents: Tous les documents de l'opérateur  #g
         approved: Approuvé  #g
-        concession: Concession  #g
         country: :activerecord.models.country  #g
         country_doc_rank: Classement des documents du pays  #g
         country_operators: Opérateurs nationaux  #g
