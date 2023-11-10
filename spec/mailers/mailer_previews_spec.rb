@@ -20,12 +20,10 @@ describe "Mail Previews", type: :request do
     operator.operator_documents.doc_valid.first.update!(start_date: 10.days.ago, expire_date: 10.days.from_now)
 
     # observation mailer needs observation
-    admin = create(:admin)
     create(
       :observation,
       admin_comment: "admin comment",
       monitor_comment: "monitor comment",
-      responsible_admin: admin,
       country: country,
       modified_user: ngo_user
     )

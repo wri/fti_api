@@ -49,22 +49,6 @@ namespace :observations do
     end
   end
 
-  desc "Set resposible admin by default"
-  task set_responsible_admin: :environment do
-    Observer.unscoped.find_each do |observer|
-      puts "Setting responsible admin by default for observer with id: #{observer.id}"
-      observer.set_responsible_admin
-      observer.save!
-    end
-
-    Observation.unscoped.find_each do |observation|
-      puts "Setting responsible admin by default for observation with id: #{observation.id}"
-      observation.set_default_responsible_admin
-      puts observation.responsible_admin_id
-      observation.save!
-    end
-  end
-
   desc "Finds obs with swapped coords and fixing them"
   task fix_swapped_coords: :environment do
     for_real = ENV["FOR_REAL"] == "true"

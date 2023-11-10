@@ -758,7 +758,6 @@ fr:
         publication_date: Date de publication  #g
         pv: Pv  #g
         relevant_operators: Opérateurs concernés  #g
-        responsible_admin: :activerecord.models.responsible_admin  #g
         severity: :activerecord.models.severity  #g
         species: Espèces  #g
         species_observations: Observations d'espèces  #g

@@ -852,7 +852,6 @@ en:
         publication_date: Publication date  #g
         pv: Pv  #g
         relevant_operators: Relevant operators  #g
-        responsible_admin: :activerecord.models.responsible_admin  #g
         severity: :activerecord.models.severity  #g
         species: Species  #g
         species_observations: Species observations  #g

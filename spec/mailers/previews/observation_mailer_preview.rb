@@ -33,7 +33,6 @@ class ObservationMailerPreview < ActionMailer::Preview
     Observation
       .where.not(observation_report: nil)
       .where.not(monitor_comment: [nil, ""])
-      .where.not(responsible_admin: nil)
       .last
   end
 

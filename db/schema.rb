@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_10_144912) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_10_154553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -554,7 +554,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_144912) do
     t.boolean "hidden", default: false, null: false
     t.text "admin_comment"
     t.text "monitor_comment"
-    t.integer "responsible_admin_id"
     t.datetime "deleted_at", precision: nil
     t.index ["country_id"], name: "index_observations_on_country_id"
     t.index ["created_at"], name: "index_observations_on_created_at"
@@ -570,7 +569,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_144912) do
     t.index ["observation_type"], name: "index_observations_on_observation_type"
     t.index ["operator_id"], name: "index_observations_on_operator_id"
     t.index ["publication_date"], name: "index_observations_on_publication_date"
-    t.index ["responsible_admin_id"], name: "index_observations_on_responsible_admin_id"
     t.index ["severity_id"], name: "index_observations_on_severity_id"
     t.index ["updated_at"], name: "index_observations_on_updated_at"
     t.index ["user_id"], name: "index_observations_on_user_id"

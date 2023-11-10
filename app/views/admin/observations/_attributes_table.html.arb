@@ -32,7 +32,6 @@ panel I18n.t("active_admin.observations_page.details") do
     row :observation_report
     row :admin_comment
     row :monitor_comment
-    row :responsible_admin
     row :user
     row :modified_user
     row :modified_user_language do |o|

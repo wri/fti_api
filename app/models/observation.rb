@@ -32,7 +32,6 @@
 #  hidden                :boolean          default(FALSE), not null
 #  admin_comment         :text
 #  monitor_comment       :text
-#  responsible_admin_id  :integer
 #  deleted_at            :datetime
 #  details               :text
 #  concern_opinion       :text
@@ -113,8 +112,6 @@ class Observation < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :observation_documents, dependent: :destroy
 
-  belongs_to :responsible_admin, class_name: "User", optional: true
-
   accepts_nested_attributes_for :observation_documents, allow_destroy: true
   accepts_nested_attributes_for :observation_report, allow_destroy: true
   accepts_nested_attributes_for :subcategory, allow_destroy: false
@@ -142,7 +139,6 @@ class Observation < ApplicationRecord
   before_save :set_centroid
   before_save :set_publication_date, if: :validation_status_changed?
   before_create :set_default_observer
-  before_create :set_responsible_admin
 
   after_create :update_operator_scores, if: :is_active?
   after_create :update_reports_observers
@@ -223,10 +219,6 @@ class Observation < ApplicationRecord
     ObservationHistory.create! mapping
   end
 
-  def set_default_responsible_admin
-    set_responsible_admin
-  end
-
   def published?
     PUBLISHED_STATES.include?(validation_status)
   end
@@ -280,22 +272,6 @@ class Observation < ApplicationRecord
     return if user.observer.nil?
 
     observers << user.observer
-  end
-
-  # Sets the responsible admin for an observation
-  # It starts by checking the monitor organization of the uploader to find its responsible person
-  # And if it doesn't find any, it iterates through all the monitors
-  def set_responsible_admin
-    return if responsible_admin_id
-
-    self.responsible_admin_id = user&.observer&.responsible_admin&.id
-    return if responsible_admin_id
-
-    observers.each do |observer|
-      if observer.responsible_admin.present?
-        self.responsible_admin_id = observer.responsible_admin&.id
-      end
-    end
   end
 
   def active_government

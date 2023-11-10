@@ -30,7 +30,6 @@
 #  hidden                :boolean          default(FALSE), not null
 #  admin_comment         :text
 #  monitor_comment       :text
-#  responsible_admin_id  :integer
 #  deleted_at            :datetime
 #  details               :text
 #  concern_opinion       :text
