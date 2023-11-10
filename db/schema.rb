@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_10_134447) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_10_144912) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -625,7 +625,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_134447) do
     t.string "data_phone"
     t.string "organization_type"
     t.boolean "public_info", default: false, null: false
-    t.integer "responsible_user_id"
     t.integer "responsible_admin_id"
     t.index ["is_active"], name: "index_observers_on_is_active"
   end
@@ -1150,7 +1149,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_134447) do
   add_foreign_key "observer_managers", "observers", on_delete: :cascade
   add_foreign_key "observer_managers", "users", on_delete: :cascade
   add_foreign_key "observers", "users", column: "responsible_admin_id", on_delete: :nullify
-  add_foreign_key "observers", "users", column: "responsible_user_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
   add_foreign_key "operator_document_histories", "required_operator_documents", on_delete: :cascade

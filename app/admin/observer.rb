@@ -17,8 +17,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
   end
 
   permit_params :observer_type, :is_active, :logo, :organization_type, :delete_logo,
-    :responsible_user_id, :responsible_admin_id,
-    translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
+    :responsible_admin_id, translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
   csv do
     column :is_active
@@ -51,7 +50,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
       link_to o.logo&.identifier, o.logo&.url if o.logo&.url
     end
     column :name, label: I18n.t("activerecord.attributes.observer/translation.name"), sortable: "observer_translations.name"
-    column :responsible_user
     column :responsible_admin
     column :created_at
     column :updated_at
@@ -85,7 +83,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
       row :public_info
       row :observer_type
       row :organization_type
-      row :responsible_user
       row :responsible_admin
       # TODO: Reactivate rubocop and fix this
       # rubocop:disable Rails/OutputSafety
@@ -122,7 +119,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
     end
     f.inputs I18n.t("active_admin.shared.monitor_details") do
       f.input :is_active
-      f.input :responsible_user, as: :select, collection: User.where(observer_id: f.object.id)
       f.input :responsible_admin, as: :select, collection: User.joins(:user_permission).where(user_permissions: {user_role: :admin})
       f.input :countries, collection: Country.with_translations(I18n.locale).order("country_translations.name asc")
       f.input :observer_type, as: :select, collection: %w[Mandated SemiMandated External Government]

@@ -536,7 +536,6 @@ fr:
         one: Groupe de documents de l'opérateur requis  #g
         other: Groupes de documents opérateur requis  #g
       responsible_admin: 'Administrateur responsable'
-      responsible_user: 'Utilisateur responsable'
       sawmill: Scierie  #g
       score_operator_document: Noter le document de l'opérateur  #g
       score_operator_observation: Noter l'observation de l'opérateur  #g
@@ -875,7 +874,6 @@ fr:
         organization_type: Type d'Organisation  #g
         public_info: Informations publiques  #g
         responsible_admin: :activerecord.models.responsible_admin  #g
-        responsible_user: :activerecord.models.responsible_user  #g
         translations: Traductions  #g
         users: Utilisateurs  #g
         versions: Versions  #g

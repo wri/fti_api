@@ -968,7 +968,6 @@ en:
         organization_type: Organization type  #g
         public_info: Public info  #g
         responsible_admin: :activerecord.models.responsible_admin  #g
-        responsible_user: :activerecord.models.responsible_user  #g
         translations: Translations  #g
         users: Users  #g
         versions: Versions  #g
