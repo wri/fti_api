@@ -3,22 +3,22 @@
 module Versionable
   def self.extended(base)
     base.instance_eval do
-      sidebar :versionate, partial: "layouts/version", only: :show
+      sidebar :versionate, partial: "version_sidebar", only: :show
 
       controller do
         def show
           model = resource.class.base_class
-          variable = current = model.includes(versions: :item).find(params[:id])
-          @versions = variable.versions.where.not(event: "create")
-          @create_version = variable.versions.where(event: "create").first
+          resource = current = model.includes(versions: :item).find(params[:id])
+          @versions = resource.versions.where.not(event: "create")
+          @create_version = resource.versions.where(event: "create").first
           begin
-            variable = @versions[params[:version].to_i].reify if params[:version]
+            resource = @versions[params[:version].to_i].reify if params[:version]
           rescue => e
             Sentry.capture_exception e
           end
           # not sure why sometimes id is nil after reify
-          variable.id = current.id if variable.id.nil?
-          instance_variable_set("@#{resource_instance_name}", variable)
+          resource.id = current.id if resource.id.nil?
+          instance_variable_set("@#{resource_instance_name}", resource)
           show! # it seems to need this
         end
       end

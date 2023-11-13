@@ -8,14 +8,13 @@
   <b><%= I18n.t('active_admin.versionate.user') %></b><%= User.find(last_version.whodunnit).email rescue '' %>
   <br>
   <% if @versions.length.to_i > 0 %>
-    <% if params[:version].to_i > 0 || !params[:version] %>
-      <%= link_to I18n.t('active_admin.versionate.previous_version'), {:version => (params[:version] || @versions.length).to_i - 1}%>
-      <br>
-    <% end %>
+
     <% if params[:version] %>
       <% version = @versions[params[:version].to_i] %>
 
       <% if version %>
+        <%= link_to I18n.t('active_admin.versionate.go_to_current_version')%>
+
         <h3><%= I18n.t('active_admin.versionate.this_is_version', number: params[:version]) %></h3>
 
         <% reify_version_info = version.previous %>
@@ -27,13 +26,16 @@
           <br>
           <br>
         <% end %>
-        <b><%= I18n.t('active_admin.versionate.created_at') %></b><%= version.created_at %>
+        <b><%= I18n.t('active_admin.versionate.modified_at') %></b><%= version.created_at %>
         <br>
         <b><%= I18n.t('active_admin.versionate.user') %></b> <%= User.find(version.whodunnit).email rescue '' %>
         <br>
-
-        <%= link_to I18n.t('active_admin.versionate.go_to_current_version')%>
       <% end %>
+    <% end %>
+
+    <% if params[:version].to_i > 0 || !params[:version] %>
+      <%= link_to I18n.t('active_admin.versionate.previous_version'), {:version => (params[:version] || @versions.length).to_i - 1}%>
+      <br>
     <% end %>
   <% end %>
 <% elsif @create_version %>
