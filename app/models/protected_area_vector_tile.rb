@@ -1,5 +1,5 @@
 class ProtectedAreaVectorTile
-  def self.fetch(param_z, param_x, param_y)
+  def self.fetch(param_x, param_y, param_z)
     begin
       x, y, z = Integer(param_x), Integer(param_y), Integer(param_z)
     rescue ArgumentError, TypeError
