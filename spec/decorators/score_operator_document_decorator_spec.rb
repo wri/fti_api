@@ -8,8 +8,8 @@ RSpec.describe ScoreOperatorDocumentDecorator do
       create_list(:required_operator_document_country, 3, country: country)
     end
 
-    @operator.operator_documents.first.update!(status: "doc_valid")
-    @operator.operator_documents.second.update!(status: "doc_pending")
+    @operator.operator_documents.first.update!(status: "doc_valid", document_file: create(:document_file), start_date: Time.zone.today)
+    @operator.operator_documents.second.update!(status: "doc_pending", reason: "reason")
   end
 
   let(:scores) { ScoreOperatorDocument.where(operator_id: @operator.id).order(:date) }

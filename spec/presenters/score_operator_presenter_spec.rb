@@ -31,27 +31,30 @@ RSpec.describe ScoreOperatorPresenter do
     f1, f2, f3, f4 = operator.operator_documents.non_signature.fmu_type.where(fmu_id: fmu.id)
     f21, f22, f23, f24 = operator.operator_documents.non_signature.fmu_type.where(fmu_id: fmu2.id)
 
-    c1.update(public: false, status: "doc_valid")
-    c2.update(public: true, status: "doc_valid")
-    c3.update(public: true, status: "doc_not_provided")
-    c4.update(public: true, status: "doc_not_required")
+    # I know that it not valid case to have shared document file but to simplify it and make it faster
+    @file = create(:document_file)
 
-    f1.update(public: false, status: "doc_valid")
-    f2.update(public: true, status: "doc_valid")
-    f3.update(public: true, status: "doc_not_provided")
-    f4.update(public: false, status: "doc_not_required")
+    c1.update!(public: false, status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
+    c2.update!(public: true, status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
+    c3.update!(public: true, status: "doc_not_provided")
+    c4.update!(public: true, status: "doc_not_required", reason: "reason")
 
-    f21.update(public: false, status: "doc_expired")
-    f22.update(public: true, status: "doc_pending")
-    f23.update(public: true, status: "doc_valid")
-    f24.update(public: false, status: "doc_invalid")
+    f1.update!(public: false, status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
+    f2.update!(public: true, status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
+    f3.update!(public: true, status: "doc_not_provided")
+    f4.update!(public: false, status: "doc_not_required", reason: "reason")
+
+    f21.update!(public: false, status: "doc_expired", document_file: @file, start_date: Time.zone.yesterday)
+    f22.update!(public: true, status: "doc_pending", document_file: @file, start_date: Time.zone.yesterday)
+    f23.update!(public: true, status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
+    f24.update!(public: false, status: "doc_invalid", document_file: @file, start_date: Time.zone.yesterday)
 
     @operator = operator
   end
 
   context "publication authorization signed" do
     before :context do
-      @operator.operator_documents.signature.first.update(status: "doc_valid")
+      @operator.operator_documents.signature.first.update!(status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
     end
 
     subject { ScoreOperatorPresenter.new(@operator.operator_documents) }
@@ -108,7 +111,7 @@ RSpec.describe ScoreOperatorPresenter do
 
   context "publication authorization not signed" do
     before :context do
-      @operator.operator_documents.signature.first.update(status: "doc_invalid")
+      @operator.operator_documents.signature.first.update!(status: "doc_invalid", document_file: @file, start_date: Time.zone.yesterday)
     end
 
     subject { ScoreOperatorPresenter.new(@operator.operator_documents) }

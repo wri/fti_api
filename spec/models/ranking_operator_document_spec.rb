@@ -43,10 +43,12 @@ RSpec.describe RankingOperatorDocument, type: :model do
     create(:fmu_operator, fmu: fmu2, operator: @operator_6)
     create(:fmu_operator, fmu: fmu3, operator: @operator_2)
 
-    @operator.operator_document_fmus.first.update!(status: :doc_valid)
-    @operator_6.operator_document_fmus.first.update!(status: :doc_valid)
+    file = create(:document_file)
 
-    @operator_2.reload.operator_documents.each { |od| od.update(status: :doc_valid) }
+    @operator.operator_document_fmus.first.update!(status: :doc_valid, document_file: file, start_date: Time.zone.today)
+    @operator_6.operator_document_fmus.first.update!(status: :doc_valid, document_file: file, start_date: Time.zone.today)
+
+    @operator_2.reload.operator_documents.each { |od| od.update!(status: :doc_valid, document_file: file, start_date: Time.zone.today) }
   end
 
   it "should calculate correct ranking per country" do
@@ -62,7 +64,7 @@ RSpec.describe RankingOperatorDocument, type: :model do
 
   describe "operator changes" do
     it "should remove ranking from old operator that become inactive" do
-      @operator_2.update(is_active: false)
+      @operator_2.update!(is_active: false)
 
       expect(@operator.reload.country_doc_rank).to eq(1)
       expect(@operator_2.reload.country_doc_rank).to be_nil
@@ -75,7 +77,7 @@ RSpec.describe RankingOperatorDocument, type: :model do
     end
 
     it "should remove ranking from operator that is not longer fa operator" do
-      @operator_2.update(fa_id: nil)
+      @operator_2.update!(fa_id: nil)
 
       expect(@operator.reload.country_doc_rank).to eq(1)
       expect(@operator_2.reload.country_doc_rank).to be_nil

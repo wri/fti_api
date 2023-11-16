@@ -44,13 +44,13 @@ class OperatorDocument < ApplicationRecord
   accepts_nested_attributes_for :document_file
 
   before_validation :set_expire_date, unless: :expire_date?
+  before_validation :set_status, on: :create
 
   validates :start_date, presence: {if: :document_file_id?}
-  validates :expire_date, presence: {if: :document_file_id} # TODO We set expire_date on before_validation
+  validates :expire_date, presence: {if: :document_file_id?}
   validate :reason_or_file
 
   before_save :set_type
-  before_create :set_status
   before_create :delete_previous_pending_document
 
   after_destroy :regenerate
@@ -210,8 +210,11 @@ class OperatorDocument < ApplicationRecord
   end
 
   def reason_or_file
-    return if document_file.blank? || reason.blank?
-
-    errors.add(:reason, "Cannot have a reason not to have a document")
+    if document_file.present? && reason.present?
+      errors.add(:base, "Could either have uploaded file or reason of document non applicability")
+    end
+    if document_file.blank? && reason.blank? && !doc_not_provided?
+      errors.add(:base, "File must be present or reason when document is non applicable")
+    end
   end
 end
