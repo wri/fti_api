@@ -27,7 +27,7 @@ ActiveAdmin.register ProtectedArea do
 
     columns class: "d-flex" do
       column max_width: "500px" do
-        f.inputs I18n.t("active_admin.details", model: ProtectedArea.to_s) do
+        f.inputs I18n.t("active_admin.details", model: I18n.t("activerecord.models.protected_area")) do
           f.input :wdpa_pid
           f.input :country
           f.input :name
@@ -35,7 +35,7 @@ ActiveAdmin.register ProtectedArea do
       end
 
       column class: "flex-1" do
-        f.inputs do
+        f.inputs ProtectedArea.human_attribute_name(:geometry) do
           f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
           render partial: "upload_geometry_map",
             locals: {

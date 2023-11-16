@@ -528,6 +528,7 @@ fr:
       operator_document_history: Historique des documents de l'opérateur  #g
       operator_document_statistic: Statistique des documents de l'opérateur  #g
       partner: Partenaire  #g
+      protected_area: Aire Protégée
       required_gov_document: Document gouvernemental requis  #g
       required_gov_document_group: Groupe de documents gouvernementaux requis  #g
       required_operator_document: Document de l'opérateur requis  #g
@@ -1109,6 +1110,13 @@ fr:
         translations: Traductions  #g
         website: Site Internet  #g
         name: Nom
+
+      protected_area:
+        country: :activerecord.models.country  #g
+        geojson: Géojson  #g
+        geometry: Géométrie  #g
+        name: Nom  #g
+        wdpa_pid: WDPA pid  #g
 
       required_gov_document:
         country: :activerecord.models.country  #g

@@ -515,6 +515,7 @@ en:
       operator_document_statistic: Operator document statistic  #g
       paper_trail/version: Paper trail/version  #g
       partner: Partner  #g
+      protected_area: Protected Area  #g
       required_gov_document: Required gov document  #g
       required_gov_document/translation: Required gov document/translation  #g
       required_gov_document_group: Required gov document group  #g
@@ -1202,6 +1203,13 @@ en:
         translations: Translations  #g
         website: Website  #g
         name: Name
+
+      protected_area:
+        country: :activerecord.models.country  #g
+        geojson: Geojson  #g
+        geometry: Geometry  #g
+        name: Name  #g
+        wdpa_pid: WDPA pid  #g
 
       required_gov_document:
         country: :activerecord.models.country  #g
