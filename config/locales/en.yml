@@ -176,6 +176,8 @@ en:
       user_deactivated: 'User deactivated'
       permissions_changed: 'Permissions changed'
       operator_activated: 'Operator activated'
+      new_shape: 'New shape'
+      current_shape: 'Current shape'
     menu:
       dashboard:
         dashboard: 'Dashboard'

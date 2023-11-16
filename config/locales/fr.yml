@@ -186,6 +186,8 @@ fr:
       user_deactivated: 'User deactivated'
       permissions_changed: 'Permissions changed'
       operator_activated: 'Operator activated'
+      new_shape: 'Nouvelle forme'
+      current_shape: 'Forme actuelle'
     menu:
       dashboard:
         dashboard: 'Tableau de bord'
@@ -436,11 +438,11 @@ fr:
       labels:
         destroy: "Supprimer"
     esri_shapefile_zip_input:
-      hint: "The zip file must contain at least the following files:\\n
-      .shp — shape format; the feature geometry itself {content-type: x-gis/x-shapefile}\\n
-      .shx — shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly {content-type: x-gis/x-shapefile}\\n
-      .dbf — attribute format; columnar attributes for each shape, in dBase IV format {content-type: application/octet-stream OR text/plain}\\n
-      .prj — projection description, using a well-known text representation of coordinate reference systems {content-type: text/plain OR application/text}"
+      hint: "Le fichier zip doit contenir au moins les fichiers suivants:\\n
+      .shp — format de la forme ; la géométrie de l'entité elle-même {content-type: x-gis/x-shapefile}\\n
+      .shx — stocke l'index de la géométrie ; un index de position de la géométrie de l'élément pour permettre une recherche rapide vers l'avant et vers l'arrière {content-type: x-gis/x-shapefile}\\n
+      .dbf — contient les données attributaires relatives aux objets contenus dans le shapefile; attributs en colonnes pour chaque forme, au format dBase IV {content-type: application/octet-stream OR text/plain}\\n
+      .prj — description de la projection, utilisant une représentation textuelle bien connue des systèmes de référence de coordonnées {content-type: text/plain OR application/text}"
     globalize:
       translations: 'Traductions'
       language:
