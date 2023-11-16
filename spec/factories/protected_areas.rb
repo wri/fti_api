@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: protected_areas
+#
+#  id         :bigint           not null, primary key
+#  country_id :bigint           not null
+#  name       :string           not null
+#  wdpa_pid   :string           not null
+#  geojson    :jsonb            not null
+#  geometry   :geometry         geometry, 0
+#  centroid   :geometry         point, 0
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 FactoryBot.define do
   factory :protected_area do
     country
