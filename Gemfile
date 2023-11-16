@@ -101,7 +101,7 @@ gem "sentry-rails"
 gem "sentry-ruby"
 
 # Utilities
-gem "rest-client"
+gem "http"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

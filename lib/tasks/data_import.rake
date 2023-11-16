@@ -586,17 +586,25 @@ namespace :import do
 
   desc "Loads protected areas from GFW data API"
   task protected_areas: :environment do
-    countries = Country.active.pluck(:iso).uniq.map { |iso| "'#{iso}'" }.join(", ")
-    sql = "SELECT wdpa_pid, name, gfw_geojson, iso3 FROM data where marine = '0' and iso3 IN (#{countries})"
+    countries = if ENV["COUNTRIES"]
+      Country.where(iso: ENV["COUNTRIES"].split(","))
+    else
+      Country.active
+    end
 
-    ProtectedArea.delete_all
+    abort "No counties found" if countries.empty?
 
-    response = RestClient.post(
+    countries_iso_string = countries.pluck(:iso).uniq.map { |iso| "'#{iso}'" }.join(", ")
+    sql = "SELECT wdpa_pid, name, gfw_geojson, iso3 FROM data where marine = '0' and iso3 IN (#{countries_iso_string})"
+
+    ProtectedArea.where(country: countries).delete_all
+    ProtectedArea.delete_all if ENV["CLEAR_ALL"]
+
+    response = HTTP.post(
       "https://data-api.globalforestwatch.org/dataset/wdpa_protected_areas/v202302/query/json",
-      {sql: sql}.to_json,
-      {content_type: :json}
+      json: {sql: sql}
     )
-    response_json = JSON.parse(response)
+    response_json = JSON.parse(response.body)
     response_json["data"].each do |protected_area|
       country = Country.find_by(iso: protected_area["iso3"])
       ProtectedArea.create!(
