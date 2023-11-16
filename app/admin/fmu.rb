@@ -106,27 +106,47 @@ ActiveAdmin.register Fmu do
 
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs I18n.t("active_admin.shared.fmu_details") do
-      f.input :country, input_html: {disabled: object.persisted?}, required: true
-      f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
-      f.input :forest_type, as: :select,
-        collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
-        input_html: {disabled: object.persisted?}
-      f.input :certification_fsc
-      f.input :certification_pefc
-      f.input :certification_olb
-      f.input :certification_pafc
-      f.input :certification_fsc_cw
-      f.input :certification_tlv
-      f.input :certification_ls
-    end
+    columns class: "d-flex" do
+      column max_width: "500px" do
+        f.inputs I18n.t("active_admin.shared.fmu_details") do
+          f.input :country, input_html: {disabled: object.persisted?}, required: true
+          f.input :forest_type, as: :select,
+            collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
+            input_html: {disabled: object.persisted?}
+          f.input :certification_fsc
+          f.input :certification_pefc
+          f.input :certification_olb
+          f.input :certification_pafc
+          f.input :certification_fsc_cw
+          f.input :certification_tlv
+          f.input :certification_ls
+        end
 
-    f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
-      fo.input :operator_id, label: I18n.t("activerecord.attributes.fmu/translation.name"), as: :select,
-        collection: Operator.active.map { |o| [o.name, o.id] },
-        input_html: {disabled: object.persisted?}, required: false
-      fo.input :start_date, input_html: {disabled: object.persisted?}, required: false
-      fo.input :end_date, input_html: {disabled: object.persisted?}
+        f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
+          fo.input :operator_id, label: I18n.t("activerecord.attributes.fmu/translation.name"), as: :select,
+            collection: Operator.active.map { |o| [o.name, o.id] },
+            input_html: {disabled: object.persisted?}, required: false
+          fo.input :start_date, input_html: {disabled: object.persisted?}, required: false
+          fo.input :end_date, input_html: {disabled: object.persisted?}
+        end
+      end
+
+      column class: "flex-1" do
+        f.inputs Fmu.human_attribute_name(:geometry) do
+          f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
+
+          render partial: "upload_geometry_map",
+            locals: {
+              file_input_id: "fmu_esri_shapefiles_zip",
+              geojson: f.resource.geojson,
+              bbox: f.resource.bbox,
+              present: f.resource.geojson.present?,
+              host: Rails.env.development? ? request.base_url : request.base_url + "/api",
+              show_fmus: true,
+              api_key: ENV["API_KEY"]
+            }
+        end
+      end
     end
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
@@ -135,16 +155,5 @@ ActiveAdmin.register Fmu do
       end
     end
     f.actions
-
-    render partial: "upload_geometry_map",
-      locals: {
-        file_input_id: "fmu_esri_shapefiles_zip",
-        geojson: f.resource.geojson,
-        bbox: f.resource.bbox,
-        present: f.resource.geojson.present?,
-        host: Rails.env.development? ? request.base_url : request.base_url + "/api",
-        show_fmus: true,
-        api_key: ENV["API_KEY"]
-      }
   end
 end

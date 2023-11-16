@@ -24,22 +24,33 @@ ActiveAdmin.register ProtectedArea do
 
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs do
-      f.input :wdpa_pid
-      f.input :country
-      f.input :name
-      f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
-      render partial: "upload_geometry_map",
-        locals: {
-          file_input_id: "protected_area_esri_shapefiles_zip",
-          geojson: f.resource.geojson,
-          bbox: f.resource.bbox,
-          present: f.resource.geojson.present?,
-          host: Rails.env.development? ? request.base_url : request.base_url + "/api",
-          show_fmus: false,
-          api_key: ENV["API_KEY"]
-        }
+
+    columns class: "d-flex" do
+      column max_width: "500px" do
+        f.inputs I18n.t("active_admin.details", model: ProtectedArea.to_s) do
+          f.input :wdpa_pid
+          f.input :country
+          f.input :name
+        end
+      end
+
+      column class: "flex-1" do
+        f.inputs do
+          f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
+          render partial: "upload_geometry_map",
+            locals: {
+              file_input_id: "protected_area_esri_shapefiles_zip",
+              geojson: f.resource.geojson,
+              bbox: f.resource.bbox,
+              present: f.resource.geojson.present?,
+              host: Rails.env.development? ? request.base_url : request.base_url + "/api",
+              show_fmus: false,
+              api_key: ENV["API_KEY"]
+            }
+        end
+      end
     end
+
     f.actions
   end
 
