@@ -24,7 +24,7 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   config.clear_action_items!
 
-  action_item :toggle_active, only: [:show] do
+  action_item :toggle_active, only: [:show], if: -> { !resource.special_unknown? } do
     if resource.is_active
       link_to I18n.t("shared.deactivate"), deactivate_admin_producer_path(resource),
         method: :put, data: {confirm: I18n.t("active_admin.operator_page.confirm_deactivate", name: resource.name)}
@@ -34,7 +34,7 @@ ActiveAdmin.register Operator, as: "Producer" do
     end
   end
 
-  action_item :edit, only: [:show] do
+  action_item :edit, only: [:show], if: -> { !resource.special_unknown? } do
     link_to I18n.t("active_admin.operator_page.edit"), edit_admin_producer_path(resource)
   end
 
@@ -97,6 +97,8 @@ ActiveAdmin.register Operator, as: "Producer" do
     end
     column(:created_at) { |o| o.created_at.to_date }
     column(I18n.t("active_admin.shared.actions")) do |operator|
+      next if operator.special_unknown?
+
       if operator.is_active
         link_to I18n.t("shared.deactivate"), deactivate_admin_producer_path(operator),
           method: :put, data: {confirm: I18n.t("active_admin.operator_page.confirm_deactivate", name: operator.name)}
@@ -108,7 +110,7 @@ ActiveAdmin.register Operator, as: "Producer" do
 
     actions defaults: false do |operator|
       item I18n.t("active_admin.view"), admin_producer_path(operator)
-      item I18n.t("active_admin.edit"), edit_admin_producer_path(operator)
+      item I18n.t("active_admin.edit"), edit_admin_producer_path(operator) unless operator.special_unknown?
       if operator.can_hard_delete?
         item I18n.t("active_admin.delete"), admin_producer_path(operator), method: :delete, data: {confirm: I18n.t("active_admin.operator_page.confirm_delete")}
       end

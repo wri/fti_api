@@ -94,9 +94,11 @@ RSpec.describe Observation, type: :model do
     describe "#status_changes" do
       let(:country) { create(:country) }
       let(:status) { "Created" }
+      let(:operator) { create(:operator, country: country) }
       let(:observation) {
         build :observation,
           country: country,
+          operator: operator,
           validation_status: status
       }
       subject {
@@ -163,6 +165,28 @@ RSpec.describe Observation, type: :model do
           let(:new_status) { "Ready for QC" }
 
           it { is_expected.to_not be_valid }
+        end
+      end
+
+      describe "for all" do
+        context "with unknown operator" do
+          let(:operator) { create(:unknown_operator) }
+          before { observation.save }
+          subject { observation }
+
+          context "when creating an observation with status `Created`" do
+            it { is_expected.to be_valid }
+            it { is_expected.to be_persisted }
+          end
+
+          context "when moving to 'Ready for QC'" do
+            it "should not be valid" do
+              observation.validation_status = "Ready for QC"
+              observation.operator = Operator.find_by(slug: "unknown")
+              expect(observation.save).to be false
+              expect(observation.errors[:operator]).to eql ["can't be blank or unknown"]
+            end
+          end
         end
       end
     end
