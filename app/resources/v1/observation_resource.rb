@@ -37,7 +37,7 @@ module V1
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
       :observation_report, :law, :operator, :subcategory,
-      :is_active, :validation_status, :is_physical_place, :new_observer_id
+      :is_active, :validation_status, :is_physical_place
 
     filter :hidden, default: "false", apply: ->(records, value, options) {
       return records if value.include?("all")
