@@ -32,7 +32,6 @@ module V1
           email: user.email,
           "is-active": true,
           "deactivated-at": nil,
-          "web-url": nil,
           locale: nil,
           "permissions-request": nil,
           "permissions-accepted": nil

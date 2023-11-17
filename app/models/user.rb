@@ -9,7 +9,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string
-#  web_url                :string
 #  is_active              :boolean          default(TRUE), not null
 #  deactivated_at         :datetime
 #  permissions_request    :integer
@@ -75,7 +74,6 @@ class User < ApplicationRecord
 
   include Activable
   include Roleable
-  include Sanitizable
 
   scope :recent, -> { order("users.updated_at DESC") }
   scope :inactive, -> { where(is_active: false) }

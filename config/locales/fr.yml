@@ -1358,7 +1358,6 @@ fr:
         reset_password_sent_at: Réinitialiser le mot de passe envoyé à  #g
         reset_password_token: Réinitialiser le jeton de mot de passe  #g
         user_permission: :activerecord.models.user_permission  #g
-        web_url: URL Web  #g
 
       user_permission:
         permissions: Autorisations  #g

@@ -1446,7 +1446,6 @@ en:
         reset_password_sent_at: Reset password sent at  #g
         reset_password_token: Reset password token  #g
         user_permission: :activerecord.models.user_permission  #g
-        web_url: Web url  #g
 
       user_permission:
         permissions: Permissions  #g

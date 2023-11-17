@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_10_154553) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -1067,7 +1067,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_154553) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "name"
-    t.string "web_url"
     t.boolean "is_active", default: true, null: false
     t.datetime "deactivated_at", precision: nil
     t.integer "permissions_request"
