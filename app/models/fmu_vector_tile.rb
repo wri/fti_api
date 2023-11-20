@@ -6,7 +6,7 @@ class FmuVectorTile
       return nil
     end
 
-    operator_condition = operator_id.present? ? sanitize_sql(["AND operator_id=?", operator_id]) : ""
+    operator_condition = operator_id.present? ? ActiveRecord::Base.sanitize_sql(["AND operator_id=?", operator_id]) : ""
 
     query = <<~SQL
       SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
