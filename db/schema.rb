@@ -575,6 +575,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
     t.index ["validation_status"], name: "index_observations_on_validation_status"
   end
 
+  create_table "observer_managers", force: :cascade do |t|
+    t.bigint "observer_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["observer_id"], name: "index_observer_managers_on_observer_id"
+    t.index ["user_id", "observer_id"], name: "index_observer_managers_on_user_id_and_observer_id", unique: true
+    t.index ["user_id"], name: "index_observer_managers_on_user_id"
+  end
+
   create_table "observer_observations", id: :serial, force: :cascade do |t|
     t.integer "observer_id"
     t.integer "observation_id"
@@ -1145,6 +1155,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
   add_foreign_key "observations", "operators"
   add_foreign_key "observations", "users"
   add_foreign_key "observations", "users", column: "modified_user_id"
+  add_foreign_key "observer_managers", "observers", on_delete: :cascade
+  add_foreign_key "observer_managers", "users", on_delete: :cascade
   add_foreign_key "observers", "users", column: "responsible_admin_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
