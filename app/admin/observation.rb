@@ -62,7 +62,7 @@ ActiveAdmin.register Observation do
             :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
             :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
             :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :admin_comment,
-            :monitor_comment, :actions_taken, :responsible_admin_id, :is_physical_place,
+            :monitor_comment, :actions_taken, :is_physical_place,
             observer_ids: [], relevant_operator_ids: [], government_ids: [],
             observation_documents_attributes: [:id, :name, :attachment],
             translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
@@ -308,7 +308,6 @@ ActiveAdmin.register Observation do
     end
     column :admin_comment
     column :monitor_comment
-    column :responsible_admin
     column I18n.t("activerecord.models.user") do |observation|
       observation.user&.name
     end
@@ -397,7 +396,6 @@ ActiveAdmin.register Observation do
     end
     column :admin_comment, sortable: false
     column :monitor_comment, sortable: false
-    column :responsible_admin
     column :user, sortable: false
     column :modified_user, sortable: false
     column I18n.t("active_admin.observations_page.modified_user_language"), class: "col-modified_user_language", sortable: false do |o|
@@ -457,7 +455,6 @@ ActiveAdmin.register Observation do
             ["report", I18n.t("document_types.Report"), :checked],
             ["admin_comment", I18n.t("activerecord.attributes.observation.admin_comment"), :checked],
             ["monitor_comment", I18n.t("activerecord.attributes.observation.monitor_comment"), :checked],
-            ["responsible_admin", Observation.human_attribute_name(:responsible_admin), :checked],
             ["user", I18n.t("activerecord.attributes.observation.user"), :checked],
             ["modified_user", Observation.human_attribute_name(:modified_user), :checked],
             ["modified_user_language", I18n.t("active_admin.observations_page.modified_user_language"), :checked],
@@ -474,11 +471,6 @@ ActiveAdmin.register Observation do
     visibility = {input_html: {disabled: !allow_override}}
 
     f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs I18n.t("active_admin.observations_page.management") do
-      f.input :responsible_admin, **visibility,
-        as: :select,
-        collection: User.joins(:user_permission).where(user_permissions: {user_role: :admin})
-    end
     f.inputs I18n.t("observations.info") do
       f.input :id, input_html: {disabled: true}
     end

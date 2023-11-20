@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -554,7 +554,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
     t.boolean "hidden", default: false, null: false
     t.text "admin_comment"
     t.text "monitor_comment"
-    t.integer "responsible_admin_id"
     t.datetime "deleted_at", precision: nil
     t.index ["country_id"], name: "index_observations_on_country_id"
     t.index ["created_at"], name: "index_observations_on_created_at"
@@ -570,7 +569,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
     t.index ["observation_type"], name: "index_observations_on_observation_type"
     t.index ["operator_id"], name: "index_observations_on_operator_id"
     t.index ["publication_date"], name: "index_observations_on_publication_date"
-    t.index ["responsible_admin_id"], name: "index_observations_on_responsible_admin_id"
     t.index ["severity_id"], name: "index_observations_on_severity_id"
     t.index ["updated_at"], name: "index_observations_on_updated_at"
     t.index ["user_id"], name: "index_observations_on_user_id"
@@ -625,7 +623,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
     t.string "data_phone"
     t.string "organization_type"
     t.boolean "public_info", default: false, null: false
-    t.integer "responsible_user_id"
     t.integer "responsible_admin_id"
     t.index ["is_active"], name: "index_observers_on_is_active"
   end
@@ -742,7 +739,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
   create_table "operators", id: :serial, force: :cascade do |t|
     t.string "operator_type"
     t.integer "country_id"
-    t.string "concession"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "is_active", default: true, null: false
@@ -752,7 +748,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
     t.string "address"
     t.string "website"
     t.boolean "approved", default: true, null: false
-    t.string "email"
     t.integer "holding_id"
     t.integer "country_doc_rank"
     t.integer "country_operators"
@@ -1072,8 +1067,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "name"
-    t.string "institution"
-    t.string "web_url"
     t.boolean "is_active", default: true, null: false
     t.datetime "deactivated_at", precision: nil
     t.integer "permissions_request"
@@ -1153,7 +1146,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_104142) do
   add_foreign_key "observer_managers", "observers", on_delete: :cascade
   add_foreign_key "observer_managers", "users", on_delete: :cascade
   add_foreign_key "observers", "users", column: "responsible_admin_id", on_delete: :nullify
-  add_foreign_key "observers", "users", column: "responsible_user_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
   add_foreign_key "operator_document_histories", "required_operator_documents", on_delete: :cascade

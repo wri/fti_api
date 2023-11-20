@@ -17,7 +17,6 @@
 #  data_phone           :string
 #  organization_type    :string
 #  public_info          :boolean          default(FALSE), not null
-#  responsible_user_id  :integer
 #  responsible_admin_id :integer
 #  name                 :string
 #  organization         :string

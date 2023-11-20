@@ -9,8 +9,8 @@ ActiveAdmin.register Operator, as: "Producer" do
   config.sort_order = "created_at_desc"
 
   actions :all
-  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
-    :logo, :delete_logo, :email, fmu_ids: []
+  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :is_active,
+    :logo, :delete_logo, fmu_ids: []
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -61,8 +61,6 @@ ActiveAdmin.register Operator, as: "Producer" do
     column :fa_id
     column :name
     column :details
-    column :email
-    column :concession
     column :score_absolute do |operator|
       ("%.2f" % operator.score_operator_observation&.score).to_s
     rescue
@@ -127,7 +125,6 @@ ActiveAdmin.register Operator, as: "Producer" do
   filter :id,
     as: :select, label: -> { I18n.t("activerecord.attributes.operator.name") },
     collection: -> { Operator.order(:name).pluck(:name, :id) }
-  filter :concession, as: :select
   filter :fa_id_present, as: :boolean, label: proc { I18n.t("active_admin.operator_page.with_fa_uuid") }
   filter :fmus_id_null, as: :boolean, label: proc { I18n.t("active_admin.operator_page.fmus_id_null") }
 
@@ -207,14 +204,12 @@ ActiveAdmin.register Operator, as: "Producer" do
       f.input :name
       f.input :details
       f.input :holding, as: :select
-      f.input :email
       f.input :fa_id, as: :string, label: I18n.t("active_admin.operator_page.with_fa_uuid")
       f.input :operator_type, as: :select,
         collection: ["Logging company", "Artisanal", "Community forest", "Estate",
           "Industrial agriculture", "Mining company",
           "Sawmill", "Other", "Unknown"]
       f.input :country, input_html: {disabled: edit}
-      f.input :concession
 
       if f.object.logo.present?
         f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
@@ -243,12 +238,10 @@ ActiveAdmin.register Operator, as: "Producer" do
       row :holding
       row :name
       row :slug
-      row :email
       row :operator_type
       row :fa_id
       row :details
       row :country
-      row :concession
       row :logo do |o|
         link_to o.logo&.identifier, o.logo&.url if o.logo&.url
       end

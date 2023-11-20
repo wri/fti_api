@@ -30,10 +30,8 @@ module V1
         expect(parsed_attributes).to eq({
           name: "Test user",
           email: user.email,
-          institution: nil,
           "is-active": true,
           "deactivated-at": nil,
-          "web-url": nil,
           locale: nil,
           "permissions-request": nil,
           "permissions-accepted": nil

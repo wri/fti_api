@@ -19,7 +19,6 @@
 #  data_phone           :string
 #  organization_type    :string
 #  public_info          :boolean          default(FALSE), not null
-#  responsible_user_id  :integer
 #  responsible_admin_id :integer
 #  name                 :string
 #  organization         :string
@@ -48,7 +47,6 @@ class Observer < ApplicationRecord
   has_many :users, inverse_of: :observer
   has_and_belongs_to_many :managers, join_table: "observer_managers", class_name: "User", dependent: :destroy
 
-  belongs_to :responsible_user, class_name: "User", optional: true
   belongs_to :responsible_admin, class_name: "User", optional: true
 
   EMAIL_VALIDATOR = /\A([\w+-].?)+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -62,8 +60,6 @@ class Observer < ApplicationRecord
 
   validates :information_email, format: {with: EMAIL_VALIDATOR, if: :information_email?}
   validates :data_email, format: {with: EMAIL_VALIDATOR, if: :data_email?}
-
-  validate :valid_responsible_user
 
   before_create :set_responsible_admin
 
@@ -103,14 +99,5 @@ class Observer < ApplicationRecord
     return if responsible_admin.present?
 
     self.responsible_admin = User.where(email: ENV["RESPONSIBLE_EMAIL"].downcase).first
-  end
-
-  private
-
-  def valid_responsible_user
-    return if responsible_user.blank?
-    return if responsible_user.observer_id == id
-
-    errors.add(:responsible_user, "The user must be an observer for this organizations")
   end
 end

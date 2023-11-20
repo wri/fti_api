@@ -5,11 +5,11 @@ module V1
     include CacheableByLocale
 
     caching
-    attributes :name, :slug, :approved, :operator_type, :concession, :is_active, :logo,
+    attributes :name, :slug, :approved, :operator_type, :is_active, :logo,
       :details, :percentage_valid_documents_fmu, :percentage_valid_documents_country,
       :percentage_valid_documents_all, :obs_per_visit, :score,
       :website, :address, :fa_id, :country_doc_rank, :country_operators,
-      :delete_logo, :email
+      :delete_logo
 
     has_one :country
     has_many :fmus

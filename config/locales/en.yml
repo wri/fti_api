@@ -852,7 +852,6 @@ en:
         publication_date: Publication date  #g
         pv: Pv  #g
         relevant_operators: Relevant operators  #g
-        responsible_admin: :activerecord.models.responsible_admin  #g
         severity: :activerecord.models.severity  #g
         species: Species  #g
         species_observations: Species observations  #g
@@ -968,7 +967,6 @@ en:
         organization_type: Organization type  #g
         public_info: Public info  #g
         responsible_admin: :activerecord.models.responsible_admin  #g
-        responsible_user: :activerecord.models.responsible_user  #g
         translations: Translations  #g
         users: Users  #g
         versions: Versions  #g
@@ -992,12 +990,10 @@ en:
         all_observations: All observations  #g
         all_operator_documents: All operator documents  #g
         approved: Approved  #g
-        concession: Concession  #g
         country: :activerecord.models.country  #g
         country_doc_rank: Country doc rank  #g
         country_operators: Country operators  #g
         details: 'Details'
-        email: Email  #g
         fmu_operators: Fmu operators  #g
         fmus: Fmus  #g
         holding: :activerecord.models.holding  #g
@@ -1432,7 +1428,6 @@ en:
         email: Email  #g
         encrypted_password: Encrypted password  #g
         holding: :activerecord.models.holding  #g
-        institution: Institution  #g
         is_active: Is active  #g
         last_sign_in_at: Last sign in at  #g
         last_sign_in_ip: Last sign in ip  #g
@@ -1451,7 +1446,6 @@ en:
         reset_password_sent_at: Reset password sent at  #g
         reset_password_token: Reset password token  #g
         user_permission: :activerecord.models.user_permission  #g
-        web_url: Web url  #g
 
       user_permission:
         permissions: Permissions  #g

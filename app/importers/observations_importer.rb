@@ -36,7 +36,7 @@ class ObservationsImporter < FileDataImport::BaseImporter
     permitted_translations: %i[name]
 
   belongs_to Operator,
-    permitted_attributes: %i[approved operator_type concession is_active logo website address delete_logo name details],
+    permitted_attributes: %i[approved operator_type is_active logo website address delete_logo name details],
     use_shared_belongs_to: %i[country],
     can: %i[create]
 end

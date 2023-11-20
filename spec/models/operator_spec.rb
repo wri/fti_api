@@ -5,7 +5,6 @@
 #  id                :integer          not null, primary key
 #  operator_type     :string
 #  country_id        :integer
-#  concession        :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  is_active         :boolean          default(TRUE), not null
@@ -15,7 +14,6 @@
 #  address           :string
 #  website           :string
 #  approved          :boolean          default(TRUE), not null
-#  email             :string
 #  holding_id        :integer
 #  country_doc_rank  :integer
 #  country_operators :integer
