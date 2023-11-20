@@ -5,7 +5,7 @@ ActiveAdmin.register User do
 
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,
-    :institution, :name, :web_url, :is_active,
+    :name, :web_url, :is_active,
     :observer_id, :operator_id, :holding_id, :locale,
     managed_observer_ids: [],
     user_permission_attributes: [:user_role]

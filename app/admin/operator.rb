@@ -10,7 +10,7 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   actions :all
   permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :concession, :is_active,
-    :logo, :delete_logo, :email, fmu_ids: []
+    :logo, :delete_logo, fmu_ids: []
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -61,7 +61,6 @@ ActiveAdmin.register Operator, as: "Producer" do
     column :fa_id
     column :name
     column :details
-    column :email
     column :concession
     column :score_absolute do |operator|
       ("%.2f" % operator.score_operator_observation&.score).to_s
@@ -207,7 +206,6 @@ ActiveAdmin.register Operator, as: "Producer" do
       f.input :name
       f.input :details
       f.input :holding, as: :select
-      f.input :email
       f.input :fa_id, as: :string, label: I18n.t("active_admin.operator_page.with_fa_uuid")
       f.input :operator_type, as: :select,
         collection: ["Logging company", "Artisanal", "Community forest", "Estate",
@@ -243,7 +241,6 @@ ActiveAdmin.register Operator, as: "Producer" do
       row :holding
       row :name
       row :slug
-      row :email
       row :operator_type
       row :fa_id
       row :details

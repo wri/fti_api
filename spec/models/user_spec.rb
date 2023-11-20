@@ -7,7 +7,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  name                   :string
-#  institution            :string
 #  web_url                :string
 #  is_active              :boolean          default(TRUE), not null
 #  deactivated_at         :datetime

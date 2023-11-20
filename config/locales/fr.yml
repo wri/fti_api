@@ -905,7 +905,6 @@ fr:
         country_doc_rank: Classement des documents du pays  #g
         country_operators: Opérateurs nationaux  #g
         details: 'Détails'
-        email: E-mail  #g
         fmu_operators: Opérateurs Fmu  #g
         fmus: Fmus  #g
         holding: :activerecord.models.holding  #g
@@ -1345,7 +1344,6 @@ fr:
         email: E-mail  #g
         encrypted_password: Mot de passe crypté  #g
         holding: :activerecord.models.holding  #g
-        institution: Institution  #g
         is_active: Actif ? #g
         last_sign_in_at: Dernière connexion à  #g
         last_sign_in_ip: IP de la dernière connexion  #g

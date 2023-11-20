@@ -17,7 +17,6 @@
 #  address           :string
 #  website           :string
 #  approved          :boolean          default(TRUE), not null
-#  email             :string
 #  holding_id        :integer
 #  country_doc_rank  :integer
 #  country_operators :integer

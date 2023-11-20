@@ -997,7 +997,6 @@ en:
         country_doc_rank: Country doc rank  #g
         country_operators: Country operators  #g
         details: 'Details'
-        email: Email  #g
         fmu_operators: Fmu operators  #g
         fmus: Fmus  #g
         holding: :activerecord.models.holding  #g
@@ -1432,7 +1431,6 @@ en:
         email: Email  #g
         encrypted_password: Encrypted password  #g
         holding: :activerecord.models.holding  #g
-        institution: Institution  #g
         is_active: Is active  #g
         last_sign_in_at: Last sign in at  #g
         last_sign_in_ip: Last sign in ip  #g
