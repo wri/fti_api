@@ -7,6 +7,7 @@ ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :country_id,
     :institution, :name, :web_url, :is_active,
     :observer_id, :operator_id, :holding_id, :locale,
+    managed_observer_ids: [],
     user_permission_attributes: [:user_role]
 
   filter :operator
@@ -84,13 +85,36 @@ ActiveAdmin.register User do
     actions
   end
 
+  show do
+    attributes_table do
+      row :name
+      row :email
+      row I18n.t("shared.role") do |user|
+        user.user_permission&.user_role
+      end
+      row :holding if resource.holding?
+      row :operator if resource.operator?
+      row :observer if resource.ngo? || resource.ngo_manager?
+      row :managed_observers if resource.ngo? || resource.ngo_manager? || resource.admin?
+      row :is_active
+      row :locale
+      row :country
+      row :web_url
+      row :current_sign_in_at
+      row :updated_at
+      row :created_at
+    end
+  end
+
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
-      f.inputs for: [:user_permission, f.object.user_permission || UserPermission.new] do |p|
+      f.object.build_user_permission if f.object.user_permission.nil?
+      f.semantic_fields_for :user_permission do |p|
         p.input :user_role, as: :select, collection: UserPermission.user_roles.keys, include_blank: false
       end
       f.input :observer
+      f.input :managed_observers
       f.input :operator
       f.input :holding
       f.input :country

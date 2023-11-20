@@ -17,7 +17,8 @@ ActiveAdmin.register Observer, as: "Monitor" do
   end
 
   permit_params :observer_type, :is_active, :logo, :organization_type, :delete_logo,
-    :responsible_user_id, :responsible_admin_id, translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
+    :responsible_user_id, :responsible_admin_id,
+    translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
 
   csv do
     column :is_active

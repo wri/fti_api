@@ -30,7 +30,7 @@ module V1
     has_one :fmu
     has_one :observation_report
 
-    after_create :add_own_observer
+    before_create :set_user
     before_save :set_modified
     before_save :validate_status
 
@@ -67,7 +67,7 @@ module V1
     }
 
     filter :observer_id, apply: ->(records, value, _options) {
-      records.joins(:observers).where(observers: {id: value})
+      records.where(id: records.joins(:observers).where(observers: {id: value}).pluck(:id))
     }
 
     def self.sortable_fields(context)
@@ -111,22 +111,9 @@ module V1
       super - [:hidden, :publication_date]
     end
 
-    # This is called in an after save cause in the before save, there are still no relationships present
-    # meaning that if there are more users, they'll override the current one
-
-    # TODO: Reactivate rubocop and fix the problem
-    # rubocop:disable Lint/RescueException
-    def add_own_observer
-      user = context[:current_user]
-      @model.observers << Observer.find(user.observer_id) if user.observer_id.present?
-      @model.user_id = user.id
-      @model.save
-      # This is added because of the order of the callbacks in JAR
-      @model.update_reports_observers
-    rescue => e
-      Rails.logger.warn "Observation created without user: #{e.inspect}"
+    def set_user
+      @model.user_id = context[:current_user].id
     end
-    # rubocop:enable Lint/RescueException
 
     # Saves the last user who modified the observation
     def set_modified
@@ -151,12 +138,10 @@ module V1
       app = context[:app]
 
       if app == "observations-tool" && user.present?
-        if user.observer_id.present?
-          Observation.own_with_inactive(user.observer_id)
-        elsif user.user_permission.present? && user.user_permission.user_role == "admin"
+        if user.user_permission.present? && user.user_permission.user_role == "admin"
           Observation.all
-        else
-          Observation.active
+        elsif user.all_managed_observer_ids.any?
+          Observation.own_with_inactive(user.all_managed_observer_ids)
         end
       else
         Observation.published

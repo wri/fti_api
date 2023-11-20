@@ -1437,6 +1437,7 @@ en:
         last_sign_in_at: Last sign in at  #g
         last_sign_in_ip: Last sign in ip  #g
         locale: Locale  #g
+        managed_observers: Managed observers  #g
         name: Name  #g
         observation_documents: Observation documents  #g
         observation_reports: Observation reports  #g

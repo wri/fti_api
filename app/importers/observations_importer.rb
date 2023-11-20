@@ -6,6 +6,7 @@ class ObservationsImporter < FileDataImport::BaseImporter
     observation_type publication_date pv is_active location_accuracy
     lat lng fmu_id evidence_type location_information actions_taken
     evidence_on_report validation_status is_physical_place user_id
+    observer_ids
   ].freeze
 
   PERMITTED_TRANSLATES = %i[

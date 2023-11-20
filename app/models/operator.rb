@@ -23,6 +23,7 @@
 #  country_operators :integer
 #  name              :string
 #  details           :string
+#  slug              :string
 #
 
 class Operator < ApplicationRecord

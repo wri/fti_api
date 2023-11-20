@@ -21,6 +21,7 @@
 #  country_operators :integer
 #  name              :string
 #  details           :string
+#  slug              :string
 #
 
 require "rails_helper"

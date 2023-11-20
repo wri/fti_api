@@ -50,3 +50,6 @@ Rails/SkipsModelValidations:
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
+Rails/HasAndBelongsToMany:
+  Enabled: false
+

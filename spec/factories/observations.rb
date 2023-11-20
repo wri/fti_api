@@ -45,6 +45,7 @@ FactoryBot.define do
     species { build_list(:species, 1) }
     user { build(:admin) }
     operator { build(:operator, name: "Operator #{Faker::Lorem.sentence}") }
+    observers { build_list(:observer, 1) }
     observation_type { "operator" }
     is_active { true }
     evidence_type { "Photos" }
@@ -52,6 +53,10 @@ FactoryBot.define do
     location_accuracy { "Estimated location" }
     lng { 12.2222 }
     lat { 12.3333 }
+
+    after(:build) do |observation|
+      observation.observers.each { |observer| observer.translation.name = observer.name }
+    end
   end
 
   factory :gov_observation, class: "Observation" do
@@ -59,6 +64,7 @@ FactoryBot.define do
     country
     governments { build_list(:government, 2) }
     species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
+    observers { build_list(:observer, 1) }
     user { build(:admin) }
     observation_type { "government" }
     validation_status { "Published (no comments)" }
@@ -66,6 +72,10 @@ FactoryBot.define do
     publication_date { DateTime.now.yesterday.to_date }
     lng { 12.2222 }
     lat { 12.3333 }
+
+    after(:build) do |observation|
+      observation.observers.each { |observer| observer.translation.name = observer.name }
+    end
   end
 
   factory :observation, class: "Observation" do

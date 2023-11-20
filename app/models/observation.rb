@@ -131,6 +131,7 @@ class Observation < ApplicationRecord
   validate :evidence_presented_in_the_report
   validate :status_changes, if: -> { user_type.present? }
 
+  validates :observers, presence: true
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
@@ -144,11 +145,13 @@ class Observation < ApplicationRecord
   before_create :set_responsible_admin
 
   after_create :update_operator_scores, if: :is_active?
+  after_create :update_reports_observers
   after_update :update_operator_scores, if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? || saved_change_to_operator_id? || saved_change_to_fmu_id? }
-  after_update :update_reports_observers, if: :saved_change_to_observation_report_id?
 
   after_destroy :update_operator_scores
   after_destroy :update_fmu_geojson
+
+  after_save :update_reports_observers, if: :saved_change_to_observation_report_id?
   after_save :create_history, if: :saved_changes?
 
   after_save :remove_documents, if: -> { evidence_type == "Evidence presented in the report" }
@@ -159,13 +162,13 @@ class Observation < ApplicationRecord
 
   # TODO Check if we can change the joins with a with_translations(I18n.locale)
   scope :active, -> { includes(:translations).where(is_active: true).visible }
-  scope :own_with_inactive, ->(observer) {
+  scope :own_with_inactive, ->(observer_id) {
     joins(
       <<~SQL
         INNER JOIN "observer_observations" ON "observer_observations"."observation_id" = "observations"."id"
         INNER JOIN "observers" as "all_observers" ON "observer_observations"."observer_id" = "all_observers"."id"
       SQL
-    ).where(all_observers: {id: observer})
+    ).where(all_observers: {id: observer_id})
   }
 
   scope :by_category, ->(category_id) { joins(:subcategory).where(subcategories: {category_id: category_id}) }
@@ -201,8 +204,7 @@ class Observation < ApplicationRecord
   def update_reports_observers
     return if observation_report.blank?
 
-    observation_report.observer_ids =
-      observation_report.observations.map(&:observers).map(&:ids).flatten
+    observation_report.update_observers
   end
 
   HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type evidence_type location_accuracy validation_status is_active hidden deleted_at]
@@ -342,7 +344,10 @@ class Observation < ApplicationRecord
   end
 
   def notify_about_creation
-    notify_observers "observation_created" if validation_status == "Created"
+    return unless validation_status == "Created"
+
+    notify_observers "observation_created"
+    notify_observer_managers "observation_created"
   end
 
   def notify_about_changes
@@ -355,22 +360,31 @@ class Observation < ApplicationRecord
   end
 
   def notify_observers(mail_template)
-    observers.each do |observer|
-      observer.users.filter_actives.each do |user|
-        I18n.with_locale(user.locale.presence || I18n.default_locale) do
-          ObservationMailer.send(mail_template, self, user).deliver_later
-        end
-      end
-    end
+    notify_users(
+      User.where(id: observers.joins(:users).distinct.pluck("users.id")),
+      mail_template
+    )
+  end
+
+  def notify_observer_managers(mail_template)
+    notify_users(
+      User.where(id: observers.joins(:managers).distinct.pluck("observer_managers.user_id")),
+      mail_template
+    )
   end
 
   def notify_admins(mail_template)
-    User
-      .where(id: observers.distinct.pluck(:responsible_admin_id)).filter_actives.where.not(email: [nil, ""])
-      .find_each do |responsible_admin|
-        I18n.with_locale(responsible_admin.locale.presence || I18n.default_locale) do
-          ObservationMailer.send(mail_template, self, responsible_admin).deliver_later
-        end
+    notify_users(
+      User.where(id: observers.distinct.pluck(:responsible_admin_id)),
+      mail_template
+    )
+  end
+
+  def notify_users(users, mail_template)
+    users.filter_actives.where.not(email: [nil, ""]).find_each do |user|
+      I18n.with_locale(user.locale.presence || I18n.default_locale) do
+        ObservationMailer.send(mail_template, self, user).deliver_later
       end
+    end
   end
 end
