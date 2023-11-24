@@ -1,6 +1,6 @@
 require "rails_helper"
 
-Rails.application.load_tasks
+Rails.application.load_tasks if Rake::Task.tasks.empty?
 
 describe "notifications_create" do
   after(:each) do
@@ -9,9 +9,14 @@ describe "notifications_create" do
 
   let(:country) { create :country }
   let(:required_operator_document) { create :required_operator_document_country, country: country }
+  let(:holding) { create :holding }
   let(:operator) { create :operator, country: country }
+  let(:operator) { create :operator, country: country, holding: holding }
   let!(:user1) { create :operator_user, country: country, operator: operator }
   let!(:user2) { create :operator_user, country: country, operator: operator }
+  let!(:user3) { create :operator_user, country: country, operator: operator, is_active: false } # not active user
+  let!(:user4) { create :holding_user, country: country, holding: holding }
+  let!(:user5) { create :holding_user, country: country, holding: holding }
   subject { Rake::Task["scheduler:create_notifications"].invoke }
 
   shared_examples "no notifications change" do
@@ -51,7 +56,7 @@ describe "notifications_create" do
       context "when there are no associated notifications" do
         let(:expire_date) { Time.zone.today }
         include_context "with document"
-        it { expect { subject }.to change { Notification.count }.by(2) }
+        it { expect { subject }.to change { Notification.count }.by(4) }
       end
 
       context "when there are associated notifications" do
@@ -91,7 +96,7 @@ describe "notifications_create" do
               operator_document: operator_document, user: user1,
               notification_group: notification_group
           }
-          it { expect { subject }.to change { Notification.count }.by(2) }
+          it { expect { subject }.to change { Notification.count }.by(4) }
 
           context "when the document did not expire" do
             let(:expire_date) { Time.zone.today + 1.year }
@@ -108,7 +113,7 @@ describe "notifications_create" do
       context "when both notification groups' date to expire are smaller than the document's expire date" do
         let(:expire_date) { Time.zone.today }
         include_context "with document"
-        it { expect { subject }.to change { Notification.count }.by(2) } # TODO: update to check if it's the right group
+        it { expect { subject }.to change { Notification.count }.by(4) } # TODO: update to check if it's the right group
 
         context "when there is a notification for the notification group with the biggest days" do
           context "when the notification is active" do
@@ -117,7 +122,7 @@ describe "notifications_create" do
                 user: user1, operator_document: operator_document,
                 notification_group: notification_group_large
             }
-            it { expect { subject }.to change { Notification.count }.by(2) } # TODO
+            it { expect { subject }.to change { Notification.count }.by(4) } # TODO
           end
           context "when the notification is solved" do
             let!(:notification) {
@@ -125,7 +130,7 @@ describe "notifications_create" do
                 user: user1, operator_document: operator_document,
                 notification_group: notification_group_large
             }
-            it { expect { subject }.to change { Notification.count }.by(2) } # TODO
+            it { expect { subject }.to change { Notification.count }.by(4) } # TODO
           end
         end
 
@@ -145,7 +150,7 @@ describe "notifications_create" do
                 user: user1, operator_document: operator_document,
                 notification_group: notification_group
             }
-            it { expect { subject }.to change { Notification.count }.by(2) } # TODO
+            it { expect { subject }.to change { Notification.count }.by(4) } # TODO
           end
         end
       end

@@ -26,10 +26,6 @@ class OperatorMailer < ApplicationMailer
   # 3. List of documents expiring in the next quarter
   # It's sent every quarter to all users of an operator
   def quarterly_newsletter(operator, user)
-    return if operator.users.filter_actives.empty?
-    return if user.nil?
-    raise "User is not eligible to receive this newsletter" unless operator.users.filter_actives.include?(user)
-
     @user = user
     current_score = operator.score_operator_document
     last_score = operator.score_operator_documents.at_date(Time.zone.today - 3.months).order(:date).last
