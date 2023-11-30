@@ -13,7 +13,6 @@ module V1
       :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment
 
     has_many :species
-    has_many :comments
     has_many :observation_documents
     has_many :observers
     has_many :relevant_operators, class_name: "Operator"
