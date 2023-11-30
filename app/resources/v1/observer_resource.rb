@@ -10,7 +10,6 @@ module V1
       :data_email, :data_phone, :organization_type, :delete_logo, :public_info
 
     has_many :countries
-    has_many :users
     has_many :observations
 
     filters :countries, :is_active

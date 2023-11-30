@@ -19,5 +19,22 @@ module V1
     end
 
     filters :is_active, :email, :name
+
+    def fetchable_fields
+      return super if owner? || admin_user?
+      return [:id, :name, :email] if password_reset_action?
+
+      [:id, :name]
+    end
+
+    private
+
+    def password_reset_action?
+      context[:action] == "update" && context[:controller] == "v1/passwords"
+    end
+
+    def owner?
+      context[:current_user].present? && context[:current_user].id == @model.id
+    end
   end
 end

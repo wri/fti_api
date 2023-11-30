@@ -7,7 +7,6 @@ module V1
     attributes :title, :publication_date, :created_at, :updated_at, :attachment
 
     has_many :observers
-    has_one :user
     has_many :observations
 
     after_create :add_observers
@@ -18,6 +17,12 @@ module V1
 
     def add_observers
       @model.update_observers if @model.observations.any?
+    end
+
+    def fetchable_fields
+      return super if observations_tool_user?
+
+      super - [:created_at, :updated_at, :user]
     end
   end
 end

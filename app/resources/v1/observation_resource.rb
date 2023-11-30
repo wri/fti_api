@@ -70,6 +70,12 @@ module V1
       records.where(id: records.joins(:observers).where(observers: {id: value}).pluck(:id))
     }
 
+    def fetchable_fields
+      return super if observations_tool_user?
+
+      super - [:admin_comment, :monitor_comment, :created_at, :updated_at, :user, :modified_user]
+    end
+
     def self.sortable_fields(context)
       super + [:"country.iso", :"severity.level", :"subcategory.name",
         :"operator.name", :"country.name", :"law.written_infraction",
