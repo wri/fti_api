@@ -97,9 +97,6 @@ class Observation < ApplicationRecord
 
   belongs_to :subcategory, inverse_of: :observations, optional: true
 
-  has_many :species_observations, dependent: :destroy
-  has_many :species, through: :species_observations
-
   has_many :governments_observations, dependent: :destroy
   has_many :governments, through: :governments_observations
 

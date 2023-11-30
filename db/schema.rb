@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_30_121925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -943,50 +943,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
     t.text "details"
     t.index ["locale"], name: "index_severity_translations_on_locale"
     t.index ["severity_id"], name: "index_severity_translations_on_severity_id"
-  end
-
-  create_table "species", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.string "species_class"
-    t.string "sub_species"
-    t.string "species_family"
-    t.string "species_kingdom"
-    t.string "scientific_name"
-    t.string "cites_status"
-    t.integer "cites_id"
-    t.integer "iucn_status"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-  end
-
-  create_table "species_countries", id: :serial, force: :cascade do |t|
-    t.integer "country_id"
-    t.integer "species_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["country_id"], name: "index_species_countries_on_country_id"
-    t.index ["species_id"], name: "index_species_countries_on_species_id"
-  end
-
-  create_table "species_observations", id: :serial, force: :cascade do |t|
-    t.integer "observation_id"
-    t.integer "species_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.datetime "deleted_at", precision: nil
-    t.index ["deleted_at"], name: "index_species_observations_on_deleted_at"
-    t.index ["observation_id"], name: "index_species_observations_on_observation_id"
-    t.index ["species_id"], name: "index_species_observations_on_species_id"
-  end
-
-  create_table "species_translations", id: :serial, force: :cascade do |t|
-    t.integer "species_id", null: false
-    t.string "locale", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "common_name"
-    t.index ["locale"], name: "index_species_translations_on_locale"
-    t.index ["species_id"], name: "index_species_translations_on_species_id"
   end
 
   create_table "subcategories", id: :serial, force: :cascade do |t|

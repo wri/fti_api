@@ -206,7 +206,6 @@ fr:
           severities: 'Sévérités'
           laws: 'Lois'
           government_entities: 'Entités gouvernementales'
-          species: 'Espèces'
       private_sector:
         private_sector: 'Secteur privé'
         holdings: 'Holdings'
@@ -540,9 +539,6 @@ fr:
       score_operator_document: Noter le document de l'opérateur  #g
       score_operator_observation: Noter l'observation de l'opérateur  #g
       severity: Gravité  #g
-      species: Espèces  #g
-      species_country: Pays de l'espèce  #g
-      species_observation: Observation des espèces  #g
       subcategory: Sous-catégorie  #g
       tool: Outil  #g
       tutorial: Didacticiel  #g
@@ -759,8 +755,6 @@ fr:
         pv: Pv  #g
         relevant_operators: Opérateurs concernés  #g
         severity: :activerecord.models.severity  #g
-        species: Espèces  #g
-        species_observations: Observations d'espèces  #g
         subcategory: :activerecord.models.subcategory  #g
         translations: Traductions  #g
         user: :activerecord.models.user  #g
@@ -1255,35 +1249,6 @@ fr:
         globalized_model: :activerecord.models.globalized_model  #g
         locale: Lieu  #g
 
-      species:
-        cites_status: Statut Cites  #g
-        countries: Des pays  #g
-        iucn_status: Statut UICN  #g
-        name: Nom  #g
-        observations: Observations  #g
-        scientific_name: Nom scientifique  #g
-        species_class: Classe d'espèces  #g
-        species_countries: Pays des espèces  #g
-        species_family: Famille d'espèces  #g
-        species_kingdom: Royaume des espèces  #g
-        species_observations: Observations d'espèces  #g
-        sub_species: Sous-espèce  #g
-        translations: Traductions  #g
-
-      species/translation:
-        common_name: Nom commun  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-
-      species_country:
-        country: :activerecord.models.country  #g
-        species: :activerecord.models.species  #g
-
-      species_observation:
-        deleted_at: Supprimé à  #g
-        observation: :activerecord.models.observation  #g
-        species: :activerecord.models.species  #g
-
       subcategory:
         category: :activerecord.models.category.one
         laws: Lois  #g
@@ -1661,9 +1626,6 @@ fr:
     type: "Type d'observation"
     info: 'Détails'
     attachments: 'Documentation'
-
-  species:
-    species: 'Species'
 
   operators:
     operators: 'Opérateurs'

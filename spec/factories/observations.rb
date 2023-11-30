@@ -41,7 +41,6 @@ FactoryBot.define do
   factory :observation_1, class: "Observation" do
     severity
     country
-    species { build_list(:species, 1) }
     user { build(:admin) }
     operator { build(:operator, name: "Operator #{Faker::Lorem.sentence}") }
     observers { build_list(:observer, 1) }
@@ -62,7 +61,6 @@ FactoryBot.define do
     severity
     country
     governments { build_list(:government, 2) }
-    species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     observers { build_list(:observer, 1) }
     user { build(:admin) }
     observation_type { "government" }
@@ -87,7 +85,6 @@ FactoryBot.define do
     operator { create(:operator, country: country) }
     observation_type { "operator" }
     observers { build_list(:observer, 1) }
-    species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     is_active { true }
     validation_status { "Published (no comments)" }
     lng { 12.2222 }

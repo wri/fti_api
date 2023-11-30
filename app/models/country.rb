@@ -34,8 +34,6 @@ class Country < ApplicationRecord
   has_many :fmus, inverse_of: :country
   has_many :laws, inverse_of: :country
 
-  has_many :species_countries
-  has_many :species, through: :species_countries
   has_many :required_operator_documents
   has_many :required_gov_documents
   has_many :gov_documents

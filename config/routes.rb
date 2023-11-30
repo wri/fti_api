@@ -71,7 +71,6 @@ Rails.application.routes.draw do
       jsonapi_resources :sawmills do; end
       jsonapi_resources :score_operator_documents, only: [:index] do; end
       jsonapi_resources :severities, only: [:index, :show] do; end
-      jsonapi_resources :species, only: [:index, :show] do; end
       jsonapi_resources :subcategories, only: [:index, :show] do; end
       jsonapi_resources :tools, only: [:index, :show] do; end
       jsonapi_resources :tutorials, only: [:index, :show] do; end

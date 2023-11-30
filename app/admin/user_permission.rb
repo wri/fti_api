@@ -8,7 +8,6 @@ ActiveAdmin.register UserPermission do
                     [fmu: [manage: {}, read: {}],
                      law: [manage: {}, read: {}],
                      user: [manage: {}, read: {}],
-                     species: [manage: {}, read: {}],
                      category: [manage: {}, read: {}],
                      observer: [manage: {}, read: {}],
                      operator: [manage: {}, read: {}],

@@ -46,7 +46,6 @@ namespace :translations do
       RequiredOperatorDocument,
       RequiredOperatorDocumentGroup,
       Severity,
-      Species,
       Subcategory,
       Tool,
       Tutorial

@@ -42,7 +42,6 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
                   li { link_to t("active_admin.menu.independent_monitoring.settings.severities"), admin_severities_path }
                   li { link_to t("active_admin.menu.independent_monitoring.settings.laws"), admin_laws_path }
                   li { link_to t("active_admin.menu.independent_monitoring.settings.government_entities"), admin_governments_path }
-                  li { link_to t("active_admin.menu.independent_monitoring.settings.species"), admin_species_index_path }
                 end
               end
             end

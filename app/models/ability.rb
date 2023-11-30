@@ -34,7 +34,7 @@ class Ability
       end
     end
 
-    can :read, [Country, Fmu, Category, Subcategory, Law, Species,
+    can :read, [Country, Fmu, Category, Subcategory, Law,
       OperatorDocument, OperatorDocumentHistory, RequiredOperatorDocument,
       RequiredOperatorDocumentGroup, ObservationReport, ObservationDocument,
       Partner, OperatorDocumentAnnex, Sawmill, Faq, Tutorial, HowTo, Tool,

@@ -17,41 +17,6 @@ namespace :import do
     puts "Categories loaded"
   end
 
-  desc "Loads species data from a csv file"
-  task species: :environment do
-    filename = File.expand_path(File.join(Rails.root, "db", "files", "cites_listings.csv"))
-    puts "* Loading Species... *"
-    Species.transaction do
-      batch, batch_size = [], 2_000
-      country_lookup = Country.pluck(:name, :id).to_h
-      CSV.foreach(filename, col_sep: ";", row_sep: :auto, headers: true, encoding: "UTF-8") do |row|
-        data_row = row.to_h
-
-        country_names = data_row["countries"].split(",") if data_row["countries"].present?
-        country_ids = country_names.map { |c| country_lookup[c] } if country_names.present?
-
-        data_species = {}
-        data_species[:cites_id] = data_row["cites_id"]
-        data_species[:species_kingdom] = data_row["species_kingdom"]
-        data_species[:species_class] = data_row["species_class"]
-        data_species[:species_family] = data_row["species_family"]
-        data_species[:name] = data_row["name"]
-        data_species[:sub_species] = data_row["sub_species"]
-        data_species[:scientific_name] = data_row["scientific_name"]
-        data_species[:cites_status] = data_row["cites_status"]
-        data_species[:country_ids] = country_ids if country_ids.present?
-
-        batch << Species.new(data_species) if data_row["name"].present?
-
-        if batch_size <= batch.size
-          Species.import batch
-          batch = []
-        end
-      end
-    end
-    puts "Species loaded"
-  end
-
   desc "Import Generic Operator Documents"
   task generic_operator_documents: :environment do
     filename = File.expand_path(File.join(Rails.root, "db", "files", "generic operator documents.csv"))

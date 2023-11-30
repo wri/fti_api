@@ -196,7 +196,6 @@ en:
           severities: 'Severities'
           laws: 'Laws'
           government_entities: 'Government entities'
-          species: 'Species'
       private_sector:
         private_sector: 'Private sector'
         holdings: 'Holdings'
@@ -531,10 +530,6 @@ en:
       score_operator_observation: Score operator observation  #g
       severity: Severity  #g
       severity/translation: Severity/translation  #g
-      species: Species  #g
-      species/translation: Species/translation  #g
-      species_country: Species country  #g
-      species_observation: Species observation  #g
       subcategory: Subcategory  #g
       subcategory/translation: Subcategory/translation  #g
       tool: Tool  #g
@@ -626,8 +621,6 @@ en:
         region_iso: Region iso  #g
         required_gov_documents: Required gov documents  #g
         required_operator_documents: Required operator documents  #g
-        species: Species  #g
-        species_countries: Species countries  #g
         translations: Translations  #g
         users: Users  #g
 
@@ -853,8 +846,6 @@ en:
         pv: Pv  #g
         relevant_operators: Relevant operators  #g
         severity: :activerecord.models.severity  #g
-        species: Species  #g
-        species_observations: Species observations  #g
         subcategory: :activerecord.models.subcategory  #g
         translations: Translations  #g
         user: :activerecord.models.user  #g
@@ -1347,35 +1338,6 @@ en:
         globalized_model: :activerecord.models.globalized_model  #g
         locale: Locale  #g
 
-      species:
-        cites_status: Cites status  #g
-        countries: Countries  #g
-        iucn_status: Iucn status  #g
-        name: Name  #g
-        observations: Observations  #g
-        scientific_name: Scientific name  #g
-        species_class: Species class  #g
-        species_countries: Species countries  #g
-        species_family: Species family  #g
-        species_kingdom: Species kingdom  #g
-        species_observations: Species observations  #g
-        sub_species: Sub species  #g
-        translations: Translations  #g
-
-      species/translation:
-        common_name: Common name  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-
-      species_country:
-        country: :activerecord.models.country  #g
-        species: :activerecord.models.species  #g
-
-      species_observation:
-        deleted_at: Deleted at  #g
-        observation: :activerecord.models.observation  #g
-        species: :activerecord.models.species  #g
-
       subcategory:
         category: :activerecord.models.category.one
         laws: Laws  #g
@@ -1744,7 +1706,6 @@ en:
     admin: 'Administration'
     countries: 'Countries'
     observations: 'Observations'
-    species: 'Species'
     administration: 'Admin'
     operators: 'Operators'
     observers: 'Monitors'
@@ -1769,9 +1730,6 @@ en:
     types: 'Observation type'
     info: 'Details'
     attachments: 'Documentation'
-
-  species:
-    species: 'Species'
 
   operators:
     operators: 'Operators'
