@@ -34,12 +34,6 @@ class Species < ApplicationRecord
 
   default_scope { includes(:translations) }
 
-  class << self
-    def fetch_all(options)
-      includes(:countries)
-    end
-  end
-
   def cache_key
     super + "-" + Globalize.locale.to_s
   end

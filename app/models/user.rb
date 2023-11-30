@@ -78,12 +78,6 @@ class User < ApplicationRecord
   scope :inactive, -> { where(is_active: false) }
   scope :with_user_role, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
-  class << self
-    def fetch_all(options)
-      includes(:user_permission, :country)
-    end
-  end
-
   def is_government(country_id)
     self&.user_permission&.user_role == "government" && self.country_id == country_id
   end
