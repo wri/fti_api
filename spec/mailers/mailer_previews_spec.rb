@@ -29,7 +29,7 @@ describe "Mail Previews", type: :request do
     )
   end
 
-  ActionMailer::Preview.all.each do |preview|
+  ActionMailer::Preview.all.each do |preview| # rubocop:disable Rails/FindEach
     next if preview.emails.empty?
 
     describe preview.preview_name do

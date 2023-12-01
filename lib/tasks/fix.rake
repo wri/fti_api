@@ -352,7 +352,7 @@ namespace :fix do
       end
     end
 
-    puts "TOTAL COUNT #{DocumentFile.all.count}"
+    puts "TOTAL COUNT #{DocumentFile.count}"
     puts "NO OPERATORS #{count_no_operator}"
     puts "NO RELATION #{count_no_relation}"
     puts "WRONG NAME #{count_wrong_name}"

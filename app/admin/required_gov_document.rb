@@ -14,7 +14,6 @@ ActiveAdmin.register RequiredGovDocument do
 
   filter :required_gov_document_group, collection: -> {
     RequiredGovDocumentGroup
-      .all
       .left_joins(:parent)
       .order(Arel.sql("coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)"))
   }
@@ -60,7 +59,6 @@ ActiveAdmin.register RequiredGovDocument do
     f.inputs "Required Gov Document Details" do
       editing = !object.new_record?
       f.input :required_gov_document_group, collection: RequiredGovDocumentGroup
-        .all
         .left_joins(:parent)
         .order(Arel.sql("coalesce(parents_required_gov_document_groups.position, required_gov_document_groups.position)"))
       f.input :country, input_html: {disabled: editing}

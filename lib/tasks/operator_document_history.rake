@@ -2,7 +2,7 @@ namespace :operator_documents_histories do
   desc "Checks if current ODHs status match with current OD status"
   task check_sync: :environment do
     unsync_docs = {}
-    Operator.all.each do |opt|
+    Operator.find_each do |opt|
       docs = []
       odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Time.zone.today)
       odhs.each do |odh|
@@ -32,7 +32,7 @@ namespace :operator_documents_histories do
 
   desc "Creates new ODHs for those unsync"
   task resync: :environment do
-    Operator.all.each do |opt|
+    Operator.find_each do |opt|
       odhs = OperatorDocumentHistory.from_operator_at_date(opt.id, Time.zone.today)
       odhs.each do |odh|
         od = odh.operator_document

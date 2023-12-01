@@ -18,7 +18,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
     as: :select,
     multiple: true,
     label: -> { I18n.t("activerecord.models.observer") },
-    collection: -> { Observer.where(id: ObservationReportStatistic.all.select(:observer_id).distinct).order(:name) }
+    collection: -> { Observer.where(id: ObservationReportStatistic.select(:observer_id).distinct).order(:name) }
   filter :date
 
   dependent_filters do

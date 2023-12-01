@@ -43,7 +43,7 @@ module V1
 
       OperatorDocumentHistory.from_operator_at_date(operator, date).non_signature
     rescue
-      return OperatorDocumentHistory.where("true = false") unless operator && date
+      OperatorDocumentHistory.where("true = false") unless operator && date
     end
   end
 end
