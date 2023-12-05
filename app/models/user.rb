@@ -67,9 +67,13 @@ class User < ApplicationRecord
     length: {within: 8..20},
     on: :create
   validates :password_confirmation, presence: true, on: :create
-  validate :user_integrity
+  validates :user_permission, presence: true
+  validates :operator, presence: true, if: -> { user_permission&.operator? }
+  validates :observer, presence: true, if: -> { user_permission&.ngo? || user_permission&.ngo_manager? }
+  validates :holding, presence: true, if: -> { user_permission&.holding? }
 
   before_validation :create_from_request, on: :create
+  before_validation :clear_unrelated_relations
   after_update :notify_user, if: -> { is_active && saved_change_to_is_active? }
 
   include Activable
@@ -156,6 +160,14 @@ class User < ApplicationRecord
     self.permissions_request = nil
   end
 
+  def clear_unrelated_relations
+    return if user_permission.blank?
+
+    self.operator = nil unless user_permission.operator?
+    self.observer = nil unless user_permission.user_role.starts_with?("ngo")
+    self.holding = nil unless user_permission.holding?
+  end
+
   def generate_reset_token(user)
     token = SecureRandom.uuid
     user.update(reset_password_token: token, reset_password_sent_at: DateTime.now)
@@ -169,31 +181,6 @@ class User < ApplicationRecord
     return "" if index.nil? || index.to_i.zero?
 
     email[0, index.to_i]
-  end
-
-  def user_integrity
-    if user_permission.blank?
-      errors.add(:user_permission, "You must choose a user permission")
-      return
-    end
-
-    case user_permission.user_role
-    when "operator"
-      if operator_id.blank? || observer_id.present? || holding_id.present?
-        errors.add(:operator_id, "User of type Operator must have an operator and no observer or holding")
-      end
-    when "ngo", "ngo_manager"
-      if operator_id.present? || observer_id.blank? || holding_id.present?
-        errors.add(:observer_id, "User of type NGO must have an observer and no operator or holding")
-      end
-    when "holding"
-      if holding_id.blank? || observer_id.present? || operator_id.present?
-        errors.add(:holding_id, "User of type Holding must have a holding and no operator or observer")
-      end
-    else
-      errors.add(:operator_id, "Cannot have an Operator") if operator_id.present?
-      errors.add(:observer_id, "Cannot have an Observer") if observer_id.present?
-    end
   end
 
   # Sends an email to the user when it is approved
