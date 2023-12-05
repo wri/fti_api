@@ -5,7 +5,7 @@ module V1
     include CacheableByCurrentUser
     caching
 
-    attributes :operator_document_name, :fmu_name, :expiration_date, :operator_document_id, :notification_name
+    attributes :operator_document_name, :operator_id, :operator_name, :fmu_name, :expiration_date, :operator_document_id, :notification_name
 
     def self.records(options = {})
       user = options.dig(:context, :current_user)
@@ -22,6 +22,14 @@ module V1
 
     def fmu_name
       @model.operator_document.fmu&.name
+    end
+
+    def operator_id
+      @model.operator_document.operator_id
+    end
+
+    def operator_name
+      @model.operator_document.operator.name
     end
 
     def expiration_date
