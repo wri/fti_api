@@ -30,6 +30,7 @@ class OperatorMailer < ApplicationMailer
     current_score = operator.score_operator_document
     last_score = operator.score_operator_documents.at_date(Time.zone.today - 3.months).order(:date).last
     @expiring_docs = operator.operator_documents.to_expire(Time.zone.today + 3.months)
+    @operator = operator
 
     @score = begin
       NumberHelper.float_to_percentage(current_score.all)
@@ -47,6 +48,6 @@ class OperatorMailer < ApplicationMailer
       @score_variation = NumberHelper.float_to_percentage(current_score.all - last_score.all)
     end
 
-    mail to: user.email, subject: I18n.t("operator_mailer.quarterly_newsletter.subject")
+    mail to: user.email, subject: I18n.t("operator_mailer.quarterly_newsletter.subject", company: operator.name)
   end
 end

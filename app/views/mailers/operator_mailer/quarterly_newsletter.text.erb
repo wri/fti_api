@@ -1,9 +1,9 @@
 <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
 
-<%= t(".paragraph1", score: @score) %>
+<%= t(".paragraph1", company: @operator.name, score: @score) %>
 
 <% if @old_score.present? %>
-<%= t(".paragraph2", old_score_date: localized_date(I18n.locale, @old_score_date), old_score: @old_score, score_variation: @score_variation) %>
+<%= t(".paragraph2", company: @operator.name, old_score_date: localized_date(I18n.locale, @old_score_date), old_score: @old_score, score_variation: @score_variation) %>
 <% end %>
 
 <% if @expiring_docs.any? %>

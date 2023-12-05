@@ -54,9 +54,9 @@ fr:
       paragraph3: "Pour accéder l’observation, veuillez consulter: %{link}"
   operator_mailer:
     quarterly_newsletter:
-      subject: Votre rapport trimestriel sur l’OTP
-      paragraph1: Votre score actuel est de %{score}.
-      paragraph2: Votre dernier score était de %{old_score} le %{old_score_date}. Cela signifie une variation de %{score_variation}.
+      subject: "%{company} rapport trimestriel sur l’OTP"
+      paragraph1: "%{company} score actuel est de %{score}."
+      paragraph2: "%{company} dernier score était de %{old_score} le %{old_score_date}. Cela signifie une variation de %{score_variation}."
       paragraph3: "Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour:"
       paragraph4: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
       doc_expires: "%{document} expire le %{date}"
