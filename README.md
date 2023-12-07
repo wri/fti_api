@@ -77,6 +77,31 @@ docker-compose up
 
     bin/rails s
 
+### Load remote database locally
+
+Project is using [capistrano-db-tasks](https://github.com/sgruhier/capistrano-db-tasks) gem to load remote database locally.
+
+There are also couple rake tasks to help with that:
+
+To download compressed remote database dump to local machine and keep it in `db/dumps` directory:
+
+```
+bin/rails db:download [SERVER=production(default)|staging] [SMALL=1]
+```
+
+To restore local database from the dump file:
+
+```
+bin/rails db:restore_from_file [FILE=db/dumps/example.sql[.gz]]
+```
+FILE is optional, by default it loads latest dump file by modification time.
+
+To restore DB from the server without keeping the downloaded dump file:
+
+```
+bin/rails db:restore_from_server [SERVER=production(default)|staging] [SMALL=1]
+```
+
 ## TEST ##
 
   To run the tests on docker:

@@ -55,9 +55,9 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-
+user = ENV["SSH_USER"]
 server ENV["STAGING_IP"],
-  user: ENV["SSH_USER"],
+  user: user,
   roles: %w[web app db], primary: true
 
 set :ssh_options, {
@@ -67,4 +67,5 @@ set :ssh_options, {
 }
 
 set :branch, ENV.fetch("BRANCH") { "staging" }
-set :deploy_to, "~/fti-api-staging"
+set :deploy_to, "/home/#{user}/fti-api-staging"
+set :rails_env, "staging"
