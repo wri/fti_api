@@ -45,10 +45,11 @@ class User < ApplicationRecord
 
   has_one :api_key, dependent: :destroy
   has_one :user_permission
-  has_many :observations, inverse_of: :user
-  has_many :observation_documents, inverse_of: :user
-  has_many :observation_reports, inverse_of: :user
-  has_many :operator_document_annexes, inverse_of: :user
+  has_many :observations, inverse_of: :user, dependent: :restrict_with_error
+  has_many :modified_observations, inverse_of: :modified_user, class_name: "Observation", dependent: :restrict_with_error
+  has_many :observation_documents, inverse_of: :user, dependent: :restrict_with_error
+  has_many :observation_reports, inverse_of: :user, dependent: :restrict_with_error
+  has_many :operator_document_annexes, inverse_of: :user, dependent: :restrict_with_error
 
   has_and_belongs_to_many :managed_observers, join_table: "observer_managers", class_name: "Observer", dependent: :destroy
 
