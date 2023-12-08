@@ -115,7 +115,7 @@ namespace :import do
           data_row = row.to_h
 
           operator = Operator.where(name: data_row["attributai"]).first
-          Fmu.where("geojson @> '{\"properties\": {\"nom_conces\": \"#{data_row["nom_conces"]}\"}}'").each do |fmu|
+          Fmu.where("geojson @> '{\"properties\": {\"nom_conces\": \"#{data_row["nom_conces"]}\"}}'").find_each do |fmu|
             start_date = Time.zone.at(data_row["date_attr"].to_f / 1000) if data_row["date_attr"].present?
 
             if operator.present? && fmu.present?

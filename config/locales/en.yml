@@ -591,12 +591,6 @@ en:
         locale: Locale  #g
         name: Name  #g
 
-      comment:
-        body: Body  #g
-        commentable: :activerecord.models.commentable  #g
-        commentable_type: Commentable type  #g
-        user: :activerecord.models.user  #g
-
       contributor:
         category: Category  #g
         logo: Logo  #g
@@ -828,7 +822,6 @@ en:
       observation:
         actions_taken: Actions taken  #g
         admin_comment: Admin comment  #g
-        comments: Comments  #g
         country: :activerecord.models.country  #g
         deleted_at: Deleted at  #g
         evidence_on_report: Evidence on report  #g
@@ -1431,7 +1424,6 @@ en:
 
       user:
         api_key: :activerecord.models.api_key  #g
-        comments: Comments  #g
         country: :activerecord.models.country  #g
         current_sign_in_at: Last sign-in on
         current_sign_in_ip: Current sign in ip  #g

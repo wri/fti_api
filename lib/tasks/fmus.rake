@@ -4,7 +4,7 @@ namespace :fmus do
     with_current_but_not_sync = []
     without_current_and_not_sync = []
     # Fmu.unscoped.all.each do |fmu|
-    Fmu.all.each do |fmu|
+    Fmu.find_each do |fmu|
       # has current in fmu_operator
       if fmu.fmu_operator&.operator_id
         unless fmu.fmu_operator&.operator_id == fmu.properties["operator_id"]

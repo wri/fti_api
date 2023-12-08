@@ -28,8 +28,10 @@ class ObservationReport < ApplicationRecord
   has_many :observers, through: :observation_report_observers
   has_many :observations, dependent: :destroy
 
+  skip_callback :commit, :after, :remove_attachment!
   after_destroy :move_attachment_to_private_directory
   after_restore :move_attachment_to_public_directory
+  after_real_destroy :remove_attachment!
 
   scope :bigger_date, ->(date) { where("observation_reports.created_at <= ?", date + 1.day) }
 

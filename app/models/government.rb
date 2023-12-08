@@ -41,16 +41,6 @@ class Government < ApplicationRecord
 
   default_scope { includes(:translations) }
 
-  class << self
-    def fetch_all(options)
-      country_id = options["country"] if options.present? && options["country"].present?
-
-      governments = includes(:country)
-      governments = governments.filter_by_country(country_id) if country_id.present?
-      governments
-    end
-  end
-
   alias_method :to_s, :government_entity
 
   def cache_key

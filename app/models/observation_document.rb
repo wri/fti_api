@@ -25,6 +25,8 @@ class ObservationDocument < ApplicationRecord
   belongs_to :user, inverse_of: :observation_documents, touch: true, optional: true
   belongs_to :observation, inverse_of: :observation_documents, touch: true
 
+  skip_callback :commit, :after, :remove_attachment!
   after_destroy :move_attachment_to_private_directory
   after_restore :move_attachment_to_public_directory
+  after_real_destroy :remove_attachment!
 end

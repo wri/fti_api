@@ -7,8 +7,7 @@ module V1
     attributes :name, :attachment, :created_at, :updated_at
 
     has_one :observation
-    has_one :user
 
-    filters :observation_id, :name, :user_id
+    filters :observation_id, :name
   end
 end

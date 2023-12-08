@@ -48,16 +48,16 @@ module FileDataImport
         raise InvalidImporterError, "Undefined importer #{importer_name}."
       end
 
-      def record(class_name, **options)
-        record_builder.record(class_name, **options)
+      def record(class_name, **)
+        record_builder.record(class_name, **)
       end
 
       def record_builder
         @record_builder ||= RecordBuilder.new
       end
 
-      def belongs_to(class_name, **options)
-        record_builder.belongs_to(class_name, **options)
+      def belongs_to(class_name, **)
+        record_builder.belongs_to(class_name, **)
       end
     end
 

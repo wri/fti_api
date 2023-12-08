@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -91,17 +91,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
     t.index ["category_id"], name: "index_category_translations_on_category_id"
     t.index ["locale"], name: "index_category_translations_on_locale"
     t.index ["name", "category_id"], name: "index_category_translations_on_name_and_category_id"
-  end
-
-  create_table "comments", id: :serial, force: :cascade do |t|
-    t.integer "commentable_id"
-    t.string "commentable_type"
-    t.text "body"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "contributor_translations", id: :serial, force: :cascade do |t|
@@ -1117,7 +1106,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_115001) do
 
   add_foreign_key "annex_documents", "operator_document_annexes", on_delete: :cascade
   add_foreign_key "api_keys", "users"
-  add_foreign_key "comments", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade
   add_foreign_key "country_vpas", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "countries", on_delete: :cascade

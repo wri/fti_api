@@ -45,8 +45,10 @@ class GovDocument < ApplicationRecord
 
   after_update :move_previous_attachment_to_private_directory, if: :saved_change_to_attachment?
 
+  skip_callback :commit, :after, :remove_attachment!
   after_destroy :move_attachment_to_private_directory
   after_restore :move_attachment_to_public_directory
+  after_real_destroy :remove_attachment!
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
   scope :to_expire, ->(date) { where("expire_date < ?", date).where(status: EXPIRABLE_STATUSES) }

@@ -13,7 +13,6 @@ module V1
       :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment
 
     has_many :species
-    has_many :comments
     has_many :observation_documents
     has_many :observers
     has_many :relevant_operators, class_name: "Operator"
@@ -69,6 +68,12 @@ module V1
     filter :observer_id, apply: ->(records, value, _options) {
       records.where(id: records.joins(:observers).where(observers: {id: value}).pluck(:id))
     }
+
+    def fetchable_fields
+      return super if observations_tool_user?
+
+      super - [:admin_comment, :monitor_comment, :created_at, :updated_at, :user, :modified_user]
+    end
 
     def self.sortable_fields(context)
       super + [:"country.iso", :"severity.level", :"subcategory.name",

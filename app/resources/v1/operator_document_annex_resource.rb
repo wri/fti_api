@@ -10,7 +10,6 @@ module V1
       :uploaded_by, :created_at, :updated_at
 
     has_one :operator_document, foreign_key_on: :related
-    has_one :user
 
     filters :status
 

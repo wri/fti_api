@@ -72,10 +72,6 @@ class Observer < ApplicationRecord
   default_scope { includes(:translations) }
 
   class << self
-    def fetch_all(options)
-      includes(:countries, :users)
-    end
-
     def observer_select
       by_name_asc.map { |c| ["#{c.name} (#{c.observer_type})", c.id] }
     end

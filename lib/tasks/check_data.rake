@@ -35,7 +35,7 @@ namespace :check do
   task docs_forest_type_mismatch: :environment do
     mismatch_count = 0
 
-    OperatorDocumentFmu.all.includes(:operator, :required_operator_document).find_each do |od|
+    OperatorDocumentFmu.includes(:operator, :required_operator_document).find_each do |od|
       next if od.fmu.forest_type == "fmu"
 
       fmu = od.fmu
