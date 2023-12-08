@@ -9,7 +9,7 @@
   Start by checking out the project from github
 
 ```
-git clone https://github.com/Vizzuality/fti_api.git
+git clone https://github.com/wri/fti_api.git
 cd fti_api
 ```
 
@@ -50,7 +50,7 @@ docker-compose up
 
 **Just execute the script file in `bin/setup`**
 
-  Depends on OPEN TIMBER PORTAL [repository](https://github.com/Vizzuality/fti_api)
+  Depends on OPEN TIMBER PORTAL [repository](https://github.com/wri/fti_api)
 
 **or install the dependencies manually:**
 
@@ -146,7 +146,7 @@ To regenerate the api documentation run:
 
 ### BEFORE CREATING A PULL REQUEST ###
 
-Please check all of [these points](https://github.com/Vizzuality/fti_api/blob/master/CONTRIBUTING.md).
+Please check all of [these points](https://github.com/wri/fti_api/blob/master/CONTRIBUTING.md).
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b feature/my-new-feature`

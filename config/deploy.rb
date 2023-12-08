@@ -4,7 +4,7 @@
 lock "~> 3.12"
 
 set :application, "OtpAPI"
-set :repo_url, "git@github.com:Vizzuality/fti_api.git"
+set :repo_url, "git@github.com:wri/fti_api.git"
 
 ruby_version = File.read(".ruby-version").strip
 
@@ -42,11 +42,12 @@ set :compressor, :gzip
 namespace :db do
   task :download do
     on roles(:db) do
+      dump_dir = ENV.fetch("DUMP_DIR", "db/dumps/#{fetch(:stage)}")
       remote_db = Database::Remote.new(self)
       $stdout.puts "Downloading remote dump..."
       begin
         remote_db.dump
-        remote_db.download "db/dumps/#{remote_db.output_file}"
+        remote_db.download "#{dump_dir}/#{remote_db.output_file}"
       rescue e
         $stdout.puts "E[#{e.class}]: #{e.message}"
       ensure
