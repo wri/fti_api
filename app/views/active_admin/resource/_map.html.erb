@@ -6,6 +6,8 @@
   .map-wrapper { width: 100%; padding: 16px; }
 </style>
 
+<% show_center_marker = true unless local_assigns.key?(:center_marker) %>
+
 <div class="map-container">
   <div class="map-wrapper">
     <div id="map" class="map"></div>
@@ -20,9 +22,12 @@
     center: <%= center %>,
     zoom: 8
   });
-  const marker1 = new mapboxgl.Marker()
+
+  <% if show_center_marker %>
+  new mapboxgl.Marker()
     .setLngLat(<%= center %>)
     .addTo(map);
+  <% end %>
 
   map.on('load', function() {
     <% if bbox.present? %>
@@ -39,16 +44,14 @@
     <% end %>
 
     <% if geojson.present? %>
-    map.addSource('fmu', {
+    map.addSource('feature', {
       'type': 'geojson',
       'data': <%= raw(geojson.to_json) %>
     });
-    <% end %>
-
     map.addLayer({
-      'id': 'fmu-fill',
+      'id': 'feature-fill',
       'type': 'fill',
-      'source': 'fmu',
+      'source': 'feature',
       'layout': {},
       'paint': {
         'fill-color': '#AAA',
@@ -56,9 +59,9 @@
       }
     });
     map.addLayer({
-      'id': 'fmu-line',
+      'id': 'feature-line',
       'type': 'line',
-      'source': 'fmu',
+      'source': 'feature',
       'layout': {},
       'paint': {
         'line-color': '#000000',
@@ -66,5 +69,6 @@
         'line-width': 4
       }
     });
+    <% end %>
   });
 </script>

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
 
   root to: "home#index"
 
-  post "admin/fmus/preview" => "admin/fmus#preview"
+  namespace :admin do
+    resources :geometry_previews, only: [:create]
+  end
 
   require "sidekiq/web"
 
@@ -82,6 +84,7 @@ Rails.application.routes.draw do
       resources :fmus, only: [:index, :update] do
         get "tiles/:z/:x/:y", to: "fmus#tiles", on: :collection
       end
+      get "protected_areas/tiles/:z/:x/:y", to: "protected_areas#tiles"
 
       resources :imports, only: :create
 

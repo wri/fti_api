@@ -11,19 +11,6 @@ ActiveAdmin.register Fmu do
   config.order_clause
 
   controller do
-    def preview
-      file = params["file"]
-      max_file_size = 200_000
-      response = if file.blank? || file.size > max_file_size
-        {errors: "File must exist and be smaller than #{max_file_size / 1000} KB"}
-      else
-        Fmu.file_upload(file)
-      end
-      respond_to do |format|
-        format.json { render json: response }
-      end
-    end
-
     def scoped_collection
       end_of_association_chain.with_translations(I18n.locale).includes(:country, :operator)
     end
@@ -88,8 +75,13 @@ ActiveAdmin.register Fmu do
       row :certification_fsc_cw
       row :certification_tlv
       row :certification_ls
+      if resource.geojson && resource.centroid.present?
+        row :map do |r|
+          render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
+        end
+      end
       row(:geojson) { |fmu| fmu.geojson.to_json }
-      row(:properties) { |fmu| fmu.geojson&.dig("properties") }
+      row(:properties) { |fmu| fmu.geojson&.dig("properties")&.to_json }
       row :created_at
       row :updated_at
       row :deleted_at
@@ -114,28 +106,47 @@ ActiveAdmin.register Fmu do
 
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs I18n.t("active_admin.shared.fmu_details") do
-      f.input :country, input_html: {disabled: object.persisted?}, required: true
-      f.input :esri_shapefiles_zip, as: :file, input_html: {accept: ".zip"}
-      render partial: "zip_hint"
-      f.input :forest_type, as: :select,
-        collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
-        input_html: {disabled: object.persisted?}
-      f.input :certification_fsc
-      f.input :certification_pefc
-      f.input :certification_olb
-      f.input :certification_pafc
-      f.input :certification_fsc_cw
-      f.input :certification_tlv
-      f.input :certification_ls
-    end
+    columns class: "d-flex" do
+      column max_width: "500px" do
+        f.inputs I18n.t("active_admin.shared.fmu_details") do
+          f.input :country, input_html: {disabled: object.persisted?}, required: true
+          f.input :forest_type, as: :select,
+            collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
+            input_html: {disabled: object.persisted?}
+          f.input :certification_fsc
+          f.input :certification_pefc
+          f.input :certification_olb
+          f.input :certification_pafc
+          f.input :certification_fsc_cw
+          f.input :certification_tlv
+          f.input :certification_ls
+        end
 
-    f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
-      fo.input :operator_id, label: I18n.t("activerecord.attributes.fmu/translation.name"), as: :select,
-        collection: Operator.active.map { |o| [o.name, o.id] },
-        input_html: {disabled: object.persisted?}, required: false
-      fo.input :start_date, input_html: {disabled: object.persisted?}, required: false
-      fo.input :end_date, input_html: {disabled: object.persisted?}
+        f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
+          fo.input :operator_id, label: I18n.t("activerecord.attributes.fmu/translation.name"), as: :select,
+            collection: Operator.active.map { |o| [o.name, o.id] },
+            input_html: {disabled: object.persisted?}, required: false
+          fo.input :start_date, input_html: {disabled: object.persisted?}, required: false
+          fo.input :end_date, input_html: {disabled: object.persisted?}
+        end
+      end
+
+      column class: "flex-1" do
+        f.inputs Fmu.human_attribute_name(:geometry) do
+          f.input :esri_shapefiles_zip, as: :esri_shapefile_zip
+
+          render partial: "upload_geometry_map",
+            locals: {
+              file_input_id: "fmu_esri_shapefiles_zip",
+              geojson: f.resource.geojson,
+              bbox: f.resource.bbox,
+              present: f.resource.geojson.present?,
+              host: Rails.env.development? ? request.base_url : request.base_url + "/api",
+              show_fmus: true,
+              api_key: ENV["API_KEY"]
+            }
+        end
+      end
     end
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
@@ -144,14 +155,5 @@ ActiveAdmin.register Fmu do
       end
     end
     f.actions
-
-    render partial: "form",
-      locals: {
-        geojson: f.resource.geojson,
-        bbox: f.resource.bbox,
-        present: f.resource.geojson.present?,
-        host: Rails.env.development? ? request.base_url : request.base_url + "/api",
-        api_key: ENV["API_KEY"]
-      }
   end
 end

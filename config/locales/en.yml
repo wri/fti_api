@@ -176,6 +176,8 @@ en:
       user_deactivated: 'User deactivated'
       permissions_changed: 'Permissions changed'
       operator_activated: 'Operator activated'
+      new_shape: 'New shape'
+      current_shape: 'Current shape'
     menu:
       dashboard:
         dashboard: 'Dashboard'
@@ -213,6 +215,7 @@ en:
           countries: 'Countries'
           fmus: 'Fmus'
           fmu_allocations: 'Fmu allocations'
+          protected_areas: 'Protected areas'
       government_sector:
         government_sector: 'Government sector'
         required_document_group: 'Required document group'
@@ -425,8 +428,8 @@ en:
       action_label: "%{title} Selected"
       labels:
         destroy: "Delete"
-    fmus:
-      esri_file_upload: "The zip file must contain at least the following files:\\n
+    esri_shapefile_zip_input:
+      hint: "The zip file must contain at least the following files:\\n
       .shp — shape format; the feature geometry itself {content-type: x-gis/x-shapefile}\\n
       .shx — shape index format; a positional index of the feature geometry to allow seeking forwards and backwards quickly {content-type: x-gis/x-shapefile}\\n
       .dbf — attribute format; columnar attributes for each shape, in dBase IV format {content-type: application/octet-stream OR text/plain}\\n
@@ -514,6 +517,7 @@ en:
       operator_document_statistic: Operator document statistic  #g
       paper_trail/version: Paper trail/version  #g
       partner: Partner  #g
+      protected_area: Protected Area  #g
       required_gov_document: Required gov document  #g
       required_gov_document/translation: Required gov document/translation  #g
       required_gov_document_group: Required gov document group  #g
@@ -1194,6 +1198,13 @@ en:
         translations: Translations  #g
         website: Website  #g
         name: Name
+
+      protected_area:
+        country: :activerecord.models.country  #g
+        geojson: Geojson  #g
+        geometry: Geometry  #g
+        name: Name  #g
+        wdpa_pid: WDPA pid  #g
 
       required_gov_document:
         country: :activerecord.models.country  #g

@@ -70,6 +70,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
                 text_node content_tag "a", t("active_admin.menu.private_sector.settings.settings"), class: "-with-children"
                 ul do
                   li { link_to t("active_admin.menu.private_sector.settings.countries"), admin_countries_path }
+                  li { link_to t("active_admin.menu.private_sector.settings.protected_areas"), admin_protected_areas_path }
                   li { link_to t("active_admin.menu.private_sector.settings.fmus"), admin_fmus_path }
                   li { link_to t("active_admin.menu.private_sector.settings.fmu_allocations"), admin_fmu_operators_path }
                 end

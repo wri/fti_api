@@ -1,0 +1,267 @@
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" rel="stylesheet" />
+<style>
+  .map-container { display: flex; justify-content: space-between; align-items: center }
+  .map { position: relative; height: 400px;  top: 0; bottom: 0; width: 100%; }
+  .map-wrapper { width: 100%; padding: 16px; }
+  .hidden { display: none }
+</style>
+
+<div class="map-container">
+  <div class="map-wrapper hidden">
+    <h2><%= I18n.t("active_admin.shared.current_shape") %></h2>
+    <div id="current-map" class="map"></div>
+  </div>
+  <div class="map-wrapper hidden">
+    <h2><%= I18n.t("active_admin.shared.new_shape") %></h2>
+    <div id="new-map" class="map"></div>
+  </div>
+</div>
+
+<script>
+  const showFmus = <%= show_fmus%>;
+  const fmuLayers = showFmus && [
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerCOD',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'COD']
+      ],
+      paint: {
+        'fill-color': '#5ca2d1',
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerCOG',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'COG']
+      ],
+      paint: {
+        'fill-color': '#7B287D',
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      id: 'layerCMR',
+      source: 'fmus',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'CMR']
+      ],
+      paint: {
+        'fill-color': {
+          property: 'fmu_type_label',
+          type: 'categorical',
+          stops: [
+            ['ventes_de_coupe', '#8BC2B5'],
+            ['ufa', '#007A5E'],
+            ['communal', '#00382B']
+          ],
+          default: '#007A5E'
+        },
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerGAB',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'GAB']
+      ],
+      paint: {
+        'fill-color': {
+          property: 'fmu_type_label',
+          type: 'categorical',
+          stops: [
+            ['CPAET', '#e95800'],
+            ['CFAD', '#e9A600']
+          ],
+          default: '#e95800'
+        },
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'fill',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerCAF',
+      filter: [
+        'all',
+        ['==', ['get', 'iso3_fmu'], 'CAF']
+      ],
+      paint: {
+        'fill-color': '#e9D400',
+        'fill-opacity': 0.9
+      }
+    },
+    {
+      type: 'line',
+      'source-layer': 'layer0',
+      source: 'fmus',
+      id: 'layerLine',
+      paint: {
+        'line-color': '#000000',
+        'line-opacity': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          1,
+          0.1
+        ],
+        'line-width': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          2,
+          1
+        ],
+        'line-dasharray': [3, 1]
+      }
+    }
+  ];
+  const inputElement = document.getElementById('<%= file_input_id %>');
+
+  function addGeometryToMap(map, geojson) {
+    map.addSource('feature', {
+      'type': 'geojson',
+      'data': geojson
+    });
+    map.addLayer({
+      'id': 'feature-fill',
+      'type': 'fill',
+      'source': 'feature',
+      'layout': {},
+      'paint': {
+        'fill-color': '#AAA',
+        'fill-opacity': 0.8
+      }
+    });
+    map.addLayer({
+      'id': 'feature-line',
+      'type': 'line',
+      'source': 'feature',
+      'layout': {},
+      'paint': {
+        'line-color': '#000',
+        'line-opacity': 1,
+        'line-width': 4
+      }
+    });
+  }
+
+  function addFMUsToMap(map) {
+    if (!fmuLayers) return;
+
+    map.addSource('fmus', {
+      'type': 'vector',
+      tiles: [`<%= host %>/fmus/tiles/{z}/{x}/{y}`],
+      promoteId: 'id'
+    });
+    fmuLayers.forEach((layer) => {
+      map.addLayer(layer);
+    });
+  }
+
+  function initializeMap(container) {
+    return new mapboxgl.Map({
+      container,
+      style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+      transformRequest: (url, resourceType) => {
+        if (
+          url.startsWith('<%= host %>')
+        ) {
+          return {
+            url,
+            headers: {
+              'Content-Type': 'application/json',
+              'OTP-API-KEY': 'Bearer <%= api_key %>'
+            }
+          };
+        }
+        return null;
+      }
+    });
+  }
+
+  function handleFiles() {
+    setMaxSize(inputElement);
+    if (this.files[0] === undefined) {
+      return;
+    }
+
+    const csrf = document.querySelector('meta[name="csrf-token"]').content;
+    const formData = new FormData();
+
+    formData.append("file", this.files[0], this.files[0].name);
+    $.ajax({
+      type: "POST",
+      url: "/admin/geometry_previews",
+      headers: { 'X-CSRF-Token': csrf },
+      success: function (data) {
+        if(data === null || data.errors !== undefined) {
+          alert("The file you uploaded is erroneous: " + data.errors);
+          $("#new-map").parent().addClass("hidden");
+          return;
+        }
+        $("#new-map").parent().removeClass("hidden");
+        map2 = initializeMap('new-map');
+        map2.on('load', function() {
+          map2.fitBounds(data.bbox, {
+            padding: 50
+          });
+          addGeometryToMap(map2, data.geojson)
+          addFMUsToMap(map2);
+          if (map) map.resize();
+        });
+      },
+      error: function (error) {
+        alert("The file you uploaded is erroneous");
+        $("#new-map").parent().addClass("hidden");
+        console.log("ERROR: " + JSON.stringify(error));
+      },
+      async: true,
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      timeout: 60000
+    });
+  }
+  inputElement.addEventListener("change", handleFiles, false);
+
+  mapboxgl.accessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
+  var map = null;
+  var map2 = null;
+  if (<%= present %>) {
+    $("#current-map").parent().removeClass("hidden");
+    map = initializeMap('current-map');
+    map.on('load', function() {
+      map.fitBounds(<%= bbox || [] %>, {
+        padding: 50
+      });
+      const geojson = <%= raw(geojson.to_json) %>;
+      addFMUsToMap(map);
+      addGeometryToMap(map, geojson);
+    });
+  }
+
+  function setMaxSize(e) {
+    const file = e.files[0];
+    if (file.size > 100000){
+      alert('Shapes cannot be larger than 100KB');
+      e.value = "";
+    }
+  }
+</script>

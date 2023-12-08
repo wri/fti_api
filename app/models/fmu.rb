@@ -27,11 +27,10 @@ class Fmu < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
 
+  include EsriShapefileUpload
   include ValidationHelper
   include Translatable
   translates :name, paranoia: true, touch: true, versioning: :paper_trail
-
-  attr_reader :esri_shapefiles_zip
 
   active_admin_translates :name do
     validates :name, presence: true
@@ -57,7 +56,7 @@ class Fmu < ApplicationRecord
 
   validates :name, presence: true
   validates :forest_type, presence: true
-  validate :geojson_correctness, if: :geojson_changed?
+  validates :geojson, geojson: true, if: :geojson_changed?
 
   after_save :update_geometry, if: :saved_change_to_geojson?
 
@@ -90,44 +89,6 @@ class Fmu < ApplicationRecord
       fmus = fmus.filter_by_free if free
       fmus
     end
-
-    # Returns a vector tile for the X,Y,Z provided
-    def vector_tiles(param_z, param_x, param_y, operator_id)
-      begin
-        x, y, z = Integer(param_x), Integer(param_y), Integer(param_z)
-      rescue ArgumentError, TypeError
-        return nil
-      end
-
-      operator_condition = operator_id.present? ? sanitize_sql(["AND operator_id=?", operator_id]) : ""
-
-      query = <<~SQL
-        SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
-          FROM (
-            SELECT id, geojson -> 'properties' as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}), 4096, 256, true) AS mvtgeometry
-            FROM (
-              SELECT fmus.*, st_transform(geometry, 3857) as the_geom_webmercator
-              FROM fmus
-                LEFT JOIN fmu_operators fo on fo.fmu_id = fmus.id and fo.current = true
-              WHERE fmus.deleted_at IS NULL #{operator_condition}
-            ) as data
-            WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}),4096,0,true) IS NOT NULL
-          ) AS tile;
-      SQL
-
-      tile = ActiveRecord::Base.connection.execute query
-      ActiveRecord::Base.connection.unescape_bytea tile.getvalue(0, 0)
-    end
-  end
-
-  def esri_shapefiles_zip=(esri_shapefiles_zip)
-    FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, index|
-      # takes only the first feature from the Esri shapefile.
-      self.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
-      break
-    end
-
-    @esri_shapefiles_zip = esri_shapefiles_zip
   end
 
   def update_geojson_properties
@@ -161,42 +122,17 @@ class Fmu < ApplicationRecord
     geojson["properties"]
   end
 
-  def bbox
-    query = <<~SQL
-      SELECT st_astext(st_envelope(geometry))
-      FROM fmus
-      where id = #{id}
-    SQL
-    envelope =
-      ActiveRecord::Base.connection.execute(query)[0]["st_astext"][9..-3]
-        .split(/ |,/).map(&:to_f).each_slice(2).to_a
-    [envelope[0], envelope[2]]
+  def centroid
+    RGeo::GeoJSON.decode(geojson["properties"]["centroid"])
   rescue
     nil
   end
 
-  def self.file_upload(esri_shapefiles_zip)
-    PaperTrail.request.disable_model(Fmu)
-    PaperTrail.request.disable_model(Fmu::Translation)
-    tmp_fmu = Fmu.new(name: "Test #{Time.now.to_i}", country_id: Country.first.id)
-    FileDataImport::Parser::Zip.new(esri_shapefiles_zip.path).foreach_with_line do |attributes, _index|
-      tmp_fmu.geojson = attributes[:geojson].slice("type", "geometry").merge("properties" => {})
-      break
-    end
-    tmp_fmu.save(validate: false)
+  def bbox
+    return nil if geometry.nil?
 
-    response = {
-      geojson: tmp_fmu.geojson,
-      bbox: tmp_fmu.bbox
-    }
-    tmp_fmu.really_destroy!
-    PaperTrail.request.enable_model(Fmu)
-    PaperTrail.request.enable_model(Fmu::Translation)
-    response
-  rescue => e
-    PaperTrail.request.enable_model(Fmu)
-    PaperTrail.request.enable_model(Fmu::Translation)
-    {errors: e.message}
+    bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(geometry)
+    [bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y]
   end
 
   def cache_key
@@ -216,39 +152,11 @@ class Fmu < ApplicationRecord
   private
 
   def update_geometry
-    query = <<~SQL
-      update fmus
-        set geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')
-      where fmus.id = :fmu_id
-    SQL
-    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
+    self.class.unscoped.where(id: id).update_all("geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')")
     update_centroid
   end
 
   def update_centroid
-    query = <<~SQL
-      update fmus
-        set geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)
-      where fmus.id = :fmu_id;
-    SQL
-    ActiveRecord::Base.connection.update(Fmu.sanitize_sql_for_assignment([query, fmu_id: id]))
-  end
-
-  def geojson_correctness
-    return if geojson.blank?
-
-    temp_geometry = RGeo::GeoJSON.decode geojson
-    bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(temp_geometry.geometry)
-    validate_bbox bbox
-  rescue RGeo::Error::InvalidGeometry
-    errors.add(:geojson, "Failed linear ring test")
-  rescue => e
-    errors.add(:geojson, "Error: #{e.message}")
-  end
-
-  def validate_bbox(bbox)
-    return if bbox.max_x <= 180 && bbox.min_x >= -180 && bbox.max_y <= 90 && bbox.min_y >= -90
-
-    errors.add(:geojson, "The FMU's bbox is bigger than the globe. Please make sure your projection is 4326")
+    self.class.unscoped.where(id: id).update_all("geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)")
   end
 end
