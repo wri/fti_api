@@ -376,7 +376,7 @@ ActiveAdmin.register Observation do
     column I18n.t("active_admin.menu.independent_monitoring.evidence"), class: "col-evidence" do |o|
       links = []
       o.observation_documents.each do |d|
-        links << link_to(d.name, admin_evidences_path(d.id))
+        links << link_to(d.name, admin_evidence_path(d.id))
       end
       links.reduce(:+)
     end

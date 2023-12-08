@@ -90,7 +90,7 @@ class Observation < ApplicationRecord
   belongs_to :severity, inverse_of: :observations, optional: true
   belongs_to :operator, inverse_of: :observations, optional: true
   belongs_to :user, inverse_of: :observations, optional: true
-  belongs_to :modified_user, class_name: "User", optional: true
+  belongs_to :modified_user, class_name: "User", inverse_of: :modified_observations, optional: true
   belongs_to :fmu, inverse_of: :observations, optional: true
   belongs_to :law, inverse_of: :observations, optional: true
   belongs_to :observation_report, optional: true
