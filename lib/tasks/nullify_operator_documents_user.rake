@@ -5,7 +5,7 @@ namespace :operator_documents do
     # puts od_wit_nil_user.count
     # puts 'Going to nullify #{od_wit_nil_user.count} operator documents user_id because user does not exists'
 
-    OperatorDocument.with_deleted.all.each do |od|
+    OperatorDocument.with_deleted.find_each do |od|
       od.update_columns(user_id: nil) if od.user.nil?
     end
 

@@ -314,12 +314,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-  describe "Class methods" do
-    describe "#fetch_all" do
-      it "return all users" do
-        expect(User.fetch_all(nil).count).to eq(User.all.size)
-      end
-    end
-  end
 end

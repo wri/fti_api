@@ -463,9 +463,6 @@ fr:
       category:
         one: 'Catégorie'
         other: 'Catégories'
-      comment:
-        one: 'Commentaire'
-        other: 'Commentaires'
       contributor:
         one: 'Contributeur'
         other: 'Contributeurs'
@@ -562,10 +559,6 @@ fr:
       category:
         category_type: 'Type de catégorie'
         name: 'Nom'
-
-      comment:
-        commentable_type: 'Type commentable'
-        body: 'Corps'
 
       contributor:
         website: 'site Internet'
@@ -730,7 +723,6 @@ fr:
       observation:
         actions_taken: Les mesures prises  #g
         admin_comment: Commentaire de l'administrateur  #g
-        comments: commentaires  #g
         country: :activerecord.models.country  #g
         deleted_at: Supprimé le #g
         evidence_on_report: Preuve sur le rapport  #g
@@ -1332,7 +1324,6 @@ fr:
 
       user:
         api_key: :activerecord.models.api_key  #g
-        comments: commentaires  #g
         country: :activerecord.models.country  #g
         current_sign_in_at: Dernière connexion à
         current_sign_in_ip: IP de connexion actuelle  #g

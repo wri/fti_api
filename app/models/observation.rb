@@ -109,7 +109,6 @@ class Observation < ApplicationRecord
   has_many :observation_operators, dependent: :destroy
   has_many :relevant_operators, through: :observation_operators, source: :operator
 
-  has_many :comments, as: :commentable, dependent: :destroy
   has_many :observation_documents, dependent: :destroy
 
   accepts_nested_attributes_for :observation_documents, allow_destroy: true

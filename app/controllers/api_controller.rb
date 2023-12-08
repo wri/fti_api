@@ -98,11 +98,11 @@ class APIController < ActionController::API
   end
 
   def api_key_present?
-    !!request.env.fetch("HTTP_OTP_API_KEY", "").scan(/Bearer/).flatten.first
+    !!request.env.fetch("HTTP_OTP_API_KEY", "").scan("Bearer").flatten.first
   end
 
   def auth_present?
-    !!request.env.fetch("HTTP_AUTHORIZATION", "").scan(/Bearer/).flatten.first
+    !!request.env.fetch("HTTP_AUTHORIZATION", "").scan("Bearer").flatten.first
   end
 
   def bad_auth_key

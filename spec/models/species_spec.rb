@@ -39,12 +39,4 @@ RSpec.describe Species, type: :model do
       end
     end
   end
-
-  describe "Class methods" do
-    describe "#fetch_all" do
-      it "returns all species" do
-        expect(Species.fetch_all(nil).count).to eq(Species.all.size)
-      end
-    end
-  end
 end

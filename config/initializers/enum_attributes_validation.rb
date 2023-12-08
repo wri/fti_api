@@ -44,8 +44,8 @@ module EnumAttributesValidation
       end
     end
 
-    def validate_enum_attribute(*attributes)
-      validate_enum_attributes(*attributes)
+    def validate_enum_attribute(*)
+      validate_enum_attributes(*)
     end
   end
 end

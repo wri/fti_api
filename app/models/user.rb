@@ -46,7 +46,6 @@ class User < ApplicationRecord
   has_one :api_key, dependent: :destroy
   has_one :user_permission
   has_many :observations, inverse_of: :user
-  has_many :comments, inverse_of: :user, dependent: :destroy
   has_many :observation_documents, inverse_of: :user
   has_many :observation_reports, inverse_of: :user
   has_many :operator_document_annexes, inverse_of: :user
@@ -78,12 +77,6 @@ class User < ApplicationRecord
   scope :recent, -> { order("users.updated_at DESC") }
   scope :inactive, -> { where(is_active: false) }
   scope :with_user_role, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
-
-  class << self
-    def fetch_all(options)
-      includes(:user_permission, :comments, :country)
-    end
-  end
 
   def is_government(country_id)
     self&.user_permission&.user_role == "government" && self.country_id == country_id
@@ -210,7 +203,7 @@ class User < ApplicationRecord
   end
 
   # Devise ActiveJob integration
-  def send_devise_notification(notification, *args)
-    devise_mailer.send(notification, self, *args).deliver_later
+  def send_devise_notification(notification, *)
+    devise_mailer.send(notification, self, *).deliver_later
   end
 end

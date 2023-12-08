@@ -13,7 +13,6 @@ module V1
 
     has_one :country
     has_many :fmus
-    has_many :users
     has_many :observations
     has_many :sawmills
 

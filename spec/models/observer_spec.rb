@@ -46,12 +46,6 @@ RSpec.describe Observer, type: :model do
       create_list(:observer, 3)
     end
 
-    describe "#fetch_all" do
-      it "fetch all operators" do
-        expect(Observer.fetch_all(nil)).to eq(Observer.includes(:countries, :users))
-      end
-    end
-
     describe "#observer_select" do
       it "return formatted information of observer sorted by name asc" do
         expect(Observer.observer_select).to eql(

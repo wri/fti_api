@@ -112,7 +112,7 @@ ActiveAdmin.register ObservationReport do
     end
     column :observers do |o|
       links = []
-      o.observers.joins(:translations).each do |observer|
+      o.observers.joins(:translations).find_each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
       end
       links.reduce(:+)

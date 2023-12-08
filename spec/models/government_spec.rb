@@ -29,28 +29,4 @@ RSpec.describe Government, type: :model do
       end
     end
   end
-
-  describe "Class methods" do
-    describe "#fetch_all" do
-      before do
-        @country = create(:country)
-        create(:government, country: @country)
-        create(:government)
-      end
-
-      context "when country_ids is not specified" do
-        it "fetch all operators" do
-          expect(Government.fetch_all(nil).count).to eq(Government.all.size)
-        end
-      end
-
-      context "when country is specified" do
-        it "fetch operators filtered by country" do
-          expect(Government.fetch_all({"country" => [@country.id]}).to_a).to eql(
-            Government.where(country_id: @country.id).includes(:country).to_a
-          )
-        end
-      end
-    end
-  end
 end

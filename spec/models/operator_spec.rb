@@ -287,22 +287,6 @@ RSpec.describe Operator, type: :model do
   end
 
   describe "Class methods" do
-    describe "#fetch_all" do
-      context "when country_ids is not specified" do
-        it "fetch all operators" do
-          expect(Operator.fetch_all(nil).count).to eq(Operator.all.size)
-        end
-      end
-
-      context "when country is specified" do
-        it "fetch operators filtered by country" do
-          expect(Operator.fetch_all({"country_ids" => [@country.id]}).to_a).to eql(
-            Operator.where(country_id: @country.id).to_a
-          )
-        end
-      end
-    end
-
     describe "#operator_select" do
       it "select operators ordered asd by name" do
         result = Operator.by_name_asc.map { |c| [c.name, c.id] }
