@@ -9,7 +9,7 @@
   Start by checking out the project from github
 
 ```
-git clone https://github.com/Vizzuality/fti_api.git
+git clone https://github.com/wri/fti_api.git
 cd fti_api
 ```
 
@@ -50,7 +50,7 @@ docker-compose up
 
 **Just execute the script file in `bin/setup`**
 
-  Depends on OPEN TIMBER PORTAL [repository](https://github.com/Vizzuality/fti_api)
+  Depends on OPEN TIMBER PORTAL [repository](https://github.com/wri/fti_api)
 
 **or install the dependencies manually:**
 
@@ -76,6 +76,31 @@ docker-compose up
 ### Run application: ###
 
     bin/rails s
+
+### Load remote database locally
+
+Project is using [capistrano-db-tasks](https://github.com/sgruhier/capistrano-db-tasks) gem to load remote database locally.
+
+There are also couple rake tasks to help with that:
+
+To download compressed remote database dump to local machine and keep it in `db/dumps` directory:
+
+```
+bin/rails db:download [SERVER=production(default)|staging] [SMALL=1]
+```
+
+To restore local database from the dump file:
+
+```
+bin/rails db:restore_from_file [FILE=db/dumps/example.sql[.gz]]
+```
+FILE is optional, by default it loads latest dump file by modification time.
+
+To restore DB from the server without keeping the downloaded dump file:
+
+```
+bin/rails db:restore_from_server [SERVER=production(default)|staging] [SMALL=1]
+```
 
 ## TEST ##
 
@@ -121,7 +146,7 @@ To regenerate the api documentation run:
 
 ### BEFORE CREATING A PULL REQUEST ###
 
-Please check all of [these points](https://github.com/Vizzuality/fti_api/blob/master/CONTRIBUTING.md).
+Please check all of [these points](https://github.com/wri/fti_api/blob/master/CONTRIBUTING.md).
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b feature/my-new-feature`

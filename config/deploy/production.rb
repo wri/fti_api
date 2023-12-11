@@ -55,8 +55,9 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+user = ENV["SSH_USER"]
 server ENV["PRODUCTION_IP"],
-  user: ENV["SSH_USER"],
+  user: user,
   roles: %w[web app db], primary: true
 
 set :ssh_options, {
@@ -66,4 +67,4 @@ set :ssh_options, {
 }
 
 set :branch, "master"
-set :deploy_to, "~/fti-api-production"
+set :deploy_to, "/home/#{user}/fti-api-production"

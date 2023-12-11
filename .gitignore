@@ -49,6 +49,8 @@ erd.png
 
 # Ignore db dumps
 /dumps
+/db/dumps/*
+!/db/dumps/.keep
 
 # Ignore IDE files
 .idea
