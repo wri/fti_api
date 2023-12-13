@@ -30,15 +30,16 @@ namespace :seeds do
     observers = Observer.where(name: monitor_names)
     reports = ObservationReport.joins(:observers).where(observers: observers).distinct
     observations = Observation.published.where(observation_report: reports)
-    observation_operators = observations.pluck(:operator_id).uniq
 
     operator_slugs = %w[
       ifo-interholco cfc sifco lorema siencam
       cib cft mokabi-sa afriwood-industries
-    ].concat(holding_operators).concat(observation_operators).uniq
+    ].concat(holding_operators).uniq
     operators = Operator.where(slug: operator_slugs)
     fmu_operators = FmuOperator.where(operator: operators)
     fmus = Fmu.where(id: fmu_operators.pluck(:fmu_id))
+    observations = observations.where(fmu: [nil, fmus]) # only observations with existing fmu or no fmu
+    observations = observations.where(operator: [nil, operators])
     generate_for_model "Holding", entries: holdings
     generate_for_model "Operator", entries: operators
     generate_for_model "FmuOperator", entries: fmu_operators
@@ -54,8 +55,8 @@ namespace :seeds do
 
     # monitors
     evidences = ObservationDocument.where(observation: observations)
-    generate_for_model "Observer", entries: observers
-    generate_for_model "ObservationReport", entries: reports
+    generate_for_model "Observer", entries: observers, exclude: %w[responsible_admin_id]
+    generate_for_model "ObservationReport", entries: reports, exclude: %w[user_id]
     generate_for_model "Observation", entries: observations, exclude: %w[user_id modified_user_id], anonymize: %w[admin_comment monitor_comment]
     generate_for_model "ObservationDocument", entries: evidences, exclude: %w[user_id]
   end
@@ -93,7 +94,7 @@ namespace :seeds do
 
       key = model_class + "_" + increment.to_s
       output = {key => attrs}
-      model_file << output.to_yaml.gsub(/^---/, "")
+      model_file << output.to_yaml.gsub(/^---/, "").gsub(/^\.\.\./, "")
 
       if translated_attributes.any?
         entry.translations.each do |t|
@@ -104,7 +105,7 @@ namespace :seeds do
           attrs.each { |k, _v| attrs[k] = "Lorem ipsum for #{k}" if anonymize.include?(k) } if anonymize.any?
           translation_key =  "#{key}_#{t.locale}_translation"
           translation_output = {translation_key => attrs}.compact_blank
-          translation_file << translation_output.to_yaml.gsub(/^---/, "")
+          translation_file << translation_output.to_yaml.gsub(/^---/, "").gsub(/^\.\.\./, "")
         end
       end
 

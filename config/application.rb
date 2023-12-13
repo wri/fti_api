@@ -57,6 +57,5 @@ module FtiApi
     end
 
     config.middleware.insert_after Rails::Rack::Logger, Rack::HealthCheck
-    config.active_record.verify_foreign_keys_for_fixtures = false
   end
 end

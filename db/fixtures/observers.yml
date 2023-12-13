@@ -1,11 +1,45 @@
 
 Observer_1:
+  id: 10
+  observer_type: Mandated
+  is_active: true
+  logo: CAGDF.jpg
+  address: 43, rue Nkounkou August, Makélékélé
+  information_name: Lambert Mabiala
+  information_email: lambertmabiala@yahoo.fr
+  data_name: Edouard Kibongui
+  data_email: ekibongui@gmail.com
+  organization_type: NGO
+
+Observer_2:
+  id: 26
+  observer_type: External
+  is_active: true
+  address: Cameroon
+  organization_type: NGO
+
+Observer_3:
+  id: 34
+  observer_type: External
+  is_active: true
+
+Observer_4:
+  id: 25
+  observer_type: External
+  is_active: true
+  organization_type: NGO
+
+Observer_5:
+  id: 38
+  observer_type: External
+  is_active: true
+
+Observer_6:
   id: 3
   observer_type: Mandated
   is_active: true
-  responsible_admin_id: 67
 
-Observer_2:
+Observer_7:
   id: 5
   observer_type: SemiMandated
   is_active: true
@@ -19,22 +53,8 @@ Observer_2:
   data_email: angeline.modjo@gmail.com
   data_phone: 00237 6 76 52 47 09
   organization_type: NGO
-  responsible_admin_id: 100117
 
-Observer_3:
-  id: 10
-  observer_type: Mandated
-  is_active: true
-  logo: CAGDF.jpg
-  address: 43, rue Nkounkou August, Makélékélé
-  information_name: Lambert Mabiala
-  information_email: lambertmabiala@yahoo.fr
-  data_name: Edouard Kibongui
-  data_email: ekibongui@gmail.com
-  organization_type: NGO
-  responsible_admin_id: 67
-
-Observer_4:
+Observer_8:
   id: 16
   observer_type: Mandated
   is_active: true
@@ -47,31 +67,3 @@ Observer_4:
   data_email: skayembeb@gmail.com
   data_phone: "+243 814051144"
   organization_type: NGO
-  responsible_admin_id: 100117
-
-Observer_5:
-  id: 25
-  observer_type: External
-  is_active: true
-  organization_type: NGO
-  responsible_admin_id: 67
-
-Observer_6:
-  id: 26
-  observer_type: External
-  is_active: true
-  address: Cameroon
-  organization_type: NGO
-  responsible_admin_id: 67
-
-Observer_7:
-  id: 34
-  observer_type: External
-  is_active: true
-  responsible_admin_id: 67
-
-Observer_8:
-  id: 38
-  observer_type: External
-  is_active: true
-  responsible_admin_id: 67
