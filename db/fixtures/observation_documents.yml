@@ -1,105 +1,105 @@
 
 ObservationDocument_1:
-  id: 763
-  name: 'Non respect de procédure de paiement de taxe de redevance '
-  attachment: non-respect-de-procedure-de-paiement-de-taxe-de-redevance.pdf
-  observation_id: 1898
-
-ObservationDocument_2:
-  id: 777
-  name: Pas de preuve
-  attachment: pas-de-preuve.pdf
-  observation_id: 1912
-
-ObservationDocument_3:
-  id: 692
-  name: Permis non conformes
-  attachment: permis-non-conformes.pdf
-  observation_id: 1751
-
-ObservationDocument_4:
-  id: 776
-  name: Pas de preuve
-  attachment: pas-de-preuve.pdf
-  observation_id: 1911
-
-ObservationDocument_5:
-  id: 737
-  name: NOTION DE CONTRAT D’ENTREPRISE DE PLANTATION
-  attachment: notion-de-contrat-d-entreprise-de-plantation.jpeg
-  observation_id: 1821
-
-ObservationDocument_6:
-  id: 677
-  name: Déboisement pour plantation de culture vivrière
-  attachment: deboisement-pour-plantation-de-culture-vivriere.pdf
-  observation_id: 1821
-
-ObservationDocument_7:
-  id: 778
-  name: Pas de preuve
-  attachment: pas-de-preuve.pdf
-  observation_id: 1913
-
-ObservationDocument_8:
-  id: 750
-  name: Pas de preuve
-  attachment: pas-de-preuve.pdf
-  observation_id: 1885
-
-ObservationDocument_9:
-  id: 927
-  name: Permis de coupe MU2
-  attachment: permis-de-coupe-mu2.pdf
-  observation_id: 1885
-
-ObservationDocument_10:
-  id: 779
-  name: Pas de preuve
-  attachment: pas-de-preuve.pdf
-  observation_id: 1914
-
-ObservationDocument_11:
-  id: 740
-  name: Bois saisi a Yololia sans marteau de OPJ
-  attachment: bois-saisi-a-yololia-sans-marteau-de-opj.jpeg
-  observation_id: 1739
-
-ObservationDocument_12:
   id: 33
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_13:
+ObservationDocument_2:
   id: 35
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_14:
+ObservationDocument_3:
   id: 36
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_15:
+ObservationDocument_4:
   id: 37
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_16:
-  id: 34
-  name: Photo -Absence du marteau forestier
-  attachment: photo-absence-du-marteau-forestier.JPG
-  observation_id: 287
+ObservationDocument_5:
+  id: 668
+  name: LocalisationEmpietement de la concession CFT par SCIPEC
+  attachment: localisationempietement-de-la-concession-cft-par-scipec.docx
+  observation_id: 1812
 
-ObservationDocument_17:
+ObservationDocument_6:
+  id: 737
+  name: NOTION DE CONTRAT D’ENTREPRISE DE PLANTATION
+  attachment: notion-de-contrat-d-entreprise-de-plantation.jpeg
+  observation_id: 1821
+
+ObservationDocument_7:
+  id: 740
+  name: Bois saisi a Yololia sans marteau de OPJ
+  attachment: bois-saisi-a-yololia-sans-marteau-de-opj.jpeg
+  observation_id: 1739
+
+ObservationDocument_8:
   id: 749
   name: Pas de preuve
   attachment: pas-de-preuve.pdf
   observation_id: 1884
+
+ObservationDocument_9:
+  id: 750
+  name: Pas de preuve
+  attachment: pas-de-preuve.pdf
+  observation_id: 1885
+
+ObservationDocument_10:
+  id: 677
+  name: Déboisement pour plantation de culture vivrière
+  attachment: deboisement-pour-plantation-de-culture-vivriere.pdf
+  observation_id: 1821
+
+ObservationDocument_11:
+  id: 692
+  name: Permis non conformes
+  attachment: permis-non-conformes.pdf
+  observation_id: 1751
+
+ObservationDocument_12:
+  id: 775
+  name: Lettre d’empiétement
+  attachment: lettre-d-empietement.pdf
+  observation_id: 1910
+
+ObservationDocument_13:
+  id: 776
+  name: Pas de preuve
+  attachment: pas-de-preuve.pdf
+  observation_id: 1911
+
+ObservationDocument_14:
+  id: 777
+  name: Pas de preuve
+  attachment: pas-de-preuve.pdf
+  observation_id: 1912
+
+ObservationDocument_15:
+  id: 778
+  name: Pas de preuve
+  attachment: pas-de-preuve.pdf
+  observation_id: 1913
+
+ObservationDocument_16:
+  id: 779
+  name: Pas de preuve
+  attachment: pas-de-preuve.pdf
+  observation_id: 1914
+
+ObservationDocument_17:
+  id: 34
+  name: Photo -Absence du marteau forestier
+  attachment: photo-absence-du-marteau-forestier.JPG
+  observation_id: 287
 
 ObservationDocument_18:
   id: 926
@@ -108,13 +108,43 @@ ObservationDocument_18:
   observation_id: 1884
 
 ObservationDocument_19:
-  id: 668
-  name: LocalisationEmpietement de la concession CFT par SCIPEC
-  attachment: localisationempietement-de-la-concession-cft-par-scipec.docx
-  observation_id: 1812
+  id: 927
+  name: Permis de coupe MU2
+  attachment: permis-de-coupe-mu2.pdf
+  observation_id: 1885
 
 ObservationDocument_20:
-  id: 775
-  name: Lettre d’empiétement
-  attachment: lettre-d-empietement.pdf
-  observation_id: 1910
+  id: 763
+  name: 'Non respect de procédure de paiement de taxe de redevance '
+  attachment: non-respect-de-procedure-de-paiement-de-taxe-de-redevance.pdf
+  observation_id: 1898
+
+ObservationDocument_21:
+  id: 1019
+  name: Extrait de laisser passer délivré par la province
+  attachment: extrait-de-laisser-passer-delivre-par-la-province.pdf
+  observation_id: 2385
+
+ObservationDocument_22:
+  id: 1051
+  name: Autorisation de compensation d'Eyoum page1
+  attachment: autorisation-de-compensation-d-eyoum-page1.jpeg
+  observation_id: 2489
+
+ObservationDocument_23:
+  id: 1052
+  name: Autorisation de compensation d'Eyoum page2
+  attachment: autorisation-de-compensation-d-eyoum-page2.jpeg
+  observation_id: 2489
+
+ObservationDocument_24:
+  id: 1053
+  name: Autorisation de compensation d'Eyoum page4
+  attachment: autorisation-de-compensation-d-eyoum-page4.jpeg
+  observation_id: 2489
+
+ObservationDocument_25:
+  id: 1054
+  name: Autorisation de compensation d'Eyoum page3
+  attachment: autorisation-de-compensation-d-eyoum-page3.jpeg
+  observation_id: 2489

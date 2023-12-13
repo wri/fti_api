@@ -67,7 +67,7 @@ class SeedsTasks
     end
   end
 
-  def generate_for_model(model_class, entries: nil, exclude: [], locale: nil, anonymize: [])
+  def generate_for_model(model_class, entries: nil, exclude: [], locale: [], anonymize: [])
     model = model_class.constantize
     puts "Dumping fixtures for: #{model_class}"
 
@@ -104,12 +104,12 @@ class SeedsTasks
 
       if translated_attributes.any?
         entry.translations.each do |t|
-          next if locale.present? && locale.exclude?(t.locale)
+          next if locale.any? && locale.exclude?(t.locale.to_s)
 
           attrs = t.attributes
           attrs.delete_if { |k, _v| exclude_attributes.include?(k) }
           attrs.each { |k, _v| attrs[k] = "Lorem ipsum for #{k}" if anonymize.include?(k) } if anonymize.any?
-          translation_key =  "#{key}_#{t.locale}_translation"
+          translation_key = "#{key}_#{t.locale}_translation"
           translation_output = {translation_key => attrs}.compact_blank
           translation_file << translation_output.to_yaml.gsub(/^---/, "").gsub(/^\.\.\./, "")
         end

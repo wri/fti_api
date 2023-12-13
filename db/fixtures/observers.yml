@@ -1,45 +1,10 @@
 
 Observer_1:
-  id: 10
-  observer_type: Mandated
-  is_active: true
-  logo: CAGDF.jpg
-  address: 43, rue Nkounkou August, Makélékélé
-  information_name: Lambert Mabiala
-  information_email: lambertmabiala@yahoo.fr
-  data_name: Edouard Kibongui
-  data_email: ekibongui@gmail.com
-  organization_type: NGO
-
-Observer_2:
-  id: 26
-  observer_type: External
-  is_active: true
-  address: Cameroon
-  organization_type: NGO
-
-Observer_3:
-  id: 34
-  observer_type: External
-  is_active: true
-
-Observer_4:
-  id: 25
-  observer_type: External
-  is_active: true
-  organization_type: NGO
-
-Observer_5:
-  id: 38
-  observer_type: External
-  is_active: true
-
-Observer_6:
   id: 3
   observer_type: Mandated
   is_active: true
 
-Observer_7:
+Observer_2:
   id: 5
   observer_type: SemiMandated
   is_active: true
@@ -54,16 +19,52 @@ Observer_7:
   data_phone: 00237 6 76 52 47 09
   organization_type: NGO
 
-Observer_8:
+Observer_3:
+  id: 10
+  observer_type: Mandated
+  is_active: true
+  logo: CAGDF.jpg
+  address: 43, rue Nkounkou August, Makélékélé
+  information_name: Lambert Mabiala
+  information_email: lambertmabiala@yahoo.fr
+  data_name: Edouard Kibongui
+  data_email: ekibongui@gmail.com
+  organization_type: NGO
+
+Observer_4:
   id: 16
   observer_type: Mandated
   is_active: true
   logo: OGF.jpg
-  address: 5, avenue Lukusa, Kinshasa/Gombe, référence Rond Point Forescom
-  information_name: Essylot LUBALA
-  information_email: essylotl@gmail.com
-  information_phone: "+243 99 99 107 95"
+  address: 6, avenue Marinel, Kinshasa/Gombe, référence Immeuble Sofide
+  information_name: Serge Bondo
+  information_email: skayembeb@gmail.com
+  information_phone: "+243 814051144"
   data_name: Serge BONDO
   data_email: skayembeb@gmail.com
   data_phone: "+243 814051144"
   organization_type: NGO
+  public_info: true
+
+Observer_5:
+  id: 25
+  observer_type: External
+  is_active: true
+  organization_type: NGO
+
+Observer_6:
+  id: 26
+  observer_type: External
+  is_active: true
+  address: Cameroon
+  organization_type: NGO
+
+Observer_7:
+  id: 34
+  observer_type: External
+  is_active: true
+
+Observer_8:
+  id: 38
+  observer_type: External
+  is_active: true

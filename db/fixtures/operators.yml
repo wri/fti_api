@@ -26,96 +26,6 @@ Operator_2:
   slug: afriwood-industries
 
 Operator_3:
-  id: 165
-  operator_type: Logging company
-  country_id: 47
-  is_active: true
-  operator_id: COG-unknown-165
-  fa_id: CG/IMP/03B001
-  address: Immeuble Villarecci, Avenue Amilcar Cabral
-  website: http://rougier.fr
-  approved: true
-  country_doc_rank: 5
-  country_operators: 36
-  name: MOKABI SA
-  details: |-
-    Exploitation
-    Transformation
-    Commerce et transport des bois et produit dérivés des bois
-  slug: mokabi-sa
-
-Operator_4:
-  id: 10623
-  operator_type: Logging company
-  country_id: 45
-  is_active: true
-  operator_id: CMR-unknown-623
-  fa_id: CM/UNKNOWN/0187
-  approved: true
-  country_doc_rank: 10
-  country_operators: 137
-  name: SIENCAM
-  slug: siencam
-
-Operator_5:
-  id: 10604
-  operator_type: Logging company
-  country_id: 45
-  is_active: true
-  operator_id: CMR-unknown-604
-  fa_id: CM/UNKNOWN/0195
-  address: 'BP: 89; Yaoundé'
-  approved: true
-  holding_id: 4
-  country_doc_rank: 19
-  country_operators: 137
-  name: SAB
-  details: Société Anonyme
-  slug: sab
-
-Operator_6:
-  id: 10589
-  operator_type: Logging company
-  country_id: 45
-  is_active: true
-  operator_id: CMR-unknown-589
-  fa_id: CM/UNKNOWN/0177
-  address: 'BP. 2064; Douala-Rue Christian Tobie Kuoh Bonanjo-Tel. : 233 42 57 03/
-    233 42 68 92'
-  approved: true
-  holding_id: 4
-  country_doc_rank: 9
-  country_operators: 137
-  name: SEBC
-  details: Exploitation et transformation du bois
-  slug: sebc
-
-Operator_7:
-  id: 10637
-  operator_type: Unknown
-  country_id: 45
-  is_active: true
-  operator_id: CMR-unknown-637
-  fa_id: CM/UNKNOWN/0180
-  country_doc_rank: 137
-  country_operators: 137
-  name: LOREMA
-  slug: lorema
-
-Operator_8:
-  id: 151
-  operator_type: Logging company
-  country_id: 47
-  is_active: true
-  operator_id: COG-unknown-151
-  fa_id: CG/OUE/05B179
-  approved: true
-  country_doc_rank: 4
-  country_operators: 36
-  name: CIB
-  slug: cib
-
-Operator_9:
   id: 161
   operator_type: Logging company
   country_id: 47
@@ -150,7 +60,20 @@ Operator_9:
     of Congo\r\nContact: info@interholco.com\r\n"
   slug: ifo-interholco
 
-Operator_10:
+Operator_4:
+  id: 151
+  operator_type: Logging company
+  country_id: 47
+  is_active: true
+  operator_id: COG-unknown-151
+  fa_id: CG/OUE/05B179
+  approved: true
+  country_doc_rank: 2
+  country_operators: 36
+  name: CIB
+  slug: cib
+
+Operator_5:
   id: 10615
   operator_type: Logging company
   country_id: 45
@@ -162,13 +85,45 @@ Operator_10:
     233 42 68 92'
   approved: true
   holding_id: 4
-  country_doc_rank: 1
+  country_doc_rank: 2
   country_operators: 137
   name: CFC
   details: Exploitation et transformation du bois
   slug: cfc
 
-Operator_11:
+Operator_6:
+  id: 10623
+  operator_type: Logging company
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-623
+  fa_id: CM/UNKNOWN/0187
+  approved: true
+  country_doc_rank: 13
+  country_operators: 137
+  name: SIENCAM
+  slug: siencam
+
+Operator_7:
+  id: 165
+  operator_type: Logging company
+  country_id: 47
+  is_active: true
+  operator_id: COG-unknown-165
+  fa_id: CG/IMP/03B001
+  address: Immeuble Villarecci, Avenue Amilcar Cabral
+  website: http://rougier.fr
+  approved: true
+  country_doc_rank: 6
+  country_operators: 36
+  name: MOKABI SA
+  details: |-
+    Exploitation
+    Transformation
+    Commerce et transport des bois et produit dérivés des bois
+  slug: mokabi-sa
+
+Operator_8:
   id: 197
   operator_type: Logging company
   country_id: 7
@@ -202,3 +157,48 @@ Operator_11:
     \                                   220 861\r\n\r\n                                                                                                   TOTAL
     \                                 402 681\r\n\r\n"
   slug: cft
+
+Operator_9:
+  id: 10589
+  operator_type: Logging company
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-589
+  fa_id: CM/UNKNOWN/0177
+  address: 'BP. 2064; Douala-Rue Christian Tobie Kuoh Bonanjo-Tel. : 233 42 57 03/
+    233 42 68 92'
+  approved: true
+  holding_id: 4
+  country_doc_rank: 9
+  country_operators: 137
+  name: SEBC
+  details: Exploitation et transformation du bois
+  slug: sebc
+
+Operator_10:
+  id: 10604
+  operator_type: Logging company
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-604
+  fa_id: CM/UNKNOWN/0195
+  address: 'BP: 89; Yaoundé'
+  approved: true
+  holding_id: 4
+  country_doc_rank: 18
+  country_operators: 137
+  name: SAB
+  details: Société Anonyme
+  slug: sab
+
+Operator_11:
+  id: 10637
+  operator_type: Unknown
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-637
+  fa_id: CM/UNKNOWN/0180
+  country_doc_rank: 137
+  country_operators: 137
+  name: LOREMA
+  slug: lorema

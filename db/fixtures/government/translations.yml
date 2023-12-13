@@ -3985,3 +3985,101 @@ Government_80_vi_translation:
   locale: vi
   government_entity: Province du Haut-Uélé
   details:
+
+Government_81_fr_translation:
+  id: 563
+  government_id: 83
+  locale: fr
+  government_entity: DGRPT, TSHOPO
+  details: Direction Générale des Recettes de Tshopo
+
+Government_81_en_translation:
+  id: 564
+  government_id: 83
+  locale: en
+  government_entity: DGRPT, TSHOPO
+  details: Direction Générale des Recettes de Tshopo
+
+Government_81_pt_translation:
+  id: 565
+  government_id: 83
+  locale: pt
+  government_entity: DGRPT, TSHOPO
+  details: Direction Générale des Recettes de Tshopo
+
+Government_81_zh-CN_translation:
+  id: 566
+  government_id: 83
+  locale: zh-CN
+  government_entity: DGRPT, TSHOPO
+  details: Direction Générale des Recettes de Tshopo
+
+Government_81_ja_translation:
+  id: 567
+  government_id: 83
+  locale: ja
+  government_entity: DGRPT, TSHOPO
+  details: Direction Générale des Recettes de Tshopo
+
+Government_81_ko_translation:
+  id: 568
+  government_id: 83
+  locale: ko
+  government_entity: DGRPT, TSHOPO
+  details: Direction Générale des Recettes de Tshopo
+
+Government_81_vi_translation:
+  id: 569
+  government_id: 83
+  locale: vi
+  government_entity: DGRPT, TSHOPO
+  details: Direction Générale des Recettes de Tshopo
+
+Government_82_fr_translation:
+  id: 570
+  government_id: 84
+  locale: fr
+  government_entity: Province du Kongo Central
+  details:
+
+Government_82_en_translation:
+  id: 571
+  government_id: 84
+  locale: en
+  government_entity: Province du Kongo Central
+  details:
+
+Government_82_pt_translation:
+  id: 572
+  government_id: 84
+  locale: pt
+  government_entity: Province du Kongo Central
+  details:
+
+Government_82_zh-CN_translation:
+  id: 573
+  government_id: 84
+  locale: zh-CN
+  government_entity: Province du Kongo Central
+  details:
+
+Government_82_ja_translation:
+  id: 574
+  government_id: 84
+  locale: ja
+  government_entity: Province du Kongo Central
+  details:
+
+Government_82_ko_translation:
+  id: 575
+  government_id: 84
+  locale: ko
+  government_entity: Province du Kongo Central
+  details:
+
+Government_82_vi_translation:
+  id: 576
+  government_id: 84
+  locale: vi
+  government_entity: Province du Kongo Central
+  details:

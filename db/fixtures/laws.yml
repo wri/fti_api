@@ -1706,8 +1706,8 @@ Law_107:
   infraction: 'Art.14 Code forestier
 
     '
-  sanctions: |
-    Art. 274 Code Forestier
+  sanctions: |2
+
     Art. 621 Code Pénal
   min_fine: 25000
   max_fine: 100000000
@@ -5075,3 +5075,402 @@ Law_299:
   subcategory_id: 18
   country_id: 188
   currency: CFA
+
+Law_300:
+  id: 431
+  written_infraction: Fausse déclaration en matière de production forestière
+  infraction: Rien à signaler
+  sanctions: Art. 430 de la loi n°006/2020 du 30 juin 2020 portant modification de
+    la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la République Gabonaise
+  min_fine: 0
+  max_fine: 100000000
+  penal_servitude: Emprisonnement de dix ans au plus
+  other_penalties: confiscation des produits saisis, des installations, matériels
+    et tous biens mobiliers ou immobiliers ayant servi, directement ou indirectement,
+    à la commission de l’infraction ainsi que de tous produits provenant de celle‐ci
+  apv: Non finalisé
+  subcategory_id: 14
+  country_id: 53
+  currency: Fcfa
+
+Law_301:
+  id: 432
+  written_infraction: Conditions de rémunération
+  infraction: |
+    Art. 169-191 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail de la République gabonaise, Décret n°127/PR/MTEPS du 23 avril 2010 sur le revenu minimum mensuel
+    Décret n°0016/PR/MTE du 26 février 2007 portant approbation des résultats des commissions paritaires de salaires
+    Convention collective (Art.45 à 54)
+  sanctions: Art. 233 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 500000
+  max_fine: 1000000
+  penal_servitude: Emprisonnement de 2 à 6 mois en cas de récidive
+  other_penalties: 'Amende de 1000000 à 2000000 FCFA en cas de récidive '
+  apv: Non finalisé
+  subcategory_id: 16
+  country_id: 53
+  currency: Fcfa
+
+Law_302:
+  id: 433
+  written_infraction: Procédures de licenciement
+  infraction: Art. 63-75, 81-83, 87, 89-92, 94, 207 de la Loi n°022/2021 du 19 novembre
+    2021, portant Code du Travail de la République gabonaise,       Convention Collective
+    (Art.53)
+  sanctions: Art. 98 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 100000
+  max_fine: 1000000
+  penal_servitude: RAS
+  other_penalties: RAS
+  apv: Non finalisé
+  subcategory_id: 16
+  country_id: 53
+  currency: Fcfa
+
+Law_303:
+  id: 434
+  written_infraction: Conditions de vie, de sécurité, de santé et d'hygiène au travail
+  infraction: |
+    Art. 171, 172, 234-259, 269 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail de la République gabonaise
+    Convention Collective 21.3
+    Décret n° 001863/PR/MTE du 16/12/86 sur les conditions de logement des travailleurs
+    Décret 1494 du 29/12/11 (art 117)
+  sanctions: Art. 233 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 500000
+  max_fine: 1000000
+  penal_servitude: Emprisonnement de 2 à 6 mois en cas de récidive
+  other_penalties: 'Amende de 1000000 à 2000000 FCFA en cas de récidive '
+  apv: Non finalisé
+  subcategory_id: 16
+  country_id: 53
+  currency: Fcfa
+
+Law_304:
+  id: 435
+  written_infraction: Conditions de vie, de sécurité, de santé et d'hygiène au travail
+  infraction: |
+    Art. 171, 172, 234-259, 269 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail de la République gabonaise
+    Convention Collective 21.3
+    Décret n° 001863/PR/MTE du 16/12/86 sur les conditions de logement des travailleurs
+    Décret 1494 du 29/12/11 (art 117)
+  sanctions: Art. 268de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 1000000
+  max_fine: 100000000
+  penal_servitude: Rien à signaler
+  other_penalties: Ces peines sont multipliées jusqu’à quatre fois en cas de récidive
+    ou de non‐exécution de la mise aux normes notifiée par les services compétents.
+  apv: Non finalisé
+  subcategory_id: 16
+  country_id: 53
+  currency: Fcfa
+
+Law_305:
+  id: 436
+  written_infraction: Conditions de vie, de sécurité, de santé et d'hygiène au travail
+  infraction: |
+    Art. 171, 172, 234-259, 269 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail de la République gabonaise
+    Convention Collective 21.3
+    Décret n° 001863/PR/MTE du 16/12/86 sur les conditions de logement des travailleurs
+    Décret 1494 du 29/12/11 (art 117)
+  sanctions: Art.270 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise (En cas d'accident du travail pour cause de manquements
+    graves ou répétés aux règles de sécurité et de santé au travail)
+  min_fine: 2000000
+  max_fine: 20000000
+  penal_servitude: Rien à signaler
+  other_penalties: |-
+    En cas de récidive aux infractions prévues par la présente section, les peines d’amende sont portées au double. Les auteurs peuvent en outre être condamnés à une peine d’emprisonnement de deux mois à un an. [...]
+    [...] En cas de récidive, le tribunal correctionnel peut ordonner la fermeture partielle ou totale, temporaire ou définitive de l’établissement.
+  apv: Non finalisé
+  subcategory_id: 16
+  country_id: 53
+  currency: Fcfa
+
+Law_306:
+  id: 437
+  written_infraction: Conditions des travailleurs mutés
+  infraction: 'Art.171, 187,227-232 de la Loi n°022/2021 du 19 novembre 2021, portant
+    Code du Travail de la République gabonaise                        Convention Collective
+    (Art.53)
+
+    '
+  sanctions: Art. 233 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 500000
+  max_fine: 1000000
+  penal_servitude: Emprisonnement de 2 à 6 mois en cas de récidive
+  other_penalties: Amende de 1000000 à 2000000 FCFA en cas de récidive
+  apv: Non finalisé
+  subcategory_id: 16
+  country_id: 53
+  currency: Fcfa
+
+Law_307:
+  id: 438
+  written_infraction: Paiement de cotisations sociales
+  infraction: Code de sécurité sociale
+  sanctions: Art. 91 Code de Sécurité Sociale
+  min_fine: 10000
+  max_fine: 100000
+  penal_servitude: Emprisonnement de 5 à 30 jours
+  other_penalties: Rien à signaler
+  apv: Non finalisé
+  subcategory_id: 16
+  country_id: 53
+  currency: Fcfa
+
+Law_308:
+  id: 439
+  written_infraction: |-
+    Activités de transformation de bois dommageables à
+    l’environnement
+  infraction: Rien à signaler
+  sanctions: Art. 430 de la loi n°006/2020 du 30 juin 2020 portant modification de
+    la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la République Gabonaise
+  min_fine: 0
+  max_fine: 100000000
+  penal_servitude: Emprisonnement de dix ans au plus
+  other_penalties: |-
+    confiscation des produits saisis, des installations, matériels et tous biens
+    mobiliers ou immobiliers ayant servi, directement ou indirectement, à la commission de
+    l’infraction ainsi que de tous produits provenant de celle‐ci
+  apv: Non finalisé
+  subcategory_id: 17
+  country_id: 53
+  currency: Fcfa
+
+Law_309:
+  id: 440
+  written_infraction: Falsification ou contrefaçon de titre d'exploitation forestière
+  sanctions: Art. 430 de la loi n°006/2020 du 30 juin 2020 portant modification de
+    la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la République Gabonaise
+  min_fine: 0
+  max_fine: 100000000
+  penal_servitude: Emprisonnement de dix ans au plus
+  other_penalties: |-
+    confiscation des produits saisis, des installations, matériels et tous biens
+    mobiliers ou immobiliers ayant servi, directement ou indirectement, à la commission de
+    l’infraction ainsi que de tous produits provenant de celle‐ci
+  apv: Non finalisé
+  subcategory_id: 22
+  country_id: 53
+  currency: Fcfa
+
+Law_310:
+  id: 441
+  written_infraction: falsification ou contrefaçon des marteaux de l'administration
+    des Eaux et Forêts servant aux marques forestières
+  infraction: Art. 127-128 Code Forestier
+  sanctions: Art. 430 de la loi n°006/2020 du 30 juin 2020 portant modification de
+    la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la République Gabonaise
+  min_fine: 0
+  max_fine: 100000000
+  penal_servitude: Emprisonnement de dix  ans au plus
+  other_penalties: |-
+    confiscation des produits saisis, des installations, matériels et tous biens
+    mobiliers ou immobiliers ayant servi, directement ou indirectement, à la commission de
+    l’infraction ainsi que de tous produits provenant de celle‐ci
+  apv: Non finalisé
+  subcategory_id: 32
+  country_id: 53
+  currency: Fcfa
+
+Law_311:
+  id: 442
+  written_infraction: 'falsification ou contrefaçon des marteaux forestiers des particuliers
+    ou de leurs marques régulièrement déposées '
+  infraction: Art. 127-128 Code Forestier
+  sanctions: Art. 430 de la loi n°006/2020 du 30 juin 2020 portant modification de
+    la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la République Gabonaise
+  min_fine: 0
+  max_fine: 100000000
+  penal_servitude: Emprisonnement de dix  ans au plus
+  other_penalties: |-
+    confiscation des produits saisis, des installations, matériels et tous biens
+    mobiliers ou immobiliers ayant servi, directement ou indirectement, à la commission de
+    l’infraction ainsi que de tous produits provenant de celle‐ci
+  apv: Non finalisé
+  subcategory_id: 32
+  country_id: 53
+  currency: Fcfa
+
+Law_312:
+  id: 443
+  written_infraction: Droit au travail
+  infraction: Art. 2 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  sanctions: Rien à signaler
+  min_fine: 0
+  max_fine: 0
+  penal_servitude: RAS
+  other_penalties: RAS
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_313:
+  id: 444
+  written_infraction: Respect des libertés et de la dignité du travailleur
+  infraction: Art. 3 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  sanctions: RAS
+  min_fine: 0
+  max_fine: 0
+  penal_servitude: RAS
+  other_penalties: RAS
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_314:
+  id: 445
+  written_infraction: Interdiction du travail forcé ou obligatoire
+  infraction: Art. 4, 5 de la Loi n°022/2021 du 19 novembre 2021, portant Code du
+    Travail de la République gabonaise
+  sanctions: RAS
+  min_fine: 0
+  max_fine: 0
+  penal_servitude: RAS
+  other_penalties: RAS
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_315:
+  id: 446
+  written_infraction: Harcèlement en milieu professionnel
+  infraction: Art. 6 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise, Art. 257-3 de la loi n°006/2020 du 30 juin 2020 portant
+    modification de la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la
+    République Gabonaise
+  sanctions: Art. 258 de la loi n°006/2020 du 30 juin 2020 portant modification de
+    la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la République Gabonaise
+  min_fine: 0
+  max_fine: 2000000
+  penal_servitude: Emprisonnement de 6 mois au plus
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_316:
+  id: 447
+  written_infraction: Egalité des travailleurs devant la loi
+  infraction: Art. 9 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  sanctions: RAS
+  min_fine: 0
+  max_fine: 0
+  penal_servitude: RAS
+  other_penalties: RAS
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_317:
+  id: 448
+  written_infraction: Egalité de rémunération des travailleurs
+  infraction: Art. 170 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  sanctions: Art. 233 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 500000
+  max_fine: 1000000
+  penal_servitude: Emprisonnement de 2 à 6 mois en cas de récidive
+  other_penalties: 'Amende de 1000000 à 2000000 FCFA en cas de récidive '
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_318:
+  id: 449
+  written_infraction: Protection de la femme en état de maternité
+  infraction: 207-213 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  sanctions: Art. 233 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 500000
+  max_fine: 1000000
+  penal_servitude: Emprisonnement de 2 à 6 mois en cas de récidive
+  other_penalties: 'Amende de 1000000 à 2000000 FCFA en cas de récidive '
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_319:
+  id: 450
+  written_infraction: Protection de l'enfant au travail
+  infraction: Art. 7, 214, 215 de la Loi n°022/2021 du 19 novembre 2021, portant Code
+    du Travail de la République gabonaise
+  sanctions: Art. 233 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 500000
+  max_fine: 1000000
+  penal_servitude: Emprisonnement de 2 à 6 mois en cas de récidive
+  other_penalties: 'Amende de 1000000 à 2000000 FCFA en cas de récidive '
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_320:
+  id: 451
+  written_infraction: Travail des personnes vivant avec un handicap
+  infraction: Art. 216-219 de la Loi n°022/2021 du 19 novembre 2021, portant Code
+    du Travail de la République gabonaise
+  sanctions: Art. 233 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  min_fine: 500000
+  max_fine: 1000000
+  penal_servitude: Emprisonnement de 2 à 6 mois en cas de récidive
+  other_penalties: 'Amende de 1000000 à 2000000 FCFA en cas de récidive '
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_321:
+  id: 452
+  written_infraction: Obligation de repos
+  infraction: Art. 220 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
+    de la République gabonaise
+  sanctions: RAS
+  min_fine: 0
+  max_fine: 0
+  penal_servitude: RAS
+  other_penalties: RAS
+  apv: Non finalisé
+  subcategory_id: 42
+  country_id: 53
+  currency: Fcfa
+
+Law_322:
+  id: 453
+  written_infraction: Exploitation intensive dommageable à l'environnement
+  infraction: "Art. 66 Code Forestier                                                \nDécret
+    n° 689/PR/MEFEPEPN du 24 août 2004 Définissant les normes techniques d'aménagement
+    et de gestion\ndurable des forêts domaniales productives enregistrées  Guide Technique
+    National d'Aménagement Forestier : Chapitre 4, Normes techniques d’exploitation,
+    Règles d’intervention en milieu forestier, Infrastructures"
+  sanctions: Art. 430 de la loi n°006/2020 du 30 juin 2020 portant modification de
+    la loi n°042/2018 du 05 juillet 2019 portant Code Pénal de la République Gabonaise
+  min_fine: 0
+  max_fine: 100000000
+  penal_servitude: Emprisonnement de dix ans au plus
+  other_penalties: |-
+    confiscation des produits saisis, des installations, matériels et tous biens
+    mobiliers ou immobiliers ayant servi, directement ou indirectement, à la commission de
+    l’infraction ainsi que de tous produits provenant de celle‐ci
+  apv: Non finalisé
+  subcategory_id: 29
+  country_id: 53
+  currency: Fcfa

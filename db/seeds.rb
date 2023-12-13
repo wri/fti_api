@@ -4,9 +4,12 @@ require "active_record/fixtures"
 fixtures_dir = File.join(Rails.root, "db", "fixtures")
 fixture_files = Dir["#{fixtures_dir}/**/*.yml"].map { |f| f[(fixtures_dir.size + 1)..-5] }
 
+$stdout.puts "Loading fixtures..."
 # NOTE: in case of integrity errors, check config/initializers/active_record_fixtures.rb for monkey patch to get better error messages
 # TODO: remove monkey patch when upgrading to Rails 7.1
 ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
+
+$stdout.puts "Creating test users..."
 
 common_fields = {password: "password", password_confirmation: "password", locale: :en}
 admin = User.create_with(**common_fields, name: "Admin").find_or_create_by!(email: "admin@example.com") do |user|
@@ -35,6 +38,8 @@ ngo_manager = User.create_with(**common_fields, name: "NGO Manager").find_or_cre
   user.build_user_permission(user_role: "ngo_manager")
 end
 
+$stdout.puts "Connecting users with test data..."
+
 cameroon = Country.find_by!(name: "Cameroon")
 ifo = Operator.find_by!(slug: "ifo-interholco")
 ogf = Observer.find_by!(name: "OGF")
@@ -48,6 +53,8 @@ ngo_manager.update!(observer: ogf, managed_observers: [ocean, foder])
 government.update!(country: cameroon)
 
 Observer.find_each { |o| o.update!(responsible_admin: admin) }
+
+$stdout.puts "Syncing test data..."
 
 Rake::Task["sync:ranking"].invoke
 Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }
