@@ -33,6 +33,7 @@ namespace :db do
     sh "cap development db:local:load DUMP_FILE=#{dump_file}"
     sh "rm #{dump_file}" if compressed
     Rake::Task["db:prepare_for_dev"].invoke
+    Rake::Task["db:environment:set"].invoke
   end
 
   desc "Restore database from server - Params: SERVER=production(default)|staging, SMALL (if present we ignore versions table data)"
@@ -44,6 +45,7 @@ namespace :db do
 
     sh "cap #{server} db:pull #{params}"
     Rake::Task["db:prepare_for_dev"].invoke
+    Rake::Task["db:environment:set"].invoke
   end
 
   desc "Prepare database for dev enviroment"

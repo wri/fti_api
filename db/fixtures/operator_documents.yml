@@ -1,0 +1,8343 @@
+
+OperatorDocument_1:
+  id: 6733
+  type: OperatorDocumentCountry
+  expire_date: 2024-05-14
+  start_date: 2023-05-15
+  required_operator_document_id: 114
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4167
+
+OperatorDocument_2:
+  id: 22576
+  type: OperatorDocumentCountry
+  expire_date: 2032-01-04
+  start_date: 2022-01-04
+  required_operator_document_id: 20010
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2379
+
+OperatorDocument_3:
+  id: 23800
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-10-13
+  fmu_id: 11660
+  required_operator_document_id: 10128
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_4:
+  id: 23817
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 2001-01-01
+  fmu_id: 11621
+  required_operator_document_id: 10128
+  status: doc_not_required
+  operator_id: 10589
+  uploaded_by: operator
+  reason: La société d'exploitation des bois du Cameroun n'est plus en convention
+    provisoire d'exploitation.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_5:
+  id: 23872
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 2015-01-01
+  fmu_id: 11660
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: La compagnie forestière du Cameroun n'a pas de contrat de sous-traitance
+    pour la gestion de ses activités d'exploitation forestière dans sa concession
+    forestière.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_6:
+  id: 23931
+  type: OperatorDocumentFmu
+  expire_date: 2027-12-31
+  start_date: 1998-03-27
+  fmu_id: 11621
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10589
+  uploaded_by: operator
+  reason: La société d'exploitation des bois du Cameroun exploite elle même son unité
+    forestière d'aménagement.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_7:
+  id: 23920
+  type: OperatorDocumentFmu
+  expire_date: 2034-12-31
+  start_date: 2001-01-01
+  fmu_id: 11617
+  required_operator_document_id: 10128
+  status: doc_not_required
+  operator_id: 10604
+  uploaded_by: operator
+  reason: La société africaine des bois n'est plus en convention provisoire d'exploitation.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_8:
+  id: 23929
+  type: OperatorDocumentFmu
+  expire_date: 2027-12-31
+  start_date: 1998-03-27
+  fmu_id: 11617
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10604
+  uploaded_by: operator
+  reason: La Société africaine des bois exploite elle même son unité forestière d'aménagement.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_9:
+  id: 6734
+  type: OperatorDocumentCountry
+  expire_date: 2024-05-16
+  start_date: 2023-05-17
+  required_operator_document_id: 54
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4168
+
+OperatorDocument_10:
+  id: 22232
+  type: OperatorDocumentCountry
+  expire_date: 2023-07-26
+  start_date: 2023-04-26
+  required_operator_document_id: 10136
+  status: doc_expired
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3950
+
+OperatorDocument_11:
+  id: 15830
+  type: OperatorDocumentFmu
+  fmu_id: 11618
+  required_operator_document_id: 10130
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_12:
+  id: 21974
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 24
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_13:
+  id: 21971
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 83
+  required_operator_document_id: 111
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo .\n\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_14:
+  id: 21968
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 83
+  required_operator_document_id: 41
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_15:
+  id: 21967
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 83
+  required_operator_document_id: 36
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_16:
+  id: 1693
+  type: OperatorDocumentFmu
+  expire_date: 2035-08-30
+  start_date: 2013-05-14
+  fmu_id: 105
+  required_operator_document_id: 48
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2420
+
+OperatorDocument_17:
+  id: 21960
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 89
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'aménagement et d'un fonds de développement local.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_18:
+  id: 21959
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 84
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'aménagement et d'un conseil de concertation.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_19:
+  id: 21952
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 11
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société dispose d'une CTI valide jusqu'au 23 août 2027.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_20:
+  id: 21962
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 83
+  required_operator_document_id: 47
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_21:
+  id: 21963
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 83
+  required_operator_document_id: 48
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_22:
+  id: 21972
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 83
+  required_operator_document_id: 113
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo.\n\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_23:
+  id: 22000
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 18
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_24:
+  id: 21999
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 21
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_25:
+  id: 21998
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 32
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_26:
+  id: 21997
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 27
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_27:
+  id: 21996
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 24
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_28:
+  id: 3373
+  type: OperatorDocumentFmu
+  expire_date: 2035-08-30
+  start_date: 2005-08-30
+  fmu_id: 105
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2390
+
+OperatorDocument_29:
+  id: 21992
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 107
+  required_operator_document_id: 111
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_30:
+  id: 21991
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La CTI est valide jusqu' au 23 aout  2027, donc il ne peut pas encore avoir
+    de vidange
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_31:
+  id: 21990
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 107
+  required_operator_document_id: 41
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_32:
+  id: 21988
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 107
+  required_operator_document_id: 36
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_33:
+  id: 21981
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 84
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'aménagement et d'un conseil de concertation.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_34:
+  id: 21978
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 18
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_35:
+  id: 21977
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 21
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_36:
+  id: 21976
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 32
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_37:
+  id: 21975
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 27
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation d'élaborer un plan d'aménagement.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_38:
+  id: 22027
+  type: OperatorDocumentFmu
+  expire_date: 2031-04-05
+  start_date: 2016-04-06
+  fmu_id: 84
+  required_operator_document_id: 113
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société dispose d'une CAT en cours de validité
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_39:
+  id: 22020
+  type: OperatorDocumentFmu
+  expire_date: 2031-04-05
+  start_date: 2016-04-06
+  fmu_id: 84
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société dispose d'une CAT en cours de validité.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_40:
+  id: 22004
+  type: OperatorDocumentFmu
+  expire_date: 2031-04-05
+  start_date: 2016-04-06
+  fmu_id: 84
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le permis de la concession de Nkola est une CAT.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_41:
+  id: 21982
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 89
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
+    CAT avec obligation de contribuer au fonds de développement local.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_42:
+  id: 21969
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La convention est va;lide jusqu'au 23 /08/2027. Donc il ne peut pas  encore
+    avoir de vidange \r\n\r\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_43:
+  id: 21983
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 107
+  required_operator_document_id: 45
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_44:
+  id: 21984
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 107
+  required_operator_document_id: 47
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_45:
+  id: 21985
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 107
+  required_operator_document_id: 48
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_46:
+  id: 21993
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 107
+  required_operator_document_id: 113
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_47:
+  id: 21939
+  type: OperatorDocumentFmu
+  expire_date: 2037-12-11
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 47
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_48:
+  id: 21903
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-07-11
+  fmu_id: 49
+  required_operator_document_id: 20005
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4235
+
+OperatorDocument_49:
+  id: 22032
+  type: OperatorDocumentCountry
+  expire_date: 2031-04-05
+  start_date: 2016-04-06
+  required_operator_document_id: 50
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: 'La société dispose d''une CAT et assure elle même le transport de son bois.  '
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_50:
+  id: 21973
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2019-04-08
+  fmu_id: 83
+  required_operator_document_id: 112
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo.\n\n"
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_51:
+  id: 22605
+  type: OperatorDocumentCountry
+  expire_date: 2030-07-17
+  start_date: 2022-07-18
+  required_operator_document_id: 20010
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3110
+
+OperatorDocument_52:
+  id: 20015
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-20
+  fmu_id: 11496
+  required_operator_document_id: 10131
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3798
+
+OperatorDocument_53:
+  id: 23799
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-10-13
+  fmu_id: 11604
+  required_operator_document_id: 10128
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_54:
+  id: 23797
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-10-13
+  fmu_id: 11602
+  required_operator_document_id: 10128
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_55:
+  id: 23869
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 2015-01-01
+  fmu_id: 11569
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: 'La compagnie forestière du Cameroun n''a pas de contrat de sous-traitance
+    pour la gestion de ses activités d''exploitation forestière dans sa concession
+    forestière. '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_56:
+  id: 4
+  type: OperatorDocumentCountry
+  required_operator_document_id: 8
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_57:
+  id: 5
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_58:
+  id: 9
+  type: OperatorDocumentCountry
+  required_operator_document_id: 62
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_59:
+  id: 13
+  type: OperatorDocumentCountry
+  required_operator_document_id: 92
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_60:
+  id: 14
+  type: OperatorDocumentCountry
+  required_operator_document_id: 94
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_61:
+  id: 2
+  type: OperatorDocumentCountry
+  expire_date: 2026-09-29
+  start_date: 2021-09-30
+  required_operator_document_id: 4
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2922
+
+OperatorDocument_62:
+  id: 4339
+  type: OperatorDocumentFmu
+  expire_date: 2033-01-25
+  start_date: 2018-01-26
+  fmu_id: 109
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: La société a signée la CAT
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_63:
+  id: 336
+  type: OperatorDocumentCountry
+  expire_date: 2040-02-02
+  start_date: 2013-08-23
+  required_operator_document_id: 92
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3025
+
+OperatorDocument_64:
+  id: 422
+  type: OperatorDocumentCountry
+  required_operator_document_id: 8
+  status: doc_not_provided
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_65:
+  id: 425
+  type: OperatorDocumentCountry
+  required_operator_document_id: 50
+  status: doc_not_provided
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_66:
+  id: 432
+  type: OperatorDocumentCountry
+  required_operator_document_id: 94
+  status: doc_not_provided
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_67:
+  id: 1210
+  type: OperatorDocumentFmu
+  fmu_id: 83
+  required_operator_document_id: 70
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_68:
+  id: 1212
+  type: OperatorDocumentFmu
+  fmu_id: 107
+  required_operator_document_id: 70
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_69:
+  id: 1216
+  type: OperatorDocumentFmu
+  fmu_id: 83
+  required_operator_document_id: 86
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_70:
+  id: 1217
+  type: OperatorDocumentFmu
+  fmu_id: 84
+  required_operator_document_id: 86
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_71:
+  id: 1218
+  type: OperatorDocumentFmu
+  fmu_id: 107
+  required_operator_document_id: 86
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_72:
+  id: 1697
+  type: OperatorDocumentFmu
+  expire_date: 2023-09-30
+  start_date: 2023-03-06
+  fmu_id: 105
+  required_operator_document_id: 89
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4099
+
+OperatorDocument_73:
+  id: 1687
+  type: OperatorDocumentFmu
+  expire_date: 2024-03-10
+  start_date: 2020-03-10
+  fmu_id: 105
+  required_operator_document_id: 32
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4087
+
+OperatorDocument_74:
+  id: 1681
+  type: OperatorDocumentFmu
+  expire_date: 2035-08-30
+  start_date: 2005-08-30
+  fmu_id: 105
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2398
+
+OperatorDocument_75:
+  id: 1682
+  type: OperatorDocumentFmu
+  expire_date: 2035-08-29
+  start_date: 2005-08-30
+  fmu_id: 105
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2399
+
+OperatorDocument_76:
+  id: 1696
+  type: OperatorDocumentFmu
+  expire_date: 2024-06-08
+  start_date: 2023-06-09
+  fmu_id: 105
+  required_operator_document_id: 86
+  status: doc_not_provided
+  operator_id: 165
+  note: Lorem ipsum for note
+
+OperatorDocument_77:
+  id: 1686
+  type: OperatorDocumentFmu
+  expire_date: 2021-03-26
+  start_date: 2017-03-27
+  fmu_id: 105
+  required_operator_document_id: 27
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4165
+
+OperatorDocument_78:
+  id: 1685
+  type: OperatorDocumentFmu
+  expire_date: 2040-02-02
+  start_date: 2010-02-02
+  fmu_id: 105
+  required_operator_document_id: 24
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3027
+
+OperatorDocument_79:
+  id: 8
+  type: OperatorDocumentCountry
+  expire_date: 2022-07-13
+  start_date: 2021-07-13
+  required_operator_document_id: 54
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2926
+
+OperatorDocument_80:
+  id: 15402
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10125
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_81:
+  id: 4678
+  type: OperatorDocumentFmu
+  expire_date: 2033-04-25
+  start_date: 2018-04-26
+  fmu_id: 55
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: 'La société a signé une CAT '
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_82:
+  id: 4198
+  type: OperatorDocumentFmu
+  expire_date: 2042-08-28
+  start_date: 2012-09-04
+  fmu_id: 54
+  required_operator_document_id: 48
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: La scierie de Kabo a été fermée et le bois de l'UGF est transformé à Pokola.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_83:
+  id: 3805
+  type: OperatorDocumentFmu
+  fmu_id: 105
+  required_operator_document_id: 111
+  status: doc_not_provided
+  operator_id: 165
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_84:
+  id: 4171
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  required_operator_document_id: 62
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: document non applicable et non délivré actuellement
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_85:
+  id: 3855
+  type: OperatorDocumentFmu
+  expire_date: 2023-06-30
+  start_date: 2022-01-01
+  fmu_id: 105
+  required_operator_document_id: 112
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4090
+
+OperatorDocument_86:
+  id: 3706
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-15
+  start_date: 2022-10-15
+  required_operator_document_id: 110
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3507
+
+OperatorDocument_87:
+  id: 4129
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 56
+  required_operator_document_id: 41
+  status: doc_not_required
+  operator_id: 161
+  uploaded_by: operator
+  reason: IFO n'est pas concernée. l'autorisation de coupe provisoire est nécessaire
+    lors de l'élaboration du Plan d'aménagement
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_88:
+  id: 4292
+  type: OperatorDocumentCountry
+  required_operator_document_id: 114
+  status: doc_not_provided
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_89:
+  id: 4466
+  type: OperatorDocumentFmu
+  expire_date: 2033-03-21
+  start_date: 2018-03-22
+  fmu_id: 53
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: L'entreprise à signé la CAT avec le Congo
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_90:
+  id: 5053
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2008-12-31
+  fmu_id: 56
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 161
+  uploaded_by: other
+  reason: The Industrial Convention is only temporary valid during preparation of
+    the Forest Management Plan, until signing of the final Forest Management Convention
+    (31.12.2008), valid for 25 years.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_91:
+  id: 5164
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-24
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 11
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: other
+  reason: 'La société dispose d''une CTI pour exploiter le bois '
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_92:
+  id: 6406
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-08
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 47
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: UFE Pikounda de la CIB a été convertit en concession REDD+, par conséquent
+    il n’y a plus de bois qui sort de cette concession
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_93:
+  id: 6404
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-08
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: UFE Pikounda de la CIB a été convertit en concession REDD+, par conséquent
+    il n’y a plus de bois qui sort de cette concession
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_94:
+  id: 6403
+  type: OperatorDocumentFmu
+  expire_date: 2042-06-01
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 45
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: UFE Pikounda de la CIB a été convertit en concession REDD+, par conséquent
+    il n’y a plus de bois qui sort de cette concession
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_95:
+  id: 6401
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-05
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 106
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: UFE Pikounda a ete convertit en concession REDD+
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_96:
+  id: 6424
+  type: OperatorDocumentFmu
+  expire_date: 2032-06-08
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 21
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: UFE Pikounda de la CIB a été convertit en concession REDD+, par conséquent
+    il n’y a plus de bois qui sort de cette concession
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_97:
+  id: 6419
+  type: OperatorDocumentFmu
+  expire_date: 2032-06-08
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 24
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: UFE Pikounda de la CIB a été convertit en concession REDD+, par conséquent
+    il n’y a plus de bois qui sort de cette concession
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_98:
+  id: 6444
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-06
+  fmu_id: 53
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: aucune vidange envisagée à ce jour
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_99:
+  id: 6408
+  type: OperatorDocumentFmu
+  expire_date: 2042-06-01
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 48
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: UFE Pikounda de la CIB a été convertit en concession REDD+, par conséquent
+    il n’y a plus de bois qui sort de cette concession
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_100:
+  id: 21678
+  type: OperatorDocumentCountry
+  expire_date: 2023-09-30
+  start_date: 2023-06-05
+  required_operator_document_id: 20009
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4327
+
+OperatorDocument_101:
+  id: 6440
+  type: OperatorDocumentFmu
+  expire_date: 2036-01-09
+  start_date: 2016-01-09
+  fmu_id: 109
+  required_operator_document_id: 21
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: Sera requis apres l'elaboration du PA en  2020
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_102:
+  id: 6431
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 67
+  required_operator_document_id: 116
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: PIKOUNDA NORD est entièrement consacré au projet REDD+ relatif à la réduction
+    des émissions dues à la déforestation et à la dégradation. Aucune exploitation
+    actuellement et par conséquent, pas de taxe applicable.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_103:
+  id: 6430
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 67
+  required_operator_document_id: 115
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: PIKOUNDA NORD est entièrement consacré au projet REDD+ relatif à la réduction
+    des émissions dues à la déforestation et à la dégradation. Aucune exploitation
+    actuellement et par conséquent, pas de taxe applicable.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_104:
+  id: 15529
+  type: OperatorDocumentFmu
+  fmu_id: 11579
+  required_operator_document_id: 10127
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_105:
+  id: 6435
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 109
+  required_operator_document_id: 113
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_106:
+  id: 6458
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 55
+  required_operator_document_id: 113
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_107:
+  id: 15567
+  type: OperatorDocumentFmu
+  fmu_id: 11634
+  required_operator_document_id: 10127
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_108:
+  id: 15802
+  type: OperatorDocumentFmu
+  fmu_id: 11579
+  required_operator_document_id: 10130
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_109:
+  id: 15840
+  type: OperatorDocumentFmu
+  fmu_id: 11634
+  required_operator_document_id: 10130
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_110:
+  id: 16672
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10140
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_111:
+  id: 15893
+  type: OperatorDocumentFmu
+  fmu_id: 11579
+  required_operator_document_id: 10131
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_112:
+  id: 15921
+  type: OperatorDocumentFmu
+  fmu_id: 11618
+  required_operator_document_id: 10131
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_113:
+  id: 15931
+  type: OperatorDocumentFmu
+  fmu_id: 11634
+  required_operator_document_id: 10131
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_114:
+  id: 16043
+  type: OperatorDocumentFmu
+  fmu_id: 11496
+  required_operator_document_id: 10133
+  status: doc_not_provided
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_115:
+  id: 7284
+  type: OperatorDocumentFmu
+  expire_date: 2032-12-29
+  start_date: 2007-12-29
+  fmu_id: 55
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: Exigible en fin de convention
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_116:
+  id: 7283
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-08
+  start_date: 2002-06-08
+  fmu_id: 54
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: other
+  reason: Exigible en fin de convention ou de rotation
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_117:
+  id: 16274
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10135
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_118:
+  id: 16346
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10136
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_119:
+  id: 16401
+  type: OperatorDocumentFmu
+  fmu_id: 11579
+  required_operator_document_id: 10137
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_120:
+  id: 16429
+  type: OperatorDocumentFmu
+  fmu_id: 11618
+  required_operator_document_id: 10137
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_121:
+  id: 16439
+  type: OperatorDocumentFmu
+  fmu_id: 11634
+  required_operator_document_id: 10137
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_122:
+  id: 16492
+  type: OperatorDocumentFmu
+  fmu_id: 11579
+  required_operator_document_id: 10138
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_123:
+  id: 16520
+  type: OperatorDocumentFmu
+  fmu_id: 11618
+  required_operator_document_id: 10138
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_124:
+  id: 16530
+  type: OperatorDocumentFmu
+  fmu_id: 11634
+  required_operator_document_id: 10138
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_125:
+  id: 16463
+  type: OperatorDocumentFmu
+  expire_date: 2029-01-05
+  start_date: 2006-08-17
+  fmu_id: 11499
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2141
+
+OperatorDocument_126:
+  id: 16600
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10139
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_127:
+  id: 16744
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10141
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_128:
+  id: 16907
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10143
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_129:
+  id: 16979
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10144
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_130:
+  id: 19068
+  type: OperatorDocumentFmu
+  fmu_id: 11617
+  required_operator_document_id: 10148
+  status: doc_not_provided
+  operator_id: 10604
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_131:
+  id: 18935
+  type: OperatorDocumentFmu
+  fmu_id: 11618
+  required_operator_document_id: 10127
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_132:
+  id: 19485
+  type: OperatorDocumentCountry
+  required_operator_document_id: 10149
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_133:
+  id: 20022
+  type: OperatorDocumentFmu
+  expire_date: 2029-05-14
+  start_date: 2014-05-15
+  fmu_id: 11499
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10623
+  uploaded_by: other
+  reason: L'UGF en question est exploitée en propre
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_134:
+  id: 21524
+  type: OperatorDocumentFmu
+  expire_date: 2047-11-22
+  start_date: 2022-11-28
+  fmu_id: 12
+  required_operator_document_id: 20006
+  status: doc_not_provided
+  operator_id: 197
+  note: Lorem ipsum for note
+
+OperatorDocument_135:
+  id: 20699
+  type: OperatorDocumentFmu
+  expire_date: 2024-04-25
+  start_date: 2023-04-26
+  fmu_id: 11499
+  required_operator_document_id: 10133
+  status: doc_not_provided
+  operator_id: 10623
+  note: Lorem ipsum for note
+
+OperatorDocument_136:
+  id: 20718
+  type: OperatorDocumentFmu
+  expire_date: 2041-08-09
+  start_date: 2016-08-09
+  fmu_id: 12
+  required_operator_document_id: 19
+  status: doc_not_required
+  operator_id: 197
+  uploaded_by: other
+  reason: 'le plan de gestion provisoire a été approuvé en  2013, et celui-ci n''était
+    plus valide en 2017. Le plan d''aménagement reste le seul  document en vigueur '
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_137:
+  id: 22733
+  type: OperatorDocumentCountry
+  required_operator_document_id: 20012
+  status: doc_not_provided
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_138:
+  id: 21901
+  type: OperatorDocumentFmu
+  expire_date: 2024-12-14
+  start_date: 2019-12-14
+  fmu_id: 49
+  required_operator_document_id: 88
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3508
+
+OperatorDocument_139:
+  id: 21898
+  type: OperatorDocumentFmu
+  expire_date: 2043-05-27
+  start_date: 2018-05-28
+  fmu_id: 49
+  required_operator_document_id: 12
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1959
+
+OperatorDocument_140:
+  id: 21905
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-27
+  start_date: 2018-11-27
+  fmu_id: 49
+  required_operator_document_id: 87
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1954
+
+OperatorDocument_141:
+  id: 21904
+  type: OperatorDocumentFmu
+  expire_date: 2043-07-09
+  start_date: 2018-07-09
+  fmu_id: 49
+  required_operator_document_id: 20006
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1960
+
+OperatorDocument_142:
+  id: 21899
+  type: OperatorDocumentFmu
+  expire_date: 2045-03-04
+  start_date: 2020-03-04
+  fmu_id: 49
+  required_operator_document_id: 46
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1946
+
+OperatorDocument_143:
+  id: 21897
+  type: OperatorDocumentFmu
+  expire_date: 2043-12-11
+  start_date: 2017-12-11
+  fmu_id: 49
+  required_operator_document_id: 42
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1947
+
+OperatorDocument_144:
+  id: 21895
+  type: OperatorDocumentFmu
+  expire_date: 2046-01-26
+  start_date: 2021-01-26
+  fmu_id: 49
+  required_operator_document_id: 22
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1940
+
+OperatorDocument_145:
+  id: 22017
+  type: OperatorDocumentFmu
+  fmu_id: 107
+  required_operator_document_id: 116
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_146:
+  id: 3802
+  type: OperatorDocumentFmu
+  expire_date: 2022-08-30
+  start_date: 2022-05-01
+  fmu_id: 84
+  required_operator_document_id: 111
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3158
+
+OperatorDocument_147:
+  id: 1694
+  type: OperatorDocumentFmu
+  expire_date: 2023-06-30
+  start_date: 2022-10-25
+  fmu_id: 105
+  required_operator_document_id: 70
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4098
+
+OperatorDocument_148:
+  id: 23870
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 2015-01-01
+  fmu_id: 11602
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: La compagnie forestière du Cameroun n'a pas de contrat de sous-traitance
+    pour la gestion de ses activités d'exploitation forestière dans sa concession
+    forestière.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_149:
+  id: 23871
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 2015-01-01
+  fmu_id: 11604
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: La compagnie forestière du Cameroun n'a pas de contrat de sous-traitance
+    pour la gestion de ses activités d'exploitation forestière dans sa concession
+    forestière.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_150:
+  id: 23923
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-10-13
+  fmu_id: 11569
+  required_operator_document_id: 10128
+  status: doc_not_required
+  operator_id: 10615
+  uploaded_by: operator
+  reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_151:
+  id: 23710
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 1999-01-06
+  fmu_id: 11604
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1335
+
+OperatorDocument_152:
+  id: 23716
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-04-13
+  fmu_id: 11660
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1338
+
+OperatorDocument_153:
+  id: 23717
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 1999-01-06
+  fmu_id: 11660
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1339
+
+OperatorDocument_154:
+  id: 23675
+  type: OperatorDocumentFmu
+  expire_date: 2023-03-30
+  start_date: 2022-06-10
+  fmu_id: 11569
+  required_operator_document_id: 10133
+  status: doc_expired
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3006
+
+OperatorDocument_155:
+  id: 23740
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 2012-06-22
+  fmu_id: 11621
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1358
+
+OperatorDocument_156:
+  id: 23967
+  type: OperatorDocumentCountry
+  expire_date: 2074-11-03
+  start_date: 2016-11-04
+  required_operator_document_id: 10125
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1438
+
+OperatorDocument_157:
+  id: 117080
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-04-28
+  fmu_id: 11621
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3962
+
+OperatorDocument_158:
+  id: 23917
+  type: OperatorDocumentFmu
+  expire_date: 2023-02-08
+  start_date: 2022-02-08
+  fmu_id: 11617
+  required_operator_document_id: 10138
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2530
+
+OperatorDocument_159:
+  id: 23779
+  type: OperatorDocumentCountry
+  expire_date: 2018-09-15
+  start_date: 2018-08-27
+  required_operator_document_id: 10140
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1370
+
+OperatorDocument_160:
+  id: 1691
+  type: OperatorDocumentFmu
+  expire_date: 2043-12-31
+  start_date: 2013-05-31
+  fmu_id: 105
+  required_operator_document_id: 45
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2444
+
+OperatorDocument_161:
+  id: 23780
+  type: OperatorDocumentCountry
+  expire_date: 2030-08-19
+  start_date: 2015-08-19
+  required_operator_document_id: 10143
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1371
+
+OperatorDocument_162:
+  id: 23781
+  type: OperatorDocumentCountry
+  expire_date: 2030-12-31
+  start_date: 2018-01-15
+  required_operator_document_id: 10139
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1372
+
+OperatorDocument_163:
+  id: 118436
+  type: OperatorDocumentFmu
+  expire_date: 2022-12-31
+  start_date: 2022-02-21
+  fmu_id: 100438
+  required_operator_document_id: 10146
+  status: doc_expired
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2765
+
+OperatorDocument_164:
+  id: 118442
+  type: OperatorDocumentFmu
+  expire_date: 2022-12-31
+  start_date: 2022-02-21
+  fmu_id: 100438
+  required_operator_document_id: 10131
+  status: doc_expired
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2766
+
+OperatorDocument_165:
+  id: 118440
+  type: OperatorDocumentFmu
+  fmu_id: 100438
+  required_operator_document_id: 10133
+  status: doc_not_provided
+  operator_id: 10623
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_166:
+  id: 118441
+  type: OperatorDocumentFmu
+  expire_date: 2024-04-05
+  start_date: 2023-04-06
+  fmu_id: 100438
+  required_operator_document_id: 10132
+  status: doc_not_provided
+  operator_id: 10623
+  note: Lorem ipsum for note
+
+OperatorDocument_167:
+  id: 118439
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-30
+  fmu_id: 100438
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3952
+
+OperatorDocument_168:
+  id: 118438
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2020-07-28
+  fmu_id: 100438
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2467
+
+OperatorDocument_169:
+  id: 6732
+  type: OperatorDocumentCountry
+  expire_date: 2115-01-10
+  start_date: 2016-01-11
+  required_operator_document_id: 6
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2999
+
+OperatorDocument_170:
+  id: 23783
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 1998-03-27
+  fmu_id: 11617
+  required_operator_document_id: 10127
+  status: doc_invalid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1374
+
+OperatorDocument_171:
+  id: 6434
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-06
+  fmu_id: 109
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: aucune vidange actuellement envisagée
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_172:
+  id: 21900
+  type: OperatorDocumentFmu
+  expire_date: 2023-09-24
+  start_date: 2023-08-24
+  fmu_id: 49
+  required_operator_document_id: 78
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4389
+
+OperatorDocument_173:
+  id: 6412
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-06
+  fmu_id: 67
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: 'aucune vidange actuellement envisagée '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_174:
+  id: 118437
+  type: OperatorDocumentFmu
+  expire_date: 2023-03-18
+  start_date: 2020-03-19
+  fmu_id: 100438
+  required_operator_document_id: 10145
+  status: doc_expired
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2466
+
+OperatorDocument_175:
+  id: 3
+  type: OperatorDocumentCountry
+  expire_date: 2102-12-14
+  start_date: 2004-01-07
+  required_operator_document_id: 6
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 2
+
+OperatorDocument_176:
+  id: 15
+  type: OperatorDocumentCountry
+  expire_date: 2036-02-10
+  start_date: 2006-02-17
+  required_operator_document_id: 96
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 4
+
+OperatorDocument_177:
+  id: 108
+  type: OperatorDocumentCountry
+  expire_date: 2041-04-03
+  start_date: 2011-04-11
+  required_operator_document_id: 92
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 13
+
+OperatorDocument_178:
+  id: 110
+  type: OperatorDocumentCountry
+  expire_date: 2042-05-22
+  start_date: 2012-05-29
+  required_operator_document_id: 96
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 14
+
+OperatorDocument_179:
+  id: 12
+  type: OperatorDocumentCountry
+  expire_date: 2015-08-05
+  start_date: 2014-08-05
+  required_operator_document_id: 80
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 3
+
+OperatorDocument_180:
+  id: 279
+  type: OperatorDocumentCountry
+  expire_date: 2036-03-23
+  start_date: 2006-03-31
+  required_operator_document_id: 92
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 27
+
+OperatorDocument_181:
+  id: 281
+  type: OperatorDocumentCountry
+  expire_date: 2030-03-20
+  start_date: 2000-03-27
+  required_operator_document_id: 96
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 28
+
+OperatorDocument_182:
+  id: 338
+  type: OperatorDocumentCountry
+  expire_date: 2040-03-04
+  start_date: 2010-03-12
+  required_operator_document_id: 96
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 37
+
+OperatorDocument_183:
+  id: 1373
+  type: OperatorDocumentFmu
+  expire_date: 2030-06-01
+  start_date: 2010-06-01
+  fmu_id: 53
+  required_operator_document_id: 21
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 73
+
+OperatorDocument_184:
+  id: 1374
+  type: OperatorDocumentFmu
+  expire_date: 2026-04-01
+  start_date: 2006-04-01
+  fmu_id: 54
+  required_operator_document_id: 21
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 74
+
+OperatorDocument_185:
+  id: 1375
+  type: OperatorDocumentFmu
+  expire_date: 2027-12-01
+  start_date: 2007-12-01
+  fmu_id: 55
+  required_operator_document_id: 21
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 75
+
+OperatorDocument_186:
+  id: 324
+  type: OperatorDocumentCountry
+  expire_date: 2023-09-20
+  start_date: 2022-09-20
+  required_operator_document_id: 2
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3472
+
+OperatorDocument_187:
+  id: 335
+  type: OperatorDocumentCountry
+  expire_date: 2023-09-30
+  start_date: 2023-04-19
+  required_operator_document_id: 80
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4101
+
+OperatorDocument_188:
+  id: 2110
+  type: OperatorDocumentFmu
+  expire_date: 2036-10-22
+  start_date: 2011-10-24
+  fmu_id: 12
+  required_operator_document_id: 12
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 114
+
+OperatorDocument_189:
+  id: 1689
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 105
+  required_operator_document_id: 38
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4089
+
+OperatorDocument_190:
+  id: 1688
+  type: OperatorDocumentFmu
+  expire_date: 2024-06-08
+  start_date: 2023-06-09
+  fmu_id: 105
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 165
+  note: Lorem ipsum for note
+
+OperatorDocument_191:
+  id: 342
+  type: OperatorDocumentCountry
+  expire_date: 2023-02-21
+  start_date: 2022-02-21
+  required_operator_document_id: 104
+  status: doc_not_provided
+  operator_id: 165
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_192:
+  id: 341
+  type: OperatorDocumentCountry
+  expire_date: 2023-02-21
+  start_date: 2022-02-21
+  required_operator_document_id: 103
+  status: doc_not_provided
+  operator_id: 165
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_193:
+  id: 330
+  type: OperatorDocumentCountry
+  expire_date: 2024-06-03
+  start_date: 2023-06-04
+  required_operator_document_id: 50
+  status: doc_invalid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4191
+
+OperatorDocument_194:
+  id: 339
+  type: OperatorDocumentCountry
+  expire_date: 2023-07-01
+  start_date: 2023-01-01
+  required_operator_document_id: 99
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4103
+
+OperatorDocument_195:
+  id: 328
+  type: OperatorDocumentCountry
+  expire_date: 2028-06-15
+  start_date: 2023-06-16
+  required_operator_document_id: 10
+  status: doc_pending
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_196:
+  id: 1684
+  type: OperatorDocumentFmu
+  expire_date: 2038-12-31
+  start_date: 2009-01-07
+  fmu_id: 105
+  required_operator_document_id: 21
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2998
+
+OperatorDocument_197:
+  id: 4118
+  type: OperatorDocumentFmu
+  expire_date: 2027-11-27
+  start_date: 2007-11-27
+  fmu_id: 56
+  required_operator_document_id: 24
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 164
+
+OperatorDocument_198:
+  id: 4119
+  type: OperatorDocumentFmu
+  expire_date: 2032-10-27
+  start_date: 2017-10-28
+  fmu_id: 56
+  required_operator_document_id: 45
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4364
+
+OperatorDocument_199:
+  id: 4183
+  type: OperatorDocumentCountry
+  expire_date: 2104-02-27
+  start_date: 2005-03-22
+  required_operator_document_id: 6
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 195
+
+OperatorDocument_200:
+  id: 4186
+  type: OperatorDocumentCountry
+  expire_date: 2030-09-07
+  start_date: 2000-09-14
+  required_operator_document_id: 8
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 198
+
+OperatorDocument_201:
+  id: 4706
+  type: OperatorDocumentFmu
+  expire_date: 2034-07-20
+  start_date: 2009-07-21
+  fmu_id: 54
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3529
+
+OperatorDocument_202:
+  id: 4255
+  type: OperatorDocumentFmu
+  expire_date: 2032-12-29
+  start_date: 2012-06-08
+  fmu_id: 55
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 207
+
+OperatorDocument_203:
+  id: 4120
+  type: OperatorDocumentFmu
+  expire_date: 2032-10-27
+  start_date: 2017-10-28
+  fmu_id: 56
+  required_operator_document_id: 47
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4377
+
+OperatorDocument_204:
+  id: 4117
+  type: OperatorDocumentFmu
+  expire_date: 2033-12-31
+  start_date: 2008-12-31
+  fmu_id: 56
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3314
+
+OperatorDocument_205:
+  id: 4465
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-08
+  start_date: 2012-06-08
+  fmu_id: 53
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 224
+
+OperatorDocument_206:
+  id: 4468
+  type: OperatorDocumentFmu
+  expire_date: 2035-12-31
+  start_date: 2010-02-10
+  fmu_id: 53
+  required_operator_document_id: 24
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 225
+
+OperatorDocument_207:
+  id: 4695
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-05
+  start_date: 2012-06-08
+  fmu_id: 55
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 234
+
+OperatorDocument_208:
+  id: 4452
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 53
+  required_operator_document_id: 27
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3677
+
+OperatorDocument_209:
+  id: 4694
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-05
+  start_date: 2012-06-08
+  fmu_id: 53
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 233
+
+OperatorDocument_210:
+  id: 4765
+  type: OperatorDocumentFmu
+  expire_date: 2027-12-01
+  start_date: 2007-12-18
+  fmu_id: 55
+  required_operator_document_id: 24
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 242
+
+OperatorDocument_211:
+  id: 5044
+  type: OperatorDocumentFmu
+  expire_date: 2036-11-15
+  start_date: 2007-11-15
+  fmu_id: 56
+  required_operator_document_id: 21
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 277
+
+OperatorDocument_212:
+  id: 5111
+  type: OperatorDocumentCountry
+  expire_date: 2018-11-13
+  start_date: 2018-05-17
+  required_operator_document_id: 99
+  status: doc_invalid
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 306
+
+OperatorDocument_213:
+  id: 5057
+  type: OperatorDocumentCountry
+  expire_date: 2025-12-31
+  start_date: 2021-01-01
+  required_operator_document_id: 10
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2028
+
+OperatorDocument_214:
+  id: 5157
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-24
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 15
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 315
+
+OperatorDocument_215:
+  id: 5161
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-21
+  start_date: 2012-08-24
+  fmu_id: 107
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 316
+
+OperatorDocument_216:
+  id: 6446
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-03
+  start_date: 2012-08-06
+  fmu_id: 54
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 342
+
+OperatorDocument_217:
+  id: 6449
+  type: OperatorDocumentFmu
+  expire_date: 2026-03-11
+  start_date: 2006-03-11
+  fmu_id: 54
+  required_operator_document_id: 24
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 344
+
+OperatorDocument_218:
+  id: 6656
+  type: OperatorDocumentCountry
+  expire_date: 2019-01-01
+  start_date: 2018-01-01
+  required_operator_document_id: 54
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 345
+
+OperatorDocument_219:
+  id: 6658
+  type: OperatorDocumentCountry
+  expire_date: 2020-09-18
+  start_date: 2018-02-26
+  required_operator_document_id: 96
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 346
+
+OperatorDocument_220:
+  id: 6659
+  type: OperatorDocumentCountry
+  expire_date: 2018-09-01
+  start_date: 2018-03-05
+  required_operator_document_id: 99
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 347
+
+OperatorDocument_221:
+  id: 6661
+  type: OperatorDocumentCountry
+  expire_date: 2018-07-31
+  start_date: 2018-03-01
+  required_operator_document_id: 92
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 348
+
+OperatorDocument_222:
+  id: 6664
+  type: OperatorDocumentCountry
+  expire_date: 2019-01-05
+  start_date: 2018-01-05
+  required_operator_document_id: 104
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 349
+
+OperatorDocument_223:
+  id: 6765
+  type: OperatorDocumentCountry
+  expire_date: 2017-07-04
+  start_date: 2016-07-05
+  required_operator_document_id: 101
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 372
+
+OperatorDocument_224:
+  id: 6783
+  type: OperatorDocumentCountry
+  expire_date: 2104-11-21
+  start_date: 2005-11-21
+  required_operator_document_id: 107
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 374
+
+OperatorDocument_225:
+  id: 6785
+  type: OperatorDocumentCountry
+  expire_date: 2086-07-09
+  start_date: 1987-10-07
+  required_operator_document_id: 7
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 375
+
+OperatorDocument_226:
+  id: 6788
+  type: OperatorDocumentCountry
+  expire_date: 2106-03-09
+  start_date: 2007-03-19
+  required_operator_document_id: 71
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 376
+
+OperatorDocument_227:
+  id: 6790
+  type: OperatorDocumentCountry
+  expire_date: 2113-02-07
+  start_date: 2014-02-07
+  required_operator_document_id: 93
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 377
+
+OperatorDocument_228:
+  id: 6791
+  type: OperatorDocumentCountry
+  expire_date: 2105-10-02
+  start_date: 2006-10-02
+  required_operator_document_id: 97
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 378
+
+OperatorDocument_229:
+  id: 6794
+  type: OperatorDocumentCountry
+  expire_date: 2116-06-01
+  start_date: 2017-06-01
+  required_operator_document_id: 100
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 379
+
+OperatorDocument_230:
+  id: 6795
+  type: OperatorDocumentFmu
+  expire_date: 2043-08-04
+  start_date: 2018-08-10
+  fmu_id: 12
+  required_operator_document_id: 46
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 380
+
+OperatorDocument_231:
+  id: 6802
+  type: OperatorDocumentFmu
+  expire_date: 2042-12-05
+  start_date: 2017-12-11
+  fmu_id: 12
+  required_operator_document_id: 42
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 382
+
+OperatorDocument_232:
+  id: 6803
+  type: OperatorDocumentFmu
+  expire_date: 2041-08-03
+  start_date: 2016-08-09
+  fmu_id: 12
+  required_operator_document_id: 20
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 383
+
+OperatorDocument_233:
+  id: 6804
+  type: OperatorDocumentFmu
+  expire_date: 2042-12-03
+  start_date: 2017-12-09
+  fmu_id: 12
+  required_operator_document_id: 22
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 384
+
+OperatorDocument_234:
+  id: 6812
+  type: OperatorDocumentFmu
+  expire_date: 2030-07-23
+  start_date: 2015-07-27
+  fmu_id: 56
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 386
+
+OperatorDocument_235:
+  id: 6665
+  type: OperatorDocumentCountry
+  expire_date: 2023-03-08
+  start_date: 2018-03-08
+  required_operator_document_id: 10
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 350
+
+OperatorDocument_236:
+  id: 6731
+  type: OperatorDocumentCountry
+  expire_date: 2052-01-12
+  start_date: 2000-11-16
+  required_operator_document_id: 8
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2461
+
+OperatorDocument_237:
+  id: 6735
+  type: OperatorDocumentCountry
+  expire_date: 2025-12-31
+  start_date: 2015-01-29
+  required_operator_document_id: 94
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4102
+
+OperatorDocument_238:
+  id: 6736
+  type: OperatorDocumentFmu
+  expire_date: 2023-06-30
+  start_date: 2023-05-25
+  fmu_id: 105
+  required_operator_document_id: 115
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4096
+
+OperatorDocument_239:
+  id: 6868
+  type: OperatorDocumentCountry
+  expire_date: 2027-12-12
+  start_date: 2022-12-12
+  required_operator_document_id: 10
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4284
+
+OperatorDocument_240:
+  id: 6983
+  type: OperatorDocumentFmu
+  expire_date: 2023-07-31
+  start_date: 2018-07-31
+  fmu_id: 12
+  required_operator_document_id: 87
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 426
+
+OperatorDocument_241:
+  id: 7424
+  type: OperatorDocumentFmu
+  expire_date: 2027-12-31
+  start_date: 2022-06-06
+  fmu_id: 56
+  required_operator_document_id: 32
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3098
+
+OperatorDocument_242:
+  id: 22026
+  type: OperatorDocumentFmu
+  expire_date: 2022-06-30
+  start_date: 2022-01-03
+  fmu_id: 84
+  required_operator_document_id: 112
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3157
+
+OperatorDocument_243:
+  id: 6973
+  type: OperatorDocumentCountry
+  expire_date: 2023-09-24
+  start_date: 2023-04-25
+  required_operator_document_id: 125
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4241
+
+OperatorDocument_244:
+  id: 7008
+  type: OperatorDocumentCountry
+  expire_date: 2116-06-08
+  start_date: 2017-06-09
+  required_operator_document_id: 102
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 443
+
+OperatorDocument_245:
+  id: 19150
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11569
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 600
+
+OperatorDocument_246:
+  id: 20016
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-15
+  fmu_id: 11496
+  required_operator_document_id: 10130
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3797
+
+OperatorDocument_247:
+  id: 6977
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2022-09-16
+  required_operator_document_id: 64
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3499
+
+OperatorDocument_248:
+  id: 6978
+  type: OperatorDocumentCountry
+  expire_date: 2024-01-04
+  start_date: 2023-07-05
+  required_operator_document_id: 65
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4237
+
+OperatorDocument_249:
+  id: 18937
+  type: OperatorDocumentFmu
+  expire_date: 2003-10-19
+  start_date: 2000-10-20
+  fmu_id: 11579
+  required_operator_document_id: 10128
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 549
+
+OperatorDocument_250:
+  id: 6972
+  type: OperatorDocumentCountry
+  expire_date: 2023-11-16
+  start_date: 2023-05-16
+  required_operator_document_id: 124
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4203
+
+OperatorDocument_251:
+  id: 18887
+  type: OperatorDocumentCountry
+  expire_date: 2085-12-02
+  start_date: 1986-12-03
+  required_operator_document_id: 10126
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 526
+
+OperatorDocument_252:
+  id: 18890
+  type: OperatorDocumentFmu
+  expire_date: 2003-10-19
+  start_date: 2000-10-20
+  fmu_id: 11634
+  required_operator_document_id: 10128
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 527
+
+OperatorDocument_253:
+  id: 18923
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11660
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 541
+
+OperatorDocument_254:
+  id: 18924
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11602
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 542
+
+OperatorDocument_255:
+  id: 18925
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11602
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 543
+
+OperatorDocument_256:
+  id: 18926
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11569
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 544
+
+OperatorDocument_257:
+  id: 18928
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11604
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 545
+
+OperatorDocument_258:
+  id: 18929
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11604
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 546
+
+OperatorDocument_259:
+  id: 18938
+  type: OperatorDocumentFmu
+  expire_date: 2038-12-23
+  start_date: 2008-12-24
+  fmu_id: 11579
+  required_operator_document_id: 10129
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 550
+
+OperatorDocument_260:
+  id: 18939
+  type: OperatorDocumentFmu
+  expire_date: 2038-12-23
+  start_date: 2008-12-24
+  fmu_id: 11579
+  required_operator_document_id: 10142
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 551
+
+OperatorDocument_261:
+  id: 18941
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11617
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 552
+
+OperatorDocument_262:
+  id: 18943
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11617
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 553
+
+OperatorDocument_263:
+  id: 18988
+  type: OperatorDocumentFmu
+  expire_date: 2038-12-23
+  start_date: 2008-12-24
+  fmu_id: 11618
+  required_operator_document_id: 10129
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 577
+
+OperatorDocument_264:
+  id: 18991
+  type: OperatorDocumentFmu
+  expire_date: 2038-12-23
+  start_date: 2008-12-24
+  fmu_id: 11634
+  required_operator_document_id: 10129
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 578
+
+OperatorDocument_265:
+  id: 18992
+  type: OperatorDocumentFmu
+  expire_date: 2038-12-23
+  start_date: 2008-12-24
+  fmu_id: 11634
+  required_operator_document_id: 10142
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 579
+
+OperatorDocument_266:
+  id: 18993
+  type: OperatorDocumentFmu
+  expire_date: 2038-12-23
+  start_date: 2008-12-24
+  fmu_id: 11618
+  required_operator_document_id: 10142
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 580
+
+OperatorDocument_267:
+  id: 19304
+  type: OperatorDocumentFmu
+  expire_date: 2025-09-13
+  start_date: 2010-09-14
+  fmu_id: 11660
+  required_operator_document_id: 10148
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 606
+
+OperatorDocument_268:
+  id: 19305
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11660
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 607
+
+OperatorDocument_269:
+  id: 19307
+  type: OperatorDocumentFmu
+  expire_date: 2025-09-13
+  start_date: 2010-09-14
+  fmu_id: 11569
+  required_operator_document_id: 10148
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 609
+
+OperatorDocument_270:
+  id: 19308
+  type: OperatorDocumentFmu
+  expire_date: 2025-09-13
+  start_date: 2010-09-14
+  fmu_id: 11604
+  required_operator_document_id: 10148
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 610
+
+OperatorDocument_271:
+  id: 19298
+  type: OperatorDocumentFmu
+  expire_date: 2029-05-16
+  start_date: 2014-05-15
+  fmu_id: 11499
+  required_operator_document_id: 10148
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 602
+
+OperatorDocument_272:
+  id: 19325
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11621
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 620
+
+OperatorDocument_273:
+  id: 19326
+  type: OperatorDocumentFmu
+  expire_date: 2034-01-15
+  start_date: 2004-01-16
+  fmu_id: 11621
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 621
+
+OperatorDocument_274:
+  id: 19354
+  type: OperatorDocumentFmu
+  expire_date: 2029-05-14
+  start_date: 2014-05-15
+  fmu_id: 11496
+  required_operator_document_id: 10148
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 646
+
+OperatorDocument_275:
+  id: 19357
+  type: OperatorDocumentFmu
+  expire_date: 2039-11-24
+  start_date: 2009-11-25
+  fmu_id: 11496
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 648
+
+OperatorDocument_276:
+  id: 19358
+  type: OperatorDocumentCountry
+  expire_date: 2097-11-09
+  start_date: 1998-11-10
+  required_operator_document_id: 10126
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 649
+
+OperatorDocument_277:
+  id: 19359
+  type: OperatorDocumentFmu
+  expire_date: 2038-08-31
+  start_date: 2008-09-01
+  fmu_id: 11499
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 650
+
+OperatorDocument_278:
+  id: 19360
+  type: OperatorDocumentFmu
+  expire_date: 2038-08-31
+  start_date: 2008-09-01
+  fmu_id: 11499
+  required_operator_document_id: 10142
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 651
+
+OperatorDocument_279:
+  id: 20017
+  type: OperatorDocumentFmu
+  expire_date: 2047-05-14
+  start_date: 2017-11-13
+  fmu_id: 11496
+  required_operator_document_id: 10129
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 744
+
+OperatorDocument_280:
+  id: 20014
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2007-02-15
+  fmu_id: 11496
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 741
+
+OperatorDocument_281:
+  id: 20009
+  type: OperatorDocumentCountry
+  expire_date: 2022-10-25
+  start_date: 2022-04-25
+  required_operator_document_id: 10140
+  status: doc_not_provided
+  operator_id: 10623
+  note: Lorem ipsum for note
+
+OperatorDocument_282:
+  id: 20018
+  type: OperatorDocumentFmu
+  expire_date: 2029-01-06
+  start_date: 2014-01-06
+  fmu_id: 11499
+  required_operator_document_id: 10127
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2105
+
+OperatorDocument_283:
+  id: 20025
+  type: OperatorDocumentCountry
+  expire_date: 2111-12-11
+  start_date: 2012-12-12
+  required_operator_document_id: 10125
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 748
+
+OperatorDocument_284:
+  id: 20026
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2018-01-05
+  required_operator_document_id: 10139
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2377
+
+OperatorDocument_285:
+  id: 20029
+  type: OperatorDocumentCountry
+  expire_date: 2025-02-01
+  start_date: 2023-02-01
+  required_operator_document_id: 10143
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2119
+
+OperatorDocument_286:
+  id: 20019
+  type: OperatorDocumentFmu
+  expire_date: 2025-02-14
+  start_date: 2007-02-15
+  fmu_id: 11499
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 746
+
+OperatorDocument_287:
+  id: 20721
+  type: OperatorDocumentFmu
+  expire_date: 2023-05-28
+  start_date: 2018-05-28
+  fmu_id: 12
+  required_operator_document_id: 88
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 844
+
+OperatorDocument_288:
+  id: 20132
+  type: OperatorDocumentFmu
+  expire_date: 2031-09-01
+  start_date: 2016-09-02
+  fmu_id: 109
+  required_operator_document_id: 48
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 803
+
+OperatorDocument_289:
+  id: 340
+  type: OperatorDocumentCountry
+  expire_date: 2022-06-15
+  start_date: 2022-01-31
+  required_operator_document_id: 101
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3026
+
+OperatorDocument_290:
+  id: 20662
+  type: OperatorDocumentFmu
+  expire_date: 2021-12-31
+  start_date: 2023-08-11
+  fmu_id: 55
+  required_operator_document_id: 27
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4359
+
+OperatorDocument_291:
+  id: 20552
+  type: OperatorDocumentFmu
+  expire_date: 2031-04-03
+  start_date: 2016-04-06
+  fmu_id: 109
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 815
+
+OperatorDocument_292:
+  id: 20553
+  type: OperatorDocumentFmu
+  expire_date: 2031-04-06
+  start_date: 2016-04-06
+  fmu_id: 109
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 816
+
+OperatorDocument_293:
+  id: 20652
+  type: OperatorDocumentCountry
+  expire_date: 2115-08-10
+  start_date: 2016-08-11
+  required_operator_document_id: 20004
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 819
+
+OperatorDocument_294:
+  id: 20657
+  type: OperatorDocumentFmu
+  expire_date: 2046-09-19
+  start_date: 2016-09-26
+  fmu_id: 109
+  required_operator_document_id: 45
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 824
+
+OperatorDocument_295:
+  id: 4568
+  type: OperatorDocumentFmu
+  expire_date: 2023-06-30
+  start_date: 2023-05-25
+  fmu_id: 105
+  required_operator_document_id: 116
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4097
+
+OperatorDocument_296:
+  id: 20769
+  type: OperatorDocumentCountry
+  expire_date: 2024-06-20
+  start_date: 2019-06-20
+  required_operator_document_id: 4
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 869
+
+OperatorDocument_297:
+  id: 22009
+  type: OperatorDocumentFmu
+  expire_date: 2019-12-31
+  start_date: 2018-01-01
+  fmu_id: 84
+  required_operator_document_id: 116
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 992
+
+OperatorDocument_298:
+  id: 22019
+  type: OperatorDocumentFmu
+  expire_date: 2022-10-04
+  start_date: 2019-10-05
+  fmu_id: 84
+  required_operator_document_id: 21
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 993
+
+OperatorDocument_299:
+  id: 21859
+  type: OperatorDocumentCountry
+  expire_date: 2020-10-08
+  start_date: 2019-10-09
+  required_operator_document_id: 2
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 961
+
+OperatorDocument_300:
+  id: 21862
+  type: OperatorDocumentCountry
+  expire_date: 2103-12-13
+  start_date: 2004-12-14
+  required_operator_document_id: 6
+  status: doc_valid
+  operator_id: 172
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 962
+
+OperatorDocument_301:
+  id: 21863
+  type: OperatorDocumentCountry
+  expire_date: 2019-12-31
+  start_date: 2019-06-24
+  required_operator_document_id: 62
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 963
+
+OperatorDocument_302:
+  id: 21864
+  type: OperatorDocumentCountry
+  expire_date: 2019-12-31
+  start_date: 2019-04-09
+  required_operator_document_id: 80
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 964
+
+OperatorDocument_303:
+  id: 21865
+  type: OperatorDocumentCountry
+  expire_date: 2020-12-31
+  start_date: 2013-12-08
+  required_operator_document_id: 103
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 965
+
+OperatorDocument_304:
+  id: 22497
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 56
+  required_operator_document_id: 111
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3720
+
+OperatorDocument_305:
+  id: 22003
+  type: OperatorDocumentFmu
+  expire_date: 2031-04-05
+  start_date: 2016-04-06
+  fmu_id: 84
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 988
+
+OperatorDocument_306:
+  id: 22005
+  type: OperatorDocumentFmu
+  expire_date: 2031-04-05
+  start_date: 2016-04-06
+  fmu_id: 84
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 989
+
+OperatorDocument_307:
+  id: 22007
+  type: OperatorDocumentFmu
+  expire_date: 2019-05-31
+  start_date: 2019-01-01
+  fmu_id: 84
+  required_operator_document_id: 115
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 990
+
+OperatorDocument_308:
+  id: 22008
+  type: OperatorDocumentFmu
+  expire_date: 2019-06-30
+  start_date: 2019-01-01
+  fmu_id: 84
+  required_operator_document_id: 70
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 991
+
+OperatorDocument_309:
+  id: 21870
+  type: OperatorDocumentCountry
+  expire_date: 2022-05-28
+  start_date: 2017-05-29
+  required_operator_document_id: 4
+  status: doc_expired
+  operator_id: 172
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 966
+
+OperatorDocument_310:
+  id: 21826
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2020-01-01
+  required_operator_document_id: 103
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 942
+
+OperatorDocument_311:
+  id: 21935
+  type: OperatorDocumentCountry
+  expire_date: 2022-07-27
+  start_date: 2021-07-28
+  required_operator_document_id: 2
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2923
+
+OperatorDocument_312:
+  id: 21954
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 15
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 986
+
+OperatorDocument_313:
+  id: 21955
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 106
+  status: doc_valid
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 987
+
+OperatorDocument_314:
+  id: 21941
+  type: OperatorDocumentFmu
+  expire_date: 2023-05-03
+  start_date: 2022-05-03
+  fmu_id: 84
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_315:
+  id: 22029
+  type: OperatorDocumentFmu
+  expire_date: 2021-12-31
+  start_date: 2019-01-01
+  fmu_id: 107
+  required_operator_document_id: 112
+  status: doc_invalid
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 998
+
+OperatorDocument_316:
+  id: 22031
+  type: OperatorDocumentCountry
+  expire_date: 2021-12-31
+  start_date: 2013-04-27
+  required_operator_document_id: 103
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 999
+
+OperatorDocument_317:
+  id: 22401
+  type: OperatorDocumentFmu
+  expire_date: 2052-12-31
+  start_date: 2022-01-01
+  fmu_id: 55
+  required_operator_document_id: 45
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3635
+
+OperatorDocument_318:
+  id: 22390
+  type: OperatorDocumentFmu
+  expire_date: 2024-07-01
+  start_date: 2009-07-01
+  fmu_id: 53
+  required_operator_document_id: 47
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1114
+
+OperatorDocument_319:
+  id: 22394
+  type: OperatorDocumentFmu
+  expire_date: 2052-12-31
+  start_date: 2022-01-01
+  fmu_id: 55
+  required_operator_document_id: 47
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3634
+
+OperatorDocument_320:
+  id: 22524
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 54
+  required_operator_document_id: 27
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3678
+
+OperatorDocument_321:
+  id: 4067
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2022-01-01
+  required_operator_document_id: 4
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3413
+
+OperatorDocument_322:
+  id: 22528
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-25
+  start_date: 2022-11-25
+  fmu_id: 109
+  required_operator_document_id: 111
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_323:
+  id: 22231
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-02-28
+  required_operator_document_id: 10135
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3799
+
+OperatorDocument_324:
+  id: 22526
+  type: OperatorDocumentFmu
+  expire_date: 2027-05-10
+  start_date: 2021-10-26
+  fmu_id: 54
+  required_operator_document_id: 32
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2949
+
+OperatorDocument_325:
+  id: 22237
+  type: OperatorDocumentCountry
+  expire_date: 2024-04-28
+  start_date: 2023-04-28
+  required_operator_document_id: 104
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4224
+
+OperatorDocument_326:
+  id: 22389
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-08
+  start_date: 2008-03-01
+  fmu_id: 53
+  required_operator_document_id: 45
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1113
+
+OperatorDocument_327:
+  id: 22388
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-08
+  start_date: 2008-03-01
+  fmu_id: 53
+  required_operator_document_id: 48
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1112
+
+OperatorDocument_328:
+  id: 22478
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-09-15
+  fmu_id: 55
+  required_operator_document_id: 116
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
+    année '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_329:
+  id: 22489
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 56
+  required_operator_document_id: 112
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3719
+
+OperatorDocument_330:
+  id: 22522
+  type: OperatorDocumentFmu
+  expire_date: 2032-07-01
+  start_date: 2017-07-01
+  fmu_id: 109
+  required_operator_document_id: 47
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1159
+
+OperatorDocument_331:
+  id: 22486
+  type: OperatorDocumentFmu
+  expire_date: 2033-12-30
+  start_date: 2008-12-31
+  fmu_id: 56
+  required_operator_document_id: 86
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1143
+
+OperatorDocument_332:
+  id: 22529
+  type: OperatorDocumentFmu
+  expire_date: 2020-12-31
+  start_date: 2020-01-01
+  fmu_id: 55
+  required_operator_document_id: 111
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1164
+
+OperatorDocument_333:
+  id: 22530
+  type: OperatorDocumentFmu
+  expire_date: 2020-12-31
+  start_date: 2020-01-01
+  fmu_id: 54
+  required_operator_document_id: 111
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1165
+
+OperatorDocument_334:
+  id: 22533
+  type: OperatorDocumentFmu
+  expire_date: 2034-12-31
+  start_date: 2019-05-09
+  fmu_id: 109
+  required_operator_document_id: 24
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1166
+
+OperatorDocument_335:
+  id: 22535
+  type: OperatorDocumentFmu
+  expire_date: 2035-02-12
+  start_date: 2020-05-29
+  fmu_id: 53
+  required_operator_document_id: 86
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1167
+
+OperatorDocument_336:
+  id: 22536
+  type: OperatorDocumentFmu
+  expire_date: 2031-03-11
+  start_date: 2020-05-29
+  fmu_id: 54
+  required_operator_document_id: 86
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1168
+
+OperatorDocument_337:
+  id: 22537
+  type: OperatorDocumentFmu
+  expire_date: 2032-12-30
+  start_date: 2020-05-29
+  fmu_id: 55
+  required_operator_document_id: 86
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1169
+
+OperatorDocument_338:
+  id: 22539
+  type: OperatorDocumentFmu
+  expire_date: 2024-12-31
+  start_date: 2020-06-01
+  fmu_id: 54
+  required_operator_document_id: 18
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 1171
+
+OperatorDocument_339:
+  id: 22601
+  type: OperatorDocumentCountry
+  expire_date: 2030-01-20
+  start_date: 2020-01-23
+  required_operator_document_id: 20010
+  status: doc_valid
+  operator_id: 172
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1177
+
+OperatorDocument_340:
+  id: 22603
+  type: OperatorDocumentCountry
+  expire_date: 2030-02-23
+  start_date: 2020-02-26
+  required_operator_document_id: 20010
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1179
+
+OperatorDocument_341:
+  id: 22649
+  type: OperatorDocumentCountry
+  expire_date: 2028-11-23
+  start_date: 2018-11-26
+  required_operator_document_id: 20011
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1186
+
+OperatorDocument_342:
+  id: 22775
+  type: OperatorDocumentCountry
+  expire_date: 2029-04-15
+  start_date: 2019-04-18
+  required_operator_document_id: 20012
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1189
+
+OperatorDocument_343:
+  id: 23506
+  type: OperatorDocumentFmu
+  expire_date: 2015-09-15
+  start_date: 2000-09-18
+  fmu_id: 11634
+  required_operator_document_id: 10148
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1234
+
+OperatorDocument_344:
+  id: 23690
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-04-13
+  fmu_id: 11602
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1326
+
+OperatorDocument_345:
+  id: 23681
+  type: OperatorDocumentFmu
+  expire_date: 2023-03-30
+  start_date: 2022-06-10
+  fmu_id: 11602
+  required_operator_document_id: 10133
+  status: doc_expired
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3005
+
+OperatorDocument_346:
+  id: 23499
+  type: OperatorDocumentFmu
+  expire_date: 2016-05-02
+  start_date: 2015-05-03
+  fmu_id: 11579
+  required_operator_document_id: 10132
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1227
+
+OperatorDocument_347:
+  id: 23507
+  type: OperatorDocumentFmu
+  expire_date: 2003-10-20
+  start_date: 2000-10-20
+  fmu_id: 11618
+  required_operator_document_id: 10128
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1235
+
+OperatorDocument_348:
+  id: 23495
+  type: OperatorDocumentFmu
+  expire_date: 2025-05-28
+  start_date: 2010-05-28
+  fmu_id: 11579
+  required_operator_document_id: 10133
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1223
+
+OperatorDocument_349:
+  id: 23496
+  type: OperatorDocumentFmu
+  expire_date: 2025-05-28
+  start_date: 2010-05-28
+  fmu_id: 11618
+  required_operator_document_id: 10133
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1224
+
+OperatorDocument_350:
+  id: 23497
+  type: OperatorDocumentFmu
+  expire_date: 2025-05-28
+  start_date: 2010-05-28
+  fmu_id: 11634
+  required_operator_document_id: 10133
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1225
+
+OperatorDocument_351:
+  id: 23498
+  type: OperatorDocumentFmu
+  expire_date: 2025-05-28
+  start_date: 2010-05-28
+  fmu_id: 11634
+  required_operator_document_id: 10134
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1226
+
+OperatorDocument_352:
+  id: 23500
+  type: OperatorDocumentFmu
+  expire_date: 2016-03-04
+  start_date: 2015-03-05
+  fmu_id: 11618
+  required_operator_document_id: 10132
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1228
+
+OperatorDocument_353:
+  id: 23501
+  type: OperatorDocumentFmu
+  expire_date: 2016-03-04
+  start_date: 2015-03-05
+  fmu_id: 11634
+  required_operator_document_id: 10132
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1229
+
+OperatorDocument_354:
+  id: 23502
+  type: OperatorDocumentFmu
+  expire_date: 2030-03-01
+  start_date: 2015-03-05
+  fmu_id: 11579
+  required_operator_document_id: 10134
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1230
+
+OperatorDocument_355:
+  id: 23503
+  type: OperatorDocumentFmu
+  expire_date: 2030-03-01
+  start_date: 2015-03-05
+  fmu_id: 11618
+  required_operator_document_id: 10134
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1231
+
+OperatorDocument_356:
+  id: 23504
+  type: OperatorDocumentFmu
+  expire_date: 2015-09-15
+  start_date: 2000-09-18
+  fmu_id: 11579
+  required_operator_document_id: 10148
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1232
+
+OperatorDocument_357:
+  id: 23505
+  type: OperatorDocumentFmu
+  expire_date: 2015-09-15
+  start_date: 2000-09-18
+  fmu_id: 11618
+  required_operator_document_id: 10148
+  status: doc_pending
+  operator_id: 10637
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1233
+
+OperatorDocument_358:
+  id: 23691
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 1999-01-06
+  fmu_id: 11602
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1327
+
+OperatorDocument_359:
+  id: 23542
+  type: OperatorDocumentFmu
+  expire_date: 2031-07-01
+  start_date: 2021-07-02
+  fmu_id: 56
+  required_operator_document_id: 48
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1262
+
+OperatorDocument_360:
+  id: 23664
+  type: OperatorDocumentCountry
+  expire_date: 2089-08-03
+  start_date: 1990-08-03
+  required_operator_document_id: 10126
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1313
+
+OperatorDocument_361:
+  id: 23671
+  type: OperatorDocumentCountry
+  expire_date: 2018-09-15
+  start_date: 2018-08-27
+  required_operator_document_id: 10140
+  status: doc_expired
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1317
+
+OperatorDocument_362:
+  id: 23672
+  type: OperatorDocumentCountry
+  expire_date: 2028-04-08
+  start_date: 2020-04-08
+  required_operator_document_id: 10143
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1318
+
+OperatorDocument_363:
+  id: 23647
+  type: OperatorDocumentCountry
+  expire_date: 2035-01-29
+  start_date: 2020-01-29
+  required_operator_document_id: 20010
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1303
+
+OperatorDocument_364:
+  id: 23673
+  type: OperatorDocumentCountry
+  expire_date: 2028-12-31
+  start_date: 2018-01-15
+  required_operator_document_id: 10139
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1319
+
+OperatorDocument_365:
+  id: 23678
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-04-13
+  fmu_id: 11569
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1322
+
+OperatorDocument_366:
+  id: 23679
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 1999-01-06
+  fmu_id: 11569
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1323
+
+OperatorDocument_367:
+  id: 23709
+  type: OperatorDocumentFmu
+  expire_date: 2025-12-31
+  start_date: 2010-04-13
+  fmu_id: 11604
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1334
+
+OperatorDocument_368:
+  id: 23720
+  type: OperatorDocumentCountry
+  expire_date: 2079-12-31
+  start_date: 1980-04-24
+  required_operator_document_id: 10126
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1341
+
+OperatorDocument_369:
+  id: 23725
+  type: OperatorDocumentCountry
+  expire_date: 2018-09-15
+  start_date: 2018-08-27
+  required_operator_document_id: 10140
+  status: doc_expired
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1345
+
+OperatorDocument_370:
+  id: 23726
+  type: OperatorDocumentCountry
+  expire_date: 2028-12-31
+  start_date: 2015-08-19
+  required_operator_document_id: 10143
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1346
+
+OperatorDocument_371:
+  id: 23728
+  type: OperatorDocumentCountry
+  expire_date: 2028-12-31
+  start_date: 2018-01-15
+  required_operator_document_id: 10139
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1348
+
+OperatorDocument_372:
+  id: 23739
+  type: OperatorDocumentFmu
+  expire_date: 2028-12-31
+  start_date: 1998-03-27
+  fmu_id: 11621
+  required_operator_document_id: 10127
+  status: doc_invalid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1357
+
+OperatorDocument_373:
+  id: 23773
+  type: OperatorDocumentCountry
+  expire_date: 2079-03-27
+  start_date: 1980-03-28
+  required_operator_document_id: 10126
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1367
+
+OperatorDocument_374:
+  id: 21890
+  type: OperatorDocumentFmu
+  expire_date: 22023-01-31
+  start_date: 2023-08-23
+  fmu_id: 49
+  required_operator_document_id: 43
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4381
+
+OperatorDocument_375:
+  id: 3905
+  type: OperatorDocumentFmu
+  expire_date: 2042-12-31
+  start_date: 2014-01-01
+  fmu_id: 105
+  required_operator_document_id: 113
+  status: doc_not_required
+  operator_id: 165
+  uploaded_by: operator
+  reason: 'L''entreprise est en activité et met en œuvre son plan d''aménagement '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_376:
+  id: 23794
+  type: OperatorDocumentFmu
+  expire_date: 2025-07-14
+  start_date: 2010-07-15
+  fmu_id: 11602
+  required_operator_document_id: 10127
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2186
+
+OperatorDocument_377:
+  id: 23792
+  type: OperatorDocumentFmu
+  expire_date: 2025-07-14
+  start_date: 2025-07-15
+  fmu_id: 11569
+  required_operator_document_id: 10127
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2185
+
+OperatorDocument_378:
+  id: 23798
+  type: OperatorDocumentFmu
+  expire_date: 2025-07-14
+  start_date: 2020-07-15
+  fmu_id: 11604
+  required_operator_document_id: 10127
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2189
+
+OperatorDocument_379:
+  id: 23790
+  type: OperatorDocumentFmu
+  expire_date: 2025-07-14
+  start_date: 2010-07-15
+  fmu_id: 11660
+  required_operator_document_id: 10127
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2188
+
+OperatorDocument_380:
+  id: 23789
+  type: OperatorDocumentFmu
+  expire_date: 2027-06-21
+  start_date: 2012-06-22
+  fmu_id: 11617
+  required_operator_document_id: 10134
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1377
+
+OperatorDocument_381:
+  id: 23919
+  type: OperatorDocumentFmu
+  expire_date: 2025-09-13
+  start_date: 2010-09-14
+  fmu_id: 11602
+  required_operator_document_id: 10148
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1413
+
+OperatorDocument_382:
+  id: 23927
+  type: OperatorDocumentCountry
+  expire_date: 2048-10-19
+  start_date: 1949-10-19
+  required_operator_document_id: 10125
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1416
+
+OperatorDocument_383:
+  id: 23965
+  type: OperatorDocumentCountry
+  expire_date: 2089-06-30
+  start_date: 2016-07-01
+  required_operator_document_id: 10125
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1437
+
+OperatorDocument_384:
+  id: 1683
+  type: OperatorDocumentFmu
+  expire_date: 2019-06-04
+  start_date: 2014-06-04
+  fmu_id: 105
+  required_operator_document_id: 18
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4166
+
+OperatorDocument_385:
+  id: 116625
+  type: OperatorDocumentFmu
+  expire_date: 2023-09-30
+  start_date: 2023-06-30
+  fmu_id: 53
+  required_operator_document_id: 115
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4274
+
+OperatorDocument_386:
+  id: 4028
+  type: OperatorDocumentFmu
+  expire_date: 2024-05-24
+  start_date: 2023-05-25
+  fmu_id: 105
+  required_operator_document_id: 84
+  status: doc_not_provided
+  operator_id: 165
+  note: Lorem ipsum for note
+
+OperatorDocument_387:
+  id: 1692
+  type: OperatorDocumentFmu
+  expire_date: 2037-09-06
+  start_date: 2013-09-07
+  fmu_id: 105
+  required_operator_document_id: 47
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4091
+
+OperatorDocument_388:
+  id: 24033
+  type: OperatorDocumentCountry
+  expire_date: 2025-12-31
+  start_date: 2020-12-10
+  required_operator_document_id: 20012
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1484
+
+OperatorDocument_389:
+  id: 24034
+  type: OperatorDocumentCountry
+  expire_date: 2025-12-31
+  start_date: 2020-12-10
+  required_operator_document_id: 20012
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1485
+
+OperatorDocument_390:
+  id: 24035
+  type: OperatorDocumentCountry
+  expire_date: 2025-12-31
+  start_date: 2020-12-10
+  required_operator_document_id: 20012
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1486
+
+OperatorDocument_391:
+  id: 4846
+  type: OperatorDocumentFmu
+  expire_date: 2023-09-17
+  start_date: 2023-06-09
+  fmu_id: 105
+  required_operator_document_id: 117
+  status: doc_not_provided
+  operator_id: 165
+  note: Lorem ipsum for note
+
+OperatorDocument_392:
+  id: 116294
+  type: OperatorDocumentCountry
+  expire_date: 2025-12-10
+  start_date: 2020-12-10
+  required_operator_document_id: 94
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1620
+
+OperatorDocument_393:
+  id: 116295
+  type: OperatorDocumentCountry
+  expire_date: 2026-12-31
+  start_date: 2021-01-28
+  required_operator_document_id: 94
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1621
+
+OperatorDocument_394:
+  id: 116384
+  type: OperatorDocumentCountry
+  expire_date: 2022-12-31
+  start_date: 2022-03-11
+  required_operator_document_id: 10135
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2672
+
+OperatorDocument_395:
+  id: 116609
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 54
+  required_operator_document_id: 38
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3623
+
+OperatorDocument_396:
+  id: 116422
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 56
+  required_operator_document_id: 38
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4363
+
+OperatorDocument_397:
+  id: 116499
+  type: OperatorDocumentFmu
+  expire_date: 2024-05-19
+  start_date: 2023-04-20
+  fmu_id: 56
+  required_operator_document_id: 84
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4020
+
+OperatorDocument_398:
+  id: 116455
+  type: OperatorDocumentCountry
+  expire_date: 2024-02-16
+  start_date: 2023-02-16
+  required_operator_document_id: 114
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3758
+
+OperatorDocument_399:
+  id: 116452
+  type: OperatorDocumentFmu
+  expire_date: 2027-12-31
+  start_date: 2022-01-01
+  fmu_id: 56
+  required_operator_document_id: 18
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2621
+
+OperatorDocument_400:
+  id: 116508
+  type: OperatorDocumentFmu
+  expire_date: 2024-03-13
+  start_date: 2023-03-13
+  fmu_id: 11569
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3847
+
+OperatorDocument_401:
+  id: 116509
+  type: OperatorDocumentFmu
+  expire_date: 2024-03-13
+  start_date: 2023-03-13
+  fmu_id: 11602
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3848
+
+OperatorDocument_402:
+  id: 116503
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-07
+  fmu_id: 11660
+  required_operator_document_id: 10131
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3865
+
+OperatorDocument_403:
+  id: 116502
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-07
+  fmu_id: 11604
+  required_operator_document_id: 10131
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3864
+
+OperatorDocument_404:
+  id: 116501
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-07
+  fmu_id: 11602
+  required_operator_document_id: 10131
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3863
+
+OperatorDocument_405:
+  id: 116505
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-16
+  fmu_id: 11621
+  required_operator_document_id: 10131
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3887
+
+OperatorDocument_406:
+  id: 116506
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-14
+  fmu_id: 11621
+  required_operator_document_id: 10130
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3884
+
+OperatorDocument_407:
+  id: 116512
+  type: OperatorDocumentFmu
+  expire_date: 2024-01-18
+  start_date: 2023-01-18
+  fmu_id: 11617
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3673
+
+OperatorDocument_408:
+  id: 116459
+  type: OperatorDocumentCountry
+  expire_date: 2024-02-16
+  start_date: 2023-02-16
+  required_operator_document_id: 54
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3753
+
+OperatorDocument_409:
+  id: 116605
+  type: OperatorDocumentCountry
+  expire_date: 2024-07-16
+  start_date: 2023-07-17
+  required_operator_document_id: 54
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4358
+
+OperatorDocument_410:
+  id: 116510
+  type: OperatorDocumentFmu
+  expire_date: 2024-03-13
+  start_date: 2023-03-13
+  fmu_id: 11604
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3849
+
+OperatorDocument_411:
+  id: 116511
+  type: OperatorDocumentFmu
+  expire_date: 2024-03-13
+  start_date: 2023-03-13
+  fmu_id: 11660
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3850
+
+OperatorDocument_412:
+  id: 116580
+  type: OperatorDocumentFmu
+  expire_date: 2026-12-31
+  start_date: 2021-01-01
+  fmu_id: 53
+  required_operator_document_id: 18
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1740
+
+OperatorDocument_413:
+  id: 116513
+  type: OperatorDocumentFmu
+  expire_date: 2024-01-18
+  start_date: 2023-01-18
+  fmu_id: 11621
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3672
+
+OperatorDocument_414:
+  id: 116588
+  type: OperatorDocumentFmu
+  expire_date: 2030-12-31
+  start_date: 2015-01-01
+  fmu_id: 54
+  required_operator_document_id: 45
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1743
+
+OperatorDocument_415:
+  id: 116603
+  type: OperatorDocumentCountry
+  expire_date: 2024-01-08
+  start_date: 2023-01-09
+  required_operator_document_id: 114
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3629
+
+OperatorDocument_416:
+  id: 116576
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  required_operator_document_id: 103
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3625
+
+OperatorDocument_417:
+  id: 116607
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 55
+  required_operator_document_id: 38
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3624
+
+OperatorDocument_418:
+  id: 116598
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 109
+  required_operator_document_id: 38
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3660
+
+OperatorDocument_419:
+  id: 116584
+  type: OperatorDocumentFmu
+  expire_date: 2023-04-16
+  start_date: 2022-04-16
+  fmu_id: 53
+  required_operator_document_id: 84
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3626
+
+OperatorDocument_420:
+  id: 116892
+  type: OperatorDocumentCountry
+  expire_date: 2021-09-26
+  start_date: 2021-06-26
+  required_operator_document_id: 10136
+  status: doc_expired
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2144
+
+OperatorDocument_421:
+  id: 116890
+  type: OperatorDocumentCountry
+  expire_date: 2022-05-06
+  start_date: 2023-04-06
+  required_operator_document_id: 10136
+  status: doc_expired
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3898
+
+OperatorDocument_422:
+  id: 116596
+  type: OperatorDocumentFmu
+  expire_date: 2024-05-31
+  start_date: 2023-04-19
+  fmu_id: 55
+  required_operator_document_id: 84
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4230
+
+OperatorDocument_423:
+  id: 116592
+  type: OperatorDocumentFmu
+  expire_date: 2024-05-31
+  start_date: 2023-04-19
+  fmu_id: 54
+  required_operator_document_id: 84
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4229
+
+OperatorDocument_424:
+  id: 116578
+  type: OperatorDocumentCountry
+  expire_date: 2024-06-01
+  start_date: 2023-06-02
+  required_operator_document_id: 101
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4269
+
+OperatorDocument_425:
+  id: 116641
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-04-26
+  fmu_id: 54
+  required_operator_document_id: 116
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
+    année '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_426:
+  id: 116582
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 53
+  required_operator_document_id: 38
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3622
+
+OperatorDocument_427:
+  id: 116624
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-09-15
+  fmu_id: 53
+  required_operator_document_id: 116
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
+    année '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_428:
+  id: 116634
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-09-15
+  fmu_id: 109
+  required_operator_document_id: 116
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
+    année '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_429:
+  id: 116631
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-10-01
+  fmu_id: 55
+  required_operator_document_id: 70
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4446
+
+OperatorDocument_430:
+  id: 116628
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-10-01
+  fmu_id: 54
+  required_operator_document_id: 70
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4445
+
+OperatorDocument_431:
+  id: 116626
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-15
+  start_date: 2023-08-30
+  fmu_id: 53
+  required_operator_document_id: 70
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4443
+
+OperatorDocument_432:
+  id: 116627
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-15
+  start_date: 2023-07-28
+  fmu_id: 53
+  required_operator_document_id: 89
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4450
+
+OperatorDocument_433:
+  id: 116629
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-15
+  start_date: 2023-07-28
+  fmu_id: 54
+  required_operator_document_id: 89
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4451
+
+OperatorDocument_434:
+  id: 116632
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-15
+  start_date: 2023-07-28
+  fmu_id: 55
+  required_operator_document_id: 89
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4452
+
+OperatorDocument_435:
+  id: 116633
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-15
+  start_date: 2023-08-30
+  fmu_id: 109
+  required_operator_document_id: 115
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4448
+
+OperatorDocument_436:
+  id: 116638
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-15
+  start_date: 2023-08-30
+  fmu_id: 54
+  required_operator_document_id: 115
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4444
+
+OperatorDocument_437:
+  id: 116927
+  type: OperatorDocumentCountry
+  expire_date: 2023-04-30
+  start_date: 2022-01-01
+  required_operator_document_id: 80
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4049
+
+OperatorDocument_438:
+  id: 116911
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-20
+  start_date: 2022-08-21
+  fmu_id: 55
+  required_operator_document_id: 32
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3692
+
+OperatorDocument_439:
+  id: 116905
+  type: OperatorDocumentFmu
+  expire_date: 2024-02-16
+  start_date: 2023-02-16
+  fmu_id: 56
+  required_operator_document_id: 89
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3757
+
+OperatorDocument_440:
+  id: 116897
+  type: OperatorDocumentFmu
+  expire_date: 2024-02-16
+  start_date: 2023-02-16
+  fmu_id: 56
+  required_operator_document_id: 115
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3756
+
+OperatorDocument_441:
+  id: 116899
+  type: OperatorDocumentFmu
+  expire_date: 2024-02-16
+  start_date: 2023-02-16
+  fmu_id: 56
+  required_operator_document_id: 116
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3755
+
+OperatorDocument_442:
+  id: 116898
+  type: OperatorDocumentFmu
+  expire_date: 2024-02-16
+  start_date: 2023-02-16
+  fmu_id: 56
+  required_operator_document_id: 70
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3754
+
+OperatorDocument_443:
+  id: 116900
+  type: OperatorDocumentCountry
+  expire_date: 2024-04-22
+  start_date: 2023-04-23
+  required_operator_document_id: 101
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4179
+
+OperatorDocument_444:
+  id: 117051
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-03-16
+  required_operator_document_id: 10135
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3809
+
+OperatorDocument_445:
+  id: 117053
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-03-14
+  required_operator_document_id: 10149
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3856
+
+OperatorDocument_446:
+  id: 117055
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-03-16
+  required_operator_document_id: 10135
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3822
+
+OperatorDocument_447:
+  id: 117057
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-03-22
+  required_operator_document_id: 10149
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3851
+
+OperatorDocument_448:
+  id: 117327
+  type: OperatorDocumentFmu
+  expire_date: 2022-12-31
+  start_date: 2016-04-06
+  fmu_id: 109
+  required_operator_document_id: 86
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1883
+
+OperatorDocument_449:
+  id: 117336
+  type: OperatorDocumentFmu
+  expire_date: 2023-06-10
+  start_date: 2022-06-10
+  fmu_id: 11621
+  required_operator_document_id: 10133
+  status: doc_expired
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3260
+
+OperatorDocument_450:
+  id: 117338
+  type: OperatorDocumentFmu
+  expire_date: 2021-12-31
+  start_date: 2021-04-19
+  fmu_id: 11617
+  required_operator_document_id: 10133
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1888
+
+OperatorDocument_451:
+  id: 4254
+  type: OperatorDocumentFmu
+  expire_date: 2032-12-29
+  start_date: 2012-06-08
+  fmu_id: 67
+  required_operator_document_id: 11
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: admin
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 206
+
+OperatorDocument_452:
+  id: 23727
+  type: OperatorDocumentCountry
+  expire_date: 2024-04-20
+  start_date: 2022-04-02
+  required_operator_document_id: 10144
+  status: doc_valid
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2783
+
+OperatorDocument_453:
+  id: 19071
+  type: OperatorDocumentFmu
+  expire_date: 2036-04-24
+  start_date: 2021-04-28
+  fmu_id: 11621
+  required_operator_document_id: 10148
+  status: doc_not_provided
+  operator_id: 10589
+  note: Lorem ipsum for note
+
+OperatorDocument_454:
+  id: 23778
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2022-03-01
+  required_operator_document_id: 10144
+  status: doc_not_required
+  operator_id: 10604
+  uploaded_by: operator
+  reason: L'effectif des employés de l'entreprise est que de 10. Il existe un contrat
+    de sous-traitance avec CFC pour la mise à disposition du personnel.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_455:
+  id: 6818
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2012-06-07
+  fmu_id: 56
+  required_operator_document_id: 27
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2960
+
+OperatorDocument_456:
+  id: 20710
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2022-11-28
+  fmu_id: 12
+  required_operator_document_id: 37
+  status: doc_invalid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_457:
+  id: 23820
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2022-11-28
+  fmu_id: 12
+  required_operator_document_id: 121
+  status: doc_invalid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_458:
+  id: 116379
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-06
+  fmu_id: 11602
+  required_operator_document_id: 10130
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3810
+
+OperatorDocument_459:
+  id: 23648
+  type: OperatorDocumentCountry
+  expire_date: 2024-03-27
+  start_date: 2023-03-28
+  required_operator_document_id: 50
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4404
+
+OperatorDocument_460:
+  id: 4088
+  type: OperatorDocumentCountry
+  expire_date: 2116-09-10
+  start_date: 2017-09-11
+  required_operator_document_id: 6
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2989
+
+OperatorDocument_461:
+  id: 116381
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-06
+  fmu_id: 11660
+  required_operator_document_id: 10130
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3812
+
+OperatorDocument_462:
+  id: 116380
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-06
+  fmu_id: 11604
+  required_operator_document_id: 10130
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3811
+
+OperatorDocument_463:
+  id: 21643
+  type: OperatorDocumentCountry
+  expire_date: 2024-01-31
+  start_date: 2023-01-20
+  required_operator_document_id: 20008
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3686
+
+OperatorDocument_464:
+  id: 20716
+  type: OperatorDocumentCountry
+  expire_date: 2024-03-31
+  start_date: 2023-02-27
+  required_operator_document_id: 63
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3805
+
+OperatorDocument_465:
+  id: 21896
+  type: OperatorDocumentFmu
+  expire_date: 2044-09-05
+  start_date: 2019-09-05
+  fmu_id: 49
+  required_operator_document_id: 20
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1939
+
+OperatorDocument_466:
+  id: 21891
+  type: OperatorDocumentFmu
+  expire_date: 2024-12-31
+  start_date: 2019-11-21
+  fmu_id: 49
+  required_operator_document_id: 33
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1941
+
+OperatorDocument_467:
+  id: 21893
+  type: OperatorDocumentFmu
+  expire_date: 2024-12-31
+  start_date: 2019-11-21
+  fmu_id: 49
+  required_operator_document_id: 28
+  status: doc_not_required
+  operator_id: 197
+  uploaded_by: operator
+  reason: 'Car les activités du plan de gestion quinquennal (PGQ1) de cette concession
+    005/18 est en cours de sa période de validité de 5 ans (21 novembre 2019 au 21
+    novembre 2024). '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_468:
+  id: 6786
+  type: OperatorDocumentCountry
+  expire_date: 2024-06-07
+  start_date: 2019-06-07
+  required_operator_document_id: 126
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 1942
+
+OperatorDocument_469:
+  id: 22512
+  type: OperatorDocumentCountry
+  expire_date: 2024-04-30
+  start_date: 2023-05-01
+  required_operator_document_id: 80
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4018
+
+OperatorDocument_470:
+  id: 5113
+  type: OperatorDocumentCountry
+  expire_date: 2019-01-31
+  start_date: 2018-01-31
+  required_operator_document_id: 104
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 307
+
+OperatorDocument_471:
+  id: 22014
+  type: OperatorDocumentFmu
+  fmu_id: 83
+  required_operator_document_id: 115
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_472:
+  id: 22015
+  type: OperatorDocumentFmu
+  fmu_id: 83
+  required_operator_document_id: 116
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_473:
+  id: 22016
+  type: OperatorDocumentFmu
+  fmu_id: 107
+  required_operator_document_id: 115
+  status: doc_not_provided
+  operator_id: 145
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_474:
+  id: 325
+  type: OperatorDocumentCountry
+  expire_date: 2024-07-29
+  start_date: 2019-07-29
+  required_operator_document_id: 4
+  status: doc_valid
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2410
+
+OperatorDocument_475:
+  id: 21906
+  type: OperatorDocumentFmu
+  expire_date: 2043-05-28
+  start_date: 2018-05-28
+  fmu_id: 49
+  required_operator_document_id: 19
+  status: doc_not_required
+  operator_id: 197
+  uploaded_by: operator
+  reason: La concession forestière 005/18 n'a pas un plan de gestion provisoire, car
+    la CFT a commencé à travailler uniquement avec son plan d'aménagement forestier
+    qui a été déposé et validé en date du 05 septembre 2019. Cette concession 005/18
+    détient un plan de gestion quinquennal qui a été déposé et validé en date du 21
+    novembre 2019. Cette concession possède des plans annuels d'opérations forestières
+    acceptés par l'administration forestière.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_476:
+  id: 23706
+  type: OperatorDocumentFmu
+  expire_date: 2023-03-30
+  start_date: 2022-06-10
+  fmu_id: 11604
+  required_operator_document_id: 10133
+  status: doc_expired
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3004
+
+OperatorDocument_477:
+  id: 23712
+  type: OperatorDocumentFmu
+  expire_date: 2023-03-30
+  start_date: 2022-06-10
+  fmu_id: 11660
+  required_operator_document_id: 10133
+  status: doc_expired
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3007
+
+OperatorDocument_478:
+  id: 21908
+  type: OperatorDocumentFmu
+  expire_date: 2043-05-28
+  start_date: 2018-05-28
+  fmu_id: 49
+  required_operator_document_id: 20007
+  status: doc_not_required
+  operator_id: 197
+  uploaded_by: operator
+  reason: parce que la concession forestière 005/18 n'est pas une concession de donation
+    ou d'échange, non plus d'une location et d'une cession.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_479:
+  id: 23776
+  type: OperatorDocumentCountry
+  expire_date: 2022-12-31
+  start_date: 2022-03-29
+  required_operator_document_id: 10149
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2756
+
+OperatorDocument_480:
+  id: 23788
+  type: OperatorDocumentFmu
+  expire_date: 2022-12-31
+  start_date: 2021-02-03
+  fmu_id: 11617
+  required_operator_document_id: 10130
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2473
+
+OperatorDocument_481:
+  id: 21892
+  type: OperatorDocumentFmu
+  expire_date: 2023-09-16
+  start_date: 2023-03-16
+  fmu_id: 49
+  required_operator_document_id: 51
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3916
+
+OperatorDocument_482:
+  id: 118552
+  type: OperatorDocumentFmu
+  expire_date: 2024-12-31
+  start_date: 2021-08-05
+  fmu_id: 100458
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3649
+
+OperatorDocument_483:
+  id: 20013
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 11496
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10623
+  uploaded_by: operator
+  reason: Les travaux d'exploitation de cette UFA sont menées par le personnel de
+    SIENCAM
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_484:
+  id: 118553
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-30
+  fmu_id: 100458
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3951
+
+OperatorDocument_485:
+  id: 118554
+  type: OperatorDocumentFmu
+  fmu_id: 100458
+  required_operator_document_id: 10133
+  status: doc_not_provided
+  operator_id: 10623
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_486:
+  id: 118551
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2021-04-30
+  fmu_id: 100458
+  required_operator_document_id: 10145
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3646
+
+OperatorDocument_487:
+  id: 118556
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-04-28
+  fmu_id: 100458
+  required_operator_document_id: 10131
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3960
+
+OperatorDocument_488:
+  id: 118550
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-04-13
+  fmu_id: 100458
+  required_operator_document_id: 10146
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3958
+
+OperatorDocument_489:
+  id: 118555
+  type: OperatorDocumentFmu
+  expire_date: 2024-04-30
+  start_date: 2022-04-25
+  fmu_id: 100458
+  required_operator_document_id: 10132
+  status: doc_not_required
+  operator_id: 10623
+  uploaded_by: operator
+  reason: LA VENTE DE COUPE EST EXPLOITEE PAR LES EQUIPES DE SIENCAM
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_490:
+  id: 116507
+  type: OperatorDocumentCountry
+  expire_date: 2022-08-27
+  start_date: 2022-05-27
+  required_operator_document_id: 10136
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2996
+
+OperatorDocument_491:
+  id: 4265
+  type: OperatorDocumentCountry
+  expire_date: 2022-09-02
+  start_date: 2021-09-02
+  required_operator_document_id: 114
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2925
+
+OperatorDocument_492:
+  id: 21942
+  type: OperatorDocumentFmu
+  expire_date: 2022-12-31
+  start_date: 2022-01-03
+  fmu_id: 84
+  required_operator_document_id: 38
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2924
+
+OperatorDocument_493:
+  id: 4460
+  type: OperatorDocumentFmu
+  expire_date: 2027-05-10
+  start_date: 2021-10-26
+  fmu_id: 53
+  required_operator_document_id: 32
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2948
+
+OperatorDocument_494:
+  id: 6441
+  type: OperatorDocumentFmu
+  expire_date: 2027-05-09
+  start_date: 2021-10-26
+  fmu_id: 109
+  required_operator_document_id: 18
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2950
+
+OperatorDocument_495:
+  id: 6438
+  type: OperatorDocumentFmu
+  expire_date: 2027-05-10
+  start_date: 2021-10-26
+  fmu_id: 109
+  required_operator_document_id: 32
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2951
+
+OperatorDocument_496:
+  id: 20698
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2019-01-23
+  fmu_id: 11499
+  required_operator_document_id: 10137
+  status: doc_not_required
+  operator_id: 10623
+  uploaded_by: operator
+  reason: LES ACTIVITES D'EXPLOITATION SONT ARRETS DANS CETTE UFA DEPUIS 2018, SUITE
+    A LA SITUATION SECURITAIRE DANS LE SUD-OUEST
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_497:
+  id: 18918
+  type: OperatorDocumentFmu
+  expire_date: 2029-05-15
+  start_date: 2014-05-15
+  fmu_id: 11499
+  required_operator_document_id: 10128
+  status: doc_not_required
+  operator_id: 10623
+  uploaded_by: operator
+  reason: 'Cette concession a été acquise par transfert. Dans le cadre de la règlementation
+    forestière , ce type acquisition de titre ne passe pas par une nouvelle convention
+    provisoire. Nous sommes dans la continuité de la mise en œuvre du plan d''aménagement
+    du précédent concessionnaire. '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_498:
+  id: 6974
+  type: OperatorDocumentCountry
+  expire_date: 2023-09-27
+  start_date: 2023-03-27
+  required_operator_document_id: 66
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3866
+
+OperatorDocument_499:
+  id: 22230
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2015-04-15
+  required_operator_document_id: 10149
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3650
+
+OperatorDocument_500:
+  id: 20693
+  type: OperatorDocumentFmu
+  expire_date: 2029-05-14
+  start_date: 2016-06-16
+  fmu_id: 11496
+  required_operator_document_id: 10138
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: other
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 829
+
+OperatorDocument_501:
+  id: 19355
+  type: OperatorDocumentFmu
+  expire_date: 2026-05-15
+  start_date: 2023-05-16
+  fmu_id: 11496
+  required_operator_document_id: 10128
+  status: doc_not_provided
+  operator_id: 10623
+  note: Lorem ipsum for note
+
+OperatorDocument_502:
+  id: 118121
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 112
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_503:
+  id: 118122
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 111
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_504:
+  id: 118123
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 106
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_505:
+  id: 118124
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 15
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_506:
+  id: 20697
+  type: OperatorDocumentFmu
+  expire_date: 2024-03-30
+  start_date: 2023-03-30
+  fmu_id: 11496
+  required_operator_document_id: 10137
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3953
+
+OperatorDocument_507:
+  id: 23670
+  type: OperatorDocumentCountry
+  expire_date: 2024-04-20
+  start_date: 2022-04-02
+  required_operator_document_id: 10144
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2782
+
+OperatorDocument_508:
+  id: 23787
+  type: OperatorDocumentFmu
+  expire_date: 2022-12-31
+  start_date: 2022-02-16
+  fmu_id: 11617
+  required_operator_document_id: 10131
+  status: doc_expired
+  operator_id: 10604
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2544
+
+OperatorDocument_509:
+  id: 20010
+  type: OperatorDocumentFmu
+  expire_date: 2029-01-05
+  start_date: 2014-01-06
+  fmu_id: 11496
+  required_operator_document_id: 10127
+  status: doc_valid
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2104
+
+OperatorDocument_510:
+  id: 116590
+  type: OperatorDocumentFmu
+  expire_date: 2030-12-31
+  start_date: 2005-06-01
+  fmu_id: 54
+  required_operator_document_id: 47
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2150
+
+OperatorDocument_511:
+  id: 118101
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 48
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_512:
+  id: 118102
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 45
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_513:
+  id: 118103
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 41
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_514:
+  id: 118104
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 38
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_515:
+  id: 118105
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_516:
+  id: 118106
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 32
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_517:
+  id: 118107
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 27
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_518:
+  id: 118108
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 24
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_519:
+  id: 118109
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 21
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_520:
+  id: 118110
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 18
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_521:
+  id: 118111
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 11
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_522:
+  id: 118112
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 89
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_523:
+  id: 118113
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 84
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_524:
+  id: 118114
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 86
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_525:
+  id: 118115
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 70
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_526:
+  id: 118116
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 113
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_527:
+  id: 118117
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 116
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_528:
+  id: 118118
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 115
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_529:
+  id: 118119
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 47
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_530:
+  id: 118120
+  type: OperatorDocumentFmu
+  fmu_id: 68
+  required_operator_document_id: 117
+  status: doc_not_provided
+  operator_id: 172
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_531:
+  id: 21894
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-07-11
+  fmu_id: 49
+  required_operator_document_id: 37
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4234
+
+OperatorDocument_532:
+  id: 270
+  type: OperatorDocumentCountry
+  expire_date: 2052-08-29
+  start_date: 2016-05-31
+  required_operator_document_id: 8
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3283
+
+OperatorDocument_533:
+  id: 116423
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2023-07-01
+  required_operator_document_id: 99
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4180
+
+OperatorDocument_534:
+  id: 21961
+  type: OperatorDocumentFmu
+  expire_date: 2027-08-23
+  start_date: 2012-08-24
+  fmu_id: 83
+  required_operator_document_id: 45
+  status: doc_not_required
+  operator_id: 145
+  uploaded_by: operator
+  reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
+    des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
+  note: Lorem ipsum for note
+  public: true
+  source: company
+
+OperatorDocument_535:
+  id: 22025
+  type: OperatorDocumentCountry
+  expire_date: 2020-12-31
+  start_date: 2020-01-01
+  required_operator_document_id: 101
+  status: doc_expired
+  operator_id: 145
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  public: true
+  source: company
+  document_file_id: 996
+
+OperatorDocument_536:
+  id: 21902
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-07-11
+  fmu_id: 49
+  required_operator_document_id: 121
+  status: doc_valid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4233
+
+OperatorDocument_537:
+  id: 116378
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-06
+  fmu_id: 11569
+  required_operator_document_id: 10130
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3813
+
+OperatorDocument_538:
+  id: 23782
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-31
+  start_date: 2022-03-01
+  required_operator_document_id: 10141
+  status: doc_not_required
+  operator_id: 10604
+  uploaded_by: operator
+  reason: "L'effectif des employés de l'Entreprise est de 10 personnes.\r\nIl existe
+    un contrat de sous-traitance avec la CFC pour la mise à disposition du personnel."
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_539:
+  id: 6968
+  type: OperatorDocumentFmu
+  expire_date: 2023-09-24
+  start_date: 2023-08-24
+  fmu_id: 12
+  required_operator_document_id: 78
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4383
+
+OperatorDocument_540:
+  id: 22396
+  type: OperatorDocumentFmu
+  expire_date: 2026-12-31
+  start_date: 2022-01-01
+  fmu_id: 55
+  required_operator_document_id: 18
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3556
+
+OperatorDocument_541:
+  id: 7278
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2022-11-28
+  fmu_id: 12
+  required_operator_document_id: 33
+  status: doc_invalid
+  operator_id: 197
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_542:
+  id: 22546
+  type: OperatorDocumentCountry
+  expire_date: 2024-03-27
+  start_date: 2023-03-28
+  required_operator_document_id: 2
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3973
+
+OperatorDocument_543:
+  id: 1690
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2022-09-28
+  fmu_id: 105
+  required_operator_document_id: 41
+  status: doc_not_required
+  operator_id: 165
+  uploaded_by: operator
+  reason: Après avoir reçu une autorisation de coupe annuelle 2023, l'autorisation
+    provisoire n'est plus valable.
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_544:
+  id: 6426
+  type: OperatorDocumentFmu
+  expire_date: 2027-11-24
+  start_date: 2022-11-25
+  fmu_id: 67
+  required_operator_document_id: 18
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: 'PIKOUNDA NORD est entièrement consacré au projet REDD+ relatif à la réduction
+    des émissions dues à la déforestation et à la dégradation. L''activité principale
+    du projet REDD+ étant l''annulation des activités de déforestation et l’engagement
+    de conserver et protéger la zone forestière. '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_545:
+  id: 6413
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 111
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_546:
+  id: 7274
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2022-11-28
+  fmu_id: 12
+  required_operator_document_id: 43
+  status: doc_invalid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_547:
+  id: 21333
+  type: OperatorDocumentFmu
+  expire_date: 2024-01-02
+  start_date: 2023-01-02
+  fmu_id: 12
+  required_operator_document_id: 20005
+  status: doc_not_provided
+  operator_id: 197
+  note: Lorem ipsum for note
+
+OperatorDocument_548:
+  id: 20124
+  type: OperatorDocumentFmu
+  expire_date: 2052-01-11
+  start_date: 2023-01-11
+  fmu_id: 55
+  required_operator_document_id: 48
+  status: doc_valid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3636
+
+OperatorDocument_549:
+  id: 4223
+  type: OperatorDocumentFmu
+  expire_date: 2037-11-24
+  start_date: 2022-11-25
+  fmu_id: 54
+  required_operator_document_id: 15
+  status: doc_not_required
+  operator_id: 151
+  uploaded_by: operator
+  reason: 'une convention de transformation  et d''aménagement a été signée et non
+    la convention de transformation industrielle '
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_550:
+  id: 6819
+  type: OperatorDocumentFmu
+  expire_date: 2041-08-09
+  start_date: 2016-08-09
+  fmu_id: 12
+  required_operator_document_id: 28
+  status: doc_not_required
+  operator_id: 197
+  uploaded_by: other
+  reason: Le rapport d'évaluation finale de la mise en oeuvre du plan d'aménagement
+    sera exigée à la fin de la rotation, après 25 ans minimum (après 2041).
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_551:
+  id: 5061
+  type: OperatorDocumentFmu
+  expire_date: 2036-12-31
+  start_date: 2022-12-12
+  fmu_id: 56
+  required_operator_document_id: 113
+  status: doc_not_required
+  operator_id: 161
+  uploaded_by: operator
+  reason: même réponse que l'aapplication de l'autorisation de vidange
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_552:
+  id: 21936
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 84
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_553:
+  id: 20474
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2022-11-28
+  fmu_id: 12
+  required_operator_document_id: 20003
+  status: doc_invalid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_554:
+  id: 6442
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-11
+  fmu_id: 109
+  required_operator_document_id: 84
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_555:
+  id: 6455
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 55
+  required_operator_document_id: 41
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_556:
+  id: 20126
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 55
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_557:
+  id: 21580
+  type: OperatorDocumentFmu
+  expire_date: 2023-01-15
+  start_date: 2022-11-28
+  fmu_id: 12
+  required_operator_document_id: 20007
+  status: doc_invalid
+  operator_id: 197
+  uploaded_by: other
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_558:
+  id: 22527
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-25
+  start_date: 2022-11-25
+  fmu_id: 53
+  required_operator_document_id: 111
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_559:
+  id: 6417
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 112
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_560:
+  id: 6427
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 84
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_561:
+  id: 6428
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 86
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_562:
+  id: 7414
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 53
+  required_operator_document_id: 41
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_563:
+  id: 7418
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 109
+  required_operator_document_id: 41
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_564:
+  id: 20532
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 53
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_565:
+  id: 5071
+  type: OperatorDocumentFmu
+  expire_date: 2036-12-31
+  start_date: 2022-12-12
+  fmu_id: 56
+  required_operator_document_id: 117
+  status: doc_not_required
+  operator_id: 161
+  uploaded_by: operator
+  reason: l'autorisation de vidange est nécessaire à la fin de la dernière assiette
+    Annuelle de coupe du plan d'Aménagement, pour évacuer le bois l'année suivante
+    (qui n'est plus dans le plan d'aménagement
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_566:
+  id: 21938
+  type: OperatorDocumentFmu
+  expire_date: 2052-12-04
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 45
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_567:
+  id: 21945
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 27
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_568:
+  id: 21946
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 32
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_569:
+  id: 21948
+  type: OperatorDocumentFmu
+  expire_date: 2027-12-11
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 18
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_570:
+  id: 21965
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 83
+  required_operator_document_id: 38
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_571:
+  id: 21940
+  type: OperatorDocumentFmu
+  expire_date: 2052-12-04
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 48
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_572:
+  id: 21943
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 41
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_573:
+  id: 21944
+  type: OperatorDocumentFmu
+  expire_date: 2042-12-12
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 24
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_574:
+  id: 21986
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 107
+  required_operator_document_id: 38
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_575:
+  id: 6432
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-10-01
+  fmu_id: 67
+  required_operator_document_id: 70
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4447
+
+OperatorDocument_576:
+  id: 6437
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 109
+  required_operator_document_id: 27
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3679
+
+OperatorDocument_577:
+  id: 20023
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 11499
+  required_operator_document_id: 10130
+  status: doc_not_required
+  operator_id: 10623
+  uploaded_by: operator
+  reason: CETTE UFA N'EST PLUS EN ACTITIVTE DU FAIT DE LA SITUATION SECURITAIRE DANS
+    LE SUD-OUEST
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_578:
+  id: 20024
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 11499
+  required_operator_document_id: 10131
+  status: doc_not_required
+  operator_id: 10623
+  uploaded_by: operator
+  reason: CETTE UFA N'EST PLUS EN ACTITIVTE DU FAIT DE LA SITUATION SECURITAIRE DANS
+    LE SUD-OUEST
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_579:
+  id: 21937
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-12
+  start_date: 2022-12-12
+  fmu_id: 84
+  required_operator_document_id: 89
+  status: doc_not_provided
+  operator_id: 145
+  note: Lorem ipsum for note
+  public: true
+
+OperatorDocument_580:
+  id: 6982
+  type: OperatorDocumentFmu
+  expire_date: 2024-01-01
+  start_date: 2023-01-01
+  fmu_id: 12
+  required_operator_document_id: 51
+  status: doc_invalid
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_581:
+  id: 21907
+  type: OperatorDocumentFmu
+  expire_date: 2023-10-31
+  start_date: 2023-08-28
+  fmu_id: 49
+  required_operator_document_id: 20003
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4387
+
+OperatorDocument_582:
+  id: 116425
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-01-01
+  fmu_id: 56
+  required_operator_document_id: 36
+  status: doc_valid
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3717
+
+OperatorDocument_583:
+  id: 116640
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-17
+  start_date: 2022-12-17
+  fmu_id: 109
+  required_operator_document_id: 89
+  status: doc_invalid
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+
+OperatorDocument_584:
+  id: 116500
+  type: OperatorDocumentFmu
+  expire_date: 2023-12-31
+  start_date: 2023-03-07
+  fmu_id: 11569
+  required_operator_document_id: 10131
+  status: doc_valid
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3862
+
+OperatorDocument_585:
+  id: 117323
+  type: OperatorDocumentCountry
+  expire_date: 2023-10-08
+  start_date: 2023-04-09
+  required_operator_document_id: 99
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 3974
+
+OperatorDocument_586:
+  id: 6975
+  type: OperatorDocumentCountry
+  expire_date: 2023-10-09
+  start_date: 2023-07-11
+  required_operator_document_id: 60
+  status: doc_expired
+  operator_id: 197
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4242
+
+OperatorDocument_587:
+  id: 20028
+  type: OperatorDocumentCountry
+  expire_date: 2023-10-27
+  start_date: 2021-10-27
+  required_operator_document_id: 10141
+  status: doc_expired
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2384
+
+OperatorDocument_588:
+  id: 23674
+  type: OperatorDocumentCountry
+  expire_date: 2023-10-27
+  start_date: 2021-10-27
+  required_operator_document_id: 10141
+  status: doc_expired
+  operator_id: 10615
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2358
+
+OperatorDocument_589:
+  id: 23729
+  type: OperatorDocumentCountry
+  expire_date: 2023-10-27
+  start_date: 2021-10-27
+  required_operator_document_id: 10141
+  status: doc_expired
+  operator_id: 10589
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2360
+
+OperatorDocument_590:
+  id: 117041
+  type: OperatorDocumentCountry
+  expire_date: 2023-10-30
+  start_date: 2023-06-30
+  required_operator_document_id: 104
+  status: doc_expired
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4218
+
+OperatorDocument_591:
+  id: 116630
+  type: OperatorDocumentFmu
+  expire_date: 2023-10-31
+  start_date: 2023-09-01
+  fmu_id: 55
+  required_operator_document_id: 115
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4403
+
+OperatorDocument_592:
+  id: 332
+  type: OperatorDocumentCountry
+  expire_date: 2023-11-09
+  start_date: 2023-05-10
+  required_operator_document_id: 62
+  status: doc_expired
+  operator_id: 165
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4093
+
+OperatorDocument_593:
+  id: 21909
+  type: OperatorDocumentCountry
+  expire_date: 2023-11-11
+  start_date: 2023-05-12
+  required_operator_document_id: 62
+  status: doc_expired
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4181
+
+OperatorDocument_594:
+  id: 116635
+  type: OperatorDocumentFmu
+  expire_date: 2023-11-15
+  start_date: 2023-08-30
+  fmu_id: 109
+  required_operator_document_id: 70
+  status: doc_expired
+  operator_id: 151
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4449
+
+OperatorDocument_595:
+  id: 20030
+  type: OperatorDocumentCountry
+  expire_date: 2023-11-24
+  start_date: 2021-11-24
+  required_operator_document_id: 10144
+  status: doc_expired
+  operator_id: 10623
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2378
+
+OperatorDocument_596:
+  id: 4312
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 54
+  required_operator_document_id: 113
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_597:
+  id: 4313
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 54
+  required_operator_document_id: 112
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_598:
+  id: 4447
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 54
+  required_operator_document_id: 41
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_599:
+  id: 4469
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 53
+  required_operator_document_id: 113
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_600:
+  id: 4470
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 53
+  required_operator_document_id: 112
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_601:
+  id: 4647
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 109
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_602:
+  id: 6409
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 38
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_603:
+  id: 6410
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_604:
+  id: 6411
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 41
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_605:
+  id: 6415
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 113
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_606:
+  id: 6421
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 27
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_607:
+  id: 6423
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 32
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_608:
+  id: 6429
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 67
+  required_operator_document_id: 89
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_609:
+  id: 20117
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 54
+  required_operator_document_id: 36
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_610:
+  id: 20128
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 55
+  required_operator_document_id: 112
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_611:
+  id: 20130
+  type: OperatorDocumentFmu
+  expire_date: 2024-11-25
+  start_date: 2023-11-26
+  fmu_id: 109
+  required_operator_document_id: 112
+  status: doc_not_provided
+  operator_id: 151
+  note: Lorem ipsum for note
+
+OperatorDocument_612:
+  id: 116424
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-04
+  start_date: 2022-12-05
+  required_operator_document_id: 2
+  status: doc_expired
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 2619
+
+OperatorDocument_613:
+  id: 116453
+  type: OperatorDocumentCountry
+  expire_date: 2023-12-04
+  start_date: 2022-12-05
+  required_operator_document_id: 50
+  status: doc_expired
+  operator_id: 161
+  uploaded_by: operator
+  note: Lorem ipsum for note
+  source: company
+  document_file_id: 4362

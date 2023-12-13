@@ -1,0 +1,3987 @@
+
+Government_1_en_translation:
+  id: 1
+  government_id: 1
+  locale: en
+  government_entity: Not specified
+  details:
+
+Government_1_fr_translation:
+  id: 68
+  government_id: 1
+  locale: fr
+  government_entity: Not specified
+  details:
+
+Government_1_zh-CN_translation:
+  id: 166
+  government_id: 1
+  locale: zh-CN
+  government_entity: Not specified
+  details:
+
+Government_1_ja_translation:
+  id: 167
+  government_id: 1
+  locale: ja
+  government_entity: Not specified
+  details:
+
+Government_1_ko_translation:
+  id: 168
+  government_id: 1
+  locale: ko
+  government_entity: Not specified
+  details:
+
+Government_1_vi_translation:
+  id: 169
+  government_id: 1
+  locale: vi
+  government_entity: Not specified
+  details:
+
+Government_1_pt_translation:
+  id: 471
+  government_id: 1
+  locale: pt
+  government_entity: Not specified
+  details:
+
+Government_2_en_translation:
+  id: 2
+  government_id: 2
+  locale: en
+  government_entity: Ministry of Commerce/MAFF
+  details:
+
+Government_2_fr_translation:
+  id: 69
+  government_id: 2
+  locale: fr
+  government_entity: Ministry of Commerce/MAFF
+  details:
+
+Government_2_zh-CN_translation:
+  id: 170
+  government_id: 2
+  locale: zh-CN
+  government_entity: Ministry of Commerce/MAFF
+  details:
+
+Government_2_ja_translation:
+  id: 171
+  government_id: 2
+  locale: ja
+  government_entity: Ministry of Commerce/MAFF
+  details:
+
+Government_2_ko_translation:
+  id: 172
+  government_id: 2
+  locale: ko
+  government_entity: Ministry of Commerce/MAFF
+  details:
+
+Government_2_vi_translation:
+  id: 173
+  government_id: 2
+  locale: vi
+  government_entity: Ministry of Commerce/MAFF
+  details:
+
+Government_2_pt_translation:
+  id: 472
+  government_id: 2
+  locale: pt
+  government_entity: Ministry of Commerce/MAFF
+  details:
+
+Government_3_en_translation:
+  id: 3
+  government_id: 3
+  locale: en
+  government_entity: Not specified
+  details:
+
+Government_3_fr_translation:
+  id: 70
+  government_id: 3
+  locale: fr
+  government_entity: Not specified
+  details:
+
+Government_3_zh-CN_translation:
+  id: 174
+  government_id: 3
+  locale: zh-CN
+  government_entity: Not specified
+  details:
+
+Government_3_ja_translation:
+  id: 175
+  government_id: 3
+  locale: ja
+  government_entity: Not specified
+  details:
+
+Government_3_ko_translation:
+  id: 176
+  government_id: 3
+  locale: ko
+  government_entity: Not specified
+  details:
+
+Government_3_vi_translation:
+  id: 177
+  government_id: 3
+  locale: vi
+  government_entity: Not specified
+  details:
+
+Government_3_pt_translation:
+  id: 473
+  government_id: 3
+  locale: pt
+  government_entity: Not specified
+  details:
+
+Government_4_en_translation:
+  id: 4
+  government_id: 4
+  locale: en
+  government_entity: MAFF
+  details:
+
+Government_4_fr_translation:
+  id: 71
+  government_id: 4
+  locale: fr
+  government_entity: MAFF
+  details:
+
+Government_4_zh-CN_translation:
+  id: 178
+  government_id: 4
+  locale: zh-CN
+  government_entity: MAFF
+  details:
+
+Government_4_ja_translation:
+  id: 179
+  government_id: 4
+  locale: ja
+  government_entity: MAFF
+  details:
+
+Government_4_ko_translation:
+  id: 180
+  government_id: 4
+  locale: ko
+  government_entity: MAFF
+  details:
+
+Government_4_vi_translation:
+  id: 181
+  government_id: 4
+  locale: vi
+  government_entity: MAFF
+  details:
+
+Government_4_pt_translation:
+  id: 474
+  government_id: 4
+  locale: pt
+  government_entity: MAFF
+  details:
+
+Government_5_en_translation:
+  id: 5
+  government_id: 5
+  locale: en
+  government_entity: MAFF/Council of Ministers
+  details:
+
+Government_5_fr_translation:
+  id: 72
+  government_id: 5
+  locale: fr
+  government_entity: MAFF/Council of Ministers
+  details:
+
+Government_5_zh-CN_translation:
+  id: 182
+  government_id: 5
+  locale: zh-CN
+  government_entity: MAFF/Council of Ministers
+  details:
+
+Government_5_ja_translation:
+  id: 183
+  government_id: 5
+  locale: ja
+  government_entity: MAFF/Council of Ministers
+  details:
+
+Government_5_ko_translation:
+  id: 184
+  government_id: 5
+  locale: ko
+  government_entity: MAFF/Council of Ministers
+  details:
+
+Government_5_vi_translation:
+  id: 185
+  government_id: 5
+  locale: vi
+  government_entity: MAFF/Council of Ministers
+  details:
+
+Government_5_pt_translation:
+  id: 475
+  government_id: 5
+  locale: pt
+  government_entity: MAFF/Council of Ministers
+  details:
+
+Government_6_en_translation:
+  id: 6
+  government_id: 6
+  locale: en
+  government_entity: Customs & Excise Agency
+  details:
+
+Government_6_fr_translation:
+  id: 73
+  government_id: 6
+  locale: fr
+  government_entity: Customs & Excise Agency
+  details:
+
+Government_6_zh-CN_translation:
+  id: 186
+  government_id: 6
+  locale: zh-CN
+  government_entity: Customs & Excise Agency
+  details:
+
+Government_6_ja_translation:
+  id: 187
+  government_id: 6
+  locale: ja
+  government_entity: Customs & Excise Agency
+  details:
+
+Government_6_ko_translation:
+  id: 188
+  government_id: 6
+  locale: ko
+  government_entity: Customs & Excise Agency
+  details:
+
+Government_6_vi_translation:
+  id: 189
+  government_id: 6
+  locale: vi
+  government_entity: Customs & Excise Agency
+  details:
+
+Government_6_pt_translation:
+  id: 476
+  government_id: 6
+  locale: pt
+  government_entity: Customs & Excise Agency
+  details:
+
+Government_7_en_translation:
+  id: 7
+  government_id: 7
+  locale: en
+  government_entity: Délégation départementale
+  details:
+
+Government_7_fr_translation:
+  id: 66
+  government_id: 7
+  locale: fr
+  government_entity: Délégation départementale
+  details: ''
+
+Government_7_zh-CN_translation:
+  id: 190
+  government_id: 7
+  locale: zh-CN
+  government_entity: Délégation départementale
+  details:
+
+Government_7_ja_translation:
+  id: 191
+  government_id: 7
+  locale: ja
+  government_entity: Délégation départementale
+  details:
+
+Government_7_ko_translation:
+  id: 192
+  government_id: 7
+  locale: ko
+  government_entity: Délégation départementale
+  details:
+
+Government_7_vi_translation:
+  id: 193
+  government_id: 7
+  locale: vi
+  government_entity: Délégation départementale
+  details:
+
+Government_7_pt_translation:
+  id: 477
+  government_id: 7
+  locale: pt
+  government_entity: Délégation départementale
+  details:
+
+Government_8_en_translation:
+  id: 8
+  government_id: 8
+  locale: en
+  government_entity: Not specified
+  details:
+
+Government_8_fr_translation:
+  id: 74
+  government_id: 8
+  locale: fr
+  government_entity: Not specified
+  details:
+
+Government_8_zh-CN_translation:
+  id: 194
+  government_id: 8
+  locale: zh-CN
+  government_entity: Not specified
+  details:
+
+Government_8_ja_translation:
+  id: 195
+  government_id: 8
+  locale: ja
+  government_entity: Not specified
+  details:
+
+Government_8_ko_translation:
+  id: 196
+  government_id: 8
+  locale: ko
+  government_entity: Not specified
+  details:
+
+Government_8_vi_translation:
+  id: 197
+  government_id: 8
+  locale: vi
+  government_entity: Not specified
+  details:
+
+Government_8_pt_translation:
+  id: 478
+  government_id: 8
+  locale: pt
+  government_entity: Not specified
+  details:
+
+Government_9_en_translation:
+  id: 9
+  government_id: 9
+  locale: en
+  government_entity: DPFoF du Centre
+  details:
+
+Government_9_fr_translation:
+  id: 75
+  government_id: 9
+  locale: fr
+  government_entity: DRFoF du Centre
+  details:
+
+Government_9_zh-CN_translation:
+  id: 198
+  government_id: 9
+  locale: zh-CN
+  government_entity: DPFoF du Centre
+  details:
+
+Government_9_ja_translation:
+  id: 199
+  government_id: 9
+  locale: ja
+  government_entity: DPFoF du Centre
+  details:
+
+Government_9_ko_translation:
+  id: 200
+  government_id: 9
+  locale: ko
+  government_entity: DPFoF du Centre
+  details:
+
+Government_9_vi_translation:
+  id: 201
+  government_id: 9
+  locale: vi
+  government_entity: DPFoF du Centre
+  details:
+
+Government_9_pt_translation:
+  id: 479
+  government_id: 9
+  locale: pt
+  government_entity: DPFoF du Centre
+  details:
+
+Government_10_en_translation:
+  id: 10
+  government_id: 10
+  locale: en
+  government_entity: DDFOF-Haut-Nyong
+  details:
+
+Government_10_fr_translation:
+  id: 76
+  government_id: 10
+  locale: fr
+  government_entity: DDFOF-Haut-Nyong
+  details:
+
+Government_10_zh-CN_translation:
+  id: 202
+  government_id: 10
+  locale: zh-CN
+  government_entity: DDFOF-Haut-Nyong
+  details:
+
+Government_10_ja_translation:
+  id: 203
+  government_id: 10
+  locale: ja
+  government_entity: DDFOF-Haut-Nyong
+  details:
+
+Government_10_ko_translation:
+  id: 204
+  government_id: 10
+  locale: ko
+  government_entity: DDFOF-Haut-Nyong
+  details:
+
+Government_10_vi_translation:
+  id: 205
+  government_id: 10
+  locale: vi
+  government_entity: DDFOF-Haut-Nyong
+  details:
+
+Government_10_pt_translation:
+  id: 480
+  government_id: 10
+  locale: pt
+  government_entity: DDFOF-Haut-Nyong
+  details:
+
+Government_11_en_translation:
+  id: 11
+  government_id: 11
+  locale: en
+  government_entity: MINFOF
+  details:
+
+Government_11_fr_translation:
+  id: 77
+  government_id: 11
+  locale: fr
+  government_entity: MINFOF
+  details:
+
+Government_11_zh-CN_translation:
+  id: 206
+  government_id: 11
+  locale: zh-CN
+  government_entity: MINFOF
+  details:
+
+Government_11_ja_translation:
+  id: 207
+  government_id: 11
+  locale: ja
+  government_entity: MINFOF
+  details:
+
+Government_11_ko_translation:
+  id: 208
+  government_id: 11
+  locale: ko
+  government_entity: MINFOF
+  details:
+
+Government_11_vi_translation:
+  id: 209
+  government_id: 11
+  locale: vi
+  government_entity: MINFOF
+  details:
+
+Government_11_pt_translation:
+  id: 481
+  government_id: 11
+  locale: pt
+  government_entity: MINFOF
+  details:
+
+Government_12_en_translation:
+  id: 12
+  government_id: 12
+  locale: en
+  government_entity: CIMA - Commission interministérielle d’attribution
+  details:
+
+Government_12_fr_translation:
+  id: 78
+  government_id: 12
+  locale: fr
+  government_entity: CIMA - Commission interministérielle d’attribution
+  details:
+
+Government_12_zh-CN_translation:
+  id: 210
+  government_id: 12
+  locale: zh-CN
+  government_entity: CIMA - Commission interministérielle d’attribution
+  details:
+
+Government_12_ja_translation:
+  id: 211
+  government_id: 12
+  locale: ja
+  government_entity: CIMA - Commission interministérielle d’attribution
+  details:
+
+Government_12_ko_translation:
+  id: 212
+  government_id: 12
+  locale: ko
+  government_entity: CIMA - Commission interministérielle d’attribution
+  details:
+
+Government_12_vi_translation:
+  id: 213
+  government_id: 12
+  locale: vi
+  government_entity: CIMA - Commission interministérielle d’attribution
+  details:
+
+Government_12_pt_translation:
+  id: 482
+  government_id: 12
+  locale: pt
+  government_entity: CIMA - Commission interministérielle d’attribution
+  details:
+
+Government_13_en_translation:
+  id: 13
+  government_id: 13
+  locale: en
+  government_entity: DDEF-N
+  details: ''
+
+Government_13_fr_translation:
+  id: 67
+  government_id: 13
+  locale: fr
+  government_entity: DDEF-Niari
+  details: ''
+
+Government_13_zh-CN_translation:
+  id: 214
+  government_id: 13
+  locale: zh-CN
+  government_entity: DDEF-N
+  details:
+
+Government_13_ja_translation:
+  id: 215
+  government_id: 13
+  locale: ja
+  government_entity: DDEF-N
+  details:
+
+Government_13_ko_translation:
+  id: 216
+  government_id: 13
+  locale: ko
+  government_entity: DDEF-N
+  details:
+
+Government_13_vi_translation:
+  id: 217
+  government_id: 13
+  locale: vi
+  government_entity: DDEF-N
+  details:
+
+Government_13_pt_translation:
+  id: 533
+  government_id: 13
+  locale: pt
+  government_entity: DDEF-N
+  details: ''
+
+Government_14_en_translation:
+  id: 14
+  government_id: 14
+  locale: en
+  government_entity: DDEF-Likouala
+  details:
+
+Government_14_fr_translation:
+  id: 79
+  government_id: 14
+  locale: fr
+  government_entity: DDEF-Likouala
+  details:
+
+Government_14_zh-CN_translation:
+  id: 218
+  government_id: 14
+  locale: zh-CN
+  government_entity: DDEF-Likouala
+  details:
+
+Government_14_ja_translation:
+  id: 219
+  government_id: 14
+  locale: ja
+  government_entity: DDEF-Likouala
+  details:
+
+Government_14_ko_translation:
+  id: 220
+  government_id: 14
+  locale: ko
+  government_entity: DDEF-Likouala
+  details:
+
+Government_14_vi_translation:
+  id: 221
+  government_id: 14
+  locale: vi
+  government_entity: DDEF-Likouala
+  details:
+
+Government_14_pt_translation:
+  id: 483
+  government_id: 14
+  locale: pt
+  government_entity: DDEF-Likouala
+  details:
+
+Government_15_en_translation:
+  id: 15
+  government_id: 15
+  locale: en
+  government_entity: DDEF-K
+  details:
+
+Government_15_fr_translation:
+  id: 80
+  government_id: 15
+  locale: fr
+  government_entity: DDEF-Kouilou
+  details:
+
+Government_15_zh-CN_translation:
+  id: 222
+  government_id: 15
+  locale: zh-CN
+  government_entity: DDEF-K
+  details:
+
+Government_15_ja_translation:
+  id: 223
+  government_id: 15
+  locale: ja
+  government_entity: DDEF-K
+  details:
+
+Government_15_ko_translation:
+  id: 224
+  government_id: 15
+  locale: ko
+  government_entity: DDEF-K
+  details:
+
+Government_15_vi_translation:
+  id: 225
+  government_id: 15
+  locale: vi
+  government_entity: DDEF-K
+  details:
+
+Government_15_pt_translation:
+  id: 484
+  government_id: 15
+  locale: pt
+  government_entity: DDEF-K
+  details:
+
+Government_16_en_translation:
+  id: 16
+  government_id: 16
+  locale: en
+  government_entity: DDEF-CO
+  details:
+
+Government_16_fr_translation:
+  id: 81
+  government_id: 16
+  locale: fr
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_16_zh-CN_translation:
+  id: 226
+  government_id: 16
+  locale: zh-CN
+  government_entity: DDEF-CO
+  details:
+
+Government_16_ja_translation:
+  id: 227
+  government_id: 16
+  locale: ja
+  government_entity: DDEF-CO
+  details:
+
+Government_16_ko_translation:
+  id: 228
+  government_id: 16
+  locale: ko
+  government_entity: DDEF-CO
+  details:
+
+Government_16_vi_translation:
+  id: 229
+  government_id: 16
+  locale: vi
+  government_entity: DDEF-CO
+  details:
+
+Government_16_pt_translation:
+  id: 485
+  government_id: 16
+  locale: pt
+  government_entity: DDEF-CO
+  details:
+
+Government_17_en_translation:
+  id: 17
+  government_id: 17
+  locale: en
+  government_entity: DGEF
+  details:
+
+Government_17_fr_translation:
+  id: 82
+  government_id: 17
+  locale: fr
+  government_entity: DGEF
+  details:
+
+Government_17_zh-CN_translation:
+  id: 230
+  government_id: 17
+  locale: zh-CN
+  government_entity: DGEF
+  details:
+
+Government_17_ja_translation:
+  id: 231
+  government_id: 17
+  locale: ja
+  government_entity: DGEF
+  details:
+
+Government_17_ko_translation:
+  id: 232
+  government_id: 17
+  locale: ko
+  government_entity: DGEF
+  details:
+
+Government_17_vi_translation:
+  id: 233
+  government_id: 17
+  locale: vi
+  government_entity: DGEF
+  details:
+
+Government_17_pt_translation:
+  id: 486
+  government_id: 17
+  locale: pt
+  government_entity: DGEF
+  details:
+
+Government_18_en_translation:
+  id: 18
+  government_id: 18
+  locale: en
+  government_entity: DGEF, SCPFE
+  details:
+
+Government_18_fr_translation:
+  id: 83
+  government_id: 18
+  locale: fr
+  government_entity: DGEF, SCPFE
+  details:
+
+Government_18_zh-CN_translation:
+  id: 234
+  government_id: 18
+  locale: zh-CN
+  government_entity: DGEF, SCPFE
+  details:
+
+Government_18_ja_translation:
+  id: 235
+  government_id: 18
+  locale: ja
+  government_entity: DGEF, SCPFE
+  details:
+
+Government_18_ko_translation:
+  id: 236
+  government_id: 18
+  locale: ko
+  government_entity: DGEF, SCPFE
+  details:
+
+Government_18_vi_translation:
+  id: 237
+  government_id: 18
+  locale: vi
+  government_entity: DGEF, SCPFE
+  details:
+
+Government_18_pt_translation:
+  id: 487
+  government_id: 18
+  locale: pt
+  government_entity: DGEF, SCPFE
+  details:
+
+Government_19_en_translation:
+  id: 19
+  government_id: 19
+  locale: en
+  government_entity: DDEF-Pl
+  details:
+
+Government_19_fr_translation:
+  id: 84
+  government_id: 19
+  locale: fr
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_19_zh-CN_translation:
+  id: 238
+  government_id: 19
+  locale: zh-CN
+  government_entity: DDEF-Pl
+  details:
+
+Government_19_ja_translation:
+  id: 239
+  government_id: 19
+  locale: ja
+  government_entity: DDEF-Pl
+  details:
+
+Government_19_ko_translation:
+  id: 240
+  government_id: 19
+  locale: ko
+  government_entity: DDEF-Pl
+  details:
+
+Government_19_vi_translation:
+  id: 241
+  government_id: 19
+  locale: vi
+  government_entity: DDEF-Pl
+  details:
+
+Government_19_pt_translation:
+  id: 488
+  government_id: 19
+  locale: pt
+  government_entity: DDEF-Pl
+  details:
+
+Government_20_en_translation:
+  id: 20
+  government_id: 20
+  locale: en
+  government_entity: DDEF-Cu
+  details:
+
+Government_20_fr_translation:
+  id: 85
+  government_id: 20
+  locale: fr
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_20_zh-CN_translation:
+  id: 242
+  government_id: 20
+  locale: zh-CN
+  government_entity: DDEF-Cu
+  details:
+
+Government_20_ja_translation:
+  id: 243
+  government_id: 20
+  locale: ja
+  government_entity: DDEF-Cu
+  details:
+
+Government_20_ko_translation:
+  id: 244
+  government_id: 20
+  locale: ko
+  government_entity: DDEF-Cu
+  details:
+
+Government_20_vi_translation:
+  id: 245
+  government_id: 20
+  locale: vi
+  government_entity: DDEF-Cu
+  details:
+
+Government_20_pt_translation:
+  id: 489
+  government_id: 20
+  locale: pt
+  government_entity: DDEF-Cu
+  details:
+
+Government_21_en_translation:
+  id: 21
+  government_id: 21
+  locale: en
+  government_entity: DDEF-S
+  details:
+
+Government_21_fr_translation:
+  id: 86
+  government_id: 21
+  locale: fr
+  government_entity: DDEF-S
+  details:
+
+Government_21_zh-CN_translation:
+  id: 246
+  government_id: 21
+  locale: zh-CN
+  government_entity: DDEF-S
+  details:
+
+Government_21_ja_translation:
+  id: 247
+  government_id: 21
+  locale: ja
+  government_entity: DDEF-S
+  details:
+
+Government_21_ko_translation:
+  id: 248
+  government_id: 21
+  locale: ko
+  government_entity: DDEF-S
+  details:
+
+Government_21_vi_translation:
+  id: 249
+  government_id: 21
+  locale: vi
+  government_entity: DDEF-S
+  details:
+
+Government_21_pt_translation:
+  id: 490
+  government_id: 21
+  locale: pt
+  government_entity: DDEF-S
+  details:
+
+Government_22_en_translation:
+  id: 22
+  government_id: 22
+  locale: en
+  government_entity: MDDEFE
+  details:
+
+Government_22_fr_translation:
+  id: 87
+  government_id: 22
+  locale: fr
+  government_entity: MEF
+  details:
+
+Government_22_zh-CN_translation:
+  id: 250
+  government_id: 22
+  locale: zh-CN
+  government_entity: MDDEFE
+  details:
+
+Government_22_ja_translation:
+  id: 251
+  government_id: 22
+  locale: ja
+  government_entity: MDDEFE
+  details:
+
+Government_22_ko_translation:
+  id: 252
+  government_id: 22
+  locale: ko
+  government_entity: MDDEFE
+  details:
+
+Government_22_vi_translation:
+  id: 253
+  government_id: 22
+  locale: vi
+  government_entity: MDDEFE
+  details:
+
+Government_22_pt_translation:
+  id: 491
+  government_id: 22
+  locale: pt
+  government_entity: MDDEFE
+  details:
+
+Government_23_en_translation:
+  id: 23
+  government_id: 23
+  locale: en
+  government_entity: DDEF-Lék
+  details:
+
+Government_23_fr_translation:
+  id: 88
+  government_id: 23
+  locale: fr
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_23_zh-CN_translation:
+  id: 254
+  government_id: 23
+  locale: zh-CN
+  government_entity: DDEF-Lék
+  details:
+
+Government_23_ja_translation:
+  id: 255
+  government_id: 23
+  locale: ja
+  government_entity: DDEF-Lék
+  details:
+
+Government_23_ko_translation:
+  id: 256
+  government_id: 23
+  locale: ko
+  government_entity: DDEF-Lék
+  details:
+
+Government_23_vi_translation:
+  id: 257
+  government_id: 23
+  locale: vi
+  government_entity: DDEF-Lék
+  details:
+
+Government_23_pt_translation:
+  id: 492
+  government_id: 23
+  locale: pt
+  government_entity: DDEF-Lék
+  details:
+
+Government_24_fr_translation:
+  id: 89
+  government_id: 24
+  locale: fr
+  government_entity: DDEF-Nairi
+  details:
+
+Government_24_en_translation:
+  id: 24
+  government_id: 24
+  locale: en
+  government_entity: DDEF-Niari
+  details:
+
+Government_24_zh-CN_translation:
+  id: 258
+  government_id: 24
+  locale: zh-CN
+  government_entity: DDEF-Nairi
+  details:
+
+Government_24_ja_translation:
+  id: 259
+  government_id: 24
+  locale: ja
+  government_entity: DDEF-Nairi
+  details:
+
+Government_24_ko_translation:
+  id: 260
+  government_id: 24
+  locale: ko
+  government_entity: DDEF-Nairi
+  details:
+
+Government_24_vi_translation:
+  id: 261
+  government_id: 24
+  locale: vi
+  government_entity: DDEF-Nairi
+  details:
+
+Government_24_pt_translation:
+  id: 535
+  government_id: 24
+  locale: pt
+  government_entity: DDEF-Niari
+  details:
+
+Government_25_en_translation:
+  id: 25
+  government_id: 25
+  locale: en
+  government_entity: DDEF-Bouenza, DDEF-Lék, DDEF-Nairi
+  details:
+
+Government_25_fr_translation:
+  id: 90
+  government_id: 25
+  locale: fr
+  government_entity: DDEF-Bouenza, DDEF-Lék, DDEF-Nairi
+  details:
+
+Government_25_zh-CN_translation:
+  id: 262
+  government_id: 25
+  locale: zh-CN
+  government_entity: DDEF-Bouenza, DDEF-Lék, DDEF-Nairi
+  details:
+
+Government_25_ja_translation:
+  id: 263
+  government_id: 25
+  locale: ja
+  government_entity: DDEF-Bouenza, DDEF-Lék, DDEF-Nairi
+  details:
+
+Government_25_ko_translation:
+  id: 264
+  government_id: 25
+  locale: ko
+  government_entity: DDEF-Bouenza, DDEF-Lék, DDEF-Nairi
+  details:
+
+Government_25_vi_translation:
+  id: 265
+  government_id: 25
+  locale: vi
+  government_entity: DDEF-Bouenza, DDEF-Lék, DDEF-Nairi
+  details:
+
+Government_25_pt_translation:
+  id: 493
+  government_id: 25
+  locale: pt
+  government_entity: DDEF-Bouenza, DDEF-Lék, DDEF-Nairi
+  details:
+
+Government_26_en_translation:
+  id: 26
+  government_id: 26
+  locale: en
+  government_entity: DDEF-Lék, DDEF-Niari
+  details:
+
+Government_26_fr_translation:
+  id: 91
+  government_id: 26
+  locale: fr
+  government_entity: DDEF-Lék, DDEF-Niari
+  details:
+
+Government_26_zh-CN_translation:
+  id: 266
+  government_id: 26
+  locale: zh-CN
+  government_entity: DDEF-Lék, DDEF-Niari
+  details:
+
+Government_26_ja_translation:
+  id: 267
+  government_id: 26
+  locale: ja
+  government_entity: DDEF-Lék, DDEF-Niari
+  details:
+
+Government_26_ko_translation:
+  id: 268
+  government_id: 26
+  locale: ko
+  government_entity: DDEF-Lék, DDEF-Niari
+  details:
+
+Government_26_vi_translation:
+  id: 269
+  government_id: 26
+  locale: vi
+  government_entity: DDEF-Lék, DDEF-Niari
+  details:
+
+Government_26_pt_translation:
+  id: 494
+  government_id: 26
+  locale: pt
+  government_entity: DDEF-Lék, DDEF-Niari
+  details:
+
+Government_27_en_translation:
+  id: 27
+  government_id: 27
+  locale: en
+  government_entity: DDEF-Lik
+  details:
+
+Government_27_fr_translation:
+  id: 92
+  government_id: 27
+  locale: fr
+  government_entity: DDEF-Likouala
+  details:
+
+Government_27_zh-CN_translation:
+  id: 270
+  government_id: 27
+  locale: zh-CN
+  government_entity: DDEF-Lik
+  details:
+
+Government_27_ja_translation:
+  id: 271
+  government_id: 27
+  locale: ja
+  government_entity: DDEF-Lik
+  details:
+
+Government_27_ko_translation:
+  id: 272
+  government_id: 27
+  locale: ko
+  government_entity: DDEF-Lik
+  details:
+
+Government_27_vi_translation:
+  id: 273
+  government_id: 27
+  locale: vi
+  government_entity: DDEF-Lik
+  details:
+
+Government_27_pt_translation:
+  id: 495
+  government_id: 27
+  locale: pt
+  government_entity: DDEF-Lik
+  details:
+
+Government_28_en_translation:
+  id: 28
+  government_id: 28
+  locale: en
+  government_entity: DDEF-Sangha
+  details:
+
+Government_28_fr_translation:
+  id: 93
+  government_id: 28
+  locale: fr
+  government_entity: DDEF-Sangha
+  details:
+
+Government_28_zh-CN_translation:
+  id: 274
+  government_id: 28
+  locale: zh-CN
+  government_entity: DDEF-Sangha
+  details:
+
+Government_28_ja_translation:
+  id: 275
+  government_id: 28
+  locale: ja
+  government_entity: DDEF-Sangha
+  details:
+
+Government_28_ko_translation:
+  id: 276
+  government_id: 28
+  locale: ko
+  government_entity: DDEF-Sangha
+  details:
+
+Government_28_vi_translation:
+  id: 277
+  government_id: 28
+  locale: vi
+  government_entity: DDEF-Sangha
+  details:
+
+Government_28_pt_translation:
+  id: 496
+  government_id: 28
+  locale: pt
+  government_entity: DDEF-Sangha
+  details:
+
+Government_29_en_translation:
+  id: 29
+  government_id: 29
+  locale: en
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_29_fr_translation:
+  id: 94
+  government_id: 29
+  locale: fr
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_29_zh-CN_translation:
+  id: 278
+  government_id: 29
+  locale: zh-CN
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_29_ja_translation:
+  id: 279
+  government_id: 29
+  locale: ja
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_29_ko_translation:
+  id: 280
+  government_id: 29
+  locale: ko
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_29_vi_translation:
+  id: 281
+  government_id: 29
+  locale: vi
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_29_pt_translation:
+  id: 497
+  government_id: 29
+  locale: pt
+  government_entity: DDEF-Plateaux
+  details:
+
+Government_30_en_translation:
+  id: 30
+  government_id: 30
+  locale: en
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_30_fr_translation:
+  id: 95
+  government_id: 30
+  locale: fr
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_30_zh-CN_translation:
+  id: 282
+  government_id: 30
+  locale: zh-CN
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_30_ja_translation:
+  id: 283
+  government_id: 30
+  locale: ja
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_30_ko_translation:
+  id: 284
+  government_id: 30
+  locale: ko
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_30_vi_translation:
+  id: 285
+  government_id: 30
+  locale: vi
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_30_pt_translation:
+  id: 498
+  government_id: 30
+  locale: pt
+  government_entity: DDEF-Cuvette
+  details:
+
+Government_31_en_translation:
+  id: 31
+  government_id: 31
+  locale: en
+  government_entity: DDEF-Cuvette-Ouest
+  details:
+
+Government_31_fr_translation:
+  id: 96
+  government_id: 31
+  locale: fr
+  government_entity: DDEF-Cuvette-Ouest
+  details:
+
+Government_31_zh-CN_translation:
+  id: 286
+  government_id: 31
+  locale: zh-CN
+  government_entity: DDEF-Cuvette-Ouest
+  details:
+
+Government_31_ja_translation:
+  id: 287
+  government_id: 31
+  locale: ja
+  government_entity: DDEF-Cuvette-Ouest
+  details:
+
+Government_31_ko_translation:
+  id: 288
+  government_id: 31
+  locale: ko
+  government_entity: DDEF-Cuvette-Ouest
+  details:
+
+Government_31_vi_translation:
+  id: 289
+  government_id: 31
+  locale: vi
+  government_entity: DDEF-Cuvette-Ouest
+  details:
+
+Government_31_pt_translation:
+  id: 499
+  government_id: 31
+  locale: pt
+  government_entity: DDEF-Cuvette-Ouest
+  details:
+
+Government_32_en_translation:
+  id: 32
+  government_id: 32
+  locale: en
+  government_entity: DDEF-Niari
+  details:
+
+Government_32_fr_translation:
+  id: 97
+  government_id: 32
+  locale: fr
+  government_entity: DDEF-Niari
+  details:
+
+Government_32_zh-CN_translation:
+  id: 290
+  government_id: 32
+  locale: zh-CN
+  government_entity: DDEF-Niari
+  details:
+
+Government_32_ja_translation:
+  id: 291
+  government_id: 32
+  locale: ja
+  government_entity: DDEF-Niari
+  details:
+
+Government_32_ko_translation:
+  id: 292
+  government_id: 32
+  locale: ko
+  government_entity: DDEF-Niari
+  details:
+
+Government_32_vi_translation:
+  id: 293
+  government_id: 32
+  locale: vi
+  government_entity: DDEF-Niari
+  details:
+
+Government_32_pt_translation:
+  id: 500
+  government_id: 32
+  locale: pt
+  government_entity: DDEF-Niari
+  details:
+
+Government_33_en_translation:
+  id: 33
+  government_id: 33
+  locale: en
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_33_fr_translation:
+  id: 98
+  government_id: 33
+  locale: fr
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_33_zh-CN_translation:
+  id: 294
+  government_id: 33
+  locale: zh-CN
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_33_ja_translation:
+  id: 295
+  government_id: 33
+  locale: ja
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_33_ko_translation:
+  id: 296
+  government_id: 33
+  locale: ko
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_33_vi_translation:
+  id: 297
+  government_id: 33
+  locale: vi
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_33_pt_translation:
+  id: 501
+  government_id: 33
+  locale: pt
+  government_entity: DDEF-Lékoumou
+  details:
+
+Government_34_en_translation:
+  id: 34
+  government_id: 34
+  locale: en
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_34_fr_translation:
+  id: 99
+  government_id: 34
+  locale: fr
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_34_zh-CN_translation:
+  id: 298
+  government_id: 34
+  locale: zh-CN
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_34_ja_translation:
+  id: 299
+  government_id: 34
+  locale: ja
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_34_ko_translation:
+  id: 300
+  government_id: 34
+  locale: ko
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_34_vi_translation:
+  id: 301
+  government_id: 34
+  locale: vi
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_34_pt_translation:
+  id: 502
+  government_id: 34
+  locale: pt
+  government_entity: DDEF-Cuvette Ouest
+  details:
+
+Government_35_en_translation:
+  id: 35
+  government_id: 35
+  locale: en
+  government_entity: DDEF-Niari, DGEF
+  details:
+
+Government_35_fr_translation:
+  id: 100
+  government_id: 35
+  locale: fr
+  government_entity: DDEF-Niari, DGEF
+  details:
+
+Government_35_zh-CN_translation:
+  id: 302
+  government_id: 35
+  locale: zh-CN
+  government_entity: DDEF-Niari, DGEF
+  details:
+
+Government_35_ja_translation:
+  id: 303
+  government_id: 35
+  locale: ja
+  government_entity: DDEF-Niari, DGEF
+  details:
+
+Government_35_ko_translation:
+  id: 304
+  government_id: 35
+  locale: ko
+  government_entity: DDEF-Niari, DGEF
+  details:
+
+Government_35_vi_translation:
+  id: 305
+  government_id: 35
+  locale: vi
+  government_entity: DDEF-Niari, DGEF
+  details:
+
+Government_35_pt_translation:
+  id: 503
+  government_id: 35
+  locale: pt
+  government_entity: DDEF-Niari, DGEF
+  details:
+
+Government_36_en_translation:
+  id: 36
+  government_id: 36
+  locale: en
+  government_entity: MECNT, Province Orientale
+  details:
+
+Government_36_fr_translation:
+  id: 101
+  government_id: 36
+  locale: fr
+  government_entity: MECNT, Province Orientale
+  details:
+
+Government_36_zh-CN_translation:
+  id: 306
+  government_id: 36
+  locale: zh-CN
+  government_entity: MECNT, Province Orientale
+  details:
+
+Government_36_ja_translation:
+  id: 307
+  government_id: 36
+  locale: ja
+  government_entity: MECNT, Province Orientale
+  details:
+
+Government_36_ko_translation:
+  id: 308
+  government_id: 36
+  locale: ko
+  government_entity: MECNT, Province Orientale
+  details:
+
+Government_36_vi_translation:
+  id: 309
+  government_id: 36
+  locale: vi
+  government_entity: MECNT, Province Orientale
+  details:
+
+Government_36_pt_translation:
+  id: 504
+  government_id: 36
+  locale: pt
+  government_entity: MECNT, Province Orientale
+  details:
+
+Government_37_en_translation:
+  id: 37
+  government_id: 37
+  locale: en
+  government_entity: MECNT
+  details:
+
+Government_37_fr_translation:
+  id: 102
+  government_id: 37
+  locale: fr
+  government_entity: MECNT
+  details:
+
+Government_37_zh-CN_translation:
+  id: 310
+  government_id: 37
+  locale: zh-CN
+  government_entity: MECNT
+  details:
+
+Government_37_ja_translation:
+  id: 311
+  government_id: 37
+  locale: ja
+  government_entity: MECNT
+  details:
+
+Government_37_ko_translation:
+  id: 312
+  government_id: 37
+  locale: ko
+  government_entity: MECNT
+  details:
+
+Government_37_vi_translation:
+  id: 313
+  government_id: 37
+  locale: vi
+  government_entity: MECNT
+  details:
+
+Government_37_pt_translation:
+  id: 505
+  government_id: 37
+  locale: pt
+  government_entity: MECNT
+  details:
+
+Government_38_en_translation:
+  id: 38
+  government_id: 38
+  locale: en
+  government_entity: DGRAD
+  details:
+
+Government_38_fr_translation:
+  id: 103
+  government_id: 38
+  locale: fr
+  government_entity: DGRAD
+  details:
+
+Government_38_zh-CN_translation:
+  id: 314
+  government_id: 38
+  locale: zh-CN
+  government_entity: DGRAD
+  details:
+
+Government_38_ja_translation:
+  id: 315
+  government_id: 38
+  locale: ja
+  government_entity: DGRAD
+  details:
+
+Government_38_ko_translation:
+  id: 316
+  government_id: 38
+  locale: ko
+  government_entity: DGRAD
+  details:
+
+Government_38_vi_translation:
+  id: 317
+  government_id: 38
+  locale: vi
+  government_entity: DGRAD
+  details:
+
+Government_38_pt_translation:
+  id: 506
+  government_id: 38
+  locale: pt
+  government_entity: DGRAD
+  details:
+
+Government_39_en_translation:
+  id: 39
+  government_id: 39
+  locale: en
+  government_entity: DRPE, Province Equator
+  details:
+
+Government_39_fr_translation:
+  id: 104
+  government_id: 39
+  locale: fr
+  government_entity: DRPE, Province Equator
+  details:
+
+Government_39_zh-CN_translation:
+  id: 318
+  government_id: 39
+  locale: zh-CN
+  government_entity: DRPE, Province Equator
+  details:
+
+Government_39_ja_translation:
+  id: 319
+  government_id: 39
+  locale: ja
+  government_entity: DRPE, Province Equator
+  details:
+
+Government_39_ko_translation:
+  id: 320
+  government_id: 39
+  locale: ko
+  government_entity: DRPE, Province Equator
+  details:
+
+Government_39_vi_translation:
+  id: 321
+  government_id: 39
+  locale: vi
+  government_entity: DRPE, Province Equator
+  details:
+
+Government_39_pt_translation:
+  id: 507
+  government_id: 39
+  locale: pt
+  government_entity: DRPE, Province Equator
+  details:
+
+Government_40_en_translation:
+  id: 40
+  government_id: 40
+  locale: en
+  government_entity: MECNT, Province Equator, District Mongala
+  details:
+
+Government_40_fr_translation:
+  id: 105
+  government_id: 40
+  locale: fr
+  government_entity: MECNT, Province Equator, District Mongala
+  details:
+
+Government_40_zh-CN_translation:
+  id: 322
+  government_id: 40
+  locale: zh-CN
+  government_entity: MECNT, Province Equator, District Mongala
+  details:
+
+Government_40_ja_translation:
+  id: 323
+  government_id: 40
+  locale: ja
+  government_entity: MECNT, Province Equator, District Mongala
+  details:
+
+Government_40_ko_translation:
+  id: 324
+  government_id: 40
+  locale: ko
+  government_entity: MECNT, Province Equator, District Mongala
+  details:
+
+Government_40_vi_translation:
+  id: 325
+  government_id: 40
+  locale: vi
+  government_entity: MECNT, Province Equator, District Mongala
+  details:
+
+Government_40_pt_translation:
+  id: 508
+  government_id: 40
+  locale: pt
+  government_entity: MECNT, Province Equator, District Mongala
+  details:
+
+Government_41_en_translation:
+  id: 41
+  government_id: 41
+  locale: en
+  government_entity: MECNT, Province Equator,
+  details:
+
+Government_41_fr_translation:
+  id: 106
+  government_id: 41
+  locale: fr
+  government_entity: MECNT, Province Equator,
+  details:
+
+Government_41_zh-CN_translation:
+  id: 326
+  government_id: 41
+  locale: zh-CN
+  government_entity: MECNT, Province Equator,
+  details:
+
+Government_41_ja_translation:
+  id: 327
+  government_id: 41
+  locale: ja
+  government_entity: MECNT, Province Equator,
+  details:
+
+Government_41_ko_translation:
+  id: 328
+  government_id: 41
+  locale: ko
+  government_entity: MECNT, Province Equator,
+  details:
+
+Government_41_vi_translation:
+  id: 329
+  government_id: 41
+  locale: vi
+  government_entity: MECNT, Province Equator,
+  details:
+
+Government_41_pt_translation:
+  id: 509
+  government_id: 41
+  locale: pt
+  government_entity: MECNT, Province Equator,
+  details:
+
+Government_42_en_translation:
+  id: 42
+  government_id: 42
+  locale: en
+  government_entity: Province du Bandundu, DCVI
+  details:
+
+Government_42_fr_translation:
+  id: 107
+  government_id: 42
+  locale: fr
+  government_entity: Province du Bandundu, DCVI
+  details:
+
+Government_42_zh-CN_translation:
+  id: 330
+  government_id: 42
+  locale: zh-CN
+  government_entity: Province du Bandundu, DCVI
+  details:
+
+Government_42_ja_translation:
+  id: 331
+  government_id: 42
+  locale: ja
+  government_entity: Province du Bandundu, DCVI
+  details:
+
+Government_42_ko_translation:
+  id: 332
+  government_id: 42
+  locale: ko
+  government_entity: Province du Bandundu, DCVI
+  details:
+
+Government_42_vi_translation:
+  id: 333
+  government_id: 42
+  locale: vi
+  government_entity: Province du Bandundu, DCVI
+  details:
+
+Government_42_pt_translation:
+  id: 510
+  government_id: 42
+  locale: pt
+  government_entity: Province du Bandundu, DCVI
+  details:
+
+Government_43_en_translation:
+  id: 43
+  government_id: 43
+  locale: en
+  government_entity: Province du Bandundu
+  details:
+
+Government_43_fr_translation:
+  id: 108
+  government_id: 43
+  locale: fr
+  government_entity: Province du Bandundu
+  details:
+
+Government_43_zh-CN_translation:
+  id: 334
+  government_id: 43
+  locale: zh-CN
+  government_entity: Province du Bandundu
+  details:
+
+Government_43_ja_translation:
+  id: 335
+  government_id: 43
+  locale: ja
+  government_entity: Province du Bandundu
+  details:
+
+Government_43_ko_translation:
+  id: 336
+  government_id: 43
+  locale: ko
+  government_entity: Province du Bandundu
+  details:
+
+Government_43_vi_translation:
+  id: 337
+  government_id: 43
+  locale: vi
+  government_entity: Province du Bandundu
+  details:
+
+Government_43_pt_translation:
+  id: 511
+  government_id: 43
+  locale: pt
+  government_entity: Province du Bandundu
+  details:
+
+Government_44_en_translation:
+  id: 44
+  government_id: 44
+  locale: en
+  government_entity: Province Orientale/Tshopo
+  details:
+
+Government_44_fr_translation:
+  id: 109
+  government_id: 44
+  locale: fr
+  government_entity: Province Orientale/Tshopo
+  details:
+
+Government_44_zh-CN_translation:
+  id: 338
+  government_id: 44
+  locale: zh-CN
+  government_entity: Province Orientale/Tshopo
+  details:
+
+Government_44_ja_translation:
+  id: 339
+  government_id: 44
+  locale: ja
+  government_entity: Province Orientale/Tshopo
+  details:
+
+Government_44_ko_translation:
+  id: 340
+  government_id: 44
+  locale: ko
+  government_entity: Province Orientale/Tshopo
+  details:
+
+Government_44_vi_translation:
+  id: 341
+  government_id: 44
+  locale: vi
+  government_entity: Province Orientale/Tshopo
+  details:
+
+Government_44_pt_translation:
+  id: 512
+  government_id: 44
+  locale: pt
+  government_entity: Province Orientale/Tshopo
+  details:
+
+Government_45_en_translation:
+  id: 45
+  government_id: 45
+  locale: en
+  government_entity: Not specified
+  details:
+
+Government_45_fr_translation:
+  id: 110
+  government_id: 45
+  locale: fr
+  government_entity: Not specified
+  details:
+
+Government_45_zh-CN_translation:
+  id: 342
+  government_id: 45
+  locale: zh-CN
+  government_entity: Not specified
+  details:
+
+Government_45_ja_translation:
+  id: 343
+  government_id: 45
+  locale: ja
+  government_entity: Not specified
+  details:
+
+Government_45_ko_translation:
+  id: 344
+  government_id: 45
+  locale: ko
+  government_entity: Not specified
+  details:
+
+Government_45_vi_translation:
+  id: 345
+  government_id: 45
+  locale: vi
+  government_entity: Not specified
+  details:
+
+Government_45_pt_translation:
+  id: 513
+  government_id: 45
+  locale: pt
+  government_entity: Not specified
+  details:
+
+Government_46_en_translation:
+  id: 46
+  government_id: 46
+  locale: en
+  government_entity: DCVI
+  details:
+
+Government_46_fr_translation:
+  id: 111
+  government_id: 46
+  locale: fr
+  government_entity: DCVI
+  details:
+
+Government_46_zh-CN_translation:
+  id: 346
+  government_id: 46
+  locale: zh-CN
+  government_entity: DCVI
+  details:
+
+Government_46_ja_translation:
+  id: 347
+  government_id: 46
+  locale: ja
+  government_entity: DCVI
+  details:
+
+Government_46_ko_translation:
+  id: 348
+  government_id: 46
+  locale: ko
+  government_entity: DCVI
+  details:
+
+Government_46_vi_translation:
+  id: 349
+  government_id: 46
+  locale: vi
+  government_entity: DCVI
+  details:
+
+Government_46_pt_translation:
+  id: 514
+  government_id: 46
+  locale: pt
+  government_entity: DCVI
+  details:
+
+Government_47_en_translation:
+  id: 47
+  government_id: 47
+  locale: en
+  government_entity: OPJ, DCVI
+  details:
+
+Government_47_fr_translation:
+  id: 112
+  government_id: 47
+  locale: fr
+  government_entity: OPJ, DCVI
+  details:
+
+Government_47_zh-CN_translation:
+  id: 350
+  government_id: 47
+  locale: zh-CN
+  government_entity: OPJ, DCVI
+  details:
+
+Government_47_ja_translation:
+  id: 351
+  government_id: 47
+  locale: ja
+  government_entity: OPJ, DCVI
+  details:
+
+Government_47_ko_translation:
+  id: 352
+  government_id: 47
+  locale: ko
+  government_entity: OPJ, DCVI
+  details:
+
+Government_47_vi_translation:
+  id: 353
+  government_id: 47
+  locale: vi
+  government_entity: OPJ, DCVI
+  details:
+
+Government_47_pt_translation:
+  id: 515
+  government_id: 47
+  locale: pt
+  government_entity: OPJ, DCVI
+  details:
+
+Government_48_en_translation:
+  id: 48
+  government_id: 48
+  locale: en
+  government_entity: DGF
+  details:
+
+Government_48_fr_translation:
+  id: 113
+  government_id: 48
+  locale: fr
+  government_entity: DGF
+  details:
+
+Government_48_zh-CN_translation:
+  id: 354
+  government_id: 48
+  locale: zh-CN
+  government_entity: DGF
+  details:
+
+Government_48_ja_translation:
+  id: 355
+  government_id: 48
+  locale: ja
+  government_entity: DGF
+  details:
+
+Government_48_ko_translation:
+  id: 356
+  government_id: 48
+  locale: ko
+  government_entity: DGF
+  details:
+
+Government_48_vi_translation:
+  id: 357
+  government_id: 48
+  locale: vi
+  government_entity: DGF
+  details:
+
+Government_48_pt_translation:
+  id: 516
+  government_id: 48
+  locale: pt
+  government_entity: DGF
+  details:
+
+Government_49_en_translation:
+  id: 49
+  government_id: 49
+  locale: en
+  government_entity: DGF, DGRAD
+  details:
+
+Government_49_fr_translation:
+  id: 114
+  government_id: 49
+  locale: fr
+  government_entity: DGF, DGRAD
+  details:
+
+Government_49_zh-CN_translation:
+  id: 358
+  government_id: 49
+  locale: zh-CN
+  government_entity: DGF, DGRAD
+  details:
+
+Government_49_ja_translation:
+  id: 359
+  government_id: 49
+  locale: ja
+  government_entity: DGF, DGRAD
+  details:
+
+Government_49_ko_translation:
+  id: 360
+  government_id: 49
+  locale: ko
+  government_entity: DGF, DGRAD
+  details:
+
+Government_49_vi_translation:
+  id: 361
+  government_id: 49
+  locale: vi
+  government_entity: DGF, DGRAD
+  details:
+
+Government_49_pt_translation:
+  id: 517
+  government_id: 49
+  locale: pt
+  government_entity: DGF, DGRAD
+  details:
+
+Government_50_en_translation:
+  id: 50
+  government_id: 50
+  locale: en
+  government_entity: Direction Contrôle et Vérification Interne
+  details:
+
+Government_50_fr_translation:
+  id: 115
+  government_id: 50
+  locale: fr
+  government_entity: Direction Contrôle et Vérification Interne
+  details:
+
+Government_50_zh-CN_translation:
+  id: 362
+  government_id: 50
+  locale: zh-CN
+  government_entity: Direction Contrôle et Vérification Interne
+  details:
+
+Government_50_ja_translation:
+  id: 363
+  government_id: 50
+  locale: ja
+  government_entity: Direction Contrôle et Vérification Interne
+  details:
+
+Government_50_ko_translation:
+  id: 364
+  government_id: 50
+  locale: ko
+  government_entity: Direction Contrôle et Vérification Interne
+  details:
+
+Government_50_vi_translation:
+  id: 365
+  government_id: 50
+  locale: vi
+  government_entity: Direction Contrôle et Vérification Interne
+  details:
+
+Government_50_pt_translation:
+  id: 518
+  government_id: 50
+  locale: pt
+  government_entity: Direction Contrôle et Vérification Interne
+  details:
+
+Government_51_en_translation:
+  id: 51
+  government_id: 51
+  locale: en
+  government_entity: DIAF
+  details:
+
+Government_51_fr_translation:
+  id: 116
+  government_id: 51
+  locale: fr
+  government_entity: DIAF
+  details:
+
+Government_51_zh-CN_translation:
+  id: 366
+  government_id: 51
+  locale: zh-CN
+  government_entity: DIAF
+  details:
+
+Government_51_ja_translation:
+  id: 367
+  government_id: 51
+  locale: ja
+  government_entity: DIAF
+  details:
+
+Government_51_ko_translation:
+  id: 368
+  government_id: 51
+  locale: ko
+  government_entity: DIAF
+  details:
+
+Government_51_vi_translation:
+  id: 369
+  government_id: 51
+  locale: vi
+  government_entity: DIAF
+  details:
+
+Government_51_pt_translation:
+  id: 519
+  government_id: 51
+  locale: pt
+  government_entity: DIAF
+  details:
+
+Government_52_en_translation:
+  id: 52
+  government_id: 52
+  locale: en
+  government_entity: DCVI du MECNT
+  details:
+
+Government_52_fr_translation:
+  id: 117
+  government_id: 52
+  locale: fr
+  government_entity: DCVI du MECNT
+  details:
+
+Government_52_zh-CN_translation:
+  id: 370
+  government_id: 52
+  locale: zh-CN
+  government_entity: DCVI du MECNT
+  details:
+
+Government_52_ja_translation:
+  id: 371
+  government_id: 52
+  locale: ja
+  government_entity: DCVI du MECNT
+  details:
+
+Government_52_ko_translation:
+  id: 372
+  government_id: 52
+  locale: ko
+  government_entity: DCVI du MECNT
+  details:
+
+Government_52_vi_translation:
+  id: 373
+  government_id: 52
+  locale: vi
+  government_entity: DCVI du MECNT
+  details:
+
+Government_52_pt_translation:
+  id: 520
+  government_id: 52
+  locale: pt
+  government_entity: DCVI du MECNT
+  details:
+
+Government_53_en_translation:
+  id: 53
+  government_id: 53
+  locale: en
+  government_entity: OPJ
+  details:
+
+Government_53_fr_translation:
+  id: 118
+  government_id: 53
+  locale: fr
+  government_entity: OPJ
+  details:
+
+Government_53_zh-CN_translation:
+  id: 374
+  government_id: 53
+  locale: zh-CN
+  government_entity: OPJ
+  details:
+
+Government_53_ja_translation:
+  id: 375
+  government_id: 53
+  locale: ja
+  government_entity: OPJ
+  details:
+
+Government_53_ko_translation:
+  id: 376
+  government_id: 53
+  locale: ko
+  government_entity: OPJ
+  details:
+
+Government_53_vi_translation:
+  id: 377
+  government_id: 53
+  locale: vi
+  government_entity: OPJ
+  details:
+
+Government_53_pt_translation:
+  id: 521
+  government_id: 53
+  locale: pt
+  government_entity: OPJ
+  details:
+
+Government_54_en_translation:
+  id: 54
+  government_id: 54
+  locale: en
+  government_entity: Ministère des Eaux et Forêts
+  details:
+
+Government_54_fr_translation:
+  id: 119
+  government_id: 54
+  locale: fr
+  government_entity: Ministère des Eaux et Forêts
+  details:
+
+Government_54_zh-CN_translation:
+  id: 378
+  government_id: 54
+  locale: zh-CN
+  government_entity: Ministère des Eaux et Forêts
+  details:
+
+Government_54_ja_translation:
+  id: 379
+  government_id: 54
+  locale: ja
+  government_entity: Ministère des Eaux et Forêts
+  details:
+
+Government_54_ko_translation:
+  id: 380
+  government_id: 54
+  locale: ko
+  government_entity: Ministère des Eaux et Forêts
+  details:
+
+Government_54_vi_translation:
+  id: 381
+  government_id: 54
+  locale: vi
+  government_entity: Ministère des Eaux et Forêts
+  details:
+
+Government_54_pt_translation:
+  id: 522
+  government_id: 54
+  locale: pt
+  government_entity: Ministère des Eaux et Forêts
+  details:
+
+Government_55_en_translation:
+  id: 55
+  government_id: 55
+  locale: en
+  government_entity: Chief of police in Lamandau
+  details:
+
+Government_55_fr_translation:
+  id: 120
+  government_id: 55
+  locale: fr
+  government_entity: Chief of police in Lamandau
+  details:
+
+Government_55_zh-CN_translation:
+  id: 382
+  government_id: 55
+  locale: zh-CN
+  government_entity: Chief of police in Lamandau
+  details:
+
+Government_55_ja_translation:
+  id: 383
+  government_id: 55
+  locale: ja
+  government_entity: Chief of police in Lamandau
+  details:
+
+Government_55_ko_translation:
+  id: 384
+  government_id: 55
+  locale: ko
+  government_entity: Chief of police in Lamandau
+  details:
+
+Government_55_vi_translation:
+  id: 385
+  government_id: 55
+  locale: vi
+  government_entity: Chief of police in Lamandau
+  details:
+
+Government_55_pt_translation:
+  id: 523
+  government_id: 55
+  locale: pt
+  government_entity: Chief of police in Lamandau
+  details:
+
+Government_56_en_translation:
+  id: 56
+  government_id: 56
+  locale: en
+  government_entity: Regency of Gunung Mas
+  details:
+
+Government_56_fr_translation:
+  id: 121
+  government_id: 56
+  locale: fr
+  government_entity: Regency of Gunung Mas
+  details:
+
+Government_56_zh-CN_translation:
+  id: 386
+  government_id: 56
+  locale: zh-CN
+  government_entity: Regency of Gunung Mas
+  details:
+
+Government_56_ja_translation:
+  id: 387
+  government_id: 56
+  locale: ja
+  government_entity: Regency of Gunung Mas
+  details:
+
+Government_56_ko_translation:
+  id: 388
+  government_id: 56
+  locale: ko
+  government_entity: Regency of Gunung Mas
+  details:
+
+Government_56_vi_translation:
+  id: 389
+  government_id: 56
+  locale: vi
+  government_entity: Regency of Gunung Mas
+  details:
+
+Government_56_pt_translation:
+  id: 524
+  government_id: 56
+  locale: pt
+  government_entity: Regency of Gunung Mas
+  details:
+
+Government_57_en_translation:
+  id: 57
+  government_id: 57
+  locale: en
+  government_entity: Regency police, other relevant ministries and agencies
+  details:
+
+Government_57_fr_translation:
+  id: 122
+  government_id: 57
+  locale: fr
+  government_entity: Regency police, other relevant ministries and agencies
+  details:
+
+Government_57_zh-CN_translation:
+  id: 390
+  government_id: 57
+  locale: zh-CN
+  government_entity: Regency police, other relevant ministries and agencies
+  details:
+
+Government_57_ja_translation:
+  id: 391
+  government_id: 57
+  locale: ja
+  government_entity: Regency police, other relevant ministries and agencies
+  details:
+
+Government_57_ko_translation:
+  id: 392
+  government_id: 57
+  locale: ko
+  government_entity: Regency police, other relevant ministries and agencies
+  details:
+
+Government_57_vi_translation:
+  id: 393
+  government_id: 57
+  locale: vi
+  government_entity: Regency police, other relevant ministries and agencies
+  details:
+
+Government_57_pt_translation:
+  id: 525
+  government_id: 57
+  locale: pt
+  government_entity: Regency police, other relevant ministries and agencies
+  details:
+
+Government_58_en_translation:
+  id: 58
+  government_id: 58
+  locale: en
+  government_entity: SVLK
+  details:
+
+Government_58_fr_translation:
+  id: 123
+  government_id: 58
+  locale: fr
+  government_entity: SVLK
+  details:
+
+Government_58_zh-CN_translation:
+  id: 394
+  government_id: 58
+  locale: zh-CN
+  government_entity: SVLK
+  details:
+
+Government_58_ja_translation:
+  id: 395
+  government_id: 58
+  locale: ja
+  government_entity: SVLK
+  details:
+
+Government_58_ko_translation:
+  id: 396
+  government_id: 58
+  locale: ko
+  government_entity: SVLK
+  details:
+
+Government_58_vi_translation:
+  id: 397
+  government_id: 58
+  locale: vi
+  government_entity: SVLK
+  details:
+
+Government_58_pt_translation:
+  id: 526
+  government_id: 58
+  locale: pt
+  government_entity: SVLK
+  details:
+
+Government_59_en_translation:
+  id: 59
+  government_id: 59
+  locale: en
+  government_entity: Ministry of Forestry
+  details:
+
+Government_59_fr_translation:
+  id: 124
+  government_id: 59
+  locale: fr
+  government_entity: Ministry of Forestry
+  details:
+
+Government_59_zh-CN_translation:
+  id: 398
+  government_id: 59
+  locale: zh-CN
+  government_entity: Ministry of Forestry
+  details:
+
+Government_59_ja_translation:
+  id: 399
+  government_id: 59
+  locale: ja
+  government_entity: Ministry of Forestry
+  details:
+
+Government_59_ko_translation:
+  id: 400
+  government_id: 59
+  locale: ko
+  government_entity: Ministry of Forestry
+  details:
+
+Government_59_vi_translation:
+  id: 401
+  government_id: 59
+  locale: vi
+  government_entity: Ministry of Forestry
+  details:
+
+Government_59_pt_translation:
+  id: 527
+  government_id: 59
+  locale: pt
+  government_entity: Ministry of Forestry
+  details:
+
+Government_60_en_translation:
+  id: 60
+  government_id: 60
+  locale: en
+  government_entity: Chef Unité de Gestion Forestière
+  details:
+
+Government_60_fr_translation:
+  id: 125
+  government_id: 60
+  locale: fr
+  government_entity: Chef Unité de Gestion Forestière
+  details:
+
+Government_60_zh-CN_translation:
+  id: 156
+  government_id: 60
+  locale: zh-CN
+  government_entity: Chef Unité de Gestion Forestière
+  details:
+
+Government_60_ja_translation:
+  id: 402
+  government_id: 60
+  locale: ja
+  government_entity: Chef Unité de Gestion Forestière
+  details:
+
+Government_60_ko_translation:
+  id: 403
+  government_id: 60
+  locale: ko
+  government_entity: Chef Unité de Gestion Forestière
+  details:
+
+Government_60_vi_translation:
+  id: 404
+  government_id: 60
+  locale: vi
+  government_entity: Chef Unité de Gestion Forestière
+  details:
+
+Government_60_pt_translation:
+  id: 528
+  government_id: 60
+  locale: pt
+  government_entity: Chef Unité de Gestion Forestière
+  details:
+
+Government_61_en_translation:
+  id: 61
+  government_id: 61
+  locale: en
+  government_entity: Directeur/Direction Technique
+  details:
+
+Government_61_fr_translation:
+  id: 126
+  government_id: 61
+  locale: fr
+  government_entity: Directeur/Direction Technique
+  details:
+
+Government_61_zh-CN_translation:
+  id: 405
+  government_id: 61
+  locale: zh-CN
+  government_entity: Directeur/Direction Technique
+  details:
+
+Government_61_ja_translation:
+  id: 406
+  government_id: 61
+  locale: ja
+  government_entity: Directeur/Direction Technique
+  details:
+
+Government_61_ko_translation:
+  id: 407
+  government_id: 61
+  locale: ko
+  government_entity: Directeur/Direction Technique
+  details:
+
+Government_61_vi_translation:
+  id: 408
+  government_id: 61
+  locale: vi
+  government_entity: Directeur/Direction Technique
+  details:
+
+Government_61_pt_translation:
+  id: 529
+  government_id: 61
+  locale: pt
+  government_entity: Directeur/Direction Technique
+  details:
+
+Government_62_en_translation:
+  id: 62
+  government_id: 62
+  locale: en
+  government_entity: Not specified
+  details:
+
+Government_62_fr_translation:
+  id: 127
+  government_id: 62
+  locale: fr
+  government_entity: Not specified
+  details:
+
+Government_62_zh-CN_translation:
+  id: 409
+  government_id: 62
+  locale: zh-CN
+  government_entity: Not specified
+  details:
+
+Government_62_ja_translation:
+  id: 410
+  government_id: 62
+  locale: ja
+  government_entity: Not specified
+  details:
+
+Government_62_ko_translation:
+  id: 411
+  government_id: 62
+  locale: ko
+  government_entity: Not specified
+  details:
+
+Government_62_vi_translation:
+  id: 412
+  government_id: 62
+  locale: vi
+  government_entity: Not specified
+  details:
+
+Government_62_pt_translation:
+  id: 530
+  government_id: 62
+  locale: pt
+  government_entity: Not specified
+  details:
+
+Government_63_en_translation:
+  id: 63
+  government_id: 63
+  locale: en
+  government_entity: Not specified
+  details:
+
+Government_63_fr_translation:
+  id: 128
+  government_id: 63
+  locale: fr
+  government_entity: Not specified
+  details:
+
+Government_63_zh-CN_translation:
+  id: 413
+  government_id: 63
+  locale: zh-CN
+  government_entity: Not specified
+  details:
+
+Government_63_ja_translation:
+  id: 414
+  government_id: 63
+  locale: ja
+  government_entity: Not specified
+  details:
+
+Government_63_ko_translation:
+  id: 415
+  government_id: 63
+  locale: ko
+  government_entity: Not specified
+  details:
+
+Government_63_vi_translation:
+  id: 416
+  government_id: 63
+  locale: vi
+  government_entity: Not specified
+  details:
+
+Government_63_pt_translation:
+  id: 531
+  government_id: 63
+  locale: pt
+  government_entity: Not specified
+  details:
+
+Government_64_fr_translation:
+  id: 130
+  government_id: 66
+  locale: fr
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_64_zh-CN_translation:
+  id: 131
+  government_id: 66
+  locale: zh-CN
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_64_en_translation:
+  id: 129
+  government_id: 66
+  locale: en
+  government_entity: National Forestry Agency (SAFR)
+  details: "Nearly all of the logging in Ukraine is carried out by the government
+    itself, through State Forestry Enterprises (SFEs), mostly under the auspices of
+    the national forestry agency (SAFR).Implementation of the SAFR’s\r\npolicies is
+    overseen at the regional level by a forestry directorate for each province called
+    Regional Forestry Management Boards (RFMBs). "
+
+Government_64_ja_translation:
+  id: 417
+  government_id: 66
+  locale: ja
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_64_ko_translation:
+  id: 418
+  government_id: 66
+  locale: ko
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_64_vi_translation:
+  id: 419
+  government_id: 66
+  locale: vi
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_64_pt_translation:
+  id: 536
+  government_id: 66
+  locale: pt
+  government_entity: National Forestry Agency (SAFR)
+  details: "Nearly all of the logging in Ukraine is carried out by the government
+    itself, through State Forestry Enterprises (SFEs), mostly under the auspices of
+    the national forestry agency (SAFR).Implementation of the SAFR’s\r\npolicies is
+    overseen at the regional level by a forestry directorate for each province called
+    Regional Forestry Management Boards (RFMBs). "
+
+Government_65_fr_translation:
+  id: 133
+  government_id: 67
+  locale: fr
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_65_zh-CN_translation:
+  id: 134
+  government_id: 67
+  locale: zh-CN
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_65_en_translation:
+  id: 132
+  government_id: 67
+  locale: en
+  government_entity: Regional Forestry Management Boards (RFMB)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region. Operate at provincial level.
+
+Government_65_ja_translation:
+  id: 420
+  government_id: 67
+  locale: ja
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_65_ko_translation:
+  id: 421
+  government_id: 67
+  locale: ko
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_65_vi_translation:
+  id: 422
+  government_id: 67
+  locale: vi
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_65_pt_translation:
+  id: 540
+  government_id: 67
+  locale: pt
+  government_entity: Regional Forestry Management Boards (RFMB)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region. Operate at provincial level.
+
+Government_66_fr_translation:
+  id: 136
+  government_id: 68
+  locale: fr
+  government_entity: State Forestry Enterprises (SFEs
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. '
+
+Government_66_zh-CN_translation:
+  id: 137
+  government_id: 68
+  locale: zh-CN
+  government_entity: State Forestry Enterprises (SFEs
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. '
+
+Government_66_en_translation:
+  id: 135
+  government_id: 68
+  locale: en
+  government_entity: State Forestry Enterprises (SFE)
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. Operate at District Level. '
+
+Government_66_ja_translation:
+  id: 423
+  government_id: 68
+  locale: ja
+  government_entity: State Forestry Enterprises (SFEs
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. '
+
+Government_66_ko_translation:
+  id: 424
+  government_id: 68
+  locale: ko
+  government_entity: State Forestry Enterprises (SFEs
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. '
+
+Government_66_vi_translation:
+  id: 425
+  government_id: 68
+  locale: vi
+  government_entity: State Forestry Enterprises (SFEs
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. '
+
+Government_66_pt_translation:
+  id: 539
+  government_id: 68
+  locale: pt
+  government_entity: State Forestry Enterprises (SFE)
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. Operate at District Level. '
+
+Government_67_en_translation:
+  id: 138
+  government_id: 69
+  locale: en
+  government_entity: Ukraine’s State Audit Service (DFS)
+  details:
+
+Government_67_fr_translation:
+  id: 139
+  government_id: 69
+  locale: fr
+  government_entity: Ukraine’s State Audit Service (DFS)
+  details:
+
+Government_67_zh-CN_translation:
+  id: 140
+  government_id: 69
+  locale: zh-CN
+  government_entity: Ukraine’s State Audit Service (DFS)
+  details:
+
+Government_67_ja_translation:
+  id: 426
+  government_id: 69
+  locale: ja
+  government_entity: Ukraine’s State Audit Service (DFS)
+  details:
+
+Government_67_ko_translation:
+  id: 427
+  government_id: 69
+  locale: ko
+  government_entity: Ukraine’s State Audit Service (DFS)
+  details:
+
+Government_67_vi_translation:
+  id: 428
+  government_id: 69
+  locale: vi
+  government_entity: Ukraine’s State Audit Service (DFS)
+  details:
+
+Government_67_pt_translation:
+  id: 532
+  government_id: 69
+  locale: pt
+  government_entity: Ukraine’s State Audit Service (DFS)
+  details:
+
+Government_68_en_translation:
+  id: 141
+  government_id: 70
+  locale: en
+  government_entity: Ukraine Customs
+  details:
+
+Government_68_fr_translation:
+  id: 142
+  government_id: 70
+  locale: fr
+  government_entity: Ukraine Customs
+  details:
+
+Government_68_zh-CN_translation:
+  id: 143
+  government_id: 70
+  locale: zh-CN
+  government_entity: Ukraine Customs
+  details:
+
+Government_68_ja_translation:
+  id: 429
+  government_id: 70
+  locale: ja
+  government_entity: Ukraine Customs
+  details:
+
+Government_68_ko_translation:
+  id: 430
+  government_id: 70
+  locale: ko
+  government_entity: Ukraine Customs
+  details:
+
+Government_68_vi_translation:
+  id: 431
+  government_id: 70
+  locale: vi
+  government_entity: Ukraine Customs
+  details:
+
+Government_68_pt_translation:
+  id: 538
+  government_id: 70
+  locale: pt
+  government_entity: Ukraine Customs
+  details:
+
+Government_69_en_translation:
+  id: 144
+  government_id: 71
+  locale: en
+  government_entity: Wildlife Division of the Forestry Commission
+  details: ''
+
+Government_69_fr_translation:
+  id: 145
+  government_id: 71
+  locale: fr
+  government_entity: Wildlife Division of the Forestry Commission
+  details:
+
+Government_69_zh-CN_translation:
+  id: 146
+  government_id: 71
+  locale: zh-CN
+  government_entity: Wildlife Division of the Forestry Commission
+  details:
+
+Government_69_ja_translation:
+  id: 432
+  government_id: 71
+  locale: ja
+  government_entity: Wildlife Division of the Forestry Commission
+  details:
+
+Government_69_ko_translation:
+  id: 433
+  government_id: 71
+  locale: ko
+  government_entity: Wildlife Division of the Forestry Commission
+  details:
+
+Government_69_vi_translation:
+  id: 434
+  government_id: 71
+  locale: vi
+  government_entity: Wildlife Division of the Forestry Commission
+  details:
+
+Government_69_pt_translation:
+  id: 537
+  government_id: 71
+  locale: pt
+  government_entity: Wildlife Division of the Forestry Commission
+  details: ''
+
+Government_70_en_translation:
+  id: 147
+  government_id: 72
+  locale: en
+  government_entity: 'Forestry Commission '
+  details:
+
+Government_70_fr_translation:
+  id: 148
+  government_id: 72
+  locale: fr
+  government_entity: 'Forestry Commission '
+  details:
+
+Government_70_zh-CN_translation:
+  id: 149
+  government_id: 72
+  locale: zh-CN
+  government_entity: 'Forestry Commission '
+  details:
+
+Government_70_ja_translation:
+  id: 435
+  government_id: 72
+  locale: ja
+  government_entity: 'Forestry Commission '
+  details:
+
+Government_70_ko_translation:
+  id: 436
+  government_id: 72
+  locale: ko
+  government_entity: 'Forestry Commission '
+  details:
+
+Government_70_vi_translation:
+  id: 437
+  government_id: 72
+  locale: vi
+  government_entity: 'Forestry Commission '
+  details:
+
+Government_70_pt_translation:
+  id: 534
+  government_id: 72
+  locale: pt
+  government_entity: 'Forestry Commission '
+  details:
+
+Government_71_en_translation:
+  id: 150
+  government_id: 73
+  locale: en
+  government_entity: Timber Industry Development Division
+  details:
+
+Government_71_fr_translation:
+  id: 151
+  government_id: 73
+  locale: fr
+  government_entity: Timber Industry Development Division
+  details:
+
+Government_71_zh-CN_translation:
+  id: 152
+  government_id: 73
+  locale: zh-CN
+  government_entity: Timber Industry Development Division
+  details:
+
+Government_71_ja_translation:
+  id: 438
+  government_id: 73
+  locale: ja
+  government_entity: Timber Industry Development Division
+  details:
+
+Government_71_ko_translation:
+  id: 439
+  government_id: 73
+  locale: ko
+  government_entity: Timber Industry Development Division
+  details:
+
+Government_71_vi_translation:
+  id: 440
+  government_id: 73
+  locale: vi
+  government_entity: Timber Industry Development Division
+  details:
+
+Government_71_pt_translation:
+  id: 541
+  government_id: 73
+  locale: pt
+  government_entity: Timber Industry Development Division
+  details:
+
+Government_72_en_translation:
+  id: 154
+  government_id: 74
+  locale: en
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_72_zh-CN_translation:
+  id: 155
+  government_id: 74
+  locale: zh-CN
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_72_fr_translation:
+  id: 153
+  government_id: 74
+  locale: fr
+  government_entity: Ministère des Eaux et Forêts (MINEF)
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_72_ja_translation:
+  id: 441
+  government_id: 74
+  locale: ja
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_72_ko_translation:
+  id: 442
+  government_id: 74
+  locale: ko
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_72_vi_translation:
+  id: 443
+  government_id: 74
+  locale: vi
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_72_pt_translation:
+  id: 542
+  government_id: 74
+  locale: pt
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_73_fr_translation:
+  id: 157
+  government_id: 75
+  locale: fr
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+  details:
+
+Government_73_en_translation:
+  id: 158
+  government_id: 75
+  locale: en
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+  details:
+
+Government_73_zh-CN_translation:
+  id: 159
+  government_id: 75
+  locale: zh-CN
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+  details:
+
+Government_73_ja_translation:
+  id: 444
+  government_id: 75
+  locale: ja
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+  details:
+
+Government_73_ko_translation:
+  id: 445
+  government_id: 75
+  locale: ko
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+  details:
+
+Government_73_vi_translation:
+  id: 446
+  government_id: 75
+  locale: vi
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+  details:
+
+Government_73_pt_translation:
+  id: 543
+  government_id: 75
+  locale: pt
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+  details:
+
+Government_74_fr_translation:
+  id: 160
+  government_id: 76
+  locale: fr
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  details:
+
+Government_74_en_translation:
+  id: 161
+  government_id: 76
+  locale: en
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  details:
+
+Government_74_zh-CN_translation:
+  id: 162
+  government_id: 76
+  locale: zh-CN
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  details:
+
+Government_74_ja_translation:
+  id: 447
+  government_id: 76
+  locale: ja
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  details:
+
+Government_74_ko_translation:
+  id: 448
+  government_id: 76
+  locale: ko
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  details:
+
+Government_74_vi_translation:
+  id: 449
+  government_id: 76
+  locale: vi
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  details:
+
+Government_74_pt_translation:
+  id: 544
+  government_id: 76
+  locale: pt
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  details:
+
+Government_75_zh-CN_translation:
+  id: 165
+  government_id: 77
+  locale: zh-CN
+  government_entity: SODEFOR
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_75_fr_translation:
+  id: 163
+  government_id: 77
+  locale: fr
+  government_entity: Société de Développement des Forêts (SODEFOR)
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_75_en_translation:
+  id: 164
+  government_id: 77
+  locale: en
+  government_entity: Société de Développement des Forêts (SODEFOR)
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_75_ja_translation:
+  id: 450
+  government_id: 77
+  locale: ja
+  government_entity: SODEFOR
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_75_ko_translation:
+  id: 451
+  government_id: 77
+  locale: ko
+  government_entity: SODEFOR
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_75_vi_translation:
+  id: 452
+  government_id: 77
+  locale: vi
+  government_entity: SODEFOR
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_75_pt_translation:
+  id: 545
+  government_id: 77
+  locale: pt
+  government_entity: Société de Développement des Forêts (SODEFOR)
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_76_fr_translation:
+  id: 453
+  government_id: 78
+  locale: fr
+  government_entity: Commune de Niété
+  details:
+
+Government_76_en_translation:
+  id: 454
+  government_id: 78
+  locale: en
+  government_entity: Commune de Niété
+  details:
+
+Government_76_zh-CN_translation:
+  id: 455
+  government_id: 78
+  locale: zh-CN
+  government_entity: Commune de Niété
+  details:
+
+Government_76_ja_translation:
+  id: 456
+  government_id: 78
+  locale: ja
+  government_entity: Commune de Niété
+  details:
+
+Government_76_ko_translation:
+  id: 457
+  government_id: 78
+  locale: ko
+  government_entity: Commune de Niété
+  details:
+
+Government_76_vi_translation:
+  id: 458
+  government_id: 78
+  locale: vi
+  government_entity: Commune de Niété
+  details:
+
+Government_76_pt_translation:
+  id: 546
+  government_id: 78
+  locale: pt
+  government_entity: Commune de Niété
+  details:
+
+Government_77_fr_translation:
+  id: 459
+  government_id: 79
+  locale: fr
+  government_entity: Gendarmerie de Bidou 3
+  details:
+
+Government_77_en_translation:
+  id: 460
+  government_id: 79
+  locale: en
+  government_entity: Gendarmerie de Bidou 3
+  details:
+
+Government_77_zh-CN_translation:
+  id: 461
+  government_id: 79
+  locale: zh-CN
+  government_entity: Gendarmerie de Bidou 3
+  details:
+
+Government_77_ja_translation:
+  id: 462
+  government_id: 79
+  locale: ja
+  government_entity: Gendarmerie de Bidou 3
+  details:
+
+Government_77_ko_translation:
+  id: 463
+  government_id: 79
+  locale: ko
+  government_entity: Gendarmerie de Bidou 3
+  details:
+
+Government_77_vi_translation:
+  id: 464
+  government_id: 79
+  locale: vi
+  government_entity: Gendarmerie de Bidou 3
+  details:
+
+Government_77_pt_translation:
+  id: 547
+  government_id: 79
+  locale: pt
+  government_entity: Gendarmerie de Bidou 3
+  details:
+
+Government_78_fr_translation:
+  id: 465
+  government_id: 80
+  locale: fr
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+  details:
+
+Government_78_en_translation:
+  id: 466
+  government_id: 80
+  locale: en
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+  details:
+
+Government_78_zh-CN_translation:
+  id: 467
+  government_id: 80
+  locale: zh-CN
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+  details:
+
+Government_78_ja_translation:
+  id: 468
+  government_id: 80
+  locale: ja
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+  details:
+
+Government_78_ko_translation:
+  id: 469
+  government_id: 80
+  locale: ko
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+  details:
+
+Government_78_vi_translation:
+  id: 470
+  government_id: 80
+  locale: vi
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+  details:
+
+Government_78_pt_translation:
+  id: 548
+  government_id: 80
+  locale: pt
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+  details:
+
+Government_79_fr_translation:
+  id: 549
+  government_id: 81
+  locale: fr
+  government_entity: MINEPDED
+  details:
+
+Government_79_en_translation:
+  id: 550
+  government_id: 81
+  locale: en
+  government_entity: MINEPDED
+  details:
+
+Government_79_pt_translation:
+  id: 551
+  government_id: 81
+  locale: pt
+  government_entity: MINEPDED
+  details:
+
+Government_79_zh-CN_translation:
+  id: 552
+  government_id: 81
+  locale: zh-CN
+  government_entity: MINEPDED
+  details:
+
+Government_79_ja_translation:
+  id: 553
+  government_id: 81
+  locale: ja
+  government_entity: MINEPDED
+  details:
+
+Government_79_ko_translation:
+  id: 554
+  government_id: 81
+  locale: ko
+  government_entity: MINEPDED
+  details:
+
+Government_79_vi_translation:
+  id: 555
+  government_id: 81
+  locale: vi
+  government_entity: MINEPDED
+  details:
+
+Government_80_fr_translation:
+  id: 556
+  government_id: 82
+  locale: fr
+  government_entity: Province du Haut-Uélé
+  details:
+
+Government_80_en_translation:
+  id: 557
+  government_id: 82
+  locale: en
+  government_entity: Province du Haut-Uélé
+  details:
+
+Government_80_pt_translation:
+  id: 558
+  government_id: 82
+  locale: pt
+  government_entity: Province du Haut-Uélé
+  details:
+
+Government_80_zh-CN_translation:
+  id: 559
+  government_id: 82
+  locale: zh-CN
+  government_entity: Province du Haut-Uélé
+  details:
+
+Government_80_ja_translation:
+  id: 560
+  government_id: 82
+  locale: ja
+  government_entity: Province du Haut-Uélé
+  details:
+
+Government_80_ko_translation:
+  id: 561
+  government_id: 82
+  locale: ko
+  government_entity: Province du Haut-Uélé
+  details:
+
+Government_80_vi_translation:
+  id: 562
+  government_id: 82
+  locale: vi
+  government_entity: Province du Haut-Uélé
+  details:

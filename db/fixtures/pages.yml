@@ -1,0 +1,12 @@
+
+Page_1:
+  id: 1
+  slug: privacy-policy
+  available_in_languages:
+  - en
+
+Page_2:
+  id: 2
+  slug: terms
+  available_in_languages:
+  - en

@@ -1,0 +1,3530 @@
+
+Country_1:
+  id: 1
+  iso: AUS
+  region_iso: AZ
+  country_centroid:
+    type: Point
+    coordinates:
+    - -25
+    - 135
+  region_centroid:
+    type: Point
+    coordinates:
+    - -26.3793465342288
+    - 135.977532183695
+
+Country_2:
+  id: 2
+  iso: BHS
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 25.04082
+    - -77.37122
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_3:
+  id: 3
+  iso: BHR
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 26.03333
+    - 50.55
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_4:
+  id: 4
+  iso: BRB
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13.16667
+    - -59.53333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_5:
+  id: 5
+  iso: BLZ
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 17.25
+    - -88.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_6:
+  id: 6
+  iso: CYM
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 19.5
+    - -80.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_7:
+  id: 7
+  iso: COD
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -2.5
+    - 23.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+  is_active: true
+
+Country_8:
+  id: 8
+  iso: CUB
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 22
+    - -79.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_9:
+  id: 9
+  iso: CUW
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 12.16667
+    - -68.96667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_10:
+  id: 10
+  iso: CZE
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 49.75
+    - 15
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_11:
+  id: 11
+  iso: DOM
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 19
+    - -70.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_12:
+  id: 12
+  iso: GEO
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 41.99998
+    - 43.4999
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_13:
+  id: 13
+  iso: HMD
+  region_iso: AN
+  country_centroid:
+    type: Point
+    coordinates:
+    - -53.11711
+    - 73.50952
+  region_centroid:
+    type: Point
+    coordinates:
+    - -80.5079464102288
+    - 19.9088475268188
+
+Country_14:
+  id: 14
+  iso: IRQ
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 33
+    - 44
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_15:
+  id: 15
+  iso: LTU
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 55.41667
+    - 24
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_16:
+  id: 16
+  iso: MDA
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 47.25
+    - 28.58333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_17:
+  id: 17
+  iso: MCO
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 43.73141
+    - 7.41903
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_18:
+  id: 18
+  iso: MSR
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 16.75
+    - -62.2
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_19:
+  id: 19
+  iso: NZL
+  region_iso: AZ
+  country_centroid:
+    type: Point
+    coordinates:
+    - -42
+    - 174
+  region_centroid:
+    type: Point
+    coordinates:
+    - -26.3793465342288
+    - 135.977532183695
+
+Country_20:
+  id: 20
+  iso: NIC
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13
+    - -85
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_21:
+  id: 21
+  iso: OMN
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 21
+    - 57
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_22:
+  id: 22
+  iso: POL
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 52
+    - 20
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_23:
+  id: 23
+  iso: RUS
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 60
+    - 100
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_24:
+  id: 24
+  iso: SMR
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 43.9367
+    - 12.4463
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_25:
+  id: 25
+  iso: SAU
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 25
+    - 45
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_26:
+  id: 26
+  iso: SXM
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18.04167
+    - -63.06667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_27:
+  id: 27
+  iso: LCA
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13.88333
+    - -60.96667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_28:
+  id: 28
+  iso: SWE
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 62
+    - 15
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_29:
+  id: 29
+  iso: HUN
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 47
+    - 20
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_30:
+  id: 30
+  iso: IDN
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - -5
+    - 120
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_31:
+  id: 31
+  iso: IMN
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 54.25
+    - -4.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_32:
+  id: 32
+  iso: GMB
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13.5
+    - -15.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_33:
+  id: 33
+  iso: CHE
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 47.00016
+    - 8.01427
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_34:
+  id: 34
+  iso: SYR
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 35
+    - 38
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_35:
+  id: 35
+  iso: TUR
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 39
+    - 35
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_36:
+  id: 36
+  iso: GBR
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 54.75844
+    - -2.69531
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_37:
+  id: 37
+  iso: USA
+  region_iso: NM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 39.76
+    - -98.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 55.1397926304534
+    - -103.939500476328
+
+Country_38:
+  id: 38
+  iso: URY
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -33
+    - -56
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_39:
+  id: 39
+  iso: VEN
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 8
+    - -66
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_40:
+  id: 40
+  iso: VNM
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 16.16667
+    - 107.83333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_41:
+  id: 41
+  iso: YEM
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15.5
+    - 47.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_42:
+  id: 42
+  iso: BGD
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 24
+    - 90
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_43:
+  id: 43
+  iso: BIH
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 44.25
+    - 17.83333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_44:
+  id: 44
+  iso: BFA
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 12.5
+    - -1.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_45:
+  id: 45
+  iso: CMR
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 6
+    - 12.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+  is_active: true
+
+Country_46:
+  id: 46
+  iso: TCD
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15
+    - 19
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+
+Country_47:
+  id: 47
+  iso: COG
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -1
+    - 15.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+  is_active: true
+
+Country_48:
+  id: 48
+  iso: DNK
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 56
+    - 10
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_49:
+  id: 49
+  iso: EGY
+  region_iso: NA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 27
+    - 30
+  region_centroid:
+    type: Point
+    coordinates:
+    - 25.1323592342349
+    - 14.8790854842834
+
+Country_50:
+  id: 50
+  iso: EST
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 59
+    - 26
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_51:
+  id: 51
+  iso: FJI
+  region_iso: ME
+  country_centroid:
+    type: Point
+    coordinates:
+    - -15.7332
+    - -179.912
+  region_centroid:
+    type: Point
+    coordinates:
+    - -7.76197444087451
+    - 147.888477768951
+
+Country_52:
+  id: 52
+  iso: FIN
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 64
+    - 26
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_53:
+  id: 53
+  iso: GAB
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -1
+    - 11.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+  is_active: true
+
+Country_54:
+  id: 54
+  iso: GRL
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 72
+    - -40
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_55:
+  id: 55
+  iso: GUM
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13.47861
+    - 144.81834
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_56:
+  id: 56
+  iso: IRL
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 53
+    - -8
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_57:
+  id: 57
+  iso: JPN
+  region_iso: ES
+  country_centroid:
+    type: Point
+    coordinates:
+    - 35.68536
+    - 139.75309
+  region_centroid:
+    type: Point
+    coordinates:
+    - 38.1739069049899
+    - 105.293943572632
+
+Country_58:
+  id: 58
+  iso: KEN
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 0.448968042
+    - 37.91715735
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_59:
+  id: 59
+  iso: KIR
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - 1.421
+    - 172.984
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_60:
+  id: 60
+  iso: LBY
+  region_iso: NA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 28
+    - 17
+  region_centroid:
+    type: Point
+    coordinates:
+    - 25.1323592342349
+    - 14.8790854842834
+
+Country_61:
+  id: 61
+  iso: MWI
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -13.5
+    - 34
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_62:
+  id: 62
+  iso: MAR
+  region_iso: NA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 31.84655878
+    - -6.276138678
+  region_centroid:
+    type: Point
+    coordinates:
+    - 25.1323592342349
+    - 14.8790854842834
+
+Country_63:
+  id: 63
+  iso: MOZ
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -18.25
+    - 35
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_64:
+  id: 64
+  iso: NRU
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - -0.517
+    - 166.933
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_65:
+  id: 65
+  iso: NCL
+  region_iso: ME
+  country_centroid:
+    type: Point
+    coordinates:
+    - -21.5
+    - 165.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - -7.76197444087451
+    - 147.888477768951
+
+Country_66:
+  id: 66
+  iso: NOR
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 62
+    - 10
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_67:
+  id: 67
+  iso: PNG
+  region_iso: ME
+  country_centroid:
+    type: Point
+    coordinates:
+    - -6
+    - 147
+  region_centroid:
+    type: Point
+    coordinates:
+    - -7.76197444087451
+    - 147.888477768951
+
+Country_68:
+  id: 68
+  iso: ROU
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 46
+    - 25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_69:
+  id: 69
+  iso: SOM
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 6
+    - 48
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_70:
+  id: 70
+  iso: KOR
+  region_iso: ES
+  country_centroid:
+    type: Point
+    coordinates:
+    - 36.5
+    - 127.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 38.1739069049899
+    - 105.293943572632
+
+Country_71:
+  id: 71
+  iso: SSD
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 7.5
+    - 30
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_72:
+  id: 72
+  iso: SDN
+  region_iso: NA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 16
+    - 30
+  region_centroid:
+    type: Point
+    coordinates:
+    - 25.1323592342349
+    - 14.8790854842834
+
+Country_73:
+  id: 73
+  iso: SJM
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 78.15706
+    - 15.86426
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_74:
+  id: 74
+  iso: TZA
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -6
+    - 35
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_75:
+  id: 75
+  iso: UGA
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 1.25
+    - 32.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_76:
+  id: 76
+  iso: UKR
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 49
+    - 32
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_77:
+  id: 77
+  iso: VUT
+  region_iso: ME
+  country_centroid:
+    type: Point
+    coordinates:
+    - -16
+    - 167
+  region_centroid:
+    type: Point
+    coordinates:
+    - -7.76197444087451
+    - 147.888477768951
+
+Country_78:
+  id: 78
+  iso: ARG
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -34
+    - -64
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_79:
+  id: 79
+  iso: AZE
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 40.5
+    - 47.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_80:
+  id: 80
+  iso: BEL
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 50.75
+    - 4.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_81:
+  id: 81
+  iso: BOL
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -17
+    - -65
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_82:
+  id: 82
+  iso: BVT
+  region_iso: AN
+  country_centroid:
+    type: Point
+    coordinates:
+    - -54.43333
+    - 3.4
+  region_centroid:
+    type: Point
+    coordinates:
+    - -80.5079464102288
+    - 19.9088475268188
+
+Country_83:
+  id: 83
+  iso: BRA
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -10
+    - -55
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_84:
+  id: 84
+  iso: BDI
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -3.5
+    - 30
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_85:
+  id: 85
+  iso: COL
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 4
+    - -73.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_86:
+  id: 86
+  iso: CIV
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 8
+    - -5.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_87:
+  id: 87
+  iso: ECU
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -1.25
+    - -78.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_88:
+  id: 88
+  iso: GHA
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 8.1
+    - -1.2
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_89:
+  id: 89
+  iso: GRC
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 39
+    - 22
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_90:
+  id: 90
+  iso: GIN
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 10.83333
+    - -10.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_91:
+  id: 91
+  iso: GNB
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 12
+    - -15
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_92:
+  id: 92
+  iso: GUY
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 5
+    - -59
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_93:
+  id: 93
+  iso: IND
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 22
+    - 79
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_94:
+  id: 94
+  iso: IRN
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 32
+    - 53
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_95:
+  id: 95
+  iso: KAZ
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 48
+    - 68
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_96:
+  id: 96
+  iso: LBR
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 6.5
+    - -9.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_97:
+  id: 97
+  iso: MLI
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18
+    - -2
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_98:
+  id: 98
+  iso: MLT
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 35.91667
+    - 14.43333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_99:
+  id: 99
+  iso: NPL
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 28
+    - 84
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_100:
+  id: 100
+  iso: NGA
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 10
+    - 8
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_101:
+  id: 101
+  iso: PRY
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -23.33333
+    - -58
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_102:
+  id: 102
+  iso: PHL
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13
+    - 122
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_103:
+  id: 103
+  iso: PRT
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 39.6945
+    - -8.13057
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_104:
+  id: 104
+  iso: SEN
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 14.5
+    - -14.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_105:
+  id: 105
+  iso: SRB
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 44.81892
+    - 20.45998
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_106:
+  id: 106
+  iso: SVN
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 46.08333
+    - 15
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_107:
+  id: 107
+  iso: ZAF
+  region_iso: SA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -29
+    - 24
+  region_centroid:
+    type: Point
+    coordinates:
+    - -25.4906108524515
+    - 22.5247263560193
+
+Country_108:
+  id: 108
+  iso: ESP
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 40
+    - -4
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_109:
+  id: 109
+  iso: LKA
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 7.75
+    - 80.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_110:
+  id: 110
+  iso: SUR
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 4
+    - -56
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_111:
+  id: 111
+  iso: TKL
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -9.167
+    - -171.83
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_112:
+  id: 112
+  iso: UZB
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 41.66667
+    - 63.83333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_113:
+  id: 113
+  iso: VAT
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 41.90225
+    - 12.4533
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_114:
+  id: 114
+  iso: NAM
+  region_iso: SA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -22
+    - 17
+  region_centroid:
+    type: Point
+    coordinates:
+    - -25.4906108524515
+    - 22.5247263560193
+
+Country_115:
+  id: 115
+  iso: AUT
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 47.33333
+    - 13.33333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_116:
+  id: 116
+  iso: ASM
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -14.23377
+    - -169.47767
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_117:
+  id: 117
+  iso: AND
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 42.55
+    - 1.58333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_118:
+  id: 118
+  iso: AGO
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -12.5
+    - 18.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+
+Country_119:
+  id: 119
+  iso: AIA
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18.21667
+    - -63.05
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_120:
+  id: 120
+  iso: VGB
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18.5
+    - -64.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_121:
+  id: 121
+  iso: COM
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -12.23333
+    - 44.44553
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_122:
+  id: 122
+  iso: COK
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -21.24842
+    - -159.78516
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_123:
+  id: 123
+  iso: DJI
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 11.83333
+    - 42.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_124:
+  id: 124
+  iso: SLV
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13.83333
+    - -88.91667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_125:
+  id: 125
+  iso: GNQ
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 1.7
+    - 10.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+
+Country_126:
+  id: 126
+  iso: ERI
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15
+    - 39
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_127:
+  id: 127
+  iso: DEU
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 51.5
+    - 10.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_128:
+  id: 128
+  iso: GIB
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 36.13333
+    - -5.35
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_129:
+  id: 129
+  iso: GRD
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 12.11667
+    - -61.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_130:
+  id: 130
+  iso: GTM
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15.5
+    - -90.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_131:
+  id: 131
+  iso: HTI
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 19
+    - -72.41667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_132:
+  id: 132
+  iso: JEY
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 49.21667
+    - -2.11667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_133:
+  id: 133
+  iso: LSO
+  region_iso: SA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -29.5
+    - 28.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - -25.4906108524515
+    - 22.5247263560193
+
+Country_134:
+  id: 134
+  iso: MUS
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -20.3
+    - 57.58333
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_135:
+  id: 135
+  iso: FSM
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - 6.924
+    - 158.162
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_136:
+  id: 136
+  iso: NER
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18
+    - 9
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_137:
+  id: 137
+  iso: MNP
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15.214
+    - 145.756
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_138:
+  id: 138
+  iso: PLW
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - 7.503
+    - 134.621
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_139:
+  id: 139
+  iso: PCN
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -25.06667
+    - -130.1
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_140:
+  id: 140
+  iso: PRI
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18.24829
+    - -66.49989
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_141:
+  id: 141
+  iso: RWA
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -2
+    - 30
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_142:
+  id: 142
+  iso: WSM
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -13.8
+    - -172.13333
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_143:
+  id: 143
+  iso: SHN
+  region_iso: SA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -15.95
+    - -5.7
+  region_centroid:
+    type: Point
+    coordinates:
+    - -25.4906108524515
+    - 22.5247263560193
+
+Country_144:
+  id: 144
+  iso: KNA
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 17.33333
+    - -62.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_145:
+  id: 145
+  iso: VCT
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13.08333
+    - -61.2
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_146:
+  id: 146
+  iso: TWN
+  region_iso: ES
+  country_centroid:
+    type: Point
+    coordinates:
+    - 24
+    - 121
+  region_centroid:
+    type: Point
+    coordinates:
+    - 38.1739069049899
+    - 105.293943572632
+
+Country_147:
+  id: 147
+  iso: TTO
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 11
+    - -61
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_148:
+  id: 148
+  iso: TCA
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 21.73333
+    - -71.58333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_149:
+  id: 149
+  iso: TUV
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -8.51719
+    - 179.14478
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_150:
+  id: 150
+  iso: ESH
+  region_iso: NA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 24.49215
+    - -12.65625
+  region_centroid:
+    type: Point
+    coordinates:
+    - 25.1323592342349
+    - 14.8790854842834
+
+Country_151:
+  id: 151
+  iso: ALB
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 41
+    - 20
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_152:
+  id: 152
+  iso: BTN
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 27.5
+    - 90.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_153:
+  id: 153
+  iso: IOT
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - -6
+    - 72
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_154:
+  id: 154
+  iso: BGR
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 42.66667
+    - 25.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_155:
+  id: 155
+  iso: CAN
+  region_iso: NM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 60.10867
+    - -113.64258
+  region_centroid:
+    type: Point
+    coordinates:
+    - 55.1397926304534
+    - -103.939500476328
+
+Country_156:
+  id: 156
+  iso: CPV
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 16
+    - -24
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_157:
+  id: 157
+  iso: CHL
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -30
+    - -71
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_158:
+  id: 158
+  iso: CHN
+  region_iso: ES
+  country_centroid:
+    type: Point
+    coordinates:
+    - 35
+    - 105
+  region_centroid:
+    type: Point
+    coordinates:
+    - 38.1739069049899
+    - 105.293943572632
+
+Country_159:
+  id: 159
+  iso: CXR
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - -10.5
+    - 105.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_160:
+  id: 160
+  iso: CCK
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - -12.1642
+    - 96.87332
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_161:
+  id: 161
+  iso: CRI
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 10
+    - -84
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_162:
+  id: 162
+  iso: HRV
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 45.16667
+    - 15.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_163:
+  id: 163
+  iso: CYP
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 35
+    - 33
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_164:
+  id: 164
+  iso: DMA
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15.5
+    - -61.33333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_165:
+  id: 165
+  iso: ETH
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 9
+    - 39.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_166:
+  id: 166
+  iso: FLK
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -51.75
+    - -59.16667
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_167:
+  id: 167
+  iso: FRO
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 62
+    - -7
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_168:
+  id: 168
+  iso: FRA
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 46
+    - 2
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_169:
+  id: 169
+  iso: GGY
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 49.45474
+    - -2.57629
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_170:
+  id: 170
+  iso: HND
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15
+    - -86.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_171:
+  id: 171
+  iso: ISR
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 31.5
+    - 34.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_172:
+  id: 172
+  iso: KWT
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 29.5
+    - 47.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_173:
+  id: 173
+  iso: LAO
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18
+    - 105
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_174:
+  id: 174
+  iso: LBN
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 33.83333
+    - 35.83333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_175:
+  id: 175
+  iso: LUX
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 49.75
+    - 6.16667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_176:
+  id: 176
+  iso: MKD
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 41.66667
+    - 21.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_177:
+  id: 177
+  iso: MNE
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 42.75
+    - 19.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_178:
+  id: 178
+  iso: MMR
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 21
+    - 96
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_179:
+  id: 179
+  iso: PSE
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 31.92157
+    - 35.20329
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_180:
+  id: 180
+  iso: PER
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -10
+    - -75.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_181:
+  id: 181
+  iso: QAT
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 25.5
+    - 51.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_182:
+  id: 182
+  iso: SLE
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 8.5
+    - -11.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_183:
+  id: 183
+  iso: SGS
+  region_iso: SM
+  country_centroid:
+    type: Point
+    coordinates:
+    - -56
+    - -33
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.2231547189536
+    - -60.8171054886641
+
+Country_184:
+  id: 184
+  iso: SWZ
+  region_iso: SA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -26.5
+    - 31.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - -25.4906108524515
+    - 22.5247263560193
+
+Country_185:
+  id: 185
+  iso: TLS
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - -8.83333
+    - 125.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_186:
+  id: 186
+  iso: TGO
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 8.66667
+    - 1.08333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_187:
+  id: 187
+  iso: BMU
+  region_iso: NM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 32.33022
+    - -64.74003
+  region_centroid:
+    type: Point
+    coordinates:
+    - 55.1397926304534
+    - -103.939500476328
+
+Country_188:
+  id: 188
+  iso: CAF
+  region_iso: MA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 7
+    - 21
+  region_centroid:
+    type: Point
+    coordinates:
+    - 0.618107263658459
+    - 19.464922564119
+  is_active: true
+
+Country_189:
+  id: 189
+  iso: ITA
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 42.83333
+    - 12.83333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488
+
+Country_190:
+  id: 190
+  iso: KGZ
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 41.5
+    - 75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_191:
+  id: 191
+  iso: LVA
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 57
+    - 25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_192:
+  id: 192
+  iso: LIE
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 47.16667
+    - 9.53333
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_193:
+  id: 193
+  iso: MYS
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 2.5
+    - 112.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_194:
+  id: 194
+  iso: MDV
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 3.682262044
+    - 73.33032797
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_195:
+  id: 195
+  iso: MHL
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - 7.113
+    - 171.236
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_196:
+  id: 196
+  iso: MEX
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 23
+    - -102
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_197:
+  id: 197
+  iso: MNG
+  region_iso: ES
+  country_centroid:
+    type: Point
+    coordinates:
+    - 46
+    - 105
+  region_centroid:
+    type: Point
+    coordinates:
+    - 38.1739069049899
+    - 105.293943572632
+
+Country_198:
+  id: 198
+  iso: NLD
+  region_iso: WE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 52.25
+    - 5.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - 48.573968061361
+    - 6.45768472125939
+
+Country_199:
+  id: 199
+  iso: NFK
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -29.03333
+    - 167.95
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_200:
+  id: 200
+  iso: PAK
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 30
+    - 70
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_201:
+  id: 201
+  iso: PAN
+  region_iso: CM
+  country_centroid:
+    type: Point
+    coordinates:
+    - 9
+    - -80
+  region_centroid:
+    type: Point
+    coordinates:
+    - 21.8133558473591
+    - -99.2505808667876
+
+Country_202:
+  id: 202
+  iso: SYC
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -4.58333
+    - 55.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_203:
+  id: 203
+  iso: SGP
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 1.36667
+    - 103.8
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_204:
+  id: 204
+  iso: SVK
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 48.66667
+    - 19.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_205:
+  id: 205
+  iso: SLB
+  region_iso: ME
+  country_centroid:
+    type: Point
+    coordinates:
+    - -8
+    - 159
+  region_centroid:
+    type: Point
+    coordinates:
+    - -7.76197444087451
+    - 147.888477768951
+
+Country_206:
+  id: 206
+  iso: STP
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 1
+    - 7
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_207:
+  id: 207
+  iso: THA
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 15.5
+    - 101
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_208:
+  id: 208
+  iso: TON
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -20
+    - -175
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_209:
+  id: 209
+  iso: TUN
+  region_iso: NA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 34
+    - 9
+  region_centroid:
+    type: Point
+    coordinates:
+    - 25.1323592342349
+    - 14.8790854842834
+
+Country_210:
+  id: 210
+  iso: TKM
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 39.75
+    - 59.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_211:
+  id: 211
+  iso: UMI
+  region_iso: MI
+  country_centroid:
+    type: Point
+    coordinates:
+    - 5.875
+    - -162.057
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94639720805253
+    - 91.2136096744779
+
+Country_212:
+  id: 212
+  iso: VIR
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18.34829
+    - -64.98348
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_213:
+  id: 213
+  iso: ZMB
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -14.33333
+    - 28.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_214:
+  id: 214
+  iso: AFG
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 33
+    - 66
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_215:
+  id: 215
+  iso: DZA
+  region_iso: NA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 28
+    - 3
+  region_centroid:
+    type: Point
+    coordinates:
+    - 25.1323592342349
+    - 14.8790854842834
+
+Country_216:
+  id: 216
+  iso: ATA
+  region_iso: AN
+  country_centroid:
+    type: Point
+    coordinates:
+    - -82.67628
+    - 8.78906
+  region_centroid:
+    type: Point
+    coordinates:
+    - -80.5079464102288
+    - 19.9088475268188
+
+Country_217:
+  id: 217
+  iso: ATG
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 17.05
+    - -61.8
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_218:
+  id: 218
+  iso: ARM
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 40.25
+    - 45
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_219:
+  id: 219
+  iso: BLR
+  region_iso: CE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 53
+    - 28
+  region_centroid:
+    type: Point
+    coordinates:
+    - 61.1241414601048
+    - 91.8672853165586
+
+Country_220:
+  id: 220
+  iso: BEN
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 9.5
+    - 2.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_221:
+  id: 221
+  iso: BWA
+  region_iso: SA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -22
+    - 24
+  region_centroid:
+    type: Point
+    coordinates:
+    - -25.4906108524515
+    - 22.5247263560193
+
+Country_222:
+  id: 222
+  iso: KHM
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 13
+    - 105
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_223:
+  id: 223
+  iso: ISL
+  region_iso: NE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 65
+    - -18
+  region_centroid:
+    type: Point
+    coordinates:
+    - 70.6996532290073
+    - -24.4266546450261
+
+Country_224:
+  id: 224
+  iso: JAM
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 18.16667
+    - -77.25
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_225:
+  id: 225
+  iso: ABW
+  region_iso: CB
+  country_centroid:
+    type: Point
+    coordinates:
+    - 12.5
+    - -69.96667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 20.2298014225409
+    - -75.0918978909751
+
+Country_226:
+  id: 226
+  iso: BRN
+  region_iso: SS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 4.5
+    - 114.66667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 7.94110667790799
+    - 109.910978851168
+
+Country_227:
+  id: 227
+  iso: JOR
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 31
+    - 36
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_228:
+  id: 228
+  iso: MDG
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -20
+    - 47
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_229:
+  id: 229
+  iso: MRT
+  region_iso: WA
+  country_centroid:
+    type: Point
+    coordinates:
+    - 20.25
+    - -10.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 14.7408116740271
+    - -1.1829537456975
+
+Country_230:
+  id: 230
+  iso: NIU
+  region_iso: PO
+  country_centroid:
+    type: Point
+    coordinates:
+    - -19.03333
+    - -169.86667
+  region_centroid:
+    type: Point
+    coordinates:
+    - -15.5658471700352
+    - -165.562775258219
+
+Country_231:
+  id: 231
+  iso: PRK
+  region_iso: ES
+  country_centroid:
+    type: Point
+    coordinates:
+    - 40.13434638
+    - 127.1627788
+  region_centroid:
+    type: Point
+    coordinates:
+    - 38.1739069049899
+    - 105.293943572632
+
+Country_232:
+  id: 232
+  iso: TJK
+  region_iso: SC
+  country_centroid:
+    type: Point
+    coordinates:
+    - 39
+    - 71
+  region_centroid:
+    type: Point
+    coordinates:
+    - 35.3805743715067
+    - 68.9353807947497
+
+Country_233:
+  id: 233
+  iso: ARE
+  region_iso: WS
+  country_centroid:
+    type: Point
+    coordinates:
+    - 23.75
+    - 54.5
+  region_centroid:
+    type: Point
+    coordinates:
+    - 28.4515048892831
+    - 43.3878415812532
+
+Country_234:
+  id: 234
+  iso: ZWE
+  region_iso: EA
+  country_centroid:
+    type: Point
+    coordinates:
+    - -19
+    - 29.75
+  region_centroid:
+    type: Point
+    coordinates:
+    - -4.70783204975634
+    - 36.2399137063007
+
+Country_235:
+  id: 235
+  iso: RKS
+  region_iso: SE
+  country_centroid:
+    type: Point
+    coordinates:
+    - 42.58333
+    - 20.91667
+  region_centroid:
+    type: Point
+    coordinates:
+    - 41.4578362811151
+    - 7.38956543946488

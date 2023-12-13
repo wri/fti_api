@@ -1,0 +1,75 @@
+
+Partner_1:
+  id: 7
+  website: http://www.rem.org.uk/
+  logo: REM_logo-black.jpg
+  priority: 1
+  type: Partner
+
+Partner_2:
+  id: 8
+  website: http://www.flag-cmr.org/
+  logo: Logo_FLAG.png
+  priority: 2
+  type: Partner
+
+Partner_3:
+  id: 9
+  website: http://ogfrdc.cd/
+  logo: OGF.png
+  priority: 3
+  type: Partner
+
+Partner_4:
+  id: 10
+  website: http://cagdf.org/qui-sommes-nous/
+  logo: CAGDF.png
+  priority: 4
+  type: Partner
+
+Partner_5:
+  id: 14
+  website: http://www.brainforest-gabon.org/
+  logo: Brainforest.jpg
+  priority: 7
+  type: Partner
+
+Partner_6:
+  id: 16
+  website: http://www.cedcameroun.org/
+  logo: CED.jpg
+  priority: 9
+  type: Partner
+
+Partner_7:
+  id: 17
+  website: https://forest4dev.org/
+  logo: Foder.png
+  priority: 10
+  type: Partner
+
+Partner_8:
+  id: 21
+  website: http://www.lecommercedubois.org/
+  logo: LCB.jpg
+  priority: 12
+  type: Partner
+
+Partner_9:
+  id: 22
+  logo: renoi-rdc.jpg
+  priority: 13
+  type: Partner
+
+Partner_10:
+  id: 23
+  website: https://eco4dev.org/
+  logo: cropped-38631870_295506447882722_3987019257568296960_n.png
+  priority: 14
+  type: Partner
+
+Partner_11:
+  id: 26
+  website: https://www.atibt.org/
+  logo: LOGO_ATIBT.jpg
+  type: Partner

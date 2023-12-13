@@ -1,0 +1,372 @@
+
+Subcategory_1:
+  id: 1
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_2:
+  id: 2
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_3:
+  id: 3
+  category_id: 1
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_4:
+  id: 4
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_5:
+  id: 5
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_6:
+  id: 6
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_7:
+  id: 7
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_8:
+  id: 8
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_9:
+  id: 9
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_10:
+  id: 10
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_11:
+  id: 11
+  category_id: 3
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_12:
+  id: 12
+  category_id: 3
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_13:
+  id: 13
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_14:
+  id: 14
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_15:
+  id: 15
+  category_id: 2
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_16:
+  id: 16
+  category_id: 1
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_17:
+  id: 17
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_18:
+  id: 18
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_19:
+  id: 19
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_20:
+  id: 20
+  category_id: 4
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_21:
+  id: 21
+  category_id: 4
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_22:
+  id: 22
+  category_id: 4
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_23:
+  id: 23
+  category_id: 4
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_24:
+  id: 24
+  category_id: 5
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_25:
+  id: 25
+  category_id: 5
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_26:
+  id: 26
+  category_id: 3
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_27:
+  id: 27
+  category_id: 5
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_28:
+  id: 28
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_29:
+  id: 29
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_30:
+  id: 30
+  category_id: 1
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_31:
+  id: 31
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_32:
+  id: 32
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_33:
+  id: 33
+  category_id: 5
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_34:
+  id: 34
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_35:
+  id: 35
+  category_id: 5
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_36:
+  id: 36
+  category_id: 4
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_37:
+  id: 37
+  category_id: 4
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_38:
+  id: 38
+  category_id: 6
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_39:
+  id: 39
+  category_id: 2
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_40:
+  id: 40
+  category_id: 2
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_41:
+  id: 41
+  category_id: 2
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_42:
+  id: 42
+  category_id: 1
+  subcategory_type: operator
+  location_required: true
+
+Subcategory_43:
+  id: 43
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_44:
+  id: 44
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_45:
+  id: 45
+  category_id: 8
+  subcategory_type: government
+  location_required: true
+
+Subcategory_46:
+  id: 46
+  category_id: 9
+  subcategory_type: government
+  location_required: true
+
+Subcategory_47:
+  id: 47
+  category_id: 10
+  subcategory_type: government
+  location_required: true
+
+Subcategory_48:
+  id: 48
+  category_id: 10
+  subcategory_type: government
+  location_required: true
+
+Subcategory_49:
+  id: 49
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_50:
+  id: 50
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_51:
+  id: 51
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_52:
+  id: 52
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_53:
+  id: 53
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_54:
+  id: 54
+  category_id: 10
+  subcategory_type: government
+  location_required: true
+
+Subcategory_55:
+  id: 55
+  category_id: 10
+  subcategory_type: government
+  location_required: true
+
+Subcategory_56:
+  id: 56
+  category_id: 10
+  subcategory_type: government
+  location_required: true
+
+Subcategory_57:
+  id: 57
+  category_id: 10
+  subcategory_type: government
+  location_required: true
+
+Subcategory_58:
+  id: 58
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_59:
+  id: 59
+  category_id: 7
+  subcategory_type: government
+  location_required: true
+
+Subcategory_60:
+  id: 60
+  category_id: 6
+  subcategory_type: government
+  location_required: true
+
+Subcategory_61:
+  id: 61
+  category_id: 8
+  subcategory_type: government
+  location_required: true
+
+Subcategory_62:
+  id: 63
+  category_id: 10
+  subcategory_type: government
+  location_required: true

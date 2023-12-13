@@ -1,0 +1,56 @@
+
+Observer_1_en_translation:
+  id: 3
+  observer_id: 3
+  locale: en
+  name: AGRECO
+  organization: AGRECO
+
+Observer_2_en_translation:
+  id: 5
+  observer_id: 5
+  locale: en
+  name: FODER
+  organization: FODER
+
+Observer_3_en_translation:
+  id: 10
+  observer_id: 10
+  locale: en
+  name: CAGDF
+  organization: CAGDF
+
+Observer_4_en_translation:
+  id: 16
+  observer_id: 16
+  locale: en
+  name: OGF
+  organization: OGF
+
+Observer_5_en_translation:
+  id: 49
+  observer_id: 25
+  locale: en
+  name: RENOI
+  organization:
+
+Observer_6_en_translation:
+  id: 51
+  observer_id: 26
+  locale: en
+  name: ECODEV
+  organization:
+
+Observer_7_en_translation:
+  id: 240
+  observer_id: 34
+  locale: en
+  name: OCEAN
+  organization:
+
+Observer_8_en_translation:
+  id: 274
+  observer_id: 38
+  locale: en
+  name: CADDE
+  organization:

@@ -1,13 +1,24 @@
+sh "bin/rails db:fixtures:load FIXTURES_PATH=db/fixtures"
+
+unless User.find_by(email: "admin@example.com")
+  user = User.new(email: "admin@example.com", password: "password", password_confirmation: "password", name: "Admin")
+  user.build_user_permission(user_role: "admin")
+  user.save!
+end
+
 # frozen_string_literal: true
+unless User.find_by(email: "user@example.com")
+  user = User.new(email: "user@example.com", password: "password", password_confirmation: "password", name: "User", is_active: true)
+  user.build_user_permission(user_role: "user")
+  user.save!
+end
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+unless User.find_by(email: "webuser@example.com")
+  user = User.new(email: "webuser@example.com", password: "password", password_confirmation: "password", name: "Web", is_active: true)
+  user.build_user_permission(user_role: "user")
+  user.save!
+  user.regenerate_api_key
+end
 
-# Find and create new seed files in db/fixtures
-Rake::Task["db:seed_fu"].invoke
-# User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+Rake::Task["sync:ranking"].invoke
+Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }

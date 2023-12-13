@@ -1,0 +1,1240 @@
+
+Severity_1:
+  id: 1
+  level: 0
+  subcategory_id: 1
+
+Severity_2:
+  id: 2
+  level: 1
+  subcategory_id: 1
+
+Severity_3:
+  id: 3
+  level: 2
+  subcategory_id: 1
+
+Severity_4:
+  id: 4
+  level: 3
+  subcategory_id: 1
+
+Severity_5:
+  id: 5
+  level: 0
+  subcategory_id: 2
+
+Severity_6:
+  id: 6
+  level: 1
+  subcategory_id: 2
+
+Severity_7:
+  id: 7
+  level: 2
+  subcategory_id: 2
+
+Severity_8:
+  id: 8
+  level: 3
+  subcategory_id: 2
+
+Severity_9:
+  id: 9
+  level: 0
+  subcategory_id: 3
+
+Severity_10:
+  id: 10
+  level: 1
+  subcategory_id: 3
+
+Severity_11:
+  id: 11
+  level: 2
+  subcategory_id: 3
+
+Severity_12:
+  id: 12
+  level: 3
+  subcategory_id: 3
+
+Severity_13:
+  id: 13
+  level: 0
+  subcategory_id: 4
+
+Severity_14:
+  id: 14
+  level: 1
+  subcategory_id: 4
+
+Severity_15:
+  id: 15
+  level: 2
+  subcategory_id: 4
+
+Severity_16:
+  id: 16
+  level: 3
+  subcategory_id: 4
+
+Severity_17:
+  id: 17
+  level: 0
+  subcategory_id: 5
+
+Severity_18:
+  id: 18
+  level: 1
+  subcategory_id: 5
+
+Severity_19:
+  id: 19
+  level: 2
+  subcategory_id: 5
+
+Severity_20:
+  id: 20
+  level: 3
+  subcategory_id: 5
+
+Severity_21:
+  id: 21
+  level: 0
+  subcategory_id: 6
+
+Severity_22:
+  id: 22
+  level: 1
+  subcategory_id: 6
+
+Severity_23:
+  id: 23
+  level: 2
+  subcategory_id: 6
+
+Severity_24:
+  id: 24
+  level: 3
+  subcategory_id: 6
+
+Severity_25:
+  id: 25
+  level: 0
+  subcategory_id: 7
+
+Severity_26:
+  id: 26
+  level: 1
+  subcategory_id: 7
+
+Severity_27:
+  id: 27
+  level: 2
+  subcategory_id: 7
+
+Severity_28:
+  id: 28
+  level: 3
+  subcategory_id: 7
+
+Severity_29:
+  id: 29
+  level: 0
+  subcategory_id: 8
+
+Severity_30:
+  id: 30
+  level: 1
+  subcategory_id: 8
+
+Severity_31:
+  id: 31
+  level: 2
+  subcategory_id: 8
+
+Severity_32:
+  id: 32
+  level: 3
+  subcategory_id: 8
+
+Severity_33:
+  id: 33
+  level: 0
+  subcategory_id: 9
+
+Severity_34:
+  id: 34
+  level: 1
+  subcategory_id: 9
+
+Severity_35:
+  id: 35
+  level: 2
+  subcategory_id: 9
+
+Severity_36:
+  id: 36
+  level: 3
+  subcategory_id: 9
+
+Severity_37:
+  id: 37
+  level: 0
+  subcategory_id: 10
+
+Severity_38:
+  id: 38
+  level: 1
+  subcategory_id: 10
+
+Severity_39:
+  id: 39
+  level: 2
+  subcategory_id: 10
+
+Severity_40:
+  id: 40
+  level: 3
+  subcategory_id: 10
+
+Severity_41:
+  id: 41
+  level: 0
+  subcategory_id: 11
+
+Severity_42:
+  id: 42
+  level: 1
+  subcategory_id: 11
+
+Severity_43:
+  id: 43
+  level: 2
+  subcategory_id: 11
+
+Severity_44:
+  id: 44
+  level: 3
+  subcategory_id: 11
+
+Severity_45:
+  id: 45
+  level: 0
+  subcategory_id: 12
+
+Severity_46:
+  id: 46
+  level: 1
+  subcategory_id: 12
+
+Severity_47:
+  id: 47
+  level: 2
+  subcategory_id: 12
+
+Severity_48:
+  id: 48
+  level: 3
+  subcategory_id: 12
+
+Severity_49:
+  id: 49
+  level: 0
+  subcategory_id: 13
+
+Severity_50:
+  id: 50
+  level: 1
+  subcategory_id: 13
+
+Severity_51:
+  id: 51
+  level: 2
+  subcategory_id: 13
+
+Severity_52:
+  id: 52
+  level: 3
+  subcategory_id: 13
+
+Severity_53:
+  id: 53
+  level: 0
+  subcategory_id: 14
+
+Severity_54:
+  id: 54
+  level: 1
+  subcategory_id: 14
+
+Severity_55:
+  id: 55
+  level: 2
+  subcategory_id: 14
+
+Severity_56:
+  id: 56
+  level: 3
+  subcategory_id: 14
+
+Severity_57:
+  id: 57
+  level: 0
+  subcategory_id: 15
+
+Severity_58:
+  id: 58
+  level: 1
+  subcategory_id: 15
+
+Severity_59:
+  id: 59
+  level: 2
+  subcategory_id: 15
+
+Severity_60:
+  id: 60
+  level: 3
+  subcategory_id: 15
+
+Severity_61:
+  id: 61
+  level: 0
+  subcategory_id: 16
+
+Severity_62:
+  id: 62
+  level: 1
+  subcategory_id: 16
+
+Severity_63:
+  id: 63
+  level: 2
+  subcategory_id: 16
+
+Severity_64:
+  id: 64
+  level: 3
+  subcategory_id: 16
+
+Severity_65:
+  id: 65
+  level: 0
+  subcategory_id: 17
+
+Severity_66:
+  id: 66
+  level: 1
+  subcategory_id: 17
+
+Severity_67:
+  id: 67
+  level: 2
+  subcategory_id: 17
+
+Severity_68:
+  id: 68
+  level: 3
+  subcategory_id: 17
+
+Severity_69:
+  id: 69
+  level: 0
+  subcategory_id: 18
+
+Severity_70:
+  id: 70
+  level: 1
+  subcategory_id: 18
+
+Severity_71:
+  id: 71
+  level: 2
+  subcategory_id: 18
+
+Severity_72:
+  id: 72
+  level: 3
+  subcategory_id: 18
+
+Severity_73:
+  id: 73
+  level: 0
+  subcategory_id: 19
+
+Severity_74:
+  id: 74
+  level: 1
+  subcategory_id: 19
+
+Severity_75:
+  id: 75
+  level: 2
+  subcategory_id: 19
+
+Severity_76:
+  id: 76
+  level: 3
+  subcategory_id: 19
+
+Severity_77:
+  id: 77
+  level: 0
+  subcategory_id: 20
+
+Severity_78:
+  id: 78
+  level: 1
+  subcategory_id: 20
+
+Severity_79:
+  id: 79
+  level: 2
+  subcategory_id: 20
+
+Severity_80:
+  id: 80
+  level: 3
+  subcategory_id: 20
+
+Severity_81:
+  id: 81
+  level: 0
+  subcategory_id: 21
+
+Severity_82:
+  id: 82
+  level: 1
+  subcategory_id: 21
+
+Severity_83:
+  id: 83
+  level: 2
+  subcategory_id: 21
+
+Severity_84:
+  id: 84
+  level: 3
+  subcategory_id: 21
+
+Severity_85:
+  id: 85
+  level: 0
+  subcategory_id: 22
+
+Severity_86:
+  id: 86
+  level: 1
+  subcategory_id: 22
+
+Severity_87:
+  id: 87
+  level: 2
+  subcategory_id: 22
+
+Severity_88:
+  id: 88
+  level: 3
+  subcategory_id: 22
+
+Severity_89:
+  id: 89
+  level: 0
+  subcategory_id: 23
+
+Severity_90:
+  id: 90
+  level: 1
+  subcategory_id: 23
+
+Severity_91:
+  id: 91
+  level: 2
+  subcategory_id: 23
+
+Severity_92:
+  id: 92
+  level: 3
+  subcategory_id: 23
+
+Severity_93:
+  id: 93
+  level: 0
+  subcategory_id: 24
+
+Severity_94:
+  id: 94
+  level: 1
+  subcategory_id: 24
+
+Severity_95:
+  id: 95
+  level: 2
+  subcategory_id: 24
+
+Severity_96:
+  id: 96
+  level: 3
+  subcategory_id: 24
+
+Severity_97:
+  id: 97
+  level: 0
+  subcategory_id: 25
+
+Severity_98:
+  id: 98
+  level: 1
+  subcategory_id: 25
+
+Severity_99:
+  id: 99
+  level: 2
+  subcategory_id: 25
+
+Severity_100:
+  id: 100
+  level: 3
+  subcategory_id: 25
+
+Severity_101:
+  id: 101
+  level: 0
+  subcategory_id: 26
+
+Severity_102:
+  id: 102
+  level: 1
+  subcategory_id: 26
+
+Severity_103:
+  id: 103
+  level: 2
+  subcategory_id: 26
+
+Severity_104:
+  id: 104
+  level: 3
+  subcategory_id: 26
+
+Severity_105:
+  id: 105
+  level: 0
+  subcategory_id: 27
+
+Severity_106:
+  id: 106
+  level: 1
+  subcategory_id: 27
+
+Severity_107:
+  id: 107
+  level: 2
+  subcategory_id: 27
+
+Severity_108:
+  id: 108
+  level: 3
+  subcategory_id: 27
+
+Severity_109:
+  id: 109
+  level: 0
+  subcategory_id: 28
+
+Severity_110:
+  id: 110
+  level: 1
+  subcategory_id: 28
+
+Severity_111:
+  id: 111
+  level: 2
+  subcategory_id: 28
+
+Severity_112:
+  id: 112
+  level: 3
+  subcategory_id: 28
+
+Severity_113:
+  id: 113
+  level: 0
+  subcategory_id: 29
+
+Severity_114:
+  id: 114
+  level: 1
+  subcategory_id: 29
+
+Severity_115:
+  id: 115
+  level: 2
+  subcategory_id: 29
+
+Severity_116:
+  id: 116
+  level: 3
+  subcategory_id: 29
+
+Severity_117:
+  id: 117
+  level: 0
+  subcategory_id: 30
+
+Severity_118:
+  id: 118
+  level: 1
+  subcategory_id: 30
+
+Severity_119:
+  id: 119
+  level: 2
+  subcategory_id: 30
+
+Severity_120:
+  id: 120
+  level: 3
+  subcategory_id: 30
+
+Severity_121:
+  id: 121
+  level: 0
+  subcategory_id: 31
+
+Severity_122:
+  id: 122
+  level: 1
+  subcategory_id: 31
+
+Severity_123:
+  id: 123
+  level: 2
+  subcategory_id: 31
+
+Severity_124:
+  id: 124
+  level: 3
+  subcategory_id: 31
+
+Severity_125:
+  id: 125
+  level: 0
+  subcategory_id: 32
+
+Severity_126:
+  id: 126
+  level: 1
+  subcategory_id: 32
+
+Severity_127:
+  id: 127
+  level: 2
+  subcategory_id: 32
+
+Severity_128:
+  id: 128
+  level: 3
+  subcategory_id: 32
+
+Severity_129:
+  id: 129
+  level: 0
+  subcategory_id: 33
+
+Severity_130:
+  id: 130
+  level: 1
+  subcategory_id: 33
+
+Severity_131:
+  id: 131
+  level: 2
+  subcategory_id: 33
+
+Severity_132:
+  id: 132
+  level: 3
+  subcategory_id: 33
+
+Severity_133:
+  id: 133
+  level: 0
+  subcategory_id: 34
+
+Severity_134:
+  id: 134
+  level: 1
+  subcategory_id: 34
+
+Severity_135:
+  id: 135
+  level: 2
+  subcategory_id: 34
+
+Severity_136:
+  id: 136
+  level: 3
+  subcategory_id: 34
+
+Severity_137:
+  id: 137
+  level: 0
+  subcategory_id: 35
+
+Severity_138:
+  id: 138
+  level: 1
+  subcategory_id: 35
+
+Severity_139:
+  id: 139
+  level: 2
+  subcategory_id: 35
+
+Severity_140:
+  id: 140
+  level: 3
+  subcategory_id: 35
+
+Severity_141:
+  id: 141
+  level: 0
+  subcategory_id: 36
+
+Severity_142:
+  id: 142
+  level: 1
+  subcategory_id: 36
+
+Severity_143:
+  id: 143
+  level: 2
+  subcategory_id: 36
+
+Severity_144:
+  id: 144
+  level: 3
+  subcategory_id: 36
+
+Severity_145:
+  id: 145
+  level: 0
+  subcategory_id: 37
+
+Severity_146:
+  id: 146
+  level: 1
+  subcategory_id: 37
+
+Severity_147:
+  id: 147
+  level: 2
+  subcategory_id: 37
+
+Severity_148:
+  id: 148
+  level: 3
+  subcategory_id: 37
+
+Severity_149:
+  id: 149
+  level: 0
+  subcategory_id: 38
+
+Severity_150:
+  id: 150
+  level: 1
+  subcategory_id: 38
+
+Severity_151:
+  id: 151
+  level: 2
+  subcategory_id: 38
+
+Severity_152:
+  id: 152
+  level: 3
+  subcategory_id: 38
+
+Severity_153:
+  id: 153
+  level: 0
+  subcategory_id: 39
+
+Severity_154:
+  id: 154
+  level: 1
+  subcategory_id: 39
+
+Severity_155:
+  id: 155
+  level: 2
+  subcategory_id: 39
+
+Severity_156:
+  id: 156
+  level: 3
+  subcategory_id: 39
+
+Severity_157:
+  id: 157
+  level: 0
+  subcategory_id: 40
+
+Severity_158:
+  id: 158
+  level: 1
+  subcategory_id: 40
+
+Severity_159:
+  id: 159
+  level: 2
+  subcategory_id: 40
+
+Severity_160:
+  id: 160
+  level: 3
+  subcategory_id: 40
+
+Severity_161:
+  id: 161
+  level: 0
+  subcategory_id: 41
+
+Severity_162:
+  id: 162
+  level: 1
+  subcategory_id: 41
+
+Severity_163:
+  id: 163
+  level: 2
+  subcategory_id: 41
+
+Severity_164:
+  id: 164
+  level: 3
+  subcategory_id: 41
+
+Severity_165:
+  id: 165
+  level: 0
+  subcategory_id: 42
+
+Severity_166:
+  id: 166
+  level: 1
+  subcategory_id: 42
+
+Severity_167:
+  id: 167
+  level: 2
+  subcategory_id: 42
+
+Severity_168:
+  id: 168
+  level: 3
+  subcategory_id: 42
+
+Severity_169:
+  id: 169
+  level: 0
+  subcategory_id: 43
+
+Severity_170:
+  id: 170
+  level: 1
+  subcategory_id: 43
+
+Severity_171:
+  id: 171
+  level: 2
+  subcategory_id: 43
+
+Severity_172:
+  id: 172
+  level: 3
+  subcategory_id: 43
+
+Severity_173:
+  id: 173
+  level: 0
+  subcategory_id: 44
+
+Severity_174:
+  id: 174
+  level: 1
+  subcategory_id: 44
+
+Severity_175:
+  id: 175
+  level: 2
+  subcategory_id: 44
+
+Severity_176:
+  id: 176
+  level: 3
+  subcategory_id: 44
+
+Severity_177:
+  id: 177
+  level: 0
+  subcategory_id: 45
+
+Severity_178:
+  id: 178
+  level: 1
+  subcategory_id: 45
+
+Severity_179:
+  id: 179
+  level: 2
+  subcategory_id: 45
+
+Severity_180:
+  id: 180
+  level: 3
+  subcategory_id: 45
+
+Severity_181:
+  id: 181
+  level: 0
+  subcategory_id: 46
+
+Severity_182:
+  id: 182
+  level: 1
+  subcategory_id: 46
+
+Severity_183:
+  id: 183
+  level: 2
+  subcategory_id: 46
+
+Severity_184:
+  id: 184
+  level: 3
+  subcategory_id: 46
+
+Severity_185:
+  id: 185
+  level: 0
+  subcategory_id: 47
+
+Severity_186:
+  id: 186
+  level: 1
+  subcategory_id: 47
+
+Severity_187:
+  id: 187
+  level: 2
+  subcategory_id: 47
+
+Severity_188:
+  id: 188
+  level: 3
+  subcategory_id: 47
+
+Severity_189:
+  id: 189
+  level: 0
+  subcategory_id: 48
+
+Severity_190:
+  id: 190
+  level: 1
+  subcategory_id: 48
+
+Severity_191:
+  id: 191
+  level: 2
+  subcategory_id: 48
+
+Severity_192:
+  id: 192
+  level: 3
+  subcategory_id: 48
+
+Severity_193:
+  id: 193
+  level: 0
+  subcategory_id: 49
+
+Severity_194:
+  id: 194
+  level: 1
+  subcategory_id: 49
+
+Severity_195:
+  id: 195
+  level: 2
+  subcategory_id: 49
+
+Severity_196:
+  id: 196
+  level: 3
+  subcategory_id: 49
+
+Severity_197:
+  id: 197
+  level: 0
+  subcategory_id: 50
+
+Severity_198:
+  id: 198
+  level: 1
+  subcategory_id: 50
+
+Severity_199:
+  id: 199
+  level: 2
+  subcategory_id: 50
+
+Severity_200:
+  id: 200
+  level: 3
+  subcategory_id: 50
+
+Severity_201:
+  id: 201
+  level: 0
+  subcategory_id: 51
+
+Severity_202:
+  id: 202
+  level: 1
+  subcategory_id: 51
+
+Severity_203:
+  id: 203
+  level: 2
+  subcategory_id: 51
+
+Severity_204:
+  id: 204
+  level: 3
+  subcategory_id: 51
+
+Severity_205:
+  id: 205
+  level: 0
+  subcategory_id: 52
+
+Severity_206:
+  id: 206
+  level: 1
+  subcategory_id: 52
+
+Severity_207:
+  id: 207
+  level: 2
+  subcategory_id: 52
+
+Severity_208:
+  id: 208
+  level: 3
+  subcategory_id: 52
+
+Severity_209:
+  id: 209
+  level: 0
+  subcategory_id: 53
+
+Severity_210:
+  id: 210
+  level: 1
+  subcategory_id: 53
+
+Severity_211:
+  id: 211
+  level: 2
+  subcategory_id: 53
+
+Severity_212:
+  id: 212
+  level: 3
+  subcategory_id: 53
+
+Severity_213:
+  id: 213
+  level: 0
+  subcategory_id: 54
+
+Severity_214:
+  id: 214
+  level: 1
+  subcategory_id: 54
+
+Severity_215:
+  id: 215
+  level: 2
+  subcategory_id: 54
+
+Severity_216:
+  id: 216
+  level: 3
+  subcategory_id: 54
+
+Severity_217:
+  id: 217
+  level: 0
+  subcategory_id: 55
+
+Severity_218:
+  id: 218
+  level: 1
+  subcategory_id: 55
+
+Severity_219:
+  id: 219
+  level: 2
+  subcategory_id: 55
+
+Severity_220:
+  id: 220
+  level: 3
+  subcategory_id: 55
+
+Severity_221:
+  id: 221
+  level: 0
+  subcategory_id: 56
+
+Severity_222:
+  id: 222
+  level: 1
+  subcategory_id: 56
+
+Severity_223:
+  id: 223
+  level: 2
+  subcategory_id: 56
+
+Severity_224:
+  id: 224
+  level: 3
+  subcategory_id: 56
+
+Severity_225:
+  id: 225
+  level: 0
+  subcategory_id: 57
+
+Severity_226:
+  id: 226
+  level: 1
+  subcategory_id: 57
+
+Severity_227:
+  id: 227
+  level: 2
+  subcategory_id: 57
+
+Severity_228:
+  id: 228
+  level: 3
+  subcategory_id: 57
+
+Severity_229:
+  id: 229
+  level: 3
+  subcategory_id: 58
+
+Severity_230:
+  id: 230
+  level: 2
+  subcategory_id: 58
+
+Severity_231:
+  id: 231
+  level: 1
+  subcategory_id: 58
+
+Severity_232:
+  id: 232
+  level: 3
+  subcategory_id: 59
+
+Severity_233:
+  id: 233
+  level: 2
+  subcategory_id: 59
+
+Severity_234:
+  id: 234
+  level: 1
+  subcategory_id: 59
+
+Severity_235:
+  id: 235
+  level: 3
+  subcategory_id: 60
+
+Severity_236:
+  id: 236
+  level: 2
+  subcategory_id: 60
+
+Severity_237:
+  id: 237
+  level: 1
+  subcategory_id: 60
+
+Severity_238:
+  id: 238
+  level: 0
+  subcategory_id: 58
+
+Severity_239:
+  id: 239
+  level: 0
+  subcategory_id: 60
+
+Severity_240:
+  id: 240
+  level: 0
+  subcategory_id: 59
+
+Severity_241:
+  id: 241
+  level: 3
+  subcategory_id: 61
+
+Severity_242:
+  id: 242
+  level: 2
+  subcategory_id: 61
+
+Severity_243:
+  id: 243
+  level: 1
+  subcategory_id: 61
+
+Severity_244:
+  id: 244
+  level: 0
+  subcategory_id: 61
+
+Severity_245:
+  id: 245
+  level: 3
+  subcategory_id: 63
+
+Severity_246:
+  id: 246
+  level: 2
+  subcategory_id: 63
+
+Severity_247:
+  id: 247
+  level: 1
+  subcategory_id: 63
+
+Severity_248:
+  id: 248
+  level: 0
+  subcategory_id: 63

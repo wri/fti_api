@@ -1,0 +1,2074 @@
+
+RequiredOperatorDocument_1:
+  id: 2
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Certificat d'agrément forestier
+  country_id: 47
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_2:
+  id: 4
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Carte d'identité des professionnels du bois et de la forêt
+  country_id: 47
+  valid_period: 1826
+  position: 1
+
+RequiredOperatorDocument_3:
+  id: 6
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Extrait du registre du commerce et du crédit mobilier
+  country_id: 47
+  valid_period: 36135
+  position: 4
+
+RequiredOperatorDocument_4:
+  id: 7
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Preuve d’immatriculation au RCCM
+  country_id: 7
+  valid_period: 36135
+  position: 4
+
+RequiredOperatorDocument_5:
+  id: 8
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Document du tribunal actant le marteau forestier
+  country_id: 47
+  valid_period: 10950
+  position: 3
+
+RequiredOperatorDocument_6:
+  id: 10
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Convention d'établissement
+  country_id: 47
+  valid_period: 1826
+  position: 1
+
+RequiredOperatorDocument_7:
+  id: 11
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Convention d’aménagement et de transformation (CAT)
+  country_id: 47
+  valid_period: 5478
+  position: 2
+
+RequiredOperatorDocument_8:
+  id: 12
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Contrat de concession
+  country_id: 7
+  valid_period: 9130
+  position: 2
+
+RequiredOperatorDocument_9:
+  id: 15
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Convention de Transformation Industrielle (CTI)
+  country_id: 47
+  valid_period: 5478
+  position: 3
+
+RequiredOperatorDocument_10:
+  id: 18
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Plan de gestion
+  country_id: 47
+  valid_period: 1825
+  position: 5
+
+RequiredOperatorDocument_11:
+  id: 19
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Notification du Plan de gestion approuvé des quatre premières assiettes annuelles
+    de coupe
+  country_id: 7
+  valid_period: 1460
+  position: 3
+
+RequiredOperatorDocument_12:
+  id: 20
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Certificat de conformité du Plan d’aménagement forestier
+  country_id: 7
+  valid_period: 9125
+  position: 2
+
+RequiredOperatorDocument_13:
+  id: 21
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Plan d'aménagement ou son resumé
+  country_id: 47
+  valid_period: 7305
+  position: 4
+
+RequiredOperatorDocument_14:
+  id: 22
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Arrêté d’approbation du plan d’aménagement
+  country_id: 7
+  valid_period: 9125
+  position: 1
+
+RequiredOperatorDocument_15:
+  id: 24
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Compte-rendu de la réunion de validation du plan d'aménagement
+  country_id: 47
+  valid_period: 7305
+  position: 1
+
+RequiredOperatorDocument_16:
+  id: 27
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Compte-rendu du comité de suivi et d'évaluation du plan d'aménagement
+  country_id: 47
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_17:
+  id: 28
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Rapport d’évaluation finale de la mise en œuvre du plan d’aménagement forestier
+  country_id: 7
+  valid_period: 365
+  position: 5
+
+RequiredOperatorDocument_18:
+  id: 32
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Compte-rendu du comité de suivi et d'évaluation du plan de gestion
+  country_id: 47
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_19:
+  id: 33
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Preuve d’approbation du Plan de gestion quinquennal
+  country_id: 7
+  valid_period: 1825
+  position: 4
+
+RequiredOperatorDocument_20:
+  id: 36
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Autorisation de coupe d'achèvement
+  country_id: 47
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_21:
+  id: 37
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Permis de coupe industrielle PCIBO
+  country_id: 7
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_22:
+  id: 38
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Autorisation de coupe annuelle
+  country_id: 47
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_23:
+  id: 41
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Autorisation de coupe provisoire
+  country_id: 47
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_24:
+  id: 42
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: " Permis d’exploitation pour les usines"
+  country_id: 7
+  valid_period: 9125
+  position: 2
+
+RequiredOperatorDocument_25:
+  id: 43
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Déclaration trimestrielle de production du bois d’œuvre
+  country_id: 7
+  valid_period: 105
+  position: 1
+
+RequiredOperatorDocument_26:
+  id: 45
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Etude d'impact environnementale et sociale (base-vie)
+  country_id: 47
+  valid_period: 10950
+  position: 1
+
+RequiredOperatorDocument_27:
+  id: 46
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Certificat environnemental et social
+  country_id: 7
+  valid_period: 9125
+  position: 1
+
+RequiredOperatorDocument_28:
+  id: 47
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Etude d'impact environnementale et sociale (exploitation)
+  country_id: 47
+  valid_period: 5478
+  position: 2
+
+RequiredOperatorDocument_29:
+  id: 48
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Etude d'impact environnementale et sociale (scierie) le cas échéant
+  country_id: 47
+  valid_period: 10950
+  position: 3
+
+RequiredOperatorDocument_30:
+  id: 50
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 6
+  name: Agrément de transports
+  country_id: 47
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_31:
+  id: 51
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 6
+  name: Bordereau de circulation
+  country_id: 7
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_32:
+  id: 54
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Déclaration en douanes
+  country_id: 47
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_33:
+  id: 60
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Déclaration d’exportation (modèle EB)
+  country_id: 7
+  valid_period: 120
+  position: 5
+
+RequiredOperatorDocument_34:
+  id: 62
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Permis d’exportation CITES
+  country_id: 47
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_35:
+  id: 63
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Numéro d’import-export
+  country_id: 7
+  valid_period: 365
+  position: 6
+
+RequiredOperatorDocument_36:
+  id: 64
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Rapport de lot à exporter
+  country_id: 7
+  valid_period: 30
+  position: 8
+
+RequiredOperatorDocument_37:
+  id: 65
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Permis d’exportation CITES, le cas échéant
+  country_id: 7
+  valid_period: 180
+  position: 7
+
+RequiredOperatorDocument_38:
+  id: 66
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Certification phytosanitaire
+  country_id: 7
+  valid_period: 90
+  position: 4
+
+RequiredOperatorDocument_39:
+  id: 70
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Décharge attestant du paiement de la taxe de superficie
+  country_id: 47
+  valid_period: 365
+  position: 4
+
+RequiredOperatorDocument_40:
+  id: 71
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Lettre d’attribution du numéro impôt
+  country_id: 7
+  valid_period: 36135
+  position: 3
+
+RequiredOperatorDocument_41:
+  id: 78
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Attestation bancaire de paiement de la redevance de superficie forestière
+  country_id: 7
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_42:
+  id: 80
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Patente
+  country_id: 47
+  valid_period: 365
+  position: 5
+
+RequiredOperatorDocument_43:
+  id: 84
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Compte-rendu du conseil de concertation
+  country_id: 47
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_44:
+  id: 86
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Etat de réalisation du cahier des charges
+  country_id: 47
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_45:
+  id: 87
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Accord sur la clause sociale du cahier des charges conforme au modèle fixé
+    par arrêté ministériel
+  country_id: 7
+  valid_period: 2190
+  position: 1
+
+RequiredOperatorDocument_46:
+  id: 88
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: PV de désignation des membres et d’installation des comités locaux de gestion
+    (CLG) et de suivi (CLS) (éventuellement déjà inclus dans les clauses sociales
+    qui font partie du contrat)
+  country_id: 7
+  valid_period: 2190
+  position: 2
+
+RequiredOperatorDocument_47:
+  id: 89
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Preuve de contribution au fond de développement local
+  country_id: 47
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_48:
+  id: 92
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Arrêté d’autorisation d’exercice du ministère en charge de la santé
+  country_id: 47
+  valid_period: 10950
+  position: 2
+
+RequiredOperatorDocument_49:
+  id: 93
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Certificat d’affiliation de l’entité à l’Institut National de Sécurité Sociale
+    (INSS)
+  country_id: 7
+  valid_period: 36135
+  position: 1
+
+RequiredOperatorDocument_50:
+  id: 94
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Arrêté d’agrément du personnel du centre socio-sanitaire de l’entreprise
+  country_id: 47
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_51:
+  id: 96
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Attestation d'immatriculation à la CNSS
+  country_id: 47
+  valid_period: 10950
+  position: 3
+
+RequiredOperatorDocument_52:
+  id: 97
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Lettre attribuant un numéro d’affiliation de l’entité à l’INPP
+  country_id: 7
+  valid_period: 36135
+  position: 4
+
+RequiredOperatorDocument_53:
+  id: 99
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Autorisation d’heures supplémentaires le cas échéant
+  country_id: 47
+  valid_period: 180
+  position: 4
+
+RequiredOperatorDocument_54:
+  id: 100
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Règlement intérieur homologué de la délégation syndicale
+  country_id: 7
+  valid_period: 1095
+  position: 6
+
+RequiredOperatorDocument_55:
+  id: 101
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Extrait du registre de réclamation et de revendication du personnel (dernière
+    page)
+  country_id: 47
+  valid_period: 365
+  position: 5
+
+RequiredOperatorDocument_56:
+  id: 102
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Convention collective ou protocole d’accord visé par l’Inspecteur de travail
+    le cas échéant
+  country_id: 7
+  valid_period: 1825
+  position: 2
+
+RequiredOperatorDocument_57:
+  id: 103
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Procès-verbal d’élections professionnelles
+  country_id: 47
+  valid_period: 365
+  position: 6
+
+RequiredOperatorDocument_58:
+  id: 104
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Procès-verbal de réunion du comité d’hygiène et de sécurité
+  country_id: 47
+  valid_period: 365
+  position: 7
+
+RequiredOperatorDocument_59:
+  id: 106
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Cahier des charges particulier
+  country_id: 47
+  valid_period: 5475
+  position: 1
+
+RequiredOperatorDocument_60:
+  id: 107
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Numéro d’identification nationale
+  country_id: 7
+  valid_period: 36135
+  position: 3
+
+RequiredOperatorDocument_61:
+  id: 110
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Quittance de versement de la contribution patronale à l’ONEM
+  country_id: 7
+  valid_period: 90
+  position: 5
+
+RequiredOperatorDocument_62:
+  id: 111
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Etat de production de l'année de coupe
+  country_id: 47
+  valid_period: 365
+  position: 6
+
+RequiredOperatorDocument_63:
+  id: 112
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Etat de production de l’année d’achèvement
+  country_id: 47
+  valid_period: 365
+  position: 5
+
+RequiredOperatorDocument_64:
+  id: 113
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Etat de production de l’année de vidange
+  country_id: 47
+  valid_period: 365
+  position: 7
+
+RequiredOperatorDocument_65:
+  id: 114
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Certificat phytosanitaire
+  country_id: 47
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_66:
+  id: 115
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Décharge attestant du paiement de la taxe d'abattage
+  country_id: 47
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_67:
+  id: 116
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Décharge attestant du paiement de la taxe de déboisement
+  country_id: 47
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_68:
+  id: 117
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Autorisation de vidange
+  country_id: 47
+  valid_period: 100
+  position: 4
+
+RequiredOperatorDocument_69:
+  id: 121
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Prolongation du permis de coupe industrielle PCIBO
+  country_id: 7
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_70:
+  id: 124
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Certificat d’origine
+  country_id: 7
+  valid_period: 120
+  position: 3
+
+RequiredOperatorDocument_71:
+  id: 125
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Certificat de vérification à l’exportation et à l’embarquement (CVEE)
+  country_id: 7
+  valid_period: 90
+  position: 2
+
+RequiredOperatorDocument_72:
+  id: 126
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Arrêté d’agrément au Code des investissements, le cas échéant
+  country_id: 7
+  valid_period: 1095
+  position: 1
+
+RequiredOperatorDocument_73:
+  id: 10125
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Registre du commerce de l’entreprise
+  country_id: 45
+  valid_period: 36135
+  position: 2
+
+RequiredOperatorDocument_74:
+  id: 10126
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Agrément à la profession forestière
+  country_id: 45
+  valid_period: 36135
+  position: 1
+
+RequiredOperatorDocument_75:
+  id: 10127
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Cahier des charges signé par l'autorité compétente et l'entité forestière
+  country_id: 45
+  valid_period: 5475
+  forest_types:
+  - 1
+  position: 2
+
+RequiredOperatorDocument_76:
+  id: 10128
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: 'Convention provisoire d''exploitation '
+  country_id: 45
+  valid_period: 1095
+  forest_types:
+  - 1
+  position: 3
+
+RequiredOperatorDocument_77:
+  id: 10129
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Lettre ou Arrêté d'approbation du plan d'aménagement par l'administration
+    chargée des forêts
+  country_id: 45
+  valid_period: 5475
+  forest_types:
+  - 1
+  - 2
+  position: 1
+
+RequiredOperatorDocument_78:
+  id: 10130
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Permis annuel d'opération ou Certificat annuel d'assiette de coupe
+  country_id: 45
+  valid_period: 365
+  forest_types:
+  - 1
+  - 2
+  position: 5
+
+RequiredOperatorDocument_79:
+  id: 10131
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Notification de démarrage des activités
+  country_id: 45
+  valid_period: 365
+  forest_types:
+  - 1
+  - 2
+  - 3
+  position: 4
+
+RequiredOperatorDocument_80:
+  id: 10132
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Lettre d'approbation du contrat de sous-traitance
+  country_id: 45
+  valid_period: 365
+  forest_types:
+  - 1
+  - 2
+  - 3
+  position: 3
+
+RequiredOperatorDocument_81:
+  id: 10133
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Attestation de respect des normes d'exploitation forestière/Attestation de
+    respect des normes d'intervention en milieu forestier
+  country_id: 45
+  valid_period: 365
+  forest_types:
+  - 1
+  - 2
+  - 3
+  position: 1
+
+RequiredOperatorDocument_82:
+  id: 10134
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Certificat de conformité environnementale
+  country_id: 45
+  valid_period: 5475
+  forest_types:
+  - 1
+  - 2
+  position: 1
+
+RequiredOperatorDocument_83:
+  id: 10135
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Certificat d’enregistrement en qualité d’exportateur de bois en grumes de
+    l’entreprise exploitante
+  country_id: 45
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_84:
+  id: 10136
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Attestation de non redevance
+  country_id: 45
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_85:
+  id: 10137
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Procès-verbal/Attestation de réalisation des œuvres sociales prévues aux cahiers
+    des charges
+  country_id: 45
+  valid_period: 5475
+  forest_types:
+  - 1
+  - 2
+  - 3
+  position: 1
+
+RequiredOperatorDocument_86:
+  id: 10138
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Procès-verbal de la réunion d'information relative à l'exploitation du titre
+    forestier
+  country_id: 45
+  valid_period: 5475
+  forest_types:
+  - 1
+  - 2
+  - 3
+  position: 2
+
+RequiredOperatorDocument_87:
+  id: 10139
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Déclaration d'établissement
+  country_id: 45
+  valid_period: 36135
+  position: 4
+
+RequiredOperatorDocument_88:
+  id: 10140
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Attestation pour soumission de l'entreprise exploitante
+  country_id: 45
+  valid_period: 183
+  position: 2
+
+RequiredOperatorDocument_89:
+  id: 10141
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Procès-verbal d'élection des délégués du personnel
+  country_id: 45
+  valid_period: 730
+  position: 5
+
+RequiredOperatorDocument_90:
+  id: 10142
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Plan d'aménagement
+  country_id: 45
+  valid_period: 5475
+  forest_types:
+  - 1
+  - 2
+  position: 2
+
+RequiredOperatorDocument_91:
+  id: 10143
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Convention de visites et de soins avec un médecin traitant
+  country_id: 45
+  valid_period: 91
+  position: 3
+
+RequiredOperatorDocument_92:
+  id: 10144
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Acte de création du comité d’hygiène et de sécurité du travail /  PV d’installation
+    des membres du comité de santé et de sécurité du travail
+  country_id: 45
+  valid_period: 36135
+  position: 1
+
+RequiredOperatorDocument_93:
+  id: 10145
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Arrêté d’attribution de la vente de coupe
+  country_id: 45
+  valid_period: 365
+  forest_types:
+  - 3
+  position: 1
+
+RequiredOperatorDocument_94:
+  id: 10146
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Certificat de vente de coupe
+  country_id: 45
+  valid_period: 365
+  forest_types:
+  - 3
+  position: 2
+
+RequiredOperatorDocument_95:
+  id: 10148
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Décret portant attribution de la Concession Forestière
+  country_id: 45
+  valid_period: 5475
+  forest_types:
+  - 1
+  position: 4
+
+RequiredOperatorDocument_96:
+  id: 10149
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Certificat d’enregistrement en qualité d’exportateur de bois transformés de
+    l’entreprise exploitante
+  country_id: 45
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_97:
+  id: 20003
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Rapport trimestriel d’avancement de la mise en œuvre des accords constituants
+    les clauses sociales de cahier des charges des contrats de concessions forestières
+  country_id: 7
+  valid_period: 105
+  position: 3
+
+RequiredOperatorDocument_98:
+  id: 20004
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Modèle de marteau déposé et enregistré
+  country_id: 7
+  valid_period: 9125
+  position: 2
+
+RequiredOperatorDocument_99:
+  id: 20005
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Attestation bancaire de paiement de la taxe sur le permis de coupe industrielle
+    du bois d'Oeuvre
+  country_id: 7
+  valid_period: 365
+  forest_types:
+  - 0
+  position: 2
+
+RequiredOperatorDocument_100:
+  id: 20006
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Lettre du ministre en charge des forêts notifiant à l’entité la convertibilité
+    de l’ancien titre
+  country_id: 7
+  valid_period: 9125
+  forest_types:
+  - 0
+  position: 3
+
+RequiredOperatorDocument_101:
+  id: 20007
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Arrêté Ministériel, Décret ou Loi, selon la superficie pour les titres issus
+    de cession, location, échange ou donation
+  country_id: 7
+  valid_period: 9125
+  forest_types:
+  - 0
+  position: 1
+
+RequiredOperatorDocument_102:
+  id: 20008
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'Déclaration annuelle de la situation de la main d’œuvre '
+  country_id: 7
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_103:
+  id: 20009
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Bulletin de liquidation des droits de sortie du bois
+  country_id: 7
+  valid_period: 90
+  position: 1
+
+RequiredOperatorDocument_104:
+  id: 20010
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 11
+  name: Autorisation de publication
+  country_id: 47
+  valid_period: 3650
+  contract_signature: true
+  position: 1
+
+RequiredOperatorDocument_105:
+  id: 20011
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 11
+  name: Autorisation de publication
+  country_id: 7
+  valid_period: 3650
+  contract_signature: true
+  position: 1
+
+RequiredOperatorDocument_106:
+  id: 20012
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 11
+  name: Autorisation de publication
+  country_id: 45
+  valid_period: 3650
+  contract_signature: true
+  position: 1
+
+RequiredOperatorDocument_107:
+  id: 100002
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 7
+  name: 'Quittance de paiement de l''IMF (impôt minimum forfaitaire) '
+  country_id: 188
+  valid_period: 180
+  forest_types:
+  - 6
+  position: 3
+
+RequiredOperatorDocument_108:
+  id: 100003
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 7
+  name: 'Bon à expédier accompagné de: spécifications, D15, déclaration d''exportation
+    commerciale, facture, certificat d''origine (au moins un exemplaire)'
+  country_id: 188
+  valid_period: 90
+  forest_types:
+  - 6
+  position: 2
+
+RequiredOperatorDocument_109:
+  id: 100004
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Autorisation spéciale pour les essences non autorisées important
+  country_id: 188
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_110:
+  id: 100006
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Convention définitive d’Exploitation-aménagement
+  country_id: 188
+  valid_period: 10950
+  forest_types:
+  - 6
+  position: 1
+
+RequiredOperatorDocument_111:
+  id: 100007
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Convention Provisoire  d’Exploitation-aménagement
+  country_id: 188
+  valid_period: 1095
+  forest_types:
+  - 6
+  position: 2
+
+RequiredOperatorDocument_112:
+  id: 100008
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: 'Décret d’attribution des permis '
+  country_id: 188
+  valid_period: 10950
+  forest_types:
+  - 6
+  position: 4
+
+RequiredOperatorDocument_113:
+  id: 100009
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 2
+  name: 'Décision ministérielle  portant agrément d’exploitation forestière '
+  country_id: 188
+  valid_period: 10950
+  position: 3
+
+RequiredOperatorDocument_114:
+  id: 100010
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'Attestation d’immatriculation à la caisse nationale de sécurité sociale (CNSS) '
+  country_id: 188
+  valid_period: 36135
+  position: 1
+
+RequiredOperatorDocument_115:
+  id: 100011
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Registre de l'employeur coté et paraphé par l'inspecteur du travail du ressort
+  country_id: 188
+  valid_period: 1825
+  position: 8
+
+RequiredOperatorDocument_116:
+  id: 100012
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Preuves de paiement de la cotisation patronale
+  country_id: 188
+  valid_period: 365
+  position: 5
+
+RequiredOperatorDocument_117:
+  id: 100013
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'PV de l''assemblée générale élective des délégués du personnel visé par l''inspecteur
+    du travail du ressort '
+  country_id: 188
+  valid_period: 730
+  position: 6
+
+RequiredOperatorDocument_118:
+  id: 100014
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Les attestations de formation visées par l'inspecteur du travail du ressort
+  country_id: 188
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_119:
+  id: 100015
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: PV de mise en place  du comité d'hygiène et de sécurité
+  country_id: 188
+  valid_period: 1095
+  position: 7
+
+RequiredOperatorDocument_120:
+  id: 100016
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Règlement intérieur
+  country_id: 188
+  valid_period: 10950
+  position: 9
+
+RequiredOperatorDocument_121:
+  id: 100017
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'Comptes rendus des réunions du comité d''hygiène et de sécurité '
+  country_id: 188
+  valid_period: 90
+  position: 2
+
+RequiredOperatorDocument_122:
+  id: 100018
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Répertoire des dotations du matériel d'hygiène et de sécurité au personnel
+  country_id: 188
+  valid_period: 180
+  position: 10
+
+RequiredOperatorDocument_123:
+  id: 100019
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: 'Preuves d''indemnisation '
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 1
+
+RequiredOperatorDocument_124:
+  id: 100020
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: 'Rapports de l''entreprise sur les campagnes d''information, d''éducation
+    et de sensibilisation '
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 2
+
+RequiredOperatorDocument_125:
+  id: 100021
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: 'Carte de contribuable '
+  country_id: 188
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_126:
+  id: 100022
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Registre du commerce et du crédit mobilier (RCCM)
+  country_id: 188
+  valid_period: 36135
+  position: 2
+
+RequiredOperatorDocument_127:
+  id: 100024
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Rapport d'études d'impact environnemental (nouveau PEA)
+  country_id: 188
+  valid_period: 10950
+  forest_types:
+  - 6
+  position: 3
+
+RequiredOperatorDocument_128:
+  id: 100025
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Rapport audit environnemental (ancien PEA)
+  country_id: 188
+  valid_period: 10950
+  forest_types:
+  - 6
+  position: 2
+
+RequiredOperatorDocument_129:
+  id: 100026
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: 'Certificat de conformité environnemental délivré par l''autorité compétente '
+  country_id: 188
+  valid_period: 10950
+  forest_types:
+  - 6
+  position: 1
+
+RequiredOperatorDocument_130:
+  id: 100027
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Lettre de dépôt du plan annuel d'opération (PAO) au cabinet du ministre en
+    change des forêts
+  country_id: 188
+  valid_period: 90
+  forest_types:
+  - 6
+  position: 6
+
+RequiredOperatorDocument_131:
+  id: 100028
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: 'Lettre d''approbation officielle du PAO '
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 5
+
+RequiredOperatorDocument_132:
+  id: 100029
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Autorisation d’ouverture des chantiers ACP
+  country_id: 188
+  valid_period: 1095
+  forest_types:
+  - 6
+  position: 4
+
+RequiredOperatorDocument_133:
+  id: 100030
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: 'Autorisation d’ouverture de l’AAC '
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 3
+
+RequiredOperatorDocument_134:
+  id: 100034
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: 'Note d''approbation du plan de gestion pour les PEA en convention définitive '
+  country_id: 188
+  valid_period: 1825
+  forest_types:
+  - 6
+  position: 2
+
+RequiredOperatorDocument_135:
+  id: 100035
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Note d'approbation du plan annuel d'opération pour les PEA en convention définitive
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 1
+
+RequiredOperatorDocument_136:
+  id: 100037
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Quittances de paiement de la taxe sur le loyer/Quitus
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 4
+
+RequiredOperatorDocument_137:
+  id: 100038
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Quittances de paiement de la taxe d'abattage/Quitus
+  country_id: 188
+  valid_period: 45
+  forest_types:
+  - 6
+  position: 2
+
+RequiredOperatorDocument_138:
+  id: 100039
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Quittances de paiement de la taxe de reboisement/Quitus
+  country_id: 188
+  valid_period: 45
+  forest_types:
+  - 6
+  position: 3
+
+RequiredOperatorDocument_139:
+  id: 100040
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Numéro d’identification fiscale (NIF) / Bulletin d'immatriculation du contribuable
+    personne morale (PM)
+  country_id: 188
+  valid_period: 36135
+  position: 1
+
+RequiredOperatorDocument_140:
+  id: 100041
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 6
+  name: Feuille de route (appelé aussi bordereau de livraison ou bordereau d'évacuation)  (au
+    moins un exemplaire)
+  country_id: 188
+  valid_period: 90
+  forest_types:
+  - 6
+  position: 1
+
+RequiredOperatorDocument_141:
+  id: 100042
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'Note d''information sur la garantie de la liberté syndicale visée par l''autorité
+    compétente et affichée '
+  country_id: 188
+  valid_period: 365
+  position: 4
+
+RequiredOperatorDocument_142:
+  id: 100043
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Autorisation de fermeture de l'AAC / Procès verbal relatif à la fermeture
+    de l'AAC
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 1
+
+RequiredOperatorDocument_143:
+  id: 100044
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: 'Plan d''aménagement approuvé par l''autorité compétente (en particulier le
+    rapport socioéconomique) '
+  country_id: 188
+  valid_period: 10950
+  forest_types:
+  - 6
+  position: 7
+
+RequiredOperatorDocument_144:
+  id: 100045
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Autorisation de maintien AC
+  country_id: 188
+  valid_period: 365
+  forest_types:
+  - 6
+  position: 2
+
+RequiredOperatorDocument_145:
+  id: 100046
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 11
+  name: Autorisation de publication
+  country_id: 188
+  valid_period: 3650
+  contract_signature: true
+  position: 1
+
+RequiredOperatorDocument_146:
+  id: 100047
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 11
+  name: Autorisation de publication
+  country_id: 53
+  valid_period: 3650
+  contract_signature: true
+  position: 1
+
+RequiredOperatorDocument_147:
+  id: 100048
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 6
+  name: 'Echantillon des bordereaux de roulage signé par l’administration '
+  country_id: 53
+  valid_period: 90
+  forest_types:
+  - 4
+  - 5
+  position: 1
+
+RequiredOperatorDocument_148:
+  id: 100050
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Attestation de la situation fiscale
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 1
+
+RequiredOperatorDocument_149:
+  id: 100051
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Quittance de paiement de la taxe sur la superficie
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 5
+
+RequiredOperatorDocument_150:
+  id: 100052
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Document de moratoire de taxe sur la superficie
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 3
+
+RequiredOperatorDocument_151:
+  id: 100054
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: " Autorisation(s)/PV(s) d’ouverture des AAC/AACP"
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 2
+
+RequiredOperatorDocument_152:
+  id: 100063
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 4
+  name: Déclaration aux fins d'immatriculation d'un marteau forestier/Certificat  d’enregistrement
+    du marteau au greffe du tribunal
+  country_id: 53
+  valid_period: 36135
+  forest_types:
+  - 4
+  - 5
+  position: 3
+
+RequiredOperatorDocument_153:
+  id: 100064
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Rapport de production annuelle des AAC en cours d’exploitation
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 5
+
+RequiredOperatorDocument_154:
+  id: 100070
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: 'Récépissé de déclaration environnementale '
+  country_id: 53
+  valid_period: 9125
+  forest_types:
+  - 4
+  - 5
+  position: 3
+
+RequiredOperatorDocument_155:
+  id: 100072
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Certificat(s) de conformité environnementale
+  country_id: 53
+  valid_period: 9125
+  forest_types:
+  - 4
+  - 5
+  position: 1
+
+RequiredOperatorDocument_156:
+  id: 100073
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: " Preuve de transmission à l’administration compétente du rapport d’exécution
+    du PGES de l’année précédente "
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 2
+
+RequiredOperatorDocument_157:
+  id: 100075
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: 'Lettre d''Approbation/Décret d''approbation du Plan d''Aménagement de la
+    CFAD '
+  country_id: 53
+  valid_period: 9125
+  forest_types:
+  - 5
+  position: 1
+
+RequiredOperatorDocument_158:
+  id: 100076
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Résumé du plan d’aménagement en cours de validité
+  country_id: 53
+  valid_period: 9125
+  forest_types:
+  - 5
+  position: 3
+
+RequiredOperatorDocument_159:
+  id: 100077
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Lettre d'approbation du Plan de gestion quinquennal (pour l'UFG en cours d'exploitation)
+  country_id: 53
+  valid_period: 1825
+  forest_types:
+  - 5
+  position: 2
+
+RequiredOperatorDocument_160:
+  id: 100079
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: 'Fiche circuit ou agrément délivré par le Ministère du Commerce au nom de
+    l’entreprise '
+  country_id: 53
+  valid_period: 36135
+  position: 2
+
+RequiredOperatorDocument_161:
+  id: 100080
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Extrait du Registre de Commerce et Crédit Mobilier (RCCM)
+  country_id: 53
+  valid_period: 36135
+  position: 1
+
+RequiredOperatorDocument_162:
+  id: 100081
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'Fiche d’immatriculation employeur de l’entreprise à la CNSS '
+  country_id: 53
+  valid_period: 36135
+  position: 3
+
+RequiredOperatorDocument_163:
+  id: 100082
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'Fiche d’immatriculation employeur de l’entreprise à la CNAMGS '
+  country_id: 53
+  valid_period: 36135
+  position: 2
+
+RequiredOperatorDocument_164:
+  id: 100083
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 2
+  name: 'Agrément professionnel valide pour l''exploitant/l''industriel au nom de
+    l’entreprise '
+  country_id: 53
+  valid_period: 36135
+  position: 1
+
+RequiredOperatorDocument_165:
+  id: 100084
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: 'PV de réunion d’information à toutes les parties prenantes '
+  country_id: 53
+  valid_period: 9125
+  forest_types:
+  - 4
+  - 5
+  position: 5
+
+RequiredOperatorDocument_166:
+  id: 100085
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Cahier(s) des charges contractuelles signé(s) par l'entreprise et les populations
+    locales impliquées
+  country_id: 53
+  valid_period: 36135
+  forest_types:
+  - 4
+  - 5
+  position: 1
+
+RequiredOperatorDocument_167:
+  id: 100086
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 8
+  name: Reçu(s) de versement du Fond de Developpement Local (FDL) de l'exercice clôturé
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 7
+
+RequiredOperatorDocument_168:
+  id: 100087
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Justificatifs des décaissements pour les réalisations approuvées par le CGSP
+    (relevés de compte, factures, etc.)
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 2
+
+RequiredOperatorDocument_169:
+  id: 100089
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: Preuve de réalisation dans le cadre de la gestion des FDL (Bilan de réalisation,
+    etc.) (pour les CFAD)
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 3
+
+RequiredOperatorDocument_170:
+  id: 100090
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Règlement d’entreprise visé par l’Inspecteur du travail
+  country_id: 53
+  valid_period: 36135
+  position: 6
+
+RequiredOperatorDocument_171:
+  id: 100091
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Quittance de cotisation réglée à la CNSS
+  country_id: 53
+  valid_period: 90
+  position: 5
+
+RequiredOperatorDocument_172:
+  id: 100092
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Echantillons de bulletin de paie comprenant ressortant les différentes taxes
+    appliquées sur les salaires
+  country_id: 53
+  valid_period: 90
+  position: 1
+
+RequiredOperatorDocument_173:
+  id: 100093
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: 'Procès-verbal de mise en place du comité de santé de sécurité et de santé,
+    pour les entreprises de plus de 50 salariés '
+  country_id: 53
+  valid_period: 730
+  position: 4
+
+RequiredOperatorDocument_174:
+  id: 100094
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Convention Provisoire Aménagement-Exploitation-Transformation (CPAET)/Autorisation
+    de mise en exploitation pour les CPAET
+  country_id: 53
+  valid_period: 1095
+  forest_types:
+  - 4
+  position: 5
+
+RequiredOperatorDocument_175:
+  id: 100095
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Décret/Arrêté d'attribution de la CFAD signée
+  country_id: 53
+  valid_period: 9125
+  forest_types:
+  - 5
+  position: 6
+
+RequiredOperatorDocument_176:
+  id: 100096
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: 'Autorisation(s) de mise en exploitation pour chaque AAC en cours d''exploitation
+    délivrée '
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 1
+
+RequiredOperatorDocument_177:
+  id: 100098
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Contrat de fermage  (Le cas échéant)
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 3
+
+RequiredOperatorDocument_178:
+  id: 100099
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Contrat de sous-traitance  (Le cas échéant)
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 4
+
+RequiredOperatorDocument_179:
+  id: 100100
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Autorisation d'exploitation des zones tampons (Le cas échéant)
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 2
+
+RequiredOperatorDocument_180:
+  id: 100101
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: La déclaration d’exportation délivrée par les services de la direction du
+    commerce extérieur.
+  country_id: 53
+  valid_period: 90
+  position: 3
+
+RequiredOperatorDocument_181:
+  id: 100102
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Permis d’exportation CITES, le cas échéant
+  country_id: 53
+  valid_period: 180
+  position: 4
+
+RequiredOperatorDocument_182:
+  id: 100103
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Echantillon(s) trimestriel(s) de rapport de visite / de certificat de visite
+    établi par le service des douanes
+  country_id: 53
+  valid_period: 90
+  position: 1
+
+RequiredOperatorDocument_183:
+  id: 100104
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Rapport  de visite / Certificat de visite établi par le service des douanes
+  country_id: 53
+  valid_period: 90
+  position: 6
+
+RequiredOperatorDocument_184:
+  id: 100105
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Autorisation donnée par la douane d'enlever une marchandise pour exportation
+    ou importation
+  country_id: 53
+  valid_period: 90
+  position: 2
+
+RequiredOperatorDocument_185:
+  id: 100106
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Procès-verbal de constat signé par le représentant local des Eaux et Forêts
+    et l’entreprise, dans l’année qui suit la fermeture de l'AAC
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 4
+  - 5
+  position: 4
+
+RequiredOperatorDocument_186:
+  id: 100108
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 9
+  name: 'Procès-verbaux des sessions des Comités de Gestion et de Suivi des Projets
+    (CGSP) pour les entreprises en CFAD '
+  country_id: 53
+  valid_period: 365
+  forest_types:
+  - 5
+  position: 4
+
+RequiredOperatorDocument_187:
+  id: 100110
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 7
+  name: Echantillon(s) trimestriel(s) des déclarations d’exportation délivrée par
+    les services de la direction du commerce extérieur
+  country_id: 53
+  valid_period: 90
+  position: 2
+
+RequiredOperatorDocument_188:
+  id: 100111
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Official registration of company
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_189:
+  id: 100112
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 1
+  name: Written authorization(s) from legally competent authority to carry out forest
+    activities in the country
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_190:
+  id: 100113
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Document demonstrating company has the right to use the resource in the Forest
+    Management Unit (ownership title or official notification of allocation such as
+    concession title)
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_191:
+  id: 100114
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 2
+  name: Any associated convention
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_192:
+  id: 100115
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Management plan
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_193:
+  id: 100116
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Summary of approved management plan
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_194:
+  id: 100117
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 3
+  name: Evidence of management plan official approval
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_195:
+  id: 100118
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Harvesting permits, licenses, or other legal documents required for specific
+    harvesting operations
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_196:
+  id: 100119
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 4
+  name: Annual summary of harvested volumes detailed by species
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_197:
+  id: 100120
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 5
+  name: Environmental impact assessment
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_198:
+  id: 100121
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 6
+  name: Required trading and transport permits
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_199:
+  id: 100122
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 6
+  name: Legally required transport documents
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_200:
+  id: 100123
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 7
+  name: CITES permits
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_201:
+  id: 100124
+  type: RequiredOperatorDocumentFmu
+  required_operator_document_group_id: 7
+  name: Customs declaration
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_202:
+  id: 100125
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Receipts or attestations of payment of all legally required and specific fees
+    relating to forest harvesting such as royalties, stumpage fees, and other volume-based
+    fees.
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_203:
+  id: 100126
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 8
+  name: Receipts or attestations of payment of income and profit taxes relating to
+    profit derived from the sale of forest products and harvesting activities
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_204:
+  id: 100127
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Evidence of social security registration
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_205:
+  id: 100128
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Evidence of social security contribution payment
+  valid_period: 365
+  position: 2
+
+RequiredOperatorDocument_206:
+  id: 100129
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 9
+  name: Evidence of engagement with local population
+  valid_period: 365
+  position: 1
+
+RequiredOperatorDocument_207:
+  id: 100130
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Evidence of social security registration
+  valid_period: 365
+  position: 3
+
+RequiredOperatorDocument_208:
+  id: 100131
+  type: RequiredOperatorDocumentCountry
+  required_operator_document_group_id: 10
+  name: Evidence of social security contribution payment
+  valid_period: 365
+  position: 4

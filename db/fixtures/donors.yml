@@ -1,0 +1,28 @@
+
+Donor_1:
+  id: 4
+  website: https://www.ukaiddirect.org
+  logo: UK-AID-Standard-RGB.jpg
+  priority: 1
+  type: Donor
+
+Donor_2:
+  id: 5
+  website: https://www.norad.no/en/front/thematic-areas/climate-change-and-environment/norways-international-climate-and-forest-initiative-nicfi/
+  logo: NICFI_1.png
+  priority: 2
+  type: Donor
+
+Donor_3:
+  id: 6
+  website: http://europa.eu/
+  logo: EU.jpg
+  priority: 3
+  type: Donor
+
+Donor_4:
+  id: 25
+  website: https://www.state.gov/bureaus-offices/under-secretary-for-civilian-security-democracy-and-human-rights/bureau-of-international-narcotics-and-law-enforcement-affairs/
+  logo: US_Flag_Color_High.jpg
+  priority: 4
+  type: Donor

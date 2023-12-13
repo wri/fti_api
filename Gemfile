@@ -67,7 +67,6 @@ gem "activerecord-import"
 gem "acts_as_list"
 gem "countries", require: false # for update translations job, so require only there
 gem "globalize"
-gem "seed-fu"
 
 # Validation
 gem "valid_url"
