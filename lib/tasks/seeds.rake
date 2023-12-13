@@ -1,64 +1,70 @@
-namespace :seeds do
-  task generate_fixtures: :environment do
-    generate_for_model "Country"
-    generate_for_model "AboutPageEntry"
-    generate_for_model "Page", locale: %w[en fr]
-    generate_for_model "Tool"
-    generate_for_model "Tutorial"
-    generate_for_model "HowTo"
-    generate_for_model "Donor"
-    generate_for_model "Partner"
-    generate_for_model "Faq"
+class SeedsTasks
+  include Rake::DSL
 
-    generate_for_model "Law"
-    generate_for_model "Government"
-    generate_for_model "Category"
-    generate_for_model "Subcategory"
-    generate_for_model "Severity"
+  def initialize
+    namespace :seeds do
+      task generate_fixtures: :environment do
+        generate_for_model "Country"
+        generate_for_model "AboutPageEntry"
+        generate_for_model "Page", locale: %w[en fr]
+        generate_for_model "Tool"
+        generate_for_model "Tutorial"
+        generate_for_model "HowTo"
+        generate_for_model "Donor"
+        generate_for_model "Partner"
+        generate_for_model "Faq"
 
-    generate_for_model "RequiredOperatorDocumentGroup"
-    generate_for_model "RequiredOperatorDocument"
+        generate_for_model "Law"
+        generate_for_model "Government"
+        generate_for_model "Category"
+        generate_for_model "Subcategory"
+        generate_for_model "Severity"
 
-    holding_names = ["Groupe Vicwood Thanry"]
-    holdings = Holding.where(name: holding_names)
-    holding_operators = Operator.where(holding: holdings).pluck(:slug)
+        generate_for_model "RequiredOperatorDocumentGroup"
+        generate_for_model "RequiredOperatorDocument"
 
-    # observations
-    monitor_names = %w[
-      OGF PAPEL FODER CADDE ECODEV CAGDF RENOI OCEAN AGRECO
-    ]
-    observers = Observer.where(name: monitor_names)
-    reports = ObservationReport.joins(:observers).where(observers: observers).distinct
-    observations = Observation.published.where(observation_report: reports)
+        holding_names = ["Groupe Vicwood Thanry"]
+        holdings = Holding.where(name: holding_names)
+        holding_operators = Operator.where(holding: holdings).pluck(:slug)
 
-    operator_slugs = %w[
-      ifo-interholco cfc sifco lorema siencam
-      cib cft mokabi-sa afriwood-industries
-    ].concat(holding_operators).uniq
-    operators = Operator.where(slug: operator_slugs)
-    fmu_operators = FmuOperator.where(operator: operators)
-    fmus = Fmu.where(id: fmu_operators.pluck(:fmu_id))
-    observations = observations.where(fmu: [nil, fmus]) # only observations with existing fmu or no fmu
-    observations = observations.where(operator: [nil, operators])
-    generate_for_model "Holding", entries: holdings
-    generate_for_model "Operator", entries: operators
-    generate_for_model "FmuOperator", entries: fmu_operators
-    generate_for_model "Fmu", entries: fmus
+        # observations
+        monitor_names = %w[
+          OGF PAPEL FODER CADDE ECODEV CAGDF RENOI OCEAN AGRECO
+        ]
+        observers = Observer.where(name: monitor_names)
+        reports = ObservationReport.joins(:observers).where(observers: observers).distinct
+        observations = Observation.published.where(observation_report: reports)
 
-    # documents
-    documents = OperatorDocument.where(operator: operators).where(fmu: [nil, fmus])
-    document_history = OperatorDocumentHistory.where(operator_document: documents).where(fmu: [nil, fmus])
-    document_files = DocumentFile.where(id: documents.pluck(:document_file_id).concat(document_history.pluck(:document_file_id)).uniq)
-    generate_for_model "DocumentFile", entries: document_files
-    generate_for_model "OperatorDocument", entries: documents, exclude: %w[user_id], anonymize: %w[note]
-    generate_for_model "OperatorDocumentHistory", entries: document_history, exclude: %w[user_id]
+        operator_slugs = %w[
+          ifo-interholco cfc sifco lorema siencam
+          cib cft mokabi-sa afriwood-industries
+        ].concat(holding_operators).uniq
+        operators = Operator.where(slug: operator_slugs)
+        fmu_operators = FmuOperator.where(operator: operators)
+        fmus = Fmu.where(id: fmu_operators.pluck(:fmu_id))
+        observations = observations.where(fmu: [nil, fmus]) # only observations with existing fmu or no fmu
+        observations = observations.where(operator: [nil, operators])
+        generate_for_model "Holding", entries: holdings
+        generate_for_model "Operator", entries: operators
+        generate_for_model "FmuOperator", entries: fmu_operators
+        generate_for_model "Fmu", entries: fmus
 
-    # monitors
-    evidences = ObservationDocument.where(observation: observations)
-    generate_for_model "Observer", entries: observers, exclude: %w[responsible_admin_id]
-    generate_for_model "ObservationReport", entries: reports, exclude: %w[user_id]
-    generate_for_model "Observation", entries: observations, exclude: %w[user_id modified_user_id], anonymize: %w[admin_comment monitor_comment]
-    generate_for_model "ObservationDocument", entries: evidences, exclude: %w[user_id]
+        # documents
+        documents = OperatorDocument.where(operator: operators).where(fmu: [nil, fmus])
+        document_history = OperatorDocumentHistory.where(operator_document: documents).where(fmu: [nil, fmus])
+        document_files = DocumentFile.where(id: documents.pluck(:document_file_id).concat(document_history.pluck(:document_file_id)).uniq)
+        generate_for_model "DocumentFile", entries: document_files
+        generate_for_model "OperatorDocument", entries: documents, exclude: %w[user_id], anonymize: %w[note]
+        generate_for_model "OperatorDocumentHistory", entries: document_history, exclude: %w[user_id]
+
+        # monitors
+        evidences = ObservationDocument.where(observation: observations)
+        generate_for_model "Observer", entries: observers, exclude: %w[responsible_admin_id]
+        generate_for_model "ObservationReport", entries: reports, exclude: %w[user_id]
+        generate_for_model "Observation", entries: observations, exclude: %w[user_id modified_user_id], anonymize: %w[admin_comment monitor_comment]
+        generate_for_model "ObservationDocument", entries: evidences, exclude: %w[user_id]
+      end
+    end
   end
 
   def generate_for_model(model_class, entries: nil, exclude: [], locale: nil, anonymize: [])
@@ -115,3 +121,5 @@ namespace :seeds do
     translation_file.close if translated_attributes.any?
   end
 end
+
+SeedsTasks.new
