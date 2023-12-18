@@ -53,6 +53,7 @@ ngo_manager.update!(observer: ogf, managed_observers: [ocean, foder])
 government.update!(country: cameroon)
 
 Observer.find_each { |o| o.update!(responsible_admin: admin) }
+OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }
 
 $stdout.puts "Syncing test data..."
 

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   require "sidekiq/web"
 
-  if Rails.env.development?
+  if Rails.env.development? || Rails.env.e2e?
     mount Sidekiq::Web => "/admin/sidekiq"
     mount LetterOpenerWeb::Engine, at: "/admin/letter_opener"
   else

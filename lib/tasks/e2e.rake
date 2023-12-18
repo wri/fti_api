@@ -4,6 +4,11 @@ class E2ETask
   def initialize
     namespace :e2e do
       task setup: :environment do
+        abort "Only works in e2e environment" unless Rails.env.e2e?
+
+        Rake::Task["tmp:clear"].invoke
+        Rake::Task["assets:clobber"].invoke
+        Rake::Task["assets:precompile"].invoke
         Rake::Task["db:reset"].invoke
         terminate_connections_to db_config["database"]
         drop_e2e_db_template
@@ -11,6 +16,8 @@ class E2ETask
       end
 
       task :db_reset do # rubocop:disable Rails/RakeEnvironment
+        abort "Only works in e2e environment" unless Rails.env.e2e?
+
         terminate_connections_to db_config["database"]
         sh "dropdb --if-exists #{connection_config} #{db_config["database"]}"
         sh "createdb #{connection_config} --template=#{template_db_name} #{db_config["database"]}"

@@ -22,6 +22,7 @@ Rails/UnknownEnv:
     - staging
     - development
     - test
+    - e2e
 
 Rails/EagerEvaluationLogMessage:
   Enabled: false

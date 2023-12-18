@@ -3,6 +3,15 @@ Observer_1_en_translation:
   id: 3
   observer_id: 3
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.443925000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.443925000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.443925000 Z
+    zone: *1
+    time: 2017-09-25 15:06:42.443925000 Z
   name: AGRECO
   organization: AGRECO
 
@@ -10,6 +19,15 @@ Observer_2_en_translation:
   id: 5
   observer_id: 5
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.457126000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.457126000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.457126000 Z
+    zone: *1
+    time: 2017-09-25 15:06:42.457126000 Z
   name: FODER
   organization: FODER
 
@@ -17,6 +35,15 @@ Observer_3_en_translation:
   id: 10
   observer_id: 10
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.494658000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.494658000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.494658000 Z
+    zone: *1
+    time: 2017-09-25 15:06:42.494658000 Z
   name: CAGDF
   organization: CAGDF
 
@@ -24,6 +51,15 @@ Observer_4_en_translation:
   id: 16
   observer_id: 16
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.541816000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.541816000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.541816000 Z
+    zone: *1
+    time: 2017-09-25 15:06:42.541816000 Z
   name: OGF
   organization: OGF
 
@@ -31,6 +67,15 @@ Observer_5_en_translation:
   id: 49
   observer_id: 25
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-01 22:01:21.357152000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-03-01 22:01:21.357152000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-01 22:01:21.357152000 Z
+    zone: *1
+    time: 2019-03-01 22:01:21.357152000 Z
   name: RENOI
   organization:
 
@@ -38,6 +83,15 @@ Observer_6_en_translation:
   id: 51
   observer_id: 26
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-29 16:31:40.557316000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-03-29 16:31:40.557316000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-29 16:31:40.557316000 Z
+    zone: *1
+    time: 2019-03-29 16:31:40.557316000 Z
   name: ECODEV
   organization:
 
@@ -45,6 +99,15 @@ Observer_7_en_translation:
   id: 240
   observer_id: 34
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-07 17:36:09.229477000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-07-07 17:36:09.229477000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-07 17:36:09.229477000 Z
+    zone: *1
+    time: 2023-07-07 17:36:09.229477000 Z
   name: OCEAN
   organization:
 
@@ -52,5 +115,14 @@ Observer_8_en_translation:
   id: 274
   observer_id: 38
   locale: en
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-17 14:29:30.659801000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-07-17 14:29:30.659801000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-17 14:29:30.659801000 Z
+    zone: *1
+    time: 2023-07-17 14:29:30.659801000 Z
   name: CADDE
   organization:

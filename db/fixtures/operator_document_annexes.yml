@@ -1,0 +1,3803 @@
+
+OperatorDocumentAnnex_1:
+  id: 1
+  name: CAT initiale 2002-2017
+  start_date: 2002-11-13
+  expire_date: 2017-11-12
+  status: doc_valid
+  attachment: attachment.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-01-25 18:13:03.610998000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-01-25 18:13:03.610998000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:19:52.288773000 Z
+    zone: *1
+    time: 2020-03-16 04:19:52.288773000 Z
+  public: true
+
+OperatorDocumentAnnex_2:
+  id: 2
+  name: CAT initiale 2002-2017
+  start_date: 2002-11-13
+  expire_date: 2017-11-12
+  status: doc_valid
+  attachment: attachment.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-01-25 18:54:43.588578000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-01-25 18:54:43.588578000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:19:43.366329000 Z
+    zone: *1
+    time: 2020-03-16 04:19:43.366329000 Z
+  public: true
+
+OperatorDocumentAnnex_3:
+  id: 59
+  name: Cahier de charges principal  Kabo
+  start_date: 2002-11-13
+  expire_date: 2034-04-30
+  status: doc_valid
+  attachment: Annex_1534938205_cib-cahier-des-charges-particulier-2018-08-22.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-08-22 11:43:25.668575000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-08-22 11:43:25.668575000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:36:13.514825000 Z
+    zone: *1
+    time: 2020-03-16 04:36:13.514825000 Z
+  public: true
+
+OperatorDocumentAnnex_4:
+  id: 60
+  name: CAT Principal Kabo
+  start_date: 2002-12-11
+  expire_date: 2034-04-30
+  status: doc_valid
+  attachment: Annex_1534938501_cib-convention-d-amenagement-et-de-transformation-cat-2018-05-02.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-08-22 11:48:21.247555000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-08-22 11:48:21.247555000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:35:59.317440000 Z
+    zone: *1
+    time: 2020-03-16 04:35:59.317440000 Z
+  public: true
+
+OperatorDocumentAnnex_5:
+  id: 84
+  name: identification nationale_RCCM_Boma
+  start_date: 2017-10-09
+  expire_date: 2116-10-09
+  status: doc_valid
+  attachment: Annex_1540206490_cft-numero-d-identification-national-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:08:10.242143000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-22 11:08:10.242143000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:35:53.829968000 Z
+    zone: *1
+    time: 2019-02-10 13:35:53.829968000 Z
+  public: true
+
+OperatorDocumentAnnex_6:
+  id: 85
+  name: identification nationale_RCCM_Kisangani
+  start_date: 2018-03-08
+  expire_date: 2117-03-08
+  status: doc_pending
+  attachment: Annex_1540206601_cft-numero-d-identification-national-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:10:01.463087000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-22 11:10:01.463087000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:10:01.463087000 Z
+    zone: *1
+    time: 2018-10-22 11:10:01.463087000 Z
+  public: true
+
+OperatorDocumentAnnex_7:
+  id: 86
+  name: RCCM_BOMA
+  start_date: 2014-08-23
+  expire_date: 2113-08-23
+  status: doc_pending
+  attachment: Annex_1540206781_cft-preuve-d-immatriculation-au-rccm-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:13:01.598105000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-22 11:13:01.598105000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:13:01.598105000 Z
+    zone: *1
+    time: 2018-10-22 11:13:01.598105000 Z
+  public: true
+
+OperatorDocumentAnnex_8:
+  id: 87
+  name: Certificat de radiation_RCCM_BOMA
+  start_date: 2018-04-13
+  expire_date: 2117-04-13
+  status: doc_pending
+  attachment: Annex_1540206996_cft-preuve-d-immatriculation-au-rccm-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:16:36.757140000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-22 11:16:36.757140000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:16:36.757140000 Z
+    zone: *1
+    time: 2018-10-22 11:16:36.757140000 Z
+  public: true
+
+OperatorDocumentAnnex_9:
+  id: 88
+  name: RCCM_KISANGANI
+  start_date: 2018-03-01
+  expire_date: 2117-03-01
+  status: doc_valid
+  attachment: Annex_1540207095_cft-preuve-d-immatriculation-au-rccm-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-22 11:18:15.409070000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-22 11:18:15.409070000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:41:12.307406000 Z
+    zone: *1
+    time: 2019-02-10 13:41:12.307406000 Z
+  public: true
+
+OperatorDocumentAnnex_10:
+  id: 95
+  name: publication de l'arrêté d'approbation du plan d'aménagement au journal officiel
+  start_date: 2018-01-15
+  expire_date: 2043-01-15
+  status: doc_valid
+  attachment: Annex_1540373674_cft-arrete-d-approbation-du-plan-d-amenagement-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-24 09:34:34.554258000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-24 09:34:34.554258000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:40:47.473955000 Z
+    zone: *1
+    time: 2019-02-10 13:40:47.473955000 Z
+  public: true
+
+OperatorDocumentAnnex_11:
+  id: 107
+  name: Avenant no3 a CAT  en lien avec le cahier de charge
+  start_date: 2015-10-27
+  expire_date: 2042-10-26
+  status: doc_valid
+  attachment: Annex_1540435021_ifo-interholco-cahier-des-charges-particulier-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-25 02:37:01.326532000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-25 02:37:01.326532000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:23:07.990355000 Z
+    zone: *1
+    time: 2020-03-16 04:23:07.990355000 Z
+  public: true
+
+OperatorDocumentAnnex_12:
+  id: 108
+  name: Avenant N03
+  start_date: 2015-10-27
+  expire_date: 2042-10-26
+  status: doc_valid
+  attachment: Annex_1540435100_ifo-interholco-cahier-des-charges-particulier-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-10-25 02:38:20.585147000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-10-25 02:38:20.585147000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:22:47.483923000 Z
+    zone: *1
+    time: 2020-03-16 04:22:47.483923000 Z
+  public: true
+
+OperatorDocumentAnnex_13:
+  id: 147
+  name: 'Preuve de paiement de la taxe de superficie_2 échelonnement CF_47/11 '
+  start_date: 2018-03-31
+  expire_date: 2019-03-31
+  status: doc_valid
+  attachment: Annex_1542101232_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-13 09:27:12.532146000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-13 09:27:12.532146000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:34:55.995507000 Z
+    zone: *1
+    time: 2019-02-10 13:34:55.995507000 Z
+  public: true
+
+OperatorDocumentAnnex_14:
+  id: 148
+  name: 'Preuve de paiement de la taxe de superficie_3 échelonnement CF_47/11 '
+  start_date: 2018-05-08
+  expire_date: 2019-05-08
+  status: doc_valid
+  attachment: Annex_1542101349_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-13 09:29:09.525712000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-13 09:29:09.525712000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:34:44.846091000 Z
+    zone: *1
+    time: 2019-02-10 13:34:44.846091000 Z
+  public: true
+
+OperatorDocumentAnnex_15:
+  id: 149
+  name: 'Preuve de paiement de la taxe de superficie_4 échelonnement CF_47/11 '
+  start_date: 2018-06-08
+  expire_date: 2019-06-08
+  status: doc_valid
+  attachment: Annex_1542101440_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-13 09:30:40.180377000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-13 09:30:40.180377000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:34:26.758366000 Z
+    zone: *1
+    time: 2019-02-10 13:34:26.758366000 Z
+  public: true
+
+OperatorDocumentAnnex_16:
+  id: 150
+  name: 'Preuve de paiement de la taxe de superficie_5 échelonnement CF_47/11 '
+  start_date: 2018-07-11
+  expire_date: 2019-07-11
+  status: doc_valid
+  attachment: Annex_1542101511_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-13 09:31:51.254176000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-13 09:31:51.254176000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:34:15.551220000 Z
+    zone: *1
+    time: 2019-02-10 13:34:15.551220000 Z
+  public: true
+
+OperatorDocumentAnnex_17:
+  id: 151
+  name: 'Preuve de paiement de la taxe de superficie_6 échelonnement CF_47/11 '
+  start_date: 2018-08-28
+  expire_date: 2019-08-28
+  status: doc_valid
+  attachment: Annex_1542101580_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-13 09:33:00.759751000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-13 09:33:00.759751000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:34:00.698888000 Z
+    zone: *1
+    time: 2019-02-10 13:34:00.698888000 Z
+  public: true
+
+OperatorDocumentAnnex_18:
+  id: 152
+  name: 'Preuve de paiement de la taxe de superficie_7 échelonnement CF_47/11 '
+  start_date: 2018-09-05
+  expire_date: 2019-09-05
+  status: doc_valid
+  attachment: Annex_1542101693_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-13 09:34:53.774552000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-13 09:34:53.774552000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:33:48.418350000 Z
+    zone: *1
+    time: 2019-02-10 13:33:48.418350000 Z
+  public: true
+
+OperatorDocumentAnnex_19:
+  id: 153
+  name: 'Preuve de paiement de la taxe de superficie_8 échelonnement CF_47/11 '
+  start_date: 2018-10-09
+  expire_date: 2019-10-09
+  status: doc_valid
+  attachment: Annex_1542101778_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-13 09:36:18.991997000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-13 09:36:18.991997000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:33:36.354142000 Z
+    zone: *1
+    time: 2019-02-10 13:33:36.354142000 Z
+  public: true
+
+OperatorDocumentAnnex_20:
+  id: 154
+  name: Accord sur la clause sociale du cahier des charges avec groupement Mandombe
+  start_date: 2018-05-28
+  expire_date: 2023-05-28
+  status: doc_pending
+  attachment: Annex_1542644821_cft-accord-sur-la-clause-sociale-du-cahier-des-charges-conforme-au-modele-fixe-par-arrete-2018-11-19.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-19 16:27:01.937329000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-19 16:27:01.937329000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-19 16:27:01.937329000 Z
+    zone: *1
+    time: 2018-11-19 16:27:01.937329000 Z
+  public: true
+
+OperatorDocumentAnnex_21:
+  id: 158
+  name: plan d'aménagement forestier SSA 46/11 & 47/11
+  start_date: 2016-08-09
+  expire_date: 2041-08-09
+  status: doc_pending
+  attachment: Annex_1542818574_cft-certificat-de-conformite-du-plan-d-amenagement-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-21 16:42:54.249812000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-21 16:42:54.249812000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-21 16:42:54.249812000 Z
+    zone: *1
+    time: 2018-11-21 16:42:54.249812000 Z
+  public: true
+
+OperatorDocumentAnnex_22:
+  id: 159
+  name: 'Preuve de paiement de la taxe de superficie_9 échelonnement CF_47/11 '
+  start_date: 2018-11-14
+  expire_date: 2019-11-14
+  status: doc_pending
+  attachment: Annex_1542821118_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-21 17:25:18.746619000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-11-21 17:25:18.746619000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-11-21 17:25:18.746619000 Z
+    zone: *1
+    time: 2018-11-21 17:25:18.746619000 Z
+  public: true
+
+OperatorDocumentAnnex_23:
+  id: 167
+  name: Déclaration trimestrielle_Troisième trimestre 2018
+  start_date: 2018-10-15
+  expire_date: 2019-10-15
+  status: doc_valid
+  attachment: Annex_1545906024_cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2018-12-27.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-12-27 10:20:24.669139000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-12-27 10:20:24.669139000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-12 08:41:47.516843000 Z
+    zone: *1
+    time: 2019-02-12 08:41:47.516843000 Z
+  public: true
+
+OperatorDocumentAnnex_24:
+  id: 170
+  name: Plan de gestion Quinquennal_BAQ1
+  start_date: 2016-11-22
+  expire_date: 2021-11-22
+  status: doc_valid
+  attachment: Annex_1545915504_cft-plan-de-gestion-quinquennal-valide-2018-12-27.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-12-27 12:58:24.383416000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-12-27 12:58:24.383416000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:14:07.306047000 Z
+    zone: *1
+    time: 2020-03-16 04:14:07.306047000 Z
+  public: true
+
+OperatorDocumentAnnex_25:
+  id: 172
+  name: 'Preuve de paiement de la taxe de superficie_10 échelonnement CF_47/11 '
+  start_date: 2018-12-12
+  expire_date: 2019-12-12
+  status: doc_valid
+  attachment: Annex_1546010980_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2018-12-28 15:29:40.469424000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2018-12-28 15:29:40.469424000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-10 13:32:26.299840000 Z
+    zone: *1
+    time: 2019-02-10 13:32:26.299840000 Z
+  public: true
+
+OperatorDocumentAnnex_26:
+  id: 10056
+  name: 'Annexe 2 de la convention d''exploitation: Cahier des charges'
+  start_date: 2006-03-21
+  expire_date: 2009-03-20
+  status: doc_valid
+  attachment: Annex_1549035565_siencam-convention-provisoire-d-exploitation-2019-02-01.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-01 15:39:25.750322000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-01 15:39:25.750322000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-05 14:01:48.650107000 Z
+    zone: *1
+    time: 2019-02-05 14:01:48.650107000 Z
+  public: true
+
+OperatorDocumentAnnex_27:
+  id: 10058
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_invalid
+  attachment: Annex_1549292161_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-04 14:56:01.642351000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-04 14:56:01.642351000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-05 14:00:20.118610000 Z
+    zone: *1
+    time: 2019-02-05 14:00:20.118610000 Z
+  public: true
+
+OperatorDocumentAnnex_28:
+  id: 10060
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_valid
+  attachment: Annex_1549292778_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-04 15:06:18.536236000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-04 15:06:18.536236000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-05 13:59:00.770368000 Z
+    zone: *1
+    time: 2019-02-05 13:59:00.770368000 Z
+  public: true
+
+OperatorDocumentAnnex_29:
+  id: 10068
+  name: Cahier des charges concession forestière 1032
+  start_date: 2000-10-20
+  expire_date: 2003-10-19
+  status: doc_valid
+  attachment: Annex_1549357619_lorema-convention-provisoire-d-exploitation-2019-02-05.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-05 09:06:59.733511000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-05 09:06:59.733511000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-05 13:54:37.281842000 Z
+    zone: *1
+    time: 2019-02-05 13:54:37.281842000 Z
+  public: true
+
+OperatorDocumentAnnex_30:
+  id: 10073
+  name: 'Annexe 2 de la convention provisoire: cahier des charges'
+  start_date: 2000-10-20
+  expire_date: 2003-10-19
+  status: doc_valid
+  attachment: Annex_1549532971_lorema-convention-provisoire-d-exploitation-2019-01-31.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-07 09:49:31.098199000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-07 09:49:31.098199000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-21 17:26:33.720311000 Z
+    zone: *1
+    time: 2019-03-21 17:26:33.720311000 Z
+  public: true
+
+OperatorDocumentAnnex_31:
+  id: 10085
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_valid
+  attachment: Annex_1550748229_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-21 11:23:49.024589000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-21 11:23:49.024589000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-21 17:27:13.611735000 Z
+    zone: *1
+    time: 2019-03-21 17:27:13.611735000 Z
+  public: true
+
+OperatorDocumentAnnex_32:
+  id: 10086
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_valid
+  attachment: Annex_1550748794_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-12.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-21 11:33:14.864514000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-21 11:33:14.864514000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-21 17:22:58.944575000 Z
+    zone: *1
+    time: 2019-03-21 17:22:58.944575000 Z
+  public: true
+
+OperatorDocumentAnnex_33:
+  id: 10091
+  name: 'Annexe 2 de la convention provisoire: cahier des charges'
+  start_date: 2000-10-20
+  expire_date: 2003-10-19
+  status: doc_valid
+  attachment: Annex_1550756421_lorema-convention-provisoire-d-exploitation-2019-01-31.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-21 13:40:21.040769000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-21 13:40:21.040769000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-21 17:22:46.081095000 Z
+    zone: *1
+    time: 2019-03-21 17:22:46.081095000 Z
+  public: true
+
+OperatorDocumentAnnex_34:
+  id: 10113
+  name: 'Annexe 2 de la convention provisoire: cahier des charges'
+  start_date: 2013-11-27
+  expire_date: 2014-05-15
+  status: doc_valid
+  attachment: Annex_1551087836_siencam-convention-provisoire-d-exploitation-2019-02-25.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-02-25 09:43:56.961365000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-02-25 09:43:56.961365000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-21 17:15:06.319936000 Z
+    zone: *1
+    time: 2019-03-21 17:15:06.319936000 Z
+  public: true
+
+OperatorDocumentAnnex_35:
+  id: 20005
+  name: procès verbal élections des déglués ufa 00004
+  start_date: 2018-03-01
+  expire_date: 2020-02-29
+  status: doc_valid
+  attachment: Annex_1555666974_siencam-proces-verbal-d-election-des-delegues-du-personnel-2019-04-19.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-04-19 09:42:54.130849000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-04-19 09:42:54.130849000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-05-06 13:36:55.032342000 Z
+    zone: *1
+    time: 2019-05-06 13:36:55.032342000 Z
+  public: true
+
+OperatorDocumentAnnex_36:
+  id: 20006
+  name: ACTE DE CRÉATION COMITÉ HYGIÈNE ET SÉCURITÉ AU TRAVAIL UFA 00004
+  start_date: 2016-01-21
+  expire_date: 2111-12-11
+  status: doc_valid
+  attachment: Annex_1555668212_siencam-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-2019-04-19.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-04-19 10:03:32.900491000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-04-19 10:03:32.900491000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-05-06 13:36:43.160803000 Z
+    zone: *1
+    time: 2019-05-06 13:36:43.160803000 Z
+  public: true
+
+OperatorDocumentAnnex_37:
+  id: 20030
+  name: 'Arrêté d''approbation dela CAT Mimbeli-Ibenga '
+  start_date: 2016-04-06
+  status: doc_valid
+  attachment: Annex_1557169475_cib-convention-d-amenagement-et-de-transformation-cat-2019-05-06.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-05-06 19:04:35.543784000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-05-06 19:04:35.543784000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-05-07 15:37:05.869313000 Z
+    zone: *1
+    time: 2019-05-07 15:37:05.869313000 Z
+  public: true
+
+OperatorDocumentAnnex_38:
+  id: 20032
+  name: " annex  Modèle de marteau déposé et enregistré"
+  start_date: 2016-08-11
+  expire_date: 2115-08-11
+  status: doc_valid
+  attachment: Annex_1557245295_cft-modele-de-marteau-depose-et-enregistre-2019-05-07.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-05-07 16:08:15.596842000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-05-07 16:08:15.596842000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-05-07 16:10:47.172541000 Z
+    zone: *1
+    time: 2019-05-07 16:10:47.172541000 Z
+  public: true
+
+OperatorDocumentAnnex_39:
+  id: 20041
+  name: PCIBO de l'AAC3 2018
+  start_date: 2018-04-06
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1559044068_cft-permis-de-coupe-industrielle-pcibo-2019-05-28.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-05-28 11:47:48.040879000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-05-28 11:47:48.040879000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-06-12 16:00:04.067805000 Z
+    zone: *1
+    time: 2019-06-12 16:00:04.067805000 Z
+  public: true
+
+OperatorDocumentAnnex_40:
+  id: 20077
+  name: Lettre circulaire de maintien des délégués du personnel de 2013
+  start_date: 2020-01-01
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1579366577_ifo-interholco-proces-verbal-d-elections-professionnelles-2020-01-18.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-01-18 16:56:17.843309000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-01-18 16:56:17.843309000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:11:18.235446000 Z
+    zone: *1
+    time: 2020-03-16 04:11:18.235446000 Z
+
+OperatorDocumentAnnex_41:
+  id: 20083
+  name: Lettre circulaire de prolongation du mandat des délégués du personnel
+  start_date: 2016-11-23
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1581159013_sifco-proces-verbal-d-elections-professionnelles-2020-02-08.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-02-08 10:50:13.153300000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-02-08 10:50:13.153300000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-16 04:10:27.460290000 Z
+    zone: *1
+    time: 2020-03-16 04:10:27.460290000 Z
+
+OperatorDocumentAnnex_42:
+  id: 20091
+  name: ACA 2019 Nkola
+  start_date: 2018-12-15
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1584571933_afriwood-industries-autorisation-de-coupe-d-achevement-2020-03-18.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-18 22:52:13.509456000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-03-18 22:52:13.509456000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-04-12 16:40:37.703512000 Z
+    zone: *1
+    time: 2020-04-12 16:40:37.703512000 Z
+
+OperatorDocumentAnnex_43:
+  id: 20092
+  name: Demande de retour au domaine des concessions Doumanga et Cayo
+  start_date: 2019-04-08
+  expire_date: 2027-08-23
+  status: doc_valid
+  attachment: Annex_1584623530_afriwood-industries-convention-de-transformation-industrielle-cti-2020-03-19.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-19 13:12:10.980369000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-03-19 13:12:10.980369000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-04-12 16:40:32.283079000 Z
+    zone: *1
+    time: 2020-04-12 16:40:32.283079000 Z
+
+OperatorDocumentAnnex_44:
+  id: 20093
+  name: Afriwood-avenant de la CAT de l'UFE Nkola
+  start_date: 2017-05-30
+  expire_date: 2031-04-05
+  status: doc_valid
+  attachment: Annex_1584629792_afriwood-industries-convention-d-amenagement-et-de-transformation-cat-2020-03-19.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-19 14:56:32.985985000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-03-19 14:56:32.985985000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-04-12 16:40:26.395676000 Z
+    zone: *1
+    time: 2020-04-12 16:40:26.395676000 Z
+
+OperatorDocumentAnnex_45:
+  id: 20095
+  name: Etat de production Nkola 2019
+  start_date: 2019-01-01
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1584786223_afriwood-industries-etat-de-production-de-l-annee-d-achevement-2020-03-21.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-03-21 10:23:43.081973000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-03-21 10:23:43.081973000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-04-12 16:40:14.312100000 Z
+    zone: *1
+    time: 2020-04-12 16:40:14.312100000 Z
+
+OperatorDocumentAnnex_46:
+  id: 20152
+  name: 'IFO-Ngombé-Cahier de charges particulier de l''arrêté n°10357 '
+  start_date: 2008-12-31
+  expire_date: 2033-12-30
+  status: doc_valid
+  attachment: Annex_1590056898_ifo-interholco-etat-de-realisation-du-cahier-des-charges-2020-05-21.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-05-21 10:28:18.818242000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-05-21 10:28:18.818242000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-06-03 15:49:28.644672000 Z
+    zone: *1
+    time: 2020-06-03 15:49:28.644672000 Z
+
+OperatorDocumentAnnex_47:
+  id: 20160
+  name: COUTURIER
+  start_date: 2020-01-01
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1590857797_ifo-interholco-patente-2020-05-22.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-05-30 16:56:37.629806000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-05-30 16:56:37.629806000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-06-03 15:48:31.550386000 Z
+    zone: *1
+    time: 2020-06-03 15:48:31.550386000 Z
+
+OperatorDocumentAnnex_48:
+  id: 20172
+  name: 'Certificat de conformité environnementale '
+  start_date: 2020-08-21
+  expire_date: 2021-08-20
+  status: doc_valid
+  attachment: Annex_1599755353_ifo-etude_d_impact_environementale_et_sociale__base-vie_-2018-01-12.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-09-10 16:29:13.772267000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-09-10 16:29:13.772267000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-21 13:17:47.933183000 Z
+    zone: *1
+    time: 2020-11-21 13:17:47.933183000 Z
+
+OperatorDocumentAnnex_49:
+  id: 20186
+  name: Lettre circulaire n° 002 du ministre du travail et de la sécurité sociale
+    portant report des élections des délégués du personnel pour le compte de l'année
+    2020
+  start_date: 2020-03-19
+  expire_date: 2021-03-19
+  status: doc_valid
+  attachment: Annex_1604566418_cfc-proces-verbal-d-election-des-delegues-du-personnel-2020-11-05.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-05 08:53:38.575108000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-11-05 08:53:38.575108000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-21 13:17:23.526752000 Z
+    zone: *1
+    time: 2020-11-21 13:17:23.526752000 Z
+
+OperatorDocumentAnnex_50:
+  id: 20187
+  name: Procès verbal de réorganisation des membres du comité d'hygiène, santé et
+    sécurité au travail
+  start_date: 2020-07-02
+  expire_date: 2020-07-02
+  status: doc_valid
+  attachment: Annex_1604654975_sebc-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-06 09:29:35.367231000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-11-06 09:29:35.367231000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-21 13:17:20.134823000 Z
+    zone: *1
+    time: 2020-11-21 13:17:20.134823000 Z
+
+OperatorDocumentAnnex_51:
+  id: 20188
+  name: Lettre circulaire du ministre du travail et de la sécurité sociale portant
+    sur le report des élections des délégués du personnel.
+  start_date: 2020-03-19
+  expire_date: 2021-03-19
+  status: doc_valid
+  attachment: Annex_1604655537_sebc-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-06 09:38:57.297743000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-11-06 09:38:57.297743000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-21 13:17:14.866932000 Z
+    zone: *1
+    time: 2020-11-21 13:17:14.866932000 Z
+
+OperatorDocumentAnnex_52:
+  id: 20189
+  name: Procès verbal de réorganisation des membres du comité d'hygiène, santé et
+    sécurité au travail
+  start_date: 2020-07-02
+  expire_date: 2022-07-02
+  status: doc_valid
+  attachment: Annex_1604674027_sab-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-06 14:47:07.577134000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-11-06 14:47:07.577134000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-21 13:17:17.944366000 Z
+    zone: *1
+    time: 2020-11-21 13:17:17.944366000 Z
+
+OperatorDocumentAnnex_53:
+  id: 20190
+  name: Lettre circulaire du ministre du travail et de la sécurité sociale portant
+    sur le report des élections des délégués du personnel.
+  start_date: 2020-03-19
+  expire_date: 2021-03-19
+  status: doc_valid
+  attachment: Annex_1604674337_sab-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-06 14:52:17.978468000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2020-11-06 14:52:17.978468000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2020-11-21 13:20:43.536564000 Z
+    zone: *1
+    time: 2020-11-21 13:20:43.536564000 Z
+
+OperatorDocumentAnnex_54:
+  id: 100059
+  name: AGREMENT PËRSONNEL CMS NGOMBE
+  start_date: 2021-01-28
+  expire_date: 2026-01-27
+  status: doc_valid
+  attachment: Annex_1616426392_ifo-interholco-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2020-12-21.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-03-22 15:19:52.262719000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-03-22 15:19:52.262719000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-03-23 01:00:16.807337000 Z
+    zone: *1
+    time: 2021-03-23 01:00:16.807337000 Z
+
+OperatorDocumentAnnex_55:
+  id: 100094
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147058_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-04 16:50:58.569375000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-04 16:50:58.569375000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:21:10.660817000 Z
+    zone: *1
+    time: 2022-01-21 11:21:10.660817000 Z
+
+OperatorDocumentAnnex_56:
+  id: 100095
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147132_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-04 16:52:12.029279000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-04 16:52:12.029279000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:20:58.912002000 Z
+    zone: *1
+    time: 2022-01-21 11:20:58.912002000 Z
+
+OperatorDocumentAnnex_57:
+  id: 100096
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147226_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-04 16:53:46.133560000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-04 16:53:46.133560000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:20:50.874052000 Z
+    zone: *1
+    time: 2022-01-21 11:20:50.874052000 Z
+
+OperatorDocumentAnnex_58:
+  id: 100097
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147309_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-04 16:55:09.537981000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-04 16:55:09.537981000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:20:47.256158000 Z
+    zone: *1
+    time: 2022-01-21 11:20:47.256158000 Z
+
+OperatorDocumentAnnex_59:
+  id: 100098
+  name: Identification nationale RCCM Kinshasa
+  start_date: 2020-12-08
+  expire_date: 2119-12-08
+  status: doc_valid
+  attachment: Annex_1620300360_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-06 11:26:00.758608000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-06 11:26:00.758608000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:20:43.207748000 Z
+    zone: *1
+    time: 2022-01-21 11:20:43.207748000 Z
+
+OperatorDocumentAnnex_60:
+  id: 100100
+  name: Certificat de radiation RCCM Kisangani
+  start_date: 2020-10-02
+  expire_date: 2119-10-02
+  status: doc_valid
+  attachment: Annex_1620302315_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-06 11:58:35.727135000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-06 11:58:35.727135000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:20:37.874127000 Z
+    zone: *1
+    time: 2022-01-21 11:20:37.874127000 Z
+
+OperatorDocumentAnnex_61:
+  id: 100102
+  name: RCCM Kinshasa
+  start_date: 2020-10-28
+  expire_date: 2119-10-28
+  status: doc_valid
+  attachment: Annex_1620302735_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-06 12:05:35.945523000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-06 12:05:35.945523000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:20:30.454447000 Z
+    zone: *1
+    time: 2022-01-21 11:20:30.454447000 Z
+
+OperatorDocumentAnnex_62:
+  id: 100105
+  name: Preuve paiement Patente 2021
+  start_date: 2021-04-01
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1620319958_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-06 16:52:38.881665000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-06 16:52:38.881665000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:19:28.655544000 Z
+    zone: *1
+    time: 2022-01-21 11:19:28.655544000 Z
+
+OperatorDocumentAnnex_63:
+  id: 100110
+  name: l'avenant n°1 de l'accord constituant la clause sociale du cahier des charges
+    du contrat de concession forestière 005/18 du 26 novembre 2018
+  start_date: 2019-12-21
+  expire_date: 2025-12-21
+  status: doc_valid
+  attachment: Annex_1620396112_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-07 14:01:52.659726000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-07 14:01:52.659726000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:18:40.485626000 Z
+    zone: *1
+    time: 2022-01-21 11:18:40.485626000 Z
+
+OperatorDocumentAnnex_64:
+  id: 100111
+  name: mise à jour de numéro d'impôt
+  start_date: 2021-01-08
+  expire_date: 2120-01-08
+  status: doc_valid
+  attachment: Annex_1620400833_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-07 15:20:33.715050000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-07 15:20:33.715050000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:18:36.401109000 Z
+    zone: *1
+    time: 2022-01-21 11:18:36.401109000 Z
+
+OperatorDocumentAnnex_65:
+  id: 100112
+  name: mise à jour de certificat d'affiliation de la CFT à la CNSS Kisangani ex INSS
+  start_date: 2019-12-05
+  expire_date: 2118-12-05
+  status: doc_valid
+  attachment: Annex_1620402903_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-07 15:55:03.987726000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-07 15:55:03.987726000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:18:29.093553000 Z
+    zone: *1
+    time: 2022-01-21 11:18:29.093553000 Z
+
+OperatorDocumentAnnex_66:
+  id: 100113
+  name: mise à jour de certificat d'affiliation de la CFT à la CNSS Kinshasa ex INSS
+  start_date: 2019-11-21
+  expire_date: 2118-11-21
+  status: doc_valid
+  attachment: Annex_1620403208_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-07 16:00:08.735817000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-07 16:00:08.735817000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:18:22.159045000 Z
+    zone: *1
+    time: 2022-01-21 11:18:22.159045000 Z
+
+OperatorDocumentAnnex_67:
+  id: 100115
+  name: Preuve de paiement de la taxe sur le permis de coupe de bois d'œuvre de l'AAC1
+    de la SSA005/18 exercice 2019
+  start_date: 2019-01-30
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1620405844_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-07 16:44:04.945260000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-07 16:44:04.945260000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:17:53.355489000 Z
+    zone: *1
+    time: 2022-01-21 11:17:53.355489000 Z
+
+OperatorDocumentAnnex_68:
+  id: 100116
+  name: Etat Réalisation Cahier de charges
+  start_date: 2008-12-31
+  expire_date: 2033-12-30
+  status: doc_valid
+  attachment: Annex_1620664874_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-10 16:41:14.561644000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-10 16:41:14.561644000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:17:43.092238000 Z
+    zone: *1
+    time: 2022-01-21 11:17:43.092238000 Z
+
+OperatorDocumentAnnex_69:
+  id: 100118
+  name: Patente 2020
+  start_date: 2020-04-01
+  expire_date: 2021-03-21
+  status: doc_valid
+  attachment: Annex_1621279095_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-17 19:18:15.247028000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-17 19:18:15.247028000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:17:10.275798000 Z
+    zone: *1
+    time: 2022-01-21 11:17:10.275798000 Z
+
+OperatorDocumentAnnex_70:
+  id: 100120
+  name: Certificat d'origine
+  start_date: 2021-02-16
+  expire_date: 2021-08-16
+  status: doc_valid
+  attachment: Annex_1621936379_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-25 09:52:59.671942000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-25 09:52:59.671942000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:16:59.933868000 Z
+    zone: *1
+    time: 2022-01-21 11:16:59.933868000 Z
+
+OperatorDocumentAnnex_71:
+  id: 100122
+  name: Attestation de Fin d'Activité et RAIF aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622042454_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 15:20:54.083966000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 15:20:54.083966000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:16:26.828069000 Z
+    zone: *1
+    time: 2022-01-21 11:16:26.828069000 Z
+
+OperatorDocumentAnnex_72:
+  id: 100123
+  name: Attestation de Fin d'activité
+  start_date: 2021-01-15
+  expire_date: 2021-01-15
+  status: doc_valid
+  attachment: Annex_1622042854_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 15:27:34.296871000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 15:27:34.296871000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:16:23.828438000 Z
+    zone: *1
+    time: 2022-01-21 11:16:23.828438000 Z
+
+OperatorDocumentAnnex_73:
+  id: 100124
+  name: Rapport annuel d'Intervention aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622049512_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 17:18:32.461925000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 17:18:32.461925000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:16:20.478352000 Z
+    zone: *1
+    time: 2022-01-21 11:16:20.478352000 Z
+
+OperatorDocumentAnnex_74:
+  id: 100125
+  name: attestation de Fin d'activité aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622049586_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 17:19:46.880998000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 17:19:46.880998000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:16:11.414630000 Z
+    zone: *1
+    time: 2022-01-21 11:16:11.414630000 Z
+
+OperatorDocumentAnnex_75:
+  id: 100126
+  name: Rapport Annuel d'intervention Forestière
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622049940_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 17:25:40.657799000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 17:25:40.657799000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:16:04.558043000 Z
+    zone: *1
+    time: 2022-01-21 11:16:04.558043000 Z
+
+OperatorDocumentAnnex_76:
+  id: 100127
+  name: Attestation de Fin d'Activité
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622050089_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 17:28:09.613247000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 17:28:09.613247000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:16:01.360521000 Z
+    zone: *1
+    time: 2022-01-21 11:16:01.360521000 Z
+
+OperatorDocumentAnnex_77:
+  id: 100129
+  name: Rapport Annuel d'Intervention annuel aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622050571_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 17:36:11.319996000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 17:36:11.319996000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:15:55.620933000 Z
+    zone: *1
+    time: 2022-01-21 11:15:55.620933000 Z
+
+OperatorDocumentAnnex_78:
+  id: 100130
+  name: Attestation de fin d'activité aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622050756_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-26 17:39:16.310906000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-26 17:39:16.310906000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:15:50.369392000 Z
+    zone: *1
+    time: 2022-01-21 11:15:50.369392000 Z
+
+OperatorDocumentAnnex_79:
+  id: 100131
+  name: Contrat de partenariat SAB et SEBC pour la transformation des Grumes
+  start_date: 2008-05-27
+  expire_date: 2038-05-26
+  status: doc_valid
+  attachment: Annex_1622280634_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-29 09:30:34.814215000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-29 09:30:34.814215000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:15:46.908801000 Z
+    zone: *1
+    time: 2022-01-21 11:15:46.908801000 Z
+
+OperatorDocumentAnnex_80:
+  id: 100132
+  name: Contrat de partenariat SEBC-SAB pour la transfoermation du bois
+  start_date: 2008-05-27
+  expire_date: 2038-05-26
+  status: doc_valid
+  attachment: Annex_1622280947_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-05-29 09:35:47.043760000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-05-29 09:35:47.043760000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 11:15:43.728800000 Z
+    zone: *1
+    time: 2022-01-21 11:15:43.728800000 Z
+
+OperatorDocumentAnnex_81:
+  id: 100154
+  name: Lettre de transfert et d'attribution des UFA 00 004  et 11 004 à SIENCAM
+  start_date: 2013-11-20
+  status: doc_valid
+  attachment: Annex_1623313526_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-10 08:25:26.372973000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-10 08:25:26.372973000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:30:28.243353000 Z
+    zone: *1
+    time: 2022-01-21 08:30:28.243353000 Z
+
+OperatorDocumentAnnex_82:
+  id: 100156
+  name: Lettre d'attribution et de transfert de l'UFA 00 004 à SIENCAM
+  start_date: 2013-11-20
+  status: doc_valid
+  attachment: Annex_1623313941_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-10 08:32:21.592599000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-10 08:32:21.592599000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:30:22.788768000 Z
+    zone: *1
+    time: 2022-01-21 08:30:22.788768000 Z
+
+OperatorDocumentAnnex_83:
+  id: 100157
+  name: Lettre d'attribution et de transfert de l'UFA 11 001 à SIENCAM
+  start_date: 2013-11-20
+  status: doc_valid
+  attachment: Annex_1623314292_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-10 08:38:12.361698000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-10 08:38:12.361698000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:30:16.260552000 Z
+    zone: *1
+    time: 2022-01-21 08:30:16.260552000 Z
+
+OperatorDocumentAnnex_84:
+  id: 100193
+  name: 'Certificat de non activités ACC 1-2 (2018) '
+  start_date: 2019-01-29
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1623937218_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-17 13:40:18.648191000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-17 13:40:18.648191000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-22 08:52:24.306776000 Z
+    zone: *1
+    time: 2021-06-22 08:52:24.306776000 Z
+
+OperatorDocumentAnnex_85:
+  id: 100194
+  name: Permis Annuel d'opération AAC 1--2 (2018)
+  start_date: 2017-12-18
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1623937403_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-17 13:43:23.421251000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-17 13:43:23.421251000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-22 08:52:21.877405000 Z
+    zone: *1
+    time: 2021-06-22 08:52:21.877405000 Z
+
+OperatorDocumentAnnex_86:
+  id: 100195
+  name: 'Quitance de paiement des RFA (3 Tranches) 2020 '
+  start_date: 2020-10-07
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1623938014_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-17 13:53:34.899498000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-17 13:53:34.899498000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-22 08:52:19.276782000 Z
+    zone: *1
+    time: 2021-06-22 08:52:19.276782000 Z
+
+OperatorDocumentAnnex_87:
+  id: 100196
+  name: Quitances Paiement RFA (3Tranches) 2020
+  start_date: 2020-10-07
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1623938171_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-17 13:56:11.527092000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-17 13:56:11.527092000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-22 08:52:15.688716000 Z
+    zone: *1
+    time: 2021-06-22 08:52:15.688716000 Z
+
+OperatorDocumentAnnex_88:
+  id: 100198
+  name: 'Permis Annuel d''opération AAC 1-2  (2018) '
+  start_date: 2017-12-18
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1623939019_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-17 14:10:19.303753000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-17 14:10:19.303753000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-22 08:51:51.316397000 Z
+    zone: *1
+    time: 2021-06-22 08:51:51.316397000 Z
+
+OperatorDocumentAnnex_89:
+  id: 100206
+  name: 'Certificat d''enregistrement en qualité d''exportatteur de bois transformé '
+  start_date: 2021-02-10
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1625060486_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-06-30 13:41:26.614348000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-06-30 13:41:26.614348000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-07-02 12:20:01.120621000 Z
+    zone: *1
+    time: 2021-07-02 12:20:01.120621000 Z
+
+OperatorDocumentAnnex_90:
+  id: 100207
+  name: Attestation de Respect des Normes d'Exploitation Forestières
+  start_date: 2021-07-22
+  expire_date: 2022-07-22
+  status: doc_valid
+  attachment: Annex_1627491945_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-07-28 17:05:45.767845000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-07-28 17:05:45.767845000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:28:43.540327000 Z
+    zone: *1
+    time: 2022-01-21 08:28:43.540327000 Z
+
+OperatorDocumentAnnex_91:
+  id: 100208
+  name: Cahier de Charges de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630946660_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-09-06 16:44:20.048179000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-09-06 16:44:20.048179000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:28:36.413204000 Z
+    zone: *1
+    time: 2022-01-21 08:28:36.413204000 Z
+
+OperatorDocumentAnnex_92:
+  id: 100209
+  name: Cahier des Charges de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630947523_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-09-06 16:58:43.624633000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-09-06 16:58:43.624633000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:28:33.457615000 Z
+    zone: *1
+    time: 2022-01-21 08:28:33.457615000 Z
+
+OperatorDocumentAnnex_93:
+  id: 100210
+  name: Cahier de Charges de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630947695_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-09-06 17:01:35.505330000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-09-06 17:01:35.505330000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:28:30.720345000 Z
+    zone: *1
+    time: 2022-01-21 08:28:30.720345000 Z
+
+OperatorDocumentAnnex_94:
+  id: 100211
+  name: Cahier de Charge de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630948073_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-09-06 17:07:53.244425000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-09-06 17:07:53.244425000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:28:27.701823000 Z
+    zone: *1
+    time: 2022-01-21 08:28:27.701823000 Z
+
+OperatorDocumentAnnex_95:
+  id: 100215
+  name: Etude Impact Site industriel
+  start_date: 2020-01-01
+  expire_date: 2036-12-31
+  status: doc_valid
+  attachment: Annex_1634198428_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-10-14 08:00:28.150960000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-10-14 08:00:28.150960000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:28:12.490321000 Z
+    zone: *1
+    time: 2022-01-21 08:28:12.490321000 Z
+
+OperatorDocumentAnnex_96:
+  id: 100222
+  name: Décharge demande acte de création CHST
+  start_date: 2021-12-14
+  expire_date: 2022-02-14
+  status: doc_valid
+  attachment: Annex_1640946909_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2021-12-31 10:35:09.406711000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2021-12-31 10:35:09.406711000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:27:31.275820000 Z
+    zone: *1
+    time: 2022-01-21 08:27:31.275820000 Z
+
+OperatorDocumentAnnex_97:
+  id: 100225
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642492796_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 07:59:56.988459000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 07:59:56.988459000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-29 20:50:02.228342000 Z
+    zone: *1
+    time: 2022-03-29 20:50:02.228342000 Z
+
+OperatorDocumentAnnex_98:
+  id: 100226
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642492928_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:02:08.160935000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:02:08.160935000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:26:57.880599000 Z
+    zone: *1
+    time: 2022-01-21 08:26:57.880599000 Z
+
+OperatorDocumentAnnex_99:
+  id: 100227
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493047_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:04:07.133473000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:04:07.133473000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:26:14.892414000 Z
+    zone: *1
+    time: 2022-01-21 08:26:14.892414000 Z
+
+OperatorDocumentAnnex_100:
+  id: 100228
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493111_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:05:11.268930000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:05:11.268930000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:25:51.126459000 Z
+    zone: *1
+    time: 2022-01-21 08:25:51.126459000 Z
+
+OperatorDocumentAnnex_101:
+  id: 100229
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493217_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:06:57.513308000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:06:57.513308000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:24:59.022178000 Z
+    zone: *1
+    time: 2022-01-21 08:24:59.022178000 Z
+
+OperatorDocumentAnnex_102:
+  id: 100230
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493418_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:10:18.634037000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:10:18.634037000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:24:08.529531000 Z
+    zone: *1
+    time: 2022-01-21 08:24:08.529531000 Z
+
+OperatorDocumentAnnex_103:
+  id: 100231
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-25
+  status: doc_valid
+  attachment: Annex_1642493479_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:11:19.934961000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:11:19.934961000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:23:22.640428000 Z
+    zone: *1
+    time: 2022-01-21 08:23:22.640428000 Z
+
+OperatorDocumentAnnex_104:
+  id: 100232
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493548_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:12:28.740311000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:12:28.740311000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:22:51.319118000 Z
+    zone: *1
+    time: 2022-01-21 08:22:51.319118000 Z
+
+OperatorDocumentAnnex_105:
+  id: 100233
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493739_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:15:39.123154000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:15:39.123154000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:22:16.434319000 Z
+    zone: *1
+    time: 2022-01-21 08:22:16.434319000 Z
+
+OperatorDocumentAnnex_106:
+  id: 100234
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493798_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-18 08:16:38.495346000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-01-18 08:16:38.495346000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-01-21 08:21:45.909545000 Z
+    zone: *1
+    time: 2022-01-21 08:21:45.909545000 Z
+
+OperatorDocumentAnnex_107:
+  id: 100281
+  name: carte professionnelle DG
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1646073464_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-02-28 18:37:44.306826000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-02-28 18:37:44.306826000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-03 15:52:55.579986000 Z
+    zone: *1
+    time: 2022-03-03 15:52:55.579986000 Z
+
+OperatorDocumentAnnex_108:
+  id: 100282
+  name: Plan de Gestion UFP4 2022-2027
+  start_date: 2022-01-01
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1646073621_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-02-28 18:40:21.273406000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-02-28 18:40:21.273406000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-03 15:52:53.283471000 Z
+    zone: *1
+    time: 2022-03-03 15:52:53.283471000 Z
+
+OperatorDocumentAnnex_109:
+  id: 100285
+  name: Arrêté d'autorisation d'ouverture du site industriel IFO
+  start_date: 2021-07-02
+  expire_date: 2031-07-01
+  status: doc_valid
+  attachment: Annex_1646073954_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-02-28 18:45:54.326649000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-02-28 18:45:54.326649000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-03 15:52:45.429880000 Z
+    zone: *1
+    time: 2022-03-03 15:52:45.429880000 Z
+
+OperatorDocumentAnnex_110:
+  id: 100288
+  name: Exemple de déclaration en douanes pour exportation produit débités séchés
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1646074211_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-02-28 18:50:11.364889000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-02-28 18:50:11.364889000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-03 15:52:38.379783000 Z
+    zone: *1
+    time: 2022-03-03 15:52:38.379783000 Z
+
+OperatorDocumentAnnex_111:
+  id: 100291
+  name: Extrait registre partenaires sociaux
+  start_date: 2022-01-01
+  expire_date: 2022-06-30
+  status: doc_valid
+  attachment: Annex_1646074506_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-02-28 18:55:06.140565000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-02-28 18:55:06.140565000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-03 15:52:31.164185000 Z
+    zone: *1
+    time: 2022-03-03 15:52:31.164185000 Z
+
+OperatorDocumentAnnex_112:
+  id: 100292
+  name: Courier transmission Plan de Gestion
+  start_date: 2022-01-01
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1646125211_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-01 09:00:11.889100000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-03-01 09:00:11.889100000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-03 15:52:28.837742000 Z
+    zone: *1
+    time: 2022-03-03 15:52:28.837742000 Z
+
+OperatorDocumentAnnex_113:
+  id: 100294
+  name: Accuse de reception du Plan de gestion UFP 4
+  start_date: 2022-01-01
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1646125391_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-01 09:03:11.489387000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-03-01 09:03:11.489387000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-03 15:52:26.570001000 Z
+    zone: *1
+    time: 2022-03-03 15:52:26.570001000 Z
+
+OperatorDocumentAnnex_114:
+  id: 100323
+  name: Taxes d'Abattage 2021
+  start_date: 2021-01-01
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1646850518_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-09 18:28:38.801722000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-03-09 18:28:38.801722000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-10 03:36:15.341649000 Z
+    zone: *1
+    time: 2022-03-10 03:36:15.341649000 Z
+
+OperatorDocumentAnnex_115:
+  id: 100333
+  name: Etats de production année 2021 échue
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1646908115_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-10 10:28:35.343666000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-03-10 10:28:35.343666000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-03-15 00:29:13.760436000 Z
+    zone: *1
+    time: 2022-03-15 00:29:13.760436000 Z
+
+OperatorDocumentAnnex_116:
+  id: 100415
+  name: Contrat de sous traitance CFC-SAB
+  start_date: 2021-10-20
+  expire_date: 2032-10-20
+  status: doc_valid
+  attachment: Annex_1649088861_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-04 16:14:21.196089000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-04 16:14:21.196089000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-06 03:36:37.685689000 Z
+    zone: *1
+    time: 2022-04-06 03:36:37.685689000 Z
+
+OperatorDocumentAnnex_117:
+  id: 100416
+  name: Contrat sous-traitance CFC-SAB
+  start_date: 2021-10-20
+  expire_date: 2032-10-20
+  status: doc_valid
+  attachment: Annex_1649089376_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-04 16:22:56.939369000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-04 16:22:56.939369000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-06 03:36:34.140592000 Z
+    zone: *1
+    time: 2022-04-06 03:36:34.140592000 Z
+
+OperatorDocumentAnnex_118:
+  id: 100460
+  name: Certificat de non activité
+  start_date: 2018-01-01
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1650880366_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-25 09:52:46.811326000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-25 09:52:46.811326000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:58:14.376992000 Z
+    zone: *1
+    time: 2022-05-14 15:58:14.376992000 Z
+
+OperatorDocumentAnnex_119:
+  id: 100461
+  name: Arrêté d'attribution (compensation)
+  start_date: 2018-09-07
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1650880511_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-25 09:55:11.326710000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-25 09:55:11.326710000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:57:36.492400000 Z
+    zone: *1
+    time: 2022-05-14 15:57:36.492400000 Z
+
+OperatorDocumentAnnex_120:
+  id: 100482
+  name: Certificat de non activité
+  start_date: 2019-01-23
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1650884371_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-25 10:59:31.854324000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-25 10:59:31.854324000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:56:38.495335000 Z
+    zone: *1
+    time: 2022-05-14 15:56:38.495335000 Z
+
+OperatorDocumentAnnex_121:
+  id: 100483
+  name: Certificat de non activité
+  start_date: 2019-01-22
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1650884558_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-25 11:02:38.883203000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-25 11:02:38.883203000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:56:35.455579000 Z
+    zone: *1
+    time: 2022-05-14 15:56:35.455579000 Z
+
+OperatorDocumentAnnex_122:
+  id: 100486
+  name: Contrat de cession SIENCAM-SEFECCAM
+  start_date: 2015-04-15
+  expire_date: 2025-04-15
+  status: doc_valid
+  attachment: Annex_1650891692_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-25 13:01:32.784018000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-25 13:01:32.784018000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:56:22.536099000 Z
+    zone: *1
+    time: 2022-05-14 15:56:22.536099000 Z
+
+OperatorDocumentAnnex_123:
+  id: 100565
+  name: Télédéclaration du Personnel CNPS
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1651304838_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-30 07:47:18.999724000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-30 07:47:18.999724000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:51:53.644144000 Z
+    zone: *1
+    time: 2022-05-14 15:51:53.644144000 Z
+
+OperatorDocumentAnnex_124:
+  id: 100566
+  name: Télédéclaration CNPS
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1651305103_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-04-30 07:51:43.370210000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-04-30 07:51:43.370210000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:51:51.516347000 Z
+    zone: *1
+    time: 2022-05-14 15:51:51.516347000 Z
+
+OperatorDocumentAnnex_125:
+  id: 100602
+  name: AUTORISATION DE COUPE ANNUELLE 2022
+  start_date: 2022-01-03
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1651590645_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-03 15:10:45.113163000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-03 15:10:45.113163000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:44.207778000 Z
+    zone: *1
+    time: 2022-05-14 15:50:44.207778000 Z
+
+OperatorDocumentAnnex_126:
+  id: 100603
+  name: CERTIFICAT D'AGREMENT FORESTIER
+  start_date: 2021-07-28
+  expire_date: 2022-07-27
+  status: doc_valid
+  attachment: Annex_1651592230_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-03 15:37:10.568313000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-03 15:37:10.568313000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:42.279783000 Z
+    zone: *1
+    time: 2022-05-14 15:50:42.279783000 Z
+
+OperatorDocumentAnnex_127:
+  id: 100604
+  name: Liste de présences
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1651760434_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-05 14:20:34.607094000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-05 14:20:34.607094000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:40.376290000 Z
+    zone: *1
+    time: 2022-05-14 15:50:40.376290000 Z
+
+OperatorDocumentAnnex_128:
+  id: 100605
+  name: Compte rendu
+  start_date: 2022-05-10
+  expire_date: 2027-05-10
+  status: doc_valid
+  attachment: Annex_1652182514_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-10 11:35:14.089995000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-10 11:35:14.089995000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:38.320461000 Z
+    zone: *1
+    time: 2022-05-14 15:50:38.320461000 Z
+
+OperatorDocumentAnnex_129:
+  id: 100606
+  name: Plan de gestion UFP1 MI
+  start_date: 2022-05-10
+  expire_date: 2027-05-10
+  status: doc_valid
+  attachment: Annex_1652182587_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-10 11:36:27.710580000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-10 11:36:27.710580000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:36.139948000 Z
+    zone: *1
+    time: 2022-05-14 15:50:36.139948000 Z
+
+OperatorDocumentAnnex_130:
+  id: 100607
+  name: contrat de sous-traitance CFC-SAB
+  start_date: 2021-07-30
+  expire_date: 2035-07-30
+  status: doc_valid
+  attachment: Annex_1652438472_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-13 10:41:12.383680000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-13 10:41:12.383680000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:33.088636000 Z
+    zone: *1
+    time: 2022-05-14 15:50:33.088636000 Z
+
+OperatorDocumentAnnex_131:
+  id: 100608
+  name: Télédéclaration du personnel SAB
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1652438677_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-13 10:44:37.309825000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-13 10:44:37.309825000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:30.376703000 Z
+    zone: *1
+    time: 2022-05-14 15:50:30.376703000 Z
+
+OperatorDocumentAnnex_132:
+  id: 100609
+  name: Contrat de sous-traitance CFC- SAB
+  start_date: 2021-07-30
+  expire_date: 3035-07-30
+  status: doc_valid
+  attachment: Annex_1652438822_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-13 10:47:02.365476000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-13 10:47:02.365476000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:27.528166000 Z
+    zone: *1
+    time: 2022-05-14 15:50:27.528166000 Z
+
+OperatorDocumentAnnex_133:
+  id: 100610
+  name: Télédéclaration du Personnel SAB
+  start_date: 2022-04-14
+  status: doc_valid
+  attachment: Annex_1652438928_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-13 10:48:48.018576000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-05-13 10:48:48.018576000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-05-14 15:50:12.344191000 Z
+    zone: *1
+    time: 2022-05-14 15:50:12.344191000 Z
+
+OperatorDocumentAnnex_134:
+  id: 100623
+  name: Lettre CR commitée de suivi PG & PA
+  start_date: 2022-05-30
+  expire_date: 2023-05-29
+  status: doc_valid
+  attachment: Annex_1654069212_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-06-01 07:40:12.966357000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-06-01 07:40:12.966357000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-07-19 03:53:27.696500000 Z
+    zone: *1
+    time: 2022-07-19 03:53:27.696500000 Z
+
+OperatorDocumentAnnex_135:
+  id: 100624
+  name: Lettre CR commitée de suivi PG & PA
+  start_date: 2022-05-30
+  expire_date: 2023-05-29
+  status: doc_valid
+  attachment: Annex_1654069254_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-06-01 07:40:54.130718000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-06-01 07:40:54.130718000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-07-19 03:53:25.626484000 Z
+    zone: *1
+    time: 2022-07-19 03:53:25.626484000 Z
+
+OperatorDocumentAnnex_136:
+  id: 100656
+  name: A
+  start_date: 2022-01-01
+  expire_date: 2022-04-30
+  status: doc_valid
+  attachment: Annex_1659628171_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 15:49:31.694182000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-04 15:49:31.694182000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 18:01:31.153286000 Z
+    zone: *1
+    time: 2022-08-09 18:01:31.153286000 Z
+
+OperatorDocumentAnnex_137:
+  id: 100657
+  name: AUTORISATION D'EVACUATION DES BOIS DE LA COUPE ANNUELLE 2021
+  start_date: 2022-01-01
+  expire_date: 2022-04-30
+  status: doc_valid
+  attachment: Annex_1659628676_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 15:57:56.756659000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-04 15:57:56.756659000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 18:01:27.204091000 Z
+    zone: *1
+    time: 2022-08-09 18:01:27.204091000 Z
+
+OperatorDocumentAnnex_138:
+  id: 100658
+  name: ETAT DE PRODUCTION FEVRIER 2022
+  start_date: 2022-02-01
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1659629834_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 16:17:14.574582000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-04 16:17:14.574582000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 18:01:21.405691000 Z
+    zone: *1
+    time: 2022-08-09 18:01:21.405691000 Z
+
+OperatorDocumentAnnex_139:
+  id: 100659
+  name: ETAT DE PRODUCTION MARS 2022
+  start_date: 2022-03-01
+  expire_date: 2022-03-31
+  status: doc_valid
+  attachment: Annex_1659629938_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 16:18:58.572737000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-04 16:18:58.572737000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 18:01:51.821484000 Z
+    zone: *1
+    time: 2022-08-09 18:01:51.821484000 Z
+
+OperatorDocumentAnnex_140:
+  id: 100660
+  name: ETAT DE PRODUCTION AVRIL 2022
+  start_date: 2022-04-01
+  expire_date: 2022-01-30
+  status: doc_valid
+  attachment: Annex_1659630027_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 16:20:27.368800000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-04 16:20:27.368800000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 18:01:17.115095000 Z
+    zone: *1
+    time: 2022-08-09 18:01:17.115095000 Z
+
+OperatorDocumentAnnex_141:
+  id: 100661
+  name: ETAT DE PRODUCTION JUIN 2022
+  start_date: 2022-06-01
+  expire_date: 2022-06-30
+  status: doc_pending
+  attachment: Annex_1659630230_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 16:23:50.215027000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-04 16:23:50.215027000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 16:23:50.215027000 Z
+    zone: *1
+    time: 2022-08-04 16:23:50.215027000 Z
+
+OperatorDocumentAnnex_142:
+  id: 100662
+  name: PATENTE PERIODE 2020
+  start_date: 2020-01-02
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1659630719_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-04 16:31:59.181652000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-04 16:31:59.181652000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 17:59:33.776615000 Z
+    zone: *1
+    time: 2022-08-09 17:59:33.776615000 Z
+
+OperatorDocumentAnnex_143:
+  id: 100663
+  name: PAIEMENT TAXE DE DENBOISEMENT 2021
+  start_date: 2022-01-02
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1659686868_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-05 08:07:48.664149000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-05 08:07:48.664149000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 17:59:30.522035000 Z
+    zone: *1
+    time: 2022-08-09 17:59:30.522035000 Z
+
+OperatorDocumentAnnex_144:
+  id: 100664
+  name: PAIEMENT  TAXE D ABATTAGE JANVIER 2022
+  start_date: 2022-01-02
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1659687173_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-05 08:12:53.538682000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-05 08:12:53.538682000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 17:59:27.234445000 Z
+    zone: *1
+    time: 2022-08-09 17:59:27.234445000 Z
+
+OperatorDocumentAnnex_145:
+  id: 100665
+  name: PAIEMENT TAXE DE SUPERFICIE JANVIER ET FEVRIER 2022
+  start_date: 2022-02-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1659687302_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-05 08:15:02.388167000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-05 08:15:02.388167000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-09 17:59:23.804302000 Z
+    zone: *1
+    time: 2022-08-09 17:59:23.804302000 Z
+
+OperatorDocumentAnnex_146:
+  id: 100677
+  name: ETAT  DE PRODUCTION JUILLET 2022
+  start_date: 2022-08-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1660727552_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-08-17 09:12:32.816410000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-08-17 09:12:32.816410000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:30.972190000 Z
+    zone: *1
+    time: 2022-10-03 13:29:30.972190000 Z
+
+OperatorDocumentAnnex_147:
+  id: 100680
+  name: 'Preuve de réalisation du cahier de charge particulier '
+  start_date: 2022-08-22
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1663060154_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 09:09:14.919469000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 09:09:14.919469000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:21.814531000 Z
+    zone: *1
+    time: 2022-10-03 13:29:21.814531000 Z
+
+OperatorDocumentAnnex_148:
+  id: 100681
+  name: 'Lettre de validation du PG de UFP4 '
+  start_date: 2022-08-31
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1663062040_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 09:40:40.177310000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 09:40:40.177310000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:18.668910000 Z
+    zone: *1
+    time: 2022-10-03 13:29:18.668910000 Z
+
+OperatorDocumentAnnex_149:
+  id: 100682
+  name: Etat de production Achevement 2021
+  start_date: 2022-01-02
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663064688_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 10:24:48.942427000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 10:24:48.942427000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:13.373509000 Z
+    zone: *1
+    time: 2022-10-03 13:29:13.373509000 Z
+
+OperatorDocumentAnnex_150:
+  id: 100683
+  name: Lettre de transmission état de production
+  start_date: 2022-04-06
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663064834_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 10:27:14.681116000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 10:27:14.681116000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:10.094323000 Z
+    zone: *1
+    time: 2022-10-03 13:29:10.094323000 Z
+
+OperatorDocumentAnnex_151:
+  id: 100684
+  name: Lettre transmission état de production 2021
+  start_date: 2022-01-07
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663064936_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 10:28:56.346368000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 10:28:56.346368000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:07.005219000 Z
+    zone: *1
+    time: 2022-10-03 13:29:07.005219000 Z
+
+OperatorDocumentAnnex_152:
+  id: 100685
+  name: Patente 2022
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663065463_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 10:37:43.069202000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 10:37:43.069202000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:03.808223000 Z
+    zone: *1
+    time: 2022-10-03 13:29:03.808223000 Z
+
+OperatorDocumentAnnex_153:
+  id: 100686
+  name: Preuve de payement de la taxe de déboisement
+  start_date: 2022-06-01
+  expire_date: 2023-06-30
+  status: doc_valid
+  attachment: Annex_1663066274_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 10:51:14.782004000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 10:51:14.782004000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:29:00.724939000 Z
+    zone: *1
+    time: 2022-10-03 13:29:00.724939000 Z
+
+OperatorDocumentAnnex_154:
+  id: 100690
+  name: 'Bilan de UFP 3 '
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663079900_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 14:38:20.504236000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 14:38:20.504236000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:28:47.902055000 Z
+    zone: *1
+    time: 2022-10-03 13:28:47.902055000 Z
+
+OperatorDocumentAnnex_155:
+  id: 100691
+  name: 'Demande mission suivi PA '
+  start_date: 2022-09-02
+  expire_date: 2036-12-31
+  status: doc_valid
+  attachment: Annex_1663080094_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-13 14:41:34.293641000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-13 14:41:34.293641000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:28:44.780934000 Z
+    zone: *1
+    time: 2022-10-03 13:28:44.780934000 Z
+
+OperatorDocumentAnnex_156:
+  id: 100703
+  name: 'Autorisation de coupe Annuelle '
+  start_date: 2021-01-01
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1663657293_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-20 07:01:33.141546000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-20 07:01:33.141546000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:27:57.150969000 Z
+    zone: *1
+    time: 2022-10-03 13:27:57.150969000 Z
+
+OperatorDocumentAnnex_157:
+  id: 100705
+  name: Preuve  paiement de la taxe d'Abattage
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663660626_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-20 07:57:06.227869000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-20 07:57:06.227869000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:27:48.866508000 Z
+    zone: *1
+    time: 2022-10-03 13:27:48.866508000 Z
+
+OperatorDocumentAnnex_158:
+  id: 100717
+  name: Permis de coupe industrielle de bois d'œuvre de l'AAC2 prolongé pour 2022
+  start_date: 2020-11-25
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1664446961_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-09-29 10:22:41.144857000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-09-29 10:22:41.144857000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-03 13:26:54.161868000 Z
+    zone: *1
+    time: 2022-10-03 13:26:54.161868000 Z
+
+OperatorDocumentAnnex_159:
+  id: 100722
+  name: Décharge attestant le paiement de la taxe de déboisement
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1664899659_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-04 16:07:39.693136000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-10-04 16:07:39.693136000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-05 20:05:31.500072000 Z
+    zone: *1
+    time: 2022-10-05 20:05:31.500072000 Z
+
+OperatorDocumentAnnex_160:
+  id: 100724
+  name: Prolongation de permis de coupe industriel de bois d'œuvre de l'AAC2 pour
+    l'exercice 2022
+  start_date: 2022-03-21
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1666711196_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-10-25 15:19:56.017541000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-10-25 15:19:56.017541000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-11-07 00:05:06.713963000 Z
+    zone: *1
+    time: 2022-11-07 00:05:06.713963000 Z
+
+OperatorDocumentAnnex_161:
+  id: 100729
+  name: Décret d'approbation du PA
+  start_date: 2009-07-21
+  expire_date: 2034-07-20
+  status: doc_valid
+  attachment: Annex_1669360306_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-11-25 07:11:46.320768000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-11-25 07:11:46.320768000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-30 12:03:12.304906000 Z
+    zone: *1
+    time: 2022-12-30 12:03:12.304906000 Z
+
+OperatorDocumentAnnex_162:
+  id: 100732
+  name: Autorisation coupe AAC 2023
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1671809514_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-23 15:31:54.710513000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-12-23 15:31:54.710513000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-30 12:03:06.797078000 Z
+    zone: *1
+    time: 2022-12-30 12:03:06.797078000 Z
+
+OperatorDocumentAnnex_163:
+  id: 100733
+  name: Agrément forestier Année 2023
+  start_date: 2022-12-28
+  expire_date: 2023-12-27
+  status: doc_valid
+  attachment: Annex_1671811153_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-23 15:59:13.900781000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-12-23 15:59:13.900781000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-30 12:03:03.843047000 Z
+    zone: *1
+    time: 2022-12-30 12:03:03.843047000 Z
+
+OperatorDocumentAnnex_164:
+  id: 100734
+  name: Autorisation heures supplémentaires 1er semestre 2023
+  start_date: 2023-01-01
+  expire_date: 2023-06-30
+  status: doc_valid
+  attachment: Annex_1671811313_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-23 16:01:53.992588000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-12-23 16:01:53.992588000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-30 12:03:00.975301000 Z
+    zone: *1
+    time: 2022-12-30 12:03:00.975301000 Z
+
+OperatorDocumentAnnex_165:
+  id: 100737
+  name: preuve de paiement de taxe de superficie exercice 2022
+  start_date: 2022-12-30
+  status: doc_valid
+  attachment: Annex_1672418927_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2022-12-30 16:48:47.703015000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2022-12-30 16:48:47.703015000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-02 13:25:56.778276000 Z
+    zone: *1
+    time: 2023-01-02 13:25:56.778276000 Z
+
+OperatorDocumentAnnex_166:
+  id: 100739
+  name: Permis de coupe industriel de bois d'œuvre PCIBO 2021 en 2022
+  start_date: 2020-11-21
+  expire_date: 2023-03-21
+  status: doc_valid
+  attachment: Annex_1672674695_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-02 15:51:35.834623000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-02 15:51:35.834623000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:42:01.486842000 Z
+    zone: *1
+    time: 2023-03-13 20:42:01.486842000 Z
+
+OperatorDocumentAnnex_167:
+  id: 100744
+  name: Prorogation des activité dans l'aac 5-4
+  start_date: 2023-01-09
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673361405_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-10 14:36:45.147060000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-10 14:36:45.147060000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:51.719657000 Z
+    zone: *1
+    time: 2023-03-13 20:41:51.719657000 Z
+
+OperatorDocumentAnnex_168:
+  id: 100746
+  name: 'Notification de démarrage de la prorogation des activités UFA 004 AAC 1-5 '
+  start_date: 2023-01-05
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673948940_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-17 09:49:00.439429000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-17 09:49:00.439429000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:48.627812000 Z
+    zone: *1
+    time: 2023-03-13 20:41:48.627812000 Z
+
+OperatorDocumentAnnex_169:
+  id: 100747
+  name: Prorogation des activités UFA 00.004 AAC 1-5 jusqu'au 28 février 2023
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949027_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-17 09:50:27.426444000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-17 09:50:27.426444000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:46.846378000 Z
+    zone: *1
+    time: 2023-03-13 20:41:46.846378000 Z
+
+OperatorDocumentAnnex_170:
+  id: 100748
+  name: 'Prorogation des activités de la VC 0702 135 '
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949400_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-17 09:56:40.035842000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-17 09:56:40.035842000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:43.212878000 Z
+    zone: *1
+    time: 2023-03-13 20:41:43.212878000 Z
+
+OperatorDocumentAnnex_171:
+  id: 100749
+  name: 'Notification de démarrage de la prorogation des activités VC 07 02 135 '
+  start_date: 2023-01-05
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949459_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-17 09:57:39.176707000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-17 09:57:39.176707000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:41.489582000 Z
+    zone: *1
+    time: 2023-03-13 20:41:41.489582000 Z
+
+OperatorDocumentAnnex_172:
+  id: 100750
+  name: Prorogation du CEQEBG siencam 28-02-2023
+  start_date: 2022-12-29
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949740_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-17 10:02:20.058494000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-17 10:02:20.058494000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:39.668109000 Z
+    zone: *1
+    time: 2023-03-13 20:41:39.668109000 Z
+
+OperatorDocumentAnnex_173:
+  id: 100755
+  name: 'Prorogation des activités de la VC 0702 135 '
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1674200782_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-20 07:46:22.116214000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-20 07:46:22.116214000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:26.946666000 Z
+    zone: *1
+    time: 2023-03-13 20:41:26.946666000 Z
+
+OperatorDocumentAnnex_174:
+  id: 100756
+  name: 'Prorogation des activités de la VC 0702 135 '
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1674219847_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-01-20 13:04:07.076228000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-01-20 13:04:07.076228000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:41:25.233417000 Z
+    zone: *1
+    time: 2023-03-13 20:41:25.233417000 Z
+
+OperatorDocumentAnnex_175:
+  id: 100769
+  name: CONGOLAISE INDUSTRIELLE DE BOIS
+  start_date: 2023-01-01
+  expire_date: 2023-04-01
+  status: doc_valid
+  attachment: Annex_1675850984_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-02-08 10:09:44.986271000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-02-08 10:09:44.986271000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:55.438877000 Z
+    zone: *1
+    time: 2023-03-13 20:40:55.438877000 Z
+
+OperatorDocumentAnnex_176:
+  id: 100771
+  name: Autorisation coupe achèvement AAC 2022
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676041388_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-02-10 15:03:08.109106000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-02-10 15:03:08.109106000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:51.844975000 Z
+    zone: *1
+    time: 2023-03-13 20:40:51.844975000 Z
+
+OperatorDocumentAnnex_177:
+  id: 100775
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676306390_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-02-13 16:39:50.567507000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-02-13 16:39:50.567507000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:43.141171000 Z
+    zone: *1
+    time: 2023-03-13 20:40:43.141171000 Z
+
+OperatorDocumentAnnex_178:
+  id: 100778
+  name: Attestation de détention de stock VC 07 02 118
+  start_date: 2023-01-18
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676306586_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-02-13 16:43:06.262036000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-02-13 16:43:06.262036000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:36.377180000 Z
+    zone: *1
+    time: 2023-03-13 20:40:36.377180000 Z
+
+OperatorDocumentAnnex_179:
+  id: 100779
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676306627_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-02-13 16:43:47.349563000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-02-13 16:43:47.349563000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:33.806912000 Z
+    zone: *1
+    time: 2023-03-13 20:40:33.806912000 Z
+
+OperatorDocumentAnnex_180:
+  id: 100787
+  name: CEQEBT SEFECCAM
+  start_date: 2023-02-27
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1678344256_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-09 06:44:16.400284000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-03-09 06:44:16.400284000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:13.014387000 Z
+    zone: *1
+    time: 2023-03-13 20:40:13.014387000 Z
+
+OperatorDocumentAnnex_181:
+  id: 100789
+  name: preuve de paiement de taxe de superficie exercice 2022-2eme échelonnement
+  start_date: 2023-02-03
+  expire_date: 2023-03-02
+  status: doc_valid
+  attachment: Annex_1678524431_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-11 08:47:11.621323000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-03-11 08:47:11.621323000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:09.841327000 Z
+    zone: *1
+    time: 2023-03-13 20:40:09.841327000 Z
+
+OperatorDocumentAnnex_182:
+  id: 100790
+  name: preuve de paiement de taxe de superficie exercice 2022- 1 er échelonnement
+  start_date: 2023-12-29
+  expire_date: 2023-01-31
+  status: doc_valid
+  attachment: Annex_1678525068_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-11 08:57:48.717977000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-03-11 08:57:48.717977000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:08.147562000 Z
+    zone: *1
+    time: 2023-03-13 20:40:08.147562000 Z
+
+OperatorDocumentAnnex_183:
+  id: 100792
+  name: 'preuve de paiement de taxe de superficie exercice 2022-2 éme échelonnement '
+  start_date: 2023-02-28
+  expire_date: 2023-03-02
+  status: doc_valid
+  attachment: Annex_1678526236_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-11 09:17:16.027760000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-03-11 09:17:16.027760000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-13 20:40:06.483662000 Z
+    zone: *1
+    time: 2023-03-13 20:40:06.483662000 Z
+
+OperatorDocumentAnnex_184:
+  id: 100816
+  name: preuve de paiement de taxe de superficie exercice 2022- 3eme échelonnement
+  start_date: 2023-02-28
+  expire_date: 2023-03-28
+  status: doc_pending
+  attachment: Annex_1680106073_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-29 16:07:53.872294000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-03-29 16:07:53.872294000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-29 16:07:53.872294000 Z
+    zone: *1
+    time: 2023-03-29 16:07:53.872294000 Z
+
+OperatorDocumentAnnex_185:
+  id: 100817
+  name: preuve de paiement de taxe de superficie exercice 2022- 3eme échelonnement
+  start_date: 2023-02-28
+  expire_date: 2023-03-29
+  status: doc_valid
+  attachment: Annex_1680106184_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-03-29 16:09:44.988932000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-03-29 16:09:44.988932000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-16 23:45:53.504497000 Z
+    zone: *1
+    time: 2023-04-16 23:45:53.504497000 Z
+
+OperatorDocumentAnnex_186:
+  id: 100824
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615021_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-04 13:30:21.706591000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-04-04 13:30:21.706591000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-16 23:45:42.734299000 Z
+    zone: *1
+    time: 2023-04-16 23:45:42.734299000 Z
+
+OperatorDocumentAnnex_187:
+  id: 100825
+  name: Certificat de détention de stock de bois en grumes VC 07 02 118
+  start_date: 2023-03-30
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615106_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-04 13:31:46.185976000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-04-04 13:31:46.185976000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-16 23:45:41.204351000 Z
+    zone: *1
+    time: 2023-04-16 23:45:41.204351000 Z
+
+OperatorDocumentAnnex_188:
+  id: 100826
+  name: Certificat de détention de stock de bois en grumes VC 07 02 118
+  start_date: 2023-03-30
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615211_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-04 13:33:31.248949000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-04-04 13:33:31.248949000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-16 23:45:39.734669000 Z
+    zone: *1
+    time: 2023-04-16 23:45:39.734669000 Z
+
+OperatorDocumentAnnex_189:
+  id: 100827
+  name: Certificat de détention de stock de bois en grumes VC 07 02 118
+  start_date: 2023-03-30
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615293_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-04 13:34:53.372409000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-04-04 13:34:53.372409000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-16 23:45:38.195849000 Z
+    zone: *1
+    time: 2023-04-16 23:45:38.195849000 Z
+
+OperatorDocumentAnnex_190:
+  id: 100828
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615328_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-04 13:35:28.268176000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-04-04 13:35:28.268176000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-04-16 23:45:36.628223000 Z
+    zone: *1
+    time: 2023-04-16 23:45:36.628223000 Z
+
+OperatorDocumentAnnex_191:
+  id: 100862
+  name: Certificat de vente coupe 2023
+  start_date: 2023-04-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1683019303_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-02 09:21:43.005380000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-05-02 09:21:43.005380000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-04 04:22:04.898696000 Z
+    zone: *1
+    time: 2023-05-04 04:22:04.898696000 Z
+
+OperatorDocumentAnnex_192:
+  id: 100869
+  name: preuve de paiement de taxe de superficie exercice 2022- 4eme échelonnement
+  start_date: 2023-03-29
+  expire_date: 2023-04-23
+  status: doc_valid
+  attachment: Annex_1684154177_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-15 12:36:17.444358000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-05-15 12:36:17.444358000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-16 15:45:52.166496000 Z
+    zone: *1
+    time: 2023-05-16 15:45:52.166496000 Z
+
+OperatorDocumentAnnex_193:
+  id: 100870
+  name: preuve de paiement de taxe de superficie exercice 2022- 4eme échelonnement
+  start_date: 2023-03-29
+  expire_date: 2023-04-29
+  status: doc_valid
+  attachment: Annex_1684154252_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-15 12:37:32.454375000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-05-15 12:37:32.454375000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-16 15:45:49.288621000 Z
+    zone: *1
+    time: 2023-05-16 15:45:49.288621000 Z
+
+OperatorDocumentAnnex_194:
+  id: 100871
+  name: permis CITES 2023
+  start_date: 2023-02-23
+  status: doc_valid
+  attachment: Annex_1684485241_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-19 08:34:01.377051000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-05-19 08:34:01.377051000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-06 02:44:50.272611000 Z
+    zone: *1
+    time: 2023-07-06 02:44:50.272611000 Z
+
+OperatorDocumentAnnex_195:
+  id: 100877
+  name: Autorisation annuelle de coupe
+  start_date: 2023-01-02
+  expire_date: 2023-12-02
+  status: doc_valid
+  attachment: Annex_1684995605_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-05-25 06:20:05.981741000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-05-25 06:20:05.981741000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-06-19 16:16:42.591953000 Z
+    zone: *1
+    time: 2023-06-19 16:16:42.591953000 Z
+
+OperatorDocumentAnnex_196:
+  id: 100881
+  name: 'Agrement de transport '
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1685905801_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-06-04 19:10:01.075596000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-06-04 19:10:01.075596000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-06-19 16:16:18.500466000 Z
+    zone: *1
+    time: 2023-06-19 16:16:18.500466000 Z
+
+OperatorDocumentAnnex_197:
+  id: 100885
+  name: Autorisation heures supplémentaires 2e semestre 2023
+  start_date: 2023-07-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1686642696_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-06-13 07:51:36.513256000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-06-13 07:51:36.513256000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-06-19 16:16:03.660808000 Z
+    zone: *1
+    time: 2023-06-19 16:16:03.660808000 Z
+
+OperatorDocumentAnnex_198:
+  id: 100888
+  name: Exemple Certificat CITES 2023
+  start_date: 2023-02-23
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1686644125_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-06-13 08:15:25.015725000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-06-13 08:15:25.015725000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-06-19 16:15:40.200823000 Z
+    zone: *1
+    time: 2023-06-19 16:15:40.200823000 Z
+
+OperatorDocumentAnnex_199:
+  id: 100892
+  name: Agrement transport 2023 Fortis logistique
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1688550633_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-05 09:50:33.958007000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-07-05 09:50:33.958007000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-06 02:44:39.100554000 Z
+    zone: *1
+    time: 2023-07-06 02:44:39.100554000 Z
+
+OperatorDocumentAnnex_200:
+  id: 100896
+  name: Prolongation de permis de coupe industriel de bois d'œuvre PCIBO 2021 en 2023
+  start_date: 2023-07-11
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1689151076_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-12 08:37:56.792998000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-07-12 08:37:56.792998000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-08-23 12:39:19.445725000 Z
+    zone: *1
+    time: 2023-08-23 12:39:19.445725000 Z
+
+OperatorDocumentAnnex_201:
+  id: 100974
+  name: preuve de paiement de taxe de superficie exercice 2023- 1eme échelonnement
+  start_date: 2023-08-24
+  expire_date: 2023-09-24
+  status: doc_valid
+  attachment: Annex_1697471741_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-10-16 15:55:41.626498000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-10-16 15:55:41.626498000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-10-16 22:53:36.758543000 Z
+    zone: *1
+    time: 2023-10-16 22:53:36.758543000 Z
+
+OperatorDocumentAnnex_202:
+  id: 100998
+  name: preuve de paiement de taxe de superficie exercice 2023- 2eme échelonnement
+  start_date: 2023-09-29
+  expire_date: 2023-11-16
+  status: doc_valid
+  attachment: Annex_1699541227_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-11-09 14:47:07.111492000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-11-09 14:47:07.111492000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-11-30 04:01:45.714712000 Z
+    zone: *1
+    time: 2023-11-30 04:01:45.714712000 Z
+
+OperatorDocumentAnnex_203:
+  id: 101006
+  name: Agrement 2024
+  start_date: 2023-11-29
+  expire_date: 2024-11-28
+  status: doc_pending
+  attachment: Annex_1701785297_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-05 14:08:17.951399000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-05 14:08:17.951399000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-05 14:08:17.951399000 Z
+    zone: *1
+    time: 2023-12-05 14:08:17.951399000 Z
+
+OperatorDocumentAnnex_204:
+  id: 101009
+  name: Autorisation CITES pad  259
+  start_date: 2023-11-07
+  expire_date: 2024-05-07
+  status: doc_pending
+  attachment: Annex_1701787931_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-05 14:52:11.228084000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-05 14:52:11.228084000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-05 14:52:11.228084000 Z
+    zone: *1
+    time: 2023-12-05 14:52:11.228084000 Z
+
+OperatorDocumentAnnex_205:
+  id: 101011
+  name: Agrement transport HMR
+  start_date: 2023-03-28
+  expire_date: 2024-03-27
+  status: doc_pending
+  attachment: Annex_1702013981_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-08 05:39:41.020238000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-08 05:39:41.020238000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-08 05:39:41.020238000 Z
+    zone: *1
+    time: 2023-12-08 05:39:41.020238000 Z
+
+OperatorDocumentAnnex_206:
+  id: 101012
+  name: Rapport CHST 3è trimestre 2023
+  start_date: 2023-07-01
+  expire_date: 2023-12-30
+  status: doc_pending
+  attachment: Annex_1702033479_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-08 11:04:39.126111000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-08 11:04:39.126111000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-08 11:04:39.126111000 Z
+    zone: *1
+    time: 2023-12-08 11:04:39.126111000 Z
+
+OperatorDocumentAnnex_207:
+  id: 101013
+  name: preuve de paiement de taxe de superficie exercice 2023- 1eme échelonnement
+  start_date: 2023-08-24
+  expire_date: 2023-09-24
+  status: doc_pending
+  attachment: Annex_1702290408_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-11 10:26:48.759659000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-11 10:26:48.759659000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-11 10:26:48.759659000 Z
+    zone: *1
+    time: 2023-12-11 10:26:48.759659000 Z
+
+OperatorDocumentAnnex_208:
+  id: 101015
+  name: preuve de paiement de taxe de superficie exercice 2023- 2eme échelonnement
+  start_date: 2023-09-29
+  expire_date: 2023-10-31
+  status: doc_pending
+  attachment: Annex_1702291445_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-11 10:44:06.000095000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-11 10:44:06.000095000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-11 10:44:06.000095000 Z
+    zone: *1
+    time: 2023-12-11 10:44:06.000095000 Z
+
+OperatorDocumentAnnex_209:
+  id: 101016
+  name: preuve de paiement de taxe de superficie exercice 2023- 3eme échelonnement
+  start_date: 2023-10-31
+  expire_date: 2023-12-01
+  status: doc_pending
+  attachment: Annex_1702291725_no_document.pdf
+  uploaded_by: operator
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-11 10:48:45.127906000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-11 10:48:45.127906000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-11 10:48:45.127906000 Z
+    zone: *1
+    time: 2023-12-11 10:48:45.127906000 Z

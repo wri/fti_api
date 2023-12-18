@@ -3,6 +3,7 @@ class SeedsTasks
 
   def initialize
     namespace :seeds do
+      desc "Generate fixtures to use as development or e2e database. First run db:restore_from_file or db:restore_from_server to get latest data from production."
       task generate_fixtures: :environment do
         generate_for_model "Country"
         generate_for_model "AboutPageEntry"
@@ -31,43 +32,52 @@ class SeedsTasks
         monitor_names = %w[
           OGF PAPEL FODER CADDE ECODEV CAGDF RENOI OCEAN AGRECO
         ]
-        observers = Observer.where(name: monitor_names)
-        reports = ObservationReport.joins(:observers).where(observers: observers).distinct
-        observations = Observation.published.where(observation_report: reports)
+        observers = Observer.where(name: monitor_names).order(:id)
+        reports = ObservationReport.joins(:observers).where(observers: observers).distinct.order(:id)
+        observations = Observation.published.where(observation_report: reports).order(:id)
 
         operator_slugs = %w[
           ifo-interholco cfc sifco lorema siencam
           cib cft mokabi-sa afriwood-industries
         ].concat(holding_operators).uniq
-        operators = Operator.where(slug: operator_slugs)
-        fmu_operators = FmuOperator.where(operator: operators)
-        fmus = Fmu.where(id: fmu_operators.pluck(:fmu_id))
+        operators = Operator.where(slug: operator_slugs).order(:id)
+        fmu_operators = FmuOperator.where(operator: operators).order(:id)
+        extra_fmus = %w[08-003 08-005 08-009]
+        fmus = Fmu.where(id: fmu_operators.pluck(:fmu_id)).or(Fmu.where(id: Fmu.where(name: extra_fmus))).order(:id)
         observations = observations.where(fmu: [nil, fmus]) # only observations with existing fmu or no fmu
-        observations = observations.where(operator: [nil, operators])
+        observations = observations.where(operator: [nil, operators]).order(:id)
         generate_for_model "Holding", entries: holdings
         generate_for_model "Operator", entries: operators
         generate_for_model "FmuOperator", entries: fmu_operators
-        generate_for_model "Fmu", entries: fmus
+        generate_for_model "Fmu", entries: fmus, locale: %w[en fr]
 
         # documents
-        documents = OperatorDocument.where(operator: operators).where(fmu: [nil, fmus])
-        document_history = OperatorDocumentHistory.where(operator_document: documents).where(fmu: [nil, fmus])
-        document_files = DocumentFile.where(id: documents.pluck(:document_file_id).concat(document_history.pluck(:document_file_id)).uniq)
+        documents = OperatorDocument.where(operator: operators).where(fmu: [nil, fmus]).order(:id)
+        document_history = OperatorDocumentHistory.where(operator_document: documents).where(fmu: [nil, fmus]).order(:id)
+        document_files = DocumentFile.where(id: documents.pluck(:document_file_id).concat(document_history.pluck(:document_file_id)).uniq).order(:id)
+        annex_documents = AnnexDocument
+          .where(documentable: documents)
+          .or(AnnexDocument.where(documentable: document_history))
+          .where(operator_document_annex: OperatorDocumentAnnex.all)
+          .order(:id)
+        annexes = OperatorDocumentAnnex.where(id: annex_documents.pluck(:operator_document_annex_id).uniq).order(:id)
         generate_for_model "DocumentFile", entries: document_files
         generate_for_model "OperatorDocument", entries: documents, exclude: %w[user_id], anonymize: %w[note]
         generate_for_model "OperatorDocumentHistory", entries: document_history, exclude: %w[user_id]
+        generate_for_model "AnnexDocument", entries: annex_documents
+        generate_for_model "OperatorDocumentAnnex", entries: annexes, exclude: %w[user_id]
 
         # monitors
-        evidences = ObservationDocument.where(observation: observations)
+        evidences = ObservationDocument.where(observation: observations).order(:id)
         generate_for_model "Observer", entries: observers, exclude: %w[responsible_admin_id]
-        generate_for_model "ObservationReport", entries: reports, exclude: %w[user_id]
-        generate_for_model "Observation", entries: observations, exclude: %w[user_id modified_user_id], anonymize: %w[admin_comment monitor_comment]
-        generate_for_model "ObservationDocument", entries: evidences, exclude: %w[user_id]
+        generate_for_model "ObservationReport", entries: reports, exclude: %w[created_at updated_at user_id]
+        generate_for_model "Observation", entries: observations, locale: %w[en], exclude: %w[created_at updated_at user_id modified_user_id], anonymize: %w[admin_comment monitor_comment]
+        generate_for_model "ObservationDocument", entries: evidences, exclude: %w[created_at updated_at user_id]
       end
     end
   end
 
-  def generate_for_model(model_class, entries: nil, exclude: [], locale: [], anonymize: [])
+  def generate_for_model(model_class, entries: nil, exclude: %w[created_at updated_at], locale: [], anonymize: [])
     model = model_class.constantize
     puts "Dumping fixtures for: #{model_class}"
 
@@ -89,7 +99,7 @@ class SeedsTasks
       entries = entries.includes(:translations)
     end
 
-    exclude_attributes = exclude.concat(%w[created_at updated_at])
+    exclude_attributes = exclude || []
 
     entries.each do |entry|
       attrs = entry.attributes

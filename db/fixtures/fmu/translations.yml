@@ -1,156 +1,44 @@
 
 Fmu_1_en_translation:
-  id: 83
-  fmu_id: 83
+  id: 12
+  fmu_id: 12
   locale: en
-  name: Doumanga
+  name: 047/11
   deleted_at:
 
 Fmu_1_fr_translation:
-  id: 198
-  fmu_id: 83
+  id: 127
+  fmu_id: 12
   locale: fr
-  name: Doumanga
-  deleted_at:
-
-Fmu_1_zh-CN_translation:
-  id: 4364
-  fmu_id: 83
-  locale: zh-CN
-  name: Doumanga
-  deleted_at:
-
-Fmu_1_pt_translation:
-  id: 102870
-  fmu_id: 83
-  locale: pt
-  name: Doumanga
-  deleted_at:
-
-Fmu_1_ja_translation:
-  id: 22839
-  fmu_id: 83
-  locale: ja
-  name: Doumanga
-  deleted_at:
-
-Fmu_1_ko_translation:
-  id: 22840
-  fmu_id: 83
-  locale: ko
-  name: Doumanga
-  deleted_at:
-
-Fmu_1_vi_translation:
-  id: 22841
-  fmu_id: 83
-  locale: vi
-  name: Doumanga
-  deleted_at:
-
-Fmu_2_en_translation:
-  id: 13232
-  fmu_id: 11618
-  locale: en
-  name: '09-003'
+  name: 047/11
   deleted_at:
 
 Fmu_2_fr_translation:
-  id: 13233
-  fmu_id: 11618
+  id: 164
+  fmu_id: 49
   locale: fr
-  name: '09-003'
+  name: 005/18
   deleted_at:
 
-Fmu_2_zh-CN_translation:
-  id: 14017
-  fmu_id: 11618
-  locale: zh-CN
-  name: '09-003'
-  deleted_at:
-
-Fmu_2_pt_translation:
-  id: 103079
-  fmu_id: 11618
-  locale: pt
-  name: '09-003'
-  deleted_at:
-
-Fmu_2_ja_translation:
-  id: 22248
-  fmu_id: 11618
-  locale: ja
-  name: '09-003'
-  deleted_at:
-
-Fmu_2_ko_translation:
-  id: 22249
-  fmu_id: 11618
-  locale: ko
-  name: '09-003'
-  deleted_at:
-
-Fmu_2_vi_translation:
-  id: 22250
-  fmu_id: 11618
-  locale: vi
-  name: '09-003'
-  deleted_at:
-
-Fmu_3_fr_translation:
-  id: 169
-  fmu_id: 54
-  locale: fr
-  name: Kabo
+Fmu_2_en_translation:
+  id: 49
+  fmu_id: 49
+  locale: en
+  name: 005/18
   deleted_at:
 
 Fmu_3_en_translation:
-  id: 54
-  fmu_id: 54
+  id: 50
+  fmu_id: 50
   locale: en
-  name: Kabo
+  name: 046/11
   deleted_at:
 
-Fmu_3_zh-CN_translation:
-  id: 4350
-  fmu_id: 54
-  locale: zh-CN
-  name: Kabo
-  deleted_at:
-
-Fmu_3_pt_translation:
-  id: 102948
-  fmu_id: 54
-  locale: pt
-  name: Kabo
-  deleted_at:
-
-Fmu_3_ja_translation:
-  id: 22737
-  fmu_id: 54
-  locale: ja
-  name: Kabo
-  deleted_at:
-
-Fmu_3_ko_translation:
-  id: 22738
-  fmu_id: 54
-  locale: ko
-  name: Kabo
-  deleted_at:
-
-Fmu_3_vi_translation:
-  id: 22739
-  fmu_id: 54
-  locale: vi
-  name: Kabo
-  deleted_at:
-
-Fmu_4_zh-CN_translation:
-  id: 4349
-  fmu_id: 53
-  locale: zh-CN
-  name: Loundoungou-toukoulaka
+Fmu_3_fr_translation:
+  id: 102456
+  fmu_id: 50
+  locale: fr
+  name: 046/11
   deleted_at:
 
 Fmu_4_en_translation:
@@ -167,179 +55,46 @@ Fmu_4_fr_translation:
   name: Loundoungou-toukoulaka
   deleted_at:
 
-Fmu_4_pt_translation:
-  id: 102955
-  fmu_id: 53
-  locale: pt
-  name: Loundoungou-toukoulaka
-  deleted_at:
-
-Fmu_4_ja_translation:
-  id: 22734
-  fmu_id: 53
-  locale: ja
-  name: Loundoungou-toukoulaka
-  deleted_at:
-
-Fmu_4_ko_translation:
-  id: 22735
-  fmu_id: 53
-  locale: ko
-  name: Loundoungou-toukoulaka
-  deleted_at:
-
-Fmu_4_vi_translation:
-  id: 22736
-  fmu_id: 53
-  locale: vi
-  name: Loundoungou-toukoulaka
-  deleted_at:
-
-Fmu_5_zh-CN_translation:
-  id: 4291
-  fmu_id: 12
-  locale: zh-CN
-  name: 047/11
+Fmu_5_fr_translation:
+  id: 169
+  fmu_id: 54
+  locale: fr
+  name: Kabo
   deleted_at:
 
 Fmu_5_en_translation:
-  id: 12
-  fmu_id: 12
+  id: 54
+  fmu_id: 54
   locale: en
-  name: 047/11
-  deleted_at:
-
-Fmu_5_fr_translation:
-  id: 127
-  fmu_id: 12
-  locale: fr
-  name: 047/11
-  deleted_at:
-
-Fmu_5_ja_translation:
-  id: 20631
-  fmu_id: 12
-  locale: ja
-  name: 047/11
-  deleted_at:
-
-Fmu_5_ko_translation:
-  id: 20632
-  fmu_id: 12
-  locale: ko
-  name: 047/11
-  deleted_at:
-
-Fmu_5_vi_translation:
-  id: 20633
-  fmu_id: 12
-  locale: vi
-  name: 047/11
-  deleted_at:
-
-Fmu_5_pt_translation:
-  id: 102914
-  fmu_id: 12
-  locale: pt
-  name: 047/11
+  name: Kabo
   deleted_at:
 
 Fmu_6_en_translation:
-  id: 13230
-  fmu_id: 11617
+  id: 55
+  fmu_id: 55
   locale: en
-  name: 10-011
+  name: Pokola
   deleted_at:
 
 Fmu_6_fr_translation:
-  id: 13231
-  fmu_id: 11617
+  id: 170
+  fmu_id: 55
   locale: fr
-  name: 10-011
-  deleted_at:
-
-Fmu_6_zh-CN_translation:
-  id: 14016
-  fmu_id: 11617
-  locale: zh-CN
-  name: 10-011
-  deleted_at:
-
-Fmu_6_pt_translation:
-  id: 103078
-  fmu_id: 11617
-  locale: pt
-  name: 10-011
-  deleted_at:
-
-Fmu_6_ja_translation:
-  id: 21666
-  fmu_id: 11617
-  locale: ja
-  name: 10-011
-  deleted_at:
-
-Fmu_6_ko_translation:
-  id: 21667
-  fmu_id: 11617
-  locale: ko
-  name: 10-011
-  deleted_at:
-
-Fmu_6_vi_translation:
-  id: 21668
-  fmu_id: 11617
-  locale: vi
-  name: 10-011
+  name: Pokola
   deleted_at:
 
 Fmu_7_en_translation:
-  id: 13476
-  fmu_id: 11740
+  id: 56
+  fmu_id: 56
   locale: en
-  name: '1001311'
+  name: Ngombe
   deleted_at:
 
 Fmu_7_fr_translation:
-  id: 13477
-  fmu_id: 11740
+  id: 171
+  fmu_id: 56
   locale: fr
-  name: '1001311'
-  deleted_at:
-
-Fmu_7_zh-CN_translation:
-  id: 14139
-  fmu_id: 11740
-  locale: zh-CN
-  name: '1001311'
-  deleted_at:
-
-Fmu_7_ja_translation:
-  id: 21465
-  fmu_id: 11740
-  locale: ja
-  name: '1001311'
-  deleted_at:
-
-Fmu_7_ko_translation:
-  id: 21466
-  fmu_id: 11740
-  locale: ko
-  name: '1001311'
-  deleted_at:
-
-Fmu_7_vi_translation:
-  id: 21467
-  fmu_id: 11740
-  locale: vi
-  name: '1001311'
-  deleted_at:
-
-Fmu_7_pt_translation:
-  id: 103201
-  fmu_id: 11740
-  locale: pt
-  name: '1001311'
+  name: Ngombe
   deleted_at:
 
 Fmu_8_en_translation:
@@ -356,1164 +111,366 @@ Fmu_8_fr_translation:
   name: Pikounda nord
   deleted_at:
 
-Fmu_8_zh-CN_translation:
-  id: 4352
-  fmu_id: 67
-  locale: zh-CN
-  name: Pikounda nord
-  deleted_at:
-
-Fmu_8_pt_translation:
-  id: 102931
-  fmu_id: 67
-  locale: pt
-  name: Pikounda nord
-  deleted_at:
-
-Fmu_8_ja_translation:
-  id: 22743
-  fmu_id: 67
-  locale: ja
-  name: Pikounda nord
-  deleted_at:
-
-Fmu_8_ko_translation:
-  id: 22744
-  fmu_id: 67
-  locale: ko
-  name: Pikounda nord
-  deleted_at:
-
-Fmu_8_vi_translation:
-  id: 22745
-  fmu_id: 67
-  locale: vi
-  name: Pikounda nord
-  deleted_at:
-
 Fmu_9_en_translation:
-  id: 20316
-  fmu_id: 20099
-  locale: en
-  name: '0702111'
-  deleted_at:
-
-Fmu_9_fr_translation:
-  id: 20317
-  fmu_id: 20099
-  locale: fr
-  name: '0702111'
-  deleted_at:
-
-Fmu_9_zh-CN_translation:
-  id: 20318
-  fmu_id: 20099
-  locale: zh-CN
-  name: '0702111'
-  deleted_at:
-
-Fmu_9_ja_translation:
-  id: 21306
-  fmu_id: 20099
-  locale: ja
-  name: '0702111'
-  deleted_at:
-
-Fmu_9_ko_translation:
-  id: 21307
-  fmu_id: 20099
-  locale: ko
-  name: '0702111'
-  deleted_at:
-
-Fmu_9_vi_translation:
-  id: 21308
-  fmu_id: 20099
-  locale: vi
-  name: '0702111'
-  deleted_at:
-
-Fmu_9_pt_translation:
-  id: 103355
-  fmu_id: 20099
-  locale: pt
-  name: '0702111'
-  deleted_at:
-
-Fmu_10_en_translation:
-  id: 13154
-  fmu_id: 11579
-  locale: en
-  name: '09-005A'
-  deleted_at:
-
-Fmu_10_fr_translation:
-  id: 13155
-  fmu_id: 11579
-  locale: fr
-  name: '09-005A'
-  deleted_at:
-
-Fmu_10_zh-CN_translation:
-  id: 13978
-  fmu_id: 11579
-  locale: zh-CN
-  name: '09-005A'
-  deleted_at:
-
-Fmu_10_pt_translation:
-  id: 103040
-  fmu_id: 11579
-  locale: pt
-  name: '09-005A'
-  deleted_at:
-
-Fmu_10_ja_translation:
-  id: 22245
-  fmu_id: 11579
-  locale: ja
-  name: '09-005A'
-  deleted_at:
-
-Fmu_10_ko_translation:
-  id: 22246
-  fmu_id: 11579
-  locale: ko
-  name: '09-005A'
-  deleted_at:
-
-Fmu_10_vi_translation:
-  id: 22247
-  fmu_id: 11579
-  locale: vi
-  name: '09-005A'
-  deleted_at:
-
-Fmu_11_en_translation:
-  id: 13134
-  fmu_id: 11569
-  locale: en
-  name: 10-003
-  deleted_at:
-
-Fmu_11_fr_translation:
-  id: 13135
-  fmu_id: 11569
-  locale: fr
-  name: 10-003
-  deleted_at:
-
-Fmu_11_zh-CN_translation:
-  id: 13968
-  fmu_id: 11569
-  locale: zh-CN
-  name: 10-003
-  deleted_at:
-
-Fmu_11_ja_translation:
-  id: 21453
-  fmu_id: 11569
-  locale: ja
-  name: 10-003
-  deleted_at:
-
-Fmu_11_ko_translation:
-  id: 21454
-  fmu_id: 11569
-  locale: ko
-  name: 10-003
-  deleted_at:
-
-Fmu_11_vi_translation:
-  id: 21455
-  fmu_id: 11569
-  locale: vi
-  name: 10-003
-  deleted_at:
-
-Fmu_11_pt_translation:
-  id: 103030
-  fmu_id: 11569
-  locale: pt
-  name: 10-003
-  deleted_at:
-
-Fmu_12_en_translation:
-  id: 55
-  fmu_id: 55
-  locale: en
-  name: Pokola
-  deleted_at:
-
-Fmu_12_fr_translation:
-  id: 170
-  fmu_id: 55
-  locale: fr
-  name: Pokola
-  deleted_at:
-
-Fmu_12_zh-CN_translation:
-  id: 4351
-  fmu_id: 55
-  locale: zh-CN
-  name: Pokola
-  deleted_at:
-
-Fmu_12_pt_translation:
-  id: 102917
-  fmu_id: 55
-  locale: pt
-  name: Pokola
-  deleted_at:
-
-Fmu_12_ja_translation:
-  id: 22740
-  fmu_id: 55
-  locale: ja
-  name: Pokola
-  deleted_at:
-
-Fmu_12_ko_translation:
-  id: 22741
-  fmu_id: 55
-  locale: ko
-  name: Pokola
-  deleted_at:
-
-Fmu_12_vi_translation:
-  id: 22742
-  fmu_id: 55
-  locale: vi
-  name: Pokola
-  deleted_at:
-
-Fmu_13_en_translation:
-  id: 12994
-  fmu_id: 11499
-  locale: en
-  name: 11-001
-  deleted_at:
-
-Fmu_13_fr_translation:
-  id: 12995
-  fmu_id: 11499
-  locale: fr
-  name: 11-001
-  deleted_at:
-
-Fmu_13_zh-CN_translation:
-  id: 13898
-  fmu_id: 11499
-  locale: zh-CN
-  name: 11-001
-  deleted_at:
-
-Fmu_13_ja_translation:
-  id: 21303
-  fmu_id: 11499
-  locale: ja
-  name: 11-001
-  deleted_at:
-
-Fmu_13_ko_translation:
-  id: 21304
-  fmu_id: 11499
-  locale: ko
-  name: 11-001
-  deleted_at:
-
-Fmu_13_vi_translation:
-  id: 21305
-  fmu_id: 11499
-  locale: vi
-  name: 11-001
-  deleted_at:
-
-Fmu_13_pt_translation:
-  id: 102962
-  fmu_id: 11499
-  locale: pt
-  name: 11-001
-  deleted_at:
-
-Fmu_14_en_translation:
-  id: 50
-  fmu_id: 50
-  locale: en
-  name: 046/11
-  deleted_at:
-
-Fmu_14_pt_translation:
-  id: 102885
-  fmu_id: 50
-  locale: pt
-  name: 046/11
-  deleted_at:
-
-Fmu_14_fr_translation:
-  id: 102456
-  fmu_id: 50
-  locale: fr
-  name: 046/11
-  deleted_at:
-
-Fmu_14_zh-CN_translation:
-  id: 102457
-  fmu_id: 50
-  locale: zh-CN
-  name: 046/11
-  deleted_at:
-
-Fmu_14_ja_translation:
-  id: 102458
-  fmu_id: 50
-  locale: ja
-  name: 046/11
-  deleted_at:
-
-Fmu_14_ko_translation:
-  id: 102459
-  fmu_id: 50
-  locale: ko
-  name: 046/11
-  deleted_at:
-
-Fmu_14_vi_translation:
-  id: 102460
-  fmu_id: 50
-  locale: vi
-  name: 046/11
-  deleted_at:
-
-Fmu_15_en_translation:
-  id: 102615
-  fmu_id: 100438
-  locale: en
-  name: '0702118'
-  deleted_at:
-
-Fmu_15_fr_translation:
-  id: 102621
-  fmu_id: 100438
-  locale: fr
-  name: '0702118'
-  deleted_at:
-
-Fmu_15_zh-CN_translation:
-  id: 102622
-  fmu_id: 100438
-  locale: zh-CN
-  name: '0702118'
-  deleted_at:
-
-Fmu_15_ja_translation:
-  id: 102623
-  fmu_id: 100438
-  locale: ja
-  name: '0702118'
-  deleted_at:
-
-Fmu_15_ko_translation:
-  id: 102624
-  fmu_id: 100438
-  locale: ko
-  name: '0702118'
-  deleted_at:
-
-Fmu_15_vi_translation:
-  id: 102625
-  fmu_id: 100438
-  locale: vi
-  name: '0702118'
-  deleted_at:
-
-Fmu_15_pt_translation:
-  id: 103409
-  fmu_id: 100438
-  locale: pt
-  name: '0702118'
-  deleted_at:
-
-Fmu_16_en_translation:
-  id: 12988
-  fmu_id: 11496
-  locale: en
-  name: 00-004
-  deleted_at:
-
-Fmu_16_fr_translation:
-  id: 12989
-  fmu_id: 11496
-  locale: fr
-  name: 00-004
-  deleted_at:
-
-Fmu_16_zh-CN_translation:
-  id: 13895
-  fmu_id: 11496
-  locale: zh-CN
-  name: 00-004
-  deleted_at:
-
-Fmu_16_ja_translation:
-  id: 21300
-  fmu_id: 11496
-  locale: ja
-  name: 00-004
-  deleted_at:
-
-Fmu_16_ko_translation:
-  id: 21301
-  fmu_id: 11496
-  locale: ko
-  name: 00-004
-  deleted_at:
-
-Fmu_16_vi_translation:
-  id: 21302
-  fmu_id: 11496
-  locale: vi
-  name: 00-004
-  deleted_at:
-
-Fmu_16_pt_translation:
-  id: 102959
-  fmu_id: 11496
-  locale: pt
-  name: 00-004
-  deleted_at:
-
-Fmu_17_en_translation:
-  id: 13494
-  fmu_id: 11749
-  locale: en
-  name: '1001309'
-  deleted_at:
-
-Fmu_17_fr_translation:
-  id: 13495
-  fmu_id: 11749
-  locale: fr
-  name: '1001309'
-  deleted_at:
-
-Fmu_17_zh-CN_translation:
-  id: 14148
-  fmu_id: 11749
-  locale: zh-CN
-  name: '1001309'
-  deleted_at:
-
-Fmu_17_ja_translation:
-  id: 21468
-  fmu_id: 11749
-  locale: ja
-  name: '1001309'
-  deleted_at:
-
-Fmu_17_ko_translation:
-  id: 21469
-  fmu_id: 11749
-  locale: ko
-  name: '1001309'
-  deleted_at:
-
-Fmu_17_vi_translation:
-  id: 21470
-  fmu_id: 11749
-  locale: vi
-  name: '1001309'
-  deleted_at:
-
-Fmu_17_pt_translation:
-  id: 103210
-  fmu_id: 11749
-  locale: pt
-  name: '1001309'
-  deleted_at:
-
-Fmu_18_en_translation:
-  id: 13238
-  fmu_id: 11621
-  locale: en
-  name: 10-007
-  deleted_at:
-
-Fmu_18_fr_translation:
-  id: 13239
-  fmu_id: 11621
-  locale: fr
-  name: 10-007
-  deleted_at:
-
-Fmu_18_zh-CN_translation:
-  id: 14020
-  fmu_id: 11621
-  locale: zh-CN
-  name: 10-007
-  deleted_at:
-
-Fmu_18_pt_translation:
-  id: 103082
-  fmu_id: 11621
-  locale: pt
-  name: 10-007
-  deleted_at:
-
-Fmu_18_ja_translation:
-  id: 21621
-  fmu_id: 11621
-  locale: ja
-  name: 10-007
-  deleted_at:
-
-Fmu_18_ko_translation:
-  id: 21622
-  fmu_id: 11621
-  locale: ko
-  name: 10-007
-  deleted_at:
-
-Fmu_18_vi_translation:
-  id: 21623
-  fmu_id: 11621
-  locale: vi
-  name: 10-007
-  deleted_at:
-
-Fmu_19_en_translation:
-  id: 56
-  fmu_id: 56
-  locale: en
-  name: Ngombe
-  deleted_at:
-
-Fmu_19_fr_translation:
-  id: 171
-  fmu_id: 56
-  locale: fr
-  name: Ngombe
-  deleted_at:
-
-Fmu_19_zh-CN_translation:
-  id: 4348
-  fmu_id: 56
-  locale: zh-CN
-  name: Ngombe
-  deleted_at:
-
-Fmu_19_pt_translation:
-  id: 102918
-  fmu_id: 56
-  locale: pt
-  name: Ngombe
-  deleted_at:
-
-Fmu_19_ja_translation:
-  id: 22284
-  fmu_id: 56
-  locale: ja
-  name: Ngombe
-  deleted_at:
-
-Fmu_19_ko_translation:
-  id: 22285
-  fmu_id: 56
-  locale: ko
-  name: Ngombe
-  deleted_at:
-
-Fmu_19_vi_translation:
-  id: 22286
-  fmu_id: 56
-  locale: vi
-  name: Ngombe
-  deleted_at:
-
-Fmu_20_en_translation:
-  id: 13264
-  fmu_id: 11634
-  locale: en
-  name: '09-004A'
-  deleted_at:
-
-Fmu_20_fr_translation:
-  id: 13265
-  fmu_id: 11634
-  locale: fr
-  name: '09-004A'
-  deleted_at:
-
-Fmu_20_zh-CN_translation:
-  id: 14033
-  fmu_id: 11634
-  locale: zh-CN
-  name: '09-004A'
-  deleted_at:
-
-Fmu_20_pt_translation:
-  id: 103095
-  fmu_id: 11634
-  locale: pt
-  name: '09-004A'
-  deleted_at:
-
-Fmu_20_ja_translation:
-  id: 22251
-  fmu_id: 11634
-  locale: ja
-  name: '09-004A'
-  deleted_at:
-
-Fmu_20_ko_translation:
-  id: 22252
-  fmu_id: 11634
-  locale: ko
-  name: '09-004A'
-  deleted_at:
-
-Fmu_20_vi_translation:
-  id: 22253
-  fmu_id: 11634
-  locale: vi
-  name: '09-004A'
-  deleted_at:
-
-Fmu_21_fr_translation:
-  id: 220
-  fmu_id: 105
-  locale: fr
-  name: Mokabi dzanga
-  deleted_at:
-
-Fmu_21_en_translation:
-  id: 105
-  fmu_id: 105
-  locale: en
-  name: Mokabi dzanga
-  deleted_at:
-
-Fmu_21_zh-CN_translation:
-  id: 4373
-  fmu_id: 105
-  locale: zh-CN
-  name: Mokabi dzanga
-  deleted_at:
-
-Fmu_21_pt_translation:
-  id: 102950
-  fmu_id: 105
-  locale: pt
-  name: Mokabi dzanga
-  deleted_at:
-
-Fmu_21_ja_translation:
-  id: 22944
-  fmu_id: 105
-  locale: ja
-  name: Mokabi dzanga
-  deleted_at:
-
-Fmu_21_ko_translation:
-  id: 22945
-  fmu_id: 105
-  locale: ko
-  name: Mokabi dzanga
-  deleted_at:
-
-Fmu_21_vi_translation:
-  id: 22946
-  fmu_id: 105
-  locale: vi
-  name: Mokabi dzanga
-  deleted_at:
-
-Fmu_22_fr_translation:
-  id: 222
-  fmu_id: 107
-  locale: fr
-  name: Cayo
-  deleted_at:
-
-Fmu_22_en_translation:
-  id: 107
-  fmu_id: 107
-  locale: en
-  name: Cayo
-  deleted_at:
-
-Fmu_22_zh-CN_translation:
-  id: 4366
-  fmu_id: 107
-  locale: zh-CN
-  name: Cayo
-  deleted_at:
-
-Fmu_22_pt_translation:
-  id: 102937
-  fmu_id: 107
-  locale: pt
-  name: Cayo
-  deleted_at:
-
-Fmu_22_ja_translation:
-  id: 22845
-  fmu_id: 107
-  locale: ja
-  name: Cayo
-  deleted_at:
-
-Fmu_22_ko_translation:
-  id: 22846
-  fmu_id: 107
-  locale: ko
-  name: Cayo
-  deleted_at:
-
-Fmu_22_vi_translation:
-  id: 22847
-  fmu_id: 107
-  locale: vi
-  name: Cayo
-  deleted_at:
-
-Fmu_23_en_translation:
-  id: 102770
-  fmu_id: 100458
-  locale: en
-  name: '0702135'
-  deleted_at:
-
-Fmu_23_fr_translation:
-  id: 102776
-  fmu_id: 100458
-  locale: fr
-  name: '0702135'
-  deleted_at:
-
-Fmu_23_zh-CN_translation:
-  id: 102777
-  fmu_id: 100458
-  locale: zh-CN
-  name: '0702135'
-  deleted_at:
-
-Fmu_23_ja_translation:
-  id: 102778
-  fmu_id: 100458
-  locale: ja
-  name: '0702135'
-  deleted_at:
-
-Fmu_23_ko_translation:
-  id: 102779
-  fmu_id: 100458
-  locale: ko
-  name: '0702135'
-  deleted_at:
-
-Fmu_23_vi_translation:
-  id: 102780
-  fmu_id: 100458
-  locale: vi
-  name: '0702135'
-  deleted_at:
-
-Fmu_23_pt_translation:
-  id: 103414
-  fmu_id: 100458
-  locale: pt
-  name: '0702135'
-  deleted_at:
-
-Fmu_24_fr_translation:
-  id: 224
-  fmu_id: 109
-  locale: fr
-  name: Mimbeli ibenga
-  deleted_at:
-
-Fmu_24_en_translation:
-  id: 109
-  fmu_id: 109
-  locale: en
-  name: Mimbeli ibenga
-  deleted_at:
-
-Fmu_24_zh-CN_translation:
-  id: 4353
-  fmu_id: 109
-  locale: zh-CN
-  name: Mimbeli ibenga
-  deleted_at:
-
-Fmu_24_pt_translation:
-  id: 102938
-  fmu_id: 109
-  locale: pt
-  name: Mimbeli ibenga
-  deleted_at:
-
-Fmu_24_ja_translation:
-  id: 22746
-  fmu_id: 109
-  locale: ja
-  name: Mimbeli ibenga
-  deleted_at:
-
-Fmu_24_ko_translation:
-  id: 22747
-  fmu_id: 109
-  locale: ko
-  name: Mimbeli ibenga
-  deleted_at:
-
-Fmu_24_vi_translation:
-  id: 22748
-  fmu_id: 109
-  locale: vi
-  name: Mimbeli ibenga
-  deleted_at:
-
-Fmu_25_pt_translation:
-  id: 103658
-  fmu_id: 100420
-  locale: pt
-  name: '0702114'
-  deleted_at:
-
-Fmu_25_en_translation:
-  id: 102467
-  fmu_id: 100420
-  locale: en
-  name: '0702114'
-  deleted_at:
-
-Fmu_25_fr_translation:
-  id: 102468
-  fmu_id: 100420
-  locale: fr
-  name: '0702114'
-  deleted_at:
-
-Fmu_25_zh-CN_translation:
-  id: 102469
-  fmu_id: 100420
-  locale: zh-CN
-  name: '0702114'
-  deleted_at:
-
-Fmu_25_ja_translation:
-  id: 102470
-  fmu_id: 100420
-  locale: ja
-  name: '0702114'
-  deleted_at:
-
-Fmu_25_ko_translation:
-  id: 102471
-  fmu_id: 100420
-  locale: ko
-  name: '0702114'
-  deleted_at:
-
-Fmu_25_vi_translation:
-  id: 102472
-  fmu_id: 100420
-  locale: vi
-  name: '0702114'
-  deleted_at:
-
-Fmu_26_en_translation:
-  id: 13204
-  fmu_id: 11604
-  locale: en
-  name: 10-004
-  deleted_at:
-
-Fmu_26_fr_translation:
-  id: 13205
-  fmu_id: 11604
-  locale: fr
-  name: 10-004
-  deleted_at:
-
-Fmu_26_zh-CN_translation:
-  id: 14003
-  fmu_id: 11604
-  locale: zh-CN
-  name: 10-004
-  deleted_at:
-
-Fmu_26_ja_translation:
-  id: 21459
-  fmu_id: 11604
-  locale: ja
-  name: 10-004
-  deleted_at:
-
-Fmu_26_ko_translation:
-  id: 21460
-  fmu_id: 11604
-  locale: ko
-  name: 10-004
-  deleted_at:
-
-Fmu_26_vi_translation:
-  id: 21461
-  fmu_id: 11604
-  locale: vi
-  name: 10-004
-  deleted_at:
-
-Fmu_26_pt_translation:
-  id: 103065
-  fmu_id: 11604
-  locale: pt
-  name: 10-004
-  deleted_at:
-
-Fmu_27_en_translation:
   id: 68
   fmu_id: 68
   locale: en
   name: Tala-tala
   deleted_at:
 
-Fmu_27_fr_translation:
+Fmu_9_fr_translation:
   id: 183
   fmu_id: 68
   locale: fr
   name: Tala-tala
   deleted_at:
 
-Fmu_27_zh-CN_translation:
-  id: 4392
-  fmu_id: 68
-  locale: zh-CN
-  name: Tala-tala
-  deleted_at:
-
-Fmu_27_pt_translation:
-  id: 102858
-  fmu_id: 68
-  locale: pt
-  name: Tala-tala
-  deleted_at:
-
-Fmu_27_ja_translation:
-  id: 22863
-  fmu_id: 68
-  locale: ja
-  name: Tala-tala
-  deleted_at:
-
-Fmu_27_ko_translation:
-  id: 22864
-  fmu_id: 68
-  locale: ko
-  name: Tala-tala
-  deleted_at:
-
-Fmu_27_vi_translation:
-  id: 22865
-  fmu_id: 68
-  locale: vi
-  name: Tala-tala
-  deleted_at:
-
-Fmu_28_en_translation:
-  id: 13200
-  fmu_id: 11602
+Fmu_10_en_translation:
+  id: 83
+  fmu_id: 83
   locale: en
-  name: 10-002
+  name: Doumanga
   deleted_at:
 
-Fmu_28_fr_translation:
-  id: 13201
-  fmu_id: 11602
+Fmu_10_fr_translation:
+  id: 198
+  fmu_id: 83
   locale: fr
-  name: 10-002
+  name: Doumanga
   deleted_at:
 
-Fmu_28_zh-CN_translation:
-  id: 14001
-  fmu_id: 11602
-  locale: zh-CN
-  name: 10-002
-  deleted_at:
-
-Fmu_28_ja_translation:
-  id: 21456
-  fmu_id: 11602
-  locale: ja
-  name: 10-002
-  deleted_at:
-
-Fmu_28_ko_translation:
-  id: 21457
-  fmu_id: 11602
-  locale: ko
-  name: 10-002
-  deleted_at:
-
-Fmu_28_vi_translation:
-  id: 21458
-  fmu_id: 11602
-  locale: vi
-  name: 10-002
-  deleted_at:
-
-Fmu_28_pt_translation:
-  id: 103063
-  fmu_id: 11602
-  locale: pt
-  name: 10-002
-  deleted_at:
-
-Fmu_29_en_translation:
-  id: 13316
-  fmu_id: 11660
-  locale: en
-  name: 10-001
-  deleted_at:
-
-Fmu_29_fr_translation:
-  id: 13317
-  fmu_id: 11660
-  locale: fr
-  name: 10-001
-  deleted_at:
-
-Fmu_29_zh-CN_translation:
-  id: 14059
-  fmu_id: 11660
-  locale: zh-CN
-  name: 10-001
-  deleted_at:
-
-Fmu_29_ja_translation:
-  id: 21462
-  fmu_id: 11660
-  locale: ja
-  name: 10-001
-  deleted_at:
-
-Fmu_29_ko_translation:
-  id: 21463
-  fmu_id: 11660
-  locale: ko
-  name: 10-001
-  deleted_at:
-
-Fmu_29_vi_translation:
-  id: 21464
-  fmu_id: 11660
-  locale: vi
-  name: 10-001
-  deleted_at:
-
-Fmu_29_pt_translation:
-  id: 103121
-  fmu_id: 11660
-  locale: pt
-  name: 10-001
-  deleted_at:
-
-Fmu_30_zh-CN_translation:
-  id: 4312
-  fmu_id: 49
-  locale: zh-CN
-  name: 005/18
-  deleted_at:
-
-Fmu_30_fr_translation:
-  id: 164
-  fmu_id: 49
-  locale: fr
-  name: 005/18
-  deleted_at:
-
-Fmu_30_ja_translation:
-  id: 20634
-  fmu_id: 49
-  locale: ja
-  name: 005/18
-  deleted_at:
-
-Fmu_30_ko_translation:
-  id: 20635
-  fmu_id: 49
-  locale: ko
-  name: 005/18
-  deleted_at:
-
-Fmu_30_vi_translation:
-  id: 20636
-  fmu_id: 49
-  locale: vi
-  name: 005/18
-  deleted_at:
-
-Fmu_30_pt_translation:
-  id: 103657
-  fmu_id: 49
-  locale: pt
-  name: 005/18
-  deleted_at:
-
-Fmu_30_en_translation:
-  id: 49
-  fmu_id: 49
-  locale: en
-  name: 005/18
-  deleted_at:
-
-Fmu_31_en_translation:
+Fmu_11_en_translation:
   id: 84
   fmu_id: 84
   locale: en
   name: Nkola
   deleted_at:
 
-Fmu_31_fr_translation:
+Fmu_11_fr_translation:
   id: 199
   fmu_id: 84
   locale: fr
   name: Nkola
   deleted_at:
 
-Fmu_31_zh-CN_translation:
-  id: 4365
-  fmu_id: 84
-  locale: zh-CN
-  name: Nkola
+Fmu_12_fr_translation:
+  id: 220
+  fmu_id: 105
+  locale: fr
+  name: Mokabi dzanga
   deleted_at:
 
-Fmu_31_pt_translation:
-  id: 102871
-  fmu_id: 84
-  locale: pt
-  name: Nkola
+Fmu_12_en_translation:
+  id: 105
+  fmu_id: 105
+  locale: en
+  name: Mokabi dzanga
   deleted_at:
 
-Fmu_31_ja_translation:
-  id: 22842
-  fmu_id: 84
-  locale: ja
-  name: Nkola
+Fmu_13_fr_translation:
+  id: 222
+  fmu_id: 107
+  locale: fr
+  name: Cayo
   deleted_at:
 
-Fmu_31_ko_translation:
-  id: 22843
-  fmu_id: 84
-  locale: ko
-  name: Nkola
+Fmu_13_en_translation:
+  id: 107
+  fmu_id: 107
+  locale: en
+  name: Cayo
   deleted_at:
 
-Fmu_31_vi_translation:
-  id: 22844
-  fmu_id: 84
-  locale: vi
-  name: Nkola
+Fmu_14_fr_translation:
+  id: 224
+  fmu_id: 109
+  locale: fr
+  name: Mimbeli ibenga
+  deleted_at:
+
+Fmu_14_en_translation:
+  id: 109
+  fmu_id: 109
+  locale: en
+  name: Mimbeli ibenga
+  deleted_at:
+
+Fmu_15_en_translation:
+  id: 12988
+  fmu_id: 11496
+  locale: en
+  name: 00-004
+  deleted_at:
+
+Fmu_15_fr_translation:
+  id: 12989
+  fmu_id: 11496
+  locale: fr
+  name: 00-004
+  deleted_at:
+
+Fmu_16_en_translation:
+  id: 12994
+  fmu_id: 11499
+  locale: en
+  name: 11-001
+  deleted_at:
+
+Fmu_16_fr_translation:
+  id: 12995
+  fmu_id: 11499
+  locale: fr
+  name: 11-001
+  deleted_at:
+
+Fmu_17_en_translation:
+  id: 13000
+  fmu_id: 11502
+  locale: en
+  name: '08-009'
+  deleted_at:
+
+Fmu_17_fr_translation:
+  id: 13001
+  fmu_id: 11502
+  locale: fr
+  name: '08-009'
+  deleted_at:
+
+Fmu_18_fr_translation:
+  id: 13039
+  fmu_id: 11521
+  locale: fr
+  name: '08-003'
+  deleted_at:
+
+Fmu_18_en_translation:
+  id: 13038
+  fmu_id: 11521
+  locale: en
+  name: '08-003'
+  deleted_at:
+
+Fmu_19_en_translation:
+  id: 13042
+  fmu_id: 11523
+  locale: en
+  name: '08-005'
+  deleted_at:
+
+Fmu_19_fr_translation:
+  id: 13043
+  fmu_id: 11523
+  locale: fr
+  name: '08-005'
+  deleted_at:
+
+Fmu_20_en_translation:
+  id: 13134
+  fmu_id: 11569
+  locale: en
+  name: 10-003
+  deleted_at:
+
+Fmu_20_fr_translation:
+  id: 13135
+  fmu_id: 11569
+  locale: fr
+  name: 10-003
+  deleted_at:
+
+Fmu_21_en_translation:
+  id: 13154
+  fmu_id: 11579
+  locale: en
+  name: '09-005A'
+  deleted_at:
+
+Fmu_21_fr_translation:
+  id: 13155
+  fmu_id: 11579
+  locale: fr
+  name: '09-005A'
+  deleted_at:
+
+Fmu_22_en_translation:
+  id: 13200
+  fmu_id: 11602
+  locale: en
+  name: 10-002
+  deleted_at:
+
+Fmu_22_fr_translation:
+  id: 13201
+  fmu_id: 11602
+  locale: fr
+  name: 10-002
+  deleted_at:
+
+Fmu_23_en_translation:
+  id: 13204
+  fmu_id: 11604
+  locale: en
+  name: 10-004
+  deleted_at:
+
+Fmu_23_fr_translation:
+  id: 13205
+  fmu_id: 11604
+  locale: fr
+  name: 10-004
+  deleted_at:
+
+Fmu_24_en_translation:
+  id: 13230
+  fmu_id: 11617
+  locale: en
+  name: 10-011
+  deleted_at:
+
+Fmu_24_fr_translation:
+  id: 13231
+  fmu_id: 11617
+  locale: fr
+  name: 10-011
+  deleted_at:
+
+Fmu_25_en_translation:
+  id: 13232
+  fmu_id: 11618
+  locale: en
+  name: '09-003'
+  deleted_at:
+
+Fmu_25_fr_translation:
+  id: 13233
+  fmu_id: 11618
+  locale: fr
+  name: '09-003'
+  deleted_at:
+
+Fmu_26_en_translation:
+  id: 13238
+  fmu_id: 11621
+  locale: en
+  name: 10-007
+  deleted_at:
+
+Fmu_26_fr_translation:
+  id: 13239
+  fmu_id: 11621
+  locale: fr
+  name: 10-007
+  deleted_at:
+
+Fmu_27_en_translation:
+  id: 13264
+  fmu_id: 11634
+  locale: en
+  name: '09-004A'
+  deleted_at:
+
+Fmu_27_fr_translation:
+  id: 13265
+  fmu_id: 11634
+  locale: fr
+  name: '09-004A'
+  deleted_at:
+
+Fmu_28_en_translation:
+  id: 13316
+  fmu_id: 11660
+  locale: en
+  name: 10-001
+  deleted_at:
+
+Fmu_28_fr_translation:
+  id: 13317
+  fmu_id: 11660
+  locale: fr
+  name: 10-001
+  deleted_at:
+
+Fmu_29_en_translation:
+  id: 13476
+  fmu_id: 11740
+  locale: en
+  name: '1001311'
+  deleted_at:
+
+Fmu_29_fr_translation:
+  id: 13477
+  fmu_id: 11740
+  locale: fr
+  name: '1001311'
+  deleted_at:
+
+Fmu_30_en_translation:
+  id: 13494
+  fmu_id: 11749
+  locale: en
+  name: '1001309'
+  deleted_at:
+
+Fmu_30_fr_translation:
+  id: 13495
+  fmu_id: 11749
+  locale: fr
+  name: '1001309'
+  deleted_at:
+
+Fmu_31_en_translation:
+  id: 20316
+  fmu_id: 20099
+  locale: en
+  name: '0702111'
+  deleted_at:
+
+Fmu_31_fr_translation:
+  id: 20317
+  fmu_id: 20099
+  locale: fr
+  name: '0702111'
+  deleted_at:
+
+Fmu_32_en_translation:
+  id: 102467
+  fmu_id: 100420
+  locale: en
+  name: '0702114'
+  deleted_at:
+
+Fmu_32_fr_translation:
+  id: 102468
+  fmu_id: 100420
+  locale: fr
+  name: '0702114'
+  deleted_at:
+
+Fmu_33_en_translation:
+  id: 102615
+  fmu_id: 100438
+  locale: en
+  name: '0702118'
+  deleted_at:
+
+Fmu_33_fr_translation:
+  id: 102621
+  fmu_id: 100438
+  locale: fr
+  name: '0702118'
+  deleted_at:
+
+Fmu_34_en_translation:
+  id: 102770
+  fmu_id: 100458
+  locale: en
+  name: '0702135'
+  deleted_at:
+
+Fmu_34_fr_translation:
+  id: 102776
+  fmu_id: 100458
+  locale: fr
+  name: '0702135'
   deleted_at:

@@ -196,116 +196,116 @@ DocumentFile_49:
   attachment: afriwood-industries-cahier-des-charges-particulier-2018-06-20.pdf
 
 DocumentFile_50:
-  id: 405
-  attachment: cib-convention-d-etablissement-2018-11-09.pdf
-
-DocumentFile_51:
   id: 342
   attachment: cib-cahier-des-charges-particulier-2018-08-22.pdf
 
-DocumentFile_52:
+DocumentFile_51:
   id: 344
   attachment: cib-compte-rendu-de-la-reunion-de-validation-du-plan-d-amenagement-2018-08-22.pdf
 
-DocumentFile_53:
+DocumentFile_52:
   id: 345
   attachment: sifco-declaration-en-douanes-2018-09-07.pdf
 
-DocumentFile_54:
+DocumentFile_53:
   id: 346
   attachment: sifco-attestation-d-immatriculation-a-la-cnss-2018-09-07.pdf
 
-DocumentFile_55:
+DocumentFile_54:
   id: 347
   attachment: sifco-autorisation-d-heures-supplementaires-le-cas-echeant-2018-09-07.pdf
 
-DocumentFile_56:
+DocumentFile_55:
   id: 348
   attachment: sifco-arrete-d-autorisation-d-exercice-du-ministere-en-charge-de-la-sante-2018-09-07.pdf
 
-DocumentFile_57:
+DocumentFile_56:
   id: 349
   attachment: sifco-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2018-09-07.pdf
 
-DocumentFile_58:
+DocumentFile_57:
   id: 350
   attachment: sifco-convention-d-etablissement-2018-09-07.pdf
 
-DocumentFile_59:
+DocumentFile_58:
   id: 365
   attachment: mokabi-sa-document-du-tribunal-actant-le-marteau-forestier-2018-09-17.pdf
 
-DocumentFile_60:
+DocumentFile_59:
   id: 366
   attachment: mokabi-sa-extrait-du-registre-du-commerce-et-du-credit-mobilier-2018-09-17.pdf
 
-DocumentFile_61:
+DocumentFile_60:
   id: 367
   attachment: mokabi-sa-certificat-phytosanitaire-2018-09-17.pdf
 
-DocumentFile_62:
+DocumentFile_61:
   id: 368
   attachment: mokabi-sa-declaration-en-douanes-2018-09-17.pdf
 
-DocumentFile_63:
+DocumentFile_62:
   id: 369
   attachment: mokabi-sa-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2018-09-17.pdf
 
-DocumentFile_64:
+DocumentFile_63:
   id: 370
   attachment: mokabi-sa-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2018-09-17.pdf
 
-DocumentFile_65:
+DocumentFile_64:
   id: 372
   attachment: sifco-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2018-09-18.pdf
 
-DocumentFile_66:
+DocumentFile_65:
   id: 374
   attachment: cft-numero-d-identification-national-2018-10-22.pdf
 
-DocumentFile_67:
+DocumentFile_66:
   id: 375
   attachment: cft-preuve-d-immatriculation-au-rccm-2018-10-22.pdf
 
-DocumentFile_68:
+DocumentFile_67:
   id: 376
   attachment: cft-lettre-d-attribution-du-numero-impot-2018-10-22.pdf
 
-DocumentFile_69:
+DocumentFile_68:
   id: 377
   attachment: cft-certificat-d-affiliation-de-l-entite-a-l-institut-national-de-securite-sociale-inss-2018-10-22.pdf
 
-DocumentFile_70:
+DocumentFile_69:
   id: 378
   attachment: cft-n-d-affiliation-a-l-inpp-2018-10-22.jpeg
 
-DocumentFile_71:
+DocumentFile_70:
   id: 379
   attachment: cft-reglement-d-entreprise-vise-par-l-inspecteur-du-travail-2018-10-22.pdf
 
-DocumentFile_72:
+DocumentFile_71:
   id: 380
   attachment: cft-certificat-environnemental-et-social-2018-10-22.pdf
 
-DocumentFile_73:
+DocumentFile_72:
   id: 382
   attachment: cft-permis-d-exploitation-pour-les-usines-2018-10-24.pdf
 
-DocumentFile_74:
+DocumentFile_73:
   id: 383
   attachment: cft-certificat-de-conformite-du-plan-d-amenagement-2018-10-24.pdf
 
-DocumentFile_75:
+DocumentFile_74:
   id: 384
   attachment: cft-arrete-d-approbation-du-plan-d-amenagement-2018-10-24.pdf
 
-DocumentFile_76:
+DocumentFile_75:
   id: 386
   attachment: ifo-interholco-cahier-des-charges-particulier-2018-10-24.pdf
 
-DocumentFile_77:
+DocumentFile_76:
   id: 392
   attachment: ifo-interholco-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2018-10-25.pdf
+
+DocumentFile_77:
+  id: 405
+  attachment: cib-convention-d-etablissement-2018-11-09.pdf
 
 DocumentFile_78:
   id: 418
@@ -356,544 +356,544 @@ DocumentFile_89:
   attachment: ifo-interholco-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-de-gestion-2019-02-28.pdf
 
 DocumentFile_90:
-  id: 1979
-  attachment: ifo-interholco-extrait-du-registre-du-commerce-et-du-credit-mobilier-2021-05-12.pdf
-
-DocumentFile_91:
   id: 526
   attachment: lorema-agrement-a-la-profession-forestiere-2019-01-31.pdf
 
-DocumentFile_92:
+DocumentFile_91:
   id: 527
   attachment: lorema-convention-provisoire-d-exploitation-2019-01-31.pdf
 
-DocumentFile_93:
+DocumentFile_92:
   id: 539
   attachment: siencam-convention-provisoire-d-exploitation-2019-02-01.pdf
 
-DocumentFile_94:
+DocumentFile_93:
   id: 541
   attachment: cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
 
-DocumentFile_95:
+DocumentFile_94:
   id: 542
   attachment: cfc-plan-d-amenagement-2019-02-04.pdf
 
-DocumentFile_96:
+DocumentFile_95:
   id: 543
   attachment: cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
 
-DocumentFile_97:
+DocumentFile_96:
   id: 544
   attachment: cfc-plan-d-amenagement-2019-02-04.pdf
 
-DocumentFile_98:
+DocumentFile_97:
   id: 545
   attachment: cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
 
-DocumentFile_99:
+DocumentFile_98:
   id: 546
   attachment: cfc-plan-d-amenagement-2019-02-04.pdf
 
-DocumentFile_100:
+DocumentFile_99:
   id: 549
   attachment: lorema-convention-provisoire-d-exploitation-2019-02-05.pdf
 
-DocumentFile_101:
+DocumentFile_100:
   id: 550
   attachment: lorema-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-05.pdf
 
-DocumentFile_102:
+DocumentFile_101:
   id: 551
   attachment: lorema-plan-d-amenagement-2019-02-05.pdf
 
-DocumentFile_103:
+DocumentFile_102:
   id: 552
   attachment: sab-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-05.pdf
 
-DocumentFile_104:
+DocumentFile_103:
   id: 553
   attachment: sab-plan-d-amenagement-2019-02-05.pdf
 
-DocumentFile_105:
+DocumentFile_104:
   id: 577
   attachment: lorema-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-07.pdf
 
-DocumentFile_106:
+DocumentFile_105:
   id: 578
   attachment: lorema-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-07.pdf
 
-DocumentFile_107:
+DocumentFile_106:
   id: 579
   attachment: lorema-plan-d-amenagement-2019-02-07.pdf
 
-DocumentFile_108:
+DocumentFile_107:
   id: 580
   attachment: lorema-plan-d-amenagement-2019-02-07.pdf
 
-DocumentFile_109:
+DocumentFile_108:
   id: 600
   attachment: cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-12.pdf
 
-DocumentFile_110:
+DocumentFile_109:
   id: 602
   attachment: siencam-decret-portant-attribution-de-la-concession-forestiere-2019-02-15.pdf
 
-DocumentFile_111:
+DocumentFile_110:
   id: 606
   attachment: cfc-decret-portant-attribution-de-la-concession-forestiere-2019-02-21.pdf
 
-DocumentFile_112:
+DocumentFile_111:
   id: 607
   attachment: cfc-plan-d-amenagement-2019-02-21.pdf
 
-DocumentFile_113:
+DocumentFile_112:
   id: 609
   attachment: cfc-decret-portant-attribution-de-la-concession-forestiere-2019-02-21.pdf
 
-DocumentFile_114:
+DocumentFile_113:
   id: 610
   attachment: cfc-decret-portant-attribution-de-la-concession-forestiere-2019-02-21.pdf
 
-DocumentFile_115:
+DocumentFile_114:
   id: 620
   attachment: sebc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-22.pdf
 
-DocumentFile_116:
+DocumentFile_115:
   id: 621
   attachment: sebc-plan-d-amenagement-2019-02-22.pdf
 
-DocumentFile_117:
+DocumentFile_116:
   id: 646
   attachment: siencam-decret-portant-attribution-de-la-concession-forestiere-2019-02-25.pdf
 
-DocumentFile_118:
+DocumentFile_117:
   id: 647
   attachment: siencam-convention-provisoire-d-exploitation-2019-02-25.pdf
 
-DocumentFile_119:
+DocumentFile_118:
   id: 648
   attachment: siencam-plan-d-amenagement-2019-02-25.pdf
 
-DocumentFile_120:
+DocumentFile_119:
   id: 649
   attachment: siencam-agrement-a-la-profession-forestiere-2019-02-25.pdf
 
-DocumentFile_121:
+DocumentFile_120:
   id: 650
   attachment: siencam-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-25.pdf
 
-DocumentFile_122:
+DocumentFile_121:
   id: 651
   attachment: siencam-plan-d-amenagement-2019-02-25.pdf
 
-DocumentFile_123:
+DocumentFile_122:
   id: 739
   attachment: siencam-attestations-pour-soumission-des-6-derniers-mois-2019-04-18.pdf
 
-DocumentFile_124:
+DocumentFile_123:
   id: 740
   attachment: siencam-convention-definitive-d-exploitation-et-cahier-des-charges-2019-04-18.pdf
 
-DocumentFile_125:
+DocumentFile_124:
   id: 741
   attachment: siencam-certificat-de-conformite-environnementale-2019-04-18.pdf
 
-DocumentFile_126:
+DocumentFile_125:
   id: 742
   attachment: siencam-notification-de-demarrage-des-activites-2019-04-18.pdf
 
-DocumentFile_127:
+DocumentFile_126:
   id: 743
   attachment: siencam-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2019-04-18.pdf
 
-DocumentFile_128:
+DocumentFile_127:
   id: 744
   attachment: siencam-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-04-18.pdf
 
-DocumentFile_129:
+DocumentFile_128:
   id: 745
   attachment: siencam-convention-definitive-d-exploitation-et-cahier-des-charges-2019-04-18.pdf
 
-DocumentFile_130:
+DocumentFile_129:
   id: 746
   attachment: siencam-certificat-de-conformite-environnementale-2019-04-18.pdf
 
-DocumentFile_131:
+DocumentFile_130:
   id: 747
   attachment: siencam-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2019-04-18.pdf
 
-DocumentFile_132:
+DocumentFile_131:
   id: 748
   attachment: siencam-registre-du-commerce-de-l-entreprise-exploitante-2019-04-19.pdf
 
-DocumentFile_133:
+DocumentFile_132:
   id: 749
   attachment: siencam-declaration-d-etablissement-2019-04-19.pdf
 
-DocumentFile_134:
+DocumentFile_133:
   id: 750
   attachment: siencam-proces-verbal-d-election-des-delegues-du-personnel-2019-04-19.pdf
 
-DocumentFile_135:
+DocumentFile_134:
   id: 751
   attachment: siencam-convention-de-visites-et-de-soins-avec-un-medecin-traitant-2019-04-19.pdf
 
-DocumentFile_136:
+DocumentFile_135:
   id: 752
   attachment: siencam-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-2019-04-19.pdf
 
-DocumentFile_137:
-  id: 1922
-  attachment: attachment.pdf
-
-DocumentFile_138:
+DocumentFile_136:
   id: 803
   attachment: cib-etude-d-impact-environnementale-et-sociale-scierie-le-cas-echeant-2019-05-01.pdf
 
-DocumentFile_139:
+DocumentFile_137:
   id: 815
   attachment: cib-cahier-des-charges-particulier-2019-05-06.pdf
 
-DocumentFile_140:
+DocumentFile_138:
   id: 816
   attachment: cib-convention-d-amenagement-et-de-transformation-cat-2019-05-06.pdf
 
-DocumentFile_141:
+DocumentFile_139:
   id: 819
   attachment: cft-modele-de-marteau-depose-et-enregistre-2019-05-07.pdf
 
-DocumentFile_142:
+DocumentFile_140:
   id: 824
   attachment: cib-etude-d-impact-environnementale-et-sociale-base-vie-2019-05-08.pdf
 
-DocumentFile_143:
+DocumentFile_141:
   id: 826
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2019-05-14.pdf
 
-DocumentFile_144:
+DocumentFile_142:
   id: 829
   attachment: siencam-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2019-05-24.pdf
 
-DocumentFile_145:
+DocumentFile_143:
   id: 832
   attachment: siencam-proces-verbaux-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2019-05-24.pdf
 
-DocumentFile_146:
+DocumentFile_144:
   id: 842
   attachment: cft-permis-de-coupe-industrielle-pcibo-2019-05-28.pdf
 
-DocumentFile_147:
+DocumentFile_145:
   id: 843
   attachment: cft-numero-d-import-export-2019-05-28.pdf
 
-DocumentFile_148:
+DocumentFile_146:
   id: 844
   attachment: cft-pv-de-designation-des-membres-et-d-installation-des-comites-locaux-de-gestion-clg-et-de-suivi-cls-2019-05-28.pdf
 
-DocumentFile_149:
+DocumentFile_147:
   id: 869
   attachment: cib-carte-d-identite-des-professionnels-du-bois-et-de-la-foret-2019-07-22.pdf
 
-DocumentFile_150:
+DocumentFile_148:
   id: 942
   attachment: ifo-interholco-proces-verbal-d-elections-professionnelles-2020-01-18.pdf
 
-DocumentFile_151:
+DocumentFile_149:
   id: 961
   attachment: sifco-certificat-d-agrement-forestier-2020-02-08.pdf
 
-DocumentFile_152:
+DocumentFile_150:
   id: 962
   attachment: sifco-extrait-du-registre-du-commerce-et-du-credit-mobilier-2020-02-08.pdf
 
-DocumentFile_153:
+DocumentFile_151:
   id: 963
   attachment: sifco-permis-d-exportation-cites-2020-02-08.pdf
 
-DocumentFile_154:
+DocumentFile_152:
   id: 964
   attachment: sifco-patente-2020-02-08.pdf
 
-DocumentFile_155:
+DocumentFile_153:
   id: 965
   attachment: sifco-proces-verbal-d-elections-professionnelles-2020-02-08.pdf
 
-DocumentFile_156:
+DocumentFile_154:
   id: 966
   attachment: sifco-carte-d-identite-des-professionnels-du-bois-et-de-la-foret-2020-02-11.pdf
 
-DocumentFile_157:
+DocumentFile_155:
   id: 981
   attachment: ifo-interholco-permis-d-exportation-cites-2020-03-15.pdf
 
-DocumentFile_158:
+DocumentFile_156:
   id: 982
   attachment: afriwood-industries-certificat-d-agrement-forestier-2020-03-18.pdf
 
-DocumentFile_159:
+DocumentFile_157:
   id: 983
   attachment: afriwood-industries-autorisation-de-coupe-d-achevement-2020-03-18.pdf
 
-DocumentFile_160:
+DocumentFile_158:
   id: 986
   attachment: afriwood-industries-convention-de-transformation-industrielle-cti-2020-03-19.pdf
 
-DocumentFile_161:
+DocumentFile_159:
   id: 987
   attachment: afriwood-industries-cahier-des-charges-particulier-2020-03-19.pdf
 
-DocumentFile_162:
+DocumentFile_160:
   id: 988
   attachment: afriwood-industries-cahier-des-charges-particulier-2020-03-19.pdf
 
-DocumentFile_163:
+DocumentFile_161:
+  id: 989
+  attachment: afriwood-industries-convention-d-amenagement-et-de-transformation-cat-2020-03-19.pdf
+
+DocumentFile_162:
   id: 990
   attachment: afriwood-industries-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2020-03-19.pdf
 
-DocumentFile_164:
+DocumentFile_163:
   id: 991
   attachment: afriwood-industries-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2020-03-19.pdf
 
+DocumentFile_164:
+  id: 992
+  attachment: afriwood-industries-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2020-03-19.pdf
+
 DocumentFile_165:
-  id: 1986
-  attachment: sab-attestation-de-non-redevance-2021-05-13.pdf
-
-DocumentFile_166:
-  id: 1989
-  attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
-
-DocumentFile_167:
   id: 993
   attachment: afriwood-industries-plan-d-amenagement-ou-son-resume-2020-03-20.pdf
 
-DocumentFile_168:
+DocumentFile_166:
   id: 996
   attachment: afriwood-industries-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2020-03-21.pdf
 
-DocumentFile_169:
+DocumentFile_167:
   id: 997
   attachment: afriwood-industries-etat-de-production-de-l-annee-d-achevement-2020-03-21.pdf
 
-DocumentFile_170:
+DocumentFile_168:
   id: 998
   attachment: afriwood-industries-etat-de-production-de-l-annee-d-achevement-2020-03-21.pdf
 
-DocumentFile_171:
+DocumentFile_169:
   id: 999
   attachment: afriwood-industries-proces-verbal-d-elections-professionnelles-2020-03-21.pdf
 
-DocumentFile_172:
-  id: 1993
-  attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
-
-DocumentFile_173:
+DocumentFile_170:
   id: 1067
   attachment: siencam-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2020-04-15.pdf
 
-DocumentFile_174:
+DocumentFile_171:
   id: 1068
   attachment: siencam-attestation-de-non-redevance-2020-04-15.pdf
 
-DocumentFile_175:
+DocumentFile_172:
   id: 1069
   attachment: cib-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2020-04-18.pdf
 
-DocumentFile_176:
+DocumentFile_173:
+  id: 1112
+  attachment: cib-etude-d-impact-environnementale-et-sociale-scierie-le-cas-echeant-2020-05-08.pdf
+
+DocumentFile_174:
   id: 1113
   attachment: cib-etude-d-impact-environnementale-et-sociale-base-vie-2020-05-08.pdf
 
-DocumentFile_177:
+DocumentFile_175:
   id: 1114
   attachment: cib-etude-d-impact-environnementale-et-sociale-exploitation-2020-05-08.pdf
 
-DocumentFile_178:
+DocumentFile_176:
   id: 1115
   attachment: cib-etude-d-impact-environnementale-et-sociale-exploitation-2020-05-08.pdf
 
-DocumentFile_179:
+DocumentFile_177:
   id: 1116
   attachment: cib-plan-de-gestion-2020-05-08.pdf
 
-DocumentFile_180:
+DocumentFile_178:
   id: 1120
   attachment: cib-etude-d-impact-environnementale-et-sociale-base-vie-2020-05-09.pdf
 
-DocumentFile_181:
+DocumentFile_179:
   id: 1138
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2020-05-13.pdf
 
-DocumentFile_182:
+DocumentFile_180:
+  id: 1143
+  attachment: ifo-interholco-etat-de-realisation-du-cahier-des-charges-2020-05-21.pdf
+
+DocumentFile_181:
   id: 1144
   attachment: ifo-interholco-etat-de-production-de-l-annee-d-achevement-2020-05-22.pdf
 
-DocumentFile_183:
+DocumentFile_182:
   id: 1146
   attachment: ifo-interholco-etat-de-production-de-l-annee-de-coupe-2020-05-22.pdf
 
-DocumentFile_184:
+DocumentFile_183:
   id: 1152
   attachment: ifo-interholco-patente-2020-05-22.pdf
 
-DocumentFile_185:
+DocumentFile_184:
   id: 1159
   attachment: cib-etude-d-impact-environnementale-et-sociale-exploitation-2020-05-23.pdf
 
-DocumentFile_186:
-  id: 1996
-  attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
-
-DocumentFile_187:
+DocumentFile_185:
   id: 1160
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2020-05-23.pdf
 
-DocumentFile_188:
+DocumentFile_186:
   id: 1161
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-de-gestion-2020-05-23.pdf
 
-DocumentFile_189:
+DocumentFile_187:
   id: 1162
   attachment: cib-etat-de-production-de-l-annee-de-coupe-2020-05-25.pdf
 
-DocumentFile_190:
+DocumentFile_188:
   id: 1163
   attachment: cib-etat-de-production-de-l-annee-de-coupe-2020-05-25.pdf
 
-DocumentFile_191:
+DocumentFile_189:
   id: 1164
   attachment: cib-etat-de-production-de-l-annee-de-coupe-2020-05-25.pdf
 
-DocumentFile_192:
+DocumentFile_190:
   id: 1165
   attachment: cib-etat-de-production-de-l-annee-de-coupe-2020-05-25.pdf
 
-DocumentFile_193:
+DocumentFile_191:
   id: 1166
   attachment: cib-compte-rendu-de-la-reunion-de-validation-du-plan-d-amenagement-2020-05-27.pdf
 
-DocumentFile_194:
+DocumentFile_192:
   id: 1167
   attachment: cib-etat-de-realisation-du-cahier-des-charges-2020-05-29.pdf
 
-DocumentFile_195:
+DocumentFile_193:
   id: 1168
   attachment: cib-etat-de-realisation-du-cahier-des-charges-2020-05-29.pdf
 
-DocumentFile_196:
+DocumentFile_194:
   id: 1169
   attachment: cib-etat-de-realisation-du-cahier-des-charges-2020-05-29.pdf
 
-DocumentFile_197:
+DocumentFile_195:
   id: 1171
   attachment: cib-plan-de-gestion-2020-06-02.pdf
 
-DocumentFile_198:
+DocumentFile_196:
   id: 1176
   attachment: cib-certificat-d-agrement-forestier-2020-06-09.pdf
 
-DocumentFile_199:
+DocumentFile_197:
   id: 1177
   attachment: sifco-autorisation-de-publication-2020-06-18.pdf
 
-DocumentFile_200:
+DocumentFile_198:
   id: 1179
   attachment: ifo-interholco-autorisation-de-publication-2020-06-18.pdf
 
-DocumentFile_201:
+DocumentFile_199:
+  id: 1181
+  attachment: afriwood-industries-autorisation-de-publication-2020-06-18.pdf
+
+DocumentFile_200:
   id: 1186
   attachment: cft-publication-authorization-2020-06-18.pdf
 
-DocumentFile_202:
+DocumentFile_201:
   id: 1189
   attachment: siencam-autorisation-de-publication-2020-06-18.pdf
 
-DocumentFile_203:
+DocumentFile_202:
   id: 1223
   attachment: lorema-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-08-04.pdf
 
-DocumentFile_204:
+DocumentFile_203:
   id: 1224
   attachment: lorema-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-08-04.pdf
 
-DocumentFile_205:
+DocumentFile_204:
   id: 1225
   attachment: lorema-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-08-04.pdf
 
-DocumentFile_206:
+DocumentFile_205:
   id: 1226
   attachment: lorema-certificat-de-conformite-environnementale-2020-08-04.pdf
 
-DocumentFile_207:
+DocumentFile_206:
   id: 1227
   attachment: lorema-lettre-d-approbation-du-contrat-de-sous-traitance-2020-08-04.pdf
 
-DocumentFile_208:
+DocumentFile_207:
   id: 1228
   attachment: lorema-lettre-d-approbation-du-contrat-de-sous-traitance-2020-08-04.pdf
 
-DocumentFile_209:
+DocumentFile_208:
   id: 1229
   attachment: lorema-lettre-d-approbation-du-contrat-de-sous-traitance-2020-08-04.pdf
 
-DocumentFile_210:
+DocumentFile_209:
   id: 1230
   attachment: lorema-certificat-de-conformite-environnementale-2020-08-04.pdf
 
-DocumentFile_211:
+DocumentFile_210:
   id: 1231
   attachment: lorema-certificat-de-conformite-environnementale-2020-08-04.pdf
 
-DocumentFile_212:
+DocumentFile_211:
   id: 1232
   attachment: lorema-decret-portant-attribution-de-la-concession-forestiere-2020-08-04.pdf
 
-DocumentFile_213:
+DocumentFile_212:
   id: 1233
   attachment: lorema-decret-portant-attribution-de-la-concession-forestiere-2020-08-04.pdf
 
-DocumentFile_214:
+DocumentFile_213:
   id: 1234
   attachment: lorema-decret-portant-attribution-de-la-concession-forestiere-2020-08-04.pdf
 
-DocumentFile_215:
+DocumentFile_214:
   id: 1235
   attachment: lorema-convention-provisoire-d-exploitation-2020-08-04.pdf
 
-DocumentFile_216:
-  id: 1313
-  attachment: cfc-agrement-a-la-profession-forestiere-2020-11-04.pdf
-
-DocumentFile_217:
+DocumentFile_215:
   id: 1262
   attachment: ifo-interholco-etude-d-impact-environnementale-et-sociale-scierie-le-cas-echeant-2020-09-08.pdf
 
-DocumentFile_218:
+DocumentFile_216:
+  id: 1303
+  attachment: cib-autorisation-de-publication-2020-10-12.pdf
+
+DocumentFile_217:
   id: 1304
   attachment: cib-agrement-de-transports-2020-10-12.pdf
 
+DocumentFile_218:
+  id: 1313
+  attachment: cfc-agrement-a-la-profession-forestiere-2020-11-04.pdf
+
 DocumentFile_219:
+  id: 1316
+  attachment: cfc-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-05.pdf
+
+DocumentFile_220:
   id: 1317
   attachment: cfc-attestation-pour-soumission-de-l-entreprise-exploitante-2020-11-05.pdf
 
-DocumentFile_220:
+DocumentFile_221:
   id: 1318
   attachment: cfc-convention-de-visites-et-de-soins-avec-un-medecin-traitant-2020-11-05.pdf
 
-DocumentFile_221:
+DocumentFile_222:
   id: 1319
   attachment: cfc-declaration-d-etablissement-2020-11-05.pdf
 
-DocumentFile_222:
+DocumentFile_223:
   id: 1320
   attachment: cfc-proces-verbal-d-election-des-delegues-du-personnel-2020-11-05.pdf
 
-DocumentFile_223:
-  id: 3427
-  attachment: cft-rapport-de-lot-a-exporter-2022-10-01.pdf
-
 DocumentFile_224:
-  id: 1303
-  attachment: cib-autorisation-de-publication-2020-10-12.pdf
+  id: 1321
+  attachment: cfc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-11-05.pdf
 
 DocumentFile_225:
   id: 1322
@@ -908,732 +908,732 @@ DocumentFile_227:
   attachment: cfc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-11-05.pdf
 
 DocumentFile_228:
-  id: 1327
-  attachment: cfc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-05.pdf
-
-DocumentFile_229:
-  id: 1333
-  attachment: cfc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-11-06.pdf
-
-DocumentFile_230:
-  id: 1334
-  attachment: cfc-certificat-de-conformite-environnementale-2020-11-06.pdf
-
-DocumentFile_231:
-  id: 1335
-  attachment: cfc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-06.pdf
-
-DocumentFile_232:
-  id: 1337
-  attachment: cfc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-11-06.pdf
-
-DocumentFile_233:
-  id: 1338
-  attachment: cfc-certificat-de-conformite-environnementale-2020-11-06.pdf
-
-DocumentFile_234:
-  id: 1339
-  attachment: cfc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-06.pdf
-
-DocumentFile_235:
-  id: 1341
-  attachment: sebc-agrement-a-la-profession-forestiere-2020-11-06.pdf
-
-DocumentFile_236:
-  id: 1345
-  attachment: sebc-attestation-pour-soumission-de-l-entreprise-exploitante-2020-11-06.pdf
-
-DocumentFile_237:
-  id: 1346
-  attachment: sebc-convention-de-visites-et-de-soins-avec-un-medecin-traitant-2020-11-06.pdf
-
-DocumentFile_238:
-  id: 1348
-  attachment: sebc-declaration-d-etablissement-2020-11-06.pdf
-
-DocumentFile_239:
-  id: 1349
-  attachment: sebc-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
-
-DocumentFile_240:
-  id: 1358
-  attachment: sebc-certificat-de-conformite-environnementale-2020-11-06.pdf
-
-DocumentFile_241:
-  id: 1367
-  attachment: sab-agrement-a-la-profession-forestiere-2020-11-06.pdf
-
-DocumentFile_242:
-  id: 1369
-  attachment: sab-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-06.pdf
-
-DocumentFile_243:
-  id: 1370
-  attachment: sab-attestation-pour-soumission-de-l-entreprise-exploitante-2020-11-06.pdf
-
-DocumentFile_244:
-  id: 1371
-  attachment: sab-convention-de-visites-et-de-soins-avec-un-medecin-traitant-2020-11-06.pdf
-
-DocumentFile_245:
-  id: 1372
-  attachment: sab-declaration-d-etablissement-2020-11-06.pdf
-
-DocumentFile_246:
-  id: 1373
-  attachment: sab-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
-
-DocumentFile_247:
-  id: 1374
-  attachment: sab-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-06.pdf
-
-DocumentFile_248:
-  id: 1375
-  attachment: sab-notification-de-demarrage-des-activites-2020-11-06.pdf
-
-DocumentFile_249:
-  id: 1376
-  attachment: sab-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2020-11-06.pdf
-
-DocumentFile_250:
-  id: 1377
-  attachment: sab-certificat-de-conformite-environnementale-2020-11-06.pdf
-
-DocumentFile_251:
-  id: 1378
-  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
-
-DocumentFile_252:
-  id: 1379
-  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
-
-DocumentFile_253:
-  id: 1380
-  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
-
-DocumentFile_254:
-  id: 1381
-  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
-
-DocumentFile_255:
-  id: 1412
-  attachment: societe-africaine-des-bois-sa-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-24.pdf
-
-DocumentFile_256:
-  id: 1413
-  attachment: compagnie-forestiere-du-camero-decret-portant-attribution-de-la-concession-forestiere-2020-11-26.pdf
-
-DocumentFile_257:
-  id: 1416
-  attachment: societe-africaine-des-bois-sa-registre-du-commerce-de-l-entreprise-2020-11-30.pdf
-
-DocumentFile_258:
-  id: 1437
-  attachment: compagnie-forestiere-du-camero-registre-du-commerce-de-l-entreprise-2020-12-07.pdf
-
-DocumentFile_259:
-  id: 1438
-  attachment: societe-d-exploitation-des-boi-registre-du-commerce-de-l-entreprise-2020-12-07.pdf
-
-DocumentFile_260:
-  id: 1484
-  attachment: compagnie-forestiere-du-camero-autorisation-de-publication-2020-12-10.pdf
-
-DocumentFile_261:
-  id: 1485
-  attachment: societe-d-exploitation-des-boi-autorisation-de-publication-2020-12-10.pdf
-
-DocumentFile_262:
-  id: 1486
-  attachment: societe-africaine-des-bois-sa-autorisation-de-publication-2020-12-10.pdf
-
-DocumentFile_263:
-  id: 1620
-  attachment: cib-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2020-12-21.pdf
-
-DocumentFile_264:
-  id: 1621
-  attachment: ifo-interholco-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2020-12-21.pdf
-
-DocumentFile_265:
-  id: 4636
-  attachment: cft-rapport-de-lot-a-exporter-2023-12-04.pdf
-
-DocumentFile_266:
-  id: 1645
-  attachment: societe-africaine-des-bois-sa-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-01-08.pdf
-
-DocumentFile_267:
-  id: 1642
-  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
-
-DocumentFile_268:
-  id: 1643
-  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
-
-DocumentFile_269:
-  id: 1644
-  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
-
-DocumentFile_270:
-  id: 1659
-  attachment: ifo-interholco-autorisation-de-coupe-annuelle-2021-01-28.pdf
-
-DocumentFile_271:
-  id: 1660
-  attachment: ifo-interholco-autorisation-d-heures-supplementaires-le-cas-echeant-2021-01-28.pdf
-
-DocumentFile_272:
-  id: 1661
-  attachment: ifo-interholco-certificat-d-agrement-forestier-2021-01-28.pdf
-
-DocumentFile_273:
-  id: 1662
-  attachment: ifo-interholco-autorisation-de-coupe-d-achevement-2021-01-28.pdf
-
-DocumentFile_274:
-  id: 1688
-  attachment: ifo-interholco-agrement-de-transports-2021-02-12.pdf
-
-DocumentFile_275:
-  id: 1687
-  attachment: ifo-interholco-plan-de-gestion-2021-02-12.pdf
-
-DocumentFile_276:
-  id: 1689
-  attachment: ifo-interholco-certificat-phytosanitaire-2021-02-12.pdf
-
-DocumentFile_277:
-  id: 1692
-  attachment: ifo-interholco-declaration-en-douanes-2021-02-12.pdf
-
-DocumentFile_278:
-  id: 1707
-  attachment: compagnie-forestiere-du-camero-notification-de-demarrage-des-activites-2021-02-16.pdf
-
-DocumentFile_279:
-  id: 1708
-  attachment: compagnie-forestiere-du-camero-notification-de-demarrage-des-activites-2021-02-16.pdf
-
-DocumentFile_280:
-  id: 1709
-  attachment: compagnie-forestiere-du-camero-notification-de-demarrage-des-activites-2021-02-16.pdf
-
-DocumentFile_281:
-  id: 1710
-  attachment: societe-d-exploitation-des-boi-notification-de-demarrage-des-activites-2021-02-16.pdf
-
-DocumentFile_282:
-  id: 1711
-  attachment: societe-d-exploitation-des-boi-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-02-16.pdf
-
-DocumentFile_283:
-  id: 1712
-  attachment: societe-africaine-des-bois-sa-attestation-de-non-redevance-2021-02-16.pdf
-
-DocumentFile_284:
-  id: 1713
-  attachment: compagnie-forestiere-du-camero-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
-
-DocumentFile_285:
-  id: 1715
-  attachment: compagnie-forestiere-du-camero-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
-
-DocumentFile_286:
-  id: 1716
-  attachment: compagnie-forestiere-du-camero-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
-
-DocumentFile_287:
-  id: 1717
-  attachment: societe-africaine-des-bois-sa-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
-
-DocumentFile_288:
-  id: 1718
-  attachment: societe-d-exploitation-des-boi-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
-
-DocumentFile_289:
-  id: 1738
-  attachment: cib-proces-verbal-d-elections-professionnelles-2021-03-02.pdf
-
-DocumentFile_290:
-  id: 1739
-  attachment: cib-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2021-03-02.pdf
-
-DocumentFile_291:
-  id: 1740
-  attachment: cib-plan-de-gestion-2021-03-02.pdf
-
-DocumentFile_292:
-  id: 1741
-  attachment: cib-autorisation-de-coupe-annuelle-2021-03-02.pdf
-
-DocumentFile_293:
-  id: 1742
-  attachment: cib-compte-rendu-du-conseil-de-concertation-2021-03-02.pdf
-
-DocumentFile_294:
-  id: 1743
-  attachment: cib-etude-d-impact-environnementale-et-sociale-base-vie-2021-03-02.pdf
-
-DocumentFile_295:
-  id: 1744
-  attachment: cib-etude-d-impact-environnementale-et-sociale-exploitation-2021-03-02.pdf
-
-DocumentFile_296:
-  id: 1745
-  attachment: cib-compte-rendu-du-conseil-de-concertation-2021-03-02.pdf
-
-DocumentFile_297:
-  id: 1746
-  attachment: cib-compte-rendu-du-conseil-de-concertation-2021-03-02.pdf
-
-DocumentFile_298:
-  id: 1747
-  attachment: cib-autorisation-de-coupe-annuelle-2021-03-02.pdf
-
-DocumentFile_299:
-  id: 1750
-  attachment: cib-certificat-phytosanitaire-2021-03-03.pdf
-
-DocumentFile_300:
-  id: 1751
-  attachment: cib-declaration-en-douanes-2021-03-03.pdf
-
-DocumentFile_301:
-  id: 1752
-  attachment: cib-autorisation-de-coupe-annuelle-2021-03-03.pdf
-
-DocumentFile_302:
-  id: 1753
-  attachment: cib-autorisation-de-coupe-annuelle-2021-03-03.pdf
-
-DocumentFile_303:
-  id: 1764
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-09.pdf
-
-DocumentFile_304:
-  id: 1765
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
-
-DocumentFile_305:
-  id: 1766
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
-
-DocumentFile_306:
-  id: 1767
-  attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2021-03-09.pdf
-
-DocumentFile_307:
-  id: 1768
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
-
-DocumentFile_308:
-  id: 1769
-  attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2021-03-09.pdf
-
-DocumentFile_309:
-  id: 1770
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
-
-DocumentFile_310:
-  id: 1771
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
-
-DocumentFile_311:
-  id: 1772
-  attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2021-03-09.pdf
-
-DocumentFile_312:
-  id: 1773
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
-
-DocumentFile_313:
-  id: 1774
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-09.pdf
-
-DocumentFile_314:
-  id: 1775
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
-
-DocumentFile_315:
-  id: 1776
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
-
-DocumentFile_316:
-  id: 1777
-  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-10.pdf
-
-DocumentFile_317:
-  id: 1794
-  attachment: societe-d-exploitation-des-boi-attestation-de-non-redevance-2021-03-24.pdf
-
-DocumentFile_318:
-  id: 1795
-  attachment: compagnie-forestiere-du-camero-attestation-de-non-redevance-2021-03-25.pdf
-
-DocumentFile_319:
-  id: 1799
-  attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-29.pdf
-
-DocumentFile_320:
-  id: 1800
-  attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-29.pdf
-
-DocumentFile_321:
-  id: 1801
-  attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-29.pdf
-
-DocumentFile_322:
-  id: 1807
-  attachment: ifo-interholco-preuve-de-contribution-au-fond-de-developpement-local-2021-03-30.pdf
-
-DocumentFile_323:
-  id: 1812
-  attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-de-gestion-2021-03-31.pdf
-
-DocumentFile_324:
-  id: 1817
-  attachment: cib-patente-2021-04-01.pdf
-
-DocumentFile_325:
-  id: 1833
-  attachment: ifo-interholco-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2021-04-13.pdf
-
-DocumentFile_326:
-  id: 1841
-  attachment: compagnie-forestiere-du-camero-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-04-14.pdf
-
-DocumentFile_327:
-  id: 1842
-  attachment: compagnie-forestiere-du-camero-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2021-04-14.pdf
-
-DocumentFile_328:
-  id: 1843
-  attachment: societe-d-exploitation-des-boi-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-04-14.pdf
-
-DocumentFile_329:
-  id: 1879
-  attachment: cib-autorisation-d-heures-supplementaires-le-cas-echeant-2021-04-19.pdf
-
-DocumentFile_330:
-  id: 1883
-  attachment: cib-etat-de-realisation-du-cahier-des-charges-2021-04-20.pdf
-
-DocumentFile_331:
-  id: 1898
-  attachment: attachment.docx
-
-DocumentFile_332:
-  id: 989
-  attachment: afriwood-industries-convention-d-amenagement-et-de-transformation-cat-2020-03-19.pdf
-
-DocumentFile_333:
-  id: 992
-  attachment: afriwood-industries-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2020-03-19.pdf
-
-DocumentFile_334:
-  id: 1888
-  attachment: sab-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2021-04-22.pdf
-
-DocumentFile_335:
-  id: 1112
-  attachment: cib-etude-d-impact-environnementale-et-sociale-scierie-le-cas-echeant-2020-05-08.pdf
-
-DocumentFile_336:
-  id: 1181
-  attachment: afriwood-industries-autorisation-de-publication-2020-06-18.pdf
-
-DocumentFile_337:
   id: 1326
   attachment: cfc-certificat-de-conformite-environnementale-2020-11-05.pdf
 
-DocumentFile_338:
-  id: 1316
-  attachment: cfc-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-05.pdf
+DocumentFile_229:
+  id: 1327
+  attachment: cfc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-05.pdf
 
-DocumentFile_339:
-  id: 1321
-  attachment: cfc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-11-05.pdf
+DocumentFile_230:
+  id: 1333
+  attachment: cfc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-11-06.pdf
 
-DocumentFile_340:
+DocumentFile_231:
+  id: 1334
+  attachment: cfc-certificat-de-conformite-environnementale-2020-11-06.pdf
+
+DocumentFile_232:
+  id: 1335
+  attachment: cfc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-06.pdf
+
+DocumentFile_233:
+  id: 1337
+  attachment: cfc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2020-11-06.pdf
+
+DocumentFile_234:
+  id: 1338
+  attachment: cfc-certificat-de-conformite-environnementale-2020-11-06.pdf
+
+DocumentFile_235:
+  id: 1339
+  attachment: cfc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-06.pdf
+
+DocumentFile_236:
+  id: 1341
+  attachment: sebc-agrement-a-la-profession-forestiere-2020-11-06.pdf
+
+DocumentFile_237:
+  id: 1345
+  attachment: sebc-attestation-pour-soumission-de-l-entreprise-exploitante-2020-11-06.pdf
+
+DocumentFile_238:
+  id: 1346
+  attachment: sebc-convention-de-visites-et-de-soins-avec-un-medecin-traitant-2020-11-06.pdf
+
+DocumentFile_239:
   id: 1347
   attachment: sebc-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-06.pdf
 
-DocumentFile_341:
+DocumentFile_240:
+  id: 1348
+  attachment: sebc-declaration-d-etablissement-2020-11-06.pdf
+
+DocumentFile_241:
+  id: 1349
+  attachment: sebc-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
+
+DocumentFile_242:
   id: 1357
   attachment: sebc-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-06.pdf
 
-DocumentFile_342:
+DocumentFile_243:
+  id: 1358
+  attachment: sebc-certificat-de-conformite-environnementale-2020-11-06.pdf
+
+DocumentFile_244:
+  id: 1367
+  attachment: sab-agrement-a-la-profession-forestiere-2020-11-06.pdf
+
+DocumentFile_245:
+  id: 1369
+  attachment: sab-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-06.pdf
+
+DocumentFile_246:
+  id: 1370
+  attachment: sab-attestation-pour-soumission-de-l-entreprise-exploitante-2020-11-06.pdf
+
+DocumentFile_247:
+  id: 1371
+  attachment: sab-convention-de-visites-et-de-soins-avec-un-medecin-traitant-2020-11-06.pdf
+
+DocumentFile_248:
+  id: 1372
+  attachment: sab-declaration-d-etablissement-2020-11-06.pdf
+
+DocumentFile_249:
+  id: 1373
+  attachment: sab-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
+
+DocumentFile_250:
+  id: 1374
+  attachment: sab-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-06.pdf
+
+DocumentFile_251:
+  id: 1375
+  attachment: sab-notification-de-demarrage-des-activites-2020-11-06.pdf
+
+DocumentFile_252:
+  id: 1376
+  attachment: sab-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2020-11-06.pdf
+
+DocumentFile_253:
+  id: 1377
+  attachment: sab-certificat-de-conformite-environnementale-2020-11-06.pdf
+
+DocumentFile_254:
+  id: 1378
+  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
+
+DocumentFile_255:
+  id: 1379
+  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
+
+DocumentFile_256:
+  id: 1380
+  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
+
+DocumentFile_257:
+  id: 1381
+  attachment: compagnie-forestiere-du-camero-cahier-des-charges-signe-par-l-autorite-competente-et-l-entite-forestiere-2020-11-09.pdf
+
+DocumentFile_258:
+  id: 1412
+  attachment: societe-africaine-des-bois-sa-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2020-11-24.pdf
+
+DocumentFile_259:
+  id: 1413
+  attachment: compagnie-forestiere-du-camero-decret-portant-attribution-de-la-concession-forestiere-2020-11-26.pdf
+
+DocumentFile_260:
+  id: 1416
+  attachment: societe-africaine-des-bois-sa-registre-du-commerce-de-l-entreprise-2020-11-30.pdf
+
+DocumentFile_261:
+  id: 1437
+  attachment: compagnie-forestiere-du-camero-registre-du-commerce-de-l-entreprise-2020-12-07.pdf
+
+DocumentFile_262:
+  id: 1438
+  attachment: societe-d-exploitation-des-boi-registre-du-commerce-de-l-entreprise-2020-12-07.pdf
+
+DocumentFile_263:
+  id: 1484
+  attachment: compagnie-forestiere-du-camero-autorisation-de-publication-2020-12-10.pdf
+
+DocumentFile_264:
+  id: 1485
+  attachment: societe-d-exploitation-des-boi-autorisation-de-publication-2020-12-10.pdf
+
+DocumentFile_265:
+  id: 1486
+  attachment: societe-africaine-des-bois-sa-autorisation-de-publication-2020-12-10.pdf
+
+DocumentFile_266:
+  id: 1620
+  attachment: cib-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2020-12-21.pdf
+
+DocumentFile_267:
+  id: 1621
+  attachment: ifo-interholco-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2020-12-21.pdf
+
+DocumentFile_268:
+  id: 1641
+  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
+
+DocumentFile_269:
+  id: 1642
+  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
+
+DocumentFile_270:
+  id: 1643
+  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
+
+DocumentFile_271:
+  id: 1644
+  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
+
+DocumentFile_272:
+  id: 1645
+  attachment: societe-africaine-des-bois-sa-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-01-08.pdf
+
+DocumentFile_273:
+  id: 1659
+  attachment: ifo-interholco-autorisation-de-coupe-annuelle-2021-01-28.pdf
+
+DocumentFile_274:
+  id: 1660
+  attachment: ifo-interholco-autorisation-d-heures-supplementaires-le-cas-echeant-2021-01-28.pdf
+
+DocumentFile_275:
+  id: 1661
+  attachment: ifo-interholco-certificat-d-agrement-forestier-2021-01-28.pdf
+
+DocumentFile_276:
+  id: 1662
+  attachment: ifo-interholco-autorisation-de-coupe-d-achevement-2021-01-28.pdf
+
+DocumentFile_277:
+  id: 1687
+  attachment: ifo-interholco-plan-de-gestion-2021-02-12.pdf
+
+DocumentFile_278:
+  id: 1688
+  attachment: ifo-interholco-agrement-de-transports-2021-02-12.pdf
+
+DocumentFile_279:
+  id: 1689
+  attachment: ifo-interholco-certificat-phytosanitaire-2021-02-12.pdf
+
+DocumentFile_280:
+  id: 1692
+  attachment: ifo-interholco-declaration-en-douanes-2021-02-12.pdf
+
+DocumentFile_281:
   id: 1705
   attachment: ifo-interholco-compte-rendu-du-conseil-de-concertation-2021-02-15.pdf
 
-DocumentFile_343:
+DocumentFile_282:
   id: 1706
   attachment: compagnie-forestiere-du-camero-notification-de-demarrage-des-activites-2021-02-16.pdf
 
-DocumentFile_344:
+DocumentFile_283:
+  id: 1707
+  attachment: compagnie-forestiere-du-camero-notification-de-demarrage-des-activites-2021-02-16.pdf
+
+DocumentFile_284:
+  id: 1708
+  attachment: compagnie-forestiere-du-camero-notification-de-demarrage-des-activites-2021-02-16.pdf
+
+DocumentFile_285:
+  id: 1709
+  attachment: compagnie-forestiere-du-camero-notification-de-demarrage-des-activites-2021-02-16.pdf
+
+DocumentFile_286:
+  id: 1710
+  attachment: societe-d-exploitation-des-boi-notification-de-demarrage-des-activites-2021-02-16.pdf
+
+DocumentFile_287:
+  id: 1711
+  attachment: societe-d-exploitation-des-boi-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-02-16.pdf
+
+DocumentFile_288:
+  id: 1712
+  attachment: societe-africaine-des-bois-sa-attestation-de-non-redevance-2021-02-16.pdf
+
+DocumentFile_289:
+  id: 1713
+  attachment: compagnie-forestiere-du-camero-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
+
+DocumentFile_290:
   id: 1714
   attachment: compagnie-forestiere-du-camero-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
 
-DocumentFile_345:
+DocumentFile_291:
+  id: 1715
+  attachment: compagnie-forestiere-du-camero-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
+
+DocumentFile_292:
+  id: 1716
+  attachment: compagnie-forestiere-du-camero-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
+
+DocumentFile_293:
+  id: 1717
+  attachment: societe-africaine-des-bois-sa-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
+
+DocumentFile_294:
+  id: 1718
+  attachment: societe-d-exploitation-des-boi-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2021-02-16.pdf
+
+DocumentFile_295:
+  id: 1738
+  attachment: cib-proces-verbal-d-elections-professionnelles-2021-03-02.pdf
+
+DocumentFile_296:
+  id: 1739
+  attachment: cib-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2021-03-02.pdf
+
+DocumentFile_297:
+  id: 1740
+  attachment: cib-plan-de-gestion-2021-03-02.pdf
+
+DocumentFile_298:
+  id: 1741
+  attachment: cib-autorisation-de-coupe-annuelle-2021-03-02.pdf
+
+DocumentFile_299:
+  id: 1742
+  attachment: cib-compte-rendu-du-conseil-de-concertation-2021-03-02.pdf
+
+DocumentFile_300:
+  id: 1743
+  attachment: cib-etude-d-impact-environnementale-et-sociale-base-vie-2021-03-02.pdf
+
+DocumentFile_301:
+  id: 1744
+  attachment: cib-etude-d-impact-environnementale-et-sociale-exploitation-2021-03-02.pdf
+
+DocumentFile_302:
+  id: 1745
+  attachment: cib-compte-rendu-du-conseil-de-concertation-2021-03-02.pdf
+
+DocumentFile_303:
+  id: 1746
+  attachment: cib-compte-rendu-du-conseil-de-concertation-2021-03-02.pdf
+
+DocumentFile_304:
+  id: 1747
+  attachment: cib-autorisation-de-coupe-annuelle-2021-03-02.pdf
+
+DocumentFile_305:
+  id: 1750
+  attachment: cib-certificat-phytosanitaire-2021-03-03.pdf
+
+DocumentFile_306:
+  id: 1751
+  attachment: cib-declaration-en-douanes-2021-03-03.pdf
+
+DocumentFile_307:
+  id: 1752
+  attachment: cib-autorisation-de-coupe-annuelle-2021-03-03.pdf
+
+DocumentFile_308:
+  id: 1753
+  attachment: cib-autorisation-de-coupe-annuelle-2021-03-03.pdf
+
+DocumentFile_309:
+  id: 1764
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-09.pdf
+
+DocumentFile_310:
+  id: 1765
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
+
+DocumentFile_311:
+  id: 1766
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
+
+DocumentFile_312:
+  id: 1767
+  attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2021-03-09.pdf
+
+DocumentFile_313:
+  id: 1768
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
+
+DocumentFile_314:
+  id: 1769
+  attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2021-03-09.pdf
+
+DocumentFile_315:
+  id: 1770
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
+
+DocumentFile_316:
+  id: 1771
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
+
+DocumentFile_317:
+  id: 1772
+  attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2021-03-09.pdf
+
+DocumentFile_318:
+  id: 1773
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
+
+DocumentFile_319:
+  id: 1774
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-09.pdf
+
+DocumentFile_320:
+  id: 1775
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-09.pdf
+
+DocumentFile_321:
+  id: 1776
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-09.pdf
+
+DocumentFile_322:
+  id: 1777
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-10.pdf
+
+DocumentFile_323:
+  id: 1794
+  attachment: societe-d-exploitation-des-boi-attestation-de-non-redevance-2021-03-24.pdf
+
+DocumentFile_324:
+  id: 1795
+  attachment: compagnie-forestiere-du-camero-attestation-de-non-redevance-2021-03-25.pdf
+
+DocumentFile_325:
+  id: 1799
+  attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2021-03-29.pdf
+
+DocumentFile_326:
+  id: 1800
+  attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2021-03-29.pdf
+
+DocumentFile_327:
+  id: 1801
+  attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2021-03-29.pdf
+
+DocumentFile_328:
   id: 1802
   attachment: ifo-interholco-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2021-03-29.pdf
 
-DocumentFile_346:
+DocumentFile_329:
+  id: 1807
+  attachment: ifo-interholco-preuve-de-contribution-au-fond-de-developpement-local-2021-03-30.pdf
+
+DocumentFile_330:
+  id: 1812
+  attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-de-gestion-2021-03-31.pdf
+
+DocumentFile_331:
+  id: 1817
+  attachment: cib-patente-2021-04-01.pdf
+
+DocumentFile_332:
+  id: 1833
+  attachment: ifo-interholco-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2021-04-13.pdf
+
+DocumentFile_333:
+  id: 1841
+  attachment: compagnie-forestiere-du-camero-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-04-14.pdf
+
+DocumentFile_334:
+  id: 1842
+  attachment: compagnie-forestiere-du-camero-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2021-04-14.pdf
+
+DocumentFile_335:
+  id: 1843
+  attachment: societe-d-exploitation-des-boi-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-04-14.pdf
+
+DocumentFile_336:
   id: 1844
   attachment: societe-d-exploitation-des-boi-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2021-04-14.pdf
 
-DocumentFile_347:
+DocumentFile_337:
   id: 1866
   attachment: sebc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2021-04-15.pdf
 
-DocumentFile_348:
+DocumentFile_338:
+  id: 1879
+  attachment: cib-autorisation-d-heures-supplementaires-le-cas-echeant-2021-04-19.pdf
+
+DocumentFile_339:
+  id: 1883
+  attachment: cib-etat-de-realisation-du-cahier-des-charges-2021-04-20.pdf
+
+DocumentFile_340:
   id: 1887
   attachment: sebc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2021-04-22.pdf
 
-DocumentFile_349:
-  id: 2029
-  attachment: sab-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-28.pdf
+DocumentFile_341:
+  id: 1888
+  attachment: sab-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2021-04-22.pdf
 
-DocumentFile_350:
-  id: 2030
-  attachment: sab-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2021-05-28.pdf
+DocumentFile_342:
+  id: 1898
+  attachment: attachment.docx
 
-DocumentFile_351:
-  id: 2031
-  attachment: sab-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2021-05-29.pdf
+DocumentFile_343:
+  id: 1922
+  attachment: attachment.pdf
 
-DocumentFile_352:
+DocumentFile_344:
+  id: 1933
+  attachment: cib-agrement-de-transports-2021-05-04.pdf
+
+DocumentFile_345:
+  id: 1934
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-04.pdf
+
+DocumentFile_346:
   id: 1935
   attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-04.pdf
 
-DocumentFile_353:
+DocumentFile_347:
+  id: 1936
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-04.pdf
+
+DocumentFile_348:
   id: 1937
   attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-04.pdf
 
-DocumentFile_354:
+DocumentFile_349:
+  id: 1938
+  attachment: cib-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2021-05-05.pdf
+
+DocumentFile_350:
   id: 1939
   attachment: cft-certificat-de-conformite-du-plan-d-amenagement-forestier-2021-05-05.pdf
 
-DocumentFile_355:
+DocumentFile_351:
+  id: 1940
+  attachment: cft-arrete-d-approbation-du-plan-d-amenagement-2021-05-05.pdf
+
+DocumentFile_352:
   id: 1941
   attachment: cft-preuve-d-approbation-du-plan-de-gestion-quinquennal-2021-05-05.pdf
 
-DocumentFile_356:
+DocumentFile_353:
+  id: 1942
+  attachment: cft-arrete-d-agrement-au-code-des-investissements-le-cas-echeant-2021-05-06.pdf
+
+DocumentFile_354:
   id: 1943
   attachment: cft-permis-de-coupe-industrielle-pcibo-2021-05-06.pdf
 
-DocumentFile_357:
+DocumentFile_355:
   id: 1944
   attachment: cft-prolongation-du-permis-de-coupe-industrielle-pcibo-2021-05-06.pdf
 
-DocumentFile_358:
+DocumentFile_356:
+  id: 1945
+  attachment: cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2021-05-06.pdf
+
+DocumentFile_357:
   id: 1946
   attachment: cft-certificat-environnemental-et-social-2021-05-06.pdf
+
+DocumentFile_358:
+  id: 1947
+  attachment: cft-permis-d-exploitation-pour-les-usines-2021-05-06.pdf
 
 DocumentFile_359:
   id: 1948
   attachment: cft-declaration-annuelle-de-la-situation-de-la-main-d-oeuvre-2021-05-06.pdf
 
 DocumentFile_360:
-  id: 1950
-  attachment: ifo-interholco-extrait-du-registre-du-commerce-et-du-credit-mobilier-2021-05-06.pdf
-
-DocumentFile_361:
-  id: 1952
-  attachment: ifo-interholco-autorisation-de-coupe-d-achevement-2021-05-06.pdf
-
-DocumentFile_362:
-  id: 1956
-  attachment: cft-attestation-bancaire-de-paiement-de-la-taxe-sur-le-permis-de-coupe-industrielle-du-bois-d-oeuvre-2021-05-07.pdf
-
-DocumentFile_363:
-  id: 1958
-  attachment: cft-numero-d-import-export-2021-05-07.pdf
-
-DocumentFile_364:
-  id: 1959
-  attachment: cft-contrat-de-concession-2021-05-08.pdf
-
-DocumentFile_365:
-  id: 1966
-  attachment: ifo-interholco-etat-de-production-de-l-annee-d-achevement-2021-05-10.pdf
-
-DocumentFile_366:
-  id: 2008
-  attachment: cib-patente-2021-05-20.pdf
-
-DocumentFile_367:
-  id: 2011
-  attachment: cft-bordereau-de-circulation-2021-05-21.pdf
-
-DocumentFile_368:
-  id: 2012
-  attachment: cft-bordereau-de-circulation-2021-05-21.pdf
-
-DocumentFile_369:
-  id: 2017
-  attachment: cft-certificat-d-origine-2021-05-25.pdf
-
-DocumentFile_370:
-  id: 2022
-  attachment: cft-declaration-d-exportation-modele-eb-2021-05-25.pdf
-
-DocumentFile_371:
-  id: 2023
-  attachment: cft-certification-phytosanitaire-2021-05-25.pdf
-
-DocumentFile_372:
-  id: 2025
-  attachment: cft-rapport-de-lot-a-exporter-2021-05-25.pdf
-
-DocumentFile_373:
-  id: 2026
-  attachment: cft-bulletin-de-liquidation-des-droits-de-sortie-du-bois-2021-05-25.pdf
-
-DocumentFile_374:
-  id: 2028
-  attachment: ifo-interholco-convention-d-etablissement-2021-05-27.pdf
-
-DocumentFile_375:
-  id: 2034
-  attachment: siencam-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-06-03.pdf
-
-DocumentFile_376:
-  id: 2039
-  attachment: siencam-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-06-03.pdf
-
-DocumentFile_377:
-  id: 2040
-  attachment: siencam-notification-de-demarrage-des-activites-2021-06-03.pdf
-
-DocumentFile_378:
-  id: 2041
-  attachment: siencam-attestation-de-non-redevance-2021-06-03.pdf
-
-DocumentFile_379:
-  id: 1933
-  attachment: cib-agrement-de-transports-2021-05-04.pdf
-
-DocumentFile_380:
-  id: 1934
-  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-04.pdf
-
-DocumentFile_381:
-  id: 1936
-  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-04.pdf
-
-DocumentFile_382:
-  id: 1938
-  attachment: cib-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2021-05-05.pdf
-
-DocumentFile_383:
-  id: 1940
-  attachment: cft-arrete-d-approbation-du-plan-d-amenagement-2021-05-05.pdf
-
-DocumentFile_384:
-  id: 1942
-  attachment: cft-arrete-d-agrement-au-code-des-investissements-le-cas-echeant-2021-05-06.pdf
-
-DocumentFile_385:
-  id: 1945
-  attachment: cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2021-05-06.pdf
-
-DocumentFile_386:
-  id: 1947
-  attachment: cft-permis-d-exploitation-pour-les-usines-2021-05-06.pdf
-
-DocumentFile_387:
   id: 1949
   attachment: ifo-interholco-certificat-d-agrement-forestier-2021-05-06.pdf
 
-DocumentFile_388:
+DocumentFile_361:
+  id: 1950
+  attachment: ifo-interholco-extrait-du-registre-du-commerce-et-du-credit-mobilier-2021-05-06.pdf
+
+DocumentFile_362:
   id: 1951
   attachment: ifo-interholco-autorisation-de-coupe-annuelle-2021-05-06.pdf
 
-DocumentFile_389:
+DocumentFile_363:
+  id: 1952
+  attachment: ifo-interholco-autorisation-de-coupe-d-achevement-2021-05-06.pdf
+
+DocumentFile_364:
   id: 1954
   attachment: cft-accord-sur-la-clause-sociale-du-cahier-des-charges-conforme-au-modele-fixe-par-arrete-ministeriel-2021-05-07.pdf
 
-DocumentFile_390:
+DocumentFile_365:
+  id: 1956
+  attachment: cft-attestation-bancaire-de-paiement-de-la-taxe-sur-le-permis-de-coupe-industrielle-du-bois-d-oeuvre-2021-05-07.pdf
+
+DocumentFile_366:
   id: 1957
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-07.pdf
 
-DocumentFile_391:
+DocumentFile_367:
+  id: 1958
+  attachment: cft-numero-d-import-export-2021-05-07.pdf
+
+DocumentFile_368:
+  id: 1959
+  attachment: cft-contrat-de-concession-2021-05-08.pdf
+
+DocumentFile_369:
   id: 1960
   attachment: cft-lettre-du-ministre-en-charge-des-forets-notifiant-a-l-entite-la-convertibilite-de-l-ancien-titre-2021-05-08.pdf
 
-DocumentFile_392:
+DocumentFile_370:
   id: 1965
   attachment: ifo-interholco-etat-de-production-de-l-annee-de-coupe-2021-05-10.pdf
 
-DocumentFile_393:
+DocumentFile_371:
+  id: 1966
+  attachment: ifo-interholco-etat-de-production-de-l-annee-d-achevement-2021-05-10.pdf
+
+DocumentFile_372:
   id: 1974
   attachment: ifo-interholco-extrait-du-registre-du-commerce-et-du-credit-mobilier-2021-05-11.pdf
 
-DocumentFile_394:
+DocumentFile_373:
+  id: 1979
+  attachment: ifo-interholco-extrait-du-registre-du-commerce-et-du-credit-mobilier-2021-05-12.pdf
+
+DocumentFile_374:
   id: 1983
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_395:
+DocumentFile_375:
   id: 1984
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_396:
+DocumentFile_376:
   id: 1985
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_397:
+DocumentFile_377:
+  id: 1986
+  attachment: sab-attestation-de-non-redevance-2021-05-13.pdf
+
+DocumentFile_378:
   id: 1987
   attachment: sab-attestation-de-non-redevance-2021-05-13.pdf
 
-DocumentFile_398:
+DocumentFile_379:
   id: 1988
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_399:
+DocumentFile_380:
+  id: 1989
+  attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
+
+DocumentFile_381:
   id: 1990
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_400:
+DocumentFile_382:
   id: 1991
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_401:
+DocumentFile_383:
   id: 1992
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_402:
+DocumentFile_384:
+  id: 1993
+  attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
+
+DocumentFile_385:
   id: 1994
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
 
-DocumentFile_403:
+DocumentFile_386:
   id: 1995
   attachment: sab-attestation-de-non-redevance-2021-05-13.pdf
 
-DocumentFile_404:
+DocumentFile_387:
+  id: 1996
+  attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2021-05-13.pdf
+
+DocumentFile_388:
   id: 1997
   attachment: sab-attestation-de-non-redevance-2021-05-15.pdf
 
-DocumentFile_405:
+DocumentFile_389:
   id: 2001
   attachment: ifo-interholco-patente-2021-05-17.pdf
 
-DocumentFile_406:
+DocumentFile_390:
+  id: 2008
+  attachment: cib-patente-2021-05-20.pdf
+
+DocumentFile_391:
+  id: 2011
+  attachment: cft-bordereau-de-circulation-2021-05-21.pdf
+
+DocumentFile_392:
+  id: 2012
+  attachment: cft-bordereau-de-circulation-2021-05-21.pdf
+
+DocumentFile_393:
   id: 2013
   attachment: cft-bordereau-de-circulation-2021-05-21.pdf
 
-DocumentFile_407:
+DocumentFile_394:
+  id: 2017
+  attachment: cft-certificat-d-origine-2021-05-25.pdf
+
+DocumentFile_395:
   id: 2021
   attachment: cft-certificat-de-verification-a-l-exportation-et-a-l-embarquement-cvee-2021-05-25.pdf
 
-DocumentFile_408:
+DocumentFile_396:
+  id: 2022
+  attachment: cft-declaration-d-exportation-modele-eb-2021-05-25.pdf
+
+DocumentFile_397:
+  id: 2023
+  attachment: cft-certification-phytosanitaire-2021-05-25.pdf
+
+DocumentFile_398:
   id: 2024
   attachment: cft-permis-d-exportation-cites-le-cas-echeant-2021-05-25.pdf
 
-DocumentFile_409:
+DocumentFile_399:
+  id: 2025
+  attachment: cft-rapport-de-lot-a-exporter-2021-05-25.pdf
+
+DocumentFile_400:
+  id: 2026
+  attachment: cft-bulletin-de-liquidation-des-droits-de-sortie-du-bois-2021-05-25.pdf
+
+DocumentFile_401:
   id: 2027
   attachment: ifo-interholco-convention-d-etablissement-2021-05-25.pdf
+
+DocumentFile_402:
+  id: 2028
+  attachment: ifo-interholco-convention-d-etablissement-2021-05-27.pdf
+
+DocumentFile_403:
+  id: 2029
+  attachment: sab-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-05-28.pdf
+
+DocumentFile_404:
+  id: 2030
+  attachment: sab-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2021-05-28.pdf
+
+DocumentFile_405:
+  id: 2031
+  attachment: sab-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2021-05-29.pdf
+
+DocumentFile_406:
+  id: 2034
+  attachment: siencam-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2021-06-03.pdf
+
+DocumentFile_407:
+  id: 2039
+  attachment: siencam-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-06-03.pdf
+
+DocumentFile_408:
+  id: 2040
+  attachment: siencam-notification-de-demarrage-des-activites-2021-06-03.pdf
+
+DocumentFile_409:
+  id: 2041
+  attachment: siencam-attestation-de-non-redevance-2021-06-03.pdf
 
 DocumentFile_410:
   id: 2055
@@ -2544,140 +2544,140 @@ DocumentFile_636:
   attachment: afriwood-industries-autorisation-de-publication-2022-07-13.pdf
 
 DocumentFile_637:
-  id: 3428
-  attachment: cft-permis-d-exportation-cites-le-cas-echeant-2022-10-01.pdf
-
-DocumentFile_638:
   id: 3118
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2022-07-19.pdf
 
-DocumentFile_639:
+DocumentFile_638:
   id: 3119
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2022-07-19.pdf
 
-DocumentFile_640:
+DocumentFile_639:
   id: 3120
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2022-07-19.pdf
 
-DocumentFile_641:
+DocumentFile_640:
   id: 3121
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2022-07-19.pdf
 
-DocumentFile_642:
+DocumentFile_641:
   id: 3157
   attachment: afriwood-industries-etat-de-production-de-l-annee-d-achevement-2022-08-04.pdf
 
-DocumentFile_643:
+DocumentFile_642:
   id: 3158
   attachment: afriwood-industries-etat-de-production-de-l-annee-de-coupe-2022-08-04.pdf
 
-DocumentFile_644:
+DocumentFile_643:
   id: 3231
   attachment: siencam-attestation-de-non-redevance-2022-08-19.pdf
 
-DocumentFile_645:
+DocumentFile_644:
   id: 3260
   attachment: sebc-attestation-de-respect-des-normes-d-exploitation-forestiere-attestation-de-respect-des-normes-d-inte-2022-08-27.pdf
 
-DocumentFile_646:
+DocumentFile_645:
   id: 3267
   attachment: mokabi-sa-plan-de-gestion-2022-09-01.pdf
 
-DocumentFile_647:
+DocumentFile_646:
   id: 3283
   attachment: ifo-interholco-document-du-tribunal-actant-le-marteau-forestier-2022-09-06.pdf
 
-DocumentFile_648:
+DocumentFile_647:
   id: 3285
   attachment: mokabi-sa-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2022-09-07.pdf
 
-DocumentFile_649:
+DocumentFile_648:
   id: 3286
   attachment: mokabi-sa-compte-rendu-du-conseil-de-concertation-2022-09-07.pdf
 
-DocumentFile_650:
+DocumentFile_649:
   id: 3287
   attachment: mokabi-sa-agrement-de-transports-2022-09-07.pdf
 
-DocumentFile_651:
+DocumentFile_650:
   id: 3314
   attachment: ifo-interholco-convention-d-amenagement-et-de-transformation-cat-2022-09-13.pdf
 
-DocumentFile_652:
+DocumentFile_651:
   id: 3315
   attachment: ifo-interholco-carte-d-identite-des-professionnels-du-bois-et-de-la-foret-2022-09-13.pdf
 
-DocumentFile_653:
+DocumentFile_652:
   id: 3384
   attachment: mokabi-sa-plan-de-gestion-2022-09-20.pdf
 
-DocumentFile_654:
+DocumentFile_653:
   id: 3385
   attachment: mokabi-sa-plan-de-gestion-2022-09-20.pdf
 
-DocumentFile_655:
+DocumentFile_654:
   id: 3394
   attachment: cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2022-09-22.pdf
 
-DocumentFile_656:
+DocumentFile_655:
   id: 3395
   attachment: cft-prolongation-du-permis-de-coupe-industrielle-pcibo-2022-09-22.pdf
 
-DocumentFile_657:
+DocumentFile_656:
   id: 3396
   attachment: cft-numero-d-import-export-2022-09-22.pdf
 
-DocumentFile_658:
+DocumentFile_657:
   id: 3398
   attachment: cft-lettre-du-ministre-en-charge-des-forets-notifiant-a-l-entite-la-convertibilite-de-l-ancien-titre-2022-09-23.pdf
 
-DocumentFile_659:
+DocumentFile_658:
   id: 3401
   attachment: cft-declaration-annuelle-de-la-situation-de-la-main-d-oeuvre-2022-09-23.pdf
 
-DocumentFile_660:
+DocumentFile_659:
   id: 3403
   attachment: cft-bordereau-de-circulation-2022-09-26.pdf
 
-DocumentFile_661:
+DocumentFile_660:
   id: 3411
   attachment: mokabi-sa-autorisation-de-coupe-annuelle-2022-09-28.pdf
 
-DocumentFile_662:
+DocumentFile_661:
   id: 3412
   attachment: mokabi-sa-autorisation-de-coupe-d-achevement-2022-09-28.pdf
 
-DocumentFile_663:
-  id: 3474
-  attachment: cft-preuve-d-approbation-du-plan-de-gestion-quinquennal-2022-10-25.pdf
-
-DocumentFile_664:
+DocumentFile_662:
   id: 3413
   attachment: ifo-interholco-carte-d-identite-des-professionnels-du-bois-et-de-la-foret-2022-09-28.pdf
 
-DocumentFile_665:
+DocumentFile_663:
   id: 3414
   attachment: cft-certificat-d-origine-2022-09-29.pdf
 
-DocumentFile_666:
+DocumentFile_664:
   id: 3415
   attachment: cft-certification-phytosanitaire-2022-09-29.pdf
 
-DocumentFile_667:
+DocumentFile_665:
   id: 3423
   attachment: cft-certificat-d-origine-2022-10-01.pdf
 
-DocumentFile_668:
+DocumentFile_666:
   id: 3424
   attachment: cft-certification-phytosanitaire-2022-10-01.pdf
 
-DocumentFile_669:
+DocumentFile_667:
   id: 3425
   attachment: cft-certification-phytosanitaire-2022-10-01.pdf
 
-DocumentFile_670:
+DocumentFile_668:
   id: 3426
   attachment: cft-certificat-de-verification-a-l-exportation-et-a-l-embarquement-cvee-2022-10-01.pdf
+
+DocumentFile_669:
+  id: 3427
+  attachment: cft-rapport-de-lot-a-exporter-2022-10-01.pdf
+
+DocumentFile_670:
+  id: 3428
+  attachment: cft-permis-d-exportation-cites-le-cas-echeant-2022-10-01.pdf
 
 DocumentFile_671:
   id: 3466
@@ -2700,84 +2700,84 @@ DocumentFile_675:
   attachment: mokabi-sa-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2022-10-25.pdf
 
 DocumentFile_676:
+  id: 3474
+  attachment: cft-preuve-d-approbation-du-plan-de-gestion-quinquennal-2022-10-25.pdf
+
+DocumentFile_677:
   id: 3495
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2022-10-27.pdf
 
-DocumentFile_677:
+DocumentFile_678:
   id: 3496
   attachment: ifo-interholco-patente-2022-10-28.pdf
 
-DocumentFile_678:
+DocumentFile_679:
   id: 3497
   attachment: ifo-interholco-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2022-10-28.pdf
 
-DocumentFile_679:
+DocumentFile_680:
   id: 3498
   attachment: cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2022-10-29.pdf
 
-DocumentFile_680:
+DocumentFile_681:
   id: 3499
   attachment: cft-rapport-de-lot-a-exporter-2022-10-29.pdf
 
-DocumentFile_681:
+DocumentFile_682:
   id: 3500
   attachment: cft-permis-d-exportation-cites-le-cas-echeant-2022-10-29.pdf
 
-DocumentFile_682:
+DocumentFile_683:
   id: 3501
   attachment: cft-certification-phytosanitaire-2022-10-31.pdf
 
-DocumentFile_683:
+DocumentFile_684:
   id: 3502
   attachment: cft-permis-d-exportation-cites-le-cas-echeant-2022-10-31.pdf
 
-DocumentFile_684:
+DocumentFile_685:
   id: 3506
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2022-11-04.pdf
 
-DocumentFile_685:
+DocumentFile_686:
   id: 3507
   attachment: cft-quittance-de-versement-de-la-contribution-patronale-a-l-onem-2022-11-04.pdf
 
-DocumentFile_686:
+DocumentFile_687:
   id: 3508
   attachment: cft-pv-de-designation-des-membres-et-d-installation-des-comites-locaux-de-gestion-clg-et-de-suivi-cls-2022-11-04.pdf
 
-DocumentFile_687:
+DocumentFile_688:
   id: 3517
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2022-11-17.pdf
 
-DocumentFile_688:
+DocumentFile_689:
   id: 3518
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2022-11-17.pdf
 
-DocumentFile_689:
+DocumentFile_690:
   id: 3519
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2022-11-17.pdf
 
-DocumentFile_690:
+DocumentFile_691:
   id: 3525
   attachment: cib-agrement-de-transports-2022-11-23.pdf
 
-DocumentFile_691:
+DocumentFile_692:
   id: 3526
   attachment: cib-autorisation-d-heures-supplementaires-le-cas-echeant-2022-11-23.pdf
 
-DocumentFile_692:
+DocumentFile_693:
   id: 3527
   attachment: cib-patente-2022-11-23.pdf
 
-DocumentFile_693:
+DocumentFile_694:
   id: 3528
   attachment: cft-rapport-trimestriel-d-avancement-de-la-mise-en-oeuvre-des-accords-constituants-les-clauses-sociales-d-2022-11-24.pdf
 
-DocumentFile_694:
+DocumentFile_695:
   id: 3529
   attachment: cib-convention-d-amenagement-et-de-transformation-cat-2022-11-25.pdf
-
-DocumentFile_695:
-  id: 3599
-  attachment: cft-permis-de-coupe-industrielle-pcibo-2023-01-02.pdf
 
 DocumentFile_696:
   id: 3551
@@ -2848,936 +2848,936 @@ DocumentFile_712:
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-01-02.pdf
 
 DocumentFile_713:
+  id: 3599
+  attachment: cft-permis-de-coupe-industrielle-pcibo-2023-01-02.pdf
+
+DocumentFile_714:
   id: 3622
   attachment: cib-autorisation-de-coupe-annuelle-2023-01-10.pdf
 
-DocumentFile_714:
+DocumentFile_715:
   id: 3623
   attachment: cib-autorisation-de-coupe-annuelle-2023-01-10.pdf
 
-DocumentFile_715:
+DocumentFile_716:
   id: 3624
   attachment: cib-autorisation-de-coupe-annuelle-2023-01-10.pdf
 
-DocumentFile_716:
+DocumentFile_717:
   id: 3625
   attachment: cib-proces-verbal-d-elections-professionnelles-2023-01-10.pdf
 
-DocumentFile_717:
+DocumentFile_718:
   id: 3626
   attachment: cib-compte-rendu-du-conseil-de-concertation-2023-01-10.pdf
 
-DocumentFile_718:
+DocumentFile_719:
   id: 3627
   attachment: cfc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2023-01-10.pdf
 
-DocumentFile_719:
+DocumentFile_720:
   id: 3628
   attachment: sebc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2023-01-10.pdf
 
-DocumentFile_720:
+DocumentFile_721:
   id: 3629
   attachment: cib-certificat-phytosanitaire-2023-01-11.pdf
 
-DocumentFile_721:
+DocumentFile_722:
   id: 3630
   attachment: cib-declaration-en-douanes-2023-01-11.pdf
 
-DocumentFile_722:
+DocumentFile_723:
   id: 3631
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-01-11.pdf
 
-DocumentFile_723:
+DocumentFile_724:
   id: 3632
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-01-11.pdf
 
-DocumentFile_724:
+DocumentFile_725:
   id: 3633
   attachment: cib-etude-d-impact-environnementale-et-sociale-scierie-le-cas-echeant-2023-01-11.pdf
 
-DocumentFile_725:
+DocumentFile_726:
   id: 3634
   attachment: cib-etude-d-impact-environnementale-et-sociale-exploitation-2023-01-11.pdf
 
-DocumentFile_726:
+DocumentFile_727:
   id: 3635
   attachment: cib-etude-d-impact-environnementale-et-sociale-base-vie-2023-01-11.pdf
 
-DocumentFile_727:
+DocumentFile_728:
   id: 3636
   attachment: cib-etude-d-impact-environnementale-et-sociale-scierie-le-cas-echeant-2023-01-11.pdf
 
-DocumentFile_728:
+DocumentFile_729:
   id: 3646
   attachment: siencam-arrete-d-attribution-de-la-vente-de-coupe-2023-01-17.pdf
 
-DocumentFile_729:
+DocumentFile_730:
   id: 3647
   attachment: siencam-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2023-01-17.pdf
 
-DocumentFile_730:
+DocumentFile_731:
   id: 3648
   attachment: siencam-attestation-de-non-redevance-2023-01-17.pdf
 
-DocumentFile_731:
+DocumentFile_732:
   id: 3649
   attachment: siencam-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2023-01-17.pdf
 
-DocumentFile_732:
+DocumentFile_733:
   id: 3650
   attachment: siencam-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2023-01-17.pdf
 
-DocumentFile_733:
+DocumentFile_734:
   id: 3660
   attachment: cib-autorisation-de-coupe-annuelle-2023-01-23.pdf
 
-DocumentFile_734:
+DocumentFile_735:
   id: 3661
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-01-23.pdf
 
-DocumentFile_735:
+DocumentFile_736:
   id: 3662
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-01-23.pdf
 
-DocumentFile_736:
+DocumentFile_737:
   id: 3663
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-01-23.pdf
 
-DocumentFile_737:
+DocumentFile_738:
   id: 3664
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-01-23.pdf
 
-DocumentFile_738:
+DocumentFile_739:
   id: 3672
   attachment: sebc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-01-30.pdf
 
-DocumentFile_739:
+DocumentFile_740:
   id: 3673
   attachment: sab-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-01-30.pdf
 
-DocumentFile_740:
+DocumentFile_741:
   id: 3677
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2023-01-31.pdf
 
-DocumentFile_741:
+DocumentFile_742:
   id: 3678
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2023-01-31.pdf
 
-DocumentFile_742:
+DocumentFile_743:
   id: 3679
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2023-01-31.pdf
 
-DocumentFile_743:
+DocumentFile_744:
   id: 3680
   attachment: siencam-attestation-de-non-redevance-2023-02-01.pdf
 
-DocumentFile_744:
+DocumentFile_745:
   id: 3683
   attachment: cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2023-02-03.pdf
 
-DocumentFile_745:
+DocumentFile_746:
   id: 3684
   attachment: cft-bordereau-de-circulation-2023-02-03.pdf
 
-DocumentFile_746:
+DocumentFile_747:
   id: 3685
   attachment: cft-declaration-annuelle-de-la-situation-de-la-main-d-oeuvre-2023-02-04.pdf
 
-DocumentFile_747:
+DocumentFile_748:
   id: 3686
   attachment: cft-declaration-annuelle-de-la-situation-de-la-main-d-oeuvre-2023-02-04.pdf
 
-DocumentFile_748:
+DocumentFile_749:
   id: 3687
   attachment: cft-certificat-d-origine-2023-02-04.pdf
 
-DocumentFile_749:
+DocumentFile_750:
   id: 3688
   attachment: cft-permis-d-exportation-cites-le-cas-echeant-2023-02-04.pdf
 
-DocumentFile_750:
+DocumentFile_751:
   id: 3692
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-de-gestion-2023-02-08.pdf
 
-DocumentFile_751:
+DocumentFile_752:
   id: 3693
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-02-08.pdf
 
-DocumentFile_752:
+DocumentFile_753:
   id: 3694
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-02-08.pdf
 
-DocumentFile_753:
+DocumentFile_754:
   id: 3695
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-02-08.pdf
 
-DocumentFile_754:
+DocumentFile_755:
   id: 3697
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-02-08.pdf
 
-DocumentFile_755:
+DocumentFile_756:
   id: 3698
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-02-08.pdf
 
-DocumentFile_756:
+DocumentFile_757:
   id: 3699
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-02-08.pdf
 
-DocumentFile_757:
+DocumentFile_758:
   id: 3700
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-02-08.pdf
 
-DocumentFile_758:
+DocumentFile_759:
   id: 3701
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-02-08.pdf
 
-DocumentFile_759:
+DocumentFile_760:
   id: 3715
   attachment: ifo-interholco-autorisation-d-heures-supplementaires-le-cas-echeant-2023-02-10.pdf
 
-DocumentFile_760:
+DocumentFile_761:
   id: 3716
   attachment: ifo-interholco-autorisation-de-coupe-d-achevement-2023-02-10.pdf
 
-DocumentFile_761:
+DocumentFile_762:
   id: 3717
   attachment: ifo-interholco-autorisation-de-coupe-d-achevement-2023-02-10.pdf
 
-DocumentFile_762:
+DocumentFile_763:
   id: 3718
   attachment: ifo-interholco-autorisation-de-coupe-annuelle-2023-02-10.pdf
 
-DocumentFile_763:
+DocumentFile_764:
   id: 3719
   attachment: ifo-interholco-etat-de-production-de-l-annee-d-achevement-2023-02-10.pdf
 
-DocumentFile_764:
+DocumentFile_765:
   id: 3720
   attachment: ifo-interholco-etat-de-production-de-l-annee-de-coupe-2023-02-10.pdf
 
-DocumentFile_765:
+DocumentFile_766:
   id: 3751
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-02-14.pdf
 
-DocumentFile_766:
+DocumentFile_767:
   id: 3752
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-02-14.pdf
 
-DocumentFile_767:
+DocumentFile_768:
   id: 3753
   attachment: ifo-interholco-declaration-en-douanes-2023-02-16.pdf
 
-DocumentFile_768:
+DocumentFile_769:
   id: 3754
   attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-02-16.pdf
 
-DocumentFile_769:
+DocumentFile_770:
   id: 3755
   attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2023-02-16.pdf
 
-DocumentFile_770:
+DocumentFile_771:
   id: 3756
   attachment: ifo-interholco-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-02-16.pdf
 
-DocumentFile_771:
+DocumentFile_772:
   id: 3757
   attachment: ifo-interholco-preuve-de-contribution-au-fond-de-developpement-local-2023-02-16.pdf
 
-DocumentFile_772:
+DocumentFile_773:
   id: 3758
   attachment: ifo-interholco-certificat-phytosanitaire-2023-02-16.pdf
 
-DocumentFile_773:
+DocumentFile_774:
   id: 3765
   attachment: cft-rapport-trimestriel-d-avancement-de-la-mise-en-oeuvre-des-accords-constituants-les-clauses-sociales-d-2023-02-18.pdf
 
-DocumentFile_774:
+DocumentFile_775:
   id: 3797
   attachment: siencam-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-03-09.pdf
 
-DocumentFile_775:
+DocumentFile_776:
   id: 3798
   attachment: siencam-notification-de-demarrage-des-activites-2023-03-09.pdf
 
-DocumentFile_776:
+DocumentFile_777:
   id: 3799
   attachment: siencam-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2023-03-09.pdf
 
-DocumentFile_777:
+DocumentFile_778:
   id: 3802
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-03-11.pdf
 
-DocumentFile_778:
+DocumentFile_779:
   id: 3803
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-03-11.pdf
 
-DocumentFile_779:
+DocumentFile_780:
   id: 3804
   attachment: cft-certificat-de-verification-a-l-exportation-et-a-l-embarquement-cvee-2023-03-11.pdf
 
-DocumentFile_780:
+DocumentFile_781:
   id: 3805
   attachment: cft-numero-d-import-export-2023-03-11.pdf
 
-DocumentFile_781:
+DocumentFile_782:
   id: 3809
   attachment: cfc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2023-03-16.pdf
 
-DocumentFile_782:
+DocumentFile_783:
   id: 3810
   attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-03-16.pdf
 
-DocumentFile_783:
+DocumentFile_784:
   id: 3811
   attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-03-16.pdf
 
-DocumentFile_784:
+DocumentFile_785:
   id: 3812
   attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-03-16.pdf
 
-DocumentFile_785:
+DocumentFile_786:
   id: 3813
   attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-03-16.pdf
 
-DocumentFile_786:
+DocumentFile_787:
   id: 3822
   attachment: sebc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2023-03-16.pdf
 
-DocumentFile_787:
+DocumentFile_788:
   id: 3847
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-03-22.pdf
 
-DocumentFile_788:
+DocumentFile_789:
   id: 3848
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-03-22.pdf
 
-DocumentFile_789:
+DocumentFile_790:
   id: 3849
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-03-22.pdf
 
-DocumentFile_790:
+DocumentFile_791:
   id: 3850
   attachment: cfc-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-03-22.pdf
 
-DocumentFile_791:
+DocumentFile_792:
   id: 3851
   attachment: sebc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2023-03-22.pdf
 
-DocumentFile_792:
+DocumentFile_793:
   id: 3854
   attachment: sebc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-03-23.pdf
 
-DocumentFile_793:
+DocumentFile_794:
   id: 3855
   attachment: cft-declaration-d-exportation-modele-eb-2023-03-24.pdf
 
-DocumentFile_794:
+DocumentFile_795:
   id: 3856
   attachment: cfc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2023-03-27.pdf
 
-DocumentFile_795:
+DocumentFile_796:
   id: 3862
   attachment: cfc-notification-de-demarrage-des-activites-2023-03-31.pdf
 
-DocumentFile_796:
+DocumentFile_797:
   id: 3863
   attachment: cfc-notification-de-demarrage-des-activites-2023-03-31.pdf
 
-DocumentFile_797:
+DocumentFile_798:
   id: 3864
   attachment: cfc-notification-de-demarrage-des-activites-2023-03-31.pdf
 
-DocumentFile_798:
+DocumentFile_799:
   id: 3865
   attachment: cfc-notification-de-demarrage-des-activites-2023-03-31.pdf
 
-DocumentFile_799:
+DocumentFile_800:
   id: 3866
   attachment: cft-certification-phytosanitaire-2023-04-01.pdf
 
-DocumentFile_800:
+DocumentFile_801:
   id: 3868
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-04-04.pdf
 
-DocumentFile_801:
+DocumentFile_802:
   id: 3869
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-04-04.pdf
 
-DocumentFile_802:
+DocumentFile_803:
   id: 3870
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-04-04.pdf
 
-DocumentFile_803:
+DocumentFile_804:
   id: 3883
   attachment: sebc-notification-de-demarrage-des-activites-2023-04-12.pdf
 
-DocumentFile_804:
+DocumentFile_805:
   id: 3884
   attachment: sebc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-04-12.pdf
 
-DocumentFile_805:
+DocumentFile_806:
   id: 3887
   attachment: sebc-notification-de-demarrage-des-activites-2023-04-13.pdf
 
-DocumentFile_806:
+DocumentFile_807:
   id: 3898
   attachment: sebc-attestation-de-non-redevance-2023-04-14.pdf
 
-DocumentFile_807:
+DocumentFile_808:
   id: 3916
   attachment: cft-bordereau-de-circulation-2023-04-19.pdf
 
-DocumentFile_808:
+DocumentFile_809:
   id: 3917
   attachment: cft-permis-d-exportation-cites-le-cas-echeant-2023-04-19.pdf
 
-DocumentFile_809:
+DocumentFile_810:
   id: 3950
   attachment: siencam-attestation-de-non-redevance-2023-05-02.pdf
 
-DocumentFile_810:
+DocumentFile_811:
   id: 3951
   attachment: siencam-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-05-02.pdf
 
-DocumentFile_811:
+DocumentFile_812:
   id: 3952
   attachment: siencam-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-05-02.pdf
 
-DocumentFile_812:
+DocumentFile_813:
   id: 3953
   attachment: siencam-proces-verbal-attestation-de-realisation-des-oeuvres-sociales-prevues-aux-cahiers-des-charges-2023-05-02.pdf
 
-DocumentFile_813:
+DocumentFile_814:
   id: 3958
   attachment: siencam-certificat-de-vente-de-coupe-2023-05-02.pdf
 
-DocumentFile_814:
+DocumentFile_815:
   id: 3960
   attachment: siencam-notification-de-demarrage-des-activites-2023-05-03.pdf
 
-DocumentFile_815:
+DocumentFile_816:
   id: 3962
   attachment: sebc-proces-verbal-de-la-reunion-d-information-relative-a-l-exploitation-du-titre-forestier-2023-05-09.pdf
 
-DocumentFile_816:
+DocumentFile_817:
   id: 3973
   attachment: cib-certificat-d-agrement-forestier-2023-05-10.pdf
 
-DocumentFile_817:
+DocumentFile_818:
   id: 3974
   attachment: cib-autorisation-d-heures-supplementaires-le-cas-echeant-2023-05-10.pdf
 
-DocumentFile_818:
+DocumentFile_819:
   id: 3976
   attachment: cib-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2023-05-10.pdf
 
-DocumentFile_819:
+DocumentFile_820:
   id: 3995
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-05-15.pdf
 
-DocumentFile_820:
+DocumentFile_821:
   id: 3996
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-05-15.pdf
 
-DocumentFile_821:
+DocumentFile_822:
   id: 3997
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-05-15.pdf
 
-DocumentFile_822:
+DocumentFile_823:
   id: 3998
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-05-15.pdf
 
-DocumentFile_823:
+DocumentFile_824:
   id: 4017
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-05-18.pdf
 
-DocumentFile_824:
+DocumentFile_825:
   id: 4018
   attachment: ifo-interholco-patente-2023-05-19.pdf
 
-DocumentFile_825:
+DocumentFile_826:
   id: 4019
   attachment: ifo-interholco-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2023-05-19.pdf
 
-DocumentFile_826:
+DocumentFile_827:
   id: 4020
   attachment: ifo-interholco-compte-rendu-du-conseil-de-concertation-2023-05-19.pdf
 
-DocumentFile_827:
+DocumentFile_828:
   id: 4048
   attachment: cib-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2023-05-23.pdf
 
-DocumentFile_828:
+DocumentFile_829:
   id: 4049
   attachment: cib-patente-2023-05-23.pdf
 
-DocumentFile_829:
+DocumentFile_830:
   id: 4050
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-05-23.pdf
 
-DocumentFile_830:
+DocumentFile_831:
   id: 4051
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-05-23.pdf
 
-DocumentFile_831:
+DocumentFile_832:
   id: 4052
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-05-23.pdf
 
-DocumentFile_832:
+DocumentFile_833:
   id: 4053
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-05-23.pdf
 
-DocumentFile_833:
+DocumentFile_834:
   id: 4087
   attachment: mokabi-sa-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-de-gestion-2023-05-25.pdf
 
-DocumentFile_834:
+DocumentFile_835:
   id: 4088
   attachment: mokabi-sa-plan-de-gestion-2023-05-25.pdf
 
-DocumentFile_835:
+DocumentFile_836:
   id: 4089
   attachment: mokabi-sa-autorisation-de-coupe-annuelle-2023-05-25.pdf
 
-DocumentFile_836:
+DocumentFile_837:
   id: 4090
   attachment: mokabi-sa-etat-de-production-de-l-annee-d-achevement-2023-05-25.pdf
 
-DocumentFile_837:
+DocumentFile_838:
   id: 4091
   attachment: mokabi-sa-etude-d-impact-environnementale-et-sociale-exploitation-2023-05-25.pdf
 
-DocumentFile_838:
+DocumentFile_839:
   id: 4092
   attachment: mokabi-sa-agrement-de-transports-2023-05-25.pdf
 
-DocumentFile_839:
+DocumentFile_840:
   id: 4093
   attachment: mokabi-sa-permis-d-exportation-cites-2023-05-25.pdf
 
-DocumentFile_840:
+DocumentFile_841:
   id: 4094
   attachment: mokabi-sa-convention-d-etablissement-2023-05-25.pdf
 
-DocumentFile_841:
+DocumentFile_842:
   id: 4095
   attachment: mokabi-sa-patente-2023-05-25.pdf
 
-DocumentFile_842:
+DocumentFile_843:
   id: 4096
   attachment: mokabi-sa-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-05-25.pdf
 
-DocumentFile_843:
+DocumentFile_844:
   id: 4097
   attachment: mokabi-sa-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2023-05-25.pdf
 
-DocumentFile_844:
+DocumentFile_845:
   id: 4098
   attachment: mokabi-sa-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-05-25.pdf
 
-DocumentFile_845:
+DocumentFile_846:
   id: 4099
   attachment: mokabi-sa-preuve-de-contribution-au-fond-de-developpement-local-2023-05-25.pdf
 
-DocumentFile_846:
+DocumentFile_847:
   id: 4100
   attachment: mokabi-sa-etat-de-realisation-du-cahier-des-charges-2023-05-25.pdf
 
-DocumentFile_847:
+DocumentFile_848:
   id: 4101
   attachment: mokabi-sa-patente-2023-05-25.pdf
 
-DocumentFile_848:
+DocumentFile_849:
   id: 4102
   attachment: mokabi-sa-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2023-05-25.pdf
 
-DocumentFile_849:
+DocumentFile_850:
   id: 4103
   attachment: mokabi-sa-autorisation-d-heures-supplementaires-le-cas-echeant-2023-05-25.pdf
 
-DocumentFile_850:
+DocumentFile_851:
   id: 4154
   attachment: cib-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2023-06-02.pdf
 
-DocumentFile_851:
+DocumentFile_852:
   id: 4165
   attachment: mokabi-sa-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2023-06-04.pdf
 
-DocumentFile_852:
+DocumentFile_853:
   id: 4166
   attachment: mokabi-sa-plan-de-gestion-2023-06-04.pdf
 
-DocumentFile_853:
+DocumentFile_854:
   id: 4167
   attachment: mokabi-sa-certificat-phytosanitaire-2023-06-04.pdf
 
-DocumentFile_854:
+DocumentFile_855:
   id: 4168
   attachment: mokabi-sa-declaration-en-douanes-2023-06-04.pdf
 
-DocumentFile_855:
+DocumentFile_856:
   id: 4179
   attachment: ifo-interholco-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2023-06-13.pdf
 
-DocumentFile_856:
+DocumentFile_857:
   id: 4180
   attachment: ifo-interholco-autorisation-d-heures-supplementaires-le-cas-echeant-2023-06-13.pdf
 
-DocumentFile_857:
+DocumentFile_858:
   id: 4181
   attachment: ifo-interholco-permis-d-exportation-cites-2023-06-13.pdf
 
-DocumentFile_858:
+DocumentFile_859:
   id: 4191
   attachment: mokabi-sa-agrement-de-transports-2023-06-16.pdf
 
-DocumentFile_859:
+DocumentFile_860:
   id: 4203
   attachment: cft-certificat-d-origine-2023-06-21.pdf
 
-DocumentFile_860:
+DocumentFile_861:
   id: 4204
   attachment: cft-declaration-d-exportation-modele-eb-2023-06-21.pdf
 
-DocumentFile_861:
+DocumentFile_862:
   id: 4218
   attachment: ifo-interholco-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2023-07-06.pdf
 
-DocumentFile_862:
+DocumentFile_863:
   id: 4224
   attachment: cib-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2023-07-07.pdf
 
-DocumentFile_863:
+DocumentFile_864:
   id: 4229
   attachment: cib-compte-rendu-du-conseil-de-concertation-2023-07-10.pdf
 
-DocumentFile_864:
+DocumentFile_865:
   id: 4230
   attachment: cib-compte-rendu-du-conseil-de-concertation-2023-07-10.pdf
 
-DocumentFile_865:
+DocumentFile_866:
   id: 4233
   attachment: cft-prolongation-du-permis-de-coupe-industrielle-pcibo-2023-07-12.pdf
 
-DocumentFile_866:
+DocumentFile_867:
   id: 4234
   attachment: cft-permis-de-coupe-industrielle-pcibo-2023-07-12.pdf
 
-DocumentFile_867:
+DocumentFile_868:
   id: 4235
   attachment: cft-attestation-bancaire-de-paiement-de-la-taxe-sur-le-permis-de-coupe-industrielle-du-bois-d-oeuvre-2023-07-12.pdf
 
-DocumentFile_868:
+DocumentFile_869:
   id: 4237
   attachment: cft-permis-d-exportation-cites-le-cas-echeant-2023-07-17.pdf
 
-DocumentFile_869:
+DocumentFile_870:
   id: 4240
   attachment: cft-declaration-d-exportation-modele-eb-2023-07-18.pdf
 
-DocumentFile_870:
+DocumentFile_871:
   id: 4241
   attachment: cft-certificat-de-verification-a-l-exportation-et-a-l-embarquement-cvee-2023-07-19.pdf
 
-DocumentFile_871:
+DocumentFile_872:
   id: 4242
   attachment: cft-declaration-d-exportation-modele-eb-2023-07-19.pdf
 
-DocumentFile_872:
+DocumentFile_873:
   id: 4269
   attachment: cib-extrait-du-registre-de-reclamation-et-de-revendication-du-personnel-derniere-page-2023-07-24.pdf
 
-DocumentFile_873:
+DocumentFile_874:
   id: 4271
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-07-24.pdf
 
-DocumentFile_874:
+DocumentFile_875:
   id: 4272
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-07-24.pdf
 
-DocumentFile_875:
+DocumentFile_876:
   id: 4273
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-07-24.pdf
 
-DocumentFile_876:
+DocumentFile_877:
   id: 4274
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-07-24.pdf
 
-DocumentFile_877:
+DocumentFile_878:
   id: 4275
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-24.pdf
 
-DocumentFile_878:
+DocumentFile_879:
   id: 4276
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-07-24.pdf
 
-DocumentFile_879:
+DocumentFile_880:
   id: 4277
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-24.pdf
 
-DocumentFile_880:
+DocumentFile_881:
   id: 4278
   attachment: cib-convention-d-etablissement-2023-07-26.pdf
 
-DocumentFile_881:
+DocumentFile_882:
   id: 4279
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-07-26.pdf
 
-DocumentFile_882:
+DocumentFile_883:
   id: 4280
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-26.pdf
 
-DocumentFile_883:
+DocumentFile_884:
   id: 4281
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-26.pdf
 
-DocumentFile_884:
+DocumentFile_885:
   id: 4282
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-07-26.pdf
 
-DocumentFile_885:
+DocumentFile_886:
   id: 4283
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-26.pdf
 
-DocumentFile_886:
+DocumentFile_887:
   id: 4284
   attachment: cib-convention-d-etablissement-2023-07-28.pdf
 
-DocumentFile_887:
+DocumentFile_888:
   id: 4300
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-07-29.pdf
 
-DocumentFile_888:
+DocumentFile_889:
   id: 4301
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-29.pdf
 
-DocumentFile_889:
+DocumentFile_890:
   id: 4302
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-29.pdf
 
-DocumentFile_890:
+DocumentFile_891:
   id: 4303
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-29.pdf
 
-DocumentFile_891:
+DocumentFile_892:
   id: 4304
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-07-29.pdf
 
-DocumentFile_892:
+DocumentFile_893:
   id: 4327
   attachment: cft-bulletin-de-liquidation-des-droits-de-sortie-du-bois-2023-08-15.pdf
 
-DocumentFile_893:
+DocumentFile_894:
   id: 4358
   attachment: cib-declaration-en-douanes-2023-08-23.pdf
 
-DocumentFile_894:
+DocumentFile_895:
   id: 4359
   attachment: cib-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2023-08-23.pdf
 
-DocumentFile_895:
+DocumentFile_896:
   id: 4361
   attachment: ifo-interholco-agrement-de-transports-2023-08-24.pdf
 
-DocumentFile_896:
+DocumentFile_897:
   id: 4362
   attachment: ifo-interholco-agrement-de-transports-2023-08-24.pdf
 
-DocumentFile_897:
+DocumentFile_898:
   id: 4363
   attachment: ifo-interholco-autorisation-de-coupe-annuelle-2023-08-25.pdf
 
-DocumentFile_898:
+DocumentFile_899:
   id: 4364
   attachment: ifo-interholco-etude-d-impact-environnementale-et-sociale-base-vie-2023-08-25.pdf
 
-DocumentFile_899:
+DocumentFile_900:
   id: 4365
   attachment: ifo-interholco-etude-d-impact-environnementale-et-sociale-exploitation-2023-08-25.pdf
 
-DocumentFile_900:
+DocumentFile_901:
   id: 4377
   attachment: ifo-interholco-etude-d-impact-environnementale-et-sociale-exploitation-2023-09-01.pdf
 
-DocumentFile_901:
+DocumentFile_902:
   id: 4381
   attachment: cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2023-09-06.pdf
 
-DocumentFile_902:
+DocumentFile_903:
   id: 4382
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-09-06.pdf
 
-DocumentFile_903:
+DocumentFile_904:
   id: 4383
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-09-06.pdf
 
-DocumentFile_904:
+DocumentFile_905:
   id: 4387
   attachment: cft-rapport-trimestriel-d-avancement-de-la-mise-en-oeuvre-des-accords-constituants-les-clauses-sociales-d-2023-09-07.pdf
 
-DocumentFile_905:
+DocumentFile_906:
   id: 4388
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-09-07.pdf
 
-DocumentFile_906:
+DocumentFile_907:
   id: 4389
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-09-07.pdf
 
-DocumentFile_907:
-  id: 1143
-  attachment: ifo-interholco-etat-de-realisation-du-cahier-des-charges-2020-05-21.pdf
-
 DocumentFile_908:
-  id: 1641
-  attachment: compagnie-forestiere-du-camero-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2021-01-08.pdf
-
-DocumentFile_909:
   id: 4403
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-09-18.pdf
 
-DocumentFile_910:
+DocumentFile_909:
   id: 4404
   attachment: cib-agrement-de-transports-2023-09-18.pdf
 
-DocumentFile_911:
+DocumentFile_910:
   id: 4443
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-09-29.pdf
 
-DocumentFile_912:
+DocumentFile_911:
   id: 4444
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-09-29.pdf
 
-DocumentFile_913:
+DocumentFile_912:
   id: 4445
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-09-29.pdf
 
-DocumentFile_914:
+DocumentFile_913:
   id: 4446
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-09-29.pdf
 
-DocumentFile_915:
+DocumentFile_914:
   id: 4447
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-09-29.pdf
 
-DocumentFile_916:
+DocumentFile_915:
   id: 4448
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-09-29.pdf
 
-DocumentFile_917:
+DocumentFile_916:
   id: 4449
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-09-29.pdf
 
-DocumentFile_918:
+DocumentFile_917:
   id: 4450
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-09-29.pdf
 
-DocumentFile_919:
+DocumentFile_918:
   id: 4451
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-09-29.pdf
 
-DocumentFile_920:
+DocumentFile_919:
   id: 4452
   attachment: cib-preuve-de-contribution-au-fond-de-developpement-local-2023-09-29.pdf
 
-DocumentFile_921:
+DocumentFile_920:
   id: 4533
   attachment: cft-certification-phytosanitaire-2023-10-11.pdf
 
-DocumentFile_922:
+DocumentFile_921:
   id: 4534
   attachment: cft-declaration-d-exportation-modele-eb-2023-10-11.pdf
 
-DocumentFile_923:
+DocumentFile_922:
   id: 4535
   attachment: cft-bulletin-de-liquidation-des-droits-de-sortie-du-bois-2023-10-12.pdf
 
-DocumentFile_924:
+DocumentFile_923:
   id: 4536
   attachment: cft-certificat-de-verification-a-l-exportation-et-a-l-embarquement-cvee-2023-10-13.pdf
 
-DocumentFile_925:
+DocumentFile_924:
   id: 4537
   attachment: cft-bordereau-de-circulation-2023-10-13.pdf
 
-DocumentFile_926:
+DocumentFile_925:
   id: 4539
   attachment: cib-autorisation-d-heures-supplementaires-le-cas-echeant-2023-10-16.pdf
 
-DocumentFile_927:
+DocumentFile_926:
   id: 4540
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-10-16.pdf
 
-DocumentFile_928:
+DocumentFile_927:
   id: 4541
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-10-16.pdf
 
-DocumentFile_929:
+DocumentFile_928:
   id: 4542
   attachment: cib-patente-2023-10-17.pdf
 
-DocumentFile_930:
+DocumentFile_929:
   id: 4577
   attachment: cft-rapport-trimestriel-d-avancement-de-la-mise-en-oeuvre-des-accords-constituants-les-clauses-sociales-d-2023-11-09.pdf
 
-DocumentFile_931:
+DocumentFile_930:
   id: 4578
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-11-10.pdf
 
-DocumentFile_932:
+DocumentFile_931:
   id: 4579
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-11-10.pdf
 
-DocumentFile_933:
+DocumentFile_932:
   id: 4580
   attachment: cft-attestation-bancaire-de-paiement-de-la-redevance-de-superficie-forestiere-2023-11-10.pdf
 
-DocumentFile_934:
+DocumentFile_933:
   id: 4587
   attachment: cft-certificat-d-origine-2023-11-16.pdf
 
-DocumentFile_935:
+DocumentFile_934:
   id: 4588
   attachment: cft-certification-phytosanitaire-2023-11-16.pdf
 
-DocumentFile_936:
+DocumentFile_935:
   id: 4619
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-11-24.pdf
 
-DocumentFile_937:
+DocumentFile_936:
   id: 4620
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-11-24.pdf
 
-DocumentFile_938:
+DocumentFile_937:
   id: 4621
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-11-24.pdf
 
-DocumentFile_939:
+DocumentFile_938:
   id: 4622
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-11-24.pdf
 
-DocumentFile_940:
+DocumentFile_939:
   id: 4623
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-11-24.pdf
 
-DocumentFile_941:
+DocumentFile_940:
   id: 4624
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2023-11-24.pdf
 
-DocumentFile_942:
+DocumentFile_941:
   id: 4625
   attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2023-11-24.pdf
 
-DocumentFile_943:
+DocumentFile_942:
   id: 4627
   attachment: cfc-proces-verbal-d-election-des-delegues-du-personnel-2023-11-28.pdf
 
-DocumentFile_944:
+DocumentFile_943:
   id: 4628
   attachment: sebc-proces-verbal-d-election-des-delegues-du-personnel-2023-11-28.pdf
 
-DocumentFile_945:
+DocumentFile_944:
   id: 4635
   attachment: cft-bulletin-de-liquidation-des-droits-de-sortie-du-bois-2023-12-04.pdf
+
+DocumentFile_945:
+  id: 4636
+  attachment: cft-rapport-de-lot-a-exporter-2023-12-04.pdf
 
 DocumentFile_946:
   id: 4637
@@ -3798,3 +3798,7 @@ DocumentFile_949:
 DocumentFile_950:
   id: 4641
   attachment: cft-quittance-de-versement-de-la-contribution-patronale-a-l-onem-2023-12-04.pdf
+
+DocumentFile_951:
+  id: 4656
+  attachment: mokabi-sa-patente-2023-12-15.pdf

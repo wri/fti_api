@@ -2,11 +2,29 @@
 Observer_1:
   id: 3
   observer_type: Mandated
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.442415000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.442415000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-09-08 12:12:54.630153000 Z
+    zone: *1
+    time: 2023-09-08 12:12:54.630153000 Z
   is_active: true
 
 Observer_2:
   id: 5
   observer_type: SemiMandated
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.455678000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.455678000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-06 09:36:08.897324000 Z
+    zone: *1
+    time: 2023-12-06 09:36:08.897324000 Z
   is_active: true
   logo: FODER.jpg
   address: Derrière usine Bastos, face Restaurant Chinois Village, PO BOX 11417, Yaoundé,
@@ -22,6 +40,15 @@ Observer_2:
 Observer_3:
   id: 10
   observer_type: Mandated
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.493181000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.493181000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-11-14 13:13:04.485913000 Z
+    zone: *1
+    time: 2023-11-14 13:13:04.485913000 Z
   is_active: true
   logo: CAGDF.jpg
   address: 43, rue Nkounkou August, Makélékélé
@@ -34,6 +61,15 @@ Observer_3:
 Observer_4:
   id: 16
   observer_type: Mandated
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2017-09-25 15:06:42.540397000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2017-09-25 15:06:42.540397000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-05 12:36:15.227355000 Z
+    zone: *1
+    time: 2023-12-05 12:36:15.227355000 Z
   is_active: true
   logo: OGF.jpg
   address: 6, avenue Marinel, Kinshasa/Gombe, référence Immeuble Sofide
@@ -49,12 +85,30 @@ Observer_4:
 Observer_5:
   id: 25
   observer_type: External
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-01 22:01:21.354791000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-03-01 22:01:21.354791000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-09-20 13:34:09.747508000 Z
+    zone: *1
+    time: 2023-09-20 13:34:09.747508000 Z
   is_active: true
   organization_type: NGO
 
 Observer_6:
   id: 26
   observer_type: External
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2019-03-29 16:31:40.555269000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2019-03-29 16:31:40.555269000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-11-01 13:51:59.249660000 Z
+    zone: *1
+    time: 2023-11-01 13:51:59.249660000 Z
   is_active: true
   address: Cameroon
   organization_type: NGO
@@ -62,9 +116,27 @@ Observer_6:
 Observer_7:
   id: 34
   observer_type: External
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-07 17:36:09.219111000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-07-07 17:36:09.219111000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-11-30 14:48:08.570607000 Z
+    zone: *1
+    time: 2023-11-30 14:48:08.570607000 Z
   is_active: true
 
 Observer_8:
   id: 38
   observer_type: External
+  created_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-07-17 14:29:30.651820000 Z
+    zone: &1 !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-07-17 14:29:30.651820000 Z
+  updated_at: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-09-01 09:17:05.178970000 Z
+    zone: *1
+    time: 2023-09-01 09:17:05.178970000 Z
   is_active: true
