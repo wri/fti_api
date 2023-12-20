@@ -117,6 +117,7 @@ class Observation < ApplicationRecord
 
   with_options if: :operator? do
     validate :validate_governments_absences
+    validate :validate_known_operator, if: -> { operator? && (validation_status != "Created") }
   end
 
   with_options if: :government? do
@@ -285,6 +286,10 @@ class Observation < ApplicationRecord
     return if governments.none?
 
     errors.add(:governments, "Should have no governments with 'operator' type")
+  end
+
+  def validate_known_operator
+    errors.add(:operator, "can't be blank or unknown") if operator.blank? || operator.special_unknown?
   end
 
   # Validates the statuses transitions.

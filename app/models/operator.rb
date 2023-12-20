@@ -86,7 +86,7 @@ class Operator < ApplicationRecord
   validates :name, uniqueness: {case_sensitive: false}
   validates :website, url: true, if: lambda { |x| x.website.present? }
   validates :operator_type, inclusion: {in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(", ")} "}
-  validates :country, presence: true, on: :create
+  validates :country, presence: true, on: :create, unless: :special_unknown?
 
   scope :by_name_asc, -> { order(name: :asc) }
 
@@ -127,11 +127,22 @@ class Operator < ApplicationRecord
       all_observations.with_deleted.none? &&
       relevant_observations.with_deleted.none? &&
       users.none? &&
-      operator_documents.with_deleted.none?
+      operator_documents.with_deleted.none? &&
+      !special_unknown?
   end
 
   def set_slug
     self.slug = name.parameterize
+  end
+
+  def name
+    return I18n.t("filters.unknown") if special_unknown?
+
+    super
+  end
+
+  def special_unknown?
+    slug == "unknown"
   end
 
   private

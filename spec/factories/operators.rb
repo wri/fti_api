@@ -30,6 +30,13 @@ FactoryBot.define do
     operator_type { "Logging company" }
     is_active { true }
 
+    factory :unknown_operator do
+      country { nil }
+      name { "Unknown" }
+      slug { "unknown" }
+      operator_type { "Unknown" }
+    end
+
     trait :with_sawmills do
       after(:create) do |op|
         create_list(:sawmill, 2, operator: op)
