@@ -73,7 +73,7 @@ namespace :scheduler do
       operators = operators.where(id: ENV["OPERATOR_IDS"].split(",")) if ENV["OPERATOR_IDS"].present?
 
       operators.find_each do |operator|
-        users = operator.users.filter_actives
+        users = operator.all_users.filter_actives
         users = users.where(id: ENV["USER_IDS"].split(",")) if ENV["USER_IDS"].present?
 
         users.each do |user|

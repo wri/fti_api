@@ -1,14 +1,14 @@
 class OperatorMailerPreview < ActionMailer::Preview
   def quarterly_newsletter
-    OperatorMailer.quarterly_newsletter operator, operator.users.filter_actives.first
+    OperatorMailer.quarterly_newsletter operator, operator.all_users.filter_actives.first
   end
 
   def expiring_documents
-    OperatorMailer.expiring_documents operator, operator.users.filter_actives.first, documents_expiring
+    OperatorMailer.expiring_documents operator, operator.all_users.filter_actives.first, documents_expiring
   end
 
   def expired_documents
-    OperatorMailer.expired_documents operator, operator.users.filter_actives.first, documents_expired
+    OperatorMailer.expired_documents operator, operator.all_users.filter_actives.first, documents_expired
   end
 
   private

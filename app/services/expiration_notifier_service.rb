@@ -9,17 +9,11 @@ class ExpirationNotifierService
   end
 
   def call
-    documents_to_notify
-  end
-
-  private
-
-  def documents_to_notify
     @notification_dates.each do |date|
-      OperatorDocument.where(expire_date: date).select(:operator_id).group(:operator_id).each do |operator_document|
-        documents = OperatorDocument.where(expire_date: date, operator_id: operator_document.operator_id)
-        operator = Operator.find(operator_document.operator_id)
-        operator.users.filter_actives.each do |user|
+      OperatorDocument.expirable.where(expire_date: date).pluck(:operator_id).uniq.each do |operator_id|
+        documents = OperatorDocument.expirable.where(expire_date: date, operator_id: operator_id)
+        operator = Operator.find(operator_id)
+        operator.all_users.filter_actives.each do |user|
           I18n.with_locale(user.locale.presence || I18n.default_locale) do
             OperatorMailer.expiring_documents(operator, user, documents).deliver_now
           end

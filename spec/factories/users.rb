@@ -29,7 +29,7 @@
 
 FactoryBot.define do
   factory :user do
-    sequence(:email) { |n| "pepe#{n}@vizzuality.com" }
+    sequence(:email) { |n| "pepe#{n}@example.com" }
 
     password { "password" }
     password_confirmation { |u| u.password }
@@ -45,29 +45,35 @@ FactoryBot.define do
     end
 
     factory :ngo do
-      sequence(:email) { |n| "ngo#{n}@vizzuality.com" }
+      sequence(:email) { |n| "ngo#{n}@example.com" }
 
       name { "Test ngo" }
 
       after(:build) do |random_ngo|
         random_ngo.observer ||= FactoryBot.create(:observer)
-        random_ngo.user_permission = UserPermission.new(user_role: 2)
+        random_ngo.user_permission = UserPermission.new(user_role: "ngo")
       end
     end
 
     factory :operator_user do
-      sequence(:email) { |n| "operator#{n}@vizzuality.com" }
+      sequence(:email) { |n| "operator#{n}@example.com" }
 
       name { "Test operator" }
 
       after(:build) do |random_operator|
         random_operator.operator ||= FactoryBot.create(:operator)
-        random_operator.user_permission = UserPermission.new(user_role: 1)
+        random_operator.user_permission = UserPermission.new(user_role: "operator")
       end
     end
 
+    factory :holding_user do
+      sequence(:email) { |n| "holding#{n}@example.com" }
+      name { "Test holding" }
+      user_role { "holding" }
+    end
+
     factory :government_user do
-      sequence(:email) { |n| "gov#{n}@vizzuality.com" }
+      sequence(:email) { |n| "gov#{n}@example.com" }
 
       name { "Test government" }
 
@@ -83,7 +89,7 @@ FactoryBot.define do
       name { "Admin user" }
 
       after(:build) do |random_admin|
-        random_admin.user_permission = UserPermission.new(user_role: 3)
+        random_admin.user_permission = UserPermission.new(user_role: "admin")
       end
 
       after(:create) do |user|
@@ -92,12 +98,12 @@ FactoryBot.define do
     end
 
     factory :webuser do
-      sequence(:email) { |n| "webuser#{n}@vizzuality.com" }
+      sequence(:email) { |n| "webuser#{n}@example.com" }
 
       name { "Web user" }
 
       after(:build) do |random_webuser|
-        random_webuser.user_permission = UserPermission.new(user_role: 0)
+        random_webuser.user_permission = UserPermission.new(user_role: "user")
       end
 
       after(:create) do |user|
@@ -105,7 +111,7 @@ FactoryBot.define do
       end
 
       after(:build) do |random_admin|
-        random_admin.user_permission = UserPermission.new(user_role: 0)
+        random_admin.user_permission = UserPermission.new(user_role: "user")
       end
     end
   end

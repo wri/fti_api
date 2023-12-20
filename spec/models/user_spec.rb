@@ -30,7 +30,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  subject(:user) { FactoryBot.build(:user) }
+  subject(:user) { build(:user) }
 
   it "is valid with valid attributes" do
     expect(user).to be_valid
@@ -45,6 +45,7 @@ RSpec.describe User, type: :model do
   describe "Validations" do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:password_confirmation) }
+    it { is_expected.to validate_presence_of(:user_permission) }
 
     it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
 
@@ -55,69 +56,49 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_length_of(:password).is_at_least(8).is_at_most(20).on(:create) }
 
-    describe "#user_integrity" do
-      context "when there is not an user permission" do
-        it "add an error on user_permission" do
-          user = create(:user)
-          user.update_attribute(:user_permission, nil)
+    describe "user permissions" do
+      let(:user) { build(:user, user_role: user_role) }
 
-          expect(user.valid?).to eql false
-          expect(user.errors[:user_permission]).to eql(
-            ["You must choose a user permission"]
-          )
-        end
-      end
+      context "with operator role" do
+        let(:user_role) { "operator" }
 
-      context "when user permission is operator and there is not operator" do
-        it "add an error on operator_id" do
-          user_permission = create(:user_permission, user_role: 1)
-          user = user_permission.user
-
-          expect(user.valid?).to eql false
-          expect(user.errors[:operator_id]).to eql(
-            ["User of type Operator must have an operator and no observer or holding"]
-          )
-        end
-      end
-
-      context "when user permission is ngo or ngo_manager and there is not observer" do
-        it "add an error on observer" do
-          user_permission = create(:user_permission, user_role: 2)
-          user = user_permission.user
-
-          expect(user.valid?).to eql false
-          expect(user.errors[:observer_id]).to eql(
-            ["User of type NGO must have an observer and no operator or holding"]
-          )
-        end
-      end
-
-      context "when user_permission is admin, user or bo_manager" do
-        context "when operator is present" do
-          it "add an error on operator_id" do
-            operator = create(:operator)
-            user_permission = create(:user_permission, user_role: 3)
-            user = user_permission.user
-            user.update(operator_id: operator.id)
-
+        context "when there is no operator" do
+          it "add an error on operator" do
             expect(user.valid?).to eql false
-            expect(user.errors[:operator_id]).to eql(
-              ["Cannot have an Operator"]
-            )
+            expect(user.errors[:operator]).to eql(["can't be blank"])
           end
         end
+      end
 
-        context "when observer is present" do
-          it "add an error on observer_id" do
-            observer = create(:observer)
-            user_permission = create(:user_permission, user_role: 3)
-            user = user_permission.user
-            user.update(observer_id: observer.id)
+      context "with ngo role" do
+        let(:user_role) { "ngo" }
 
+        context "when there is no observer" do
+          it "add an error on observer" do
             expect(user.valid?).to eql false
-            expect(user.errors[:observer_id]).to eql(
-              ["Cannot have an Observer"]
-            )
+            expect(user.errors[:observer]).to eql(["can't be blank"])
+          end
+        end
+      end
+
+      context "with ngo role" do
+        let(:user_role) { "ngo_manager" }
+
+        context "when there is no observer" do
+          it "add an error on observer" do
+            expect(user.valid?).to eql false
+            expect(user.errors[:observer]).to eql(["can't be blank"])
+          end
+        end
+      end
+
+      context "with holding role" do
+        let(:user_role) { "holding" }
+
+        context "when there is no holding" do
+          it "add an error on holding" do
+            expect(user.valid?).to eql false
+            expect(user.errors[:holding]).to eql(["can't be blank"])
           end
         end
       end
@@ -125,6 +106,61 @@ RSpec.describe User, type: :model do
   end
 
   describe "Hooks" do
+    describe "#clear_unrelated_relations" do
+      let(:user) { build(:user, operator: build(:operator), observer: build(:observer), holding: build(:holding), permissions_request: user_role) }
+
+      context "when user_permission is operator" do
+        let(:user_role) { "operator" }
+
+        it "clears observer and holding" do
+          expect(user.valid?).to eql true
+          expect(user.observer).to eql nil
+          expect(user.holding).to eql nil
+        end
+      end
+
+      context "when user_permission is ngo" do
+        let(:user_role) { "ngo" }
+
+        it "clears operator and holding" do
+          expect(user.valid?).to eql true
+          expect(user.operator).to eql nil
+          expect(user.holding).to eql nil
+        end
+      end
+
+      context "when user_permission is ngo_manager" do
+        let(:user_role) { "ngo_manager" }
+
+        it "clears operator and holding" do
+          expect(user.valid?).to eql true
+          expect(user.operator).to eql nil
+          expect(user.holding).to eql nil
+        end
+      end
+
+      context "when user_permission is holding" do
+        let(:user_role) { "holding" }
+
+        it "clears operator and observer" do
+          expect(user.valid?).to eql true
+          expect(user.operator).to eql nil
+          expect(user.observer).to eql nil
+        end
+      end
+
+      context "when user_permission is government" do
+        let(:user_role) { "government" }
+
+        it "clears operator, observer, holding" do
+          expect(user.valid?).to eql true
+          expect(user.operator).to eql nil
+          expect(user.observer).to eql nil
+          expect(user.holding).to eql nil
+        end
+      end
+    end
+
     describe "#create_from_request" do
       context "when permission_request is present" do
         it "add user_permission which correspond to the permissions_request" do

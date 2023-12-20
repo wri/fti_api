@@ -12,6 +12,7 @@
 
 class Holding < ApplicationRecord
   has_many :operators, dependent: :nullify
+  has_many :users, dependent: :nullify
 
   validates :name, presence: true
 end

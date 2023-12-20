@@ -3,12 +3,12 @@
 </p>
 
 <p>
-  <%= t(".paragraph1", score: @score) %>
+  <%= t(".paragraph1", company: @operator.name, score: @score) %>
 </p>
 
 <% if @old_score.present? %>
 <p>
-  <%= t(".paragraph2", old_score_date: localized_date(I18n.locale, @old_score_date), old_score: @old_score, score_variation: @score_variation) %>
+  <%= t(".paragraph2", company: @operator.name, old_score_date: localized_date(I18n.locale, @old_score_date), old_score: @old_score, score_variation: @score_variation) %>
 </p>
 <% end %>
 

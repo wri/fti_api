@@ -124,8 +124,8 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
               li do
                 text_node content_tag "a", t("active_admin.menu.user_management.notifications.notifications"), class: "-with-children"
                 ul do
-                  li { link_to t("active_admin.menu.user_management.notifications.notifications"), admin_notification_groups_path }
-                  li { link_to t("active_admin.menu.user_management.notifications.notification_groups"), admin_notifications_path }
+                  li { link_to t("active_admin.menu.user_management.notifications.notification_groups"), admin_notification_groups_path }
+                  li { link_to t("active_admin.menu.user_management.notifications.notifications"), admin_notifications_path }
                 end
               end
             end

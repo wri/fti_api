@@ -36,12 +36,12 @@ RSpec.describe OperatorMailer, type: :mailer do
     let(:mail) { OperatorMailer.quarterly_newsletter(operator, user) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("Your quarterly OTP report")
+      expect(mail.subject).to eq("#{operator.name} quarterly OTP report")
       expect(mail.to).to eq([user.email])
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Your current score is 0")
+      expect(mail.body.encoded).to match("#{operator.name} current score is 0")
     end
   end
 end

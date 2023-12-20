@@ -122,6 +122,14 @@ class Operator < ApplicationRecord
     end
   end
 
+  def holding_users
+    holding&.users || User.none
+  end
+
+  def all_users
+    users.or(holding_users)
+  end
+
   def can_hard_delete?
     all_fmus.with_deleted.none? &&
       all_observations.with_deleted.none? &&
