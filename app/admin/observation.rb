@@ -63,7 +63,7 @@ ActiveAdmin.register Observation do
             :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
             :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :admin_comment,
             :monitor_comment, :actions_taken, :is_physical_place,
-            observer_ids: [], relevant_operator_ids: [], government_ids: [],
+            relevant_operator_ids: [], government_ids: [],
             observation_documents_attributes: [:id, :name, :attachment],
             translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
           ]
@@ -547,7 +547,7 @@ ActiveAdmin.register Observation do
 
       f.input :is_physical_place, **visibility
       f.input :location_information, **visibility if f.object.observation_type == "operator"
-      f.input :observers, **visibility
+      f.input :observers, input_html: {disabled: true}
 
       f.input :relevant_operator_ids,
         label: I18n.t("activerecord.attributes.observation.relevant_operators"),

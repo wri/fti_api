@@ -33,7 +33,7 @@ resource "Operators" do
     let(:operator_with_obs) { create(:operator, country: country) }
 
     before do
-      create(:observation, operator: operator_with_obs, observers: [observer])
+      create(:observation, operator: operator_with_obs, observation_report: create(:observation_report, observers: [observer]))
     end
 
     example_request "Listing operators" do

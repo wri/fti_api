@@ -74,6 +74,7 @@ RSpec.describe Observation, type: :model do
 
     it "is invalid without observers" do
       subject.observers = []
+      subject.observation_report = nil # clearing the report as well to not copy observers from there
       expect(subject.valid?).to eq(false)
       expect(subject.errors[:observers]).to include("can't be blank")
     end
@@ -220,11 +221,12 @@ RSpec.describe Observation, type: :model do
       let(:admin2) { create(:admin) }
       let(:observer1) { create(:observer, responsible_admin: admin1) }
       let(:observer2) { create(:observer, responsible_admin: admin2) }
+      let(:observation_report) { create(:observation_report, observers: [observer1, observer2]) }
       let(:observation) {
         build(
           :observation,
           validation_status: "Created",
-          observers: [observer1, observer2]
+          observation_report: observation_report
         )
       }
 
@@ -299,16 +301,25 @@ RSpec.describe Observation, type: :model do
       end
     end
 
-    describe "#update_reports_observers" do
-      let(:observation_report) { create(:observation_report) }
+    describe "#assign_observers_from_report" do
       let(:observer1) { create(:observer) }
       let(:observer2) { create(:observer) }
+      let(:observation_report) { create(:observation_report, observers: [observer1, observer2]) }
+      let(:observation) { create(:observation, observation_report: observation_report) }
 
-      context "when creating observation with the report" do
-        it "assigns reports to observers associated with observation" do
-          create(:observation, observers: [observer1, observer2], observation_report: observation_report)
+      context "when creating an observation" do
+        it "assigns the observers from the report" do
+          expect(observation.observers).to match_array([observer1, observer2])
+        end
+      end
 
-          expect(observation_report.observer_ids.sort).to eql([observer1.id, observer2.id].sort)
+      context "when changing observation report" do
+        let(:observer3) { create(:observer) }
+        let(:observation_report2) { create(:observation_report, observers: [observer3]) }
+
+        it "assigns the observers from the report" do
+          observation.update!(observation_report: observation_report2)
+          expect(observation.observers).to match_array([observer3])
         end
       end
     end
@@ -416,22 +427,6 @@ RSpec.describe Observation, type: :model do
         @observation.destroy
 
         expect(ObservationDocument.where(observation_id: @observation.id).size).to eql 0
-      end
-    end
-
-    describe "#update_report_observers" do
-      context "when there is observation report" do
-        it "update the observer_ids with the observer_id associated to the observations" do
-          observation_report = create(:observation_report)
-          observation = create(:observation)
-
-          observation.update(observation_report_id: observation_report.id)
-
-          # To avoid unscope joins
-          expect(observation_report.observer_ids.uniq).to eql(
-            observation_report.observations.map(&:observers).map(&:ids).flatten.uniq
-          )
-        end
       end
     end
   end
