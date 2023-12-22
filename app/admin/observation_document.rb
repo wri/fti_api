@@ -24,9 +24,6 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
   csv do
     column :id
-    column :observation do |od|
-      od.observation&.id
-    end
     column :name
     column :user do |od|
       od.user&.name
@@ -38,7 +35,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
   index do
     column :id
-    column :observation, sortable: "observation_id"
+    column :observations
     column :name
     column :attachment do |o|
       link_to o&.name, o.attachment&.url if o.attachment&.url
@@ -62,7 +59,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
     end
   end
 
-  filter :observation, as: :select, collection: -> { Observation.joins(:observation_documents).distinct.order(:id).pluck(:id) }
+  filter :observations, as: :select, collection: -> { Observation.joins(:observation_documents).distinct.order(:id).pluck(:id) }
   filter :name, as: :select
   filter :attachment, as: :select
   filter :user
@@ -73,7 +70,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
-      f.input :observation, collection: Observation.all.map { |o| [o.id, o.id] }, input_html: {disabled: true}
+      f.input :observations, input_html: {disabled: true}
       f.input :user, input_html: {disabled: true}
       f.input :name
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
@@ -85,7 +82,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   show do
     attributes_table do
       row :id
-      row :observation
+      row :observations
       row :attachment do |o|
         link_to o&.name, o.attachment&.url if o.attachment&.url
       end
@@ -99,7 +96,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes(:user)
+      end_of_association_chain.includes(:user, :observations)
     end
   end
 end
