@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_22_154005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -391,11 +391,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
     t.datetime "updated_at", precision: nil, null: false
     t.integer "user_id"
     t.datetime "deleted_at", precision: nil
-    t.integer "observation_id"
     t.index ["deleted_at"], name: "index_observation_documents_on_deleted_at"
     t.index ["name"], name: "index_observation_documents_on_name"
-    t.index ["observation_id"], name: "index_observation_documents_on_observation_id"
     t.index ["user_id"], name: "index_observation_documents_on_user_id"
+  end
+
+  create_table "observation_documents_observations", force: :cascade do |t|
+    t.bigint "observation_document_id", null: false
+    t.bigint "observation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["observation_document_id", "observation_id"], name: "observation_documents_observations_double_index", unique: true
+    t.index ["observation_document_id"], name: "observation_documents_observations_doc_index"
+    t.index ["observation_id"], name: "observation_documents_observations_obs_index"
   end
 
   create_table "observation_histories", id: :serial, force: :cascade do |t|
@@ -1116,8 +1124,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
   add_foreign_key "notifications", "notification_groups", on_delete: :nullify
   add_foreign_key "notifications", "operator_documents", on_delete: :cascade
   add_foreign_key "notifications", "users", on_delete: :cascade
-  add_foreign_key "observation_documents", "observations"
   add_foreign_key "observation_documents", "users"
+  add_foreign_key "observation_documents_observations", "observation_documents", on_delete: :cascade
+  add_foreign_key "observation_documents_observations", "observations", on_delete: :cascade
   add_foreign_key "observation_histories", "categories", on_delete: :cascade
   add_foreign_key "observation_histories", "countries", on_delete: :cascade
   add_foreign_key "observation_histories", "fmus", on_delete: :cascade
