@@ -113,16 +113,16 @@ ActiveAdmin.register OperatorDocumentAnnex do
     actions
   end
 
-  filter :annex_documents_documentable_of_OperatorDocument_type_required_operator_document_name_equals,
+  filter :annex_documents_documentable_of_OperatorDocument_type_required_operator_document_name_eq,
     as: :select,
     label: proc { I18n.t("active_admin.operator_document_annexes_page.operator_document") },
     collection: -> { RequiredOperatorDocument.order(:name).pluck(:name) }
 
-  filter :annex_documents_documentable_of_OperatorDocument_type_operator_name_equals,
+  filter :annex_documents_documentable_of_OperatorDocument_type_operator_name_eq,
     as: :select,
     label: proc { I18n.t("activerecord.models.operator") },
     collection: -> { Operator.order(:name).pluck(:name) }
-  filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals,
+  filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_eq,
     as: :select,
     label: -> { I18n.t("activerecord.models.fmu.one") },
     collection: -> { Fmu.by_name_asc.pluck(:name) }
@@ -133,8 +133,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   dependent_filters do
     {
-      annex_documents_documentable_of_OperatorDocument_type_operator_name_equals: {
-        annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_equals:
+      annex_documents_documentable_of_OperatorDocument_type_operator_name_eq: {
+        annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_eq:
           Operator.joins(fmus: :translations).where(fmu_translations: {locale: I18n.locale}).pluck(:name, "fmu_translations.name")
       }
     }

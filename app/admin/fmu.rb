@@ -28,7 +28,7 @@ ActiveAdmin.register Fmu do
   filter :id, as: :select
   filter :country, as: :select, label: proc { I18n.t("activerecord.models.country.one") }, collection: -> { Country.joins(:fmus).by_name_asc }
   filter :operator_in_all, as: :select, label: proc { I18n.t("activerecord.attributes.fmu.operator") }, collection: -> { Operator.order(:name) }
-  filter :translations_name_contains,
+  filter :translations_name_cont,
     as: :select, label: proc { I18n.t("activerecord.attributes.fmu/translation.name") },
     collection: -> { Fmu.by_name_asc.pluck(:name) }
 
@@ -38,7 +38,7 @@ ActiveAdmin.register Fmu do
         operator_in_all: Operator.pluck(:country_id, :id)
       },
       operator_in_all: {
-        translations_name_contains: Operator.joins(fmus: :translations).where(fmu_translations: {locale: I18n.locale}).pluck(:id, "fmu_translations.name")
+        translations_name_cont: Operator.joins(fmus: :translations).where(fmu_translations: {locale: I18n.locale}).pluck(:id, "fmu_translations.name")
       }
     }
   end

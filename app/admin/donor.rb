@@ -13,8 +13,6 @@ ActiveAdmin.register Donor do
 
   permit_params :website, :logo, :priority, :category, translations_attributes: [:id, :locale, :name, :description]
 
-  filter :translations_name_contains, as: :select, label: -> { I18n.t("activerecord.attributes.donor.name") },
-    collection: -> { Donor.with_translations(I18n.locale).pluck(:name) }
   filter :website, as: :select
 
   csv do
