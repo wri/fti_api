@@ -16,10 +16,15 @@
 
 class ObservationDocument < ApplicationRecord
   has_paper_trail
+  acts_as_paranoid
   mount_base64_uploader :attachment, ObservationDocumentUploader
   include MoveableAttachment
 
-  acts_as_paranoid
+  enum document_type: {
+    "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2,
+    "Testimony from local communities" => 3, "Other" => 4, "Maps" => 5
+  }
+  validate_enum_attributes :document_type
 
   # TODO: only nils in the database, maybe that should be removed?
   belongs_to :user, inverse_of: :observation_documents, touch: true, optional: true
