@@ -26,11 +26,11 @@ GIT
 
 GIT
   remote: https://github.com/tsubik/activeadmin-globalize.git
-  revision: 57061edaf07d04136fa1693602251bfd37e59e4b
-  branch: rails-7
+  revision: e1f619939db718bcdb48018c06484508fdc092ed
+  branch: custom
   specs:
     activeadmin-globalize (1.0.0.pre)
-      activeadmin (>= 1.0, < 3.0)
+      activeadmin (>= 1.0, < 4.0)
       globalize (>= 3.1.0, <= 6.2.1)
 
 GIT
@@ -101,15 +101,15 @@ GEM
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
     active_material (1.5.2)
     active_skin (0.0.13)
-    activeadmin (2.14.0)
+    activeadmin (3.2.0)
       arbre (~> 1.2, >= 1.2.1)
-      formtastic (>= 3.1, < 5.0)
-      formtastic_i18n (~> 0.4)
+      formtastic (>= 3.1)
+      formtastic_i18n (>= 0.4)
       inherited_resources (~> 1.7)
-      jquery-rails (~> 4.2)
-      kaminari (~> 1.0, >= 1.2.1)
-      railties (>= 6.1, < 7.1)
-      ransack (>= 2.1.1, < 4)
+      jquery-rails (>= 4.2)
+      kaminari (>= 1.2.1)
+      railties (>= 6.1)
+      ransack (>= 4.0)
     activeadmin_addons (1.9.0)
       active_material
       railties
@@ -269,8 +269,8 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    formtastic (4.0.0)
-      actionpack (>= 5.2.0)
+    formtastic (5.0.0)
+      actionpack (>= 6.0.0)
     formtastic_i18n (0.7.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -381,10 +381,10 @@ GEM
       net-protocol
     net-ssh (7.2.0)
     nio4r (2.7.0)
-    nokogiri (1.15.5)
+    nokogiri (1.16.0)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.15.5-x86_64-linux)
+    nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     oj (3.16.2)
       bigdecimal (~> 3.1)
@@ -453,7 +453,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.1.0)
-    ransack (3.2.1)
+    ransack (4.1.1)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
