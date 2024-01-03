@@ -14,7 +14,7 @@ class ObservationDocumentUploader < ApplicationUploader
     else
       [
         model.id,
-        (model.observation.evidence_type || "other").parameterize
+        (model.document_type || "other").parameterize
       ].join("-")
     end
 

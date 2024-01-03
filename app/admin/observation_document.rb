@@ -25,6 +25,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   csv do
     column :id
     column :name
+    column :document_type
     column :user do |od|
       od.user&.name
     end
@@ -37,6 +38,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
     column :id
     column :observations
     column :name
+    column :document_type
     column :attachment do |o|
       link_to o&.name, o.attachment&.url if o.attachment&.url
     end
@@ -73,6 +75,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
       f.input :observations, input_html: {disabled: true}
       f.input :user, input_html: {disabled: true}
       f.input :name
+      f.input :document_type
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
 
       f.actions
@@ -83,6 +86,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
     attributes_table do
       row :id
       row :observations
+      row :document_type
       row :attachment do |o|
         link_to o&.name, o.attachment&.url if o.attachment&.url
       end

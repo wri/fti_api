@@ -27,6 +27,8 @@ panel I18n.t("active_admin.observations_page.details") do
         render partial: "map", locals: {center: [r.lng, r.lat], geojson: r.fmu&.geojson, bbox: r.fmu&.bbox}
       end
     end
+    row :evidence_type
+    row :evidence_on_report
     row :actions_taken
     row :concern_opinion
     row :observation_report

@@ -26,7 +26,6 @@
 #  law_id                :integer
 #  location_information  :string
 #  is_physical_place     :boolean          default(TRUE), not null
-#  evidence_type         :integer
 #  location_accuracy     :integer
 #  evidence_on_report    :string
 #  hidden                :boolean          default(FALSE), not null
@@ -50,18 +49,18 @@ class Observation < ApplicationRecord
   translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
 
+  enum evidence_type: {
+    "No Evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2
+  }
   enum observation_type: {"operator" => 0, "government" => 1}
   enum validation_status: {"Created" => 0, "Ready for QC" => 1, "QC in progress" => 2, "Approved" => 3,
                            "Rejected" => 4, "Needs revision" => 5, "Ready for publication" => 6,
                            "Published (no comments)" => 7, "Published (not modified)" => 8,
                            "Published (modified)" => 9}
-  enum evidence_type: {"Government Documents" => 0, "Company Documents" => 1, "Photos" => 2,
-                       "Testimony from local communities" => 3, "Other" => 4, "Evidence presented in the report" => 5,
-                       "Maps" => 6}
   enum location_accuracy: {"Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
                            "Accurate GPS coordinates" => 2}
 
-  validate_enum_attributes :observation_type, :evidence_type, :location_accuracy
+  validate_enum_attributes :evidence_type, :observation_type, :location_accuracy
 
   STATUS_TRANSITIONS = {
     monitor: {
@@ -127,7 +126,7 @@ class Observation < ApplicationRecord
 
   validates :lat, numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90, allow_blank: true}
   validates :lng, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180, allow_blank: true}
-  validate :evidence_presented_in_the_report
+  validates :evidence_on_report, presence: true, if: -> { evidence_type == "Evidence presented in the report" }
   validate :status_changes, if: -> { user_type.present? }
 
   validates :observers, presence: true
@@ -137,6 +136,7 @@ class Observation < ApplicationRecord
   validates :admin_comment, presence: true, if: -> { validation_status == "Needs revision" }
 
   before_validation :assign_observers_from_report, if: :observation_report_changed?
+  before_validation :nullify_evidence_on_report, if: -> { evidence_type != "Evidence presented in the report" }
 
   before_save :set_active_status
   before_save :nullify_fmu_and_coordinates, unless: :is_physical_place
@@ -152,7 +152,7 @@ class Observation < ApplicationRecord
 
   after_save :create_history, if: :saved_changes?
 
-  after_save :remove_documents, if: -> { evidence_type == "Evidence presented in the report" }
+  after_save :remove_documents, if: -> { evidence_type != "Uploaded documents" }
   after_save :update_fmu_geojson
 
   after_commit :notify_about_creation, on: :create
@@ -220,6 +220,10 @@ class Observation < ApplicationRecord
   end
 
   private
+
+  def nullify_evidence_on_report
+    self.evidence_on_report = nil
+  end
 
   def nullify_fmu_and_coordinates
     self.lat = nil
@@ -296,17 +300,8 @@ class Observation < ApplicationRecord
       "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}' to '#{validation_status}'")
   end
 
-  def evidence_presented_in_the_report
-    if evidence_type == "Evidence presented in the report" && evidence_on_report.blank?
-      errors.add(:evidence_on_report, "You must add information on where to find the evidence on the report")
-    end
-    if evidence_type != "Evidence presented in the report" && evidence_on_report.present?
-      errors.add(:evidence_on_report, "This field can only be present when the evidence is presented on the report")
-    end
-  end
-
   def remove_documents
-    ObservationDocument.where(observation_id: id).destroy_all
+    self.observation_documents = []
   end
 
   # If the observation is for an fmu, it updates its geojson with the new count
