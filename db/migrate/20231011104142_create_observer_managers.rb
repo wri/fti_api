@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateObserverManagers < ActiveRecord::Migration[7.0]
   def change
     create_table :observer_managers do |t|

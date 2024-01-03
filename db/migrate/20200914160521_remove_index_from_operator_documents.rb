@@ -1,3 +1,4 @@
+# rubocop:disable all
 class RemoveIndexFromOperatorDocuments < ActiveRecord::Migration[5.0]
   def change
     change_column_null :operator_documents, :source, false

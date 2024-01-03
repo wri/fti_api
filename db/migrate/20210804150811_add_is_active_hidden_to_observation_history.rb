@@ -1,3 +1,4 @@
+# rubocop:disable all
 class AddIsActiveHiddenToObservationHistory < ActiveRecord::Migration[5.0]
   def change
     add_column :observation_histories, :hidden, :boolean

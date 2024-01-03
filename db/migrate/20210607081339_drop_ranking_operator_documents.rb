@@ -1,3 +1,4 @@
+# rubocop:disable all
 class DropRankingOperatorDocuments < ActiveRecord::Migration[5.0]
   def change
     drop_table :ranking_operator_documents do |t|

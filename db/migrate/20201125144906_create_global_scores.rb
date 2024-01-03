@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateGlobalScores < ActiveRecord::Migration[5.0]
   def change
     create_table :global_scores do |t|

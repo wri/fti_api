@@ -1,3 +1,4 @@
+# rubocop:disable all
 class AddPositionToDocuments < ActiveRecord::Migration[5.1]
   def change
     add_column :required_operator_documents, :position, :integer

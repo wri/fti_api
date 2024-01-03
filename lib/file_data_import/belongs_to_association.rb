@@ -62,7 +62,7 @@ module FileDataImport
 
     def extract_attributes(attrs)
       attrs.each_with_object({}) do |attribute, attributes|
-        value = raw_attributes["#{singular_name}__#{attribute}".to_sym]
+        value = raw_attributes[:"#{singular_name}__#{attribute}"]
         attributes[attribute] = value if value.present?
       end
     end

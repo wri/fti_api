@@ -1,3 +1,4 @@
+# rubocop:disable all
 class AddDeletedAtToTheObservationsDependencies < ActiveRecord::Migration[5.0]
   def change
     add_column :observation_translations, :deleted_at, :datetime

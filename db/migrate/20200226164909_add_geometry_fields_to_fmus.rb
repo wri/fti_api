@@ -1,3 +1,4 @@
+# rubocop:disable all
 class AddGeometryFieldsToFmus < ActiveRecord::Migration[5.0]
   def change
     add_column :fmus, :geometry, :geometry

@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateRankingOperatorDocuments < ActiveRecord::Migration[5.0]
   def change
     create_table :ranking_operator_documents do |t|

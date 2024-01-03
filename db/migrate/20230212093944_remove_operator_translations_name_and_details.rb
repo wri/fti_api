@@ -1,3 +1,4 @@
+# rubocop:disable all
 class RemoveOperatorTranslationsNameAndDetails < ActiveRecord::Migration[5.2]
   def change
     PaperTrail.request.disable_model(Operator)

@@ -1,3 +1,4 @@
+# rubocop:disable all
 class ChangeFmusCertifications < ActiveRecord::Migration[5.0]
   def change
     rename_column :fmus, :certification_tltv, :certification_tlv

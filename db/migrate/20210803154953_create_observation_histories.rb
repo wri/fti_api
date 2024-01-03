@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateObservationHistories < ActiveRecord::Migration[5.0]
   def change
     create_table :observation_histories do |t|

@@ -1,3 +1,4 @@
+# rubocop:disable all
 class RemovePhotos < ActiveRecord::Migration[5.1]
   def change
     remove_index :photos, [:attacheable_id, :attacheable_type]

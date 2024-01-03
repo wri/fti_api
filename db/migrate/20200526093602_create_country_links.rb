@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateCountryLinks < ActiveRecord::Migration[5.0]
   def change
     create_table :country_links do |t|
