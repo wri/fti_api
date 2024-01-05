@@ -27,6 +27,7 @@ class ObservationReport < ApplicationRecord
   has_many :observation_report_observers, dependent: :destroy
   has_many :observers, through: :observation_report_observers, after_add: :self_touch, after_remove: :self_touch
   has_many :observations, dependent: :destroy
+  has_many :observation_documents, inverse_of: :observation_report, dependent: :destroy
 
   validates :attachment, presence: true
   validates :observers, presence: true
