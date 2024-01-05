@@ -28,6 +28,7 @@ class ObservationDocument < ApplicationRecord
 
   # TODO: only nils in the database, maybe that should be removed?
   belongs_to :user, inverse_of: :observation_documents, touch: true, optional: true
+  belongs_to :observation_report, inverse_of: :observation_documents, touch: true, optional: true
   has_and_belongs_to_many :observations, inverse_of: :observation_documents
 
   skip_callback :commit, :after, :remove_attachment!

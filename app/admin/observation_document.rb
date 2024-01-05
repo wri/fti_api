@@ -36,6 +36,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
   index do
     column :id
+    column :observation_report
     column :observations
     column :name
     column :document_type
@@ -62,6 +63,9 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   end
 
   filter :observations, as: :select, collection: -> { Observation.joins(:observation_documents).distinct.order(:id).pluck(:id) }
+  filter :observation_report,
+    label: -> { I18n.t("activerecord.models.observation_report") }, as: :select,
+    collection: -> { ObservationReport.where(id: ObservationDocument.select(:observation_report_id)).order(:title) }
   filter :name, as: :select
   filter :attachment, as: :select
   filter :user
@@ -72,6 +76,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
+      f.input :observation_report, input_html: {disabled: true}
       f.input :observations, input_html: {disabled: true}
       f.input :user, input_html: {disabled: true}
       f.input :name
@@ -85,6 +90,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   show do
     attributes_table do
       row :id
+      row :observation_report
       row :observations
       row :document_type
       row :attachment do |o|
