@@ -1,6 +1,5 @@
 
 Tutorial_1_en_translation:
-  id: 2
   tutorial_id: 2
   locale: en
   name: Tutorial for logging companies
@@ -12,7 +11,6 @@ Tutorial_1_en_translation:
     rel="noopener noreferrer" target="_blank"><strong>French</strong></a></p>
 
 Tutorial_1_fr_translation:
-  id: 5
   tutorial_id: 2
   locale: fr
   name: Tutoriel pour les exploitants
@@ -25,7 +23,6 @@ Tutorial_1_fr_translation:
     rel="noopener noreferrer" target="_blank"><strong>anglais</strong></a></p>
 
 Tutorial_1_zh-CN_translation:
-  id: 13
   tutorial_id: 2
   locale: zh-CN
   name: 伐木公司的教程
@@ -36,7 +33,6 @@ Tutorial_1_zh-CN_translation:
     rel="noopener noreferrer" target="_blank"><strong>法语</strong></a>版本</p>
 
 Tutorial_1_ko_translation:
-  id: 19
   tutorial_id: 2
   locale: ko
   name: 벌목 회사를 위한 튜토리얼
@@ -47,7 +43,6 @@ Tutorial_1_ko_translation:
     rel="noopener noreferrer" target="_blank"><strong>프랑스어</strong></a>로 제공</p>
 
 Tutorial_1_ja_translation:
-  id: 18
   tutorial_id: 2
   locale: ja
   name: 木材会社向けチュートリアル
@@ -58,7 +53,6 @@ Tutorial_1_ja_translation:
     rel="noopener noreferrer" target="_blank"><strong>フランス語</strong></a>に対応</p>
 
 Tutorial_1_pt_translation:
-  id: 25
   tutorial_id: 2
   locale: pt
   name: Tutorial para madeireiras
@@ -71,7 +65,6 @@ Tutorial_1_pt_translation:
     rel="noopener noreferrer" target="_blank"><strong>francês</strong></a></p>'
 
 Tutorial_1_vi_translation:
-  id: 14
   tutorial_id: 2
   locale: vi
   name: Hướng dẫn cho các công ty khai thác gỗ
@@ -84,7 +77,6 @@ Tutorial_1_vi_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Pháp</strong></a></p>'
 
 Tutorial_2_ja_translation:
-  id: 22
   tutorial_id: 3
   locale: ja
   name: 独立したモニター向けのチュートリアル
@@ -95,7 +87,6 @@ Tutorial_2_ja_translation:
     rel="noopener noreferrer" target="_blank"><strong>フランス語</strong></a>に対応</p>
 
 Tutorial_2_ko_translation:
-  id: 23
   tutorial_id: 3
   locale: ko
   name: 독립 모니터 요원을 위한 튜토리얼
@@ -106,7 +97,6 @@ Tutorial_2_ko_translation:
     rel="noopener noreferrer" target="_blank"><strong>프랑스어</strong></a>로 제공</p>
 
 Tutorial_2_zh-CN_translation:
-  id: 12
   tutorial_id: 3
   locale: zh-CN
   name: 独立检察员的教程
@@ -117,7 +107,6 @@ Tutorial_2_zh-CN_translation:
     rel="noopener noreferrer" target="_blank"><strong>法语</strong></a>版本</p>
 
 Tutorial_2_pt_translation:
-  id: 24
   tutorial_id: 3
   locale: pt
   name: Tutorial para monitores independentes
@@ -130,7 +119,6 @@ Tutorial_2_pt_translation:
     rel="noopener noreferrer" target="_blank"><strong>francês</strong></a></p>'
 
 Tutorial_2_fr_translation:
-  id: 4
   tutorial_id: 3
   locale: fr
   name: Tutoriel pour les observateurs indépendants
@@ -143,7 +131,6 @@ Tutorial_2_fr_translation:
     rel="noopener noreferrer" target="_blank"><strong>anglais</strong></a></p>
 
 Tutorial_2_vi_translation:
-  id: 15
   tutorial_id: 3
   locale: vi
   name: Hướng dẫn cho các cơ quan giám sát độc lập
@@ -156,7 +143,6 @@ Tutorial_2_vi_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Pháp</strong></a></p>'
 
 Tutorial_2_en_translation:
-  id: 3
   tutorial_id: 3
   locale: en
   name: Tutorial for independent monitors
@@ -168,7 +154,6 @@ Tutorial_2_en_translation:
     rel="noopener noreferrer" target="_blank"><strong>French</strong></a></p>
 
 Tutorial_3_en_translation:
-  id: 6
   tutorial_id: 4
   locale: en
   name: OTP Brochure
@@ -190,7 +175,6 @@ Tutorial_3_en_translation:
     rel="noopener noreferrer" target="_blank"><strong>Portuguese</strong></a></p>
 
 Tutorial_3_zh-CN_translation:
-  id: 11
   tutorial_id: 4
   locale: zh-CN
   name: OTP 手册
@@ -205,7 +189,6 @@ Tutorial_3_zh-CN_translation:
     rel="noopener noreferrer" target="_blank"><strong>韩语</strong></a></p>
 
 Tutorial_3_ja_translation:
-  id: 20
   tutorial_id: 4
   locale: ja
   name: OTPのパンフレット
@@ -224,7 +207,6 @@ Tutorial_3_ja_translation:
     rel="noopener noreferrer" target="_blank"><strong>ベトナム語</strong></a><strong>に対応</strong></p>
 
 Tutorial_3_pt_translation:
-  id: 27
   tutorial_id: 4
   locale: pt
   name: Brochura do OTP
@@ -246,7 +228,6 @@ Tutorial_3_pt_translation:
     rel="noopener noreferrer" target="_blank"><strong>português</strong></a></p>'
 
 Tutorial_3_fr_translation:
-  id: 7
   tutorial_id: 4
   locale: fr
   name: Brochure OTP
@@ -269,7 +250,6 @@ Tutorial_3_fr_translation:
     rel="noopener noreferrer" target="_blank"><strong>portugais</strong></a><strong>.</strong></p>
 
 Tutorial_3_ko_translation:
-  id: 21
   tutorial_id: 4
   locale: ko
   name: OTP 브로셔
@@ -289,7 +269,6 @@ Tutorial_3_ko_translation:
     rgb(56, 103, 139);"><u> 및 포르투갈어</u></strong>로 제공</p>'
 
 Tutorial_3_vi_translation:
-  id: 16
   tutorial_id: 4
   locale: vi
   name: Tài liệu giới thiệu OTP
@@ -310,7 +289,6 @@ Tutorial_3_vi_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Việt</strong></a></p>'
 
 Tutorial_4_fr_translation:
-  id: 9
   tutorial_id: 5
   locale: fr
   name: Vidéo d'introduction à l'OTP
@@ -320,7 +298,6 @@ Tutorial_4_fr_translation:
     src="https://www.youtube.com/embed/9WRUMYMISes?showinfo=0"></iframe><p><br></p>
 
 Tutorial_4_en_translation:
-  id: 8
   tutorial_id: 5
   locale: en
   name: Introductory video to the OTP
@@ -329,7 +306,6 @@ Tutorial_4_en_translation:
     class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
 Tutorial_4_vi_translation:
-  id: 17
   tutorial_id: 5
   locale: vi
   name: Video giới thiệu về OTP
@@ -339,7 +315,6 @@ Tutorial_4_vi_translation:
     allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>'
 
 Tutorial_4_zh-CN_translation:
-  id: 10
   tutorial_id: 5
   locale: zh-CN
   name: OTP 介绍视频
@@ -347,7 +322,6 @@ Tutorial_4_zh-CN_translation:
     frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
 Tutorial_4_pt_translation:
-  id: 26
   tutorial_id: 5
   locale: pt
   name: Vídeo introdutório ao OTP
@@ -356,7 +330,6 @@ Tutorial_4_pt_translation:
     class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
 Tutorial_4_ja_translation:
-  id: 28
   tutorial_id: 5
   locale: ja
   name: OTPの紹介ビデオ
@@ -364,7 +337,6 @@ Tutorial_4_ja_translation:
     class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
 Tutorial_4_ko_translation:
-  id: 29
   tutorial_id: 5
   locale: ko
   name: OTP 소개 동영상

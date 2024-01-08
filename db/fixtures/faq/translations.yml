@@ -1,6 +1,5 @@
 
 Faq_1_fr_translation:
-  id: 2
   faq_id: 1
   locale: fr
   question: A propos de l’OTP et des données sur le site
@@ -117,7 +116,6 @@ Faq_1_fr_translation:
     être consultés et téléchargés individuellement.</p>'
 
 Faq_1_zh-CN_translation:
-  id: 3
   faq_id: 1
   locale: zh-CN
   question: About the OTP and the data on the site
@@ -218,7 +216,6 @@ Faq_1_zh-CN_translation:
     downloaded.</p>'
 
 Faq_1_ja_translation:
-  id: 7
   faq_id: 1
   locale: ja
   question: About the OTP and the data on the site
@@ -319,7 +316,6 @@ Faq_1_ja_translation:
     downloaded.</p>'
 
 Faq_1_ko_translation:
-  id: 8
   faq_id: 1
   locale: ko
   question: About the OTP and the data on the site
@@ -420,7 +416,6 @@ Faq_1_ko_translation:
     downloaded.</p>'
 
 Faq_1_en_translation:
-  id: 1
   faq_id: 1
   locale: en
   question: About the OTP and the data on the site
@@ -521,7 +516,6 @@ Faq_1_en_translation:
     published on the website can be individually accessed and downloaded.</p>'
 
 Faq_1_vi_translation:
-  id: 9
   faq_id: 1
   locale: vi
   question: Giới thiệu về OTP và dữ liệu trên trang web
@@ -628,7 +622,6 @@ Faq_1_vi_translation:
     có thể được truy cập và tải xuống riêng lẻ.</span></p>'
 
 Faq_1_pt_translation:
-  id: 16
   faq_id: 1
   locale: pt
   question: About the OTP and the data on the site
@@ -729,7 +722,6 @@ Faq_1_pt_translation:
     published on the website can be individually accessed and downloaded.</p>'
 
 Faq_2_fr_translation:
-  id: 11
   faq_id: 3
   locale: fr
   question: Questions fréquentes
@@ -794,7 +786,6 @@ Faq_2_fr_translation:
     style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
 Faq_2_zh-CN_translation:
-  id: 12
   faq_id: 3
   locale: zh-CN
   question: 问题解答
@@ -849,7 +840,6 @@ Faq_2_zh-CN_translation:
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
 Faq_2_vi_translation:
-  id: 15
   faq_id: 3
   locale: vi
   question: Xử lý sự cố
@@ -909,7 +899,6 @@ Faq_2_vi_translation:
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
 Faq_2_ja_translation:
-  id: 13
   faq_id: 3
   locale: ja
   question: 寄せられる質問
@@ -937,7 +926,6 @@ Faq_2_ja_translation:
     style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>までご連絡ください。</p>'
 
 Faq_2_pt_translation:
-  id: 17
   faq_id: 3
   locale: pt
   question: Resolução de problemas
@@ -1005,7 +993,6 @@ Faq_2_pt_translation:
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
 Faq_2_en_translation:
-  id: 10
   faq_id: 3
   locale: en
   question: Troubleshooting
@@ -1064,7 +1051,6 @@ Faq_2_en_translation:
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
 Faq_2_ko_translation:
-  id: 14
   faq_id: 3
   locale: ko
   question: 문제 해결

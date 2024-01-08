@@ -3802,3 +3802,83 @@ DocumentFile_950:
 DocumentFile_951:
   id: 4656
   attachment: mokabi-sa-patente-2023-12-15.pdf
+
+DocumentFile_952:
+  id: 4657
+  attachment: cft-quittance-de-versement-de-la-contribution-patronale-a-l-onem-2023-12-18.pdf
+
+DocumentFile_953:
+  id: 4679
+  attachment: mokabi-sa-certificat-d-agrement-forestier-2023-12-20.pdf
+
+DocumentFile_954:
+  id: 4680
+  attachment: mokabi-sa-compte-rendu-du-comite-de-suivi-et-d-evaluation-du-plan-d-amenagement-2023-12-20.pdf
+
+DocumentFile_955:
+  id: 4683
+  attachment: cft-bordereau-de-circulation-2023-12-21.pdf
+
+DocumentFile_956:
+  id: 4687
+  attachment: ifo-interholco-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2023-12-23.pdf
+
+DocumentFile_957:
+  id: 4688
+  attachment: ifo-interholco-permis-d-exportation-cites-2023-12-23.pdf
+
+DocumentFile_958:
+  id: 4689
+  attachment: ifo-interholco-agrement-de-transports-2023-12-23.pdf
+
+DocumentFile_959:
+  id: 4690
+  attachment: ifo-interholco-certificat-d-agrement-forestier-2023-12-23.pdf
+
+DocumentFile_960:
+  id: 4691
+  attachment: ifo-interholco-patente-2023-12-23.pdf
+
+DocumentFile_961:
+  id: 4692
+  attachment: ifo-interholco-autorisation-de-coupe-annuelle-2023-12-26.pdf
+
+DocumentFile_962:
+  id: 4694
+  attachment: cft-bordereau-de-circulation-2023-12-28.pdf
+
+DocumentFile_963:
+  id: 4695
+  attachment: cft-quittance-de-versement-de-la-contribution-patronale-a-l-onem-2023-12-28.pdf
+
+DocumentFile_964:
+  id: 4696
+  attachment: sebc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-12-31.pdf
+
+DocumentFile_965:
+  id: 4707
+  attachment: sebc-notification-de-demarrage-des-activites-2024-01-05.pdf
+
+DocumentFile_966:
+  id: 4708
+  attachment: cfc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2024-01-05.pdf
+
+DocumentFile_967:
+  id: 4712
+  attachment: cfc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-en-grumes-de-l-entreprise-exploitante-2024-01-05.pdf
+
+DocumentFile_968:
+  id: 4713
+  attachment: cib-autorisation-de-coupe-annuelle-2024-01-06.pdf
+
+DocumentFile_969:
+  id: 4714
+  attachment: cib-autorisation-de-coupe-annuelle-2024-01-06.pdf
+
+DocumentFile_970:
+  id: 4715
+  attachment: cib-autorisation-de-coupe-annuelle-2024-01-06.pdf
+
+DocumentFile_971:
+  id: 4716
+  attachment: cib-autorisation-de-coupe-annuelle-2024-01-06.pdf

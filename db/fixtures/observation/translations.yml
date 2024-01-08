@@ -1,26 +1,17 @@
 
 Observation_1_en_translation:
-  id: 230
   observation_id: 230
   locale: en
   details: Non-opening and materialization of the border crossing which separates
     the forest concession Loundoungou Toukoulaka and Kabo.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_2_en_translation:
-  id: 231
   observation_id: 231
   locale: en
   details: Evacuation under number 4029/3 of a Sapelli log but, in the field logbook,
     this number corresponds to a Bilinga.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_3_en_translation:
-  id: 232
   observation_id: 232
   locale: en
   details: 'Use of fraudulent maneuvers to evade payment of taxes: under recording
@@ -31,24 +22,16 @@ Observation_3_en_translation:
     tree shafts, and consequently on the felling tax. Moreover, it was noted that
     for shafts n4287, 4288,4367 and 4808, the diameters of the small ends (or top)
     are greater than the average diameters of the logs.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_4_en_translation:
-  id: 233
   observation_id: 233
   locale: en
   details: 'Several dozen of trees stored between February and March 2011 were still
     lying on the sawmill park of  MOKABI at the time of the passage of the mission.
     825.79 m3 of wood (Mahogany: 71.21 m3; Sapelli: 515.99 m3; Tali: 136.67 m3; Bossé:
     101.91 m3) have been stored for more than 6 months.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_5_en_translation:
-  id: 265
   observation_id: 265
   locale: en
   details: "Block 4 of the CDS operated by IFO has not been materialized on the ground.
@@ -57,12 +40,8 @@ Observation_5_en_translation:
     development series\" (CDS) is a set of terroirs and village endings, centered
     around trees, forests and other natural resources likely to contribute to the
     development of the economies of rural communities and to the fight against poverty. "
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_6_en_translation:
-  id: 266
   observation_id: 266
   locale: en
   details: Of the 83 social measures contained in the management plan of the Forest
@@ -71,53 +50,33 @@ Observation_6_en_translation:
     and populations and installation of a radio). However, neither the Independent
     Monitor nor the Deparmental Delegation of Forests had the opportunity to verify
     these achievements firsthand.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_7_en_translation:
-  id: 286
   observation_id: 286
   locale: en
   details: 13 trees felled in excess of the quota authorized for the 2011 additional
     cutting permit
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_8_en_translation:
-  id: 287
   observation_id: 287
   locale: en
   details: 'Absence of the forest hammer markings on the trees and logs in forest
     sites '
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_9_en_translation:
-  id: 288
   observation_id: 288
   locale: en
   details: The company accommodates its workers in conditions that are not those provided
     for by its agreement
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_10_en_translation:
-  id: 361
   observation_id: 361
   locale: en
   details: Absence of the annual implementation program of the management plan or
     annual operating plan for the two forest concessions POKOLA & KABO. However, several
     elements of this program exist in various documents produced by CIB.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_11_en_translation:
-  id: 385
   observation_id: 385
   locale: en
   details: 'Failure to respect the diameter under which a tree should not be felled:
@@ -125,67 +84,43 @@ Observation_11_en_translation:
     according to the management plan, felled with the agreement of the head of brigade,
     entered in the field document for road opening and used for the construction of
     a bridge.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_12_en_translation:
-  id: 386
   observation_id: 386
   locale: en
   details: Presence of modifications and erasures on MOKABI SA company transport documents.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_13_en_translation:
-  id: 387
   observation_id: 387
   locale: en
   details: For the 2012 Annual Cutting Permit, Mokabi  cut down the 90 Iroko trees
     authorized and postponed the registration of 6 other Iroko trees felled in 2012
     to conceal exceeding the quota set for 2012.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_14_en_translation:
-  id: 388
   observation_id: 388
   locale: en
   details: Certain species belonging to group I (species with development objective)
     cut down for road opening are not recorded in the log books,  when they are not
     recovered by the company for other reasons. This is for example the case of unmarked
     pink Pao and Tchitola observed during field investigations in parcel EV43.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_15_en_translation:
-  id: 389
   observation_id: 389
   locale: en
   details: Failure to register certain felled timber in log books - akin to the use
     of fraudulent maneuvers to evade payment of taxes due. For example, unmarked pink
     Pao and Tchitola observed during field investigations.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_16_en_translation:
-  id: 390
   observation_id: 390
   locale: en
   details: "Some Iroko trees bearing the numbers between MM 0029 and MM0035 were evacuated
     between November and December 2012 when the log shafts from which they came\r\nwere
     not yet recorded in the site logs, for example MM 0032/1, 0032/2, 0033/2, 0034/1
     and 0034/2."
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_17_en_translation:
-  id: 391
   observation_id: 391
   locale: en
   details: 'Most of the obligations provided for in the specifications of the MOKABI
@@ -193,42 +128,26 @@ Observation_17_en_translation:
     of the buildings housing for the DDEF-Lik and the accommodation of the Director
     (roofing, painting and ceiling), the construction of the Mokabi multi-service
     brigade and the construction of the Enyellé football field'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_18_en_translation:
-  id: 539
   observation_id: 539
   locale: en
   details: 'Coupe en sus 16 pieds : 1 Padouk, 2 pieds de Bilinga et 13 pieds de Kosipo.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_19_en_translation:
-  id: 540
   observation_id: 540
   locale: en
   details: Coupes sous diamètre de diverses essences dans les zones Ilobi et Mbanza,
     correspondant respectivement aux tenants 1 et 2 de l’AAC 2015.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_20_en_translation:
-  id: 818
   observation_id: 818
   locale: en
   details: Assessment of penalties was based exclusively on the smallest FOB value
     of the species fraudulently exploited instead of the FOB value of each of the
     species
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_21_en_translation:
-  id: 819
   observation_id: 819
   locale: en
   details: 'Only 4 of the 7 companies visited comply with the regulations relating
@@ -238,23 +157,15 @@ Observation_21_en_translation:
     Wood processing is one of the requirements of the forestry legislation in force
     in Congo, and according to the provisions of Law 16-2000, the first processing
     should be brought closer to the felling area'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_22_en_translation:
-  id: 820
   observation_id: 820
   locale: en
   details: Tax register and mission reports essential for the Independent Observer
     to monitor the implementation of the law by the Departmental Directorate of Forest
     Economy - Niari were not obtained
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_23_en_translation:
-  id: 821
   observation_id: 821
   locale: en
   details: During the visit of the Independent Observer team to the Mila-Mila checkpoint,
@@ -263,34 +174,22 @@ Observation_23_en_translation:
     receiving the team and providing them with the requested documents, the checkpoint
     manager was instructed by his supervisor to withdraw all the documents he had
     previously made available to the mission.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_24_en_translation:
-  id: 822
   observation_id: 822
   locale: en
   details: 'For the year 2010: a recovery rate of 31% (32 989 629 FCFA or 50 409 Euros
     recovered out of an expected total of 106 972 410 FCFA or 163 459 Euros)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_25_en_translation:
-  id: 823
   observation_id: 823
   locale: en
   details: For one and the same Forest Exploitation Unit, 2 distinct annual cutting
     permits designated under the names of areas 1 and 2 have been allocated, which
     is a violation of the regulatory provisions regarding the allocation of annual
     cutting permits.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_26_en_translation:
-  id: 824
   observation_id: 824
   locale: en
   details: 'Resizing of the Annual Cutting Permit (ACP) without affecting the number
@@ -298,12 +197,8 @@ Observation_26_en_translation:
     1 CIBN) is identical to that requested by the company (appearing on the annual
     cutting permit) while the description of the annual cutting permit has been modified
     by the reduction in the number of plots.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_27_en_translation:
-  id: 825
   observation_id: 825
   locale: en
   details: 'Description of inaccurate annual cutting permit limits: the descriptions
@@ -312,12 +207,8 @@ Observation_27_en_translation:
     to be reproduced using a computer geographical information system (the geographical
     coordinates of the points appearing in the authorizations are poorly reported
     and do not allow georeference of the annual cutting permits)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_28_en_translation:
-  id: 826
   observation_id: 826
   locale: en
   details: COFIBOIS obtained an authorization to complete the 2010 annual cutting
@@ -327,34 +218,22 @@ Observation_28_en_translation:
     trees and undevacuated park stocks. However, within the meaning of article 101
     of Decree 2002-347, the emptying authorization is granted at the expiry of an
     agreement and not at that of a cutting authorization.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_29_en_translation:
-  id: 827
   observation_id: 827
   locale: en
   details: A lack of consistency and a variation in control procedures at each stage
     of the the mission and therefore the absence of a standardization of control
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_30_en_translation:
-  id: 828
   observation_id: 828
   locale: en
   details: A partial verification of the materialization and opening of the limits,
     an activity likely to reveal felling outside the limits of the forest concession
     and / or the Annual Cutting Permit. The trails were only checked at their intersections
     with roads
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_31_en_translation:
-  id: 829
   observation_id: 829
   locale: en
   details: A deficit in financial means, material and field equipment (decameters,
@@ -364,220 +243,140 @@ Observation_31_en_translation:
     946 FCFA or 26 573 Euros out of 61 097 567 FCFA or 93 225 Euros requested for
     the year 2011 which represents a little less than a third (28.5%) of expressed
     needs.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_32_en_translation:
-  id: 830
   observation_id: 830
   locale: en
   details: From January to November 2011, the Departmental Directorate of Forest Economy
     - Kouilou (DDEF-K) carried out 11 missions - a number well below the minimum of
     28 missions that the DDEF-K should carry out annually in view of the number of
     exploitation titles it manages
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_33_en_translation:
-  id: 831
   observation_id: 831
   locale: en
   details: The recovery rate for all taxes combined, during the period from January
     1 to November 30 2011 is 45%
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_34_en_translation:
-  id: 832
   observation_id: 832
   locale: en
   details: The Departmental Directorate of Forest Economy - West Cuvette unfairly
     fined Congo Deijia Wood Industry (CDWI) for cutting beyond the authorized quotas.
     At the date at which the report was established, the company had not yet exceeded
     the 3 780 trees that could legally be exploited.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_35_en_translation:
-  id: 833
   observation_id: 833
   locale: en
   details: The Departmental Directorate of Forest Economy - Cuvette Ouest recovered
     231 933 380 FCFA (353 837 Euros), i.e. a recovery rate of 78.5%
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_36_en_translation:
-  id: 834
   observation_id: 834
   locale: en
   details: 'Poor application of the regulations by the Departmental Directorate of
     Forest Economy - West Cuvette (DDEF-CO): volume requested by CDWI was revised
     downwards by the DDEF-CO, however this decrease in number of trees of all species
     requested, has not been reflected in the area to be exploited'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_37_en_translation:
-  id: 835
   observation_id: 835
   locale: en
   details: The number of  trees authorized in the Annual Cutting Permit for certain
     species is different from that shown on the Average Annual Volume map which, under
     the law, should reflect the authorization issued
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_38_en_translation:
-  id: 836
   observation_id: 836
   locale: en
   details: 'Tacit authorization to continue exports notwithstanding the quota overrun:
     untreated volumes or in the process of being processed should have been affected
     by the suspension measure and the products returned to the processing units.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_39_en_translation:
-  id: 837
   observation_id: 837
   locale: en
   details: Deadlines for exemptions were not respected
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_40_en_translation:
-  id: 838
   observation_id: 838
   locale: en
   details: 'Insufficient information to allow adequate control: the Directorate General
     of Forest Economy asks the Forest Products Export Control Service to carry out
     a checks they are not able to do'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_41_en_translation:
-  id: 839
   observation_id: 839
   locale: en
   details: 'Partial application of article 147 of law number 16-2000: failure to take
     into account the fine for 7 Official Statements of Offence out of the 24 established'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_42_en_translation:
-  id: 840
   observation_id: 840
   locale: en
   details: 'Poor qualification of the Offense retained in the Official Statement of
     Offence number 3: the facts were qualified as "poor maintenance of site documents"
     instead of "the use of fraudulent maneuvers to avoid payment of the taxes due"'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_43_en_translation:
-  id: 841
   observation_id: 841
   locale: en
   details: "The lack of precision on the nature of the adjoining line (annual cutting
     permit, concession) beyond the exploitation sanctioned by the Statement of Offence
     11. This precision is very important because\r\nthe section of the law which will
     be applied depends on it."
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_44_en_translation:
-  id: 842
   observation_id: 842
   locale: en
   details: For the period from January to November 2012, there is a low rate of tax
     collection, which is only 18% - only 18 785 930 FCFA (28 651 Euros) were collected
     out of the 106 612 844 FCFA expected (162 590 Euros).
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_45_en_translation:
-  id: 843
   observation_id: 843
   locale: en
   details: Granting of the 2012 annual cutting permits on the basis of an incomplete
     application file (activity report for the first eight months, the annual investment
     program, receipts for taxes or other fees and all field books)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_46_en_translation:
-  id: 844
   observation_id: 844
   locale: en
   details: 'Partial application of article 147 of law number 16-2000: failure to take
     into account the fine for 3 of the 6 established Official Statements of Offence.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_47_en_translation:
-  id: 845
   observation_id: 845
   locale: en
   details: No Official Statement of Offence established for the 3 cases of fraudulent
     cutting noted by the Departmental Directorate of Forest Economy-Cuvette during
     the control and inspection missions carried out in April 2012.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_48_en_translation:
-  id: 846
   observation_id: 846
   locale: en
   details: The Departmental Directorate of Forest Economy-Cuvette does not revoke
     the previous decisions of users who have obtained more than one Special Permit
     during the year
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_49_en_translation:
-  id: 847
   observation_id: 847
   locale: en
   details: With a forest area of 854 572 hectares covered by 14 agents, 1 motorbike,
     2 speedboats and 1 functional vehicle, the Departmental Directorate of Forest
     Economy-Cuvette has logistical and human resources that does not allow it to effectively
     fulfill its missions.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_50_en_translation:
-  id: 848
   observation_id: 848
   locale: en
   details: 'The Departmental Directorate of Forest Economy-South had drawn up 6 reports
     in 2012, all against 2 companies (SEFYD and SIFCO), but none of them had yet been
     the object of transactions at the date of the mission '
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_51_en_translation:
-  id: 849
   observation_id: 849
   locale: en
   details: 'Insufficient control of the exploitation activities of holders of timber
@@ -586,32 +385,20 @@ Observation_51_en_translation:
     the non application of certain provisions which govern the issuance of cutting
     authorizations in this specific case and the assimilation of these operating authorizations
     to special permits, each time limiting the duration to one month'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_52_en_translation:
-  id: 850
   observation_id: 850
   locale: en
   details: For the year 2011, the Departmental Directorate of Forest Economy-South
     recovered, for transactions, 596 825 FCFA (910 Euros) out of 3 096 825 FCFA (4
     721 Euros) due, i.e. a rate of 19% recovery.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_53_en_translation:
-  id: 851
   observation_id: 851
   locale: en
   details: The tax collection rate in the first quarter of 2012 is 59%
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_54_en_translation:
-  id: 852
   observation_id: 852
   locale: en
   details: Inadequacy of the location of the offices of the Mokeko, Tala Tala and
@@ -619,48 +406,32 @@ Observation_54_en_translation:
     of the exploitation (evacuation of timber from the forest to the stock parks).
     These brigades are forced to limit themselves to a simple compilation of waybills,
     which the companies send them weekly or monthly.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_55_en_translation:
-  id: 853
   observation_id: 853
   locale: en
   details: 'The Departmental Directorate of Forest Economy has expressed its inability
     to bear the financial burden relating to the support of the agent having to accompany
     the team of the Independent Observer for lack of budget allocation for the 2012
     financial year. '
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_56_en_translation:
-  id: 854
   observation_id: 854
   locale: en
   details: 'In January 2012, the Departmental Directorate of Forest Economy-South
     carried out a hammering mission for the allocation of a cutting authorization
     while the title concerned (extension of the timber exploitation authorization)
     had expired since December 2011. '
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_57_en_translation:
-  id: 855
   observation_id: 855
   locale: en
   details: The Departmental Directorate of Forest Economy-South did not take account
     of the expiration period, and issued authorizations for cutting, removals or completion  valid
     until January / February 2012, while the right to access to initial resources
     was only valid until December 2011
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_58_en_translation:
-  id: 856
   observation_id: 856
   locale: en
   details: 'Between October 2011 and January 2012, IFO obtained 4 authorizations for
@@ -668,23 +439,15 @@ Observation_58_en_translation:
     issued by the Director General of Forest Economy (DGEF): these authorizations
     do not bear any expiry date and the DGEF is not the competent authority to authorize
     the operation of the SDC'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_59_en_translation:
-  id: 857
   observation_id: 857
   locale: en
   details: The description of the limits appearing in the annual cutting permit issued
     to SEFYD by the Departmental Directorate of Forest Economy - South does not allow
     the limits of said cut to be reproduced using a geographic information system
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_60_en_translation:
-  id: 858
   observation_id: 858
   locale: en
   details: During 2010, 4 logging authorizations were issued by the Ministry of Forest
@@ -694,12 +457,8 @@ Observation_60_en_translation:
     granting of these authorizations, they are in contradiction with the principles
     set out in the forest law with regard to the allocation of access rights to forest
     resources.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_61_en_translation:
-  id: 859
   observation_id: 859
   locale: en
   details: 'An absence of correlation between the facts observed and the penalties
@@ -707,22 +466,14 @@ Observation_61_en_translation:
     FCFA (around 1 500 €) granted for 1901 trees felled beyond the number authorized
     then that an amount of 2 000 000 FCFA (€ 3,000) for 586 trees felled in excess
     of the quota.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_62_en_translation:
-  id: 860
   observation_id: 860
   locale: en
   details: 'Inconsistency in the application of the provisions of Article 149 of the
     Forest Code: damages are taken into account in some cases and not others'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_63_en_translation:
-  id: 861
   observation_id: 861
   locale: en
   details: The number of trees cut in addition noted in the report and that retained
@@ -731,12 +482,8 @@ Observation_63_en_translation:
     into account in the Statement of Offence n ° 023. It is the same, for SICOFOR
     Létili out of 7 340 Okoumés cut in addition, 652 trees were retained in the Official
     Statement of Offence N ° 21
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_64_en_translation:
-  id: 862
   observation_id: 862
   locale: en
   details: Since the beginning of 2012, the Departmental Directorate of Forest Economy
@@ -745,65 +492,41 @@ Observation_64_en_translation:
     available monthly by the public treasury for the realization of this activity,
     besides which the Independent Observer also underlined limited manpower and means
     of locomotion.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_65_en_translation:
-  id: 863
   observation_id: 863
   locale: en
   details: Recovery rate of 62% on all taxes combined (518 606 157 FCFA or 790 043
     Euros out of 842 265 500 FCFA or 1 283 105 Euros)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_66_en_translation:
-  id: 864
   observation_id: 864
   locale: en
   details: 'Recovery rate for the area tax: 52% (i.e. 300 761 877 FCFA or 457 938
     Euros out of 573 339 011 FCFA or 872 963 Euros)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_67_en_translation:
-  id: 866
   observation_id: 866
   locale: en
   details: With a forest area of 2,086,800 hectares, covered only by 10 forest agents
     with 1 motorcycle and 1 vehicle, the Departmental Directorate of Forest Economy
     - Lékoumou is clearly under-equipped to properly fulfill its missions.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_68_en_translation:
-  id: 867
   observation_id: 867
   locale: en
   details: TAMAN has received a provisional cutting permit under conditions which
     are not those defined by the regulations in force. Indeed, this company was issued
     with a provisional authorization although it had not completed the preparation
     of its annual cutting permit
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_69_en_translation:
-  id: 868
   observation_id: 868
   locale: en
   details: 'In the case of four Statements of Offence (number 1, 36, 37 and 38), the
     volume of illegally cut timber (sawn) is not indicated '
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_70_en_translation:
-  id: 869
   observation_id: 869
   locale: en
   details: Control deficit at the Malélé checkpoint. The water and forestry officers
@@ -811,12 +534,8 @@ Observation_70_en_translation:
     leave at their post, which would mean that the control of the conformity of the
     logging truck loads with the inscriptions appearing on the waybills is not carried
     out
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_71_en_translation:
-  id: 870
   observation_id: 870
   locale: en
   details: At the time of the Independent Observer mission, the Departmental Directorate
@@ -827,75 +546,47 @@ Observation_71_en_translation:
     number of missions expected, due to a lack of resources made available for control,
     because in the second quarter the DDEF-K should have visited each concession under
     its jurisdiction at least twice.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_72_en_translation:
-  id: 871
   observation_id: 871
   locale: en
   details: For the year 2012, 36% of the total amount of transactions was recovered
     (11 670 000 FCFA or 17 770 Euros out of 31 979 330 FCFA or 48 697 Euros)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_73_en_translation:
-  id: 872
   observation_id: 872
   locale: en
   details: For the year 2012, 17 629 330 FCFA (26k euro) owed by the company FORALAC
     had not yet been paid on the date of the passage of the Independent Monitor mission.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_74_en_translation:
-  id: 873
   observation_id: 873
   locale: en
   details: 'Payment of forestry taxes: out of the 382 214 347 FCFA (581 818 Euros)
     expected for the period from January to August 2012 - all taxes included - only
     57 667 040 (87 818 Euros) were paid during the mission, i.e. a 15% recovery rate'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_75_en_translation:
-  id: 874
   observation_id: 874
   locale: en
   details: 'Felling tax: 31,233,933 FCFA (47,550 Euros) were collected out of 46,720,344
     FCFA (71,127 Euros), i.e. a recovery tax of 70%'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_76_en_translation:
-  id: 875
   observation_id: 875
   locale: en
   details: 'Area tax: 26 433 107 FCFA (40 241 Euros) were collected out of 335 494
     003 FCFA expected (510 759 Euros), i.e. a recovery rate of 8%'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_77_en_translation:
-  id: 877
   observation_id: 877
   locale: en
   details: Until the passage of the Independent Monitor's mission, the Departmental
     Directorate of Forest Economy - Kouilou had not yet received any money dedicated
     to the implementation of control and inspection activities of the sites. (payment
     of mission expenses, purchase of fuel, small field equipment).
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_78_en_translation:
-  id: 878
   observation_id: 878
   locale: en
   details: TRABEC has made a request to cut 848 trees of various species in its 2011
@@ -908,11 +599,8 @@ Observation_78_en_translation:
     pour compétence. L’examen de ce dossier par la DGEF n’avait ainsi relevé aucune
     observation/ Aussi l’autorisation de coupe accordée à cet effet mentionne bien
     qu’une vérification sur le terrain avait été effectuée.
-  litigation_status: ''
-  deleted_at:
 
 Observation_79_en_translation:
-  id: 879
   observation_id: 879
   locale: en
   details: 'FORALAC (Nkola forest concession) received the same day from the Departmental
@@ -921,24 +609,16 @@ Observation_79_en_translation:
     it It appeared that FORALAC operates both permits simultaneously. This possibility
     is only reserved for concessions with a validated development plan, which is not
     the case for FORALAC '
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_80_en_translation:
-  id: 880
   observation_id: 880
   locale: en
   details: Several facts constituting offenses (18) noted in the mission reports of
     the Departmental Directorate of Forest Economy - Niari were not the subject of
     Official Statements of Offence. The number of Statements recorded during the passage
     of the mission was thirty-two (32))
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_81_en_translation:
-  id: 881
   observation_id: 881
   locale: en
   details: 'Inaccuracies between the description of the facts and the associated offense:
@@ -947,12 +627,8 @@ Observation_81_en_translation:
     the SICOFOR company, loaded with nine (09) Okoumé logs and one (01) Dibétou log,
     respectively cubing 7 406 m3 and 4 903 m3 ”and the offense retained in said statement,
     namely“ traffic of logs with non-conform waybills ”.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_82_en_translation:
-  id: 882
   observation_id: 882
   locale: en
   details: 'Poor qualification of offenses: Facts constituting the offense relating
@@ -963,24 +639,16 @@ Observation_82_en_translation:
     the law 16-2000, but for which the Departmental Directorate of Forest Economy
     - Niari rather applied the provisions of article 162 (see Statement of Offence
     n ° 12 and 13)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_83_en_translation:
-  id: 883
   observation_id: 883
   locale: en
   details: The Independent Monitor obtained part of the information requested from
     the Departmental Directorate of Forest Economy - Niari (DDEF-N Annex 5) - except,
     the letters of notification of the felling tax, the annual cutting permit request
     files for 2012, waybills and field logbooks.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_84_en_translation:
-  id: 884
   observation_id: 884
   locale: en
   details: For the first semester of 2012, the Departmental Directorate of Forest
@@ -988,112 +656,72 @@ Observation_84_en_translation:
     2 per annual cutting permit issued to meet the provisions of article 82 paragraph
     4 of the decree 2002-437. The total number of missions carried out by the DDEF-N
     is only 7.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_85_en_translation:
-  id: 885
   observation_id: 885
   locale: en
   details: The model of monthly production statements (EMP) used in the department
     of Niari does not allow adequate monitoring of the production carried out because
     they do not give the possibility of knowing if there is a stock of non-cubed wood
     at the end of the month. .
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_86_en_translation:
-  id: 886
   observation_id: 886
   locale: en
   details: "Payment of forestry taxes: out of 1 171 833 768 FCFA expected for the
     period from January to August 2012, all taxes combined of 619 417 490 FCFA (944
     296 Euros) had been recovered - i.e. a recovery rate of 53%\r\n\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_87_en_translation:
-  id: 887
   observation_id: 887
   locale: en
   details: 'Felling tax: 355,449,422 FCFA (540,783 Euros) collected out of 542,633,021
     FCFA (825,647 Euros) (65%)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_88_en_translation:
-  id: 888
   observation_id: 888
   locale: en
   details: 'Area tax: 263 968 068 FCFA (401 588 Euros) collected out of 629 200 747
     (699 633 478 Euros) (41%)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_89_en_translation:
-  id: 889
   observation_id: 889
   locale: en
   details: For the year 2012, 8 transactions were recovered out of 32 Official Statements
     of Offence drawn up by the Departmental Directorate of Forest Economy Niari. This
     represents an amount of 21 382 123 FCFA (32 533 Euros) out of 59 680 605 FCFA
     (90 804 Euros) expected, i.e. a recovery rate of 36%
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_90_en_translation:
-  id: 890
   observation_id: 890
   locale: en
   details: With a forest area of 2 670 658 hectares, the Departmental Directorate
     of Forest Economy-Niari has only 2 motorcycles and a vehicle.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_91_en_translation:
-  id: 891
   observation_id: 891
   locale: en
   details: The area covered by the authorization to complete the 2011 annual cutting
     permit from FORALAC (Nyanga KOLA Forest Unit) is the same as that covered by the
     annual cutting permit in 2011 when it should have been limited to unexploited
     areas, as stipulated by law.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_92_en_translation:
-  id: 892
   observation_id: 892
   locale: en
   details: The volume of wood granted to the company ACI in 2012 (Massanga forest
     concession) is greater than its maximum annual volume (VMA) provided for in its
     agreement (90 367m3 authorized while the VMA is 47 75m3)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_93_en_translation:
-  id: 893
   observation_id: 893
   locale: en
   details: Although the description of the Nyanga Forest Exploitation Unit (UFE) has
     been modified by merging the former UFE Nyanga and Moungoudou, CIBN continues
     to be allocated 2 separate logging authorizations for a single concession in violation
     of the principles of forest management in force in Congo
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_94_en_translation:
-  id: 894
   observation_id: 894
   locale: en
   details: 'Taman (TIL) has 2 simultaneous valid authorizations: the installation
@@ -1103,54 +731,34 @@ Observation_94_en_translation:
     Unit (UFE). If this rate is maintained, it will only take 4 years for the company
     to make a complete rotation of this UFE which is allocated to it for a period
     of 15 years.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_95_en_translation:
-  id: 897
   observation_id: 897
   locale: en
   details: The Departmental Directors of Forest Economy (Niari, Lekoumou, Bouenza)
     do not have all the waybills used by companies operating in their respective jurisdictions
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_96_en_translation:
-  id: 898
   observation_id: 898
   locale: en
   details: There is only one operational checkpoint in Mila Mila, for all timber from
     the Bambama district
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_97_en_translation:
-  id: 899
   observation_id: 899
   locale: en
   details: The 2 checkpoints of the Departmental Forest Economy Directorate of Cuvette-Lékoumou
     are all on the same linear axis Zanaga - Sibiti - Loudima - Dolisie
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_98_en_translation:
-  id: 900
   observation_id: 900
   locale: en
   details: 'Insufficient human resources: for the most part the staff is limited to
     the sole head of post or in the best case to 2 agents, the capacity of said posts
     to control all of the flow passing through them is not guaranteed. Indeed during
     the passage of the mission, some posts were deserted'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_99_en_translation:
-  id: 901
   observation_id: 901
   locale: en
   details: Partial application of article 147 of law number 16-2000 relating to the
@@ -1161,12 +769,8 @@ Observation_99_en_translation:
     which punishes a fine of 100,000 FCFA per m3 of fraudulently exploited timber
     and the seizure of products. However, only the seizure was applied for these 3
     cases despite the offenders were formally identified.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_100_en_translation:
-  id: 902
   observation_id: 902
   locale: en
   details: 'Non-establishment of Officiat Statements of Offence: At the date of the
@@ -1174,12 +778,8 @@ Observation_100_en_translation:
     of fraudulent cutting noted by the Departmental Directorate of Forest Economy
     of Cuvette (DDEF-Cu) during the missions control and inspection carried out in
     April 2012'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_101_en_translation:
-  id: 903
   observation_id: 903
   locale: en
   details: 'Omission of withdrawal of previous special permits: the Departmental Directorate
@@ -1187,24 +787,16 @@ Observation_101_en_translation:
     of users who have obtained more than one Special Permit during the year: Case,
     for example, of 5 Special Permits granted to the company Rose wood, while the
     previous ones were not withdrawn.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_102_en_translation:
-  id: 904
   observation_id: 904
   locale: en
   details: With a forest area of 854 572 hectares to be covered by 14 forest officers,
     with 1 motorbike, 2 speedboats and 1 functional vehicle, the Departmental Directorate
     of Forest Economy of Cuvette (DDEF-Cu) has logistical and humans resources which
     do not allow it to effectively fulfill its missions
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_103_en_translation:
-  id: 905
   observation_id: 905
   locale: en
   details: Contrary to the provisions of article 188 of decree 2002-437 of December
@@ -1214,12 +806,8 @@ Observation_103_en_translation:
     of the company ROSE-WOOD, that the validity of Special Permit n ° 18 / MDDEFE
     / DGEF / DDEF-Cu of 09/11/2012 for exploitation of 5 trees be extended by 5 days
     for its completion in order to allow its holder to cut down the remaining tree.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_104_en_translation:
-  id: 906
   observation_id: 906
   locale: en
   details: 'Cases of facts constituting infringements identified but not having been
@@ -1227,35 +815,23 @@ Observation_104_en_translation:
     SETRAF, carried out in June 2012, the report notesthat “certain logs export date
     from 2011 and have labels from the Forest Products Export Control Service (SCPFE)
     ”.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_105_en_translation:
-  id: 907
   observation_id: 907
   locale: en
   details: 'Cases of facts constituting infringements identified but not having been
     sanctioned: the lack of marking of stumps and logs as well as the use of other
     products than those mentioned in the cutting decision noted against Ekasi Bongo
     did not lead to any Statement of Offence during the passage of the mission.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_106_en_translation:
-  id: 908
   observation_id: 908
   locale: en
   details: 'Cases of facts constituting infringements identified but not having been
     sanctioned: failure to complete authorized activities at the end of the validity
     of special permit n ° 13 of 12 June 2012 duly noted'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_107_en_translation:
-  id: 909
   observation_id: 909
   locale: en
   details: 'The Departmental Directorates of the Southern Forest Economy (DDEF-S)
@@ -1264,22 +840,14 @@ Observation_107_en_translation:
     without a roadmap, no marking of logs and the practice of subcontracting in the
     forestry and timber profession without a certificate of approval and professional
     card.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_108_en_translation:
-  id: 910
   observation_id: 910
   locale: en
   details: Insufficient information allowing the conclusion of abandonment of timber
     of market value by the company SEFYD
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_109_en_translation:
-  id: 911
   observation_id: 911
   locale: en
   details: 'Failure to update documents relating to litigation characterized by: the
@@ -1289,43 +857,27 @@ Observation_109_en_translation:
     to stagger the payment of transactions, or even a transaction act that includes
     the proceeds from the sale by mutual agreement which suggests that the sale was
     made for the benefit of the offender.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_110_en_translation:
-  id: 912
   observation_id: 912
   locale: en
   details: In 4  marking mission reports requested, the Departmental Directorates
     of the Southern Forest Economy (DDEF-S) clearly indicated that "not all trees
     from the applicants' previous authorization had been felled and evacuated". But
     the same document gives a favorable opinion on the granting of special permits.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_111_en_translation:
-  id: 914
   observation_id: 914
   locale: en
   details: 'Felling tax: 388 171 207 FCFA were collected out of 437 238 764 FCFA (89%)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_112_en_translation:
-  id: 915
   observation_id: 915
   locale: en
   details: For the area tax 397 989 432 FCFA (606 731 €) were recovered out of 526
     825 144 FCFA (803 140 €). (75%)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_113_en_translation:
-  id: 916
   observation_id: 916
   locale: en
   details: 'Collection of the area tax in cash and in advance: The Independent Monitor
@@ -1335,12 +887,8 @@ Observation_113_en_translation:
     €). This practice poses a governance problem, because by virtue of the uniqueness
     of the state coffers, the funds collected must first pass through the public treasury
     before any retrocession.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_114_en_translation:
-  id: 917
   observation_id: 917
   locale: en
   details: After the observation, the mission from the Departmental Directorates of
@@ -1350,12 +898,8 @@ Observation_114_en_translation:
     applicant.  In such circumstances, from the point of view of the Independent Observer,
     it should have been necessary  to identify the concerned species and to determine
     their selling price and not any tax.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_115_en_translation:
-  id: 918
   observation_id: 918
   locale: en
   details: 'According to the report of the Departmental Directorates of the Southern
@@ -1366,12 +910,8 @@ Observation_115_en_translation:
     that Mr. NABODEBE made by paying a deposit for his forestry transaction,  the
     mission believes that  it is desirable to issue a title and a freehand certificate
     for at least 2 machines to allow him to saw in order to face his transaction ”'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_116_en_translation:
-  id: 919
   observation_id: 919
   locale: en
   details: 'Non-compliance with the conditions required for the issuance of the deforestation
@@ -1381,23 +921,15 @@ Observation_116_en_translation:
     and state of the forest. These reports are legal requirements (Articles 45 and
     43 (paragraphs 2 and 3) of Decree No. 2002-437 establishing the condition for
     the management and use of forests).'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_117_en_translation:
-  id: 920
   observation_id: 920
   locale: en
   details: SETRAF carries out its activities as a logger and sawyer on the basis of
     a certificate of approval issued to this company, although its company name at
     that time did not include the said activities
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_118_en_translation:
-  id: 921
   observation_id: 921
   locale: en
   details: For the cutting in excess of 1 526 trees by the company CDWI, the Departmental
@@ -1406,122 +938,78 @@ Observation_118_en_translation:
     cutting permit 2012” in accordance with the provisions of article 149 of the law.
     However, it emerges from the analysis of said dispute that the damages provided
     for in this article have not been applied.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_119_en_translation:
-  id: 922
   observation_id: 922
   locale: en
   details: 'Infractions detected but not punished: no report was drawn up against
     CDWI for non-compliance with the relevant legal and regulatory provisions, and
     no justification or precision was given for these facts'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_120_en_translation:
-  id: 923
   observation_id: 923
   locale: en
   details: Non application de la récidive malgré des persistances des coupes frauduleuses
     constatées et verbalisées par la DDEF-CO, respectivement le 03 mai 2012 et le
     30 novembre 2012.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_121_en_translation:
-  id: 924
   observation_id: 924
   locale: en
   details: The Departmental Directorates of Forest Economy of the West Cuvette (DDEF)
     -Co have sanctioned twice a fact noted during the same mission
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_122_en_translation:
-  id: 925
   observation_id: 925
   locale: en
   details: The amount of the fine entered in transaction 003 of 2 500 000 FCFA (3
     813 Euros) is different from that recorded in the register Statements of Offence
     and Transactions (3,500,000 FCFA or 5,338 euros).
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_123_en_translation:
-  id: 926
   observation_id: 926
   locale: en
   details: A poor qualification of the offense in the report n ° 008 which led to
     a poor application of the forestry law (instead of drawing up a report against
     the company, the DDEF-CO instead drew up a report against unknown in referring
     to article 147)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_124_en_translation:
-  id: 927
   observation_id: 927
   locale: en
   details: 'Poor application of the forest law by the Departmental Directorates of
     Forest Economy of the West Cuvette (DDEF) -Co: the articles of the law to which
     the DDEF-CO referred to punish the infringements noted in Statement of Offence
     number 4, 5 and 6 are inappropriate.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_125_en_translation:
-  id: 928
   observation_id: 928
   locale: en
   details: 'Infractions not detected by the Departmental Directorates of Forest Economy
     of the West Cuvette (DDEF) -Co: False declarations and cutting without authorization.
     Some production data sent to the DDEF by CDWI turned out to be false.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_126_en_translation:
-  id: 929
   observation_id: 929
   locale: en
   details: 'Weaknesses in the monitoring of special permits: they result in the granting
     of a number of trees higher than that fixed by the decree, the absence of evaluation
     of the special permits granted and the non-withdrawal of those previously granted'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_127_en_translation:
-  id: 930
   observation_id: 930
   locale: en
   details: With a total area of 1 863 770 ha to be managed, the Departmental Directorates
     of Forest Economy of the West Cuvette (DDEF) - CO only has one constantly broken
     down vehicle and one functional motorcycle out of the 6 it owns.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_128_en_translation:
-  id: 931
   observation_id: 931
   locale: en
   details: Lack of an "expertise or evaluation" mission before updating the 2012 Annual
     Cutting permit.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_129_en_translation:
-  id: 932
   observation_id: 932
   locale: en
   details: On the basis of the information collected from the company Likouala Timber,
@@ -1531,12 +1019,8 @@ Observation_129_en_translation:
     But no report or deed of transaction established against the company and relating
     to this offense were found in the DDEF registers, much less a reference to the
     sum of 200 000 FCFA
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_130_en_translation:
-  id: 933
   observation_id: 933
   locale: en
   details: The Departmental Directorates of Forest Economy (DDEF) -Likouala having
@@ -1545,23 +1029,15 @@ Observation_130_en_translation:
     Economy with a transaction proposal of 50 000 000 FCFA (76 169 Euros) in lieu
     of a detailed report as required by article 156 of law 16-2000 of 20 November
     2000 of the forest code
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_131_en_translation:
-  id: 934
   observation_id: 934
   locale: en
   details: From the analysis of the 3 Statements of Offence received, it emerges that
     2 of them do not mention the nature of the offense while the 3rd does not mention
     the articles which provide for and punish the breach of law concerned.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_132_en_translation:
-  id: 935
   observation_id: 935
   locale: en
   details: 'The Departmental Directorates of Forest Economy (DDEF) -Likouala carried
@@ -1570,23 +1046,15 @@ Observation_132_en_translation:
     of the 2012 annual cutting permits and production capacities. A number of missions
     which is low in comparison with the minima required by the regulations (articles
     72, 74 and 82 paragraph 4)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_133_en_translation:
-  id: 936
   observation_id: 936
   locale: en
   details: For the payment of arrears of transactions, the Departmental Directorates
     of Forest Economy (DDEF) -Likouala collected 44 302 511 FCFA (67 538 €) out of
     a total of 92 274 361 FCFA (140 671 €), or 48% .
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_134_en_translation:
-  id: 937
   observation_id: 937
   locale: en
   details: According to the special permit register of the Departmental Directorates
@@ -1594,12 +1062,8 @@ Observation_134_en_translation:
     of use to 12 individuals for a total amount of 583 590 FCFA (890 Euros). However,
     according to the forest code, the exercise of user rights is free, so the DDEF-Lik
     should not have levied any tax from the beneficiaries.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_135_en_translation:
-  id: 938
   observation_id: 938
   locale: en
   details: Two original checks for the payment of taxes (felling and area) from the
@@ -1607,60 +1071,40 @@ Observation_135_en_translation:
     by the Independent Monitor several months later. These amounts have never been
     collected by the public treasury while in the books of the Departmental Directorates
     of Forest Economy (DDEF), these amounts appear as paid.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_136_en_translation:
-  id: 939
   observation_id: 939
   locale: en
   details: The request for approval of the 2012 Annual Cutting Permit for the Missa
     forest concession was filed outside the legal deadline. In addition, an absence
     of certain documents required in the composition of the file was noted (receipts
     for taxes or other fees, specific list of personnel)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_137_en_translation:
-  id: 940
   observation_id: 940
   locale: en
   details: The Departmental Directorates of Forest Economy (DDEF) - Likouala has granted
     Likoula Timber 2 cutting authorizations within the Bétou Forest concession. The
     Independent Monitor was able to see their simultaneous exploitation by examining
     the field logbooks
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_138_en_translation:
-  id: 941
   observation_id: 941
   locale: en
   details: The number of trees species authorized by special permit for domestic needs
     is a maximum of 3  -  the Departmental Directorates of Forest Economy (DDEF) -Likouala
     issued a special permit for cutting f 4 trees, thus violating the provisions of
     the regulations
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_139_en_translation:
-  id: 942
   observation_id: 942
   locale: en
   details: Current regulations for issuing special permits require that the previously
     issued special permit be withdrawn when the applicant has recently obtained one.
     The Departmental Directorates of Forest Economy of Likouala do not withdraw previous
     decisions from users who belong to this category.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_140_en_translation:
-  id: 943
   observation_id: 943
   locale: en
   details: 'The Departmental Directorates of Forest Economy (DDEF) -South treated
@@ -1669,24 +1113,16 @@ Observation_140_en_translation:
     without a roadmap, no marking of logs and the practice of subcontracting in the
     forestry and timber profession without a certificate of approval and professionql
     card for which the DDEF-S applied article 162 as repression'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_141_en_translation:
-  id: 944
   observation_id: 944
   locale: en
   details: ATAMA has been sanctioned with an offense relating to subcontracting without
     authorization although it is not required to comply with this provision (the company
     does not hold an operating permit, therefore the provisions of article 71 of law
     16-2000 of 20 November 200 cannot be used)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_142_en_translation:
-  id: 945
   observation_id: 945
   locale: en
   details: The forest regulations in force prescribe 3 fundamental elements to obtain
@@ -1695,12 +1131,8 @@ Observation_142_en_translation:
     (EIA) followed by the implementation of mitigation measures. The Independent Monitor's
     mission did not have access to any of these documents and the existence of the
     latter is questionable because no indication seems to prove its existence.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_143_en_translation:
-  id: 946
   observation_id: 946
   locale: en
   details: 'Certain provisions of the certificate of approval of the APS company are
@@ -1710,23 +1142,15 @@ Observation_143_en_translation:
     of its application for approval. Other articles of this certificate of approval
     still restrict its validity exclusively to clearing activities in the indicated
     area.'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_144_en_translation:
-  id: 3456
   observation_id: 1732
   locale: en
   details: "Délivrance tardive des autorisations de coupe industrielle de bois (ACIBO).
     Cas de l’ACIBO N°74/2012/BN/22 de la concession FOLAC délivré le 26 décembre 2012
     et l’ACIBO 66/2012/BN/17 délivrée à la SODEFOR le 26 décembre 2012.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_145_en_translation:
-  id: 3460
   observation_id: 1734
   locale: en
   details: "Payement partiel de la redevance de superficie forestière ( un manque
@@ -1734,47 +1158,31 @@ Observation_145_en_translation:
     forestières (CCF), les superficies exploitables reconnues par la Direction des
     Inventaires et Aménagements Forestiers (DIAF) et celles des superficies utilisées
     pour taxer cette redevance en province pour les exercices 2013 et 2014).\r\n\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_146_en_translation:
-  id: 3462
   observation_id: 1735
   locale: en
   details: "instauration du payement de la redevance de superficie en nature dans
     la province du Bandundu: cas de la convention signée entre la société SODEFOR
     et le Gouvernorat (Protocole d’accord entre SODEFOR et le gouvernorat du Bandundu
     signé le 22/03/2014)\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_147_en_translation:
-  id: 3470
   observation_id: 1739
   locale: en
   details: "Non usage du marteau forestier de l’administration par les inspecteurs
     lors de la saisie d’un lot de bois scié d’environ 17 m3 trouvé dans le village
     Yalolia.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_148_en_translation:
-  id: 3494
   observation_id: 1751
   locale: en
   details: "La délivrance des permis de coupe non conformes.  défaut de référence
     des certificats d’agréments sur les permis de coupe n°01/GOUVPROV/KC/2017 - n°02/GOUVPROV/KC/2017
     et\r\nn°03/GOUVPROV/KC/2017 et la référence dans l’exposé des motifs à un texte
     qui n’est plus en vigueur.\r\n\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_149_en_translation:
-  id: 3927
   observation_id: 1812
   locale: en
   details: Absence de communication et de coordination entre les services provinciaux
@@ -1783,12 +1191,8 @@ Observation_149_en_translation:
     sans concertation avec les autre services de la province et sans tenir compte
     du titre forestier de la CFT légalement acquis.,  La CFT affirme que SCIPEC a
     déjà coupé 298,5 ha dans sa zone de production.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_150_en_translation:
-  id: 3954
   observation_id: 1821
   locale: en
   details: Le chef de chantier de la réserve KM 28 autorise la plantation des cultures
@@ -1796,23 +1200,15 @@ Observation_150_en_translation:
     lieu et place des cultures pérennes). cette nouvelle pratique n’est pas encadrée
     par le CONTRAT D’ENTREPRISE DE PLANTATION qui lie les planteurs aux services du
     Ministère de l’Environnement.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_151_en_translation:
-  id: 4168
   observation_id: 1883
   locale: en
   details: Délivrance des permis de coupe aux exploitants industriels  sans la vérification
     du Plan Annuel d’Opérations pour les Assiettes Annuelles de coupe ouvertes et
     exploitées en 2018 et 2019.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_152_en_translation:
-  id: 4171
   observation_id: 1884
   locale: en
   details: "La minoration par la Coordination provinciale  de l’EDD du payement de
@@ -1824,12 +1220,8 @@ Observation_152_en_translation:
     par la coordination provinciale de l’EDD qui a considéré comme superficies taxables
     les superficies estimés dans les projets de plans d’aménagement non encore validés
     et approuvés par l’administration centrale déposés dans leurs services.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_153_en_translation:
-  id: 4174
   observation_id: 1885
   locale: en
   details: Délivrance des permis de coupe industrielle de bois d’oeuvre sur base d’un
@@ -1842,36 +1234,24 @@ Observation_153_en_translation:
     le lieu de coupe est Linala. les numéros de concession portés sur ces permis de
     coupe ne sont pas ceux de Maniema Union 2. Il s’agit de l’ancien numéro de la
     société SEFOCO remise à l’Etat congolais.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_154_en_translation:
-  id: 4213
   observation_id: 1898
   locale: en
   details: "la taxe de la redevance de superficie est perçue en main propre par le
     responsable de la Régie Financière provinciale qui délivre ensuite l’assujetti
     une quittance en lieu et place du bordereau de versement à une banque commerciale,
     qui constitue la preuve de paiement.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_155_en_translation:
-  id: 4249
   observation_id: 1910
   locale: en
   details: "Empiétement des services de contrôle forestier par la Division Provinciale
     de Contrôle de l’Environnement et des Exportations Minières créée par arrêté n°2018
     /135 /HAUT-KATANGA du 10 0ctobre 2018 qui organise des missions de contrôle et
     d’inspection forestier, pourtant relevant de la coordination provinciale de l’environnement.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_156_en_translation:
-  id: 4252
   observation_id: 1911
   locale: en
   details: "Faible collaboration entre le PCPCB et la Coordination provinciale. Le
@@ -1879,34 +1259,22 @@ Observation_156_en_translation:
     de Production et Commercialisation de Bois qui est un programme d’appui pouvant
     fournir des données d’empotage, a tendance se substituer à la structure organique
     (Bureau de Contrôle et Vérification) en posant des actes de contrôle.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_157_en_translation:
-  id: 4255
   observation_id: 1912
   locale: en
   details: "Aucun acte d’agrément et de permis de coupe artisanal attribué depuis
     2016 jusqu’ à la décision de la suspension de l’exploitation en 2018 par l’autorité
     de la province. \r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_158_en_translation:
-  id: 4258
   observation_id: 1913
   locale: en
   details: "Absence de contrôle de routine. Cette mission était l’occasion pour le
     responsable de contrôle d’arriver à certains endroits (SAKANIA, KIMPE et BOWA)
     qu’ils n’ont pas encore contrôlés. La raison évoquée est le manque de moyens financiers.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_159_en_translation:
-  id: 4261
   observation_id: 1914
   locale: en
   details: "Création de la commission chargée de la récupération et de la vente des
@@ -1919,12 +1287,8 @@ Observation_159_en_translation:
     dans l’Ex. Province du KATANGA. les actes initiés par la commission sont entachés
     et peuvent faire l’objet d’opposition ou d’action en justice des acteurs touchés
     par les activités de la commission.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
 Observation_160_en_translation:
-  id: 8514
   observation_id: 2191
   locale: en
   details: 'Parc forêt  hors des limites de la VC 09 03 473  contenant 29 billes de
@@ -1936,11 +1300,8 @@ Observation_160_en_translation:
     preuves  et a recommandé que le rapport soit transmis aux administrations compétentes
     en charge d'application des lois. Confère procès-verbal de la 38ème session du
     Comité de lecture
-  litigation_status: ''
-  deleted_at:
 
 Observation_161_en_translation:
-  id: 8526
   observation_id: 2193
   locale: en
   details: 'Sept (07) parcs forêt dans le domaine national contenant un important
@@ -1953,11 +1314,40 @@ Observation_161_en_translation:
     preuves  et a recommandé que le rapport soit transmis aux administrations compétentes
     en charge d'application des lois. Confère procès-verbal de la 38ème session du
     Comité de lecture.
-  litigation_status: ''
-  deleted_at:
 
 Observation_162_en_translation:
-  id: 12116
+  observation_id: 2218
+  locale: en
+  details: 'Délivrance du permis de coupe N° 007/2021/MGL/02 le 31 décembre 2020 à
+    Congo King Baisheng Forestry Development sans la vérification de l’existence du
+    plan annuel d’opérations. '
+
+Observation_163_en_translation:
+  observation_id: 2219
+  locale: en
+  details: "FORABOLA avait obtenu deux permis de coupe industrielle de bois d’œuvre
+    en 2020 pour deux Assiettes Annuelles de Coupe différentes à savoir le permis
+    N° 017/2020/MGL/03 du 17 mars 2020 pour 57.215 m3 (AAC 2) et le permis N° 022/2020/MGL/04
+    du 29 octobre 2020 pour 46.998 m3(AAC 3). \r\n"
+
+Observation_164_en_translation:
+  observation_id: 2220
+  locale: en
+  details: "L’OI relève que l’actuel CCF n° 004/20 appartenant à COKIBAFODE, anciennement
+    GA 033/04 d’une superficie de 92 971 ha fut convertie en CCF 033/14 en date du
+    25 octobre 2014 pour le compte de la SICOBOIS (territoire de Lisala). Ce contrat
+    avait été résilié par l’Arrêté Ministériel N°070/CAB/MIN/EDD/WF/AAN/05/18 du 9/10/2018
+    et par  remis dans le domaine privé de l’l’Etat sans que le concessionnaire ait
+    réalisé le Rapport d’Inventaire d’Aménagement (RIA), le Plan d’Aménagement Forestier
+    (PAF) et le Plan de Gestion Quinquennale (PGQ) validés par l’administration compétente.
+    Le 14 janvier 2020, le ministre en charge des forêts attribue cette concession,
+    en vertu du CCF N°004/20, à une société à capitaux chinois dénommée CONGO KING
+    BAISHENG FORESTRY DEVELOPMENT, qui en réalité s’appelait auparavant  MANIEMA UNION
+    2 en 2018, qui, par la suite, deviendra en fin 2019 LONG XIN Sarlu signataire
+    du  contrat de concession forestière n° 017/18/Mongala Motima avec le gouvernement
+    de la RDC en 2018 pendant que le moratoire est encore en vigueur.\r\n"
+
+Observation_165_en_translation:
   observation_id: 2246
   locale: en
   details: "\"Non-respect des obligations du cahier de charge relatives aux droits
@@ -1967,32 +1357,20 @@ Observation_162_en_translation:
     d’une antenne parabolique, d’une infirmerie, d’un économat, d’une école et d’un
     système d’adduction d’eau potable: la société a racheté celle laissée par la société
     FORALAC.)"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_163_en_translation:
-  id: 12122
+Observation_166_en_translation:
   observation_id: 2247
   locale: en
   details: Non-conformité des relations entre l’entreprise et ses employés (retard
     de paiement de 12 mois de salaires)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_164_en_translation:
-  id: 12128
+Observation_167_en_translation:
   observation_id: 2248
   locale: en
   details: Non-conformité des conditions de sécurité et de santé au travail (Pas de
     comité d'hygiène et sécurité)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_165_en_translation:
-  id: 12134
+Observation_168_en_translation:
   observation_id: 2249
   locale: en
   details: 'Non respect des obligations vis à vis des communautés locales et populations
@@ -2000,34 +1378,22 @@ Observation_165_en_translation:
     à la disposition de l’OI)
 
     '
-  concern_opinion:
-  litigation_status:
-  deleted_at:
 
-Observation_166_en_translation:
-  id: 12140
+Observation_169_en_translation:
   observation_id: 2250
   locale: en
   details: Non-respect des procédures de réalisation de l’étude d’impact environnemental
     et social (EIES)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_167_en_translation:
-  id: 12146
+Observation_170_en_translation:
   observation_id: 2251
   locale: en
   details: Non respect du délais d’élaboration du plan d’aménagement (la société s’est
     engagée à élaborer le plan d’aménagement à partir de 2016. Cependant, ce n’est
     que le 05 octobre 2020, soit 4 ans après, que le protocole d’accord pour l’élaboration
     du plan d’aménagement a été signé avec le MEF)
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_168_en_translation:
-  id: 12152
+Observation_171_en_translation:
   observation_id: 2252
   locale: en
   details: 'La duplication des numéros d’ordre d’abattage (pour illustration : le
@@ -2040,23 +1406,15 @@ Observation_168_en_translation:
     que seuls 12 m ont été déclarés dans le carnet de chantier. Le fût n°908 de l’essence
     Bilinga de 16m, a été retrouvé sur le parc forêt, alors que seuls 10 m de longueur
     fût ont été déclarés dans le carnet de chantier)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_169_en_translation:
-  id: 12158
+Observation_172_en_translation:
   observation_id: 2253
   locale: en
   details: 'Mauvaise tenue des documents de chantier (5 carnets de chantier, qui n’étaient
     pas mis à jour : le non renseignement d’une cinquantaine des billes dans les carnets
     de chantier)'
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_170_en_translation:
-  id: 14397
+Observation_173_en_translation:
   observation_id: 2311
   locale: en
   details: "Aucun permis de coupe artisanal de bois n’a été signé par le Gouverneur
@@ -2066,58 +1424,73 @@ Observation_170_en_translation:
     et les requérants ont été notifié pour procéder au paiement de taxe de permis.
     A ce stade, tous les dossiers ont été transmis au Gouverneur de Province pour
     signature.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_171_en_translation:
-  id: 14404
+Observation_174_en_translation:
   observation_id: 2312
   locale: en
   details: "Sur 32 exploitants identifiés lors de la revue documentaire, 27 avaient
     régulièrement payé la taxe d’agrément, mais aucun d’eux n’a reçu à ce jour le
     certificat  d’agrément signé par l’autorité provinciale (Gouverneur).\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_172_en_translation:
-  id: 14411
+Observation_175_en_translation:
   observation_id: 2313
   locale: en
   details: "Aucune mission de contrôle forestier n’est faite au cours de ces deux
     dernières années (2021 et 2022). Sur place, aucun rapport des OPJ, ni les copies
     de procès-verbaux qui attestent la réalisation de ces missions.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_173_en_translation:
-  id: 14418
+Observation_176_en_translation:
   observation_id: 2314
   locale: en
   details: "L’équipe de mission a constaté que la plupart des infractions ne sont
     pas bien maîtrisées et traitées par les services concernés (entre autres, constatation
     des infractions sans établissement systématique de PV, insuffisance dans le traitement
     des PV). \r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_174_en_translation:
-  id: 14425
+Observation_177_en_translation:
   observation_id: 2315
   locale: en
   details: "La coordination ne dispose pas de  statistique à jour sur les exploitants
     artisanaux qui évoluent dans la province. La mission n’a trouvé aucun document
     concernant l’exploitation (déclaration trimestrielle des exploitants artisanaux,
     le rapport d’enquête, etc.)\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_175_en_translation:
-  id: 14803
+Observation_178_en_translation:
+  observation_id: 2362
+  locale: en
+  details: "La CFT a signé la clause le 24 Février 2018 avec le groupement Mandombe
+    concerné par l’intégralité de l’exploitation sur l’Assiette Annuelle de Coupe
+    3 et une partie de l’assiette 4. Le montant prévisionnel pour cette clause s’élève
+    à 82.976 $. Les réalisations suivantes ont été prévues : La construction de l’école
+    secondaire de 6 classes avec bureau et latrine en brique cuite pour la localité
+    de Babongena (52873 dollars), la construction du bureau du chef de groupement
+    (10000 dollars), les équipements du bureau du chef de groupement (200 dollars),
+    l’acquisition décortiqueuse (3500 dollars), les bourses de 4 étudiants de la localité
+    de Babongena, Banakanuke et Babagulu (7200 dollars) et l’acquisition des motos
+    pour le chef de groupement et le président du CLG (2000 dollars).  La CFT a fait
+    savoir que seule la construction d’une école de six salles de classes, un bureau
+    et une latrine et l’acquisition de deux motos ont été effectifs pour l’ensemble
+    des projets communautaires concernant cette clause.La raison avancée est la fermeture
+    des assiettes dont les ristournes servaient à la réalisation de ces projets communautaires.
+    \n"
+
+Observation_179_en_translation:
+  observation_id: 2363
+  locale: en
+  details: Les inspecteurs forestiers en mission n'étaient pas muni de leurs uniformes
+    et insignes pour être bien identifier comme l'exige la loi forestière.
+
+Observation_180_en_translation:
+  observation_id: 2368
+  locale: en
+  details: La DGF a établi une note de débit pour l’exercice 2021 au profit de l’Ets
+    KITENGE LOLA  pour un paiement tardif de RS,  le 07 Janvier 2022; soit 6 mois
+    après la date buttoir (le 30 Juin de l’exercice en cours) sans tenir comptes de
+    l’application des intérêts moratoires  prévus par l’ordonnance-loi n°13/003 du
+    23 Février 2013 portant reformes des procédures relatives à l’assiette, au contrôle
+    et aux modalités de recouvrement  des recettes non fiscales.
+
+Observation_181_en_translation:
   observation_id: 2369
   locale: en
   details: 'La note de perception établie par la régie financière provinciale renseignent  pour
@@ -2129,12 +1502,8 @@ Observation_175_en_translation:
     .
 
     '
-  concern_opinion:
-  litigation_status:
-  deleted_at:
 
-Observation_176_en_translation:
-  id: 14810
+Observation_182_en_translation:
   observation_id: 2370
   locale: en
   details: La DGRPT a établi la note de débit faisant office de la note de taxation
@@ -2143,12 +1512,8 @@ Observation_176_en_translation:
     étaient déjà aménagés avant 2021, d’où la redevance de superficie devait être
     sur les superficies aménagés. La  minoration de la redevance de superficie en
     violation de la réglementation du montant de  7.382,5$  par la coordination provinciale.
-  concern_opinion:
-  litigation_status:
-  deleted_at:
 
-Observation_177_en_translation:
-  id: 14901
+Observation_183_en_translation:
   observation_id: 2383
   locale: en
   details: 'La redevance de superficie en application des dispositions de l’arrêté
@@ -2169,12 +1534,8 @@ Observation_177_en_translation:
     en attendant que la solution soit trouvée.
 
     '
-  concern_opinion:
-  litigation_status:
-  deleted_at:
 
-Observation_178_en_translation:
-  id: 14915
+Observation_184_en_translation:
   observation_id: 2385
   locale: en
   details: 'Selon les informations fournies par les coordonnateurs provinciaux que
@@ -2189,12 +1550,8 @@ Observation_178_en_translation:
     Kinshasa.
 
     '
-  concern_opinion:
-  litigation_status:
-  deleted_at:
 
-Observation_179_en_translation:
-  id: 15148
+Observation_185_en_translation:
   observation_id: 2419
   locale: en
   details: "-Le non respect du plan d’aménagement d’une forêt domaniale à but de protection
@@ -2210,11 +1567,8 @@ Observation_179_en_translation:
     forêts."
   concern_opinion: Archive FODER-Procès verbal (PV) -Comité Technique et Ethique d'évaluation
     des rapports d'OIE (CTE)  N°49 du 22 mars 2023
-  litigation_status: ''
-  deleted_at:
 
-Observation_180_en_translation:
-  id: 15155
+Observation_186_en_translation:
   observation_id: 2420
   locale: en
   details: "- Non réalisation des études d'impact environnementale de l'exploitation
@@ -2230,11 +1584,8 @@ Observation_180_en_translation:
     significatif sur la diversité biologique de l'aire protégée"
   concern_opinion: Archive FODER-Procès verbal (PV) -Comité Technique et Éthique d'évaluation
     des rapports d'OIE (CTE)  N°49 du 22 mars 2023
-  litigation_status: ''
-  deleted_at:
 
-Observation_181_en_translation:
-  id: 15183
+Observation_187_en_translation:
   observation_id: 2424
   locale: en
   details: "Exploitation non autorisée dans une forêt domaniale et non respect des
@@ -2250,11 +1601,8 @@ Observation_181_en_translation:
     1082 appartenant aux ETS EFFA JBP&Cie "
   concern_opinion: Archive FODER_Procès-verbal (PV) -Comité Technique et Ethique d'évaluation
     des rapports d'OIE (CTE)  N°48 du 21 mars 2023
-  litigation_status: ''
-  deleted_at:
 
-Observation_182_en_translation:
-  id: 15261
+Observation_188_en_translation:
   observation_id: 2435
   locale: en
   details: "De l'Entretien avec les éléments du Poste de Contrôle Forestier de Messamena
@@ -2272,81 +1620,53 @@ Observation_182_en_translation:
     mais continue à piloter à distance les opérations ;"
   concern_opinion: Archive FODER_Procès-verbal (PV) -Comité Technique et Ethique d'évaluation
     des rapports d'OIE (CTE)  N°48 du 21 mars 2023
-  litigation_status: ''
-  deleted_at:
 
-Observation_183_en_translation:
-  id: 15639
+Observation_189_en_translation:
   observation_id: 2489
   locale: en
   details: "L’octroi en 2021 à la société Entreprise Christelle (EC) d’une autorisation
     spéciale de coupe de \r\nl’essence Eyoum dans l’assiette annuelle de coupe 2018\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_184_en_translation:
-  id: 15646
+Observation_190_en_translation:
   observation_id: 2490
   locale: en
   details: "Manque de sanction des infractions constatées\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_185_en_translation:
-  id: 15653
+Observation_191_en_translation:
   observation_id: 2491
   locale: en
   details: "Non application de la récidive contre la société Entreprise Christelle
     pour coupe sous  diamètre\r\n"
   concern_opinion: "L’aspect pédagogique a été préféré et non répressif. Une lettre
     de mise en garde a été adressée à la société.\r\n"
-  litigation_status: ''
-  deleted_at:
 
-Observation_186_en_translation:
-  id: 15660
+Observation_192_en_translation:
   observation_id: 2492
   locale: en
   details: "Mauvaise qualification de l’infraction \r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_187_en_translation:
-  id: 15667
+Observation_193_en_translation:
   observation_id: 2493
   locale: en
   details: "Surévaluation de la taxe d’abattage de bois d’éclairage route de la société
     EC\r\n"
   concern_opinion: " L’erreur est partie de la société qui a enregistré tout le bois
     (éclaire \r\nroute et VMA) dans le même carnet de chantier."
-  litigation_status: ''
-  deleted_at:
 
-Observation_188_en_translation:
-  id: 15674
+Observation_194_en_translation:
   observation_id: 2494
   locale: en
   details: " Surévaluation de la taxe de déboisement de la société CDWI\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_189_en_translation:
-  id: 15975
+Observation_195_en_translation:
   observation_id: 2536
   locale: en
   details: "\" Octroi aux sociétés forestières Thanry Congo, BPL, Bois-Kassa des autorisations
     de \r\ncoupes annuelles 2021 et 2022 sans tenir compte de leurs capacités opérationnelles.\"\r\n"
   concern_opinion: " La crise de COVID-19 et le manque de carburant dans les chantiers
     sont les causes des faibles productions"
-  litigation_status: ''
-  deleted_at:
 
-Observation_190_en_translation:
-  id: 16017
+Observation_196_en_translation:
   observation_id: 2543
   locale: en
   details: " Sous-évaluation de la taxe de superficie de la société CIB (UFA Loundoungou
@@ -2354,95 +1674,58 @@ Observation_190_en_translation:
   concern_opinion: "La superficie prise en compte, dans le calcul de la taxe de superficie,
     fait référence au plan d’aménagement, notamment la superficie des forêts de terre
     \r\nferme moins 3% de surface d’emprise des routes forestières existantes. "
-  litigation_status: ''
-  deleted_at:
 
-Observation_191_en_translation:
-  id: 16269
+Observation_197_en_translation:
   observation_id: 2579
   locale: en
   details: " Octroi à la société SICOFOR des autorisations après l’expiration de sa
     convention\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_192_en_translation:
-  id: 16283
+Observation_198_en_translation:
   observation_id: 2581
   locale: en
   details: " Emploi inapproprié de l’article 241 du code forestier\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_193_en_translation:
-  id: 16290
+Observation_199_en_translation:
   observation_id: 2582
   locale: en
   details: "Absence de sanction contre les sociétés Sicofor, Asia Congo et Sipam pour
     non construction de base-vie conformes\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_194_en_translation:
-  id: 16297
+Observation_200_en_translation:
   observation_id: 2583
   locale: en
   details: "\" Absence de sanction contre les sociétés SICOFOR et Asia Congo pour
     évacuation du bois \r\nsans autorisation\"\r\n"
   concern_opinion: "il y a absence de texte d’application pour l’autorisation \r\nd’évacuation
     de bois après expiration de l’autorisation de coupe annuelle"
-  litigation_status: ''
-  deleted_at:
 
-Observation_195_en_translation:
-  id: 16304
+Observation_201_en_translation:
   observation_id: 2584
   locale: en
   details: "\" Octroi en 2022 des ACA aux sociétés FORALAC et SFIB sur la base des
     dossiers de \r\ndemande incomplets\"\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_196_en_translation:
-  id: 16311
+Observation_202_en_translation:
   observation_id: 2585
   locale: en
   details: " Utilisation des dispositions d’une loi abrogée\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_197_en_translation:
-  id: 16318
+Observation_203_en_translation:
   observation_id: 2586
   locale: en
   details: "\" Absence de sanction contre les sociétés SICOFOR et AGRI TRANS pour
     coupe de bois \r\nfrauduleuse dans la concession de CIBN (UFE Nyanga)\"\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_198_en_translation:
-  id: 16325
+Observation_204_en_translation:
   observation_id: 2587
   locale: en
   details: " Absence des sanctions contre les sociétés forestières SICOFOR et ADL
     pour non exécution des obligations du cahier de charges particuliers.\r\n"
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:
 
-Observation_199_en_translation:
-  id: 16648
+Observation_205_en_translation:
   observation_id: 2634
   locale: en
   details: Contrôle non optimal du port appartenant à la société CONGO DIHAO. Les
     inspecteurs ce sont limités seulement au contrôle documentaire et le contrôle
     dans le parc à bois n’était pas leur préoccupation.
-  concern_opinion: ''
-  litigation_status: ''
-  deleted_at:

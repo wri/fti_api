@@ -36,7 +36,7 @@ Operator_3:
   address: B.P. 135, Ouesso, Republic of Congo
   website: http://www.interholco.com/
   approved: true
-  country_doc_rank: 1
+  country_doc_rank: 2
   country_operators: 36
   name: IFO / Interholco
   details: "Interholco (IHC) is one of the largest producing companies of African
@@ -138,7 +138,7 @@ Operator_7:
     233 42 68 92'
   approved: true
   holding_id: 4
-  country_doc_rank: 9
+  country_doc_rank: 6
   country_operators: 137
   name: SEBC
   details: Exploitation et transformation du bois
@@ -154,7 +154,7 @@ Operator_8:
   address: 'BP: 89; Yaoundé'
   approved: true
   holding_id: 4
-  country_doc_rank: 18
+  country_doc_rank: 16
   country_operators: 137
   name: SAB
   details: Société Anonyme
@@ -172,7 +172,7 @@ Operator_9:
     233 42 68 92'
   approved: true
   holding_id: 4
-  country_doc_rank: 2
+  country_doc_rank: 1
   country_operators: 137
   name: CFC
   details: Exploitation et transformation du bois

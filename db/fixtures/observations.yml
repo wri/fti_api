@@ -3300,6 +3300,64 @@ Observation_161:
   monitor_comment: Lorem ipsum for monitor_comment
 
 Observation_162:
+  id: 2218
+  severity_id: 220
+  observation_type: government
+  publication_date: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-21 11:31:27.292035000 Z
+    zone: !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-21 11:31:27.292035000 Z
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (no comments)
+  observation_report_id: 294
+  is_physical_place: true
+  evidence_type: Photos
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_163:
+  id: 2219
+  severity_id: 219
+  observation_type: government
+  publication_date: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2024-01-08 09:55:12.023044000 Z
+    zone: !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2024-01-08 09:55:12.023044000 Z
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (modified)
+  observation_report_id: 294
+  is_physical_place: true
+  evidence_type: Company Documents
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_164:
+  id: 2220
+  severity_id: 227
+  observation_type: government
+  publication_date: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2024-01-08 09:51:34.855165000 Z
+    zone: !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2024-01-08 09:51:34.855165000 Z
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (modified)
+  observation_report_id: 294
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Cfr page 6 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_165:
   id: 2246
   severity_id: 118
   observation_type: operator
@@ -3325,7 +3383,7 @@ Observation_162:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_163:
+Observation_166:
   id: 2247
   severity_id: 64
   observation_type: operator
@@ -3351,7 +3409,7 @@ Observation_163:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_164:
+Observation_167:
   id: 2248
   severity_id: 64
   observation_type: operator
@@ -3376,7 +3434,7 @@ Observation_164:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_165:
+Observation_168:
   id: 2249
   severity_id: 120
   observation_type: operator
@@ -3403,7 +3461,7 @@ Observation_165:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_166:
+Observation_169:
   id: 2250
   severity_id: 124
   observation_type: operator
@@ -3429,7 +3487,7 @@ Observation_166:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_167:
+Observation_170:
   id: 2251
   severity_id: 128
   observation_type: operator
@@ -3454,7 +3512,7 @@ Observation_167:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_168:
+Observation_171:
   id: 2252
   severity_id: 72
   observation_type: operator
@@ -3480,7 +3538,7 @@ Observation_168:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_169:
+Observation_172:
   id: 2253
   severity_id: 52
   observation_type: operator
@@ -3507,7 +3565,7 @@ Observation_169:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_170:
+Observation_173:
   id: 2311
   severity_id: 218
   observation_type: government
@@ -3527,7 +3585,7 @@ Observation_170:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_171:
+Observation_174:
   id: 2312
   severity_id: 226
   observation_type: government
@@ -3548,7 +3606,7 @@ Observation_171:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_172:
+Observation_175:
   id: 2313
   severity_id: 196
   observation_type: government
@@ -3568,7 +3626,7 @@ Observation_172:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_173:
+Observation_176:
   id: 2314
   severity_id: 176
   observation_type: government
@@ -3588,7 +3646,7 @@ Observation_173:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_174:
+Observation_177:
   id: 2315
   severity_id: 193
   observation_type: government
@@ -3608,7 +3666,71 @@ Observation_174:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_175:
+Observation_178:
+  id: 2362
+  severity_id: 119
+  observation_type: operator
+  publication_date: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-21 11:34:22.649579000 Z
+    zone: !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-21 11:34:22.649579000 Z
+  country_id: 7
+  operator_id: 197
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:0.269268543e0
+  lng: !ruby/object:BigDecimal 27:0.25695359028e2
+  fmu_id: 12
+  subcategory_id: 30
+  validation_status: Published (no comments)
+  observation_report_id: 310
+  law_id: 57
+  location_information: Territoire d'UBUNDU, Province de la TSHOPO
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_179:
+  id: 2363
+  severity_id: 173
+  observation_type: government
+  publication_date: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-21 11:34:39.200347000 Z
+    zone: !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-21 11:34:39.200347000 Z
+  country_id: 7
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (no comments)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Cf. page 5
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_180:
+  id: 2368
+  severity_id: 201
+  observation_type: government
+  publication_date: !ruby/object:ActiveSupport::TimeWithZone
+    utc: 2023-12-21 11:40:02.822013000 Z
+    zone: !ruby/object:ActiveSupport::TimeZone
+      name: Etc/UTC
+    time: 2023-12-21 11:40:02.822013000 Z
+  country_id: 7
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (modified)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_181:
   id: 2369
   severity_id: 203
   observation_type: government
@@ -3627,7 +3749,7 @@ Observation_175:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_176:
+Observation_182:
   id: 2370
   severity_id: 203
   observation_type: government
@@ -3646,7 +3768,7 @@ Observation_176:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_177:
+Observation_183:
   id: 2383
   severity_id: 188
   observation_type: government
@@ -3666,7 +3788,7 @@ Observation_177:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_178:
+Observation_184:
   id: 2385
   severity_id: 228
   observation_type: government
@@ -3685,7 +3807,7 @@ Observation_178:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_179:
+Observation_185:
   id: 2419
   severity_id: 184
   observation_type: government
@@ -3711,7 +3833,7 @@ Observation_179:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_180:
+Observation_186:
   id: 2420
   severity_id: 245
   observation_type: government
@@ -3742,7 +3864,7 @@ Observation_180:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_181:
+Observation_187:
   id: 2424
   severity_id: 173
   observation_type: government
@@ -3776,7 +3898,7 @@ Observation_181:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_182:
+Observation_188:
   id: 2435
   severity_id: 174
   observation_type: government
@@ -3811,7 +3933,7 @@ Observation_182:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_183:
+Observation_189:
   id: 2489
   severity_id: 228
   observation_type: government
@@ -3830,7 +3952,7 @@ Observation_183:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_184:
+Observation_190:
   id: 2490
   severity_id: 176
   observation_type: government
@@ -3850,7 +3972,7 @@ Observation_184:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_185:
+Observation_191:
   id: 2491
   severity_id: 170
   observation_type: government
@@ -3870,7 +3992,7 @@ Observation_185:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_186:
+Observation_192:
   id: 2492
   severity_id: 170
   observation_type: government
@@ -3890,7 +4012,7 @@ Observation_186:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_187:
+Observation_193:
   id: 2493
   severity_id: 202
   observation_type: government
@@ -3910,7 +4032,7 @@ Observation_187:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_188:
+Observation_194:
   id: 2494
   severity_id: 202
   observation_type: government
@@ -3930,7 +4052,7 @@ Observation_188:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_189:
+Observation_195:
   id: 2536
   severity_id: 228
   observation_type: government
@@ -3950,7 +4072,7 @@ Observation_189:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_190:
+Observation_196:
   id: 2543
   severity_id: 204
   observation_type: government
@@ -3970,7 +4092,7 @@ Observation_190:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_191:
+Observation_197:
   id: 2579
   severity_id: 228
   observation_type: government
@@ -3990,7 +4112,7 @@ Observation_191:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_192:
+Observation_198:
   id: 2581
   severity_id: 171
   observation_type: government
@@ -4010,7 +4132,7 @@ Observation_192:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_193:
+Observation_199:
   id: 2582
   severity_id: 176
   observation_type: government
@@ -4030,7 +4152,7 @@ Observation_193:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_194:
+Observation_200:
   id: 2583
   severity_id: 223
   observation_type: government
@@ -4050,7 +4172,7 @@ Observation_194:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_195:
+Observation_201:
   id: 2584
   severity_id: 228
   observation_type: government
@@ -4070,7 +4192,7 @@ Observation_195:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_196:
+Observation_202:
   id: 2585
   severity_id: 172
   observation_type: government
@@ -4090,7 +4212,7 @@ Observation_196:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_197:
+Observation_203:
   id: 2586
   severity_id: 176
   observation_type: government
@@ -4110,7 +4232,7 @@ Observation_197:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_198:
+Observation_204:
   id: 2587
   severity_id: 176
   observation_type: government
@@ -4130,7 +4252,7 @@ Observation_198:
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
-Observation_199:
+Observation_205:
   id: 2634
   severity_id: 195
   observation_type: government

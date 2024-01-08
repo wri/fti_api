@@ -1,6 +1,5 @@
 
 AboutPageEntry_1_en_translation:
-  id: 1
   about_page_entry_id: 1
   locale: en
   title: Background
@@ -26,7 +25,6 @@ AboutPageEntry_1_en_translation:
     rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa.</a></p>'
 
 AboutPageEntry_1_fr_translation:
-  id: 2
   about_page_entry_id: 1
   locale: fr
   title: Contexte
@@ -57,7 +55,6 @@ AboutPageEntry_1_fr_translation:
     rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/web/apv-a-z/qu-est-ce-un-apv</a>.</p>'
 
 AboutPageEntry_1_zh-CN_translation:
-  id: 3
   about_page_entry_id: 1
   locale: zh-CN
   title: 背景信息
@@ -70,7 +67,6 @@ AboutPageEntry_1_zh-CN_translation:
     noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa</a>。</p><p>&nbsp;</p><p><br></p>
 
 AboutPageEntry_1_ja_translation:
-  id: 4
   about_page_entry_id: 1
   locale: ja
   title: 背景
@@ -79,7 +75,6 @@ AboutPageEntry_1_ja_translation:
     href="http://www.euflegt.efi.int/what-is-a-vpa" rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa</a>をご覧ください。</p><p>&nbsp;</p><p><br></p>
 
 AboutPageEntry_1_vi_translation:
-  id: 6
   about_page_entry_id: 1
   locale: vi
   title: Bối cảnh
@@ -106,7 +101,6 @@ AboutPageEntry_1_vi_translation:
     rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa</a>.</p>'
 
 AboutPageEntry_1_ko_translation:
-  id: 5
   about_page_entry_id: 1
   locale: ko
   title: 배경
@@ -124,7 +118,6 @@ AboutPageEntry_1_ko_translation:
     참조하십시오.</p>
 
 AboutPageEntry_1_pt_translation:
-  id: 25
   about_page_entry_id: 1
   locale: pt
   title: Origem
@@ -148,7 +141,6 @@ AboutPageEntry_1_pt_translation:
     noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa.</a></p>
 
 AboutPageEntry_2_en_translation:
-  id: 7
   about_page_entry_id: 2
   locale: en
   title: Contact us
@@ -157,7 +149,6 @@ AboutPageEntry_2_en_translation:
     rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a>.</p>'
 
 AboutPageEntry_2_fr_translation:
-  id: 8
   about_page_entry_id: 2
   locale: fr
   title: Contactez-nous
@@ -166,7 +157,6 @@ AboutPageEntry_2_fr_translation:
     rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a>.</p>'
 
 AboutPageEntry_2_zh-CN_translation:
-  id: 9
   about_page_entry_id: 2
   locale: zh-CN
   title: 联系我们
@@ -174,7 +164,6 @@ AboutPageEntry_2_zh-CN_translation:
     noreferrer" target="_blank">opentimberportal@wri.org</a>与我们联系</p>
 
 AboutPageEntry_2_ja_translation:
-  id: 10
   about_page_entry_id: 2
   locale: ja
   title: お問い合わせ
@@ -182,7 +171,6 @@ AboutPageEntry_2_ja_translation:
     rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a></p>
 
 AboutPageEntry_2_ko_translation:
-  id: 11
   about_page_entry_id: 2
   locale: ko
   title: 연락처
@@ -190,7 +178,6 @@ AboutPageEntry_2_ko_translation:
     rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a>로 연락해주세요.</p>
 
 AboutPageEntry_2_vi_translation:
-  id: 12
   about_page_entry_id: 2
   locale: vi
   title: Liên hệ chúng tôi
@@ -199,7 +186,6 @@ AboutPageEntry_2_vi_translation:
     rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a></p>'
 
 AboutPageEntry_2_pt_translation:
-  id: 26
   about_page_entry_id: 2
   locale: pt
   title: Entre em contato conosco
@@ -208,7 +194,6 @@ AboutPageEntry_2_pt_translation:
     noreferrer" target="_blank">opentimberportal@wri.org</a>.</p>'
 
 AboutPageEntry_3_zh-CN_translation:
-  id: 15
   about_page_entry_id: 3
   locale: zh-CN
   title: 合作伙伴
@@ -219,7 +204,6 @@ AboutPageEntry_3_zh-CN_translation:
     (CODELT)。</p><p>由Vizzuality搭建</p>"
 
 AboutPageEntry_3_ja_translation:
-  id: 16
   about_page_entry_id: 3
   locale: ja
   title: パートナー
@@ -230,7 +214,6 @@ AboutPageEntry_3_ja_translation:
     (CODELT)。これらパートナーは、Citizen Voices for ChangeプロジェクトにおいてCIDT、Brainforest、CIEDD、CED、およびFODERの支援により、コンゴ盆地でのサイトの展開も支援しました。</p><p>OTPはVizzualityによって構築されました。</p>"
 
 AboutPageEntry_3_ko_translation:
-  id: 17
   about_page_entry_id: 3
   locale: ko
   title: 파트너
@@ -244,7 +227,6 @@ AboutPageEntry_3_ko_translation:
     Vizzuality가 디자인했습니다.</p>
 
 AboutPageEntry_3_vi_translation:
-  id: 18
   about_page_entry_id: 3
   locale: vi
   title: Đối tác
@@ -262,7 +244,6 @@ AboutPageEntry_3_vi_translation:
     dân vì sự Thay đổi.</p><p>OTP được xây dựng bởi Vizzuality.</p>"
 
 AboutPageEntry_3_en_translation:
-  id: 13
   about_page_entry_id: 3
   locale: en
   title: Partners
@@ -281,7 +262,6 @@ AboutPageEntry_3_en_translation:
     OTP was built by Vizzuality.</p>'
 
 AboutPageEntry_3_fr_translation:
-  id: 14
   about_page_entry_id: 3
   locale: fr
   title: Partenaires
@@ -300,7 +280,6 @@ AboutPageEntry_3_fr_translation:
     Vizzuality.</p>'
 
 AboutPageEntry_3_pt_translation:
-  id: 28
   about_page_entry_id: 3
   locale: pt
   title: Parceiros
@@ -317,7 +296,6 @@ AboutPageEntry_3_pt_translation:
     projeto Citizen Voices for Change.</p><p>O OTP foi criado pela Vizzuality.</p>"
 
 AboutPageEntry_4_en_translation:
-  id: 19
   about_page_entry_id: 4
   locale: en
   title: Donors
@@ -325,28 +303,24 @@ AboutPageEntry_4_en_translation:
     the following donors:</p>"
 
 AboutPageEntry_4_zh-CN_translation:
-  id: 21
   about_page_entry_id: 4
   locale: zh-CN
   title: 捐助者
   body: "<p>公开木材信息平台得到了以下机构的慷慨资助：</p>"
 
 AboutPageEntry_4_ja_translation:
-  id: 22
   about_page_entry_id: 4
   locale: ja
   title: ドナー
   body: "<p>オープン・ティンバー・ポータルは、以下のドナーからの寛大な支援により実現しました：</p>"
 
 AboutPageEntry_4_ko_translation:
-  id: 23
   about_page_entry_id: 4
   locale: ko
   title: 후원자
   body: "<p>OTP는 다음 후원자들의 든든한 지원으로 만들어졌습니다.</p>"
 
 AboutPageEntry_4_vi_translation:
-  id: 24
   about_page_entry_id: 4
   locale: vi
   title: Nhà tài trợ
@@ -354,7 +328,6 @@ AboutPageEntry_4_vi_translation:
     tài trợ sau đây:</p>"
 
 AboutPageEntry_4_fr_translation:
-  id: 20
   about_page_entry_id: 4
   locale: fr
   title: Les bailleurs de fonds
@@ -362,7 +335,6 @@ AboutPageEntry_4_fr_translation:
     des bailleurs suivants :</p>"
 
 AboutPageEntry_4_pt_translation:
-  id: 27
   about_page_entry_id: 4
   locale: pt
   title: Doadores

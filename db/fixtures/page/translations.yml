@@ -1,6 +1,5 @@
 
 Page_1_en_translation:
-  id: 1
   page_id: 1
   locale: en
   title: "World Resources Institute Privacy Policy\t"
@@ -198,7 +197,6 @@ Page_1_en_translation:
     rel="noopener noreferrer" target="_blank">Legal Department</a>.</p><p><br></p><p><br></p><h2><br></h2>'
 
 Page_1_fr_translation:
-  id: 2
   page_id: 1
   locale: fr
   title: "World Resources Institute Privacy Policy\t"
@@ -396,7 +394,6 @@ Page_1_fr_translation:
     rel="noopener noreferrer" target="_blank">Legal Department</a>.</p><p><br></p><p><br></p><h2><br></h2>'
 
 Page_2_en_translation:
-  id: 8
   page_id: 2
   locale: en
   title: "Open Timber Portal Terms of service\t"
@@ -549,7 +546,6 @@ Page_2_en_translation:
     Services and their contents.</li></ol><p><br></p>'
 
 Page_2_fr_translation:
-  id: 9
   page_id: 2
   locale: fr
   title: "Open Timber Portal Terms of service\t"

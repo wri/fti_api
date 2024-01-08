@@ -1,6 +1,5 @@
 
 HowTo_1_en_translation:
-  id: 1
   how_to_id: 1
   locale: en
   name: Assessing severity of observations
@@ -65,7 +64,6 @@ HowTo_1_en_translation:
     at the regional or country level will be developed accordingly.</p>'
 
 HowTo_1_fr_translation:
-  id: 2
   how_to_id: 1
   locale: fr
   name: L'évaluation de la sévérité des observations
@@ -139,7 +137,6 @@ HowTo_1_fr_translation:
     des paramètres de sévérité au niveau régional ou national seront développés.</p>'
 
 HowTo_1_zh-CN_translation:
-  id: 3
   how_to_id: 1
   locale: zh-CN
   name: '判定观察的严重性 '
@@ -154,7 +151,6 @@ HowTo_1_zh-CN_translation:
     rgb(51, 51, 51);">&nbsp;</span></p><p>OTP第一阶段的开发主要关注刚果盆地。因此，严重程度的指标也主要基于和刚果盆地的独立观察机构和他们的观察报告研究设计。我们的目标是开发出适用于全球性的严重程度指标，帮助用户比较不同木材生产国的相关信息。随着OTP在地理上的扩张，相关区域或者国家层面的严重程度的指标也会随之开发。&nbsp;</p>'
 
 HowTo_1_ja_translation:
-  id: 16
   how_to_id: 1
   locale: ja
   name: オブザベーションの深刻度の評価
@@ -167,7 +163,6 @@ HowTo_1_ja_translation:
     style="color: black;">OTP開発の第一段階では、コンゴ盆地に焦点を当てています。その結果、深刻度パラメータは、主にこの地域の 独立モニターとの協議とその報告書の評価に基づいています。現在の目標は、グローバルに適用できる深刻度パラメータを開発することです。OTPが地理的に拡大するにつれて、地域レベルまたは国レベルでの深刻度パラメータもそれに応じて開発されることになると思われます。</span></p>'
 
 HowTo_1_ko_translation:
-  id: 20
   how_to_id: 1
   locale: ko
   name: 관찰 문서의 심각도 평가
@@ -202,7 +197,6 @@ HowTo_1_ko_translation:
     수 있을 것입니다.</span></p>'
 
 HowTo_1_vi_translation:
-  id: 24
   how_to_id: 1
   locale: vi
   name: Đánh giá mức độ nghiêm trọng của các hoạt động giám sát
@@ -277,7 +271,6 @@ HowTo_1_vi_translation:
     về mức độ nghiêm trọng ở cấp khu vực hoặc quốc gia sẽ được phát triển tương ứng.</p>'
 
 HowTo_1_pt_translation:
-  id: 28
   how_to_id: 1
   locale: pt
   name: Avaliação da severidade das observações
@@ -356,14 +349,12 @@ HowTo_1_pt_translation:
     conformidade.</span></p>'
 
 HowTo_2_zh-CN_translation:
-  id: 6
   how_to_id: 2
   locale: zh-CN
   name: 分数计算
   description: "<p>透明度分数是根据每个经营者所提供的文件占所有要求文件总数的百分比计算的。</p>"
 
 HowTo_2_en_translation:
-  id: 4
   how_to_id: 2
   locale: en
   name: Score calculation
@@ -372,7 +363,6 @@ HowTo_2_en_translation:
     requested.</p>"
 
 HowTo_2_fr_translation:
-  id: 5
   how_to_id: 2
   locale: fr
   name: Calcul du score
@@ -381,14 +371,12 @@ HowTo_2_fr_translation:
     dans l'OTP sur le nombre total de documents requis.</p>"
 
 HowTo_2_ja_translation:
-  id: 15
   how_to_id: 2
   locale: ja
   name: スコア計算
   description: '<p><span style="color: black;">生産者ごとに、要求されている書類の総数に対するOTP上で共有された書類の割合に基づいて透明性スコアが計算されます。</span></p>'
 
 HowTo_2_ko_translation:
-  id: 19
   how_to_id: 2
   locale: ko
   name: 점수 계산
@@ -396,7 +384,6 @@ HowTo_2_ko_translation:
     수를 기업이 공유 요청 받은 문서의 수로 나눠서 계산합니다. 값은&nbsp;퍼센트(%)입니다.</span></p>'
 
 HowTo_2_vi_translation:
-  id: 23
   how_to_id: 2
   locale: vi
   name: 'Tính điểm '
@@ -405,7 +392,6 @@ HowTo_2_vi_translation:
     mở OTP trên tổng số tài liệu yêu cầu.</span></p>'
 
 HowTo_2_pt_translation:
-  id: 27
   how_to_id: 2
   locale: pt
   name: Cálculo de pontuação
@@ -414,7 +400,6 @@ HowTo_2_pt_translation:
     dos no OTP do número total de documentos solicitados.</span></p>'
 
 HowTo_3_fr_translation:
-  id: 8
   how_to_id: 3
   locale: fr
   name: Etendue géographique
@@ -423,14 +408,12 @@ HowTo_3_fr_translation:
     à commencer par le Gabon, le Cameroun et la République Centrafricaine.&nbsp;</p>"
 
 HowTo_3_zh-CN_translation:
-  id: 9
   how_to_id: 3
   locale: zh-CN
   name: 地理范围
   description: "<p>从刚果共和国和刚果民主共和国开始，公开木材信息平台将在未来机会合适时扩展到其他主要的木材出口国。</p>"
 
 HowTo_3_en_translation:
-  id: 7
   how_to_id: 3
   locale: en
   name: Geographical scope
@@ -440,7 +423,6 @@ HowTo_3_en_translation:
     Cameroon, and the CAR next.</p>"
 
 HowTo_3_ko_translation:
-  id: 18
   how_to_id: 3
   locale: ko
   name: '지리적 범위 '
@@ -448,14 +430,12 @@ HowTo_3_ko_translation:
     민주 공화국에서 시작해 주요 목재 수출국으로 확장할 예정입니다. 가봉, 카메룬, 중앙아프리카 공화국으로 우리의 모델을 확장시켜나갈 계획입니다.&nbsp;</span></p>'
 
 HowTo_3_ja_translation:
-  id: 14
   how_to_id: 3
   locale: ja
   name: 地理的範囲
   description: '<p><span style="color: black;">コンゴ共和国とコンゴ民主共和国から開始し、OTPは資源と機会が許す限り、他​​の主要な木材輸出国にも取り組みます。今後は、ガボン、カメルーン、中央アフリカ共和国を対象にすることを計画しています</span></p>'
 
 HowTo_3_vi_translation:
-  id: 22
   how_to_id: 3
   locale: vi
   name: Phạm vi địa lý
@@ -466,7 +446,6 @@ HowTo_3_vi_translation:
     theo là Cộng hòa Trung Phi.&nbsp;&nbsp;</span></p>'
 
 HowTo_3_pt_translation:
-  id: 26
   how_to_id: 3
   locale: pt
   name: Escopo geográfico
@@ -476,7 +455,6 @@ HowTo_3_pt_translation:
     conforme os recursos e as oportunidades o permitirem.</span></p>'
 
 HowTo_4_fr_translation:
-  id: 11
   how_to_id: 4
   locale: fr
   name: Sources d'information
@@ -485,14 +463,12 @@ HowTo_4_fr_translation:
     parties&nbsp;(ONG et autres acteurs qualifiés)</p>"
 
 HowTo_4_zh-CN_translation:
-  id: 12
   how_to_id: 4
   locale: zh-CN
   name: 信息来源
   description: "<p>公开木材信息平台（OTP）整理了三种不同来源的木材生产者信息。这三种信息来源包括政府，私营部门，以及第三方机构（非政府组织和其他有资格的参与者）</p>"
 
 HowTo_4_en_translation:
-  id: 10
   how_to_id: 4
   locale: en
   name: Sources of information
@@ -504,7 +480,6 @@ HowTo_4_en_translation:
     provided by operators.</p>"
 
 HowTo_4_ko_translation:
-  id: 17
   how_to_id: 4
   locale: ko
   name: 정보 출처
@@ -514,7 +489,6 @@ HowTo_4_ko_translation:
     검증합니다.&nbsp;</span></p>'
 
 HowTo_4_ja_translation:
-  id: 13
   how_to_id: 4
   locale: ja
   name: 情報源
@@ -522,7 +496,6 @@ HowTo_4_ja_translation:
     NGOやその他の資格のある主体は、オペレーターから提供された情報を補完し、検証します。</span></p>'
 
 HowTo_4_vi_translation:
-  id: 21
   how_to_id: 4
   locale: vi
   name: Nguồn thông tin
@@ -535,7 +508,6 @@ HowTo_4_vi_translation:
     bổ sung và xác minh thông tin do các nhà sản xuất cung cấp.</span></p>'
 
 HowTo_4_pt_translation:
-  id: 25
   how_to_id: 4
   locale: pt
   name: Fontes de informação

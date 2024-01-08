@@ -1,420 +1,350 @@
 
 Category_1_en_translation:
-  id: 1
   category_id: 1
   locale: en
   name: Local population rights & labor regulations
 
 Category_1_fr_translation:
-  id: 15
   category_id: 1
   locale: fr
   name: Droits des populations et droit du travail
 
 Category_1_zh-CN_translation:
-  id: 30
   category_id: 1
   locale: zh-CN
   name: 当地人口权利和劳动法规
 
 Category_1_ja_translation:
-  id: 31
   category_id: 1
   locale: ja
   name: 地域住民の権利および労働規則
 
 Category_1_ko_translation:
-  id: 32
   category_id: 1
   locale: ko
   name: 지역 주민 권리 및 노동 규제
 
 Category_1_vi_translation:
-  id: 33
   category_id: 1
   locale: vi
   name: Quyền của người dân địa phương và các quy định về lao động
 
 Category_1_pt_translation:
-  id: 70
   category_id: 1
   locale: pt
   name: Direitos da população local e regulamentações trabalhistas
 
 Category_2_en_translation:
-  id: 2
   category_id: 2
   locale: en
   name: Timber processing
 
 Category_2_fr_translation:
-  id: 14
   category_id: 2
   locale: fr
   name: Transformation
 
 Category_2_zh-CN_translation:
-  id: 29
   category_id: 2
   locale: zh-CN
   name: 木材加工
 
 Category_2_ja_translation:
-  id: 34
   category_id: 2
   locale: ja
   name: 木材加工
 
 Category_2_ko_translation:
-  id: 35
   category_id: 2
   locale: ko
   name: 목재 가공
 
 Category_2_vi_translation:
-  id: 36
   category_id: 2
   locale: vi
   name: Chế biến gỗ
 
 Category_2_pt_translation:
-  id: 61
   category_id: 2
   locale: pt
   name: Processamento da madeira
 
 Category_3_en_translation:
-  id: 3
   category_id: 3
   locale: en
   name: Taxes, fees and royalties
 
 Category_3_fr_translation:
-  id: 16
   category_id: 3
   locale: fr
   name: Taxes et fiscalité
 
 Category_3_zh-CN_translation:
-  id: 28
   category_id: 3
   locale: zh-CN
   name: 税，费用和特许权使用费
 
 Category_3_ja_translation:
-  id: 37
   category_id: 3
   locale: ja
   name: 税金、手数料、ロイヤリティ
 
 Category_3_ko_translation:
-  id: 38
   category_id: 3
   locale: ko
   name: 세금, 비용, 로열티
 
 Category_3_vi_translation:
-  id: 39
   category_id: 3
   locale: vi
   name: Thuế, phí và thuế tài nguyên
 
 Category_3_pt_translation:
-  id: 67
   category_id: 3
   locale: pt
   name: Impostos, taxas e royalties
 
 Category_4_en_translation:
-  id: 4
   category_id: 4
   locale: en
   name: Right to exploit
 
 Category_4_fr_translation:
-  id: 13
   category_id: 4
   locale: fr
   name: Droit d'exploiter
 
 Category_4_zh-CN_translation:
-  id: 27
   category_id: 4
   locale: zh-CN
   name: 开发权
 
 Category_4_ja_translation:
-  id: 40
   category_id: 4
   locale: ja
   name: 開発権
 
 Category_4_ko_translation:
-  id: 41
   category_id: 4
   locale: ko
   name: 이용 권리
 
 Category_4_vi_translation:
-  id: 42
   category_id: 4
   locale: vi
   name: Quyền khai thác
 
 Category_4_pt_translation:
-  id: 62
   category_id: 4
   locale: pt
   name: Direitos de exploração
 
 Category_5_en_translation:
-  id: 5
   category_id: 5
   locale: en
   name: Transport, trade, export and CITES
 
 Category_5_fr_translation:
-  id: 12
   category_id: 5
   locale: fr
   name: Commercialisation et transport, export, CITES
 
 Category_5_zh-CN_translation:
-  id: 26
   category_id: 5
   locale: zh-CN
   name: 运输，贸易，出口和CITES
 
 Category_5_ja_translation:
-  id: 43
   category_id: 5
   locale: ja
   name: 輸送、取引、輸出、CITES
 
 Category_5_ko_translation:
-  id: 44
   category_id: 5
   locale: ko
   name: 수송, 무역, 수출, CITES
 
 Category_5_vi_translation:
-  id: 45
   category_id: 5
   locale: vi
   name: Vận tải, thương mại, xuất khẩu và Công ước CITES
 
 Category_5_pt_translation:
-  id: 68
   category_id: 5
   locale: pt
   name: Transporte, comércio, exportação e CITES
 
 Category_6_en_translation:
-  id: 6
   category_id: 6
   locale: en
   name: Timber harvesting
 
 Category_6_fr_translation:
-  id: 11
   category_id: 6
   locale: fr
   name: Exploitation
 
 Category_6_zh-CN_translation:
-  id: 25
   category_id: 6
   locale: zh-CN
   name: 采伐木材
 
 Category_6_ja_translation:
-  id: 46
   category_id: 6
   locale: ja
   name: 木材の伐採
 
 Category_6_ko_translation:
-  id: 47
   category_id: 6
   locale: ko
   name: 벌목
 
 Category_6_vi_translation:
-  id: 48
   category_id: 6
   locale: vi
   name: Khai thác gỗ
 
 Category_6_pt_translation:
-  id: 63
   category_id: 6
   locale: pt
   name: Extração de madeira
 
 Category_7_en_translation:
-  id: 7
   category_id: 7
   locale: en
   name: Law enforcement
 
 Category_7_fr_translation:
-  id: 17
   category_id: 7
   locale: fr
   name: Mise en oeuvre des lois
 
 Category_7_zh-CN_translation:
-  id: 24
   category_id: 7
   locale: zh-CN
   name: 法律执行
 
 Category_7_ja_translation:
-  id: 49
   category_id: 7
   locale: ja
   name: 法の実施
 
 Category_7_ko_translation:
-  id: 50
   category_id: 7
   locale: ko
   name: 법 집행
 
 Category_7_vi_translation:
-  id: 51
   category_id: 7
   locale: vi
   name: Thực thi pháp luật
 
 Category_7_pt_translation:
-  id: 69
   category_id: 7
   locale: pt
   name: Aplicação da lei
 
 Category_8_en_translation:
-  id: 8
   category_id: 8
   locale: en
   name: Transparency
 
 Category_8_fr_translation:
-  id: 18
   category_id: 8
   locale: fr
   name: Transparence
 
 Category_8_zh-CN_translation:
-  id: 23
   category_id: 8
   locale: zh-CN
   name: 透明度
 
 Category_8_ja_translation:
-  id: 52
   category_id: 8
   locale: ja
   name: 透明性
 
 Category_8_ko_translation:
-  id: 53
   category_id: 8
   locale: ko
   name: 투명성
 
 Category_8_vi_translation:
-  id: 54
   category_id: 8
   locale: vi
   name: Tính minh bạch
 
 Category_8_pt_translation:
-  id: 64
   category_id: 8
   locale: pt
   name: Transparência
 
 Category_9_en_translation:
-  id: 9
   category_id: 9
   locale: en
   name: Policy framework
 
 Category_9_fr_translation:
-  id: 19
   category_id: 9
   locale: fr
   name: Cadre législatif
 
 Category_9_zh-CN_translation:
-  id: 22
   category_id: 9
   locale: zh-CN
   name: 政策框架
 
 Category_9_ja_translation:
-  id: 55
   category_id: 9
   locale: ja
   name: 政策枠組み
 
 Category_9_ko_translation:
-  id: 56
   category_id: 9
   locale: ko
   name: 정책 프레임워크
 
 Category_9_vi_translation:
-  id: 57
   category_id: 9
   locale: vi
   name: Khung chính sách
 
 Category_9_pt_translation:
-  id: 65
   category_id: 9
   locale: pt
   name: Enquadramento de políticas
 
 Category_10_en_translation:
-  id: 10
   category_id: 10
   locale: en
   name: Planning and decision making
 
 Category_10_fr_translation:
-  id: 20
   category_id: 10
   locale: fr
   name: Planning et prises de décision
 
 Category_10_zh-CN_translation:
-  id: 21
   category_id: 10
   locale: zh-CN
   name: 规划和决定
 
 Category_10_ja_translation:
-  id: 58
   category_id: 10
   locale: ja
   name: 計画と意思決定
 
 Category_10_ko_translation:
-  id: 59
   category_id: 10
   locale: ko
   name: 계획과 의사 결정
 
 Category_10_vi_translation:
-  id: 60
   category_id: 10
   locale: vi
   name: Lập kế hoạch và ra quyết định
 
 Category_10_pt_translation:
-  id: 66
   category_id: 10
   locale: pt
   name: Planejamento e tomada de decisão

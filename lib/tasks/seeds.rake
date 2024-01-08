@@ -1,6 +1,13 @@
 class SeedsTasks
   include Rake::DSL
 
+  HOLDINGS = ["Groupe Vicwood Thanry"]
+  MONITORS = %w[OGF PAPEL FODER CADDE ECODEV CAGDF RENOI OCEAN AGRECO]
+  OPERATORS = %w[ifo-interholco cfc sifco lorema siencam cib cft mokabi-sa afriwood-industries]
+  EXTRA_FMUS = %w[08-003 08-005 08-009]
+
+  DATE_FIELDS = %w[created_at updated_at deleted_at operator_document_updated_at operator_document_created_at]
+
   def initialize
     namespace :seeds do
       desc "Generate fixtures to use as development or e2e database. First run db:restore_from_file or db:restore_from_server to get latest data from production."
@@ -24,26 +31,18 @@ class SeedsTasks
         generate_for_model "RequiredOperatorDocumentGroup"
         generate_for_model "RequiredOperatorDocument"
 
-        holding_names = ["Groupe Vicwood Thanry"]
-        holdings = Holding.where(name: holding_names)
+        holdings = Holding.where(name: HOLDINGS)
         holding_operators = Operator.where(holding: holdings).pluck(:slug)
 
         # observations
-        monitor_names = %w[
-          OGF PAPEL FODER CADDE ECODEV CAGDF RENOI OCEAN AGRECO
-        ]
-        observers = Observer.where(name: monitor_names).order(:id)
+        observers = Observer.where(name: MONITORS).order(:id)
         reports = ObservationReport.joins(:observers).where(observers: observers).distinct.order(:id)
         observations = Observation.published.where(observation_report: reports).order(:id)
 
-        operator_slugs = %w[
-          ifo-interholco cfc sifco lorema siencam
-          cib cft mokabi-sa afriwood-industries
-        ].concat(holding_operators).uniq
+        operator_slugs = OPERATORS.concat(holding_operators).uniq
         operators = Operator.where(slug: operator_slugs).order(:id)
         fmu_operators = FmuOperator.where(operator: operators).order(:id)
-        extra_fmus = %w[08-003 08-005 08-009]
-        fmus = Fmu.where(id: fmu_operators.pluck(:fmu_id)).or(Fmu.where(id: Fmu.where(name: extra_fmus))).order(:id)
+        fmus = Fmu.where(id: fmu_operators.pluck(:fmu_id)).or(Fmu.where(id: Fmu.where(name: EXTRA_FMUS))).order(:id)
         observations = observations.where(fmu: [nil, fmus]) # only observations with existing fmu or no fmu
         observations = observations.where(operator: [nil, operators]).order(:id)
         generate_for_model "Holding", entries: holdings
@@ -86,7 +85,7 @@ class SeedsTasks
     model_file_name = "#{Rails.root}/db/fixtures/#{model_class.underscore.pluralize}.yml"
     model_file = File.open(model_file_name, "w")
 
-    translated_attributes = model.respond_to?(:translated_attribute_names) ? model.translated_attribute_names : []
+    translated_attributes = model.respond_to?(:translated_attribute_names) ? model.translated_attribute_names.map(&:to_s) : []
 
     entries ||= model.order(id: :asc).all
 
@@ -102,10 +101,9 @@ class SeedsTasks
     exclude_attributes = exclude || []
 
     entries.each do |entry|
-      attrs = entry.attributes
-      attrs.delete_if { |k, _v| translated_attributes.include?(k.to_sym) }
-      attrs.delete_if { |k, _v| exclude_attributes.include?(k) }
+      attrs = entry.attributes.except(*(exclude_attributes + translated_attributes))
       attrs.each { |k, _v| attrs[k] = "Lorem ipsum for #{k}" if anonymize.include?(k) } if anonymize.any?
+      attrs.each { |k, _v| attrs[k] = attrs[k].to_s if DATE_FIELDS.include?(k) }
       attrs.compact_blank!
 
       key = model_class + "_" + increment.to_s
@@ -116,9 +114,10 @@ class SeedsTasks
         entry.translations.each do |t|
           next if locale.any? && locale.exclude?(t.locale.to_s)
 
-          attrs = t.attributes
-          attrs.delete_if { |k, _v| exclude_attributes.include?(k) }
+          attrs = t.attributes.except(*(["id"] + exclude_attributes))
           attrs.each { |k, _v| attrs[k] = "Lorem ipsum for #{k}" if anonymize.include?(k) } if anonymize.any?
+          attrs.each { |k, _v| attrs[k] = attrs[k].to_s if DATE_FIELDS.include?(k) }
+          attrs.compact_blank!
           translation_key = "#{key}_#{t.locale}_translation"
           translation_output = {translation_key => attrs}.compact_blank
           translation_file << translation_output.to_yaml.gsub(/^---/, "").gsub(/^\.\.\./, "")

@@ -1,476 +1,340 @@
 
 Fmu_1_en_translation:
-  id: 12
   fmu_id: 12
   locale: en
   name: 047/11
-  deleted_at:
 
 Fmu_1_fr_translation:
-  id: 127
   fmu_id: 12
   locale: fr
   name: 047/11
-  deleted_at:
 
 Fmu_2_fr_translation:
-  id: 164
   fmu_id: 49
   locale: fr
   name: 005/18
-  deleted_at:
 
 Fmu_2_en_translation:
-  id: 49
   fmu_id: 49
   locale: en
   name: 005/18
-  deleted_at:
 
 Fmu_3_en_translation:
-  id: 50
   fmu_id: 50
   locale: en
   name: 046/11
-  deleted_at:
 
 Fmu_3_fr_translation:
-  id: 102456
   fmu_id: 50
   locale: fr
   name: 046/11
-  deleted_at:
 
 Fmu_4_en_translation:
-  id: 53
   fmu_id: 53
   locale: en
   name: Loundoungou-toukoulaka
-  deleted_at:
 
 Fmu_4_fr_translation:
-  id: 168
   fmu_id: 53
   locale: fr
   name: Loundoungou-toukoulaka
-  deleted_at:
 
 Fmu_5_fr_translation:
-  id: 169
   fmu_id: 54
   locale: fr
   name: Kabo
-  deleted_at:
 
 Fmu_5_en_translation:
-  id: 54
   fmu_id: 54
   locale: en
   name: Kabo
-  deleted_at:
 
 Fmu_6_en_translation:
-  id: 55
   fmu_id: 55
   locale: en
   name: Pokola
-  deleted_at:
 
 Fmu_6_fr_translation:
-  id: 170
   fmu_id: 55
   locale: fr
   name: Pokola
-  deleted_at:
 
 Fmu_7_en_translation:
-  id: 56
   fmu_id: 56
   locale: en
   name: Ngombe
-  deleted_at:
 
 Fmu_7_fr_translation:
-  id: 171
   fmu_id: 56
   locale: fr
   name: Ngombe
-  deleted_at:
 
 Fmu_8_en_translation:
-  id: 67
   fmu_id: 67
   locale: en
   name: Pikounda nord
-  deleted_at:
 
 Fmu_8_fr_translation:
-  id: 182
   fmu_id: 67
   locale: fr
   name: Pikounda nord
-  deleted_at:
 
 Fmu_9_en_translation:
-  id: 68
   fmu_id: 68
   locale: en
   name: Tala-tala
-  deleted_at:
 
 Fmu_9_fr_translation:
-  id: 183
   fmu_id: 68
   locale: fr
   name: Tala-tala
-  deleted_at:
 
 Fmu_10_en_translation:
-  id: 83
   fmu_id: 83
   locale: en
   name: Doumanga
-  deleted_at:
 
 Fmu_10_fr_translation:
-  id: 198
   fmu_id: 83
   locale: fr
   name: Doumanga
-  deleted_at:
 
 Fmu_11_en_translation:
-  id: 84
   fmu_id: 84
   locale: en
   name: Nkola
-  deleted_at:
 
 Fmu_11_fr_translation:
-  id: 199
   fmu_id: 84
   locale: fr
   name: Nkola
-  deleted_at:
 
 Fmu_12_fr_translation:
-  id: 220
   fmu_id: 105
   locale: fr
   name: Mokabi dzanga
-  deleted_at:
 
 Fmu_12_en_translation:
-  id: 105
   fmu_id: 105
   locale: en
   name: Mokabi dzanga
-  deleted_at:
 
 Fmu_13_fr_translation:
-  id: 222
   fmu_id: 107
   locale: fr
   name: Cayo
-  deleted_at:
 
 Fmu_13_en_translation:
-  id: 107
   fmu_id: 107
   locale: en
   name: Cayo
-  deleted_at:
 
 Fmu_14_fr_translation:
-  id: 224
   fmu_id: 109
   locale: fr
   name: Mimbeli ibenga
-  deleted_at:
 
 Fmu_14_en_translation:
-  id: 109
   fmu_id: 109
   locale: en
   name: Mimbeli ibenga
-  deleted_at:
 
 Fmu_15_en_translation:
-  id: 12988
   fmu_id: 11496
   locale: en
   name: 00-004
-  deleted_at:
 
 Fmu_15_fr_translation:
-  id: 12989
   fmu_id: 11496
   locale: fr
   name: 00-004
-  deleted_at:
 
 Fmu_16_en_translation:
-  id: 12994
   fmu_id: 11499
   locale: en
   name: 11-001
-  deleted_at:
 
 Fmu_16_fr_translation:
-  id: 12995
   fmu_id: 11499
   locale: fr
   name: 11-001
-  deleted_at:
 
 Fmu_17_en_translation:
-  id: 13000
   fmu_id: 11502
   locale: en
   name: '08-009'
-  deleted_at:
 
 Fmu_17_fr_translation:
-  id: 13001
   fmu_id: 11502
   locale: fr
   name: '08-009'
-  deleted_at:
 
 Fmu_18_fr_translation:
-  id: 13039
   fmu_id: 11521
   locale: fr
   name: '08-003'
-  deleted_at:
 
 Fmu_18_en_translation:
-  id: 13038
   fmu_id: 11521
   locale: en
   name: '08-003'
-  deleted_at:
 
 Fmu_19_en_translation:
-  id: 13042
   fmu_id: 11523
   locale: en
   name: '08-005'
-  deleted_at:
 
 Fmu_19_fr_translation:
-  id: 13043
   fmu_id: 11523
   locale: fr
   name: '08-005'
-  deleted_at:
 
 Fmu_20_en_translation:
-  id: 13134
   fmu_id: 11569
   locale: en
   name: 10-003
-  deleted_at:
 
 Fmu_20_fr_translation:
-  id: 13135
   fmu_id: 11569
   locale: fr
   name: 10-003
-  deleted_at:
 
 Fmu_21_en_translation:
-  id: 13154
   fmu_id: 11579
   locale: en
   name: '09-005A'
-  deleted_at:
 
 Fmu_21_fr_translation:
-  id: 13155
   fmu_id: 11579
   locale: fr
   name: '09-005A'
-  deleted_at:
 
 Fmu_22_en_translation:
-  id: 13200
   fmu_id: 11602
   locale: en
   name: 10-002
-  deleted_at:
 
 Fmu_22_fr_translation:
-  id: 13201
   fmu_id: 11602
   locale: fr
   name: 10-002
-  deleted_at:
 
 Fmu_23_en_translation:
-  id: 13204
   fmu_id: 11604
   locale: en
   name: 10-004
-  deleted_at:
 
 Fmu_23_fr_translation:
-  id: 13205
   fmu_id: 11604
   locale: fr
   name: 10-004
-  deleted_at:
 
 Fmu_24_en_translation:
-  id: 13230
   fmu_id: 11617
   locale: en
   name: 10-011
-  deleted_at:
 
 Fmu_24_fr_translation:
-  id: 13231
   fmu_id: 11617
   locale: fr
   name: 10-011
-  deleted_at:
 
 Fmu_25_en_translation:
-  id: 13232
   fmu_id: 11618
   locale: en
   name: '09-003'
-  deleted_at:
 
 Fmu_25_fr_translation:
-  id: 13233
   fmu_id: 11618
   locale: fr
   name: '09-003'
-  deleted_at:
 
 Fmu_26_en_translation:
-  id: 13238
   fmu_id: 11621
   locale: en
   name: 10-007
-  deleted_at:
 
 Fmu_26_fr_translation:
-  id: 13239
   fmu_id: 11621
   locale: fr
   name: 10-007
-  deleted_at:
 
 Fmu_27_en_translation:
-  id: 13264
   fmu_id: 11634
   locale: en
   name: '09-004A'
-  deleted_at:
 
 Fmu_27_fr_translation:
-  id: 13265
   fmu_id: 11634
   locale: fr
   name: '09-004A'
-  deleted_at:
 
 Fmu_28_en_translation:
-  id: 13316
   fmu_id: 11660
   locale: en
   name: 10-001
-  deleted_at:
 
 Fmu_28_fr_translation:
-  id: 13317
   fmu_id: 11660
   locale: fr
   name: 10-001
-  deleted_at:
 
 Fmu_29_en_translation:
-  id: 13476
   fmu_id: 11740
   locale: en
   name: '1001311'
-  deleted_at:
 
 Fmu_29_fr_translation:
-  id: 13477
   fmu_id: 11740
   locale: fr
   name: '1001311'
-  deleted_at:
 
 Fmu_30_en_translation:
-  id: 13494
   fmu_id: 11749
   locale: en
   name: '1001309'
-  deleted_at:
 
 Fmu_30_fr_translation:
-  id: 13495
   fmu_id: 11749
   locale: fr
   name: '1001309'
-  deleted_at:
 
 Fmu_31_en_translation:
-  id: 20316
   fmu_id: 20099
   locale: en
   name: '0702111'
-  deleted_at:
 
 Fmu_31_fr_translation:
-  id: 20317
   fmu_id: 20099
   locale: fr
   name: '0702111'
-  deleted_at:
 
 Fmu_32_en_translation:
-  id: 102467
   fmu_id: 100420
   locale: en
   name: '0702114'
-  deleted_at:
 
 Fmu_32_fr_translation:
-  id: 102468
   fmu_id: 100420
   locale: fr
   name: '0702114'
-  deleted_at:
 
 Fmu_33_en_translation:
-  id: 102615
   fmu_id: 100438
   locale: en
   name: '0702118'
-  deleted_at:
 
 Fmu_33_fr_translation:
-  id: 102621
   fmu_id: 100438
   locale: fr
   name: '0702118'
-  deleted_at:
 
 Fmu_34_en_translation:
-  id: 102770
   fmu_id: 100458
   locale: en
   name: '0702135'
-  deleted_at:
 
 Fmu_34_fr_translation:
-  id: 102776
   fmu_id: 100458
   locale: fr
   name: '0702135'
-  deleted_at:
