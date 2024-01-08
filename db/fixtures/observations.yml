@@ -3,11 +3,7 @@ Observation_1:
   id: 230
   severity_id: 38
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   operator_id: 151
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
@@ -29,11 +25,7 @@ Observation_2:
   id: 231
   severity_id: 70
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   operator_id: 151
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
@@ -54,11 +46,7 @@ Observation_3:
   id: 232
   severity_id: 70
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-11 16:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-11 16:00:00.000000000 Z
+  publication_date: 2020-09-11 16:00:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -79,11 +67,7 @@ Observation_4:
   id: 233
   severity_id: 4
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-16 10:38:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-16 10:38:00.000000000 Z
+  publication_date: 2020-09-16 10:38:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -104,11 +88,7 @@ Observation_5:
   id: 265
   severity_id: 38
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 161
   lat: !ruby/object:BigDecimal 27:0.1035403764e1
@@ -130,11 +110,7 @@ Observation_6:
   id: 266
   severity_id: 118
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 161
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
@@ -155,11 +131,7 @@ Observation_7:
   id: 286
   severity_id: 66
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 172
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
@@ -180,11 +152,7 @@ Observation_8:
   id: 287
   severity_id: 34
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 172
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
@@ -204,11 +172,7 @@ Observation_9:
   id: 288
   severity_id: 118
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 172
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
@@ -229,11 +193,7 @@ Observation_10:
   id: 361
   severity_id: 126
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   operator_id: 151
   lat: !ruby/object:BigDecimal 27:0.134650374423073e1
@@ -255,11 +215,7 @@ Observation_11:
   id: 385
   severity_id: 27
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-09 15:18:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-09 15:18:00.000000000 Z
+  publication_date: 2020-09-09 15:18:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -280,11 +236,7 @@ Observation_12:
   id: 386
   severity_id: 50
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-09 15:07:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-09 15:07:00.000000000 Z
+  publication_date: 2020-09-09 15:07:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -305,11 +257,7 @@ Observation_13:
   id: 387
   severity_id: 70
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-09 15:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-09 15:00:00.000000000 Z
+  publication_date: 2020-09-09 15:00:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -330,11 +278,7 @@ Observation_14:
   id: 388
   severity_id: 69
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-09 14:54:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-09 14:54:00.000000000 Z
+  publication_date: 2020-09-09 14:54:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -355,11 +299,7 @@ Observation_15:
   id: 389
   severity_id: 70
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-09 14:41:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-09 14:41:00.000000000 Z
+  publication_date: 2020-09-09 14:41:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -380,11 +320,7 @@ Observation_16:
   id: 390
   severity_id: 69
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-09 14:32:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-09 14:32:00.000000000 Z
+  publication_date: 2020-09-09 14:32:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -405,11 +341,7 @@ Observation_17:
   id: 391
   severity_id: 118
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2020-09-09 14:23:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2020-09-09 14:23:00.000000000 Z
+  publication_date: 2020-09-09 14:23:00 UTC
   country_id: 47
   operator_id: 165
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
@@ -430,11 +362,7 @@ Observation_18:
   id: 539
   severity_id: 70
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-17 14:06:07.380554000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-17 14:06:07.380554000 Z
+  publication_date: 2023-11-17 14:06:07 UTC
   country_id: 47
   operator_id: 151
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
@@ -452,11 +380,7 @@ Observation_19:
   id: 540
   severity_id: 25
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-17 14:05:43.554405000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-17 14:05:43.554405000 Z
+  publication_date: 2023-11-17 14:05:43 UTC
   country_id: 47
   operator_id: 151
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
@@ -474,11 +398,7 @@ Observation_20:
   id: 818
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -494,11 +414,7 @@ Observation_21:
   id: 819
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-09-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-09-01 00:00:00.000000000 Z
+  publication_date: 2011-09-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -514,11 +430,7 @@ Observation_22:
   id: 820
   severity_id: 187
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 47
   validation_status: Published (not modified)
@@ -534,11 +446,7 @@ Observation_23:
   id: 821
   severity_id: 187
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 47
   validation_status: Published (not modified)
@@ -554,11 +462,7 @@ Observation_24:
   id: 822
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -574,11 +478,7 @@ Observation_25:
   id: 823
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -594,11 +494,7 @@ Observation_26:
   id: 824
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -614,11 +510,7 @@ Observation_27:
   id: 825
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -634,11 +526,7 @@ Observation_28:
   id: 826
   severity_id: 223
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 56
   validation_status: Published (not modified)
@@ -653,11 +541,7 @@ Observation_29:
   id: 827
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -673,11 +557,7 @@ Observation_30:
   id: 828
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -693,11 +573,7 @@ Observation_31:
   id: 829
   severity_id: 207
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-10-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-10-01 00:00:00.000000000 Z
+  publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -713,11 +589,7 @@ Observation_32:
   id: 830
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-12-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-12-01 00:00:00.000000000 Z
+  publication_date: 2011-12-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -733,11 +605,7 @@ Observation_33:
   id: 831
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2011-12-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2011-12-01 00:00:00.000000000 Z
+  publication_date: 2011-12-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -753,11 +621,7 @@ Observation_34:
   id: 832
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-02-01 00:00:00.000000000 Z
+  publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -773,11 +637,7 @@ Observation_35:
   id: 833
   severity_id: 202
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-02-01 00:00:00.000000000 Z
+  publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -793,11 +653,7 @@ Observation_36:
   id: 834
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-02-01 00:00:00.000000000 Z
+  publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -813,11 +669,7 @@ Observation_37:
   id: 835
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-02-01 00:00:00.000000000 Z
+  publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -833,11 +685,7 @@ Observation_38:
   id: 836
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-09-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-09-01 00:00:00.000000000 Z
+  publication_date: 2012-09-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -853,11 +701,7 @@ Observation_39:
   id: 837
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-09-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-09-01 00:00:00.000000000 Z
+  publication_date: 2012-09-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -873,11 +717,7 @@ Observation_40:
   id: 838
   severity_id: 194
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-09-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-09-01 00:00:00.000000000 Z
+  publication_date: 2012-09-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -893,11 +733,7 @@ Observation_41:
   id: 839
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -913,11 +749,7 @@ Observation_42:
   id: 840
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -933,11 +765,7 @@ Observation_43:
   id: 841
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -953,11 +781,7 @@ Observation_44:
   id: 842
   severity_id: 204
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -973,11 +797,7 @@ Observation_45:
   id: 843
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -993,11 +813,7 @@ Observation_46:
   id: 844
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1013,11 +829,7 @@ Observation_47:
   id: 845
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1033,11 +845,7 @@ Observation_48:
   id: 846
   severity_id: 196
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -1053,11 +861,7 @@ Observation_49:
   id: 847
   severity_id: 207
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2012-11-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2012-11-01 00:00:00.000000000 Z
+  publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -1073,11 +877,7 @@ Observation_50:
   id: 848
   severity_id: 173
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1093,11 +893,7 @@ Observation_51:
   id: 849
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -1113,11 +909,7 @@ Observation_52:
   id: 850
   severity_id: 204
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1133,11 +925,7 @@ Observation_53:
   id: 851
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1153,11 +941,7 @@ Observation_54:
   id: 852
   severity_id: 207
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -1173,11 +957,7 @@ Observation_55:
   id: 853
   severity_id: 206
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -1193,11 +973,7 @@ Observation_56:
   id: 854
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1213,11 +989,7 @@ Observation_57:
   id: 855
   severity_id: 218
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1233,11 +1005,7 @@ Observation_58:
   id: 856
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1253,11 +1021,7 @@ Observation_59:
   id: 857
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1273,11 +1037,7 @@ Observation_60:
   id: 858
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1293,11 +1053,7 @@ Observation_61:
   id: 859
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1313,11 +1069,7 @@ Observation_62:
   id: 860
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1333,11 +1085,7 @@ Observation_63:
   id: 861
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1353,11 +1101,7 @@ Observation_64:
   id: 862
   severity_id: 196
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -1373,11 +1117,7 @@ Observation_65:
   id: 863
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1393,11 +1133,7 @@ Observation_66:
   id: 864
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1413,11 +1149,7 @@ Observation_67:
   id: 866
   severity_id: 208
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -1433,11 +1165,7 @@ Observation_68:
   id: 867
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1453,11 +1181,7 @@ Observation_69:
   id: 868
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1473,11 +1197,7 @@ Observation_70:
   id: 869
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -1493,11 +1213,7 @@ Observation_71:
   id: 870
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -1513,11 +1229,7 @@ Observation_72:
   id: 871
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1533,11 +1245,7 @@ Observation_73:
   id: 872
   severity_id: 202
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1553,11 +1261,7 @@ Observation_74:
   id: 873
   severity_id: 204
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1573,11 +1277,7 @@ Observation_75:
   id: 874
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1593,11 +1293,7 @@ Observation_76:
   id: 875
   severity_id: 204
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1613,11 +1309,7 @@ Observation_77:
   id: 877
   severity_id: 208
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -1633,11 +1325,7 @@ Observation_78:
   id: 878
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1653,11 +1341,7 @@ Observation_79:
   id: 879
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1673,11 +1357,7 @@ Observation_80:
   id: 880
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1693,11 +1373,7 @@ Observation_81:
   id: 881
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1713,11 +1389,7 @@ Observation_82:
   id: 882
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -1733,11 +1405,7 @@ Observation_83:
   id: 883
   severity_id: 186
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 47
   validation_status: Published (not modified)
@@ -1753,11 +1421,7 @@ Observation_84:
   id: 884
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -1773,11 +1437,7 @@ Observation_85:
   id: 885
   severity_id: 199
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 50
   validation_status: Published (not modified)
@@ -1793,11 +1453,7 @@ Observation_86:
   id: 886
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1813,11 +1469,7 @@ Observation_87:
   id: 887
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1833,11 +1485,7 @@ Observation_88:
   id: 888
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1853,11 +1501,7 @@ Observation_89:
   id: 889
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -1873,11 +1517,7 @@ Observation_90:
   id: 890
   severity_id: 206
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -1893,11 +1533,7 @@ Observation_91:
   id: 891
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1913,11 +1549,7 @@ Observation_92:
   id: 892
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1933,11 +1565,7 @@ Observation_93:
   id: 893
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1953,11 +1581,7 @@ Observation_94:
   id: 894
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-02-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-02-01 00:00:00.000000000 Z
+  publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -1973,11 +1597,7 @@ Observation_95:
   id: 897
   severity_id: 194
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -1993,11 +1613,7 @@ Observation_96:
   id: 898
   severity_id: 207
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -2013,11 +1629,7 @@ Observation_97:
   id: 899
   severity_id: 207
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -2033,11 +1645,7 @@ Observation_98:
   id: 900
   severity_id: 207
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -2053,11 +1661,7 @@ Observation_99:
   id: 901
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-03-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-03-01 00:00:00.000000000 Z
+  publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2073,11 +1677,7 @@ Observation_100:
   id: 902
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-03-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-03-01 00:00:00.000000000 Z
+  publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2093,11 +1693,7 @@ Observation_101:
   id: 903
   severity_id: 196
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-03-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-03-01 00:00:00.000000000 Z
+  publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -2113,11 +1709,7 @@ Observation_102:
   id: 904
   severity_id: 208
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-03-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-03-01 00:00:00.000000000 Z
+  publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -2133,11 +1725,7 @@ Observation_103:
   id: 905
   severity_id: 218
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-03-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-03-01 00:00:00.000000000 Z
+  publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2153,11 +1741,7 @@ Observation_104:
   id: 906
   severity_id: 173
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2173,11 +1757,7 @@ Observation_105:
   id: 907
   severity_id: 173
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2193,11 +1773,7 @@ Observation_106:
   id: 908
   severity_id: 173
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2213,11 +1789,7 @@ Observation_107:
   id: 909
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2233,11 +1805,7 @@ Observation_108:
   id: 910
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2253,11 +1821,7 @@ Observation_109:
   id: 911
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2273,11 +1837,7 @@ Observation_110:
   id: 912
   severity_id: 194
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -2294,11 +1854,7 @@ Observation_111:
   id: 914
   severity_id: 202
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -2314,11 +1870,7 @@ Observation_112:
   id: 915
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -2334,11 +1886,7 @@ Observation_113:
   id: 916
   severity_id: 202
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -2354,11 +1902,7 @@ Observation_114:
   id: 917
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -2374,11 +1918,7 @@ Observation_115:
   id: 918
   severity_id: 218
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2394,11 +1934,7 @@ Observation_116:
   id: 919
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2414,11 +1950,7 @@ Observation_117:
   id: 920
   severity_id: 227
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 57
   validation_status: Published (not modified)
@@ -2434,11 +1966,7 @@ Observation_118:
   id: 921
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2454,11 +1982,7 @@ Observation_119:
   id: 922
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2474,11 +1998,7 @@ Observation_120:
   id: 923
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2494,11 +2014,7 @@ Observation_121:
   id: 924
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2514,11 +2030,7 @@ Observation_122:
   id: 925
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2534,11 +2046,7 @@ Observation_123:
   id: 926
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2554,11 +2062,7 @@ Observation_124:
   id: 927
   severity_id: 182
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 46
   validation_status: Published (not modified)
@@ -2574,11 +2078,7 @@ Observation_125:
   id: 928
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -2594,11 +2094,7 @@ Observation_126:
   id: 929
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -2614,11 +2110,7 @@ Observation_127:
   id: 930
   severity_id: 207
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 52
   validation_status: Published (not modified)
@@ -2634,11 +2126,7 @@ Observation_128:
   id: 931
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2654,11 +2142,7 @@ Observation_129:
   id: 932
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2674,11 +2158,7 @@ Observation_130:
   id: 933
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2693,11 +2173,7 @@ Observation_131:
   id: 934
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2713,11 +2189,7 @@ Observation_132:
   id: 935
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 49
   validation_status: Published (not modified)
@@ -2733,11 +2205,7 @@ Observation_133:
   id: 936
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -2753,11 +2221,7 @@ Observation_134:
   id: 937
   severity_id: 201
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -2773,11 +2237,7 @@ Observation_135:
   id: 938
   severity_id: 202
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 51
   validation_status: Published (not modified)
@@ -2793,11 +2253,7 @@ Observation_136:
   id: 939
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2813,11 +2269,7 @@ Observation_137:
   id: 940
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2833,11 +2285,7 @@ Observation_138:
   id: 941
   severity_id: 218
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2853,11 +2301,7 @@ Observation_139:
   id: 942
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 55
   validation_status: Published (not modified)
@@ -2873,11 +2317,7 @@ Observation_140:
   id: 943
   severity_id: 175
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2893,11 +2333,7 @@ Observation_141:
   id: 944
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 44
   validation_status: Published (not modified)
@@ -2913,11 +2349,7 @@ Observation_142:
   id: 945
   severity_id: 228
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 57
   validation_status: Published (not modified)
@@ -2933,11 +2365,7 @@ Observation_143:
   id: 946
   severity_id: 227
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2013-06-01 00:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2013-06-01 00:00:00.000000000 Z
+  publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   subcategory_id: 57
   validation_status: Published (not modified)
@@ -2953,11 +2381,7 @@ Observation_144:
   id: 1732
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2015-02-28 09:47:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2015-02-28 09:47:00.000000000 Z
+  publication_date: 2015-02-28 09:47:00 UTC
   country_id: 7
   subcategory_id: 55
   validation_status: Published (modified)
@@ -2971,11 +2395,7 @@ Observation_145:
   id: 1734
   severity_id: 169
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2015-02-28 10:04:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2015-02-28 10:04:00.000000000 Z
+  publication_date: 2015-02-28 10:04:00 UTC
   country_id: 7
   subcategory_id: 43
   validation_status: Published (modified)
@@ -2989,11 +2409,7 @@ Observation_146:
   id: 1735
   severity_id: 201
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2015-02-28 10:16:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2015-02-28 10:16:00.000000000 Z
+  publication_date: 2015-02-28 10:16:00 UTC
   country_id: 7
   subcategory_id: 51
   validation_status: Published (modified)
@@ -3007,11 +2423,7 @@ Observation_147:
   id: 1739
   severity_id: 210
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2017-08-14 11:42:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2017-08-14 11:42:00.000000000 Z
+  publication_date: 2017-08-14 11:42:00 UTC
   country_id: 7
   is_active: true
   subcategory_id: 53
@@ -3026,11 +2438,7 @@ Observation_148:
   id: 1751
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2017-09-06 11:40:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2017-09-06 11:40:00.000000000 Z
+  publication_date: 2017-09-06 11:40:00 UTC
   country_id: 7
   is_active: true
   subcategory_id: 55
@@ -3045,11 +2453,7 @@ Observation_149:
   id: 1812
   severity_id: 187
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2017-08-13 23:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2017-08-13 23:00:00.000000000 Z
+  publication_date: 2017-08-13 23:00:00 UTC
   country_id: 7
   is_active: true
   subcategory_id: 47
@@ -3064,11 +2468,7 @@ Observation_150:
   id: 1821
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2017-09-05 23:00:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2017-09-05 23:00:00.000000000 Z
+  publication_date: 2017-09-05 23:00:00 UTC
   country_id: 7
   is_active: true
   subcategory_id: 44
@@ -3083,11 +2483,7 @@ Observation_151:
   id: 1883
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-14 08:12:20.839289000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-14 08:12:20.839289000 Z
+  publication_date: 2021-01-14 08:12:20 UTC
   country_id: 7
   is_active: true
   subcategory_id: 55
@@ -3104,11 +2500,7 @@ Observation_152:
   id: 1884
   severity_id: 171
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-14 08:56:29.535854000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-14 08:56:29.535854000 Z
+  publication_date: 2021-01-14 08:56:29 UTC
   country_id: 7
   is_active: true
   subcategory_id: 43
@@ -3123,11 +2515,7 @@ Observation_153:
   id: 1885
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-14 09:15:27.530324000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-14 09:15:27.530324000 Z
+  publication_date: 2021-01-14 09:15:27 UTC
   country_id: 7
   is_active: true
   subcategory_id: 55
@@ -3142,11 +2530,7 @@ Observation_154:
   id: 1898
   severity_id: 189
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-12 08:40:45.284892000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-12 08:40:45.284892000 Z
+  publication_date: 2021-01-12 08:40:45 UTC
   country_id: 7
   is_active: true
   subcategory_id: 48
@@ -3161,11 +2545,7 @@ Observation_155:
   id: 1910
   severity_id: 186
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-07 11:01:06.098785000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-07 11:01:06.098785000 Z
+  publication_date: 2021-01-07 11:01:06 UTC
   country_id: 7
   is_active: true
   subcategory_id: 47
@@ -3179,11 +2559,7 @@ Observation_156:
   id: 1911
   severity_id: 188
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-07 11:02:31.507065000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-07 11:02:31.507065000 Z
+  publication_date: 2021-01-07 11:02:31 UTC
   country_id: 7
   is_active: true
   subcategory_id: 47
@@ -3197,11 +2573,7 @@ Observation_157:
   id: 1912
   severity_id: 225
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-07 11:02:50.546609000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-07 11:02:50.546609000 Z
+  publication_date: 2021-01-07 11:02:50 UTC
   country_id: 7
   is_active: true
   subcategory_id: 57
@@ -3215,11 +2587,7 @@ Observation_158:
   id: 1913
   severity_id: 196
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-07 11:03:25.370298000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-07 11:03:25.370298000 Z
+  publication_date: 2021-01-07 11:03:25 UTC
   country_id: 7
   is_active: true
   subcategory_id: 49
@@ -3233,11 +2601,7 @@ Observation_159:
   id: 1914
   severity_id: 186
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-01-07 11:03:06.836743000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-01-07 11:03:06.836743000 Z
+  publication_date: 2021-01-07 11:03:06 UTC
   country_id: 7
   is_active: true
   subcategory_id: 47
@@ -3251,11 +2615,7 @@ Observation_160:
   id: 2191
   severity_id: 35
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-09-17 08:22:00.000000000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-09-17 08:22:00.000000000 Z
+  publication_date: 2021-09-17 08:22:00 UTC
   country_id: 45
   is_active: true
   lat: !ruby/object:BigDecimal 27:0.280789020259514e1
@@ -3277,11 +2637,7 @@ Observation_161:
   id: 2193
   severity_id: 23
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2021-09-17 08:02:07.061899000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2021-09-17 08:02:07.061899000 Z
+  publication_date: 2021-09-17 08:02:07 UTC
   country_id: 45
   is_active: true
   lat: !ruby/object:BigDecimal 27:0.281712117228093e1
@@ -3303,11 +2659,7 @@ Observation_162:
   id: 2218
   severity_id: 220
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-21 11:31:27.292035000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-21 11:31:27.292035000 Z
+  publication_date: 2023-12-21 11:31:27 UTC
   country_id: 7
   is_active: true
   subcategory_id: 55
@@ -3322,11 +2674,7 @@ Observation_163:
   id: 2219
   severity_id: 219
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2024-01-08 09:55:12.023044000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2024-01-08 09:55:12.023044000 Z
+  publication_date: 2024-01-08 09:55:12 UTC
   country_id: 7
   is_active: true
   subcategory_id: 55
@@ -3341,11 +2689,7 @@ Observation_164:
   id: 2220
   severity_id: 227
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2024-01-08 09:51:34.855165000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2024-01-08 09:51:34.855165000 Z
+  publication_date: 2024-01-08 09:51:34 UTC
   country_id: 7
   is_active: true
   subcategory_id: 57
@@ -3361,11 +2705,7 @@ Observation_165:
   id: 2246
   severity_id: 118
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 13:50:05.406295000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 13:50:05.406295000 Z
+  publication_date: 2022-06-06 13:50:05 UTC
   country_id: 47
   operator_id: 145
   pv: PV N°7 dressé par la DDEF-K après la mission OI
@@ -3387,11 +2727,7 @@ Observation_166:
   id: 2247
   severity_id: 64
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 13:39:20.455786000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 13:39:20.455786000 Z
+  publication_date: 2022-06-06 13:39:20 UTC
   country_id: 47
   operator_id: 145
   pv: PV N°7 dressé par la DDEF-K après la mission OI
@@ -3413,11 +2749,7 @@ Observation_167:
   id: 2248
   severity_id: 64
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 13:34:31.727246000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 13:34:31.727246000 Z
+  publication_date: 2022-06-06 13:34:31 UTC
   country_id: 47
   operator_id: 145
   is_active: true
@@ -3438,11 +2770,7 @@ Observation_168:
   id: 2249
   severity_id: 120
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 13:36:14.635321000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 13:36:14.635321000 Z
+  publication_date: 2022-06-06 13:36:14 UTC
   country_id: 47
   operator_id: 145
   pv: PV N°7 dressé par la DDEF-K après la mission OI
@@ -3465,11 +2793,7 @@ Observation_169:
   id: 2250
   severity_id: 124
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 13:48:44.062586000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 13:48:44.062586000 Z
+  publication_date: 2022-06-06 13:48:44 UTC
   country_id: 47
   operator_id: 145
   is_active: true
@@ -3491,11 +2815,7 @@ Observation_170:
   id: 2251
   severity_id: 128
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 13:41:49.405530000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 13:41:49.405530000 Z
+  publication_date: 2022-06-06 13:41:49 UTC
   country_id: 47
   operator_id: 145
   is_active: true
@@ -3516,11 +2836,7 @@ Observation_171:
   id: 2252
   severity_id: 72
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 14:20:04.935156000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 14:20:04.935156000 Z
+  publication_date: 2022-06-06 14:20:04 UTC
   country_id: 47
   operator_id: 145
   is_active: true
@@ -3542,11 +2858,7 @@ Observation_172:
   id: 2253
   severity_id: 52
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2022-06-06 13:43:03.553858000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2022-06-06 13:43:03.553858000 Z
+  publication_date: 2022-06-06 13:43:03 UTC
   country_id: 47
   operator_id: 145
   pv: PV N°5 dressé par la DDEF-K après la mission OI
@@ -3569,11 +2881,7 @@ Observation_173:
   id: 2311
   severity_id: 218
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-30 14:48:08.600137000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-30 14:48:08.600137000 Z
+  publication_date: 2023-11-30 14:48:08 UTC
   country_id: 7
   is_active: true
   subcategory_id: 55
@@ -3589,11 +2897,7 @@ Observation_174:
   id: 2312
   severity_id: 226
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-30 14:58:17.856548000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-30 14:58:17.856548000 Z
+  publication_date: 2023-11-30 14:58:17 UTC
   country_id: 7
   is_active: true
   subcategory_id: 57
@@ -3610,11 +2914,7 @@ Observation_175:
   id: 2313
   severity_id: 196
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-10 15:34:07.481658000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-10 15:34:07.481658000 Z
+  publication_date: 2023-11-10 15:34:07 UTC
   country_id: 7
   is_active: true
   subcategory_id: 49
@@ -3630,11 +2930,7 @@ Observation_176:
   id: 2314
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-06 13:08:44.875633000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-06 13:08:44.875633000 Z
+  publication_date: 2023-12-06 13:08:44 UTC
   country_id: 7
   is_active: true
   subcategory_id: 44
@@ -3650,11 +2946,7 @@ Observation_177:
   id: 2315
   severity_id: 193
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-10 15:33:41.319314000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-10 15:33:41.319314000 Z
+  publication_date: 2023-11-10 15:33:41 UTC
   country_id: 7
   is_active: true
   subcategory_id: 49
@@ -3670,11 +2962,7 @@ Observation_178:
   id: 2362
   severity_id: 119
   observation_type: operator
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-21 11:34:22.649579000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-21 11:34:22.649579000 Z
+  publication_date: 2023-12-21 11:34:22 UTC
   country_id: 7
   operator_id: 197
   is_active: true
@@ -3695,11 +2983,7 @@ Observation_179:
   id: 2363
   severity_id: 173
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-21 11:34:39.200347000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-21 11:34:39.200347000 Z
+  publication_date: 2023-12-21 11:34:39 UTC
   country_id: 7
   is_active: true
   subcategory_id: 44
@@ -3715,11 +2999,7 @@ Observation_180:
   id: 2368
   severity_id: 201
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-21 11:40:02.822013000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-21 11:40:02.822013000 Z
+  publication_date: 2023-12-21 11:40:02 UTC
   country_id: 7
   is_active: true
   subcategory_id: 51
@@ -3734,11 +3014,7 @@ Observation_181:
   id: 2369
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-15 14:45:21.613719000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-15 14:45:21.613719000 Z
+  publication_date: 2023-12-15 14:45:21 UTC
   country_id: 7
   is_active: true
   subcategory_id: 51
@@ -3753,11 +3029,7 @@ Observation_182:
   id: 2370
   severity_id: 203
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-15 14:46:43.491140000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-15 14:46:43.491140000 Z
+  publication_date: 2023-12-15 14:46:43 UTC
   country_id: 7
   is_active: true
   subcategory_id: 51
@@ -3772,11 +3044,7 @@ Observation_183:
   id: 2383
   severity_id: 188
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-13 09:41:24.439935000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-13 09:41:24.439935000 Z
+  publication_date: 2023-12-13 09:41:24 UTC
   country_id: 7
   is_active: true
   subcategory_id: 47
@@ -3792,11 +3060,7 @@ Observation_184:
   id: 2385
   severity_id: 228
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-13 09:46:17.371842000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-13 09:46:17.371842000 Z
+  publication_date: 2023-12-13 09:46:17 UTC
   country_id: 7
   is_active: true
   subcategory_id: 57
@@ -3811,11 +3075,7 @@ Observation_185:
   id: 2419
   severity_id: 184
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-06-12 12:50:45.185048000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-06-12 12:50:45.185048000 Z
+  publication_date: 2023-06-12 12:50:45 UTC
   country_id: 45
   is_active: true
   subcategory_id: 46
@@ -3837,11 +3097,7 @@ Observation_186:
   id: 2420
   severity_id: 245
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-06-12 12:52:52.322810000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-06-12 12:52:52.322810000 Z
+  publication_date: 2023-06-12 12:52:52 UTC
   country_id: 45
   is_active: true
   subcategory_id: 63
@@ -3868,11 +3124,7 @@ Observation_187:
   id: 2424
   severity_id: 173
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-06-12 12:48:01.119174000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-06-12 12:48:01.119174000 Z
+  publication_date: 2023-06-12 12:48:01 UTC
   country_id: 45
   is_active: true
   subcategory_id: 44
@@ -3902,11 +3154,7 @@ Observation_188:
   id: 2435
   severity_id: 174
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-06-12 12:49:09.194482000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-06-12 12:49:09.194482000 Z
+  publication_date: 2023-06-12 12:49:09 UTC
   country_id: 45
   is_active: true
   subcategory_id: 44
@@ -3937,11 +3185,7 @@ Observation_189:
   id: 2489
   severity_id: 228
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-10-31 12:34:22.847760000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-10-31 12:34:22.847760000 Z
+  publication_date: 2023-10-31 12:34:22 UTC
   country_id: 47
   is_active: true
   subcategory_id: 57
@@ -3956,11 +3200,7 @@ Observation_190:
   id: 2490
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-10-31 13:07:35.514262000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-10-31 13:07:35.514262000 Z
+  publication_date: 2023-10-31 13:07:35 UTC
   country_id: 47
   is_active: true
   subcategory_id: 44
@@ -3976,11 +3216,7 @@ Observation_191:
   id: 2491
   severity_id: 170
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-10-31 13:18:10.596832000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-10-31 13:18:10.596832000 Z
+  publication_date: 2023-10-31 13:18:10 UTC
   country_id: 47
   is_active: true
   subcategory_id: 43
@@ -3996,11 +3232,7 @@ Observation_192:
   id: 2492
   severity_id: 170
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-10-31 13:23:50.166153000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-10-31 13:23:50.166153000 Z
+  publication_date: 2023-10-31 13:23:50 UTC
   country_id: 47
   is_active: true
   subcategory_id: 43
@@ -4016,11 +3248,7 @@ Observation_193:
   id: 2493
   severity_id: 202
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-10-31 12:15:01.802989000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-10-31 12:15:01.802989000 Z
+  publication_date: 2023-10-31 12:15:01 UTC
   country_id: 47
   is_active: true
   subcategory_id: 51
@@ -4036,11 +3264,7 @@ Observation_194:
   id: 2494
   severity_id: 202
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-10-31 13:30:12.499130000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-10-31 13:30:12.499130000 Z
+  publication_date: 2023-10-31 13:30:12 UTC
   country_id: 47
   is_active: true
   subcategory_id: 51
@@ -4056,11 +3280,7 @@ Observation_195:
   id: 2536
   severity_id: 228
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-08 09:58:27.023519000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-08 09:58:27.023519000 Z
+  publication_date: 2023-11-08 09:58:27 UTC
   country_id: 47
   is_active: true
   subcategory_id: 57
@@ -4076,11 +3296,7 @@ Observation_196:
   id: 2543
   severity_id: 204
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-08 09:57:26.346356000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-08 09:57:26.346356000 Z
+  publication_date: 2023-11-08 09:57:26 UTC
   country_id: 47
   is_active: true
   subcategory_id: 51
@@ -4096,11 +3312,7 @@ Observation_197:
   id: 2579
   severity_id: 228
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-17 13:56:23.701575000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-17 13:56:23.701575000 Z
+  publication_date: 2023-11-17 13:56:23 UTC
   country_id: 47
   is_active: true
   subcategory_id: 57
@@ -4116,11 +3328,7 @@ Observation_198:
   id: 2581
   severity_id: 171
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-08 09:58:34.358914000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-08 09:58:34.358914000 Z
+  publication_date: 2023-11-08 09:58:34 UTC
   country_id: 47
   is_active: true
   subcategory_id: 43
@@ -4136,11 +3344,7 @@ Observation_199:
   id: 2582
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-17 13:56:43.437077000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-17 13:56:43.437077000 Z
+  publication_date: 2023-11-17 13:56:43 UTC
   country_id: 47
   is_active: true
   subcategory_id: 44
@@ -4156,11 +3360,7 @@ Observation_200:
   id: 2583
   severity_id: 223
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-17 13:56:34.271034000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-17 13:56:34.271034000 Z
+  publication_date: 2023-11-17 13:56:34 UTC
   country_id: 47
   is_active: true
   subcategory_id: 56
@@ -4176,11 +3376,7 @@ Observation_201:
   id: 2584
   severity_id: 228
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-06 12:37:22.369147000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-06 12:37:22.369147000 Z
+  publication_date: 2023-11-06 12:37:22 UTC
   country_id: 47
   is_active: true
   subcategory_id: 57
@@ -4196,11 +3392,7 @@ Observation_202:
   id: 2585
   severity_id: 172
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-06 13:06:21.864826000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-06 13:06:21.864826000 Z
+  publication_date: 2023-11-06 13:06:21 UTC
   country_id: 47
   is_active: true
   subcategory_id: 43
@@ -4216,11 +3408,7 @@ Observation_203:
   id: 2586
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-06 12:37:09.506704000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-06 12:37:09.506704000 Z
+  publication_date: 2023-11-06 12:37:09 UTC
   country_id: 47
   is_active: true
   subcategory_id: 44
@@ -4236,11 +3424,7 @@ Observation_204:
   id: 2587
   severity_id: 176
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-11-06 13:06:47.484053000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-11-06 13:06:47.484053000 Z
+  publication_date: 2023-11-06 13:06:47 UTC
   country_id: 47
   is_active: true
   subcategory_id: 44
@@ -4256,11 +3440,7 @@ Observation_205:
   id: 2634
   severity_id: 195
   observation_type: government
-  publication_date: !ruby/object:ActiveSupport::TimeWithZone
-    utc: 2023-12-13 09:47:28.254293000 Z
-    zone: !ruby/object:ActiveSupport::TimeZone
-      name: Etc/UTC
-    time: 2023-12-13 09:47:28.254293000 Z
+  publication_date: 2023-12-13 09:47:28 UTC
   country_id: 7
   is_active: true
   subcategory_id: 49

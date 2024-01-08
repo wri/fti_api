@@ -6,7 +6,7 @@ class SeedsTasks
   OPERATORS = %w[ifo-interholco cfc sifco lorema siencam cib cft mokabi-sa afriwood-industries]
   EXTRA_FMUS = %w[08-003 08-005 08-009]
 
-  DATE_FIELDS = %w[created_at updated_at deleted_at operator_document_updated_at operator_document_created_at]
+  DATE_FIELDS = %w[created_at updated_at deleted_at operator_document_updated_at operator_document_created_at publication_date response_date]
 
   def initialize
     namespace :seeds do
