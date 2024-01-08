@@ -2,7 +2,7 @@
 require "active_record/fixtures"
 
 fixtures_dir = File.join(Rails.root, "db", "fixtures")
-fixture_files = Dir["#{fixtures_dir}/**/*.yml"].map { |f| f[(fixtures_dir.size + 1)..-5] }
+fixture_files = Dir["#{fixtures_dir}/**/*.yml"].pluck((fixtures_dir.size + 1)..-5)
 
 $stdout.puts "Loading fixtures..."
 # NOTE: in case of integrity errors, check config/initializers/active_record_fixtures.rb for monkey patch to get better error messages

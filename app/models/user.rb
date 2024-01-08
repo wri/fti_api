@@ -37,9 +37,9 @@ class User < ApplicationRecord
 
   # Include default devise modules.
   TEMP_EMAIL_REGEX = /\Achange@tmp/
-  PERMISSIONS = %w(operator ngo ngo_manager government)
+  PERMISSIONS = %w[operator ngo ngo_manager government]
 
-  enum permissions_request: { operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7 }
+  enum permissions_request: {operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7}
 
   belongs_to :country, inverse_of: :users, optional: true
 
