@@ -49,9 +49,7 @@ class Observation < ApplicationRecord
   translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
 
-  enum evidence_type: {
-    "No Evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2
-  }
+  enum evidence_type: {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
   enum observation_type: {"operator" => 0, "government" => 1}
   enum validation_status: {"Created" => 0, "Ready for QC" => 1, "QC in progress" => 2, "Approved" => 3,
                            "Rejected" => 4, "Needs revision" => 5, "Ready for publication" => 6,
