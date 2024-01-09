@@ -6,7 +6,6 @@ class ObservationDocumentUploader < ApplicationUploader
   end
 
   def filename
-    return super if model.observation.nil?
     return if super.blank?
 
     filename = if model.name.present?
