@@ -13,7 +13,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     let!(:observation) { create(:gov_observation) }
 
     before do
-      create(:observation_document, observation: observation)
+      create(:observation_document, observations: [observation])
     end
 
     describe "GET index" do

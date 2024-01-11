@@ -3,7 +3,7 @@ require "rails_helper"
 module V1
   describe "Observation Documents", type: :request do
     let(:user) { create(:user) }
-    let(:observation) { create(:observation) }
+    let(:observation_report) { create(:observation_report) }
 
     # TODO: add attachment
     let(:document_data) {
@@ -15,7 +15,7 @@ module V1
       create: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: -> { {name: "Document one", relationships: {user: user.id, observation: observation.id}} }
+        valid_params: -> { {name: "Document one", relationships: {user: user.id, observation_report: observation_report.id}} }
       },
       edit: {
         success_roles: %i[admin],

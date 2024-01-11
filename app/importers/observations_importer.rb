@@ -5,7 +5,7 @@ class ObservationsImporter < FileDataImport::BaseImporter
   PERMITTED_ATTRIBUTES = %i[
     observation_type publication_date pv is_active location_accuracy
     lat lng fmu_id location_information actions_taken
-    evidence_on_report validation_status is_physical_place user_id
+    evidence_type evidence_on_report validation_status is_physical_place user_id
     observer_ids
   ].freeze
 
