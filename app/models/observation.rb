@@ -45,6 +45,7 @@ class Observation < ApplicationRecord
   include Translatable
   include Activable
   include ValidationHelper
+  include ObservationOldAttributes
 
   translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
