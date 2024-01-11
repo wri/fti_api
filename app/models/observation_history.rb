@@ -33,7 +33,6 @@ class ObservationHistory < ApplicationRecord
                            "Rejected" => 4, "Needs revision" => 5, "Ready for publication" => 6,
                            "Published (no comments)" => 7, "Published (not modified)" => 8,
                            "Published (modified)" => 9}
-  enum evidence_type: {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
   enum location_accuracy: {"Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
                            "Accurate GPS coordinates" => 2}
   enum fmu_forest_type: ForestType::TYPES_WITH_CODE

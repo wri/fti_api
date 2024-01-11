@@ -197,7 +197,13 @@ class Observation < ApplicationRecord
     super + "-" + Globalize.locale.to_s
   end
 
-  HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type evidence_type location_accuracy validation_status is_active hidden deleted_at]
+  def update_reports_observers
+    return if observation_report.blank?
+
+    observation_report.update_observers
+  end
+
+  HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type location_accuracy validation_status is_active hidden deleted_at]
 
   # Creates an ObservationHistory for the current Observation
   def create_history
