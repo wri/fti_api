@@ -62,6 +62,8 @@ class Observation < ApplicationRecord
 
   validate_enum_attributes :evidence_type, :observation_type, :location_accuracy
 
+  AUTOMATICALLY_TRANSLATABLE_FIELDS = %w[details concern_opinion litigation_status]
+
   STATUS_TRANSITIONS = {
     monitor: {
       "Created" => ["Ready for QC"],
@@ -84,6 +86,7 @@ class Observation < ApplicationRecord
   ].freeze
 
   attr_accessor :user_type
+  attr_accessor :force_translations_from
 
   belongs_to :country, inverse_of: :observations
   belongs_to :severity, inverse_of: :observations, optional: true
@@ -155,6 +158,7 @@ class Observation < ApplicationRecord
 
   after_save :remove_documents, if: -> { evidence_type != "Uploaded documents" }
   after_save :update_fmu_geojson
+  after_save :force_translations
 
   after_commit :notify_about_creation, on: :create
   after_commit :notify_about_changes, if: :saved_change_to_validation_status?
@@ -369,5 +373,12 @@ class Observation < ApplicationRecord
         ObservationMailer.send(mail_template, self, user).deliver_later
       end
     end
+  end
+
+  def force_translations
+    return unless published?
+    return unless I18n.locale_available? force_translations_from
+
+    TranslationJob.perform_later(self, force_translations_from)
   end
 end

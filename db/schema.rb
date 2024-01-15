@@ -534,6 +534,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_144714) do
     t.text "concern_opinion"
     t.string "litigation_status"
     t.datetime "deleted_at", precision: nil
+    t.string "details_translated_from"
+    t.string "concern_opinion_translated_from"
+    t.string "litigation_status_translated_from"
     t.index ["deleted_at"], name: "index_observation_translations_on_deleted_at"
     t.index ["locale"], name: "index_observation_translations_on_locale"
     t.index ["observation_id"], name: "index_observation_translations_on_observation_id"

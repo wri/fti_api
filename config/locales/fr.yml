@@ -393,6 +393,9 @@ fr:
       orphaned: 'Orphelin'
       details: "Détails de l'annexe du document de l'opérateur"
     observations_page:
+      translate_from: 'Traduire de'
+      force_translations: 'Forcer les traductions de:'
+      translating_observation: "L’observation est en cours de traduction. Veuillez recharger la page dans quelques minutes."
       not_modified: 'Observation NON modifiée'
       performed_qc: 'Contrôle qualité effectué'
       moved_ready: 'Observation déplacée vers Prêt pour publication'

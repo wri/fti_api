@@ -384,6 +384,9 @@ en:
       orphaned: 'Orphaned'
       details: 'Operator Document Annex Details'
     observations_page:
+      translate_from: 'Translate from'
+      force_translations: 'Force translations from:'
+      translating_observation: 'The observation is being translated. Please reload the page in a few minutes.'
       not_modified: 'Observation NOT modified'
       performed_qc: 'Quality Control performed'
       moved_ready: 'Observation moved to Ready for Publication'
