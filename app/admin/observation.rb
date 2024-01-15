@@ -62,7 +62,7 @@ ActiveAdmin.register Observation do
             :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
             :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
             :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :admin_comment,
-            :monitor_comment, :actions_taken, :is_physical_place,
+            :monitor_comment, :actions_taken, :is_physical_place, :admin_locale,
             relevant_operator_ids: [], government_ids: [],
             observation_documents_attributes: [:id, :name, :attachment],
             translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
@@ -100,6 +100,20 @@ ActiveAdmin.register Observation do
       redirect_to perform_qc_admin_observation_path(resource), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
     else
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
+    end
+  end
+
+  member_action :force_translations do
+    translate_to = params[:translate_to] || I18n.locale
+    TranslationJob.perform_later(resource, translate_to)
+    redirect_to admin_observation_path(resource), notice: I18n.t("active_admin.observations_page.translating_observation")
+  end
+
+  action_item :force_translations, only: :show do
+    dropdown_menu I18n.t("active_admin.observations_page.force_translations") do
+      I18n.available_locales.each do |locale|
+        item locale, force_translations_admin_observation_path(observation, translate_to: locale)
+      end
     end
   end
 
@@ -178,6 +192,7 @@ ActiveAdmin.register Observation do
   scope -> { I18n.t("active_admin.observations_page.scope_hidden") }, :hidden
   scope -> { I18n.t("active_admin.observations_page.visible") }, :visible
 
+  # region filters
   filter :id, as: :numeric_range
   filter :validation_status,
     as: :select,
@@ -200,6 +215,7 @@ ActiveAdmin.register Observation do
   filter :publication_date
   filter :updated_at
   filter :deleted_at
+  # endregion
 
   dependent_filters do
     {
@@ -581,10 +597,20 @@ ActiveAdmin.register Observation do
     end
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
+      div do
+        f.input :admin_locale, label:  I18n.t("active_admin.observations_page.translate_from"),
+                as: :select,
+                collection: I18n.available_locales,
+                include_blank: true,
+                input_html: {class: "translate_from"}
+      end
       f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :details, **visibility
+        t.input :details_translated_from, input_html: {disabled: true}
         t.input :concern_opinion, **visibility
+        t.input :concern_opinion_translated_from, input_html: {disabled: true}
         t.input :litigation_status, **visibility
+        t.input :litigation_status_translated_from, input_html: {disabled: true}
       end
     end
     f.actions
