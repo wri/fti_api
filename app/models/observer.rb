@@ -36,7 +36,8 @@ class Observer < ApplicationRecord
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
 
-  has_and_belongs_to_many :countries
+  has_many :countries_observers
+  has_many :countries, through: :countries_observers
 
   has_many :observer_observations, dependent: :restrict_with_error
   has_many :observations, through: :observer_observations

@@ -1,11 +1,11 @@
 
-Donor_1_zh-CN_translation:
+Donor_4_zh-CN_translation:
   contributor_id: 4
   locale: zh-CN
   name: UK Department of International Development (DFID)
   description: 英国援助直通车项目的目标是支持民间组织在减贫和完成全球目标上贡献力量。这个新项目关注最脆弱和被边缘化的群体，特别是妇女和女童，实现“一个都不能少”。英国援助直通车项目反映了更广的战略目标：加强全球和平，安全和治理，提高韧性和在应对危机能力，促进全球繁荣，减少极端贫困和帮助世界上最脆弱的群体。
 
-Donor_1_vi_translation:
+Donor_4_vi_translation:
   contributor_id: 4
   locale: vi
   name: Bộ Phát triển Quốc tế Vương quốc Anh (DFID)
@@ -19,7 +19,7 @@ Donor_1_vi_translation:
     – thúc đẩy thịnh vượng toàn cầu – hỗ trợ giải quyết tình trạng nghèo đói và giúp
     đỡ những nhóm người dễ bị tổn thương nhất trên thế giới. '
 
-Donor_1_ja_translation:
+Donor_4_ja_translation:
   contributor_id: 4
   locale: ja
   name: イギリス国際開発省（DFID）
@@ -28,7 +28,7 @@ Donor_1_ja_translation:
     Aid Directの優先事項は、の以下の幅広い戦略目標を反映しています：\r\n- 世界の平和、安全保障、ガバナンスの強化 \r\n- 危機に対する回復力と対応力の強化
     \r\n- 世界の繁栄の促進 \r\n- 極端な貧困への取り組み\r\n- 世界で最も弱い立場にある人々への支援。"
 
-Donor_1_en_translation:
+Donor_4_en_translation:
   contributor_id: 4
   locale: en
   name: UK Foreign, Commonwealth & Development Office
@@ -41,7 +41,7 @@ Donor_1_en_translation:
     global prosperity\r\nTackling extreme poverty and helping the world’s most vulnerable\r\nDelivering
     value for money"
 
-Donor_1_ko_translation:
+Donor_4_ko_translation:
   contributor_id: 4
   locale: ko
   name: 영국 국제개발부(UK Department of International Development (DFID))
@@ -51,7 +51,7 @@ Donor_1_ko_translation:
     반영합니다.\r\n- 세계 평화·안보·거버넌스 강화\r\n- 위기에 대한 탄력성 및 대응 강화\r\n- 국제사회의 번영 촉진\r\n- 극심한
     빈곤 해결 및 세계에서 \r\n- 가장 취약한 계층 지원   \r\n"
 
-Donor_1_fr_translation:
+Donor_4_fr_translation:
   contributor_id: 4
   locale: fr
   name: UK Department of International Development (DFID)
@@ -65,7 +65,7 @@ Donor_1_fr_translation:
     promouvoir la prospérité mondiale\r\n- lutter contre l'extrême pauvreté et aider
     les plus vulnérables du monde."
 
-Donor_1_pt_translation:
+Donor_4_pt_translation:
   contributor_id: 4
   locale: pt
   name: UK Foreign, Commonwealth & Development Office
@@ -79,7 +79,7 @@ Donor_1_pt_translation:
     pobreza extrema e assistência aos mais vulneráveis no planeta\r\nProporcionar
     uma boa relação custo-benefício"
 
-Donor_2_en_translation:
+Donor_5_en_translation:
   contributor_id: 5
   locale: en
   name: 'Norwegian Ministry of Climate and Environment '
@@ -92,7 +92,7 @@ Donor_2_en_translation:
     and forest degradation.\r\n\r\n3. To promote the conservation of primary forests,
     due to their particular importance as carbon stores and for their biological diversity."
 
-Donor_2_fr_translation:
+Donor_5_fr_translation:
   contributor_id: 5
   locale: fr
   name: 'Norwegian Ministry of Climate and Environment '
@@ -107,7 +107,7 @@ Donor_2_fr_translation:
     Promouvoir la conservation des forêts primaires, en raison de leur importance
     particulière en tant que réserves de carbone et de leur diversité biologique."
 
-Donor_2_zh-CN_translation:
+Donor_5_zh-CN_translation:
   contributor_id: 5
   locale: zh-CN
   name: 挪威国际气候与森林倡议
@@ -115,7 +115,7 @@ Donor_2_zh-CN_translation:
     推进减少发展中国家毁林和森林退化所致排放量加上森林可持续管理以及保护和加强森林碳储量(REDD+)纳入联合国气候变化框架公约（UNFCCC）。\r\n\r\n2.
     支持减少发展中国家毁林和森林退化所致排放的早期行动。\r\n\r\n3. 支持原始森林的保护，原始森林在碳储存和维护生物多样性上有特别重要性。"
 
-Donor_2_vi_translation:
+Donor_5_vi_translation:
   contributor_id: 5
   locale: vi
   name: Bộ Khí hậu và Môi trường Na Uy
@@ -129,7 +129,7 @@ Donor_2_vi_translation:
     sinh do tầm quan trọng của các khu rừng này đối với lưu trữ các-bon và đa dạng
     sinh học"
 
-Donor_2_ja_translation:
+Donor_5_ja_translation:
   contributor_id: 5
   locale: ja
   name: ノルウェー気候・環境省
@@ -137,7 +137,7 @@ Donor_2_ja_translation:
     国連気候変動枠組条約（UNFCCC）にREDD+を含めることに貢献する。\r\n\r\n2. 森林減少・劣化による排出の測定可能な削減のための早期行動に貢献する。\r\n\r\n3.
     炭素貯蔵庫として、また生物多様性への重要さから、原生林の保全を推進する。"
 
-Donor_2_ko_translation:
+Donor_5_ko_translation:
   contributor_id: 5
   locale: ko
   name: 노르웨이 기후환경부
@@ -147,7 +147,7 @@ Donor_2_ko_translation:
     산림전용과 산림황폐화로부터 발생하는 탄소배출에 대한 가시적인 감축을 위한 신속한 조치에 기여한다. \r\n\r\n3. 탄소 저장과 생물다양성에
     중요한 역할을 하는 천연림 보전을 증진한다.\r\n"
 
-Donor_2_pt_translation:
+Donor_5_pt_translation:
   contributor_id: 5
   locale: pt
   name: 'Norwegian Ministry of Climate and Environment '
@@ -161,7 +161,7 @@ Donor_2_pt_translation:
     Promover a conservação das florestas virgens, pela sua particular importância
     como estoques de carbono e pela sua diversidade biológica."
 
-Donor_3_en_translation:
+Donor_6_en_translation:
   contributor_id: 6
   locale: en
   name: EU
@@ -171,7 +171,7 @@ Donor_3_en_translation:
     external action – alongside foreign, security and trade policy and international
     aspects of other policies like environment, agriculture and fisheries.
 
-Donor_3_fr_translation:
+Donor_6_fr_translation:
   contributor_id: 6
   locale: fr
   name: UE
@@ -182,19 +182,19 @@ Donor_3_fr_translation:
     aux politiques étrangère, de sécurité et commerciale et aux aspects internationaux
     d'autres politiques telles que l'environnement, l'agriculture et la pêche.
 
-Donor_3_zh-CN_translation:
+Donor_6_zh-CN_translation:
   contributor_id: 6
   locale: zh-CN
   name: UE
   description: '欧盟发展政策旨在促进发展中国家的可持续发展，消除贫困。它是欧盟和外部国家和地区关系的基石，同时也促进欧盟外部行动的相关目标。这些外部行动包括外交，安全和贸易政策以及其他环境，农业和渔业政策的国际层面等。 '
 
-Donor_3_ja_translation:
+Donor_6_ja_translation:
   contributor_id: 6
   locale: ja
   name: 欧州連合（EU）
   description: EUの開発政策は、貧困撲滅を第一の目的として、開発途上国の持続可能な発展を促進することを目指しています。開発政策は、EUの対外関係の要であり、外交、安全保障、貿易政策、環境、農業、漁業などの他の政策の国際的側面と並んで、EUの対外行動の目的に貢献しています。
 
-Donor_3_ko_translation:
+Donor_6_ko_translation:
   contributor_id: 6
   locale: ko
   name: 유럽연합(EU)
@@ -202,7 +202,7 @@ Donor_3_ko_translation:
     EU의 관계에 초석이 되고 있으며 외부·안보·무역 정책과, 환경, 농업, 수산업 등 여러 정책의 국제 정세에 따라 EU 외부 활동의 목적에
     기여합니다. '
 
-Donor_3_vi_translation:
+Donor_6_vi_translation:
   contributor_id: 6
   locale: vi
   name: Liên minh châu Âu (EU)
@@ -213,7 +213,7 @@ Donor_3_vi_translation:
     tế khác về môi trường, nông nghiệp, ngư nghiệp, chính sách nói trên cũng đóng
     góp tích cực vào việc thực hiện các mục tiêu đối ngoại của EU.
 
-Donor_3_pt_translation:
+Donor_6_pt_translation:
   contributor_id: 6
   locale: pt
   name: UE
@@ -224,7 +224,7 @@ Donor_3_pt_translation:
     externa e de segurança e os aspetos internacionais de outras políticas, como o
     meio ambiente, a agricultura e as pescas.
 
-Donor_4_en_translation:
+Donor_25_en_translation:
   contributor_id: 25
   locale: en
   name: Bureau of Internal Narcotics & Law Enforcement (INL)
@@ -235,7 +235,7 @@ Donor_4_en_translation:
     drugs, or endangered wildlife. INL combats corruption by helping governments and
     civil society build transparent and accountable public institutions.
 
-Donor_4_fr_translation:
+Donor_25_fr_translation:
   contributor_id: 25
   locale: fr
   name: Le Bureau international chargé de la lutte contre les stupéfiants et de l'application
@@ -249,7 +249,7 @@ Donor_4_fr_translation:
     menacées. INL combat la corruption en aidant les gouvernements et la société civile
     à mettre en place des institutions publiques transparentes et responsables.
 
-Donor_4_vi_translation:
+Donor_25_vi_translation:
   contributor_id: 25
   locale: vi
   name: Cục Phòng chống ma tuý nội bộ và Thực thi Pháp luật (INL)
@@ -261,14 +261,14 @@ Donor_4_vi_translation:
     chống tham nhũng bằng cách giúp các chính phủ và xã hội dân sự xây dựng các thể
     chế công minh bạch và có trách nhiệm.
 
-Donor_4_zh-CN_translation:
+Donor_25_zh-CN_translation:
   contributor_id: 25
   locale: zh-CN
   name: 国际毒品与执法事务局 (INL)
   description: 美国国务院的国际毒品与执法事务局 (INL) 通过帮助外国政府建立有效的执法机构，以打击跨国犯罪——包括洗钱、网络犯罪、知识产权盗窃和贩运货物、人员、武器、毒品或濒危野生动物。INL
     通过帮助政府和公民社会建立透明且负责任的公共机构来打击腐败。
 
-Donor_4_pt_translation:
+Donor_25_pt_translation:
   contributor_id: 25
   locale: pt
   name: Bureau of International Narcotics and Law Enforcement Affairs (INL) [Gabinete
@@ -280,13 +280,13 @@ Donor_4_pt_translation:
     a corrupção ajudando os governos e a sociedade civil a criar instituições públicas
     transparentes e responsáveis.
 
-Donor_4_ja_translation:
+Donor_25_ja_translation:
   contributor_id: 25
   locale: ja
   name: アメリカ合衆国国務省国際麻薬・法執行局（INL)
   description: 国務省の国際麻薬・法執行局（INL）は、マネーロンダリング、サイバー犯罪、知的財産の侵害から、商品、人、武器、麻薬、絶滅危惧野生生物の取引まで、あらゆる国際犯罪に対抗できる効果的な法執行機関を外国政府が構築できるよう支援することにより、犯罪撲滅に取り組んでいます。INLは、政府や市民社会による透明で説明責任のある公的機関の構築を支援することで、汚職と闘っています。
 
-Donor_4_ko_translation:
+Donor_25_ko_translation:
   contributor_id: 25
   locale: ko
   name: 내부 마약 및 법 집행국(INL)

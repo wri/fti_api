@@ -1,0 +1,55 @@
+
+ObservationOperator_128:
+  id: 128
+  observation_id: 856
+  operator_id: 161
+
+ObservationOperator_129:
+  id: 129
+  observation_id: 848
+  operator_id: 172
+
+ObservationOperator_180:
+  id: 180
+  observation_id: 2246
+  operator_id: 145
+
+ObservationOperator_181:
+  id: 181
+  observation_id: 2247
+  operator_id: 145
+
+ObservationOperator_182:
+  id: 182
+  observation_id: 2248
+  operator_id: 145
+
+ObservationOperator_183:
+  id: 183
+  observation_id: 2249
+  operator_id: 145
+
+ObservationOperator_184:
+  id: 184
+  observation_id: 2250
+  operator_id: 145
+
+ObservationOperator_185:
+  id: 185
+  observation_id: 2251
+  operator_id: 145
+
+ObservationOperator_186:
+  id: 186
+  observation_id: 2252
+  operator_id: 145
+
+ObservationOperator_187:
+  id: 187
+  observation_id: 2253
+  operator_id: 145
+
+ObservationOperator_348:
+  id: 348
+  observation_id: 2543
+  operator_id: 151

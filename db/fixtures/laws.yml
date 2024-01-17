@@ -47,7 +47,7 @@ Law_3:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_4:
+Law_5:
   id: 5
   written_infraction: marquage non conforme
   infraction: Art. 66 al.3 et 67  de l'arrêté 084/2016 portant conditions et règles
@@ -63,7 +63,7 @@ Law_4:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_5:
+Law_6:
   id: 6
   written_infraction: Abattage/exploitation  des arbres (essences) autres que ceux
     mentionnés sur la décision de coupe
@@ -79,7 +79,7 @@ Law_5:
   country_id: 47
   currency: CFA
 
-Law_6:
+Law_7:
   id: 7
   written_infraction: Coupe non autorisée
   infraction: Art. 65 de l'arrêté 050 au point 5 (abrogé en octobre 2016)-Art. 97
@@ -97,7 +97,7 @@ Law_6:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_7:
+Law_8:
   id: 8
   written_infraction: Coupe dans une zone interdite
   infraction: Art. 38 du CF-Article 64 point 7 de l'arrêté 084/2016 portant conditions
@@ -111,7 +111,7 @@ Law_7:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_8:
+Law_9:
   id: 9
   written_infraction: |-
     "Création d'une société d'exploitation forestière ayant pour
@@ -130,7 +130,7 @@ Law_8:
   country_id: 45
   currency: FCFA
 
-Law_9:
+Law_10:
   id: 10
   written_infraction: Abattage (coupe) des arbres (essences) en dehors des limites
     de la concession ou de l'assiette de coupe annuelle
@@ -147,7 +147,7 @@ Law_9:
   country_id: 47
   currency: CFA par m3
 
-Law_10:
+Law_11:
   id: 11
   written_infraction: Coupe en dehors des limites
   infraction: Art. 65 de l'arrêté 050/2015 point 1 (Valable depuis 2015); Art 42 de
@@ -165,7 +165,7 @@ Law_10:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_11:
+Law_12:
   id: 12
   written_infraction: 'Exploitation au-delà des limites de la concession forestière
     et/ou du volume et de la période accordée      '
@@ -183,7 +183,7 @@ Law_11:
   country_id: 45
   currency: FCFA
 
-Law_12:
+Law_13:
   id: 13
   written_infraction: Abattage/coupe des arbres sous diamètres fixés par les textes
     réglementaires et le plan d'aménagement
@@ -199,7 +199,7 @@ Law_12:
   country_id: 47
   currency: CFA
 
-Law_13:
+Law_14:
   id: 14
   written_infraction: Coupe en dessous du DME
   infraction: Art. 65 de l’arrêté 050/2015 point 1 (Valable depuis 2015)-Art 42 de
@@ -217,7 +217,7 @@ Law_13:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_14:
+Law_15:
   id: 15
   written_infraction: Déboisement sans titre  /  au-delà du délais règlementaire
   infraction: Article 31 alinéa 3 de la loi n°16-2000
@@ -228,7 +228,7 @@ Law_14:
   country_id: 47
   currency: FCFA
 
-Law_15:
+Law_16:
   id: 16
   written_infraction: Défaut de marquage sur les billes, les culées et les souches
   infraction: Article 86 Decret 2002 / 437
@@ -243,7 +243,7 @@ Law_15:
   country_id: 47
   currency: FCFA
 
-Law_16:
+Law_17:
   id: 17
   written_infraction: Déboisement sans autorisation
   infraction: Article 53 du CF
@@ -257,7 +257,7 @@ Law_16:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_17:
+Law_18:
   id: 18
   written_infraction: Non matérialisation des limites sur le terrain  suivant la règlementation
     en vigueur (layons limitrophes de la concession forestière (UFA/UFE) ou de l'assiette
@@ -275,7 +275,7 @@ Law_17:
   country_id: 47
   currency: FCFA
 
-Law_18:
+Law_19:
   id: 19
   written_infraction: Non matérialisation des limites AAC
   infraction: Art. 5 alinéa  4 de l'arrêté ministériel 011/2007 (abrogé en 2015) -Art.
@@ -295,7 +295,7 @@ Law_18:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_19:
+Law_20:
   id: 20
   written_infraction: 'Défaut, non paiement des amendes '
   infraction: Art 138 du code forestier-Art 7 de l'arrêté 104/2009 fixant les procédures
@@ -311,7 +311,7 @@ Law_19:
   country_id: 7
   currency: Franc Congolais
 
-Law_20:
+Law_21:
   id: 21
   written_infraction: Non payement des taxes en matière forestière et redevances  à
     l'échéance convenue
@@ -327,7 +327,7 @@ Law_20:
   country_id: 47
   currency: FCFA
 
-Law_21:
+Law_22:
   id: 22
   written_infraction: Défaut, Non paiement des taxes forestières
   infraction: Art. 122 code forestier (superficie); Art. 120 code forestier (abattage,
@@ -346,7 +346,7 @@ Law_21:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_22:
+Law_23:
   id: 23
   written_infraction: 'Le paiement des taxes et redevances en dehors des délais '
   infraction: 'Article 122 du Code Forestier, Articles 9 au point 6 annexe 1 de l''arrêté
@@ -362,7 +362,7 @@ Law_22:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_23:
+Law_24:
   id: 24
   written_infraction: 'Mauvaise tenue  du cahier de chantier/ Mauvaise tenue des documents
     de chantier /Non mis à jour du cahier de chantier / '
@@ -378,7 +378,7 @@ Law_23:
   country_id: 47
   currency: FCFA
 
-Law_24:
+Law_25:
   id: 25
   written_infraction: Défaut de tenue des documents
   infraction: Article 70, 76-78 de l'arrêté 084 portant règles d'exploitation de bois
@@ -396,7 +396,7 @@ Law_24:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_25:
+Law_26:
   id: 26
   written_infraction: Non transmission dans les délais ou refus de transmission des
     états de production, des états des bois entrés usines, des états de produits usinés,
@@ -412,7 +412,7 @@ Law_25:
   country_id: 47
   currency: FCFA
 
-Law_26:
+Law_27:
   id: 27
   written_infraction: Non transmission de documents d'exploitation (Déclarations Trimestrielles)
   infraction: Articles 61 et 62 de l'arrêté 035 relatif à l'exploitation forestière
@@ -431,7 +431,7 @@ Law_26:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_27:
+Law_28:
   id: 28
   written_infraction: Défaut sur documents de transformation de bois
   infraction: Article 7 de l'arrêté 084/2016 portant conditions et règles d'exploitation
@@ -446,7 +446,7 @@ Law_27:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_28:
+Law_29:
   id: 29
   written_infraction: Défaut sur le recrutement ou la gestion du personnel
   infraction: 'Art 9, 10 et 11 Al.3  de l''arrêté ministériel N° 021/CAB/MIN/ECN-T/15/JEB/2008
@@ -465,7 +465,7 @@ Law_28:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_29:
+Law_30:
   id: 30
   written_infraction: Exploitation d’un nombre de pieds supérieurs à celui indiqué
     dans la coupe annuelle
@@ -481,7 +481,7 @@ Law_29:
   country_id: 47
   currency: CFA
 
-Law_30:
+Law_31:
   id: 31
   written_infraction: Dépassement de volume
   infraction: Art 19 de l'arrêté 035/2006 relatif à l'exploitation forestière (valide
@@ -499,7 +499,7 @@ Law_30:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_31:
+Law_32:
   id: 32
   written_infraction: Exploitation forestière en violation de la loi et de ses mesures
     d'exécution
@@ -518,7 +518,7 @@ Law_31:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_32:
+Law_33:
   id: 33
   written_infraction: Contrefaction et Falsification du marteau forestier de la société,
     de ses marques régulièrement déposées, application ou usage frauduleux
@@ -532,7 +532,7 @@ Law_32:
   country_id: 47
   currency: FCFA
 
-Law_33:
+Law_34:
   id: 34
   written_infraction: Contrefait ou falsifie les marques régulièrement déposées, fait
     usage de marteau contrefait ou falsifié, ou, s'étant indûment procuré le marteau
@@ -551,7 +551,7 @@ Law_33:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_34:
+Law_35:
   id: 35
   written_infraction: Contrefait ou falsifie les marques régulièrement déposées, fait
     usage de marteau contrefait ou falsifié, ou, s'étant indûment procuré le marteau
@@ -569,7 +569,7 @@ Law_34:
   country_id: 7
   currency: Franc congolais constant
 
-Law_35:
+Law_36:
   id: 36
   written_infraction: 'Lorsque ces marteaux servant de marque de l''administration
     chargée des forêts:  Contrefait ou falsifie les marques régulièrement déposées,
@@ -583,7 +583,7 @@ Law_35:
   subcategory_id: 18
   country_id: 7
 
-Law_36:
+Law_37:
   id: 37
   written_infraction: Exploitation/évacuation hors délai
   infraction: Art 62 de l'arrêté 050/2015 (valable jusqu'en octobre 2016)-Article
@@ -600,7 +600,7 @@ Law_36:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_37:
+Law_38:
   id: 38
   written_infraction: 'Exercice de la profession de la forêt et du bois sans agrément
     délivré par le Ministre chargé de l''économie forestière '
@@ -615,7 +615,7 @@ Law_37:
   country_id: 47
   currency: FCFA
 
-Law_38:
+Law_39:
   id: 39
   written_infraction: Exploitation sans agrément valable
   infraction: Art. 3, 8, 24 arrêté ministériel 035 (valable jusqu'en 2015); Art. 97
@@ -632,7 +632,7 @@ Law_38:
   country_id: 7
   currency: Franc congolis constant
 
-Law_39:
+Law_40:
   id: 40
   written_infraction: Exploitation du bois sans titre d'exploitation (PS) signé par
     le Directeur Départemental de l'Economie
@@ -648,7 +648,7 @@ Law_39:
   country_id: 47
   currency: CFA par m3
 
-Law_40:
+Law_41:
   id: 41
   written_infraction: Exploitation sans convention avec les communautés locales
   infraction: Article 112 Code Forestier
@@ -664,7 +664,7 @@ Law_40:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_41:
+Law_42:
   id: 42
   written_infraction: Exploite les produits forestiers sans autorisation requise
   infraction: Article 97 du code forestier
@@ -679,7 +679,7 @@ Law_41:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_42:
+Law_43:
   id: 43
   written_infraction: Exploitation forestière sans une autorisation appropriée.
   infraction: Article 97 Code forestier
@@ -693,7 +693,7 @@ Law_42:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_43:
+Law_44:
   id: 44
   written_infraction: Exploitation sans autorisation
   infraction: Art. 95 alinéa 1 du code forestier; Art. 97 du Code Forestier, Art.
@@ -710,7 +710,7 @@ Law_43:
   country_id: 7
   currency: '500000'
 
-Law_44:
+Law_45:
   id: 45
   written_infraction: Commencement  de l'exploitation sans avoir reçu de l'autorité
     compétente l'autorisation de coupe annuelle
@@ -727,7 +727,7 @@ Law_44:
   country_id: 47
   currency: FCFA
 
-Law_45:
+Law_46:
   id: 46
   written_infraction: Exploitation sans contrat de concession forestière
   infraction: Art. 8 de l'arrêté 036 décrivant le contenu du et plan d'aménagement-Article
@@ -743,7 +743,7 @@ Law_45:
   country_id: 7
   currency: '500000'
 
-Law_46:
+Law_47:
   id: 47
   written_infraction: Exportation sans autorisation
   infraction: article 82 al 2 arrêté 050/2015 (abrogé depuis octobre 2016)
@@ -757,7 +757,7 @@ Law_46:
   country_id: 7
   currency: Franc Congolais constant
 
-Law_47:
+Law_48:
   id: 48
   written_infraction: Exportation sans autorisation
   infraction: article 82 al 2 arrêté 050/2016 (abrogé depuis octobre 2015)
@@ -771,7 +771,7 @@ Law_47:
   country_id: 7
   currency: Franc congolais constant
 
-Law_48:
+Law_49:
   id: 49
   written_infraction: Exporte des essences en violation des restrictions instituées
     par les mesures d'exécution de la présente loi
@@ -782,7 +782,7 @@ Law_48:
   subcategory_id: 25
   country_id: 7
 
-Law_49:
+Law_50:
   id: 50
   written_infraction: Non paiement
   infraction: Art 122 du Code Forestier
@@ -796,7 +796,7 @@ Law_49:
   country_id: 7
   currency: Franc congolais constant
 
-Law_50:
+Law_51:
   id: 51
   written_infraction: Absence de l'ancrage
   infraction: Art 72 de l'arrêté 050/2015-Art 54, 55 arrêté 035/2006 (valable jusqu'en
@@ -811,13 +811,13 @@ Law_50:
   country_id: 7
   currency: Franc congolais constant
 
-Law_51:
+Law_52:
   id: 52
   infraction: Article 31 al 1 de la loi 16-2000,
   subcategory_id: 28
   country_id: 47
 
-Law_52:
+Law_53:
   id: 53
   written_infraction: Dégrade un écosystème, déboise dans une zone à risque d'érosion
   infraction: Art 2 pt h de l'Arrêté n° 036/2006 du 05 octobre 2006 (valable jusqu'en
@@ -833,7 +833,7 @@ Law_52:
   country_id: 7
   currency: Franc congolais constant
 
-Law_53:
+Law_54:
   id: 54
   written_infraction: Déboise la forêt sur une distance de 50 m de part et d'autre
     d'un cours d'eau
@@ -848,7 +848,7 @@ Law_53:
   country_id: 7
   currency: Franc congolais constant
 
-Law_54:
+Law_55:
   id: 55
   written_infraction: Déboise la forêt sur une distance de 50 mètres de part et d'autre
     des cours d'eau ou dans un rayon de 100 mètres autour de leur source
@@ -859,7 +859,7 @@ Law_54:
   subcategory_id: 29
   country_id: 7
 
-Law_55:
+Law_56:
   id: 56
   written_infraction: Absence de base-vie construite suivant le plan directeur de
     développement ou mauvaise exécution de l’obligation relative à la construction
@@ -879,7 +879,7 @@ Law_55:
   country_id: 47
   currency: CFA
 
-Law_56:
+Law_57:
   id: 57
   written_infraction: Exploitation en violation de clauses sociales de cahier de charge
     du contrat de concession forestière
@@ -897,7 +897,7 @@ Law_56:
   country_id: 7
   currency: Franc congolais constant
 
-Law_57:
+Law_58:
   id: 58
   written_infraction: Exploitation forestière en violation des clauses sociales du
     cahier des charges.
@@ -910,13 +910,13 @@ Law_57:
   subcategory_id: 30
   country_id: 7
 
-Law_58:
+Law_59:
   id: 59
   infraction: Article 45 al 1 du décret 2002-437
   subcategory_id: 31
   country_id: 47
 
-Law_59:
+Law_60:
   id: 60
   written_infraction: Non respect des procédures relatives aux EIES
   infraction: Art 19 du CF
@@ -930,7 +930,7 @@ Law_59:
   country_id: 7
   currency: Franc congolais constant
 
-Law_60:
+Law_61:
   id: 61
   written_infraction: Non-respect du Plan d’Aménagement ( L’entreprise ne respecte
     pas les us, coutumes et droits d’usages des populations locales et autochtones.)
@@ -945,7 +945,7 @@ Law_60:
   country_id: 47
   currency: FCFA
 
-Law_61:
+Law_62:
   id: 62
   written_infraction: Exploitation forestière non conforme au plan d’aménagement selon
     l'article 100 de la loi.
@@ -963,7 +963,7 @@ Law_61:
   country_id: 7
   currency: Franc congolais constant
 
-Law_62:
+Law_63:
   id: 63
   written_infraction: 'Non-respect du quota de transformation  (exportation) fixé
     par la règlementation en vigueur '
@@ -979,7 +979,7 @@ Law_62:
   country_id: 47
   currency: FCFA
 
-Law_63:
+Law_64:
   id: 64
   written_infraction: Refuse l'accès de sa concession à des agents de l'administration
     chargée des forêts ou aux membres du conseil consultatif provincial des forêts
@@ -995,7 +995,7 @@ Law_63:
   country_id: 7
   currency: Franc congolais constant
 
-Law_64:
+Law_65:
   id: 65
   written_infraction: Bois non tracé
   infraction: Article 127 du CF-Articles 8 à 11 de l'arrêté 102/2009 sur le contrôle
@@ -1010,7 +1010,7 @@ Law_64:
   country_id: 7
   currency: Franc congolais
 
-Law_65:
+Law_66:
   id: 66
   written_infraction: Défaut d'enregistrement au registre de commerce et crédit mobilier
   infraction: Art 9 de l'arrêté 050/2015
@@ -1024,7 +1024,7 @@ Law_65:
   country_id: 7
   currency: Franc congolais constant
 
-Law_66:
+Law_67:
   id: 67
   written_infraction: Loue, échange ou cède sa concession sans autorisation de l'autorité
     compétente;
@@ -1039,7 +1039,7 @@ Law_66:
   country_id: 7
   currency: Franc congolais constant
 
-Law_67:
+Law_68:
   id: 68
   written_infraction: Stockage de bois illégal
   infraction: Art. 57 et 58 de l'arrêté ministériel N°035/CAB/MIN/ECN-EF/2006
@@ -1053,7 +1053,7 @@ Law_67:
   country_id: 7
   currency: Franc congolais constant
 
-Law_68:
+Law_71:
   id: 71
   written_infraction: 'Abandon de bois '
   infraction: Articles 112, 126, Décret  n° 95/531/PM du 23 août 1995 fixant les modalités
@@ -1070,7 +1070,7 @@ Law_68:
   country_id: 45
   currency: FCFA
 
-Law_69:
+Law_82:
   id: 82
   written_infraction: Retard de  payement des amendes en matière forestière
   infraction: Article 90  al 2 Code Forestier
@@ -1084,7 +1084,7 @@ Law_69:
   country_id: 47
   currency: FCFA
 
-Law_70:
+Law_83:
   id: 83
   written_infraction: 'Non ouverture/absence du registre des bois entrés en usine '
   infraction: 'Article 119 du décret 2002-437 '
@@ -1098,7 +1098,7 @@ Law_70:
   country_id: 47
   currency: FCFA
 
-Law_71:
+Law_84:
   id: 84
   written_infraction: Evacuation des bois abattus non sortis à l’échéance de la décision
     du permis  spécial ou la convention (CTI/CTA) sans avoir au préalable une autorisation
@@ -1114,7 +1114,7 @@ Law_71:
   country_id: 47
   currency: FCFA
 
-Law_72:
+Law_89:
   id: 89
   written_infraction: Abandon sur les chantiers des bois en grume de valeur marchande
     non sortis six mois après l'abattage, bois en grumes stockés hors de la coupe
@@ -1130,7 +1130,7 @@ Law_72:
   country_id: 47
   currency: CFA
 
-Law_73:
+Law_90:
   id: 90
   written_infraction: L’Entreprise ne dispose pas d’un mécanisme de concertation fonctionnel
     des parties prenantes sur la gestion durable de sa concession.
@@ -1145,7 +1145,7 @@ Law_73:
   country_id: 47
   currency: FCFA
 
-Law_74:
+Law_91:
   id: 91
   written_infraction: Cession du titre d'exploitation (CAT/CTI/PS) à des tiers
   infraction: Article 71 al 1 Code Forestier
@@ -1159,7 +1159,7 @@ Law_74:
   country_id: 47
   currency: FCFA
 
-Law_75:
+Law_94:
   id: 94
   written_infraction: Quiconque aura volontairement fait obstacle à l’accomplissement
     des devoirs des agents de l’administration des eaux et forêts sera puni par la
@@ -1175,7 +1175,7 @@ Law_75:
   country_id: 47
   currency: CFA
 
-Law_76:
+Law_95:
   id: 95
   written_infraction: Exploitation du bois sans titre d'exploitation (CAT/CTI) signé
     par le Ministre chargé de l'économie forestière et approuvé par arrêté
@@ -1191,7 +1191,7 @@ Law_76:
   country_id: 47
   currency: CFA par m3
 
-Law_77:
+Law_137:
   id: 137
   written_infraction: 'Violation des normes définies en matière de transformation
     des produits forestiers '
@@ -1208,7 +1208,7 @@ Law_77:
   country_id: 45
   currency: FCFA
 
-Law_78:
+Law_138:
   id: 138
   written_infraction: '"Violation des normes définies en matière de transformation
     des produits forestiers"'
@@ -1227,7 +1227,7 @@ Law_78:
   country_id: 45
   currency: FCFA
 
-Law_79:
+Law_139:
   id: 139
   written_infraction: 'Non réalisation des clauses portant sur la mise en place de
     l''unité de transformation du bois '
@@ -1244,7 +1244,7 @@ Law_79:
   country_id: 45
   currency: FCFA
 
-Law_80:
+Law_140:
   id: 140
   written_infraction: Infraction aux dispositions de l'article 62 (L'article 62 de
     la loi n°92/007 du 14 août 1992 portant code du travail traite du salaire minimum
@@ -1266,7 +1266,7 @@ Law_80:
   country_id: 45
   currency: FCFA
 
-Law_81:
+Law_146:
   id: 146
   written_infraction: Blanchiment ou tentative de blanchiment
   infraction: Art. 199 code penal de 2010
@@ -1280,7 +1280,7 @@ Law_81:
   country_id: 188
   currency: CFA
 
-Law_82:
+Law_147:
   id: 147
   written_infraction: Non tenue de la procedure d'audience publique (ayant pour objectif
     de faire participer la population locale aux prises des décisions)
@@ -1295,7 +1295,7 @@ Law_82:
   country_id: 188
   currency: CFA
 
-Law_83:
+Law_149:
   id: 149
   written_infraction: Fait de couper, mutiler, ébrancher, arracher des espèces dans
     une réserve naturelle intégrale, un parc national ou un sanctuaire sans autorisation
@@ -1311,7 +1311,7 @@ Law_83:
   country_id: 188
   currency: CFA
 
-Law_84:
+Law_150:
   id: 150
   written_infraction: 'Non paiement de droit et taxes à l''exportation des bois bruts,
     sciages, déroulés, contreplaqué et tranchés '
@@ -1326,7 +1326,7 @@ Law_84:
   country_id: 188
   currency: CFA
 
-Law_85:
+Law_151:
   id: 151
   written_infraction: 'Non respect des prescriptions de la convention définitive d’aménagement,
     du cahier des charges, des limites de son permis, par un exploitant ou son représentant. '
@@ -1342,7 +1342,7 @@ Law_85:
   country_id: 188
   currency: CFA
 
-Law_86:
+Law_152:
   id: 152
   written_infraction: Non respect des modalités définies par voie réglementaires pour
     les activités de déboisement dans les autres types de forêts(réserves naturelles
@@ -1358,7 +1358,7 @@ Law_86:
   country_id: 188
   currency: CFA
 
-Law_87:
+Law_156:
   id: 156
   written_infraction: Non paiement des taxes et redevances forestières
   infraction: Article 177 du code forestier
@@ -1372,7 +1372,7 @@ Law_87:
   country_id: 188
   currency: CFA
 
-Law_88:
+Law_160:
   id: 160
   written_infraction: 'Fait de contraindre un travailleur à s''embaucher contre son
     gré ou qui l’empêche de s’embaucher ou de se rendre à son travail et, d’une manière
@@ -1388,7 +1388,7 @@ Law_88:
   country_id: 188
   currency: CFA
 
-Law_89:
+Law_161:
   id: 161
   written_infraction: Omission volontaire ou actions frauduleuses tendant à modifier
     ou à manipuler à la baisse les volumes de bois abattus
@@ -1402,7 +1402,7 @@ Law_89:
   country_id: 188
   currency: CFA
 
-Law_90:
+Law_162:
   id: 162
   written_infraction: Fait de se procurer indûment les vrais marteaux, d'en faire
     une application ou un usage frauduleux ou d'enlever ou falsifier les vraies marques
@@ -1417,7 +1417,7 @@ Law_90:
   country_id: 188
   currency: CFA
 
-Law_91:
+Law_165:
   id: 165
   written_infraction: Absence de convention définitive d’aménagement et d’exploitation
     entre la société et l’Etat
@@ -1432,7 +1432,7 @@ Law_91:
   country_id: 188
   currency: CFA
 
-Law_92:
+Law_166:
   id: 166
   written_infraction: 'Exploitation industrielle du domaine forestier de l’État sans
     permis d’exploitation et d’aménagement (PEA) '
@@ -1447,7 +1447,7 @@ Law_92:
   country_id: 188
   currency: CFA
 
-Law_93:
+Law_167:
   id: 167
   written_infraction: Absence de permis d’exploitation délivré par le Ministre en
     charge des forêts selon les modalités définies par voie réglementaire pour l'exploitation
@@ -1463,7 +1463,7 @@ Law_93:
   country_id: 188
   currency: CFA
 
-Law_94:
+Law_168:
   id: 168
   written_infraction: Prélèvement ou mutilation d’espèces protégées dans un but commercial
     ou non, quelle que soit la nature desdits produit
@@ -1478,7 +1478,7 @@ Law_94:
   country_id: 188
   currency: CFA
 
-Law_95:
+Law_170:
   id: 170
   written_infraction: Non paiement de droits et taxes à l’exportation des bois bruts,
     sciages, déroulés, contreplaqués et tranchés
@@ -1493,7 +1493,7 @@ Law_95:
   country_id: 188
   currency: CFA
 
-Law_96:
+Law_174:
   id: 174
   written_infraction: Non observation des obligations sociales
   infraction: Art. 51 du Code Forestier
@@ -1509,7 +1509,7 @@ Law_96:
   country_id: 188
   currency: CFA
 
-Law_97:
+Law_175:
   id: 175
   written_infraction: Exécution d’inventaires forestiers ne respectant pas les normes
     en vigueur
@@ -1526,7 +1526,7 @@ Law_97:
   country_id: 188
   currency: CFA
 
-Law_98:
+Law_176:
   id: 176
   written_infraction: Non respect du plan d'aménagement prévu à l'article 129 du code
     forestier
@@ -1541,7 +1541,7 @@ Law_98:
   country_id: 188
   currency: CFA
 
-Law_99:
+Law_181:
   id: 181
   written_infraction: 'Transfert, cession ou sous-traitance d’un titre d’exploitation '
   infraction: Art. 212 code forestier
@@ -1555,7 +1555,7 @@ Law_99:
   country_id: 188
   currency: CFA
 
-Law_100:
+Law_183:
   id: 183
   written_infraction: Contrefaçon ou falsification des marteaux forestiers particuliers
     ou de leurs marques régulièrement déposées ou usage de ces marteaux contrefaits
@@ -1571,7 +1571,7 @@ Law_100:
   country_id: 188
   currency: CFA
 
-Law_101:
+Law_187:
   id: 187
   written_infraction: Inobservation de la réglementation sur la récupération des grumes
     abandonnées le long des cours d'eau, plages, routes et parcs
@@ -1588,7 +1588,7 @@ Law_101:
   country_id: 53
   currency: Fcfa
 
-Law_102:
+Law_189:
   id: 189
   written_infraction: "Non-respect du plan d'aménagement \n"
   infraction: "Art. 21 Code Forestier. Décret n° 539 du 15 juillet 2005 réglementant
@@ -1608,7 +1608,7 @@ Law_102:
   country_id: 53
   currency: Fcfa
 
-Law_103:
+Law_190:
   id: 190
   written_infraction: 'Exploitation sans titre, coupe de bois en dehors des limites
     du permis, récolte de produits autres que ceux prévus dans le titre d''exploitation
@@ -1629,7 +1629,7 @@ Law_103:
   country_id: 53
   currency: Fcfa
 
-Law_104:
+Law_191:
   id: 191
   written_infraction: 'Violation des prescriptions relatives aux forêts classées
 
@@ -1651,7 +1651,7 @@ Law_104:
   country_id: 53
   currency: Fcfa
 
-Law_105:
+Law_192:
   id: 192
   written_infraction: |
     -1) Exploitation sans titre, coupe de bois en dehors des limites du permis, récolte de produits autres que ceux prévus dans le titre d'exploitation
@@ -1673,7 +1673,7 @@ Law_105:
   country_id: 53
   currency: Fcfa
 
-Law_106:
+Law_193:
   id: 193
   written_infraction: Non-respect du plan d'aménagement
   infraction: 'Art .22 et 37 Code forestier et le Décret n° 000117-PR-MEFEPEPN du
@@ -1696,7 +1696,7 @@ Law_106:
   country_id: 53
   currency: Fcfa
 
-Law_107:
+Law_194:
   id: 194
   written_infraction: 'Coupe et enlèvement d''arbres ou exploitation de produits forestiers
     accessoires, sans autorisation de l''administration des Eaux et Forêts en dehors
@@ -1724,7 +1724,7 @@ Law_107:
   country_id: 53
   currency: Fcfa
 
-Law_108:
+Law_195:
   id: 195
   written_infraction: Non Prévu
   infraction: 'Non Prévu
@@ -1740,7 +1740,7 @@ Law_108:
   country_id: 53
   currency: Fcfa
 
-Law_109:
+Law_196:
   id: 196
   written_infraction: "Non respect du plan d'aménagement\r\n"
   infraction: "Art. 22 Code Forestier; Décret n° 689/PR/MEFEPEPN du 24 août 2004  Définissant
@@ -1757,7 +1757,7 @@ Law_109:
   country_id: 53
   currency: Fcfa
 
-Law_110:
+Law_198:
   id: 198
   written_infraction: 'Inexécution des condamnations à des peines d''amende
 
@@ -1781,7 +1781,7 @@ Law_110:
   country_id: 53
   currency: Fcfa
 
-Law_111:
+Law_199:
   id: 199
   written_infraction: |-
     Enregistrement au Centre de Développement des Entreprises (CDE)
@@ -1820,7 +1820,7 @@ Law_111:
   currency: Fcfa
 
 
-Law_112:
+Law_200:
   id: 200
   written_infraction: 'Non prévu
 
@@ -1840,7 +1840,7 @@ Law_112:
   country_id: 53
   currency: Fcfa
 
-Law_113:
+Law_203:
   id: 203
   written_infraction: |
     - Non-respect des quotas de production, de transformation et d'exportation
@@ -1867,7 +1867,7 @@ Law_113:
   country_id: 53
   currency: Fcfa
 
-Law_114:
+Law_204:
   id: 204
   written_infraction: Manoeuvres frauduleuses
   infraction: Art. 228 Code Forestier
@@ -1882,7 +1882,7 @@ Law_114:
   country_id: 53
   currency: Fcfa
 
-Law_115:
+Law_205:
   id: 205
   written_infraction: 'Non prévu
 
@@ -1901,7 +1901,7 @@ Law_115:
   country_id: 53
   currency: Fcfa
 
-Law_116:
+Law_206:
   id: 206
   written_infraction: |
     - Exploitation sans titre
@@ -1925,7 +1925,7 @@ Law_116:
   country_id: 53
   currency: Fcfa
 
-Law_117:
+Law_207:
   id: 207
   written_infraction: 'Exploitation sans titre
 
@@ -1948,7 +1948,7 @@ Law_117:
   country_id: 53
   currency: Fcfa
 
-Law_118:
+Law_208:
   id: 208
   written_infraction: |
     -Exploitation sans titre
@@ -1974,7 +1974,7 @@ Law_118:
   country_id: 53
   currency: Fcfa
 
-Law_119:
+Law_209:
   id: 209
   written_infraction: 'Exploitation sans titre
 
@@ -1997,7 +1997,7 @@ Law_119:
   country_id: 53
   currency: Fcfa
 
-Law_120:
+Law_210:
   id: 210
   written_infraction: "Non-respect par les compagnies aériennes, de transit et de
     fret des conditions de transport d'animaux sauvages vivants, suivant les dispositions
@@ -2014,7 +2014,7 @@ Law_120:
   country_id: 53
   currency: Fcfa
 
-Law_121:
+Law_211:
   id: 211
   written_infraction: 'Non respect des quotas de production, de transformation et
     d''exportation
@@ -2038,7 +2038,7 @@ Law_121:
   country_id: 53
   currency: Fcfa
 
-Law_122:
+Law_213:
   id: 213
   written_infraction: Non-paiement des taxes domaniales et des redevances
   infraction: Art.244 Code forestier
@@ -2056,7 +2056,7 @@ Law_122:
   country_id: 53
   currency: Fcfa
 
-Law_123:
+Law_215:
   id: 215
   written_infraction: "Pratique des cultures vivrières dans une forêt classée \r\n"
   infraction: Non prévu
@@ -2070,7 +2070,7 @@ Law_123:
   country_id: 53
   currency: Fcfa
 
-Law_124:
+Law_216:
   id: 216
   written_infraction: 'Exploitation intensive dommageable à l''environnement
 
@@ -2092,7 +2092,7 @@ Law_124:
   country_id: 53
   currency: Fcfa
 
-Law_125:
+Law_217:
   id: 217
   written_infraction: Non respect du plan d'aménagement
   infraction: "-Art. 251 Code Forestier . \n-Arrêté n° 105 /MFEPRN/SG/DGF/DDF/SACF
@@ -2110,7 +2110,7 @@ Law_125:
   country_id: 53
   currency: Fcfa
 
-Law_126:
+Law_218:
   id: 218
   written_infraction: Non respect du plan d'aménagement
   infraction: "-Art. 19 et 22 Code Forestier  \n-Art. 9-14 Décret n° 689-PR-MEFEPEPN
@@ -2129,7 +2129,7 @@ Law_126:
   country_id: 53
   currency: Fcfa
 
-Law_127:
+Law_219:
   id: 219
   written_infraction: "-Non respect du plan d'aménagement\n-Falsification ou contrefaçon
     des marteaux de l'administration des Eaux et Forêts servant aux marques forestières\n-Falsification
@@ -2170,7 +2170,7 @@ Law_127:
   country_id: 53
   currency: Fcfa
 
-Law_128:
+Law_220:
   id: 220
   written_infraction: "Non-respect des quotas de production, de transformation et
     d'exportation\r\n"
@@ -2189,7 +2189,7 @@ Law_128:
   country_id: 53
   currency: Fcfa
 
-Law_129:
+Law_221:
   id: 221
   written_infraction: "Entrave volontaire à l'accomplissement des devoirs des agents
     de l'administration des Eaux et Forêts \n"
@@ -2210,7 +2210,7 @@ Law_129:
   country_id: 53
   currency: Fcfa
 
-Law_130:
+Law_224:
   id: 224
   written_infraction: 'Cession, transmission ou transfert non autorisés des permis
     et regroupement non autorisés des titres d''exploitation
@@ -2235,7 +2235,7 @@ Law_130:
   country_id: 53
   currency: Fcfa
 
-Law_131:
+Law_228:
   id: 228
   written_infraction: Non prévu
   infraction: 'Art. 123 Code Forestier
@@ -2253,7 +2253,7 @@ Law_131:
   country_id: 53
   currency: Fcfa
 
-Law_132:
+Law_233:
   id: 233
   written_infraction: Abandon injustifié du bois d’oeuvre
   infraction: Art. 231 du code forestier
@@ -2271,7 +2271,7 @@ Law_132:
   country_id: 188
   currency: CFA
 
-Law_133:
+Law_235:
   id: 235
   written_infraction: Exploitation par vente de coupe, dans une forêt domaniale, au-delà
     des limites de l'assiette de coupe délimitée et/ou du volume et de la période
@@ -2289,7 +2289,7 @@ Law_133:
   country_id: 45
   currency: FCFA
 
-Law_134:
+Law_236:
   id: 236
   written_infraction: Exploitation par permis, dans une forêt du domaine national,
     ou au-delà des limites du volume attribué et/ou de la période accordée de produits
@@ -2307,7 +2307,7 @@ Law_134:
   country_id: 45
   currency: FCFA
 
-Law_135:
+Law_237:
   id: 237
   written_infraction: L'abattage sans autorisation, d'arbres protégés
   infraction: Article 43, Loi  N° 94/01 du 20 janvier 1994 portant régime des forêts,
@@ -2323,7 +2323,7 @@ Law_135:
   country_id: 45
   currency: FCFA
 
-Law_136:
+Law_241:
   id: 241
   written_infraction: Exploitation par vente de coupe, dans une forêt domaniale, au-delà
     des limites de l'assiette de coupe délimitée et/ou du volume et de la période
@@ -2341,7 +2341,7 @@ Law_136:
   country_id: 45
   currency: FCFA
 
-Law_137:
+Law_242:
   id: 242
   written_infraction: '"Exploitation par autorisation personnelle de coupe dans une
     forêt du domaine national au-delà de la quantité accordée"'
@@ -2358,7 +2358,7 @@ Law_137:
   country_id: 45
   currency: FCFA
 
-Law_138:
+Law_243:
   id: 243
   written_infraction: Production de faux justificatifs relatifs notamment aux capacités
     techniques et financières, au lieu de résidence à la nationalité et à la constitution
@@ -2379,7 +2379,7 @@ Law_138:
   country_id: 45
   currency: FCFA
 
-Law_139:
+Law_246:
   id: 246
   written_infraction: Production de faux justificatifs relatifs notamment aux capacités
     techniques et financières, au lieu de résidence à la nationalité et à la constitution
@@ -2400,7 +2400,7 @@ Law_139:
   country_id: 45
   currency: FCFA
 
-Law_140:
+Law_247:
   id: 247
   written_infraction: Exploitation forestière non autorisée dans une forêt domaniale
     ou communale
@@ -2417,7 +2417,7 @@ Law_140:
   country_id: 45
   currency: FCFA
 
-Law_141:
+Law_249:
   id: 249
   written_infraction: Exploitation sans agrément (l'exploitation forestière non autorisée
     dans une forêt du domaine national ou communautaire/dans une forêt domaniale ou
@@ -2438,7 +2438,7 @@ Law_141:
   country_id: 45
   currency: FCFA
 
-Law_142:
+Law_250:
   id: 250
   written_infraction: Abattage sans autorisation, d'arbres protégés
   infraction: 'Article 43, Loi N° 94/01 du 20 janvier 1994 portant régime des forêts,
@@ -2454,7 +2454,7 @@ Law_142:
   country_id: 45
   currency: FCFA
 
-Law_143:
+Law_251:
   id: 251
   written_infraction: |-
     "Importation ou exportation non autorisée de matériel génétique à but lucratif, telle
@@ -2472,7 +2472,7 @@ Law_143:
   country_id: 45
   currency: FCFA
 
-Law_144:
+Law_253:
   id: 253
   written_infraction: Violation des dispositions des textes réglementaires pris pour
     l'application de la loi portant régime des forêts, de la faune et de la pêche
@@ -2494,7 +2494,7 @@ Law_144:
   country_id: 45
   currency: FCFA
 
-Law_145:
+Law_256:
   id: 256
   written_infraction: Falsification ou fraude sur tout document émis par les administrations
     chargées des forêts, de la faune et de la pêche, selon le cas
@@ -2514,7 +2514,7 @@ Law_145:
   country_id: 45
   currency: FCFA
 
-Law_146:
+Law_257:
   id: 257
   written_infraction: 'Exploitation forestière non autorisée dans une forêt domaniale '
   infraction: |-
@@ -2533,7 +2533,7 @@ Law_146:
   country_id: 45
   currency: FCFA
 
-Law_147:
+Law_262:
   id: 262
   written_infraction: |-
     "Pollution, dégradation des sols et sous-sols, altération de la qualité de l’air ou des eaux
@@ -2553,7 +2553,7 @@ Law_147:
   country_id: 45
   currency: FCFA
 
-Law_148:
+Law_263:
   id: 263
   written_infraction: Exécution d'un inventaire d'aménagement ou d'exploitation non
     conforme aux normes établies par l'administration chargée des forêts
@@ -2571,7 +2571,7 @@ Law_148:
   country_id: 45
   currency: FCFA
 
-Law_149:
+Law_264:
   id: 264
   written_infraction: '"Usage frauduleux, contrefaçon ou destruction des marques ou
     du Marteau de l’Etat servant aux marques forestières"'
@@ -2589,7 +2589,7 @@ Law_149:
   country_id: 45
   currency: FCFA
 
-Law_150:
+Law_267:
   id: 267
   written_infraction: Non respect des clauses du cahier des charges
   infraction: 'Article 65, Loi N° 94/01 du 20 janvier 1994 portant régime des forêts,
@@ -2611,7 +2611,7 @@ Law_150:
   country_id: 45
   currency: FCFA
 
-Law_151:
+Law_268:
   id: 268
   written_infraction: 'Certificat irrégulier i.e faux et usage du faux '
   infraction: 'Article 204, Loi N°2016/007 du 16 juillet 2016 portant code pénal '
@@ -2625,7 +2625,7 @@ Law_151:
   country_id: 45
   currency: FCFA
 
-Law_152:
+Law_269:
   id: 269
   written_infraction: Transfert ou cession d'une autorisation personnelle de coupe
     en violation des articles 42 (2) et 60
@@ -2642,7 +2642,7 @@ Law_152:
   country_id: 45
   currency: FCFA
 
-Law_153:
+Law_270:
   id: 270
   written_infraction: Exploitation frauduleuse par un sous-traitant dans le cadre
     d'un contrat de sous-traitance s'exerçant dans une forêt domaniale
@@ -2659,7 +2659,7 @@ Law_153:
   country_id: 45
   currency: FCFA
 
-Law_154:
+Law_271:
   id: 271
   written_infraction: |-
     "Transfert d'une vente de coupe, ou d'une concession forestière sans autorisation,
@@ -2677,7 +2677,7 @@ Law_154:
   country_id: 45
   currency: FCFA
 
-Law_155:
+Law_272:
   id: 272
   written_infraction: Sous-traitance des titres nominatifs d'exploitation forestière,
     la prise de position dans une société bénéficiaire d'un titre d'exploitation,
@@ -2698,7 +2698,7 @@ Law_155:
   country_id: 45
   currency: FCFA
 
-Law_156:
+Law_275:
   id: 275
   written_infraction: Exploitation par vente de coupe dans une forêt du domaine national
     au-delà des limites de l'assiette de coupe délimitée et/ou la période accordée
@@ -2715,7 +2715,7 @@ Law_156:
   country_id: 45
   currency: FCFA
 
-Law_157:
+Law_276:
   id: 276
   written_infraction: Exploitation artisanale sans permis du domaine forestier
   infraction: Art. 211 code forestier
@@ -2729,7 +2729,7 @@ Law_157:
   country_id: 188
   currency: CFA
 
-Law_158:
+Law_277:
   id: 277
   written_infraction: Fait de couper, mutiler, ébrancher, arracher des arbres hors
     d’un permis d’exploitation ou hors d’un droit coutumier sans autorisation spécifique.
@@ -2745,7 +2745,7 @@ Law_158:
   country_id: 188
   currency: CFA
 
-Law_159:
+Law_278:
   id: 278
   written_infraction: Défrichement non autorisé d’une forêt permanente, d’un périmètre
     mis en défens, d’une zone à écologie fragile
@@ -2760,7 +2760,7 @@ Law_159:
   country_id: 188
   currency: CFA
 
-Law_160:
+Law_279:
   id: 279
   written_infraction: Violation du taux de transformation locale (70%) sur la production
     nette des essences de première catégories définie dans le plan d'aménagement  -
@@ -2778,7 +2778,7 @@ Law_160:
   country_id: 188
   currency: CFA
 
-Law_161:
+Law_280:
   id: 280
   written_infraction: Activités de déboisement dans les réserves naturelles intégrales,
     les parcs nationaux et les sanctuaires
@@ -2793,7 +2793,7 @@ Law_161:
   country_id: 188
   currency: CFA
 
-Law_162:
+Law_281:
   id: 281
   written_infraction: 'Realisation d''un projet de developpement sans étude d''impact '
   infraction: Art 136 du code de l'Environnement
@@ -2807,7 +2807,7 @@ Law_162:
   country_id: 188
   currency: CFA
 
-Law_163:
+Law_282:
   id: 282
   written_infraction: Violation du taux de transformation locale (70%) sur la production
     nette des essences de première catégories définie dans le plan d'aménagement  -
@@ -2825,7 +2825,7 @@ Law_163:
   country_id: 188
   currency: CFA
 
-Law_164:
+Law_283:
   id: 283
   written_infraction: Absence de l’empreinte du marteau portant la marque triangulaire
     de l’exploitant
@@ -2840,7 +2840,7 @@ Law_164:
   country_id: 188
   currency: CFA
 
-Law_165:
+Law_284:
   id: 284
   written_infraction: Violation des dispositions des textes réglementaires pris en
     application de la loi N° 94/01 du 20 janvier 1994 portant régime des forêts, de
@@ -2861,7 +2861,7 @@ Law_165:
   country_id: 45
   currency: FCFA
 
-Law_166:
+Law_285:
   id: 285
   written_infraction: Falsification ou fraude sur tout document émis par les Administrations
     chargées des Forêts, de la Faune et de la Pêche, selon le cas
@@ -2878,7 +2878,7 @@ Law_166:
   country_id: 45
   currency: FCFA
 
-Law_167:
+Law_286:
   id: 286
   written_infraction: Violation des dispositions des textes réglementaires pris pour
     l'application de la loi portant régime des forêts, de la faune et de la pêche
@@ -2900,7 +2900,7 @@ Law_167:
   country_id: 45
   currency: FCFA
 
-Law_168:
+Law_287:
   id: 287
   written_infraction: Violation des prescriptions d'un plan d'aménagement d'une forêt
     permanente ou communautaire
@@ -2918,7 +2918,7 @@ Law_168:
   country_id: 45
   currency: FCFA
 
-Law_169:
+Law_288:
   id: 288
   written_infraction: Infraction à l'article 62 de la Loi N° 92/007 du 14 août 1992
     portant code du travail
@@ -2934,7 +2934,7 @@ Law_169:
   country_id: 45
   currency: FCFA
 
-Law_170:
+Law_289:
   id: 289
   written_infraction: Réalisation, sans étude d'impact, d'un projet nécessitant une
     étude d'impact
@@ -2951,7 +2951,7 @@ Law_170:
   country_id: 45
   currency: FCFA
 
-Law_171:
+Law_290:
   id: 290
   written_infraction: Falsification ou fraude sur tout document émis par les Administrations
     chargées des Forêts, de la Faune et de la Pêche, selon le cas
@@ -2971,7 +2971,7 @@ Law_171:
   country_id: 45
   currency: FCFA
 
-Law_172:
+Law_291:
   id: 291
   written_infraction: Violation des normes relatives à l'exploitation des produits
     forestiers spéciaux
@@ -2988,7 +2988,7 @@ Law_172:
   country_id: 45
   currency: FCFA
 
-Law_173:
+Law_294:
   id: 294
   written_infraction: 'Abattage sans autorisation d''arbres protégés (Peut être assimilé
     à la coupe d''arbres protégés)
@@ -3007,7 +3007,7 @@ Law_173:
   country_id: 45
   currency: FCFA
 
-Law_174:
+Law_296:
   id: 296
   written_infraction: Manœuvre frauduleuse pour se soustraire au paiement du prix
     de vente des bois et des taxes dues
@@ -3023,7 +3023,7 @@ Law_174:
   country_id: 47
   currency: FCFA
 
-Law_175:
+Law_297:
   id: 297
   written_infraction: 'Falsification du document de chantier '
   infraction: Article 153 Code Forestier
@@ -3037,7 +3037,7 @@ Law_175:
   country_id: 47
   currency: FCFA
 
-Law_176:
+Law_298:
   id: 298
   written_infraction: Exercice de la profession de la forêt et du bois sans carte
     d'identité professionnelle délivré par le Directeur Général de l’’Economie Forestière
@@ -3053,7 +3053,7 @@ Law_176:
   country_id: 47
   currency: FCFA
 
-Law_177:
+Law_300:
   id: 300
   written_infraction: Inexécution du programme d'investissement au terme d'une année
     suivant les délais fixés
@@ -3068,7 +3068,7 @@ Law_177:
   country_id: 47
   currency: FCFA
 
-Law_178:
+Law_301:
   id: 301
   written_infraction: Installation de l’unité de transformation non conforme à la
     convention/ Non exécution des clauses de cahier de charge
@@ -3084,7 +3084,7 @@ Law_178:
   country_id: 47
   currency: FCFA
 
-Law_179:
+Law_302:
   id: 302
   written_infraction: Les populations locales et autochtones ne sont pas informées
     de leurs droits, et de la gestion de la concession forestière.
@@ -3099,7 +3099,7 @@ Law_179:
   country_id: 47
   currency: FCFA
 
-Law_180:
+Law_303:
   id: 303
   written_infraction: 'Non-exécution de l''obligation du cahier des charges de la
     convention (construction de la base-vie en matériaux durable pour les travailleurs) '
@@ -3116,7 +3116,7 @@ Law_180:
   country_id: 47
   currency: FCFA
 
-Law_181:
+Law_304:
   id: 304
   written_infraction: Non construction de la maison dite de passage meublée et indépendante
     pour les séjours des agents des eaux et forêts en mission
@@ -3133,7 +3133,7 @@ Law_181:
   country_id: 47
   currency: FCFA
 
-Law_182:
+Law_305:
   id: 305
   written_infraction: Non-respect du Plan d’Aménagement (la procédure d’enregistrement,
     de traitement des requêtes et plaintes n'est pas mise en place au sein de l’entreprise)
@@ -3148,7 +3148,7 @@ Law_182:
   country_id: 47
   currency: FCFA
 
-Law_183:
+Law_306:
   id: 306
   written_infraction: Non-respect du Plan d’Aménagement (La société civile, les populations
     locales et autochtones ne sont pas informées des procédures de gestion des conflits
@@ -3164,7 +3164,7 @@ Law_183:
   country_id: 47
   currency: FCFA
 
-Law_184:
+Law_307:
   id: 307
   written_infraction: Non-respect du Plan d’Aménagement   (Non traitement par l'entreprise  des
     déchets résultant de ses activités selon les prescriptions légales et réglementaires.)
@@ -3179,7 +3179,7 @@ Law_184:
   country_id: 47
   currency: FCFA
 
-Law_185:
+Law_308:
   id: 308
   written_infraction: 'Non entretien des limites sur le terrain  suivant la règlementation
     en vigueur (layons limitrophes de la concession forestière (UFA/UFE) ou de l''assiette
@@ -3197,7 +3197,7 @@ Law_185:
   country_id: 47
   currency: FCFA
 
-Law_186:
+Law_309:
   id: 309
   written_infraction: Non-respect du plan d'aménagement (planification et cartographie
     du réseau routier)
@@ -3212,7 +3212,7 @@ Law_186:
   country_id: 47
   currency: FCFA
 
-Law_187:
+Law_310:
   id: 310
   written_infraction: 'Non ouverture du réseau routier selon les prescriptions règlementaires
     (plan d''exploitation) '
@@ -3227,7 +3227,7 @@ Law_187:
   country_id: 47
   currency: FCFA
 
-Law_188:
+Law_311:
   id: 311
   written_infraction: Non-respect de l'emprise des routes ouvertes suivant le réseau
     routier
@@ -3242,7 +3242,7 @@ Law_188:
   country_id: 47
   currency: FCFA
 
-Law_189:
+Law_312:
   id: 312
   written_infraction: Non tenue du registre des bois entrés en usine (mensuelle et
     annuelle)
@@ -3257,7 +3257,7 @@ Law_189:
   country_id: 47
   currency: FCFA
 
-Law_190:
+Law_313:
   id: 313
   written_infraction: Non transmission dans les délais prévus des feuilles de route
   infraction: Article 192 du décret 2002-437
@@ -3271,7 +3271,7 @@ Law_190:
   country_id: 47
   currency: FCFA
 
-Law_191:
+Law_314:
   id: 314
   written_infraction: 'Non-exécution ou mauvaise exécution  de l''obligation du cahier
     de charge particulier de la convention '
@@ -3288,7 +3288,7 @@ Law_191:
   country_id: 47
   currency: FCFA
 
-Law_192:
+Law_315:
   id: 315
   written_infraction: Non ou mauvaise exécution  de l'obligation du plan d'aménagement
     relative au financement du fond de développement local dans le cadre de la SDC
@@ -3303,7 +3303,7 @@ Law_192:
   country_id: 47
   currency: FCFA
 
-Law_193:
+Law_316:
   id: 316
   written_infraction: Non transmission dans les délais prescrits du bilan d’activité
     pour l’année écoulée
@@ -3318,7 +3318,7 @@ Law_193:
   country_id: 47
   currency: FCFA
 
-Law_194:
+Law_317:
   id: 317
   written_infraction: Récidive des coupes en dehors des limites (Résiliation de la
     convention et interdiction pendant un délai de cinq ans en cas de récidives)
@@ -3335,7 +3335,7 @@ Law_194:
   country_id: 47
   currency: FCFA
 
-Law_195:
+Law_318:
   id: 318
   written_infraction: Ratures et surcharges de la feuille de route
   infraction: 'Article 121  al  2 du décret 2002- 437 '
@@ -3349,7 +3349,7 @@ Law_195:
   country_id: 47
   currency: FCFA
 
-Law_196:
+Law_319:
   id: 319
   written_infraction: Transmission des comptages (données)  qui se révèlent faux ou  fantaisistes
     à la Direction départementale des eaux et forêts
@@ -3364,7 +3364,7 @@ Law_196:
   country_id: 47
   currency: FCFA
 
-Law_197:
+Law_320:
   id: 320
   written_infraction: 'Transport de bois sans feuille de route '
   infraction: Article 121  al  1 du décret 2002- 437
@@ -3378,7 +3378,7 @@ Law_197:
   country_id: 47
   currency: FCFA
 
-Law_198:
+Law_321:
   id: 321
   written_infraction: Transport de nuit des grumes et sciages par route
   infraction: Article 122  al  2 du décret 2002- 437
@@ -3392,7 +3392,7 @@ Law_198:
   country_id: 47
   currency: FCFA
 
-Law_199:
+Law_322:
   id: 322
   written_infraction: Non transmission dans les délais prévus des états de bois entrés
     usine, des états de produits usinés, des états de produits exportés
@@ -3407,7 +3407,7 @@ Law_199:
   country_id: 47
   currency: FCFA
 
-Law_200:
+Law_323:
   id: 323
   written_infraction: Dépôt des états de production au delà du délai réglementaire
   infraction: Article 90 du Décret 2002-437
@@ -3421,7 +3421,7 @@ Law_200:
   country_id: 47
   currency: FCFA
 
-Law_201:
+Law_324:
   id: 324
   written_infraction: Dépôt des dossiers de demande de coupe au delà du délai réglementaire
   infraction: Article 71 du décret 2002-437
@@ -3435,7 +3435,7 @@ Law_201:
   country_id: 47
   currency: FCFA
 
-Law_202:
+Law_326:
   id: 326
   written_infraction: Violation des dispositions des textes réglementaires pris pour
     l'application de la loi portant régime des forêts, de la faune et de la pêche
@@ -3455,7 +3455,7 @@ Law_202:
   country_id: 45
   currency: FCFA
 
-Law_203:
+Law_332:
   id: 332
   written_infraction: La non délimitation des licences d'exploitation forestière et
     des assiettes de coupe en cours
@@ -3472,7 +3472,7 @@ Law_203:
   country_id: 45
   currency: FCFA
 
-Law_204:
+Law_333:
   id: 333
   written_infraction: '"Tout retard constaté dans le paiement des taxes et redevances
     relatives aux forêts, à la faune et à la pêche relatives aux forêts"'
@@ -3494,7 +3494,7 @@ Law_204:
   country_id: 45
   currency: FCFA
 
-Law_205:
+Law_334:
   id: 334
   written_infraction: 'Violation des normes définies en matière de transformation  des
     produits forestiers '
@@ -3514,7 +3514,7 @@ Law_205:
   country_id: 45
   currency: FCFA
 
-Law_206:
+Law_335:
   id: 335
   written_infraction: 'Exploitation au-delà des limites de la concession forestière
     et/ou du volume et de la période accordée   '
@@ -3531,7 +3531,7 @@ Law_206:
   country_id: 45
   currency: FCFA
 
-Law_207:
+Law_336:
   id: 336
   written_infraction: Exploitation frauduleuse par un sous-traitant dans le cadre
     d'un contrat de sous-traitance s'exerçant dans une forêt domaniale
@@ -3548,7 +3548,7 @@ Law_207:
   country_id: 45
   currency: FCFA
 
-Law_208:
+Law_337:
   id: 337
   written_infraction: Exploitation non autorisée dans une forêt du domaine national
   infraction: 'Article 53, Loi N° 94/01 du 20 janvier 1994 portant régime des forêts,
@@ -3564,7 +3564,7 @@ Law_208:
   country_id: 45
   currency: FCFA
 
-Law_209:
+Law_338:
   id: 338
   written_infraction: Exploitation forestière non autorisée dans une forêt communautaire
   infraction: 'Article 54, Loi N° 94/01 du 20 janvier 1994 portant régime des forêts,
@@ -3580,7 +3580,7 @@ Law_209:
   country_id: 45
   currency: FCFA
 
-Law_210:
+Law_339:
   id: 339
   written_infraction: Importation ou exportation non autorisée de matériel génétique
     pour usage personnel  (Article 13, loi 94/01)
@@ -3597,7 +3597,7 @@ Law_210:
   country_id: 45
   currency: FCFA
 
-Law_211:
+Law_340:
   id: 340
   written_infraction: Tout retard constaté dans le paiement des taxes et redevances
     relatives aux forêts, à la faune et à la pêche
@@ -3619,7 +3619,7 @@ Law_211:
   country_id: 45
   currency: FCFA
 
-Law_212:
+Law_341:
   id: 341
   written_infraction: 'Non respect des clauses du cahier des charges '
   infraction: '"Art 65, Loi N° 94/01 portant régime des forêts, de la faune et de
@@ -3636,7 +3636,7 @@ Law_212:
   country_id: 45
   currency: FCFA
 
-Law_213:
+Law_342:
   id: 342
   written_infraction: Non respect des clauses du cahier des charges
   infraction: 'Article 65, Loi N° 94/01 du 20 janvier 1994 portant régime des forêts,
@@ -3656,7 +3656,7 @@ Law_213:
   country_id: 45
   currency: FCFA
 
-Law_214:
+Law_343:
   id: 343
   written_infraction: Non respect des clauses du cahier des charges
   infraction: 'Article 65, Loi N° 94/01 du 20 janvier 1994 portant régime des forêts,
@@ -3675,7 +3675,7 @@ Law_214:
   country_id: 45
   currency: FCFA
 
-Law_215:
+Law_344:
   id: 344
   written_infraction: 'Non respect des quotas de transformation locale par tout exportateur
     de produits forestiers '
@@ -3692,7 +3692,7 @@ Law_215:
   country_id: 45
   currency: FCFA
 
-Law_216:
+Law_345:
   id: 345
   written_infraction: Délit de fuite ou refus d'obtempérer aux injonctions des agents
     commis au contrôle; Toute violation de barrière de contrôle forestier
@@ -3709,7 +3709,7 @@ Law_216:
   country_id: 45
   currency: FCFA
 
-Law_217:
+Law_346:
   id: 346
   written_infraction: Défaut de déclaration de la volonté d'exploiter une usine de
     première transformation des produits forestiers aux Administrations chargées des
@@ -3730,7 +3730,7 @@ Law_217:
   country_id: 45
   currency: FCFA
 
-Law_218:
+Law_347:
   id: 347
   written_infraction: Non respect des clauses du cahier des charges
   infraction: |-
@@ -3750,7 +3750,7 @@ Law_218:
   country_id: 45
   currency: FCFA
 
-Law_219:
+Law_350:
   id: 350
   written_infraction: Abandonne du bois d’œuvre abattu dans des conditions interdites
     par les textes en vigueur
@@ -3769,7 +3769,7 @@ Law_219:
   country_id: 86
   currency: CFA
 
-Law_220:
+Law_351:
   id: 351
   written_infraction: Manœuvre frauduleuse
   infraction: Art.228 Code Forestier
@@ -3783,7 +3783,7 @@ Law_220:
   country_id: 53
   currency: Fcfa
 
-Law_221:
+Law_352:
   id: 352
   written_infraction: Sont interdits, dans le domaine forestier national, sauf pour
     des raisons scientifiques ou d’intérêt  public et après autorisation de l’Administration
@@ -3804,7 +3804,7 @@ Law_221:
   country_id: 86
   currency: CFA
 
-Law_222:
+Law_353:
   id: 353
   written_infraction: 'Fait de l’exploitation en dehors des limites affectées au titre
     d’exploitation '
@@ -3823,7 +3823,7 @@ Law_222:
   country_id: 86
   currency: CFA
 
-Law_223:
+Law_354:
   id: 354
   written_infraction: 'Fait de l’exploitation de produits forestiers en dessous du
     diamètre de référence '
@@ -3842,7 +3842,7 @@ Law_223:
   country_id: 86
   currency: CFA
 
-Law_224:
+Law_355:
   id: 355
   written_infraction: Sur toute l'étendue de la réserve naturelle intégrale...toute
     forme d'exploitation forestière..sont strictement interdits.
@@ -3851,7 +3851,7 @@ Law_224:
   subcategory_id: 5
   country_id: 86
 
-Law_225:
+Law_356:
   id: 356
   written_infraction: Sur toute l'étendue du parc national...toute forme d'exploitation
     forestière..sont strictement interdits.
@@ -3860,7 +3860,7 @@ Law_225:
   subcategory_id: 5
   country_id: 86
 
-Law_226:
+Law_357:
   id: 357
   written_infraction: Procède à un déboisement non autorisé dans le domaine forestier
     protégé. Toute activité susceptible d’entrainer le déboisement d’une partie domaine
@@ -3883,7 +3883,7 @@ Law_226:
   country_id: 86
   currency: CFA
 
-Law_227:
+Law_358:
   id: 358
   written_infraction: 'Procède à un déboisement non autorisé dans un domaine forestier
     classé '
@@ -3902,7 +3902,7 @@ Law_227:
   country_id: 86
   currency: CFA
 
-Law_228:
+Law_359:
   id: 359
   written_infraction: Violation de la réglementation relative au marquage des bois
     en grumes ou des souches
@@ -3922,7 +3922,7 @@ Law_228:
   country_id: 86
   currency: CFA
 
-Law_229:
+Law_360:
   id: 360
   written_infraction: Viole la réglementation relative à la déclaration de la production
     ou des taxes forestières
@@ -3941,7 +3941,7 @@ Law_229:
   country_id: 86
   currency: CFA
 
-Law_230:
+Law_361:
   id: 361
   written_infraction: Toute concession ou tout contrat d'exploitation forestière,
     hormis les droits d'usage forestier, doit être assorti d'un cahier des charges
@@ -3956,7 +3956,7 @@ Law_230:
   subcategory_id: 13
   country_id: 86
 
-Law_231:
+Law_362:
   id: 362
   written_infraction: 'Tout exploitant forestier ou industriel du bois ... qui ne
     fournit pas à l’Administration forestière, dans les délais prescrits, les informations
@@ -3976,7 +3976,7 @@ Law_231:
   country_id: 86
   currency: CFA
 
-Law_232:
+Law_363:
   id: 363
   written_infraction: Fausses déclarations relatives aux informations et aux documents
     techniques et comptables requis par les textes en vigueur.
@@ -3995,7 +3995,7 @@ Law_232:
   country_id: 86
   currency: CFA
 
-Law_233:
+Law_364:
   id: 364
   written_infraction: 'Tout exploitant forestier ou industriel du bois qui fait de
     fausses déclarations ou qui ne fournit pas à l’Administration forestière, dans
@@ -4016,7 +4016,7 @@ Law_233:
   country_id: 86
   currency: CFA
 
-Law_234:
+Law_365:
   id: 365
   written_infraction: Ne respecte pas les quotas d’exploitation, d’exportation ou
     de reboisement.
@@ -4035,7 +4035,7 @@ Law_234:
   country_id: 86
   currency: CFA
 
-Law_235:
+Law_366:
   id: 366
   written_infraction: Contrefait ou falsifie les marques régulièrement déposées des
     marteaux particuliers.Lorsque ces marteaux servent aux marques de l’Administration
@@ -4056,7 +4056,7 @@ Law_235:
   country_id: 86
   currency: CFA
 
-Law_236:
+Law_367:
   id: 367
   written_infraction: 'EXIGENCE: Les titres d’exploitation forestière délivrés avant
     l’entrée en vigueur de la présente loi, demeurentvalables jusqu’à leur expiration.'
@@ -4065,7 +4065,7 @@ Law_236:
   subcategory_id: 23
   country_id: 86
 
-Law_237:
+Law_368:
   id: 368
   written_infraction: 'Vend, importe ou exporte des produits forestiers sans autorisation.
     L’exportation et l’importation des produits forestiers ne peuvent être exercées
@@ -4087,7 +4087,7 @@ Law_237:
   country_id: 86
   currency: CFA
 
-Law_238:
+Law_369:
   id: 369
   written_infraction: |-
     Viole la réglementation relative à la déclaration de la production ou des taxes forestières
@@ -4101,7 +4101,7 @@ Law_238:
   country_id: 86
   currency: CFA
 
-Law_239:
+Law_370:
   id: 370
   written_infraction: Viole la réglementation relative à la circulation et au transport
     des bois en grumes
@@ -4120,7 +4120,7 @@ Law_239:
   country_id: 86
   currency: CFA
 
-Law_240:
+Law_371:
   id: 371
   written_infraction: L’exécution des sentences pénales est poursuivie conformément
     aux dispositions du Code de procédure pénale. Le Trésor public est chargé, outre
@@ -4135,7 +4135,7 @@ Law_240:
   subcategory_id: 51
   country_id: 86
 
-Law_241:
+Law_372:
   id: 372
   written_infraction: L’élaboration du plan d’aménagement forestier simplifié exige
     une superficie minimale déterminée en concertation avec les partenaires concernés
@@ -4144,7 +4144,7 @@ Law_241:
   subcategory_id: 3
   country_id: 86
 
-Law_242:
+Law_373:
   id: 373
   written_infraction: Procède à un déboisement non autorisé
   infraction: Art 135 code forestier 2014
@@ -4162,7 +4162,7 @@ Law_242:
   country_id: 86
   currency: CFA
 
-Law_243:
+Law_374:
   id: 374
   written_infraction: Fait usage de marteaux contrefait ou falsifiés.Lorsque ces marteaux
     servent aux marques de l’Administration forestière, la peine est portée au double.
@@ -4182,7 +4182,7 @@ Law_243:
   country_id: 86
   currency: CFA
 
-Law_244:
+Law_375:
   id: 375
   written_infraction: Enlève les marques des marteaux. Lorsque ces marteaux servent
     aux marques de l’Administration forestière, la peine est portée au double.
@@ -4202,7 +4202,7 @@ Law_244:
   country_id: 86
   currency: CFA
 
-Law_245:
+Law_376:
   id: 376
   written_infraction: Se procure indûment des marteaux et en fait frauduleusement
     usage. Lorsque ces marteaux servent aux marques de l’Administration forestière,
@@ -4223,7 +4223,7 @@ Law_245:
   country_id: 86
   currency: CFA
 
-Law_246:
+Law_377:
   id: 377
   written_infraction: 'EXIGENCE: Tout exploitant forestier est tenu d’obtenir un agrément
     délivré par le Ministre chargé des forêts, préalablement à l’exercice de sa profession.
@@ -4234,7 +4234,7 @@ Law_246:
   subcategory_id: 20
   country_id: 86
 
-Law_247:
+Law_378:
   id: 378
   written_infraction: Fait des défrichements ou des cultures dans le domaine forestier
     public. Sous réserve des dispositions prévues à l’article 47 de la présente loi,
@@ -4255,7 +4255,7 @@ Law_247:
   country_id: 86
   currency: CFA
 
-Law_248:
+Law_379:
   id: 379
   written_infraction: Fait des défrichements ou des cultures dans un domaine forestier
     classé. Sous réserve des dispositions prévues à l’article 47 de la présente loi,
@@ -4276,7 +4276,7 @@ Law_248:
   country_id: 86
   currency: CFA
 
-Law_249:
+Law_380:
   id: 380
   written_infraction: Fait des défrichements ou cultures dans les zones affectées
     à la constitution de forêts. Sous réserve des dispositions prévues à l’article
@@ -4297,7 +4297,7 @@ Law_249:
   country_id: 86
   currency: CFA
 
-Law_250:
+Law_381:
   id: 381
   written_infraction: Fait des prélèvements en violation des droits d’usage et du
     plan d’aménagement de la forêt concernée)
@@ -4316,7 +4316,7 @@ Law_250:
   country_id: 86
   currency: CFA
 
-Law_251:
+Law_382:
   id: 382
   written_infraction: Fait l’exploitation forestière sans plan d’aménagement / plan
     d’aménagement simplifié)
@@ -4335,7 +4335,7 @@ Law_251:
   country_id: 86
   currency: CFA
 
-Law_252:
+Law_383:
   id: 383
   written_infraction: Ne respecte pas le plan d’aménagement d’une forêt
   infraction: Art. 128 code forestier
@@ -4348,7 +4348,7 @@ Law_252:
   country_id: 86
   currency: CFA
 
-Law_253:
+Law_384:
   id: 384
   written_infraction: Tout produit forestier ligneux destiné à l’exploitation doit
     être préalablement transformé sauf en cas d’autorisation spéciale accordée par
@@ -4357,7 +4357,7 @@ Law_253:
   subcategory_id: 33
   country_id: 86
 
-Law_254:
+Law_385:
   id: 385
   written_infraction: Ne respecte pas le plan d’aménagement d’une forêt
   infraction: Art. 128 code forestier
@@ -4375,7 +4375,7 @@ Law_254:
   country_id: 86
   currency: CFA
 
-Law_255:
+Law_386:
   id: 386
   written_infraction: Loue son agrément ou son titre d’exploitation sans autorisation
     préalable de l’Administration forestière
@@ -4394,7 +4394,7 @@ Law_255:
   country_id: 86
   currency: CFA
 
-Law_256:
+Law_387:
   id: 387
   written_infraction: 'Constitution de  dépôt frauduleux de produits forestiers '
   infraction: Art 128 code forestier 2014
@@ -4412,7 +4412,7 @@ Law_256:
   country_id: 86
   currency: CFA
 
-Law_257:
+Law_388:
   id: 388
   written_infraction: 'Installe une unité de transformation sans agrément '
   infraction: Art. 131 code forestier
@@ -4430,7 +4430,7 @@ Law_257:
   country_id: 86
   currency: CFA
 
-Law_258:
+Law_389:
   id: 389
   written_infraction: 'Fait  des  prélèvements  en  violation  des  droits  d’usage  et  du  plan  d’aménagement  de  la  forêt  concernée '
   infraction: Art. 127 code forestier
@@ -4448,7 +4448,7 @@ Law_258:
   country_id: 86
   currency: CFA
 
-Law_259:
+Law_390:
   id: 390
   written_infraction: Defaut de presentation de la carte d'exploitation mise a jour
   infraction: Article 81 Decret 2002-437
@@ -4463,7 +4463,7 @@ Law_259:
   subcategory_id: 13
   country_id: 47
 
-Law_260:
+Law_391:
   id: 391
   written_infraction: Non-paiement des taxes domaniales et des redevances
   infraction: Art. 244 et 245 Code Forestier
@@ -4477,7 +4477,7 @@ Law_260:
   country_id: 53
   currency: Fcfa
 
-Law_261:
+Law_392:
   id: 392
   written_infraction: 'mauvaise tenue des carnets de chantiers '
   infraction: Art. 130 Code Forestier
@@ -4491,7 +4491,7 @@ Law_261:
   country_id: 53
   currency: Fcfa
 
-Law_262:
+Law_393:
   id: 393
   written_infraction: |-
     -Non présentation des documents techniques et comptables à l'administration des Eaux et Forêts
@@ -4513,7 +4513,7 @@ Law_262:
   country_id: 53
   currency: Fcfa
 
-Law_263:
+Law_394:
   id: 394
   written_infraction: |
     - Conclusion du contrat de travail
@@ -4548,7 +4548,7 @@ Law_263:
   country_id: 53
   currency: Fcfa
 
-Law_264:
+Law_395:
   id: 395
   written_infraction: Non respect des quotas de production, de transformation et d'exportation
   infraction: Art. 228 Code Forestier
@@ -4563,7 +4563,7 @@ Law_264:
   country_id: 53
   currency: Fcfa
 
-Law_265:
+Law_396:
   id: 396
   written_infraction: Rien à signalé
   infraction: Art. 228, 229 Code Forestier
@@ -4578,7 +4578,7 @@ Law_265:
   country_id: 53
   currency: Fcfa
 
-Law_266:
+Law_397:
   id: 397
   written_infraction: Transformation sans autorisation
   infraction: Art. 14, 102 Code Forestier
@@ -4593,7 +4593,7 @@ Law_266:
   country_id: 53
   currency: Fcfa
 
-Law_267:
+Law_398:
   id: 398
   written_infraction: '214 Code forestier '
   infraction: '214 Code forestier '
@@ -4606,7 +4606,7 @@ Law_267:
   country_id: 188
   currency: FCFA
 
-Law_268:
+Law_399:
   id: 399
   written_infraction: Non transmission dans les délais prévus des carnets de chantier
   infraction: Article 88 Décret 2002-437
@@ -4619,7 +4619,7 @@ Law_268:
   country_id: 47
   currency: FCFA
 
-Law_269:
+Law_400:
   id: 400
   written_infraction: Absence de plan d’aménagement validé
   infraction: Article 24-40 Decret 2002-437
@@ -4627,7 +4627,7 @@ Law_269:
   subcategory_id: 30
   country_id: 47
 
-Law_270:
+Law_401:
   id: 401
   written_infraction: Exploitation avant la délivrance de la décision de coupe ou
     après expiration de l'autorisation
@@ -4644,7 +4644,7 @@ Law_270:
   country_id: 47
   currency: FCFA
 
-Law_271:
+Law_402:
   id: 402
   written_infraction: Non signification à la DDEF des auteurs des infractions commises
     dans sa concession
@@ -4656,7 +4656,7 @@ Law_271:
   country_id: 47
   currency: FCFA
 
-Law_272:
+Law_403:
   id: 403
   written_infraction: Abandonne des billes sur les lieux de coupe ou long des routes
     et parcs, cours d’eau et plages
@@ -4675,7 +4675,7 @@ Law_272:
   country_id: 86
   currency: CFA
 
-Law_273:
+Law_404:
   id: 404
   written_infraction: |-
     EXIGENCE: Promouvoir la participation active des populations locales, des Organisations Non Gouvernementales
@@ -4691,7 +4691,7 @@ Law_273:
   subcategory_id: 3
   country_id: 86
 
-Law_274:
+Law_405:
   id: 405
   written_infraction: |-
     GOUVERNANCE: En vue de la mise en oeuvre de la politique forestière nationale, l’Etat institue des cadres de
@@ -4708,7 +4708,7 @@ Law_274:
   subcategory_id: 3
   country_id: 86
 
-Law_275:
+Law_406:
   id: 406
   written_infraction: 'Quiconque entreprend l’exploitation de bois d’œuvre et d’ébénisterie
     à l’intérieur d’un parc national ou d’une réserve naturelle. La peine est portée
@@ -4722,7 +4722,7 @@ Law_275:
   country_id: 86
   currency: CFA
 
-Law_276:
+Law_407:
   id: 407
   written_infraction: 'EXIGENCE:  Est obligatoirement affilié à la Caisse Nationale
     de Prévoyance Sociale, tout employeur occupant des travailleurs salariés'
@@ -4730,7 +4730,7 @@ Law_276:
   subcategory_id: 16
   country_id: 86
 
-Law_277:
+Law_408:
   id: 408
   written_infraction: 'EXIGENCE: Le présent Code du travail est applicable sur tout
     le territoire de la République de Côte-d''Ivoire. il régit les relations entre
@@ -4744,7 +4744,7 @@ Law_277:
   subcategory_id: 16
   country_id: 86
 
-Law_278:
+Law_409:
   id: 409
   written_infraction: Recèle des produits forestiers provenant d’une infraction aux
     dispositions de la présente loi ;
@@ -4763,7 +4763,7 @@ Law_278:
   country_id: 86
   currency: CFA
 
-Law_279:
+Law_410:
   id: 410
   written_infraction: |-
     EXIGENCE: L’exportation et l’importation des produits forestiers ne peuvent être exercées que par des
@@ -4772,7 +4772,7 @@ Law_279:
   subcategory_id: 25
   country_id: 86
 
-Law_280:
+Law_411:
   id: 411
   written_infraction: 'EXIGENCE: Dans les forêts classées, l’exploitation commerciale
     est soumise : à l’existence d’un contrat d’exploitation forestière ou d’une concession
@@ -4787,7 +4787,7 @@ Law_280:
   subcategory_id: 21
   country_id: 86
 
-Law_281:
+Law_412:
   id: 412
   written_infraction: 'Exploite du bois autre que le bois d’oeuvre sans autorisation
     dans le domaine forestier protégé '
@@ -4806,7 +4806,7 @@ Law_281:
   country_id: 86
   currency: CFA
 
-Law_282:
+Law_413:
   id: 413
   written_infraction: Exploite ou exporte des ressources génétiques forestières sans
     autorisation.
@@ -4825,7 +4825,7 @@ Law_282:
   country_id: 86
   currency: CFA
 
-Law_283:
+Law_414:
   id: 414
   written_infraction: Exploite du bois d’oeuvre ou d’ébénisterie sans autorisation
     dans le domaine forestier classé
@@ -4844,7 +4844,7 @@ Law_283:
   country_id: 86
   currency: CFA
 
-Law_284:
+Law_415:
   id: 415
   written_infraction: 'GOUVERNANCE: L’Etat met en oeuvre les engagements découlant
     des conventions internationales notamment : La protection des espèces menacées
@@ -4853,7 +4853,7 @@ Law_284:
   subcategory_id: 24
   country_id: 86
 
-Law_285:
+Law_416:
   id: 416
   written_infraction: |-
     L’exportation et l’importation des produits forestiers se font conformément à la réglementation en
@@ -4862,7 +4862,7 @@ Law_285:
   subcategory_id: 24
   country_id: 86
 
-Law_286:
+Law_417:
   id: 417
   written_infraction: Non respecte des quotas d'exploitation
   infraction: Art 128 code forestier
@@ -4880,7 +4880,7 @@ Law_286:
   country_id: 86
   currency: CFA
 
-Law_287:
+Law_418:
   id: 418
   written_infraction: 'Non respecte des quotas d''exportation '
   infraction: Art 128 code forestier
@@ -4898,7 +4898,7 @@ Law_287:
   country_id: 86
   currency: CFA
 
-Law_288:
+Law_419:
   id: 419
   written_infraction: Non respecte des quotas de reboisement
   infraction: Art 128 code forestier
@@ -4916,7 +4916,7 @@ Law_288:
   country_id: 86
   currency: CFA
 
-Law_289:
+Law_420:
   id: 420
   written_infraction: Quiconque viole la réglementation relative aux feux de brousse
     et incendies de forêt ou les règles d’usage locales de lutte contre les sinistres.
@@ -4935,7 +4935,7 @@ Law_289:
   country_id: 86
   currency: CFA
 
-Law_290:
+Law_421:
   id: 421
   written_infraction: 'EXIGENCE: les conventions légalement formées tiennent lieu
     de loi à ceux qui les ont faites. Elles ne peuvent être révoquées que de leur
@@ -4945,7 +4945,7 @@ Law_290:
   subcategory_id: 30
   country_id: 86
 
-Law_291:
+Law_422:
   id: 422
   written_infraction: "EXIGENCE: Tout projet important susceptible d'avoir un impact
     sur l'environnement doit faire l'objet d'une étude d'impact préalable.  \n\nINFRACTION:
@@ -4961,7 +4961,7 @@ Law_291:
   subcategory_id: 31
   country_id: 86
 
-Law_292:
+Law_423:
   id: 423
   written_infraction: 'Quiconque, en usant de menaces, violences ou voies de fait,
     empêche ou tente d''empêcher tout fonctionnaire... d''accomplir la mission dont
@@ -4978,7 +4978,7 @@ Law_292:
   subcategory_id: 34
   country_id: 86
 
-Law_293:
+Law_424:
   id: 424
   written_infraction: 'EXIGENCE: A l''exception des société en participation, toute
     société doit être immatriculée au régistre du commerce et du crédit mobilier'
@@ -4987,7 +4987,7 @@ Law_293:
   subcategory_id: 20
   country_id: 86
 
-Law_294:
+Law_425:
   id: 425
   written_infraction: Echange ou cède son titre d'exploitation
   infraction: Art 130 code forestier 2014
@@ -5005,7 +5005,7 @@ Law_294:
   country_id: 86
   currency: CFA
 
-Law_295:
+Law_426:
   id: 426
   written_infraction: 'EXIGENCE: L’installation, l’augmentation des capacités et de
     la délocalisation d’usines de transformation du  bois sont soumises à l’autorisation
@@ -5014,7 +5014,7 @@ Law_295:
   subcategory_id: 41
   country_id: 86
 
-Law_296:
+Law_427:
   id: 427
   written_infraction: Exploitation forestière non autorisée dans une forêt du domaine
     national
@@ -5030,7 +5030,7 @@ Law_296:
   country_id: 45
   currency: FCFA
 
-Law_297:
+Law_428:
   id: 428
   written_infraction: 'Fait de couper, mutiler, ébrancher, arracher des espèces dans
     une réserve naturelle intégrale, un parc national ou un sanctuaire sans autorisation
@@ -5046,7 +5046,7 @@ Law_297:
   country_id: 188
   currency: CFA
 
-Law_298:
+Law_429:
   id: 429
   written_infraction: 'Défrichement non autorisé d''une forêt permanente, d''un périmètre
     mis en défens, d''une zone à écologie fragile '
@@ -5061,7 +5061,7 @@ Law_298:
   country_id: 188
   currency: CFA
 
-Law_299:
+Law_430:
   id: 430
   written_infraction: Omission volontaire ou actions frauduleuses tendant à modifier
     ou manipuler à la baisse les volumes de bois abattus
@@ -5076,7 +5076,7 @@ Law_299:
   country_id: 188
   currency: CFA
 
-Law_300:
+Law_431:
   id: 431
   written_infraction: Fausse déclaration en matière de production forestière
   infraction: Rien à signaler
@@ -5093,7 +5093,7 @@ Law_300:
   country_id: 53
   currency: Fcfa
 
-Law_301:
+Law_432:
   id: 432
   written_infraction: Conditions de rémunération
   infraction: |
@@ -5111,7 +5111,7 @@ Law_301:
   country_id: 53
   currency: Fcfa
 
-Law_302:
+Law_433:
   id: 433
   written_infraction: Procédures de licenciement
   infraction: Art. 63-75, 81-83, 87, 89-92, 94, 207 de la Loi n°022/2021 du 19 novembre
@@ -5128,7 +5128,7 @@ Law_302:
   country_id: 53
   currency: Fcfa
 
-Law_303:
+Law_434:
   id: 434
   written_infraction: Conditions de vie, de sécurité, de santé et d'hygiène au travail
   infraction: |
@@ -5147,7 +5147,7 @@ Law_303:
   country_id: 53
   currency: Fcfa
 
-Law_304:
+Law_435:
   id: 435
   written_infraction: Conditions de vie, de sécurité, de santé et d'hygiène au travail
   infraction: |
@@ -5167,7 +5167,7 @@ Law_304:
   country_id: 53
   currency: Fcfa
 
-Law_305:
+Law_436:
   id: 436
   written_infraction: Conditions de vie, de sécurité, de santé et d'hygiène au travail
   infraction: |
@@ -5189,7 +5189,7 @@ Law_305:
   country_id: 53
   currency: Fcfa
 
-Law_306:
+Law_437:
   id: 437
   written_infraction: Conditions des travailleurs mutés
   infraction: 'Art.171, 187,227-232 de la Loi n°022/2021 du 19 novembre 2021, portant
@@ -5208,7 +5208,7 @@ Law_306:
   country_id: 53
   currency: Fcfa
 
-Law_307:
+Law_438:
   id: 438
   written_infraction: Paiement de cotisations sociales
   infraction: Code de sécurité sociale
@@ -5222,7 +5222,7 @@ Law_307:
   country_id: 53
   currency: Fcfa
 
-Law_308:
+Law_439:
   id: 439
   written_infraction: |-
     Activités de transformation de bois dommageables à
@@ -5242,7 +5242,7 @@ Law_308:
   country_id: 53
   currency: Fcfa
 
-Law_309:
+Law_440:
   id: 440
   written_infraction: Falsification ou contrefaçon de titre d'exploitation forestière
   sanctions: Art. 430 de la loi n°006/2020 du 30 juin 2020 portant modification de
@@ -5259,7 +5259,7 @@ Law_309:
   country_id: 53
   currency: Fcfa
 
-Law_310:
+Law_441:
   id: 441
   written_infraction: falsification ou contrefaçon des marteaux de l'administration
     des Eaux et Forêts servant aux marques forestières
@@ -5278,7 +5278,7 @@ Law_310:
   country_id: 53
   currency: Fcfa
 
-Law_311:
+Law_442:
   id: 442
   written_infraction: 'falsification ou contrefaçon des marteaux forestiers des particuliers
     ou de leurs marques régulièrement déposées '
@@ -5297,7 +5297,7 @@ Law_311:
   country_id: 53
   currency: Fcfa
 
-Law_312:
+Law_443:
   id: 443
   written_infraction: Droit au travail
   infraction: Art. 2 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
@@ -5312,7 +5312,7 @@ Law_312:
   country_id: 53
   currency: Fcfa
 
-Law_313:
+Law_444:
   id: 444
   written_infraction: Respect des libertés et de la dignité du travailleur
   infraction: Art. 3 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
@@ -5327,7 +5327,7 @@ Law_313:
   country_id: 53
   currency: Fcfa
 
-Law_314:
+Law_445:
   id: 445
   written_infraction: Interdiction du travail forcé ou obligatoire
   infraction: Art. 4, 5 de la Loi n°022/2021 du 19 novembre 2021, portant Code du
@@ -5342,7 +5342,7 @@ Law_314:
   country_id: 53
   currency: Fcfa
 
-Law_315:
+Law_446:
   id: 446
   written_infraction: Harcèlement en milieu professionnel
   infraction: Art. 6 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
@@ -5359,7 +5359,7 @@ Law_315:
   country_id: 53
   currency: Fcfa
 
-Law_316:
+Law_447:
   id: 447
   written_infraction: Egalité des travailleurs devant la loi
   infraction: Art. 9 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
@@ -5374,7 +5374,7 @@ Law_316:
   country_id: 53
   currency: Fcfa
 
-Law_317:
+Law_448:
   id: 448
   written_infraction: Egalité de rémunération des travailleurs
   infraction: Art. 170 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
@@ -5390,7 +5390,7 @@ Law_317:
   country_id: 53
   currency: Fcfa
 
-Law_318:
+Law_449:
   id: 449
   written_infraction: Protection de la femme en état de maternité
   infraction: 207-213 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
@@ -5406,7 +5406,7 @@ Law_318:
   country_id: 53
   currency: Fcfa
 
-Law_319:
+Law_450:
   id: 450
   written_infraction: Protection de l'enfant au travail
   infraction: Art. 7, 214, 215 de la Loi n°022/2021 du 19 novembre 2021, portant Code
@@ -5422,7 +5422,7 @@ Law_319:
   country_id: 53
   currency: Fcfa
 
-Law_320:
+Law_451:
   id: 451
   written_infraction: Travail des personnes vivant avec un handicap
   infraction: Art. 216-219 de la Loi n°022/2021 du 19 novembre 2021, portant Code
@@ -5438,7 +5438,7 @@ Law_320:
   country_id: 53
   currency: Fcfa
 
-Law_321:
+Law_452:
   id: 452
   written_infraction: Obligation de repos
   infraction: Art. 220 de la Loi n°022/2021 du 19 novembre 2021, portant Code du Travail
@@ -5453,7 +5453,7 @@ Law_321:
   country_id: 53
   currency: Fcfa
 
-Law_322:
+Law_453:
   id: 453
   written_infraction: Exploitation intensive dommageable à l'environnement
   infraction: "Art. 66 Code Forestier                                                \nDécret

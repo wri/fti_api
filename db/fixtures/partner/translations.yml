@@ -1,255 +1,255 @@
 
-Partner_1_en_translation:
-  contributor_id: 7
-  locale: en
-  name: REM
-
-Partner_1_fr_translation:
-  contributor_id: 7
-  locale: fr
-  name: REM
-
-Partner_1_pt_translation:
-  contributor_id: 7
-  locale: pt
-  name: REM
-
-Partner_2_en_translation:
-  contributor_id: 8
-  locale: en
-  name: FLAG
-
-Partner_2_fr_translation:
-  contributor_id: 8
-  locale: fr
-  name: FLAG
-
-Partner_2_zh-CN_translation:
-  contributor_id: 8
-  locale: zh-CN
-  name: FLAG
-
-Partner_2_ja_translation:
-  contributor_id: 8
-  locale: ja
-  name: FLAG
-
-Partner_2_ko_translation:
-  contributor_id: 8
-  locale: ko
-  name: FLAG
-
-Partner_2_vi_translation:
-  contributor_id: 8
-  locale: vi
-  name: FLAG
-
-Partner_2_pt_translation:
-  contributor_id: 8
-  locale: pt
-  name: FLAG
-
-Partner_3_en_translation:
-  contributor_id: 9
-  locale: en
-  name: OGF
-
-Partner_3_fr_translation:
-  contributor_id: 9
-  locale: fr
-  name: OGF
-
-Partner_3_pt_translation:
-  contributor_id: 9
-  locale: pt
-  name: OGF
-
-Partner_4_en_translation:
-  contributor_id: 10
-  locale: en
-  name: CAGDF
-
-Partner_4_fr_translation:
-  contributor_id: 10
-  locale: fr
-  name: CAGDF
-
-Partner_4_zh-CN_translation:
-  contributor_id: 10
-  locale: zh-CN
-  name: CAGDF
-
-Partner_4_pt_translation:
-  contributor_id: 10
-  locale: pt
-  name: CAGDF
-
-Partner_5_en_translation:
-  contributor_id: 14
-  locale: en
-  name: Brainforest
-
-Partner_5_fr_translation:
-  contributor_id: 14
-  locale: fr
-  name: Brainforest
-
-Partner_5_pt_translation:
-  contributor_id: 14
-  locale: pt
-  name: Brainforest
-
-Partner_6_en_translation:
-  contributor_id: 16
-  locale: en
-  name: CED
-
-Partner_6_fr_translation:
-  contributor_id: 16
-  locale: fr
-  name: CED
-
-Partner_6_pt_translation:
-  contributor_id: 16
-  locale: pt
-  name: CED
-
 Partner_7_en_translation:
-  contributor_id: 17
+  contributor_id: 7
   locale: en
-  name: FODER
+  name: REM
 
 Partner_7_fr_translation:
-  contributor_id: 17
+  contributor_id: 7
   locale: fr
-  name: FODER
-
-Partner_7_zh-CN_translation:
-  contributor_id: 17
-  locale: zh-CN
-  name: FODER
+  name: REM
 
 Partner_7_pt_translation:
+  contributor_id: 7
+  locale: pt
+  name: REM
+
+Partner_8_en_translation:
+  contributor_id: 8
+  locale: en
+  name: FLAG
+
+Partner_8_fr_translation:
+  contributor_id: 8
+  locale: fr
+  name: FLAG
+
+Partner_8_zh-CN_translation:
+  contributor_id: 8
+  locale: zh-CN
+  name: FLAG
+
+Partner_8_ja_translation:
+  contributor_id: 8
+  locale: ja
+  name: FLAG
+
+Partner_8_ko_translation:
+  contributor_id: 8
+  locale: ko
+  name: FLAG
+
+Partner_8_vi_translation:
+  contributor_id: 8
+  locale: vi
+  name: FLAG
+
+Partner_8_pt_translation:
+  contributor_id: 8
+  locale: pt
+  name: FLAG
+
+Partner_9_en_translation:
+  contributor_id: 9
+  locale: en
+  name: OGF
+
+Partner_9_fr_translation:
+  contributor_id: 9
+  locale: fr
+  name: OGF
+
+Partner_9_pt_translation:
+  contributor_id: 9
+  locale: pt
+  name: OGF
+
+Partner_10_en_translation:
+  contributor_id: 10
+  locale: en
+  name: CAGDF
+
+Partner_10_fr_translation:
+  contributor_id: 10
+  locale: fr
+  name: CAGDF
+
+Partner_10_zh-CN_translation:
+  contributor_id: 10
+  locale: zh-CN
+  name: CAGDF
+
+Partner_10_pt_translation:
+  contributor_id: 10
+  locale: pt
+  name: CAGDF
+
+Partner_14_en_translation:
+  contributor_id: 14
+  locale: en
+  name: Brainforest
+
+Partner_14_fr_translation:
+  contributor_id: 14
+  locale: fr
+  name: Brainforest
+
+Partner_14_pt_translation:
+  contributor_id: 14
+  locale: pt
+  name: Brainforest
+
+Partner_16_en_translation:
+  contributor_id: 16
+  locale: en
+  name: CED
+
+Partner_16_fr_translation:
+  contributor_id: 16
+  locale: fr
+  name: CED
+
+Partner_16_pt_translation:
+  contributor_id: 16
+  locale: pt
+  name: CED
+
+Partner_17_en_translation:
+  contributor_id: 17
+  locale: en
+  name: FODER
+
+Partner_17_fr_translation:
+  contributor_id: 17
+  locale: fr
+  name: FODER
+
+Partner_17_zh-CN_translation:
+  contributor_id: 17
+  locale: zh-CN
+  name: FODER
+
+Partner_17_pt_translation:
   contributor_id: 17
   locale: pt
   name: FODER
 
-Partner_8_en_translation:
+Partner_21_en_translation:
   contributor_id: 21
   locale: en
   name: Le Commerce du Bois
 
-Partner_8_fr_translation:
+Partner_21_fr_translation:
   contributor_id: 21
   locale: fr
   name: Le Commerce du Bois
 
-Partner_8_pt_translation:
+Partner_21_pt_translation:
   contributor_id: 21
   locale: pt
   name: Le Commerce du Bois
 
-Partner_9_en_translation:
+Partner_22_en_translation:
   contributor_id: 22
   locale: en
   name: RENOI-RDC
 
-Partner_9_fr_translation:
+Partner_22_fr_translation:
   contributor_id: 22
   locale: fr
   name: RENOI-RDC
 
-Partner_9_zh-CN_translation:
+Partner_22_zh-CN_translation:
   contributor_id: 22
   locale: zh-CN
   name: RENOI-RDC
 
-Partner_9_pt_translation:
+Partner_22_pt_translation:
   contributor_id: 22
   locale: pt
   name: RENOI-RDC
 
-Partner_9_ja_translation:
+Partner_22_ja_translation:
   contributor_id: 22
   locale: ja
   name: RENOI-RDC
 
-Partner_9_ko_translation:
+Partner_22_ko_translation:
   contributor_id: 22
   locale: ko
   name: RENOI-RDC
 
-Partner_9_vi_translation:
+Partner_22_vi_translation:
   contributor_id: 22
   locale: vi
   name: RENOI-RDC
 
-Partner_10_en_translation:
+Partner_23_en_translation:
   contributor_id: 23
   locale: en
   name: ECODEV
 
-Partner_10_fr_translation:
+Partner_23_fr_translation:
   contributor_id: 23
   locale: fr
   name: ECODEV
 
-Partner_10_zh-CN_translation:
+Partner_23_zh-CN_translation:
   contributor_id: 23
   locale: zh-CN
   name: ECODEV
 
-Partner_10_ja_translation:
+Partner_23_ja_translation:
   contributor_id: 23
   locale: ja
   name: ECODEV
 
-Partner_10_ko_translation:
+Partner_23_ko_translation:
   contributor_id: 23
   locale: ko
   name: ECODEV
 
-Partner_10_vi_translation:
+Partner_23_vi_translation:
   contributor_id: 23
   locale: vi
   name: ECODEV
 
-Partner_10_pt_translation:
+Partner_23_pt_translation:
   contributor_id: 23
   locale: pt
   name: ECODEV
 
-Partner_11_pt_translation:
+Partner_26_pt_translation:
   contributor_id: 26
   locale: pt
   name: ATIBT
 
-Partner_11_en_translation:
+Partner_26_en_translation:
   contributor_id: 26
   locale: en
   name: ATIBT
 
-Partner_11_fr_translation:
+Partner_26_fr_translation:
   contributor_id: 26
   locale: fr
   name: ATIBT
 
-Partner_11_zh-CN_translation:
+Partner_26_zh-CN_translation:
   contributor_id: 26
   locale: zh-CN
   name: ATIBT
 
-Partner_11_ja_translation:
+Partner_26_ja_translation:
   contributor_id: 26
   locale: ja
   name: ATIBT
 
-Partner_11_ko_translation:
+Partner_26_ko_translation:
   contributor_id: 26
   locale: ko
   name: ATIBT
 
-Partner_11_vi_translation:
+Partner_26_vi_translation:
   contributor_id: 26
   locale: vi
   name: ATIBT

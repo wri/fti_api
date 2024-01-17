@@ -2204,154 +2204,154 @@ Government_63_pt_translation:
   locale: pt
   government_entity: Not specified
 
-Government_64_fr_translation:
-  government_id: 66
-  locale: fr
-  government_entity: National Forestry Agency (SAFR).
-  details: Nearly all of the logging in Ukraine is carried out by the government itself,
-    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
-    forestry agency (SAFR).
-
-Government_64_zh-CN_translation:
-  government_id: 66
-  locale: zh-CN
-  government_entity: National Forestry Agency (SAFR).
-  details: Nearly all of the logging in Ukraine is carried out by the government itself,
-    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
-    forestry agency (SAFR).
-
-Government_64_en_translation:
-  government_id: 66
-  locale: en
-  government_entity: National Forestry Agency (SAFR)
-  details: "Nearly all of the logging in Ukraine is carried out by the government
-    itself, through State Forestry Enterprises (SFEs), mostly under the auspices of
-    the national forestry agency (SAFR).Implementation of the SAFR’s\r\npolicies is
-    overseen at the regional level by a forestry directorate for each province called
-    Regional Forestry Management Boards (RFMBs). "
-
-Government_64_ja_translation:
-  government_id: 66
-  locale: ja
-  government_entity: National Forestry Agency (SAFR).
-  details: Nearly all of the logging in Ukraine is carried out by the government itself,
-    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
-    forestry agency (SAFR).
-
-Government_64_ko_translation:
-  government_id: 66
-  locale: ko
-  government_entity: National Forestry Agency (SAFR).
-  details: Nearly all of the logging in Ukraine is carried out by the government itself,
-    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
-    forestry agency (SAFR).
-
-Government_64_vi_translation:
-  government_id: 66
-  locale: vi
-  government_entity: National Forestry Agency (SAFR).
-  details: Nearly all of the logging in Ukraine is carried out by the government itself,
-    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
-    forestry agency (SAFR).
-
-Government_64_pt_translation:
-  government_id: 66
-  locale: pt
-  government_entity: National Forestry Agency (SAFR)
-  details: "Nearly all of the logging in Ukraine is carried out by the government
-    itself, through State Forestry Enterprises (SFEs), mostly under the auspices of
-    the national forestry agency (SAFR).Implementation of the SAFR’s\r\npolicies is
-    overseen at the regional level by a forestry directorate for each province called
-    Regional Forestry Management Boards (RFMBs). "
-
-Government_65_fr_translation:
-  government_id: 67
-  locale: fr
-  government_entity: Regional Forestry Management Boards (RFMBs)
-  details: Responsible for issuing key documentation such as harvesting permits and
-    certificates of origin, which are required for export of timber. The RFMB is the
-    coordinating body for the various forestry management units, called State Forestry
-    Enterprises (SFEs), for their region.
-
-Government_65_zh-CN_translation:
-  government_id: 67
-  locale: zh-CN
-  government_entity: Regional Forestry Management Boards (RFMBs)
-  details: Responsible for issuing key documentation such as harvesting permits and
-    certificates of origin, which are required for export of timber. The RFMB is the
-    coordinating body for the various forestry management units, called State Forestry
-    Enterprises (SFEs), for their region.
-
-Government_65_en_translation:
-  government_id: 67
-  locale: en
-  government_entity: Regional Forestry Management Boards (RFMB)
-  details: Responsible for issuing key documentation such as harvesting permits and
-    certificates of origin, which are required for export of timber. The RFMB is the
-    coordinating body for the various forestry management units, called State Forestry
-    Enterprises (SFEs), for their region. Operate at provincial level.
-
-Government_65_ja_translation:
-  government_id: 67
-  locale: ja
-  government_entity: Regional Forestry Management Boards (RFMBs)
-  details: Responsible for issuing key documentation such as harvesting permits and
-    certificates of origin, which are required for export of timber. The RFMB is the
-    coordinating body for the various forestry management units, called State Forestry
-    Enterprises (SFEs), for their region.
-
-Government_65_ko_translation:
-  government_id: 67
-  locale: ko
-  government_entity: Regional Forestry Management Boards (RFMBs)
-  details: Responsible for issuing key documentation such as harvesting permits and
-    certificates of origin, which are required for export of timber. The RFMB is the
-    coordinating body for the various forestry management units, called State Forestry
-    Enterprises (SFEs), for their region.
-
-Government_65_vi_translation:
-  government_id: 67
-  locale: vi
-  government_entity: Regional Forestry Management Boards (RFMBs)
-  details: Responsible for issuing key documentation such as harvesting permits and
-    certificates of origin, which are required for export of timber. The RFMB is the
-    coordinating body for the various forestry management units, called State Forestry
-    Enterprises (SFEs), for their region.
-
-Government_65_pt_translation:
-  government_id: 67
-  locale: pt
-  government_entity: Regional Forestry Management Boards (RFMB)
-  details: Responsible for issuing key documentation such as harvesting permits and
-    certificates of origin, which are required for export of timber. The RFMB is the
-    coordinating body for the various forestry management units, called State Forestry
-    Enterprises (SFEs), for their region. Operate at provincial level.
-
 Government_66_fr_translation:
-  government_id: 68
+  government_id: 66
   locale: fr
-  government_entity: State Forestry Enterprises (SFEs
-  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
-    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
-    for each individual SFE. '
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
 
 Government_66_zh-CN_translation:
-  government_id: 68
+  government_id: 66
   locale: zh-CN
-  government_entity: State Forestry Enterprises (SFEs
-  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
-    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
-    for each individual SFE. '
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
 
 Government_66_en_translation:
-  government_id: 68
+  government_id: 66
   locale: en
-  government_entity: State Forestry Enterprises (SFE)
-  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
-    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
-    for each individual SFE. Operate at District Level. '
+  government_entity: National Forestry Agency (SAFR)
+  details: "Nearly all of the logging in Ukraine is carried out by the government
+    itself, through State Forestry Enterprises (SFEs), mostly under the auspices of
+    the national forestry agency (SAFR).Implementation of the SAFR’s\r\npolicies is
+    overseen at the regional level by a forestry directorate for each province called
+    Regional Forestry Management Boards (RFMBs). "
 
 Government_66_ja_translation:
+  government_id: 66
+  locale: ja
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_66_ko_translation:
+  government_id: 66
+  locale: ko
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_66_vi_translation:
+  government_id: 66
+  locale: vi
+  government_entity: National Forestry Agency (SAFR).
+  details: Nearly all of the logging in Ukraine is carried out by the government itself,
+    through State Forestry Enterprises (SFEs), mostly under the auspices of the national
+    forestry agency (SAFR).
+
+Government_66_pt_translation:
+  government_id: 66
+  locale: pt
+  government_entity: National Forestry Agency (SAFR)
+  details: "Nearly all of the logging in Ukraine is carried out by the government
+    itself, through State Forestry Enterprises (SFEs), mostly under the auspices of
+    the national forestry agency (SAFR).Implementation of the SAFR’s\r\npolicies is
+    overseen at the regional level by a forestry directorate for each province called
+    Regional Forestry Management Boards (RFMBs). "
+
+Government_67_fr_translation:
+  government_id: 67
+  locale: fr
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_67_zh-CN_translation:
+  government_id: 67
+  locale: zh-CN
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_67_en_translation:
+  government_id: 67
+  locale: en
+  government_entity: Regional Forestry Management Boards (RFMB)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region. Operate at provincial level.
+
+Government_67_ja_translation:
+  government_id: 67
+  locale: ja
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_67_ko_translation:
+  government_id: 67
+  locale: ko
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_67_vi_translation:
+  government_id: 67
+  locale: vi
+  government_entity: Regional Forestry Management Boards (RFMBs)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region.
+
+Government_67_pt_translation:
+  government_id: 67
+  locale: pt
+  government_entity: Regional Forestry Management Boards (RFMB)
+  details: Responsible for issuing key documentation such as harvesting permits and
+    certificates of origin, which are required for export of timber. The RFMB is the
+    coordinating body for the various forestry management units, called State Forestry
+    Enterprises (SFEs), for their region. Operate at provincial level.
+
+Government_68_fr_translation:
+  government_id: 68
+  locale: fr
+  government_entity: State Forestry Enterprises (SFEs
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. '
+
+Government_68_zh-CN_translation:
+  government_id: 68
+  locale: zh-CN
+  government_entity: State Forestry Enterprises (SFEs
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. '
+
+Government_68_en_translation:
+  government_id: 68
+  locale: en
+  government_entity: State Forestry Enterprises (SFE)
+  details: 'These SFEs produce 83 per cent of all the logs harvested in Ukraine. The
+    SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
+    for each individual SFE. Operate at District Level. '
+
+Government_68_ja_translation:
   government_id: 68
   locale: ja
   government_entity: State Forestry Enterprises (SFEs
@@ -2359,7 +2359,7 @@ Government_66_ja_translation:
     SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
     for each individual SFE. '
 
-Government_66_ko_translation:
+Government_68_ko_translation:
   government_id: 68
   locale: ko
   government_entity: State Forestry Enterprises (SFEs
@@ -2367,7 +2367,7 @@ Government_66_ko_translation:
     SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
     for each individual SFE. '
 
-Government_66_vi_translation:
+Government_68_vi_translation:
   government_id: 68
   locale: vi
   government_entity: State Forestry Enterprises (SFEs
@@ -2375,7 +2375,7 @@ Government_66_vi_translation:
     SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
     for each individual SFE. '
 
-Government_66_pt_translation:
+Government_68_pt_translation:
   government_id: 68
   locale: pt
   government_entity: State Forestry Enterprises (SFE)
@@ -2383,597 +2383,597 @@ Government_66_pt_translation:
     SAFR and Ministry of Ecology approve the Annual Allowable Cut (AAC) each year
     for each individual SFE. Operate at District Level. '
 
-Government_67_en_translation:
-  government_id: 69
-  locale: en
-  government_entity: Ukraine’s State Audit Service (DFS)
-
-Government_67_fr_translation:
-  government_id: 69
-  locale: fr
-  government_entity: Ukraine’s State Audit Service (DFS)
-
-Government_67_zh-CN_translation:
-  government_id: 69
-  locale: zh-CN
-  government_entity: Ukraine’s State Audit Service (DFS)
-
-Government_67_ja_translation:
-  government_id: 69
-  locale: ja
-  government_entity: Ukraine’s State Audit Service (DFS)
-
-Government_67_ko_translation:
-  government_id: 69
-  locale: ko
-  government_entity: Ukraine’s State Audit Service (DFS)
-
-Government_67_vi_translation:
-  government_id: 69
-  locale: vi
-  government_entity: Ukraine’s State Audit Service (DFS)
-
-Government_67_pt_translation:
-  government_id: 69
-  locale: pt
-  government_entity: Ukraine’s State Audit Service (DFS)
-
-Government_68_en_translation:
-  government_id: 70
-  locale: en
-  government_entity: Ukraine Customs
-
-Government_68_fr_translation:
-  government_id: 70
-  locale: fr
-  government_entity: Ukraine Customs
-
-Government_68_zh-CN_translation:
-  government_id: 70
-  locale: zh-CN
-  government_entity: Ukraine Customs
-
-Government_68_ja_translation:
-  government_id: 70
-  locale: ja
-  government_entity: Ukraine Customs
-
-Government_68_ko_translation:
-  government_id: 70
-  locale: ko
-  government_entity: Ukraine Customs
-
-Government_68_vi_translation:
-  government_id: 70
-  locale: vi
-  government_entity: Ukraine Customs
-
-Government_68_pt_translation:
-  government_id: 70
-  locale: pt
-  government_entity: Ukraine Customs
-
 Government_69_en_translation:
-  government_id: 71
+  government_id: 69
   locale: en
-  government_entity: Wildlife Division of the Forestry Commission
+  government_entity: Ukraine’s State Audit Service (DFS)
 
 Government_69_fr_translation:
-  government_id: 71
+  government_id: 69
   locale: fr
-  government_entity: Wildlife Division of the Forestry Commission
+  government_entity: Ukraine’s State Audit Service (DFS)
 
 Government_69_zh-CN_translation:
-  government_id: 71
+  government_id: 69
   locale: zh-CN
-  government_entity: Wildlife Division of the Forestry Commission
+  government_entity: Ukraine’s State Audit Service (DFS)
 
 Government_69_ja_translation:
-  government_id: 71
+  government_id: 69
   locale: ja
-  government_entity: Wildlife Division of the Forestry Commission
+  government_entity: Ukraine’s State Audit Service (DFS)
 
 Government_69_ko_translation:
-  government_id: 71
+  government_id: 69
   locale: ko
-  government_entity: Wildlife Division of the Forestry Commission
+  government_entity: Ukraine’s State Audit Service (DFS)
 
 Government_69_vi_translation:
-  government_id: 71
+  government_id: 69
   locale: vi
-  government_entity: Wildlife Division of the Forestry Commission
+  government_entity: Ukraine’s State Audit Service (DFS)
 
 Government_69_pt_translation:
+  government_id: 69
+  locale: pt
+  government_entity: Ukraine’s State Audit Service (DFS)
+
+Government_70_en_translation:
+  government_id: 70
+  locale: en
+  government_entity: Ukraine Customs
+
+Government_70_fr_translation:
+  government_id: 70
+  locale: fr
+  government_entity: Ukraine Customs
+
+Government_70_zh-CN_translation:
+  government_id: 70
+  locale: zh-CN
+  government_entity: Ukraine Customs
+
+Government_70_ja_translation:
+  government_id: 70
+  locale: ja
+  government_entity: Ukraine Customs
+
+Government_70_ko_translation:
+  government_id: 70
+  locale: ko
+  government_entity: Ukraine Customs
+
+Government_70_vi_translation:
+  government_id: 70
+  locale: vi
+  government_entity: Ukraine Customs
+
+Government_70_pt_translation:
+  government_id: 70
+  locale: pt
+  government_entity: Ukraine Customs
+
+Government_71_en_translation:
+  government_id: 71
+  locale: en
+  government_entity: Wildlife Division of the Forestry Commission
+
+Government_71_fr_translation:
+  government_id: 71
+  locale: fr
+  government_entity: Wildlife Division of the Forestry Commission
+
+Government_71_zh-CN_translation:
+  government_id: 71
+  locale: zh-CN
+  government_entity: Wildlife Division of the Forestry Commission
+
+Government_71_ja_translation:
+  government_id: 71
+  locale: ja
+  government_entity: Wildlife Division of the Forestry Commission
+
+Government_71_ko_translation:
+  government_id: 71
+  locale: ko
+  government_entity: Wildlife Division of the Forestry Commission
+
+Government_71_vi_translation:
+  government_id: 71
+  locale: vi
+  government_entity: Wildlife Division of the Forestry Commission
+
+Government_71_pt_translation:
   government_id: 71
   locale: pt
   government_entity: Wildlife Division of the Forestry Commission
 
-Government_70_en_translation:
-  government_id: 72
-  locale: en
-  government_entity: 'Forestry Commission '
-
-Government_70_fr_translation:
-  government_id: 72
-  locale: fr
-  government_entity: 'Forestry Commission '
-
-Government_70_zh-CN_translation:
-  government_id: 72
-  locale: zh-CN
-  government_entity: 'Forestry Commission '
-
-Government_70_ja_translation:
-  government_id: 72
-  locale: ja
-  government_entity: 'Forestry Commission '
-
-Government_70_ko_translation:
-  government_id: 72
-  locale: ko
-  government_entity: 'Forestry Commission '
-
-Government_70_vi_translation:
-  government_id: 72
-  locale: vi
-  government_entity: 'Forestry Commission '
-
-Government_70_pt_translation:
-  government_id: 72
-  locale: pt
-  government_entity: 'Forestry Commission '
-
-Government_71_en_translation:
-  government_id: 73
-  locale: en
-  government_entity: Timber Industry Development Division
-
-Government_71_fr_translation:
-  government_id: 73
-  locale: fr
-  government_entity: Timber Industry Development Division
-
-Government_71_zh-CN_translation:
-  government_id: 73
-  locale: zh-CN
-  government_entity: Timber Industry Development Division
-
-Government_71_ja_translation:
-  government_id: 73
-  locale: ja
-  government_entity: Timber Industry Development Division
-
-Government_71_ko_translation:
-  government_id: 73
-  locale: ko
-  government_entity: Timber Industry Development Division
-
-Government_71_vi_translation:
-  government_id: 73
-  locale: vi
-  government_entity: Timber Industry Development Division
-
-Government_71_pt_translation:
-  government_id: 73
-  locale: pt
-  government_entity: Timber Industry Development Division
-
 Government_72_en_translation:
-  government_id: 74
+  government_id: 72
   locale: en
-  government_entity: MINEF
-  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
-    d''exploitation forestière. '
-
-Government_72_zh-CN_translation:
-  government_id: 74
-  locale: zh-CN
-  government_entity: MINEF
-  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
-    d''exploitation forestière. '
+  government_entity: 'Forestry Commission '
 
 Government_72_fr_translation:
+  government_id: 72
+  locale: fr
+  government_entity: 'Forestry Commission '
+
+Government_72_zh-CN_translation:
+  government_id: 72
+  locale: zh-CN
+  government_entity: 'Forestry Commission '
+
+Government_72_ja_translation:
+  government_id: 72
+  locale: ja
+  government_entity: 'Forestry Commission '
+
+Government_72_ko_translation:
+  government_id: 72
+  locale: ko
+  government_entity: 'Forestry Commission '
+
+Government_72_vi_translation:
+  government_id: 72
+  locale: vi
+  government_entity: 'Forestry Commission '
+
+Government_72_pt_translation:
+  government_id: 72
+  locale: pt
+  government_entity: 'Forestry Commission '
+
+Government_73_en_translation:
+  government_id: 73
+  locale: en
+  government_entity: Timber Industry Development Division
+
+Government_73_fr_translation:
+  government_id: 73
+  locale: fr
+  government_entity: Timber Industry Development Division
+
+Government_73_zh-CN_translation:
+  government_id: 73
+  locale: zh-CN
+  government_entity: Timber Industry Development Division
+
+Government_73_ja_translation:
+  government_id: 73
+  locale: ja
+  government_entity: Timber Industry Development Division
+
+Government_73_ko_translation:
+  government_id: 73
+  locale: ko
+  government_entity: Timber Industry Development Division
+
+Government_73_vi_translation:
+  government_id: 73
+  locale: vi
+  government_entity: Timber Industry Development Division
+
+Government_73_pt_translation:
+  government_id: 73
+  locale: pt
+  government_entity: Timber Industry Development Division
+
+Government_74_en_translation:
+  government_id: 74
+  locale: en
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_74_zh-CN_translation:
+  government_id: 74
+  locale: zh-CN
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_74_fr_translation:
   government_id: 74
   locale: fr
   government_entity: Ministère des Eaux et Forêts (MINEF)
   details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
     d''exploitation forestière. '
 
-Government_72_ja_translation:
-  government_id: 74
-  locale: ja
-  government_entity: MINEF
-  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
-    d''exploitation forestière. '
-
-Government_72_ko_translation:
-  government_id: 74
-  locale: ko
-  government_entity: MINEF
-  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
-    d''exploitation forestière. '
-
-Government_72_vi_translation:
-  government_id: 74
-  locale: vi
-  government_entity: MINEF
-  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
-    d''exploitation forestière. '
-
-Government_72_pt_translation:
-  government_id: 74
-  locale: pt
-  government_entity: MINEF
-  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
-    d''exploitation forestière. '
-
-Government_73_fr_translation:
-  government_id: 75
-  locale: fr
-  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
-
-Government_73_en_translation:
-  government_id: 75
-  locale: en
-  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
-
-Government_73_zh-CN_translation:
-  government_id: 75
-  locale: zh-CN
-  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
-
-Government_73_ja_translation:
-  government_id: 75
-  locale: ja
-  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
-
-Government_73_ko_translation:
-  government_id: 75
-  locale: ko
-  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
-
-Government_73_vi_translation:
-  government_id: 75
-  locale: vi
-  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
-
-Government_73_pt_translation:
-  government_id: 75
-  locale: pt
-  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
-
-Government_74_fr_translation:
-  government_id: 76
-  locale: fr
-  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
-
-Government_74_en_translation:
-  government_id: 76
-  locale: en
-  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
-
-Government_74_zh-CN_translation:
-  government_id: 76
-  locale: zh-CN
-  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
-
 Government_74_ja_translation:
-  government_id: 76
+  government_id: 74
   locale: ja
-  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
 
 Government_74_ko_translation:
-  government_id: 76
+  government_id: 74
   locale: ko
-  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
 
 Government_74_vi_translation:
-  government_id: 76
+  government_id: 74
   locale: vi
-  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
 
 Government_74_pt_translation:
+  government_id: 74
+  locale: pt
+  government_entity: MINEF
+  details: 'Ministère des Eaux et Forêts, ayant la charge et la gestion des domaine
+    d''exploitation forestière. '
+
+Government_75_fr_translation:
+  government_id: 75
+  locale: fr
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+
+Government_75_en_translation:
+  government_id: 75
+  locale: en
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+
+Government_75_zh-CN_translation:
+  government_id: 75
+  locale: zh-CN
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+
+Government_75_ja_translation:
+  government_id: 75
+  locale: ja
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+
+Government_75_ko_translation:
+  government_id: 75
+  locale: ko
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+
+Government_75_vi_translation:
+  government_id: 75
+  locale: vi
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+
+Government_75_pt_translation:
+  government_id: 75
+  locale: pt
+  government_entity: Direction de Production et de l'Industrie Forestière (DPIF)
+
+Government_76_fr_translation:
+  government_id: 76
+  locale: fr
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+
+Government_76_en_translation:
+  government_id: 76
+  locale: en
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+
+Government_76_zh-CN_translation:
+  government_id: 76
+  locale: zh-CN
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+
+Government_76_ja_translation:
+  government_id: 76
+  locale: ja
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+
+Government_76_ko_translation:
+  government_id: 76
+  locale: ko
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+
+Government_76_vi_translation:
+  government_id: 76
+  locale: vi
+  government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
+
+Government_76_pt_translation:
   government_id: 76
   locale: pt
   government_entity: Direction du Patrimoine et des Affaires Financières (DPAF)
 
-Government_75_zh-CN_translation:
+Government_77_zh-CN_translation:
   government_id: 77
   locale: zh-CN
   government_entity: SODEFOR
   details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
     du Ministère du Budget et du Portefeuille de l'Etat
-
-Government_75_fr_translation:
-  government_id: 77
-  locale: fr
-  government_entity: Société de Développement des Forêts (SODEFOR)
-  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
-    du Ministère du Budget et du Portefeuille de l'Etat
-
-Government_75_en_translation:
-  government_id: 77
-  locale: en
-  government_entity: Société de Développement des Forêts (SODEFOR)
-  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
-    du Ministère du Budget et du Portefeuille de l'Etat
-
-Government_75_ja_translation:
-  government_id: 77
-  locale: ja
-  government_entity: SODEFOR
-  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
-    du Ministère du Budget et du Portefeuille de l'Etat
-
-Government_75_ko_translation:
-  government_id: 77
-  locale: ko
-  government_entity: SODEFOR
-  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
-    du Ministère du Budget et du Portefeuille de l'Etat
-
-Government_75_vi_translation:
-  government_id: 77
-  locale: vi
-  government_entity: SODEFOR
-  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
-    du Ministère du Budget et du Portefeuille de l'Etat
-
-Government_75_pt_translation:
-  government_id: 77
-  locale: pt
-  government_entity: Société de Développement des Forêts (SODEFOR)
-  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
-    du Ministère du Budget et du Portefeuille de l'Etat
-
-Government_76_fr_translation:
-  government_id: 78
-  locale: fr
-  government_entity: Commune de Niété
-
-Government_76_en_translation:
-  government_id: 78
-  locale: en
-  government_entity: Commune de Niété
-
-Government_76_zh-CN_translation:
-  government_id: 78
-  locale: zh-CN
-  government_entity: Commune de Niété
-
-Government_76_ja_translation:
-  government_id: 78
-  locale: ja
-  government_entity: Commune de Niété
-
-Government_76_ko_translation:
-  government_id: 78
-  locale: ko
-  government_entity: Commune de Niété
-
-Government_76_vi_translation:
-  government_id: 78
-  locale: vi
-  government_entity: Commune de Niété
-
-Government_76_pt_translation:
-  government_id: 78
-  locale: pt
-  government_entity: Commune de Niété
 
 Government_77_fr_translation:
-  government_id: 79
+  government_id: 77
   locale: fr
-  government_entity: Gendarmerie de Bidou 3
+  government_entity: Société de Développement des Forêts (SODEFOR)
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
 
 Government_77_en_translation:
-  government_id: 79
+  government_id: 77
   locale: en
-  government_entity: Gendarmerie de Bidou 3
-
-Government_77_zh-CN_translation:
-  government_id: 79
-  locale: zh-CN
-  government_entity: Gendarmerie de Bidou 3
+  government_entity: Société de Développement des Forêts (SODEFOR)
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
 
 Government_77_ja_translation:
-  government_id: 79
+  government_id: 77
   locale: ja
-  government_entity: Gendarmerie de Bidou 3
+  government_entity: SODEFOR
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
 
 Government_77_ko_translation:
-  government_id: 79
+  government_id: 77
   locale: ko
-  government_entity: Gendarmerie de Bidou 3
+  government_entity: SODEFOR
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
 
 Government_77_vi_translation:
-  government_id: 79
+  government_id: 77
   locale: vi
-  government_entity: Gendarmerie de Bidou 3
+  government_entity: SODEFOR
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
 
 Government_77_pt_translation:
+  government_id: 77
+  locale: pt
+  government_entity: Société de Développement des Forêts (SODEFOR)
+  details: Société d'état rattaché au Ministère des Eaux et Forêts et sous tutelle
+    du Ministère du Budget et du Portefeuille de l'Etat
+
+Government_78_fr_translation:
+  government_id: 78
+  locale: fr
+  government_entity: Commune de Niété
+
+Government_78_en_translation:
+  government_id: 78
+  locale: en
+  government_entity: Commune de Niété
+
+Government_78_zh-CN_translation:
+  government_id: 78
+  locale: zh-CN
+  government_entity: Commune de Niété
+
+Government_78_ja_translation:
+  government_id: 78
+  locale: ja
+  government_entity: Commune de Niété
+
+Government_78_ko_translation:
+  government_id: 78
+  locale: ko
+  government_entity: Commune de Niété
+
+Government_78_vi_translation:
+  government_id: 78
+  locale: vi
+  government_entity: Commune de Niété
+
+Government_78_pt_translation:
+  government_id: 78
+  locale: pt
+  government_entity: Commune de Niété
+
+Government_79_fr_translation:
+  government_id: 79
+  locale: fr
+  government_entity: Gendarmerie de Bidou 3
+
+Government_79_en_translation:
+  government_id: 79
+  locale: en
+  government_entity: Gendarmerie de Bidou 3
+
+Government_79_zh-CN_translation:
+  government_id: 79
+  locale: zh-CN
+  government_entity: Gendarmerie de Bidou 3
+
+Government_79_ja_translation:
+  government_id: 79
+  locale: ja
+  government_entity: Gendarmerie de Bidou 3
+
+Government_79_ko_translation:
+  government_id: 79
+  locale: ko
+  government_entity: Gendarmerie de Bidou 3
+
+Government_79_vi_translation:
+  government_id: 79
+  locale: vi
+  government_entity: Gendarmerie de Bidou 3
+
+Government_79_pt_translation:
   government_id: 79
   locale: pt
   government_entity: Gendarmerie de Bidou 3
 
-Government_78_fr_translation:
-  government_id: 80
-  locale: fr
-  government_entity: Poste de controle forestier et chasse de Bidou 3
-
-Government_78_en_translation:
-  government_id: 80
-  locale: en
-  government_entity: Poste de controle forestier et chasse de Bidou 3
-
-Government_78_zh-CN_translation:
-  government_id: 80
-  locale: zh-CN
-  government_entity: Poste de controle forestier et chasse de Bidou 3
-
-Government_78_ja_translation:
-  government_id: 80
-  locale: ja
-  government_entity: Poste de controle forestier et chasse de Bidou 3
-
-Government_78_ko_translation:
-  government_id: 80
-  locale: ko
-  government_entity: Poste de controle forestier et chasse de Bidou 3
-
-Government_78_vi_translation:
-  government_id: 80
-  locale: vi
-  government_entity: Poste de controle forestier et chasse de Bidou 3
-
-Government_78_pt_translation:
-  government_id: 80
-  locale: pt
-  government_entity: Poste de controle forestier et chasse de Bidou 3
-
-Government_79_fr_translation:
-  government_id: 81
-  locale: fr
-  government_entity: MINEPDED
-
-Government_79_en_translation:
-  government_id: 81
-  locale: en
-  government_entity: MINEPDED
-
-Government_79_pt_translation:
-  government_id: 81
-  locale: pt
-  government_entity: MINEPDED
-
-Government_79_zh-CN_translation:
-  government_id: 81
-  locale: zh-CN
-  government_entity: MINEPDED
-
-Government_79_ja_translation:
-  government_id: 81
-  locale: ja
-  government_entity: MINEPDED
-
-Government_79_ko_translation:
-  government_id: 81
-  locale: ko
-  government_entity: MINEPDED
-
-Government_79_vi_translation:
-  government_id: 81
-  locale: vi
-  government_entity: MINEPDED
-
 Government_80_fr_translation:
-  government_id: 82
+  government_id: 80
   locale: fr
-  government_entity: Province du Haut-Uélé
+  government_entity: Poste de controle forestier et chasse de Bidou 3
 
 Government_80_en_translation:
-  government_id: 82
+  government_id: 80
   locale: en
-  government_entity: Province du Haut-Uélé
-
-Government_80_pt_translation:
-  government_id: 82
-  locale: pt
-  government_entity: Province du Haut-Uélé
+  government_entity: Poste de controle forestier et chasse de Bidou 3
 
 Government_80_zh-CN_translation:
-  government_id: 82
+  government_id: 80
   locale: zh-CN
-  government_entity: Province du Haut-Uélé
+  government_entity: Poste de controle forestier et chasse de Bidou 3
 
 Government_80_ja_translation:
-  government_id: 82
+  government_id: 80
   locale: ja
-  government_entity: Province du Haut-Uélé
+  government_entity: Poste de controle forestier et chasse de Bidou 3
 
 Government_80_ko_translation:
-  government_id: 82
+  government_id: 80
   locale: ko
-  government_entity: Province du Haut-Uélé
+  government_entity: Poste de controle forestier et chasse de Bidou 3
 
 Government_80_vi_translation:
+  government_id: 80
+  locale: vi
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+
+Government_80_pt_translation:
+  government_id: 80
+  locale: pt
+  government_entity: Poste de controle forestier et chasse de Bidou 3
+
+Government_81_fr_translation:
+  government_id: 81
+  locale: fr
+  government_entity: MINEPDED
+
+Government_81_en_translation:
+  government_id: 81
+  locale: en
+  government_entity: MINEPDED
+
+Government_81_pt_translation:
+  government_id: 81
+  locale: pt
+  government_entity: MINEPDED
+
+Government_81_zh-CN_translation:
+  government_id: 81
+  locale: zh-CN
+  government_entity: MINEPDED
+
+Government_81_ja_translation:
+  government_id: 81
+  locale: ja
+  government_entity: MINEPDED
+
+Government_81_ko_translation:
+  government_id: 81
+  locale: ko
+  government_entity: MINEPDED
+
+Government_81_vi_translation:
+  government_id: 81
+  locale: vi
+  government_entity: MINEPDED
+
+Government_82_fr_translation:
+  government_id: 82
+  locale: fr
+  government_entity: Province du Haut-Uélé
+
+Government_82_en_translation:
+  government_id: 82
+  locale: en
+  government_entity: Province du Haut-Uélé
+
+Government_82_pt_translation:
+  government_id: 82
+  locale: pt
+  government_entity: Province du Haut-Uélé
+
+Government_82_zh-CN_translation:
+  government_id: 82
+  locale: zh-CN
+  government_entity: Province du Haut-Uélé
+
+Government_82_ja_translation:
+  government_id: 82
+  locale: ja
+  government_entity: Province du Haut-Uélé
+
+Government_82_ko_translation:
+  government_id: 82
+  locale: ko
+  government_entity: Province du Haut-Uélé
+
+Government_82_vi_translation:
   government_id: 82
   locale: vi
   government_entity: Province du Haut-Uélé
 
-Government_81_fr_translation:
+Government_83_fr_translation:
   government_id: 83
   locale: fr
   government_entity: DGRPT, TSHOPO
   details: Direction Générale des Recettes de Tshopo
 
-Government_81_en_translation:
+Government_83_en_translation:
   government_id: 83
   locale: en
   government_entity: DGRPT, TSHOPO
   details: Direction Générale des Recettes de Tshopo
 
-Government_81_pt_translation:
+Government_83_pt_translation:
   government_id: 83
   locale: pt
   government_entity: DGRPT, TSHOPO
   details: Direction Générale des Recettes de Tshopo
 
-Government_81_zh-CN_translation:
+Government_83_zh-CN_translation:
   government_id: 83
   locale: zh-CN
   government_entity: DGRPT, TSHOPO
   details: Direction Générale des Recettes de Tshopo
 
-Government_81_ja_translation:
+Government_83_ja_translation:
   government_id: 83
   locale: ja
   government_entity: DGRPT, TSHOPO
   details: Direction Générale des Recettes de Tshopo
 
-Government_81_ko_translation:
+Government_83_ko_translation:
   government_id: 83
   locale: ko
   government_entity: DGRPT, TSHOPO
   details: Direction Générale des Recettes de Tshopo
 
-Government_81_vi_translation:
+Government_83_vi_translation:
   government_id: 83
   locale: vi
   government_entity: DGRPT, TSHOPO
   details: Direction Générale des Recettes de Tshopo
 
-Government_82_fr_translation:
+Government_84_fr_translation:
   government_id: 84
   locale: fr
   government_entity: Province du Kongo Central
 
-Government_82_en_translation:
+Government_84_en_translation:
   government_id: 84
   locale: en
   government_entity: Province du Kongo Central
 
-Government_82_pt_translation:
+Government_84_pt_translation:
   government_id: 84
   locale: pt
   government_entity: Province du Kongo Central
 
-Government_82_zh-CN_translation:
+Government_84_zh-CN_translation:
   government_id: 84
   locale: zh-CN
   government_entity: Province du Kongo Central
 
-Government_82_ja_translation:
+Government_84_ja_translation:
   government_id: 84
   locale: ja
   government_entity: Province du Kongo Central
 
-Government_82_ko_translation:
+Government_84_ko_translation:
   government_id: 84
   locale: ko
   government_entity: Province du Kongo Central
 
-Government_82_vi_translation:
+Government_84_vi_translation:
   government_id: 84
   locale: vi
   government_entity: Province du Kongo Central

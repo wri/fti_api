@@ -721,7 +721,7 @@ Faq_1_pt_translation:
     profiles or observations from third-party organizations, however, all documents
     published on the website can be individually accessed and downloaded.</p>'
 
-Faq_2_fr_translation:
+Faq_3_fr_translation:
   faq_id: 3
   locale: fr
   question: Questions fréquentes
@@ -785,7 +785,7 @@ Faq_2_fr_translation:
     <a href="mailto:opentimberportal@wri.org" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
-Faq_2_zh-CN_translation:
+Faq_3_zh-CN_translation:
   faq_id: 3
   locale: zh-CN
   question: 问题解答
@@ -839,7 +839,7 @@ Faq_2_zh-CN_translation:
     profile, please contact us at <a href="mailto:opentimberportal@wri.org" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
-Faq_2_vi_translation:
+Faq_3_vi_translation:
   faq_id: 3
   locale: vi
   question: Xử lý sự cố
@@ -898,7 +898,7 @@ Faq_2_vi_translation:
     chúng tôi theo địa chỉ</span> <a href="mailto:opentimberportal@wri.org" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
-Faq_2_ja_translation:
+Faq_3_ja_translation:
   faq_id: 3
   locale: ja
   question: 寄せられる質問
@@ -925,7 +925,7 @@ Faq_2_ja_translation:
     href="mailto:opentimberportal@wri.org" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>までご連絡ください。</p>'
 
-Faq_2_pt_translation:
+Faq_3_pt_translation:
   faq_id: 3
   locale: pt
   question: Resolução de problemas
@@ -992,7 +992,7 @@ Faq_2_pt_translation:
     pelo e-mai</span>l&nbsp;<a href="mailto:opentimberportal@wri.org" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
-Faq_2_en_translation:
+Faq_3_en_translation:
   faq_id: 3
   locale: en
   question: Troubleshooting
@@ -1050,7 +1050,7 @@ Faq_2_en_translation:
     profile, please contact us at <a href="mailto:opentimberportal@wri.org" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
 
-Faq_2_ko_translation:
+Faq_3_ko_translation:
   faq_id: 3
   locale: ko
   question: 문제 해결

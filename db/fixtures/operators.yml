@@ -1,5 +1,5 @@
 
-Operator_1:
+Operator_145:
   id: 145
   operator_type: Logging company
   country_id: 47
@@ -12,7 +12,7 @@ Operator_1:
   name: AFRIWOOD INDUSTRIES
   slug: afriwood-industries
 
-Operator_2:
+Operator_151:
   id: 151
   operator_type: Logging company
   country_id: 47
@@ -20,12 +20,12 @@ Operator_2:
   operator_id: COG-unknown-151
   fa_id: CG/OUE/05B179
   approved: true
-  country_doc_rank: 3
+  country_doc_rank: 1
   country_operators: 36
   name: CIB
   slug: cib
 
-Operator_3:
+Operator_161:
   id: 161
   operator_type: Logging company
   country_id: 47
@@ -36,7 +36,7 @@ Operator_3:
   address: B.P. 135, Ouesso, Republic of Congo
   website: http://www.interholco.com/
   approved: true
-  country_doc_rank: 2
+  country_doc_rank: 3
   country_operators: 36
   name: IFO / Interholco
   details: "Interholco (IHC) is one of the largest producing companies of African
@@ -60,7 +60,7 @@ Operator_3:
     of Congo\r\nContact: info@interholco.com\r\n"
   slug: ifo-interholco
 
-Operator_4:
+Operator_165:
   id: 165
   operator_type: Logging company
   country_id: 47
@@ -79,7 +79,7 @@ Operator_4:
     Commerce et transport des bois et produit dérivés des bois
   slug: mokabi-sa
 
-Operator_5:
+Operator_172:
   id: 172
   operator_type: Logging company
   country_id: 47
@@ -92,7 +92,7 @@ Operator_5:
   name: SIFCO
   slug: sifco
 
-Operator_6:
+Operator_197:
   id: 197
   operator_type: Logging company
   country_id: 7
@@ -127,7 +127,7 @@ Operator_6:
     \                                 402 681\r\n\r\n"
   slug: cft
 
-Operator_7:
+Operator_10589:
   id: 10589
   operator_type: Logging company
   country_id: 45
@@ -138,13 +138,13 @@ Operator_7:
     233 42 68 92'
   approved: true
   holding_id: 4
-  country_doc_rank: 6
+  country_doc_rank: 11
   country_operators: 137
   name: SEBC
   details: Exploitation et transformation du bois
   slug: sebc
 
-Operator_8:
+Operator_10604:
   id: 10604
   operator_type: Logging company
   country_id: 45
@@ -160,7 +160,7 @@ Operator_8:
   details: Société Anonyme
   slug: sab
 
-Operator_9:
+Operator_10615:
   id: 10615
   operator_type: Logging company
   country_id: 45
@@ -178,7 +178,7 @@ Operator_9:
   details: Exploitation et transformation du bois
   slug: cfc
 
-Operator_10:
+Operator_10623:
   id: 10623
   operator_type: Logging company
   country_id: 45
@@ -191,7 +191,7 @@ Operator_10:
   name: SIENCAM
   slug: siencam
 
-Operator_11:
+Operator_10637:
   id: 10637
   operator_type: Unknown
   country_id: 45

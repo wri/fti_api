@@ -1,5 +1,5 @@
 
-Tool_1_en_translation:
+Tool_6_en_translation:
   tool_id: 6
   locale: en
   name: Risk Tool
@@ -12,7 +12,7 @@ Tool_1_en_translation:
     href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">Go to site</a></p>'
 
-Tool_1_vi_translation:
+Tool_6_vi_translation:
   tool_id: 6
   locale: vi
   name: Công cụ thông tin rủi ro
@@ -25,7 +25,7 @@ Tool_1_vi_translation:
     href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
     style="color: rgb(0, 0, 0);">Vào trang web</a></p>'
 
-Tool_1_ja_translation:
+Tool_6_ja_translation:
   tool_id: 6
   locale: ja
   name: リスク管理ツール
@@ -33,7 +33,7 @@ Tool_1_ja_translation:
     href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">サイトへ移動する</a></p>'
 
-Tool_1_pt_translation:
+Tool_6_pt_translation:
   tool_id: 6
   locale: pt
   name: Risk Tool
@@ -47,7 +47,7 @@ Tool_1_pt_translation:
     class="ql-align-justify"><a href="https://forestlegality.org/risk-tool" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Ir para o site</a></p>'
 
-Tool_1_fr_translation:
+Tool_6_fr_translation:
   tool_id: 6
   locale: fr
   name: Risk Tool
@@ -61,7 +61,7 @@ Tool_1_fr_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
     sur le site</a></p>'
 
-Tool_1_ko_translation:
+Tool_6_ko_translation:
   tool_id: 6
   locale: ko
   name: 위험 도구
@@ -71,7 +71,7 @@ Tool_1_ko_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로
     이동</a></p>'
 
-Tool_1_zh-CN_translation:
+Tool_6_zh-CN_translation:
   tool_id: 6
   locale: zh-CN
   name: 风险工具
@@ -79,7 +79,7 @@ Tool_1_zh-CN_translation:
     href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">前往网站</a></p>'
 
-Tool_2_zh-CN_translation:
+Tool_7_zh-CN_translation:
   tool_id: 7
   locale: zh-CN
   name: SPOTT - 可持续性政策透明度工具包
@@ -89,7 +89,7 @@ Tool_2_zh-CN_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTT
     和 Open Timber Portal 携手合作，促进提升热带木材部门的透明度，以解决非法采伐问题</em></a></p>'
 
-Tool_2_en_translation:
+Tool_7_en_translation:
   tool_id: 7
   locale: en
   name: SPOTT – Sustainability Policy Transparency Toolkit
@@ -104,7 +104,7 @@ Tool_2_en_translation:
     and the Open Timber Portal partner to promote transparency in the tropical timber
     sector to tackle illegal logging</em></a></p>'
 
-Tool_2_vi_translation:
+Tool_7_vi_translation:
   tool_id: 7
   locale: vi
   name: SPOTT – Bộ công cụ minh bạch chính sách bền vững
@@ -121,7 +121,7 @@ Tool_2_vi_translation:
     bạch trong ngành gỗ nhiệt đới nhằm giải quyết tình trạng khai thác gỗ bất hợp
     pháp</em></a></p>'
 
-Tool_2_ja_translation:
+Tool_7_ja_translation:
   tool_id: 7
   locale: ja
   name: SPOTT – サステナビリティ・ポリシー・トランスペアレンシー・ツールキット（Sustainability Policy Transparency
@@ -133,7 +133,7 @@ Tool_2_ja_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTTとオープン・ティンバー・ポータル（Open
     Timber Portal）が提携し、熱帯木材セクターの透明性を高め、違法伐採の撲滅を目指す</em></a></p>'
 
-Tool_2_fr_translation:
+Tool_7_fr_translation:
   tool_id: 7
   locale: fr
   name: SPOTT – Sustainability Policy Transparency Toolkit
@@ -149,7 +149,7 @@ Tool_2_fr_translation:
     and the Open Timber Portal partner to promote transparency in the tropical timber
     sector to tackle illegal logging</em></a><em> (en anglais)</em></p>'
 
-Tool_2_ko_translation:
+Tool_7_ko_translation:
   tool_id: 7
   locale: ko
   name: SPOTT – 지속 가능성 정책 투명성 툴킷
@@ -161,7 +161,7 @@ Tool_2_ko_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTT와
     Open Timber Portal이 협력하여 열대 목재 부문의 투명성 촉진을 통해 불법 벌목을 방지하다</em></a></p>'
 
-Tool_2_pt_translation:
+Tool_7_pt_translation:
   tool_id: 7
   locale: pt
   name: SPOTT – Sustainability Policy Transparency Toolkit [Kit de ferramentas para
@@ -182,7 +182,7 @@ Tool_2_pt_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(148, 79, 113);"><em>das
     madeiras tropicais para combater a extração de madeira ilegal</em></a></p>'
 
-Tool_3_zh-CN_translation:
+Tool_8_zh-CN_translation:
   tool_id: 8
   locale: zh-CN
   name: 木材交易信息平台
@@ -190,7 +190,7 @@ Tool_3_zh-CN_translation:
     进程等事实，使运营商能够根据具体情况自行执行风险分析并开展尽职调查。</p><p><a href="http://www.timbertradeportal.com/"
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">前往网站</a></p>'
 
-Tool_3_en_translation:
+Tool_8_en_translation:
   tool_id: 8
   locale: en
   name: Timber Trade Portal
@@ -203,7 +203,7 @@ Tool_3_en_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Go
     to site</a></p>'
 
-Tool_3_fr_translation:
+Tool_8_fr_translation:
   tool_id: 8
   locale: fr
   name: Timber Trade Portal
@@ -217,7 +217,7 @@ Tool_3_fr_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
     sur le site</a></p>'
 
-Tool_3_vi_translation:
+Tool_8_vi_translation:
   tool_id: 8
   locale: vi
   name: Timber Trade Portal
@@ -231,7 +231,7 @@ Tool_3_vi_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang
     web</a></p>'
 
-Tool_3_pt_translation:
+Tool_8_pt_translation:
   tool_id: 8
   locale: pt
   name: Timber Trade Portal
@@ -245,7 +245,7 @@ Tool_3_pt_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Ir
     para o site</a></p>'
 
-Tool_3_ko_translation:
+Tool_8_ko_translation:
   tool_id: 8
   locale: ko
   name: 목재 거래 포털
@@ -255,7 +255,7 @@ Tool_3_ko_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로
     이동</a></p>'
 
-Tool_3_ja_translation:
+Tool_8_ja_translation:
   tool_id: 8
   locale: ja
   name: ティンバー・トレード・ポータル（Timber Trade Portal）
@@ -263,7 +263,7 @@ Tool_3_ja_translation:
     href="http://www.timbertradeportal.com/" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">サイトへ移動する</a></p>'
 
-Tool_4_en_translation:
+Tool_9_en_translation:
   tool_id: 9
   locale: en
   name: Preferred by Nature Sourcing Hub
@@ -275,7 +275,7 @@ Tool_4_en_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Go
     to site</a></p>'
 
-Tool_4_ko_translation:
+Tool_9_ko_translation:
   tool_id: 9
   locale: ko
   name: Preferred by Nature Sourcing Hub
@@ -284,7 +284,7 @@ Tool_4_ko_translation:
     충족할 수 있도록 지원합니다.</p><p><a href="https://preferredbynature.org/sourcinghub" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로 이동</a></p>'
 
-Tool_4_vi_translation:
+Tool_9_vi_translation:
   tool_id: 9
   locale: vi
   name: Preferred by Nature Sourcing Hub
@@ -297,7 +297,7 @@ Tool_4_vi_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang
     web</a></p>'
 
-Tool_4_fr_translation:
+Tool_9_fr_translation:
   tool_id: 9
   locale: fr
   name: Preferred by Nature Sourcing Hub
@@ -310,7 +310,7 @@ Tool_4_fr_translation:
     class="ql-align-justify"><a href="https://preferredbynature.org/sourcinghub" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller sur le site</a></p>'
 
-Tool_4_zh-CN_translation:
+Tool_9_zh-CN_translation:
   tool_id: 9
   locale: zh-CN
   name: Preferred by Nature 采购中心
@@ -318,7 +318,7 @@ Tool_4_zh-CN_translation:
     href="https://preferredbynature.org/sourcinghub" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">前往网站</a></p>'
 
-Tool_4_ja_translation:
+Tool_9_ja_translation:
   tool_id: 9
   locale: ja
   name: プリファード・バイ・ネイチャー・ソーシング・ハブ（Preferred by Nature Sourcing Hub）
@@ -326,7 +326,7 @@ Tool_4_ja_translation:
     href="https://preferredbynature.org/sourcinghub" rel="noopener noreferrer" target="_blank"
     style="color: rgb(149, 79, 114);">サイトへ移動する</a></p>'
 
-Tool_4_pt_translation:
+Tool_9_pt_translation:
   tool_id: 9
   locale: pt
   name: Preferred by Nature Sourcing Hub
@@ -339,7 +339,7 @@ Tool_4_pt_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Ir
     para o site</a></p>'
 
-Tool_5_vi_translation:
+Tool_10_vi_translation:
   tool_id: 10
   locale: vi
   name: Buôn bán gỗ có trách nhiệm & Thẩm định và Đánh giá rủi ro
@@ -351,7 +351,7 @@ Tool_5_vi_translation:
     xác minh giấy phép FSC và PEFC.</span></p><p><a href="http://www.bvrio.com/" rel="noopener
     noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang web</a></p>'
 
-Tool_5_zh-CN_translation:
+Tool_10_zh-CN_translation:
   tool_id: 10
   locale: zh-CN
   name: 负责任的木材交易与尽职调查和风险评估
@@ -359,7 +359,7 @@ Tool_5_zh-CN_translation:
     (DDRA) 系统，帮助买家评估木材托运的供应链或验证森林管理委员会 (FSC) 和森林认证体系认可计划 (PEFC) 的许可证。</p><p><a href="http://www.bvrio.com/"
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">前往网站</a></p>'
 
-Tool_5_fr_translation:
+Tool_10_fr_translation:
   tool_id: 10
   locale: fr
   name: Responsible Timber Exchange & Due Diligence and Risk Assessment
@@ -372,7 +372,7 @@ Tool_5_fr_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
     sur le site</a></p>'
 
-Tool_5_en_translation:
+Tool_10_en_translation:
   tool_id: 10
   locale: en
   name: Responsible Timber Exchange & Due Diligence and Risk Assessment
@@ -384,7 +384,7 @@ Tool_5_en_translation:
     href="http://www.bvrio.com/" rel="noopener noreferrer" target="_blank" style="color:
     rgb(149, 79, 114);">Go to site</a></p>'
 
-Tool_5_ko_translation:
+Tool_10_ko_translation:
   tool_id: 10
   locale: ko
   name: 책임 있는 목재 교환과 실사 및 위험 평가
@@ -393,7 +393,7 @@ Tool_5_ko_translation:
     위험 평가(DDRA) 시스템이 플랫폼에 통합되었습니다.</p><p><a href="http://www.bvrio.com/" rel="noopener
     noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로 이동</a></p>'
 
-Tool_5_ja_translation:
+Tool_10_ja_translation:
   tool_id: 10
   locale: ja
   name: レスポンシブル・ティンバー・エクスチェンジ（Responsible Timber Exchange）および、デューデリジェンス＆リスクアセスメント
@@ -401,7 +401,7 @@ Tool_5_ja_translation:
     href="http://www.bvrio.com/" rel="noopener noreferrer" target="_blank" style="color:
     rgb(149, 79, 114);">サイトへ移動する</a></p>'
 
-Tool_5_pt_translation:
+Tool_10_pt_translation:
   tool_id: 10
   locale: pt
   name: Intercâmbio Responsável de Madeira e Dever de Diligência e Avaliação de Riscos
@@ -414,7 +414,7 @@ Tool_5_pt_translation:
     href="http://www.bvrio.com/" rel="noopener noreferrer" target="_blank" style="color:
     rgb(149, 79, 114);">Ir para o site</a></p>'
 
-Tool_6_fr_translation:
+Tool_11_fr_translation:
   tool_id: 11
   locale: fr
   name: Open Land Contracts
@@ -427,7 +427,7 @@ Tool_6_fr_translation:
     et la transparence des contrats.&nbsp;</p><p><a href="https://www.openlandcontracts.org/"
     rel="noopener noreferrer" target="_blank">Aller sur le site</a></p>
 
-Tool_6_zh-CN_translation:
+Tool_11_zh-CN_translation:
   tool_id: 11
   locale: zh-CN
   name: Open Land Contracts
@@ -435,7 +435,7 @@ Tool_6_zh-CN_translation:
     和文本版本；每份合同的社会、环境、人权、财政和运营条款的简明语言摘要（“注释”）；合同搜索和比较工具；以及投资合同和合同透明度指南。</p><p><a href="https://www.openlandcontracts.org/"
     rel="noopener noreferrer" target="_blank">前往网站</a></p>
 
-Tool_6_vi_translation:
+Tool_11_vi_translation:
   tool_id: 11
   locale: vi
   name: Open Land Contracts
@@ -449,7 +449,7 @@ Tool_6_vi_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang
     web</a></p>'
 
-Tool_6_en_translation:
+Tool_11_en_translation:
   tool_id: 11
   locale: en
   name: Open Land Contracts
@@ -462,7 +462,7 @@ Tool_6_en_translation:
     href="https://www.openlandcontracts.org/" rel="noopener noreferrer" target="_blank">Go
     to site</a></p>
 
-Tool_6_ko_translation:
+Tool_11_ko_translation:
   tool_id: 11
   locale: ko
   name: 개방형 토지 계약
@@ -472,14 +472,14 @@ Tool_6_ko_translation:
     href="https://www.openlandcontracts.org/" rel="noopener noreferrer" target="_blank">사이트로
     이동</a></p>
 
-Tool_6_ja_translation:
+Tool_11_ja_translation:
   tool_id: 11
   locale: ja
   name: オープンランド契約（Open Land Contracts）
   description: <p>OpenLandContracts.orgは、大規模な農業、林業、その他の土地利用型投資プロジェクトに関する契約書を一般に公開するオンラインリポジトリです。契約書や関連文書のPDF版とテキスト版、各契約の社会、環境、人権、財政、運用に関する条項を平易な言葉でまとめたもの（「注釈」）、契約書の検索・比較ツール、投資契約や契約の透明性に関するガイドが含まれています。</p><p><a
     href="https://www.openlandcontracts.org/" rel="noopener noreferrer" target="_blank">サイトへ移動する</a></p>
 
-Tool_6_pt_translation:
+Tool_11_pt_translation:
   tool_id: 11
   locale: pt
   name: Open Land Contracts

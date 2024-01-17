@@ -2161,37 +2161,37 @@ Subcategory_61_pt_translation:
   name: Supressão governamental da sociedade civil ou da mídia que investiga a extração
     de madeira ilegal
 
-Subcategory_62_en_translation:
+Subcategory_63_en_translation:
   subcategory_id: 63
   locale: en
   name: Non respect of procedures regarding environmental regulations
 
-Subcategory_62_fr_translation:
+Subcategory_63_fr_translation:
   subcategory_id: 63
   locale: fr
   name: Non respect des procédures en matière de réglementation environnementale
 
-Subcategory_62_zh-CN_translation:
+Subcategory_63_zh-CN_translation:
   subcategory_id: 63
   locale: zh-CN
   name: 违背环境法规的流程要求
 
-Subcategory_62_ja_translation:
+Subcategory_63_ja_translation:
   subcategory_id: 63
   locale: ja
   name: 環境規則に関する手続きの不遵守
 
-Subcategory_62_ko_translation:
+Subcategory_63_ko_translation:
   subcategory_id: 63
   locale: ko
   name: 환경 규제 관련 과정 무시
 
-Subcategory_62_vi_translation:
+Subcategory_63_vi_translation:
   subcategory_id: 63
   locale: vi
   name: Không tuân thủ các thủ tục theo quy định về môi trường
 
-Subcategory_62_pt_translation:
+Subcategory_63_pt_translation:
   subcategory_id: 63
   locale: pt
   name: Desrespeito dos procedimentos relativos à regulamentação ambiental

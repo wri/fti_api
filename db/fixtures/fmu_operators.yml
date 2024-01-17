@@ -1,215 +1,208 @@
 
-FmuOperator_1:
+FmuOperator_11:
   id: 11
   fmu_id: 12
   operator_id: 197
   current: true
   start_date: 2015-10-25
 
-FmuOperator_2:
+FmuOperator_50:
   id: 50
   fmu_id: 53
   operator_id: 151
   current: true
   start_date: 2012-06-08
 
-FmuOperator_3:
+FmuOperator_51:
   id: 51
   fmu_id: 54
   operator_id: 151
   current: true
   start_date: 2012-06-08
 
-FmuOperator_4:
+FmuOperator_52:
   id: 52
   fmu_id: 55
   operator_id: 151
   current: true
   start_date: 2012-06-08
 
-FmuOperator_5:
+FmuOperator_53:
   id: 53
   fmu_id: 56
   operator_id: 161
   current: true
   start_date: 2008-12-31
 
-FmuOperator_6:
-  id: 60
-  fmu_id: 67
-  operator_id: 151
-  current: true
-  start_date: 2012-06-08
-
-FmuOperator_7:
+FmuOperator_61:
   id: 61
   fmu_id: 68
   operator_id: 172
   current: true
   start_date: 2020-01-20
 
-FmuOperator_8:
+FmuOperator_76:
   id: 76
   fmu_id: 83
   operator_id: 145
   current: true
   start_date: 2012-08-24
 
-FmuOperator_9:
+FmuOperator_77:
   id: 77
   fmu_id: 84
   operator_id: 145
   current: true
   start_date: 2009-12-09
 
-FmuOperator_10:
+FmuOperator_95:
   id: 95
   fmu_id: 105
   operator_id: 165
   current: true
   start_date: 2005-08-30
 
-FmuOperator_11:
+FmuOperator_97:
   id: 97
   fmu_id: 107
   operator_id: 145
   current: true
   start_date: 2012-08-24
 
-FmuOperator_12:
+FmuOperator_99:
   id: 99
   fmu_id: 109
   operator_id: 151
   current: true
   start_date: 2015-10-25
 
-FmuOperator_13:
+FmuOperator_10483:
   id: 10483
   fmu_id: 11579
   operator_id: 10637
   current: true
   start_date: 2000-07-01
 
-FmuOperator_14:
+FmuOperator_10484:
   id: 10484
   fmu_id: 11618
   operator_id: 10637
   current: true
   start_date: 2000-07-01
 
-FmuOperator_15:
+FmuOperator_10485:
   id: 10485
   fmu_id: 11634
   operator_id: 10637
   current: true
   start_date: 2000-07-01
 
-FmuOperator_16:
+FmuOperator_10493:
   id: 10493
   fmu_id: 11496
   operator_id: 10623
   current: true
   start_date: 2013-11-20
 
-FmuOperator_17:
+FmuOperator_10494:
   id: 10494
   fmu_id: 11499
   operator_id: 10623
   current: true
   start_date: 2013-11-27
 
-FmuOperator_18:
+FmuOperator_10511:
   id: 10511
   fmu_id: 11569
   operator_id: 10615
   current: true
   start_date: 1996-08-13
 
-FmuOperator_19:
+FmuOperator_10512:
   id: 10512
   fmu_id: 11602
   operator_id: 10615
   current: true
   start_date: 1996-08-13
 
-FmuOperator_20:
+FmuOperator_10513:
   id: 10513
   fmu_id: 11604
   operator_id: 10615
   current: true
   start_date: 1996-08-13
 
-FmuOperator_21:
+FmuOperator_10514:
   id: 10514
   fmu_id: 11660
   operator_id: 10615
   current: true
   start_date: 1996-08-13
 
-FmuOperator_22:
+FmuOperator_10515:
   id: 10515
   fmu_id: 11621
   operator_id: 10589
   current: true
   start_date: 1998-03-27
 
-FmuOperator_23:
+FmuOperator_10516:
   id: 10516
   fmu_id: 11617
   operator_id: 10604
   current: true
   start_date: 1998-03-27
 
-FmuOperator_24:
+FmuOperator_20015:
   id: 20015
   fmu_id: 49
   operator_id: 197
   current: true
   start_date: 2018-05-28
 
-FmuOperator_25:
+FmuOperator_20039:
   id: 20039
   fmu_id: 20099
   operator_id: 10623
   start_date: 2018-09-07
   end_date: 2023-01-19
 
-FmuOperator_26:
+FmuOperator_100244:
   id: 100244
   fmu_id: 50
   operator_id: 197
   start_date: 2018-01-01
   end_date: 2019-01-01
 
-FmuOperator_27:
+FmuOperator_100245:
   id: 100245
   fmu_id: 11749
   operator_id: 10615
   start_date: 2018-01-01
   end_date: 2019-02-26
 
-FmuOperator_28:
+FmuOperator_100246:
   id: 100246
   fmu_id: 11740
   operator_id: 10615
   start_date: 2018-01-01
   end_date: 2018-03-26
 
-FmuOperator_29:
+FmuOperator_100247:
   id: 100247
   fmu_id: 100420
   operator_id: 10623
   start_date: 2019-08-07
   end_date: 2023-01-19
 
-FmuOperator_30:
+FmuOperator_100264:
   id: 100264
   fmu_id: 100438
   operator_id: 10623
   current: true
   start_date: 2022-02-02
 
-FmuOperator_31:
+FmuOperator_100272:
   id: 100272
   fmu_id: 100458
   operator_id: 10623

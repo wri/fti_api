@@ -1,4 +1,4 @@
-# sh "bin/rails db:fixtures:load FIXTURES_PATH=db/fixtures"
+# # sh "bin/rails db:fixtures:load FIXTURES_PATH=db/fixtures"
 require "active_record/fixtures"
 
 fixtures_dir = File.join(Rails.root, "db", "fixtures")
@@ -52,7 +52,7 @@ ngo.update!(observer: ogf)
 ngo_manager.update!(observer: ogf, managed_observers: [ocean, foder])
 government.update!(country: cameroon)
 
-Observer.find_each { |o| o.update!(responsible_admin: admin) }
+# Observer.find_each { |o| o.update!(responsible_admin: admin) }
 OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }
 
 $stdout.puts "Syncing test data..."

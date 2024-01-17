@@ -1,5 +1,5 @@
 
-Tutorial_1_en_translation:
+Tutorial_2_en_translation:
   tutorial_id: 2
   locale: en
   name: Tutorial for logging companies
@@ -10,7 +10,7 @@ Tutorial_1_en_translation:
     or in </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>French</strong></a></p>
 
-Tutorial_1_fr_translation:
+Tutorial_2_fr_translation:
   tutorial_id: 2
   locale: fr
   name: Tutoriel pour les exploitants
@@ -22,7 +22,7 @@ Tutorial_1_fr_translation:
     et en </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
     rel="noopener noreferrer" target="_blank"><strong>anglais</strong></a></p>
 
-Tutorial_1_zh-CN_translation:
+Tutorial_2_zh-CN_translation:
   tutorial_id: 2
   locale: zh-CN
   name: 伐木公司的教程
@@ -32,7 +32,7 @@ Tutorial_1_zh-CN_translation:
     href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>法语</strong></a>版本</p>
 
-Tutorial_1_ko_translation:
+Tutorial_2_ko_translation:
   tutorial_id: 2
   locale: ko
   name: 벌목 회사를 위한 튜토리얼
@@ -42,7 +42,7 @@ Tutorial_1_ko_translation:
     href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>프랑스어</strong></a>로 제공</p>
 
-Tutorial_1_ja_translation:
+Tutorial_2_ja_translation:
   tutorial_id: 2
   locale: ja
   name: 木材会社向けチュートリアル
@@ -52,7 +52,7 @@ Tutorial_1_ja_translation:
     href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>フランス語</strong></a>に対応</p>
 
-Tutorial_1_pt_translation:
+Tutorial_2_pt_translation:
   tutorial_id: 2
   locale: pt
   name: Tutorial para madeireiras
@@ -64,7 +64,7 @@ Tutorial_1_pt_translation:
     ou em </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>francês</strong></a></p>'
 
-Tutorial_1_vi_translation:
+Tutorial_2_vi_translation:
   tutorial_id: 2
   locale: vi
   name: Hướng dẫn cho các công ty khai thác gỗ
@@ -76,7 +76,7 @@ Tutorial_1_vi_translation:
     style="color: rgb(0, 0, 0);"> hoặc tiếng </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Pháp</strong></a></p>'
 
-Tutorial_2_ja_translation:
+Tutorial_3_ja_translation:
   tutorial_id: 3
   locale: ja
   name: 独立したモニター向けのチュートリアル
@@ -86,7 +86,7 @@ Tutorial_2_ja_translation:
     href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>フランス語</strong></a>に対応</p>
 
-Tutorial_2_ko_translation:
+Tutorial_3_ko_translation:
   tutorial_id: 3
   locale: ko
   name: 독립 모니터 요원을 위한 튜토리얼
@@ -96,7 +96,7 @@ Tutorial_2_ko_translation:
     href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>프랑스어</strong></a>로 제공</p>
 
-Tutorial_2_zh-CN_translation:
+Tutorial_3_zh-CN_translation:
   tutorial_id: 3
   locale: zh-CN
   name: 独立检察员的教程
@@ -106,7 +106,7 @@ Tutorial_2_zh-CN_translation:
     href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>法语</strong></a>版本</p>
 
-Tutorial_2_pt_translation:
+Tutorial_3_pt_translation:
   tutorial_id: 3
   locale: pt
   name: Tutorial para monitores independentes
@@ -118,7 +118,7 @@ Tutorial_2_pt_translation:
     ou em </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>francês</strong></a></p>'
 
-Tutorial_2_fr_translation:
+Tutorial_3_fr_translation:
   tutorial_id: 3
   locale: fr
   name: Tutoriel pour les observateurs indépendants
@@ -130,7 +130,7 @@ Tutorial_2_fr_translation:
     et en </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
     rel="noopener noreferrer" target="_blank"><strong>anglais</strong></a></p>
 
-Tutorial_2_vi_translation:
+Tutorial_3_vi_translation:
   tutorial_id: 3
   locale: vi
   name: Hướng dẫn cho các cơ quan giám sát độc lập
@@ -142,7 +142,7 @@ Tutorial_2_vi_translation:
     style="color: rgb(0, 0, 0);"> hoặc tiếng </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Pháp</strong></a></p>'
 
-Tutorial_2_en_translation:
+Tutorial_3_en_translation:
   tutorial_id: 3
   locale: en
   name: Tutorial for independent monitors
@@ -153,7 +153,7 @@ Tutorial_2_en_translation:
     or in </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
     rel="noopener noreferrer" target="_blank"><strong>French</strong></a></p>
 
-Tutorial_3_en_translation:
+Tutorial_4_en_translation:
   tutorial_id: 4
   locale: en
   name: OTP Brochure
@@ -174,7 +174,7 @@ Tutorial_3_en_translation:
     and in </strong><a href="https://opentimberportal.org/uploads/documents/10/OTP_Brochure_Portuguese.pdf"
     rel="noopener noreferrer" target="_blank"><strong>Portuguese</strong></a></p>
 
-Tutorial_3_zh-CN_translation:
+Tutorial_4_zh-CN_translation:
   tutorial_id: 4
   locale: zh-CN
   name: OTP 手册
@@ -188,7 +188,7 @@ Tutorial_3_zh-CN_translation:
     rel="noopener noreferrer" target="_blank"><strong>日语</strong></a>、<a href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
     rel="noopener noreferrer" target="_blank"><strong>韩语</strong></a></p>
 
-Tutorial_3_ja_translation:
+Tutorial_4_ja_translation:
   tutorial_id: 4
   locale: ja
   name: OTPのパンフレット
@@ -206,7 +206,7 @@ Tutorial_3_ja_translation:
     href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
     rel="noopener noreferrer" target="_blank"><strong>ベトナム語</strong></a><strong>に対応</strong></p>
 
-Tutorial_3_pt_translation:
+Tutorial_4_pt_translation:
   tutorial_id: 4
   locale: pt
   name: Brochura do OTP
@@ -227,7 +227,7 @@ Tutorial_3_pt_translation:
     </strong><a href="https://opentimberportal.org/uploads/documents/10/OTP_Brochure_Portuguese.pdf"
     rel="noopener noreferrer" target="_blank"><strong>português</strong></a></p>'
 
-Tutorial_3_fr_translation:
+Tutorial_4_fr_translation:
   tutorial_id: 4
   locale: fr
   name: Brochure OTP
@@ -249,7 +249,7 @@ Tutorial_3_fr_translation:
     <a href="https://opentimberportal.org/uploads/documents/10/OTP_Brochure_Portuguese.pdf"
     rel="noopener noreferrer" target="_blank"><strong>portugais</strong></a><strong>.</strong></p>
 
-Tutorial_3_ko_translation:
+Tutorial_4_ko_translation:
   tutorial_id: 4
   locale: ko
   name: OTP 브로셔
@@ -268,7 +268,7 @@ Tutorial_3_ko_translation:
     rel="noopener noreferrer" target="_blank"><strong>베트남어</strong></a><strong style="color:
     rgb(56, 103, 139);"><u> 및 포르투갈어</u></strong>로 제공</p>'
 
-Tutorial_3_vi_translation:
+Tutorial_4_vi_translation:
   tutorial_id: 4
   locale: vi
   name: Tài liệu giới thiệu OTP
@@ -288,7 +288,7 @@ Tutorial_3_vi_translation:
     style="color: rgb(0, 0, 0);"> và tiếng </strong><a href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
     rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Việt</strong></a></p>'
 
-Tutorial_4_fr_translation:
+Tutorial_5_fr_translation:
   tutorial_id: 5
   locale: fr
   name: Vidéo d'introduction à l'OTP
@@ -297,7 +297,7 @@ Tutorial_4_fr_translation:
     de la plateforme.</p><iframe class="ql-video" frameborder="0" allowfullscreen="true"
     src="https://www.youtube.com/embed/9WRUMYMISes?showinfo=0"></iframe><p><br></p>
 
-Tutorial_4_en_translation:
+Tutorial_5_en_translation:
   tutorial_id: 5
   locale: en
   name: Introductory video to the OTP
@@ -305,7 +305,7 @@ Tutorial_4_en_translation:
     Portal and explains how to use all of the platform's functionalities.</p><iframe
     class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
-Tutorial_4_vi_translation:
+Tutorial_5_vi_translation:
   tutorial_id: 5
   locale: vi
   name: Video giới thiệu về OTP
@@ -314,14 +314,14 @@ Tutorial_4_vi_translation:
     các chức năng của nền tảng.</span></p><iframe class="ql-video" frameborder="0"
     allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>'
 
-Tutorial_4_zh-CN_translation:
+Tutorial_5_zh-CN_translation:
   tutorial_id: 5
   locale: zh-CN
   name: OTP 介绍视频
   description: <p>这段介绍性视频引导用户浏览整个公开木材信息平台，并解释如何使用平台的所有功能。</p><iframe class="ql-video"
     frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
-Tutorial_4_pt_translation:
+Tutorial_5_pt_translation:
   tutorial_id: 5
   locale: pt
   name: Vídeo introdutório ao OTP
@@ -329,14 +329,14 @@ Tutorial_4_pt_translation:
     Portal e explica como usar todas as funcionalidades da plataforma.</p><iframe
     class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
-Tutorial_4_ja_translation:
+Tutorial_5_ja_translation:
   tutorial_id: 5
   locale: ja
   name: OTPの紹介ビデオ
   description: <p>この入門ビデオでは、オープン・ティンバー・ポータル（Open Timber Portal）の全体を解説し、プラットフォームのすべての機能の使用方法を説明しています。</p><iframe
     class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
 
-Tutorial_4_ko_translation:
+Tutorial_5_ko_translation:
   tutorial_id: 5
   locale: ko
   name: OTP 소개 동영상

@@ -1,0 +1,950 @@
+
+GovernmentsObservation_1:
+  id: 1
+  government_id: 21
+  observation_id: 910
+
+GovernmentsObservation_4:
+  id: 4
+  government_id: 43
+  observation_id: 1734
+
+GovernmentsObservation_5:
+  id: 5
+  government_id: 44
+  observation_id: 1812
+
+GovernmentsObservation_6:
+  id: 6
+  government_id: 13
+  observation_id: 821
+
+GovernmentsObservation_7:
+  id: 7
+  government_id: 13
+  observation_id: 822
+
+GovernmentsObservation_8:
+  id: 8
+  government_id: 21
+  observation_id: 916
+
+GovernmentsObservation_9:
+  id: 9
+  government_id: 21
+  observation_id: 917
+
+GovernmentsObservation_15:
+  id: 15
+  government_id: 43
+  observation_id: 1735
+
+GovernmentsObservation_17:
+  id: 17
+  government_id: 13
+  observation_id: 818
+
+GovernmentsObservation_18:
+  id: 18
+  government_id: 13
+  observation_id: 819
+
+GovernmentsObservation_29:
+  id: 29
+  government_id: 13
+  observation_id: 824
+
+GovernmentsObservation_30:
+  id: 30
+  government_id: 13
+  observation_id: 825
+
+GovernmentsObservation_31:
+  id: 31
+  government_id: 13
+  observation_id: 826
+
+GovernmentsObservation_32:
+  id: 32
+  government_id: 14
+  observation_id: 827
+
+GovernmentsObservation_33:
+  id: 33
+  government_id: 14
+  observation_id: 828
+
+GovernmentsObservation_34:
+  id: 34
+  government_id: 14
+  observation_id: 829
+
+GovernmentsObservation_35:
+  id: 35
+  government_id: 15
+  observation_id: 830
+
+GovernmentsObservation_36:
+  id: 36
+  government_id: 15
+  observation_id: 831
+
+GovernmentsObservation_37:
+  id: 37
+  government_id: 16
+  observation_id: 832
+
+GovernmentsObservation_38:
+  id: 38
+  government_id: 16
+  observation_id: 833
+
+GovernmentsObservation_39:
+  id: 39
+  government_id: 16
+  observation_id: 834
+
+GovernmentsObservation_40:
+  id: 40
+  government_id: 16
+  observation_id: 835
+
+GovernmentsObservation_41:
+  id: 41
+  government_id: 17
+  observation_id: 836
+
+GovernmentsObservation_42:
+  id: 42
+  government_id: 17
+  observation_id: 837
+
+GovernmentsObservation_43:
+  id: 43
+  government_id: 19
+  observation_id: 839
+
+GovernmentsObservation_44:
+  id: 44
+  government_id: 19
+  observation_id: 840
+
+GovernmentsObservation_45:
+  id: 45
+  government_id: 19
+  observation_id: 841
+
+GovernmentsObservation_46:
+  id: 46
+  government_id: 19
+  observation_id: 842
+
+GovernmentsObservation_47:
+  id: 47
+  government_id: 19
+  observation_id: 843
+
+GovernmentsObservation_48:
+  id: 48
+  government_id: 20
+  observation_id: 844
+
+GovernmentsObservation_49:
+  id: 49
+  government_id: 20
+  observation_id: 845
+
+GovernmentsObservation_50:
+  id: 50
+  government_id: 20
+  observation_id: 846
+
+GovernmentsObservation_51:
+  id: 51
+  government_id: 20
+  observation_id: 847
+
+GovernmentsObservation_52:
+  id: 52
+  government_id: 21
+  observation_id: 848
+
+GovernmentsObservation_53:
+  id: 53
+  government_id: 21
+  observation_id: 849
+
+GovernmentsObservation_54:
+  id: 54
+  government_id: 21
+  observation_id: 850
+
+GovernmentsObservation_55:
+  id: 55
+  government_id: 21
+  observation_id: 851
+
+GovernmentsObservation_56:
+  id: 56
+  government_id: 21
+  observation_id: 852
+
+GovernmentsObservation_57:
+  id: 57
+  government_id: 21
+  observation_id: 853
+
+GovernmentsObservation_58:
+  id: 58
+  government_id: 21
+  observation_id: 854
+
+GovernmentsObservation_59:
+  id: 59
+  government_id: 21
+  observation_id: 855
+
+GovernmentsObservation_60:
+  id: 60
+  government_id: 17
+  observation_id: 856
+
+GovernmentsObservation_61:
+  id: 61
+  government_id: 21
+  observation_id: 857
+
+GovernmentsObservation_62:
+  id: 62
+  government_id: 22
+  observation_id: 858
+
+GovernmentsObservation_63:
+  id: 63
+  government_id: 23
+  observation_id: 859
+
+GovernmentsObservation_64:
+  id: 64
+  government_id: 23
+  observation_id: 860
+
+GovernmentsObservation_65:
+  id: 65
+  government_id: 23
+  observation_id: 861
+
+GovernmentsObservation_66:
+  id: 66
+  government_id: 23
+  observation_id: 862
+
+GovernmentsObservation_67:
+  id: 67
+  government_id: 23
+  observation_id: 863
+
+GovernmentsObservation_68:
+  id: 68
+  government_id: 23
+  observation_id: 864
+
+GovernmentsObservation_69:
+  id: 69
+  government_id: 23
+  observation_id: 866
+
+GovernmentsObservation_70:
+  id: 70
+  government_id: 23
+  observation_id: 867
+
+GovernmentsObservation_71:
+  id: 71
+  government_id: 15
+  observation_id: 868
+
+GovernmentsObservation_72:
+  id: 72
+  government_id: 15
+  observation_id: 869
+
+GovernmentsObservation_73:
+  id: 73
+  government_id: 15
+  observation_id: 870
+
+GovernmentsObservation_74:
+  id: 74
+  government_id: 15
+  observation_id: 871
+
+GovernmentsObservation_75:
+  id: 75
+  government_id: 15
+  observation_id: 872
+
+GovernmentsObservation_82:
+  id: 82
+  government_id: 15
+  observation_id: 873
+
+GovernmentsObservation_83:
+  id: 83
+  government_id: 15
+  observation_id: 874
+
+GovernmentsObservation_84:
+  id: 84
+  government_id: 15
+  observation_id: 875
+
+GovernmentsObservation_86:
+  id: 86
+  government_id: 15
+  observation_id: 877
+
+GovernmentsObservation_87:
+  id: 87
+  government_id: 15
+  observation_id: 878
+
+GovernmentsObservation_88:
+  id: 88
+  government_id: 15
+  observation_id: 879
+
+GovernmentsObservation_89:
+  id: 89
+  government_id: 13
+  observation_id: 880
+
+GovernmentsObservation_90:
+  id: 90
+  government_id: 13
+  observation_id: 881
+
+GovernmentsObservation_91:
+  id: 91
+  government_id: 13
+  observation_id: 882
+
+GovernmentsObservation_92:
+  id: 92
+  government_id: 13
+  observation_id: 883
+
+GovernmentsObservation_93:
+  id: 93
+  government_id: 24
+  observation_id: 884
+
+GovernmentsObservation_94:
+  id: 94
+  government_id: 13
+  observation_id: 885
+
+GovernmentsObservation_95:
+  id: 95
+  government_id: 13
+  observation_id: 886
+
+GovernmentsObservation_96:
+  id: 96
+  government_id: 13
+  observation_id: 887
+
+GovernmentsObservation_97:
+  id: 97
+  government_id: 13
+  observation_id: 888
+
+GovernmentsObservation_98:
+  id: 98
+  government_id: 21
+  observation_id: 908
+
+GovernmentsObservation_99:
+  id: 99
+  government_id: 21
+  observation_id: 909
+
+GovernmentsObservation_100:
+  id: 100
+  government_id: 21
+  observation_id: 911
+
+GovernmentsObservation_102:
+  id: 102
+  government_id: 21
+  observation_id: 914
+
+GovernmentsObservation_103:
+  id: 103
+  government_id: 13
+  observation_id: 823
+
+GovernmentsObservation_104:
+  id: 104
+  government_id: 21
+  observation_id: 919
+
+GovernmentsObservation_105:
+  id: 105
+  government_id: 21
+  observation_id: 920
+
+GovernmentsObservation_106:
+  id: 106
+  government_id: 16
+  observation_id: 921
+
+GovernmentsObservation_107:
+  id: 107
+  government_id: 16
+  observation_id: 922
+
+GovernmentsObservation_108:
+  id: 108
+  government_id: 16
+  observation_id: 923
+
+GovernmentsObservation_109:
+  id: 109
+  government_id: 16
+  observation_id: 924
+
+GovernmentsObservation_110:
+  id: 110
+  government_id: 16
+  observation_id: 925
+
+GovernmentsObservation_111:
+  id: 111
+  government_id: 16
+  observation_id: 926
+
+GovernmentsObservation_112:
+  id: 112
+  government_id: 16
+  observation_id: 927
+
+GovernmentsObservation_113:
+  id: 113
+  government_id: 16
+  observation_id: 928
+
+GovernmentsObservation_114:
+  id: 114
+  government_id: 16
+  observation_id: 929
+
+GovernmentsObservation_115:
+  id: 115
+  government_id: 16
+  observation_id: 930
+
+GovernmentsObservation_116:
+  id: 116
+  government_id: 16
+  observation_id: 931
+
+GovernmentsObservation_117:
+  id: 117
+  government_id: 27
+  observation_id: 932
+
+GovernmentsObservation_118:
+  id: 118
+  government_id: 27
+  observation_id: 934
+
+GovernmentsObservation_119:
+  id: 119
+  government_id: 27
+  observation_id: 935
+
+GovernmentsObservation_120:
+  id: 120
+  government_id: 27
+  observation_id: 936
+
+GovernmentsObservation_121:
+  id: 121
+  government_id: 27
+  observation_id: 937
+
+GovernmentsObservation_122:
+  id: 122
+  government_id: 27
+  observation_id: 938
+
+GovernmentsObservation_123:
+  id: 123
+  government_id: 21
+  observation_id: 939
+
+GovernmentsObservation_124:
+  id: 124
+  government_id: 27
+  observation_id: 940
+
+GovernmentsObservation_125:
+  id: 125
+  government_id: 27
+  observation_id: 941
+
+GovernmentsObservation_126:
+  id: 126
+  government_id: 27
+  observation_id: 942
+
+GovernmentsObservation_127:
+  id: 127
+  government_id: 21
+  observation_id: 943
+
+GovernmentsObservation_128:
+  id: 128
+  government_id: 21
+  observation_id: 944
+
+GovernmentsObservation_129:
+  id: 129
+  government_id: 21
+  observation_id: 945
+
+GovernmentsObservation_130:
+  id: 130
+  government_id: 21
+  observation_id: 946
+
+GovernmentsObservation_169:
+  id: 169
+  government_id: 21
+  observation_id: 918
+
+GovernmentsObservation_330:
+  id: 330
+  government_id: 21
+  observation_id: 915
+
+GovernmentsObservation_336:
+  id: 336
+  government_id: 27
+  observation_id: 933
+
+GovernmentsObservation_339:
+  id: 339
+  government_id: 13
+  observation_id: 820
+
+GovernmentsObservation_340:
+  id: 340
+  government_id: 18
+  observation_id: 838
+
+GovernmentsObservation_343:
+  id: 343
+  government_id: 21
+  observation_id: 912
+
+GovernmentsObservation_358:
+  id: 358
+  government_id: 45
+  observation_id: 1913
+
+GovernmentsObservation_359:
+  id: 359
+  government_id: 45
+  observation_id: 1914
+
+GovernmentsObservation_364:
+  id: 364
+  government_id: 37
+  observation_id: 1821
+
+GovernmentsObservation_378:
+  id: 378
+  government_id: 23
+  observation_id: 899
+
+GovernmentsObservation_379:
+  id: 379
+  government_id: 24
+  observation_id: 900
+
+GovernmentsObservation_380:
+  id: 380
+  government_id: 20
+  observation_id: 901
+
+GovernmentsObservation_381:
+  id: 381
+  government_id: 20
+  observation_id: 902
+
+GovernmentsObservation_382:
+  id: 382
+  government_id: 13
+  observation_id: 889
+
+GovernmentsObservation_383:
+  id: 383
+  government_id: 24
+  observation_id: 890
+
+GovernmentsObservation_384:
+  id: 384
+  government_id: 20
+  observation_id: 903
+
+GovernmentsObservation_385:
+  id: 385
+  government_id: 13
+  observation_id: 891
+
+GovernmentsObservation_386:
+  id: 386
+  government_id: 20
+  observation_id: 904
+
+GovernmentsObservation_387:
+  id: 387
+  government_id: 13
+  observation_id: 892
+
+GovernmentsObservation_388:
+  id: 388
+  government_id: 13
+  observation_id: 893
+
+GovernmentsObservation_389:
+  id: 389
+  government_id: 20
+  observation_id: 905
+
+GovernmentsObservation_390:
+  id: 390
+  government_id: 13
+  observation_id: 894
+
+GovernmentsObservation_391:
+  id: 391
+  government_id: 21
+  observation_id: 906
+
+GovernmentsObservation_393:
+  id: 393
+  government_id: 21
+  observation_id: 907
+
+GovernmentsObservation_396:
+  id: 396
+  government_id: 26
+  observation_id: 898
+
+GovernmentsObservation_409:
+  id: 409
+  government_id: 44
+  observation_id: 1739
+
+GovernmentsObservation_437:
+  id: 437
+  government_id: 41
+  observation_id: 1885
+
+GovernmentsObservation_446:
+  id: 446
+  government_id: 37
+  observation_id: 1751
+
+GovernmentsObservation_477:
+  id: 477
+  government_id: 43
+  observation_id: 1732
+
+GovernmentsObservation_491:
+  id: 491
+  government_id: 45
+  observation_id: 1912
+
+GovernmentsObservation_503:
+  id: 503
+  government_id: 43
+  observation_id: 1898
+
+GovernmentsObservation_519:
+  id: 519
+  government_id: 45
+  observation_id: 1910
+
+GovernmentsObservation_523:
+  id: 523
+  government_id: 45
+  observation_id: 1911
+
+GovernmentsObservation_525:
+  id: 525
+  government_id: 37
+  observation_id: 1883
+
+GovernmentsObservation_526:
+  id: 526
+  government_id: 41
+  observation_id: 1884
+
+GovernmentsObservation_547:
+  id: 547
+  government_id: 25
+  observation_id: 897
+
+GovernmentsObservation_556:
+  id: 556
+  government_id: 37
+  observation_id: 2218
+
+GovernmentsObservation_557:
+  id: 557
+  government_id: 37
+  observation_id: 2219
+
+GovernmentsObservation_558:
+  id: 558
+  government_id: 37
+  observation_id: 2220
+
+GovernmentsObservation_559:
+  id: 559
+  government_id: 36
+  observation_id: 2311
+
+GovernmentsObservation_560:
+  id: 560
+  government_id: 44
+  observation_id: 2312
+
+GovernmentsObservation_561:
+  id: 561
+  government_id: 44
+  observation_id: 2313
+
+GovernmentsObservation_562:
+  id: 562
+  government_id: 44
+  observation_id: 2314
+
+GovernmentsObservation_563:
+  id: 563
+  government_id: 44
+  observation_id: 2315
+
+GovernmentsObservation_564:
+  id: 564
+  government_id: 47
+  observation_id: 2363
+
+GovernmentsObservation_565:
+  id: 565
+  government_id: 36
+  observation_id: 2364
+
+GovernmentsObservation_566:
+  id: 566
+  government_id: 37
+  observation_id: 2365
+
+GovernmentsObservation_567:
+  id: 567
+  government_id: 37
+  observation_id: 2366
+
+GovernmentsObservation_568:
+  id: 568
+  government_id: 48
+  observation_id: 2367
+
+GovernmentsObservation_569:
+  id: 569
+  government_id: 48
+  observation_id: 2368
+
+GovernmentsObservation_570:
+  id: 570
+  government_id: 36
+  observation_id: 2369
+
+GovernmentsObservation_571:
+  id: 571
+  government_id: 49
+  observation_id: 2371
+
+GovernmentsObservation_572:
+  id: 572
+  government_id: 37
+  observation_id: 2371
+
+GovernmentsObservation_573:
+  id: 573
+  government_id: 36
+  observation_id: 2371
+
+GovernmentsObservation_574:
+  id: 574
+  government_id: 37
+  observation_id: 2380
+
+GovernmentsObservation_575:
+  id: 575
+  government_id: 37
+  observation_id: 2381
+
+GovernmentsObservation_576:
+  id: 576
+  government_id: 47
+  observation_id: 2382
+
+GovernmentsObservation_577:
+  id: 577
+  government_id: 49
+  observation_id: 2383
+
+GovernmentsObservation_578:
+  id: 578
+  government_id: 41
+  observation_id: 2383
+
+GovernmentsObservation_579:
+  id: 579
+  government_id: 37
+  observation_id: 2383
+
+GovernmentsObservation_580:
+  id: 580
+  government_id: 41
+  observation_id: 2384
+
+GovernmentsObservation_581:
+  id: 581
+  government_id: 39
+  observation_id: 2385
+
+GovernmentsObservation_582:
+  id: 582
+  government_id: 11
+  observation_id: 2419
+
+GovernmentsObservation_583:
+  id: 583
+  government_id: 11
+  observation_id: 2420
+
+GovernmentsObservation_584:
+  id: 584
+  government_id: 81
+  observation_id: 2420
+
+GovernmentsObservation_585:
+  id: 585
+  government_id: 11
+  observation_id: 2424
+
+GovernmentsObservation_586:
+  id: 586
+  government_id: 11
+  observation_id: 2435
+
+GovernmentsObservation_601:
+  id: 601
+  government_id: 34
+  observation_id: 2489
+
+GovernmentsObservation_602:
+  id: 602
+  government_id: 34
+  observation_id: 2490
+
+GovernmentsObservation_603:
+  id: 603
+  government_id: 34
+  observation_id: 2491
+
+GovernmentsObservation_604:
+  id: 604
+  government_id: 34
+  observation_id: 2492
+
+GovernmentsObservation_605:
+  id: 605
+  government_id: 34
+  observation_id: 2493
+
+GovernmentsObservation_606:
+  id: 606
+  government_id: 34
+  observation_id: 2494
+
+GovernmentsObservation_612:
+  id: 612
+  government_id: 14
+  observation_id: 2536
+
+GovernmentsObservation_619:
+  id: 619
+  government_id: 14
+  observation_id: 2543
+
+GovernmentsObservation_620:
+  id: 620
+  government_id: 33
+  observation_id: 2579
+
+GovernmentsObservation_622:
+  id: 622
+  government_id: 33
+  observation_id: 2581
+
+GovernmentsObservation_623:
+  id: 623
+  government_id: 33
+  observation_id: 2582
+
+GovernmentsObservation_624:
+  id: 624
+  government_id: 33
+  observation_id: 2583
+
+GovernmentsObservation_625:
+  id: 625
+  government_id: 24
+  observation_id: 2584
+
+GovernmentsObservation_626:
+  id: 626
+  government_id: 24
+  observation_id: 2585
+
+GovernmentsObservation_627:
+  id: 627
+  government_id: 24
+  observation_id: 2586
+
+GovernmentsObservation_628:
+  id: 628
+  government_id: 24
+  observation_id: 2587
+
+GovernmentsObservation_629:
+  id: 629
+  government_id: 83
+  observation_id: 2370
+
+GovernmentsObservation_630:
+  id: 630
+  government_id: 84
+  observation_id: 2634
+
+GovernmentsObservation_631:
+  id: 631
+  government_id: 84
+  observation_id: 2635

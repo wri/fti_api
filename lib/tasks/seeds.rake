@@ -68,10 +68,20 @@ class SeedsTasks
 
         # monitors
         evidences = ObservationDocument.where(observation: observations).order(:id)
+        report_observers = ObservationReportObserver.where(observation_report: reports, observer: observers).order(:id)
+        observer_observations = ObserverObservation.where(observation: observations, observer: observers).order(:id)
+        countries_observers = CountriesObserver.where(observer: observers).order(:country_id, :observer_id)
+        governments_observations = GovernmentsObservation.where(observation: observations).order(:id)
+        observation_operators = ObservationOperator.where(observation: observations, operator: operators).order(:id)
         generate_for_model "Observer", entries: observers, exclude: %w[responsible_admin_id]
+        generate_for_model "CountriesObserver", entries: countries_observers, exclude: %w[created_at updated_at]
         generate_for_model "ObservationReport", entries: reports, exclude: %w[created_at updated_at user_id]
+        generate_for_model "ObservationReportObserver", entries: report_observers, exclude: %w[created_at updated_at]
         generate_for_model "Observation", entries: observations, locale: %w[en], exclude: %w[created_at updated_at user_id modified_user_id], anonymize: %w[admin_comment monitor_comment]
         generate_for_model "ObservationDocument", entries: evidences, exclude: %w[created_at updated_at user_id]
+        generate_for_model "ObserverObservation", entries: observer_observations, exclude: %w[created_at updated_at]
+        generate_for_model "GovernmentsObservation", entries: governments_observations, exclude: %w[created_at updated_at]
+        generate_for_model "ObservationOperator", entries: observation_operators, exclude: %w[created_at updated_at]
       end
     end
   end
@@ -80,14 +90,12 @@ class SeedsTasks
     model = model_class.constantize
     puts "Dumping fixtures for: #{model_class}"
 
-    increment = 1
-
     model_file_name = "#{Rails.root}/db/fixtures/#{model_class.underscore.pluralize}.yml"
     model_file = File.open(model_file_name, "w")
 
     translated_attributes = model.respond_to?(:translated_attribute_names) ? model.translated_attribute_names.map(&:to_s) : []
 
-    entries ||= model.order(id: :asc).all
+    entries ||= model.attribute_names.include?("id") ? model.order(id: :asc).all : model.all
 
     if translated_attributes.any?
       translation_dir = "#{Rails.root}/db/fixtures/#{model_class.underscore}"
@@ -99,6 +107,7 @@ class SeedsTasks
     end
 
     exclude_attributes = exclude || []
+    increment = 1
 
     entries.each do |entry|
       attrs = entry.attributes.except(*(exclude_attributes + translated_attributes))
@@ -106,7 +115,7 @@ class SeedsTasks
       attrs.each { |k, _v| attrs[k] = attrs[k].to_s if DATE_FIELDS.include?(k) }
       attrs.compact_blank!
 
-      key = model_class + "_" + increment.to_s
+      key = "#{model_class}_#{entry.id || increment}"
       output = {key => attrs}
       model_file << output.to_yaml.gsub(/^---/, "").gsub(/^\.\.\./, "")
 

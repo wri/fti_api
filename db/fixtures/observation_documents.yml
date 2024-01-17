@@ -1,185 +1,216 @@
 
-ObservationDocument_1:
+ObservationDocument_33:
   id: 33
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_2:
+ObservationDocument_34:
   id: 34
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_3:
+ObservationDocument_35:
   id: 35
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_4:
+ObservationDocument_36:
   id: 36
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_5:
+ObservationDocument_37:
   id: 37
   name: Photo -Absence du marteau forestier
   attachment: photo-absence-du-marteau-forestier.JPG
   observation_id: 287
 
-ObservationDocument_6:
+ObservationDocument_668:
   id: 668
   name: LocalisationEmpietement de la concession CFT par SCIPEC
   attachment: localisationempietement-de-la-concession-cft-par-scipec.docx
   observation_id: 1812
 
-ObservationDocument_7:
+ObservationDocument_677:
   id: 677
   name: Déboisement pour plantation de culture vivrière
   attachment: deboisement-pour-plantation-de-culture-vivriere.pdf
   observation_id: 1821
 
-ObservationDocument_8:
+ObservationDocument_692:
   id: 692
   name: Permis non conformes
   attachment: permis-non-conformes.pdf
   observation_id: 1751
 
-ObservationDocument_9:
+ObservationDocument_737:
   id: 737
   name: NOTION DE CONTRAT D’ENTREPRISE DE PLANTATION
   attachment: notion-de-contrat-d-entreprise-de-plantation.jpeg
   observation_id: 1821
 
-ObservationDocument_10:
+ObservationDocument_740:
   id: 740
   name: Bois saisi a Yololia sans marteau de OPJ
   attachment: bois-saisi-a-yololia-sans-marteau-de-opj.jpeg
   observation_id: 1739
 
-ObservationDocument_11:
+ObservationDocument_749:
   id: 749
   name: Pas de preuve
   attachment: pas-de-preuve.pdf
   observation_id: 1884
 
-ObservationDocument_12:
+ObservationDocument_750:
   id: 750
   name: Pas de preuve
   attachment: pas-de-preuve.pdf
   observation_id: 1885
 
-ObservationDocument_13:
+ObservationDocument_763:
   id: 763
   name: 'Non respect de procédure de paiement de taxe de redevance '
   attachment: non-respect-de-procedure-de-paiement-de-taxe-de-redevance.pdf
   observation_id: 1898
 
-ObservationDocument_14:
+ObservationDocument_775:
   id: 775
   name: Lettre d’empiétement
   attachment: lettre-d-empietement.pdf
   observation_id: 1910
 
-ObservationDocument_15:
+ObservationDocument_776:
   id: 776
   name: Pas de preuve
   attachment: pas-de-preuve.pdf
   observation_id: 1911
 
-ObservationDocument_16:
+ObservationDocument_777:
   id: 777
   name: Pas de preuve
   attachment: pas-de-preuve.pdf
   observation_id: 1912
 
-ObservationDocument_17:
+ObservationDocument_778:
   id: 778
   name: Pas de preuve
   attachment: pas-de-preuve.pdf
   observation_id: 1913
 
-ObservationDocument_18:
+ObservationDocument_779:
   id: 779
   name: Pas de preuve
   attachment: pas-de-preuve.pdf
   observation_id: 1914
 
-ObservationDocument_19:
+ObservationDocument_926:
   id: 926
   name: Note de débit SCIBOIS
   attachment: note-de-debit-scibois.pdf
   observation_id: 1884
 
-ObservationDocument_20:
+ObservationDocument_927:
   id: 927
   name: Permis de coupe MU2
   attachment: permis-de-coupe-mu2.pdf
   observation_id: 1885
 
-ObservationDocument_21:
+ObservationDocument_970:
   id: 970
   name: Permis de Congo King
   attachment: permis-de-congo-king.jpeg
   observation_id: 2218
 
-ObservationDocument_22:
+ObservationDocument_971:
   id: 971
   name: Permis FARABOLA en 2020
   attachment: permis-farabola-en-2020.pdf
   observation_id: 2219
 
-ObservationDocument_23:
+ObservationDocument_1002:
+  id: 1002
+  name: Paiement partiel de la redevance
+  attachment: paiement-partiel-de-la-redevance.pdf
+  observation_id: 2361
+
+ObservationDocument_1003:
   id: 1003
   name: Réalisation partielle de la clause sociale
   attachment: realisation-partielle-de-la-clause-sociale.pdf
   observation_id: 2362
 
-ObservationDocument_24:
+ObservationDocument_1005:
+  id: 1005
+  name: Délivrance tardive de permis de coupe
+  attachment: delivrance-tardive-de-permis-de-coupe.pdf
+  observation_id: 2366
+
+ObservationDocument_1006:
+  id: 1006
+  name: Minoration de la taxe de superficie de KL
+  attachment: minoration-de-la-taxe-de-superficie-de-kl.pdf
+  observation_id: 2367
+
+ObservationDocument_1007:
   id: 1007
   name: Mauvais recouvrement de la taxe
   attachment: mauvais-recouvrement-de-la-taxe.pdf
   observation_id: 2368
 
-ObservationDocument_25:
+ObservationDocument_1008:
   id: 1008
   name: Minoration de la redevance de superficie de SODEFOR
   attachment: minoration-de-la-redevance-de-superficie-de-sodefor.pdf
   observation_id: 2369
 
-ObservationDocument_26:
+ObservationDocument_1009:
   id: 1009
   name: Minoration de la taxe de superficie exercice 2021
   attachment: minoration-de-la-taxe-de-superficie-exercice-2021.pdf
   observation_id: 2370
 
-ObservationDocument_27:
+ObservationDocument_1010:
+  id: 1010
+  name: Liquidation et recouvrement de la redevance de superficie au niveau provincial
+    pour l’exercice 2021
+  attachment: liquidation-et-recouvrement-de-la-redevance-de-superficie-au-niveau-provincial-pour-l-exercice-2021.pdf
+  observation_id: 2371
+
+ObservationDocument_1018:
+  id: 1018
+  name: Permis délivré en retard
+  attachment: permis-delivre-en-retard.pdf
+  observation_id: 2381
+
+ObservationDocument_1019:
   id: 1019
   name: Extrait de laisser passer délivré par la province
   attachment: extrait-de-laisser-passer-delivre-par-la-province.pdf
   observation_id: 2385
 
-ObservationDocument_28:
+ObservationDocument_1051:
   id: 1051
   name: Autorisation de compensation d'Eyoum page1
   attachment: autorisation-de-compensation-d-eyoum-page1.jpeg
   observation_id: 2489
 
-ObservationDocument_29:
+ObservationDocument_1052:
   id: 1052
   name: Autorisation de compensation d'Eyoum page2
   attachment: autorisation-de-compensation-d-eyoum-page2.jpeg
   observation_id: 2489
 
-ObservationDocument_30:
+ObservationDocument_1053:
   id: 1053
   name: Autorisation de compensation d'Eyoum page4
   attachment: autorisation-de-compensation-d-eyoum-page4.jpeg
   observation_id: 2489
 
-ObservationDocument_31:
+ObservationDocument_1054:
   id: 1054
   name: Autorisation de compensation d'Eyoum page3
   attachment: autorisation-de-compensation-d-eyoum-page3.jpeg
