@@ -1,5 +1,9 @@
 require "active_record/fixtures"
 
+# This file contains a monkey patch to ActiveRecord::FixtureSet that allows us to get better error messages when
+# there are integrity errors in the fixtures.
+# TODO: Remove after upgrading to Rails 7.1
+
 module FixtureSetExtension
   extend ActiveSupport::Concern
 
@@ -77,7 +81,6 @@ module IntegrityExtension
   end
 end
 
-# TODO: Remove when upgrading to Rails 7.1
 # uncomment below extensions if you have problems with finding errors in data integrity of your fixtures
 ActiveSupport::Reloader.to_prepare do
   ActiveRecord::FixtureSet.prepend FixtureSetExtension
