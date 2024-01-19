@@ -12,7 +12,7 @@ ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
 $stdout.puts "Creating test users..."
 
 common_fields = {password: "password", password_confirmation: "password", locale: :en}
-admin = User.create_with(**common_fields, name: "Admin").find_or_create_by!(email: "admin@example.com") do |user|
+User.create_with(**common_fields, name: "Admin").find_or_create_by!(email: "admin@example.com") do |user|
   user.build_user_permission(user_role: "admin")
 end
 User.create_with(**common_fields, name: "User").find_or_create_by(email: "user@example.com") do |user|
@@ -57,5 +57,6 @@ OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }
 
 $stdout.puts "Syncing test data..."
 
+Fmu.find_each(&:update_geometry)
 Rake::Task["sync:ranking"].invoke
 Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }

@@ -149,8 +149,6 @@ class Fmu < ApplicationRecord
     parent.table[:id]
   end
 
-  private
-
   def update_geometry
     self.class.unscoped.where(id: id).update_all("geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')")
     update_centroid
