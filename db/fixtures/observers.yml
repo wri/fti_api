@@ -1,0 +1,86 @@
+
+Observer_3:
+  id: 3
+  observer_type: Mandated
+  created_at: 2017-09-25 15:06:42 UTC
+  updated_at: 2023-09-08 12:12:54 UTC
+  is_active: true
+
+Observer_5:
+  id: 5
+  observer_type: SemiMandated
+  created_at: 2017-09-25 15:06:42 UTC
+  updated_at: 2023-12-06 09:36:08 UTC
+  is_active: true
+  logo: FODER.jpg
+  address: Derrière usine Bastos, face Restaurant Chinois Village, PO BOX 11417, Yaoundé,
+    Cameroon
+  information_name: JUSTIN CHRISTOPHE KAMGA
+  information_email: foder4dev@gmail.com
+  information_phone: 00 237 651 267 812
+  data_name: ANGELINE MODJO KAMDEM
+  data_email: angeline.modjo@gmail.com
+  data_phone: 00237 6 76 52 47 09
+  organization_type: NGO
+
+Observer_10:
+  id: 10
+  observer_type: Mandated
+  created_at: 2017-09-25 15:06:42 UTC
+  updated_at: 2023-11-14 13:13:04 UTC
+  is_active: true
+  logo: CAGDF.jpg
+  address: 43, rue Nkounkou August, Makélékélé
+  information_name: Lambert Mabiala
+  information_email: lambertmabiala@yahoo.fr
+  data_name: Edouard Kibongui
+  data_email: ekibongui@gmail.com
+  organization_type: NGO
+
+Observer_16:
+  id: 16
+  observer_type: Mandated
+  created_at: 2017-09-25 15:06:42 UTC
+  updated_at: 2023-12-05 12:36:15 UTC
+  is_active: true
+  logo: OGF.jpg
+  address: 6, avenue Marinel, Kinshasa/Gombe, référence Immeuble Sofide
+  information_name: Serge Bondo
+  information_email: skayembeb@gmail.com
+  information_phone: "+243 814051144"
+  data_name: Serge BONDO
+  data_email: skayembeb@gmail.com
+  data_phone: "+243 814051144"
+  organization_type: NGO
+  public_info: true
+
+Observer_25:
+  id: 25
+  observer_type: External
+  created_at: 2019-03-01 22:01:21 UTC
+  updated_at: 2023-09-20 13:34:09 UTC
+  is_active: true
+  organization_type: NGO
+
+Observer_26:
+  id: 26
+  observer_type: External
+  created_at: 2019-03-29 16:31:40 UTC
+  updated_at: 2023-11-01 13:51:59 UTC
+  is_active: true
+  address: Cameroon
+  organization_type: NGO
+
+Observer_34:
+  id: 34
+  observer_type: External
+  created_at: 2023-07-07 17:36:09 UTC
+  updated_at: 2023-11-30 14:48:08 UTC
+  is_active: true
+
+Observer_38:
+  id: 38
+  observer_type: External
+  created_at: 2023-07-17 14:29:30 UTC
+  updated_at: 2023-09-01 09:17:05 UTC
+  is_active: true

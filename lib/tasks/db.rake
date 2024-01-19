@@ -30,9 +30,11 @@ namespace :db do
       sh "gzip -dk #{dump_file}"
       dump_file = dump_file.gsub(".gz", "")
     end
+    sh "docker-compose restart db" # just in case if load task cannot drop the database
     sh "cap development db:local:load DUMP_FILE=#{dump_file}"
     sh "rm #{dump_file}" if compressed
     Rake::Task["db:prepare_for_dev"].invoke
+    Rake::Task["db:environment:set"].invoke
   end
 
   desc "Restore database from server - Params: SERVER=production(default)|staging, SMALL (if present we ignore versions table data)"
@@ -42,8 +44,10 @@ namespace :db do
     params = ENV["SMALL"] ? "DB_IGNORE_DATA_TABLES=versions" : ""
     server = ENV.fetch("SERVER", "production")
 
+    sh "docker-compose restart db" # just in case if load task cannot drop the database
     sh "cap #{server} db:pull #{params}"
     Rake::Task["db:prepare_for_dev"].invoke
+    Rake::Task["db:environment:set"].invoke
   end
 
   desc "Prepare database for dev enviroment"

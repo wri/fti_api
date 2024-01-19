@@ -1,0 +1,2492 @@
+
+OperatorDocumentAnnex_1:
+  id: 1
+  name: CAT initiale 2002-2017
+  start_date: 2002-11-13
+  expire_date: 2017-11-12
+  status: doc_valid
+  attachment: attachment.pdf
+  uploaded_by: operator
+  created_at: 2018-01-25 18:13:03 UTC
+  updated_at: 2020-03-16 04:19:52 UTC
+  public: true
+
+OperatorDocumentAnnex_59:
+  id: 59
+  name: Cahier de charges principal  Kabo
+  start_date: 2002-11-13
+  expire_date: 2034-04-30
+  status: doc_valid
+  attachment: Annex_1534938205_cib-cahier-des-charges-particulier-2018-08-22.pdf
+  uploaded_by: operator
+  created_at: 2018-08-22 11:43:25 UTC
+  updated_at: 2020-03-16 04:36:13 UTC
+  public: true
+
+OperatorDocumentAnnex_60:
+  id: 60
+  name: CAT Principal Kabo
+  start_date: 2002-12-11
+  expire_date: 2034-04-30
+  status: doc_valid
+  attachment: Annex_1534938501_cib-convention-d-amenagement-et-de-transformation-cat-2018-05-02.pdf
+  uploaded_by: operator
+  created_at: 2018-08-22 11:48:21 UTC
+  updated_at: 2020-03-16 04:35:59 UTC
+  public: true
+
+OperatorDocumentAnnex_84:
+  id: 84
+  name: identification nationale_RCCM_Boma
+  start_date: 2017-10-09
+  expire_date: 2116-10-09
+  status: doc_valid
+  attachment: Annex_1540206490_cft-numero-d-identification-national-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: 2018-10-22 11:08:10 UTC
+  updated_at: 2019-02-10 13:35:53 UTC
+  public: true
+
+OperatorDocumentAnnex_85:
+  id: 85
+  name: identification nationale_RCCM_Kisangani
+  start_date: 2018-03-08
+  expire_date: 2117-03-08
+  status: doc_pending
+  attachment: Annex_1540206601_cft-numero-d-identification-national-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: 2018-10-22 11:10:01 UTC
+  updated_at: 2018-10-22 11:10:01 UTC
+  public: true
+
+OperatorDocumentAnnex_86:
+  id: 86
+  name: RCCM_BOMA
+  start_date: 2014-08-23
+  expire_date: 2113-08-23
+  status: doc_pending
+  attachment: Annex_1540206781_cft-preuve-d-immatriculation-au-rccm-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: 2018-10-22 11:13:01 UTC
+  updated_at: 2018-10-22 11:13:01 UTC
+  public: true
+
+OperatorDocumentAnnex_87:
+  id: 87
+  name: Certificat de radiation_RCCM_BOMA
+  start_date: 2018-04-13
+  expire_date: 2117-04-13
+  status: doc_pending
+  attachment: Annex_1540206996_cft-preuve-d-immatriculation-au-rccm-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: 2018-10-22 11:16:36 UTC
+  updated_at: 2018-10-22 11:16:36 UTC
+  public: true
+
+OperatorDocumentAnnex_88:
+  id: 88
+  name: RCCM_KISANGANI
+  start_date: 2018-03-01
+  expire_date: 2117-03-01
+  status: doc_valid
+  attachment: Annex_1540207095_cft-preuve-d-immatriculation-au-rccm-2018-10-22.pdf
+  uploaded_by: operator
+  created_at: 2018-10-22 11:18:15 UTC
+  updated_at: 2019-02-10 13:41:12 UTC
+  public: true
+
+OperatorDocumentAnnex_95:
+  id: 95
+  name: publication de l'arrêté d'approbation du plan d'aménagement au journal officiel
+  start_date: 2018-01-15
+  expire_date: 2043-01-15
+  status: doc_valid
+  attachment: Annex_1540373674_cft-arrete-d-approbation-du-plan-d-amenagement-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: 2018-10-24 09:34:34 UTC
+  updated_at: 2019-02-10 13:40:47 UTC
+  public: true
+
+OperatorDocumentAnnex_107:
+  id: 107
+  name: Avenant no3 a CAT  en lien avec le cahier de charge
+  start_date: 2015-10-27
+  expire_date: 2042-10-26
+  status: doc_valid
+  attachment: Annex_1540435021_ifo-interholco-cahier-des-charges-particulier-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: 2018-10-25 02:37:01 UTC
+  updated_at: 2020-03-16 04:23:07 UTC
+  public: true
+
+OperatorDocumentAnnex_108:
+  id: 108
+  name: Avenant N03
+  start_date: 2015-10-27
+  expire_date: 2042-10-26
+  status: doc_valid
+  attachment: Annex_1540435100_ifo-interholco-cahier-des-charges-particulier-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: 2018-10-25 02:38:20 UTC
+  updated_at: 2020-03-16 04:22:47 UTC
+  public: true
+
+OperatorDocumentAnnex_147:
+  id: 147
+  name: 'Preuve de paiement de la taxe de superficie_2 échelonnement CF_47/11 '
+  start_date: 2018-03-31
+  expire_date: 2019-03-31
+  status: doc_valid
+  attachment: Annex_1542101232_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-13 09:27:12 UTC
+  updated_at: 2019-02-10 13:34:55 UTC
+  public: true
+
+OperatorDocumentAnnex_148:
+  id: 148
+  name: 'Preuve de paiement de la taxe de superficie_3 échelonnement CF_47/11 '
+  start_date: 2018-05-08
+  expire_date: 2019-05-08
+  status: doc_valid
+  attachment: Annex_1542101349_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-13 09:29:09 UTC
+  updated_at: 2019-02-10 13:34:44 UTC
+  public: true
+
+OperatorDocumentAnnex_149:
+  id: 149
+  name: 'Preuve de paiement de la taxe de superficie_4 échelonnement CF_47/11 '
+  start_date: 2018-06-08
+  expire_date: 2019-06-08
+  status: doc_valid
+  attachment: Annex_1542101440_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-13 09:30:40 UTC
+  updated_at: 2019-02-10 13:34:26 UTC
+  public: true
+
+OperatorDocumentAnnex_150:
+  id: 150
+  name: 'Preuve de paiement de la taxe de superficie_5 échelonnement CF_47/11 '
+  start_date: 2018-07-11
+  expire_date: 2019-07-11
+  status: doc_valid
+  attachment: Annex_1542101511_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-13 09:31:51 UTC
+  updated_at: 2019-02-10 13:34:15 UTC
+  public: true
+
+OperatorDocumentAnnex_151:
+  id: 151
+  name: 'Preuve de paiement de la taxe de superficie_6 échelonnement CF_47/11 '
+  start_date: 2018-08-28
+  expire_date: 2019-08-28
+  status: doc_valid
+  attachment: Annex_1542101580_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-13 09:33:00 UTC
+  updated_at: 2019-02-10 13:34:00 UTC
+  public: true
+
+OperatorDocumentAnnex_152:
+  id: 152
+  name: 'Preuve de paiement de la taxe de superficie_7 échelonnement CF_47/11 '
+  start_date: 2018-09-05
+  expire_date: 2019-09-05
+  status: doc_valid
+  attachment: Annex_1542101693_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-13 09:34:53 UTC
+  updated_at: 2019-02-10 13:33:48 UTC
+  public: true
+
+OperatorDocumentAnnex_153:
+  id: 153
+  name: 'Preuve de paiement de la taxe de superficie_8 échelonnement CF_47/11 '
+  start_date: 2018-10-09
+  expire_date: 2019-10-09
+  status: doc_valid
+  attachment: Annex_1542101778_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-13 09:36:18 UTC
+  updated_at: 2019-02-10 13:33:36 UTC
+  public: true
+
+OperatorDocumentAnnex_154:
+  id: 154
+  name: Accord sur la clause sociale du cahier des charges avec groupement Mandombe
+  start_date: 2018-05-28
+  expire_date: 2023-05-28
+  status: doc_pending
+  attachment: Annex_1542644821_cft-accord-sur-la-clause-sociale-du-cahier-des-charges-conforme-au-modele-fixe-par-arrete-2018-11-19.pdf
+  uploaded_by: operator
+  created_at: 2018-11-19 16:27:01 UTC
+  updated_at: 2018-11-19 16:27:01 UTC
+  public: true
+
+OperatorDocumentAnnex_158:
+  id: 158
+  name: plan d'aménagement forestier SSA 46/11 & 47/11
+  start_date: 2016-08-09
+  expire_date: 2041-08-09
+  status: doc_pending
+  attachment: Annex_1542818574_cft-certificat-de-conformite-du-plan-d-amenagement-2018-10-24.pdf
+  uploaded_by: operator
+  created_at: 2018-11-21 16:42:54 UTC
+  updated_at: 2018-11-21 16:42:54 UTC
+  public: true
+
+OperatorDocumentAnnex_159:
+  id: 159
+  name: 'Preuve de paiement de la taxe de superficie_9 échelonnement CF_47/11 '
+  start_date: 2018-11-14
+  expire_date: 2019-11-14
+  status: doc_pending
+  attachment: Annex_1542821118_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-11-21 17:25:18 UTC
+  updated_at: 2018-11-21 17:25:18 UTC
+  public: true
+
+OperatorDocumentAnnex_167:
+  id: 167
+  name: Déclaration trimestrielle_Troisième trimestre 2018
+  start_date: 2018-10-15
+  expire_date: 2019-10-15
+  status: doc_valid
+  attachment: Annex_1545906024_cft-declaration-trimestrielle-de-production-du-bois-d-oeuvre-2018-12-27.pdf
+  uploaded_by: operator
+  created_at: 2018-12-27 10:20:24 UTC
+  updated_at: 2019-02-12 08:41:47 UTC
+  public: true
+
+OperatorDocumentAnnex_170:
+  id: 170
+  name: Plan de gestion Quinquennal_BAQ1
+  start_date: 2016-11-22
+  expire_date: 2021-11-22
+  status: doc_valid
+  attachment: Annex_1545915504_cft-plan-de-gestion-quinquennal-valide-2018-12-27.pdf
+  uploaded_by: operator
+  created_at: 2018-12-27 12:58:24 UTC
+  updated_at: 2020-03-16 04:14:07 UTC
+  public: true
+
+OperatorDocumentAnnex_172:
+  id: 172
+  name: 'Preuve de paiement de la taxe de superficie_10 échelonnement CF_47/11 '
+  start_date: 2018-12-12
+  expire_date: 2019-12-12
+  status: doc_valid
+  attachment: Annex_1546010980_cft-attestation-de-paiement-redevance-de-superficie-forestiere-2018-11-13.pdf
+  uploaded_by: operator
+  created_at: 2018-12-28 15:29:40 UTC
+  updated_at: 2019-02-10 13:32:26 UTC
+  public: true
+
+OperatorDocumentAnnex_10056:
+  id: 10056
+  name: 'Annexe 2 de la convention d''exploitation: Cahier des charges'
+  start_date: 2006-03-21
+  expire_date: 2009-03-20
+  status: doc_valid
+  attachment: Annex_1549035565_siencam-convention-provisoire-d-exploitation-2019-02-01.pdf
+  uploaded_by: operator
+  created_at: 2019-02-01 15:39:25 UTC
+  updated_at: 2019-02-05 14:01:48 UTC
+  public: true
+
+OperatorDocumentAnnex_10058:
+  id: 10058
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_invalid
+  attachment: Annex_1549292161_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
+  uploaded_by: operator
+  created_at: 2019-02-04 14:56:01 UTC
+  updated_at: 2019-02-05 14:00:20 UTC
+  public: true
+
+OperatorDocumentAnnex_10060:
+  id: 10060
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_valid
+  attachment: Annex_1549292778_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
+  uploaded_by: operator
+  created_at: 2019-02-04 15:06:18 UTC
+  updated_at: 2019-02-05 13:59:00 UTC
+  public: true
+
+OperatorDocumentAnnex_10068:
+  id: 10068
+  name: Cahier des charges concession forestière 1032
+  start_date: 2000-10-20
+  expire_date: 2003-10-19
+  status: doc_valid
+  attachment: Annex_1549357619_lorema-convention-provisoire-d-exploitation-2019-02-05.pdf
+  uploaded_by: operator
+  created_at: 2019-02-05 09:06:59 UTC
+  updated_at: 2019-02-05 13:54:37 UTC
+  public: true
+
+OperatorDocumentAnnex_10073:
+  id: 10073
+  name: 'Annexe 2 de la convention provisoire: cahier des charges'
+  start_date: 2000-10-20
+  expire_date: 2003-10-19
+  status: doc_valid
+  attachment: Annex_1549532971_lorema-convention-provisoire-d-exploitation-2019-01-31.pdf
+  uploaded_by: operator
+  created_at: 2019-02-07 09:49:31 UTC
+  updated_at: 2019-03-21 17:26:33 UTC
+  public: true
+
+OperatorDocumentAnnex_10085:
+  id: 10085
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_valid
+  attachment: Annex_1550748229_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
+  uploaded_by: operator
+  created_at: 2019-02-21 11:23:49 UTC
+  updated_at: 2019-03-21 17:27:13 UTC
+  public: true
+
+OperatorDocumentAnnex_10086:
+  id: 10086
+  name: Arrêté d'approbation du plan d'aménagement
+  start_date: 2004-01-16
+  expire_date: 2034-01-15
+  status: doc_valid
+  attachment: Annex_1550748794_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-12.pdf
+  uploaded_by: operator
+  created_at: 2019-02-21 11:33:14 UTC
+  updated_at: 2019-03-21 17:22:58 UTC
+  public: true
+
+OperatorDocumentAnnex_10091:
+  id: 10091
+  name: 'Annexe 2 de la convention provisoire: cahier des charges'
+  start_date: 2000-10-20
+  expire_date: 2003-10-19
+  status: doc_valid
+  attachment: Annex_1550756421_lorema-convention-provisoire-d-exploitation-2019-01-31.pdf
+  uploaded_by: operator
+  created_at: 2019-02-21 13:40:21 UTC
+  updated_at: 2019-03-21 17:22:46 UTC
+  public: true
+
+OperatorDocumentAnnex_10113:
+  id: 10113
+  name: 'Annexe 2 de la convention provisoire: cahier des charges'
+  start_date: 2013-11-27
+  expire_date: 2014-05-15
+  status: doc_valid
+  attachment: Annex_1551087836_siencam-convention-provisoire-d-exploitation-2019-02-25.pdf
+  uploaded_by: operator
+  created_at: 2019-02-25 09:43:56 UTC
+  updated_at: 2019-03-21 17:15:06 UTC
+  public: true
+
+OperatorDocumentAnnex_20005:
+  id: 20005
+  name: procès verbal élections des déglués ufa 00004
+  start_date: 2018-03-01
+  expire_date: 2020-02-29
+  status: doc_valid
+  attachment: Annex_1555666974_siencam-proces-verbal-d-election-des-delegues-du-personnel-2019-04-19.pdf
+  uploaded_by: operator
+  created_at: 2019-04-19 09:42:54 UTC
+  updated_at: 2019-05-06 13:36:55 UTC
+  public: true
+
+OperatorDocumentAnnex_20006:
+  id: 20006
+  name: ACTE DE CRÉATION COMITÉ HYGIÈNE ET SÉCURITÉ AU TRAVAIL UFA 00004
+  start_date: 2016-01-21
+  expire_date: 2111-12-11
+  status: doc_valid
+  attachment: Annex_1555668212_siencam-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-2019-04-19.pdf
+  uploaded_by: operator
+  created_at: 2019-04-19 10:03:32 UTC
+  updated_at: 2019-05-06 13:36:43 UTC
+  public: true
+
+OperatorDocumentAnnex_20030:
+  id: 20030
+  name: 'Arrêté d''approbation dela CAT Mimbeli-Ibenga '
+  start_date: 2016-04-06
+  status: doc_valid
+  attachment: Annex_1557169475_cib-convention-d-amenagement-et-de-transformation-cat-2019-05-06.pdf
+  uploaded_by: operator
+  created_at: 2019-05-06 19:04:35 UTC
+  updated_at: 2019-05-07 15:37:05 UTC
+  public: true
+
+OperatorDocumentAnnex_20032:
+  id: 20032
+  name: " annex  Modèle de marteau déposé et enregistré"
+  start_date: 2016-08-11
+  expire_date: 2115-08-11
+  status: doc_valid
+  attachment: Annex_1557245295_cft-modele-de-marteau-depose-et-enregistre-2019-05-07.pdf
+  uploaded_by: operator
+  created_at: 2019-05-07 16:08:15 UTC
+  updated_at: 2019-05-07 16:10:47 UTC
+  public: true
+
+OperatorDocumentAnnex_20041:
+  id: 20041
+  name: PCIBO de l'AAC3 2018
+  start_date: 2018-04-06
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1559044068_cft-permis-de-coupe-industrielle-pcibo-2019-05-28.pdf
+  uploaded_by: operator
+  created_at: 2019-05-28 11:47:48 UTC
+  updated_at: 2019-06-12 16:00:04 UTC
+  public: true
+
+OperatorDocumentAnnex_20077:
+  id: 20077
+  name: Lettre circulaire de maintien des délégués du personnel de 2013
+  start_date: 2020-01-01
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1579366577_ifo-interholco-proces-verbal-d-elections-professionnelles-2020-01-18.pdf
+  uploaded_by: operator
+  created_at: 2020-01-18 16:56:17 UTC
+  updated_at: 2020-03-16 04:11:18 UTC
+
+OperatorDocumentAnnex_20083:
+  id: 20083
+  name: Lettre circulaire de prolongation du mandat des délégués du personnel
+  start_date: 2016-11-23
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1581159013_sifco-proces-verbal-d-elections-professionnelles-2020-02-08.pdf
+  uploaded_by: operator
+  created_at: 2020-02-08 10:50:13 UTC
+  updated_at: 2020-03-16 04:10:27 UTC
+
+OperatorDocumentAnnex_20091:
+  id: 20091
+  name: ACA 2019 Nkola
+  start_date: 2018-12-15
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1584571933_afriwood-industries-autorisation-de-coupe-d-achevement-2020-03-18.pdf
+  uploaded_by: operator
+  created_at: 2020-03-18 22:52:13 UTC
+  updated_at: 2020-04-12 16:40:37 UTC
+
+OperatorDocumentAnnex_20092:
+  id: 20092
+  name: Demande de retour au domaine des concessions Doumanga et Cayo
+  start_date: 2019-04-08
+  expire_date: 2027-08-23
+  status: doc_valid
+  attachment: Annex_1584623530_afriwood-industries-convention-de-transformation-industrielle-cti-2020-03-19.pdf
+  uploaded_by: operator
+  created_at: 2020-03-19 13:12:10 UTC
+  updated_at: 2020-04-12 16:40:32 UTC
+
+OperatorDocumentAnnex_20093:
+  id: 20093
+  name: Afriwood-avenant de la CAT de l'UFE Nkola
+  start_date: 2017-05-30
+  expire_date: 2031-04-05
+  status: doc_valid
+  attachment: Annex_1584629792_afriwood-industries-convention-d-amenagement-et-de-transformation-cat-2020-03-19.pdf
+  uploaded_by: operator
+  created_at: 2020-03-19 14:56:32 UTC
+  updated_at: 2020-04-12 16:40:26 UTC
+
+OperatorDocumentAnnex_20095:
+  id: 20095
+  name: Etat de production Nkola 2019
+  start_date: 2019-01-01
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1584786223_afriwood-industries-etat-de-production-de-l-annee-d-achevement-2020-03-21.pdf
+  uploaded_by: operator
+  created_at: 2020-03-21 10:23:43 UTC
+  updated_at: 2020-04-12 16:40:14 UTC
+
+OperatorDocumentAnnex_20152:
+  id: 20152
+  name: 'IFO-Ngombé-Cahier de charges particulier de l''arrêté n°10357 '
+  start_date: 2008-12-31
+  expire_date: 2033-12-30
+  status: doc_valid
+  attachment: Annex_1590056898_ifo-interholco-etat-de-realisation-du-cahier-des-charges-2020-05-21.pdf
+  uploaded_by: operator
+  created_at: 2020-05-21 10:28:18 UTC
+  updated_at: 2020-06-03 15:49:28 UTC
+
+OperatorDocumentAnnex_20160:
+  id: 20160
+  name: COUTURIER
+  start_date: 2020-01-01
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1590857797_ifo-interholco-patente-2020-05-22.pdf
+  uploaded_by: operator
+  created_at: 2020-05-30 16:56:37 UTC
+  updated_at: 2020-06-03 15:48:31 UTC
+
+OperatorDocumentAnnex_20172:
+  id: 20172
+  name: 'Certificat de conformité environnementale '
+  start_date: 2020-08-21
+  expire_date: 2021-08-20
+  status: doc_valid
+  attachment: Annex_1599755353_ifo-etude_d_impact_environementale_et_sociale__base-vie_-2018-01-12.pdf
+  uploaded_by: operator
+  created_at: 2020-09-10 16:29:13 UTC
+  updated_at: 2020-11-21 13:17:47 UTC
+
+OperatorDocumentAnnex_20186:
+  id: 20186
+  name: Lettre circulaire n° 002 du ministre du travail et de la sécurité sociale
+    portant report des élections des délégués du personnel pour le compte de l'année
+    2020
+  start_date: 2020-03-19
+  expire_date: 2021-03-19
+  status: doc_valid
+  attachment: Annex_1604566418_cfc-proces-verbal-d-election-des-delegues-du-personnel-2020-11-05.pdf
+  uploaded_by: operator
+  created_at: 2020-11-05 08:53:38 UTC
+  updated_at: 2020-11-21 13:17:23 UTC
+
+OperatorDocumentAnnex_20187:
+  id: 20187
+  name: Procès verbal de réorganisation des membres du comité d'hygiène, santé et
+    sécurité au travail
+  start_date: 2020-07-02
+  expire_date: 2020-07-02
+  status: doc_valid
+  attachment: Annex_1604654975_sebc-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: 2020-11-06 09:29:35 UTC
+  updated_at: 2020-11-21 13:17:20 UTC
+
+OperatorDocumentAnnex_20188:
+  id: 20188
+  name: Lettre circulaire du ministre du travail et de la sécurité sociale portant
+    sur le report des élections des délégués du personnel.
+  start_date: 2020-03-19
+  expire_date: 2021-03-19
+  status: doc_valid
+  attachment: Annex_1604655537_sebc-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: 2020-11-06 09:38:57 UTC
+  updated_at: 2020-11-21 13:17:14 UTC
+
+OperatorDocumentAnnex_20189:
+  id: 20189
+  name: Procès verbal de réorganisation des membres du comité d'hygiène, santé et
+    sécurité au travail
+  start_date: 2020-07-02
+  expire_date: 2022-07-02
+  status: doc_valid
+  attachment: Annex_1604674027_sab-acte-de-creation-du-comite-d-hygiene-et-de-securite-du-travail-pv-d-installation-des-membres-du-c-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: 2020-11-06 14:47:07 UTC
+  updated_at: 2020-11-21 13:17:17 UTC
+
+OperatorDocumentAnnex_20190:
+  id: 20190
+  name: Lettre circulaire du ministre du travail et de la sécurité sociale portant
+    sur le report des élections des délégués du personnel.
+  start_date: 2020-03-19
+  expire_date: 2021-03-19
+  status: doc_valid
+  attachment: Annex_1604674337_sab-proces-verbal-d-election-des-delegues-du-personnel-2020-11-06.pdf
+  uploaded_by: operator
+  created_at: 2020-11-06 14:52:17 UTC
+  updated_at: 2020-11-21 13:20:43 UTC
+
+OperatorDocumentAnnex_100059:
+  id: 100059
+  name: AGREMENT PËRSONNEL CMS NGOMBE
+  start_date: 2021-01-28
+  expire_date: 2026-01-27
+  status: doc_valid
+  attachment: Annex_1616426392_ifo-interholco-arrete-d-agrement-du-personnel-du-centre-socio-sanitaire-de-l-entreprise-2020-12-21.pdf
+  uploaded_by: operator
+  created_at: 2021-03-22 15:19:52 UTC
+  updated_at: 2021-03-23 01:00:16 UTC
+
+OperatorDocumentAnnex_100094:
+  id: 100094
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147058_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-04 16:50:58 UTC
+  updated_at: 2022-01-21 11:21:10 UTC
+
+OperatorDocumentAnnex_100095:
+  id: 100095
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147132_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-04 16:52:12 UTC
+  updated_at: 2022-01-21 11:20:58 UTC
+
+OperatorDocumentAnnex_100096:
+  id: 100096
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147226_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-04 16:53:46 UTC
+  updated_at: 2022-01-21 11:20:50 UTC
+
+OperatorDocumentAnnex_100097:
+  id: 100097
+  name: Arrêté d'Approbation du Plan d'Aménagement de l'UFA 10 00 1-2-3-4
+  start_date: 2010-07-15
+  expire_date: 2028-12-31
+  status: doc_valid
+  attachment: Annex_1620147309_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-04 16:55:09 UTC
+  updated_at: 2022-01-21 11:20:47 UTC
+
+OperatorDocumentAnnex_100098:
+  id: 100098
+  name: Identification nationale RCCM Kinshasa
+  start_date: 2020-12-08
+  expire_date: 2119-12-08
+  status: doc_valid
+  attachment: Annex_1620300360_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-06 11:26:00 UTC
+  updated_at: 2022-01-21 11:20:43 UTC
+
+OperatorDocumentAnnex_100100:
+  id: 100100
+  name: Certificat de radiation RCCM Kisangani
+  start_date: 2020-10-02
+  expire_date: 2119-10-02
+  status: doc_valid
+  attachment: Annex_1620302315_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-06 11:58:35 UTC
+  updated_at: 2022-01-21 11:20:37 UTC
+
+OperatorDocumentAnnex_100102:
+  id: 100102
+  name: RCCM Kinshasa
+  start_date: 2020-10-28
+  expire_date: 2119-10-28
+  status: doc_valid
+  attachment: Annex_1620302735_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-06 12:05:35 UTC
+  updated_at: 2022-01-21 11:20:30 UTC
+
+OperatorDocumentAnnex_100105:
+  id: 100105
+  name: Preuve paiement Patente 2021
+  start_date: 2021-04-01
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1620319958_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-06 16:52:38 UTC
+  updated_at: 2022-01-21 11:19:28 UTC
+
+OperatorDocumentAnnex_100110:
+  id: 100110
+  name: l'avenant n°1 de l'accord constituant la clause sociale du cahier des charges
+    du contrat de concession forestière 005/18 du 26 novembre 2018
+  start_date: 2019-12-21
+  expire_date: 2025-12-21
+  status: doc_valid
+  attachment: Annex_1620396112_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-07 14:01:52 UTC
+  updated_at: 2022-01-21 11:18:40 UTC
+
+OperatorDocumentAnnex_100111:
+  id: 100111
+  name: mise à jour de numéro d'impôt
+  start_date: 2021-01-08
+  expire_date: 2120-01-08
+  status: doc_valid
+  attachment: Annex_1620400833_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-07 15:20:33 UTC
+  updated_at: 2022-01-21 11:18:36 UTC
+
+OperatorDocumentAnnex_100112:
+  id: 100112
+  name: mise à jour de certificat d'affiliation de la CFT à la CNSS Kisangani ex INSS
+  start_date: 2019-12-05
+  expire_date: 2118-12-05
+  status: doc_valid
+  attachment: Annex_1620402903_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-07 15:55:03 UTC
+  updated_at: 2022-01-21 11:18:29 UTC
+
+OperatorDocumentAnnex_100113:
+  id: 100113
+  name: mise à jour de certificat d'affiliation de la CFT à la CNSS Kinshasa ex INSS
+  start_date: 2019-11-21
+  expire_date: 2118-11-21
+  status: doc_valid
+  attachment: Annex_1620403208_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-07 16:00:08 UTC
+  updated_at: 2022-01-21 11:18:22 UTC
+
+OperatorDocumentAnnex_100115:
+  id: 100115
+  name: Preuve de paiement de la taxe sur le permis de coupe de bois d'œuvre de l'AAC1
+    de la SSA005/18 exercice 2019
+  start_date: 2019-01-30
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1620405844_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-07 16:44:04 UTC
+  updated_at: 2022-01-21 11:17:53 UTC
+
+OperatorDocumentAnnex_100116:
+  id: 100116
+  name: Etat Réalisation Cahier de charges
+  start_date: 2008-12-31
+  expire_date: 2033-12-30
+  status: doc_valid
+  attachment: Annex_1620664874_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-10 16:41:14 UTC
+  updated_at: 2022-01-21 11:17:43 UTC
+
+OperatorDocumentAnnex_100118:
+  id: 100118
+  name: Patente 2020
+  start_date: 2020-04-01
+  expire_date: 2021-03-21
+  status: doc_valid
+  attachment: Annex_1621279095_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-17 19:18:15 UTC
+  updated_at: 2022-01-21 11:17:10 UTC
+
+OperatorDocumentAnnex_100120:
+  id: 100120
+  name: Certificat d'origine
+  start_date: 2021-02-16
+  expire_date: 2021-08-16
+  status: doc_valid
+  attachment: Annex_1621936379_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-25 09:52:59 UTC
+  updated_at: 2022-01-21 11:16:59 UTC
+
+OperatorDocumentAnnex_100122:
+  id: 100122
+  name: Attestation de Fin d'Activité et RAIF aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622042454_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 15:20:54 UTC
+  updated_at: 2022-01-21 11:16:26 UTC
+
+OperatorDocumentAnnex_100123:
+  id: 100123
+  name: Attestation de Fin d'activité
+  start_date: 2021-01-15
+  expire_date: 2021-01-15
+  status: doc_valid
+  attachment: Annex_1622042854_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 15:27:34 UTC
+  updated_at: 2022-01-21 11:16:23 UTC
+
+OperatorDocumentAnnex_100124:
+  id: 100124
+  name: Rapport annuel d'Intervention aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622049512_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 17:18:32 UTC
+  updated_at: 2022-01-21 11:16:20 UTC
+
+OperatorDocumentAnnex_100125:
+  id: 100125
+  name: attestation de Fin d'activité aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622049586_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 17:19:46 UTC
+  updated_at: 2022-01-21 11:16:11 UTC
+
+OperatorDocumentAnnex_100126:
+  id: 100126
+  name: Rapport Annuel d'intervention Forestière
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622049940_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 17:25:40 UTC
+  updated_at: 2022-01-21 11:16:04 UTC
+
+OperatorDocumentAnnex_100127:
+  id: 100127
+  name: Attestation de Fin d'Activité
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622050089_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 17:28:09 UTC
+  updated_at: 2022-01-21 11:16:01 UTC
+
+OperatorDocumentAnnex_100129:
+  id: 100129
+  name: Rapport Annuel d'Intervention annuel aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622050571_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 17:36:11 UTC
+  updated_at: 2022-01-21 11:15:55 UTC
+
+OperatorDocumentAnnex_100130:
+  id: 100130
+  name: Attestation de fin d'activité aac 5-2
+  start_date: 2021-01-15
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1622050756_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-26 17:39:16 UTC
+  updated_at: 2022-01-21 11:15:50 UTC
+
+OperatorDocumentAnnex_100131:
+  id: 100131
+  name: Contrat de partenariat SAB et SEBC pour la transformation des Grumes
+  start_date: 2008-05-27
+  expire_date: 2038-05-26
+  status: doc_valid
+  attachment: Annex_1622280634_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-29 09:30:34 UTC
+  updated_at: 2022-01-21 11:15:46 UTC
+
+OperatorDocumentAnnex_100132:
+  id: 100132
+  name: Contrat de partenariat SEBC-SAB pour la transfoermation du bois
+  start_date: 2008-05-27
+  expire_date: 2038-05-26
+  status: doc_valid
+  attachment: Annex_1622280947_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-05-29 09:35:47 UTC
+  updated_at: 2022-01-21 11:15:43 UTC
+
+OperatorDocumentAnnex_100154:
+  id: 100154
+  name: Lettre de transfert et d'attribution des UFA 00 004  et 11 004 à SIENCAM
+  start_date: 2013-11-20
+  status: doc_valid
+  attachment: Annex_1623313526_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-10 08:25:26 UTC
+  updated_at: 2022-01-21 08:30:28 UTC
+
+OperatorDocumentAnnex_100156:
+  id: 100156
+  name: Lettre d'attribution et de transfert de l'UFA 00 004 à SIENCAM
+  start_date: 2013-11-20
+  status: doc_valid
+  attachment: Annex_1623313941_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-10 08:32:21 UTC
+  updated_at: 2022-01-21 08:30:22 UTC
+
+OperatorDocumentAnnex_100157:
+  id: 100157
+  name: Lettre d'attribution et de transfert de l'UFA 11 001 à SIENCAM
+  start_date: 2013-11-20
+  status: doc_valid
+  attachment: Annex_1623314292_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-10 08:38:12 UTC
+  updated_at: 2022-01-21 08:30:16 UTC
+
+OperatorDocumentAnnex_100193:
+  id: 100193
+  name: 'Certificat de non activités ACC 1-2 (2018) '
+  start_date: 2019-01-29
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1623937218_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-17 13:40:18 UTC
+  updated_at: 2021-06-22 08:52:24 UTC
+
+OperatorDocumentAnnex_100194:
+  id: 100194
+  name: Permis Annuel d'opération AAC 1--2 (2018)
+  start_date: 2017-12-18
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1623937403_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-17 13:43:23 UTC
+  updated_at: 2021-06-22 08:52:21 UTC
+
+OperatorDocumentAnnex_100195:
+  id: 100195
+  name: 'Quitance de paiement des RFA (3 Tranches) 2020 '
+  start_date: 2020-10-07
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1623938014_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-17 13:53:34 UTC
+  updated_at: 2021-06-22 08:52:19 UTC
+
+OperatorDocumentAnnex_100196:
+  id: 100196
+  name: Quitances Paiement RFA (3Tranches) 2020
+  start_date: 2020-10-07
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1623938171_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-17 13:56:11 UTC
+  updated_at: 2021-06-22 08:52:15 UTC
+
+OperatorDocumentAnnex_100198:
+  id: 100198
+  name: 'Permis Annuel d''opération AAC 1-2  (2018) '
+  start_date: 2017-12-18
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1623939019_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-17 14:10:19 UTC
+  updated_at: 2021-06-22 08:51:51 UTC
+
+OperatorDocumentAnnex_100206:
+  id: 100206
+  name: 'Certificat d''enregistrement en qualité d''exportatteur de bois transformé '
+  start_date: 2021-02-10
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1625060486_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-06-30 13:41:26 UTC
+  updated_at: 2021-07-02 12:20:01 UTC
+
+OperatorDocumentAnnex_100207:
+  id: 100207
+  name: Attestation de Respect des Normes d'Exploitation Forestières
+  start_date: 2021-07-22
+  expire_date: 2022-07-22
+  status: doc_valid
+  attachment: Annex_1627491945_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-07-28 17:05:45 UTC
+  updated_at: 2022-01-21 08:28:43 UTC
+
+OperatorDocumentAnnex_100208:
+  id: 100208
+  name: Cahier de Charges de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630946660_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-09-06 16:44:20 UTC
+  updated_at: 2022-01-21 08:28:36 UTC
+
+OperatorDocumentAnnex_100209:
+  id: 100209
+  name: Cahier des Charges de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630947523_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-09-06 16:58:43 UTC
+  updated_at: 2022-01-21 08:28:33 UTC
+
+OperatorDocumentAnnex_100210:
+  id: 100210
+  name: Cahier de Charges de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630947695_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-09-06 17:01:35 UTC
+  updated_at: 2022-01-21 08:28:30 UTC
+
+OperatorDocumentAnnex_100211:
+  id: 100211
+  name: Cahier de Charge de la Convention Définitive
+  start_date: 2021-09-01
+  expire_date: 2035-09-01
+  status: doc_valid
+  attachment: Annex_1630948073_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-09-06 17:07:53 UTC
+  updated_at: 2022-01-21 08:28:27 UTC
+
+OperatorDocumentAnnex_100215:
+  id: 100215
+  name: Etude Impact Site industriel
+  start_date: 2020-01-01
+  expire_date: 2036-12-31
+  status: doc_valid
+  attachment: Annex_1634198428_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-10-14 08:00:28 UTC
+  updated_at: 2022-01-21 08:28:12 UTC
+
+OperatorDocumentAnnex_100222:
+  id: 100222
+  name: Décharge demande acte de création CHST
+  start_date: 2021-12-14
+  expire_date: 2022-02-14
+  status: doc_valid
+  attachment: Annex_1640946909_no_document.pdf
+  uploaded_by: operator
+  created_at: 2021-12-31 10:35:09 UTC
+  updated_at: 2022-01-21 08:27:31 UTC
+
+OperatorDocumentAnnex_100225:
+  id: 100225
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642492796_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 07:59:56 UTC
+  updated_at: 2022-03-29 20:50:02 UTC
+
+OperatorDocumentAnnex_100226:
+  id: 100226
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642492928_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:02:08 UTC
+  updated_at: 2022-01-21 08:26:57 UTC
+
+OperatorDocumentAnnex_100227:
+  id: 100227
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493047_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:04:07 UTC
+  updated_at: 2022-01-21 08:26:14 UTC
+
+OperatorDocumentAnnex_100228:
+  id: 100228
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493111_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:05:11 UTC
+  updated_at: 2022-01-21 08:25:51 UTC
+
+OperatorDocumentAnnex_100229:
+  id: 100229
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493217_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:06:57 UTC
+  updated_at: 2022-01-21 08:24:59 UTC
+
+OperatorDocumentAnnex_100230:
+  id: 100230
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493418_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:10:18 UTC
+  updated_at: 2022-01-21 08:24:08 UTC
+
+OperatorDocumentAnnex_100231:
+  id: 100231
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-25
+  status: doc_valid
+  attachment: Annex_1642493479_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:11:19 UTC
+  updated_at: 2022-01-21 08:23:22 UTC
+
+OperatorDocumentAnnex_100232:
+  id: 100232
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493548_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:12:28 UTC
+  updated_at: 2022-01-21 08:22:51 UTC
+
+OperatorDocumentAnnex_100233:
+  id: 100233
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493739_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:15:39 UTC
+  updated_at: 2022-01-21 08:22:16 UTC
+
+OperatorDocumentAnnex_100234:
+  id: 100234
+  name: Prorogation des activités
+  start_date: 2022-01-13
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1642493798_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-01-18 08:16:38 UTC
+  updated_at: 2022-01-21 08:21:45 UTC
+
+OperatorDocumentAnnex_100281:
+  id: 100281
+  name: carte professionnelle DG
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1646073464_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-02-28 18:37:44 UTC
+  updated_at: 2022-03-03 15:52:55 UTC
+
+OperatorDocumentAnnex_100282:
+  id: 100282
+  name: Plan de Gestion UFP4 2022-2027
+  start_date: 2022-01-01
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1646073621_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-02-28 18:40:21 UTC
+  updated_at: 2022-03-03 15:52:53 UTC
+
+OperatorDocumentAnnex_100285:
+  id: 100285
+  name: Arrêté d'autorisation d'ouverture du site industriel IFO
+  start_date: 2021-07-02
+  expire_date: 2031-07-01
+  status: doc_valid
+  attachment: Annex_1646073954_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-02-28 18:45:54 UTC
+  updated_at: 2022-03-03 15:52:45 UTC
+
+OperatorDocumentAnnex_100288:
+  id: 100288
+  name: Exemple de déclaration en douanes pour exportation produit débités séchés
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1646074211_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-02-28 18:50:11 UTC
+  updated_at: 2022-03-03 15:52:38 UTC
+
+OperatorDocumentAnnex_100291:
+  id: 100291
+  name: Extrait registre partenaires sociaux
+  start_date: 2022-01-01
+  expire_date: 2022-06-30
+  status: doc_valid
+  attachment: Annex_1646074506_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-02-28 18:55:06 UTC
+  updated_at: 2022-03-03 15:52:31 UTC
+
+OperatorDocumentAnnex_100292:
+  id: 100292
+  name: Courier transmission Plan de Gestion
+  start_date: 2022-01-01
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1646125211_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-03-01 09:00:11 UTC
+  updated_at: 2022-03-03 15:52:28 UTC
+
+OperatorDocumentAnnex_100294:
+  id: 100294
+  name: Accuse de reception du Plan de gestion UFP 4
+  start_date: 2022-01-01
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1646125391_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-03-01 09:03:11 UTC
+  updated_at: 2022-03-03 15:52:26 UTC
+
+OperatorDocumentAnnex_100323:
+  id: 100323
+  name: Taxes d'Abattage 2021
+  start_date: 2021-01-01
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1646850518_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-03-09 18:28:38 UTC
+  updated_at: 2022-03-10 03:36:15 UTC
+
+OperatorDocumentAnnex_100333:
+  id: 100333
+  name: Etats de production année 2021 échue
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1646908115_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-03-10 10:28:35 UTC
+  updated_at: 2022-03-15 00:29:13 UTC
+
+OperatorDocumentAnnex_100415:
+  id: 100415
+  name: Contrat de sous traitance CFC-SAB
+  start_date: 2021-10-20
+  expire_date: 2032-10-20
+  status: doc_valid
+  attachment: Annex_1649088861_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-04 16:14:21 UTC
+  updated_at: 2022-04-06 03:36:37 UTC
+
+OperatorDocumentAnnex_100416:
+  id: 100416
+  name: Contrat sous-traitance CFC-SAB
+  start_date: 2021-10-20
+  expire_date: 2032-10-20
+  status: doc_valid
+  attachment: Annex_1649089376_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-04 16:22:56 UTC
+  updated_at: 2022-04-06 03:36:34 UTC
+
+OperatorDocumentAnnex_100460:
+  id: 100460
+  name: Certificat de non activité
+  start_date: 2018-01-01
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1650880366_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-25 09:52:46 UTC
+  updated_at: 2022-05-14 15:58:14 UTC
+
+OperatorDocumentAnnex_100461:
+  id: 100461
+  name: Arrêté d'attribution (compensation)
+  start_date: 2018-09-07
+  expire_date: 2018-12-31
+  status: doc_valid
+  attachment: Annex_1650880511_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-25 09:55:11 UTC
+  updated_at: 2022-05-14 15:57:36 UTC
+
+OperatorDocumentAnnex_100482:
+  id: 100482
+  name: Certificat de non activité
+  start_date: 2019-01-23
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1650884371_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-25 10:59:31 UTC
+  updated_at: 2022-05-14 15:56:38 UTC
+
+OperatorDocumentAnnex_100483:
+  id: 100483
+  name: Certificat de non activité
+  start_date: 2019-01-22
+  expire_date: 2019-12-31
+  status: doc_valid
+  attachment: Annex_1650884558_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-25 11:02:38 UTC
+  updated_at: 2022-05-14 15:56:35 UTC
+
+OperatorDocumentAnnex_100486:
+  id: 100486
+  name: Contrat de cession SIENCAM-SEFECCAM
+  start_date: 2015-04-15
+  expire_date: 2025-04-15
+  status: doc_valid
+  attachment: Annex_1650891692_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-25 13:01:32 UTC
+  updated_at: 2022-05-14 15:56:22 UTC
+
+OperatorDocumentAnnex_100565:
+  id: 100565
+  name: Télédéclaration du Personnel CNPS
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1651304838_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-30 07:47:18 UTC
+  updated_at: 2022-05-14 15:51:53 UTC
+
+OperatorDocumentAnnex_100566:
+  id: 100566
+  name: Télédéclaration CNPS
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1651305103_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-04-30 07:51:43 UTC
+  updated_at: 2022-05-14 15:51:51 UTC
+
+OperatorDocumentAnnex_100602:
+  id: 100602
+  name: AUTORISATION DE COUPE ANNUELLE 2022
+  start_date: 2022-01-03
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1651590645_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-03 15:10:45 UTC
+  updated_at: 2022-05-14 15:50:44 UTC
+
+OperatorDocumentAnnex_100603:
+  id: 100603
+  name: CERTIFICAT D'AGREMENT FORESTIER
+  start_date: 2021-07-28
+  expire_date: 2022-07-27
+  status: doc_valid
+  attachment: Annex_1651592230_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-03 15:37:10 UTC
+  updated_at: 2022-05-14 15:50:42 UTC
+
+OperatorDocumentAnnex_100604:
+  id: 100604
+  name: Liste de présences
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1651760434_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-05 14:20:34 UTC
+  updated_at: 2022-05-14 15:50:40 UTC
+
+OperatorDocumentAnnex_100605:
+  id: 100605
+  name: Compte rendu
+  start_date: 2022-05-10
+  expire_date: 2027-05-10
+  status: doc_valid
+  attachment: Annex_1652182514_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-10 11:35:14 UTC
+  updated_at: 2022-05-14 15:50:38 UTC
+
+OperatorDocumentAnnex_100606:
+  id: 100606
+  name: Plan de gestion UFP1 MI
+  start_date: 2022-05-10
+  expire_date: 2027-05-10
+  status: doc_valid
+  attachment: Annex_1652182587_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-10 11:36:27 UTC
+  updated_at: 2022-05-14 15:50:36 UTC
+
+OperatorDocumentAnnex_100607:
+  id: 100607
+  name: contrat de sous-traitance CFC-SAB
+  start_date: 2021-07-30
+  expire_date: 2035-07-30
+  status: doc_valid
+  attachment: Annex_1652438472_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-13 10:41:12 UTC
+  updated_at: 2022-05-14 15:50:33 UTC
+
+OperatorDocumentAnnex_100608:
+  id: 100608
+  name: Télédéclaration du personnel SAB
+  start_date: 2022-04-14
+  expire_date: 2023-04-14
+  status: doc_valid
+  attachment: Annex_1652438677_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-13 10:44:37 UTC
+  updated_at: 2022-05-14 15:50:30 UTC
+
+OperatorDocumentAnnex_100609:
+  id: 100609
+  name: Contrat de sous-traitance CFC- SAB
+  start_date: 2021-07-30
+  expire_date: 3035-07-30
+  status: doc_valid
+  attachment: Annex_1652438822_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-13 10:47:02 UTC
+  updated_at: 2022-05-14 15:50:27 UTC
+
+OperatorDocumentAnnex_100610:
+  id: 100610
+  name: Télédéclaration du Personnel SAB
+  start_date: 2022-04-14
+  status: doc_valid
+  attachment: Annex_1652438928_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-05-13 10:48:48 UTC
+  updated_at: 2022-05-14 15:50:12 UTC
+
+OperatorDocumentAnnex_100623:
+  id: 100623
+  name: Lettre CR commitée de suivi PG & PA
+  start_date: 2022-05-30
+  expire_date: 2023-05-29
+  status: doc_valid
+  attachment: Annex_1654069212_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-06-01 07:40:12 UTC
+  updated_at: 2022-07-19 03:53:27 UTC
+
+OperatorDocumentAnnex_100624:
+  id: 100624
+  name: Lettre CR commitée de suivi PG & PA
+  start_date: 2022-05-30
+  expire_date: 2023-05-29
+  status: doc_valid
+  attachment: Annex_1654069254_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-06-01 07:40:54 UTC
+  updated_at: 2022-07-19 03:53:25 UTC
+
+OperatorDocumentAnnex_100656:
+  id: 100656
+  name: A
+  start_date: 2022-01-01
+  expire_date: 2022-04-30
+  status: doc_valid
+  attachment: Annex_1659628171_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-04 15:49:31 UTC
+  updated_at: 2022-08-09 18:01:31 UTC
+
+OperatorDocumentAnnex_100657:
+  id: 100657
+  name: AUTORISATION D'EVACUATION DES BOIS DE LA COUPE ANNUELLE 2021
+  start_date: 2022-01-01
+  expire_date: 2022-04-30
+  status: doc_valid
+  attachment: Annex_1659628676_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-04 15:57:56 UTC
+  updated_at: 2022-08-09 18:01:27 UTC
+
+OperatorDocumentAnnex_100658:
+  id: 100658
+  name: ETAT DE PRODUCTION FEVRIER 2022
+  start_date: 2022-02-01
+  expire_date: 2022-02-28
+  status: doc_valid
+  attachment: Annex_1659629834_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-04 16:17:14 UTC
+  updated_at: 2022-08-09 18:01:21 UTC
+
+OperatorDocumentAnnex_100659:
+  id: 100659
+  name: ETAT DE PRODUCTION MARS 2022
+  start_date: 2022-03-01
+  expire_date: 2022-03-31
+  status: doc_valid
+  attachment: Annex_1659629938_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-04 16:18:58 UTC
+  updated_at: 2022-08-09 18:01:51 UTC
+
+OperatorDocumentAnnex_100660:
+  id: 100660
+  name: ETAT DE PRODUCTION AVRIL 2022
+  start_date: 2022-04-01
+  expire_date: 2022-01-30
+  status: doc_valid
+  attachment: Annex_1659630027_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-04 16:20:27 UTC
+  updated_at: 2022-08-09 18:01:17 UTC
+
+OperatorDocumentAnnex_100661:
+  id: 100661
+  name: ETAT DE PRODUCTION JUIN 2022
+  start_date: 2022-06-01
+  expire_date: 2022-06-30
+  status: doc_pending
+  attachment: Annex_1659630230_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-04 16:23:50 UTC
+  updated_at: 2022-08-04 16:23:50 UTC
+
+OperatorDocumentAnnex_100662:
+  id: 100662
+  name: PATENTE PERIODE 2020
+  start_date: 2020-01-02
+  expire_date: 2020-12-31
+  status: doc_valid
+  attachment: Annex_1659630719_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-04 16:31:59 UTC
+  updated_at: 2022-08-09 17:59:33 UTC
+
+OperatorDocumentAnnex_100663:
+  id: 100663
+  name: PAIEMENT TAXE DE DENBOISEMENT 2021
+  start_date: 2022-01-02
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1659686868_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-05 08:07:48 UTC
+  updated_at: 2022-08-09 17:59:30 UTC
+
+OperatorDocumentAnnex_100664:
+  id: 100664
+  name: PAIEMENT  TAXE D ABATTAGE JANVIER 2022
+  start_date: 2022-01-02
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1659687173_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-05 08:12:53 UTC
+  updated_at: 2022-08-09 17:59:27 UTC
+
+OperatorDocumentAnnex_100665:
+  id: 100665
+  name: PAIEMENT TAXE DE SUPERFICIE JANVIER ET FEVRIER 2022
+  start_date: 2022-02-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1659687302_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-05 08:15:02 UTC
+  updated_at: 2022-08-09 17:59:23 UTC
+
+OperatorDocumentAnnex_100677:
+  id: 100677
+  name: ETAT  DE PRODUCTION JUILLET 2022
+  start_date: 2022-08-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1660727552_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-08-17 09:12:32 UTC
+  updated_at: 2022-10-03 13:29:30 UTC
+
+OperatorDocumentAnnex_100680:
+  id: 100680
+  name: 'Preuve de réalisation du cahier de charge particulier '
+  start_date: 2022-08-22
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1663060154_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 09:09:14 UTC
+  updated_at: 2022-10-03 13:29:21 UTC
+
+OperatorDocumentAnnex_100681:
+  id: 100681
+  name: 'Lettre de validation du PG de UFP4 '
+  start_date: 2022-08-31
+  expire_date: 2027-12-31
+  status: doc_valid
+  attachment: Annex_1663062040_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 09:40:40 UTC
+  updated_at: 2022-10-03 13:29:18 UTC
+
+OperatorDocumentAnnex_100682:
+  id: 100682
+  name: Etat de production Achevement 2021
+  start_date: 2022-01-02
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663064688_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 10:24:48 UTC
+  updated_at: 2022-10-03 13:29:13 UTC
+
+OperatorDocumentAnnex_100683:
+  id: 100683
+  name: Lettre de transmission état de production
+  start_date: 2022-04-06
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663064834_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 10:27:14 UTC
+  updated_at: 2022-10-03 13:29:10 UTC
+
+OperatorDocumentAnnex_100684:
+  id: 100684
+  name: Lettre transmission état de production 2021
+  start_date: 2022-01-07
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663064936_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 10:28:56 UTC
+  updated_at: 2022-10-03 13:29:07 UTC
+
+OperatorDocumentAnnex_100685:
+  id: 100685
+  name: Patente 2022
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663065463_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 10:37:43 UTC
+  updated_at: 2022-10-03 13:29:03 UTC
+
+OperatorDocumentAnnex_100686:
+  id: 100686
+  name: Preuve de payement de la taxe de déboisement
+  start_date: 2022-06-01
+  expire_date: 2023-06-30
+  status: doc_valid
+  attachment: Annex_1663066274_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 10:51:14 UTC
+  updated_at: 2022-10-03 13:29:00 UTC
+
+OperatorDocumentAnnex_100690:
+  id: 100690
+  name: 'Bilan de UFP 3 '
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663079900_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 14:38:20 UTC
+  updated_at: 2022-10-03 13:28:47 UTC
+
+OperatorDocumentAnnex_100691:
+  id: 100691
+  name: 'Demande mission suivi PA '
+  start_date: 2022-09-02
+  expire_date: 2036-12-31
+  status: doc_valid
+  attachment: Annex_1663080094_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-13 14:41:34 UTC
+  updated_at: 2022-10-03 13:28:44 UTC
+
+OperatorDocumentAnnex_100703:
+  id: 100703
+  name: 'Autorisation de coupe Annuelle '
+  start_date: 2021-01-01
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1663657293_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-20 07:01:33 UTC
+  updated_at: 2022-10-03 13:27:57 UTC
+
+OperatorDocumentAnnex_100705:
+  id: 100705
+  name: Preuve  paiement de la taxe d'Abattage
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1663660626_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-20 07:57:06 UTC
+  updated_at: 2022-10-03 13:27:48 UTC
+
+OperatorDocumentAnnex_100717:
+  id: 100717
+  name: Permis de coupe industrielle de bois d'œuvre de l'AAC2 prolongé pour 2022
+  start_date: 2020-11-25
+  expire_date: 2021-12-31
+  status: doc_valid
+  attachment: Annex_1664446961_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-09-29 10:22:41 UTC
+  updated_at: 2022-10-03 13:26:54 UTC
+
+OperatorDocumentAnnex_100722:
+  id: 100722
+  name: Décharge attestant le paiement de la taxe de déboisement
+  start_date: 2022-01-01
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1664899659_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-10-04 16:07:39 UTC
+  updated_at: 2022-10-05 20:05:31 UTC
+
+OperatorDocumentAnnex_100724:
+  id: 100724
+  name: Prolongation de permis de coupe industriel de bois d'œuvre de l'AAC2 pour
+    l'exercice 2022
+  start_date: 2022-03-21
+  expire_date: 2022-12-31
+  status: doc_valid
+  attachment: Annex_1666711196_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-10-25 15:19:56 UTC
+  updated_at: 2022-11-07 00:05:06 UTC
+
+OperatorDocumentAnnex_100729:
+  id: 100729
+  name: Décret d'approbation du PA
+  start_date: 2009-07-21
+  expire_date: 2034-07-20
+  status: doc_valid
+  attachment: Annex_1669360306_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-11-25 07:11:46 UTC
+  updated_at: 2022-12-30 12:03:12 UTC
+
+OperatorDocumentAnnex_100732:
+  id: 100732
+  name: Autorisation coupe AAC 2023
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1671809514_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-12-23 15:31:54 UTC
+  updated_at: 2022-12-30 12:03:06 UTC
+
+OperatorDocumentAnnex_100733:
+  id: 100733
+  name: Agrément forestier Année 2023
+  start_date: 2022-12-28
+  expire_date: 2023-12-27
+  status: doc_valid
+  attachment: Annex_1671811153_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-12-23 15:59:13 UTC
+  updated_at: 2022-12-30 12:03:03 UTC
+
+OperatorDocumentAnnex_100734:
+  id: 100734
+  name: Autorisation heures supplémentaires 1er semestre 2023
+  start_date: 2023-01-01
+  expire_date: 2023-06-30
+  status: doc_valid
+  attachment: Annex_1671811313_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-12-23 16:01:53 UTC
+  updated_at: 2022-12-30 12:03:00 UTC
+
+OperatorDocumentAnnex_100737:
+  id: 100737
+  name: preuve de paiement de taxe de superficie exercice 2022
+  start_date: 2022-12-30
+  status: doc_valid
+  attachment: Annex_1672418927_no_document.pdf
+  uploaded_by: operator
+  created_at: 2022-12-30 16:48:47 UTC
+  updated_at: 2023-01-02 13:25:56 UTC
+
+OperatorDocumentAnnex_100739:
+  id: 100739
+  name: Permis de coupe industriel de bois d'œuvre PCIBO 2021 en 2022
+  start_date: 2020-11-21
+  expire_date: 2023-03-21
+  status: doc_valid
+  attachment: Annex_1672674695_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-02 15:51:35 UTC
+  updated_at: 2023-03-13 20:42:01 UTC
+
+OperatorDocumentAnnex_100744:
+  id: 100744
+  name: Prorogation des activité dans l'aac 5-4
+  start_date: 2023-01-09
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673361405_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-10 14:36:45 UTC
+  updated_at: 2023-03-13 20:41:51 UTC
+
+OperatorDocumentAnnex_100746:
+  id: 100746
+  name: 'Notification de démarrage de la prorogation des activités UFA 004 AAC 1-5 '
+  start_date: 2023-01-05
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673948940_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-17 09:49:00 UTC
+  updated_at: 2023-03-13 20:41:48 UTC
+
+OperatorDocumentAnnex_100747:
+  id: 100747
+  name: Prorogation des activités UFA 00.004 AAC 1-5 jusqu'au 28 février 2023
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949027_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-17 09:50:27 UTC
+  updated_at: 2023-03-13 20:41:46 UTC
+
+OperatorDocumentAnnex_100748:
+  id: 100748
+  name: 'Prorogation des activités de la VC 0702 135 '
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949400_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-17 09:56:40 UTC
+  updated_at: 2023-03-13 20:41:43 UTC
+
+OperatorDocumentAnnex_100749:
+  id: 100749
+  name: 'Notification de démarrage de la prorogation des activités VC 07 02 135 '
+  start_date: 2023-01-05
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949459_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-17 09:57:39 UTC
+  updated_at: 2023-03-13 20:41:41 UTC
+
+OperatorDocumentAnnex_100750:
+  id: 100750
+  name: Prorogation du CEQEBG siencam 28-02-2023
+  start_date: 2022-12-29
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1673949740_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-17 10:02:20 UTC
+  updated_at: 2023-03-13 20:41:39 UTC
+
+OperatorDocumentAnnex_100755:
+  id: 100755
+  name: 'Prorogation des activités de la VC 0702 135 '
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1674200782_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-20 07:46:22 UTC
+  updated_at: 2023-03-13 20:41:26 UTC
+
+OperatorDocumentAnnex_100756:
+  id: 100756
+  name: 'Prorogation des activités de la VC 0702 135 '
+  start_date: 2022-12-30
+  expire_date: 2023-02-28
+  status: doc_valid
+  attachment: Annex_1674219847_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-01-20 13:04:07 UTC
+  updated_at: 2023-03-13 20:41:25 UTC
+
+OperatorDocumentAnnex_100769:
+  id: 100769
+  name: CONGOLAISE INDUSTRIELLE DE BOIS
+  start_date: 2023-01-01
+  expire_date: 2023-04-01
+  status: doc_valid
+  attachment: Annex_1675850984_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-02-08 10:09:44 UTC
+  updated_at: 2023-03-13 20:40:55 UTC
+
+OperatorDocumentAnnex_100771:
+  id: 100771
+  name: Autorisation coupe achèvement AAC 2022
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676041388_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-02-10 15:03:08 UTC
+  updated_at: 2023-03-13 20:40:51 UTC
+
+OperatorDocumentAnnex_100775:
+  id: 100775
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676306390_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-02-13 16:39:50 UTC
+  updated_at: 2023-03-13 20:40:43 UTC
+
+OperatorDocumentAnnex_100778:
+  id: 100778
+  name: Attestation de détention de stock VC 07 02 118
+  start_date: 2023-01-18
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676306586_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-02-13 16:43:06 UTC
+  updated_at: 2023-03-13 20:40:36 UTC
+
+OperatorDocumentAnnex_100779:
+  id: 100779
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1676306627_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-02-13 16:43:47 UTC
+  updated_at: 2023-03-13 20:40:33 UTC
+
+OperatorDocumentAnnex_100787:
+  id: 100787
+  name: CEQEBT SEFECCAM
+  start_date: 2023-02-27
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1678344256_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-03-09 06:44:16 UTC
+  updated_at: 2023-03-13 20:40:13 UTC
+
+OperatorDocumentAnnex_100789:
+  id: 100789
+  name: preuve de paiement de taxe de superficie exercice 2022-2eme échelonnement
+  start_date: 2023-02-03
+  expire_date: 2023-03-02
+  status: doc_valid
+  attachment: Annex_1678524431_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-03-11 08:47:11 UTC
+  updated_at: 2023-03-13 20:40:09 UTC
+
+OperatorDocumentAnnex_100790:
+  id: 100790
+  name: preuve de paiement de taxe de superficie exercice 2022- 1 er échelonnement
+  start_date: 2023-12-29
+  expire_date: 2023-01-31
+  status: doc_valid
+  attachment: Annex_1678525068_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-03-11 08:57:48 UTC
+  updated_at: 2023-03-13 20:40:08 UTC
+
+OperatorDocumentAnnex_100792:
+  id: 100792
+  name: 'preuve de paiement de taxe de superficie exercice 2022-2 éme échelonnement '
+  start_date: 2023-02-28
+  expire_date: 2023-03-02
+  status: doc_valid
+  attachment: Annex_1678526236_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-03-11 09:17:16 UTC
+  updated_at: 2023-03-13 20:40:06 UTC
+
+OperatorDocumentAnnex_100816:
+  id: 100816
+  name: preuve de paiement de taxe de superficie exercice 2022- 3eme échelonnement
+  start_date: 2023-02-28
+  expire_date: 2023-03-28
+  status: doc_pending
+  attachment: Annex_1680106073_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-03-29 16:07:53 UTC
+  updated_at: 2023-03-29 16:07:53 UTC
+
+OperatorDocumentAnnex_100817:
+  id: 100817
+  name: preuve de paiement de taxe de superficie exercice 2022- 3eme échelonnement
+  start_date: 2023-02-28
+  expire_date: 2023-03-29
+  status: doc_valid
+  attachment: Annex_1680106184_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-03-29 16:09:44 UTC
+  updated_at: 2023-04-16 23:45:53 UTC
+
+OperatorDocumentAnnex_100824:
+  id: 100824
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615021_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-04-04 13:30:21 UTC
+  updated_at: 2023-04-16 23:45:42 UTC
+
+OperatorDocumentAnnex_100825:
+  id: 100825
+  name: Certificat de détention de stock de bois en grumes VC 07 02 118
+  start_date: 2023-03-30
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615106_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-04-04 13:31:46 UTC
+  updated_at: 2023-04-16 23:45:41 UTC
+
+OperatorDocumentAnnex_100826:
+  id: 100826
+  name: Certificat de détention de stock de bois en grumes VC 07 02 118
+  start_date: 2023-03-30
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615211_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-04-04 13:33:31 UTC
+  updated_at: 2023-04-16 23:45:39 UTC
+
+OperatorDocumentAnnex_100827:
+  id: 100827
+  name: Certificat de détention de stock de bois en grumes VC 07 02 118
+  start_date: 2023-03-30
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615293_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-04-04 13:34:53 UTC
+  updated_at: 2023-04-16 23:45:38 UTC
+
+OperatorDocumentAnnex_100828:
+  id: 100828
+  name: Attestation de fin d'activité VC 07 02 118
+  start_date: 2023-01-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1680615328_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-04-04 13:35:28 UTC
+  updated_at: 2023-04-16 23:45:36 UTC
+
+OperatorDocumentAnnex_100862:
+  id: 100862
+  name: Certificat de vente coupe 2023
+  start_date: 2023-04-13
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1683019303_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-05-02 09:21:43 UTC
+  updated_at: 2023-05-04 04:22:04 UTC
+
+OperatorDocumentAnnex_100869:
+  id: 100869
+  name: preuve de paiement de taxe de superficie exercice 2022- 4eme échelonnement
+  start_date: 2023-03-29
+  expire_date: 2023-04-23
+  status: doc_valid
+  attachment: Annex_1684154177_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-05-15 12:36:17 UTC
+  updated_at: 2023-05-16 15:45:52 UTC
+
+OperatorDocumentAnnex_100870:
+  id: 100870
+  name: preuve de paiement de taxe de superficie exercice 2022- 4eme échelonnement
+  start_date: 2023-03-29
+  expire_date: 2023-04-29
+  status: doc_valid
+  attachment: Annex_1684154252_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-05-15 12:37:32 UTC
+  updated_at: 2023-05-16 15:45:49 UTC
+
+OperatorDocumentAnnex_100871:
+  id: 100871
+  name: permis CITES 2023
+  start_date: 2023-02-23
+  status: doc_valid
+  attachment: Annex_1684485241_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-05-19 08:34:01 UTC
+  updated_at: 2023-07-06 02:44:50 UTC
+
+OperatorDocumentAnnex_100877:
+  id: 100877
+  name: Autorisation annuelle de coupe
+  start_date: 2023-01-02
+  expire_date: 2023-12-02
+  status: doc_valid
+  attachment: Annex_1684995605_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-05-25 06:20:05 UTC
+  updated_at: 2023-06-19 16:16:42 UTC
+
+OperatorDocumentAnnex_100881:
+  id: 100881
+  name: 'Agrement de transport '
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1685905801_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-06-04 19:10:01 UTC
+  updated_at: 2023-06-19 16:16:18 UTC
+
+OperatorDocumentAnnex_100885:
+  id: 100885
+  name: Autorisation heures supplémentaires 2e semestre 2023
+  start_date: 2023-07-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1686642696_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-06-13 07:51:36 UTC
+  updated_at: 2023-06-19 16:16:03 UTC
+
+OperatorDocumentAnnex_100888:
+  id: 100888
+  name: Exemple Certificat CITES 2023
+  start_date: 2023-02-23
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1686644125_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-06-13 08:15:25 UTC
+  updated_at: 2023-06-19 16:15:40 UTC
+
+OperatorDocumentAnnex_100892:
+  id: 100892
+  name: Agrement transport 2023 Fortis logistique
+  start_date: 2023-01-01
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1688550633_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-07-05 09:50:33 UTC
+  updated_at: 2023-07-06 02:44:39 UTC
+
+OperatorDocumentAnnex_100896:
+  id: 100896
+  name: Prolongation de permis de coupe industriel de bois d'œuvre PCIBO 2021 en 2023
+  start_date: 2023-07-11
+  expire_date: 2023-12-31
+  status: doc_valid
+  attachment: Annex_1689151076_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-07-12 08:37:56 UTC
+  updated_at: 2023-08-23 12:39:19 UTC
+
+OperatorDocumentAnnex_100974:
+  id: 100974
+  name: preuve de paiement de taxe de superficie exercice 2023- 1eme échelonnement
+  start_date: 2023-08-24
+  expire_date: 2023-09-24
+  status: doc_valid
+  attachment: Annex_1697471741_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-10-16 15:55:41 UTC
+  updated_at: 2023-10-16 22:53:36 UTC
+
+OperatorDocumentAnnex_100998:
+  id: 100998
+  name: preuve de paiement de taxe de superficie exercice 2023- 2eme échelonnement
+  start_date: 2023-09-29
+  expire_date: 2023-11-16
+  status: doc_valid
+  attachment: Annex_1699541227_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-11-09 14:47:07 UTC
+  updated_at: 2023-11-30 04:01:45 UTC
+
+OperatorDocumentAnnex_101006:
+  id: 101006
+  name: Agrement 2024
+  start_date: 2023-11-29
+  expire_date: 2024-11-28
+  status: doc_pending
+  attachment: Annex_1701785297_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-05 14:08:17 UTC
+  updated_at: 2023-12-05 14:08:17 UTC
+
+OperatorDocumentAnnex_101009:
+  id: 101009
+  name: Autorisation CITES pad  259
+  start_date: 2023-11-07
+  expire_date: 2024-05-07
+  status: doc_valid
+  attachment: Annex_1701787931_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-05 14:52:11 UTC
+  updated_at: 2024-01-07 04:38:11 UTC
+
+OperatorDocumentAnnex_101013:
+  id: 101013
+  name: preuve de paiement de taxe de superficie exercice 2023- 1eme échelonnement
+  start_date: 2023-08-24
+  expire_date: 2023-09-24
+  status: doc_valid
+  attachment: Annex_1702290408_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-11 10:26:48 UTC
+  updated_at: 2024-01-07 04:38:07 UTC
+
+OperatorDocumentAnnex_101015:
+  id: 101015
+  name: preuve de paiement de taxe de superficie exercice 2023- 2eme échelonnement
+  start_date: 2023-09-29
+  expire_date: 2023-10-31
+  status: doc_valid
+  attachment: Annex_1702291445_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-11 10:44:06 UTC
+  updated_at: 2024-01-07 04:38:06 UTC
+
+OperatorDocumentAnnex_101016:
+  id: 101016
+  name: preuve de paiement de taxe de superficie exercice 2023- 3eme échelonnement
+  start_date: 2023-10-31
+  expire_date: 2023-12-01
+  status: doc_valid
+  attachment: Annex_1702291725_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-11 10:48:45 UTC
+  updated_at: 2024-01-07 04:38:04 UTC
+
+OperatorDocumentAnnex_101017:
+  id: 101017
+  name: preuve de paiement de taxe de superficie exercice 2023- 3eme échelonnement
+  start_date: 0023-10-29
+  expire_date: 2023-12-01
+  status: doc_valid
+  attachment: Annex_1703248190_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-22 12:29:50 UTC
+  updated_at: 2024-01-07 04:38:02 UTC
+
+OperatorDocumentAnnex_101019:
+  id: 101019
+  name: CHST 3è trimestre 2023
+  start_date: 2023-09-01
+  expire_date: 2023-12-30
+  status: doc_valid
+  attachment: Annex_1703312005_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-23 06:13:25 UTC
+  updated_at: 2024-01-07 04:37:59 UTC
+
+OperatorDocumentAnnex_101020:
+  id: 101020
+  name: Autorisation de coupe 2024
+  start_date: 2024-01-01
+  expire_date: 2024-12-31
+  status: doc_valid
+  attachment: Annex_1703312360_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-23 06:19:20 UTC
+  updated_at: 2024-01-07 04:37:56 UTC
+
+OperatorDocumentAnnex_101021:
+  id: 101021
+  name: Autorisation Heures supp S1 2024
+  start_date: 2024-01-01
+  expire_date: 2024-06-30
+  status: doc_valid
+  attachment: Annex_1703312894_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-23 06:28:14 UTC
+  updated_at: 2024-01-07 04:37:54 UTC
+
+OperatorDocumentAnnex_101022:
+  id: 101022
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704022136_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 11:28:56 UTC
+  updated_at: 2024-01-07 04:37:52 UTC
+
+OperatorDocumentAnnex_101023:
+  id: 101023
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704022216_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 11:30:16 UTC
+  updated_at: 2024-01-07 04:37:50 UTC
+
+OperatorDocumentAnnex_101024:
+  id: 101024
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704022270_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 11:31:10 UTC
+  updated_at: 2024-01-07 04:37:47 UTC
+
+OperatorDocumentAnnex_101025:
+  id: 101025
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704023730_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 11:55:30 UTC
+  updated_at: 2024-01-07 04:37:42 UTC
+
+OperatorDocumentAnnex_101026:
+  id: 101026
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704024584_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 12:09:44 UTC
+  updated_at: 2024-01-07 04:37:40 UTC
+
+OperatorDocumentAnnex_101027:
+  id: 101027
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704024748_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 12:12:28 UTC
+  updated_at: 2024-01-07 04:37:38 UTC
+
+OperatorDocumentAnnex_101028:
+  id: 101028
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704024806_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 12:13:26 UTC
+  updated_at: 2024-01-07 04:37:36 UTC
+
+OperatorDocumentAnnex_101029:
+  id: 101029
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704024873_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 12:14:33 UTC
+  updated_at: 2024-01-07 04:37:34 UTC
+
+OperatorDocumentAnnex_101030:
+  id: 101030
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704024913_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 12:15:13 UTC
+  updated_at: 2024-01-07 04:37:31 UTC
+
+OperatorDocumentAnnex_101031:
+  id: 101031
+  name: Prorogation des activités dans l'aac 5-4
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1704025060_no_document.pdf
+  uploaded_by: operator
+  created_at: 2023-12-31 12:17:40 UTC
+  updated_at: 2024-01-07 04:37:22 UTC
+
+OperatorDocumentAnnex_101032:
+  id: 101032
+  name: PAO 2023 de l'aac 5-4
+  start_date: 2023-03-14
+  expire_date: 2023-12-31
+  status: doc_pending
+  attachment: Annex_1704651924_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-07 18:25:24 UTC
+  updated_at: 2024-01-07 18:25:24 UTC
+
+OperatorDocumentAnnex_101033:
+  id: 101033
+  name: Contrat de partenariat de Transformation de bois entre SEBC et SAB
+  start_date: 2008-05-27
+  status: doc_pending
+  attachment: Annex_1704792868_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-09 09:34:28 UTC
+  updated_at: 2024-01-09 09:34:28 UTC
+
+OperatorDocumentAnnex_101034:
+  id: 101034
+  name: Notification de démarrage de la prorogation des activités
+  start_date: 2024-01-09
+  expire_date: 2024-02-28
+  status: doc_pending
+  attachment: Annex_1704882558_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-10 10:29:18 UTC
+  updated_at: 2024-01-10 10:29:18 UTC

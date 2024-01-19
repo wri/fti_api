@@ -1,0 +1,385 @@
+
+RequiredOperatorDocumentGroup_1_en_translation:
+  required_operator_document_group_id: 1
+  locale: en
+  name: Legal registration
+
+RequiredOperatorDocumentGroup_1_fr_translation:
+  required_operator_document_group_id: 1
+  locale: fr
+  name: Enregistrement légal
+
+RequiredOperatorDocumentGroup_1_vi_translation:
+  required_operator_document_group_id: 1
+  locale: vi
+  name: Đăng ký pháp lý
+
+RequiredOperatorDocumentGroup_1_zh-CN_translation:
+  required_operator_document_group_id: 1
+  locale: zh-CN
+  name: 合法注册
+
+RequiredOperatorDocumentGroup_1_ja_translation:
+  required_operator_document_group_id: 1
+  locale: ja
+  name: 法的な登録
+
+RequiredOperatorDocumentGroup_1_ko_translation:
+  required_operator_document_group_id: 1
+  locale: ko
+  name: 법적 등록
+
+RequiredOperatorDocumentGroup_1_pt_translation:
+  required_operator_document_group_id: 1
+  locale: pt
+  name: Registro legal
+
+RequiredOperatorDocumentGroup_2_en_translation:
+  required_operator_document_group_id: 2
+  locale: en
+  name: Use right
+
+RequiredOperatorDocumentGroup_2_fr_translation:
+  required_operator_document_group_id: 2
+  locale: fr
+  name: Droit d'accès à la ressource
+
+RequiredOperatorDocumentGroup_2_zh-CN_translation:
+  required_operator_document_group_id: 2
+  locale: zh-CN
+  name: 使用权
+
+RequiredOperatorDocumentGroup_2_ja_translation:
+  required_operator_document_group_id: 2
+  locale: ja
+  name: 使用権
+
+RequiredOperatorDocumentGroup_2_ko_translation:
+  required_operator_document_group_id: 2
+  locale: ko
+  name: 사용권
+
+RequiredOperatorDocumentGroup_2_vi_translation:
+  required_operator_document_group_id: 2
+  locale: vi
+  name: Quyền sử dụng
+
+RequiredOperatorDocumentGroup_2_pt_translation:
+  required_operator_document_group_id: 2
+  locale: pt
+  name: Direito de exploração
+
+RequiredOperatorDocumentGroup_3_en_translation:
+  required_operator_document_group_id: 3
+  locale: en
+  name: Forest management
+
+RequiredOperatorDocumentGroup_3_fr_translation:
+  required_operator_document_group_id: 3
+  locale: fr
+  name: Gestion forestière
+
+RequiredOperatorDocumentGroup_3_zh-CN_translation:
+  required_operator_document_group_id: 3
+  locale: zh-CN
+  name: 森林管理
+
+RequiredOperatorDocumentGroup_3_ja_translation:
+  required_operator_document_group_id: 3
+  locale: ja
+  name: 森林管理
+
+RequiredOperatorDocumentGroup_3_ko_translation:
+  required_operator_document_group_id: 3
+  locale: ko
+  name: 산림 관리
+
+RequiredOperatorDocumentGroup_3_vi_translation:
+  required_operator_document_group_id: 3
+  locale: vi
+  name: Quản lý rừng
+
+RequiredOperatorDocumentGroup_3_pt_translation:
+  required_operator_document_group_id: 3
+  locale: pt
+  name: Gerenciamento florestal
+
+RequiredOperatorDocumentGroup_4_en_translation:
+  required_operator_document_group_id: 4
+  locale: en
+  name: Timber harvesting
+
+RequiredOperatorDocumentGroup_4_fr_translation:
+  required_operator_document_group_id: 4
+  locale: fr
+  name: Exploitation
+
+RequiredOperatorDocumentGroup_4_zh-CN_translation:
+  required_operator_document_group_id: 4
+  locale: zh-CN
+  name: 木材采伐
+
+RequiredOperatorDocumentGroup_4_ja_translation:
+  required_operator_document_group_id: 4
+  locale: ja
+  name: 木材伐採
+
+RequiredOperatorDocumentGroup_4_ko_translation:
+  required_operator_document_group_id: 4
+  locale: ko
+  name: 벌목
+
+RequiredOperatorDocumentGroup_4_vi_translation:
+  required_operator_document_group_id: 4
+  locale: vi
+  name: Khai thác gỗ
+
+RequiredOperatorDocumentGroup_4_pt_translation:
+  required_operator_document_group_id: 4
+  locale: pt
+  name: Extração de madeira
+
+RequiredOperatorDocumentGroup_5_fr_translation:
+  required_operator_document_group_id: 5
+  locale: fr
+  name: Etudes d'impact
+
+RequiredOperatorDocumentGroup_5_en_translation:
+  required_operator_document_group_id: 5
+  locale: en
+  name: Impact assessments
+
+RequiredOperatorDocumentGroup_5_zh-CN_translation:
+  required_operator_document_group_id: 5
+  locale: zh-CN
+  name: 影响评估
+
+RequiredOperatorDocumentGroup_5_ja_translation:
+  required_operator_document_group_id: 5
+  locale: ja
+  name: 影響評価
+
+RequiredOperatorDocumentGroup_5_ko_translation:
+  required_operator_document_group_id: 5
+  locale: ko
+  name: 영향 평가
+
+RequiredOperatorDocumentGroup_5_vi_translation:
+  required_operator_document_group_id: 5
+  locale: vi
+  name: Đánh giá tác động
+
+RequiredOperatorDocumentGroup_5_pt_translation:
+  required_operator_document_group_id: 5
+  locale: pt
+  name: Avaliações de impacto
+
+RequiredOperatorDocumentGroup_6_en_translation:
+  required_operator_document_group_id: 6
+  locale: en
+  name: Transport
+
+RequiredOperatorDocumentGroup_6_fr_translation:
+  required_operator_document_group_id: 6
+  locale: fr
+  name: Transport
+
+RequiredOperatorDocumentGroup_6_zh-CN_translation:
+  required_operator_document_group_id: 6
+  locale: zh-CN
+  name: 运输
+
+RequiredOperatorDocumentGroup_6_ja_translation:
+  required_operator_document_group_id: 6
+  locale: ja
+  name: 輸送
+
+RequiredOperatorDocumentGroup_6_ko_translation:
+  required_operator_document_group_id: 6
+  locale: ko
+  name: 수송
+
+RequiredOperatorDocumentGroup_6_vi_translation:
+  required_operator_document_group_id: 6
+  locale: vi
+  name: Vận tải
+
+RequiredOperatorDocumentGroup_6_pt_translation:
+  required_operator_document_group_id: 6
+  locale: pt
+  name: Transporte
+
+RequiredOperatorDocumentGroup_7_fr_translation:
+  required_operator_document_group_id: 7
+  locale: fr
+  name: Commercialisation, export & CITES
+
+RequiredOperatorDocumentGroup_7_zh-CN_translation:
+  required_operator_document_group_id: 7
+  locale: zh-CN
+  name: 贸易，出口和濒危野生动植物保护公约（CITES）
+
+RequiredOperatorDocumentGroup_7_ja_translation:
+  required_operator_document_group_id: 7
+  locale: ja
+  name: 取引、輸出、およびCITES
+
+RequiredOperatorDocumentGroup_7_ko_translation:
+  required_operator_document_group_id: 7
+  locale: ko
+  name: 무역, 수출, CITES
+
+RequiredOperatorDocumentGroup_7_vi_translation:
+  required_operator_document_group_id: 7
+  locale: vi
+  name: Thương mại, xuất khẩu và Công ước CITES
+
+RequiredOperatorDocumentGroup_7_en_translation:
+  required_operator_document_group_id: 7
+  locale: en
+  name: Trade, export and CITES
+
+RequiredOperatorDocumentGroup_7_pt_translation:
+  required_operator_document_group_id: 7
+  locale: pt
+  name: Comércio, exportação e CITES
+
+RequiredOperatorDocumentGroup_8_en_translation:
+  required_operator_document_group_id: 8
+  locale: en
+  name: Taxes, fees and royalties
+
+RequiredOperatorDocumentGroup_8_fr_translation:
+  required_operator_document_group_id: 8
+  locale: fr
+  name: Taxes et fiscalité
+
+RequiredOperatorDocumentGroup_8_zh-CN_translation:
+  required_operator_document_group_id: 8
+  locale: zh-CN
+  name: 税，费用和特许权使用费
+
+RequiredOperatorDocumentGroup_8_ja_translation:
+  required_operator_document_group_id: 8
+  locale: ja
+  name: 税、料金、ロイヤリティ
+
+RequiredOperatorDocumentGroup_8_ko_translation:
+  required_operator_document_group_id: 8
+  locale: ko
+  name: 세금, 비용, 로열티
+
+RequiredOperatorDocumentGroup_8_vi_translation:
+  required_operator_document_group_id: 8
+  locale: vi
+  name: Thuế, phí và thuế tài nguyên
+
+RequiredOperatorDocumentGroup_8_pt_translation:
+  required_operator_document_group_id: 8
+  locale: pt
+  name: Impostos, taxas e royalties
+
+RequiredOperatorDocumentGroup_9_en_translation:
+  required_operator_document_group_id: 9
+  locale: en
+  name: Population rights
+
+RequiredOperatorDocumentGroup_9_fr_translation:
+  required_operator_document_group_id: 9
+  locale: fr
+  name: Droits des populations
+
+RequiredOperatorDocumentGroup_9_zh-CN_translation:
+  required_operator_document_group_id: 9
+  locale: zh-CN
+  name: 人口权利
+
+RequiredOperatorDocumentGroup_9_ja_translation:
+  required_operator_document_group_id: 9
+  locale: ja
+  name: 住民の権利
+
+RequiredOperatorDocumentGroup_9_ko_translation:
+  required_operator_document_group_id: 9
+  locale: ko
+  name: 인권
+
+RequiredOperatorDocumentGroup_9_vi_translation:
+  required_operator_document_group_id: 9
+  locale: vi
+  name: Quyền của người dân
+
+RequiredOperatorDocumentGroup_9_pt_translation:
+  required_operator_document_group_id: 9
+  locale: pt
+  name: Direitos da população
+
+RequiredOperatorDocumentGroup_10_fr_translation:
+  required_operator_document_group_id: 10
+  locale: fr
+  name: Droit des travailleurs
+
+RequiredOperatorDocumentGroup_10_zh-CN_translation:
+  required_operator_document_group_id: 10
+  locale: zh-CN
+  name: 劳动法规
+
+RequiredOperatorDocumentGroup_10_ja_translation:
+  required_operator_document_group_id: 10
+  locale: ja
+  name: 労働規則
+
+RequiredOperatorDocumentGroup_10_ko_translation:
+  required_operator_document_group_id: 10
+  locale: ko
+  name: 근로 규정
+
+RequiredOperatorDocumentGroup_10_vi_translation:
+  required_operator_document_group_id: 10
+  locale: vi
+  name: Các quy định về lao động
+
+RequiredOperatorDocumentGroup_10_en_translation:
+  required_operator_document_group_id: 10
+  locale: en
+  name: Labor regulations
+
+RequiredOperatorDocumentGroup_10_pt_translation:
+  required_operator_document_group_id: 10
+  locale: pt
+  name: Regulamentações trabalhistas
+
+RequiredOperatorDocumentGroup_11_fr_translation:
+  required_operator_document_group_id: 11
+  locale: fr
+  name: Documents à classer
+
+RequiredOperatorDocumentGroup_11_zh-CN_translation:
+  required_operator_document_group_id: 11
+  locale: zh-CN
+  name: Documents à classer
+
+RequiredOperatorDocumentGroup_11_en_translation:
+  required_operator_document_group_id: 11
+  locale: en
+  name: Publication Authorization
+
+RequiredOperatorDocumentGroup_11_vi_translation:
+  required_operator_document_group_id: 11
+  locale: vi
+  name: Ủy quyền xuất bản
+
+RequiredOperatorDocumentGroup_11_ja_translation:
+  required_operator_document_group_id: 11
+  locale: ja
+  name: Documents à classer
+
+RequiredOperatorDocumentGroup_11_ko_translation:
+  required_operator_document_group_id: 11
+  locale: ko
+  name: Documents à classer
+
+RequiredOperatorDocumentGroup_11_pt_translation:
+  required_operator_document_group_id: 11
+  locale: pt
+  name: Publication Authorization

@@ -1,0 +1,1092 @@
+
+Faq_1_fr_translation:
+  faq_id: 1
+  locale: fr
+  question: A propos de l’OTP et des données sur le site
+  answer: '<p>&nbsp;<strong>1.&nbsp;&nbsp;&nbsp;&nbsp;D’où proviennent les données
+    ?</strong></p><p>L’OTP compile des informations sur les opérations forestières
+    provenant de trois sources différentes : de l’administration, des exploitants
+    forestiers et de tierces parties.</p><p>(1) <u>L’administration chargée des forêts</u>
+    dans les pays&nbsp;producteurs fournit des détails sur les concessions forestières,
+    tels que les limites officielles, le nom de la concession, l’année de début d’exploitation,
+    ainsi que la liste des exploitants forestiers enregistrés qui opèrent dans le
+    pays. Ces informations sont en grande partie tirées des données compilées dans
+    les <a href="https://www.wri.org/our-work/project/forest-atlases" target="_blank"
+    style="color: rgb(149, 79, 114);">Atlas Forestiers</a>.</p><p>(2) Tous <u>les
+    exploitants forestiers enregistrés</u> qui opèrent dans des pays producteurs sont
+    répertoriés dans l’OTP. Ces exploitants peuvent ensuite s’enregistrer volontairement
+    et publier des documents clés qui démontrent leur conformité avec les exigences
+    légales du pays dans lequel ils opèrent.</p><p>(3) <u>Les tierces parties</u>
+    comprennent les observateurs indépendants (OI), mandatés ou non mandatés, ainsi
+    que d’autres groupes de la société civile et des organisations non gouvernementales
+    qui opèrent au niveau local et international. Ces organisations peuvent mettre
+    en ligne des observations relatives au non-respect présumé des obligations légales,
+    à condition que ces observations soient appuyées par des preuves. Dans certains
+    cas, ces observations sont validées par un comité de lecture officiel. Pour en
+    savoir plus sur le fonctionnement des OI, veuillez consulter la section ci-dessous.&nbsp;</p><p>(4)
+    L’OTP contient aussi des données de Global Forest Watch sur la perte de couvert
+    arboré au fil du temps ainsi que sur les aires protégées. Ces données comprennent
+    également les alertes hebdomadaires de perte de couvert forestier <a href="https://blog.globalforestwatch.org/data-and-research/glad-alerts-now-available-for-entire-pantropical-region"
+    target="_blank" style="color: rgb(149, 79, 114);">Global Land Analysis and Discover
+    (GLAD)</a>.</p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;Quelle est la précision des
+    données de l’OTP ?</strong></p><p>Pour les données soumises par les entreprises,
+    l’OTP a mis en place un processus de validation en deux étapes. La première étape
+    consiste à passer en revue les soumissions, afin de s’assurer que le contenu est
+    lisible, de qualité suffisante et catégorisé correctement. Ceci est suivi d’un
+    contrôle sur le contenu et la qualité des informations fournies. Les documents
+    de l’entreprise sont également revus périodiquement par des experts externes.</p><p>Pour
+    les données soumises par des tierces parties, il existe deux niveaux supplémentaires
+    de contrôle de qualité. Tout d’abord, WRI et ses partenaires locaux vérifient
+    que les soumissions sont renseignées correctement (les formulaires doivent contenir
+    des preuves ainsi que les références légales correctes). Ceci est suivi d’un contrôle
+    secondaire sur le contenu où des commentaires sont fournis aux OI afin d’améliorer
+    la qualité de la soumission.</p><p><strong>WRI et ses partenaires s’efforcent
+    de maintenir le site web de l’OTP à jour autant que possible, cependant nous ne
+    pouvons pas garantir que les données sur le site sont à jour au moment où elles
+    sont consultées.&nbsp;</strong></p><p>WRI n’est pas responsable des inexactitudes
+    dans les données disponibles sur le portail OTP. Pour en savoir plus, veuillez
+    consulter nos <a href="https://www.opentimberportal.org/terms" target="_blank"
+    style="color: rgb(149, 79, 114);">conditions d’utilisation</a>.&nbsp;</p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;Comment
+    le score de transparence est-il calculé ?</strong></p><p>Pour que les données
+    sur l’OTP soient facilement accessibles et compréhensibles pour les utilisateurs,
+    les exploitants forestiers sont classés par rapport aux informations publiées
+    volontairement. Pour chaque exploitant, un score de transparence est calculé sous
+    forme d’un pourcentage prenant en compte le nombre de documents rendus publics
+    dans l’OTP sur le nombre total de documents requis.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;Qu’est-ce
+    qu’un «&nbsp;OI&nbsp;» ou un observateur indépendant, et que fait-il ?</strong></p><p>Un
+    observateur indépendant («&nbsp;OI&nbsp;») est une organisation non gouvernementale
+    qui analyse et soumet des rapports sur la gouvernance et la gestion des forêts,
+    ainsi que sur l’exploitation et le transport du bois. Le processus d’<a href="http://www.euflegt.efi.int/vpa"
+    target="_blank" style="color: rgb(149, 79, 114);">APV FLEGT</a> confère un rôle
+    explicite aux OI dans la supervision de la mise en œuvre de l’accord et la vérification
+    de conformité dans le pays producteur.&nbsp;</p><p>Habituellement, lorsqu’il est
+    mandaté, l’OI travaille dans le cadre d’un accord avec le gouvernement du pays
+    hôte. Les rapports sur leurs constatations sont validés dans de nombreux pays
+    par un comité de lecture qui comprend des bailleurs de fonds ainsi que d’autres
+    parties prenantes et qui est généralement présidé par l’autorité forestière nationale.</p><p>Dans
+    l’OTP, les OI mandatés peuvent soumettre des cas de non-respect présumé des obligations
+    légales par les entreprises et/ou par l’administration. Ces observations doivent
+    être validées par le comité de lecture avant de pouvoir être publiées sur le site
+    de l’OTP.</p><p>Les OI non mandatés peuvent être des ONG et des organisations
+    de la société civile qui travaillent sur la protection des forêts et les droits
+    des communautés, mais qui n’ont pas d’accord officiel avec le gouvernement du
+    pays pour mener des missions de suivi de mise en œuvre de l’APV FLEGT.</p><p>Les
+    OI non mandatés peuvent mettre en ligne leurs observations directement sur l’OTP.
+    Celles-ci sont ensuite soumises à des membres de l’équipe de WRI et des partenaires
+    locaux pour validation.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;Comment la sévérité
+    des observations/infractions est-elle calculée ?</strong></p><p>Pour aider les
+    utilisateurs de l’OTP à comprendre l’importance relative ou le caractère plus
+    ou moins significatif d’une observation sur une exploitation forestière illégale
+    ou d’un problème de gouvernance forestière, WRI et ses partenaires ont développé
+    une gamme de paramètres de sévérité pour chaque catégorie d’observations en collaboration
+    avec des observateurs indépendants.&nbsp;</p><p>La section «&nbsp;<a href="https://www.opentimberportal.org/help/how-otp-works?language=fr-FR"
+    target="_blank" style="color: rgb(149, 79, 114);">Évaluation de la sévérité des
+    observations&nbsp;</a>» fournit une explication détaillée sur la manière dont
+    les paramètres de sévérité ont été définis.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;A
+    quelle fréquence les données sont-elles mises à jour ?</strong></p><p>Les exploitants
+    forestiers et tierces parties ajoutent régulièrement de nouvelles informations
+    sur l’OTP.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;Que sont les alertes GLAD&nbsp;?</strong></p><p>Alors
+    que les données de Global Forest Watch affichent la perte de couvert forestier
+    au fil du temps, les alertes GLAD fournissent des informations sur les déboisements
+    au fur et à mesure qu’ils se produisent. Les alertes sont mises à jour chaque
+    semaine et permettent d’obtenir des données en temps quasi réel sur la perte de
+    couvert forestier. Pour plus d’informations sur les alertes GLAD, rendez-vous
+    sur <a href="https://glad.geog.umd.edu/" target="_blank" style="color: rgb(149,
+    79, 114);">https://glad.geog.umd.edu/</a>.</p><p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;Quelle
+    est la différence entre l’OTP et les autres outils d’appui à la diligence raisonnée
+    (SPOTT, Timber Trade Portal, NEPCON Sourcing Hub et BVRio)&nbsp;?</strong></p><p>En
+    collaboration avec les organisations qui ont créé ces outils, nous avons développé
+    <a href="https://www.opentimberportal.com/uploads/newsletter/26651-D-01_WRI_JointTools.pdf"
+    target="_blank" style="color: rgb(149, 79, 114);">un dépliant commun</a> qui fournit
+    une brève description de chacun de ces outils et de leur étendue géographique.
+    Vous pouvez accéder à ces outils depuis notre section «&nbsp;<a href="https://opentimberportal.org/help/legislation-and-regulations"
+    target="_blank" style="color: rgb(149, 79, 114);">Outils d’appui à la diligence
+    raisonnée&nbsp;</a>»</p><p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;L’OTP s’étendra-t-il
+    à d’autres pays&nbsp;?</strong></p><p>L’OTP est adaptable et pourrait être déployé
+    dans tout pays qui gère des zones de forêts naturelles par le biais de concessions
+    de gestion forestière à long terme. Actuellement, l’OTP contient des données d’exploitants
+    forestiers en RDC, au Congo et au Cameroun. Il est prévu d’étendre ensuite l’OTP
+    au Gabon et en République centrafricaine.</p><p>Les observations relatives au
+    non-respect présumé des obligations légales soumises par&nbsp;des tierces parties
+    ne sont toutefois pas limitées à un pays spécifique et les utilisateurs peuvent
+    accéder à des données du monde entier.</p><p><strong>10.&nbsp;Est-ce que je peux
+    télécharger les données de l’OTP ?</strong></p><p>L’OTP ne permet pas aux utilisateurs
+    de télécharger les profils des exploitants, ni les observations soumises par les
+    tierces parties. Cependant, tous les documents publiés sur le site web peuvent
+    être consultés et téléchargés individuellement.</p>'
+
+Faq_1_zh-CN_translation:
+  faq_id: 1
+  locale: zh-CN
+  question: About the OTP and the data on the site
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Where does the data come from?</strong></p><p>The
+    OTP compiles information about forest operations from three sources: government
+    agencies, logging companies and third-party organizations.</p><p>(1) <u>Government
+    agencies</u> in producer countries provide details on forest concessions, such
+    as geographic boundaries, forest concession names, initial year of exploitation,
+    as well as the names of the registered logging companies that operate in forest
+    concessions within their country. This is largely drawn from data compiled in
+    the <a href="https://www.wri.org/our-work/project/forest-atlases" target="_blank"
+    style="color: rgb(149, 79, 114);">Forest Atlases</a>.</p><p>(2) All of the <u>registered
+    logging companies</u> operating in producer countries are listed on the OTP website.
+    These companies are then able to voluntarily register their profile and upload
+    key documents to demonstrate compliance with the legal framework of the country
+    that they operate in.</p><p>(3) <u>Third-party organizations</u> include independent
+    monitors (IMs), both mandated or nonmandated, as well as other civil society groups
+    and nongovernment organizations at the local and international level. These organizations
+    are able to upload observations of suspected noncompliance, provided that they
+    are supported by evidence. In some cases, observations are validated by an official
+    reading committee. See our section below on IMs to find out more about how they
+    operate.</p><p>(4) Data from <u>Global Forest Watch</u> on forest cover and tree
+    cover loss over time as well as on protected areas. This data also includes weekly
+    <a href="https://blog.globalforestwatch.org/data-and-research/glad-alerts-now-available-for-entire-pantropical-region"
+    target="_blank" style="color: rgb(149, 79, 114);">Global Land Analysis and Discover
+    (GLAD)</a> tree cover loss alerts.</p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;How
+    accurate is the data in the OTP?</strong></p><p>For the data submitted by companies,
+    the OTP has put in place a two-step validation process, where an initial review
+    of the submissions is conducted to ensure that the content is legible, of sufficient
+    quality and categorized correctly. This is followed by a secondary review to verify
+    the content and the quality of the information provided. Company documents are
+    also reviewed by external experts periodically.</p><p>For the data submitted by
+    third-party organizations, there are two levels of quality control. First, WRI
+    staff and local partners from IM organizations review the completion of the submission
+    (forms must include evidence and correct legal references). This is followed by
+    a secondary review, where the content of the submission is reviewed, and comments
+    to improve the quality of the submission are sent back to the IM organization.</p><p>WRI
+    and its partners strive to keep the website up to date as much as possible, however
+    we cannot guarantee that the data on the site is up to date at the time of access.</p><p>WRI
+    is not liable for any inaccuracies with the data available on the Open Timber
+    Portal. To find out more, please take a look at our <a href="https://www.opentimberportal.org/terms"
+    target="_blank" style="color: rgb(149, 79, 114);">Terms of Service</a><span style="color:
+    blue;">.</span></p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;How is the transparency
+    ranking calculated?</strong></p><p>To make data on the OTP easily accessible and
+    understandable for users, companies are ranked on the basis of their level of
+    voluntary disclosure. For each producer, a transparency score is calculated based
+    on the percentage of documents shared on the OTP out of the total number of documents
+    requested.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;What’s an “IM” or independent
+    monitor and what do they do?</strong></p><p>An independent monitor (“IM”) is a
+    non-governmental organization that analyzes and reports on forest governance and
+    management, as well as the harvest and transport of timber. The <a href="http://www.euflegt.efi.int/vpa"
+    target="_blank" style="color: rgb(149, 79, 114);">FLEGT VPA process</a> creates
+    an explicit role for IMs to oversee implementation of the agreement and verify
+    compliance in the producer country.</p><p>Usually, when mandated, the IM works
+    under an agreement with the host country government. Its findings are in many
+    countries validated by a reading committee that includes donors and other stakeholders,
+    typically chaired by the national forest authority.</p><p>Within the OTP, mandated
+    IMs can enter instances of suspected noncompliance by companies and/or by government
+    actors. These observations will need to be validated by the reading committee
+    before they can be published on the OTP website.</p><p>Nonmandated IMs can be
+    NGOs and civil society organizations that work on forest protection and community
+    rights but do not have an official agreement with the government of the country
+    to conduct missions to monitor the implementation of the FLEGT VPAs.</p><p>Observations
+    from nonmandated IMs can be uploaded by these organizations directly onto the
+    OTP website. These are then reviewed for validation by WRI staff and local partners.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;How
+    is the severity of observations/infractions calculated?</strong></p><p>To assist
+    OTP users in understanding the relative importance or severity of an observation
+    on illegal logging or a forest governance problem, WRI and its partners have developed
+    severity parameters for each observation category in collaboration with IMs.</p><p>Take
+    a look at the <a href="https://www.opentimberportal.org/help/how-otp-works?article=tutorial-article-1"
+    target="_blank" style="color: rgb(149, 79, 114);">Assessing severity of observations</a>
+    section, which will provide an in-depth explanation on how the severity parameters
+    used were defined.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;How often is the data
+    updated?</strong></p><p>Companies and third-party organizations are regularly
+    uploading new information on the OTP.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;What
+    are GLAD alerts?</strong></p><p>While the data from Global Forest Watch displays
+    tree cover loss over time, GLAD alerts provide information on tree clearings as
+    they happen. Alerts are updated weekly and allow for near-real time data on tree
+    cover loss. For more information on the GLAD alerts, go to <a href="https://glad.geog.umd.edu/"
+    target="_blank" style="color: rgb(149, 79, 114);">https://glad.geog.umd.edu/</a>.</p><p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;What
+    is the difference between the OTP and other tools that support due diligence (SPOTT,
+    Timber Trade Portal, NEPCON Sourcing Hub and BVRio)?</strong></p><p>In collaboration
+    with the organizations that have created these tools, we have developed <a href="https://www.opentimberportal.com/uploads/newsletter/26651-D-01_WRI_JointTools.pdf"
+    target="_blank" style="color: rgb(149, 79, 114);">a joint flyer</a> that provides
+    a brief description of each of these tools and their geographical focus. You can
+    also access these directly from our <a href="https://www.opentimberportal.org/help/legislation-and-regulations"
+    target="_blank" style="color: rgb(149, 79, 114);">Tools and Resources section</a>.</p><p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;Will
+    the OTP expand to other countries?</strong></p><p>The OTP will eventually be adaptable
+    to and deployed in any country that manages natural forest areas through long-term
+    forest management concessions. Currently, the OTP contains data about forest operations
+    in the DRC, Congo and Cameroon. Data on forest operations in Gabon and CAR will
+    be released on the OTP by the end of 2020.</p><p>Observations of suspected infractions
+    submitted by third-party organizations, however, are not limited to any specific
+    country and users will be able to access data from around the globe.</p><p><strong>10.&nbsp;Can
+    I download the data from the OTP website?</strong></p><p>The OTP does not allow
+    users to download company profiles or observations from third-party organizations,
+    however, all documents published on the website can be individually accessed and
+    downloaded.</p>'
+
+Faq_1_ja_translation:
+  faq_id: 1
+  locale: ja
+  question: About the OTP and the data on the site
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Where does the data come from?</strong></p><p>The
+    OTP compiles information about forest operations from three sources: government
+    agencies, logging companies and third-party organizations.</p><p>(1) <u>Government
+    agencies</u> in producer countries provide details on forest concessions, such
+    as geographic boundaries, forest concession names, initial year of exploitation,
+    as well as the names of the registered logging companies that operate in forest
+    concessions within their country. This is largely drawn from data compiled in
+    the <a href="https://www.wri.org/our-work/project/forest-atlases" target="_blank"
+    style="color: rgb(149, 79, 114);">Forest Atlases</a>.</p><p>(2) All of the <u>registered
+    logging companies</u> operating in producer countries are listed on the OTP website.
+    These companies are then able to voluntarily register their profile and upload
+    key documents to demonstrate compliance with the legal framework of the country
+    that they operate in.</p><p>(3) <u>Third-party organizations</u> include independent
+    monitors (IMs), both mandated or nonmandated, as well as other civil society groups
+    and nongovernment organizations at the local and international level. These organizations
+    are able to upload observations of suspected noncompliance, provided that they
+    are supported by evidence. In some cases, observations are validated by an official
+    reading committee. See our section below on IMs to find out more about how they
+    operate.</p><p>(4) Data from <u>Global Forest Watch</u> on forest cover and tree
+    cover loss over time as well as on protected areas. This data also includes weekly
+    <a href="https://blog.globalforestwatch.org/data-and-research/glad-alerts-now-available-for-entire-pantropical-region"
+    target="_blank" style="color: rgb(149, 79, 114);">Global Land Analysis and Discover
+    (GLAD)</a> tree cover loss alerts.</p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;How
+    accurate is the data in the OTP?</strong></p><p>For the data submitted by companies,
+    the OTP has put in place a two-step validation process, where an initial review
+    of the submissions is conducted to ensure that the content is legible, of sufficient
+    quality and categorized correctly. This is followed by a secondary review to verify
+    the content and the quality of the information provided. Company documents are
+    also reviewed by external experts periodically.</p><p>For the data submitted by
+    third-party organizations, there are two levels of quality control. First, WRI
+    staff and local partners from IM organizations review the completion of the submission
+    (forms must include evidence and correct legal references). This is followed by
+    a secondary review, where the content of the submission is reviewed, and comments
+    to improve the quality of the submission are sent back to the IM organization.</p><p>WRI
+    and its partners strive to keep the website up to date as much as possible, however
+    we cannot guarantee that the data on the site is up to date at the time of access.</p><p>WRI
+    is not liable for any inaccuracies with the data available on the Open Timber
+    Portal. To find out more, please take a look at our <a href="https://www.opentimberportal.org/terms"
+    target="_blank" style="color: rgb(149, 79, 114);">Terms of Service</a><span style="color:
+    blue;">.</span></p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;How is the transparency
+    ranking calculated?</strong></p><p>To make data on the OTP easily accessible and
+    understandable for users, companies are ranked on the basis of their level of
+    voluntary disclosure. For each producer, a transparency score is calculated based
+    on the percentage of documents shared on the OTP out of the total number of documents
+    requested.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;What’s an “IM” or independent
+    monitor and what do they do?</strong></p><p>An independent monitor (“IM”) is a
+    non-governmental organization that analyzes and reports on forest governance and
+    management, as well as the harvest and transport of timber. The <a href="http://www.euflegt.efi.int/vpa"
+    target="_blank" style="color: rgb(149, 79, 114);">FLEGT VPA process</a> creates
+    an explicit role for IMs to oversee implementation of the agreement and verify
+    compliance in the producer country.</p><p>Usually, when mandated, the IM works
+    under an agreement with the host country government. Its findings are in many
+    countries validated by a reading committee that includes donors and other stakeholders,
+    typically chaired by the national forest authority.</p><p>Within the OTP, mandated
+    IMs can enter instances of suspected noncompliance by companies and/or by government
+    actors. These observations will need to be validated by the reading committee
+    before they can be published on the OTP website.</p><p>Nonmandated IMs can be
+    NGOs and civil society organizations that work on forest protection and community
+    rights but do not have an official agreement with the government of the country
+    to conduct missions to monitor the implementation of the FLEGT VPAs.</p><p>Observations
+    from nonmandated IMs can be uploaded by these organizations directly onto the
+    OTP website. These are then reviewed for validation by WRI staff and local partners.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;How
+    is the severity of observations/infractions calculated?</strong></p><p>To assist
+    OTP users in understanding the relative importance or severity of an observation
+    on illegal logging or a forest governance problem, WRI and its partners have developed
+    severity parameters for each observation category in collaboration with IMs.</p><p>Take
+    a look at the <a href="https://www.opentimberportal.org/help/how-otp-works?article=tutorial-article-1"
+    target="_blank" style="color: rgb(149, 79, 114);">Assessing severity of observations</a>
+    section, which will provide an in-depth explanation on how the severity parameters
+    used were defined.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;How often is the data
+    updated?</strong></p><p>Companies and third-party organizations are regularly
+    uploading new information on the OTP.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;What
+    are GLAD alerts?</strong></p><p>While the data from Global Forest Watch displays
+    tree cover loss over time, GLAD alerts provide information on tree clearings as
+    they happen. Alerts are updated weekly and allow for near-real time data on tree
+    cover loss. For more information on the GLAD alerts, go to <a href="https://glad.geog.umd.edu/"
+    target="_blank" style="color: rgb(149, 79, 114);">https://glad.geog.umd.edu/</a>.</p><p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;What
+    is the difference between the OTP and other tools that support due diligence (SPOTT,
+    Timber Trade Portal, NEPCON Sourcing Hub and BVRio)?</strong></p><p>In collaboration
+    with the organizations that have created these tools, we have developed <a href="https://www.opentimberportal.com/uploads/newsletter/26651-D-01_WRI_JointTools.pdf"
+    target="_blank" style="color: rgb(149, 79, 114);">a joint flyer</a> that provides
+    a brief description of each of these tools and their geographical focus. You can
+    also access these directly from our <a href="https://www.opentimberportal.org/help/legislation-and-regulations"
+    target="_blank" style="color: rgb(149, 79, 114);">Tools and Resources section</a>.</p><p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;Will
+    the OTP expand to other countries?</strong></p><p>The OTP will eventually be adaptable
+    to and deployed in any country that manages natural forest areas through long-term
+    forest management concessions. Currently, the OTP contains data about forest operations
+    in the DRC, Congo and Cameroon. Data on forest operations in Gabon and CAR will
+    be released on the OTP by the end of 2020.</p><p>Observations of suspected infractions
+    submitted by third-party organizations, however, are not limited to any specific
+    country and users will be able to access data from around the globe.</p><p><strong>10.&nbsp;Can
+    I download the data from the OTP website?</strong></p><p>The OTP does not allow
+    users to download company profiles or observations from third-party organizations,
+    however, all documents published on the website can be individually accessed and
+    downloaded.</p>'
+
+Faq_1_ko_translation:
+  faq_id: 1
+  locale: ko
+  question: About the OTP and the data on the site
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Where does the data come from?</strong></p><p>The
+    OTP compiles information about forest operations from three sources: government
+    agencies, logging companies and third-party organizations.</p><p>(1) <u>Government
+    agencies</u> in producer countries provide details on forest concessions, such
+    as geographic boundaries, forest concession names, initial year of exploitation,
+    as well as the names of the registered logging companies that operate in forest
+    concessions within their country. This is largely drawn from data compiled in
+    the <a href="https://www.wri.org/our-work/project/forest-atlases" target="_blank"
+    style="color: rgb(149, 79, 114);">Forest Atlases</a>.</p><p>(2) All of the <u>registered
+    logging companies</u> operating in producer countries are listed on the OTP website.
+    These companies are then able to voluntarily register their profile and upload
+    key documents to demonstrate compliance with the legal framework of the country
+    that they operate in.</p><p>(3) <u>Third-party organizations</u> include independent
+    monitors (IMs), both mandated or nonmandated, as well as other civil society groups
+    and nongovernment organizations at the local and international level. These organizations
+    are able to upload observations of suspected noncompliance, provided that they
+    are supported by evidence. In some cases, observations are validated by an official
+    reading committee. See our section below on IMs to find out more about how they
+    operate.</p><p>(4) Data from <u>Global Forest Watch</u> on forest cover and tree
+    cover loss over time as well as on protected areas. This data also includes weekly
+    <a href="https://blog.globalforestwatch.org/data-and-research/glad-alerts-now-available-for-entire-pantropical-region"
+    target="_blank" style="color: rgb(149, 79, 114);">Global Land Analysis and Discover
+    (GLAD)</a> tree cover loss alerts.</p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;How
+    accurate is the data in the OTP?</strong></p><p>For the data submitted by companies,
+    the OTP has put in place a two-step validation process, where an initial review
+    of the submissions is conducted to ensure that the content is legible, of sufficient
+    quality and categorized correctly. This is followed by a secondary review to verify
+    the content and the quality of the information provided. Company documents are
+    also reviewed by external experts periodically.</p><p>For the data submitted by
+    third-party organizations, there are two levels of quality control. First, WRI
+    staff and local partners from IM organizations review the completion of the submission
+    (forms must include evidence and correct legal references). This is followed by
+    a secondary review, where the content of the submission is reviewed, and comments
+    to improve the quality of the submission are sent back to the IM organization.</p><p>WRI
+    and its partners strive to keep the website up to date as much as possible, however
+    we cannot guarantee that the data on the site is up to date at the time of access.</p><p>WRI
+    is not liable for any inaccuracies with the data available on the Open Timber
+    Portal. To find out more, please take a look at our <a href="https://www.opentimberportal.org/terms"
+    target="_blank" style="color: rgb(149, 79, 114);">Terms of Service</a><span style="color:
+    blue;">.</span></p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;How is the transparency
+    ranking calculated?</strong></p><p>To make data on the OTP easily accessible and
+    understandable for users, companies are ranked on the basis of their level of
+    voluntary disclosure. For each producer, a transparency score is calculated based
+    on the percentage of documents shared on the OTP out of the total number of documents
+    requested.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;What’s an “IM” or independent
+    monitor and what do they do?</strong></p><p>An independent monitor (“IM”) is a
+    non-governmental organization that analyzes and reports on forest governance and
+    management, as well as the harvest and transport of timber. The <a href="http://www.euflegt.efi.int/vpa"
+    target="_blank" style="color: rgb(149, 79, 114);">FLEGT VPA process</a> creates
+    an explicit role for IMs to oversee implementation of the agreement and verify
+    compliance in the producer country.</p><p>Usually, when mandated, the IM works
+    under an agreement with the host country government. Its findings are in many
+    countries validated by a reading committee that includes donors and other stakeholders,
+    typically chaired by the national forest authority.</p><p>Within the OTP, mandated
+    IMs can enter instances of suspected noncompliance by companies and/or by government
+    actors. These observations will need to be validated by the reading committee
+    before they can be published on the OTP website.</p><p>Nonmandated IMs can be
+    NGOs and civil society organizations that work on forest protection and community
+    rights but do not have an official agreement with the government of the country
+    to conduct missions to monitor the implementation of the FLEGT VPAs.</p><p>Observations
+    from nonmandated IMs can be uploaded by these organizations directly onto the
+    OTP website. These are then reviewed for validation by WRI staff and local partners.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;How
+    is the severity of observations/infractions calculated?</strong></p><p>To assist
+    OTP users in understanding the relative importance or severity of an observation
+    on illegal logging or a forest governance problem, WRI and its partners have developed
+    severity parameters for each observation category in collaboration with IMs.</p><p>Take
+    a look at the <a href="https://www.opentimberportal.org/help/how-otp-works?article=tutorial-article-1"
+    target="_blank" style="color: rgb(149, 79, 114);">Assessing severity of observations</a>
+    section, which will provide an in-depth explanation on how the severity parameters
+    used were defined.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;How often is the data
+    updated?</strong></p><p>Companies and third-party organizations are regularly
+    uploading new information on the OTP.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;What
+    are GLAD alerts?</strong></p><p>While the data from Global Forest Watch displays
+    tree cover loss over time, GLAD alerts provide information on tree clearings as
+    they happen. Alerts are updated weekly and allow for near-real time data on tree
+    cover loss. For more information on the GLAD alerts, go to <a href="https://glad.geog.umd.edu/"
+    target="_blank" style="color: rgb(149, 79, 114);">https://glad.geog.umd.edu/</a>.</p><p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;What
+    is the difference between the OTP and other tools that support due diligence (SPOTT,
+    Timber Trade Portal, NEPCON Sourcing Hub and BVRio)?</strong></p><p>In collaboration
+    with the organizations that have created these tools, we have developed <a href="https://www.opentimberportal.com/uploads/newsletter/26651-D-01_WRI_JointTools.pdf"
+    target="_blank" style="color: rgb(149, 79, 114);">a joint flyer</a> that provides
+    a brief description of each of these tools and their geographical focus. You can
+    also access these directly from our <a href="https://www.opentimberportal.org/help/legislation-and-regulations"
+    target="_blank" style="color: rgb(149, 79, 114);">Tools and Resources section</a>.</p><p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;Will
+    the OTP expand to other countries?</strong></p><p>The OTP will eventually be adaptable
+    to and deployed in any country that manages natural forest areas through long-term
+    forest management concessions. Currently, the OTP contains data about forest operations
+    in the DRC, Congo and Cameroon. Data on forest operations in Gabon and CAR will
+    be released on the OTP by the end of 2020.</p><p>Observations of suspected infractions
+    submitted by third-party organizations, however, are not limited to any specific
+    country and users will be able to access data from around the globe.</p><p><strong>10.&nbsp;Can
+    I download the data from the OTP website?</strong></p><p>The OTP does not allow
+    users to download company profiles or observations from third-party organizations,
+    however, all documents published on the website can be individually accessed and
+    downloaded.</p>'
+
+Faq_1_en_translation:
+  faq_id: 1
+  locale: en
+  question: About the OTP and the data on the site
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Where does the data come from?</strong></p><p>The
+    OTP compiles information about forest operations from three sources: government
+    agencies, logging companies and third-party organizations.</p><p>(1) <u>Government
+    agencies</u> in producer countries provide details on forest concessions, such
+    as geographic boundaries, forest concession names, initial year of exploitation,
+    as well as the names of the registered logging companies that operate in forest
+    concessions within their country. This is largely drawn from data compiled in
+    the <a href="https://www.wri.org/our-work/project/forest-atlases" target="_blank"
+    style="color: rgb(149, 79, 114);">Forest Atlases</a>.</p><p>(2) All of the <u>registered
+    logging companies</u> operating in producer countries are listed on the OTP website.
+    These companies are then able to voluntarily register their profile and upload
+    key documents to demonstrate compliance with the legal framework of the country
+    that they operate in.</p><p>(3) <u>Third-party organizations</u> include independent
+    monitors (IMs), both mandated or nonmandated, as well as other civil society groups
+    and nongovernment organizations at the local and international level. These organizations
+    are able to upload observations of suspected noncompliance, provided that they
+    are supported by evidence. In some cases, observations are validated by an official
+    reading committee. See our section below on IMs to find out more about how they
+    operate.</p><p>(4) Data from <u>Global Forest Watch</u> on forest cover and tree
+    cover loss over time as well as on protected areas. This data also includes weekly
+    <a href="https://blog.globalforestwatch.org/data-and-research/glad-alerts-now-available-for-entire-pantropical-region"
+    target="_blank" style="color: rgb(149, 79, 114);">Global Land Analysis and Discover
+    (GLAD)</a> tree cover loss alerts.</p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;How
+    accurate is the data in the OTP?</strong></p><p>For the data submitted by companies,
+    the OTP has put in place a two-step validation process, where an initial review
+    of the submissions is conducted to ensure that the content is legible, of sufficient
+    quality and categorized correctly. This is followed by a secondary review to verify
+    the content and the quality of the information provided. Company documents are
+    also reviewed by external experts periodically.</p><p>For the data submitted by
+    third-party organizations, there are two levels of quality control. First, WRI
+    staff and local partners from IM organizations review the completion of the submission
+    (forms must include evidence and correct legal references). This is followed by
+    a secondary review, where the content of the submission is reviewed, and comments
+    to improve the quality of the submission are sent back to the IM organization.</p><p><strong>WRI
+    and its partners strive to keep the website up to date as much as possible, however
+    we cannot guarantee that the data on the site is up to date at the time of access.</strong></p><p>WRI
+    is not liable for any inaccuracies with the data available on the Open Timber
+    Portal. To find out more, please take a look at our <a href="https://www.opentimberportal.org/terms"
+    target="_blank" style="color: rgb(149, 79, 114);">Terms of Service</a><span style="color:
+    blue;">.</span></p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;How is the transparency
+    ranking calculated?</strong></p><p>To make data on the OTP easily accessible and
+    understandable for users, companies are ranked on the basis of their level of
+    voluntary disclosure. For each producer, a transparency score is calculated based
+    on the percentage of documents shared on the OTP out of the total number of documents
+    requested.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;What’s an “IM” or independent
+    monitor and what do they do?</strong></p><p>An independent monitor (“IM”) is a
+    non-governmental organization that analyzes and reports on forest governance and
+    management, as well as the harvest and transport of timber. The <a href="http://www.euflegt.efi.int/vpa"
+    target="_blank" style="color: rgb(149, 79, 114);">FLEGT VPA process</a> creates
+    an explicit role for IMs to oversee implementation of the agreement and verify
+    compliance in the producer country.</p><p>Usually, when mandated, the IM works
+    under an agreement with the host country government. Its findings are in many
+    countries validated by a reading committee that includes donors and other stakeholders,
+    typically chaired by the national forest authority.</p><p>Within the OTP, mandated
+    IMs can enter instances of suspected noncompliance by companies and/or by government
+    actors. These observations will need to be validated by the reading committee
+    before they can be published on the OTP website.</p><p>Nonmandated IMs can be
+    NGOs and civil society organizations that work on forest protection and community
+    rights but do not have an official agreement with the government of the country
+    to conduct missions to monitor the implementation of the FLEGT VPAs.</p><p>Observations
+    from nonmandated IMs can be uploaded by these organizations directly onto the
+    OTP website. These are then reviewed for validation by WRI staff and local partners.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;How
+    is the severity of observations/infractions calculated?</strong></p><p>To assist
+    OTP users in understanding the relative importance or severity of an observation
+    on illegal logging or a forest governance problem, WRI and its partners have developed
+    severity parameters for each observation category in collaboration with IMs.</p><p>Take
+    a look at the <a href="https://www.opentimberportal.org/help/how-otp-works?article=tutorial-article-1"
+    target="_blank" style="color: rgb(149, 79, 114);">Assessing severity of observations</a>
+    section, which will provide an in-depth explanation on how the severity parameters
+    used were defined.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;How often is the data
+    updated?</strong></p><p>Companies and third-party organizations are regularly
+    uploading new information on the OTP.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;What
+    are GLAD alerts?</strong></p><p>While the data from Global Forest Watch displays
+    tree cover loss over time, GLAD alerts provide information on tree clearings as
+    they happen. Alerts are updated weekly and allow for near-real time data on tree
+    cover loss. For more information on the GLAD alerts, go to <a href="https://glad.geog.umd.edu/"
+    target="_blank" style="color: rgb(149, 79, 114);">https://glad.geog.umd.edu/</a>.</p><p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;What
+    is the difference between the OTP and other tools that support due diligence (SPOTT,
+    Timber Trade Portal, NEPCON Sourcing Hub and BVRio)?</strong></p><p>In collaboration
+    with the organizations that have created these tools, we have developed <a href="https://www.opentimberportal.com/uploads/newsletter/26651-D-01_WRI_JointTools.pdf"
+    target="_blank" style="color: rgb(149, 79, 114);">a joint flyer</a> that provides
+    a brief description of each of these tools and their geographical focus. You can
+    also access these directly from our <a href="https://www.opentimberportal.org/help/legislation-and-regulations"
+    target="_blank" style="color: rgb(149, 79, 114);">Tools and Resources section</a>.</p><p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;Will
+    the OTP expand to other countries?</strong></p><p>The OTP will eventually be adaptable
+    to and deployed in any country that manages natural forest areas through long-term
+    forest management concessions. The OTP was launched in the Republic of Congo and
+    the Democratic Republic of Congo, and expanded to Gabon, Cameroon and the CAR.
+    It will expand to other major timber exporting countries as resources and opportunities
+    allow.</p><p>Observations of suspected infractions submitted by third-party organizations,
+    however, are not limited to any specific country and users will be able to access
+    data from around the globe.</p><p><strong>10.&nbsp;Can I download the data from
+    the OTP website?</strong></p><p>The OTP does not allow users to download company
+    profiles or observations from third-party organizations, however, all documents
+    published on the website can be individually accessed and downloaded.</p>'
+
+Faq_1_vi_translation:
+  faq_id: 1
+  locale: vi
+  question: Giới thiệu về OTP và dữ liệu trên trang web
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;Dữ liệu này đến từ đâu?</strong></p><p>OTP
+    tổng hợp thông tin về hoạt động lâm nghiệp từ ba nguồn: cơ quan chính phủ, công
+    ty khai thác gỗ và tổ chức bên thứ ba.</p><p>(1) <u style="color: rgb(0, 0, 0);">Các
+    cơ quan chính phủ</u><span style="color: rgb(0, 0, 0);"> ở các nước sản xuất cung
+    cấp thông tin chi tiết về nhượng quyền lâm nghiệp, chẳng hạn như ranh giới địa
+    lý, tên nhượng quyền lâm nghiệp, năm khai thác đầu tiên, cũng như tên của các
+    công ty khai thác gỗ đã đăng ký hoạt động trong lĩnh vực nhượng quyền lâm nghiệp
+    trong quốc gia của họ. Các thông tin này phần lớn được rút ra từ dữ liệu đã được
+    tổng hợp trong các Bản đồ rừng</span> (<a href="https://www.wri.org/our-work/project/forest-atlases"
+    target="_blank" style="color: rgb(149, 79, 114);">Forest Atlases</a>).</p><p>(2)
+    <u>Tất cả các công ty khai</u> thác gỗ đã đăng ký hoạt động tại các quốc gia sản
+    xuất đều được liệt kê trên trang web OTP. Sau đó, các công ty này có thể tự nguyện
+    đăng ký hồ sơ của họ và tải lên các tài liệu quan trọng để chứng minh sự tuân
+    thủ khuôn khổ pháp lý của quốc gia mà họ hoạt động.</p><p>(3) <u style="color:
+    rgb(0, 0, 0);">Các tổ chức bên thứ ba</u><span style="color: rgb(0, 0, 0);"> bao
+    gồm các cơ quan giám sát độc lập (IM), cả được ủy quyền hoặc không được ủy quyền,
+    cũng như các nhóm xã hội dân sự khác và các tổ chức phi chính phủ ở cấp địa phương
+    và cấp quốc tế. Các tổ chức này có thể tải lên những quan sát về sự không tuân
+    thủ đáng ngờ, miễn là có bằng chứng hỗ trợ. Trong một số trường hợp, các quan
+    sát được xác nhận bởi một ủy ban phê duyệt chính thức. Xem phần dưới đây về IM
+    để tìm hiểu thêm về cách họ hoạt động</span></p><p>(4) Dữ liệu từ Global Forest
+    Watch về độ che phủ của rừng và mất độ che phủ của cây theo thời gian cũng như
+    trên các khu bảo tồn. Dữ liệu này cũng bao gồm các cảnh báo hàng tuần về mất độ
+    che phủ của cây từ cơ quan Phân tích và Khám phá Đất đai Toàn cầu (<a href="https://blog.globalforestwatch.org/data-and-research/glad-alerts-now-available-for-entire-pantropical-region"
+    target="_blank" style="color: rgb(149, 79, 114);">Global Land Analysis and Discover,
+    GLAD)</a></p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;Dữ liệu trong OTP chính xác
+    ra sao?</strong></p><p>Đối với dữ liệu do các công ty gửi, OTP đã đưa ra quy trình
+    xác thực hai bước, trong đó tiến hành đánh giá ban đầu các nội dung gửi để đảm
+    bảo rằng nội dung dễ đọc, đủ chất lượng và được phân loại chính xác. Tiếp theo
+    là đánh giá thứ cấp để xác minh nội dung và chất lượng của thông tin được cung
+    cấp. Các tài liệu của công ty cũng được các chuyên gia bên ngoài đánh giá định
+    kỳ.</p><p>Đối với dữ liệu do các tổ chức bên thứ ba gửi, có hai cấp độ kiểm soát
+    chất lượng. Đầu tiên, nhân viên WRI và các đối tác địa phương từ các tổ chức IM
+    sẽ đánh giá việc hoàn thành nội dung gửi (các biểu mẫu phải bao gồm bằng chứng
+    và các tham chiếu pháp lý chính xác). Tiếp theo là đánh giá thứ cấp, trong đó
+    nội dung nộp được đánh giá, và các ý kiến giúp cải thiện chất lượng nội dung nộp
+    được gửi lại cho tổ chức IM.</p><p>WRI và các đối tác cố gắng cập nhật trang web
+    nhiều nhất có thể, tuy nhiên chúng tôi không thể đảm bảo rằng dữ liệu trên trang
+    web được cập nhật tại thời điểm truy cập.</p><p>WRI không chịu trách nhiệm pháp
+    lý về bất kỳ sự không chính xác nào với dữ liệu có sẵn trên Open Timber Portal.
+    Để tìm hiểu thêm, vui lòng xem <a href="https://www.opentimberportal.org/terms"
+    target="_blank">Điều khoản Dịch vụ của chúng tôi</a>.</p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;Xếp
+    hạng minh bạch được tính như thế nào?</strong></p><p>Để giúp cho dữ liệu trên
+    OTP dễ dàng truy cập và dễ hiểu đối với người dùng, các công ty được xếp hạng
+    dựa trên mức độ công bố tự nguyện của họ. Đối với mỗi nhà sản xuất, điểm minh
+    bạch được tính dựa trên phần trăm tài liệu chia sẻ trên OTP trong tổng số tài
+    liệu yêu cầu.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;“IM” hay cơ quan giám sát
+    độc lập là ai và nhiệm vụ của họ là gì?</strong></p><p><span style="color: rgb(0,
+    0, 0);">Cơ quan giám sát độc lập (independent monitor, IM) là một tổ chức phi
+    chính phủ phân tích và báo cáo về quản trị và quản lý rừng cũng như việc khai
+    thác và vận chuyển gỗ. Quy trình</span> <a href="http://www.euflegt.efi.int/vpa"
+    target="_blank" style="color: rgb(149, 79, 114);">FLEGT VPA</a> tạo ra vai trò
+    rõ ràng cho các IM trong giám sát việc thực hiện các hiệp định và xác minh sự
+    tuân thủ ở quốc gia sản xuất.</p><p>Thông thường, khi được ủy quyền, IM làm việc
+    theo thỏa thuận với chính phủ nước sở tại. Các phát hiện của IM ở nhiều quốc gia
+    được xác nhận bởi một ủy ban phê duyệt bao gồm các nhà tài trợ và các bên liên
+    quan khác, thường do cơ quan quản lý rừng quốc gia chủ trì.</p><p>Trong OTP, các
+    IM được ủy quyền có thể nhập những trường hợp mà các công ty và/hoặc cơ quan chính
+    phủ bị nghi ngờ là không tuân thủ. Những quan sát này sẽ cần được xác nhận bởi
+    ủy ban phê duyệt trước khi có thể được công bố trên trang web OTP.</p><p>Các IM
+    không được ủy quyền có thể là các tổ chức phi chính phủ và tổ chức xã hội dân
+    sự đang hoạt động về quyền bảo vệ rừng và quyền cộng đồng nhưng không có thỏa
+    thuận chính thức với chính phủ của quốc gia để tiến hành các sứ mệnh giám sát
+    việc thực hiện các VPA của FLEGT.</p><p>Những quan sát từ các IM không được ủy
+    quyền có thể được các tổ chức này tải trực tiếp lên trang web OTP. Sau đó, những
+    quan sát này sẽ được nhân viên WRI và các đối tác địa phương xem xét để xác nhận.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;Mức
+    độ nghiêm trọng của các quan sát/vi phạm được tính như thế nào?</strong></p><p>Để
+    hỗ trợ người dùng OTP hiểu được tầm quan trọng hoặc mức độ nghiêm trọng tương
+    đối của một quan sát về tình trạng khai thác gỗ bất hợp pháp hoặc vấn đề quản
+    lý rừng, WRI và các đối tác đã phát triển các thông&nbsp;số về mức độ nghiêm trọng
+    cho từng phân mục quan sát với sự phối hợp của các IM.</p><p>Hãy xem phần <a href="https://www.opentimberportal.org/help/how-otp-works?article=tutorial-article-1"
+    target="_blank">Đánh giá mức độ nghiêm trọng của các quan sát</a>, phần này sẽ
+    đưa ra giải thích sâu về cách xác định các thông số mức độ nghiêm trọng đã được
+    xác định.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;Dữ liệu được cập nhật thường
+    xuyên như thế nào?</strong></p><p>Các công ty và tổ chức bên thứ ba thường xuyên
+    tải thông tin mới lên OTP.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;Cảnh báo GLAD
+    là gì?</strong></p><p>Trong khi dữ liệu từ Global Forest Watch hiển thị tình trạng
+    mất độ che phủ của cây qua thời gian, các cảnh báo GLAD cung cấp thông tin về
+    tình trạng chặt phá cây đang xảy ra. Các cảnh báo được cập nhật hàng tuần và cho
+    phép cung cấp dữ liệu cận thời gian thực về tình trạng mất độ che phủ của cây.
+    Để biết thêm thông tin về các cảnh báo GLAD, hãy truy cập <a href="https://glad.geog.umd.edu/"
+    target="_blank" style="color: rgb(149, 79, 114);">https://glad.geog.umd.edu/</a>.</p><p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;Sự
+    khác nhau giữa OTP và các công cụ khác hỗ trợ thẩm định (SPOTT, Timber Trade Portal,
+    NEPCON Sourcing Hub và BVRio) là gì?</strong></p><p>Cùng với các tổ chức đã tạo
+    ra những công cụ này, chúng tôi đã phát triển <a href="https://www.opentimberportal.com/uploads/newsletter/26651-D-01_WRI_JointTools.pdf"
+    target="_blank">tờ rơi chung cung</a> cấp mô tả ngắn gọn về từng công cụ này và
+    trọng tâm địa lý của chúng. Quý vị cũng có thể truy cập trực tiếp vào những công
+    cụ này từ phần <a href="https://www.opentimberportal.org/help/legislation-and-regulations"
+    target="_blank">Công cụ và Tài nguyên của chúng tôi</a>.</p><p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;OTP
+    sẽ mở rộng sang các quốc gia khác?</strong></p><p>OTP cuối cùng sẽ có thể thích
+    nghi và được triển khai ở bất kỳ quốc gia nào quản lý các khu rừng tự nhiên thông
+    qua nhượng quyền quản lý rừng dài hạn. OTP đã được ra mắt tại Cộng hòa Congo và
+    Cộng hòa Dân chủ Congo, đồng thời mở rộng sang Gabon, Cameroon và CAR. Nó sẽ mở
+    rộng sang các nước xuất khẩu gỗ lớn khác khi nguồn lực và cơ hội cho phép.</p><p>Tuy
+    nhiên, việc quan sát những vi phạm đáng ngờ do các tổ chức bên thứ ba đệ trình
+    không giới hạn ở bất kỳ quốc gia cụ thể nào và người dùng sẽ có thể truy cập dữ
+    liệu từ khắp nơi trên thế giới.</p><p><strong>10.&nbsp;Tôi có thể tải xuống dữ
+    liệu từ trang web OTP không?</strong></p><p><span style="color: rgb(0, 0, 0);">OTP
+    không cho phép người dùng tải xuống hồ sơ công ty hoặc những quan sát từ các tổ
+    chức bên thứ ba, tuy nhiên, tất cả các tài liệu được xuất bản trên trang web đều
+    có thể được truy cập và tải xuống riêng lẻ.</span></p>'
+
+Faq_1_pt_translation:
+  faq_id: 1
+  locale: pt
+  question: About the OTP and the data on the site
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Where does the data come from?</strong></p><p>The
+    OTP compiles information about forest operations from three sources: government
+    agencies, logging companies and third-party organizations.</p><p>(1) <u>Government
+    agencies</u> in producer countries provide details on forest concessions, such
+    as geographic boundaries, forest concession names, initial year of exploitation,
+    as well as the names of the registered logging companies that operate in forest
+    concessions within their country. This is largely drawn from data compiled in
+    the <a href="https://www.wri.org/our-work/project/forest-atlases" target="_blank"
+    style="color: rgb(149, 79, 114);">Forest Atlases</a>.</p><p>(2) All of the <u>registered
+    logging companies</u> operating in producer countries are listed on the OTP website.
+    These companies are then able to voluntarily register their profile and upload
+    key documents to demonstrate compliance with the legal framework of the country
+    that they operate in.</p><p>(3) <u>Third-party organizations</u> include independent
+    monitors (IMs), both mandated or nonmandated, as well as other civil society groups
+    and nongovernment organizations at the local and international level. These organizations
+    are able to upload observations of suspected noncompliance, provided that they
+    are supported by evidence. In some cases, observations are validated by an official
+    reading committee. See our section below on IMs to find out more about how they
+    operate.</p><p>(4) Data from <u>Global Forest Watch</u> on forest cover and tree
+    cover loss over time as well as on protected areas. This data also includes weekly
+    <a href="https://blog.globalforestwatch.org/data-and-research/glad-alerts-now-available-for-entire-pantropical-region"
+    target="_blank" style="color: rgb(149, 79, 114);">Global Land Analysis and Discover
+    (GLAD)</a> tree cover loss alerts.</p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;How
+    accurate is the data in the OTP?</strong></p><p>For the data submitted by companies,
+    the OTP has put in place a two-step validation process, where an initial review
+    of the submissions is conducted to ensure that the content is legible, of sufficient
+    quality and categorized correctly. This is followed by a secondary review to verify
+    the content and the quality of the information provided. Company documents are
+    also reviewed by external experts periodically.</p><p>For the data submitted by
+    third-party organizations, there are two levels of quality control. First, WRI
+    staff and local partners from IM organizations review the completion of the submission
+    (forms must include evidence and correct legal references). This is followed by
+    a secondary review, where the content of the submission is reviewed, and comments
+    to improve the quality of the submission are sent back to the IM organization.</p><p><strong>WRI
+    and its partners strive to keep the website up to date as much as possible, however
+    we cannot guarantee that the data on the site is up to date at the time of access.</strong></p><p>WRI
+    is not liable for any inaccuracies with the data available on the Open Timber
+    Portal. To find out more, please take a look at our <a href="https://www.opentimberportal.org/terms"
+    target="_blank" style="color: rgb(149, 79, 114);">Terms of Service</a><span style="color:
+    blue;">.</span></p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;How is the transparency
+    ranking calculated?</strong></p><p>To make data on the OTP easily accessible and
+    understandable for users, companies are ranked on the basis of their level of
+    voluntary disclosure. For each producer, a transparency score is calculated based
+    on the percentage of documents shared on the OTP out of the total number of documents
+    requested.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;What’s an “IM” or independent
+    monitor and what do they do?</strong></p><p>An independent monitor (“IM”) is a
+    non-governmental organization that analyzes and reports on forest governance and
+    management, as well as the harvest and transport of timber. The <a href="http://www.euflegt.efi.int/vpa"
+    target="_blank" style="color: rgb(149, 79, 114);">FLEGT VPA process</a> creates
+    an explicit role for IMs to oversee implementation of the agreement and verify
+    compliance in the producer country.</p><p>Usually, when mandated, the IM works
+    under an agreement with the host country government. Its findings are in many
+    countries validated by a reading committee that includes donors and other stakeholders,
+    typically chaired by the national forest authority.</p><p>Within the OTP, mandated
+    IMs can enter instances of suspected noncompliance by companies and/or by government
+    actors. These observations will need to be validated by the reading committee
+    before they can be published on the OTP website.</p><p>Nonmandated IMs can be
+    NGOs and civil society organizations that work on forest protection and community
+    rights but do not have an official agreement with the government of the country
+    to conduct missions to monitor the implementation of the FLEGT VPAs.</p><p>Observations
+    from nonmandated IMs can be uploaded by these organizations directly onto the
+    OTP website. These are then reviewed for validation by WRI staff and local partners.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;How
+    is the severity of observations/infractions calculated?</strong></p><p>To assist
+    OTP users in understanding the relative importance or severity of an observation
+    on illegal logging or a forest governance problem, WRI and its partners have developed
+    severity parameters for each observation category in collaboration with IMs.</p><p>Take
+    a look at the <a href="https://www.opentimberportal.org/help/how-otp-works?article=tutorial-article-1"
+    target="_blank" style="color: rgb(149, 79, 114);">Assessing severity of observations</a>
+    section, which will provide an in-depth explanation on how the severity parameters
+    used were defined.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;How often is the data
+    updated?</strong></p><p>Companies and third-party organizations are regularly
+    uploading new information on the OTP.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;What
+    are GLAD alerts?</strong></p><p>While the data from Global Forest Watch displays
+    tree cover loss over time, GLAD alerts provide information on tree clearings as
+    they happen. Alerts are updated weekly and allow for near-real time data on tree
+    cover loss. For more information on the GLAD alerts, go to <a href="https://glad.geog.umd.edu/"
+    target="_blank" style="color: rgb(149, 79, 114);">https://glad.geog.umd.edu/</a>.</p><p><strong>8.&nbsp;&nbsp;&nbsp;&nbsp;What
+    is the difference between the OTP and other tools that support due diligence (SPOTT,
+    Timber Trade Portal, NEPCON Sourcing Hub and BVRio)?</strong></p><p>In collaboration
+    with the organizations that have created these tools, we have developed <a href="https://www.opentimberportal.com/uploads/newsletter/26651-D-01_WRI_JointTools.pdf"
+    target="_blank" style="color: rgb(149, 79, 114);">a joint flyer</a> that provides
+    a brief description of each of these tools and their geographical focus. You can
+    also access these directly from our <a href="https://www.opentimberportal.org/help/legislation-and-regulations"
+    target="_blank" style="color: rgb(149, 79, 114);">Tools and Resources section</a>.</p><p><strong>9.&nbsp;&nbsp;&nbsp;&nbsp;Will
+    the OTP expand to other countries?</strong></p><p>The OTP will eventually be adaptable
+    to and deployed in any country that manages natural forest areas through long-term
+    forest management concessions. The OTP was launched in the Republic of Congo and
+    the Democratic Republic of Congo, and expanded to Gabon, Cameroon and the CAR.
+    It will expand to other major timber exporting countries as resources and opportunities
+    allow.</p><p>Observations of suspected infractions submitted by third-party organizations,
+    however, are not limited to any specific country and users will be able to access
+    data from around the globe.</p><p><strong>10.&nbsp;Can I download the data from
+    the OTP website?</strong></p><p>The OTP does not allow users to download company
+    profiles or observations from third-party organizations, however, all documents
+    published on the website can be individually accessed and downloaded.</p>'
+
+Faq_3_fr_translation:
+  faq_id: 3
+  locale: fr
+  question: Questions fréquentes
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Qui puis-je contacter pour plus d’informations
+    ou des questions sur le site web ?</strong></p><p>Si vous avez des questions sur
+    le portail, veuillez nous contacter à <a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a></p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;Où
+    puis-je en savoir plus sur l’utilisation de l’OTP&nbsp;?</strong></p><p>Nous avons
+    créé une vidéo d’introduction qui guide les utilisateurs à travers l’ensemble
+    de l’OTP et qui explique toutes les différentes fonctionnalités. Vous pouvez la
+    regarder ici&nbsp;:</p><iframe class="ql-video" frameborder="0" allowfullscreen="true"
+    src="https://www.youtube.com/embed/9WRUMYMISes?showinfo=0"></iframe><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/9WRUMYMISes?t=156" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Aller à 2:36</a> pour une introduction sur les
+    pages de classement de transparence</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/9WRUMYMISes?t=303" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Aller à 5:03</a> pour en savoir plus sur le
+    fonctionnement des profils des exploitants</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/9WRUMYMISes?t=689" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Aller à 11:29</a> pour un aperçu des observations
+    soumises par les tierces parties</p><p>&nbsp;<strong>3.&nbsp;&nbsp;&nbsp;&nbsp;Ai-je
+    besoin d’un compte pour utiliser l’OTP&nbsp;?</strong></p><p>L’OTP est gratuit
+    et les utilisateurs n’ont pas besoin de créer un compte pour accéder au contenu.
+    Seuls les exploitants et les tierces parties qui souhaitent fournir des données
+    devront se créer un compte.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;Comment puis-je
+    m’inscrire et accéder à mon compte sur le site de l’OTP en tant qu’exploitant
+    ?</strong></p><p>Si vous êtes un exploitant qui opère dans un pays couvert par
+    l’OTP et que votre entreprise n’est pas actuellement répertoriée sur le site web,
+    vous devez vous inscrire en tant qu’exploitant sur le site. Dirigez-vous vers
+    la page «&nbsp;<a href="https://www.opentimberportal.org/operators/new" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Nouvel exploitant&nbsp;</a>»&nbsp;et
+    suivez les instructions à l’écran pour vous enregistrer.</p><p>Une fois que l’entreprise
+    est répertoriée sur le site de l’OTP, vous pourrez vous créer un compte en vous
+    rendant sur la <a href="https://www.opentimberportal.org/signup" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">page d’inscription</a>.</p><p>Pour
+    plus d’informations sur la création d’un compte, l’ajout de documents ou toute
+    autre demande associée, veuillez consulter notre <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">tutoriel
+    pour les exploitants</a>.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;Je suis un exploitant.
+    Comment saurais-je quels documents mettre en ligne&nbsp;?</strong></p><p>Pour
+    chaque pays dans lequel un exploitant opère, il verra une liste de documents spécifiques
+    au pays qui peuvent être mis en ligne sur l’OTP. De plus, les exploitants devront
+    indiquer la date de début et la date d’expiration prévue de chaque document.</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;Je
+    fais partie d’une organisation de la société civile/d’une ONG et je souhaite mettre
+    en ligne des informations sur le site de l’OTP. Comment dois-je procéder&nbsp;?</strong></p><p>Toute
+    tierce partie qui souhaite contribuer à l’OTP devra soumettre une demande d’inscription
+    à travers la plateforme. Dirigez-vous vers la <a href="https://www.opentimberportal.org/observations-tool/?lang=fr"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">page
+    de connexion</a>, cliquez sur «&nbsp;créer un compte&nbsp;» et complétez le formulaire.</p><p>Une
+    fois que la demande est approuvée par l’équipe de l’OTP, vous pourrez vous connecter
+    sur la même page web avec le nom d’utilisateur et le mot de passe que vous avez
+    sélectionnés dans le formulaire d’inscription.</p><p>Pour plus d’informations
+    sur la création d’un compte, l’ajout d’observations ou toute autre demande associée,
+    veuillez consulter notre <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">tutoriel
+    pour les observateurs indépendants</a>.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;Je
+    suis un exploitant et j’ai un problème avec le contenu qui apparaît sur mon profil.</strong></p><p>Tout
+    le contenu répertorié sur le profil de votre entreprise est vérifié par un membre
+    de l’équipe de l’OTP. Cependant, si vous rencontrez des problèmes supplémentaires
+    avec le contenu qui apparaît sur votre profil, veuillez nous contacter à&nbsp;:
+    <a href="mailto:opentimberportal@wri.org" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
+
+Faq_3_zh-CN_translation:
+  faq_id: 3
+  locale: zh-CN
+  question: 问题解答
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;有关网站的更多信息或问题，我可以联系谁？</strong></p><p>如果您对公开木材信息平台中的信息有任何问题，请发送电子邮件至
+    <a href="mailto:opentimberportal@wri.org" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a> 联系我们</p><p><strong>2.&nbsp;&nbsp;&nbsp;在哪里可以找到有关如何使用
+    OTP 的更多信息？</strong></p><p>我们制作了介绍视频，带您浏览整个 OTP 网站，并解释所有不同的功能。您可以在此观看：</p><iframe
+    class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p><ul><li><a
+    href="https://youtu.be/GORbRTyoTHM?t=172" rel="noopener noreferrer" target="_blank">跳至</a><a
+    href="https://youtu.be/GORbRTyoTHM?t=172" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);"> 2:52</a> for an introduction on the transparency
+    ranking pages</li><li><a href="https://youtu.be/GORbRTyoTHM?t=322" rel="noopener
+    noreferrer" target="_blank">跳至</a><a href="https://youtu.be/GORbRTyoTHM?t=322"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"> 5:22</a>
+    to learn more about how producer profiles work</li><li><a href="https://youtu.be/GORbRTyoTHM?t=731"
+    rel="noopener noreferrer" target="_blank">跳至</a><a href="https://youtu.be/GORbRTyoTHM?t=731"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"> 12:11</a>
+    for a walk-through of the observations uploaded by third-party organizations</li></ul><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;使用
+    OTP 需要账户吗？</strong></p><p>OTP 可免费使用，用户无需创建账户即可访问内容。只有希望提供数据的生产商和第三方组织才需要创建账户。</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;如何注册成为
+    OTP 网站的生产商并访问我的账户？</strong></p><p>If you are producer operating in a country covered
+    in the OTP and your company is not currently listed on the website, you will need
+    to register as a producer on the site. Go to our <a href="https://www.opentimberportal.org/operators/new"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">New
+    Producer page</a> and follow the instructions to register as a producer.&nbsp;</p><p>Once
+    the company is listed on the OTP website, you will be able to create an account
+    by going to the <a href="https://www.opentimberportal.org/signup" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Sign up page</a>.</p><p>For
+    more detailed information on how to set up an account, upload documents and any
+    associated inquiries, please take a look at our <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Tutorial
+    factsheet for producers</a>.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;I am a producer.
+    How will I know which documents I will need to upload?</strong></p><p>For each
+    country that the producer operates in, you will see a list of country-specific
+    documents that can be uploaded onto the OTP website. In addition, producers will
+    need to indicate the start date and expected expiration date of the document.&nbsp;</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;I’m
+    a third-party organization that wants to upload information on the OTP website.
+    How do I proceed?</strong></p><p>Any third-party organization that wants to contribute
+    to the OTP will need to submit a registration request through the platform. Go
+    to our <a href="https://www.opentimberportal.org/observations-tool/" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Login page</a>,
+    select ‘Register’ and complete the form.</p><p>Once the request has been approved
+    by the OTP team, you will be able to log in on the same webpage with the username
+    and password you selected in the registration form.</p><p>For more detailed information
+    on how to set up an account, creating observations and any associated inquiries,
+    please take a look at our <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Tutorial
+    factsheet for independent monitors</a>.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;I
+    am producer and I have an issue with the content listed on my profile.</strong></p><p>All
+    the content listed on your company will have been verified by OTP staff, however,
+    if you have any additional issues with the content that is appearing on your company
+    profile, please contact us at <a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
+
+Faq_3_vi_translation:
+  faq_id: 3
+  locale: vi
+  question: Xử lý sự cố
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Tôi có thể liên hệ với ai để biết
+    thêm thông tin hoặc nếu có thắc mắc khác về trang web?</strong></p><p><span style="color:
+    rgb(0, 0, 0);">Nếu quý vị có bất kỳ thắc mắc nào về thông tin trong Open Timber
+    Portal, vui lòng liên hệ với chúng tôi theo địa chỉ</span> <a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a></p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;Tôi
+    có thể tìm hiểu thêm về cách sử dụng OTP ở đâu?</strong></p><p>Chúng tôi đã tạo
+    một video giới thiệu hướng dẫn quý vị về toàn bộ trang web OTP và giải thích tất
+    cả các chức năng khác nhau. Quý vị có thể xem ở đây:</p><iframe class="ql-video"
+    frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=172" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(0, 0, 0);">Chuyển đến 2:52</a><span style="color: rgb(0, 0,
+    0);"> để xem phần giới thiệu về các trang xếp hạng minh bạch</span></p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=322" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(0, 0, 0);">Chuyển đến 5:22</a><span style="color: rgb(0, 0,
+    0);"> để tìm hiểu thêm về cách hoạt động của hồ sơ nhà sản xuất</span></p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=731" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(0, 0, 0);">Chuyển đến 12:11</a><span style="color: rgb(0, 0,
+    0);"> để xem qua những quan sát do các tổ chức bên thứ ba tải lên</span></p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;Tôi
+    có cần tài khoản để sử dụng OTP không?</strong></p><p>OTP hoàn toàn miễn phí và
+    người dùng không cần tạo tài khoản để truy cập nội dung. Chỉ các nhà sản xuất
+    và tổ chức bên thứ ba muốn đóng góp dữ liệu mới cần tạo tài khoản.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;Tôi
+    có thể đăng ký làm nhà sản xuất trên trang web OTP và truy cập tài khoản của tôi
+    như thế nào?</strong></p><p>Nếu quý vị là nhà sản xuất hoạt động tại một quốc
+    gia có trong OTP và công ty của quý vị hiện không được liệt kê trên trang web,
+    quý vị sẽ cần đăng ký làm nhà sản xuất trên trang web. Vào <a href="https://www.opentimberportal.org/operators/new"
+    rel="noopener noreferrer" target="_blank">trang Nhà sản xuất</a> mới của chúng
+    tôi và làm theo hướng dẫn để đăng ký làm nhà sản xuất.</p><p>Khi công ty được
+    liệt kê trên trang web OTP, quý vị sẽ có thể tạo tài khoản bằng cách vào trang
+    <a href="https://www.opentimberportal.org/signup" rel="noopener noreferrer" target="_blank">Đăng
+    ký</a>.</p><p>Để biết thêm thông tin chi tiết về cách thiết lập tài khoản, tải
+    lên các tài liệu và mọi câu hỏi liên quan, vui lòng xem bảng thông tin <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank">Hướng dẫn của chúng tôi dành cho nhà
+    sản xuất.</a></p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;Tôi là một nhà sản xuất.
+    Làm thế nào để tôi biết tài liệu nào cần phải tải lên?</strong></p><p>Đối với
+    mỗi quốc gia nơi nhà sản xuất hoạt động, quý vị sẽ thấy danh mục các tài liệu
+    dành riêng cho quốc gia có thể được tải lên trang web OTP. Ngoài ra, các nhà sản
+    xuất sẽ cần nêu rõ ngày bắt đầu và ngày hết hạn dự kiến của tài liệu.</p><p><strong>6.&nbsp;&nbsp;&nbsp;Tôi
+    là tổ chức bên thứ ba muốn tải thông tin lên trang web OTP. Tôi có thể làm như
+    thế nào?</strong></p><p>Bất kỳ tổ chức bên thứ ba nào muốn đóng góp vào OTP sẽ
+    cần phải gửi yêu cầu đăng ký thông qua nền tảng. Vào trang <a href="https://www.opentimberportal.org/observations-tool/"
+    rel="noopener noreferrer" target="_blank">Đăng nhập của chúng tôi</a>, chọn ''Đăng
+    ký'' và hoàn thành biểu mẫu.</p><p>Khi yêu cầu đã được nhóm OTP chấp thuận, quý
+    vị sẽ có thể đăng nhập vào trên cùng một trang web bằng tên người dùng và mật
+    khẩu mà quý vị đã chọn trong biểu mẫu đăng ký.</p><p>Để biết thêm thông tin chi
+    tiết về cách thiết lập tài khoản, tạo các quan sát và mọi câu hỏi liên quan, vui
+    lòng xem bảng thông tin <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank">Hướng dẫn của chúng tôi dành cho cơ
+    quan giám sát độc lập</a>.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;Tôi là nhà
+    sản xuất và tôi gặp lỗi với nội dung liệt kê trên hồ sơ của mình.</strong></p><p><span
+    style="color: rgb(0, 0, 0);">Tất cả nội dung liệt kê trên hồ sơ công ty của quý
+    vị sẽ được nhân viên OTP xác minh, tuy nhiên, nếu quý vị có bất kỳ vấn đề nào
+    khác với nội dung xuất hiện trên hồ sơ công ty của quý vị, vui lòng liên hệ với
+    chúng tôi theo địa chỉ</span> <a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
+
+Faq_3_ja_translation:
+  faq_id: 3
+  locale: ja
+  question: 寄せられる質問
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;ウェブサイトに関する詳細や質問はどこに問い合わせればよいですか？</strong></p><p>オープン・ティンバー・ポータル（Open
+    Timber Portal）の情報に関してご不明な点がございましたら、<a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>までお問い合わせください。</p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;OTPの使用方法について知りたいのですが、どこに問い合わせればよいですか？</strong></p><p>OTPのウェブサイト全体を紹介し、さまざまな機能を説明する紹介ビデオが用意されています。こちらからご覧いただけます。</p><iframe
+    class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;透明性に関するランキングページの紹介は<a
+    href="https://youtu.be/GORbRTyoTHM?t=172" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">2:52から</a>ご覧ください</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;生産業者のプロフィールの仕組みについては、<a
+    href="https://youtu.be/GORbRTyoTHM?t=322" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">5:22から</a>ご覧ください</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;第三者機関がアップロードした観察結果の詳細については、<a
+    href="https://youtu.be/GORbRTyoTHM?t=731" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">12:11から</a>ご覧ください</p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;OTPを使うにはアカウントが必要ですか？</strong></p><p>OTPは無料で利用でき、ユーザーはコンテンツを利用するためにアカウントを作成する必要はありません。アカウント作成が必要なのは、データの提供を希望する生産業者と第三者機関のみです。</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;OTPサイトに生産業者として登録し、自分のアカウントにアクセスするにはどうすればよいのでしょうか？</strong></p><p>OTPの対象国で活動する生産業者で、現在ウェブサイトに掲載されていない会社は、ウェブサイト上で生産業者として登録する必要があります。<a
+    href="https://www.opentimberportal.org/operators/new" rel="noopener noreferrer"
+    target="_blank" style="color: rgb(149, 79, 114);">生産業者新規登録</a>のページにアクセスし、手順に従って生産業者登録を行ってください。</p><p>OTPサイトに掲載されると、<a
+    href="https://www.opentimberportal.org/signup" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">登録ページ</a>でアカウントを作成することができます。</p><p>アカウントの設定方法、書類のアップロード方法、関連するお問い合わせなど、より詳細な情報については、<a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">生産業者向けチュートリアル・ファクトシート</a>をご覧ください。</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;私は生産業者です。どの書類をアップロードする必要があるかをどのように確認できますか？</strong></p><p>生産業者が事業を展開している国ごとに、OTPサイトにアップロードできる国別文書のリストが表示されます。さらに、生産業者は文書の有効開始日と予定される有効期限を明記する必要があります。</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;OTPサイトに情報をアップロードしたいと考えている第三者機関です。どのように行えますか？</strong></p><p>OTPへの参加を希望する第三者機関は、同プラットフォームを通じて登録申請を行う必要があります。<a
+    href="https://www.opentimberportal.org/observations-tool/" rel="noopener noreferrer"
+    target="_blank" style="color: rgb(149, 79, 114);">ログインページ</a>から「登録」を選択し、フォームに必要事項を入力してください。</p><p>OTPチームによるリクエストが承認されると、登録フォームで選択したユーザー名とパスワードで、同じウェブサイトにログインできるようになります。</p><p>アカウントの設定方法、観察結果の作成、関連する問い合わせなど、より詳細な情報については、<a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">独立したモニター向けチュートリアル・ファクトシート</a>をご覧ください。</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;私は生産業者ですが、プロフィールに記載されている内容に問題があります。</strong></p><p>お客様の会社概要に記載されている内容は、すべてOTPスタッフによって確認されていますが、会社概要に記載されている内容に関して別途問題がある場合は、<a
+    href="mailto:opentimberportal@wri.org" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>までご連絡ください。</p>'
+
+Faq_3_pt_translation:
+  faq_id: 3
+  locale: pt
+  question: Resolução de problemas
+  answer: '<p><strong>1.&nbsp;Com quem posso entrar em contato para obter mais informações
+    ou tirar dúvidas sobre o site?</strong></p><p>Se tiver alguma dúvida sobre as
+    informações no Open Timber Portal, por favoir, entre em contato conosco através
+    do e-mail: <a href="mailto:opentimberportal@wri.org" rel="noopener noreferrer"
+    target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a></p><p><strong>2.&nbsp;Onde
+    é possível encontrar mais informações sobre como utilizar o OTP?</strong></p><p>Criamos
+    um vídeo introdutório para orientá-lo por todo o website da OTP e explicar todas
+    as suas diferentes funcionalidades. Veja aqui:</p><iframe class="ql-video" frameborder="0"
+    allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=172" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Saltar para 2:52</a> para uma introdução nas
+    páginas de classificação de transparência</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=322" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Saltar para 5:22</a> para saber mais sobre como
+    funcionam os perfis de produtor</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=731" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Saltar para 12:11</a> para uma visita guiada
+    às observações disponibilizadas on-line por organizações terceiras</p><p><strong>3.&nbsp;Preciso
+    de uma conta para utilizar o OTP?</strong></p><p>O OTP é gratuito e os usuários
+    não precisam de uma conta para acessar o seu conteúdo. Apenas produtores e organizações
+    terceiras que desejam contribuir com dados precisarão criar uma conta.</p><p><strong>4.&nbsp;Como
+    me registro como um produtor no website do OTP e acesso a minha conta?</strong></p><p><span
+    style="color: rgb(49, 53, 55);">Se você for um produtor operando em um país abrangido
+    pelo OTP e sua empresa não estiver listada no website, você precisará se registrar
+    como produtor no site. Vá para a nossa</span>&nbsp;<a href="https://www.opentimberportal.org/operators/new"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">página
+    Novo Produtor</a> <span style="color: rgb(49, 53, 55);">e siga as instruções para
+    se registrar enquanto produtor.</span></p><p><span style="color: rgb(49, 53, 55);">Logo
+    que a empresa estiver listada no website da OTP, você poderá criar uma conta indo
+    para a&nbsp;</span><a href="https://www.opentimberportal.org/signup" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">página de Registro</a>.</p><p><span
+    style="color: rgb(49, 53, 55);">Para obter informações mais detalhadas sobre como
+    criar uma conta, faça o upload de documentos e todas as consultas associadas,
+    por favor, consulte nossa</span>&nbsp;<a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Planilha
+    do tutorial para produtores</a>.</p><p><strong>5.&nbsp;Sou produtor. Como saberei
+    quais documentos precisarei fazer upload?</strong></p><p><span style="color: rgb(49,
+    53, 55);">Para cada país em que o produtor opera, irá ver uma lista de documentos
+    específicos de cada país cujo upload pode ser feito no site da OTP. Além disso,
+    os produtores precisarão indicar a data de início e a data prevista de vencimento
+    do documento.</span></p><p><strong>6.&nbsp;Sou uma organização terceira que deseja
+    fazer upload de informações no site da OTP. Como devo proceder?</strong></p><p><span
+    style="color: rgb(49, 53, 55);">Qualquer organização terceira que queira contribuir
+    para o OTP precisará enviar uma solicitação de registro através da plataforma.
+    Vá para a nossa&nbsp;</span><a href="https://www.opentimberportal.org/observations-tool/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Página
+    de login</a>, selecione ''Registrar'' e preencha o formulário.</p><p>A<span style="color:
+    rgb(49, 53, 55);">selecionar ''Registrar'' e preenchectares o formulário.</span></p><p><span
+    style="color: rgb(49, 53, 55);">Assim que a solicitação for aprovada pela equipe
+    do OTP, você poderá fazer login na mesma página web com o nome de usuário e a
+    senhectares &nbsp;que selecionou no formulário de registro. </span></p><p><span
+    style="color: rgb(49, 53, 55);">Para obter informações mais detalhectares das
+    sobre como criar a sua conta, criando observações e quaisquer perguntas associadas,
+    por favor, confira nossa&nbsp;</span><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Planilha
+    do tutorial para monitores independentes</a>.</p><p><strong>7.&nbsp;Sou produtor
+    e tenho um problema com o conteúdo listado em meu perfil.</strong></p><p><span
+    style="color: rgb(49, 53, 55);">Todo o conteúdo listado em sua empresa terá sido
+    verificado pela equipe do OTP, no entanto, se tiver algum problema adicional com
+    o conteúdo que aparece sobre a sua empresa, por favor, entre em contato conosco
+    pelo e-mai</span>l&nbsp;<a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
+
+Faq_3_en_translation:
+  faq_id: 3
+  locale: en
+  question: Troubleshooting
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;Who can I contact for more information
+    or questions about the website?</strong></p><p>If you have any questions about
+    the information in the Open Timber Portal, please contact us at <a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a></p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;Where
+    can I find out more about how to use the OTP?</strong></p><p>We have created an
+    introduction video that walks you through the entire OTP website and explains
+    all of the different functionalities. You can watch it here:</p><iframe class="ql-video"
+    frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=172" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Skip to 2:52</a> for an introduction on the
+    transparency ranking pages</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://youtu.be/GORbRTyoTHM?t=322"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Skip
+    to 5:22</a> to learn more about how producer profiles work</p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+    href="https://youtu.be/GORbRTyoTHM?t=731" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Skip to 12:11</a> for a walk-through of the
+    observations uploaded by third-party organizations</p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;Do
+    I need an account to use to OTP?</strong></p><p>The OTP is free to use, and users
+    do not need to create an account in order to access the content. Only producers
+    and third-party organizations who wish to contribute data will need to create
+    an account.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;How do I register as a producer
+    in the OTP website and access my account?</strong></p><p>If you are producer operating
+    in a country covered in the OTP and your company is not currently listed on the
+    website, you will need to register as a producer on the site. Go to our <a href="https://www.opentimberportal.org/operators/new"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">New
+    Producer page</a> and follow the instructions to register as a producer.&nbsp;</p><p>Once
+    the company is listed on the OTP website, you will be able to create an account
+    by going to the <a href="https://www.opentimberportal.org/signup" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Sign up page</a>.</p><p>For
+    more detailed information on how to set up an account, upload documents and any
+    associated inquiries, please take a look at our <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Tutorial
+    factsheet for producers</a>.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;I am a producer.
+    How will I know which documents I will need to upload?</strong></p><p>For each
+    country that the producer operates in, you will see a list of country-specific
+    documents that can be uploaded onto the OTP website. In addition, producers will
+    need to indicate the start date and expected expiration date of the document.&nbsp;</p><p><strong>6.&nbsp;&nbsp;&nbsp;&nbsp;I’m
+    a third-party organization that wants to upload information on the OTP website.
+    How do I proceed?</strong></p><p>Any third-party organization that wants to contribute
+    to the OTP will need to submit a registration request through the platform. Go
+    to our <a href="https://www.opentimberportal.org/observations-tool/" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Login page</a>,
+    select ‘Register’ and complete the form.</p><p>Once the request has been approved
+    by the OTP team, you will be able to log in on the same webpage with the username
+    and password you selected in the registration form.</p><p>For more detailed information
+    on how to set up an account, creating observations and any associated inquiries,
+    please take a look at our <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Tutorial
+    factsheet for independent monitors</a>.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;I
+    am producer and I have an issue with the content listed on my profile.</strong></p><p>All
+    the content listed on your company will have been verified by OTP staff, however,
+    if you have any additional issues with the content that is appearing on your company
+    profile, please contact us at <a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>.</p>'
+
+Faq_3_ko_translation:
+  faq_id: 3
+  locale: ko
+  question: 문제 해결
+  answer: '<p><strong>1.&nbsp;&nbsp;&nbsp;&nbsp;웹사이트에 대한 자세한 정보나 질문은 누구에게 문의해야 합니까?</strong></p><p>Open
+    Timber Portal의 정보에 대해 질문이 있는 경우 <a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a><span
+    style="color: rgb(149, 79, 114);">로 문의하십시오.</span></p><p><strong>2.&nbsp;&nbsp;&nbsp;&nbsp;OTP
+    사용 방법에 대한 자세한 내용은 어디에서 확인할 수 있습니까?</strong></p><p>전체 OTP 웹사이트를 안내하고 다양한 기능을 모두
+    설명하는 소개 동영상을 제작했습니다. 여기에서 볼 수 있습니다.</p><iframe class="ql-video" frameborder="0"
+    allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p><p>-
+    <a href="https://youtu.be/GORbRTyoTHM?t=172" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">2:52로 넘어가서</a> 투명성 순위 페이지에 있는 소개를 보십시오.</p><p>-
+    <a href="https://youtu.be/GORbRTyoTHM?t=322" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">5:22로 넘어가서</a> 생산자 프로필이 어떻게 작동하는지 자세히 알아보십시오.</p><p>-
+    <a href="https://youtu.be/GORbRTyoTHM?t=731" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">12:11로 넘어가서</a> 제3자 조직이 업로드한 관찰 내용을 살펴보십시오.&nbsp;</p><p><strong>3.&nbsp;&nbsp;&nbsp;&nbsp;OTP에
+    사용할 계정이 필요합니까?</strong></p><p>OTP는 무료로 사용할 수 있으며, 사용자는 콘텐츠에 액세스하기 위해 계정을 만들 필요가
+    없습니다. 데이터를 제공하고자 하는 생산자와 제3자 조직만 계정을 만들어야 합니다.</p><p><strong>4.&nbsp;&nbsp;&nbsp;&nbsp;OTP
+    웹사이트에서 생산자를 등록하고 내 계정에 액세스하려면 어떻게 해야 합니까?</strong></p><p>귀하가 OTP에서 다루는 국가에서 운영
+    중인 생산자이고 귀하의 회사가 현재 웹사이트에 등재되어 있지 않은 경우, 귀하는 사이트에서 생산자로 등록해야 합니다. <a href="https://www.opentimberportal.org/operators/new"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">신규
+    생산자 페이지</a>로 이동하여 지시에 따라 생산자로 등록하십시오.&nbsp;</p><p>회사가 OTP 웹사이트에 등재되면 <a href="https://www.opentimberportal.org/signup"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">가입
+    페이지</a>로 이동하여 계정을 만들 수 있습니다.</p><p>계정 설정, 문서 업로드 및 관련 문의 방법에 대한 자세한 내용은 <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">생산자용
+    튜토리얼 팩트시트</a>를 참조하십시오.</p><p><strong>5.&nbsp;&nbsp;&nbsp;&nbsp;저는 생산자입니다. 어떤 문서를
+    업로드해야 하는지 어떻게 알 수 있습니까?</strong></p><p>생산자가 사업을 운영하는 각 국가에 대해 OTP 웹사이트에 업로드할 수
+    있는 국가별 문서 목록을 볼 수 있습니다. 또한, 생산자는 문서의 시작일과 예상 만료일을 표시해야 합니다.&nbsp;</p><p><strong>6.&nbsp;&nbsp;&nbsp;저는
+    OTP 웹사이트에 정보를 업로드하고자 하는 제3자 조직입니다. 어떻게 진행해야 합니까?</strong></p><p>OTP에 기고하고자 하는
+    제3자 조직은 플랫폼을 통해 등록 요청을 제출해야 합니다. <a href="https://www.opentimberportal.org/observations-tool/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">로그인
+    페이지</a>로 이동하여 ‘등록’을 선택하고 양식을 작성합니다.</p><p>OTP 팀이 요청을 승인하면 등록 양식에서 선택한 사용자 이름과
+    암호로 동일한 웹 페이지에 로그인할 수 있습니다.</p><p>계정 설정, 관찰 내용 생성 및 관련 문의 방법에 대한 자세한 내용은 <a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">독립
+    모니터 요원용 튜토리얼 팩트시트</a>를 참조하십시오.</p><p><strong>7.&nbsp;&nbsp;&nbsp;&nbsp;저는 생산자인데
+    제 프로필에 나열된 콘텐츠에 문제가 있습니다.</strong></p><p>귀사에 나열된 모든 콘텐츠는 OTP 직원이 확인하지만, 귀사의 프로필에
+    표시되는 콘텐츠에 추가적인 문제가 있는 경우 <a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">opentimberportal@wri.org</a>로
+    당사에 문의하십시오.</p>'

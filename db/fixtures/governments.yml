@@ -1,0 +1,410 @@
+
+Government_1:
+  id: 1
+  country_id: 83
+  is_active: true
+
+Government_2:
+  id: 2
+  country_id: 222
+  is_active: true
+
+Government_3:
+  id: 3
+  country_id: 222
+  is_active: true
+
+Government_4:
+  id: 4
+  country_id: 222
+  is_active: true
+
+Government_5:
+  id: 5
+  country_id: 222
+  is_active: true
+
+Government_6:
+  id: 6
+  country_id: 222
+  is_active: true
+
+Government_7:
+  id: 7
+  country_id: 45
+  is_active: true
+
+Government_8:
+  id: 8
+  country_id: 45
+  is_active: true
+
+Government_9:
+  id: 9
+  country_id: 45
+  is_active: true
+
+Government_10:
+  id: 10
+  country_id: 45
+  is_active: true
+
+Government_11:
+  id: 11
+  country_id: 45
+  is_active: true
+
+Government_12:
+  id: 12
+  country_id: 188
+  is_active: true
+
+Government_13:
+  id: 13
+  country_id: 47
+  is_active: true
+
+Government_14:
+  id: 14
+  country_id: 47
+  is_active: true
+
+Government_15:
+  id: 15
+  country_id: 47
+  is_active: true
+
+Government_16:
+  id: 16
+  country_id: 47
+  is_active: true
+
+Government_17:
+  id: 17
+  country_id: 47
+  is_active: true
+
+Government_18:
+  id: 18
+  country_id: 47
+  is_active: true
+
+Government_19:
+  id: 19
+  country_id: 47
+  is_active: true
+
+Government_20:
+  id: 20
+  country_id: 47
+  is_active: true
+
+Government_21:
+  id: 21
+  country_id: 47
+  is_active: true
+
+Government_22:
+  id: 22
+  country_id: 47
+  is_active: true
+
+Government_23:
+  id: 23
+  country_id: 47
+  is_active: true
+
+Government_24:
+  id: 24
+  country_id: 47
+  is_active: true
+
+Government_25:
+  id: 25
+  country_id: 47
+  is_active: true
+
+Government_26:
+  id: 26
+  country_id: 47
+  is_active: true
+
+Government_27:
+  id: 27
+  country_id: 47
+  is_active: true
+
+Government_28:
+  id: 28
+  country_id: 47
+  is_active: true
+
+Government_29:
+  id: 29
+  country_id: 47
+  is_active: true
+
+Government_30:
+  id: 30
+  country_id: 47
+  is_active: true
+
+Government_31:
+  id: 31
+  country_id: 47
+  is_active: true
+
+Government_32:
+  id: 32
+  country_id: 47
+  is_active: true
+
+Government_33:
+  id: 33
+  country_id: 47
+  is_active: true
+
+Government_34:
+  id: 34
+  country_id: 47
+  is_active: true
+
+Government_35:
+  id: 35
+  country_id: 47
+  is_active: true
+
+Government_36:
+  id: 36
+  country_id: 7
+  is_active: true
+
+Government_37:
+  id: 37
+  country_id: 7
+  is_active: true
+
+Government_38:
+  id: 38
+  country_id: 7
+  is_active: true
+
+Government_39:
+  id: 39
+  country_id: 7
+  is_active: true
+
+Government_40:
+  id: 40
+  country_id: 7
+  is_active: true
+
+Government_41:
+  id: 41
+  country_id: 7
+  is_active: true
+
+Government_42:
+  id: 42
+  country_id: 7
+  is_active: true
+
+Government_43:
+  id: 43
+  country_id: 7
+  is_active: true
+
+Government_44:
+  id: 44
+  country_id: 7
+  is_active: true
+
+Government_45:
+  id: 45
+  country_id: 7
+  is_active: true
+
+Government_46:
+  id: 46
+  country_id: 7
+  is_active: true
+
+Government_47:
+  id: 47
+  country_id: 7
+  is_active: true
+
+Government_48:
+  id: 48
+  country_id: 7
+  is_active: true
+
+Government_49:
+  id: 49
+  country_id: 7
+  is_active: true
+
+Government_50:
+  id: 50
+  country_id: 7
+  is_active: true
+
+Government_51:
+  id: 51
+  country_id: 7
+  is_active: true
+
+Government_52:
+  id: 52
+  country_id: 7
+  is_active: true
+
+Government_53:
+  id: 53
+  country_id: 7
+  is_active: true
+
+Government_54:
+  id: 54
+  country_id: 53
+  is_active: true
+
+Government_55:
+  id: 55
+  country_id: 30
+  is_active: true
+
+Government_56:
+  id: 56
+  country_id: 30
+  is_active: true
+
+Government_57:
+  id: 57
+  country_id: 30
+  is_active: true
+
+Government_58:
+  id: 58
+  country_id: 30
+  is_active: true
+
+Government_59:
+  id: 59
+  country_id: 30
+  is_active: true
+
+Government_60:
+  id: 60
+  country_id: 86
+  is_active: true
+
+Government_61:
+  id: 61
+  country_id: 86
+  is_active: true
+
+Government_62:
+  id: 62
+  country_id: 173
+  is_active: true
+
+Government_63:
+  id: 63
+  country_id: 228
+  is_active: true
+
+Government_66:
+  id: 66
+  country_id: 76
+  is_active: true
+
+Government_67:
+  id: 67
+  country_id: 76
+  is_active: true
+
+Government_68:
+  id: 68
+  country_id: 76
+  is_active: true
+
+Government_69:
+  id: 69
+  country_id: 76
+  is_active: true
+
+Government_70:
+  id: 70
+  country_id: 76
+  is_active: true
+
+Government_71:
+  id: 71
+  country_id: 88
+  is_active: true
+
+Government_72:
+  id: 72
+  country_id: 88
+  is_active: true
+
+Government_73:
+  id: 73
+  country_id: 88
+  is_active: true
+
+Government_74:
+  id: 74
+  country_id: 86
+  is_active: true
+
+Government_75:
+  id: 75
+  country_id: 86
+  is_active: true
+
+Government_76:
+  id: 76
+  country_id: 86
+  is_active: true
+
+Government_77:
+  id: 77
+  country_id: 86
+  is_active: true
+
+Government_78:
+  id: 78
+  country_id: 45
+  is_active: true
+
+Government_79:
+  id: 79
+  country_id: 45
+  is_active: true
+
+Government_80:
+  id: 80
+  country_id: 45
+  is_active: true
+
+Government_81:
+  id: 81
+  country_id: 45
+  is_active: true
+
+Government_82:
+  id: 82
+  country_id: 7
+  is_active: true
+
+Government_83:
+  id: 83
+  country_id: 7
+  is_active: true
+
+Government_84:
+  id: 84
+  country_id: 7
+  is_active: true

@@ -1,0 +1,494 @@
+
+Tool_6_en_translation:
+  tool_id: 6
+  locale: en
+  name: Risk Tool
+  description: '<p class="ql-align-justify">The Risk Tool, hosted by WRI, provides
+    an overview of relevant legislations and regulations as well as information about
+    most commonly traded species, in order to help users ask informed questions about
+    where their forest products come from and what issues a buyer might encounter.
+    Users can find country-specific information about relevant laws and local contacts
+    who might be able to help answer more questions.</p><p class="ql-align-justify"><a
+    href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">Go to site</a></p>'
+
+Tool_6_vi_translation:
+  tool_id: 6
+  locale: vi
+  name: Công cụ thông tin rủi ro
+  description: '<p><span style="color: rgb(0, 0, 0);">Công cụ thông tin rủi ro, do
+    WRI chủ trì, cung cấp tổng quan về các luật và quy định liên quan cũng như thông
+    tin về các loài được buôn bán phổ biến nhất, để giúp người dùng nêu các câu hỏi
+    về nguồn gốc lâm sản của họ và những vấn đề mà người mua có thể gặp phải. Người
+    dùng có thể tìm thấy thông tin theo quốc gia cụ thể về các luật liên quan và các
+    đầu mối liên lạc địa phương nơi có thể giúp trả lời nhiều câu hỏi hơn.</span></p><p><a
+    href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(0, 0, 0);">Vào trang web</a></p>'
+
+Tool_6_ja_translation:
+  tool_id: 6
+  locale: ja
+  name: リスク管理ツール
+  description: '<p>WRIが提供するリスク管理ツールは、関連する法律や規制の概要と、一般的に取引される樹種に関する情報を提供し、ユーザーが林産物の原産地や購入者が遭遇しうる問題について、十分な情報に基づいて判断できるよう支援します。関連する法律に関する国別の情報や、より多くの質問に答えることができる現地の連絡先を検索することができます。</p><p><a
+    href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">サイトへ移動する</a></p>'
+
+Tool_6_pt_translation:
+  tool_id: 6
+  locale: pt
+  name: Risk Tool
+  description: '<p class="ql-align-justify"><span style="color: rgb(49, 53, 55);">A
+    Ferramenta de Risco, apresentada pelo WRI, fornece uma visão geral das legislações
+    e regulamentações relevantes, bem como informações sobre as espécies mais geralmente
+    comercializadas, a fim de ajudar os usuários a colocarem perguntas informadas
+    sobre a origem de seus produtos florestais e que problemas um comprador pode encontrar.
+    Os usuários podem encontrar informações específicas sobre leis relevantes de um
+    determinado país e contatos locais que podem ajudar a responder a mais perguntas.</span></p><p
+    class="ql-align-justify"><a href="https://forestlegality.org/risk-tool" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Ir para o site</a></p>'
+
+Tool_6_fr_translation:
+  tool_id: 6
+  locale: fr
+  name: Risk Tool
+  description: '<p>Le Risk Tool du WRI, fournit un aperçu des législations et des
+    réglementations en vigueur ainsi que des informations sur les espèces les plus
+    couramment commercialisées, afin d''aider les utilisateurs à poser des questions
+    sur la provenance de leurs produits forestiers et d’identifier les problèmes que
+    pourrait avoir un acheteur. Les utilisateurs peuvent trouver des informations
+    spécifiques au pays sur les lois pertinentes et des contacts locaux susceptibles
+    de répondre aux questions.</p><p class="ql-align-justify"><a href="https://forestlegality.org/risk-tool"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
+    sur le site</a></p>'
+
+Tool_6_ko_translation:
+  tool_id: 6
+  locale: ko
+  name: 위험 도구
+  description: '<p>WRI에서 호스팅하는 위험 도구는 관련 법률 및 규정의 개요와 가장 일반적으로 거래되는 종에 대한 정보를 제공함으로써
+    사용자가 임산물 원산지와 구매자의 문제에 대해 정보에 입각한 질문을 할 수 있도록 도와줍니다. 사용자는 더 많은 질문에 답변하는 데 도움을
+    줄 수 있는 관련 법률 및 현지 연락처에 대한 국가별 정보를 찾을 수 있습니다.&nbsp;</p><p><a href="https://forestlegality.org/risk-tool"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로
+    이동</a></p>'
+
+Tool_6_zh-CN_translation:
+  tool_id: 6
+  locale: zh-CN
+  name: 风险工具
+  description: '<p>由世界资源研究所 (WRI) 开发的风险工具提供了有关立法和法规的概述，以及最常见的贸易物种的信息，以帮助用户就其森林产品的来源及买方可能遇到的问题提出有见地的问题。用户可以找到特定国家/地区信息，了解相关法律和可能会帮助回答更多问题的当地联系人。</p><p><a
+    href="https://forestlegality.org/risk-tool" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">前往网站</a></p>'
+
+Tool_7_zh-CN_translation:
+  tool_id: 7
+  locale: zh-CN
+  name: SPOTT - 可持续性政策透明度工具包
+  description: '<p>SPOTT 是一款支持可持续生产和贸易的免费在线平台。SPOTT 每年根据 130 多项环境、社会和治理 (ESG) 指标对热带林业和棕榈油公司进行评分，以衡量其长期进展。</p><p><a
+    href="https://www.spott.org/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">前往网站</a></p><p>另请参阅本文章，其中讨论了 SPOTT 如何整合 OTP 中的数据：<a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTT
+    和 Open Timber Portal 携手合作，促进提升热带木材部门的透明度，以解决非法采伐问题</em></a></p>'
+
+Tool_7_en_translation:
+  tool_id: 7
+  locale: en
+  name: SPOTT – Sustainability Policy Transparency Toolkit
+  description: '<p class="ql-align-justify">SPOTT is a free online platform supporting
+    sustainable production and trade. SPOTT scores tropical forestry and palm oil
+    companies annually against over 130 environmental, social and governance (ESG)
+    indicators to benchmark their progress over time.</p><p class="ql-align-justify"><a
+    href="https://www.spott.org/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">Go to site</a></p><p class="ql-align-justify">See also this
+    article that talks about how SPOTT integrates data from the OTP: <a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTT
+    and the Open Timber Portal partner to promote transparency in the tropical timber
+    sector to tackle illegal logging</em></a></p>'
+
+Tool_7_vi_translation:
+  tool_id: 7
+  locale: vi
+  name: SPOTT – Bộ công cụ minh bạch chính sách bền vững
+  description: '<p>SPOTT (Sustainability Policy Transparency Toolkit) là nền tảng
+    trực tuyến miễn phí hỗ trợ sản xuất và thương mại bền vững. SPOTT chấm điểm hàng
+    năm cho các công ty dầu cọ và lâm nghiệp nhiệt đới dựa trên hơn 130 chỉ số môi
+    trường, xã hội và quản trị (environmental, social and governance, ESG) để đánh
+    giá sự tiến bộ của họ qua thời gian.</p><p><a href="https://www.spott.org/" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang web</a></p><p><span
+    style="color: rgb(0, 0, 0);">Xem thêm bài viết này nói về cách SPOTT tích hợp
+    dữ liệu từ OTP: </span><a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><em>SPOTT
+    và đối tác Open Timber Portal (Cổng thông tin mở về gỗ) để thúc đẩy tính minh
+    bạch trong ngành gỗ nhiệt đới nhằm giải quyết tình trạng khai thác gỗ bất hợp
+    pháp</em></a></p>'
+
+Tool_7_ja_translation:
+  tool_id: 7
+  locale: ja
+  name: SPOTT – サステナビリティ・ポリシー・トランスペアレンシー・ツールキット（Sustainability Policy Transparency
+    Toolkit）
+  description: '<p>SPOTTは、持続可能な生産と取引を支援する無料のオンラインプラットフォームです。SPOTTは、130以上の環境・社会・ガバナンス（ESG）指標に照らして熱帯林業およびパーム油企業を毎年採点し、その進捗状況を時系列で評価しています。</p><p><a
+    href="https://www.spott.org/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">サイトへ移動する</a></p><p>SPOTTがOTPのデータをどのように統合しているかについては、こちらの記事もご覧ください。<a
+    href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTTとオープン・ティンバー・ポータル（Open
+    Timber Portal）が提携し、熱帯木材セクターの透明性を高め、違法伐採の撲滅を目指す</em></a></p>'
+
+Tool_7_fr_translation:
+  tool_id: 7
+  locale: fr
+  name: SPOTT – Sustainability Policy Transparency Toolkit
+  description: '<p class="ql-align-justify">SPOTT est une plateforme en ligne gratuite
+    qui promeut la production et le commerce durables de marchandises. Chaque année,
+    SPOTT évalue des entreprises forestières tropicales et d’huile de palme par rapport
+    à plus de 130 critères environnementaux, sociaux et de gouvernance (ESG) afin
+    d’évaluer leur progrès au fil du temps.</p><p class="ql-align-justify"><a href="https://www.spott.org/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
+    sur le site</a></p><p class="ql-align-justify">Voir aussi&nbsp;l’article suivant
+    qui explique comment la plateforme SPOTT intègre des données de l’OTP: <a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTT
+    and the Open Timber Portal partner to promote transparency in the tropical timber
+    sector to tackle illegal logging</em></a><em> (en anglais)</em></p>'
+
+Tool_7_ko_translation:
+  tool_id: 7
+  locale: ko
+  name: SPOTT – 지속 가능성 정책 투명성 툴킷
+  description: '<p>SPOTT는 지속 가능한 생산 및 거래를 지원하는 무료 온라인 플랫폼입니다. SPOTT는 매년 130개 이상의 환경,
+    사회 및 거버넌스(ESG) 지표에 대해 열대 임업 및 팜유 회사들의 점수를 매겨 시간이 지남에 따라 진행 상황을 벤치마킹합니다</p><p><a
+    href="https://www.spott.org/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">사이트로 이동</a></p><p>또한 SPOTT가 OTP의 데이터를 통합하는 방법을 다룬 이 기사를 참조하십시오.
+    <a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTT와
+    Open Timber Portal이 협력하여 열대 목재 부문의 투명성 촉진을 통해 불법 벌목을 방지하다</em></a></p>'
+
+Tool_7_pt_translation:
+  tool_id: 7
+  locale: pt
+  name: SPOTT – Sustainability Policy Transparency Toolkit [Kit de ferramentas para
+    a transparência da política de sustentabilidade]
+  description: '<p class="ql-align-justify"><span style="color: rgb(49, 53, 55);">O
+    SPOTT é uma plataforma online gratuita que apoia o comércio e a produção sustentáveis.
+    O SPOTT pontua, anualmente, empresas de silvicultura e de óleo de palma comparativamente
+    &nbsp;a mais de 130 indicadores ambientais, sociais e de gerenciamento (ESG) para
+    avaliar seu progresso ao longo do tempo.</span></p><p class="ql-align-justify"><a
+    href="https://www.spott.org/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">Ir para o site</a></p><p>Veja também este artigo que fala
+    sobre como o SPOTT integra os dados do OTP: <a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);"><em>SPOTT
+    e o Open Timber Portal fazem </em></a><a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(148, 79, 113);"><em>fazem
+    parceria para promover a transparência no setor</em></a><em style="color: rgb(148,
+    79, 113);"> </em><a href="https://www.spott.org/news/spott-and-the-open-timber-portal-partner-to-promote-transparency-in-the-tropical-timber-sector-to-tackle-illegal-logging/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(148, 79, 113);"><em>das
+    madeiras tropicais para combater a extração de madeira ilegal</em></a></p>'
+
+Tool_8_zh-CN_translation:
+  tool_id: 8
+  locale: zh-CN
+  name: 木材交易信息平台
+  description: '<p>木材交易信息在线平台是一个中心点，访问者可以在这里找到主要位于热带地区的木材生产国家/地区的行业和立法信息。该平台通过展示林业部门数据、立法框架、VPA
+    进程等事实，使运营商能够根据具体情况自行执行风险分析并开展尽职调查。</p><p><a href="http://www.timbertradeportal.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">前往网站</a></p>'
+
+Tool_8_en_translation:
+  tool_id: 8
+  locale: en
+  name: Timber Trade Portal
+  description: '<p class="ql-align-justify">The online timber trade portal serves
+    as a central point where visitors can find information on the industry and legislation
+    of timber-producing countries, which are mainly located in tropical areas. The
+    platform enables operators to make their own risk analysis and exercise due diligence,
+    on a case-by-case basis, by presenting facts such as forestry sector data, legislative
+    frameworks, VPA processes, etc.</p><p class="ql-align-justify"><a href="http://www.timbertradeportal.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Go
+    to site</a></p>'
+
+Tool_8_fr_translation:
+  tool_id: 8
+  locale: fr
+  name: Timber Trade Portal
+  description: '<p class="ql-align-justify">Le Timber Trade Portal sert de point central
+    où les visiteurs peuvent trouver des informations sur l''industrie et la législation
+    des pays producteurs de bois, qui sont principalement situés dans les zones tropicales.
+    La plateforme permet aux opérateurs de faire leur propre analyse de risques et
+    leur diligence raisonnée, au cas par cas, en présentant des informations telles
+    que des données sur le secteur forestier, le cadre législatif, les processus d’APV,
+    etc.</p><p class="ql-align-justify"><a href="http://www.timbertradeportal.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
+    sur le site</a></p>'
+
+Tool_8_vi_translation:
+  tool_id: 8
+  locale: vi
+  name: Timber Trade Portal
+  description: '<p><span style="color: rgb(0, 0, 0);">Timber Trade Portal (Cổng thông
+    tin thương mại gỗ) trực tuyến đóng vai trò là điểm trung tâm trong đó khách truy
+    cập có thể tìm thấy thông tin về ngành gỗ và pháp luật của các nước sản xuất gỗ,
+    chủ yếu nằm ở các khu vực nhiệt đới. Nền tảng này cho phép các nhà khai thác thực
+    hiện phân tích rủi ro của riêng họ và thực hiện thẩm định, trên cơ sở từng trường
+    hợp, bằng cách trình bày các dữ kiện như dữ liệu ngành lâm nghiệp, khuôn khổ lập
+    pháp, quy trình VPA, v.v.</span></p><p><a href="http://www.timbertradeportal.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang
+    web</a></p>'
+
+Tool_8_pt_translation:
+  tool_id: 8
+  locale: pt
+  name: Timber Trade Portal
+  description: '<p><span style="color: rgb(49, 53, 55);">O Timber Trade Portal on-line
+    funciona como um ponto central onde os visitantes podem encontrar informações
+    sobre a indústria e a legislação dos países produtores de madeira, localizados
+    principalmente em áreas tropicais. A plataforma permite aos operadores fazerem
+    suas próprias análises de risco e de dever de diligência, caso a caso, apresentando
+    fatos como dados da silvicultura, enquadramentos legislativos, processos APV (acordo
+    de parceria voluntária), etc.</span></p><p class="ql-align-justify"><a href="http://www.timbertradeportal.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Ir
+    para o site</a></p>'
+
+Tool_8_ko_translation:
+  tool_id: 8
+  locale: ko
+  name: 목재 거래 포털
+  description: '<p>온라인 목재 거래 포털은 주로 열대 지역에 위치한 목재 생산국의 산업 및 법률에 대한 정보를 찾을 수 있는 중심지
+    역할을 합니다. 이 플랫폼은 운영자가 임업 부문 데이터, 입법 프레임워크, VPA 프로세스 등과 같은 팩트들을 제시하여 사례별로 자체 위험
+    분석을 수행하고 실사를 수행할 수 있도록 합니다.</p><p><a href="http://www.timbertradeportal.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로
+    이동</a></p>'
+
+Tool_8_ja_translation:
+  tool_id: 8
+  locale: ja
+  name: ティンバー・トレード・ポータル（Timber Trade Portal）
+  description: '<p>オンラインのティンバー・トレード・ポータル（Timber Trade Portal）は、熱帯地域を中心とした木材生産国の産業や法規制に関する情報を提供する中心的な役割を担っています。このプラットフォームでは、林業セクターのデータ、法的枠組み、VPAプロセスなどの事実を提示することで、事業者が自らリスク分析を行い、ケースバイケースでデューデリジェンスを実施することができます。</p><p><a
+    href="http://www.timbertradeportal.com/" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">サイトへ移動する</a></p>'
+
+Tool_9_en_translation:
+  tool_id: 9
+  locale: en
+  name: Preferred by Nature Sourcing Hub
+  description: '<p class="ql-align-justify">The Preferred by Nature Sourcing Hub helps
+    companies meet due diligence requirements of market regulation such as the Lacey
+    Act, EUTR, and the Australian Illegal Logging Prohibition Act by providing a complete
+    due diligence system, as well as many risk assessments and tools to support the
+    implementation of a due diligence system.</p><p class="ql-align-justify"><a href="https://preferredbynature.org/sourcinghub"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Go
+    to site</a></p>'
+
+Tool_9_ko_translation:
+  tool_id: 9
+  locale: ko
+  name: Preferred by Nature Sourcing Hub
+  description: '<p>Preferred by Nature Sourcing Hub는 완벽한 실사 시스템뿐만 아니라 실사 시스템 구현을 지원하는
+    많은 위험 평가 및 도구를 제공함으로써 기업이 레이시법(Lacey Act), EUTR 및 호주의 불법벌목금지법과 같은 시장 규제의 실사 요건을
+    충족할 수 있도록 지원합니다.</p><p><a href="https://preferredbynature.org/sourcinghub" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로 이동</a></p>'
+
+Tool_9_vi_translation:
+  tool_id: 9
+  locale: vi
+  name: Preferred by Nature Sourcing Hub
+  description: '<p><span style="color: rgb(0, 0, 0);">Trung tâm tìm nguồn cung ứng
+    Preferred by Nature (Preferred by Nature Sourcing Hub) giúp các công ty đáp ứng
+    các yêu cầu thẩm định theo quy định thị trường như Đạo luật Lacey, EUTR và Đạo
+    luật cấm khai thác gỗ bất hợp pháp của Úc bằng cách cung cấp một hệ thống thẩm
+    định đầy đủ, cũng như nhiều đánh giá rủi ro và các công cụ để hỗ trợ việc thực
+    hiện hệ thống thẩm định.</span></p><p><a href="https://preferredbynature.org/sourcinghub"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang
+    web</a></p>'
+
+Tool_9_fr_translation:
+  tool_id: 9
+  locale: fr
+  name: Preferred by Nature Sourcing Hub
+  description: '<p class="ql-align-justify">Le Preferred by Nature Sourcing Hub aide
+    les entreprises à satisfaire les exigences de diligence raisonnée des réglementations
+    du marché telles que la loi américaine Lacey Act, le RBUE, la réglementation australienne
+    «&nbsp;Australian Illegal Logging Prohibition Act&nbsp;», en fournissant un système
+    complet de diligence raisonnée, ainsi que de nombreuses évaluations de risques
+    et des outils pour soutenir la mise en œuvre d''un système de diligence raisonnée.</p><p
+    class="ql-align-justify"><a href="https://preferredbynature.org/sourcinghub" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller sur le site</a></p>'
+
+Tool_9_zh-CN_translation:
+  tool_id: 9
+  locale: zh-CN
+  name: Preferred by Nature 采购中心
+  description: '<p>Preferred by Nature 采购中心通过提供完整的尽职调查系统，以及许多风险评估和工具来支持尽职调查系统的实施，帮助企业满足《雷斯法案》、《EUTR》和澳大利亚《禁止非法采伐木材法案》等市场监管的尽职调查要求。</p><p><a
+    href="https://preferredbynature.org/sourcinghub" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">前往网站</a></p>'
+
+Tool_9_ja_translation:
+  tool_id: 9
+  locale: ja
+  name: プリファード・バイ・ネイチャー・ソーシング・ハブ（Preferred by Nature Sourcing Hub）
+  description: '<p>「プリファード・バイ・ネイチャー・ソーシング・ハブ」は、包括的なデューデリジェンス・システムに加え、多くのリスクアセスメントやデューデリジェンス・システムの実施を支援するツールを提供し、企業がレイシー法、EUTR、オーストラリア違法伐採禁止法などの市場規制のデューデリジェンス要件に対応できるように支援しています。</p><p><a
+    href="https://preferredbynature.org/sourcinghub" rel="noopener noreferrer" target="_blank"
+    style="color: rgb(149, 79, 114);">サイトへ移動する</a></p>'
+
+Tool_9_pt_translation:
+  tool_id: 9
+  locale: pt
+  name: Preferred by Nature Sourcing Hub
+  description: '<p><span style="color: rgb(49, 53, 55);">O Preferred by Nature Sourcing
+    Hub ajuda as empresas a atender aos requisitos de dever de diligência da regulamentação
+    do mercado, como a Lei Lacey, EUTR e a Lei Australiana de Proibição de Exploração
+    de Madeira Ilegal, fornecendo um sistema completo de dever de diligência, bem
+    como muitas avaliações de riscos e ferramentas para apoiar a implementação de
+    um sistema de dever de diligência.</span></p><p class="ql-align-justify"><a href="https://preferredbynature.org/sourcinghub"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Ir
+    para o site</a></p>'
+
+Tool_10_vi_translation:
+  tool_id: 10
+  locale: vi
+  name: Buôn bán gỗ có trách nhiệm & Thẩm định và Đánh giá rủi ro
+  description: '<p><span style="color: rgb(0, 0, 0);">Buôn bán gỗ có trách nhiệm (Responsible
+    Timber Exchange) của BVRio là nền tảng đàm phán trực tuyến để tìm nguồn cung ứng
+    sản phẩm gỗ hợp pháp và được chứng nhận từ khắp nơi trên thế giới. Tích hợp vào
+    nền tảng này là hệ thống Thẩm định và Đánh giá rủi ro (Due Diligence and Risk
+    Assessment, DDRA) để giúp người mua đánh giá chuỗi cung ứng của lô hàng gỗ hoặc
+    xác minh giấy phép FSC và PEFC.</span></p><p><a href="http://www.bvrio.com/" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang web</a></p>'
+
+Tool_10_zh-CN_translation:
+  tool_id: 10
+  locale: zh-CN
+  name: 负责任的木材交易与尽职调查和风险评估
+  description: '<p>BVRio 的负责任木材交易平台是一款在线谈判平台，用于从世界各地采购合法和经认证的木材产品。该平台中集成了尽职调查和风险评估
+    (DDRA) 系统，帮助买家评估木材托运的供应链或验证森林管理委员会 (FSC) 和森林认证体系认可计划 (PEFC) 的许可证。</p><p><a href="http://www.bvrio.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">前往网站</a></p>'
+
+Tool_10_fr_translation:
+  tool_id: 10
+  locale: fr
+  name: Responsible Timber Exchange & Due Diligence and Risk Assessment
+  description: '<p class="ql-align-justify">Le Responsible Timber Exchange de BVRio
+    est une plateforme en ligne de négociation pour l’approvisionnement de produits
+    forestiers d’origine légale et certifiés du monde entier. La plateforme intègre
+    un système de diligence raisonnée et d’évaluation de risques (DDRA), pour permettre
+    aux acheteurs d’évaluer la chaine d’approvisionnement de bois ou de vérifier les
+    certificats FSC et PEFC.</p><p class="ql-align-justify"><a href="http://www.bvrio.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
+    sur le site</a></p>'
+
+Tool_10_en_translation:
+  tool_id: 10
+  locale: en
+  name: Responsible Timber Exchange & Due Diligence and Risk Assessment
+  description: '<p class="ql-align-justify">BVRio’s Responsible Timber Exchange is
+    an online negotiations platform for sourcing legal and certified timber products
+    from all over the world. Integrated into the platform is a Due Diligence and Risk
+    Assessment (DDRA) system to help buyers evaluate the supply chain of a timber
+    consignment or verify FSC and PEFC licenses.</p><p class="ql-align-justify"><a
+    href="http://www.bvrio.com/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">Go to site</a></p>'
+
+Tool_10_ko_translation:
+  tool_id: 10
+  locale: ko
+  name: 책임 있는 목재 교환과 실사 및 위험 평가
+  description: '<p>BVRio의 Responsible Timber Exchange는 전 세계에서 합법적이고 인증된 목재 제품을 조달하기
+    위한 온라인 협상 플랫폼입니다. 구매자가 목재 위탁품의 공급망을 평가하거나 FSC 및 PEFC 라이선스를 검증하는 데 도움이 되는 실사 및
+    위험 평가(DDRA) 시스템이 플랫폼에 통합되었습니다.</p><p><a href="http://www.bvrio.com/" rel="noopener
+    noreferrer" target="_blank" style="color: rgb(149, 79, 114);">사이트로 이동</a></p>'
+
+Tool_10_ja_translation:
+  tool_id: 10
+  locale: ja
+  name: レスポンシブル・ティンバー・エクスチェンジ（Responsible Timber Exchange）および、デューデリジェンス＆リスクアセスメント
+  description: '<p>BVRioのレスポンシブル・ティンバー・エクスチェンジ（Responsible Timber Exchange）は、世界中の合法木材や認証材を調達するためのオンライン交渉用プラットフォームです。このプラットフォームに統合されているDDRA（デューデリジェンス＆リスクアセスメント）システムは、バイヤーが木材委託のサプライチェーンを評価したり、FSCやPEFCのライセンスを確認したりするうえで役立ちます。</p><p><a
+    href="http://www.bvrio.com/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">サイトへ移動する</a></p>'
+
+Tool_10_pt_translation:
+  tool_id: 10
+  locale: pt
+  name: Intercâmbio Responsável de Madeira e Dever de Diligência e Avaliação de Riscos
+  description: '<p><span style="color: rgb(49, 53, 55);">O intercâmbio responsável
+    de madeira da BVRio é uma plataforma de negociação on-line para o fornecimento
+    legal e certificado de produtos de madeira, por todo o mundo. Integrado na plataforma
+    está um sistema de Dever de Diligência e Avaliação de Riscos (DDAR) para ajudar
+    os compradores a avaliarem a cadeia de abastecimento de uma remessa de madeira
+    ou a verificarem as licenças FSC e PEFC.</span></p><p class="ql-align-justify"><a
+    href="http://www.bvrio.com/" rel="noopener noreferrer" target="_blank" style="color:
+    rgb(149, 79, 114);">Ir para o site</a></p>'
+
+Tool_11_fr_translation:
+  tool_id: 11
+  locale: fr
+  name: Open Land Contracts
+  description: <p>OpenLandContracts.org est un répertoire en ligne de contrats accessibles
+    au public sur des projets d'investissement agricoles et forestiers à grande échelle.
+    Il contient les versions PDF et texte de contrats et de documents associés ; des
+    résumés concis (« annotations ») des clauses sociales, environnementales, relatives
+    aux droits de l’homme, fiscales et opérationnelles de chaque contrat ; des outils
+    pour rechercher et comparer des contrats ; et des guides sur les contrats d’investissement
+    et la transparence des contrats.&nbsp;</p><p><a href="https://www.openlandcontracts.org/"
+    rel="noopener noreferrer" target="_blank">Aller sur le site</a></p>
+
+Tool_11_zh-CN_translation:
+  tool_id: 11
+  locale: zh-CN
+  name: Open Land Contracts
+  description: <p>OpenLandContracts.org 是大型农业、林业和其他土地投资项目公开合同的在线资料库。其中包含合同和相关文档的 PDF
+    和文本版本；每份合同的社会、环境、人权、财政和运营条款的简明语言摘要（“注释”）；合同搜索和比较工具；以及投资合同和合同透明度指南。</p><p><a href="https://www.openlandcontracts.org/"
+    rel="noopener noreferrer" target="_blank">前往网站</a></p>
+
+Tool_11_vi_translation:
+  tool_id: 11
+  locale: vi
+  name: Open Land Contracts
+  description: '<p>OpenLandContracts.org là kho lưu trữ trực tuyến các hợp đồng công
+    khai cho các dự án quy mô lớn về nông nghiệp, lâm nghiệp và các dự án đầu tư về
+    đất đai khác. Kho lưu trữ này bao gồm các phiên bản PDF và văn bản về các hợp
+    đồng và tài liệu liên quan; các bản tóm tắt bằng ngôn ngữ đơn giản (“chú thích”)
+    về các điều khoản xã hội, môi trường, nhân quyền, tài chính và hoạt động của từng
+    hợp đồng; các công cụ tìm kiếm và so sánh hợp đồng; cũng như các hướng dẫn về
+    hợp đồng đầu tư và minh bạch hợp đồng.</p><p><a href="https://www.openlandcontracts.org/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);">Vào trang
+    web</a></p>'
+
+Tool_11_en_translation:
+  tool_id: 11
+  locale: en
+  name: Open Land Contracts
+  description: <p>OpenLandContracts.org is an online repository of publicly available
+    contracts for large-scale agriculture, forestry and other land-based investment
+    projects. It includes PDF and text versions of contracts and associated documents;
+    plain language summaries ("annotations") of each contract’s social, environmental,
+    human rights, fiscal, and operational terms; tools for searching and comparing
+    contracts; and guides on investment contracts and contract transparency.</p><p><a
+    href="https://www.openlandcontracts.org/" rel="noopener noreferrer" target="_blank">Go
+    to site</a></p>
+
+Tool_11_ko_translation:
+  tool_id: 11
+  locale: ko
+  name: 개방형 토지 계약
+  description: <p>OpenLandContracts.org는 대규모 농업, 임업 및 기타 토지 기반 투자 프로젝트를 위해 공개적으로 이용
+    가능한 계약의 온라인 저장소입니다. 여기에는 계약서 및 관련 문서의 PDF 및 텍스트 버전, 각 계약서의 사회, 환경, 인권, 재정 및 운영
+    조건에 대하여 평이한 언어로 된 요약(“주석”), 계약서 검색 및 비교 도구, 투자 계약서 및 계약서 투명성에 대한 가이드가 포함됩니다.</p><p><a
+    href="https://www.openlandcontracts.org/" rel="noopener noreferrer" target="_blank">사이트로
+    이동</a></p>
+
+Tool_11_ja_translation:
+  tool_id: 11
+  locale: ja
+  name: オープンランド契約（Open Land Contracts）
+  description: <p>OpenLandContracts.orgは、大規模な農業、林業、その他の土地利用型投資プロジェクトに関する契約書を一般に公開するオンラインリポジトリです。契約書や関連文書のPDF版とテキスト版、各契約の社会、環境、人権、財政、運用に関する条項を平易な言葉でまとめたもの（「注釈」）、契約書の検索・比較ツール、投資契約や契約の透明性に関するガイドが含まれています。</p><p><a
+    href="https://www.openlandcontracts.org/" rel="noopener noreferrer" target="_blank">サイトへ移動する</a></p>
+
+Tool_11_pt_translation:
+  tool_id: 11
+  locale: pt
+  name: Open Land Contracts
+  description: '<p><span style="color: rgb(49, 53, 55);">OpenLandContracts.org é um
+    repositório on-line de contratos publicamente disponíveis para agricultura extensiva,
+    silvicultura e outros projetos de investimento rural. Inclui versões em PDF e
+    de texto de contratos e documentos associados; resumos em linguagem acessível
+    ("anotações") da terminologia social, ambiental, direitos humanos, fiscalidade
+    e operacional de cada contrato; ferramentas para busca e comparação de contratos;
+    e guias sobre contratos de investimento e transparência contratual.</span></p><p><a
+    href="https://www.openlandcontracts.org/" rel="noopener noreferrer" target="_blank">Ir
+    para o site</a></p>'

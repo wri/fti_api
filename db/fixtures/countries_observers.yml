@@ -1,0 +1,32 @@
+
+CountriesObserver_1:
+  country_id: 7
+  observer_id: 16
+
+CountriesObserver_2:
+  country_id: 7
+  observer_id: 25
+
+CountriesObserver_3:
+  country_id: 7
+  observer_id: 34
+
+CountriesObserver_4:
+  country_id: 45
+  observer_id: 3
+
+CountriesObserver_5:
+  country_id: 45
+  observer_id: 5
+
+CountriesObserver_6:
+  country_id: 45
+  observer_id: 26
+
+CountriesObserver_7:
+  country_id: 45
+  observer_id: 38
+
+CountriesObserver_8:
+  country_id: 47
+  observer_id: 10

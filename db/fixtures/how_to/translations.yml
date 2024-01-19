@@ -1,0 +1,520 @@
+
+HowTo_1_en_translation:
+  how_to_id: 1
+  locale: en
+  name: Assessing severity of observations
+  description: '<p><strong>What are severity parameters and why are they important?&nbsp;</strong></p><p>Until
+    now, most IM reports do not provide any information on the relative importance
+    of an observation in the context of common infractions or in relationship to the
+    legal framework. This is particularly true in reports from the mandated IM who
+    often limit interpretations of their findings to ensure that their report remains
+    objective. Unfortunately, it prevents a broader audience, non-specialized in forestry
+    laws, to understand and use their findings. In addition, many reports are written
+    in highly technical language, making it difficult for most readers to understand
+    the relative importance of a given observation. For instance, a report may state
+    that a given company harvested without a permit, but there is a significant difference
+    between an instance in which a company harvested timber without obtaining a permit
+    at all, or if it harvested the timber two weeks before the permit was officially
+    granted.</p><p>To help OTP users understand the relative importance - or significance
+    - of an observation on illegal logging or forest governance problem, WRI and its
+    partners have developed a range of severity parameters for each observation category
+    in collaboration with independent monitors. This severity approach makes it possible
+    to group observations depending on their significance/impact on the natural resource,
+    biodiversity, workers and economy. The parameters define 3 levels of severity:
+    high, medium and low for each sub-category of observations.&nbsp;</p><p>For instance,
+    for the subcategory “Harvesting without required permit”, the severity parameters
+    are defined as follows:</p><ul><li>High: absence of permit</li><li>Medium: harvesting
+    before or after the authorized dates (one month or more)</li><li>Low: harvesting
+    before or after the authorized dates (less than one month)</li></ul><p><strong>What
+    does the severity level of an observation mean?&nbsp;</strong></p><p>The severity
+    of an observation on illegal logging or governance problem refers to the relative
+    significance in comparison to other observations of the same infraction. For instance,
+    illegally cutting 500 trees is defined as more damaging than illegally cutting
+    10 trees. The OTP severity parameters do not compare severity of different categories
+    or subcategory of illegal activity. In other words, infraction types are given
+    equal weight.</p><p><strong>How are severity parameters determined?&nbsp;</strong></p><p>The
+    parameters were determined through 4 basic steps.</p><ol><li>Compilation of IM
+    observations from multiple countries and organizations</li><li>Analysis of the
+    range of observations in terms of impact</li><li>Definition of proposed severity
+    parameters based on the range of observations and legal text</li><li>Discussions
+    and finalization of the severity parameters with Independent monitors from the
+    Congo Basin during a workshop.</li></ol><p>The severity parameters are not static
+    and will be updated periodically based on feedback from OTP users including forest
+    companies and governments, further consultations with IMs, lessons learned from
+    the deployment and geographic expansion of the OTP, and policy developments in
+    producer and demand side countries.</p><p><strong>What are the limitations of
+    severity parameters?&nbsp;</strong></p><p><span style="color: black;">Defining
+    severity parameters is not an exact science and the process does not attempt to
+    definitively determine the severity of a given observation. This system is designed
+    to help OTP users interpret information and OTP users are encouraged to interpret
+    the severity of an observation based on their own criteria.</span></p><p><span
+    style="color: black;">It is worth highlighting that the thresholds used to define
+    the severity categories may lead to under- or overestimation of severity. For
+    example, the threshold for severe overcutting is 500 trees. As a result, an observation
+    on the overharvesting of 499 trees would fall into the moderate category. OTP
+    users are therefore encouraged to consider not only the severity parameter classification
+    but also the details before coming to a conclusion about the importance of a given
+    observation. </span></p><p><strong>What is the geographic coverage of severity
+    parameters? </strong></p><p><span style="color: black;">The first stage of OTP
+    development focuses on the Congo Basin. As a result, the severity parameters are
+    based primarily on consultations with IMs in the region and assessments of their
+    reports. The current goal is to develop severity parameters that can be applied
+    globally because such a system would help users compare information from different
+    producer countries. As the OTP expands geographically, </span>severity parameters
+    at the regional or country level will be developed accordingly.</p>'
+
+HowTo_1_fr_translation:
+  how_to_id: 1
+  locale: fr
+  name: L'évaluation de la sévérité des observations
+  description: '<p><strong>A quoi renvoient les paramètres de sévérité et pourquoi
+    sont-ils importants ?</strong></p><p>Jusqu’à présent, la plupart des rapports
+    d’observateurs indépendants (OI) ne fournissaient aucune information sur la gravité
+    relative d’une observation par rapport aux infractions courantes dans le pays
+    ou par rapport au cadre juridique. Cela se vérifie en particulier dans les rapports
+    des OI mandatés qui limitent souvent l’interprétation de leurs résultats pour
+    garantir l’objectivité de leur rapport. Malheureusement, cela limite la compréhension
+    et l’utilisation de leurs rapports par une audience plus large et non spécialisée
+    du domaine forestier des pays concernés. En outre, de nombreux rapports sont rédigés
+    dans un langage très technique, ce qui empêche la plupart des lecteurs de comprendre
+    l’importance relative d’une observation donnée. Par exemple, un rapport peut indiquer
+    qu’une entreprise donnée a récolté sans permis, mais il existe une différence
+    importante entre une entreprise qui récolte du bois sans obtenir de permis et
+    une entreprise qui récolte deux semaines avant l’émission de l’autorisation officielle.</p><p>Pour
+    aider les utilisateurs de l’OTP à comprendre l’importance relative ou le caractère
+    plus ou moins significatif d’une observation sur une exploitation forestière illégale
+    ou d’un problème de gouvernance forestière, WRI et ses partenaires ont développé
+    une gamme de paramètres de gravité pour chaque catégorie d’observations en collaboration
+    avec des observateurs indépendants. Cette approche de gravité permet de regrouper
+    les observations en fonction de leur importance / impact sur les ressources naturelles,
+    la biodiversité, les travailleurs et l’économie.</p><p>Les paramètres définissent
+    3 niveaux de sévérité : forte, moyenne et faible pour chaque sous-catégorie d’observations.</p><p>Par
+    exemple, pour la sous-catégorie “Exploitation sans permis”, les paramètres de
+    sévérité sont définis comme suit :</p><ul><li>Forte : Absence de permis</li><li>Moyenne
+    : Exploitation du bois avant ou après la date d’autorisation (un mois ou plus)</li><li>Faible
+    : Exploitation du bois avant ou après la date d’autorisation (moins d’un mois)</li></ul><p><strong>Que
+    signifie le niveau de sévérité d’une observation ?</strong></p><p>La sévérité
+    d’une observation d’exploitation illégale présumée ou d’un problème de gouvernance
+    fait référence à son importance relative par rapport à d’autres observations de
+    la même sous-catégorie d’infraction. Par exemple, couper illégalement 500 arbres
+    est considéré comme plus dommageable que de couper illégalement 10 arbres. Les
+    paramètres de gravité d’OTP ne comparent pas la gravité de différentes catégories
+    ou sous-catégories d’observations. En d’autres termes, les types d’infraction
+    ont le même poids.</p><p><strong>Comment les paramètres de gravité sont-ils calibrés
+    ?</strong></p><p>Les paramètres ont été déterminés en 4 étapes :</p><ol><li>Compilation
+    des observations indépendantes issues de plusieurs organisations et plusieurs
+    pays</li><li>Analyse de la gamme d’observations en termes d’impact</li><li>Définition
+    de paramètres de sévérité sur la base de la gamme d’observations et des textes
+    de loi</li><li>Discussion et finalisation de ces paramètres de sévérité au cours
+    d’un atelier avec les OI du Bassin du Congo</li></ol><p>Les paramètres de gravité
+    ne sont pas statiques et seront mis à jour périodiquement en fonction des commentaires
+    des utilisateurs de l’OTP, y compris des entreprises forestières et de l’administration.
+    De nouvelles consultations avec les OI, des enseignements tirés du déploiement
+    et de l’expansion géographique de l’OTP, ainsi que l’évolution des politiques
+    dans les pays producteurs et consommateurs seront aussi des opportunités pour
+    réviser ces paramètres.</p><p><strong>Quelles sont les limites des paramètres
+    de sévérité ?</strong></p><p class="ql-align-justify">Définir des paramètres de
+    sévérité n’est pas une science exacte et le procédé ne tente pas de définir avec
+    certitude la sévérité d’une observation donnée. Ce système a été conçu dans le
+    but d’aider les utilisateurs de l’OTP à interpréter les informations fournies,
+    et nous encourageons les utilisateurs de&nbsp;l’OTP à interpréter la sévérité
+    d’une observation selon leurs propres critères.</p><p class="ql-align-justify">Il
+    convient de souligner que les seuils utilisés pour définir les catégories de sévérité
+    peuvent entrainer une sous-estimation ou une surestimation de la sévérité. Par
+    exemple, le seuil de surexploitation sévère est de 500 arbres. De ce fait, une
+    observation sur la surexploitation de 499 arbres tomberait dans la catégorie&nbsp;«&nbsp;modérée&nbsp;».
+    Les utilisateurs de l’OTP sont donc encouragés à prendre en compte non seulement
+    la classification résultant des paramètres de sévérité, mais aussi les caractéristiques
+    de cette observation, avant de se prononcer sur l’importance d’une observation
+    donnée.</p><p class="ql-align-justify"><strong>Quelle est la couverture géographique
+    des paramètres de sévérité&nbsp;?</strong></p><p class="ql-align-justify">La première
+    étape du développement de l’OTP est centrée sur le bassin du Congo. Par conséquent,
+    les paramètres de sévérité sont fondés principalement sur des consultations avec
+    les OI de la région ainsi sur que l’évaluation de leurs rapports. L’objectif actuel
+    est de développer des paramètres de sévérité qui peuvent être appliqués à l’échelle
+    mondiale, car un tel système aiderait les utilisateurs à comparer des informations
+    venant de différents pays producteurs. Au fur et à mesure que l’OTP s’étend géographiquement,
+    des paramètres de sévérité au niveau régional ou national seront développés.</p>'
+
+HowTo_1_zh-CN_translation:
+  how_to_id: 1
+  locale: zh-CN
+  name: '判定观察的严重性 '
+  description: '<p><strong style="color: rgb(51, 51, 51);"><em>严重性的指标是什么？他们为什么重要？</em></strong><span
+    style="color: rgb(51, 51, 51);">&nbsp;</span></p><p><span style="color: black;">截至目前，绝大多数独立观察报告都没有提供有关特定观察在常见违法行为或与法律框架有关的违规行为方面严重程度的信息。特别是指定的独立观察机构为了保证报告的客观性，观察的结论往往不会详细阐述特定观察的严重性。此外，许多报告的语言过于专业化，这使得大多数读者很难理解特定观察的相对重要程度。比如，一个报告指出某个公司无证采伐。但实际上，一个公司在完全没有许可证的情况下采伐和在许可证正式批准两周前采伐是有很大区别的。</span></p><p>为了帮助OTP用户理解一个有关非法采伐或者森林管理问题观察的相对严重性，世界资源研究所和相关合作伙伴以及独立观察机构一起开发了衡量每个观察严重性的指标。这个指标针对每个观察有高中低三种严重程度。&nbsp;</p><p>高：没有许可证&nbsp;</p><p>中：在许可证有效期前后采伐&nbsp;（提前或者延后一个月及以上）&nbsp;</p><p>低：在许可证有效期前后采伐&nbsp;（提前或者延后一个月内）&nbsp;</p><p><strong>一个观察的严重程度意味着什么？&nbsp;</strong></p><p>一个非法采伐或者森林管理问题观察的严重程度是相对的。比如，非法砍伐500棵树应该比非法砍伐10棵更严重。OTP严重性指标不会比较不同类型的非法活动。换句话说，不同的违法活动类型在严重程度指标中被给予一样的权重。例如，过度采伐和税款支付违约在严重程度上是一样的。&nbsp;</p><p><strong
+    style="color: rgb(51, 51, 51);"><em>严重程度是如何决定的？</em>&nbsp;</strong></p><p>严重程度通过三个基本步骤决定。&nbsp;</p><p>汇总各个国家和各个机构的独立观察报告&nbsp;</p><p>分析这些观察的严重性&nbsp;</p><p><span
+    style="color: black;">在观察和相应的法律框架下定义严重程度&nbsp;</span></p><p><span style="color:
+    black;">在输入观察结果时，用户可以从一个下拉菜单中选择合适的严重程度。这个菜单包含不同的严重程度信息（比如1到500棵树，501到1000棵树等）。这个严重程度并不是固定不变的，它会随着OTP用户的反馈而更新。这些用户反馈来自可以林业公司和政府部门，未来和独立观察机构的协商，OTP在地区扩张中的经验，以及木材生产国和需求国的政策发展。严重程度的的定义会在OTP网站上分享</span></p><p><strong
+    style="color: rgb(51, 51, 51);"><em>严重性指标的局限是什么？</em></strong><span style="color:
+    rgb(51, 51, 51);">&nbsp;</span></p><p>定义严重程度指标不是一门科学，其过程并不是想要给某个观察的严重性下定义。这个系统主要帮助OTP用户解释观察的相关信息，然后鼓励用户根据自己的标准解读一个观察的具体严重程度。&nbsp;</p><p>目前用来定义严重程度的界限有可能低估或者高估观察的严重性。比如，严重过度砍伐的界限是500棵树。所以一个过度砍伐499棵树的观察会被列为中度的情况。因此，OTP用户不仅应该考虑严重程度指标的分类，还应该关注观察的具体细节来决定一个特定观察的严重程度。&nbsp;</p><p><strong
+    style="color: rgb(51, 51, 51);"><em>严重程度指标都覆盖哪些地域？</em></strong><span style="color:
+    rgb(51, 51, 51);">&nbsp;</span></p><p>OTP第一阶段的开发主要关注刚果盆地。因此，严重程度的指标也主要基于和刚果盆地的独立观察机构和他们的观察报告研究设计。我们的目标是开发出适用于全球性的严重程度指标，帮助用户比较不同木材生产国的相关信息。随着OTP在地理上的扩张，相关区域或者国家层面的严重程度的指标也会随之开发。&nbsp;</p>'
+
+HowTo_1_ja_translation:
+  how_to_id: 1
+  locale: ja
+  name: オブザベーションの深刻度の評価
+  description: '<p><strong><em>深刻度パラメータとは何か、そしてなぜ重要なのか？</em></strong></p><p><span
+    style="color: black;">これまで、ほとんどの IM（＝Independent monitor：第三者モニター） による報告書は、一般的な違反としての、あるいは法的枠組みに対するオブザベーションの相対的な重要性、つまりその違反等がどれだけ深刻な問題かどうかについての情報を提供していませんでした。これは、特に義務的に作成された
+    IM 報告書に当てはまり、報告書の客観性を確保するために、所見の解釈を制限していることが多いことによります。残念ながら、これでは林業関連の法律の専門家ではない幅広い読者が調査結果を理解し、利用することができません。さらに、多くの報告書は非常に専門的な言葉で書かれているため、ほとんどの読者がオブザベーション結果の相対的な重要性を理解することが困難です。例えば、ある企業が無許可で伐採を行ったと報告書に記載されていても、全く許可を得ずに伐採を行った場合と、許可が下りる2週間前に伐採を行った場合とでは大きな違いがあります。</span></p><p>OTP利用者が違法伐採や森林ガバナンス問題に関するオブザベーションの相対的な重要性（意義）を理解するために、WRIとそのパートナーは、独立モニターとの協力のもと、オブザベーションカテゴリーごとに様々な深刻度パラメータを開発しました。この深刻度アプローチにより、天然資源、生物多様性、労働者、経済への影響の大きさに応じてオブザベーションをグループ化することが可能になりました。パラメータは、オブザベーションの各サブカテゴリーについて、高い、中間、低い、の3つのレベルの厳しさを定義しています。</p><p>例えば、サブカテゴリー「必要な許可なしの収穫」については、深刻度パラメータは以下のように定義されています。</p><ul><li>高い：許可証の不存在</li><li>中間：許可された日時より前または後に伐採（1ヶ月またはそれ以上）を行っている</li><li>低い：許可された日時より前または後に伐採（1ヶ月未満）</li></ul><p><strong><em>オブザベーションの深刻度レベルは何を意味するのか？</em></strong></p><p>違法伐採やガバナンス問題に関するオブザベーションの深刻度は、同じ違反の他のオブザベーションと比較して相対的な重要性を示します。例えば、500本の木を違法に伐採することは、10本の木を違法に伐採することよりもダメージが大きいと定義されています。OTP
+    深刻度パラメータは、違法行為の異なるカテゴリーやサブカテゴリーの深刻度を比較していない。言い換えれば、個々の違反の種類には同等の重みが与えられます。</p><p><strong><em>深刻度パラメータはどのようにして決定されるのですか？</em></strong></p><p>パラメータは4つの基本的なステップを経て決定されました。</p><ol><li>複数の国や組織からの
+    独立モニター（IM）によるオブザベーションの集約</li><li>影響の観点からの観測の幅の分析</li><li>オブザベーションの幅と法律の文面に基づいて提案されている深刻度パラメータの定義</li><li>コンゴ盆地における独立モニターとのワークショップでの、深刻度パラメータの議論と最終決定</li></ol><p>深刻度パラメータは固定的なものではなく、林業会社や政府を含む
+    OTP 利用者からのフィードバック、独立モニター との更なる協議、OTP の展開と地理的拡大から得られた教訓、生産国と需要国の政策展開に基づいて、定期的に更新されます。</p><p><strong><em>深刻度パラメータにはどのような限界がありますか？</em></strong></p><p>深刻度パラメータの定義は正確な科学的なものではなく、その評価プロセスは個々のオブザベーションの重大度を最終的に決定するものではありません。この深刻度パラメータは、OTPユーザーが情報を解釈するのに役立つように設計されており、OTPユーザーは独自の基準に基づいてオブザベーションの深刻度を解釈することが推奨されています。</p><p>深刻度カテゴリーを定義するために使用される閾値は、深刻度の過小評価や過大評価につながる可能性があることに注意が必要です。例えば、深刻な過剰伐採の閾値は500本ですが、その結果、499本の木の過剰伐採のオブザベーションは中レベルに分類されることになります。したがって、OTP利用者は、あるオブザベーションの重要性について結論を出す前に、深刻度パラメータのレベルだけでなく、詳細についても検討することが推奨されています。</p><p><strong><em>深刻度パラメータの地理的範囲は？</em></strong></p><p><span
+    style="color: black;">OTP開発の第一段階では、コンゴ盆地に焦点を当てています。その結果、深刻度パラメータは、主にこの地域の 独立モニターとの協議とその報告書の評価に基づいています。現在の目標は、グローバルに適用できる深刻度パラメータを開発することです。OTPが地理的に拡大するにつれて、地域レベルまたは国レベルでの深刻度パラメータもそれに応じて開発されることになると思われます。</span></p>'
+
+HowTo_1_ko_translation:
+  how_to_id: 1
+  locale: ko
+  name: 관찰 문서의 심각도 평가
+  description: '<p><strong style="color: rgb(0, 0, 0);"><em>심각도 매개변수는 무엇이며 왜 중요한가요?</em></strong></p><p>지금까지
+    대부분의 IM 보고서는 일반적인 위반 상황이나 법적 틀과 관련하여 관찰 문서의 상대적 중요성에 대한 정보를 제공하지 않았습니다. 이는 특히
+    보고서의 객관성을 유지하기 위해 조사 결과에 대한 해석을 제한하는 의무적 IM 보고서에서 그렇습니다.</p><p>불행히도 이는 산림법을 제대로
+    알지 못하는 많은 사람들이 문서 결과를 이해하고 사용하는 것을 제한합니다. 또한 다수의 보고서는 매우 기술적 인 용어로 작성되어 있어 독자
+    대부분이 특정 관찰에 대한 상대적 중요성을 이해하기 어렵습니다. 예를 들어 어떤 보고서에서 특정 회사가 허가없이 벌목했음을 언급할 때, 회사가
+    어떤 허가도 없이 벌목한 경우와 법적 허가를 받기 2주 전에 벌목한 경우에는 큰 차이가 있습니다.</p><p>OTP 사용자가 불법 벌채나 산림
+    거버넌스 문제에 대한 관찰 문서의 상대적 중요성 또는 의미를 이해할 수 있도록 WRI와 파트너는 독립된 감독기관과 협력하여 각 관찰 범주에
+    대한 다양한 심각도 매개변수를 개발했습니다. 이와 같은 심각도 접근 방식으로 천연 자원, 생물다양성, 근로자 및 경제에 대한 중요성 또는 영향에
+    따라 관찰을 분류할 수 있습니다. 매개변수는 각 하위 범주의 관측 문서에 대해 높음, 중간, 낮음, 총 세 단계의 심각도로 정의합니다.</p><p>예를
+    들어, 하위 범주 "필수 허가를 받지 않은 벌목 행위"의 경우 심각도 매개변수는 다음과 같이 정의됩니다.</p><ul><li>높음 : 허가
+    부재</li><li>중간 : 승인 날짜 전후(1개월 이상)에 벌목</li><li>낮음 : 승인 날짜 전후(1개월 미만)에 벌목</li></ul><p><strong><em>관찰
+    문서의 심각도는 무엇을 의미합니까?</em></strong></p><p>불법 벌채 또는 거버넌스 문제에 대한 관찰 문서의 심각도는 동일한 규정
+    위반을 다룬 다른 관찰 문서와 비교하는 것에서 상대적 중요성을 나타냅니다. 예를 들어, 500 그루의 나무를 불법적으로 자르는 것은 10 그루의
+    나무를 불법적으로 자르는 것보다 더 해로운 것으로 정의됩니다. OTP 심각도 매개변수는 각기 다른 불법 활동 범주 또는 하위범주의 심각도로
+    비교하지 않습니다. 즉, 규정 위반 유형은 동일하게 취급됩니다.</p><p><strong><em>심각도 매개 변수는 어떻게 결정됩니까?</em></strong></p><p>매개
+    변수는 4가지 기본 단계를 통해 결정되었습니다.</p><ol><li>여러 국가와 단체의 IM 관찰 문서 편집</li><li>영향 측면에서 관찰
+    범위 분석</li><li>관찰 범위 및 법적 텍스트를 기반으로 제안된 심각도 매개변수 정의</li><li>워크숍 동안 콩고 분지의 독립된 모니터를
+    통한 심각도 매개변수에 대한 토론 및 최종 결정</li></ol><p>심각도 매개변수는 고정된 것이 아니며 산림 기업과 정부를 포함한 OTP
+    사용자의 피드백, IM과의 추가 자문, OTP 정착 및 지리적 확장으로 얻은 교훈, 생산자 및 수요국의 정책 개발을 기반으로 주기적으로 업데이트됩니다.</p><p><strong><em>심각도
+    매개 변수의 한계는 무엇입니까?</em></strong></p><p>기준이 아니며 그 과정에서 주어진 관측치의 심각도를 단정하려고 하지 않습니다.
+    이 시스템은 OTP 사용자가 정보를 해석할 수 있도록 도울 목적으로 설계되었으며 OTP 사용자는 각자의 기준에 따라 관측의 심각도를 해석할
+    수 있습니다.</p><p>심각도 범주를 정의하는데 사용된 임계값이 심각도를 과소 평가하거나 또는 과대 평가할 수 있습니다. 예를 들어 심각한
+    수준의 과다 벌채에 대한 임계값은 500 그루입니다. 결과적으로 499 그루의 나무를 과도하게 벌채한 사항에 대한 관찰 문서는 보통 범주에
+    속합니다. 따라서 OTP 사용자는 주어진 관찰 문서의 중요성에 대한 결론을 내리기 전에 심각도 매개변수의 분류 뿐 아니라 세부 사항도 고려해야
+    합니다.</p><p><strong><em>심각도 매개 변수의 지리적 적용 범위는 어떻게 됩니까?</em></strong></p><p><span
+    style="color: rgb(0, 0, 0);">OTP 개발의 첫 단계는 콩고 분지입니다. 결과적으로 심각도 매개변수는 주로 해당 지역
+    IM과의 상담 및 보고서 평가에 주로 기반합니다. 최근 목표는 전 세계에 적용 가능한 심각도 매개변수를 개발하는 것입니다. 이는 사용자가 다른
+    생산 국가의 정보를 비교하는 데 도움이 될 것입니다. OTP가 지리적으로 확장되면 지역 또는 국가 수준에서의 심각도 매개변수도 그에 맞춰 개발될
+    수 있을 것입니다.</span></p>'
+
+HowTo_1_vi_translation:
+  how_to_id: 1
+  locale: vi
+  name: Đánh giá mức độ nghiêm trọng của các hoạt động giám sát
+  description: '<p class="ql-align-justify"><strong>Các thông số về mức độ nghiêm
+    trọng là gì và tại sao chúng lại quan trọng?</strong></p><p class="ql-align-justify">Cho
+    đến nay, hầu hết các báo cáo của IM không cung cấp bất kỳ thông tin nào về tầm
+    quan trọng tương đối của một hoạt động giám sát trong bối cảnh các vi phạm diễn
+    ra phổ biến hoặc trong mối liên hệ với khuôn khổ pháp lý. Điều này đặc biệt đúng
+    trong báo của các IM được ủy quyền, vì họ thường tránh suy diễn các phát hiện
+    để đảm bảo tính khách quan của báo cáo. Tuy nhiên, điều này sẽ ngăn cản lượng
+    lớn độc giả không có chuyên môn về lâm luật hiểu và sử dụng những kết quả này.
+    Ngoài ra, nhiều báo cáo được viết bằng ngôn ngữ kỹ thuật khiến phần lớn người
+    đọc khó nắm bắt được tầm quan trọng tương đối của một hoạt động giám sát nhất
+    định. Ví dụ, báo cáo có thể đề cập về một công ty nào đó khai thác mà không có
+    giấy phép, nhưng có sự khác biệt rất lớn giữa trường hợp công ty đã tiến hành
+    khai thác gỗ không hề xin cấp phép với tình huống công ty đó tiến hành khai thác
+    gỗ hai tuần trước khi giấy phép chính thức được cấp.</p><p class="ql-align-justify">Để
+    giúp người sử dụng Cổng thông tin mở OTP hiểu được tầm quan trọng tương đối của
+    một hoạt động giám sát về vấn đề khai thác gỗ trái phép hoặc quản trị rừng, Viện
+    Tài nguyên thế giới (WRI) và các đối tác đã phát triển một loạt các thông số về
+    mức độ nghiêm trọng cho từng hạng mục giám sát kết hợp với các hoạt động giám
+    sát độc lập. Phương pháp tiếp cận theo mức độ nghiêm trọng cho phép gộp các hoạt
+    động giám sát lại với nhau dựa trên mức độ quan trọng/tác động của các vấn đề
+    này lên tài nguyên thiên nhiên, đa dạng sinh học, người lao động và nền kinh tế.
+    Các thông số xác định 3 mức độ nghiêm trọng bao gồm: cao, trung bình và thấp cho
+    mỗi hạng mục giám sát phụ.</p><p class="ql-align-justify">Ví dụ, đối với hạng
+    mục phụ “Khai thác không có giấy phép” các thông số về mức độ nghiêm trọng được
+    xác định như sau:</p><ul><li>Cao: không có giấy phép</li><li>Trung bình: khai
+    thác trước hoặc sau ngày được cấp phép khai thác (một tháng trở lên)</li><li>Thấp:
+    khai thác trước hoặc sau ngày được cấp phép khai thác (dưới một tháng)</li></ul><p
+    class="ql-align-justify"><strong>Mức độ nghiêm trọng của một hoạt động giám sát
+    mang ý nghĩa gì?</strong></p><p class="ql-align-justify">Mức độ nghiêm trọng của
+    một hoạt động giám sát về vấn đề khai thác gỗ trái phép hoặc quản trị chỉ mức
+    độ quan trọng tương đối khi so sánh với các hoạt động giám sát khác trong cùng
+    một vi phạm. Ví dụ, khai thác trái phép 500 cây được xác định là gây thiệt hại
+    lớn hơn chặt 10 cây. Các thông số về mức độ nghiêm trọng được đề cập trong Cổng
+    thông tin mở OTP không so sánh mức độ nghiêm trọng của các hoạt động bất hợp pháp
+    giữa các hạng mục khác nhau hoặc giữa các hạng mục phụ. Nói cách khác, các loại
+    vi phạm có trọng số bằng nhau.</p><p class="ql-align-justify"><strong>Các thông
+    số về mức độ nghiêm trọng được xác định như thế nào?</strong></p><p class="ql-align-justify">Các
+    thông số được xác định qua 4 bước cơ bản.</p><ol><li>Tổng hợp các hoạt động giám
+    sát của IM từ nhiều quốc gia và tổ chức</li><li>Phân tích tác động dựa trên phạm
+    vi giám sát</li><li>Định nghĩa thông số về mức độ nghiêm trọng được đề xuất dựa
+    trên phạm vi giám sát và văn bản pháp lý</li><li>Thảo luận và hoàn thiện thông
+    số về mức độ nghiêm trọng với các Giám sát viên độc lập tại Lưu vực sông Công-gô
+    trong một phiên hội thảo.</li></ol><p class="ql-align-justify">Các thông số về
+    mức độ nghiêm trọng không cố định và sẽ được cập nhật định kỳ dựa trên phản hồi
+    từ người sử dụng Cổng thông tin mở OTP, bao gồm các công ty lâm nghiệp và chính
+    phủ, từ tham vấn thêm với các IM, bài học kinh nghiệm từ việc triển khai và mở
+    rộng sang các vùng địa lý khác của Cổng thông tin OTP, và các bước tiến về chính
+    sách ở các nước sản xuất và nước có nhu cầu<em>.</em></p><p class="ql-align-justify"><strong>Các
+    thông số về mức độ nghiêm trọng có những hạn chế gì?</strong></p><p class="ql-align-justify">Việc
+    xác định các thông số về mức độ nghiêm trọng không phải là một đặc điểm khoa học
+    chính xác và quá trình này không cố gắng xác định chính xác hoàn toàn mức độ nghiêm
+    trọng của một hoạt động giám sát nhất định. Hệ thống này được thiết kế để giúp
+    người dùng OTP tự diễn giải thông tin và khuyến khích họ tự đánh giá mức độ nghiêm
+    trọng của một hoạt động giám sát dựa trên các tiêu chí họ tự đặt ra.</p><p class="ql-align-justify">Cần
+    nhấn mạnh rằng việc sử dụng các ngưỡng để xác định mức độ nghiêm có thể dẫn tới
+    tình trạng đánh giá quá thấp hoặc quá cao về mức độ nghiêm trọng. Ví dụ, ngưỡng
+    chặt hạ 500 cây được coi là nghiêm trọng. Dựa trên tiêu chí đó, một hoạt động
+    giám sát báo cáo về việc chặt hạ 499 cây sẽ được xếp vào loại trung bình. Do đó,
+    người dùng OTP được khuyến khích không chỉ dựa trên kết quả phân loại thông số
+    mức độ nghiêm trọng mà còn xem xét các chi tiết trước khi đi đến kết luận về tầm
+    quan trọng của một giám sát nhất định.</p><p class="ql-align-justify"><strong>Phạm
+    vi địa lý của các thông số về mức độ nghiêm trọng là gì?</strong></p><p class="ql-align-justify">Cổng
+    thông tin mở OTP trong giai đoạn đầu được phát triển tập trung vào Lưu vực sông
+    Công-gô. Do đó, các thông số về mức độ nghiêm trọng chủ yếu dựa trên tham vấn
+    với các IM tại khu vực này và dựa trên phần đánh giá về các báo cáo của họ. Mục
+    tiêu hiện tại là phát triển các thông số về mức độ nghiêm trọng có thể được áp
+    dụng trên toàn cầu, vì một hệ thống như vậy sẽ giúp người dùng so sánh thông tin
+    từ các quốc gia sản xuất khác nhau. Khi mở rộng OTP về mặt địa lý, các thông số
+    về mức độ nghiêm trọng ở cấp khu vực hoặc quốc gia sẽ được phát triển tương ứng.</p>'
+
+HowTo_1_pt_translation:
+  how_to_id: 1
+  locale: pt
+  name: Avaliação da severidade das observações
+  description: '<p><strong style="color: rgb(49, 53, 55);">O que são parâmetros de
+    severidade e por que são importantes?</strong></p><p><span style="color: rgb(49,
+    53, 55);">Até agora, a maioria dos relatórios do MI não fornece informações sobre
+    a importância relativa de uma observação no contexto das infrações comuns ou em
+    relação ao enquadramento legal. Isso é mais visível em relatórios do MI mandatado,
+    que frequentemente limitam as interpretações de suas descobertas para garantir
+    que os seus relatórios permaneçam objetivos. Infelizmente, isto impede que um
+    público mais amplo, não especializado em legislação florestal, entenda e faça
+    uso de suas descobertas. Além disso, muitos relatórios são redigidos em linguagem
+    altamente técnica, tornando difícil para a maioria dos leitores entender a importância
+    relativa de uma determinada observação. Por exemplo, um relatório pode afirmar
+    que uma determinada empresa extraiu madeira sem uma licença, mas há uma diferença
+    significativa entre um caso em que uma empresa extraiu madeira sem obter qualquer
+    licença, ou se extraiu a madeira duas semanas antes de a licença ser concedida
+    oficialmente.</span></p><p><span style="color: rgb(49, 53, 55);">Para ajudar os
+    usuários do OTP a entender a importância relativa - ou significado - de uma observação
+    sobre extração ilegal de madeira ou problema de gerenciamento florestal, o IRM
+    e seus parceiros desenvolveram uma série de parâmetros de severidade para cada
+    categoria de observação, em colaboração com monitores independentes. Esta abordagem
+    de severidade permite agrupar as observações com base na sua significância/impacto
+    no recurso natural, na biodiversidade, nos trabalhectares dores e na economia.
+    Os parâmetros definem 3 níveis de severidade: alto, médio e baixo para cada subcategoria
+    de observações.</span></p><p class="ql-align-justify"><span style="color: rgb(49,
+    53, 55);">Por exemplo, para a subcategoria “Extração sem a licença necessária”,
+    os parâmetros de severidade são definidos da seguinte forma:</span></p><ul><li
+    class="ql-align-justify"><span style="color: rgb(49, 53, 55);">Alta: ausência
+    de licença</span></li><li class="ql-align-justify"><span style="color: rgb(49,
+    53, 55);">Médio: extração antes ou após as datas autorizadas (um mês ou mais)</span></li><li
+    class="ql-align-justify"><span style="color: rgb(49, 53, 55);">Baixa: extração
+    antes ou depois das datas autorizadas (menos de um mês)</span></li></ul><p><strong
+    style="color: rgb(49, 53, 55);">O que significa o nível de severidade de uma observação?</strong></p><p><span
+    style="color: rgb(49, 53, 55);">A severidade de uma observação sobre extração
+    de madeira ilegal ou problema de gerenciamento refere-se à significância relativa
+    em comparação a outras observações da mesma infração. Por exemplo, o corte ilegal
+    de 500 árvores é definido como mais danoso do que o corte ilegal de 10 árvores.
+    Os parâmetros de severidade do OTP não comparam a severidade de diferentes categorias
+    ou subcategorias de atividades ilegais. Em outras palavras, aos tipos de infração
+    é dado o mesmo peso.</span></p><p><strong style="color: rgb(49, 53, 55);">Como
+    são determinados os parâmetros de severidade?</strong></p><p><span style="color:
+    rgb(49, 53, 55);">Os parâmetros foram determinados através de 4 etapas básicas.</span></p><ol><li><span
+    style="color: rgb(49, 53, 55);">Compilação de observações MI de vários países
+    e organizações</span></li><li><span style="color: rgb(49, 53, 55);">Análise do
+    índice de observações em termos de impacto</span></li><li><span style="color:
+    rgb(49, 53, 55);">Definição dos parâmetros de severidade propostos com base no
+    índice de observações e no texto jurídico</span></li><li><span style="color: rgb(49,
+    53, 55);">Discussões e finalização dos parâmetros de severidade com monitores
+    independentes, da Bacia do Congo, durante um workshop.</span></li></ol><p><span
+    style="color: rgb(49, 53, 55);">Os parâmetros de severidade não são estáticos
+    e serão atualizados periodicamente com base no feedback dos usuários do OTP, incluindo
+    empresas florestais e governos, consultas adicionais com MIs, ensinamentos obtidos
+    da implementação e da expansão geográfica do OTP e o desenvolvimento de políticas
+    nos países produtores e do lado da demanda.</span></p><p><strong style="color:
+    rgb(49, 53, 55);">Quais são as limitações dos parâmetros de severidade?</strong></p><p>Definir
+    parâmetros de severidade não é uma ciência exata e o processo não tenta determinar
+    definitivamente a severidade de uma determinada observação. Este sistema é projetado
+    para ajudar os usuários OTP a interpretarem as informações sendo também encorajados
+    a interpretarem a severidade de uma observação com base em seus próprios critérios.</p><p>Vale
+    ressaltar que os limiares utilizados para definir as categorias de severidade
+    podem levar à subvalorização ou sobrevalorização da mesma. Por exemplo, o limite
+    para o corte excessivo grave é de 500 árvores. Como resultado, uma observação
+    sobre a extração excessiva de 499 árvores cairia na categoria moderada. Os usuários
+    do OTP são, portanto, encorajados a considerar não apenas a classificação do parâmetro
+    de severidade, mas também os detalhes antes de chegarem a uma conclusão sobre
+    a importância de uma determinada observação.</p><p><strong style="color: rgb(49,
+    53, 55);">Qual é a cobertura geográfica dos parâmetros de severidade?</strong></p><p>A
+    primeira etapa do desenvolvimento da OTP se concentra na Bacia do Congo. Como
+    resultado, os parâmetros de severidade se baseiam principalmente em consultas
+    com MIs na região e avaliações de seus relatórios. O objetivo atual é desenvolver
+    parâmetros de severidade que possam ser aplicados globalmente, pois tal sistema
+    ajudaria os usuários a comparar informações de diferentes países produtores. À
+    medida que o OTP se expande geograficamente, <span style="color: rgb(49, 53, 55);">os
+    parâmetros de severidade a nível regional ou nacional, serão desenvolvidos em
+    conformidade.</span></p>'
+
+HowTo_2_zh-CN_translation:
+  how_to_id: 2
+  locale: zh-CN
+  name: 分数计算
+  description: "<p>透明度分数是根据每个经营者所提供的文件占所有要求文件总数的百分比计算的。</p>"
+
+HowTo_2_en_translation:
+  how_to_id: 2
+  locale: en
+  name: Score calculation
+  description: "<p>For each producer, a transparency score is calculated based on
+    the percentage of documents shared on the OTP out of the total number of documents
+    requested.</p>"
+
+HowTo_2_fr_translation:
+  how_to_id: 2
+  locale: fr
+  name: Calcul du score
+  description: "<p>Pour chaque exploitant, un score de transparence est calculé sous
+    forme d'un pourcentage prenant en compte le nombre de documents rendus publics
+    dans l'OTP sur le nombre total de documents requis.</p>"
+
+HowTo_2_ja_translation:
+  how_to_id: 2
+  locale: ja
+  name: スコア計算
+  description: '<p><span style="color: black;">生産者ごとに、要求されている書類の総数に対するOTP上で共有された書類の割合に基づいて透明性スコアが計算されます。</span></p>'
+
+HowTo_2_ko_translation:
+  how_to_id: 2
+  locale: ko
+  name: 점수 계산
+  description: '<p><span style="color: rgb(0, 0, 0);">각 생산 기업별 투명성 점수는 OTP에 공유된 문서의
+    수를 기업이 공유 요청 받은 문서의 수로 나눠서 계산합니다. 값은&nbsp;퍼센트(%)입니다.</span></p>'
+
+HowTo_2_vi_translation:
+  how_to_id: 2
+  locale: vi
+  name: 'Tính điểm '
+  description: '<p><span style="color: black;">Đối với mỗi nhà sản xuất, điểm minh
+    bạch được tính dựa trên tỷ lệ phần trăm tài liệu được chia sẻ lên Cổng thông tin
+    mở OTP trên tổng số tài liệu yêu cầu.</span></p>'
+
+HowTo_2_pt_translation:
+  how_to_id: 2
+  locale: pt
+  name: Cálculo de pontuação
+  description: '<p><span style="color: rgb(49, 53, 55);">Para cada produtor, é calculada
+    uma pontuação de transparência com base na porcentagem de documentos compartilhectares
+    dos no OTP do número total de documentos solicitados.</span></p>'
+
+HowTo_3_fr_translation:
+  how_to_id: 3
+  locale: fr
+  name: Etendue géographique
+  description: "<p>Déployé dans un premier temps au Congo et en RDC, l'OTP sera étendu
+    à d'autres pays producteurs selon les ressources disponibles et les opportunités,
+    à commencer par le Gabon, le Cameroun et la République Centrafricaine.&nbsp;</p>"
+
+HowTo_3_zh-CN_translation:
+  how_to_id: 3
+  locale: zh-CN
+  name: 地理范围
+  description: "<p>从刚果共和国和刚果民主共和国开始，公开木材信息平台将在未来机会合适时扩展到其他主要的木材出口国。</p>"
+
+HowTo_3_en_translation:
+  how_to_id: 3
+  locale: en
+  name: Geographical scope
+  description: "<p>Beginning with the Republic of Congo and the Democratic Republic
+    of Congo, the OTP will expand to other major timber exporting countries as resources
+    and opportunities allow. We are planning the expansion of our model to Gabon,
+    Cameroon, and the CAR next.</p>"
+
+HowTo_3_ko_translation:
+  how_to_id: 3
+  locale: ko
+  name: '지리적 범위 '
+  description: '<p><span style="color: rgb(0, 0, 0);">OTP는 자원과 기회가 주어진다면 콩고 공화국과 콩고
+    민주 공화국에서 시작해 주요 목재 수출국으로 확장할 예정입니다. 가봉, 카메룬, 중앙아프리카 공화국으로 우리의 모델을 확장시켜나갈 계획입니다.&nbsp;</span></p>'
+
+HowTo_3_ja_translation:
+  how_to_id: 3
+  locale: ja
+  name: 地理的範囲
+  description: '<p><span style="color: black;">コンゴ共和国とコンゴ民主共和国から開始し、OTPは資源と機会が許す限り、他​​の主要な木材輸出国にも取り組みます。今後は、ガボン、カメルーン、中央アフリカ共和国を対象にすることを計画しています</span></p>'
+
+HowTo_3_vi_translation:
+  how_to_id: 3
+  locale: vi
+  name: Phạm vi địa lý
+  description: '<p><span style="color: black;">Được phát triển đầu tiên ở Cộng hòa
+    Công-gô và Cộng hòa Dân chủ Công-gô, Cổng thông tin mở về gỗ OTP sau đó sẽ được
+    mở rộng sang các quốc gia xuất khẩu gỗ lớn khác khi nguồn lực và cơ hội cho phép.
+    Chúng tôi đang lên kế hoạch mở rộng mô hình này sang Gabon, Ca-mơ-run, và tiếp
+    theo là Cộng hòa Trung Phi.&nbsp;&nbsp;</span></p>'
+
+HowTo_3_pt_translation:
+  how_to_id: 3
+  locale: pt
+  name: Escopo geográfico
+  description: '<p><span style="color: rgb(49, 53, 55);">O OTP foi lançado na República
+    do Congo e na República Democrática do Congo e alargado ao Gabão, aos Camarões
+    e à RCA. Ele se expandirá para outros países principais exportadores de madeira
+    conforme os recursos e as oportunidades o permitirem.</span></p>'
+
+HowTo_4_fr_translation:
+  how_to_id: 4
+  locale: fr
+  name: Sources d'information
+  description: "<p>L'OTP&nbsp;compile des informations de trois sources différentes
+    sur les producteurs de bois : l'administration, le secteur privé, des tierces
+    parties&nbsp;(ONG et autres acteurs qualifiés)</p>"
+
+HowTo_4_zh-CN_translation:
+  how_to_id: 4
+  locale: zh-CN
+  name: 信息来源
+  description: "<p>公开木材信息平台（OTP）整理了三种不同来源的木材生产者信息。这三种信息来源包括政府，私营部门，以及第三方机构（非政府组织和其他有资格的参与者）</p>"
+
+HowTo_4_en_translation:
+  how_to_id: 4
+  locale: en
+  name: Sources of information
+  description: "<p>The OTP compiles information on timber producers from three different
+    sources. All registered timber producers, permit boundaries and contracts to harvest
+    are pulled directly from the forest administration’s database. Producer companies
+    voluntarily disclose information according to a standard list of compliance documents
+    and related metrics. NGOs and other qualified actors complement and verify information
+    provided by operators.</p>"
+
+HowTo_4_ko_translation:
+  how_to_id: 4
+  locale: ko
+  name: 정보 출처
+  description: '<p><span style="color: rgb(0, 0, 0);">OTP는 각기 다른 공급 기관 세 곳에서 목재 생산자에
+    관한 정보를 수집합니다. 등록된 모든 목재 생산 기업, 정부 허가 경계, 그리고 벌채 계약을 직접 산림 행정기관의 데이터베이스에서 직접 가져옵니다.
+    생산 기업은 이행 입증 기본 문서 목록에 따라 정보를 자발적으로 공개합니다. NGO와 그 외 검증된 활동가들은 기업이 제출한 문서를 보완하고
+    검증합니다.&nbsp;</span></p>'
+
+HowTo_4_ja_translation:
+  how_to_id: 4
+  locale: ja
+  name: 情報源
+  description: '<p><span style="color: black;">OTPは3つの異なる情報源から木材生産者に関する情報を収集しています。登録されているすべての木材生産者、許可された区域、伐採契約は森林管理データベースから直接入手します。生産者企業は、法遵守に関する書類の標準的なリストと関連指標に従って、自発的に情報を開示します。
+    NGOやその他の資格のある主体は、オペレーターから提供された情報を補完し、検証します。</span></p>'
+
+HowTo_4_vi_translation:
+  how_to_id: 4
+  locale: vi
+  name: Nguồn thông tin
+  description: '<p><span style="color: black;">Cổng thông tin mở về gỗ (OTP) tổng
+    hợp thông tin về các nhà sản xuất gỗ từ ba nguồn khác nhau. Thông tin về đăng
+    ký của các nhà sản xuất gỗ, ranh giới được cấp phép và hợp đồng khai thác được
+    lấy trực tiếp từ cơ sở dữ liệu của cơ quan quản lý rừng. Các nhà sản xuất tự nguyện
+    cung cấp thông tin theo một danh mục chuẩn về tài liệu chứng minh tuân thủ và
+    các số liệu liên quan. Các tổ chức phi chính phủ và các tổ chức đủ điều kiện khác
+    bổ sung và xác minh thông tin do các nhà sản xuất cung cấp.</span></p>'
+
+HowTo_4_pt_translation:
+  how_to_id: 4
+  locale: pt
+  name: Fontes de informação
+  description: '<p><span style="color: rgb(49, 53, 55);">O OTP compila informações
+    sobre produtores de madeira de três fontes diferentes. Todos os produtores de
+    madeira registrados, limites da licença e contratos de exploração extraídos diretamente
+    do banco de dados da administração florestal. As empresas produtoras divulgam
+    informações voluntariamente de acordo com uma lista padrão de documentos de observância
+    e métricas relacionadas. ONGs e outros agentes qualificados complementam e verificam
+    as informações fornecidas por operadores.</span></p>'

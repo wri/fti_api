@@ -1,0 +1,330 @@
+
+Fmu_12_en_translation:
+  fmu_id: 12
+  locale: en
+  name: 047/11
+
+Fmu_12_fr_translation:
+  fmu_id: 12
+  locale: fr
+  name: 047/11
+
+Fmu_49_fr_translation:
+  fmu_id: 49
+  locale: fr
+  name: 005/18
+
+Fmu_49_en_translation:
+  fmu_id: 49
+  locale: en
+  name: 005/18
+
+Fmu_50_en_translation:
+  fmu_id: 50
+  locale: en
+  name: 046/11
+
+Fmu_50_fr_translation:
+  fmu_id: 50
+  locale: fr
+  name: 046/11
+
+Fmu_53_en_translation:
+  fmu_id: 53
+  locale: en
+  name: Loundoungou-toukoulaka
+
+Fmu_53_fr_translation:
+  fmu_id: 53
+  locale: fr
+  name: Loundoungou-toukoulaka
+
+Fmu_54_fr_translation:
+  fmu_id: 54
+  locale: fr
+  name: Kabo
+
+Fmu_54_en_translation:
+  fmu_id: 54
+  locale: en
+  name: Kabo
+
+Fmu_55_en_translation:
+  fmu_id: 55
+  locale: en
+  name: Pokola
+
+Fmu_55_fr_translation:
+  fmu_id: 55
+  locale: fr
+  name: Pokola
+
+Fmu_56_en_translation:
+  fmu_id: 56
+  locale: en
+  name: Ngombe
+
+Fmu_56_fr_translation:
+  fmu_id: 56
+  locale: fr
+  name: Ngombe
+
+Fmu_68_en_translation:
+  fmu_id: 68
+  locale: en
+  name: Tala-tala
+
+Fmu_68_fr_translation:
+  fmu_id: 68
+  locale: fr
+  name: Tala-tala
+
+Fmu_83_en_translation:
+  fmu_id: 83
+  locale: en
+  name: Doumanga
+
+Fmu_83_fr_translation:
+  fmu_id: 83
+  locale: fr
+  name: Doumanga
+
+Fmu_84_en_translation:
+  fmu_id: 84
+  locale: en
+  name: Nkola
+
+Fmu_84_fr_translation:
+  fmu_id: 84
+  locale: fr
+  name: Nkola
+
+Fmu_105_fr_translation:
+  fmu_id: 105
+  locale: fr
+  name: Mokabi dzanga
+
+Fmu_105_en_translation:
+  fmu_id: 105
+  locale: en
+  name: Mokabi dzanga
+
+Fmu_107_fr_translation:
+  fmu_id: 107
+  locale: fr
+  name: Cayo
+
+Fmu_107_en_translation:
+  fmu_id: 107
+  locale: en
+  name: Cayo
+
+Fmu_109_fr_translation:
+  fmu_id: 109
+  locale: fr
+  name: Mimbeli ibenga
+
+Fmu_109_en_translation:
+  fmu_id: 109
+  locale: en
+  name: Mimbeli ibenga
+
+Fmu_11496_en_translation:
+  fmu_id: 11496
+  locale: en
+  name: 00-004
+
+Fmu_11496_fr_translation:
+  fmu_id: 11496
+  locale: fr
+  name: 00-004
+
+Fmu_11499_en_translation:
+  fmu_id: 11499
+  locale: en
+  name: 11-001
+
+Fmu_11499_fr_translation:
+  fmu_id: 11499
+  locale: fr
+  name: 11-001
+
+Fmu_11502_en_translation:
+  fmu_id: 11502
+  locale: en
+  name: '08-009'
+
+Fmu_11502_fr_translation:
+  fmu_id: 11502
+  locale: fr
+  name: '08-009'
+
+Fmu_11521_fr_translation:
+  fmu_id: 11521
+  locale: fr
+  name: '08-003'
+
+Fmu_11521_en_translation:
+  fmu_id: 11521
+  locale: en
+  name: '08-003'
+
+Fmu_11523_en_translation:
+  fmu_id: 11523
+  locale: en
+  name: '08-005'
+
+Fmu_11523_fr_translation:
+  fmu_id: 11523
+  locale: fr
+  name: '08-005'
+
+Fmu_11569_en_translation:
+  fmu_id: 11569
+  locale: en
+  name: 10-003
+
+Fmu_11569_fr_translation:
+  fmu_id: 11569
+  locale: fr
+  name: 10-003
+
+Fmu_11579_en_translation:
+  fmu_id: 11579
+  locale: en
+  name: '09-005A'
+
+Fmu_11579_fr_translation:
+  fmu_id: 11579
+  locale: fr
+  name: '09-005A'
+
+Fmu_11602_en_translation:
+  fmu_id: 11602
+  locale: en
+  name: 10-002
+
+Fmu_11602_fr_translation:
+  fmu_id: 11602
+  locale: fr
+  name: 10-002
+
+Fmu_11604_en_translation:
+  fmu_id: 11604
+  locale: en
+  name: 10-004
+
+Fmu_11604_fr_translation:
+  fmu_id: 11604
+  locale: fr
+  name: 10-004
+
+Fmu_11617_en_translation:
+  fmu_id: 11617
+  locale: en
+  name: 10-011
+
+Fmu_11617_fr_translation:
+  fmu_id: 11617
+  locale: fr
+  name: 10-011
+
+Fmu_11618_en_translation:
+  fmu_id: 11618
+  locale: en
+  name: '09-003'
+
+Fmu_11618_fr_translation:
+  fmu_id: 11618
+  locale: fr
+  name: '09-003'
+
+Fmu_11621_en_translation:
+  fmu_id: 11621
+  locale: en
+  name: 10-007
+
+Fmu_11621_fr_translation:
+  fmu_id: 11621
+  locale: fr
+  name: 10-007
+
+Fmu_11634_en_translation:
+  fmu_id: 11634
+  locale: en
+  name: '09-004A'
+
+Fmu_11634_fr_translation:
+  fmu_id: 11634
+  locale: fr
+  name: '09-004A'
+
+Fmu_11660_en_translation:
+  fmu_id: 11660
+  locale: en
+  name: 10-001
+
+Fmu_11660_fr_translation:
+  fmu_id: 11660
+  locale: fr
+  name: 10-001
+
+Fmu_11740_en_translation:
+  fmu_id: 11740
+  locale: en
+  name: '1001311'
+
+Fmu_11740_fr_translation:
+  fmu_id: 11740
+  locale: fr
+  name: '1001311'
+
+Fmu_11749_en_translation:
+  fmu_id: 11749
+  locale: en
+  name: '1001309'
+
+Fmu_11749_fr_translation:
+  fmu_id: 11749
+  locale: fr
+  name: '1001309'
+
+Fmu_20099_en_translation:
+  fmu_id: 20099
+  locale: en
+  name: '0702111'
+
+Fmu_20099_fr_translation:
+  fmu_id: 20099
+  locale: fr
+  name: '0702111'
+
+Fmu_100420_en_translation:
+  fmu_id: 100420
+  locale: en
+  name: '0702114'
+
+Fmu_100420_fr_translation:
+  fmu_id: 100420
+  locale: fr
+  name: '0702114'
+
+Fmu_100438_en_translation:
+  fmu_id: 100438
+  locale: en
+  name: '0702118'
+
+Fmu_100438_fr_translation:
+  fmu_id: 100438
+  locale: fr
+  name: '0702118'
+
+Fmu_100458_en_translation:
+  fmu_id: 100458
+  locale: en
+  name: '0702135'
+
+Fmu_100458_fr_translation:
+  fmu_id: 100458
+  locale: fr
+  name: '0702135'

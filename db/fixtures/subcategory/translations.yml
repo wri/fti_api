@@ -1,0 +1,2197 @@
+
+Subcategory_1_en_translation:
+  subcategory_id: 1
+  locale: en
+  name: Abandonment of timber
+
+Subcategory_1_fr_translation:
+  subcategory_id: 1
+  locale: fr
+  name: Abandon de bois
+
+Subcategory_1_zh-CN_translation:
+  subcategory_id: 1
+  locale: zh-CN
+  name: 放弃木材
+
+Subcategory_1_ja_translation:
+  subcategory_id: 1
+  locale: ja
+  name: 木材の投棄
+
+Subcategory_1_ko_translation:
+  subcategory_id: 1
+  locale: ko
+  name: 목재 유기
+
+Subcategory_1_vi_translation:
+  subcategory_id: 1
+  locale: vi
+  name: Gỗ bị vứt bỏ
+
+Subcategory_1_pt_translation:
+  subcategory_id: 1
+  locale: pt
+  name: Abandono de madeira
+
+Subcategory_2_en_translation:
+  subcategory_id: 2
+  locale: en
+  name: Timber laundering
+
+Subcategory_2_fr_translation:
+  subcategory_id: 2
+  locale: fr
+  name: Blanchiment de bois
+
+Subcategory_2_zh-CN_translation:
+  subcategory_id: 2
+  locale: zh-CN
+  name: 木材洗白
+
+Subcategory_2_ja_translation:
+  subcategory_id: 2
+  locale: ja
+  name: 木材ロンダリング
+
+Subcategory_2_ko_translation:
+  subcategory_id: 2
+  locale: ko
+  name: 목재 세탁
+
+Subcategory_2_vi_translation:
+  subcategory_id: 2
+  locale: vi
+  name: Hợp pháp hóa gỗ lậu
+
+Subcategory_2_pt_translation:
+  subcategory_id: 2
+  locale: pt
+  name: Lavagem de madeira
+
+Subcategory_3_en_translation:
+  subcategory_id: 3
+  locale: en
+  name: Insufficient consultation of local/indigenous populations
+
+Subcategory_3_fr_translation:
+  subcategory_id: 3
+  locale: fr
+  name: Consultation insuffisante des populations locales / autochtones
+
+Subcategory_3_zh-CN_translation:
+  subcategory_id: 3
+  locale: zh-CN
+  name: 未能足够征询当地/本土人口的意见
+
+Subcategory_3_ja_translation:
+  subcategory_id: 3
+  locale: ja
+  name: 地域住民／先住民との協議不足
+
+Subcategory_3_ko_translation:
+  subcategory_id: 3
+  locale: ko
+  name: 지역 주민 또는 현지인에 대한 불충분한 협의
+
+Subcategory_3_vi_translation:
+  subcategory_id: 3
+  locale: vi
+  name: Không tham vấn đầy đủ với cộng đồng địa phương/bản địa
+
+Subcategory_3_pt_translation:
+  subcategory_id: 3
+  locale: pt
+  name: Consulta insuficiente às populações locais/indígenas
+
+Subcategory_4_fr_translation:
+  subcategory_id: 4
+  locale: fr
+  name: Coupe d'essence non autorisée
+
+Subcategory_4_en_translation:
+  subcategory_id: 4
+  locale: en
+  name: Harvesting non authorized species
+
+Subcategory_4_zh-CN_translation:
+  subcategory_id: 4
+  locale: zh-CN
+  name: 采伐未授权树种
+
+Subcategory_4_ja_translation:
+  subcategory_id: 4
+  locale: ja
+  name: 許可されていない樹種の伐採
+
+Subcategory_4_ko_translation:
+  subcategory_id: 4
+  locale: ko
+  name: 승인받지 않은 수종 수확
+
+Subcategory_4_vi_translation:
+  subcategory_id: 4
+  locale: vi
+  name: Khai thác các loài cây không được phép
+
+Subcategory_4_pt_translation:
+  subcategory_id: 4
+  locale: pt
+  name: Extração de espécies proibidas
+
+Subcategory_5_en_translation:
+  subcategory_id: 5
+  locale: en
+  name: Harvesting in a protected area or other area where logging is prohibited
+
+Subcategory_5_fr_translation:
+  subcategory_id: 5
+  locale: fr
+  name: Coupe dans une aire protégée, domaine forestier national ou autre zone où
+    l'exploitation forestière n'est pas autorisée.
+
+Subcategory_5_zh-CN_translation:
+  subcategory_id: 5
+  locale: zh-CN
+  name: 在保护区或其他禁止采伐区采伐
+
+Subcategory_5_ja_translation:
+  subcategory_id: 5
+  locale: ja
+  name: 保護地域など伐採が禁止された場所での伐採
+
+Subcategory_5_ko_translation:
+  subcategory_id: 5
+  locale: ko
+  name: 보호구역 또는 벌목 금지 구역에서 수확
+
+Subcategory_5_vi_translation:
+  subcategory_id: 5
+  locale: vi
+  name: Khai thác gỗ trong các khu được bảo vệ hoặc ở nơi cấm khai thác
+
+Subcategory_5_pt_translation:
+  subcategory_id: 5
+  locale: pt
+  name: Harvesting in a protected area or other area where logging is prohibited
+
+Subcategory_6_en_translation:
+  subcategory_id: 6
+  locale: en
+  name: Cutting outside permit boundaries
+
+Subcategory_6_fr_translation:
+  subcategory_id: 6
+  locale: fr
+  name: Coupe en dehors des limites
+
+Subcategory_6_zh-CN_translation:
+  subcategory_id: 6
+  locale: zh-CN
+  name: 在许可边界外砍伐
+
+Subcategory_6_ja_translation:
+  subcategory_id: 6
+  locale: ja
+  name: 許可された区域の外での伐採
+
+Subcategory_6_ko_translation:
+  subcategory_id: 6
+  locale: ko
+  name: 허가 한계선 외 벌채
+
+Subcategory_6_vi_translation:
+  subcategory_id: 6
+  locale: vi
+  name: Chặt cây bên ngoài ranh giới được cấp phép
+
+Subcategory_6_pt_translation:
+  subcategory_id: 6
+  locale: pt
+  name: Corte fora dos limites da licença
+
+Subcategory_7_en_translation:
+  subcategory_id: 7
+  locale: en
+  name: Cutting trees below minimum diameter
+
+Subcategory_7_fr_translation:
+  subcategory_id: 7
+  locale: fr
+  name: Coupe sous-diamètre
+
+Subcategory_7_zh-CN_translation:
+  subcategory_id: 7
+  locale: zh-CN
+  name: 砍伐未达到最小直径的树木
+
+Subcategory_7_ja_translation:
+  subcategory_id: 7
+  locale: ja
+  name: 伐採可能な胸高直径下限以下の伐採
+
+Subcategory_7_ko_translation:
+  subcategory_id: 7
+  locale: ko
+  name: 최소 직경 이하의 나무 벌채
+
+Subcategory_7_vi_translation:
+  subcategory_id: 7
+  locale: vi
+  name: Chặt cây dưới đường kính thân cây tối thiểu
+
+Subcategory_7_pt_translation:
+  subcategory_id: 7
+  locale: pt
+  name: Cortar árvores abaixo do diâmetro mínimo
+
+Subcategory_8_en_translation:
+  subcategory_id: 8
+  locale: en
+  name: Deforestation without authorisation
+
+Subcategory_8_fr_translation:
+  subcategory_id: 8
+  locale: fr
+  name: Déboisement sans autorisation
+
+Subcategory_8_zh-CN_translation:
+  subcategory_id: 8
+  locale: zh-CN
+  name: 未经授权毁林
+
+Subcategory_8_ja_translation:
+  subcategory_id: 8
+  locale: ja
+  name: 許可なしの皆伐
+
+Subcategory_8_ko_translation:
+  subcategory_id: 8
+  locale: ko
+  name: 무허가 산림황폐화
+
+Subcategory_8_vi_translation:
+  subcategory_id: 8
+  locale: vi
+  name: Phá rừng không phép
+
+Subcategory_8_pt_translation:
+  subcategory_id: 8
+  locale: pt
+  name: Desflorestamento sem autorização
+
+Subcategory_9_fr_translation:
+  subcategory_id: 9
+  locale: fr
+  name: Défaut de marquage sur les billes, les culées et les souches.
+
+Subcategory_9_en_translation:
+  subcategory_id: 9
+  locale: en
+  name: Default on markings on logs, stumps, other wood products
+
+Subcategory_9_zh-CN_translation:
+  subcategory_id: 9
+  locale: zh-CN
+  name: 未能标记原木，树桩，以及其他木制品
+
+Subcategory_9_ko_translation:
+  subcategory_id: 9
+  locale: ko
+  name: 목재, 그루터기, 기타 목제품 대상 마킹 행위 안함
+
+Subcategory_9_ja_translation:
+  subcategory_id: 9
+  locale: ja
+  name: 木材、切り株、他の木材製品へのマーク付けの不履行
+
+Subcategory_9_vi_translation:
+  subcategory_id: 9
+  locale: vi
+  name: Có vi phạm trong việc đánh dấu trên phần gỗ đã khai thác, gốc cây sau khai
+    thác và các sản phẩm gỗ khác
+
+Subcategory_9_pt_translation:
+  subcategory_id: 9
+  locale: pt
+  name: Inadimplência nas marcações em toros, cepos e outros produtos de madeira
+
+Subcategory_10_en_translation:
+  subcategory_id: 10
+  locale: en
+  name: Default on demarcation of cutting permit boundaries
+
+Subcategory_10_fr_translation:
+  subcategory_id: 10
+  locale: fr
+  name: Défaut de matérialisation des limites de coupe annuelle
+
+Subcategory_10_zh-CN_translation:
+  subcategory_id: 10
+  locale: zh-CN
+  name: 未按采伐许可证边界采伐
+
+Subcategory_10_ja_translation:
+  subcategory_id: 10
+  locale: ja
+  name: 伐採許可エリアの境界画定の不履行
+
+Subcategory_10_ko_translation:
+  subcategory_id: 10
+  locale: ko
+  name: 벌채 허가 한계선 구분 안함
+
+Subcategory_10_vi_translation:
+  subcategory_id: 10
+  locale: vi
+  name: Có vi phạm trong việc phân định ranh giới của diện tích được phép khai thác
+    gỗ
+
+Subcategory_10_pt_translation:
+  subcategory_id: 10
+  locale: pt
+  name: Inadimplência na demarcação dos limites da licença de corte
+
+Subcategory_11_fr_translation:
+  subcategory_id: 11
+  locale: fr
+  name: Défaut de paiement des amendes
+
+Subcategory_11_en_translation:
+  subcategory_id: 11
+  locale: en
+  name: Default on payment of fines
+
+Subcategory_11_zh-CN_translation:
+  subcategory_id: 11
+  locale: zh-CN
+  name: 税款支付违约
+
+Subcategory_11_ja_translation:
+  subcategory_id: 11
+  locale: ja
+  name: 罰金の支払いの不履行
+
+Subcategory_11_ko_translation:
+  subcategory_id: 11
+  locale: ko
+  name: 벌금 지불 안함
+
+Subcategory_11_vi_translation:
+  subcategory_id: 11
+  locale: vi
+  name: Có vi phạm trong việc nộp phạt
+
+Subcategory_11_pt_translation:
+  subcategory_id: 11
+  locale: pt
+  name: Inadimplência no pagamento de multas
+
+Subcategory_12_fr_translation:
+  subcategory_id: 12
+  locale: fr
+  name: Défaut de paiement des taxes forestières
+
+Subcategory_12_en_translation:
+  subcategory_id: 12
+  locale: en
+  name: Default on payments of tax
+
+Subcategory_12_zh-CN_translation:
+  subcategory_id: 12
+  locale: zh-CN
+  name: 税款支付违约
+
+Subcategory_12_ja_translation:
+  subcategory_id: 12
+  locale: ja
+  name: 税の支払いの不履行
+
+Subcategory_12_ko_translation:
+  subcategory_id: 12
+  locale: ko
+  name: 세금 납부 안함
+
+Subcategory_12_vi_translation:
+  subcategory_id: 12
+  locale: vi
+  name: Có vi phạm trong việc đóng thuế
+
+Subcategory_12_pt_translation:
+  subcategory_id: 12
+  locale: pt
+  name: Inadimplência no pagamento do imposto
+
+Subcategory_13_en_translation:
+  subcategory_id: 13
+  locale: en
+  name: Default on maintenance of exploitation documents
+
+Subcategory_13_fr_translation:
+  subcategory_id: 13
+  locale: fr
+  name: Défaut de tenue des documents de suivi de l'exploitation
+
+Subcategory_13_zh-CN_translation:
+  subcategory_id: 13
+  locale: zh-CN
+  name: 采伐文件没有更新
+
+Subcategory_13_ja_translation:
+  subcategory_id: 13
+  locale: ja
+  name: 木材の伐採に関する書類の管理の不履行
+
+Subcategory_13_ko_translation:
+  subcategory_id: 13
+  locale: ko
+  name: 이용 문서 유지 안함
+
+Subcategory_13_vi_translation:
+  subcategory_id: 13
+  locale: vi
+  name: Có vi phạm trong việc bảo quản tài liệu về khai thác
+
+Subcategory_13_pt_translation:
+  subcategory_id: 13
+  locale: pt
+  name: Inadimplência na manutenção dos documentos de exploração
+
+Subcategory_14_en_translation:
+  subcategory_id: 14
+  locale: en
+  name: Default on transmission of documents to relevant authorities
+
+Subcategory_14_fr_translation:
+  subcategory_id: 14
+  locale: fr
+  name: Défaut de transmission des documents d'exploitation
+
+Subcategory_14_zh-CN_translation:
+  subcategory_id: 14
+  locale: zh-CN
+  name: 未能将运输文件递交给有关当局
+
+Subcategory_14_ja_translation:
+  subcategory_id: 14
+  locale: ja
+  name: 関連当局への書類送付の不履行
+
+Subcategory_14_ko_translation:
+  subcategory_id: 14
+  locale: ko
+  name: 유관기관에 문서 전송 안함
+
+Subcategory_14_vi_translation:
+  subcategory_id: 14
+  locale: vi
+  name: Có vi phạm trong quá trình chuyển tài liệu cho các cơ quan hữu quan
+
+Subcategory_14_pt_translation:
+  subcategory_id: 14
+  locale: pt
+  name: Inadimplência na transmissão  de documentos às autoridades competentes
+
+Subcategory_15_en_translation:
+  subcategory_id: 15
+  locale: en
+  name: Default on timber processing documents
+
+Subcategory_15_fr_translation:
+  subcategory_id: 15
+  locale: fr
+  name: Défaut sur documents de transformation de bois
+
+Subcategory_15_zh-CN_translation:
+  subcategory_id: 15
+  locale: zh-CN
+  name: 缺少木材加工文件
+
+Subcategory_15_ja_translation:
+  subcategory_id: 15
+  locale: ja
+  name: 木材加工に関する書類の不履行
+
+Subcategory_15_ko_translation:
+  subcategory_id: 15
+  locale: ko
+  name: 목재 가공 문서 작성 안함
+
+Subcategory_15_vi_translation:
+  subcategory_id: 15
+  locale: vi
+  name: Thiếu giấy tờ liên quan đến chế biến gỗ
+
+Subcategory_15_pt_translation:
+  subcategory_id: 15
+  locale: pt
+  name: Inadimplência em documentos de processamento de madeira
+
+Subcategory_16_en_translation:
+  subcategory_id: 16
+  locale: en
+  name: Recruitment/management of workers in breach of labour laws
+
+Subcategory_16_fr_translation:
+  subcategory_id: 16
+  locale: fr
+  name: Défaut sur le recrutement ou la gestion du personnel
+
+Subcategory_16_zh-CN_translation:
+  subcategory_id: 16
+  locale: zh-CN
+  name: 违法劳工法招聘/管理工人
+
+Subcategory_16_ja_translation:
+  subcategory_id: 16
+  locale: ja
+  name: 労働法に反した労働者の雇用や管理
+
+Subcategory_16_ko_translation:
+  subcategory_id: 16
+  locale: ko
+  name: 노동법을 위반하면서 노동자 고용 및/또는 관리
+
+Subcategory_16_vi_translation:
+  subcategory_id: 16
+  locale: vi
+  name: Vi phạm Luật Lao động trong công tác tuyển dụng/quản lý lao động
+
+Subcategory_16_pt_translation:
+  subcategory_id: 16
+  locale: pt
+  name: Recrutamento/gerenciamento de trabalhectares dores violando as leis trabalhistas
+
+Subcategory_17_en_translation:
+  subcategory_id: 17
+  locale: en
+  name: Overharvesting
+
+Subcategory_17_fr_translation:
+  subcategory_id: 17
+  locale: fr
+  name: Dépassement de volume/pieds autorisés
+
+Subcategory_17_zh-CN_translation:
+  subcategory_id: 17
+  locale: zh-CN
+  name: 过度采伐
+
+Subcategory_17_ja_translation:
+  subcategory_id: 17
+  locale: ja
+  name: 過剰伐採
+
+Subcategory_17_ko_translation:
+  subcategory_id: 17
+  locale: ko
+  name: 과도 벌목
+
+Subcategory_17_vi_translation:
+  subcategory_id: 17
+  locale: vi
+  name: Khai thác quá mức
+
+Subcategory_17_pt_translation:
+  subcategory_id: 17
+  locale: pt
+  name: Extração excessiva
+
+Subcategory_18_en_translation:
+  subcategory_id: 18
+  locale: en
+  name: Fraudulent behavior
+
+Subcategory_18_fr_translation:
+  subcategory_id: 18
+  locale: fr
+  name: Emploi de manoeuvres frauduleuses
+
+Subcategory_18_zh-CN_translation:
+  subcategory_id: 18
+  locale: zh-CN
+  name: 欺诈行为
+
+Subcategory_18_ja_translation:
+  subcategory_id: 18
+  locale: ja
+  name: 不正行為
+
+Subcategory_18_ko_translation:
+  subcategory_id: 18
+  locale: ko
+  name: 사기 행위
+
+Subcategory_18_vi_translation:
+  subcategory_id: 18
+  locale: vi
+  name: Hành vi gian lận
+
+Subcategory_18_pt_translation:
+  subcategory_id: 18
+  locale: pt
+  name: Comportamento fraudulento
+
+Subcategory_19_fr_translation:
+  subcategory_id: 19
+  locale: fr
+  name: Exploitation ou évacuation hors délais autorisés
+
+Subcategory_19_en_translation:
+  subcategory_id: 19
+  locale: en
+  name: Exploitation or transport of wood outside of authorized timeframe
+
+Subcategory_19_zh-CN_translation:
+  subcategory_id: 19
+  locale: zh-CN
+  name: 在有效期限外采伐或运输木材
+
+Subcategory_19_ja_translation:
+  subcategory_id: 19
+  locale: ja
+  name: 許可された期間外での木材の伐採または輸送
+
+Subcategory_19_ko_translation:
+  subcategory_id: 19
+  locale: ko
+  name: 허가 기간 외 목재 이용 또는 수송
+
+Subcategory_19_vi_translation:
+  subcategory_id: 19
+  locale: vi
+  name: Khai thác hay vận chuyển gỗ ngoài khung thời gian cho phép
+
+Subcategory_19_pt_translation:
+  subcategory_id: 19
+  locale: pt
+  name: Exploração ou transporte de madeira fora do prazo autorizado
+
+Subcategory_20_en_translation:
+  subcategory_id: 20
+  locale: en
+  name: Operating without a valid license
+
+Subcategory_20_fr_translation:
+  subcategory_id: 20
+  locale: fr
+  name: Exploitation sans agrément valable
+
+Subcategory_20_zh-CN_translation:
+  subcategory_id: 20
+  locale: zh-CN
+  name: 无有效牌照经营
+
+Subcategory_20_ja_translation:
+  subcategory_id: 20
+  locale: ja
+  name: 有効な免許なしでの操業
+
+Subcategory_20_ko_translation:
+  subcategory_id: 20
+  locale: ko
+  name: 유효한 허가증 없이 실행
+
+Subcategory_20_vi_translation:
+  subcategory_id: 20
+  locale: vi
+  name: Hoạt động không có giấy phép hợp lệ
+
+Subcategory_20_pt_translation:
+  subcategory_id: 20
+  locale: pt
+  name: Operar sem uma licença válida
+
+Subcategory_21_en_translation:
+  subcategory_id: 21
+  locale: en
+  name: Operating without a convention
+
+Subcategory_21_fr_translation:
+  subcategory_id: 21
+  locale: fr
+  name: Exploitation sans convention
+
+Subcategory_21_zh-CN_translation:
+  subcategory_id: 21
+  locale: zh-CN
+  name: 无协议经营
+
+Subcategory_21_ja_translation:
+  subcategory_id: 21
+  locale: ja
+  name: 署名された合意や契約なしの操業
+
+Subcategory_21_ko_translation:
+  subcategory_id: 21
+  locale: ko
+  name: 협약 없이 실행
+
+Subcategory_21_vi_translation:
+  subcategory_id: 21
+  locale: vi
+  name: Hoạt động không theo quy ước
+
+Subcategory_21_pt_translation:
+  subcategory_id: 21
+  locale: pt
+  name: Operando sem convenção
+
+Subcategory_22_en_translation:
+  subcategory_id: 22
+  locale: en
+  name: Harvesting without required permit
+
+Subcategory_22_fr_translation:
+  subcategory_id: 22
+  locale: fr
+  name: Exploitation sans permis
+
+Subcategory_22_zh-CN_translation:
+  subcategory_id: 22
+  locale: zh-CN
+  name: 无许可证采伐
+
+Subcategory_22_ja_translation:
+  subcategory_id: 22
+  locale: ja
+  name: 必要な許可のない伐採
+
+Subcategory_22_ko_translation:
+  subcategory_id: 22
+  locale: ko
+  name: 필수 허가 없이 수확
+
+Subcategory_22_vi_translation:
+  subcategory_id: 22
+  locale: vi
+  name: Khai thác không phép
+
+Subcategory_22_pt_translation:
+  subcategory_id: 22
+  locale: pt
+  name: Extração sem a licença necessária
+
+Subcategory_23_en_translation:
+  subcategory_id: 23
+  locale: en
+  name: Operating without a title
+
+Subcategory_23_fr_translation:
+  subcategory_id: 23
+  locale: fr
+  name: Exploitation sans titre d'exploitation
+
+Subcategory_23_zh-CN_translation:
+  subcategory_id: 23
+  locale: zh-CN
+  name: 无牌照经营
+
+Subcategory_23_ja_translation:
+  subcategory_id: 23
+  locale: ja
+  name: 権利のない操業
+
+Subcategory_23_ko_translation:
+  subcategory_id: 23
+  locale: ko
+  name: 권한 없이 실행
+
+Subcategory_23_vi_translation:
+  subcategory_id: 23
+  locale: vi
+  name: Hoạt động không có tư cách pháp nhân
+
+Subcategory_23_pt_translation:
+  subcategory_id: 23
+  locale: pt
+  name: Operar sem um título
+
+Subcategory_24_fr_translation:
+  subcategory_id: 24
+  locale: fr
+  name: Exportation d'espèces CITES sans autorisation
+
+Subcategory_24_en_translation:
+  subcategory_id: 24
+  locale: en
+  name: Export of CITES species without authorization
+
+Subcategory_24_zh-CN_translation:
+  subcategory_id: 24
+  locale: zh-CN
+  name: 未经许可出口CITES树种
+
+Subcategory_24_ja_translation:
+  subcategory_id: 24
+  locale: ja
+  name: 許可の無いCITES種の輸出
+
+Subcategory_24_ko_translation:
+  subcategory_id: 24
+  locale: ko
+  name: CITES 수종 무허가 수출
+
+Subcategory_24_vi_translation:
+  subcategory_id: 24
+  locale: vi
+  name: Xuất khẩu không phép các loài thuộc Công ước CITES
+
+Subcategory_24_pt_translation:
+  subcategory_id: 24
+  locale: pt
+  name: Exportação de espécies CITES sem autorização
+
+Subcategory_25_fr_translation:
+  subcategory_id: 25
+  locale: fr
+  name: Exportation de bois sans autorisation
+
+Subcategory_25_en_translation:
+  subcategory_id: 25
+  locale: en
+  name: Nonauthorized export of timber
+
+Subcategory_25_zh-CN_translation:
+  subcategory_id: 25
+  locale: zh-CN
+  name: 未经许可的木材出口
+
+Subcategory_25_ja_translation:
+  subcategory_id: 25
+  locale: ja
+  name: 許可のない木材輸出
+
+Subcategory_25_ko_translation:
+  subcategory_id: 25
+  locale: ko
+  name: 미승인된 목재 수출
+
+Subcategory_25_vi_translation:
+  subcategory_id: 25
+  locale: vi
+  name: Xuất khẩu gỗ không phép
+
+Subcategory_25_pt_translation:
+  subcategory_id: 25
+  locale: pt
+  name: Exportação não autorizada de madeira
+
+Subcategory_26_en_translation:
+  subcategory_id: 26
+  locale: en
+  name: Export duty unpaid
+
+Subcategory_26_fr_translation:
+  subcategory_id: 26
+  locale: fr
+  name: Non paiement des droits à l'exportation
+
+Subcategory_26_zh-CN_translation:
+  subcategory_id: 26
+  locale: zh-CN
+  name: 未付出口税费
+
+Subcategory_26_ja_translation:
+  subcategory_id: 26
+  locale: ja
+  name: 輸出税の未払い
+
+Subcategory_26_ko_translation:
+  subcategory_id: 26
+  locale: ko
+  name: 지불하지 않은 수출 의무
+
+Subcategory_26_vi_translation:
+  subcategory_id: 26
+  locale: vi
+  name: Không đóng thuế xuất khẩu
+
+Subcategory_26_pt_translation:
+  subcategory_id: 26
+  locale: pt
+  name: Imposto de exportação não pago
+
+Subcategory_27_fr_translation:
+  subcategory_id: 27
+  locale: fr
+  name: Non respect de la réglementation du transport (enregistrement du véhicule,
+    autorisation de transport...)
+
+Subcategory_27_en_translation:
+  subcategory_id: 27
+  locale: en
+  name: Transport regulations breached (registration of vehicle, authorization of
+    transport...)
+
+Subcategory_27_zh-CN_translation:
+  subcategory_id: 27
+  locale: zh-CN
+  name: 违反了运输法规（车辆注册，运输许可……）
+
+Subcategory_27_ja_translation:
+  subcategory_id: 27
+  locale: ja
+  name: 輸送規則（車両の登録、輸送許可など）違反
+
+Subcategory_27_ko_translation:
+  subcategory_id: 27
+  locale: ko
+  name: 수송 규제 위반(자동차 등록, 수송 허가 등)
+
+Subcategory_27_vi_translation:
+  subcategory_id: 27
+  locale: vi
+  name: Vi phạm các quy định về vận tải (giấy đăng ký phương tiện, giấy phép vận tải,
+    v.v.)
+
+Subcategory_27_pt_translation:
+  subcategory_id: 27
+  locale: pt
+  name: Normas de transporte violadas (registro do veículo, autorização de transporte...)
+
+Subcategory_28_fr_translation:
+  subcategory_id: 28
+  locale: fr
+  name: 'Non respect des exigences relatives à la conversion des forêts '
+
+Subcategory_28_en_translation:
+  subcategory_id: 28
+  locale: en
+  name: 'Nonrespect of requirements related to conversion of forest '
+
+Subcategory_28_zh-CN_translation:
+  subcategory_id: 28
+  locale: zh-CN
+  name: 违反森林转化的相关要求
+
+Subcategory_28_ja_translation:
+  subcategory_id: 28
+  locale: ja
+  name: 森林の転換に関する要件の不遵守
+
+Subcategory_28_ko_translation:
+  subcategory_id: 28
+  locale: ko
+  name: 산림 전용 관련 요건 무시
+
+Subcategory_28_vi_translation:
+  subcategory_id: 28
+  locale: vi
+  name: Không tuân thủ các yêu cầu về chuyển đổi mục đích sử dụng rừng
+
+Subcategory_28_pt_translation:
+  subcategory_id: 28
+  locale: pt
+  name: Desrespeito dos requisitos relacionados à conversão da floresta
+
+Subcategory_29_fr_translation:
+  subcategory_id: 29
+  locale: fr
+  name: Non respect des normes pour la réduction des impacts forestiers ou des réglementations
+    environnementales
+
+Subcategory_29_en_translation:
+  subcategory_id: 29
+  locale: en
+  name: Nonrespect of norms for reduced impact logging or environmental regulations
+
+Subcategory_29_zh-CN_translation:
+  subcategory_id: 29
+  locale: zh-CN
+  name: 违反减少环境影响的森林采伐要求或者相关环境法规
+
+Subcategory_29_ja_translation:
+  subcategory_id: 29
+  locale: ja
+  name: 低インパクト伐採基準や環境規則の不遵守
+
+Subcategory_29_ko_translation:
+  subcategory_id: 29
+  locale: ko
+  name: 친환경 벌채(RIL) 또는 환경 규제 기준 무시
+
+Subcategory_29_vi_translation:
+  subcategory_id: 29
+  locale: vi
+  name: Không tuân thủ các biện pháp giảm tác động tiêu cực của hoạt động khai thác
+    gỗ hay các quy định về bảo vệ môi trường
+
+Subcategory_29_pt_translation:
+  subcategory_id: 29
+  locale: pt
+  name: Desrespeito das normas de exploração florestal de impacto reduzido ou regulamentos
+    ambientais
+
+Subcategory_30_fr_translation:
+  subcategory_id: 30
+  locale: fr
+  name: Non respect des obligations contractuelles
+
+Subcategory_30_en_translation:
+  subcategory_id: 30
+  locale: en
+  name: Nonfulfillment of contractual obligations
+
+Subcategory_30_zh-CN_translation:
+  subcategory_id: 30
+  locale: zh-CN
+  name: 没有履行合约
+
+Subcategory_30_ja_translation:
+  subcategory_id: 30
+  locale: ja
+  name: 契約上の義務の不履行
+
+Subcategory_30_ko_translation:
+  subcategory_id: 30
+  locale: ko
+  name: 계약 의무 불이행
+
+Subcategory_30_vi_translation:
+  subcategory_id: 30
+  locale: vi
+  name: Không thực hiện đúng nghĩa vụ theo hợp đồng
+
+Subcategory_30_pt_translation:
+  subcategory_id: 30
+  locale: pt
+  name: Incumprimento de obrigações contratuais
+
+Subcategory_31_en_translation:
+  subcategory_id: 31
+  locale: en
+  name: Non respect of procedures related to impact assessments or inventories
+
+Subcategory_31_fr_translation:
+  subcategory_id: 31
+  locale: fr
+  name: Non respect des procédures relatives aux études d'impact et aux inventaires
+
+Subcategory_31_zh-CN_translation:
+  subcategory_id: 31
+  locale: zh-CN
+  name: 违背环境影响评估或者存货的流程
+
+Subcategory_31_ja_translation:
+  subcategory_id: 31
+  locale: ja
+  name: 影響評価やインベントリに関する手続きの不遵守
+
+Subcategory_31_ko_translation:
+  subcategory_id: 31
+  locale: ko
+  name: 효과 평가 또는 물품 목록 관련 과정 무시
+
+Subcategory_31_vi_translation:
+  subcategory_id: 31
+  locale: vi
+  name: Không tuân thủ các thủ tục về đánh giá tác động hoặc kiểm kê
+
+Subcategory_31_pt_translation:
+  subcategory_id: 31
+  locale: pt
+  name: Desrespeito dos procedimentos relacionados com avaliações de impacto ou inventários
+
+Subcategory_32_fr_translation:
+  subcategory_id: 32
+  locale: fr
+  name: Non respect du plan d'aménagement
+
+Subcategory_32_en_translation:
+  subcategory_id: 32
+  locale: en
+  name: Nonrespect of management plan
+
+Subcategory_32_zh-CN_translation:
+  subcategory_id: 32
+  locale: zh-CN
+  name: 违背经营计划
+
+Subcategory_32_ja_translation:
+  subcategory_id: 32
+  locale: ja
+  name: 管理計画の不遵守
+
+Subcategory_32_ko_translation:
+  subcategory_id: 32
+  locale: ko
+  name: 관리 계획 무시
+
+Subcategory_32_vi_translation:
+  subcategory_id: 32
+  locale: vi
+  name: Không tuân thủ kế hoạch quản lý
+
+Subcategory_32_pt_translation:
+  subcategory_id: 32
+  locale: pt
+  name: Desrespeito do plano de gerenciamento
+
+Subcategory_33_fr_translation:
+  subcategory_id: 33
+  locale: fr
+  name: Non respect du quota de transformation
+
+Subcategory_33_en_translation:
+  subcategory_id: 33
+  locale: en
+  name: Nonrespect of quotas on processed wood
+
+Subcategory_33_zh-CN_translation:
+  subcategory_id: 33
+  locale: zh-CN
+  name: 违背加工木材的限额
+
+Subcategory_33_ja_translation:
+  subcategory_id: 33
+  locale: ja
+  name: 加工木材の規定量の不遵守
+
+Subcategory_33_ko_translation:
+  subcategory_id: 33
+  locale: ko
+  name: 가공목재 할당량 무시
+
+Subcategory_33_vi_translation:
+  subcategory_id: 33
+  locale: vi
+  name: Không tuân thủ hạn ngạch về gỗ đã qua chế biến
+
+Subcategory_33_pt_translation:
+  subcategory_id: 33
+  locale: pt
+  name: Desrespeito das cotas de madeira processada
+
+Subcategory_34_en_translation:
+  subcategory_id: 34
+  locale: en
+  name: Obstacles to checks by forest law enforcement officials
+
+Subcategory_34_fr_translation:
+  subcategory_id: 34
+  locale: fr
+  name: Obstacles au contrôle forestier
+
+Subcategory_34_zh-CN_translation:
+  subcategory_id: 34
+  locale: zh-CN
+  name: 森林执法部门检查的阻碍
+
+Subcategory_34_ja_translation:
+  subcategory_id: 34
+  locale: ja
+  name: 森林関連法執行官による確認への妨害
+
+Subcategory_34_ko_translation:
+  subcategory_id: 34
+  locale: ko
+  name: 산림법 집행관이 진행하는 검수 통과에서 직면하는 어려움
+
+Subcategory_34_vi_translation:
+  subcategory_id: 34
+  locale: vi
+  name: 'Các yếu tố cản trở việc kiểm tra của cán bộ kiểm lâm '
+
+Subcategory_34_pt_translation:
+  subcategory_id: 34
+  locale: pt
+  name: Obstáculos a verificações por parte de agentes de fiscalização florestal
+
+Subcategory_35_en_translation:
+  subcategory_id: 35
+  locale: en
+  name: Origin of timber transported not traceable or timber not identified
+
+Subcategory_35_fr_translation:
+  subcategory_id: 35
+  locale: fr
+  name: Origine du bois transporté non traçable ou origine du bois non identifiée
+
+Subcategory_35_zh-CN_translation:
+  subcategory_id: 35
+  locale: zh-CN
+  name: 运输的木材来源无法追溯或木材种类无法识别
+
+Subcategory_35_ko_translation:
+  subcategory_id: 35
+  locale: ko
+  name: 추적 없이 수송된 목재 또는 인증 받지 않은 목재의 원산지
+
+Subcategory_35_vi_translation:
+  subcategory_id: 35
+  locale: vi
+  name: Gỗ đang vận chuyển không truy xuất được nguồn gốc hoặc không xác định được
+    loại gỗ
+
+Subcategory_35_ja_translation:
+  subcategory_id: 35
+  locale: ja
+  name: 輸送された木材の原産地追跡ができない、または木材に伐採後になされるべきマーキングがされていない
+
+Subcategory_35_pt_translation:
+  subcategory_id: 35
+  locale: pt
+  name: Origem da madeira transportada não rastreável ou madeira não identificada
+
+Subcategory_36_en_translation:
+  subcategory_id: 36
+  locale: en
+  name: Company not registered according to regulations
+
+Subcategory_36_fr_translation:
+  subcategory_id: 36
+  locale: fr
+  name: Société non enregistrée conformément à la réglementation
+
+Subcategory_36_zh-CN_translation:
+  subcategory_id: 36
+  locale: zh-CN
+  name: 公司未按法规注册
+
+Subcategory_36_ja_translation:
+  subcategory_id: 36
+  locale: ja
+  name: 企業の登録義務違反
+
+Subcategory_36_ko_translation:
+  subcategory_id: 36
+  locale: ko
+  name: 규제에 따라 등록되지 않은 기업
+
+Subcategory_36_vi_translation:
+  subcategory_id: 36
+  locale: vi
+  name: Công ty không được đăng ký theo đúng quy định
+
+Subcategory_36_pt_translation:
+  subcategory_id: 36
+  locale: pt
+  name: Conflito de interesses - dentro e entre agências
+
+Subcategory_37_fr_translation:
+  subcategory_id: 37
+  locale: fr
+  name: Sous-traitance / transfert d'actions irréguliers
+
+Subcategory_37_en_translation:
+  subcategory_id: 37
+  locale: en
+  name: Irregular subcontracting/transfer of shares
+
+Subcategory_37_zh-CN_translation:
+  subcategory_id: 37
+  locale: zh-CN
+  name: 非正常的合同以及股份转让
+
+Subcategory_37_ja_translation:
+  subcategory_id: 37
+  locale: ja
+  name: 不正な下請け契約／株式譲渡
+
+Subcategory_37_ko_translation:
+  subcategory_id: 37
+  locale: ko
+  name: 불규칙한 하청 또는 지분 양도
+
+Subcategory_37_vi_translation:
+  subcategory_id: 37
+  locale: vi
+  name: Hợp đồng thầu phụ/chuyển nhượng cổ phần bất thường
+
+Subcategory_37_pt_translation:
+  subcategory_id: 37
+  locale: pt
+  name: Subcontratação/transferência irregular de ações
+
+Subcategory_38_en_translation:
+  subcategory_id: 38
+  locale: en
+  name: Illegal timber storage
+
+Subcategory_38_fr_translation:
+  subcategory_id: 38
+  locale: fr
+  name: Stockage de bois illégal
+
+Subcategory_38_zh-CN_translation:
+  subcategory_id: 38
+  locale: zh-CN
+  name: 非法木材存放
+
+Subcategory_38_ja_translation:
+  subcategory_id: 38
+  locale: ja
+  name: 違法木材の保管
+
+Subcategory_38_ko_translation:
+  subcategory_id: 38
+  locale: ko
+  name: 불법 목재 창고
+
+Subcategory_38_vi_translation:
+  subcategory_id: 38
+  locale: vi
+  name: Tàng trữ gỗ trái phép
+
+Subcategory_38_pt_translation:
+  subcategory_id: 38
+  locale: pt
+  name: Armazenamento ilegal de madeira
+
+Subcategory_39_en_translation:
+  subcategory_id: 39
+  locale: en
+  name: Processing wood of fraudulent or untraceable origin
+
+Subcategory_39_fr_translation:
+  subcategory_id: 39
+  locale: fr
+  name: Transformation de bois d'origine frauduleuse ou inconnue
+
+Subcategory_39_zh-CN_translation:
+  subcategory_id: 39
+  locale: zh-CN
+  name: 加工的木材来源可疑或不明
+
+Subcategory_39_ja_translation:
+  subcategory_id: 39
+  locale: ja
+  name: 違法に伐採された木材ないし、原産地追跡不可能な木材の加工
+
+Subcategory_39_ko_translation:
+  subcategory_id: 39
+  locale: ko
+  name: 불법적이거나 추적 불가능한 목재를 가공함
+
+Subcategory_39_vi_translation:
+  subcategory_id: 39
+  locale: vi
+  name: Chế biến gỗ có nguồn gốc gian lận hoặc không thể truy xuất nguồn gốc
+
+Subcategory_39_pt_translation:
+  subcategory_id: 39
+  locale: pt
+  name: Processamento de madeira de origem fraudulenta ou não rastreável
+
+Subcategory_40_fr_translation:
+  subcategory_id: 40
+  locale: fr
+  name: Transformation de bois sans autorisation
+
+Subcategory_40_en_translation:
+  subcategory_id: 40
+  locale: en
+  name: Processing timber without authorization
+
+Subcategory_40_zh-CN_translation:
+  subcategory_id: 40
+  locale: zh-CN
+  name: 木材加工没有得到授权
+
+Subcategory_40_ja_translation:
+  subcategory_id: 40
+  locale: ja
+  name: 無許可での木材加工
+
+Subcategory_40_ko_translation:
+  subcategory_id: 40
+  locale: ko
+  name: 무허가 목재를 가공함
+
+Subcategory_40_vi_translation:
+  subcategory_id: 40
+  locale: vi
+  name: Chế biến gỗ không phép
+
+Subcategory_40_pt_translation:
+  subcategory_id: 40
+  locale: pt
+  name: Processamento de madeira sem autorização
+
+Subcategory_41_en_translation:
+  subcategory_id: 41
+  locale: en
+  name: Timber processing facility not in place when required
+
+Subcategory_41_fr_translation:
+  subcategory_id: 41
+  locale: fr
+  name: Unité de transformation pas en place lorsque prévu
+
+Subcategory_41_zh-CN_translation:
+  subcategory_id: 41
+  locale: zh-CN
+  name: 木材加工设施没有按要求到位
+
+Subcategory_41_ja_translation:
+  subcategory_id: 41
+  locale: ja
+  name: 木材加工施設が設置されていない（要求されている場合）
+
+Subcategory_41_ko_translation:
+  subcategory_id: 41
+  locale: ko
+  name: 필요할 때 가동할 목재 가공 시설 없음
+
+Subcategory_41_vi_translation:
+  subcategory_id: 41
+  locale: vi
+  name: Không có cơ sở chế biến gỗ khi cần
+
+Subcategory_41_pt_translation:
+  subcategory_id: 41
+  locale: pt
+  name: Instalação de processamento de madeira não está em funcionamento quando necessário
+
+Subcategory_42_en_translation:
+  subcategory_id: 42
+  locale: en
+  name: Human rights violation
+
+Subcategory_42_fr_translation:
+  subcategory_id: 42
+  locale: fr
+  name: Violation des droits de l'Homme
+
+Subcategory_42_zh-CN_translation:
+  subcategory_id: 42
+  locale: zh-CN
+  name: 侵犯人权
+
+Subcategory_42_ja_translation:
+  subcategory_id: 42
+  locale: ja
+  name: 人権侵害
+
+Subcategory_42_ko_translation:
+  subcategory_id: 42
+  locale: ko
+  name: 인권 침해
+
+Subcategory_42_vi_translation:
+  subcategory_id: 42
+  locale: vi
+  name: Vi phạm quyền con người
+
+Subcategory_42_pt_translation:
+  subcategory_id: 42
+  locale: pt
+  name: Violação de Direitos Humanos
+
+Subcategory_43_fr_translation:
+  subcategory_id: 43
+  locale: fr
+  name: Corruption conduisant à une activité illégale / mauvaise application de la
+    loi
+
+Subcategory_43_en_translation:
+  subcategory_id: 43
+  locale: en
+  name: Corruption leading to an illegal activity or poor law enforcement
+
+Subcategory_43_zh-CN_translation:
+  subcategory_id: 43
+  locale: zh-CN
+  name: 腐败导致非法活动或执法薄弱
+
+Subcategory_43_ja_translation:
+  subcategory_id: 43
+  locale: ja
+  name: 違法行為や法の執行不足につながる汚職
+
+Subcategory_43_ko_translation:
+  subcategory_id: 43
+  locale: ko
+  name: '부패로 인한 불법 활동 또는 허술한 법 집행 '
+
+Subcategory_43_vi_translation:
+  subcategory_id: 43
+  locale: vi
+  name: Tham nhũng dẫn đến các hành vi phạm pháp hoặc thực thi pháp luật yếu kém
+
+Subcategory_43_pt_translation:
+  subcategory_id: 43
+  locale: pt
+  name: Corrupção levando a uma atividade ilegal ou má aplicação da lei
+
+Subcategory_44_zh-CN_translation:
+  subcategory_id: 44
+  locale: zh-CN
+  name: 处罚执行差
+
+Subcategory_44_ja_translation:
+  subcategory_id: 44
+  locale: ja
+  name: 制裁の適用に問題がある
+
+Subcategory_44_ko_translation:
+  subcategory_id: 44
+  locale: ko
+  name: 부실한 제재 적용
+
+Subcategory_44_vi_translation:
+  subcategory_id: 44
+  locale: vi
+  name: Áp dụng các biện pháp trừng phạt thiếu hiệu quả
+
+Subcategory_44_fr_translation:
+  subcategory_id: 44
+  locale: fr
+  name: Défaut d'application des sanctions ou carences dans méthodes de prise de sanctions
+
+Subcategory_44_en_translation:
+  subcategory_id: 44
+  locale: en
+  name: Poor application of sanctions or shortages in methods for sanctioning
+
+Subcategory_44_pt_translation:
+  subcategory_id: 44
+  locale: pt
+  name: Poor application of sanctions or shortages in methods for sanctionning
+
+Subcategory_45_en_translation:
+  subcategory_id: 45
+  locale: en
+  name: Information not made public as required by law, including the VPA
+
+Subcategory_45_fr_translation:
+  subcategory_id: 45
+  locale: fr
+  name: Information non rendue publique malgré la loi, y compris l'APV
+
+Subcategory_45_zh-CN_translation:
+  subcategory_id: 45
+  locale: zh-CN
+  name: 信息没有依法公开，包括VPA
+
+Subcategory_45_ko_translation:
+  subcategory_id: 45
+  locale: ko
+  name: VPA 포함, 법에 따라 공개되지 않은 정보
+
+Subcategory_45_ja_translation:
+  subcategory_id: 45
+  locale: ja
+  name: VPAを含み法律で義務付けられているにも関わらず公開されていない情報
+
+Subcategory_45_vi_translation:
+  subcategory_id: 45
+  locale: vi
+  name: Không công bố thông tin rộng rãi theo quy định của pháp luật, bao gồm các
+    quy định của VPA (Hiệp định đối tác tự nguyện)
+
+Subcategory_45_pt_translation:
+  subcategory_id: 45
+  locale: pt
+  name: Information not made public as required by law, including the VPA
+
+Subcategory_46_en_translation:
+  subcategory_id: 46
+  locale: en
+  name: Policy gaps or legal shortage
+
+Subcategory_46_fr_translation:
+  subcategory_id: 46
+  locale: fr
+  name: Lacunes dans les lois ou politiques clés pour la gestion durable des forêts
+
+Subcategory_46_zh-CN_translation:
+  subcategory_id: 46
+  locale: zh-CN
+  name: 政策缺口
+
+Subcategory_46_ja_translation:
+  subcategory_id: 46
+  locale: ja
+  name: 政策ギャップ
+
+Subcategory_46_ko_translation:
+  subcategory_id: 46
+  locale: ko
+  name: 정책 간극
+
+Subcategory_46_vi_translation:
+  subcategory_id: 46
+  locale: vi
+  name: Chính sách còn nhiều lỗ hổng
+
+Subcategory_46_pt_translation:
+  subcategory_id: 46
+  locale: pt
+  name: Lacunas nas políticas ou escassez legislativa
+
+Subcategory_47_en_translation:
+  subcategory_id: 47
+  locale: en
+  name: Lack of interagency cooperation
+
+Subcategory_47_fr_translation:
+  subcategory_id: 47
+  locale: fr
+  name: Manque de coopération interinstitutions
+
+Subcategory_47_zh-CN_translation:
+  subcategory_id: 47
+  locale: zh-CN
+  name: 部门间缺少配合
+
+Subcategory_47_ja_translation:
+  subcategory_id: 47
+  locale: ja
+  name: 省庁間協力の不足
+
+Subcategory_47_ko_translation:
+  subcategory_id: 47
+  locale: ko
+  name: 기관 간 협력 부족
+
+Subcategory_47_vi_translation:
+  subcategory_id: 47
+  locale: vi
+  name: Thiếu hợp tác liên ngành
+
+Subcategory_47_pt_translation:
+  subcategory_id: 47
+  locale: pt
+  name: Falta de cooperação interagências
+
+Subcategory_48_en_translation:
+  subcategory_id: 48
+  locale: en
+  name: Lack of transparency on use of forestry revenues, including taxes and fines
+
+Subcategory_48_fr_translation:
+  subcategory_id: 48
+  locale: fr
+  name: Manque de transparence sur l'utilisation des taxes, transactions et d'autres
+    recettes forestières
+
+Subcategory_48_zh-CN_translation:
+  subcategory_id: 48
+  locale: zh-CN
+  name: 林业收入以及税费和罚金的使用情况缺少透明度
+
+Subcategory_48_ja_translation:
+  subcategory_id: 48
+  locale: ja
+  name: 税金や罰金を含む林業部門の収入の使途に関する透明性の欠如
+
+Subcategory_48_ko_translation:
+  subcategory_id: 48
+  locale: ko
+  name: 세금, 벌금 등 임업 수익 사용의 투명성 부족
+
+Subcategory_48_vi_translation:
+  subcategory_id: 48
+  locale: vi
+  name: Thiếu minh bạch trong việc sử dụng các khoản thu từ lâm nghiệp, bao gồm thuế
+    và tiền phạt
+
+Subcategory_48_pt_translation:
+  subcategory_id: 48
+  locale: pt
+  name: Falta de transparência no uso das receitas florestais, incluindo impostos
+    e multas
+
+Subcategory_49_fr_translation:
+  subcategory_id: 49
+  locale: fr
+  name: Mauvais contrôle/suivi
+
+Subcategory_49_en_translation:
+  subcategory_id: 49
+  locale: en
+  name: Poor control/follow-up
+
+Subcategory_49_zh-CN_translation:
+  subcategory_id: 49
+  locale: zh-CN
+  name: 控制/跟进不足
+
+Subcategory_49_ja_translation:
+  subcategory_id: 49
+  locale: ja
+  name: 管理やフォローアップに問題がある
+
+Subcategory_49_ko_translation:
+  subcategory_id: 49
+  locale: ko
+  name: 부실한 규제 및 후속 조치
+
+Subcategory_49_vi_translation:
+  subcategory_id: 49
+  locale: vi
+  name: Kiểm soát/theo dõi kém hiệu quả
+
+Subcategory_49_pt_translation:
+  subcategory_id: 49
+  locale: pt
+  name: Controle insuficiente/acompanhamento
+
+Subcategory_50_en_translation:
+  subcategory_id: 50
+  locale: en
+  name: Poor reporting of enforcement
+
+Subcategory_50_fr_translation:
+  subcategory_id: 50
+  locale: fr
+  name: Mauvais rapportage de l'application de la loi
+
+Subcategory_50_zh-CN_translation:
+  subcategory_id: 50
+  locale: zh-CN
+  name: 执法报告水平低
+
+Subcategory_50_ja_translation:
+  subcategory_id: 50
+  locale: ja
+  name: 法執行の報告に問題がある
+
+Subcategory_50_ko_translation:
+  subcategory_id: 50
+  locale: ko
+  name: 부실한 집행 보고
+
+Subcategory_50_vi_translation:
+  subcategory_id: 50
+  locale: vi
+  name: Báo cáo sơ sài về tình hình thực thi pháp luật
+
+Subcategory_50_pt_translation:
+  subcategory_id: 50
+  locale: pt
+  name: Relatórios deficientes sobre a aplicação da lei
+
+Subcategory_51_en_translation:
+  subcategory_id: 51
+  locale: en
+  name: Poor tax and fine collection
+
+Subcategory_51_fr_translation:
+  subcategory_id: 51
+  locale: fr
+  name: Mauvaise recouvrement des taxes/transactions/frais
+
+Subcategory_51_zh-CN_translation:
+  subcategory_id: 51
+  locale: zh-CN
+  name: 税费和罚金征收不善
+
+Subcategory_51_ja_translation:
+  subcategory_id: 51
+  locale: ja
+  name: 税金や罰金の徴収に問題がある
+
+Subcategory_51_ko_translation:
+  subcategory_id: 51
+  locale: ko
+  name: 부실한 세금 및 벌금 징수
+
+Subcategory_51_vi_translation:
+  subcategory_id: 51
+  locale: vi
+  name: Thu thuế và tiền phạt kém hiệu quả
+
+Subcategory_51_pt_translation:
+  subcategory_id: 51
+  locale: pt
+  name: Cobrança deficiente de impostos e multas
+
+Subcategory_52_en_translation:
+  subcategory_id: 52
+  locale: en
+  name: Poor distribution of law enforcement means
+
+Subcategory_52_fr_translation:
+  subcategory_id: 52
+  locale: fr
+  name: Mauvaise répartition des moyens d'application de la loi
+
+Subcategory_52_zh-CN_translation:
+  subcategory_id: 52
+  locale: zh-CN
+  name: 执法方式参差不齐
+
+Subcategory_52_ja_translation:
+  subcategory_id: 52
+  locale: ja
+  name: 法の執行手段の分布に問題がある
+
+Subcategory_52_ko_translation:
+  subcategory_id: 52
+  locale: ko
+  name: 법 집행 수단의 부실한 전달
+
+Subcategory_52_vi_translation:
+  subcategory_id: 52
+  locale: vi
+  name: Phân phối kém hiệu quả các phương tiện thực thi pháp luật
+
+Subcategory_52_pt_translation:
+  subcategory_id: 52
+  locale: pt
+  name: Distribuição deficiente dos meios de aplicação da lei
+
+Subcategory_53_fr_translation:
+  subcategory_id: 53
+  locale: fr
+  name: Non respect de procédures - gestion des produits saisis
+
+Subcategory_53_en_translation:
+  subcategory_id: 53
+  locale: en
+  name: Nonrespect of procedures - management of seized goods
+
+Subcategory_53_zh-CN_translation:
+  subcategory_id: 53
+  locale: zh-CN
+  name: 违背流程-扣押物品的管理
+
+Subcategory_53_ja_translation:
+  subcategory_id: 53
+  locale: ja
+  name: 押収材の管理に関する手続きの不遵守
+
+Subcategory_53_ko_translation:
+  subcategory_id: 53
+  locale: ko
+  name: 과정 무시 - 압류품 관리
+
+Subcategory_53_vi_translation:
+  subcategory_id: 53
+  locale: vi
+  name: Không tuân thủ các thủ tục – quản lý hàng hóa bị thu giữ
+
+Subcategory_53_pt_translation:
+  subcategory_id: 53
+  locale: pt
+  name: Desrespeito dos procedimentos - gerenciamento de bens apreendidos
+
+Subcategory_54_fr_translation:
+  subcategory_id: 54
+  locale: fr
+  name: Non respect de procédures CITES - attribution de droit d'exploiter/transporter/vendre
+
+Subcategory_54_en_translation:
+  subcategory_id: 54
+  locale: en
+  name: Nonrespect of procedures - attribution of right to exploit, trade or transport
+    CITES species
+
+Subcategory_54_zh-CN_translation:
+  subcategory_id: 54
+  locale: zh-CN
+  name: '违背流程-有关采伐，贸易和运输《濒危野生动植物保护公约》下的树种 '
+
+Subcategory_54_ja_translation:
+  subcategory_id: 54
+  locale: ja
+  name: CITES種の伐採、取引、輸送の権利取得に関する手続きの不遵守
+
+Subcategory_54_ko_translation:
+  subcategory_id: 54
+  locale: ko
+  name: 과정 무시 - CITES 수종 이용, 무역, 수송에 대한 권한 책임
+
+Subcategory_54_vi_translation:
+  subcategory_id: 54
+  locale: vi
+  name: Không tuân thủ các thủ tục – cấp quyền khai thác, buôn bán hoặc vận chuyển
+    các loài thuộc Công ước CITES
+
+Subcategory_54_pt_translation:
+  subcategory_id: 54
+  locale: pt
+  name: Desrespeito dos procedimentos - atribuição de direito de exploração, comercialização
+    ou transporte de espécies CITES
+
+Subcategory_55_fr_translation:
+  subcategory_id: 55
+  locale: fr
+  name: Non respect des procédures autorisant la récolte/gestion des ressources forestières
+
+Subcategory_55_en_translation:
+  subcategory_id: 55
+  locale: en
+  name: Nonrespect of procedures authorizing harvesting of forest resources
+
+Subcategory_55_zh-CN_translation:
+  subcategory_id: 55
+  locale: zh-CN
+  name: 违背采伐森林资源的许可流程
+
+Subcategory_55_ja_translation:
+  subcategory_id: 55
+  locale: ja
+  name: 森林資源の伐採を許可する手続きの不遵守
+
+Subcategory_55_ko_translation:
+  subcategory_id: 55
+  locale: ko
+  name: 산림자원 수확 승인 절차 무시
+
+Subcategory_55_vi_translation:
+  subcategory_id: 55
+  locale: vi
+  name: Không tuân thủ các thủ tục cấp phép khai thác tài nguyên rừng
+
+Subcategory_55_pt_translation:
+  subcategory_id: 55
+  locale: pt
+  name: Desrespeito dos procedimentos que autorizam a extração de recursos florestais
+
+Subcategory_56_fr_translation:
+  subcategory_id: 56
+  locale: fr
+  name: Non-respect des procédures autorisant le transport ou l'exportation des ressources
+    forestières
+
+Subcategory_56_en_translation:
+  subcategory_id: 56
+  locale: en
+  name: Nonrespect of procedures authorizing transport or export of forest resources
+
+Subcategory_56_zh-CN_translation:
+  subcategory_id: 56
+  locale: zh-CN
+  name: 违背森林资源运输和出口的授权流程
+
+Subcategory_56_ja_translation:
+  subcategory_id: 56
+  locale: ja
+  name: 森林資源の輸送または輸出を許可する手続きの不遵守
+
+Subcategory_56_ko_translation:
+  subcategory_id: 56
+  locale: ko
+  name: 산림자원 수송 및 수출 승인 절차 무시
+
+Subcategory_56_vi_translation:
+  subcategory_id: 56
+  locale: vi
+  name: Không tuân thủ các thủ tục cấp phép vận chuyển hoặc xuất khẩu tài nguyên rừng
+
+Subcategory_56_pt_translation:
+  subcategory_id: 56
+  locale: pt
+  name: Desrespeito dos procedimentos que autorizam o transporte ou a exportação de
+    recursos florestais
+
+Subcategory_57_fr_translation:
+  subcategory_id: 57
+  locale: fr
+  name: Non-respect des procédures donnant accès aux ressources forestières
+
+Subcategory_57_en_translation:
+  subcategory_id: 57
+  locale: en
+  name: Nonrespect of procedures granting access to forest resources
+
+Subcategory_57_zh-CN_translation:
+  subcategory_id: 57
+  locale: zh-CN
+  name: 违背获得森林资源的许可流程
+
+Subcategory_57_ja_translation:
+  subcategory_id: 57
+  locale: ja
+  name: 森林資源へのアクセスを許可する手続きの不遵守
+
+Subcategory_57_ko_translation:
+  subcategory_id: 57
+  locale: ko
+  name: 산림자원 접근 허가 발급 절차 무시
+
+Subcategory_57_vi_translation:
+  subcategory_id: 57
+  locale: vi
+  name: Không tuân thủ các thủ tục về cấp quyền tiếp cận tài nguyên rừng
+
+Subcategory_57_pt_translation:
+  subcategory_id: 57
+  locale: pt
+  name: Desrespeito dos procedimentos de acesso aos recursos florestais
+
+Subcategory_58_en_translation:
+  subcategory_id: 58
+  locale: en
+  name: Conflict of interest - inter or intra agency
+
+Subcategory_58_fr_translation:
+  subcategory_id: 58
+  locale: fr
+  name: Conflict d'intérêt - inter ou intra agences
+
+Subcategory_58_zh-CN_translation:
+  subcategory_id: 58
+  locale: zh-CN
+  name: 利益冲突-部门间和部门内部
+
+Subcategory_58_ja_translation:
+  subcategory_id: 58
+  locale: ja
+  name: 機関間または機関内での利益相反
+
+Subcategory_58_ko_translation:
+  subcategory_id: 58
+  locale: ko
+  name: 이해 충돌 - 기관 내외
+
+Subcategory_58_vi_translation:
+  subcategory_id: 58
+  locale: vi
+  name: Xung đột lợi ích – giữa các cơ quan liên quan hoặc trong nội bộ cơ quan
+
+Subcategory_58_pt_translation:
+  subcategory_id: 58
+  locale: pt
+  name: Conflito de interesses - dentro e entre agências
+
+Subcategory_59_fr_translation:
+  subcategory_id: 59
+  locale: fr
+  name: 'Traçabilité du bois: gouvernement mis au défi de déterminer l''origine du
+    bois'
+
+Subcategory_59_en_translation:
+  subcategory_id: 59
+  locale: en
+  name: 'Timber tracking: Government challenged to determine origin of timber'
+
+Subcategory_59_zh-CN_translation:
+  subcategory_id: 59
+  locale: zh-CN
+  name: 木材追踪：政府被要求判定木材来源
+
+Subcategory_59_ja_translation:
+  subcategory_id: 59
+  locale: ja
+  name: 木材の追跡：政府は木材の原産地を特定することを試みたことがある
+
+Subcategory_59_ko_translation:
+  subcategory_id: 59
+  locale: ko
+  name: '목재 추적: 목재 원산지 명확화를 위해 노력하는 정부'
+
+Subcategory_59_vi_translation:
+  subcategory_id: 59
+  locale: vi
+  name: 'Truy xuất nguồn gốc của gỗ: Chính phủ gặp khó khăn trong việc xác định nguồn
+    gốc của gỗ'
+
+Subcategory_59_pt_translation:
+  subcategory_id: 59
+  locale: pt
+  name: 'Rastreamento de madeira: Governo desafiado a determinar origem da madeira'
+
+Subcategory_60_en_translation:
+  subcategory_id: 60
+  locale: en
+  name: 'State owned or partially owned enterprise involved in illegal logging '
+
+Subcategory_60_fr_translation:
+  subcategory_id: 60
+  locale: fr
+  name: 'Entreprise publique ou semi-publique impliquée dans des activités d''exploitation
+    illegale '
+
+Subcategory_60_zh-CN_translation:
+  subcategory_id: 60
+  locale: zh-CN
+  name: 国有或者国有控股企业涉及非法采伐
+
+Subcategory_60_ja_translation:
+  subcategory_id: 60
+  locale: ja
+  name: 国家が所有する、または部分的に所有する違法伐採に関与している企業
+
+Subcategory_60_ko_translation:
+  subcategory_id: 60
+  locale: ko
+  name: 불법 벌채와 연관된 국유 또는 일부 국유 기업
+
+Subcategory_60_vi_translation:
+  subcategory_id: 60
+  locale: vi
+  name: Các công ty thuộc sở hữu nhà nước hoặc do nhà nước sở hữu một phần tham gia
+    khai thác gỗ bất hợp pháp
+
+Subcategory_60_pt_translation:
+  subcategory_id: 60
+  locale: pt
+  name: Empresa estatal ou semi-estatal ligada a exploração madeireira ilegal
+
+Subcategory_61_zh-CN_translation:
+  subcategory_id: 61
+  locale: zh-CN
+  name: 政府镇压公民社会或者媒体调查非法采伐
+
+Subcategory_61_en_translation:
+  subcategory_id: 61
+  locale: en
+  name: Government suppression of civil society or media investigating illegal logging
+
+Subcategory_61_ja_translation:
+  subcategory_id: 61
+  locale: ja
+  name: 違法伐採を調査する市民社会やメディアへの政府の弾圧
+
+Subcategory_61_ko_translation:
+  subcategory_id: 61
+  locale: ko
+  name: 불법 벌채를 조사하는 매체 또는 시민사회를 향한 정부의 압력
+
+Subcategory_61_vi_translation:
+  subcategory_id: 61
+  locale: vi
+  name: Chính phủ cản trở hoạt động của xã hội dân sự hoặc truyền thông trong việc
+    điều tra về khai thác gỗ bất hợp pháp
+
+Subcategory_61_fr_translation:
+  subcategory_id: 61
+  locale: fr
+  name: Répression gouvernementale contre la société civile ou les médias enquêtant
+    sur l'exploitation forestière illégale
+
+Subcategory_61_pt_translation:
+  subcategory_id: 61
+  locale: pt
+  name: Supressão governamental da sociedade civil ou da mídia que investiga a extração
+    de madeira ilegal
+
+Subcategory_63_en_translation:
+  subcategory_id: 63
+  locale: en
+  name: Non respect of procedures regarding environmental regulations
+
+Subcategory_63_fr_translation:
+  subcategory_id: 63
+  locale: fr
+  name: Non respect des procédures en matière de réglementation environnementale
+
+Subcategory_63_zh-CN_translation:
+  subcategory_id: 63
+  locale: zh-CN
+  name: 违背环境法规的流程要求
+
+Subcategory_63_ja_translation:
+  subcategory_id: 63
+  locale: ja
+  name: 環境規則に関する手続きの不遵守
+
+Subcategory_63_ko_translation:
+  subcategory_id: 63
+  locale: ko
+  name: 환경 규제 관련 과정 무시
+
+Subcategory_63_vi_translation:
+  subcategory_id: 63
+  locale: vi
+  name: Không tuân thủ các thủ tục theo quy định về môi trường
+
+Subcategory_63_pt_translation:
+  subcategory_id: 63
+  locale: pt
+  name: Desrespeito dos procedimentos relativos à regulamentação ambiental

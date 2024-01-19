@@ -118,7 +118,7 @@ class SyncTasks
         compare(score_json, expected_json)
         different_scores += 1
 
-        ScoreOperatorDocument.recalculate_scores!(operator) if ENV["FOR_REAL"] == "true"
+        ScoreOperatorDocument.recalculate!(operator) if ENV["FOR_REAL"] == "true"
       end
     end
 

@@ -1,0 +1,3652 @@
+
+Observation_230:
+  id: 230
+  severity_id: 38
+  observation_type: operator
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 151
+  lat: !ruby/object:BigDecimal 27:0.208928131030305e1
+  lng: !ruby/object:BigDecimal 27:0.170033496674681e2
+  fmu_id: 53
+  subcategory_id: 10
+  validation_status: Published (not modified)
+  observation_report_id: 34
+  law_id: 18
+  location_information: Loundoungou Toukoulaka & Kabo
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_231:
+  id: 231
+  severity_id: 70
+  observation_type: operator
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 151
+  lat: !ruby/object:BigDecimal 27:0.208928131030305e1
+  lng: !ruby/object:BigDecimal 27:0.170033496674681e2
+  fmu_id: 53
+  subcategory_id: 18
+  validation_status: Published (not modified)
+  observation_report_id: 34
+  law_id: 296
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_232:
+  id: 232
+  severity_id: 70
+  observation_type: operator
+  publication_date: 2020-09-11 16:00:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 18
+  validation_status: Published (not modified)
+  observation_report_id: 34
+  law_id: 296
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 12
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_233:
+  id: 233
+  severity_id: 4
+  observation_type: operator
+  publication_date: 2020-09-16 10:38:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 1
+  validation_status: Published (not modified)
+  observation_report_id: 34
+  law_id: 1
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 12
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_265:
+  id: 265
+  severity_id: 38
+  observation_type: operator
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 161
+  lat: !ruby/object:BigDecimal 27:0.1035403764e1
+  lng: !ruby/object:BigDecimal 27:0.15884108858e2
+  fmu_id: 56
+  subcategory_id: 10
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  law_id: 18
+  location_information: série de développement communautaire
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 13
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_266:
+  id: 266
+  severity_id: 118
+  observation_type: operator
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 161
+  lat: !ruby/object:BigDecimal 27:0.177226105037592e1
+  lng: !ruby/object:BigDecimal 27:0.152278128923389e2
+  fmu_id: 68
+  subcategory_id: 30
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  law_id: 314
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 20
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_286:
+  id: 286
+  severity_id: 66
+  observation_type: operator
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 172
+  lat: !ruby/object:BigDecimal 27:0.177226105037592e1
+  lng: !ruby/object:BigDecimal 27:0.152278128923389e2
+  fmu_id: 68
+  subcategory_id: 17
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  law_id: 30
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 14, 28
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_287:
+  id: 287
+  severity_id: 34
+  observation_type: operator
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 172
+  lat: !ruby/object:BigDecimal 27:0.177226105037592e1
+  lng: !ruby/object:BigDecimal 27:0.152278128923389e2
+  fmu_id: 68
+  subcategory_id: 9
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  law_id: 16
+  is_physical_place: true
+  evidence_type: Other
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_288:
+  id: 288
+  severity_id: 118
+  observation_type: operator
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 172
+  lat: !ruby/object:BigDecimal 27:0.177226105037592e1
+  lng: !ruby/object:BigDecimal 27:0.152278128923389e2
+  fmu_id: 68
+  subcategory_id: 30
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  law_id: 56
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 20
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_361:
+  id: 361
+  severity_id: 126
+  observation_type: operator
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  operator_id: 151
+  lat: !ruby/object:BigDecimal 27:0.134650374423073e1
+  lng: !ruby/object:BigDecimal 27:0.165172318710738e2
+  fmu_id: 55
+  subcategory_id: 32
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  law_id: 309
+  location_information: " POKOLA & KABO"
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_385:
+  id: 385
+  severity_id: 27
+  observation_type: operator
+  publication_date: 2020-09-09 15:18:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 7
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  law_id: 13
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 12
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_386:
+  id: 386
+  severity_id: 50
+  observation_type: operator
+  publication_date: 2020-09-09 15:07:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 13
+  validation_status: Published (modified)
+  observation_report_id: 48
+  law_id: 318
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 15
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_387:
+  id: 387
+  severity_id: 70
+  observation_type: operator
+  publication_date: 2020-09-09 15:00:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 18
+  validation_status: Published (modified)
+  observation_report_id: 48
+  law_id: 296
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 13
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_388:
+  id: 388
+  severity_id: 69
+  observation_type: operator
+  publication_date: 2020-09-09 14:54:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 18
+  validation_status: Published (modified)
+  observation_report_id: 48
+  law_id: 296
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 13
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_389:
+  id: 389
+  severity_id: 70
+  observation_type: operator
+  publication_date: 2020-09-09 14:41:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 18
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  law_id: 296
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 13
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_390:
+  id: 390
+  severity_id: 69
+  observation_type: operator
+  publication_date: 2020-09-09 14:32:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 18
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  law_id: 296
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 13
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_391:
+  id: 391
+  severity_id: 118
+  observation_type: operator
+  publication_date: 2020-09-09 14:23:00 UTC
+  country_id: 47
+  operator_id: 165
+  lat: !ruby/object:BigDecimal 27:0.326997274287424e1
+  lng: !ruby/object:BigDecimal 27:0.169921659267476e2
+  fmu_id: 105
+  subcategory_id: 30
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  law_id: 314
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: IM report validated by the Government. Page 14
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_539:
+  id: 539
+  severity_id: 70
+  observation_type: operator
+  publication_date: 2023-11-17 14:06:07 UTC
+  country_id: 47
+  operator_id: 151
+  lat: !ruby/object:BigDecimal 27:0.208928131030305e1
+  lng: !ruby/object:BigDecimal 27:0.170033496674681e2
+  fmu_id: 53
+  subcategory_id: 18
+  validation_status: Published (not modified)
+  observation_report_id: 59
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_540:
+  id: 540
+  severity_id: 25
+  observation_type: operator
+  publication_date: 2023-11-17 14:05:43 UTC
+  country_id: 47
+  operator_id: 151
+  lat: !ruby/object:BigDecimal 27:0.208928131030305e1
+  lng: !ruby/object:BigDecimal 27:0.170033496674681e2
+  fmu_id: 53
+  subcategory_id: 7
+  validation_status: Published (not modified)
+  observation_report_id: 59
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_818:
+  id: 818
+  severity_id: 174
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_819:
+  id: 819
+  severity_id: 176
+  observation_type: government
+  publication_date: 2011-09-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_820:
+  id: 820
+  severity_id: 187
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 47
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_821:
+  id: 821
+  severity_id: 187
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 47
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_822:
+  id: 822
+  severity_id: 203
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_823:
+  id: 823
+  severity_id: 220
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Pages 9, 12
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_824:
+  id: 824
+  severity_id: 219
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_825:
+  id: 825
+  severity_id: 219
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_826:
+  id: 826
+  severity_id: 223
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 56
+  validation_status: Published (not modified)
+  observation_report_id: 33
+  is_physical_place: true
+  evidence_type: Government Documents
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_827:
+  id: 827
+  severity_id: 195
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 34
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_828:
+  id: 828
+  severity_id: 195
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 34
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_829:
+  id: 829
+  severity_id: 207
+  observation_type: government
+  publication_date: 2011-10-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 34
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_830:
+  id: 830
+  severity_id: 195
+  observation_type: government
+  publication_date: 2011-12-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 35
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_831:
+  id: 831
+  severity_id: 203
+  observation_type: government
+  publication_date: 2011-12-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 35
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 16
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_832:
+  id: 832
+  severity_id: 174
+  observation_type: government
+  publication_date: 2012-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 80
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_833:
+  id: 833
+  severity_id: 202
+  observation_type: government
+  publication_date: 2012-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 80
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_834:
+  id: 834
+  severity_id: 220
+  observation_type: government
+  publication_date: 2012-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 80
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_835:
+  id: 835
+  severity_id: 219
+  observation_type: government
+  publication_date: 2012-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 80
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_836:
+  id: 836
+  severity_id: 176
+  observation_type: government
+  publication_date: 2012-09-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 37
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_837:
+  id: 837
+  severity_id: 176
+  observation_type: government
+  publication_date: 2012-09-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 37
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_838:
+  id: 838
+  severity_id: 194
+  observation_type: government
+  publication_date: 2012-09-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 37
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_839:
+  id: 839
+  severity_id: 175
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 82
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Pages 5, 17
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_840:
+  id: 840
+  severity_id: 174
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 82
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 4
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_841:
+  id: 841
+  severity_id: 174
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 82
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: 'Page 7 '
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_842:
+  id: 842
+  severity_id: 204
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 82
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_843:
+  id: 843
+  severity_id: 219
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 82
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_844:
+  id: 844
+  severity_id: 175
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 4, 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_845:
+  id: 845
+  severity_id: 176
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_846:
+  id: 846
+  severity_id: 196
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_847:
+  id: 847
+  severity_id: 207
+  observation_type: government
+  publication_date: 2012-11-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_848:
+  id: 848
+  severity_id: 173
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7, 23
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_849:
+  id: 849
+  severity_id: 195
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_850:
+  id: 850
+  severity_id: 204
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_851:
+  id: 851
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Pages 7, 24
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_852:
+  id: 852
+  severity_id: 207
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_853:
+  id: 853
+  severity_id: 206
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_854:
+  id: 854
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_855:
+  id: 855
+  severity_id: 218
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_856:
+  id: 856
+  severity_id: 220
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_857:
+  id: 857
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_858:
+  id: 858
+  severity_id: 220
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 40
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 18
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_859:
+  id: 859
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_860:
+  id: 860
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_861:
+  id: 861
+  severity_id: 176
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_862:
+  id: 862
+  severity_id: 196
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_863:
+  id: 863
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_864:
+  id: 864
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_866:
+  id: 866
+  severity_id: 208
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_867:
+  id: 867
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 41
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_868:
+  id: 868
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_869:
+  id: 869
+  severity_id: 195
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_870:
+  id: 870
+  severity_id: 195
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_871:
+  id: 871
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_872:
+  id: 872
+  severity_id: 202
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_873:
+  id: 873
+  severity_id: 204
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_874:
+  id: 874
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_875:
+  id: 875
+  severity_id: 204
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_877:
+  id: 877
+  severity_id: 208
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_878:
+  id: 878
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_879:
+  id: 879
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 42
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6, 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_880:
+  id: 880
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_881:
+  id: 881
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_882:
+  id: 882
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_883:
+  id: 883
+  severity_id: 186
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 47
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_884:
+  id: 884
+  severity_id: 195
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_885:
+  id: 885
+  severity_id: 199
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 50
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_886:
+  id: 886
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_887:
+  id: 887
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_888:
+  id: 888
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_889:
+  id: 889
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_890:
+  id: 890
+  severity_id: 206
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_891:
+  id: 891
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_892:
+  id: 892
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_893:
+  id: 893
+  severity_id: 220
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 12
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_894:
+  id: 894
+  severity_id: 220
+  observation_type: government
+  publication_date: 2013-02-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 43
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_897:
+  id: 897
+  severity_id: 194
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 83
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_898:
+  id: 898
+  severity_id: 207
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 83
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_899:
+  id: 899
+  severity_id: 207
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 83
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_900:
+  id: 900
+  severity_id: 207
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 83
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_901:
+  id: 901
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-03-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_902:
+  id: 902
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-03-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_903:
+  id: 903
+  severity_id: 196
+  observation_type: government
+  publication_date: 2013-03-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_904:
+  id: 904
+  severity_id: 208
+  observation_type: government
+  publication_date: 2013-03-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_905:
+  id: 905
+  severity_id: 218
+  observation_type: government
+  publication_date: 2013-03-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 39
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_906:
+  id: 906
+  severity_id: 173
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_907:
+  id: 907
+  severity_id: 173
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_908:
+  id: 908
+  severity_id: 173
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_909:
+  id: 909
+  severity_id: 176
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_910:
+  id: 910
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_911:
+  id: 911
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_912:
+  id: 912
+  severity_id: 194
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  actions_taken: ",,"
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_914:
+  id: 914
+  severity_id: 202
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_915:
+  id: 915
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_916:
+  id: 916
+  severity_id: 202
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_917:
+  id: 917
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_918:
+  id: 918
+  severity_id: 218
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_919:
+  id: 919
+  severity_id: 220
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_920:
+  id: 920
+  severity_id: 227
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 57
+  validation_status: Published (not modified)
+  observation_report_id: 85
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_921:
+  id: 921
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_922:
+  id: 922
+  severity_id: 176
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_923:
+  id: 923
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8,9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_924:
+  id: 924
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_925:
+  id: 925
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_926:
+  id: 926
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_927:
+  id: 927
+  severity_id: 182
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 46
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_928:
+  id: 928
+  severity_id: 195
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_929:
+  id: 929
+  severity_id: 195
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_930:
+  id: 930
+  severity_id: 207
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 52
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_931:
+  id: 931
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 86
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 9
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_932:
+  id: 932
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_933:
+  id: 933
+  severity_id: 176
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Government Documents
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_934:
+  id: 934
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_935:
+  id: 935
+  severity_id: 195
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 49
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_936:
+  id: 936
+  severity_id: 203
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_937:
+  id: 937
+  severity_id: 201
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_938:
+  id: 938
+  severity_id: 202
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_939:
+  id: 939
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_940:
+  id: 940
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_941:
+  id: 941
+  severity_id: 218
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_942:
+  id: 942
+  severity_id: 219
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 55
+  validation_status: Published (not modified)
+  observation_report_id: 48
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 7
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_943:
+  id: 943
+  severity_id: 175
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 88
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_944:
+  id: 944
+  severity_id: 174
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 88
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_945:
+  id: 945
+  severity_id: 228
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 57
+  validation_status: Published (not modified)
+  observation_report_id: 88
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 6
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_946:
+  id: 946
+  severity_id: 227
+  observation_type: government
+  publication_date: 2013-06-01 00:00:00 UTC
+  country_id: 47
+  subcategory_id: 57
+  validation_status: Published (not modified)
+  observation_report_id: 88
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 5
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1732:
+  id: 1732
+  severity_id: 219
+  observation_type: government
+  publication_date: 2015-02-28 09:47:00 UTC
+  country_id: 7
+  subcategory_id: 55
+  validation_status: Published (modified)
+  observation_report_id: 73
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1734:
+  id: 1734
+  severity_id: 169
+  observation_type: government
+  publication_date: 2015-02-28 10:04:00 UTC
+  country_id: 7
+  subcategory_id: 43
+  validation_status: Published (modified)
+  observation_report_id: 73
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1735:
+  id: 1735
+  severity_id: 201
+  observation_type: government
+  publication_date: 2015-02-28 10:16:00 UTC
+  country_id: 7
+  subcategory_id: 51
+  validation_status: Published (modified)
+  observation_report_id: 73
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1739:
+  id: 1739
+  severity_id: 210
+  observation_type: government
+  publication_date: 2017-08-14 11:42:00 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 53
+  validation_status: Published (modified)
+  observation_report_id: 124
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1751:
+  id: 1751
+  severity_id: 220
+  observation_type: government
+  publication_date: 2017-09-06 11:40:00 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (modified)
+  observation_report_id: 125
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1812:
+  id: 1812
+  severity_id: 187
+  observation_type: government
+  publication_date: 2017-08-13 23:00:00 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 47
+  validation_status: Published (modified)
+  observation_report_id: 124
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1821:
+  id: 1821
+  severity_id: 176
+  observation_type: government
+  publication_date: 2017-09-05 23:00:00 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (modified)
+  observation_report_id: 125
+  is_physical_place: true
+  hidden: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1883:
+  id: 1883
+  severity_id: 220
+  observation_type: government
+  publication_date: 2021-01-14 08:12:20 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (modified)
+  observation_report_id: 215
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: 'Délivrance de permis sans plan annuel d''opération, Observation
+    documentée lors de la descente sur terrain, cfr p. 11 '
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1884:
+  id: 1884
+  severity_id: 171
+  observation_type: government
+  publication_date: 2021-01-14 08:56:29 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 43
+  validation_status: Published (modified)
+  observation_report_id: 215
+  is_physical_place: true
+  evidence_type: Photos
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1885:
+  id: 1885
+  severity_id: 220
+  observation_type: government
+  publication_date: 2021-01-14 09:15:27 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (modified)
+  observation_report_id: 215
+  is_physical_place: true
+  evidence_type: Photos
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1898:
+  id: 1898
+  severity_id: 189
+  observation_type: government
+  publication_date: 2021-01-12 08:40:45 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 48
+  validation_status: Published (modified)
+  observation_report_id: 216
+  is_physical_place: true
+  evidence_type: Photos
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1910:
+  id: 1910
+  severity_id: 186
+  observation_type: government
+  publication_date: 2021-01-07 11:01:06 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 47
+  validation_status: Published (no comments)
+  observation_report_id: 217
+  is_physical_place: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1911:
+  id: 1911
+  severity_id: 188
+  observation_type: government
+  publication_date: 2021-01-07 11:02:31 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 47
+  validation_status: Published (no comments)
+  observation_report_id: 217
+  is_physical_place: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1912:
+  id: 1912
+  severity_id: 225
+  observation_type: government
+  publication_date: 2021-01-07 11:02:50 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (no comments)
+  observation_report_id: 217
+  is_physical_place: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1913:
+  id: 1913
+  severity_id: 196
+  observation_type: government
+  publication_date: 2021-01-07 11:03:25 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 49
+  validation_status: Published (no comments)
+  observation_report_id: 217
+  is_physical_place: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_1914:
+  id: 1914
+  severity_id: 186
+  observation_type: government
+  publication_date: 2021-01-07 11:03:06 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 47
+  validation_status: Published (no comments)
+  observation_report_id: 217
+  is_physical_place: true
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2191:
+  id: 2191
+  severity_id: 35
+  observation_type: operator
+  publication_date: 2021-09-17 08:22:00 UTC
+  country_id: 45
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:0.280789020259514e1
+  lng: !ruby/object:BigDecimal 27:0.104741007553043e2
+  subcategory_id: 9
+  validation_status: Published (not modified)
+  observation_report_id: 284
+  law_id: 284
+  location_information: Arrondissement d'Akom2, Département de l'Océan, région du
+    Sud
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  location_accuracy: Accurate GPS coordinates
+  evidence_on_report: Page 16 du rapport photo 11
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2193:
+  id: 2193
+  severity_id: 23
+  observation_type: operator
+  publication_date: 2021-09-17 08:02:07 UTC
+  country_id: 45
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:0.281712117228093e1
+  lng: !ruby/object:BigDecimal 27:0.101671620811042e2
+  subcategory_id: 6
+  validation_status: Published (not modified)
+  observation_report_id: 284
+  law_id: 275
+  location_information: Arrondissement d'Akom2, département de l'Océan, région du
+    Sud
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  location_accuracy: Accurate GPS coordinates
+  evidence_on_report: Photo 2 page 12 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2218:
+  id: 2218
+  severity_id: 220
+  observation_type: government
+  publication_date: 2023-12-21 11:31:27 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (no comments)
+  observation_report_id: 294
+  is_physical_place: true
+  evidence_type: Photos
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2219:
+  id: 2219
+  severity_id: 219
+  observation_type: government
+  publication_date: 2024-01-08 09:55:12 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (modified)
+  observation_report_id: 294
+  is_physical_place: true
+  evidence_type: Company Documents
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2220:
+  id: 2220
+  severity_id: 227
+  observation_type: government
+  publication_date: 2024-01-08 09:51:34 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (modified)
+  observation_report_id: 294
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Cfr page 6 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2246:
+  id: 2246
+  severity_id: 118
+  observation_type: operator
+  publication_date: 2022-06-06 13:50:05 UTC
+  country_id: 47
+  operator_id: 145
+  pv: PV N°7 dressé par la DDEF-K après la mission OI
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 30
+  validation_status: Published (not modified)
+  observation_report_id: 296
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 21
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2247:
+  id: 2247
+  severity_id: 64
+  observation_type: operator
+  publication_date: 2022-06-06 13:39:20 UTC
+  country_id: 47
+  operator_id: 145
+  pv: PV N°7 dressé par la DDEF-K après la mission OI
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 16
+  validation_status: Published (modified)
+  observation_report_id: 296
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 21
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2248:
+  id: 2248
+  severity_id: 64
+  observation_type: operator
+  publication_date: 2022-06-06 13:34:31 UTC
+  country_id: 47
+  operator_id: 145
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 16
+  validation_status: Published (modified)
+  observation_report_id: 296
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 21-22
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2249:
+  id: 2249
+  severity_id: 120
+  observation_type: operator
+  publication_date: 2022-06-06 13:36:14 UTC
+  country_id: 47
+  operator_id: 145
+  pv: PV N°7 dressé par la DDEF-K après la mission OI
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 30
+  validation_status: Published (no comments)
+  observation_report_id: 296
+  law_id: 314
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 22
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2250:
+  id: 2250
+  severity_id: 124
+  observation_type: operator
+  publication_date: 2022-06-06 13:48:44 UTC
+  country_id: 47
+  operator_id: 145
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 31
+  validation_status: Published (not modified)
+  observation_report_id: 296
+  law_id: 59
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 22
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2251:
+  id: 2251
+  severity_id: 128
+  observation_type: operator
+  publication_date: 2022-06-06 13:41:49 UTC
+  country_id: 47
+  operator_id: 145
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 32
+  validation_status: Published (not modified)
+  observation_report_id: 296
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 22
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2252:
+  id: 2252
+  severity_id: 72
+  observation_type: operator
+  publication_date: 2022-06-06 14:20:04 UTC
+  country_id: 47
+  operator_id: 145
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 18
+  validation_status: Published (not modified)
+  observation_report_id: 296
+  law_id: 296
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 23
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2253:
+  id: 2253
+  severity_id: 52
+  observation_type: operator
+  publication_date: 2022-06-06 13:43:03 UTC
+  country_id: 47
+  operator_id: 145
+  pv: PV N°5 dressé par la DDEF-K après la mission OI
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:-0.3998493751e1
+  lng: !ruby/object:BigDecimal 27:0.11928910282e2
+  fmu_id: 84
+  subcategory_id: 13
+  validation_status: Published (not modified)
+  observation_report_id: 296
+  law_id: 24
+  location_information: BIVELA
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 24
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2311:
+  id: 2311
+  severity_id: 218
+  observation_type: government
+  publication_date: 2023-11-30 14:48:08 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 55
+  validation_status: Published (modified)
+  observation_report_id: 306
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Rapport 18, Page 5 (Preuve de paiement de la taxe de permis)
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2312:
+  id: 2312
+  severity_id: 226
+  observation_type: government
+  publication_date: 2023-11-30 14:58:17 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (modified)
+  observation_report_id: 306
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Rapport 18, Page 4 ( Certificat d'agrément non signé et la preuve
+    de paiement)
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2313:
+  id: 2313
+  severity_id: 196
+  observation_type: government
+  publication_date: 2023-11-10 15:34:07 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 49
+  validation_status: Published (no comments)
+  observation_report_id: 306
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Voire page 5
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2314:
+  id: 2314
+  severity_id: 176
+  observation_type: government
+  publication_date: 2023-12-06 13:08:44 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (modified)
+  observation_report_id: 306
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: 'Voire page 6 '
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2315:
+  id: 2315
+  severity_id: 193
+  observation_type: government
+  publication_date: 2023-11-10 15:33:41 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 49
+  validation_status: Published (no comments)
+  observation_report_id: 306
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Voire page 6
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2359:
+  id: 2359
+  severity_id: 61
+  observation_type: operator
+  publication_date: 2024-01-09 11:40:30 UTC
+  country_id: 7
+  operator_id: 197
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:0.269268543e0
+  lng: !ruby/object:BigDecimal 27:0.25695359028e2
+  fmu_id: 12
+  subcategory_id: 16
+  validation_status: Published (modified)
+  observation_report_id: 310
+  law_id: 29
+  location_information: Territoire d'UBUNDU, Province de la TSHOPO
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Cfr page 33-34
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2361:
+  id: 2361
+  severity_id: 46
+  observation_type: operator
+  publication_date: 2024-01-09 11:37:49 UTC
+  country_id: 7
+  operator_id: 197
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:0.269268543e0
+  lng: !ruby/object:BigDecimal 27:0.25695359028e2
+  fmu_id: 12
+  subcategory_id: 12
+  validation_status: Published (modified)
+  observation_report_id: 310
+  law_id: 22
+  location_information: Territoire d'UBUNDU, Province de la TSHOPO
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2362:
+  id: 2362
+  severity_id: 119
+  observation_type: operator
+  publication_date: 2023-12-21 11:34:22 UTC
+  country_id: 7
+  operator_id: 197
+  is_active: true
+  lat: !ruby/object:BigDecimal 27:0.269268543e0
+  lng: !ruby/object:BigDecimal 27:0.25695359028e2
+  fmu_id: 12
+  subcategory_id: 30
+  validation_status: Published (no comments)
+  observation_report_id: 310
+  law_id: 57
+  location_information: Territoire d'UBUNDU, Province de la TSHOPO
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2363:
+  id: 2363
+  severity_id: 173
+  observation_type: government
+  publication_date: 2023-12-21 11:34:39 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (no comments)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Cf. page 5
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2364:
+  id: 2364
+  severity_id: 196
+  observation_type: government
+  publication_date: 2024-01-09 12:56:27 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 49
+  validation_status: Published (modified)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 8 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2365:
+  id: 2365
+  severity_id: 228
+  observation_type: government
+  publication_date: 2024-01-09 13:37:34 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (modified)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 3 du rapport 17
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2366:
+  id: 2366
+  severity_id: 227
+  observation_type: government
+  publication_date: 2024-01-09 12:31:42 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (modified)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2367:
+  id: 2367
+  severity_id: 203
+  observation_type: government
+  publication_date: 2024-01-09 12:43:28 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (modified)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2368:
+  id: 2368
+  severity_id: 201
+  observation_type: government
+  publication_date: 2023-12-21 11:40:02 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (modified)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2369:
+  id: 2369
+  severity_id: 203
+  observation_type: government
+  publication_date: 2023-12-15 14:45:21 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (no comments)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2370:
+  id: 2370
+  severity_id: 203
+  observation_type: government
+  publication_date: 2023-12-15 14:46:43 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (no comments)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2371:
+  id: 2371
+  severity_id: 188
+  observation_type: government
+  publication_date: 2024-01-09 11:47:19 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 47
+  validation_status: Published (modified)
+  observation_report_id: 310
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2380:
+  id: 2380
+  severity_id: 228
+  observation_type: government
+  publication_date: 2024-01-08 12:50:18 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (modified)
+  observation_report_id: 311
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: page 10 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2381:
+  id: 2381
+  severity_id: 227
+  observation_type: government
+  publication_date: 2024-01-08 13:10:17 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (modified)
+  observation_report_id: 311
+  is_physical_place: true
+  evidence_type: Government Documents
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2382:
+  id: 2382
+  severity_id: 173
+  observation_type: government
+  publication_date: 2024-01-08 12:48:50 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (not modified)
+  observation_report_id: 311
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2383:
+  id: 2383
+  severity_id: 188
+  observation_type: government
+  publication_date: 2023-12-13 09:41:24 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 47
+  validation_status: Published (no comments)
+  observation_report_id: 311
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11-12
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2384:
+  id: 2384
+  severity_id: 196
+  observation_type: government
+  publication_date: 2024-01-08 13:05:45 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 49
+  validation_status: Published (modified)
+  observation_report_id: 311
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 12
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2385:
+  id: 2385
+  severity_id: 228
+  observation_type: government
+  publication_date: 2023-12-13 09:46:17 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (no comments)
+  observation_report_id: 311
+  is_physical_place: true
+  evidence_type: Other
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2419:
+  id: 2419
+  severity_id: 184
+  observation_type: government
+  publication_date: 2023-06-12 12:50:45 UTC
+  country_id: 45
+  is_active: true
+  subcategory_id: 46
+  validation_status: Published (no comments)
+  observation_report_id: 313
+  actions_taken: "//"
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: "- Cartographie des faits observés dans la réserve de biosphère
+    du Dja indiquant une vente de coupe attribuée et une exploitation forestière qui
+    se déroule dans la réserve, page 22 du rapport; - Photos géoreférencées des faits
+    observés: page 15;16;17;18;19 et 20 du rapport-Synthèse des entretiens avec les
+    leaders communautaires des villages Mekas, Adjap, Kou-dja et Koungoulou de la
+    bouche Ouest de la réserve;  page 20 et 21 du rapport"
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2420:
+  id: 2420
+  severity_id: 245
+  observation_type: government
+  publication_date: 2023-06-12 12:52:52 UTC
+  country_id: 45
+  is_active: true
+  subcategory_id: 63
+  validation_status: Published (no comments)
+  observation_report_id: 313
+  actions_taken: 'Le Délégation régionale du Ministère de l’environnement , de la
+    protection de la nature et du développement durable (MINEPDED) de la région du
+    Sud a envoyé une correspondance à FODER suite à la réception du rapport de dénonciation
+    qui leur avait été également envoyé.  La correspondance indique que le MINEPDED
+    a pris acte de cette dénonciation qui est pertinente au regard des faits présentés
+    dans le rapport, et engagera des mesures nécessaires pour veiller au respect des
+    exigences en matière environnementale dans la Réserve de Biosphère du Dja.  '
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: "-Cartographie des faits observés sur le terrain, page 22 du
+    rapport-Photos déréférencées  numéro 1 à 10 des faits observées sur le terrain;
+    page 15 à 20 du rapport.-Synthèse des entretiens avec les Notables des villages
+    Adjap, Nko-dja; Mekas;  Koungoulou de la boucle Ouest de la réserve de biosphère
+    du Dja. "
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2424:
+  id: 2424
+  severity_id: 173
+  observation_type: government
+  publication_date: 2023-06-12 12:48:01 UTC
+  country_id: 45
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (no comments)
+  observation_report_id: 314
+  actions_taken: 'Une mission de contrôle menée par la brigade régionale de contrôle
+    forestier du Sud a eu lieu le 20 Avril 2023 à la suite de la réception par le
+    MINFOF du rapport d’OIE à lui transmis. Un Procès-verbal (PV) d''infraction a
+    été dressé par les éléments de la brigade régionale lors de cette mission.  Malheureusement
+    ce PV d''infraction n’a pas été remis à l''OIE, malgré la demande. Il reste et
+    demeure un document interne de l''administration forestière nous dit-on. '
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: '-Quelques illustrations: Photo 1 à 11 de la page 13 à 19 du
+    rapport-Cartographie des faits observés sur le terrain à la page 22, 23 et 24
+    du rapport- Résultat de l''entretien que la mission a effectué avec l’administration
+    forestière locale, dernier paragraphe de la page 20 du rapport, je cite  "Les
+    éléments du poste forestier de Bipindi ont effectué une mission de terrain dans
+    le village Ndtoua en l’absence du Chef de poste forestier et chasse (CPFC) suite
+    à une plainte de cette communauté sur des cas présumés d’exploitation forestière
+    illégale. Un rapport de cette mission a été dressé à cet effet et transmis à la
+    hiérarchie"'
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2435:
+  id: 2435
+  severity_id: 174
+  observation_type: government
+  publication_date: 2023-06-12 12:49:09 UTC
+  country_id: 45
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (no comments)
+  observation_report_id: 320
+  actions_taken: "Suite à la réception par le ministère des forêts et de la faune
+    du rapport de mission d'OIE accompagnée d'une lettre de dénonciation, une mission
+    conjointe de contrôle de la Brigade régional de contrôle forestier de la région
+    de l'Est (BRC Est) et SNOIE (PAPEL) a eu lieu du 11 au 12 mai 2023 sur le terrain
+    suivant la note de services N° 23/0727/NS/RE/DRFOF/DRC/C4 du 9 Mai 2023 à l’effet
+    de vérifier la véracité des faits dénoncés. Cette mission a relevé que les faits
+    dénoncés dans le rapport de SNOIE/PAPEL étaient pertinents. 42,623m3 de bois débités
+    et trois tronçonneuses ont été saisis; deux campements de scieurs installés dans
+    l'UFA ont été brûlés, et deux contentieux ont été ouverts à l’encontre du directeur
+    de la société SOFOHNY et du responsable de l’établissement V13. \r\nLes PV d'infraction
+    dressés contre SOFOHNY et l’établissement V13  n'ont pas été remis car à l'OIE
+    car reste et demeure un document interne de l'administration des forêts, nous
+    dit-on. Le rapport de la mission conjointe est disponible dans les archives de
+    FODER (Réf : 011MA/032023/31RO/SNOIE/PAPEL/052023)\r\n"
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Résultats de l'entretien avec les éléments du poste forestier
+    et chasse de Messamena lors de la mission, à la Page 20 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2489:
+  id: 2489
+  severity_id: 228
+  observation_type: government
+  publication_date: 2023-10-31 12:34:22 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (not modified)
+  observation_report_id: 333
+  is_physical_place: true
+  evidence_type: Government Documents
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2490:
+  id: 2490
+  severity_id: 176
+  observation_type: government
+  publication_date: 2023-10-31 13:07:35 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (modified)
+  observation_report_id: 333
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2491:
+  id: 2491
+  severity_id: 170
+  observation_type: government
+  publication_date: 2023-10-31 13:18:10 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 43
+  validation_status: Published (modified)
+  observation_report_id: 333
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: page 10
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2492:
+  id: 2492
+  severity_id: 170
+  observation_type: government
+  publication_date: 2023-10-31 13:23:50 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 43
+  validation_status: Published (modified)
+  observation_report_id: 333
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: page 10
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2493:
+  id: 2493
+  severity_id: 202
+  observation_type: government
+  publication_date: 2023-10-31 12:15:01 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (not modified)
+  observation_report_id: 333
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: page 11
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2494:
+  id: 2494
+  severity_id: 202
+  observation_type: government
+  publication_date: 2023-10-31 13:30:12 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (modified)
+  observation_report_id: 333
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: page 11
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2536:
+  id: 2536
+  severity_id: 228
+  observation_type: government
+  publication_date: 2023-11-08 09:58:27 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (no comments)
+  observation_report_id: 335
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2543:
+  id: 2543
+  severity_id: 204
+  observation_type: government
+  publication_date: 2023-11-08 09:57:26 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 51
+  validation_status: Published (no comments)
+  observation_report_id: 335
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 15
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2579:
+  id: 2579
+  severity_id: 228
+  observation_type: government
+  publication_date: 2023-11-17 13:56:23 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (no comments)
+  observation_report_id: 336
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2581:
+  id: 2581
+  severity_id: 171
+  observation_type: government
+  publication_date: 2023-11-08 09:58:34 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 43
+  validation_status: Published (no comments)
+  observation_report_id: 336
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 12
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2582:
+  id: 2582
+  severity_id: 176
+  observation_type: government
+  publication_date: 2023-11-17 13:56:43 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (no comments)
+  observation_report_id: 336
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 13
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2583:
+  id: 2583
+  severity_id: 223
+  observation_type: government
+  publication_date: 2023-11-17 13:56:34 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 56
+  validation_status: Published (no comments)
+  observation_report_id: 336
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 13
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2584:
+  id: 2584
+  severity_id: 228
+  observation_type: government
+  publication_date: 2023-11-06 12:37:22 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 57
+  validation_status: Published (no comments)
+  observation_report_id: 337
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 10
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2585:
+  id: 2585
+  severity_id: 172
+  observation_type: government
+  publication_date: 2023-11-06 13:06:21 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 43
+  validation_status: Published (no comments)
+  observation_report_id: 337
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 11-12
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2586:
+  id: 2586
+  severity_id: 176
+  observation_type: government
+  publication_date: 2023-11-06 12:37:09 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (no comments)
+  observation_report_id: 337
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 12
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2587:
+  id: 2587
+  severity_id: 176
+  observation_type: government
+  publication_date: 2023-11-06 13:06:47 UTC
+  country_id: 47
+  is_active: true
+  subcategory_id: 44
+  validation_status: Published (no comments)
+  observation_report_id: 337
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Page 12-13
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2634:
+  id: 2634
+  severity_id: 195
+  observation_type: government
+  publication_date: 2023-12-13 09:47:28 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 49
+  validation_status: Published (no comments)
+  observation_report_id: 339
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Cfr page 9 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment
+
+Observation_2635:
+  id: 2635
+  severity_id: 196
+  observation_type: government
+  publication_date: 2024-01-08 13:32:55 UTC
+  country_id: 7
+  is_active: true
+  subcategory_id: 49
+  validation_status: Published (modified)
+  observation_report_id: 339
+  is_physical_place: true
+  evidence_type: Evidence presented in the report
+  evidence_on_report: Voire page 9 du rapport
+  admin_comment: Lorem ipsum for admin_comment
+  monitor_comment: Lorem ipsum for monitor_comment

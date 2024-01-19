@@ -1,0 +1,40 @@
+
+Category_1:
+  id: 1
+  category_type: operator
+
+Category_2:
+  id: 2
+  category_type: operator
+
+Category_3:
+  id: 3
+  category_type: operator
+
+Category_4:
+  id: 4
+  category_type: operator
+
+Category_5:
+  id: 5
+  category_type: operator
+
+Category_6:
+  id: 6
+  category_type: operator
+
+Category_7:
+  id: 7
+  category_type: government
+
+Category_8:
+  id: 8
+  category_type: government
+
+Category_9:
+  id: 9
+  category_type: government
+
+Category_10:
+  id: 10
+  category_type: government

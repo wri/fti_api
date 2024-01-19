@@ -1,0 +1,342 @@
+
+AboutPageEntry_1_en_translation:
+  about_page_entry_id: 1
+  locale: en
+  title: Background
+  body: '<p>The Open Timber Portal is an initiative launched by the World Resources
+    Institute to incentivize the production and trade of legal timber.</p><p>As such,
+    this platform aims to improve access to comprehensive country-specific information
+    about forest management and harvesting, and increase the effectiveness of regulations
+    on illegal logging, such as the US Lacey Act, the Korea Act on the Sustainable
+    Use of Timbers, the Japan Clean Wood Act, the Australia Illegal Logging Prohibition
+    Act and the EU Timber Regulation (EUTR). For more information on these laws, please
+    visit <a href="http://www.forestlegality.org" rel="noopener noreferrer" target="_blank">www.forestlegality.org</a>.</p><p>The
+    OTP compiles information from three different sources: official concession boundaries
+    and the list of registered timber producers from the government; documents uploaded
+    voluntarily by timber producers to demonstrate compliance; and observations by
+    third party forest monitors. The list of documents to be published by operators
+    is specific to each country. It is established based on the legality grid developed
+    by national actors as part of the Voluntary Partnership Agreement (VPA) process
+    between the producer country and the European Union. A VPA is a legally binding
+    trade agreement between the EU and a timber-exporting country outside the EU.
+    A VPA aims to ensure that all timber and timber products destined for the EU market
+    from a partner country comply with the laws of that country. For more information
+    on the VPAs, please visit <a href="http://www.euflegt.efi.int/what-is-a-vpa."
+    rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa.</a></p>'
+
+AboutPageEntry_1_fr_translation:
+  about_page_entry_id: 1
+  locale: fr
+  title: Contexte
+  body: '<p>Le Portail Open Timber est une initiative lancée par le World Resources
+    Institute pour promouvoir la production et le commerce du bois légal.</p><p>En
+    tant que telle, cette plateforme vise à améliorer l''accès à des informations
+    nationales spécifiques sur la gestion et l''exploitation des forêts et à accroître
+    l''efficacité des réglementations sur l''exploitation forestière illégale, telles
+    que la loi américaine Lacey Act, la loi sud-coréenne sur l''utilisation durable
+    des espèces de bois, la loi japonaise sur le bois propre, la réglementation australienne
+    « Australian Illegal Logging Prohibition Act » et le Règlement sur le Bois de
+    l''Union Européenne (RBUE). Pour plus d''informations sur ces réglementations,
+    rendez-vous sur <a href="http://www.forestlegality.org" rel="noopener noreferrer"
+    target="_blank">www.forestlegality.org</a>.</p><p>Le portail compile des informations
+    provenant de trois sources différentes : les limites officielles des concessions
+    et la liste des exploitants forestiers enregistrés provenant de l’administration
+    chargée des forêts ; les documents mis en ligne volontairement par les exploitants
+    pour démontrer leur conformité avec les exigences légales ; et les observations
+    faites par les observateurs indépendants des forêts. La liste des documents à
+    publier par les exploitants est propre à chaque pays. Elle est élaborée à partir
+    de la grille de légalité développée par les acteurs nationaux dans le cadre du
+    processus de l’Accord de Partenariat Volontaire (APV) signé entre le pays producteur
+    et l''Union Européenne. L’APV est accord commercial bilatéral négocié entre l''UE
+    et un pays exportateur de bois situé en dehors de l''UE. Le but d''un APV est
+    de faire en sorte que les bois et produits bois en provenance d''un pays partenaire,
+    qui sont importés par l''UE sont conformes aux lois de ce pays. Pour plus d’informations,
+    rendez-vous sur <a href="http://www.euflegt.efi.int/web/apv-a-z/qu-est-ce-un-apv"
+    rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/web/apv-a-z/qu-est-ce-un-apv</a>.</p>'
+
+AboutPageEntry_1_zh-CN_translation:
+  about_page_entry_id: 1
+  locale: zh-CN
+  title: 背景信息
+  body: <p>公开木材信息平台是世界资源研究所发起的一项倡议，旨在促进合法木材的生产贸易。</p><p>因此，该平台旨在改善获取有关森林管理和采伐的综合国家/地区特定信息的途径，加强打击非法采伐之法规的有效性，如美国《雷斯法案》(US
+    Lacey Act)、韩国《木材可持续利用法》(Korea Act on the Sustainable Use of Timbers)、日本《清洁木材法案》(Japan
+    Clean Wood Act)、澳大利亚《禁止非法采伐法案》(Australia Illegal Logging Prohibition Act) 和《欧盟木材法规》(EU
+    Timber Regulation, EUTR)。有关以上法律的更多信息，请访问 www.forestlegality.org。</p><p>OTP汇集了三种不同来源的信息：官方特许经营边界和在政府登记的木材生产商；木材生产商为证明经营合规性而自愿上传的文件；第三方森林监测机构的观察。运营商将发布每个国家/地区的文档列表。该列表根据国家行为体制定的合法性网格建立的，作为生产国家/地区和欧盟之间自愿合作伙伴关系协议
+    (VPA) 流程的一部分。VPA 是欧盟与欧盟以外的木材出口国家/地区之间具有法律约束力的贸易协议。VPA 旨在确保从合作伙伴国家/地区运往欧盟市场的所有木材和木材产品均符合该国家/地区的法律。有关
+    VPA 的更多信息，请访问 <a href="http://www.euflegt.efi.int/what-is-a-vpa" rel="noopener
+    noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa</a>。</p><p>&nbsp;</p><p><br></p>
+
+AboutPageEntry_1_ja_translation:
+  about_page_entry_id: 1
+  locale: ja
+  title: 背景
+  body: <p>オープン・ティンバー・ポータルは、合法木材の生産と貿易を促進するために世界資源研究所が立ち上げたイニシアチブです</p><p>そのため、本プラットフォームは、森林管理と伐採に関する国別の包括的な情報へのアクセスを改善し、米国のレイシー法、韓国の木材の持続可能な利用に関する法律、日本のクリーンウッド法、オーストラリアの違法伐採禁止法、EU木材規制（EUTR）などの違法伐採に対する規則の有効性を高めることを目的としています。これらの法律の詳細については、<a
+    href="http://www.forestlegality.org" rel="noopener noreferrer" target="_blank">forestlegality.org</a>をご覧ください。</p><p>OTPは、以下の3つの異なる情報源からの情報をまとめています：公式なコンセッションの境界と政府によって登録された森林オペレーターのリスト、遵守を示すために森林オペレーターが自主的にアップロードした書類、森林の第三者モニターによるオブザベーション。事業者が公開すべき文書の一覧は、国ごとに定められています。生産国と欧州連合の自主的パートナーシップ協定（VPA）プロセスの一環として、各国の関係者が作成した合法性グリッドに基づいて設定されます。VPAとは、EUとEU域外の木材輸出国との間で結ばれる法的拘束力のある貿易協定のことです。VPAは、協定国からEU市場に向けて出荷されるすべての木材および木材製品が、その国の法律を遵守していることを保証することを目的としています。VPAの詳細については、<a
+    href="http://www.euflegt.efi.int/what-is-a-vpa" rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa</a>をご覧ください。</p><p>&nbsp;</p><p><br></p>
+
+AboutPageEntry_1_vi_translation:
+  about_page_entry_id: 1
+  locale: vi
+  title: Bối cảnh
+  body: '<p>Open Timber Portal là sáng kiến do Viện Tài nguyên Thế giới (World Resources
+    Institute) đưa ra để khuyến khích việc sản xuất và buôn bán gỗ hợp pháp.</p><p>Như
+    vậy, nền tảng này hướng đến cải thiện khả năng tiếp cận thông tin toàn diện của
+    từng quốc gia cụ thể về quản lý và khai thác rừng, đồng thời tăng hiệu quả của
+    các quy định về khai thác gỗ bất hợp pháp, chẳng hạn như Đạo luật Lacey của Hoa
+    Kỳ, Đạo luật của Hàn Quốc về Sử dụng Gỗ Bền vững, Đạo luật Gỗ Sạch của Nhật Bản,
+    Đạo luật cấm khai thác gỗ bất hợp pháp của Úc và Quy định về gỗ của EU (EUTR).
+    Để biết thêm thông tin về các luật này, vui lòng truy cập <a href="http://www.forestlegality.org"
+    rel="noopener noreferrer" target="_blank">forestlegality.org</a>.</p><p>OTP tổng
+    hợp thông tin từ ba nguồn khác nhau: ranh giới nhượng quyền chính thức và danh
+    sách các nhà khai thác rừng đã đăng ký từ chính phủ; tài liệu do các nhà khai
+    thác rừng tự nguyện tải lên để chứng minh sự tuân thủ; và những quan sát của các
+    cơ quan giám sát rừng bên thứ ba. Danh mục các tài liệu do các nhà khai thác công
+    bố là cụ thể cho từng quốc gia. Nó được lập dựa trên mạng lưới tính hợp pháp được
+    phát triển bởi các chủ thể trong nước như là một phần của tiến trình Hiệp định
+    Đối tác Tự nguyện (VPA) giữa nước sản xuất và Liên minh Châu Âu. Một Hiệp định
+    Đối tác Tự nguyện là một thoả thuận thương mại ràng buộc giữa EU và một nước xuất
+    khẩu gỗ ngoài EU. Hiệp định Đối tác Tự nguyện nhằm đảm bảo rằng tất cả gỗ và sản
+    phẩm gỗ đi vào thị trường EU từ một nước đối tác phải tuân thủ luật pháp của nước
+    đó.&nbsp;Để biết thêm chi tiết, vui lòng truy cập: <a href="http://www.euflegt.efi.int/what-is-a-vpa"
+    rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa</a>.</p>'
+
+AboutPageEntry_1_ko_translation:
+  about_page_entry_id: 1
+  locale: ko
+  title: 배경
+  body: <p>OTP는 합법 목재 생산과 무역을 장려하기 위해 세계자원연구소가 시작한 이니셔티브입니다.</p><p>따라서 이 플랫폼은 산림 관리
+    및 수확에 대한 포괄적인 국가별 정보에 대한 접근성을 개선하고 미국의 '레이시 법', 한국의 '목재의 지속가능한 이용에 관한 법률', 일본의
+    '깨끗한 목재법', 호주의 '불법 목재 금지법', EU의 ' EU 목재 규제(EUTR)'와 같이 불법 벌채 규제 효과를 높이는 것을 목표로
+    두고 있습니다. 법률에 대한 자세한 내용은 <a href="http://www.forestlegality.org" rel="noopener
+    noreferrer" target="_blank">forestlegality.org</a>에서 확인할 수 있습니다.</p><p>OTP는 정부
+    양도 한계선과 정부 인가를 받은 목재 생산 기업 명단, 목재 생산 기업이 법을 준수하고 있음을 입증하기 위해 자발적으로 제출한 문서, 제3
+    산림 감독 기관의 감독 이력이라는 각기 다른 기관 세 곳에서 정보를 받아 수집합니다.&nbsp;운영자가 게시할 수 있는 문서의 목록은 각 국가에
+    따라 다릅니다. 이는 생산자 국가와 유럽연합 간의 자발적 파트너십 계약(VPA) 프로세스의 일환으로 국가 관계자가 개발한 합법성 그리드에 기반하여
+    확정됩니다. VPA는 EU와 EU 외부의 목재 수출 국가 간의 법적 구속력이 있는 무역 협정입니다. VPA는 파트너 국가의 EU 시장을 대상으로
+    하는 모든 목재 및 목재 제품이 해당 국가의 법률을 준수하도록 하는 것을 목표로 합니다. VPA에 대한 자세한 내용은 <a href="http://www.euflegt.efi.int/what-is-a-vpa"
+    rel="noopener noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa</a>를
+    참조하십시오.</p>
+
+AboutPageEntry_1_pt_translation:
+  about_page_entry_id: 1
+  locale: pt
+  title: Origem
+  body: <p>O Open Timber Portal é uma iniciativa lançada pelo Worls Resources Institute
+    (Instituto de Recursos Mundiais) para incentivar a produção e ao comércio de condições
+    legais.</p><p>Dessa forma, essa plataforma tem como objetivo melhorar o acesso
+    a informações abrangentes específicas de cada país sobre o gerenciamento e a extração
+    florestal e aumentar a eficácia das regulamentações sobre a extração ilegal de
+    madeira, como a Lei Lacey dos EUA, a Lei Coreana sobre o Uso Sustentável de Madeiras,
+    a Lei de Madeira Limpa do Japão, a Lei de Proibição de Extração Ilegal de Madeira
+    da Austrália e a Regulamentação de Madeira da UE (EUTR). Para obter mais informações
+    sobre essas leis, por favor, consulte&nbsp;<a href="http://www.forestlegality.org"
+    rel="noopener noreferrer" target="_blank">www.forestlegality.org</a>.</p><p>Essa
+    lista é estabelecida com base na rede da legalidade desenvolvida por intervenientes
+    nacionais como parte do processo do Acordo de Parceria Voluntária (APV) entre
+    o país produtor e a União Europeia. O APV é um acordo comercial juridicamente
+    vinculativo entre a UE e um país exportador de madeira fora da UE. O APV visa
+    garantir que toda madeira e produtos de madeira destinados ao mercado da UE, de
+    um país parceiro cumpram as leis desse país. Para obter mais informações sobre
+    os APVs,por favor acesse <a href="http://www.euflegt.efi.int/what-is-a-vpa." rel="noopener
+    noreferrer" target="_blank">http://www.euflegt.efi.int/what-is-a-vpa.</a></p>
+
+AboutPageEntry_2_en_translation:
+  about_page_entry_id: 2
+  locale: en
+  title: Contact us
+  body: '<p>Please get in touch with us if you have any further questions regarding
+    the Open Timber Portal or want to get involved: <a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a>.</p>'
+
+AboutPageEntry_2_fr_translation:
+  about_page_entry_id: 2
+  locale: fr
+  title: Contactez-nous
+  body: '<p>N''hésitez pas à nous contacter si vous avez des questions supplémentaires
+    concernant l''OTP ou si vous souhaitez participer : <a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a>.</p>'
+
+AboutPageEntry_2_zh-CN_translation:
+  about_page_entry_id: 2
+  locale: zh-CN
+  title: 联系我们
+  body: <p>如果您对公开木材信息平台有任何问题或想参与其中，请通过<a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank">opentimberportal@wri.org</a>与我们联系</p>
+
+AboutPageEntry_2_ja_translation:
+  about_page_entry_id: 2
+  locale: ja
+  title: お問い合わせ
+  body: <p>オープン・ティンバー・ポータルに関する質問がある場合や、参加を希望の場合は、ご連絡ください：&nbsp;<a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a></p>
+
+AboutPageEntry_2_ko_translation:
+  about_page_entry_id: 2
+  locale: ko
+  title: 연락처
+  body: <p>Open Timber Portal에 대한 더 많은 질문이 있거나 함께 하고 싶다면 <a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a>로 연락해주세요.</p>
+
+AboutPageEntry_2_vi_translation:
+  about_page_entry_id: 2
+  locale: vi
+  title: Liên hệ chúng tôi
+  body: '<p>Vui lòng liên hệ với chúng tôi nếu quý vị có bất kỳ thắc mắc nào khác
+    liên quan đến Open Timber Portal hoặc muốn tham gia: <a href="mailto:opentimberportal@wri.org"
+    rel="noopener noreferrer" target="_blank">opentimberportal@wri.org</a></p>'
+
+AboutPageEntry_2_pt_translation:
+  about_page_entry_id: 2
+  locale: pt
+  title: Entre em contato conosco
+  body: '<p>Entre em contato conosco se tiver mais dúvidas sobre o Open Timber Portal
+    ou se desejar participar: <a href="mailto:opentimberportal@wri.org" rel="noopener
+    noreferrer" target="_blank">opentimberportal@wri.org</a>.</p>'
+
+AboutPageEntry_3_zh-CN_translation:
+  about_page_entry_id: 3
+  locale: zh-CN
+  title: 合作伙伴
+  body: "<p>公开木材信息平台由世界资源研究所，相关政府机构，社会团体和私营部门的合作伙伴共同设计。以下机构和组织在网站的概念开发和运营测试阶段提供了宝贵帮助：Resource
+    Extraction Monitoring (REM), Field Legality Advisory Group (FLAG), Observatoire
+    de la Gouvernance Forestière (OGF), Cercle d’Appui à la Gestion Durable des Forêts
+    (CAGDF), Conseil pour la Défense Environnementale par la Légalité et la Traçabilité
+    (CODELT)。</p><p>由Vizzuality搭建</p>"
+
+AboutPageEntry_3_ja_translation:
+  about_page_entry_id: 3
+  locale: ja
+  title: パートナー
+  body: "<p>オープン・ティンバー・ポータルは、世界資源研究所とパートナーが、国内、地域レベル、輸入業者、NGO、研究者、政府執行官、ドナーを含む幅広いステークホルダーと協議して共同で設計しました。以下のグループは、コンセプトの開発とサイトでのテストに協力しました：Resource
+    Extraction Monitoring (REM)、Field Legality Advisory Group (FLAG)、Observatoire
+    de la Gouvernance Forestière (OGF)、Cercle d’Appui à la Gestion Durable des Forêts
+    (CAGDF)、Conseil pour la Défense Environnementale par la Légalité et la Traçabilité
+    (CODELT)。これらパートナーは、Citizen Voices for ChangeプロジェクトにおいてCIDT、Brainforest、CIEDD、CED、およびFODERの支援により、コンゴ盆地でのサイトの展開も支援しました。</p><p>OTPはVizzualityによって構築されました。</p>"
+
+AboutPageEntry_3_ko_translation:
+  about_page_entry_id: 3
+  locale: ko
+  title: 파트너
+  body: <p>Open Timber Portal은 세계자원연구소와 다수의 파트너가 공동으로 설계하고 NGO, 연구원, 정부 집행 공무원 및 후원자뿐만
+    아니라 전국, 지역 수준 및 수입업자 간의 산업 협회를 포함한 광범위한 이해 관계자와 협의하여 설계되었습니다. 개념을 정립하고 사이트를 시험하는데
+    도움을 준 파트너는 다음과 같습니다. Resource Extraction Monitoring (REM), Field Legality Advisory
+    Group (FLAG), Observatoire de la Gouvernance Forestière (OGF), Cercle d’Appui
+    à la Gestion Durable des Forêts (CAGDF), Conseil pour la Défense Environnementale
+    par la Légalité et la Traçabilité (CODELT). 이 파트너들은 CIDT, Brainforest, CIEDD,
+    CED, FODER의 지원과 더불어 "변화를 위한 시민의 목소리" 프로젝트 안에서 콩고 분지에 지역을 선정하는 일을 도와주었습니다.</p><p>OTP는
+    Vizzuality가 디자인했습니다.</p>
+
+AboutPageEntry_3_vi_translation:
+  about_page_entry_id: 3
+  locale: vi
+  title: Đối tác
+  body: "<p>Open Timber Portal do Viện Tài nguyên Thế giới và các đối tác đồng thiết
+    kế với sự tham vấn rất nhiều bên liên quan, bao gồm các hiệp hội ngành trong quốc
+    gia, ở cấp khu vực và giữa các nhà nhập khẩu, cũng như các tổ chức phi chính phủ,
+    nhà nghiên cứu, quan chức thi hành pháp luật của chính phủ và các nhà tài trợ.
+    Các nhóm sau đây đã giúp phát triển khái niệm và thử nghiệm trang web: Giám sát
+    Khai thác Tài nguyên (Resource Extraction Monitoring, REM), Nhóm Tư vấn Pháp lý
+    Hiện trường (Field Legality Advisory Group, FLAG), Observatoire de la Gouvernance
+    Forestière (OGF), Cercle d’Appui à la Gestion Durable des Forêts (CAGDF), Conseil
+    pour la Défense Environnementale par la Légalité et la Traçabilité (CODELT). Các
+    đối tác này cũng giúp triển khai trang web này ở Lưu vực Côn-gô, với sự hỗ trợ
+    của CIDT, Brainforest, CIEDD, CED và FODER trong phạm vi của dự án Tiếng nói Công
+    dân vì sự Thay đổi.</p><p>OTP được xây dựng bởi Vizzuality.</p>"
+
+AboutPageEntry_3_en_translation:
+  about_page_entry_id: 3
+  locale: en
+  title: Partners
+  body: '<p>The Open Timber Portal was designed jointly by the World Resources Institute
+    and partners in consultation with a wide range of stakeholders, including industry
+    associations in country, at the regional level and among importers, as well as
+    NGOs, researchers, government enforcement officials and donors. The following
+    groups have helped develop the concept and with testing the site: Resource Extraction
+    Monitoring (REM), Field Legality Advisory Group (FLAG), Observatoire de la Gouvernance
+    Forestière (OGF), Cercle d’Appui à la Gestion Durable des Forêts (CAGDF), Conseil
+    pour la Défense Environnementale par la Légalité et la Traçabilité (CODELT) and
+    the <span style="color: rgb(32, 33, 36);">Association Technique Internationale
+    des Bois Tropicaux (</span>ATIBT). These partners also helped with the deployment
+    of the site in the Congo Basin, with the support of CIDT, Brainforest, CIEDD,
+    CED and FODER within the scope of the Citizen Voices for Change project.</p><p>The
+    OTP was built by Vizzuality.</p>'
+
+AboutPageEntry_3_fr_translation:
+  about_page_entry_id: 3
+  locale: fr
+  title: Partenaires
+  body: '<p>Le Portail Open Timber a été conçu par WRI et ses partenaires, en consultation
+    avec de nombreux acteurs dont les fédérations industrielles dans les pays producteurs,
+    à l''échelle régionale et dans les pays consommateurs, ainsi que des ONG, des
+    chercheurs, des membres de l''administration et des bailleurs. Les groupes suivants
+    ont contribué à développer le concept et tester le site: Resource Extraction Monitoring
+    (REM), FLAG, l''Observatoire de la Gouvernance Forestière (OGF), le Cercle d''Appui
+    à la Gestion Durable des Forêts (CAGDF ), le Conseil par la defense Environnementale
+    par la Légalité et la Traçabilité (CODELT) et l''<span style="color: rgb(32, 33,
+    36);">Association Technique Internationale des Bois Tropicaux (</span>ATIBT).
+    Ces partenaires ont également participé au déploiement du site dans le Bassin
+    du Congo, avec le soutien de CIDT, Brainforest, CIEDD, CED et FODER dans le cadre
+    du projet "Citizen Voices for Change".&nbsp;</p><p>L''OTP a été développé par
+    Vizzuality.</p>'
+
+AboutPageEntry_3_pt_translation:
+  about_page_entry_id: 3
+  locale: pt
+  title: Parceiros
+  body: "<p>O Open Timber Portal foi projetado em conjunto com o Instituto de Recursos
+    Mundiais e parceiros consultando uma vasta gama de partes interessadas, incluindo
+    associações industriais no país, a nível regional e entre importadores, bem como
+    ONGs, pesquisadores, autoridades governamentais e doadores. Os grupos seguintes
+    ajudaram a desenvolver o conceito e a testar o site: Resource Extraction Monitoring
+    (REM) &nbsp;Field Legality Advisory Group (FLAG), Observatoire de la Gouvernance
+    Forestière (OGF), Cercle d’Appui à la Gestion Durable des Forêts (CAGDF), Conseil
+    pour la Défense Environnementale par la Légalité et la Traçabilité (CODELT). Esses
+    parceiros também ajudaram na implementação do site na Bacia do Congo, com o apoio
+    do CIDT, Brainforest, CIEDD, CED e Forêts et Développement Rural no escopo do
+    projeto Citizen Voices for Change.</p><p>O OTP foi criado pela Vizzuality.</p>"
+
+AboutPageEntry_4_en_translation:
+  about_page_entry_id: 4
+  locale: en
+  title: Donors
+  body: "<p>The Open Timber Portal is made possible with the generous support from
+    the following donors:</p>"
+
+AboutPageEntry_4_zh-CN_translation:
+  about_page_entry_id: 4
+  locale: zh-CN
+  title: 捐助者
+  body: "<p>公开木材信息平台得到了以下机构的慷慨资助：</p>"
+
+AboutPageEntry_4_ja_translation:
+  about_page_entry_id: 4
+  locale: ja
+  title: ドナー
+  body: "<p>オープン・ティンバー・ポータルは、以下のドナーからの寛大な支援により実現しました：</p>"
+
+AboutPageEntry_4_ko_translation:
+  about_page_entry_id: 4
+  locale: ko
+  title: 후원자
+  body: "<p>OTP는 다음 후원자들의 든든한 지원으로 만들어졌습니다.</p>"
+
+AboutPageEntry_4_vi_translation:
+  about_page_entry_id: 4
+  locale: vi
+  title: Nhà tài trợ
+  body: "<p>Open Timber Portal được thực hiện với sự hỗ trợ hào phóng của các nhà
+    tài trợ sau đây:</p>"
+
+AboutPageEntry_4_fr_translation:
+  about_page_entry_id: 4
+  locale: fr
+  title: Les bailleurs de fonds
+  body: "<p>Le développement de l'OTP a été rendu possible grâce au généreux soutien
+    des bailleurs suivants :</p>"
+
+AboutPageEntry_4_pt_translation:
+  about_page_entry_id: 4
+  locale: pt
+  title: Doadores
+  body: "<p>O Open Timber Portal é possível graças ao generoso apoio dos seguintes
+    doadores:</p>"

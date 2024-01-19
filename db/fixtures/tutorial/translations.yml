@@ -1,0 +1,344 @@
+
+Tutorial_2_en_translation:
+  tutorial_id: 2
+  locale: en
+  name: Tutorial for logging companies
+  description: <p>This tutorial document provides step-by-step instructions for logging
+    companies on how to set up their account, edit their profile, and view, upload
+    and manage legality documents.</p><p><strong>Available in </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>English</strong></a><strong>
+    or in </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>French</strong></a></p>
+
+Tutorial_2_fr_translation:
+  tutorial_id: 2
+  locale: fr
+  name: Tutoriel pour les exploitants
+  description: <p>Ce tutoriel fournit des instructions détaillées pour les exploitants
+    sur la configuration d'un compte, la modification d'un profil et l’affichage,
+    la mise en ligne et la gestion des documents de légalité.</p><p><strong>Disponible
+    en </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>français</strong></a><strong>
+    et en </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>anglais</strong></a></p>
+
+Tutorial_2_zh-CN_translation:
+  tutorial_id: 2
+  locale: zh-CN
+  name: 伐木公司的教程
+  description: <p>该教程文档为伐木公司提供了如何设置账户、编辑其资料以及查看、上传和管理合法性文档的分步指导。</p><p><strong>提供</strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>英语</strong></a><strong>或</strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>法语</strong></a>版本</p>
+
+Tutorial_2_ko_translation:
+  tutorial_id: 2
+  locale: ko
+  name: 벌목 회사를 위한 튜토리얼
+  description: <p>이 튜토리얼 문서는 계정을 설정하고, 프로필을 편집하고, 적법성 문서를 확인, 업로드 및 관리하는 방법에 대한 단계별
+    지침을 벌목 회사에 제공합니다.</p><p><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>영어</strong></a><strong> 또는 </strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>프랑스어</strong></a>로 제공</p>
+
+Tutorial_2_ja_translation:
+  tutorial_id: 2
+  locale: ja
+  name: 木材会社向けチュートリアル
+  description: <p>このチュートリアル文書では、木材会社向けに、アカウントの設定、プロフィールの編集、合法性文書の表示、アップロード、管理方法を順を追って説明しています。</p><p><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>英語</strong></a><strong>もしくは</strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>フランス語</strong></a>に対応</p>
+
+Tutorial_2_pt_translation:
+  tutorial_id: 2
+  locale: pt
+  name: Tutorial para madeireiras
+  description: '<p><span style="color: rgb(49, 53, 55);">Este documento explicativo
+    fornece instruções passo a passo para empresas madeireiras sobre como configurar
+    uma conta, editar o perfil e visualizar, fazer upload e gerenciar documentos de
+    legalidade.</span></p><p><strong>Disponível em&nbsp;</strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>inglês</strong></a><strong>
+    ou em </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>francês</strong></a></p>'
+
+Tutorial_2_vi_translation:
+  tutorial_id: 2
+  locale: vi
+  name: Hướng dẫn cho các công ty khai thác gỗ
+  description: '<p>Tài liệu hướng dẫn này cung cấp hướng dẫn từng bước cho các công
+    ty khai thác gỗ về cách thiết lập tài khoản của họ, chỉnh sửa hồ sơ của họ, cũng
+    như xem, tải lên và quản lý các tài liệu hợp pháp.</p><p><strong style="color:
+    rgb(0, 0, 0);">Có sẵn bằng tiếng </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Producer_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Anh</strong></a><strong
+    style="color: rgb(0, 0, 0);"> hoặc tiếng </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_Exploitant_Francais.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Pháp</strong></a></p>'
+
+Tutorial_3_ja_translation:
+  tutorial_id: 3
+  locale: ja
+  name: 独立したモニター向けのチュートリアル
+  description: <p>このチュートリアル文書では、独立したモニター向けに、アカウントの設定、プロフィールの編集、レポートや観測のアップロードと管理の方法を順を追って説明しています。</p><p><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>英語</strong></a><strong>もしくは</strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>フランス語</strong></a>に対応</p>
+
+Tutorial_3_ko_translation:
+  tutorial_id: 3
+  locale: ko
+  name: 독립 모니터 요원을 위한 튜토리얼
+  description: <p>이 튜토리얼 문서는 독립 모니터 요원에게 계정 설정, 프로필 편집, 보고서 및 관찰 사항 업로드 및 관리 방법에 대한
+    단계별 지침을 제공합니다.&nbsp;</p><p><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>영어</strong></a><strong> 또는 </strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>프랑스어</strong></a>로 제공</p>
+
+Tutorial_3_zh-CN_translation:
+  tutorial_id: 3
+  locale: zh-CN
+  name: 独立检察员的教程
+  description: <p>该教程文档为独立监察员提供了如何设置账户、编辑资料以及上传和管理报告及观察结果的分步说明。&nbsp;</p><p><strong>提供</strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>英语</strong></a><strong>或</strong><a
+    href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>法语</strong></a>版本</p>
+
+Tutorial_3_pt_translation:
+  tutorial_id: 3
+  locale: pt
+  name: Tutorial para monitores independentes
+  description: '<p><span style="color: rgb(49, 53, 55);">Este documento tutorial fornece
+    instruções, passo a passo, para monitores independentes sobre como criar uma conta,
+    editar um perfil e fazer o upload e gerenciar relatórios e observações.</span></p><p><strong>Disponível
+    em&nbsp;</strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>inglês</strong></a><strong>
+    ou em </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>francês</strong></a></p>'
+
+Tutorial_3_fr_translation:
+  tutorial_id: 3
+  locale: fr
+  name: Tutoriel pour les observateurs indépendants
+  description: <p>Ce tutoriel fournit des instructions détaillées pour les observateurs
+    indépendants sur la création d'un compte, la modification d'un profil, ainsi que
+    sur la mise en ligne et la gestion des rapports et des observations.</p><p><strong>Disponible
+    en </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>français</strong></a><strong>
+    et en </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>anglais</strong></a></p>
+
+Tutorial_3_vi_translation:
+  tutorial_id: 3
+  locale: vi
+  name: Hướng dẫn cho các cơ quan giám sát độc lập
+  description: '<p>Tài liệu hướng dẫn này cung cấp hướng dẫn từng bước cho các cơ
+    quan giám sát độc lập về cách thiết lập tài khoản, chỉnh sửa hồ sơ, cũng như tải
+    lên và quản lý các báo cáo và việc quan sát.</p><p><strong style="color: rgb(0,
+    0, 0);">Có sẵn bằng tiếng </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Anh</strong></a><strong
+    style="color: rgb(0, 0, 0);"> hoặc tiếng </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Pháp</strong></a></p>'
+
+Tutorial_3_en_translation:
+  tutorial_id: 3
+  locale: en
+  name: Tutorial for independent monitors
+  description: <p>This tutorial document provides step-by-step instructions for independent
+    monitors on how to set up an account, edit a profile, and upload and manage reports
+    and observations.&nbsp;</p><p><strong>Available in </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_IM_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>English</strong></a><strong>
+    or in </strong><a href="https://www.opentimberportal.com/uploads/newsletter/Final_OTP_OI_Francais.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>French</strong></a></p>
+
+Tutorial_4_en_translation:
+  tutorial_id: 4
+  locale: en
+  name: OTP Brochure
+  description: <p>This brochure provides key information about the Open Timber Portal,
+    such as details on how the platform works, who the platform is intended for and
+    why it is an important tool.</p><p><strong>Available in </strong><a href="https://opentimberportal.org/uploads/documents/3/OTP_Brochure_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>English</strong></a><strong>,
+    in </strong><a href="https://opentimberportal.org/uploads/documents/4/OTP_Brochure_French.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>French</strong></a><strong>,
+    in </strong><a href="https://opentimberportal.org/uploads/documents/2/OTP_Brochure_Chinese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>Chinese</strong></a><strong>,
+    in </strong><a href="https://opentimberportal.org/uploads/documents/5/OTP_Brochure_Japanese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>Japanese</strong></a><strong>,
+    in </strong><a href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>Korean</strong></a><strong>,
+    in </strong><a href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>Vietnamese</strong></a><strong>
+    and in </strong><a href="https://opentimberportal.org/uploads/documents/10/OTP_Brochure_Portuguese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>Portuguese</strong></a></p>
+
+Tutorial_4_zh-CN_translation:
+  tutorial_id: 4
+  locale: zh-CN
+  name: OTP 手册
+  description: <p>该手册提供了有关公开木材信息平台的关键信息，如平台如何运行的详细信息、平台的目标用户以及为什么它是一款重要工具。</p><p><strong>提供
+    </strong><a href="https://opentimberportal.org/uploads/documents/3/OTP_Brochure_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>英语</strong></a><strong>、</strong><a
+    href="https://opentimberportal.org/uploads/documents/4/OTP_Brochure_French.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>法语</strong></a>、<strong>,</strong><a
+    href="https://opentimberportal.org/uploads/documents/2/OTP_Brochure_Chinese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>中文</strong></a>、<a href="https://opentimberportal.org/uploads/documents/5/OTP_Brochure_Japanese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>日语</strong></a>、<a href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>韩语</strong></a></p>
+
+Tutorial_4_ja_translation:
+  tutorial_id: 4
+  locale: ja
+  name: OTPのパンフレット
+  description: <p>このパンフレットでは、プラットフォームの仕組みや対象者、重要なツールである理由など、オープン・ティンバー・ポータル（Open Timber
+    Portal）に関する主要な情報を紹介しています。</p><p><a href="https://opentimberportal.org/uploads/documents/3/OTP_Brochure_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>英語</strong></a><strong>、</strong><a
+    href="https://opentimberportal.org/uploads/documents/4/OTP_Brochure_French.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>フランス語</strong></a><strong>、</strong><a
+    href="https://opentimberportal.org/uploads/documents/2/OTP_Brochure_Chinese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>中国語</strong></a><strong>、</strong><a
+    href="https://opentimberportal.org/uploads/documents/5/OTP_Brochure_Japanese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>日本語</strong></a><strong>、</strong><a
+    href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>韓国語</strong></a><strong>、</strong><a
+    href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>ベトナム語</strong></a><strong>に対応</strong></p>
+
+Tutorial_4_pt_translation:
+  tutorial_id: 4
+  locale: pt
+  name: Brochura do OTP
+  description: '<p><span style="color: rgb(49, 53, 55);">Esta brochura fornece informações
+    importantes sobre o Open Timber Portal, como detalhes de como a plataforma funciona,
+    a quem se destina e por que é uma ferramenta importante.</span></p><p><strong>Disponível
+    em&nbsp;</strong><a href="https://opentimberportal.org/uploads/documents/3/OTP_Brochure_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>inglês</strong></a><strong>,
+    </strong><a href="https://opentimberportal.org/uploads/documents/4/OTP_Brochure_French.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>francês</strong></a><strong>,
+    </strong><a href="https://opentimberportal.org/uploads/documents/2/OTP_Brochure_Chinese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>chinês</strong></a><strong>,
+    </strong><a href="https://opentimberportal.org/uploads/documents/5/OTP_Brochure_Japanese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>japonês</strong></a><strong>,
+    </strong><a href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>coreano</strong></a>, <a href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>vietnamita</strong></a> <strong>e
+    </strong><a href="https://opentimberportal.org/uploads/documents/10/OTP_Brochure_Portuguese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>português</strong></a></p>'
+
+Tutorial_4_fr_translation:
+  tutorial_id: 4
+  locale: fr
+  name: Brochure OTP
+  description: <p>Cette brochure fournit des informations clés sur le portal Open
+    Timber, telles que des détails sur le fonctionnement de la plateforme et ses utilisateurs
+    et pourquoi c'est un outil important.</p><p><strong>Disponible en </strong><a
+    href="https://opentimberportal.org/uploads/documents/4/OTP_Brochure_French.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>français</strong></a><strong>,
+    en </strong><a href="https://opentimberportal.org/uploads/documents/3/OTP_Brochure_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>anglais</strong></a><strong>,
+    en </strong><a href="https://opentimberportal.org/uploads/documents/2/OTP_Brochure_Chinese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>chinois</strong></a><strong>,
+    en </strong><a href="https://opentimberportal.org/uploads/documents/5/OTP_Brochure_Japanese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>japonais</strong></a><strong>,
+    en </strong><a href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>coréen</strong></a>, <strong>en
+    </strong><a href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>vietnamien</strong></a> et en
+    <a href="https://opentimberportal.org/uploads/documents/10/OTP_Brochure_Portuguese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>portugais</strong></a><strong>.</strong></p>
+
+Tutorial_4_ko_translation:
+  tutorial_id: 4
+  locale: ko
+  name: OTP 브로셔
+  description: '<p>이 브로셔는 플랫폼의 작동 방식, 플랫폼이 의도하는 사용자, 플랫폼이 중요한 도구인 이유에 대한 세부 정보와 같은
+    Open Timber 포털에 대한 주요 정보를 제공합니다.</p><p><a href="https://opentimberportal.org/uploads/documents/3/OTP_Brochure_English.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>영어</strong></a><strong>, </strong><a
+    href="https://opentimberportal.org/uploads/documents/4/OTP_Brochure_French.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>프랑스어</strong></a><strong>, </strong><a
+    href="https://opentimberportal.org/uploads/documents/2/OTP_Brochure_Chinese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>중국어</strong></a><strong>, </strong><a
+    href="https://opentimberportal.org/uploads/documents/5/OTP_Brochure_Japanese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>일본어</strong></a><strong>, </strong><a
+    href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>한국어</strong></a><strong style="color:
+    rgb(56, 103, 139);"><u>, </u></strong><a href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
+    rel="noopener noreferrer" target="_blank"><strong>베트남어</strong></a><strong style="color:
+    rgb(56, 103, 139);"><u> 및 포르투갈어</u></strong>로 제공</p>'
+
+Tutorial_4_vi_translation:
+  tutorial_id: 4
+  locale: vi
+  name: Tài liệu giới thiệu OTP
+  description: '<p>Tài liệu giới thiệu này cung cấp thông tin chính về Open Timber
+    Portal, chẳng hạn như chi tiết về cách nền tảng này hoạt động, đối tượng sử dụng
+    nền tảng và tại sao đây lại là công cụ quan trọng.</p><p><strong style="color:
+    rgb(0, 0, 0);">Có sẵn bằng tiếng </strong><a href="https://opentimberportal.org/uploads/documents/3/OTP_Brochure_English.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Anh</strong></a><strong
+    style="color: rgb(0, 0, 0);">, tiếng </strong><a href="https://opentimberportal.org/uploads/documents/4/OTP_Brochure_French.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Pháp</strong></a><strong
+    style="color: rgb(0, 0, 0);">, tiếng </strong><a href="https://opentimberportal.org/uploads/documents/2/OTP_Brochure_Chinese.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Trung</strong></a><strong
+    style="color: rgb(0, 0, 0);">, tiếng </strong><a href="https://opentimberportal.org/uploads/documents/5/OTP_Brochure_Japanese.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Nhật</strong></a><strong
+    style="color: rgb(0, 0, 0);">, tiếng </strong><a href="https://opentimberportal.org/uploads/documents/6/OTP_Brochure_Korean.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Hàn</strong></a><strong
+    style="color: rgb(0, 0, 0);"> và tiếng </strong><a href="https://opentimberportal.org/uploads/documents/7/OTP_Brochure_Vietnamese.pdf"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(0, 0, 0);"><strong>Việt</strong></a></p>'
+
+Tutorial_5_fr_translation:
+  tutorial_id: 5
+  locale: fr
+  name: Vidéo d'introduction à l'OTP
+  description: <p>Cette vidéo d'introduction guide les utilisateurs à travers l'ensemble
+    du portail Open Timber et explique comment utiliser toutes les fonctionnalités
+    de la plateforme.</p><iframe class="ql-video" frameborder="0" allowfullscreen="true"
+    src="https://www.youtube.com/embed/9WRUMYMISes?showinfo=0"></iframe><p><br></p>
+
+Tutorial_5_en_translation:
+  tutorial_id: 5
+  locale: en
+  name: Introductory video to the OTP
+  description: <p>This introductory video walks users through the entire Open Timber
+    Portal and explains how to use all of the platform's functionalities.</p><iframe
+    class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
+
+Tutorial_5_vi_translation:
+  tutorial_id: 5
+  locale: vi
+  name: Video giới thiệu về OTP
+  description: '<p><span style="color: rgb(0, 0, 0);">Video giới thiệu này sẽ hướng
+    dẫn người dùng về toàn bộ Open Timber Portal và giải thích cách sử dụng tất cả
+    các chức năng của nền tảng.</span></p><iframe class="ql-video" frameborder="0"
+    allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>'
+
+Tutorial_5_zh-CN_translation:
+  tutorial_id: 5
+  locale: zh-CN
+  name: OTP 介绍视频
+  description: <p>这段介绍性视频引导用户浏览整个公开木材信息平台，并解释如何使用平台的所有功能。</p><iframe class="ql-video"
+    frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
+
+Tutorial_5_pt_translation:
+  tutorial_id: 5
+  locale: pt
+  name: Vídeo introdutório ao OTP
+  description: <p>Este vídeo introdutório conduz os usuários por todo o Open Timber
+    Portal e explica como usar todas as funcionalidades da plataforma.</p><iframe
+    class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
+
+Tutorial_5_ja_translation:
+  tutorial_id: 5
+  locale: ja
+  name: OTPの紹介ビデオ
+  description: <p>この入門ビデオでは、オープン・ティンバー・ポータル（Open Timber Portal）の全体を解説し、プラットフォームのすべての機能の使用方法を説明しています。</p><iframe
+    class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>
+
+Tutorial_5_ko_translation:
+  tutorial_id: 5
+  locale: ko
+  name: OTP 소개 동영상
+  description: <p>이 소개 동영상은 전체 Open Timber Portal을 안내하고 플랫폼의 모든 기능을 사용하는 방법을 설명합니다.</p><iframe
+    class="ql-video" frameborder="0" allowfullscreen="true" src="https://www.youtube.com/embed/GORbRTyoTHM?showinfo=0"></iframe><p><br></p>

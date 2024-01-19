@@ -17,6 +17,10 @@ test:
   <<: *default
   database: fti_test
 
+e2e:
+  <<: *default
+  database: fti_e2e
+
 staging:
   <<: *default
   database: fti_api_staging

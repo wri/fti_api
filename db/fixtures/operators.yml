@@ -1,0 +1,204 @@
+
+Operator_145:
+  id: 145
+  operator_type: Logging company
+  country_id: 47
+  is_active: true
+  operator_id: COG-unknown-145
+  fa_id: CG/PNR/13B947
+  approved: true
+  country_doc_rank: 10
+  country_operators: 36
+  name: AFRIWOOD INDUSTRIES
+  slug: afriwood-industries
+
+Operator_151:
+  id: 151
+  operator_type: Logging company
+  country_id: 47
+  is_active: true
+  operator_id: COG-unknown-151
+  fa_id: CG/OUE/05B179
+  approved: true
+  country_doc_rank: 1
+  country_operators: 36
+  name: CIB
+  slug: cib
+
+Operator_161:
+  id: 161
+  operator_type: Logging company
+  country_id: 47
+  is_active: true
+  logo: logo.jpeg
+  operator_id: COG-unknown-161
+  fa_id: CG/UNKNOWN/0011
+  address: B.P. 135, Ouesso, Republic of Congo
+  website: http://www.interholco.com/
+  approved: true
+  country_doc_rank: 3
+  country_operators: 36
+  name: IFO / Interholco
+  details: "Interholco (IHC) is one of the largest producing companies of African
+    tropical hardwood, specialized in forest management and wood production. Its subsidiary
+    company IFO manages a 1.16 million ha natural forest area in the Republic of Congo:
+    the largest FSC®-certified tropical timber concession. In the IHC concession,
+    69% of the area is utilized for production, 27% for conservation/protection and
+    4% for rural development.\r\nInterholco has extensive experience with natural
+    and social capital assessments. Numerous environmental and socio-economic impact
+    assessments have been carried out in preparation of the forest management plan
+    and certification, combined with over 10 years of ongoing detailed monitoring
+    of impacts and dependencies from business activities on natural capital (e.g.
+    on vegetation, water, soil and wildlife).\r\n\r\nThe leading strategy is to manage
+    forests well and sustainably, to secure a long-term supply of high-quality wood.
+    The tropical forests in West- and Central Africa are valuable renewable resources.
+    Development of a sustainable forest- and wood economy is an economic and social
+    incentive for the population to maintain the forest cover and avoid deforestation.
+    It has been determined which parts of the IHC forest areas are available on a
+    long-term basis for forestry and which, due to their uniqueness, have to be preserved
+    as protected areas. (1) FSC® C122325\r\n\r\nAdress:B.P. 135, Ouesso, Republic
+    of Congo\r\nContact: info@interholco.com\r\n"
+  slug: ifo-interholco
+
+Operator_165:
+  id: 165
+  operator_type: Logging company
+  country_id: 47
+  is_active: true
+  operator_id: COG-unknown-165
+  fa_id: CG/IMP/03B001
+  address: Immeuble Villarecci, Avenue Amilcar Cabral
+  website: http://rougier.fr
+  approved: true
+  country_doc_rank: 6
+  country_operators: 36
+  name: MOKABI SA
+  details: |-
+    Exploitation
+    Transformation
+    Commerce et transport des bois et produit dérivés des bois
+  slug: mokabi-sa
+
+Operator_172:
+  id: 172
+  operator_type: Logging company
+  country_id: 47
+  is_active: true
+  operator_id: COG-unknown-172
+  fa_id: CG/BZV/04B2198
+  approved: true
+  country_doc_rank: 17
+  country_operators: 36
+  name: SIFCO
+  slug: sifco
+
+Operator_197:
+  id: 197
+  operator_type: Logging company
+  country_id: 7
+  is_active: true
+  logo: logo.jpeg
+  operator_id: COD-unknown-197
+  fa_id: DRC/UNKNOWN/0004
+  address: 'info@cft-drc.com          Téléphone: +243 80 84 00 00 1'
+  website: http://www.cft-drc.com
+  approved: true
+  country_doc_rank: 1
+  country_operators: 26
+  name: CFT
+  details: "La Compagnie Forestière et de Transformation Sarl, « CFT » en sigle est
+    une société d’exploitation forestière située dans la Province de Tshopo. La CFT
+    est attributaire des concessions forestières, dont elle tire l’exclusivité de
+    ses productions. Elle dispose ainsi d’une source d’approvisionnement de bois définie
+    et simple. Elle possède une scierie située sur le site à Kisangani, qui scie exclusivement
+    les grumes en provenance des concessions de la CFT.\r\n\r\nElle possède une politique
+    de gestion durable de ses forêts, et met en œuvre des meilleurs efforts conformément
+    aux réglementations en vigueur de la RDC, ainsi qu’aux exigences des normes d’un
+    système de gestion durable établie pour le programme de vérification de la légalité,
+    en matière d’aménagement forestier, d’exploitation forestière, de transformation
+    industrielle des bois, taxes, impôts, et autres.  Dans le but de répondre aux
+    concepts de gestion durable comme étant une activité économiquement viable, socialement
+    acceptable, et écologiquement équitable.\r\n\r\nAinsi, aujourd’hui, la CFT possède
+    les titres d’exploitation suivants :\r\n\r\nGarantie d’Approvisionnement\t Contrat
+    de Concession Forestière\t               Superficie (ha)\r\n                   18/03
+    \                                                                      47/11                                   181
+    820\r\n               002/93                                                                    005/18
+    \                                   220 861\r\n\r\n                                                                                                   TOTAL
+    \                                 402 681\r\n\r\n"
+  slug: cft
+
+Operator_10589:
+  id: 10589
+  operator_type: Logging company
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-589
+  fa_id: CM/UNKNOWN/0177
+  address: 'BP. 2064; Douala-Rue Christian Tobie Kuoh Bonanjo-Tel. : 233 42 57 03/
+    233 42 68 92'
+  approved: true
+  holding_id: 4
+  country_doc_rank: 11
+  country_operators: 137
+  name: SEBC
+  details: Exploitation et transformation du bois
+  slug: sebc
+
+Operator_10604:
+  id: 10604
+  operator_type: Logging company
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-604
+  fa_id: CM/UNKNOWN/0195
+  address: 'BP: 89; Yaoundé'
+  approved: true
+  holding_id: 4
+  country_doc_rank: 16
+  country_operators: 137
+  name: SAB
+  details: Société Anonyme
+  slug: sab
+
+Operator_10615:
+  id: 10615
+  operator_type: Logging company
+  country_id: 45
+  is_active: true
+  logo: logo.png
+  operator_id: CMR-unknown-615
+  fa_id: CM/UNKNOWN/0203
+  address: 'BP. 1905 Douala-Rue Christian Tobie Kuoh Bonanjo-Tel. : 233 42 57 03/
+    233 42 68 92'
+  approved: true
+  holding_id: 4
+  country_doc_rank: 1
+  country_operators: 137
+  name: CFC
+  details: Exploitation et transformation du bois
+  slug: cfc
+
+Operator_10623:
+  id: 10623
+  operator_type: Logging company
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-623
+  fa_id: CM/UNKNOWN/0187
+  approved: true
+  country_doc_rank: 13
+  country_operators: 137
+  name: SIENCAM
+  slug: siencam
+
+Operator_10637:
+  id: 10637
+  operator_type: Unknown
+  country_id: 45
+  is_active: true
+  operator_id: CMR-unknown-637
+  fa_id: CM/UNKNOWN/0180
+  country_doc_rank: 137
+  country_operators: 137
+  name: LOREMA
+  slug: lorema
