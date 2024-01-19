@@ -1,3 +1,4 @@
+# rubocop:disable all
 class RequiredGovDocumentsTranslateName < ActiveRecord::Migration[5.2]
   def change
     reversible do |dir|

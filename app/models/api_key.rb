@@ -21,4 +21,8 @@ class APIKey < ApplicationRecord
   def expired?
     DateTime.now >= expires_at || user.deactivated? || deactivated?
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    []
+  end
 end

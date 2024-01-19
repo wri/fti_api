@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateScoreOperatorDocuments < ActiveRecord::Migration[5.0]
   def change
     reversible do |dir|

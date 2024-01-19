@@ -8,4 +8,16 @@ module ActiveRecord
         (Relation::CLAUSE_METHODS - [:having, :where]).reject { |m| send("#{m}_clause") == other.send("#{m}_clause") }
     end
   end
+
+  # After upgrading to ransack 4.0 we need to explicitly whitelist attributes
+  # In this project I prefer to only blacklist the attributes that are not allowed for couple models
+  class Base
+    def self.ransackable_attributes(auth_object = nil)
+      @ransackable_attributes ||= authorizable_ransackable_attributes
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      @ransackable_associations ||= authorizable_ransackable_associations
+    end
+  end
 end

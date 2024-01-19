@@ -67,7 +67,7 @@ class Fmu < ApplicationRecord
   scope :filter_by_operators, ->(operator_ids) { joins(:fmu_operators).where(fmu_operators: {current: true, operator_id: operator_ids.split(",")}) }
   # this could also be done like: "id not in ( select fmu_id from fmu_operators where \"current\" = true)"
   # but it might break the method chaining
-  scope :filter_by_free, -> { where.not(id: FmuOperator.where(current: true).pluck(:fmu_id)).group(:id) }
+  scope :filter_by_free, -> { where.not(id: FmuOperator.where(current: true).select(:fmu_id)).group(:id) }
   # TODO remve the filter by free. This needs to be tested
   scope :filter_by_free_aa, -> { where(" fmus.id not in (select fmu_id from fmu_operators where current = true)") }
   scope :current, -> { joins(:fmu_operators).where(fmu_operators: {current: true}) }

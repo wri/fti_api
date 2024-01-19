@@ -40,14 +40,14 @@ ActiveAdmin.register Government do
   end
 
   filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc }
-  filter :translations_government_entity_contains,
+  filter :translations_government_entity_cont,
     as: :select, label: -> { I18n.t("activerecord.attributes.government/translation.government_entity") },
     collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
 
   dependent_filters do
     {
       country_id: {
-        translations_government_entity_contains: Government.distinct.pluck(:country_id, :government_entity)
+        translations_government_entity_cont: Government.distinct.pluck(:country_id, :government_entity)
       }
     }
   end

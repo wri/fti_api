@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateHoldings < ActiveRecord::Migration[5.0]
   def change
     create_table :holdings do |t|

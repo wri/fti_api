@@ -195,7 +195,7 @@ RSpec.describe Fmu, type: :model do
     context "when free is specified" do
       it "fetch fmus filtered by free" do
         expect(Fmu.fetch_all({"free" => "true"}).to_a).to eql(
-          Fmu.where.not(id: FmuOperator.where(current: true).pluck(:fmu_id)).group(:id).to_a
+          Fmu.where.not(id: FmuOperator.where(current: true).select(:fmu_id)).group(:id).to_a
         )
       end
     end

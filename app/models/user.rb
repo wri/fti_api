@@ -83,6 +83,10 @@ class User < ApplicationRecord
   scope :inactive, -> { where(is_active: false) }
   scope :with_user_role, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name email id created_at]
+  end
+
   def is_government(country_id)
     self&.user_permission&.user_role == "government" && self.country_id == country_id
   end

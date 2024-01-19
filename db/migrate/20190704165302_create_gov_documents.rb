@@ -1,3 +1,4 @@
+# rubocop:disable all
 # frozen_string_literal: true
 
 class CreateGovDocuments < ActiveRecord::Migration[5.0]

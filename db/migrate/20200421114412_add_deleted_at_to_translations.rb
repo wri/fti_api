@@ -1,3 +1,4 @@
+# rubocop:disable all
 class AddDeletedAtToTranslations < ActiveRecord::Migration[5.0]
   def change
     add_column :fmu_translations, :deleted_at, :datetime

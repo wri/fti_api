@@ -33,7 +33,7 @@ ActiveAdmin.register RequiredGovDocumentGroup do
     actions
   end
 
-  filter :translations_name_contains,
+  filter :translations_name_cont,
     as: :select,
     label: -> { I18n.t("activerecord.attributes.required_gov_document_group/translation.name") },
     collection: -> {

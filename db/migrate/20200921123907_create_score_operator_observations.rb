@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateScoreOperatorObservations < ActiveRecord::Migration[5.0]
   def change
     create_table :score_operator_observations do |t|

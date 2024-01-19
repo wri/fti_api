@@ -1,3 +1,4 @@
+# rubocop:disable all
 class AddUnknownOperator < ActiveRecord::Migration[7.0]
   def up
     Operator.find_or_create_by!(name: "Unknown", operator_type: "Unknown", slug: "unknown")

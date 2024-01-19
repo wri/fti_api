@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateObservationStatistics < ActiveRecord::Migration[5.0]
   def change
     create_table :observation_statistics do |t|

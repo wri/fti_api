@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateDocumentFiles < ActiveRecord::Migration[5.0]
   def change
     create_table :document_files do |t|

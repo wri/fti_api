@@ -1,3 +1,4 @@
+# rubocop:disable all
 class RemoveEvidenceFromObservation < ActiveRecord::Migration[5.0]
   def change
     evidence_mapping = ActiveSupport::HashWithIndifferentAccess.new({

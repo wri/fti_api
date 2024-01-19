@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateGovernmentsObservations < ActiveRecord::Migration[5.0]
   def change
     create_table :governments_observations do |t|

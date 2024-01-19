@@ -1,3 +1,4 @@
+# rubocop:disable all
 class CreateOperatorDocumentHistories < ActiveRecord::Migration[5.0]
   def change
     create_table :operator_document_histories do |t|

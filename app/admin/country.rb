@@ -19,7 +19,7 @@ ActiveAdmin.register Country do
   scope -> { I18n.t("active_admin.shared.active") }, :active
 
   filter :iso, as: :select
-  filter :translations_name_contains, as: :select,
+  filter :translations_name_cont, as: :select,
     label: -> { I18n.t("activerecord.attributes.country.name") },
     collection: -> { Country.order(:name).pluck(:name) }
   filter :region_iso, as: :select

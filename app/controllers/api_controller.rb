@@ -13,7 +13,7 @@ class APIController < ActionController::API
      action: params[:action],
      controller: params[:controller],
      filters: params[:filter],
-     locale: (params[:locale] || I18n.default_locale)}
+     locale: params[:locale] || I18n.default_locale}
   end
 
   before_action :check_access, :authenticate

@@ -1,3 +1,4 @@
+# rubocop:disable all
 class DropGlobalObservationScore < ActiveRecord::Migration[5.0]
   def up
     drop_table :global_observation_scores
