@@ -38,7 +38,8 @@ class ObservationReport < ApplicationRecord
   after_restore :move_attachment_to_public_directory
   after_real_destroy :remove_attachment!
 
-  after_commit :sync_observation_observers
+  attr_accessor :skip_observers_sync
+  after_commit :sync_observation_observers, unless: :skip_observers_sync
 
   scope :bigger_date, ->(date) { where("observation_reports.created_at <= ?", date + 1.day) }
 
