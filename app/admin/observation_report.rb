@@ -151,6 +151,8 @@ ActiveAdmin.register ObservationReport do
     attributes_table do
       row :title
       row :publication_date
+      row :observers
+      row :observations
       row :user
       row :created_at
       row :updated_at

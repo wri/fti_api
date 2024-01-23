@@ -28,6 +28,11 @@ class ObservationReport < ApplicationRecord
   has_many :observers, through: :observation_report_observers, after_add: :self_touch, after_remove: :self_touch
   has_many :observations, dependent: :destroy
 
+  validates :attachment, presence: true
+  validates :observers, presence: true
+  validates :title, presence: true
+  validates :publication_date, presence: true
+
   skip_callback :commit, :after, :remove_attachment!
   after_destroy :move_attachment_to_private_directory
   after_restore :move_attachment_to_public_directory

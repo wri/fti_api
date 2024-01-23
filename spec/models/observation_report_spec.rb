@@ -21,6 +21,18 @@ RSpec.describe ObservationReport, type: :model do
     expect(subject).to be_valid
   end
 
+  describe "Validations" do
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:observers) }
+    it { is_expected.to validate_presence_of(:publication_date) }
+
+    it "validates presence of attachment" do
+      subject.remove_attachment!
+      expect(subject).not_to be_valid
+      expect(subject.errors.messages[:attachment]).to include("can't be blank")
+    end
+  end
+
   describe "hooks" do
     describe "sync_observation_observers" do
       let!(:observer) { create(:observer) }
