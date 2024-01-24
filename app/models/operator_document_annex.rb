@@ -24,7 +24,7 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   mount_base64_uploader :attachment, OperatorDocumentAnnexUploader
 
-  belongs_to :user
+  belongs_to :user, optional: true # FIX db data to eliminate this
   has_many :annex_documents, inverse_of: :operator_document_annex
   has_one :annex_document, -> { where(documentable_type: "OperatorDocument") }, inverse_of: :operator_document_annex
   has_one :operator_document, through: :annex_document, required: false, source: :documentable, source_type: "OperatorDocument"
