@@ -38,45 +38,6 @@
 #
 
 FactoryBot.define do
-  factory :observation_1, class: "Observation" do
-    severity
-    country
-    species { build_list(:species, 1) }
-    user { build(:admin) }
-    operator { build(:operator, name: "Operator #{Faker::Lorem.sentence}") }
-    observers { build_list(:observer, 1) }
-    observation_type { "operator" }
-    is_active { true }
-    evidence_type { "Photos" }
-    publication_date { DateTime.now.to_date }
-    location_accuracy { "Estimated location" }
-    lng { 12.2222 }
-    lat { 12.3333 }
-
-    after(:build) do |observation|
-      observation.observers.each { |observer| observer.translation.name = observer.name }
-    end
-  end
-
-  factory :gov_observation, class: "Observation" do
-    severity
-    country
-    governments { build_list(:government, 2) }
-    species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
-    observers { build_list(:observer, 1) }
-    user { build(:admin) }
-    observation_type { "government" }
-    validation_status { "Published (no comments)" }
-    is_active { true }
-    publication_date { DateTime.now.yesterday.to_date }
-    lng { 12.2222 }
-    lat { 12.3333 }
-
-    after(:build) do |observation|
-      observation.observers.each { |observer| observer.translation.name = observer.name }
-    end
-  end
-
   factory :observation, class: "Observation" do
     country
     subcategory
@@ -86,10 +47,9 @@ FactoryBot.define do
     severity { build(:severity, subcategory: subcategory) }
     operator { create(:operator, country: country) }
     observation_type { "operator" }
-    observers { build_list(:observer, 1) }
-    species { build_list(:species, 1, name: "Species #{Faker::Lorem.sentence}") }
     is_active { true }
     validation_status { "Published (no comments)" }
+    is_physical_place { true }
     lng { 12.2222 }
     lat { 12.3333 }
 
@@ -107,6 +67,22 @@ FactoryBot.define do
 
     after(:create) do |doc, evaluator|
       doc.update(validation_status: evaluator.force_status) if evaluator.force_status
+    end
+  end
+
+  factory :gov_observation, class: "Observation" do
+    severity
+    country
+    governments { build_list(:government, 2) }
+    observers { build_list(:observer, 1) }
+    user { build(:admin) }
+    observation_type { "government" }
+    validation_status { "Published (no comments)" }
+    is_active { true }
+    publication_date { DateTime.now.yesterday.to_date }
+
+    after(:build) do |observation|
+      observation.observers.each { |observer| observer.translation.name = observer.name }
     end
   end
 

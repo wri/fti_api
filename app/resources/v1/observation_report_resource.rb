@@ -9,15 +9,9 @@ module V1
     has_many :observers
     has_many :observations
 
-    after_create :add_observers
-
     filter :observer_id, apply: ->(records, value, _options) {
       records.where(id: ObservationReportObserver.where(observer_id: value[0].to_i).select(:observation_report_id))
     }
-
-    def add_observers
-      @model.update_observers if @model.observations.any?
-    end
 
     def fetchable_fields
       return super if observations_tool_user?

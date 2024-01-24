@@ -134,6 +134,8 @@ class Observation < ApplicationRecord
 
   validates :admin_comment, presence: true, if: -> { validation_status == "Needs revision" }
 
+  before_validation :assign_observers_from_report, if: :observation_report_changed?
+
   before_save :set_active_status
   before_save :check_is_physical_place
   before_save :set_centroid
@@ -141,13 +143,11 @@ class Observation < ApplicationRecord
   before_create :set_default_observer
 
   after_create :update_operator_scores, if: :is_active?
-  after_create :update_reports_observers
   after_update :update_operator_scores, if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? || saved_change_to_operator_id? || saved_change_to_fmu_id? }
 
   after_destroy :update_operator_scores
   after_destroy :update_fmu_geojson
 
-  after_save :update_reports_observers, if: :saved_change_to_observation_report_id?
   after_save :create_history, if: :saved_changes?
 
   after_save :remove_documents, if: -> { evidence_type == "Evidence presented in the report" }
@@ -195,12 +195,6 @@ class Observation < ApplicationRecord
 
   def cache_key
     super + "-" + Globalize.locale.to_s
-  end
-
-  def update_reports_observers
-    return if observation_report.blank?
-
-    observation_report.update_observers
   end
 
   HISTORICAL_ATTRIBUTES = %w[fmu_id operator_id country_id subcategory_id observation_type evidence_type location_accuracy validation_status is_active hidden deleted_at]
@@ -321,6 +315,13 @@ class Observation < ApplicationRecord
 
     fmu.update_geojson_properties
     fmu.save
+  end
+
+  def assign_observers_from_report
+    return if observation_report.nil?
+    return if observation_report.observers.empty?
+
+    self.observers = observation_report.observers
   end
 
   def notify_about_creation

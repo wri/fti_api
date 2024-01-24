@@ -19,15 +19,16 @@ module V1
     let(:ngo_headers) { authorize_headers(ngo.id) }
     let!(:country) { create(:country) }
 
-    let(:observation) { create(:observation_1) }
+    let(:observation) { create(:observation) }
 
     context "Show observations" do
       before do
         poland = create(:country, name: "Poland", iso: "POL")
         spain = create(:country, name: "Spain", iso: "ESP")
         create_list(:observation, 4, country: poland)
-        create(:observation, observers: [ngo_observer], user_id: ngo.id, country: spain)
-        create(:observation, observers: [ngo_observer], user_id: ngo.id, country: spain, fmu: create(:fmu))
+        report = create(:observation_report, observers: [ngo_observer])
+        create(:observation, observation_report: report, user_id: ngo.id, country: spain)
+        create(:observation, observation_report: report, user_id: ngo.id, country: spain, fmu: create(:fmu))
         create(:gov_observation, user_id: admin.id, country: poland)
       end
 
@@ -117,7 +118,7 @@ module V1
     end
 
     context "Edit observations" do
-      let(:observation) { create(:observation_1) }
+      let(:observation) { create(:created_observation) }
 
       describe "For admin user" do
         it "Returns error object when the observation cannot be updated by admin" do
@@ -162,7 +163,7 @@ module V1
       end
 
       describe "For not admin user" do
-        let(:observation_by_user) { create(:observation_1, validation_status: "Published (no comments)", user_id: ngo.id) }
+        let(:observation_by_user) { create(:observation, validation_status: "Published (no comments)", user_id: ngo.id) }
 
         it "Do not allows to update observation by not admin user" do
           patch("/observations/#{observation.id}?app=observations-tool",

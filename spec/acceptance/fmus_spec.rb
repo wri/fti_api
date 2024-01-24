@@ -34,7 +34,7 @@ If not, then the request is processed as a typical JSON API request.'
 
     before do
       create(:fmu_operator, fmu: fmu_with_obs, operator: operator)
-      create(:observation, operator: operator, fmu: fmu_with_obs, observers: [observer])
+      create(:observation, operator: operator, fmu: fmu_with_obs, observation_report: create(:observation_report, observers: [observer]))
     end
 
     context "200" do

@@ -25,17 +25,33 @@ class ObservationReport < ApplicationRecord
   # API creating report fails as it's not providing user. Thing to investigate
   belongs_to :user, inverse_of: :observation_reports, optional: true
   has_many :observation_report_observers, dependent: :destroy
-  has_many :observers, through: :observation_report_observers
+  has_many :observers, through: :observation_report_observers, after_add: :self_touch, after_remove: :self_touch
   has_many :observations, dependent: :destroy
+
+  validates :attachment, presence: true
+  validates :observers, presence: true
+  validates :title, presence: true
+  validates :publication_date, presence: true
 
   skip_callback :commit, :after, :remove_attachment!
   after_destroy :move_attachment_to_private_directory
   after_restore :move_attachment_to_public_directory
   after_real_destroy :remove_attachment!
 
+  attr_accessor :skip_observers_sync
+  after_commit :sync_observation_observers, unless: :skip_observers_sync
+
   scope :bigger_date, ->(date) { where("observation_reports.created_at <= ?", date + 1.day) }
 
-  def update_observers
-    self.observer_ids = observations.joins(:observers).distinct.pluck("observers.id") if observations.any?
+  private
+
+  def self_touch(_)
+    touch unless destroyed? || new_record?
+  end
+
+  def sync_observation_observers
+    observations.with_deleted.find_each do |observation|
+      observation.observers = observers
+    end
   end
 end

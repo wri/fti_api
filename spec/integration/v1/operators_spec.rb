@@ -64,7 +64,7 @@ module V1
 
         before do
           create_list(:operator, 3, country: country) # those should not be returned
-          create(:observation, operator: operator, observers: [observer])
+          create(:observation, operator: operator, observation_report: create(:observation_report, observers: [observer]))
         end
 
         it "returns only operators linked with observer observations" do

@@ -57,6 +57,17 @@ OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }
 
 $stdout.puts "Syncing test data..."
 
+sample_file_base64 = "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
+
+# observation report has validation on attachment, so to not fail some e2e specs make sure all reports has some attachments
+ObservationReport.find_each do |report|
+  if report.attachment.blank?
+    report.remove_attachment!
+    report.skip_observers_sync = true
+    report.save!(validate: false)
+    report.update!(attachment: sample_file_base64)
+  end
+end
 Fmu.find_each(&:update_geometry)
 Rake::Task["sync:ranking"].invoke
 Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }

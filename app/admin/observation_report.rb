@@ -8,7 +8,7 @@ ActiveAdmin.register ObservationReport do
 
   actions :all, except: [:new]
 
-  permit_params :user_id, :title, :publication_date, :attachment
+  permit_params :user_id, :title, :publication_date, :attachment, observer_ids: []
 
   config.order_clause
   active_admin_paranoia
@@ -141,15 +141,18 @@ ActiveAdmin.register ObservationReport do
       f.input :title
       f.input :publication_date, as: :date_time_picker, picker_options: {timepicker: false, format: "Y-m-d"}
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
-
-      f.actions
+      f.input :observers
     end
+
+    f.actions
   end
 
   show do
     attributes_table do
       row :title
       row :publication_date
+      row :observers
+      row :observations
       row :user
       row :created_at
       row :updated_at
