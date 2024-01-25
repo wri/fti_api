@@ -7,7 +7,6 @@
 #  id                     :integer          not null, primary key
 #  validation_status      :integer
 #  observation_type       :integer
-#  evidence_type          :integer
 #  location_accuracy      :integer
 #  severity_level         :integer
 #  fmu_forest_type        :integer
