@@ -1030,8 +1030,8 @@ OperatorDocument_4129:
   fmu_id: 56
   required_operator_document_id: 41
   created_at: 2023-12-13 01:04:05 UTC
-  updated_at: 2023-12-23 06:23:58 UTC
-  status: doc_pending
+  updated_at: 2024-01-15 17:35:56 UTC
+  status: doc_not_required
   operator_id: 161
   uploaded_by: operator
   reason: |-
@@ -1044,14 +1044,17 @@ OperatorDocument_4129:
 OperatorDocument_4171:
   id: 4171
   type: OperatorDocumentCountry
-  expire_date: 2024-12-31
-  start_date: 2024-01-01
+  expire_date: 2024-05-13
+  start_date: 2023-11-14
   required_operator_document_id: 62
   created_at: 2024-01-01 01:04:06 UTC
-  updated_at: 2024-01-01 01:04:06 UTC
-  status: doc_not_provided
+  updated_at: 2024-01-16 10:50:06 UTC
+  status: doc_valid
   operator_id: 151
+  uploaded_by: operator
   note: Lorem ipsum for note
+  source: company
+  document_file_id: 4744
 
 OperatorDocument_4183:
   id: 4183
@@ -4575,8 +4578,8 @@ OperatorDocument_21909:
   start_date: 2023-11-07
   required_operator_document_id: 62
   created_at: 2023-12-23 06:14:37 UTC
-  updated_at: 2023-12-23 06:16:57 UTC
-  status: doc_pending
+  updated_at: 2024-01-16 10:07:35 UTC
+  status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -5857,19 +5860,18 @@ OperatorDocument_22401:
 OperatorDocument_22478:
   id: 22478
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-09-15
+  expire_date: 2024-02-28
+  start_date: 2023-01-12
   fmu_id: 55
   required_operator_document_id: 116
-  created_at: 2023-09-15 18:04:48 UTC
-  updated_at: 2023-09-27 23:01:33 UTC
-  status: doc_not_required
+  created_at: 2024-01-10 14:56:56 UTC
+  updated_at: 2024-01-22 11:14:07 UTC
+  status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
-    année '
   note: Lorem ipsum for note
   source: company
+  document_file_id: 4795
 
 OperatorDocument_22486:
   id: 22486
@@ -5895,8 +5897,8 @@ OperatorDocument_22489:
   fmu_id: 56
   required_operator_document_id: 112
   created_at: 2023-02-10 16:13:40 UTC
-  updated_at: 2023-02-11 07:29:18 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:56:56 UTC
+  status: doc_expired
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -5911,8 +5913,8 @@ OperatorDocument_22497:
   fmu_id: 56
   required_operator_document_id: 111
   created_at: 2023-02-10 16:13:46 UTC
-  updated_at: 2023-02-11 07:29:06 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:56:56 UTC
+  status: doc_expired
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -5926,8 +5928,8 @@ OperatorDocument_22512:
   start_date: 2023-05-16
   required_operator_document_id: 80
   created_at: 2023-12-23 06:25:34 UTC
-  updated_at: 2023-12-23 06:26:21 UTC
-  status: doc_pending
+  updated_at: 2024-01-15 17:40:20 UTC
+  status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -6922,32 +6924,29 @@ OperatorDocument_23773:
 OperatorDocument_23776:
   id: 23776
   type: OperatorDocumentCountry
-  expire_date: 2024-02-28
-  start_date: 2024-01-08
+  expire_date: 2030-12-31
+  start_date: 2024-01-16
   required_operator_document_id: 10149
-  created_at: 2024-01-09 09:20:41 UTC
-  updated_at: 2024-01-09 09:21:28 UTC
+  created_at: 2024-01-16 10:09:28 UTC
+  updated_at: 2024-01-17 16:58:01 UTC
   status: doc_pending
   operator_id: 10604
+  reason: SAB ne fait pas d'exportation, sa production est entièrement reprise par
+    SEBC, voir contrat de sous-traitance.
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4726
 
 OperatorDocument_23778:
   id: 23778
   type: OperatorDocumentCountry
-  expire_date: 2023-12-31
-  start_date: 2022-03-01
+  expire_date: 2122-12-17
+  start_date: 2024-01-10
   required_operator_document_id: 10144
-  created_at: 2022-05-13 10:29:41 UTC
-  updated_at: 2022-05-14 07:17:47 UTC
-  status: doc_not_required
+  created_at: 2024-01-10 14:56:58 UTC
+  updated_at: 2024-01-10 14:56:58 UTC
+  status: doc_not_provided
   operator_id: 10604
-  uploaded_by: operator
-  reason: L'effectif des employés de l'entreprise est que de 10. Il existe un contrat
-    de sous-traitance avec CFC pour la mise à disposition du personnel.
   note: Lorem ipsum for note
-  source: company
 
 OperatorDocument_23779:
   id: 23779
@@ -6997,18 +6996,14 @@ OperatorDocument_23781:
 OperatorDocument_23782:
   id: 23782
   type: OperatorDocumentCountry
-  expire_date: 2023-12-31
-  start_date: 2022-03-01
+  expire_date: 2026-01-09
+  start_date: 2024-01-10
   required_operator_document_id: 10141
-  created_at: 2022-05-13 10:34:17 UTC
-  updated_at: 2022-05-14 07:16:34 UTC
-  status: doc_not_required
+  created_at: 2024-01-10 14:56:58 UTC
+  updated_at: 2024-01-10 14:56:58 UTC
+  status: doc_not_provided
   operator_id: 10604
-  uploaded_by: operator
-  reason: "L'effectif des employés de l'Entreprise est de 10 personnes.\r\nIl existe
-    un contrat de sous-traitance avec la CFC pour la mise à disposition du personnel."
   note: Lorem ipsum for note
-  source: company
 
 OperatorDocument_23783:
   id: 23783
@@ -7510,66 +7505,62 @@ OperatorDocument_116295:
 OperatorDocument_116378:
   id: 116378
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-06
+  expire_date: 2024-02-28
+  start_date: 2023-12-28
   fmu_id: 11569
   required_operator_document_id: 10130
-  created_at: 2022-02-02 10:50:31 UTC
-  updated_at: 2023-03-18 10:34:33 UTC
+  created_at: 2024-01-16 09:56:56 UTC
+  updated_at: 2024-01-18 10:23:14 UTC
   status: doc_valid
   operator_id: 10615
-  uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3813
+  document_file_id: 4786
 
 OperatorDocument_116379:
   id: 116379
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-06
+  expire_date: 2024-02-28
+  start_date: 2023-12-28
   fmu_id: 11602
   required_operator_document_id: 10130
-  created_at: 2022-02-02 10:57:41 UTC
-  updated_at: 2023-03-18 10:35:28 UTC
+  created_at: 2024-01-16 09:55:54 UTC
+  updated_at: 2024-01-18 10:23:56 UTC
   status: doc_valid
   operator_id: 10615
-  uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3810
+  document_file_id: 4785
 
 OperatorDocument_116380:
   id: 116380
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-06
+  expire_date: 2024-02-28
+  start_date: 2023-12-28
   fmu_id: 11604
   required_operator_document_id: 10130
-  created_at: 2022-02-02 10:59:28 UTC
-  updated_at: 2023-03-18 10:35:14 UTC
+  created_at: 2024-01-16 09:58:04 UTC
+  updated_at: 2024-01-18 10:22:55 UTC
   status: doc_valid
   operator_id: 10615
-  uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3811
+  document_file_id: 4787
 
 OperatorDocument_116381:
   id: 116381
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-06
+  expire_date: 2024-02-28
+  start_date: 2023-12-28
   fmu_id: 11660
   required_operator_document_id: 10130
-  created_at: 2022-02-02 11:01:22 UTC
-  updated_at: 2023-03-18 10:34:44 UTC
+  created_at: 2024-01-16 09:54:10 UTC
+  updated_at: 2024-01-18 10:24:13 UTC
   status: doc_valid
   operator_id: 10615
-  uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3812
+  document_file_id: 4784
 
 OperatorDocument_116384:
   id: 116384
@@ -7590,12 +7581,12 @@ OperatorDocument_116422:
   id: 116422
   type: OperatorDocumentFmu
   expire_date: 2024-12-31
-  start_date: 2023-12-26
+  start_date: 2024-01-01
   fmu_id: 56
   required_operator_document_id: 38
   created_at: 2023-12-26 10:58:23 UTC
-  updated_at: 2023-12-26 10:59:01 UTC
-  status: doc_pending
+  updated_at: 2024-01-15 17:42:22 UTC
+  status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -7605,27 +7596,27 @@ OperatorDocument_116422:
 OperatorDocument_116423:
   id: 116423
   type: OperatorDocumentCountry
-  expire_date: 2023-12-31
-  start_date: 2023-07-01
+  expire_date: 2024-06-30
+  start_date: 2024-01-01
   required_operator_document_id: 99
-  created_at: 2023-02-10 14:49:13 UTC
-  updated_at: 2023-06-19 15:54:23 UTC
+  created_at: 2024-01-12 13:34:25 UTC
+  updated_at: 2024-01-16 10:06:55 UTC
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4180
+  document_file_id: 4741
 
 OperatorDocument_116424:
   id: 116424
   type: OperatorDocumentCountry
   expire_date: 2024-12-04
-  start_date: 2023-12-05
+  start_date: 2023-11-29
   required_operator_document_id: 2
   created_at: 2023-12-23 06:24:23 UTC
-  updated_at: 2023-12-23 06:24:54 UTC
-  status: doc_pending
+  updated_at: 2024-01-15 17:39:56 UTC
+  status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -7635,18 +7626,18 @@ OperatorDocument_116424:
 OperatorDocument_116425:
   id: 116425
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-01-01
+  expire_date: 2024-12-31
+  start_date: 2024-01-03
   fmu_id: 56
   required_operator_document_id: 36
-  created_at: 2023-02-10 15:26:19 UTC
-  updated_at: 2023-02-11 07:31:31 UTC
+  created_at: 2024-01-12 13:35:40 UTC
+  updated_at: 2024-01-15 18:06:11 UTC
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3717
+  document_file_id: 4742
 
 OperatorDocument_116452:
   id: 116452
@@ -7671,8 +7662,8 @@ OperatorDocument_116453:
   start_date: 2023-03-28
   required_operator_document_id: 50
   created_at: 2023-12-23 06:17:14 UTC
-  updated_at: 2023-12-23 06:17:59 UTC
-  status: doc_pending
+  updated_at: 2024-01-16 10:07:21 UTC
+  status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -7728,66 +7719,66 @@ OperatorDocument_116499:
 OperatorDocument_116500:
   id: 116500
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-07
+  expire_date: 2024-02-28
+  start_date: 2024-01-09
   fmu_id: 11569
   required_operator_document_id: 10131
   created_at: 2022-02-18 17:35:20 UTC
-  updated_at: 2023-04-03 05:05:52 UTC
+  updated_at: 2024-01-18 10:22:24 UTC
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3862
+  document_file_id: 4788
 
 OperatorDocument_116501:
   id: 116501
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-07
+  expire_date: 2024-02-28
+  start_date: 2024-01-09
   fmu_id: 11602
   required_operator_document_id: 10131
   created_at: 2022-02-22 10:19:44 UTC
-  updated_at: 2023-04-03 05:05:37 UTC
+  updated_at: 2024-01-18 10:22:09 UTC
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3863
+  document_file_id: 4789
 
 OperatorDocument_116502:
   id: 116502
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-07
+  expire_date: 2024-02-28
+  start_date: 2024-01-09
   fmu_id: 11604
   required_operator_document_id: 10131
   created_at: 2022-02-22 10:23:23 UTC
-  updated_at: 2023-04-03 05:05:24 UTC
+  updated_at: 2024-01-18 10:21:57 UTC
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3864
+  document_file_id: 4790
 
 OperatorDocument_116503:
   id: 116503
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-07
+  expire_date: 2024-02-28
+  start_date: 2024-01-09
   fmu_id: 11660
   required_operator_document_id: 10131
   created_at: 2022-02-22 10:28:02 UTC
-  updated_at: 2023-04-03 05:05:06 UTC
+  updated_at: 2024-01-18 10:24:30 UTC
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3865
+  document_file_id: 4783
 
 OperatorDocument_116505:
   id: 116505
@@ -7797,8 +7788,8 @@ OperatorDocument_116505:
   fmu_id: 11621
   required_operator_document_id: 10131
   created_at: 2024-01-05 10:42:44 UTC
-  updated_at: 2024-01-07 18:19:14 UTC
-  status: doc_pending
+  updated_at: 2024-01-21 21:00:50 UTC
+  status: doc_valid
   operator_id: 10589
   note: Lorem ipsum for note
   source: company
@@ -7807,18 +7798,17 @@ OperatorDocument_116505:
 OperatorDocument_116506:
   id: 116506
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-03-14
+  expire_date: 2024-02-28
+  start_date: 2023-12-28
   fmu_id: 11621
   required_operator_document_id: 10130
-  created_at: 2022-02-02 11:05:15 UTC
-  updated_at: 2023-12-31 12:16:40 UTC
-  status: doc_pending
+  created_at: 2024-01-16 09:38:20 UTC
+  updated_at: 2024-01-18 10:11:00 UTC
+  status: doc_valid
   operator_id: 10589
-  uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4696
+  document_file_id: 4782
 
 OperatorDocument_116507:
   id: 116507
@@ -7907,8 +7897,8 @@ OperatorDocument_116512:
   fmu_id: 11617
   required_operator_document_id: 10137
   created_at: 2023-01-30 08:41:52 UTC
-  updated_at: 2023-02-02 10:19:05 UTC
-  status: doc_valid
+  updated_at: 2024-01-19 01:04:05 UTC
+  status: doc_expired
   operator_id: 10604
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -7923,8 +7913,8 @@ OperatorDocument_116513:
   fmu_id: 11621
   required_operator_document_id: 10137
   created_at: 2023-01-30 08:34:08 UTC
-  updated_at: 2023-02-02 10:19:40 UTC
-  status: doc_valid
+  updated_at: 2024-01-19 01:04:05 UTC
+  status: doc_expired
   operator_id: 10589
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -7934,11 +7924,11 @@ OperatorDocument_116513:
 OperatorDocument_116576:
   id: 116576
   type: OperatorDocumentCountry
-  expire_date: 2023-12-31
-  start_date: 2023-01-01
+  expire_date: 2024-12-31
+  start_date: 2024-01-01
   required_operator_document_id: 103
   created_at: 2021-03-02 09:06:49 UTC
-  updated_at: 2023-01-11 08:08:17 UTC
+  updated_at: 2024-01-23 10:41:11 UTC
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
@@ -8092,17 +8082,17 @@ OperatorDocument_116598:
 OperatorDocument_116603:
   id: 116603
   type: OperatorDocumentCountry
-  expire_date: 2024-01-08
-  start_date: 2023-01-09
+  expire_date: 2025-01-08
+  start_date: 2024-01-08
   required_operator_document_id: 114
   created_at: 2021-03-03 10:24:37 UTC
-  updated_at: 2023-01-11 08:05:36 UTC
+  updated_at: 2024-01-15 18:55:36 UTC
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 3629
+  document_file_id: 4743
 
 OperatorDocument_116605:
   id: 116605
@@ -8154,19 +8144,15 @@ OperatorDocument_116609:
 OperatorDocument_116624:
   id: 116624
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-09-15
+  expire_date: 2025-01-09
+  start_date: 2024-01-10
   fmu_id: 53
   required_operator_document_id: 116
-  created_at: 2023-09-15 18:02:59 UTC
-  updated_at: 2023-09-27 23:20:04 UTC
-  status: doc_not_required
+  created_at: 2024-01-10 14:57:11 UTC
+  updated_at: 2024-01-10 14:57:11 UTC
+  status: doc_not_provided
   operator_id: 151
-  uploaded_by: operator
-  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
-    année '
   note: Lorem ipsum for note
-  source: company
 
 OperatorDocument_116625:
   id: 116625
@@ -8187,18 +8173,18 @@ OperatorDocument_116625:
 OperatorDocument_116626:
   id: 116626
   type: OperatorDocumentFmu
-  expire_date: 2024-01-15
-  start_date: 2023-11-14
+  expire_date: 2024-02-28
+  start_date: 2023-12-11
   fmu_id: 53
   required_operator_document_id: 70
   created_at: 2021-03-09 14:52:28 UTC
-  updated_at: 2023-11-28 11:33:44 UTC
-  status: doc_valid
+  updated_at: 2024-01-24 08:36:30 UTC
+  status: doc_pending
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4620
+  document_file_id: 4794
 
 OperatorDocument_116627:
   id: 116627
@@ -8219,13 +8205,13 @@ OperatorDocument_116627:
 OperatorDocument_116628:
   id: 116628
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-10-01
+  expire_date: 2024-02-28
+  start_date: 2023-08-30
   fmu_id: 54
   required_operator_document_id: 70
   created_at: 2021-03-09 15:02:55 UTC
-  updated_at: 2023-10-02 18:02:09 UTC
-  status: doc_valid
+  updated_at: 2024-01-24 12:00:30 UTC
+  status: doc_pending
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -8251,18 +8237,18 @@ OperatorDocument_116629:
 OperatorDocument_116630:
   id: 116630
   type: OperatorDocumentFmu
-  expire_date: 2024-01-15
-  start_date: 2023-11-15
+  expire_date: 2024-02-28
+  start_date: 2023-12-11
   fmu_id: 55
   required_operator_document_id: 115
   created_at: 2021-03-09 15:04:55 UTC
-  updated_at: 2023-11-28 11:42:12 UTC
+  updated_at: 2024-01-22 11:16:41 UTC
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4624
+  document_file_id: 4796
 
 OperatorDocument_116631:
   id: 116631
@@ -8272,8 +8258,8 @@ OperatorDocument_116631:
   fmu_id: 55
   required_operator_document_id: 70
   created_at: 2021-03-09 15:06:27 UTC
-  updated_at: 2023-11-24 13:08:43 UTC
-  status: doc_pending
+  updated_at: 2024-01-20 01:04:05 UTC
+  status: doc_expired
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -8299,99 +8285,93 @@ OperatorDocument_116632:
 OperatorDocument_116633:
   id: 116633
   type: OperatorDocumentFmu
-  expire_date: 2024-01-15
-  start_date: 2023-11-15
+  expire_date: 2024-02-28
+  start_date: 2023-12-22
   fmu_id: 109
   required_operator_document_id: 115
   created_at: 2021-03-09 15:15:42 UTC
-  updated_at: 2023-11-28 11:34:25 UTC
+  updated_at: 2024-01-22 11:22:15 UTC
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4621
+  document_file_id: 4798
 
 OperatorDocument_116634:
   id: 116634
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-09-15
+  expire_date: 2025-01-09
+  start_date: 2024-01-10
   fmu_id: 109
   required_operator_document_id: 116
-  created_at: 2023-09-15 18:06:04 UTC
-  updated_at: 2023-09-27 23:20:26 UTC
-  status: doc_not_required
+  created_at: 2024-01-10 14:57:11 UTC
+  updated_at: 2024-01-10 14:57:11 UTC
+  status: doc_not_provided
   operator_id: 151
-  uploaded_by: operator
-  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
-    année '
   note: Lorem ipsum for note
-  source: company
 
 OperatorDocument_116635:
   id: 116635
   type: OperatorDocumentFmu
-  expire_date: 2024-01-15
-  start_date: 2023-11-15
+  expire_date: 2024-02-28
+  start_date: 2023-12-11
   fmu_id: 109
   required_operator_document_id: 70
   created_at: 2022-07-07 07:12:59 UTC
-  updated_at: 2023-11-28 11:35:12 UTC
+  updated_at: 2024-01-22 11:10:42 UTC
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4622
+  document_file_id: 4793
 
 OperatorDocument_116638:
   id: 116638
   type: OperatorDocumentFmu
-  expire_date: 2024-01-15
-  start_date: 2023-11-15
+  expire_date: 2024-02-28
+  start_date: 2023-12-22
   fmu_id: 54
   required_operator_document_id: 115
   created_at: 2021-03-09 15:48:35 UTC
-  updated_at: 2023-11-28 11:36:14 UTC
-  status: doc_valid
+  updated_at: 2024-01-24 08:37:58 UTC
+  status: doc_pending
   operator_id: 151
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4619
+  document_file_id: 4799
 
 OperatorDocument_116640:
   id: 116640
   type: OperatorDocumentFmu
-  expire_date: 2023-12-17
-  start_date: 2022-12-17
+  expire_date: 2024-12-31
+  start_date: 2024-01-01
   fmu_id: 109
   required_operator_document_id: 89
-  created_at: 2022-12-17 11:44:42 UTC
-  updated_at: 2023-02-22 00:06:50 UTC
-  status: doc_invalid
+  created_at: 2024-01-11 17:57:47 UTC
+  updated_at: 2024-01-19 04:30:20 UTC
+  status: doc_not_required
   operator_id: 151
   uploaded_by: operator
+  reason: l'organe de concertation de l'UFA Mimbeli Ibenga n'a pas encore été mis
+    en place, en attendant les textes d'application de la nouvelle loi forestière
   note: Lorem ipsum for note
   source: company
 
 OperatorDocument_116641:
   id: 116641
   type: OperatorDocumentFmu
-  expire_date: 2023-12-31
-  start_date: 2023-04-26
+  expire_date: 2025-01-09
+  start_date: 2024-01-10
   fmu_id: 54
   required_operator_document_id: 116
-  created_at: 2023-04-26 01:04:04 UTC
-  updated_at: 2023-09-27 23:02:51 UTC
-  status: doc_not_required
+  created_at: 2024-01-10 14:57:11 UTC
+  updated_at: 2024-01-10 14:57:11 UTC
+  status: doc_not_provided
   operator_id: 151
-  uploaded_by: operator
-  reason: 'aucune route ou parc entrainant un déboisement n’ont été ouverts cette
-    année '
   note: Lorem ipsum for note
-  source: company
 
 OperatorDocument_116890:
   id: 116890
@@ -8536,17 +8516,17 @@ OperatorDocument_116927:
 OperatorDocument_117041:
   id: 117041
   type: OperatorDocumentCountry
-  expire_date: 2023-12-30
-  start_date: 2023-09-01
+  expire_date: 2024-06-29
+  start_date: 2023-12-29
   required_operator_document_id: 104
-  created_at: 2023-12-23 06:13:50 UTC
-  updated_at: 2023-12-23 06:14:20 UTC
-  status: doc_pending
+  created_at: 2024-01-12 13:30:22 UTC
+  updated_at: 2024-01-15 17:58:10 UTC
+  status: doc_valid
   operator_id: 161
   uploaded_by: operator
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4687
+  document_file_id: 4740
 
 OperatorDocument_117051:
   id: 117051
@@ -8594,13 +8574,13 @@ OperatorDocument_117057:
   expire_date: 2024-02-28
   start_date: 2024-01-08
   required_operator_document_id: 10149
-  created_at: 2024-01-09 09:15:01 UTC
-  updated_at: 2024-01-09 09:16:07 UTC
-  status: doc_pending
+  created_at: 2024-01-16 09:31:35 UTC
+  updated_at: 2024-01-18 10:25:08 UTC
+  status: doc_valid
   operator_id: 10589
   note: Lorem ipsum for note
   source: company
-  document_file_id: 4725
+  document_file_id: 4772
 
 OperatorDocument_117080:
   id: 117080
@@ -8610,8 +8590,8 @@ OperatorDocument_117080:
   fmu_id: 11621
   required_operator_document_id: 10138
   created_at: 2021-04-15 09:30:56 UTC
-  updated_at: 2023-05-09 19:04:44 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:57:14 UTC
+  status: doc_expired
   operator_id: 10589
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -9033,8 +9013,8 @@ OperatorDocument_118438:
   fmu_id: 100438
   required_operator_document_id: 10138
   created_at: 2022-02-02 23:09:41 UTC
-  updated_at: 2023-05-04 04:21:02 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:57:15 UTC
+  status: doc_expired
   operator_id: 10623
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -9049,8 +9029,8 @@ OperatorDocument_118439:
   fmu_id: 100438
   required_operator_document_id: 10137
   created_at: 2022-02-02 23:09:41 UTC
-  updated_at: 2023-05-04 04:15:51 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:57:15 UTC
+  status: doc_expired
   operator_id: 10623
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -9107,8 +9087,8 @@ OperatorDocument_118550:
   fmu_id: 100458
   required_operator_document_id: 10146
   created_at: 2022-04-19 21:44:37 UTC
-  updated_at: 2023-05-04 04:16:35 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:57:16 UTC
+  status: doc_expired
   operator_id: 10623
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -9123,8 +9103,8 @@ OperatorDocument_118551:
   fmu_id: 100458
   required_operator_document_id: 10145
   created_at: 2023-01-17 09:41:14 UTC
-  updated_at: 2023-05-04 04:14:25 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:57:16 UTC
+  status: doc_expired
   operator_id: 10623
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -9155,8 +9135,8 @@ OperatorDocument_118553:
   fmu_id: 100458
   required_operator_document_id: 10137
   created_at: 2022-04-19 21:44:37 UTC
-  updated_at: 2023-05-04 04:15:16 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:57:17 UTC
+  status: doc_expired
   operator_id: 10623
   uploaded_by: operator
   note: Lorem ipsum for note
@@ -9200,8 +9180,8 @@ OperatorDocument_118556:
   fmu_id: 100458
   required_operator_document_id: 10131
   created_at: 2023-05-03 09:53:36 UTC
-  updated_at: 2023-05-04 04:18:26 UTC
-  status: doc_valid
+  updated_at: 2024-01-10 14:57:17 UTC
+  status: doc_expired
   operator_id: 10623
   uploaded_by: operator
   note: Lorem ipsum for note

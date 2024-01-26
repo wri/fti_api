@@ -363,6 +363,7 @@ ObservationReport_240:
   id: 240
   title: Rapport de mission-014-OIFLEGT-OGF
   publication_date: 2020-07-21 23:00:00 UTC
+  attachment: rapport-de-mission-014-oiflegt-ogf-2020-07-21.pdf
 
 ObservationReport_276:
   id: 276
@@ -627,3 +628,9 @@ ObservationReport_340:
   title: 'Réf: 001/RO-SNOIE/SUHE/092023/Arrondissment de Massock Songloulou'
   publication_date: 2023-10-25 23:00:00 UTC
   attachment: ref-001-ro-snoie-suhe-092023-arrondissment-de-mas-2023-10-25.pdf
+
+ObservationReport_341:
+  id: 341
+  title: Rapport 23 OGF
+  publication_date: 2023-11-28 23:00:00 UTC
+  attachment: rapport-23-ogf-2023-11-28.pdf

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_11_105148) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_26_170353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -404,6 +404,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_11_105148) do
     t.bigint "observation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_observation_documents_observations_on_deleted_at"
     t.index ["observation_document_id", "observation_id"], name: "observation_documents_observations_double_index", unique: true
     t.index ["observation_document_id"], name: "observation_documents_observations_doc_index"
     t.index ["observation_id"], name: "observation_documents_observations_obs_index"

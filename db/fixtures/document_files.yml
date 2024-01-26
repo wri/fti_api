@@ -3831,10 +3831,6 @@ DocumentFile_4695:
   id: 4695
   attachment: cft-quittance-de-versement-de-la-contribution-patronale-a-l-onem-2023-12-28.pdf
 
-DocumentFile_4696:
-  id: 4696
-  attachment: sebc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2023-12-31.pdf
-
 DocumentFile_4707:
   id: 4707
   attachment: sebc-notification-de-demarrage-des-activites-2024-01-05.pdf
@@ -3870,3 +3866,111 @@ DocumentFile_4725:
 DocumentFile_4726:
   id: 4726
   attachment: sab-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2024-01-09.pdf
+
+DocumentFile_4740:
+  id: 4740
+  attachment: ifo-interholco-proces-verbal-de-reunion-du-comite-d-hygiene-et-de-securite-2024-01-12.pdf
+
+DocumentFile_4741:
+  id: 4741
+  attachment: ifo-interholco-autorisation-d-heures-supplementaires-le-cas-echeant-2024-01-12.pdf
+
+DocumentFile_4742:
+  id: 4742
+  attachment: ifo-interholco-autorisation-de-coupe-d-achevement-2024-01-12.pdf
+
+DocumentFile_4743:
+  id: 4743
+  attachment: cib-certificat-phytosanitaire-2024-01-12.pdf
+
+DocumentFile_4744:
+  id: 4744
+  attachment: cib-permis-d-exportation-cites-2024-01-12.pdf
+
+DocumentFile_4772:
+  id: 4772
+  attachment: sebc-certificat-d-enregistrement-en-qualite-d-exportateur-de-bois-transformes-de-l-entreprise-exploitante-2024-01-16.pdf
+
+DocumentFile_4773:
+  id: 4773
+  attachment: sebc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4774:
+  id: 4774
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4775:
+  id: 4775
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4776:
+  id: 4776
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4778:
+  id: 4778
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4782:
+  id: 4782
+  attachment: sebc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4783:
+  id: 4783
+  attachment: cfc-notification-de-demarrage-des-activites-2024-01-16.pdf
+
+DocumentFile_4784:
+  id: 4784
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4785:
+  id: 4785
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4786:
+  id: 4786
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4787:
+  id: 4787
+  attachment: cfc-permis-annuel-d-operation-ou-certificat-annuel-d-assiette-de-coupe-2024-01-16.pdf
+
+DocumentFile_4788:
+  id: 4788
+  attachment: cfc-notification-de-demarrage-des-activites-2024-01-16.pdf
+
+DocumentFile_4789:
+  id: 4789
+  attachment: cfc-notification-de-demarrage-des-activites-2024-01-16.pdf
+
+DocumentFile_4790:
+  id: 4790
+  attachment: cfc-notification-de-demarrage-des-activites-2024-01-16.pdf
+
+DocumentFile_4793:
+  id: 4793
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2024-01-17.pdf
+
+DocumentFile_4794:
+  id: 4794
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-superficie-2024-01-17.pdf
+
+DocumentFile_4795:
+  id: 4795
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-de-deboisement-2024-01-17.pdf
+
+DocumentFile_4796:
+  id: 4796
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2024-01-17.pdf
+
+DocumentFile_4797:
+  id: 4797
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2024-01-17.pdf
+
+DocumentFile_4798:
+  id: 4798
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2024-01-17.pdf
+
+DocumentFile_4799:
+  id: 4799
+  attachment: cib-decharge-attestant-du-paiement-de-la-taxe-d-abattage-2024-01-17.pdf
