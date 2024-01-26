@@ -375,7 +375,8 @@ ActiveAdmin.register Observation do
     column :evidence_type
     column I18n.t("active_admin.menu.independent_monitoring.evidence"), class: "col-evidence" do |o|
       links = []
-      o.observation_documents.each do |d|
+      documents = params["scope"].eql?("recycle_bin") ? o.observation_documents.unscope(where: :deleted_at) : o.observation_documents
+      documents.each do |d|
         links << link_to(d.name, admin_evidence_path(d.id))
       end
       links.reduce(:+)
