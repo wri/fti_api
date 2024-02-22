@@ -39,8 +39,6 @@
 
 require "rails_helper"
 
-RSpec::Matchers.define_negated_matcher :have_not_enqueued_mail, :have_enqueued_mail
-
 RSpec.describe Observation, type: :model do
   subject(:observation) { build(:observation) }
 

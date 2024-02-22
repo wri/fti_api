@@ -27,15 +27,17 @@ Bundler.require(*Rails.groups)
 
 module FtiApi
   class Application < Rails::Application
-    config.autoload_paths << Rails.root.join("lib")
-    config.eager_load_paths << Rails.root.join("lib")
-    config.load_defaults 7.0
+    config.load_defaults 7.1
+    # Please, add to the `ignore` list any other `lib` subdirectories that do
+    # not contain `.rb` files, or that should not be reloaded or eager loaded.
+    # Common ones are `templates`, `generators`, or `middleware`, for example.
+    config.autoload_lib(ignore: %w[tasks rack])
 
     # ActiveJob
     config.active_job.queue_adapter = :sidekiq
 
     config.api_only = false
-    config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
+    config.action_mailer.preview_paths << "#{Rails.root}/spec/mailers/previews"
 
     config.i18n.fallbacks = [I18n.default_locale]
 
@@ -48,6 +50,7 @@ module FtiApi
     config.asset_host = app_url.to_s unless Rails.env.test?
 
     config.generators do |g|
+      g.system_tests nil
       g.template_engine nil
       g.test_framework :rspec,
         fixtures: true,
