@@ -53,7 +53,7 @@ class OperatorDocument < ApplicationRecord
   before_save :set_type
   before_create :delete_previous_pending_document
 
-  after_destroy :regenerate
+  after_destroy :create_history
   after_destroy :recalculate_scores
   after_save :create_history, if: :saved_changes?
   after_save :recalculate_scores, if: :saved_change_to_score_related_attributes?
@@ -142,6 +142,22 @@ class OperatorDocument < ApplicationRecord
     "#{required_operator_document.name} (#{fmu.name})"
   end
 
+  def destroy # rubocop:disable Rails/ActiveRecordOverride
+    # It only allows for (soft) deletion of the operator documents when:
+    # 1 - The Operator was deleted  (destroyed_by_association)
+    # 2 - The Fmu was deleted (destroyed_by_association)
+    # 3 - The Required Operator Document was deleted (destroyed_by_association)
+    # 4 - The Operator is no longer active for this Fmu
+    return super if destroyed_by_association || (fmu_id && (operator_id != fmu.operator&.id))
+
+    update!(
+      status: OperatorDocument.statuses[:doc_not_provided],
+      expire_date: nil, start_date: Time.zone.today, created_at: DateTime.now, updated_at: DateTime.now,
+      deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
+      source: nil, source_info: nil, document_file_id: nil
+    )
+  end
+
   private
 
   def recalculate_scores
@@ -152,25 +168,6 @@ class OperatorDocument < ApplicationRecord
 
   def saved_change_to_score_related_attributes?
     saved_change_to_status? || (!operator.approved? && saved_change_to_public?)
-  end
-
-  def regenerate
-    # It only allows for (soft) deletion of the operator documents when:
-    # 1 - The Operator was deleted  (destroyed_by_association)
-    # 2 - The Fmu was deleted (destroyed_by_association)
-    # 3 - The Required Operator Document was deleted (destroyed_by_association)
-    # 4 - The Operator is no longer active for this Fmu
-
-    create_history and return if destroyed_by_association
-    create_history and return if fmu_id && (operator_id != fmu.operator&.id)
-
-    update!(
-      status: OperatorDocument.statuses[:doc_not_provided],
-      expire_date: nil, start_date: Time.zone.today, created_at: DateTime.now, updated_at: DateTime.now,
-      deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
-      source: nil, source_info: nil, document_file_id: nil
-    )
-    self.skip_score_recalculation = true
   end
 
   def set_type

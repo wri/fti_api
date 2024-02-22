@@ -37,10 +37,7 @@ gem "groupdate"
 gem "devise"
 
 # Soft Delete
-# version 2.6.0 will not work in this app because until the way operator document is regenerated after destroy is changed
-# here is the reason https://github.com/rubysherpas/paranoia/pull/485/files#diff-11d24643784dae175b47e4df1207f1184300711d4f728e730c06fbecf300cd7fR76-R77
-# if model is not deleted in destroy action then everything is rolled back
-gem "paranoia", "~> 2.5.3"
+gem "paranoia"
 
 # Rails and DB
 gem "activerecord-postgis-adapter"

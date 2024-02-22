@@ -403,8 +403,8 @@ GEM
       activerecord (>= 5.2)
       request_store (~> 1.1)
     parallel (1.24.0)
-    paranoia (2.5.3)
-      activerecord (>= 5.1, < 7.1)
+    paranoia (2.6.3)
+      activerecord (>= 5.1, < 7.2)
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
@@ -717,7 +717,7 @@ DEPENDENCIES
   oj
   oj_mimic_json
   paper_trail
-  paranoia (~> 2.5.3)
+  paranoia
   pg
   puma
   rack-cors
