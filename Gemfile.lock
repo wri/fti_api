@@ -6,17 +6,6 @@ GIT
       activeadmin
 
 GIT
-  remote: https://github.com/globalize/globalize-versioning.git
-  revision: 5d92ddbf838e2bffc4c1229cab02b34bb96ad46f
-  branch: main
-  specs:
-    globalize-versioning (0.5.0)
-      activemodel (>= 4.2.0, < 8.0)
-      activerecord (>= 4.2.0, < 8.0)
-      globalize (>= 5.1.0, < 7)
-      paper_trail (>= 8, < 13)
-
-GIT
   remote: https://github.com/tsubik/active_admin_paranoia.git
   revision: 3f3fd26962ae4d8aee139a3b8f7256e2d1d340dc
   specs:
@@ -32,6 +21,17 @@ GIT
     activeadmin-globalize (1.0.0.pre)
       activeadmin (>= 1.0, < 4.0)
       globalize (>= 3.1.0, <= 6.3)
+
+GIT
+  remote: https://github.com/tsubik/globalize-versioning.git
+  revision: 7b13908044e79fa975155bb1b4941fdeffd6682b
+  branch: custom
+  specs:
+    globalize-versioning (0.5.0)
+      activemodel (>= 4.2.0, < 8.0)
+      activerecord (>= 4.2.0, < 8.0)
+      globalize (>= 5.1.0, < 7)
+      paper_trail (>= 8, < 16)
 
 GIT
   remote: https://github.com/tsubik/rspec-request_snapshot.git
@@ -409,9 +409,9 @@ GEM
     oj_mimic_json (1.0.1)
     optimist (3.1.0)
     orm_adapter (0.5.0)
-    paper_trail (12.3.0)
-      activerecord (>= 5.2)
-      request_store (~> 1.1)
+    paper_trail (15.1.0)
+      activerecord (>= 6.1)
+      request_store (~> 1.4)
     parallel (1.24.0)
     paranoia (2.6.3)
       activerecord (>= 5.1, < 7.2)
