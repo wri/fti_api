@@ -58,7 +58,7 @@ RSpec.configure do |config|
   config.include ImporterHelper, type: :importer
   config.extend APIDocsHelpers
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
   config.request_snapshots_dir = "spec/fixtures/snapshots"
   # adding dynamic attributes for snapshots, small medium original are for active storage links
