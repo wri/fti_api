@@ -167,7 +167,7 @@ GEM
       ruby2_keywords (>= 0.0.2)
     ast (2.4.2)
     attr_extras (7.1.0)
-    base64 (0.2.0)
+    base64 (0.1.1)
     bcrypt (3.1.20)
     bigdecimal (3.1.6)
     bindex (0.8.1)
@@ -692,6 +692,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   acts_as_list
   annotate
+  base64 (= 0.1.1)
   bcrypt
   bootsnap
   brakeman
