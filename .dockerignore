@@ -35,8 +35,18 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 /public/assets
+/public/uploads
+/public/system
+/private
 
 # coverage
 /coverage
 
 /db/files/.~*
+
+# Ignore db dumps
+/dumps
+/db/dumps/*
+!/db/dumps/.keep
+
+.dir-locals.el
