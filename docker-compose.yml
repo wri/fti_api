@@ -1,5 +1,9 @@
 version: "3.8"
 services:
+  redis:
+    image: redis:7.2.4-alpine
+    ports:
+      - "${REDIS_PORT}:6379"
   db:
     image: postgis/postgis:12-3.1-alpine
     container_name: postgres_fti_api
