@@ -21,8 +21,8 @@ class E2ETask
         abort "Only works in e2e environment" unless Rails.env.e2e?
 
         terminate_connections_to db_config["database"]
-        sh "dropdb --if-exists #{connection_config} #{db_config["database"]}"
-        sh "createdb #{connection_config} --template=#{template_db_name} #{db_config["database"]}"
+        sh "#{pgpass} dropdb --if-exists #{connection_config} #{db_config["database"]}"
+        sh "#{pgpass} createdb #{connection_config} --template=#{template_db_name} #{db_config["database"]}"
       end
     end
   end
@@ -31,19 +31,19 @@ class E2ETask
 
   def drop_e2e_db_template
     disable_template_sql = "ALTER DATABASE #{template_db_name} WITH IS_TEMPLATE false;"
-    system "psql -c \"#{disable_template_sql};\" #{connection_config}"
-    sh "dropdb --if-exists #{connection_config} #{template_db_name}"
+    system "#{pgpass} psql -c \"#{disable_template_sql};\" #{connection_config}"
+    sh "#{pgpass} dropdb --if-exists #{connection_config} #{template_db_name}"
   end
 
   def create_e2e_db_template
     set_template_sql = "ALTER DATABASE #{db_config["database"]} RENAME TO #{template_db_name}; ALTER DATABASE #{template_db_name} WITH IS_TEMPLATE true;"
     create_db_sql = "CREATE DATABASE #{db_config["database"]} WITH TEMPLATE #{template_db_name};"
-    sh "psql -c \"#{set_template_sql};\" #{connection_config}"
-    sh "psql -c \"#{create_db_sql};\" #{connection_config}"
+    sh "#{pgpass} psql -c \"#{set_template_sql};\" #{connection_config}"
+    sh "#{pgpass} psql -c \"#{create_db_sql};\" #{connection_config}"
   end
 
   def terminate_connections_to(database_name)
-    system "psql -c \"#{terminate_connection_sql(database_name)};\" #{connection_config} #{database_name}"
+    system "#{pgpass} psql -c \"#{terminate_connection_sql(database_name)};\" #{connection_config} #{database_name}"
   end
 
   def terminate_connection_sql(database_name)
@@ -56,6 +56,10 @@ class E2ETask
 
   def connection_config
     "--host=#{db_config["host"]} --port=#{db_config["port"]} --username=#{db_config["username"]}"
+  end
+
+  def pgpass
+    "PGPASSWORD=#{db_config["password"]}" if db_config["password"]
   end
 
   def db_config
