@@ -50,7 +50,6 @@ jobs:
           CONTACT_EMAIL: nomail@nomail.com
           RESPONSIBLE_EMAIL: test@nomail.com
           AUTH_SECRET: secret
-          ADMIN_PASSWORD: password
         run: bundle exec rspec spec
       - name: Upload Code Coverage
         uses: actions/upload-artifact@v2

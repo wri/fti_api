@@ -6,9 +6,11 @@ class E2ETask
       task setup: :environment do
         abort "Only works in e2e environment" unless Rails.env.e2e?
 
-        Rake::Task["tmp:clear"].invoke
-        Rake::Task["assets:clobber"].invoke
-        Rake::Task["assets:precompile"].invoke
+        unless ENV["SKIP_ASSETS_RESET"]
+          Rake::Task["tmp:clear"].invoke
+          Rake::Task["assets:clobber"].invoke
+          Rake::Task["assets:precompile"].invoke
+        end
         Rake::Task["db:reset"].invoke
         terminate_connections_to db_config["database"]
         drop_e2e_db_template

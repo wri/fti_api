@@ -1,18 +1,41 @@
 version: "3.8"
 services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: otp_api
+    depends_on:
+      - db
+      - redis
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - APP_URL=http://localhost:3000
+      - FRONTEND_URL=http://localhost:4000
+      - CONTACT_EMAIL=contact@example.com
+      - RESPONSIBLE_EMAIL=responsible@example.com
+      - SECRET_KEY_BASE=aeef67c86699888f6031825bded34718f473cd41a1e585e7ffdbb59dd3efc40c8ea06d4d8f7188aeb5b54ddb793c8e83f6dc9840fc3a02b240525a126308ed6d
+      - POSTGRES_PORT_5432_TCP_ADDR=db
+      - POSTGRES_PORT_5432_TCP_PORT=5432
+      - POSTGRES_USER=postgres
+      - AUTH_SECRET
+      - RAILS_ENV=e2e
   redis:
     image: redis:7.2.4-alpine
+    container_name: otp_api_redis
     ports:
       - "${REDIS_PORT}:6379"
   db:
     image: postgis/postgis:12-3.1-alpine
-    container_name: postgres_fti_api
+    container_name: otp_api_db
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - '${POSTGRES_PORT_5432_TCP_PORT}:5432'
     volumes:
-      - fti_api_db:/var/lib/postgresql/data
+      - otp_api_db:/var/lib/postgresql/data
 
 volumes:
-  fti_api_db:
+  otp_api_db:
