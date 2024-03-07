@@ -1,15 +1,45 @@
 env:
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: localhost
+  POSTGRES_PORT: 5432
   APP_URL: http://localhost:3000
+  FRONTEND_URL: http://localhost:5000
+  SENDGRID_API_KEY: asdf
+  CONTACT_EMAIL: nomail@nomail.com
+  RESPONSIBLE_EMAIL: test@nomail.com
+  AUTH_SECRET: secret
+  RAILS_ENV: test
+  SECRET_KEY_BASE: f54c9d76c42e397e17cbc0d0a024da5a762a7a0d934839b417a77dac6fda65a49a37b32bcd229ac5fd5c1fedef8ed6acf7a57ed6465d6339862cdc0dfab8886f
 
 name: Tests
 on: push
 
 jobs:
+  e2e-setup:
+    name: Check E2E Setup
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:12-3.1-alpine
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        ports: ["5432:5432"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Setup E2E database
+        run: bin/rails e2e:setup RAILS_ENV=e2e
+
   tests:
     name: Tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     services:
       postgres:
@@ -19,38 +49,25 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
         ports: ["5432:5432"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
       - name: Install dependencies
         run: |
           sudo apt update --fix-missing
-          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev gdal-bin
+          sudo apt-get -yqq install gdal-bin
           npm install -g mjml
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
       - name: Setup test database
-        env:
-          RAILS_ENV: test
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-        run: |
-          bin/rails db:create db:schema:load
+        run: bin/rails db:create db:schema:load
+
       - name: Run tests
-        env:
-          RAILS_ENV: test
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-          FRONTEND_URL: http://localhost:5000
-          SENDGRID_API_KEY: asdf
-          CONTACT_EMAIL: nomail@nomail.com
-          RESPONSIBLE_EMAIL: test@nomail.com
-          AUTH_SECRET: secret
         run: bundle exec rspec spec
+
       - name: Upload Code Coverage
         uses: actions/upload-artifact@v2
         with:
