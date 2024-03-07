@@ -32,8 +32,8 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          POSTGRES_PORT_5432_TCP_ADDR: localhost
-          POSTGRES_PORT_5432_TCP_PORT: 5432
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
         run: |
@@ -41,8 +41,8 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          POSTGRES_PORT_5432_TCP_ADDR: localhost
-          POSTGRES_PORT_5432_TCP_PORT: 5432
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
           FRONTEND_URL: http://localhost:5000

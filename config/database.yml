@@ -6,8 +6,8 @@ default: &default
   password: <%= ENV["POSTGRES_PASSWORD"] %>
   # please see the update below about using hostnames to
   # access linked services via docker-compose
-  host: <%= ENV['POSTGRES_PORT_5432_TCP_ADDR'] %>
-  port: <%= ENV['POSTGRES_PORT_5432_TCP_PORT'] %>
+  host: <%= ENV['POSTGRES_HOST'] %>
+  port: <%= ENV['POSTGRES_PORT'] %>
 
 development:
   <<: *default
