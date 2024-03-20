@@ -66,6 +66,11 @@ RSpec.describe Observation, type: :model do
       expect(subject).to be_valid
     end
 
+    it { is_expected.to validate_numericality_of(:lat).is_greater_than_or_equal_to(-90).allow_nil }
+    it { is_expected.to validate_numericality_of(:lat).is_less_than_or_equal_to(90).allow_nil }
+    it { is_expected.to validate_numericality_of(:lng).is_greater_than_or_equal_to(-180).allow_nil }
+    it { is_expected.to validate_numericality_of(:lng).is_less_than_or_equal_to(180).allow_nil }
+
     it "is invalid there is evidence on the report but not listed where" do
       subject.evidence_type = "Evidence presented in the report"
       expect(subject.valid?).to eq(false)
@@ -353,7 +358,7 @@ RSpec.describe Observation, type: :model do
       end
     end
 
-    describe "#check_is_physical_place" do
+    describe "#nullify_fmu_and_coordinates" do
       context "when there is not physical place" do
         it "set lat, lng and fmu to nil" do
           observation = create(:observation, is_physical_place: false)

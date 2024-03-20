@@ -85,7 +85,7 @@ module V1
           params = {
             "country-id": country.id,
             "observation-type": "operator",
-            lat: 123.4444,
+            lat: 50.4444,
             lng: 12.4444,
             relationships: {
               observers: [ngo_observer.id]

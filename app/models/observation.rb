@@ -125,6 +125,8 @@ class Observation < ApplicationRecord
     validate :active_government
   end
 
+  validates :lat, numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90, allow_blank: true}
+  validates :lng, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180, allow_blank: true}
   validate :evidence_presented_in_the_report
   validate :status_changes, if: -> { user_type.present? }
 
@@ -137,7 +139,7 @@ class Observation < ApplicationRecord
   before_validation :assign_observers_from_report, if: :observation_report_changed?
 
   before_save :set_active_status
-  before_save :check_is_physical_place
+  before_save :nullify_fmu_and_coordinates, unless: :is_physical_place
   before_save :set_centroid
   before_save :set_publication_date, if: :validation_status_changed?
   before_create :set_default_observer
@@ -219,9 +221,7 @@ class Observation < ApplicationRecord
 
   private
 
-  def check_is_physical_place
-    return if is_physical_place
-
+  def nullify_fmu_and_coordinates
     self.lat = nil
     self.lng = nil
     self.fmu = nil
