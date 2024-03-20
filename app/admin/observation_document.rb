@@ -6,8 +6,6 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
   menu false
 
-  actions :all, except: [:new]
-
   config.order_clause
   active_admin_paranoia
 
@@ -76,15 +74,17 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
-      f.input :observation_report, input_html: {disabled: true}
-      f.input :observations, input_html: {disabled: true}
-      f.input :user, input_html: {disabled: true}
+      f.input :observation_report, input_html: {disabled: f.object.persisted? && f.object.observation_report.present?}
+      unless f.object.new_record?
+        f.input :observations, input_html: {disabled: true}
+        f.input :user, input_html: {disabled: true}
+      end
       f.input :name
       f.input :document_type
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
-
-      f.actions
     end
+
+    f.actions
   end
 
   show do
