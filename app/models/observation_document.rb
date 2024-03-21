@@ -27,6 +27,8 @@ class ObservationDocument < ApplicationRecord
   }
   validate_enum_attributes :document_type
 
+  validates :attachment, presence: true
+
   # TODO: only nils in the database, maybe that should be removed?
   belongs_to :user, inverse_of: :observation_documents, touch: true, optional: true
   belongs_to :observation_report, inverse_of: :observation_documents, touch: true, optional: true
