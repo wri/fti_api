@@ -15,7 +15,8 @@ module V1
       create: {
         success_roles: %i[admin],
         failure_roles: %i[user],
-        valid_params: -> { {name: "Document one", relationships: {user: user.id, observation_report: observation_report.id}} }
+        valid_params: -> { {name: "Document one", attachment: document_data, relationships: {user: user.id, observation_report: observation_report.id}} },
+        excluded_params: %i[attachment] # workaround as after upload attachment is url and not base64
       },
       edit: {
         success_roles: %i[admin],
