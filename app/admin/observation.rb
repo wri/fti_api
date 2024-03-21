@@ -575,7 +575,10 @@ ActiveAdmin.register Observation do
       f.input :observation_report, as: :select, **visibility
       f.input :evidence_type, as: :select, **visibility
       f.input :evidence_on_report, **visibility
-      f.input :observation_documents, as: :select, collection: ObservationDocument.where(observation_report: f.object.observation_report), **visibility
+      f.input :observation_documents,
+        as: :select,
+        collection: (f.object.observation_documents + (f.object.observation_report&.observation_documents || [])).uniq,
+        **visibility
     end
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
