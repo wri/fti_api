@@ -24,9 +24,6 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
     column :id
     column :name
     column :document_type
-    column :user do |od|
-      od.user&.name
-    end
     column :created_at
     column :updated_at
     column :deleted_at
@@ -41,7 +38,6 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
     column :attachment do |o|
       link_to o&.name, o.attachment&.url if o.attachment&.url
     end
-    column :user, sortable: "users.name"
     column :created_at
     column :updated_at
     column :deleted_at
@@ -66,7 +62,6 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
     collection: -> { ObservationReport.where(id: ObservationDocument.select(:observation_report_id)).order(:title) }
   filter :name, as: :select
   filter :attachment, as: :select
-  filter :user
   filter :created_at
   filter :updated_at
   filter :deleted_at
@@ -75,10 +70,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
       f.input :observation_report, input_html: {disabled: f.object.persisted? && f.object.observation_report.present?}
-      unless f.object.new_record?
-        f.input :observations, input_html: {disabled: true}
-        f.input :user, input_html: {disabled: true}
-      end
+      f.input :observations, input_html: {disabled: true} unless f.object.new_record?
       f.input :name
       f.input :document_type
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
@@ -96,7 +88,6 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
       row :attachment do |o|
         link_to o&.name, o.attachment&.url if o.attachment&.url
       end
-      row :user
       row :created_at
       row :updated_at
       row :deleted_at
@@ -106,7 +97,7 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes(:user, :observations)
+      end_of_association_chain.includes(:observations)
     end
   end
 end

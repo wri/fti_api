@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_26_170353) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_21_122524) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -389,14 +389,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_26_170353) do
     t.string "attachment"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
-    t.integer "user_id"
     t.datetime "deleted_at", precision: nil
     t.integer "document_type", default: 0, null: false
     t.bigint "observation_report_id"
     t.index ["deleted_at"], name: "index_observation_documents_on_deleted_at"
     t.index ["name"], name: "index_observation_documents_on_name"
     t.index ["observation_report_id"], name: "index_observation_documents_on_observation_report_id"
-    t.index ["user_id"], name: "index_observation_documents_on_user_id"
   end
 
   create_table "observation_documents_observations", force: :cascade do |t|
@@ -1129,7 +1127,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_26_170353) do
   add_foreign_key "notifications", "operator_documents", on_delete: :cascade
   add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "observation_documents", "observation_reports"
-  add_foreign_key "observation_documents", "users"
   add_foreign_key "observation_documents_observations", "observation_documents", on_delete: :cascade
   add_foreign_key "observation_documents_observations", "observations", on_delete: :cascade
   add_foreign_key "observation_histories", "categories", on_delete: :cascade

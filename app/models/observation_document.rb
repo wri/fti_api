@@ -9,7 +9,6 @@
 #  attachment            :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  user_id               :integer
 #  deleted_at            :datetime
 #  document_type         :integer          default("Government Documents"), not null
 #  observation_report_id :bigint
@@ -30,8 +29,6 @@ class ObservationDocument < ApplicationRecord
   validates :attachment, presence: true
   validates :name, presence: true
 
-  # TODO: only nils in the database, maybe that should be removed?
-  belongs_to :user, inverse_of: :observation_documents, touch: true, optional: true
   belongs_to :observation_report, inverse_of: :observation_documents, touch: true, optional: true
   has_and_belongs_to_many :observations, inverse_of: :observation_documents
 
