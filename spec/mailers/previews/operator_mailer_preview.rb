@@ -11,6 +11,14 @@ class OperatorMailerPreview < ActionMailer::Preview
     OperatorMailer.expired_documents operator, operator.all_users.filter_actives.first, documents_expired
   end
 
+  def document_valid
+    OperatorMailer.document_valid OperatorDocument.doc_valid.last, User.filter_actives.first
+  end
+
+  def document_invalid
+    OperatorMailer.document_invalid OperatorDocument.doc_invalid.where.not(document_file: nil).last, User.filter_actives.first
+  end
+
   private
 
   def documents_expired

@@ -61,6 +61,8 @@ class OperatorDocument < ApplicationRecord
   after_save :recalculate_scores, if: :saved_change_to_score_related_attributes?
   after_save :remove_notifications, if: :saved_change_to_expire_date?
 
+  after_commit :notify_about_changes, if: :saved_change_to_status?
+
   scope :by_forest_types, ->(forest_type_id) { includes(:fmu).where(fmus: {forest_type: forest_type_id}) }
   scope :by_country, ->(country_id) { includes(:required_operator_document).where(required_operator_documents: {country_id: country_id}) }
   scope :by_required_operator_document_group, ->(required_operator_document_group_id) { includes(:required_operator_document).where(required_operator_documents: {required_operator_document_group_id: required_operator_document_group_id}) }
@@ -215,6 +217,19 @@ class OperatorDocument < ApplicationRecord
     end
     if document_file.blank? && reason.blank? && !doc_not_provided?
       errors.add(:base, "File must be present or reason when document is non applicable")
+    end
+  end
+
+  def notify_about_changes
+    notify_users(operator.all_users, "document_valid") if doc_valid?
+    notify_users(operator.all_users, "document_invalid") if doc_invalid?
+  end
+
+  def notify_users(users, mail_template)
+    users.filter_actives.where.not(email: [nil, ""]).find_each do |user|
+      I18n.with_locale(user.locale.presence || I18n.default_locale) do
+        OperatorMailer.send(mail_template, self, user).deliver_later
+      end
     end
   end
 end

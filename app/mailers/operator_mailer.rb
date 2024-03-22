@@ -50,4 +50,18 @@ class OperatorMailer < ApplicationMailer
 
     mail to: user.email, subject: I18n.t("operator_mailer.quarterly_newsletter.subject", company: operator.name)
   end
+
+  def document_valid(document, user)
+    @operator = document.operator
+    @document = document
+    @user = user
+    mail to: user.email, subject: I18n.t("operator_mailer.document_valid.subject")
+  end
+
+  def document_invalid(document, user)
+    @operator = document.operator
+    @document = document
+    @user = user
+    mail to: user.email, subject: I18n.t("operator_mailer.document_invalid.subject")
+  end
 end

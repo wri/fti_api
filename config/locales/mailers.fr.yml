@@ -6,6 +6,8 @@ fr:
     contact_us: N'hésitez pas à nous contacter si vous avez des questions.
     observation_id: Identifiant de l’observation
     report_name: Nom du rapport
+    company: Enterprise
+    document: Document
   user_mailer:
     user_acceptance:
       subject: Bienvenue sur la plateforme Open Timber Portal
@@ -70,4 +72,13 @@ fr:
         other: "Vous avez %{count} documents expiré sur l'OTP"
       paragraph1: "%{company} a %{count} document(s) qui sont expiré:"
       paragraph2: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
+    document_valid:
+      subject: "Open Timber Portal: nouveau document publié"
+      paragraph1: Le document %{document} a été validé et est désormais publié sur le profil de %{company} sur l’Open Timber Portal.
+    document_invalid:
+      subject: "Open Timber Portal: le document téléchargé n’a pas été validé"
+      paragraph1: "Le document ci-dessous a été passé en revue et a besoin d’être modifié avant de pouvoir être publié:"
+      paragraph2: "L'évaluateur a fait le commentaire suivant:"
+      paragraph3: "Vous pouvez modifier ce document en cliquant sur le lien suivant et en modifiant le document sur votre profil: %{link}"
+
 
