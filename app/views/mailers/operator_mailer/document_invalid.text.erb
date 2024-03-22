@@ -1,0 +1,17 @@
+<%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+
+<%= t(".paragraph1") %>
+
+<%= t("mailers.company") %>: <%= @operator.name %>
+<%= t("mailers.document") %>: <%= @document.name_with_fmu %>
+<%= OperatorDocument.human_attribute_name(:start_date) %>: <%= @document.start_date %>
+<%= OperatorDocument.human_attribute_name(:expire_date) %>: <%= @document.expire_date %>
+Link: <%= @document&.document_file&.attachment&.url %>
+
+<%= t(".paragraph2") %>
+<%= @document.admin_comment %>
+
+<%= t(".paragraph3", link: "#{ENV["FRONTEND_URL"]}/operators/#{@operator.slug}/documentation") %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

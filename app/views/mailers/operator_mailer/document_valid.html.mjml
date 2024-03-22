@@ -1,0 +1,12 @@
+<p>
+  <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+</p>
+
+<p>
+  <%= t(".paragraph1", document: @document.name_with_fmu, company: link_to(@operator.name, ENV["FRONTEND_URL"] + "/operators/"+ @operator.slug + "/documentation", target: "_blank")).html_safe %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %> <br/>
+  <%= t("mailers.signature") %>
+</p>
