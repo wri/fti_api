@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_28_163512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -510,6 +510,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
     t.text "concern_opinion"
     t.string "litigation_status"
     t.datetime "deleted_at", precision: nil
+    t.string "details_translated_from"
+    t.string "concern_opinion_translated_from"
+    t.string "litigation_status_translated_from"
     t.index ["deleted_at"], name: "index_observation_translations_on_deleted_at"
     t.index ["locale"], name: "index_observation_translations_on_locale"
     t.index ["observation_id"], name: "index_observation_translations_on_observation_id"
