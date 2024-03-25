@@ -1,0 +1,15 @@
+active_admin_form_for [:admin, resource], url: perform_qc_admin_operator_document_path(resource), method: :put do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+
+  f.inputs do
+    f.input :admin_comment, hint: "Reason for rejection (required if document is invalid)"
+  end
+
+  f.actions do
+    f.button "Approve", class: "button", name: "operator_document[status]", value: :doc_valid
+    f.button "Reject", class: "button", name: "operator_document[status]", value: :doc_invalid
+  end
+end
+
+# loading a fresh object as resource could have changed validation status or other properties after validation errors
+render partial: "attributes_table", locals: {operator_document: OperatorDocument.find(resource.id)}

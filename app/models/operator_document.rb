@@ -24,6 +24,7 @@
 #  source                        :integer          default("company")
 #  source_info                   :string
 #  document_file_id              :integer
+#  admin_comment                 :text
 #
 
 class OperatorDocument < ApplicationRecord
@@ -48,6 +49,7 @@ class OperatorDocument < ApplicationRecord
 
   validates :start_date, presence: {if: :document_file_id?}
   validates :expire_date, presence: {if: :document_file_id?}
+  validates :admin_comment, presence: {if: :doc_invalid?}
   validate :reason_or_file
 
   before_save :set_type
