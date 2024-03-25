@@ -18,7 +18,7 @@ on: push
 jobs:
   e2e-setup:
     name: Check E2E Setup
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     services:
       postgres:
         image: postgis/postgis:12-3.1-alpine
@@ -39,7 +39,7 @@ jobs:
 
   tests:
     name: Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     services:
       postgres:
