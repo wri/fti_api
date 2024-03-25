@@ -69,7 +69,7 @@ jobs:
         run: bundle exec rspec spec
 
       - name: Upload Code Coverage
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: code-coverage
           path: coverage/
