@@ -15,6 +15,7 @@ module Versionable
             resource = @versions[params[:version].to_i].reify if params[:version]
           rescue => e
             Sentry.capture_exception e
+            raise if Rails.env.local?
           end
           # not sure why sometimes id is nil after reify
           resource.id = current.id if resource.id.nil?

@@ -22,6 +22,11 @@ Dir[Rails.root.join("spec/integration/shared_examples/**/*.rb")].sort.each { |f|
 
 ActiveRecord::Migration.maintain_test_schema!
 
+# TODO: try to remove the line below the comment after some time, not sure why this still not working
+# see https://github.com/rails/rails/issues/49958
+RSpec::Matchers::AliasedNegatedMatcher.undef_method(:with)
+RSpec::Matchers.define_negated_matcher :have_not_enqueued_mail, :have_enqueued_mail
+
 # Configuration for Shoulda::Matchers
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -53,7 +58,7 @@ RSpec.configure do |config|
   config.include ImporterHelper, type: :importer
   config.extend APIDocsHelpers
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
   config.request_snapshots_dir = "spec/fixtures/snapshots"
   # adding dynamic attributes for snapshots, small medium original are for active storage links

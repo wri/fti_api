@@ -7,7 +7,7 @@ Globalize::ActiveRecord::ActMacro.module_eval do
     if options[:paranoia] && translation_class.attribute_names.include?("deleted_at")
       translation_class.send(:acts_as_paranoid, without_default_scope: true)
     end
-  rescue ::ActiveRecord::NoDatabaseError
+  rescue ::ActiveRecord::NoDatabaseError, ::ActiveRecord::ConnectionNotEstablished
     warn "Unable to connect to a database. Setup translates with paranoia"
   end
 

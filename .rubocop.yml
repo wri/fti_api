@@ -15,6 +15,7 @@ AllCops:
     - 'db/schema.rb'
     - 'tmp/**/*'
     - 'bin/**/*'
+    - 'config/initializers/new_framework_defaults_*'
 
 Rails/UnknownEnv:
   Environments:

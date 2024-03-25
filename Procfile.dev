@@ -1,0 +1,4 @@
+web: bin/rails s
+db: docker compose up db
+redis: docker compose up redis
+sidekiq: bundle exec sidekiq

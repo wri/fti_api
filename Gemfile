@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby "3.2.3"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -10,6 +10,9 @@ git_source(:github) do |repo_name|
 end
 
 gem "bootsnap", require: false
+
+# TODO: after upgrading passenger change it's config to use passenger_preload_bundler on
+gem "base64", "0.1.1"
 
 # Active admin
 gem "active_admin_paranoia", git: "https://github.com/tsubik/active_admin_paranoia.git"
@@ -37,15 +40,12 @@ gem "groupdate"
 gem "devise"
 
 # Soft Delete
-# version 2.6.0 will not work in this app because until the way operator document is regenerated after destroy is changed
-# here is the reason https://github.com/rubysherpas/paranoia/pull/485/files#diff-11d24643784dae175b47e4df1207f1184300711d4f728e730c06fbecf300cd7fR76-R77
-# if model is not deleted in destroy action then everything is rolled back
-gem "paranoia", "~> 2.5.3"
+gem "paranoia"
 
 # Rails and DB
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 7.0.4"
+gem "rails", "~> 7.1.3"
 gem "rgeo"
 gem "rgeo-geojson"
 
@@ -89,7 +89,7 @@ gem "sendgrid-actionmailer"
 gem "rubyzip", "~> 2.3.0"
 
 # Changes monitoring
-gem "globalize-versioning", github: "globalize/globalize-versioning", branch: "main"
+gem "globalize-versioning", github: "tsubik/globalize-versioning", branch: "custom"
 gem "paper_trail"
 
 # Interactors
@@ -149,6 +149,7 @@ end
 # Server
 gem "dotenv-rails"
 gem "puma"
-gem "rack-cors"
+# TODO: remove version lock after this issue is resolved: https://github.com/cyu/rack-cors/issues/274
+gem "rack-cors", "2.0.0"
 gem "redis-rails"
 gem "tzinfo-data"

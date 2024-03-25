@@ -38,6 +38,7 @@ spec/.DS_Store
 /dev.env
 
 # Ignore the default SQLite database.
+# TODO: remove
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
@@ -52,6 +53,13 @@ erd.png
 /db/dumps/*
 !/db/dumps/.keep
 
+# Ignore storage (uploaded files in development and any SQLite databases).
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
+
 # Ignore IDE files
 .idea
 .dir-locals.el
@@ -63,3 +71,6 @@ erd.png
 /spec/support/uploads
 
 node_modules
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key

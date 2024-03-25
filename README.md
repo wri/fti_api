@@ -24,28 +24,64 @@ cd fti_api
 - [Docker](https://www.docker.com/)
 - [docker-compose](https://docs.docker.com/compose/)
 
-### RUNNING DB IN DOCKER ###
+### RUNNING SERVICES IN DOCKER ###
 
-PostgreSQL database with PostGIS will run on standard 5432 port, so make sure it's not already taken.
+#### POSTGRES
 
-Do not forget to setup those env variables for the database
+PostgreSQL database with PostGIS will run by default on standard 5432 port. You can change it with `POSTGRES_PORT` env variable.
+
+Here are example settings for `.env` file:
 
 ```
-POSTGRES_PORT_5432_TCP_ADDR=localhost
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
 POSTGRES_USER=postgres
+
+# optional
+POSTGRES_PASSWORD=postgres
+POSTGRES_DATABASE=otp_database
 ```
 
 And run container
 
 ```
-docker-compose up
+docker-compose up -d db
+```
+
+#### REDIS
+
+Redis will run by default on standard 6379 port. You can change it with `REDIS_PORT` env variable. You can also change the URL with `REDIS_URL` env variable.
+
+Here are example settings for `.env` file:
+
+```
+REDIS_PORT=6380
+REDIS_URL="redis://localhost:${REDIS_PORT}/0"
+```
+
+And run container
+
+```
+docker-compose up -d redis
+```
+
+We are using sidekiq for background jobs. You can run it with:
+
+```
+bundle exec sidekiq
+```
+
+Or better to run all mentioned services along with application with simply
+
+```
+bin/dev
 ```
 
 ## NATIVELY ##
 
 ### REQUIREMENTS ###
 
-  - **Ruby version:** 2.7.6
+  - **Ruby version:** 3.2.3
   - **PostgreSQL 12.1+** [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
 
 **Just execute the script file in `bin/setup`**
@@ -73,9 +109,13 @@ docker-compose up
 
     bundle exec rake db:seed
 
-### Run application: ###
+### Run all development services: ###
 
-    bin/rails s
+    bin/dev
+
+### Run only selected services: ###
+
+    bin/dev -m "redis=1,db=1,sidekiq=1"
 
 ### Load remote database locally
 
@@ -104,16 +144,10 @@ bin/rails db:restore_from_server [SERVER=production(default)|staging] [SMALL=1]
 
 ## TEST ##
 
-  To run the tests on docker:
-
-```
-./service test
-```
-
-  Run rspec:
+Run rspec:
 
 ```ruby
-  bin/rspec
+bundle exec rspec
 ```
 
 ## DOCUMENTATION ##
@@ -125,12 +159,14 @@ The API is documented used swagger and can be found in `/docs`.
 To regenerate the api documentation run:
 
 ```ruby
-  rails docs:generate
+bin/rails docs:generate
 ```
 
 ## DEPLOYMENT ##
 
-**To deploy the API to staging environment, just execute: cap staging deploy**
+Deploy to production with `cap production deploy` it will deploy the `master` branch.
+
+To deploy the API to staging environment use `cap staging deploy`, by default that will deploy `staging` branch, but you can change it with `BRANCH` env variable (ex. `cap staging deploy BRANCH=develop`)
 
 ## TASKS ##
 
