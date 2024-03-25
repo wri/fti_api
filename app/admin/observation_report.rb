@@ -153,6 +153,7 @@ ActiveAdmin.register ObservationReport do
       row :publication_date
       row :observers
       row :observations
+      row :observation_documents
       row :user
       row :created_at
       row :updated_at

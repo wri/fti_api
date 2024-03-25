@@ -20,7 +20,7 @@ Operator_151:
   operator_id: COG-unknown-151
   fa_id: CG/OUE/05B179
   approved: true
-  country_doc_rank: 1
+  country_doc_rank: 2
   country_operators: 36
   name: CIB
   slug: cib
@@ -36,7 +36,7 @@ Operator_161:
   address: B.P. 135, Ouesso, Republic of Congo
   website: http://www.interholco.com/
   approved: true
-  country_doc_rank: 3
+  country_doc_rank: 1
   country_operators: 36
   name: IFO / Interholco
   details: "Interholco (IHC) is one of the largest producing companies of African
@@ -70,7 +70,7 @@ Operator_165:
   address: Immeuble Villarecci, Avenue Amilcar Cabral
   website: http://rougier.fr
   approved: true
-  country_doc_rank: 6
+  country_doc_rank: 4
   country_operators: 36
   name: MOKABI SA
   details: |-
@@ -138,7 +138,7 @@ Operator_10589:
     233 42 68 92'
   approved: true
   holding_id: 4
-  country_doc_rank: 11
+  country_doc_rank: 8
   country_operators: 137
   name: SEBC
   details: Exploitation et transformation du bois
@@ -154,7 +154,7 @@ Operator_10604:
   address: 'BP: 89; Yaoundé'
   approved: true
   holding_id: 4
-  country_doc_rank: 16
+  country_doc_rank: 17
   country_operators: 137
   name: SAB
   details: Société Anonyme
@@ -186,7 +186,7 @@ Operator_10623:
   operator_id: CMR-unknown-623
   fa_id: CM/UNKNOWN/0187
   approved: true
-  country_doc_rank: 13
+  country_doc_rank: 16
   country_operators: 137
   name: SIENCAM
   slug: siencam

@@ -43,8 +43,9 @@ RSpec.describe Observation, type: :model do
   subject(:observation) { build(:observation) }
 
   it "Removes old evidences when the evidence is on the report" do
+    subject.evidence_type = "Uploaded documents"
+    subject.observation_documents << create(:observation_document)
     subject.save!
-    create(:observation_document, observation: subject)
     expect(subject.observation_documents.count).to eql(1)
     subject.evidence_type = "Evidence presented in the report"
     subject.evidence_on_report = "10"
@@ -72,7 +73,7 @@ RSpec.describe Observation, type: :model do
     it "is invalid there is evidence on the report but not listed where" do
       subject.evidence_type = "Evidence presented in the report"
       expect(subject.valid?).to eq(false)
-      expect(subject.errors[:evidence_on_report]).to include("You must add information on where to find the evidence on the report")
+      expect(subject.errors[:evidence_on_report]).to include("can't be blank")
     end
 
     it "is invalid without observers" do
@@ -421,7 +422,7 @@ RSpec.describe Observation, type: :model do
     describe "#destroy_documents" do
       before do
         @observation = create(:observation, country: @country, operator: @operator)
-        create_list(:observation_document, 3, observation: @observation)
+        @observation.observation_documents = create_list(:observation_document, 3)
       end
 
       it "destroy related observation documents" do
@@ -429,7 +430,7 @@ RSpec.describe Observation, type: :model do
 
         @observation.destroy
 
-        expect(ObservationDocument.where(observation_id: @observation.id).size).to eql 0
+        expect(ObservationDocument.joins(:observations).where(observations: [@observation]).size).to eql 0
       end
     end
   end

@@ -2184,17 +2184,6 @@ OperatorDocumentAnnex_100881:
   created_at: 2023-06-04 19:10:01 UTC
   updated_at: 2023-06-19 16:16:18 UTC
 
-OperatorDocumentAnnex_100885:
-  id: 100885
-  name: Autorisation heures supplémentaires 2e semestre 2023
-  start_date: 2023-07-01
-  expire_date: 2023-12-31
-  status: doc_valid
-  attachment: Annex_1686642696_no_document.pdf
-  uploaded_by: operator
-  created_at: 2023-06-13 07:51:36 UTC
-  updated_at: 2023-06-19 16:16:03 UTC
-
 OperatorDocumentAnnex_100888:
   id: 100888
   name: Exemple Certificat CITES 2023
@@ -2338,17 +2327,6 @@ OperatorDocumentAnnex_101020:
   created_at: 2023-12-23 06:19:20 UTC
   updated_at: 2024-01-07 04:37:56 UTC
 
-OperatorDocumentAnnex_101021:
-  id: 101021
-  name: Autorisation Heures supp S1 2024
-  start_date: 2024-01-01
-  expire_date: 2024-06-30
-  status: doc_valid
-  attachment: Annex_1703312894_no_document.pdf
-  uploaded_by: operator
-  created_at: 2023-12-23 06:28:14 UTC
-  updated_at: 2024-01-07 04:37:54 UTC
-
 OperatorDocumentAnnex_101022:
   id: 101022
   name: Prorogation des activités dans l'aac 5-4
@@ -2464,29 +2442,117 @@ OperatorDocumentAnnex_101032:
   name: PAO 2023 de l'aac 5-4
   start_date: 2023-03-14
   expire_date: 2023-12-31
-  status: doc_pending
+  status: doc_valid
   attachment: Annex_1704651924_no_document.pdf
   uploaded_by: operator
   created_at: 2024-01-07 18:25:24 UTC
-  updated_at: 2024-01-07 18:25:24 UTC
+  updated_at: 2024-01-18 10:37:59 UTC
 
 OperatorDocumentAnnex_101033:
   id: 101033
   name: Contrat de partenariat de Transformation de bois entre SEBC et SAB
   start_date: 2008-05-27
-  status: doc_pending
+  status: doc_valid
   attachment: Annex_1704792868_no_document.pdf
   uploaded_by: operator
   created_at: 2024-01-09 09:34:28 UTC
-  updated_at: 2024-01-09 09:34:28 UTC
+  updated_at: 2024-01-18 10:37:58 UTC
 
 OperatorDocumentAnnex_101034:
   id: 101034
   name: Notification de démarrage de la prorogation des activités
   start_date: 2024-01-09
   expire_date: 2024-02-28
-  status: doc_pending
+  status: doc_valid
   attachment: Annex_1704882558_no_document.pdf
   uploaded_by: operator
   created_at: 2024-01-10 10:29:18 UTC
-  updated_at: 2024-01-10 10:29:18 UTC
+  updated_at: 2024-01-18 10:37:56 UTC
+
+OperatorDocumentAnnex_101039:
+  id: 101039
+  name: Notification démarrage Prorogation
+  start_date: 2024-01-09
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1705054960_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-12 10:22:40 UTC
+  updated_at: 2024-01-18 10:37:50 UTC
+
+OperatorDocumentAnnex_101040:
+  id: 101040
+  name: Notification de démarrage de la prorogation des activités
+  start_date: 2024-01-09
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1705055037_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-12 10:23:57 UTC
+  updated_at: 2024-01-18 10:37:48 UTC
+
+OperatorDocumentAnnex_101041:
+  id: 101041
+  name: Notification de démarrage de la prorogation des activités
+  start_date: 2024-01-09
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1705055102_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-12 10:25:02 UTC
+  updated_at: 2024-01-18 10:37:46 UTC
+
+OperatorDocumentAnnex_101042:
+  id: 101042
+  name: autorisation heures supplementaires T1 2024
+  start_date: 2024-01-01
+  expire_date: 2024-06-30
+  status: doc_valid
+  attachment: Annex_1705066191_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-12 13:29:51 UTC
+  updated_at: 2024-01-18 10:37:44 UTC
+
+OperatorDocumentAnnex_101046:
+  id: 101046
+  name: Prorogation des activités
+  start_date: 2023-12-28
+  expire_date: 2024-02-28
+  status: doc_valid
+  attachment: Annex_1705396569_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-16 09:16:09 UTC
+  updated_at: 2024-01-18 10:37:38 UTC
+
+OperatorDocumentAnnex_101047:
+  id: 101047
+  name: Contrat partenariat SEBC-SAB
+  start_date: 2008-05-27
+  expire_date: 2030-12-31
+  status: doc_valid
+  attachment: Annex_1705400469_no_document.pdf
+  uploaded_by: operator
+  created_at: 2024-01-16 10:21:09 UTC
+  updated_at: 2024-01-18 10:37:36 UTC
+
+OperatorDocumentAnnex_101048:
+  id: 101048
+  name: Détails Taxe Superficie Sangha
+  start_date: 2024-01-01
+  expire_date: 2024-03-31
+  status: doc_valid
+  attachment: Annex_1705484126_no_document.docx
+  uploaded_by: operator
+  created_at: 2024-01-17 09:35:26 UTC
+  updated_at: 2024-01-18 10:37:32 UTC
+
+OperatorDocumentAnnex_101049:
+  id: 101049
+  name: Détails Taxe de superficie Sangha
+  start_date: 2024-01-01
+  expire_date: 2024-03-31
+  status: doc_valid
+  attachment: Annex_1705484662_no_document.docx
+  uploaded_by: operator
+  created_at: 2024-01-17 09:44:22 UTC
+  updated_at: 2024-01-18 10:37:21 UTC

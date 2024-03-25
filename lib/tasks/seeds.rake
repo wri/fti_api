@@ -67,12 +67,13 @@ class SeedsTasks
         generate_for_model "OperatorDocumentAnnex", entries: annexes, exclude: %w[user_id]
 
         # monitors
-        evidences = ObservationDocument.where(observation: observations).order(:id)
+        evidences = ObservationDocument.joins(:observations).where(observations: observations).order(:id)
         report_observers = ObservationReportObserver.where(observation_report: reports, observer: observers).order(:id)
         observer_observations = ObserverObservation.where(observation: observations, observer: observers).order(:id)
         countries_observers = CountriesObserver.where(observer: observers).order(:country_id, :observer_id)
         governments_observations = GovernmentsObservation.where(observation: observations).order(:id)
         observation_operators = ObservationOperator.where(observation: observations, operator: operators).order(:id)
+        documents_observations = ObservationDocumentsObservation.where(observation: observations, observation_document: evidences).order(:observation_id, :observation_document_id)
         generate_for_model "Observer", entries: observers, exclude: %w[responsible_admin_id]
         generate_for_model "CountriesObserver", entries: countries_observers, exclude: %w[created_at updated_at]
         generate_for_model "ObservationReport", entries: reports, exclude: %w[created_at updated_at user_id]
@@ -82,6 +83,7 @@ class SeedsTasks
         generate_for_model "ObserverObservation", entries: observer_observations, exclude: %w[created_at updated_at]
         generate_for_model "GovernmentsObservation", entries: governments_observations, exclude: %w[created_at updated_at]
         generate_for_model "ObservationOperator", entries: observation_operators, exclude: %w[created_at updated_at]
+        generate_for_model "ObservationDocumentsObservation", entries: documents_observations, exclude: %w[created_at updated_at]
       end
     end
   end

@@ -5,6 +5,7 @@
 //= require users
 //= require rod
 //= require fmu
+//= require observations
 //= require index-filters
 //= require active_admin_sidebar
 //= require pagination

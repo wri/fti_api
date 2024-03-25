@@ -64,7 +64,7 @@ ActiveAdmin.register Observation do
             :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :admin_comment,
             :monitor_comment, :actions_taken, :is_physical_place,
             relevant_operator_ids: [], government_ids: [],
-            observation_documents_attributes: [:id, :name, :attachment],
+            observation_document_ids: [],
             translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
           ]
         )
@@ -375,7 +375,8 @@ ActiveAdmin.register Observation do
     column :evidence_type
     column I18n.t("active_admin.menu.independent_monitoring.evidence"), class: "col-evidence" do |o|
       links = []
-      o.observation_documents.each do |d|
+      documents = params["scope"].eql?("recycle_bin") ? o.observation_documents.unscope(where: :deleted_at) : o.observation_documents
+      documents.each do |d|
         links << link_to(d.name, admin_evidence_path(d.id))
       end
       links.reduce(:+)
@@ -574,10 +575,10 @@ ActiveAdmin.register Observation do
       f.input :observation_report, as: :select, **visibility
       f.input :evidence_type, as: :select, **visibility
       f.input :evidence_on_report, **visibility
-      f.has_many :observation_documents, new_record: I18n.t("active_admin.observations_page.add_evidence"), heading: I18n.t("active_admin.menu.independent_monitoring.evidence") do |t|
-        t.input :name, input_html: {disabled: !allow_override}
-        t.input :attachment, **visibility
-      end
+      f.input :observation_documents,
+        as: :select,
+        collection: (f.object.observation_documents + (f.object.observation_report&.observation_documents || [])).uniq,
+        **visibility
     end
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do

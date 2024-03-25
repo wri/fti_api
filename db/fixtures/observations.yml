@@ -163,7 +163,7 @@ Observation_287:
   observation_report_id: 40
   law_id: 16
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   hidden: true
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
@@ -532,7 +532,7 @@ Observation_826:
   validation_status: Published (not modified)
   observation_report_id: 33
   is_physical_place: true
-  evidence_type: Government Documents
+  evidence_type: No evidence
   hidden: true
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
@@ -2164,7 +2164,7 @@ Observation_933:
   validation_status: Published (not modified)
   observation_report_id: 48
   is_physical_place: true
-  evidence_type: Government Documents
+  evidence_type: No evidence
   hidden: true
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
@@ -2430,6 +2430,7 @@ Observation_1739:
   validation_status: Published (modified)
   observation_report_id: 124
   is_physical_place: true
+  evidence_type: Uploaded documents
   hidden: true
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
@@ -2445,6 +2446,7 @@ Observation_1751:
   validation_status: Published (modified)
   observation_report_id: 125
   is_physical_place: true
+  evidence_type: Uploaded documents
   hidden: true
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
@@ -2460,6 +2462,7 @@ Observation_1812:
   validation_status: Published (modified)
   observation_report_id: 124
   is_physical_place: true
+  evidence_type: Uploaded documents
   hidden: true
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
@@ -2475,6 +2478,7 @@ Observation_1821:
   validation_status: Published (modified)
   observation_report_id: 125
   is_physical_place: true
+  evidence_type: Uploaded documents
   hidden: true
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
@@ -2507,7 +2511,7 @@ Observation_1884:
   validation_status: Published (modified)
   observation_report_id: 215
   is_physical_place: true
-  evidence_type: Photos
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2522,7 +2526,7 @@ Observation_1885:
   validation_status: Published (modified)
   observation_report_id: 215
   is_physical_place: true
-  evidence_type: Photos
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2537,7 +2541,7 @@ Observation_1898:
   validation_status: Published (modified)
   observation_report_id: 216
   is_physical_place: true
-  evidence_type: Photos
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2552,6 +2556,7 @@ Observation_1910:
   validation_status: Published (no comments)
   observation_report_id: 217
   is_physical_place: true
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2566,6 +2571,7 @@ Observation_1911:
   validation_status: Published (no comments)
   observation_report_id: 217
   is_physical_place: true
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2580,6 +2586,7 @@ Observation_1912:
   validation_status: Published (no comments)
   observation_report_id: 217
   is_physical_place: true
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2594,6 +2601,7 @@ Observation_1913:
   validation_status: Published (no comments)
   observation_report_id: 217
   is_physical_place: true
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2608,6 +2616,7 @@ Observation_1914:
   validation_status: Published (no comments)
   observation_report_id: 217
   is_physical_place: true
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2666,7 +2675,7 @@ Observation_2218:
   validation_status: Published (no comments)
   observation_report_id: 294
   is_physical_place: true
-  evidence_type: Photos
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2681,7 +2690,7 @@ Observation_2219:
   validation_status: Published (modified)
   observation_report_id: 294
   is_physical_place: true
-  evidence_type: Company Documents
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -2997,7 +3006,7 @@ Observation_2361:
   law_id: 22
   location_information: Territoire d'UBUNDU, Province de la TSHOPO
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3018,7 +3027,7 @@ Observation_2362:
   law_id: 57
   location_information: Territoire d'UBUNDU, Province de la TSHOPO
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3081,7 +3090,7 @@ Observation_2366:
   validation_status: Published (modified)
   observation_report_id: 310
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3096,7 +3105,7 @@ Observation_2367:
   validation_status: Published (modified)
   observation_report_id: 310
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3111,7 +3120,7 @@ Observation_2368:
   validation_status: Published (modified)
   observation_report_id: 310
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3126,7 +3135,7 @@ Observation_2369:
   validation_status: Published (no comments)
   observation_report_id: 310
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3141,7 +3150,7 @@ Observation_2370:
   validation_status: Published (no comments)
   observation_report_id: 310
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3156,7 +3165,7 @@ Observation_2371:
   validation_status: Published (modified)
   observation_report_id: 310
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3187,7 +3196,7 @@ Observation_2381:
   validation_status: Published (modified)
   observation_report_id: 311
   is_physical_place: true
-  evidence_type: Government Documents
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3250,7 +3259,7 @@ Observation_2385:
   validation_status: Published (no comments)
   observation_report_id: 311
   is_physical_place: true
-  evidence_type: Other
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 
@@ -3375,7 +3384,7 @@ Observation_2489:
   validation_status: Published (not modified)
   observation_report_id: 333
   is_physical_place: true
-  evidence_type: Government Documents
+  evidence_type: Uploaded documents
   admin_comment: Lorem ipsum for admin_comment
   monitor_comment: Lorem ipsum for monitor_comment
 

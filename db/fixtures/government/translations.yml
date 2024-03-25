@@ -2977,3 +2977,45 @@ Government_84_vi_translation:
   government_id: 84
   locale: vi
   government_entity: Province du Kongo Central
+
+Government_85_fr_translation:
+  government_id: 85
+  locale: fr
+  government_entity: DGRE, PROVINCE DE L'EQUATEUR
+  details: DIRECTION GENERALE DES RECETTES DE L'EQUATEUR
+
+Government_85_en_translation:
+  government_id: 85
+  locale: en
+  government_entity: DGRE, PROVINCE DE L'EQUATEUR
+  details: DIRECTION GENERALE DES RECETTES DE L'EQUATEUR
+
+Government_85_pt_translation:
+  government_id: 85
+  locale: pt
+  government_entity: DGRE, PROVINCE DE L'EQUATEUR
+  details: DIRECTION GENERALE DES RECETTES DE L'EQUATEUR
+
+Government_85_zh-CN_translation:
+  government_id: 85
+  locale: zh-CN
+  government_entity: DGRE, PROVINCE DE L'EQUATEUR
+  details: DIRECTION GENERALE DES RECETTES DE L'EQUATEUR
+
+Government_85_ja_translation:
+  government_id: 85
+  locale: ja
+  government_entity: DGRE, PROVINCE DE L'EQUATEUR
+  details: DIRECTION GENERALE DES RECETTES DE L'EQUATEUR
+
+Government_85_ko_translation:
+  government_id: 85
+  locale: ko
+  government_entity: DGRE, PROVINCE DE L'EQUATEUR
+  details: DIRECTION GENERALE DES RECETTES DE L'EQUATEUR
+
+Government_85_vi_translation:
+  government_id: 85
+  locale: vi
+  government_entity: DGRE, PROVINCE DE L'EQUATEUR
+  details: DIRECTION GENERALE DES RECETTES DE L'EQUATEUR
