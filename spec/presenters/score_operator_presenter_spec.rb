@@ -47,7 +47,7 @@ RSpec.describe ScoreOperatorPresenter do
     f21.update!(public: false, status: "doc_expired", document_file: @file, start_date: Time.zone.yesterday)
     f22.update!(public: true, status: "doc_pending", document_file: @file, start_date: Time.zone.yesterday)
     f23.update!(public: true, status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
-    f24.update!(public: false, status: "doc_invalid", document_file: @file, start_date: Time.zone.yesterday)
+    f24.update!(public: false, status: "doc_invalid", admin_comment: "invalid reason", document_file: @file, start_date: Time.zone.yesterday)
 
     @operator = operator
   end
@@ -111,7 +111,7 @@ RSpec.describe ScoreOperatorPresenter do
 
   context "publication authorization not signed" do
     before :context do
-      @operator.operator_documents.signature.first.update!(status: "doc_invalid", document_file: @file, start_date: Time.zone.yesterday)
+      @operator.operator_documents.signature.first.update!(status: "doc_invalid", admin_comment: "invalid", document_file: @file, start_date: Time.zone.yesterday)
     end
 
     subject { ScoreOperatorPresenter.new(@operator.operator_documents) }

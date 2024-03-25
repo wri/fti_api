@@ -73,7 +73,7 @@ ActiveAdmin.register Observation do
   end
 
   member_action :perform_qc, method: [:put, :get] do
-    @page_title = I18n.t("active_admin.observations_page.perform_qc")
+    @page_title = I18n.t("active_admin.shared.perform_qc")
     if request.get?
       if resource.validation_status == "QC in progress"
         render "perform_qc"
@@ -117,11 +117,8 @@ ActiveAdmin.register Observation do
     end
   end
 
-  action_item :start_qc, only: :show do
-    if resource.validation_status == "Ready for QC"
-      link_to I18n.t("active_admin.observations_page.start_qc"), start_qc_admin_observation_path(observation),
-        method: :put, notice: I18n.t("active_admin.observations_page.in_qc")
-    end
+  action_item :start_qc, only: :show, if: proc { resource.validation_status == "Ready for QC" } do
+    link_to I18n.t("active_admin.shared.start_qc"), start_qc_admin_observation_path(observation), method: :put
   end
 
   # Bulk actions should be available only if this env flag is set to `true`
@@ -406,7 +403,7 @@ ActiveAdmin.register Observation do
     column :updated_at
     column :deleted_at
     column(I18n.t("active_admin.shared.actions")) do |observation|
-      a I18n.t("active_admin.observations_page.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC"
+      a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC"
       a I18n.t("active_admin.observations_page.needs_revision"), href: perform_qc_admin_observation_path(observation) if observation.validation_status == "QC in progress"
       a I18n.t("active_admin.observations_page.ready_to_publish"), href: ready_for_publication_admin_observation_path(observation), "data-method": :put if observation.validation_status == "QC in progress"
     end

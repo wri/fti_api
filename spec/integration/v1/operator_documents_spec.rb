@@ -23,7 +23,7 @@ module V1
         public: false,
         note: "notes"
       )
-      @doc_invalid.update(status: "doc_invalid")
+      @doc_invalid.update(status: "doc_invalid", admin_comment: "invalid")
       @doc_valid_private.update(status: "doc_valid")
     end
 

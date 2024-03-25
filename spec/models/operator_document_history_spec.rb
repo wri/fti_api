@@ -25,6 +25,7 @@
 #  deleted_at                    :datetime
 #  operator_document_updated_at  :datetime         not null
 #  operator_document_created_at  :datetime         not null
+#  admin_comment                 :text
 #
 require "rails_helper"
 

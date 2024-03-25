@@ -67,19 +67,37 @@ ActiveAdmin.register OperatorDocument do
     redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.other_confirmed")
   end
 
-  member_action :approve, method: :put do
-    if resource.reason.present?
-      resource.update(status: OperatorDocument.statuses[:doc_not_required])
-    else
-      resource.update(status: OperatorDocument.statuses[:doc_valid])
-    end
-    redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.approved")
+  action_item :start_qc, only: :show, if: proc { resource.doc_pending? } do
+    link_to I18n.t("active_admin.shared.start_qc"), perform_qc_admin_operator_document_path(resource)
   end
 
-  member_action :reject, method: :put do
-    resource.update(status: OperatorDocument.statuses[:doc_invalid], reason: nil)
+  member_action :perform_qc, method: [:put, :get] do
+    @page_title = I18n.t("active_admin.shared.perform_qc")
+    if request.get?
+      if resource.doc_pending?
+        render "perform_qc"
+      else
+        redirect_to collection_path, alert: I18n.t("active_admin.operator_documents_page.document_not_pending_to_start_qc")
+      end
+    elsif resource.update permitted_params[:operator_document]
+      notice = if resource.doc_invalid?
+        I18n.t("active_admin.operator_documents_page.rejected")
+      else
+        I18n.t("active_admin.operator_documents_page.approved")
+      end
+      redirect_to collection_path, notice: notice
+    else
+      render "perform_qc"
+    end
+  end
 
-    redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.rejected")
+  member_action :approve, method: :put do
+    if resource.reason.present?
+      resource.update!(status: OperatorDocument.statuses[:doc_not_required])
+    else
+      resource.update!(status: OperatorDocument.statuses[:doc_valid])
+    end
+    redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.approved")
   end
 
   sidebar I18n.t("active_admin.operator_documents_page.annexes"), only: :show do
@@ -95,7 +113,7 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new]
   permit_params :name, :public, :required_operator_document_id,
     :operator_id, :type, :status, :expire_date, :start_date,
-    :uploaded_by, :reason, :note, :response_date,
+    :uploaded_by, :admin_comment, :reason, :note, :response_date,
     :source, :source_info, document_file_attributes: [:id, :attachment, :filename]
 
   csv do
@@ -104,6 +122,7 @@ ActiveAdmin.register OperatorDocument do
     end
     column :public
     column :status
+    column :admin_comment
     column :id
     column :required_operator_document do |o|
       o.required_operator_document.name
@@ -214,11 +233,15 @@ ActiveAdmin.register OperatorDocument do
       links.join(" ").html_safe
     end
     # rubocop:enable Rails/OutputSafety
+    column :admin_comment
     column :reason
     column :note
     column :response_date
-    column(I18n.t("active_admin.approve")) { |observation| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(observation), method: :put }
-    column(I18n.t("active_admin.reject")) { |observation| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_path(observation), method: :put }
+    column(I18n.t("active_admin.shared.actions")) do |document|
+      a I18n.t("active_admin.shared.start_qc"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
+      a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put if document.doc_pending?
+      a I18n.t("active_admin.reject"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
+    end
     actions
   end
 
@@ -261,6 +284,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :source
       f.input :source_info
       f.input :status, include_blank: false
+      f.input :admin_comment
       f.input :public
       f.inputs for: [:document_file_attributes, f.object.document_file || DocumentFile.new] do |df|
         df.input :attachment
@@ -275,23 +299,8 @@ ActiveAdmin.register OperatorDocument do
   end
 
   show title: proc { "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
-    attributes_table do
-      row :public
-      tag_row :status
-      row :required_operator_document
-      row :operator
-      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
-      row :uploaded_by
-      row I18n.t("active_admin.operator_documents_page.attachment") do |r|
-        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url
-      end
-      row :reason
-      row :start_date
-      row :expire_date
-      row :created_at
-      row :updated_at
-      row :deleted_at
-    end
+    render partial: "attributes_table", locals: {operator_document: resource}
+
     active_admin_comments
   end
 end
