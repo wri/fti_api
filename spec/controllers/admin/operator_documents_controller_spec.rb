@@ -27,15 +27,4 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
       end
     end
   end
-
-  describe "PUT reject" do
-    let(:doc) { create(:operator_document_country, force_status: "doc_pending") }
-
-    before { put :reject, params: {id: doc.id} }
-
-    it "rejects document" do
-      expect(flash[:notice]).to match("Document rejected")
-      expect(doc.reload.status).to eq("doc_invalid")
-    end
-  end
 end

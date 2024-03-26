@@ -81,7 +81,7 @@ module V1
           operator_document = FactoryBot.create :operator_document_country
           attachment = operator_document.document_file.attachment_url
           travel_to time1
-          operator_document.update(status: "doc_invalid")
+          operator_document.update(status: "doc_invalid", admin_comment: "invalid")
           travel_to time2
           operator_document.update note: "new note"
           travel_to time3
@@ -100,7 +100,7 @@ module V1
           FactoryBot.create :operator_document_country, operator_id: operator_document.operator_id
           operator_document.document_file.attachment_url
           travel_to time1
-          operator_document.update(status: "doc_invalid")
+          operator_document.update(status: "doc_invalid", admin_comment: "invalid")
           travel_to time2
           operator_document.update note: "new note"
           travel_to time3
@@ -129,7 +129,7 @@ module V1
           public: false,
           note: "notes"
         )
-        @doc_invalid.update(status: "doc_invalid")
+        @doc_invalid.update(status: "doc_invalid", admin_comment: "invalid")
         @doc_valid_private.update(status: "doc_valid")
       end
 

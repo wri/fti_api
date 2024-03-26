@@ -178,6 +178,8 @@ en:
       operator_activated: 'Operator activated'
       new_shape: 'New shape'
       current_shape: 'Current shape'
+      perform_qc: 'Perform Quality Control'
+      start_qc: 'Start QC'
     menu:
       dashboard:
         dashboard: 'Dashboard'
@@ -370,6 +372,7 @@ en:
       annexes: 'Annexes'
       operator_document_id: 'Operator Document ID'
       with_deleted: 'With deleted'
+      document_not_pending_to_start_qc: "Document must be in a pending state to start QC"
     operator_document_annexes_page:
       approved: 'Annex approved'
       not_approved: 'Annex could not be approved'
@@ -380,7 +383,6 @@ en:
       details: 'Operator Document Annex Details'
     observations_page:
       not_modified: 'Observation NOT modified'
-      perform_qc: 'Perform Quality Control'
       performed_qc: 'Quality Control performed'
       moved_ready: 'Observation moved to Ready for Publication'
       moved_needs_revision: 'Observation moved to Needs Revision'
@@ -391,7 +393,6 @@ en:
       needs_revision: 'Needs revision'
       confirm_needs_revision: 'Do you want to notify the IM this needs revision?'
       obs_needs_revision: 'Observation Needs revision'
-      start_qc: 'Start QC'
       qc_started: 'QC started'
       in_qc: 'Observation in QC'
       bulk_confirm_qc: 'Are you sure you want to start QC for all these observations?'
