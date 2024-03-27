@@ -10,7 +10,7 @@ module OperatorDocumentable
       :status, :created_at, :updated_at,
       :attachment, :operator_id, :required_operator_document_id,
       :fmu_id, :uploaded_by, :reason, :note, :response_date,
-      :public, :source_info
+      :public, :source_info, :admin_comment
     attribute :source_type, delegate: :source
 
     has_one :country
@@ -22,6 +22,10 @@ module OperatorDocumentable
     filters :type, :status, :operator_id, :fmu_id, :required_operator_document_id, :country_ids, :source, :legal_categories, :forest_types
 
     privateable :document_visible?, [:start_date, :expire_date, :note, :reason, :response_date, :source_info, :uploaded_by, :created_at, :updated_at]
+
+    def admin_comment
+      can_see_document? ? @model.admin_comment : nil
+    end
 
     def source_type
       return nil unless document_visible?
