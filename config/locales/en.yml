@@ -373,6 +373,7 @@ en:
       operator_document_id: 'Operator Document ID'
       with_deleted: 'With deleted'
       document_not_pending_to_start_qc: "Document must be in a pending state to start QC"
+      reason_label: "Reason for putting document as “non applicable”"
     operator_document_annexes_page:
       approved: 'Annex approved'
       not_approved: 'Annex could not be approved'

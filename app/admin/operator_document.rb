@@ -299,7 +299,25 @@ ActiveAdmin.register OperatorDocument do
   end
 
   show title: proc { "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
-    render partial: "attributes_table", locals: {operator_document: resource}
+    attributes_table do
+      row :public
+      tag_row :status
+      row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
+      row :admin_comment if resource.admin_comment.present?
+      row :required_operator_document
+      row :operator
+      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
+      row :uploaded_by
+      row I18n.t("active_admin.operator_documents_page.attachment") do |r|
+        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer"
+      end
+      row :note
+      row :start_date
+      row :expire_date
+      row :created_at
+      row :updated_at
+      row :deleted_at
+    end
 
     active_admin_comments
   end
