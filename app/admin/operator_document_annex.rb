@@ -160,6 +160,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   show do
     attributes_table do
+      row :name
       tag_row :status
       row :required_operator_document do
         resource.operator_document.required_operator_document if resource.operator_document.present? &&
@@ -171,10 +172,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
       row :operator_document
       row :uploaded_by
       row :user
-      if resource.attachment.present?
-        row :attachment do |o|
-          link_to o.attachment&.identifier, o.attachment&.url
-        end
+      row :attachment do |o|
+        link_to o.attachment&.identifier, o.attachment&.url if o.attachment.present?
       end
       row :start_date
       row :expire_date
