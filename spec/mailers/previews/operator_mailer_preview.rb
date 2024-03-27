@@ -1,9 +1,13 @@
 class OperatorMailerPreview < ActionMailer::Preview
   def quarterly_newsletter
-    OperatorMailer.quarterly_newsletter operator, operator.all_users.filter_actives.first
+    OperatorMailer.quarterly_newsletter operator, test_user
   end
 
   private
+
+  def test_user
+    User.new(email: "john@example.com", name: "John Tester", locale: "en")
+  end
 
   def operator
     Operator.find(operator_id)

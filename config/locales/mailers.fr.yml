@@ -62,6 +62,7 @@ fr:
       paragraph3: "Veuillez noter que les documents ci-dessous expirent ce trimestre et qu’il faudra les mettre à jour:"
       paragraph4: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
       doc_expires: "%{document} expire le %{date}"
+  operator_document_mailer:
     expiring_documents:
       subject: Document(s) qui vont expirer sur l’Open Timber Portal
       paragraph1: "Le(s) document(s) de %{company} ci-dessous expire(nt) dans %{days}:"
