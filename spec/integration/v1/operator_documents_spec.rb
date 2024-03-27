@@ -51,6 +51,7 @@ module V1
 
           expect(parsed_data.count).to eql(10)
           expect(returned_document[:status]).to eq("doc_invalid")
+          expect(returned_document[:"admin-comment"]).to eq("invalid")
         end
       end
 
@@ -62,6 +63,7 @@ module V1
 
           expect(parsed_data.count).to eql(10)
           expect(returned_document[:status]).to eq("doc_not_provided")
+          expect(returned_document[:"admin-comment"]).to be_nil
         end
 
         context "with signed publication authorization" do
@@ -81,6 +83,10 @@ module V1
             expect(returned_document[:"response-date"]).to eq(@doc_valid_private.response_date.iso8601(3))
             expect(returned_document[:"updated-at"]).not_to be_nil
             expect(returned_document[:"created-at"]).not_to be_nil
+
+            invalid_doc = parsed_data.find { |d| d[:id] == @doc_invalid.id.to_s }[:attributes]
+            expect(invalid_doc[:status]).to eq("doc_not_provided")
+            expect(invalid_doc[:"admin-comment"]).to be_nil
           end
         end
 
@@ -100,6 +106,10 @@ module V1
             expect(returned_document[:note]).to be_nil
             expect(returned_document[:"updated-at"]).to be_nil
             expect(returned_document[:"created-at"]).to be_nil
+
+            invalid_doc = parsed_data.find { |d| d[:id] == @doc_invalid.id.to_s }[:attributes]
+            expect(invalid_doc[:status]).to eq("doc_not_provided")
+            expect(invalid_doc[:"admin-comment"]).to be_nil
           end
         end
       end
