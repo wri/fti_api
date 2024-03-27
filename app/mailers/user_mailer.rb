@@ -31,7 +31,7 @@ class UserMailer < ApplicationMailer
 
   def generate_reset_token(user)
     token, hashed = Devise.token_generator.generate(User, :reset_password_token)
-    user.update(reset_password_token: hashed, reset_password_sent_at: DateTime.now)
+    user.update!(reset_password_token: hashed, reset_password_sent_at: DateTime.now) unless user.new_record? # workaround for mailer previews
     token
   end
 end
