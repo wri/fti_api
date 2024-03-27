@@ -228,7 +228,7 @@ class OperatorDocument < ApplicationRecord
   def notify_users(users, mail_template)
     users.filter_actives.where.not(email: [nil, ""]).find_each do |user|
       I18n.with_locale(user.locale.presence || I18n.default_locale) do
-        OperatorMailer.send(mail_template, self, user).deliver_later
+        OperatorDocumentMailer.send(mail_template, self, user).deliver_later
       end
     end
   end
