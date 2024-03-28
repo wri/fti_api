@@ -48,7 +48,8 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
   end
 
   describe "PUT perform_qc" do
-    let(:doc) { create(:operator_document_country, force_status: "doc_pending", document_file: nil, reason: "It's a national secret") }
+    let(:file) { create(:document_file) }
+    let(:doc) { create(:operator_document_country, force_status: "doc_pending", document_file: file) }
 
     before { put :perform_qc, params: {id: doc.id, operator_document: doc_params} }
 
@@ -81,6 +82,17 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
         expect(flash[:notice]).to match("Document approved")
         doc.reload
         expect(doc.status).to eq("doc_valid")
+      end
+
+      context "when document with not required reason" do
+        let(:doc) { create(:operator_document_country, force_status: "doc_pending", document_file: nil, reason: "not required reason") }
+
+        it "makes sure to update it as not required" do
+          expect(response).to redirect_to(admin_operator_documents_path)
+          expect(flash[:notice]).to match("Document approved")
+          doc.reload
+          expect(doc.status).to eq("doc_not_required")
+        end
       end
     end
   end

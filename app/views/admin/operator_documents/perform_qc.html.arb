@@ -27,7 +27,7 @@ active_admin_form_for [:admin, resource.becomes(OperatorDocument)], url: perform
   end
 
   f.actions do
-    f.button "Approve", class: "button", name: "operator_document[status]", value: :doc_valid
+    f.button "Approve", class: "button", name: "operator_document[status]", value: resource.reason.present? ? :doc_not_required : :doc_valid
     f.button "Reject", class: "button", name: "operator_document[status]", value: :doc_invalid
   end
 end
