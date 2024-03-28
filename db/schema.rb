@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_22_163118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
@@ -657,6 +657,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
     t.datetime "deleted_at", precision: nil
     t.datetime "operator_document_updated_at", precision: nil, null: false
     t.datetime "operator_document_created_at", precision: nil, null: false
+    t.text "admin_comment"
     t.index ["deleted_at"], name: "index_operator_document_histories_on_deleted_at"
     t.index ["document_file_id"], name: "index_operator_document_histories_on_document_file_id"
     t.index ["expire_date"], name: "index_operator_document_histories_on_expire_date"
@@ -712,6 +713,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_113839) do
     t.integer "source", default: 1
     t.string "source_info"
     t.integer "document_file_id"
+    t.text "admin_comment"
     t.index ["deleted_at"], name: "index_operator_documents_on_deleted_at"
     t.index ["document_file_id"], name: "index_operator_documents_on_document_file_id"
     t.index ["expire_date"], name: "index_operator_documents_on_expire_date"

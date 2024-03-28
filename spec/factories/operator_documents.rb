@@ -22,6 +22,7 @@
 #  source                        :integer          default("company")
 #  source_info                   :string
 #  document_file_id              :integer
+#  admin_comment                 :text
 #
 
 FactoryBot.define do
