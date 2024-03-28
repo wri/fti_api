@@ -79,15 +79,18 @@ ActiveAdmin.register OperatorDocument do
       else
         redirect_to collection_path, alert: I18n.t("active_admin.operator_documents_page.document_not_pending_to_start_qc")
       end
-    elsif resource.update permitted_params[:operator_document]
-      notice = if resource.doc_invalid?
-        I18n.t("active_admin.operator_documents_page.rejected")
-      else
-        I18n.t("active_admin.operator_documents_page.approved")
-      end
-      redirect_to collection_path, notice: notice
     else
-      render "perform_qc"
+      params[:operator_document][:status] = "doc_not_required" if resource.reason.present? && params[:operator_document][:status] == "doc_valid"
+      if resource.update permitted_params[:operator_document]
+        notice = if resource.doc_invalid?
+          I18n.t("active_admin.operator_documents_page.rejected")
+        else
+          I18n.t("active_admin.operator_documents_page.approved")
+        end
+        redirect_to collection_path, notice: notice
+      else
+        render "perform_qc"
+      end
     end
   end
 
