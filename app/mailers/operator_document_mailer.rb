@@ -1,4 +1,6 @@
 class OperatorDocumentMailer < ApplicationMailer
+  include Rails.application.routes.url_helpers
+
   def expiring_documents(operator, user, documents)
     @documents = sort_documents(documents)
     @user = user
@@ -34,6 +36,13 @@ class OperatorDocumentMailer < ApplicationMailer
     @document = document
     @user = user
     mail to: user.email, subject: I18n.t("operator_document_mailer.document_invalid.subject")
+  end
+
+  def admin_document_pending(document)
+    @operator = document.operator
+    @document = document
+    # TODO: must be admins but first need to implement admin responsible for countries features
+    mail to: ENV["CONTACT_EMAIL"], subject: I18n.t("operator_document_mailer.admin_document_pending.subject", company: @operator.name)
   end
 
   private

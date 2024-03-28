@@ -224,6 +224,7 @@ class OperatorDocument < ApplicationRecord
     notify_users(operator.all_users, "document_valid") if doc_valid?
     notify_users(operator.all_users, "document_accepted_as_not_required") if doc_not_required?
     notify_users(operator.all_users, "document_invalid") if doc_invalid?
+    OperatorDocumentMailer.admin_document_pending(self).deliver_later if doc_pending?
   end
 
   def notify_users(users, mail_template)

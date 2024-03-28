@@ -1,0 +1,12 @@
+<%= t(".paragraph1", company: @operator.name) %>
+
+<%= t("mailers.company") %>: <%= @operator.name %>
+<%= t("mailers.document") %>: <%= @document.name_with_fmu %>
+<%= OperatorDocument.human_attribute_name(:start_date) %>: <%= @document.start_date %>
+<%= OperatorDocument.human_attribute_name(:expire_date) %>: <%= @document.expire_date %>
+Link: <%= @document&.document_file&.attachment&.url %>
+
+<%= t(".paragraph2", link: perform_qc_admin_operator_document_url(@document)) %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

@@ -19,7 +19,17 @@ class OperatorDocumentMailerPreview < ActionMailer::Preview
     OperatorDocumentMailer.document_invalid invalid_document, test_user
   end
 
+  def admin_document_pending
+    OperatorDocumentMailer.admin_document_pending pending_document, test_user
+  end
+
   private
+
+  def pending_document
+    valid_document.tap do |d|
+      d.status = "doc_pending"
+    end
+  end
 
   def invalid_document
     valid_document.tap do |d|
@@ -30,6 +40,7 @@ class OperatorDocumentMailerPreview < ActionMailer::Preview
 
   def valid_document
     OperatorDocumentFmu.new(
+      id: 1,
       start_date: 10.days.ago,
       expire_date: 2.years.from_now,
       fmu: Fmu.new(name: "Ngombe"),
