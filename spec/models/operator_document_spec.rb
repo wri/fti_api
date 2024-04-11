@@ -117,6 +117,40 @@ RSpec.describe OperatorDocument, type: :model do
       )
     end
 
+    describe "notifications" do
+      let(:operator_user) { create(:operator_user, operator: @operator) }
+      let(:document) { create(:operator_document_fmu, fmu: @fmu, operator: @operator) }
+
+      context "when validating document" do
+        subject { document.update!(status: "doc_valid") }
+
+        it "sends an email to observer users" do
+          expect { subject }.to have_enqueued_mail(OperatorDocumentMailer, :document_valid).exactly(1).times
+            .and have_enqueued_mail(OperatorDocumentMailer, :document_valid).with(document, operator_user)
+        end
+      end
+
+      context "when rejecting document" do
+        subject { document.update!(status: "doc_invalid", admin_comment: "wrong file") }
+
+        it "sends an email to observer users" do
+          expect { subject }.to have_enqueued_mail(OperatorDocumentMailer, :document_invalid).exactly(1).times
+            .and have_enqueued_mail(OperatorDocumentMailer, :document_invalid).with(document, operator_user)
+        end
+      end
+
+      context "when accepting document as not required" do
+        let(:document) { create(:operator_document_fmu, reason: "Not required document", document_file: nil, fmu: @fmu, operator: @operator) }
+
+        subject { document.update!(status: "doc_not_required") }
+
+        it "sends an email to observer users" do
+          expect { subject }.to have_enqueued_mail(OperatorDocumentMailer, :document_accepted_as_not_required).exactly(1).times
+            .and have_enqueued_mail(OperatorDocumentMailer, :document_accepted_as_not_required).with(document, operator_user)
+        end
+      end
+    end
+
     describe "#set_status" do
       context "when attachment or reason are not present" do
         it "update status as doc_not_provided" do
