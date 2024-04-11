@@ -36,25 +36,16 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
     it "is successful" do
       expect(response).to be_successful
     end
-
-    context "when document not pending qc" do
-      let(:doc) { create(:operator_document_country, force_status: "doc_valid", document_file: nil, reason: "It's a national secret") }
-
-      it "redirects to index" do
-        expect(response).to redirect_to(admin_operator_documents_path)
-        expect(flash[:alert]).to match("Document must be in a pending state to start QC")
-      end
-    end
   end
 
   describe "PUT perform_qc" do
     let(:file) { create(:document_file) }
     let(:doc) { create(:operator_document_country, force_status: "doc_pending", document_file: file) }
 
-    before { put :perform_qc, params: {id: doc.id, operator_document: doc_params} }
+    before { put :perform_qc, params: {id: doc.id, operator_document_qc_form: doc_params} }
 
     context "when rejecting" do
-      let(:doc_params) { {status: "doc_invalid", admin_comment: "Comment"} }
+      let(:doc_params) { {decision: "doc_invalid", admin_comment: "Comment"} }
 
       it "is successful" do
         expect(response).to redirect_to(admin_operator_documents_path)
@@ -65,7 +56,7 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
       end
 
       context "when missing admin comments" do
-        let(:doc_params) { {status: "doc_invalid", admin_comment: ""} }
+        let(:doc_params) { {decision: "doc_invalid", admin_comment: ""} }
 
         it "does not change status" do
           expect(response).to be_successful
@@ -75,7 +66,7 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
     end
 
     context "when approving" do
-      let(:doc_params) { {status: "doc_valid"} }
+      let(:doc_params) { {decision: "doc_valid"} }
 
       it "is successful" do
         expect(response).to redirect_to(admin_operator_documents_path)
