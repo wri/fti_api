@@ -222,6 +222,7 @@ class OperatorDocument < ApplicationRecord
 
   def notify_about_changes
     notify_users(operator.all_users, "document_valid") if doc_valid?
+    notify_users(operator.all_users, "document_accepted_as_not_required") if doc_not_required?
     notify_users(operator.all_users, "document_invalid") if doc_invalid?
   end
 

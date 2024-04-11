@@ -11,6 +11,10 @@ class OperatorDocumentMailerPreview < ActionMailer::Preview
     OperatorDocumentMailer.document_valid valid_document, test_user
   end
 
+  def document_accepted_as_not_required
+    OperatorDocumentMailer.document_accepted_as_not_required valid_document, test_user
+  end
+
   def document_invalid
     OperatorDocumentMailer.document_invalid invalid_document, test_user
   end

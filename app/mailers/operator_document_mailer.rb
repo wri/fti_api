@@ -22,6 +22,13 @@ class OperatorDocumentMailer < ApplicationMailer
     mail to: user.email, subject: I18n.t("operator_document_mailer.document_valid.subject")
   end
 
+  def document_accepted_as_not_required(document, user)
+    @operator = document.operator
+    @document = document
+    @user = user
+    mail to: user.email, subject: I18n.t("operator_document_mailer.document_accepted_as_not_required.subject")
+  end
+
   def document_invalid(document, user)
     @operator = document.operator
     @document = document

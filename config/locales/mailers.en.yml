@@ -75,10 +75,13 @@ en:
       paragraph2: You can update these documents by logging on to your OTP profile at %{link}.
     document_valid:
       subject: "Open Timber Portal: new document published"
-      paragraph1: The document %{document} has been validated and is now published on %{company} profile on the Open Timber Portal.
+      paragraph1: The document %{document} has been validated and is now published on %{company}'s profile on the Open Timber Portal.
+    document_accepted_as_not_required:
+      subject: "Open Timber Portal: updated document"
+      paragraph1: "The document %{document} has been approved as not required on %{company}'s profile on the Open Timber Portal."
     document_invalid:
       subject: "Open Timber Portal: uploaded document was not validated"
-      paragraph1: "The following document was reviewed and needs to be revised before it can be published:"
+      paragraph1: "The following document was reviewed and needs to be revised:"
       paragraph2: "The reviewer made the following comment:"
       paragraph3: "You can make edits to this document by clicking on the following link and updating it on your profile: %{link}"
   system_mailer:

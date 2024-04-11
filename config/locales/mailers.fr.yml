@@ -76,9 +76,12 @@ fr:
     document_valid:
       subject: "Open Timber Portal: nouveau document publié"
       paragraph1: Le document %{document} a été validé et est désormais publié sur le profil de %{company} sur l’Open Timber Portal.
+    document_accepted_as_not_required:
+      subject: "Open Timber Portal: nouveau document publié"
+      paragraph1: "Le document %{document} a été approuvé comme non requis sur le profil de %{company} sur l’Open Timber Portal."
     document_invalid:
       subject: "Open Timber Portal: le document téléchargé n’a pas été validé"
-      paragraph1: "Le document ci-dessous a été passé en revue et a besoin d’être modifié avant de pouvoir être publié:"
+      paragraph1: "Le document ci-dessous a été passé en revue et a besoin d’être modifié:"
       paragraph2: "L'évaluateur a fait le commentaire suivant:"
       paragraph3: "Vous pouvez modifier ce document en cliquant sur le lien suivant et en modifiant le document sur votre profil: %{link}"
 
