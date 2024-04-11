@@ -19,5 +19,6 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.acronym "API"
+  inflect.acronym "QC"
   inflect.uncountable %w[species]
 end

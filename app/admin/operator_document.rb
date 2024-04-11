@@ -25,6 +25,10 @@ ActiveAdmin.register OperatorDocument do
           [required_operator_document:
              [required_operator_document_group: :translations, country: :translations]]])
     end
+
+    def perform_qc_params
+      params.require(:operator_document_qc_form).permit(:decision, :admin_comment) if params.key?(:operator_document_qc_form)
+    end
   end
 
   # Here we're updating the documents one by one to make sure the callbacks to
@@ -75,13 +79,14 @@ ActiveAdmin.register OperatorDocument do
     @page_title = I18n.t("active_admin.shared.perform_qc")
     if request.get?
       if resource.doc_pending?
+        @form = OperatorDocumentQCForm.new(resource)
         render "perform_qc"
       else
         redirect_to collection_path, alert: I18n.t("active_admin.operator_documents_page.document_not_pending_to_start_qc")
       end
     else
-      params[:operator_document][:status] = "doc_not_required" if resource.reason.present? && params[:operator_document][:status] == "doc_valid"
-      if resource.update permitted_params[:operator_document]
+      @form = OperatorDocumentQCForm.new(resource, perform_qc_params)
+      if @form.call
         notice = if resource.doc_invalid?
           I18n.t("active_admin.operator_documents_page.rejected")
         else
@@ -95,12 +100,12 @@ ActiveAdmin.register OperatorDocument do
   end
 
   member_action :approve, method: :put do
-    if resource.reason.present?
-      resource.update!(status: OperatorDocument.statuses[:doc_not_required])
+    form = OperatorDocumentQCForm.new(resource, decision: "doc_valid")
+    if form.call
+      redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.approved")
     else
-      resource.update!(status: OperatorDocument.statuses[:doc_valid])
+      redirect_to collection_path, alert: I18n.t("active_admin.operator_documents_page.error_approving")
     end
-    redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.approved")
   end
 
   sidebar I18n.t("active_admin.operator_documents_page.annexes"), only: :show do

@@ -30,6 +30,7 @@ fr:
     edit_model: "Modifier %{model}"
     details: "Détails de %{model}"
     cancel: "Annuler"
+    submit: "Soumettre"
     empty: "Vide"
     previous: "Précédent"
     next: "Suivant"
@@ -371,6 +372,7 @@ fr:
       fa_confirmed: 'Les documents ont été définis sur "source: FOREST ATLAS"'
       confirm_other: 'Voulez-vous vraiment définir la source des documents sélectionnés comme AUTRE?'
       other_confirmed: 'Les documents ont été définis comme "source: OTHER"'
+      error_approving: "Erreur lors de l'approbation du document"
       approved: 'Document approuvé'
       rejected: 'Document rejeté'
       legal_category: 'Catégorie juridique'
@@ -1722,6 +1724,12 @@ fr:
     : "Commerçant"
 
   operator_documents:
+    qc_form:
+      admin_comment_hint: "Motif du rejet (obligatoire si le document n'est pas valide)"
+      decision: "Décision"
+      decisions:
+        doc_invalid: "Rejeter le document"
+        doc_valid: "Approuver le document"
     filters:
       country: 'Pays'
       fmu: 'FMU'

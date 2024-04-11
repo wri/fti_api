@@ -15,6 +15,7 @@ en:
     edit_model: "Edit %{model}"
     details: "%{model} Details"
     cancel: "Cancel"
+    submit: "Submit"
     empty: "Empty"
     previous: "Previous"
     next: "Next"
@@ -362,6 +363,7 @@ en:
       fa_confirmed: 'Documents were set to "source: FOREST_ATLAS"'
       confirm_other: 'Are you sure you want to set the source of the selected documents as OTHER?'
       other_confirmed: 'Documents were set to "source: OTHER"'
+      error_approving: "Error while approving document"
       approved: 'Document approved'
       rejected: 'Document rejected'
       legal_category: 'Legal Category'
@@ -1834,6 +1836,12 @@ en:
     : "Trader"
 
   operator_documents:
+    qc_form:
+      admin_comment_hint: "Reason for rejection (required if document is invalid)"
+      decision: "Decision"
+      decisions:
+        doc_invalid: "Reject document"
+        doc_valid: "Approve document"
     filters:
       country: 'Country'
       fmu: 'Fmu'
