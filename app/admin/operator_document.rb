@@ -308,7 +308,7 @@ ActiveAdmin.register OperatorDocument do
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :uploaded_by
       row I18n.t("active_admin.operator_documents_page.attachment") do |r|
-        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer"
+        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer" if r.document_file&.attachment&.present?
       end
       row :note
       row :start_date
