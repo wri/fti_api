@@ -77,25 +77,16 @@ ActiveAdmin.register OperatorDocument do
 
   member_action :perform_qc, method: [:put, :get] do
     @page_title = I18n.t("active_admin.shared.perform_qc")
-    if request.get?
-      if resource.doc_pending?
-        @form = OperatorDocumentQCForm.new(resource)
-        render "perform_qc"
+    @form = OperatorDocumentQCForm.new(resource, perform_qc_params)
+    if request.put? && @form.call
+      notice = if resource.doc_invalid?
+        I18n.t("active_admin.operator_documents_page.rejected")
       else
-        redirect_to collection_path, alert: I18n.t("active_admin.operator_documents_page.document_not_pending_to_start_qc")
+        I18n.t("active_admin.operator_documents_page.approved")
       end
+      redirect_to collection_path, notice: notice
     else
-      @form = OperatorDocumentQCForm.new(resource, perform_qc_params)
-      if @form.call
-        notice = if resource.doc_invalid?
-          I18n.t("active_admin.operator_documents_page.rejected")
-        else
-          I18n.t("active_admin.operator_documents_page.approved")
-        end
-        redirect_to collection_path, notice: notice
-      else
-        render "perform_qc"
-      end
+      render "perform_qc"
     end
   end
 

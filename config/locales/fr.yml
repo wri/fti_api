@@ -383,7 +383,6 @@ fr:
       annexes: 'Annexes'
       operator_document_id: "ID de document de l'opérateur"
       with_deleted: 'Avec supprimé'
-      document_not_pending_to_start_qc: "Le document doit être en attente pour démarrer le contrôle qualité"
       reason_label: "Raison de mettre le document comme “non applicable”"
     operator_document_annexes_page:
       approved: 'Annexe approuvée'
@@ -1524,6 +1523,7 @@ fr:
         one: ne fait pas la bonne longueur (doit comporter un seul caractère)
         other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
       other_than: doit être différent de %{count}
+      not_pending_state: n'est pas en attente
       carrierwave_processing_error: failed to be processed
       carrierwave_integrity_error: is not an allowed file type
       carrierwave_download_error: could not be downloaded

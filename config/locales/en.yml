@@ -374,7 +374,6 @@ en:
       annexes: 'Annexes'
       operator_document_id: 'Operator Document ID'
       with_deleted: 'With deleted'
-      document_not_pending_to_start_qc: "Document must be in a pending state to start QC"
       reason_label: "Reason for putting document as “non applicable”"
     operator_document_annexes_page:
       approved: 'Annex approved'
@@ -1614,6 +1613,7 @@ en:
         one: is the wrong length (should be 1 character)
         other: is the wrong length (should be %{count} characters)
       other_than: must be other than %{count}
+      not_pending_state: is not in pending state
       carrierwave_processing_error: failed to be processed
       carrierwave_integrity_error: is not an allowed file type
       carrierwave_download_error: could not be downloaded
