@@ -12,7 +12,7 @@ ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
 $stdout.puts "Creating test users..."
 
 common_fields = {password: "password", password_confirmation: "password", locale: :en}
-User.create_with(**common_fields, name: "Admin").find_or_create_by!(email: "admin@example.com") do |user|
+admin = User.create_with(**common_fields, name: "Admin").find_or_create_by!(email: "admin@example.com") do |user|
   user.build_user_permission(user_role: "admin")
 end
 User.create_with(**common_fields, name: "User").find_or_create_by(email: "user@example.com") do |user|
@@ -41,6 +41,7 @@ end
 $stdout.puts "Connecting users with test data..."
 
 cameroon = Country.find_by!(name: "Cameroon")
+congo = Country.find_by!(name: "Congo")
 ifo = Operator.find_by!(slug: "ifo-interholco")
 ogf = Observer.find_by!(name: "OGF")
 ocean = Observer.find_by!(name: "OCEAN")
@@ -51,6 +52,7 @@ operator.update!(operator: ifo)
 ngo.update!(observer: ogf)
 ngo_manager.update!(observer: ogf, managed_observers: [ocean, foder])
 government.update!(country: cameroon)
+admin.update!(responsible_for_countries: [cameroon, congo])
 
 # Observer.find_each { |o| o.update!(responsible_admin: admin) }
 OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }

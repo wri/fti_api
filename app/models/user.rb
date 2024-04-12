@@ -51,6 +51,7 @@ class User < ApplicationRecord
   has_many :operator_document_annexes, inverse_of: :user, dependent: :restrict_with_error
 
   has_and_belongs_to_many :managed_observers, join_table: "observer_managers", class_name: "Observer", dependent: :destroy
+  has_and_belongs_to_many :responsible_for_countries, join_table: "country_responsible_admins", class_name: "Country", dependent: :destroy
 
   belongs_to :observer, optional: true
   belongs_to :operator, optional: true

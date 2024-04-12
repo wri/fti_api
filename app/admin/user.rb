@@ -8,6 +8,7 @@ ActiveAdmin.register User do
     :name, :is_active,
     :observer_id, :operator_id, :holding_id, :locale,
     managed_observer_ids: [],
+    responsible_for_country_ids: [],
     user_permission_attributes: [:user_role]
 
   filter :operator
@@ -94,6 +95,7 @@ ActiveAdmin.register User do
       end
       row :holding if resource.holding?
       row :operator if resource.operator?
+      row :responsible_for_countries if resource.admin?
       row :observer if resource.ngo? || resource.ngo_manager?
       row :managed_observers if resource.ngo? || resource.ngo_manager? || resource.admin?
       row :is_active
@@ -117,6 +119,7 @@ ActiveAdmin.register User do
       f.input :managed_observers
       f.input :operator
       f.input :holding
+      f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)
       f.input :country
       f.input :locale, as: :select, collection: I18n.available_locales
       f.input :name

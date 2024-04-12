@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_21_122524) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_12_083812) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -158,6 +158,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_122524) do
     t.datetime "updated_at", precision: nil, null: false
     t.integer "country_id"
     t.index ["country_id"], name: "index_country_links_on_country_id"
+  end
+
+  create_table "country_responsible_admins", force: :cascade do |t|
+    t.bigint "country_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id", "user_id"], name: "index_country_responsible_admins_on_country_id_and_user_id", unique: true
+    t.index ["country_id"], name: "index_country_responsible_admins_on_country_id"
+    t.index ["user_id"], name: "index_country_responsible_admins_on_user_id"
   end
 
   create_table "country_translations", id: :serial, force: :cascade do |t|
@@ -1121,6 +1131,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_21_122524) do
   add_foreign_key "annex_documents", "operator_document_annexes", on_delete: :cascade
   add_foreign_key "api_keys", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade
+  add_foreign_key "country_responsible_admins", "countries", on_delete: :cascade
+  add_foreign_key "country_responsible_admins", "users", on_delete: :cascade
   add_foreign_key "country_vpas", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade

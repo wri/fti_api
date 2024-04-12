@@ -1347,6 +1347,7 @@ fr:
         last_sign_in_ip: IP de la dernière connexion  #g
         locale: Lieu  #g
         managed_observers: Observateurs gérés  #g
+        responsible_for_countries: Responsable des pays
         name: Nom  #g
         observation_documents: Documents d'observation  #g
         observation_reports: Rapports d'observation  #g

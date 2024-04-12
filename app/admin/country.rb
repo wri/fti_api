@@ -26,7 +26,7 @@ ActiveAdmin.register Country do
   filter :region_name
   filter :is_active
 
-  permit_params translations_attributes: [:id, :locale, :name, :overview, :vpa_overview, :_destroy]
+  permit_params responsible_admin_ids: [], translations_attributes: [:id, :locale, :name, :overview, :vpa_overview, :_destroy]
 
   csv do
     column :is_active
@@ -51,6 +51,7 @@ ActiveAdmin.register Country do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs I18n.t("active_admin.shared.country_details") do
+      f.input :responsible_admins, collection: User.filter_actives.filter_admins.order(:name)
       f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :name
         t.input :overview, as: :html_editor
@@ -67,6 +68,7 @@ ActiveAdmin.register Country do
       row :iso
       row :region_iso
       row :is_active
+      row :responsible_admins
       # rubocop:disable Rails/OutputSafety
       row(:overview) { |c| c.overview&.html_safe }
       row(:vpa_overview) { |c| c.vpa_overview&.html_safe }
