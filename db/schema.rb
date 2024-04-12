@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_21_122524) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_21_122524) do
+  create_schema "tiger"
+  create_schema "tiger_data"
+  create_schema "topology"
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "address_standardizer"
   enable_extension "address_standardizer_data_us"
