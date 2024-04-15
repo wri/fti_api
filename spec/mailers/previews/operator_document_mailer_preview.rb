@@ -23,11 +23,22 @@ class OperatorDocumentMailerPreview < ActionMailer::Preview
     OperatorDocumentMailer.admin_document_pending pending_document, test_user
   end
 
+  def admin_document_pending_with_reason
+    OperatorDocumentMailer.admin_document_pending pending_document_with_reason, test_user
+  end
+
   private
 
   def pending_document
     valid_document.tap do |d|
       d.status = "doc_pending"
+    end
+  end
+
+  def pending_document_with_reason
+    pending_document.tap do |d|
+      d.document_file = nil
+      d.reason = "Document is not applicable. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     end
   end
 
