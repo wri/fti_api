@@ -130,6 +130,10 @@ class Operator < ApplicationRecord
     users.or(holding_users)
   end
 
+  def responsible_admins
+    country&.responsible_admins || User.none
+  end
+
   def can_hard_delete?
     all_fmus.with_deleted.none? &&
       all_observations.with_deleted.none? &&

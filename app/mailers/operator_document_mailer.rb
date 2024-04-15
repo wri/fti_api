@@ -38,11 +38,10 @@ class OperatorDocumentMailer < ApplicationMailer
     mail to: user.email, subject: I18n.t("operator_document_mailer.document_invalid.subject")
   end
 
-  def admin_document_pending(document)
+  def admin_document_pending(document, admin)
     @operator = document.operator
     @document = document
-    # TODO: must be admins but first need to implement admin responsible for countries features
-    mail to: ENV["CONTACT_EMAIL"], subject: I18n.t("operator_document_mailer.admin_document_pending.subject", company: @operator.name)
+    mail to: admin.email, subject: I18n.t("operator_document_mailer.admin_document_pending.subject", company: @operator.name)
   end
 
   private
