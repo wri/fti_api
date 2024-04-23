@@ -36,6 +36,11 @@ module FtiApi
     # TODO: remove next line later after Rails 7.1 is deployed to prod with no intention to rollback
     config.active_support.cache_format_version = 7.0
 
+    # for paper trail versioning
+    # TODO: switch paper_trail to jsonb columns instead of text columns and yaml serialization
+    # then remove the following line
+    config.active_record.use_yaml_unsafe_load = true
+
     # ActiveJob
     config.active_job.queue_adapter = :sidekiq
 
