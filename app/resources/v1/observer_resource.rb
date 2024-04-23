@@ -5,7 +5,7 @@ module V1
     include CacheableByLocale
     # caching
 
-    attributes :observer_type, :name, :organization, :is_active, :logo, :address,
+    attributes :observer_type, :name, :is_active, :logo, :address,
       :information_name, :information_email, :information_phone, :data_name,
       :data_email, :data_phone, :organization_type, :delete_logo, :public_info
 

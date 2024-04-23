@@ -21,13 +21,12 @@
 #  public_info          :boolean          default(FALSE), not null
 #  responsible_admin_id :integer
 #  name                 :string
-#  organization         :string
 #
 
 class Observer < ApplicationRecord
   has_paper_trail
   include Translatable
-  translates :name, :organization, touch: true, versioning: :paper_trail
+  translates :name, touch: true, versioning: :paper_trail
 
   active_admin_translates :name do
     validates :name, presence: true

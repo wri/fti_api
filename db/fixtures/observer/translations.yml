@@ -5,7 +5,6 @@ Observer_3_en_translation:
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2017-09-25 15:06:42 UTC
   name: AGRECO
-  organization: AGRECO
 
 Observer_5_en_translation:
   observer_id: 5
@@ -13,7 +12,6 @@ Observer_5_en_translation:
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2017-09-25 15:06:42 UTC
   name: FODER
-  organization: FODER
 
 Observer_10_en_translation:
   observer_id: 10
@@ -21,7 +19,6 @@ Observer_10_en_translation:
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2017-09-25 15:06:42 UTC
   name: CAGDF
-  organization: CAGDF
 
 Observer_16_en_translation:
   observer_id: 16
@@ -29,7 +26,6 @@ Observer_16_en_translation:
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2017-09-25 15:06:42 UTC
   name: OGF
-  organization: OGF
 
 Observer_25_en_translation:
   observer_id: 25

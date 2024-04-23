@@ -19,7 +19,6 @@
 #  public_info          :boolean          default(FALSE), not null
 #  responsible_admin_id :integer
 #  name                 :string
-#  organization         :string
 #
 
 require "rails_helper"
@@ -31,7 +30,7 @@ RSpec.describe Observer, type: :model do
     expect(observer).to be_valid
   end
 
-  it_should_behave_like "translatable", :observer, %i[name organization]
+  it_should_behave_like "translatable", :observer, %i[name]
 
   describe "Instance methods" do
     describe "#cache_key" do

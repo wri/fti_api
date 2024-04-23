@@ -974,7 +974,6 @@ en:
         globalized_model: :activerecord.models.globalized_model  #g
         locale: Locale  #g
         name: Name  #g
-        organization: Organization  #g
         versions: Versions  #g
 
       observer_observation:
