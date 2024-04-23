@@ -30,8 +30,6 @@ RSpec.describe Observer, type: :model do
     expect(observer).to be_valid
   end
 
-  it_should_behave_like "translatable", :observer, %i[name]
-
   describe "Instance methods" do
     describe "#cache_key" do
       it "return the default value with the locale" do

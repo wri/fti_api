@@ -124,7 +124,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
 
     def returned_observers
       ids = collection.map(&:all_observer_ids).compact.map { |ids| ids.split(",") }.flatten.uniq.compact
-      Observer.where(id: ids).with_translations
+      Observer.where(id: ids)
     end
   end
 end

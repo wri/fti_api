@@ -1,6 +1,7 @@
 
 Observer_3:
   id: 3
+  name: AGRECO
   observer_type: Mandated
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2023-09-08 12:12:54 UTC
@@ -8,6 +9,7 @@ Observer_3:
 
 Observer_5:
   id: 5
+  name: FODER
   observer_type: SemiMandated
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2023-12-06 09:36:08 UTC
@@ -25,6 +27,7 @@ Observer_5:
 
 Observer_10:
   id: 10
+  name: CAGDF
   observer_type: Mandated
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2023-11-14 13:13:04 UTC
@@ -39,6 +42,7 @@ Observer_10:
 
 Observer_16:
   id: 16
+  name: OGF
   observer_type: Mandated
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2024-01-25 12:53:53 UTC
@@ -56,6 +60,7 @@ Observer_16:
 
 Observer_25:
   id: 25
+  name: RENOI
   observer_type: External
   created_at: 2019-03-01 22:01:21 UTC
   updated_at: 2023-09-20 13:34:09 UTC
@@ -64,6 +69,7 @@ Observer_25:
 
 Observer_26:
   id: 26
+  name: ECODEV
   observer_type: External
   created_at: 2019-03-29 16:31:40 UTC
   updated_at: 2023-11-01 13:51:59 UTC
@@ -73,6 +79,7 @@ Observer_26:
 
 Observer_34:
   id: 34
+  name: OCEAN
   observer_type: External
   created_at: 2023-07-07 17:36:09 UTC
   updated_at: 2023-11-30 14:48:08 UTC
@@ -80,6 +87,7 @@ Observer_34:
 
 Observer_38:
   id: 38
+  name: CADDE
   observer_type: External
   created_at: 2023-07-17 14:29:30 UTC
   updated_at: 2023-09-01 09:17:05 UTC

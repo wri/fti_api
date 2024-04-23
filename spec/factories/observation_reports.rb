@@ -21,7 +21,6 @@ FactoryBot.define do
 
     after(:build) do |random_observation_report|
       random_observation_report.user ||= FactoryBot.create(:user)
-      random_observation_report.observers.each { |observer| observer.translation.name = observer.name }
     end
   end
 end
