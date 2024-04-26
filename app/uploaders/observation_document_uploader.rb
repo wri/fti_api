@@ -6,7 +6,6 @@ class ObservationDocumentUploader < ApplicationUploader
   end
 
   def filename
-    return super if model.observation.nil?
     return if super.blank?
 
     filename = if model.name.present?
@@ -14,7 +13,7 @@ class ObservationDocumentUploader < ApplicationUploader
     else
       [
         model.id,
-        (model.observation.evidence_type || "other").parameterize
+        (model.document_type || "other").parameterize
       ].join("-")
     end
 

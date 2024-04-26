@@ -17,7 +17,7 @@ class ApplicationUploader < CarrierWave::Uploader::Base
   end
 
   def url(*args)
-    return super.gsub("/uploads/", "/private/uploads/") if private_upload?
+    return super&.gsub("/uploads/", "/private/uploads/") if private_upload?
 
     super
   end
