@@ -122,7 +122,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
     as: :select,
     label: proc { I18n.t("activerecord.models.operator") },
     collection: -> { Operator.order(:name).pluck(:name) }
-  filter :annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_eq,
+  filter :annex_documents_documentable_of_OperatorDocument_type_fmu_name_eq,
     as: :select,
     label: -> { I18n.t("activerecord.models.fmu.one") },
     collection: -> { Fmu.by_name_asc.pluck(:name) }
@@ -134,8 +134,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
   dependent_filters do
     {
       annex_documents_documentable_of_OperatorDocument_type_operator_name_eq: {
-        annex_documents_documentable_of_OperatorDocument_type_fmu_translations_name_eq:
-          Operator.joins(fmus: :translations).where(fmu_translations: {locale: I18n.locale}).pluck(:name, "fmu_translations.name")
+        annex_documents_documentable_of_OperatorDocument_type_fmus_name_eq:
+          Operator.joins(:fmus).pluck(:name, "fmus.name")
       }
     }
   end

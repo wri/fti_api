@@ -29,8 +29,6 @@ RSpec.describe Fmu, type: :model do
     expect(fmu).to be_valid
   end
 
-  it_should_behave_like "translatable", :fmu, %i[name]
-
   describe "Methods" do
     describe "#cache_key" do
       it "return the default value with the locale" do

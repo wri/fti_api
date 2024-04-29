@@ -109,13 +109,11 @@ module V1
 
     def fmu_ids
       having_published_observations = Observation.published.distinct.pluck(:fmu_id)
-      name_column = Arel.sql("fmu_translations.name")
 
       Fmu
         .where(id: having_published_observations)
-        .with_translations(I18n.locale)
-        .order("fmu_translations.name asc")
-        .pluck(:id, name_column)
+        .order(name: :asc)
+        .pluck(:id, :name)
         .map { |x| {id: x[0], name: x[1]} }
     end
 

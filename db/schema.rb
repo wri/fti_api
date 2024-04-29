@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_23_144714) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_104647) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -244,19 +244,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_144714) do
     t.index ["operator_id", "fmu_id"], name: "index_fmu_operators_on_operator_id_and_fmu_id"
   end
 
-  create_table "fmu_translations", id: :serial, force: :cascade do |t|
-    t.integer "fmu_id", null: false
-    t.string "locale", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "name"
-    t.datetime "deleted_at", precision: nil
-    t.index ["deleted_at"], name: "index_fmu_translations_on_deleted_at"
-    t.index ["fmu_id"], name: "index_fmu_translations_on_fmu_id"
-    t.index ["locale"], name: "index_fmu_translations_on_locale"
-    t.index ["name", "fmu_id"], name: "index_fmu_translations_on_name_and_fmu_id"
-  end
-
   create_table "fmus", id: :serial, force: :cascade do |t|
     t.integer "country_id"
     t.jsonb "geojson"
@@ -272,6 +259,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_144714) do
     t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
     t.datetime "deleted_at", precision: nil
     t.boolean "certification_ls", default: false, null: false
+    t.string "name", null: false
     t.index ["country_id"], name: "index_fmus_on_country_id"
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at"
     t.index ["forest_type"], name: "index_fmus_on_forest_type"

@@ -716,13 +716,6 @@ en:
         translations: Translations  #g
         versions: Versions  #g
 
-      fmu/translation:
-        deleted_at: Deleted at  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
-        versions: Versions  #g
-
       fmu_operator:
         current: Current  #g
         deleted_at: Deleted at  #g

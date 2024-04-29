@@ -29,12 +29,6 @@ class Fmu < ApplicationRecord
 
   include EsriShapefileUpload
   include ValidationHelper
-  include Translatable
-  translates :name, paranoia: true, touch: true, versioning: :paper_trail
-
-  active_admin_translates :name do
-    validates :name, presence: true
-  end
 
   enum forest_type: ForestType::TYPES_WITH_CODE
 
@@ -60,8 +54,6 @@ class Fmu < ApplicationRecord
 
   after_save :update_geometry, if: :saved_change_to_geojson?
 
-  default_scope { includes(:translations) }
-
   # TODO Redo all of those
   scope :filter_by_countries, ->(country_ids) { where(country_id: country_ids.split(",")) }
   scope :filter_by_operators, ->(operator_ids) { joins(:fmu_operators).where(fmu_operators: {current: true, operator_id: operator_ids.split(",")}) }
@@ -73,9 +65,7 @@ class Fmu < ApplicationRecord
   scope :current, -> { joins(:fmu_operators).where(fmu_operators: {current: true}) }
   scope :filter_by_forest_type, ->(forest_type) { where(forest_type: forest_type) }
   scope :discriminate_by_forest_type, ->(forest_type) { where.not(forest_type: forest_type) }
-  scope :by_name_asc, -> { with_translations(I18n.locale).order("fmu_translations.name") }
-
-  ransacker(:name) { Arel.sql("fmu_translations.name") } # for nested_select in observation form
+  scope :by_name_asc, -> { order(name: :asc) }
 
   class << self
     def fetch_all(options)

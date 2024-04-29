@@ -12,24 +12,23 @@ ActiveAdmin.register Fmu do
 
   controller do
     def scoped_collection
-      end_of_association_chain.with_translations(I18n.locale).includes(:country, :operator)
+      end_of_association_chain.includes(:country, :operator)
     end
   end
 
   scope -> { I18n.t("active_admin.all") }, :all, default: true
   scope -> { I18n.t("active_admin.free") }, :filter_by_free_aa
 
-  permit_params :id, :certification_fsc, :certification_pefc,
+  permit_params :id, :name, :certification_fsc, :certification_pefc,
     :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
     :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
-    fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date],
-    translations_attributes: [:id, :locale, :name, :_destroy]
+    fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date]
 
   filter :id, as: :select
   filter :country, as: :select, label: proc { I18n.t("activerecord.models.country.one") }, collection: -> { Country.joins(:fmus).by_name_asc }
   filter :operator_in_all, as: :select, label: proc { I18n.t("activerecord.attributes.fmu.operator") }, collection: -> { Operator.order(:name) }
-  filter :translations_name_cont,
-    as: :select, label: proc { I18n.t("activerecord.attributes.fmu/translation.name") },
+  filter :name_cont,
+    as: :select, label: proc { I18n.t("activerecord.attributes.fmu.name") },
     collection: -> { Fmu.by_name_asc.pluck(:name) }
 
   dependent_filters do
@@ -38,7 +37,7 @@ ActiveAdmin.register Fmu do
         operator_in_all: Operator.pluck(:country_id, :id)
       },
       operator_in_all: {
-        translations_name_cont: Operator.joins(fmus: :translations).where(fmu_translations: {locale: I18n.locale}).pluck(:id, "fmu_translations.name")
+        name_cont: Operator.joins(:fmus).pluck(:id, "fmus.name")
       }
     }
   end
@@ -90,7 +89,7 @@ ActiveAdmin.register Fmu do
 
   index do
     column :id, sortable: true
-    column :name, sortable: "fmu_translations.name"
+    column :name, sortable: true
     column :country, sortable: "country_translations.name"
     column :operator
     column "FSC", :certification_fsc
@@ -109,6 +108,7 @@ ActiveAdmin.register Fmu do
     columns class: "d-flex" do
       column max_width: "500px" do
         f.inputs I18n.t("active_admin.shared.fmu_details") do
+          f.input :name
           f.input :country, input_html: {disabled: object.persisted?}, required: true
           f.input :forest_type, as: :select,
             collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
@@ -123,7 +123,7 @@ ActiveAdmin.register Fmu do
         end
 
         f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
-          fo.input :operator_id, label: I18n.t("activerecord.attributes.fmu/translation.name"), as: :select,
+          fo.input :operator_id, label: I18n.t("activerecord.attributes.operator.name"), as: :select,
             collection: Operator.active.map { |o| [o.name, o.id] },
             input_html: {disabled: object.persisted?}, required: false
           fo.input :start_date, input_html: {disabled: object.persisted?}, required: false
@@ -149,11 +149,6 @@ ActiveAdmin.register Fmu do
       end
     end
 
-    f.inputs I18n.t("active_admin.shared.translated_fields") do
-      f.translated_inputs "Translations", switch_locale: false do |t|
-        t.input :name, label: I18n.t("activerecord.attributes.fmu/translation.name")
-      end
-    end
     f.actions
   end
 end

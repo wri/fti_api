@@ -501,7 +501,7 @@ ActiveAdmin.register Observation do
             level_3: {
               attribute: :fmu_id,
               minimum_input_length: 0,
-              order: "fmu_translations.name_asc"
+              order: "fmus.name_asc"
             }
         else
           f.input :country
