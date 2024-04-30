@@ -383,7 +383,7 @@ fr:
       annexes: 'Annexes'
       operator_document_id: "ID de document de l'opérateur"
       with_deleted: 'Avec supprimé'
-      reason_label: "Raison de mettre le document comme “non applicable”"
+      reason_label: "Le document a été mis comme non applicable avec l'explication suivante"
     operator_document_annexes_page:
       approved: 'Annexe approuvée'
       not_approved: "L'annexe n'a pas pu être approuvée"
