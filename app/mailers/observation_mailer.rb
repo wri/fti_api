@@ -31,20 +31,20 @@ class ObservationMailer < ApplicationMailer
 
   def admin_observation_ready_for_qc(observation, user)
     @observation = observation
-    @observer = observation.modified_user.observer
+    @observer = observer
     mail to: user.email, subject: I18n.t(subject_i18n_key, id: observation.id)
   end
 
   def admin_observation_published_not_modified(observation, user)
     @observation = observation
-    @observer = observation.modified_user.observer
+    @observer = observer
     mail to: user.email, subject: I18n.t(subject_i18n_key, observer: @observer.name, id: observation.id)
   end
 
   private
 
   def observer
-    @observation.modified_user.observer
+    @observation.modified_user&.observer || @observation.user&.observer || @observation.observers.first
   end
 
   def subject_i18n_key
