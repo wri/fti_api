@@ -125,7 +125,6 @@ module V1
       Observer
         .active
         .where(id: having_published_observations)
-        .with_translations(I18n.locale)
         .map { |x| {id: x.id, name: x.name} }
         .sort_by { |x| x[:name] }
     end

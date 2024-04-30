@@ -12,12 +12,12 @@ ActiveAdmin.register Observer, as: "Monitor" do
 
   controller do
     def scoped_collection
-      end_of_association_chain.with_translations(I18n.locale).includes(:responsible_admin, :countries)
+      end_of_association_chain.includes(:responsible_admin, :countries)
     end
   end
 
-  permit_params :observer_type, :is_active, :logo, :organization_type, :delete_logo,
-    :responsible_admin_id, translations_attributes: [:id, :locale, :name, :_destroy], country_ids: []
+  permit_params :observer_type, :is_active, :logo, :name, :organization_type, :delete_logo,
+    :responsible_admin_id, country_ids: []
 
   csv do
     column :is_active
@@ -49,7 +49,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
     column :logo do |o|
       link_to o.logo&.identifier, o.logo&.url if o.logo&.url
     end
-    column :name, label: I18n.t("activerecord.attributes.observer/translation.name"), sortable: "observer_translations.name"
+    column :name
     column :responsible_admin
     column :created_at
     column :updated_at
@@ -61,18 +61,18 @@ ActiveAdmin.register Observer, as: "Monitor" do
     as: :select,
     label: I18n.t("activerecord.models.country.one"),
     collection: -> { Country.joins(:observers).with_translations(I18n.locale).order("country_translations.name").distinct }
-  filter :translations_name_eq,
+  filter :name_eq,
     as: :select,
-    label: -> { I18n.t("activerecord.attributes.observer/translation.name") },
+    label: -> { I18n.t("activerecord.attributes.observer.name") },
     collection: -> { Observer.by_name_asc.pluck(:name) }
 
   dependent_filters do
     {
       is_active: {
-        translations_name_eq: Observer.pluck(:is_active, :name)
+        name_eq: Observer.pluck(:is_active, :name)
       },
       country_ids: {
-        translations_name_eq: Observer.joins(:countries).pluck(:country_id, :name)
+        name_eq: Observer.joins(:countries).pluck(:country_id, :name)
       }
     }
   end
@@ -112,12 +112,8 @@ ActiveAdmin.register Observer, as: "Monitor" do
 
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
-    f.inputs I18n.t("active_admin.shared.translated_fields") do
-      f.translated_inputs "Translations", switch_locale: false do |t|
-        t.input :name
-      end
-    end
     f.inputs I18n.t("active_admin.shared.monitor_details") do
+      f.input :name
       f.input :is_active
       f.input :responsible_admin, as: :select, collection: User.joins(:user_permission).where(user_permissions: {user_role: :admin})
       f.input :countries, collection: Country.with_translations(I18n.locale).order("country_translations.name asc")

@@ -61,10 +61,6 @@ FactoryBot.define do
       validation_status { "Created" }
     end
 
-    after(:build) do |observation|
-      observation.observers.each { |observer| observer.translation.name = observer.name }
-    end
-
     after(:create) do |doc, evaluator|
       doc.update(validation_status: evaluator.force_status) if evaluator.force_status
     end
@@ -80,10 +76,6 @@ FactoryBot.define do
     validation_status { "Published (no comments)" }
     is_active { true }
     publication_date { DateTime.now.yesterday.to_date }
-
-    after(:build) do |observation|
-      observation.observers.each { |observer| observer.translation.name = observer.name }
-    end
   end
 
   trait :with_translations do

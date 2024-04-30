@@ -331,7 +331,7 @@ ActiveAdmin.register Observation do
     column I18n.t("observers.observers"), class: "col-monitors", sortable: false do |o|
       links = []
       observers = params["scope"].eql?("recycle_bin") ? o.observers.unscope(where: :deleted_at) : o.observers
-      observers.with_translations(I18n.locale).each do |observer|
+      observers.each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
       end
       links.reduce(:+)

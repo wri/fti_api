@@ -15,8 +15,7 @@ ActiveAdmin.register ObservationReport do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([[observation_report_observers: [observer: :translations]],
-        [observations: :translations], [observations: [country: :translations]]])
+      end_of_association_chain.includes([:observers, [observations: :translations], [observations: [country: :translations]]])
     end
 
     def apply_filtering(chain)
@@ -78,7 +77,7 @@ ActiveAdmin.register ObservationReport do
       o.observations.first&.country&.name
     end
     column I18n.t("activerecord.attributes.observation_report.observers") do |o|
-      names = o.observers.joins(:translations).map { |o| o.name }
+      names = o.observers.map { |o| o.name }
       names.sort.join(", ")
     end
     column :created_at
@@ -112,7 +111,7 @@ ActiveAdmin.register ObservationReport do
     end
     column :observers do |o|
       links = []
-      o.observers.joins(:translations).find_each do |observer|
+      o.observers.find_each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
       end
       links.reduce(:+)

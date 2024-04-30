@@ -21,17 +21,10 @@
 #  public_info          :boolean          default(FALSE), not null
 #  responsible_admin_id :integer
 #  name                 :string
-#  organization         :string
 #
 
 class Observer < ApplicationRecord
   has_paper_trail
-  include Translatable
-  translates :name, :organization, touch: true, versioning: :paper_trail
-
-  active_admin_translates :name do
-    validates :name, presence: true
-  end
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
@@ -64,13 +57,11 @@ class Observer < ApplicationRecord
 
   before_create :set_responsible_admin
 
-  scope :by_name_asc, -> { with_translations(I18n.locale).order("observer_translations.name ASC") }
+  scope :by_name_asc, -> { order(name: :asc) }
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
   scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observers).select("observers.id").distinct.select("observers.id")) }
-
-  default_scope { includes(:translations) }
 
   class << self
     def observer_select

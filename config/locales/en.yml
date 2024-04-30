@@ -967,14 +967,8 @@ en:
         public_info: Public info  #g
         responsible_admin: :activerecord.models.responsible_admin  #g
         translations: Translations  #g
-        users: Users  #g
-        versions: Versions  #g
-
-      observer/translation:
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
         name: Name  #g
-        organization: Organization  #g
+        users: Users  #g
         versions: Versions  #g
 
       observer_observation:

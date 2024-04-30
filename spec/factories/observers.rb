@@ -19,7 +19,6 @@
 #  public_info          :boolean          default(FALSE), not null
 #  responsible_admin_id :integer
 #  name                 :string
-#  organization         :string
 #
 
 FactoryBot.define do

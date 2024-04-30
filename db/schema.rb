@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_12_083812) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_23_144714) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -609,18 +609,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_12_083812) do
     t.index ["observer_id"], name: "index_observer_observations_on_observer_id"
   end
 
-  create_table "observer_translations", id: :serial, force: :cascade do |t|
-    t.integer "observer_id", null: false
-    t.string "locale", null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "name"
-    t.string "organization"
-    t.index ["locale"], name: "index_observer_translations_on_locale"
-    t.index ["name", "observer_id"], name: "index_observer_translations_on_name_and_observer_id"
-    t.index ["observer_id"], name: "index_observer_translations_on_observer_id"
-  end
-
   create_table "observers", id: :serial, force: :cascade do |t|
     t.string "observer_type", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -637,6 +625,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_12_083812) do
     t.string "organization_type"
     t.boolean "public_info", default: false, null: false
     t.integer "responsible_admin_id"
+    t.string "name", null: false
     t.index ["is_active"], name: "index_observers_on_is_active"
   end
 

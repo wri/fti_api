@@ -874,13 +874,6 @@ fr:
         versions: Versions  #g
         name: Nom
 
-      observer/translation:
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
-        organization: Organisme  #g
-        versions: Versions  #g
-
       observer_observation:
         deleted_at: Supprimé le  #g
         observation: :activerecord.models.observation  #g
