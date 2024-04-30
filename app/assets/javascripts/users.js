@@ -9,6 +9,7 @@ function updateFields() {
   const userRole = $('#user_user_permission_attributes_user_role').val();
   const observerInput = $('#user_observer_id');
   const managedObserversInput = $('#user_managed_observer_ids');
+  const reponsibleForCountriesInput = $('#user_responsible_for_country_ids');
   const operatorInput = $('#user_operator_id');
   const holdingInput = $('#user_holding_id');
 
@@ -25,6 +26,7 @@ function updateFields() {
   hideInput(holdingInput);
   hideInput(observerInput);
   hideInput(managedObserversInput);
+  hideInput(reponsibleForCountriesInput);
 
   switch (userRole) {
     case 'holding':
@@ -40,6 +42,7 @@ function updateFields() {
       break;
     case 'admin':
       showInput(managedObserversInput);
+      showInput(reponsibleForCountriesInput);
       break;
   }
 }

@@ -43,6 +43,8 @@ class Country < ApplicationRecord
   has_many :country_links, inverse_of: :country
   has_many :country_vpas, inverse_of: :country
 
+  has_and_belongs_to_many :responsible_admins, join_table: "country_responsible_admins", class_name: "User", dependent: :destroy
+
   validates :name, :iso, presence: true, uniqueness: {case_sensitive: false}
 
   before_save :set_active

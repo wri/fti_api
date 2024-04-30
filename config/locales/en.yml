@@ -413,6 +413,8 @@ en:
       location_on_map: 'Location on map'
       visible: 'Visible'
       scope_hidden: 'Hidden'
+    users_page:
+      responsible_for_countries_hint: Admin responsible for countries will get notifications concerning the private sector in these countries.
     powered_by: "Admin Backoffice"
     delete_model: "Delete %{model}"
     delete: "Delete"
@@ -1436,6 +1438,7 @@ en:
         last_sign_in_ip: Last sign in ip  #g
         locale: Locale  #g
         managed_observers: Managed observers  #g
+        responsible_for_countries: Responsible for countries
         name: Name  #g
         observation_documents: Observation documents  #g
         observation_reports: Observation reports  #g
