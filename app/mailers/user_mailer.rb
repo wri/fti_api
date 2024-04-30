@@ -25,7 +25,7 @@ class UserMailer < ApplicationMailer
 
   def generate_reset_url(user)
     if user.admin?
-      edit_user_password_url(reset_password_token: generate_reset_token(user)) if user.admin?
+      edit_user_password_url(reset_password_token: generate_reset_token(user))
     elsif user.ngo_manager? || user.ngo?
       ENV["OBSERVATIONS_TOOL_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
     else
