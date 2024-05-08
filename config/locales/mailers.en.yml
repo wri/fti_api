@@ -84,6 +84,10 @@ en:
       paragraph1: "The following document was reviewed and needs to be revised:"
       paragraph2: "The reviewer made the following comment:"
       paragraph3: "You can make edits to this document by clicking on the following link and updating it on your profile: %{link}"
+    admin_document_pending:
+      subject: "%{company} has uploaded a new document"
+      paragraph1: "%{company} has uploaded a new document on the Open Timber Portal that is ready to be reviewed."
+      paragraph2: "To review the document, go to: %{link}"
   system_mailer:
     user_created:
       subject: New account created

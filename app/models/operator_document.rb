@@ -32,6 +32,7 @@ class OperatorDocument < ApplicationRecord
   acts_as_paranoid
 
   attr_accessor :skip_score_recalculation
+  attr_accessor :new_document_uploaded # workaround flag, check operator_documentable.rb
 
   belongs_to :operator, touch: true
   belongs_to :required_operator_document, -> { with_archived }, inverse_of: :operator_documents
@@ -61,7 +62,7 @@ class OperatorDocument < ApplicationRecord
   after_save :recalculate_scores, if: :saved_change_to_score_related_attributes?
   after_save :remove_notifications, if: :saved_change_to_expire_date?
 
-  after_commit :notify_about_changes, if: :saved_change_to_status?
+  after_commit :notify_about_changes, if: -> { saved_change_to_status? || new_document_uploaded }
 
   scope :by_forest_types, ->(forest_type_id) { includes(:fmu).where(fmus: {forest_type: forest_type_id}) }
   scope :by_country, ->(country_id) { includes(:required_operator_document).where(required_operator_documents: {country_id: country_id}) }
@@ -224,6 +225,7 @@ class OperatorDocument < ApplicationRecord
     notify_users(operator.all_users, "document_valid") if doc_valid?
     notify_users(operator.all_users, "document_accepted_as_not_required") if doc_not_required?
     notify_users(operator.all_users, "document_invalid") if doc_invalid?
+    notify_users(operator.responsible_admins, "admin_document_pending") if doc_pending?
   end
 
   def notify_users(users, mail_template)

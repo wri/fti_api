@@ -121,6 +121,18 @@ RSpec.describe OperatorDocument, type: :model do
       let(:operator_user) { create(:operator_user, operator: @operator) }
       let(:document) { create(:operator_document_fmu, fmu: @fmu, operator: @operator) }
 
+      context "when changing document status to pending" do
+        let(:document) { create(:operator_document_fmu, document_file: nil, reason: nil, fmu: @fmu, operator: @operator) }
+        let!(:responsible_admin) { create(:admin, responsible_for_countries: [@country]) }
+
+        subject { document.update!(status: "doc_pending", reason: "it's not required") }
+
+        it "sends an email to all reponsible admins for this operator" do
+          expect { subject }.to have_enqueued_mail(OperatorDocumentMailer, :admin_document_pending).exactly(1).times
+            .and have_enqueued_mail(OperatorDocumentMailer, :admin_document_pending).with(document, responsible_admin)
+        end
+      end
+
       context "when validating document" do
         subject { document.update!(status: "doc_valid") }
 

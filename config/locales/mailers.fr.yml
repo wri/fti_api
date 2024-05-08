@@ -84,5 +84,9 @@ fr:
       paragraph1: "Le document ci-dessous a été passé en revue et a besoin d’être modifié:"
       paragraph2: "L'évaluateur a fait le commentaire suivant:"
       paragraph3: "Vous pouvez modifier ce document en cliquant sur le lien suivant et en modifiant le document sur votre profil: %{link}"
+    admin_document_pending:
+      subject: "%{company} a publié un nouveau document"
+      paragraph1: "%{company} a publié un nouveau document sur l’Open Timber Portal qui est prêt à être passé en revue:"
+      paragraph2: "Pour passer en revue le document, veuillez consulter: %{link}"
 
 

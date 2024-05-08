@@ -48,6 +48,11 @@ module OperatorDocumentable
 
     def attachment=(attachment)
       @model.build_document_file(attachment: attachment)
+      # TODO: check if there is better workaround for this issue https://github.com/rails/rails/issues/49898
+      # flipping activerecord flag about commit on first saved instance does not work
+      # when using build_document_file probably because of autosaving - save is called twice and in after commit we lose saved_changes hash somehow
+      # that's why I'm adding new_document_uploaded flag to run after_commit notifications
+      @model.new_document_uploaded = true
     end
 
     def document_visible?
