@@ -18,7 +18,7 @@
 #  organization_type    :string
 #  public_info          :boolean          default(FALSE), not null
 #  responsible_admin_id :integer
-#  name                 :string
+#  name                 :string           not null
 #
 
 require "rails_helper"

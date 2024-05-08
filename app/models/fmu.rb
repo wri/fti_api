@@ -19,8 +19,7 @@
 #  geometry             :geometry         geometry, 0
 #  deleted_at           :datetime
 #  certification_ls     :boolean          default(FALSE), not null
-#  name                 :string
-#  deleted_at           :datetime
+#  name                 :string           not null
 #
 
 class Fmu < ApplicationRecord
