@@ -24,9 +24,13 @@ class UserMailer < ApplicationMailer
   private
 
   def generate_reset_url(user)
-    return edit_user_password_url(reset_password_token: generate_reset_token(user)) if user.admin?
-
-    ENV["FRONTEND_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
+    if user.admin?
+      edit_user_password_url(reset_password_token: generate_reset_token(user))
+    elsif user.ngo_manager? || user.ngo?
+      ENV["OBSERVATIONS_TOOL_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
+    else
+      ENV["FRONTEND_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
+    end
   end
 
   def generate_reset_token(user)

@@ -12,8 +12,7 @@ Rails.application.configure do
   }
   config.public_file_server.enabled = true
 
-  # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter = :inline
   # config.active_job.queue_name_prefix = "sc_api_test_#{Rails.env}"
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
