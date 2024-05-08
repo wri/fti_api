@@ -1,0 +1,6 @@
+<%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+
+<%= t(".paragraph1", document: @document.name_with_fmu, company: @operator.name) %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

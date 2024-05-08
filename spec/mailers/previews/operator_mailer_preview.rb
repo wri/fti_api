@@ -1,24 +1,12 @@
 class OperatorMailerPreview < ActionMailer::Preview
   def quarterly_newsletter
-    OperatorMailer.quarterly_newsletter operator, operator.all_users.filter_actives.first
-  end
-
-  def expiring_documents
-    OperatorMailer.expiring_documents operator, operator.all_users.filter_actives.first, documents_expiring
-  end
-
-  def expired_documents
-    OperatorMailer.expired_documents operator, operator.all_users.filter_actives.first, documents_expired
+    OperatorMailer.quarterly_newsletter operator, test_user
   end
 
   private
 
-  def documents_expired
-    OperatorDocument.where(operator_id: operator_id).doc_expired.last(3)
-  end
-
-  def documents_expiring
-    documents_expired.each { |d| d.expire_date = 30.days.from_now } # workaround just in preview
+  def test_user
+    User.new(email: "john@example.com", name: "John Tester", locale: "en")
   end
 
   def operator

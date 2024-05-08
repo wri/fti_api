@@ -6,6 +6,8 @@ en:
     contact_us: Feel free to contact us if you have any questions.
     observation_id: Observation ID
     report_name: Report name
+    company: Company
+    document: Document
   user_mailer:
     user_acceptance:
       subject: Welcome to the Open Timber Portal!
@@ -60,6 +62,7 @@ en:
       paragraph3: "Please note that the following documents on your profile are expiring this quarter and will need to be updated:"
       paragraph4: You can update these documents by logging on to your OTP profile at %{link}.
       doc_expires: "%{document} expires on %{date}"
+  operator_document_mailer:
     expiring_documents:
       subject: Expiring document(s) on the Open Timber Portal
       paragraph1: "The following document(s) from %{company} is/are expiring in %{days}:"
@@ -70,6 +73,17 @@ en:
         other: "You have %{count} documents expired on the OTP"
       paragraph1: "%{company} has %{count} document(s) that are expired:"
       paragraph2: You can update these documents by logging on to your OTP profile at %{link}.
+    document_valid:
+      subject: "Open Timber Portal: new document published"
+      paragraph1: The document %{document} has been validated and is now published on %{company}'s profile on the Open Timber Portal.
+    document_accepted_as_not_required:
+      subject: "Open Timber Portal: updated document"
+      paragraph1: "The document %{document} has been approved as not required on %{company}'s profile on the Open Timber Portal."
+    document_invalid:
+      subject: "Open Timber Portal: uploaded document was not validated"
+      paragraph1: "The following document was reviewed and needs to be revised:"
+      paragraph2: "The reviewer made the following comment:"
+      paragraph3: "You can make edits to this document by clicking on the following link and updating it on your profile: %{link}"
   system_mailer:
     user_created:
       subject: New account created

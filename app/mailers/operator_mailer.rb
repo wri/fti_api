@@ -3,22 +3,6 @@ class OperatorMailer < ApplicationMailer
 
   helper :date
 
-  def expiring_documents(operator, user, documents)
-    @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
-    @user = user
-    @operator = operator
-
-    mail to: user.email, subject: I18n.t("operator_mailer.expiring_documents.subject")
-  end
-
-  def expired_documents(operator, user, documents)
-    @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
-    @user = user
-    @operator = operator
-
-    mail to: user.email, subject: I18n.t("operator_mailer.expired_documents.subject", count: @documents.count)
-  end
-
   # An email that contains the a quarterly report of an operator
   # It lists:
   # 1. Current transparency score

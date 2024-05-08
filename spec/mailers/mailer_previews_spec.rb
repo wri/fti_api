@@ -7,7 +7,6 @@ describe "Mail Previews", type: :request do
     # doing it in before all for better performance
     country = create(:country)
 
-    ngo_user = create(:ngo, country: country)
     create_list(:required_operator_document_country, 3, country: country)
 
     operator = create(:operator, :with_documents, country: country)
@@ -18,15 +17,6 @@ describe "Mail Previews", type: :request do
       document_file: create(:document_file), status: "doc_expired", start_date: 10.days.ago, expire_date: 2.days.ago
     )
     operator.operator_documents.doc_valid.first.update!(start_date: 10.days.ago, expire_date: 10.days.from_now)
-
-    # observation mailer needs observation
-    create(
-      :observation,
-      admin_comment: "admin comment",
-      monitor_comment: "monitor comment",
-      country: country,
-      modified_user: ngo_user
-    )
   end
 
   ActionMailer::Preview.all.each do |preview| # rubocop:disable Rails/FindEach

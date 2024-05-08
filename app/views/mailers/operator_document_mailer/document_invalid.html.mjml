@@ -1,0 +1,32 @@
+<p>
+  <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+</p>
+
+<p>
+  <%= t(".paragraph1") %>
+</p>
+
+<p>
+  <%= t("mailers.company") %>: <%= @operator.name %><br/>
+  <%= t("mailers.document") %>: <%= @document.name_with_fmu %><br/>
+  <%= OperatorDocument.human_attribute_name(:start_date) %>: <%= @document.start_date %><br/>
+  <%= OperatorDocument.human_attribute_name(:expire_date) %>: <%= @document.expire_date %><br/>
+  Link: <%= link_to nil, @document&.document_file&.attachment&.url %>
+</p>
+
+<p>
+  <%= t(".paragraph2") %>
+</p>
+
+<p style="background-color: #f7f6ed; padding: 20px">
+  <em><%= @document.admin_comment %></em>
+</p>
+
+<p>
+  <%= t(".paragraph3", link: link_to(nil, "#{ENV["FRONTEND_URL"]}/operators/#{@operator.slug}/documentation", target: "_blank")).html_safe %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %> <br/>
+  <%= t("mailers.signature") %>
+</p>
