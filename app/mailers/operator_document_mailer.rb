@@ -1,6 +1,6 @@
 class OperatorDocumentMailer < ApplicationMailer
   def expiring_documents(operator, user, documents)
-    @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
+    @documents = sort_documents(documents)
     @user = user
     @operator = operator
 
@@ -8,7 +8,7 @@ class OperatorDocumentMailer < ApplicationMailer
   end
 
   def expired_documents(operator, user, documents)
-    @documents = documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
+    @documents = sort_documents(documents)
     @user = user
     @operator = operator
 
@@ -34,5 +34,11 @@ class OperatorDocumentMailer < ApplicationMailer
     @document = document
     @user = user
     mail to: user.email, subject: I18n.t("operator_document_mailer.document_invalid.subject")
+  end
+
+  private
+
+  def sort_documents(documents)
+    documents.sort_by { |d| [d.fmu&.name || "_", d.required_operator_document.name] }
   end
 end
