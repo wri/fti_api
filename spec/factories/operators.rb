@@ -49,7 +49,7 @@ FactoryBot.define do
         # create one country document
         create(:operator_document_country, operator: op)
         create(:operator_document_fmu, operator: op, force_status: "doc_valid")
-        create(:operator_document_fmu, operator: op, force_status: "doc_invalid")
+        create(:operator_document_fmu, operator: op, force_status: "doc_invalid", admin_comment: "invalid")
       end
     end
   end

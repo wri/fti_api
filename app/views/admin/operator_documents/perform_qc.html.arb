@@ -1,0 +1,36 @@
+panel I18n.t("active_admin.operator_documents_page.details") do
+  attributes_table_for OperatorDocument.find(resource.id) do # have to be fresh object
+    tag_row :status
+    row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
+    row :required_operator_document
+    row :operator
+    row :fmu unless resource.is_a?(OperatorDocumentCountry)
+    row I18n.t("active_admin.operator_documents_page.attachment") do |r|
+      link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer" if r.document_file&.attachment&.present?
+    end
+    row :start_date
+    row :expire_date
+    row :updated_at
+    row I18n.t("active_admin.operator_documents_page.annexes") do |r|
+      r.operator_document_annexes.map do |annex|
+        link_to annex.name, admin_operator_document_annex_path(annex), target: "_blank", rel: "noopener noreferrer"
+      end.join(", ").html_safe # rubocop:disable Rails/OutputSafety
+    end
+  end
+end
+
+form = assigns[:form]
+
+active_admin_form_for [:admin, form], url: perform_qc_admin_operator_document_path(resource), method: :put do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+
+  f.inputs do
+    f.input :decision, as: :radio, collection: OperatorDocumentQCForm.decisions, label: I18n.t("operator_documents.qc_form.decision")
+    f.input :admin_comment, as: :text, hint: I18n.t("operator_documents.qc_form.admin_comment_hint")
+  end
+
+  f.actions do
+    f.action :submit, label: I18n.t("active_admin.submit")
+    f.cancel_link
+  end
+end

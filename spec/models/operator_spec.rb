@@ -201,7 +201,7 @@ RSpec.describe Operator, type: :model do
         context "when operator is not approved/not signed contract" do
           it "update non approved percentages" do
             @operator.operator_documents.signature.first.update!(
-              status: "doc_invalid", document_file: create(:document_file), start_date: Time.zone.today
+              status: "doc_invalid", admin_comment: "invalid", document_file: create(:document_file), start_date: Time.zone.today
             ) # contract invalid
             @operator.reload
 

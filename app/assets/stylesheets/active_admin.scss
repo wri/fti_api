@@ -162,6 +162,21 @@ body.active_admin {
     color: #666;
     margin: 0.5em 0 0 20%;
   }
+
+  .input.radio {
+    fieldset.choices {
+      legend {
+        width: unset;
+        border-bottom: unset;
+      }
+
+      .choice {
+        .field_with_errors {
+          display: inline-block;
+        }
+      }
+    }
+  }
 }
 
 .select2-container--default .select2-results__option[aria-disabled=true] {

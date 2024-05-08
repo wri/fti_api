@@ -71,6 +71,7 @@ ActiveAdmin.register OperatorDocumentHistory do
       links.join(" ").html_safe
     end
     # rubocop:enable Rails/OutputSafety
+    column :admin_comment
     column :reason
     column :note
     column :response_date
@@ -80,6 +81,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column :public
     tag_column :status
     column :id
+    column :admin_comment
     column :operator_document do |od|
       if od.operator_document.present?
         link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)

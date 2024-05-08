@@ -22,6 +22,7 @@
 #  source                        :integer          default("company")
 #  source_info                   :string
 #  document_file_id              :integer
+#  admin_comment                 :text
 #
 
 require "rails_helper"
@@ -34,6 +35,13 @@ RSpec.describe OperatorDocument, type: :model do
   end
 
   describe "Validations" do
+    it "is invalid without admin comment if status is doc invalid" do
+      subject.save!
+      subject.status = "doc_invalid"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:admin_comment]).to include("can't be blank")
+    end
+
     describe "#start_date" do
       context "has an attachment" do
         before { allow(subject).to receive(:document_file_id?).and_return(true) }
