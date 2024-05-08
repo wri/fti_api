@@ -58,7 +58,7 @@ module OpDoc
     end
 
     def fmu_ids
-      Fmu.all.with_translations.order(:name).pluck(:id, :name).map { |x| {id: x[0], name: x[1]} }
+      Fmu.order(:name).pluck(:id, :name).map { |x| {id: x[0], name: x[1]} }
     end
 
     def required_operator_document_ids

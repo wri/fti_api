@@ -161,7 +161,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     as: :select,
     collection: -> { Operator.order(:name) }
   filter :fmu, label: proc { I18n.t("activerecord.models.fmu.other") },
-    as: :select, collection: -> { Fmu.with_translations(I18n.locale).order("fmu_translations.name") }
+    as: :select, collection: -> { Fmu.order(:name) }
   filter :status, as: :select, collection: OperatorDocument.statuses
   filter :type, as: :select
   filter :source, as: :select, collection: OperatorDocument.sources

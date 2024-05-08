@@ -17,8 +17,7 @@
 #  geometry             :geometry         geometry, 0
 #  deleted_at           :datetime
 #  certification_ls     :boolean          default(FALSE), not null
-#  name                 :string
-#  deleted_at           :datetime
+#  name                 :string           not null
 #
 
 require "rails_helper"
@@ -28,8 +27,6 @@ RSpec.describe Fmu, type: :model do
     fmu = build(:fmu)
     expect(fmu).to be_valid
   end
-
-  it_should_behave_like "translatable", :fmu, %i[name]
 
   describe "Methods" do
     describe "#cache_key" do

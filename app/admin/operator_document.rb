@@ -20,8 +20,7 @@ ActiveAdmin.register OperatorDocument do
   controller do
     def scoped_collection
       end_of_association_chain
-        .includes([:required_operator_document, :user, :operator,
-          [fmu: :translations],
+        .includes([:required_operator_document, :user, :operator, :fmu,
           [required_operator_document:
              [required_operator_document_group: :translations, country: :translations]]])
     end
