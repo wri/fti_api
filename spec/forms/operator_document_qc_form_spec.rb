@@ -28,6 +28,14 @@ RSpec.describe OperatorDocumentQCForm, type: :model do
       form.valid?
       expect(form.errors[:operator_document]).to include("is not in pending state")
     end
+
+    it "validates document model" do
+      operator_document.start_date = nil
+      operator_document.save!(validate: false)
+      form = OperatorDocumentQCForm.new(operator_document, decision: "doc_invalid")
+      form.valid?
+      expect(form.errors[:start_date]).to include("can't be blank")
+    end
   end
 
   describe "#call" do
