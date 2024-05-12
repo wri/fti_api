@@ -433,6 +433,33 @@ RSpec.describe Observation, type: :model do
         expect(ObservationDocument.joins(:observations).where(observations: [@observation]).size).to eql 0
       end
     end
+
+    describe "#force_translations" do
+      let(:observation) { create(:observation, :with_translations, validation_status: "Ready for publication") }
+
+      context "when changing the status to something other than published" do
+        it "does not call the translation job" do
+          expect(TranslationJob).to_not receive(:perform_later)
+          observation.update(validation_status: "Needs revision")
+        end
+      end
+
+      context "when changing the status to published" do
+        context "when the language is not supported" do
+          it "does not call the translation job" do
+            expect(TranslationJob).to_not receive(:perform_later)
+            observation.force_translations_from = :es
+            observation.update(validation_status: "Published (no comments)")
+          end
+        end
+
+        it "calls the translation job" do
+          expect(TranslationJob).to receive(:perform_later)
+          observation.force_translations_from = :fr
+          observation.update(validation_status: "Published (no comments)")
+        end
+      end
+    end
   end
 
   describe "Instance methods" do

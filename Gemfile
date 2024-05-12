@@ -95,6 +95,9 @@ gem "paper_trail"
 # Interactors
 gem "interactor", "~> 3.0"
 
+# Translations
+gem "google-cloud-translate"
+
 # Error Management
 gem "sentry-rails"
 gem "sentry-ruby"

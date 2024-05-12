@@ -122,6 +122,20 @@ RSpec.describe Admin::ObservationsController, type: :controller do
         end
       end
     end
+
+    describe "PUT force_translations" do
+      let(:observation) { create(:observation, :with_translations) }
+
+      it "calls force_translations on the observation" do
+        expect(TranslationJob).to receive(:perform_later)
+        put :force_translations, params: {id: observation.id}
+      end
+
+      it "reloads the page" do
+        put :force_translations, params: {id: observation.id}
+        expect(response).to redirect_to(admin_observation_path(observation))
+      end
+    end
   end
 
   describe "batch actions" do
