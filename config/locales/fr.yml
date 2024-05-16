@@ -238,6 +238,7 @@ fr:
         vpas: 'APV'
       static_content:
         static_content: 'Contenu statique'
+        newsletters: 'Newsletters'
         partners: 'Partenaires'
         donors: 'Bailleurs'
         about_page: 'A propos'

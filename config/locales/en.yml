@@ -228,6 +228,7 @@ en:
         vpas: 'Vpas'
       static_content:
         static_content: 'Static content'
+        newsletters: 'Newsletters'
         pages: 'Pages'
         partners: 'Partners'
         donors: 'Donors'

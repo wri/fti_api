@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_104647) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_103335) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -360,6 +360,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_104647) do
     t.index ["max_fine"], name: "index_laws_on_max_fine"
     t.index ["min_fine"], name: "index_laws_on_min_fine"
     t.index ["subcategory_id"], name: "index_laws_on_subcategory_id"
+  end
+
+  create_table "newsletter_translations", force: :cascade do |t|
+    t.bigint "newsletter_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title", null: false
+    t.text "short_description", null: false
+    t.string "title_translated_from"
+    t.string "short_description_translated_from"
+    t.index ["locale"], name: "index_newsletter_translations_on_locale"
+    t.index ["newsletter_id"], name: "index_newsletter_translations_on_newsletter_id"
+  end
+
+  create_table "newsletters", force: :cascade do |t|
+    t.date "date", null: false
+    t.string "attachment", null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "notification_groups", id: :serial, force: :cascade do |t|

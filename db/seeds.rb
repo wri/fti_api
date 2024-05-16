@@ -59,7 +59,11 @@ OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }
 
 $stdout.puts "Syncing test data..."
 
-sample_file_base64 = "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
+sample_pdf_file = "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
+sample_image1 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample1.jpg")))}"
+sample_image2 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample2.jpg")))}"
+sample_image3 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample3.jpg")))}"
+images = [sample_image1, sample_image2, sample_image3]
 
 # observation report has validation on attachment, so to not fail some e2e specs make sure all reports has some attachments
 ObservationReport.find_each do |report|
@@ -67,9 +71,19 @@ ObservationReport.find_each do |report|
     report.remove_attachment!
     report.skip_observers_sync = true
     report.save!(validate: false)
-    report.update!(attachment: sample_file_base64)
+    report.update!(attachment: sample_pdf_file)
   end
 end
 Fmu.find_each(&:update_geometry)
 Rake::Task["sync:ranking"].invoke
 Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }
+
+10.times do
+  Newsletter.create!(
+    title: Faker::Lorem.sentence,
+    date: Faker::Date.between(from: 2.years.ago, to: Time.zone.today),
+    short_description: Faker::Lorem.paragraph,
+    attachment: sample_pdf_file,
+    image: images.sample
+  )
+end
