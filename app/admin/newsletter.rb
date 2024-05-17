@@ -5,7 +5,7 @@ ActiveAdmin.register Newsletter do
 
   menu false
 
-  permit_params :date, :attachment, :image, translations_attributes: [:id, :locale, :title, :short_description, :_destroy]
+  permit_params :date, :attachment, :image, :force_translations_from, translations_attributes: [:id, :locale, :title, :short_description, :_destroy]
 
   controller do
     def scoped_collection
@@ -16,11 +16,11 @@ ActiveAdmin.register Newsletter do
   member_action :force_translations do
     translate_from = params[:translate_from] || I18n.locale
     TranslationJob.perform_later(resource, translate_from)
-    redirect_to admin_newsletter_path(resource), notice: I18n.t("active_admin.observations_page.translating_observation")
+    redirect_to admin_newsletter_path(resource), notice: I18n.t("active_admin.shared.translating_entity")
   end
 
   action_item :force_translations, only: :show do
-    dropdown_menu I18n.t("active_admin.observations_page.force_translations") do
+    dropdown_menu I18n.t("active_admin.shared.force_translations") do
       I18n.available_locales.each do |locale|
         item locale, force_translations_admin_newsletter_path(newsletter, translate_from: locale)
       end
@@ -55,11 +55,19 @@ ActiveAdmin.register Newsletter do
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
       f.input :image, as: :file, hint: f.object.image.present? && image_tag(f.object.image.url(:thumbnail))
     end
-    f.translated_inputs "Translations", switch_locale: false do |t|
-      t.input :title
-      t.input :title_translated_from, input_html: {disabled: true}
-      t.input :short_description
-      t.input :short_description_translated_from, input_html: {disabled: true}
+    f.inputs I18n.t("active_admin.shared.translated_fields") do
+      f.input :force_translations_from, label: I18n.t("active_admin.shared.translate_from"),
+        as: :select,
+        collection: I18n.available_locales,
+        include_blank: true,
+        hint: I18n.t("active_admin.shared.translate_from_hint"),
+        input_html: {class: "translate_from"}
+      f.translated_inputs "Translations", switch_locale: false do |t|
+        t.input :title
+        t.input :title_translated_from, input_html: {disabled: true}
+        t.input :short_description
+        t.input :short_description_translated_from, input_html: {disabled: true}
+      end
     end
     f.actions
   end

@@ -8,6 +8,6 @@ class NewsletterImageUploader < ApplicationUploader
   end
 
   version :thumbnail do
-    process resize_to_limit: [0, 200]
+    process resize_to_fit: [nil, 200]
   end
 end

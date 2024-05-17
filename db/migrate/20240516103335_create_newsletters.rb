@@ -16,7 +16,7 @@ class CreateNewsletters < ActiveRecord::Migration[7.1]
       dir.up do
         Newsletter.create_translation_table!(
           title: {type: :string, null: false},
-          short_description: {type: :text, null: false},
+          short_description: {type: :text, null: false}
         )
         add_column :newsletter_translations, :title_translated_from, :string
         add_column :newsletter_translations, :short_description_translated_from, :string
