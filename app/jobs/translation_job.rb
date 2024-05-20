@@ -28,8 +28,10 @@ class TranslationJob < ApplicationJob
     end
 
     translated_fields.each do |field, translation|
-      translation.each do |locale, text|
+      translation.each do |locale, text_raw|
         I18n.with_locale locale do
+          # Some UTF charactes returned by google API are HTML encoded
+          text = Nokogiri::HTML.parse(text_raw).text
           entity.send("#{field}=", text)
           entity.translation.send("#{field}_translated_from=", original_locale)
         end

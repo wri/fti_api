@@ -104,6 +104,7 @@ gem "sentry-ruby"
 
 # Utilities
 gem "http"
+gem "nokogiri"
 
 group :development, :test, :e2e do
   gem "faker"

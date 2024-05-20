@@ -801,6 +801,7 @@ DEPENDENCIES
   letter_opener_web
   mini_magick
   mjml-rails
+  nokogiri
   oj
   oj_mimic_json
   paper_trail
