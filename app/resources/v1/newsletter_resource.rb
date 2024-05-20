@@ -2,6 +2,8 @@
 
 module V1
   class NewsletterResource < BaseResource
+    include CacheableByLocale
+
     caching
     immutable
 

@@ -2,6 +2,8 @@
 
 module V1
   class PageResource < BaseResource
+    include CacheableByLocale
+
     caching
     immutable
 
