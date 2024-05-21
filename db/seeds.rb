@@ -63,7 +63,6 @@ sample_pdf_file = "data:application/pdf;base64,#{Base64.encode64(File.read(File.
 sample_image1 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample1.jpg")))}"
 sample_image2 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample2.jpg")))}"
 sample_image3 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample3.jpg")))}"
-images = [sample_image1, sample_image2, sample_image3]
 
 # observation report has validation on attachment, so to not fail some e2e specs make sure all reports has some attachments
 ObservationReport.find_each do |report|
@@ -78,12 +77,26 @@ Fmu.find_each(&:update_geometry)
 Rake::Task["sync:ranking"].invoke
 Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }
 
-10.times do
-  Newsletter.create!(
-    title: Faker::Lorem.sentence,
-    date: Faker::Date.between(from: 2.years.ago, to: Time.zone.today),
-    short_description: Faker::Lorem.paragraph,
-    attachment: sample_pdf_file,
-    image: images.sample
-  )
-end
+# for now, let's add 3 newsletters here
+# TODO: move it to fixtures with better data later
+Newsletter.create!(
+  title: "Open Timber Portal Newsletter 1",
+  date: Date.new(2018, 11, 1),
+  short_description: "Welcome to first edition of the Open Timber Portal newsletter! The Open Timber Portal is now live in the Republic of Congo (ROC)and the Democratic Republic of Congo (DRC) with more than 200 corporate documents and 200 observations uploaded. Recently, our team has expanded to accelerate the data collection and quality control processes.",
+  attachment: sample_pdf_file,
+  image: sample_image1
+)
+Newsletter.create!(
+  title: "Newsletter number two. This title is a little longer",
+  date: Date.new(2022, 10, 1),
+  short_description: "This is the second newsletter. Here is a short description of it. It is very short.",
+  attachment: sample_pdf_file,
+  image: sample_image2
+)
+Newsletter.create!(
+  title: "Newsletter number three",
+  date: Date.new(2023, 10, 1),
+  short_description: "This is the third newsletter. Here is a short description of it. It is very short.",
+  attachment: sample_pdf_file,
+  image: sample_image3
+)
