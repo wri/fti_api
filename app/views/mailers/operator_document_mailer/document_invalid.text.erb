@@ -6,7 +6,12 @@
 <%= t("mailers.document") %>: <%= @document.name_with_fmu %>
 <%= OperatorDocument.human_attribute_name(:start_date) %>: <%= @document.start_date %>
 <%= OperatorDocument.human_attribute_name(:expire_date) %>: <%= @document.expire_date %>
+<% if @document.reason.present? %>
+<%= t("active_admin.operator_documents_page.reason_label") %>:
+<%= @document.reason %>
+<% else %>
 Link: <%= @document&.document_file&.attachment&.url %>
+<% end %>
 
 <%= t(".paragraph2") %>
 <%= @document.admin_comment %>
