@@ -33,6 +33,7 @@
 #  admin_comment         :text
 #  monitor_comment       :text
 #  deleted_at            :datetime
+#  locale                :string
 #  details               :text
 #  concern_opinion       :text
 #  litigation_status     :string
