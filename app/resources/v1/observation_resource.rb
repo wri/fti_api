@@ -129,7 +129,7 @@ module V1
     def set_modified
       user = context[:current_user]
       @model.modified_user_id = user.id
-      @model.force_translations_from = user.locale
+      @model.force_translations_from = @model.locale || user.locale
     end
 
     # Makes sure the validation status can be an acceptable one
