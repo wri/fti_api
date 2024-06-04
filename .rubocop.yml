@@ -55,3 +55,7 @@ Rails/HasManyOrHasOneDependent:
 Rails/HasAndBelongsToMany:
   Enabled: false
 
+# have a mixed feeling about this style
+Rails/WhereRange:
+  Enabled: false
+
