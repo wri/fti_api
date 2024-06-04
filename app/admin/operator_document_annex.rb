@@ -134,7 +134,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   dependent_filters do
     {
       annex_documents_documentable_of_OperatorDocument_type_operator_name_eq: {
-        annex_documents_documentable_of_OperatorDocument_type_fmus_name_eq:
+        annex_documents_documentable_of_OperatorDocument_type_fmu_name_eq:
           Operator.joins(:fmus).pluck(:name, "fmus.name")
       }
     }

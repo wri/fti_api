@@ -19,6 +19,10 @@ class OperatorDocumentMailerPreview < ActionMailer::Preview
     OperatorDocumentMailer.document_invalid invalid_document, test_user
   end
 
+  def document_put_as_not_required_invalid
+    OperatorDocumentMailer.document_invalid invalid_not_required_document, test_user
+  end
+
   def admin_document_pending
     OperatorDocumentMailer.admin_document_pending pending_document, test_user
   end
@@ -44,6 +48,13 @@ class OperatorDocumentMailerPreview < ActionMailer::Preview
 
   def invalid_document
     valid_document.tap do |d|
+      d.status = "doc_invalid"
+      d.admin_comment = "Document is invalid because of reasons."
+    end
+  end
+
+  def invalid_not_required_document
+    pending_document_with_reason.tap do |d|
       d.status = "doc_invalid"
       d.admin_comment = "Document is invalid because of reasons."
     end
