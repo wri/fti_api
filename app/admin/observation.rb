@@ -111,7 +111,7 @@ ActiveAdmin.register Observation do
 
   action_item :force_translations, only: :show do
     dropdown_menu I18n.t("active_admin.shared.force_translations") do
-      I18n.available_locales.each do |locale|
+      I18n.available_locales.sort.each do |locale|
         item locale, force_translations_admin_observation_path(observation, translate_from: locale)
       end
     end
@@ -598,7 +598,7 @@ ActiveAdmin.register Observation do
       if Observation::PUBLISHED_STATES.include? object.validation_status
         f.input :force_translations_from, label: I18n.t("active_admin.shared.translate_from"),
           as: :select,
-          collection: I18n.available_locales,
+          collection: I18n.available_locales.sort,
           include_blank: true,
           hint: I18n.t("active_admin.shared.translate_from_hint"),
           input_html: {class: "translate_from"}
