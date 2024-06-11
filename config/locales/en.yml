@@ -181,6 +181,10 @@ en:
       current_shape: 'Current shape'
       perform_qc: 'Perform Quality Control'
       start_qc: 'Start QC'
+      translate_from: 'Translate from'
+      translate_from_hint: 'Select the language you want to translate from. If you leave it blank, no automatic translation will be done.'
+      force_translations: 'Force translations from:'
+      translating_entity: 'The entity is being translated. Please reload the page in a few minutes.'
     menu:
       dashboard:
         dashboard: 'Dashboard'
@@ -228,6 +232,7 @@ en:
         vpas: 'Vpas'
       static_content:
         static_content: 'Static content'
+        newsletters: 'Newsletters'
         pages: 'Pages'
         partners: 'Partners'
         donors: 'Donors'
@@ -384,9 +389,6 @@ en:
       orphaned: 'Orphaned'
       details: 'Operator Document Annex Details'
     observations_page:
-      translate_from: 'Translate from'
-      force_translations: 'Force translations from:'
-      translating_observation: 'The observation is being translated. Please reload the page in a few minutes.'
       not_modified: 'Observation NOT modified'
       performed_qc: 'Quality Control performed'
       moved_ready: 'Observation moved to Ready for Publication'

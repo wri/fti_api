@@ -26,7 +26,7 @@ RSpec.shared_examples "jsonapi-resources__translations" do |options|
 
             expect(status).to eq(200)
             options[:attributes].each do |key, value|
-              expect(parsed_data[0][:attributes][key.to_sym]).to eq("#{value} #{locale}")
+              expect(parsed_data[0][:attributes][key.to_s.dasherize.to_sym]).to eq("#{value} #{locale}")
             end
           end
         end

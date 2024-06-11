@@ -106,12 +106,12 @@ ActiveAdmin.register Observation do
   member_action :force_translations do
     translate_from = params[:translate_from] || I18n.locale
     TranslationJob.perform_later(resource, translate_from)
-    redirect_to admin_observation_path(resource), notice: I18n.t("active_admin.observations_page.translating_observation")
+    redirect_to admin_observation_path(resource), notice: I18n.t("active_admin.shared.translating_entity")
   end
 
   action_item :force_translations, only: :show do
-    dropdown_menu I18n.t("active_admin.observations_page.force_translations") do
-      I18n.available_locales.each do |locale|
+    dropdown_menu I18n.t("active_admin.shared.force_translations") do
+      I18n.available_locales.sort.each do |locale|
         item locale, force_translations_admin_observation_path(observation, translate_from: locale)
       end
     end
@@ -596,11 +596,11 @@ ActiveAdmin.register Observation do
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
       if Observation::PUBLISHED_STATES.include? object.validation_status
-        f.input :force_translations_from, label:  I18n.t("active_admin.observations_page.translate_from"),
+        f.input :force_translations_from, label: I18n.t("active_admin.shared.translate_from"),
           as: :select,
-          collection: I18n.available_locales,
+          collection: I18n.available_locales.sort,
           include_blank: true,
-          hint: "Select the language you want to translate from. If you leave it blank, no automatic translation will be done.",
+          hint: I18n.t("active_admin.shared.translate_from_hint"),
           input_html: {class: "translate_from"}
       end
       f.translated_inputs "Translations", switch_locale: false do |t|

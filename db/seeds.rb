@@ -59,7 +59,10 @@ OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }
 
 $stdout.puts "Syncing test data..."
 
-sample_file_base64 = "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
+sample_pdf_file = "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
+sample_image1 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample1.jpg")))}"
+sample_image2 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample2.jpg")))}"
+sample_image3 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample3.jpg")))}"
 
 # observation report has validation on attachment, so to not fail some e2e specs make sure all reports has some attachments
 ObservationReport.find_each do |report|
@@ -67,9 +70,33 @@ ObservationReport.find_each do |report|
     report.remove_attachment!
     report.skip_observers_sync = true
     report.save!(validate: false)
-    report.update!(attachment: sample_file_base64)
+    report.update!(attachment: sample_pdf_file)
   end
 end
 Fmu.find_each(&:update_geometry)
 Rake::Task["sync:ranking"].invoke
 Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }
+
+# for now, let's add 3 newsletters here
+# TODO: move it to fixtures with better data later
+Newsletter.create!(
+  title: "Open Timber Portal Newsletter 1",
+  date: Date.new(2018, 11, 1),
+  short_description: "Welcome to first edition of the Open Timber Portal newsletter! The Open Timber Portal is now live in the Republic of Congo (ROC)and the Democratic Republic of Congo (DRC) with more than 200 corporate documents and 200 observations uploaded. Recently, our team has expanded to accelerate the data collection and quality control processes.",
+  attachment: sample_pdf_file,
+  image: sample_image1
+)
+Newsletter.create!(
+  title: "Newsletter number two. This title is a little longer",
+  date: Date.new(2022, 10, 1),
+  short_description: "This is the second newsletter. Here is a short description of it. It is very short.",
+  attachment: sample_pdf_file,
+  image: sample_image2
+)
+Newsletter.create!(
+  title: "Newsletter number three",
+  date: Date.new(2023, 10, 1),
+  short_description: "This is the third newsletter. Here is a short description of it. It is very short.",
+  attachment: sample_pdf_file,
+  image: sample_image3
+)

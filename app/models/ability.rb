@@ -37,7 +37,7 @@ class Ability
     can :read, [Country, Fmu, Category, Subcategory, Law, Species,
       OperatorDocument, OperatorDocumentHistory, RequiredOperatorDocument,
       RequiredOperatorDocumentGroup, ObservationReport, ObservationDocument,
-      Partner, OperatorDocumentAnnex, Sawmill, Faq, Tutorial, HowTo, Tool,
+      Partner, OperatorDocumentAnnex, Sawmill, Faq, Tutorial, HowTo, Tool, Newsletter,
       CountryLink, CountryVpa, RequiredGovDocumentGroup, RequiredGovDocument,
       GovDocument, ScoreOperatorDocument, AboutPageEntry, Page]
     can :read, Observation, is_active: true

@@ -191,6 +191,10 @@ fr:
       current_shape: 'Forme actuelle'
       perform_qc: 'Effectuer un contrôle qualité'
       start_qc: 'Démarrer le CQ'
+      translate_from: 'Traduire de'
+      translate_from_hint: 'Sélectionnez la langue à partir de laquelle vous souhaitez traduire. Si vous le laissez vide, aucune traduction automatique ne sera effectuée.'
+      force_translations: 'Forcer les traductions de:'
+      translating_entity: "L’entité est en cours de traduction. Veuillez recharger la page dans quelques minutes."
     menu:
       dashboard:
         dashboard: 'Tableau de bord'
@@ -238,6 +242,7 @@ fr:
         vpas: 'APV'
       static_content:
         static_content: 'Contenu statique'
+        newsletters: 'Newsletters'
         partners: 'Partenaires'
         donors: 'Bailleurs'
         about_page: 'A propos'
@@ -393,9 +398,6 @@ fr:
       orphaned: 'Orphelin'
       details: "Détails de l'annexe du document de l'opérateur"
     observations_page:
-      translate_from: 'Traduire de'
-      force_translations: 'Forcer les traductions de:'
-      translating_observation: "L’observation est en cours de traduction. Veuillez recharger la page dans quelques minutes."
       not_modified: 'Observation NON modifiée'
       performed_qc: 'Contrôle qualité effectué'
       moved_ready: 'Observation déplacée vers Prêt pour publication'
