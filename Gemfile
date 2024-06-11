@@ -102,6 +102,9 @@ gem "google-cloud-translate"
 gem "sentry-rails"
 gem "sentry-ruby"
 
+# TODO: jsonapi-resources is not compatible with this rack PR https://github.com/rack/rack/pull/2137 (ver 3.1.0), waiting for a patch
+gem "rack", "~> 3.0.11"
+
 # Utilities
 gem "http"
 gem "nokogiri"
