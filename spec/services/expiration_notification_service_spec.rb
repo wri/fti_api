@@ -33,21 +33,31 @@ RSpec.describe ExpirationNotifierService do
 
     file = create(:document_file)
 
-    doc1.update!(public: false, status: "doc_valid", document_file: file, start_date: Time.zone.yesterday, expire_date: 1.week.from_now)
-    doc2.update!(public: false, status: "doc_valid", document_file: file, start_date: Time.zone.yesterday, expire_date: 1.month.from_now)
-    doc3.update!(public: false, status: "doc_valid", document_file: file, start_date: 2.days.ago, expire_date: Time.zone.yesterday)
-    doc4.update!(public: false, status: "doc_valid", document_file: file, start_date: Time.zone.yesterday, expire_date: 3.days.from_now)
+    doc1.update!(public: false, status: "doc_valid", document_file: file, start_date: Time.zone.yesterday, expire_date: 1.week.from_now) # will send
+    doc2.update!(public: false, status: "doc_valid", document_file: file, start_date: Time.zone.yesterday, expire_date: 1.month.from_now) # will send
+    doc3.update!(public: false, status: "doc_expired", document_file: file, start_date: 2.days.ago, expire_date: Time.zone.yesterday) # will send
+    doc4.update!(public: false, status: "doc_valid", document_file: file, start_date: Time.zone.yesterday, expire_date: 3.days.from_now) #  will not send
+
+    # gov documents part
+    @user4 = create(:government_user, country: country)
+    @user5 = create(:user, country: country) # not a government user
+
+    create(:gov_document, country: country, force_status: "doc_valid", start_date: Time.zone.yesterday, expire_date: 1.week.from_now) # will send
+    create(:gov_document, country: country, force_status: "doc_expired", start_date: 3.days.ago, expire_date: Time.zone.yesterday) # will send
+    create(:gov_document, country: country, force_status: "doc_valid", start_date: 3.days.ago, expire_date: 2.days.from_now) # will not send
   end
 
   subject { ExpirationNotifierService.new.call }
 
   it "sends notification to all active eligible users" do
-    expect { subject }.to change { ActionMailer::Base.deliveries.count }.by(3)
-      .and change { ActionMailer::Base.deliveries.flat_map(&:to).sort }.to(
-        [
-          @user1.email, @user1.email, # with doc1, doc2
-          @user3.email # with doc4
-        ].sort
-      )
+    expect { subject }.to change { ActionMailer::Base.deliveries.count }.by(5)
+    delivered_emails = ActionMailer::Base.deliveries.map { |d| [d.to, d.subject] }
+    expect(delivered_emails).to match_array([
+      [[@user1.email], "Expiring document(s) on the Open Timber Portal"],
+      [[@user1.email], "Expiring document(s) on the Open Timber Portal"],
+      [[@user3.email], "You have 1 document expired on the OTP"],
+      [[@user4.email], "Expiring document(s) on the Open Timber Portal"],
+      [[@user4.email], "You have 1 document expired on the OTP"]
+    ])
   end
 end

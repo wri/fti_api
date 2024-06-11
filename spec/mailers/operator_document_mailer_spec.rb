@@ -30,6 +30,30 @@ RSpec.describe OperatorDocumentMailer, type: :mailer do
     end
   end
 
+  describe "expired_documents" do
+    let(:country) { create(:country) }
+    let(:operator) { create(:operator, country_id: country.id) }
+    let(:rod1) { create(:required_operator_document_country, country_id: country.id) }
+    let(:rod2) { create(:required_operator_document_country, country_id: country.id) }
+    let(:document1) {
+      create(:operator_document_country, required_operator_document_id: rod1.id, operator_id: operator, expire_date: Date.yesterday)
+    }
+    let(:document2) {
+      create(:operator_document_country, required_operator_document_id: rod2.id, operator_id: operator, expire_date: Date.yesterday)
+    }
+    let(:documents) { [document1, document2] }
+    let(:mail) { OperatorDocumentMailer.expired_documents(operator, user, documents) }
+
+    it "renders the headers" do
+      expect(mail.subject).to eq("You have 2 documents expired on the OTP")
+      expect(mail.to).to eq([user.email])
+    end
+
+    it "renders the body" do
+      expect(mail.body.encoded).to match(/#{operator.name} has 2 document\(s\) that are expired/)
+    end
+  end
+
   describe "document_valid" do
     let(:document) { create(:operator_document_country, operator: operator, force_status: "doc_valid") }
     let(:mail) { OperatorDocumentMailer.document_valid(document, user) }

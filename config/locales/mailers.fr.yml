@@ -88,5 +88,15 @@ fr:
       subject: "%{company} a publié un nouveau document"
       paragraph1: "%{company} a publié un nouveau document sur l’Open Timber Portal qui est prêt à être passé en revue:"
       paragraph2: "Pour passer en revue le document, veuillez consulter: %{link}"
-
+  gov_document_mailer:
+    expiring_documents:
+      subject: Document(s) qui vont expirer sur l’Open Timber Portal
+      paragraph1: "Le(s) document(s) de %{country} ci-dessous expire(nt) dans %{days}:"
+      paragraph2: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
+    expired_documents:
+      subject:
+        one: "Vous avez 1 document expiré sur l'OTP."
+        other: "Vous avez %{count} documents expiré sur l'OTP"
+      paragraph1: "%{country} a %{count} document(s) qui sont expiré:"
+      paragraph2: "Vous pouvez actualiser ces documents directement sur votre profil, en vous connectant sur l'OTP: %{link}."
 

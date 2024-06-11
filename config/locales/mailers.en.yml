@@ -88,6 +88,17 @@ en:
       subject: "%{company} has uploaded a new document"
       paragraph1: "%{company} has uploaded a new document on the Open Timber Portal that is ready to be reviewed."
       paragraph2: "To review the document, go to: %{link}"
+  gov_document_mailer:
+    expiring_documents:
+      subject: Expiring document(s) on the Open Timber Portal
+      paragraph1: "The following document(s) from %{country} is/are expiring in %{days}:"
+      paragraph2: You can update these documents by logging on to your OTP profile at %{link}.
+    expired_documents:
+      subject:
+        one: "You have 1 document expired on the OTP"
+        other: "You have %{count} documents expired on the OTP"
+      paragraph1: "%{country} has %{count} document(s) that are expired:"
+      paragraph2: You can update these documents by logging on to your OTP profile at %{link}.
   system_mailer:
     user_created:
       subject: New account created

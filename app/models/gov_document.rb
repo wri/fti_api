@@ -51,6 +51,7 @@ class GovDocument < ApplicationRecord
   after_real_destroy :remove_attachment!
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
+  scope :expirable, -> { where(status: EXPIRABLE_STATUSES) }
   scope :to_expire, ->(date) { where("expire_date < ?", date).where(status: EXPIRABLE_STATUSES) }
   scope :valid, -> { actual.where(status: GovDocument.statuses[:doc_valid]) }
 

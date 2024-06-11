@@ -12,6 +12,7 @@ module Roleable
     scope :filter_ngos, -> { joins(:user_permission).where(user_permissions: {user_role: "ngo"}) }
     scope :filter_operators, -> { joins(:user_permission).where(user_permissions: {user_role: "operator"}) }
     scope :filter_users, -> { joins(:user_permission).where(user_permissions: {user_role: "user"}) }
+    scope :filter_governments, -> { joins(:user_permission).where(user_permissions: {user_role: "government"}) }
 
     def admin?
       user_permission.user_role.in?("admin")
