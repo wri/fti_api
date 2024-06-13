@@ -3,6 +3,7 @@ panel I18n.t("active_admin.observations_page.details") do
     row :is_active
     row :hidden
     tag_row :validation_status
+    row :locale
     row :country
     row :observation_type
     row :subcategory

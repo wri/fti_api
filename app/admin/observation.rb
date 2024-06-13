@@ -595,6 +595,7 @@ ActiveAdmin.register Observation do
     end
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
+      f.input :locale, input_html: {disabled: true}
       if Observation::PUBLISHED_STATES.include? object.validation_status
         f.input :force_translations_from, label: I18n.t("active_admin.shared.translate_from"),
           as: :select,

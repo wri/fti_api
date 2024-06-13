@@ -580,6 +580,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_103335) do
     t.text "admin_comment"
     t.text "monitor_comment"
     t.datetime "deleted_at", precision: nil
+    t.string "locale"
     t.index ["country_id"], name: "index_observations_on_country_id"
     t.index ["created_at"], name: "index_observations_on_created_at"
     t.index ["deleted_at"], name: "index_observations_on_deleted_at"

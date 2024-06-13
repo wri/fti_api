@@ -10,7 +10,7 @@ module V1
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
       :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
-      :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment
+      :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment, :locale
 
     has_many :species
     has_many :observation_documents
@@ -30,6 +30,7 @@ module V1
     has_one :observation_report
 
     before_create :set_user
+    before_create :set_locale
     before_save :set_modified
     before_save :validate_status
 
@@ -120,11 +121,15 @@ module V1
       @model.user_id = context[:current_user].id
     end
 
+    def set_locale
+      @model.locale = context[:current_user].locale if @model.locale.blank?
+    end
+
     # Saves the last user who modified the observation and its locale
     def set_modified
       user = context[:current_user]
       @model.modified_user_id = user.id
-      @model.force_translations_from = user.locale
+      @model.force_translations_from = @model.locale || user.locale
     end
 
     # Makes sure the validation status can be an acceptable one
