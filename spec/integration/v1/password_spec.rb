@@ -57,8 +57,8 @@ module V1
             headers: non_api_webuser_headers)
 
           expect(parsed_body[:data][:attributes][:name]).to eq("00 User one")
-          expect(parsed_body[:data][:attributes][:first_name]).to eq("00 User")
-          expect(parsed_body[:data][:attributes][:last_name]).to eq("one")
+          expect(parsed_body[:data][:attributes][:"first-name"]).to eq("00 User")
+          expect(parsed_body[:data][:attributes][:"last-name"]).to eq("one")
           expect(parsed_body[:data][:attributes][:email]).to eq(user.email)
           expect(status).to eq(200)
         end

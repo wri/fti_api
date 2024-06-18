@@ -62,7 +62,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_permission
 
   validates :email, uniqueness: true
-  validates :name, presence: true
+  validates :name, presence: true # TODO: when remvoing name, add separate for first/last names
   validates :locale, inclusion: {in: I18n.available_locales.map(&:to_s), allow_blank: true}
   validates :password, confirmation: true,
     length: {within: 8..20},
@@ -85,7 +85,7 @@ class User < ApplicationRecord
   scope :with_user_role, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[name email id created_at]
+    %w[name first_name last_name email id created_at]
   end
 
   def is_government(country_id)

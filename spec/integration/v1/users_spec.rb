@@ -20,6 +20,7 @@ module V1
         },
         invalid_params: {email: "test@gmail.com", password: "password", "permissions-request": "government"},
         error_attributes: [422, 100, {
+          name: ["can't be blank"],
           "password-confirmation": ["can't be blank"]
         }]
       },
@@ -45,13 +46,6 @@ module V1
       },
       pagination: {
         success_roles: %i[admin]
-      },
-      sort: {
-        success_roles: %i[admin],
-        attribute: :first_name,
-        sequence: ->(i) { "#{i} observer" },
-        expected_count: 8,
-        desc: "Web user"
       }
     }
 

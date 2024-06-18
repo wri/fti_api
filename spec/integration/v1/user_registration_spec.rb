@@ -4,6 +4,7 @@ module V1
   describe "Register users", type: :request do
     let(:error) {
       {errors: [
+        {status: 422, title: "name can't be blank"},
         {status: 422, title: "password_confirmation can't be blank"}
       ]}
     }
@@ -11,7 +12,7 @@ module V1
     let(:error_pw) { {errors: [{status: 422, title: "password is too short (minimum is 8 characters)"}]} }
 
     let(:invalid_user_params) do
-      {email: "test@gmail.com", password: "password", permissions_request: "government"}
+      {first_name: "", email: "test@gmail.com", password: "password", permissions_request: "government"}
     end
 
     let(:valid_user_params) do
