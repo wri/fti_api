@@ -27,6 +27,8 @@
 #  operator_id            :integer
 #  holding_id             :integer
 #  locale                 :string
+#  first_name             :string
+#  last_name              :string
 #
 
 class User < ApplicationRecord
