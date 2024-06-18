@@ -113,6 +113,20 @@ class User < ApplicationRecord
     []
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def name
+    return full_name if full_name.present?
+
+    self[:name]
+  end
+
+  def name_old
+    self[:name]
+  end
+
   def display_name
     name.present? ? name.to_s : half_email.to_s
   end

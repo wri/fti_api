@@ -4,7 +4,6 @@ module V1
   describe "Register users", type: :request do
     let(:error) {
       {errors: [
-        {status: 422, title: "name can't be blank"},
         {status: 422, title: "password_confirmation can't be blank"}
       ]}
     }
@@ -22,7 +21,8 @@ module V1
         password_confirmation: "password",
         locale: "en",
         permissions_request: "government",
-        name: "Test user new"
+        first_name: "First name",
+        last_name: "Last name"
       }
     end
 

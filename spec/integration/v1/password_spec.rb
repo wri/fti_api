@@ -2,7 +2,7 @@ require "rails_helper"
 
 module V1
   describe "Password", type: :request do
-    let(:user) { create(:user, email: "test@email.com", password: "password", password_confirmation: "password", name: "00 User one") }
+    let(:user) { create(:user, email: "test@email.com", password: "password", password_confirmation: "password", first_name: "00 User", last_name: "one") }
 
     context "Request reset password token" do
       describe "Valid request" do
@@ -57,6 +57,8 @@ module V1
             headers: non_api_webuser_headers)
 
           expect(parsed_body[:data][:attributes][:name]).to eq("00 User one")
+          expect(parsed_body[:data][:attributes][:first_name]).to eq("00 User")
+          expect(parsed_body[:data][:attributes][:last_name]).to eq("one")
           expect(parsed_body[:data][:attributes][:email]).to eq(user.email)
           expect(status).to eq(200)
         end

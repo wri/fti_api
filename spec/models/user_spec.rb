@@ -230,7 +230,7 @@ RSpec.describe User, type: :model do
     describe "#display_name" do
       context "when name is present" do
         it "return name" do
-          user = build(:user, name: nil)
+          user = build(:user, first_name: nil, last_name: nil)
 
           expect(user.send(:display_name)).to eql user.send(:half_email)
         end
