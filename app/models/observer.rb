@@ -29,6 +29,9 @@ class Observer < ApplicationRecord
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
 
+  normalizes :name, :address, :information_name, :data_name, :information_phone, :data_phone, with: -> { _1.strip }
+  normalizes :information_email, :data_email, with: -> { _1.strip.downcase }
+
   has_many :countries_observers
   has_many :countries, through: :countries_observers
 
