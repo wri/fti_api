@@ -8,7 +8,8 @@ namespace :deploy do
       "$HOME/otp-observations-tool/script/deploy"
     end
     begin
-      stdout, stderr, status = Open3.capture3(command)
+      unset_app_env = Dotenv.parse.transform_values { nil } # Unset all the env variables to avoid conflicts
+      stdout, stderr, status = Open3.capture3(unset_app_env, command)
       raise stderr unless status.success?
     rescue => e
       Sentry.capture_exception e
@@ -31,7 +32,8 @@ namespace :deploy do
       "$HOME/otp-portal/script/deploy"
     end
     begin
-      stdout, stderr, status = Open3.capture3(command)
+      unset_app_env = Dotenv.parse.transform_values { nil } # Unset all the env variables to avoid conflicts
+      stdout, stderr, status = Open3.capture3(unset_app_env, command)
       raise stderr unless status.success?
     rescue => e
       Sentry.capture_exception e
