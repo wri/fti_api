@@ -47,6 +47,7 @@ gem "pg"
 gem "rails", "~> 7.1.3"
 gem "rgeo"
 gem "rgeo-geojson"
+gem "gdal"
 
 # API
 gem "jsonapi-resources", "0.9.12"

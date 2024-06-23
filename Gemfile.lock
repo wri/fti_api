@@ -313,6 +313,7 @@ GEM
       googleapis-common-protos-types (~> 1.15)
       googleauth (~> 1.11)
       grpc (~> 1.65)
+    gdal (3.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     globalize (6.3.0)
@@ -827,6 +828,7 @@ DEPENDENCIES
   email_spec
   factory_bot_rails
   faker
+  gdal
   globalize
   globalize-versioning!
   google-cloud-translate
