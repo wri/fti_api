@@ -6,7 +6,7 @@
     category subcategory government species law severity fmu operator_document
     required_operator_document required_operator_document_group)
     @categories.each do |p|
-      @permissions[p] = @up.permissions[p]['read'].nil? ? true : false
+      @permissions[p] = @up.permissions[p]['manage'].nil? ? false : true
     end
   %>
 

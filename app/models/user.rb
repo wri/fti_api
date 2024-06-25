@@ -35,8 +35,6 @@ class User < ApplicationRecord
   devise :database_authenticatable,
     :recoverable, :rememberable, :trackable, :validatable
 
-  # Include default devise modules.
-  TEMP_EMAIL_REGEX = /\Achange@tmp/
   PERMISSIONS = %w[operator ngo ngo_manager government]
 
   normalizes :name, with: -> { _1.strip }
@@ -62,7 +60,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_permission
 
   validates :email, uniqueness: true
-  validates :email, format: {without: TEMP_EMAIL_REGEX, on: :update}
   validates :name, presence: true
   validates :locale, inclusion: {in: I18n.available_locales.map(&:to_s), allow_blank: true}
   validates :password, confirmation: true,

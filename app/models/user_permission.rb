@@ -18,14 +18,14 @@ class UserPermission < ApplicationRecord
 
   belongs_to :user
 
-  before_create :change_permissions
-  before_update :change_permissions, if: :user_role_changed?
+  def permissions
+    hash = JSON.parse(role_permissions.to_json)
+    permissions_overwrite = read_attribute(:permissions)
 
-  def change_permissions
-    self.permissions = role_permissions
+    return hash if permissions_overwrite.blank?
+
+    hash.merge(permissions_overwrite) { |_key, oldval, newval| newval } # keep only top level overwrite
   end
-
-  private
 
   def role_permissions
     case user_role

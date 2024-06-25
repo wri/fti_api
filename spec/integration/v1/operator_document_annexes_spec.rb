@@ -10,11 +10,7 @@ module V1
       create(:operator_document_annex, user: operator_user, operator_document: operator_document)
     }
 
-    before {
-      operator_user.update!(operator: operator_document.operator)
-      operator_user.user_permission.change_permissions # to make sure permissions are ok after changing operator
-      operator_user.user_permission.save!
-    }
+    before { operator_user.update!(operator: operator_document.operator) }
 
     it_behaves_like "jsonapi-resources", OperatorDocumentAnnex, {
       show: {},
