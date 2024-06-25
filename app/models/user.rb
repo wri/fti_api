@@ -39,6 +39,8 @@ class User < ApplicationRecord
   TEMP_EMAIL_REGEX = /\Achange@tmp/
   PERMISSIONS = %w[operator ngo ngo_manager government]
 
+  normalizes :name, with: -> { _1.strip }
+
   enum permissions_request: {operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7}
 
   belongs_to :country, inverse_of: :users, optional: true
