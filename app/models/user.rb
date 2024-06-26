@@ -52,6 +52,8 @@ class User < ApplicationRecord
   has_many :modified_observations, inverse_of: :modified_user, class_name: "Observation", dependent: :restrict_with_error
   has_many :observation_reports, inverse_of: :user, dependent: :restrict_with_error
   has_many :operator_document_annexes, inverse_of: :user, dependent: :restrict_with_error
+  has_many :qc1_observers, inverse_of: :responsible_qc1, class_name: "Observer", dependent: :nullify
+  has_many :qc2_observers, inverse_of: :responsible_qc2, class_name: "Observer", dependent: :nullify
 
   has_and_belongs_to_many :managed_observers, join_table: "observer_managers", class_name: "Observer", dependent: :destroy
   has_and_belongs_to_many :responsible_for_countries, join_table: "country_responsible_admins", class_name: "Country", dependent: :destroy
@@ -81,7 +83,7 @@ class User < ApplicationRecord
 
   scope :recent, -> { order("users.updated_at DESC") }
   scope :inactive, -> { where(is_active: false) }
-  scope :with_user_role, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
+  scope :with_roles, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
   def self.ransackable_attributes(auth_object = nil)
     %w[name first_name last_name email id created_at]

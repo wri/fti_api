@@ -639,7 +639,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
     t.boolean "public_info", default: false, null: false
     t.integer "responsible_admin_id"
     t.string "name", null: false
+    t.bigint "responsible_qc1_id"
+    t.bigint "responsible_qc2_id"
     t.index ["is_active"], name: "index_observers_on_is_active"
+    t.index ["responsible_qc1_id"], name: "index_observers_on_responsible_qc1_id"
+    t.index ["responsible_qc2_id"], name: "index_observers_on_responsible_qc2_id"
   end
 
   create_table "operator_document_annexes", id: :serial, force: :cascade do |t|
@@ -1180,6 +1184,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
   add_foreign_key "observer_managers", "observers", on_delete: :cascade
   add_foreign_key "observer_managers", "users", on_delete: :cascade
   add_foreign_key "observers", "users", column: "responsible_admin_id", on_delete: :nullify
+  add_foreign_key "observers", "users", column: "responsible_qc1_id", on_delete: :nullify
+  add_foreign_key "observers", "users", column: "responsible_qc2_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
   add_foreign_key "operator_document_histories", "required_operator_documents", on_delete: :cascade

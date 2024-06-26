@@ -45,6 +45,8 @@ class Observer < ApplicationRecord
   has_and_belongs_to_many :managers, join_table: "observer_managers", class_name: "User", dependent: :destroy
 
   belongs_to :responsible_admin, class_name: "User", optional: true
+  belongs_to :responsible_qc1, class_name: "User", optional: true
+  belongs_to :responsible_qc2, class_name: "User", optional: true
 
   EMAIL_VALIDATOR = /\A([\w+-].?)+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
 

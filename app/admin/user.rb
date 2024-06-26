@@ -7,6 +7,7 @@ ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :country_id,
     :name, :first_name, :last_name, :is_active, :organization_account,
     :observer_id, :operator_id, :holding_id, :locale,
+    qc1_observer_ids: [], qc2_observer_ids: [],
     managed_observer_ids: [],
     responsible_for_country_ids: [],
     user_permission_attributes: [:user_role]
@@ -102,6 +103,8 @@ ActiveAdmin.register User do
       row :responsible_for_countries if resource.admin?
       row :observer if resource.ngo? || resource.ngo_manager?
       row :managed_observers if resource.ngo? || resource.ngo_manager? || resource.admin?
+      row :qc1_observers if resource.ngo_manager?
+      row :qc2_observers if resource.admin? || resource.ngo_manager?
       row :is_active
       row :locale
       row :country
@@ -121,6 +124,8 @@ ActiveAdmin.register User do
       end
       f.input :observer
       f.input :managed_observers
+      f.input :qc1_observers
+      f.input :qc2_observers
       f.input :operator
       f.input :holding
       f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)
