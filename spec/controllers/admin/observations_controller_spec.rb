@@ -43,7 +43,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
   describe "member actions" do
     describe "PUT ready_for_publication" do
-      let(:observation) { create(:observation, force_status: "QC in progress") }
+      let(:observation) { create(:observation, force_status: "QC2 in progress") }
 
       before { put :ready_for_publication, params: {id: observation.id} }
 
@@ -54,18 +54,18 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe "PUT start_qc" do
-      let(:observation) { create(:observation, force_status: "Ready for QC") }
+      let(:observation) { create(:observation, force_status: "Ready for QC2") }
 
       before { put :start_qc, params: {id: observation.id} }
 
       it "is successful" do
         expect(flash[:notice]).to match("Observation moved to QC in Progress")
-        expect(observation.reload.validation_status).to eq("QC in progress")
+        expect(observation.reload.validation_status).to eq("QC2 in progress")
       end
     end
 
     describe "GET perform_qc" do
-      let(:observation) { create(:observation, force_status: "QC in progress") }
+      let(:observation) { create(:observation, force_status: "QC2 in progress") }
 
       before { get :perform_qc, params: {id: observation.id} }
 
@@ -73,18 +73,18 @@ RSpec.describe Admin::ObservationsController, type: :controller do
         expect(response).to be_successful
       end
 
-      context "when not in QC in progress" do
-        let(:observation) { create(:observation, force_status: "Ready for QC") }
+      context "when not in QC2 in progress" do
+        let(:observation) { create(:observation, force_status: "Ready for QC2") }
 
         it "redirects to index" do
           expect(response).to redirect_to(admin_observations_path)
-          expect(flash[:alert]).to match("Observation is not in QC in progress")
+          expect(flash[:alert]).to match("Observation is not in QC2 in progress")
         end
       end
     end
 
     describe "PUT perform_qc" do
-      let(:observation) { create(:observation, force_status: "QC in progress") }
+      let(:observation) { create(:observation, force_status: "QC2 in progress") }
 
       context "when needs revision" do
         let(:observation_params) { {validation_status: "Needs revision", admin_comment: "Comment"} }
@@ -104,7 +104,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
           it "does not change validation status" do
             expect(response).to be_successful
-            expect(observation.reload.validation_status).to eq("QC in progress")
+            expect(observation.reload.validation_status).to eq("QC2 in progress")
           end
         end
       end
@@ -140,7 +140,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
   describe "batch actions" do
     describe "move_to_qc_in_progress" do
-      let(:observation1) { create(:observation, :with_translations, validation_status: "Ready for QC") }
+      let(:observation1) { create(:observation, :with_translations, validation_status: "Ready for QC2") }
       let(:observation2) { create(:gov_observation, :with_translations, validation_status: "Created") }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
@@ -153,14 +153,14 @@ RSpec.describe Admin::ObservationsController, type: :controller do
       end
 
       it "is successful" do
-        expect(observation1.reload.validation_status).to eq("QC in progress")
-        expect(observation2.reload.validation_status).to eq("Created") # only can change if it was Ready for QC
+        expect(observation1.reload.validation_status).to eq("QC2 in progress")
+        expect(observation2.reload.validation_status).to eq("Created") # only can change if it was Ready for QC2
         expect(flash[:notice]).to match("QC started")
       end
     end
 
     describe "move_to_ready_for_publication" do
-      let(:observation1) { create(:observation, :with_translations, validation_status: "QC in progress") }
+      let(:observation1) { create(:observation, :with_translations, validation_status: "QC2 in progress") }
       let(:observation2) { create(:gov_observation, :with_translations, validation_status: "Created") }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
@@ -174,13 +174,13 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
       it "is successful" do
         expect(observation1.reload.validation_status).to eq("Ready for publication")
-        expect(observation2.reload.validation_status).to eq("Created") # only can change if it was QC in progress
+        expect(observation2.reload.validation_status).to eq("Created") # only can change if it was QC2 in progress
         expect(flash[:notice]).to match("Observation is ready to be published")
       end
     end
 
     describe "hide" do
-      let(:observation1) { create(:observation, :with_translations, validation_status: "QC in progress", hidden: false) }
+      let(:observation1) { create(:observation, :with_translations, validation_status: "QC2 in progress", hidden: false) }
       let(:observation2) { create(:gov_observation, :with_translations, validation_status: "Created", hidden: false) }
       let(:obs_ids) { [observation1.id, observation2.id] }
 
@@ -200,7 +200,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe "unhide" do
-      let(:observation1) { create(:observation, :with_translations, validation_status: "QC in progress", hidden: true) }
+      let(:observation1) { create(:observation, :with_translations, validation_status: "QC2 in progress", hidden: true) }
       let(:observation2) { create(:gov_observation, :with_translations, validation_status: "Created", hidden: true) }
       let(:obs_ids) { [observation1.id, observation2.id] }
 

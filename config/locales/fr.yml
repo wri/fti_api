@@ -846,8 +846,8 @@ fr:
         subcategory: :activerecord.models.subcategory  #g
         validation_status: Statut de validation  #g
         created: :shared.created
-        ready_for_qc: :activerecord.enums.observation.statuses.Ready for QC
-        qc_in_progress: :activerecord.enums.observation.statuses.QC in progress
+        ready_for_qc: :activerecord.enums.observation.statuses.Ready for QC2
+        qc_in_progress: :activerecord.enums.observation.statuses.QC2 in progress
         approved: :activerecord.enums.observation.statuses.Approved
         rejected: :activerecord.enums.observation.statuses.Rejected
         needs_revision: :activerecord.enums.observation.statuses.Needs revision
@@ -1372,8 +1372,10 @@ fr:
       observation:
         statuses:
           Created: "Crée"
-          Ready for QC: "Prêt pour le contrôle de qualité"
-          QC in progress: "Contrôle de qualité en cours"
+          Ready for QC1: "Ready for QC1"
+          QC1 in progress: "QC1 in progress"
+          Ready for QC2: "Prêt pour le contrôle de qualité"
+          QC2 in progress: "Contrôle de qualité en cours"
           Approved: "Approuvé"
           Rejected: "Rejeté"
           Needs revision: "Necesite une revision"

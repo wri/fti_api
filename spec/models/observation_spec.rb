@@ -131,18 +131,41 @@ RSpec.describe Observation, type: :model do
           end
 
           context "when moving from `Created` to `Ready for QA`" do
-            let(:new_status) { "Ready for QC" }
+            let(:new_status) { "Ready for QC2" }
 
             it { is_expected.to be_valid }
           end
 
-          context "when going to QC in progress" do
-            let(:new_status) { "QC in progress" }
+          context "when going to QC2 in progress" do
+            let(:new_status) { "QC2 in progress" }
 
             it { is_expected.to_not be_valid }
           end
         end
       end
+
+      # describe "for a reviewer" do
+      #   let(:user_type) { :reviewer }
+
+      #   before do
+      #     observation.save
+      #     observation.validation_status = new_status
+      #   end
+
+      #   context "when moving from `Ready for QC1` to `QC1 in progress`" do
+      #     let(:status) { "Ready for QC1" }
+      #     let(:new_status) { "QC1 in progress" }
+
+      #     it { is_expected.to be_valid }
+      #   end
+
+      #   context "when moving from `QC1 in progress` to `Published (modified)`" do
+      #     let(:status) { "Created" }
+      #     let(:new_status) { "Published (modified)" }
+
+      #     it { is_expected.to_not be_valid }
+      #   end
+      # end
 
       describe "for an admin" do
         let(:user_type) { :admin }
@@ -162,16 +185,16 @@ RSpec.describe Observation, type: :model do
           observation.validation_status = new_status
         end
 
-        context "when moving from `Ready for QC` to `QC in progress`" do
-          let(:status) { "Ready for QC" }
-          let(:new_status) { "QC in progress" }
+        context "when moving from `Ready for QC2` to `QC2 in progress`" do
+          let(:status) { "Ready for QC2" }
+          let(:new_status) { "QC2 in progress" }
 
           it { is_expected.to be_valid }
         end
 
-        context "when moving from `Created` to `Ready for QC`" do
+        context "when moving from `Created` to `Ready for QC2`" do
           let(:status) { "Created" }
-          let(:new_status) { "Ready for QC" }
+          let(:new_status) { "Ready for QC2" }
 
           it { is_expected.to_not be_valid }
         end
@@ -188,9 +211,9 @@ RSpec.describe Observation, type: :model do
             it { is_expected.to be_persisted }
           end
 
-          context "when moving to 'Ready for QC'" do
+          context "when moving to 'Ready for QC2'" do
             it "should not be valid" do
-              observation.validation_status = "Ready for QC"
+              observation.validation_status = "Ready for QC2"
               observation.operator = Operator.find_by(slug: "unknown")
               expect(observation.save).to be false
               expect(observation.errors[:operator]).to eql ["can't be blank or unknown"]
@@ -261,8 +284,8 @@ RSpec.describe Observation, type: :model do
       context "when was created before" do
         before { observation.save! }
 
-        context "when validation status is changed to `Ready for QC`" do
-          subject { observation.update!(validation_status: "Ready for QC") }
+        context "when validation status is changed to `Ready for QC2`" do
+          subject { observation.update!(validation_status: "Ready for QC2") }
 
           it "sends an email to observer users" do
             expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_submitted_for_qc).exactly(3).times

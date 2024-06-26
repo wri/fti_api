@@ -28,7 +28,8 @@ class ObservationHistory < ApplicationRecord
   acts_as_paranoid
 
   enum observation_type: {"operator" => 0, "government" => 1}
-  enum validation_status: {"Created" => 0, "Ready for QC" => 1, "QC in progress" => 2, "Approved" => 3,
+  enum validation_status: {"Created" => 0, "Ready for QC1" => 10, "QC1 in progress" => 11,
+                           "Ready for QC2" => 1, "QC2 in progress" => 2, "Approved" => 3,
                            "Rejected" => 4, "Needs revision" => 5, "Ready for publication" => 6,
                            "Published (no comments)" => 7, "Published (not modified)" => 8,
                            "Published (modified)" => 9}

@@ -57,12 +57,23 @@ class Observation < ApplicationRecord
 
   enum evidence_type: {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
   enum observation_type: {"operator" => 0, "government" => 1}
-  enum validation_status: {"Created" => 0, "Ready for QC" => 1, "QC in progress" => 2, "Approved" => 3,
-                           "Rejected" => 4, "Needs revision" => 5, "Ready for publication" => 6,
-                           "Published (no comments)" => 7, "Published (not modified)" => 8,
-                           "Published (modified)" => 9}
-  enum location_accuracy: {"Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
-                           "Accurate GPS coordinates" => 2}
+  enum validation_status: {
+    "Created" => 0,
+    "Ready for QC1" => 10,
+    "QC1 in progress" => 11,
+    "Ready for QC2" => 1,
+    "QC2 in progress" => 2,
+    "Approved" => 3,
+    "Rejected" => 4,
+    "Needs revision" => 5,
+    "Ready for publication" => 6,
+    "Published (no comments)" => 7,
+    "Published (not modified)" => 8,
+    "Published (modified)" => 9
+  }
+  enum location_accuracy: {
+    "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2
+  }
 
   validate_enum_attributes :evidence_type, :observation_type, :location_accuracy
 
@@ -70,16 +81,18 @@ class Observation < ApplicationRecord
 
   STATUS_TRANSITIONS = {
     monitor: {
-      "Created" => ["Ready for QC"],
-      "Needs revision" => ["Ready for QC", "Published (not modified)", "Published (modified)"],
+      "Created" => ["Ready for QC2", "Ready for QC1"],
+      "Ready for QC1" => ["QC1 in progress"],
+      "QC1 in progress" => ["Needs revision", "Ready for QC2"],
+      "Needs revision" => ["Ready for QC2", "Ready for QC1", "Published (not modified)", "Published (modified)"],
       "Ready for publication" => ["Published (no comments)"],
-      "Published (modified)" => ["Ready for QC"],
-      "Published (not modified)" => ["Ready for QC"],
-      "Published (no comments)" => ["Ready for QC"]
+      "Published (modified)" => ["Ready for QC2"],
+      "Published (not modified)" => ["Ready for QC2"],
+      "Published (no comments)" => ["Ready for QC2"]
     },
     admin: {
-      "Ready for QC" => ["QC in progress"],
-      "QC in progress" => ["Needs revision", "Ready for publication"]
+      "Ready for QC2" => ["QC2 in progress"],
+      "QC2 in progress" => ["Needs revision", "Ready for publication"]
     }
   }.freeze
 
@@ -181,8 +194,8 @@ class Observation < ApplicationRecord
   scope :by_category, ->(category_id) { joins(:subcategory).where(subcategories: {category_id: category_id}) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: {level: level}) }
   scope :by_government, ->(government_id) { joins(:governments).where(governments: {id: government_id}) }
-  scope :pending, -> { where(validation_status: ["Created", "QC in progress"]) }
-  scope :created, -> { where(validation_status: ["Created", "Ready for QC"]) }
+  scope :pending, -> { where(validation_status: ["Created", "QC2 in progress"]) }
+  scope :created, -> { where(validation_status: ["Created", "Ready for QC2"]) }
   scope :published, -> { where(validation_status: PUBLISHED_STATES) }
   scope :hidden, -> { where(hidden: true) }
   scope :visible, -> { where(hidden: [false, nil]) }
@@ -342,9 +355,10 @@ class Observation < ApplicationRecord
   end
 
   def notify_about_changes
-    notify_admins "admin_observation_ready_for_qc" if validation_status == "Ready for QC"
+    # notify_qc1_reviewers "admin_observation_ready_for_pre_qc" if validation_status == "Ready for QC1"
+    notify_admins "admin_observation_ready_for_qc" if validation_status == "Ready for QC2"
     notify_admins "admin_observation_published_not_modified" if validation_status == "Published (not modified)"
-    notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC"
+    notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC2"
     notify_observers "observation_needs_revision" if validation_status == "Needs revision"
     notify_observers "observation_ready_for_publication" if validation_status == "Ready for publication"
     notify_observers "observation_published" if published?
@@ -369,6 +383,13 @@ class Observation < ApplicationRecord
       User.where(id: observers.distinct.pluck(:responsible_admin_id)),
       mail_template
     )
+  end
+
+  def notify_qc1_reviewers(mail_template)
+    # notify_users(
+    #   User.where(id: observers.distinct.pluck(:responsible_admin_id)),
+    #   mail_template
+    # )
   end
 
   def notify_users(users, mail_template)
