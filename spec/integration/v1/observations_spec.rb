@@ -187,12 +187,12 @@ module V1
 
       describe "For all users" do
         describe "Modify status" do
-          it "Status goes from Created to Ready for QC" do
+          it "Status goes from Created to Ready for QC2" do
             patch("/observations/#{observation.id}?app=observations-tool",
-              params: jsonapi_params("observations", observation.id, {"validation-status": "Ready for QC"}),
+              params: jsonapi_params("observations", observation.id, {"validation-status": "Ready for QC2"}),
               headers: admin_headers)
             expect(status).to eq(200)
-            expect(parsed_body[:data][:attributes][:"validation-status"]).to eq("Ready for QC")
+            expect(parsed_body[:data][:attributes][:"validation-status"]).to eq("Ready for QC2")
           end
 
           it "Status cannot go to Needs revision" do

@@ -75,7 +75,7 @@ ActiveAdmin.register Observation do
   member_action :perform_qc, method: [:put, :get] do
     @page_title = I18n.t("active_admin.shared.perform_qc")
     if request.get?
-      if resource.validation_status == "QC in progress"
+      if resource.validation_status == "QC2 in progress"
         render "perform_qc"
       else
         redirect_to collection_path, alert: I18n.t("active_admin.observations_page.not_in_qc_in_progress")
@@ -95,7 +95,7 @@ ActiveAdmin.register Observation do
 
   member_action :start_qc, method: [:put, :get] do
     resource.user_type = :admin
-    resource.validation_status = Observation.validation_statuses["QC in progress"]
+    resource.validation_status = Observation.validation_statuses["QC2 in progress"]
     if resource.save
       redirect_to perform_qc_admin_observation_path(resource), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
     else
@@ -118,7 +118,7 @@ ActiveAdmin.register Observation do
   end
 
   action_item :ready_for_publication, only: :show do
-    if resource.validation_status == "QC in progress"
+    if resource.validation_status == "QC2 in progress"
       link_to I18n.t("active_admin.observations_page.ready_for_publication"), ready_for_publication_admin_observation_path(observation),
         method: :put, data: {confirm: I18n.t("active_admin.observations_page.confirm_ready_publication")},
         notice: I18n.t("active_admin.observations_page.approved")
@@ -126,12 +126,12 @@ ActiveAdmin.register Observation do
   end
 
   action_item :needs_revision, only: :show do
-    if resource.validation_status == "QC in progress"
+    if resource.validation_status == "QC2 in progress"
       link_to I18n.t("active_admin.observations_page.needs_revision"), perform_qc_admin_observation_path(observation)
     end
   end
 
-  action_item :start_qc, only: :show, if: proc { resource.validation_status == "Ready for QC" } do
+  action_item :start_qc, only: :show, if: proc { resource.validation_status == "Ready for QC2" } do
     link_to I18n.t("active_admin.shared.start_qc"), start_qc_admin_observation_path(observation), method: :put
   end
 
@@ -139,16 +139,16 @@ ActiveAdmin.register Observation do
   if ENV.fetch("BULK_EDIT_OBSERVATIONS", "TRUE").upcase == "TRUE"
     batch_action :move_to_qc_in_progress, confirm: I18n.t("active_admin.observations_page.bulk_confirm_qc") do |ids|
       batch_action_collection.find(ids).each do |observation|
-        next unless observation.validation_status == "Ready for QC"
+        next unless observation.validation_status == "Ready for QC2"
 
-        observation.update(validation_status: "QC in progress")
+        observation.update(validation_status: "QC2 in progress")
       end
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.qc_started")
     end
 
     batch_action :move_to_ready_for_publication, confirm: I18n.t("active_admin.observations_page.bulk_ready_for_publication") do |ids|
       batch_action_collection.find(ids).each do |observation|
-        next unless observation.validation_status == "QC in progress"
+        next unless observation.validation_status == "QC2 in progress"
 
         observation.update(validation_status: "Ready for publication")
       end
@@ -419,9 +419,9 @@ ActiveAdmin.register Observation do
     column :updated_at
     column :deleted_at
     column(I18n.t("active_admin.shared.actions")) do |observation|
-      a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC"
-      a I18n.t("active_admin.observations_page.needs_revision"), href: perform_qc_admin_observation_path(observation) if observation.validation_status == "QC in progress"
-      a I18n.t("active_admin.observations_page.ready_to_publish"), href: ready_for_publication_admin_observation_path(observation), "data-method": :put if observation.validation_status == "QC in progress"
+      a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC2"
+      a I18n.t("active_admin.observations_page.needs_revision"), href: perform_qc_admin_observation_path(observation) if observation.validation_status == "QC2 in progress"
+      a I18n.t("active_admin.observations_page.ready_to_publish"), href: ready_for_publication_admin_observation_path(observation), "data-method": :put if observation.validation_status == "QC2 in progress"
     end
     actions
 

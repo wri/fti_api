@@ -29,10 +29,9 @@ module V1
     has_one :fmu
     has_one :observation_report
 
-    before_create :set_user
     before_create :set_locale
-    before_save :set_modified
-    before_save :validate_status
+    before_save :set_user
+    before_save :ensure_correct_validation_status
 
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
@@ -117,25 +116,21 @@ module V1
       super - [:hidden, :publication_date]
     end
 
-    def set_user
-      @model.user_id = context[:current_user].id
-    end
-
     def set_locale
       @model.locale = context[:current_user].locale if @model.locale.blank?
     end
 
-    # Saves the last user who modified the observation and its locale
-    def set_modified
+    def set_user
       user = context[:current_user]
+      @model.user_type = :monitor
+      @model.user_id = user.id if context[:action] == "create"
       @model.modified_user_id = user.id
       @model.force_translations_from = @model.locale || user.locale
     end
 
     # Makes sure the validation status can be an acceptable one
-    def validate_status
-      @model.validation_status = "Created" unless @model.persisted? || @model.validation_status == "Ready for QC"
-      @model.user_type = :monitor
+    def ensure_correct_validation_status
+      @model.validation_status = "Created" unless @model.persisted? || @model.validation_status == "Ready for QC2"
     end
 
     # To allow the filtering of results according to the app and user
