@@ -10,7 +10,7 @@ module V1
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
       :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
-      :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment, :locale
+      :is_physical_place, :complete, :hidden, :qc1_comment, :qc2_comment, :monitor_comment, :locale
 
     has_many :species
     has_many :observation_documents
@@ -31,7 +31,6 @@ module V1
 
     before_create :set_locale
     before_save :set_user
-    before_save :ensure_correct_validation_status
 
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
@@ -72,7 +71,7 @@ module V1
     def fetchable_fields
       return super if observations_tool_user?
 
-      super - [:admin_comment, :monitor_comment, :created_at, :updated_at, :user, :modified_user]
+      super - [:qc1_comment, :qc2_comment, :monitor_comment, :created_at, :updated_at, :user, :modified_user]
     end
 
     def self.sortable_fields(context)
@@ -126,11 +125,6 @@ module V1
       @model.user_id = user.id if context[:action] == "create"
       @model.modified_user_id = user.id
       @model.force_translations_from = @model.locale || user.locale
-    end
-
-    # Makes sure the validation status can be an acceptable one
-    def ensure_correct_validation_status
-      @model.validation_status = "Created" unless @model.persisted? || @model.validation_status == "Ready for QC2"
     end
 
     # To allow the filtering of results according to the app and user

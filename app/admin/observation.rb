@@ -55,14 +55,14 @@ ActiveAdmin.register Observation do
   controller do
     def permitted_params
       if current_user.user_permission.user_role == "bo_manager"
-        params.permit(observation: [:validation_status, :admin_comment])
+        params.permit(observation: [:validation_status, :qc2_comment])
       else
         params.permit(
           observation: [
             :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
             :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
-            :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :admin_comment,
-            :monitor_comment, :actions_taken, :is_physical_place, :force_translations_from,
+            :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden,
+            :actions_taken, :is_physical_place, :force_translations_from,
             relevant_operator_ids: [], government_ids: [],
             observation_document_ids: [],
             translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
@@ -467,7 +467,7 @@ ActiveAdmin.register Observation do
             ["is_physical_place", I18n.t("activerecord.attributes.observation.is_physical_place"), :checked],
             ["litigation_status", I18n.t("activerecord.attributes.observation/translation.litigation_status"), :checked],
             ["report", I18n.t("document_types.Report"), :checked],
-            ["admin_comment", I18n.t("activerecord.attributes.observation.admin_comment"), :checked],
+            ["qc2_comment", I18n.t("activerecord.attributes.observation.qc2_comment"), :checked],
             ["monitor_comment", I18n.t("activerecord.attributes.observation.monitor_comment"), :checked],
             ["user", I18n.t("activerecord.attributes.observation.user"), :checked],
             ["modified_user", Observation.human_attribute_name(:modified_user), :checked],
@@ -583,8 +583,6 @@ ActiveAdmin.register Observation do
       f.input :lat, **visibility
       f.input :lng, **visibility
       f.input :actions_taken, **visibility
-      f.input :admin_comment
-      f.input :monitor_comment, **visibility
       f.input :observation_report, as: :select, **visibility
       f.input :evidence_type, as: :select, **visibility
       f.input :evidence_on_report, **visibility
