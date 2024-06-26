@@ -78,7 +78,7 @@ class SeedsTasks
         generate_for_model "CountriesObserver", entries: countries_observers, exclude: %w[created_at updated_at]
         generate_for_model "ObservationReport", entries: reports, exclude: %w[created_at updated_at user_id]
         generate_for_model "ObservationReportObserver", entries: report_observers, exclude: %w[created_at updated_at]
-        generate_for_model "Observation", entries: observations, locale: %w[en], exclude: %w[created_at updated_at user_id modified_user_id], anonymize: %w[admin_comment monitor_comment]
+        generate_for_model "Observation", entries: observations, locale: %w[en], exclude: %w[created_at updated_at user_id modified_user_id], anonymize: %w[qc1_comment qc2_comment monitor_comment]
         generate_for_model "ObservationDocument", entries: evidences, exclude: %w[created_at updated_at user_id]
         generate_for_model "ObserverObservation", entries: observer_observations, exclude: %w[created_at updated_at]
         generate_for_model "GovernmentsObservation", entries: governments_observations, exclude: %w[created_at updated_at]

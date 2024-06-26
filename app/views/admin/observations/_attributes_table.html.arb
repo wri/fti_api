@@ -33,7 +33,8 @@ panel I18n.t("active_admin.observations_page.details") do
     row :actions_taken
     row :concern_opinion
     row :observation_report
-    row :admin_comment
+    row :qc1_comment
+    row :qc2_comment
     row :monitor_comment
     row :user
     row :modified_user

@@ -87,7 +87,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
       let(:observation) { create(:observation, force_status: "QC2 in progress") }
 
       context "when needs revision" do
-        let(:observation_params) { {validation_status: "Needs revision", admin_comment: "Comment"} }
+        let(:observation_params) { {validation_status: "Needs revision", qc2_comment: "Comment"} }
 
         before { put :perform_qc, params: {id: observation.id, observation: observation_params} }
 
@@ -100,7 +100,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
         end
 
         context "when missing admin comments" do
-          let(:observation_params) { {validation_status: "Needs revision", admin_comment: ""} }
+          let(:observation_params) { {validation_status: "Needs revision", qc2_comment: ""} }
 
           it "does not change validation status" do
             expect(response).to be_successful

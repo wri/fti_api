@@ -577,10 +577,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
     t.integer "location_accuracy"
     t.string "evidence_on_report"
     t.boolean "hidden", default: false, null: false
-    t.text "admin_comment"
+    t.text "qc2_comment"
     t.text "monitor_comment"
     t.datetime "deleted_at", precision: nil
     t.string "locale"
+    t.text "qc1_comment"
     t.index ["country_id"], name: "index_observations_on_country_id"
     t.index ["created_at"], name: "index_observations_on_created_at"
     t.index ["deleted_at"], name: "index_observations_on_deleted_at"

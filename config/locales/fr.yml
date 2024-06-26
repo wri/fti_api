@@ -734,7 +734,8 @@ fr:
 
       observation:
         actions_taken: Les mesures prises  #g
-        admin_comment: Commentaire de l'administrateur  #g
+        qc1_comment: Commentaire QC1  #g
+        qc2_comment: Commentaire QC2  #g
         country: :activerecord.models.country  #g
         deleted_at: Supprimé le #g
         evidence_on_report: Preuve sur le rapport  #g

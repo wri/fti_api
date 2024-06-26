@@ -8,7 +8,7 @@
 <%= t("mailers.report_name") %>: <%= @observation.observation_report&.title %>
 
 <%= t(".paragraph2") %>
-<%= @observation.admin_comment %>
+<%= @observation.qc2_comment %>
 
 <%= t(".paragraph3", link: "#{ENV["FRONTEND_URL"]}/observations-tool/private/observations/edit/#{@observation.id}") %>
 

@@ -87,10 +87,10 @@ RSpec.describe Observation, type: :model do
       expect(subject.errors[:observers]).to include("can't be blank")
     end
 
-    it "is invalid without admin comment if status is needs revision" do
+    it "is invalid without qc2 comment if status is needs revision" do
       subject.validation_status = "Needs revision"
       expect(subject.valid?).to eq(false)
-      expect(subject.errors[:admin_comment]).to include("can't be blank")
+      expect(subject.errors[:qc2_comment]).to include("can't be blank")
     end
 
     it "is invalid with governments if is of operator type" do
@@ -302,7 +302,7 @@ RSpec.describe Observation, type: :model do
         end
 
         context "when validation status is changed to `Needs revision`" do
-          subject { observation.update!(validation_status: "Needs revision", admin_comment: "Some comment") }
+          subject { observation.update!(validation_status: "Needs revision", qc2_comment: "Some comment") }
 
           it "sends an email to observer users" do
             expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
@@ -377,7 +377,7 @@ RSpec.describe Observation, type: :model do
 
       context "when validation_status is not Approved" do
         it "set is_active to false" do
-          observation = create(:observation, validation_status: "Needs revision", admin_comment: "Comment")
+          observation = create(:observation, validation_status: "Needs revision", qc2_comment: "Comment")
 
           expect(observation.is_active).to eql false
         end

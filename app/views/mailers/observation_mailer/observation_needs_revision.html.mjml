@@ -18,7 +18,7 @@
 </p>
 
 <p style="background-color: #f7f6ed; padding: 20px">
-  <em><%= @observation.admin_comment %></em>
+  <em><%= @observation.qc2_comment %></em>
 </p>
 
 <p>

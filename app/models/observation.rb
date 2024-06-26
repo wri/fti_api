@@ -154,7 +154,7 @@ class Observation < ApplicationRecord
   validates :validation_status, presence: true
   validates :observation_type, presence: true
 
-  validates :admin_comment, presence: true, if: -> { validation_status == "Needs revision" }
+  validates :qc2_comment, presence: true, if: -> { validation_status == "Needs revision" }
 
   before_validation :assign_observers_from_report, if: :observation_report_changed?
   before_validation :nullify_evidence_on_report, if: -> { evidence_type != "Evidence presented in the report" }
@@ -355,9 +355,9 @@ class Observation < ApplicationRecord
   end
 
   def notify_about_changes
-    # notify_qc1_reviewers "admin_observation_ready_for_pre_qc" if validation_status == "Ready for QC1"
-    notify_admins "admin_observation_ready_for_qc" if validation_status == "Ready for QC2"
-    notify_admins "admin_observation_published_not_modified" if validation_status == "Published (not modified)"
+    notify_qc1_reviewers "admin_observation_ready_for_qc" if validation_status == "Ready for QC1"
+    notify_qc2_reviewers "admin_observation_ready_for_qc" if validation_status == "Ready for QC2"
+    notify_qc2_reviewers "admin_observation_published_not_modified" if validation_status == "Published (not modified)"
     notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC2"
     notify_observers "observation_needs_revision" if validation_status == "Needs revision"
     notify_observers "observation_ready_for_publication" if validation_status == "Ready for publication"
@@ -378,18 +378,18 @@ class Observation < ApplicationRecord
     )
   end
 
-  def notify_admins(mail_template)
+  def notify_qc1_reviewers
     notify_users(
-      User.where(id: observers.distinct.pluck(:responsible_admin_id)),
+      User.where(id: observers.distinct.pluck(:responsible_qc1_id)),
       mail_template
     )
   end
 
-  def notify_qc1_reviewers(mail_template)
-    # notify_users(
-    #   User.where(id: observers.distinct.pluck(:responsible_admin_id)),
-    #   mail_template
-    # )
+  def notify_qc2_reviewers
+    notify_users(
+      User.where(id: observers.distinct.pluck(:responsible_qc2_id)),
+      mail_template
+    )
   end
 
   def notify_users(users, mail_template)
