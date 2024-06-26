@@ -12,6 +12,8 @@ function updateFields() {
   const reponsibleForCountriesInput = $('#user_responsible_for_country_ids');
   const operatorInput = $('#user_operator_id');
   const holdingInput = $('#user_holding_id');
+  const qc1ObserversInput = $('#user_qc1_observer_ids');
+  const qc2ObserversInput = $('#user_qc2_observer_ids');
 
   const showInput = (input) => {
     input.prop('disabled', false);
@@ -27,13 +29,17 @@ function updateFields() {
   hideInput(observerInput);
   hideInput(managedObserversInput);
   hideInput(reponsibleForCountriesInput);
+  hideInput(qc1ObserversInput);
+  hideInput(qc2ObserversInput);
 
   switch (userRole) {
     case 'holding':
       showInput(holdingInput);
       break;
-    case 'ngo':
     case 'ngo_manager':
+      showInput(qc1ObserversInput);
+      showInput(qc2ObserversInput);
+    case 'ngo':
       showInput(observerInput);
       showInput(managedObserversInput);
       break;
@@ -43,6 +49,7 @@ function updateFields() {
     case 'admin':
       showInput(managedObserversInput);
       showInput(reponsibleForCountriesInput);
+      showInput(qc2ObserversInput);
       break;
   }
 }
