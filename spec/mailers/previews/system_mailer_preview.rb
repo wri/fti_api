@@ -10,7 +10,7 @@ class SystemMailerPreview < ActionMailer::Preview
   private
 
   def test_user
-    User.new(id: 1, email: "john@example.com", operator: test_operator, country: country, name: "John Tester", locale: "en", user_permission: UserPermission.new(user_role: "operator"))
+    User.new(id: 1, email: "john@example.com", operator: test_operator, country: country, first_name: "John", last_name: "Tester", locale: "en", user_permission: UserPermission.new(user_role: "operator"))
   end
 
   def test_operator

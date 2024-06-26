@@ -27,6 +27,8 @@
 #  operator_id            :integer
 #  holding_id             :integer
 #  locale                 :string
+#  first_name             :string
+#  last_name              :string
 #
 
 class User < ApplicationRecord
@@ -83,7 +85,7 @@ class User < ApplicationRecord
   scope :with_user_role, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[name email id created_at]
+    %w[name first_name last_name email id created_at]
   end
 
   def is_government(country_id)
@@ -111,6 +113,20 @@ class User < ApplicationRecord
     return holding.operators.pluck(:id) if holding_id.present?
 
     []
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def name
+    return full_name if full_name.present?
+
+    self[:name]
+  end
+
+  def name_old
+    self[:name]
   end
 
   def display_name

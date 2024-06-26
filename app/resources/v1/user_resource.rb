@@ -3,7 +3,7 @@
 module V1
   class UserResource < BaseResource
     caching
-    attributes :name, :email,
+    attributes :name, :first_name, :last_name, :email,
       :is_active, :deactivated_at, :locale,
       :permissions_request, :permissions_accepted, :password, :password_confirmation
 
@@ -21,9 +21,9 @@ module V1
 
     def fetchable_fields
       return super if owner? || admin_user?
-      return [:id, :name, :email] if password_reset_action?
+      return [:id, :name, :first_name, :last_name, :email] if password_reset_action?
 
-      [:id, :name]
+      [:id, :name, :first_name, :last_name]
     end
 
     private

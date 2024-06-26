@@ -2,13 +2,16 @@
 #
 # Table name: newsletters
 #
-#  id                :bigint           not null, primary key
-#  date              :date             not null
-#  attachment        :string           not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  title             :string           not null
-#  short_description :text             not null
+#  id                                :bigint           not null, primary key
+#  date                              :date             not null
+#  attachment                        :string           not null
+#  image                             :string
+#  created_at                        :datetime         not null
+#  updated_at                        :datetime         not null
+#  title                             :string           not null
+#  short_description                 :text             not null
+#  title_translated_from             :string
+#  short_description_translated_from :string
 #
 require "rails_helper"
 

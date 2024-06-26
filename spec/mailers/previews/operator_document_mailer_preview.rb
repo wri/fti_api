@@ -74,7 +74,7 @@ class OperatorDocumentMailerPreview < ActionMailer::Preview
   end
 
   def test_user
-    User.new(email: "john@example.com", name: "John Tester", locale: "en")
+    User.new(email: "john@example.com", first_name: "John", last_name: "Tester", locale: "en")
   end
 
   def documents
