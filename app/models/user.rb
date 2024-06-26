@@ -62,7 +62,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_permission
 
   validates :email, uniqueness: true
-  validates :name, presence: true # TODO: when remvoing name, add separate for first/last names
+  validates :name, presence: true
   validates :locale, inclusion: {in: I18n.available_locales.map(&:to_s), allow_blank: true}
   validates :password, confirmation: true,
     length: {within: 8..20},
