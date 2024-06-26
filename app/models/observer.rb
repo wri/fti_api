@@ -61,12 +61,21 @@ class Observer < ApplicationRecord
   validates :data_email, format: {with: EMAIL_VALIDATOR, if: :data_email?}
 
   before_create :set_responsible_admin
+  before_create :set_responsible_qc2
 
   scope :by_name_asc, -> { order(name: :asc) }
 
   scope :active, -> { where(is_active: true) }
   scope :inactive, -> { where(is_active: false) }
   scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observers).select("observers.id").distinct.select("observers.id")) }
+
+  def users_eligible_for_qc1
+    managers.with_roles(:ngo_manager).filter_actives
+  end
+
+  def users_eligible_for_qc2
+    users_eligible_for_qc1 + User.with_roles(:admin).filter_actives
+  end
 
   class << self
     def observer_select
@@ -92,5 +101,11 @@ class Observer < ApplicationRecord
     return if responsible_admin.present?
 
     self.responsible_admin = User.where(email: ENV["RESPONSIBLE_EMAIL"].downcase).first
+  end
+
+  def set_responsible_qc2
+    return if responsible_qc2.present?
+
+    self.responsible_qc2 = responsible_admin
   end
 end
