@@ -82,15 +82,16 @@ class Observation < ApplicationRecord
   STATUS_TRANSITIONS = {
     monitor: {
       "Created" => ["Ready for QC2", "Ready for QC1"],
-      "Ready for QC1" => ["QC1 in progress"],
-      "QC1 in progress" => ["Needs revision", "Ready for QC2"],
-      "Needs revision" => ["Ready for QC2", "Ready for QC1", "Published (not modified)", "Published (modified)"],
+      "Rejected" => ["Ready for QC1"],
+      "Needs revision" => ["Ready for QC2", "Published (not modified)", "Published (modified)"],
       "Ready for publication" => ["Published (no comments)"],
-      "Published (modified)" => ["Ready for QC2"],
-      "Published (not modified)" => ["Ready for QC2"],
-      "Published (no comments)" => ["Ready for QC2"]
+      "Published (modified)" => ["Ready for QC2", "Ready for QC1"],
+      "Published (not modified)" => ["Ready for QC2", "Ready for QC1"],
+      "Published (no comments)" => ["Ready for QC2", "Ready for QC1"]
     },
-    admin: {
+    reviewer: {
+      "Ready for QC1" => ["QC1 in progress"],
+      "QC1 in progress" => ["Rejected", "Ready for QC2"],
       "Ready for QC2" => ["QC2 in progress"],
       "QC2 in progress" => ["Needs revision", "Ready for publication"]
     }
@@ -151,9 +152,9 @@ class Observation < ApplicationRecord
   validate :status_changes, if: -> { user_type.present? }
 
   validates :observers, presence: true
-  validates :validation_status, presence: true
   validates :observation_type, presence: true
 
+  validates :validation_status, presence: true
   validates :qc2_comment, presence: true, if: -> { validation_status == "Needs revision" }
 
   before_validation :assign_observers_from_report, if: :observation_report_changed?
@@ -245,6 +246,10 @@ class Observation < ApplicationRecord
 
   def published?
     PUBLISHED_STATES.include?(validation_status)
+  end
+
+  def qc1_needed?
+    observers.any?(&:responsible_qc1_id)
   end
 
   private
@@ -378,14 +383,14 @@ class Observation < ApplicationRecord
     )
   end
 
-  def notify_qc1_reviewers
+  def notify_qc1_reviewers(mail_template)
     notify_users(
       User.where(id: observers.distinct.pluck(:responsible_qc1_id)),
       mail_template
     )
   end
 
-  def notify_qc2_reviewers
+  def notify_qc2_reviewers(mail_template)
     notify_users(
       User.where(id: observers.distinct.pluck(:responsible_qc2_id)),
       mail_template

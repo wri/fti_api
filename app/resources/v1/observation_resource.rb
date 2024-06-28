@@ -3,6 +3,7 @@
 module V1
   class ObservationResource < BaseResource
     include CacheableByLocale
+    # TODO: investigate caching issues, I remember it was somthing with included resources like observers
     # caching
 
     attributes :observation_type, :publication_date, :pv, :is_active,
@@ -10,7 +11,7 @@ module V1
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
       :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
-      :is_physical_place, :complete, :hidden, :qc1_comment, :qc2_comment, :monitor_comment, :locale
+      :is_physical_place, :complete, :hidden, :user_type, :qc1_comment, :qc2_comment, :monitor_comment, :locale
 
     has_many :species
     has_many :observation_documents
@@ -31,11 +32,12 @@ module V1
 
     before_create :set_locale
     before_save :set_user
+    before_update :set_qc_validation_status
 
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
-      :observation_report, :law, :operator, :subcategory,
-      :is_active, :validation_status, :is_physical_place
+      :observation_report, :law, :operator, :subcategory, :validation_status,
+      :is_active, :is_physical_place
 
     filter :hidden, default: "false", apply: ->(records, value, options) {
       return records if value.include?("all")
@@ -107,6 +109,17 @@ module V1
       Observation.validation_statuses[@model.validation_status]
     end
 
+    def set_qc_validation_status
+      # TODO: I don't like this custom_command
+      return if context[:custom_command] != "ready_for_review"
+
+      @model.validation_status = if @model.published?
+        "Ready for QC2"
+      else
+        @model.qc1_needed? ? "Ready for QC1" : "Ready for QC2"
+      end
+    end
+
     def self.updatable_fields(context)
       super - [:hidden, :publication_date]
     end
@@ -121,7 +134,8 @@ module V1
 
     def set_user
       user = context[:current_user]
-      @model.user_type = :monitor
+      @model.user_type = :monitor if @model.user_type.blank?
+      @model.user_type = @model.user_type.to_sym
       @model.user_id = user.id if context[:action] == "create"
       @model.modified_user_id = user.id
       @model.force_translations_from = @model.locale || user.locale

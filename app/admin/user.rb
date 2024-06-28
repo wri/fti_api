@@ -124,8 +124,14 @@ ActiveAdmin.register User do
       end
       f.input :observer
       f.input :managed_observers
-      f.input :qc1_observers
-      f.input :qc2_observers
+      f.input :qc1_observers,
+        as: :select,
+        hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
+        collection: Observer.left_outer_joins(:responsible_qc1).map { |o| [o.responsible_qc1.present? ? "#{o.name} (QC: #{o.responsible_qc1.name})" : o.name, o.id] }
+      f.input :qc2_observers,
+        as: :select,
+        hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
+        collection: Observer.left_outer_joins(:responsible_qc2).map { |o| [o.responsible_qc2.present? ? "#{o.name} (QC: #{o.responsible_qc2.name})" : o.name, o.id] }
       f.input :operator
       f.input :holding
       f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)
