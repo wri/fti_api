@@ -319,7 +319,8 @@ ActiveAdmin.register Observation do
     column I18n.t("document_types.Report") do |observation|
       observation.observation_report&.title
     end
-    column :admin_comment
+    column :qc1_comment
+    column :qc2_comment
     column :monitor_comment
     column I18n.t("activerecord.models.user") do |observation|
       observation.user&.name
@@ -408,7 +409,8 @@ ActiveAdmin.register Observation do
       title = o.observation_report.title[0..100] + ((o.observation_report.title.length >= 100) ? "..." : "") if o.observation_report&.title
       link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
-    column :admin_comment, sortable: false
+    column :qc1_comment, sortable: false
+    column :qc2_comment, sortable: false
     column :monitor_comment, sortable: false
     column :user, sortable: false
     column :modified_user, sortable: false
@@ -491,8 +493,8 @@ ActiveAdmin.register Observation do
     f.inputs I18n.t("shared.status") do
       f.input :is_active, input_html: {disabled: true}
       f.input :hidden, **visibility
-      if Observation::STATUS_TRANSITIONS[:admin].key?(f.object.validation_status)
-        valid_statuses = [Observation::STATUS_TRANSITIONS[:admin][f.object.validation_status], f.object.validation_status].flatten
+      if Observation::STATUS_TRANSITIONS[:reviewer].key?(f.object.validation_status)
+        valid_statuses = [Observation::STATUS_TRANSITIONS[:reviewer][f.object.validation_status], f.object.validation_status].flatten
         f.input :validation_status, collection: valid_statuses
       else
         f.input :validation_status, {input_html: {disabled: true}}
