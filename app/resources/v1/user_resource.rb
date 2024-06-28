@@ -5,7 +5,8 @@ module V1
     caching
     attributes :name, :email,
       :is_active, :deactivated_at, :locale,
-      :permissions_request, :permissions_accepted, :password, :password_confirmation
+      :permissions_request, :permissions_accepted, :password, :password_confirmation,
+      :managed_observer_ids, :qc1_observer_ids, :qc2_observer_ids
 
     has_one :country
     has_one :user_permission, foreign_key_on: :related
