@@ -19,6 +19,29 @@ ActiveAdmin.register Fmu do
   scope -> { I18n.t("active_admin.all") }, :all, default: true
   scope -> { I18n.t("active_admin.free") }, :filter_by_free_aa
 
+  batch_action :destroy, false
+  batch_action :download_shapefiles do |ids|
+    fmus = batch_action_collection.find(ids)
+    file_content = ShapefileService.generate_shapefile(fmus)
+    filename = "fmus.zip"
+
+    send_data file_content, type: "application/zip", filename: filename, disposition: "attachment"
+  end
+
+  member_action :download_shapefile, method: :get do
+    fmu = Fmu.find(params[:id])
+    file_content = ShapefileService.generate_shapefile([fmu])
+    filename = fmu.name || "fmu"
+    filename = filename.gsub(/[^0-9A-Za-z ]/, "")[0..30]
+    filename += ".zip"
+
+    send_data file_content, type: "application/zip", filename: filename, disposition: "attachment"
+  end
+
+  action_item :download_shapefile, only: :show do
+    link_to I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
+  end
+
   permit_params :id, :name, :certification_fsc, :certification_pefc,
     :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
     :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
@@ -88,6 +111,7 @@ ActiveAdmin.register Fmu do
   end
 
   index do
+    selectable_column
     column :id, sortable: true
     column :name, sortable: true
     column :country, sortable: "country_translations.name"
@@ -100,7 +124,12 @@ ActiveAdmin.register Fmu do
     column "TLV", :certification_tlv
     column "LS", :certification_ls
 
-    actions
+    actions defaults: false do |fmu|
+      item I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
+      item I18n.t("active_admin.view"), admin_fmu_path(fmu)
+      item I18n.t("active_admin.edit"), edit_admin_fmu_path(fmu)
+      item I18n.t("active_admin.delete"), admin_fmu_path(fmu), method: :delete, data: {confirm: I18n.t("active_admin.fmus_page.confirm_delete")}
+    end
   end
 
   form do |f|
