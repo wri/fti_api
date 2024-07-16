@@ -56,7 +56,7 @@
 #     # password: "please use keys"
 #   }
 user = ENV["SSH_USER"]
-server ENV["STAGING_IP"],
+server ENV["STAGING_HOST"],
   user: user,
   roles: %w[web app db], primary: true
 
