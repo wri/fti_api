@@ -88,7 +88,7 @@ end
 namespace :sidekiq do
   task :quiet do
     on roles(:app) do
-      $stdout.puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
+      $stdout.puts capture("pgrep -f 'sidekiq' | xargs sudo kill -TSTP")
     end
   end
   task :restart do
