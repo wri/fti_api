@@ -8,6 +8,7 @@ abort "HEALTHCHECKS_ACCOUNT_ID is not set" unless account_id
 
 check_in = "curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/#{account_id}/#{env}-:check_in"
 job_type :rake, "cd :path && :environment_variable=:environment bundle exec rake :task --silent :output && #{check_in}"
+set :output, "#{path}/log/cron.log"
 
 every 1.day, at: "1 am" do
   rake "scheduler:calculate_scores", check_in: "calculate"
