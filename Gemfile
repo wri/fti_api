@@ -129,17 +129,16 @@ group :development do
   gem "capistrano-bundler", require: false
   gem "capistrano-db-tasks", require: false
   gem "capistrano-env-config", require: false
-  # gem "capistrano-passenger"
+  gem "capistrano-maintenance", require: false
   gem "capistrano3-puma", "~> 6.0.0.beta", require: false
   gem "capistrano-rails", "~> 1.2", require: false
   gem "capistrano-nvm", require: false
   gem "capistrano-rvm", require: false
   gem "i18n_generators"
+
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem "rack-mini-profiler", "~> 2.0"
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
   gem "web-console", ">= 4.1.0"
 end
 

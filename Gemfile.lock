@@ -198,6 +198,8 @@ GEM
     capistrano-env-config (0.3.0)
       capistrano (~> 3.0)
       dotenv (~> 2.0)
+    capistrano-maintenance (1.2.1)
+      capistrano (>= 3.0)
     capistrano-nvm (0.0.7)
       capistrano (~> 3.1)
     capistrano-rails (1.6.3)
@@ -784,6 +786,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-db-tasks
   capistrano-env-config
+  capistrano-maintenance
   capistrano-nvm
   capistrano-rails (~> 1.2)
   capistrano-rvm
