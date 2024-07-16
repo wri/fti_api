@@ -1,0 +1,22 @@
+[Unit]
+Description=sidekiq
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=<% user %>
+Group=<% user %>
+UMask=0002
+WorkingDirectory=<%= api_dir %>/current
+ExecStart=/home/<%= user %>/.nvm/nvm-exec /usr/share/rvm/bin/rvm in <%= api_dir %>/current do bundle exec sidekiq -e <%= rails_env %>
+Environment=MALLOC_ARENA_MAX=2
+Environment=NODE_VERSION=default
+
+# if we crash, restart
+RestartSec=1
+Restart=on-failure
+
+SyslogIdentifier=sidekiq
+
+[Install]
+WantedBy=multi-user.target

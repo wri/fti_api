@@ -33,9 +33,10 @@ spec/.DS_Store
 /db/files/.~*
 
 # Ignore environment variables
-/.env
 /test.env
 /dev.env
+.env*
+!.env.sample
 
 # Ignore the default SQLite database.
 # TODO: remove

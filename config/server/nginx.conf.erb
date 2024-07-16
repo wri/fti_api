@@ -1,0 +1,61 @@
+server {
+  server_name <%= domain %>;
+
+  server_tokens off;
+
+  rewrite ^/api/admin(/.*|$) /admin permanent;
+
+  location ~ ^/api(/.*|$) {
+    root <%= api_dir %>/current/public;
+    proxy_pass http://localhost:3000;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_redirect off;
+
+    rewrite ^/api(/.*)$ $1 break;
+  }
+
+  location ~ ^/uploads(/.*|$) {
+    root <%= api_dir %>/current/public;
+    gzip_static on;
+    # expires 24h;
+    # add_header Cache-Control public;
+  }
+
+  location ~ ^/(admin|private|rails|health_check)(/.*|$) {
+    root <%= api_dir %>/current/public;
+    proxy_pass http://localhost:3000;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_redirect off;
+  }
+
+  # Rails assets
+  location ~ ^/assets/ {
+    root <%= api_dir %>/current/public;
+    gzip_static on;
+    expires max;
+    add_header Cache-Control public;
+  }
+
+  # Angular app
+  location /observations-tool {
+    rewrite ^([^.]*[^/])$ $1/ permanent;
+  }
+
+  location /observations-tool/ {
+    alias <%= obs_tool_dir %>/dist/;
+    index index.html;
+    try_files $uri $uri/ /index.html =404;
+  }
+
+  # Next.js frontend
+  location / {
+    proxy_pass http://localhost:6000;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_redirect off;
+  }
+
+  # certbot will add certificates
+}

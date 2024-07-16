@@ -29,12 +29,17 @@ install_plugin Capistrano::SCM::Git
 #   https://github.com/capistrano/passenger
 #
 require "capistrano/rvm"
+require "capistrano/nvm"
+require "capistrano/puma"
+install_plugin Capistrano::Puma
+install_plugin Capistrano::Puma::Systemd
 # require "capistrano/rbenv"
 # require "capistrano/chruby"
 require "capistrano/bundler"
 require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
-require "capistrano/passenger"
+# require "capistrano/passenger"
+
 require "capistrano/env-config"
 # require 'capistrano/secrets_yml'
 # require 'capistrano/postgresql'

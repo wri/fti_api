@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -x
+export GIT_WORK_TREE="<%= workdir %>"
+export PATH="/home/<%= user %>/bin:/home/<%= user %>/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+
+while read oldrev newrev refname
+do
+branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+git --work-tree=$GIT_WORK_TREE --git-dir=/home/<%= user %>/git/<%= app %>.git checkout -f $branch
+done
+
+cd $GIT_WORK_TREE
+
+script/deploy <%= env %>

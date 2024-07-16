@@ -1,0 +1,294 @@
+#!/usr/bin/env ruby
+
+# Provision a virtual private server for deployments, ubuntu
+
+require "net/ssh"
+require "net/scp"
+require "erb"
+
+hosts = ["94.130.177.199"]
+domain = "otp.tsubik.com"
+email = "tsubik@gmail.com"
+user = "ubuntu"
+ruby_version = File.read(".ruby-version").strip
+api_dir = "/var/www/fti-api"
+portal_dir = "/var/www/otp-portal"
+obs_tool_dir = "/var/www/otp-observations-tool"
+rails_env = "staging"
+
+class DeployFrontendTemplate
+  attr_reader :user, :app, :env
+
+  def initialize(workdir, user, app, env)
+    @workdir = workdir
+    @user = user
+    @app = app
+    @env = env
+  end
+
+  def render
+    StringIO.new(ERB.new(File.read("./config/server/git/frontend-app-post-receive.erb")).result(binding))
+  end
+
+  def workdir
+    @workdir || "/home/#{user}/#{@app}"
+  end
+end
+
+puma_service_config = StringIO.new(ERB.new(File.read("./config/server/puma.service.erb")).result)
+sidekiq_service_config = StringIO.new(ERB.new(File.read("./config/server/sidekiq.service.erb")).result)
+otp_portal_post_receive = DeployFrontendTemplate.new("/var/www/otp-portal", user, "otp-portal", rails_env).render
+obs_tool_post_receive = DeployFrontendTemplate.new("/var/www/otp-observations-tool", user, "otp-observations-tool", rails_env).render
+nginx_config = StringIO.new(ERB.new(File.read("./config/server/nginx.conf.erb")).result)
+
+# puts puma_service_config.string
+# puts otp_portal_post_receive.string
+# puts obs_tool_post_receive.string
+# puts nginx_config.string
+
+upgrade_packages = <<~EOF
+  apt-get update -qq && apt upgrade -y
+EOF
+# Install Docker and add the private network
+install_essentials = <<~EOF
+  apt-get install -y build-essential curl git
+EOF
+
+# Add swap space
+add_swap = <<~EOF
+  fallocate -l 4GB /swapfile;
+  chmod 600 /swapfile;
+  mkswap /swapfile;
+  swapon /swapfile;
+  echo "/swapfile swap swap defaults 0 0" >> /etc/fstab;
+  sysctl vm.swappiness=20;
+  echo "vm.swappiness=20" >> /etc/sysctl.conf
+  sysctl vm.vfs_cache_pressure=50;
+  echo "vm.vfs_cache_pressure=50" >> /etc/sysctl.conf
+EOF
+# Add non-root user
+add_user = <<~EOF
+  useradd --create-home --shell /bin/bash #{user};
+  rsync --archive --chown=#{user}:#{user} /root/.ssh /home/#{user};
+  echo '#{user} ALL=(ALL:ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/#{user};
+  chmod 0440 /etc/sudoers.d/#{user};
+  visudo -c -f /etc/sudoers.d/#{user}
+EOF
+# Install fail2ban
+install_fail2ban = <<~EOF
+  apt-get install -y fail2ban;
+  systemctl start fail2ban;
+  systemctl enable fail2ban
+EOF
+# Configure firewall
+configure_firewall = <<~EOF
+  ufw logging on;
+  ufw default deny incoming;
+  ufw default allow outgoing;
+  ufw allow 22;
+  ufw allow 80;
+  ufw allow 443;
+  ufw --force enable;
+  systemctl restart ufw
+EOF
+
+install_postgres = <<~EOF
+  apt-get install -y postgresql-16-postgis-3 libpq-dev
+EOF
+
+configure_postgres = <<~EOF
+  sudo -u postgres createuser -s #{user}
+  sudo -u postgres createdb #{user}
+  sudo -u ubuntu createdb fti_api_staging
+EOF
+
+install_app_dependencies = <<~EOF
+  sudo apt-get install -y libvips
+EOF
+
+install_redis = <<~EOF
+  apt-get install -y redis-server
+EOF
+
+install_nginx = <<~EOF
+  apt-get install -y nginx
+EOF
+
+setup_nginx = <<~EOF
+  rm /etc/nginx/sites-enabled/default;
+  ln -s /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
+EOF
+# chmod o+x /home/#{user};
+# usermod -a -G www-data #{user};
+
+# Prepare Let's Encrypt
+prepare_letsencrypt = <<~EOF
+  apt-get install -y certbot python3-certbot-nginx;
+  certbot --nginx -d #{domain} --non-interactive --agree-tos -m #{email};
+EOF
+
+setup_capistrano = <<~EOF
+  sudo mkdir -p #{api_dir}/shared;
+  sudo chown -R #{user}:#{user} #{api_dir};
+EOF
+
+install_rvm = <<~EOF
+  apt-add-repository -y ppa:rael-gc/rvm;
+  apt-get update;
+  apt-get install -y rvm
+  usermod -a -G rvm #{user}
+EOF
+
+install_ruby = <<~EOF
+  . /usr/share/rvm/scripts/rvm;
+  rvm install #{ruby_version}
+EOF
+
+install_nvm = <<~EOF
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+EOF
+
+# obs tool needs node 16
+# the rest will be running on node 20
+install_node = <<~EOF
+  . /home/#{user}/.nvm/nvm.sh
+  nvm install v16.20.2;
+  npm install -g yarn;
+  nvm install v20;
+  nvm alias default 20;
+  npm install -g yarn mjml pm2;
+EOF
+
+setup_puma_service = <<~EOF
+  sudo systemctl daemon-reload;
+  sudo systemctl enable puma;
+  sudo systemctl start puma;
+EOF
+
+setup_sidekiq_service = <<~EOF
+  sudo systemctl daemon-reload;
+  sudo systemctl enable sidekiq;
+  sudo systemctl start sidekiq;
+EOF
+
+setup_frontend_repos = <<~EOF
+  mkdir -p /home/#{user}/git;
+  cd /home/#{user}/git;
+  git init --bare otp-observations-tool.git;
+  git init --bare otp-portal.git;
+  rm /home/#{user}/git/otp-observations-tool.git/hooks/*;
+  rm /home/#{user}/git/otp-portal.git/hooks/*;
+  sudo mkdir -p #{portal_dir};
+  sudo mkdir -p #{obs_tool_dir};
+  sudo chown #{user}:#{user} #{portal_dir};
+  sudo chown #{user}:#{user} #{obs_tool_dir};
+EOF
+
+ensure_githooks_executable = <<~EOF
+  chmod +x /home/#{user}/git/otp-portal.git/hooks/post-receive;
+  chmod +x /home/#{user}/git/otp-observations-tool.git/hooks/post-receive;
+EOF
+
+restart_nginx = <<~EOF
+  sudo systemctl restart nginx
+EOF
+
+install_transifex_cli = <<~EOF
+  mkdir -p /home/#{user}/.local/bin;
+  mkdir -p /home/#{user}/tx;
+  cd /home/#{user}/tx;
+  curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+  ln -s /home/#{user}/tx/tx /home/#{user}/.local/bin/tx
+EOF
+
+# Disable root
+disable_root = <<~EOF
+  sed -i 's@PasswordAuthentication yes@PasswordAuthentication no@g' /etc/ssh/sshd_config;
+  sed -i 's@PermitRootLogin yes@PermitRootLogin no@g' /etc/ssh/sshd_config;
+  chage -E 0 root;
+  systemctl restart ssh
+EOF
+
+execute_command = ->(ssh, cmd) {
+  puts cmd
+  puts "=============================================="
+  ssh.exec!(cmd) do |_channel, _stream, data|
+    print data
+  end
+}
+
+hosts.each do |host|
+  puts "Provisioning server '#{host}' with user '#{user}'..."
+  # Run provisioning on server `host`
+  Net::SSH.start(host, "root") do |ssh|
+    ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }
+
+    puts "Upgrade packages..."
+    ssh_exec.(upgrade_packages)
+    puts "Installing essential packages..."
+    ssh_exec.(install_essentials)
+    puts "Adding swap space..."
+    ssh_exec.(add_swap)
+    puts "Adding user with sudo privileges..."
+    ssh_exec.(add_user)
+    puts "Installing and running fail2ban..."
+    ssh_exec.(install_fail2ban)
+    puts "Configure firewall..."
+    ssh_exec.(configure_firewall)
+    puts "Installing Postgres..."
+    ssh_exec.(install_postgres)
+    puts "Configuring Postgres..."
+    ssh_exec.(configure_postgres)
+    puts "Installing Redis..."
+    ssh_exec.(install_redis)
+    puts "Installing Nginx..."
+    ssh_exec.(install_nginx)
+    puts "Upload Nginx configuration..."
+    Net::SCP.upload!(host, "root", nginx_config, "/etc/nginx/sites-available/otp.conf")
+    puts "Setting up Nginx..."
+    ssh_exec.(setup_nginx)
+    puts "Install letsencrypt..."
+    ssh_exec.(prepare_letsencrypt)
+    puts "Install rvm..."
+    ssh_exec.(install_rvm)
+  end
+
+  Net::SSH.start(host, user) do |ssh|
+    ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }
+    puts "Install ruby..."
+    ssh_exec.(install_ruby)
+    puts "Install nvm..."
+    ssh_exec.(install_nvm)
+    puts "Install node..."
+    ssh_exec.(install_node)
+    puts "Installing app dependencies..."
+    ssh_exec.(install_app_dependencies)
+    puts "Setup capistrano"
+    ssh_exec.(setup_capistrano)
+    puts "Upload env..."
+    Net::SCP.upload!(host, "root", ".env.production", "#{api_dir}/shared/.env")
+    puts "Setup PUMA..."
+    Net::SCP.upload!(host, "root", puma_service_config, "/lib/systemd/system/puma.service")
+    ssh_exec.(setup_puma_service)
+    puts "Setup Sidekiq..."
+    Net::SCP.upload!(host, "root", sidekiq_service_config, "/lib/systemd/system/sidekiq.service")
+    ssh_exec.(setup_sidekiq_service)
+    puts "Setup frontend repos..."
+    ssh_exec.(setup_frontend_repos)
+    puts "Upload otp portal git hooks..."
+    Net::SCP.upload!(host, user, otp_portal_post_receive, "/home/#{user}/git/otp-portal.git/hooks/post-receive")
+    puts "Upload otp observations tool git hooks..."
+    Net::SCP.upload!(host, user, obs_tool_post_receive, "/home/#{user}/git/otp-observations-tool.git/hooks/post-receive")
+    puts "Ensure git hooks executable..."
+    ssh_exec.(ensure_githooks_executable)
+    puts "Restart Nginx..."
+    ssh_exec.(restart_nginx)
+    puts "Install Transifex CLI..."
+    ssh_exec.(install_transifex_cli)
+    puts "Disable root..."
+    ssh_exec.(disable_root)
+  end
+end
+
+puts "Done!"
+puts " ssh #{user}@#{hosts.first}"

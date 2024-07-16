@@ -122,13 +122,15 @@ group :development do
   gem "annotate"
   gem "brakeman", require: false
   gem "bundler-audit", require: false
-  gem "capistrano", "~> 3.6"
-  gem "capistrano-bundler"
+  gem "capistrano", "~> 3.6", require: false
+  gem "capistrano-bundler", require: false
   gem "capistrano-db-tasks", require: false
-  gem "capistrano-env-config"
-  gem "capistrano-passenger"
-  gem "capistrano-rails", "~> 1.2"
-  gem "capistrano-rvm"
+  gem "capistrano-env-config", require: false
+  # gem "capistrano-passenger"
+  gem "capistrano3-puma", "~> 6.0.0.beta", require: false
+  gem "capistrano-rails", "~> 1.2", require: false
+  gem "capistrano-nvm", require: false
+  gem "capistrano-rvm", require: false
   gem "i18n_generators"
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
