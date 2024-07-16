@@ -62,6 +62,9 @@ gem "rswag-ui"
 # Activejob
 gem "sidekiq"
 
+# Cron
+gem "whenever", require: false
+
 # Data
 gem "activerecord-import"
 gem "acts_as_list"
