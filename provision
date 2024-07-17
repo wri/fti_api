@@ -163,7 +163,7 @@ install_node = <<~EOF
   npm install -g yarn;
   nvm install v20;
   nvm alias default 20;
-  npm install -g yarn mjml pm2;
+  npm install -g yarn pm2;
 EOF
 
 setup_puma_service = <<~EOF
@@ -260,6 +260,8 @@ Net::SSH.start(host, "root") do |ssh|
   ssh_exec.(prepare_letsencrypt)
   puts "Install rvm..."
   ssh_exec.(install_rvm)
+  puts "Disable root..."
+  ssh_exec.(disable_root)
 end
 
 Net::SSH.start(host, user) do |ssh|
@@ -294,8 +296,6 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.(restart_nginx)
   puts "Install Transifex CLI..."
   ssh_exec.(install_transifex_cli)
-  puts "Disable root..."
-  ssh_exec.(disable_root)
 end
 
 puts "Done!"

@@ -45,9 +45,6 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl nodejs npm postgresql-client libvips && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# for email templates
-RUN npm install -g mjml
-
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails

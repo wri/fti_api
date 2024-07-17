@@ -85,6 +85,7 @@ gem "mini_magick"
 
 # Mail
 gem "mjml-rails"
+gem "mrml"
 gem "letter_opener_web"
 gem "sendgrid-actionmailer"
 
