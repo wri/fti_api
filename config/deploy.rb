@@ -3,7 +3,7 @@
 # config valid only for current version of Capistrano
 lock "~> 3.12"
 
-set :application, "OtpAPI"
+set :application, "otp_api"
 set :repo_url, "git@github.com:wri/fti_api.git"
 
 ruby_version = File.read(".ruby-version").strip

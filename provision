@@ -21,7 +21,7 @@ abort "Please provide LETSENCRYPT_EMAIL" unless email
 abort "Please provide #{env.upcase}_HOST" unless host
 
 ruby_version = File.read(".ruby-version").strip
-api_dir = "/var/www/fti-api"
+api_dir = "/var/www/otp-api"
 portal_dir = "/var/www/otp-portal"
 obs_tool_dir = "/var/www/otp-observations-tool"
 rails_env = env
@@ -231,7 +231,6 @@ exit unless HighLine.agree("Do you want to proceed (yes/no)?")
 # Run provisioning on server `host`
 Net::SSH.start(host, "root") do |ssh|
   ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }
-
   puts "Upgrade packages..."
   ssh_exec.(upgrade_packages)
   puts "Installing essential packages..."
@@ -260,8 +259,6 @@ Net::SSH.start(host, "root") do |ssh|
   ssh_exec.(prepare_letsencrypt)
   puts "Install rvm..."
   ssh_exec.(install_rvm)
-  puts "Disable root..."
-  ssh_exec.(disable_root)
 end
 
 Net::SSH.start(host, user) do |ssh|
@@ -296,6 +293,12 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.(restart_nginx)
   puts "Install Transifex CLI..."
   ssh_exec.(install_transifex_cli)
+end
+
+Net::SSH.start(host, "root") do |ssh|
+  ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }
+  puts "Disable root..."
+  ssh_exec.(disable_root)
 end
 
 puts "Done!"
