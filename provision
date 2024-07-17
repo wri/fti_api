@@ -5,6 +5,7 @@
 require "net/ssh"
 require "net/scp"
 require "erb"
+require "highline"
 
 require "dotenv"
 Dotenv.load
@@ -103,7 +104,6 @@ EOF
 configure_postgres = <<~EOF
   sudo -u postgres createuser -s #{user}
   sudo -u postgres createdb #{user}
-  sudo -u ubuntu createdb fti_api_staging
 EOF
 
 install_app_dependencies = <<~EOF
@@ -225,6 +225,9 @@ execute_command = ->(ssh, cmd) {
 }
 
 puts "Provisioning server '#{host}' with user '#{user}'..."
+
+exit unless HighLine.agree("Do you want to proceed (yes/no)?")
+
 # Run provisioning on server `host`
 Net::SSH.start(host, "root") do |ssh|
   ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }

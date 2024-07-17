@@ -1,3 +1,11 @@
+upstream api_admin {
+  server http://localhost:3000;
+}
+
+upstream portal {
+  server http://localhost:6000;
+}
+
 server {
   server_name <%= domain %>;
 
@@ -14,7 +22,7 @@ server {
 
   location ~ ^/api(/.*|$) {
     root <%= api_dir %>/current/public;
-    proxy_pass http://localhost:3000;
+    proxy_pass http://api_admin;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;
     proxy_redirect off;
@@ -25,13 +33,11 @@ server {
   location ~ ^/uploads(/.*|$) {
     root <%= api_dir %>/current/public;
     gzip_static on;
-    # expires 24h;
-    # add_header Cache-Control public;
   }
 
   location ~ ^/(admin|private|rails|health_check)(/.*|$) {
     root <%= api_dir %>/current/public;
-    proxy_pass http://localhost:3000;
+    proxy_pass http://api_admin;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;
     proxy_redirect off;
@@ -58,7 +64,7 @@ server {
 
   # Next.js frontend
   location / {
-    proxy_pass http://localhost:6000;
+    proxy_pass http://portal;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;
     proxy_redirect off;
@@ -74,5 +80,5 @@ server {
     rewrite ^(.*)$ /system/maintenance.html break;
   }
 
-  # certbot will add certificates
+  # certbot will install certificates
 }
