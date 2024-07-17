@@ -11,6 +11,11 @@ server {
 
   server_tokens off;
 
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+  proxy_set_header Host $host;
+  proxy_hide_header X-Powered-By;
+
   error_page 503 @503;
 
   # Return a 503 error if the maintenance page exists.
@@ -23,8 +28,6 @@ server {
   location ~ ^/api(/.*|$) {
     root <%= api_dir %>/current/public;
     proxy_pass http://api_admin;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $host;
     proxy_redirect off;
 
     rewrite ^/api(/.*)$ $1 break;
@@ -37,9 +40,12 @@ server {
 
   location ~ ^/(admin|private|rails|health_check)(/.*|$) {
     root <%= api_dir %>/current/public;
+
+    proxy_connect_timeout       600;
+    proxy_read_timeout          600;
+    fastcgi_read_timeout        600;
+
     proxy_pass http://api_admin;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $host;
     proxy_redirect off;
   }
 
@@ -65,8 +71,6 @@ server {
   # Next.js frontend
   location / {
     proxy_pass http://portal;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $host;
     proxy_redirect off;
   }
 
