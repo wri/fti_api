@@ -78,6 +78,9 @@ task "deploy:db:load" do
   on primary :db do
     within release_path do
       with rails_env: fetch(:rails_env) do
+        execute :rake, "db:version"
+      rescue
+        # only create if db does not exist
         execute :rake, "db:create"
         execute :rake, "db:schema:load"
       end
@@ -99,7 +102,7 @@ namespace :sidekiq do
 end
 
 namespace :deploy do
-  before :migrate, "deploy:db:load" if ENV["INITIAL"]
+  before :migrate, "deploy:db:load"
   after :starting, "sidekiq:quiet"
   after :finishing, "deploy:cleanup"
   after :reverted, "sidekiq:restart"
