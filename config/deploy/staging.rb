@@ -67,6 +67,5 @@ set :ssh_options, {
 }
 
 set :branch, ENV.fetch("BRANCH") { "staging" }
-# set :deploy_to, "/home/#{user}/fti-api"
-set :deploy_to , "/var/www/fti-api"
+set :deploy_to, "/var/www/otp-api"
 set :rails_env, "staging"

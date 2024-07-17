@@ -168,15 +168,7 @@ Deploy to production with `cap production deploy` it will deploy the `master` br
 
 To deploy the API to staging environment use `cap staging deploy`, by default that will deploy `staging` branch, but you can change it with `BRANCH` env variable (ex. `cap staging deploy BRANCH=develop`)
 
-## TASKS ##
-
-**There are two tasks that should be executed in the server, with a cron job. Below there0s a suggestion on how to set up the jobs:**
-
-```
-* */8 * * * sleep $(( RANDOM \% 1000 )); cd ~/fti-api-development/current; RAILS_ENV=staging bundle exec rails scheduler:expire
-* 0 * * * sleep $(( RANDOM \% 10000 )); cd ~/fti-api-development/current; RAILS_ENV=staging bundle exec rails scheduler:expire
-
-```
+After deployment crontab will be automatically updated with the new cron jobs. (check config/schedule.rb for more details)
 
 ## CONTRIBUTING ##
 
