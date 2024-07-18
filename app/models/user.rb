@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   PERMISSIONS = %w[operator ngo ngo_manager government]
 
-  normalizes :name, with: -> { _1.strip }
+  normalizes :first_name, :last_name, :name, with: -> { _1.strip }
 
   enum permissions_request: {operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7}
 
@@ -65,9 +65,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :name, presence: true
   validates :locale, inclusion: {in: I18n.available_locales.map(&:to_s), allow_blank: true}
-  validates :password, confirmation: true,
-    length: {within: 8..20},
-    on: :create
+  validates :password, confirmation: true, length: {within: 8..20}, on: :create
   validates :password_confirmation, presence: true, on: :create
   validates :user_permission, presence: true
   validates :operator, presence: true, if: -> { user_permission&.operator? }
@@ -123,11 +121,7 @@ class User < ApplicationRecord
   def name
     return full_name if full_name.present?
 
-    self[:name]
-  end
-
-  def name_old
-    self[:name]
+    organization_name
   end
 
   def display_name
