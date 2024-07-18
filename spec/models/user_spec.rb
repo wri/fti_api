@@ -27,6 +27,7 @@
 #  locale                 :string
 #  first_name             :string
 #  last_name              :string
+#  organization_account   :boolean          default(FALSE), not null
 #
 
 require "rails_helper"

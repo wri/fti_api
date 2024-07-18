@@ -49,6 +49,7 @@ module V1
           :"current-password",
           :"first-name",
           :"last-name",
+          :"organization-account",
           :name,
           :email,
           :locale

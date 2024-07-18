@@ -29,6 +29,7 @@
 #  locale                 :string
 #  first_name             :string
 #  last_name              :string
+#  organization_account   :boolean          default(FALSE), not null
 #
 
 class User < ApplicationRecord
