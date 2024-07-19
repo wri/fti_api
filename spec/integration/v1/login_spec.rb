@@ -35,6 +35,7 @@ module V1
           "is-active": true,
           "deactivated-at": nil,
           locale: nil,
+          "organization-account": false,
           "permissions-request": nil,
           "permissions-accepted": nil
         })

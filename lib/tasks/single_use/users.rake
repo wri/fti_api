@@ -13,6 +13,11 @@ namespace :users do
     )
     csv.each do |row|
       user = User.find_by(id: row[:id])
+      if user.nil?
+        puts "user not found #{row[:id]}"
+        next
+      end
+
       organization_account = row[:organization] == "TRUE"
       user.organization_account = organization_account
 

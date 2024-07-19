@@ -120,13 +120,11 @@ class User < ApplicationRecord
 
   def name
     return full_name if full_name.present?
+    return organization_name if organization_account?
 
-    organization_name
+    half_email.to_s
   end
-
-  def display_name
-    name.present? ? name.to_s : half_email.to_s
-  end
+  alias_method :display_name, :name
 
   def active_for_authentication?
     super and is_active?
