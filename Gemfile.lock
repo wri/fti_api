@@ -446,9 +446,6 @@ GEM
     mini_portile2 (2.8.7)
     minitest (5.23.1)
     mjml-rails (4.11.0)
-    mrml (1.6.2)
-      rb_sys
-    mrml (1.6.2-x86_64-linux)
     msgpack (1.7.2)
     multi_json (1.15.0)
     mustache (1.1.1)
@@ -551,7 +548,6 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
-    rb_sys (0.9.98)
     rdoc (6.7.0)
       psych (>= 4.0.0)
     redcarpet (3.6.0)
@@ -819,7 +815,6 @@ DEPENDENCIES
   letter_opener_web
   mini_magick
   mjml-rails
-  mrml
   nokogiri
   oj
   oj_mimic_json

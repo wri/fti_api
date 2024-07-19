@@ -162,7 +162,7 @@ install_node = <<~EOF
   npm install -g yarn;
   nvm install v20;
   nvm alias default 20;
-  npm install -g yarn pm2;
+  npm install -g yarn mjml pm2;
 EOF
 
 setup_puma_service = <<~EOF
