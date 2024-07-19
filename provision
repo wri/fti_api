@@ -49,7 +49,7 @@ puma_service_config = StringIO.new(ERB.new(File.read("./config/server/puma.servi
 sidekiq_service_config = StringIO.new(ERB.new(File.read("./config/server/sidekiq.service.erb")).result)
 otp_portal_post_receive = DeployFrontendTemplate.new("/var/www/otp-portal", user, "otp-portal", rails_env).render
 obs_tool_post_receive = DeployFrontendTemplate.new("/var/www/otp-observations-tool", user, "otp-observations-tool", rails_env).render
-nginx_config = StringIO.new(ERB.new(File.read("./config/server/nginx.conf.erb")).result)
+nginx_config = StringIO.new(ERB.new(File.read("./config/server/nginx.conf.erb"), trim_mode: ">").result)
 
 upgrade_packages = <<~EOF
   apt-get update -qq && apt upgrade -y
@@ -150,8 +150,7 @@ install_nvm = <<~EOF
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash;
   cat <<EOT >> ~/.profile
   export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
   EOT
 EOF
 
@@ -230,75 +229,75 @@ exit unless HighLine.agree("Do you want to proceed (yes/no)?")
 
 # Run provisioning on server `host`
 Net::SSH.start(host, "root") do |ssh|
-  ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }
+  ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
   puts "Upgrade packages..."
-  ssh_exec.(upgrade_packages)
+  ssh_exec.call(upgrade_packages)
   puts "Installing essential packages..."
-  ssh_exec.(install_essentials)
+  ssh_exec.call(install_essentials)
   puts "Adding swap space..."
-  ssh_exec.(add_swap)
+  ssh_exec.call(add_swap)
   puts "Adding user with sudo privileges..."
-  ssh_exec.(add_user)
+  ssh_exec.call(add_user)
   puts "Installing and running fail2ban..."
-  ssh_exec.(install_fail2ban)
+  ssh_exec.call(install_fail2ban)
   puts "Configure firewall..."
-  ssh_exec.(configure_firewall)
+  ssh_exec.call(configure_firewall)
   puts "Installing Postgres..."
-  ssh_exec.(install_postgres)
+  ssh_exec.call(install_postgres)
   puts "Configuring Postgres..."
-  ssh_exec.(configure_postgres)
+  ssh_exec.call(configure_postgres)
   puts "Installing Redis..."
-  ssh_exec.(install_redis)
+  ssh_exec.call(install_redis)
   puts "Installing Nginx..."
-  ssh_exec.(install_nginx)
+  ssh_exec.call(install_nginx)
   puts "Upload Nginx configuration..."
   Net::SCP.upload!(host, "root", nginx_config, "/etc/nginx/sites-available/otp.conf")
   puts "Setting up Nginx..."
-  ssh_exec.(setup_nginx)
+  ssh_exec.call(setup_nginx)
   puts "Install letsencrypt..."
-  ssh_exec.(prepare_letsencrypt)
+  ssh_exec.call(prepare_letsencrypt)
   puts "Install rvm..."
-  ssh_exec.(install_rvm)
+  ssh_exec.call(install_rvm)
 end
 
 Net::SSH.start(host, user) do |ssh|
-  ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }
+  ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
   puts "Install ruby..."
-  ssh_exec.(install_ruby)
+  ssh_exec.call(install_ruby)
   puts "Install nvm..."
-  ssh_exec.(install_nvm)
+  ssh_exec.call(install_nvm)
   puts "Install node..."
-  ssh_exec.(install_node)
+  ssh_exec.call(install_node)
   puts "Installing app dependencies..."
-  ssh_exec.(install_app_dependencies)
+  ssh_exec.call(install_app_dependencies)
   puts "Setup capistrano"
-  ssh_exec.(setup_capistrano)
+  ssh_exec.call(setup_capistrano)
   puts "Upload env..."
   Net::SCP.upload!(host, "root", ".env.production", "#{api_dir}/shared/.env")
   puts "Setup PUMA..."
   Net::SCP.upload!(host, "root", puma_service_config, "/lib/systemd/system/puma.service")
-  ssh_exec.(setup_puma_service)
+  ssh_exec.call(setup_puma_service)
   puts "Setup Sidekiq..."
   Net::SCP.upload!(host, "root", sidekiq_service_config, "/lib/systemd/system/sidekiq.service")
-  ssh_exec.(setup_sidekiq_service)
+  ssh_exec.call(setup_sidekiq_service)
   puts "Setup frontend repos..."
-  ssh_exec.(setup_frontend_repos)
+  ssh_exec.call(setup_frontend_repos)
   puts "Upload otp portal git hooks..."
   Net::SCP.upload!(host, user, otp_portal_post_receive, "/home/#{user}/git/otp-portal.git/hooks/post-receive")
   puts "Upload otp observations tool git hooks..."
   Net::SCP.upload!(host, user, obs_tool_post_receive, "/home/#{user}/git/otp-observations-tool.git/hooks/post-receive")
   puts "Ensure git hooks executable..."
-  ssh_exec.(ensure_githooks_executable)
+  ssh_exec.call(ensure_githooks_executable)
   puts "Restart Nginx..."
-  ssh_exec.(restart_nginx)
+  ssh_exec.call(restart_nginx)
   puts "Install Transifex CLI..."
-  ssh_exec.(install_transifex_cli)
+  ssh_exec.call(install_transifex_cli)
 end
 
 Net::SSH.start(host, "root") do |ssh|
-  ssh_exec = ->(cmd) { execute_command.(ssh, cmd) }
+  ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
   puts "Disable root..."
-  ssh_exec.(disable_root)
+  ssh_exec.call(disable_root)
 end
 
 puts "Done!"

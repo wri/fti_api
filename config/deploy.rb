@@ -23,7 +23,7 @@ set :rvm_roles, [:app, :web, :db]
 
 set :nvm_type, :user # or :system, depends on your nvm setup
 set :nvm_node, "v16.20.2"
-set :nvm_map_bins, %w{node npm yarn rake}
+set :nvm_map_bins, %w[node npm yarn rake]
 
 set :keep_releases, 5
 
@@ -108,5 +108,3 @@ namespace :deploy do
   after :reverted, "sidekiq:restart"
   after :published, "sidekiq:restart"
 end
-
-
