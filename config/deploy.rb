@@ -3,7 +3,7 @@
 # config valid only for current version of Capistrano
 lock "~> 3.12"
 
-set :application, "OtpAPI"
+set :application, "otp_api"
 set :repo_url, "git@github.com:wri/fti_api.git"
 
 ruby_version = File.read(".ruby-version").strip
@@ -23,7 +23,7 @@ set :rvm_roles, [:app, :web, :db]
 
 set :nvm_type, :user # or :system, depends on your nvm setup
 set :nvm_node, "v16.20.2"
-set :nvm_map_bins, %w{node npm yarn rake}
+set :nvm_map_bins, %w[node npm yarn rake]
 
 set :keep_releases, 5
 
@@ -78,6 +78,9 @@ task "deploy:db:load" do
   on primary :db do
     within release_path do
       with rails_env: fetch(:rails_env) do
+        execute :rake, "db:version"
+      rescue
+        # only create if db does not exist
         execute :rake, "db:create"
         execute :rake, "db:schema:load"
       end
@@ -99,11 +102,9 @@ namespace :sidekiq do
 end
 
 namespace :deploy do
-  before :migrate, "deploy:db:load" if ENV["INITIAL"]
+  before :migrate, "deploy:db:load"
   after :starting, "sidekiq:quiet"
   after :finishing, "deploy:cleanup"
   after :reverted, "sidekiq:restart"
   after :published, "sidekiq:restart"
 end
-
-

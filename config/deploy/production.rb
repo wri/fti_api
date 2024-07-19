@@ -67,4 +67,4 @@ set :ssh_options, {
 }
 
 set :branch, "master"
-set :deploy_to, "/home/#{user}/fti-api-production"
+set :deploy_to, "/var/www/otp-api"
