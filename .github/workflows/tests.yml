@@ -55,6 +55,7 @@ jobs:
         run: |
           sudo apt update --fix-missing
           sudo apt-get -yqq install gdal-bin
+          npm install -g mjml
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
