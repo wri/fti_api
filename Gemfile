@@ -132,7 +132,6 @@ group :development do
   gem "capistrano-maintenance", require: false
   gem "capistrano3-puma", "~> 6.0.0.beta", require: false
   gem "capistrano-rails", "~> 1.2", require: false
-  gem "capistrano-nvm", require: false
   gem "capistrano-rvm", require: false
   gem "i18n_generators"
 
