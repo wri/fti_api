@@ -15,6 +15,7 @@ host = ENV[env.upcase + "_HOST"]
 domain = ENV[env.upcase + "_DOMAIN"] || host
 email = ENV["LETSENCRYPT_EMAIL"]
 user = ENV["SSH_USER"]
+arch = ENV["ARCH"] || "x86_64" # aarch64
 
 abort "Please provide SSH_USER" unless user
 abort "Please provide LETSENCRYPT_EMAIL" unless email
@@ -98,7 +99,7 @@ configure_firewall = <<~EOF
 EOF
 
 install_postgres = <<~EOF
-  apt-get install -y postgresql-16-postgis-3 libpq-dev
+  apt-get install -y postgresql-16-postgis-3 libpq-dev autopostgresqlbackup
 EOF
 
 configure_postgres = <<~EOF
@@ -207,6 +208,15 @@ install_transifex_cli = <<~EOF
   ln -s /home/#{user}/tx/tx /home/#{user}/.local/bin/tx
 EOF
 
+install_aws_cli = <<~EOF
+  cd ~;
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-#{arch}.zip" -o "awscliv2.zip";
+  unzip awscliv2.zip;
+  sudo ./aws/install
+  rm awscliv2.zip;
+  rm -rf aws;
+EOF
+
 # Disable root
 disable_root = <<~EOF
   sed -i 's@PasswordAuthentication yes@PasswordAuthentication no@g' /etc/ssh/sshd_config;
@@ -292,6 +302,8 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(restart_nginx)
   puts "Install Transifex CLI..."
   ssh_exec.call(install_transifex_cli)
+  puts "Install AWS CLI..."
+  ssh_exec.call(install_aws_cli)
 end
 
 Net::SSH.start(host, "root") do |ssh|
