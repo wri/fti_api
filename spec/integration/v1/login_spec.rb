@@ -29,10 +29,13 @@ module V1
         expect(status).to eq(200)
         expect(parsed_attributes).to eq({
           name: "Test user",
+          "first-name": "Test",
+          "last-name": "user",
           email: user.email,
           "is-active": true,
           "deactivated-at": nil,
           locale: nil,
+          "organization-account": false,
           "permissions-request": nil,
           "permissions-accepted": nil
         })

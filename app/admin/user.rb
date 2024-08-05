@@ -5,7 +5,7 @@ ActiveAdmin.register User do
 
   menu false
   permit_params :email, :password, :password_confirmation, :country_id,
-    :name, :is_active,
+    :name, :first_name, :last_name, :is_active, :organization_account,
     :observer_id, :operator_id, :holding_id, :locale,
     managed_observer_ids: [],
     responsible_for_country_ids: [],
@@ -89,6 +89,9 @@ ActiveAdmin.register User do
 
   show do
     attributes_table do
+      row :organization_account
+      row :first_name if resource.first_name.present?
+      row :last_name if resource.last_name.present?
       row :name
       row :email
       row I18n.t("shared.role") do |user|
@@ -123,7 +126,10 @@ ActiveAdmin.register User do
       f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)
       f.input :country
       f.input :locale, as: :select, collection: I18n.available_locales
-      f.input :name
+      f.input :name, input_html: {disabled: true}
+      f.input :first_name
+      f.input :last_name
+      f.input :organization_account
       f.input :email
       f.input :password
       f.input :password_confirmation

@@ -25,6 +25,9 @@
 #  operator_id            :integer
 #  holding_id             :integer
 #  locale                 :string
+#  first_name             :string
+#  last_name              :string
+#  organization_account   :boolean          default(FALSE), not null
 #
 
 FactoryBot.define do
@@ -33,7 +36,8 @@ FactoryBot.define do
 
     password { "password" }
     password_confirmation { |u| u.password }
-    name { "Test user" }
+    first_name { "Test" }
+    last_name { "user" }
     is_active { true }
 
     transient do
@@ -47,7 +51,8 @@ FactoryBot.define do
     factory :ngo do
       sequence(:email) { |n| "ngo#{n}@example.com" }
 
-      name { "Test ngo" }
+      first_name { "Test" }
+      last_name { "ngo" }
 
       after(:build) do |random_ngo|
         random_ngo.observer ||= FactoryBot.create(:observer)
@@ -58,7 +63,8 @@ FactoryBot.define do
     factory :operator_user do
       sequence(:email) { |n| "operator#{n}@example.com" }
 
-      name { "Test operator" }
+      first_name { "Test" }
+      last_name { "operator" }
 
       after(:build) do |random_operator|
         random_operator.operator ||= FactoryBot.create(:operator)
@@ -68,14 +74,16 @@ FactoryBot.define do
 
     factory :holding_user do
       sequence(:email) { |n| "holding#{n}@example.com" }
-      name { "Test holding" }
+      first_name { "Test" }
+      last_name { "holding" }
       user_role { "holding" }
     end
 
     factory :government_user do
       sequence(:email) { |n| "gov#{n}@example.com" }
 
-      name { "Test government" }
+      first_name { "Test" }
+      last_name { "government" }
 
       after(:build) do |random_gov_user|
         random_gov_user.country ||= FactoryBot.create(:country)
@@ -86,7 +94,8 @@ FactoryBot.define do
     factory :admin do
       sequence(:email) { |n| Faker::Internet.email }
 
-      name { "Admin user" }
+      first_name { "Admin" }
+      last_name { "user" }
 
       after(:build) do |random_admin|
         random_admin.user_permission = UserPermission.new(user_role: "admin")
@@ -100,7 +109,8 @@ FactoryBot.define do
     factory :webuser do
       sequence(:email) { |n| "webuser#{n}@example.com" }
 
-      name { "Web user" }
+      first_name { "Web" }
+      last_name { "user" }
 
       after(:build) do |random_webuser|
         random_webuser.user_permission = UserPermission.new(user_role: "user")

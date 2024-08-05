@@ -14,12 +14,12 @@ module V1
           email: "test@gmail.com",
           password: "password",
           "password-confirmation": "password",
-          name: "Test user new",
+          "first-name": "Test",
+          "last-name": "user new",
           "permissions-request": "government"
         },
         invalid_params: {email: "test@gmail.com", password: "password", "permissions-request": "government"},
         error_attributes: [422, 100, {
-          name: ["can't be blank"],
           "password-confirmation": ["can't be blank"]
         }]
       },
@@ -32,11 +32,12 @@ module V1
           password: "password",
           "password-confirmation": "password",
           "current-password": "password",
-          name: "Test user new",
+          "first-name": "Test",
+          "last-name": "user new",
           "permissions-request": "government"
         },
-        invalid_params: {name: "", email: "test@gmail.com", password: "password", "permissions-request": "government"},
-        error_attributes: [422, 100, {name: ["can't be blank"], "current-password": ["can't be blank"]}]
+        invalid_params: {email: "test@gmail.com", password: "password", "permissions-request": "government"},
+        error_attributes: [422, 100, {"current-password": ["can't be blank"]}]
       },
       delete: {
         success_roles: %i[admin],
@@ -44,13 +45,6 @@ module V1
       },
       pagination: {
         success_roles: %i[admin]
-      },
-      sort: {
-        success_roles: %i[admin],
-        attribute: :name,
-        sequence: ->(i) { "#{i} observer" },
-        expected_count: 8,
-        desc: "Web user"
       }
     }
 
@@ -69,7 +63,7 @@ module V1
       describe "Can't update profile" do
         it "Returns error when update user by owner" do
           patch("/users/#{user.id}",
-            params: jsonapi_params("users", user.id, {name: "Test user new"}),
+            params: jsonapi_params("users", user.id, {first_name: "Test user new"}),
             headers: user_headers)
 
           expect(parsed_body).to eq(default_status_errors(401))

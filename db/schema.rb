@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_103335) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -1114,6 +1114,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_103335) do
     t.integer "operator_id"
     t.integer "holding_id"
     t.string "locale"
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "organization_account", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -14,10 +14,10 @@ class UserMailerPreview < ActionMailer::Preview
   private
 
   def test_user_observer
-    User.new(email: "john@example.com", name: "John Tester", locale: "en", user_permission: UserPermission.new(user_role: "ngo_manager"))
+    User.new(email: "john@example.com", first_name: "John", last_name: "Tester", locale: "en", user_permission: UserPermission.new(user_role: "ngo_manager"))
   end
 
   def test_user_operator
-    User.new(email: "john@example.com", name: "John Tester", locale: "en", user_permission: UserPermission.new(user_role: "operator"))
+    User.new(email: "john@example.com", first_name: "John", last_name: "Tester", locale: "en", user_permission: UserPermission.new(user_role: "operator"))
   end
 end
