@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ObservationMailer, type: :mailer do
   let(:admin) { create(:admin) }
-  let(:observer) { create(:observer, responsible_admin: admin) }
+  let(:observer) { create(:observer, responsible_qc2: admin) }
   let(:user) { create(:ngo, observer: observer) }
   let(:observation) { create(:observation, observers: [user.observer], modified_user: user) }
 

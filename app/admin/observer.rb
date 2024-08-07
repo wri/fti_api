@@ -12,12 +12,12 @@ ActiveAdmin.register Observer, as: "Monitor" do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes(:responsible_admin, :countries)
+      end_of_association_chain.includes(:responsible_qc1, :responsible_qc2, :countries)
     end
   end
 
   permit_params :observer_type, :is_active, :logo, :name, :organization_type, :delete_logo,
-    :responsible_admin_id, :responsible_qc1_id, :responsible_qc2_id, country_ids: []
+    :responsible_qc1_id, :responsible_qc2_id, country_ids: []
 
   csv do
     column :is_active
@@ -50,7 +50,8 @@ ActiveAdmin.register Observer, as: "Monitor" do
       link_to o.logo&.identifier, o.logo&.url if o.logo&.url
     end
     column :name
-    column :responsible_admin
+    column :responsible_qc1
+    column :responsible_qc2
     column :created_at
     column :updated_at
     actions
@@ -83,7 +84,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
       row :public_info
       row :observer_type
       row :organization_type
-      row :responsible_admin
       row :responsible_qc1
       row :responsible_qc2
       # TODO: Reactivate rubocop and fix this
@@ -117,7 +117,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
     f.inputs I18n.t("active_admin.shared.monitor_details") do
       f.input :name
       f.input :is_active
-      f.input :responsible_admin, as: :select, collection: User.filter_actives.with_roles(:admin)
       f.input :countries, collection: Country.with_translations(I18n.locale).order("country_translations.name asc")
       f.input :observer_type, as: :select, collection: %w[Mandated SemiMandated External Government]
       f.input :organization_type, as: :select, collection: ["NGO", "Academic", "Research Institute", "Private Company", "Other"]

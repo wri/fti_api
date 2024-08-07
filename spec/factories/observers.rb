@@ -2,23 +2,24 @@
 #
 # Table name: observers
 #
-#  id                   :integer          not null, primary key
-#  observer_type        :string           not null
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  is_active            :boolean          default(TRUE), not null
-#  logo                 :string
-#  address              :string
-#  information_name     :string
-#  information_email    :string
-#  information_phone    :string
-#  data_name            :string
-#  data_email           :string
-#  data_phone           :string
-#  organization_type    :string
-#  public_info          :boolean          default(FALSE), not null
-#  responsible_admin_id :integer
-#  name                 :string           not null
+#  id                 :integer          not null, primary key
+#  observer_type      :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  is_active          :boolean          default(TRUE), not null
+#  logo               :string
+#  address            :string
+#  information_name   :string
+#  information_email  :string
+#  information_phone  :string
+#  data_name          :string
+#  data_email         :string
+#  data_phone         :string
+#  organization_type  :string
+#  public_info        :boolean          default(FALSE), not null
+#  responsible_qc2_id :integer
+#  name               :string           not null
+#  responsible_qc1_id :bigint
 #
 
 FactoryBot.define do

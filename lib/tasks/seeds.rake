@@ -74,7 +74,7 @@ class SeedsTasks
         governments_observations = GovernmentsObservation.where(observation: observations).order(:id)
         observation_operators = ObservationOperator.where(observation: observations, operator: operators).order(:id)
         documents_observations = ObservationDocumentsObservation.where(observation: observations, observation_document: evidences).order(:observation_id, :observation_document_id)
-        generate_for_model "Observer", entries: observers, exclude: %w[responsible_admin_id]
+        generate_for_model "Observer", entries: observers, exclude: %w[responsible_qc1_id responsible_qc2_id]
         generate_for_model "CountriesObserver", entries: countries_observers, exclude: %w[created_at updated_at]
         generate_for_model "ObservationReport", entries: reports, exclude: %w[created_at updated_at user_id]
         generate_for_model "ObservationReportObserver", entries: report_observers, exclude: %w[created_at updated_at]

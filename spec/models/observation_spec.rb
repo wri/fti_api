@@ -28,10 +28,11 @@
 #  location_accuracy                 :integer
 #  evidence_on_report                :string
 #  hidden                            :boolean          default(FALSE), not null
-#  admin_comment                     :text
+#  qc2_comment                       :text
 #  monitor_comment                   :text
 #  deleted_at                        :datetime
 #  locale                            :string
+#  qc1_comment                       :text
 #  details                           :text
 #  concern_opinion                   :text
 #  litigation_status                 :string
@@ -250,8 +251,8 @@ RSpec.describe Observation, type: :model do
     describe "notifications" do
       let(:admin1) { create(:admin) }
       let(:admin2) { create(:admin) }
-      let(:observer1) { create(:observer, responsible_admin: admin1) }
-      let(:observer2) { create(:observer, responsible_admin: admin2) }
+      let(:observer1) { create(:observer, responsible_qc2: admin1) }
+      let(:observer2) { create(:observer, responsible_qc2: admin2) }
       let(:observation_report) { create(:observation_report, observers: [observer1, observer2]) }
       let(:observation) {
         build(

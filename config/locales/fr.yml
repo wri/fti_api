@@ -877,7 +877,6 @@ fr:
         observer_type: Type d'observateur  #g
         organization_type: Type d'Organisation  #g
         public_info: Informations publiques  #g
-        responsible_admin: :activerecord.models.responsible_admin  #g
         translations: Traductions  #g
         users: Utilisateurs  #g
         versions: Versions  #g

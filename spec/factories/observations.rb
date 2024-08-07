@@ -28,10 +28,11 @@
 #  location_accuracy                 :integer
 #  evidence_on_report                :string
 #  hidden                            :boolean          default(FALSE), not null
-#  admin_comment                     :text
+#  qc2_comment                       :text
 #  monitor_comment                   :text
 #  deleted_at                        :datetime
 #  locale                            :string
+#  qc1_comment                       :text
 #  details                           :text
 #  concern_opinion                   :text
 #  litigation_status                 :string

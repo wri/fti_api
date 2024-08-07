@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_07_132619) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -638,10 +638,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
     t.string "data_phone"
     t.string "organization_type"
     t.boolean "public_info", default: false, null: false
-    t.integer "responsible_admin_id"
+    t.integer "responsible_qc2_id"
     t.string "name", null: false
     t.bigint "responsible_qc1_id"
-    t.bigint "responsible_qc2_id"
     t.index ["is_active"], name: "index_observers_on_is_active"
     t.index ["responsible_qc1_id"], name: "index_observers_on_responsible_qc1_id"
     t.index ["responsible_qc2_id"], name: "index_observers_on_responsible_qc2_id"
@@ -1184,7 +1183,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
   add_foreign_key "observations", "users", column: "modified_user_id"
   add_foreign_key "observer_managers", "observers", on_delete: :cascade
   add_foreign_key "observer_managers", "users", on_delete: :cascade
-  add_foreign_key "observers", "users", column: "responsible_admin_id", on_delete: :nullify
   add_foreign_key "observers", "users", column: "responsible_qc1_id", on_delete: :nullify
   add_foreign_key "observers", "users", column: "responsible_qc2_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
