@@ -165,6 +165,7 @@ class Observation < ApplicationRecord
   before_save :nullify_fmu_and_coordinates, unless: :is_physical_place
   before_save :set_centroid
   before_save :set_publication_date, if: :validation_status_changed?
+  before_save :clear_previous_qc_comments, if: -> { validation_status_changed? && ["Ready for QC1", "Ready for QC2"].include?(validation_status) }
   before_create :set_default_observer
 
   after_create :update_operator_scores, if: :is_active?
@@ -263,6 +264,11 @@ class Observation < ApplicationRecord
     self.lat = nil
     self.lng = nil
     self.fmu = nil
+  end
+
+  def clear_previous_qc_comments
+    self.qc1_comment = nil if validation_status == "Ready for QC1"
+    self.qc2_comment = nil if validation_status == "Ready for QC2"
   end
 
   def set_publication_date

@@ -109,17 +109,6 @@ module V1
       Observation.validation_statuses[@model.validation_status]
     end
 
-    def set_qc_validation_status
-      # TODO: I don't like this custom_command
-      return if context[:custom_command] != "ready_for_review"
-
-      @model.validation_status = if @model.published?
-        "Ready for QC2"
-      else
-        @model.qc1_needed? ? "Ready for QC1" : "Ready for QC2"
-      end
-    end
-
     def self.updatable_fields(context)
       super - [:hidden, :publication_date]
     end
@@ -135,7 +124,6 @@ module V1
     def set_user
       user = context[:current_user]
       @model.user_type = :monitor if @model.user_type.blank?
-      @model.user_type = @model.user_type.to_sym
       @model.user_id = user.id if context[:action] == "create"
       @model.modified_user_id = user.id
       @model.force_translations_from = @model.locale || user.locale
@@ -160,6 +148,47 @@ module V1
       else
         Observation.published
       end
+    end
+
+    private
+
+    def set_qc_validation_status
+      return if qc_action.blank?
+
+      ready_for_review_action if qc_action == "ready_for_review"
+      start_qc_action if qc_action == "start_qc"
+      approve_qc_action if qc_action == "approve_qc"
+      reject_qc_action if qc_action == "reject_qc"
+    end
+
+    def ready_for_review_action
+      @model.validation_status = if @model.published? || @model.validation_status == "Needs revision"
+        "Ready for QC2"
+      else
+        @model.qc1_needed? ? "Ready for QC1" : "Ready for QC2"
+      end
+    end
+
+    def start_qc_action
+      @model.user_type = :reviewer
+      @model.validation_status = "QC1 in progress" if @model.validation_status == "Ready for QC1"
+      @model.validation_status = "QC2 in progress" if @model.validation_status == "Ready for QC2"
+    end
+
+    def approve_qc_action
+      @model.user_type = :reviewer
+      @model.validation_status = "Ready for QC2" if @model.validation_status == "QC1 in progress"
+      @model.validation_status = "Ready for publication" if @model.validation_status == "QC2 in progress"
+    end
+
+    def reject_qc_action
+      @model.user_type = :reviewer
+      @model.validation_status = "Rejected" if @model.validation_status == "QC1 in progress"
+      @model.validation_status = "Needs revision" if @model.validation_status == "QC2 in progress"
+    end
+
+    def qc_action
+      context[:custom_command]
     end
   end
 end

@@ -61,7 +61,7 @@ ActiveAdmin.register Observation do
           observation: [
             :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
             :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
-            :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden,
+            :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :qc2_comment,
             :actions_taken, :is_physical_place, :force_translations_from,
             relevant_operator_ids: [], government_ids: [],
             observation_document_ids: [],

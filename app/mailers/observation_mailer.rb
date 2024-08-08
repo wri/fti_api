@@ -1,4 +1,6 @@
 class ObservationMailer < ApplicationMailer
+  include Rails.application.routes.url_helpers
+
   def observation_created(observation, user)
     @user = user
     @observation = observation
@@ -32,6 +34,7 @@ class ObservationMailer < ApplicationMailer
   def admin_observation_ready_for_qc(observation, user)
     @observation = observation
     @observer = observer
+    @link = start_qc_link(observation, user)
     mail to: user.email, subject: I18n.t(subject_i18n_key, id: observation.id)
   end
 
@@ -42,6 +45,12 @@ class ObservationMailer < ApplicationMailer
   end
 
   private
+
+  def start_qc_link(observation, user)
+    return "#{ENV["OBSERVATIONS_TOOL_URL"]}/private/observations/edit/#{observation.id}" if user.observation_tool_user?
+
+    start_qc_admin_observation_url(@observation)
+  end
 
   def observer
     @observation.modified_user&.observer || @observation.user&.observer || @observation.observers.first

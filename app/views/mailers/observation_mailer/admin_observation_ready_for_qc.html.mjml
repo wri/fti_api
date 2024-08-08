@@ -9,7 +9,7 @@
 </p>
 
 <p>
-  <%= t(".paragraph2", link: link_to(nil, start_qc_admin_observation_url(@observation), target: "_blank")).html_safe %>
+  <%= t(".paragraph2", link: link_to(nil, @link, target: "_blank")).html_safe %>
 </p>
 
 <p>
