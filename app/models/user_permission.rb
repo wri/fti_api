@@ -82,7 +82,8 @@ class UserPermission < ApplicationRecord
         operator_document: {manage: {}},
         required_operator_document_group: {cru: {}},
         required_operator_document: {cru: {}},
-        file_data_import: {manage: {}}
+        file_data_import: {manage: {}},
+        quality_controls: {cru: {}}
       }
     when "bo_manager"
       {
@@ -101,7 +102,8 @@ class UserPermission < ApplicationRecord
         fmu: {read: {}},
         operator_document: {read: {}},
         required_operator_document_group: {read: {}},
-        required_operator_document: {read: {}}
+        required_operator_document: {read: {}},
+        quality_controls: {cru: {}}
       }
     when "government"
       {

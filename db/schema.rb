@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_07_132619) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_153734) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -577,11 +577,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_132619) do
     t.integer "location_accuracy"
     t.string "evidence_on_report"
     t.boolean "hidden", default: false, null: false
-    t.text "qc2_comment"
+    t.text "admin_comment"
     t.text "monitor_comment"
     t.datetime "deleted_at", precision: nil
     t.string "locale"
-    t.text "qc1_comment"
     t.index ["country_id"], name: "index_observations_on_country_id"
     t.index ["created_at"], name: "index_observations_on_created_at"
     t.index ["deleted_at"], name: "index_observations_on_deleted_at"
@@ -812,6 +811,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_132619) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_protected_areas_on_country_id"
+  end
+
+  create_table "quality_controls", force: :cascade do |t|
+    t.string "reviewable_type", null: false
+    t.bigint "reviewable_id", null: false
+    t.bigint "reviewer_id", null: false
+    t.boolean "passed", default: false, null: false
+    t.text "comment"
+    t.jsonb "metadata", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_quality_controls_on_reviewable"
+    t.index ["reviewer_id"], name: "index_quality_controls_on_reviewer_id"
   end
 
   create_table "required_gov_document_group_translations", id: :serial, force: :cascade do |t|
@@ -1197,6 +1209,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_132619) do
   add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "operators", "holdings", on_delete: :nullify
   add_foreign_key "protected_areas", "countries", on_delete: :cascade
+  add_foreign_key "quality_controls", "users", column: "reviewer_id"
   add_foreign_key "required_gov_document_groups", "required_gov_document_groups", column: "parent_id"
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade

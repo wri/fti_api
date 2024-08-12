@@ -13,6 +13,7 @@
 //= require visibility
 //= require dependent_filters
 //= require sentry
+//= require quality_controls
 
 //= require active_admin/active_admin_globalize
 //= require chartkick

@@ -145,6 +145,7 @@ group :test do
   gem "cuprite"
   gem "database_cleaner"
   gem "email_spec"
+  gem "rspec-collection_matchers"
   gem "rspec-activejob"
   gem "rspec-rails"
   gem "rspec-request_snapshot", github: "tsubik/rspec-request_snapshot", branch: "fix/ignore-order"

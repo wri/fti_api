@@ -28,11 +28,10 @@
 #  location_accuracy                 :integer
 #  evidence_on_report                :string
 #  hidden                            :boolean          default(FALSE), not null
-#  qc2_comment                       :text
+#  admin_comment                     :text
 #  monitor_comment                   :text
 #  deleted_at                        :datetime
 #  locale                            :string
-#  qc1_comment                       :text
 #  details                           :text
 #  concern_opinion                   :text
 #  litigation_status                 :string
@@ -88,12 +87,6 @@ RSpec.describe Observation, type: :model do
       expect(subject.errors[:observers]).to include("can't be blank")
     end
 
-    it "is invalid without qc2 comment if status is needs revision" do
-      subject.validation_status = "Needs revision"
-      expect(subject.valid?).to eq(false)
-      expect(subject.errors[:qc2_comment]).to include("can't be blank")
-    end
-
     it "is invalid with governments if is of operator type" do
       subject.governments = build_list(:government, 1)
       subject.observation_type = :operator
@@ -145,31 +138,31 @@ RSpec.describe Observation, type: :model do
         end
       end
 
-      # describe "for a reviewer" do
-      #   let(:user_type) { :reviewer }
+      describe "for a reviewer" do
+        let(:user_type) { :reviewer }
 
-      #   before do
-      #     observation.save
-      #     observation.validation_status = new_status
-      #   end
+        before do
+          observation.save
+          observation.validation_status = new_status
+        end
 
-      #   context "when moving from `Ready for QC1` to `QC1 in progress`" do
-      #     let(:status) { "Ready for QC1" }
-      #     let(:new_status) { "QC1 in progress" }
+        context "when moving from `Ready for QC1` to `QC1 in progress`" do
+          let(:status) { "Ready for QC1" }
+          let(:new_status) { "QC1 in progress" }
 
-      #     it { is_expected.to be_valid }
-      #   end
+          it { is_expected.to be_valid }
+        end
 
-      #   context "when moving from `QC1 in progress` to `Published (modified)`" do
-      #     let(:status) { "Created" }
-      #     let(:new_status) { "Published (modified)" }
+        context "when moving from `QC1 in progress` to `Published (modified)`" do
+          let(:status) { "Created" }
+          let(:new_status) { "Published (modified)" }
 
-      #     it { is_expected.to_not be_valid }
-      #   end
-      # end
+          it { is_expected.to_not be_valid }
+        end
+      end
 
       describe "for an admin" do
-        let(:user_type) { :admin }
+        let(:user_type) { :reviewer }
 
         before do
           # looks like validate: false does not work correctly from Rails 6.0,
@@ -303,7 +296,15 @@ RSpec.describe Observation, type: :model do
         end
 
         context "when validation status is changed to `Needs revision`" do
-          subject { observation.update!(validation_status: "Needs revision", qc2_comment: "Some comment") }
+          subject { observation.update!(validation_status: "Needs revision") }
+
+          it "sends an email to observer users" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
+          end
+        end
+
+        context "when validation status is changed to 'Rejected'" do
+          subject { observation.update!(validation_status: "Rejected") }
 
           it "sends an email to observer users" do
             expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
@@ -378,7 +379,7 @@ RSpec.describe Observation, type: :model do
 
       context "when validation_status is not Approved" do
         it "set is_active to false" do
-          observation = create(:observation, validation_status: "Needs revision", qc2_comment: "Comment")
+          observation = create(:observation, validation_status: "Needs revision")
 
           expect(observation.is_active).to eql false
         end
@@ -491,26 +492,6 @@ RSpec.describe Observation, type: :model do
   end
 
   describe "Instance methods" do
-    describe "#user_name" do
-      context "when there is an user" do
-        it "return username" do
-          user = create(:user)
-          observation = create(:observation, user: user)
-
-          expect(observation.user_name).to eql observation.user.name
-        end
-      end
-
-      context "when there is not an user" do
-        it "return nil" do
-          observation = create(:observation)
-          observation.update(user: nil)
-
-          expect(observation.user_name).to eql nil
-        end
-      end
-    end
-
     describe "#translated_type" do
       it "return the translation of the observation type" do
         observation = create(:observation, observation_type: "operator")

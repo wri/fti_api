@@ -30,11 +30,10 @@
 #  location_accuracy                 :integer
 #  evidence_on_report                :string
 #  hidden                            :boolean          default(FALSE), not null
-#  qc2_comment                       :text
+#  admin_comment                     :text
 #  monitor_comment                   :text
 #  deleted_at                        :datetime
 #  locale                            :string
-#  qc1_comment                       :text
 #  details                           :text
 #  concern_opinion                   :text
 #  litigation_status                 :string
@@ -55,6 +54,8 @@ class Observation < ApplicationRecord
 
   translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
+
+  WrongStateError = Class.new(StandardError)
 
   enum evidence_type: {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
   enum observation_type: {"operator" => 0, "government" => 1}
@@ -98,6 +99,17 @@ class Observation < ApplicationRecord
     }
   }.freeze
 
+  QC_APPROVAL_STATUS_TRANSITIONS = {
+    "QC1 in progress" => {
+      false => "Rejected",
+      true => "Ready for QC2"
+    },
+    "QC2 in progress" => {
+      false => "Needs revision",
+      true => "Ready for publication"
+    }
+  }.freeze
+
   PUBLISHED_STATES = [
     "Published (modified)",
     "Published (not modified)",
@@ -117,6 +129,9 @@ class Observation < ApplicationRecord
   belongs_to :observation_report, optional: true
 
   belongs_to :subcategory, inverse_of: :observations, optional: true
+
+  has_many :quality_controls, as: :reviewable, dependent: :destroy
+  has_one :latest_quality_control, -> { order(created_at: :desc) }, inverse_of: :reviewable, class_name: "QualityControl"
 
   has_many :species_observations, dependent: :destroy
   has_many :species, through: :species_observations
@@ -156,7 +171,6 @@ class Observation < ApplicationRecord
   validates :observation_type, presence: true
 
   validates :validation_status, presence: true
-  validates :qc2_comment, presence: true, if: -> { validation_status == "Needs revision" }
 
   before_validation :assign_observers_from_report, if: :observation_report_changed?
   before_validation :nullify_evidence_on_report, if: -> { evidence_type != "Evidence presented in the report" }
@@ -165,7 +179,6 @@ class Observation < ApplicationRecord
   before_save :nullify_fmu_and_coordinates, unless: :is_physical_place
   before_save :set_centroid
   before_save :set_publication_date, if: :validation_status_changed?
-  before_save :clear_previous_qc_comments, if: -> { validation_status_changed? && ["Ready for QC1", "Ready for QC2"].include?(validation_status) }
   before_create :set_default_observer
 
   after_create :update_operator_scores, if: :is_active?
@@ -212,10 +225,6 @@ class Observation < ApplicationRecord
     end
   end
 
-  def user_name
-    user&.name
-  end
-
   def translated_type
     I18n.t("observation_types.#{observation_type}")
   end
@@ -250,8 +259,36 @@ class Observation < ApplicationRecord
     PUBLISHED_STATES.include?(validation_status)
   end
 
+  def qc_in_progress?
+    validation_status.in?(["QC1 in progress", "QC2 in progress"])
+  end
+
   def qc1_needed?
     observers.any?(&:responsible_qc1_id)
+  end
+
+  def update_qc_status!(qc_passed:)
+    raise WrongStateError, "QC not in progress" unless qc_in_progress?
+
+    update!(
+      user_type: :reviewer,
+      validation_status: QC_APPROVAL_STATUS_TRANSITIONS[validation_status][qc_passed]
+    )
+  end
+
+  def qc_available_decisions
+    return [] unless QC_APPROVAL_STATUS_TRANSITIONS[validation_status]
+
+    QC_APPROVAL_STATUS_TRANSITIONS[validation_status].invert.to_a
+  end
+
+  def qc_metadata(qc_passed:)
+    return {} unless qc_in_progress?
+
+    {
+      level: (validation_status == "QC1 in progress") ? "QC1" : "QC2",
+      decision: QC_APPROVAL_STATUS_TRANSITIONS[validation_status][qc_passed]
+    }
   end
 
   private
@@ -264,11 +301,6 @@ class Observation < ApplicationRecord
     self.lat = nil
     self.lng = nil
     self.fmu = nil
-  end
-
-  def clear_previous_qc_comments
-    self.qc1_comment = nil if validation_status == "Ready for QC1"
-    self.qc2_comment = nil if validation_status == "Ready for QC2"
   end
 
   def set_publication_date
@@ -367,11 +399,11 @@ class Observation < ApplicationRecord
   end
 
   def notify_about_changes
-    notify_qc1_reviewers "admin_observation_ready_for_qc" if validation_status == "Ready for QC1"
-    notify_qc2_reviewers "admin_observation_ready_for_qc" if validation_status == "Ready for QC2"
-    notify_qc2_reviewers "admin_observation_published_not_modified" if validation_status == "Published (not modified)"
+    notify_reviewers "admin_observation_ready_for_qc", level: :qc1 if validation_status == "Ready for QC1"
+    notify_reviewers "admin_observation_ready_for_qc", level: :qc2 if validation_status == "Ready for QC2"
+    notify_reviewers "admin_observation_published_not_modified", level: :qc2 if validation_status == "Published (not modified)"
     notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC2"
-    notify_observers "observation_needs_revision" if validation_status == "Needs revision"
+    notify_observers "observation_needs_revision" if validation_status == "Needs revision" || validation_status == "Rejected"
     notify_observers "observation_ready_for_publication" if validation_status == "Ready for publication"
     notify_observers "observation_published" if published?
   end
@@ -390,16 +422,9 @@ class Observation < ApplicationRecord
     )
   end
 
-  def notify_qc1_reviewers(mail_template)
+  def notify_reviewers(mail_template, level:)
     notify_users(
-      User.where(id: observers.distinct.pluck(:responsible_qc1_id)),
-      mail_template
-    )
-  end
-
-  def notify_qc2_reviewers(mail_template)
-    notify_users(
-      User.where(id: observers.distinct.pluck(:responsible_qc2_id)),
+      User.where(id: observers.distinct.pluck("responsible_#{level}_id")),
       mail_template
     )
   end

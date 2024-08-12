@@ -34,8 +34,7 @@ panel I18n.t("active_admin.observations_page.details") do
     row :concern_opinion
     row :observation_report
     row :qc1_needed?
-    row :qc1_comment
-    row :qc2_comment
+    row :admin_comment_deprecated, &:admin_comment
     row :monitor_comment
     row :user
     row :modified_user
@@ -45,5 +44,24 @@ panel I18n.t("active_admin.observations_page.details") do
     row :created_at
     row :updated_at
     row :deleted_at
+  end
+end
+
+panel "Quality Controls" do
+  if observation.quality_controls.any?
+    table_for observation.quality_controls.order(created_at: :desc) do
+      column :level do |qc|
+        qc.metadata["level"]
+      end
+      column :reviewer
+      column :passed?
+      tag_column :decision do |qc|
+        qc.metadata["decision"].presence
+      end
+      column :comment
+      column :performed_at, &:created_at
+    end
+  else
+    "No quality controls performed for this observation"
   end
 end

@@ -75,6 +75,10 @@ RSpec.describe ObservationMailer, type: :mailer do
   end
 
   describe "observation_needs_revision" do
+    before {
+      observation.update!(validation_status: "QC2 in progress")
+      create(:quality_control, reviewable: observation)
+    }
     let(:mail) { ObservationMailer.observation_needs_revision(observation, user) }
 
     it "renders the headers" do

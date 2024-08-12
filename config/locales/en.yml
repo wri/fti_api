@@ -423,6 +423,8 @@ en:
       scope_hidden: 'Hidden'
     users_page:
       responsible_for_countries_hint: Admin responsible for countries will get notifications concerning the private sector in these countries.
+    quality_control_page:
+      reviewable_not_in_qc: "Reviewed entity is not in QC in progress status"
     powered_by: "Admin Backoffice"
     delete_model: "Delete %{model}"
     delete: "Delete"
@@ -824,8 +826,6 @@ en:
 
       observation:
         actions_taken: Actions taken  #g
-        qc1_comment: QC1 comment  #g
-        qc2_comment: QC2 comment  #g
         country: :activerecord.models.country  #g
         deleted_at: Deleted at  #g
         evidence_on_report: Evidence on report  #g
@@ -1475,6 +1475,7 @@ en:
 
     errors:
       messages:
+        qc_in_progress: "QC must be in progress"
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
           has_one: "Cannot delete record because a dependent %{record} exists"

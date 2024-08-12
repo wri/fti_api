@@ -11,13 +11,14 @@ module V1
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
       :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
-      :is_physical_place, :complete, :hidden, :user_type, :qc1_comment, :qc2_comment, :monitor_comment, :locale
+      :is_physical_place, :complete, :hidden, :user_type, :monitor_comment, :locale
 
     has_many :species
     has_many :observation_documents
     has_many :observers
     has_many :relevant_operators, class_name: "Operator"
     has_many :governments
+    has_many :quality_controls
 
     has_one :country
     has_one :subcategory
@@ -32,7 +33,6 @@ module V1
 
     before_create :set_locale
     before_save :set_user
-    before_update :set_qc_validation_status
 
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
@@ -73,7 +73,7 @@ module V1
     def fetchable_fields
       return super if observations_tool_user?
 
-      super - [:qc1_comment, :qc2_comment, :monitor_comment, :created_at, :updated_at, :user, :modified_user]
+      super - [:monitor_comment, :created_at, :updated_at, :user, :modified_user]
     end
 
     def self.sortable_fields(context)
@@ -109,6 +109,22 @@ module V1
       Observation.validation_statuses[@model.validation_status]
     end
 
+    def validation_status=(value)
+      @model.validation_status = if value == "Ready for QC"
+        if @model.published? || @model.validation_status == "Needs revision"
+          "Ready for QC2"
+        else
+          @model.qc1_needed? ? "Ready for QC1" : "Ready for QC2"
+        end
+      elsif value == "QC in progress" && @model.validation_status == "Ready for QC1"
+        "QC1 in progress"
+      elsif value == "QC in progress" && @model.validation_status == "Ready for QC2"
+        "QC2 in progress"
+      else
+        value
+      end
+    end
+
     def self.updatable_fields(context)
       super - [:hidden, :publication_date]
     end
@@ -123,9 +139,10 @@ module V1
 
     def set_user
       user = context[:current_user]
+      @model.user_type = :reviewer if @model.qc_in_progress?
       @model.user_type = :monitor if @model.user_type.blank?
       @model.user_id = user.id if context[:action] == "create"
-      @model.modified_user_id = user.id
+      @model.modified_user_id = user.id unless @model.qc_in_progress?
       @model.force_translations_from = @model.locale || user.locale
     end
 
@@ -148,47 +165,6 @@ module V1
       else
         Observation.published
       end
-    end
-
-    private
-
-    def set_qc_validation_status
-      return if qc_action.blank?
-
-      ready_for_review_action if qc_action == "ready_for_review"
-      start_qc_action if qc_action == "start_qc"
-      approve_qc_action if qc_action == "approve_qc"
-      reject_qc_action if qc_action == "reject_qc"
-    end
-
-    def ready_for_review_action
-      @model.validation_status = if @model.published? || @model.validation_status == "Needs revision"
-        "Ready for QC2"
-      else
-        @model.qc1_needed? ? "Ready for QC1" : "Ready for QC2"
-      end
-    end
-
-    def start_qc_action
-      @model.user_type = :reviewer
-      @model.validation_status = "QC1 in progress" if @model.validation_status == "Ready for QC1"
-      @model.validation_status = "QC2 in progress" if @model.validation_status == "Ready for QC2"
-    end
-
-    def approve_qc_action
-      @model.user_type = :reviewer
-      @model.validation_status = "Ready for QC2" if @model.validation_status == "QC1 in progress"
-      @model.validation_status = "Ready for publication" if @model.validation_status == "QC2 in progress"
-    end
-
-    def reject_qc_action
-      @model.user_type = :reviewer
-      @model.validation_status = "Rejected" if @model.validation_status == "QC1 in progress"
-      @model.validation_status = "Needs revision" if @model.validation_status == "QC2 in progress"
-    end
-
-    def qc_action
-      context[:custom_command]
     end
   end
 end

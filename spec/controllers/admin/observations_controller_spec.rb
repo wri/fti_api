@@ -64,64 +64,64 @@ RSpec.describe Admin::ObservationsController, type: :controller do
       end
     end
 
-    describe "GET perform_qc" do
-      let(:observation) { create(:observation, force_status: "QC2 in progress") }
+    # describe "GET perform_qc" do
+    #   let(:observation) { create(:observation, force_status: "QC2 in progress") }
 
-      before { get :perform_qc, params: {id: observation.id} }
+    #   before { get :perform_qc, params: {id: observation.id} }
 
-      it "is successful" do
-        expect(response).to be_successful
-      end
+    #   it "is successful" do
+    #     expect(response).to be_successful
+    #   end
 
-      context "when not in QC2 in progress" do
-        let(:observation) { create(:observation, force_status: "Ready for QC2") }
+    #   context "when not in QC2 in progress" do
+    #     let(:observation) { create(:observation, force_status: "Ready for QC2") }
 
-        it "redirects to index" do
-          expect(response).to redirect_to(admin_observations_path)
-          expect(flash[:alert]).to match("Observation is not in QC2 in progress")
-        end
-      end
-    end
+    #     it "redirects to index" do
+    #       expect(response).to redirect_to(admin_observations_path)
+    #       expect(flash[:alert]).to match("Observation is not in QC2 in progress")
+    #     end
+    #   end
+    # end
 
-    describe "PUT perform_qc" do
-      let(:observation) { create(:observation, force_status: "QC2 in progress") }
+    # describe "PUT perform_qc" do
+    #   let(:observation) { create(:observation, force_status: "QC2 in progress") }
 
-      context "when needs revision" do
-        let(:observation_params) { {validation_status: "Needs revision", qc2_comment: "Comment"} }
+    #   context "when needs revision" do
+    #     let(:observation_params) { {validation_status: "Needs revision", qc2_comment: "Comment"} }
 
-        before { put :perform_qc, params: {id: observation.id, observation: observation_params} }
+    #     before { put :perform_qc, params: {id: observation.id, observation: observation_params} }
 
-        it "is successful" do
-          expect(response).to redirect_to(admin_observations_path)
-          expect(flash[:notice]).to match("Quality Control performed")
-          observation.reload
-          expect(observation.validation_status).to eq("Needs revision")
-          expect(observation.qc2_comment).to eq("Comment")
-        end
+    #     it "is successful" do
+    #       expect(response).to redirect_to(admin_observations_path)
+    #       expect(flash[:notice]).to match("Quality Control performed")
+    #       observation.reload
+    #       expect(observation.validation_status).to eq("Needs revision")
+    #       expect(observation.qc2_comment).to eq("Comment")
+    #     end
 
-        context "when missing admin comments" do
-          let(:observation_params) { {validation_status: "Needs revision", qc2_comment: ""} }
+    #     context "when missing admin comments" do
+    #       let(:observation_params) { {validation_status: "Needs revision", qc2_comment: ""} }
 
-          it "does not change validation status" do
-            # expect(response).to be_successful
-            expect(observation.reload.validation_status).to eq("QC2 in progress")
-          end
-        end
-      end
+    #       it "does not change validation status" do
+    #         # expect(response).to be_successful
+    #         expect(observation.reload.validation_status).to eq("QC2 in progress")
+    #       end
+    #     end
+    #   end
 
-      context "when ready to be published" do
-        let(:observation_params) { {validation_status: "Ready for publication"} }
+    #   context "when ready to be published" do
+    #     let(:observation_params) { {validation_status: "Ready for publication"} }
 
-        before { put :perform_qc, params: {id: observation.id, observation: observation_params} }
+    #     before { put :perform_qc, params: {id: observation.id, observation: observation_params} }
 
-        it "is successful" do
-          expect(response).to redirect_to(admin_observations_path)
-          expect(flash[:notice]).to match("Quality Control performed")
-          observation.reload
-          expect(observation.validation_status).to eq("Ready for publication")
-        end
-      end
-    end
+    #     it "is successful" do
+    #       expect(response).to redirect_to(admin_observations_path)
+    #       expect(flash[:notice]).to match("Quality Control performed")
+    #       observation.reload
+    #       expect(observation.validation_status).to eq("Ready for publication")
+    #     end
+    #   end
+    # end
 
     describe "PUT force_translations" do
       let(:observation) { create(:observation, :with_translations) }

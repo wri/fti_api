@@ -52,52 +52,26 @@ ActiveAdmin.register Observation do
   end
 
   actions :all, except: [:new]
-  controller do
-    def permitted_params
-      if current_user.user_permission.user_role == "bo_manager"
-        params.permit(observation: [:validation_status, :qc2_comment])
-      else
-        params.permit(
-          observation: [
-            :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
-            :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
-            :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :qc2_comment,
-            :actions_taken, :is_physical_place, :force_translations_from,
-            relevant_operator_ids: [], government_ids: [],
-            observation_document_ids: [],
-            translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
-          ]
-        )
-      end
-    end
-  end
 
-  member_action :perform_qc, method: [:put, :get] do
-    @page_title = I18n.t("active_admin.shared.perform_qc")
-    if request.get?
-      if resource.validation_status == "QC2 in progress"
-        render "perform_qc"
-      else
-        redirect_to collection_path, alert: I18n.t("active_admin.observations_page.not_in_qc_in_progress")
-      end
-    elsif resource.update permitted_params[:observation]
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.performed_qc")
-    else
-      render "perform_qc"
-    end
-  end
+  permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
+    :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
+    :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden,
+    :actions_taken, :is_physical_place, :force_translations_from,
+    relevant_operator_ids: [], government_ids: [],
+    observation_document_ids: [],
+    translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
   member_action :ready_for_publication, method: :put do
-    resource.validation_status = Observation.validation_statuses["Ready for publication"]
-    notice = resource.save ? I18n.t("active_admin.observations_page.moved_ready") : I18n.t("active_admin.observations_page.not_modified")
-    redirect_to collection_path, notice: notice
+    if QualityControl.create(reviewable: resource, reviewer: current_user, passed: true)
+      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.moved_ready")
+    else
+      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
+    end
   end
 
   member_action :start_qc, method: [:put, :get] do
-    resource.user_type = :reviewer
-    resource.validation_status = Observation.validation_statuses["QC2 in progress"]
-    if resource.save
-      redirect_to perform_qc_admin_observation_path(resource), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
+    if resource.update(user_type: :reviewer, validation_status: "QC2 in progress")
+      redirect_to new_admin_quality_control_path(reviewable_id: resource.id, reviewable_type: "Observation"), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
     else
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
     end
@@ -127,7 +101,7 @@ ActiveAdmin.register Observation do
 
   action_item :needs_revision, only: :show do
     if resource.validation_status == "QC2 in progress"
-      link_to I18n.t("active_admin.observations_page.needs_revision"), perform_qc_admin_observation_path(observation)
+      link_to I18n.t("active_admin.observations_page.needs_revision"), new_admin_quality_control_path(reviewable_id: resource.id, reviewable_type: "Observation")
     end
   end
 
@@ -150,7 +124,7 @@ ActiveAdmin.register Observation do
       batch_action_collection.find(ids).each do |observation|
         next unless observation.validation_status == "QC2 in progress"
 
-        observation.update(validation_status: "Ready for publication")
+        QualityControl.create(reviewable: observation, reviewer: current_user, passed: true)
       end
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.ready_to_publish")
     end
@@ -170,7 +144,7 @@ ActiveAdmin.register Observation do
     end
   end
 
-  sidebar I18n.t("active_admin.operator_page.documents"), only: [:show, :perform_qc] do
+  sidebar I18n.t("active_admin.operator_page.documents"), only: [:show] do
     attributes_table_for resource do
       ul do
         resource.observation_documents.collect do |od|
@@ -319,8 +293,6 @@ ActiveAdmin.register Observation do
     column I18n.t("document_types.Report") do |observation|
       observation.observation_report&.title
     end
-    column :qc1_comment
-    column :qc2_comment
     column :monitor_comment
     column I18n.t("activerecord.models.user") do |observation|
       observation.user&.name
@@ -409,8 +381,6 @@ ActiveAdmin.register Observation do
       title = o.observation_report.title[0..100] + ((o.observation_report.title.length >= 100) ? "..." : "") if o.observation_report&.title
       link_to title, admin_observation_report_path(o.observation_report_id) if o.observation_report.present?
     end
-    column :qc1_comment, sortable: false
-    column :qc2_comment, sortable: false
     column :monitor_comment, sortable: false
     column :user, sortable: false
     column :modified_user, sortable: false
@@ -422,7 +392,8 @@ ActiveAdmin.register Observation do
     column :deleted_at
     column(I18n.t("active_admin.shared.actions")) do |observation|
       a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC2"
-      a I18n.t("active_admin.observations_page.needs_revision"), href: perform_qc_admin_observation_path(observation) if observation.validation_status == "QC2 in progress"
+      a I18n.t("active_admin.shared.start_qc"), href: new_admin_quality_control_path(reviewable_id: observation.id, reviewable_type: "Observation") if observation.validation_status == "QC2 in progress"
+      a I18n.t("active_admin.observations_page.needs_revision"), href: new_admin_quality_control_path(reviewable_id: observation.id, reviewable_type: "Observation") if observation.validation_status == "QC2 in progress"
       a I18n.t("active_admin.observations_page.ready_to_publish"), href: ready_for_publication_admin_observation_path(observation), "data-method": :put if observation.validation_status == "QC2 in progress"
     end
     actions
@@ -469,7 +440,6 @@ ActiveAdmin.register Observation do
             ["is_physical_place", I18n.t("activerecord.attributes.observation.is_physical_place"), :checked],
             ["litigation_status", I18n.t("activerecord.attributes.observation/translation.litigation_status"), :checked],
             ["report", I18n.t("document_types.Report"), :checked],
-            ["qc2_comment", I18n.t("activerecord.attributes.observation.qc2_comment"), :checked],
             ["monitor_comment", I18n.t("activerecord.attributes.observation.monitor_comment"), :checked],
             ["user", I18n.t("activerecord.attributes.observation.user"), :checked],
             ["modified_user", Observation.human_attribute_name(:modified_user), :checked],

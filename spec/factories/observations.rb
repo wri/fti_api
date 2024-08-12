@@ -28,11 +28,10 @@
 #  location_accuracy                 :integer
 #  evidence_on_report                :string
 #  hidden                            :boolean          default(FALSE), not null
-#  qc2_comment                       :text
+#  admin_comment                     :text
 #  monitor_comment                   :text
 #  deleted_at                        :datetime
 #  locale                            :string
-#  qc1_comment                       :text
 #  details                           :text
 #  concern_opinion                   :text
 #  litigation_status                 :string
@@ -81,6 +80,14 @@ FactoryBot.define do
     validation_status { "Published (no comments)" }
     is_active { true }
     publication_date { DateTime.now.yesterday.to_date }
+  end
+
+  trait :with_failed_qc do
+    quality_controls { [build(:quality_control, :not_passed)] }
+  end
+
+  trait :with_passed_qc do
+    quality_controls { [build(:quality_control, :passed)] }
   end
 
   trait :with_translations do

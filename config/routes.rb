@@ -80,6 +80,7 @@ Rails.application.routes.draw do
       jsonapi_resources :tutorials, only: [:index, :show] do; end
       jsonapi_resources :users do; end
       jsonapi_resources :pages do; end
+      jsonapi_resources :quality_controls, only: [:create] do; end
       # rubocop:enable Standard/BlockSingleLineBraces
 
       resources :fmus, only: [:index, :update] do

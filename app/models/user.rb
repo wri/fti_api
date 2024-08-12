@@ -67,7 +67,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :name, presence: true
   validates :locale, inclusion: {in: I18n.available_locales.map(&:to_s), allow_blank: true}
-  validates :password, confirmation: true, length: {within: 8..20}, on: :create
+  validates :password, confirmation: true, length: {within: 8..128}, on: :create
   validates :password_confirmation, presence: true, on: :create
   validates :user_permission, presence: true
   validates :operator, presence: true, if: -> { user_permission&.operator? }
