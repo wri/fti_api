@@ -369,6 +369,16 @@ ActiveAdmin.after_load do |app|
   app.view_factory.register header: CustomAdminHeader
 end
 
+# activeadmin_addons update in 1.10 introduced a bug where it raises Formtastic::UnsupportedEnumCollection for multiple selects with enum values
+# not sure why it should be raising not supported but it works so for me it's supported just fine
+# https://github.com/platanus/activeadmin_addons/pull/442/files#diff-811ca221eee9c4866653114961ac21bcd0398557bb402c60f149be506c385a8eR3
+class ActiveAdmin::Inputs::Filters::SelectInput
+  def initialize(*)
+    super
+  rescue Formtastic::UnsupportedEnumCollection
+  end
+end
+
 # Modifies the display of the CSVs so that it shows on to download an English and a French versions.
 module ActiveAdmin::ViewHelpers::DownloadFormatLinksHelper
   def build_download_format_links(formats = self.class.formats)
