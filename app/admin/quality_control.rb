@@ -9,9 +9,9 @@ ActiveAdmin.register QualityControl do
 
   controller do
     def new
-      redirect_to reviewable_path, notice: I18n.t("active_admin.quality_control_page.reviewable_not_in_qc") and return unless reviewable.qc_in_progress?
-
-      super
+      super do
+        redirect_to reviewable_path, notice: I18n.t("active_admin.quality_control_page.reviewable_not_in_qc") and return unless resource.reviewable.qc_in_progress?
+      end
     end
 
     def create
@@ -22,16 +22,7 @@ ActiveAdmin.register QualityControl do
 
     helper_method :reviewable_path
     def reviewable_path
-      admin_observation_path(reviewable) if reviewable.is_a?(Observation)
-    end
-
-    helper_method :reviewable
-    def reviewable
-      @reviewable ||= if params[:reviewable_type] && params[:reviewable_id]
-        params[:reviewable_type].constantize.find(params[:reviewable_id])
-      else
-        resource.reviewable
-      end
+      admin_observation_path(resource.reviewable) if resource.reviewable.is_a?(Observation)
     end
   end
 
@@ -39,11 +30,11 @@ ActiveAdmin.register QualityControl do
     f.semantic_errors(*f.object.errors.attribute_names)
 
     f.hidden_field :reviewer_id, value: current_user.id
-    f.hidden_field :reviewable_id, value: params[:reviewable_id]
-    f.hidden_field :reviewable_type, value: params[:reviewable_type]
+    f.hidden_field :reviewable_id, value: resource.reviewable_id
+    f.hidden_field :reviewable_type, value: resource.reviewable_type
 
     f.inputs do
-      f.input :passed, as: :radio, collection: reviewable.qc_available_decisions, label: I18n.t("operator_documents.qc_form.decision")
+      f.input :passed, as: :radio, collection: resource.reviewable.qc_available_decisions, label: I18n.t("operator_documents.qc_form.decision")
       f.input :comment, as: :text
     end
 
@@ -55,8 +46,8 @@ ActiveAdmin.register QualityControl do
       end
     end
 
-    if params[:reviewable_type] == "Observation"
-      render partial: "admin/observations/attributes_table", locals: {observation: reviewable}
+    if resource.reviewable_type == "Observation"
+      render partial: "admin/observations/attributes_table", locals: {observation: resource.reviewable}
     end
   end
 end

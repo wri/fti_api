@@ -83,7 +83,7 @@ class UserPermission < ApplicationRecord
         required_operator_document_group: {cru: {}},
         required_operator_document: {cru: {}},
         file_data_import: {manage: {}},
-        quality_controls: {cru: {}}
+        quality_controls: {cru: {reviewable_id: user.quality_controlable_observations.pluck(:id), reviewable_type: "Observation"}}
       }
     when "bo_manager"
       {
@@ -103,7 +103,7 @@ class UserPermission < ApplicationRecord
         operator_document: {read: {}},
         required_operator_document_group: {read: {}},
         required_operator_document: {read: {}},
-        quality_controls: {cru: {}}
+        quality_controls: {cru: {reviewable_id: user.quality_controlable_observations.pluck(:id), reviewable_type: "Observation"}}
       }
     when "government"
       {

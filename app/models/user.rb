@@ -109,6 +109,10 @@ class User < ApplicationRecord
     [observer_id, *managed_observer_ids].compact.uniq
   end
 
+  def quality_controlable_observations
+    Observation.joins(:observers).where(observers: {id: qc1_observers.pluck(:id) + qc2_observers.pluck(:id)})
+  end
+
   def operator_ids
     return [operator_id] if operator_id.present?
     return holding.operators.pluck(:id) if holding_id.present?

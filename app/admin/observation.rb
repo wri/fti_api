@@ -37,12 +37,6 @@ ActiveAdmin.register Observation do
     end
   end
 
-  before_action do
-    if %w[POST PATCH PUT].include?(request.method) && action_name != "batch_action"
-      resource.user_type = :reviewer
-    end
-  end
-
   scope_to do
     Class.new do
       def self.observations
@@ -61,17 +55,9 @@ ActiveAdmin.register Observation do
     observation_document_ids: [],
     translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
 
-  member_action :ready_for_publication, method: :put do
-    if QualityControl.create(reviewable: resource, reviewer: current_user, passed: true)
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.moved_ready")
-    else
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
-    end
-  end
-
   member_action :start_qc, method: [:put, :get] do
     if resource.update(user_type: :reviewer, validation_status: "QC2 in progress")
-      redirect_to new_admin_quality_control_path(reviewable_id: resource.id, reviewable_type: "Observation"), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
+      redirect_to new_admin_quality_control_path(quality_control: {reviewable_id: resource.id, reviewable_type: "Observation"}), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
     else
       redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
     end
@@ -91,44 +77,12 @@ ActiveAdmin.register Observation do
     end
   end
 
-  action_item :ready_for_publication, only: :show do
-    if resource.validation_status == "QC2 in progress"
-      link_to I18n.t("active_admin.observations_page.ready_for_publication"), ready_for_publication_admin_observation_path(observation),
-        method: :put, data: {confirm: I18n.t("active_admin.observations_page.confirm_ready_publication")},
-        notice: I18n.t("active_admin.observations_page.approved")
-    end
-  end
-
-  action_item :needs_revision, only: :show do
-    if resource.validation_status == "QC2 in progress"
-      link_to I18n.t("active_admin.observations_page.needs_revision"), new_admin_quality_control_path(reviewable_id: resource.id, reviewable_type: "Observation")
-    end
-  end
-
-  action_item :start_qc, only: :show, if: proc { resource.validation_status == "Ready for QC2" } do
+  action_item :start_qc, only: :show, if: proc { resource.validation_status == "Ready for QC2" && resource.responsible_for_qc2.include?(current_user) } do
     link_to I18n.t("active_admin.shared.start_qc"), start_qc_admin_observation_path(observation), method: :put
   end
 
   # Bulk actions should be available only if this env flag is set to `true`
   if ENV.fetch("BULK_EDIT_OBSERVATIONS", "TRUE").upcase == "TRUE"
-    batch_action :move_to_qc_in_progress, confirm: I18n.t("active_admin.observations_page.bulk_confirm_qc") do |ids|
-      batch_action_collection.find(ids).each do |observation|
-        next unless observation.validation_status == "Ready for QC2"
-
-        observation.update(validation_status: "QC2 in progress")
-      end
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.qc_started")
-    end
-
-    batch_action :move_to_ready_for_publication, confirm: I18n.t("active_admin.observations_page.bulk_ready_for_publication") do |ids|
-      batch_action_collection.find(ids).each do |observation|
-        next unless observation.validation_status == "QC2 in progress"
-
-        QualityControl.create(reviewable: observation, reviewer: current_user, passed: true)
-      end
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.ready_to_publish")
-    end
-
     batch_action :hide, confirm: I18n.t("active_admin.observations_page.bulk_hide") do |ids|
       batch_action_collection.find(ids).each do |observation|
         observation.update(hidden: true)
@@ -391,10 +345,10 @@ ActiveAdmin.register Observation do
     column :updated_at
     column :deleted_at
     column(I18n.t("active_admin.shared.actions")) do |observation|
-      a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC2"
-      a I18n.t("active_admin.shared.start_qc"), href: new_admin_quality_control_path(reviewable_id: observation.id, reviewable_type: "Observation") if observation.validation_status == "QC2 in progress"
-      a I18n.t("active_admin.observations_page.needs_revision"), href: new_admin_quality_control_path(reviewable_id: observation.id, reviewable_type: "Observation") if observation.validation_status == "QC2 in progress"
-      a I18n.t("active_admin.observations_page.ready_to_publish"), href: ready_for_publication_admin_observation_path(observation), "data-method": :put if observation.validation_status == "QC2 in progress"
+      if observation.responsible_for_qc2.include? current_user
+        a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC2"
+        a I18n.t("active_admin.shared.start_qc"), href: new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}) if observation.validation_status == "QC2 in progress"
+      end
     end
     actions
 
@@ -463,12 +417,7 @@ ActiveAdmin.register Observation do
     f.inputs I18n.t("shared.status") do
       f.input :is_active, input_html: {disabled: true}
       f.input :hidden, **visibility
-      if Observation::STATUS_TRANSITIONS[:reviewer].key?(f.object.validation_status)
-        valid_statuses = [Observation::STATUS_TRANSITIONS[:reviewer][f.object.validation_status], f.object.validation_status].flatten
-        f.input :validation_status, collection: valid_statuses
-      else
-        f.input :validation_status, {input_html: {disabled: true}}
-      end
+      f.input :validation_status, input_html: {disabled: true}
     end
     f.inputs I18n.t("active_admin.observations_page.details") do
       f.input :observation_type, input_html: {disabled: true}
@@ -566,7 +515,7 @@ ActiveAdmin.register Observation do
 
     f.inputs I18n.t("active_admin.shared.translated_fields") do
       f.input :locale, input_html: {disabled: true}
-      if Observation::PUBLISHED_STATES.include? object.validation_status
+      if f.object.published?
         f.input :force_translations_from, label: I18n.t("active_admin.shared.translate_from"),
           as: :select,
           collection: I18n.available_locales.sort,

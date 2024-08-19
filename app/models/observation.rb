@@ -267,6 +267,18 @@ class Observation < ApplicationRecord
     observers.any?(&:responsible_qc1_id)
   end
 
+  def responsible_for_qc1
+    User.where(id: observers.pluck(:responsible_qc1_id))
+  end
+
+  def responsible_for_qc2
+    User.where(id: observers.pluck(:responsible_qc2_id))
+  end
+
+  def all_responsible_for_qc
+    responsible_for_qc1.or(responsible_for_qc2)
+  end
+
   def update_qc_status!(qc_passed:)
     raise WrongStateError, "QC not in progress" unless qc_in_progress?
 

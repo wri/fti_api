@@ -11,7 +11,7 @@ RSpec.describe Admin::QualityControlsController, type: :controller do
   describe "GET new" do
     let!(:observation) { create(:observation, validation_status: "QC2 in progress") }
 
-    subject { get :new, params: {reviewable_id: observation.id, reviewable_type: "Observation"} }
+    subject { get :new, params: {quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}} }
 
     it { is_expected.to be_successful }
   end
