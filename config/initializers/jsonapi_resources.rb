@@ -9,6 +9,7 @@ JSONAPI.configure do |config|
   config.always_include_to_one_linkage_data = false
   config.warn_on_missing_routes = false
   config.default_exclude_links = :default
+  config.exception_class_whitelist = [CanCan::AccessDenied]
 
   # Metadata
   # Output record count in top level meta for find operation
