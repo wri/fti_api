@@ -129,8 +129,8 @@ ActiveAdmin.register Observer, as: "Monitor" do
     end
     unless f.object.new_record?
       f.inputs "Quality Control" do
-        f.input :responsible_qc1, as: :select, collection: f.object.users_eligible_for_qc1
-        f.input :responsible_qc2, as: :select, collection: f.object.users_eligible_for_qc2
+        f.input :responsible_qc1, as: :select, collection: User.with_roles(:ngo_manager).filter_actives
+        f.input :responsible_qc2, as: :select, collection: User.with_roles([:admin, :ngo_manager]).filter_actives
       end
     end
     f.inputs I18n.t("activerecord.attributes.observer.public_info") do

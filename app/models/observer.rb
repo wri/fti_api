@@ -68,14 +68,6 @@ class Observer < ApplicationRecord
   scope :inactive, -> { where(is_active: false) }
   scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observers).select("observers.id").distinct.select("observers.id")) }
 
-  def users_eligible_for_qc1
-    managers.with_roles(:ngo_manager).filter_actives
-  end
-
-  def users_eligible_for_qc2
-    users_eligible_for_qc1 + User.with_roles(:admin).filter_actives
-  end
-
   class << self
     def observer_select
       by_name_asc.map { |c| ["#{c.name} (#{c.observer_type})", c.id] }

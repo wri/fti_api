@@ -102,7 +102,7 @@ ActiveAdmin.register User do
       row :operator if resource.operator?
       row :responsible_for_countries if resource.admin?
       row :observer if resource.ngo? || resource.ngo_manager?
-      row :managed_observers if resource.ngo? || resource.ngo_manager? || resource.admin?
+      # row :managed_observers if resource.ngo? || resource.ngo_manager? || resource.admin?
       row :qc1_observers if resource.ngo_manager?
       row :qc2_observers if resource.admin? || resource.ngo_manager?
       row :is_active
@@ -123,15 +123,16 @@ ActiveAdmin.register User do
         p.input :user_role, as: :select, collection: UserPermission.user_roles.keys, include_blank: false
       end
       f.input :observer
-      f.input :managed_observers
+      # TODO: remove if removing managed_observers
+      # f.input :managed_observers
       f.input :qc1_observers,
         as: :select,
         hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
-        collection: f.object.managed_observers.left_outer_joins(:responsible_qc1).map { |o| [o.responsible_qc1.present? ? "#{o.name} (QC: #{o.responsible_qc1.name})" : o.name, o.id] }
+        collection: Observer.left_outer_joins(:responsible_qc1).map { |o| [o.responsible_qc1.present? ? "#{o.name} (QC: #{o.responsible_qc1.name})" : o.name, o.id] }
       f.input :qc2_observers,
         as: :select,
         hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
-        collection: (f.object.admin? ? Observer.all : f.object.managed_observers).left_outer_joins(:responsible_qc2).map { |o| [o.responsible_qc2.present? ? "#{o.name} (QC: #{o.responsible_qc2.name})" : o.name, o.id] }
+        collection: Observer.left_outer_joins(:responsible_qc2).map { |o| [o.responsible_qc2.present? ? "#{o.name} (QC: #{o.responsible_qc2.name})" : o.name, o.id] }
       f.input :operator
       f.input :holding
       f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)

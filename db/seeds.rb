@@ -50,7 +50,7 @@ foder = Observer.find_by!(name: "FODER")
 holding.update!(holding: Holding.first)
 operator.update!(operator: ifo)
 ngo.update!(observer: ogf)
-ngo_manager.update!(observer: ogf, managed_observers: [ocean, foder])
+ngo_manager.update!(observer: ogf, qc1_observers: [ocean, foder])
 government.update!(country: cameroon)
 admin.update!(responsible_for_countries: [cameroon, congo])
 
