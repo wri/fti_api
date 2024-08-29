@@ -109,6 +109,10 @@ class User < ApplicationRecord
     [observer_id, *managed_observer_ids].compact.uniq
   end
 
+  def reviewable_observer_ids
+    [*qc1_observer_ids, *qc2_observer_ids].compact.uniq
+  end
+
   def quality_controlable_observations
     Observation.joins(:observers).where(observers: {id: qc1_observers.pluck(:id) + qc2_observers.pluck(:id)})
   end

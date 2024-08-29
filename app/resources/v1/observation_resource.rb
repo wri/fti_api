@@ -159,8 +159,8 @@ module V1
       if app == "observations-tool" && user.present?
         if user.user_permission.present? && user.user_permission.user_role == "admin"
           Observation.all
-        elsif user.all_managed_observer_ids.any?
-          Observation.own_with_inactive(user.all_managed_observer_ids)
+        else
+          Observation.own_with_inactive([user.observer_id, *user.reviewable_observer_ids])
         end
       else
         Observation.published
