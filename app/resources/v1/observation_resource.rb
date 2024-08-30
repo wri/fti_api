@@ -6,6 +6,8 @@ module V1
     # TODO: investigate caching issues, I remember it was somthing with included resources like observers
     # caching
 
+    attr_reader :adjust_validation_status_with_value
+
     attributes :observation_type, :publication_date, :pv, :is_active,
       :details, :evidence_type, :evidence_on_report, :concern_opinion,
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
@@ -32,6 +34,7 @@ module V1
     has_one :observation_report
 
     before_create :set_locale
+    before_save :set_validation_status, if: :adjust_validation_status_with_value # must be before set_user
     before_save :set_user
 
     filters :id, :observation_type, :fmu_id, :country_id,
@@ -109,7 +112,14 @@ module V1
       Observation.validation_statuses[@model.validation_status]
     end
 
+    # to not allow the user to change validation status with non existent values (AR will raise an error)
+    # we will adjust them in before_save hook as here not full object is instantiated (missing relationships)
     def validation_status=(value)
+      @adjust_validation_status_with_value = value
+    end
+
+    def set_validation_status
+      value = adjust_validation_status_with_value
       @model.validation_status = if value == "Ready for QC"
         if @model.published? || @model.validation_status == "Needs revision"
           "Ready for QC2"

@@ -34,7 +34,7 @@ end
 ngo = User.create_with(**common_fields, first_name: "NGO").find_or_create_by(email: "ngo@example.com") do |user|
   user.build_user_permission(user_role: "ngo")
 end
-User.create_with(**common_fields, first_name: "NGO", last_name: "Manager").find_or_create_by(email: "ngo_manager@example.com") do |user|
+ngo_manager = User.create_with(**common_fields, first_name: "NGO", last_name: "Manager").find_or_create_by(email: "ngo_manager@example.com") do |user|
   user.build_user_permission(user_role: "ngo_manager")
 end
 ngo_reviewer = User.create_with(**common_fields, first_name: "NGO", last_name: "Reviewer").find_or_create_by(email: "ngo_reviewer@example.com") do |user|
@@ -53,6 +53,8 @@ foder = Observer.find_by!(name: "FODER")
 holding.update!(holding: Holding.first)
 operator.update!(operator: ifo)
 ngo.update!(observer: ogf)
+
+ngo_manager.update!(observer: ogf)
 ngo_reviewer.update!(observer: ocean, qc1_observers: [ogf, foder])
 government.update!(country: cameroon)
 admin.update!(responsible_for_countries: [cameroon, congo])
