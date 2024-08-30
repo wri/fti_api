@@ -56,6 +56,7 @@ ngo.update!(observer: ogf)
 
 ngo_manager.update!(observer: ogf)
 ngo_reviewer.update!(observer: ocean, qc1_observers: [ogf, foder])
+ngo_reviewer.update!(observer: ocean, qc2_observers: [ogf, foder])
 government.update!(country: cameroon)
 admin.update!(responsible_for_countries: [cameroon, congo])
 
