@@ -7,8 +7,9 @@ env = ENV["RAILS_ENV"]
 abort "HEALTHCHECKS_ACCOUNT_ID is not set" unless account_id
 
 unless ENV["SKIP_CRON"] == "true"
+  nvm_exec = "NODE_VERSION=default ~/.nvm/nvm-exec"
   check_in = "curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/#{account_id}/#{env}-:check_in"
-  job_type :rake, "cd :path && :environment_variable=:environment bundle exec rake :task --silent :output && #{check_in}"
+  job_type :rake, "cd :path && :environment_variable=:environment #{nvm_exec} bundle exec rake :task --silent :output && #{check_in}"
   set :output, "#{path}/log/cron.log"
   every 1.day, at: "1 am" do
     rake "scheduler:expire", check_in: "expire-documents"
