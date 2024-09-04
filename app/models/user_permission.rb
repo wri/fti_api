@@ -67,7 +67,7 @@ class UserPermission < ApplicationRecord
     when "ngo_manager"
       {
         user: {manage: {id: user.id}},
-        observation: {manage: {observers: {id: user.all_managed_observer_ids}}, read: {}, create: {}},
+        observation: {manage: {observers: {id: user.all_managed_observer_ids}}, update: {observers: {id: user.reviewable_observer_ids}}, read: {}, create: {}},
         observation_report: {update: {observers: {id: user.all_managed_observer_ids}}, create: {}},
         observation_documents: {ud: {observations: {is_active: false, observers: {id: user.all_managed_observer_ids}}}, create: {}},
         category: {cru: {}},

@@ -38,6 +38,7 @@ RSpec.describe UserPermission, type: :model do
       let(:user) { create(:bo_manager, qc1_observers: [@observer1]) }
 
       it { is_expected.to be_able_to(:manage, user) }
+
       it { is_expected.to be_able_to(:cru, QualityControl.new(reviewable: @observation1)) }
       it { is_expected.not_to be_able_to(:delete, QualityControl.new(reviewable: @observation1)) }
       it { is_expected.not_to be_able_to(:cru, QualityControl.new(reviewable: @observation2)) }
@@ -49,6 +50,14 @@ RSpec.describe UserPermission, type: :model do
       let(:user) { create(:ngo_manager, qc1_observers: [@observer1]) }
 
       it { is_expected.to be_able_to(:manage, user) }
+
+      it { is_expected.not_to be_able_to(:manage, @observation1) }
+      it { is_expected.to be_able_to(:update, @observation1) }
+      it { is_expected.to be_able_to(:read, @observation1) }
+      it { is_expected.not_to be_able_to(:manage, @observation2) }
+      it { is_expected.not_to be_able_to(:update, @observation2) }
+      it { is_expected.to be_able_to(:read, @observation2) }
+
       it { is_expected.to be_able_to(:cru, QualityControl.new(reviewable: @observation1)) }
       it { is_expected.not_to be_able_to(:delete, QualityControl.new(reviewable: @observation1)) }
       it { is_expected.not_to be_able_to(:cru, QualityControl.new(reviewable: @observation2)) }
