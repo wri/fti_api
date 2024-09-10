@@ -9,6 +9,7 @@ class TranslationJob < ApplicationJob
   # The model should have a TRANSLATABLE_FIELDS constant
   def perform(entity, original_locale)
     return unless entity.class.const_defined?(:AUTOMATICALLY_TRANSLATABLE_FIELDS)
+    return if Rails.env.e2e? && ENV["GOOGLE_API_KEY"].blank?
 
     fields = entity.class.const_get(:AUTOMATICALLY_TRANSLATABLE_FIELDS)
     translation_service = TranslationService.new

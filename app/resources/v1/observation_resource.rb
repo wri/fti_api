@@ -3,20 +3,24 @@
 module V1
   class ObservationResource < BaseResource
     include CacheableByLocale
+    # TODO: investigate caching issues, I remember it was somthing with included resources like observers
     # caching
+
+    attr_reader :adjust_validation_status_with_value
 
     attributes :observation_type, :publication_date, :pv, :is_active,
       :details, :evidence_type, :evidence_on_report, :concern_opinion,
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
       :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
-      :is_physical_place, :complete, :hidden, :admin_comment, :monitor_comment, :locale
+      :is_physical_place, :complete, :hidden, :user_type, :monitor_comment, :locale
 
     has_many :species
     has_many :observation_documents
     has_many :observers
     has_many :relevant_operators, class_name: "Operator"
     has_many :governments
+    has_many :quality_controls
 
     has_one :country
     has_one :subcategory
@@ -29,15 +33,14 @@ module V1
     has_one :fmu
     has_one :observation_report
 
-    before_create :set_user
     before_create :set_locale
-    before_save :set_modified
-    before_save :validate_status
+    before_save :set_validation_status, if: :adjust_validation_status_with_value # must be before set_user
+    before_save :set_user
 
     filters :id, :observation_type, :fmu_id, :country_id,
       :publication_date, :observer_id, :subcategory_id, :years,
-      :observation_report, :law, :operator, :subcategory,
-      :is_active, :validation_status, :is_physical_place
+      :observation_report, :law, :operator, :subcategory, :validation_status,
+      :is_active, :is_physical_place
 
     filter :hidden, default: "false", apply: ->(records, value, options) {
       return records if value.include?("all")
@@ -73,7 +76,7 @@ module V1
     def fetchable_fields
       return super if observations_tool_user?
 
-      super - [:admin_comment, :monitor_comment, :created_at, :updated_at, :user, :modified_user]
+      super - [:monitor_comment, :created_at, :updated_at, :user, :modified_user]
     end
 
     def self.sortable_fields(context)
@@ -109,6 +112,29 @@ module V1
       Observation.validation_statuses[@model.validation_status]
     end
 
+    # to not allow the user to change validation status with non existent values (AR will raise an error)
+    # we will adjust them in before_save hook as here not full object is instantiated (missing relationships)
+    def validation_status=(value)
+      @adjust_validation_status_with_value = value
+    end
+
+    def set_validation_status
+      value = adjust_validation_status_with_value
+      @model.validation_status = if value == "Ready for QC"
+        if @model.published? || @model.validation_status == "Needs revision"
+          "Ready for QC2"
+        else
+          @model.qc1_needed? ? "Ready for QC1" : "Ready for QC2"
+        end
+      elsif value == "QC in progress" && @model.validation_status == "Ready for QC1"
+        "QC1 in progress"
+      elsif value == "QC in progress" && @model.validation_status == "Ready for QC2"
+        "QC2 in progress"
+      else
+        value
+      end
+    end
+
     def self.updatable_fields(context)
       super - [:hidden, :publication_date]
     end
@@ -117,25 +143,17 @@ module V1
       super - [:hidden, :publication_date]
     end
 
-    def set_user
-      @model.user_id = context[:current_user].id
-    end
-
     def set_locale
       @model.locale = context[:current_user].locale if @model.locale.blank?
     end
 
-    # Saves the last user who modified the observation and its locale
-    def set_modified
+    def set_user
       user = context[:current_user]
-      @model.modified_user_id = user.id
+      @model.user_type = :reviewer if @model.qc_in_progress?
+      @model.user_type = :monitor if @model.user_type.blank?
+      @model.user_id = user.id if context[:action] == "create"
+      @model.modified_user_id = user.id unless @model.qc_in_progress?
       @model.force_translations_from = @model.locale || user.locale
-    end
-
-    # Makes sure the validation status can be an acceptable one
-    def validate_status
-      @model.validation_status = "Created" unless @model.persisted? || @model.validation_status == "Ready for QC"
-      @model.user_type = :monitor
     end
 
     # To allow the filtering of results according to the app and user
@@ -151,8 +169,8 @@ module V1
       if app == "observations-tool" && user.present?
         if user.user_permission.present? && user.user_permission.user_role == "admin"
           Observation.all
-        elsif user.all_managed_observer_ids.any?
-          Observation.own_with_inactive(user.all_managed_observer_ids)
+        else
+          Observation.own_with_inactive([user.observer_id, *user.reviewable_observer_ids])
         end
       else
         Observation.published

@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_confirmation_of(:password) }
 
-    it { is_expected.to validate_length_of(:password).is_at_least(8).is_at_most(20).on(:create) }
+    it { is_expected.to validate_length_of(:password).is_at_least(8).is_at_most(128).on(:create) }
 
     describe "user permissions" do
       let(:user) { build(:user, user_role: user_role) }

@@ -34,10 +34,10 @@ class ObservationMailerPreview < ActionMailer::Preview
       id: 100,
       observation_type: "operator",
       subcategory: Subcategory.new(name: "Conflict of interest - inter or intra agency"),
-      admin_comment: "Here are some comments made by admin",
       monitor_comment: "Here are some comments made by monitor",
       observation_report: ObservationReport.new(title: "Report 100"),
-      modified_user: test_user
+      modified_user: test_user,
+      latest_quality_control: QualityControl.new(passed: true, comment: "Here are some comments made by monitor", reviewer: test_user)
     )
   end
 

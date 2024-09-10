@@ -60,6 +60,18 @@ FactoryBot.define do
       end
     end
 
+    factory :ngo_manager do
+      sequence(:email) { |n| "ngo#{n}@example.com" }
+
+      first_name { "Test" }
+      last_name { "ngo manager" }
+      user_role { "ngo_manager" }
+
+      after(:build) do |random_ngo|
+        random_ngo.observer ||= FactoryBot.create(:observer)
+      end
+    end
+
     factory :operator_user do
       sequence(:email) { |n| "operator#{n}@example.com" }
 
@@ -77,6 +89,11 @@ FactoryBot.define do
       first_name { "Test" }
       last_name { "holding" }
       user_role { "holding" }
+    end
+
+    factory :bo_manager do
+      sequence(:email) { |n| "bo_manager#{n}@example.com" }
+      user_role { "bo_manager" }
     end
 
     factory :government_user do

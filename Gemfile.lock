@@ -573,7 +573,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.4)
+    rexml (3.3.6)
       strscan
     rgeo (3.0.1)
     rgeo-activerecord (7.0.1)
@@ -588,6 +588,8 @@ GEM
     rspec-activejob (0.6.1)
       activejob (>= 4.2)
       rspec-mocks
+    rspec-collection_matchers (1.2.1)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.0)
@@ -819,6 +821,7 @@ DEPENDENCIES
   rgeo
   rgeo-geojson
   rspec-activejob
+  rspec-collection_matchers
   rspec-rails
   rspec-request_snapshot!
   rspec_api_documentation!

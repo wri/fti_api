@@ -87,12 +87,6 @@ RSpec.describe Observation, type: :model do
       expect(subject.errors[:observers]).to include("can't be blank")
     end
 
-    it "is invalid without admin comment if status is needs revision" do
-      subject.validation_status = "Needs revision"
-      expect(subject.valid?).to eq(false)
-      expect(subject.errors[:admin_comment]).to include("can't be blank")
-    end
-
     it "is invalid with governments if is of operator type" do
       subject.governments = build_list(:government, 1)
       subject.observation_type = :operator
@@ -131,21 +125,44 @@ RSpec.describe Observation, type: :model do
           end
 
           context "when moving from `Created` to `Ready for QA`" do
-            let(:new_status) { "Ready for QC" }
+            let(:new_status) { "Ready for QC2" }
 
             it { is_expected.to be_valid }
           end
 
-          context "when going to QC in progress" do
-            let(:new_status) { "QC in progress" }
+          context "when going to QC2 in progress" do
+            let(:new_status) { "QC2 in progress" }
 
             it { is_expected.to_not be_valid }
           end
         end
       end
 
+      describe "for a reviewer" do
+        let(:user_type) { :reviewer }
+
+        before do
+          observation.save
+          observation.validation_status = new_status
+        end
+
+        context "when moving from `Ready for QC1` to `QC1 in progress`" do
+          let(:status) { "Ready for QC1" }
+          let(:new_status) { "QC1 in progress" }
+
+          it { is_expected.to be_valid }
+        end
+
+        context "when moving from `QC1 in progress` to `Published (modified)`" do
+          let(:status) { "Created" }
+          let(:new_status) { "Published (modified)" }
+
+          it { is_expected.to_not be_valid }
+        end
+      end
+
       describe "for an admin" do
-        let(:user_type) { :admin }
+        let(:user_type) { :reviewer }
 
         before do
           # looks like validate: false does not work correctly from Rails 6.0,
@@ -162,16 +179,16 @@ RSpec.describe Observation, type: :model do
           observation.validation_status = new_status
         end
 
-        context "when moving from `Ready for QC` to `QC in progress`" do
-          let(:status) { "Ready for QC" }
-          let(:new_status) { "QC in progress" }
+        context "when moving from `Ready for QC2` to `QC2 in progress`" do
+          let(:status) { "Ready for QC2" }
+          let(:new_status) { "QC2 in progress" }
 
           it { is_expected.to be_valid }
         end
 
-        context "when moving from `Created` to `Ready for QC`" do
+        context "when moving from `Created` to `Ready for QC2`" do
           let(:status) { "Created" }
-          let(:new_status) { "Ready for QC" }
+          let(:new_status) { "Ready for QC2" }
 
           it { is_expected.to_not be_valid }
         end
@@ -188,9 +205,9 @@ RSpec.describe Observation, type: :model do
             it { is_expected.to be_persisted }
           end
 
-          context "when moving to 'Ready for QC'" do
+          context "when moving to 'Ready for QC2'" do
             it "should not be valid" do
-              observation.validation_status = "Ready for QC"
+              observation.validation_status = "Ready for QC2"
               observation.operator = Operator.find_by(slug: "unknown")
               expect(observation.save).to be false
               expect(observation.errors[:operator]).to eql ["can't be blank or unknown"]
@@ -227,8 +244,8 @@ RSpec.describe Observation, type: :model do
     describe "notifications" do
       let(:admin1) { create(:admin) }
       let(:admin2) { create(:admin) }
-      let(:observer1) { create(:observer, responsible_admin: admin1) }
-      let(:observer2) { create(:observer, responsible_admin: admin2) }
+      let(:observer1) { create(:observer, responsible_qc2: admin1) }
+      let(:observer2) { create(:observer, responsible_qc2: admin2) }
       let(:observation_report) { create(:observation_report, observers: [observer1, observer2]) }
       let(:observation) {
         build(
@@ -261,8 +278,8 @@ RSpec.describe Observation, type: :model do
       context "when was created before" do
         before { observation.save! }
 
-        context "when validation status is changed to `Ready for QC`" do
-          subject { observation.update!(validation_status: "Ready for QC") }
+        context "when validation status is changed to `Ready for QC2`" do
+          subject { observation.update!(validation_status: "Ready for QC2") }
 
           it "sends an email to observer users" do
             expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_submitted_for_qc).exactly(3).times
@@ -279,7 +296,15 @@ RSpec.describe Observation, type: :model do
         end
 
         context "when validation status is changed to `Needs revision`" do
-          subject { observation.update!(validation_status: "Needs revision", admin_comment: "Some comment") }
+          subject { observation.update!(validation_status: "Needs revision") }
+
+          it "sends an email to observer users" do
+            expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
+          end
+        end
+
+        context "when validation status is changed to 'Rejected'" do
+          subject { observation.update!(validation_status: "Rejected") }
 
           it "sends an email to observer users" do
             expect { subject }.to have_enqueued_mail(ObservationMailer, :observation_needs_revision).exactly(3).times
@@ -354,7 +379,7 @@ RSpec.describe Observation, type: :model do
 
       context "when validation_status is not Approved" do
         it "set is_active to false" do
-          observation = create(:observation, validation_status: "Needs revision", admin_comment: "Comment")
+          observation = create(:observation, validation_status: "Needs revision")
 
           expect(observation.is_active).to eql false
         end
@@ -467,26 +492,6 @@ RSpec.describe Observation, type: :model do
   end
 
   describe "Instance methods" do
-    describe "#user_name" do
-      context "when there is an user" do
-        it "return username" do
-          user = create(:user)
-          observation = create(:observation, user: user)
-
-          expect(observation.user_name).to eql observation.user.name
-        end
-      end
-
-      context "when there is not an user" do
-        it "return nil" do
-          observation = create(:observation)
-          observation.update(user: nil)
-
-          expect(observation.user_name).to eql nil
-        end
-      end
-    end
-
     describe "#translated_type" do
       it "return the translation of the observation type" do
         observation = create(:observation, observation_type: "operator")

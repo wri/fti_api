@@ -55,14 +55,27 @@ class Observation < ApplicationRecord
   translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
 
+  WrongStateError = Class.new(StandardError)
+
   enum evidence_type: {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
   enum observation_type: {"operator" => 0, "government" => 1}
-  enum validation_status: {"Created" => 0, "Ready for QC" => 1, "QC in progress" => 2, "Approved" => 3,
-                           "Rejected" => 4, "Needs revision" => 5, "Ready for publication" => 6,
-                           "Published (no comments)" => 7, "Published (not modified)" => 8,
-                           "Published (modified)" => 9}
-  enum location_accuracy: {"Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
-                           "Accurate GPS coordinates" => 2}
+  enum validation_status: {
+    "Created" => 0,
+    "Ready for QC1" => 10,
+    "QC1 in progress" => 11,
+    "Ready for QC2" => 1,
+    "QC2 in progress" => 2,
+    "Approved" => 3,
+    "Rejected" => 4,
+    "Needs revision" => 5,
+    "Ready for publication" => 6,
+    "Published (no comments)" => 7,
+    "Published (not modified)" => 8,
+    "Published (modified)" => 9
+  }
+  enum location_accuracy: {
+    "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2
+  }
 
   validate_enum_attributes :evidence_type, :observation_type, :location_accuracy
 
@@ -70,16 +83,30 @@ class Observation < ApplicationRecord
 
   STATUS_TRANSITIONS = {
     monitor: {
-      "Created" => ["Ready for QC"],
-      "Needs revision" => ["Ready for QC", "Published (not modified)", "Published (modified)"],
+      "Created" => ["Ready for QC2", "Ready for QC1"],
+      "Rejected" => ["Ready for QC1"],
+      "Needs revision" => ["Ready for QC2", "Published (not modified)", "Published (modified)"],
       "Ready for publication" => ["Published (no comments)"],
-      "Published (modified)" => ["Ready for QC"],
-      "Published (not modified)" => ["Ready for QC"],
-      "Published (no comments)" => ["Ready for QC"]
+      "Published (modified)" => ["Ready for QC2", "Ready for QC1"],
+      "Published (not modified)" => ["Ready for QC2", "Ready for QC1"],
+      "Published (no comments)" => ["Ready for QC2", "Ready for QC1"]
     },
-    admin: {
-      "Ready for QC" => ["QC in progress"],
-      "QC in progress" => ["Needs revision", "Ready for publication"]
+    reviewer: {
+      "Ready for QC1" => ["QC1 in progress"],
+      "QC1 in progress" => ["Rejected", "Ready for QC2"],
+      "Ready for QC2" => ["QC2 in progress"],
+      "QC2 in progress" => ["Needs revision", "Ready for publication"]
+    }
+  }.freeze
+
+  QC_APPROVAL_STATUS_TRANSITIONS = {
+    "QC1 in progress" => {
+      false => "Rejected",
+      true => "Ready for QC2"
+    },
+    "QC2 in progress" => {
+      false => "Needs revision",
+      true => "Ready for publication"
     }
   }.freeze
 
@@ -102,6 +129,9 @@ class Observation < ApplicationRecord
   belongs_to :observation_report, optional: true
 
   belongs_to :subcategory, inverse_of: :observations, optional: true
+
+  has_many :quality_controls, as: :reviewable, dependent: :destroy
+  has_one :latest_quality_control, -> { order(created_at: :desc) }, inverse_of: :reviewable, class_name: "QualityControl"
 
   has_many :species_observations, dependent: :destroy
   has_many :species, through: :species_observations
@@ -138,10 +168,9 @@ class Observation < ApplicationRecord
   validate :status_changes, if: -> { user_type.present? }
 
   validates :observers, presence: true
-  validates :validation_status, presence: true
   validates :observation_type, presence: true
 
-  validates :admin_comment, presence: true, if: -> { validation_status == "Needs revision" }
+  validates :validation_status, presence: true
 
   before_validation :assign_observers_from_report, if: :observation_report_changed?
   before_validation :nullify_evidence_on_report, if: -> { evidence_type != "Evidence presented in the report" }
@@ -181,8 +210,8 @@ class Observation < ApplicationRecord
   scope :by_category, ->(category_id) { joins(:subcategory).where(subcategories: {category_id: category_id}) }
   scope :by_severity_level, ->(level) { joins(:subcategory).joins("inner join severities sevs on subcategories.id = sevs.subcategory_id and observations.severity_id = sevs.id").where(sevs: {level: level}) }
   scope :by_government, ->(government_id) { joins(:governments).where(governments: {id: government_id}) }
-  scope :pending, -> { where(validation_status: ["Created", "QC in progress"]) }
-  scope :created, -> { where(validation_status: ["Created", "Ready for QC"]) }
+  scope :pending, -> { where(validation_status: ["Created", "QC2 in progress"]) }
+  scope :created, -> { where(validation_status: ["Created", "Ready for QC2"]) }
   scope :published, -> { where(validation_status: PUBLISHED_STATES) }
   scope :hidden, -> { where(hidden: true) }
   scope :visible, -> { where(hidden: [false, nil]) }
@@ -194,10 +223,6 @@ class Observation < ApplicationRecord
     def translated_types
       observation_types.map { |t| [I18n.t("observation_types.#{t.first}", default: t.first), t.first.camelize] }
     end
-  end
-
-  def user_name
-    user&.name
   end
 
   def translated_type
@@ -232,6 +257,50 @@ class Observation < ApplicationRecord
 
   def published?
     PUBLISHED_STATES.include?(validation_status)
+  end
+
+  def qc_in_progress?
+    validation_status.in?(["QC1 in progress", "QC2 in progress"])
+  end
+
+  def qc1_needed?
+    observers.any?(&:responsible_qc1_id)
+  end
+
+  def responsible_for_qc1
+    User.where(id: observers.pluck(:responsible_qc1_id))
+  end
+
+  def responsible_for_qc2
+    User.where(id: observers.pluck(:responsible_qc2_id))
+  end
+
+  def all_responsible_for_qc
+    responsible_for_qc1.or(responsible_for_qc2)
+  end
+
+  def update_qc_status!(qc_passed:)
+    raise WrongStateError, "QC not in progress" unless qc_in_progress?
+
+    update!(
+      user_type: :reviewer,
+      validation_status: QC_APPROVAL_STATUS_TRANSITIONS[validation_status][qc_passed]
+    )
+  end
+
+  def qc_available_decisions
+    return [] unless QC_APPROVAL_STATUS_TRANSITIONS[validation_status]
+
+    QC_APPROVAL_STATUS_TRANSITIONS[validation_status].invert.to_a
+  end
+
+  def qc_metadata(qc_passed:)
+    return {} unless qc_in_progress?
+
+    {
+      level: (validation_status == "QC1 in progress") ? "QC1" : "QC2",
+      decision: QC_APPROVAL_STATUS_TRANSITIONS[validation_status][qc_passed]
+    }
   end
 
   private
@@ -342,10 +411,11 @@ class Observation < ApplicationRecord
   end
 
   def notify_about_changes
-    notify_admins "admin_observation_ready_for_qc" if validation_status == "Ready for QC"
-    notify_admins "admin_observation_published_not_modified" if validation_status == "Published (not modified)"
-    notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC"
-    notify_observers "observation_needs_revision" if validation_status == "Needs revision"
+    notify_reviewers "admin_observation_ready_for_qc", level: :qc1 if validation_status == "Ready for QC1"
+    notify_reviewers "admin_observation_ready_for_qc", level: :qc2 if validation_status == "Ready for QC2"
+    notify_reviewers "admin_observation_published_not_modified", level: :qc2 if validation_status == "Published (not modified)"
+    notify_observers "observation_submitted_for_qc" if validation_status == "Ready for QC2"
+    notify_observers "observation_needs_revision" if validation_status == "Needs revision" || validation_status == "Rejected"
     notify_observers "observation_ready_for_publication" if validation_status == "Ready for publication"
     notify_observers "observation_published" if published?
   end
@@ -364,9 +434,9 @@ class Observation < ApplicationRecord
     )
   end
 
-  def notify_admins(mail_template)
+  def notify_reviewers(mail_template, level:)
     notify_users(
-      User.where(id: observers.distinct.pluck(:responsible_admin_id)),
+      User.where(id: observers.distinct.pluck("responsible_#{level}_id")),
       mail_template
     )
   end

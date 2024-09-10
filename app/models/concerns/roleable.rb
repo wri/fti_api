@@ -37,6 +37,10 @@ module Roleable
       user_permission.user_role.in?("user")
     end
 
+    def observation_tool_user?
+      ngo? || ngo_manager?
+    end
+
     def is_active_admin?
       admin? && is_active?
     end

@@ -67,8 +67,10 @@ $to-be-reviewed: #99AA99;
 
   // Observations
   &.created { background: $created-color; }
-  &.ready_for_qc { background: $ready-for-qc-color; }
-  &.qc_in_progress { background: $qc-in-progress-color; }
+  &.ready_for_qc1 { background: $ready-for-qc-color; }
+  &.ready_for_qc2 { background: $ready-for-qc-color; }
+  &.qc1_in_progress { background: $qc-in-progress-color; }
+  &.qc2_in_progress { background: $qc-in-progress-color; }
   &.needs_revision { background: $needs-revision-color; }
   &.ready_for_publication { background: $ready-for-publication-color; }
   &.published\(no_comments\) { background: $published-no-comments-color; }

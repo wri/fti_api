@@ -4,23 +4,24 @@
 #
 # Table name: observers
 #
-#  id                   :integer          not null, primary key
-#  observer_type        :string           not null
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  is_active            :boolean          default(TRUE), not null
-#  logo                 :string
-#  address              :string
-#  information_name     :string
-#  information_email    :string
-#  information_phone    :string
-#  data_name            :string
-#  data_email           :string
-#  data_phone           :string
-#  organization_type    :string
-#  public_info          :boolean          default(FALSE), not null
-#  responsible_admin_id :integer
-#  name                 :string           not null
+#  id                 :integer          not null, primary key
+#  observer_type      :string           not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  is_active          :boolean          default(TRUE), not null
+#  logo               :string
+#  address            :string
+#  information_name   :string
+#  information_email  :string
+#  information_phone  :string
+#  data_name          :string
+#  data_email         :string
+#  data_phone         :string
+#  organization_type  :string
+#  public_info        :boolean          default(FALSE), not null
+#  responsible_qc2_id :integer
+#  name               :string           not null
+#  responsible_qc1_id :bigint
 #
 
 class Observer < ApplicationRecord
@@ -44,7 +45,8 @@ class Observer < ApplicationRecord
   has_many :users, inverse_of: :observer
   has_and_belongs_to_many :managers, join_table: "observer_managers", class_name: "User", dependent: :destroy
 
-  belongs_to :responsible_admin, class_name: "User", optional: true
+  belongs_to :responsible_qc1, class_name: "User", optional: true
+  belongs_to :responsible_qc2, class_name: "User", optional: true
 
   EMAIL_VALIDATOR = /\A([\w+-].?)+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
 
@@ -58,7 +60,7 @@ class Observer < ApplicationRecord
   validates :information_email, format: {with: EMAIL_VALIDATOR, if: :information_email?}
   validates :data_email, format: {with: EMAIL_VALIDATOR, if: :data_email?}
 
-  before_create :set_responsible_admin
+  before_create :set_responsible_qc2
 
   scope :by_name_asc, -> { order(name: :asc) }
 
@@ -84,11 +86,9 @@ class Observer < ApplicationRecord
     super + "-" + Globalize.locale.to_s
   end
 
-  # Sets the default responsible admin for an observer
-  #
-  def set_responsible_admin
-    return if responsible_admin.present?
+  def set_responsible_qc2
+    return if responsible_qc2.present?
 
-    self.responsible_admin = User.where(email: ENV["RESPONSIBLE_EMAIL"].downcase).first
+    self.responsible_qc2 = User.where(email: ENV["RESPONSIBLE_EMAIL"].downcase).first
   end
 end

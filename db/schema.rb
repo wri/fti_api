@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_153734) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -637,9 +637,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
     t.string "data_phone"
     t.string "organization_type"
     t.boolean "public_info", default: false, null: false
-    t.integer "responsible_admin_id"
+    t.integer "responsible_qc2_id"
     t.string "name", null: false
+    t.bigint "responsible_qc1_id"
     t.index ["is_active"], name: "index_observers_on_is_active"
+    t.index ["responsible_qc1_id"], name: "index_observers_on_responsible_qc1_id"
+    t.index ["responsible_qc2_id"], name: "index_observers_on_responsible_qc2_id"
   end
 
   create_table "operator_document_annexes", id: :serial, force: :cascade do |t|
@@ -808,6 +811,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_protected_areas_on_country_id"
+  end
+
+  create_table "quality_controls", force: :cascade do |t|
+    t.string "reviewable_type", null: false
+    t.bigint "reviewable_id", null: false
+    t.bigint "reviewer_id", null: false
+    t.boolean "passed", default: false, null: false
+    t.text "comment"
+    t.jsonb "metadata", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_quality_controls_on_reviewable"
+    t.index ["reviewer_id"], name: "index_quality_controls_on_reviewer_id"
   end
 
   create_table "required_gov_document_group_translations", id: :serial, force: :cascade do |t|
@@ -1179,7 +1195,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
   add_foreign_key "observations", "users", column: "modified_user_id"
   add_foreign_key "observer_managers", "observers", on_delete: :cascade
   add_foreign_key "observer_managers", "users", on_delete: :cascade
-  add_foreign_key "observers", "users", column: "responsible_admin_id", on_delete: :nullify
+  add_foreign_key "observers", "users", column: "responsible_qc1_id", on_delete: :nullify
+  add_foreign_key "observers", "users", column: "responsible_qc2_id", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operator_documents", on_delete: :nullify
   add_foreign_key "operator_document_histories", "operators", on_delete: :cascade
   add_foreign_key "operator_document_histories", "required_operator_documents", on_delete: :cascade
@@ -1192,6 +1209,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_101902) do
   add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "operators", "holdings", on_delete: :nullify
   add_foreign_key "protected_areas", "countries", on_delete: :cascade
+  add_foreign_key "quality_controls", "users", column: "reviewer_id"
   add_foreign_key "required_gov_document_groups", "required_gov_document_groups", column: "parent_id"
   add_foreign_key "required_gov_documents", "countries", on_delete: :cascade
   add_foreign_key "required_gov_documents", "required_gov_document_groups", on_delete: :cascade

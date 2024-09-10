@@ -37,7 +37,10 @@ module V1
           locale: nil,
           "organization-account": false,
           "permissions-request": nil,
-          "permissions-accepted": nil
+          "permissions-accepted": nil,
+          "managed-observer-ids": [],
+          "qc1-observer-ids": [],
+          "qc2-observer-ids": []
         })
       end
 

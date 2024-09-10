@@ -82,6 +82,14 @@ FactoryBot.define do
     publication_date { DateTime.now.yesterday.to_date }
   end
 
+  trait :with_failed_qc do
+    quality_controls { [build(:quality_control, :not_passed)] }
+  end
+
+  trait :with_passed_qc do
+    quality_controls { [build(:quality_control, :passed)] }
+  end
+
   trait :with_translations do
     details { "details" }
     concern_opinion { "concern opinion" }

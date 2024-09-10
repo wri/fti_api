@@ -404,7 +404,7 @@ en:
       in_qc: 'Observation in QC'
       bulk_confirm_qc: 'Are you sure you want to start QC for all these observations?'
       bulk_require_revision: 'Are you sure you want to require revision for all these observations?'
-      not_in_qc_in_progress: 'Observation is not in QC in progress status'
+      not_in_qc_in_progress: 'Observation is not in QC2 in progress status'
       required_revision: 'Required revision for observations'
       bulk_ready_for_publication: 'Are you sure you want to mark these publications as ready to publish?'
       ready_to_publish: 'Observation is ready to be published'
@@ -423,6 +423,8 @@ en:
       scope_hidden: 'Hidden'
     users_page:
       responsible_for_countries_hint: Admin responsible for countries will get notifications concerning the private sector in these countries.
+    quality_control_page:
+      reviewable_not_in_qc: "Reviewed entity is not in QC in progress status"
     powered_by: "Admin Backoffice"
     delete_model: "Delete %{model}"
     delete: "Delete"
@@ -824,7 +826,6 @@ en:
 
       observation:
         actions_taken: Actions taken  #g
-        admin_comment: Admin comment  #g
         country: :activerecord.models.country  #g
         deleted_at: Deleted at  #g
         evidence_on_report: Evidence on report  #g
@@ -936,8 +937,8 @@ en:
         subcategory: :activerecord.models.subcategory  #g
         validation_status: Validation status  #g
         created: :shared.created
-        ready_for_qc: :activerecord.enums.observation.statuses.Ready for QC
-        qc_in_progress: :activerecord.enums.observation.statuses.QC in progress
+        ready_for_qc: Ready for QC
+        qc_in_progress: QC in progress
         approved: :activerecord.enums.observation.statuses.Approved
         rejected: :activerecord.enums.observation.statuses.Rejected
         needs_revision: :activerecord.enums.observation.statuses.Needs Revision
@@ -966,7 +967,6 @@ en:
         observer_type: Observer type  #g
         organization_type: Organization type  #g
         public_info: Public info  #g
-        responsible_admin: :activerecord.models.responsible_admin  #g
         translations: Translations  #g
         name: Name  #g
         users: Users  #g
@@ -1456,8 +1456,10 @@ en:
       observation:
         statuses:
           Created: "Created"
-          Ready for QC: "Ready for QC"
-          QC in progress: "QC in progress"
+          Ready for QC1: "Ready for QC1"
+          QC1 in progress: "QC1 in progress"
+          Ready for QC2: "Ready for QC2"
+          QC2 in progress: "QC2 in progress"
           Approved: "Approved"
           Rejected: "Rejected"
           Needs revision: "Needs revision"
@@ -1473,6 +1475,7 @@ en:
 
     errors:
       messages:
+        qc_in_progress: "QC must be in progress"
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
           has_one: "Cannot delete record because a dependent %{record} exists"

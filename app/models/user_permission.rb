@@ -67,7 +67,7 @@ class UserPermission < ApplicationRecord
     when "ngo_manager"
       {
         user: {manage: {id: user.id}},
-        observation: {manage: {observers: {id: user.all_managed_observer_ids}}, create: {}},
+        observation: {manage: {observers: {id: user.all_managed_observer_ids}}, update: {observers: {id: user.reviewable_observer_ids}}, read: {}, create: {}},
         observation_report: {update: {observers: {id: user.all_managed_observer_ids}}, create: {}},
         observation_documents: {ud: {observations: {is_active: false, observers: {id: user.all_managed_observer_ids}}}, create: {}},
         category: {cru: {}},
@@ -82,7 +82,8 @@ class UserPermission < ApplicationRecord
         operator_document: {manage: {}},
         required_operator_document_group: {cru: {}},
         required_operator_document: {cru: {}},
-        file_data_import: {manage: {}}
+        file_data_import: {manage: {}},
+        quality_controls: {cru: {reviewable_id: user.quality_controlable_observations.pluck(:id), reviewable_type: "Observation"}}
       }
     when "bo_manager"
       {
@@ -101,7 +102,8 @@ class UserPermission < ApplicationRecord
         fmu: {read: {}},
         operator_document: {read: {}},
         required_operator_document_group: {read: {}},
-        required_operator_document: {read: {}}
+        required_operator_document: {read: {}},
+        quality_controls: {cru: {reviewable_id: user.quality_controlable_observations.pluck(:id), reviewable_type: "Observation"}}
       }
     when "government"
       {

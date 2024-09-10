@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ObservationMailer, type: :mailer do
   let(:admin) { create(:admin) }
-  let(:observer) { create(:observer, responsible_admin: admin) }
+  let(:observer) { create(:observer, responsible_qc2: admin) }
   let(:user) { create(:ngo, observer: observer) }
   let(:observation) { create(:observation, observers: [user.observer], modified_user: user) }
 
@@ -75,6 +75,10 @@ RSpec.describe ObservationMailer, type: :mailer do
   end
 
   describe "observation_needs_revision" do
+    before {
+      observation.update!(validation_status: "QC2 in progress")
+      create(:quality_control, reviewable: observation)
+    }
     let(:mail) { ObservationMailer.observation_needs_revision(observation, user) }
 
     it "renders the headers" do
