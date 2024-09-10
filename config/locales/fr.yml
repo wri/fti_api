@@ -430,6 +430,8 @@ fr:
       location_on_map: 'Emplacement sur la carte'
       visible: 'Visible'
       scope_hidden: 'Invisible'
+    quality_control_page:
+      reviewable_not_in_qc: "L'entité examinée n'a pas le statut de contrôle qualité en cours"
     powered_by: "Admin Backoffice"
     delete_model: "Supprimer %{model}"
     delete: "Supprimer"
@@ -845,8 +847,8 @@ fr:
         subcategory: :activerecord.models.subcategory  #g
         validation_status: Statut de validation  #g
         created: :shared.created
-        ready_for_qc: Ready for QC
-        qc_in_progress: QC in progress
+        ready_for_qc: Prêt pour le contrôle de qualité
+        qc_in_progress: En cours de contrôle de qualité
         approved: :activerecord.enums.observation.statuses.Approved
         rejected: :activerecord.enums.observation.statuses.Rejected
         needs_revision: :activerecord.enums.observation.statuses.Needs revision
@@ -1370,10 +1372,10 @@ fr:
       observation:
         statuses:
           Created: "Crée"
-          Ready for QC1: "Ready for QC1"
-          QC1 in progress: "QC1 in progress"
-          Ready for QC2: "Prêt pour le contrôle de qualité"
-          QC2 in progress: "Contrôle de qualité en cours"
+          Ready for QC1: "Prêt pour le CQ1"
+          QC1 in progress: "CQ1 en cours"
+          Ready for QC2: "Prêt pour le CQ2"
+          QC2 in progress: "CQ2 en cours"
           Approved: "Approuvé"
           Rejected: "Rejeté"
           Needs revision: "Necesite une revision"
@@ -1392,6 +1394,7 @@ fr:
           government: 'Gouvernement'
     errors:
       messages:
+        qc_in_progress: "Le contrôle qualité doit être en cours"
         record_invalid: 'La validation a échoué : %{errors}'
         restrict_dependent_destroy:
           has_one: "Vous ne pouvez pas supprimer l'enregistrement car une personne à charge %{record} existe"
