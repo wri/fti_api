@@ -11,5 +11,5 @@ set :ssh_options, {
   password: fetch(:password)
 }
 
-set :branch, "master"
+set :branch, ENV.fetch("BRANCH") { "master" }
 set :deploy_to, "/var/www/otp-api"
