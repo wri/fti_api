@@ -3,24 +3,27 @@
 # config valid only for current version of Capistrano
 lock "~> 3.12"
 
-set :application, "OtpAPI"
+set :application, "otp_api"
 set :repo_url, "git@github.com:wri/fti_api.git"
 
 ruby_version = File.read(".ruby-version").strip
+rvm_path = "/usr/share/rvm"
+user = ENV["SSH_USER"]
 
-set :default_env, {
-  "PATH" => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}/bin:/home/ubuntu/.rvm/bin:$PATH",
-  "RUBY_VERSION" => "ruby-#{ruby_version}",
-  "GEM_HOME" => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}",
-  "GEM_PATH" => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}",
-  "BUNDLE_PATH" => "/home/ubuntu/.rvm/gems/ruby-#{ruby_version}"
-}
+set :puma_threads, [4, 16]
+set :puma_workers, 0
+set :puma_service_unit_name, "puma"
+set :puma_service_unit_env_vars, %w[RAILS_ENV=staging]
 
-set :passenger_restart_with_touch, true
+set :systemctl_user, :system
 
 set :rvm_type, :user
 set :rvm_ruby_version, ruby_version
+set :rvm_custom_path, rvm_path
 set :rvm_roles, [:app, :web, :db]
+
+set :nvm_node, "default"
+set :nvm_map_bins, %w[node npm yarn rake]
 
 set :keep_releases, 5
 
@@ -71,10 +74,24 @@ namespace :db do
   end
 end
 
+task "deploy:db:load" do
+  on primary :db do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rake, "db:version"
+      rescue
+        # only create if db does not exist
+        execute :rake, "db:create"
+        execute :rake, "db:schema:load"
+      end
+    end
+  end
+end
+
 namespace :sidekiq do
   task :quiet do
     on roles(:app) do
-      $stdout.puts capture("pgrep -f 'sidekiq' | xargs kill -TSTP")
+      $stdout.puts capture("pgrep -f 'sidekiq' | xargs sudo kill -TSTP")
     end
   end
   task :restart do
@@ -84,9 +101,31 @@ namespace :sidekiq do
   end
 end
 
+namespace :nvm do
+  task :map_bins do
+    on roles(:all) do
+      SSHKit.config.default_env[:node_version] = fetch(:nvm_node)
+      nvm_prefix = "/home/#{user}/.nvm/nvm-exec"
+      fetch(:nvm_map_bins).each do |command|
+        SSHKit.config.command_map.prefix[command.to_sym].unshift(nvm_prefix)
+      end
+      execute :node, "-v"
+    end
+  end
+end
+
+# TODO: not sure why sometimes there are some logs or other temp files that belongs to root not a app user
+task "deploy:fix_permissions" do
+  on roles(:all) do |host|
+    execute :sudo, :chown, "-R", "#{host.user}:#{host.user}", "#{fetch(:deploy_to)}/releases"
+  end
+end
+
 namespace :deploy do
+  before :check, "nvm:map_bins"
+  before :migrate, "deploy:db:load"
+  before :cleanup, "deploy:fix_permissions"
   after :starting, "sidekiq:quiet"
-  after :finishing, "deploy:cleanup"
   after :reverted, "sidekiq:restart"
   after :published, "sidekiq:restart"
 end

@@ -1,0 +1,329 @@
+#!/usr/bin/env ruby
+
+# Provision a virtual private server for deployments, ubuntu
+
+require "net/ssh"
+require "net/scp"
+require "erb"
+require "highline"
+
+require "dotenv"
+Dotenv.load
+
+env = ENV["ENV"] || "staging"
+host = ENV[env.upcase + "_HOST"]
+domain = ENV[env.upcase + "_DOMAIN"] || host
+email = ENV["LETSENCRYPT_EMAIL"]
+user = ENV["SSH_USER"]
+install_ufw = ENV["UFW"]
+root_access = ENV["ROOT_ACCESS"]
+
+abort "Please provide SSH_USER" unless user
+abort "Please provide LETSENCRYPT_EMAIL" unless email
+abort "Please provide #{env.upcase}_HOST" unless host
+
+ruby_version = File.read(".ruby-version").strip
+api_dir = "/var/www/otp-api"
+portal_dir = "/var/www/otp-portal"
+obs_tool_dir = "/var/www/otp-observations-tool"
+rails_env = env
+
+class DeployFrontendTemplate
+  attr_reader :user, :app, :env
+
+  def initialize(workdir, user, app, env)
+    @workdir = workdir
+    @user = user
+    @app = app
+    @env = env
+  end
+
+  def render
+    StringIO.new(ERB.new(File.read("./config/server/git/frontend-app-post-receive.erb")).result(binding))
+  end
+
+  def workdir
+    @workdir || "/home/#{user}/#{@app}"
+  end
+end
+
+puma_service_config = StringIO.new(ERB.new(File.read("./config/server/puma.service.erb")).result)
+sidekiq_service_config = StringIO.new(ERB.new(File.read("./config/server/sidekiq.service.erb")).result)
+otp_portal_post_receive = DeployFrontendTemplate.new("/var/www/otp-portal", user, "otp-portal", rails_env).render
+obs_tool_post_receive = DeployFrontendTemplate.new("/var/www/otp-observations-tool", user, "otp-observations-tool", rails_env).render
+nginx_config = StringIO.new(ERB.new(File.read("./config/server/nginx.conf.erb"), trim_mode: ">").result)
+
+upgrade_packages = <<~EOF
+  sudo apt-get update -qq && sudo apt upgrade -y
+EOF
+# Install Docker and add the private network
+install_essentials = <<~EOF
+  sudo apt-get install -y build-essential curl git unzip
+EOF
+
+# Add swap space
+add_swap = <<~EOF
+  sudo fallocate -l 4GB /swapfile;
+  sudo chmod 600 /swapfile;
+  sudo mkswap /swapfile;
+  sudo swapon /swapfile;
+  sudo echo "/swapfile swap swap defaults 0 0" >> /etc/fstab;
+  sudo sysctl vm.swappiness=20;
+  sudo echo "vm.swappiness=20" >> /etc/sysctl.conf
+  sudo sysctl vm.vfs_cache_pressure=50;
+  sudo echo "vm.vfs_cache_pressure=50" >> /etc/sysctl.conf
+EOF
+# Add non-root user
+add_user = <<~EOF
+  useradd --create-home --shell /bin/bash #{user};
+  rsync --archive --chown=#{user}:#{user} /root/.ssh /home/#{user};
+  echo '#{user} ALL=(ALL:ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/#{user};
+  chmod 0440 /etc/sudoers.d/#{user};
+  visudo -c -f /etc/sudoers.d/#{user}
+EOF
+# Install fail2ban
+install_fail2ban = <<~EOF
+  sudo apt-get install -y fail2ban;
+  sudo systemctl start fail2ban;
+  sudo systemctl enable fail2ban
+EOF
+# Configure firewall
+configure_firewall = <<~EOF
+  sudo ufw logging on;
+  sudo ufw default deny incoming;
+  sudo ufw default allow outgoing;
+  sudo ufw allow 22;
+  sudo ufw allow 80;
+  sudo ufw allow 443;
+  sudo ufw --force enable;
+  sudo systemctl restart ufw
+EOF
+
+install_postgres = <<~EOF
+  sudo apt-get install -y postgresql-16-postgis-3 libpq-dev
+EOF
+
+configure_postgres = <<~EOF
+  sudo -u postgres createuser -s #{user}
+  sudo -u postgres createdb #{user}
+EOF
+
+install_app_dependencies = <<~EOF
+  sudo apt-get install -y libvips
+EOF
+
+install_redis = <<~EOF
+  sudo apt-get install -y redis-server
+EOF
+
+install_nginx = <<~EOF
+  sudo apt-get install -y nginx
+EOF
+
+setup_nginx = <<~EOF
+  sudo rm /etc/nginx/sites-enabled/default;
+  sudo ln -s /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
+EOF
+
+# Prepare Let's Encrypt
+prepare_letsencrypt = <<~EOF
+  sudo apt-get install -y certbot python3-certbot-nginx;
+  sudo certbot --nginx -d #{domain} --non-interactive --agree-tos -m #{email};
+EOF
+
+setup_capistrano = <<~EOF
+  sudo mkdir -p #{api_dir}/shared;
+  sudo chown -R #{user}:#{user} #{api_dir};
+EOF
+
+install_rvm = <<~EOF
+  sudo apt-add-repository -y ppa:rael-gc/rvm;
+  sudo apt-get update;
+  sudo apt-get install -y rvm
+  sudo usermod -a -G rvm #{user}
+EOF
+
+install_ruby = <<~EOF
+  . /usr/share/rvm/scripts/rvm;
+  rvm install #{ruby_version}
+EOF
+
+install_nvm = <<~EOF
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash;
+  cat <<EOT >> ~/.profile
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+  EOT
+EOF
+
+# obs tool needs node 16
+# the rest will be running on node 20
+install_node = <<~EOF
+  . /home/#{user}/.nvm/nvm.sh
+  nvm install v16.20.2;
+  npm install -g yarn;
+  nvm install v20;
+  nvm alias default 20;
+  npm install -g yarn mjml pm2;
+EOF
+
+setup_puma_service = <<~EOF
+  sudo mv /home/#{user}/deploy/puma.service /etc/systemd/system/puma.service;
+  sudo systemctl daemon-reload;
+  sudo systemctl enable puma;
+  sudo systemctl start puma;
+EOF
+
+setup_sidekiq_service = <<~EOF
+  sudo mv /home/#{user}/deploy/sidekiq.service /etc/systemd/system/sidekiq.service;
+  sudo systemctl daemon-reload;
+  sudo systemctl enable sidekiq;
+  sudo systemctl start sidekiq;
+EOF
+
+setup_frontend_repos = <<~EOF
+  mkdir -p /home/#{user}/git;
+  cd /home/#{user}/git;
+  git init --bare otp-observations-tool.git;
+  git init --bare otp-portal.git;
+  rm /home/#{user}/git/otp-observations-tool.git/hooks/*;
+  rm /home/#{user}/git/otp-portal.git/hooks/*;
+  sudo mkdir -p #{portal_dir};
+  sudo mkdir -p #{obs_tool_dir};
+  sudo chown #{user}:#{user} #{portal_dir};
+  sudo chown #{user}:#{user} #{obs_tool_dir};
+EOF
+
+ensure_githooks_executable = <<~EOF
+  chmod +x /home/#{user}/git/otp-portal.git/hooks/post-receive;
+  chmod +x /home/#{user}/git/otp-observations-tool.git/hooks/post-receive;
+EOF
+
+restart_nginx = <<~EOF
+  sudo systemctl restart nginx
+EOF
+
+install_transifex_cli = <<~EOF
+  mkdir -p /home/#{user}/.local/bin;
+  mkdir -p /home/#{user}/tx;
+  cd /home/#{user}/tx;
+  curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+  ln -s /home/#{user}/tx/tx /home/#{user}/.local/bin/tx
+EOF
+
+install_aws_cli = <<~EOF
+  cd ~;
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip";
+  unzip -q awscliv2.zip;
+  sudo ./aws/install
+  rm awscliv2.zip;
+  rm -rf aws;
+EOF
+
+# Disable root
+disable_root = <<~EOF
+  sed -i 's@PasswordAuthentication yes@PasswordAuthentication no@g' /etc/ssh/sshd_config;
+  sed -i 's@PermitRootLogin yes@PermitRootLogin no@g' /etc/ssh/sshd_config;
+  chage -E 0 root;
+  systemctl restart ssh
+EOF
+
+execute_command = ->(ssh, cmd) {
+  puts cmd
+  puts "=============================================="
+  ssh.exec!(cmd) do |_channel, _stream, data|
+    print data
+  end
+}
+
+puts "Provisioning server '#{host}' with user '#{user}'..."
+
+exit unless HighLine.agree("Do you want to proceed (yes/no)?")
+
+if root_access
+  Net::SSH.start(host, "root") do |ssh|
+    ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
+    puts "Adding user with sudo privileges..."
+    ssh_exec.call(add_user)
+    puts "Disable root..."
+    ssh_exec.call(disable_root)
+  end
+end
+
+# Run provisioning on server `host`
+Net::SSH.start(host, user) do |ssh|
+  ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
+  puts "Upgrade packages..."
+  ssh_exec.call(upgrade_packages)
+  puts "Installing essential packages..."
+  ssh_exec.call(install_essentials)
+  puts "Adding swap space..."
+  ssh_exec.call(add_swap)
+  puts "Installing and running fail2ban..."
+  ssh_exec.call(install_fail2ban)
+  if install_ufw
+    puts "Configure firewall..."
+    ssh_exec.call(configure_firewall)
+  end
+  puts "Installing Postgres..."
+  ssh_exec.call(install_postgres)
+  puts "Configuring Postgres..."
+  ssh_exec.call(configure_postgres)
+  puts "Installing Redis..."
+  ssh_exec.call(install_redis)
+  puts "Make tmp deploy directory..."
+  ssh_exec.call("mkdir -p /home/#{user}/deploy")
+  puts "Installing Nginx..."
+  ssh_exec.call(install_nginx)
+  puts "Upload Nginx configuration..."
+  Net::SCP.upload!(host, user, nginx_config, "/home/#{user}/deploy/otp.conf")
+  ssh_exec.call("sudo mv /home/#{user}/deploy/otp.conf /etc/nginx/sites-available/otp.conf")
+  puts "Setting up Nginx..."
+  ssh_exec.call(setup_nginx)
+  puts "Install letsencrypt..."
+  ssh_exec.call(prepare_letsencrypt)
+  puts "Install rvm..."
+  ssh_exec.call(install_rvm)
+end
+
+Net::SSH.start(host, user) do |ssh|
+  ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
+  puts "Install ruby..."
+  ssh_exec.call(install_ruby)
+  puts "Install nvm..."
+  ssh_exec.call(install_nvm)
+  puts "Install node..."
+  ssh_exec.call(install_node)
+  puts "Installing app dependencies..."
+  ssh_exec.call(install_app_dependencies)
+  puts "Setup capistrano"
+  ssh_exec.call(setup_capistrano)
+  puts "Upload env..."
+  Net::SCP.upload!(host, user, ".env.#{env}", "/home/#{user}/deploy/.env")
+  ssh_exec.call("sudo mv /home/#{user}/deploy/.env #{api_dir}/shared/.env")
+  puts "Setup PUMA..."
+  Net::SCP.upload!(host, user, puma_service_config, "/home/#{user}/deploy/puma.service")
+  ssh_exec.call(setup_puma_service)
+  puts "Setup Sidekiq..."
+  Net::SCP.upload!(host, user, sidekiq_service_config, "/home/#{user}/deploy/sidekiq.service")
+  ssh_exec.call(setup_sidekiq_service)
+  puts "Setup frontend repos..."
+  ssh_exec.call(setup_frontend_repos)
+  puts "Upload otp portal git hooks..."
+  Net::SCP.upload!(host, user, otp_portal_post_receive, "/home/#{user}/git/otp-portal.git/hooks/post-receive")
+  puts "Upload otp observations tool git hooks..."
+  Net::SCP.upload!(host, user, obs_tool_post_receive, "/home/#{user}/git/otp-observations-tool.git/hooks/post-receive")
+  puts "Ensure git hooks executable..."
+  ssh_exec.call(ensure_githooks_executable)
+  puts "Restart Nginx..."
+  ssh_exec.call(restart_nginx)
+  puts "Install Transifex CLI..."
+  ssh_exec.call(install_transifex_cli)
+  puts "Install AWS CLI..."
+  ssh_exec.call(install_aws_cli)
+  puts "Cleanup..."
+  ssh_exec.call("rm -rf /home/#{user}/deploy")
+end
+
+puts "Done!"
+puts " ssh #{user}@#{host}"

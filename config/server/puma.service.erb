@@ -1,0 +1,20 @@
+[Unit]
+Description=Puma HTTP Server for OTP (production)
+After=network.target
+
+[Service]
+Type=simple
+User=<%= user %>
+Environment="NODE_VERSION=default"
+EnvironmentFile=<%= api_dir %>/shared/.env
+WorkingDirectory=<%= api_dir %>/current
+ExecStart=/home/<%= user %>/.nvm/nvm-exec /usr/share/rvm/bin/rvm in <%= api_dir %>/current do bundle exec puma -C <%= api_dir %>/current/config/puma.rb
+ExecReload=/bin/kill -TSTP $MAINPID
+StandardOutput=append:<%= api_dir %>/current/log/puma.access.log
+StandardError=append:<%= api_dir %>/current/log/puma.error.log
+Restart=always
+RestartSec=1
+SyslogIdentifier=puma
+
+[Install]
+WantedBy=multi-user.target
