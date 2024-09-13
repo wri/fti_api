@@ -23,7 +23,7 @@ set :rvm_custom_path, rvm_path
 set :rvm_roles, [:app, :web, :db]
 
 set :nvm_node, "default"
-set :nvm_map_bins, %w[node npm yarn rake]
+set :nvm_map_bins, %w[node npm yarn rake rails]
 
 set :keep_releases, 5
 
@@ -72,6 +72,8 @@ namespace :db do
       end
     end
   end
+
+  before :download, "nvm:map_bins"
 end
 
 task "deploy:db:load" do
