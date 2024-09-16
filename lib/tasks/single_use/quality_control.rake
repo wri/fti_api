@@ -18,8 +18,29 @@ namespace :quality_control do
       )
     end
 
+    puts "Cleaning up duplicate version changes..."
+
     Observation.unscoped.includes(:versions).find_each do |observation|
+      prev_uniq_version = nil
       observation.versions.each do |version|
+        if prev_uniq_version.nil?
+          prev_uniq_version = version
+          next
+        end
+
+        if version.event == prev_uniq_version.event && version.changeset.except(:updated_at) == prev_uniq_version.changeset.except(:updated_at)
+          puts "Found duplicate version changes for observation #{observation.id}, version #{version.id}"
+          version.destroy!
+        else
+          prev_uniq_version = version
+        end
+      end
+    end
+
+    puts "Cleaning up duplicate version changes...DONE"
+
+    Observation.unscoped.find_each do |observation|
+      observation.versions.each.with_index(1) do |version, index|
         next unless version.event == "update"
         next unless version.changeset.key?("validation_status")
         next unless ["Needs revision", "Ready for publication"].include?(version.changeset["validation_status"].last)
@@ -33,7 +54,25 @@ namespace :quality_control do
         puts "Creating QC for observation #{observation.id}: version #{version.id}, created at: #{version.created_at}, whodunnit: #{version.whodunnit}"
 
         passed = version.changeset["validation_status"].last == "Ready for publication"
-        comment = version.reify.admin_comment
+        before_changes = version.reify
+        comment = before_changes&.admin_comment
+
+        if version.changeset.key?("admin_comment")
+          comment = version.changeset["admin_comment"].last
+        end
+
+        # get the latest comment before validation status changes
+        observation.versions.offset(index).each do |next_version|
+          break if next_version.changeset.key?("validation_status")
+          next unless next_version.changeset.key?("admin_comment")
+
+          comment = next_version.changeset["admin_comment"].last
+        end
+        comment = nil if comment.blank?
+
+        if !passed && comment.blank?
+          puts "No comment found for failed qc: observation #{observation.id}"
+        end
 
         # check if that qc already not exists as paper trail history is very weird and sometimes it creates multiple
         # similar version changes in a very short time (miliseconds apart mostly)
@@ -66,6 +105,10 @@ namespace :quality_control do
     puts "Checking if all observations that needs revision have a quality control..."
     Observation.where(validation_status: "Needs revision").where.missing(:quality_controls).find_each do |observation|
       puts "Observation with id: #{observation.id} does not have a quality control"
+    end
+    puts "Checking if all needs revision observation have a quality control with comment"
+    Observation.where(validation_status: "Needs revision").find_each do |observation|
+      puts "Observation with id: #{observation.id} does not have a quality control with comment" if observation.latest_quality_control&.comment.blank?
     end
     puts "Checking if all observations that are ready for publication have a quality control..."
     Observation.where(validation_status: "Ready for publication").where.missing(:quality_controls).find_each do |observation|
