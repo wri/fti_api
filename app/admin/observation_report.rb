@@ -19,7 +19,7 @@ ActiveAdmin.register ObservationReport do
     end
 
     def apply_filtering(chain)
-      super(chain).distinct
+      super.distinct
     end
   end
 
