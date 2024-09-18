@@ -14,7 +14,6 @@ Observer_5:
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2023-12-06 09:36:08 UTC
   is_active: true
-  logo: FODER.jpg
   address: Derrière usine Bastos, face Restaurant Chinois Village, PO BOX 11417, Yaoundé,
     Cameroon
   information_name: JUSTIN CHRISTOPHE KAMGA
@@ -32,7 +31,6 @@ Observer_10:
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2023-11-14 13:13:04 UTC
   is_active: true
-  logo: CAGDF.jpg
   address: 43, rue Nkounkou August, Makélékélé
   information_name: Lambert Mabiala
   information_email: lambertmabiala@yahoo.fr
@@ -47,7 +45,6 @@ Observer_16:
   created_at: 2017-09-25 15:06:42 UTC
   updated_at: 2024-01-25 12:53:53 UTC
   is_active: true
-  logo: OGF.jpg
   address: 6, avenue Marinel, Kinshasa/Gombe, référence Immeuble Sofide
   information_name: Serge Bondo
   information_email: skayembeb@gmail.com

@@ -869,7 +869,6 @@ fr:
         information_name: Nom de l'information  #g
         information_phone: Téléphone d'information  #g
         is_active: Actif ? #g
-        logo: Logo  #g
         observation_report_observers: Rapport d'observation observateurs  #g
         observation_reports: Rapports d'observation  #g
         observations: Observations  #g

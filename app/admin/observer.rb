@@ -16,7 +16,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
     end
   end
 
-  permit_params :observer_type, :is_active, :logo, :name, :organization_type, :delete_logo,
+  permit_params :observer_type, :is_active, :name, :organization_type,
     :responsible_qc1_id, :responsible_qc2_id, country_ids: []
 
   csv do
@@ -46,9 +46,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
     end
     # rubocop:enable Rails/OutputSafety
     column :observer_type, sortable: true
-    column :logo do |o|
-      link_to o.logo&.identifier, o.logo&.url if o.logo&.url
-    end
     column :name
     column :responsible_qc1
     column :responsible_qc2
@@ -96,9 +93,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
         links.join(" ").html_safe
       end
       # rubocop:enable Rails/OutputSafety
-      row :logo do |o|
-        link_to o.logo&.identifier, o.logo&.url
-      end
       row :address
       row :information_name
       row :information_email
@@ -120,12 +114,6 @@ ActiveAdmin.register Observer, as: "Monitor" do
       f.input :countries, collection: Country.with_translations(I18n.locale).order("country_translations.name asc")
       f.input :observer_type, as: :select, collection: %w[Mandated SemiMandated External Government]
       f.input :organization_type, as: :select, collection: ["NGO", "Academic", "Research Institute", "Private Company", "Other"]
-      if f.object.logo.present?
-        f.input :logo, as: :file, hint: image_tag(f.object.logo.url(:thumbnail))
-        f.input :delete_logo, as: :boolean, required: false, label: "Remove logo"
-      else
-        f.input :logo, as: :file
-      end
     end
     unless f.object.new_record?
       f.inputs "Quality Control" do

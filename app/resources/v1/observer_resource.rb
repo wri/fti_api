@@ -5,9 +5,9 @@ module V1
     include CacheableByLocale
     # caching
 
-    attributes :observer_type, :name, :is_active, :logo, :address,
+    attributes :observer_type, :name, :is_active, :address,
       :information_name, :information_email, :information_phone, :data_name,
-      :data_email, :data_phone, :organization_type, :delete_logo, :public_info
+      :data_email, :data_phone, :organization_type, :public_info
 
     has_many :countries
     has_many :observations
@@ -34,9 +34,9 @@ module V1
 
     def fetchable_fields
       if (context[:app] == "observations-tool") || @model.public_info
-        super - [:delete_logo]
+        super
       else
-        super - [:delete_logo, :address, :information_name, :information_email, :information_phone, :data_email, :data_phone, :data_name]
+        super - [:address, :information_name, :information_email, :information_phone, :data_email, :data_phone, :data_name]
       end
     end
   end
