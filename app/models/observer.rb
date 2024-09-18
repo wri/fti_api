@@ -9,7 +9,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  is_active          :boolean          default(TRUE), not null
-#  logo               :string
 #  address            :string
 #  information_name   :string
 #  information_email  :string
@@ -26,9 +25,6 @@
 
 class Observer < ApplicationRecord
   has_paper_trail
-
-  mount_base64_uploader :logo, LogoUploader
-  attr_accessor :delete_logo
 
   normalizes :name, :address, :information_name, :data_name, :information_phone, :data_phone, with: -> { _1.strip }
   normalizes :information_email, :data_email, with: -> { _1.strip.downcase }
@@ -50,7 +46,6 @@ class Observer < ApplicationRecord
 
   EMAIL_VALIDATOR = /\A([\w+-].?)+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
 
-  before_validation { remove_logo! if delete_logo == "1" }
   validates :name, presence: true
   validates :observer_type, presence: true, inclusion: {in: %w[Mandated SemiMandated External Government],
                                                         message: "%{value} is not a valid observer type"}
