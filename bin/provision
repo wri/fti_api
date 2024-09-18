@@ -67,11 +67,11 @@ add_swap = <<~EOF
   sudo chmod 600 /swapfile;
   sudo mkswap /swapfile;
   sudo swapon /swapfile;
-  sudo echo "/swapfile swap swap defaults 0 0" >> /etc/fstab;
+  echo "/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab;
   sudo sysctl vm.swappiness=20;
-  sudo echo "vm.swappiness=20" >> /etc/sysctl.conf
+  echo "vm.swappiness=20" | sudo tee -a /etc/sysctl.conf
   sudo sysctl vm.vfs_cache_pressure=50;
-  sudo echo "vm.vfs_cache_pressure=50" >> /etc/sysctl.conf
+  echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.conf
 EOF
 # Add non-root user
 add_user = <<~EOF
