@@ -14,8 +14,8 @@ panel I18n.t("active_admin.observations_page.details") do
     row :is_physical_place
     row :location_information if observation.location_information.present?
     row :fmu if observation.fmu.present?
-    row :operator if observation.operator.present?
-    row :governments if observation.governments.present?
+    row :operator if observation.operator?
+    row :governments if observation.government?
     row :observers
     row :relevant_operators
     row :publication_date
