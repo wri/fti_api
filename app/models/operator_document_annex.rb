@@ -37,8 +37,8 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   validates :name, :start_date, :status, presence: true
 
-  enum status: {doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4}
-  enum uploaded_by: {operator: 1, monitor: 2, admin: 3, other: 4}
+  enum :status, {doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4}
+  enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
 
   scope :valid, -> { where(status: OperatorDocumentAnnex.statuses[:doc_valid]) }
   scope :from_user, ->(operator_id) { joins(:operator_document).where(operator_documents: {operator_id: operator_id}) }

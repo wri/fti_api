@@ -42,7 +42,7 @@ class User < ApplicationRecord
 
   normalizes :first_name, :last_name, :name, with: -> { _1.strip }
 
-  enum permissions_request: {operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7}
+  enum :permissions_request, {operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7}
 
   belongs_to :country, inverse_of: :users, optional: true
 

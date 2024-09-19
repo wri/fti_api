@@ -121,7 +121,7 @@ module V1
 
       # not great to filter by controller here, but not sure how to do it in observation resource only
       if (app == "observations-tool" && user.present?) || controller == "v1/observations"
-        super(options)
+        super
       else
         Operator.active
       end

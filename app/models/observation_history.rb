@@ -27,8 +27,8 @@
 class ObservationHistory < ApplicationRecord
   acts_as_paranoid
 
-  enum observation_type: {"operator" => 0, "government" => 1}
-  enum validation_status: {
+  enum :observation_type, {"operator" => 0, "government" => 1}
+  enum :validation_status, {
     "Created" => 0,
     "Ready for QC1" => 10,
     "QC1 in progress" => 11,
@@ -42,9 +42,9 @@ class ObservationHistory < ApplicationRecord
     "Published (not modified)" => 8,
     "Published (modified)" => 9
   }
-  enum location_accuracy: {"Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
+  enum :location_accuracy, {"Estimated location" => 0, "GPS coordinates extracted from photo" => 1,
                            "Accurate GPS coordinates" => 2}
-  enum fmu_forest_type: ForestType::TYPES_WITH_CODE
+  enum :fmu_forest_type, ForestType::TYPES_WITH_CODE
 
   belongs_to :observation
   belongs_to :country

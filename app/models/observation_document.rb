@@ -20,7 +20,7 @@ class ObservationDocument < ApplicationRecord
   mount_base64_uploader :attachment, ObservationDocumentUploader
   include MoveableAttachment
 
-  enum document_type: {
+  enum :document_type, {
     "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2,
     "Testimony from local communities" => 3, "Other" => 4, "Maps" => 5
   }

@@ -44,7 +44,7 @@ or apv is null or currency is null')
       if order_options["country.name"].present? || order_options["subcategory.name"].present?
         order_options["id"] = "DESC"
       end
-      super(records, order_options, context)
+      super
     end
 
     def complete

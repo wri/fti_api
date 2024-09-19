@@ -13,7 +13,7 @@
 
 class Category < ApplicationRecord
   include Translatable
-  enum category_type: {operator: 0, government: 1}
+  enum :category_type, {operator: 0, government: 1}
 
   translates :name, touch: true
   active_admin_translates :name do
