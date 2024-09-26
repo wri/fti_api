@@ -67,8 +67,10 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :name, presence: true
   validates :locale, inclusion: {in: I18n.available_locales.map(&:to_s), allow_blank: true}
-  validates :password, confirmation: true, length: {within: 8..128}, on: :create
-  validates :password_confirmation, presence: true, on: :create
+  # password length and confirmation match is handled by Devise
+  validates :password_confirmation, presence: true, if: -> { password.present? }
+  validates :password, format: {with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+\z/, message: :password_complexity}, if: -> { password.present? }
+
   validates :user_permission, presence: true
   validates :operator, presence: true, if: -> { user_permission&.operator? }
   validates :observer, presence: true, if: -> { user_permission&.ngo? || user_permission&.ngo_manager? }
