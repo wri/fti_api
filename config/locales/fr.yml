@@ -1396,6 +1396,7 @@ fr:
           government: 'Gouvernement'
     errors:
       messages:
+        password_complexity: "doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre"
         qc_in_progress: "Le contrôle qualité doit être en cours"
         record_invalid: 'La validation a échoué : %{errors}'
         restrict_dependent_destroy:

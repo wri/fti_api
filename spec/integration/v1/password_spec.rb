@@ -2,7 +2,7 @@ require "rails_helper"
 
 module V1
   describe "Password", type: :request do
-    let(:user) { create(:user, email: "test@email.com", password: "password", password_confirmation: "password", first_name: "00 User", last_name: "one") }
+    let(:user) { create(:user, email: "test@email.com", password: "Password123", password_confirmation: "Password123", first_name: "00 User", last_name: "one") }
 
     context "Request reset password token" do
       describe "Valid request" do
@@ -51,8 +51,8 @@ module V1
           post("/users/password",
             params: {password: {
               reset_password_token: token,
-              password: "testpassword",
-              password_confirmation: "testpassword"
+              password: "Supersecret1",
+              password_confirmation: "Supersecret1"
             }},
             headers: non_api_webuser_headers)
 
@@ -74,8 +74,8 @@ module V1
           post("/users/password",
             params: {password: {
               reset_password_token: invalid_token,
-              password: "testpassword",
-              password_confirmation: "testpassword"
+              password: "Supersecret1",
+              password_confirmation: "Supersecret1"
             }},
             headers: non_api_webuser_headers)
 
@@ -85,7 +85,7 @@ module V1
 
         it "Returns error object when the user token is not present" do
           post("/users/password",
-            params: {password: {password: "testpassword", password_confirmation: "testpassword"}},
+            params: {password: {password: "Supersecret1", password_confirmation: "Supersecret1"}},
             headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq({errors: [{status: 422, title: "reset_password_token can't be blank"}]})
@@ -94,7 +94,7 @@ module V1
 
         it "Returns error object when the user password and confirmation not valid" do
           post("/users/password",
-            params: {password: {reset_password_token: valid_token, password: "testpassword", password_confirmation: "testpass"}},
+            params: {password: {reset_password_token: valid_token, password: "Supersecret1", password_confirmation: "Super"}},
             headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq(error_pw)
@@ -103,7 +103,7 @@ module V1
 
         it "Returns error object when the user token expired" do
           post("/users/password",
-            params: {password: {reset_password_token: expired_token, password: "testpassword", password_confirmation: "testpassword"}},
+            params: {password: {reset_password_token: expired_token, password: "Supersecret1", password_confirmation: "Supersecret1"}},
             headers: non_api_webuser_headers)
 
           expect(parsed_body).to eq({errors: [{status: 422, title: "reset_password_token has expired, please request a new one"}]})
