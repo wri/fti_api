@@ -19,7 +19,7 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y nodejs build-essential git libvips pkg-config libpq-dev
+    apt-get install --no-install-recommends -y nodejs build-essential git pkg-config libpq-dev
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -42,7 +42,7 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl nodejs npm postgresql-client libvips && \
+    apt-get install --no-install-recommends -y curl nodejs npm postgresql-client imagemagick && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # for email templates

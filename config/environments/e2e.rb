@@ -12,6 +12,8 @@ Rails.application.configure do
   }
   config.public_file_server.enabled = true
 
+  config.force_ssl = false
+
   config.active_job.queue_adapter = :inline
   # config.active_job.queue_name_prefix = "sc_api_test_#{Rails.env}"
   config.action_mailer.raise_delivery_errors = false
