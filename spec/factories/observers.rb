@@ -7,7 +7,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  is_active          :boolean          default(TRUE), not null
-#  logo               :string
 #  address            :string
 #  information_name   :string
 #  information_email  :string
@@ -26,7 +25,6 @@ FactoryBot.define do
   factory :observer do
     sequence(:name) { |n| "Observer #{n}" }
     observer_type { "External" }
-    logo { Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "image.png")) }
     sequence(:information_name) { |n| "Information name #{n}" }
     sequence(:information_email) { |n| "info_email#{n}@mail.com" }
     sequence(:information_phone) { |n| (n.to_s * 9).first(9) }

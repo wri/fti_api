@@ -959,7 +959,6 @@ en:
         information_name: Information name  #g
         information_phone: Information phone  #g
         is_active: Is active  #g
-        logo: Logo  #g
         observation_report_observers: Observation report observers  #g
         observation_reports: Observation reports  #g
         observations: Observations  #g
