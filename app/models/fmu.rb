@@ -29,7 +29,7 @@ class Fmu < ApplicationRecord
   include EsriShapefileUpload
   include ValidationHelper
 
-  enum forest_type: ForestType::TYPES_WITH_CODE
+  enum :forest_type, ForestType::TYPES_WITH_CODE
 
   belongs_to :country, inverse_of: :fmus
   has_many :observations, inverse_of: :fmu, dependent: :destroy

@@ -33,7 +33,7 @@ class RequiredGovDocument < ApplicationRecord
   belongs_to :country
   has_many :gov_documents, dependent: :destroy
 
-  enum document_type: {file: 1, link: 2, stats: 3}
+  enum :document_type, {file: 1, link: 2, stats: 3}
 
   validates :document_type, inclusion: {in: RequiredGovDocument.document_types.keys}
   validates :valid_period, numericality: {greater_than: 0}, if: :valid_period?

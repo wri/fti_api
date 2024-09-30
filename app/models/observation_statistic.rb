@@ -30,7 +30,7 @@ class ObservationStatistic < ApplicationRecord
   belongs_to :subcategory, optional: true
   belongs_to :operator, optional: true
 
-  enum validation_status: {
+  enum :validation_status, {
     "Created" => 0,
     "Ready for QC" => 1,
     "QC in progress" => 2,
@@ -43,8 +43,8 @@ class ObservationStatistic < ApplicationRecord
     "Published (modified)" => 9,
     "Published (all)" => 789 # extra state for looking for all published
   }
-  enum observation_type: {"operator" => 0, "government" => 1}
-  enum fmu_forest_type: ForestType::TYPES_WITH_CODE
+  enum :observation_type, {"operator" => 0, "government" => 1}
+  enum :fmu_forest_type, ForestType::TYPES_WITH_CODE
 
   validates :date, presence: true
 

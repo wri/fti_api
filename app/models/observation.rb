@@ -57,9 +57,9 @@ class Observation < ApplicationRecord
 
   WrongStateError = Class.new(StandardError)
 
-  enum evidence_type: {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
-  enum observation_type: {"operator" => 0, "government" => 1}
-  enum validation_status: {
+  enum :evidence_type, {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
+  enum :observation_type, {"operator" => 0, "government" => 1}
+  enum :validation_status, {
     "Created" => 0,
     "Ready for QC1" => 10,
     "QC1 in progress" => 11,
@@ -73,7 +73,7 @@ class Observation < ApplicationRecord
     "Published (not modified)" => 8,
     "Published (modified)" => 9
   }
-  enum location_accuracy: {
+  enum :location_accuracy, {
     "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2
   }
 

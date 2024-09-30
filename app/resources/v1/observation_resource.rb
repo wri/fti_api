@@ -90,7 +90,7 @@ module V1
         records = records.order_by_category(order_options["subcategory.category.name"])
         order_options.except!("subcategory.category.name")
       end
-      super(records, order_options, context)
+      super
     end
 
     def self.apply_includes(records, directives)
