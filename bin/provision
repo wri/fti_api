@@ -100,7 +100,7 @@ configure_firewall = <<~EOF
 EOF
 
 install_postgres = <<~EOF
-  sudo apt-get install -y postgresql-16-postgis-3 libpq-dev
+  sudo apt-get install -y postgresql-16-postgis-3 libpq-dev imagemagick
 EOF
 
 configure_postgres = <<~EOF
