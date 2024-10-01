@@ -48,7 +48,6 @@ RSpec.describe User, type: :model do
   describe "Validations" do
     # TODO: reenable later when validating first/last names
     #  it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:password_confirmation) }
     it { is_expected.to validate_presence_of(:user_permission) }
 
     it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
@@ -57,7 +56,28 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_confirmation_of(:password) }
 
-    it { is_expected.to validate_length_of(:password).is_at_least(8).is_at_most(128).on(:create) }
+    it { is_expected.to validate_length_of(:password).is_at_least(10).is_at_most(128) }
+
+    it "is invalid when password does not contain lowercase letter" do
+      subject.password = "PASSWORD1234"
+      subject.password_confirmation = "PASSWORD1234"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:password]).to include("must contain at least one uppercase letter, one lowercase letter, and one digit")
+    end
+
+    it "is invalid when password does not contain uppercase letter" do
+      subject.password = "password1234"
+      subject.password_confirmation = "password1234"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:password]).to include("must contain at least one uppercase letter, one lowercase letter, and one digit")
+    end
+
+    it "is invalid when password does not contain digit" do
+      subject.password = "SuperPassword"
+      subject.password_confirmation = "SuperPassword"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:password]).to include("must contain at least one uppercase letter, one lowercase letter, and one digit")
+    end
 
     describe "user permissions" do
       let(:user) { build(:user, user_role: user_role) }
