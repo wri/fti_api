@@ -27,4 +27,9 @@ unless ENV["SKIP_CRON"] == "true"
   every 1.day, at: "6 am" do
     rake "notify_expiration:send", check_in: "notify-about-expired-documents"
   end
+
+  # send every quarter, on the first day of the month at 8:00
+  every "0 8 1 */3 *" do
+    rake "scheduler:send_quarterly_newsletters", check_in: "quarterly-newsletter"
+  end
 end
