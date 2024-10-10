@@ -112,6 +112,21 @@ RSpec.describe Observation, type: :model do
       expect(subject.errors[:location_accuracy]).to include("is not included in the list")
     end
 
+    describe "non concession activity" do
+      it "should be valid if checked for observation in COD" do
+        subject.country = build(:country, iso: "COD")
+        subject.non_concession_activity = true
+        expect(subject).to be_valid
+      end
+
+      it "should be invalid if checked for observation not in COD" do
+        subject.country = build(:country, iso: "POL")
+        subject.non_concession_activity = true
+        expect(subject).not_to be_valid
+        expect(subject.errors[:non_concession_activity]).to include("is not allowed for this country")
+      end
+    end
+
     describe "#status_changes" do
       let(:country) { create(:country) }
       let(:status) { "Created" }

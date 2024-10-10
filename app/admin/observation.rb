@@ -49,7 +49,7 @@ ActiveAdmin.register Observation do
 
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
     :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
-    :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden,
+    :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :non_concession_activity,
     :actions_taken, :is_physical_place, :force_translations_from,
     relevant_operator_ids: [], government_ids: [],
     observation_document_ids: [],
@@ -423,6 +423,7 @@ ActiveAdmin.register Observation do
       f.input :observation_type, input_html: {disabled: true}
       if allow_override
         if f.object.observation_type == "operator"
+          f.input :non_concession_activity if f.object.country.nil? || f.object.non_concession_activity_enabled?
           f.input :fmu_id,
             as: :nested_select,
             level_1: {
@@ -472,6 +473,7 @@ ActiveAdmin.register Observation do
       else
         f.input :country, input_html: {disabled: true}
         f.input :operator, input_html: {disabled: true} if f.object.observation_type == "operator"
+        f.input :non_concession_activity, input_html: {disabled: true} if f.object.observation_type == "operator" && (f.object.country.nil? || f.object.non_concession_activity_enabled?)
         f.input :fmu, input_html: {disabled: true} if f.object.observation_type == "operator"
         f.input :subcategory, input_html: {disabled: true}
         f.input :severity, as: :string, input_html: {

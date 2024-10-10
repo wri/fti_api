@@ -11,7 +11,7 @@ module V1
     attributes :observation_type, :publication_date, :pv, :is_active,
       :details, :evidence_type, :evidence_on_report, :concern_opinion,
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
-      :fmu_id, :location_information, :subcategory_id, :severity_id,
+      :fmu_id, :non_concession_activity, :location_information, :subcategory_id, :severity_id,
       :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
       :is_physical_place, :hidden, :user_type, :monitor_comment, :locale
 
