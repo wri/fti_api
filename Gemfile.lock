@@ -406,7 +406,6 @@ GEM
       has_scope (>= 0.6)
       railties (>= 6.0)
       responders (>= 2)
-    interactor (3.1.2)
     io-console (0.7.2)
     irb (1.14.1)
       rdoc (>= 4.0.0)
@@ -835,7 +834,6 @@ DEPENDENCIES
   groupdate
   http
   i18n_generators
-  interactor (~> 3.0)
   jsonapi-resources (= 0.9.12)
   jwt
   letter_opener_web

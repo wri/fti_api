@@ -7,8 +7,7 @@ module V1
     skip_before_action :authenticate
 
     def tree
-      result = OpDoc::FetchFilterTree.call
-      render json: result.tree.to_json
+      render json: OperatorDocumentFilterTree.new.to_json
     end
   end
 end

@@ -95,9 +95,6 @@ gem "rubyzip", "~> 2.3.0"
 gem "globalize-versioning", github: "tsubik/globalize-versioning", branch: "custom"
 gem "paper_trail"
 
-# Interactors
-gem "interactor", "~> 3.0"
-
 # Translations
 gem "google-cloud-translate"
 
