@@ -744,6 +744,7 @@ fr:
         evidence_on_report: Preuve sur le rapport  #g
         evidence_type: Type de preuve  #g
         fmu: :activerecord.models.fmu  #g
+        non_concession_activity: Le producteur exerce des activités dans une concession attribuée à un autre producteur
         governments: Gouvernements  #g
         governments_observations: Observations des gouvernements  #g
         hidden: Invisible  #g
@@ -1397,6 +1398,7 @@ fr:
     errors:
       messages:
         password_complexity: "doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre"
+        not_allowed_for_country: "n'est pas autorisé pour ce pays"
         qc_in_progress: "Le contrôle qualité doit être en cours"
         record_invalid: 'La validation a échoué : %{errors}'
         restrict_dependent_destroy:
