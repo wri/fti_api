@@ -833,6 +833,7 @@ en:
         deleted_at: Deleted at  #g
         evidence_on_report: Evidence on report  #g
         evidence_type: Evidence type  #g
+        non_concession_activity: Producer conducts activities in a concession that is attributed to another producer
         fmu: :activerecord.models.fmu  #g
         governments: Governments  #g
         governments_observations: Governments observations  #g
@@ -1478,6 +1479,7 @@ en:
     errors:
       messages:
         password_complexity: "must contain at least one uppercase letter, one lowercase letter, and one digit"
+        not_allowed_for_country: "is not allowed for this country"
         qc_in_progress: "QC must be in progress"
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
