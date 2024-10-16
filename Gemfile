@@ -151,7 +151,6 @@ end
 # Server
 gem "dotenv-rails"
 gem "puma"
-# TODO: remove version lock after this issue is resolved: https://github.com/cyu/rack-cors/issues/274
-gem "rack-cors", "2.0.0"
+gem "rack-cors"
 gem "redis-rails"
 gem "tzinfo-data"
