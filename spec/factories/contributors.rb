@@ -17,7 +17,7 @@
 FactoryBot.define do
   factory :contributor do
     name { |n| "Contributor#{n}" }
-    website { |n| "Website#{n}" }
+    website { "http://website.com" }
     priority { rand(0..10) }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "image.png")) }
 
