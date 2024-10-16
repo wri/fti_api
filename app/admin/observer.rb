@@ -23,8 +23,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
     column :is_active
     column :public_info
     column :countries do |observer|
-      names = observer.countries.map { |c| c.name }
-      names.join(" ").tr(",", ";")
+      observer.countries.map(&:name).join(";")
     end
     column :observer_type
     column :name
@@ -35,16 +34,13 @@ ActiveAdmin.register Observer, as: "Monitor" do
   index title: proc { I18n.t("activerecord.models.observer") } do
     column :is_active
     column :public_info
-    # TODO: Reactivate rubocop and fix this
-    # rubocop:disable Rails/OutputSafety
     column :countries do |observer|
       links = []
       observer.countries.each do |country|
         links << link_to(country.name, admin_country_path(country.id))
       end
-      links.join(" ").html_safe
+      safe_join(links, " ")
     end
-    # rubocop:enable Rails/OutputSafety
     column :observer_type, sortable: true
     column :name
     column :responsible_qc1
@@ -83,16 +79,13 @@ ActiveAdmin.register Observer, as: "Monitor" do
       row :organization_type
       row :responsible_qc1
       row :responsible_qc2
-      # TODO: Reactivate rubocop and fix this
-      # rubocop:disable Rails/OutputSafety
       row :countries do |observer|
         links = []
         observer.countries.each do |country|
           links << link_to(country.name, admin_country_path(country.id))
         end
-        links.join(" ").html_safe
+        safe_join(links, " ")
       end
-      # rubocop:enable Rails/OutputSafety
       row :address
       row :information_name
       row :information_email
