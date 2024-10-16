@@ -65,7 +65,6 @@ gem "whenever", require: false
 # Data
 gem "activerecord-import"
 gem "acts_as_list"
-gem "countries", require: false # for update translations job, so require only there
 gem "globalize"
 
 # Auth and Omniauth
@@ -100,8 +99,11 @@ gem "sentry-ruby"
 gem "rack", "~> 3.0.11"
 
 # Utilities
-gem "http"
 gem "nokogiri"
+
+# Only used in rake tasks
+gem "http", require: false # protected areas job
+gem "countries", require: false # for update translations job, so require only there
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
