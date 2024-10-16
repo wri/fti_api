@@ -11,9 +11,6 @@ end
 
 gem "bootsnap", require: false
 
-# TODO: after upgrading passenger change it's config to use passenger_preload_bundler on
-gem "base64", "0.1.1"
-
 # Active admin
 gem "active_admin_paranoia", git: "https://github.com/tsubik/active_admin_paranoia.git"
 gem "active_admin_sidebar", git: "https://github.com/activeadmin-plugins/active_admin_sidebar.git"
