@@ -57,8 +57,8 @@ class Observation < ApplicationRecord
 
   WrongStateError = Class.new(StandardError)
 
-  enum :evidence_type, {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}
-  enum :observation_type, {"operator" => 0, "government" => 1}
+  enum :evidence_type, {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}, validate: {allow_nil: true}
+  enum :observation_type, {"operator" => 0, "government" => 1}, validate: true
   enum :validation_status, {
     "Created" => 0,
     "Ready for QC1" => 10,
@@ -75,9 +75,7 @@ class Observation < ApplicationRecord
   }
   enum :location_accuracy, {
     "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2
-  }
-
-  validate_enum_attributes :evidence_type, :observation_type, :location_accuracy
+  }, validate: {allow_nil: true}
 
   AUTOMATICALLY_TRANSLATABLE_FIELDS = %w[details concern_opinion litigation_status]
 

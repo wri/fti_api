@@ -94,6 +94,24 @@ RSpec.describe Observation, type: :model do
       expect(subject.errors[:governments]).to include("Should have no governments with 'operator' type")
     end
 
+    it "is invalid with wrong evidence_type" do
+      subject.evidence_type = "wrong"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:evidence_type]).to include("is not included in the list")
+    end
+
+    it "is invalid with wrong observation_type" do
+      subject.observation_type = "wrong"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:observation_type]).to include("is not included in the list")
+    end
+
+    it "is invalid with wrong location accuracy" do
+      subject.location_accuracy = "wrong"
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:location_accuracy]).to include("is not included in the list")
+    end
+
     describe "#status_changes" do
       let(:country) { create(:country) }
       let(:status) { "Created" }
