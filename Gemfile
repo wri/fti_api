@@ -71,9 +71,6 @@ gem "acts_as_list"
 gem "countries", require: false # for update translations job, so require only there
 gem "globalize"
 
-# Validation
-gem "valid_url"
-
 # Auth and Omniauth
 gem "bcrypt"
 gem "cancancan"

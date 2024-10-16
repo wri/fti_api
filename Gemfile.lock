@@ -757,9 +757,6 @@ GEM
     unicode-display_width (2.6.0)
     uniform_notifier (1.16.0)
     uri (0.13.1)
-    valid_url (0.0.4)
-      addressable
-      rails
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -876,7 +873,6 @@ DEPENDENCIES
   super_diff
   tzinfo-data
   uglifier
-  valid_url
   web-console (>= 4.1.0)
   webmock
   whenever
