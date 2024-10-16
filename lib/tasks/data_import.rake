@@ -1,4 +1,5 @@
 require "csv"
+require "http"
 
 namespace :import do
   I18n.locale = :en
