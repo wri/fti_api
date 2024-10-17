@@ -52,6 +52,16 @@ RSpec.describe Operator, type: :model do
     expect(operator).to be_valid
   end
 
+  it "is invalid with invalid website url" do
+    operator.website = "invalid url"
+    expect(operator).not_to be_valid
+    expect(operator.errors[:website]).to include("is invalid")
+
+    operator.website = "validurl.com"
+    expect(operator).not_to be_valid
+    expect(operator.errors[:website]).to include("must start with http:// or https://")
+  end
+
   describe "Hooks" do
     describe "#set_slug" do
       it "sets slug for a new operator" do
