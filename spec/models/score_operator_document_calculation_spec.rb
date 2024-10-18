@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ScoreOperatorPresenter do
+RSpec.describe ScoreOperatorDocumentCalculation do
   before :all do
     country = create(:country)
     operator = create(:operator, country: country, fa_id: "fa-id")
