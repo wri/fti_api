@@ -2,8 +2,6 @@
 
 module V1
   class SessionsController < APIController
-    include ErrorSerializer
-
     skip_before_action :authenticate, only: [:create]
 
     def create

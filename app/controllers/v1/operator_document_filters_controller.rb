@@ -2,8 +2,6 @@
 
 module V1
   class OperatorDocumentFiltersController < APIController
-    include ErrorSerializer
-
     skip_before_action :authenticate
 
     def tree

@@ -2,8 +2,6 @@
 
 module V1
   class UsersController < APIController
-    include ErrorSerializer
-
     load_and_authorize_resource class: "User"
 
     def update
