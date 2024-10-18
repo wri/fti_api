@@ -13,7 +13,7 @@ module V1
                       user_id: @user.id, country: @user.country_id,
                       operator_ids: @user.operator_ids, observer: @user.observer_id}, status: :ok
       else
-        render json: {errors: [{status: "401", title: "Incorrect email or password"}]}, status: :unauthorized
+        render json: {errors: [{status: 401, title: "Incorrect email or password"}]}, status: :unauthorized
       end
     end
 
