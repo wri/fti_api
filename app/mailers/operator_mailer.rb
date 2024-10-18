@@ -1,5 +1,6 @@
 class OperatorMailer < ApplicationMailer
   include ActionView::Helpers::DateHelper
+  include ActionView::Helpers::NumberHelper
 
   helper :date
 
@@ -17,21 +18,27 @@ class OperatorMailer < ApplicationMailer
     @operator = operator
 
     @score = begin
-      NumberHelper.float_to_percentage(current_score.all)
+      float_to_percentage(current_score.all)
     rescue
       0
     end
 
     if last_score.present?
       @old_score = begin
-        NumberHelper.float_to_percentage(last_score.all)
+        float_to_percentage(last_score.all)
       rescue
         0
       end
       @old_score_date = last_score.date
-      @score_variation = NumberHelper.float_to_percentage(current_score.all - last_score.all)
+      @score_variation = float_to_percentage(current_score.all - last_score.all)
     end
 
     mail to: user.email, subject: I18n.t("operator_mailer.quarterly_newsletter.subject", company: operator.name)
+  end
+
+  private
+
+  def float_to_percentage(number)
+    number_to_percentage(number * 100, precision: 2, strip_insignificant_zeros: true)
   end
 end

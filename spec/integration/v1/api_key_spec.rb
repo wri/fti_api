@@ -12,7 +12,7 @@ module V1
 
       describe "Request with invalid api key" do
         let!(:error) {
-          {errors: [{status: "401", title: "Sorry invalid API token"}]}
+          {errors: [{status: 401, title: "Sorry invalid API token"}]}
         }
 
         it "Get users list" do

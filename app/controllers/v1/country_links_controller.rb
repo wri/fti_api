@@ -2,8 +2,6 @@
 
 module V1
   class CountryLinksController < APIController
-    include ErrorSerializer
-
     skip_before_action :authenticate, only: [:index, :show]
     load_and_authorize_resource class: "CountryLink"
   end

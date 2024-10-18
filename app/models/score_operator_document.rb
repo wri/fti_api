@@ -46,13 +46,13 @@ class ScoreOperatorDocument < ApplicationRecord
   def self.build(operator, docs = nil)
     docs ||= operator.operator_documents
     sod = ScoreOperatorDocument.new date: Time.zone.today, operator: operator, current: true
-    calculator = ScoreOperatorPresenter.new(docs)
-    sod.all = calculator.all
-    sod.fmu = calculator.fmu
-    sod.country = calculator.country
-    sod.total = calculator.total
-    sod.summary_private = calculator.summary_private
-    sod.summary_public = calculator.summary_public
+    results = ScoreOperatorDocumentCalculation.new(docs)
+    sod.all = results.all
+    sod.fmu = results.fmu
+    sod.country = results.country
+    sod.total = results.total
+    sod.summary_private = results.summary_private
+    sod.summary_public = results.summary_public
     sod
   end
 

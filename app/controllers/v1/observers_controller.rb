@@ -2,7 +2,6 @@
 
 module V1
   class ObserversController < APIController
-    include ErrorSerializer
     include APIUploads
 
     skip_before_action :authenticate, only: [:index, :show]

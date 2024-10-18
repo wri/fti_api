@@ -22,7 +22,6 @@ class Notification < ApplicationRecord
   delegate :operator, to: :operator_document
 
   # The number of months a notification is still fetchable
-  # TODO: move this to an environment variable
   MONTHS_TO_FETCH = 1
 
   scope :newly_created, -> { where(last_displayed_at: nil, solved_at: nil) }
