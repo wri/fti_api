@@ -81,6 +81,18 @@ class APIController < ActionController::API
     render json: {errors: [{status: "404", title: "Record not found"}]}, status: :not_found
   end
 
+  def render_unprocessable_entity_error(errors)
+    json_errors = {errors: []}
+
+    errors.messages.each do |err_type, messages|
+      messages.each do |msg|
+        json_errors[:errors] << {status: "422", title: "#{err_type} #{msg}"}
+      end
+    end
+
+    render json: json_errors, status: :unprocessable_entity
+  end
+
   def token
     request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
   end

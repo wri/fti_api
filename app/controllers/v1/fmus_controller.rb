@@ -2,8 +2,6 @@
 
 module V1
   class FmusController < APIController
-    include ErrorSerializer
-
     skip_before_action :authenticate, only: %w[index tiles]
     skip_authorize_resource only: :tiles
     load_and_authorize_resource class: "Fmu"
