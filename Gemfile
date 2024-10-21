@@ -96,6 +96,8 @@ gem "sentry-rails"
 gem "sentry-ruby"
 
 # TODO: jsonapi-resources is not compatible with this rack PR https://github.com/rack/rack/pull/2137 (ver 3.1.0), waiting for a patch
+# more info here https://github.com/cerebris/jsonapi-resources/pull/1457
+# remove version contstraint when above PR is merged and backported to ver 0.9.12
 gem "rack", "~> 3.0.11"
 
 # Utilities
