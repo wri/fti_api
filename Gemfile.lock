@@ -176,7 +176,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    brakeman (6.2.1)
+    brakeman (6.2.2)
       racc
     builder (3.3.0)
     bullet (7.2.0)
@@ -278,7 +278,7 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
-    faker (3.4.2)
+    faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.12.0)
       faraday-net_http (>= 2.0, < 3.4)
@@ -613,7 +613,7 @@ GEM
       rspec-mocks (~> 3.13.0)
     rspec-collection_matchers (1.2.1)
       rspec-expectations (>= 2.99.0.beta1)
-    rspec-core (3.13.1)
+    rspec-core (3.13.2)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.3)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -719,7 +719,7 @@ GEM
       net-ssh (>= 2.8.0)
       ostruct
     ssrf_filter (1.1.2)
-    standard (1.41.0)
+    standard (1.41.1)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
       rubocop (~> 1.66.0)
@@ -771,7 +771,7 @@ GEM
       rails (>= 3.2.16)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.0)
+    zeitwerk (2.7.1)
 
 PLATFORMS
   ruby
