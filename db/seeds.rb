@@ -9,7 +9,7 @@ ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
 
 $stdout.puts "Creating test users..."
 
-common_fields = {password: "password", password_confirmation: "password", locale: :en, last_name: "User"}
+common_fields = {password: "Supersecret1", password_confirmation: "Supersecret1", locale: :en, last_name: "User"}
 admin = User.create_with(**common_fields, first_name: "Admin").find_or_create_by!(email: "admin@example.com") do |user|
   user.build_user_permission(user_role: "admin")
 end

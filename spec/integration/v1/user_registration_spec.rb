@@ -8,17 +8,24 @@ module V1
       ]}
     }
 
-    let(:error_pw) { {errors: [{status: 422, title: "password is too short (minimum is 8 characters)"}]} }
+    let(:error_pw) {
+      {
+        errors: [
+          {status: 422, title: "password is too short (minimum is 10 characters)"},
+          {status: 422, title: "password must contain at least one uppercase letter, one lowercase letter, and one digit"}
+        ]
+      }
+    }
 
     let(:invalid_user_params) do
-      {email: "test@gmail.com", password: "password", permissions_request: "government"}
+      {email: "test@gmail.com", password: "Password123", permissions_request: "government"}
     end
 
     let(:valid_user_params) do
       {
         email: "test@gmail.com",
-        password: "password",
-        password_confirmation: "password",
+        password: "Password123",
+        password_confirmation: "Password123",
         locale: "en",
         permissions_request: "government",
         first_name: "First name",

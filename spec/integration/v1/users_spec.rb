@@ -12,13 +12,13 @@ module V1
         excluded_params: %i[password password-confirmation permissions-request],
         valid_params: {
           email: "test@gmail.com",
-          password: "password",
-          "password-confirmation": "password",
+          password: "Supersecret1",
+          "password-confirmation": "Supersecret1",
           "first-name": "Test",
           "last-name": "user new",
           "permissions-request": "government"
         },
-        invalid_params: {email: "test@gmail.com", password: "password", "permissions-request": "government"},
+        invalid_params: {email: "test@gmail.com", password: "Supersecret1", "permissions-request": "government"},
         error_attributes: [422, 100, {
           "password-confirmation": ["can't be blank"]
         }]
@@ -29,14 +29,14 @@ module V1
         excluded_params: %i[password password-confirmation permissions-request current-password],
         valid_params: {
           email: "test@gmail.com",
-          password: "password",
-          "password-confirmation": "password",
-          "current-password": "password",
+          password: "NewPassword1",
+          "password-confirmation": "NewPassword1",
+          "current-password": "Supersecret1",
           "first-name": "Test",
           "last-name": "user new",
           "permissions-request": "government"
         },
-        invalid_params: {email: "test@gmail.com", password: "password", "permissions-request": "government"},
+        invalid_params: {email: "test@gmail.com", password: "Supersecret1", "password-confirmation": "Supersecret1", "permissions-request": "government"},
         error_attributes: [422, 100, {"current-password": ["can't be blank"]}]
       },
       delete: {
@@ -82,7 +82,7 @@ module V1
         describe "Current Password validation" do
           it "requires current password when changing password" do
             patch("/users/#{operator_user.id}",
-              params: jsonapi_params("users", operator_user.id, {password: "new_password"}),
+              params: jsonapi_params("users", operator_user.id, {password: "NewPassword1", "password-confirmation": "NewPassword1"}),
               headers: operator_user_headers)
 
             expect(status).to eq(422)
