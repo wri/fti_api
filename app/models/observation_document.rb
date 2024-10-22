@@ -23,8 +23,7 @@ class ObservationDocument < ApplicationRecord
   enum :document_type, {
     "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2,
     "Testimony from local communities" => 3, "Other" => 4, "Maps" => 5
-  }
-  validate_enum_attributes :document_type
+  }, validate: true
 
   validates :attachment, presence: true
   validates :name, presence: true

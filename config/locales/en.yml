@@ -1597,7 +1597,6 @@ en:
       greater_than_or_equal_to: must be greater than or equal to %{count}
       inclusion: is not included in the list
       invalid: is invalid
-      invalid_enum: "can't be %{value}. Valid values are: %{valid_values}"
       less_than: must be less than %{count}
       less_than_or_equal_to: must be less than or equal to %{count}
       model_invalid: "Validation failed: %{errors}"
@@ -1625,6 +1624,7 @@ en:
       rmagick_processing_error: "Failed to manipulate with rmagick, maybe it is not an image? Original Error: %{e}"
       mime_types_processing_error: "Failed to process file with MIME::Types, maybe not valid content-type? Original Error: %{e}"
       mini_magick_processing_error: "Failed to manipulate with MiniMagick, maybe it is not an image? Original Error: %{e}"
+      url_valid_scheme: "must start with http:// or https://"
     template:
       body: 'There were problems with the following fields:'
       header:

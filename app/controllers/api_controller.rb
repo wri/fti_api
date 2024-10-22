@@ -26,7 +26,7 @@ class APIController < ActionController::API
 
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug { "Access denied on #{exception.action} #{exception.subject.inspect}" }
-    render json: {errors: [{status: "401", title: exception.message}]}, status: :unauthorized
+    render json: {errors: [{status: 401, title: exception.message}]}, status: :unauthorized
   end
 
   on_server_error do |error|
@@ -70,15 +70,27 @@ class APIController < ActionController::API
   protected
 
   def check_access
-    render json: {errors: [{status: "401", title: "Sorry invalid API token"}]}, status: :unauthorized unless valid_api_key?
+    render json: {errors: [{status: 401, title: "Sorry invalid API token"}]}, status: :unauthorized unless valid_api_key?
   end
 
   def authenticate
-    render json: {errors: [{status: "401", title: "You are not authorized to access this page."}]}, status: :unauthorized unless logged_in?
+    render json: {errors: [{status: 401, title: "You are not authorized to access this page."}]}, status: :unauthorized unless logged_in?
   end
 
   def record_not_found
-    render json: {errors: [{status: "404", title: "Record not found"}]}, status: :not_found
+    render json: {errors: [{status: 404, title: "Record not found"}]}, status: :not_found
+  end
+
+  def render_unprocessable_entity_error(errors)
+    json_errors = {errors: []}
+
+    errors.messages.each do |err_type, messages|
+      messages.each do |msg|
+        json_errors[:errors] << {status: 422, title: "#{err_type} #{msg}"}
+      end
+    end
+
+    render json: json_errors, status: :unprocessable_entity
   end
 
   def token
@@ -106,7 +118,7 @@ class APIController < ActionController::API
   end
 
   def bad_auth_key
-    render json: {errors: [{status: "400", title: "API Key/Authorization Key mal formed"}]}, status: :bad_request
+    render json: {errors: [{status: 400, title: "API Key/Authorization Key mal formed"}]}, status: :bad_request
   end
 
   def set_locale(&action)

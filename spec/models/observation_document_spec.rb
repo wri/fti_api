@@ -21,6 +21,12 @@ RSpec.describe ObservationDocument, type: :model do
     expect(subject).to be_valid
   end
 
+  it "is invalid with wrong document_type" do
+    subject.document_type = "wrong"
+    expect(subject.valid?).to eq(false)
+    expect(subject.errors[:document_type]).to include("is not included in the list")
+  end
+
   describe "soft delete" do
     let!(:report) { create(:observation_document) }
 

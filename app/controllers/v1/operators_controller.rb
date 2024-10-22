@@ -2,7 +2,6 @@
 
 module V1
   class OperatorsController < APIController
-    include ErrorSerializer
     include APIUploads
 
     skip_before_action :authenticate, only: [:index, :show, :create]

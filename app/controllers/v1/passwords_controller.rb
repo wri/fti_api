@@ -2,8 +2,6 @@
 
 module V1
   class PasswordsController < APIController
-    include ErrorSerializer
-
     skip_before_action :authenticate, only: [:create, :update]
 
     def create
@@ -21,7 +19,7 @@ module V1
           }
         ).serialize_to_hash(UserResource.new(user, context))
       else
-        render json: ErrorSerializer.serialize(user.errors, 422), status: :unprocessable_entity
+        render_unprocessable_entity_error(user.errors)
       end
     end
 

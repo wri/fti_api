@@ -12,9 +12,10 @@ panel I18n.t("active_admin.operator_documents_page.details") do
     row :expire_date
     row :updated_at
     row I18n.t("active_admin.operator_documents_page.annexes") do |r|
-      r.operator_document_annexes.map do |annex|
+      links = r.operator_document_annexes.map do |annex|
         link_to annex.name, admin_operator_document_annex_path(annex), target: "_blank", rel: "noopener noreferrer"
-      end.join(", ").html_safe # rubocop:disable Rails/OutputSafety
+      end
+      safe_join(links, ", ")
     end
   end
 end
