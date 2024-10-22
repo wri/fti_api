@@ -93,12 +93,6 @@ $to-be-reviewed: #99AA99;
   }
 }
 
-.shapefiles_button {
-  @extend .button;
-  display: block !important;
-  text-align: center;
-}
-
 // To increase the width of observations-details
 .col-details {
   min-width: 500px;
@@ -222,6 +216,6 @@ body.active_admin {
 
 // Dependent filters
 #dependent_filters_sidebar_section {
-  visibility: hidden;
+  display: none;
 }
 

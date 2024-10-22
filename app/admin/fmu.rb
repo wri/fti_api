@@ -73,7 +73,7 @@ ActiveAdmin.register Fmu do
     div do
       link_to "Download Filtered Shapefiles", download_filtered_shapefiles_admin_fmus_path(
         q: params[:q]&.to_unsafe_h
-      ), class: "shapefiles_button"
+      ), class: "button text-center mt-10px"
     end
   end
 
