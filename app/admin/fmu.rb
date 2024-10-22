@@ -4,20 +4,47 @@ ActiveAdmin.register Fmu do
   extend BackRedirectable
   extend Versionable
 
-  menu false
-
-  active_admin_paranoia
-
-  config.order_clause
-
   controller do
     def scoped_collection
       end_of_association_chain.includes(:country, :operator)
+    end
+
+    def download_shapefiles(fmus)
+      file_content = ShapefileService.generate_shapefile(fmus)
+
+      filename = "fmus"
+      filename = fmus.first&.name if fmus.size == 1
+      filename = filename.gsub(/[^0-9A-Za-z ]/, "")[0..30]
+      filename += ".zip"
+
+      send_data file_content, type: "application/zip", filename: filename, disposition: "attachment"
     end
   end
 
   scope -> { I18n.t("active_admin.all") }, :all, default: true
   scope -> { I18n.t("active_admin.free") }, :filter_by_free_aa
+
+  menu false
+
+  active_admin_paranoia
+
+  config.order_clause
+  config.batch_actions = true
+
+  batch_action :destroy, false
+  batch_action :download_shapefiles do |ids|
+    fmus = batch_action_collection.find(ids)
+    download_shapefiles(fmus)
+  end
+
+  member_action :download_shapefile, method: :get do
+    fmu = Fmu.find(params[:id])
+    download_shapefiles([fmu])
+  end
+
+  action_item :download_shapefile, only: :show do
+    link_to I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
+  end
 
   permit_params :id, :name, :certification_fsc, :certification_pefc,
     :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
@@ -40,6 +67,19 @@ ActiveAdmin.register Fmu do
         name_cont: Operator.joins(:fmus).pluck(:id, "fmus.name")
       }
     }
+  end
+
+  sidebar "Shapefiles" do
+    div do
+      link_to "Download Filtered Shapefiles", download_filtered_shapefiles_admin_fmus_path(
+        q: params[:q]&.to_unsafe_h
+      ), class: "button text-center mt-10px"
+    end
+  end
+
+  collection_action :download_filtered_shapefiles, method: :get do
+    fmus = Fmu.ransack(params.dig(:q)).result(distinct: true)
+    download_shapefiles(fmus)
   end
 
   csv do
@@ -88,6 +128,7 @@ ActiveAdmin.register Fmu do
   end
 
   index do
+    selectable_column
     column :id, sortable: true
     column :name, sortable: true
     column :country, sortable: "country_translations.name"
@@ -100,7 +141,12 @@ ActiveAdmin.register Fmu do
     column "TLV", :certification_tlv
     column "LS", :certification_ls
 
-    actions
+    actions defaults: false do |fmu|
+      item I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
+      item I18n.t("active_admin.view"), admin_fmu_path(fmu)
+      item I18n.t("active_admin.edit"), edit_admin_fmu_path(fmu)
+      item I18n.t("active_admin.delete"), admin_fmu_path(fmu), method: :delete, data: {confirm: I18n.t("active_admin.fmus_page.confirm_delete")}
+    end
   end
 
   form do |f|
