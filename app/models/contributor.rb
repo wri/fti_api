@@ -27,4 +27,5 @@ class Contributor < ApplicationRecord
 
   validates :priority, numericality: {only_integer: true, greater_than_or_equal_to: 0}, if: :priority?
   validates :name, presence: true
+  validates :website, url: true
 end

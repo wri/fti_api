@@ -2,8 +2,6 @@
 
 module V1
   class RegistrationsController < APIController
-    include ErrorSerializer
-
     skip_before_action :authenticate
     before_action :reject_params
 
@@ -14,7 +12,7 @@ module V1
         SystemMailer.user_created(@user).deliver_later
         render json: {messages: [{status: 201, title: "User successfully registered!"}]}, status: :created
       else
-        render json: ErrorSerializer.serialize(@user.errors, 422), status: :unprocessable_entity
+        render_unprocessable_entity_error(@user.errors)
       end
     end
 

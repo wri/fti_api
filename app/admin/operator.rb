@@ -9,7 +9,7 @@ ActiveAdmin.register Operator, as: "Producer" do
   config.sort_order = "created_at_desc"
 
   actions :all
-  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :is_active,
+  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :is_active, :website,
     :logo, :delete_logo, fmu_ids: []
 
   member_action :activate, method: :put do
@@ -219,6 +219,7 @@ ActiveAdmin.register Operator, as: "Producer" do
       else
         f.input :logo, as: :file
       end
+      f.input :website
       available_fmus = Fmu.filter_by_free
       if edit
         available_fmus = []

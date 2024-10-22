@@ -1,11 +1,21 @@
 # frozen_string_literal: true
 
-class ScoreOperatorPresenter
+class ScoreOperatorDocumentCalculation
   attr_reader :docs, :signed_publication_authorization
 
   def initialize(docs)
     @docs = docs.non_signature
     @signed_publication_authorization = docs.signature.approved.any?
+  end
+
+  def apply_to(score_operator_document)
+    score_operator_document.all = all
+    score_operator_document.fmu = fmu
+    score_operator_document.country = country
+    score_operator_document.total = total
+    score_operator_document.summary_private = summary_private
+    score_operator_document.summary_public = summary_public
+    score_operator_document
   end
 
   def all

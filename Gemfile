@@ -11,9 +11,6 @@ end
 
 gem "bootsnap", require: false
 
-# TODO: after upgrading passenger change it's config to use passenger_preload_bundler on
-gem "base64", "0.1.1"
-
 # Active admin
 gem "active_admin_paranoia", git: "https://github.com/tsubik/active_admin_paranoia.git"
 gem "active_admin_sidebar", git: "https://github.com/activeadmin-plugins/active_admin_sidebar.git"
@@ -68,11 +65,7 @@ gem "whenever", require: false
 # Data
 gem "activerecord-import"
 gem "acts_as_list"
-gem "countries", require: false # for update translations job, so require only there
 gem "globalize"
-
-# Validation
-gem "valid_url"
 
 # Auth and Omniauth
 gem "bcrypt"
@@ -95,9 +88,6 @@ gem "rubyzip", "~> 2.3.0"
 gem "globalize-versioning", github: "tsubik/globalize-versioning", branch: "custom"
 gem "paper_trail"
 
-# Interactors
-gem "interactor", "~> 3.0"
-
 # Translations
 gem "google-cloud-translate"
 
@@ -106,11 +96,16 @@ gem "sentry-rails"
 gem "sentry-ruby"
 
 # TODO: jsonapi-resources is not compatible with this rack PR https://github.com/rack/rack/pull/2137 (ver 3.1.0), waiting for a patch
+# more info here https://github.com/cerebris/jsonapi-resources/pull/1457
+# remove version contstraint when above PR is merged and backported to ver 0.9.12
 gem "rack", "~> 3.0.11"
 
 # Utilities
-gem "http"
 gem "nokogiri"
+
+# Only used in rake tasks
+gem "http", require: false # protected areas job
+gem "countries", require: false # for update translations job, so require only there
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
@@ -147,9 +142,7 @@ group :test do
   gem "capybara"
   gem "cuprite"
   gem "database_cleaner"
-  gem "email_spec"
   gem "rspec-collection_matchers"
-  gem "rspec-activejob"
   gem "rspec-rails"
   gem "rspec-request_snapshot", github: "tsubik/rspec-request_snapshot", branch: "fix/ignore-order"
   gem "shoulda-matchers", "~> 4.0.1"
@@ -160,7 +153,6 @@ end
 # Server
 gem "dotenv-rails"
 gem "puma"
-# TODO: remove version lock after this issue is resolved: https://github.com/cyu/rack-cors/issues/274
-gem "rack-cors", "2.0.0"
+gem "rack-cors"
 gem "redis-rails"
 gem "tzinfo-data"

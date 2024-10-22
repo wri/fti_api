@@ -118,7 +118,7 @@ ActiveAdmin.register Observation do
   scope -> { I18n.t("active_admin.observations_page.visible") }, :visible
 
   # region filters
-  filter :id, as: :numeric_range
+  filter :id, as: :numeric_range_filter
   filter :validation_status,
     as: :select,
     input_html: {multiple: true},

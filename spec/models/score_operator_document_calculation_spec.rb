@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ScoreOperatorPresenter do
+RSpec.describe ScoreOperatorDocumentCalculation do
   before :all do
     country = create(:country)
     operator = create(:operator, country: country, fa_id: "fa-id")
@@ -57,7 +57,7 @@ RSpec.describe ScoreOperatorPresenter do
       @operator.operator_documents.signature.first.update!(status: "doc_valid", document_file: @file, start_date: Time.zone.yesterday)
     end
 
-    subject { ScoreOperatorPresenter.new(@operator.operator_documents) }
+    subject { ScoreOperatorDocumentCalculation.new(@operator.operator_documents) }
 
     describe "all" do
       it "returns score for all documents" do
@@ -114,7 +114,7 @@ RSpec.describe ScoreOperatorPresenter do
       @operator.operator_documents.signature.first.update!(status: "doc_invalid", admin_comment: "invalid", document_file: @file, start_date: Time.zone.yesterday)
     end
 
-    subject { ScoreOperatorPresenter.new(@operator.operator_documents) }
+    subject { ScoreOperatorDocumentCalculation.new(@operator.operator_documents) }
 
     describe "all" do
       it "returns score for all documents" do

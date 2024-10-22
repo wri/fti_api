@@ -46,26 +46,13 @@ class ScoreOperatorDocument < ApplicationRecord
   def self.build(operator, docs = nil)
     docs ||= operator.operator_documents
     sod = ScoreOperatorDocument.new date: Time.zone.today, operator: operator, current: true
-    calculator = ScoreOperatorPresenter.new(docs)
-    sod.all = calculator.all
-    sod.fmu = calculator.fmu
-    sod.country = calculator.country
-    sod.total = calculator.total
-    sod.summary_private = calculator.summary_private
-    sod.summary_public = calculator.summary_public
-    sod
+    ScoreOperatorDocumentCalculation.new(docs).apply_to(sod)
   end
 
   # Resync the score using operator document history
   def resync!
     docs = OperatorDocumentHistory.from_operator_at_date(operator_id, date)
-    new_score = ScoreOperatorDocument.build(operator, docs)
-    self.all = new_score.all
-    self.fmu = new_score.fmu
-    self.country = new_score.country
-    self.total = new_score.total
-    self.summary_private = new_score.summary_private
-    self.summary_public = new_score.summary_public
+    ScoreOperatorDocumentCalculation.new(docs).apply_to(self)
     save!
   end
 

@@ -13,7 +13,7 @@ module V1
       :litigation_status, :location_accuracy, :lat, :lng, :country_id,
       :fmu_id, :location_information, :subcategory_id, :severity_id,
       :created_at, :updated_at, :actions_taken, :validation_status, :validation_status_id,
-      :is_physical_place, :complete, :hidden, :user_type, :monitor_comment, :locale
+      :is_physical_place, :hidden, :user_type, :monitor_comment, :locale
 
     has_many :species
     has_many :observation_documents
@@ -95,17 +95,6 @@ module V1
 
     def self.apply_includes(records, directives)
       super.includes(:observation_report, :observation_documents, :translations)
-    end
-
-    # An observation is complete if it has evidence
-    def complete
-      return true if @model.observation_documents.any?
-      if @model.evidence_type == "Evidence presented in the report" &&
-          @model.evidence_on_report && @model.observation_report_id
-        return true
-      end
-
-      false
     end
 
     def validation_status_id

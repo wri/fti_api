@@ -5,8 +5,6 @@ fixtures_dir = File.join(Rails.root, "db", "fixtures")
 fixture_files = Dir["#{fixtures_dir}/**/*.yml"].pluck((fixtures_dir.size + 1)..-5)
 
 $stdout.puts "Loading fixtures..."
-# NOTE: in case of integrity errors, check config/initializers/active_record_fixtures.rb for monkey patch to get better error messages
-# TODO: remove monkey patch when upgrading to Rails 7.1
 ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
 
 $stdout.puts "Creating test users..."
