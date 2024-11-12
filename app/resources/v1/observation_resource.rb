@@ -4,7 +4,7 @@ module V1
   class ObservationResource < BaseResource
     include CacheableByLocale
     # TODO: investigate caching issues, I remember it was somthing with included resources like observers
-    # caching
+    caching
 
     attr_reader :adjust_validation_status_with_value
 
