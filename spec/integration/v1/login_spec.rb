@@ -11,7 +11,7 @@ module V1
     end
 
     it "Valid login" do
-      post "/login", params: {auth: {email: user.email, password: "password"}},
+      post "/login", params: {auth: {email: user.email, password: "Supersecret1"}},
         headers: non_api_webuser_headers
 
       expect(status).to eq(200)

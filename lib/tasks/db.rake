@@ -53,7 +53,7 @@ namespace :db do
   desc "Prepare database for dev enviroment"
   task prepare_for_dev: :environment do
     ActiveRecord::Base.connection.reconnect! # make sure connection is open
-    puts "Changing all users passwords to secret"
-    User.update_all(encrypted_password: User.new(password: "secret").encrypted_password)
+    puts "Changing all users passwords to Supersecret1"
+    User.update_all(encrypted_password: User.new(password: "Supersecret1").encrypted_password)
   end
 end
