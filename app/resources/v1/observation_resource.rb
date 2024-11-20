@@ -73,10 +73,24 @@ module V1
       records.where(id: records.joins(:observers).where(observers: {id: value}).pluck(:id))
     }
 
+    filter :fmu_id, apply: ->(records, value, options) {
+      context = options[:context]
+      user = context[:current_user]
+
+      if context[:app] == "observations-tool" && user.present? && ["ngo", "ngo_manager", "admin"].include?(user.user_permission.user_role)
+        records.where(fmu_id: value)
+      else
+        # prevent searching up observations with non concession activity by fmu_id
+        records.where(fmu_id: value, non_concession_activity: false)
+      end
+    }
+
     def fetchable_fields
       return super if observations_tool_user?
+      non_fetchable_fields = [:monitor_comment, :created_at, :updated_at, :user, :modified_user]
+      non_fetchable_fields.concat([:fmu, :fmu_id]) if non_concession_activity
 
-      super - [:monitor_comment, :created_at, :updated_at, :user, :modified_user]
+      super - non_fetchable_fields
     end
 
     def self.sortable_fields(context)
