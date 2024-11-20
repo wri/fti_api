@@ -73,7 +73,7 @@ module V1
     describe "non concession activity" do
       let(:fmu) { create(:fmu) }
       let(:report) { create(:observation_report, observers: [ngo_observer]) }
-      let!(:observation) { create(:observation, observation_report: report, non_concession_activity: true, fmu: fmu) }
+      let!(:observation) { create(:observation, observation_report: report, country: create(:country, iso: "COD"), non_concession_activity: true, fmu: fmu) }
 
       context "observation tool user" do
         it "shows fmu for non concession activity observations" do
