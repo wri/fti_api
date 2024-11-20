@@ -54,6 +54,7 @@ FactoryBot.define do
     is_active { true }
     validation_status { "Published (no comments)" }
     is_physical_place { true }
+    non_concession_activity { false }
     lng { 12.2222 }
     lat { 12.3333 }
 

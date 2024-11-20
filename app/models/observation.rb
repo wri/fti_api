@@ -164,6 +164,7 @@ class Observation < ApplicationRecord
   validates :lng, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180, allow_blank: true}
   validates :evidence_on_report, presence: true, if: -> { evidence_type == "Evidence presented in the report" }
   validate :status_changes, if: -> { user_type.present? }
+  validate :can_set_non_concession_activity, if: -> { non_concession_activity? }
 
   validates :observers, presence: true
   validates :observation_type, presence: true
@@ -301,6 +302,10 @@ class Observation < ApplicationRecord
     }
   end
 
+  def non_concession_activity_enabled?
+    country&.iso == "COD"
+  end
+
   private
 
   def nullify_evidence_on_report
@@ -380,6 +385,10 @@ class Observation < ApplicationRecord
 
     errors.add(:validation_status,
       "Invalid validation change for #{@user_type}. Can't move from '#{validation_status_was}' to '#{validation_status}'")
+  end
+
+  def can_set_non_concession_activity
+    errors.add(:non_concession_activity, :not_allowed_for_country) unless non_concession_activity_enabled?
   end
 
   def remove_documents
