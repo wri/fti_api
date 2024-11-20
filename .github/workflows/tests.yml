@@ -31,6 +31,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt update --fix-missing
           sudo apt-get install libgdal-dev
 
       - name: Set up Ruby
@@ -58,8 +59,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update --fix-missing
-          sudo apt-get -yqq install gdal-bin
-          sudo apt-get install libgdal-dev
+          sudo apt-get -yqq install gdal-bin libgdal-dev
           npm install -g mjml
 
       - name: Set up Ruby
