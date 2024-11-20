@@ -70,6 +70,47 @@ module V1
       end
     end
 
+    describe "non concession activity" do
+      let(:fmu) { create(:fmu) }
+      let(:report) { create(:observation_report, observers: [ngo_observer]) }
+      let!(:observation) { create(:observation, observation_report: report, non_concession_activity: true, fmu: fmu) }
+
+      context "observation tool user" do
+        it "shows fmu for non concession activity observations" do
+          get "/observations", params: {app: "observations-tool", include: "fmu"}, headers: ngo_headers
+          expect(status).to eq(200)
+          expect(parsed_data.size).to eq(1)
+          expect(parsed_data.first[:id].to_i).to eq(observation.id)
+          expect(parsed_data.first[:attributes][:"fmu-id"]&.to_i).to eq(fmu.id)
+          expect(parsed_data.first[:relationships][:fmu][:data][:id].to_i).to eq(fmu.id)
+        end
+
+        it "finds observation using fmu filter" do
+          get "/observations", params: {app: "observations-tool", "filter[fmu_id]": fmu.id}, headers: ngo_headers
+          expect(status).to eq(200)
+          expect(parsed_data.size).to eq(1)
+          expect(parsed_data.first[:id].to_i).to eq(observation.id)
+        end
+      end
+
+      context "non observation tool user" do
+        it "does not show fmu for non concession activity observations" do
+          get "/observations", params: {app: "observations-tool", include: "fmu"}, headers: webuser_headers
+          expect(status).to eq(200)
+          expect(parsed_data.size).to eq(1)
+          expect(parsed_data.first[:id].to_i).to eq(observation.id)
+          expect(parsed_data.first[:attributes][:"fmu-id"]).to eq(nil)
+          expect(parsed_data.first[:relationships][:fmu]).to eq(nil)
+        end
+
+        it "cannot find observation using fmu filter" do
+          get "/observations", params: {app: "observations-tool", "filter[fmu_id]": fmu.id}, headers: webuser_headers
+          expect(status).to eq(200)
+          expect(parsed_data.size).to eq(0)
+        end
+      end
+    end
+
     context "Create observations" do
       describe "For admin user" do
         it "Returns error object when the observation cannot be created by admin" do
