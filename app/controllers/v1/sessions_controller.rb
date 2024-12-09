@@ -6,7 +6,7 @@ module V1
 
     def create
       @user = User.find_by(email: auth_params[:email])
-      if @user&.valid_password?(auth_params[:password]) && @user&.is_active
+      if @user.present? && @user.valid_password?(auth_params[:password]) && @user.is_active
         token = Auth.issue({user: @user.id})
         @user.update_tracked_fields!(request)
         render json: {token: token, role: @user.user_permission.user_role,
