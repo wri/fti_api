@@ -21,6 +21,10 @@ module OperatorDocumentable
 
     filters :type, :status, :operator_id, :fmu_id, :required_operator_document_id, :country_ids, :source, :legal_categories, :forest_types
 
+    filter :contract_signature, apply: ->(records, value, _options) {
+      records.joins(:required_operator_document).where(required_operator_document: {contract_signature: value})
+    }
+
     privateable :document_visible?, [:start_date, :expire_date, :note, :reason, :response_date, :source_info, :uploaded_by, :created_at, :updated_at]
 
     def admin_comment

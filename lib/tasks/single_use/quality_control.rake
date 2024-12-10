@@ -55,7 +55,8 @@ namespace :quality_control do
 
         passed = version.changeset["validation_status"].last == "Ready for publication"
         before_changes = version.reify
-        comment = before_changes&.admin_comment
+        # next line rubocop reporting some false positive, it's not useless assignment
+        comment = before_changes&.admin_comment # rubocop:disable Link/UselessAssignment
 
         if version.changeset.key?("admin_comment")
           comment = version.changeset["admin_comment"].last
