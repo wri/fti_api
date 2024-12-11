@@ -64,6 +64,7 @@ $skinTextColor: #1e2a33 !default;
       position: absolute;
       width: 200px;
       z-index: 1010;
+      box-sizing: content-box;
 
       a {
         background: none;
