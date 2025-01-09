@@ -179,20 +179,15 @@ body.active_admin {
       }
     }
   }
+
+  // fixing max width issues with long select2 fields in the form
+  form .inputs ol {
+    max-width: calc(100vw - 100px);
+  }
 }
 
 .select2-container--default .select2-results__option[aria-disabled=true] {
   display: none;
-}
-
-
-// fixing layout issues https://github.com/activeadmin/activeadmin/issues/7667
-body.active_admin {
-  *,
-  *:before,
-  *:after {
-    box-sizing: unset;
-  }
 }
 
 // trying to revert this https://github.com/activeadmin/activeadmin/commit/7dd9bc89716603ba602985baf720c7d4623fbe07
