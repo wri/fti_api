@@ -70,15 +70,13 @@ ActiveAdmin.register ObservationReport do
       obsr.user&.name
     end
     column I18n.t("activerecord.models.observation.other") do |obsr|
-      ids = obsr.observations.map { |o| o.id }
-      ids.sort.join(", ")
+      obsr.observations.map(&:id).sort.join(", ")
     end
     column :country do |o|
       o.observations.first&.country&.name
     end
     column I18n.t("activerecord.attributes.observation_report.observers") do |o|
-      names = o.observers.map { |o| o.name }
-      names.sort.join(", ")
+      o.observers.map(&:name).sort.join(", ")
     end
     column :created_at
     column :updated_at
@@ -104,7 +102,7 @@ ActiveAdmin.register ObservationReport do
     end
     column :observations do |o|
       links = []
-      o.observations.each do |obs|
+      o.observations.sort_by(&:id).each do |obs|
         links << link_to(obs.id, admin_observation_path(obs.id))
       end
       links.reduce(:+)
