@@ -376,9 +376,6 @@ GEM
     grpc (1.69.0)
       google-protobuf (>= 3.25, < 5.0)
       googleapis-common-protos-types (~> 1.0)
-    grpc (1.69.0-x86_64-linux)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
     grpc-google-iam-v1 (1.8.0)
       google-protobuf (>= 3.18, < 5.a)
       googleapis-common-protos (~> 1.4)
@@ -879,7 +876,7 @@ DEPENDENCIES
   whenever
 
 RUBY VERSION
-   ruby 3.3.7p123
+   ruby 3.4.1p0
 
 BUNDLED WITH
    2.5.6
