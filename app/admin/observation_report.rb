@@ -137,7 +137,7 @@ ActiveAdmin.register ObservationReport do
       f.input :user
       f.input :title
       f.input :publication_date, as: :date_time_picker, picker_options: {timepicker: false, format: "Y-m-d"}
-      f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename
+      f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename, input_html: {accept: "application/pdf"}
       f.input :observers
     end
 
