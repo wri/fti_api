@@ -32,7 +32,7 @@ module JSONAPI
 
       include_directives[:include_related] ||= {}
 
-      relationships = source.class._relationships.select { |k, v| fetchable_fields.include?(k) }
+      relationships = source.class._relationships.slice(*fetchable_fields)
       field_set = supplying_relationship_fields(source.class) & relationships.keys
 
       relationships.each_with_object({}) do |(name, relationship), hash|
