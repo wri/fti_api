@@ -1,3 +1,7 @@
+unless Rails.env.development? || Rails.env.e2e?
+  $stdout.puts "Seeding is only allowed in development or e2e environment"
+  return
+end
 # # sh "bin/rails db:fixtures:load FIXTURES_PATH=db/fixtures"
 require "active_record/fixtures"
 

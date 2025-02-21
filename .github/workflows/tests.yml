@@ -52,6 +52,7 @@ jobs:
         env:
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          RAILS_ENV: test
         ports: ["5432:5432"]
     steps:
       - uses: actions/checkout@v4
@@ -68,10 +69,10 @@ jobs:
           bundler-cache: true
 
       - name: Setup test database
-        run: bin/rails db:create db:schema:load
+        run: bin/rake parallel:setup
 
       - name: Run tests
-        run: bundle exec rspec spec
+        run: bin/rake parallel:spec
 
       - name: Upload Code Coverage
         uses: actions/upload-artifact@v4
