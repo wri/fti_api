@@ -15,7 +15,7 @@ development:
 
 test:
   <<: *default
-  database: fti_test
+  database: fti_test<%= ENV['TEST_ENV_NUMBER'] %>
 
 e2e:
   <<: *default
