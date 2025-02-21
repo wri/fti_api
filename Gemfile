@@ -102,6 +102,7 @@ gem "rack", "~> 3.0.11"
 
 # Utilities
 gem "nokogiri"
+gem "warning", require: false # for silencing certain warnings, will require before boot in warings_silencer.rb
 
 # Only used in rake tasks
 gem "http", require: false # protected areas job
