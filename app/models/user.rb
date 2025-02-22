@@ -52,6 +52,9 @@ class User < ApplicationRecord
   has_many :modified_observations, inverse_of: :modified_user, class_name: "Observation", dependent: :restrict_with_error
   has_many :observation_reports, inverse_of: :user, dependent: :restrict_with_error
   has_many :operator_document_annexes, inverse_of: :user, dependent: :restrict_with_error
+  has_many :operator_documents, inverse_of: :user, dependent: :restrict_with_error
+  has_many :operator_document_histories, inverse_of: :user, dependent: :restrict_with_error
+  has_many :gov_documents, inverse_of: :user, dependent: :restrict_with_error
   has_many :qc1_observers, inverse_of: :responsible_qc1, class_name: "Observer", dependent: :nullify
   has_many :qc2_observers, inverse_of: :responsible_qc2, class_name: "Observer", dependent: :nullify
 
