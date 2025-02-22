@@ -766,6 +766,7 @@ GEM
     useragent (0.16.11)
     warden (1.2.9)
       rack (>= 2.0.9)
+    warning (1.5.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -878,6 +879,7 @@ DEPENDENCIES
   super_diff
   tzinfo-data
   uglifier
+  warning
   web-console (>= 4.1.0)
   webmock
   whenever
