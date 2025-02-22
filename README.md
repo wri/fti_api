@@ -150,6 +150,27 @@ Run rspec:
 bundle exec rspec
 ```
 
+You can also run tests in parallel. To do that you need to create a test database for each parallel process:
+
+```ruby
+bundle exec rake parallel:create
+bundle exec rake parallel:prepare
+```
+
+And then run the tests:
+
+```ruby
+bundle exec parallel:spec
+```
+
+To drop all test databases:
+
+```ruby
+bundle exec rake parallel:drop
+```
+
+For more information about parallel tests check [parallel_tests gem.](https://github.com/grosser/parallel_tests)
+
 ## DOCUMENTATION ##
 
 ### API ###
