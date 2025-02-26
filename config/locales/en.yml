@@ -330,6 +330,7 @@ en:
       indicator_apv: 'Indicator APV'
       law_details: 'Law details'
     fmus_page:
+      certification: Certification
       download_shapefile: 'Download shapefile'
       confirm_delete: 'Are you sure you want to delete this FMU?'
     operator_page:
