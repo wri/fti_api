@@ -69,7 +69,7 @@ ActiveAdmin.register Fmu do
     }
   end
 
-  sidebar "Shapefiles" do
+  sidebar "Shapefiles", only: :index do
     div do
       link_to "Download Filtered Shapefiles", download_filtered_shapefiles_admin_fmus_path(
         q: params[:q]&.to_unsafe_h
@@ -101,29 +101,51 @@ ActiveAdmin.register Fmu do
   end
 
   show do
-    attributes_table do
-      row :id
-      row :name
-      row :forest_type
-      row :country
-      row :operator
-      row :certification_fsc
-      row :certification_pefc
-      row :certification_olb
-      row :certification_pafc
-      row :certification_fsc_cw
-      row :certification_tlv
-      row :certification_ls
-      if resource.geojson && resource.centroid.present?
-        row :map do |r|
-          render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
+    columns class: "d-flex" do
+      column class: "flex-1" do
+        attributes_table do
+          row :id
+          row :name
+          row :forest_type
+          row :country
+          row :operator
+
+          if resource.geojson && resource.centroid.present?
+            row :map do |r|
+              render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
+            end
+          end
+          if resource.geojson
+            row(:geojson) do
+              div id: "geojson_modal", style: "display: none;" do
+                resource.geojson
+              end
+              link_to t("active_admin.view"), "javascript:void(0)", onclick: "$('#geojson_modal').dialog({ modal: true, dialogClass: 'custom_dialog' })"
+            end
+            row(:properties) do
+              div id: "properties_modal", style: "display: none;" do
+                resource.properties
+              end
+              link_to t("active_admin.view"), "javascript:void(0)", onclick: "$('#properties_modal').dialog({ modal: true, dialogClass: 'custom_dialog' })"
+            end
+          end
+          row :created_at
+          row :updated_at
+          row :deleted_at
         end
       end
-      row(:geojson) { |fmu| fmu.geojson.to_json }
-      row(:properties) { |fmu| fmu.geojson&.dig("properties")&.to_json }
-      row :created_at
-      row :updated_at
-      row :deleted_at
+
+      column max_width: "250px" do
+        attributes_table title: t("active_admin.fmus_page.certification") do
+          row :certification_fsc
+          row :certification_pefc
+          row :certification_olb
+          row :certification_pafc
+          row :certification_fsc_cw
+          row :certification_tlv
+          row :certification_ls
+        end
+      end
     end
   end
 

@@ -214,3 +214,13 @@ body.active_admin {
   display: none;
 }
 
+.custom_dialog {
+  width: unset !important;
+  max-height: 80vh;
+  max-width: 70vw;
+  overflow-y: auto;
+
+  .ui-dialog-content {
+    padding: 10px;
+  }
+}
