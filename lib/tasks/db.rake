@@ -1,4 +1,12 @@
 namespace :db do
+  namespace :migrate do
+    desc "Archives old DB migration files"
+    task :archive do # rubocop:disable Rails/RakeEnvironment
+      sh "mkdir -p db/migrate/archive"
+      sh "mv db/migrate/*.rb db/migrate/archive"
+    end
+  end
+
   desc "Download database from server - Params: SERVER=production(default)|staging, SMALL (if present we ignore versions table data))"
   task :download do # rubocop:disable Rails/RakeEnvironment
     server = ENV.fetch("SERVER", "production")
