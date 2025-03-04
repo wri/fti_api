@@ -1477,6 +1477,11 @@ en:
           country: 'Country'
 
     errors:
+      models:
+        observer:
+          attributes:
+            observer_type:
+              inclusion: "%{value} is not a valid observer type"
       messages:
         password_complexity: "must contain at least one uppercase letter, one lowercase letter, and one digit"
         not_allowed_for_country: "is not allowed for this country"

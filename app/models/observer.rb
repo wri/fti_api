@@ -47,10 +47,8 @@ class Observer < ApplicationRecord
   EMAIL_VALIDATOR = /\A([\w+-].?)+@[a-z\d-]+(\.[a-z]+)*\.[a-z]+\z/i
 
   validates :name, presence: true
-  validates :observer_type, presence: true, inclusion: {in: %w[Mandated SemiMandated External Government],
-                                                        message: "%{value} is not a valid observer type"}
-  validates :organization_type,
-    inclusion: {in: ["NGO", "Academic", "Research Institute", "Private Company", "Other"]}, if: :organization_type?
+  validates :observer_type, presence: true, inclusion: {in: %w[Mandated SemiMandated Externalaa Government]}
+  validates :organization_type, inclusion: {in: ["NGO", "Academic", "Research Institute", "Private Company", "Other"]}, if: :organization_type?
 
   validates :information_email, format: {with: EMAIL_VALIDATOR, if: :information_email?}
   validates :data_email, format: {with: EMAIL_VALIDATOR, if: :data_email?}

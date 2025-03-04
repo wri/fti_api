@@ -1396,6 +1396,11 @@ fr:
           operator: 'Opérateur'
           government: 'Gouvernement'
     errors:
+      models:
+        observer:
+          attributes:
+            observer_type:
+              inclusion: "%{value} n'est pas un type d'observateur valide"
       messages:
         password_complexity: "doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre"
         not_allowed_for_country: "n'est pas autorisé pour ce pays"

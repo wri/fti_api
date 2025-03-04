@@ -18,13 +18,6 @@ Rails/AddColumnIndex:
     - 'db/migrate/20201209161058_add_responsible_user_to_observer.rb'
     - 'db/migrate/20211003145842_add_responsible_admin_to_observer.rb'
 
-# Offense count: 4
-Rails/I18nLocaleTexts:
-  Exclude:
-    - 'app/mailers/observation_mailer.rb'
-    - 'app/mailers/user_mailer.rb'
-    - 'app/models/observer.rb'
-
 # Offense count: 28
 # Configuration parameters: Include.
 # Include: db/**/*.rb
