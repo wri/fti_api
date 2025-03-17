@@ -229,11 +229,15 @@ dialog {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #ccc;
 
-    .close-dialog {
+    > strong {
+      font-size: 1.2em;
+    }
+
+    .close-dialog-button {
       cursor: pointer;
-      font-size: 1.5em;
+      padding: 10px 15px;
+      margin-left: auto;
     }
   }
 

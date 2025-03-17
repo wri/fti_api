@@ -14,8 +14,10 @@ function initializeDialog() {
       }
     });
 
-    dialog.querySelector(".close-dialog-button").addEventListener("click", () => {
-      dialog.close();
+    dialog.querySelectorAll(".close-dialog-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        dialog.close();
+      });
     });
   });
 }
