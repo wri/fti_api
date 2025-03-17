@@ -16,8 +16,6 @@ module V1
       super - [:fmu_id]
     end
 
-    def type
-      @model.type
-    end
+    delegate :type, to: :@model
   end
 end

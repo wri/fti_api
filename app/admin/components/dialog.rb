@@ -26,9 +26,7 @@ module Admin
         end
       end
 
-      def children?
-        @inner_content.children?
-      end
+      delegate :children?, to: :@inner_content
     end
   end
 end
