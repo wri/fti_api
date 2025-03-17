@@ -369,6 +369,18 @@ ActiveAdmin.after_load do |app|
   app.view_factory.register header: CustomAdminHeader
 end
 
+module Arbre
+  module HTML
+    class Dialog < Tag
+      builder_method :dialog
+    end
+
+    class Header < Tag
+      builder_method :html5_header
+    end
+  end
+end
+
 # activeadmin_addons update in 1.10 introduced a bug where it raises Formtastic::UnsupportedEnumCollection for multiple selects with enum values
 # not sure why it should be raising not supported but it works so for me it's supported just fine
 # https://github.com/platanus/activeadmin_addons/pull/442/files#diff-811ca221eee9c4866653114961ac21bcd0398557bb402c60f149be506c385a8eR3
