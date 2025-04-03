@@ -2,6 +2,7 @@
 //= require activeadmin_addons/all
 //= require access_control
 //= require editor
+//= require dialog
 //= require users
 //= require rod
 //= require fmu

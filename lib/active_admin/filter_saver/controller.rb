@@ -8,9 +8,9 @@ module ActiveAdmin
     # @author David Daniell / тιηуηυмвєяѕ <info@tinynumbers.com>
     # rubocop:enable Style/AsciiComments
     module Controller
-      private
-
       SAVED_FILTER_KEY = :last_search_filter
+
+      private
 
       def restore_search_filters
         filter_storage = session[SAVED_FILTER_KEY]

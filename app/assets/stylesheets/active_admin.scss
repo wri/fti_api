@@ -214,3 +214,39 @@ body.active_admin {
   display: none;
 }
 
+dialog {
+  border: 0;
+  padding: 0;
+
+  max-height: 80vh;
+  max-width: 70vw;
+  overflow-y: auto;
+
+  header {
+    display: flex;
+    background-color: $panelHeaderBck;
+    color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    > strong {
+      font-size: 1.2em;
+    }
+
+    .close-dialog-button {
+      cursor: pointer;
+      padding: 10px 15px;
+      margin-left: auto;
+    }
+  }
+
+  > div {
+    padding: 10px;
+  }
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(2px);
+}
+
