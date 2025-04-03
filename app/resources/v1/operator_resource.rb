@@ -29,9 +29,7 @@ module V1
     before_create :set_active
     after_create :send_notification
 
-    def type
-      @model.type
-    end
+    delegate :type, to: :@model
 
     def set_active
       @model.is_active = false

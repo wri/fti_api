@@ -117,10 +117,16 @@ ActiveAdmin.register Fmu do
           end
           if resource.geojson
             row(:geojson) do
-              div id: "geojson_modal", style: "display: none;" do
+              dialog id: "geojson_modal", title: Fmu.human_attribute_name(:geojson) do
                 resource.geojson
               end
-              link_to "Show", "javascript:void(0)", onclick: "$('#geojson_modal').dialog({ modal: true, dialogClass: 'custom_dialog' })"
+              link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#geojson_modal').showModal()"
+            end
+            row(:properties) do
+              dialog id: "properties_modal", title: Fmu.human_attribute_name(:properties) do
+                resource.properties
+              end
+              link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
             end
           end
           row :created_at

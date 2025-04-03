@@ -16,8 +16,6 @@ class OperatorDocumentFilterTree
     }
   end
 
-  private
-
   TYPES = [
     {id: "OperatorDocumentCountry", name: I18n.t("operator_documents.filters.producer")},
     {id: "OperatorDocumentFmu", name: I18n.t("operator_documents.filters.fmu")}
@@ -35,6 +33,8 @@ class OperatorDocumentFilterTree
     {id: 2, name: I18n.t("filters.forest_atlas")},
     {id: 3, name: I18n.t("filters.other")}
   ].freeze
+
+  private
 
   def legal_categories
     RequiredOperatorDocumentGroup.with_translations.where.not(id: required_operator_group_id_to_exclude).map do |x|
