@@ -31,6 +31,15 @@ RSpec.describe ObservationReport, type: :model do
       expect(subject).not_to be_valid
       expect(subject.errors.messages[:attachment]).to include("can't be blank")
     end
+
+    it "accepts only pdf files" do
+      subject.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "image.png"))
+      expect(subject).not_to be_valid
+      expect(subject.errors.messages[:attachment]).to include("You are not allowed to upload \"png\" files, allowed types: pdf")
+      subject = build(:observation_report) # somehow just changing the attachment do not reset that validation error, probably carrierwave bug
+      subject.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "doc.pdf"))
+      expect(subject).to be_valid
+    end
   end
 
   describe "hooks" do
