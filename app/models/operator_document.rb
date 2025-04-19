@@ -141,6 +141,10 @@ class OperatorDocument < ApplicationRecord
     %w[doc_not_required doc_valid].include?(status)
   end
 
+  def publication_authorization?
+    required_operator_document.contract_signature?
+  end
+
   def name_with_fmu
     return required_operator_document.name if fmu.nil?
 
