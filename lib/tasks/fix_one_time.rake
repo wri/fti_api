@@ -56,60 +56,6 @@ namespace :fix_one_time do
     end
   end
 
-  desc "Removing documents completely"
-  task remove_docs: :environment do
-    for_real = ENV["FOR_REAL"] == "true"
-    docs_to_remove = (ENV["DOCS"] || "").split(",")
-
-    puts "RUNNING FOR REAL" if for_real
-    puts "DRY RUN" unless for_real
-
-    puts "This script will remove #{docs_to_remove.count} documents"
-
-    ActiveRecord::Base.transaction do
-      docs = OperatorDocument.unscoped.where(id: docs_to_remove)
-      operator_ids = docs.pluck(:operator_id).uniq
-      histories = OperatorDocumentHistory.unscoped.where(operator_document_id: docs_to_remove)
-      versions = PaperTrail::Version.where(item: docs)
-
-      files = DocumentFile.where(id: docs.pluck(:document_file_id) + histories.pluck(:document_file_id))
-      if for_real
-        files.each do |file|
-          puts "Removing file #{file.id}"
-          file.destroy!
-        end
-      else
-        puts "Removing files... #{files.delete_all} affected"
-      end
-
-      annexes = OperatorDocumentAnnex.where(id: AnnexDocument
-                                            .where(documentable: histories)
-                                            .or(AnnexDocument.where(documentable: docs))
-                                            .select(:operator_document_annex_id))
-
-      if for_real
-        annexes.each do |annex|
-          puts "Removing annex #{annex.id}"
-          annex.really_destroy!
-        end
-      else
-        puts "Removing annexes... #{annexes.delete_all} affected"
-      end
-
-      puts "Removing versions... #{versions.delete_all} affected"
-      puts "Removing histories... #{histories.delete_all} affected"
-      puts "Removing docs... #{docs.delete_all} affected"
-
-      puts "Syncing scores..."
-      puts "Only for operators: #{operator_ids.join(", ")}"
-      SyncTasks.new(as_rake_task: false).sync_scores(operator_id: operator_ids)
-      puts "Refreshing ranking..."
-      RankingOperatorDocument.refresh
-
-      raise ActiveRecord::Rollback unless for_real
-    end
-  end
-
   desc "Re-assign uploaded attachment to observation reports"
   task observation_report_attachments: :environment do
     # context
