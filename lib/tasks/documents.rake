@@ -67,11 +67,13 @@ namespace :documents do
       puts "Removing histories... #{histories.delete_all} affected"
       puts "Removing docs... #{docs.delete_all} affected"
 
-      puts "Syncing scores..."
-      puts "Only for operators: #{operator_ids.join(", ")}"
-      SyncTasks.new(as_rake_task: false).sync_scores(operator_id: operator_ids)
-      puts "Refreshing ranking..."
-      RankingOperatorDocument.refresh
+      if operator_ids.any?
+        puts "Syncing scores..."
+        puts "Only for operators: #{operator_ids.join(", ")}"
+        SyncTasks.new(as_rake_task: false).sync_scores(operator_id: operator_ids)
+        puts "Refreshing ranking..."
+        RankingOperatorDocument.refresh
+      end
 
       raise ActiveRecord::Rollback unless for_real
     end
