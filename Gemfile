@@ -27,7 +27,7 @@ gem "sprockets-rails"
 gem "active_skin"
 
 # WYSIWYG
-gem "activeadmin_quill_editor"
+gem "activeadmin_quill_editor", "~> 1.0"
 
 # Graphs
 gem "chartkick"

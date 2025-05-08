@@ -78,12 +78,8 @@ class OperatorDocument < ApplicationRecord
   scope :by_source, ->(source_id) { where(source: source_id) }
   scope :available, -> { where(public: true) }
   scope :expirable, -> { where(status: EXPIRABLE_STATUSES) }
-  scope :signature, -> {
-                      joins(:required_operator_document).where(required_operator_documents: {contract_signature: true})
-                    }
-  scope :non_signature, -> {
-                          joins(:required_operator_document).where(required_operator_documents: {contract_signature: false})
-                        }                                                  # non signature
+  scope :signature, -> { joins(:required_operator_document).where(required_operator_documents: {contract_signature: true}) }
+  scope :non_signature, -> { joins(:required_operator_document).where(required_operator_documents: {contract_signature: false}) }
   scope :to_expire, ->(date) {
                       expirable
                         .joins(:required_operator_document)
@@ -139,6 +135,10 @@ class OperatorDocument < ApplicationRecord
   # When a doc is valid or not required
   def approved?
     %w[doc_not_required doc_valid].include?(status)
+  end
+
+  def publication_authorization?
+    required_operator_document.contract_signature?
   end
 
   def name_with_fmu

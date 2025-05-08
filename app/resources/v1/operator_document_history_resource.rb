@@ -35,15 +35,14 @@ module V1
       @model.operator_document_created_at
     end
 
-    # TODO
     def self.records(options = {})
       context = options[:context]
-      operator = context.dig(:filters, "operator-id")
+      operator_id = context.dig(:filters, "operator-id")
       date = context.dig(:filters, "date").to_date
 
-      OperatorDocumentHistory.from_operator_at_date(operator, date).non_signature
-    rescue
-      OperatorDocumentHistory.where("true = false") unless operator && date
+      return OperatorDocumentHistory.none unless operator_id && date
+
+      OperatorDocumentHistory.from_operator_at_date(operator_id, date).non_signature
     end
   end
 end

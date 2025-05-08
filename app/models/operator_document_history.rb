@@ -53,6 +53,10 @@ class OperatorDocumentHistory < ApplicationRecord
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
   enum :source, {company: 1, forest_atlas: 2, other_source: 3}
 
+  def publication_authorization?
+    required_operator_document.contract_signature?
+  end
+
   # Returns the collection of OperatorDocumentHistory for a given operator at a point in time
   #
   # @param String operator_id The operator id
