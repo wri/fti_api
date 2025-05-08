@@ -64,6 +64,8 @@ module OperatorDocumentable
     end
 
     def document_public?
+      return false if @model.publication_authorization?
+
       @model.public || @model.operator.approved
     end
 
@@ -81,7 +83,7 @@ module OperatorDocumentable
 
   module ClassMethods
     def apply_includes(records, directives)
-      super.includes(:document_file)
+      super.includes(:document_file, :required_operator_document)
     end
   end
 end

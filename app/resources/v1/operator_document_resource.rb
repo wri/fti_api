@@ -43,7 +43,17 @@ module V1
     end
 
     def self.records(options = {})
-      OperatorDocument.from_active_operators
+      context = options[:context]
+      user = context[:current_user]
+
+      records = OperatorDocument.from_active_operators
+      return records if user.present? && user.admin?
+
+      if user.present? && user.operator_ids.any?
+        other_signature_documents = OperatorDocument.signature.where.not(operator_id: user.operator_ids)
+        return records.where.not(id: other_signature_documents.pluck(:id))
+      end
+      records.where(id: OperatorDocument.non_signature) # somehow records.non_signature is not working
     end
 
     def self.apply_filter(records, filter, value, options)
