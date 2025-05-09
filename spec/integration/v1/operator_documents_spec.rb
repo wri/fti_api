@@ -63,6 +63,7 @@ module V1
           expect(parsed_data.count).to eql(10)
           expect(returned_document[:status]).to eq("doc_invalid")
           expect(returned_document[:"admin-comment"]).to eq("invalid")
+          expect(returned_document[:attachment]).to eq({url: @doc_invalid.document_file.attachment.url})
         end
 
         it "returns publication authorization" do
@@ -91,6 +92,7 @@ module V1
           expect(parsed_data.count).to eql(9)
           expect(returned_document[:status]).to eq("doc_not_provided")
           expect(returned_document[:"admin-comment"]).to be_nil
+          expect(returned_document[:attachment]).to eq({url: nil})
         end
 
         context "with signed publication authorization" do
@@ -110,10 +112,12 @@ module V1
             expect(returned_document[:"response-date"]).to eq(@doc_valid_private.response_date.iso8601(3))
             expect(returned_document[:"updated-at"]).not_to be_nil
             expect(returned_document[:"created-at"]).not_to be_nil
+            expect(returned_document[:attachment]).to eq({url: @doc_valid_private.document_file.attachment.url})
 
             invalid_doc = parsed_data.find { |d| d[:id] == @doc_invalid.id.to_s }[:attributes]
             expect(invalid_doc[:status]).to eq("doc_not_provided")
             expect(invalid_doc[:"admin-comment"]).to be_nil
+            expect(invalid_doc[:attachment]).to eq({url: nil})
           end
         end
 
@@ -124,6 +128,7 @@ module V1
             returned_document = parsed_data.find { |d| d[:id] == @doc_valid_private.id.to_s }[:attributes]
             expect(parsed_data.count).to eql(9)
             expect(returned_document[:status]).to eq("doc_not_provided")
+            expect(returned_document[:attachment]).to eq({url: nil})
             expect(returned_document[:"start-date"]).to be_nil
             expect(returned_document[:"expire-date"]).to be_nil
             expect(returned_document[:"response-date"]).to be_nil
@@ -134,6 +139,7 @@ module V1
             invalid_doc = parsed_data.find { |d| d[:id] == @doc_invalid.id.to_s }[:attributes]
             expect(invalid_doc[:status]).to eq("doc_not_provided")
             expect(invalid_doc[:"admin-comment"]).to be_nil
+            expect(invalid_doc[:attachment]).to eq({url: nil})
           end
         end
       end
