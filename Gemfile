@@ -114,8 +114,8 @@ group :development, :test do
   gem "faker"
   gem "parallel_tests"
   gem "rails-erd"
-  gem "rubocop-rails"
-  gem "standard"
+  gem "rubocop-rails", require: false
+  gem "standard", require: false
   gem "webmock"
 end
 
@@ -149,6 +149,7 @@ group :test do
   gem "rspec-request_snapshot", github: "tsubik/rspec-request_snapshot", branch: "fix/ignore-order"
   gem "shoulda-matchers", "~> 4.0.1"
   gem "simplecov"
+  gem "spring-commands-rspec"
   gem "super_diff"
 end
 
