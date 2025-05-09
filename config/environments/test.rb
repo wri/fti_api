@@ -10,7 +10,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # While tests run files are not watched, reloading is not necessary. (unless you are using Spring)
-  config.enable_reloading = defined?(Spring)
+  config.enable_reloading = ENV["SPRING_SPAWN_ENV"].present?
 
   # Eager loading loads your entire application. When running a single test locally,
   # this is usually not necessary, and can slow down your test suite. However, it's
