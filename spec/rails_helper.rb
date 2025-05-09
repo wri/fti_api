@@ -24,7 +24,9 @@ ActiveRecord::Migration.maintain_test_schema!
 
 # TODO: try to remove the line below the comment after some time, not sure why this still not working
 # see https://github.com/rails/rails/issues/49958
-RSpec::Matchers::AliasedNegatedMatcher.undef_method(:with)
+# somehow this does not work with spring. I have no time to debug this, only one test is failing without this line
+# and mostly using spring to run single tests so this is not a problem for me
+RSpec::Matchers::AliasedNegatedMatcher.undef_method(:with) unless defined?(Spring)
 RSpec::Matchers.define_negated_matcher :have_not_enqueued_mail, :have_enqueued_mail
 
 # Configuration for Shoulda::Matchers
