@@ -43,9 +43,6 @@ spec/.DS_Store
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
-# Ignore ERD images
-erd.png
-
 # Ignore the document files to import
 /db/files/operator_document_files
 
