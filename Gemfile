@@ -110,13 +110,9 @@ gem "countries", require: false # for update translations job, so require only t
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
-  gem "factory_bot_rails"
-  gem "faker"
-  gem "parallel_tests"
   gem "rails-erd"
   gem "rubocop-rails", require: false
   gem "standard", require: false
-  gem "webmock"
 end
 
 group :development do
@@ -144,6 +140,9 @@ group :test do
   gem "capybara"
   gem "cuprite"
   gem "database_cleaner"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "parallel_tests"
   gem "rspec-collection_matchers"
   gem "rspec-rails"
   gem "rspec-request_snapshot", github: "tsubik/rspec-request_snapshot", branch: "fix/ignore-order"
@@ -151,6 +150,7 @@ group :test do
   gem "simplecov"
   gem "spring-commands-rspec"
   gem "super_diff"
+  gem "webmock"
 end
 
 # Server
