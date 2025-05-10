@@ -41,13 +41,13 @@ module OperatorDocumentable
       return @model.status if can_see_document?
       return @model.status if document_public? && %w[doc_not_provided doc_valid doc_expired doc_not_required].include?(@model.status)
 
-      :doc_not_provided
+      "doc_not_provided"
     end
 
     def attachment
-      return @model&.document_file&.attachment if document_visible?
+      return {url: nil} if %w[doc_not_provided doc_not_required].include?(status)
 
-      {url: nil}
+      @model&.document_file&.attachment
     end
 
     def attachment=(attachment)

@@ -171,6 +171,20 @@ bundle exec rake parallel:drop
 
 For more information about parallel tests check [parallel_tests gem.](https://github.com/grosser/parallel_tests)
 
+### Running single test faster with spring ###
+
+You can use spring to run single tests faster. There is bin/rspec stub that will run the tests with spring. You can use it like this:
+
+```ruby
+bin/rspec spec/models/user_spec.rb
+```
+
+or just prepend spring to the command:
+
+```ruby
+bundle exec spring rspec spec/models/user_spec.rb
+```
+
 ## DOCUMENTATION ##
 
 ### API ###
