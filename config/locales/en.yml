@@ -256,6 +256,7 @@ en:
         language: 'Language'
         english: 'English'
         french: 'French'
+        spanish: 'Spanish'
       logout: 'Logout'
     dashboard_page:
       columns:

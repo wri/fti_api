@@ -143,6 +143,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             ul do
               li { link_to t("active_admin.menu.language.english"), admin_dashboard_change_language_path(locale: :en), method: :post }
               li { link_to t("active_admin.menu.language.french"), admin_dashboard_change_language_path(locale: :fr), method: :post }
+              li { link_to t("active_admin.menu.language.spanish"), admin_dashboard_change_language_path(locale: :es), method: :post }
             end
           end
         end
