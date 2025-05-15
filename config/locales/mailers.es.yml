@@ -1,0 +1,99 @@
+es:
+  mailers:
+    greeting: "Estimado/a %{name},"
+    salutation: "Saludos cordiales,"
+    signature: "El equipo de OTP"
+    contact_us: "No dude en contactarnos si tiene alguna pregunta."
+    observation_id: "ID de Observación"
+    report_name: "Nombre del informe"
+    company: "Empresa"
+    document: "Documento"
+  user_mailer:
+    user_acceptance:
+      subject: "¡Bienvenido/a al Open Timber Portal!"
+      welcome: "¡Bienvenido/a al Open Timber Portal!"
+      message: "Su cuenta ha sido activada y ahora puede iniciar sesión con las credenciales que seleccionó."
+      message_portal: "Para acceder a la plataforma, simplemente vaya a %{link} y haga clic en el botón de Iniciar sesión en la esquina superior derecha."
+      message_tutorial: "Le invitamos a revisar los tutoriales disponibles en el Open Timber Portal que proporcionan información adicional sobre cómo usar la plataforma: %{link}"
+      message_obs_tool: "Para acceder a la herramienta de observaciones, simplemente vaya a: %{link}"
+      contact_us: "Siempre puede contactarnos en %{link} si tiene alguna pregunta."
+    forgotten_password:
+      subject: "Restablecimiento de contraseña del Open Timber Portal"
+      message: "Haga clic en el enlace para restablecer su contraseña y conectarse al Open Timber Portal"
+      link_expiration: "El enlace anterior expirará en 6 horas. Si realizó múltiples solicitudes para restablecer su contraseña, asegúrese de hacer clic en el enlace del correo electrónico más reciente."
+      outro: "Si no solicitó este restablecimiento de contraseña, ignore este correo electrónico. Su contraseña no cambiará hasta que acceda al enlace anterior y cree una nueva contraseña."
+  observation_mailer:
+    observation_created:
+      subject: "La observación %{id} se creó exitosamente"
+      paragraph1: "Su observación se creó exitosamente en el Open Timber Portal."
+      paragraph2: "La observación no será revisada por el equipo de OTP hasta que la envíe para revisión."
+      paragraph3: "Para enviar su observación y hacer cualquier edición, vaya a: %{link}"
+    observation_submitted_for_qc:
+      subject: "La observación %{id} se envió exitosamente para control de calidad"
+      paragraph1: "La siguiente observación se envió exitosamente para control de calidad."
+      paragraph2: "La observación será revisada por el equipo de OTP y recibirá una notificación por correo electrónico cuando la observación esté lista para publicarse o si hay ediciones por hacer."
+    observation_needs_revision:
+      subject: "La observación %{id} necesita revisiones antes de publicarse"
+      paragraph1: "La siguiente observación necesita ser revisada antes de poder publicarse."
+      paragraph2: "El revisor hizo los siguientes comentarios:"
+      paragraph3: "Puede editar la observación haciendo clic en el siguiente enlace: %{link}"
+    observation_ready_for_publication:
+      subject: "La observación %{id} está lista para publicarse"
+      paragraph1: "La observación %{id} ha sido revisada y está lista para publicarse."
+      paragraph2: "Haga clic en el siguiente enlace y publique la observación: %{link}"
+    observation_published:
+      subject: "La observación %{id} ahora está publicada"
+      paragraph1: "La observación %{id} ahora está publicada y aparece en la lista de observaciones del Open Timber Portal."
+      paragraph2: "Puede verla en la lista de observaciones de la plataforma: %{link}"
+    admin_observation_ready_for_qc:
+      subject: "La observación %{id} está lista para control de calidad"
+      paragraph1: "%{observer} ha enviado una observación a través del portal que está lista para ser revisada."
+      paragraph2: "Para revisar la observación, vaya a: %{link}"
+    admin_observation_published_not_modified:
+      subject: "%{observer} publicó la observación %{id} sin modificaciones"
+      paragraph1: "%{observer} ha decidido publicar la observación %{id} sin hacer ediciones."
+      paragraph2: "A los comentarios que usted hizo, %{observer} respondió:"
+      paragraph3: "Para revisar la observación, vaya a: %{link}"
+  operator_mailer:
+    quarterly_newsletter:
+      subject: "Informe trimestral de OTP de %{company}"
+      paragraph1: "La puntuación actual de %{company} es %{score}."
+      paragraph2: "La puntuación de %{company} el %{old_score_date} era %{old_score}. Esto representa una variación de %{score_variation}."
+      paragraph3: "Tenga en cuenta que los siguientes documentos en su perfil expiran este trimestre y deberán ser actualizados:"
+      paragraph4: "Puede actualizar estos documentos iniciando sesión en su perfil de OTP en %{link}."
+      doc_expires: "%{document} expira el %{date}"
+  operator_document_mailer:
+    expiring_documents:
+      subject: "Documento(s) próximo(s) a expirar en el Open Timber Portal"
+      paragraph1: "El(los) siguiente(s) documento(s) de %{company} expira(n) en %{days} días:"
+      paragraph2: "Puede actualizar estos documentos iniciando sesión en su perfil de OTP en %{link}."
+    expired_documents:
+      subject:
+        one: "Tiene 1 documento expirado en el OTP"
+        other: "Tiene %{count} documentos expirados en el OTP"
+      paragraph1: "%{company} tiene %{count} documento(s) que han expirado:"
+      paragraph2: "Puede actualizar estos documentos iniciando sesión en su perfil de OTP en %{link}."
+    document_valid:
+      subject: "Open Timber Portal: nuevo documento publicado"
+      paragraph1: "El documento %{document} ha sido validado y ahora está publicado en el perfil de %{company} en el Open Timber Portal."
+    document_accepted_as_not_required:
+      subject: "Open Timber Portal: documento actualizado"
+      paragraph1: "El documento %{document} ha sido aprobado como no requerido en el perfil de %{company} en el Open Timber Portal."
+    document_invalid:
+      subject: "Open Timber Portal: documento cargado no fue validado"
+      paragraph1: "El siguiente documento fue revisado y necesita ser corregido:"
+      paragraph2: "El revisor hizo el siguiente comentario:"
+      paragraph3: "Puede editar este documento haciendo clic en el siguiente enlace y actualizándolo en su perfil: %{link}"
+    admin_document_pending:
+      subject: "%{company} ha cargado un nuevo documento"
+      paragraph1: "%{company} ha cargado un nuevo documento en el Open Timber Portal que está listo para ser revisado."
+      paragraph2: "Para revisar el documento, vaya a: %{link}"
+  system_mailer:
+    user_created:
+      subject: "Nueva cuenta creada"
+      paragraph1: "Se ha creado un nuevo usuario %{user_role} a través del portal y necesita ser aprobado."
+      paragraph2: "Para revisar el perfil y activar la cuenta, vaya a: %{link}"
+    operator_created:
+      subject: "Nuevo operador creado"
+      paragraph1: "Se ha creado un nuevo operador a través del portal y necesita ser aprobado."
+      paragraph2: "Para revisar el perfil y activar la cuenta, vaya a: %{link}"
