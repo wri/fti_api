@@ -44,20 +44,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_21_075002) do
     t.index ["locale"], name: "index_about_page_entry_translations_on_locale"
   end
 
-  create_table "active_admin_comments", id: :serial, force: :cascade do |t|
-    t.string "namespace"
-    t.text "body"
-    t.string "resource_type"
-    t.integer "resource_id"
-    t.string "author_type"
-    t.integer "author_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
-  end
-
   create_table "annex_documents", id: :serial, force: :cascade do |t|
     t.string "documentable_type", null: false
     t.integer "documentable_id", null: false
