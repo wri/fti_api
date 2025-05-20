@@ -96,21 +96,6 @@ fr:
       link: "Créez en un"
     dropdown_actions:
       button_label: "Actions"
-    comments:
-      created_at: "Créé le"
-      resource_type: "Type de ressource"
-      author_type: "Profil de l'auteur"
-      body: "Corps"
-      author: "Auteur"
-      add: "Ajouter un commentaire"
-      delete: "Supprimer ce commentaire"
-      delete_confirmation: "Voulez-vous vraiment supprimer ce commentaire ?"
-      resource: "Ressource"
-      no_comments_yet: "Aucun commentaire actuellement"
-      author_missing: "Anonyme"
-      title_content: "Commentaires (%{count})"
-      errors:
-        empty_text: "Le commentaire n'a pas été enregistré puisque le texte était vide."
     devise:
       username:
         title: "Nom d'utilisateur"
@@ -270,7 +255,6 @@ fr:
         user_management: 'Gestion des utilisateurs'
         users: 'Utilisateurs'
         access_control: "Contrôle d'accès"
-        comments: 'commentaires'
         notifications:
           notifications: 'Notifications'
           notification_groups: 'Groupes de notifications'

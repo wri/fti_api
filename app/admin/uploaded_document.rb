@@ -38,6 +38,5 @@ ActiveAdmin.register UploadedDocument do
       row :caption
       row :file
     end
-    active_admin_comments
   end
 end

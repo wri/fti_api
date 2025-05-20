@@ -66,6 +66,5 @@ ActiveAdmin.register ProtectedArea do
         r.geojson.to_json
       end
     end
-    active_admin_comments
   end
 end
