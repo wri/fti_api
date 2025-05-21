@@ -64,7 +64,7 @@ module V1
           travel_to time1
           operator_document.update(status: "doc_valid")
           travel_to time2
-          operator_document.update note: "new note"
+          operator_document.update source_info: "new source info"
           travel_to time3
           operator_document.destroy
 
@@ -83,7 +83,7 @@ module V1
           travel_to time1
           operator_document.update(status: "doc_invalid", admin_comment: "invalid")
           travel_to time2
-          operator_document.update note: "new note"
+          operator_document.update source_info: "new source info"
           travel_to time3
           operator_document.update(status: "doc_valid")
 
@@ -102,7 +102,7 @@ module V1
           travel_to time1
           operator_document.update(status: "doc_invalid", admin_comment: "invalid")
           travel_to time2
-          operator_document.update note: "new note"
+          operator_document.update source_info: "new source info"
           travel_to time3
           operator_document.update(status: "doc_valid")
 
@@ -126,8 +126,7 @@ module V1
           start_date: 10.days.ago,
           expire_date: 10.days.from_now,
           response_date: 10.days.ago,
-          public: false,
-          note: "notes"
+          public: false
         )
         @doc_invalid.update!(status: "doc_invalid", admin_comment: "invalid")
         @doc_valid_private.update!(status: "doc_valid")
@@ -178,7 +177,6 @@ module V1
             expect(returned_document[:status]).to eq("doc_valid")
             expect(returned_document[:"start-date"]).to eq(@doc_valid_private.start_date.to_s)
             expect(returned_document[:"expire-date"]).to eq(@doc_valid_private.expire_date.to_s)
-            expect(returned_document[:note]).to eq("notes")
             expect(returned_document[:"response-date"]).to eq(@doc_valid_private.response_date.iso8601(3))
             expect(returned_document[:"updated-at"]).not_to be_nil
             expect(returned_document[:"created-at"]).not_to be_nil
@@ -205,7 +203,6 @@ module V1
             expect(returned_document[:"start-date"]).to be_nil
             expect(returned_document[:"expire-date"]).to be_nil
             expect(returned_document[:"response-date"]).to be_nil
-            expect(returned_document[:note]).to be_nil
             expect(returned_document[:"updated-at"]).to be_nil
             expect(returned_document[:"created-at"]).to be_nil
 

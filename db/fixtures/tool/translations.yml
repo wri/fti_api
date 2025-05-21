@@ -182,6 +182,20 @@ Tool_7_pt_translation:
     rel="noopener noreferrer" target="_blank" style="color: rgb(148, 79, 113);"><em>das
     madeiras tropicais para combater a extração de madeira ilegal</em></a></p>'
 
+Tool_8_fr_translation:
+  tool_id: 8
+  locale: fr
+  name: Timber Trade Portal
+  description: '<p class="ql-align-justify">Le Timber Trade Portal sert de point central
+    où les visiteurs peuvent trouver des informations sur l''industrie et la législation
+    des pays producteurs de bois, qui sont principalement situés dans les zones tropicales.
+    La plateforme permet aux opérateurs de faire leur propre analyse de risques et
+    leur diligence raisonnée, au cas par cas, en présentant des informations telles
+    que des données sur le secteur forestier, le cadre législatif, les processus d’APV,
+    etc.</p><p class="ql-align-justify"><a href="http://www.timbertradeportal.com/"
+    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
+    sur le site</a></p>'
+
 Tool_8_zh-CN_translation:
   tool_id: 8
   locale: zh-CN
@@ -202,20 +216,6 @@ Tool_8_en_translation:
     frameworks, VPA processes, etc.</p><p class="ql-align-justify"><a href="http://www.timbertradeportal.com/"
     rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Go
     to site</a></p>'
-
-Tool_8_fr_translation:
-  tool_id: 8
-  locale: fr
-  name: Timber Trade Portal
-  description: '<p class="ql-align-justify">Le Timber Trade Portal sert de point central
-    où les visiteurs peuvent trouver des informations sur l''industrie et la législation
-    des pays producteurs de bois, qui sont principalement situés dans les zones tropicales.
-    La plateforme permet aux opérateurs de faire leur propre analyse de risques et
-    leur diligence raisonnée, au cas par cas, en présentant des informations telles
-    que des données sur le secteur forestier, le cadre législatif, les processus d’APV,
-    etc.</p><p class="ql-align-justify"><a href="http://www.timbertradeportal.com/"
-    rel="noopener noreferrer" target="_blank" style="color: rgb(149, 79, 114);">Aller
-    sur le site</a></p>'
 
 Tool_8_vi_translation:
   tool_id: 8

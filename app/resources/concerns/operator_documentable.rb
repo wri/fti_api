@@ -9,7 +9,7 @@ module OperatorDocumentable
     attributes :expire_date, :start_date,
       :status, :created_at, :updated_at,
       :attachment, :operator_id, :required_operator_document_id,
-      :fmu_id, :uploaded_by, :reason, :note, :response_date,
+      :fmu_id, :uploaded_by, :reason, :response_date,
       :public, :source_info, :admin_comment
     attribute :source_type, delegate: :source
 
@@ -25,7 +25,7 @@ module OperatorDocumentable
       records.joins(:required_operator_document).where(required_operator_document: {contract_signature: value})
     }
 
-    privateable :document_visible?, [:start_date, :expire_date, :note, :reason, :response_date, :source_info, :uploaded_by, :created_at, :updated_at]
+    privateable :document_visible?, [:start_date, :expire_date, :reason, :response_date, :source_info, :uploaded_by, :created_at, :updated_at]
 
     def admin_comment
       can_see_document? ? @model.admin_comment : nil

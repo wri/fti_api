@@ -9,7 +9,6 @@
 #  status                        :integer
 #  uploaded_by                   :integer
 #  reason                        :text
-#  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default(FALSE), not null
 #  source                        :integer
@@ -41,7 +40,6 @@ RSpec.describe OperatorDocumentHistory, type: :model do
         expect(odh.start_date).to eql(od.start_date)
         expect(odh.uploaded_by).to eql(od.uploaded_by)
         expect(odh.reason).to eql(od.reason)
-        expect(odh.note).to eql(od.note)
         expect(odh.response_date).to eql(od.response_date)
         expect(odh.public).to eql(od.public)
         expect(odh.source).to eql(od.source)
@@ -57,14 +55,14 @@ RSpec.describe OperatorDocumentHistory, type: :model do
     end
     context "Updating an OperatorDocument" do
       it "Adds a new version of the OperatorDocumentHistory" do
-        od.update(note: "new note")
+        od.update(source_info: "new source info")
         od.reload
         odhs = OperatorDocumentHistory.where(operator_document_id: od.id).order({operator_document_updated_at: :desc})
         expect(odhs.count).to eql(2)
-        expect(odhs.first.note).to eql("new note")
+        expect(odhs.first.source_info).to eql("new source info")
         expect(odhs.first.operator_document_updated_at.to_i).to eql(od.updated_at.to_i)
         expect(odhs.first.operator_document_created_at.to_i).to eql(od.created_at.to_i)
-        expect(odhs.last.note).to be_nil
+        expect(odhs.last.source_info).to be_nil
       end
     end
     context "Deletes an OperatorDocument" do

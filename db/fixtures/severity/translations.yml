@@ -1561,6 +1561,17 @@ Severity_42_pt_translation:
   details: "- 1 missed deadline / 1 year\r\n- More than 75% of fines paid (at least
     one quarter)"
 
+Severity_43_ko_translation:
+  severity_id: 43
+  locale: ko
+  details: "-1년 간 마감시한 놓친 건수 2건\r\n-지불된 벌금 25~75% (최소 ¼) "
+
+Severity_43_vi_translation:
+  severity_id: 43
+  locale: vi
+  details: "- Trễ hạn 2 lần/năm\r\n- Đã thanh toán từ 25%-75% tiền phạt (ít nhất một
+    quý)\r\n"
+
 Severity_43_en_translation:
   severity_id: 43
   locale: en
@@ -1583,17 +1594,6 @@ Severity_43_ja_translation:
   severity_id: 43
   locale: ja
   details: "- 1年間に締め切りが守られていないものが2件\r\n- 25% - 75%の罰金が支払われた（最低四半期間）"
-
-Severity_43_ko_translation:
-  severity_id: 43
-  locale: ko
-  details: "-1년 간 마감시한 놓친 건수 2건\r\n-지불된 벌금 25~75% (최소 ¼) "
-
-Severity_43_vi_translation:
-  severity_id: 43
-  locale: vi
-  details: "- Trễ hạn 2 lần/năm\r\n- Đã thanh toán từ 25%-75% tiền phạt (ít nhất một
-    quý)\r\n"
 
 Severity_43_pt_translation:
   severity_id: 43
@@ -5542,6 +5542,16 @@ Severity_150_pt_translation:
   locale: pt
   details: "- 1 to 100 trees\r\n- 1 to 400 m3"
 
+Severity_151_vi_translation:
+  severity_id: 151
+  locale: vi
+  details: "- 101-500 cây\r\n- 401-2.000 m3"
+
+Severity_151_pt_translation:
+  severity_id: 151
+  locale: pt
+  details: "- 101 to 500 trees\r\n- 401 to 2 000 m3"
+
 Severity_151_en_translation:
   severity_id: 151
   locale: en
@@ -5566,16 +5576,6 @@ Severity_151_ko_translation:
   severity_id: 151
   locale: ko
   details: "-101~500 그루\r\n-401~ 2,000 m3"
-
-Severity_151_vi_translation:
-  severity_id: 151
-  locale: vi
-  details: "- 101-500 cây\r\n- 401-2.000 m3"
-
-Severity_151_pt_translation:
-  severity_id: 151
-  locale: pt
-  details: "- 101 to 500 trees\r\n- 401 to 2 000 m3"
 
 Severity_152_en_translation:
   severity_id: 152
@@ -8023,6 +8023,11 @@ Severity_213_pt_translation:
   locale: pt
   details: Not specified
 
+Severity_214_pt_translation:
+  severity_id: 214
+  locale: pt
+  details: 1 to 5 trees
+
 Severity_214_en_translation:
   severity_id: 214
   locale: en
@@ -8052,11 +8057,6 @@ Severity_214_vi_translation:
   severity_id: 214
   locale: vi
   details: '1-5 cây '
-
-Severity_214_pt_translation:
-  severity_id: 214
-  locale: pt
-  details: 1 to 5 trees
 
 Severity_215_en_translation:
   severity_id: 215
@@ -8821,6 +8821,12 @@ Severity_233_pt_translation:
   details: Systemic problems limiting governments ability to track timber to the place
     of harvest
 
+Severity_234_pt_translation:
+  severity_id: 234
+  locale: pt
+  details: One off or periodic issues limiting the ability of government to track
+    timber to place of harvest
+
 Severity_234_en_translation:
   severity_id: 234
   locale: en
@@ -8854,12 +8860,6 @@ Severity_234_vi_translation:
   locale: vi
   details: Vấn đề xảy ra một lần hoặc định kỳ hạn chế khả năng của chính phủ trong
     việc truy xuất địa điểm khai thác gỗ
-
-Severity_234_pt_translation:
-  severity_id: 234
-  locale: pt
-  details: One off or periodic issues limiting the ability of government to track
-    timber to place of harvest
 
 Severity_235_zh-CN_translation:
   severity_id: 235

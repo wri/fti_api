@@ -70,7 +70,6 @@ ActiveAdmin.register OperatorDocumentHistory do
     end
     column :admin_comment
     column :reason
-    column :note
     column :response_date
   end
 
@@ -131,7 +130,6 @@ ActiveAdmin.register OperatorDocumentHistory do
       safe_join(links, " ")
     end
     column :reason
-    column :note
     column :response_date
     actions
   end

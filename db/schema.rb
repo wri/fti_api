@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_09_073948) do
+ActiveRecord::Schema[7.2].define(version: 2025_05_21_075002) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -256,7 +256,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_073948) do
     t.boolean "certification_fsc_cw", default: false, null: false
     t.boolean "certification_tlv", default: false, null: false
     t.integer "forest_type", default: 0, null: false
-    t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
+    t.geometry "geometry", limit: {srid: 0, type: "geometry"}
     t.datetime "deleted_at", precision: nil
     t.boolean "certification_ls", default: false, null: false
     t.string "name", null: false
@@ -670,7 +670,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_073948) do
     t.integer "status"
     t.integer "uploaded_by"
     t.text "reason"
-    t.text "note"
     t.datetime "response_date", precision: nil
     t.boolean "public", default: false, null: false
     t.integer "source"
@@ -736,7 +735,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_073948) do
     t.integer "uploaded_by"
     t.integer "user_id"
     t.text "reason"
-    t.text "note"
     t.datetime "response_date", precision: nil
     t.boolean "public", default: true, null: false
     t.integer "source", default: 1
@@ -806,8 +804,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_09_073948) do
     t.string "name", null: false
     t.string "wdpa_pid", null: false
     t.jsonb "geojson", null: false
-    t.geometry "geometry", limit: {:srid=>0, :type=>"geometry"}
-    t.virtual "centroid", type: :geometry, limit: {:srid=>0, :type=>"st_point"}, as: "st_centroid(geometry)", stored: true
+    t.geometry "geometry", limit: {srid: 0, type: "geometry"}
+    t.virtual "centroid", type: :geometry, limit: {srid: 0, type: "st_point"}, as: "st_centroid(geometry)", stored: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_protected_areas_on_country_id"

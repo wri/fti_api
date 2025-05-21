@@ -558,11 +558,13 @@ ObservationReport_328:
   id: 328
   title: RAPPORT 020 RENOI-CRONGD
   publication_date: 2023-09-07 23:00:00 UTC
+  attachment: rapport-020-renoi-crongd-2023-09-07.pdf
 
 ObservationReport_329:
   id: 329
   title: RAPPORT 006 RENOI
   publication_date: 2023-09-07 23:00:00 UTC
+  attachment: rapport-006-renoi-2023-09-07.pdf
 
 ObservationReport_330:
   id: 330
@@ -574,6 +576,7 @@ ObservationReport_331:
   id: 331
   title: RAPPORT 020 RENOI-CRONGD
   publication_date: 2023-09-19 23:00:00 UTC
+  attachment: rapport-020-renoi-crongd-2023-09-19.pdf
 
 ObservationReport_332:
   id: 332

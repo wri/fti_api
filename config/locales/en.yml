@@ -1022,7 +1022,6 @@ en:
         document_file: :activerecord.models.document_file  #g
         expire_date: Expire date  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         notifications: Notifications  #g
         operator: :activerecord.models.operator  #g
         operator_document_annexes: Operator document annexes  #g
@@ -1060,7 +1059,6 @@ en:
         document_file: :activerecord.models.document_file  #g
         expire_date: expire_date  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         notifications: Notifications  #g
         operator: :activerecord.models.operator  #g
         operator_document_annexes: Operator document annexes  #g
@@ -1083,7 +1081,6 @@ en:
         document_file: :activerecord.models.document_file  #g
         expire_date: Expire date  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Operator document annexes  #g
@@ -1106,7 +1103,6 @@ en:
         document_file: :activerecord.models.document_file  #g
         expire_date: expire_date  #g
         fmu: :activerecord.models.fmu  #g
-        note: note  #g
         notifications: Notifications  #g
         operator: :activerecord.models.operator  #g
         operator_document_annexes: Operator document annexes  #g
@@ -1129,7 +1125,6 @@ en:
         document_file: :activerecord.models.document_file  #g
         expire_date: Expire date  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Operator document annexes  #g
@@ -1152,7 +1147,6 @@ en:
         document_file: :activerecord.models.document_file  #g
         expire_date: Expire date  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Operator document annexes  #g

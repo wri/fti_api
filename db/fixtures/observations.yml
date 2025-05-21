@@ -6,6 +6,7 @@ Observation_230:
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   operator_id: 151
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
   lng: !ruby/object:BigDecimal 27:0.170033496674681e2
   fmu_id: 53
@@ -27,6 +28,7 @@ Observation_231:
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
   operator_id: 151
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
   lng: !ruby/object:BigDecimal 27:0.170033496674681e2
   fmu_id: 53
@@ -47,6 +49,7 @@ Observation_232:
   publication_date: 2020-09-11 16:00:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -67,6 +70,7 @@ Observation_233:
   publication_date: 2020-09-16 10:38:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -87,6 +91,7 @@ Observation_265:
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 161
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.1035403764e1
   lng: !ruby/object:BigDecimal 27:0.15884108858e2
   fmu_id: 56
@@ -108,6 +113,7 @@ Observation_266:
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 161
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
   lng: !ruby/object:BigDecimal 27:0.152278128923389e2
   fmu_id: 68
@@ -128,6 +134,7 @@ Observation_286:
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 172
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
   lng: !ruby/object:BigDecimal 27:0.152278128923389e2
   fmu_id: 68
@@ -148,6 +155,7 @@ Observation_287:
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 172
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
   lng: !ruby/object:BigDecimal 27:0.152278128923389e2
   fmu_id: 68
@@ -167,6 +175,7 @@ Observation_288:
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
   operator_id: 172
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.177226105037592e1
   lng: !ruby/object:BigDecimal 27:0.152278128923389e2
   fmu_id: 68
@@ -187,6 +196,7 @@ Observation_361:
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
   operator_id: 151
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.134650374423073e1
   lng: !ruby/object:BigDecimal 27:0.165172318710738e2
   fmu_id: 55
@@ -208,6 +218,7 @@ Observation_385:
   publication_date: 2020-09-09 15:18:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -228,6 +239,7 @@ Observation_386:
   publication_date: 2020-09-09 15:07:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -248,6 +260,7 @@ Observation_387:
   publication_date: 2020-09-09 15:00:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -268,6 +281,7 @@ Observation_388:
   publication_date: 2020-09-09 14:54:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -288,6 +302,7 @@ Observation_389:
   publication_date: 2020-09-09 14:41:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -308,6 +323,7 @@ Observation_390:
   publication_date: 2020-09-09 14:32:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -328,6 +344,7 @@ Observation_391:
   publication_date: 2020-09-09 14:23:00 UTC
   country_id: 47
   operator_id: 165
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.326997274287424e1
   lng: !ruby/object:BigDecimal 27:0.169921659267476e2
   fmu_id: 105
@@ -348,6 +365,7 @@ Observation_539:
   publication_date: 2023-11-17 14:06:07 UTC
   country_id: 47
   operator_id: 151
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
   lng: !ruby/object:BigDecimal 27:0.170033496674681e2
   fmu_id: 53
@@ -365,6 +383,7 @@ Observation_540:
   publication_date: 2023-11-17 14:05:43 UTC
   country_id: 47
   operator_id: 151
+  is_active: true
   lat: !ruby/object:BigDecimal 27:0.208928131030305e1
   lng: !ruby/object:BigDecimal 27:0.170033496674681e2
   fmu_id: 53
@@ -381,6 +400,7 @@ Observation_818:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -396,6 +416,7 @@ Observation_819:
   observation_type: government
   publication_date: 2011-09-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -411,6 +432,7 @@ Observation_820:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 47
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -426,6 +448,7 @@ Observation_821:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 47
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -441,6 +464,7 @@ Observation_822:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -456,6 +480,7 @@ Observation_823:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -471,6 +496,7 @@ Observation_824:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -486,6 +512,7 @@ Observation_825:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -501,6 +528,7 @@ Observation_826:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 56
   validation_status: Published (not modified)
   observation_report_id: 33
@@ -515,6 +543,7 @@ Observation_827:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 34
@@ -530,6 +559,7 @@ Observation_828:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 34
@@ -545,6 +575,7 @@ Observation_829:
   observation_type: government
   publication_date: 2011-10-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 34
@@ -560,6 +591,7 @@ Observation_830:
   observation_type: government
   publication_date: 2011-12-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 35
@@ -575,6 +607,7 @@ Observation_831:
   observation_type: government
   publication_date: 2011-12-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 35
@@ -590,6 +623,7 @@ Observation_832:
   observation_type: government
   publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 80
@@ -605,6 +639,7 @@ Observation_833:
   observation_type: government
   publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 80
@@ -620,6 +655,7 @@ Observation_834:
   observation_type: government
   publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 80
@@ -635,6 +671,7 @@ Observation_835:
   observation_type: government
   publication_date: 2012-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 80
@@ -650,6 +687,7 @@ Observation_836:
   observation_type: government
   publication_date: 2012-09-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 37
@@ -665,6 +703,7 @@ Observation_837:
   observation_type: government
   publication_date: 2012-09-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 37
@@ -680,6 +719,7 @@ Observation_838:
   observation_type: government
   publication_date: 2012-09-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 37
@@ -695,6 +735,7 @@ Observation_839:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 82
@@ -710,6 +751,7 @@ Observation_840:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 82
@@ -725,6 +767,7 @@ Observation_841:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 82
@@ -740,6 +783,7 @@ Observation_842:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 82
@@ -755,6 +799,7 @@ Observation_843:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 82
@@ -770,6 +815,7 @@ Observation_844:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -785,6 +831,7 @@ Observation_845:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -800,6 +847,7 @@ Observation_846:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -815,6 +863,7 @@ Observation_847:
   observation_type: government
   publication_date: 2012-11-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -830,6 +879,7 @@ Observation_848:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -845,6 +895,7 @@ Observation_849:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -860,6 +911,7 @@ Observation_850:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -875,6 +927,7 @@ Observation_851:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -890,6 +943,7 @@ Observation_852:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -905,6 +959,7 @@ Observation_853:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -920,6 +975,7 @@ Observation_854:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -935,6 +991,7 @@ Observation_855:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -950,6 +1007,7 @@ Observation_856:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -965,6 +1023,7 @@ Observation_857:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -980,6 +1039,7 @@ Observation_858:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 40
@@ -995,6 +1055,7 @@ Observation_859:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1010,6 +1071,7 @@ Observation_860:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1025,6 +1087,7 @@ Observation_861:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1040,6 +1103,7 @@ Observation_862:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1055,6 +1119,7 @@ Observation_863:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1070,6 +1135,7 @@ Observation_864:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1085,6 +1151,7 @@ Observation_866:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1100,6 +1167,7 @@ Observation_867:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 41
@@ -1115,6 +1183,7 @@ Observation_868:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1130,6 +1199,7 @@ Observation_869:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1145,6 +1215,7 @@ Observation_870:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1160,6 +1231,7 @@ Observation_871:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1175,6 +1247,7 @@ Observation_872:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1190,6 +1263,7 @@ Observation_873:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1205,6 +1279,7 @@ Observation_874:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1220,6 +1295,7 @@ Observation_875:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1235,6 +1311,7 @@ Observation_877:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1250,6 +1327,7 @@ Observation_878:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1265,6 +1343,7 @@ Observation_879:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 42
@@ -1280,6 +1359,7 @@ Observation_880:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1295,6 +1375,7 @@ Observation_881:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1310,6 +1391,7 @@ Observation_882:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1325,6 +1407,7 @@ Observation_883:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 47
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1340,6 +1423,7 @@ Observation_884:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1355,6 +1439,7 @@ Observation_885:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 50
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1370,6 +1455,7 @@ Observation_886:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1385,6 +1471,7 @@ Observation_887:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1400,6 +1487,7 @@ Observation_888:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1415,6 +1503,7 @@ Observation_889:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1430,6 +1519,7 @@ Observation_890:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1445,6 +1535,7 @@ Observation_891:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1460,6 +1551,7 @@ Observation_892:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1475,6 +1567,7 @@ Observation_893:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1490,6 +1583,7 @@ Observation_894:
   observation_type: government
   publication_date: 2013-02-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 43
@@ -1505,6 +1599,7 @@ Observation_897:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 83
@@ -1520,6 +1615,7 @@ Observation_898:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 83
@@ -1535,6 +1631,7 @@ Observation_899:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 83
@@ -1550,6 +1647,7 @@ Observation_900:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 83
@@ -1565,6 +1663,7 @@ Observation_901:
   observation_type: government
   publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -1580,6 +1679,7 @@ Observation_902:
   observation_type: government
   publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -1595,6 +1695,7 @@ Observation_903:
   observation_type: government
   publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -1610,6 +1711,7 @@ Observation_904:
   observation_type: government
   publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -1625,6 +1727,7 @@ Observation_905:
   observation_type: government
   publication_date: 2013-03-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 39
@@ -1640,6 +1743,7 @@ Observation_906:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1655,6 +1759,7 @@ Observation_907:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1670,6 +1775,7 @@ Observation_908:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1685,6 +1791,7 @@ Observation_909:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1700,6 +1807,7 @@ Observation_910:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1715,6 +1823,7 @@ Observation_911:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1730,6 +1839,7 @@ Observation_912:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1746,6 +1856,7 @@ Observation_914:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1761,6 +1872,7 @@ Observation_915:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1776,6 +1888,7 @@ Observation_916:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1791,6 +1904,7 @@ Observation_917:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1806,6 +1920,7 @@ Observation_918:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1821,6 +1936,7 @@ Observation_919:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1836,6 +1952,7 @@ Observation_920:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 57
   validation_status: Published (not modified)
   observation_report_id: 85
@@ -1851,6 +1968,7 @@ Observation_921:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1866,6 +1984,7 @@ Observation_922:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1881,6 +2000,7 @@ Observation_923:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1896,6 +2016,7 @@ Observation_924:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1911,6 +2032,7 @@ Observation_925:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1926,6 +2048,7 @@ Observation_926:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1941,6 +2064,7 @@ Observation_927:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 46
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1956,6 +2080,7 @@ Observation_928:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1971,6 +2096,7 @@ Observation_929:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -1986,6 +2112,7 @@ Observation_930:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 52
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -2001,6 +2128,7 @@ Observation_931:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 86
@@ -2016,6 +2144,7 @@ Observation_932:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2031,6 +2160,7 @@ Observation_933:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2045,6 +2175,7 @@ Observation_934:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2060,6 +2191,7 @@ Observation_935:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 49
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2075,6 +2207,7 @@ Observation_936:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2090,6 +2223,7 @@ Observation_937:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2105,6 +2239,7 @@ Observation_938:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 51
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2120,6 +2255,7 @@ Observation_939:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2135,6 +2271,7 @@ Observation_940:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2150,6 +2287,7 @@ Observation_941:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2165,6 +2303,7 @@ Observation_942:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 55
   validation_status: Published (not modified)
   observation_report_id: 48
@@ -2180,6 +2319,7 @@ Observation_943:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 88
@@ -2195,6 +2335,7 @@ Observation_944:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 44
   validation_status: Published (not modified)
   observation_report_id: 88
@@ -2210,6 +2351,7 @@ Observation_945:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 57
   validation_status: Published (not modified)
   observation_report_id: 88
@@ -2225,6 +2367,7 @@ Observation_946:
   observation_type: government
   publication_date: 2013-06-01 00:00:00 UTC
   country_id: 47
+  is_active: true
   subcategory_id: 57
   validation_status: Published (not modified)
   observation_report_id: 88
@@ -2240,6 +2383,7 @@ Observation_1732:
   observation_type: government
   publication_date: 2015-02-28 09:47:00 UTC
   country_id: 7
+  is_active: true
   subcategory_id: 55
   validation_status: Published (modified)
   observation_report_id: 73
@@ -2253,6 +2397,7 @@ Observation_1734:
   observation_type: government
   publication_date: 2015-02-28 10:04:00 UTC
   country_id: 7
+  is_active: true
   subcategory_id: 43
   validation_status: Published (modified)
   observation_report_id: 73
@@ -2266,6 +2411,7 @@ Observation_1735:
   observation_type: government
   publication_date: 2015-02-28 10:16:00 UTC
   country_id: 7
+  is_active: true
   subcategory_id: 51
   validation_status: Published (modified)
   observation_report_id: 73

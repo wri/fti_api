@@ -16,7 +16,6 @@
 #  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
-#  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default(TRUE), not null
 #  source                        :integer          default("company")
@@ -184,7 +183,7 @@ RSpec.describe OperatorDocument, type: :model do
 
       context "when not updating the expire date" do
         before do
-          operator_document.note = "test"
+          operator_document.source_info = "test"
         end
         it "does not remove the notification" do
           expect { subject }.not_to change { notification.reload.solved_at }

@@ -2204,6 +2204,12 @@ Country_48_pt_translation:
   name: Denmark
   region_name: Northern Europe
 
+Country_49_pt_translation:
+  country_id: 49
+  locale: pt
+  name: Egypt
+  region_name: North Africa
+
 Country_49_en_translation:
   country_id: 49
   locale: en
@@ -2238,12 +2244,6 @@ Country_49_vi_translation:
   country_id: 49
   locale: vi
   name: Ai Cập
-  region_name: North Africa
-
-Country_49_pt_translation:
-  country_id: 49
-  locale: pt
-  name: Egypt
   region_name: North Africa
 
 Country_50_en_translation:

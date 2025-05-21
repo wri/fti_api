@@ -423,12 +423,6 @@ RequiredOperatorDocument_22_pt_translation:
     by the forestry administration, it becomes an integral part of the forest concession
     contract.'
 
-RequiredOperatorDocument_24_en_translation:
-  required_operator_document_id: 24
-  locale: en
-  explanation: 'Minutes of the meeting to validate the management plan: document that
-    demonstrates that the management plan is validated by the stakeholders '
-
 RequiredOperatorDocument_24_fr_translation:
   required_operator_document_id: 24
   locale: fr
@@ -438,6 +432,12 @@ RequiredOperatorDocument_24_fr_translation:
 RequiredOperatorDocument_24_pt_translation:
   required_operator_document_id: 24
   locale: pt
+  explanation: 'Minutes of the meeting to validate the management plan: document that
+    demonstrates that the management plan is validated by the stakeholders '
+
+RequiredOperatorDocument_24_en_translation:
+  required_operator_document_id: 24
+  locale: en
   explanation: 'Minutes of the meeting to validate the management plan: document that
     demonstrates that the management plan is validated by the stakeholders '
 
@@ -1301,17 +1301,17 @@ RequiredOperatorDocument_89_pt_translation:
     fund financing for to support community development areas in accordance with the
     management plan'
 
-RequiredOperatorDocument_92_en_translation:
-  required_operator_document_id: 92
-  locale: en
-  explanation: 'Ministry of Health''s authorization to practice: document authorizing
-    the free exercise of medicine, the paramedical and pharmaceutical professions'
-
 RequiredOperatorDocument_92_fr_translation:
   required_operator_document_id: 92
   locale: fr
   explanation: Document autorisant l’exercice libéral de la médecine et des professions
     para médicales et pharmaceutiques
+
+RequiredOperatorDocument_92_en_translation:
+  required_operator_document_id: 92
+  locale: en
+  explanation: 'Ministry of Health''s authorization to practice: document authorizing
+    the free exercise of medicine, the paramedical and pharmaceutical professions'
 
 RequiredOperatorDocument_92_pt_translation:
   required_operator_document_id: 92
@@ -1689,6 +1689,12 @@ RequiredOperatorDocument_113_pt_translation:
     production for the calendar year of a plot subject to timber evacuation from allowable
     cuts '
 
+RequiredOperatorDocument_114_pt_translation:
+  required_operator_document_id: 114
+  locale: pt
+  explanation: 'Phytosanitary certificate: document accompanying logs and lumber to
+    be exported demonstrating that they have undergone proper fumigation'
+
 RequiredOperatorDocument_114_en_translation:
   required_operator_document_id: 114
   locale: en
@@ -1700,12 +1706,6 @@ RequiredOperatorDocument_114_fr_translation:
   locale: fr
   explanation: Document qui accompagne les grumes et débités destinés à l’exportation
     prouvant qu’ils ont subi le traitement adéquat
-
-RequiredOperatorDocument_114_pt_translation:
-  required_operator_document_id: 114
-  locale: pt
-  explanation: 'Phytosanitary certificate: document accompanying logs and lumber to
-    be exported demonstrating that they have undergone proper fumigation'
 
 RequiredOperatorDocument_115_en_translation:
   required_operator_document_id: 115

@@ -932,7 +932,6 @@ fr:
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         notifications: Avis  #g
         operator: :activerecord.models.operator  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
@@ -970,7 +969,6 @@ fr:
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         notifications: Avis  #g
         operator: :activerecord.models.operator  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
@@ -993,7 +991,6 @@ fr:
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
@@ -1016,7 +1013,6 @@ fr:
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         notifications: Avis  #g
         operator: :activerecord.models.operator  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
@@ -1039,7 +1035,6 @@ fr:
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
@@ -1062,7 +1057,6 @@ fr:
         document_file: :activerecord.models.document_file  #g
         expire_date: Date d'expiration  #g
         fmu: :activerecord.models.fmu  #g
-        note: Note  #g
         operator: :activerecord.models.operator  #g
         operator_document: :activerecord.models.operator_document  #g
         operator_document_annexes: Annexes aux documents de l'opérateur  #g
