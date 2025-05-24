@@ -7,15 +7,9 @@ class ApplicationController < ActionController::Base
 
   # Active admin permissions
   def authenticate_user!
-    if current_user.present?
-      unless current_user.user_permission.present? &&
-          %w[admin bo_manager].include?(current_user.user_permission.user_role) &&
-          current_user.is_active
-        raise SecurityError
-      end
-    else
-      redirect_to user_session_path
-    end
+    raise SecurityError if current_user.present? && !backoffice_user?
+
+    super
   end
 
   rescue_from SecurityError do
@@ -40,5 +34,12 @@ class ApplicationController < ActionController::Base
 
   def user_for_paper_trail
     user_signed_in?.present? ? current_user.try(:id) : "Unknown user"
+  end
+
+  private
+
+  def backoffice_user?
+    current_user.user_permission.present? && current_user.is_active &&
+      %w[admin bo_manager].include?(current_user.user_permission.user_role)
   end
 end
