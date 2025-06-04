@@ -491,10 +491,10 @@ es:
       faq: Preguntas frecuentes
       faq/translation: Traducción de preguntas frecuentes
       fmu:
-        one: UMF  # Acrónimo (Unidad de Manejo Forestal)
-        other: UMFs
-      fmu/translation: Traducción de UMF
-      fmu_operator: Operador de UMF
+        one: UGF  # Acrónimo (Unidad de Gestión Forestal)
+        other: UGF
+      fmu/translation: Traducción de UGF
+      fmu_operator: Operador de UGF
       gov_document: Documento gubernamental
       gov_file: Archivo gubernamental
       government: Gobierno
@@ -527,8 +527,8 @@ es:
       operator_document_annex: Anexo de documento de operador
       operator_document_country: País de documento de operador
       operator_document_country_history: Historial de país de documento de operador
-      operator_document_fmu: UMF de documento de operador
-      operator_document_fmu_history: Historial de UMF de documento de operador
+      operator_document_fmu: UGF de documento de operador
+      operator_document_fmu_history: Historial de UGF de documento de operador
       operator_document_history: Historial de documento de operador
       operator_document_statistic: Estadística de documento de operador
       paper_trail/version: Versión de Paper Trail
@@ -541,7 +541,7 @@ es:
       required_operator_document: Documento de operador requerido
       required_operator_document/translation: Traducción de documento de operador requerido
       required_operator_document_country: País de documento de operador requerido
-      required_operator_document_fmu: UMF de documento de operador requerido
+      required_operator_document_fmu: UGF de documento de operador requerido
       required_operator_document_group:
         one: Grupo de documentos de operador requeridos
         other: Grupos de documentos de operador requeridos
@@ -625,7 +625,7 @@ es:
         country_links: Enlaces de país
         country_vpas: VPAs de país
         fa_operators: Operadores FA
-        fmus: UMFs
+        fmus: UGF
         gov_documents: Documentos gubernamentales
         governments: Gobiernos
         is_active: Está activo
@@ -715,14 +715,14 @@ es:
         country: :activerecord.models.country
         deleted_at: Eliminado el
         fmu_operator: :activerecord.models.fmu_operator
-        fmu_operators: Operadores de UMF
+        fmu_operators: Operadores de UGF
         forest_type: Tipo de bosque
         geojson: Geojson
         geometry: Geometría
         name: Nombre
         observations: Observaciones
         operator: :activerecord.models.operator
-        operator_document_fmus: UMFs de documento de operador
+        operator_document_fmus: UGF de documento de operador
         operators: Operadores
         translations: Traducciones
         versions: Versiones
@@ -890,7 +890,7 @@ es:
         deleted_at: Eliminado el
         evidence_type: Tipo de evidencia
         fmu: :activerecord.models.fmu
-        fmu_forest_type: Tipo de bosque UMF
+        fmu_forest_type: Tipo de bosque UGF
         hidden: Oculto
         is_active: Está activo
         location_accuracy: Precisión de ubicación
@@ -933,7 +933,7 @@ es:
         country: :activerecord.models.country
         date: Fecha
         fmu: :activerecord.models.fmu
-        fmu_forest_type: Tipo de bosque UMF
+        fmu_forest_type: Tipo de bosque UGF
         hidden: Oculto
         is_active: Está activo
         observation_type: Tipo de observación
@@ -983,8 +983,8 @@ es:
 
       operator:
         address: Dirección
-        all_fmu_operators: Todos los operadores de UMF
-        all_fmus: Todos los UMFs
+        all_fmu_operators: Todos los operadores de UGF
+        all_fmus: Todos los UGF
         all_observations: Todas las observaciones
         all_operator_documents: Todos los documentos de operador
         approved: Aprobado
@@ -992,8 +992,8 @@ es:
         country_doc_rank: Rango de documento de país
         country_operators: Operadores de país
         details: 'Detalles'
-        fmu_operators: Operadores de UMF
-        fmus: UMFs
+        fmu_operators: Operadores de UGF
+        fmus: UGF
         holding: :activerecord.models.holding
         is_active: Está activo
         logo: Logo
@@ -1001,8 +1001,8 @@ es:
         observations: Observaciones
         operator_document_countries: Países de documento de operador
         operator_document_country_histories: Historiales de país de documento de operador
-        operator_document_fmu_histories: Historiales de UMF de documento de operador
-        operator_document_fmus: UMFs de documento de operador
+        operator_document_fmu_histories: Historiales de UGF de documento de operador
+        operator_document_fmus: UGF de documento de operador
         operator_document_histories: Historiales de documento de operador
         operator_documents: Documentos de operador
         operator_type: Tipo de operador
@@ -1173,7 +1173,7 @@ es:
         country: :activerecord.models.country
         date: Fecha
         document_type: Tipo de documento
-        fmu_forest_type: Tipo de bosque UMF
+        fmu_forest_type: Tipo de bosque UGF
         required_operator_document_group: :activerecord.models.required_operator_document_group
         valid_and_expired_count: Válido y expirado
         not_provided_count: No proporcionado
@@ -1248,8 +1248,8 @@ es:
         name: Nombre
         operator_document_countries: Documentos de operador por país
         operator_document_country_histories: Historiales de documentos de operador por país
-        operator_document_fmu_histories: Historiales de documentos de operador por UMF
-        operator_document_fmus: Documentos de operador por UMF
+        operator_document_fmu_histories: Historiales de documentos de operador por UGF
+        operator_document_fmus: Documentos de operador por UGF
         operator_document_histories: Historiales de documentos de operador
         operator_documents: Documentos de operador
         position: Posición
@@ -1273,8 +1273,8 @@ es:
         name: Nombre
         operator_document_countries: Documentos de operador por país
         operator_document_country_histories: Historiales de documentos de operador por país
-        operator_document_fmu_histories: Historiales de documentos de operador por UMF
-        operator_document_fmus: Documentos de operador por UMF
+        operator_document_fmu_histories: Historiales de documentos de operador por UGF
+        operator_document_fmus: Documentos de operador por UGF
         operator_document_histories: Historiales de documentos de operador
         operator_documents: Documentos de operador
         position: Posición
@@ -1291,8 +1291,8 @@ es:
         name: Nombre
         operator_document_countries: Documentos de operador por país
         operator_document_country_histories: Historiales de documentos de operador por país
-        operator_document_fmu_histories: Historiales de documentos de operador por UMF
-        operator_document_fmus: Documentos de operador por UMF
+        operator_document_fmu_histories: Historiales de documentos de operador por UGF
+        operator_document_fmus: Documentos de operador por UGF
         operator_document_histories: Historiales de documentos de operador
         operator_documents: Documentos de operador
         position: Posición
@@ -1304,7 +1304,7 @@ es:
       required_operator_document_group:
         position: Posición
         required_operator_document_countries: Documentos de operador requeridos por país
-        required_operator_document_fmus: Documentos de operador requeridos por UMF
+        required_operator_document_fmus: Documentos de operador requeridos por UGF
         required_operator_documents: Documentos de operador requeridos
         translations: Traducciones
         name: Nombre
@@ -1327,7 +1327,7 @@ es:
         country: País
         current: Actual
         date: Fecha
-        fmu: UMF
+        fmu: UGF
         operator: :activerecord.models.operator
         summary_private: Resumen privado
         summary_public: Resumen público
@@ -1475,7 +1475,7 @@ es:
       operator_document:
         types:
           name: 'Tipo de Documento'
-          fmu: 'UMF'
+          fmu: 'UGF'
           country: 'País'
     errors:
       messages:
@@ -1851,7 +1851,7 @@ es:
         doc_valid: "Aprobar documento"
     filters:
       country: 'País'
-      fmu: 'UMF'  # Unidad de Manejo Forestal
+      fmu: 'UGF'
       doc_not_provided: 'Documento No Proporcionado'
       doc_expired: 'Documento Expirado'
       doc_valid: 'Documento Válido'
