@@ -19,6 +19,10 @@ namespace :translations do
     end
   end
 
+  task create_spanish_fallback: :environment do
+    Rake::Task["translations:create_fallback"].invoke(:es)
+  end
+
   task create_portuguese_fallback: :environment do
     Rake::Task["translations:create_fallback"].invoke(:pt)
   end
@@ -34,17 +38,17 @@ namespace :translations do
       Country,
       CountryLink,
       CountryVpa,
+      Country,
       Faq,
-      Fmu,
       Government,
       HowTo,
+      Newsletter,
       Observation,
-      Observer,
-      Operator,
-      RequiredGovDocument,
+      Page,
       RequiredGovDocumentGroup,
-      RequiredOperatorDocument,
+      RequiredGovDocument,
       RequiredOperatorDocumentGroup,
+      RequiredOperatorDocument,
       Severity,
       Species,
       Subcategory,
