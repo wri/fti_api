@@ -510,7 +510,7 @@ RSpec.describe Observation, type: :model do
         context "when the language is not supported" do
           it "does not call the translation job" do
             expect(TranslationJob).to_not receive(:perform_later)
-            observation.force_translations_from = :es
+            observation.force_translations_from = :pl
             observation.update(validation_status: "Published (no comments)")
           end
         end
