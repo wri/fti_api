@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/tsubik/active_admin_paranoia.git
-  revision: 3f3fd26962ae4d8aee139a3b8f7256e2d1d340dc
+  revision: cf5de101901e49eebf3ab76aae9e290d5e44f546
   specs:
     active_admin_paranoia (1.0.11)
       paranoia (>= 1.0)
