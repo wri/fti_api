@@ -2,6 +2,12 @@
 fr:
   locale_name: "Français"
   attributes:
+    name: Nom
+    description: Description
+    details: Détails
+    versions: Versions
+    translations: Traductions
+    position: 'Position'
     created_at: 'Créé le'
     updated_at: 'Mis à jour le'
   active_admin_paranoia:
@@ -572,10 +578,7 @@ fr:
       user: Utilisateur  #g
       user_permission: Autorisation utilisateur  #g
     attributes:
-      created_at: Creado en
-      updated_at: Actualizado en
       about_page_entry:
-        position: 'Position'
         code: 'Code'
         title: 'Titre'
         body: 'Corps'
@@ -585,7 +588,6 @@ fr:
 
       category:
         category_type: 'Type de catégorie'
-        name: 'Nom'
 
       contributor:
         website: 'site Internet'
@@ -593,8 +595,6 @@ fr:
         priority: 'Priorité'
         category: 'Catégorie'
         type: 'Type'
-        name: 'Nom'
-        description: 'description'
 
       country:
         iso: 'ISO'
@@ -603,23 +603,16 @@ fr:
         region_centroid: 'Centroïde de région'
         is_active: "Actif?"
         percentage_valid_document: 'Pourcentage de documents valides'
-        name: 'Nom'
         region_name: 'Nom de la région'
 
       country_link:
         url: 'URL'
         active: 'Actif?'
-        position: 'Position'
-        name: 'Nom'
-        description: 'Description'
         country: 'Pays'
 
       country_vpa:
         url: 'URL'
         active: 'Actif?'
-        position: 'Position'
-        name: 'Nom'
-        description: 'Description'
         country: 'Pays'
 
       document_file:
@@ -631,12 +624,8 @@ fr:
         priority: 'Priorité'
         category: 'Catégorie'
         type: 'Type'
-        name: 'Nom'
-        description: 'Description'
-        name: 'Nom'
 
       faq:
-        position: 'Position'
         image: 'Image'
         question: 'Question'
         answer: 'Réponse'
@@ -646,7 +635,6 @@ fr:
         geojson: 'Geojson'
         forest_type: 'Type de forêt'
         geometry: 'Géométrie'
-        name: 'Nom'
         operator: 'Opérateur'
 
       fmu_operator:
@@ -667,36 +655,26 @@ fr:
         value: 'Valeur'
         units: 'Unités'
         user: 'Utilisateur'
-        versions: Versions  #g
 
       gov_file:
         attachment: Pièce jointe  #g
         deleted_at: Supprimé le  #g
         gov_document: :activerecord.models.gov_document  #g
-        versions: Versions  #g
 
       government:
         country: :activerecord.models.country  #g
         governments_observations: Observations des gouvernements  #g
         is_active: Actif ?  #g
         observations: Observations  #g
-        translations: Traductions  #g
-        versions: Versions  #g
         government_entity: Entité gouvernementale  #g
-        details: Des détails  #g
 
       government/translation:
-        details: Des détails  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        government_entity: Entité gouvernementale  #g
-        locale: Lieu  #g
-        versions: Versions  #g
+        government_entity: :activerecord.attributes.government.government_entity
 
       governments_observation:
         deleted_at: Supprimé le  #g
         government: :activerecord.models.government  #g
         observation: :activerecord.models.observation  #g
-        versions: Versions  #g
 
       habtm_countries:
         country: :activerecord.models.country  #g
@@ -707,19 +685,7 @@ fr:
         observer: :activerecord.models.observer  #g
 
       holding:
-        name: Nom  #g
         operators: Les opérateurs  #g
-
-      how_to:
-        position: Position  #g
-        translations: Traductions  #g
-        name: Nom
-
-      how_to/translation:
-        description: La description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
 
       law:
         apv: Apv  #g
@@ -747,7 +713,6 @@ fr:
 
       notification_group:
         days: Journées  #g
-        name: Nom  #g
 
       observation:
         actions_taken: Les mesures prises  #g
@@ -783,27 +748,20 @@ fr:
         species: Espèces  #g
         species_observations: Observations d'espèces  #g
         subcategory: :activerecord.models.subcategory  #g
-        translations: Traductions  #g
         user: :activerecord.models.user  #g
         validation_status: Statut #g
-        versions: Versions  #g
+        concern_opinion: Avis de préoccupation  #g
+        litigation_status: Statut du litige  #g
 
       observation/translation:
-        concern_opinion: Avis de préoccupation  #g
-        deleted_at: Supprimé le  #g
-        details: Des détails  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        litigation_status: Statut du litige  #g
-        locale: Lieu  #g
-        versions: Versions  #g
+       concern_opinion: :activerecord.attributes.observation.concern_opinion
+       litigation_status: :activerecord.attributes.observation.litigation_status
 
       observation_document:
         attachment: Pièce jointe  #g
         deleted_at: Supprimé à  #g
-        name: Nom  #g
         observation: :activerecord.models.observation  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       observation_history:
         category: :activerecord.models.category.one
@@ -838,7 +796,6 @@ fr:
         publication_date: Date de publication  #g
         title: Titre  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       observation_report_observer:
         observation_report: :activerecord.models.observation_report  #g
@@ -894,8 +851,6 @@ fr:
         public_info: Informations publiques  #g
         translations: Traductions  #g
         users: Utilisateurs  #g
-        versions: Versions  #g
-        name: Nom
 
       observer_observation:
         deleted_at: Supprimé le  #g
@@ -918,7 +873,6 @@ fr:
         holding: :activerecord.models.holding  #g
         is_active: Actif ? #g
         logo: Logo  #g
-        name: 'Nom'
         observations: Observations  #g
         operator_document_countries: Pays du document opérateur  #g
         operator_document_country_histories: Historiques des pays des documents de l'opérateur  #g
@@ -934,7 +888,6 @@ fr:
         score_operator_observations: Noter les observations de l'opérateur  #g
         translations: Traductions  #g
         users: Utilisateurs  #g
-        versions: Versions  #g
         website: Site Internet  #g
 
       operator_document:
@@ -956,7 +909,6 @@ fr:
         status: Statut  #g
         uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_annex:
         annex_document: :activerecord.models.annex_document  #g
@@ -965,14 +917,12 @@ fr:
         attachment: Pièce jointe  #g
         deleted_at: Supprimé le  #g
         expire_date: Date d'expiration  #g
-        name: Nom  #g
         operator_document: :activerecord.models.operator_document  #g
         public: Public  #g
         start_date: Date de début  #g
         status: Statut  #g
         uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_country:
         annex_documents: Annexes  #g
@@ -994,7 +944,6 @@ fr:
         status: Statut  #g
         uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_country_history:
         annex_documents: Annexes  #g
@@ -1038,7 +987,6 @@ fr:
         status: Statut  #g
         uploaded_by: Telechargé par  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_fmu_history:
         annex_documents: Documents annexes  #g
@@ -1111,15 +1059,12 @@ fr:
         category: Catégorie  #g
         logo: Logo  #g
         priority: Priorité  #g
-        translations: Traductions  #g
         website: Site Internet  #g
-        name: Nom
 
       protected_area:
         country: :activerecord.models.country  #g
         geojson: Géojson  #g
         geometry: Géométrie  #g
-        name: Nom  #g
         wdpa_pid: WDPA pid  #g
 
       required_gov_document:
@@ -1127,115 +1072,74 @@ fr:
         deleted_at: Supprimé le  #g
         document_type: Type de document  #g
         gov_documents: Documents gouvernementaux  #g
-        name: Nom  #g
-        position: Position  #g
         required_gov_document_group: :activerecord.models.required_gov_document_group  #g
-        translations: Traductions  #g
         valid_period: Période de validité  #g
-        versions: Versions  #g
+        explanation: Explication  #g
 
       required_gov_document/translation:
-        deleted_at: Supprimé le  #g
-        explanation: Explication  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        versions: Versions  #g
+        explanation: :activerecord.attributes.required_gov_document.explanation  #g
 
       required_gov_document_group:
         deleted_at: Supprimé le  #g
         parent: :activerecord.models.parent  #g
-        position: Position  #g
         required_gov_documents: Documents gouvernementaux requis  #g
-        translations: Traductions  #g
-        name: Nom
-
-      required_gov_document_group/translation:
-        deleted_at: Supprimé le  #g
-        description: La description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
 
       required_operator_document:
         contract_signature: Signature du contrat  #g
         country: :activerecord.models.country  #g
         deleted_at: Supprimé le  #g
         forest_types: Types de forêts  #g
-        name: Nom  #g
         operator_document_countries: Pays du document opérateur  #g
         operator_document_country_histories: Historiques des pays des documents de l'opérateur  #g
         operator_document_fmu_histories: Historiques des fmu des documents de l'opérateur  #g
         operator_document_fmus: Document opérateur fmus  #g
         operator_document_histories: Historiques des documents de l'opérateur  #g
         operator_documents: Documents de l'opérateur  #g
-        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
-        translations: Traductions  #g
         valid_period: Période de validité  #g
-        versions: Versions  #g
+        explanation: Explication  #g
 
       required_operator_document/translation:
-        deleted_at: Supprimé le  #g
-        explanation: Explication  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        versions: Versions  #g
+        explanation: :activerecord.attributes.required_operator_document.explanation  #g
 
       required_operator_document_country:
         contract_signature: Signature du contrat  #g
         country: :activerecord.models.country  #g
         deleted_at: Supprimé le  #g
         forest_types: Types de forêts  #g
-        name: Nom  #g
         operator_document_countries: Pays du document opérateur  #g
         operator_document_country_histories: Historiques des pays des documents de l'opérateur  #g
         operator_document_fmu_histories: Historiques des fmu des documents de l'opérateur  #g
         operator_document_fmus: Document opérateur fmus  #g
         operator_document_histories: Historiques des documents de l'opérateur  #g
         operator_documents: Documents de l'opérateur  #g
-        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
-        translations: Traductions  #g
         valid_period: Période de validité  #g
-        versions: Versions  #g
 
       required_operator_document_fmu:
         contract_signature: Signature du contrat  #g
         country: :activerecord.models.country  #g
         deleted_at: Supprimé le  #g
         forest_types: Types de forêts  #g
-        name: Nom  #g
         operator_document_countries: Pays du document opérateur  #g
         operator_document_country_histories: Historiques des pays des documents de l'opérateur  #g
         operator_document_fmu_histories: Historiques des fmu des documents de l'opérateur  #g
         operator_document_fmus: Document opérateur fmus  #g
         operator_document_histories: Historiques des documents de l'opérateur  #g
         operator_documents: Documents de l'opérateur  #g
-        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
-        translations: Traductions  #g
         valid_period: Période de validité  #g
-        versions: Versions  #g
 
       required_operator_document_group:
-        position: Position  #g
         required_operator_document_countries: Pays requis pour le document de l'opérateur  #g
         required_operator_document_fmus: Document d'opérateur requis fmus  #g
         required_operator_documents: Documents de l'opérateur requis  #g
-        translations: Traductions  #g
-        name: Nom  #g
-
-      required_operator_document_group/translation:
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
 
       sawmill:
         geojson: Géojson  #g
         is_active: Actif ? #g
         lat: Lat  #g
         lng: Lng  #g
-        name: Nom  #g
         operator: :activerecord.models.operator  #g
 
       score_operator_document:
@@ -1260,19 +1164,12 @@ fr:
         level: Niveau  #g
         observations: Observations  #g
         subcategory: :activerecord.models.subcategory  #g
-        translations: Traductions  #g
         details: Détails
-
-      severity/translation:
-        details: Des détails  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
 
       species:
         cites_status: Statut Cites  #g
         countries: Des pays  #g
         iucn_status: Statut UICN  #g
-        name: Nom  #g
         observations: Observations  #g
         scientific_name: Nom scientifique  #g
         species_class: Classe d'espèces  #g
@@ -1282,11 +1179,10 @@ fr:
         species_observations: Observations d'espèces  #g
         sub_species: Sous-espèce  #g
         translations: Traductions  #g
+        common_name: Nom commun  #g
 
       species/translation:
-        common_name: Nom commun  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
+        common_name: :activerecord.attributes.species.common_name  #g
 
       species_country:
         country: :activerecord.models.country  #g
@@ -1304,44 +1200,11 @@ fr:
         observations: Observations  #g
         severities: Gravités  #g
         subcategory_type: Type de sous-catégorie  #g
-        translations: Traductions  #g
-        name: Nom
-
-      subcategory/translation:
-        details: Des détails  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
-
-      tool:
-        position: Position  #g
-        translations: Traductions  #g
-        name: Nom
-        description: Description
-
-      tool/translation:
-        description: La description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
-
-      tutorial:
-        position: Position  #g
-        translations: Traductions  #g
-        name: Nom
-        description: Description
-
-      tutorial/translation:
-        description: La description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Lieu  #g
-        name: Nom  #g
 
       uploaded_document:
         author: Auteur  #g
         caption: Légende  #g
         file: Dossier  #g
-        name: Nom  #g
 
       user:
         api_key: :activerecord.models.api_key  #g
@@ -1358,7 +1221,6 @@ fr:
         locale: Lieu  #g
         managed_observers: Observateurs gérés  #g
         responsible_for_countries: Responsable des pays
-        name: Nom  #g
         observation_documents: Documents d'observation  #g
         observation_reports: Rapports d'observation  #g
         observations: Observations  #g

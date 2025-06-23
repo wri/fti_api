@@ -1,6 +1,12 @@
 es:
   locale_name: "Español"
   attributes:
+    name: Nombre
+    description: Descripción
+    details: Detalles
+    versions: Versiones
+    translations: Traducciones
+    position: Posición
     created_at: Creado en
     updated_at: Actualizado en
   active_admin:
@@ -574,16 +580,13 @@ es:
     attributes:
       about_page_entry:
         code: Código
-        position: Posición
         translations: Traducciones
         title: Título
         body: Cuerpo
 
       about_page_entry/translation:
-        body: Cuerpo
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        title: Título
+        body: :activerecord.attributes.about_page_entry.body
+        title: :activerecord.attributes.about_page_entry.title
 
       active_admin/comment:
         author: :activerecord.models.author
@@ -607,25 +610,12 @@ es:
       category:
         category_type: Tipo de categoría
         subcategories: Subcategorías
-        translations: Traducciones
-
-      category/translation:
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       contributor:
         category: Categoría
         logo: Logo
         priority: Prioridad
-        translations: Traducciones
         website: Sitio web
-
-      contributor/translation:
-        description: Descripción
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       country:
         country_centroid: Centroide del país
@@ -644,45 +634,26 @@ es:
         operators: Operadores
         percentage_valid_documents: Porcentaje de documentos válidos
         region_centroid: Centroide de región
+        region_name: Nombre de región
         region_iso: ISO de región
         required_gov_documents: Documentos gubernamentales requeridos
         required_operator_documents: Documentos de operador requeridos
         species: Especies
         species_countries: Especies por países
-        translations: Traducciones
         users: Usuarios
 
       country/translation:
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
-        region_name: Nombre de región
+        region_name: :activerecord.attributes.country.region_name
 
       country_link:
         active: Activo
         country: :activerecord.models.country
-        position: Posición
-        translations: Traducciones
         url: URL
-
-      country_link/translation:
-        description: Descripción
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       country_vpa:
         active: Activo
         country: :activerecord.models.country
-        position: Posición
-        translations: Traducciones
         url: URL
-
-      country_vpa/translation:
-        description: Descripción
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       document_file:
         attachment: Adjunto
@@ -693,22 +664,17 @@ es:
         category: Categoría
         logo: Logo
         priority: Prioridad
-        translations: Traducciones
         website: Sitio web
         name: Nombre
 
       faq:
         image: Imagen
-        position: Posición
-        translations: Traducciones
         answer: Respuesta
         question: Pregunta
 
       faq/translation:
-        answer: Respuesta
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        question: Pregunta
+        answer: :activerecord.attributes.faq.answer
+        question: :activerecord.attributes.faq.question
 
       fmu:
         active_observations: Observaciones activas
@@ -726,13 +692,10 @@ es:
         forest_type: Tipo de bosque
         geojson: Geojson
         geometry: Geometría
-        name: Nombre
         observations: Observaciones
         operator: :activerecord.models.operator
         operator_document_fmus: UGF de documento de operador
         operators: Operadores
-        translations: Traducciones
-        versions: Versiones
 
       fmu_operator:
         current: Actual
@@ -741,7 +704,6 @@ es:
         fmu: :activerecord.models.fmu
         operator: :activerecord.models.operator
         start_date: Fecha de inicio
-        versions: Versiones
 
       gov_document:
         current: Actual
@@ -756,36 +718,26 @@ es:
         units: Unidades
         uploaded_by: Subido por
         value: Valor
-        versions: Versiones
 
       gov_file:
         attachment: Adjunto
         deleted_at: Eliminado el
         gov_document: :activerecord.models.gov_document
-        versions: Versiones
 
       government:
         country: :activerecord.models.country
         governments_observations: Observaciones de gobiernos
         is_active: Está activo
         observations: Observaciones
-        translations: Traducciones
-        versions: Versiones
-        details: Detalles
         government_entity: Entidad gubernamental
 
       government/translation:
-        details: Detalles
-        globalized_model: :activerecord.models.globalized_model
-        government_entity: Entidad gubernamental
-        locale: Idioma
-        versions: Versiones
+        government_entity: :activerecord.attributes.government.government_entity
 
       governments_observation:
         deleted_at: Eliminado el
         government: :activerecord.models.government
         observation: :activerecord.models.observation
-        versions: Versiones
 
       habtm_countries:
         country: :activerecord.models.country
@@ -796,18 +748,7 @@ es:
         observer: :activerecord.models.observer
 
       holding:
-        name: Nombre
         operators: Operadores
-
-      how_to:
-        position: Posición
-        translations: Traducciones
-
-      how_to/translation:
-        description: Descripción
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       law:
         apv: APV
@@ -871,27 +812,20 @@ es:
         species: Especies
         species_observations: Observaciones de especies
         subcategory: :activerecord.models.subcategory
-        translations: Traducciones
         user: :activerecord.models.user
         validation_status: Estado de validación
-        versions: Versiones
+        concern_opinion: Opinión de preocupación
+        litigation_status: Estado de litigio
 
       observation/translation:
-        concern_opinion: Opinión de preocupación
-        deleted_at: Eliminado el
-        details: Detalles
-        globalized_model: :activerecord.models.globalized_model
-        litigation_status: Estado de litigio
-        locale: Idioma
-        versions: Versiones
+        concern_option: :activerecord.attributes.observation.concern_option
+        litigation_status: :activerecord.attributes.observation.litigation_status
 
       observation_document:
         attachment: Adjunto
         deleted_at: Eliminado el
-        name: Nombre
         observation: :activerecord.models.observation
         user: :activerecord.models.user
-        versions: Versiones
 
       observation_history:
         category: :activerecord.models.category.one
@@ -926,7 +860,6 @@ es:
         publication_date: Fecha de publicación
         title: Título
         user: :activerecord.models.user
-        versions: Versiones
 
       observation_report_observer:
         observation_report: :activerecord.models.observation_report
@@ -980,8 +913,6 @@ es:
         observer_type: Tipo de observador
         organization_type: Tipo de organización
         public_info: Información pública
-        translations: Traducciones
-        name: Nombre
         users: Usuarios
         versions: Versiones
 
@@ -1006,7 +937,6 @@ es:
         holding: :activerecord.models.holding
         is_active: Está activo
         logo: Logo
-        name: 'Nombre'
         observations: Observaciones
         operator_document_countries: Países de documento de operador
         operator_document_country_histories: Historiales de país de documento de operador
@@ -1020,9 +950,7 @@ es:
         score_operator_documents: Puntuaciones de documentos de operador
         score_operator_observation: :activerecord.models.score_operator_observation
         score_operator_observations: Puntuaciones de observaciones de operador
-        translations: Traducciones
         users: Usuarios
-        versions: Versiones
         website: Sitio web
 
       operator_document:
@@ -1045,7 +973,6 @@ es:
         status: Estado
         uploaded_by: Subido por
         user: :activerecord.models.user
-        versions: Versiones
 
       operator_document_annex:
         annex_document: :activerecord.models.annex_document
@@ -1054,14 +981,12 @@ es:
         attachment: Adjunto
         deleted_at: Eliminado el
         expire_date: Fecha de expiración
-        name: Nombre
         operator_document: :activerecord.models.operator_document
         public: Público
         start_date: Fecha de inicio
         status: Estado
         uploaded_by: Subido por
         user: :activerecord.models.user
-        versions: Versiones
 
       operator_document_country:
         annex_documents: Documentos anexos
@@ -1084,7 +1009,6 @@ es:
         status: Estado
         uploaded_by: Subido por
         user: :activerecord.models.user
-        versions: Versiones
 
       operator_document_country_history:
         annex_documents: Documentos anexos
@@ -1130,7 +1054,6 @@ es:
         status: Estado
         uploaded_by: Subido por
         user: :activerecord.models.user
-        versions: Versiones
 
       operator_document_fmu_history:
         annex_documents: Documentos anexos
@@ -1207,13 +1130,11 @@ es:
         priority: Prioridad
         translations: Traducciones
         website: Sitio web
-        name: Nombre
 
       protected_area:
         country: :activerecord.models.country
         geojson: Geojson
         geometry: Geometría
-        name: Nombre
         wdpa_pid: PID WDPA
 
       required_gov_document:
@@ -1221,40 +1142,23 @@ es:
         deleted_at: Eliminado el
         document_type: Tipo de documento
         gov_documents: Documentos gubernamentales
-        name: Nombre
-        position: Posición
         required_gov_document_group: :activerecord.models.required_gov_document_group
-        translations: Traducciones
         valid_period: Período válido
-        versions: Versiones
+        explanation: Explicación
 
       required_gov_document/translation:
-        deleted_at: Eliminado el
-        explanation: Explicación
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        versions: Versiones
+        explanation: :activerecord.attributes.required_gov_document.explanation
 
       required_gov_document_group:
         deleted_at: Eliminado el
         parent: :activerecord.models.parent
-        position: Posición
         required_gov_documents: Documentos gubernamentales requeridos
-        translations: Traducciones
-
-      required_gov_document_group/translation:
-        deleted_at: Eliminado el
-        description: Descripción
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       required_operator_document:
         contract_signature: Firma de contrato
         country: :activerecord.models.country
         deleted_at: Eliminado el
         forest_types: Tipos de bosque
-        name: Nombre
         operator_document_countries: Documentos de operador por país
         operator_document_country_histories: Historiales de documentos de operador por país
         operator_document_fmu_histories: Historiales de documentos de operador por UGF
@@ -1263,41 +1167,31 @@ es:
         operator_documents: Documentos de operador
         position: Posición
         required_operator_document_group: :activerecord.models.required_operator_document_group
-        translations: Traducciones
         valid_period: Período válido
-        versions: Versiones
+        explanation: Explicación
 
       required_operator_document/translation:
-        deleted_at: Eliminado el
-        explanation: Explicación
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        versions: Versiones
+        explanation: :activerecord.attributes.required_operator_document.explanation
 
       required_operator_document_country:
         contract_signature: Firma de contrato
         country: :activerecord.models.country
         deleted_at: Eliminado el
         forest_types: Tipos de bosque
-        name: Nombre
         operator_document_countries: Documentos de operador por país
         operator_document_country_histories: Historiales de documentos de operador por país
         operator_document_fmu_histories: Historiales de documentos de operador por UGF
         operator_document_fmus: Documentos de operador por UGF
         operator_document_histories: Historiales de documentos de operador
         operator_documents: Documentos de operador
-        position: Posición
         required_operator_document_group: :activerecord.models.required_operator_document_group
-        translations: Traducciones
         valid_period: Período válido
-        versions: Versiones
 
       required_operator_document_fmu:
         contract_signature: Firma de contrato
         country: :activerecord.models.country
         deleted_at: Eliminado el
         forest_types: Tipos de bosque
-        name: Nombre
         operator_document_countries: Documentos de operador por país
         operator_document_country_histories: Historiales de documentos de operador por país
         operator_document_fmu_histories: Historiales de documentos de operador por UGF
@@ -1306,22 +1200,12 @@ es:
         operator_documents: Documentos de operador
         position: Posición
         required_operator_document_group: :activerecord.models.required_operator_document_group
-        translations: Traducciones
         valid_period: Período válido
-        versions: Versiones
 
       required_operator_document_group:
-        position: Posición
         required_operator_document_countries: Documentos de operador requeridos por país
         required_operator_document_fmus: Documentos de operador requeridos por UGF
         required_operator_documents: Documentos de operador requeridos
-        translations: Traducciones
-        name: Nombre
-
-      required_operator_document_group/translation:
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       sawmill:
         geojson: Geojson
@@ -1353,13 +1237,6 @@ es:
         level: Nivel
         observations: Observaciones
         subcategory: :activerecord.models.subcategory
-        translations: Traducciones
-        details: Detalles
-
-      severity/translation:
-        details: Detalles
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
 
       species:
         cites_status: Estado CITES
@@ -1374,12 +1251,10 @@ es:
         species_kingdom: Reino de especie
         species_observations: Observaciones de especies
         sub_species: Subespecie
-        translations: Traducciones
+        common_name: Nombre común
 
       species/translation:
-        common_name: Nombre común
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
+        common_name: :activerecord.attributes.species.common_name
 
       species_country:
         country: :activerecord.models.country
@@ -1397,40 +1272,11 @@ es:
         observations: Observaciones
         severities: Gravedades
         subcategory_type: Tipo de subcategoría
-        translations: Traducciones
-        name: Nombre
-
-      subcategory/translation:
-        details: Detalles
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
-
-      tool:
-        position: Posición
-        translations: Traducciones
-
-      tool/translation:
-        description: Descripción
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
-
-      tutorial:
-        position: Posición
-        translations: Traducciones
-
-      tutorial/translation:
-        description: Descripción
-        globalized_model: :activerecord.models.globalized_model
-        locale: Idioma
-        name: Nombre
 
       uploaded_document:
         author: Autor
         caption: Leyenda
         file: Archivo
-        name: Nombre
 
       user:
         api_key: :activerecord.models.api_key
@@ -1447,7 +1293,6 @@ es:
         locale: Idioma
         managed_observers: Observadores gestionados
         responsible_for_countries: Responsable de países
-        name: Nombre
         observation_documents: Documentos de observación
         observation_reports: Informes de observación
         observations: Observaciones

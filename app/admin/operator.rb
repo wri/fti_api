@@ -125,7 +125,7 @@ ActiveAdmin.register Operator, as: "Producer" do
     as: :select,
     collection: -> { Country.joins(:operators).with_translations(I18n.locale).order("country_translations.name") }
   filter :id,
-    as: :select, label: -> { I18n.t("activerecord.attributes.operator.name") },
+    as: :select, label: -> { Operator.human_attribute_name(:name) },
     collection: -> { Operator.order(:name).pluck(:name, :id) }
   filter :fa_id_present, as: :boolean, label: proc { I18n.t("active_admin.operator_page.with_fa_uuid") }
   filter :fmus_id_null, as: :boolean, label: proc { I18n.t("active_admin.operator_page.fmus_id_null") }

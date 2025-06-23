@@ -311,7 +311,7 @@ ActiveAdmin.register Observation do
     column :actions_taken, sortable: false do |o|
       o.actions_taken[0..100] + ((o.actions_taken.length >= 100) ? "..." : "") if o.actions_taken
     end
-    column I18n.t("activerecord.attributes.observation/translation.details"), class: "col-details", &:details
+    column :details, class: "col-details"
     column :evidence_type
     column I18n.t("active_admin.menu.independent_monitoring.evidence"), class: "col-evidence" do |o|
       links = []
@@ -322,7 +322,7 @@ ActiveAdmin.register Observation do
       links.reduce(:+)
     end
     column :evidence_on_report, sortable: false
-    column I18n.t("activerecord.attributes.observation/translation.concern_opinion"), class: "col-concern_opinion" do |o|
+    column :concern_opinion, class: "col-concern_opinion" do |o|
       o.concern_opinion[0..100] + ((o.concern_opinion.length >= 100) ? "..." : "") if o.concern_opinion
     end
     column :pv, sortable: false
@@ -382,17 +382,17 @@ ActiveAdmin.register Observation do
             ["severity", I18n.t("activerecord.models.severity"), :checked],
             ["publication_date", I18n.t("activerecord.attributes.observation.publication_date"), :checked],
             ["actions_taken", I18n.t("activerecord.attributes.observation.actions_taken"), :checked],
-            ["details", I18n.t("activerecord.attributes.observation/translation.details"), :checked],
+            ["details", Observation.human_attribute_name(:details), :checked],
             ["evidence_type", I18n.t("activerecord.attributes.observation.evidence_type"), :checked],
             ["evidence", I18n.t("active_admin.menu.independent_monitoring.evidence"), :checked],
             ["evidence_on_report", I18n.t("activerecord.attributes.observation.evidence_on_report"), :checked],
-            ["concern_opinion", I18n.t("activerecord.attributes.observation/translation.concern_opinion"), :checked],
+            ["concern_opinion", I18n.t("activerecord.attributes.observation.concern_opinion"), :checked],
             ["pv", I18n.t("activerecord.attributes.observation.pv"), :checked],
             ["location_accuracy", I18n.t("activerecord.attributes.observation.location_accuracy"), :checked],
             ["lat", I18n.t("activerecord.attributes.observation.lat"), :checked],
             ["lng", I18n.t("activerecord.attributes.observation.lng"), :checked],
             ["is_physical_place", I18n.t("activerecord.attributes.observation.is_physical_place"), :checked],
-            ["litigation_status", I18n.t("activerecord.attributes.observation/translation.litigation_status"), :checked],
+            ["litigation_status", I18n.t("activerecord.attributes.observation.litigation_status"), :checked],
             ["report", I18n.t("document_types.Report"), :checked],
             ["monitor_comment", I18n.t("activerecord.attributes.observation.monitor_comment"), :checked],
             ["user", I18n.t("activerecord.attributes.observation.user"), :checked],
