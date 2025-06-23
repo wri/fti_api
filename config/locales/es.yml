@@ -1,5 +1,8 @@
 es:
   locale_name: "Español"
+  attributes:
+    created_at: Creado en
+    updated_at: Actualizado en
   active_admin:
     true: 'Verdadero'
     false: 'Falso'
@@ -41,6 +44,10 @@ es:
         to: "Hasta"
     scopes:
       all: "Todos"
+      newly_created: "Recientemente creado"
+      seen: "Visto"
+      dismissed: "Descartado"
+      solved: "Resuelto"
     search_status:
       headline: "Estado de búsqueda:"
       current_scope: "Ámbito:"
@@ -823,6 +830,8 @@ es:
         operator_document: :activerecord.models.operator_document
         solved_at: Resuelto el
         user: :activerecord.models.user
+        on_time?: A tiempo?
+        expiration_date: Fecha de expiración
 
       notification_group:
         days: Días

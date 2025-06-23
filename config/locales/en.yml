@@ -1,6 +1,9 @@
 ---
 en:
   locale_name: "English"
+  attributes:
+    created_at: Created at
+    updated_at: Updated at
   active_admin:
     true: 'True'
     false: 'False'
@@ -42,6 +45,10 @@ en:
         to: "To"
     scopes:
       all: "All"
+      newly_created: "Newly created"
+      seen: "Seen"
+      dismissed: "Dismissed"
+      solved: "Solved"
     search_status:
       headline: "Search status:"
       current_scope: "Scope:"
@@ -824,6 +831,8 @@ en:
         operator_document: :activerecord.models.operator_document  #g
         solved_at: Solved at  #g
         user: :activerecord.models.user  #g
+        on_time?: On time?
+        expiration_date: Expiration date
 
       notification_group:
         days: Days  #g

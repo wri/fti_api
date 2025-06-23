@@ -54,6 +54,12 @@ fr:
         lteq_datetime: "Antérieur ou égal à"
         from: "De"
         to: "À"
+    scopes:
+      all: "Tous"
+      newly_created: "Nouveaux"
+      seen: "Vu"
+      dismissed: "Rejeté"
+      solved: "Résolu"
     search_status:
       headline: "Statut de la recherche :"
       current_scope: "Etendu du filtre :"
@@ -566,6 +572,8 @@ fr:
       user: Utilisateur  #g
       user_permission: Autorisation utilisateur  #g
     attributes:
+      created_at: Creado en
+      updated_at: Actualizado en
       about_page_entry:
         position: 'Position'
         code: 'Code'
@@ -734,6 +742,8 @@ fr:
         operator_document: :activerecord.models.operator_document  #g
         solved_at: Résolu le  #g
         user: :activerecord.models.user  #g
+        on_time?: À temps ?
+        expiration_date: Date d'expiration
 
       notification_group:
         days: Journées  #g
