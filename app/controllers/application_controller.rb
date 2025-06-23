@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include FilterSaver
+
   before_action :exclude_whodunnit_from_login
+  before_action :restore_search_filters, unless: :devise_controller?
+  after_action :save_search_filters, unless: :devise_controller?
 
   protect_from_forgery
 

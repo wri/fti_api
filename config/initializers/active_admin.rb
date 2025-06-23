@@ -346,8 +346,6 @@ ActiveAdmin.setup do |config|
   #
   # config.webpacker = true
 
-  # These two are defined in ActiveAdmin::FilterSaver::Controller, which is loaded below.
-  config.before_action :restore_search_filters, unless: :devise_controller?
   config.before_action do
     if params[:locale] && params[:format] == "csv"
       I18n.locale = params[:locale]
@@ -355,12 +353,9 @@ ActiveAdmin.setup do |config|
       set_admin_locale
     end
   end
-  config.after_action :save_search_filters, unless: :devise_controller?
 end
 
 ActiveAdmin.before_load do |app|
-  # Add Filters Extensions
-  ActiveAdmin::BaseController.include ActiveAdmin::FilterSaver::Controller
   ActiveAdmin::Views::Pages::Show.prepend ActiveAdmin::PaperTrail::ShowPageExtension
   ActiveAdmin::ResourceDSL.include ActiveAdmin::DependentFiltersExtension
 end
