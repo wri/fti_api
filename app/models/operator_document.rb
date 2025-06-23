@@ -18,7 +18,6 @@
 #  uploaded_by                   :integer
 #  user_id                       :integer
 #  reason                        :text
-#  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default(TRUE), not null
 #  source                        :integer          default("company")
@@ -158,7 +157,7 @@ class OperatorDocument < ApplicationRecord
     update!(
       status: OperatorDocument.statuses[:doc_not_provided],
       expire_date: nil, start_date: Time.zone.today, created_at: DateTime.now, updated_at: DateTime.now,
-      deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, note: nil, response_date: nil,
+      deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, response_date: nil,
       source: nil, source_info: nil, document_file_id: nil
     )
   end

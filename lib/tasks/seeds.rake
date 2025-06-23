@@ -61,7 +61,7 @@ class SeedsTasks
           .order(:id)
         annexes = OperatorDocumentAnnex.where(id: annex_documents.pluck(:operator_document_annex_id).uniq).order(:id)
         generate_for_model "DocumentFile", entries: document_files
-        generate_for_model "OperatorDocument", entries: documents, exclude: %w[user_id], anonymize: %w[note]
+        generate_for_model "OperatorDocument", entries: documents, exclude: %w[user_id]
         generate_for_model "OperatorDocumentHistory", entries: document_history, exclude: %w[user_id]
         generate_for_model "AnnexDocument", entries: annex_documents
         generate_for_model "OperatorDocumentAnnex", entries: annexes, exclude: %w[user_id]

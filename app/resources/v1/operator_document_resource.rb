@@ -29,11 +29,11 @@ module V1
     end
 
     def self.updatable_fields(context)
-      super - [:note, :response_date, :source]
+      super - [:response_date, :source]
     end
 
     def self.creatable_fields(context)
-      super - [:note, :response_date, :source]
+      super - [:response_date, :source]
     end
 
     def set_user_id

@@ -1994,6 +1994,11 @@ Government_57_pt_translation:
   locale: pt
   government_entity: Regency police, other relevant ministries and agencies
 
+Government_58_pt_translation:
+  government_id: 58
+  locale: pt
+  government_entity: SVLK
+
 Government_58_en_translation:
   government_id: 58
   locale: en
@@ -2022,11 +2027,6 @@ Government_58_ko_translation:
 Government_58_vi_translation:
   government_id: 58
   locale: vi
-  government_entity: SVLK
-
-Government_58_pt_translation:
-  government_id: 58
-  locale: pt
   government_entity: SVLK
 
 Government_59_en_translation:

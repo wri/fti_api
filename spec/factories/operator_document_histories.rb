@@ -9,7 +9,6 @@
 #  status                        :integer
 #  uploaded_by                   :integer
 #  reason                        :text
-#  note                          :text
 #  response_date                 :datetime
 #  public                        :boolean          default(FALSE), not null
 #  source                        :integer

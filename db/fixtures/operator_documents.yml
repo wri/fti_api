@@ -10,7 +10,7 @@ OperatorDocument_2:
   status: doc_valid
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2922
 
@@ -25,7 +25,6 @@ OperatorDocument_3:
   status: doc_valid
   operator_id: 145
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 2
@@ -39,7 +38,6 @@ OperatorDocument_4:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -52,7 +50,6 @@ OperatorDocument_5:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -67,7 +64,7 @@ OperatorDocument_8:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2926
 
@@ -80,7 +77,6 @@ OperatorDocument_9:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -95,7 +91,6 @@ OperatorDocument_12:
   status: doc_expired
   operator_id: 145
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 3
@@ -109,7 +104,6 @@ OperatorDocument_13:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -122,7 +116,6 @@ OperatorDocument_14:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -137,7 +130,6 @@ OperatorDocument_15:
   status: doc_valid
   operator_id: 145
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 4
@@ -153,7 +145,6 @@ OperatorDocument_108:
   status: doc_valid
   operator_id: 151
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 13
@@ -169,7 +160,6 @@ OperatorDocument_110:
   status: doc_valid
   operator_id: 151
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 14
@@ -185,7 +175,7 @@ OperatorDocument_270:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3283
 
@@ -200,7 +190,6 @@ OperatorDocument_279:
   status: doc_valid
   operator_id: 161
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 27
@@ -216,7 +205,6 @@ OperatorDocument_281:
   status: doc_valid
   operator_id: 161
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 28
@@ -232,7 +220,7 @@ OperatorDocument_324:
   status: doc_pending
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4679
 
@@ -247,7 +235,7 @@ OperatorDocument_325:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2410
 
@@ -262,7 +250,7 @@ OperatorDocument_328:
   status: doc_pending
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_330:
@@ -276,7 +264,7 @@ OperatorDocument_330:
   status: doc_invalid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4191
 
@@ -291,7 +279,7 @@ OperatorDocument_332:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4093
 
@@ -306,7 +294,7 @@ OperatorDocument_335:
   status: doc_pending
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4656
 
@@ -321,7 +309,7 @@ OperatorDocument_336:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3025
 
@@ -336,7 +324,6 @@ OperatorDocument_338:
   status: doc_valid
   operator_id: 165
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 37
@@ -352,7 +339,7 @@ OperatorDocument_339:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4103
 
@@ -367,7 +354,7 @@ OperatorDocument_340:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3026
 
@@ -381,8 +368,8 @@ OperatorDocument_341:
   updated_at: 2022-02-21 06:33:36 UTC
   status: doc_not_provided
   operator_id: 165
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_342:
   id: 342
@@ -394,8 +381,8 @@ OperatorDocument_342:
   updated_at: 2022-02-21 06:32:55 UTC
   status: doc_not_provided
   operator_id: 165
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_422:
   id: 422
@@ -406,7 +393,6 @@ OperatorDocument_422:
   status: doc_not_provided
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -419,7 +405,6 @@ OperatorDocument_425:
   status: doc_not_provided
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -432,7 +417,6 @@ OperatorDocument_432:
   status: doc_not_provided
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -446,7 +430,6 @@ OperatorDocument_1210:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -460,7 +443,6 @@ OperatorDocument_1212:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -474,7 +456,6 @@ OperatorDocument_1216:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -488,7 +469,6 @@ OperatorDocument_1217:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -502,7 +482,6 @@ OperatorDocument_1218:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -518,7 +497,6 @@ OperatorDocument_1373:
   status: doc_valid
   operator_id: 151
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 73
@@ -535,7 +513,6 @@ OperatorDocument_1374:
   status: doc_valid
   operator_id: 151
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 74
@@ -552,7 +529,6 @@ OperatorDocument_1375:
   status: doc_valid
   operator_id: 151
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 75
@@ -569,7 +545,7 @@ OperatorDocument_1681:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2398
 
@@ -585,7 +561,7 @@ OperatorDocument_1682:
   status: doc_not_required
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2399
 
@@ -601,7 +577,7 @@ OperatorDocument_1683:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4166
 
@@ -617,7 +593,7 @@ OperatorDocument_1684:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2998
 
@@ -633,7 +609,7 @@ OperatorDocument_1685:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3027
 
@@ -649,7 +625,7 @@ OperatorDocument_1686:
   status: doc_pending
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4680
 
@@ -665,7 +641,7 @@ OperatorDocument_1687:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4087
 
@@ -680,7 +656,8 @@ OperatorDocument_1688:
   updated_at: 2023-06-09 09:51:21 UTC
   status: doc_not_provided
   operator_id: 165
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_1689:
   id: 1689
@@ -694,7 +671,7 @@ OperatorDocument_1689:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4089
 
@@ -709,7 +686,8 @@ OperatorDocument_1690:
   updated_at: 2024-01-01 01:04:05 UTC
   status: doc_not_provided
   operator_id: 165
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_1691:
   id: 1691
@@ -723,7 +701,7 @@ OperatorDocument_1691:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2444
 
@@ -739,7 +717,7 @@ OperatorDocument_1692:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4091
 
@@ -755,7 +733,7 @@ OperatorDocument_1693:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2420
 
@@ -771,7 +749,7 @@ OperatorDocument_1694:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4098
 
@@ -786,7 +764,8 @@ OperatorDocument_1696:
   updated_at: 2023-06-09 09:55:05 UTC
   status: doc_not_provided
   operator_id: 165
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_1697:
   id: 1697
@@ -800,7 +779,7 @@ OperatorDocument_1697:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4099
 
@@ -816,7 +795,6 @@ OperatorDocument_2110:
   status: doc_valid
   operator_id: 197
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 114
@@ -833,7 +811,7 @@ OperatorDocument_3373:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2390
 
@@ -848,7 +826,7 @@ OperatorDocument_3706:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4695
 
@@ -864,7 +842,7 @@ OperatorDocument_3802:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3158
 
@@ -878,7 +856,6 @@ OperatorDocument_3805:
   status: doc_not_provided
   operator_id: 165
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -894,7 +871,7 @@ OperatorDocument_3855:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4090
 
@@ -911,7 +888,7 @@ OperatorDocument_3905:
   operator_id: 165
   uploaded_by: operator
   reason: 'L''entreprise est en activité et met en œuvre son plan d''aménagement '
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4028:
@@ -925,7 +902,8 @@ OperatorDocument_4028:
   updated_at: 2023-05-25 19:06:30 UTC
   status: doc_not_provided
   operator_id: 165
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_4067:
   id: 4067
@@ -938,7 +916,7 @@ OperatorDocument_4067:
   status: doc_expired
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3413
 
@@ -953,7 +931,7 @@ OperatorDocument_4088:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2989
 
@@ -969,7 +947,7 @@ OperatorDocument_4117:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3314
 
@@ -985,7 +963,6 @@ OperatorDocument_4118:
   status: doc_valid
   operator_id: 161
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 164
@@ -1002,7 +979,7 @@ OperatorDocument_4119:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4364
 
@@ -1018,7 +995,7 @@ OperatorDocument_4120:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4377
 
@@ -1038,7 +1015,7 @@ OperatorDocument_4129:
     Les coupes provisoires sont valables lorsque l'entreprise s'installe (les coupes sont délivrées sur des VMA théoriques annuels)
     IFO est aménagée depuis 2007 et son plan d'aménagement dure jusqu'au 31/12/2036
     IFO n'est pas soumise à des coupes provisoires (sauf si il y a un projet spécifique avec l'Etat)
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4171:
@@ -1052,7 +1029,7 @@ OperatorDocument_4171:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4744
 
@@ -1067,7 +1044,6 @@ OperatorDocument_4183:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 195
@@ -1083,7 +1059,6 @@ OperatorDocument_4186:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 198
@@ -1101,7 +1076,6 @@ OperatorDocument_4198:
   operator_id: 151
   uploaded_by: other
   reason: La scierie de Kabo a été fermée et le bois de l'UGF est transformé à Pokola.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -1119,7 +1093,7 @@ OperatorDocument_4223:
   uploaded_by: operator
   reason: 'une convention de transformation  et d''aménagement a été signée et non
     la convention de transformation industrielle '
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4255:
@@ -1134,7 +1108,6 @@ OperatorDocument_4255:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 207
@@ -1150,7 +1123,7 @@ OperatorDocument_4265:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2925
 
@@ -1163,7 +1136,6 @@ OperatorDocument_4292:
   status: doc_not_provided
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -1180,7 +1152,7 @@ OperatorDocument_4312:
   operator_id: 151
   uploaded_by: operator
   reason: pas de vidange existante
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4313:
@@ -1196,7 +1168,7 @@ OperatorDocument_4313:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement au programme
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4339:
@@ -1212,7 +1184,6 @@ OperatorDocument_4339:
   operator_id: 151
   uploaded_by: other
   reason: La société a signée la CAT
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -1229,7 +1200,7 @@ OperatorDocument_4447:
   operator_id: 151
   uploaded_by: operator
   reason: l'autorisation annuelle dejà délivrée
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4452:
@@ -1244,7 +1215,7 @@ OperatorDocument_4452:
   status: doc_invalid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3677
 
@@ -1260,7 +1231,7 @@ OperatorDocument_4460:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2948
 
@@ -1276,7 +1247,6 @@ OperatorDocument_4465:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 224
@@ -1294,7 +1264,6 @@ OperatorDocument_4466:
   operator_id: 151
   uploaded_by: other
   reason: L'entreprise à signé la CAT avec le Congo
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -1310,7 +1279,6 @@ OperatorDocument_4468:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 225
@@ -1328,7 +1296,7 @@ OperatorDocument_4469:
   operator_id: 151
   uploaded_by: operator
   reason: pas de vidange existante
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4470:
@@ -1344,7 +1312,7 @@ OperatorDocument_4470:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement applicable
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4568:
@@ -1359,7 +1327,7 @@ OperatorDocument_4568:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4097
 
@@ -1376,7 +1344,7 @@ OperatorDocument_4647:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement applicable
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_4678:
@@ -1392,7 +1360,6 @@ OperatorDocument_4678:
   operator_id: 151
   uploaded_by: other
   reason: 'La société a signé une CAT '
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -1408,7 +1375,6 @@ OperatorDocument_4694:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 233
@@ -1425,7 +1391,6 @@ OperatorDocument_4695:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 234
@@ -1442,7 +1407,7 @@ OperatorDocument_4706:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3529
 
@@ -1458,7 +1423,6 @@ OperatorDocument_4765:
   status: doc_valid
   operator_id: 151
   uploaded_by: admin
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 242
@@ -1474,7 +1438,8 @@ OperatorDocument_4846:
   updated_at: 2023-06-09 09:54:20 UTC
   status: doc_not_provided
   operator_id: 165
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_5044:
   id: 5044
@@ -1488,7 +1453,7 @@ OperatorDocument_5044:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 277
 
@@ -1503,8 +1468,8 @@ OperatorDocument_5053:
   updated_at: 2024-01-01 01:04:07 UTC
   status: doc_not_provided
   operator_id: 161
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_5057:
   id: 5057
@@ -1517,7 +1482,7 @@ OperatorDocument_5057:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2028
 
@@ -1534,7 +1499,7 @@ OperatorDocument_5061:
   operator_id: 161
   uploaded_by: operator
   reason: même réponse que l'aapplication de l'autorisation de vidange
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_5071:
@@ -1552,7 +1517,7 @@ OperatorDocument_5071:
   reason: l'autorisation de vidange est nécessaire à la fin de la dernière assiette
     Annuelle de coupe du plan d'Aménagement, pour évacuer le bois l'année suivante
     (qui n'est plus dans le plan d'aménagement
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_5111:
@@ -1566,7 +1531,6 @@ OperatorDocument_5111:
   status: doc_invalid
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 306
@@ -1582,7 +1546,6 @@ OperatorDocument_5113:
   status: doc_expired
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 307
@@ -1599,7 +1562,6 @@ OperatorDocument_5157:
   status: doc_valid
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 315
@@ -1616,7 +1578,6 @@ OperatorDocument_5161:
   status: doc_valid
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 316
@@ -1634,7 +1595,6 @@ OperatorDocument_5164:
   operator_id: 145
   uploaded_by: other
   reason: 'La société dispose d''une CTI pour exploiter le bois '
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -1651,7 +1611,7 @@ OperatorDocument_6434:
   operator_id: 151
   uploaded_by: operator
   reason: aucune opération de vidange préconisée
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6435:
@@ -1667,7 +1627,7 @@ OperatorDocument_6435:
   operator_id: 151
   uploaded_by: operator
   reason: pas de vidange existante
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6437:
@@ -1682,7 +1642,7 @@ OperatorDocument_6437:
   status: doc_invalid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3679
 
@@ -1698,7 +1658,7 @@ OperatorDocument_6438:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2951
 
@@ -1715,7 +1675,6 @@ OperatorDocument_6440:
   operator_id: 151
   uploaded_by: other
   reason: Sera requis apres l'elaboration du PA en  2020
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -1731,7 +1690,7 @@ OperatorDocument_6441:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2950
 
@@ -1747,7 +1706,7 @@ OperatorDocument_6442:
   status: doc_invalid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6444:
@@ -1763,7 +1722,7 @@ OperatorDocument_6444:
   operator_id: 151
   uploaded_by: operator
   reason: Aucune activité de vidange préconisée
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6446:
@@ -1778,7 +1737,6 @@ OperatorDocument_6446:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 342
@@ -1795,7 +1753,6 @@ OperatorDocument_6449:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 344
@@ -1813,7 +1770,7 @@ OperatorDocument_6455:
   operator_id: 151
   uploaded_by: operator
   reason: l'autorisation de coupe annuelle délivrée
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6458:
@@ -1829,7 +1786,7 @@ OperatorDocument_6458:
   operator_id: 151
   uploaded_by: operator
   reason: pas de vidange existante
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6656:
@@ -1843,7 +1800,6 @@ OperatorDocument_6656:
   status: doc_expired
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 345
@@ -1859,7 +1815,6 @@ OperatorDocument_6658:
   status: doc_expired
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 346
@@ -1875,7 +1830,6 @@ OperatorDocument_6659:
   status: doc_expired
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 347
@@ -1891,7 +1845,6 @@ OperatorDocument_6661:
   status: doc_expired
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 348
@@ -1907,7 +1860,6 @@ OperatorDocument_6664:
   status: doc_expired
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 349
@@ -1923,7 +1875,6 @@ OperatorDocument_6665:
   status: doc_expired
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 350
@@ -1939,7 +1890,7 @@ OperatorDocument_6731:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2461
 
@@ -1954,7 +1905,7 @@ OperatorDocument_6732:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2999
 
@@ -1969,7 +1920,7 @@ OperatorDocument_6733:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4167
 
@@ -1984,7 +1935,7 @@ OperatorDocument_6734:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4168
 
@@ -1999,7 +1950,7 @@ OperatorDocument_6735:
   status: doc_valid
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4102
 
@@ -2015,7 +1966,7 @@ OperatorDocument_6736:
   status: doc_expired
   operator_id: 165
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4096
 
@@ -2030,7 +1981,6 @@ OperatorDocument_6765:
   status: doc_expired
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 372
@@ -2046,7 +1996,6 @@ OperatorDocument_6783:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 374
@@ -2062,7 +2011,6 @@ OperatorDocument_6785:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 375
@@ -2078,7 +2026,7 @@ OperatorDocument_6786:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1942
 
@@ -2093,7 +2041,6 @@ OperatorDocument_6788:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 376
@@ -2109,7 +2056,6 @@ OperatorDocument_6790:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 377
@@ -2125,7 +2071,6 @@ OperatorDocument_6791:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 378
@@ -2141,7 +2086,6 @@ OperatorDocument_6794:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 379
@@ -2158,7 +2102,6 @@ OperatorDocument_6795:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 380
@@ -2175,7 +2118,6 @@ OperatorDocument_6802:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 382
@@ -2192,7 +2134,6 @@ OperatorDocument_6803:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 383
@@ -2209,7 +2150,6 @@ OperatorDocument_6804:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 384
@@ -2226,7 +2166,6 @@ OperatorDocument_6812:
   status: doc_valid
   operator_id: 161
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 386
@@ -2243,7 +2182,7 @@ OperatorDocument_6818:
   status: doc_expired
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2960
 
@@ -2261,7 +2200,7 @@ OperatorDocument_6819:
   uploaded_by: other
   reason: Le rapport d'évaluation finale de la mise en oeuvre du plan d'aménagement
     sera exigée à la fin de la rotation, après 25 ans minimum (après 2041).
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6868:
@@ -2275,7 +2214,7 @@ OperatorDocument_6868:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4284
 
@@ -2291,7 +2230,7 @@ OperatorDocument_6968:
   status: doc_expired
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4580
 
@@ -2306,7 +2245,7 @@ OperatorDocument_6972:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4587
 
@@ -2321,7 +2260,7 @@ OperatorDocument_6973:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4638
 
@@ -2336,7 +2275,7 @@ OperatorDocument_6974:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4588
 
@@ -2351,7 +2290,7 @@ OperatorDocument_6975:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4639
 
@@ -2366,7 +2305,7 @@ OperatorDocument_6977:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4636
 
@@ -2381,7 +2320,7 @@ OperatorDocument_6978:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4640
 
@@ -2397,7 +2336,7 @@ OperatorDocument_6982:
   status: doc_invalid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_6983:
@@ -2412,7 +2351,6 @@ OperatorDocument_6983:
   status: doc_expired
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 426
@@ -2428,7 +2366,6 @@ OperatorDocument_7008:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 443
@@ -2445,7 +2382,7 @@ OperatorDocument_7274:
   status: doc_invalid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_7278:
@@ -2459,7 +2396,7 @@ OperatorDocument_7278:
   updated_at: 2023-08-13 13:53:39 UTC
   status: doc_invalid
   operator_id: 197
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_7283:
@@ -2475,7 +2412,6 @@ OperatorDocument_7283:
   operator_id: 151
   uploaded_by: other
   reason: Exigible en fin de convention ou de rotation
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2492,7 +2428,6 @@ OperatorDocument_7284:
   operator_id: 151
   uploaded_by: other
   reason: Exigible en fin de convention
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2509,7 +2444,7 @@ OperatorDocument_7414:
   operator_id: 151
   uploaded_by: operator
   reason: l'autorisation annuelle délivrée
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_7418:
@@ -2525,7 +2460,7 @@ OperatorDocument_7418:
   operator_id: 151
   uploaded_by: operator
   reason: l'autorisation annuelle délivrée
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_7424:
@@ -2540,7 +2475,7 @@ OperatorDocument_7424:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3098
 
@@ -2553,7 +2488,6 @@ OperatorDocument_15402:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2567,7 +2501,6 @@ OperatorDocument_15529:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2581,7 +2514,6 @@ OperatorDocument_15567:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2595,7 +2527,6 @@ OperatorDocument_15802:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2609,7 +2540,6 @@ OperatorDocument_15830:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2623,7 +2553,6 @@ OperatorDocument_15840:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2637,7 +2566,6 @@ OperatorDocument_15893:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2651,7 +2579,6 @@ OperatorDocument_15921:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2665,7 +2592,6 @@ OperatorDocument_15931:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2679,7 +2605,6 @@ OperatorDocument_16043:
   status: doc_not_provided
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2692,7 +2617,6 @@ OperatorDocument_16274:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2705,7 +2629,6 @@ OperatorDocument_16346:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2719,7 +2642,6 @@ OperatorDocument_16401:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2733,7 +2655,6 @@ OperatorDocument_16429:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2747,7 +2668,6 @@ OperatorDocument_16439:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2763,7 +2683,7 @@ OperatorDocument_16463:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2141
 
@@ -2777,7 +2697,6 @@ OperatorDocument_16492:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2791,7 +2710,6 @@ OperatorDocument_16520:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2805,7 +2723,6 @@ OperatorDocument_16530:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2818,7 +2735,6 @@ OperatorDocument_16600:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2831,7 +2747,6 @@ OperatorDocument_16672:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2844,7 +2759,6 @@ OperatorDocument_16744:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2857,7 +2771,6 @@ OperatorDocument_16907:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2870,7 +2783,6 @@ OperatorDocument_16979:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -2885,7 +2797,6 @@ OperatorDocument_18887:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 526
@@ -2902,7 +2813,6 @@ OperatorDocument_18890:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 527
@@ -2923,7 +2833,7 @@ OperatorDocument_18918:
     forestière , ce type acquisition de titre ne passe pas par une nouvelle convention
     provisoire. Nous sommes dans la continuité de la mise en œuvre du plan d''aménagement
     du précédent concessionnaire. '
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_18923:
@@ -2938,7 +2848,6 @@ OperatorDocument_18923:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 541
@@ -2955,7 +2864,6 @@ OperatorDocument_18924:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 542
@@ -2972,7 +2880,6 @@ OperatorDocument_18925:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 543
@@ -2989,7 +2896,6 @@ OperatorDocument_18926:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 544
@@ -3006,7 +2912,6 @@ OperatorDocument_18928:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 545
@@ -3023,7 +2928,6 @@ OperatorDocument_18929:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 546
@@ -3038,7 +2942,6 @@ OperatorDocument_18935:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -3054,7 +2957,6 @@ OperatorDocument_18937:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 549
@@ -3071,7 +2973,6 @@ OperatorDocument_18938:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 550
@@ -3088,7 +2989,6 @@ OperatorDocument_18939:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 551
@@ -3105,7 +3005,6 @@ OperatorDocument_18941:
   status: doc_valid
   operator_id: 10604
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 552
@@ -3122,7 +3021,6 @@ OperatorDocument_18943:
   status: doc_valid
   operator_id: 10604
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 553
@@ -3139,7 +3037,6 @@ OperatorDocument_18988:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 577
@@ -3156,7 +3053,6 @@ OperatorDocument_18991:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 578
@@ -3173,7 +3069,6 @@ OperatorDocument_18992:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 579
@@ -3190,7 +3085,6 @@ OperatorDocument_18993:
   status: doc_pending
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 580
@@ -3205,7 +3099,6 @@ OperatorDocument_19068:
   status: doc_not_provided
   operator_id: 10604
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -3220,7 +3113,8 @@ OperatorDocument_19071:
   updated_at: 2021-04-28 11:38:52 UTC
   status: doc_not_provided
   operator_id: 10589
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_19150:
   id: 19150
@@ -3234,7 +3128,6 @@ OperatorDocument_19150:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 600
@@ -3251,7 +3144,6 @@ OperatorDocument_19298:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 602
@@ -3268,7 +3160,6 @@ OperatorDocument_19304:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 606
@@ -3285,7 +3176,6 @@ OperatorDocument_19305:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 607
@@ -3302,7 +3192,6 @@ OperatorDocument_19307:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 609
@@ -3319,7 +3208,6 @@ OperatorDocument_19308:
   status: doc_valid
   operator_id: 10615
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 610
@@ -3336,7 +3224,6 @@ OperatorDocument_19325:
   status: doc_valid
   operator_id: 10589
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 620
@@ -3353,7 +3240,6 @@ OperatorDocument_19326:
   status: doc_valid
   operator_id: 10589
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 621
@@ -3370,7 +3256,6 @@ OperatorDocument_19354:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 646
@@ -3386,7 +3271,8 @@ OperatorDocument_19355:
   updated_at: 2023-05-16 01:04:04 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_19357:
   id: 19357
@@ -3400,7 +3286,6 @@ OperatorDocument_19357:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 648
@@ -3416,7 +3301,6 @@ OperatorDocument_19358:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 649
@@ -3433,7 +3317,6 @@ OperatorDocument_19359:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 650
@@ -3450,7 +3333,6 @@ OperatorDocument_19360:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 651
@@ -3464,7 +3346,6 @@ OperatorDocument_19485:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -3478,7 +3359,8 @@ OperatorDocument_20009:
   updated_at: 2022-04-25 09:26:47 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_20010:
   id: 20010
@@ -3492,7 +3374,7 @@ OperatorDocument_20010:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2104
 
@@ -3507,7 +3389,8 @@ OperatorDocument_20013:
   updated_at: 2023-12-13 01:04:06 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_20014:
   id: 20014
@@ -3521,7 +3404,7 @@ OperatorDocument_20014:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 741
 
@@ -3537,7 +3420,7 @@ OperatorDocument_20015:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3798
 
@@ -3553,7 +3436,7 @@ OperatorDocument_20016:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3797
 
@@ -3569,7 +3452,6 @@ OperatorDocument_20017:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 744
@@ -3586,7 +3468,7 @@ OperatorDocument_20018:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2105
 
@@ -3602,7 +3484,7 @@ OperatorDocument_20019:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 746
 
@@ -3619,7 +3501,6 @@ OperatorDocument_20022:
   operator_id: 10623
   uploaded_by: other
   reason: L'UGF en question est exploitée en propre
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -3634,7 +3515,8 @@ OperatorDocument_20023:
   updated_at: 2023-12-13 01:04:06 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_20024:
   id: 20024
@@ -3647,7 +3529,8 @@ OperatorDocument_20024:
   updated_at: 2023-12-13 01:04:06 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_20025:
   id: 20025
@@ -3660,7 +3543,6 @@ OperatorDocument_20025:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 748
@@ -3676,7 +3558,7 @@ OperatorDocument_20026:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2377
 
@@ -3691,7 +3573,7 @@ OperatorDocument_20028:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2384
 
@@ -3706,7 +3588,7 @@ OperatorDocument_20029:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2119
 
@@ -3721,7 +3603,7 @@ OperatorDocument_20030:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2378
 
@@ -3738,7 +3620,7 @@ OperatorDocument_20117:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement de coupe applicable
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_20124:
@@ -3753,7 +3635,7 @@ OperatorDocument_20124:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3636
 
@@ -3770,7 +3652,7 @@ OperatorDocument_20126:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement applicable
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_20128:
@@ -3786,7 +3668,7 @@ OperatorDocument_20128:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement de coupe applicable
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_20130:
@@ -3802,7 +3684,7 @@ OperatorDocument_20130:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement de coupe applicable
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_20132:
@@ -3817,7 +3699,6 @@ OperatorDocument_20132:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 803
@@ -3834,7 +3715,7 @@ OperatorDocument_20474:
   status: doc_invalid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_20532:
@@ -3850,7 +3731,7 @@ OperatorDocument_20532:
   operator_id: 151
   uploaded_by: operator
   reason: pas d'achèvement applicable
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_20552:
@@ -3865,7 +3746,6 @@ OperatorDocument_20552:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 815
@@ -3882,7 +3762,6 @@ OperatorDocument_20553:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 816
@@ -3898,7 +3777,6 @@ OperatorDocument_20652:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 819
@@ -3915,7 +3793,6 @@ OperatorDocument_20657:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 824
@@ -3932,7 +3809,7 @@ OperatorDocument_20662:
   status: doc_invalid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4359
 
@@ -3948,7 +3825,6 @@ OperatorDocument_20693:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 829
@@ -3965,7 +3841,7 @@ OperatorDocument_20697:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3953
 
@@ -3980,7 +3856,8 @@ OperatorDocument_20698:
   updated_at: 2024-01-01 01:04:12 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_20699:
   id: 20699
@@ -3993,7 +3870,8 @@ OperatorDocument_20699:
   updated_at: 2023-04-26 01:04:03 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_20710:
   id: 20710
@@ -4007,7 +3885,7 @@ OperatorDocument_20710:
   status: doc_invalid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_20716:
@@ -4021,7 +3899,7 @@ OperatorDocument_20716:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3805
 
@@ -4039,7 +3917,6 @@ OperatorDocument_20718:
   uploaded_by: other
   reason: 'le plan de gestion provisoire a été approuvé en  2013, et celui-ci n''était
     plus valide en 2017. Le plan d''aménagement reste le seul  document en vigueur '
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4055,7 +3932,6 @@ OperatorDocument_20721:
   status: doc_expired
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 844
@@ -4071,7 +3947,6 @@ OperatorDocument_20769:
   status: doc_valid
   operator_id: 151
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 869
@@ -4087,7 +3962,8 @@ OperatorDocument_21333:
   updated_at: 2023-01-02 13:30:33 UTC
   status: doc_not_provided
   operator_id: 197
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_21524:
   id: 21524
@@ -4100,7 +3976,8 @@ OperatorDocument_21524:
   updated_at: 2022-11-28 16:47:36 UTC
   status: doc_not_provided
   operator_id: 197
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_21580:
   id: 21580
@@ -4114,7 +3991,7 @@ OperatorDocument_21580:
   status: doc_invalid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_21643:
@@ -4128,7 +4005,7 @@ OperatorDocument_21643:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3686
 
@@ -4143,7 +4020,7 @@ OperatorDocument_21678:
   status: doc_expired
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4637
 
@@ -4158,7 +4035,7 @@ OperatorDocument_21826:
   status: doc_expired
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 942
 
@@ -4173,7 +4050,6 @@ OperatorDocument_21859:
   status: doc_expired
   operator_id: 172
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 961
@@ -4189,7 +4065,6 @@ OperatorDocument_21862:
   status: doc_valid
   operator_id: 172
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 962
@@ -4205,7 +4080,6 @@ OperatorDocument_21863:
   status: doc_expired
   operator_id: 172
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 963
@@ -4221,7 +4095,6 @@ OperatorDocument_21864:
   status: doc_expired
   operator_id: 172
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 964
@@ -4237,7 +4110,6 @@ OperatorDocument_21865:
   status: doc_expired
   operator_id: 172
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 965
@@ -4253,7 +4125,6 @@ OperatorDocument_21870:
   status: doc_expired
   operator_id: 172
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 966
@@ -4270,7 +4141,7 @@ OperatorDocument_21890:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4381
 
@@ -4286,7 +4157,7 @@ OperatorDocument_21891:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1941
 
@@ -4302,7 +4173,7 @@ OperatorDocument_21892:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4694
 
@@ -4321,7 +4192,7 @@ OperatorDocument_21893:
   reason: 'Car les activités du plan de gestion quinquennal (PGQ1) de cette concession
     005/18 est en cours de sa période de validité de 5 ans (21 novembre 2019 au 21
     novembre 2024). '
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_21894:
@@ -4336,7 +4207,7 @@ OperatorDocument_21894:
   status: doc_expired
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4234
 
@@ -4352,7 +4223,7 @@ OperatorDocument_21895:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1940
 
@@ -4368,7 +4239,7 @@ OperatorDocument_21896:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1939
 
@@ -4384,7 +4255,7 @@ OperatorDocument_21897:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1947
 
@@ -4400,7 +4271,6 @@ OperatorDocument_21898:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1959
@@ -4417,7 +4287,7 @@ OperatorDocument_21899:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1946
 
@@ -4433,7 +4303,7 @@ OperatorDocument_21900:
   status: doc_expired
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4579
 
@@ -4449,7 +4319,7 @@ OperatorDocument_21901:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3508
 
@@ -4465,7 +4335,7 @@ OperatorDocument_21902:
   status: doc_expired
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4233
 
@@ -4481,7 +4351,7 @@ OperatorDocument_21903:
   status: doc_expired
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4235
 
@@ -4497,7 +4367,7 @@ OperatorDocument_21904:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1960
 
@@ -4513,7 +4383,7 @@ OperatorDocument_21905:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1954
 
@@ -4535,7 +4405,7 @@ OperatorDocument_21906:
     détient un plan de gestion quinquennal qui a été déposé et validé en date du 21
     novembre 2019. Cette concession possède des plans annuels d'opérations forestières
     acceptés par l'administration forestière.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_21907:
@@ -4550,7 +4420,7 @@ OperatorDocument_21907:
   status: doc_valid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4577
 
@@ -4568,7 +4438,7 @@ OperatorDocument_21908:
   uploaded_by: operator
   reason: parce que la concession forestière 005/18 n'est pas une concession de donation
     ou d'échange, non plus d'une location et d'une cession.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_21909:
@@ -4582,7 +4452,7 @@ OperatorDocument_21909:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4688
 
@@ -4597,7 +4467,7 @@ OperatorDocument_21935:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2923
 
@@ -4612,8 +4482,8 @@ OperatorDocument_21936:
   updated_at: 2022-12-12 14:57:46 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21937:
   id: 21937
@@ -4626,8 +4496,8 @@ OperatorDocument_21937:
   updated_at: 2022-12-12 14:57:46 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21938:
   id: 21938
@@ -4640,8 +4510,8 @@ OperatorDocument_21938:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21939:
   id: 21939
@@ -4654,8 +4524,8 @@ OperatorDocument_21939:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21940:
   id: 21940
@@ -4668,8 +4538,8 @@ OperatorDocument_21940:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21941:
   id: 21941
@@ -4682,8 +4552,8 @@ OperatorDocument_21941:
   updated_at: 2022-05-03 15:45:49 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21942:
   id: 21942
@@ -4697,7 +4567,7 @@ OperatorDocument_21942:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2924
 
@@ -4712,8 +4582,8 @@ OperatorDocument_21943:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21944:
   id: 21944
@@ -4726,8 +4596,8 @@ OperatorDocument_21944:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21945:
   id: 21945
@@ -4740,8 +4610,8 @@ OperatorDocument_21945:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21946:
   id: 21946
@@ -4754,8 +4624,8 @@ OperatorDocument_21946:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21948:
   id: 21948
@@ -4768,8 +4638,8 @@ OperatorDocument_21948:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21952:
   id: 21952
@@ -4784,7 +4654,6 @@ OperatorDocument_21952:
   operator_id: 145
   uploaded_by: operator
   reason: La société dispose d'une CTI valide jusqu'au 23 août 2027.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4800,7 +4669,6 @@ OperatorDocument_21954:
   status: doc_valid
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 986
@@ -4817,7 +4685,6 @@ OperatorDocument_21955:
   status: doc_valid
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 987
@@ -4836,7 +4703,6 @@ OperatorDocument_21959:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'aménagement et d'un conseil de concertation.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4854,7 +4720,6 @@ OperatorDocument_21960:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'aménagement et d'un fonds de développement local.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4872,7 +4737,6 @@ OperatorDocument_21961:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4890,7 +4754,6 @@ OperatorDocument_21962:
   uploaded_by: operator
   reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4908,7 +4771,6 @@ OperatorDocument_21963:
   uploaded_by: operator
   reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4923,8 +4785,8 @@ OperatorDocument_21965:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21967:
   id: 21967
@@ -4940,7 +4802,6 @@ OperatorDocument_21967:
   uploaded_by: operator
   reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4958,7 +4819,6 @@ OperatorDocument_21968:
   uploaded_by: operator
   reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.\n\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4976,7 +4836,6 @@ OperatorDocument_21969:
   uploaded_by: operator
   reason: "La convention est va;lide jusqu'au 23 /08/2027. Donc il ne peut pas  encore
     avoir de vidange \r\n\r\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -4994,7 +4853,6 @@ OperatorDocument_21971:
   uploaded_by: operator
   reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo .\n\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5012,7 +4870,6 @@ OperatorDocument_21972:
   uploaded_by: operator
   reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo.\n\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5030,7 +4887,6 @@ OperatorDocument_21973:
   uploaded_by: operator
   reason: "La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo.\n\n"
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5048,7 +4904,6 @@ OperatorDocument_21974:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5066,7 +4921,6 @@ OperatorDocument_21975:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5084,7 +4938,6 @@ OperatorDocument_21976:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5102,7 +4955,6 @@ OperatorDocument_21977:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5120,7 +4972,6 @@ OperatorDocument_21978:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5138,7 +4989,6 @@ OperatorDocument_21981:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'aménagement et d'un conseil de concertation.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5156,7 +5006,6 @@ OperatorDocument_21982:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation de contribuer au fonds de développement local.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5174,7 +5023,6 @@ OperatorDocument_21983:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5192,7 +5040,6 @@ OperatorDocument_21984:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5210,7 +5057,6 @@ OperatorDocument_21985:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5225,8 +5071,8 @@ OperatorDocument_21986:
   updated_at: 2022-12-12 14:57:43 UTC
   status: doc_not_provided
   operator_id: 145
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_21988:
   id: 21988
@@ -5242,7 +5088,6 @@ OperatorDocument_21988:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5260,7 +5105,6 @@ OperatorDocument_21990:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo et ne sont plus exploitées en 2020.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5278,7 +5122,6 @@ OperatorDocument_21991:
   uploaded_by: operator
   reason: La CTI est valide jusqu' au 23 aout  2027, donc il ne peut pas encore avoir
     de vidange
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5296,7 +5139,6 @@ OperatorDocument_21992:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5314,7 +5156,6 @@ OperatorDocument_21993:
   uploaded_by: operator
   reason: La société Afriwood a demandé depuis le 8 avril 2019, un retour au domaine
     des concessions de Doumanga et Cayo.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5332,7 +5173,6 @@ OperatorDocument_21996:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5350,7 +5190,6 @@ OperatorDocument_21997:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5368,7 +5207,6 @@ OperatorDocument_21998:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5386,7 +5224,6 @@ OperatorDocument_21999:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5404,7 +5241,6 @@ OperatorDocument_22000:
   uploaded_by: operator
   reason: Le titre d'exploitation de la concession Doumanga est une CTI et non une
     CAT avec obligation d'élaborer un plan d'aménagement.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5420,7 +5256,6 @@ OperatorDocument_22003:
   status: doc_valid
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 988
@@ -5438,7 +5273,6 @@ OperatorDocument_22004:
   operator_id: 145
   uploaded_by: operator
   reason: Le permis de la concession de Nkola est une CAT.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5454,7 +5288,6 @@ OperatorDocument_22005:
   status: doc_valid
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 989
@@ -5471,7 +5304,6 @@ OperatorDocument_22007:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 990
@@ -5488,7 +5320,6 @@ OperatorDocument_22008:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 991
@@ -5505,7 +5336,6 @@ OperatorDocument_22009:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 992
@@ -5520,7 +5350,6 @@ OperatorDocument_22014:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5534,7 +5363,6 @@ OperatorDocument_22015:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5548,7 +5376,6 @@ OperatorDocument_22016:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5562,7 +5389,6 @@ OperatorDocument_22017:
   status: doc_not_provided
   operator_id: 145
   uploaded_by: other
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5578,7 +5404,6 @@ OperatorDocument_22019:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 993
@@ -5596,7 +5421,6 @@ OperatorDocument_22020:
   operator_id: 145
   uploaded_by: operator
   reason: La société dispose d'une CAT en cours de validité.
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5611,7 +5435,6 @@ OperatorDocument_22025:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 996
@@ -5628,7 +5451,7 @@ OperatorDocument_22026:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3157
 
@@ -5645,7 +5468,6 @@ OperatorDocument_22027:
   operator_id: 145
   uploaded_by: operator
   reason: La société dispose d'une CAT en cours de validité
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5661,7 +5483,6 @@ OperatorDocument_22029:
   status: doc_invalid
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 998
@@ -5677,7 +5498,6 @@ OperatorDocument_22031:
   status: doc_expired
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 999
@@ -5694,7 +5514,6 @@ OperatorDocument_22032:
   operator_id: 145
   uploaded_by: operator
   reason: 'La société dispose d''une CAT et assure elle même le transport de son bois.  '
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -5709,7 +5528,7 @@ OperatorDocument_22230:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3650
 
@@ -5724,7 +5543,7 @@ OperatorDocument_22231:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3799
 
@@ -5739,7 +5558,7 @@ OperatorDocument_22232:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3950
 
@@ -5754,7 +5573,7 @@ OperatorDocument_22237:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4224
 
@@ -5770,7 +5589,6 @@ OperatorDocument_22388:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1112
@@ -5787,7 +5605,6 @@ OperatorDocument_22389:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1113
@@ -5804,7 +5621,6 @@ OperatorDocument_22390:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1114
@@ -5821,7 +5637,7 @@ OperatorDocument_22394:
   status: doc_invalid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3634
 
@@ -5837,7 +5653,7 @@ OperatorDocument_22396:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3556
 
@@ -5853,7 +5669,7 @@ OperatorDocument_22401:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3635
 
@@ -5869,7 +5685,7 @@ OperatorDocument_22478:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4795
 
@@ -5885,7 +5701,7 @@ OperatorDocument_22486:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1143
 
@@ -5901,7 +5717,7 @@ OperatorDocument_22489:
   status: doc_expired
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3719
 
@@ -5917,7 +5733,7 @@ OperatorDocument_22497:
   status: doc_expired
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3720
 
@@ -5932,7 +5748,7 @@ OperatorDocument_22512:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4691
 
@@ -5948,7 +5764,6 @@ OperatorDocument_22522:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1159
@@ -5965,7 +5780,7 @@ OperatorDocument_22524:
   status: doc_invalid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3678
 
@@ -5981,7 +5796,7 @@ OperatorDocument_22526:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2949
 
@@ -5997,7 +5812,7 @@ OperatorDocument_22527:
   status: doc_invalid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_22528:
@@ -6011,8 +5826,8 @@ OperatorDocument_22528:
   updated_at: 2022-11-25 09:20:56 UTC
   status: doc_not_provided
   operator_id: 151
-  note: Lorem ipsum for note
   public: true
+  source: company
 
 OperatorDocument_22529:
   id: 22529
@@ -6026,7 +5841,6 @@ OperatorDocument_22529:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1164
@@ -6043,7 +5857,6 @@ OperatorDocument_22530:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1165
@@ -6060,7 +5873,6 @@ OperatorDocument_22533:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1166
@@ -6077,7 +5889,6 @@ OperatorDocument_22535:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1167
@@ -6094,7 +5905,6 @@ OperatorDocument_22536:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1168
@@ -6111,7 +5921,6 @@ OperatorDocument_22537:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1169
@@ -6128,7 +5937,6 @@ OperatorDocument_22539:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
   public: true
   source: company
   document_file_id: 1171
@@ -6144,7 +5952,7 @@ OperatorDocument_22546:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3973
 
@@ -6159,7 +5967,7 @@ OperatorDocument_22576:
   status: doc_valid
   operator_id: 165
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2379
 
@@ -6174,7 +5982,7 @@ OperatorDocument_22601:
   status: doc_valid
   operator_id: 172
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1177
 
@@ -6189,7 +5997,7 @@ OperatorDocument_22603:
   status: doc_valid
   operator_id: 161
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1179
 
@@ -6204,7 +6012,7 @@ OperatorDocument_22605:
   status: doc_valid
   operator_id: 145
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3110
 
@@ -6219,7 +6027,7 @@ OperatorDocument_22649:
   status: doc_valid
   operator_id: 197
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1186
 
@@ -6232,7 +6040,7 @@ OperatorDocument_22733:
   status: doc_not_provided
   operator_id: 10637
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_22775:
@@ -6246,7 +6054,7 @@ OperatorDocument_22775:
   status: doc_valid
   operator_id: 10623
   uploaded_by: other
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1189
 
@@ -6262,7 +6070,7 @@ OperatorDocument_23495:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1223
 
@@ -6278,7 +6086,7 @@ OperatorDocument_23496:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1224
 
@@ -6294,7 +6102,7 @@ OperatorDocument_23497:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1225
 
@@ -6310,7 +6118,7 @@ OperatorDocument_23498:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1226
 
@@ -6326,7 +6134,7 @@ OperatorDocument_23499:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1227
 
@@ -6342,7 +6150,7 @@ OperatorDocument_23500:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1228
 
@@ -6358,7 +6166,7 @@ OperatorDocument_23501:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1229
 
@@ -6374,7 +6182,7 @@ OperatorDocument_23502:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1230
 
@@ -6390,7 +6198,7 @@ OperatorDocument_23503:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1231
 
@@ -6406,7 +6214,7 @@ OperatorDocument_23504:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1232
 
@@ -6422,7 +6230,7 @@ OperatorDocument_23505:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1233
 
@@ -6438,7 +6246,7 @@ OperatorDocument_23506:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1234
 
@@ -6454,7 +6262,7 @@ OperatorDocument_23507:
   status: doc_pending
   operator_id: 10637
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1235
 
@@ -6470,7 +6278,7 @@ OperatorDocument_23542:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1262
 
@@ -6485,7 +6293,7 @@ OperatorDocument_23647:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1303
 
@@ -6500,7 +6308,7 @@ OperatorDocument_23648:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4404
 
@@ -6515,7 +6323,7 @@ OperatorDocument_23664:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1313
 
@@ -6530,7 +6338,7 @@ OperatorDocument_23670:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2782
 
@@ -6545,7 +6353,7 @@ OperatorDocument_23671:
   status: doc_expired
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1317
 
@@ -6560,7 +6368,7 @@ OperatorDocument_23672:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1318
 
@@ -6575,7 +6383,7 @@ OperatorDocument_23673:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1319
 
@@ -6589,7 +6397,7 @@ OperatorDocument_23674:
   updated_at: 2023-11-30 04:00:09 UTC
   status: doc_valid
   operator_id: 10615
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4627
 
@@ -6605,7 +6413,7 @@ OperatorDocument_23675:
   status: doc_expired
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3006
 
@@ -6621,7 +6429,7 @@ OperatorDocument_23678:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1322
 
@@ -6637,7 +6445,7 @@ OperatorDocument_23679:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1323
 
@@ -6653,7 +6461,7 @@ OperatorDocument_23681:
   status: doc_expired
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3005
 
@@ -6669,7 +6477,7 @@ OperatorDocument_23690:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1326
 
@@ -6685,7 +6493,7 @@ OperatorDocument_23691:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1327
 
@@ -6701,7 +6509,7 @@ OperatorDocument_23706:
   status: doc_expired
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3004
 
@@ -6717,7 +6525,7 @@ OperatorDocument_23709:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1334
 
@@ -6733,7 +6541,7 @@ OperatorDocument_23710:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1335
 
@@ -6749,7 +6557,7 @@ OperatorDocument_23712:
   status: doc_expired
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3007
 
@@ -6765,7 +6573,7 @@ OperatorDocument_23716:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1338
 
@@ -6781,7 +6589,7 @@ OperatorDocument_23717:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1339
 
@@ -6796,7 +6604,7 @@ OperatorDocument_23720:
   status: doc_valid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1341
 
@@ -6811,7 +6619,7 @@ OperatorDocument_23725:
   status: doc_expired
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1345
 
@@ -6826,7 +6634,7 @@ OperatorDocument_23726:
   status: doc_valid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1346
 
@@ -6841,7 +6649,7 @@ OperatorDocument_23727:
   status: doc_valid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2783
 
@@ -6856,7 +6664,7 @@ OperatorDocument_23728:
   status: doc_valid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1348
 
@@ -6870,7 +6678,7 @@ OperatorDocument_23729:
   updated_at: 2023-11-30 03:58:42 UTC
   status: doc_valid
   operator_id: 10589
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4628
 
@@ -6886,7 +6694,7 @@ OperatorDocument_23739:
   status: doc_invalid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1357
 
@@ -6902,7 +6710,7 @@ OperatorDocument_23740:
   status: doc_valid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1358
 
@@ -6917,7 +6725,7 @@ OperatorDocument_23773:
   status: doc_valid
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1367
 
@@ -6933,7 +6741,7 @@ OperatorDocument_23776:
   operator_id: 10604
   reason: SAB ne fait pas d'exportation, sa production est entièrement reprise par
     SEBC, voir contrat de sous-traitance.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23778:
@@ -6946,7 +6754,8 @@ OperatorDocument_23778:
   updated_at: 2024-01-10 14:56:58 UTC
   status: doc_not_provided
   operator_id: 10604
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_23779:
   id: 23779
@@ -6959,7 +6768,7 @@ OperatorDocument_23779:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1370
 
@@ -6974,7 +6783,7 @@ OperatorDocument_23780:
   status: doc_valid
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1371
 
@@ -6989,7 +6798,7 @@ OperatorDocument_23781:
   status: doc_valid
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1372
 
@@ -7003,7 +6812,8 @@ OperatorDocument_23782:
   updated_at: 2024-01-10 14:56:58 UTC
   status: doc_not_provided
   operator_id: 10604
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_23783:
   id: 23783
@@ -7017,7 +6827,7 @@ OperatorDocument_23783:
   status: doc_invalid
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1374
 
@@ -7033,7 +6843,7 @@ OperatorDocument_23787:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2544
 
@@ -7049,7 +6859,7 @@ OperatorDocument_23788:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2473
 
@@ -7065,7 +6875,7 @@ OperatorDocument_23789:
   status: doc_valid
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1377
 
@@ -7081,7 +6891,7 @@ OperatorDocument_23790:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2188
 
@@ -7097,7 +6907,7 @@ OperatorDocument_23792:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2185
 
@@ -7113,7 +6923,7 @@ OperatorDocument_23794:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2186
 
@@ -7130,7 +6940,7 @@ OperatorDocument_23797:
   operator_id: 10615
   uploaded_by: operator
   reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23798:
@@ -7145,7 +6955,7 @@ OperatorDocument_23798:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2189
 
@@ -7162,7 +6972,7 @@ OperatorDocument_23799:
   operator_id: 10615
   uploaded_by: operator
   reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23800:
@@ -7178,7 +6988,7 @@ OperatorDocument_23800:
   operator_id: 10615
   uploaded_by: operator
   reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23817:
@@ -7195,7 +7005,7 @@ OperatorDocument_23817:
   uploaded_by: operator
   reason: La société d'exploitation des bois du Cameroun n'est plus en convention
     provisoire d'exploitation.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23820:
@@ -7210,7 +7020,7 @@ OperatorDocument_23820:
   status: doc_invalid
   operator_id: 197
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23869:
@@ -7228,7 +7038,7 @@ OperatorDocument_23869:
   reason: 'La compagnie forestière du Cameroun n''a pas de contrat de sous-traitance
     pour la gestion de ses activités d''exploitation forestière dans sa concession
     forestière. '
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23870:
@@ -7246,7 +7056,7 @@ OperatorDocument_23870:
   reason: La compagnie forestière du Cameroun n'a pas de contrat de sous-traitance
     pour la gestion de ses activités d'exploitation forestière dans sa concession
     forestière.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23871:
@@ -7264,7 +7074,7 @@ OperatorDocument_23871:
   reason: La compagnie forestière du Cameroun n'a pas de contrat de sous-traitance
     pour la gestion de ses activités d'exploitation forestière dans sa concession
     forestière.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23872:
@@ -7282,7 +7092,7 @@ OperatorDocument_23872:
   reason: La compagnie forestière du Cameroun n'a pas de contrat de sous-traitance
     pour la gestion de ses activités d'exploitation forestière dans sa concession
     forestière.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23917:
@@ -7297,7 +7107,7 @@ OperatorDocument_23917:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2530
 
@@ -7313,7 +7123,7 @@ OperatorDocument_23919:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1413
 
@@ -7330,7 +7140,7 @@ OperatorDocument_23920:
   operator_id: 10604
   uploaded_by: operator
   reason: La société africaine des bois n'est plus en convention provisoire d'exploitation.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23923:
@@ -7346,7 +7156,7 @@ OperatorDocument_23923:
   operator_id: 10615
   uploaded_by: operator
   reason: La compagnie forestière du Cameroun est en convention définitive d'exploitation.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23927:
@@ -7360,7 +7170,7 @@ OperatorDocument_23927:
   status: doc_valid
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1416
 
@@ -7377,7 +7187,7 @@ OperatorDocument_23929:
   operator_id: 10604
   uploaded_by: operator
   reason: La Société africaine des bois exploite elle même son unité forestière d'aménagement.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23931:
@@ -7394,7 +7204,7 @@ OperatorDocument_23931:
   uploaded_by: operator
   reason: La société d'exploitation des bois du Cameroun exploite elle même son unité
     forestière d'aménagement.
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_23965:
@@ -7408,7 +7218,7 @@ OperatorDocument_23965:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1437
 
@@ -7423,7 +7233,7 @@ OperatorDocument_23967:
   status: doc_valid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1438
 
@@ -7438,7 +7248,7 @@ OperatorDocument_24033:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1484
 
@@ -7453,7 +7263,7 @@ OperatorDocument_24034:
   status: doc_valid
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1485
 
@@ -7468,7 +7278,7 @@ OperatorDocument_24035:
   status: doc_valid
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1486
 
@@ -7483,7 +7293,7 @@ OperatorDocument_116294:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1620
 
@@ -7498,7 +7308,7 @@ OperatorDocument_116295:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1621
 
@@ -7513,7 +7323,7 @@ OperatorDocument_116378:
   updated_at: 2024-01-18 10:23:14 UTC
   status: doc_valid
   operator_id: 10615
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4786
 
@@ -7528,7 +7338,7 @@ OperatorDocument_116379:
   updated_at: 2024-01-18 10:23:56 UTC
   status: doc_valid
   operator_id: 10615
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4785
 
@@ -7543,7 +7353,7 @@ OperatorDocument_116380:
   updated_at: 2024-01-18 10:22:55 UTC
   status: doc_valid
   operator_id: 10615
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4787
 
@@ -7558,7 +7368,7 @@ OperatorDocument_116381:
   updated_at: 2024-01-18 10:24:13 UTC
   status: doc_valid
   operator_id: 10615
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4784
 
@@ -7573,7 +7383,7 @@ OperatorDocument_116384:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2672
 
@@ -7589,7 +7399,7 @@ OperatorDocument_116422:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4692
 
@@ -7604,7 +7414,7 @@ OperatorDocument_116423:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4741
 
@@ -7619,7 +7429,7 @@ OperatorDocument_116424:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4690
 
@@ -7635,7 +7445,7 @@ OperatorDocument_116425:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4742
 
@@ -7651,7 +7461,7 @@ OperatorDocument_116452:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2621
 
@@ -7666,7 +7476,7 @@ OperatorDocument_116453:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4689
 
@@ -7681,7 +7491,7 @@ OperatorDocument_116455:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3758
 
@@ -7696,7 +7506,7 @@ OperatorDocument_116459:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3753
 
@@ -7712,7 +7522,7 @@ OperatorDocument_116499:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4020
 
@@ -7728,7 +7538,7 @@ OperatorDocument_116500:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4788
 
@@ -7744,7 +7554,7 @@ OperatorDocument_116501:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4789
 
@@ -7760,7 +7570,7 @@ OperatorDocument_116502:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4790
 
@@ -7776,7 +7586,7 @@ OperatorDocument_116503:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4783
 
@@ -7791,7 +7601,7 @@ OperatorDocument_116505:
   updated_at: 2024-01-21 21:00:50 UTC
   status: doc_valid
   operator_id: 10589
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4707
 
@@ -7806,7 +7616,7 @@ OperatorDocument_116506:
   updated_at: 2024-01-18 10:11:00 UTC
   status: doc_valid
   operator_id: 10589
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4782
 
@@ -7821,7 +7631,7 @@ OperatorDocument_116507:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2996
 
@@ -7837,7 +7647,7 @@ OperatorDocument_116508:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3847
 
@@ -7853,7 +7663,7 @@ OperatorDocument_116509:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3848
 
@@ -7869,7 +7679,7 @@ OperatorDocument_116510:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3849
 
@@ -7885,7 +7695,7 @@ OperatorDocument_116511:
   status: doc_valid
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3850
 
@@ -7901,7 +7711,7 @@ OperatorDocument_116512:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3673
 
@@ -7917,7 +7727,7 @@ OperatorDocument_116513:
   status: doc_expired
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3672
 
@@ -7932,7 +7742,7 @@ OperatorDocument_116576:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3625
 
@@ -7947,7 +7757,7 @@ OperatorDocument_116578:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4269
 
@@ -7963,7 +7773,7 @@ OperatorDocument_116580:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1740
 
@@ -7979,7 +7789,7 @@ OperatorDocument_116582:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4714
 
@@ -7995,7 +7805,7 @@ OperatorDocument_116584:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3626
 
@@ -8011,7 +7821,7 @@ OperatorDocument_116588:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1743
 
@@ -8027,7 +7837,7 @@ OperatorDocument_116590:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2150
 
@@ -8043,7 +7853,7 @@ OperatorDocument_116592:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4229
 
@@ -8059,7 +7869,7 @@ OperatorDocument_116596:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4230
 
@@ -8075,7 +7885,7 @@ OperatorDocument_116598:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4715
 
@@ -8090,7 +7900,7 @@ OperatorDocument_116603:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4743
 
@@ -8105,7 +7915,7 @@ OperatorDocument_116605:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4358
 
@@ -8121,7 +7931,7 @@ OperatorDocument_116607:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4716
 
@@ -8137,7 +7947,7 @@ OperatorDocument_116609:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4713
 
@@ -8152,7 +7962,8 @@ OperatorDocument_116624:
   updated_at: 2024-01-10 14:57:11 UTC
   status: doc_not_provided
   operator_id: 151
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_116625:
   id: 116625
@@ -8166,7 +7977,7 @@ OperatorDocument_116625:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4274
 
@@ -8182,7 +7993,7 @@ OperatorDocument_116626:
   status: doc_pending
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4794
 
@@ -8198,7 +8009,7 @@ OperatorDocument_116627:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4450
 
@@ -8214,7 +8025,7 @@ OperatorDocument_116628:
   status: doc_pending
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4445
 
@@ -8230,7 +8041,7 @@ OperatorDocument_116629:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4451
 
@@ -8246,7 +8057,7 @@ OperatorDocument_116630:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4796
 
@@ -8262,7 +8073,7 @@ OperatorDocument_116631:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4625
 
@@ -8278,7 +8089,7 @@ OperatorDocument_116632:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4452
 
@@ -8294,7 +8105,7 @@ OperatorDocument_116633:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4798
 
@@ -8309,7 +8120,8 @@ OperatorDocument_116634:
   updated_at: 2024-01-10 14:57:11 UTC
   status: doc_not_provided
   operator_id: 151
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_116635:
   id: 116635
@@ -8323,7 +8135,7 @@ OperatorDocument_116635:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4793
 
@@ -8339,7 +8151,7 @@ OperatorDocument_116638:
   status: doc_pending
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4799
 
@@ -8357,7 +8169,7 @@ OperatorDocument_116640:
   uploaded_by: operator
   reason: l'organe de concertation de l'UFA Mimbeli Ibenga n'a pas encore été mis
     en place, en attendant les textes d'application de la nouvelle loi forestière
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_116641:
@@ -8371,7 +8183,8 @@ OperatorDocument_116641:
   updated_at: 2024-01-10 14:57:11 UTC
   status: doc_not_provided
   operator_id: 151
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_116890:
   id: 116890
@@ -8384,7 +8197,7 @@ OperatorDocument_116890:
   status: doc_expired
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3898
 
@@ -8399,7 +8212,7 @@ OperatorDocument_116892:
   status: doc_expired
   operator_id: 10615
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2144
 
@@ -8415,7 +8228,7 @@ OperatorDocument_116897:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3756
 
@@ -8431,7 +8244,7 @@ OperatorDocument_116898:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3754
 
@@ -8447,7 +8260,7 @@ OperatorDocument_116899:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3755
 
@@ -8462,7 +8275,7 @@ OperatorDocument_116900:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4179
 
@@ -8478,7 +8291,7 @@ OperatorDocument_116905:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3757
 
@@ -8494,7 +8307,7 @@ OperatorDocument_116911:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3692
 
@@ -8509,7 +8322,7 @@ OperatorDocument_116927:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4542
 
@@ -8524,7 +8337,7 @@ OperatorDocument_117041:
   status: doc_valid
   operator_id: 161
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4740
 
@@ -8538,7 +8351,7 @@ OperatorDocument_117051:
   updated_at: 2024-01-07 04:11:58 UTC
   status: doc_valid
   operator_id: 10615
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4712
 
@@ -8552,7 +8365,7 @@ OperatorDocument_117053:
   updated_at: 2024-01-07 04:14:11 UTC
   status: doc_valid
   operator_id: 10615
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4708
 
@@ -8566,7 +8379,8 @@ OperatorDocument_117055:
   updated_at: 2024-01-09 09:16:28 UTC
   status: doc_not_provided
   operator_id: 10589
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_117057:
   id: 117057
@@ -8578,7 +8392,7 @@ OperatorDocument_117057:
   updated_at: 2024-01-18 10:25:08 UTC
   status: doc_valid
   operator_id: 10589
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4772
 
@@ -8594,7 +8408,7 @@ OperatorDocument_117080:
   status: doc_expired
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3962
 
@@ -8609,7 +8423,7 @@ OperatorDocument_117323:
   status: doc_valid
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 4539
 
@@ -8625,7 +8439,7 @@ OperatorDocument_117327:
   status: doc_expired
   operator_id: 151
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1883
 
@@ -8641,7 +8455,7 @@ OperatorDocument_117336:
   status: doc_expired
   operator_id: 10589
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3260
 
@@ -8657,7 +8471,7 @@ OperatorDocument_117338:
   status: doc_expired
   operator_id: 10604
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 1888
 
@@ -8670,7 +8484,6 @@ OperatorDocument_118101:
   updated_at: 2021-07-15 16:16:49 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8683,7 +8496,6 @@ OperatorDocument_118102:
   updated_at: 2021-07-15 16:16:49 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8696,7 +8508,6 @@ OperatorDocument_118103:
   updated_at: 2021-07-15 16:16:49 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8709,7 +8520,6 @@ OperatorDocument_118104:
   updated_at: 2021-07-15 16:16:49 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8722,7 +8532,6 @@ OperatorDocument_118105:
   updated_at: 2021-07-15 16:16:49 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8735,7 +8544,6 @@ OperatorDocument_118106:
   updated_at: 2021-07-15 16:16:49 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8748,7 +8556,6 @@ OperatorDocument_118107:
   updated_at: 2021-07-15 16:16:49 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8761,7 +8568,6 @@ OperatorDocument_118108:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8774,7 +8580,6 @@ OperatorDocument_118109:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8787,7 +8592,6 @@ OperatorDocument_118110:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8800,7 +8604,6 @@ OperatorDocument_118111:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8813,7 +8616,6 @@ OperatorDocument_118112:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8826,7 +8628,6 @@ OperatorDocument_118113:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8839,7 +8640,6 @@ OperatorDocument_118114:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8852,7 +8652,6 @@ OperatorDocument_118115:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8865,7 +8664,6 @@ OperatorDocument_118116:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8878,7 +8676,6 @@ OperatorDocument_118117:
   updated_at: 2021-07-15 16:16:50 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8891,7 +8688,6 @@ OperatorDocument_118118:
   updated_at: 2021-07-15 16:16:51 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8904,7 +8700,6 @@ OperatorDocument_118119:
   updated_at: 2021-07-15 16:16:51 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8917,7 +8712,6 @@ OperatorDocument_118120:
   updated_at: 2021-07-15 16:16:51 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8930,7 +8724,6 @@ OperatorDocument_118121:
   updated_at: 2021-07-15 16:16:51 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8943,7 +8736,6 @@ OperatorDocument_118122:
   updated_at: 2021-07-15 16:16:51 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8956,7 +8748,6 @@ OperatorDocument_118123:
   updated_at: 2021-07-15 16:16:51 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8969,7 +8760,6 @@ OperatorDocument_118124:
   updated_at: 2021-07-15 16:16:51 UTC
   status: doc_not_provided
   operator_id: 172
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -8985,7 +8775,7 @@ OperatorDocument_118436:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2765
 
@@ -9001,7 +8791,7 @@ OperatorDocument_118437:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2466
 
@@ -9017,7 +8807,7 @@ OperatorDocument_118438:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2467
 
@@ -9033,7 +8823,7 @@ OperatorDocument_118439:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3952
 
@@ -9046,7 +8836,6 @@ OperatorDocument_118440:
   updated_at: 2022-02-02 23:09:41 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -9061,7 +8850,8 @@ OperatorDocument_118441:
   updated_at: 2023-04-06 01:04:04 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
+  public: true
+  source: company
 
 OperatorDocument_118442:
   id: 118442
@@ -9075,7 +8865,7 @@ OperatorDocument_118442:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 2766
 
@@ -9091,7 +8881,7 @@ OperatorDocument_118550:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3958
 
@@ -9107,7 +8897,7 @@ OperatorDocument_118551:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3646
 
@@ -9123,7 +8913,7 @@ OperatorDocument_118552:
   status: doc_valid
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3649
 
@@ -9139,7 +8929,7 @@ OperatorDocument_118553:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3951
 
@@ -9152,7 +8942,6 @@ OperatorDocument_118554:
   updated_at: 2022-04-19 21:44:37 UTC
   status: doc_not_provided
   operator_id: 10623
-  note: Lorem ipsum for note
   public: true
   source: company
 
@@ -9169,7 +8958,7 @@ OperatorDocument_118555:
   operator_id: 10623
   uploaded_by: operator
   reason: LA VENTE DE COUPE EST EXPLOITEE PAR LES EQUIPES DE SIENCAM
-  note: Lorem ipsum for note
+  public: true
   source: company
 
 OperatorDocument_118556:
@@ -9184,6 +8973,6 @@ OperatorDocument_118556:
   status: doc_expired
   operator_id: 10623
   uploaded_by: operator
-  note: Lorem ipsum for note
+  public: true
   source: company
   document_file_id: 3960

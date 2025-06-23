@@ -7,8 +7,8 @@ Operator_145:
   operator_id: COG-unknown-145
   fa_id: CG/PNR/13B947
   approved: true
-  country_doc_rank: 10
-  country_operators: 36
+  country_doc_rank: 4
+  country_operators: 5
   name: AFRIWOOD INDUSTRIES
   slug: afriwood-industries
 
@@ -21,7 +21,7 @@ Operator_151:
   fa_id: CG/OUE/05B179
   approved: true
   country_doc_rank: 2
-  country_operators: 36
+  country_operators: 5
   name: CIB
   slug: cib
 
@@ -37,7 +37,7 @@ Operator_161:
   website: http://www.interholco.com/
   approved: true
   country_doc_rank: 1
-  country_operators: 36
+  country_operators: 5
   name: IFO / Interholco
   details: "Interholco (IHC) is one of the largest producing companies of African
     tropical hardwood, specialized in forest management and wood production. Its subsidiary
@@ -70,8 +70,8 @@ Operator_165:
   address: Immeuble Villarecci, Avenue Amilcar Cabral
   website: http://rougier.fr
   approved: true
-  country_doc_rank: 4
-  country_operators: 36
+  country_doc_rank: 3
+  country_operators: 5
   name: MOKABI SA
   details: |-
     Exploitation
@@ -87,8 +87,8 @@ Operator_172:
   operator_id: COG-unknown-172
   fa_id: CG/BZV/04B2198
   approved: true
-  country_doc_rank: 17
-  country_operators: 36
+  country_doc_rank: 5
+  country_operators: 5
   name: SIFCO
   slug: sifco
 
@@ -104,7 +104,7 @@ Operator_197:
   website: http://www.cft-drc.com
   approved: true
   country_doc_rank: 1
-  country_operators: 26
+  country_operators: 1
   name: CFT
   details: "La Compagnie Forestière et de Transformation Sarl, « CFT » en sigle est
     une société d’exploitation forestière située dans la Province de Tshopo. La CFT
@@ -138,8 +138,8 @@ Operator_10589:
     233 42 68 92'
   approved: true
   holding_id: 4
-  country_doc_rank: 8
-  country_operators: 137
+  country_doc_rank: 2
+  country_operators: 5
   name: SEBC
   details: Exploitation et transformation du bois
   slug: sebc
@@ -154,8 +154,8 @@ Operator_10604:
   address: 'BP: 89; Yaoundé'
   approved: true
   holding_id: 4
-  country_doc_rank: 17
-  country_operators: 137
+  country_doc_rank: 4
+  country_operators: 5
   name: SAB
   details: Société Anonyme
   slug: sab
@@ -173,7 +173,7 @@ Operator_10615:
   approved: true
   holding_id: 4
   country_doc_rank: 1
-  country_operators: 137
+  country_operators: 5
   name: CFC
   details: Exploitation et transformation du bois
   slug: cfc
@@ -186,8 +186,8 @@ Operator_10623:
   operator_id: CMR-unknown-623
   fa_id: CM/UNKNOWN/0187
   approved: true
-  country_doc_rank: 16
-  country_operators: 137
+  country_doc_rank: 3
+  country_operators: 5
   name: SIENCAM
   slug: siencam
 
@@ -198,7 +198,8 @@ Operator_10637:
   is_active: true
   operator_id: CMR-unknown-637
   fa_id: CM/UNKNOWN/0180
-  country_doc_rank: 137
-  country_operators: 137
+  approved: true
+  country_doc_rank: 5
+  country_operators: 5
   name: LOREMA
   slug: lorema

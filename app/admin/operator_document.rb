@@ -111,7 +111,7 @@ ActiveAdmin.register OperatorDocument do
   actions :all, except: [:destroy, :new]
   permit_params :name, :public, :required_operator_document_id,
     :operator_id, :type, :status, :expire_date, :start_date,
-    :uploaded_by, :admin_comment, :reason, :note, :response_date,
+    :uploaded_by, :admin_comment, :reason, :response_date,
     :source, :source_info, document_file_attributes: [:id, :attachment, :filename]
 
   csv do
@@ -164,7 +164,6 @@ ActiveAdmin.register OperatorDocument do
       safe_join(links, " ")
     end
     column :reason
-    column :note
     column :response_date
   end
 
@@ -227,7 +226,6 @@ ActiveAdmin.register OperatorDocument do
     end
     column :admin_comment
     column :reason
-    column :note
     column :response_date
     column(I18n.t("active_admin.shared.actions")) do |document|
       a I18n.t("active_admin.shared.start_qc"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
@@ -282,7 +280,6 @@ ActiveAdmin.register OperatorDocument do
         df.input :attachment
       end
       f.input :reason
-      f.input :note
       f.input :response_date, as: :date_picker
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
@@ -303,7 +300,6 @@ ActiveAdmin.register OperatorDocument do
       row I18n.t("active_admin.operator_documents_page.attachment") do |r|
         link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer" if r.document_file&.attachment&.present?
       end
-      row :note
       row :start_date
       row :expire_date
       row :created_at

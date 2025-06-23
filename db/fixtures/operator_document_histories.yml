@@ -1566,13 +1566,6 @@ OperatorDocumentHistory_67538:
   start_date: 2012-06-08
   status: doc_valid
   uploaded_by: other
-  note: 'La date d''expiration est fixée page 2, article 2 "La durée de la convention
-    est fixée dorénavant à 25 ans, à compter de la date d''adoption du plan d''aménagement".
-    Le plan d''amenagement a ete adopte a ouesso le 29 decembre 2007. (page 2 du Compte-rendu
-    du comité de suivi et d''évaluation du plan d''aménagement : "ll a rappelé que
-    le plan d''aménagement de I''UFA Pokola a été adopté à Ouesso le décembre 2007,
-    approuvé en Conseil des Ministres, le 21 juillet 2009 et certifié FSC mois de
-    mai 2008." La nouvelle date d''expiration est donc le 29 dec 2032.'
   public: true
   source: company
   fmu_id: 55
@@ -1983,8 +1976,6 @@ OperatorDocumentHistory_67696:
   start_date: 2007-11-15
   status: doc_valid
   uploaded_by: other
-  note: Il est important d'associer l'arrete  d'approbation de ce plan d'amenagement
-    .
   public: true
   source: company
   fmu_id: 56
@@ -2152,9 +2143,6 @@ OperatorDocumentHistory_67718:
   start_date: 2018-05-17
   status: doc_invalid
   uploaded_by: other
-  note: Veuillez verifier que le Groupe AFRIWOOD Industrie a une immatriculation a
-    la CNSS . Si l'entite juridique avec cette appellation n'existe pas, alors veuillez
-    confirmer comment le groupe AFRIWOOD Industrie est enregistree.
   public: true
   source: company
   document_file_id: 306
@@ -2494,7 +2482,6 @@ OperatorDocumentHistory_68026:
   start_date: 2018-01-01
   status: doc_expired
   uploaded_by: other
-  note: ok
   public: true
   source: company
   document_file_id: 345
@@ -2513,10 +2500,6 @@ OperatorDocumentHistory_68027:
   start_date: 2018-02-26
   status: doc_expired
   uploaded_by: other
-  note: Document valide. L'attestation est conforme.  mais la date d'immatriculation
-    n'est pas bonne.  en attendant d'avoir l'originale d'immatriculation a la CNSS
-    pour avoir la bonne date.  On fixe une date sur la base de la date d'expiration  de
-    la CAT
   public: true
   source: company
   document_file_id: 346
@@ -2535,7 +2518,6 @@ OperatorDocumentHistory_68028:
   start_date: 2018-03-05
   status: doc_expired
   uploaded_by: other
-  note: ok
   public: true
   source: company
   document_file_id: 347
@@ -2554,8 +2536,6 @@ OperatorDocumentHistory_68029:
   start_date: 2018-03-01
   status: doc_expired
   uploaded_by: other
-  note: On voit une autorisation provisoire de 6 mois de validite. Mais l'OTP donne
-    la validite jus'en 2048. Est ce que c'est normale
   public: true
   source: company
   document_file_id: 348
@@ -2574,7 +2554,6 @@ OperatorDocumentHistory_68030:
   start_date: 2018-01-05
   status: doc_expired
   uploaded_by: other
-  note: ok
   public: true
   source: company
   document_file_id: 349
@@ -2593,7 +2572,6 @@ OperatorDocumentHistory_68031:
   start_date: 2018-03-08
   status: doc_valid
   uploaded_by: other
-  note: ok
   public: true
   source: company
   document_file_id: 350
@@ -2721,7 +2699,6 @@ OperatorDocumentHistory_68043:
   start_date: 2016-07-05
   status: doc_expired
   uploaded_by: other
-  note: Ok
   public: true
   source: company
   document_file_id: 372
@@ -2740,7 +2717,6 @@ OperatorDocumentHistory_68046:
   start_date: 2005-11-21
   status: doc_valid
   uploaded_by: other
-  note: Ok
   public: true
   source: company
   document_file_id: 374
@@ -2759,7 +2735,6 @@ OperatorDocumentHistory_68047:
   start_date: 1987-10-07
   status: doc_valid
   uploaded_by: other
-  note: Ok
   public: true
   source: company
   document_file_id: 375
@@ -2865,8 +2840,6 @@ OperatorDocumentHistory_68055:
   start_date: 2007-03-19
   status: doc_valid
   uploaded_by: other
-  note: Le document a deux date   recus le  06 Avril 2007 et   19 Mars 2007.  Quelle
-    est la date de signature du dpocument
   public: true
   source: company
   document_file_id: 376
@@ -2885,7 +2858,6 @@ OperatorDocumentHistory_68056:
   start_date: 2014-02-07
   status: doc_valid
   uploaded_by: other
-  note: ok
   public: true
   source: company
   document_file_id: 377
@@ -2922,7 +2894,6 @@ OperatorDocumentHistory_68058:
   start_date: 2017-06-01
   status: doc_valid
   uploaded_by: other
-  note: ok
   public: true
   source: company
   document_file_id: 379
@@ -2941,7 +2912,6 @@ OperatorDocumentHistory_68059:
   start_date: 2018-08-10
   status: doc_valid
   uploaded_by: other
-  note: ok
   public: true
   source: company
   fmu_id: 12
@@ -2999,7 +2969,6 @@ OperatorDocumentHistory_68062:
   start_date: 2017-12-09
   status: doc_valid
   uploaded_by: other
-  note: ok
   public: true
   source: company
   fmu_id: 12
@@ -3164,9 +3133,6 @@ OperatorDocumentHistory_68152:
   start_date: 2018-02-28
   status: doc_expired
   uploaded_by: other
-  note: Taxe de  superficie de 047/11 valide ljusqu'au 9ieme echeancier. CFT devra
-    mette les annexes du 10 et 11ieme echeancier pour obtenir la validite pour l'annee
-    2019.
   public: true
   source: company
   fmu_id: 12
@@ -4512,9 +4478,6 @@ OperatorDocumentHistory_69591:
   start_date: 1986-12-03
   status: doc_pending
   uploaded_by: other
-  note: Le document est bon. Même si à cette période c'était le PR qui prenait cet
-    arrêté son objectif reste le même à savoir attribuer l'agrément à la profession
-    forestière. Celle-ci vaut jusqu'à la cessation d'activité de la structure
   public: true
   source: company
   document_file_id: 526
@@ -4533,7 +4496,6 @@ OperatorDocumentHistory_69592:
   start_date: 2000-10-20
   status: doc_pending
   uploaded_by: other
-  note: Document expiré
   public: true
   source: company
   fmu_id: 11634
@@ -4553,8 +4515,6 @@ OperatorDocumentHistory_69606:
   start_date: 2006-03-21
   status: doc_expired
   uploaded_by: other
-  note: Premiere page couleur. mais deuxieme page contenant les cachets en Noir et
-    Blanc
   public: true
   source: company
   fmu_id: 11499
@@ -4632,7 +4592,6 @@ OperatorDocumentHistory_69614:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: Ok. scan photocopie
   public: true
   source: company
   fmu_id: 11660
@@ -4652,7 +4611,6 @@ OperatorDocumentHistory_69615:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: Ok
   public: true
   source: company
   fmu_id: 11602
@@ -4672,7 +4630,6 @@ OperatorDocumentHistory_69616:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: OK.  scan photocopie
   public: true
   source: company
   fmu_id: 11602
@@ -4692,7 +4649,6 @@ OperatorDocumentHistory_69617:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: 'Ok.  '
   public: true
   source: company
   fmu_id: 11569
@@ -4712,7 +4668,6 @@ OperatorDocumentHistory_69618:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: Ok.  Mais scan photocopie
   public: true
   source: company
   fmu_id: 11604
@@ -4732,7 +4687,6 @@ OperatorDocumentHistory_69619:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: 'Ok.  '
   public: true
   source: company
   fmu_id: 11604
@@ -4784,7 +4738,6 @@ OperatorDocumentHistory_69624:
   start_date: 2000-10-20
   status: doc_pending
   uploaded_by: other
-  note: Document expiré
   public: true
   source: company
   fmu_id: 11579
@@ -4804,7 +4757,6 @@ OperatorDocumentHistory_69625:
   start_date: 2008-12-24
   status: doc_pending
   uploaded_by: other
-  note: Le document est conforme dans la forme et dans le fond. Il peut être publié
   public: true
   source: company
   fmu_id: 11579
@@ -4824,9 +4776,6 @@ OperatorDocumentHistory_69626:
   start_date: 2008-12-24
   status: doc_pending
   uploaded_by: other
-  note: Sur le document le nom de la société est SFID. Pour valider ce document il
-    faut au préalable une annexe attestant du transfert de la concession à LOREMA.
-    Ce document ne peut être validé en l'état
   public: true
   source: company
   fmu_id: 11579
@@ -4846,7 +4795,6 @@ OperatorDocumentHistory_69627:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: SACAN photocopie
   public: true
   source: company
   fmu_id: 11617
@@ -4866,8 +4814,6 @@ OperatorDocumentHistory_69628:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: PA  de 2002.  A verifier s'il n'y a pas eu  revision  depuis l'approbation
-    en 2004.?
   public: true
   source: company
   fmu_id: 11617
@@ -4887,7 +4833,6 @@ OperatorDocumentHistory_69660:
   start_date: 2008-12-24
   status: doc_pending
   uploaded_by: other
-  note: Le document est conforme dans la forme et dans le fond. Il peut être publié
   public: true
   source: company
   fmu_id: 11618
@@ -4907,7 +4852,6 @@ OperatorDocumentHistory_69661:
   start_date: 2008-12-24
   status: doc_pending
   uploaded_by: other
-  note: Le document est conforme dans la forme et dans le fond. Il peut être publié
   public: true
   source: company
   fmu_id: 11634
@@ -4927,9 +4871,6 @@ OperatorDocumentHistory_69662:
   start_date: 2008-12-24
   status: doc_pending
   uploaded_by: other
-  note: Sur le document le nom de la société est SFID. Pour valider ce document il
-    faut au préalable une annexe attestant du transfert de la concession à LOREMA.
-    Ce document ne peut être validé en l'état
   public: true
   source: company
   fmu_id: 11634
@@ -4949,9 +4890,6 @@ OperatorDocumentHistory_69663:
   start_date: 2008-12-24
   status: doc_pending
   uploaded_by: other
-  note: Sur le document le nom de la société est SFID. Pour valider ce document il
-    faut au préalable une annexe attestant du transfert de la concession à LOREMA.
-    Ce document ne peut être validé en l'état
   public: true
   source: company
   fmu_id: 11618
@@ -5036,7 +4974,6 @@ OperatorDocumentHistory_69755:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: Ok
   public: true
   source: company
   fmu_id: 11569
@@ -5056,7 +4993,6 @@ OperatorDocumentHistory_69822:
   start_date: 2014-05-15
   status: doc_valid
   uploaded_by: other
-  note: 'Il faut la preuve de transfert avec quittance de paiement de la taxe de transfert. '
   public: true
   source: company
   fmu_id: 11499
@@ -5076,7 +5012,6 @@ OperatorDocumentHistory_69826:
   start_date: 2010-09-14
   status: doc_valid
   uploaded_by: other
-  note: Ok. Mais scan photocopie
   public: true
   source: company
   fmu_id: 11660
@@ -5096,7 +5031,6 @@ OperatorDocumentHistory_69827:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: 'Ok. '
   public: true
   source: company
   fmu_id: 11660
@@ -5116,7 +5050,6 @@ OperatorDocumentHistory_69828:
   start_date: 2010-09-14
   status: doc_valid
   uploaded_by: other
-  note: Attribution de la concession en 2010 par le PM.  [A voir la  convention provisoire
   public: true
   source: company
   fmu_id: 11569
@@ -5136,7 +5069,6 @@ OperatorDocumentHistory_69829:
   start_date: 2010-09-14
   status: doc_valid
   uploaded_by: other
-  note: Attribution de la concession en 2010 par le PM.  [A voir la  convention provisoire
   public: true
   source: company
   fmu_id: 11604
@@ -5156,8 +5088,6 @@ OperatorDocumentHistory_69839:
   start_date: 2004-01-16
   status: doc_valid
   uploaded_by: other
-  note: Il faut toujours mettre la date d'approbation comme date debut et non la date
-    de l'arrete  d'approbation  qui est un acte qui connait parfois des retards
   public: true
   source: company
   fmu_id: 11621
@@ -5196,8 +5126,6 @@ OperatorDocumentHistory_69865:
   start_date: 2014-05-15
   status: doc_valid
   uploaded_by: other
-  note: Le s preuves de transfert effectif de  TRC a SIENCAM doivent etre fournir
-    en annexe.  QUittance de paiement de la taxe de transfert
   public: true
   source: company
   fmu_id: 11496
@@ -5217,8 +5145,6 @@ OperatorDocumentHistory_69866:
   start_date: 2013-11-27
   status: doc_pending
   uploaded_by: other
-  note: Convention d'exploitation  est  t-elle egale a la convention provisoire.  A
-    clarifier.
   public: true
   source: company
   fmu_id: 11496
@@ -5364,9 +5290,6 @@ OperatorDocumentHistory_69877:
   start_date: 2009-11-25
   status: doc_valid
   uploaded_by: other
-  note: Ok. Mais il faut la preuve de transfert de TRC a SIENCAM a fournir ( quittance
-    de paiement de la taxe de transfert).  Version 2017 du PA soumis, mais l'aapprobation  est
-    l'ancien PA redige par TRC
   public: true
   source: company
   fmu_id: 11496
@@ -5386,7 +5309,6 @@ OperatorDocumentHistory_69878:
   start_date: 1998-11-10
   status: doc_valid
   uploaded_by: other
-  note: Scan photocopie . Mais courrier de  transfert joint en copie originale
   public: true
   source: company
   document_file_id: 649
@@ -5405,9 +5327,6 @@ OperatorDocumentHistory_69879:
   start_date: 2008-09-01
   status: doc_valid
   uploaded_by: other
-  note: 'Il s''agit ici d''une approbation du 01er Septembre 2008.  Pourtant en Juin
-    2016 la societe a soumis une nouvelle version de PA revise.  Il faut la preuve
-    d''approbation de ce nouveau plan revise. '
   public: true
   source: company
   fmu_id: 11499
@@ -5427,8 +5346,6 @@ OperatorDocumentHistory_69880:
   start_date: 2008-09-01
   status: doc_valid
   uploaded_by: other
-  note: Ok. Mais il faut la preuve de transfert de TRC a SIENCAM a fournir ( quittance
-    de paiement de la taxe de transfert)
   public: true
   source: company
   fmu_id: 11499
@@ -5496,7 +5413,6 @@ OperatorDocumentHistory_70051:
   start_date: 2014-05-15
   status: doc_pending
   uploaded_by: other
-  note: Le cahier de charge n'est pas joint
   public: true
   source: company
   fmu_id: 11496
@@ -5657,8 +5573,6 @@ OperatorDocumentHistory_70062:
   start_date: 2007-02-15
   status: doc_valid
   uploaded_by: other
-  note: La date de debut est 2007 et non 2017.   car il s'agit d'une mutation et non
-    une prorogation des dates
   public: true
   source: company
   fmu_id: 11496
@@ -5841,7 +5755,6 @@ OperatorDocumentHistory_70073:
   start_date: 2014-05-15
   status: doc_pending
   uploaded_by: other
-  note: Document partiel -  Il faut ajouter la copie du cahier de charge
   public: true
   source: company
   fmu_id: 11499
@@ -5931,9 +5844,6 @@ OperatorDocumentHistory_70079:
   start_date: 2007-02-15
   status: doc_valid
   uploaded_by: other
-  note: 'Attention :  Il s''agit d''une mutation de certificat.  La date de debut
-    c''est 2007 et non la date de 2017 a laquelle la mutation s''est opere.  Ainsi
-    la validite sur 15 ans sera jusq''en 2022.'
   public: true
   source: company
   fmu_id: 11499
@@ -6073,9 +5983,6 @@ OperatorDocumentHistory_70087:
   start_date: 2019-01-01
   status: doc_invalid
   uploaded_by: other
-  note: Pourqoui le PAO a ete emis s'il n'y a pas d'activite.  le PAO est emis sur
-    la base des inventaires.  Ca veut dire que les inventaires ont ete effectue dans
-    la AAC1-2
   public: true
   source: company
   fmu_id: 11499
@@ -6194,8 +6101,6 @@ OperatorDocumentHistory_70094:
   start_date: 2018-01-31
   status: doc_pending
   uploaded_by: other
-  note: Cette convention devrait etre sur la duree de  la Vente de coupe.  comme c'est
-    ce site qui est precise sur le formulaire renseignee
   public: true
   source: company
   document_file_id: 749
@@ -6280,7 +6185,6 @@ OperatorDocumentHistory_70100:
   start_date: 2019-01-25
   status: doc_expired
   uploaded_by: other
-  note: Formulaire portant l'incription du premier ministere
   public: true
   source: company
   document_file_id: 750
@@ -6549,8 +6453,6 @@ OperatorDocumentHistory_70119:
   start_date: 2019-02-05
   status: doc_expired
   uploaded_by: other
-  note: Le comite d'hygiene et securite doit etre mis en place via un acte de l'inspection
-    du travail pour un mandat de 2 ans
   public: true
   source: company
   document_file_id: 752
@@ -6601,12 +6503,6 @@ OperatorDocumentHistory_70123:
   start_date: 2016-01-21
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est la note de service relative à la mise en place du Comité
-    d'Hygiène et de Sécurité au Travail UFA 00 004, signé le 22 janvier 2016. Il présente
-    les références de cette entreprise et les informations qu'il présente sont similaires
-    à celles figurant dans des actes de création de comité d'hygiène et de sécurité
-    au travail publiés. La date de fin de validité n'étant pas mentionnée, ce document
-    peut être publié.
   source: company
   document_file_id: 2055
   created_at: 2021-06-29 09:23:24 UTC
@@ -6624,12 +6520,6 @@ OperatorDocumentHistory_70124:
   start_date: 2016-01-21
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est la note de service relative à la mise en place du Comité
-    d'Hygiène et de Sécurité au Travail UFA 00 004, signé le 22 janvier 2016. Il présente
-    les références de cette entreprise et les informations qu'il présente sont similaires
-    à celles figurant dans des actes de création de comité d'hygiène et de sécurité
-    au travail publiés. La date de fin de validité n'étant pas mentionnée, ce document
-    peut être publié.
   source: company
   document_file_id: 2055
   created_at: 2021-06-29 09:23:24 UTC
@@ -7020,8 +6910,6 @@ OperatorDocumentHistory_70422:
   start_date: 2016-06-16
   status: doc_pending
   uploaded_by: other
-  note: "S'assurer que lePV a ete entierement scannee.  Revoir avec l'entreprise pour
-    la version complete\r\n\r\n"
   public: true
   source: company
   fmu_id: 11496
@@ -7041,8 +6929,6 @@ OperatorDocumentHistory_70423:
   start_date: 2016-06-16
   status: doc_valid
   uploaded_by: other
-  note: "S'assurer que lePV a ete entierement scannee.  Revoir avec l'entreprise pour
-    la version complete\r\n\r\n"
   public: true
   source: company
   fmu_id: 11496
@@ -7062,9 +6948,6 @@ OperatorDocumentHistory_70424:
   start_date: 2018-05-24
   status: doc_expired
   uploaded_by: other
-  note: "Ce document fait etat des realisations sociales de 2017. Donc reste valable
-    jusqu'au 31 Decembre 2018. Pour 2019, il faut la preuve de s realisations de 2018.
-    \r\n"
   public: true
   source: company
   fmu_id: 11496
@@ -10579,8 +10462,6 @@ OperatorDocumentHistory_71070:
     year. For the period indicated, please note that the logs produced in the FMUs
     managed by SIENCAM will be entirely sold and processed by SEFECCAM and the products
     exported as such. '
-  note: Mettre le contrat de sous-traitance avec SEFECCAM pour soutenir votre justification.  ensuite
-    mettre le document de SEFECCAM correspondant en ligne
   source: company
   created_at: 2021-06-29 09:23:24 UTC
   updated_at: 2021-06-29 09:23:24 UTC
@@ -10633,8 +10514,6 @@ OperatorDocumentHistory_71074:
   reason: 'SIENCAM n''effectue pas d''exportation de bois débité , elle ne prévoit
     pas en faire pour le compte de l''exercice 2021. La production débité est entièrement
     mise à disposition d''une entreprise partenaire locale. '
-  note: Il faut donc mettre le comtrat de partenariat avec SEFECCAM approuve par le
-    MINFOF.  ENSUI TE METTRE EN ANNEXE LE DOCUMENT CORRESPONDANT POUR SEFECCAM
   source: company
   created_at: 2021-06-29 09:23:24 UTC
   updated_at: 2021-06-29 09:23:24 UTC
@@ -10654,8 +10533,6 @@ OperatorDocumentHistory_71075:
   reason: 'SIENCAM n''effectue pas d''exportation de bois débité , elle ne prévoit
     pas en faire pour le compte de l''exercice 2021. La production débité est entièrement
     mise à disposition d''une entreprise partenaire locale. '
-  note: Il faut donc mettre le comtrat de partenariat avec SEFECCAM approuve par le
-    MINFOF.  ENSUI TE METTRE EN ANNEXE LE DOCUMENT CORRESPONDANT POUR SEFECCAM
   source: company
   created_at: 2021-06-29 09:23:24 UTC
   updated_at: 2021-06-29 09:23:24 UTC
@@ -10724,16 +10601,6 @@ OperatorDocumentHistory_71079:
   start_date: 2020-04-01
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé présente bien l'entête de la direction des grandes entreprises.
-    Il est signé du receveur des impôts et du directeur des grandes entreprises et
-    sa structure est conforme à celles des attestation de non redevance habituellement
-    publiées dans la plateforme. Les informations qu'il contient font bien référence
-    à SIENCAM (le nom de l'entreprise, son numéro identifiant, la ville, ...).  Il
-    a été délivré le 01/04/2020 pour une durée de trois mois, par conséquent  il est
-    encore valide et devrait arriver à expiration le 31/06/2020. En le chargeant,
-    la date d'expiration qui a été mentionnée est le 01/07/2020, ce qui est une erreur.
-    En conclusion, ce document est de bonne qualité et devrait être publié après correction
-    de la date d'expiration.
   public: true
   source: company
   document_file_id: 1068
@@ -11719,9 +11586,6 @@ OperatorDocumentHistory_71926:
   start_date: 2010-05-28
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé n'est pas celui demandé. Il s'agit plutôt du certificat
-    de conformité environnementale des concessions 1032 et 1034 adressé à la SFID.
-    Ce document ne peut dont pas être rendu public au niveau de la présente vignette
   source: company
   fmu_id: 11579
   document_file_id: 1223
@@ -11740,9 +11604,6 @@ OperatorDocumentHistory_71927:
   start_date: 2010-05-28
   status: doc_pending
   uploaded_by: operator
-  note: " Le document chargé n'est pas celui demandé. Il s'agit plutôt du certificat
-    de conformité environnementale des concessions 1032 et 1034 adressé à la SFID.
-    Ce document ne peut dont pas être rendu public au niveau de la présente vignette"
   source: company
   fmu_id: 11618
   document_file_id: 1224
@@ -11761,9 +11622,6 @@ OperatorDocumentHistory_71928:
   start_date: 2010-05-28
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé n'est pas celui demandé. Il s'agit plutôt du certificat
-    de conformité environnementale des concessions 1032 et 1034 adressé à la SFID.
-    Ce document ne peut dont pas être rendu public au niveau de la présente vignette
   source: company
   fmu_id: 11634
   document_file_id: 1225
@@ -11782,13 +11640,6 @@ OperatorDocumentHistory_71929:
   start_date: 2010-05-28
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est le Certificat de Conformité Environnementale des concessions
-    1032 et 1034, adressé à la SFID. La lettre d'approbation du contrat de sous-traitance
-    entre LOREMA et la SFID, chargée dans la vignette correspondante, mentionne que
-    les concessions 1032 et 1034 sont constituées des UFA 09 003, 09 004A, 09 005A
-    et 09 005B dont LOREMA est attributaire. Par conséquent, le certificat chargé
-    couvre toute ces UFAs. Ce document est conforme à ceux publiés. Mais pour qu'il
-    soit rendu public,  il faudrait que lui soit annexé la copie du contrat de sous-traitance.
   source: company
   fmu_id: 11634
   document_file_id: 1226
@@ -11807,13 +11658,6 @@ OperatorDocumentHistory_71930:
   start_date: 2015-05-03
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est la copie de la lettre d'approbation du contrat de sous-traitance
-    signée entre LOREMA, attributaire des concessions 1032 et 1034 constituées des
-    UFAs 09 003, 09 004A, 09 005A et 09 005B et la SFID. Sur le fond et sur la forme,
-    le document est de  bonne qualité. Il peut dont être publié, mais il faudra avant
-    cela, corriger les dates de signature et de fin de validité, qui n'ont pas inscrites
-    lors du chargement du document. Au lieu du 3 mai 2015 et du 2 mai 2016, il faudra
-    écrite le 03 mars 2015 et le 2 mars 2030
   source: company
   fmu_id: 11579
   document_file_id: 1227
@@ -11832,13 +11676,6 @@ OperatorDocumentHistory_71931:
   start_date: 2015-03-05
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est la copie de la lettre d'approbation du contrat de sous-traitance
-    signée entre LOREMA, attributaire des concessions 1032 et 1034 constituées des
-    UFAs 09 003, 09 004A, 09 005A et 09 005B et la SFID. Sur le fond et sur la forme,
-    le document est de bonne qualité. Il peut dont être publié, mais il faudra avant
-    cela, corriger les dates de signature et de fin de validité, qui n'ont pas inscrites
-    lors du chargement du document. Au lieu du 5 mars 2015 et du 4 mars 2016, il faudra
-    écrite le 03 mars 2015 et le 2 mars 2030
   source: company
   fmu_id: 11618
   document_file_id: 1228
@@ -11857,13 +11694,6 @@ OperatorDocumentHistory_71932:
   start_date: 2015-03-05
   status: doc_pending
   uploaded_by: operator
-  note: "\tLe document chargé est la copie de la lettre d'approbation du contrat de
-    sous-traitance signée entre LOREMA, attributaire des concessions 1032 et 1034
-    constituées des UFAs 09 003, 09 004A, 09 005A et 09 005B et la SFID. Sur le fond
-    et sur la forme, le document est de bonne qualité. Il peut dont être publié, mais
-    il faudra avant cela, corriger les dates de signature et de fin de validité, qui
-    n'ont pas inscrites lors du chargement du document. Au lieu du 5 mars 2015 et
-    du 4 mars 2016, il faudra écrite le 03 mars 2015 et le 2 mars 2030"
   source: company
   fmu_id: 11634
   document_file_id: 1229
@@ -11882,8 +11712,6 @@ OperatorDocumentHistory_71933:
   start_date: 2015-03-05
   status: doc_pending
   uploaded_by: operator
-  note: 'Il y a eu confusion, le document chargé est la lettre d''approbation du contrat
-    de sous-traitance, et non le le certificat de conformité environnementale. '
   source: company
   fmu_id: 11579
   document_file_id: 1230
@@ -11902,8 +11730,6 @@ OperatorDocumentHistory_71934:
   start_date: 2015-03-05
   status: doc_pending
   uploaded_by: operator
-  note: 'Il y a eu confusion, le document chargé est la lettre d''approbation du contrat
-    de sous-traitance, et non le le certificat de conformité environnementale. '
   source: company
   fmu_id: 11618
   document_file_id: 1231
@@ -11922,9 +11748,6 @@ OperatorDocumentHistory_71935:
   start_date: 2000-09-18
   status: doc_pending
   uploaded_by: operator
-  note: 'Le document chargé n''est pas celui demandé, il s''agit d''un décret portant
-    incorporation au domaine privé de l''Etat d''une portion de forêt. Ce document
-    ne peut donc pas être publié. '
   source: company
   fmu_id: 11579
   document_file_id: 1232
@@ -11943,9 +11766,6 @@ OperatorDocumentHistory_71936:
   start_date: 2000-09-18
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé n'est pas celui demandé, il s'agit d'un décret portant
-    incorporation au domaine privé de l'Etat d'une portion de forêt. Ce document ne
-    peut donc pas être publié.
   source: company
   fmu_id: 11618
   document_file_id: 1233
@@ -11964,8 +11784,6 @@ OperatorDocumentHistory_71937:
   start_date: 2000-09-18
   status: doc_pending
   uploaded_by: operator
-  note: 'Le document chargé n''est pas celui demandé, il s''agit d''un décret portant
-    incorporation au domaine privé de l''Etat d''une portion de forêt. '
   source: company
   fmu_id: 11634
   document_file_id: 1234
@@ -11984,11 +11802,6 @@ OperatorDocumentHistory_71938:
   start_date: 2000-10-20
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est bien la convention provisoire d'exploitation de la
-    concession 1032 et dont les limites sont fixées par celles/ou des UFA 09 003,
-    09 004A et 09005A. Mais il a été signé le 20 octobre 2000, pour une durée de trois
-    (03) ans, par conséquent, il est arrivé à expiration depuis le 19 octobre 2003
-    et ne peut dont pas être publié
   source: company
   fmu_id: 11618
   document_file_id: 1235
@@ -12741,10 +12554,6 @@ OperatorDocumentHistory_72124:
   start_date: 1980-03-28
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est l'arrêté portant agrément d'office à la profession
-    forestière de la SAB. Il est signé du Président de la République du Cameroun.
-    Dans le fond et la forme ce document, signé le 28/03/190 pour une durée de validité
-    de 99 ans est de bonne qualité. Il peut donc être publié.
   source: company
   document_file_id: 1367
   created_at: 2021-06-29 09:23:24 UTC
@@ -12763,7 +12572,6 @@ OperatorDocumentHistory_72125:
   status: doc_pending
   uploaded_by: operator
   reason: La société africaine des bois n'exporte pas de bois transformés.
-  note: Il faut  inclure le contrat de partenariat qui soutient cete affirmation
   source: company
   created_at: 2021-06-29 09:23:24 UTC
   updated_at: 2021-06-29 09:23:24 UTC
@@ -12780,7 +12588,6 @@ OperatorDocumentHistory_72126:
   start_date: 2000-01-01
   status: doc_invalid
   uploaded_by: operator
-  note: Il faut  inclure le contrat de partenariat qui soutient cete affirmation
   source: company
   created_at: 2021-06-29 09:23:24 UTC
   updated_at: 2021-06-29 09:23:24 UTC
@@ -12797,7 +12604,6 @@ OperatorDocumentHistory_72127:
   start_date: 2000-01-01
   status: doc_pending
   uploaded_by: operator
-  note: Il faut  inclure le contrat de partenariat qui soutient cete affirmation
   source: company
   document_file_id: 2030
   created_at: 2021-06-29 09:23:24 UTC
@@ -12863,13 +12669,6 @@ OperatorDocumentHistory_72132:
   start_date: 2020-07-22
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est intitulé "Procès verbal d'installation du comité d'Hygiène
-    et sécurité au travail des entreprises du groupe VICWOOD-Thanry du site de LOKOMO".
-    Il présente l'entête de la délégation départementale du ministère du travail et
-    de la sécurité sociale et concerne toutes les entreprises du groupe, représentées
-    à Lokomo, dont SAB. Il est conforme à ceux publiés dans l'OTP, mais il  ne présente
-    pas de date de signature, ce qui est un véritable problème. En conclusion, il
-    ne peut être publié.
   source: company
   document_file_id: 1369
   created_at: 2021-06-29 09:23:24 UTC
@@ -12887,9 +12686,6 @@ OperatorDocumentHistory_72133:
   start_date: 2018-08-27
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document est constitué de deux attestations pour soumission, signées le
-    27/08/2018 et devant arriver à expiration le 15/9/2018. Ces documents sont expirés
-    il y a plus de deux ans, par conséquent, aucun d''eux ne peut être publié. '
   source: company
   document_file_id: 1370
   created_at: 2021-06-29 09:23:24 UTC
@@ -12907,14 +12703,6 @@ OperatorDocumentHistory_72134:
   start_date: 2015-08-19
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé est intitulé : "Convention de visites et de soins médicaux".
-    Il a été signé entre le chef de site des entreprises SAB, SEBC et CIB de LOKOM
-    et la directrice de l''hôpital catholique de Salapoumbé. S''il est vrai que la
-    lettre d''approbation du contrat de partenariat précédemment chargée par la SAB
-    ne présente que la SEBC comme partenaire, Je pense que la présente convention
-    signée le 19/08/2020 pour une durée indéterminée est de bonne qualité et peut
-    être publiée. En attendant que la convention définitive soit chargée, nous allons
-    attribuer une durée de validité de 15 ans.'
   source: company
   document_file_id: 1371
   created_at: 2021-06-29 09:23:24 UTC
@@ -12932,11 +12720,6 @@ OperatorDocumentHistory_72135:
   start_date: 2018-01-15
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est bien la déclaration d'établissement de l'entreprise
-    SAB. Sur la forme, il est conforme à ceux publiés dans l'OTP, à la seule différence
-    que la date de signature n'est pas visible. Il faudrait demander la raison à cela
-    aux responsables de cette entreprise.  En attendant ces échanges, le document
-    ne peut être publié.
   source: company
   document_file_id: 1372
   created_at: 2021-06-29 09:23:24 UTC
@@ -12954,14 +12737,6 @@ OperatorDocumentHistory_72136:
   start_date: 2018-03-15
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est un procès-verbal d'élection des délégués du personnel
-    de l'entreprise SAB. Dans le fond et la forme il est conforme et contient le cachet
-    de l'entreprise. Il a été signé le 02/03/2020 et devrait être expiré depuis le
-    01/03/2020. Mais le document chargé en annexe est une lettre circulaire signée
-    du ministre délégué auprès du ministre du travail et de la sécurité sociale reportant
-    à une date ultérieure, les élections des délégués du personnel qui devraient avoir
-    lieu en mars 2020. En conclusion, le document est de bonne qualité et peut être
-    publié
   source: company
   document_file_id: 1373
   created_at: 2021-06-29 09:23:24 UTC
@@ -12979,14 +12754,6 @@ OperatorDocumentHistory_72137:
   start_date: 2018-03-15
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est un procès-verbal d'élection des délégués du personnel
-    de l'entreprise SAB. Dans le fond et la forme il est conforme et contient le cachet
-    de l'entreprise. Il a été signé le 02/03/2020 et devrait être expiré depuis le
-    01/03/2020. Mais le document chargé en annexe est une lettre circulaire signée
-    du ministre délégué auprès du ministre du travail et de la sécurité sociale reportant
-    à une date ultérieure, les élections des délégués du personnel qui devraient avoir
-    lieu en mars 2020. En conclusion, le document est de bonne qualité et peut être
-    publié
   source: company
   document_file_id: 1373
   created_at: 2021-06-29 09:23:24 UTC
@@ -13004,14 +12771,6 @@ OperatorDocumentHistory_72138:
   start_date: 2018-03-15
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est un procès-verbal d'élection des délégués du personnel
-    de l'entreprise SAB. Dans le fond et la forme il est conforme et contient le cachet
-    de l'entreprise. Il a été signé le 02/03/2020 et devrait être expiré depuis le
-    01/03/2020. Mais le document chargé en annexe est une lettre circulaire signée
-    du ministre délégué auprès du ministre du travail et de la sécurité sociale reportant
-    à une date ultérieure, les élections des délégués du personnel qui devraient avoir
-    lieu en mars 2020. En conclusion, le document est de bonne qualité et peut être
-    publié
   source: company
   document_file_id: 1373
   created_at: 2021-06-29 09:23:24 UTC
@@ -13029,9 +12788,6 @@ OperatorDocumentHistory_72139:
   start_date: 1998-03-27
   status: doc_invalid
   uploaded_by: operator
-  note: 'Le document chargé est le cahier des charges de la convention provisoire,
-    alors que c''est celui de la convention définitive qui devait être chargé dans
-    cette vignette. Ce document ne peut dont pas être publié. '
   source: company
   fmu_id: 11617
   document_file_id: 1374
@@ -13050,16 +12806,6 @@ OperatorDocumentHistory_72140:
   start_date: 2020-02-12
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est bien une notification de démarrage des activités dans
-    l'UFA 10 011. Mais contrairement au permis annuel d'opération qui prend en compte
-    les AAC 5.2 et 5.3, la notification ne fait allusion qu'à l'AAC 5.3 et en plus
-    de cela, le document n'a pas été bien scanné, il est un peu flou et enfin, les
-    informations liées au nombre d'arbres à exploités et au volume correspondant ont
-    été volontairement cachées. Au vu de ces irrégularités, ce document ne peut être
-    publié. Le gestionnaire du compte de cette entreprise doit bien scanner le document
-    original et le chargé à nouveau. Il serait également intéressant qu'il donne des
-    clarifications concernant la différence d'AAC entre le PAO et la notification
-    de démarrage
   source: company
   fmu_id: 11617
   document_file_id: 1375
@@ -13078,15 +12824,6 @@ OperatorDocumentHistory_72141:
   start_date: 2020-02-03
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé est bien un permis annuel d''opération délivré par l''autorité
-    compétente en l''occurrence le Ministre des forêts et de la faune le 03/02/2020.
-    Il a été émis le 02/01/2020, modifié le 27 du même mois et doit arriver à expiration
-    le 31 décembre 2020.  Il a été délivré à la SABM et prend en compte deux assiettes
-    annuelles de coupe (5.2 et 5.3). Mais contrairement aux document similaires publiés
-    dans l''OTP, il ne présente pas la page affichant la liste des essences à ne pas
-    exploiter, qui constitue très souvent la dernière page du PAO. En attendant les
-    explications du gestionnaire du compte de cette entreprise, ce document ne peut
-    être publié. '
   source: company
   fmu_id: 11617
   document_file_id: 1376
@@ -13156,13 +12893,6 @@ OperatorDocumentHistory_72146:
   start_date: 2012-06-22
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est bien intitulé "Certificat de conformité environnementale".
-    Il présente l'entête du Ministère en charge de l'environnement et est conforme
-    aux documents similaires publiés dans l'OTP. Les information lié à son destinataire
-    font bien référence à l'entreprise SAB et à l'UFA 10 011 dont elle est attributaire.
-    Il a été signé par le Ministre délégué auprès du ministre en charge de l'environnement
-    le 22/06/2012 pour l'UFA. Sa durée étant se 15 ans, il arrivera à expiration le
-    21/06/2027. En conclusion, il est valide et peut être publié.
   source: company
   fmu_id: 11617
   document_file_id: 1377
@@ -13181,12 +12911,6 @@ OperatorDocumentHistory_72147:
   start_date: 2010-10-13
   status: doc_invalid
   uploaded_by: operator
-  note: Le document chargé est le cahier des charges de la convention définitive d'exploitation
-    de la concession N° 1025 constituée des UFA 10 001, 10 002, 10 003 et 10 004 attribuées
-    à la CFC. Il ne présente que la signature du titulaire du titre, il manque celle
-    du ministre en charge des forêts. En plus de cela, il n'y a pas de date de signature.
-    En conclusion, le document n'est pas de bonne qualité et ne peut donc pas être
-    publié.
   source: company
   fmu_id: 11660
   document_file_id: 1378
@@ -13205,12 +12929,6 @@ OperatorDocumentHistory_72148:
   start_date: 2010-10-13
   status: doc_invalid
   uploaded_by: operator
-  note: Le document chargé est le cahier des charges de la convention définitive d'exploitation
-    de la concession N° 1025 constituée des UFA 10 001, 10 002, 10 003 et 10 004 attribuées
-    à la CFC. Il ne présente que la signature du titulaire du titre, il manque celle
-    du ministre en charge des forêts. En plus de cela, il n'y a pas de date de signature.
-    En conclusion, le document n'est pas de bonne qualité et ne peut donc pas être
-    publié.
   source: company
   fmu_id: 11569
   document_file_id: 1379
@@ -13229,12 +12947,6 @@ OperatorDocumentHistory_72149:
   start_date: 2010-10-13
   status: doc_invalid
   uploaded_by: operator
-  note: Le document chargé est le cahier des charges de la convention définitive d'exploitation
-    de la concession N° 1025 constituée des UFA 10 001, 10 002, 10 003 et 10 004 attribuées
-    à la CFC. Il ne présente que la signature du titulaire du titre, il manque celle
-    du ministre en charge des forêts. En plus de cela, il n'y a pas de date de signature.
-    En conclusion, le document n'est pas de bonne qualité et ne peut donc pas être
-    publié.
   source: company
   fmu_id: 11602
   document_file_id: 1380
@@ -13271,12 +12983,6 @@ OperatorDocumentHistory_72151:
   start_date: 2010-10-13
   status: doc_invalid
   uploaded_by: operator
-  note: Le document chargé est le cahier des charges de la convention définitive d'exploitation
-    de la concession N° 1025 constituée des UFA 10 001, 10 002, 10 003 et 10 004 attribuées
-    à la CFC. Il ne présente que la signature du titulaire du titre, il manque celle
-    du ministre en charge des forêts. En plus de cela, il n'y a pas de date de signature.
-    En conclusion, le document n'est pas de bonne qualité et ne peut donc pas être
-    publié.
   source: company
   fmu_id: 11604
   document_file_id: 1381
@@ -13505,11 +13211,6 @@ OperatorDocumentHistory_72218:
   start_date: 2020-04-13
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est un compte-rendu de sensibilisation du comité paysan
-    forêt rédigé par l'entreprise SEBC. Il ne correspond pas au document attendu qui
-    est un procès-verbal de réunion dressé par l'administration avant le début d'une
-    exploitation forestière. Il faudrait également joindre la preuve d'un partenariat
-    entre SAB et SEBC. Ce document ne peut être publié.
   source: company
   fmu_id: 11617
   document_file_id: 1412
@@ -13528,11 +13229,6 @@ OperatorDocumentHistory_72219:
   start_date: 2010-09-14
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé contient une notification d'attribution de concession forestière
-    ainsi que le décret y relatif. La concession porte sur les UFA 10 001, 10 002,
-    10 003 et 10 004. Le document a été chargé pour l'UFA 10 002. Dans la forme et
-    le fond le décret chargé est conforme à la norme et signé par l'autorité compétente
-    en l'occurrence le premier ministre. En conlusion, le document peut être publié
   source: company
   fmu_id: 11602
   document_file_id: 1413
@@ -13658,14 +13354,6 @@ OperatorDocumentHistory_72254:
   start_date: 2016-11-04
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est une déclaration de modification au registre du commerce
-    contenant le numéro d'immatriculation de la société d'exploitation de bois du
-    Cameroun SEBC. Bien que l'intégralité de la mention du tribunal de première instance
-    n'apparaisse pas, il est possible d'avoir en la partie "première instance" sur
-    la page 1 l'assurance que ce document a été délivré par le greffe d'un tribunal
-    de premier instance. C'est la structure compétente dans la délivrance de ce document.
-    Dans la forme et dans le fond, ce document correspond à ceux publiés sur l'OTP.
-    Il peut donc être publié.
   source: company
   document_file_id: 1438
   created_at: 2021-06-29 09:23:24 UTC
@@ -13819,14 +13507,6 @@ OperatorDocumentHistory_77668:
   start_date: 2021-01-04
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est un permis annuel d'opérations de la société CFC. Dans
-    sa forme et son fond il est conforme car similaire aux permis annuels validés
-    dans l'OTP et signé par l'autorité compétente en l'occurrence le Ministre des
-    forêts et de la faune. Cependant, au lieu de charger le permis de l'UFA 10 003
-    comme le demande la vignette, le gestionnaire du compte de l'entreprise a chargé
-    celui de l'UFA 10 004. Il faudrait donc signaler cela à l'entreprise afin qu'elle
-    charge le permis annuel d'opérations de l'UFA 10 003. En conclusion le document
-    ne peut être publié.
   source: company
   fmu_id: 11569
   document_file_id: 1935
@@ -13845,15 +13525,6 @@ OperatorDocumentHistory_77669:
   start_date: 2021-01-04
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11569
   document_file_id: 1935
@@ -13872,15 +13543,6 @@ OperatorDocumentHistory_77670:
   start_date: 2021-01-04
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11569
   document_file_id: 1935
@@ -13950,14 +13612,6 @@ OperatorDocumentHistory_77675:
   start_date: 2021-01-04
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est un permis annuel d'opérations de la société CFC. Dans
-    sa forme et son fond il est conforme car similaire aux permis annuels validés
-    dans l'OTP et signé par l'autorité compétente en l'occurrence le Ministre des
-    forêts et de la faune. Cependant, au lieu de charger le permis de l'UFA 10 002
-    comme le demande la vignette, le gestionnaire du compte de l'entreprise a chargé
-    celui de l'UFA 10 004. Il faudrait donc signaler cela à l'entreprise afin qu'elle
-    charge le permis annuel d'opérations de l'UFA 10 002. En conclusion le document
-    ne peut être publié.
   source: company
   fmu_id: 11602
   document_file_id: 1934
@@ -13976,15 +13630,6 @@ OperatorDocumentHistory_77676:
   start_date: 2021-01-04
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11602
   document_file_id: 1934
@@ -14003,15 +13648,6 @@ OperatorDocumentHistory_77677:
   start_date: 2021-01-04
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11602
   document_file_id: 1934
@@ -14081,10 +13717,6 @@ OperatorDocumentHistory_77682:
   start_date: 2021-01-04
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opération de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. En conclusion le document peut être publié.
   source: company
   fmu_id: 11604
   document_file_id: 1936
@@ -14103,10 +13735,6 @@ OperatorDocumentHistory_77683:
   start_date: 2021-01-04
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opération de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. En conclusion le document peut être publié.
   source: company
   fmu_id: 11604
   document_file_id: 1936
@@ -14176,15 +13804,6 @@ OperatorDocumentHistory_77688:
   start_date: 2021-01-04
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11660
   document_file_id: 1937
@@ -14203,15 +13822,6 @@ OperatorDocumentHistory_77689:
   start_date: 2021-01-04
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11660
   document_file_id: 1937
@@ -14545,16 +14155,6 @@ OperatorDocumentHistory_77804:
   start_date: 2021-01-12
   status: doc_valid
   uploaded_by: operator
-  note: "Le document chargé est la notification de démarrage des activités dans l'UFA
-    10 004 mais il a été chargé dans la vignette correspondant à l'UFA 10 001. Etant
-    donné que les UFA 10 001, 10 002; 10 003 et 10 004 ont fait l'objet d'un  seul
-    plan d'aménagement,  le document chargé est valable pour toutes ces quatre UFAs.
-    Pour les UFA autres que la 10 004, il faudrait insérer en annexe, la lettre d'approbation
-    du plan d'aménagement. sur le fond, le document est de bonne qualité mais sur
-    la forme, nous constatons qu'une petite partie du cachet et de la signature n'est
-    pas visible, mais cela ne devrait pas véritablement constituer un problème. En
-    conclusion, la publication pourra être effectuée une fois que le document demandé
-    en annexe sera chargé?\r\n"
   source: company
   fmu_id: 11569
   document_file_id: 1706
@@ -14573,16 +14173,6 @@ OperatorDocumentHistory_77805:
   start_date: 2021-01-12
   status: doc_valid
   uploaded_by: operator
-  note: "Le document chargé est la notification de démarrage des activités dans l'UFA
-    10 004 mais il a été chargé dans la vignette correspondant à l'UFA 10 001. Etant
-    donné que les UFA 10 001, 10 002; 10 003 et 10 004 ont fait l'objet d'un  seul
-    plan d'aménagement,  le document chargé est valable pour toutes ces quatre UFAs.
-    Pour les UFAs autres que la 10 004, il faudrait insérer en annexe, la lettre d'approbation
-    du plan d'aménagement. sur le fond, le document est de bonne qualité mais sur
-    la forme, nous constatons qu'une petite partie du cachet et de la signature n'est
-    pas visible, mais cela ne devrait pas véritablement constituer un problème. En
-    conclusion, la publication pourra être effectuée une fois que le document demandé
-    en annexe sera chargé?\r\n"
   source: company
   fmu_id: 11602
   document_file_id: 1707
@@ -14601,12 +14191,6 @@ OperatorDocumentHistory_77806:
   start_date: 2021-01-12
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé est la notification de démarrage des activités dans l''UFA
-    10 004 dont l''entreprise CFC est attributaire. Il est signé par l''autorité compétente
-    en l''occurrence le délégué régional des forêts et de la faune de la région de
-    l''Est. Une petite partie du cachet et de la signature n''est pas visible, mais
-    nous pensons que cela ne constitue pas un véritable problème et que le document
-    peut être publié. '
   source: company
   fmu_id: 11604
   document_file_id: 1708
@@ -14625,16 +14209,6 @@ OperatorDocumentHistory_77807:
   start_date: 2021-01-12
   status: doc_valid
   uploaded_by: operator
-  note: "Le document chargé est la notification de démarrage des activités dans l'UFA
-    10 004 mais il a été chargé dans la vignette correspondant à l'UFA 10 001. Etant
-    donné que les UFA 10 001, 10 002; 10 003 et 10 004 ont fait l'objet d'un  seul
-    plan d'aménagement,  le document chargé est valable pour toutes ces quatre UFAs.
-    Pour les UFA autres que la 10 004, il faudrait insérer en annexe, la lettre d'approbation
-    du plan d'aménagement. sur le fond, le document est de bonne qualité mais sur
-    la forme, nous constatons qu'une petite partie du cachet et de la signature n'est
-    pas visible, mais cela ne devrait pas véritablement constituer un problème. En
-    conclusion, la publication pourra être effectuée une fois que le document demandé
-    en annexe sera chargé?\r\n\r\n"
   source: company
   fmu_id: 11660
   document_file_id: 1709
@@ -14653,13 +14227,6 @@ OperatorDocumentHistory_77808:
   start_date: 2021-01-12
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est une notification de démarrage des activités délivrée
-    à SEBC pour l'UFA 10-007 par le Délégué régional des forêts. Il est l'autorité
-    compétente en la matière. Il est vrai que la signature n'est pas entièrement visible.
-    On pourrait revenir d'abord vers l'entreprise pour qu'elle refasse le scan de
-    sorte que la signature soit plus visible. Mais dans le fond et la forme ce document
-    est conforme.  En conclusion, ce document ne peut être publié que s'il présente
-    mieux la signature.
   source: company
   fmu_id: 11621
   document_file_id: 1710
@@ -14678,10 +14245,6 @@ OperatorDocumentHistory_77809:
   start_date: 2021-01-05
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est un permis annuel d'opération de la société SEBC pour
-    l'UFA 10-007. Il a été délivré par l'autorité compétente notamment le Ministre
-    des Forêts et de la Faune. Dans sa forme et son fond il correspond aux PAO validés
-    dans l'OTP. En conclusion le document peut être publié.
   source: company
   fmu_id: 11621
   document_file_id: 1711
@@ -14700,11 +14263,6 @@ OperatorDocumentHistory_77810:
   start_date: 2021-02-11
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est une attestation de non redevance délivrée par le centre
-    de impôts des moyennes entreprises de Bonandjo, Douala à l'entreprise SAB. Il
-    a été signé par les autorités compétentes notamment le receveur des impôts et
-    le chef de centre,  le 11/02/2021 pour une durée de trois mois. Il est donc valide
-    et peut être publié.
   source: company
   document_file_id: 1712
   created_at: 2021-06-29 09:23:24 UTC
@@ -14722,11 +14280,6 @@ OperatorDocumentHistory_77811:
   start_date: 2021-02-11
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est une attestation de non redevance délivrée par le centre
-    de impôts des moyennes entreprises de Bonandjo, Douala à l'entreprise SAB. Il
-    a été signé par les autorités compétentes notamment le receveur des impôts et
-    le chef de centre,  le 11/02/2021 pour une durée de trois mois. Il est donc valide
-    et peut être publié.
   source: company
   document_file_id: 1712
   created_at: 2021-06-29 09:23:24 UTC
@@ -15064,11 +14617,6 @@ OperatorDocumentHistory_77852:
   start_date: 2021-05-12
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est une attestation de non redevance délivrée par le centre
-    de impôts des moyennes entreprises de Bonandjo, Douala à l'entreprise SAB. Il
-    a été signé par les autorités compétentes notamment le receveur des impôts et
-    le chef de centre,  le 12/05/2021 pour une durée de trois mois. Il est donc valide
-    et peut être publié.
   source: company
   document_file_id: 1997
   created_at: 2021-06-29 09:23:24 UTC
@@ -15086,11 +14634,6 @@ OperatorDocumentHistory_77853:
   start_date: 2021-05-12
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est une attestation de non redevance délivrée par le centre
-    de impôts des moyennes entreprises de Bonandjo, Douala à l'entreprise SAB. Il
-    a été signé par les autorités compétentes notamment le receveur des impôts et
-    le chef de centre,  le 12/05/2021 pour une durée de trois mois. Il est donc valide
-    et peut être publié.
   source: company
   document_file_id: 1997
   created_at: 2021-06-29 09:23:24 UTC
@@ -15108,11 +14651,6 @@ OperatorDocumentHistory_77854:
   start_date: 2021-05-12
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est une attestation de non redevance délivrée par le centre
-    de impôts des moyennes entreprises de Bonandjo, Douala à l'entreprise SAB. Il
-    a été signé par les autorités compétentes notamment le receveur des impôts et
-    le chef de centre,  le 12/05/2021 pour une durée de trois mois. Il est donc valide
-    et peut être publié.
   source: company
   document_file_id: 1997
   created_at: 2021-06-29 09:23:24 UTC
@@ -15130,12 +14668,6 @@ OperatorDocumentHistory_77855:
   start_date: 2021-01-15
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11569
   document_file_id: 1713
@@ -15154,12 +14686,6 @@ OperatorDocumentHistory_77856:
   start_date: 2021-01-15
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11602
   document_file_id: 1714
@@ -15178,12 +14704,6 @@ OperatorDocumentHistory_77857:
   start_date: 2021-01-15
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11604
   document_file_id: 1715
@@ -15202,12 +14722,6 @@ OperatorDocumentHistory_77858:
   start_date: 2021-01-15
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11660
   document_file_id: 1716
@@ -15226,12 +14740,6 @@ OperatorDocumentHistory_77859:
   start_date: 2021-01-15
   status: doc_valid
   uploaded_by: operator
-  note: "\tLe document chargé est intitulé \"Attestation de réalisation des œuvres
-    sociales\", il a été établi le 15/01/2021 pour les œuvres sociales réalisées au
-    cours de l'année 2020 par l'entreprise SAB dans l'UFA 10 007. Comme certains documents
-    similaires publiés dans l'OTP,  il a été signé par le délégué départemental couvrant
-    la zone dans laquelle se trouve cette UFA. Il est donc de bonne qualité et peut
-    être publié."
   source: company
   fmu_id: 11617
   document_file_id: 1717
@@ -15250,12 +14758,6 @@ OperatorDocumentHistory_77860:
   start_date: 2021-01-15
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l'année
-    2020 par l'entreprise SEBC dans l'UFA 10 007.  Comme certains documents similaires
-    publiés dans l'OTP, notamment PALLISCO, il a été signé par le délégué départemental
-    couvrant la zone dans laquelle se trouve cette UFA. En conclusion,  il est de
-    bonne qualité et peut être publié.
   source: company
   fmu_id: 11621
   document_file_id: 1718
@@ -16532,8 +16034,6 @@ OperatorDocumentHistory_78670:
   start_date: 2016-04-06
   status: doc_pending
   uploaded_by: operator
-  note: "Toutes les charges ne sont pas realisees.  \r\n\r\nContruction du logement
-    du proviseur du lycee  d’Enyelle\r\nFinalisation du boulevard  Denis Sassou NGuesso\r\n"
   source: company
   fmu_id: 109
   created_at: 2021-06-29 09:23:24 UTC
@@ -16551,8 +16051,6 @@ OperatorDocumentHistory_78671:
   start_date: 2016-04-06
   status: doc_valid
   uploaded_by: operator
-  note: "Toutes les charges ne sont pas realisees.  \r\n\r\nContruction du logement
-    du proviseur du lycee  d’Enyelle\r\nFinalisation du boulevard  Denis Sassou NGuesso\r\n"
   source: company
   fmu_id: 109
   document_file_id: 1883
@@ -16588,12 +16086,6 @@ OperatorDocumentHistory_78688:
   start_date: 2021-04-19
   status: doc_pending
   uploaded_by: operator
-  note: 'Le document chargé par la SEBC est bien l''attestation de respect des normes
-    d''exploitation forestière de l''UFA 10 007, AC 5-1. Conformément à la réglementation,
-    il est signé par l''autorité compétente en l''occurrence le ministre des forêts
-    et de la faune et il a la même structure des documents similaires publiés dans
-    l''OTP. Il a été délivré le 19 avril 2021 pour une durée d''un an. En conclusion,
-    il est de bonne qualité et peut être publié. '
   source: company
   fmu_id: 11621
   created_at: 2021-06-29 09:23:24 UTC
@@ -16611,12 +16103,6 @@ OperatorDocumentHistory_78689:
   start_date: 2021-04-19
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé par la SEBC est bien l''attestation de respect des normes
-    d''exploitation forestière de l''UFA 10 007, AC 5-1. Conformément à la réglementation,
-    il est signé par l''autorité compétente en l''occurrence le ministre des forêts
-    et de la faune et il a la même structure des documents similaires publiés dans
-    l''OTP. Il a été délivré le 19 avril 2021 pour une durée d''un an. En conclusion,
-    il est de bonne qualité et peut être publié. '
   source: company
   fmu_id: 11621
   document_file_id: 1887
@@ -16652,12 +16138,6 @@ OperatorDocumentHistory_78691:
   start_date: 2021-04-19
   status: doc_pending
   uploaded_by: operator
-  note: 'Le document chargé par la SAB est est bien l''attestation de respect des
-    normes d''exploitation forestière de l''UFA 10 011, AC 5-2 et AC 5-3. Conformément
-    à la réglementation, il est signé par l''autorité compétente en l''occurrence
-    le ministre des forêts et de la faune. Les AC mentionnées dans ce document correspondent
-    bien à celles mentionnées dans la PAO délivré pour l''exploitation de cette UFA
-    en 2020. Par conséquent, le document est de bonne qualité et peut être publié. '
   source: company
   fmu_id: 11617
   created_at: 2021-06-29 09:23:24 UTC
@@ -16675,12 +16155,6 @@ OperatorDocumentHistory_78692:
   start_date: 2021-04-19
   status: doc_pending
   uploaded_by: operator
-  note: 'Le document chargé par la SAB  est bien l''attestation de respect des normes
-    d''exploitation forestière de l''UFA 10 011, AC 5-2 et AC 5-3. Conformément à
-    la réglementation, il est signé par l''autorité compétente en l''occurrence le
-    ministre des forêts et de la faune. Les AC mentionnées dans ce document correspondent
-    bien à celles mentionnées dans la PAO délivré pour l''exploitation de cette UFA
-    en 2020. Par conséquent, le document est de bonne qualité et peut être publié. '
   source: company
   fmu_id: 11617
   created_at: 2021-06-29 09:23:24 UTC
@@ -16698,12 +16172,6 @@ OperatorDocumentHistory_78693:
   start_date: 2021-04-19
   status: doc_valid
   uploaded_by: operator
-  note: 'Le document chargé par la SAB  est bien l''attestation de respect des normes
-    d''exploitation forestière de l''UFA 10 011, AC 5-2 et AC 5-3. Conformément à
-    la réglementation, il est signé par l''autorité compétente en l''occurrence le
-    ministre des forêts et de la faune. Les AC mentionnées dans ce document correspondent
-    bien à celles mentionnées dans la PAO délivré pour l''exploitation de cette UFA
-    en 2020. Par conséquent, le document est de bonne qualité et peut être publié. '
   source: company
   fmu_id: 11617
   document_file_id: 1888
@@ -16910,14 +16378,6 @@ OperatorDocumentHistory_79548:
   start_date: 2018-03-15
   status: doc_pending
   uploaded_by: operator
-  note: Le document chargé est un procès-verbal d'élection des délégués du personnel
-    de l'entreprise SAB. Dans le fond et la forme il est conforme et contient le cachet
-    de l'entreprise. Il a été signé le 02/03/2020 et devrait être expiré depuis le
-    01/03/2020. Mais le document chargé en annexe est une lettre circulaire signée
-    du ministre délégué auprès du ministre du travail et de la sécurité sociale reportant
-    à une date ultérieure, les élections des délégués du personnel qui devraient avoir
-    lieu en mars 2020. En conclusion, le document est de bonne qualité et peut être
-    publié
   source: company
   document_file_id: 1373
   created_at: 2021-07-01 17:04:20 UTC
@@ -16952,14 +16412,6 @@ OperatorDocumentHistory_79550:
   start_date: 2018-03-15
   status: doc_valid
   uploaded_by: operator
-  note: Le document chargé est un procès-verbal d'élection des délégués du personnel
-    de l'entreprise SAB. Dans le fond et la forme il est conforme et contient le cachet
-    de l'entreprise. Il a été signé le 02/03/2020 et devrait être expiré depuis le
-    01/03/2020. Mais le document chargé en annexe est une lettre circulaire signée
-    du ministre délégué auprès du ministre du travail et de la sécurité sociale reportant
-    à une date ultérieure, les élections des délégués du personnel qui devraient avoir
-    lieu en mars 2020. En conclusion, le document est de bonne qualité et peut être
-    publié
   source: company
   document_file_id: 1373
   created_at: 2021-07-01 17:05:16 UTC
@@ -17065,8 +16517,6 @@ OperatorDocumentHistory_79556:
   reason: 'SIENCAM n''effectue pas d''exportation de bois débité , elle ne prévoit
     pas en faire pour le compte de l''exercice 2021. La production débité est entièrement
     mise à disposition d''une entreprise partenaire locale. '
-  note: Il faut donc mettre le comtrat de partenariat avec SEFECCAM approuve par le
-    MINFOF.  ENSUI TE METTRE EN ANNEXE LE DOCUMENT CORRESPONDANT POUR SEFECCAM
   source: company
   created_at: 2021-07-02 12:19:51 UTC
   updated_at: 2021-07-02 12:19:51 UTC
@@ -18317,11 +17767,6 @@ OperatorDocumentHistory_79738:
   start_date: 2021-05-12
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est une attestation de non redevance délivrée par le centre
-    de impôts des moyennes entreprises de Bonandjo, Douala à l'entreprise SAB. Il
-    a été signé par les autorités compétentes notamment le receveur des impôts et
-    le chef de centre,  le 12/05/2021 pour une durée de trois mois. Il est donc valide
-    et peut être publié.
   source: company
   document_file_id: 1997
   created_at: 2021-08-12 01:04:08 UTC
@@ -20355,14 +19800,6 @@ OperatorDocumentHistory_80989:
   start_date: 2018-03-15
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est un procès-verbal d'élection des délégués du personnel
-    de l'entreprise SAB. Dans le fond et la forme il est conforme et contient le cachet
-    de l'entreprise. Il a été signé le 02/03/2020 et devrait être expiré depuis le
-    01/03/2020. Mais le document chargé en annexe est une lettre circulaire signée
-    du ministre délégué auprès du ministre du travail et de la sécurité sociale reportant
-    à une date ultérieure, les élections des délégués du personnel qui devraient avoir
-    lieu en mars 2020. En conclusion, le document est de bonne qualité et peut être
-    publié
   source: company
   document_file_id: 1373
   created_at: 2022-01-01 01:04:21 UTC
@@ -20416,15 +19853,6 @@ OperatorDocumentHistory_81009:
   start_date: 2021-01-04
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11569
   document_file_id: 1935
@@ -20443,15 +19871,6 @@ OperatorDocumentHistory_81010:
   start_date: 2021-01-04
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11602
   document_file_id: 1934
@@ -20470,10 +19889,6 @@ OperatorDocumentHistory_81011:
   start_date: 2021-01-04
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opération de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. En conclusion le document peut être publié.
   source: company
   fmu_id: 11604
   document_file_id: 1936
@@ -20492,15 +19907,6 @@ OperatorDocumentHistory_81012:
   start_date: 2021-01-04
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est le permis annuel d'opérations de la société CFC dans
-    l'UFA 10 004. Dans sa forme et son fond il est conforme car similaire aux permis
-    annuels validés dans l'OTP et signé par l'autorité compétente en l'occurrence
-    le Ministre des forêts et de la faune. Conformément à la pratique une concession
-    forestière constituée de plusieurs UFA peut disposer d'un seul plan d'aménagement.
-    Et sur cette base, un seul permis annuel d'opération peut être délivré à l'entreprise
-    exploitante. C'est la raison pour laquelle CFC a chargé en annexe l'arrêté d'approbation
-    de son plan d'aménagement. Ainsi, le permis annuel d'opération de l'UFA 10 004
-    peut être chargé pour toutes les autres UFA. Ce document peut donc être publié.
   source: company
   fmu_id: 11660
   document_file_id: 1937
@@ -20590,16 +19996,6 @@ OperatorDocumentHistory_81041:
   start_date: 2021-01-12
   status: doc_expired
   uploaded_by: operator
-  note: "Le document chargé est la notification de démarrage des activités dans l'UFA
-    10 004 mais il a été chargé dans la vignette correspondant à l'UFA 10 001. Etant
-    donné que les UFA 10 001, 10 002; 10 003 et 10 004 ont fait l'objet d'un  seul
-    plan d'aménagement,  le document chargé est valable pour toutes ces quatre UFAs.
-    Pour les UFA autres que la 10 004, il faudrait insérer en annexe, la lettre d'approbation
-    du plan d'aménagement. sur le fond, le document est de bonne qualité mais sur
-    la forme, nous constatons qu'une petite partie du cachet et de la signature n'est
-    pas visible, mais cela ne devrait pas véritablement constituer un problème. En
-    conclusion, la publication pourra être effectuée une fois que le document demandé
-    en annexe sera chargé?\r\n"
   source: company
   fmu_id: 11569
   document_file_id: 1706
@@ -20618,16 +20014,6 @@ OperatorDocumentHistory_81042:
   start_date: 2021-01-12
   status: doc_expired
   uploaded_by: operator
-  note: "Le document chargé est la notification de démarrage des activités dans l'UFA
-    10 004 mais il a été chargé dans la vignette correspondant à l'UFA 10 001. Etant
-    donné que les UFA 10 001, 10 002; 10 003 et 10 004 ont fait l'objet d'un  seul
-    plan d'aménagement,  le document chargé est valable pour toutes ces quatre UFAs.
-    Pour les UFAs autres que la 10 004, il faudrait insérer en annexe, la lettre d'approbation
-    du plan d'aménagement. sur le fond, le document est de bonne qualité mais sur
-    la forme, nous constatons qu'une petite partie du cachet et de la signature n'est
-    pas visible, mais cela ne devrait pas véritablement constituer un problème. En
-    conclusion, la publication pourra être effectuée une fois que le document demandé
-    en annexe sera chargé?\r\n"
   source: company
   fmu_id: 11602
   document_file_id: 1707
@@ -20646,12 +20032,6 @@ OperatorDocumentHistory_81043:
   start_date: 2021-01-12
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé est la notification de démarrage des activités dans l''UFA
-    10 004 dont l''entreprise CFC est attributaire. Il est signé par l''autorité compétente
-    en l''occurrence le délégué régional des forêts et de la faune de la région de
-    l''Est. Une petite partie du cachet et de la signature n''est pas visible, mais
-    nous pensons que cela ne constitue pas un véritable problème et que le document
-    peut être publié. '
   source: company
   fmu_id: 11604
   document_file_id: 1708
@@ -20670,16 +20050,6 @@ OperatorDocumentHistory_81044:
   start_date: 2021-01-12
   status: doc_expired
   uploaded_by: operator
-  note: "Le document chargé est la notification de démarrage des activités dans l'UFA
-    10 004 mais il a été chargé dans la vignette correspondant à l'UFA 10 001. Etant
-    donné que les UFA 10 001, 10 002; 10 003 et 10 004 ont fait l'objet d'un  seul
-    plan d'aménagement,  le document chargé est valable pour toutes ces quatre UFAs.
-    Pour les UFA autres que la 10 004, il faudrait insérer en annexe, la lettre d'approbation
-    du plan d'aménagement. sur le fond, le document est de bonne qualité mais sur
-    la forme, nous constatons qu'une petite partie du cachet et de la signature n'est
-    pas visible, mais cela ne devrait pas véritablement constituer un problème. En
-    conclusion, la publication pourra être effectuée une fois que le document demandé
-    en annexe sera chargé?\r\n\r\n"
   source: company
   fmu_id: 11660
   document_file_id: 1709
@@ -20698,13 +20068,6 @@ OperatorDocumentHistory_81045:
   start_date: 2021-01-12
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est une notification de démarrage des activités délivrée
-    à SEBC pour l'UFA 10-007 par le Délégué régional des forêts. Il est l'autorité
-    compétente en la matière. Il est vrai que la signature n'est pas entièrement visible.
-    On pourrait revenir d'abord vers l'entreprise pour qu'elle refasse le scan de
-    sorte que la signature soit plus visible. Mais dans le fond et la forme ce document
-    est conforme.  En conclusion, ce document ne peut être publié que s'il présente
-    mieux la signature.
   source: company
   fmu_id: 11621
   document_file_id: 1710
@@ -20723,10 +20086,6 @@ OperatorDocumentHistory_81046:
   start_date: 2021-01-05
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est un permis annuel d'opération de la société SEBC pour
-    l'UFA 10-007. Il a été délivré par l'autorité compétente notamment le Ministre
-    des Forêts et de la Faune. Dans sa forme et son fond il correspond aux PAO validés
-    dans l'OTP. En conclusion le document peut être publié.
   source: company
   fmu_id: 11621
   document_file_id: 1711
@@ -20745,12 +20104,6 @@ OperatorDocumentHistory_81047:
   start_date: 2021-01-15
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11602
   document_file_id: 1714
@@ -21287,12 +20640,6 @@ OperatorDocumentHistory_81104:
   start_date: 2021-04-19
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé par la SEBC est bien l''attestation de respect des normes
-    d''exploitation forestière de l''UFA 10 007, AC 5-1. Conformément à la réglementation,
-    il est signé par l''autorité compétente en l''occurrence le ministre des forêts
-    et de la faune et il a la même structure des documents similaires publiés dans
-    l''OTP. Il a été délivré le 19 avril 2021 pour une durée d''un an. En conclusion,
-    il est de bonne qualité et peut être publié. '
   source: company
   fmu_id: 11621
   document_file_id: 1887
@@ -21311,12 +20658,6 @@ OperatorDocumentHistory_81105:
   start_date: 2021-04-19
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé par la SAB  est bien l''attestation de respect des normes
-    d''exploitation forestière de l''UFA 10 011, AC 5-2 et AC 5-3. Conformément à
-    la réglementation, il est signé par l''autorité compétente en l''occurrence le
-    ministre des forêts et de la faune. Les AC mentionnées dans ce document correspondent
-    bien à celles mentionnées dans la PAO délivré pour l''exploitation de cette UFA
-    en 2020. Par conséquent, le document est de bonne qualité et peut être publié. '
   source: company
   fmu_id: 11617
   document_file_id: 1888
@@ -22014,12 +21355,6 @@ OperatorDocumentHistory_81216:
   start_date: 2021-01-15
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11569
   document_file_id: 1713
@@ -22038,12 +21373,6 @@ OperatorDocumentHistory_81217:
   start_date: 2021-01-15
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11604
   document_file_id: 1715
@@ -22062,12 +21391,6 @@ OperatorDocumentHistory_81218:
   start_date: 2021-01-15
   status: doc_expired
   uploaded_by: operator
-  note: 'Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l''année
-    2020 par l''entreprise CFC dans ses UFAs : 10 001, 10 002,  10 003 et 10 004.  Comme
-    certains documents similaires publiés dans l''OTP, notamment PALLISCO, il a été
-    signé par le délégué départemental couvrant la zone dans laquelle se trouve ces
-    UFAs. En conclusion,  il est de bonne qualité et peut être publié.'
   source: company
   fmu_id: 11660
   document_file_id: 1716
@@ -22086,12 +21409,6 @@ OperatorDocumentHistory_81219:
   start_date: 2021-01-15
   status: doc_expired
   uploaded_by: operator
-  note: "\tLe document chargé est intitulé \"Attestation de réalisation des œuvres
-    sociales\", il a été établi le 15/01/2021 pour les œuvres sociales réalisées au
-    cours de l'année 2020 par l'entreprise SAB dans l'UFA 10 007. Comme certains documents
-    similaires publiés dans l'OTP,  il a été signé par le délégué départemental couvrant
-    la zone dans laquelle se trouve cette UFA. Il est donc de bonne qualité et peut
-    être publié."
   source: company
   fmu_id: 11617
   document_file_id: 1717
@@ -22110,12 +21427,6 @@ OperatorDocumentHistory_81220:
   start_date: 2021-01-15
   status: doc_expired
   uploaded_by: operator
-  note: Le document chargé est intitulé  "Attestation de réalisation des œuvres sociales",  il  a
-    été établi le 15/01/2021 pour les œuvres sociales réalisées au cours de l'année
-    2020 par l'entreprise SEBC dans l'UFA 10 007.  Comme certains documents similaires
-    publiés dans l'OTP, notamment PALLISCO, il a été signé par le délégué départemental
-    couvrant la zone dans laquelle se trouve cette UFA. En conclusion,  il est de
-    bonne qualité et peut être publié.
   source: company
   fmu_id: 11621
   document_file_id: 1718
@@ -23620,8 +22931,6 @@ OperatorDocumentHistory_81340:
   start_date: 2012-05-19
   status: doc_pending
   uploaded_by: operator
-  note: 'Telecharger le document insere pour "Etude d''impact environnementale et
-    sociale (scierie) le cas échéant" pour ajouter a celui ci. '
   source: company
   fmu_id: 105
   document_file_id: 2419
@@ -23640,8 +22949,6 @@ OperatorDocumentHistory_81341:
   start_date: 2013-08-23
   status: doc_pending
   uploaded_by: operator
-  note: 'Telecharger le document insere pour "Etude d''impact environnementale et
-    sociale (scierie) le cas échéant" pour ajouter a celui ci. '
   source: company
   fmu_id: 105
   document_file_id: 2418
@@ -25605,7 +24912,6 @@ OperatorDocumentHistory_81600:
   start_date: 2020-03-19
   status: doc_pending
   uploaded_by: operator
-  note: C'est bon, on peut valider
   source: company
   fmu_id: 100438
   document_file_id: 2466
@@ -25675,7 +24981,6 @@ OperatorDocumentHistory_81606:
   start_date: 2020-03-19
   status: doc_valid
   uploaded_by: operator
-  note: C'est bon, on peut valider
   source: company
   fmu_id: 100438
   document_file_id: 2466
@@ -25972,8 +25277,6 @@ OperatorDocumentHistory_81783:
   start_date: 2007-02-15
   status: doc_expired
   uploaded_by: other
-  note: La date de debut est 2007 et non 2017.   car il s'agit d'une mutation et non
-    une prorogation des dates
   public: true
   source: company
   fmu_id: 11496
@@ -25993,9 +25296,6 @@ OperatorDocumentHistory_81784:
   start_date: 2007-02-15
   status: doc_expired
   uploaded_by: other
-  note: 'Attention :  Il s''agit d''une mutation de certificat.  La date de debut
-    c''est 2007 et non la date de 2017 a laquelle la mutation s''est opere.  Ainsi
-    la validite sur 15 ans sera jusq''en 2022.'
   public: true
   source: company
   fmu_id: 11499
@@ -27210,7 +26510,6 @@ OperatorDocumentHistory_82333:
   start_date: 2021-07-02
   status: doc_pending
   uploaded_by: operator
-  note: 'Ce document est bon.  Pour une duree de 10 ans,  '
   source: company
   fmu_id: 56
   document_file_id: 1262
@@ -27229,8 +26528,6 @@ OperatorDocumentHistory_82334:
   start_date: 2021-01-01
   status: doc_pending
   uploaded_by: operator
-  note: il s'agit de la taxe 2020.  La validte devrait aller jusqu'au 31 Decembre
-    2021
   source: company
   fmu_id: 56
   document_file_id: 1801
@@ -27249,8 +26546,6 @@ OperatorDocumentHistory_82335:
   start_date: 2022-01-03
   status: doc_pending
   uploaded_by: operator
-  note: ":Le document est valide. Mais., c'est toujours bien de consulter le document
-    de l'annee precedente avant de publier."
   source: company
   fmu_id: 56
   document_file_id: 2623
@@ -27367,8 +26662,6 @@ OperatorDocumentHistory_82372:
   start_date: 2022-01-03
   status: doc_pending
   uploaded_by: operator
-  note: ":Le document est valide. Mais., c'est toujours bien de consulter le document
-    de l'annee precedente avant de publier."
   source: company
   fmu_id: 56
   document_file_id: 2674
@@ -27441,8 +26734,6 @@ OperatorDocumentHistory_82376:
   start_date: 2022-01-03
   status: doc_valid
   uploaded_by: operator
-  note: ":Le document est valide. Mais., c'est toujours bien de consulter le document
-    de l'annee precedente avant de publier."
   source: company
   fmu_id: 56
   document_file_id: 2674
@@ -27548,8 +26839,6 @@ OperatorDocumentHistory_82414:
   start_date: 2021-01-01
   status: doc_valid
   uploaded_by: operator
-  note: il s'agit de la taxe 2020.  La validte devrait aller jusqu'au 31 Decembre
-    2021
   source: company
   fmu_id: 56
   document_file_id: 1801
@@ -27568,7 +26857,6 @@ OperatorDocumentHistory_82415:
   start_date: 2021-07-02
   status: doc_valid
   uploaded_by: operator
-  note: 'Ce document est bon.  Pour une duree de 10 ans,  '
   source: company
   fmu_id: 56
   document_file_id: 1262
@@ -27587,7 +26875,6 @@ OperatorDocumentHistory_82416:
   start_date: 2021-08-18
   status: doc_pending
   uploaded_by: operator
-  note: la version 2021 n'est pas signe par le president du conseil de concertation
   source: company
   fmu_id: 56
   document_file_id: 1705
@@ -28045,8 +27332,6 @@ OperatorDocumentHistory_82797:
   start_date: 2007-02-15
   status: doc_pending
   uploaded_by: operator
-  note: La date de debut est 2007 et non 2017.   car il s'agit d'une mutation et non
-    une prorogation des dates
   source: company
   fmu_id: 11496
   document_file_id: 741
@@ -28065,9 +27350,6 @@ OperatorDocumentHistory_82798:
   start_date: 2007-02-15
   status: doc_pending
   uploaded_by: operator
-  note: 'Attention :  Il s''agit d''une mutation de certificat.  La date de debut
-    c''est 2007 et non la date de 2017 a laquelle la mutation s''est opere.  Ainsi
-    la validite sur 15 ans sera jusq''en 2022.'
   source: company
   fmu_id: 11499
   document_file_id: 746
@@ -29007,8 +28289,6 @@ OperatorDocumentHistory_83081:
   start_date: 2007-02-15
   status: doc_valid
   uploaded_by: operator
-  note: La date de debut est 2007 et non 2017.   car il s'agit d'une mutation et non
-    une prorogation des dates
   source: company
   fmu_id: 11496
   document_file_id: 741
@@ -29045,9 +28325,6 @@ OperatorDocumentHistory_83089:
   start_date: 2007-02-15
   status: doc_valid
   uploaded_by: operator
-  note: 'Attention :  Il s''agit d''une mutation de certificat.  La date de debut
-    c''est 2007 et non la date de 2017 a laquelle la mutation s''est opere.  Ainsi
-    la validite sur 15 ans sera jusq''en 2022.'
   source: company
   fmu_id: 11499
   document_file_id: 746
@@ -29595,8 +28872,6 @@ OperatorDocumentHistory_83302:
   start_date: 2021-01-01
   status: doc_expired
   uploaded_by: operator
-  note: il s'agit de la taxe 2020.  La validte devrait aller jusqu'au 31 Decembre
-    2021
   source: company
   fmu_id: 56
   document_file_id: 1801
@@ -30527,7 +29802,6 @@ OperatorDocumentHistory_83509:
   start_date: 2020-03-19
   status: doc_valid
   uploaded_by: operator
-  note: C'est bon, on peut valider
   source: company
   fmu_id: 100438
   document_file_id: 2466
@@ -30601,8 +29875,6 @@ OperatorDocumentHistory_83692:
   start_date: 2022-01-01
   status: doc_pending
   uploaded_by: operator
-  note: il s'agit de la taxe 2020.  La validte devrait aller jusqu'au 31 Decembre
-    2021
   source: company
   fmu_id: 56
   document_file_id: 2962
@@ -30832,8 +30104,6 @@ OperatorDocumentHistory_83717:
   start_date: 2022-01-01
   status: doc_pending
   uploaded_by: operator
-  note: il s'agit de la taxe 2020.  La validte devrait aller jusqu'au 31 Decembre
-    2021
   source: company
   fmu_id: 56
   document_file_id: 2976
@@ -30852,7 +30122,6 @@ OperatorDocumentHistory_83718:
   start_date: 2021-08-18
   status: doc_pending
   uploaded_by: operator
-  note: la version 2021 n'est pas signe par le president du conseil de concertation
   source: company
   fmu_id: 56
   document_file_id: 2977
@@ -30905,7 +30174,6 @@ OperatorDocumentHistory_83790:
   start_date: 2022-04-20
   status: doc_pending
   uploaded_by: operator
-  note: la version 2021 n'est pas signe par le president du conseil de concertation
   source: company
   fmu_id: 56
   document_file_id: 2994
@@ -30958,7 +30226,6 @@ OperatorDocumentHistory_83804:
   start_date: 2022-04-20
   status: doc_valid
   uploaded_by: operator
-  note: la version 2021 n'est pas signe par le president du conseil de concertation
   source: company
   fmu_id: 56
   document_file_id: 2994
@@ -30977,8 +30244,6 @@ OperatorDocumentHistory_83805:
   start_date: 2022-01-01
   status: doc_pending
   uploaded_by: operator
-  note: il s'agit de la taxe 2020.  La validte devrait aller jusqu'au 31 Decembre
-    2021
   source: company
   fmu_id: 56
   document_file_id: 2976
@@ -30997,8 +30262,6 @@ OperatorDocumentHistory_83806:
   start_date: 2022-01-01
   status: doc_valid
   uploaded_by: operator
-  note: il s'agit de la taxe 2020.  La validte devrait aller jusqu'au 31 Decembre
-    2021
   source: company
   fmu_id: 56
   document_file_id: 2976
@@ -31118,9 +30381,6 @@ OperatorDocumentHistory_83904:
   start_date: 2015-12-09
   status: doc_pending
   uploaded_by: operator
-  note: La reunion de validation ayant eu lieu en Mars 2022, il faudra mettre la preuve
-    de validation du nouveau plan de gestion une fois  disponible pour prolonger le
-    delai
   source: company
   fmu_id: 56
   document_file_id: 455
@@ -31175,9 +30435,6 @@ OperatorDocumentHistory_83907:
   start_date: 2015-12-09
   status: doc_valid
   uploaded_by: operator
-  note: La reunion de validation ayant eu lieu en Mars 2022, il faudra mettre la preuve
-    de validation du nouveau plan de gestion une fois  disponible pour prolonger le
-    delai
   source: company
   fmu_id: 56
   document_file_id: 455
@@ -31196,9 +30453,6 @@ OperatorDocumentHistory_83908:
   start_date: 2015-12-09
   status: doc_pending
   uploaded_by: operator
-  note: La reunion de validation ayant eu lieu en Mars 2022, il faudra mettre la preuve
-    de validation du nouveau plan de gestion une fois  disponible pour prolonger le
-    delai
   source: company
   fmu_id: 56
   document_file_id: 455
@@ -32237,8 +31491,6 @@ OperatorDocumentHistory_84280:
   start_date: 2012-05-19
   status: doc_invalid
   uploaded_by: operator
-  note: 'Telecharger le document insere pour "Etude d''impact environnementale et
-    sociale (scierie) le cas échéant" pour ajouter a celui ci. '
   source: company
   fmu_id: 105
   document_file_id: 2419
@@ -32837,9 +32089,6 @@ OperatorDocumentHistory_85514:
   start_date: 2022-06-06
   status: doc_pending
   uploaded_by: operator
-  note: La reunion de validation ayant eu lieu en Mars 2022, il faudra mettre la preuve
-    de validation du nouveau plan de gestion une fois  disponible pour prolonger le
-    delai
   source: company
   fmu_id: 56
   document_file_id: 3098
@@ -32926,9 +32175,6 @@ OperatorDocumentHistory_85559:
   start_date: 2022-06-06
   status: doc_valid
   uploaded_by: operator
-  note: La reunion de validation ayant eu lieu en Mars 2022, il faudra mettre la preuve
-    de validation du nouveau plan de gestion une fois  disponible pour prolonger le
-    delai
   source: company
   fmu_id: 56
   document_file_id: 3098
@@ -34017,8 +33263,6 @@ OperatorDocumentHistory_86326:
   start_date: 2007-11-15
   status: doc_pending
   uploaded_by: operator
-  note: Il est important d'associer l'arrete  d'approbation de ce plan d'amenagement
-    .
   source: company
   fmu_id: 56
   document_file_id: 277
@@ -34631,7 +33875,6 @@ OperatorDocumentHistory_86561:
   start_date: 2022-01-01
   status: doc_pending
   uploaded_by: operator
-  note: Il faut ajjouter la coupe 2022 ici
   source: company
   fmu_id: 105
   document_file_id: 3411
@@ -34650,7 +33893,6 @@ OperatorDocumentHistory_86562:
   start_date: 2022-01-01
   status: doc_invalid
   uploaded_by: operator
-  note: Il faut ajjouter la coupe 2022 ici
   source: company
   fmu_id: 105
   document_file_id: 3411
@@ -34759,8 +34001,6 @@ OperatorDocumentHistory_86580:
   start_date: 2007-11-15
   status: doc_valid
   uploaded_by: operator
-  note: Il est important d'associer l'arrete  d'approbation de ce plan d'amenagement
-    .
   source: company
   fmu_id: 56
   document_file_id: 277
@@ -40753,8 +39993,6 @@ OperatorDocumentHistory_88356:
   start_date: 2022-01-03
   status: doc_expired
   uploaded_by: operator
-  note: ":Le document est valide. Mais., c'est toujours bien de consulter le document
-    de l'annee precedente avant de publier."
   source: company
   fmu_id: 56
   document_file_id: 2674
@@ -41344,8 +40582,6 @@ OperatorDocumentHistory_88471:
   start_date: 2016-04-06
   status: doc_expired
   uploaded_by: operator
-  note: "Toutes les charges ne sont pas realisees.  \r\n\r\nContruction du logement
-    du proviseur du lycee  d’Enyelle\r\nFinalisation du boulevard  Denis Sassou NGuesso\r\n"
   source: company
   fmu_id: 109
   document_file_id: 1883
@@ -42887,7 +42123,6 @@ OperatorDocumentHistory_88871:
   start_date: 2015-04-15
   status: doc_pending
   uploaded_by: operator
-  note: Ajouter l'enregistrement de SEFECAM en annexe
   source: company
   document_file_id: 3650
   created_at: 2023-01-17 17:31:05 UTC
@@ -43186,8 +42421,6 @@ OperatorDocumentHistory_88951:
   start_date: 2023-01-05
   status: doc_pending
   uploaded_by: operator
-  note: Il manque la prorogation du PAO jusqu'au 28 Fevrier 2023 pour valider la prorogation
-    du delai de demarrage
   source: company
   fmu_id: 11496
   document_file_id: 2447
@@ -43206,8 +42439,6 @@ OperatorDocumentHistory_88952:
   start_date: 2023-01-05
   status: doc_valid
   uploaded_by: operator
-  note: Il manque la prorogation du PAO jusqu'au 28 Fevrier 2023 pour valider la prorogation
-    du delai de demarrage
   source: company
   fmu_id: 11496
   document_file_id: 2447
@@ -43226,7 +42457,6 @@ OperatorDocumentHistory_88953:
   start_date: 2015-04-15
   status: doc_pending
   uploaded_by: operator
-  note: Ajouter l'enregistrement de SEFECAM en annexe
   source: company
   document_file_id: 3650
   created_at: 2023-01-20 18:45:32 UTC
@@ -43244,7 +42474,6 @@ OperatorDocumentHistory_88954:
   start_date: 2015-04-15
   status: doc_valid
   uploaded_by: operator
-  note: Ajouter l'enregistrement de SEFECAM en annexe
   source: company
   document_file_id: 3650
   created_at: 2023-01-20 18:45:38 UTC
@@ -44860,8 +44089,6 @@ OperatorDocumentHistory_89209:
   start_date: 2023-01-03
   status: doc_pending
   uploaded_by: operator
-  note: ":Le document est valide. Mais., c'est toujours bien de consulter le document
-    de l'annee precedente avant de publier."
   source: company
   fmu_id: 56
   document_file_id: 3716
@@ -45755,8 +44982,6 @@ OperatorDocumentHistory_89528:
   start_date: 2023-01-05
   status: doc_expired
   uploaded_by: operator
-  note: Il manque la prorogation du PAO jusqu'au 28 Fevrier 2023 pour valider la prorogation
-    du delai de demarrage
   source: company
   fmu_id: 11496
   document_file_id: 2447
@@ -45793,7 +45018,6 @@ OperatorDocumentHistory_89532:
   start_date: 2015-04-15
   status: doc_expired
   uploaded_by: operator
-  note: Ajouter l'enregistrement de SEFECAM en annexe
   source: company
   document_file_id: 3650
   created_at: 2023-03-01 01:04:06 UTC
@@ -46125,7 +45349,6 @@ OperatorDocumentHistory_89583:
   start_date: 2018-03-08
   status: doc_expired
   uploaded_by: other
-  note: ok
   public: true
   source: company
   document_file_id: 350
@@ -46241,7 +45464,6 @@ OperatorDocumentHistory_89590:
   start_date: 2015-04-15
   status: doc_pending
   uploaded_by: operator
-  note: Ajouter l'enregistrement de SEFECAM en annexe
   source: company
   document_file_id: 3650
   created_at: 2023-03-09 06:43:01 UTC
@@ -46329,7 +45551,6 @@ OperatorDocumentHistory_89625:
   start_date: 2015-04-15
   status: doc_valid
   uploaded_by: operator
-  note: Ajouter l'enregistrement de SEFECAM en annexe
   source: company
   document_file_id: 3650
   created_at: 2023-03-13 20:25:19 UTC
@@ -46718,7 +45939,6 @@ OperatorDocumentHistory_89718:
   start_date: 2020-03-19
   status: doc_expired
   uploaded_by: operator
-  note: C'est bon, on peut valider
   source: company
   fmu_id: 100438
   document_file_id: 2466
@@ -48959,7 +48179,6 @@ OperatorDocumentHistory_90443:
   start_date: 2023-04-20
   status: doc_pending
   uploaded_by: operator
-  note: la version 2021 n'est pas signe par le president du conseil de concertation
   source: company
   fmu_id: 56
   document_file_id: 4020
@@ -50327,7 +49546,6 @@ OperatorDocumentHistory_90711:
   start_date: 2023-04-20
   status: doc_valid
   uploaded_by: operator
-  note: la version 2021 n'est pas signe par le president du conseil de concertation
   source: company
   fmu_id: 56
   document_file_id: 4020
@@ -58677,7 +57895,6 @@ OperatorDocumentHistory_93198:
   start_date: 2015-04-15
   status: doc_expired
   uploaded_by: operator
-  note: Ajouter l'enregistrement de SEFECAM en annexe
   source: company
   document_file_id: 3650
   created_at: 2024-01-01 01:04:13 UTC
