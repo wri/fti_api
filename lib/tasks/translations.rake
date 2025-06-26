@@ -81,4 +81,85 @@ namespace :translations do
 
     puts "All done"
   end
+
+  task prepare_csv: :environment do
+    translate_from = ENV["TRANSLATE_FROM"] || I18n.default_locale.to_s
+
+    models = [
+      AboutPageEntry,
+      Category,
+      Contributor,
+      Country,
+      CountryLink,
+      CountryVpa,
+      Country,
+      Faq,
+      Government,
+      HowTo,
+      Newsletter,
+      Observation,
+      Page,
+      RequiredGovDocumentGroup,
+      RequiredGovDocument,
+      RequiredOperatorDocumentGroup,
+      RequiredOperatorDocument,
+      Severity,
+      Species,
+      Subcategory,
+      Tool,
+      Tutorial
+    ]
+    models = ENV["MODELS"].split(",").map(&:constantize) if ENV["MODELS"].present?
+
+    CSV.open("tmp/translations.csv", "w") do |csv|
+      csv << ["model", "id", "locale", "attribute", "value"]
+
+      models.each do |model|
+        translation_model = model.translation_class
+        translation_table = translation_model.table_name
+        foreign_key = "#{model.model_name.singular}_id"
+        attributes = model.translated_attribute_names
+
+        query = <<~SQL
+          SELECT #{foreign_key}, locale, #{attributes.join(", ")}
+          FROM #{translation_table}
+          WHERE locale = '#{translate_from}'
+        SQL
+
+        puts "Fetching translations for #{model.name}..."
+        ActiveRecord::Base.connection.execute(query).each do |row|
+          attributes.map(&:to_s).each do |attribute|
+            value = row[attribute]
+            next if value.blank?
+
+            csv << [model.name, row[foreign_key], row["locale"], attribute, value]
+          end
+        end
+      end
+    end
+  end
+
+  task load_from_csv: :environment do
+    csv_file = ENV["CSV_FILE"] || "tmp/translations.csv"
+
+    puts "Loading translations from #{csv_file}"
+
+    CSV.foreach(csv_file, headers: true) do |row|
+      model_name = row["model"].constantize
+      model_id = row["id"].to_i
+      locale = row["locale"]
+      attribute = row["attribute"]
+      value = row["value"]
+
+      translation = model_name.translation_class.find_or_initialize_by(
+        "#{model_name.model_name.singular}_id": model_id,
+        locale: locale
+      )
+
+      translation[attribute] = value
+      translation.save!
+    end
+
+    puts "Translations loaded successfully"
+  end
 end
