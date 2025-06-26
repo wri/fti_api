@@ -151,10 +151,16 @@ namespace :translations do
       attribute = row["attribute"]
       value = row["value"]
 
-      translation = model_name.translation_class.find_or_initialize_by(
+      translation = model_name.translation_class.find_by(
         "#{model_name.model_name.singular}_id": model_id,
         locale: locale
       )
+
+      # fallback translation should be there (create_fallback task), so this is edge case meaning that probably record does not exist
+      if translation.nil?
+        puts "Translation not found for #{model_name.name} with ID #{model_id} and locale #{locale}."
+        next
+      end
 
       translation[attribute] = value
       translation.save!
