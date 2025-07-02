@@ -57,7 +57,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
     collection: -> { Country.joins(:observers).with_translations(I18n.locale).order("country_translations.name").distinct }
   filter :name_eq,
     as: :select,
-    label: -> { I18n.t("activerecord.attributes.observer.name") },
+    label: -> { Observer.human_attribute_name(:name) },
     collection: -> { Observer.by_name_asc.pluck(:name) }
 
   dependent_filters do
@@ -114,7 +114,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
         f.input :responsible_qc2, as: :select, collection: User.with_roles([:admin, :ngo_manager]).filter_actives
       end
     end
-    f.inputs I18n.t("activerecord.attributes.observer.public_info") do
+    f.inputs Observer.human_attribute_name(:public_info) do
       f.input :public_info, input_html: {disabled: true}
       f.input :address, input_html: {disabled: true}
       f.input :information_name, input_html: {disabled: true}

@@ -53,9 +53,9 @@ ActiveAdmin.register Fmu do
 
   filter :id, as: :select
   filter :country, as: :select, label: proc { I18n.t("activerecord.models.country.one") }, collection: -> { Country.joins(:fmus).by_name_asc }
-  filter :operator_in_all, as: :select, label: proc { I18n.t("activerecord.attributes.fmu.operator") }, collection: -> { Operator.order(:name) }
+  filter :operator_in_all, as: :select, label: proc { Fmu.human_attribute_name(:operator) }, collection: -> { Operator.order(:name) }
   filter :name_cont,
-    as: :select, label: proc { I18n.t("activerecord.attributes.fmu.name") },
+    as: :select, label: proc { Fmu.human_attribute_name(:name) },
     collection: -> { Fmu.by_name_asc.pluck(:name) }
 
   dependent_filters do
@@ -191,7 +191,7 @@ ActiveAdmin.register Fmu do
         end
 
         f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
-          fo.input :operator_id, label: I18n.t("activerecord.attributes.operator.name"), as: :select,
+          fo.input :operator_id, label: Operator.human_attribute_name(:name), as: :select,
             collection: Operator.active.map { |o| [o.name, o.id] },
             input_html: {disabled: object.persisted?}, required: false
           fo.input :start_date, input_html: {disabled: object.persisted?}, required: false

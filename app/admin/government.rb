@@ -41,7 +41,7 @@ ActiveAdmin.register Government do
 
   filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc }
   filter :translations_government_entity_cont,
-    as: :select, label: -> { I18n.t("activerecord.attributes.government.government_entity") },
+    as: :select, label: -> { Government.human_attribute_name(:government_entity) },
     collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
 
   dependent_filters do
