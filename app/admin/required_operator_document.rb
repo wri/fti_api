@@ -58,7 +58,7 @@ ActiveAdmin.register RequiredOperatorDocument do
   filter :type, as: :select, collection: %w[RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu]
   filter "forest_types_contains_array",
     as: :select,
-    label: proc { I18n.t("activerecord.attributes.fmu.forest_type") },
+    label: proc { Fmu.human_attribute_name(:forest_type) },
     collection: -> { ForestType.select_collection }
   filter :name, as: :select
   filter :updated_at

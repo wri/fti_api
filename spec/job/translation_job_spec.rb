@@ -54,6 +54,7 @@ RSpec.describe TranslationJob, type: :job do
           {
             details: {
               fr: "détails",
+              es: "detalles",
               pt: "detalhes",
               "zh-CN": "细节",
               ja: "詳細",
@@ -62,6 +63,7 @@ RSpec.describe TranslationJob, type: :job do
             },
             concern_opinion: {
               fr: "préoccupation opinion",
+              es: "opinión de preocupación",
               pt: "opinião sobre preocupação",
               "zh-CN": "关注意见",
               ja: "懸念意見",
@@ -70,6 +72,7 @@ RSpec.describe TranslationJob, type: :job do
             },
             litigation_status: {
               fr: "statut du litige",
+              es: "estado de litigio",
               pt: "situação de litígio",
               "zh-CN": "诉讼状态",
               ja: "訴訟状況",

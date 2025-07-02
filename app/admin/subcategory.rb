@@ -24,7 +24,7 @@ ActiveAdmin.register Subcategory do
 
   filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :translations_name_eq,
-    as: :select, label: -> { I18n.t("activerecord.attributes.subcategory.name") },
+    as: :select, label: -> { Subcategory.human_attribute_name(:name) },
     collection: -> { Subcategory.by_name_asc.pluck(:name) }
   filter :created_at
   filter :updated_at

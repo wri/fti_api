@@ -1,6 +1,15 @@
 ---
 en:
   locale_name: "English"
+  attributes:
+    name: Name
+    description: Description
+    details: Details
+    versions: Versions
+    translations: Translations
+    position: Position
+    created_at: Created at
+    updated_at: Updated at
   active_admin:
     true: 'True'
     false: 'False'
@@ -42,6 +51,10 @@ en:
         to: "To"
     scopes:
       all: "All"
+      newly_created: "Newly created"
+      seen: "Seen"
+      dismissed: "Dismissed"
+      solved: "Solved"
     search_status:
       headline: "Search status:"
       current_scope: "Scope:"
@@ -162,6 +175,7 @@ en:
       actions: 'Actions'
       active: 'Active'
       inactive: 'Inactive'
+      law_details: 'Law details'
       report_details: 'Report Details'
       category_details: 'Category Details'
       subcategory_details: 'Subcategory Details'
@@ -256,6 +270,7 @@ en:
         language: 'Language'
         english: 'English'
         french: 'French'
+        spanish: 'Spanish'
       logout: 'Logout'
     dashboard_page:
       columns:
@@ -321,14 +336,6 @@ en:
     evidence_page:
       evidence_removed: 'Evidence removed!'
       evidence_must_be_recycled: 'Evidence must be moved to recycle bin first!'
-    laws_page:
-      written_infraction: 'Illegality as written by law'
-      infraction: 'Legal reference: Illegality'
-      sanctions: 'Legal reference: Penalties'
-      max_fine: 'Maximum Fine'
-      min_fine: 'Minimum Fine'
-      indicator_apv: 'Indicator APV'
-      law_details: 'Law details'
     fmus_page:
       certification: Certification
       download_shapefile: 'Download shapefile'
@@ -567,16 +574,12 @@ en:
     attributes:
       about_page_entry:
         code: Code  #g
-        position: Position  #g
-        translations: Translations  #g
         title: Title
         body: Body
 
       about_page_entry/translation:
-        body: Body  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        title: Title  #g
+        body: :active_record.attributes.about_page_entry.body
+        title: :active_record.attributes.about_page_entry.title
 
       active_admin/comment:
         author: :activerecord.models.author  #g
@@ -600,25 +603,12 @@ en:
       category:
         category_type: Category type  #g
         subcategories: Subcategories  #g
-        translations: Translations  #g
-
-      category/translation:
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
 
       contributor:
         category: Category  #g
         logo: Logo  #g
         priority: Priority  #g
-        translations: Translations  #g
         website: Website  #g
-
-      contributor/translation:
-        description: Description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
 
       country:
         country_centroid: Country centroid  #g
@@ -631,13 +621,13 @@ en:
         is_active: Is active  #g
         iso: Iso  #g
         laws: Laws  #g
-        name: Name
         observations: Observations  #g
         observers: Observers  #g
         operators: Operators  #g
         percentage_valid_documents: Percentage valid documents  #g
         region_centroid: Region centroid  #g
         region_iso: Region iso  #g
+        region_name: Region name  #g
         required_gov_documents: Required gov documents  #g
         required_operator_documents: Required operator documents  #g
         species: Species  #g
@@ -646,36 +636,17 @@ en:
         users: Users  #g
 
       country/translation:
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
-        region_name: Region name  #g
+        region_name: :active_record.attributes.country.region_name
 
       country_link:
         active: Active  #g
         country: :activerecord.models.country  #g
-        position: Position  #g
-        translations: Translations  #g
         url: Url  #g
-
-      country_link/translation:
-        description: Description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
 
       country_vpa:
         active: Active  #g
         country: :activerecord.models.country  #g
-        position: Position  #g
-        translations: Translations  #g
         url: Url  #g
-
-      country_vpa/translation:
-        description: Description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
 
       document_file:
         attachment: Attachment  #g
@@ -686,22 +657,16 @@ en:
         category: Category  #g
         logo: logo  #g
         priority: priority  #g
-        translations: Translations  #g
         website: Website  #g
-        name: Name
 
       faq:
         image: Image  #g
-        position: Position  #g
-        translations: Translations  #g
         answer: Answer  #g
         question: Question  #g
 
       faq/translation:
-        answer: Answer  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        question: Question  #g
+        answer: :active_record.attributes.faq.answer
+        question: :active_record.attributes.faq.question
 
       fmu:
         active_observations: Active observations  #g
@@ -724,8 +689,6 @@ en:
         operator: :activerecord.models.operator  #g
         operator_document_fmus: Operator document fmus  #g
         operators: Operators  #g
-        translations: Translations  #g
-        versions: Versions  #g
 
       fmu_operator:
         current: Current  #g
@@ -734,7 +697,6 @@ en:
         fmu: :activerecord.models.fmu  #g
         operator: :activerecord.models.operator  #g
         start_date: Start date  #g
-        versions: Versions  #g
 
       gov_document:
         current: Current  #g
@@ -749,36 +711,26 @@ en:
         units: Units  #g
         uploaded_by: Uploaded by  #g
         value: Value  #g
-        versions: Versions  #g
 
       gov_file:
         attachment: Attachment  #g
         deleted_at: Deleted at  #g
         gov_document: :activerecord.models.gov_document  #g
-        versions: Versions  #g
 
       government:
         country: :activerecord.models.country  #g
         governments_observations: Governments observations  #g
         is_active: Is active  #g
         observations: Observations  #g
-        translations: Translations  #g
-        versions: Versions  #g
-        details: Details  #g
         government_entity: Government entity  #g
 
       government/translation:
-        details: Details  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        government_entity: Government entity  #g
-        locale: Locale  #g
-        versions: Versions  #g
+        government_entity: :active_record.attributes.government.government_entity
 
       governments_observation:
         deleted_at: Deleted at  #g
         government: :activerecord.models.government  #g
         observation: :activerecord.models.observation  #g
-        versions: Versions  #g
 
       habtm_countries:
         country: :activerecord.models.country  #g
@@ -792,29 +744,19 @@ en:
         name: Name  #g
         operators: Operators  #g
 
-      how_to:
-        position: Position  #g
-        translations: Translations  #g
-
-      how_to/translation:
-        description: Description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
-
       law:
-        apv: Apv  #g
+        apv: 'Indicator APV'
+        written_infraction: 'Illegality as written by law'
+        infraction: 'Legal reference: Illegality'
+        sanctions: 'Legal reference: Penalties'
+        max_fine: 'Maximum Fine'
+        min_fine: 'Minimum Fine'
         country: :activerecord.models.country  #g
         currency: Currency  #g
-        infraction: Infraction  #g
-        max_fine: Max fine  #g
-        min_fine: Min fine  #g
         observations: Observations  #g
         other_penalties: Other penalties  #g
         penal_servitude: Penal servitude  #g
-        sanctions: Sanctions  #g
         subcategory: :activerecord.models.subcategory  #g
-        written_infraction: Written infraction  #g
 
       notification:
         dismissed_at: Dismissed at  #g
@@ -823,6 +765,8 @@ en:
         operator_document: :activerecord.models.operator_document  #g
         solved_at: Solved at  #g
         user: :activerecord.models.user  #g
+        on_time?: On time?
+        expiration_date: Expiration date
 
       notification_group:
         days: Days  #g
@@ -862,19 +806,14 @@ en:
         species: Species  #g
         species_observations: Species observations  #g
         subcategory: :activerecord.models.subcategory  #g
-        translations: Translations  #g
         user: :activerecord.models.user  #g
         validation_status: Validation status  #g
-        versions: Versions  #g
+        concern_opinion: Concern opinion  #g
+        litigation_status: Litigation status  #g
 
       observation/translation:
-        concern_opinion: Concern opinion  #g
-        deleted_at: Deleted at  #g
-        details: Details  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        litigation_status: Litigation status  #g
-        locale: Locale  #g
-        versions: Versions  #g
+        concern_opinion: :active_record.attributes.observation.concern_opinion
+        litigation_status: :active_record.attributes.observation.litigation_status
 
       observation_document:
         attachment: Attachment  #g
@@ -882,7 +821,6 @@ en:
         name: Name  #g
         observation: :activerecord.models.observation  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       observation_history:
         category: :activerecord.models.category.one
@@ -917,7 +855,6 @@ en:
         publication_date: Publication date  #g
         title: Title  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       observation_report_observer:
         observation_report: :activerecord.models.observation_report  #g
@@ -974,7 +911,6 @@ en:
         translations: Translations  #g
         name: Name  #g
         users: Users  #g
-        versions: Versions  #g
 
       observer_observation:
         deleted_at: Deleted at  #g
@@ -1011,9 +947,7 @@ en:
         score_operator_documents: Score operator documents  #g
         score_operator_observation: :activerecord.models.score_operator_observation  #g
         score_operator_observations: Score operator observations  #g
-        translations: Translations  #g
         users: Users  #g
-        versions: Versions  #g
         website: Website  #g
 
       operator_document:
@@ -1035,7 +969,6 @@ en:
         status: Status  #g
         uploaded_by: Uploaded by  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_annex:
         annex_document: :activerecord.models.annex_document  #g
@@ -1051,7 +984,6 @@ en:
         status: Status  #g
         uploaded_by: Uploaded by  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_country:
         annex_documents: Annex documents  #g
@@ -1073,7 +1005,6 @@ en:
         status: status  #g
         uploaded_by: Uploaded by  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_country_history:
         annex_documents: Annex documents  #g
@@ -1117,7 +1048,6 @@ en:
         status: Status  #g
         uploaded_by: Uploaded by  #g
         user: :activerecord.models.user  #g
-        versions: Versions  #g
 
       operator_document_fmu_history:
         annex_documents: Annex documents  #g
@@ -1206,76 +1136,51 @@ en:
         deleted_at: Deleted at  #g
         document_type: Document type  #g
         gov_documents: Gov documents  #g
-        name: Name  #g
-        position: Position  #g
         required_gov_document_group: :activerecord.models.required_gov_document_group  #g
         translations: Translations  #g
         valid_period: Valid period  #g
         versions: Versions  #g
+        explanation: Explanation  #g
 
       required_gov_document/translation:
-        deleted_at: Deleted at  #g
-        explanation: Explanation  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        versions: Versions  #g
+        explanation: :active_record.attributes.required_gov_document.explanation
 
       required_gov_document_group:
         deleted_at: Deleted at  #g
         parent: :activerecord.models.parent  #g
-        position: Position  #g
         required_gov_documents: Required gov documents  #g
-        translations: Translations  #g
-
-      required_gov_document_group/translation:
-        deleted_at: Deleted at  #g
-        description: Description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
 
       required_operator_document:
         contract_signature: Contract signature  #g
         country: :activerecord.models.country  #g
         deleted_at: Deleted at  #g
         forest_types: Forest types  #g
-        name: Name  #g
         operator_document_countries: Operator document countries  #g
         operator_document_country_histories: Operator document country histories  #g
         operator_document_fmu_histories: Operator document fmu histories  #g
         operator_document_fmus: Operator document fmus  #g
         operator_document_histories: Operator document histories  #g
         operator_documents: Operator documents  #g
-        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
-        translations: Translations  #g
         valid_period: Valid period  #g
-        versions: Versions  #g
+        explanation: Explanation  #g
 
       required_operator_document/translation:
-        deleted_at: Deleted at  #g
-        explanation: Explanation  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        versions: Versions  #g
+        explanation: :active_record.attributes.required_operator_document.explanation
 
       required_operator_document_country:
         contract_signature: Contract signature  #g
         country: :activerecord.models.country  #g
         deleted_at: Deleted at  #g
         forest_types: Forest types  #g
-        name: Name  #g
         operator_document_countries: Operator document countries  #g
         operator_document_country_histories: Operator document country histories  #g
         operator_document_fmu_histories: Operator document fmu histories  #g
         operator_document_fmus: Operator document fmus  #g
         operator_document_histories: Operator document histories  #g
         operator_documents: Operator documents  #g
-        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
-        translations: Translations  #g
         valid_period: Valid period  #g
-        versions: Versions  #g
 
       required_operator_document_fmu:
         contract_signature: Contract signature  #g
@@ -1289,24 +1194,16 @@ en:
         operator_document_fmus: Operator document fmus  #g
         operator_document_histories: Operator document histories  #g
         operator_documents: Operator documents  #g
-        position: Position  #g
         required_operator_document_group: :activerecord.models.required_operator_document_group  #g
-        translations: Translations  #g
         valid_period: Valid period  #g
-        versions: Versions  #g
 
       required_operator_document_group:
-        position: Position  #g
         required_operator_document_countries: Required operator document countries  #g
         required_operator_document_fmus: Required operator document fmus  #g
         required_operator_documents: Required operator documents  #g
-        translations: Translations  #g
-        name: Name
 
       required_operator_document_group/translation:
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
+        name: :active_record.attributes.required_operator_document_group.name
 
       sawmill:
         geojson: Geojson  #g
@@ -1338,17 +1235,11 @@ en:
         level: Level  #g
         observations: Observations  #g
         subcategory: :activerecord.models.subcategory  #g
-        translations: Translations  #g
-        details: Details
-
-      severity/translation:
-        details: Details  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
 
       species:
         cites_status: Cites status  #g
         countries: Countries  #g
+        common_name: Common name  #g
         iucn_status: Iucn status  #g
         name: Name  #g
         observations: Observations  #g
@@ -1359,12 +1250,9 @@ en:
         species_kingdom: Species kingdom  #g
         species_observations: Species observations  #g
         sub_species: Sub species  #g
-        translations: Translations  #g
 
       species/translation:
-        common_name: Common name  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
+        common_name: :active_record.attributes.species.common_name
 
       species_country:
         country: :activerecord.models.country  #g
@@ -1382,40 +1270,11 @@ en:
         observations: Observations  #g
         severities: Severities  #g
         subcategory_type: Subcategory type  #g
-        translations: Translations  #g
-        name: Name
-
-      subcategory/translation:
-        details: Details  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
-
-      tool:
-        position: Position  #g
-        translations: Translations  #g
-
-      tool/translation:
-        description: Description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
-
-      tutorial:
-        position: Position  #g
-        translations: Translations  #g
-
-      tutorial/translation:
-        description: Description  #g
-        globalized_model: :activerecord.models.globalized_model  #g
-        locale: Locale  #g
-        name: Name  #g
 
       uploaded_document:
         author: Author  #g
         caption: Caption  #g
         file: File  #g
-        name: Name  #g
 
       user:
         api_key: :activerecord.models.api_key  #g
@@ -1432,7 +1291,6 @@ en:
         locale: Locale  #g
         managed_observers: Managed observers  #g
         responsible_for_countries: Responsible for countries
-        name: Name  #g
         observation_documents: Observation documents  #g
         observation_reports: Observation reports  #g
         observations: Observations  #g

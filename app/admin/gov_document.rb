@@ -89,7 +89,7 @@ ActiveAdmin.register GovDocument do
     collection: -> { Country.with_translations(I18n.locale).joins(:required_gov_documents).distinct.order("country_translations.name") }
   filter :status, as: :select, collection: -> { GovDocument.statuses }
   filter :required_gov_document_document_type,
-    label: proc { I18n.t("activerecord.attributes.required_gov_document.document_type") },
+    label: proc { RequiredGovDocument.human_attribute_name(:document_type) },
     as: :select, collection: -> { RequiredGovDocument.document_types }
   filter :updated_at
 

@@ -23,7 +23,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
       [I18n.t("activerecord.enums.operator_document.types.fmu"), :fmu],
       [I18n.t("activerecord.enums.operator_document.types.country"), :country]
     ]
-  filter :fmu_forest_type_eq, label: proc { I18n.t("activerecord.attributes.fmu.forest_type") }, as: :select, collection: -> { ForestType.select_collection }
+  filter :fmu_forest_type_eq, label: proc { Fmu.human_attribute_name(:forest_type) }, as: :select, collection: -> { ForestType.select_collection }
   filter :date
 
   index title: proc { I18n.t("active_admin.producer_documents_dashboard_page.name") }, pagination_total: false do
@@ -97,11 +97,11 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
       render partial: "fields", locals: {
         page: "producer_documents_dashboard",
         attributes: [
-          ["date", I18n.t("activerecord.attributes.operator_document_statistic.date"), :checked],
-          ["country", I18n.t("activerecord.attributes.operator_document_statistic.country.one"), :checked],
+          ["date", OperatorDocumentStatistic.human_attribute_name(:date), :checked],
+          ["country", OperatorDocumentStatistic.human_attribute_name(:country), :checked],
           ["required_operator_document_group", I18n.t("activerecord.models.required_operator_document_group.one")],
-          ["fmu_forest_type", I18n.t("activerecord.attributes.fmu.forest_type")],
-          ["document_type", I18n.t("activerecord.attributes.required_gov_document.document_type")],
+          ["fmu_forest_type", Fmu.human_attribute_name(:forest_type)],
+          ["document_type", RequiredGovDocument.human_attribute_name(:document_type)],
           ["valid_and_expired_count", OperatorDocumentStatistic.human_attribute_name(:valid_and_expired_count), :checked],
           ["valid_count", OperatorDocumentStatistic.human_attribute_name(:valid_count), :checked],
           ["expired_count", OperatorDocumentStatistic.human_attribute_name(:expired_count), :checked],
