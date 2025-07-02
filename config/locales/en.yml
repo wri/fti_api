@@ -175,6 +175,7 @@ en:
       actions: 'Actions'
       active: 'Active'
       inactive: 'Inactive'
+      law_details: 'Law details'
       report_details: 'Report Details'
       category_details: 'Category Details'
       subcategory_details: 'Subcategory Details'
@@ -335,14 +336,6 @@ en:
     evidence_page:
       evidence_removed: 'Evidence removed!'
       evidence_must_be_recycled: 'Evidence must be moved to recycle bin first!'
-    laws_page:
-      written_infraction: 'Illegality as written by law'
-      infraction: 'Legal reference: Illegality'
-      sanctions: 'Legal reference: Penalties'
-      max_fine: 'Maximum Fine'
-      min_fine: 'Minimum Fine'
-      indicator_apv: 'Indicator APV'
-      law_details: 'Law details'
     fmus_page:
       certification: Certification
       download_shapefile: 'Download shapefile'
@@ -752,18 +745,18 @@ en:
         operators: Operators  #g
 
       law:
-        apv: Apv  #g
+        apv: 'Indicator APV'
+        written_infraction: 'Illegality as written by law'
+        infraction: 'Legal reference: Illegality'
+        sanctions: 'Legal reference: Penalties'
+        max_fine: 'Maximum Fine'
+        min_fine: 'Minimum Fine'
         country: :activerecord.models.country  #g
         currency: Currency  #g
-        infraction: Infraction  #g
-        max_fine: Max fine  #g
-        min_fine: Min fine  #g
         observations: Observations  #g
         other_penalties: Other penalties  #g
         penal_servitude: Penal servitude  #g
-        sanctions: Sanctions  #g
         subcategory: :activerecord.models.subcategory  #g
-        written_infraction: Written infraction  #g
 
       notification:
         dismissed_at: Dismissed at  #g

@@ -174,6 +174,7 @@ es:
       actions: 'Acciones'
       active: 'Activo'
       inactive: 'Inactivo'
+      law_details: 'Detalles de la ley'
       report_details: 'Detalles del informe'
       category_details: 'Detalles de la categoría'
       subcategory_details: 'Detalles de la subcategoría'
@@ -334,14 +335,6 @@ es:
     evidence_page:
       evidence_removed: '¡Evidencia eliminada!'
       evidence_must_be_recycled: '¡La evidencia debe moverse primero a la papelera de reciclaje!'
-    laws_page:
-      written_infraction: 'Ilegalidad según la ley'
-      infraction: 'Referencia legal: Ilegalidad'
-      sanctions: 'Referencia legal: Sanciones'
-      max_fine: 'Multa máxima'
-      min_fine: 'Multa mínima'
-      indicator_apv: 'Indicador APV'
-      law_details: 'Detalles de la ley'
     fmus_page:
       certification: Certificación
       download_shapefile: 'Descargar shapefile'
@@ -751,18 +744,18 @@ es:
         operators: Operadores
 
       law:
-        apv: APV
+        written_infraction: 'Ilegalidad según la ley'
+        infraction: 'Referencia legal: Ilegalidad'
+        sanctions: 'Referencia legal: Sanciones'
+        max_fine: 'Multa máxima'
+        min_fine: 'Multa mínima'
+        apv: 'Indicador APV'
         country: :activerecord.models.country
         currency: Moneda
-        infraction: Infracción
-        max_fine: Multa máxima
-        min_fine: Multa mínima
         observations: Observaciones
         other_penalties: Otras sanciones
         penal_servitude: Servidumbre penal
-        sanctions: Sanciones
         subcategory: :activerecord.models.subcategory
-        written_infraction: Infracción escrita
 
       notification:
         dismissed_at: Descartado el

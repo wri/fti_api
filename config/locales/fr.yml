@@ -184,6 +184,7 @@ fr:
       actions: 'Actions'
       active: 'Actif'
       inactive: 'Inactif'
+      law_details: 'Détails de la loi'
       report_details: 'Détails du rapport'
       category_details: 'Détails de la catégorie'
       subcategory_details: 'Détails de la sous-catégorie'
@@ -366,14 +367,6 @@ fr:
       remove_logo: 'Supprimer le logo'
       documents: 'Documents'
       marked_as_relevant: 'Marqué comme exploitant concerné'
-    laws_page:
-      written_infraction: "L'illégalité telle qu'écrite par la loi"
-      infraction: 'Référence légale : Illégalité'
-      sanctions: 'Référence légale : Sanctions'
-      max_fine: 'Amende maximale'
-      min_fine: 'Amende minimale'
-      indicator_apv: 'Indicateur APV'
-      law_details: 'Détails de la loi'
     fmus_page:
       certification: Certification
       download_shapefile: 'Télécharger shapefile'
@@ -688,18 +681,18 @@ fr:
         operators: Les opérateurs  #g
 
       law:
-        apv: Apv  #g
+        written_infraction: "L'illégalité telle qu'écrite par la loi"
+        infraction: 'Référence légale : Illégalité'
+        sanctions: 'Référence légale : Sanctions'
+        max_fine: 'Amende maximale'
+        min_fine: 'Amende minimale'
+        apv: 'Indicateur APV'
         country: :activerecord.models.country  #g
         currency: Devise  #g
-        infraction: Infraction  #g
-        max_fine: Amende maximale  #g
-        min_fine: Amende minimale  #g
         observations: Observations  #g
         other_penalties: Autres pénalités  #g
         penal_servitude: Servitude pénale  #g
-        sanctions: Les sanctions  #g
         subcategory: :activerecord.models.subcategory  #g
-        written_infraction: Infraction écrite  #g
 
       notification:
         dismissed_at: Licencié à  #g

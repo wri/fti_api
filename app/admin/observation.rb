@@ -219,7 +219,7 @@ ActiveAdmin.register Observation do
     column Law.human_attribute_name(:other_penalties) do |observation|
       observation.law&.other_penalties
     end
-    column I18n.t("active_admin.laws_page.indicator_apv") do |observation|
+    column Law.human_attribute_name(:apv) do |observation|
       observation.law&.apv
     end
     column I18n.t("activerecord.models.severity") do |observation|
@@ -294,15 +294,15 @@ ActiveAdmin.register Observation do
     end
     column :subcategory, sortable: false
 
-    column(I18n.t("active_admin.laws_page.written_infraction"), class: "col-written_infraction", sortable: false) { |o| o.law&.written_infraction }
-    column(I18n.t("active_admin.laws_page.infraction"), class: "col-infration", sortable: false) { |o| o.law&.infraction }
-    column(I18n.t("active_admin.laws_page.sanctions"), class: "col-sanctions", sortable: false) { |o| o.law&.sanctions }
-    column(I18n.t("active_admin.laws_page.min_fine"), class: "col-minimum_fine", sortable: false) { |o| o.law&.min_fine }
-    column(I18n.t("active_admin.laws_page.max_fine"), class: "col-maximum_fine", sortable: false) { |o| o.law&.max_fine }
+    column(Law.human_attribute_name(:written_infraction), class: "col-written_infraction", sortable: false) { |o| o.law&.written_infraction }
+    column(Law.human_attribute_name(:infraction), class: "col-infration", sortable: false) { |o| o.law&.infraction }
+    column(Law.human_attribute_name(:sanctions), class: "col-sanctions", sortable: false) { |o| o.law&.sanctions }
+    column(Law.human_attribute_name(:min_fine), class: "col-minimum_fine", sortable: false) { |o| o.law&.min_fine }
+    column(Law.human_attribute_name(:max_fine), class: "col-maximum_fine", sortable: false) { |o| o.law&.max_fine }
     column(Law.human_attribute_name(:currency), class: "col-currency") { |o| o.law&.currency }
     column(Law.human_attribute_name(:penal_servitude), class: "col-penal_servitude", sortable: false) { |o| o.law&.penal_servitude }
     column(Law.human_attribute_name(:other_penalties), class: "col-other_penalties", sortable: false) { |o| o.law&.other_penalties }
-    column(I18n.t("active_admin.laws_page.indicator_apv"), class: "col-indicator_apv", sortable: false) { |o| o.law&.apv }
+    column(Law.human_attribute_name(:apv), class: "col-indicator_apv", sortable: false) { |o| o.law&.apv }
 
     column I18n.t("activerecord.models.severity"), class: "col-severity", sortable: false do |o|
       o&.severity&.level
@@ -370,15 +370,15 @@ ActiveAdmin.register Observation do
             ["governments", Observation.human_attribute_name(:governments), :checked],
             ["relevant_operators", Observation.human_attribute_name(:relevant_operators), :checked],
             ["subcategory", Observation.human_attribute_name(:subcategory), :checked],
-            ["written_infraction", I18n.t("active_admin.laws_page.written_infraction"), :checked],
-            ["infraction", I18n.t("active_admin.laws_page.infraction"), :checked],
-            ["sanctions", I18n.t("active_admin.laws_page.sanctions"), :checked],
-            ["minimum_fine", I18n.t("active_admin.laws_page.min_fine"), :checked],
-            ["maximum_fine", I18n.t("active_admin.laws_page.max_fine"), :checked],
+            ["written_infraction", Law.human_attribute_name(:written_infraction), :checked],
+            ["infraction", Law.human_attribute_name(:infraction), :checked],
+            ["sanctions", Law.human_attribute_name(:sanctions), :checked],
+            ["minimum_fine", Law.human_attribute_name(:min_fine), :checked],
+            ["maximum_fine", Law.human_attribute_name(:max_fine), :checked],
             ["currency", Law.human_attribute_name(:currency), :checked],
             ["penal_servitude", Law.human_attribute_name(:penal_servitude), :checked],
             ["other_penalties", Law.human_attribute_name(:other_penalties), :checked],
-            ["indicator_apv", I18n.t("active_admin.laws_page.indicator_apv"), :checked],
+            ["indicator_apv", Law.human_attribute_name(:apv), :checked],
             ["severity", I18n.t("activerecord.models.severity"), :checked],
             ["publication_date", Observation.human_attribute_name(:publication_date), :checked],
             ["actions_taken", Observation.human_attribute_name(:actions_taken), :checked],
