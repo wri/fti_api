@@ -43,7 +43,9 @@ class ApplicationController < ActionController::Base
   private
 
   def backoffice_user?
-    current_user.user_permission.present? && current_user.is_active &&
-      %w[admin bo_manager].include?(current_user.user_permission.user_role)
+    current_user.is_active && %w[admin bo_manager].include?(current_user.user_permission.user_role)
+  rescue => e
+    Sentry.capture_exception(e)
+    raise SecurityError
   end
 end
