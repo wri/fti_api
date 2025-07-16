@@ -10,7 +10,7 @@ ActiveAdmin.register User do
     qc1_observer_ids: [], qc2_observer_ids: [],
     managed_observer_ids: [],
     responsible_for_country_ids: [],
-    user_permission_attributes: [:user_role]
+    user_permission_attributes: [:id, :user_role]
 
   filter :country, as: :select, collection: -> { Country.joins(:users).by_name_asc }
   filter :operator
