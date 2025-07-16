@@ -17,7 +17,7 @@ ActiveAdmin.register Category do
   permit_params :category_type, translations_attributes: [:id, :locale, :name, :_destroy]
 
   sidebar :subcategories, only: :show do
-    sidebar = Subcategory.joins(:translations).where(category: resource).collect do |s|
+    sidebar = Subcategory.with_translations(I18n.locale).where(category: resource).collect do |s|
       auto_link(s, s.name.camelize)
     end
     safe_join(sidebar, content_tag("br"))
