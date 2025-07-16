@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_05_21_075002) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_16_100255) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -1113,7 +1113,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_21_075002) do
     t.integer "observer_id"
     t.integer "operator_id"
     t.integer "holding_id"
-    t.string "locale"
+    t.string "locale", default: "en", null: false
     t.string "first_name"
     t.string "last_name"
     t.boolean "organization_account", default: false, null: false

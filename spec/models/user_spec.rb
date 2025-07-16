@@ -58,6 +58,12 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_length_of(:password).is_at_least(10).is_at_most(128) }
 
+    it "is invalid without locale" do
+      subject.locale = nil
+      expect(subject.valid?).to eq(false)
+      expect(subject.errors[:locale]).to include("can't be blank")
+    end
+
     it "is invalid when password does not contain lowercase letter" do
       subject.password = "PASSWORD1234"
       subject.password_confirmation = "PASSWORD1234"

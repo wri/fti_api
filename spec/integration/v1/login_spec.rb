@@ -34,7 +34,7 @@ module V1
           email: user.email,
           "is-active": true,
           "deactivated-at": nil,
-          locale: nil,
+          locale: "en",
           "organization-account": false,
           "permissions-request": nil,
           "permissions-accepted": nil,
