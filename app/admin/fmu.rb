@@ -70,9 +70,9 @@ ActiveAdmin.register Fmu do
     }
   end
 
-  sidebar "Shapefiles", only: :index do
+  sidebar :shapefiles, only: :index do
     div do
-      link_to "Download Filtered Shapefiles", download_filtered_shapefiles_admin_fmus_path(
+      link_to I18n.t("active_admin.fmus_page.download_filtered_shapefiles"), download_filtered_shapefiles_admin_fmus_path(
         q: params[:q]&.to_unsafe_h
       ), class: "button text-center mt-10px"
     end
@@ -102,7 +102,7 @@ ActiveAdmin.register Fmu do
     column :certification_ls
   end
 
-  sidebar I18n.t("active_admin.fmus_page.certification"), class: "fmu_certificates_sidebar", only: :show do
+  sidebar :certification, class: "fmu_certificates_sidebar", only: :show do
     attributes_table do
       row :certification_fsc
       row :certification_pefc

@@ -68,6 +68,7 @@ es:
     sidebars:
       filters: "Filtros"
       search_status: "Estado de búsqueda"
+      certification: "Certificación"
     pagination:
       empty: "No se encontraron %{model}"
       one: "Mostrando <b>1</b> %{model}"
@@ -338,6 +339,7 @@ es:
     fmus_page:
       certification: Certificación
       download_shapefile: 'Descargar shapefile'
+      download_filtered_shapefiles: 'Descargar Shapefiles Filtrados'
       confirm_delete: '¿Estás seguro de que quieres eliminar este FMU?'
     operator_page:
       producer: 'Productor'
