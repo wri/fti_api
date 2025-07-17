@@ -181,6 +181,9 @@ ActiveAdmin.register Fmu do
           f.input :forest_type, as: :select,
             collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
             input_html: {disabled: object.persisted?}
+          li class: "checkboxes_label" do
+            label I18n.t("active_admin.fmus_page.certification")
+          end
           f.input :certification_fsc
           f.input :certification_pefc
           f.input :certification_olb
