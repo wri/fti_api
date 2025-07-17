@@ -99,6 +99,7 @@ class Fmu < ApplicationRecord
       "certification_olb" => certification_olb,
       "certification_pafc" => certification_pafc,
       "certification_fsc_cw" => certification_fsc_cw,
+      "certification_pbn" => certification_pbn,
       "certification_tlv" => certification_tlv,
       "certification_ls" => certification_ls,
       "observations" => active_observations.reload.uniq.count,

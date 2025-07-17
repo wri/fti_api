@@ -659,6 +659,7 @@ en:
         certification_ls: Certification ls  #g
         certification_olb: Certification olb  #g
         certification_pafc: Certification pafc  #g
+        certification_pbn: Certification pbn  #g
         certification_pefc: Certification pefc  #g
         certification_tlv: Certification tlv  #g
         country: :activerecord.models.country  #g

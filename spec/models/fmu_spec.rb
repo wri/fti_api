@@ -78,6 +78,7 @@ RSpec.describe Fmu, type: :model do
           expect(fmu.geojson["properties"]["certification_pefc"]).to eql fmu.certification_pefc
           expect(fmu.geojson["properties"]["certification_olb"]).to eql fmu.certification_olb
           expect(fmu.geojson["properties"]["certification_pafc"]).to eql fmu.certification_pafc
+          expect(fmu.geojson["properties"]["certification_pbn"]).to eql fmu.certification_pbn
           expect(fmu.geojson["properties"]["certification_fsc_cw"]).to eql fmu.certification_fsc_cw
           expect(fmu.geojson["properties"]["certification_tlv"]).to eql fmu.certification_tlv
           expect(fmu.geojson["properties"]["certification_ls"]).to eql fmu.certification_ls

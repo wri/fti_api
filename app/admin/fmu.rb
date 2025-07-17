@@ -46,9 +46,10 @@ ActiveAdmin.register Fmu do
     link_to I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
   end
 
-  permit_params :id, :name, :certification_fsc, :certification_pefc,
+  permit_params :id, :name,
+    :certification_fsc, :certification_pefc, :certification_ls, :certification_pbn,
     :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
-    :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
+    :esri_shapefiles_zip, :forest_type, :country_id,
     fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date]
 
   filter :id, as: :select
@@ -95,6 +96,7 @@ ActiveAdmin.register Fmu do
     column :certification_pefc
     column :certification_olb
     column :certification_pafc
+    column :certification_pbn
     column :certification_fsc_cw
     column :certification_tlv
     column :certification_ls
@@ -142,6 +144,7 @@ ActiveAdmin.register Fmu do
           row :certification_olb
           row :certification_pafc
           row :certification_fsc_cw
+          row :certification_pbn
           row :certification_tlv
           row :certification_ls
         end
@@ -159,6 +162,7 @@ ActiveAdmin.register Fmu do
     column "PEFC", :certification_pefc
     column "OLB", :certification_olb
     column "PAFC", :certification_pafc
+    column "PbN", :certification_pbn
     column "FSC CW", :certification_fsc_cw
     column "TLV", :certification_tlv
     column "LS", :certification_ls
@@ -186,6 +190,7 @@ ActiveAdmin.register Fmu do
           f.input :certification_olb
           f.input :certification_pafc
           f.input :certification_fsc_cw
+          f.input :certification_pbn
           f.input :certification_tlv
           f.input :certification_ls
         end

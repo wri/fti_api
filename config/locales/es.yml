@@ -676,6 +676,7 @@ es:
         certification_ls: Certificación LS
         certification_olb: Certificación OLB
         certification_pafc: Certificación PAFC
+        certification_pbn: Certificación PbN
         certification_pefc: Certificación PEFC
         certification_tlv: Certificación TLV
         country: :activerecord.models.country
