@@ -102,53 +102,49 @@ ActiveAdmin.register Fmu do
     column :certification_ls
   end
 
+  sidebar I18n.t("active_admin.fmus_page.certification"), class: "fmu_certificates_sidebar", only: :show do
+    attributes_table do
+      row :certification_fsc
+      row :certification_pefc
+      row :certification_olb
+      row :certification_pafc
+      row :certification_fsc_cw
+      row :certification_pbn
+      row :certification_tlv
+      row :certification_ls
+    end
+  end
+
   show do
-    columns class: "d-flex" do
-      column class: "flex-1" do
-        attributes_table do
-          row :id
-          row :name
-          row :forest_type
-          row :country
-          row :operator
+    attributes_table do
+      row :id
+      row :name
+      row :forest_type
+      row :country
+      row :operator
 
-          if resource.geojson && resource.centroid.present?
-            row :map do |r|
-              render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
-            end
-          end
-          if resource.geojson
-            row(:geojson) do
-              dialog id: "geojson_modal", title: Fmu.human_attribute_name(:geojson) do
-                resource.geojson
-              end
-              link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#geojson_modal').showModal()"
-            end
-            row(:properties) do
-              dialog id: "properties_modal", title: Fmu.human_attribute_name(:properties) do
-                resource.properties
-              end
-              link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
-            end
-          end
-          row :created_at
-          row :updated_at
-          row :deleted_at
+      if resource.geojson && resource.centroid.present?
+        row :map do |r|
+          render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
         end
       end
-
-      column max_width: "250px" do
-        attributes_table title: t("active_admin.fmus_page.certification") do
-          row :certification_fsc
-          row :certification_pefc
-          row :certification_olb
-          row :certification_pafc
-          row :certification_fsc_cw
-          row :certification_pbn
-          row :certification_tlv
-          row :certification_ls
+      if resource.geojson
+        row(:geojson) do
+          dialog id: "geojson_modal", title: Fmu.human_attribute_name(:geojson) do
+            resource.geojson
+          end
+          link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#geojson_modal').showModal()"
+        end
+        row(:properties) do
+          dialog id: "properties_modal", title: Fmu.human_attribute_name(:properties) do
+            resource.properties
+          end
+          link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
         end
       end
+      row :created_at
+      row :updated_at
+      row :deleted_at
     end
   end
 

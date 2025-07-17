@@ -209,6 +209,18 @@ body.active_admin {
   box-sizing: border-box !important;
 }
 
+.fmu_certificates_sidebar {
+  .attributes_table table {
+    th {
+      width: auto;
+    }
+
+    td {
+      text-align: right;
+    }
+  }
+}
+
 // Dependent filters
 #dependent_filters_sidebar_section {
   display: none;
