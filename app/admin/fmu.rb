@@ -93,25 +93,25 @@ ActiveAdmin.register Fmu do
       fmu.operator&.name
     end
     column :certification_fsc
-    column :certification_pefc
+    column :certification_fsc_cw
+    column :certification_ls
     column :certification_olb
     column :certification_pafc
     column :certification_pbn
-    column :certification_fsc_cw
+    column :certification_pefc
     column :certification_tlv
-    column :certification_ls
   end
 
   sidebar :certification, class: "fmu_certificates_sidebar", only: :show do
     attributes_table do
       row :certification_fsc
-      row :certification_pefc
+      row :certification_fsc_cw
+      row :certification_ls
       row :certification_olb
       row :certification_pafc
-      row :certification_fsc_cw
       row :certification_pbn
+      row :certification_pefc
       row :certification_tlv
-      row :certification_ls
     end
   end
 
@@ -155,14 +155,13 @@ ActiveAdmin.register Fmu do
     column :country, sortable: "country_translations.name"
     column :operator
     column "FSC", :certification_fsc
-    column "PEFC", :certification_pefc
+    column "FSC CW", :certification_fsc_cw
+    column "LS", :certification_ls
     column "OLB", :certification_olb
     column "PAFC", :certification_pafc
     column "PbN", :certification_pbn
-    column "FSC CW", :certification_fsc_cw
+    column "PEFC", :certification_pefc
     column "TLV", :certification_tlv
-    column "LS", :certification_ls
-
     actions defaults: false do |fmu|
       item I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
       item I18n.t("active_admin.view"), admin_fmu_path(fmu)
@@ -185,13 +184,13 @@ ActiveAdmin.register Fmu do
             label I18n.t("active_admin.fmus_page.certification")
           end
           f.input :certification_fsc
-          f.input :certification_pefc
+          f.input :certification_fsc_cw
+          f.input :certification_ls
           f.input :certification_olb
           f.input :certification_pafc
-          f.input :certification_fsc_cw
           f.input :certification_pbn
+          f.input :certification_pefc
           f.input :certification_tlv
-          f.input :certification_ls
         end
 
         f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|
