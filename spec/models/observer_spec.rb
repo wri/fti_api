@@ -7,7 +7,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  is_active          :boolean          default(TRUE), not null
-#  logo               :string
 #  address            :string
 #  information_name   :string
 #  information_email  :string

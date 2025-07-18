@@ -20,6 +20,7 @@
 #  deleted_at           :datetime
 #  certification_ls     :boolean          default(FALSE), not null
 #  name                 :string           not null
+#  certification_pbn    :boolean          default(FALSE), not null
 #
 
 class Fmu < ApplicationRecord
