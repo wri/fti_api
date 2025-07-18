@@ -159,6 +159,5 @@ ActiveAdmin.register ObservationReport do
         link_to o.attachment&.identifier, o.attachment&.url
       end
     end
-    active_admin_comments
   end
 end

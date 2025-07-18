@@ -92,7 +92,6 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
       row :updated_at
       row :deleted_at
     end
-    active_admin_comments
   end
 
   controller do

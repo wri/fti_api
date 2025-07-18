@@ -3,7 +3,9 @@ require "rails_helper"
 ActiveAdmin.application.namespaces[:admin].resources.each do |resource|
   # resource_name will be empty for custom pages not backed by models
   resource_name = resource.resource_name.instance_variable_get(:@klass)&.name&.underscore
-  next if ["quality_control"].include?(resource_name)
+  exclude_resources = ["quality_control"]
+  exclude_resources += ["active_admin/comment"] unless ActiveAdmin.application.comments
+  next if exclude_resources.include?(resource_name)
 
   describe resource.controller, type: :controller do
     let(:admin) { create(:admin) }

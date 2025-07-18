@@ -121,7 +121,6 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
             ul do
               li { link_to t("active_admin.menu.user_management.users"), admin_users_path }
               li { link_to t("active_admin.menu.user_management.access_control"), admin_access_control_path }
-              li { link_to t("active_admin.menu.user_management.comments"), admin_comments_path }
               li do
                 text_node content_tag "a", t("active_admin.menu.user_management.notifications.notifications"), class: "-with-children"
                 ul do

@@ -302,7 +302,6 @@ ActiveAdmin.register Operator, as: "Producer" do
         end
       end
     end
-    active_admin_comments
   end
 
   controller do

@@ -38,7 +38,5 @@ ActiveAdmin.register Tutorial do
       row :name
       row :description
     end
-
-    active_admin_comments
   end
 end

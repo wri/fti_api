@@ -539,7 +539,5 @@ ActiveAdmin.register Observation do
 
   show do
     render partial: "attributes_table", locals: {observation: resource}
-
-    active_admin_comments
   end
 end
