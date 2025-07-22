@@ -358,4 +358,27 @@ namespace :fix do
     puts "WRONG NAME #{count_wrong_name}"
     puts "WRONG FILE DOES NOT EXIST #{count_file_not_exists}"
   end
+
+  desc "Fixing operator document annexes generated names"
+  task annexes_names: :environment do
+    # fixing only those with no_document in the name
+    OperatorDocumentAnnex.find_each do |oda|
+      next unless oda.attachment.identifier.include?("no_document")
+
+      new_suffix = oda.operator_document&.document_file&.attachment&.file&.basename&.parameterize&.first(200)
+
+      puts "OperatorDocumentAnnex #{oda.id} has no document" if new_suffix.blank?
+      next if new_suffix.blank?
+
+      new_name = oda.attachment.identifier.gsub("no_document", new_suffix)
+      puts "Changing annex #{oda.id} name from #{oda.attachment.identifier} to new name: #{new_name}"
+      file_dirname = File.dirname(oda.attachment.file.file)
+      new_file_path = File.join(file_dirname, new_name)
+
+      if ENV["FOR_REAL"]
+        oda.attachment.file.move!(new_file_path)
+        oda.update_columns(attachment: new_name)
+      end
+    end
+  end
 end
