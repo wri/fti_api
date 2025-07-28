@@ -73,7 +73,6 @@ class OperatorDocument < ApplicationRecord
   scope :approved, -> { where(status: %i[doc_valid doc_not_required]) }
   scope :valid, -> { where(status: :doc_valid) }
   scope :required, -> { where.not(status: :doc_not_required) }
-  scope :from_user, ->(operator_id) { where(operator_id: operator_id) }
   scope :by_source, ->(source_id) { where(source: source_id) }
   scope :available, -> { where(public: true) }
   scope :expirable, -> { where(status: EXPIRABLE_STATUSES) }

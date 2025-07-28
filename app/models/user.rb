@@ -99,13 +99,13 @@ class User < ApplicationRecord
   end
 
   def is_operator?(operator_id)
-    return true if self&.user_permission&.user_role == "operator" && self.operator_id == operator_id
+    return true if operator? && self.operator_id == operator_id
 
     is_operator_holding? operator_id
   end
 
   def is_operator_holding?(operator_id)
-    return false unless self&.user_permission&.user_role == "holding"
+    return false unless holding?
 
     Operator.find_by(id: operator_id)&.holding_id == holding_id
   end
