@@ -30,6 +30,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   has_one :operator_document, through: :annex_document, required: false, source: :documentable, source_type: "OperatorDocument"
   has_many :annex_documents_history, -> { where(documentable_type: "OperatorDocumentHistory") },
     class_name: "AnnexDocument", inverse_of: :operator_document_annex
+  has_many :operator_document_histories, through: :annex_documents_history, source: :documentable, source_type: "OperatorDocumentHistory"
 
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]

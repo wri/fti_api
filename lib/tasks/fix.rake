@@ -361,14 +361,23 @@ namespace :fix do
 
   desc "Fixing operator document annexes generated names"
   task annexes_names: :environment do
+    no_suffix = 0
+
     # fixing only those with no_document in the name
     OperatorDocumentAnnex.find_each do |oda|
       next unless oda.attachment.identifier.include?("no_document")
 
-      new_suffix = oda.operator_document&.document_file&.attachment&.file&.basename&.parameterize&.first(200)
+      # first look into the history
+      document_file = oda.operator_document_histories.order(operator_document_updated_at: :asc).first&.document_file # oldest history entry
+      document_file = oda.operator_document&.document_file if document_file.nil?
 
-      puts "OperatorDocumentAnnex #{oda.id} has no document" if new_suffix.blank?
-      next if new_suffix.blank?
+      new_suffix = document_file&.attachment&.file&.basename&.parameterize&.first(200)
+
+      if new_suffix.blank?
+        puts "NO new suffix for annex #{oda.id}, operator document: #{oda.operator_document&.id}, annex documents history: #{oda.annex_documents_history.count}"
+        no_suffix += 1
+        next
+      end
 
       new_name = oda.attachment.identifier.gsub("no_document", new_suffix)
       puts "Changing annex #{oda.id} name from #{oda.attachment.identifier} to new name: #{new_name}"
@@ -380,5 +389,7 @@ namespace :fix do
         oda.update_columns(attachment: new_name)
       end
     end
+
+    puts "No suffix count: #{no_suffix}"
   end
 end
