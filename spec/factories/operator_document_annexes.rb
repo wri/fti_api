@@ -22,6 +22,10 @@ FactoryBot.define do
     expire_date { Date.tomorrow }
     name { "annex name" }
 
+    transient do
+      force_status { nil }
+    end
+
     after(:build) do |random_operator_document_annex|
       if random_operator_document_annex.annex_document.nil? ||
           random_operator_document_annex.annex_documents.none?
@@ -31,6 +35,10 @@ FactoryBot.define do
           operator_document_annex_id: random_operator_document_annex.id
       end
       random_operator_document_annex.user ||= FactoryBot.create :admin
+    end
+
+    after(:create) do |doc, evaluator|
+      doc.update(status: evaluator.force_status) if evaluator.force_status
     end
   end
 end
