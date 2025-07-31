@@ -322,7 +322,7 @@ ActiveAdmin.register OperatorDocument do
     end
 
     panel I18n.t("activerecord.models.operator_document_history") do
-      table_for OperatorDocumentHistory.where(operator_document_id: resource.id).order(created_at: :desc) do
+      table_for OperatorDocumentHistory.where(operator_document_id: resource.id).order(operator_document_updated_at: :desc) do
         column :id do |history|
           link_to history.id, admin_operator_document_history_path(history)
         end
