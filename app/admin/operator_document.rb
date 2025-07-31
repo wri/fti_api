@@ -98,16 +98,6 @@ ActiveAdmin.register OperatorDocument do
     end
   end
 
-  sidebar I18n.t("active_admin.operator_documents_page.annexes"), only: :show do
-    attributes_table_for resource do
-      ul do
-        resource.operator_document_annexes.collect do |annex|
-          li link_to(annex.name, admin_operator_document_annex_path(annex.id))
-        end
-      end
-    end
-  end
-
   actions :all, except: [:destroy, :new]
   permit_params :name, :public, :required_operator_document_id,
     :operator_id, :type, :status, :expire_date, :start_date,
@@ -305,6 +295,52 @@ ActiveAdmin.register OperatorDocument do
       row :created_at
       row :updated_at
       row :deleted_at
+    end
+
+    panel I18n.t("active_admin.operator_documents_page.annexes") do
+      table_for resource.operator_document_annexes do
+        column :id do |resource|
+          link_to resource.id, admin_operator_document_annex_path(resource)
+        end
+        column :name do |resource|
+          if resource.attachment.present?
+            link_to resource.name, resource.attachment.url, target: "_blank", rel: "noopener noreferrer"
+          else
+            resource.name
+          end
+        end
+        tag_column :status
+        column :created_at
+        column :uploaded_by do |resource|
+          if resource.user.present?
+            link_to resource.user.name, admin_user_path(resource.user)
+          else
+            resource.uploaded_by
+          end
+        end
+      end
+    end
+
+    panel I18n.t("activerecord.models.operator_document_history") do
+      table_for OperatorDocumentHistory.where(operator_document_id: resource.id).order(created_at: :desc) do
+        column :id do |history|
+          link_to history.id, admin_operator_document_history_path(history)
+        end
+        tag_column :status
+        column :operator_document_updated_at
+        column :attachment do |history|
+          if history.document_file&.attachment.present?
+            link_to history.document_file.attachment.identifier, history.document_file.attachment.url, target: "_blank", rel: "noopener noreferrer"
+          end
+        end
+        column :annexes do |history|
+          links = []
+          history.operator_document_annexes.each do |annex|
+            links << link_to(annex.id, admin_operator_document_annex_path(annex.id))
+          end
+          safe_join(links, ", ")
+        end
+      end
     end
   end
 end
