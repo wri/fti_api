@@ -29,10 +29,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          sudo apt update --fix-missing
-          sudo apt-get install libgdal-dev
+      - uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: libgdal-dev
+          version: 1.0
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -57,10 +57,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: gdal-bin libgdal-dev
+          version: 1.0
+
+      - name: Install other dependencies
         run: |
-          sudo apt update --fix-missing
-          sudo apt-get -yqq install gdal-bin libgdal-dev
           npm install -g mjml
 
       - name: Set up Ruby
