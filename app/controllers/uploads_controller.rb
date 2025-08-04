@@ -46,7 +46,9 @@ class UploadsController < ApplicationController
   end
 
   def trackable_request?
-    TRACKABLE_MODELS.include?(@model_name) && !bot_request?
+    TRACKABLE_MODELS.include?(@model_name) &&
+      !bot_request? &&
+      !admin_panel_request?
   end
 
   def bot_request?
@@ -59,6 +61,14 @@ class UploadsController < ApplicationController
     ]
 
     bot_patterns.any? { |pattern| user_agent.match?(pattern) }
+  end
+
+  def admin_panel_request?
+    referer = request.referer.to_s
+    return false if referer.blank?
+
+    admin_paths = ["/admin", "/observations-tool"]
+    admin_paths.any? { |path| referer.include?(path) }
   end
 
   def allowed_models
