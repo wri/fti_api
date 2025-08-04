@@ -28,7 +28,7 @@ set :nvm_map_bins, %w[node npm yarn rake rails]
 set :keep_releases, 5
 
 set :linked_files, %w[.env]
-set :linked_dirs, %w[log db/dumps tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads private]
+set :linked_dirs, %w[log db/dumps tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads uploads private]
 
 append :rvm_map_bins, "rvmsudo", "rails"
 

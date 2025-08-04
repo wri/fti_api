@@ -58,6 +58,8 @@ spec/.DS_Store
 !/tmp/storage/
 !/tmp/storage/.keep
 
+/uploads
+
 # Ignore IDE files
 .idea
 .dir-locals.el

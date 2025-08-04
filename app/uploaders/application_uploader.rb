@@ -4,7 +4,7 @@ class ApplicationUploader < CarrierWave::Uploader::Base
   storage :file
 
   def root
-    result = super
+    result = Rails.root
     result = Rails.root.join("private") if private_upload?
     result = result.to_s.gsub(Rails.root.to_s, Rails.root.join("tmp").to_s) if Rails.env.test?
     result
