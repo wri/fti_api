@@ -1,4 +1,4 @@
-class TrackDownloadJob < ApplicationJob
+class TrackFileDownloadJob < ApplicationJob
   queue_as :default
 
   def perform(file_url, file_name, model_name)

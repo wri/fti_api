@@ -51,7 +51,7 @@ class UploadsController < ApplicationController
   end
 
   def track_download
-    TrackDownloadJob.perform_later(request.url, @filename, @model_name)
+    TrackFileDownloadJob.perform_later(request.url, @filename, @model_name)
   end
 
   def trackable_request?

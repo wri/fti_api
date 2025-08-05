@@ -15,7 +15,7 @@ RSpec.describe UploadsController, type: :request do
   end
 
   before do
-    allow(TrackDownloadJob).to receive(:perform_later)
+    allow(TrackFileDownloadJob).to receive(:perform_later)
   end
 
   describe "GET /uploads/*path" do
@@ -69,7 +69,7 @@ RSpec.describe UploadsController, type: :request do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(TrackDownloadJob).to have_received(:perform_later).with(
+        expect(TrackFileDownloadJob).to have_received(:perform_later).with(
           request.url, @document_file.attachment.filename, "document_file"
         )
 
@@ -78,7 +78,7 @@ RSpec.describe UploadsController, type: :request do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(TrackDownloadJob).to have_received(:perform_later).with(
+        expect(TrackFileDownloadJob).to have_received(:perform_later).with(
           request.url, @observation_report.attachment.filename, "observation_report"
         )
       end
@@ -89,7 +89,7 @@ RSpec.describe UploadsController, type: :request do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(TrackDownloadJob).not_to have_received(:perform_later)
+        expect(TrackFileDownloadJob).not_to have_received(:perform_later)
       end
 
       it "does not track admin panel requests" do
@@ -107,7 +107,7 @@ RSpec.describe UploadsController, type: :request do
           }
 
           expect(response).to have_http_status(:ok)
-          expect(TrackDownloadJob).not_to have_received(:perform_later)
+          expect(TrackFileDownloadJob).not_to have_received(:perform_later)
         end
       end
 
@@ -117,7 +117,7 @@ RSpec.describe UploadsController, type: :request do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(TrackDownloadJob).not_to have_received(:perform_later)
+        expect(TrackFileDownloadJob).not_to have_received(:perform_later)
       end
     end
 
@@ -126,7 +126,7 @@ RSpec.describe UploadsController, type: :request do
         get @observation_report.attachment.url
 
         expect(response).to have_http_status(:ok)
-        expect(TrackDownloadJob).to have_received(:perform_later)
+        expect(TrackFileDownloadJob).to have_received(:perform_later)
       end
 
       it "handles requests without referer" do
@@ -135,7 +135,7 @@ RSpec.describe UploadsController, type: :request do
         }
 
         expect(response).to have_http_status(:ok)
-        expect(TrackDownloadJob).to have_received(:perform_later)
+        expect(TrackFileDownloadJob).to have_received(:perform_later)
       end
 
       it "prevents directory traversal" do
