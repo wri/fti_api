@@ -1,18 +1,28 @@
 # frozen_string_literal: true
 
 class PrivateUploadsController < ApplicationController
-  include SecureSendFile
-
   before_action :authenticate_user!
 
   rescue_from ActionController::MissingFile, with: :raise_not_found_exception
 
   def download
-    filepath = "#{params[:rest]}.#{params[:format]}"
-    secure_send_file allowed_filepath, filepath, disposition: :inline
+    sanitize_filepath
+    send_file @sanitized_filepath, disposition: :inline
   end
 
   private
+
+  def sanitize_filepath
+    filepath = "#{params[:rest]}.#{params[:format]}"
+    allowed_path = File.realpath(allowed_directory)
+    full_path = File.realpath(File.join(allowed_path, filepath))
+
+    raise_not_found_exception unless full_path.start_with?(allowed_path + File::SEPARATOR)
+
+    @sanitized_filepath = full_path
+  rescue Errno::ENOENT
+    raise_not_found_exception
+  end
 
   def authenticate_user!
     if current_user.present?

@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class UploadsController < ApplicationController
-  include SecureSendFile
-
   rescue_from ActionController::MissingFile, with: :raise_not_found_exception
 
-  ALLOWED_MODELS_OVERRIDES = {
+  MODELS_OVERRIDES = {
     "operator_document_file" => "document_file",
     "documents" => "uploaded_document"
   }.freeze
@@ -21,24 +19,35 @@ class UploadsController < ApplicationController
   ].freeze
 
   def download
+    sanitize_filepath
     parse_upload_path
     track_download if trackable_request?
-    secure_send_file allowed_directory, @filepath, disposition: :inline
+    send_file @sanitized_filepath, disposition: :inline
   end
 
   private
 
+  def sanitize_filepath
+    filepath = "#{params[:rest]}.#{params[:format]}"
+    allowed_path = File.realpath(allowed_directory)
+    full_path = File.realpath(File.join(allowed_path, filepath))
+
+    raise_not_found_exception unless full_path.start_with?(allowed_path + File::SEPARATOR)
+
+    @sanitized_filepath = full_path
+    @relative_filepath = full_path.gsub(allowed_path + File::SEPARATOR, "")
+  rescue Errno::ENOENT
+    raise_not_found_exception
+  end
+
   def parse_upload_path
-    path_parts = "#{params[:rest]}.#{params[:format]}".split("/")
-    @filepath = "#{params[:rest]}.#{params[:format]}"
+    path_parts = @relative_filepath.split("/")
 
     raise_not_found_exception if path_parts.length < 4
 
     model_key = path_parts[0].downcase
-    @model_name = ALLOWED_MODELS_OVERRIDES[model_key] || model_key
+    @model_name = MODELS_OVERRIDES[model_key] || model_key
     @filename = path_parts[3..].join("/")
-
-    raise_not_known_model unless allowed_models.include?(@model_name) # extra security check
   end
 
   def track_download
@@ -71,22 +80,11 @@ class UploadsController < ApplicationController
     admin_paths.any? { |path| referer.include?(path) }
   end
 
-  def allowed_models
-    Dir.entries(Rails.root.join("uploads"))
-      .select { |entry| File.directory?(Rails.root.join("uploads", entry)) }
-      .reject { |entry| entry.start_with?(".") || entry == "tmp" }
-      .map { |entry| ALLOWED_MODELS_OVERRIDES[entry.downcase] || entry }
-  end
-
   def allowed_directory
     Rails.env.test? ? File.join(Rails.root, "tmp", "uploads") : File.join(Rails.root, "uploads")
   end
 
   def raise_not_found_exception
     raise ActionController::RoutingError, "Not Found"
-  end
-
-  def raise_not_known_model
-    raise ActionController::RoutingError, "Not Known Model"
   end
 end
