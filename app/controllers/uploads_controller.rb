@@ -21,6 +21,7 @@ class UploadsController < ApplicationController
   def download
     sanitize_filepath
     parse_upload_path
+    ensure_valid_db_record
     track_download if trackable_request?
     send_file @sanitized_filepath, disposition: :inline
   end
@@ -46,8 +47,36 @@ class UploadsController < ApplicationController
     raise_not_found_exception if path_parts.length < 4
 
     model_key = path_parts[0].downcase
-    @model_name = MODELS_OVERRIDES[model_key] || model_key
+    @model_name = (MODELS_OVERRIDES[model_key] || model_key).downcase
+    @uploader_name = path_parts[1].downcase
+    @record_id = path_parts[2].to_i
     @filename = path_parts[3..].join("/")
+  end
+
+  # extra security step, do not let download antything for removed records or not saved in DB
+  # we already have sanitized file path that should be enough, but this also will ensure no protected file is downloaded
+  def ensure_valid_db_record
+    raise_not_found_exception unless allowed_models.include?(@model_name)
+
+    model_class = @model_name.classify.constantize
+    raise_not_found_exception unless model_class.uploaders.keys.map(&:to_s).include?(@uploader_name) # ensure valid uploader
+
+    record = model_class.find(@record_id)
+    uploader = record.public_send(@uploader_name)
+    db_filenames = [uploader.file.file, *uploader.versions.values.map { |v| v.file.file }].map { |f| File.basename(f) }
+
+    unless db_filenames.include?(File.basename(@sanitized_filepath))
+      raise_not_found_exception
+    end
+  rescue NameError, ActiveRecord::RecordNotFound
+    raise_not_found_exception
+  end
+
+  def allowed_models
+    Dir.entries(Rails.root.join("uploads"))
+      .select { |entry| File.directory?(Rails.root.join("uploads", entry)) }
+      .reject { |entry| entry.start_with?(".") || entry == "tmp" }
+      .map { |entry| MODELS_OVERRIDES[entry.downcase] || entry }
   end
 
   def track_download

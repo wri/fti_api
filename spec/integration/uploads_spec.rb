@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe UploadsController, type: :request do
   before(:all) do
     @etc_dir = Rails.root.join("tmp", "etc")
+    FileUtils.mkdir_p(Rails.root.join("tmp", "uploads"))
     FileUtils.mkdir_p(@etc_dir)
 
     @observation_report = create(:observation_report)
@@ -37,6 +38,15 @@ RSpec.describe UploadsController, type: :request do
 
       it "returns 404 for non-existent directories" do
         get "/uploads/operator_document_file/999/888/test.pdf"
+
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it "returns 404 for existing files but not in db" do
+        new_file = File.join(File.dirname(@document_file.attachment.file.file), "newfile.txt")
+        File.write(new_file, "test")
+
+        get "/uploads/operator_document_file/attachment/#{@document_file.id}/newfile.txt"
 
         expect(response).to have_http_status(:not_found)
       end

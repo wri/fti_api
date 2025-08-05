@@ -32,7 +32,7 @@ class PrivateUploadsController < ApplicationController
     end
   end
 
-  def allowed_filepath
+  def allowed_directory
     return File.join(Rails.root, "tmp", "private", "uploads") if Rails.env.test?
 
     File.join(Rails.root, "private", "uploads")
