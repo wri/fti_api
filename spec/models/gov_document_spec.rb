@@ -27,7 +27,7 @@ RSpec.describe GovDocument, type: :model do
     with_versioning do
       context "when removing attachment" do
         it "moves previous attachment to private folder" do
-          expect(document.attachment.file.file).to match("/public/uploads")
+          expect(document.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
           document.remove_attachment!
           document.save!
           document.reload
@@ -39,7 +39,7 @@ RSpec.describe GovDocument, type: :model do
 
       context "when changing attachment" do
         it "moves previous attachment to private folder" do
-          expect(document.attachment.file.file).to match("/public/uploads")
+          expect(document.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
           document.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "doc.pdf"))
           document.save!
           document.reload
@@ -94,7 +94,7 @@ RSpec.describe GovDocument, type: :model do
     with_versioning do
       context "when deleting" do
         it "moves attachment to private directory" do
-          expect(document.attachment.file.file).to match("/public/uploads")
+          expect(document.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
           document.destroy!
           document.reload
           expect(document.attachment.file.file).to match("/private/uploads")
@@ -114,7 +114,7 @@ RSpec.describe GovDocument, type: :model do
           expect(document.attachment.file.file).to match("/private/uploads")
           document.restore
           reloaded_doc = GovDocument.find(document.id) # as reload does not reload paper_trail.live? weird
-          expect(reloaded_doc.attachment.file.file).to match("/public/uploads")
+          expect(reloaded_doc.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
           # first version should stay in private directory
           prev_version = reloaded_doc.versions[-2].reify
           expect(prev_version.attachment.file.file).to match("/private/uploads")

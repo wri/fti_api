@@ -79,7 +79,7 @@ RSpec.describe ObservationReport, type: :model do
 
     context "when deleting" do
       it "moves attachment to private directory" do
-        expect(report.attachment.file.file).to match("/public/uploads")
+        expect(report.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
         report.destroy!
         report.reload
         expect(report.attachment.file.file).to match("/private/uploads")
@@ -96,7 +96,7 @@ RSpec.describe ObservationReport, type: :model do
         expect(report.attachment.file.file).to match("/private/uploads")
         report.restore
         report.reload
-        expect(report.attachment.file.file).to match("/public/uploads")
+        expect(report.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
       end
     end
   end
