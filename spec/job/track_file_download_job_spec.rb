@@ -6,6 +6,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
   let(:model_name) { "User" }
   let(:measurement_id) { "G-XXXXXXXXXX" }
   let(:api_secret) { "test_api_secret" }
+  let(:client_id) { "test_client" }
 
   before do
     ENV["GA4_MEASUREMENT_ID"] = measurement_id
@@ -21,6 +22,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
     context "when environment variables are present" do
       let(:expected_payload) do
         {
+          client_id: client_id,
           events: [{
             name: "file_download",
             params: {
@@ -48,7 +50,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
           json: expected_payload
         )
 
-        described_class.perform_now(file_url, file_name, model_name)
+        described_class.perform_now(client_id, file_url, file_name, model_name)
       end
     end
 
@@ -59,7 +61,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
 
       it "does not send GA4 event" do
         expect(HTTP).not_to receive(:post)
-        described_class.perform_now(file_url, file_name, model_name)
+        described_class.perform_now(client_id, file_url, file_name, model_name)
       end
     end
 
@@ -70,7 +72,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
 
       it "does not send GA4 event" do
         expect(HTTP).not_to receive(:post)
-        described_class.perform_now(file_url, file_name, model_name)
+        described_class.perform_now(client_id, file_url, file_name, model_name)
       end
     end
   end

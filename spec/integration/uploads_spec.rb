@@ -64,13 +64,15 @@ RSpec.describe UploadsController, type: :request do
 
     context "download tracking" do
       it "tracks downloads for trackable models with regular browsers" do
+        allow_any_instance_of(UploadsController).to receive(:client_id).and_return("test-client-id")
+
         get @document_file.attachment.url, headers: {
           "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
         }
 
         expect(response).to have_http_status(:ok)
         expect(TrackFileDownloadJob).to have_received(:perform_later).with(
-          request.url, @document_file.attachment.filename, "document_file"
+          "test-client-id", request.url, @document_file.attachment.filename, "document_file"
         )
 
         get @observation_report.attachment.url, headers: {
@@ -79,7 +81,7 @@ RSpec.describe UploadsController, type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(TrackFileDownloadJob).to have_received(:perform_later).with(
-          request.url, @observation_report.attachment.filename, "observation_report"
+          "test-client-id", request.url, @observation_report.attachment.filename, "observation_report"
         )
       end
 
