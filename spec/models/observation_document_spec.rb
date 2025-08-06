@@ -36,6 +36,7 @@ RSpec.describe ObservationDocument, type: :model do
         report.destroy!
         report.reload
         expect(report.attachment.file.file).to match("/private/uploads")
+        expect(report.attachment.file.exists?).to be(true)
       end
     end
 
@@ -50,6 +51,7 @@ RSpec.describe ObservationDocument, type: :model do
         report.restore
         report.reload
         expect(report.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
+        expect(report.attachment.file.exists?).to be(true)
       end
     end
   end
