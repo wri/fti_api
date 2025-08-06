@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe UploadsController, type: :request do
   before(:all) do
     @etc_dir = Rails.root.join("tmp", "etc")
-    FileUtils.mkdir_p(Rails.root.join("tmp", "uploads"))
+    FileUtils.mkdir_p(ApplicationUploader.new.public_root.join("uploads"))
     FileUtils.mkdir_p(@etc_dir)
 
     @observation_report = create(:observation_report)

@@ -73,8 +73,9 @@ class UploadsController < ApplicationController
   end
 
   def allowed_models
-    Dir.entries(Rails.root.join("uploads"))
-      .select { |entry| File.directory?(Rails.root.join("uploads", entry)) }
+    uploads_root = ApplicationUploader.new.public_root.join("uploads")
+    Dir.entries(uploads_root)
+      .select { |entry| File.directory?(uploads_root.join(entry)) }
       .reject { |entry| entry.start_with?(".") || entry == "tmp" }
       .map { |entry| MODELS_OVERRIDES[entry.downcase] || entry }
   end
