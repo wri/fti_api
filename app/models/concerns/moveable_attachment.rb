@@ -12,8 +12,10 @@ module MoveableAttachment
         return if uploader.nil?
         return if uploader.file.nil?
 
-        from = File.dirname(uploader.file.file.gsub("/public/", "/private/"))
-        to = File.dirname(from.gsub("/private/", "/public/"))
+        public_uploads = uploader.public_root.join("uploads").to_s
+        private_uploads = uploader.private_root.join("uploads").to_s
+        from = File.dirname(uploader.file.file.gsub(public_uploads, private_uploads))
+        to = File.dirname(from.gsub(private_uploads, public_uploads))
         move_attachment(from, to)
       end
 
@@ -22,8 +24,10 @@ module MoveableAttachment
         return if uploader.nil?
         return if uploader.file.nil?
 
-        from = File.dirname(uploader.file.file.gsub("/private/", "/public/"))
-        to = File.dirname(from.gsub("/public/", "/private/"))
+        public_uploads = uploader.public_root.join("uploads").to_s
+        private_uploads = uploader.private_root.join("uploads").to_s
+        from = File.dirname(uploader.file.file.gsub(private_uploads, public_uploads))
+        to = File.dirname(from.gsub(public_uploads, private_uploads))
         move_attachment(from, to)
       end
     end

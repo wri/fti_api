@@ -29,7 +29,7 @@ RSpec.describe GovDocument, type: :model do
         it "moves previous attachment to private folder" do
           expect(document.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
           expect(document.attachment.file.exists?).to be(true)
-          document.remove_attachment!
+          document.attachment = nil
           document.save!
           document.reload
           expect(document.read_attribute(:attachment)).to be_nil
@@ -117,6 +117,7 @@ RSpec.describe GovDocument, type: :model do
 
         it "moves attachment back to public directory" do
           expect(document.attachment.file.file).to match("/private/uploads")
+          expect(document.attachment.file.exists?).to be(true)
           document.restore
           reloaded_doc = GovDocument.find(document.id) # as reload does not reload paper_trail.live? weird
           expect(reloaded_doc.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)

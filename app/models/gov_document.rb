@@ -80,9 +80,8 @@ class GovDocument < ApplicationRecord
   end
 
   def reset_to_not_provided!
-    remove_attachment!
     update!(
-      status: OperatorDocument.statuses[:doc_not_provided],
+      status: OperatorDocument.statuses[:doc_not_provided], attachment: nil,
       expire_date: nil, start_date: nil, uploaded_by: nil, user_id: nil,
       value: nil, link: nil
     )
@@ -102,8 +101,8 @@ class GovDocument < ApplicationRecord
     previous_attachment_filename = previous_changes[:attachment][0]
     return if previous_attachment_filename.blank?
 
-    from = File.join(attachment.root, attachment.store_dir, previous_attachment_filename)
-    to = from.gsub("/public/", "/private/")
+    from = File.join(attachment.public_root, attachment.store_dir, previous_attachment_filename)
+    to = File.join(attachment.private_root, attachment.store_dir, previous_attachment_filename)
     FileUtils.makedirs(File.dirname(to))
     system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
   end
@@ -113,9 +112,9 @@ class GovDocument < ApplicationRecord
     attachment_attr = self[:attachment]
     return if attachment_attr.nil?
 
-    to = File.join(attachment.root, attachment.store_dir, attachment_attr)
-    from = to.gsub("/public/", "/private/")
-    FileUtils.makedirs(File.dirname(from))
+    from = File.join(attachment.private_root, attachment.store_dir, attachment_attr)
+    to = File.join(attachment.public_root, attachment.store_dir, attachment_attr)
+    FileUtils.makedirs(File.dirname(to))
     system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
   end
 
