@@ -33,7 +33,6 @@ class GovDocument < ApplicationRecord
   belongs_to :required_gov_document, -> { with_archived }, inverse_of: :gov_documents
 
   mount_base64_uploader :attachment, GovDocumentUploader
-  include MoveableAttachment
 
   before_validation :set_expire_date, if: proc { |d| d.required_gov_document.valid_period? }
   before_validation :clear_wrong_fields
@@ -43,11 +42,7 @@ class GovDocument < ApplicationRecord
   validates :start_date, presence: true, if: proc { |d| d.required_gov_document.valid_period? && d.has_data? }
   validates :expire_date, presence: true, if: proc { |d| d.required_gov_document.valid_period? && d.has_data? }
 
-  after_update :move_previous_attachment_to_private_directory, if: :saved_change_to_attachment?
-
-  skip_callback :commit, :after, :remove_attachment!
-  after_destroy :move_attachment_to_private_directory
-  after_restore :move_attachment_to_public_directory
+  skip_callback :commit, :after, :remove_attachment! # skip removal after destroying the record, skip after update done in uploader
   after_real_destroy :remove_attachment!
 
   scope :with_archived, -> { unscope(where: :deleted_at) }
@@ -95,27 +90,6 @@ class GovDocument < ApplicationRecord
 
   def set_country
     self.country_id = required_gov_document.country_id
-  end
-
-  def move_previous_attachment_to_private_directory
-    previous_attachment_filename = previous_changes[:attachment][0]
-    return if previous_attachment_filename.blank?
-
-    from = File.join(attachment.public_root, attachment.store_dir, previous_attachment_filename)
-    to = File.join(attachment.private_root, attachment.store_dir, previous_attachment_filename)
-    FileUtils.makedirs(File.dirname(to))
-    system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
-  end
-
-  # we only want to move current attachment back to public directory
-  def move_attachment_to_public_directory
-    attachment_attr = self[:attachment]
-    return if attachment_attr.nil?
-
-    from = File.join(attachment.private_root, attachment.store_dir, attachment_attr)
-    to = File.join(attachment.public_root, attachment.store_dir, attachment_attr)
-    FileUtils.makedirs(File.dirname(to))
-    system "mv #{Shellwords.escape(from)} #{Shellwords.escape(to)}"
   end
 
   def clear_wrong_fields

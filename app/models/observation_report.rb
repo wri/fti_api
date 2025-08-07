@@ -17,7 +17,6 @@
 class ObservationReport < ApplicationRecord
   has_paper_trail
   mount_base64_uploader :attachment, ObservationReportUploader
-  include MoveableAttachment
 
   acts_as_paranoid
 
@@ -35,8 +34,6 @@ class ObservationReport < ApplicationRecord
   validates :publication_date, presence: true
 
   skip_callback :commit, :after, :remove_attachment!
-  after_destroy :move_attachment_to_private_directory
-  after_restore :move_attachment_to_public_directory
   after_real_destroy :remove_attachment!
 
   attr_accessor :skip_observers_sync

@@ -17,8 +17,4 @@ class ObservationReportUploader < ApplicationUploader
     filename += "." + super.split(".").last if super.split(".").any?
     sanitize_filename(filename)
   end
-
-  def private_upload?
-    model.deleted?
-  end
 end

@@ -27,31 +27,26 @@ RSpec.describe ObservationDocument, type: :model do
     expect(subject.errors[:document_type]).to include("is not included in the list")
   end
 
-  describe "soft delete" do
-    let!(:report) { create(:observation_document) }
+  describe "deletion" do
+    let!(:document) { create(:observation_document) }
 
-    context "when deleting" do
-      it "moves attachment to private directory" do
-        expect(report.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
-        report.destroy!
-        report.reload
-        expect(report.attachment.file.file).to match("/private/uploads")
-        expect(report.attachment.file.exists?).to be(true)
+    context "when soft deleting record" do
+      it "does not delete the original file" do
+        original_file_path = document.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
+        document.destroy!
+        expect(document.deleted?).to be true
+        expect(File.exist?(original_file_path)).to be true
+        expect(document.attachment.file.file).to eq(original_file_path)
       end
     end
 
-    context "when restoring" do
-      before do
-        report.destroy!
-        report.reload
-      end
-
-      it "moves attachment back to public directory" do
-        expect(report.attachment.file.file).to match("/private/uploads")
-        report.restore
-        report.reload
-        expect(report.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
-        expect(report.attachment.file.exists?).to be(true)
+    context "when hard deleting record" do
+      it "deletes the original file" do
+        original_file_path = document.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
+        document.really_destroy!
+        expect(File.exist?(original_file_path)).to be false
       end
     end
   end

@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe UploadsController, type: :request do
   before(:all) do
     @etc_dir = Rails.root.join("tmp", "etc")
-    FileUtils.mkdir_p(ApplicationUploader.new.public_root.join("uploads"))
+    FileUtils.mkdir_p(ApplicationUploader.new.root.join("uploads"))
     FileUtils.mkdir_p(@etc_dir)
 
     @observation_report = create(:observation_report)
@@ -130,6 +130,60 @@ RSpec.describe UploadsController, type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(TrackFileDownloadJob).not_to have_received(:perform_later)
+      end
+    end
+
+    context "special paper trail history handling" do
+      # gov document keeps history of changed attachments - not removing files after update
+      let(:gov_document) { create(:gov_document, :file) }
+
+      before do
+        @previous_url = gov_document.attachment.url
+
+        gov_document.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "doc.pdf"))
+        gov_document.save!
+
+        expect(@previous_url).not_to eq(gov_document.attachment.url)
+      end
+
+      it "returns 404 for previous version" do
+        get @previous_url
+
+        expect(response).to have_http_status(:not_found)
+      end
+
+      context "when admin user" do
+        before { sign_in admin }
+
+        it "allows access to previous history attachment" do
+          get @previous_url
+
+          expect(response).to have_http_status(:ok)
+          expect(response.headers["Content-Disposition"]).to include("inline")
+        end
+      end
+    end
+
+    context "soft deleted records handling" do
+      let(:gov_document) { create(:gov_document, :file) }
+
+      before { gov_document.destroy! }
+
+      it "returns 404 for soft deleted records" do
+        get gov_document.attachment.url
+
+        expect(response).to have_http_status(:not_found)
+      end
+
+      context "when admin user" do
+        before { sign_in admin }
+
+        it "allows access to soft deleted records" do
+          get gov_document.attachment.url
+
+          expect(response).to have_http_status(:ok)
+          expect(response.headers["Content-Disposition"]).to include("inline")
+        end
       end
     end
 
