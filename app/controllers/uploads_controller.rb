@@ -15,6 +15,7 @@ class UploadsController < ApplicationController
     parse_upload_path
     ensure_valid_db_record
     track_download if trackable_request?
+    check_authorization if needs_authorization?
     send_file @sanitized_filepath, disposition: :inline
   end
 
@@ -77,6 +78,14 @@ class UploadsController < ApplicationController
     unless db_filenames.include?(File.basename(@sanitized_filepath))
       raise_not_found_exception
     end
+  end
+
+  def check_authorization
+    authorize! :download, @record
+  end
+
+  def needs_authorization?
+    @uploader.protected?
   end
 
   def allowed_models

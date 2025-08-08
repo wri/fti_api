@@ -8,8 +8,10 @@ RSpec.describe UploadsController, type: :request do
     FileUtils.mkdir_p(ApplicationUploader.new.root.join("uploads"))
     FileUtils.mkdir_p(@etc_dir)
 
+    operator_document = create(:operator_document, force_status: :doc_valid)
     @observation_report = create(:observation_report)
-    @document_file = create(:document_file) # operator_document_file
+
+    @document_file = create(:document_file, operator_document: operator_document) # operator_document_file
     @donor = create(:donor) # donor logo
 
     File.write(@etc_dir.join("passwd.txt"), "private")
@@ -189,6 +191,29 @@ RSpec.describe UploadsController, type: :request do
 
         it "allows access to soft deleted records" do
           get gov_document.attachment.url
+
+          expect(response).to have_http_status(:ok)
+          expect(response.headers["Content-Disposition"]).to include("inline")
+        end
+      end
+    end
+
+    context "when uploaded file needs authorization before download" do
+      before { allow_any_instance_of(DocumentFileUploader).to receive(:protected?).and_return(true) }
+
+      context "when user is not authorized" do
+        it "returns 404 for unauthorized access" do
+          get @document_file.attachment.url
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context "when user is authorized" do
+        before { sign_in admin }
+
+        it "allows download of protected files" do
+          get @document_file.attachment.url
 
           expect(response).to have_http_status(:ok)
           expect(response.headers["Content-Disposition"]).to include("inline")
