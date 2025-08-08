@@ -25,4 +25,10 @@ class DocumentFileUploader < ApplicationUploader
 
     sanitize_filename(filename + File.extname(super))
   end
+
+  def protected?
+    model.owner.nil? ||
+      model.owner.publication_authorization? ||
+      !(model.owner.doc_valid? || model.owner.doc_expired?)
+  end
 end
