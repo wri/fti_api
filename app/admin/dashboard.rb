@@ -76,7 +76,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel t("active_admin.dashboard_page.new_producers.new_producers") do
-          table_for Operator.inactive.includes(country: :translations).order("updated_at DESC").limit(20).each do
+          table_for Operator.inactive.includes(country: :translations).order(updated_at: :desc).limit(20).each do
             column(t("active_admin.dashboard_page.columns.name")) { |o| link_to o.name, admin_producer_path(o.id) }
             column(t("active_admin.dashboard_page.columns.country")) { |o| o.country.present? ? o.country.name : t("active_admin.dashboard_page.new_producers.no_country") }
           end
@@ -85,7 +85,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel t("active_admin.dashboard_page.new_ims") do
-          table_for Observer.inactive.includes(countries: :translations).order("updated_at DESC").limit(20).each do
+          table_for Observer.inactive.includes(countries: :translations).order(updated_at: :desc).limit(20).each do
             column(t("active_admin.dashboard_page.columns.name")) { |o| link_to o.name, admin_monitor_path(o.id) }
             column(t("active_admin.dashboard_page.columns.countries")) { |o| o.countries.each { |x| x.name }.join(", ") }
           end
@@ -96,7 +96,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel t("active_admin.dashboard_page.new_user_accounts") do
-          table_for User.inactive.includes(:user_permission, country: :translations).order("updated_at DESC").limit(20).each do
+          table_for User.inactive.includes(:user_permission, country: :translations).order(updated_at: :desc).limit(20).each do
             column(t("active_admin.dashboard_page.columns.name")) { |o| link_to o.name, admin_user_path(o.id) }
             column(t("active_admin.dashboard_page.columns.country")) { |o| o.country.name if o.country.present? }
             column(t("active_admin.dashboard_page.columns.role")) { |o| o.user_permission.user_role if o.user_permission.present? }
@@ -106,7 +106,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel t("active_admin.dashboard_page.pending_observations", count: Observation.Created.count) do
-          table_for Observation.Created.includes(:country, :subcategory, :operator).order("updated_at DESC").limit(20).each do
+          table_for Observation.Created.includes(:country, :subcategory, :operator).order(updated_at: :desc).limit(20).each do
             column("ID") { |obs| link_to obs.id, admin_observation_path(obs.id) }
             column(t("active_admin.dashboard_page.columns.country")) { |obs| obs.country }
             column(t("active_admin.dashboard_page.columns.subcategory")) { |obs| obs.subcategory }
@@ -120,7 +120,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel t("active_admin.dashboard_page.pending_documents", count: OperatorDocument.doc_pending.count) do
-          table_for OperatorDocument.doc_pending.includes(:operator, :required_operator_document).order("updated_at DESC").limit(20).each do
+          table_for OperatorDocument.doc_pending.includes(:operator, :required_operator_document).order(updated_at: :desc).limit(20).each do
             column(t("active_admin.dashboard_page.columns.operator")) { |od| link_to od.operator.name, admin_producer_path(od.operator_id) }
             column(t("active_admin.dashboard_page.columns.name")) { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
             column(t("active_admin.dashboard_page.columns.creation_date")) { |od| od.created_at.strftime("%A, %d/%b/%Y") }
