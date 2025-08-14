@@ -29,9 +29,10 @@ module V1
 
     def can_see_documents?
       user = @context[:current_user]
+      return false if user.blank?
 
-      return true if user&.user_permission&.user_role == "admin"
-      return true if user&.is_operator?(@model.operator_id)
+      return true if user.admin?
+      return true if user.is_operator?(@model.operator_id)
 
       false
     end

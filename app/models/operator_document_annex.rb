@@ -42,7 +42,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
 
   scope :valid, -> { where(status: OperatorDocumentAnnex.statuses[:doc_valid]) }
-  scope :from_user, ->(operator_id) { joins(:operator_document).where(operator_documents: {operator_id: operator_id}) }
+  scope :from_operator, ->(operator_id) { joins(:operator_document).where(operator_documents: {operator_id: operator_id}) }
   scope :orphaned, -> { where.not(id: AnnexDocument.select(:operator_document_annex_id)) }
 
   def self.expire_document_annexes

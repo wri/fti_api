@@ -47,19 +47,26 @@ module V1
       @model.status == "doc_valid" || belongs_to_user?
     end
 
+    def self.records(options = {})
+      context = options[:context]
+      user = context[:current_user]
+
+      if user.present?
+        return OperatorDocumentAnnex.all if user.admin?
+        return OperatorDocumentAnnex.from_operator(user.operator_ids) if user.operator_ids.any?
+      end
+
+      OperatorDocumentAnnex.where(status: [:doc_valid, :doc_expired])
+    end
+
     private
 
-    # TODO: Refactor this
     def belongs_to_user?
       user = context[:current_user]
-      return true if user&.user_permission&.user_role == "admin"
+      return false if user.blank?
+      return true if user.admin?
 
-      annex_document_id =
-        AnnexDocument.find_by(documentable_type: "OperatorDocument",
-          operator_document_annex_id: @model.id)&.documentable_id
-      operator_id = OperatorDocument.find_by(id: annex_document_id)&.operator_id
-
-      user&.is_operator?(operator_id)
+      user.is_operator?(@model.operator_document&.operator_id)
     end
   end
 end
