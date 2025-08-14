@@ -21,8 +21,7 @@ module V1
 
     def operator_document_id=(operator_document_id)
       od = OperatorDocument.find operator_document_id
-      ad = AnnexDocument.new(documentable: od)
-      @model.annex_document = ad
+      @model.operator_document = od # this will also set @model.annex_document
 
       odh = OperatorDocumentHistory.where(operator_document_id: operator_document_id).order(operator_document_updated_at: :desc).first
       adh = AnnexDocument.new(documentable: odh)
