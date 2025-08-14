@@ -46,9 +46,10 @@ ActiveAdmin.register Fmu do
     link_to I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
   end
 
-  permit_params :id, :name, :certification_fsc, :certification_pefc,
+  permit_params :id, :name,
+    :certification_fsc, :certification_pefc, :certification_ls, :certification_pbn,
     :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
-    :certification_ls, :esri_shapefiles_zip, :forest_type, :country_id,
+    :esri_shapefiles_zip, :forest_type, :country_id,
     fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date]
 
   filter :id, as: :select
@@ -69,9 +70,9 @@ ActiveAdmin.register Fmu do
     }
   end
 
-  sidebar "Shapefiles", only: :index do
+  sidebar :shapefiles, only: :index do
     div do
-      link_to "Download Filtered Shapefiles", download_filtered_shapefiles_admin_fmus_path(
+      link_to I18n.t("active_admin.fmus_page.download_filtered_shapefiles"), download_filtered_shapefiles_admin_fmus_path(
         q: params[:q]&.to_unsafe_h
       ), class: "button text-center mt-10px"
     end
@@ -92,60 +93,58 @@ ActiveAdmin.register Fmu do
       fmu.operator&.name
     end
     column :certification_fsc
-    column :certification_pefc
+    column :certification_fsc_cw
+    column :certification_ls
     column :certification_olb
     column :certification_pafc
-    column :certification_fsc_cw
+    column :certification_pbn
+    column :certification_pefc
     column :certification_tlv
-    column :certification_ls
+  end
+
+  sidebar :certification, class: "fmu_certificates_sidebar", only: :show do
+    attributes_table do
+      row :certification_fsc
+      row :certification_fsc_cw
+      row :certification_ls
+      row :certification_olb
+      row :certification_pafc
+      row :certification_pbn
+      row :certification_pefc
+      row :certification_tlv
+    end
   end
 
   show do
-    columns class: "d-flex" do
-      column class: "flex-1" do
-        attributes_table do
-          row :id
-          row :name
-          row :forest_type
-          row :country
-          row :operator
+    attributes_table do
+      row :id
+      row :name
+      row :forest_type
+      row :country
+      row :operator
 
-          if resource.geojson && resource.centroid.present?
-            row :map do |r|
-              render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
-            end
-          end
-          if resource.geojson
-            row(:geojson) do
-              dialog id: "geojson_modal", title: Fmu.human_attribute_name(:geojson) do
-                resource.geojson
-              end
-              link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#geojson_modal').showModal()"
-            end
-            row(:properties) do
-              dialog id: "properties_modal", title: Fmu.human_attribute_name(:properties) do
-                resource.properties
-              end
-              link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
-            end
-          end
-          row :created_at
-          row :updated_at
-          row :deleted_at
+      if resource.geojson && resource.centroid.present?
+        row :map do |r|
+          render partial: "map", locals: {center: [r.centroid.x, r.centroid.y], center_marker: false, geojson: r.geojson, bbox: r.bbox}
         end
       end
-
-      column max_width: "250px" do
-        attributes_table title: t("active_admin.fmus_page.certification") do
-          row :certification_fsc
-          row :certification_pefc
-          row :certification_olb
-          row :certification_pafc
-          row :certification_fsc_cw
-          row :certification_tlv
-          row :certification_ls
+      if resource.geojson
+        row(:geojson) do
+          dialog id: "geojson_modal", title: Fmu.human_attribute_name(:geojson) do
+            resource.geojson
+          end
+          link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#geojson_modal').showModal()"
+        end
+        row(:properties) do
+          dialog id: "properties_modal", title: Fmu.human_attribute_name(:properties) do
+            resource.properties
+          end
+          link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
         end
       end
+      row :created_at
+      row :updated_at
+      row :deleted_at
     end
   end
 
@@ -156,13 +155,13 @@ ActiveAdmin.register Fmu do
     column :country, sortable: "country_translations.name"
     column :operator
     column "FSC", :certification_fsc
-    column "PEFC", :certification_pefc
+    column "FSC CW", :certification_fsc_cw
+    column "LS", :certification_ls
     column "OLB", :certification_olb
     column "PAFC", :certification_pafc
-    column "FSC CW", :certification_fsc_cw
+    column "PbN", :certification_pbn
+    column "PEFC", :certification_pefc
     column "TLV", :certification_tlv
-    column "LS", :certification_ls
-
     actions defaults: false do |fmu|
       item I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
       item I18n.t("active_admin.view"), admin_fmu_path(fmu)
@@ -181,13 +180,17 @@ ActiveAdmin.register Fmu do
           f.input :forest_type, as: :select,
             collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
             input_html: {disabled: object.persisted?}
+          li class: "checkboxes_label" do
+            label I18n.t("active_admin.fmus_page.certification")
+          end
           f.input :certification_fsc
-          f.input :certification_pefc
+          f.input :certification_fsc_cw
+          f.input :certification_ls
           f.input :certification_olb
           f.input :certification_pafc
-          f.input :certification_fsc_cw
+          f.input :certification_pbn
+          f.input :certification_pefc
           f.input :certification_tlv
-          f.input :certification_ls
         end
 
         f.inputs I18n.t("activerecord.models.operator"), for: [:fmu_operator, f.object.fmu_operator || FmuOperator.new] do |fo|

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: quality_controls
+#
+#  id              :bigint           not null, primary key
+#  reviewable_type :string           not null
+#  reviewable_id   :bigint           not null
+#  reviewer_id     :bigint           not null
+#  passed          :boolean          default(FALSE), not null
+#  comment         :text
+#  metadata        :jsonb
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 require "rails_helper"
 
 RSpec.describe QualityControl, type: :model do

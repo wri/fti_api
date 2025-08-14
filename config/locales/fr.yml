@@ -80,6 +80,7 @@ fr:
     sidebars:
       filters: "Filtres"
       search_status: "Statut de la recherche"
+      certification: "Certification"
     pagination:
       empty: "Aucun %{model} trouvé"
       one: "Affichage de <b>1</b> %{model}"
@@ -354,6 +355,7 @@ fr:
     fmus_page:
       certification: Certification
       download_shapefile: 'Télécharger shapefile'
+      download_filtered_shapefiles: 'Télécharger les shapefiles filtrés'
       confirm_delete: 'Êtes-vous sûr de vouloir supprimer cette FMU?'
     required_operator_document_page:
       exists: 'Existe'

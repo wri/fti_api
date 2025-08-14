@@ -50,6 +50,7 @@
             "certification_tlv": false,
             "certification_pafc": false,
             "certification_pefc": false,
+            "certification_pbn": false,
             "certification_fsc_cw": false
           },
           "geometry": {

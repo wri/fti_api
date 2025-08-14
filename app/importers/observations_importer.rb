@@ -30,7 +30,7 @@ class ObservationsImporter < FileDataImport::BaseImporter
 
   belongs_to Fmu,
     permitted_attributes: %i[
-      geojson forest_type certification_fsc certification_pefc
+      geojson forest_type certification_fsc certification_pefc certification_pbn
       certification_olb certification_vlc certification_vlo certification_tltv
     ],
     permitted_translations: %i[name]

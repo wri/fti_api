@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_16_100255) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_17_073611) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -246,6 +246,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_16_100255) do
     t.datetime "deleted_at", precision: nil
     t.boolean "certification_ls", default: false, null: false
     t.string "name", null: false
+    t.boolean "certification_pbn", default: false, null: false
     t.index ["country_id"], name: "index_fmus_on_country_id"
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at"
     t.index ["forest_type"], name: "index_fmus_on_forest_type"

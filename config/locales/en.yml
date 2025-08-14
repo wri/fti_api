@@ -69,6 +69,8 @@ en:
     sidebars:
       filters: "Filters"
       search_status: "Search Status"
+      certification: "Certification"
+      shapefiles: "Shapefiles"
     pagination:
       empty: "No %{model} found"
       one: "Displaying <b>1</b> %{model}"
@@ -323,6 +325,7 @@ en:
     fmus_page:
       certification: Certification
       download_shapefile: 'Download shapefile'
+      download_filtered_shapefiles: 'Download Filtered Shapefiles'
       confirm_delete: 'Are you sure you want to delete this FMU?'
     operator_page:
       producer: 'Producer'
@@ -654,13 +657,14 @@ en:
 
       fmu:
         active_observations: Active observations  #g
-        certification_fsc: Certification fsc  #g
-        certification_fsc_cw: Certification fsc cw  #g
-        certification_ls: Certification ls  #g
-        certification_olb: Certification olb  #g
-        certification_pafc: Certification pafc  #g
-        certification_pefc: Certification pefc  #g
-        certification_tlv: Certification tlv  #g
+        certification_fsc: Forest Stewardship Council (FSC) #g
+        certification_fsc_cw: Forest Stewardship Council - Controlled Wood (FSC-CW)
+        certification_ls: LegalSource (LS)
+        certification_olb: Origin and Legality of Wood (OLB)
+        certification_pafc: Pan African Forest Certification (PAFC)
+        certification_pbn: Preferred by Nature Certification Regulatory Scope (PbN)
+        certification_pefc: Programme for the Endorsement of Forest Certification (PEFC)
+        certification_tlv: Timber Legality Verification (TLV)
         country: :activerecord.models.country  #g
         deleted_at: Deleted at  #g
         fmu_operator: :activerecord.models.fmu_operator  #g

@@ -9,7 +9,7 @@ module V1
     attributes :name, :geojson, :forest_type,
       :certification_fsc, :certification_pefc, :certification_olb,
       :certification_pafc, :certification_fsc_cw, :certification_tlv,
-      :certification_ls
+      :certification_ls, :certification_pbn
 
     has_one :country
     has_one :operator, foreign_key_on: :related
@@ -17,7 +17,7 @@ module V1
     filters :country, :free, :certification, :operator
 
     filter :certification, apply: ->(records, value, _options) {
-      values = value.select { |c| %w[fsc pefc olb pafc fsc_cw tlv ls].include? c }
+      values = value.select { |c| %w[fsc pefc olb pafc pbn fsc_cw tlv ls].include? c }
       return records unless values.any?
 
       certifications = []

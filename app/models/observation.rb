@@ -34,6 +34,7 @@
 #  monitor_comment                   :text
 #  deleted_at                        :datetime
 #  locale                            :string
+#  non_concession_activity           :boolean          default(FALSE), not null
 #  details                           :text
 #  concern_opinion                   :text
 #  litigation_status                 :string
