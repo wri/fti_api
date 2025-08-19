@@ -362,20 +362,43 @@ namespace :fix do
   desc "Fixing operator document annexes generated names"
   task annexes_names: :environment do
     no_suffix = 0
+    no_file = 0
+    no_operator_document_record = 0
+    non_required_document = 0
 
     # fixing only those with no_document in the name
     OperatorDocumentAnnex.find_each do |oda|
       next unless oda.attachment.identifier.include?("no_document")
 
       # first look into the history
-      document_file = oda.operator_document_histories.order(operator_document_updated_at: :asc).first&.document_file # oldest history entry
-      document_file = oda.operator_document&.document_file if document_file.nil?
+      first_history_entry = oda.operator_document_histories.order(operator_document_updated_at: :asc).first
+      operator_document_record = first_history_entry || oda.operator_document
+
+      if operator_document_record.blank?
+        puts "NO operator document for annex #{oda.id}, skipping"
+        no_operator_document_record += 1
+        next
+      end
+
+      document_file = operator_document_record.document_file
+
+      if document_file.nil? && operator_document_record.reason.present?
+        # puts "Looks like annex #{oda.id} is for non required document, document status is: #{operator_document_record.status} skipping"
+        non_required_document += 1
+        next
+      end
 
       new_suffix = document_file&.attachment&.file&.basename&.parameterize&.first(200)
 
       if new_suffix.blank?
         puts "NO new suffix for annex #{oda.id}, operator document: #{oda.operator_document&.id}, annex documents history: #{oda.annex_documents_history.count}"
         no_suffix += 1
+        next
+      end
+
+      unless File.exist?(oda.attachment.file.file)
+        puts "File for annex #{oda.id} does not exist, skipping"
+        no_file += 1
         next
       end
 
@@ -391,6 +414,9 @@ namespace :fix do
     end
 
     puts "No suffix count: #{no_suffix}"
+    puts "No file count: #{no_file}"
+    puts "No operator document record count: #{no_operator_document_record}"
+    puts "Non required document count: #{non_required_document}"
   end
 
   desc "Fix filenames saved in db for annexes with timestamp mismatch"
