@@ -8,16 +8,6 @@ ActiveAdmin.register OperatorDocumentHistory do
 
   scope -> { I18n.t("active_admin.operator_documents_page.with_deleted") }, :with_deleted, default: true
 
-  sidebar I18n.t("active_admin.operator_documents_page.annexes"), only: :show do
-    attributes_table_for resource do
-      ul do
-        resource.operator_document_annexes.collect do |annex|
-          li link_to(annex.name, admin_operator_document_annex_path(annex.id))
-        end
-      end
-    end
-  end
-
   actions :index, :show
 
   csv do
@@ -169,6 +159,38 @@ ActiveAdmin.register OperatorDocumentHistory do
         fmu_id: FmuOperator.where(current: true).pluck(:operator_id, :fmu_id)
       }
     }
+  end
+
+  show title: proc { "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
+    attributes_table do
+      row :operator_document do |od|
+        if od.operator_document.present?
+          link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
+        else
+          od.operator_document&.required_operator_document&.name
+        end
+      end
+      row :public
+      tag_row :status
+      row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
+      row :admin_comment if resource.admin_comment.present?
+      row :required_operator_document
+      row :operator
+      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
+      row :uploaded_by
+      row I18n.t("active_admin.operator_documents_page.attachment") do |r|
+        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer" if r.document_file&.attachment&.present?
+      end
+      row :start_date
+      row :expire_date
+      row :operator_document_updated_at
+      row :operator_document_created_at
+      row :created_at
+      row :updated_at
+      row :deleted_at
+    end
+
+    render partial: "admin/operator_documents/annexes_table", locals: {resource: resource}
   end
 
   controller do
