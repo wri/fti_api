@@ -297,29 +297,7 @@ ActiveAdmin.register OperatorDocument do
       row :deleted_at
     end
 
-    panel I18n.t("active_admin.operator_documents_page.annexes") do
-      table_for resource.operator_document_annexes do
-        column :id do |resource|
-          link_to resource.id, admin_operator_document_annex_path(resource)
-        end
-        column :name do |resource|
-          if resource.attachment.present?
-            link_to resource.name, resource.attachment.url, target: "_blank", rel: "noopener noreferrer"
-          else
-            resource.name
-          end
-        end
-        tag_column :status
-        column :created_at
-        column :uploaded_by do |resource|
-          if resource.user.present?
-            link_to resource.user.name, admin_user_path(resource.user)
-          else
-            resource.uploaded_by
-          end
-        end
-      end
-    end
+    render partial: "annexes_table", locals: {resource: resource}
 
     panel I18n.t("activerecord.models.operator_document_history") do
       table_for OperatorDocumentHistory.where(operator_document_id: resource.id).order(operator_document_updated_at: :desc) do
