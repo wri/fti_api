@@ -162,35 +162,60 @@ ActiveAdmin.register OperatorDocumentHistory do
   end
 
   show title: proc { "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
-    attributes_table do
-      row :operator_document do |od|
-        if od.operator_document.present?
-          link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
-        else
-          od.operator_document&.required_operator_document&.name
+    columns class: "d-flex" do
+      column max_width: "330px" do
+        panel "Operator document history timeline" do
+          table_for OperatorDocumentHistory.where(operator_document_id: resource.operator_document_id).order(operator_document_updated_at: :desc),
+            row_class: ->(history) { (history.id == resource.id) ? "highlight" : "" } do
+            column :date do |history|
+              # link_to history.id, admin_operator_document_history_path(history)
+              link_to history.operator_document_updated_at.to_datetime.to_fs(:long), admin_operator_document_history_path(history)
+            end
+            tag_column :status
+          end
         end
       end
-      row :public
-      tag_row :status
-      row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
-      row :admin_comment if resource.admin_comment.present?
-      row :required_operator_document
-      row :operator
-      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
-      row :uploaded_by
-      row I18n.t("active_admin.operator_documents_page.attachment") do |r|
-        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer" if r.document_file&.attachment&.present?
-      end
-      row :start_date
-      row :expire_date
-      row :operator_document_updated_at
-      row :operator_document_created_at
-      row :created_at
-      row :updated_at
-      row :deleted_at
-    end
+      column class: "flex-1" do
+        attributes_table do
+          row :id
+          row :operator_document do |od|
+            if od.operator_document.present?
+              link_to od.operator_document&.required_operator_document&.name, admin_operator_document_path(od.operator_document&.id)
+            else
+              od.operator_document&.required_operator_document&.name
+            end
+          end
+          row :public
+          tag_row :status
+          row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
+          row :admin_comment if resource.admin_comment.present?
+          row :required_operator_document
+          row :operator
+          row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
+          row :uploaded_by
+          row I18n.t("active_admin.operator_documents_page.attachment") do |r|
+            if r.document_file.present?
+              name = r.document_file.attachment.identifier
+              name += " (Missing file)" if r.document_file.attachment.blank?
+              link_to name, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer"
+            elsif r.reason.present?
+              r.reason
+            else
+              "No document or reason for not uploading provided"
+            end
+          end
+          row :start_date
+          row :expire_date
+          row :operator_document_updated_at
+          row :operator_document_created_at
+          row :created_at
+          row :updated_at
+          row :deleted_at
+        end
 
-    render partial: "admin/operator_documents/annexes_table", locals: {resource: resource}
+        render partial: "admin/operator_documents/annexes_table", locals: {resource: resource}
+      end
+    end
   end
 
   controller do
