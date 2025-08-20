@@ -170,16 +170,29 @@ ActiveAdmin.register OperatorDocumentAnnex do
         end
       end
       row :operator_document_history do |a|
-        links = a.annex_documents_history.order(id: :desc).each_with_object([]) do |ad, links|
-          doc = OperatorDocumentHistory.unscoped.find(ad.documentable_id)
-          links << link_to(doc.id, admin_operator_document_history_path(doc.id))
+        table_for a.operator_document_histories.order(operator_document_updated_at: :desc) do
+          column :id do |history|
+            link_to history.id, admin_operator_document_history_path(history)
+          end
+          tag_column :status
+          column :operator_document_updated_at
+          column :attachment do |history|
+            if history.document_file&.attachment.present?
+              link_to history.document_file.attachment.identifier, history.document_file.attachment.url, target: "_blank", rel: "noopener noreferrer"
+            elsif history.reason.present?
+              history.reason
+            end
+          end
         end
-        safe_join(links, ", ")
       end
       row :uploaded_by
       row :user
       row :attachment do |o|
-        link_to o.attachment&.identifier, o.attachment&.url if o.attachment.present?
+        if o.attachment&.identifier.present?
+          name = o.attachment.identifier
+          name += " (Missing file)" if o.attachment.blank?
+          link_to name, o.attachment.url
+        end
       end
       row :start_date
       row :expire_date
