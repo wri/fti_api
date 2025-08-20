@@ -122,6 +122,14 @@ form input.deploy-button {
   font-size: 12px !important;
 }
 
+table {
+  tr.highlight {
+    td {
+      background-color: lighten( $pending-color, 35% ) !important;
+    }
+  }
+}
+
 body.active_admin {
   #hidden_active_admin_goto_page {
     width: 100%;
