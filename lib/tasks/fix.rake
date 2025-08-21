@@ -392,4 +392,59 @@ namespace :fix do
 
     puts "No suffix count: #{no_suffix}"
   end
+
+  desc "Fix filenames saved in db for annexes with timestamp mismatch"
+  task annexes_timestamps: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+
+    puts "RUNNING FOR REAL" if for_real
+    puts "DRY RUN" unless for_real
+
+    ActiveRecord::Base.transaction do
+      OperatorDocumentAnnex.find_each do |annex|
+        next if annex.attachment.present?
+
+        File.dirname(annex.attachment.file.file).tap do |dir|
+          files = Dir.glob("#{dir}/*").select { |f| File.file?(f) }
+          if files.empty?
+            puts "!!! No files found in directory: #{dir}"
+            next
+          end
+          if files.count > 1
+            puts "!!! Multiple files found in directory: #{dir}, cannot fix attachment filename for annex #{annex.id}"
+            next
+          end
+          file = files.first
+          # get the number from the filename (filename starts with Annex_{number}) and compare to the number from saved filename in db
+          if file =~ /Annex_(\d+)_/
+            file_number = $1.to_i
+            db_number = annex.attachment.file.file.match(/Annex_(\d+)_/)[1].to_i
+            # if number is different by max value of 2
+            if (file_number - db_number).abs <= 2
+              puts "Fixing annex #{annex.id} attachment filename from #{File.basename(annex.attachment.file.file)} to #{File.basename(file)}"
+              annex.update_columns(attachment: File.basename(file))
+              # also take a peek into paper trail history and update the filenames there
+              annex.versions.each do |version|
+                new_object = version.object&.gsub("Annex_#{db_number}_", "Annex_#{file_number}_")
+                new_object_changes = version.object_changes.gsub("Annex_#{db_number}_", "Annex_#{file_number}_")
+
+                next if new_object == version.object && new_object_changes == version.object_changes
+
+                version.update_columns(object: new_object, object_changes: new_object_changes)
+                puts "Updated paper trail version #{version.id}"
+              end
+            else
+              puts "!!! Cannot fix annex #{annex.id} attachment filename, number mismatch: file number #{file_number}, db number #{db_number}"
+            end
+          else
+            puts "!!! No valid filename found in directory: #{dir} for annex #{annex.id}"
+          end
+        end
+      end
+
+      Rails.cache.delete_matched(/operator_document_annexes/) if for_real
+
+      raise ActiveRecord::Rollback unless for_real
+    end
+  end
 end
