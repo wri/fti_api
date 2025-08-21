@@ -311,6 +311,9 @@ GEM
       googleauth (~> 1.12)
       grpc (~> 1.66)
     gdal (3.0.0)
+    geocoder (1.8.5)
+      base64 (>= 0.1.0)
+      csv (>= 3.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     globalize (7.0.0)
@@ -839,6 +842,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   gdal
+  geocoder
   globalize
   globalize-versioning!
   google-cloud-translate

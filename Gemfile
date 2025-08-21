@@ -105,8 +105,8 @@ gem "http"
 gem "nokogiri"
 gem "warning", require: false # for silencing certain warnings, will require before boot in warings_silencer.rb
 
-# Only used in rake tasks
-gem "countries", require: false # for update translations job, so require only there
+gem "countries"
+gem "geocoder"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]

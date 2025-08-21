@@ -7,15 +7,28 @@ RSpec.describe TrackFileDownloadJob, type: :job do
   let(:measurement_id) { "G-XXXXXXXXXX" }
   let(:api_secret) { "test_api_secret" }
   let(:client_id) { "test_client" }
+  let(:client_ip) { "192.168.1.1" }
 
   before do
     ENV["GA4_MEASUREMENT_ID"] = measurement_id
     ENV["GA4_API_SECRET"] = api_secret
+    Geocoder.configure(lookup: :test, ip_lookup: :test)
+    Geocoder::Lookup::Test.add_stub(
+      client_ip, [
+        {
+          country: "United States",
+          country_code: "US",
+          city: "New York",
+          state: "New York"
+        }
+      ]
+    )
   end
 
   after do
     ENV.delete("GA4_MEASUREMENT_ID")
     ENV.delete("GA4_API_SECRET")
+    Geocoder::Lookup::Test.reset
   end
 
   describe "#perform" do
@@ -24,13 +37,17 @@ RSpec.describe TrackFileDownloadJob, type: :job do
         {
           client_id: client_id,
           events: [{
-            name: "file_download",
+            name: "server_file_download",
             params: {
               file_name: file_name,
               file_extension: "pdf",
               file_url: file_url,
               link_url: file_url,
-              model_name: model_name
+              model_name: model_name,
+              country: "United States",
+              country_code: "US",
+              city: "New York",
+              region: "New York"
             }
           }]
         }
@@ -50,7 +67,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
           json: expected_payload
         )
 
-        described_class.perform_now(client_id, file_url, file_name, model_name)
+        described_class.perform_now(client_id, client_ip, file_url, file_name, model_name)
       end
     end
 
@@ -61,7 +78,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
 
       it "does not send GA4 event" do
         expect(HTTP).not_to receive(:post)
-        described_class.perform_now(client_id, file_url, file_name, model_name)
+        described_class.perform_now(client_id, client_ip, file_url, file_name, model_name)
       end
     end
 
@@ -72,7 +89,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
 
       it "does not send GA4 event" do
         expect(HTTP).not_to receive(:post)
-        described_class.perform_now(client_id, file_url, file_name, model_name)
+        described_class.perform_now(client_id, client_ip, file_url, file_name, model_name)
       end
     end
   end
