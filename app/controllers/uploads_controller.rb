@@ -81,7 +81,7 @@ class UploadsController < ApplicationController
   end
 
   def track_download
-    TrackFileDownloadJob.perform_later(client_id, request.remote_ip, request.url, @filename, @model_name)
+    TrackFileDownloadJob.perform_later(client_id, request.remote_ip, request_source, request_source_info, request.url, @filename, @model_name)
   end
 
   def client_id
@@ -104,6 +104,30 @@ class UploadsController < ApplicationController
     ]
 
     bot_patterns.any? { |pattern| user_agent.match?(pattern) }
+  end
+
+  def request_source
+    return "direct" if request.referer.blank?
+    return "internal" if request.referer.start_with?(root_url)
+    return "search_engine" if search_engine_referer.present?
+
+    "external_site"
+  end
+
+  def request_source_info
+    return search_engine_referer if search_engine_referer.present?
+
+    nil
+  end
+
+  def search_engine_referer
+    return nil unless request.referer.present?
+
+    %w[google bing yahoo duckduckgo baidu].each do |engine|
+      return engine if request.referer.include?(engine)
+    end
+
+    nil
   end
 
   def admin_panel_request?

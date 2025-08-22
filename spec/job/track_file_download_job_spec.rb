@@ -8,6 +8,8 @@ RSpec.describe TrackFileDownloadJob, type: :job do
   let(:api_secret) { "test_api_secret" }
   let(:client_id) { "test_client" }
   let(:client_ip) { "81.2.69.142" }
+  let(:request_source) { "search_engine" }
+  let(:request_source_info) { "google" }
   let(:expected_location) do
     {
       country: "United Kingdom",
@@ -40,6 +42,8 @@ RSpec.describe TrackFileDownloadJob, type: :job do
               file_url: file_url,
               link_url: file_url,
               model_name: model_name,
+              source: request_source,
+              source_info: request_source_info,
               **expected_location
             }
           }]
@@ -60,7 +64,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
           json: expected_payload
         )
 
-        described_class.perform_now(client_id, client_ip, file_url, file_name, model_name)
+        described_class.perform_now(client_id, client_ip, request_source, request_source_info, file_url, file_name, model_name)
       end
     end
 
@@ -71,7 +75,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
 
       it "does not send GA4 event" do
         expect(HTTP).not_to receive(:post)
-        described_class.perform_now(client_id, client_ip, file_url, file_name, model_name)
+        described_class.perform_now(client_id, client_ip, request_source, request_source_info, file_url, file_name, model_name)
       end
     end
 
@@ -82,7 +86,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
 
       it "does not send GA4 event" do
         expect(HTTP).not_to receive(:post)
-        described_class.perform_now(client_id, client_ip, file_url, file_name, model_name)
+        described_class.perform_now(client_id, client_ip, request_source, request_source_info, file_url, file_name, model_name)
       end
     end
   end

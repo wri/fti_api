@@ -1,11 +1,11 @@
 class TrackFileDownloadJob < ApplicationJob
   queue_as :default
 
-  def perform(client_id, client_ip, file_url, file_name, model_name)
+  def perform(client_id, client_ip, source, source_info, file_url, file_name, model_name)
     return if measurement_id.blank? || api_secret.blank?
 
     location = get_location_details(client_ip)
-    send_ga4_event(client_id, location, file_url, file_name, model_name)
+    send_ga4_event(client_id, location, source, source_info, file_url, file_name, model_name)
   end
 
   private
@@ -23,7 +23,7 @@ class TrackFileDownloadJob < ApplicationJob
     {country: nil, city: nil, region: nil, country_code: ""}
   end
 
-  def send_ga4_event(client_id, location, file_url, file_name, model_name)
+  def send_ga4_event(client_id, location, source, source_info, file_url, file_name, model_name)
     payload = {
       client_id: client_id,
       events: [{
@@ -37,8 +37,10 @@ class TrackFileDownloadJob < ApplicationJob
           country: location[:country],
           country_code: location[:country_code],
           region: location[:region],
-          city: location[:city]
-        }
+          city: location[:city],
+          source: source,
+          source_info: source_info
+        }.compact
       }]
     }
 
