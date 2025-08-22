@@ -7,28 +7,24 @@ RSpec.describe TrackFileDownloadJob, type: :job do
   let(:measurement_id) { "G-XXXXXXXXXX" }
   let(:api_secret) { "test_api_secret" }
   let(:client_id) { "test_client" }
-  let(:client_ip) { "192.168.1.1" }
+  let(:client_ip) { "81.2.69.142" }
+  let(:expected_location) do
+    {
+      country: "United Kingdom",
+      country_code: "GB",
+      city: "London",
+      region: "England"
+    }
+  end
 
   before do
     ENV["GA4_MEASUREMENT_ID"] = measurement_id
     ENV["GA4_API_SECRET"] = api_secret
-    Geocoder.configure(lookup: :test, ip_lookup: :test)
-    Geocoder::Lookup::Test.add_stub(
-      client_ip, [
-        {
-          country: "United States",
-          country_code: "US",
-          city: "New York",
-          state: "New York"
-        }
-      ]
-    )
   end
 
   after do
     ENV.delete("GA4_MEASUREMENT_ID")
     ENV.delete("GA4_API_SECRET")
-    Geocoder::Lookup::Test.reset
   end
 
   describe "#perform" do
@@ -44,10 +40,7 @@ RSpec.describe TrackFileDownloadJob, type: :job do
               file_url: file_url,
               link_url: file_url,
               model_name: model_name,
-              country: "United States",
-              country_code: "US",
-              city: "New York",
-              region: "New York"
+              **expected_location
             }
           }]
         }

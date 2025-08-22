@@ -123,10 +123,21 @@ task "deploy:fix_permissions" do
   end
 end
 
+task "deploy:import_maxmind_db" do
+  on roles(:db) do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rake, "db:import_maxmind_db"
+      end
+    end
+  end
+end
+
 namespace :deploy do
   before :check, "nvm:map_bins"
   before :migrate, "deploy:db:load"
   before :cleanup, "deploy:fix_permissions"
+  after :migrate, "deploy:import_maxmind_db"
   after :starting, "sidekiq:quiet"
   after :reverted, "sidekiq:restart"
   after :published, "sidekiq:restart"

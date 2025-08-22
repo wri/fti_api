@@ -105,8 +105,8 @@ gem "http"
 gem "nokogiri"
 gem "warning", require: false # for silencing certain warnings, will require before boot in warings_silencer.rb
 
-gem "countries"
-gem "geocoder"
+gem "countries", require: false # only in rake task, not in app code
+gem "maxmind-geoip2"
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
