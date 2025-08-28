@@ -8,16 +8,6 @@ class UploadsController < ApplicationController
     "documents" => "uploaded_document"
   }.freeze
 
-  TRACKABLE_MODELS = [
-    "document_file",
-    "documents",
-    "gov_document",
-    "gov_file",
-    "newsletter",
-    "observation_document",
-    "observation_report"
-  ].freeze
-
   def download
     sanitize_filepath
     parse_upload_path
@@ -62,8 +52,8 @@ class UploadsController < ApplicationController
     raise_not_found_exception unless model_class.uploaders.keys.map(&:to_s).include?(@uploader_name) # ensure valid uploader
 
     record = model_class.find(@record_id)
-    uploader = record.public_send(@uploader_name)
-    db_filenames = [uploader.file.file, *uploader.versions.values.map { |v| v.file.file }].map { |f| File.basename(f) }
+    @uploader = record.public_send(@uploader_name)
+    db_filenames = [@uploader.file.file, *@uploader.versions.values.map { |v| v.file.file }].map { |f| File.basename(f) }
 
     unless db_filenames.include?(File.basename(@sanitized_filepath))
       raise_not_found_exception
@@ -98,7 +88,7 @@ class UploadsController < ApplicationController
   end
 
   def trackable_request?
-    TRACKABLE_MODELS.include?(@model_name) &&
+    @uploader.respond_to?(:track_downloads?) && @uploader.track_downloads? &&
       !bot_request? &&
       !admin_panel_request?
   end

@@ -9,6 +9,10 @@ class DocumentFileUploader < ApplicationUploader
     %w[pdf doc docx txt csv xml jpg jpeg png exif tiff bmp]
   end
 
+  def track_downloads?
+    true
+  end
+
   def filename
     return super if model.operator_document.nil?
     return if super.blank?

@@ -29,6 +29,10 @@ class ApplicationUploader < CarrierWave::Uploader::Base
     file.present?
   end
 
+  def track_downloads?
+    false
+  end
+
   def private_upload?
     false
   end
