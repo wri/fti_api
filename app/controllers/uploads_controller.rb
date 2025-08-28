@@ -81,7 +81,16 @@ class UploadsController < ApplicationController
   end
 
   def track_download
-    TrackFileDownloadJob.perform_later(client_id, request.remote_ip, request_source, request_source_info, request.url, @filename, @model_name)
+    TrackFileDownloadJob.perform_later(
+      client_id,
+      request.remote_ip,
+      request.referer,
+      request_source,
+      request_source_info,
+      request.url,
+      @filename,
+      @model_name
+    )
   end
 
   def client_id
