@@ -11,7 +11,7 @@ module V1
       if @user.present? && @user.valid_password?(auth_params[:password]) && @user.is_active
         token = Auth.issue({user: @user.id})
         @user.update_tracked_fields!(request)
-        cookies.delete(download_user_cookie_name)
+        set_download_session_cookie_for(@user)
         render json: {token: token, role: @user.user_permission.user_role,
                       user_id: @user.id, country: @user.country_id,
                       operator_ids: @user.operator_ids, observer: @user.observer_id}, status: :ok
@@ -26,8 +26,19 @@ module V1
 
     # each app, like portal and observation tool can have it's own download user cookie to prevent some edgecases
     def download_session
+      set_download_session_cookie_for(current_user)
+      head :ok
+    end
+
+    private
+
+    def auth_params
+      params.require(:auth).permit(:email, :password, :current_sign_in_ip)
+    end
+
+    def set_download_session_cookie_for(user)
       download_token = Rails.application.message_verifier("download_token").generate(
-        {user_id: current_user.id},
+        {user_id: user.id},
         expires_in: 10.minutes
       )
       cookies[download_user_cookie_name] = {
@@ -37,13 +48,6 @@ module V1
         secure: Rails.env.production? || Rails.env.staging?,
         httponly: true
       }
-      head :ok
-    end
-
-    private
-
-    def auth_params
-      params.require(:auth).permit(:email, :password, :current_sign_in_ip)
     end
 
     def download_user_cookie_name
