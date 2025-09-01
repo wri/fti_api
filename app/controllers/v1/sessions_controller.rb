@@ -26,11 +26,15 @@ module V1
 
     # each app, like portal and observation tool can have it's own download user cookie to prevent some edgecases
     def download_session
-      cookies.signed[download_user_cookie_name] = {
-        value: current_user.id,
+      download_token = Rails.application.message_verifier("download_token").generate(
+        {user_id: current_user.id},
+        expires_in: 10.minutes
+      )
+      cookies[download_user_cookie_name] = {
+        value: download_token,
         expires: 10.minutes.from_now,
         same_site: :strict,
-        secure: true,
+        secure: Rails.env.production? || Rails.env.staging?,
         httponly: true
       }
       head :ok

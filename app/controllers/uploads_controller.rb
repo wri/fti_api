@@ -81,7 +81,14 @@ class UploadsController < ApplicationController
   end
 
   def cookie_download_users
-    cookies.select { |name, _v| name.ends_with?("download_user") }.map { |name, _v| User.find_by(id: cookies.signed[name]) }
+    cookies
+      .select { |name, _v| name.ends_with?("download_user") }
+      .map do |name, download_token|
+        payload = Rails.application.message_verifier("download_token").verify(download_token)
+        User.find_by(id: payload["user_id"])
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        nil
+      end.compact
   end
 
   def check_authorization!
