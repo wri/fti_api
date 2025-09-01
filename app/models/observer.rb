@@ -26,8 +26,8 @@
 class Observer < ApplicationRecord
   has_paper_trail
 
-  normalizes :name, :address, :information_name, :data_name, :information_phone, :data_phone, with: -> { _1.strip }
-  normalizes :information_email, :data_email, with: -> { _1.strip.downcase }
+  normalizes :name, :address, :information_name, :data_name, :information_phone, :data_phone, with: -> { it.strip }
+  normalizes :information_email, :data_email, with: -> { it.strip.downcase }
 
   has_many :countries_observers
   has_many :countries, through: :countries_observers
