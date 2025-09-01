@@ -15,7 +15,7 @@ class UploadsController < ApplicationController
     parse_upload_path
     ensure_valid_db_record
     track_download if trackable_request?
-    check_authorization if needs_authorization?
+    check_authorization! if needs_authorization?
     send_file @sanitized_filepath, disposition: :inline
   end
 
@@ -80,8 +80,16 @@ class UploadsController < ApplicationController
     end
   end
 
-  def check_authorization
-    authorize! :download, @record
+  def cookie_download_users
+    cookies.select { |name, _v| name.ends_with?("download_user") }.map { |name, _v| User.find_by(id: cookies.signed[name]) }
+  end
+
+  def check_authorization!
+    raise SecurityError unless download_users.any? { it.can?(:download_protected, @record) }
+  end
+
+  def download_users
+    [current_user, *cookie_download_users].compact
   end
 
   def needs_authorization?
@@ -161,6 +169,6 @@ class UploadsController < ApplicationController
   end
 
   def raise_not_found_exception
-    raise ActionController::RoutingError, "Not Found"
+    raise ActionController::RoutingError, "Not found or your download session has expired (try clicking on the link again)"
   end
 end
