@@ -103,6 +103,12 @@ module IntegrationHelper
     )
   end
 
+  def initialize_download_session(user_headers, app: nil)
+    url = "/sessions/download-session"
+    url += "?app=#{app}" if app.present?
+    post url, headers: user_headers
+  end
+
   def jsonapi_errors(status, code, errors = {})
     api_errors = []
 
