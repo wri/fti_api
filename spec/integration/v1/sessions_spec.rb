@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module V1
-  describe "Login and authenticate user", type: :request do
+  describe "Sessions management", type: :request do
     it "Returns error object when the user cannot login" do
       post "/login", params: {auth: {email: user.email, password: "wrong password"}},
         headers: non_api_webuser_headers
@@ -21,6 +21,39 @@ module V1
         user_id: user.id,
         country: nil, operator_ids: [], observer: nil
       })
+      expect(response.cookies["download_user"]).to be_present
+    end
+
+    describe "Download session" do
+      it "Destroy session removes download cookie" do
+        post "/sessions/download-session", headers: user_headers
+
+        expect(status).to eq(200)
+        expect(response.cookies["download_user"]).to be_present
+
+        delete "/logout", headers: user_headers
+
+        expect(status).to eq(204)
+        expect(response.headers["Set-Cookie"]).to include("download_user=;")
+        expect(response.cookies["download_user"]).to be_blank
+      end
+
+      it "Download session sets download cookie for authenticated user" do
+        post "/sessions/download-session", headers: user_headers
+
+        expect(status).to eq(200)
+        download_token = response.cookies["download_user"]
+        expect(download_token).to be_present
+        payload = Rails.application.message_verifier("download_token").verify(download_token)
+        expect(payload["user_id"]).to eq(user.id)
+      end
+
+      it "Download session set download cookie for different app" do
+        post "/sessions/download-session?app=observations-tool", headers: user_headers
+
+        expect(status).to eq(200)
+        expect(response.cookies["observations-tool_download_user"]).to be_present
+      end
     end
 
     describe "For current user" do

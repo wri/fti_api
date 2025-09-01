@@ -13,6 +13,8 @@ RSpec.describe UploadsController, type: :request do
 
     @document_file = create(:document_file, operator_document: operator_document) # operator_document_file
     @donor = create(:donor) # donor logo
+    pending_document = create(:operator_document, operator: operator_user.operator)
+    @protected_document_file = create(:document_file, operator_document: pending_document)
 
     File.write(@etc_dir.join("passwd.txt"), "private")
   end
@@ -30,6 +32,72 @@ RSpec.describe UploadsController, type: :request do
 
         expect(response).to have_http_status(:ok)
         expect(response.headers["Content-Disposition"]).to include("inline")
+      end
+    end
+
+    context "protected file scenario" do
+      it "returns the file if user eligible to download it with download session" do
+        initialize_download_session(operator_user_headers)
+        get @protected_document_file.attachment.url
+
+        expect(response).to have_http_status(:ok)
+        expect(response.headers["Content-Disposition"]).to include("inline")
+      end
+
+      it "returns the file if multiple download sessions but at least one eligible" do
+        initialize_download_session(user_headers)
+        initialize_download_session(operator_user_headers, app: "observations-tool")
+        get @protected_document_file.attachment.url
+
+        expect(response).to have_http_status(:ok)
+        expect(response.headers["Content-Disposition"]).to include("inline")
+      end
+
+      it "returns the file if user eligible to download it when signed in" do
+        sign_in operator_user
+        get @protected_document_file.attachment.url
+
+        expect(response).to have_http_status(:ok)
+        expect(response.headers["Content-Disposition"]).to include("inline")
+      end
+
+      it "returns 404 with expired download session" do
+        initialize_download_session(operator_user_headers)
+
+        travel_to 11.minutes.from_now do
+          get @protected_document_file.attachment.url
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      it "returns 404 with expired download session with tampered cookie" do
+        initialize_download_session(operator_user_headers)
+
+        # somehow changing cookies expiration date, still should not get the file
+        cookies[:download_user] = {
+          value: cookies[:download_user],
+          expires: 20.minutes
+        }
+
+        travel_to 11.minutes.from_now do
+          get @protected_document_file.attachment.url
+
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      it "returns 404 without logging in or download session" do
+        get @protected_document_file.attachment.url
+
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it "returns 404 for non eligible user" do
+        initialize_download_session(user_headers)
+        get @protected_document_file.attachment.url
+
+        expect(response).to have_http_status(:not_found)
       end
     end
 
