@@ -32,6 +32,10 @@ spec/.DS_Store
 /coverage
 /db/files/.~*
 
+# maxmind db
+db/*.mmdb
+!db/*-Test.mmdb
+
 # Ignore environment variables
 /test.env
 /dev.env
@@ -57,6 +61,8 @@ spec/.DS_Store
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
+
+/uploads
 
 # Ignore IDE files
 .idea

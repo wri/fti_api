@@ -6,11 +6,23 @@ class PrivateUploadsController < ApplicationController
   rescue_from ActionController::MissingFile, with: :raise_not_found_exception
 
   def download
-    filepath = "#{params[:rest]}.#{params[:format]}"
-    send_file_inside allowed_filepath, filepath, disposition: :inline
+    sanitize_filepath
+    send_file @sanitized_filepath, disposition: :inline
   end
 
   private
+
+  def sanitize_filepath
+    filepath = "#{params[:rest]}.#{params[:format]}"
+    allowed_path = File.realpath(allowed_directory)
+    full_path = File.realpath(File.join(allowed_path, filepath))
+
+    raise_not_found_exception unless full_path.start_with?(allowed_path + File::SEPARATOR)
+
+    @sanitized_filepath = full_path
+  rescue Errno::ENOENT
+    raise_not_found_exception
+  end
 
   def authenticate_user!
     if current_user.present?
@@ -20,19 +32,10 @@ class PrivateUploadsController < ApplicationController
     end
   end
 
-  def allowed_filepath
+  def allowed_directory
     return File.join(Rails.root, "tmp", "private", "uploads") if Rails.env.test?
 
     File.join(Rails.root, "private", "uploads")
-  end
-
-  def send_file_inside(allowed_path, filename, options = {})
-    path = File.expand_path(File.join(allowed_path, filename))
-    if path.match Regexp.new("^" + Regexp.escape(allowed_path))
-      send_file path, options
-    else
-      raise_not_found_exception
-    end
   end
 
   def raise_not_found_exception

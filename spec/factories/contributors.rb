@@ -21,11 +21,11 @@ FactoryBot.define do
     priority { rand(0..10) }
     logo { Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "image.png")) }
 
-    factory :partner do
+    factory :partner, class: Partner do
       type { "Partner" }
     end
 
-    factory :donor do
+    factory :donor, class: Donor do
       type { "Donor" }
     end
   end
