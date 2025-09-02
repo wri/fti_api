@@ -48,7 +48,11 @@ RSpec.describe TrackFileDownloadJob, type: :job do
               source_info: request_source_info,
               **expected_location
             }
-          }]
+          }],
+          user_location: {
+            city: expected_location[:city],
+            country_id: expected_location[:country_code]
+          }
         }
       end
 

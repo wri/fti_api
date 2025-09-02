@@ -42,7 +42,11 @@ class TrackFileDownloadJob < ApplicationJob
           source: source,
           source_info: source_info
         }.compact
-      }]
+      }],
+      user_location: {
+        city: location[:city],
+        country_id: location[:country_code]
+      }.compact
     }
 
     HTTP.post(
