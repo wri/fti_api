@@ -26,7 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/private/uploads/*rest", controller: "private_uploads", action: "download"
   get "/uploads/*rest", controller: "uploads", action: "download"
 
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do

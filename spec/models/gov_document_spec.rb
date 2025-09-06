@@ -25,32 +25,14 @@ RSpec.describe GovDocument, type: :model do
     let!(:document) { create(:gov_document, :file) }
 
     with_versioning do
-      context "when removing attachment" do
-        it "moves previous attachment to private folder" do
-          expect(document.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
-          expect(document.attachment.file.exists?).to be(true)
-          document.attachment = nil
-          document.save!
-          document.reload
-          expect(document.read_attribute(:attachment)).to be_nil
-          prev_version = document.versions.last.reify
-          expect(prev_version.attachment.file.file).to match("/private/uploads")
-          expect(prev_version.attachment.file.exists?).to be(true)
-        end
-      end
-
       context "when changing attachment" do
-        it "moves previous attachment to private folder" do
-          expect(document.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
-          expect(document.attachment.file.exists?).to be(true)
+        it "does not delete the original file" do
+          original_file_path = document.attachment.file.file
+          expect(File.exist?(original_file_path)).to be true
           document.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "doc.pdf"))
           document.save!
-          document.reload
-          expect(document.read_attribute(:attachment)).to match(".pdf")
-          prev_version = document.versions.last.reify
-          expect(prev_version.attachment.file.file).to match("/private/uploads")
-          expect(prev_version.attachment.file.file).to match(".png")
-          expect(prev_version.attachment.file.exists?).to be(true)
+          expect(File.exist?(original_file_path)).to be true
+          expect(document.attachment.file.file).to_not eq(original_file_path)
         end
       end
     end
@@ -92,41 +74,26 @@ RSpec.describe GovDocument, type: :model do
     end
   end
 
-  describe "soft delete" do
+  describe "deletion" do
     let!(:document) { create(:gov_document, :file) }
 
-    with_versioning do
-      context "when deleting" do
-        it "moves attachment to private directory" do
-          expect(document.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
-          document.destroy!
-          document.reload
-          expect(document.attachment.file.file).to match("/private/uploads")
-          expect(document.attachment.file.exists?).to be(true)
-        end
+    context "when soft deleting record" do
+      it "does not delete the original file" do
+        original_file_path = document.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
+        document.destroy!
+        expect(document.deleted?).to be true
+        expect(File.exist?(original_file_path)).to be true
+        expect(document.attachment.file.file).to eq(original_file_path)
       end
+    end
 
-      context "when restoring" do
-        before do
-          # change attachment to move previous to private directory
-          document.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "doc.pdf"))
-          document.save!
-          document.destroy!
-          document.reload
-        end
-
-        it "moves attachment back to public directory" do
-          expect(document.attachment.file.file).to match("/private/uploads")
-          expect(document.attachment.file.exists?).to be(true)
-          document.restore
-          reloaded_doc = GovDocument.find(document.id) # as reload does not reload paper_trail.live? weird
-          expect(reloaded_doc.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
-          expect(reloaded_doc.attachment.file.exists?).to be(true)
-          # first version should stay in private directory
-          prev_version = reloaded_doc.versions[-2].reify
-          expect(prev_version.attachment.file.file).to match("/private/uploads")
-          expect(prev_version.attachment.file.exists?).to be(true)
-        end
+    context "when hard deleting record" do
+      it "deletes the original file" do
+        original_file_path = document.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
+        document.really_destroy!
+        expect(File.exist?(original_file_path)).to be false
       end
     end
   end

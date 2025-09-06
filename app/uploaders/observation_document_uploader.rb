@@ -23,8 +23,4 @@ class ObservationDocumentUploader < ApplicationUploader
 
     sanitize_filename(filename + File.extname(super))
   end
-
-  def private_upload?
-    model.deleted?
-  end
 end

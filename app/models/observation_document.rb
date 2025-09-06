@@ -18,7 +18,6 @@ class ObservationDocument < ApplicationRecord
   has_paper_trail
   acts_as_paranoid
   mount_base64_uploader :attachment, ObservationDocumentUploader
-  include MoveableAttachment
 
   enum :document_type, {
     "Government Documents" => 0, "Company Documents" => 1, "Photos" => 2,
@@ -32,7 +31,5 @@ class ObservationDocument < ApplicationRecord
   has_and_belongs_to_many :observations, inverse_of: :observation_documents
 
   skip_callback :commit, :after, :remove_attachment!
-  after_destroy :move_attachment_to_private_directory
-  after_restore :move_attachment_to_public_directory
   after_real_destroy :remove_attachment!
 end

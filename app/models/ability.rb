@@ -33,7 +33,6 @@ class Ability
         can [:read], User, id: user.id
       end
     end
-
     can :read, [Country, Fmu, Category, Subcategory, Law, Species,
       OperatorDocument, OperatorDocumentHistory, RequiredOperatorDocument,
       RequiredOperatorDocumentGroup, ObservationReport, ObservationDocument,

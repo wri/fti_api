@@ -2,6 +2,8 @@
 
 class UploadsController < ApplicationController
   rescue_from ActionController::MissingFile, with: :raise_not_found_exception
+  rescue_from SecurityError, with: :raise_not_found_exception
+  rescue_from CanCan::AccessDenied, with: :raise_not_found_exception
 
   MODELS_OVERRIDES = {
     "operator_document_file" => "document_file",
@@ -48,22 +50,37 @@ class UploadsController < ApplicationController
   def ensure_valid_db_record
     raise_not_found_exception unless allowed_models.include?(@model_name)
 
-    model_class = @model_name.classify.constantize
-    raise_not_found_exception unless model_class.uploaders.keys.map(&:to_s).include?(@uploader_name) # ensure valid uploader
+    @model_class = @model_name.classify.constantize
+    raise_not_found_exception unless @model_class.uploaders.keys.map(&:to_s).include?(@uploader_name) # ensure valid uploader
 
-    record = model_class.find(@record_id)
-    @uploader = record.public_send(@uploader_name)
+    find_record
+    ensure_valid_filename
+  end
+
+  def find_record
+    @record = if current_user.present? && current_user.admin? && @model_class.respond_to?(:with_deleted)
+      @model_class.with_deleted.find(@record_id)
+    else
+      @model_class.find(@record_id)
+    end
+    @uploader = @record.public_send(@uploader_name)
+  rescue ActiveRecord::RecordNotFound, NameError
+    raise_not_found_exception
+  end
+
+  def ensure_valid_filename
+    # do not check for admins, could download other files like from papertrail history
+    return if current_user.present? && current_user.admin?
+
     db_filenames = [@uploader.file.file, *@uploader.versions.values.map { |v| v.file.file }].map { |f| File.basename(f) }
 
     unless db_filenames.include?(File.basename(@sanitized_filepath))
       raise_not_found_exception
     end
-  rescue NameError, ActiveRecord::RecordNotFound
-    raise_not_found_exception
   end
 
   def allowed_models
-    uploads_root = ApplicationUploader.new.public_root.join("uploads")
+    uploads_root = ApplicationUploader.new.root.join("uploads")
     Dir.entries(uploads_root)
       .select { |entry| File.directory?(uploads_root.join(entry)) }
       .reject { |entry| entry.start_with?(".") || entry == "tmp" }

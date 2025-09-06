@@ -21,10 +21,6 @@ class GovDocumentUploader < ApplicationUploader
     sanitize_filename(filename)
   end
 
-  def private_upload?
-    model.deleted? || !model.paper_trail.live?
-  end
-
   protected
 
   def random_token

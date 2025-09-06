@@ -74,31 +74,26 @@ RSpec.describe ObservationReport, type: :model do
     end
   end
 
-  describe "soft delete" do
+  describe "deletion" do
     let!(:report) { create(:observation_report) }
 
-    context "when deleting" do
-      it "moves attachment to private directory" do
-        expect(report.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
+    context "when soft deleting record" do
+      it "does not delete the original file" do
+        original_file_path = report.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
         report.destroy!
-        report.reload
-        expect(report.attachment.file.file).to match("/private/uploads")
-        expect(report.attachment.file.exists?).to be(true)
+        expect(report.deleted?).to be true
+        expect(File.exist?(original_file_path)).to be true
+        expect(report.attachment.file.file).to eq(original_file_path)
       end
     end
 
-    context "when restoring" do
-      before do
-        report.destroy!
-        report.reload
-      end
-
-      it "moves attachment back to public directory" do
-        expect(report.attachment.file.file).to match("/private/uploads")
-        report.restore
-        report.reload
-        expect(report.attachment.file.file).to match(Rails.root.join("tmp/uploads").to_s)
-        expect(report.attachment.file.exists?).to be(true)
+    context "when hard deleting record" do
+      it "deletes the original file" do
+        original_file_path = report.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
+        report.really_destroy!
+        expect(File.exist?(original_file_path)).to be false
       end
     end
   end
