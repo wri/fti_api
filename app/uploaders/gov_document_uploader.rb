@@ -9,16 +9,16 @@ class GovDocumentUploader < ApplicationUploader
     %w[pdf doc docx txt csv xml jpg jpeg png exif tiff bmp]
   end
 
+  def track_downloads?
+    true
+  end
+
   def filename
     return if super.blank?
 
     filename = "" + model.required_gov_document.name.first(200) + "-" + random_token + "-" + Time.zone.today.to_s
     filename += "." + super.split(".").last if super.split(".").any?
     sanitize_filename(filename)
-  end
-
-  def private_upload?
-    model.deleted? || !model.paper_trail.live?
   end
 
   protected

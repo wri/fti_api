@@ -5,6 +5,10 @@ class NewsletterUploader < ApplicationUploader
     %w[pdf]
   end
 
+  def track_downloads?
+    true
+  end
+
   def filename
     return if super.blank?
 

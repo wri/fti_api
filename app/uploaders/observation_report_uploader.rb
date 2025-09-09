@@ -5,6 +5,10 @@ class ObservationReportUploader < ApplicationUploader
     %w[pdf]
   end
 
+  def track_downloads?
+    true
+  end
+
   def filename
     return if super.blank?
 
@@ -12,9 +16,5 @@ class ObservationReportUploader < ApplicationUploader
     filename = "" + model.title[0...50]&.parameterize + "-" + date
     filename += "." + super.split(".").last if super.split(".").any?
     sanitize_filename(filename)
-  end
-
-  def private_upload?
-    model.deleted?
   end
 end

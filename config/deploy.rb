@@ -28,7 +28,7 @@ set :nvm_map_bins, %w[node npm yarn rake rails]
 set :keep_releases, 5
 
 set :linked_files, %w[.env]
-set :linked_dirs, %w[log db/dumps tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads private]
+set :linked_dirs, %w[log db/dumps tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads uploads private]
 
 append :rvm_map_bins, "rvmsudo", "rails"
 
@@ -123,10 +123,21 @@ task "deploy:fix_permissions" do
   end
 end
 
+task "deploy:import_maxmind_db" do
+  on roles(:db) do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rake, "db:import_maxmind_db"
+      end
+    end
+  end
+end
+
 namespace :deploy do
   before :check, "nvm:map_bins"
   before :migrate, "deploy:db:load"
   before :cleanup, "deploy:fix_permissions"
+  after :migrate, "deploy:import_maxmind_db"
   after :starting, "sidekiq:quiet"
   after :reverted, "sidekiq:restart"
   after :published, "sidekiq:restart"

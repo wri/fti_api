@@ -6,14 +6,14 @@ panel I18n.t("active_admin.operator_documents_page.details") do
     row :operator
     row :fmu unless resource.is_a?(OperatorDocumentCountry)
     row I18n.t("active_admin.operator_documents_page.attachment") do |r|
-      link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer" if r.document_file&.attachment&.present?
+      link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener" if r.document_file&.attachment&.present?
     end
     row :start_date
     row :expire_date
     row :updated_at
     row I18n.t("active_admin.operator_documents_page.annexes") do |r|
       links = r.operator_document_annexes.map do |annex|
-        link_to annex.name, admin_operator_document_annex_path(annex), target: "_blank", rel: "noopener noreferrer"
+        link_to annex.name, admin_operator_document_annex_path(annex), target: "_blank", rel: "noopener"
       end
       safe_join(links, ", ")
     end

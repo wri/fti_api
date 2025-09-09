@@ -5,6 +5,10 @@ class OperatorDocumentAnnexUploader < ApplicationUploader
     %w[pdf doc docx txt csv xml jpg jpeg png exif tiff bmp]
   end
 
+  def track_downloads?
+    true
+  end
+
   def filename
     return if super.blank?
 

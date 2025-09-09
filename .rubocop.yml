@@ -61,3 +61,6 @@ Rails/HasAndBelongsToMany:
 Rails/WhereRange:
   Enabled: false
 
+Rails/Blank:
+  Enabled: false
+

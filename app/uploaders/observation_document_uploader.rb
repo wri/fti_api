@@ -5,6 +5,10 @@ class ObservationDocumentUploader < ApplicationUploader
     %w[pdf doc docx txt csv xml jpg jpeg png exif tiff bmp]
   end
 
+  def track_downloads?
+    true
+  end
+
   def filename
     return if super.blank?
 
@@ -18,9 +22,5 @@ class ObservationDocumentUploader < ApplicationUploader
     end
 
     sanitize_filename(filename + File.extname(super))
-  end
-
-  def private_upload?
-    model.deleted?
   end
 end

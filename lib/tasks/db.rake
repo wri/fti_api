@@ -1,3 +1,5 @@
+# require "dotenv/tasks"
+
 namespace :db do
   desc "Download database from server - Params: SERVER=production(default)|staging, SMALL (if present we ignore versions table data))"
   task :download do # rubocop:disable Rails/RakeEnvironment
@@ -50,10 +52,50 @@ namespace :db do
     Rake::Task["db:environment:set"].invoke
   end
 
-  desc "Prepare database for dev enviroment"
+  desc "Prepare database for dev environment"
   task prepare_for_dev: :environment do
     ActiveRecord::Base.connection.reconnect! # make sure connection is open
     puts "Changing all users passwords to Supersecret1"
     User.update_all(encrypted_password: User.new(password: "Supersecret1").encrypted_password)
+  end
+
+  desc "Import Maxmind GeoIP database (requires MAXMIND_LICENSE_KEY env variable)"
+  task import_maxmind_db: :environment do
+    edition_id = "GeoLite2-City"
+    db_path = Rails.root.join("db", "#{edition_id}.mmdb")
+    tmp_file = Rails.root.join("tmp", "tmp.mmdb.tar.gz")
+
+    # check if db_path file exists and is not yet 30 days old
+    if !ENV["FORCE"] && File.exist?(db_path) && File.mtime(db_path) > 30.days.ago
+      puts "Maxmind DB already exists and is less than 30 days old, skipping download"
+      next
+    end
+
+    account_id = ENV["MAXMIND_ACCOUNT_ID"]
+    key = ENV["MAXMIND_LICENSE_KEY"]
+    url = "https://download.maxmind.com/geoip/databases/#{edition_id}/download?suffix=tar.gz"
+
+    abort "NO MAXMIND LICENSE KEY" unless key.present?
+
+    puts "DOWNLOADING MAXMIND DB..."
+    abort "Maxmind download error" unless system "wget -q -c --tries=3 --user=#{account_id} --password=#{key} '#{url}' -O #{tmp_file}"
+    abort "Maxmind unzip error" unless system "cd tmp && tar -xvf #{tmp_file} --wildcards --strip-components 1 '*.mmdb' && mv #{edition_id}.mmdb #{db_path}"
+
+    system "rm #{tmp_file}"
+
+    puts "MAXMIND DB DOWNLOADED!"
+  end
+
+  # https://github.com/maxmind/MaxMind-DB/blob/main/test-data
+  desc "Import Maxmind GeoIP test database (for test and dev env)"
+  task import_maxmind_test_db: :environment do
+    edition_id = "GeoLite2-City-Test"
+    db_path = Rails.root.join("db", "#{edition_id}.mmdb")
+    url = "https://github.com/maxmind/MaxMind-DB/raw/refs/heads/main/test-data/#{edition_id}.mmdb"
+
+    puts "DOWNLOADING MAXMIND CITY TEST DB..."
+    abort "Maxmind download error" unless system "wget -q -c --tries=3 '#{url}' -O #{db_path}"
+
+    puts "MAXMIND CITY TEST DB DOWNLOADED!"
   end
 end

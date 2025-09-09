@@ -4,20 +4,13 @@ class ApplicationUploader < CarrierWave::Uploader::Base
   storage :file
 
   def root
-    result = super
-    result = Rails.root.join("private") if private_upload?
-    result = result.to_s.gsub(Rails.root.to_s, Rails.root.join("tmp").to_s) if Rails.env.test?
-    result
+    return Rails.root.join("tmp") if Rails.env.test?
+
+    Rails.root
   end
 
   def cache_dir
     return Rails.root.join("tmp", "uploads", "cache") if Rails.env.test?
-
-    super
-  end
-
-  def url(*args)
-    return super&.gsub("/uploads/", "/private/uploads/") if private_upload?
 
     super
   end
@@ -30,7 +23,7 @@ class ApplicationUploader < CarrierWave::Uploader::Base
     file.present?
   end
 
-  def private_upload?
+  def track_downloads?
     false
   end
 
