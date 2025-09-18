@@ -111,15 +111,8 @@ class UploadsController < ApplicationController
   end
 
   def bot_request?
-    user_agent = request.user_agent.to_s.downcase
-    bot_patterns = [
-      /bot/, /spider/, /crawl/, /slurp/, /search/, /googlebot/,
-      /bingbot/, /yandexbot/, /duckduckbot/, /facebookexternalhit/,
-      /headlesschrome/, /phantomjs/, /selenium/, /curl/, /wget/, /python-requests/,
-      /ruby/, /java/, /httpclient/, /scrapy/, /mechanize/, /go-http-client/
-    ]
-
-    bot_patterns.any? { |pattern| user_agent.match?(pattern) }
+    detector = DeviceDetector.new(request.user_agent)
+    detector.bot? || (detector.device_type.nil? && detector.os_name.nil?)
   end
 
   def request_source
