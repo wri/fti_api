@@ -20,6 +20,9 @@ class ObservationReport < ApplicationRecord
 
   acts_as_paranoid
 
+  enum :mission_type, {mandated: 0, semi_mandated: 1, external: 2, government: 3}, prefix: true, scopes: false
+  ransacker :mission_type, formatter: proc { |v| mission_types[v] }
+
   # TODO: in DB user is nil in most records, is that a bug or not? Adding optional otherwise
   # API creating report fails as it's not providing user. Thing to investigate
   belongs_to :user, inverse_of: :observation_reports, optional: true
@@ -40,6 +43,14 @@ class ObservationReport < ApplicationRecord
   after_commit :sync_observation_observers, unless: :skip_observers_sync
 
   scope :bigger_date, ->(date) { where("observation_reports.created_at <= ?", date + 1.day) }
+
+  def translated_mission_type
+    I18n.t("activerecord.enums.observation_report.mission_types.#{mission_type}") if mission_type.present?
+  end
+
+  def self.translated_mission_types
+    mission_types.map { |key, value| [I18n.t("activerecord.enums.observation_report.mission_types.#{key}"), key] }
+  end
 
   private
 

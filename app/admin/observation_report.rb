@@ -8,7 +8,7 @@ ActiveAdmin.register ObservationReport do
 
   actions :all, except: [:new]
 
-  permit_params :user_id, :title, :publication_date, :attachment, observer_ids: []
+  permit_params :user_id, :title, :mission_type, :publication_date, :attachment, observer_ids: []
 
   config.order_clause
   active_admin_paranoia
@@ -39,6 +39,7 @@ ActiveAdmin.register ObservationReport do
   filter :title, as: :select
   filter :observers, as: :select, label: -> { Observation.human_attribute_name(:observers) }, collection: -> { Observer.by_name_asc }
   filter :observations, as: :select, collection: -> { Observation.order(:id).pluck(:id) }
+  filter :mission_type, as: :select, collection: -> { ObservationReport.translated_mission_types }
   filter :publication_date
 
   dependent_filters do
@@ -64,6 +65,7 @@ ActiveAdmin.register ObservationReport do
   csv do
     column :id
     column :title
+    column :mission_type, &:translated_mission_type
     column :publication_date
     column :attachment
     column I18n.t("activerecord.models.user") do |obsr|
@@ -91,6 +93,7 @@ ActiveAdmin.register ObservationReport do
         link_to(report.title, admin_observation_report_path(report.id))
       end
     end
+    column :mission_type, &:translated_mission_type
     column :publication_date
     column :attachment do |o|
       link_to o.attachment&.identifier, o.attachment&.url
@@ -136,6 +139,7 @@ ActiveAdmin.register ObservationReport do
     f.inputs I18n.t("active_admin.shared.report_details") do
       f.input :user
       f.input :title
+      f.input :mission_type, as: :select, collection: ObservationReport.translated_mission_types
       f.input :publication_date, as: :date_time_picker, picker_options: {timepicker: false, format: "Y-m-d"}
       f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename, input_html: {accept: "application/pdf"}
       f.input :observers
@@ -147,6 +151,7 @@ ActiveAdmin.register ObservationReport do
   show do
     attributes_table do
       row :title
+      row :mission_type, &:translated_mission_type
       row :publication_date
       row :observers
       row :observations

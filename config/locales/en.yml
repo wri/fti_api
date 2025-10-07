@@ -1297,6 +1297,12 @@ en:
         user: :activerecord.models.user  #g
         user_role: User role  #g
     enums:
+      observation_report:
+        mission_types:
+          mandated: Mandated
+          semi_mandated: Semi-mandated
+          external: External
+          government: Government
       observation:
         statuses:
           Created: "Created"

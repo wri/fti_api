@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_17_073611) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_29_113922) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -492,6 +492,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_17_073611) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.datetime "deleted_at", precision: nil
+    t.integer "mission_type"
     t.index ["deleted_at"], name: "index_observation_reports_on_deleted_at"
     t.index ["title"], name: "index_observation_reports_on_title"
     t.index ["user_id"], name: "index_observation_reports_on_user_id"
