@@ -10,7 +10,6 @@ inherit_gem:
   standard: config/base.yml
 
 AllCops:
-  TargetRubyVersion: 3.2
   NewCops: enable
   Exclude:
     - 'vendor/**/*'
@@ -63,4 +62,3 @@ Rails/WhereRange:
 
 Rails/Blank:
   Enabled: false
-

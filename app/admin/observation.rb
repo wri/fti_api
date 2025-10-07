@@ -468,7 +468,7 @@ ActiveAdmin.register Observation do
           }
         f.input :law, collection:
           Law.with_country_subcategory.map {
-            ["#{_1.country.name} - #{_1.subcategory.name} - #{_1.written_infraction}", _1.id]
+            ["#{it.country.name} - #{it.subcategory.name} - #{it.written_infraction}", it.id]
           }
       else
         f.input :country, input_html: {disabled: true}

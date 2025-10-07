@@ -33,7 +33,7 @@ class Operator < ApplicationRecord
   TYPES = ["Logging company", "Artisanal", "Community forest", "Estate", "Industrial agriculture", "Mining company",
     "Sawmill", "Other", "Unknown"].freeze
 
-  normalizes :name, :details, :address, :website, with: -> { _1.strip }
+  normalizes :name, :details, :address, :website, with: -> { it.strip }
 
   belongs_to :country, inverse_of: :operators, optional: true
   belongs_to :holding, inverse_of: :operators, optional: true

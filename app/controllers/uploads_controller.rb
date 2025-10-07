@@ -15,6 +15,7 @@ class UploadsController < ApplicationController
     parse_upload_path
     ensure_valid_db_record
     track_download if trackable_request?
+    check_authorization! if needs_authorization?
     send_file @sanitized_filepath, disposition: :inline
   end
 
@@ -77,6 +78,29 @@ class UploadsController < ApplicationController
     unless db_filenames.include?(File.basename(@sanitized_filepath))
       raise_not_found_exception
     end
+  end
+
+  def cookie_download_users
+    cookies
+      .select { |name, _v| name.ends_with?("download_user") }
+      .map do |name, download_token|
+        payload = Rails.application.message_verifier("download_token").verify(download_token)
+        User.find_by(id: payload["user_id"])
+      rescue ActiveSupport::MessageVerifier::InvalidSignature
+        nil
+      end.compact
+  end
+
+  def check_authorization!
+    raise SecurityError unless download_users.any? { it.can?(:download_protected, @record) }
+  end
+
+  def download_users
+    [current_user, *cookie_download_users].compact
+  end
+
+  def needs_authorization?
+    @uploader.protected?
   end
 
   def allowed_models
@@ -159,6 +183,6 @@ class UploadsController < ApplicationController
   end
 
   def raise_not_found_exception
-    raise ActionController::RoutingError, "Not Found"
+    raise ActionController::RoutingError, "Not found or your download session has expired (try clicking on the link again)"
   end
 end
