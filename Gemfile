@@ -107,6 +107,7 @@ gem "warning", require: false # for silencing certain warnings, will require bef
 
 gem "countries", require: false # only in rake task, not in app code
 gem "maxmind-geoip2"
+gem "device_detector" # for analytics bot detection
 
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
