@@ -111,6 +111,27 @@ RSpec.describe DocumentFileUploader do
       end
 
       context "when owner is not publication authorization" do
+        context "when publication authorization not signed / opperator not approved" do
+          before do
+            operator.update!(approved: false)
+            operator_document.update!(status: "doc_valid", public: false)
+          end
+
+          it "returns true when publication authorization not signed and operator not approved" do
+            expect(uploader.protected?).to be true
+          end
+
+          context "when document is marked as public" do
+            before do
+              operator_document.update!(public: true)
+            end
+
+            it "returns false when publication authorization not signed and operator not approved even if document is public" do
+              expect(uploader.protected?).to be false
+            end
+          end
+        end
+
         context "when document is valid" do
           before do
             operator_document.update!(status: "doc_valid")
