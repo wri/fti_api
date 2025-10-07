@@ -15,6 +15,7 @@
 FactoryBot.define do
   factory :observation_report do
     sequence(:title) { |n| "ObservationReportTitle#{n}" }
+    mission_type { "external" }
     publication_date { DateTime.current }
     attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "doc.pdf")) }
     observers { build_list(:observer, 1) }

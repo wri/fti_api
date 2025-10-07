@@ -1219,6 +1219,12 @@ fr:
         user_role: Rôle de l’utilisateur  #g
 
     enums:
+      observation_report:
+        mission_types:
+          mandated: "Mandaté"
+          semi_mandated: "Semi-mandat"
+          external: "Externe"
+          government: "Gouvernement"
       observation:
         statuses:
           Created: "Crée"
