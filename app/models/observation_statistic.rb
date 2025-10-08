@@ -119,7 +119,7 @@ class ObservationStatistic < ApplicationRecord
             ) as sq
             where sq.row_number = 1
           ) as observations_by_date on 1=1
-        where deleted_at is null #{filters_sql.present? ? "AND " + filters_sql : ""}
+        where deleted_at is null #{"AND " + filters_sql if filters_sql.present?}
         group by date, validation_status, rollup(country_id)
       )
       select
