@@ -19,7 +19,7 @@ ActiveAdmin.register User do
     label: proc { I18n.t("shared.role") },
     as: :select,
     collection: -> { UserPermission.user_roles }
-  filter :name, as: :select
+  filter :name_in, label: -> { User.human_attribute_name(:name) }, as: :select, collection: -> { User.all.map(&:name).uniq.compact.sort_by(&:downcase) }
   filter :email, as: :select
   filter :created_at
 
