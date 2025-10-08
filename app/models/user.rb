@@ -99,7 +99,14 @@ class User < ApplicationRecord
     %w[name first_name last_name email id created_at]
   end
 
-  def is_government(country_id)
+  # search by ids as some users could have the same name, use with in predicate
+  ransacker :name, formatter: proc { |name|
+    User.all.select { |u| u.name == name }.map(&:id)
+  } do |parent|
+    parent.table[:id]
+  end
+
+  def is_government?(country_id)
     self&.user_permission&.user_role == "government" && self.country_id == country_id
   end
 
@@ -135,7 +142,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 
   def name

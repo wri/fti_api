@@ -80,7 +80,7 @@ module V1
 
       return false if app == "observations-tool"
       return true if user&.user_permission&.user_role == "admin"
-      return true if user&.is_government(@model.country_id)
+      return true if user&.is_government?(@model.country_id)
       return true if @model.doc_valid?
 
       false
