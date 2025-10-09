@@ -30,7 +30,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/resources/v1/observation_resource.rb",
-      "line": 62,
+      "line": 65,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "records.joins(:observation_report).where(\"extract(year from observation_reports.publication_date) in (#{years})\")",
       "render_path": null,
@@ -76,7 +76,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/models/operator_document_history.rb",
-      "line": 84,
+      "line": 87,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "from(\"(select * from\\n  (select row_number() over (partition by operator_id, required_operator_document_id, fmu_id order by operator_document_updated_at desc), *\\n   from operator_document_histories\\n   where operator_document_updated_at <= '#{(date.to_date + 1.day).to_fs(:db)}'\\n  ) as sq\\n  where sq.row_number = 1\\n) as operator_document_histories\\n\")",
       "render_path": null,
@@ -168,7 +168,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/models/operator_document_annex.rb",
-      "line": 49,
+      "line": 50,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "OperatorDocumentAnnex.where(\"expire_date IS NOT NULL and expire_date < '#{Time.zone.today}'::date and status = 3\")",
       "render_path": null,
@@ -214,7 +214,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "app/resources/v1/operator_resource.rb",
-      "line": 62,
+      "line": 60,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "records.joins(:country).joins([{ :country => :translations }]).where(\"lower(country_translations.name) like #{sanitized_value}\")",
       "render_path": null,
@@ -227,72 +227,6 @@
       "confidence": "Weak",
       "cwe_id": [
         89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "8729a7b4292d624865be0497a74f2d27abec626d151430dd744415c6925e18b7",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/models/concerns/moveable_attachment.rb",
-      "line": 34,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"rm -rf #{from}\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "MoveableAttachment",
-        "method": "move_attachment"
-      },
-      "user_input": "from",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "8e9a68077d0bef9081f98116bb9a698f83327e1e3752e44a29fdf239eaf28bea",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/models/observation_statistic.rb",
-      "line": 167,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "ObservationStatistic.from(\"(#{\"with dates as (\\n  select distinct date from (\\n    select '#{(search[:date_gteq] or Observation.order(:created_at).first.created_at).to_date.to_fs(:db)}'::date\\n    union\\n    select distinct date(observation_updated_at + interval '1' day) from observation_histories\\n    union\\n    select '#{(search[:date_lteq] or Time.zone.today).to_date.to_fs(:db)}'::date\\n  ) as important_dates\\n  where date between '#{(search[:date_gteq] or Observation.order(:created_at).first.created_at).to_date.to_fs(:db)}' and '#{(search[:date_lteq] or Time.zone.today).to_date.to_fs(:db)}'\\n),\\ngrouped as (\\n  select\\n    date,\\n    country_id,\\n    validation_status,\\n    count(*)::integer as total_count\\n  from\\n  dates\\n  left join lateral\\n    (\\n      select * from (\\n        select row_number() over (partition by observation_id order by observation_updated_at desc), *\\n          from observation_histories\\n        where observation_updated_at <= dates.date\\n      ) as sq\\n      where sq.row_number = 1\\n    ) as observations_by_date on 1=1\\n  where deleted_at is null #{if ActiveRecord::Base.sanitize_sql_for_conditions([[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:first).join(\" AND \"), *[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:last).compact]).present? then\n  (\"AND \" + ActiveRecord::Base.sanitize_sql_for_conditions([[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:first).join(\" AND \"), *[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:last).compact]))\nelse\n  \"\"\nend}\\n  group by date, validation_status, rollup(country_id)\\n)\\nselect\\n  date,\\n  country_id,\\n  #{(search[:operator_id_eq] or \"null\")} as operator_id,\\n  sum(total_count) filter (where validation_status = 0) as created,\\n  sum(total_count) filter (where validation_status IN (1, 10)) as ready_for_qc,\\n  sum(total_count) filter (where validation_status IN (2, 11)) as qc_in_progress,\\n  sum(total_count) filter (where validation_status = 3) as approved,\\n  sum(total_count) filter (where validation_status = 4) as rejected,\\n  sum(total_count) filter (where validation_status = 5) as needs_revision,\\n  sum(total_count) filter (where validation_status = 6) as ready_for_publication,\\n  sum(total_count) filter (where validation_status = 7) as published_no_comments,\\n  sum(total_count) filter (where validation_status = 8) as published_not_modified,\\n  sum(total_count) filter (where validation_status = 9) as published_modified,\\n  sum(total_count) filter (where validation_status IN (7,8, 9)) as published_all,\\n  sum(total_count) as total_count,\\n  null as validation_status,\\n  #{(search[:severity_level_eq] or \"null\")} as severity_level,\\n  #{(search[:subcategory_id_eq] or \"null\")} as subcategory_id,\\n  #{(search[:category_id_eq] or \"null\")} as category_id,\\n  #{(search[:observation_type_eq] or \"null\")} as observation_type,\\n  #{(search[:fmu_forest_type_eq] or \"null\")} as fmu_forest_type,\\n  #{search[:is_active_eq].nil? ? (\"null\") : (search[:is_active_eq])} as is_active,\\n  #{search[:hidden_eq].nil? ? (\"null\") : (search[:hidden_eq])} as hidden\\nfrom (\\n  select\\n    *,\\n    LAG(total_count,1) OVER (\\n      partition by country_id\\n      ORDER BY date\\n    ) prev_total\\n    from grouped\\n) as total_c\\nwhere\\n  (prev_total is null or prev_total != total_count or date = '#{(search[:date_lteq] or Time.zone.today).to_date.to_fs(:db)}' or date = '#{(search[:date_gteq] or Observation.order(:created_at).first.created_at).to_date.to_fs(:db)}')\\n  AND (#{if (search[:by_country].nil? or (search[:by_country] == \"null\")) then\n  \"1=1\"\nelse\n  \"country_id is not null\"\nend})\\n  AND (#{(search[:by_country] == \"null\") ? (\"country_id is null\") : (\"1=1\")})\\ngroup by date, country_id\\norder by date desc, country_id asc nulls first\\n\"}) as observation_statistics\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "ObservationStatistic",
-        "method": "ObservationStatistic.query_dashboard_report"
-      },
-      "user_input": "Observation.order(:created_at).first",
-      "confidence": "High",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Remote Code Execution",
-      "warning_code": 110,
-      "fingerprint": "9ae68e59cfee3e5256c0540dadfeb74e6b72c91997fdb60411063a6e8518144a",
-      "check_name": "CookieSerialization",
-      "message": "Use of unsafe cookie serialization strategy `:hybrid` might lead to remote code execution",
-      "file": "config/initializers/cookies_serializer.rb",
-      "line": 5,
-      "link": "https://brakemanscanner.org/docs/warning_types/unsafe_deserialization",
-      "code": "Rails.application.config.action_dispatch.cookies_serializer = :hybrid",
-      "render_path": null,
-      "location": null,
-      "user_input": null,
-      "confidence": "Medium",
-      "cwe_id": [
-        565,
-        502
       ],
       "note": ""
     },
@@ -316,29 +250,6 @@
       "confidence": "Weak",
       "cwe_id": [
         89
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "a1df757e227d9babcd885f53bb61fd71d559c8a3286c86315bd3c6f4b2c3633f",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "app/models/concerns/moveable_attachment.rb",
-      "line": 33,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "system(\"rsync -a #{from} #{to}\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "MoveableAttachment",
-        "method": "move_attachment"
-      },
-      "user_input": "from",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
       ],
       "note": ""
     },
@@ -395,7 +306,7 @@
       "check_name": "SQL",
       "message": "Possible SQL injection",
       "file": "config/initializers/jsonapi_resources.rb",
-      "line": 98,
+      "line": 99,
       "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
       "code": "records.joins((_build_joins([records.model, *_lookup_association_chain([records.model.to_s, *model_names]).last]) << \" LEFT JOIN #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_translations ON #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_translations.#{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_id = #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_sorting.id AND #{_lookup_association_chain([records.model.to_s, *model_names]).last.name}_translations.locale = '#{_context[:locale]}'\"))",
       "render_path": null,
@@ -456,8 +367,30 @@
         89
       ],
       "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "ea13e0f226e7109ec5afcfbfcc51fc4bd6b89133229104be41085c759d792ebe",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/observation_statistic.rb",
+      "line": 167,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "ObservationStatistic.from(\"(#{\"with dates as (\\n  select distinct date from (\\n    select '#{(search[:date_gteq] or Observation.order(:created_at).first.created_at).to_date.to_fs(:db)}'::date\\n    union\\n    select distinct date(observation_updated_at + interval '1' day) from observation_histories\\n    union\\n    select '#{(search[:date_lteq] or Time.zone.today).to_date.to_fs(:db)}'::date\\n  ) as important_dates\\n  where date between '#{(search[:date_gteq] or Observation.order(:created_at).first.created_at).to_date.to_fs(:db)}' and '#{(search[:date_lteq] or Time.zone.today).to_date.to_fs(:db)}'\\n),\\ngrouped as (\\n  select\\n    date,\\n    country_id,\\n    validation_status,\\n    count(*)::integer as total_count\\n  from\\n  dates\\n  left join lateral\\n    (\\n      select * from (\\n        select row_number() over (partition by observation_id order by observation_updated_at desc), *\\n          from observation_histories\\n        where observation_updated_at <= dates.date\\n      ) as sq\\n      where sq.row_number = 1\\n    ) as observations_by_date on 1=1\\n  where deleted_at is null #{if ActiveRecord::Base.sanitize_sql_for_conditions([[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:first).join(\" AND \"), *[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:last).compact]).present? then\n  (\"AND \" + ActiveRecord::Base.sanitize_sql_for_conditions([[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:first).join(\" AND \"), *[[\"country_id is not null\", nil], [\"country_id = ?\", search[:by_country]], [\"operator_id = ?\", search[:operator_id_eq]], [\"observation_type = ?\", search[:observation_type_eq]], [\"validation_status IN (?)\", (\"7,8,9\" or search[:validation_status_eq])], [\"fmu_forest_type = ?\", search[:fmu_forest_type_eq]], [\"severity_level = ?\", search[:severity_level_eq]], [\"subcategory_id = ?\", search[:subcategory_id_eq]], [\"category_id = ?\", search[:category_id_eq]], [\"hidden = ?\", search[:hidden_eq]], [\"is_active = ?\", search[:is_active_eq]]].map(&:last).compact]))\nend}\\n  group by date, validation_status, rollup(country_id)\\n)\\nselect\\n  date,\\n  country_id,\\n  #{(search[:operator_id_eq] or \"null\")} as operator_id,\\n  sum(total_count) filter (where validation_status = 0) as created,\\n  sum(total_count) filter (where validation_status IN (1, 10)) as ready_for_qc,\\n  sum(total_count) filter (where validation_status IN (2, 11)) as qc_in_progress,\\n  sum(total_count) filter (where validation_status = 3) as approved,\\n  sum(total_count) filter (where validation_status = 4) as rejected,\\n  sum(total_count) filter (where validation_status = 5) as needs_revision,\\n  sum(total_count) filter (where validation_status = 6) as ready_for_publication,\\n  sum(total_count) filter (where validation_status = 7) as published_no_comments,\\n  sum(total_count) filter (where validation_status = 8) as published_not_modified,\\n  sum(total_count) filter (where validation_status = 9) as published_modified,\\n  sum(total_count) filter (where validation_status IN (7,8, 9)) as published_all,\\n  sum(total_count) as total_count,\\n  null as validation_status,\\n  #{(search[:severity_level_eq] or \"null\")} as severity_level,\\n  #{(search[:subcategory_id_eq] or \"null\")} as subcategory_id,\\n  #{(search[:category_id_eq] or \"null\")} as category_id,\\n  #{(search[:observation_type_eq] or \"null\")} as observation_type,\\n  #{(search[:fmu_forest_type_eq] or \"null\")} as fmu_forest_type,\\n  #{search[:is_active_eq].nil? ? (\"null\") : (search[:is_active_eq])} as is_active,\\n  #{search[:hidden_eq].nil? ? (\"null\") : (search[:hidden_eq])} as hidden\\nfrom (\\n  select\\n    *,\\n    LAG(total_count,1) OVER (\\n      partition by country_id\\n      ORDER BY date\\n    ) prev_total\\n    from grouped\\n) as total_c\\nwhere\\n  (prev_total is null or prev_total != total_count or date = '#{(search[:date_lteq] or Time.zone.today).to_date.to_fs(:db)}' or date = '#{(search[:date_gteq] or Observation.order(:created_at).first.created_at).to_date.to_fs(:db)}')\\n  AND (#{if (search[:by_country].nil? or (search[:by_country] == \"null\")) then\n  \"1=1\"\nelse\n  \"country_id is not null\"\nend})\\n  AND (#{(search[:by_country] == \"null\") ? (\"country_id is null\") : (\"1=1\")})\\ngroup by date, country_id\\norder by date desc, country_id asc nulls first\\n\"}) as observation_statistics\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ObservationStatistic",
+        "method": "ObservationStatistic.query_dashboard_report"
+      },
+      "user_input": "Observation.order(:created_at).first",
+      "confidence": "High",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
     }
   ],
-  "updated": "2024-06-28 14:24:11 +0200",
-  "brakeman_version": "6.1.2"
+  "brakeman_version": "7.1.0"
 }
