@@ -1,28 +1,4 @@
 {
-  "ignored_warnings": [
-    {
-      "warning_type": "Command Injection",
-      "warning_code": 14,
-      "fingerprint": "38623cc840f776cf5570955ff366c35a012bfdb28fd9a8103e4d3df5fea22f41",
-      "check_name": "Execute",
-      "message": "Possible command injection",
-      "file": "lib/file_data_import/parser/shp.rb",
-      "line": 7,
-      "link": "https://brakemanscanner.org/docs/warning_types/command_injection/",
-      "code": "`ogr2ogr -f GeoJSON #{path_to_geojson_file} #{path_to_file}`",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "FileDataImport::Parser::Shp",
-        "method": "convert_to_geojson"
-      },
-      "user_input": "path_to_geojson_file",
-      "confidence": "Medium",
-      "cwe_id": [
-        77
-      ],
-      "note": ""
-    }
-  ],
+  "ignored_warnings": [],
   "brakeman_version": "7.1.0"
 }
