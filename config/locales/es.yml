@@ -1300,6 +1300,12 @@ es:
         user_role: Rol de usuario
 
     enums:
+      observation_report:
+        mission_types:
+          mandated: Mandatado
+          semi_mandated: Semimandatado
+          external: Externo
+          government: Gobierno
       observation:
         statuses:
           Created: "Creado"

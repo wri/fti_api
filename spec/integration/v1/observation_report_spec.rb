@@ -18,6 +18,7 @@ module V1
             title: "Report one",
             "publication-date": Time.zone.today.to_s,
             attachment: document_data,
+            "mission-type": "semi_mandated",
             relationships: {user: user.id, observers: [observer.id]}
           }
         },

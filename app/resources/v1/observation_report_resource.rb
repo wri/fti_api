@@ -4,7 +4,7 @@ module V1
   class ObservationReportResource < BaseResource
     caching
 
-    attributes :title, :publication_date, :created_at, :updated_at, :attachment
+    attributes :title, :publication_date, :mission_type, :created_at, :updated_at, :attachment
 
     has_many :observers
     has_many :observations
