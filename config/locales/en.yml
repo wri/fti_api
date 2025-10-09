@@ -1302,7 +1302,6 @@ en:
           mandated: Mandated
           semi_mandated: Semi-mandated
           external: External
-          government: Government
       observation:
         statuses:
           Created: "Created"

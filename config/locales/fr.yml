@@ -1224,7 +1224,6 @@ fr:
           mandated: "Mandaté"
           semi_mandated: "Semi-mandat"
           external: "Externe"
-          government: "Gouvernement"
       observation:
         statuses:
           Created: "Crée"
