@@ -6,6 +6,16 @@ GIT
       activeadmin
 
 GIT
+  remote: https://github.com/cerebris/jsonapi-resources.git
+  revision: 17772cefd8a90fc1b54744871de1050a6040a691
+  branch: release-0-9
+  specs:
+    jsonapi-resources (0.9.12)
+      activerecord (>= 4.1)
+      concurrent-ruby
+      railties (>= 4.1)
+
+GIT
   remote: https://github.com/tsubik/active_admin_paranoia.git
   revision: cf5de101901e49eebf3ab76aae9e290d5e44f546
   specs:
@@ -43,7 +53,7 @@ GIT
 
 GIT
   remote: https://github.com/tsubik/rspec_api_documentation.git
-  revision: a0f70af60c16737577818ca4ff01475da71958e5
+  revision: cfaa68d7f0deb99bb3126970cf3b47975456d9eb
   branch: fix/open-api-parameter-format
   specs:
     rspec_api_documentation (6.1.0)
@@ -415,10 +425,6 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.15.1)
-    jsonapi-resources (0.9.12)
-      activerecord (>= 4.1)
-      concurrent-ruby
-      railties (>= 4.1)
     jwt (3.1.2)
       base64
     kaminari (1.2.2)
@@ -534,7 +540,7 @@ GEM
     puma (6.6.1)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.0.18)
+    rack (3.1.17)
     rack-cors (3.0.0)
       logger
       rack (>= 3.0.14)
@@ -852,7 +858,7 @@ DEPENDENCIES
   groupdate
   http
   i18n_generators
-  jsonapi-resources (= 0.9.12)
+  jsonapi-resources!
   jwt
   letter_opener_web
   maxmind-geoip2
@@ -866,7 +872,6 @@ DEPENDENCIES
   paranoia
   pg
   puma
-  rack (~> 3.0.11)
   rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 7.2.2)
