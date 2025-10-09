@@ -27,6 +27,9 @@ Rails/UnknownEnv:
     - test
     - e2e
 
+Layout/EmptyLinesAfterModuleInclusion:
+  Enabled: false
+
 Rails/EagerEvaluationLogMessage:
   Enabled: false
   Severity: warning

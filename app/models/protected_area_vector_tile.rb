@@ -9,16 +9,16 @@ class ProtectedAreaVectorTile
     query = <<~SQL
       SELECT ST_ASMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') as tile
         FROM (
-          SELECT id, json_build_object('name', name) as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}), 4096, 256, true) AS mvtgeometry
+          SELECT id, json_build_object('name', name) as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(:z,:x,:y), 4096, 256, true) AS mvtgeometry
           FROM (
             SELECT protected_areas.*, st_transform(geometry, 3857) as the_geom_webmercator
             FROM protected_areas
           ) as data
-          WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(#{z},#{x},#{y}),4096,0,true) IS NOT NULL
+          WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(:z,:x,:y),4096,0,true) IS NOT NULL
         ) AS tile;
     SQL
 
-    tile = ActiveRecord::Base.connection.execute query
+    tile = ActiveRecord::Base.connection.execute ActiveRecord::Base.sanitize_sql([query, {z: z, x: x, y: y}])
     ActiveRecord::Base.connection.unescape_bytea tile.getvalue(0, 0)
   end
 end

@@ -90,7 +90,7 @@ module JSONAPI
               joins_query = _build_joins([records.model, *association])
               if defined?(association.klass.translated_attribute_names) &&
                   association.klass.translated_attribute_names.map(&:to_s).include?(column_name.to_s)
-                joins_query << " LEFT JOIN #{association.name}_translations ON #{association.name}_translations.#{association.name}_id = #{association.name}_sorting.id AND #{association.name}_translations.locale = '#{_context[:locale]}'"
+                joins_query << ActiveRecord::Base.sanitize_sql([" LEFT JOIN #{association.name}_translations ON #{association.name}_translations.#{association.name}_id = #{association.name}_sorting.id AND #{association.name}_translations.locale = ?", _context[:locale]])
                 order_by_query = "#{association.name}_translations.#{column_name} #{direction}"
               else
                 # _sorting is appended to avoid name clashes with manual joins eg. overridden filters

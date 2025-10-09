@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require "shellwords"
+
 module FileDataImport
   module Parser
     class Shp < FileDataImport::Parser::Base
       def convert_to_geojson
-        `ogr2ogr -f GeoJSON #{path_to_geojson_file} #{path_to_file}`
+        `ogr2ogr -f GeoJSON #{Shellwords.shellescape(path_to_geojson_file)} #{Shellwords.shellescape(path_to_file)}`
       end
 
       def path_to_geojson_file
