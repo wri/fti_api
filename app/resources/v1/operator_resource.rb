@@ -56,8 +56,8 @@ module V1
 
     filter :"country.name", apply: ->(records, value, _options) {
       if value.present?
-        sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
-        records.joins(:country).joins([country: :translations]).where("lower(country_translations.name) like #{sanitized_value}")
+        pattern = "%#{value[0].downcase}%"
+        records.joins(:country).joins([country: :translations]).where("lower(country_translations.name) like ?", pattern)
       else
         records
       end

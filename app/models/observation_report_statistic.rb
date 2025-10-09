@@ -21,7 +21,7 @@ class ObservationReportStatistic < ApplicationRecord
 
   def self.from_date(date)
     date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
-    from_date_sql = where("date > '#{date_obj.to_fs(:db)}'").to_sql
+    from_date_sql = where("date > ?", date_obj.to_fs(:db)).to_sql
     first_rows_sql = at_date(date_obj).to_sql
 
     from("(#{from_date_sql} UNION #{first_rows_sql}) as observation_report_statistics")
@@ -35,7 +35,7 @@ class ObservationReportStatistic < ApplicationRecord
     query = <<~SQL
       (select
         id,
-        '#{date_obj.to_fs(:db)}'::date as date,
+        :date_obj::date as date,
         country_id,
         observer_id,
         total_count,
@@ -44,13 +44,13 @@ class ObservationReportStatistic < ApplicationRecord
        from
        (select row_number() over (partition by country_id, observer_id order by date desc), *
         from observation_report_statistics ors
-        where date <= '#{date_obj.to_fs(:db)}'
+        where date <= :date_obj
        ) as stats_by_date
        where stats_by_date.row_number = 1
       ) as observation_report_statistics
     SQL
 
-    ObservationReportStatistic.from(query)
+    ObservationReportStatistic.from(ActiveRecord::Base.sanitize_sql([query, {date_obj: date_obj.to_fs(:db)}]))
   end
 
   def self.generate_for_country_and_day(country_id, day, delete_old = false)

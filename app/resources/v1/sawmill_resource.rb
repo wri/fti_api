@@ -24,8 +24,8 @@ module V1
 
     filter :"operator.name", apply: ->(records, value, _options) {
       if value.present?
-        sanitized_value = ActiveRecord::Base.connection.quote("%#{value[0].downcase}%")
-        records.joins(:operator).joins([operator: :translations]).where("lower(operator_translations.name) like #{sanitized_value}")
+        pattern = "%#{value[0].downcase}%"
+        records.joins(:operator).joins([operator: :translations]).where("lower(operator_translations.name) like ?", pattern)
       else
         records
       end
