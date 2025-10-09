@@ -46,8 +46,9 @@ class OperatorDocumentAnnex < ApplicationRecord
   scope :orphaned, -> { where.not(id: AnnexDocument.select(:operator_document_annex_id)) }
 
   def self.expire_document_annexes
+    today = Time.zone.today
     documents_to_expire =
-      OperatorDocumentAnnex.where("expire_date IS NOT NULL and expire_date < '#{Time.zone.today}'::date and status = 3")
+      OperatorDocumentAnnex.where("expire_date IS NOT NULL and expire_date < :today::date and status = 3", {today: today})
     number_of_documents = documents_to_expire.count
     documents_to_expire.find_each(&:expire_document)
     Rails.logger.info "Expired #{number_of_documents} document annexes"

@@ -75,7 +75,7 @@ class OperatorDocumentHistory < ApplicationRecord
       (select * from
         (select row_number() over (partition by operator_id, required_operator_document_id, fmu_id order by operator_document_updated_at desc), *
          from operator_document_histories
-         where operator_document_updated_at <= '#{db_date}'
+         where operator_document_updated_at <= :db_date
         ) as sq
         where sq.row_number = 1
       ) as operator_document_histories
@@ -84,6 +84,6 @@ class OperatorDocumentHistory < ApplicationRecord
     # coupled with default not deleted scope will only return not deleted
     # deleted document history is created when document is destroyed, when country, fmu is unattributed
     # it will not return destroyed documents
-    from(query)
+    from(ActiveRecord::Base.sanitize_sql([query, {db_date: db_date}]))
   end
 end

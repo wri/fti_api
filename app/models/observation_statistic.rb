@@ -94,13 +94,13 @@ class ObservationStatistic < ApplicationRecord
     sql = <<~SQL
       with dates as (
         select distinct date from (
-          select '#{date_from}'::date
+          select :date_from::date
           union
           select distinct date(observation_updated_at + interval '1' day) from observation_histories
           union
-          select '#{date_to}'::date
+          select :date_to::date
         ) as important_dates
-        where date between '#{date_from}' and '#{date_to}'
+        where date between :date_from and :date_to
       ),
       grouped as (
         select
@@ -119,7 +119,7 @@ class ObservationStatistic < ApplicationRecord
             ) as sq
             where sq.row_number = 1
           ) as observations_by_date on 1=1
-        where deleted_at is null #{filters_sql.present? ? "AND " + filters_sql : ""}
+        where deleted_at is null #{"AND " + filters_sql if filters_sql.present?}
         group by date, validation_status, rollup(country_id)
       )
       select
@@ -156,7 +156,7 @@ class ObservationStatistic < ApplicationRecord
           from grouped
       ) as total_c
       where
-        (prev_total is null or prev_total != total_count or date = '#{date_to}' or date = '#{date_from}')
+        (prev_total is null or prev_total != total_count or date = :date_to or date = :date_from)
         AND (#{(country_id.nil? || country_id == "null") ? "1=1" : "country_id is not null"})
         AND (#{(country_id == "null") ? "country_id is null" : "1=1"})
       group by date, country_id
@@ -164,7 +164,10 @@ class ObservationStatistic < ApplicationRecord
     SQL
 
     ObservationStatistic.from(
-      "(#{sql}) as observation_statistics"
+      ActiveRecord::Base.sanitize_sql([
+        "(#{sql}) as observation_statistics",
+        {date_from: date_from, date_to: date_to}
+      ])
     ).includes(country: :translations)
   end
 
