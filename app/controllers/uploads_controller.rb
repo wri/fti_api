@@ -2,8 +2,8 @@
 
 class UploadsController < ApplicationController
   rescue_from ActionController::MissingFile, with: :raise_not_found_exception
-  rescue_from SecurityError, with: :raise_not_found_exception
-  rescue_from CanCan::AccessDenied, with: :raise_not_found_exception
+  rescue_from SecurityError, with: :log_and_raise_not_found_exception
+  rescue_from CanCan::AccessDenied, with: :log_and_raise_not_found_exception
 
   MODELS_OVERRIDES = {
     "operator_document_file" => "document_file",
@@ -173,6 +173,13 @@ class UploadsController < ApplicationController
 
   def allowed_directory
     Rails.env.test? ? File.join(Rails.root, "tmp", "uploads") : File.join(Rails.root, "uploads")
+  end
+
+  def log_and_raise_not_found_exception
+    msg = "Unauthorized file download attempt: user_id=#{current_user&.id}, path=#{@sanitized_filepath}"
+    Rails.logger.warn(msg)
+    Sentry.capture_message(msg) if ENV["SENTRY_LOG_UNAUTHORIZED_DOWNLOADS"] == "true"
+    raise_not_found_exception
   end
 
   def raise_not_found_exception
