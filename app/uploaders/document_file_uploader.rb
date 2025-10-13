@@ -28,9 +28,7 @@ class DocumentFileUploader < ApplicationUploader
 
   def protected?
     return true if model.owner.nil?
-    return true if model.owner.publication_authorization?
-    return false if (model.owner.doc_valid? || model.owner.doc_expired?) && (model.owner.operator.approved? || model.owner.public?)
 
-    true
+    model.owner.needs_authorization_before_downloading?
   end
 end

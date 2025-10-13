@@ -121,6 +121,10 @@ class Operator < ApplicationRecord
     end
   end
 
+  def publication_authorization_signed?
+    approved?
+  end
+
   def holding_users
     holding&.users || User.none
   end

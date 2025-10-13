@@ -99,68 +99,9 @@ RSpec.describe DocumentFileUploader do
         document_file.update!(operator_document: operator_document)
       end
 
-      context "when owner document is publication authorization" do
-        before do
-          operator_document.required_operator_document.contract_signature = true
-          operator_document.required_operator_document.save!(validate: false)
-        end
-
-        it "returns true when publication_authorization is true" do
-          expect(uploader.protected?).to be true
-        end
-      end
-
-      context "when owner is not publication authorization" do
-        context "when publication authorization not signed / opperator not approved" do
-          before do
-            operator.update!(approved: false)
-            operator_document.update!(status: "doc_valid", public: false)
-          end
-
-          it "returns true when publication authorization not signed and operator not approved" do
-            expect(uploader.protected?).to be true
-          end
-
-          context "when document is marked as public" do
-            before do
-              operator_document.update!(public: true)
-            end
-
-            it "returns false when publication authorization not signed and operator not approved even if document is public" do
-              expect(uploader.protected?).to be false
-            end
-          end
-        end
-
-        context "when document is valid" do
-          before do
-            operator_document.update!(status: "doc_valid")
-          end
-
-          it "returns false when document is valid" do
-            expect(uploader.protected?).to be false
-          end
-        end
-
-        context "when document is expired" do
-          before do
-            operator_document.update!(status: "doc_expired")
-          end
-
-          it "returns false when document is expired" do
-            expect(uploader.protected?).to be false
-          end
-        end
-
-        context "when document is neither valid nor expired" do
-          before do
-            operator_document.update!(status: "doc_pending")
-          end
-
-          it "returns true when document is neither valid nor expired" do
-            expect(uploader.protected?).to be true
-          end
-        end
+      it "delegates to owner's needs_authorization_before_downloading? method" do
+        expect(operator_document).to receive(:needs_authorization_before_downloading?).and_return(true)
+        expect(uploader.protected?).to be true
       end
     end
   end
