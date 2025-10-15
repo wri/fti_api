@@ -26,17 +26,19 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/uploads/*rest", controller: "uploads", action: "download"
+  get "/uploads/*rest", to: "uploads#download"
 
   scope module: :v1, constraints: APIVersion.new(version: 1, current: true) do
     # Account
     post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
     post "/register", to: "registrations#create"
     post "/reset-password", to: "passwords#create"
     post "/users/password", to: "passwords#update"
 
     # Helper requests
     get "/users/current-user", to: "users#current"
+    post "/sessions/download-session", to: "sessions#download_session"
 
     scope "(:locale)", locale: /en|fr/ do
       # Resources

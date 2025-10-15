@@ -33,7 +33,7 @@ class Operator < ApplicationRecord
   TYPES = ["Logging company", "Artisanal", "Community forest", "Estate", "Industrial agriculture", "Mining company",
     "Sawmill", "Other", "Unknown"].freeze
 
-  normalizes :name, :details, :address, :website, with: -> { _1.strip }
+  normalizes :name, :details, :address, :website, with: -> { it.strip }
 
   belongs_to :country, inverse_of: :operators, optional: true
   belongs_to :holding, inverse_of: :operators, optional: true
@@ -119,6 +119,10 @@ class Operator < ApplicationRecord
     def translated_types
       types.map { |t| [I18n.t("operator_types.#{t}", default: t), t.camelize] }
     end
+  end
+
+  def publication_authorization_signed?
+    approved?
   end
 
   def holding_users

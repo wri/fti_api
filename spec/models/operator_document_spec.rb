@@ -356,6 +356,111 @@ RSpec.describe OperatorDocument, type: :model do
         end
       end
     end
+
+    describe "#needs_authorization_before_downloading?" do
+      let(:operator) { create(:operator) }
+      let(:required_operator_document) { create(:required_operator_document_country, contract_signature: contract_signature) }
+      let(:operator_document) { create(:operator_document_country, operator: operator, required_operator_document: required_operator_document, force_status: status, public: is_public) }
+      let(:contract_signature) { false }
+      let(:status) { :doc_valid }
+      let(:is_public) { true }
+
+      context "when document is publication authorization (contract signature)" do
+        let(:contract_signature) { true }
+
+        it "returns true" do
+          expect(operator_document.needs_authorization_before_downloading?).to be true
+        end
+      end
+
+      context "when document is not publication authorization" do
+        let(:contract_signature) { false }
+
+        context "when document is valid" do
+          let(:status) { :doc_valid }
+
+          context "when operator has signed publication authorization" do
+            before do
+              allow(operator).to receive(:publication_authorization_signed?).and_return(true)
+            end
+
+            it "returns false" do
+              expect(operator_document.needs_authorization_before_downloading?).to be false
+            end
+          end
+
+          context "when document is public" do
+            let(:is_public) { true }
+
+            before do
+              allow(operator).to receive(:publication_authorization_signed?).and_return(false)
+            end
+
+            it "returns false" do
+              expect(operator_document.needs_authorization_before_downloading?).to be false
+            end
+          end
+
+          context "when operator hasn't signed and document is not public" do
+            let(:is_public) { false }
+
+            before do
+              allow(operator).to receive(:publication_authorization_signed?).and_return(false)
+            end
+
+            it "returns true" do
+              expect(operator_document.needs_authorization_before_downloading?).to be true
+            end
+          end
+        end
+
+        context "when document is expired" do
+          let(:status) { :doc_expired }
+
+          context "when operator has signed publication authorization" do
+            before do
+              allow(operator).to receive(:publication_authorization_signed?).and_return(true)
+            end
+
+            it "returns false" do
+              expect(operator_document.needs_authorization_before_downloading?).to be false
+            end
+          end
+
+          context "when document is public" do
+            let(:is_public) { true }
+
+            before do
+              allow(operator).to receive(:publication_authorization_signed?).and_return(false)
+            end
+
+            it "returns false" do
+              expect(operator_document.needs_authorization_before_downloading?).to be false
+            end
+          end
+
+          context "when operator hasn't signed and document is not public" do
+            let(:is_public) { false }
+
+            before do
+              allow(operator).to receive(:publication_authorization_signed?).and_return(false)
+            end
+
+            it "returns true" do
+              expect(operator_document.needs_authorization_before_downloading?).to be true
+            end
+          end
+        end
+
+        context "when document is not valid or expired" do
+          let(:status) { :doc_pending }
+
+          it "returns true" do
+            expect(operator_document.needs_authorization_before_downloading?).to be true
+          end
+        end
+      end
+    end
   end
 
   describe "Class methods" do

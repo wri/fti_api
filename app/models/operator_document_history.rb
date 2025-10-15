@@ -56,6 +56,13 @@ class OperatorDocumentHistory < ApplicationRecord
     required_operator_document.contract_signature?
   end
 
+  def needs_authorization_before_downloading?
+    return true if publication_authorization?
+    return false if (doc_valid? || doc_expired?) && (operator.publication_authorization_signed? || public?)
+
+    true
+  end
+
   # Returns the collection of OperatorDocumentHistory for a given operator at a point in time
   #
   # @param String operator_id The operator id

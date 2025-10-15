@@ -29,6 +29,16 @@ class Ability
         end
         can :ru, Notification, user_id: user.id
         can :dismiss, Notification, user_id: user.id
+        can :download_protected, OperatorDocumentAnnex do |annex|
+          can? :update, annex.operator_document
+        end
+        can :download_protected, DocumentFile do |document_file|
+          if document_file.owner.is_a?(OperatorDocumentHistory)
+            can? :manage, document_file.owner.operator_document
+          else
+            can? :manage, document_file.owner
+          end
+        end
       else
         can [:read], User, id: user.id
       end

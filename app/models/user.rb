@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   PERMISSIONS = %w[operator ngo ngo_manager government]
 
-  normalizes :first_name, :last_name, :name, with: -> { _1.strip }
+  normalizes :first_name, :last_name, :name, with: -> { it.strip }
 
   enum :permissions_request, {operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7}
 
@@ -89,6 +89,11 @@ class User < ApplicationRecord
   scope :recent, -> { order("users.updated_at DESC") }
   scope :inactive, -> { where(is_active: false) }
   scope :with_roles, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
+
+  delegate :can?, :cannot, to: :ability
+  def ability
+    @ability ||= Ability.new(self)
+  end
 
   def self.ransackable_attributes(auth_object = nil)
     %w[name first_name last_name email id created_at]
