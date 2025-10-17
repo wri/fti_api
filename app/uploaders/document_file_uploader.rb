@@ -26,9 +26,9 @@ class DocumentFileUploader < ApplicationUploader
     sanitize_filename(filename + File.extname(super))
   end
 
-  def protected?
-    return true if model.owner.nil?
+  # def protected?
+  #   return true if model.owner.nil?
 
-    model.owner.needs_authorization_before_downloading?
-  end
+  #   model.owner.needs_authorization_before_downloading?
+  # end
 end
