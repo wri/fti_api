@@ -139,6 +139,14 @@ class OperatorDocument < ApplicationRecord
     required_operator_document.contract_signature?
   end
 
+  # # TODO: I would name it public? but we have public attribute that should be refactored at some point
+  def needs_authorization_before_downloading?
+    return true if publication_authorization?
+    return false if (doc_valid? || doc_expired?) && (operator.publication_authorization_signed? || public?)
+
+    true
+  end
+
   def name_with_fmu
     return required_operator_document.name if fmu.nil?
 

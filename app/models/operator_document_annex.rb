@@ -45,6 +45,12 @@ class OperatorDocumentAnnex < ApplicationRecord
   scope :from_operator, ->(operator_id) { joins(:operator_document).where(operator_documents: {operator_id: operator_id}) }
   scope :orphaned, -> { where.not(id: AnnexDocument.select(:operator_document_annex_id)) }
 
+  def needs_authorization_before_downloading?
+    return false if (doc_valid? || doc_expired?) && any_operator_document_without_authorization?
+
+    true
+  end
+
   def self.expire_document_annexes
     today = Time.zone.today
     documents_to_expire =
@@ -60,5 +66,11 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   def expire_document_annex
     update(status: OperatorDocumentAnnex.statuses[:doc_expired])
+  end
+
+  private
+
+  def any_operator_document_without_authorization?
+    [operator_document, *operator_document_histories].compact.any? { !it.needs_authorization_before_downloading? }
   end
 end

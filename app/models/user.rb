@@ -90,6 +90,11 @@ class User < ApplicationRecord
   scope :inactive, -> { where(is_active: false) }
   scope :with_roles, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
+  delegate :can?, :cannot, to: :ability
+  def ability
+    @ability ||= Ability.new(self)
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     %w[name first_name last_name email id created_at]
   end

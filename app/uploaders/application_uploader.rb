@@ -27,6 +27,10 @@ class ApplicationUploader < CarrierWave::Uploader::Base
     false
   end
 
+  def protected?
+    false
+  end
+
   def original_filename
     if file.present?
       file.filename
