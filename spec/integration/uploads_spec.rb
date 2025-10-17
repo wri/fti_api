@@ -22,7 +22,9 @@ RSpec.describe UploadsController, type: :request do
   describe "GET /uploads/*path" do
     context "successful file downloads" do
       it "downloads existing files" do
-        get @document_file.attachment.url
+        get @document_file.attachment.url, headers: {
+          "User-Agent" => "Mozilla/5.0 (Chrome/91.0) Safari/537.36"
+        }
 
         expect(response).to have_http_status(:ok)
         expect(response.headers["Content-Disposition"]).to include("inline")
@@ -99,6 +101,13 @@ RSpec.describe UploadsController, type: :request do
         get @document_file.attachment.url, headers: {
           "User-Agent" => "Googlebot/2.1"
         }
+
+        expect(response).to have_http_status(:ok)
+        expect(TrackFileDownloadJob).not_to have_received(:perform_later)
+      end
+
+      it "does not track requests without user agent" do
+        get @document_file.attachment.url
 
         expect(response).to have_http_status(:ok)
         expect(TrackFileDownloadJob).not_to have_received(:perform_later)
@@ -188,13 +197,6 @@ RSpec.describe UploadsController, type: :request do
     end
 
     context "edge cases and error handling" do
-      it "handles requests without user agent" do
-        get @observation_report.attachment.url
-
-        expect(response).to have_http_status(:ok)
-        expect(TrackFileDownloadJob).to have_received(:perform_later)
-      end
-
       it "handles requests without referer" do
         get @document_file.attachment.url, headers: {
           "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
