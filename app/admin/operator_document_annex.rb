@@ -81,12 +81,6 @@ ActiveAdmin.register OperatorDocumentAnnex do
       doc = OperatorDocument.unscoped.find(od.annex_document.documentable_id)
       link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
     end
-    column I18n.t("activerecord.models.operator_document_history") do |od|
-      od.annex_documents_history.each_with_object([]) do |ad, links|
-        doc = OperatorDocumentHistory.unscoped.find(ad.documentable_id)
-        links << link_to(doc.required_operator_document.name, admin_operator_document_history_path(doc.id))
-      end.reduce(:+)
-    end
     column I18n.t("active_admin.dashboard_page.columns.operator") do |od|
       o = od.annex_documents_history.first.documentable.operator
       link_to(o.name, admin_producer_path(o.id))
@@ -169,11 +163,36 @@ ActiveAdmin.register OperatorDocumentAnnex do
       row :operator do
         resource.operator_document.operator if resource.operator_document.present?
       end
-      row :operator_document
+      row :operator_document do |a|
+        if a.annex_document.present?
+          doc = OperatorDocument.unscoped.find(a.annex_document.documentable_id)
+          link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
+        end
+      end
+      row :operator_document_history do |a|
+        table_for a.operator_document_histories.order(operator_document_updated_at: :desc) do
+          column :id do |history|
+            link_to history.id, admin_operator_document_history_path(history)
+          end
+          tag_column :status
+          column :operator_document_updated_at
+          column :attachment do |history|
+            if history.document_file&.attachment.present?
+              link_to history.document_file.attachment.identifier, history.document_file.attachment.url, target: "_blank", rel: "noopener"
+            elsif history.reason.present?
+              history.reason
+            end
+          end
+        end
+      end
       row :uploaded_by
       row :user
       row :attachment do |o|
-        link_to o.attachment&.identifier, o.attachment&.url if o.attachment.present?
+        if o.attachment&.identifier.present?
+          name = o.attachment.identifier
+          name += " (Missing file)" if o.attachment.blank?
+          link_to name, o.attachment.url
+        end
       end
       row :start_date
       row :expire_date

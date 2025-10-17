@@ -79,6 +79,11 @@ $to-be-reviewed: #99AA99;
 
 }
 
+// fix issue with top margin in panel title
+.panel > h3 {
+  margin-top: 0;
+}
+
 .button {
   @include no-shadow();
   @include rounded(0);
@@ -115,6 +120,14 @@ form input.deploy-button {
 
 .index_as_table {
   font-size: 12px !important;
+}
+
+table {
+  tr.highlight {
+    td {
+      background-color: lighten( $pending-color, 35% ) !important;
+    }
+  }
 }
 
 body.active_admin {

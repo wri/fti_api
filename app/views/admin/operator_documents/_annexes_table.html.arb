@@ -1,0 +1,23 @@
+panel I18n.t("active_admin.operator_documents_page.annexes") do
+  table_for resource.operator_document_annexes do
+    column :id do |resource|
+      link_to resource.id, admin_operator_document_annex_path(resource)
+    end
+    column :name do |resource|
+      if resource.attachment.present?
+        link_to resource.name, resource.attachment.url, target: "_blank", rel: "noopener"
+      else
+        resource.name
+      end
+    end
+    tag_column :status
+    column :created_at
+    column :uploaded_by do |resource|
+      if resource.user.present?
+        link_to resource.user.name, admin_user_path(resource.user)
+      else
+        resource.uploaded_by
+      end
+    end
+  end
+end
