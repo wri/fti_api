@@ -308,7 +308,7 @@ ActiveAdmin.register OperatorDocument do
         column :operator_document_updated_at
         column :attachment do |history|
           if history.document_file&.attachment.present?
-            link_to history.document_file.attachment.identifier, history.document_file.attachment.url, target: "_blank", rel: "noopener noreferrer"
+            link_to history.document_file.attachment.identifier, history.document_file.attachment.url, target: "_blank", rel: "noopener"
           end
         end
         column :annexes do |history|

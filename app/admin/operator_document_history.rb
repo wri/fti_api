@@ -197,7 +197,7 @@ ActiveAdmin.register OperatorDocumentHistory do
             if r.document_file.present?
               name = r.document_file.attachment.identifier
               name += " (Missing file)" if r.document_file.attachment.blank?
-              link_to name, r.document_file&.attachment&.url, target: "_blank", rel: "noopener noreferrer"
+              link_to name, r.document_file&.attachment&.url, target: "_blank", rel: "noopener"
             elsif r.reason.present?
               r.reason
             else

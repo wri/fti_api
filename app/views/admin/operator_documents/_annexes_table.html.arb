@@ -5,7 +5,7 @@ panel I18n.t("active_admin.operator_documents_page.annexes") do
     end
     column :name do |resource|
       if resource.attachment.present?
-        link_to resource.name, resource.attachment.url, target: "_blank", rel: "noopener noreferrer"
+        link_to resource.name, resource.attachment.url, target: "_blank", rel: "noopener"
       else
         resource.name
       end
