@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   PERMISSIONS = %w[operator ngo ngo_manager government]
 
-  normalizes :first_name, :last_name, :name, with: -> { _1.strip }
+  normalizes :first_name, :last_name, :name, with: -> { it.strip }
 
   enum :permissions_request, {operator: 1, ngo: 2, ngo_manager: 4, government: 6, holding: 7}
 
