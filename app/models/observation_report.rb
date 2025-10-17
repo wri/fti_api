@@ -23,6 +23,8 @@ class ObservationReport < ApplicationRecord
   enum :mission_type, {mandated: 0, semi_mandated: 1, external: 2, government: 3}, prefix: true, scopes: false
   ransacker :mission_type, formatter: proc { |v| mission_types[v] }
 
+  normalizes :title, with: -> { it.strip }
+
   # TODO: in DB user is nil in most records, is that a bug or not? Adding optional otherwise
   # API creating report fails as it's not providing user. Thing to investigate
   belongs_to :user, inverse_of: :observation_reports, optional: true
