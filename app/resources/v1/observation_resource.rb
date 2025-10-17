@@ -61,8 +61,8 @@ module V1
     }
 
     filter :years, apply: ->(records, value, _options) {
-      years = value.map(&:to_i).compact.reject(&:zero?).join(", ")
-      records.joins(:observation_report).where("extract(year from observation_reports.publication_date) in (#{years})")
+      years = value.map(&:to_i).compact.reject(&:zero?)
+      records.joins(:observation_report).where("extract(year from observation_reports.publication_date) in (?)", years)
     }
 
     filter :"observation_report.id", apply: ->(records, value, _options) {

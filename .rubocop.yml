@@ -10,7 +10,6 @@ inherit_gem:
   standard: config/base.yml
 
 AllCops:
-  TargetRubyVersion: 3.2
   NewCops: enable
   Exclude:
     - 'vendor/**/*'
@@ -26,6 +25,9 @@ Rails/UnknownEnv:
     - development
     - test
     - e2e
+
+Layout/EmptyLinesAfterModuleInclusion:
+  Enabled: false
 
 Rails/EagerEvaluationLogMessage:
   Enabled: false

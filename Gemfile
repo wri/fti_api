@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.4.2"
+ruby "3.4.7"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -47,7 +47,9 @@ gem "rgeo-geojson"
 gem "gdal"
 
 # API
-gem "jsonapi-resources", "0.9.12"
+# patches are on that branch and they seem not to release new versions to rubygems
+# TODO: switch back to rubygems version when they release new version
+gem "jsonapi-resources", github: "cerebris/jsonapi-resources", branch: "release-0-9"
 gem "oj"
 gem "oj_mimic_json"
 
@@ -94,11 +96,6 @@ gem "google-cloud-translate"
 # Error Management
 gem "sentry-rails"
 gem "sentry-ruby"
-
-# TODO: jsonapi-resources is not compatible with this rack PR https://github.com/rack/rack/pull/2137 (ver 3.1.0), waiting for a patch
-# more info here https://github.com/cerebris/jsonapi-resources/pull/1457
-# remove version contstraint when above PR is merged and backported to ver 0.9.12
-gem "rack", "~> 3.0.11"
 
 # Utilities
 gem "http"
