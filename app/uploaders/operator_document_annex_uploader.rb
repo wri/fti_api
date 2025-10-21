@@ -9,9 +9,9 @@ class OperatorDocumentAnnexUploader < ApplicationUploader
     true
   end
 
-  # def protected?
-  #   model.needs_authorization_before_downloading?
-  # end
+  def protected?
+    model.needs_authorization_before_downloading?
+  end
 
   def filename
     return if super.blank?
