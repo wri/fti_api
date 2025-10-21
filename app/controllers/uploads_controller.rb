@@ -177,6 +177,7 @@ class UploadsController < ApplicationController
 
   def log_and_raise_not_found_exception
     msg_info = {
+      ip: request.remote_ip,
       user_id: current_user&.id,
       source: request_source,
       source_info: request_source_info,
