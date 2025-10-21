@@ -176,7 +176,14 @@ class UploadsController < ApplicationController
   end
 
   def log_and_raise_not_found_exception
-    msg = "Unauthorized file download attempt: user_id=#{current_user&.id}, path=#{@sanitized_filepath}"
+    msg_info = {
+      user_id: current_user&.id,
+      source: request_source,
+      source_info: request_source_info,
+      bot_request: bot_request?,
+      path: @sanitized_filepath
+    }
+    msg = "Unauthorized file download attempt: #{msg_info}"
     Rails.logger.warn(msg)
     Sentry.capture_message(msg) if ENV["SENTRY_LOG_UNAUTHORIZED_DOWNLOADS"] == "true"
     raise_not_found_exception
