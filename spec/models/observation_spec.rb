@@ -267,6 +267,52 @@ RSpec.describe Observation, type: :model do
         end
       end
     end
+
+    describe "government observation validations" do
+      it "should be invalid when government observation has operator_id" do
+        country = create(:country)
+        observation = build(:gov_observation, country: country)
+        observation.operator = create(:operator, country: country)
+
+        expect(observation.valid?).to eq(false)
+        expect(observation.errors[:operator_id]).to include("must be blank")
+      end
+    end
+
+    describe "required fields for non-Created and non-Rejected statuses" do
+      it "allows missing required fields when status is Created or Rejected" do
+        created_obs = build(:observation,
+          validation_status: "Created",
+          subcategory: nil,
+          severity: nil,
+          observation_report: nil,
+          evidence_type: nil)
+        expect(created_obs).to be_valid
+
+        rejected_obs = build(:observation,
+          validation_status: "Rejected",
+          subcategory: nil,
+          severity: nil,
+          observation_report: nil,
+          evidence_type: nil)
+        expect(rejected_obs).to be_valid
+      end
+
+      it "requires subcategory, severity, observation_report, and evidence_type for other statuses" do
+        observation = build(:observation,
+          validation_status: "Ready for QC2",
+          subcategory: nil,
+          severity: nil,
+          observation_report: nil,
+          evidence_type: nil)
+
+        expect(observation.valid?).to eq(false)
+        expect(observation.errors[:subcategory]).to include("can't be blank")
+        expect(observation.errors[:severity]).to include("can't be blank")
+        expect(observation.errors[:observation_report]).to include("can't be blank")
+        expect(observation.errors[:evidence_type]).to include("can't be blank")
+      end
+    end
   end
 
   describe "Hooks" do
