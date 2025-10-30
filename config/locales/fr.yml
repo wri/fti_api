@@ -401,6 +401,7 @@ fr:
       operator_document: "Document de l'opérateur"
       orphaned: 'Orphelin'
       details: "Détails de l'annexe du document de l'opérateur"
+      approve_confirmation: 'Êtes-vous sûr de vouloir approuver l’annexe %{name}?'
     observations_page:
       not_modified: 'Observation NON modifiée'
       moved_ready: 'Observation déplacée vers Prêt pour publication'
@@ -437,6 +438,7 @@ fr:
       needs_revision_hint: 'Le moniteur sera informé que l’observation nécessite une révision avec des suggestions proposées. Le moniteur peut toujours publier l’observation ou la soumettre à nouveau pour le contrôle de qualité.'
     quality_control_page:
       performed_qc: 'Contrôle de qualité effectué avec la décision : %{decision}'
+      title: "Contrôle de Qualité pour %{reviewable_type} #%{reviewable_id}"
       reviewable_not_in_qc: "L'entité examinée n'a pas le statut de contrôle qualité en cours"
     powered_by: "Admin Backoffice"
     delete_model: "Supprimer %{model}"

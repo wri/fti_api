@@ -20,24 +20,16 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :approve, method: :put do
-    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_valid])
+    qc = QualityControl.new(passed: true, reviewable: resource, reviewer: current_user)
+    if !resource.doc_valid? && qc.save
       redirect_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.approved")
     else
       redirect_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
     end
   end
 
-  member_action :reject, method: :put do
-    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_invalid])
-      redirect_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.rejected")
-    else
-      redirect_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_rejected")
-    end
-  end
-
   actions :all, except: [:destroy, :new]
-  permit_params :name, :status, :expire_date, :start_date,
-    :attachment, :uploaded_by
+  permit_params :name, :status, :expire_date, :start_date, :attachment, :uploaded_by
 
   csv do
     column :status
@@ -98,7 +90,13 @@ ActiveAdmin.register OperatorDocumentAnnex do
       column(I18n.t("active_admin.approve")) { |annex| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put }
       column(I18n.t("active_admin.reject")) { |annex| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), method: :put }
     end
-    actions
+    actions defaults: false, name: I18n.t("active_admin.shared.actions") do |annex|
+      unless annex.doc_valid?
+        approve_confirmation = I18n.t("active_admin.operator_document_annexes_page.approve_confirmation", name: annex.name)
+        item I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put, data: {confirm: approve_confirmation}
+      end
+      item I18n.t("active_admin.reject"), new_admin_quality_control_path(quality_control: {reviewable_id: annex.id, reviewable_type: "OperatorDocumentAnnex"}) unless annex.doc_invalid?
+    end
   end
 
   filter :operator_document_required_operator_document_name_or_operator_document_histories_required_operator_document_name_eq,
@@ -136,61 +134,25 @@ ActiveAdmin.register OperatorDocumentAnnex do
         input_html: {disabled: true}
       f.input :uploaded_by
       f.input :name
-      f.input :status, include_blank: false
+      f.input :status, include_blank: false, input_html: {disabled: true}
       f.input :attachment, hint: preview_file_tag(f.object.attachment)
-      f.input :expire_date, as: :date_picker
-      f.input :start_date, as: :date_picker
     end
-    f.actions
   end
 
   show do
-    attributes_table do
-      row :name
-      tag_row :status
-      row :required_operator_document do
-        resource.operator_document.required_operator_document if resource.operator_document.present? &&
-          resource.operator_document.required_operator_document.present?
-      end
-      row :operator do
-        resource.operator_document.presence&.operator
-      end
-      row :operator_document do |a|
-        if a.annex_document.present?
-          doc = OperatorDocument.unscoped.find(a.annex_document.documentable_id)
-          link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
+    render partial: "attributes_table", locals: {annex: resource}
+
+    panel "Quality Controls" do
+      if resource.quality_controls.any?
+        table_for resource.quality_controls.order(created_at: :desc) do
+          column :reviewer
+          column :passed?
+          column :comment
+          column :performed_at, &:created_at
         end
+      else
+        "No quality controls performed for this annex"
       end
-      row :operator_document_history do |a|
-        table_for a.operator_document_histories.order(operator_document_updated_at: :desc) do
-          column :id do |history|
-            link_to history.id, admin_operator_document_history_path(history)
-          end
-          tag_column :status
-          column :operator_document_updated_at
-          column :attachment do |history|
-            if history.document_file&.attachment.present?
-              link_to history.document_file.attachment.identifier, history.document_file.attachment.url, target: "_blank", rel: "noopener"
-            elsif history.reason.present?
-              history.reason
-            end
-          end
-        end
-      end
-      row :uploaded_by
-      row :user
-      row :attachment do |o|
-        if o.attachment&.identifier.present?
-          name = o.attachment.identifier
-          name += " (Missing file)" if o.attachment.blank?
-          link_to name, o.attachment.url
-        end
-      end
-      row :start_date
-      row :expire_date
-      row :created_at
-      row :updated_at
-      row :deleted_at
     end
   end
 end

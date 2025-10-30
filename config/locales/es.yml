@@ -408,6 +408,7 @@ es:
       operator_document: 'Documento del Operador'
       orphaned: 'Huérfano'
       details: 'Detalles de Anexo de Documento del Operador'
+      approve_confirmation: '¿Estás seguro de que quieres aprobar el anexo %{name}?'
     observations_page:
       not_modified: 'Observación NO modificada'
       moved_ready: 'Observación movida a Listo para Publicación'
@@ -446,6 +447,7 @@ es:
       responsible_for_countries_hint: Los administradores responsables de países recibirán notificaciones relacionadas con el sector privado en estos países.
     quality_control_page:
       performed_qc: 'Control de Calidad realizado con decisión: %{decision}'
+      title: "Control de Calidad para %{reviewable_type} #%{reviewable_id}"
       reviewable_not_in_qc: "La entidad revisada no está en estado QC en progreso"
     powered_by: "Admin Backoffice"
     delete_model: "Eliminar %{model}"
