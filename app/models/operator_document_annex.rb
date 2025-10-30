@@ -31,6 +31,8 @@ class OperatorDocumentAnnex < ApplicationRecord
   has_many :annex_documents_history, -> { where(documentable_type: "OperatorDocumentHistory") },
     class_name: "AnnexDocument", inverse_of: :operator_document_annex
   has_many :operator_document_histories, through: :annex_documents_history, source: :documentable, source_type: "OperatorDocumentHistory"
+  has_many :quality_controls, as: :reviewable, dependent: :destroy
+  has_one :latest_quality_control, -> { order(created_at: :desc) }, inverse_of: :reviewable, class_name: "QualityControl"
 
   skip_callback :commit, :after, :remove_attachment!
   after_real_destroy :remove_attachment!
@@ -77,6 +79,14 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   def expire_document_annex
     update(status: OperatorDocumentAnnex.statuses[:doc_expired])
+  end
+
+  def qc_available_decisions
+    [[I18n.t("active_admin.approve"), true], [I18n.t("active_admin.reject"), false]]
+  end
+
+  def update_qc_status!(qc_passed:)
+    update!(status: qc_passed ? :doc_valid : :doc_invalid)
   end
 
   private
