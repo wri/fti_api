@@ -102,8 +102,12 @@ ActiveAdmin.register OperatorDocumentAnnex do
     column :attachment do |o|
       link_to o.attachment&.identifier, o.attachment&.url
     end
-    column(I18n.t("active_admin.approve")) { |annex| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put }
-    column(I18n.t("active_admin.reject")) { |annex| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), method: :put }
+    if params[:scope] == "archived"
+      column :deleted_at
+    else
+      column(I18n.t("active_admin.approve")) { |annex| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put }
+      column(I18n.t("active_admin.reject")) { |annex| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), method: :put }
+    end
     actions
   end
 
