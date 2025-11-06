@@ -168,6 +168,7 @@ class OperatorDocument < ApplicationRecord
       deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, response_date: nil,
       source: nil, source_info: nil, document_file_id: nil
     )
+    self.annex_documents = []
   end
 
   private
@@ -201,14 +202,11 @@ class OperatorDocument < ApplicationRecord
   end
 
   def set_status
-    status =
-      if document_file.present? || reason.present?
-        :doc_pending
-      else
-        :doc_not_provided
-      end
-
-    self.status = OperatorDocument.statuses[status]
+    self.status = if document_file.present? || reason.present?
+      :doc_pending
+    else
+      :doc_not_provided
+    end
   end
 
   def delete_previous_pending_document
