@@ -53,7 +53,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
           let(:is_public) { true }
 
           before do
-            allow(operator).to receive(:publication_authorization_signed?).and_return(true)
+            operator.update!(approved: true)
           end
 
           it "returns false" do
@@ -66,6 +66,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
           let(:is_public) { false }
 
           before do
+            operator.update!(approved: false)
             allow(operator).to receive(:publication_authorization_signed?).and_return(false)
           end
 
@@ -83,7 +84,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
           let(:is_public) { true }
 
           before do
-            allow(operator).to receive(:publication_authorization_signed?).and_return(true)
+            operator.update!(approved: true)
           end
 
           it "returns false" do
@@ -96,7 +97,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
           let(:is_public) { false }
 
           before do
-            allow(operator).to receive(:publication_authorization_signed?).and_return(false)
+            operator.update!(approved: false)
           end
 
           it "returns true" do
