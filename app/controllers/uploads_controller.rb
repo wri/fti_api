@@ -6,8 +6,7 @@ class UploadsController < ApplicationController
   rescue_from CanCan::AccessDenied, with: :log_and_raise_not_found_exception
 
   MODELS_OVERRIDES = {
-    "operator_document_file" => "document_file",
-    "documents" => "uploaded_document"
+    "operator_document_file" => "document_file"
   }.freeze
 
   def download
