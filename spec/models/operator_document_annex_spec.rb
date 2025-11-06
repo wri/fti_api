@@ -25,6 +25,30 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
     expect(operator_document_annex).to be_valid
   end
 
+  describe "deletion" do
+    let!(:annex) { create(:operator_document_annex) }
+
+    context "when soft deleting record" do
+      it "does not delete the original file" do
+        original_file_path = annex.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
+        annex.destroy!
+        expect(annex.deleted?).to be true
+        expect(File.exist?(original_file_path)).to be true
+        expect(annex.attachment.file.file).to eq(original_file_path)
+      end
+    end
+
+    context "when hard deleting record" do
+      it "deletes the original file" do
+        original_file_path = annex.attachment.file.file
+        expect(File.exist?(original_file_path)).to be true
+        annex.really_destroy!
+        expect(File.exist?(original_file_path)).to be false
+      end
+    end
+  end
+
   describe "Instance methods" do
     describe "#expire_document_annex" do
       it "set status to doc_expired" do

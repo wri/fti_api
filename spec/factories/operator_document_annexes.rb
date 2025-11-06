@@ -21,6 +21,7 @@ FactoryBot.define do
     start_date { Date.yesterday }
     expire_date { Date.tomorrow }
     name { "annex name" }
+    attachment { Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "doc.pdf")) }
 
     transient do
       force_status { nil }
