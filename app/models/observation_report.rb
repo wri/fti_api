@@ -20,7 +20,7 @@ class ObservationReport < ApplicationRecord
 
   acts_as_paranoid
 
-  enum :mission_type, {mandated: 0, semi_mandated: 1, external: 2}, prefix: true, scopes: false
+  enum :mission_type, {mandated: 0, semi_mandated: 1, external: 2}, prefix: true, scopes: false, validate: true
   ransacker :mission_type, formatter: proc { |v| mission_types[v] }
 
   normalizes :title, with: -> { it.strip }
