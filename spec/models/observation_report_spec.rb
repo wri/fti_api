@@ -32,6 +32,12 @@ RSpec.describe ObservationReport, type: :model do
       expect(subject.errors.messages[:attachment]).to include("can't be blank")
     end
 
+    it "validates mission_type inclusion" do
+      subject.mission_type = nil
+      expect(subject).not_to be_valid
+      expect(subject.errors.messages[:mission_type]).to include("is not included in the list")
+    end
+
     it "accepts only pdf files" do
       subject.attachment = Rack::Test::UploadedFile.new(File.join(Rails.root, "spec", "support", "files", "image.png"))
       expect(subject).not_to be_valid
