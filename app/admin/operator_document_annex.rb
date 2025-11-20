@@ -135,7 +135,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
       f.input :uploaded_by
       f.input :name
       f.input :status, include_blank: false
-      f.input :attachment
+      f.input :attachment, hint: preview_file_tag(f.object.attachment)
       f.input :expire_date, as: :date_picker
       f.input :start_date, as: :date_picker
     end

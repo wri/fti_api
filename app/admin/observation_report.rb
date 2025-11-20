@@ -141,7 +141,7 @@ ActiveAdmin.register ObservationReport do
       f.input :title
       f.input :mission_type, as: :select, collection: ObservationReport.translated_mission_types
       f.input :publication_date, as: :date_time_picker, picker_options: {timepicker: false, format: "Y-m-d"}
-      f.input :attachment, as: :file, hint: f.object&.attachment&.file&.filename, input_html: {accept: "application/pdf"}
+      f.input :attachment, as: :file, hint: preview_file_tag(f.object.attachment), input_html: {accept: "application/pdf"}
       f.input :observers
     end
 
