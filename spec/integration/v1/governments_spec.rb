@@ -50,7 +50,7 @@ module V1
 
         before do
           create_list(:government, 3, country: country) # those should not be returned
-          create(:gov_observation, observers: [observer], governments: [gov])
+          create(:gov_observation, observation_report: build(:observation_report, observers: [observer]), governments: [gov])
         end
 
         it "returns only governments linked with observer observations" do
