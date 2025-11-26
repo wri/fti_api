@@ -9,15 +9,6 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   active_admin_paranoia
 
-  # To include the deleted operator document annexes
-  scope_to do
-    Class.new do
-      def self.operator_document_annexes
-        OperatorDocumentAnnex.unscoped.distinct
-      end
-    end
-  end
-
   controller do
     def scoped_collection
       end_of_association_chain.includes([:user, annex_documents: [documentable: [:operator, required_operator_document: :translations]]])
@@ -45,11 +36,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
     :attachment, :uploaded_by
 
   csv do
-    column I18n.t("active_admin.required_operator_document_page.exists") do |annex|
-      annex.deleted_at.nil?
-    end
     column :status
-
     column I18n.t("active_admin.operator_page.documents") do |annex|
       documents = []
       annex.annex_documents.each do |ad|
@@ -60,7 +47,6 @@ ActiveAdmin.register OperatorDocumentAnnex do
     column I18n.t("active_admin.dashboard_page.columns.operator") do |annex|
       annex.annex_documents.first&.documentable&.operator&.name
     end
-
     column I18n.t("activerecord.models.user") do |annex|
       annex.user&.name
     end
@@ -71,9 +57,6 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   index do
-    bool_column I18n.t("active_admin.required_operator_document_page.exists") do |od|
-      od.deleted_at.nil?
-    end
     tag_column :status
     column I18n.t("active_admin.operator_page.documents") do |od|
       next if od.annex_document.nil?
@@ -93,17 +76,24 @@ ActiveAdmin.register OperatorDocumentAnnex do
       fmu = doc.documentable_type.constantize.unscoped.find(doc.documentable_id).fmu
       link_to(fmu.name, admin_fmu_path(fmu.id)) if fmu
     end
-
     column :user, sortable: "users.name"
     column :expire_date
     column :start_date
     column :created_at
     column :uploaded_by
     column :attachment do |o|
-      link_to o.attachment&.identifier, o.attachment&.url
+      if o.attachment&.identifier.present?
+        name = o.attachment.identifier
+        name += " (Missing file)" if o.attachment.blank?
+        link_to name, o.attachment.url
+      end
     end
-    column(I18n.t("active_admin.approve")) { |annex| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put }
-    column(I18n.t("active_admin.reject")) { |annex| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), method: :put }
+    if params[:scope] == "archived"
+      column :deleted_at
+    else
+      column(I18n.t("active_admin.approve")) { |annex| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put }
+      column(I18n.t("active_admin.reject")) { |annex| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), method: :put }
+    end
     actions
   end
 

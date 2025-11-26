@@ -32,6 +32,9 @@ class OperatorDocumentAnnex < ApplicationRecord
     class_name: "AnnexDocument", inverse_of: :operator_document_annex
   has_many :operator_document_histories, through: :annex_documents_history, source: :documentable, source_type: "OperatorDocumentHistory"
 
+  skip_callback :commit, :after, :remove_attachment!
+  after_real_destroy :remove_attachment!
+
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
