@@ -58,7 +58,8 @@ class OperatorDocumentHistory < ApplicationRecord
 
   def needs_authorization_before_downloading?
     return true if publication_authorization?
-    return false if (doc_valid? || doc_expired?) && (operator.publication_authorization_signed? || public?)
+    # doc_not_required? is included as that document could have annexes and those should be downloadable without authorization
+    return false if (doc_valid? || doc_expired? || doc_not_required?) && (operator.publication_authorization_signed? || public?)
 
     true
   end

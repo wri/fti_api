@@ -305,5 +305,16 @@ RSpec.describe UploadsController, type: :request do
         expect(response).to have_http_status(:not_found)
       end
     end
+
+    context "Redirects handling" do
+      it "redirects old /uploads/documents path to new /uploads/uploaded_document/file path" do
+        uploaded_document = create(:uploaded_document)
+
+        get "/uploads/documents/#{uploaded_document.id}/#{uploaded_document.file.identifier}"
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(uploaded_document.file.url)
+      end
+    end
   end
 end

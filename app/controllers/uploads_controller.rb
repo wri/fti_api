@@ -6,11 +6,17 @@ class UploadsController < ApplicationController
   rescue_from CanCan::AccessDenied, with: :log_and_raise_not_found_exception
 
   MODELS_OVERRIDES = {
-    "operator_document_file" => "document_file",
-    "documents" => "uploaded_document"
+    "operator_document_file" => "document_file"
+  }.freeze
+
+  # after changes in uploaders structure we need to redirect some old paths to new ones
+  REDIRECTS = {
+    "/uploads/documents/" => "/uploads/uploaded_document/file/"
   }.freeze
 
   def download
+    return redirect_to redirect_path if needs_redirect?
+
     sanitize_filepath
     parse_upload_path
     ensure_valid_db_record
@@ -20,6 +26,18 @@ class UploadsController < ApplicationController
   end
 
   private
+
+  def needs_redirect?
+    REDIRECTS.keys.any? { |path_fragment| request.url.include?(path_fragment) }
+  end
+
+  def redirect_path
+    request.url.dup.tap do |path|
+      REDIRECTS.each do |from, to|
+        path.gsub!(from, to)
+      end
+    end
+  end
 
   def sanitize_filepath
     filepath = "#{params[:rest]}.#{params[:format]}"
