@@ -386,6 +386,7 @@ en:
       not_rejected: 'Annex could not be rejected'
       operator_document: 'Operator Document'
       orphaned: 'Orphaned'
+      history_annexes: 'History Annexes'
       details: 'Operator Document Annex Details'
     observations_page:
       not_modified: 'Observation NOT modified'
