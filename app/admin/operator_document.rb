@@ -267,7 +267,7 @@ ActiveAdmin.register OperatorDocument do
       f.input :admin_comment
       f.input :public
       f.inputs for: [:document_file_attributes, f.object.document_file || DocumentFile.new] do |df|
-        df.input :attachment
+        df.input :attachment, hint: preview_file_tag(df.object.attachment)
       end
       f.input :reason
       f.input :response_date, as: :date_picker

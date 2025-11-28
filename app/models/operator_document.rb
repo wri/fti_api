@@ -57,6 +57,7 @@ class OperatorDocument < ApplicationRecord
 
   after_destroy :create_history
   after_destroy :recalculate_scores
+  after_save :disconnect_annexes, if: :new_document_uploaded
   after_save :create_history, if: :saved_changes?
   after_save :recalculate_scores, if: :saved_change_to_score_related_attributes?
   after_save :remove_notifications, if: :saved_change_to_expire_date?
@@ -168,9 +169,14 @@ class OperatorDocument < ApplicationRecord
       deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, response_date: nil,
       source: nil, source_info: nil, document_file_id: nil
     )
+    disconnect_annexes
   end
 
   private
+
+  def disconnect_annexes
+    self.annex_documents = []
+  end
 
   def recalculate_scores
     return if skip_score_recalculation
@@ -201,14 +207,11 @@ class OperatorDocument < ApplicationRecord
   end
 
   def set_status
-    status =
-      if document_file.present? || reason.present?
-        :doc_pending
-      else
-        :doc_not_provided
-      end
-
-    self.status = OperatorDocument.statuses[status]
+    self.status = if document_file.present? || reason.present?
+      :doc_pending
+    else
+      :doc_not_provided
+    end
   end
 
   def delete_previous_pending_document

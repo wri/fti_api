@@ -3,6 +3,6 @@ module FileHelper
     return if file.blank?
     return unless file.exists?
 
-    link_to "Uploaded file: #{file.identifier}", file.url, options.merge(target: "_blank")
+    link_to I18n.t("active_admin.shared.uploaded_file", file_name: file.identifier), file.url, options.merge(target: "_blank")
   end
 end

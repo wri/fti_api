@@ -1509,7 +1509,7 @@ fr:
     title: 'Titre'
     continue: 'Continuez'
     finish: 'Finir'
-
+    uploaded_file: 'Fichier téléchargé: %{file_name}'
   users:
     user: 'Utilisateur'
     users: 'Utilisateur'

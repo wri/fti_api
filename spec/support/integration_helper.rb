@@ -180,4 +180,8 @@ module IntegrationHelper
   def try_to_call(callable_or_not)
     callable_or_not.respond_to?(:call) ? instance_exec(&callable_or_not) : callable_or_not
   end
+
+  def base64_file_data(filepath)
+    "data:application/pdf;base64,#{Base64.encode64(File.read(filepath))}"
+  end
 end

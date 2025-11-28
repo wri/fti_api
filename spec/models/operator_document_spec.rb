@@ -297,11 +297,12 @@ RSpec.describe OperatorDocument, type: :model do
         operator_document = create(
           :operator_document_country,
           operator: @operator,
-          status: :doc_valid,
           required_operator_document: @required_operator_document
         )
+        create(:operator_document_annex, operator_document: operator_document)
 
         expect(OperatorDocument.count).to eql 1
+        expect(operator_document.annex_documents.count).to eql 1
 
         expect {
           operator_document.destroy
@@ -309,9 +310,16 @@ RSpec.describe OperatorDocument, type: :model do
 
         operator_document.reload
 
+        history_pending = OperatorDocumentHistory.find_by(operator_document_id: operator_document.id, status: "doc_pending")
+        history_not_provided = OperatorDocumentHistory.find_by(operator_document_id: operator_document.id, status: "doc_not_provided")
+
+        expect(OperatorDocumentHistory.count).to eql 2
         expect(OperatorDocument.count).to eql 1
         expect(operator_document.deleted?).to be(false)
         expect(operator_document.status).to eq("doc_not_provided")
+        expect(operator_document.annex_documents.count).to eql 0
+        expect(history_pending.annex_documents.count).to eql 1
+        expect(history_not_provided.annex_documents.count).to eql 0
       end
     end
   end

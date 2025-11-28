@@ -58,6 +58,7 @@ module V1
     describe "GET OperatorDocumentAnnexes" do
       let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
       let!(:valid_annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_valid) }
+      let!(:history_annex) { create(:operator_document_annex, force_status: :doc_valid, operator_document_histories: [create(:operator_document_history, operator: operator_user.operator)]) }
       let!(:invalid_annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_invalid) }
       let!(:other_invalid_annex) { create(:operator_document_annex, force_status: :doc_invalid) }
 
@@ -65,10 +66,11 @@ module V1
         it "returns all annexes" do
           get("/operator-document-annexes", headers: admin_headers)
 
-          expect(parsed_data.count).to eql(3)
+          expect(parsed_data.count).to eql(4)
           valid_annex_data = parsed_data.find { |d| d[:id] == valid_annex.id.to_s }[:attributes]
           invalid_annex_data = parsed_data.find { |d| d[:id] == invalid_annex.id.to_s }[:attributes]
           other_annex_data = parsed_data.find { |d| d[:id] == other_invalid_annex.id.to_s }[:attributes]
+          history_annex_data = parsed_data.find { |d| d[:id] == history_annex.id.to_s }[:attributes]
 
           expect(valid_annex_data[:status]).to eq("doc_valid")
           expect(valid_annex_data[:attachment]).to eq({url: valid_annex.attachment.url})
@@ -76,6 +78,8 @@ module V1
           expect(invalid_annex_data[:attachment]).to eq({url: invalid_annex.attachment.url})
           expect(other_annex_data[:status]).to eq("doc_invalid")
           expect(other_annex_data[:attachment]).to eq({url: other_invalid_annex.attachment.url})
+          expect(history_annex_data[:attachment]).to eq({url: history_annex.attachment.url})
+          expect(history_annex_data[:status]).to eq("doc_valid")
         end
       end
 
@@ -83,14 +87,17 @@ module V1
         it "returns all operator annexes" do
           get("/operator-document-annexes", headers: operator_user_headers)
 
-          expect(parsed_data.count).to eql(2)
+          expect(parsed_data.count).to eql(3)
           valid_annex_data = parsed_data.find { |d| d[:id] == valid_annex.id.to_s }[:attributes]
           invalid_annex_data = parsed_data.find { |d| d[:id] == invalid_annex.id.to_s }[:attributes]
+          history_annex_data = parsed_data.find { |d| d[:id] == history_annex.id.to_s }[:attributes]
 
           expect(valid_annex_data[:status]).to eq("doc_valid")
           expect(valid_annex_data[:attachment]).to eq({url: valid_annex.attachment.url})
           expect(invalid_annex_data[:status]).to eq("doc_invalid")
           expect(invalid_annex_data[:attachment]).to eq({url: invalid_annex.attachment.url})
+          expect(history_annex_data[:attachment]).to eq({url: history_annex.attachment.url})
+          expect(history_annex_data[:status]).to eq("doc_valid")
         end
       end
 
@@ -98,13 +105,16 @@ module V1
         it "returns valid annexes" do
           get("/operator-document-annexes", headers: webuser_headers)
 
-          expect(parsed_data.count).to eql(1)
+          expect(parsed_data.count).to eql(2)
           valid_annex_data = parsed_data.find { |d| d[:id] == valid_annex.id.to_s }[:attributes]
           invalid_annex_data = parsed_data.find { |d| d[:id] == invalid_annex.id.to_s }
+          history_annex_data = parsed_data.find { |d| d[:id] == history_annex.id.to_s }[:attributes]
 
           expect(valid_annex_data[:status]).to eq("doc_valid")
           expect(valid_annex_data[:attachment]).to eq({url: valid_annex.attachment.url})
           expect(invalid_annex_data).to be_nil
+          expect(history_annex_data[:attachment]).to eq({url: history_annex.attachment.url})
+          expect(history_annex_data[:status]).to eq("doc_valid")
         end
       end
     end

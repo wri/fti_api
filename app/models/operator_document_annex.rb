@@ -45,8 +45,16 @@ class OperatorDocumentAnnex < ApplicationRecord
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
 
   scope :valid, -> { where(status: OperatorDocumentAnnex.statuses[:doc_valid]) }
-  scope :from_operator, ->(operator_id) { joins(:operator_document).where(operator_documents: {operator_id: operator_id}) }
+  scope :from_operator, ->(operator_ids) {
+    where(id: AnnexDocument.where(documentable: OperatorDocument.where(operator_id: operator_ids))
+      .or(AnnexDocument.where(documentable: OperatorDocumentHistory.where(operator_id: operator_ids)))
+      .select(:operator_document_annex_id))
+  }
   scope :orphaned, -> { where.not(id: AnnexDocument.select(:operator_document_annex_id)) }
+  scope :history_annexes, -> {
+    where(id: AnnexDocument.where(documentable_type: "OperatorDocumentHistory").select(:operator_document_annex_id))
+      .where.not(id: AnnexDocument.where(documentable_type: "OperatorDocument").select(:operator_document_annex_id))
+  }
 
   def needs_authorization_before_downloading?
     return false if (doc_valid? || doc_expired?) && any_operator_document_without_authorization?

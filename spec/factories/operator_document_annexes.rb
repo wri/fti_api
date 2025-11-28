@@ -27,19 +27,23 @@ FactoryBot.define do
       force_status { nil }
     end
 
-    after(:build) do |random_operator_document_annex|
-      if random_operator_document_annex.annex_document.nil? ||
-          random_operator_document_annex.annex_documents.none?
+    after(:build) do |annex|
+      if annex.annex_document.nil? && annex.annex_documents.none?
         od = FactoryBot.create :operator_document_country
         AnnexDocument.create documentable_id: od.id,
           documentable_type: "OperatorDocument",
-          operator_document_annex_id: random_operator_document_annex.id
+          operator_document_annex_id: annex.id
       end
-      random_operator_document_annex.user ||= FactoryBot.create :admin
+      annex.user ||= FactoryBot.create :admin
     end
 
     after(:create) do |doc, evaluator|
       doc.update(status: evaluator.force_status) if evaluator.force_status
+      # connect to latest history
+      if doc.operator_document.present?
+        odh = OperatorDocumentHistory.where(operator_document_id: doc.operator_document.id).order(operator_document_updated_at: :desc).first
+        doc.annex_documents_history << AnnexDocument.new(documentable: odh) if odh.present?
+      end
     end
   end
 end
