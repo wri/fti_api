@@ -8,7 +8,12 @@ module Versionable
       controller do
         def show
           model = resource.class.base_class
-          resource = current = model.includes(versions: :item).find(params[:id])
+          current = if model.respond_to?(:with_deleted)
+            model.includes(versions: :item).with_deleted.find(params[:id])
+          else
+            model.includes(versions: :item).find(params[:id])
+          end
+          resource = current
           @versions = resource.versions.where.not(event: "create")
           @create_version = resource.versions.where(event: "create").first
           begin
