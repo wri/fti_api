@@ -48,7 +48,7 @@ class UploadsController < ApplicationController
 
     @sanitized_filepath = full_path
     @relative_filepath = full_path.gsub(allowed_path + File::SEPARATOR, "")
-  rescue Errno::ENOENT
+  rescue Errno::ENOENT, Errno::ENOTDIR
     raise_not_found_exception
   end
 
