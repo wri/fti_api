@@ -16,14 +16,6 @@ GIT
       railties (>= 4.1)
 
 GIT
-  remote: https://github.com/tsubik/active_admin_paranoia.git
-  revision: cf5de101901e49eebf3ab76aae9e290d5e44f546
-  specs:
-    active_admin_paranoia (1.0.11)
-      paranoia (>= 1.0)
-      rails (>= 4.0)
-
-GIT
   remote: https://github.com/tsubik/activeadmin-globalize.git
   revision: 70b9d9768f0a4d6fc02b8ce69441418ba910aa91
   branch: custom
@@ -816,7 +808,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_admin_paranoia!
   active_admin_sidebar!
   active_skin
   activeadmin

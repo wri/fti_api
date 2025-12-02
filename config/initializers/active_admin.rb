@@ -358,6 +358,8 @@ end
 ActiveAdmin.before_load do |app|
   ActiveAdmin::Views::Pages::Show.prepend ActiveAdmin::PaperTrail::ShowPageExtension
   ActiveAdmin::ResourceDSL.include ActiveAdmin::DependentFiltersExtension
+  ActiveAdmin::DSL.include ActiveAdmin::Paranoia::DSLExtension
+  ActiveAdmin::Views::IndexAsTable::IndexTableFor.include ActiveAdmin::Paranoia::IndexTableForExtension
 end
 
 ActiveAdmin.after_load do |app|
