@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    if Rails.env.production? || Rails.env.staging?
-      origins(/\Ahttps:\/\/([a-z0-9-]+\.)*opentimberportal\.org\z/)
-    else
-      origins "*"
+if Rails.env.development? || Rails.env.e2e?
+  Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins(/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/)
+      resource "*", headers: :any, methods: %i[get post put patch delete options head]
     end
-    resource "*", headers: :any, methods: %i[get post put patch delete options head]
   end
 end
