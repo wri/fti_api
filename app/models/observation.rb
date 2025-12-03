@@ -172,6 +172,13 @@ class Observation < ApplicationRecord
 
   validates :validation_status, presence: true
 
+  with_options unless: -> { Created? || Rejected? } do
+    validates :subcategory, presence: true
+    validates :severity, presence: true
+    validates :observation_report, presence: true
+    validates :evidence_type, presence: true
+  end
+
   before_validation :assign_observers_from_report, if: :observation_report_changed?
   before_validation :nullify_evidence_on_report, if: -> { evidence_type != "Evidence presented in the report" }
 
