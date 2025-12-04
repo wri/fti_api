@@ -32,14 +32,9 @@ class Government < ApplicationRecord
   # TODO: change unique validation to not only on create, after cleaning up the data
   validates :government_entity, uniqueness: {case_sensitive: false}, on: :create
 
-  scope :by_entity_asc, -> {
-    with_translations(I18n.locale).order("government_translations.government_entity ASC")
-  }
-
+  scope :by_entity_asc, -> { with_translations(I18n.locale).order("government_translations.government_entity ASC") }
   scope :filter_by_country, ->(country_id) { where(country_id: country_id) }
   scope :active, -> { where(is_active: true) }
-
-  default_scope { includes(:translations) }
 
   alias_method :to_s, :government_entity
 

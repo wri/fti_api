@@ -27,8 +27,6 @@ class Severity < ApplicationRecord
   validates :level, uniqueness: {scope: :subcategory_id}
   validates :level, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 3}
 
-  default_scope { includes(:translations) }
-
   ransacker(:details) { Arel.sql("severity_translations.details") } # for nested_select in observation form
 
   def cache_key
