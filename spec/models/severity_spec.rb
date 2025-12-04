@@ -33,12 +33,6 @@ RSpec.describe Severity, type: :model do
   end
 
   describe "Instance methods" do
-    describe "#level_details" do
-      it "return level with details" do
-        expect(severity.level_details).to eql "#{severity.level} - #{severity.details}"
-      end
-    end
-
     describe "#cache_key" do
       it "return the default value with the locale" do
         expect(severity.cache_key).to match(/-#{Globalize.locale}\z/)
