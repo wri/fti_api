@@ -11,7 +11,7 @@ ActiveAdmin.register Country do
 
   controller do
     def scoped_collection
-      end_of_association_chain.with_translations
+      end_of_association_chain.with_translations(I18n.locale)
     end
   end
 
@@ -21,7 +21,7 @@ ActiveAdmin.register Country do
   filter :iso, as: :select
   filter :translations_name_cont, as: :select,
     label: -> { Country.human_attribute_name(:name) },
-    collection: -> { Country.order(:name).pluck(:name) }
+    collection: -> { Country.by_name_asc.pluck(:name) }
   filter :region_iso, as: :select
   filter :region_name
   filter :is_active

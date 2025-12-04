@@ -123,7 +123,7 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   filter :country,
     as: :select,
-    collection: -> { Country.joins(:operators).with_translations(I18n.locale).order("country_translations.name") }
+    collection: -> { Country.joins(:operators).with_translations(I18n.locale).by_name_asc.distinct }
   filter :id,
     as: :select, label: -> { Operator.human_attribute_name(:name) },
     collection: -> { Operator.order(:name).pluck(:name, :id) }

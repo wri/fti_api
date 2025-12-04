@@ -54,7 +54,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
   filter :countries,
     as: :select,
     label: I18n.t("activerecord.models.country.one"),
-    collection: -> { Country.joins(:observers).with_translations(I18n.locale).order("country_translations.name").distinct }
+    collection: -> { Country.joins(:observers).with_translations(I18n.locale).by_name_asc.distinct }
   filter :name_eq,
     as: :select,
     label: -> { Observer.human_attribute_name(:name) },
@@ -103,7 +103,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
     f.inputs I18n.t("active_admin.shared.monitor_details") do
       f.input :name
       f.input :is_active
-      f.input :countries, collection: Country.with_translations(I18n.locale).order("country_translations.name asc")
+      f.input :countries, collection: Country.with_translations(I18n.locale).by_name_asc
       f.input :observer_type, as: :select, collection: %w[Mandated SemiMandated External Government]
       f.input :organization_type, as: :select, collection: ["NGO", "Academic", "Research Institute", "Private Company", "Other"]
     end
