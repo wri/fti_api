@@ -60,7 +60,7 @@ class Country < ApplicationRecord
   end
 
   def forest_types
-    fmus.map { |fmu| fmu.forest_type }.compact.uniq
+    fmus.select(:forest_type).distinct.pluck(:forest_type)
   end
 
   private
