@@ -12,7 +12,7 @@ ActiveAdmin.register User do
     responsible_for_country_ids: [],
     user_permission_attributes: [:id, :user_role]
 
-  filter :country, as: :select, collection: -> { Country.joins(:users).by_name_asc }
+  filter :country, as: :select, collection: -> { Country.joins(:users).by_name_asc.distinct }
   filter :operator
   filter :observer
   filter :user_permission_user_role_eq,

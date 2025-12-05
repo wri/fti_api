@@ -54,7 +54,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
   filter :countries,
     as: :select,
     label: I18n.t("activerecord.models.country.one"),
-    collection: -> { Country.joins(:observers).with_translations(I18n.locale).by_name_asc.distinct }
+    collection: -> { Country.joins(:observers).by_name_asc.distinct }
   filter :name_eq,
     as: :select,
     label: -> { Observer.human_attribute_name(:name) },

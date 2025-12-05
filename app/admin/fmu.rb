@@ -53,7 +53,7 @@ ActiveAdmin.register Fmu do
     fmu_operator_attributes: [:id, :operator_id, :start_date, :end_date]
 
   filter :id, as: :select
-  filter :country, as: :select, label: proc { I18n.t("activerecord.models.country.one") }, collection: -> { Country.joins(:fmus).by_name_asc }
+  filter :country, as: :select, label: proc { I18n.t("activerecord.models.country.one") }, collection: -> { Country.joins(:fmus).by_name_asc.distinct }
   filter :operator_in_all, as: :select, label: proc { Fmu.human_attribute_name(:operator) }, collection: -> { Operator.order(:name) }
   filter :name_cont,
     as: :select, label: proc { Fmu.human_attribute_name(:name) },

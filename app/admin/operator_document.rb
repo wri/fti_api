@@ -221,7 +221,7 @@ ActiveAdmin.register OperatorDocument do
   filter :required_operator_document_country_id,
     label: proc { I18n.t("activerecord.models.country.one") },
     as: :select,
-    collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.select(:country_id)) }
+    collection: -> { Country.joins(:required_operator_documents).by_name_asc.distinct }
   filter :required_operator_document,
     collection: -> { RequiredOperatorDocument.with_generic.order(:country_id, :name).map { |r| [r.name_with_country, r.id] } }
   filter :operator, as: :select, collection: -> { Operator.by_name_asc }
