@@ -14,9 +14,6 @@ ActiveAdmin.register RequiredOperatorDocument do
     translations_attributes: [:id, :locale, :explanation]
 
   csv do
-    column I18n.t("active_admin.required_operator_document_page.exists") do |rod|
-      rod.deleted_at.nil?
-    end
     column I18n.t("active_admin.required_operator_document_page.publication_authorization") do |rod|
       rod.contract_signature
     end
@@ -34,9 +31,6 @@ ActiveAdmin.register RequiredOperatorDocument do
   end
 
   index do
-    bool_column :exists do |rod|
-      rod.deleted_at.nil?
-    end
     column I18n.t("active_admin.required_operator_document_page.publication_authorization"), :contract_signature
     column :required_operator_document_group
     column :country, sortable: "country_translations.name"

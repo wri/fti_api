@@ -151,9 +151,6 @@ ActiveAdmin.register OperatorDocument do
 
   index do
     selectable_column
-    bool_column I18n.t("active_admin.required_operator_document_page.exists") do |od|
-      od.deleted_at.nil? && od.required_operator_document.deleted_at.nil?
-    end
     column :public
     tag_column :status
     column :id
