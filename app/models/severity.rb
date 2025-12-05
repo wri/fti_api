@@ -23,15 +23,9 @@ class Severity < ApplicationRecord
   belongs_to :subcategory, inverse_of: :severities
   has_many :observations, inverse_of: :severity
 
-  def level_details
-    "#{level} - #{details}"
-  end
-
   validates :level, presence: true
   validates :level, uniqueness: {scope: :subcategory_id}
   validates :level, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 3}
-
-  default_scope { includes(:translations) }
 
   ransacker(:details) { Arel.sql("severity_translations.details") } # for nested_select in observation form
 

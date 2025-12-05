@@ -30,9 +30,8 @@ class Law < ApplicationRecord
 
   scope :by_country_subcategory, ->(observation) { where(country_id: observation.country_id, subcategory_id: observation.subcategory_id) }
   scope :with_country_subcategory, -> {
-    includes(country: :translations)
-      .includes(subcategory: :translations)
-      .where(country_translations: {locale: I18n.locale})
-      .where(subcategory_translations: {locale: I18n.locale}).order("country_translations.name, subcategory_translations.name")
+    includes(country: :translations, subcategory: :translations)
+      .where(country_translations: {locale: I18n.locale}, subcategory_translations: {locale: I18n.locale})
+      .order("country_translations.name, subcategory_translations.name")
   }
 end

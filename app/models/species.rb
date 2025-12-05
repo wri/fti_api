@@ -32,8 +32,6 @@ class Species < ApplicationRecord
 
   scope :by_name_asc, -> { order("species.name ASC") }
 
-  default_scope { includes(:translations) }
-
   def cache_key
     super + "-" + Globalize.locale.to_s
   end

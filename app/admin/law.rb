@@ -21,10 +21,10 @@ ActiveAdmin.register Law do
 
   filter :country,
     as: :select,
-    collection: -> { Country.joins(:laws).with_translations(I18n.locale).order("country_translations.name") }
+    collection: -> { Country.joins(:laws).with_translations(I18n.locale).by_name_asc.distinct }
   filter :subcategory,
     as: :select,
-    collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).order("subcategory_translations.name") }
+    collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).by_name_asc.distinct }
   filter :written_infraction_cont, label: proc { Law.human_attribute_name(:written_infraction) }
   filter :infraction_cont, label: proc { Law.human_attribute_name(:infraction) }
   filter :sanctions_cont, label: proc { Law.human_attribute_name(:sanctions) }

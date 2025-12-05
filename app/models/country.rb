@@ -49,27 +49,18 @@ class Country < ApplicationRecord
 
   before_save :set_active
 
-  scope :by_name_asc, -> { with_translations(I18n.locale).order("country_translations.name ASC") }
-
-  scope :with_observations, ->(scope = Observation.all) {
-    joins(:observations).merge(scope).where.not(observations: {id: nil}).distinct
-  }
+  scope :by_name_asc, -> { with_translations(I18n.locale).order(:name) }
+  scope :with_observations, ->(scope = Observation.all) { where(id: scope.select(:country_id)) }
   scope :with_at_least_one_report, -> { where(id: ObservationReport.joins(:observations).select("observations.country_id").distinct.select("observations.country_id")) }
-
   scope :by_status, ->(status) { where(is_active: status) }
-
   scope :active, -> { where(is_active: true) }
-
-  default_scope do
-    includes(:translations)
-  end
 
   def cache_key
     super + "-" + Globalize.locale.to_s
   end
 
   def forest_types
-    fmus.map { |fmu| fmu.forest_type }.compact.uniq
+    fmus.select(:forest_type).distinct.pluck(:forest_type)
   end
 
   private
