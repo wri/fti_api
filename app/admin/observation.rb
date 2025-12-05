@@ -37,14 +37,6 @@ ActiveAdmin.register Observation do
     end
   end
 
-  scope_to do
-    Class.new do
-      def self.observations
-        Observation.unscoped
-      end
-    end
-  end
-
   actions :all, except: [:new]
 
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
@@ -344,10 +336,12 @@ ActiveAdmin.register Observation do
     column :created_at
     column :updated_at
     column :deleted_at
-    column(I18n.t("active_admin.shared.actions")) do |observation|
-      if observation.responsible_for_qc2.include? current_user
-        a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC2"
-        a I18n.t("active_admin.shared.start_qc"), href: new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}) if observation.validation_status == "QC2 in progress"
+    unless params[:scope] == "archived"
+      column(I18n.t("active_admin.shared.actions")) do |observation|
+        if observation.responsible_for_qc2.include? current_user
+          a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC2"
+          a I18n.t("active_admin.shared.start_qc"), href: new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}) if observation.validation_status == "QC2 in progress"
+        end
       end
     end
     actions

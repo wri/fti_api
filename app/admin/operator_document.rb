@@ -9,14 +9,6 @@ ActiveAdmin.register OperatorDocument do
 
   active_admin_paranoia
 
-  scope_to do
-    Class.new do
-      def self.operator_documents
-        OperatorDocument.unscoped
-      end
-    end
-  end
-
   controller do
     def scoped_collection
       end_of_association_chain
@@ -217,10 +209,12 @@ ActiveAdmin.register OperatorDocument do
     column :admin_comment
     column :reason
     column :response_date
-    column(I18n.t("active_admin.shared.actions")) do |document|
-      a I18n.t("active_admin.shared.start_qc"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
-      a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put if document.doc_pending?
-      a I18n.t("active_admin.reject"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
+    unless params[:scope] == "archived"
+      column(I18n.t("active_admin.shared.actions")) do |document|
+        a I18n.t("active_admin.shared.start_qc"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
+        a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put if document.doc_pending?
+        a I18n.t("active_admin.reject"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
+      end
     end
     actions
   end
