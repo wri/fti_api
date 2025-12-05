@@ -39,7 +39,7 @@ ActiveAdmin.register Government do
     actions
   end
 
-  filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc }
+  filter :country, as: :select, collection: -> { Country.joins(:governments).by_name_asc.distinct }
   filter :translations_government_entity_cont,
     as: :select, label: -> { Government.human_attribute_name(:government_entity) },
     collection: -> { Government.by_entity_asc.distinct.pluck(:government_entity) }
