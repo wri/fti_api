@@ -153,7 +153,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
           resource.operator_document.required_operator_document.present?
       end
       row :operator do
-        resource.operator_document.operator if resource.operator_document.present?
+        resource.operator_document.presence&.operator
       end
       row :operator_document do |a|
         if a.annex_document.present?

@@ -29,7 +29,7 @@ module V1
       if params[:user][:permissions_request].present?
         permissions = params[:user][:permissions_request].downcase
         unless permissions.in?(User::PERMISSIONS)
-          render json: {messages: [{status: 422, title: "Not valid permissions_request. Valid permissions_request: #{User::PERMISSIONS}"}]}, status: :unprocessable_entity
+          render json: {messages: [{status: 422, title: "Not valid permissions_request. Valid permissions_request: #{User::PERMISSIONS}"}]}, status: :unprocessable_content
         end
       end
     end

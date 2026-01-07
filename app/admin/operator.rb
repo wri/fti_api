@@ -14,12 +14,12 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
-    redirect_back fallback_location: admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_activated")
+    redirect_back_or_to(admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_activated"))
   end
 
   member_action :deactivate, method: :put do
     resource.update(is_active: false)
-    redirect_back fallback_location: admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_deactivated")
+    redirect_back_or_to(admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_deactivated"))
   end
 
   config.clear_action_items!

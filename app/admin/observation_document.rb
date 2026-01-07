@@ -14,9 +14,9 @@ ActiveAdmin.register ObservationDocument, as: "Evidence" do
   member_action :really_destroy, method: :delete do
     if resource.deleted?
       resource.really_destroy!
-      redirect_back fallback_location: admin_evidences_path, notice: I18n.t("active_admin.evidence_page.evidence_removed")
+      redirect_back_or_to(admin_evidences_path, notice: I18n.t("active_admin.evidence_page.evidence_removed"))
     else
-      redirect_back fallback_location: admin_evidences_path, notice: I18n.t("active_admin.evidence_page.evidence_must_be_recycled")
+      redirect_back_or_to(admin_evidences_path, notice: I18n.t("active_admin.evidence_page.evidence_must_be_recycled"))
     end
   end
 
