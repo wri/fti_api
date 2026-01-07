@@ -141,5 +141,78 @@ module V1
         end
       end
     end
+
+    describe "Uploading new document" do
+      let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
+
+      describe "For operator user" do
+        it "Returns error object when validation fails" do
+          patch(
+            "/operator-document-fmus/#{operator_document.id}",
+            params: jsonapi_params("operator-document-fmus", operator_document.id, {"start-date": nil, "expire-date": nil}),
+            headers: operator_user_headers
+          )
+          expect(parsed_body).to eq(jsonapi_errors(422, 100, {"start-date": ["can't be blank"], "expire-date": ["can't be blank"]}))
+          expect(status).to eq(422)
+        end
+
+        it "Returns success object when document is uploaded" do
+          create(:operator_document_annex, operator_document: operator_document)
+          patch(
+            "/operator-document-fmus/#{operator_document.id}",
+            params: jsonapi_params(
+              "operator-document-fmus",
+              operator_document.id,
+              {
+                attachment: base64_file_data(Rails.root.join("spec", "support", "files", "doc.pdf")),
+                "start-date": "2025-12-01",
+                "expire-date": "2040-12-01"
+              }
+            ),
+            headers: operator_user_headers
+          )
+
+          expect(parsed_data[:id]).not_to be_empty
+          expect(parsed_attributes[:status]).to eq("doc_pending")
+          expect(parsed_attributes[:"start-date"]).to eq("2025-12-01")
+          expect(parsed_attributes[:"expire-date"]).to eq("2040-12-01")
+          expect(parsed_attributes[:"source-type"]).to eq("company")
+          expect(parsed_attributes[:"uploaded-by"]).to eq("operator")
+          expect(status).to eq(200)
+
+          # annexes should be cleared as new document uploaded
+          operator_document = OperatorDocument.find(parsed_data[:id])
+          expect(operator_document.annex_documents.count).to eq(0)
+        end
+
+        context "when trying to upload for another operator" do
+          let(:other_operator_document) { create(:operator_document_fmu) }
+
+          it "Does not allow to upload document for another operator" do
+            patch(
+              "/operator-document-fmus/#{other_operator_document.id}",
+              params: jsonapi_params("operator-document-fmus", other_operator_document.id, {}),
+              headers: operator_user_headers
+            )
+
+            expect(parsed_body).to eq(default_status_errors(401))
+            expect(status).to eq(401)
+          end
+        end
+      end
+
+      describe "For not operator user" do
+        it "Does not allow to upload document by not operator users" do
+          patch(
+            "/operator-document-fmus/#{operator_document.id}",
+            params: jsonapi_params("operator-document-fmus", operator_document.id, {}),
+            headers: user_headers
+          )
+
+          expect(parsed_body).to eq(default_status_errors(401))
+          expect(status).to eq(401)
+        end
+      end
+    end
   end
 end

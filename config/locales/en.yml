@@ -186,6 +186,7 @@ en:
       translate_from_hint: 'Select the language you want to translate from. If you leave it blank, no automatic translation will be done.'
       force_translations: 'Force translations from:'
       translating_entity: 'The entity is being translated. Please reload the page in a few minutes.'
+      uploaded_file: 'Uploaded file: %{file_name}'
     menu:
       dashboard:
         dashboard: 'Dashboard'
@@ -385,6 +386,7 @@ en:
       not_rejected: 'Annex could not be rejected'
       operator_document: 'Operator Document'
       orphaned: 'Orphaned'
+      history_annexes: 'History Annexes'
       details: 'Operator Document Annex Details'
     observations_page:
       not_modified: 'Observation NOT modified'
