@@ -12,7 +12,6 @@ end
 gem "bootsnap", require: false
 
 # Active admin
-gem "active_admin_paranoia", git: "https://github.com/tsubik/active_admin_paranoia.git"
 gem "active_admin_sidebar", git: "https://github.com/activeadmin-plugins/active_admin_sidebar.git"
 gem "activeadmin"
 gem "activeadmin-globalize", github: "tsubik/activeadmin-globalize", branch: "custom"
