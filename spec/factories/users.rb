@@ -61,7 +61,7 @@ FactoryBot.define do
     end
 
     factory :ngo_manager do
-      sequence(:email) { |n| "ngo#{n}@example.com" }
+      sequence(:email) { |n| "ngo_manager#{n}@example.com" }
 
       first_name { "Test" }
       last_name { "ngo manager" }

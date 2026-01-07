@@ -48,12 +48,13 @@ FactoryBot.define do
     subcategory
     observation_report
     law
-    user { build(:admin) }
+    user { build(:ngo_manager) }
     severity { build(:severity, subcategory: subcategory) }
     operator { create(:operator, country: country) }
     observation_type { "operator" }
     is_active { true }
     validation_status { "Published (no comments)" }
+    evidence_type { "No evidence" }
     is_physical_place { true }
     non_concession_activity { false }
     lng { 12.2222 }
@@ -67,19 +68,26 @@ FactoryBot.define do
       validation_status { "Created" }
     end
 
-    after(:create) do |doc, evaluator|
-      doc.update(validation_status: evaluator.force_status) if evaluator.force_status
+    after(:build) do |observation|
+      # TODO: maybe that should be in the model?
+      observation.observers = [observation.user.observer] if observation.observers.empty? || observation.observation_report.nil?
+    end
+
+    after(:create) do |observation, evaluator|
+      observation.update(validation_status: evaluator.force_status) if evaluator.force_status
     end
   end
 
   factory :gov_observation, class: "Observation" do
-    severity
     country
+    subcategory { build(:subcategory) }
+    severity { build(:severity, subcategory: subcategory) }
+    observation_report { build(:observation_report) }
     governments { build_list(:government, 2) }
-    observers { build_list(:observer, 1) }
     user { build(:admin) }
     observation_type { "government" }
     validation_status { "Published (no comments)" }
+    evidence_type { "No evidence" }
     is_active { true }
     publication_date { DateTime.now.yesterday.to_date }
   end
