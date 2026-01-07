@@ -51,7 +51,7 @@ ActiveAdmin.register Observation do
     if resource.update(user_type: :reviewer, validation_status: "QC2 in progress")
       redirect_to new_admin_quality_control_path(quality_control: {reviewable_id: resource.id, reviewable_type: "Observation"}), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
     else
-      redirect_to collection_path, notice: I18n.t("active_admin.observations_page.not_modified")
+      redirect_back_or_to collection_path, alert: I18n.t("active_admin.observations_page.not_modified")
     end
   end
 
