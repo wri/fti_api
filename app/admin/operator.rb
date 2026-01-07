@@ -147,21 +147,18 @@ ActiveAdmin.register Operator, as: "Producer" do
   end
 
   sidebar I18n.t("activerecord.models.observation.other"), only: :show do
-    # rubocop:disable Rails/OutputSafety
     get_observation_list = proc do |scope|
       parts = []
-      parts << scope.order(:id).collect do |observation|
+      observation_links = scope.order(:id).collect do |observation|
         link_to(observation.id, admin_observation_path(observation.id))
-      end.join(", ").html_safe
+      end
+      parts << safe_join(observation_links, ", ")
       parts << " "
       if scope.deleted.any?
-        parts << "("
-        parts << I18n.t("active_admin.shared.deleted")
-        parts << ": "
-        parts << scope.deleted.pluck(:id).join(", ").html_safe
-        parts << ")"
+        deleted_ids = scope.deleted.pluck(:id).join(", ")
+        parts << "(#{I18n.t("active_admin.shared.deleted")}: #{deleted_ids})"
       end
-      parts.join.html_safe
+      safe_join(parts)
     end
 
     div { get_observation_list.call resource.all_observations }
@@ -169,7 +166,6 @@ ActiveAdmin.register Operator, as: "Producer" do
       h6 I18n.t("active_admin.operator_page.marked_as_relevant"), class: "my-5px"
       div { get_observation_list.call resource.relevant_observations }
     end
-    # rubocop:enable Rails/OutputSafety
   end
 
   sidebar I18n.t("activerecord.models.sawmill"), only: :show do

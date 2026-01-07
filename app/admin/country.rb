@@ -69,10 +69,8 @@ ActiveAdmin.register Country do
       row :region_iso
       row :is_active
       row :responsible_admins
-      # rubocop:disable Rails/OutputSafety
-      row(:overview) { |c| c.overview&.html_safe }
-      row(:vpa_overview) { |c| c.vpa_overview&.html_safe }
-      # rubocop:enable Rails/OutputSafety
+      row(:overview) { |c| sanitize(c.overview) }
+      row(:vpa_overview) { |c| sanitize(c.vpa_overview) }
       row :created_at
       row :updated_at
     end

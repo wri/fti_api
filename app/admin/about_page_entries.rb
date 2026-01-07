@@ -30,11 +30,7 @@ ActiveAdmin.register AboutPageEntry do
     column :position
     column :title
     column :code
-    # rubocop:disable Rails/OutputSafety
-    column :body do |entry|
-      entry.body.html_safe
-    end
-    # rubocop:enable Rails/OutputSafety
+    column(:body) { |entry| sanitize(entry.body) }
     column :created_at
     column :updated_at
 
@@ -59,11 +55,7 @@ ActiveAdmin.register AboutPageEntry do
       row :position
       row :title
       row :code
-      # rubocop:disable Rails/OutputSafety
-      row :body do |entry|
-        entry.body.html_safe
-      end
-      # rubocop:enable Rails/OutputSafety
+      row(:body) { |entry| sanitize(entry.body) }
       row :created_at
       row :updated_at
     end
