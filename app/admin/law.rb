@@ -11,20 +11,15 @@ ActiveAdmin.register Law do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([[country: :translations],
-        [subcategory: :translations]])
+      end_of_association_chain.includes([[country: :translations], [subcategory: :translations]])
     end
   end
 
   permit_params :id, :subcategory_id, :infraction, :sanctions, :min_fine, :max_fine, :currency,
     :penal_servitude, :other_penalties, :apv, :written_infraction, :country_id
 
-  filter :country,
-    as: :select,
-    collection: -> { Country.joins(:laws).with_translations(I18n.locale).by_name_asc.distinct }
-  filter :subcategory,
-    as: :select,
-    collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).by_name_asc.distinct }
+  filter :country, as: :select, collection: -> { Country.joins(:laws).with_translations(I18n.locale).by_name_asc.distinct }
+  filter :subcategory, as: :select, collection: -> { Subcategory.joins(:laws).with_translations(I18n.locale).by_name_asc.distinct }
   filter :written_infraction_cont, label: proc { Law.human_attribute_name(:written_infraction) }
   filter :infraction_cont, label: proc { Law.human_attribute_name(:infraction) }
   filter :sanctions_cont, label: proc { Law.human_attribute_name(:sanctions) }
