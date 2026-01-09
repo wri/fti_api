@@ -4,7 +4,7 @@ Dotenv.load
 account_id = ENV["HEALTHCHECKS_ACCOUNT_ID"]
 env = ENV["RAILS_ENV"]
 
-abort "HEALTHCHECKS_ACCOUNT_ID is not set" unless account_id
+raise "HEALTHCHECKS_ACCOUNT_ID is not set" unless account_id
 
 unless ENV["SKIP_CRON"] == "true"
   nvm_exec = "NODE_VERSION=default ~/.nvm/nvm-exec"

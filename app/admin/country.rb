@@ -11,7 +11,7 @@ ActiveAdmin.register Country do
 
   controller do
     def scoped_collection
-      end_of_association_chain.with_translations
+      end_of_association_chain.with_translations(I18n.locale)
     end
   end
 
@@ -21,7 +21,7 @@ ActiveAdmin.register Country do
   filter :iso, as: :select
   filter :translations_name_cont, as: :select,
     label: -> { Country.human_attribute_name(:name) },
-    collection: -> { Country.order(:name).pluck(:name) }
+    collection: -> { Country.by_name_asc.pluck(:name) }
   filter :region_iso, as: :select
   filter :region_name
   filter :is_active
@@ -69,10 +69,8 @@ ActiveAdmin.register Country do
       row :region_iso
       row :is_active
       row :responsible_admins
-      # rubocop:disable Rails/OutputSafety
-      row(:overview) { |c| c.overview&.html_safe }
-      row(:vpa_overview) { |c| c.vpa_overview&.html_safe }
-      # rubocop:enable Rails/OutputSafety
+      row(:overview) { |c| sanitize(c.overview) }
+      row(:vpa_overview) { |c| sanitize(c.vpa_overview) }
       row :created_at
       row :updated_at
     end

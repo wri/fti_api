@@ -14,12 +14,12 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
-    redirect_back fallback_location: admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_activated")
+    redirect_back_or_to(admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_activated"))
   end
 
   member_action :deactivate, method: :put do
     resource.update(is_active: false)
-    redirect_back fallback_location: admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_deactivated")
+    redirect_back_or_to(admin_producers_path, notice: I18n.t("active_admin.operator_page.producer_deactivated"))
   end
 
   config.clear_action_items!
@@ -123,7 +123,7 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   filter :country,
     as: :select,
-    collection: -> { Country.joins(:operators).with_translations(I18n.locale).order("country_translations.name") }
+    collection: -> { Country.joins(:operators).by_name_asc.distinct }
   filter :id,
     as: :select, label: -> { Operator.human_attribute_name(:name) },
     collection: -> { Operator.order(:name).pluck(:name, :id) }
@@ -147,21 +147,18 @@ ActiveAdmin.register Operator, as: "Producer" do
   end
 
   sidebar I18n.t("activerecord.models.observation.other"), only: :show do
-    # rubocop:disable Rails/OutputSafety
     get_observation_list = proc do |scope|
       parts = []
-      parts << scope.order(:id).collect do |observation|
+      observation_links = scope.order(:id).collect do |observation|
         link_to(observation.id, admin_observation_path(observation.id))
-      end.join(", ").html_safe
+      end
+      parts << safe_join(observation_links, ", ")
       parts << " "
       if scope.deleted.any?
-        parts << "("
-        parts << I18n.t("active_admin.shared.deleted")
-        parts << ": "
-        parts << scope.deleted.pluck(:id).join(", ").html_safe
-        parts << ")"
+        deleted_ids = scope.deleted.pluck(:id).join(", ")
+        parts << "(#{I18n.t("active_admin.shared.deleted")}: #{deleted_ids})"
       end
-      parts.join.html_safe
+      safe_join(parts)
     end
 
     div { get_observation_list.call resource.all_observations }
@@ -169,7 +166,6 @@ ActiveAdmin.register Operator, as: "Producer" do
       h6 I18n.t("active_admin.operator_page.marked_as_relevant"), class: "my-5px"
       div { get_observation_list.call resource.relevant_observations }
     end
-    # rubocop:enable Rails/OutputSafety
   end
 
   sidebar I18n.t("activerecord.models.sawmill"), only: :show do

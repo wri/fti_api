@@ -90,7 +90,7 @@ class OperatorDocument < ApplicationRecord
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
   enum :source, {company: 1, forest_atlas: 2, other_source: 3}
 
-  NON_HISTORICAL_ATTRIBUTES = %w[id attachment updated_at created_at].freeze
+  NON_HISTORICAL_ATTRIBUTES = %w[id updated_at created_at].freeze
   EXPIRABLE_STATUSES = %w[doc_valid doc_not_required]
 
   def self.expire_documents

@@ -22,7 +22,7 @@
 
 class RequiredOperatorDocument < ApplicationRecord
   has_paper_trail
-  include ArrayForestTypeable
+
   acts_as_paranoid
   acts_as_list scope: [:country_id, :required_operator_document_group_id, deleted_at: nil]
 

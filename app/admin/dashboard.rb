@@ -5,9 +5,9 @@ ActiveAdmin.register_page "Dashboard" do
 
   page_action :change_language, method: :post do
     if current_user.update(locale: params[:locale])
-      redirect_back fallback_location: admin_dashboard_path, notice: t("active_admin.dashboard_page.change_language.language_changed")
+      redirect_back_or_to(admin_dashboard_path, notice: t("active_admin.dashboard_page.change_language.language_changed"))
     else
-      redirect_back fallback_location: admin_dashboard_path, notice: t("active_admin.dashboard_page.change_language.language_unchanged")
+      redirect_back_or_to(admin_dashboard_path, notice: t("active_admin.dashboard_page.change_language.language_unchanged"))
     end
   end
 
@@ -98,8 +98,8 @@ ActiveAdmin.register_page "Dashboard" do
         panel t("active_admin.dashboard_page.new_user_accounts") do
           table_for User.inactive.includes(:user_permission, country: :translations).order(updated_at: :desc).limit(20).each do
             column(t("active_admin.dashboard_page.columns.name")) { |o| link_to o.name, admin_user_path(o.id) }
-            column(t("active_admin.dashboard_page.columns.country")) { |o| o.country.name if o.country.present? }
-            column(t("active_admin.dashboard_page.columns.role")) { |o| o.user_permission.user_role if o.user_permission.present? }
+            column(t("active_admin.dashboard_page.columns.country")) { |o| o.country.presence&.name }
+            column(t("active_admin.dashboard_page.columns.role")) { |o| o.user_permission.presence&.user_role }
           end
         end
       end

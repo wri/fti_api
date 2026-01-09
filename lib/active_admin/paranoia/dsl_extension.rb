@@ -20,7 +20,7 @@ module ActiveAdmin
           resource.restore(recursive: true)
           options = {notice: I18n.t("active_admin_paranoia.batch_actions.succesfully_restored", count: 1, model: resource_class.to_s.camelize.constantize.model_name, plural_model: resource_class.to_s.downcase.pluralize)}
 
-          redirect_back(fallback_location: ActiveAdmin.application.root_to, **options)
+          redirect_back_or_to(ActiveAdmin.application.root_to, **options)
         end
 
         if scopes

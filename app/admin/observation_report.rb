@@ -26,9 +26,9 @@ ActiveAdmin.register ObservationReport do
   member_action :really_destroy, method: :delete do
     if resource.deleted?
       resource.really_destroy!
-      redirect_back fallback_location: admin_observation_report_path, notice: I18n.t("active_admin.shared.report_removed")
+      redirect_back_or_to(admin_observation_report_path, notice: I18n.t("active_admin.shared.report_removed"))
     else
-      redirect_back fallback_location: admin_observation_report_path, notice: I18n.t("active_admin.shared.recycle_report")
+      redirect_back_or_to(admin_observation_report_path, notice: I18n.t("active_admin.shared.recycle_report"))
     end
   end
 

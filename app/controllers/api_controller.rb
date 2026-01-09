@@ -90,7 +90,7 @@ class APIController < ActionController::API
       end
     end
 
-    render json: json_errors, status: :unprocessable_entity
+    render json: json_errors, status: :unprocessable_content
   end
 
   def token

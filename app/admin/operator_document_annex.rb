@@ -113,7 +113,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
     as: :select,
     label: -> { I18n.t("activerecord.models.fmu.one") },
     collection: -> { Fmu.by_name_asc.pluck(:name) }
-  filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
+  filter :status, as: :select, collection: OperatorDocumentAnnex.statuses.transform_keys(&:humanize)
   filter :updated_at
 
   dependent_filters do
@@ -153,7 +153,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
           resource.operator_document.required_operator_document.present?
       end
       row :operator do
-        resource.operator_document.operator if resource.operator_document.present?
+        resource.operator_document.presence&.operator
       end
       row :operator_document do |a|
         if a.annex_document.present?

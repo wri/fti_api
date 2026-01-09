@@ -152,6 +152,6 @@ end
 # Server
 gem "dotenv-rails"
 gem "puma"
-gem "rack-cors"
+gem "rack-cors", groups: [:development, :e2e]
 gem "redis-rails"
 gem "tzinfo-data"

@@ -14,9 +14,6 @@ ActiveAdmin.register RequiredOperatorDocument do
     translations_attributes: [:id, :locale, :explanation]
 
   csv do
-    column I18n.t("active_admin.required_operator_document_page.exists") do |rod|
-      rod.deleted_at.nil?
-    end
     column I18n.t("active_admin.required_operator_document_page.publication_authorization") do |rod|
       rod.contract_signature
     end
@@ -34,9 +31,6 @@ ActiveAdmin.register RequiredOperatorDocument do
   end
 
   index do
-    bool_column :exists do |rod|
-      rod.deleted_at.nil?
-    end
     column I18n.t("active_admin.required_operator_document_page.publication_authorization"), :contract_signature
     column :required_operator_document_group
     column :country, sortable: "country_translations.name"
@@ -54,7 +48,7 @@ ActiveAdmin.register RequiredOperatorDocument do
     label: proc { I18n.t("active_admin.required_operator_document_page.publication_authorization") },
     as: :select, collection: [[I18n.t("active_admin.true"), true], [I18n.t("active_admin.false"), false]]
   filter :required_operator_document_group
-  filter :country, collection: -> { Country.by_name_asc.where(id: RequiredOperatorDocument.select(:country_id).distinct.select(:country_id)) }
+  filter :country, collection: -> { Country.joins(:required_operator_documents).by_name_asc.distinct }
   filter :type, as: :select, collection: %w[RequiredOperatorDocumentCountry RequiredOperatorDocumentFmu]
   filter "forest_types_contains_array",
     as: :select,

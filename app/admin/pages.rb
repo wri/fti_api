@@ -49,11 +49,7 @@ ActiveAdmin.register Page do
       row :title
       row :slug
       row :available_in_languages
-      # rubocop:disable Rails/OutputSafety
-      row :body do |entry|
-        entry.body.html_safe
-      end
-      # rubocop:enable Rails/OutputSafety
+      row(:body) { |entry| sanitize(entry.body) }
       row :created_at
       row :updated_at
     end
