@@ -113,7 +113,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
     as: :select,
     label: -> { I18n.t("activerecord.models.fmu.one") },
     collection: -> { Fmu.by_name_asc.pluck(:name) }
-  filter :status, as: :select, collection: OperatorDocumentAnnex.statuses
+  filter :status, as: :select, collection: OperatorDocumentAnnex.statuses.transform_keys(&:humanize)
   filter :updated_at
 
   dependent_filters do

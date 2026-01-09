@@ -226,9 +226,9 @@ ActiveAdmin.register OperatorDocument do
     collection: -> { RequiredOperatorDocument.with_generic.order(:country_id, :name).map { |r| [r.name_with_country, r.id] } }
   filter :operator, as: :select, collection: -> { Operator.by_name_asc }
   filter :fmu, as: :select, label: -> { I18n.t("activerecord.models.fmu.other") }, collection: -> { Fmu.by_name_asc }
-  filter :status, as: :select, collection: -> { OperatorDocument.statuses }
+  filter :status, as: :select, collection: -> { OperatorDocument.statuses.transform_keys(&:humanize) }
   filter :type, as: :select
-  filter :source, as: :select, collection: -> { OperatorDocument.sources }
+  filter :source, as: :select, collection: -> { OperatorDocument.sources.transform_keys(&:humanize) }
   filter :updated_at
 
   dependent_filters do
