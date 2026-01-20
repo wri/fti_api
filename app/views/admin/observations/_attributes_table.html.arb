@@ -35,7 +35,14 @@ panel I18n.t("active_admin.observations_page.details") do
     row :litigation_status
     row :actions_taken
     row :concern_opinion
-    row :observation_report
+    row :observation_report do |o|
+      report = ObservationReport.with_deleted.find_by(id: o.observation_report_id)
+      if report
+        text = report.title
+        text = "#{text} (#{I18n.t("active_admin.shared.deleted")})" if report.deleted?
+        link_to text, admin_observation_report_path(report)
+      end
+    end
     row :qc1_needed?
     row :admin_comment_deprecated, &:admin_comment
     row :monitor_comment
