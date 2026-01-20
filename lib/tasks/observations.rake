@@ -96,4 +96,119 @@ namespace :observations do
     end
     puts "Done :)"
   end
+
+  desc "Reject invalid observations that don't meet validation requirements"
+  task reject_invalid_observations: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN MODE - No changes will be made"
+    puts "=" * 80
+
+    # Find a system user to use as reviewer for QualityControl records
+    system_user = User.find_by(email: ENV["RESPONSIBLE_EMAIL"]&.downcase)
+
+    if system_user.nil?
+      puts "ERROR: No user found to use as reviewer. Cannot proceed."
+      exit 1
+    end
+
+    puts "Using user #{system_user.email} as reviewer for QualityControl records"
+    puts
+
+    observations_to_check = Observation.where.not(validation_status: ["Created", "Rejected"])
+
+    total_checked = 0
+    invalid_count = 0
+    error_count = 0
+
+    users_getting_emails = {}
+
+    # Skip QualityControl callback to prevent automatic status update
+    # We'll update the status manually after creating the QC record
+    QualityControl.skip_callback(:create, :after, :update_reviewable_qc_status) if for_real
+
+    begin
+      observations_to_check.find_each do |observation|
+        total_checked += 1
+
+        # Check if observation is valid
+        next if observation.valid?
+
+        invalid_count += 1
+
+        # Get observer's locale for error messages
+        # Use first observer's first user's locale, or default locale
+        observer_user = observation.observers.first&.users&.first
+        observer_locale = observer_user&.locale || I18n.default_locale
+
+        error_message = I18n.with_locale(observer_locale) do
+          observation.errors.full_messages.join("; ")
+        end
+        if observer_locale != "en"
+          error_message += " (EN: #{I18n.with_locale(:en) { observation.errors.full_messages.join("; ") }})"
+        end
+        if observer_locale != "fr"
+          error_message += " (FR: #{I18n.with_locale(:fr) { observation.errors.full_messages.join("; ") }})"
+        end
+
+        skip_email_notification = false
+
+        if observation.validation_status != "Needs revision"
+          User.where(id: observation.observers.joins(:users).distinct.pluck("users.id")).pluck(:email).uniq.each do |email|
+            users_getting_emails[email] ||= 0
+            users_getting_emails[email] += 1
+          end
+        else
+          # if observation already marked as Needs revision, append last QC comment to provide more context
+          last_qc_message = observation.latest_quality_control&.comment
+          error_message = "#{last_qc_message} \n #{error_message}" if last_qc_message.present?
+          skip_email_notification = true
+        end
+
+        puts "Observation ##{observation.id} (status: #{observation.validation_status}) is invalid:"
+        puts "  Observer locale: #{observer_locale}"
+        puts "  Message: #{error_message}"
+
+
+        if for_real
+          ActiveRecord::Base.transaction do
+            Observation.skip_callback(:commit, :after, :notify_about_changes) if skip_email_notification
+
+            qc = QualityControl.create!(
+              reviewable: observation,
+              reviewer: system_user,
+              passed: false,
+              comment: error_message
+            )
+            observation.update!(validation_status: "Rejected")
+
+            puts "  ✓ Created QualityControl ##{qc.id} and rejected observation"
+          rescue => e
+            error_count += 1
+            puts "  ✗ Error: #{e.message}"
+            puts "    #{e.backtrace.first}" if ENV["DEBUG"]
+          ensure
+            Observation.set_callback(:commit, :after, :notify_about_changes) if skip_email_notification
+          end
+        end
+
+        puts
+      end
+    ensure
+      # Re-enable callback
+      QualityControl.set_callback(:create, :after, :update_reviewable_qc_status) if for_real
+    end
+
+    puts users_getting_emails.empty? ? "No users to notify." : "Users to be notified:"
+    users_getting_emails.each do |email, count|
+      puts "  #{email}: #{count} emails sent"
+    end
+
+    puts "=" * 80
+    puts "Summary:"
+    puts "  Total observations checked: #{total_checked}"
+    puts "  Invalid observations found: #{invalid_count}"
+    puts "  Successfully rejected: #{invalid_count - error_count}" if for_real
+    puts "  Errors encountered: #{error_count}" if error_count > 0 && for_real
+  end
 end
