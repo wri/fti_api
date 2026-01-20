@@ -169,7 +169,6 @@ namespace :observations do
         puts "  Observer locale: #{observer_locale}"
         puts "  Message: #{error_message}"
 
-
         if for_real
           ActiveRecord::Base.transaction do
             Observation.skip_callback(:commit, :after, :notify_about_changes) if skip_email_notification
