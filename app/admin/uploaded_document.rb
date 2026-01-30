@@ -16,7 +16,9 @@ ActiveAdmin.register UploadedDocument do
     column :name
     column :author
     column :caption
-    column :file_url
+    column :file do |d|
+      link_to d.file.url, d.file.url
+    end
     actions
   end
 
@@ -26,7 +28,7 @@ ActiveAdmin.register UploadedDocument do
       f.input :name
       f.input :author
       f.input :caption
-      f.input :file, as: :file
+      f.input :file, as: :file, hint: preview_file_tag(f.object.file)
     end
     f.actions
   end
@@ -36,7 +38,9 @@ ActiveAdmin.register UploadedDocument do
       row :name
       row :author
       row :caption
-      row :file
+      row :file do |d|
+        link_to d.file.url, d.file.url
+      end
     end
   end
 end
