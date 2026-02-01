@@ -46,10 +46,10 @@ ActiveAdmin.register Page do
 
   show do
     attributes_table do
-      row :title
+      translated_row :title, locales: resource.available_in_languages
       row :slug
       row :available_in_languages
-      row(:body) { |entry| sanitize(entry.body) }
+      translated_row(:body, locales: resource.available_in_languages) { |entry| sanitize(entry.body) }
       row :created_at
       row :updated_at
     end

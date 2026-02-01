@@ -76,7 +76,6 @@ $to-be-reviewed: #99AA99;
   &.published\(no_comments\) { background: $published-no-comments-color; }
   &.published\(not_modified\) { background: $published-not-modified-color; }
   &.published\(modified\) { background: $published_modified-color; }
-
 }
 
 // fix issue with top margin in panel title
@@ -283,5 +282,42 @@ dialog {
 
 dialog::backdrop {
   backdrop-filter: blur(2px);
+}
+
+// Translated row styles
+.translated-attribute {
+  .translation-content {
+    margin-bottom: 8px;
+
+    .empty {
+      color: #999;
+      font-style: italic;
+    }
+  }
+
+  .translation-links {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+
+    .translation-link {
+      cursor: pointer;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background-color: #f0f0f0;
+      color: #666;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      &.active {
+        background-color: $skinHeaderBck;
+        color: #fff;
+      }
+    }
+  }
 }
 
