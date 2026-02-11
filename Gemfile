@@ -32,7 +32,7 @@ gem "activeadmin_quill_editor", "~> 1.0"
 gem "chartkick"
 gem "groupdate"
 
-gem "devise"
+gem "devise", "<5.0" # ver. 5 does not work with activeadmin for now
 
 # Soft Delete
 gem "paranoia"
