@@ -105,7 +105,7 @@ namespace :observations do
     puts "=" * 80
 
     # Find a system user to use as reviewer for QualityControl records
-    system_user = User.find_by(email: ENV["RESPONSIBLE_EMAIL"]&.downcase)
+    system_user = User.find_by(email: "admin@example.com")
 
     if system_user.nil?
       puts "ERROR: No user found to use as reviewer. Cannot proceed."
@@ -167,21 +167,28 @@ namespace :observations do
 
         puts "Observation ##{observation.id} (status: #{observation.validation_status}) is invalid:"
         puts "  Observer locale: #{observer_locale}"
+        puts "  Sending email notifications: #{skip_email_notification ? "No" : "Yes"}"
         puts "  Message: #{error_message}"
-
         if for_real
-          ActiveRecord::Base.transaction do
+          begin
             Observation.skip_callback(:commit, :after, :notify_about_changes) if skip_email_notification
+            ActiveRecord::Base.transaction do
+              PaperTrail.request(whodunnit: system_user.id) do
+                QualityControl.create!(
+                  reviewable: observation,
+                  reviewer: system_user,
+                  passed: false,
+                  comment: error_message,
+                  metadata: {
+                    level: "System",
+                    decision: "Rejected"
+                  }
+                )
+                observation.update!(validation_status: "Rejected")
+              end
 
-            qc = QualityControl.create!(
-              reviewable: observation,
-              reviewer: system_user,
-              passed: false,
-              comment: error_message
-            )
-            observation.update!(validation_status: "Rejected")
-
-            puts "  ✓ Created QualityControl ##{qc.id} and rejected observation"
+              puts "  ✓ Created QualityControl and rejected observation"
+            end
           rescue => e
             error_count += 1
             puts "  ✗ Error: #{e.message}"
@@ -207,6 +214,7 @@ namespace :observations do
     puts "Summary:"
     puts "  Total observations checked: #{total_checked}"
     puts "  Invalid observations found: #{invalid_count}"
+    puts "  Total number of email notifications to be sent: #{users_getting_emails.values.sum}"
     puts "  Successfully rejected: #{invalid_count - error_count}" if for_real
     puts "  Errors encountered: #{error_count}" if error_count > 0 && for_real
   end
