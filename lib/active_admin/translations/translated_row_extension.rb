@@ -28,10 +28,10 @@ module ActiveAdmin
                   text_node value
                   if translated_from.present?
                     br
-                    text_node "(Auto translated from #{translated_from} locale)"
+                    text_node I18n.t("active_admin.shared.auto_translated_from", translated_from: translated_from)
                   end
                 else
-                  span(class: "empty") { "empty" }
+                  span(class: "empty") { I18n.t("active_admin.empty") }
                 end
               end
             end

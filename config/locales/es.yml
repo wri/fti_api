@@ -199,6 +199,8 @@ es:
       translate_from_hint: 'Selecciona el idioma desde el que quieres traducir. Si lo dejas en blanco, no se realizará traducción automática.'
       force_translations: 'Forzar traducciones desde:'
       translating_entity: 'La entidad se está traduciendo. Por favor, recarga la página en unos minutos.'
+      auto_translated_from: 'Traducido automáticamente desde el idioma %{translated_from}'
+      uploaded_file: 'Archivo subido: %{file_name}'
     menu:
       dashboard:
         dashboard: 'Tablero'

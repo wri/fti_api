@@ -194,6 +194,8 @@ fr:
       translate_from_hint: 'Sélectionnez la langue à partir de laquelle vous souhaitez traduire. Si vous le laissez vide, aucune traduction automatique ne sera effectuée.'
       force_translations: 'Forcer les traductions de:'
       translating_entity: "L’entité est en cours de traduction. Veuillez recharger la page dans quelques minutes."
+      auto_translated_from: 'Traduit automatiquement à partir de la locale %{translated_from}'
+      uploaded_file: 'Fichier téléchargé : %{file_name}'
     menu:
       dashboard:
         dashboard: 'Tableau de bord'
