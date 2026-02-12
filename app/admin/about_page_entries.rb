@@ -53,9 +53,9 @@ ActiveAdmin.register AboutPageEntry do
   show do
     attributes_table do
       row :position
-      row :title
+      translated_row :title
       row :code
-      row(:body) { |entry| sanitize(entry.body) }
+      translated_row(:body) { |entry| sanitize(entry.body) }
       row :created_at
       row :updated_at
     end

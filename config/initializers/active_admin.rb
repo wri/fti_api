@@ -360,6 +360,7 @@ ActiveAdmin.before_load do |app|
   ActiveAdmin::ResourceDSL.include ActiveAdmin::DependentFiltersExtension
   ActiveAdmin::DSL.include ActiveAdmin::Paranoia::DSLExtension
   ActiveAdmin::Views::IndexAsTable::IndexTableFor.prepend ActiveAdmin::Paranoia::IndexTableForExtension
+  ActiveAdmin::Views::AttributesTable.prepend ActiveAdmin::Translations::TranslatedRowExtension
 end
 
 ActiveAdmin.after_load do |app|
