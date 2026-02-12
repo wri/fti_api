@@ -151,16 +151,6 @@ class Observation < ApplicationRecord
   accepts_nested_attributes_for :observation_report, allow_destroy: true
   accepts_nested_attributes_for :subcategory, allow_destroy: false
 
-  with_options if: :operator? do
-    validate :validate_governments_absences
-    validate :validate_known_operator, if: -> { operator? && (validation_status != "Created") }
-  end
-
-  with_options if: :government? do
-    validates :operator_id, absence: true
-    validate :active_government
-  end
-
   validates :lat, numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90, allow_blank: true}
   validates :lng, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180, allow_blank: true}
   validates :evidence_on_report, presence: true, if: -> { evidence_type == "Evidence presented in the report" }
@@ -169,10 +159,11 @@ class Observation < ApplicationRecord
 
   validates :observers, presence: true
   validates :observation_type, presence: true
-
   validates :validation_status, presence: true
 
   with_options unless: -> { Created? || Rejected? } do
+    validate :validate_known_operator, if: -> { operator? }
+    validate :validate_any_active_government, if: -> { government? }
     validates :subcategory, presence: true
     validates :severity, presence: true
     validates :observation_report, presence: true
@@ -181,6 +172,8 @@ class Observation < ApplicationRecord
 
   before_validation :assign_observers_from_report, if: :observation_report_changed?
   before_validation :nullify_evidence_on_report, if: -> { evidence_type != "Evidence presented in the report" }
+  before_validation :nullify_operator, unless: :operator?
+  before_validation :nullify_governments, unless: :government?
 
   before_save :set_active_status
   before_save :nullify_fmu_and_coordinates, unless: :is_physical_place
@@ -326,6 +319,14 @@ class Observation < ApplicationRecord
     self.fmu = nil
   end
 
+  def nullify_operator
+    self.operator = nil
+  end
+
+  def nullify_governments
+    self.governments = []
+  end
+
   def set_publication_date
     self.publication_date = Time.zone.now if published?
   end
@@ -367,18 +368,10 @@ class Observation < ApplicationRecord
     observers << user.observer
   end
 
-  def active_government
-    return if persisted? ||
-      governments.none? ||
-      governments.select { |g| g.is_active? }.any?(&:is_active)
+  def validate_any_active_government
+    return if governments.any?(&:is_active)
 
     errors.add(:governments, "At least one government should be active")
-  end
-
-  def validate_governments_absences
-    return if governments.none?
-
-    errors.add(:governments, "Should have no governments with 'operator' type")
   end
 
   def validate_known_operator

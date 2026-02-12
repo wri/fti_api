@@ -88,13 +88,6 @@ RSpec.describe Observation, type: :model do
       expect(subject.errors[:observers]).to include("can't be blank")
     end
 
-    it "is invalid with governments if is of operator type" do
-      subject.governments = build_list(:government, 1)
-      subject.observation_type = :operator
-      expect(subject.valid?).to eq(false)
-      expect(subject.errors[:governments]).to include("Should have no governments with 'operator' type")
-    end
-
     it "is invalid with wrong evidence_type" do
       subject.evidence_type = "wrong"
       expect(subject.valid?).to eq(false)
@@ -265,17 +258,6 @@ RSpec.describe Observation, type: :model do
             ["At least one government should be active"]
           )
         end
-      end
-    end
-
-    describe "government observation validations" do
-      it "should be invalid when government observation has operator_id" do
-        country = create(:country)
-        observation = build(:gov_observation, country: country)
-        observation.operator = create(:operator, country: country)
-
-        expect(observation.valid?).to eq(false)
-        expect(observation.errors[:operator_id]).to include("must be blank")
       end
     end
 
