@@ -417,6 +417,8 @@ en:
       location_on_map: 'Location on map'
       visible: 'Visible'
       scope_hidden: 'Hidden'
+      rejected_hint: 'The observation will be rejected and the monitor will be notified. The monitor can then edit the observation and submit it for QC again.'
+      needs_revision_hint: 'The monitor will be notified that the observation needs revision with proposed suggestions. The monitor can still publish the observation or submit it for QC again.'
     users_page:
       responsible_for_countries_hint: Admin responsible for countries will get notifications concerning the private sector in these countries.
     quality_control_page:

@@ -286,6 +286,13 @@ class Observation < ApplicationRecord
     STATUS_TRANSITIONS[:reviewer][validation_status]
   end
 
+  def qc_decisions_hints
+    {
+      "Rejected" => I18n.t("active_admin.observations_page.rejected_hint"),
+      "Needs revision" => I18n.t("active_admin.observations_page.needs_revision_hint")
+    }
+  end
+
   def qc_metadata(qc)
     return {} unless qc_in_progress?
 

@@ -40,6 +40,17 @@ ActiveAdmin.register QualityControl do
 
     f.inputs do
       f.input :decision, as: :radio, collection: resource.reviewable.qc_available_decisions, label: I18n.t("operator_documents.qc_form.decision")
+
+      resource.reviewable.qc_available_decisions.each do |decision|
+        next unless resource.reviewable.qc_decisions_hints[decision].present?
+
+        li class: "input qc-decision-hint", style: "display: none;", "data-hint": decision do
+          div class: "flash flash_warning" do
+            resource.reviewable.qc_decisions_hints[decision]
+          end
+        end
+      end
+
       f.input :comment, as: :text
     end
 
