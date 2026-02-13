@@ -23,6 +23,7 @@ RSpec.describe Admin::QualityControlsController, type: :controller do
         reviewable_id: observation.id,
         reviewable_type: "Observation",
         reviewer_id: admin.id,
+        decision: "Rejected",
         passed: false,
         comment: "Comment"
       }

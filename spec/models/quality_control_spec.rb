@@ -29,11 +29,6 @@ RSpec.describe QualityControl, type: :model do
     expect(subject).to have(1).error_on(:reviewer)
   end
 
-  it "should be invalid without passed" do
-    subject.passed = nil
-    expect(subject).to have(1).error_on(:passed)
-  end
-
   it "should be invalid without a comment if not passed" do
     subject.passed = false
     expect(subject).to have(1).error_on(:comment)
