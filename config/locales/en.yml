@@ -559,6 +559,7 @@ en:
       uploaded_document: Uploaded document  #g
       user: User  #g
       user_permission: User permission  #g
+      quality_control: Quality control
     attributes:
       about_page_entry:
         code: Code  #g

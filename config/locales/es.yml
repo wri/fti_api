@@ -430,6 +430,8 @@ es:
       location_on_map: 'Ubicación en el mapa'
       visible: 'Visible'
       scope_hidden: 'Oculto'
+      rejected_hint: 'La observación será rechazada y el monitor será notificado. El monitor puede luego editar la observación y enviarla nuevamente para QC.'
+      needs_revision_hint: 'El monitor será notificado de que la observación necesita revisión con sugerencias propuestas. El monitor aún puede publicar la observación o enviarla nuevamente para QC.'
     users_page:
       responsible_for_countries_hint: Los administradores responsables de países recibirán notificaciones relacionadas con el sector privado en estos países.
     quality_control_page:
@@ -570,6 +572,7 @@ es:
       uploaded_document: Documento subido
       user: Usuario
       user_permission: Permiso de usuario
+      quality_control: Control de calidad
     attributes:
       about_page_entry:
         code: Código
