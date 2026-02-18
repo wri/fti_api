@@ -30,7 +30,7 @@ RSpec.describe QualityControl, type: :model do
   end
 
   it "should be invalid without a comment if not passed" do
-    subject.passed = false
+    subject = build(:quality_control, :not_passed, comment: nil)
     expect(subject).to have(1).error_on(:comment)
   end
 

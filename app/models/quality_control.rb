@@ -27,7 +27,7 @@ class QualityControl < ApplicationRecord
   private
 
   def set_passed
-    self.passed = reviewable.qc_rejectable_decisions.exclude?(decision) if passed.nil?
+    self.passed = reviewable.qc_rejectable_decisions.exclude?(decision) if reviewable.present?
   end
 
   def set_metadata

@@ -5,7 +5,7 @@ ActiveAdmin.register QualityControl do
 
   actions :new, :create
 
-  permit_params :reviewer_id, :reviewable_id, :reviewable_type, :decision, :passed, :comment
+  permit_params :reviewer_id, :reviewable_id, :reviewable_type, :decision, :comment
 
   controller do
     def new
@@ -17,7 +17,7 @@ ActiveAdmin.register QualityControl do
     def create
       super do |format|
         if resource.errors.empty?
-          redirect_to reviewable_path, notice: I18n.t("active_admin.quality_control_page.performed_qc", decision: resource.decision) and return
+          redirect_to params[:return_to] || reviewable_path, notice: I18n.t("active_admin.quality_control_page.performed_qc", decision: resource.decision) and return
         else
           resource.reviewable.reload
         end
