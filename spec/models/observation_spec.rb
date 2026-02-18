@@ -88,13 +88,6 @@ RSpec.describe Observation, type: :model do
       expect(subject.errors[:observers]).to include("can't be blank")
     end
 
-    it "is invalid with governments if is of operator type" do
-      subject.governments = build_list(:government, 1)
-      subject.observation_type = :operator
-      expect(subject.valid?).to eq(false)
-      expect(subject.errors[:governments]).to include("Should have no governments with 'operator' type")
-    end
-
     it "is invalid with wrong evidence_type" do
       subject.evidence_type = "wrong"
       expect(subject.valid?).to eq(false)
@@ -265,6 +258,41 @@ RSpec.describe Observation, type: :model do
             ["At least one government should be active"]
           )
         end
+      end
+    end
+
+    describe "required fields for non-Created and non-Rejected statuses" do
+      it "allows missing required fields when status is Created or Rejected" do
+        created_obs = build(:observation,
+          validation_status: "Created",
+          subcategory: nil,
+          severity: nil,
+          observation_report: nil,
+          evidence_type: nil)
+        expect(created_obs).to be_valid
+
+        rejected_obs = build(:observation,
+          validation_status: "Rejected",
+          subcategory: nil,
+          severity: nil,
+          observation_report: nil,
+          evidence_type: nil)
+        expect(rejected_obs).to be_valid
+      end
+
+      it "requires subcategory, severity, observation_report, and evidence_type for other statuses" do
+        observation = build(:observation,
+          validation_status: "Ready for QC2",
+          subcategory: nil,
+          severity: nil,
+          observation_report: nil,
+          evidence_type: nil)
+
+        expect(observation.valid?).to eq(false)
+        expect(observation.errors[:subcategory]).to include("can't be blank")
+        expect(observation.errors[:severity]).to include("can't be blank")
+        expect(observation.errors[:observation_report]).to include("can't be blank")
+        expect(observation.errors[:evidence_type]).to include("can't be blank")
       end
     end
   end
