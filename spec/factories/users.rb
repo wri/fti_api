@@ -24,10 +24,11 @@
 #  observer_id            :integer
 #  operator_id            :integer
 #  holding_id             :integer
-#  locale                 :string
+#  locale                 :string           default("en"), not null
 #  first_name             :string
 #  last_name              :string
 #  organization_account   :boolean          default(FALSE), not null
+#  should_change_password :boolean          default(FALSE), not null
 #
 
 FactoryBot.define do

@@ -26,10 +26,11 @@
 #  observer_id            :integer
 #  operator_id            :integer
 #  holding_id             :integer
-#  locale                 :string
+#  locale                 :string           default("en"), not null
 #  first_name             :string
 #  last_name              :string
 #  organization_account   :boolean          default(FALSE), not null
+#  should_change_password :boolean          default(FALSE), not null
 #
 
 class User < ApplicationRecord
@@ -39,6 +40,7 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, :validatable
 
   PERMISSIONS = %w[operator ngo ngo_manager government]
+  PASSWORD_COMPLEXITY_REGEX = /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+\z/
 
   normalizes :first_name, :last_name, :name, with: -> { it.strip }
 
@@ -72,7 +74,7 @@ class User < ApplicationRecord
   validates :locale, presence: true, inclusion: {in: I18n.available_locales.map(&:to_s)}
   # password length and confirmation match is handled by Devise
   validates :password_confirmation, presence: true, if: -> { password.present? }
-  validates :password, format: {with: /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+\z/, message: :password_complexity}, if: -> { password.present? }
+  validates :password, format: {with: PASSWORD_COMPLEXITY_REGEX, message: :password_complexity}, if: -> { password.present? }
 
   validates :user_permission, presence: true
   validates :operator, presence: true, if: -> { user_permission&.operator? }
@@ -104,6 +106,10 @@ class User < ApplicationRecord
     User.all.select { |u| u.name == name }.map(&:id)
   } do |parent|
     parent.table[:id]
+  end
+
+  def self.strong_password?(password)
+    PASSWORD_COMPLEXITY_REGEX.match?(password) && Devise.password_length.include?(password.length)
   end
 
   def is_government?(country_id)
