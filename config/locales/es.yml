@@ -1,5 +1,4 @@
 es:
-  locale_name: "Español"
   attributes:
     name: Nombre
     description: Descripción
@@ -270,9 +269,6 @@ es:
           notification_groups: 'Grupos de notificación'
       language:
         language: 'Idioma'
-        english: 'Inglés'
-        french: 'Francés'
-        spanish: 'Español'
       logout: 'Cerrar sesión'
     dashboard_page:
       columns:
@@ -1722,3 +1718,13 @@ es:
     types: 'tipo-de-observación'
     info: 'información-de-observación'
     attachments: 'archivos-adjuntos-de-observación'
+
+  locales:
+    en: 'Inglés'
+    fr: 'Francés'
+    pt: 'Portugués'
+    es: 'Español'
+    zh-CN: 'Chino (simplificado)'
+    ja: 'Japonés'
+    ko: 'Coreano'
+    vi: 'Vietnamita'

@@ -1,6 +1,5 @@
 ---
 fr:
-  locale_name: "Français"
   attributes:
     name: Nom
     description: Description
@@ -263,9 +262,6 @@ fr:
           notification_groups: 'Groupes de notifications'
       language:
         language: 'Langue'
-        english: 'Anglais'
-        french: 'Français'
-        spanish: 'Espagnol'
       logout: 'Se déconnecter'
     dashboard_page:
       columns:
@@ -1624,3 +1620,13 @@ fr:
     types: 'observation-type'
     info: 'observation-info'
     attachments: 'observation-attachments'
+
+  locales:
+    en: 'Anglais'
+    fr: 'Français'
+    pt: 'Portugais'
+    es: 'Espagnol'
+    zh-CN: 'Chinois (simplifié)'
+    ja: 'Japonais'
+    ko: 'Coréen'
+    vi: 'Vietnamien'
