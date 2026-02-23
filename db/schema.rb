@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.2].define(version: 2026_02_20_175846) do
-=======
 ActiveRecord::Schema[7.2].define(version: 2026_02_23_113655) do
->>>>>>> b3b22546 (add evidence on report to translatable columns)
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
