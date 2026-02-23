@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.2].define(version: 2026_02_20_175846) do
+=======
+ActiveRecord::Schema[7.2].define(version: 2026_02_23_113655) do
+>>>>>>> b3b22546 (add evidence on report to translatable columns)
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -534,6 +538,8 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_20_175846) do
     t.string "details_translated_from"
     t.string "concern_opinion_translated_from"
     t.string "litigation_status_translated_from"
+    t.string "evidence_on_report"
+    t.string "evidence_on_report_translated_from"
     t.index ["deleted_at"], name: "index_observation_translations_on_deleted_at"
     t.index ["locale"], name: "index_observation_translations_on_locale"
     t.index ["observation_id"], name: "index_observation_translations_on_observation_id"
@@ -563,7 +569,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_20_175846) do
     t.boolean "is_physical_place", default: true, null: false
     t.integer "evidence_type"
     t.integer "location_accuracy"
-    t.string "evidence_on_report"
     t.boolean "hidden", default: false, null: false
     t.text "admin_comment"
     t.text "monitor_comment"

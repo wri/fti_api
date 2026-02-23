@@ -41,11 +41,11 @@ ActiveAdmin.register Observation do
 
   permit_params :name, :lng, :pv, :lat, :lon, :subcategory_id, :severity_id, :country_id, :operator_id, :user_type,
     :validation_status, :publication_date, :observation_report_id, :location_information, :evidence_type,
-    :evidence_on_report, :location_accuracy, :law_id, :fmu_id, :hidden, :non_concession_activity,
+    :location_accuracy, :law_id, :fmu_id, :hidden, :non_concession_activity,
     :actions_taken, :is_physical_place, :force_translations_from,
     relevant_operator_ids: [], government_ids: [],
     observation_document_ids: [],
-    translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :_destroy]
+    translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :evidence_on_report, :_destroy]
 
   member_action :start_qc, method: [:put, :get] do
     if resource.update(user_type: :reviewer, validation_status: "QC2 in progress")
@@ -502,7 +502,6 @@ ActiveAdmin.register Observation do
       f.input :actions_taken, **visibility
       f.input :observation_report, as: :select, **visibility
       f.input :evidence_type, as: :select, **visibility
-      f.input :evidence_on_report, **visibility
       f.input :observation_documents,
         as: :select,
         collection: (f.object.observation_documents + (f.object.observation_report&.observation_documents || [])).uniq,
@@ -526,6 +525,8 @@ ActiveAdmin.register Observation do
         t.input :concern_opinion_translated_from, input_html: {disabled: true}
         t.input :litigation_status, **visibility
         t.input :litigation_status_translated_from, input_html: {disabled: true}
+        t.input :evidence_on_report, **visibility
+        t.input :evidence_on_report_translated_from, input_html: {disabled: true}
       end
     end
     f.actions
