@@ -390,6 +390,7 @@ es:
       operator_document_id: 'ID de Documento del Operador'
       with_deleted: 'Con eliminados'
       reason_label: "Razón para marcar documento como \"no aplicable\""
+      non_applicable: "No aplicable"
     operator_document_annexes_page:
       approved: 'Anexo aprobado'
       not_approved: 'No se pudo aprobar el anexo'

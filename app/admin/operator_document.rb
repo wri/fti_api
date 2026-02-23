@@ -152,7 +152,7 @@ ActiveAdmin.register OperatorDocument do
   index do
     selectable_column
     column :public
-    tag_column :status
+    tag_column :status, &:detailed_status
     column :id
     column I18n.t("activerecord.models.country.one") do |od|
       od.required_operator_document.country
@@ -196,6 +196,8 @@ ActiveAdmin.register OperatorDocument do
     column I18n.t("active_admin.operator_documents_page.attachment") do |od|
       if od&.document_file&.attachment
         link_to od.document_file.attachment.identifier, od.document_file.attachment.url
+      elsif od.reason.present?
+        I18n.t("active_admin.operator_documents_page.non_applicable")
       end
     end
     column I18n.t("active_admin.operator_documents_page.annexes") do |od|
@@ -271,7 +273,7 @@ ActiveAdmin.register OperatorDocument do
   show title: proc { "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
     attributes_table do
       row :public
-      tag_row :status
+      tag_row :status, &:detailed_status
       row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
       row :admin_comment if resource.admin_comment.present?
       row :required_operator_document
@@ -279,7 +281,11 @@ ActiveAdmin.register OperatorDocument do
       row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
       row :uploaded_by
       row I18n.t("active_admin.operator_documents_page.attachment") do |r|
-        link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener" if r.document_file&.attachment&.present?
+        if r.document_file&.attachment&.present?
+          link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener"
+        elsif r.reason.present?
+          I18n.t("active_admin.operator_documents_page.non_applicable")
+        end
       end
       row :start_date
       row :expire_date

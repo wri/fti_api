@@ -155,6 +155,12 @@ class OperatorDocument < ApplicationRecord
     "#{required_operator_document.name} (#{fmu.name})"
   end
 
+  def detailed_status
+    return "doc_pending_non_applicable" if doc_pending? && reason.present?
+
+    status
+  end
+
   def destroy # rubocop:disable Rails/ActiveRecordOverride
     # It only allows for (soft) deletion of the operator documents when:
     # 1 - The Operator was deleted  (destroyed_by_association)

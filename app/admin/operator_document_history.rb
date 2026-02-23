@@ -65,7 +65,7 @@ ActiveAdmin.register OperatorDocumentHistory do
 
   index do
     column :public
-    tag_column :status
+    tag_column :status, &:detailed_status
     column :id
     column :admin_comment
     column :operator_document do |od|
@@ -171,7 +171,7 @@ ActiveAdmin.register OperatorDocumentHistory do
               # link_to history.id, admin_operator_document_history_path(history)
               link_to history.operator_document_updated_at.to_datetime.to_fs(:long), admin_operator_document_history_path(history)
             end
-            tag_column :status
+            tag_column :status, &:detailed_status
           end
         end
       end
@@ -186,7 +186,7 @@ ActiveAdmin.register OperatorDocumentHistory do
             end
           end
           row :public
-          tag_row :status
+          tag_row :status, &:detailed_status
           row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
           row :admin_comment if resource.admin_comment.present?
           row :required_operator_document

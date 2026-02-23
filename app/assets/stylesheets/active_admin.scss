@@ -59,6 +59,7 @@ $to-be-reviewed: #99AA99;
   &.rejected { background: $rejected-color; }
   &.approved { background: $approved-color; }
   &.doc_pending { background: $pending-color; }
+  &.doc_pending_non_applicable { background: $pending-color; }
   &.doc_invalid { background: $rejected-color; }
   &.doc_valid { background: $approved-color; }
   &.doc_expired { background: $expired-color; }
