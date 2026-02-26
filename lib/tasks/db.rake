@@ -1,5 +1,19 @@
 # require "dotenv/tasks"
 
+def human_file_size(path)
+  size = File.size(path).to_f
+  %w[B KB MB GB TB].each_with_index do |unit, i|
+    return format("%.1f %s", size, unit) if size < 1024 || i == 4
+    size /= 1024.0
+  end
+end
+
+def db_dump_files_sorted(dumps_root, server = "all")
+  servers = (server == "all") ? Dir["#{dumps_root}/*/"].map { |d| File.basename(d) } : [server]
+  servers.flat_map { |srv| Dir["#{dumps_root}/#{srv}/*"].map { |f| [srv, f] } }
+    .sort_by { |_, f| File.mtime(f) }.reverse
+end
+
 namespace :db do
   desc "Download database from server - Params: SERVER=production(default)|staging, SMALL (if present we ignore versions table data))"
   task :download do # rubocop:disable Rails/RakeEnvironment
@@ -11,26 +25,40 @@ namespace :db do
     sh "cap #{server} db:download #{params}"
   end
 
-  desc "Load dump into local database - Params: FILE=path_to_dump (if not specified, latest dump will be used, SERVER, FORCE"
+  desc "Load dump into local database - Params: FILE=path_to_dump, INDEX=n (from dump_list), SERVER, FORCE"
   task :restore_from_file do # rubocop:disable Rails/RakeEnvironment
     abort "Loading dump only in dev environment, or when using FORCE env" unless Rails.env.development? || ENV["FORCE"]
 
+    dumps_root = Rails.root.join("db", "dumps")
     dump_file = ENV["FILE"]
+
+    if !dump_file && ENV["INDEX"]
+      index = ENV["INDEX"].to_i
+      abort "INDEX must be a positive integer" unless index > 0
+      server = ENV.fetch("SERVER", "all")
+      files = db_dump_files_sorted(dumps_root, server)
+      _srv, dump_file = files[index - 1]
+      abort "No dump file at index #{index} (run rake db:dump_list to see available files)" unless dump_file
+    end
+
     unless dump_file
       server = ENV.fetch("SERVER", "production")
 
       puts "No file specified, using latest #{server} dump (use SERVER env to change server)"
 
-      dump_dir = Rails.root.join("db", "dumps", server)
+      dump_dir = dumps_root.join(server)
       dump_file = Dir["#{dump_dir}/*"].max_by { |f| File.mtime(f) }
     end
     abort "No dump file found" unless dump_file
+
+    print "Restore database from #{dump_file}? [y/N] "
+    abort "Aborted" unless $stdin.gets.to_s.strip.casecmp("y").zero?
 
     compressed = dump_file.end_with?(".gz")
     if compressed
       puts "Decompressing dump"
       sh "gzip -dk #{dump_file}"
-      dump_file = dump_file.gsub(".gz", "")
+      dump_file = dump_file.delete_suffix(".gz")
     end
     sh "docker-compose restart db" # just in case if load task cannot drop the database
     sh "cap development db:local:load DUMP_FILE=#{dump_file}"
@@ -50,6 +78,26 @@ namespace :db do
     sh "cap #{server} db:pull #{params}"
     Rake::Task["db:prepare_for_dev"].invoke
     Rake::Task["db:environment:set"].invoke
+  end
+
+  desc "List all available dump files - Params: SERVER=production|staging|all(default)"
+  task :dump_list do # rubocop:disable Rails/RakeEnvironment
+    server = ENV.fetch("SERVER", "all")
+    dumps_root = Rails.root.join("db", "dumps")
+    files = db_dump_files_sorted(dumps_root, server)
+
+    if files.empty?
+      puts "No dump files found"
+      next
+    end
+
+    file_col = files.map { |_, f| File.basename(f).length }.max
+    puts "%-5s  %-12s  %-#{file_col}s  %-10s  %s" % ["INDEX", "SERVER", "FILE", "SIZE", "DATE MODIFIED"]
+    puts "-" * (5 + 2 + 12 + 2 + file_col + 2 + 10 + 2 + 19)
+    files.each_with_index do |(srv, f), i|
+      mtime = File.mtime(f).strftime("%Y-%m-%d %H:%M:%S")
+      puts "%-5s  %-12s  %-#{file_col}s  %-10s  %s" % [i + 1, srv, File.basename(f), human_file_size(f), mtime]
+    end
   end
 
   desc "Prepare database for dev environment"
