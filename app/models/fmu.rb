@@ -24,7 +24,7 @@
 #
 
 class Fmu < ApplicationRecord
-  has_paper_trail
+  has_paper_trail ignore: %i[geometry geojson]
   acts_as_paranoid
 
   include EsriShapefileUpload
