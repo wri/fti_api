@@ -1,41 +1,56 @@
-namespace :paper_trail do
-  desc "Clean Operator versions - delete where only ignored fields changed, strip those fields from object_changes in the rest. Set FOR_REAL=true to apply."
-  task clean_operators: :environment do
-    for_real = ENV["FOR_REAL"] == "true"
-
-    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
-
-    stripped_fields = %w[
+PAPER_TRAIL_CLEAN_CONFIG = [
+  {
+    item_type: "Operator",
+    stripped_fields: %w[
       percentage_valid_documents_all
       percentage_valid_documents_fmu
       percentage_valid_documents_country
       country_doc_rank
       country_operators
     ]
-    ignored_fields = stripped_fields + %w[updated_at]
-    ids_to_delete = []
-    ids_to_strip = []
+  },
+  {
+    item_type: "Fmu",
+    stripped_fields: %w[geometry geojson]
+  }
+].freeze
 
-    PaperTrail::Version.where(item_type: "Operator", event: "update").find_each do |version|
-      next if version.object_changes.blank?
+namespace :paper_trail do
+  desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply."
+  task clean_up: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
 
-      changed_keys = version.changeset.keys
-      next unless (changed_keys & stripped_fields).any?
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
 
-      if (changed_keys - ignored_fields).empty?
-        ids_to_delete << version.id
-      else
-        ids_to_strip << version.id
+    PAPER_TRAIL_CLEAN_CONFIG.each do |config|
+      item_type = config[:item_type]
+      stripped_fields = config[:stripped_fields]
+      ignored_fields = stripped_fields + %w[updated_at]
+      ids_to_delete = []
+      ids_to_strip = []
+
+      PaperTrail::Version.where(item_type: item_type, event: "update").find_each do |version|
+        next if version.object_changes.blank?
+
+        changes = version.changeset
+        next unless (changes.keys & stripped_fields).any?
+
+        if (changes.keys - ignored_fields).empty?
+          ids_to_delete << version.id
+        else
+          ids_to_strip << version.id
+        end
       end
-    end
 
-    puts "Found #{ids_to_delete.size} versions to delete (only ignored fields changed)."
-    puts "Found #{ids_to_strip.size} versions to strip ignored fields from."
+      puts "\n#{item_type}:"
+      puts "  #{ids_to_delete.size} versions to delete (only ignored fields changed)"
+      puts "  #{ids_to_strip.size} versions to strip ignored fields from"
 
-    if for_real
+      next unless for_real
+
       if ids_to_delete.any?
         PaperTrail::Version.where(id: ids_to_delete).delete_all
-        puts "Deleted #{ids_to_delete.size} versions."
+        puts "  Deleted."
       end
 
       if ids_to_strip.any?
@@ -44,51 +59,7 @@ namespace :paper_trail do
           stripped_fields.each { |f| changes.delete(f) }
           version.update_column(:object_changes, PaperTrail.serializer.dump(changes))
         end
-        puts "Stripped ignored fields from #{ids_to_strip.size} versions."
-      end
-    end
-  end
-
-  desc "Clean Fmu versions - delete where only ignored fields changed, strip those fields from object_changes in the rest. Set FOR_REAL=true to apply."
-  task clean_fmus: :environment do
-    for_real = ENV["FOR_REAL"] == "true"
-
-    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
-
-    stripped_fields = %w[geometry geojson]
-    ignored_fields = stripped_fields + %w[updated_at]
-    ids_to_delete = []
-    ids_to_strip = []
-
-    PaperTrail::Version.where(item_type: "Fmu", event: "update").find_each do |version|
-      next if version.object_changes.blank?
-
-      changes = YAML.unsafe_load(version.object_changes)
-      next unless (changes.keys & stripped_fields).any?
-
-      if (changes.keys - ignored_fields).empty?
-        ids_to_delete << version.id
-      else
-        ids_to_strip << version.id
-      end
-    end
-
-    puts "Found #{ids_to_delete.size} versions to delete (only ignored fields changed)."
-    puts "Found #{ids_to_strip.size} versions to strip ignored fields from."
-
-    if for_real
-      if ids_to_delete.any?
-        PaperTrail::Version.where(id: ids_to_delete).delete_all
-        puts "Deleted #{ids_to_delete.size} versions."
-      end
-
-      if ids_to_strip.any?
-        PaperTrail::Version.where(id: ids_to_strip).find_each do |version|
-          changes = YAML.unsafe_load(version.object_changes)
-          stripped_fields.each { |f| changes.delete(f) }
-          version.update_column(:object_changes, PaperTrail.serializer.dump(changes))
-        end
-        puts "Stripped ignored fields from #{ids_to_strip.size} versions."
+        puts "  Stripped."
       end
     end
   end
