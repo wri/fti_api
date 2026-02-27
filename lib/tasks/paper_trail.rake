@@ -63,4 +63,37 @@ namespace :paper_trail do
       end
     end
   end
+
+  desc "Remove duplicate versions with identical object_changes created within 3 seconds of each other. Set FOR_REAL=true to apply."
+  task deduplicate: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+
+    ids_to_delete = ActiveRecord::Base.connection.select_values(<<~SQL)
+      WITH ranked AS (
+        SELECT id,
+               ROW_NUMBER() OVER (
+                 PARTITION BY item_type, item_id, object_changes
+                 ORDER BY id
+               ) AS rn,
+               created_at - FIRST_VALUE(created_at) OVER (
+                 PARTITION BY item_type, item_id, object_changes
+                 ORDER BY id
+               ) AS age_within_group
+        FROM versions
+        WHERE event = 'update'
+      )
+      SELECT id FROM ranked
+      WHERE rn > 1
+        AND EXTRACT(EPOCH FROM age_within_group) <= 3
+    SQL
+
+    puts "Found #{ids_to_delete.size} duplicate versions."
+
+    if for_real && ids_to_delete.any?
+      PaperTrail::Version.where(id: ids_to_delete).delete_all
+      puts "Deleted."
+    end
+  end
 end
