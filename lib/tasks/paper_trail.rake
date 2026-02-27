@@ -7,6 +7,8 @@ PAPER_TRAIL_CLEAN_CONFIG = [
       percentage_valid_documents_country
       country_doc_rank
       country_operators
+      score_absolute
+      obs_per_visit
     ]
   },
   {
@@ -71,22 +73,18 @@ namespace :paper_trail do
     puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
 
     ids_to_delete = ActiveRecord::Base.connection.select_values(<<~SQL)
-      WITH ranked AS (
+      WITH lagged AS (
         SELECT id,
-               ROW_NUMBER() OVER (
-                 PARTITION BY item_type, item_id, object_changes
-                 ORDER BY id
-               ) AS rn,
-               created_at - FIRST_VALUE(created_at) OVER (
-                 PARTITION BY item_type, item_id, object_changes
-                 ORDER BY id
-               ) AS age_within_group
+               object_changes,
+               created_at,
+               LAG(object_changes) OVER (PARTITION BY item_type, item_id ORDER BY created_at, id) AS prev_object_changes,
+               LAG(created_at)     OVER (PARTITION BY item_type, item_id ORDER BY created_at, id) AS prev_created_at
         FROM versions
         WHERE event = 'update'
       )
-      SELECT id FROM ranked
-      WHERE rn > 1
-        AND EXTRACT(EPOCH FROM age_within_group) <= 3
+      SELECT id FROM lagged
+      WHERE object_changes = prev_object_changes
+        AND EXTRACT(EPOCH FROM (created_at - prev_created_at)) <= 3
     SQL
 
     puts "Found #{ids_to_delete.size} duplicate versions."
