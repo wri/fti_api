@@ -49,10 +49,11 @@ namespace :documents do
         puts "Removing files... #{files.delete_all} affected"
       end
 
-      annexes = OperatorDocumentAnnex.where(id: AnnexDocument
-                                            .where(documentable: histories)
-                                            .or(AnnexDocument.where(documentable: docs))
-                                            .select(:operator_document_annex_id))
+      annexes = OperatorDocumentAnnex.where(
+        id: AnnexDocument.where(documentable: histories)
+          .or(AnnexDocument.where(documentable: docs))
+          .select(:operator_document_annex_id)
+      )
 
       if for_real
         annexes.each do |annex|
