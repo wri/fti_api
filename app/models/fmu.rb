@@ -24,7 +24,7 @@
 #
 
 class Fmu < ApplicationRecord
-  has_paper_trail ignore: %i[geometry geojson]
+  has_paper_trail skip: %i[geometry]
   acts_as_paranoid
 
   include EsriShapefileUpload
@@ -46,13 +46,12 @@ class Fmu < ApplicationRecord
   accepts_nested_attributes_for :operators
   accepts_nested_attributes_for :fmu_operator, reject_if: proc { |attributes| attributes["operator_id"].blank? }
 
-  before_validation :update_geojson_properties
-
   validates :name, presence: true
   validates :forest_type, presence: true
   validates :geojson, geojson: true, if: :geojson_changed?
 
   after_save :update_geometry, if: :saved_change_to_geojson?
+  after_save :update_geojson_properties
 
   # TODO Redo all of those
   scope :filter_by_countries, ->(country_ids) { where(country_id: country_ids.split(",")) }
@@ -82,14 +81,12 @@ class Fmu < ApplicationRecord
   end
 
   def update_geojson_properties
-    return if geojson.blank?
-
     fmu_type_label = begin
       ForestType::TYPES[forest_type.to_sym][:geojson_label]
     rescue
       ""
     end
-    geojson["properties"] = (geojson["properties"] || {}).merge({
+    new_properties = {
       "id" => id,
       "fmu_name" => name,
       "iso3_fmu" => country&.iso,
@@ -106,7 +103,12 @@ class Fmu < ApplicationRecord
       "observations" => active_observations.reload.uniq.count,
       "forest_type" => forest_type,
       "fmu_type_label" => fmu_type_label # old one deprecated, to be removed in the future
-    })
+    }
+    # we want to omit tracking those changes in properties in the paper trail
+    # we only will track changes to geojson->geometry via upload
+    self.class.unscoped.where(id: id).where.not(geojson: nil).update_all(
+      ["geojson = jsonb_set(geojson, '{properties}', COALESCE(geojson->'properties', '{}') || ?::jsonb, true)", new_properties.to_json]
+    )
   end
 
   def properties
