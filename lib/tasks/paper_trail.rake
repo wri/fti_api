@@ -31,7 +31,7 @@ PAPER_TRAIL_MERGE_TRANSLATIONS_CONFIG = [
 
 namespace :paper_trail do
   desc "Run all paper_trail cleanup tasks in order. Set FOR_REAL=true to apply."
-  task clean_up_all: %i[strip_fmu_geojson_properties clean_up deduplicate]
+  task clean_up_all: %i[merge_old_translations strip_fmu_geojson_properties squash_create_updates clean_up deduplicate]
 
   desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
   task clean_up: :environment do
@@ -178,6 +178,66 @@ namespace :paper_trail do
       PaperTrail::Version.where(item_type: translation_item_type).delete_all
       puts "  Deleted #{total} #{translation_item_type} versions."
     end
+  end
+
+  desc "Merge update versions into preceding create versions when done by the same user within 3 seconds, then delete the update. Set FOR_REAL=true to apply."
+  task squash_create_updates: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+
+    exclude_models = ["Operator::Translation", "Fmu::Translation", "Observer::Translation"]
+
+    pairs = ActiveRecord::Base.connection.select_rows(<<~SQL)
+      SELECT c.id, u.id
+      FROM versions c
+      JOIN versions u
+        ON  u.item_type = c.item_type
+        AND u.item_id   = c.item_id
+        AND u.event     = 'update'
+        AND (u.whodunnit = c.whodunnit OR (u.whodunnit IS NULL AND c.whodunnit IS NULL))
+        AND EXTRACT(EPOCH FROM (u.created_at - c.created_at)) BETWEEN 0 AND 3
+        WHERE c.event = 'create' AND c.item_type NOT IN (#{exclude_models.map { |m| "'#{m}'" }.join(", ")})
+      ORDER BY c.id, u.created_at, u.id
+    SQL
+
+    grouped = pairs.each_with_object({}) do |(create_id, update_id), h|
+      (h[create_id.to_i] ||= []) << update_id.to_i
+    end
+
+    puts "Found #{grouped.size} create versions with #{pairs.size} follow-up updates to squash."
+
+    next unless for_real
+
+    update_ids_to_delete = []
+
+    grouped.each do |create_id, update_ids|
+      create_version = PaperTrail::Version.find(create_id)
+      next if create_version.object_changes.blank?
+
+      # create_changes = PaperTrail.serializer.load(create_version.object_changes)
+      create_changes = create_version.changeset
+
+      # Accumulate all update changes in order; later updates overwrite earlier for the same field
+      update_changes = PaperTrail::Version.where(id: update_ids).order(:created_at, :id).each_with_object({}) do |update_version, acc|
+        next if update_version.object_changes.blank?
+
+        update_ids_to_delete << update_version.id
+        update_changes = update_version.changeset
+        acc.merge!(update_changes)
+      end
+
+      # For fields in create: keep nil as origin, use update's final value
+      # For fields only in update: treat as [nil, new_val] since record started with nil
+      merged = create_changes.merge(update_changes.transform_values { |(_old, new_val)| [nil, new_val] }) do |_field, create_pair, (_nil, new_val)|
+        [create_pair[0], new_val]
+      end
+
+      create_version.update_column(:object_changes, PaperTrail.serializer.dump(merged))
+    end
+
+    PaperTrail::Version.where(id: update_ids_to_delete).delete_all if update_ids_to_delete.any?
+    puts "Squashed #{update_ids_to_delete.size} update versions into their create versions."
   end
 
   desc "Strip geojson['properties'] from Fmu version object_changes. Deletes version if geojson is the only change and becomes identical after stripping. Set FOR_REAL=true to apply."
