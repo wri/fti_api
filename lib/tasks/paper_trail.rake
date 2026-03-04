@@ -85,7 +85,7 @@ namespace :paper_trail do
     end
   end
 
-  desc "Remove duplicate versions with identical object_changes created within 3 seconds of each other. Set FOR_REAL=true to apply."
+  desc "Remove duplicate versions with identical object_changes created within 3 minutes of each other. Set FOR_REAL=true to apply."
   task deduplicate: :environment do
     for_real = ENV["FOR_REAL"] == "true"
 
@@ -103,7 +103,7 @@ namespace :paper_trail do
       )
       SELECT id FROM lagged
       WHERE object_changes = prev_object_changes
-        AND EXTRACT(EPOCH FROM (created_at - prev_created_at)) <= 3
+        AND EXTRACT(EPOCH FROM (created_at - prev_created_at)) <= 3 * 60
     SQL
 
     puts "Found #{ids_to_delete.size} duplicate versions."
