@@ -14,7 +14,7 @@ PAPER_TRAIL_CLEAN_CONFIG = [
   },
   {
     item_type: "Fmu",
-    stripped_fields: %w[geometry updated_at]
+    stripped_fields: %w[geometry properties updated_at]
   }
 ].freeze
 
@@ -175,5 +175,53 @@ namespace :paper_trail do
       PaperTrail::Version.where(item_type: translation_item_type).delete_all
       puts "  Deleted #{total} #{translation_item_type} versions."
     end
+  end
+
+  desc "Strip geojson['properties'] from Fmu version object_changes. Deletes version if geojson is the only change and becomes identical after stripping. Set FOR_REAL=true to apply."
+  task strip_fmu_geojson_properties: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+
+    ids_to_delete = []
+    ids_to_update = {}
+
+    PaperTrail::Version.where(item_type: "Fmu", event: "update").find_each do |version|
+      next if version.object_changes.blank?
+
+      changes = PaperTrail.serializer.load(version.object_changes)
+      next unless changes.key?("geojson")
+
+      old_geojson, new_geojson = changes["geojson"]
+      old_geojson = JSON.parse(old_geojson) if old_geojson.is_a?(String)
+      new_geojson = JSON.parse(new_geojson) if new_geojson.is_a?(String)
+      old_geojson&.delete("properties")
+      new_geojson&.delete("properties")
+
+      if old_geojson == new_geojson
+        changes.delete("geojson")
+      else
+        changes["geojson"] = [old_geojson&.to_json, new_geojson&.to_json]
+      end
+
+      if (changes.keys - %w[updated_at]).empty?
+        ids_to_delete << version.id
+      else
+        ids_to_update[version.id] = PaperTrail.serializer.dump(changes)
+      end
+    end
+
+    puts "#{ids_to_delete.size} versions to delete (geojson-only change, properties was the only diff)"
+    puts "#{ids_to_update.size} versions to update (strip properties from geojson)"
+
+    next unless for_real
+
+    PaperTrail::Version.where(id: ids_to_delete).delete_all if ids_to_delete.any?
+    puts "Deleted #{ids_to_delete.size} versions."
+
+    ids_to_update.each do |id, object_changes|
+      PaperTrail::Version.where(id: id).update_all(object_changes: object_changes)
+    end
+    puts "Updated #{ids_to_update.size} versions."
   end
 end
