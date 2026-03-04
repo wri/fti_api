@@ -18,6 +18,17 @@ PAPER_TRAIL_CLEAN_CONFIG = [
   }
 ].freeze
 
+PAPER_TRAIL_MERGE_TRANSLATIONS_CONFIG = [
+  {
+    item_type: "Fmu",
+    translated_fields: %w[name]
+  },
+  {
+    item_type: "Operator",
+    translated_fields: %w[name details]
+  }
+].freeze
+
 namespace :paper_trail do
   desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
   task clean_up: :environment do
@@ -97,6 +108,72 @@ namespace :paper_trail do
     if for_real && ids_to_delete.any?
       PaperTrail::Version.where(id: ids_to_delete).delete_all
       puts "Deleted."
+    end
+  end
+
+  desc "Merge Translation versions (locale: en) into parent model versions, then delete all translation versions. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
+  task merge_old_translations: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+    filter_item_type = ENV["ITEM_TYPE"]
+
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+    puts "Filtering to item_type=#{filter_item_type}" if filter_item_type
+
+    configs = PAPER_TRAIL_MERGE_TRANSLATIONS_CONFIG
+    configs = configs.select { |c| c[:item_type] == filter_item_type } if filter_item_type
+
+    configs.each do |config|
+      item_type = config[:item_type]
+      translated_fields = config[:translated_fields]
+      translation_item_type = "#{item_type}::Translation"
+      foreign_key = "#{item_type.downcase}_id"
+
+      new_versions = []
+      skipped = 0
+
+      translation_versions = PaperTrail::Version.where(item_type: translation_item_type, locale: "en", event: "update")
+
+      translation_versions.find_each do |version|
+        parent_id = if version.object.present?
+          PaperTrail.serializer.load(version.object)[foreign_key]
+        elsif version.object_changes.present?
+          PaperTrail.serializer.load(version.object_changes)[foreign_key]&.last
+        end
+
+        unless parent_id
+          skipped += 1
+          next
+        end
+
+        relevant_changes = PaperTrail.serializer.load(version.object_changes).slice(*translated_fields)
+
+        next if relevant_changes.empty?
+
+        new_versions << {
+          item_type: item_type,
+          item_id: parent_id,
+          event: version.event,
+          whodunnit: version.whodunnit,
+          object_changes: PaperTrail.serializer.dump(relevant_changes),
+          created_at: version.created_at
+        }
+      end
+
+      total = PaperTrail::Version.where(item_type: translation_item_type).count
+      total_update_en = PaperTrail::Version.where(item_type: translation_item_type, locale: "en", event: "update").count
+      puts "\n#{item_type}:"
+      puts "  #{translation_item_type} versions total: #{total}"
+      puts "  #{translation_item_type} versions locale en and event update: #{total_update_en}"
+      puts "  #{new_versions.size} to convert to #{item_type} versions"
+      puts "  #{skipped} skipped due to missing #{foreign_key}"
+
+      next unless for_real
+
+      PaperTrail::Version.insert_all(new_versions) if new_versions.any?
+      puts "  Created #{new_versions.size} #{item_type} versions."
+
+      PaperTrail::Version.where(item_type: translation_item_type).delete_all
+      puts "  Deleted #{total} #{translation_item_type} versions."
     end
   end
 end
