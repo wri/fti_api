@@ -96,6 +96,8 @@ ActiveAdmin.register Observer, as: "Monitor" do
       row :created_at
       row :updated_at
     end
+
+    render "version_history"
   end
 
   form do |f|

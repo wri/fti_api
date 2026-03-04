@@ -298,6 +298,8 @@ ActiveAdmin.register Operator, as: "Producer" do
         end
       end
     end
+
+    render "version_history"
   end
 
   controller do

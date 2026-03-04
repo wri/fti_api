@@ -1,0 +1,33 @@
+history ||= resource.versions.reorder(created_at: :desc)
+
+enum_labels = resource.class.defined_enums.transform_values(&:invert)
+format_value = ->(field, value) {
+  return "" if field == "geojson"
+
+  enum_labels[field]&.fetch(value, nil)&.humanize || value.to_s
+}
+
+panel I18n.t("active_admin.versionate.version_history", default: "Version History") do
+  table_for history do
+    column I18n.t("active_admin.versionate.event", default: "Event"), &:event
+    column I18n.t("active_admin.versionate.created_at", default: "Date") do |v|
+      v.created_at.strftime("%Y-%m-%d %H:%M")
+    end
+    column I18n.t("active_admin.versionate.user", default: "User") do |v|
+      User.find_by(id: v.whodunnit)&.email
+    end
+    column I18n.t("active_admin.versionate.changes", default: "Changes") do |v|
+      changes = v.changeset.except("created_at", "updated_at", "id")
+      next if changes.blank?
+
+      content_tag(:ul, style: "margin: 0; padding-left: 1.2em;") do
+        safe_join(changes.map do |field, (old_val, new_val)|
+          content_tag(:li) do
+            content_tag(:b, field.humanize) +
+              ": " + format_value.call(field, old_val) + " \u2192 " + format_value.call(field, new_val)
+          end
+        end)
+      end
+    end
+  end
+end
