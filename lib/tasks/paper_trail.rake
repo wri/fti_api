@@ -50,13 +50,13 @@ namespace :paper_trail do
       ids_to_delete = []
       ids_to_strip = []
 
-      PaperTrail::Version.where(event: "update", item_type: item_type).find_each do |version|
+      PaperTrail::Version.where(item_type: item_type).find_each do |version|
         next if version.object_changes.blank?
 
         changes = version.changeset
         next unless (changes.keys & stripped_fields).any?
 
-        if (changes.keys - stripped_fields).empty?
+        if (changes.keys - stripped_fields).empty? && version.event == "update"
           ids_to_delete << version.id
         else
           ids_to_strip << version.id
@@ -249,7 +249,7 @@ namespace :paper_trail do
     ids_to_delete = []
     ids_to_update = {}
 
-    PaperTrail::Version.where(item_type: "Fmu", event: "update").find_each do |version|
+    PaperTrail::Version.where(item_type: "Fmu").find_each do |version|
       next if version.object_changes.blank?
 
       changes = PaperTrail.serializer.load(version.object_changes)
@@ -267,7 +267,7 @@ namespace :paper_trail do
         changes["geojson"] = [old_geojson&.to_json, new_geojson&.to_json]
       end
 
-      if (changes.keys - %w[updated_at]).empty?
+      if (changes.keys - %w[updated_at]).empty? && version.event == "update"
         ids_to_delete << version.id
       else
         ids_to_update[version.id] = PaperTrail.serializer.dump(changes)
