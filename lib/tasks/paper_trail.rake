@@ -9,35 +9,40 @@ PAPER_TRAIL_CLEAN_CONFIG = [
       country_operators
       score_absolute
       obs_per_visit
+      updated_at
     ]
   },
   {
     item_type: "Fmu",
-    stripped_fields: %w[geometry geojson]
+    stripped_fields: %w[geometry updated_at]
   }
 ].freeze
 
 namespace :paper_trail do
-  desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply."
+  desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
   task clean_up: :environment do
     for_real = ENV["FOR_REAL"] == "true"
+    filter_item_type = ENV["ITEM_TYPE"]
 
     puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+    puts "Filtering to item_type=#{filter_item_type}" if filter_item_type
 
-    PAPER_TRAIL_CLEAN_CONFIG.each do |config|
+    configs = PAPER_TRAIL_CLEAN_CONFIG
+    configs = configs.select { |c| c[:item_type] == filter_item_type } if filter_item_type
+
+    configs.each do |config|
       item_type = config[:item_type]
       stripped_fields = config[:stripped_fields]
-      ignored_fields = stripped_fields + %w[updated_at]
       ids_to_delete = []
       ids_to_strip = []
 
-      PaperTrail::Version.where(item_type: item_type, event: "update").find_each do |version|
+      PaperTrail::Version.where(event: "update", item_type: item_type).find_each do |version|
         next if version.object_changes.blank?
 
         changes = version.changeset
         next unless (changes.keys & stripped_fields).any?
 
-        if (changes.keys - ignored_fields).empty?
+        if (changes.keys - stripped_fields).empty?
           ids_to_delete << version.id
         else
           ids_to_strip << version.id
