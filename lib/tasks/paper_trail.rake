@@ -30,6 +30,9 @@ PAPER_TRAIL_MERGE_TRANSLATIONS_CONFIG = [
 ].freeze
 
 namespace :paper_trail do
+  desc "Run all paper_trail cleanup tasks in order. Set FOR_REAL=true to apply."
+  task clean_up_all: %i[strip_fmu_geojson_properties clean_up deduplicate]
+
   desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
   task clean_up: :environment do
     for_real = ENV["FOR_REAL"] == "true"
