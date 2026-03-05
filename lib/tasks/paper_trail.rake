@@ -31,7 +31,7 @@ PAPER_TRAIL_MERGE_TRANSLATIONS_CONFIG = [
 
 namespace :paper_trail do
   desc "Run all paper_trail cleanup tasks in order. Set FOR_REAL=true to apply."
-  task clean_up_all: %i[merge_old_translations strip_fmu_geojson_properties squash_create_updates clean_up deduplicate]
+  task clean_up_all: %i[strip_fmu_geojson_properties clean_up deduplicate squash_create_updates]
 
   desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
   task clean_up: :environment do
@@ -114,73 +114,7 @@ namespace :paper_trail do
     end
   end
 
-  desc "Merge Translation versions (locale: en) into parent model versions, then delete all translation versions. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
-  task merge_old_translations: :environment do
-    for_real = ENV["FOR_REAL"] == "true"
-    filter_item_type = ENV["ITEM_TYPE"]
-
-    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
-    puts "Filtering to item_type=#{filter_item_type}" if filter_item_type
-
-    configs = PAPER_TRAIL_MERGE_TRANSLATIONS_CONFIG
-    configs = configs.select { |c| c[:item_type] == filter_item_type } if filter_item_type
-
-    configs.each do |config|
-      item_type = config[:item_type]
-      translated_fields = config[:translated_fields]
-      translation_item_type = "#{item_type}::Translation"
-      foreign_key = "#{item_type.downcase}_id"
-
-      new_versions = []
-      skipped = 0
-
-      translation_versions = PaperTrail::Version.where(item_type: translation_item_type, locale: "en", event: "update")
-
-      translation_versions.find_each do |version|
-        parent_id = if version.object.present?
-          PaperTrail.serializer.load(version.object)[foreign_key]
-        elsif version.object_changes.present?
-          PaperTrail.serializer.load(version.object_changes)[foreign_key]&.last
-        end
-
-        unless parent_id
-          skipped += 1
-          next
-        end
-
-        relevant_changes = PaperTrail.serializer.load(version.object_changes).slice(*translated_fields)
-
-        next if relevant_changes.empty?
-
-        new_versions << {
-          item_type: item_type,
-          item_id: parent_id,
-          event: version.event,
-          whodunnit: version.whodunnit,
-          object_changes: PaperTrail.serializer.dump(relevant_changes),
-          created_at: version.created_at
-        }
-      end
-
-      total = PaperTrail::Version.where(item_type: translation_item_type).count
-      total_update_en = PaperTrail::Version.where(item_type: translation_item_type, locale: "en", event: "update").count
-      puts "\n#{item_type}:"
-      puts "  #{translation_item_type} versions total: #{total}"
-      puts "  #{translation_item_type} versions locale en and event update: #{total_update_en}"
-      puts "  #{new_versions.size} to convert to #{item_type} versions"
-      puts "  #{skipped} skipped due to missing #{foreign_key}"
-
-      next unless for_real
-
-      PaperTrail::Version.insert_all(new_versions) if new_versions.any?
-      puts "  Created #{new_versions.size} #{item_type} versions."
-
-      PaperTrail::Version.where(item_type: translation_item_type).delete_all
-      puts "  Deleted #{total} #{translation_item_type} versions."
-    end
-  end
-
-  desc "Merge update versions into preceding create versions when done by the same user within 3 seconds, then delete the update. Set FOR_REAL=true to apply."
+  desc "Merge update versions into preceding create versions when done by the same user within 10 seconds, then delete the update. Set FOR_REAL=true to apply."
   task squash_create_updates: :environment do
     for_real = ENV["FOR_REAL"] == "true"
 
@@ -196,7 +130,7 @@ namespace :paper_trail do
         AND u.item_id   = c.item_id
         AND u.event     = 'update'
         AND (u.whodunnit = c.whodunnit OR (u.whodunnit IS NULL AND c.whodunnit IS NULL))
-        AND EXTRACT(EPOCH FROM (u.created_at - c.created_at)) BETWEEN 0 AND 3
+        AND EXTRACT(EPOCH FROM (u.created_at - c.created_at)) BETWEEN 0 AND 10
         WHERE c.event = 'create' AND c.item_type NOT IN (#{exclude_models.map { |m| "'#{m}'" }.join(", ")})
       ORDER BY c.id, u.created_at, u.id
     SQL
