@@ -29,12 +29,78 @@ PAPER_TRAIL_MERGE_TRANSLATIONS_CONFIG = [
   }
 ].freeze
 
+# Known class renames between Rails versions stored in PaperTrail YAML
+YAML_CLASS_SUBSTITUTIONS = [
+  ["ActiveRecord::Attribute::", "ActiveModel::Attribute::"],
+  ["ActiveModel::Type::Text", "ActiveModel::Type::String"],
+  ["OperatorDocumentUploader", "DocumentFileUploader"],
+  [/LogoUploader::Uploader\d+/, "LogoUploader"]
+].freeze
+
 namespace :paper_trail do
   desc "Run all paper_trail cleanup tasks in order. Set FOR_REAL=true to apply."
-  task clean_up_all: %i[strip_fmu_geojson_properties clean_up deduplicate squash_create_updates]
+  task clean_up_all: %i[fix_yaml_serialization strip_fmu_geojson_properties clean_up deduplicate squash_create_updates]
+
+  desc "Fix YAML serialization issues in PaperTrail versions caused by Rails class renames. also removes uploader objects. Set FOR_REAL=true to apply."
+  task fix_yaml_serialization: :environment do
+    puts "Fixing YAML serialization issues in PaperTrail versions caused by Rails class renames, and removing uploader objects..."
+    for_real = ENV["FOR_REAL"] == "true"
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+
+    scope = PaperTrail::Version.where(
+      "object LIKE '%!ruby/object:%' OR object_changes LIKE '%!ruby/object:%'"
+    )
+    puts "Found #{scope.count} versions with serialized Ruby objects.\n\n"
+
+    normalize_uploaders = ->(obj, key) do
+      obj.class.name.to_s.end_with?("Uploader") ? obj.model.read_attribute(key) : obj
+    end
+
+    fixed = 0
+    failed = 0
+
+    scope.find_each do |version|
+      updates = {}
+
+      %i[object object_changes].each do |col|
+        raw = version.read_attribute(col)
+        next if raw.blank?
+
+        substituted = raw.dup
+        YAML_CLASS_SUBSTITUTIONS.each { |old, new_name| substituted.gsub!(old, new_name) }
+        next if substituted == raw
+
+        begin
+          loaded = PaperTrail.serializer.load(substituted)
+          normalized = loaded.map do |k, v|
+            if col == :object
+              [k, normalize_uploaders.call(v, k)]
+            elsif col == :object_changes && v.is_a?(Array)
+              [k, v.map { |change| normalize_uploaders.call(change, k) }]
+            else
+              raise "Unexpected value type in #{col}: #{v.class}"
+            end
+          end.to_h
+          updates[col] = PaperTrail.serializer.dump(normalized)
+        rescue => e
+          puts "  [FAIL] Version #{version.id} #{col}: #{e.message}"
+          failed += 1
+        end
+      end
+
+      next if updates.empty?
+
+      version.update_columns(updates) if for_real
+      fixed += 1
+    end
+
+    puts "\nVersions fixed: #{fixed}"
+    puts "Versions with errors: #{failed}"
+  end
 
   desc "Clean versions for all models - delete where only ignored fields changed, strip those fields from the rest. Set FOR_REAL=true to apply. Optionally filter with ITEM_TYPE=Foo."
   task clean_up: :environment do
+    puts "Cleaning up PaperTrail versions by removing ignored fields and deleting versions with only ignored fields changed..."
     for_real = ENV["FOR_REAL"] == "true"
     filter_item_type = ENV["ITEM_TYPE"]
 
@@ -87,6 +153,7 @@ namespace :paper_trail do
 
   desc "Remove duplicate versions with identical object_changes created within 3 minutes of each other. Set FOR_REAL=true to apply."
   task deduplicate: :environment do
+    puts "Removing duplicate PaperTrail versions with identical object_changes created within 3 minutes of each other..."
     for_real = ENV["FOR_REAL"] == "true"
 
     puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
@@ -116,6 +183,7 @@ namespace :paper_trail do
 
   desc "Merge update versions into preceding create versions when done by the same user within 10 seconds, then delete the update. Set FOR_REAL=true to apply."
   task squash_create_updates: :environment do
+    puts "Squashing PaperTrail update versions into their create version when they have the same whodunnit and are created within 10 seconds of each other..."
     for_real = ENV["FOR_REAL"] == "true"
 
     puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
@@ -176,6 +244,7 @@ namespace :paper_trail do
 
   desc "Strip geojson['properties'] from Fmu version object_changes. Deletes version if geojson is the only change and becomes identical after stripping. Set FOR_REAL=true to apply."
   task strip_fmu_geojson_properties: :environment do
+    puts "Stripping geojson['properties'] from Fmu version object_changes, and deleting versions where geojson is the only change and becomes identical after stripping..."
     for_real = ENV["FOR_REAL"] == "true"
 
     puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
