@@ -8,7 +8,7 @@ class ShapefileService
   def self.generate_shapefile(shapes)
     # Create a temporary directory to store the shapefile components
     Dir.mktmpdir do |dir|
-      shapes_name = (shapes.size == 1) ? shapes.first.name : "shapes"
+      shapes_name = (shapes.size == 1) ? shapes.first.name.gsub(/[\/\\:*?"<>|]/, "_") : "shapes"
 
       shapefile_path = File.join(dir, "#{shapes_name}.shp")
 

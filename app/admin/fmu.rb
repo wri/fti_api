@@ -131,13 +131,13 @@ ActiveAdmin.register Fmu do
       if resource.geojson
         row(:geojson) do
           dialog id: "geojson_modal", title: Fmu.human_attribute_name(:geojson) do
-            resource.geojson
+            resource.geojson&.to_json
           end
           link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#geojson_modal').showModal()"
         end
         row(:properties) do
           dialog id: "properties_modal", title: Fmu.human_attribute_name(:properties) do
-            resource.properties
+            resource.properties&.to_json
           end
           link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
         end
