@@ -311,3 +311,13 @@ Devise.setup do |config|
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
 end
+
+Warden::Manager.after_authentication do |user, auth, opts|
+  next unless user.is_a?(User)
+  next if user.should_change_password
+
+  password = auth.env.dig("action_dispatch.request.parameters", "user", "password")
+  next unless password
+
+  user.update_column(:should_change_password, true) unless User.strong_password?(password)
+end

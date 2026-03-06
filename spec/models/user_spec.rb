@@ -24,10 +24,11 @@
 #  observer_id            :integer
 #  operator_id            :integer
 #  holding_id             :integer
-#  locale                 :string
+#  locale                 :string           default("en"), not null
 #  first_name             :string
 #  last_name              :string
 #  organization_account   :boolean          default(FALSE), not null
+#  should_change_password :boolean          default(FALSE), not null
 #
 
 require "rails_helper"
@@ -83,6 +84,14 @@ RSpec.describe User, type: :model do
       subject.password_confirmation = "SuperPassword"
       expect(subject.valid?).to eq(false)
       expect(subject.errors[:password]).to include("must contain at least one uppercase letter, one lowercase letter, and one digit")
+    end
+
+    it "clears should_change_password when password is changed" do
+      subject.should_change_password = true
+      subject.password = "Newpassword1"
+      subject.password_confirmation = "Newpassword1"
+      expect(subject.save).to eq(true)
+      expect(subject.should_change_password).to eq(false)
     end
 
     describe "user permissions" do

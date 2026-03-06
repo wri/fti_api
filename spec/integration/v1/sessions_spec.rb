@@ -22,6 +22,18 @@ module V1
         country: nil, operator_ids: [], observer: nil
       })
       expect(response.cookies["download_user"]).to be_present
+      expect(user.reload.should_change_password).to eq(false)
+    end
+
+    it "Login with weak password sets should_change_password flag" do
+      user = build(:admin, password: "weak", password_confirmation: "weak")
+      user.save!(validate: false)
+
+      post "/login", params: {auth: {email: user.email, password: "weak"}},
+        headers: non_api_webuser_headers
+
+      expect(status).to eq(200)
+      expect(user.reload.should_change_password).to eq(true)
     end
 
     describe "Download session" do
