@@ -64,7 +64,7 @@ ActiveAdmin.register Observation do
   action_item :force_translations, only: :show do
     dropdown_menu I18n.t("active_admin.shared.force_translations") do
       I18n.available_locales.sort.each do |locale|
-        item locale, force_translations_admin_observation_path(observation, translate_from: locale)
+        item I18n.t("locales.#{locale}"), force_translations_admin_observation_path(observation, translate_from: locale)
       end
     end
   end
