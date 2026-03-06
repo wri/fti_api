@@ -17,18 +17,27 @@ class QualityControl < ApplicationRecord
   belongs_to :reviewer, class_name: "User"
 
   validates :passed, inclusion: {in: [true, false]}
+  validates :decision, presence: true
   validates :comment, presence: true, if: -> { !passed && !metadata["backfilled"] }
 
+  before_validation :set_passed
   before_save :set_metadata
-  after_create :update_reviewable_qc_status
+  before_create :update_reviewable_qc_status
 
   private
 
+  def set_passed
+    self.passed = reviewable.qc_rejectable_decisions.exclude? decision
+  end
+
   def set_metadata
-    self.metadata = reviewable.qc_metadata(qc_passed: passed)
+    self.metadata = reviewable.qc_metadata(self) unless metadata.present?
   end
 
   def update_reviewable_qc_status
-    reviewable.update_qc_status!(qc_passed: passed)
+    reviewable.update_qc_status!(self)
+  rescue => e
+    errors.add(:base, "Failed to update QC status: #{e.message}")
+    throw :abort
   end
 end

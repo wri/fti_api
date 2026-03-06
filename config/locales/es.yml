@@ -400,7 +400,6 @@ es:
       details: 'Detalles de Anexo de Documento del Operador'
     observations_page:
       not_modified: 'Observación NO modificada'
-      performed_qc: 'Control de Calidad realizado'
       moved_ready: 'Observación movida a Listo para Publicación'
       moved_needs_revision: 'Observación movida a Necesita Revisión'
       moved_qc_in_progress: 'Observación movida a QC en Progreso'
@@ -434,6 +433,7 @@ es:
     users_page:
       responsible_for_countries_hint: Los administradores responsables de países recibirán notificaciones relacionadas con el sector privado en estos países.
     quality_control_page:
+      performed_qc: 'Control de Calidad realizado con decisión: %{decision}'
       reviewable_not_in_qc: "La entidad revisada no está en estado QC en progreso"
     powered_by: "Admin Backoffice"
     delete_model: "Eliminar %{model}"

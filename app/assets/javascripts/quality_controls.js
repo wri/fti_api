@@ -1,15 +1,16 @@
 $(document).ready(function() {
   updateQCFields();
-  $('input[name="quality_control[passed]"]').on('change', function(){
+  $('input[name="quality_control[decision]"]').on('change', function(){
     updateQCFields();
   })
 })
 
 function updateQCFields() {
-  const selectedValue = $('input[name="quality_control[passed]"]:checked').val();
+  const selectedValue = $('input[name="quality_control[decision]"]:checked').val();
+  const rejectableDecisions = $('#quality_control_rejectable_decisions').val().split(',');
   const comment = $('#quality_control_comment_input');
 
-  if (selectedValue === 'false') {
+  if (rejectableDecisions.includes(selectedValue)) {
     comment.find('textarea').prop('disabled', false);
     comment.show();
   } else {

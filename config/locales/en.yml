@@ -387,7 +387,6 @@ en:
       details: 'Operator Document Annex Details'
     observations_page:
       not_modified: 'Observation NOT modified'
-      performed_qc: 'Quality Control performed'
       moved_ready: 'Observation moved to Ready for Publication'
       moved_needs_revision: 'Observation moved to Needs Revision'
       moved_qc_in_progress: 'Observation moved to QC in Progress'
@@ -422,6 +421,7 @@ en:
       responsible_for_countries_hint: Admin responsible for countries will get notifications concerning the private sector in these countries.
     quality_control_page:
       reviewable_not_in_qc: "Reviewed entity is not in QC in progress status"
+      performed_qc: 'Quality Control performed with decision: %{decision}'
     powered_by: "Admin Backoffice"
     delete_model: "Delete %{model}"
     delete: "Delete"
