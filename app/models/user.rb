@@ -83,6 +83,7 @@ class User < ApplicationRecord
 
   before_validation :create_from_request, on: :create
   before_validation :clear_unrelated_relations
+  before_save :clear_should_change_password, if: -> { will_save_change_to_encrypted_password? }
   after_update :notify_user, if: -> { is_active && saved_change_to_is_active? }
 
   include Activable
@@ -197,6 +198,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def clear_should_change_password
+    self.should_change_password = false
+  end
 
   def create_from_request
     return if permissions_request.blank?
