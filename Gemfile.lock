@@ -1,12 +1,5 @@
 GIT
-  remote: https://github.com/activeadmin-plugins/active_admin_sidebar.git
-  revision: 18b38b0586192cc0acab70b914b3536ca5be04de
-  specs:
-    active_admin_sidebar (2.0.0)
-      activeadmin
-
-GIT
-  remote: https://github.com/cerebris/jsonapi-resources.git
+  remote: https://github.com/JSONAPI-Resources/jsonapi-resources.git
   revision: 17772cefd8a90fc1b54744871de1050a6040a691
   branch: release-0-9
   specs:
@@ -14,6 +7,13 @@ GIT
       activerecord (>= 4.1)
       concurrent-ruby
       railties (>= 4.1)
+
+GIT
+  remote: https://github.com/activeadmin-plugins/active_admin_sidebar.git
+  revision: 18b38b0586192cc0acab70b914b3536ca5be04de
+  specs:
+    active_admin_sidebar (2.0.0)
+      activeadmin
 
 GIT
   remote: https://github.com/tsubik/activeadmin-globalize.git
