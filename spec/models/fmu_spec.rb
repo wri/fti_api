@@ -127,9 +127,8 @@ RSpec.describe Fmu, type: :model do
         country = create(:country)
         operator = create(:operator, country: country, fa_id: "fa_id")
         fmu = create(:fmu_geojson, operator: operator, country: country)
-        fmu.save
-
         fmu.reload
+
         expect(fmu.geojson["geometry"]["coordinates"]).to eql(fmu.geometry.coordinates)
       end
     end

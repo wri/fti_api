@@ -50,7 +50,8 @@ class Fmu < ApplicationRecord
   validates :forest_type, presence: true
   validates :geojson, geojson: true, if: :geojson_changed?
 
-  after_save :update_geometry, if: :saved_change_to_geojson?
+  after_create :update_geometry, if: :geojson
+  after_update :update_geometry, if: :saved_change_to_geojson?
   after_save :update_geojson_properties
 
   # TODO Redo all of those
@@ -148,6 +149,6 @@ class Fmu < ApplicationRecord
   end
 
   def update_centroid
-    self.class.unscoped.where(id: id).update_all("geojson = jsonb_set(geojson, '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)")
+    self.class.unscoped.where(id: id).update_all("geojson = jsonb_set(jsonb_set(geojson, '{properties}', COALESCE(geojson -> 'properties', '{}'), true), '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)")
   end
 end
