@@ -37,6 +37,14 @@ YAML_CLASS_SUBSTITUTIONS = [
   [/LogoUploader::Uploader\d+/, "LogoUploader"]
 ].freeze
 
+def paper_trail_print_progress(processed, total)
+  return unless processed % 100 == 0 || processed == total
+
+  pct = (total > 0) ? (processed * 100.0 / total).round(1) : 100.0
+  print "\r  #{processed}/#{total} (#{pct}%)"
+  $stdout.flush
+end
+
 namespace :paper_trail do
   desc "Run all paper_trail cleanup tasks in order. Set FOR_REAL=true to apply."
   task clean_up_all: %i[fix_yaml_serialization strip_fmu_geojson_properties clean_up deduplicate squash_create_updates]
@@ -50,7 +58,8 @@ namespace :paper_trail do
     scope = PaperTrail::Version.where(
       "object LIKE '%!ruby/object:%' OR object_changes LIKE '%!ruby/object:%'"
     )
-    puts "Found #{scope.count} versions with serialized Ruby objects.\n\n"
+    total = scope.count
+    puts "Found #{total} versions with serialized Ruby objects.\n\n"
 
     normalize_uploaders = ->(obj, key) do
       obj.class.name.to_s.end_with?("Uploader") ? obj.model.read_attribute(key) : obj
@@ -58,8 +67,11 @@ namespace :paper_trail do
 
     fixed = 0
     failed = 0
+    processed = 0
 
     scope.find_each do |version|
+      processed += 1
+      paper_trail_print_progress(processed, total)
       updates = {}
 
       %i[object object_changes].each do |col|
@@ -94,7 +106,7 @@ namespace :paper_trail do
       fixed += 1
     end
 
-    puts "\nVersions fixed: #{fixed}"
+    puts "\n\nVersions fixed: #{fixed}"
     puts "Versions with errors: #{failed}"
   end
 
@@ -116,7 +128,14 @@ namespace :paper_trail do
       ids_to_delete = []
       ids_to_strip = []
 
-      PaperTrail::Version.where(item_type: item_type).find_each do |version|
+      scope = PaperTrail::Version.where(item_type: item_type)
+      total = scope.count
+      processed = 0
+      puts "  Scanning #{total} #{item_type} versions..."
+
+      scope.find_each do |version|
+        processed += 1
+        paper_trail_print_progress(processed, total)
         next if version.object_changes.blank?
 
         changes = version.changeset
@@ -141,12 +160,16 @@ namespace :paper_trail do
       end
 
       if ids_to_strip.any?
+        strip_total = ids_to_strip.size
+        strip_processed = 0
         PaperTrail::Version.where(id: ids_to_strip).find_each do |version|
+          strip_processed += 1
+          paper_trail_print_progress(strip_processed, strip_total)
           changes = version.changeset
           stripped_fields.each { |f| changes.delete(f) }
           version.update_column(:object_changes, PaperTrail.serializer.dump(changes))
         end
-        puts "  Stripped."
+        puts "\n  Stripped."
       end
     end
   end
@@ -212,8 +235,12 @@ namespace :paper_trail do
     next unless for_real
 
     update_ids_to_delete = []
+    total = grouped.size
+    processed = 0
 
     grouped.each do |create_id, update_ids|
+      processed += 1
+      paper_trail_print_progress(processed, total)
       create_version = PaperTrail::Version.find(create_id)
       next if create_version.object_changes.blank?
 
@@ -238,6 +265,7 @@ namespace :paper_trail do
       create_version.update_column(:object_changes, PaperTrail.serializer.dump(merged))
     end
 
+    puts "" if total > 0
     PaperTrail::Version.where(id: update_ids_to_delete).delete_all if update_ids_to_delete.any?
     puts "Squashed #{update_ids_to_delete.size} update versions into their create versions."
   end
@@ -252,7 +280,13 @@ namespace :paper_trail do
     ids_to_delete = []
     ids_to_update = {}
 
-    PaperTrail::Version.where(item_type: "Fmu").find_each do |version|
+    fmu_scope = PaperTrail::Version.where(item_type: "Fmu")
+    total = fmu_scope.count
+    processed = 0
+
+    fmu_scope.find_each do |version|
+      processed += 1
+      paper_trail_print_progress(processed, total)
       next if version.object_changes.blank?
 
       changes = PaperTrail.serializer.load(version.object_changes)
@@ -277,7 +311,7 @@ namespace :paper_trail do
       end
     end
 
-    puts "#{ids_to_delete.size} versions to delete (geojson-only change, properties was the only diff)"
+    puts "\n#{ids_to_delete.size} versions to delete (geojson-only change, properties was the only diff)"
     puts "#{ids_to_update.size} versions to update (strip properties from geojson)"
 
     next unless for_real
