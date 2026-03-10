@@ -47,7 +47,7 @@ end
 
 namespace :paper_trail do
   desc "Run all paper_trail cleanup tasks in order. Set FOR_REAL=true to apply."
-  task clean_up_all: %i[fix_yaml_serialization strip_fmu_geojson_properties clean_up deduplicate squash_create_updates]
+  task clean_up_all: %i[fix_yaml_serialization strip_fmu_geojson_properties clean_up deduplicate squash_create_updates strip_create_duplicates]
 
   desc "Fix YAML serialization issues in PaperTrail versions caused by Rails class renames. also removes uploader objects. Set FOR_REAL=true to apply."
   task fix_yaml_serialization: :environment do
@@ -268,6 +268,84 @@ namespace :paper_trail do
     puts "" if total > 0
     PaperTrail::Version.where(id: update_ids_to_delete).delete_all if update_ids_to_delete.any?
     puts "Squashed #{update_ids_to_delete.size} update versions into their create versions."
+  end
+
+  desc "Remove changes from update versions that duplicate the directly preceding create version for the same item. Deletes the update if no changes remain. Set FOR_REAL=true to apply."
+  task strip_create_duplicates: :environment do
+    puts "Stripping changes from update versions that duplicate their directly preceding create version..."
+    for_real = ENV["FOR_REAL"] == "true"
+    verbose = ENV["VERBOSE"] == "true"
+    filter_item_type = ENV["ITEM_TYPE"]
+
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+    puts "Filtering to item_type=#{filter_item_type}" if filter_item_type
+
+    exclude_models = ["Operator::Translation", "Fmu::Translation", "Observer::Translation", "GovFile"]
+
+    type_filter = filter_item_type ? "AND item_type = #{ActiveRecord::Base.connection.quote(filter_item_type)}" : ""
+    exclude_filter = "AND item_type NOT IN (#{exclude_models.map { |m| ActiveRecord::Base.connection.quote(m) }.join(", ")})"
+
+    pairs = ActiveRecord::Base.connection.select_rows(<<~SQL)
+      WITH ranked AS (
+        SELECT id, event, item_type, item_id,
+               LAG(event) OVER (PARTITION BY item_type, item_id ORDER BY created_at, id) AS prev_event,
+               LAG(id)    OVER (PARTITION BY item_type, item_id ORDER BY created_at, id) AS prev_id
+        FROM versions
+        WHERE 1=1 #{type_filter} #{exclude_filter}
+      )
+      SELECT prev_id AS create_id, id AS update_id
+      FROM ranked
+      WHERE event = 'update' AND prev_event = 'create'
+    SQL
+
+    puts "Found #{pairs.size} (create, update) sibling pairs to inspect."
+
+    ids_to_delete = []
+    ids_to_update = {}
+
+    create_versions = PaperTrail::Version.where(id: pairs.map(&:first).uniq).index_by(&:id)
+    update_versions = PaperTrail::Version.where(id: pairs.map(&:last)).index_by(&:id)
+
+    pairs.each do |create_id, update_id|
+      create_version = create_versions[create_id.to_i]
+      update_version = update_versions[update_id.to_i]
+      next if create_version&.object_changes.blank? || update_version&.object_changes.blank?
+
+      create_changes = create_version.changeset.except("updated_at")
+      update_changes = update_version.changeset.except("updated_at")
+
+      duplicate_keys = update_changes.select { |field, pair| create_changes[field] == pair }.keys
+      next if duplicate_keys.empty?
+
+      reduced = update_changes.except(*duplicate_keys)
+
+      if verbose
+        diff_seconds = (update_version.created_at - create_version.created_at).to_i
+        time_diff = ActiveSupport::Duration.build(diff_seconds).inspect
+        base_info = "#{update_version.item_type} ##{update_version.item_id} (create: #{create_version.id}, update: #{update_version.id}, +#{time_diff})"
+      end
+
+      if reduced.empty?
+        puts "  [DELETE] #{base_info}" if verbose
+        ids_to_delete << update_version.id
+      else
+        puts "  [STRIP]  #{base_info} removing: #{duplicate_keys.join(", ")}" if verbose
+        ids_to_update[update_version.id] = PaperTrail.serializer.dump(reduced)
+      end
+    end
+
+    puts "#{ids_to_delete.size} update versions to delete (all changes duplicated the create)"
+    puts "#{ids_to_update.size} update versions to strip duplicate changes from"
+
+    next unless for_real
+
+    PaperTrail::Version.where(id: ids_to_delete).delete_all if ids_to_delete.any?
+    puts "Deleted #{ids_to_delete.size} update versions."
+
+    ids_to_update.each do |id, object_changes|
+      PaperTrail::Version.where(id: id).update_all(object_changes: object_changes)
+    end
+    puts "Updated #{ids_to_update.size} update versions."
   end
 
   desc "Strip geojson['properties'] from Fmu version object_changes. Deletes version if geojson is the only change and becomes identical after stripping. Set FOR_REAL=true to apply."
