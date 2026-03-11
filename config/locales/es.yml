@@ -150,6 +150,7 @@ es:
     versionate:
       current_version: 'Versión actual: '
       previous_version: 'Versión anterior'
+      next_version: 'Próxima versión'
       this_is_version: "Esta es la versión %{number}"
       created_at: 'Creado en: '
       modified_at: 'Modificado en: '

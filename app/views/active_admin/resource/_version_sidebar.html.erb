@@ -1,14 +1,15 @@
+<% user_email = ->(whodunnit) { User.find_by(id: whodunnit)&.email.presence || whodunnit.to_s.presence || 'Unknown' } %>
+
 <% if !@versions.empty? %>
-  <h3><%= I18n.t('active_admin.versionate.current_version').to_s + @versions.length.to_s %></h3>
-
   <% last_version = @versions.last %>
+  <% last_version_number = @versions.length %>
 
-  <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= last_version.created_at%>
-  <br>
-  <b><%= I18n.t('active_admin.versionate.user') %></b><%= User.find(last_version.whodunnit).email rescue '' %>
-  <br>
-  <% if @versions.length.to_i > 0 %>
+  <h3><%= I18n.t('active_admin.versionate.current_version') %><%= last_version_number %></h3>
 
+  <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= last_version.created_at %><br>
+  <b><%= I18n.t('active_admin.versionate.user') %></b><%= user_email.call(last_version.whodunnit) %><br>
+
+  <% if last_version_number > 0 %>
     <% if params[:version] %>
       <% version = @versions[params[:version].to_i] %>
 
@@ -20,31 +21,29 @@
         <% reify_version_info = version.previous %>
         <!-- We are showing reify version which is object before changes -->
         <% if reify_version_info %>
-          <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= reify_version_info.created_at %>
-          <br>
-          <b><%= I18n.t('active_admin.versionate.user') %></b>: <%= User.find(reify_version_info.whodunnit).email rescue '' %>
-          <br>
-          <br>
+          <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= reify_version_info.created_at %><br>
+          <b><%= I18n.t('active_admin.versionate.user') %></b>: <%= user_email.call(reify_version_info.whodunnit) %><br>
         <% end %>
-        <b><%= I18n.t('active_admin.versionate.modified_at') %></b><%= version.created_at %>
-        <br>
-        <b><%= I18n.t('active_admin.versionate.user') %></b> <%= User.find(version.whodunnit).email rescue '' %>
-        <br>
+        <b><%= I18n.t('active_admin.versionate.modified_at') %></b><%= version.created_at %><br>
+        <b><%= I18n.t('active_admin.versionate.user') %></b> <%= user_email.call(version.whodunnit) %><br>
       <% end %>
     <% end %>
 
+    <div style="display: flex; justify-content: space-between;margin-top: 10px;">
     <% if params[:version].to_i > 0 || !params[:version] %>
-      <%= link_to I18n.t('active_admin.versionate.previous_version'), {:version => (params[:version] || @versions.length).to_i - 1}%>
-      <br>
+      <%= link_to I18n.t('active_admin.versionate.previous_version'), { version: (params[:version] || last_version_number).to_i - 1 }%>
     <% end %>
+    <% if params[:version] && params[:version].to_i < last_version_number %>
+      <% next_version = params[:version].to_i + 1  %>
+      <%= link_to I18n.t('active_admin.versionate.next_version'), { version: next_version == last_version_number ? nil : next_version }%>
+    <% end %>
+    </div>
   <% end %>
 <% elsif @create_version %>
   <h3><%= I18n.t('active_admin.versionate.current_version')%>0</h3>
 
-  <b><%= I18n.t('active_admin.versionate.created_at') %></b>
-  <%= @create_version.created_at%>
-  <br>
-  <b><%= I18n.t('active_admin.versionate.user') %></b><%= User.find(@create_version.whodunnit).email rescue '' %>
+  <b><%= I18n.t('active_admin.versionate.created_at') %></b><%= @create_version.created_at%><br>
+  <b><%= I18n.t('active_admin.versionate.user') %></b><%= user_email.call(@create_version.whodunnit) %>
 <% else %>
   <p><%= I18n.t('active_admin.versionate.no_versions') %></p>
 <% end %>

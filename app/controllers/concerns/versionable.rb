@@ -3,9 +3,19 @@
 module Versionable
   def self.extended(base)
     base.instance_eval do
-      sidebar :versionate, partial: "version_sidebar", only: :show
+      sidebar :version_info, partial: "version_sidebar", only: :show
 
       controller do
+        helper_method :versions, :create_version
+
+        def versions
+          @versions
+        end
+
+        def create_version
+          @create_version
+        end
+
         def show
           model = resource.class.base_class
           current = if model.respond_to?(:with_deleted)

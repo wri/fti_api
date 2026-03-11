@@ -145,6 +145,7 @@ fr:
     versionate:
       current_version: 'Version actuelle: '
       previous_version: 'Version précédente'
+      next_version: 'Prochaine version'
       this_is_version: "This is %{number} version"
       created_at: 'Créé le: '
       modified_at: 'Modifié le: '
