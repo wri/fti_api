@@ -192,7 +192,5 @@ ActiveAdmin.register OperatorDocumentAnnex do
       row :updated_at
       row :deleted_at
     end
-
-    render "version_history"
   end
 end

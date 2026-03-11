@@ -146,8 +146,6 @@ ActiveAdmin.register Fmu do
       row :updated_at
       row :deleted_at
     end
-
-    render "version_history"
   end
 
   index do

@@ -146,6 +146,7 @@ en:
       no_versions: 'This item does not have any registered version.'
       preview: 'Preview'
       view: 'View'
+      version_history: 'Version History'
     shared:
       translated_fields: 'Translated Fields'
       monitor_details: 'Monitor Details'

@@ -1,0 +1,5 @@
+dialog id: "version_history_modal", title: I18n.t("active_admin.versionate.version_history"), class: "version_history" do
+  render "version_history"
+end
+
+button t("active_admin.view"), "javascript:void(0)", class: "button", onclick: "document.querySelector('#version_history_modal').showModal()"

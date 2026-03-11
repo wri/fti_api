@@ -253,10 +253,6 @@ dialog {
   border: 0;
   padding: 0;
 
-  max-height: 80vh;
-  max-width: 70vw;
-  overflow-y: auto;
-
   header {
     display: flex;
     background-color: $panelHeaderBck;
@@ -278,11 +274,32 @@ dialog {
 
   > div {
     padding: 10px;
+
+    max-height: 80vh;
+    max-width: 70vw;
+    overflow-y: auto;
   }
 }
 
 dialog::backdrop {
   backdrop-filter: blur(2px);
+}
+
+// versionate dialog
+dialog.version_history {
+  > div {
+    padding: 0px;
+  }
+
+  table {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  table thead {
+    position: sticky;
+    top: 0;
+  }
 }
 
 // Translated row styles
