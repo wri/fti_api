@@ -108,6 +108,9 @@ ActiveAdmin.register Observation do
   scope -> { I18n.t("shared.created") }, :created
   scope -> { I18n.t("active_admin.observations_page.scope_hidden") }, :hidden
   scope -> { I18n.t("active_admin.observations_page.visible") }, :visible
+  scope -> { I18n.t("activerecord.models.quality_control") }, :quality_control, if: -> { current_user.reviewable_observer_ids.any? } do |observations|
+    observations.ready_for_or_in_qc.where(id: current_user.quality_controlable_observations)
+  end
 
   # region filters
   filter :id, as: :numeric_range_filter

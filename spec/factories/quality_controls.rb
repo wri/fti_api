@@ -14,11 +14,13 @@
 #
 FactoryBot.define do
   factory :quality_control do
-    reviewable { create(:observation, validation_status: "QC2 in progress") }
+    reviewable { build(:observation, validation_status: "QC2 in progress") }
     reviewer { build(:admin) }
     passed { true }
+    decision { "Ready for publication" }
 
     trait :not_passed do
+      decision { "Rejected" }
       passed { false }
       comment { "Quality control not passed" }
     end

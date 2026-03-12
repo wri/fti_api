@@ -56,7 +56,7 @@ class Observation < ApplicationRecord
   translates :details, :concern_opinion, :litigation_status, :evidence_on_report, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
 
-  WrongStateError = Class.new(StandardError)
+  QCError = Class.new(StandardError)
 
   enum :evidence_type, {"No evidence" => 0, "Uploaded documents" => 1, "Evidence presented in the report" => 2}, validate: {allow_nil: true}
   enum :observation_type, {"operator" => 0, "government" => 1}, validate: true
@@ -94,18 +94,7 @@ class Observation < ApplicationRecord
       "Ready for QC1" => ["QC1 in progress"],
       "QC1 in progress" => ["Rejected", "Ready for QC2"],
       "Ready for QC2" => ["QC2 in progress"],
-      "QC2 in progress" => ["Needs revision", "Ready for publication"]
-    }
-  }.freeze
-
-  QC_APPROVAL_STATUS_TRANSITIONS = {
-    "QC1 in progress" => {
-      false => "Rejected",
-      true => "Ready for QC2"
-    },
-    "QC2 in progress" => {
-      false => "Needs revision",
-      true => "Ready for publication"
+      "QC2 in progress" => ["Needs revision", "Rejected", "Ready for publication"]
     }
   }.freeze
 
@@ -212,6 +201,7 @@ class Observation < ApplicationRecord
   scope :by_government, ->(government_id) { joins(:governments).where(governments: {id: government_id}) }
   scope :pending, -> { where(validation_status: ["Created", "QC2 in progress"]) }
   scope :created, -> { where(validation_status: ["Created", "Ready for QC2"]) }
+  scope :ready_for_or_in_qc, -> { where(validation_status: ["Ready for QC1", "Ready for QC2", "QC1 in progress", "QC2 in progress"]) }
   scope :published, -> { where(validation_status: PUBLISHED_STATES) }
   scope :hidden, -> { where(hidden: true) }
   scope :visible, -> { where(hidden: [false, nil]) }
@@ -279,27 +269,36 @@ class Observation < ApplicationRecord
     responsible_for_qc1.or(responsible_for_qc2)
   end
 
-  def update_qc_status!(qc_passed:)
-    raise WrongStateError, "QC not in progress" unless qc_in_progress?
-
+  def update_qc_status!(qc)
     update!(
       user_type: :reviewer,
-      validation_status: QC_APPROVAL_STATUS_TRANSITIONS[validation_status][qc_passed]
+      validation_status: qc.decision
     )
   end
 
-  def qc_available_decisions
-    return [] unless QC_APPROVAL_STATUS_TRANSITIONS[validation_status]
-
-    QC_APPROVAL_STATUS_TRANSITIONS[validation_status].invert.to_a
+  def qc_rejectable_decisions
+    ["Rejected", "Needs revision"]
   end
 
-  def qc_metadata(qc_passed:)
+  def qc_available_decisions
+    return [] unless qc_in_progress?
+
+    STATUS_TRANSITIONS[:reviewer][validation_status]
+  end
+
+  def qc_decisions_hints
+    {
+      "Rejected" => I18n.t("active_admin.observations_page.rejected_hint"),
+      "Needs revision" => I18n.t("active_admin.observations_page.needs_revision_hint")
+    }
+  end
+
+  def qc_metadata(qc)
     return {} unless qc_in_progress?
 
     {
       level: (validation_status == "QC1 in progress") ? "QC1" : "QC2",
-      decision: QC_APPROVAL_STATUS_TRANSITIONS[validation_status][qc_passed]
+      decision: qc.decision
     }
   end
 

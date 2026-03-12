@@ -65,9 +65,7 @@ panel "Quality Controls" do
       end
       column :reviewer
       column :passed?
-      tag_column :decision do |qc|
-        qc.metadata["decision"].presence
-      end
+      tag_column :decision
       column :comment
       column :performed_at, &:created_at
     end

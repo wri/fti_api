@@ -809,6 +809,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_23_113655) do
     t.jsonb "metadata", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "decision", null: false
     t.index ["reviewable_type", "reviewable_id"], name: "index_quality_controls_on_reviewable"
     t.index ["reviewer_id"], name: "index_quality_controls_on_reviewer_id"
   end

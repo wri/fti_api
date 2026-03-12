@@ -7,7 +7,7 @@ module V1
 
     has_one :reviewable, polymorphic: true, always_include_linkage_data: true
 
-    attributes :comment, :passed, :created_at, :updated_at
+    attributes :comment, :passed, :decision, :created_at, :updated_at
 
     before_create :set_reviewer
 

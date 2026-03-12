@@ -393,7 +393,6 @@ fr:
       details: "Détails de l'annexe du document de l'opérateur"
     observations_page:
       not_modified: 'Observation NON modifiée'
-      performed_qc: 'Contrôle qualité effectué'
       moved_ready: 'Observation déplacée vers Prêt pour publication'
       moved_needs_revision: 'Observation déplacée vers Nécessite une révision'
       moved_qc_in_progress: 'Observation déplacée au CQ en cours'
@@ -424,7 +423,10 @@ fr:
       location_on_map: 'Emplacement sur la carte'
       visible: 'Visible'
       scope_hidden: 'Invisible'
+      rejected_hint: 'L’observation sera rejetée et le moniteur en sera informé. Le moniteur peut ensuite modifier l’observation et la soumettre à nouveau pour le contrôle de qualité.'
+      needs_revision_hint: 'Le moniteur sera informé que l’observation nécessite une révision avec des suggestions proposées. Le moniteur peut toujours publier l’observation ou la soumettre à nouveau pour le contrôle de qualité.'
     quality_control_page:
+      performed_qc: 'Contrôle de qualité effectué avec la décision : %{decision}'
       reviewable_not_in_qc: "L'entité examinée n'a pas le statut de contrôle qualité en cours"
     powered_by: "Admin Backoffice"
     delete_model: "Supprimer %{model}"
@@ -554,6 +556,7 @@ fr:
       uploaded_document: Document téléchargé  #g
       user: Utilisateur  #g
       user_permission: Autorisation utilisateur  #g
+      quality_control: Contrôle de qualité
     attributes:
       about_page_entry:
         code: 'Code'

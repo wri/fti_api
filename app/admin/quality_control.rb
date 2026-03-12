@@ -5,7 +5,7 @@ ActiveAdmin.register QualityControl do
 
   actions :new, :create
 
-  permit_params :reviewer_id, :reviewable_id, :reviewable_type, :passed, :comment
+  permit_params :reviewer_id, :reviewable_id, :reviewable_type, :decision, :comment
 
   controller do
     def new
@@ -16,7 +16,11 @@ ActiveAdmin.register QualityControl do
 
     def create
       super do |format|
-        redirect_to reviewable_path and return
+        if resource.errors.empty?
+          redirect_to params[:return_to] || reviewable_path, notice: I18n.t("active_admin.quality_control_page.performed_qc", decision: resource.decision) and return
+        else
+          resource.reviewable.reload
+        end
       end
     end
 
@@ -32,9 +36,21 @@ ActiveAdmin.register QualityControl do
     f.hidden_field :reviewer_id, value: current_user.id
     f.hidden_field :reviewable_id, value: resource.reviewable_id
     f.hidden_field :reviewable_type, value: resource.reviewable_type
+    f.hidden_field :rejectable_decisions, value: resource.reviewable.qc_rejectable_decisions.join(","), disabled: true
 
     f.inputs do
-      f.input :passed, as: :radio, collection: resource.reviewable.qc_available_decisions, label: I18n.t("operator_documents.qc_form.decision")
+      f.input :decision, as: :radio, collection: resource.reviewable.qc_available_decisions, label: I18n.t("operator_documents.qc_form.decision")
+
+      resource.reviewable.qc_available_decisions.each do |decision|
+        next unless resource.reviewable.qc_decisions_hints[decision].present?
+
+        li class: "input qc-decision-hint", style: "display: none;", "data-hint": decision do
+          div class: "flash flash_warning" do
+            resource.reviewable.qc_decisions_hints[decision]
+          end
+        end
+      end
+
       f.input :comment, as: :text
     end
 
