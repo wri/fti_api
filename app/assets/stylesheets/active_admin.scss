@@ -252,6 +252,7 @@ body.active_admin {
 dialog {
   border: 0;
   padding: 0;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
 
   header {
     display: flex;
@@ -294,11 +295,15 @@ dialog.version_history {
   table {
     margin-top: 0px;
     margin-bottom: 0px;
-  }
 
-  table thead {
-    position: sticky;
-    top: 0;
+    thead {
+      position: sticky;
+      top: 0;
+    }
+
+    tr.odd td {
+      background: unset;
+    }
   }
 }
 
