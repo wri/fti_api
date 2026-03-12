@@ -53,7 +53,7 @@ class Observation < ApplicationRecord
   include ValidationHelper
   include ObservationOldAttributes
 
-  translates :details, :concern_opinion, :litigation_status, touch: true, versioning: :paper_trail, paranoia: true
+  translates :details, :concern_opinion, :litigation_status, :evidence_on_report, touch: true, versioning: :paper_trail, paranoia: true
   active_admin_translates :details, :concern_opinion, :litigation_status
 
   WrongStateError = Class.new(StandardError)
