@@ -60,15 +60,23 @@ table_for history, class: "index_table" do
     User.find_by(id: v.whodunnit)&.email
   end
   column I18n.t("active_admin.versionate.changes", default: "Changes") do |v|
-    changes = v.changeset
-    next if changes.blank?
+    grouped = v.grouped_changeset
+    next if grouped[:plain].empty? && grouped[:translated].empty?
 
     content_tag(:ul, style: "margin: 0; padding: 0; list-style: none;") do
-      safe_join(changes.map do |field, (old_val, new_val)|
+      items = grouped[:plain].map do |field, (old_val, new_val)|
         content_tag(:li) do
-          content_tag(:b, field.humanize) + ": " + format_diff.call(field, old_val, new_val, v.object_id.to_s)
+          content_tag(:b, field.humanize) + ": " + format_diff.call(field, old_val, new_val, "#{v.object_id}_#{field}")
         end
-      end)
+      end
+
+      items += grouped[:translated].map do |base_field, locale_changes|
+        content_tag(:li) do
+          render("version_history_translated_field", base_field: base_field, locale_changes: locale_changes, version_id: v.object_id, format_diff: format_diff)
+        end
+      end
+
+      safe_join(items)
     end
   end
   if all_versions.present?

@@ -84,10 +84,31 @@ class CombinedVersion
       next unless locale
       v.changeset.except("created_at", "updated_at", "id", "locale").each do |field, changes|
         next if field.end_with?("_id")
-        h["#{field} (#{locale})"] = changes
+        if field.include?("translated_from")
+          h[field] = changes
+        else
+          h["#{field} (#{locale})"] = changes
+        end
       end
     end
-    parent_cs.merge(translation_cs).except("created_at", "updated_at", "id")
+    parent_cs
+      .merge(translation_cs)
+      .except("created_at", "updated_at", "id")
+      .reject { |_, (old, new)| old.to_s == new.to_s }
+  end
+
+  # Returns { plain: { field => [old, new] }, translated: { field => { locale => [old, new] } } }
+  def grouped_changeset
+    plain = {}
+    translated = {}
+    changeset.each do |field, vals|
+      if (m = field.match(/\A(.+) \((\w[\w-]*)\)\z/))
+        (translated[m[1]] ||= {})[m[2]] = vals
+      else
+        plain[field] = vals
+      end
+    end
+    {plain: plain, translated: translated}
   end
 
   def translation_only?

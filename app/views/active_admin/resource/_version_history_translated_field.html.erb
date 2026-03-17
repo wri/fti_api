@@ -1,0 +1,17 @@
+<div class="translated-attribute">
+  <b><%= base_field.humanize %>: </b>
+  <span style="font-weight: normal; color: #999;">
+    <span class="translation-links" style="display: inline; border: none; padding: 0; margin: 0;">
+      <% locale_changes.each_key do |locale| %>
+        <a class="translation-link <%= "active" if locale == locale_changes.keys.first %>" data-locale="<%= locale %>">
+          <%= locale.upcase %>
+        </a>
+      <% end %>
+    </span>
+  </span>
+  <% locale_changes.each do |locale, (old_val, new_val)| %>
+    <div class="translation-content" data-locale="<%= locale %>" style="<%= "display:none" unless locale == locale_changes.keys.first %>">
+      <%= format_diff.call(base_field, old_val, new_val, "#{version_id}_#{base_field}_#{locale}") %>
+    </div>
+  <% end %>
+</div>
