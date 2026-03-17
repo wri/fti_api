@@ -849,6 +849,7 @@ DEPENDENCIES
   debug
   device_detector
   devise
+  diff-lcs
   dotenv-rails
   factory_bot_rails
   faker

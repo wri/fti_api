@@ -344,3 +344,7 @@ dialog.version_history {
   }
 }
 
+// Inline diff highlighting in version history table
+.index_table ins { background: #d4fcbc; text-decoration: none; }
+.index_table del { background: #fbb6c2; text-decoration: line-through; }
+

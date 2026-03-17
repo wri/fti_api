@@ -1,18 +1,48 @@
 history ||= versions&.reverse || []
 
 enum_labels = resource.class.defined_enums.transform_values(&:invert)
-format_value = ->(field, value, id) {
+
+format_diff = ->(field, old_val, new_val, id) {
+  format_geojson = ->(val, modal_id) {
+    next "" if val.blank?
+    dialog(id: modal_id, title: Fmu.human_attribute_name(:geojson)) { val }
+    link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('##{modal_id}').showModal()"
+  }
+
   if field == "geojson"
-    return "" if value.blank?
-
-    dialog id: "history_#{id}_geojson_modal", title: Fmu.human_attribute_name(:geojson) do
-      value
-    end
-
-    return link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#history_#{id}_geojson_modal').showModal()"
+    return safe_join([
+      format_geojson.call(old_val, "history_#{id}_geojson_old_modal"),
+      " \u2192 ",
+      format_geojson.call(new_val, "history_#{id}_geojson_new_modal")
+    ])
   end
 
-  enum_labels[field]&.fetch(value, nil)&.humanize || value.to_s
+  if enum_labels[field]
+    format_status = ->(v) {
+      next "" unless v.present?
+      label = enum_labels[field].fetch(v, v).to_s
+      content_tag(:span, label.humanize, class: "status_tag #{label.parameterize}")
+    }
+    return safe_join([format_status.call(old_val), " \u2192 ", format_status.call(new_val)])
+  end
+
+  old_s = old_val.to_s
+  new_s = new_val.to_s
+
+  if (old_s.length + new_s.length) > 30
+    # Word-level inline diff: split on word boundaries so each token is a word or whitespace/punct
+    diffs = Diff::LCS.sdiff(old_s.split(/\b/), new_s.split(/\b/))
+    safe_join(diffs.map { |change|
+      case change.action
+      when "=" then change.old_element
+      when "+" then content_tag(:ins, change.new_element)
+      when "-" then content_tag(:del, change.old_element)
+      when "!" then content_tag(:del, change.old_element) + content_tag(:ins, change.new_element)
+      end
+    })
+  else
+    "#{old_s} \u2192 #{new_s}"
+  end
 }
 
 all_versions = if create_version.present?
@@ -33,11 +63,10 @@ table_for history, class: "index_table" do
     changes = v.changeset
     next if changes.blank?
 
-    content_tag(:ul, style: "margin: 0; padding-left: 1.2em;") do
+    content_tag(:ul, style: "margin: 0; padding: 0; list-style: none;") do
       safe_join(changes.map do |field, (old_val, new_val)|
         content_tag(:li) do
-          content_tag(:b, field.humanize) +
-            ": " + format_value.call(field, old_val, v.object_id.to_s + "_old") + " \u2192 " + format_value.call(field, new_val, v.object_id.to_s + "_new")
+          content_tag(:b, field.humanize) + ": " + format_diff.call(field, old_val, new_val, v.object_id.to_s)
         end
       end)
     end
