@@ -4,7 +4,6 @@ module Versionable
   def self.extended(base)
     base.instance_eval do
       sidebar :version_info, partial: "version_sidebar", only: :show
-      sidebar :version_history, partial: "version_history_sidebar", only: :show
 
       controller do
         helper_method :versions, :create_version

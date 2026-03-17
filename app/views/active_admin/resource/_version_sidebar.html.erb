@@ -27,6 +27,12 @@
   <% end %>
 <% end %>
 
+<% if [@create_version, *@versions].compact.length > 1 %>
+  <%= render 'version_history_dialog' %>
+  <%= link_to t("active_admin.versionate.view_history_table"), "javascript:void(0)", style: "margin-top: 10px; width: 100%; text-align: center;", class: "button", onclick: "document.querySelector('#version_history_modal').showModal()" %>
+<% end %>
+
+
 <% if last_version_number > 0 %>
   <div style="display: flex; justify-content: space-between; margin-top: 10px;">
     <% if params[:version].to_i > 0 || !params[:version] %>

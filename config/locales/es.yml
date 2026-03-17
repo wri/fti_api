@@ -157,6 +157,10 @@ es:
       user: 'Usuario: '
       go_to_current_version: 'Ir a la versión actual'
       no_versions: 'Este elemento no tiene versiones registradas.'
+      preview: 'Vista previa'
+      view: 'Ver'
+      version_history: 'Historial de versiones'
+      view_history_table: 'Ver tabla de historial'
     shared:
       translated_fields: 'Campos traducidos'
       monitor_details: 'Detalles del monitor'

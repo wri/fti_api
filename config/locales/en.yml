@@ -147,6 +147,7 @@ en:
       preview: 'Preview'
       view: 'View'
       version_history: 'Version History'
+      view_history_table: 'View History Table'
     shared:
       translated_fields: 'Translated Fields'
       monitor_details: 'Monitor Details'
