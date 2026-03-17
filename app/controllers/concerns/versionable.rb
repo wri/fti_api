@@ -23,11 +23,13 @@ module Versionable
           else
             model.includes(versions: :item).find(params[:id])
           end
+          @versions, @create_version = CombinedVersion.build_for(current)
           resource = current
-          @versions = resource.versions.where.not(event: "create")
-          @create_version = resource.versions.where(event: "create").first
           begin
-            resource = @versions[params[:version].to_i].reify if params[:version]
+            if params[:version]
+              version = @versions[params[:version].to_i]
+              resource = version.reify(current)
+            end
           rescue => e
             Sentry.capture_exception e
             raise if Rails.env.local?
