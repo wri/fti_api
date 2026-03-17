@@ -1,8 +1,10 @@
 $(document).ready(function() {
-  updateQCFields();
-  $('input[name="quality_control[decision]"]').on('change', function(){
+  if ($('input[name="quality_control[decision]"]').length) {
     updateQCFields();
-  })
+    $('input[name="quality_control[decision]"]').on('change', function(){
+      updateQCFields();
+    })
+  }
 })
 
 function updateQCFields() {

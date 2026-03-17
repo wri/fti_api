@@ -64,6 +64,12 @@ class OperatorDocumentHistory < ApplicationRecord
     true
   end
 
+  def detailed_status
+    return "doc_pending_non_applicable" if doc_pending? && reason.present?
+
+    status
+  end
+
   # Returns the collection of OperatorDocumentHistory for a given operator at a point in time
   #
   # @param String operator_id The operator id

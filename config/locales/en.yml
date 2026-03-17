@@ -376,6 +376,7 @@ en:
       operator_document_id: 'Operator Document ID'
       with_deleted: 'With deleted'
       reason_label: "Reason for putting document as “non applicable”"
+      non_applicable: "Non applicable"
     operator_document_annexes_page:
       approved: 'Annex approved'
       not_approved: 'Annex could not be approved'
