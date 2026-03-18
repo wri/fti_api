@@ -4,18 +4,19 @@
 #
 # Table name: operator_document_annexes
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  start_date  :date
-#  expire_date :date
-#  deleted_at  :date
-#  status      :integer
-#  attachment  :string
-#  uploaded_by :integer
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  public      :boolean          default(TRUE), not null
+#  id                  :integer          not null, primary key
+#  name                :string
+#  start_date          :date
+#  expire_date         :date
+#  deleted_at          :date
+#  status              :integer
+#  attachment          :string
+#  uploaded_by         :integer
+#  user_id             :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  public              :boolean          default(TRUE), not null
+#  invalidation_reason :text
 #
 
 class OperatorDocumentAnnex < ApplicationRecord
@@ -31,19 +32,19 @@ class OperatorDocumentAnnex < ApplicationRecord
   has_many :annex_documents_history, -> { where(documentable_type: "OperatorDocumentHistory") },
     class_name: "AnnexDocument", inverse_of: :operator_document_annex
   has_many :operator_document_histories, through: :annex_documents_history, source: :documentable, source_type: "OperatorDocumentHistory"
-  has_many :quality_controls, as: :reviewable, dependent: :destroy
-  has_one :latest_quality_control, -> { order(created_at: :desc) }, inverse_of: :reviewable, class_name: "QualityControl"
 
   skip_callback :commit, :after, :remove_attachment!
   after_real_destroy :remove_attachment!
 
-  after_commit :notify_about_changes, if: -> { saved_change_to_status? }
-
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
+  before_validation :clear_invalidation_reason, if: :doc_valid?
+
+  after_commit :notify_about_changes, if: -> { saved_change_to_status? }
 
   validates :name, :start_date, :status, presence: true
+  validates :invalidation_reason, presence: {if: :doc_invalid?}
 
   enum :status, {doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4}
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
@@ -95,22 +96,14 @@ class OperatorDocumentAnnex < ApplicationRecord
     update(status: OperatorDocumentAnnex.statuses[:doc_expired])
   end
 
-  def qc_available_decisions
-    ["doc_valid", "doc_invalid"]
-  end
-
-  def qc_rejectable_decisions
-    ["doc_invalid"]
-  end
-
-  def update_qc_status!(qc)
-    update!(status: qc.decision)
-  end
-
   private
 
   def any_operator_document_without_authorization?
     [operator_document, *operator_document_histories].compact.any? { !it.needs_authorization_before_downloading? }
+  end
+
+  def clear_invalidation_reason
+    self.invalidation_reason = nil
   end
 
   def notify_about_changes

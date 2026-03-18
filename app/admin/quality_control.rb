@@ -69,12 +69,6 @@ ActiveAdmin.register QualityControl do
       end
     end
 
-    if resource.reviewable_type == "Observation"
-      render partial: "admin/observations/attributes_table", locals: {observation: resource.reviewable}
-    end
-
-    if resource.reviewable_type == "OperatorDocumentAnnex"
-      render partial: "admin/operator_document_annexes/attributes_table", locals: {annex: resource.reviewable}
-    end
+    render partial: "admin/#{resource.reviewable_type.pluralize.downcase}/attributes_table", locals: {observation: resource.reviewable}
   end
 end
