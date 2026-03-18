@@ -161,6 +161,7 @@ es:
       view: 'Ver'
       version_history: 'Historial de versiones'
       view_history_table: 'Ver tabla de historial'
+      loading_history_table: 'Cargando...'
     shared:
       translated_fields: 'Campos traducidos'
       monitor_details: 'Detalles del monitor'

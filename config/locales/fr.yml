@@ -156,6 +156,7 @@ fr:
       view: 'Voir'
       version_history: 'Historique des versions'
       view_history_table: "Voir le tableau d'historique"
+      loading_history_table: 'Chargement...'
     shared:
       translated_fields: 'Champs traduits'
       monitor_details: 'Détails de l’observateur'

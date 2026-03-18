@@ -17,12 +17,7 @@ module Versionable
         end
 
         def show
-          model = resource.class.base_class
-          current = if model.respond_to?(:with_deleted)
-            model.includes(versions: :item).with_deleted.find(params[:id])
-          else
-            model.includes(versions: :item).find(params[:id])
-          end
+          current = find_current_record
           @versions, @create_version = CombinedVersion.build_for(current)
           resource = current
           begin
@@ -39,6 +34,25 @@ module Versionable
           instance_variable_set("@#{resource_instance_name}", resource)
           show! # it seems to need this
         end
+
+        private
+
+        def find_current_record
+          model = resource.class.base_class
+          if model.respond_to?(:with_deleted)
+            model.includes(versions: :item).with_deleted.find(params[:id])
+          else
+            model.includes(versions: :item).find(params[:id])
+          end
+        end
+      end
+
+      member_action :version_history do
+        current = find_current_record
+        versions, create_version = CombinedVersion.build_for(current)
+        render partial: "version_history",
+          locals: {versions: versions, create_version: create_version, resource: current},
+          layout: false
       end
     end
   end

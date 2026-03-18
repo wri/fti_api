@@ -29,7 +29,33 @@
 
 <% if [@create_version, *@versions].compact.length > 1 %>
   <%= render 'version_history_dialog' %>
-  <%= link_to t("active_admin.versionate.view_history_table"), "javascript:void(0)", style: "margin-top: 10px; width: 100%; text-align: center;", class: "button", onclick: "document.querySelector('#version_history_modal').showModal()" %>
+  <% history_url = url_for(action: :version_history) %>
+  <script>
+    function openVersionHistoryModal(btn) {
+      var modal = document.querySelector('#version_history_modal');
+      var content = document.querySelector('#version_history_modal_content');
+      if (content.dataset.loaded) { modal.showModal(); return; }
+      var originalText = btn.textContent;
+      btn.textContent = '<%= t("active_admin.versionate.loading_history_table") %>';
+      btn.disabled = true;
+      content.textContent = '';
+      fetch('<%= history_url %>', {headers: {'X-Requested-With': 'XMLHttpRequest'}})
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          content.innerHTML = html;
+          content.dataset.loaded = '1';
+          modal.showModal();
+        })
+        .finally(function() {
+          btn.textContent = originalText;
+          btn.disabled = false;
+        });
+    }
+  </script>
+  <%= link_to t("active_admin.versionate.view_history_table"), "javascript:void(0)",
+    style: "margin-top: 10px; width: 100%; text-align: center;",
+    class: "button",
+    onclick: "openVersionHistoryModal(this)" %>
 <% end %>
 
 
