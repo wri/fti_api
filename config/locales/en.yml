@@ -396,6 +396,7 @@ en:
       history_annexes: 'History Annexes'
       details: 'Operator Document Annex Details'
       approve_confirmation: 'Are you sure you want to approve annex %{name}?'
+      comment: 'Reason for rejection'
     observations_page:
       not_modified: 'Observation NOT modified'
       moved_ready: 'Observation moved to Ready for Publication'

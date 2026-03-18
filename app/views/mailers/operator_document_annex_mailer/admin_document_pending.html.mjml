@@ -1,0 +1,20 @@
+<p>
+  <%= t(".paragraph1", company: @operator.name) %>
+</p>
+
+<p>
+  <%= t("mailers.document") %>: <%= @document.operator_document.name_with_fmu %><br/>
+  Annex Name: <%= @document.name %><br/>
+  <%= OperatorDocument.human_attribute_name(:start_date) %>: <%= @document.start_date %><br/>
+  <%= OperatorDocument.human_attribute_name(:expire_date) %>: <%= @document.expire_date %><br/>
+  Link: <%= link_to nil, @document.attachment.url %>
+</p>
+
+<p>
+  <%= t(".paragraph2", link: link_to(nil, admin_operator_document_annex_url(@document), target: "_blank")).html_safe %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %> <br/>
+  <%= t("mailers.signature") %>
+</p>

@@ -58,10 +58,22 @@ class OperatorDocumentAnnex < ApplicationRecord
       .where.not(id: AnnexDocument.where(documentable_type: "OperatorDocument").select(:operator_document_annex_id))
   }
 
+  def rejectable?
+    !deleted? && (doc_pending? || doc_valid?)
+  end
+
+  def approvable?
+    !deleted? && (doc_pending? || doc_invalid?)
+  end
+
   def needs_authorization_before_downloading?
     return false if (doc_valid? || doc_expired?) && any_operator_document_without_authorization?
 
     true
+  end
+
+  def operator
+    operator_document&.operator || operator_document_histories.first&.operator
   end
 
   def self.expire_document_annexes
@@ -82,11 +94,15 @@ class OperatorDocumentAnnex < ApplicationRecord
   end
 
   def qc_available_decisions
-    [[I18n.t("active_admin.approve"), true], [I18n.t("active_admin.reject"), false]]
+    ["doc_valid", "doc_invalid"]
   end
 
-  def update_qc_status!(qc_passed:)
-    update!(status: qc_passed ? :doc_valid : :doc_invalid)
+  def qc_rejectable_decisions
+    ["doc_invalid"]
+  end
+
+  def update_qc_status!(qc)
+    update!(status: qc.decision)
   end
 
   private

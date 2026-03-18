@@ -401,7 +401,8 @@ fr:
       operator_document: "Document de l'opérateur"
       orphaned: 'Orphelin'
       details: "Détails de l'annexe du document de l'opérateur"
-      approve_confirmation: 'Êtes-vous sûr de vouloir approuver l’annexe %{name}?'
+      approve_confirmation: ‘Êtes-vous sûr de vouloir approuver l’annexe %{name}?’
+      comment: ‘Raison du rejet’
     observations_page:
       not_modified: 'Observation NON modifiée'
       moved_ready: 'Observation déplacée vers Prêt pour publication'

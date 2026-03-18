@@ -20,12 +20,33 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :approve, method: :put do
-    qc = QualityControl.new(passed: true, reviewable: resource, reviewer: current_user)
+    qc = QualityControl.new(decision: "doc_valid", reviewable: resource, reviewer: current_user)
     if !resource.doc_valid? && qc.save
-      redirect_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.approved")
+      redirect_back_or_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.approved")
     else
-      redirect_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
+      redirect_back_or_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
     end
+  end
+
+  member_action :reject, method: [:get, :put] do
+    @qc = QualityControl.new(decision: "doc_invalid", reviewable: resource, reviewer: current_user)
+    if request.put?
+      @qc.comment = params.dig(:quality_control, :comment)
+      if !resource.doc_invalid? && @qc.save
+        redirect_to params[:return_to] || collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.rejected")
+      else
+        render :reject
+      end
+    end
+  end
+
+  action_item :reject, only: :show, if: proc { resource.rejectable? } do
+    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(resource)
+  end
+
+  action_item :approve, only: :show, if: proc { resource.approvable? } do
+    approve_confirmation = I18n.t("active_admin.operator_document_annexes_page.approve_confirmation", name: resource.name)
+    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(resource), method: :put, data: {confirm: approve_confirmation}
   end
 
   actions :all, except: [:destroy, :new]
@@ -86,17 +107,15 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     if params[:scope] == "archived"
       column :deleted_at
-    else
-      column(I18n.t("active_admin.approve")) { |annex| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put }
-      column(I18n.t("active_admin.reject")) { |annex| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), method: :put }
     end
     actions defaults: false, name: I18n.t("active_admin.shared.actions") do |annex|
-      unless annex.doc_valid?
+      if annex.approvable?
         approve_confirmation = I18n.t("active_admin.operator_document_annexes_page.approve_confirmation", name: annex.name)
         item I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put, data: {confirm: approve_confirmation}
       end
-      item I18n.t("active_admin.reject"), new_admin_quality_control_path(quality_control: {reviewable_id: annex.id, reviewable_type: "OperatorDocumentAnnex"}) unless annex.doc_invalid?
+      item I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex) if annex.rejectable?
     end
+    actions
   end
 
   filter :operator_document_required_operator_document_name_or_operator_document_histories_required_operator_document_name_eq,
