@@ -49,6 +49,52 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
     end
   end
 
+  describe "notifications" do
+    let(:operator) { create(:operator) }
+    let(:operator_user) { create(:operator_user, operator: operator) }
+    let(:operator_document) { create(:operator_document_country, operator: operator) }
+    let(:annex) { create(:operator_document_annex, operator_document: operator_document) }
+
+    context "when changing annex status to pending" do
+      let(:responsible_admin) { create(:admin, responsible_for_countries: [operator.country]) }
+
+      subject { annex.update!(status: "doc_pending") }
+
+      before { responsible_admin }
+
+      it "sends an email to all responsible admins" do
+        expect { subject }.to have_enqueued_mail(OperatorDocumentAnnexMailer, :admin_document_pending).exactly(1).times
+          .and have_enqueued_mail(OperatorDocumentAnnexMailer, :admin_document_pending).with(annex, responsible_admin)
+      end
+    end
+
+    context "when validating annex" do
+      let(:annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_pending) }
+
+      subject { annex.update!(status: "doc_valid") }
+
+      before { operator_user }
+
+      it "sends an email to operator users" do
+        expect { subject }.to have_enqueued_mail(OperatorDocumentAnnexMailer, :document_valid).exactly(1).times
+          .and have_enqueued_mail(OperatorDocumentAnnexMailer, :document_valid).with(annex, operator_user)
+      end
+    end
+
+    context "when rejecting annex" do
+      let(:annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_pending) }
+
+      subject { annex.update!(status: "doc_invalid") }
+
+      before { operator_user }
+
+      it "sends an email to operator users" do
+        expect { subject }.to have_enqueued_mail(OperatorDocumentAnnexMailer, :document_invalid).exactly(1).times
+          .and have_enqueued_mail(OperatorDocumentAnnexMailer, :document_invalid).with(annex, operator_user)
+      end
+    end
+  end
+
   describe "Instance methods" do
     describe "#expire_document_annex" do
       it "set status to doc_expired" do
