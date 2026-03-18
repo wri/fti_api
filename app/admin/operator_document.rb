@@ -16,10 +16,6 @@ ActiveAdmin.register OperatorDocument do
           [required_operator_document:
              [required_operator_document_group: :translations, country: :translations]]])
     end
-
-    def perform_qc_params
-      params.require(:operator_document_qc_form).permit(:decision, :admin_comment) if params.key?(:operator_document_qc_form)
-    end
   end
 
   # Here we're updating the documents one by one to make sure the callbacks to
@@ -62,32 +58,45 @@ ActiveAdmin.register OperatorDocument do
     redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.other_confirmed")
   end
 
-  action_item :start_qc, only: :show, if: proc { resource.doc_pending? } do
-    link_to I18n.t("active_admin.shared.start_qc"), perform_qc_admin_operator_document_path(resource)
+  action_item :approve, only: :show, if: proc { resource.doc_pending? } do
+    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(resource)
   end
 
-  member_action :perform_qc, method: [:put, :get] do
-    @page_title = I18n.t("active_admin.shared.perform_qc")
-    @form = OperatorDocumentQCForm.new(resource, perform_qc_params)
-    if request.put? && @form.call
-      notice = if resource.doc_invalid?
-        I18n.t("active_admin.operator_documents_page.rejected")
+  action_item :reject, only: :show, if: proc { resource.doc_pending? } do
+    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_path(resource)
+  end
+
+  member_action :reject, method: [:get, :put] do
+    unless resource.doc_pending?
+      redirect_to params[:return_to] || resource_path(resource), notice: "Document not in pending state" and return
+    end
+
+    if request.put?
+      resource.status = "doc_invalid"
+      resource.admin_comment = params.dig(:operator_document, :admin_comment)
+      if resource.save
+        redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.rejected")
       else
-        I18n.t("active_admin.operator_documents_page.approved")
+        render :reject
       end
-      redirect_to collection_path, notice: notice
-    else
-      render "perform_qc"
     end
   end
 
   member_action :approve, method: :put do
-    form = OperatorDocumentQCForm.new(resource, decision: "doc_valid")
-    if form.call
-      redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.approved")
-    else
-      redirect_to collection_path, alert: I18n.t("active_admin.operator_documents_page.error_approving")
+    unless resource.doc_pending?
+      redirect_to params[:return_to] || resource_path(resource), notice: "Document not in pending state" and return
     end
+
+    resource.status = resource.reason.present? ? "doc_not_required" : "doc_valid"
+    if resource.save
+      redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.approved")
+    else
+      redirect_to params[:return_to] || resource_path(resource), alert: I18n.t("active_admin.operator_documents_page.error_approving")
+    end
+  end
+
+  member_action :perform_qc, method: :get do
+    redirect_to resource_path(resource)
   end
 
   actions :all, except: [:destroy, :new]
@@ -210,9 +219,10 @@ ActiveAdmin.register OperatorDocument do
     column :response_date
     unless params[:scope] == "archived"
       column(I18n.t("active_admin.shared.actions")) do |document|
-        a I18n.t("active_admin.shared.start_qc"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
-        a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put if document.doc_pending?
-        a I18n.t("active_admin.reject"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
+        if document.doc_pending?
+          a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put
+          a I18n.t("active_admin.reject"), href: reject_admin_operator_document_path(document)
+        end
       end
     end
     actions
@@ -271,29 +281,7 @@ ActiveAdmin.register OperatorDocument do
   end
 
   show title: proc { "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
-    attributes_table do
-      row :public
-      tag_row :status, &:detailed_status
-      row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
-      row :admin_comment if resource.admin_comment.present?
-      row :required_operator_document
-      row :operator
-      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
-      row :uploaded_by
-      row I18n.t("active_admin.operator_documents_page.attachment") do |r|
-        if r.document_file&.attachment&.present?
-          link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener"
-        elsif r.reason.present?
-          I18n.t("active_admin.operator_documents_page.non_applicable")
-        end
-      end
-      row :start_date
-      row :expire_date
-      row :created_at
-      row :updated_at
-      row :deleted_at
-    end
-
+    render partial: "attributes_table", locals: {document: resource}
     render partial: "annexes_table", locals: {resource: resource}
 
     panel I18n.t("activerecord.models.operator_document_history") do

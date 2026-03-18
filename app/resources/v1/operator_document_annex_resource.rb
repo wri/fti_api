@@ -8,10 +8,10 @@ module V1
 
     caching
     attributes :name,
-      :start_date, :expire_date, :status, :attachment,
+      :start_date, :expire_date, :status, :invalidation_reason, :attachment,
       :uploaded_by, :created_at, :updated_at
 
-    privateable :show_attributes?, [:name, :start_date, :expire_date, :status, :attachment, :uploaded_by, :created_at, :updated_at]
+    privateable :show_attributes?, [:name, :invalidation_reason, :start_date, :expire_date, :status, :attachment, :uploaded_by, :created_at, :updated_at]
 
     has_one :operator_document, foreign_key_on: :related
 
@@ -26,6 +26,12 @@ module V1
       odh = OperatorDocumentHistory.where(operator_document_id: operator_document_id).order(operator_document_updated_at: :desc).first
       adh = AnnexDocument.new(documentable: odh)
       @model.annex_documents_history << adh
+    end
+
+    def invalidation_reason
+      return unless @model.doc_invalid?
+
+      @model.latest_quality_control&.comment
     end
 
     def set_user_id
@@ -45,6 +51,10 @@ module V1
 
     def show_attributes?
       @model.status == "doc_valid" || belongs_to_user?
+    end
+
+    def self.apply_includes(records, directives)
+      super&.includes(:latest_quality_control)
     end
 
     def self.records(options = {})
