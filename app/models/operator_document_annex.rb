@@ -37,6 +37,8 @@ class OperatorDocumentAnnex < ApplicationRecord
   skip_callback :commit, :after, :remove_attachment!
   after_real_destroy :remove_attachment!
 
+  after_commit :notify_about_changes, if: -> { saved_change_to_status? }
+
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
@@ -109,5 +111,19 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   def any_operator_document_without_authorization?
     [operator_document, *operator_document_histories].compact.any? { !it.needs_authorization_before_downloading? }
+  end
+
+  def notify_about_changes
+    notify_users(operator.all_users, "document_valid") if doc_valid?
+    notify_users(operator.all_users, "document_invalid") if doc_invalid?
+    notify_users(operator.responsible_admins, "admin_document_pending") if doc_pending?
+  end
+
+  def notify_users(users, mail_template)
+    users.filter_actives.where.not(email: [nil, ""]).find_each do |user|
+      I18n.with_locale(user.locale.presence || I18n.default_locale) do
+        OperatorDocumentAnnexMailer.send(mail_template, self, user).deliver_later
+      end
+    end
   end
 end
