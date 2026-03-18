@@ -1,0 +1,22 @@
+return_to = params[:return_to] || request.referer
+
+active_admin_form_for assigns[:qc],
+  url: reject_admin_operator_document_annex_path(resource),
+  method: :put do |f|
+  f.semantic_errors(*f.object.errors.attribute_names)
+  f.hidden_field :return_to, name: :return_to, value: return_to if return_to.present?
+
+  f.inputs do
+    f.input :comment, as: :text,
+      label: I18n.t("active_admin.operator_document_annexes_page.comment"),
+      required: true,
+      input_html: {rows: 4}
+  end
+
+  f.actions do
+    f.action :submit, label: I18n.t("active_admin.reject")
+    f.cancel_link return_to
+  end
+end
+
+render partial: "attributes_table", locals: {annex: resource}

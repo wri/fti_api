@@ -31,7 +31,7 @@ class QualityControl < ApplicationRecord
   end
 
   def set_metadata
-    self.metadata = reviewable.qc_metadata(self) unless metadata.present?
+    self.metadata = reviewable.qc_metadata(self) if !metadata.present? && reviewable.respond_to?(:qc_metadata)
   end
 
   def update_reviewable_qc_status

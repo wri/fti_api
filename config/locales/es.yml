@@ -409,6 +409,7 @@ es:
       orphaned: 'Huérfano'
       details: 'Detalles de Anexo de Documento del Operador'
       approve_confirmation: '¿Estás seguro de que quieres aprobar el anexo %{name}?'
+      comment: 'Motivo del rechazo'
     observations_page:
       not_modified: 'Observación NO modificada'
       moved_ready: 'Observación movida a Listo para Publicación'
