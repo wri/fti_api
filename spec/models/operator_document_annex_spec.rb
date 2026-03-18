@@ -2,18 +2,19 @@
 #
 # Table name: operator_document_annexes
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  start_date  :date
-#  expire_date :date
-#  deleted_at  :date
-#  status      :integer
-#  attachment  :string
-#  uploaded_by :integer
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  public      :boolean          default(TRUE), not null
+#  id                  :integer          not null, primary key
+#  name                :string
+#  start_date          :date
+#  expire_date         :date
+#  deleted_at          :date
+#  status              :integer
+#  attachment          :string
+#  uploaded_by         :integer
+#  user_id             :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  public              :boolean          default(TRUE), not null
+#  invalidation_reason :text
 #
 
 require "rails_helper"

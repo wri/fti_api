@@ -9,7 +9,7 @@
 Link: <%= @document.attachment.url %>
 
 <%= t(".paragraph2") %>
-<%= @document.latest_quality_control.comment %>
+<%= @document.invalidation_reason %>
 
 <%= t(".paragraph3", link: "#{ENV["FRONTEND_URL"]}/operators/#{@operator.slug}/documentation") %>
 

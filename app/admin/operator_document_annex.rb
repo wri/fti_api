@@ -20,8 +20,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :approve, method: :put do
-    qc = QualityControl.new(decision: "doc_valid", reviewable: resource, reviewer: current_user)
-    if !resource.doc_valid? && qc.save
+    if resource.update(status: "doc_valid")
       redirect_back_or_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.approved")
     else
       redirect_back_or_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
@@ -29,10 +28,8 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :reject, method: [:get, :put] do
-    @qc = QualityControl.new(decision: "doc_invalid", reviewable: resource, reviewer: current_user)
     if request.put?
-      @qc.comment = params.dig(:quality_control, :comment)
-      if !resource.doc_invalid? && @qc.save
+      if resource.update(status: "doc_invalid", invalidation_reason: params.dig(:operator_document_annex, :invalidation_reason))
         redirect_to params[:return_to] || collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.rejected")
       else
         render :reject
@@ -160,18 +157,5 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   show do
     render partial: "attributes_table", locals: {annex: resource}
-
-    panel "Quality Controls" do
-      if resource.quality_controls.any?
-        table_for resource.quality_controls.order(created_at: :desc) do
-          column :reviewer
-          column :passed?
-          column :comment
-          column :performed_at, &:created_at
-        end
-      else
-        "No quality controls performed for this annex"
-      end
-    end
   end
 end

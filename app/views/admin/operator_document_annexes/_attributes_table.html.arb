@@ -2,6 +2,7 @@ panel I18n.t("active_admin.details", model: I18n.t("activerecord.models.operator
   attributes_table_for annex do
     row :name
     tag_row :status
+    row :invalidation_reason if annex.invalidation_reason.present? || annex.doc_invalid?
     row :required_operator_document do
       annex.operator_document.required_operator_document if annex.operator_document.present? &&
         annex.operator_document.required_operator_document.present?

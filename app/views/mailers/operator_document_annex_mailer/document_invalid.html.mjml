@@ -19,7 +19,7 @@
 </p>
 
 <p style="background-color: #f7f6ed; padding: 20px">
-  <em><%= @document.latest_quality_control.comment %></em>
+  <em><%= @document.invalidation_reason %></em>
 </p>
 
 <p>

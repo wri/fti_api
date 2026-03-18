@@ -28,12 +28,6 @@ module V1
       @model.annex_documents_history << adh
     end
 
-    def invalidation_reason
-      return unless @model.doc_invalid?
-
-      @model.latest_quality_control&.comment
-    end
-
     def set_user_id
       if context[:current_user].present?
         @model.user_id = context[:current_user].id
@@ -51,10 +45,6 @@ module V1
 
     def show_attributes?
       @model.status == "doc_valid" || belongs_to_user?
-    end
-
-    def self.apply_includes(records, directives)
-      super&.includes(:latest_quality_control)
     end
 
     def self.records(options = {})
