@@ -380,6 +380,7 @@ fr:
       fa_confirmed: 'Les documents ont été définis sur "source: FOREST ATLAS"'
       confirm_other: 'Voulez-vous vraiment définir la source des documents sélectionnés comme AUTRE?'
       other_confirmed: 'Les documents ont été définis comme "source: OTHER"'
+      not_pending: "Le document n'est pas en attente"
       error_approving: "Erreur lors de l'approbation du document"
       approved: 'Document approuvé'
       rejected: 'Document rejeté'

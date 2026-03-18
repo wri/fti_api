@@ -373,6 +373,7 @@ en:
       fa_confirmed: 'Documents were set to "source: FOREST_ATLAS"'
       confirm_other: 'Are you sure you want to set the source of the selected documents as OTHER?'
       other_confirmed: 'Documents were set to "source: OTHER"'
+      not_pending: 'Document not in pending state'
       error_approving: "Error while approving document"
       approved: 'Document approved'
       rejected: 'Document rejected'

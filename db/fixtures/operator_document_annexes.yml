@@ -305,6 +305,7 @@ OperatorDocumentAnnex_10058:
   start_date: 2004-01-16
   expire_date: 2034-01-15
   status: doc_invalid
+  invalidation_reason: Invalidation reason
   attachment: Annex_1549292161_cfc-lettre-ou-arrete-d-approbation-du-plan-d-amenagement-par-l-administration-chargee-des-forets-2019-02-04.pdf
   uploaded_by: operator
   created_at: 2019-02-04 14:56:01 UTC
