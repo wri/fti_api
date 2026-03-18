@@ -54,14 +54,12 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
     let(:operator) { create(:operator) }
     let(:operator_user) { create(:operator_user, operator: operator) }
     let(:operator_document) { create(:operator_document_country, operator: operator) }
-    let(:annex) { create(:operator_document_annex, operator_document: operator_document) }
 
     context "when changing annex status to pending" do
-      let(:responsible_admin) { create(:admin, responsible_for_countries: [operator.country]) }
+      let!(:responsible_admin) { create(:admin, responsible_for_countries: [operator.country]) }
+      let!(:annex) { build(:operator_document_annex, operator_document: operator_document) }
 
-      subject { annex.update!(status: "doc_pending") }
-
-      before { responsible_admin }
+      subject { annex.save! }
 
       it "sends an email to all responsible admins" do
         expect { subject }.to have_enqueued_mail(OperatorDocumentAnnexMailer, :admin_document_pending).exactly(1).times
@@ -85,7 +83,7 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
     context "when rejecting annex" do
       let(:annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_pending) }
 
-      subject { annex.update!(status: "doc_invalid") }
+      subject { annex.update!(status: "doc_invalid", invalidation_reason: "Here is the reason why is invalid") }
 
       before { operator_user }
 

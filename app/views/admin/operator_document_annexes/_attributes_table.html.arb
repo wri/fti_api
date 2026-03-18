@@ -8,7 +8,7 @@ panel I18n.t("active_admin.details", model: I18n.t("activerecord.models.operator
         annex.operator_document.required_operator_document.present?
     end
     row :operator do
-      annex.operator_document.operator if annex.operator_document.present?
+      annex.operator_document.presence&.operator
     end
     row :operator_document do |a|
       if a.annex_document.present?

@@ -68,7 +68,7 @@ ActiveAdmin.register OperatorDocument do
 
   member_action :reject, method: [:get, :put] do
     unless resource.doc_pending?
-      redirect_to params[:return_to] || resource_path(resource), notice: "Document not in pending state" and return
+      redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
     end
 
     if request.put?
@@ -84,7 +84,7 @@ ActiveAdmin.register OperatorDocument do
 
   member_action :approve, method: :put do
     unless resource.doc_pending?
-      redirect_to params[:return_to] || resource_path(resource), notice: "Document not in pending state" and return
+      redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
     end
 
     resource.status = resource.reason.present? ? "doc_not_required" : "doc_valid"

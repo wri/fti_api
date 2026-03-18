@@ -387,6 +387,7 @@ es:
       fa_confirmed: 'Los documentos se establecieron como "fuente: FOREST_ATLAS"'
       confirm_other: '¿Estás seguro de que quieres establecer la fuente de los documentos seleccionados como OTRO?'
       other_confirmed: 'Los documentos se establecieron como "fuente: OTRO"'
+      not_pending: 'El documento no está en estado pendiente'
       error_approving: "Error al aprobar documento"
       approved: 'Documento aprobado'
       rejected: 'Documento rechazado'

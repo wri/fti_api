@@ -22,7 +22,7 @@ class OperatorDocumentAnnexMailerPreview < ActionMailer::Preview
   def invalid_document
     valid_document.tap do |d|
       d.status = "doc_invalid"
-      d.invalidation_reason =  "Document is invalid because of reasons."
+      d.invalidation_reason = "Document is invalid because of reasons."
     end
   end
 

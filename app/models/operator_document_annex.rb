@@ -107,6 +107,8 @@ class OperatorDocumentAnnex < ApplicationRecord
   end
 
   def notify_about_changes
+    return unless operator.present?
+
     notify_users(operator.all_users, "document_valid") if doc_valid?
     notify_users(operator.all_users, "document_invalid") if doc_invalid?
     notify_users(operator.responsible_admins, "admin_document_pending") if doc_pending?
