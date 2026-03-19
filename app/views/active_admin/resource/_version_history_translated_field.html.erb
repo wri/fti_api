@@ -11,7 +11,13 @@
   </span>
   <% locale_changes.each do |locale, (old_val, new_val)| %>
     <div class="translation-content" data-locale="<%= locale %>" style="<%= "display:none" unless locale == locale_changes.keys.first %>">
-      <%= format_diff.call(base_field, old_val, new_val, "#{version_id}_#{base_field}_#{locale}") %>
+      <% id = "#{version_id}_#{base_field}_#{locale}" %>
+      <% if uses_diff.call(base_field, old_val, new_val) %>
+        <span class="vh-diff"><%= format_diff.call(base_field, old_val, new_val, id) %></span>
+        <span class="vh-oldnew"><%= format_oldnew.call(base_field, old_val, new_val, id) %></span>
+      <% else %>
+        <%= format_oldnew.call(base_field, old_val, new_val, id) %>
+      <% end %>
     </div>
   <% end %>
 </div>

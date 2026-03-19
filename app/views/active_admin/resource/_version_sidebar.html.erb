@@ -44,6 +44,7 @@
         .then(function(html) {
           content.innerHTML = html;
           content.dataset.loaded = '1';
+          content.dispatchEvent(new CustomEvent('app:content_load', {bubbles: true}));
           modal.showModal();
         })
         .finally(function() {

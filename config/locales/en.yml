@@ -149,6 +149,9 @@ en:
       version_history: 'Version History'
       view_history_table: 'View History Table'
       loading_history_table: 'Loading...'
+      view_mode: 'View mode:'
+      show_diff: 'Diff'
+      show_old_new: 'Old/New'
     shared:
       translated_fields: 'Translated Fields'
       monitor_details: 'Monitor Details'

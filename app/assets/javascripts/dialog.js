@@ -1,5 +1,5 @@
-function initializeDialog() {
-  document.querySelectorAll("dialog").forEach((dialog) => {
+function initializeDialog(root) {
+  root.querySelectorAll("dialog").forEach((dialog) => {
     // close when clicking outside
     dialog.addEventListener("mousedown", (event) => {
       if (event.target !== dialog) return;
@@ -25,4 +25,5 @@ function initializeDialog() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initializeDialog);
+document.addEventListener("DOMContentLoaded", function() { initializeDialog(document); });
+document.addEventListener("app:content_load", function(e) { initializeDialog(e.target); });

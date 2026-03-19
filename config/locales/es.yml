@@ -162,6 +162,9 @@ es:
       version_history: 'Historial de versiones'
       view_history_table: 'Ver tabla de historial'
       loading_history_table: 'Cargando...'
+      view_mode: 'Modo de vista:'
+      show_diff: 'Diff'
+      show_old_new: 'Antiguo/Nuevo'
     shared:
       translated_fields: 'Campos traducidos'
       monitor_details: 'Detalles del monitor'

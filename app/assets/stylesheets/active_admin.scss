@@ -344,7 +344,38 @@ dialog.version_history {
   }
 }
 
-// Inline diff highlighting in version history table
+// Version history table
 .index_table ins { background: #d4fcbc; text-decoration: none; }
 .index_table del { background: #fbb6c2; text-decoration: line-through; }
+
+.vh-container {
+  &[data-vh-mode="diff"] .vh-oldnew { display: none; }
+  &[data-vh-mode="oldnew"] .vh-diff { display: none; }
+
+  .vh-old { color: #c0392b; }
+  .vh-new { color: #27ae60; }
+
+  .vh-toggle {
+    // display: inline-block;
+    float: right;
+    font-weight: normal;
+    margin-left: 60px;
+
+    .vh-view-mode {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    a {
+      color: #999;
+      text-decoration: none;
+      display: inline-block !important;
+
+      &.active {
+        color: inherit;
+        font-weight: bold;
+      }
+    }
+  }
+}
 

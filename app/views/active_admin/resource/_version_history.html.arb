@@ -2,47 +2,49 @@ history ||= versions&.reverse || []
 
 enum_labels = resource.class.defined_enums.transform_values(&:invert)
 
-format_diff = ->(field, old_val, new_val, id) {
-  format_geojson = ->(val, modal_id) {
-    next "" if val.blank?
-    dialog(id: modal_id, title: Fmu.human_attribute_name(:geojson)) { val }
-    link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('##{modal_id}').showModal()"
-  }
-
+format_value = ->(field, val, id_suffix) {
   if field == "geojson"
-    return safe_join([
-      format_geojson.call(old_val, "history_#{id}_geojson_old_modal"),
-      " \u2192 ",
-      format_geojson.call(new_val, "history_#{id}_geojson_new_modal")
-    ])
+    next "" if val.blank?
+    modal_id = "history_#{id_suffix}_geojson_modal"
+    dialog(id: modal_id, title: Fmu.human_attribute_name(:geojson)) { val }
+    next link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('##{modal_id}').showModal()"
   end
 
   if enum_labels[field]
-    format_status = ->(v) {
-      next "" unless v.present?
-      label = enum_labels[field].fetch(v, v).to_s
-      content_tag(:span, label.humanize, class: "status_tag #{label.parameterize}")
-    }
-    return safe_join([format_status.call(old_val), " \u2192 ", format_status.call(new_val)])
+    next "" unless val.present?
+    label = enum_labels[field].fetch(val, val).to_s
+    next content_tag(:span, label.humanize, class: "status_tag #{label.parameterize}")
   end
+
+  val.to_s
+}
+
+format_oldnew = ->(field, old_val, new_val, id) {
+  safe_join([
+    content_tag(:span, format_value.call(field, old_val, "#{id}_on_old"), class: "vh-old"),
+    " \u2192 ",
+    content_tag(:span, format_value.call(field, new_val, "#{id}_on_new"), class: "vh-new")
+  ])
+}
+
+uses_diff = ->(field, old_val, new_val) {
+  field != "geojson" && !enum_labels[field] && (old_val.to_s.length + new_val.to_s.length) > 30
+}
+
+format_diff = ->(field, old_val, new_val, id) {
+  next format_oldnew.call(field, old_val, new_val, id) unless uses_diff.call(field, old_val, new_val)
 
   old_s = old_val.to_s
   new_s = new_val.to_s
-
-  if (old_s.length + new_s.length) > 30
-    # Word-level inline diff: split on word boundaries so each token is a word or whitespace/punct
-    diffs = Diff::LCS.sdiff(old_s.split(/\b/), new_s.split(/\b/))
-    safe_join(diffs.map { |change|
-      case change.action
-      when "=" then change.old_element
-      when "+" then content_tag(:ins, change.new_element)
-      when "-" then content_tag(:del, change.old_element)
-      when "!" then content_tag(:del, change.old_element) + content_tag(:ins, change.new_element)
-      end
-    })
-  else
-    "#{old_s} \u2192 #{new_s}"
-  end
+  diffs = Diff::LCS.sdiff(old_s.split(/\b/), new_s.split(/\b/))
+  safe_join(diffs.map { |change|
+    case change.action
+    when "=" then change.old_element
+    when "+" then content_tag(:ins, change.new_element)
+    when "-" then content_tag(:del, change.old_element)
+    when "!" then content_tag(:del, change.old_element) + content_tag(:ins, change.new_element)
+    end
+  })
 }
 
 all_versions = if create_version.present?
@@ -51,38 +53,68 @@ else
   versions
 end
 
-table_for history, class: "index_table" do
-  column I18n.t("active_admin.versionate.event", default: "Event"), &:event
-  column I18n.t("active_admin.versionate.created_at", default: "Date") do |v|
-    v.created_at.strftime("%Y-%m-%d %H:%M")
-  end
-  column I18n.t("active_admin.versionate.user", default: "User") do |v|
-    User.find_by(id: v.whodunnit)&.email
-  end
-  column I18n.t("active_admin.versionate.changes", default: "Changes") do |v|
-    grouped = v.grouped_changeset
-    next if grouped[:plain].empty? && grouped[:translated].empty?
+toggle_js = "var c=this.closest('.vh-container');c.dataset.vhMode=this.dataset.mode;c.querySelectorAll('.vh-toggle a').forEach(function(b){b.classList.toggle('active',b===this)}.bind(this));return false"
 
-    content_tag(:ul, style: "margin: 0; padding: 0; list-style: none;") do
-      items = grouped[:plain].map do |field, (old_val, new_val)|
-        content_tag(:li) do
-          content_tag(:b, field.humanize) + ": " + format_diff.call(field, old_val, new_val, "#{v.object_id}_#{field}")
-        end
-      end
+changes_header = safe_join([
+  t("active_admin.versionate.changes", default: "Changes"),
+  " ",
+  content_tag(:div, class: "vh-toggle") {
+    safe_join([
+      content_tag(:span, t("active_admin.versionate.view_mode"), class: "vh-view-mode"),
+      content_tag(:a, t("active_admin.versionate.show_diff"), href: "#", class: "active", data: {mode: "diff"}, onclick: toggle_js),
+      " | ",
+      content_tag(:a, t("active_admin.versionate.show_old_new"), href: "#", data: {mode: "oldnew"}, onclick: toggle_js)
+    ])
+  }
+])
 
-      items += grouped[:translated].map do |base_field, locale_changes|
-        content_tag(:li) do
-          render("version_history_translated_field", base_field: base_field, locale_changes: locale_changes, version_id: v.object_id, format_diff: format_diff)
-        end
-      end
-
-      safe_join(items)
+div class: "vh-container", "data-vh-mode": "diff" do
+  table_for history, class: "index_table" do
+    column I18n.t("active_admin.versionate.event", default: "Event"), &:event
+    column I18n.t("active_admin.versionate.created_at", default: "Date") do |v|
+      v.created_at.strftime("%Y-%m-%d %H:%M")
     end
-  end
-  if all_versions.present?
-    column I18n.t("active_admin.versionate.preview", default: "Preview") do |v|
-      idx = all_versions.index(v)
-      link_to t("active_admin.versionate.view"), url_for(version: idx) if idx
+    column I18n.t("active_admin.versionate.user", default: "User") do |v|
+      User.find_by(id: v.whodunnit)&.email
+    end
+    column changes_header, class: "col-changes" do |v|
+      grouped = v.grouped_changeset
+      next if grouped[:plain].empty? && grouped[:translated].empty?
+
+      content_tag(:ul, style: "margin: 0; padding: 0; list-style: none;") do
+        items = grouped[:plain].map do |field, (old_val, new_val)|
+          id = "#{v.object_id}_#{field}"
+          content_tag(:li) do
+            content_tag(:b, field.humanize) + ": " +
+              if uses_diff.call(field, old_val, new_val)
+                content_tag(:span, format_diff.call(field, old_val, new_val, id), class: "vh-diff") +
+                  content_tag(:span, format_oldnew.call(field, old_val, new_val, id), class: "vh-oldnew")
+              else
+                format_oldnew.call(field, old_val, new_val, id)
+              end
+          end
+        end
+
+        items += grouped[:translated].map do |base_field, locale_changes|
+          content_tag(:li) do
+            render("version_history_translated_field",
+              base_field: base_field,
+              locale_changes: locale_changes,
+              version_id: v.object_id,
+              format_diff: format_diff,
+              format_oldnew: format_oldnew,
+              uses_diff: uses_diff)
+          end
+        end
+
+        safe_join(items)
+      end
+    end
+    if all_versions.present?
+      column I18n.t("active_admin.versionate.preview", default: "Preview") do |v|
+        idx = all_versions.index(v)
+        link_to t("active_admin.versionate.view"), url_for(version: idx) if idx
+      end
     end
   end
 end
