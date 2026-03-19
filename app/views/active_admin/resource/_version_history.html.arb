@@ -2,20 +2,22 @@ history ||= versions&.reverse || []
 
 enum_labels = resource.class.defined_enums.transform_values(&:invert)
 
+format_geojson = ->(val, id_suffix) {
+  next "" if val.blank?
+  modal_id = "history_#{id_suffix}_geojson_modal"
+  dialog(id: modal_id, title: Fmu.human_attribute_name(:geojson)) { val }
+  link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('##{modal_id}').showModal()"
+}
+
+format_enum_label = ->(field, val) {
+  next "" unless val.present?
+  label = enum_labels[field].fetch(val, val).to_s
+  content_tag(:span, label.humanize, class: "status_tag #{label.parameterize.underscore}")
+}
+
 format_value = ->(field, val, id_suffix) {
-  if field == "geojson"
-    next "" if val.blank?
-    modal_id = "history_#{id_suffix}_geojson_modal"
-    dialog(id: modal_id, title: Fmu.human_attribute_name(:geojson)) { val }
-    next link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('##{modal_id}').showModal()"
-  end
-
-  if enum_labels[field]
-    next "" unless val.present?
-    label = enum_labels[field].fetch(val, val).to_s
-    next content_tag(:span, label.humanize, class: "status_tag #{label.parameterize}")
-  end
-
+  next format_geojson.call(val, id_suffix) if field == "geojson"
+  next format_enum_label.call(field, val) if enum_labels[field]
   val.to_s
 }
 
