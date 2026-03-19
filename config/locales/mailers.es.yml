@@ -88,6 +88,19 @@ es:
       subject: "%{company} ha cargado un nuevo documento"
       paragraph1: "%{company} ha cargado un nuevo documento en el Open Timber Portal que está listo para ser revisado."
       paragraph2: "Para revisar el documento, vaya a: %{link}"
+  operator_document_annex_mailer:
+    document_valid:
+      subject: "Open Timber Portal: nuevo anexo de documento publicado"
+      paragraph1: "El anexo %{annex} cargado para el documento %{document} ha sido validado."
+    document_invalid:
+      subject: "Open Timber Portal: el anexo de documento cargado no fue validado"
+      paragraph1: "El siguiente anexo de documento fue revisado y necesita ser corregido:"
+      paragraph2: "El revisor hizo el siguiente comentario:"
+      paragraph3: "Puede editar este anexo haciendo clic en el siguiente enlace y actualizándolo en su perfil: %{link}"
+    admin_document_pending:
+      subject: "%{company} ha cargado un nuevo anexo de documento"
+      paragraph1: "%{company} ha cargado un nuevo anexo de documento en el Open Timber Portal que está listo para ser revisado."
+      paragraph2: "Para revisar el anexo, vaya a: %{link}"
   system_mailer:
     user_created:
       subject: "Nueva cuenta creada"
