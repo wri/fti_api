@@ -25,7 +25,7 @@
 #
 
 class Operator < ApplicationRecord
-  has_paper_trail
+  has_paper_trail skip: %i[country_doc_rank country_operators]
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo

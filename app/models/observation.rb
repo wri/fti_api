@@ -400,7 +400,7 @@ class Observation < ApplicationRecord
     return unless fmu_id
 
     fmu.update_geojson_properties
-    fmu.save
+    fmu.touch # to update cache
   end
 
   def assign_observers_from_report

@@ -104,7 +104,7 @@ GEM
       rails-html-sanitizer (~> 1.6)
     active_material (2.1.5)
     active_skin (0.0.13)
-    activeadmin (3.4.0)
+    activeadmin (3.5.0)
       arbre (~> 1.2, >= 1.2.1)
       csv
       formtastic (>= 3.1)
@@ -135,7 +135,7 @@ GEM
       timeout (>= 0.4.0)
     activerecord-import (2.2.0)
       activerecord (>= 4.2)
-    activerecord-postgis-adapter (10.0.1)
+    activerecord-postgis-adapter (10.0.2)
       activerecord (~> 7.2.0)
       rgeo-activerecord (~> 8.0.0)
     activestorage (7.2.3)
@@ -172,7 +172,7 @@ GEM
     ast (2.4.3)
     attr_extras (7.1.0)
     base64 (0.3.0)
-    bcrypt (3.1.21)
+    bcrypt (3.1.22)
     benchmark (0.5.0)
     bigdecimal (4.0.1)
     bindex (0.8.1)
@@ -260,10 +260,10 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     device_detector (1.1.3)
-    devise (4.9.4)
+    devise (5.0.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
+      railties (>= 7.0)
       responders
       warden (~> 1.2.3)
     diff-lcs (1.6.2)
@@ -421,7 +421,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json (2.19.0)
+    json (2.19.2)
     jwt (3.1.2)
       base64
     kaminari (1.2.2)
@@ -453,7 +453,7 @@ GEM
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
     logger (1.7.0)
-    loofah (2.25.0)
+    loofah (2.25.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.9.0)
@@ -472,7 +472,7 @@ GEM
     mime-types (3.7.0)
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
-    mime-types-data (3.2026.0303)
+    mime-types-data (3.2026.0317)
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
@@ -499,14 +499,14 @@ GEM
       net-ssh (>= 5.0.0, < 8.0.0)
     net-smtp (0.5.1)
       net-protocol
-    net-ssh (7.3.0)
+    net-ssh (7.3.1)
     nio4r (2.7.5)
     nokogiri (1.19.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     nokogiri (1.19.1-x86_64-linux-gnu)
       racc (~> 1.4)
-    oj (3.16.15)
+    oj (3.16.16)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
     oj_mimic_json (1.0.1)
@@ -604,7 +604,7 @@ GEM
     redis-activesupport (5.3.0)
       activesupport (>= 3, < 8)
       redis-store (>= 1.3, < 2)
-    redis-client (0.27.0)
+    redis-client (0.28.0)
       connection_pool
     redis-rack (3.0.0)
       rack-session (>= 0.2.0)
@@ -646,14 +646,14 @@ GEM
     rspec-mocks (3.13.8)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
-    rspec-rails (8.0.3)
+    rspec-rails (8.0.4)
       actionpack (>= 7.2)
       activesupport (>= 7.2)
       railties (>= 7.2)
-      rspec-core (~> 3.13)
-      rspec-expectations (~> 3.13)
-      rspec-mocks (~> 3.13)
-      rspec-support (~> 3.13)
+      rspec-core (>= 3.13.0, < 5.0.0)
+      rspec-expectations (>= 3.13.0, < 5.0.0)
+      rspec-mocks (>= 3.13.0, < 5.0.0)
+      rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.7)
     rswag-api (2.17.0)
       activesupport (>= 5.2, < 8.2)
@@ -672,7 +672,7 @@ GEM
       rubocop-ast (>= 1.49.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.49.0)
+    rubocop-ast (1.49.1)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
     rubocop-performance (1.26.1)
@@ -708,10 +708,10 @@ GEM
       sendgrid-ruby (~> 6.4)
     sendgrid-ruby (6.7.0)
       ruby_http_client (~> 3.4)
-    sentry-rails (6.4.1)
+    sentry-rails (6.5.0)
       railties (>= 5.2.0)
-      sentry-ruby (~> 6.4.1)
-    sentry-ruby (6.4.1)
+      sentry-ruby (~> 6.5.0)
+    sentry-ruby (6.5.0)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
       logger
@@ -772,7 +772,7 @@ GEM
       patience_diff
     thor (1.5.0)
     tilt (2.7.0)
-    timeout (0.6.0)
+    timeout (0.6.1)
     tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -795,7 +795,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webmock (3.26.1)
+    webmock (3.26.2)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
@@ -850,7 +850,7 @@ DEPENDENCIES
   database_cleaner
   debug
   device_detector
-  devise (< 5.0)
+  devise
   dotenv-rails
   factory_bot_rails
   faker
