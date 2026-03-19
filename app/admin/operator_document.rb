@@ -59,7 +59,8 @@ ActiveAdmin.register OperatorDocument do
   end
 
   action_item :approve, only: :show, if: proc { resource.doc_pending? } do
-    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(resource), method: :put
+    approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: resource.name_with_fmu)
+    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(resource), method: :put, data: {confirm: approve_confirmation}
   end
 
   action_item :reject, only: :show, if: proc { resource.doc_pending? } do
@@ -220,7 +221,8 @@ ActiveAdmin.register OperatorDocument do
     unless params[:scope] == "archived"
       column(I18n.t("active_admin.shared.actions")) do |document|
         if document.doc_pending?
-          a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put
+          approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: document.name_with_fmu)
+          a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put, "data-confirm": approve_confirmation
           a I18n.t("active_admin.reject"), href: reject_admin_operator_document_path(document)
         end
       end

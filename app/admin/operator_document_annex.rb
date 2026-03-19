@@ -30,7 +30,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   member_action :reject, method: [:get, :put] do
     if request.put?
       if resource.update(status: "doc_invalid", invalidation_reason: params.dig(:operator_document_annex, :invalidation_reason))
-        redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_document_annexes_page.rejected")
+        redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.rejected")
       else
         render :reject
       end
@@ -42,7 +42,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   action_item :approve, only: :show, if: proc { resource.approvable? } do
-    approve_confirmation = I18n.t("active_admin.operator_document_annexes_page.approve_confirmation", name: resource.name)
+    approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: resource.name)
     link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(resource), method: :put, data: {confirm: approve_confirmation}
   end
 
@@ -107,7 +107,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     actions defaults: false, name: I18n.t("active_admin.shared.actions") do |annex|
       if annex.approvable?
-        approve_confirmation = I18n.t("active_admin.operator_document_annexes_page.approve_confirmation", name: annex.name)
+        approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: annex.name)
         item I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put, data: {confirm: approve_confirmation}
       end
       item I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex) if annex.rejectable?
