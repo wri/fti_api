@@ -21,16 +21,16 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   member_action :approve, method: :put do
     if resource.update(status: "doc_valid")
-      redirect_back_or_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.approved")
+      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_document_annexes_page.approved")
     else
-      redirect_back_or_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
+      redirect_back_or_to resource_path(resource), alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
     end
   end
 
   member_action :reject, method: [:get, :put] do
     if request.put?
       if resource.update(status: "doc_invalid", invalidation_reason: params.dig(:operator_document_annex, :invalidation_reason))
-        redirect_to params[:return_to] || collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.rejected")
+        redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_document_annexes_page.rejected")
       else
         render :reject
       end

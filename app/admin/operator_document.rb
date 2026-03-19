@@ -59,7 +59,7 @@ ActiveAdmin.register OperatorDocument do
   end
 
   action_item :approve, only: :show, if: proc { resource.doc_pending? } do
-    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(resource)
+    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(resource), method: :put
   end
 
   action_item :reject, only: :show, if: proc { resource.doc_pending? } do
@@ -68,7 +68,7 @@ ActiveAdmin.register OperatorDocument do
 
   member_action :reject, method: [:get, :put] do
     unless resource.doc_pending?
-      redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
+      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
     end
 
     if request.put?
@@ -84,14 +84,14 @@ ActiveAdmin.register OperatorDocument do
 
   member_action :approve, method: :put do
     unless resource.doc_pending?
-      redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
+      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
     end
 
     resource.status = resource.reason.present? ? "doc_not_required" : "doc_valid"
     if resource.save
-      redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.approved")
+      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.approved")
     else
-      redirect_to params[:return_to] || resource_path(resource), alert: I18n.t("active_admin.operator_documents_page.error_approving")
+      redirect_back_or_to resource_path(resource), alert: I18n.t("active_admin.operator_documents_page.error_approving")
     end
   end
 
