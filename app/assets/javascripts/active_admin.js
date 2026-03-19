@@ -8,6 +8,7 @@
 //= require fmu
 //= require observations
 //= require translated_attributes
+//= require version_history
 //= require operator_document_qc_form
 //= require index-filters
 //= require active_admin_sidebar

@@ -55,17 +55,15 @@ else
   versions
 end
 
-toggle_js = "var c=this.closest('.vh-container');c.dataset.vhMode=this.dataset.mode;c.querySelectorAll('.vh-toggle a').forEach(function(b){b.classList.toggle('active',b===this)}.bind(this));return false"
-
 changes_header = safe_join([
   t("active_admin.versionate.changes", default: "Changes"),
   " ",
   content_tag(:div, class: "vh-toggle") {
     safe_join([
       content_tag(:span, t("active_admin.versionate.view_mode"), class: "vh-view-mode"),
-      content_tag(:a, t("active_admin.versionate.show_diff"), href: "#", class: "active", data: {mode: "diff"}, onclick: toggle_js),
+      content_tag(:a, t("active_admin.versionate.show_diff"), href: "#", class: "active", data: {mode: "diff"}),
       " | ",
-      content_tag(:a, t("active_admin.versionate.show_old_new"), href: "#", data: {mode: "oldnew"}, onclick: toggle_js)
+      content_tag(:a, t("active_admin.versionate.show_old_new"), href: "#", data: {mode: "oldnew"})
     ])
   }
 ])

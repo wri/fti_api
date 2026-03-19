@@ -62,13 +62,9 @@ class CombinedVersion
       (created_at - version.created_at).abs <= GROUPING_WINDOW_SECONDS
   end
 
-  def created_at
-    primary_version.created_at
-  end
+  delegate :created_at, to: :primary_version
 
-  def whodunnit
-    primary_version.whodunnit
-  end
+  delegate :whodunnit, to: :primary_version
 
   def event
     parent_version&.event || translation_versions.first&.event
