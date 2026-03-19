@@ -401,6 +401,7 @@ es:
       with_deleted: 'Con eliminados'
       reason_label: "Razón para marcar documento como \"no aplicable\""
       non_applicable: "No aplicable"
+      approve_confirmation: '¿Estás seguro de que quieres aprobar el documento %{name}?'
     operator_document_annexes_page:
       approved: 'Anexo aprobado'
       not_approved: 'No se pudo aprobar el anexo'
@@ -409,7 +410,6 @@ es:
       operator_document: 'Documento del Operador'
       orphaned: 'Huérfano'
       details: 'Detalles de Anexo de Documento del Operador'
-      approve_confirmation: '¿Estás seguro de que quieres aprobar el anexo %{name}?'
       comment: 'Motivo del rechazo'
     observations_page:
       not_modified: 'Observación NO modificada'
@@ -1482,7 +1482,6 @@ es:
         one: "tiene la longitud incorrecta (debería ser 1 carácter)"
         other: "tiene la longitud incorrecta (debería ser %{count} caracteres)"
       other_than: "debe ser diferente de %{count}"
-      not_pending_state: "no está en estado pendiente"
       carrierwave_processing_error: "falló al procesarse"
       carrierwave_integrity_error: "no es un tipo de archivo permitido"
       carrierwave_download_error: "no se pudo descargar"
