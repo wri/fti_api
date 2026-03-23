@@ -70,6 +70,7 @@ changes_header = safe_join([
 
 div class: "vh-container", "data-vh-mode": "diff" do
   table_for history, class: "index_table" do
+    column :id
     column I18n.t("active_admin.versionate.event", default: "Event"), &:event
     column I18n.t("active_admin.versionate.created_at", default: "Date") do |v|
       v.created_at.strftime("%Y-%m-%d %H:%M")
