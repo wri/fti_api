@@ -8,22 +8,18 @@ class CombinedVersion
   GROUPING_WINDOW_SECONDS = 5
 
   attr_reader :parent_version, :translation_versions
-  attr_accessor :previous # set by build_for to link adjacent combined versions
+  attr_accessor :previous, :next # set by build_for to link adjacent combined versions
 
-  # Returns [Array<CombinedVersion>, PaperTrail::Version (create event)]
   def self.build_for(record)
-    parent_versions = record.versions.to_a
-    translation_versions = translation_versions_for(record)
+    all_versions = (record.versions.to_a + translation_versions_for(record)).sort_by(&:created_at)
 
-    create_version = parent_versions.find { |v| v.event == "create" }
-    non_create = (parent_versions + translation_versions)
-      .reject { |v| v == create_version }
-      .sort_by(&:created_at)
+    combined = group(all_versions)
+    combined.each_cons(2) do |a, b|
+      b.previous = a
+      a.next = b
+    end
 
-    combined = group(non_create)
-    combined.each_cons(2) { |a, b| b.previous = a }
-
-    [combined, create_version]
+    combined
   end
 
   def self.translation_versions_for(record)
@@ -37,8 +33,8 @@ class CombinedVersion
   end
 
   def self.group(versions)
-    versions.each_with_object([]) do |version, combined|
-      match = combined.reverse_each.find { |c| c.can_absorb?(version) }
+    versions.each.with_object([]) do |version, combined|
+      match = combined.find { |c| c.can_absorb?(version) }
       match ? match.add(version) : combined << new(version)
     end
   end
@@ -58,6 +54,8 @@ class CombinedVersion
   end
 
   def can_absorb?(version)
+    return false if !translation_version?(version) && parent_version
+
     whodunnit == version.whodunnit &&
       (created_at - version.created_at).abs <= GROUPING_WINDOW_SECONDS
   end

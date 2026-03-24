@@ -49,12 +49,6 @@ format_diff = ->(field, old_val, new_val, id) {
   })
 }
 
-all_versions = if create_version.present?
-  [create_version, *versions]
-else
-  versions
-end
-
 changes_header = safe_join([
   t("active_admin.versionate.changes", default: "Changes"),
   " ",
@@ -111,11 +105,10 @@ div class: "vh-container", "data-vh-mode": "diff" do
         safe_join(items)
       end
     end
-    if all_versions.present?
-      column I18n.t("active_admin.versionate.preview", default: "Preview") do |v|
-        idx = all_versions.index(v)
-        link_to t("active_admin.versionate.view"), url_for(version: idx) if idx
-      end
+    column I18n.t("active_admin.versionate.preview", default: "Preview") do |v|
+      idx = versions.index(v)
+      idx = nil if idx == versions.length - 1
+      link_to t("active_admin.versionate.view"), resource_path(resource, version: idx)
     end
   end
 end

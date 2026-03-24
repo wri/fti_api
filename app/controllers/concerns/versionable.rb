@@ -6,24 +6,20 @@ module Versionable
       sidebar :version_info, partial: "version_sidebar", only: :show
 
       controller do
-        helper_method :versions, :create_version
+        helper_method :versions
 
         def versions
           @versions
         end
 
-        def create_version
-          @create_version
-        end
-
         def show
           current = find_current_record
-          @versions, @create_version = CombinedVersion.build_for(current)
+          @versions = CombinedVersion.build_for(current)
           resource = current
           begin
             if params[:version]
               version = @versions[params[:version].to_i]
-              resource = version.reify(current)
+              resource = version.next.reify(current)
             end
           rescue => e
             Sentry.capture_exception e
@@ -49,9 +45,9 @@ module Versionable
 
       member_action :version_history do
         current = find_current_record
-        versions, create_version = CombinedVersion.build_for(current)
+        versions = CombinedVersion.build_for(current)
         render partial: "version_history",
-          locals: {versions: versions, create_version: create_version, resource: current},
+          locals: {versions: versions, resource: current},
           layout: false
       end
     end

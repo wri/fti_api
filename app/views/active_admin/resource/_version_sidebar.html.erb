@@ -1,5 +1,5 @@
 <% user_email = ->(whodunnit) { User.find_by(id: whodunnit)&.email.presence || whodunnit.to_s.presence || 'Unknown' } %>
-<% last_version_number = @versions.length %>
+<% last_version_number = @versions.length - 1 %>
 
 <% if params[:version] %>
   <% version = @versions[params[:version].to_i] %>
@@ -8,16 +8,11 @@
     <h3 style="margin-bottom: 0;"><%= I18n.t('active_admin.versionate.this_is_version', number: params[:version]) %></h3>
     <%= link_to I18n.t('active_admin.versionate.go_to_current_version'), { version: nil } %><br><br>
 
-    <% prev = version.previous %>
-    <% if prev %>
-      <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= prev.created_at %><br>
-      <b><%= I18n.t('active_admin.versionate.user') %></b>: <%= user_email.call(prev.whodunnit) %><br>
-    <% end %>
-    <b><%= I18n.t('active_admin.versionate.modified_at') %></b> <%= version.created_at %><br>
+    <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= version.created_at %><br>
     <b><%= I18n.t('active_admin.versionate.user') %></b> <%= user_email.call(version.whodunnit) %><br>
   <% end %>
 <% else %>
-  <% current_v = @versions.last || @create_version %>
+  <% current_v = @versions.last %>
   <% if current_v %>
     <h3><%= I18n.t('active_admin.versionate.current_version') %><%= last_version_number %></h3>
     <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= current_v.created_at %><br>
@@ -27,7 +22,7 @@
   <% end %>
 <% end %>
 
-<% if [@create_version, *@versions].compact.length > 1 %>
+<% if @versions.length > 0 %>
   <%= render 'version_history_dialog' %>
   <% history_url = url_for(action: :version_history) %>
   <script>
