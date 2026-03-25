@@ -804,6 +804,7 @@ DEPENDENCIES
   acts_as_list
   annotate
   bcrypt
+  benchmark
   bootsnap
   brakeman
   bullet
