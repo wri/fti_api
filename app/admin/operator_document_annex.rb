@@ -5,7 +5,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   extend Versionable
 
   menu false
-  config.order_clause
+  config.sort_order = "updated_at_desc"
 
   active_admin_paranoia
 
