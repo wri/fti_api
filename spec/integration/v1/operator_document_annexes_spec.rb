@@ -29,7 +29,12 @@ module V1
                           }
                         },
           excluded_params: %i[attachment],
-          invalid_params: {name: ""},
+          invalid_params: -> {
+            {
+              name: "",
+              relationships: {"operator-document": operator_document.id}
+            }
+          },
           error_attributes: [422, 100, {name: ["can't be blank"], "start-date": ["can't be blank"]}]
         },
         edit: {
@@ -100,6 +105,29 @@ module V1
           expect(parsed_attributes[:"start-date"]).to eq("2025-12-01")
           expect(parsed_attributes[:"uploaded-by"]).to eq("operator")
           expect(status).to eq(201)
+        end
+
+        context "when trying to upload for another operator's document" do
+          let(:other_operator_document) { create(:operator_document_fmu) }
+
+          it "Does not allow to upload annex for another operator's document" do
+            post(
+              "/operator-document-annexes",
+              params: jsonapi_params(
+                "operator-document-annexes",
+                nil,
+                {
+                  name: "Test Annex",
+                  "start-date": "2025-12-01",
+                  relationships: {"operator-document": other_operator_document.id}
+                }
+              ),
+              headers: operator_user_headers
+            )
+
+            expect(parsed_body).to eq(default_status_errors(401))
+            expect(status).to eq(401)
+          end
         end
       end
 

@@ -34,7 +34,7 @@ class UserPermission < ApplicationRecord
     when "operator"
       {user: {manage: {id: user.id}},
        operator_document: {manage: {operator_id: user.operator_id}},
-       operator_document_annex: {ud: {operator_document: {operator_id: user.operator_id}}, create: {}},
+       operator_document_annex: {manage: {operator_document: {operator_id: user.operator_id}}},
        observation: {read: {}},
        fmu: {ru: {}},
        operator: {ru: {id: user.operator_id}},
@@ -42,7 +42,7 @@ class UserPermission < ApplicationRecord
     when "holding"
       {user: {manage: {id: user.id}},
        operator_document: {manage: {operator: {holding_id: user.holding_id}}},
-       operator_document_annex: {ud: {operator_document: {operator: {holding_id: user.holding_id}}}, create: {}},
+       operator_document_annex: {manage: {operator_document: {operator: {holding_id: user.holding_id}}}},
        observation: {read: {}},
        fmu: {ru: {}},
        operator: {ru: {holding_id: user.holding_id}},
