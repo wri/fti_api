@@ -55,6 +55,147 @@ module V1
       }
     end
 
+    describe "Uploading new document annex" do
+      let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
+
+      describe "For operator user" do
+        it "Returns error object when validation fails" do
+          post(
+            "/operator-document-annexes",
+            params: jsonapi_params(
+              "operator-document-annexes",
+              nil,
+              {
+                name: "",
+                "start-date": nil,
+                relationships: {"operator-document": operator_document.id}
+              }
+            ),
+            headers: operator_user_headers
+          )
+
+          expect(parsed_body).to eq(jsonapi_errors(422, 100, {name: ["can't be blank"], "start-date": ["can't be blank"]}))
+          expect(status).to eq(422)
+        end
+
+        it "Returns success object when annex is uploaded" do
+          post(
+            "/operator-document-annexes",
+            params: jsonapi_params(
+              "operator-document-annexes",
+              nil,
+              {
+                name: "Test Annex",
+                attachment: base64_file_data(Rails.root.join("spec", "support", "files", "doc.pdf")),
+                "start-date": "2025-12-01",
+                relationships: {"operator-document": operator_document.id}
+              }
+            ),
+            headers: operator_user_headers
+          )
+
+          expect(parsed_data[:id]).not_to be_empty
+          expect(parsed_attributes[:status]).to eq("doc_pending")
+          expect(parsed_attributes[:name]).to eq("Test Annex")
+          expect(parsed_attributes[:"start-date"]).to eq("2025-12-01")
+          expect(parsed_attributes[:"uploaded-by"]).to eq("operator")
+          expect(status).to eq(201)
+        end
+      end
+
+      describe "For not operator user" do
+        it "Does not allow to upload annex by non-operator users" do
+          post(
+            "/operator-document-annexes",
+            params: jsonapi_params(
+              "operator-document-annexes",
+              nil,
+              {
+                name: "Test Annex",
+                "start-date": "2025-12-01",
+                relationships: {"operator-document": operator_document.id}
+              }
+            ),
+            headers: user_headers
+          )
+
+          expect(parsed_body).to eq(default_status_errors(401))
+          expect(status).to eq(401)
+        end
+      end
+    end
+
+    describe "Editing document annex" do
+      let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
+      let(:annex) {
+        create(:operator_document_annex, user: operator_user, operator_document: operator_document, force_status: :doc_valid)
+      }
+
+      describe "For operator user" do
+        it "Returns error object when validation fails" do
+          patch(
+            "/operator-document-annexes/#{annex.id}",
+            params: jsonapi_params("operator-document-annexes", annex.id, {name: ""}),
+            headers: operator_user_headers
+          )
+
+          expect(parsed_body).to eq(jsonapi_errors(422, 100, {name: ["can't be blank"]}))
+          expect(status).to eq(422)
+        end
+
+        it "Returns success, updates the annex, and resets status to pending" do
+          expect(annex.status).to eq("doc_valid")
+
+          patch(
+            "/operator-document-annexes/#{annex.id}",
+            params: jsonapi_params(
+              "operator-document-annexes",
+              annex.id,
+              {
+                name: "Updated Annex Name",
+                "start-date": "2025-06-01"
+              }
+            ),
+            headers: operator_user_headers
+          )
+
+          expect(parsed_data[:id]).to eq(annex.id.to_s)
+          expect(parsed_attributes[:name]).to eq("Updated Annex Name")
+          expect(parsed_attributes[:"start-date"]).to eq("2025-06-01")
+          expect(parsed_attributes[:status]).to eq("doc_pending")
+          expect(status).to eq(200)
+        end
+
+        context "when trying to edit another operator's annex" do
+          let(:other_annex) { create(:operator_document_annex, force_status: :doc_valid) }
+
+          it "Does not allow editing another operator's annex" do
+            patch(
+              "/operator-document-annexes/#{other_annex.id}",
+              params: jsonapi_params("operator-document-annexes", other_annex.id, {name: "Hacked"}),
+              headers: operator_user_headers
+            )
+
+            expect(parsed_body).to eq(default_status_errors(401))
+            expect(status).to eq(401)
+          end
+        end
+      end
+
+      describe "For not operator user" do
+        it "Does not allow editing annex by non-operator users" do
+          patch(
+            "/operator-document-annexes/#{annex.id}",
+            params: jsonapi_params("operator-document-annexes", annex.id, {name: "Hacked"}),
+            headers: user_headers
+          )
+
+          expect(parsed_body).to eq(default_status_errors(401))
+          expect(status).to eq(401)
+        end
+      end
+    end
+
     describe "GET OperatorDocumentAnnexes" do
       let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
       let!(:valid_annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_valid) }
