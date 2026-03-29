@@ -28,20 +28,18 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :reject, method: [:get, :put] do
+    @dialog_id = "reject-annex-dialog"
     if request.put?
-      if resource.update(status: "doc_invalid", invalidation_reason: params.dig(:operator_document_annex, :invalidation_reason))
-        redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.rejected")
-      else
-        render :reject
-      end
+      @success = resource.update(status: "doc_invalid", invalidation_reason: params.dig(:operator_document_annex, :invalidation_reason))
+      flash[:notice] = I18n.t("active_admin.operator_documents_page.rejected") if @success
     end
   end
 
-  action_item :reject, only: :show, if: proc { resource.rejectable? } do
-    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(resource)
+  action_item :reject, only: :show, if: proc { resource.rejectable? && params[:version].blank? } do
+    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(resource, open_existing: true), remote: true
   end
 
-  action_item :approve, only: :show, if: proc { resource.approvable? } do
+  action_item :approve, only: :show, if: proc { resource.approvable? && params[:version].blank? } do
     approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: resource.name)
     link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(resource), method: :put, data: {confirm: approve_confirmation}
   end
@@ -110,7 +108,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
         approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: annex.name)
         item I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put, data: {confirm: approve_confirmation}
       end
-      item I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex) if annex.rejectable?
+      item I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), remote: true if annex.rejectable?
     end
     actions
   end

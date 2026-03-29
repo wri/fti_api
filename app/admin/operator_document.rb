@@ -58,28 +58,26 @@ ActiveAdmin.register OperatorDocument do
     redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.other_confirmed")
   end
 
-  action_item :approve, only: :show, if: proc { resource.doc_pending? } do
+  action_item :approve, only: :show, if: proc { resource.doc_pending? && params[:version].blank? } do
     approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: resource.name_with_fmu)
     link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(resource), method: :put, data: {confirm: approve_confirmation}
   end
 
-  action_item :reject, only: :show, if: proc { resource.doc_pending? } do
-    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_path(resource)
+  action_item :reject, only: :show, if: proc { resource.doc_pending? && params[:version].blank? } do
+    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_path(resource, open_existing: true), remote: true
   end
 
   member_action :reject, method: [:get, :put] do
     unless resource.doc_pending?
       redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
     end
-
+    resource.admin_comment = nil if request.get? # Clear comment when opening the dialog for the first time
+    @dialog_id = "reject-document-dialog"
     if request.put?
       resource.status = "doc_invalid"
       resource.admin_comment = params.dig(:operator_document, :admin_comment)
-      if resource.save
-        redirect_to params[:return_to] || resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.rejected")
-      else
-        render :reject
-      end
+      @success = resource.save
+      flash[:notice] = I18n.t("active_admin.operator_documents_page.rejected") if @success
     end
   end
 
@@ -219,11 +217,11 @@ ActiveAdmin.register OperatorDocument do
     column :reason
     column :response_date
     unless params[:scope] == "archived"
-      column(I18n.t("active_admin.shared.actions")) do |document|
+      actions defaults: false, name: I18n.t("active_admin.shared.actions") do |document|
         if document.doc_pending?
           approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: document.name_with_fmu)
-          a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put, "data-confirm": approve_confirmation
-          a I18n.t("active_admin.reject"), href: reject_admin_operator_document_path(document)
+          item I18n.t("active_admin.approve"), approve_admin_operator_document_path(document), method: :put, data: {confirm: approve_confirmation}
+          item I18n.t("active_admin.reject"), reject_admin_operator_document_path(document), remote: true
         end
       end
     end
