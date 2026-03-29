@@ -98,6 +98,13 @@ $to-be-reviewed: #99AA99;
   }
 }
 
+.actions {
+  .cancel a {
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+  }
+}
+
 // To increase the width of observations-details
 .col-details {
   min-width: 500px;
@@ -264,6 +271,7 @@ dialog {
 
     > strong {
       font-size: 1.2em;
+      margin-right: 20px;
     }
 
     .close-dialog-button {
@@ -375,6 +383,46 @@ dialog.version_history {
         color: inherit;
         font-weight: bold;
       }
+    }
+  }
+}
+.vertical-form {
+  .input {
+    width: 100%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+
+    label, textarea, input, select {
+      width: unset;
+    }
+
+    p.inline-errors, p.inline-hints {
+      margin: 0;
+    }
+  }
+}
+
+dialog .vertical-form {
+  .inputs {
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 0;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+
+    input, a {
+      margin: 0;
+      margin-left: 10px;
     }
   }
 }

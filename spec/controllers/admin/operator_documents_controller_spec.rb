@@ -35,7 +35,7 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
       let(:comment) { "Missing signature" }
 
       it "rejects the document and redirects" do
-        expect(response).to redirect_to(admin_operator_document_path(doc))
+        expect(response).to be_successful
         expect(flash[:notice]).to match("Document rejected")
         doc.reload
         expect(doc.status).to eq("doc_invalid")
