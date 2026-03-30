@@ -26,6 +26,7 @@ fr:
     false: 'Faux'
     approve: 'Approuver'
     reject: 'Rejeter'
+    rejecting: 'Rejet en cours...'
     all: 'Tout'
     free: 'Libre'
     view: "Voir"

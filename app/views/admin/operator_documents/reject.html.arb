@@ -1,1 +1,0 @@
-render "reject", dialog_id: @dialog_id

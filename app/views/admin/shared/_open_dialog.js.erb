@@ -12,6 +12,6 @@
   document.body.appendChild(tmp.firstElementChild);
 
   var dialog = document.getElementById("<%= j(dialog_id) %>");
-  initializeDialog();
+  initializeDialog(document);
   dialog.showModal();
 })();
