@@ -40,7 +40,7 @@ gem "paranoia"
 # Rails and DB
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 7.2.2"
+gem "rails", "~> 7.2.3.1"
 gem "rgeo"
 gem "rgeo-geojson"
 gem "gdal"
