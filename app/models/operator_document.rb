@@ -149,9 +149,7 @@ class OperatorDocument < ApplicationRecord
     true
   end
 
-  def name
-    required_operator_document.name
-  end
+  delegate :name, to: :required_operator_document
 
   def name_with_fmu
     return name if fmu.nil?
