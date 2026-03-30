@@ -281,7 +281,29 @@ ActiveAdmin.register OperatorDocument do
   end
 
   show title: proc { "#{resource.operator.name} - #{resource.required_operator_document.name}" } do
-    render partial: "attributes_table", locals: {document: resource}
+    attributes_table do
+      row :public
+      tag_row :status, &:detailed_status
+      row(I18n.t("active_admin.operator_documents_page.reason_label"), &:reason) if resource.reason.present?
+      row :admin_comment if resource.admin_comment.present?
+      row :required_operator_document
+      row :operator
+      row :fmu, unless: resource.is_a?(OperatorDocumentCountry)
+      row :uploaded_by
+      row I18n.t("active_admin.operator_documents_page.attachment") do |r|
+        if r.document_file&.attachment&.present?
+          link_to r.document_file&.attachment&.identifier, r.document_file&.attachment&.url, target: "_blank", rel: "noopener"
+        elsif r.reason.present?
+          I18n.t("active_admin.operator_documents_page.non_applicable")
+        end
+      end
+      row :start_date
+      row :expire_date
+      row :created_at
+      row :updated_at
+      row :deleted_at
+    end
+
     render partial: "annexes_table", locals: {resource: resource}
 
     panel I18n.t("activerecord.models.operator_document_history") do
