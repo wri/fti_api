@@ -9,7 +9,7 @@ dialog id: dialog_id, title: I18n.t("active_admin.reject") + " " + resource.name
 
     f.actions do
       f.cancel_link "javascript:void(0)", class: "close-dialog-button"
-      f.action :submit, label: I18n.t("active_admin.reject")
+      f.action :submit, label: I18n.t("active_admin.reject"), data: {disable_with: I18n.t("active_admin.rejecting")}
     end
   end
 end

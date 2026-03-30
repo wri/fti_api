@@ -14,6 +14,7 @@ en:
     false: 'False'
     approve: 'Approve'
     reject: 'Reject'
+    rejecting: 'Rejecting...'
     all: 'All'
     free: 'Free'
     view: "View"
