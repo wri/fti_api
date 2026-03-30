@@ -69,7 +69,8 @@ ActiveAdmin.register OperatorDocument do
 
   member_action :reject, method: [:get, :put] do
     unless resource.doc_pending?
-      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
+      flash[:notice] = I18n.t("active_admin.operator_documents_page.not_pending")
+      render js: "window.location.reload();" and return
     end
     resource.admin_comment = nil if request.get? # Clear comment when opening the dialog for the first time
     @dialog_id = "reject-document-dialog"

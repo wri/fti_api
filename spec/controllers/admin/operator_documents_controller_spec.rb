@@ -11,17 +11,18 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
   describe "GET reject" do
     let(:doc) { create(:operator_document_country, force_status: "doc_pending") }
 
-    before { get :reject, params: {id: doc.id} }
+    before { get :reject, params: {id: doc.id}, xhr: true, format: :js }
 
-    it "renders the reject form" do
+    it "renders the reject form js" do
       expect(response).to be_successful
     end
 
     context "when document is not pending" do
       let(:doc) { create(:operator_document_country, force_status: "doc_valid") }
 
-      it "redirects away" do
-        expect(response).to redirect_to(admin_operator_document_path(doc))
+      it "shows a notice and reloads the page" do
+        expect(response).to be_successful
+        expect(flash[:notice]).to eq(I18n.t("active_admin.operator_documents_page.not_pending"))
       end
     end
   end
@@ -29,7 +30,7 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
   describe "PUT reject" do
     let(:doc) { create(:operator_document_country, force_status: "doc_pending") }
 
-    before { put :reject, params: {id: doc.id, operator_document: {admin_comment: comment}} }
+    before { put :reject, params: {id: doc.id, operator_document: {admin_comment: comment}}, xhr: true, format: :js }
 
     context "with a comment" do
       let(:comment) { "Missing signature" }
@@ -48,7 +49,7 @@ RSpec.describe Admin::OperatorDocumentsController, type: :controller do
       let(:comment) { "Some comment" }
 
       it "does not change status and redirects" do
-        expect(response).to redirect_to(admin_operator_document_path(doc))
+        expect(flash[:notice]).to eq(I18n.t("active_admin.operator_documents_page.not_pending"))
         expect(doc.reload.status).to eq("doc_valid")
       end
     end
