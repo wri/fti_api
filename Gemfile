@@ -2,13 +2,14 @@
 
 source "https://rubygems.org"
 
-ruby "3.4.7"
+ruby "4.0.2"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
 
+gem "benchmark"
 gem "bootsnap", require: false
 
 # Active admin
@@ -40,7 +41,7 @@ gem "paranoia"
 # Rails and DB
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 7.2.3.1"
+gem "rails", "~> 8.0.5"
 gem "rgeo"
 gem "rgeo-geojson"
 gem "gdal"
@@ -107,7 +108,7 @@ gem "maxmind-geoip2"
 gem "device_detector" # for analytics bot detection
 
 group :development, :test do
-  gem "debug", platforms: %i[mri mingw x64_mingw]
+  gem "debug", platforms: %i[mri windows]
   gem "rubocop-rails", require: false
   gem "standard", require: false
 end
@@ -154,5 +155,5 @@ end
 gem "dotenv-rails"
 gem "puma"
 gem "rack-cors", groups: [:development, :e2e]
-gem "redis-rails"
+gem "redis"
 gem "tzinfo-data"

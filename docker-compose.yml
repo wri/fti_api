@@ -23,7 +23,7 @@ services:
       - AUTH_SECRET
       - RAILS_ENV=e2e
   redis:
-    image: redis:7.2.4-alpine
+    image: redis:8.0.5-alpine
     container_name: otp_api_redis
     ports:
       - "${REDIS_PORT}:6379"
