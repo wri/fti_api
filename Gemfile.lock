@@ -473,7 +473,7 @@ GEM
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
-    minitest (6.0.2)
+    minitest (6.0.3)
       drb (~> 2.0)
       prism (~> 1.5)
     mjml-rails (4.16.0)
@@ -766,11 +766,10 @@ GEM
     warden (1.2.9)
       rack (>= 2.0.9)
     warning (1.5.0)
-    web-console (4.2.1)
-      actionview (>= 6.0.0)
-      activemodel (>= 6.0.0)
+    web-console (4.3.0)
+      actionview (>= 8.0.0)
       bindex (>= 0.4.0)
-      railties (>= 6.0.0)
+      railties (>= 8.0.0)
     webmock (3.26.2)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -854,7 +853,7 @@ DEPENDENCIES
   puma
   rack-cors
   rack-mini-profiler (~> 2.0)
-  rails (~> 8.0)
+  rails (~> 8.0.5)
   redis
   rgeo
   rgeo-geojson
