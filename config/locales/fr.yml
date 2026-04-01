@@ -145,12 +145,21 @@ fr:
     versionate:
       current_version: 'Version actuelle: '
       previous_version: 'Version précédente'
-      this_is_version: "This is %{number} version"
+      next_version: 'Prochaine version'
+      this_is_version: "C'est la version %{number}"
       created_at: 'Créé le: '
       modified_at: 'Modifié le: '
       user: 'Utilisateur: '
       go_to_current_version: 'Aller à la version actuelle'
       no_versions: "Cet article n'a pas de version enregistrée."
+      preview: 'Aperçu'
+      view: 'Voir'
+      version_history: 'Historique des versions'
+      view_history_table: "Voir le tableau d'historique"
+      loading_history_table: 'Chargement...'
+      view_mode: 'Mode d''affichage:'
+      show_diff: 'Diff'
+      show_old_new: 'Ancien/Nouveau'
     shared:
       translated_fields: 'Champs traduits'
       monitor_details: 'Détails de l’observateur'

@@ -1,50 +1,68 @@
-<% if !@versions.empty? %>
-  <h3><%= I18n.t('active_admin.versionate.current_version').to_s + @versions.length.to_s %></h3>
+<% user_email = ->(whodunnit) { User.find_by(id: whodunnit)&.email.presence || whodunnit.to_s.presence || 'Unknown' } %>
+<% last_version_number = @versions.length - 1 %>
 
-  <% last_version = @versions.last %>
+<% if params[:version] %>
+  <% version = @versions[params[:version].to_i] %>
 
-  <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= last_version.created_at%>
-  <br>
-  <b><%= I18n.t('active_admin.versionate.user') %></b><%= User.find(last_version.whodunnit).email rescue '' %>
-  <br>
-  <% if @versions.length.to_i > 0 %>
+  <% if version %>
+    <h3 style="margin-bottom: 0;"><%= I18n.t('active_admin.versionate.this_is_version', number: params[:version]) %></h3>
+    <%= link_to I18n.t('active_admin.versionate.go_to_current_version'), { version: nil } %><br><br>
 
-    <% if params[:version] %>
-      <% version = @versions[params[:version].to_i] %>
-
-      <% if version %>
-        <%= link_to I18n.t('active_admin.versionate.go_to_current_version')%>
-
-        <h3><%= I18n.t('active_admin.versionate.this_is_version', number: params[:version]) %></h3>
-
-        <% reify_version_info = version.previous %>
-        <!-- We are showing reify version which is object before changes -->
-        <% if reify_version_info %>
-          <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= reify_version_info.created_at %>
-          <br>
-          <b><%= I18n.t('active_admin.versionate.user') %></b>: <%= User.find(reify_version_info.whodunnit).email rescue '' %>
-          <br>
-          <br>
-        <% end %>
-        <b><%= I18n.t('active_admin.versionate.modified_at') %></b><%= version.created_at %>
-        <br>
-        <b><%= I18n.t('active_admin.versionate.user') %></b> <%= User.find(version.whodunnit).email rescue '' %>
-        <br>
-      <% end %>
-    <% end %>
-
-    <% if params[:version].to_i > 0 || !params[:version] %>
-      <%= link_to I18n.t('active_admin.versionate.previous_version'), {:version => (params[:version] || @versions.length).to_i - 1}%>
-      <br>
-    <% end %>
+    <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= version.created_at %><br>
+    <b><%= I18n.t('active_admin.versionate.user') %></b> <%= user_email.call(version.whodunnit) %><br>
   <% end %>
-<% elsif @create_version %>
-  <h3><%= I18n.t('active_admin.versionate.current_version')%>0</h3>
-
-  <b><%= I18n.t('active_admin.versionate.created_at') %></b>
-  <%= @create_version.created_at%>
-  <br>
-  <b><%= I18n.t('active_admin.versionate.user') %></b><%= User.find(@create_version.whodunnit).email rescue '' %>
 <% else %>
-  <p><%= I18n.t('active_admin.versionate.no_versions') %></p>
+  <% current_v = @versions.last %>
+  <% if current_v %>
+    <h3><%= I18n.t('active_admin.versionate.current_version') %><%= last_version_number %></h3>
+    <b><%= I18n.t('active_admin.versionate.created_at') %></b> <%= current_v.created_at %><br>
+    <b><%= I18n.t('active_admin.versionate.user') %></b> <%= user_email.call(current_v.whodunnit) %><br>
+  <% else %>
+    <p><%= I18n.t('active_admin.versionate.no_versions') %></p>
+  <% end %>
+<% end %>
+
+<% if @versions.length > 0 %>
+  <%= render 'version_history_dialog' %>
+  <% history_url = url_for(action: :version_history) %>
+  <script>
+    function openVersionHistoryModal(btn) {
+      var modal = document.querySelector('#version_history_modal');
+      var content = document.querySelector('#version_history_modal_content');
+      if (content.dataset.loaded) { modal.showModal(); return; }
+      var originalText = btn.textContent;
+      btn.textContent = '<%= t("active_admin.versionate.loading_history_table") %>';
+      btn.disabled = true;
+      content.textContent = '';
+      fetch('<%= history_url %>', {headers: {'X-Requested-With': 'XMLHttpRequest'}})
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+          content.innerHTML = html;
+          content.dataset.loaded = '1';
+          content.dispatchEvent(new CustomEvent('app:content_load', {bubbles: true}));
+          modal.showModal();
+        })
+        .finally(function() {
+          btn.textContent = originalText;
+          btn.disabled = false;
+        });
+    }
+  </script>
+  <%= link_to t("active_admin.versionate.view_history_table"), "javascript:void(0)",
+    style: "margin-top: 10px; width: 100%; text-align: center;",
+    class: "button",
+    onclick: "openVersionHistoryModal(this)" %>
+<% end %>
+
+
+<% if last_version_number > 0 %>
+  <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+    <% if params[:version].to_i > 0 || !params[:version] %>
+      <%= link_to I18n.t('active_admin.versionate.previous_version'), { version: (params[:version] || last_version_number).to_i - 1 } %>
+    <% end %>
+    <% if params[:version] && params[:version].to_i < last_version_number %>
+      <% next_version = params[:version].to_i + 1 %>
+      <%= link_to I18n.t('active_admin.versionate.next_version'), { version: next_version == last_version_number ? nil : next_version } %>
+    <% end %>
+  </div>
 <% end %>

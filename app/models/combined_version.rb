@@ -1,0 +1,161 @@
+# frozen_string_literal: true
+
+# Wraps one logical "change event" which may consist of a parent model version,
+# one or more translation versions, or both — grouped by the same author within
+# a short time window. Used in the version history UI instead of raw PaperTrail
+# versions so that translation-only changes are visible alongside model changes.
+class CombinedVersion
+  GROUPING_WINDOW_SECONDS = 5
+
+  attr_reader :parent_version, :translation_versions
+  attr_accessor :previous, :next # set by build_for to link adjacent combined versions
+
+  def self.build_for(record)
+    all_versions = (record.versions.to_a + translation_versions_for(record)).sort_by(&:created_at)
+
+    combined = group(all_versions)
+    combined.each_cons(2) do |a, b|
+      b.previous = a
+      a.next = b
+    end
+
+    combined
+  end
+
+  def self.translation_versions_for(record)
+    return [] unless record.class.respond_to?(:translation_class)
+    return [] if record.translation_ids.empty?
+
+    PaperTrail::Version.where(
+      item_type: record.class.translation_class.name,
+      item_id: record.translation_ids
+    ).to_a
+  end
+
+  def self.group(versions)
+    versions.each.with_object([]) do |version, combined|
+      match = combined.find { |c| c.can_absorb?(version) }
+      match ? match.add(version) : combined << new(version)
+    end
+  end
+
+  def initialize(first_version)
+    @parent_version = nil
+    @translation_versions = []
+    add(first_version)
+  end
+
+  def add(version)
+    if translation_version?(version)
+      @translation_versions << version
+    else
+      @parent_version = version
+    end
+  end
+
+  def can_absorb?(version)
+    return false if !translation_version?(version) && parent_version
+
+    whodunnit == version.whodunnit &&
+      (created_at - version.created_at).abs <= GROUPING_WINDOW_SECONDS
+  end
+
+  delegate :id, :created_at, :whodunnit, to: :primary_version
+
+  def event
+    parent_version&.event || translation_versions.first&.event
+  end
+
+  def changeset
+    parent_cs = parent_version&.changeset || {}
+    translation_cs = translation_versions.each_with_object({}) do |v, h|
+      # create events have locale in changeset; update/destroy don't (it never changes),
+      # so fall back to reify which parses v.object without a DB query.
+      # that is super weird but ok
+      locale = v.changeset["locale"]&.last || v.reify&.locale
+      next unless locale
+      v.changeset.except("created_at", "updated_at", "id", "locale").each do |field, changes|
+        next if field.end_with?("_id")
+        if field.include?("translated_from")
+          h[field] = changes
+        else
+          h["#{field} (#{locale})"] = changes
+        end
+      end
+    end
+    parent_cs
+      .merge(translation_cs)
+      .except("created_at", "updated_at", "id")
+      .reject { |_, (old, new)| old.to_s == new.to_s }
+  end
+
+  # Returns { plain: { field => [old, new] }, translated: { field => { locale => [old, new] } } }
+  def grouped_changeset
+    plain = {}
+    translated = {}
+    changeset.each do |field, vals|
+      if (m = field.match(/\A(.+) \((\w[\w-]*)\)\z/))
+        (translated[m[1]] ||= {})[m[2]] = vals
+      else
+        plain[field] = vals
+      end
+    end
+    {plain: plain, translated: translated}
+  end
+
+  def translation_only?
+    parent_version.nil?
+  end
+
+  # Restores the record to the state it was in just BEFORE this combined version
+  # (i.e. the state AFTER the previous combined version — matching PaperTrail's
+  # reify semantics so the existing prev/next navigation in the UI still works).
+  def reify(record)
+    resource = if parent_version
+      parent_version.reify
+    else
+      # translation-only change: restore parent from its most recent version before this timestamp
+      parent_v = PaperTrail::Version
+        .where(item_type: record.class.base_class.name, item_id: record.id)
+        .where("created_at < ?", created_at)
+        .order(created_at: :desc)
+        .first
+      parent_v ? parent_v.reify : record.dup
+    end
+
+    reify_translations!(resource, record)
+    resource.id ||= record.id
+    resource
+  end
+
+  private
+
+  def primary_version
+    parent_version || translation_versions.first
+  end
+
+  def translation_version?(version)
+    version.item_type.end_with?("::Translation")
+  end
+
+  def reify_translations!(resource, record)
+    return unless record.class.respond_to?(:translation_class)
+
+    translation_class = record.class.translation_class
+    record.translations.find_each do |translation|
+      t_version = PaperTrail::Version
+        .where(item_type: translation_class.name, item_id: translation.id)
+        .where("created_at < ?", created_at)
+        .order(created_at: :desc)
+        .first
+      next unless t_version
+
+      reified_t = t_version.reify
+      next unless reified_t
+
+      locale = reified_t.locale.to_sym
+      attrs = reified_t.attributes.slice(*record.class.translated_attribute_names.map(&:to_s))
+      resource.translation_for(locale).assign_attributes(attrs)
+    end
+  end
+end

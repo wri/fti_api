@@ -1,7 +1,8 @@
-function initializeDialog() {
-  document.querySelectorAll("dialog").forEach((dialog) => {
+function initializeDialog(root) {
+  root.querySelectorAll("dialog").forEach((dialog) => {
     // close when clicking outside
     dialog.addEventListener("mousedown", (event) => {
+      if (event.target !== dialog) return;
       // Check if the click is on the backdrop (not the dialog content)
       const dialogDimensions = dialog.getBoundingClientRect();
       if (
@@ -15,11 +16,14 @@ function initializeDialog() {
     });
 
     dialog.querySelectorAll(".close-dialog-button").forEach((button) => {
-      button.addEventListener("click", () => {
-        dialog.close();
-      });
+      if (button.closest("dialog") === dialog) {
+        button.addEventListener("click", () => {
+          dialog.close();
+        });
+      }
     });
   });
 }
 
-document.addEventListener("DOMContentLoaded", initializeDialog);
+document.addEventListener("DOMContentLoaded", function() { initializeDialog(document); });
+document.addEventListener("app:content_load", function(e) { initializeDialog(e.target); });

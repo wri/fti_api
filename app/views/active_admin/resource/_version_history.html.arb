@@ -1,0 +1,114 @@
+history ||= versions&.reverse || []
+
+enum_labels = resource.class.defined_enums.transform_values(&:invert)
+
+format_geojson = ->(val, id_suffix) {
+  next "" if val.blank?
+  modal_id = "history_#{id_suffix}_geojson_modal"
+  dialog(id: modal_id, title: Fmu.human_attribute_name(:geojson)) { val }
+  link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('##{modal_id}').showModal()"
+}
+
+format_enum_label = ->(field, val) {
+  next "" unless val.present?
+  label = enum_labels[field].fetch(val, val).to_s
+  content_tag(:span, label.humanize, class: "status_tag #{label.parameterize.underscore}")
+}
+
+format_value = ->(field, val, id_suffix) {
+  next format_geojson.call(val, id_suffix) if field == "geojson"
+  next format_enum_label.call(field, val) if enum_labels[field]
+  val.to_s
+}
+
+format_oldnew = ->(field, old_val, new_val, id) {
+  safe_join([
+    content_tag(:span, format_value.call(field, old_val, "#{id}_on_old"), class: "vh-old"),
+    " \u2192 ",
+    content_tag(:span, format_value.call(field, new_val, "#{id}_on_new"), class: "vh-new")
+  ])
+}
+
+uses_diff = ->(field, old_val, new_val) {
+  field != "geojson" && !enum_labels[field] && (old_val.to_s.length + new_val.to_s.length) > 30
+}
+
+format_diff = ->(field, old_val, new_val, id) {
+  next format_oldnew.call(field, old_val, new_val, id) unless uses_diff.call(field, old_val, new_val)
+
+  old_s = old_val.to_s
+  new_s = new_val.to_s
+  diffs = Diff::LCS.sdiff(old_s.split(/\b/), new_s.split(/\b/))
+  safe_join(diffs.map { |change|
+    case change.action
+    when "=" then change.old_element
+    when "+" then content_tag(:ins, change.new_element)
+    when "-" then content_tag(:del, change.old_element)
+    when "!" then content_tag(:del, change.old_element) + content_tag(:ins, change.new_element)
+    end
+  })
+}
+
+changes_header = safe_join([
+  t("active_admin.versionate.changes", default: "Changes"),
+  " ",
+  content_tag(:div, class: "vh-toggle") {
+    safe_join([
+      content_tag(:span, t("active_admin.versionate.view_mode"), class: "vh-view-mode"),
+      content_tag(:a, t("active_admin.versionate.show_diff"), href: "#", class: "active", data: {mode: "diff"}),
+      " | ",
+      content_tag(:a, t("active_admin.versionate.show_old_new"), href: "#", data: {mode: "oldnew"})
+    ])
+  }
+])
+
+div class: "vh-container", "data-vh-mode": "diff" do
+  table_for history, class: "index_table" do
+    column :id
+    column I18n.t("active_admin.versionate.event", default: "Event"), &:event
+    column I18n.t("active_admin.versionate.created_at", default: "Date") do |v|
+      v.created_at.strftime("%Y-%m-%d %H:%M")
+    end
+    column I18n.t("active_admin.versionate.user", default: "User") do |v|
+      User.find_by(id: v.whodunnit)&.email
+    end
+    column changes_header, class: "col-changes" do |v|
+      grouped = v.grouped_changeset
+      next if grouped[:plain].empty? && grouped[:translated].empty?
+
+      content_tag(:ul, style: "margin: 0; padding: 0; list-style: none;") do
+        items = grouped[:plain].map do |field, (old_val, new_val)|
+          id = "#{v.object_id}_#{field}"
+          content_tag(:li) do
+            content_tag(:b, field.humanize) + ": " +
+              if uses_diff.call(field, old_val, new_val)
+                content_tag(:span, format_diff.call(field, old_val, new_val, id), class: "vh-diff") +
+                  content_tag(:span, format_oldnew.call(field, old_val, new_val, id), class: "vh-oldnew")
+              else
+                format_oldnew.call(field, old_val, new_val, id)
+              end
+          end
+        end
+
+        items += grouped[:translated].map do |base_field, locale_changes|
+          content_tag(:li) do
+            render("version_history_translated_field",
+              base_field: base_field,
+              locale_changes: locale_changes,
+              version_id: v.object_id,
+              format_diff: format_diff,
+              format_oldnew: format_oldnew,
+              uses_diff: uses_diff)
+          end
+        end
+
+        safe_join(items)
+      end
+    end
+    column I18n.t("active_admin.versionate.preview", default: "Preview") do |v|
+      idx = versions.index(v)
+      idx = nil if idx == versions.length - 1
+      link_to t("active_admin.versionate.view"), resource_path(resource, version: idx)
+    end
+  end
+end

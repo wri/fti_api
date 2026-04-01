@@ -137,12 +137,21 @@ en:
     versionate:
       current_version: 'Current Version: '
       previous_version: 'Previous version'
+      next_version: 'Next version'
       this_is_version: "This is %{number} version"
       created_at: 'Created at: '
       modified_at: 'Modified at: '
       user: 'User: '
       go_to_current_version: 'Go to current version'
       no_versions: 'This item does not have any registered version.'
+      preview: 'Preview'
+      view: 'View'
+      version_history: 'Version History'
+      view_history_table: 'View History Table'
+      loading_history_table: 'Loading...'
+      view_mode: 'View mode:'
+      show_diff: 'Diff'
+      show_old_new: 'Old/New'
     shared:
       translated_fields: 'Translated Fields'
       monitor_details: 'Monitor Details'

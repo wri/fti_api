@@ -252,10 +252,7 @@ body.active_admin {
 dialog {
   border: 0;
   padding: 0;
-
-  max-height: 80vh;
-  max-width: 70vw;
-  overflow-y: auto;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
 
   header {
     display: flex;
@@ -278,11 +275,36 @@ dialog {
 
   > div {
     padding: 10px;
+
+    max-height: 80vh;
+    max-width: 70vw;
+    overflow-y: auto;
   }
 }
 
 dialog::backdrop {
   backdrop-filter: blur(2px);
+}
+
+// versionate dialog
+dialog.version_history {
+  > div {
+    padding: 0px;
+  }
+
+  table {
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    thead {
+      position: sticky;
+      top: 0;
+    }
+
+    tr.odd td {
+      background: unset;
+    }
+  }
 }
 
 // Translated row styles
@@ -317,6 +339,41 @@ dialog::backdrop {
       &.active {
         background-color: $skinHeaderBck;
         color: #fff;
+      }
+    }
+  }
+}
+
+// Version history table
+.index_table ins { background: #d4fcbc; text-decoration: none; }
+.index_table del { background: #fbb6c2; text-decoration: line-through; }
+
+.vh-container {
+  &[data-vh-mode="diff"] .vh-oldnew { display: none; }
+  &[data-vh-mode="oldnew"] .vh-diff { display: none; }
+
+  .vh-old { color: #c0392b; }
+  .vh-new { color: #27ae60; }
+
+  .vh-toggle {
+    // display: inline-block;
+    float: right;
+    font-weight: normal;
+    margin-left: 60px;
+
+    .vh-view-mode {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    a {
+      color: #999;
+      text-decoration: none;
+      display: inline-block !important;
+
+      &.active {
+        color: inherit;
+        font-weight: bold;
       }
     }
   }
