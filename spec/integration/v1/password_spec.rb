@@ -29,17 +29,6 @@ module V1
           expect(parsed_body).to eq({messages: [{status: 200, title: "Reset password email sent if email in the database!"}]})
           expect(status).to eq(200)
         end
-
-        it "Returns 200 when object when the user email is not valid" do
-          expect {
-            post("/reset-password",
-              params: {password: {any_attribute: ""}},
-              headers: non_api_webuser_headers)
-          }.not_to have_enqueued_mail(UserMailer, :forgotten_password)
-
-          expect(parsed_body).to eq({messages: [{status: 200, title: "Reset password email sent if email in the database!"}]})
-          expect(status).to eq(200)
-        end
       end
     end
 

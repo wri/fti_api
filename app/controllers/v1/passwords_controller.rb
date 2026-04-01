@@ -26,11 +26,11 @@ module V1
     private
 
     def create_params
-      params.require(:password).permit(:email)
+      params.expect(password: [:email])
     end
 
     def update_params
-      params.require(:password).permit(:reset_password_token, :password, :password_confirmation)
+      params.expect(password: [:reset_password_token, :password, :password_confirmation])
     end
   end
 end
