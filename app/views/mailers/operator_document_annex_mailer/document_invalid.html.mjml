@@ -8,7 +8,8 @@
 
 <p>
   <%= t("mailers.company") %>: <%= @operator.name %><br/>
-  <%= t("mailers.document") %>: <%= @document.operator_document.name_with_fmu %><br/>
+  <%= t("mailers.annex") %>: <%= @document.name %><br/>
+  <%= t("mailers.associated_to") %>: <%= @document.operator_document.name_with_fmu %><br/>
   <%= OperatorDocument.human_attribute_name(:start_date) %>: <%= @document.start_date %><br/>
   <%= OperatorDocument.human_attribute_name(:expire_date) %>: <%= @document.expire_date %><br/>
   Link: <%= link_to nil, @document.attachment.url %>
