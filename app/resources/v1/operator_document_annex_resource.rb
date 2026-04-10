@@ -7,9 +7,9 @@ module V1
     include Privateable
 
     caching
-    attributes :name,
-      :start_date, :expire_date, :status, :invalidation_reason, :attachment,
-      :uploaded_by, :created_at, :updated_at
+    attributes :name, :start_date, :expire_date, :status, :invalidation_reason, :attachment,
+      :uploaded_by, :created_at, :updated_at,
+      :source_operator_document_id, :source_annex_id
 
     privateable :show_attributes?, [:name, :invalidation_reason, :start_date, :expire_date, :status, :attachment, :uploaded_by, :created_at, :updated_at]
 
@@ -21,12 +21,14 @@ module V1
     before_create :set_user_id, :set_status_pending, :set_public
 
     def self.updatable_fields(context)
-      [:name, :start_date, :expire_date, :attachment]
+      [:name, :start_date, :expire_date, :attachment, :source_operator_document_id, :source_annex_id]
     end
 
     def self.creatable_fields(context)
       updatable_fields(context) + [:operator_document]
     end
+
+    delegate :attachment=, to: :@model
 
     def operator_document_id=(operator_document_id)
       od = OperatorDocument.find operator_document_id
@@ -35,6 +37,32 @@ module V1
       odh = OperatorDocumentHistory.where(operator_document_id: operator_document_id).order(operator_document_updated_at: :desc).first
       adh = AnnexDocument.new(documentable: odh)
       @model.annex_documents_history << adh
+    end
+
+    def source_operator_document_id
+      nil
+    end
+
+    def source_operator_document_id=(id)
+      source = OperatorDocument.find(id)
+      unless current_user_operator_ids.include?(source.operator_id)
+        raise APIController::UnprocessableContentError, "source-operator-document-id must belong to your operator"
+      end
+
+      self.attachment = File.open(source.document_file.attachment.path)
+    end
+
+    def source_annex_id
+      nil
+    end
+
+    def source_annex_id=(id)
+      source = OperatorDocumentAnnex.find(id)
+      unless current_user_operator_ids.include?(source.operator_document&.operator_id)
+        raise APIController::UnprocessableContentError, "source-annex-id must belong to your operator"
+      end
+
+      self.attachment = File.open(source.attachment.path)
     end
 
     def set_user_id
@@ -83,6 +111,10 @@ module V1
       return true if user.admin?
 
       user.is_operator?(@model.operator&.id)
+    end
+
+    def current_user_operator_ids
+      context[:current_user]&.operator_ids || []
     end
   end
 end
