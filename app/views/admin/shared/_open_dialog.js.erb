@@ -1,0 +1,17 @@
+(function() {
+  const existing = document.getElementById("<%= j(dialog_id) %>");
+  const openExisting = <%= open_existing ? "true" : "false" %>;
+  if (existing && !openExisting) existing.remove();
+  if (existing && openExisting) {
+    existing.showModal();
+    return;
+  }
+
+  var tmp = document.createElement("div");
+  tmp.innerHTML = "<%= j(render partial, dialog_id: dialog_id) %>";
+  document.body.appendChild(tmp.firstElementChild);
+
+  var dialog = document.getElementById("<%= j(dialog_id) %>");
+  initializeDialog(document);
+  dialog.showModal();
+})();

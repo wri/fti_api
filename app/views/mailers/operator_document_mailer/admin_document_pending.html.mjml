@@ -18,7 +18,7 @@
 </p>
 
 <p>
-  <%= t(".paragraph2", link: link_to(nil, perform_qc_admin_operator_document_url(@document), target: "_blank")).html_safe %>
+  <%= t(".paragraph2", link: link_to(nil, admin_operator_document_url(@document), target: "_blank")).html_safe %>
 </p>
 
 <p>

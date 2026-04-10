@@ -10,7 +10,10 @@ ActiveAdmin.register QualityControl do
   controller do
     def new
       super do
-        redirect_to reviewable_path, notice: I18n.t("active_admin.quality_control_page.reviewable_not_in_qc") and return unless resource.reviewable.qc_in_progress?
+        set_title
+        if resource.reviewable.respond_to?(:qc_in_progress?) && !resource.reviewable.qc_in_progress?
+          redirect_to reviewable_path, notice: I18n.t("active_admin.quality_control_page.reviewable_not_in_qc") and return
+        end
       end
     end
 
@@ -27,6 +30,10 @@ ActiveAdmin.register QualityControl do
     helper_method :reviewable_path
     def reviewable_path
       admin_observation_path(resource.reviewable) if resource.reviewable.is_a?(Observation)
+    end
+
+    def set_title
+      @page_title = I18n.t("active_admin.quality_control_page.title", reviewable_type: resource.reviewable_type, reviewable_id: resource.reviewable_id)
     end
   end
 
@@ -62,8 +69,6 @@ ActiveAdmin.register QualityControl do
       end
     end
 
-    if resource.reviewable_type == "Observation"
-      render partial: "admin/observations/attributes_table", locals: {observation: resource.reviewable}
-    end
+    render partial: "admin/#{resource.reviewable_type.pluralize.downcase}/attributes_table", locals: {observation: resource.reviewable}
   end
 end

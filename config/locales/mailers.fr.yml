@@ -8,6 +8,8 @@ fr:
     report_name: Nom du rapport
     company: Enterprise
     document: Document
+    associated_to: Associé à
+    annex: Annexe
   user_mailer:
     user_acceptance:
       subject: Bienvenue sur la plateforme Open Timber Portal
@@ -88,5 +90,18 @@ fr:
       subject: "%{company} a publié un nouveau document"
       paragraph1: "%{company} a publié un nouveau document sur l’Open Timber Portal qui est prêt à être passé en revue:"
       paragraph2: "Pour passer en revue le document, veuillez consulter: %{link}"
+  operator_document_annex_mailer:
+    document_valid:
+      subject: "Open Timber Portal: nouvelle annexe publiée"
+      paragraph1: "L’annexe %{annex} téléchargée pour le document %{document} a été validée."
+    document_invalid:
+      subject: "Open Timber Portal: l’annexe téléchargée n’a pas été validée"
+      paragraph1: "L’annexe ci-dessous a été passée en revue et a besoin d’être modifiée:"
+      paragraph2: "L’évaluateur a fait le commentaire suivant:"
+      paragraph3: "Vous pouvez modifier cette annexe en cliquant sur le lien suivant et en modifiant le document sur votre profil: %{link}"
+    admin_document_pending:
+      subject: "%{company} a publié une nouvelle annexe"
+      paragraph1: "%{company} a publié une nouvelle annexe sur l’Open Timber Portal qui est prête à être passée en revue."
+      paragraph2: "Pour passer en revue l’annexe, veuillez consulter: %{link}"
 
 

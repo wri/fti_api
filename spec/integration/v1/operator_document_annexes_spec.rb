@@ -59,8 +59,8 @@ module V1
       let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
       let!(:valid_annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_valid) }
       let!(:history_annex) { create(:operator_document_annex, force_status: :doc_valid, operator_document_histories: [create(:operator_document_history, operator: operator_user.operator)]) }
-      let!(:invalid_annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_invalid) }
-      let!(:other_invalid_annex) { create(:operator_document_annex, force_status: :doc_invalid) }
+      let!(:invalid_annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_invalid, invalidation_reason: "Invalid") }
+      let!(:other_invalid_annex) { create(:operator_document_annex, force_status: :doc_invalid, invalidation_reason: "Invalid") }
 
       context "when admin" do
         it "returns all annexes" do

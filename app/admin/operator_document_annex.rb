@@ -20,24 +20,32 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   member_action :approve, method: :put do
-    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_valid])
-      redirect_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.approved")
+    if resource.update(status: "doc_valid")
+      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_document_annexes_page.approved")
     else
-      redirect_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
+      redirect_back_or_to resource_path(resource), alert: I18n.t("active_admin.operator_document_annexes_page.not_approved")
     end
   end
 
-  member_action :reject, method: :put do
-    if resource.update(status: OperatorDocumentAnnex.statuses[:doc_invalid])
-      redirect_to collection_path, notice: I18n.t("active_admin.operator_document_annexes_page.rejected")
-    else
-      redirect_to collection_path, alert: I18n.t("active_admin.operator_document_annexes_page.not_rejected")
+  member_action :reject, method: [:get, :put] do
+    @dialog_id = "reject-annex-dialog"
+    if request.put?
+      @success = resource.update(status: "doc_invalid", invalidation_reason: params.dig(:operator_document_annex, :invalidation_reason))
+      flash[:notice] = I18n.t("active_admin.operator_documents_page.rejected") if @success
     end
+  end
+
+  action_item :reject, only: :show, if: proc { resource.rejectable? && params[:version].blank? } do
+    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(resource, open_existing: true), remote: true
+  end
+
+  action_item :approve, only: :show, if: proc { resource.approvable? && params[:version].blank? } do
+    approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: resource.name)
+    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(resource), method: :put, data: {confirm: approve_confirmation}
   end
 
   actions :all, except: [:destroy, :new]
-  permit_params :name, :status, :expire_date, :start_date,
-    :attachment, :uploaded_by
+  permit_params :name, :status, :expire_date, :start_date, :attachment, :uploaded_by
 
   csv do
     column :status
@@ -94,9 +102,13 @@ ActiveAdmin.register OperatorDocumentAnnex do
     end
     if params[:scope] == "archived"
       column :deleted_at
-    else
-      column(I18n.t("active_admin.approve")) { |annex| link_to I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put }
-      column(I18n.t("active_admin.reject")) { |annex| link_to I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), method: :put }
+    end
+    actions defaults: false, name: I18n.t("active_admin.shared.actions") do |annex|
+      if annex.approvable?
+        approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: annex.name)
+        item I18n.t("active_admin.approve"), approve_admin_operator_document_annex_path(annex), method: :put, data: {confirm: approve_confirmation}
+      end
+      item I18n.t("active_admin.reject"), reject_admin_operator_document_annex_path(annex), remote: true if annex.rejectable?
     end
     actions
   end
@@ -136,18 +148,16 @@ ActiveAdmin.register OperatorDocumentAnnex do
         input_html: {disabled: true}
       f.input :uploaded_by
       f.input :name
-      f.input :status, include_blank: false
+      f.input :status, include_blank: false, input_html: {disabled: true}
       f.input :attachment, hint: preview_file_tag(f.object.attachment)
-      f.input :expire_date, as: :date_picker
-      f.input :start_date, as: :date_picker
     end
-    f.actions
   end
 
   show do
     attributes_table do
       row :name
       tag_row :status
+      row :invalidation_reason if resource.invalidation_reason.present? || resource.doc_invalid?
       row :required_operator_document do
         resource.operator_document.required_operator_document if resource.operator_document.present? &&
           resource.operator_document.required_operator_document.present?

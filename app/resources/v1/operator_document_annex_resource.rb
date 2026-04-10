@@ -8,10 +8,10 @@ module V1
 
     caching
     attributes :name,
-      :start_date, :expire_date, :status, :attachment,
+      :start_date, :expire_date, :status, :invalidation_reason, :attachment,
       :uploaded_by, :created_at, :updated_at
 
-    privateable :show_attributes?, [:name, :start_date, :expire_date, :status, :attachment, :uploaded_by, :created_at, :updated_at]
+    privateable :show_attributes?, [:name, :invalidation_reason, :start_date, :expire_date, :status, :attachment, :uploaded_by, :created_at, :updated_at]
 
     has_one :operator_document, foreign_key_on: :related
 

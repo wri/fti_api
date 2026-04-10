@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_23_113655) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_18_192753) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -646,6 +646,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_23_113655) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "public", default: true, null: false
+    t.text "invalidation_reason"
     t.index ["deleted_at"], name: "index_operator_document_annexes_on_deleted_at"
     t.index ["public"], name: "index_operator_document_annexes_on_public"
     t.index ["status"], name: "index_operator_document_annexes_on_status"
