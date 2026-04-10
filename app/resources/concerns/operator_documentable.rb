@@ -10,7 +10,8 @@ module OperatorDocumentable
       :status, :created_at, :updated_at,
       :attachment, :operator_id, :required_operator_document_id,
       :fmu_id, :uploaded_by, :reason, :response_date,
-      :public, :source_info, :admin_comment
+      :public, :source_info, :admin_comment,
+      :source_operator_document_id, :source_annex_id
     attribute :source_type, delegate: :source
 
     has_one :country
@@ -59,6 +60,32 @@ module OperatorDocumentable
       @model.new_document_uploaded = true
     end
 
+    def source_operator_document_id
+      nil
+    end
+
+    def source_operator_document_id=(id)
+      source = OperatorDocument.find(id)
+      unless current_user_operator_ids.include?(source.operator_id)
+        raise APIController::UnprocessableContentError, "source-operator-document-id must belong to your operator"
+      end
+
+      self.attachment = File.open(source.document_file.attachment.path)
+    end
+
+    def source_annex_id
+      nil
+    end
+
+    def source_annex_id=(id)
+      source = OperatorDocumentAnnex.find(id)
+      unless current_user_operator_ids.include?(source.operator_document&.operator_id)
+        raise APIController::UnprocessableContentError, "source-annex-id must belong to your operator"
+      end
+
+      self.attachment = File.open(source.attachment.path)
+    end
+
     def document_visible?
       can_see_document? || document_public?
     end
@@ -78,6 +105,10 @@ module OperatorDocumentable
       return true if user&.is_operator?(@model.operator_id)
 
       false
+    end
+
+    def current_user_operator_ids
+      @context[:current_user]&.operator_ids || []
     end
   end
 

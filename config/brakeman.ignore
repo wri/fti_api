@@ -1,4 +1,97 @@
 {
-  "ignored_warnings": [],
-  "brakeman_version": "7.1.0"
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "024f9c6c74d2f952c245a67b12de951edc532e5d570da663e2da9fe004a2c8ba",
+      "check_name": "FileAccess",
+      "message": "Model attribute used in file name",
+      "file": "app/resources/concerns/operator_documentable.rb",
+      "line": 73,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "File.open(OperatorDocument.find(id).document_file.attachment.path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "OperatorDocumentable",
+        "method": "source_operator_document_id="
+      },
+      "user_input": "OperatorDocument.find(id).document_file.attachment.path",
+      "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "029b1df6a60878f89705b53f34359caa764d990e011d24ac1bd22a263c66e323",
+      "check_name": "FileAccess",
+      "message": "Model attribute used in file name",
+      "file": "app/resources/v1/operator_document_annex_resource.rb",
+      "line": 44,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "File.open(OperatorDocument.find(id).document_file.attachment.path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "V1::OperatorDocumentAnnexResource",
+        "method": "source_operator_document_id="
+      },
+      "user_input": "OperatorDocument.find(id).document_file.attachment.path",
+      "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "02f13e5f55adc59afe435b7296349aaeee025c456004334f0f70925597a3132f",
+      "check_name": "FileAccess",
+      "message": "Model attribute used in file name",
+      "file": "app/resources/concerns/operator_documentable.rb",
+      "line": 86,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "File.open(OperatorDocumentAnnex.find(id).attachment.path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "OperatorDocumentable",
+        "method": "source_annex_id="
+      },
+      "user_input": "OperatorDocumentAnnex.find(id).attachment.path",
+      "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "49345b1c4e5bd083953300f9545745fbc0dd77f23f7070aba71cd6f04cc0011d",
+      "check_name": "FileAccess",
+      "message": "Model attribute used in file name",
+      "file": "app/resources/v1/operator_document_annex_resource.rb",
+      "line": 57,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "File.open(OperatorDocumentAnnex.find(id).attachment.path)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "V1::OperatorDocumentAnnexResource",
+        "method": "source_annex_id="
+      },
+      "user_input": "OperatorDocumentAnnex.find(id).attachment.path",
+      "confidence": "Medium",
+      "cwe_id": [
+        22
+      ],
+      "note": ""
+    }
+  ],
+  "brakeman_version": "8.0.4"
 }

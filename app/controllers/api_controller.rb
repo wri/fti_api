@@ -4,6 +4,8 @@ require "oj"
 require "auth"
 
 class APIController < ActionController::API
+  class UnprocessableContentError < StandardError; end
+
   include CanCan::ControllerAdditions
   include JSONAPI::ActsAsResourceController
 
@@ -23,6 +25,7 @@ class APIController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActionController::RoutingError, with: :record_not_found
   rescue_from JWT::VerificationError, with: :bad_auth_key
+  rescue_from UnprocessableContentError, with: :unprocessable_content
 
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug { "Access denied on #{exception.action} #{exception.subject.inspect}" }
@@ -79,6 +82,10 @@ class APIController < ActionController::API
 
   def record_not_found
     render json: {errors: [{status: 404, title: "Record not found"}]}, status: :not_found
+  end
+
+  def unprocessable_content(exception)
+    render json: {errors: [{status: 422, title: exception.message}]}, status: :unprocessable_content
   end
 
   def render_unprocessable_entity_error(errors)

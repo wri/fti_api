@@ -119,4 +119,75 @@ module V1
       end
     end
   end
+
+  describe "File reuse" do
+    let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
+    let(:source_annex) { create(:operator_document_annex, operator_document: operator_document) }
+    let(:other_operator_document) { create(:operator_document_fmu) }
+    let(:other_source_annex) { create(:operator_document_annex, operator_document: other_operator_document) }
+
+    let(:base_params) {
+      {
+        name: "Reused annex",
+        "start-date": Time.zone.today.to_s,
+        relationships: {"operator-document": operator_document.id}
+      }
+    }
+
+    describe "source-operator-document-id" do
+      context "when same operator" do
+        it "creates annex copying attachment from the operator document" do
+          post(
+            "/operator-document-annexes",
+            params: jsonapi_params("operator-document-annexes", nil, base_params.merge("source-operator-document-id": operator_document.id)),
+            headers: operator_user_headers
+          )
+
+          expect(status).to eq(201)
+          expect(OperatorDocumentAnnex.find(parsed_data[:id]).attachment_identifier).to be_present
+        end
+      end
+
+      context "when different operator" do
+        it "returns 422 with error message" do
+          post(
+            "/operator-document-annexes",
+            params: jsonapi_params("operator-document-annexes", nil, base_params.merge("source-operator-document-id": other_operator_document.id)),
+            headers: operator_user_headers
+          )
+
+          expect(status).to eq(422)
+          expect(parsed_body[:errors].first[:title]).to include("must belong to your operator")
+        end
+      end
+    end
+
+    describe "source-annex-id" do
+      context "when same operator" do
+        it "creates annex copying attachment from another annex" do
+          post(
+            "/operator-document-annexes",
+            params: jsonapi_params("operator-document-annexes", nil, base_params.merge("source-annex-id": source_annex.id)),
+            headers: operator_user_headers
+          )
+
+          expect(status).to eq(201)
+          expect(OperatorDocumentAnnex.find(parsed_data[:id]).attachment_identifier).to be_present
+        end
+      end
+
+      context "when different operator" do
+        it "returns 422 with error message" do
+          post(
+            "/operator-document-annexes",
+            params: jsonapi_params("operator-document-annexes", nil, base_params.merge("source-annex-id": other_source_annex.id)),
+            headers: operator_user_headers
+          )
+
+          expect(status).to eq(422)
+          expect(parsed_body[:errors].first[:title]).to include("must belong to your operator")
+        end
+      end
+    end
+  end
 end

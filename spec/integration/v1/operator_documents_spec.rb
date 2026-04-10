@@ -214,5 +214,76 @@ module V1
         end
       end
     end
+
+    describe "File reuse" do
+      let(:operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
+      let(:source_operator_document) { create(:operator_document_fmu, operator: operator_user.operator) }
+      let(:source_annex) { create(:operator_document_annex, operator_document: source_operator_document) }
+      let(:other_operator_document) { create(:operator_document_fmu) }
+      let(:other_annex) { create(:operator_document_annex, operator_document: other_operator_document) }
+
+      let(:base_params) {
+        {
+          "start-date": "2025-12-01",
+          "expire-date": "2040-12-01"
+        }
+      }
+
+      describe "source-operator-document-id" do
+        context "when same operator" do
+          it "uploads document copying attachment from another operator document" do
+            patch(
+              "/operator-document-fmus/#{operator_document.id}",
+              params: jsonapi_params("operator-document-fmus", operator_document.id, base_params.merge("source-operator-document-id": source_operator_document.id)),
+              headers: operator_user_headers
+            )
+
+            expect(status).to eq(200)
+            expect(OperatorDocument.find(operator_document.id).document_file.attachment_identifier).to be_present
+          end
+        end
+
+        context "when different operator" do
+          it "returns 422 with error message" do
+            patch(
+              "/operator-document-fmus/#{operator_document.id}",
+              params: jsonapi_params("operator-document-fmus", operator_document.id, base_params.merge("source-operator-document-id": other_operator_document.id)),
+              headers: operator_user_headers
+            )
+
+            expect(status).to eq(422)
+            expect(parsed_body[:errors].first[:title]).to include("must belong to your operator")
+          end
+        end
+      end
+
+      describe "source-annex-id" do
+        context "when same operator" do
+          it "uploads document copying attachment from annex" do
+            patch(
+              "/operator-document-fmus/#{operator_document.id}",
+              params: jsonapi_params("operator-document-fmus", operator_document.id, base_params.merge("source-annex-id": source_annex.id)),
+              headers: operator_user_headers
+            )
+
+            expect(status).to eq(200)
+            expect(OperatorDocument.find(operator_document.id).document_file.attachment_identifier).to be_present
+          end
+        end
+
+        context "when different operator" do
+          it "returns 422 with error message" do
+            patch(
+              "/operator-document-fmus/#{operator_document.id}",
+              params: jsonapi_params("operator-document-fmus", operator_document.id, base_params.merge("source-annex-id": other_annex.id)),
+              headers: operator_user_headers
+            )
+
+            expect(status).to eq(422)
+            expect(parsed_body[:errors].first[:title]).to include("must belong to your operator")
+          end
+        end
+      end
+    end
   end
 end
