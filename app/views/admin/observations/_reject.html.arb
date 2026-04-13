@@ -1,0 +1,19 @@
+dialog id: dialog_id, title: I18n.t("active_admin.reject") + " " + I18n.t("activerecord.models.observation.one") do
+  active_admin_form_for qc, url: reject_admin_observation_path(resource), method: :post,
+    html: {data: {remote: true}, class: "vertical-form"} do |f|
+    f.semantic_errors(*f.object.errors.attribute_names)
+
+    div class: "flash flash_warning" do
+      I18n.t("active_admin.observations_page.rejected_hint")
+    end
+
+    f.inputs do
+      f.input :comment, as: :text, required: true, input_html: {rows: 4, style: "min-width: 450px;"}
+    end
+
+    f.actions do
+      f.cancel_link "javascript:void(0)", class: "close-dialog-button"
+      f.action :submit, label: I18n.t("active_admin.reject"), button_html: {data: {disable_with: I18n.t("active_admin.rejecting")}}
+    end
+  end
+end
