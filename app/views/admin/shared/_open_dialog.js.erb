@@ -8,7 +8,7 @@
   }
 
   var tmp = document.createElement("div");
-  tmp.innerHTML = "<%= j(render partial, dialog_id: dialog_id) %>";
+  tmp.innerHTML = "<%= j(render partial, **local_assigns) %>";
   document.body.appendChild(tmp.firstElementChild);
 
   var dialog = document.getElementById("<%= j(dialog_id) %>");

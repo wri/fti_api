@@ -437,6 +437,7 @@ fr:
       location_on_map: 'Emplacement sur la carte'
       visible: 'Visible'
       scope_hidden: 'Invisible'
+      observation_cannot_be_rejected: 'L’observation ne peut pas être rejetée'
       rejected_hint: 'L’observation sera rejetée et le moniteur en sera informé. Le moniteur peut ensuite modifier l’observation et la soumettre à nouveau pour le contrôle de qualité.'
       needs_revision_hint: 'Le moniteur sera informé que l’observation nécessite une révision avec des suggestions proposées. Le moniteur peut toujours publier l’observation ou la soumettre à nouveau pour le contrôle de qualité.'
     quality_control_page:

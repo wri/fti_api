@@ -1,0 +1,9 @@
+<% if @success %>
+  window.location.reload();
+<% else %>
+<%= render "admin/shared/open_dialog",
+  partial: "reject",
+  dialog_id: "observation-reject-dialog",
+  qc: @qc,
+  open_existing: params[:open_existing] %>
+<% end %>
