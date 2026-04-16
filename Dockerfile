@@ -46,7 +46,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # for email templates
-RUN npm install -g mjml
+RUN npm install -g mjml@4
 
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
