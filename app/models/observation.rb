@@ -106,6 +106,7 @@ class Observation < ApplicationRecord
 
   attr_accessor :user_type
   attr_accessor :force_translations_from
+  attr_accessor :skip_status_transition_validation
 
   belongs_to :country, inverse_of: :observations
   belongs_to :severity, inverse_of: :observations, optional: true
@@ -143,7 +144,7 @@ class Observation < ApplicationRecord
   validates :lat, numericality: {greater_than_or_equal_to: -90, less_than_or_equal_to: 90, allow_blank: true}
   validates :lng, numericality: {greater_than_or_equal_to: -180, less_than_or_equal_to: 180, allow_blank: true}
   validates :evidence_on_report, presence: true, if: -> { evidence_type == "Evidence presented in the report" }
-  validate :status_changes, if: -> { user_type.present? }
+  validate :status_changes, if: -> { user_type.present? && !skip_status_transition_validation }
   validate :can_set_non_concession_activity, if: -> { non_concession_activity? }
 
   validates :observers, presence: true
