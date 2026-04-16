@@ -6,3 +6,4 @@ PaperTrail.config.has_paper_trail_defaults = {
   on: %i[create update destroy]
 }
 PaperTrail.config.version_limit = nil
+PaperTrail.serializer = PaperTrail::Serializers::JSON
