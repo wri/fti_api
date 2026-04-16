@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_23_113655) do
+ActiveRecord::Schema[7.2].define(version: 2026_04_16_100821) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -1132,10 +1132,12 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_23_113655) do
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
-    t.text "object"
+    t.text "old_object"
     t.string "locale"
     t.datetime "created_at", precision: nil
-    t.text "object_changes"
+    t.text "old_object_changes"
+    t.jsonb "object"
+    t.jsonb "object_changes"
     t.index ["item_type", "item_id", "locale"], name: "index_versions_on_item_type_and_item_id_and_locale"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
