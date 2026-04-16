@@ -54,26 +54,33 @@ namespace :data_migrations do
   desc "Move PaperTrail versions from YAML to JSON columns."
   task paper_trail_to_json: :environment do
     for_real = ENV["FOR_REAL"] == "true"
+    batch_size = (ENV["BATCH_SIZE"] || 2000).to_i
     puts "DRY RUN" unless for_real
 
-    total = PaperTrail::Version.count
+    scope = PaperTrail::Version.all
+    total = scope.count
     processed = 0
-    puts "Migrating #{total} PaperTrail versions to JSON..."
+    errors = 0
+    puts "Migrating #{total} PaperTrail versions to JSON (batch_size=#{batch_size})..."
 
-    PaperTrail::Version.find_each do |version|
-      if version.old_object.present?
-        object_hash = PaperTrail::Serializers::YAML.load(version.old_object)
-        version.update_column(:object, object_hash) if for_real
-      end
-      if version.old_object_changes.present?
-        object_changes_hash = PaperTrail::Serializers::YAML.load(version.old_object_changes)
-        version.update_column(:object_changes, object_changes_hash) if for_real
+    scope.find_in_batches(batch_size: batch_size) do |batch|
+      ActiveRecord::Base.transaction do
+        batch.each do |version|
+          attrs = {}
+          attrs[:object] = PaperTrail::Serializers::YAML.load(version.old_object) if version.old_object.present?
+          attrs[:object_changes] = PaperTrail::Serializers::YAML.load(version.old_object_changes) if version.old_object_changes.present?
+          version.update_columns(attrs) if for_real
+        rescue => e
+          errors += 1
+          warn "\n  Error parsing version #{version.id}: #{e.message}"
+        end
       end
 
-      processed += 1
+      processed += batch.size
       print "\r  #{processed}/#{total} (#{"%.1f" % (processed.to_f / total * 100)}%)"
     end
 
+    warn "\n  #{errors} version(s) failed to parse and were skipped." if errors > 0
     puts "\nFinished migrating PaperTrail versions to JSON columns. You can now remove the old YAML columns with a separate migration."
   end
 end
