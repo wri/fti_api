@@ -50,4 +50,30 @@ namespace :data_migrations do
     end
     puts "Wrote tmp/data_migrations_report_mission_type_report.csv"
   end
+
+  desc "Move PaperTrail versions from YAML to JSON columns."
+  task paper_trail_to_json: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+    puts "DRY RUN" unless for_real
+
+    total = PaperTrail::Version.count
+    processed = 0
+    puts "Migrating #{total} PaperTrail versions to JSON..."
+
+    PaperTrail::Version.find_each do |version|
+      if version.old_object.present?
+        object_hash = PaperTrail::Serializers::YAML.load(version.old_object)
+        version.update_column(:object, object_hash) if for_real
+      end
+      if version.old_object_changes.present?
+        object_changes_hash = PaperTrail::Serializers::YAML.load(version.old_object_changes)
+        version.update_column(:object_changes, object_changes_hash) if for_real
+      end
+
+      processed += 1
+      print "\r  #{processed}/#{total} (#{"%.1f" % (processed.to_f / total * 100)}%)"
+    end
+
+    puts "\nFinished migrating PaperTrail versions to JSON columns. You can now remove the old YAML columns with a separate migration."
+  end
 end
