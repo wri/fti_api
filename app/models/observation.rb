@@ -83,7 +83,7 @@ class Observation < ApplicationRecord
   STATUS_TRANSITIONS = {
     monitor: {
       "Created" => ["Ready for QC2", "Ready for QC1"],
-      "Rejected" => ["Ready for QC1"],
+      "Rejected" => ["Ready for QC1", "Ready for QC2"],
       "Needs revision" => ["Ready for QC2", "Published (not modified)", "Published (modified)"],
       "Ready for publication" => ["Published (no comments)"],
       "Published (modified)" => ["Ready for QC2", "Ready for QC1"],
