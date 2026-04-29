@@ -304,6 +304,9 @@ ActiveAdmin.register Operator, as: "Producer" do
         column :end_date
         column :current
         column :deleted_at
+        column "" do |fo|
+          link_to I18n.t("active_admin.edit"), edit_admin_fmu_operator_path(fo) if fo.deleted_at.nil?
+        end
       end
     end
 
