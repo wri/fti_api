@@ -80,11 +80,21 @@ ActiveAdmin.register FmuOperator do
 
   form do |f|
     edit = !f.object.new_record?
+    if f.object.new_record?
+      f.object.fmu_id ||= params[:fmu_id] if params[:fmu_id].present?
+      f.object.operator_id ||= params[:operator_id] if params[:operator_id].present?
+    end
+    fmu_locked = !edit && f.object.fmu_id.present?
+    operator_locked = !edit && f.object.operator_id.present?
+
     f.semantic_errors(*f.object.errors.attribute_names)
 
+    f.hidden_field :fmu_id if fmu_locked
+    f.hidden_field :operator_id if operator_locked
+
     f.inputs do
-      f.input :fmu, as: :select, input_html: {disabled: edit}
-      f.input :operator, as: :select, input_html: {disabled: edit}
+      f.input :fmu, as: :select, input_html: {disabled: edit || fmu_locked}
+      f.input :operator, as: :select, input_html: {disabled: edit || operator_locked}
       f.input :start_date, as: :date_time_picker, picker_options: {timepicker: false, format: "Y-m-d"}
       f.input :end_date, as: :date_time_picker, picker_options: {timepicker: false, format: "Y-m-d"}
       f.input :current

@@ -46,6 +46,10 @@ ActiveAdmin.register Fmu do
     link_to I18n.t("active_admin.fmus_page.download_shapefile"), download_shapefile_admin_fmu_path(fmu), method: :get
   end
 
+  action_item :new_allocation, only: :show do
+    link_to I18n.t("active_admin.fmus_page.add_allocation"), new_admin_fmu_operator_path(fmu_id: fmu.id)
+  end
+
   permit_params :id, :name,
     :certification_fsc, :certification_pefc, :certification_ls, :certification_pbn,
     :certification_olb, :certification_pafc, :certification_fsc_cw, :certification_tlv,
