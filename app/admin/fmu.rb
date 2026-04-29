@@ -146,6 +146,21 @@ ActiveAdmin.register Fmu do
       row :updated_at
       row :deleted_at
     end
+
+    panel I18n.t("active_admin.menu.private_sector.settings.fmu_allocations") do
+      table_for resource.fmu_operators.with_deleted.includes(:operator).order(start_date: :desc) do
+        column :id do |fo|
+          link_to fo.id, admin_fmu_operator_path(fo)
+        end
+        column :operator do |fo|
+          link_to fo.operator.name, admin_producer_path(fo.operator) if fo.operator
+        end
+        column :start_date
+        column :end_date
+        column :current
+        column :deleted_at
+      end
+    end
   end
 
   index do

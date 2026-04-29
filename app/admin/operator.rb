@@ -258,6 +258,24 @@ ActiveAdmin.register Operator, as: "Producer" do
       end
       row :created_at
       row :updated_at
+    end
+
+    panel I18n.t("active_admin.menu.private_sector.settings.fmu_allocations") do
+      table_for resource.all_fmu_operators.with_deleted.includes(:fmu).order(start_date: :desc) do
+        column :id do |fo|
+          link_to fo.id, admin_fmu_operator_path(fo)
+        end
+        column :fmu do |fo|
+          link_to fo.fmu.name, admin_fmu_path(fo.fmu) if fo.fmu
+        end
+        column :start_date
+        column :end_date
+        column :current
+        column :deleted_at
+      end
+    end
+
+    attributes_table do
       if resource.fa_id.present?
         grouped_sod = ScoreOperatorDocument.where(operator_id: resource.id).group_by_day(:date, series: false)
         row :total_documents do
