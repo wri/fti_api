@@ -19,7 +19,13 @@ module BackRedirectable
     if block.present?
       extended = proc do |f|
         return_to = request.params[:return_to] || request.referer
-        f.hidden_field :return_to, name: :return_to, value: return_to if return_to.present?
+        if return_to.present?
+          f.hidden_field :return_to, name: :return_to, value: return_to
+          original_cancel_link = f.method(:cancel_link)
+          f.define_singleton_method(:cancel_link) do |url = return_to, html_options = {}, li_attrs = {}|
+            original_cancel_link.call(url, html_options, li_attrs)
+          end
+        end
         instance_eval(&block)
       end
       super(options, &extended)
