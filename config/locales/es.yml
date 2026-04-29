@@ -348,6 +348,7 @@ es:
       download_shapefile: 'Descargar shapefile'
       download_filtered_shapefiles: 'Descargar Shapefiles Filtrados'
       confirm_delete: '¿Estás seguro de que quieres eliminar este FMU?'
+      add_allocation: 'Añadir asignación'
     operator_page:
       producer: 'Productor'
       producer_activated: 'Productor activado'

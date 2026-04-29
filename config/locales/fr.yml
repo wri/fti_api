@@ -364,6 +364,7 @@ fr:
       download_shapefile: 'Télécharger shapefile'
       download_filtered_shapefiles: 'Télécharger les shapefiles filtrés'
       confirm_delete: 'Êtes-vous sûr de vouloir supprimer cette FMU?'
+      add_allocation: 'Ajouter une attribution'
     required_operator_document_page:
       exists: 'Existe'
       publication_authorization: 'Autorisation de publication'
