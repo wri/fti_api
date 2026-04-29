@@ -153,7 +153,16 @@ ActiveAdmin.register Fmu do
           link_to fo.id, admin_fmu_operator_path(fo)
         end
         column :operator do |fo|
-          link_to fo.operator.name, admin_producer_path(fo.operator) if fo.operator
+          if fo.operator.present?
+            link_to fo.operator.name, admin_producer_path(fo.operator)
+          elsif fo.operator_id.present?
+            operator = Operator.unscoped.find_by(id: fo.operator_id)
+            if operator
+              "#{link_to(operator.name, admin_producer_path(operator))} (#{I18n.t("active_admin.shared.deleted")})".html_safe
+            else
+              "##{fo.operator_id} (#{I18n.t("active_admin.shared.deleted")})"
+            end
+          end
         end
         column :start_date
         column :end_date

@@ -48,8 +48,30 @@ ActiveAdmin.register FmuOperator do
 
   index do
     column :current
-    column :fmu
-    column :operator
+    column :fmu, sortable: "fmu_id" do |fo|
+      if fo.fmu.present?
+        link_to fo.fmu.name, admin_fmu_path(fo.fmu)
+      elsif fo.fmu_id.present?
+        fmu = Fmu.unscoped.find_by(id: fo.fmu_id)
+        if fmu
+          "#{link_to(fmu.name, admin_fmu_path(fmu))} (#{I18n.t("active_admin.shared.deleted")})".html_safe
+        else
+          "##{fo.fmu_id} (#{I18n.t("active_admin.shared.deleted")})"
+        end
+      end
+    end
+    column :operator, sortable: "operator_id" do |fo|
+      if fo.operator.present?
+        link_to fo.operator.name, admin_producer_path(fo.operator)
+      elsif fo.operator_id.present?
+        operator = Operator.unscoped.find_by(id: fo.operator_id)
+        if operator
+          "#{link_to(operator.name, admin_producer_path(operator))} (#{I18n.t("active_admin.shared.deleted")})".html_safe
+        else
+          "##{fo.operator_id} (#{I18n.t("active_admin.shared.deleted")})"
+        end
+      end
+    end
     column :start_date
     column :end_date
 
