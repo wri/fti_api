@@ -22,6 +22,14 @@ fr:
       message: Veuillez cliquer sur le lien afin de réinitialiser votre mot de passe pour vous connecter à l’Open Timber Portal
       link_expiration: Le lien ci-dessus expire après 6 heures. Si vous avez fait plusieurs demandes de réinitialisation, veuillez vous assurer de cliquer sur le lien qui figure dans le mail le plus récent.
       outro: Si vous n’avez pas fait cette demande de réinitialisation, veuillez ignorer cet e-mail. Votre mot de passe ne changera pas tant que vous n'aurez pas cliqué sur le lien ci-dessus et créé un nouveau mot de passe.
+    inactive_account_warning:
+      subject: "Avis d'inactivite du compte Open Timber Portal - date de desactivation %{disable_date}"
+      message: "Votre compte n'a pas ete utilise depuis 18 mois. Connectez-vous bientot pour le garder actif. Sans nouvelle connexion, votre compte sera desactive le %{disable_date}."
+      cta: "Connectez-vous ici: %{link}"
+    account_deactivated_for_inactivity:
+      subject: "Votre compte Open Timber Portal a ete desactive"
+      message: "Parce que votre compte n'a pas ete utilise depuis 2 ans, il est maintenant desactive."
+      contact: "Si vous avez besoin d'aide ou pensez qu'il s'agit d'une erreur, contactez l'equipe OTP."
   observation_mailer:
     observation_created:
       subject: L’observation %{id} a été créée

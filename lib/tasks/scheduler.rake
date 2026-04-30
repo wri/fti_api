@@ -90,4 +90,44 @@ namespace :scheduler do
     Rails.logger.info "Sent quarterly newsletters to operators. It took #{time} ms."
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
+
+  desc "Warn and deactivate inactive users"
+  task deactivate_inactive_users: :environment do
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to process inactive users at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
+
+    warning_start = 18.months.ago.beginning_of_day
+    warning_end = 18.months.ago.end_of_day
+    deactivation_threshold = 2.years.ago.end_of_day
+
+    warned_users = 0
+    deactivated_users = 0
+
+    time = Benchmark.ms do
+      warning_users = User.where(is_active: true)
+        .where("COALESCE(last_sign_in_at, created_at) BETWEEN ? AND ?", warning_start, warning_end)
+
+      warning_users.find_each do |user|
+        disable_date = (user.last_sign_in_at || user.created_at).to_date + 2.years
+        I18n.with_locale(user.locale.presence || I18n.default_locale) do
+          UserMailer.inactive_account_warning(user, disable_date).deliver_now
+        end
+        warned_users += 1
+      end
+
+      users_to_deactivate = User.where(is_active: true)
+        .where("COALESCE(last_sign_in_at, created_at) <= ?", deactivation_threshold)
+
+      users_to_deactivate.find_each do |user|
+        user.update!(is_active: false, deactivated_at: Time.zone.now)
+        I18n.with_locale(user.locale.presence || I18n.default_locale) do
+          UserMailer.account_deactivated_for_inactivity(user).deliver_now
+        end
+        deactivated_users += 1
+      end
+    end
+
+    Rails.logger.info "Processed inactive users. Warned=#{warned_users}, Deactivated=#{deactivated_users}. It took #{time} ms."
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+  end
 end

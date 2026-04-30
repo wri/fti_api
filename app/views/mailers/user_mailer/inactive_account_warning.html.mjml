@@ -1,0 +1,20 @@
+<p>
+  <%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+</p>
+
+<p>
+  <%= t(".message", disable_date: l(@disable_date)) %>
+</p>
+
+<p>
+  <%= t(".cta", link: link_to(ENV["FRONTEND_URL"], ENV["FRONTEND_URL"], target: "_blank")).html_safe %>
+</p>
+
+<p>
+  <%= t("mailers.contact_us") %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %> <br />
+  <%= t("mailers.signature") %>
+</p>
