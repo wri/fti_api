@@ -21,6 +21,17 @@ class UserMailer < ApplicationMailer
     mail(to: user.email, subject: I18n.t("user_mailer.user_acceptance.subject"))
   end
 
+  def inactive_account_warning(user, disable_date)
+    @user = user
+    @disable_date = disable_date
+    mail(to: user.email, subject: I18n.t("user_mailer.inactive_account_warning.subject", disable_date: I18n.l(disable_date)))
+  end
+
+  def account_deactivated_for_inactivity(user)
+    @user = user
+    mail(to: user.email, subject: I18n.t("user_mailer.account_deactivated_for_inactivity.subject"))
+  end
+
   private
 
   def generate_reset_url(user)

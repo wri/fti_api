@@ -17,6 +17,7 @@ unless ENV["SKIP_CRON"] == "true"
     rake_with_check "scheduler:set_active_fmu_operator", check_in: "update-fmus"
     rake_with_check "scheduler:generate_documents_stats", check_in: "generate-documents-stats"
     rake_with_check "scheduler:generate_observation_reports_stats", check_in: "generate-observation-reports-stats"
+    rake "scheduler:deactivate_inactive_users", check_in: "deactivate-inactive-users"
     rake "scheduler:clean_cache"
   end
 
