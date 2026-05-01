@@ -22,6 +22,14 @@ es:
       message: "Haga clic en el enlace para restablecer su contraseña y conectarse al Open Timber Portal"
       link_expiration: "El enlace anterior expirará en 6 horas. Si realizó múltiples solicitudes para restablecer su contraseña, asegúrese de hacer clic en el enlace del correo electrónico más reciente."
       outro: "Si no solicitó este restablecimiento de contraseña, ignore este correo electrónico. Su contraseña no cambiará hasta que acceda al enlace anterior y cree una nueva contraseña."
+    inactive_account_warning:
+      subject: "Aviso de inactividad de su cuenta de Open Timber Portal - fecha de desactivacion %{disable_date}"
+      message: "Su cuenta no se ha utilizado durante 18 meses. Inicie sesion pronto para mantenerla activa. Si no hay actividad de inicio de sesion, su cuenta se desactivara el %{disable_date}."
+      cta: "Inicie sesion aqui: %{link}"
+    account_deactivated_for_inactivity:
+      subject: "Su cuenta de Open Timber Portal ha sido desactivada"
+      message: "Debido a que su cuenta no se ha utilizado en 2 anos, ahora esta desactivada."
+      contact: "Si necesita ayuda o cree que esto es un error, contacte al equipo de OTP."
   observation_mailer:
     observation_created:
       subject: "La observación %{id} se creó exitosamente"

@@ -1,0 +1,10 @@
+<%= t("mailers.greeting", name: @user.display_name, fallback: true) %>
+
+<%= t(".message", disable_date: l(@disable_date)) %>
+
+<%= t(".cta", link: ENV["FRONTEND_URL"]) %>
+
+<%= t("mailers.contact_us") %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>
