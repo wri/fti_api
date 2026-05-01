@@ -96,8 +96,8 @@ namespace :scheduler do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
     Rails.logger.info "Going to process inactive users at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
 
-    warning_start = 18.months.ago.beginning_of_day
-    warning_end = 18.months.ago.end_of_day
+    warning_threshold = 18.months.ago.end_of_day
+    warning_cooldown = 1.month.ago.end_of_day
     deactivation_threshold = 2.years.ago.end_of_day
 
     warned_users = 0
@@ -105,13 +105,16 @@ namespace :scheduler do
 
     time = Benchmark.ms do
       warning_users = User.where(is_active: true)
-        .where("COALESCE(last_sign_in_at, created_at) BETWEEN ? AND ?", warning_start, warning_end)
+        .where("COALESCE(last_sign_in_at, created_at) <= ?", warning_threshold)
+        .where("COALESCE(last_sign_in_at, created_at) > ?", deactivation_threshold)
+        .where("last_inactivity_warning_sent_at IS NULL OR last_inactivity_warning_sent_at <= ?", warning_cooldown)
 
       warning_users.find_each do |user|
         disable_date = (user.last_sign_in_at || user.created_at).to_date + 2.years
         I18n.with_locale(user.locale.presence || I18n.default_locale) do
           UserMailer.inactive_account_warning(user, disable_date).deliver_now
         end
+        user.update!(last_inactivity_warning_sent_at: Time.zone.now)
         warned_users += 1
       end
 
