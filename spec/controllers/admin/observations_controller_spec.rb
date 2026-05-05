@@ -42,6 +42,61 @@ RSpec.describe Admin::ObservationsController, type: :controller do
   end
 
   describe "member actions" do
+    describe "reject" do
+      describe "GET reject" do
+        let(:observation) { create(:observation) }
+
+        before { get :reject, params: {id: observation.id}, xhr: true, format: :js }
+
+        it "renders the reject form js for published observations and admins" do
+          expect(response).to be_successful
+        end
+
+        context "when observation is not published and user is not admin" do
+          let(:bo_manager) { create(:bo_manager) }
+          let(:observation) { create(:observation, force_status: "Created") }
+
+          before do
+            sign_in bo_manager
+            get :reject, params: {id: observation.id}, xhr: true, format: :js
+          end
+
+          it "shows a notice and reloads the page" do
+            expect(response).to be_successful
+            expect(flash[:notice]).to eq(I18n.t("active_admin.observations_page.observation_cannot_be_rejected"))
+          end
+        end
+      end
+
+      describe "POST reject" do
+        let(:observation) { create(:observation) }
+
+        before { post :reject, params: {id: observation.id, quality_control: {comment: comment}}, xhr: true, format: :js }
+
+        context "with a comment" do
+          let(:comment) { "Does not meet requirements" }
+
+          it "creates a rejected QualityControl" do
+            expect(response).to be_successful
+            qc = QualityControl.last
+            expect(qc).to be_present
+            expect(qc.passed).to be false
+            expect(qc.decision).to eq("Rejected")
+            expect(qc.comment).to eq(comment)
+            expect(qc.reviewable).to eq(observation)
+          end
+        end
+
+        context "without a comment" do
+          let(:comment) { nil }
+
+          it "does not create a QualityControl" do
+            expect(QualityControl.where(reviewable: observation, decision: "Rejected").count).to eq(0)
+          end
+        end
+      end
+    end
+
     describe "PUT start_qc" do
       let(:observation) { create(:observation, force_status: "Ready for QC2") }
 

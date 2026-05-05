@@ -444,6 +444,7 @@ es:
       location_on_map: 'Ubicación en el mapa'
       visible: 'Visible'
       scope_hidden: 'Oculto'
+      observation_cannot_be_rejected: 'La observación no puede ser rechazada'
       rejected_hint: 'La observación será rechazada y el monitor será notificado. El monitor puede luego editar la observación y enviarla nuevamente para QC.'
       needs_revision_hint: 'El monitor será notificado de que la observación necesita revisión con sugerencias propuestas. El monitor aún puede publicar la observación o enviarla nuevamente para QC.'
     users_page:

@@ -69,6 +69,32 @@ ActiveAdmin.register Observation do
     end
   end
 
+  member_action :reject, method: [:get, :post] do
+    unless resource.published? && current_user.admin?
+      flash[:notice] = I18n.t("active_admin.observations_page.observation_cannot_be_rejected")
+      render js: "window.location.reload();" and return
+    end
+
+    @qc = QualityControl.new(
+      reviewable: resource,
+      reviewer: current_user,
+      passed: false,
+      decision: "Rejected",
+      metadata: {
+        level: "Admin"
+      },
+      comment: params.dig(:quality_control, :comment)
+    )
+    if request.post?
+      @qc.reviewable.skip_status_transition_validation = true
+      @success = @qc.save
+    end
+  end
+
+  action_item :reject, only: :show, if: proc { resource.published? && current_user.admin? } do
+    link_to I18n.t("active_admin.reject"), reject_admin_observation_path(resource, open_existing: true), remote: true
+  end
+
   action_item :start_qc, only: :show, if: proc { resource.validation_status == "Ready for QC2" && resource.responsible_for_qc2.include?(current_user) } do
     link_to I18n.t("active_admin.shared.start_qc"), start_qc_admin_observation_path(observation), method: :put
   end
