@@ -93,9 +93,9 @@ fr:
   operator_document_annex_mailer:
     document_valid:
       subject: "Open Timber Portal: nouvelle annexe publiée"
-      paragraph1: "L’annexe %{annex} téléchargée pour le document %{document} a été validée."
+      paragraph1: "L’annexe %{annex} du %{document} a été validée"
     document_invalid:
-      subject: "Open Timber Portal: l’annexe téléchargée n’a pas été validée"
+      subject: "Open Timber Portal: l’annexe n’a pas été validée"
       paragraph1: "L’annexe ci-dessous a été passée en revue et a besoin d’être modifiée:"
       paragraph2: "L’évaluateur a fait le commentaire suivant:"
       paragraph3: "Vous pouvez modifier cette annexe en cliquant sur le lien suivant et en modifiant le document sur votre profil: %{link}"
