@@ -149,10 +149,12 @@ class OperatorDocument < ApplicationRecord
     true
   end
 
-  def name_with_fmu
-    return required_operator_document.name if fmu.nil?
+  delegate :name, to: :required_operator_document
 
-    "#{required_operator_document.name} (#{fmu.name})"
+  def name_with_fmu
+    return name if fmu.nil?
+
+    "#{name} (#{fmu.name})"
   end
 
   def detailed_status

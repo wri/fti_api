@@ -11,7 +11,7 @@
 Link: <%= @document&.document_file&.attachment&.url %>
 <% end %>
 
-<%= t(".paragraph2", link: perform_qc_admin_operator_document_url(@document)) %>
+<%= t(".paragraph2", link: admin_operator_document_url(@document)) %>
 
 <%= t("mailers.salutation") %>
 <%= t("mailers.signature") %>

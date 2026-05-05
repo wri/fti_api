@@ -26,6 +26,7 @@ fr:
     false: 'Faux'
     approve: 'Approuver'
     reject: 'Rejeter'
+    rejecting: 'Rejet en cours...'
     all: 'Tout'
     free: 'Libre'
     view: "Voir"
@@ -380,6 +381,7 @@ fr:
       fa_confirmed: 'Les documents ont été définis sur "source: FOREST ATLAS"'
       confirm_other: 'Voulez-vous vraiment définir la source des documents sélectionnés comme AUTRE?'
       other_confirmed: 'Les documents ont été définis comme "source: OTHER"'
+      not_pending: "Le document n'est pas en attente"
       error_approving: "Erreur lors de l'approbation du document"
       approved: 'Document approuvé'
       rejected: 'Document rejeté'
@@ -393,6 +395,7 @@ fr:
       with_deleted: 'Avec supprimé'
       reason_label: "Le document a été mis comme non applicable avec l'explication suivante"
       non_applicable: "Non applicable"
+      approve_confirmation: 'Êtes-vous sûr de vouloir approuver le document %{name}?'
     operator_document_annexes_page:
       approved: 'Annexe approuvée'
       not_approved: "L'annexe n'a pas pu être approuvée"
@@ -401,6 +404,7 @@ fr:
       operator_document: "Document de l'opérateur"
       orphaned: 'Orphelin'
       details: "Détails de l'annexe du document de l'opérateur"
+      comment: ‘Raison du rejet’
     observations_page:
       not_modified: 'Observation NON modifiée'
       moved_ready: 'Observation déplacée vers Prêt pour publication'
@@ -437,6 +441,7 @@ fr:
       needs_revision_hint: 'Le moniteur sera informé que l’observation nécessite une révision avec des suggestions proposées. Le moniteur peut toujours publier l’observation ou la soumettre à nouveau pour le contrôle de qualité.'
     quality_control_page:
       performed_qc: 'Contrôle de qualité effectué avec la décision : %{decision}'
+      title: "Contrôle de Qualité pour %{reviewable_type} #%{reviewable_id}"
       reviewable_not_in_qc: "L'entité examinée n'a pas le statut de contrôle qualité en cours"
     powered_by: "Admin Backoffice"
     delete_model: "Supprimer %{model}"
@@ -1399,7 +1404,6 @@ fr:
         one: ne fait pas la bonne longueur (doit comporter un seul caractère)
         other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
       other_than: doit être différent de %{count}
-      not_pending_state: n'est pas en attente
       carrierwave_processing_error: failed to be processed
       carrierwave_integrity_error: is not an allowed file type
       carrierwave_download_error: could not be downloaded

@@ -14,6 +14,7 @@ en:
     false: 'False'
     approve: 'Approve'
     reject: 'Reject'
+    rejecting: 'Rejecting...'
     all: 'All'
     free: 'Free'
     view: "View"
@@ -373,6 +374,7 @@ en:
       fa_confirmed: 'Documents were set to "source: FOREST_ATLAS"'
       confirm_other: 'Are you sure you want to set the source of the selected documents as OTHER?'
       other_confirmed: 'Documents were set to "source: OTHER"'
+      not_pending: 'Document is not in pending state'
       error_approving: "Error while approving document"
       approved: 'Document approved'
       rejected: 'Document rejected'
@@ -386,6 +388,7 @@ en:
       with_deleted: 'With deleted'
       reason_label: "Reason for putting document as “non applicable”"
       non_applicable: "Non applicable"
+      approve_confirmation: 'Are you sure you want to approve document %{name}?'
     operator_document_annexes_page:
       approved: 'Annex approved'
       not_approved: 'Annex could not be approved'
@@ -395,6 +398,7 @@ en:
       orphaned: 'Orphaned'
       history_annexes: 'History Annexes'
       details: 'Operator Document Annex Details'
+      comment: 'Reason for rejection'
     observations_page:
       not_modified: 'Observation NOT modified'
       moved_ready: 'Observation moved to Ready for Publication'
@@ -432,6 +436,7 @@ en:
     users_page:
       responsible_for_countries_hint: Admin responsible for countries will get notifications concerning the private sector in these countries.
     quality_control_page:
+      title: "Quality Control for %{reviewable_type} #%{reviewable_id}"
       reviewable_not_in_qc: "Reviewed entity is not in QC in progress status"
       performed_qc: 'Quality Control performed with decision: %{decision}'
     powered_by: "Admin Backoffice"
@@ -1476,7 +1481,6 @@ en:
         one: is the wrong length (should be 1 character)
         other: is the wrong length (should be %{count} characters)
       other_than: must be other than %{count}
-      not_pending_state: is not in pending state
       carrierwave_processing_error: failed to be processed
       carrierwave_integrity_error: is not an allowed file type
       carrierwave_download_error: could not be downloaded

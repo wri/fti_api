@@ -1,0 +1,15 @@
+dialog id: dialog_id, title: I18n.t("active_admin.reject") + " " + resource.name do
+  active_admin_form_for resource, url: reject_admin_operator_document_annex_path(resource), method: :put,
+    html: {data: {remote: true}, class: "vertical-form"} do |f|
+    f.semantic_errors(*f.object.errors.attribute_names)
+
+    f.inputs do
+      f.input :invalidation_reason, as: :text, required: true, input_html: {rows: 4, style: "min-width: 450px;"}
+    end
+
+    f.actions do
+      f.cancel_link "javascript:void(0)", class: "close-dialog-button"
+      f.action :submit, label: I18n.t("active_admin.reject"), data: {disable_with: I18n.t("active_admin.rejecting")}
+    end
+  end
+end

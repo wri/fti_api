@@ -16,10 +16,6 @@ ActiveAdmin.register OperatorDocument do
           [required_operator_document:
              [required_operator_document_group: :translations, country: :translations]]])
     end
-
-    def perform_qc_params
-      params.require(:operator_document_qc_form).permit(:decision, :admin_comment) if params.key?(:operator_document_qc_form)
-    end
   end
 
   # Here we're updating the documents one by one to make sure the callbacks to
@@ -62,32 +58,45 @@ ActiveAdmin.register OperatorDocument do
     redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.other_confirmed")
   end
 
-  action_item :start_qc, only: :show, if: proc { resource.doc_pending? } do
-    link_to I18n.t("active_admin.shared.start_qc"), perform_qc_admin_operator_document_path(resource)
+  action_item :approve, only: :show, if: proc { resource.doc_pending? && params[:version].blank? } do
+    approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: resource.name_with_fmu)
+    link_to I18n.t("active_admin.approve"), approve_admin_operator_document_path(resource), method: :put, data: {confirm: approve_confirmation}
   end
 
-  member_action :perform_qc, method: [:put, :get] do
-    @page_title = I18n.t("active_admin.shared.perform_qc")
-    @form = OperatorDocumentQCForm.new(resource, perform_qc_params)
-    if request.put? && @form.call
-      notice = if resource.doc_invalid?
-        I18n.t("active_admin.operator_documents_page.rejected")
-      else
-        I18n.t("active_admin.operator_documents_page.approved")
-      end
-      redirect_to collection_path, notice: notice
-    else
-      render "perform_qc"
+  action_item :reject, only: :show, if: proc { resource.doc_pending? && params[:version].blank? } do
+    link_to I18n.t("active_admin.reject"), reject_admin_operator_document_path(resource, open_existing: true), remote: true
+  end
+
+  member_action :reject, method: [:get, :put] do
+    unless resource.doc_pending?
+      flash[:notice] = I18n.t("active_admin.operator_documents_page.not_pending")
+      render js: "window.location.reload();" and return
+    end
+    resource.admin_comment = nil if request.get? # Clear comment when opening the dialog for the first time
+    @dialog_id = "reject-document-dialog"
+    if request.put?
+      resource.status = "doc_invalid"
+      resource.admin_comment = params.dig(:operator_document, :admin_comment)
+      @success = resource.save
+      flash[:notice] = I18n.t("active_admin.operator_documents_page.rejected") if @success
     end
   end
 
   member_action :approve, method: :put do
-    form = OperatorDocumentQCForm.new(resource, decision: "doc_valid")
-    if form.call
-      redirect_to collection_path, notice: I18n.t("active_admin.operator_documents_page.approved")
-    else
-      redirect_to collection_path, alert: I18n.t("active_admin.operator_documents_page.error_approving")
+    unless resource.doc_pending?
+      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.not_pending") and return
     end
+
+    resource.status = resource.reason.present? ? "doc_not_required" : "doc_valid"
+    if resource.save
+      redirect_back_or_to resource_path(resource), notice: I18n.t("active_admin.operator_documents_page.approved")
+    else
+      redirect_back_or_to resource_path(resource), alert: I18n.t("active_admin.operator_documents_page.error_approving")
+    end
+  end
+
+  member_action :perform_qc, method: :get do
+    redirect_to resource_path(resource)
   end
 
   actions :all, except: [:destroy, :new]
@@ -209,10 +218,12 @@ ActiveAdmin.register OperatorDocument do
     column :reason
     column :response_date
     unless params[:scope] == "archived"
-      column(I18n.t("active_admin.shared.actions")) do |document|
-        a I18n.t("active_admin.shared.start_qc"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
-        a I18n.t("active_admin.approve"), href: approve_admin_operator_document_path(document), "data-method": :put if document.doc_pending?
-        a I18n.t("active_admin.reject"), href: perform_qc_admin_operator_document_path(document) if document.doc_pending?
+      actions defaults: false, name: I18n.t("active_admin.shared.actions") do |document|
+        if document.doc_pending?
+          approve_confirmation = I18n.t("active_admin.operator_documents_page.approve_confirmation", name: document.name_with_fmu)
+          item I18n.t("active_admin.approve"), approve_admin_operator_document_path(document), method: :put, data: {confirm: approve_confirmation}
+          item I18n.t("active_admin.reject"), reject_admin_operator_document_path(document), remote: true
+        end
       end
     end
     actions

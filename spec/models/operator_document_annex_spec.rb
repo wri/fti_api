@@ -2,18 +2,19 @@
 #
 # Table name: operator_document_annexes
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  start_date  :date
-#  expire_date :date
-#  deleted_at  :date
-#  status      :integer
-#  attachment  :string
-#  uploaded_by :integer
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  public      :boolean          default(TRUE), not null
+#  id                  :integer          not null, primary key
+#  name                :string
+#  start_date          :date
+#  expire_date         :date
+#  deleted_at          :date
+#  status              :integer
+#  attachment          :string
+#  uploaded_by         :integer
+#  user_id             :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  public              :boolean          default(TRUE), not null
+#  invalidation_reason :text
 #
 
 require "rails_helper"
@@ -45,6 +46,50 @@ RSpec.describe OperatorDocumentAnnex, type: :model do
         expect(File.exist?(original_file_path)).to be true
         annex.really_destroy!
         expect(File.exist?(original_file_path)).to be false
+      end
+    end
+  end
+
+  describe "notifications" do
+    let(:operator) { create(:operator) }
+    let(:operator_user) { create(:operator_user, operator: operator) }
+    let(:operator_document) { create(:operator_document_country, operator: operator) }
+
+    context "when changing annex status to pending" do
+      let!(:responsible_admin) { create(:admin, responsible_for_countries: [operator.country]) }
+      let!(:annex) { build(:operator_document_annex, operator_document: operator_document) }
+
+      subject { annex.save! }
+
+      it "sends an email to all responsible admins" do
+        expect { subject }.to have_enqueued_mail(OperatorDocumentAnnexMailer, :admin_document_pending).exactly(1).times
+          .and have_enqueued_mail(OperatorDocumentAnnexMailer, :admin_document_pending).with(annex, responsible_admin)
+      end
+    end
+
+    context "when validating annex" do
+      let(:annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_pending) }
+
+      subject { annex.update!(status: "doc_valid") }
+
+      before { operator_user }
+
+      it "sends an email to operator users" do
+        expect { subject }.to have_enqueued_mail(OperatorDocumentAnnexMailer, :document_valid).exactly(1).times
+          .and have_enqueued_mail(OperatorDocumentAnnexMailer, :document_valid).with(annex, operator_user)
+      end
+    end
+
+    context "when rejecting annex" do
+      let(:annex) { create(:operator_document_annex, operator_document: operator_document, force_status: :doc_pending) }
+
+      subject { annex.update!(status: "doc_invalid", invalidation_reason: "Here is the reason why is invalid") }
+
+      before { operator_user }
+
+      it "sends an email to operator users" do
+        expect { subject }.to have_enqueued_mail(OperatorDocumentAnnexMailer, :document_invalid).exactly(1).times
+          .and have_enqueued_mail(OperatorDocumentAnnexMailer, :document_invalid).with(annex, operator_user)
       end
     end
   end

@@ -4,18 +4,19 @@
 #
 # Table name: operator_document_annexes
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  start_date  :date
-#  expire_date :date
-#  deleted_at  :date
-#  status      :integer
-#  attachment  :string
-#  uploaded_by :integer
-#  user_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  public      :boolean          default(TRUE), not null
+#  id                  :integer          not null, primary key
+#  name                :string
+#  start_date          :date
+#  expire_date         :date
+#  deleted_at          :date
+#  status              :integer
+#  attachment          :string
+#  uploaded_by         :integer
+#  user_id             :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  public              :boolean          default(TRUE), not null
+#  invalidation_reason :text
 #
 
 class OperatorDocumentAnnex < ApplicationRecord
@@ -38,8 +39,12 @@ class OperatorDocumentAnnex < ApplicationRecord
   before_validation(on: :create) do
     self.status = OperatorDocumentAnnex.statuses[:doc_pending]
   end
+  before_validation :clear_invalidation_reason, if: :doc_valid?
+
+  after_commit :notify_about_changes, if: -> { saved_change_to_status? }
 
   validates :name, :start_date, :status, presence: true
+  validates :invalidation_reason, presence: {if: :doc_invalid?}
 
   enum :status, {doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4}
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
@@ -56,10 +61,22 @@ class OperatorDocumentAnnex < ApplicationRecord
       .where.not(id: AnnexDocument.where(documentable_type: "OperatorDocument").select(:operator_document_annex_id))
   }
 
+  def rejectable?
+    !deleted? && (doc_pending? || doc_valid?)
+  end
+
+  def approvable?
+    !deleted? && (doc_pending? || doc_invalid?)
+  end
+
   def needs_authorization_before_downloading?
     return false if (doc_valid? || doc_expired?) && any_operator_document_without_authorization?
 
     true
+  end
+
+  def operator
+    operator_document&.operator || operator_document_histories.first&.operator
   end
 
   def self.expire_document_annexes
@@ -83,5 +100,25 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   def any_operator_document_without_authorization?
     [operator_document, *operator_document_histories].compact.any? { !it.needs_authorization_before_downloading? }
+  end
+
+  def clear_invalidation_reason
+    self.invalidation_reason = nil
+  end
+
+  def notify_about_changes
+    return unless operator.present?
+
+    notify_users(operator.all_users, "document_valid") if doc_valid?
+    notify_users(operator.all_users, "document_invalid") if doc_invalid?
+    notify_users(operator.responsible_admins, "admin_document_pending") if doc_pending?
+  end
+
+  def notify_users(users, mail_template)
+    users.filter_actives.where.not(email: [nil, ""]).find_each do |user|
+      I18n.with_locale(user.locale.presence || I18n.default_locale) do
+        OperatorDocumentAnnexMailer.send(mail_template, self, user).deliver_later
+      end
+    end
   end
 end
