@@ -48,7 +48,7 @@ RSpec.describe Admin::ObservationsController, type: :controller do
 
         before { get :reject, params: {id: observation.id}, xhr: true, format: :js }
 
-        it "renders the reject form js" do
+        it "renders the reject form js for published observations and admins" do
           expect(response).to be_successful
         end
 

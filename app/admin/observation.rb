@@ -70,7 +70,7 @@ ActiveAdmin.register Observation do
   end
 
   member_action :reject, method: [:get, :post] do
-    unless resource.published? || current_user.admin?
+    unless can?(:reject, resource)
       flash[:notice] = I18n.t("active_admin.observations_page.observation_cannot_be_rejected")
       render js: "window.location.reload();" and return
     end
@@ -91,7 +91,7 @@ ActiveAdmin.register Observation do
     end
   end
 
-  action_item :reject, only: :show, if: proc { resource.published? && current_user.admin? } do
+  action_item :reject, only: :show, if: proc { can?(:reject, resource) } do
     link_to I18n.t("active_admin.reject"), reject_admin_observation_path(resource, open_existing: true), remote: true
   end
 

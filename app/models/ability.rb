@@ -50,6 +50,7 @@ class Ability
       CountryLink, CountryVpa, RequiredGovDocumentGroup, RequiredGovDocument,
       GovDocument, ScoreOperatorDocument, AboutPageEntry, Page]
     can :read, Observation, is_active: true
+    can :reject, Observation, &:published? if user&.admin?
     can :read, Observer, is_active: true
     can :read, Operator, is_active: true
     can :create, Operator, is_active: false
