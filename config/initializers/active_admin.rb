@@ -143,7 +143,7 @@ ActiveAdmin.setup do |config|
   # Active Admin resources and pages from here.
   #
   config.before_action do
-    left_sidebar!(collapsed: true) if respond_to?(:left_sidebar!)
+    left_sidebar!(collapsible: true, start_collapsed: false) if respond_to?(:left_sidebar!)
   end
 
   # Set default locale for active admin
