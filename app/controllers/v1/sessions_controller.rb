@@ -34,7 +34,7 @@ module V1
     private
 
     def auth_params
-      params.require(:auth).permit(:email, :password, :current_sign_in_ip)
+      params.expect(auth: [:email, :password, :current_sign_in_ip])
     end
 
     def set_download_session_cookie_for(user)
