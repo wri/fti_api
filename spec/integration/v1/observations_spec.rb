@@ -33,14 +33,14 @@ module V1
       end
 
       it "Get all observations list" do
-        get "/observations", headers: webuser_headers
+        get "/observations", headers: jsonapi_headers
         expect(status).to eq(200)
         expect(parsed_data.size).to eq(7)
       end
 
       it "Get all observations and include relationships" do
         include = %w[operator subcategory subcategory.category observers governments law.country fmu severity]
-        get "/observations?include=#{include.join(",")}", headers: webuser_headers
+        get "/observations?include=#{include.join(",")}", headers: jsonapi_headers
         expect(status).to eq(200)
         expect(parsed_data.size).to eq(7)
         included_types = parsed_body[:included].pluck(:type).uniq
@@ -95,7 +95,7 @@ module V1
 
       context "non observation tool user" do
         it "does not show fmu for non concession activity observations" do
-          get "/observations", params: {app: "observations-tool", include: "fmu"}, headers: webuser_headers
+          get "/observations", params: {app: "observations-tool", include: "fmu"}, headers: jsonapi_headers
           expect(status).to eq(200)
           expect(parsed_data.size).to eq(1)
           expect(parsed_data.first[:id].to_i).to eq(observation.id)
@@ -104,7 +104,7 @@ module V1
         end
 
         it "cannot find observation using fmu filter" do
-          get "/observations", params: {app: "observations-tool", "filter[fmu_id]": fmu.id}, headers: webuser_headers
+          get "/observations", params: {app: "observations-tool", "filter[fmu_id]": fmu.id}, headers: jsonapi_headers
           expect(status).to eq(200)
           expect(parsed_data.size).to eq(0)
         end
@@ -218,7 +218,7 @@ module V1
         it "Do not allows to deactivate observation by user" do
           patch("/observations/#{observation_by_user.id}?app=observations-tool",
             params: jsonapi_params("observations", observation_by_user.id, {"is-active": false}),
-            headers: webuser_headers)
+            headers: jsonapi_headers)
 
           expect(status).to eq(401)
           expect(parsed_body).to eq(default_status_errors(401))

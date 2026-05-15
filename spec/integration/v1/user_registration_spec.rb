@@ -35,7 +35,7 @@ module V1
 
     describe "Registration" do
       it "Returns error object when the user cannot be registered" do
-        post "/register", params: {user: invalid_user_params}, headers: non_api_webuser_headers
+        post "/register", params: {user: invalid_user_params}
 
         expect(parsed_body).to eq(error)
         expect(status).to eq(422)
@@ -43,8 +43,7 @@ module V1
 
       it "Returns error object when the user password is to short" do
         post("/register",
-          params: {user: valid_user_params.merge(password: "121212", password_confirmation: "121212")},
-          headers: non_api_webuser_headers)
+          params: {user: valid_user_params.merge(password: "121212", password_confirmation: "121212")})
 
         expect(parsed_body).to eq(error_pw)
         expect(status).to eq(422)
@@ -52,7 +51,7 @@ module V1
 
       it "Register valid user" do
         expect {
-          post "/register", params: {user: valid_user_params}, headers: non_api_webuser_headers
+          post "/register", params: {user: valid_user_params}
         }.to have_enqueued_mail(SystemMailer, :user_created)
 
         expect(parsed_body).to eq({messages: [{status: 201, title: "User successfully registered!"}]})
@@ -63,8 +62,7 @@ module V1
       it "Register valid user with ngo role request" do
         expect {
           post("/register",
-            params: {user: valid_user_params.merge(permissions_request: "ngo", observer_id: create(:observer).id)},
-            headers: non_api_webuser_headers)
+            params: {user: valid_user_params.merge(permissions_request: "ngo", observer_id: create(:observer).id)})
         }.to have_enqueued_mail(SystemMailer, :user_created)
 
         expect(parsed_body).to eq({messages: [{status: 201, title: "User successfully registered!"}]})
@@ -74,8 +72,7 @@ module V1
 
       it "Returns error object when the user permissions_request invalid" do
         post("/register",
-          params: {user: valid_user_params.merge(permissions_request: "invalid permissions_request")},
-          headers: non_api_webuser_headers)
+          params: {user: valid_user_params.merge(permissions_request: "invalid permissions_request")})
 
         expect(parsed_body).to eq({
           messages: [{

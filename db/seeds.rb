@@ -20,10 +20,6 @@ end
 User.create_with(**common_fields, first_name: "User").find_or_create_by(email: "user@example.com") do |user|
   user.build_user_permission(user_role: "user")
 end
-api_user = User.create_with(**common_fields, first_name: "Web").find_or_create_by(email: "webuser@example.com") do |user|
-  user.build_user_permission(user_role: "user")
-end
-api_user.regenerate_api_key
 holding = User.create_with(**common_fields, first_name: "Holding").find_or_create_by(email: "holding@example.com") do |user|
   user.build_user_permission(user_role: "holding")
 end

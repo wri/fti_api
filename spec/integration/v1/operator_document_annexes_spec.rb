@@ -272,7 +272,7 @@ module V1
 
       context "when public user" do
         it "returns valid annexes" do
-          get("/operator-document-annexes", headers: webuser_headers)
+          get("/operator-document-annexes", headers: jsonapi_headers)
 
           expect(parsed_data.count).to eql(2)
           valid_annex_data = parsed_data.find { |d| d[:id] == valid_annex.id.to_s }[:attributes]

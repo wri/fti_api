@@ -14,7 +14,7 @@ module V1
 
     describe "Tree" do
       it "Returns the filters' tree" do
-        get "/observation_filters_tree", headers: non_api_webuser_headers
+        get "/observation_filters_tree"
 
         expect(status).to eql(200)
       end

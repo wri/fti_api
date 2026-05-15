@@ -44,8 +44,7 @@ ActiveAdmin.register ProtectedArea do
               bbox: f.resource.bbox,
               present: f.resource.geojson.present?,
               host: Rails.env.development? ? request.base_url : request.base_url + "/api",
-              show_fmus: false,
-              api_key: ENV["API_KEY"]
+              show_fmus: false
             }
         end
       end

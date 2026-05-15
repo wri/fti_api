@@ -12,7 +12,7 @@ module V1
 
     describe "index" do
       it "errors without operator filter" do
-        get "/score-operator-documents", headers: non_api_webuser_headers
+        get "/score-operator-documents"
 
         expect(status).to eq(400)
         expect(parsed_body[:error]).to eq("You must provide an operator")
@@ -20,7 +20,7 @@ module V1
 
       describe "filters" do
         it "filter by operator id" do
-          get "/score-operator-documents?filter[operator]=#{operator_1.id}", headers: webuser_headers
+          get "/score-operator-documents?filter[operator]=#{operator_1.id}", headers: jsonapi_headers
 
           expect(status).to eq(200)
           expect(parsed_data.size).to eq(1)

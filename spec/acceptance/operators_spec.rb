@@ -4,11 +4,8 @@ require "rspec_api_documentation/dsl"
 resource "Operators" do
   explanation "Operators resource"
 
-  let!(:web_user) { FactoryBot.create(:admin) }
-  let!(:web_token) { "Bearer " + web_user.api_key.access_token }
-
   let!(:admin) { FactoryBot.create(:admin) }
-  let!(:admin_token) { "Bearer " + admin.api_key.access_token }
+  let!(:admin_token) { "Bearer " + Auth.issue({user: admin.id}) }
 
   header "Content-Type", "application/vnd.api+json"
   header "Authorization", :admin_token
@@ -16,8 +13,6 @@ resource "Operators" do
   let!(:country) { FactoryBot.create :country }
   let!(:operators) { FactoryBot.create_list(:operator, 5, country: country) }
   let!(:fmu) { FactoryBot.create_list(:fmu, 5, {country: country, operator: operators.first}) }
-
-  authentication :apiKey, :web_token, name: "OTP-API-KEY"
 
   get "/operators" do
     route_summary "Fetches the operators"

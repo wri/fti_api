@@ -1203,7 +1203,6 @@ fr:
         file: Dossier  #g
 
       user:
-        api_key: :activerecord.models.api_key  #g
         country: :activerecord.models.country  #g
         current_sign_in_at: Dernière connexion à
         current_sign_in_ip: IP de connexion actuelle  #g

@@ -36,33 +36,11 @@ module IntegrationHelper
   def login_user(user)
     post("/login",
       params: {auth: {email: user.email, password: user.password}},
-      headers: webuser_headers)
+      headers: jsonapi_headers)
   end
 
   def generate_token(id)
     JWT.encode({user: id}, ENV["AUTH_SECRET"], "HS256")
-  end
-
-  def webuser
-    @webuser ||= create(:webuser)
-  end
-
-  def webuser_token
-    @webuser_token ||= generate_token(webuser.id)
-  end
-
-  def webuser_headers
-    @webuser_headers ||= {
-      "HTTP_OTP_API_KEY" => "Bearer #{webuser_token}",
-      "Content-Type" => "application/vnd.api+json",
-      "HTTP_ACCEPT" => "application/vnd.api+json"
-    }
-  end
-
-  def non_api_webuser_headers
-    @non_api_webuser_headers ||= {
-      "HTTP_OTP_API_KEY" => "Bearer #{webuser_token}"
-    }
   end
 
   def admin
@@ -91,16 +69,17 @@ module IntegrationHelper
 
   def authorize_headers(id, jsonapi: true)
     headers = {
-      "Authorization" => "Bearer #{generate_token(id)}",
-      "HTTP_OTP_API_KEY" => "Bearer #{webuser_token}"
+      "Authorization" => "Bearer #{generate_token(id)}"
     }
+    headers.merge!(jsonapi_headers) if jsonapi
+    headers
+  end
 
-    return headers unless jsonapi
-
-    headers.merge!(
+  def jsonapi_headers
+    {
       "Content-Type" => "application/vnd.api+json",
       "HTTP_ACCEPT" => "application/vnd.api+json"
-    )
+    }
   end
 
   def initialize_download_session(user_headers, app: nil)

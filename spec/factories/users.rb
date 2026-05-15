@@ -118,10 +118,6 @@ FactoryBot.define do
       after(:build) do |random_admin|
         random_admin.user_permission = UserPermission.new(user_role: "admin")
       end
-
-      after(:create) do |user|
-        user.regenerate_api_key
-      end
     end
 
     factory :webuser do
@@ -132,14 +128,6 @@ FactoryBot.define do
 
       after(:build) do |random_webuser|
         random_webuser.user_permission = UserPermission.new(user_role: "user")
-      end
-
-      after(:create) do |user|
-        user.regenerate_api_key
-      end
-
-      after(:build) do |random_admin|
-        random_admin.user_permission = UserPermission.new(user_role: "user")
       end
     end
   end

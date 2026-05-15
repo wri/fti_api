@@ -28,7 +28,7 @@ module V1
       before { subject }
 
       context "when public user" do
-        let(:user_headers) { non_api_webuser_headers }
+        let(:user_headers) { {} }
 
         it "shows attributes only for valid documents", :aggregate_failures do
           expect(status).to eq(200)
@@ -121,7 +121,7 @@ module V1
 
       describe "errors" do
         context "when public user" do
-          let(:user_headers) { non_api_webuser_headers }
+          let(:user_headers) { {} }
 
           it "should return not authenticated error" do
             expect(parsed_body).to eq(default_status_errors(401))
@@ -164,7 +164,7 @@ module V1
 
       describe "errors" do
         context "when public user" do
-          let(:user_headers) { non_api_webuser_headers }
+          let(:user_headers) { {} }
 
           it "should return not authenticated error" do
             expect(parsed_body).to eq(default_status_errors(401))

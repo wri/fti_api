@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_04_16_105402) do
+ActiveRecord::Schema[8.0].define(version: 2026_05_13_104855) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -20,10 +20,10 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_16_105402) do
   enable_extension "address_standardizer_data_us"
   enable_extension "citext"
   enable_extension "fuzzystrmatch"
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
   enable_extension "postgis"
-  enable_extension "postgis_tiger_geocoder"
-  enable_extension "postgis_topology"
+  enable_extension "tiger.postgis_tiger_geocoder"
+  enable_extension "topology.postgis_topology"
 
   create_table "about_page_entries", id: :serial, force: :cascade do |t|
     t.integer "position", null: false
@@ -53,17 +53,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_16_105402) do
     t.index ["documentable_id"], name: "index_annex_documents_on_documentable_id"
     t.index ["documentable_type"], name: "index_annex_documents_on_documentable_type"
     t.index ["operator_document_annex_id"], name: "index_annex_documents_on_operator_document_annex_id"
-  end
-
-  create_table "api_keys", id: :serial, force: :cascade do |t|
-    t.string "access_token"
-    t.datetime "expires_at", precision: nil
-    t.integer "user_id"
-    t.boolean "is_active", default: true, null: false
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["access_token"], name: "index_api_keys_on_access_token", unique: true
-    t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
   create_table "categories", id: :serial, force: :cascade do |t|
@@ -1142,7 +1131,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_16_105402) do
   end
 
   add_foreign_key "annex_documents", "operator_document_annexes", on_delete: :cascade
-  add_foreign_key "api_keys", "users"
   add_foreign_key "country_links", "countries", on_delete: :cascade
   add_foreign_key "country_responsible_admins", "countries", on_delete: :cascade
   add_foreign_key "country_responsible_admins", "users", on_delete: :cascade

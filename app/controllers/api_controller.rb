@@ -16,7 +16,7 @@ class APIController < ActionController::API
      locale: params[:locale] || I18n.default_locale}
   end
 
-  before_action :check_access, :authenticate
+  before_action :authenticate
   before_action :set_paper_trail_whodunnit
   around_action :set_locale
 
@@ -33,23 +33,8 @@ class APIController < ActionController::API
     Sentry.capture_exception(error)
   end
 
-  def valid_api_key?
-    !!web_user
-  end
-
   def logged_in?
     !!current_user
-  end
-
-  def web_user
-    if api_key_present?
-      user = User.find(api_auth["user"])
-      if user&.api_key_exists?
-        @current_api_user ||= user
-      end
-    end
-  rescue
-    @current_api_user = nil
   end
 
   def current_user
@@ -68,10 +53,6 @@ class APIController < ActionController::API
   end
 
   protected
-
-  def check_access
-    render json: {errors: [{status: 401, title: "Sorry invalid API token"}]}, status: :unauthorized unless valid_api_key?
-  end
 
   def authenticate
     render json: {errors: [{status: 401, title: "You are not authorized to access this page."}]}, status: :unauthorized unless logged_in?
@@ -97,20 +78,8 @@ class APIController < ActionController::API
     request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
   end
 
-  def api_key
-    request.env["HTTP_OTP_API_KEY"].scan(/Bearer (.*)$/).flatten.last
-  end
-
   def auth
     Auth.decode(token)
-  end
-
-  def api_auth
-    Auth.decode(api_key)
-  end
-
-  def api_key_present?
-    !!request.env.fetch("HTTP_OTP_API_KEY", "").scan("Bearer").flatten.first
   end
 
   def auth_present?

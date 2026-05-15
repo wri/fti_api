@@ -213,8 +213,7 @@ ActiveAdmin.register Fmu do
               bbox: f.resource.bbox,
               present: f.resource.geojson.present?,
               host: Rails.env.development? ? request.base_url : request.base_url + "/api",
-              show_fmus: true,
-              api_key: ENV["API_KEY"]
+              show_fmus: true
             }
         end
       end
