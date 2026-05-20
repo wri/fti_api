@@ -103,7 +103,7 @@ ActiveAdmin.register User do
       row :responsible_for_countries if resource.admin?
       row :observer if resource.ngo? || resource.ngo_manager?
       # row :managed_observers if resource.ngo? || resource.ngo_manager? || resource.admin?
-      row :qc1_observers if resource.ngo_manager?
+      row :qc1_observers if resource.admin? || resource.ngo_manager?
       row :qc2_observers if resource.admin? || resource.ngo_manager?
       row :is_active
       row :locale

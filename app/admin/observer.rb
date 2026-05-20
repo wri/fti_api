@@ -109,7 +109,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
     end
     unless f.object.new_record?
       f.inputs "Quality Control" do
-        f.input :responsible_qc1, as: :select, collection: User.with_roles(:ngo_manager).filter_actives
+        f.input :responsible_qc1, as: :select, collection: User.with_roles([:admin, :ngo_manager]).filter_actives
         f.input :responsible_qc2, as: :select, collection: User.with_roles([:admin, :ngo_manager]).filter_actives
       end
     end
