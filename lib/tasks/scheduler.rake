@@ -88,6 +88,15 @@ namespace :scheduler do
     end
     raise "Error while sending quarterly newsletter" if failed
     Rails.logger.info "Sent quarterly newsletters to operators. It took #{time} ms."
-    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+  end
+
+  desc "Delete expired entries from the Rails cache"
+  task clean_cache: :environment do
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
+    Rails.logger.info "Going to clean Rails cache at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
+    time = Benchmark.ms { Rails.cache.cleanup }
+    Rails.logger.info "Rails cache cleaned. It took #{time} ms."
+    Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 end
