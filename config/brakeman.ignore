@@ -1,4 +1,53 @@
 {
-  "ignored_warnings": [],
-  "brakeman_version": "7.1.0"
+  "ignored_warnings": [
+    {
+      "warning_type": "Denial of Service",
+      "warning_code": 76,
+      "fingerprint": "0ea03e6b67a9cdf6471ff527b29400cb793da5ab7910df36c03ab9bd8455e63b",
+      "check_name": "RegexDoS",
+      "message": "Model attribute used in regular expression",
+      "file": "app/jobs/clean_operator_document_cache_job.rb",
+      "line": 11,
+      "link": "https://brakemanscanner.org/docs/warning_types/denial_of_service/",
+      "code": "/operator_documents\\/(#{Operator.find_by(:id => operator_id).operator_document_ids.join(\"|\")})\\//",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "CleanOperatorDocumentCacheJob",
+        "method": "perform"
+      },
+      "user_input": "Operator.find_by(:id => operator_id).operator_document_ids.join(\"|\")",
+      "confidence": "Medium",
+      "cwe_id": [
+        20,
+        185
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Denial of Service",
+      "warning_code": 76,
+      "fingerprint": "7236233b0a2d59f3b79ba3dec11e1a130b4bdfb0bf4efabd33ddd70d0f1095a1",
+      "check_name": "RegexDoS",
+      "message": "Model attribute used in regular expression",
+      "file": "app/jobs/clean_operator_document_cache_job.rb",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/denial_of_service/",
+      "code": "/operator_document_histories\\/(#{Operator.find_by(:id => operator_id).operator_document_history_ids.join(\"|\")})\\//",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "CleanOperatorDocumentCacheJob",
+        "method": "perform"
+      },
+      "user_input": "Operator.find_by(:id => operator_id).operator_document_history_ids.join(\"|\")",
+      "confidence": "Medium",
+      "cwe_id": [
+        20,
+        185
+      ],
+      "note": ""
+    }
+  ],
+  "brakeman_version": "8.0.4"
 }
