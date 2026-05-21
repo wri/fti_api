@@ -38,6 +38,63 @@ RSpec.describe Observer, type: :model do
     end
   end
 
+  describe "callbacks" do
+    describe "when responsible_qc1 is removed" do
+      let(:qc1_user) { create(:ngo_manager) }
+      let(:observer) { create(:observer, responsible_qc1: qc1_user) }
+
+      def create_observation_in(status)
+        create(:observation, force_status: status).tap do |o|
+          # to override observers taken from observation_report
+          o.observers = [observer]
+        end
+      end
+
+      it "moves `Ready for QC1` observations to `Ready for QC2`" do
+        observation = create_observation_in("Ready for QC1")
+
+        expect {
+          observer.update!(responsible_qc1: nil)
+        }.to change { observation.reload.validation_status }.from("Ready for QC1").to("Ready for QC2")
+      end
+
+      it "moves `QC1 in progress` observations to `Ready for QC2`" do
+        observation = create_observation_in("QC1 in progress")
+
+        expect {
+          observer.update!(responsible_qc1: nil)
+        }.to change { observation.reload.validation_status }.from("QC1 in progress").to("Ready for QC2")
+      end
+
+      it "leaves the observation in QC1 if another observer still has responsible_qc1" do
+        other_observer = create(:observer, responsible_qc1: create(:ngo_manager))
+        observation = create_observation_in("Ready for QC1")
+        observation.observers << other_observer
+
+        expect {
+          observer.update!(responsible_qc1: nil)
+        }.not_to change { observation.reload.validation_status }
+      end
+
+      it "does not touch observations in other statuses" do
+        observation = create_observation_in("Ready for QC2")
+
+        expect {
+          observer.update!(responsible_qc1: nil)
+        }.not_to change { observation.reload.validation_status }
+      end
+
+      it "does nothing when responsible_qc1 is reassigned to another user" do
+        observation = create_observation_in("Ready for QC1")
+        new_qc1 = create(:ngo_manager)
+
+        expect {
+          observer.update!(responsible_qc1: new_qc1)
+        }.not_to change { observation.reload.validation_status }
+      end
+    end
+  end
+
   describe "Class methods" do
     before do
       create_list(:observer, 3)

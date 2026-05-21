@@ -56,6 +56,7 @@ class Observer < ApplicationRecord
   validates :data_email, format: {with: EMAIL_VALIDATOR, if: :data_email?}
 
   before_create :set_responsible_qc2
+  after_update :move_qc1_observations_to_qc2, if: -> { saved_change_to_responsible_qc1_id?(to: nil) }
 
   scope :by_name_asc, -> { order(name: :asc) }
 
@@ -85,5 +86,16 @@ class Observer < ApplicationRecord
     return if responsible_qc2.present?
 
     self.responsible_qc2 = User.where(email: ENV["RESPONSIBLE_EMAIL"].downcase).first
+  end
+
+  def move_qc1_observations_to_qc2
+    observations
+      .includes(:observers)
+      .where(validation_status: ["Ready for QC1", "QC1 in progress"])
+      .find_each do |observation|
+        next if observation.qc1_needed?
+
+        observation.update!(validation_status: "Ready for QC2")
+      end
   end
 end
