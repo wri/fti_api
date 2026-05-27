@@ -33,6 +33,82 @@ module V1
       expect(user.reload.should_change_password).to eq(true)
     end
 
+    describe "Auth cookie" do
+      it "does not set auth cookie by default" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+
+        expect(status).to eq(200)
+        expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_nil
+      end
+
+      it "sets an opaque auth cookie when set_cookie param is true" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        expect(status).to eq(200)
+        cookie = response.cookies[APIController::AUTH_COOKIE_NAME]
+        expect(cookie).to be_present
+        # the cookie is encrypted, so it neither exposes the user id nor is a JWT
+        expect(cookie).not_to include(user.id.to_s)
+        expect(cookie).not_to eq(JWT.encode({user: user.id}, ENV["AUTH_SECRET"], "HS256"))
+      end
+
+      it "sets a separate auth cookie per app" do
+        post "/login?app=observations-tool", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        expect(status).to eq(200)
+        expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_nil
+        expect(response.cookies["observations-tool_#{APIController::AUTH_COOKIE_NAME}"]).to be_present
+      end
+
+      it "authenticates a request using the auth cookie" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        get "/users/current-user"
+
+        expect(status).to eq(200)
+        expect(parsed_attributes[:email]).to eq(user.email)
+      end
+
+      it "authenticates a request using the app-namespaced auth cookie" do
+        post "/login?app=observations-tool", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        get "/users/current-user?app=observations-tool"
+
+        expect(status).to eq(200)
+        expect(parsed_attributes[:email]).to eq(user.email)
+      end
+
+      it "does not authenticate when the app does not match the cookie" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        # cookie was set for the portal (no app), so the observations-tool app
+        # cannot read it
+        get "/users/current-user?app=observations-tool"
+
+        expect(status).to eq(401)
+      end
+
+      it "Authorization header takes precedence over cookie" do
+        other_user = create(:admin)
+        post "/login", params: {auth: {email: other_user.email, password: "Supersecret1", set_cookie: true}}
+
+        get "/users/current-user", headers: user_headers
+
+        expect(status).to eq(200)
+        expect(parsed_attributes[:email]).to eq(user.email)
+      end
+
+      it "logout clears the auth cookie" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_present
+
+        delete "/logout"
+
+        expect(status).to eq(204)
+        expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_blank
+      end
+    end
+
     describe "Download session" do
       it "Destroy session removes download cookie" do
         post "/sessions/download-session", headers: user_headers
