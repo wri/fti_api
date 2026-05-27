@@ -13,6 +13,7 @@ module V1
         @user.update_column(:should_change_password, true) unless User.strong_password?(auth_params[:password])
         @user.update_tracked_fields!(request)
         set_download_session_cookie_for(@user)
+        set_auth_cookie(@user) if ActiveModel::Type::Boolean.new.cast(auth_params[:set_cookie])
         render json: {token: token, role: @user.user_permission.user_role,
                       user_id: @user.id, country: @user.country_id,
                       operator_ids: @user.operator_ids, observer: @user.observer_id}, status: :ok
@@ -23,6 +24,7 @@ module V1
 
     def destroy
       cookies.delete(download_user_cookie_name)
+      cookies.delete(auth_cookie_name)
     end
 
     # each app, like portal and observation tool can have it's own download user cookie to prevent some edgecases
@@ -34,7 +36,17 @@ module V1
     private
 
     def auth_params
-      params.expect(auth: [:email, :password, :current_sign_in_ip])
+      params.expect(auth: [:email, :password, :current_sign_in_ip, :set_cookie])
+    end
+
+    def set_auth_cookie(user)
+      cookies.encrypted[auth_cookie_name] = {
+        value: user.id,
+        expires: 30.days.from_now,
+        same_site: :strict,
+        secure: Rails.env.production? || Rails.env.staging?,
+        httponly: true
+      }
     end
 
     def set_download_session_cookie_for(user)

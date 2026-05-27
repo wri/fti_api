@@ -4,8 +4,11 @@ require "oj"
 require "auth"
 
 class APIController < ActionController::API
+  include ActionController::Cookies
   include CanCan::ControllerAdditions
   include JSONAPI::ActsAsResourceController
+
+  AUTH_COOKIE_NAME = "otp_auth_token"
 
   def context
     {current_user: current_user,
@@ -38,11 +41,10 @@ class APIController < ActionController::API
   end
 
   def current_user
-    if auth_present?
-      user = User.find(auth["user"])
-      if user&.is_active
-        @current_user ||= user
-      end
+    @current_user ||= begin
+      id = user_id_from_token
+      user = User.find_by(id: id) if id
+      user if user&.is_active
     end
   rescue
     @current_user = nil
@@ -74,16 +76,35 @@ class APIController < ActionController::API
     render json: json_errors, status: :unprocessable_content
   end
 
-  def token
-    request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
+  # Resolve the authenticated user id from either the Bearer JWT (API clients)
+  # or the encrypted session cookie set at login. The Bearer header takes
+  # precedence so an explicit token always wins over a stored cookie.
+  def user_id_from_token
+    user_id_from_bearer_token || user_id_from_auth_cookie
   end
 
-  def auth
-    Auth.decode(token)
+  def user_id_from_bearer_token
+    return unless bearer_token.present?
+
+    Auth.decode(bearer_token)&.dig("user")
   end
 
-  def auth_present?
-    !!request.env.fetch("HTTP_AUTHORIZATION", "").scan("Bearer").flatten.first
+  # The cookie is encrypted with the app's secret_key_base (opaque, tamper-proof
+  # and with a server-verified expiry) rather than a JWT, so its payload is not
+  # readable by the client. Returns nil for missing/invalid/expired cookies.
+  def user_id_from_auth_cookie
+    cookies.encrypted[auth_cookie_name]
+  end
+
+  # each app, like portal and observations tool, has its own auth cookie so a
+  # user can be logged into both at the same time. portal (no app param) uses
+  # the bare name, observations-tool gets an "observations-tool_" prefix.
+  def auth_cookie_name
+    [params[:app], AUTH_COOKIE_NAME].compact.join("_")
+  end
+
+  def bearer_token
+    request.env["HTTP_AUTHORIZATION"]&.scan(/Bearer (.*)$/)&.flatten&.last
   end
 
   def bad_auth_key
