@@ -6,6 +6,13 @@ module V1
 
     include ActionController::Cookies
 
+    # how long the auth cookie stays valid server-side. The default is a browser
+    # session cookie (dropped on browser close) capped at SESSION_TTL so a
+    # captured cookie can't be replayed indefinitely; remember_me persists the
+    # cookie across restarts for REMEMBER_ME_TTL.
+    SESSION_TTL = 24.hours
+    REMEMBER_ME_TTL = 30.days
+
     def create
       @user = User.find_by(email: auth_params[:email])
       if @user.present? && @user.valid_password?(auth_params[:password]) && @user.is_active
@@ -36,17 +43,26 @@ module V1
     private
 
     def auth_params
-      params.expect(auth: [:email, :password, :current_sign_in_ip, :set_cookie])
+      params.expect(auth: [:email, :password, :current_sign_in_ip, :set_cookie, :remember_me])
     end
 
     def set_auth_cookie(user)
-      cookies.encrypted[auth_cookie_name] = {
-        value: user.id,
-        expires: 30.days.from_now,
+      ttl = remember_me? ? REMEMBER_ME_TTL : SESSION_TTL
+      cookie = {
+        value: {user_id: user.id, exp: ttl.from_now.to_i},
         same_site: :strict,
         secure: Rails.env.production? || Rails.env.staging?,
         httponly: true
       }
+      # remember_me makes the browser persist the cookie across restarts;
+      # otherwise it stays a session cookie but is still capped server-side by
+      # the exp baked into the encrypted payload above
+      cookie[:expires] = ttl.from_now if remember_me?
+      cookies.encrypted[auth_cookie_name] = cookie
+    end
+
+    def remember_me?
+      ActiveModel::Type::Boolean.new.cast(auth_params[:remember_me])
     end
 
     def set_download_session_cookie_for(user)
