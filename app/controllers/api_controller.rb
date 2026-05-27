@@ -89,11 +89,19 @@ class APIController < ActionController::API
     Auth.decode(bearer_token)&.dig("user")
   end
 
-  # The cookie is encrypted with the app's secret_key_base (opaque, tamper-proof
-  # and with a server-verified expiry) rather than a JWT, so its payload is not
-  # readable by the client. Returns nil for missing/invalid/expired cookies.
+  # The cookie is encrypted with the app's secret_key_base (opaque, tamper-proof)
+  # rather than a JWT, so its payload is not readable by the client. It carries
+  # an exp timestamp that is enforced here, capping how long a cookie is honoured
+  # server-side even if the browser keeps sending it. Returns nil for
+  # missing/invalid/expired cookies.
   def user_id_from_auth_cookie
-    cookies.encrypted[auth_cookie_name]
+    data = cookies.encrypted[auth_cookie_name]
+    return unless data.is_a?(Hash)
+
+    data = data.with_indifferent_access
+    return if data[:exp].blank? || Time.current.to_i > data[:exp].to_i
+
+    data[:user_id]
   end
 
   # each app, like portal and observations tool, has its own auth cookie so a

@@ -60,6 +60,44 @@ module V1
         expect(response.cookies["observations-tool_#{APIController::AUTH_COOKIE_NAME}"]).to be_present
       end
 
+      it "sets a session cookie (no expiry) by default" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        expect(status).to eq(200)
+        set_cookie = auth_set_cookie_header
+        expect(set_cookie).to be_present
+        expect(set_cookie).not_to match(/expires=/i)
+        expect(set_cookie).not_to match(/max-age=/i)
+      end
+
+      it "sets a persistent cookie when remember_me is true" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true, remember_me: true}}
+
+        expect(status).to eq(200)
+        expect(auth_set_cookie_header).to match(/expires=/i)
+      end
+
+      it "stops honouring a session cookie after its server-side expiry" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        get "/users/current-user"
+        expect(status).to eq(200)
+
+        travel(V1::SessionsController::SESSION_TTL + 1.hour) do
+          get "/users/current-user"
+          expect(status).to eq(401)
+        end
+      end
+
+      it "honours a remember_me cookie past the default session window" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true, remember_me: true}}
+
+        travel(V1::SessionsController::SESSION_TTL + 1.hour) do
+          get "/users/current-user"
+          expect(status).to eq(200)
+        end
+      end
+
       it "authenticates a request using the auth cookie" do
         post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
 
