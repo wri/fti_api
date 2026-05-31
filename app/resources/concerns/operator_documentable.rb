@@ -83,7 +83,10 @@ module OperatorDocumentable
 
   module ClassMethods
     def apply_includes(records, directives)
-      super.includes(:document_file, :required_operator_document)
+      result = super
+      return result unless result.respond_to?(:includes)
+
+      result.includes(:document_file, :required_operator_document)
     end
   end
 end

@@ -30,7 +30,10 @@ module V1
     filters :name, :document_type
 
     def self.apply_includes(records, directives)
-      super.with_translations(I18n.locale)
+      result = super
+      return result unless result.respond_to?(:with_translations)
+
+      result.with_translations(I18n.locale)
     end
   end
 end
