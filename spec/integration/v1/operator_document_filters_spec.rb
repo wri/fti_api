@@ -26,7 +26,7 @@ module V1
       create(:fmu_operator, operator: @operator_2, fmu: @fmu_2)
       create(:fmu_operator, operator: @operator_3, fmu: @fmu_3)
 
-      get "/operator_document_filters_tree", headers: non_api_webuser_headers
+      get "/operator_document_filters_tree"
     end
 
     # before :each do

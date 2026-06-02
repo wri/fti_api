@@ -3,16 +3,14 @@ require "rails_helper"
 module V1
   describe "Sessions management", type: :request do
     it "Returns error object when the user cannot login" do
-      post "/login", params: {auth: {email: user.email, password: "wrong password"}},
-        headers: non_api_webuser_headers
+      post "/login", params: {auth: {email: user.email, password: "wrong password"}}
 
       expect(status).to eq(401)
       expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
     end
 
     it "Valid login" do
-      post "/login", params: {auth: {email: user.email, password: "Supersecret1"}},
-        headers: non_api_webuser_headers
+      post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
       expect(status).to eq(200)
       expect(parsed_body).to eq({
@@ -29,8 +27,7 @@ module V1
       user = build(:admin, password: "weak", password_confirmation: "weak")
       user.save!(validate: false)
 
-      post "/login", params: {auth: {email: user.email, password: "weak"}},
-        headers: non_api_webuser_headers
+      post "/login", params: {auth: {email: user.email, password: "weak"}}
 
       expect(status).to eq(200)
       expect(user.reload.should_change_password).to eq(true)
@@ -90,7 +87,7 @@ module V1
       end
 
       it "Request without valid authorization for current user" do
-        get "/users/current-user", headers: non_api_webuser_headers
+        get "/users/current-user"
         expect(parsed_body).to eq(default_status_errors(401))
       end
     end

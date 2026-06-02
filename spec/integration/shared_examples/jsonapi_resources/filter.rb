@@ -1,6 +1,6 @@
 RSpec.shared_examples "jsonapi-resources__filter" do |options|
   context "Filter" do
-    let(:headers) { options[:success_role] ? authorize_headers(create(options[:success_role]).id) : webuser_headers }
+    let(:headers) { options[:success_role] ? authorize_headers(create(options[:success_role]).id) : jsonapi_headers }
 
     before(:context) do
       @model_class.destroy_all

@@ -177,21 +177,7 @@
   function initializeMap(container) {
     return new mapboxgl.Map({
       container,
-      style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-      transformRequest: (url, resourceType) => {
-        if (
-          url.startsWith('<%= host %>')
-        ) {
-          return {
-            url,
-            headers: {
-              'Content-Type': 'application/json',
-              'OTP-API-KEY': 'Bearer <%= api_key %>'
-            }
-          };
-        }
-        return null;
-      }
+      style: 'mapbox://styles/mapbox/streets-v11' // stylesheet location
     });
   }
 

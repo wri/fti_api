@@ -306,60 +306,6 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe "#api_key_exists" do
-      context "when api_key is present" do
-        context "when api_key has expired" do
-          it "return false" do
-            api_key = create(:api_key, expires_at: DateTime.yesterday)
-            user = create(:user, api_key: api_key)
-
-            expect(user.api_key_exists?).to eql false
-          end
-        end
-
-        context "when api_key has not expired" do
-          it "return true" do
-            api_key = create(:api_key)
-            user = create(:user, api_key: api_key)
-
-            expect(user.api_key_exists?).to eql true
-          end
-        end
-      end
-
-      context "when api_key is blank" do
-        it "return nil" do
-          user = create(:user, api_key: nil)
-
-          expect(user.api_key_exists?).to eql nil
-        end
-      end
-    end
-
-    describe "#regenerate_api_key" do
-      it "create/update api_key with the information of the user" do
-        user = create(:user)
-
-        expect(user.api_key).to eql nil
-
-        user.regenerate_api_key
-
-        user.reload
-        expect(user.api_key).not_to eql nil
-      end
-    end
-
-    describe "#delete_api_key" do
-      it "removes all api_key associated to the user" do
-        api_key = create(:api_key)
-        user = create(:user, api_key: api_key)
-
-        user.delete_api_key
-
-        expect(APIKey.where(user_id: user.id).any?).to eql false
-      end
-    end
-
     describe "#generate_reset_token" do
       it "generate a random reset password token" do
         user = create(:user)

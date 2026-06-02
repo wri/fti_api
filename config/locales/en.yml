@@ -481,7 +481,6 @@ en:
       about_page_entry/translation: About page entry/translation  #g
       active_admin/comment: Active admin/comment  #g
       annex_document: Annex document  #g
-      api_key: API key  #g
       category:
         one: Category
         other: Categories
@@ -598,12 +597,6 @@ en:
         documentable: :activerecord.models.documentable  #g
         documentable_type: Documentable type  #g
         operator_document_annex: :activerecord.models.operator_document_annex  #g
-
-      api_key:
-        access_token: Access token  #g
-        expires_at: Expires at  #g
-        is_active: Is active  #g
-        user: :activerecord.models.user  #g
 
       category:
         category_type: Category type  #g
@@ -1283,7 +1276,6 @@ en:
         file: File  #g
 
       user:
-        api_key: :activerecord.models.api_key  #g
         country: :activerecord.models.country  #g
         current_sign_in_at: Last sign-in on
         current_sign_in_ip: Current sign in ip  #g

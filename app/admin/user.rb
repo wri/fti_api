@@ -25,7 +25,7 @@ ActiveAdmin.register User do
 
   controller do
     def scoped_collection
-      User.where.not(email: "webuser@example.com").includes([country: :translations], :user_permission)
+      User.includes([country: :translations], :user_permission)
     end
   end
 
@@ -156,7 +156,7 @@ ActiveAdmin.register User do
   end
 
   member_action :deactivate, method: :put do
-    resource.update(is_active: false) unless (resource.id == current_user.id) || (resource.email == "webuser@example.com")
+    resource.update(is_active: false) unless resource.id == current_user.id
     redirect_to collection_path, notice: I18n.t("active_admin.shared.user_deactivated")
   end
 end

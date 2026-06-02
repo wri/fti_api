@@ -9,8 +9,7 @@ module V1
         it "Request password reset token by user" do
           expect {
             post("/reset-password",
-              params: {password: {email: user.email}},
-              headers: non_api_webuser_headers)
+              params: {password: {email: user.email}})
           }.to have_enqueued_mail(UserMailer, :forgotten_password)
 
           expect(parsed_body).to eq({messages: [{status: 200, title: "Reset password email sent if email in the database!"}]})
@@ -22,8 +21,7 @@ module V1
         it "Returns 200 when the user email is not in the database" do
           expect {
             post("/reset-password",
-              params: {password: {email: "invalid@gmai.com"}},
-              headers: non_api_webuser_headers)
+              params: {password: {email: "invalid@gmai.com"}})
           }.not_to have_enqueued_mail(UserMailer, :forgotten_password)
 
           expect(parsed_body).to eq({messages: [{status: 200, title: "Reset password email sent if email in the database!"}]})
@@ -42,8 +40,7 @@ module V1
               reset_password_token: token,
               password: "Supersecret1",
               password_confirmation: "Supersecret1"
-            }},
-            headers: non_api_webuser_headers)
+            }})
 
           expect(parsed_body[:data][:attributes][:name]).to eq("00 User one")
           expect(parsed_body[:data][:attributes][:"first-name"]).to eq("00 User")
@@ -65,8 +62,7 @@ module V1
               reset_password_token: invalid_token,
               password: "Supersecret1",
               password_confirmation: "Supersecret1"
-            }},
-            headers: non_api_webuser_headers)
+            }})
 
           expect(parsed_body).to eq({errors: [{status: 422, title: "reset_password_token is invalid"}]})
           expect(status).to eq(422)
@@ -74,8 +70,7 @@ module V1
 
         it "Returns error object when the user token is not present" do
           post("/users/password",
-            params: {password: {password: "Supersecret1", password_confirmation: "Supersecret1"}},
-            headers: non_api_webuser_headers)
+            params: {password: {password: "Supersecret1", password_confirmation: "Supersecret1"}})
 
           expect(parsed_body).to eq({errors: [{status: 422, title: "reset_password_token can't be blank"}]})
           expect(status).to eq(422)
@@ -83,8 +78,7 @@ module V1
 
         it "Returns error object when the user password and confirmation not valid" do
           post("/users/password",
-            params: {password: {reset_password_token: valid_token, password: "Supersecret1", password_confirmation: "Super"}},
-            headers: non_api_webuser_headers)
+            params: {password: {reset_password_token: valid_token, password: "Supersecret1", password_confirmation: "Super"}})
 
           expect(parsed_body).to eq(error_pw)
           expect(status).to eq(422)
@@ -92,8 +86,7 @@ module V1
 
         it "Returns error object when the user token expired" do
           post("/users/password",
-            params: {password: {reset_password_token: expired_token, password: "Supersecret1", password_confirmation: "Supersecret1"}},
-            headers: non_api_webuser_headers)
+            params: {password: {reset_password_token: expired_token, password: "Supersecret1", password_confirmation: "Supersecret1"}})
 
           expect(parsed_body).to eq({errors: [{status: 422, title: "reset_password_token has expired, please request a new one"}]})
           expect(status).to eq(422)
