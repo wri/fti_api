@@ -76,7 +76,7 @@ class Operator < ApplicationRecord
   after_create :create_documents
 
   after_update :recalculate_scores, if: :saved_change_to_approved?
-  after_update :clean_document_cache, if: :saved_change_to_approved?
+  after_update_commit :clean_document_cache, if: :saved_change_to_approved?
   after_update :create_documents, if: -> { saved_change_to_fa_id? && fa_id_before_last_save.blank? }
   after_update :refresh_ranking, if: -> { saved_change_to_fa_id? || saved_change_to_is_active? }
 
@@ -173,9 +173,7 @@ class Operator < ApplicationRecord
   end
 
   def clean_document_cache
-    # TODO: try different technique for jsonapi cache invalidation, this is undocumented way for cleaning cache of jsonapi resources
-    Rails.cache.delete_matched(/operator_documents\/(#{operator_document_ids.join("|")})\//)
-    Rails.cache.delete_matched(/operator_document_histories\/(#{operator_document_history_ids.join("|")})\//)
+    CleanOperatorDocumentCacheJob.perform_later(id)
   end
 
   def refresh_ranking

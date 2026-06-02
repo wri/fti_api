@@ -135,6 +135,32 @@ RSpec.describe Operator, type: :model do
         end
       end
     end
+
+    describe "#clean_document_cache" do
+      let(:operator) { create(:operator, approved: true) }
+
+      it "enqueues a cache cleanup job when approved changes" do
+        expect {
+          operator.update!(approved: false)
+        }.to have_enqueued_job(CleanOperatorDocumentCacheJob).with(operator.id)
+      end
+
+      it "does not enqueue when other attributes change" do
+        operator # create outside the block so the create-time jobs aren't counted
+        expect {
+          operator.update!(website: "https://example.com")
+        }.not_to have_enqueued_job(CleanOperatorDocumentCacheJob)
+      end
+
+      it "does not enqueue when the transaction is rolled back" do
+        expect {
+          ActiveRecord::Base.transaction do
+            operator.update!(approved: false)
+            raise ActiveRecord::Rollback
+          end
+        }.not_to have_enqueued_job(CleanOperatorDocumentCacheJob)
+      end
+    end
   end
 
   describe "Instance methods" do
