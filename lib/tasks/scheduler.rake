@@ -112,8 +112,13 @@ namespace :scheduler do
     warned_users = 0
     deactivated_users = 0
 
+    disablable_users = User.where(is_active: true)
+      .where.not(email: "webuser@example.com")
+      .joins(:user_permission)
+      .where.not(user_permissions: {user_role: %w[ngo ngo_manager] })
+
     time = Benchmark.ms do
-      warning_users = User.where(is_active: true)
+      warning_users = disablable_users
         .where("COALESCE(last_sign_in_at, created_at) <= ?", warning_threshold)
         .where("COALESCE(last_sign_in_at, created_at) > ?", deactivation_threshold)
         .where("last_inactivity_warning_sent_at IS NULL OR last_inactivity_warning_sent_at <= ?", warning_cooldown)
@@ -127,7 +132,7 @@ namespace :scheduler do
         warned_users += 1
       end
 
-      users_to_deactivate = User.where(is_active: true)
+      users_to_deactivate = disablable_users
         .where("COALESCE(last_sign_in_at, created_at) <= ?", deactivation_threshold)
 
       users_to_deactivate.find_each do |user|
