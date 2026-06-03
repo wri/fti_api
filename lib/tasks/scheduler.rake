@@ -119,8 +119,8 @@ namespace :scheduler do
 
     time = Benchmark.ms do
       warning_users = disablable_users
-        .where("COALESCE(last_sign_in_at, created_at) <= ?", warning_threshold)
-        .where("COALESCE(last_sign_in_at, created_at) > ?", deactivation_threshold)
+        .where("COALESCE(last_sign_in_at, users.created_at) <= ?", warning_threshold)
+        .where("COALESCE(last_sign_in_at, users.created_at) > ?", deactivation_threshold)
         .where("last_inactivity_warning_sent_at IS NULL OR last_inactivity_warning_sent_at <= ?", warning_cooldown)
 
       warning_users.find_each do |user|
@@ -133,7 +133,7 @@ namespace :scheduler do
       end
 
       users_to_deactivate = disablable_users
-        .where("COALESCE(last_sign_in_at, created_at) <= ?", deactivation_threshold)
+        .where("COALESCE(last_sign_in_at, users.created_at) <= ?", deactivation_threshold)
 
       users_to_deactivate.find_each do |user|
         user.update!(is_active: false, deactivated_at: Time.zone.now)
