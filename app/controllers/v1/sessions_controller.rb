@@ -6,11 +6,6 @@ module V1
 
     include ActionController::Cookies
 
-    # how long the auth cookie stays valid server-side. The default is a browser
-    # session cookie (dropped on browser close) capped at SESSION_TTL so a
-    # captured cookie can't be replayed indefinitely; remember_me persists the
-    # cookie across restarts for REMEMBER_ME_TTL.
-    SESSION_TTL = 24.hours
     REMEMBER_ME_TTL = 30.days
 
     def create
@@ -47,17 +42,17 @@ module V1
     end
 
     def set_auth_cookie(user)
-      ttl = remember_me? ? REMEMBER_ME_TTL : SESSION_TTL
       cookie = {
-        value: {user_id: user.id, exp: ttl.from_now.to_i},
+        value: user.id,
         same_site: :strict,
         secure: Rails.env.production? || Rails.env.staging?,
         httponly: true
       }
-      # remember_me makes the browser persist the cookie across restarts;
-      # otherwise it stays a session cookie but is still capped server-side by
-      # the exp baked into the encrypted payload above
-      cookie[:expires] = ttl.from_now if remember_me?
+      # remember_me persists the cookie across browser restarts for 30 days
+      # (Rails embeds a server-verified expiry into the encrypted payload via
+      # use_cookies_with_metadata); without it the browser drops the cookie on
+      # close
+      cookie[:expires] = REMEMBER_ME_TTL.from_now if remember_me?
       cookies.encrypted[auth_cookie_name] = cookie
     end
 

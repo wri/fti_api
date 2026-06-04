@@ -90,18 +90,12 @@ class APIController < ActionController::API
   end
 
   # The cookie is encrypted with the app's secret_key_base (opaque, tamper-proof)
-  # rather than a JWT, so its payload is not readable by the client. It carries
-  # an exp timestamp that is enforced here, capping how long a cookie is honoured
-  # server-side even if the browser keeps sending it. Returns nil for
-  # missing/invalid/expired cookies.
+  # rather than a JWT, so its payload is not readable by the client. For
+  # remember_me logins Rails embeds a server-verified expiry into the payload
+  # via use_cookies_with_metadata; the default browser-session cookie has no
+  # server-side expiry and is dropped client-side when the browser closes.
   def user_id_from_auth_cookie
-    data = cookies.encrypted[auth_cookie_name]
-    return unless data.is_a?(Hash)
-
-    data = data.with_indifferent_access
-    return if data[:exp].blank? || Time.current.to_i > data[:exp].to_i
-
-    data[:user_id]
+    cookies.encrypted[auth_cookie_name]
   end
 
   # each app, like portal and observations tool, has its own auth cookie so a
