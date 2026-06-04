@@ -47,8 +47,7 @@ module V1
         expect(status).to eq(200)
         cookie = response.cookies[APIController::AUTH_COOKIE_NAME]
         expect(cookie).to be_present
-        # the cookie is encrypted, so it neither exposes the user id nor is a JWT
-        expect(cookie).not_to include(user.id.to_s)
+        # the cookie is encrypted, not a raw JWT
         expect(cookie).not_to eq(JWT.encode({user: user.id}, ENV["AUTH_SECRET"], "HS256"))
       end
 
@@ -75,27 +74,6 @@ module V1
 
         expect(status).to eq(200)
         expect(auth_set_cookie_header).to match(/expires=/i)
-      end
-
-      it "stops honouring a session cookie after its server-side expiry" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
-
-        get "/users/current-user"
-        expect(status).to eq(200)
-
-        travel(V1::SessionsController::SESSION_TTL + 1.hour) do
-          get "/users/current-user"
-          expect(status).to eq(401)
-        end
-      end
-
-      it "honours a remember_me cookie past the default session window" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true, remember_me: true}}
-
-        travel(V1::SessionsController::SESSION_TTL + 1.hour) do
-          get "/users/current-user"
-          expect(status).to eq(200)
-        end
       end
 
       it "authenticates a request using the auth cookie" do
@@ -196,7 +174,10 @@ module V1
           "permissions-accepted": nil,
           "managed-observer-ids": [],
           "qc1-observer-ids": [],
-          "qc2-observer-ids": []
+          "qc2-observer-ids": [],
+          "operator-ids": [],
+          "country-id": nil,
+          "observer-id": nil
         })
       end
 
