@@ -7,6 +7,7 @@ class APIController < ActionController::API
   include ActionController::Cookies
   include CanCan::ControllerAdditions
   include JSONAPI::ActsAsResourceController
+  include CsrfProtection
 
   AUTH_COOKIE_NAME = "otp_auth_token"
 

@@ -118,10 +118,80 @@ module V1
         post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
         expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_present
 
-        delete "/logout"
+        delete "/logout", headers: {APIController::CSRF_HEADER => cookies[APIController::CSRF_COOKIE_NAME]}
 
         expect(status).to eq(204)
         expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_blank
+      end
+    end
+
+    describe "CSRF protection" do
+      it "issues a non-HTTP-only XSRF-TOKEN cookie at login" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        expect(response.cookies[APIController::CSRF_COOKIE_NAME]).to be_present
+        csrf_set_cookie = Array(response.headers["Set-Cookie"]).find { |c| c.start_with?("#{APIController::CSRF_COOKIE_NAME}=") }
+        expect(csrf_set_cookie).not_to match(/httponly/i)
+      end
+
+      it "blocks cookie-authenticated unsafe requests without the CSRF header" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        delete "/logout"
+
+        expect(status).to eq(403)
+      end
+
+      it "blocks cookie-authenticated unsafe requests with a mismatched CSRF header" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        delete "/logout", headers: {APIController::CSRF_HEADER => "not-the-real-token"}
+
+        expect(status).to eq(403)
+      end
+
+      it "allows cookie-authenticated unsafe requests when the header matches" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        delete "/logout", headers: {APIController::CSRF_HEADER => cookies[APIController::CSRF_COOKIE_NAME]}
+
+        expect(status).to eq(204)
+      end
+
+      it "exempts safe (GET) cookie-authenticated requests from CSRF" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        get "/users/current-user"
+
+        expect(status).to eq(200)
+      end
+
+      it "exempts Bearer-authenticated requests from CSRF" do
+        delete "/logout", headers: user_headers
+
+        expect(status).to eq(204)
+      end
+
+      it "re-issues the XSRF-TOKEN cookie when it's missing on a cookie-authed request" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        # simulate the XSRF cookie being cleared while the auth cookie persists
+        cookies.delete(APIController::CSRF_COOKIE_NAME)
+
+        delete "/logout"
+
+        # the current request still fails CSRF (no header could be sent)...
+        expect(status).to eq(403)
+        # ...but the response includes a fresh XSRF cookie so the frontend can retry
+        expect(response.cookies[APIController::CSRF_COOKIE_NAME]).to be_present
+      end
+
+      it "logout clears the XSRF-TOKEN cookie" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        delete "/logout", headers: {APIController::CSRF_HEADER => cookies[APIController::CSRF_COOKIE_NAME]}
+
+        expect(response.cookies[APIController::CSRF_COOKIE_NAME]).to be_blank
       end
     end
 
