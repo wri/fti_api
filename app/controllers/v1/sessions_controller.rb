@@ -3,6 +3,9 @@
 module V1
   class SessionsController < APIController
     skip_before_action :authenticate, only: [:create]
+    # login has no prior cookie/header, so CSRF doesn't apply yet — credentials
+    # themselves are the proof of intent
+    skip_before_action :verify_csrf_token!, only: [:create]
 
     include ActionController::Cookies
 
@@ -15,7 +18,10 @@ module V1
         @user.update_column(:should_change_password, true) unless User.strong_password?(auth_params[:password])
         @user.update_tracked_fields!(request)
         set_download_session_cookie_for(@user)
-        set_auth_cookie(@user) if ActiveModel::Type::Boolean.new.cast(auth_params[:set_cookie])
+        if ActiveModel::Type::Boolean.new.cast(auth_params[:set_cookie])
+          set_auth_cookie(@user)
+          set_csrf_cookie(expires: remember_me? ? REMEMBER_ME_TTL.from_now : nil)
+        end
         render json: {token: token, role: @user.user_permission.user_role,
                       user_id: @user.id, country: @user.country_id,
                       operator_ids: @user.operator_ids, observer: @user.observer_id}, status: :ok
@@ -27,6 +33,7 @@ module V1
     def destroy
       cookies.delete(download_user_cookie_name)
       cookies.delete(auth_cookie_name)
+      cookies.delete(csrf_cookie_name)
     end
 
     # each app, like portal and observation tool can have it's own download user cookie to prevent some edgecases
