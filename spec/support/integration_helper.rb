@@ -39,10 +39,6 @@ module IntegrationHelper
       headers: jsonapi_headers)
   end
 
-  def generate_token(id)
-    JWT.encode({user: id}, ENV["AUTH_SECRET"], "HS256")
-  end
-
   def admin
     @admin ||= create(:admin)
   end
@@ -69,7 +65,7 @@ module IntegrationHelper
 
   def authorize_headers(id, jsonapi: true)
     headers = {
-      "Authorization" => "Bearer #{generate_token(id)}"
+      TestAuthentication::TEST_USER_HEADER => id.to_s
     }
     headers.merge!(jsonapi_headers) if jsonapi
     headers

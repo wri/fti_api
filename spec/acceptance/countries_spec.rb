@@ -5,10 +5,10 @@ resource "Countries" do
   explanation "Countries resource"
 
   let!(:admin) { FactoryBot.create(:admin) }
-  let!(:admin_token) { "Bearer " + Auth.issue({user: admin.id}) }
+  let(:admin_id) { admin.id.to_s }
 
   header "Content-Type", "application/vnd.api+json"
-  header "Authorization", :admin_token
+  header TestAuthentication::TEST_USER_HEADER, :admin_id
 
   let!(:countries) { FactoryBot.create_list(:country, 5, is_active: true) }
   let!(:operator) { FactoryBot.create_list(:operator, 3, country: countries.first) }

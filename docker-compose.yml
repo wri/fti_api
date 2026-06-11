@@ -20,7 +20,6 @@ services:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
-      - AUTH_SECRET
       - RAILS_ENV=e2e
   redis:
     image: redis:8.0.5-alpine

@@ -72,7 +72,6 @@ gem "globalize"
 # Auth and Omniauth
 gem "bcrypt"
 gem "cancancan"
-gem "jwt"
 
 # Uploads
 gem "carrierwave-base64"

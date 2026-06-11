@@ -14,7 +14,6 @@ module V1
 
       expect(status).to eq(200)
       expect(parsed_body).to eq({
-        token: JWT.encode({user: user.id}, ENV["AUTH_SECRET"], "HS256"),
         role: "user",
         user_id: user.id,
         country: nil, operator_ids: [], observer: nil
@@ -47,8 +46,8 @@ module V1
         expect(status).to eq(200)
         cookie = response.cookies[APIController::AUTH_COOKIE_NAME]
         expect(cookie).to be_present
-        # the cookie is encrypted, not a raw JWT
-        expect(cookie).not_to eq(JWT.encode({user: user.id}, ENV["AUTH_SECRET"], "HS256"))
+        # the cookie is encrypted, so it never exposes the raw user id
+        expect(cookie).not_to eq(user.id.to_s)
       end
 
       it "sets a separate auth cookie per app" do
@@ -104,16 +103,6 @@ module V1
         expect(status).to eq(401)
       end
 
-      it "Authorization header takes precedence over cookie" do
-        other_user = create(:admin)
-        post "/login", params: {auth: {email: other_user.email, password: "Supersecret1", set_cookie: true}}
-
-        get "/users/current-user", headers: user_headers
-
-        expect(status).to eq(200)
-        expect(parsed_attributes[:email]).to eq(user.email)
-      end
-
       it "logout clears the auth cookie" do
         post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
         expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_present
@@ -166,10 +155,12 @@ module V1
         expect(status).to eq(200)
       end
 
-      it "exempts Bearer-authenticated requests from CSRF" do
-        delete "/logout", headers: user_headers
+      it "exempts requests not authenticated via the auth cookie from CSRF" do
+        # no auth cookie means the CSRF check is skipped; the request is then
+        # rejected by authentication rather than CSRF
+        delete "/logout"
 
-        expect(status).to eq(204)
+        expect(status).to eq(401)
       end
 
       it "re-issues the XSRF-TOKEN cookie when it's missing on a cookie-authed request" do

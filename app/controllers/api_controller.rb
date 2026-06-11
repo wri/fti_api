@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "oj"
-require "auth"
 
 class APIController < ActionController::API
   include ActionController::Cookies
@@ -26,7 +25,6 @@ class APIController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActionController::RoutingError, with: :record_not_found
-  rescue_from JWT::VerificationError, with: :bad_auth_key
 
   rescue_from CanCan::AccessDenied do |exception|
     Rails.logger.debug { "Access denied on #{exception.action} #{exception.subject.inspect}" }
@@ -77,24 +75,16 @@ class APIController < ActionController::API
     render json: json_errors, status: :unprocessable_content
   end
 
-  # Resolve the authenticated user id from either the Bearer JWT (API clients)
-  # or the encrypted session cookie set at login. The Bearer header takes
-  # precedence so an explicit token always wins over a stored cookie.
-  def user_id_from_token
-    user_id_from_bearer_token || user_id_from_auth_cookie
-  end
-
-  def user_id_from_bearer_token
-    return unless bearer_token.present?
-
-    Auth.decode(bearer_token)&.dig("user")
-  end
-
-  # The cookie is encrypted with the app's secret_key_base (opaque, tamper-proof)
-  # rather than a JWT, so its payload is not readable by the client. For
-  # remember_me logins Rails embeds a server-verified expiry into the payload
-  # via use_cookies_with_metadata; the default browser-session cookie has no
+  # Resolve the authenticated user id from the encrypted session cookie set at
+  # login. The cookie is encrypted with the app's secret_key_base (opaque,
+  # tamper-proof) so its payload is not readable by the client. For remember_me
+  # logins Rails embeds a server-verified expiry into the payload via
+  # use_cookies_with_metadata; the default browser-session cookie has no
   # server-side expiry and is dropped client-side when the browser closes.
+  def user_id_from_token
+    user_id_from_auth_cookie
+  end
+
   def user_id_from_auth_cookie
     cookies.encrypted[auth_cookie_name]
   end
@@ -104,14 +94,6 @@ class APIController < ActionController::API
   # the bare name, observations-tool gets an "observations-tool_" prefix.
   def auth_cookie_name
     [params[:app], AUTH_COOKIE_NAME].compact.join("_")
-  end
-
-  def bearer_token
-    request.env["HTTP_AUTHORIZATION"]&.scan(/Bearer (.*)$/)&.flatten&.last
-  end
-
-  def bad_auth_key
-    render json: {errors: [{status: 400, title: "API Key/Authorization Key mal formed"}]}, status: :bad_request
   end
 
   def set_locale(&action)

@@ -295,7 +295,6 @@ GEM
       concurrent-ruby (~> 1.1)
       webrick (~> 1.7)
       websocket-driver (~> 0.7)
-    ffi (1.17.4)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi-compiler (1.4.2)
       ffi (>= 1.15.5)
@@ -351,9 +350,6 @@ GEM
       google-cloud-errors (~> 1.0)
       grpc-google-iam-v1 (~> 1.1)
     google-logging-utils (0.2.0)
-    google-protobuf (4.34.1)
-      bigdecimal
-      rake (~> 13.3)
     google-protobuf (4.34.1-x86_64-linux-gnu)
       bigdecimal
       rake (~> 13.3)
@@ -373,9 +369,6 @@ GEM
       signet (>= 0.16, < 2.a)
     groupdate (6.8.0)
       activesupport (>= 7.2)
-    grpc (1.80.0)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
     grpc (1.80.0-x86_64-linux-gnu)
       google-protobuf (>= 3.25, < 5.0)
       googleapis-common-protos-types (~> 1.0)
@@ -520,7 +513,6 @@ GEM
       racc
     patience_diff (1.2.0)
       optimist (~> 3.0)
-    pg (1.6.3)
     pg (1.6.3-x86_64-linux)
     pp (0.6.3)
       prettyprint
@@ -838,7 +830,6 @@ DEPENDENCIES
   http
   i18n_generators
   jsonapi-resources!
-  jwt
   letter_opener_web
   maxmind-geoip2
   mini_magick
