@@ -13,6 +13,10 @@ ActiveAdmin.register User do
     user_permission_attributes: [:id, :user_role]
 
   filter :country, as: :select, collection: -> { Country.joins(:users).by_name_asc.distinct }
+  filter :holding_id_or_operator_holding_id,
+    label: User.human_attribute_name(:holding),
+    as: :select,
+    collection: -> { Holding.order(:name) }
   filter :operator
   filter :observer
   filter :user_permission_user_role_eq,
