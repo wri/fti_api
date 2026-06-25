@@ -141,6 +141,8 @@ install_rvm = <<~EOF
   sudo apt-get update;
   sudo apt-get install -y rvm
   sudo usermod -a -G rvm #{user}
+  curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
+  rvmsudo rvm get master
 EOF
 
 install_ruby = <<~EOF
@@ -157,13 +159,13 @@ install_nvm = <<~EOF
 EOF
 
 # obs tool needs node 16
-# the rest will be running on node 20
+# the rest will be running on node 24
 install_node = <<~EOF
   . /home/#{user}/.nvm/nvm.sh
   nvm install v16.20.2;
   npm install -g yarn;
-  nvm install v20;
-  nvm alias default 20;
+  nvm install v24;
+  nvm alias default 24;
   npm install -g yarn mjml@4 pm2;
 EOF
 
