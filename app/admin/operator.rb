@@ -9,8 +9,8 @@ ActiveAdmin.register Operator, as: "Producer" do
   config.sort_order = "created_at_desc"
 
   actions :all
-  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :is_active, :website,
-    :logo, :delete_logo, fmu_ids: []
+  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :is_active, :website,
+    :logo, :delete_logo, fmu_ids: [], translations_attributes: [:id, :locale, :details]
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -200,7 +200,6 @@ ActiveAdmin.register Operator, as: "Producer" do
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs I18n.t("active_admin.operator_page.operator_details") do
       f.input :name
-      f.input :details
       f.input :holding, as: :select
       f.input :fa_id, as: :string, label: I18n.t("active_admin.operator_page.with_fa_uuid")
       f.input :operator_type, as: :select,
@@ -226,6 +225,10 @@ ActiveAdmin.register Operator, as: "Producer" do
         f.input :fmus, collection: available_fmus
       end
       f.input :is_active
+      f.translated_inputs "Translations", switch_locale: false do |t|
+        t.input :details, as: :text
+        t.input :details_translated_from, input_html: {disabled: true}
+      end
     end
     f.actions
   end
