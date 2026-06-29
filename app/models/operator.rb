@@ -31,6 +31,7 @@ class Operator < ApplicationRecord
   translates :details, touch: true, versioning: :paper_trail
   active_admin_translates :details
 
+  attr_accessor :force_translations_from
   AUTOMATICALLY_TRANSLATABLE_FIELDS = %w[details]
 
   class Translation
@@ -91,6 +92,8 @@ class Operator < ApplicationRecord
   after_update :refresh_ranking, if: -> { saved_change_to_fa_id? || saved_change_to_is_active? }
 
   after_save :update_operator_name_on_fmus, if: :saved_change_to_name?
+
+  after_commit :auto_translate, if: :force_translations_from
 
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :website, url: true
@@ -175,6 +178,10 @@ class Operator < ApplicationRecord
   end
 
   private
+
+  def auto_translate
+    TranslationJob.perform_later(self, force_translations_from) if force_translations_from.present?
+  end
 
   # Saves the fmus of the operator to update the operator's name.
   # This is called in an `after_save` to keep the name of the operator in the fmu's geojson property in sync

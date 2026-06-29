@@ -10,7 +10,7 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   actions :all
   permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :is_active, :website,
-    :logo, :delete_logo, fmu_ids: [], translations_attributes: [:id, :locale, :details]
+    :logo, :delete_logo, :force_translations_from, fmu_ids: [], translations_attributes: [:id, :locale, :details]
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -225,6 +225,12 @@ ActiveAdmin.register Operator, as: "Producer" do
         f.input :fmus, collection: available_fmus
       end
       f.input :is_active
+      f.input :force_translations_from, label: I18n.t("active_admin.shared.translate_from"),
+        as: :select,
+        collection: I18n.available_locales.sort,
+        include_blank: true,
+        hint: I18n.t("active_admin.shared.translate_from_hint"),
+        input_html: {class: "translate_from"}
       f.translated_inputs "Translations", switch_locale: false do |t|
         t.input :details, as: :text
         t.input :details_translated_from, input_html: {disabled: true}
