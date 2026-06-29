@@ -20,12 +20,20 @@
 #  country_doc_rank  :integer
 #  country_operators :integer
 #  name              :string
-#  details           :string
 #  slug              :string
 #
 
 class Operator < ApplicationRecord
   has_paper_trail skip: %i[country_doc_rank country_operators]
+
+  include Translatable
+
+  translates :details, touch: true, versioning: :paper_trail
+  active_admin_translates :details
+
+  class Translation
+    normalizes :details, with: -> { it.strip }
+  end
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
@@ -33,7 +41,7 @@ class Operator < ApplicationRecord
   TYPES = ["Logging company", "Artisanal", "Community forest", "Estate", "Industrial agriculture", "Mining company",
     "Sawmill", "Other", "Unknown"].freeze
 
-  normalizes :name, :details, :address, :website, with: -> { it.strip }
+  normalizes :name, :address, :website, with: -> { it.strip }
 
   belongs_to :country, inverse_of: :operators, optional: true
   belongs_to :holding, inverse_of: :operators, optional: true
@@ -119,6 +127,10 @@ class Operator < ApplicationRecord
     def translated_types
       types.map { |t| [I18n.t("operator_types.#{t}", default: t), t.camelize] }
     end
+  end
+
+  def cache_key
+    super + "-" + Globalize.locale.to_s
   end
 
   def publication_authorization_signed?

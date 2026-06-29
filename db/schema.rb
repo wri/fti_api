@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_05_13_104855) do
+ActiveRecord::Schema[8.0].define(version: 2026_06_25_084712) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -733,6 +733,17 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_13_104855) do
     t.index ["type"], name: "index_operator_documents_on_type"
   end
 
+  create_table "operator_translations", force: :cascade do |t|
+    t.integer "operator_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "details"
+    t.string "details_translated_from"
+    t.index ["locale"], name: "index_operator_translations_on_locale"
+    t.index ["operator_id"], name: "index_operator_translations_on_operator_id"
+  end
+
   create_table "operators", id: :serial, force: :cascade do |t|
     t.string "operator_type"
     t.integer "country_id"
@@ -749,7 +760,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_05_13_104855) do
     t.integer "country_doc_rank"
     t.integer "country_operators"
     t.string "name"
-    t.string "details"
     t.string "slug"
     t.index "btrim(lower((name)::text))", name: "index_operators_on_btrim_lower_name", unique: true
     t.index ["approved"], name: "index_operators_on_approved"
