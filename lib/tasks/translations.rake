@@ -168,4 +168,84 @@ namespace :translations do
 
     puts "Translations loaded successfully"
   end
+
+  task translate_operator_details: :environment do
+    operator_language_map = {
+      146 => "fr",
+      161 => "en",
+      163 => "fr",
+      165 => "fr",
+      172 => "fr",
+      179 => "fr",
+      197 => "fr",
+      665 => "fr",
+      10589 => "fr",
+      10599 => "fr",
+      10604 => "fr",
+      10615 => "fr",
+      10620 => "fr",
+      10621 => "fr",
+      10628 => "fr",
+      10633 => "fr",
+      10645 => "fr",
+      10657 => "fr",
+      10658 => "fr",
+      10659 => "fr",
+      10661 => "fr",
+      20000 => "en",
+      20003 => "fr",
+      20023 => "en",
+      20071 => "en",
+      20072 => "en",
+      20118 => "fr",
+      100090 => "fr",
+      100091 => "fr",
+      100105 => "fr",
+      100109 => "fr",
+      100114 => "fr",
+      100115 => "en",
+      100123 => "fr",
+      100137 => "fr",
+      100151 => "en",
+      100152 => "fr",
+      100161 => "fr",
+      100271 => "en",
+      100342 => "fr",
+      100363 => "en",
+      100368 => "fr",
+      100376 => "fr",
+      100377 => "fr",
+      100380 => "en",
+      100381 => "fr",
+      100396 => "en",
+      100409 => "fr",
+      100414 => "fr",
+      100415 => "es",
+      100515 => "en",
+      120129 => "fr",
+      120133 => "fr",
+      120397 => "fr"
+    }
+
+    operators = Operator.where(id: operator_language_map.keys).index_by(&:id)
+
+    operator_language_map.each do |operator_id, locale|
+      operator = operators[operator_id]
+
+      if operator.nil?
+        puts "Operator #{operator_id} not found, skipping."
+        next
+      end
+
+      if operator.details.blank?
+        puts "Operator #{operator_id} has no details, skipping."
+        next
+      end
+
+      puts "Enqueueing translation for operator #{operator_id} from #{locale}..."
+      TranslationJob.perform_later(operator, locale)
+    end
+
+    puts "All done"
+  end
 end

@@ -31,6 +31,8 @@ class Operator < ApplicationRecord
   translates :details, touch: true, versioning: :paper_trail
   active_admin_translates :details
 
+  AUTOMATICALLY_TRANSLATABLE_FIELDS = %w[details]
+
   class Translation
     normalizes :details, with: -> { it.strip }
   end
