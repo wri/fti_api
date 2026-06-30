@@ -78,3 +78,13 @@ node_modules
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Terraform stuff
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfplan files
+*.tfplan
