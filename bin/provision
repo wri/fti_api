@@ -5,7 +5,6 @@
 require "net/ssh"
 require "net/scp"
 require "erb"
-require "highline"
 
 require "dotenv"
 Dotenv.load
@@ -15,11 +14,12 @@ host = ENV[env.upcase + "_HOST"]
 domain = ENV[env.upcase + "_DOMAIN"] || host
 email = ENV["LETSENCRYPT_EMAIL"]
 user = ENV["SSH_USER"]
-install_ufw = ENV["UFW"]
+install_ufw = ENV["UFW"] != "false"
+install_letsencrypt = ENV["LETSENCRYPT"] != "false"
 root_access = ENV["ROOT_ACCESS"]
 
 abort "Please provide SSH_USER" unless user
-abort "Please provide LETSENCRYPT_EMAIL" unless email
+abort "Please provide LETSENCRYPT_EMAIL" unless email || !install_letsencrypt
 abort "Please provide #{env.upcase}_HOST" unless host
 
 ruby_version = File.read(".ruby-version").strip
@@ -238,9 +238,21 @@ execute_command = ->(ssh, cmd) {
   end
 }
 
-puts "Provisioning server '#{host}' with user '#{user}'..."
+puts "Provisioning server with the following parameters:"
+puts "=============================================="
+puts "  Environment:      #{env}"
+puts "  Host:             #{host}"
+puts "  Domain:           #{domain}"
+puts "  SSH user:         #{user}"
+puts "  Let's Encrypt:    #{email}"
+puts "  Ruby version:     #{ruby_version}"
+puts "  Configure UFW:    #{install_ufw ? 'yes' : 'no'}"
+puts "  Let's Encrypt:    #{install_letsencrypt ? 'yes' : 'no'}"
+puts "  Root access step: #{root_access ? 'yes' : 'no'}"
+puts "=============================================="
 
-exit unless HighLine.agree("Do you want to proceed (yes/no)?")
+print "Do you want to proceed (yes/no)? "
+exit unless $stdin.gets.to_s.strip.downcase =~ /\A(y|yes)\z/
 
 if root_access
   Net::SSH.start(host, "root") do |ssh|
@@ -282,8 +294,10 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call("sudo mv /home/#{user}/deploy/otp.conf /etc/nginx/sites-available/otp.conf")
   puts "Setting up Nginx..."
   ssh_exec.call(setup_nginx)
-  puts "Install letsencrypt..."
-  ssh_exec.call(prepare_letsencrypt)
+  if install_letsencrypt
+    puts "Install letsencrypt..."
+    ssh_exec.call(prepare_letsencrypt)
+  end
   puts "Install rvm..."
   ssh_exec.call(install_rvm)
 end
