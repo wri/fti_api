@@ -100,7 +100,7 @@ configure_firewall = <<~EOF
 EOF
 
 install_postgres = <<~EOF
-  sudo apt-get install -y postgresql-16-postgis-3 libpq-dev imagemagick
+  sudo apt-get install -y postgresql-18-postgis-3 libpq-dev imagemagick autopostgresqlbackup
 EOF
 
 configure_postgres = <<~EOF
@@ -109,7 +109,7 @@ configure_postgres = <<~EOF
 EOF
 
 install_app_dependencies = <<~EOF
-  sudo apt-get install -y libvips
+  sudo apt-get install -y libvips gdal-bin libgdal-dev
 EOF
 
 install_redis = <<~EOF
@@ -117,7 +117,7 @@ install_redis = <<~EOF
 EOF
 
 install_nginx = <<~EOF
-  sudo apt-get install -y nginx
+  sudo apt-get install -y nginx libnginx-mod-http-brotli-static
 EOF
 
 setup_nginx = <<~EOF
@@ -137,16 +137,13 @@ setup_capistrano = <<~EOF
 EOF
 
 install_rvm = <<~EOF
-  sudo apt-add-repository -y ppa:rael-gc/rvm;
-  sudo apt-get update;
-  sudo apt-get install -y rvm
+  sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  curl -sSL https://get.rvm.io | sudo rvm_path=/usr/share/rvm bash -s master
   sudo usermod -a -G rvm #{user}
-  curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
-  rvmsudo rvm get master
 EOF
 
 install_ruby = <<~EOF
-  . /usr/share/rvm/scripts/rvm;
+  . /etc/profile.d/rvm.sh;
   rvm install #{ruby_version}
 EOF
 
