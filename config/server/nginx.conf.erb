@@ -3,7 +3,7 @@ upstream api_admin {
 }
 
 upstream portal {
-  server localhost:6000;
+  server localhost:5000;
 }
 
 server {
@@ -101,7 +101,7 @@ server {
 
   # Next.js frontend
   location /_next/static/ {
-    alias <%= portal_dir %>/\.next/static/;
+    alias <%= portal_dir %>/.next/static/;
     brotli_static on;
     add_header Cache-Control "public, immutable";
     expires max;
