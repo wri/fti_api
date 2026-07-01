@@ -108,6 +108,13 @@ configure_postgres = <<~EOF
   sudo -u postgres createdb #{user}
 EOF
 
+# Configure autopostgresqlbackup (config: /etc/default/autopostgresqlbackup)
+configure_postgres_backups = <<~EOF
+  mkdir -p /home/#{user}/backup/db;
+  sudo sed -i -E 's|^#?\\s*DBNAMES=.*|DBNAMES="fti_api_#{env}"|' /etc/default/autopostgresqlbackup;
+  sudo sed -i -E 's|^#?\\s*BACKUPDIR=.*|BACKUPDIR="/home/#{user}/backup/db"|' /etc/default/autopostgresqlbackup;
+EOF
+
 install_app_dependencies = <<~EOF
   sudo apt-get install -y libvips gdal-bin libgdal-dev
 EOF
@@ -280,6 +287,8 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(install_postgres)
   puts "Configuring Postgres..."
   ssh_exec.call(configure_postgres)
+  puts "Configuring Postgres backups..."
+  ssh_exec.call(configure_postgres_backups)
   puts "Installing Redis..."
   ssh_exec.call(install_redis)
   puts "Make tmp deploy directory..."
