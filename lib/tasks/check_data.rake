@@ -44,7 +44,7 @@ namespace :check do
       unless rod.forest_types.include?(fmu.forest_type.to_sym)
         mismatch_count += 1
 
-        expected_forest_types = rod.forest_types.map(&:to_s).join(", ")
+        expected_forest_types = rod.forest_types.join(", ")
 
         puts "Document id: #{od.id} - status: #{od.status}, last updated at: #{od.updated_at} versions: #{od.versions.count}, operator: #{od.operator.name} (id: #{od.operator.id}), Country: #{od.operator.country.name}, FMU forest type: #{fmu.forest_type} but this document is for forest types: #{expected_forest_types}"
 

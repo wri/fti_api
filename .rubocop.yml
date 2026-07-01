@@ -65,3 +65,6 @@ Rails/WhereRange:
 
 Rails/Blank:
   Enabled: false
+
+Rails/StrongParametersExpect:
+  Enabled: false
