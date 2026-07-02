@@ -48,7 +48,13 @@ ActiveAdmin.register Observation do
     translations_attributes: [:id, :locale, :details, :concern_opinion, :litigation_status, :evidence_on_report, :_destroy]
 
   member_action :start_qc, method: [:put, :get] do
-    if resource.update(user_type: :reviewer, validation_status: "QC2 in progress")
+    validation_status = if resource.responsible_for_qc1.include?(current_user) && resource.validation_status == "Ready for QC1"
+      "QC1 in progress"
+    elsif resource.responsible_for_qc2.include?(current_user) && resource.validation_status == "Ready for QC2"
+      "QC2 in progress"
+    end
+
+    if validation_status && resource.update(user_type: :reviewer, validation_status: validation_status)
       redirect_to new_admin_quality_control_path(quality_control: {reviewable_id: resource.id, reviewable_type: "Observation"}), notice: I18n.t("active_admin.observations_page.moved_qc_in_progress")
     else
       redirect_back_or_to collection_path, alert: I18n.t("active_admin.observations_page.not_modified")
@@ -95,7 +101,7 @@ ActiveAdmin.register Observation do
     link_to I18n.t("active_admin.reject"), reject_admin_observation_path(resource, open_existing: true), remote: true
   end
 
-  action_item :start_qc, only: :show, if: proc { resource.validation_status == "Ready for QC2" && resource.responsible_for_qc2.include?(current_user) } do
+  action_item :start_qc, only: :show, if: proc { (resource.validation_status == "Ready for QC1" && resource.responsible_for_qc1.include?(current_user)) || (resource.validation_status == "Ready for QC2" && resource.responsible_for_qc2.include?(current_user)) } do
     link_to I18n.t("active_admin.shared.start_qc"), start_qc_admin_observation_path(observation), method: :put
   end
 
@@ -135,7 +141,11 @@ ActiveAdmin.register Observation do
   scope -> { I18n.t("active_admin.observations_page.scope_hidden") }, :hidden
   scope -> { I18n.t("active_admin.observations_page.visible") }, :visible
   scope -> { I18n.t("activerecord.models.quality_control") }, :quality_control, if: -> { current_user.reviewable_observer_ids.any? } do |observations|
-    observations.ready_for_or_in_qc.where(id: current_user.quality_controlable_observations)
+    qc1 = Observation.joins(:observers)
+      .where(validation_status: ["Ready for QC1", "QC1 in progress"], observers: {responsible_qc1_id: current_user.id})
+    qc2 = Observation.joins(:observers)
+      .where(validation_status: ["Ready for QC2", "QC2 in progress"], observers: {responsible_qc2_id: current_user.id})
+    observations.where(id: qc1).or(observations.where(id: qc2))
   end
 
   # region filters
@@ -367,9 +377,11 @@ ActiveAdmin.register Observation do
     column :deleted_at
     unless params[:scope] == "archived"
       column(I18n.t("active_admin.shared.actions")) do |observation|
-        if observation.responsible_for_qc2.include? current_user
-          a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put if observation.validation_status == "Ready for QC2"
-          a I18n.t("active_admin.shared.start_qc"), href: new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}) if observation.validation_status == "QC2 in progress"
+        if (observation.validation_status == "Ready for QC1" && observation.responsible_for_qc1.include?(current_user)) || (observation.validation_status == "Ready for QC2" && observation.responsible_for_qc2.include?(current_user))
+          a I18n.t("active_admin.shared.start_qc"), href: start_qc_admin_observation_path(observation), "data-method": :put
+        end
+        if (observation.validation_status == "QC1 in progress" && observation.responsible_for_qc1.include?(current_user)) || (observation.validation_status == "QC2 in progress" && observation.responsible_for_qc2.include?(current_user))
+          a I18n.t("active_admin.shared.start_qc"), href: new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"})
         end
       end
     end

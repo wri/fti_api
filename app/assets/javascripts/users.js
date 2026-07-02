@@ -49,6 +49,7 @@ function updateFields() {
     case 'admin':
       showInput(managedObserversInput);
       showInput(reponsibleForCountriesInput);
+      showInput(qc1ObserversInput);
       showInput(qc2ObserversInput);
       break;
   }

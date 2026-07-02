@@ -98,14 +98,42 @@ RSpec.describe Admin::ObservationsController, type: :controller do
     end
 
     describe "PUT start_qc" do
-      let(:observation) { create(:observation, force_status: "Ready for QC2") }
+      let(:status) { "Ready for QC2" }
+      let(:responsible_qc1) { admin }
+      let(:responsible_qc2) { admin }
+      let(:observation) { create(:observation, force_status: status) }
 
-      before { put :start_qc, params: {id: observation.id} }
+      before do
+        observation.observers.each { |o| o.update!(responsible_qc1: responsible_qc1, responsible_qc2: responsible_qc2) }
+        put :start_qc, params: {id: observation.id}
+      end
 
-      it "is successful" do
-        expect(flash[:notice]).to match("Observation moved to QC in Progress")
-        expect(observation.reload.validation_status).to eq("QC2 in progress")
-        expect(response).to redirect_to(new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}))
+      context "when admin is responsible for QC2 and observation is Ready for QC2" do
+        it "moves observation to QC2 in progress and redirects to new quality control" do
+          expect(flash[:notice]).to match("Observation moved to QC in Progress")
+          expect(observation.reload.validation_status).to eq("QC2 in progress")
+          expect(response).to redirect_to(new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}))
+        end
+      end
+
+      context "when admin is responsible for QC1 and observation is Ready for QC1" do
+        let(:status) { "Ready for QC1" }
+
+        it "moves observation to QC1 in progress and redirects to new quality control" do
+          expect(flash[:notice]).to match("Observation moved to QC in Progress")
+          expect(observation.reload.validation_status).to eq("QC1 in progress")
+          expect(response).to redirect_to(new_admin_quality_control_path(quality_control: {reviewable_id: observation.id, reviewable_type: "Observation"}))
+        end
+      end
+
+      context "when admin is not responsible for the observation's QC stage" do
+        let(:responsible_qc1) { nil }
+        let(:responsible_qc2) { nil }
+
+        it "does not change the validation status and shows an alert" do
+          expect(observation.reload.validation_status).to eq("Ready for QC2")
+          expect(flash[:alert]).to be_present
+        end
       end
     end
 
