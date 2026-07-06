@@ -19,7 +19,7 @@ variable "instance_type" {
 }
 
 variable "ami_id" {
-  description = "AMI override. Empty uses the latest Ubuntu 24.04 LTS."
+  description = "AMI override. Empty uses the latest Ubuntu 26.04 LTS."
   type        = string
   default     = ""
 }
