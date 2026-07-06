@@ -123,6 +123,23 @@ install_redis = <<~EOF
   sudo apt-get install -y redis-server
 EOF
 
+# Redis is only used by Sidekiq/background jobs, so tune it for a job queue:
+# - maxmemory + noeviction: cap RAM and reject new writes (backpressure) rather
+#   than dropping queued jobs or OOM-killing Postgres/Puma on this shared host
+# - appendonly: persist queued/scheduled jobs across restarts
+configure_redis = <<~EOF
+  sudo grep -q "OTP Sidekiq settings" /etc/redis/redis.conf || sudo tee -a /etc/redis/redis.conf > /dev/null <<'CONF'
+
+# --- OTP Sidekiq settings ---
+maxmemory 256mb
+maxmemory-policy noeviction
+appendonly yes
+appendfsync everysec
+CONF
+  sudo systemctl enable redis-server;
+  sudo systemctl restart redis-server;
+EOF
+
 install_nginx = <<~EOF
   sudo apt-get install -y nginx libnginx-mod-http-brotli-static
 EOF
@@ -291,6 +308,8 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(configure_postgres_backups)
   puts "Installing Redis..."
   ssh_exec.call(install_redis)
+  puts "Configuring Redis..."
+  ssh_exec.call(configure_redis)
   puts "Make tmp deploy directory..."
   ssh_exec.call("mkdir -p /home/#{user}/deploy")
   puts "Installing Nginx..."
