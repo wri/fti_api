@@ -25,8 +25,8 @@ infrastructure/
     compute/   # EC2 + EIP + security group + IAM instance profile + DLM EBS snapshots
     storage/   # one S3 bucket (uploads/ + db-backups/ prefixes) + IAM access policy
   environments/
-    staging/      # t3.small
-    production/   # t3.large
+    staging/      # t4g.small
+    production/   # t4g.large
 ```
 
 Each `environments/<env>/` is an independent Terraform root with its own state.

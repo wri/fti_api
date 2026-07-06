@@ -1,10 +1,26 @@
+# Look up the CPU architecture of the chosen instance type so the AMI matches
+# automatically — switch between x86 (t3.*) and Graviton/ARM (t4g.*) with no
+# AMI edits.
+data "aws_ec2_instance_type" "this" {
+  instance_type = var.instance_type
+}
+
+locals {
+  cpu_arch = contains(data.aws_ec2_instance_type.this.supported_architectures, "arm64") ? "arm64" : "x86_64"
+}
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd*/ubuntu-*-26.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd*/ubuntu-*-26.04-*-server-*"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = [local.cpu_arch]
   }
 
   filter {
