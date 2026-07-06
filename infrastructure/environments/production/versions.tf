@@ -7,17 +7,6 @@ terraform {
       version = "~> 6.0"
     }
   }
-
-  # Remote state is local by default. To share/lock state across the team,
-  # create the bucket + DynamoDB lock table once, then uncomment and `terraform init`:
-  #
-  # backend "s3" {
-  #   bucket         = "otp-api-tfstate"
-  #   key            = "production/terraform.tfstate"
-  #   region         = "us-east-1"
-  #   dynamodb_table = "otp-api-tfstate-lock"
-  #   encrypt        = true
-  # }
 }
 
 provider "aws" {
@@ -25,7 +14,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = "otp-api"
+      Project     = "OTP"
       Environment = var.environment
       ManagedBy   = "terraform"
     }

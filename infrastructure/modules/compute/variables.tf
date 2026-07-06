@@ -1,5 +1,5 @@
 variable "name" {
-  description = "Name prefix for compute resources (e.g. otp-api-staging)."
+  description = "Name prefix for compute resources (e.g. otp-staging)."
   type        = string
 }
 

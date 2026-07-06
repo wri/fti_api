@@ -13,7 +13,7 @@ variable "environment" {
 variable "name" {
   description = "Resource name prefix."
   type        = string
-  default     = "otp-api-production"
+  default     = "otp-production"
 }
 
 variable "subnet_id" {
