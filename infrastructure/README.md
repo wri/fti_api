@@ -21,23 +21,35 @@ Postgres and Redis run **self-hosted on each host** (no RDS / ElastiCache).
 
 ```
 infrastructure/
-  remote-state/  # creates the S3 bucket that holds Terraform state (run once)
+  remote-state/     # creates the S3 bucket that holds Terraform state (run once)
   modules/
-    compute/   # EC2 + EIP + security group + IAM instance profile + DLM EBS snapshots
-    storage/   # one S3 bucket (uploads/ + db-backups/ prefixes) + IAM access policy
-  environments/
-    staging/      # t4g.small
-    production/   # t4g.large
+    compute/        # EC2 + EIP + security group + IAM instance profile + DLM EBS snapshots
+    storage/        # one S3 bucket (uploads/ + db-backups/ prefixes) + IAM access policy
+  main.tf           # module wiring — shared by all environments
+  variables.tf
+  outputs.tf
+  versions.tf       # single S3 backend (state namespaced per workspace)
+  staging.tfvars    # per-env values
+  production.tfvars
 ```
 
-Each `environments/<env>/` is an independent Terraform root with its own state.
+**One root, one set of files.** Environments are **Terraform workspaces**
+(`staging`, `production`), not separate directories — the workspace selects both
+the state file (Terraform namespaces it automatically) and the `*.tfvars` you pass.
+`terraform.workspace` drives the resource-name prefix (`otp-<workspace>`) and
+the `Environment` tag, so there's nothing per-env to duplicate.
+
 The host launches into the account's **default VPC** (looked up via data source);
-no custom VPC is created. Pin a specific subnet with `subnet_id` in `terraform.tfvars`
-if you don't want the first default-VPC subnet.
+no custom VPC is created. Pin a specific subnet with `subnet_id` in the tfvars if
+you don't want the first default-VPC subnet.
+
+> A guard rail (`terraform_data.workspace_guard`) refuses to run in the `default`
+> workspace or any name other than `staging`/`production`, so a forgotten
+> `workspace select` can't apply to the wrong environment.
 
 ## Prerequisites
 
-- Terraform >= 1.5, AWS provider ~> 5.0
+- Terraform >= 1.10 (for native S3 state locking), AWS provider ~> 6.0
 - AWS credentials with permission to manage VPC/EC2/IAM/S3/DLM (e.g. `AWS_PROFILE`)
 - An existing EC2 **key pair** in the target region; put its name in
   `terraform.tfvars` (`key_name`)
@@ -53,38 +65,48 @@ the `remote-state/` config (which keeps its own state local by design):
 ```bash
 cd infrastructure/remote-state
 terraform init
-terraform apply            # creates the otp-terraform-state bucket
+terraform apply            # creates the otp-wri-terraform-state bucket
 ```
 
-The bucket name/region are hard-coded in each env's `backend "s3"` block
-(`versions.tf`) — backends can't take variables. If you change the bucket name in
-`remote-state/terraform.tfvars`, update those two backend blocks to match.
+The bucket name/region are hard-coded in the `backend "s3"` block (`versions.tf`)
+— backends can't take variables. If you change the bucket name in
+`remote-state/terraform.tfvars`, update that backend block to match.
 
-Then, in each environment, migrate the existing local state up:
-
-```bash
-cd infrastructure/environments/staging
-terraform init -migrate-state   # answer "yes" to copy local state to S3
-```
+The backend is configured before the first `terraform init`, so state lives in S3
+from the start — no migration needed. (Only if you had a pre-existing local
+`terraform.tfstate` would you run `terraform init -migrate-state` once to lift it
+up.)
 
 ## Usage
 
 ```bash
-cd infrastructure/environments/staging   # or production
+cd infrastructure
+terraform init                          # configures the S3 backend
 
-terraform init
-terraform plan
-terraform apply
+# --- staging ---
+terraform workspace new staging         # first time only (then: workspace select staging)
+terraform plan  -var-file=staging.tfvars
+terraform apply -var-file=staging.tfvars
+
+# --- production ---
+terraform workspace new production      # first time only
+terraform workspace select production
+terraform plan  -var-file=production.tfvars
+terraform apply -var-file=production.tfvars
 ```
+
+Always pair the selected workspace with its matching `-var-file`. The guard rail
+blocks the `default` workspace, but it can't tell staging vars from production
+vars — that pairing is on you.
 
 Then wire the result into the existing deploy flow:
 
 ```bash
-terraform output public_ip     # -> set as STAGING_HOST / PRODUCTION_HOST in .env.<env>
+terraform output public_ip      # -> set as STAGING_HOST / PRODUCTION_HOST in .env.<env>
 terraform output bucket_name    # -> S3 bucket for uploads + backups
 
-ENV=staging bin/provision        # configure the host
-cap staging deploy               # deploy the app
+ENV=staging bin/provision       # configure the host
+cap staging deploy              # deploy the app
 ```
 
 ## Adopting the existing live servers
@@ -93,10 +115,12 @@ Production and staging already exist. Running `terraform apply` as-is creates
 **parallel** infrastructure. Two options:
 
 1. **Import (recommended for live boxes)** — adopt the running resources into
-   state so Terraform manages them in place, e.g.:
+   state so Terraform manages them in place. Select the target workspace first,
+   e.g.:
    ```bash
-   terraform import module.compute.aws_instance.app i-0123456789abcdef0
-   terraform import module.compute.aws_eip.app eipalloc-0123456789abcdef0
+   terraform workspace select production
+   terraform import -var-file=production.tfvars module.compute.aws_instance.app i-0123456789abcdef0
+   terraform import -var-file=production.tfvars module.compute.aws_eip.app eipalloc-0123456789abcdef0
    # the default VPC/subnet are read-only data sources, so nothing to import there
    ```
    Run `terraform plan` afterwards and reconcile `terraform.tfvars` until the plan
@@ -112,7 +136,7 @@ The bucket is created but the app must opt in:
   `uploads/` prefix. The host uses its instance-profile IAM role, so **no static
   AWS keys** are required.
 - **DB backups** — the host-side `aws s3 sync` cron should target
-  `s3://otp-api-production/db-backups/` (production only). Objects under that
+  `s3://otp-wri-production/db-backups/` (production only). Objects under that
   prefix expire per `backup_retention_days`.
 
 ## Backups & snapshots
