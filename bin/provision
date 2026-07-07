@@ -63,19 +63,21 @@ EOF
 
 # Add swap space
 add_swap = <<~EOF
-  sudo fallocate -l 4GB /swapfile;
-  sudo chmod 600 /swapfile;
-  sudo mkswap /swapfile;
-  sudo swapon /swapfile;
-  echo "/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab;
+  if ! sudo swapon --show | grep -q '/swapfile'; then
+    sudo fallocate -l 4GB /swapfile;
+    sudo chmod 600 /swapfile;
+    sudo mkswap /swapfile;
+    sudo swapon /swapfile;
+  fi
+  grep -q '^/swapfile ' /etc/fstab || echo "/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab;
   sudo sysctl vm.swappiness=20;
-  echo "vm.swappiness=20" | sudo tee -a /etc/sysctl.conf
+  grep -q '^vm.swappiness=' /etc/sysctl.conf || echo "vm.swappiness=20" | sudo tee -a /etc/sysctl.conf;
   sudo sysctl vm.vfs_cache_pressure=50;
-  echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.conf
+  grep -q '^vm.vfs_cache_pressure=' /etc/sysctl.conf || echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.conf;
 EOF
 # Add non-root user
 add_user = <<~EOF
-  useradd --create-home --shell /bin/bash #{user};
+  id -u #{user} >/dev/null 2>&1 || useradd --create-home --shell /bin/bash #{user};
   rsync --archive --chown=#{user}:#{user} /root/.ssh /home/#{user};
   echo '#{user} ALL=(ALL:ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/#{user};
   chmod 0440 /etc/sudoers.d/#{user};
@@ -104,8 +106,10 @@ install_postgres = <<~EOF
 EOF
 
 configure_postgres = <<~EOF
-  sudo -u postgres createuser -s #{user}
-  sudo -u postgres createdb #{user}
+  if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='#{user}'" | grep -q 1; then
+    sudo -u postgres createuser -s #{user};
+    sudo -u postgres createdb #{user};
+  fi
 EOF
 
 # Configure autopostgresqlbackup (config: /etc/default/autopostgresqlbackup)
@@ -166,8 +170,8 @@ CONF
 EOF
 
 setup_nginx = <<~EOF
-  sudo rm /etc/nginx/sites-enabled/default;
-  sudo ln -s /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
+  sudo rm -f /etc/nginx/sites-enabled/default;
+  sudo ln -sf /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
 EOF
 
 # Prepare Let's Encrypt
@@ -182,8 +186,10 @@ setup_capistrano = <<~EOF
 EOF
 
 install_rvm = <<~EOF
-  sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-  curl -sSL https://get.rvm.io | sudo rvm_path=/usr/share/rvm bash -s master
+  if [ ! -d /usr/share/rvm ]; then
+    sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    curl -sSL https://get.rvm.io | sudo rvm_path=/usr/share/rvm bash -s master
+  fi
   sudo usermod -a -G rvm #{user}
 EOF
 
@@ -193,11 +199,13 @@ install_ruby = <<~EOF
 EOF
 
 install_nvm = <<~EOF
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash;
-  cat <<EOT >> ~/.profile
+  if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash;
+    cat <<EOT >> ~/.profile
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
   EOT
+  fi
 EOF
 
 # obs tool needs node 16
@@ -236,16 +244,18 @@ setup_sidekiq_service = <<~EOF
 EOF
 
 setup_frontend_repos = <<~EOF
-  mkdir -p /home/#{user}/git;
-  cd /home/#{user}/git;
-  git init --bare otp-observations-tool.git;
-  git init --bare otp-portal.git;
-  rm /home/#{user}/git/otp-observations-tool.git/hooks/*;
-  rm /home/#{user}/git/otp-portal.git/hooks/*;
-  sudo mkdir -p #{portal_dir};
-  sudo mkdir -p #{obs_tool_dir};
-  sudo chown #{user}:#{user} #{portal_dir};
-  sudo chown #{user}:#{user} #{obs_tool_dir};
+  if [ ! -d /home/#{user}/git ]; then
+    mkdir -p /home/#{user}/git;
+    cd /home/#{user}/git;
+    git init --bare otp-observations-tool.git;
+    git init --bare otp-portal.git;
+    rm /home/#{user}/git/otp-observations-tool.git/hooks/*;
+    rm /home/#{user}/git/otp-portal.git/hooks/*;
+    sudo mkdir -p #{portal_dir};
+    sudo mkdir -p #{obs_tool_dir};
+    sudo chown #{user}:#{user} #{portal_dir};
+    sudo chown #{user}:#{user} #{obs_tool_dir};
+  fi
 EOF
 
 ensure_githooks_executable = <<~EOF
@@ -258,20 +268,24 @@ restart_nginx = <<~EOF
 EOF
 
 install_transifex_cli = <<~EOF
-  mkdir -p /home/#{user}/.local/bin;
-  mkdir -p /home/#{user}/tx;
-  cd /home/#{user}/tx;
-  curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
-  ln -s /home/#{user}/tx/tx /home/#{user}/.local/bin/tx
+  if ! command -v tx >/dev/null 2>&1; then
+    mkdir -p /home/#{user}/.local/bin;
+    mkdir -p /home/#{user}/tx;
+    cd /home/#{user}/tx;
+    curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+    ln -sf /home/#{user}/tx/tx /home/#{user}/.local/bin/tx
+  fi
 EOF
 
 install_aws_cli = <<~EOF
-  cd ~;
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip";
-  unzip -q awscliv2.zip;
-  sudo ./aws/install
-  rm awscliv2.zip;
-  rm -rf aws;
+  if ! command -v aws >/dev/null 2>&1; then
+    cd ~;
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip";
+    unzip -q awscliv2.zip;
+    sudo ./aws/install
+    rm awscliv2.zip;
+    rm -rf aws;
+  fi
 EOF
 
 # Disable root
