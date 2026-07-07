@@ -45,26 +45,8 @@ variable "bucket_access_policy_arn" {
   type        = string
 }
 
-variable "snapshot_interval_hours" {
-  description = "Hours between automated EBS snapshots."
-  type        = number
-  default     = 24
-}
-
-variable "snapshot_start_time" {
-  description = "UTC time (HH:MM) the snapshot schedule starts."
-  type        = string
-  default     = "03:00"
-}
-
 variable "snapshot_retain_count" {
   description = "Number of EBS snapshots to retain."
   type        = number
   default     = 7
-}
-
-variable "tags" {
-  description = "Tags applied to compute resources."
-  type        = map(string)
-  default     = {}
 }

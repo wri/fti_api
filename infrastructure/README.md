@@ -136,8 +136,8 @@ The bucket is created but the app must opt in:
   `uploads/` prefix. The host uses its instance-profile IAM role, so **no static
   AWS keys** are required.
 - **DB backups** — the host-side `aws s3 sync` cron should target
-  `s3://otp-wri-production/db-backups/` (production only). Objects under that
-  prefix expire per `backup_retention_days`.
+  `s3://otp-wri-production/db-backups/` (production only). Retention/pruning is
+  handled host-side by the backup script (no S3 lifecycle rule).
 
 ## Backups & snapshots
 
