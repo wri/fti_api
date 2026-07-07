@@ -94,7 +94,7 @@ configure_firewall = <<~EOF
   sudo ufw logging on;
   sudo ufw default deny incoming;
   sudo ufw default allow outgoing;
-  sudo ufw allow 22;
+  sudo ufw limit 22;
   sudo ufw allow 80;
   sudo ufw allow 443;
   sudo ufw --force enable;
@@ -107,7 +107,7 @@ EOF
 
 configure_postgres = <<~EOF
   if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='#{user}'" | grep -q 1; then
-    sudo -u postgres createuser -s #{user};
+    sudo -u postgres createuser --createdb #{user};
     sudo -u postgres createdb #{user};
   fi
 EOF
@@ -188,7 +188,11 @@ EOF
 install_rvm = <<~EOF
   if [ ! -d /usr/share/rvm ]; then
     sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-    curl -sSL https://get.rvm.io | sudo rvm_path=/usr/share/rvm bash -s master
+    curl -sSL https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer -o /tmp/rvm-installer
+    curl -sSL https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer.asc -o /tmp/rvm-installer.asc
+    sudo gpg --verify /tmp/rvm-installer.asc /tmp/rvm-installer
+    sudo rvm_path=/usr/share/rvm bash /tmp/rvm-installer master
+    rm -f /tmp/rvm-installer /tmp/rvm-installer.asc
   fi
   sudo usermod -a -G rvm #{user}
 EOF
@@ -288,10 +292,10 @@ install_aws_cli = <<~EOF
   fi
 EOF
 
-# Disable root
+# Disable root. Use a drop-in, which overrides the /etc/ssh/sshd_config.d/*
+# cloud-init defaults that a sed on the main config would miss.
 disable_root = <<~EOF
-  sed -i 's@PasswordAuthentication yes@PasswordAuthentication no@g' /etc/ssh/sshd_config;
-  sed -i 's@PermitRootLogin yes@PermitRootLogin no@g' /etc/ssh/sshd_config;
+  printf 'PasswordAuthentication no\\nPermitRootLogin no\\n' | sudo tee /etc/ssh/sshd_config.d/99-hardening.conf;
   chage -E 0 root;
   systemctl restart ssh
 EOF
@@ -406,7 +410,7 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(setup_capistrano)
   puts "Upload env..."
   Net::SCP.upload!(host, user, ".env.#{env}", "/home/#{user}/deploy/.env")
-  ssh_exec.call("sudo mv /home/#{user}/deploy/.env #{api_dir}/shared/.env")
+  ssh_exec.call("sudo mv /home/#{user}/deploy/.env #{api_dir}/shared/.env && sudo chown #{user}:#{user} #{api_dir}/shared/.env && sudo chmod 600 #{api_dir}/shared/.env")
   puts "Setup PUMA..."
   Net::SCP.upload!(host, user, puma_service_config, "/home/#{user}/deploy/puma.service")
   ssh_exec.call(setup_puma_service)
