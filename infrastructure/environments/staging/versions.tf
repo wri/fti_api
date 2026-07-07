@@ -7,6 +7,16 @@ terraform {
       version = "~> 6.0"
     }
   }
+
+  # Remote state in S3 with native locking (use_lockfile). Create the bucket first via ../../remote-state,
+  # then `terraform init -migrate-state`.
+  backend "s3" {
+    bucket       = "otp-terraform-state"
+    key          = "staging/terraform.tfstate"
+    region       = "eu-central-1"
+    encrypt      = true
+    use_lockfile = true
+  }
 }
 
 provider "aws" {
