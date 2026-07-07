@@ -21,6 +21,7 @@ Postgres and Redis run **self-hosted on each host** (no RDS / ElastiCache).
 
 ```
 infrastructure/
+  remote-state/  # creates the S3 bucket that holds Terraform state (run once)
   modules/
     compute/   # EC2 + EIP + security group + IAM instance profile + DLM EBS snapshots
     storage/   # one S3 bucket (uploads/ + db-backups/ prefixes) + IAM access policy
@@ -40,6 +41,31 @@ if you don't want the first default-VPC subnet.
 - AWS credentials with permission to manage VPC/EC2/IAM/S3/DLM (e.g. `AWS_PROFILE`)
 - An existing EC2 **key pair** in the target region; put its name in
   `terraform.tfvars` (`key_name`)
+
+## Remote state (one-time setup)
+
+State lives in a dedicated, versioned, encrypted S3 bucket with **native S3
+locking** (`use_lockfile`). One state file per environment (`staging/…`, `production/…`).
+
+The bucket must exist before the env backends can use it, so create it once with
+the `remote-state/` config (which keeps its own state local by design):
+
+```bash
+cd infrastructure/remote-state
+terraform init
+terraform apply            # creates the otp-terraform-state bucket
+```
+
+The bucket name/region are hard-coded in each env's `backend "s3"` block
+(`versions.tf`) — backends can't take variables. If you change the bucket name in
+`remote-state/terraform.tfvars`, update those two backend blocks to match.
+
+Then, in each environment, migrate the existing local state up:
+
+```bash
+cd infrastructure/environments/staging
+terraform init -migrate-state   # answer "yes" to copy local state to S3
+```
 
 ## Usage
 
@@ -91,10 +117,9 @@ The bucket is created but the app must opt in:
 
 ## Backups & snapshots
 
-- **EBS snapshots** — Data Lifecycle Manager snapshots every volume tagged
-  `Snapshot = true` (root + optional data volume) daily, retaining
-  `snapshot_retain_count` (prod 14 / staging 7). Block-level protection for the
-  self-hosted Postgres data.
+- **EBS snapshots** — Data Lifecycle Manager snapshots the host's root volume
+  (tagged `Snapshot = true`) daily, retaining `snapshot_retain_count`
+  (prod 14 / staging 7). Block-level protection for the self-hosted Postgres data.
 - **Logical DB dumps** — the existing `aws s3 sync` cron under `db-backups/`
   (production). The two are complementary.
 
@@ -104,7 +129,7 @@ The bucket is created but the app must opt in:
   them in sync if you change ports.
 - `ssh_allowed_cidrs` defaults to `0.0.0.0/0` in the tfvars — **narrow it** to
   known admin IPs.
-- Remote state is local by default. To share/lock state, create an S3 bucket +
-  DynamoDB lock table and uncomment the `backend "s3"` block in `versions.tf`.
+- Remote state is an S3 bucket with native locking (no DynamoDB) — see
+  [Remote state](#remote-state-one-time-setup).
 - The instance ignores AMI changes (`lifecycle.ignore_changes = [ami]`) so a new
   Ubuntu release won't trigger a host rebuild.
