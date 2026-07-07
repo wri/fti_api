@@ -29,9 +29,7 @@ data "aws_subnets" "default" {
 module "storage" {
   source = "./modules/storage"
 
-  bucket_name           = var.bucket_name
-  backup_retention_days = var.backup_retention_days
-  cors_allowed_origins  = var.cors_allowed_origins
+  bucket_name = var.bucket_name
 }
 
 module "compute" {

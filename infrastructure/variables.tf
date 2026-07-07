@@ -41,18 +41,6 @@ variable "bucket_name" {
   type        = string
 }
 
-variable "backup_retention_days" {
-  description = "Retention for objects under the db-backups/ prefix."
-  type        = number
-  default     = 30
-}
-
-variable "cors_allowed_origins" {
-  description = "Origins allowed for direct browser access to the bucket."
-  type        = list(string)
-  default     = []
-}
-
 variable "snapshot_retain_count" {
   description = "Number of automated EBS snapshots to retain."
   type        = number

@@ -7,6 +7,10 @@ data "aws_ec2_instance_type" "this" {
 
 locals {
   cpu_arch = contains(data.aws_ec2_instance_type.this.supported_architectures, "arm64") ? "arm64" : "x86_64"
+
+  # Daily EBS snapshots at 03:00 UTC. Only the retention count varies per env.
+  snapshot_interval_hours = 24
+  snapshot_start_time     = "03:00"
 }
 
 data "aws_ami" "ubuntu" {
@@ -71,9 +75,9 @@ resource "aws_security_group" "app" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(var.tags, {
+  tags = {
     Name = "${var.name}-app"
-  })
+  }
 }
 
 # -----------------------------------------------------------------------------
@@ -95,7 +99,6 @@ data "aws_iam_policy_document" "ec2_assume" {
 resource "aws_iam_role" "app" {
   name               = "${var.name}-app"
   assume_role_policy = data.aws_iam_policy_document.ec2_assume.json
-  tags               = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "bucket_access" {
@@ -106,7 +109,6 @@ resource "aws_iam_role_policy_attachment" "bucket_access" {
 resource "aws_iam_instance_profile" "app" {
   name = "${var.name}-app"
   role = aws_iam_role.app.name
-  tags = var.tags
 }
 
 # -----------------------------------------------------------------------------
@@ -127,15 +129,15 @@ resource "aws_instance" "app" {
     delete_on_termination = true
     encrypted             = true
 
-    tags = merge(var.tags, {
+    tags = {
       Name     = "${var.name}-root"
       Snapshot = "true"
-    })
+    }
   }
 
-  tags = merge(var.tags, {
+  tags = {
     Name = "${var.name}-app"
-  })
+  }
 
   lifecycle {
     # The AMI updates over time; don't recreate a live host on a new AMI release.
@@ -148,9 +150,9 @@ resource "aws_eip" "app" {
   domain   = "vpc"
   instance = aws_instance.app.id
 
-  tags = merge(var.tags, {
+  tags = {
     Name = "${var.name}-eip"
-  })
+  }
 }
 
 # -----------------------------------------------------------------------------
@@ -172,7 +174,6 @@ data "aws_iam_policy_document" "dlm_assume" {
 resource "aws_iam_role" "dlm" {
   name               = "${var.name}-dlm"
   assume_role_policy = data.aws_iam_policy_document.dlm_assume.json
-  tags               = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "dlm" {
@@ -196,22 +197,21 @@ resource "aws_dlm_lifecycle_policy" "ebs" {
       name = "${var.name}-daily"
 
       create_rule {
-        interval      = var.snapshot_interval_hours
+        interval      = local.snapshot_interval_hours
         interval_unit = "HOURS"
-        times         = [var.snapshot_start_time]
+        times         = [local.snapshot_start_time]
       }
 
       retain_rule {
         count = var.snapshot_retain_count
       }
 
-      tags_to_add = merge(var.tags, {
+      tags_to_add = {
         SnapshotCreator = "dlm"
-      })
+      }
 
+      # Copies the volume's tags (incl. default_tags like Project=OTP) onto snapshots.
       copy_tags = true
     }
   }
-
-  tags = var.tags
 }
