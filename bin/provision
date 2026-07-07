@@ -144,6 +144,27 @@ install_nginx = <<~EOF
   sudo apt-get install -y nginx libnginx-mod-http-brotli-static
 EOF
 
+# Rotate the app's log files, all of which land in the Capistrano shared/log dir:
+#   staging.log/production.log (Rails), puma.access.log/puma.error.log (Puma via
+#   systemd `append:`) and cron.log (whenever, see config/schedule.rb).
+# These writers hold the fd open across a rename, so copytruncate is required.
+# nginx and journald (Sidekiq) rotate themselves, so only this dir needs it.
+configure_logrotate = <<~EOF
+  sudo tee /etc/logrotate.d/otp-api > /dev/null <<'CONF'
+#{api_dir}/shared/log/*.log {
+  daily
+  maxsize 100M
+  rotate 14
+  missingok
+  notifempty
+  compress
+  delaycompress
+  copytruncate
+  su #{user} #{user}
+}
+CONF
+EOF
+
 setup_nginx = <<~EOF
   sudo rm /etc/nginx/sites-enabled/default;
   sudo ln -s /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
@@ -188,6 +209,16 @@ install_node = <<~EOF
   nvm install v24;
   nvm alias default 24;
   npm install -g yarn mjml@4 pm2;
+EOF
+
+# Rotate the pm2-managed frontend logs (~/.pm2/logs/otp-portal-*.log).
+# Applies daemon-wide to any pm2 app; `pm2 install`/`pm2 set` are idempotent.
+configure_pm2_logrotate = <<~EOF
+  . /home/#{user}/.nvm/nvm.sh;
+  pm2 install pm2-logrotate;
+  pm2 set pm2-logrotate:max_size 20M;
+  pm2 set pm2-logrotate:retain 14;
+  pm2 set pm2-logrotate:compress true;
 EOF
 
 setup_puma_service = <<~EOF
@@ -319,6 +350,8 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call("sudo mv /home/#{user}/deploy/otp.conf /etc/nginx/sites-available/otp.conf")
   puts "Setting up Nginx..."
   ssh_exec.call(setup_nginx)
+  puts "Configuring logrotate..."
+  ssh_exec.call(configure_logrotate)
   if install_letsencrypt
     puts "Install letsencrypt..."
     ssh_exec.call(prepare_letsencrypt)
@@ -335,6 +368,8 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(install_nvm)
   puts "Install node..."
   ssh_exec.call(install_node)
+  puts "Configuring pm2-logrotate..."
+  ssh_exec.call(configure_pm2_logrotate)
   puts "Installing app dependencies..."
   ssh_exec.call(install_app_dependencies)
   puts "Setup capistrano"
