@@ -268,7 +268,7 @@ restart_nginx = <<~EOF
 EOF
 
 install_transifex_cli = <<~EOF
-  if ! command -v tx >/dev/null 2>&1; then
+  if [ ! -x /home/#{user}/.local/bin/tx ]; then
     mkdir -p /home/#{user}/.local/bin;
     mkdir -p /home/#{user}/tx;
     cd /home/#{user}/tx;
@@ -296,12 +296,24 @@ disable_root = <<~EOF
   systemctl restart ssh
 EOF
 
+# Run `cmd` on the remote host, streaming output. Aborts provisioning if the
+# step fails: `set -e` makes the remote shell stop at the first failing command
+# (instead of running on with `;`-chained commands), and we capture the channel
+# exit status and bail so we never print "Done!" over a half-provisioned box.
 execute_command = ->(ssh, cmd) {
   puts cmd
   puts "=============================================="
-  ssh.exec!(cmd) do |_channel, _stream, data|
-    print data
+  exit_code = 0
+  ssh.open_channel do |channel|
+    channel.exec("set -e\n#{cmd}") do |ch, success|
+      abort "Could not start command on remote host." unless success
+      ch.on_data { |_ch, data| print data }
+      ch.on_extended_data { |_ch, _type, data| print data }
+      ch.on_request("exit-status") { |_ch, data| exit_code = data.read_long }
+    end
   end
+  ssh.loop
+  abort "\nStep failed (exit status #{exit_code}). Aborting provisioning." unless exit_code.zero?
 }
 
 puts "Provisioning server with the following parameters:"
@@ -374,6 +386,10 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(install_rvm)
 end
 
+# NOTE: This is intentionally a second, separate SSH session.
+# install_rvm runs `usermod -a -G rvm #{user}`, but group membership only takes
+# effect on a new login. Reconnecting here gives the user its `rvm` group so the
+# steps below (rvm install ruby, etc.) can use RVM. Do not merge these two blocks.
 Net::SSH.start(host, user) do |ssh|
   ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
   puts "Install ruby..."
