@@ -1,6 +1,20 @@
-# Use the account's existing default VPC instead of creating a new one — the
-# single self-hosted host needs no custom networking, and this keeps `terraform
-# import` of the live box aligned with where it actually runs.
+locals {
+  # The workspace IS the environment. Derive a clean resource-name prefix from it.
+  name = "otp-${terraform.workspace}"
+}
+
+# Guard rail: refuse to run in the `default` workspace or any unexpected one, so a
+# forgotten `terraform workspace select` can't apply to the wrong environment.
+resource "terraform_data" "workspace_guard" {
+  lifecycle {
+    precondition {
+      condition     = contains(["staging", "production"], terraform.workspace)
+      error_message = "Select an environment first: `terraform workspace select staging|production`. Refusing to run in workspace '${terraform.workspace}'."
+    }
+  }
+}
+
+# Existing default VPC — no custom networking for a single self-hosted host.
 data "aws_vpc" "default" {
   default = true
 }
@@ -13,7 +27,7 @@ data "aws_subnets" "default" {
 }
 
 module "storage" {
-  source = "../../modules/storage"
+  source = "./modules/storage"
 
   bucket_name           = var.bucket_name
   backup_retention_days = var.backup_retention_days
@@ -21,9 +35,9 @@ module "storage" {
 }
 
 module "compute" {
-  source = "../../modules/compute"
+  source = "./modules/compute"
 
-  name                     = var.name
+  name                     = local.name
   vpc_id                   = data.aws_vpc.default.id
   subnet_id                = var.subnet_id != "" ? var.subnet_id : tolist(data.aws_subnets.default.ids)[0]
   instance_type            = var.instance_type

@@ -1,5 +1,5 @@
 output "public_ip" {
-  description = "Elastic IP of the application host. Set this as STAGING_HOST."
+  description = "Elastic IP of the host. Set this as STAGING_HOST / PRODUCTION_HOST."
   value       = module.compute.public_ip
 }
 
@@ -8,7 +8,7 @@ output "instance_id" {
 }
 
 output "bucket_name" {
-  description = "S3 bucket for uploads (and db-backups, unused on staging)."
+  description = "S3 bucket for uploads (uploads/) and db-backups (db-backups/)."
   value       = module.storage.bucket_name
 }
 

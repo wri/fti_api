@@ -1,17 +1,14 @@
-region      = "eu-central-1"
-environment = "staging"
-name        = "otp-staging"
-
+region        = "eu-central-1"
 instance_type = "t4g.small"
 
-# Optional: pin a specific subnet. Empty uses the first default-VPC subnet.
-# subnet_id = "subnet-0123456789abcdef0"
-
-# An existing EC2 key pair name in the target region.
+# An existing EC2 key pair name in eu-central-1.
 # key_name = "otp-api"
 
 # Lock SSH down to known admin IPs. 0.0.0.0/0 is open to the world — narrow it.
 ssh_allowed_cidrs = ["0.0.0.0/0"]
+
+# Optional: pin a specific subnet. Empty uses the first default-VPC subnet.
+# subnet_id = "subnet-0123456789abcdef0"
 
 root_volume_size = 100
 

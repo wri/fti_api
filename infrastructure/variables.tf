@@ -1,44 +1,31 @@
 variable "region" {
-  description = "AWS region."
+  description = "AWS region for this environment's resources."
   type        = string
-  default     = "eu-central-1"
-}
-
-variable "environment" {
-  description = "Environment name."
-  type        = string
-  default     = "staging"
-}
-
-variable "name" {
-  description = "Resource name prefix."
-  type        = string
-  default     = "otp-staging"
-}
-
-variable "subnet_id" {
-  description = "Subnet to launch the host into. Empty picks the first default-VPC subnet."
-  type        = string
-  default     = ""
 }
 
 variable "instance_type" {
-  description = "EC2 instance type for the application host."
+  description = "EC2 instance type. Architecture (x86/ARM) is auto-detected for the AMI."
   type        = string
 }
 
 variable "key_name" {
-  description = "Name of an existing EC2 key pair for SSH access."
+  description = "Name of an existing EC2 key pair for SSH access (region-scoped)."
   type        = string
 }
 
 variable "ssh_allowed_cidrs" {
-  description = "CIDR blocks allowed to reach SSH."
+  description = "CIDR blocks allowed to reach SSH (port 22)."
   type        = list(string)
 }
 
 variable "ami_id" {
-  description = "AMI override. Empty uses the latest Ubuntu 26.04 LTS."
+  description = "AMI override. Empty uses the latest Ubuntu 26.04 LTS for the instance's architecture."
+  type        = string
+  default     = ""
+}
+
+variable "subnet_id" {
+  description = "Subnet to launch the host into. Empty picks the first default-VPC subnet."
   type        = string
   default     = ""
 }
@@ -50,12 +37,12 @@ variable "root_volume_size" {
 }
 
 variable "bucket_name" {
-  description = "S3 bucket name for uploads + db-backups."
+  description = "S3 bucket name for uploads + db-backups (globally unique)."
   type        = string
 }
 
 variable "backup_retention_days" {
-  description = "Retention for objects under db-backups/."
+  description = "Retention for objects under the db-backups/ prefix."
   type        = number
   default     = 30
 }
