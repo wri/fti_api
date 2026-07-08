@@ -13,7 +13,7 @@ terraform {
   # Native S3 locking (use_lockfile) — no DynamoDB. Create the bucket first via
   # ./remote-state.
   backend "s3" {
-    bucket       = "otp-wri-terraform-state"
+    bucket       = "otp-wri-tf-state"
     key          = "terraform.tfstate"
     region       = "us-east-1"
     encrypt      = true
