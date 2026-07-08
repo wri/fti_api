@@ -1,7 +1,7 @@
 variable "region" {
   description = "Region the state bucket lives in. Holds state for all environments regardless of where their resources run."
   type        = string
-  default     = "eu-central-1"
+  default     = "us-east-1"
 }
 
 variable "bucket_name" {
