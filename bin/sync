@@ -60,7 +60,7 @@ end
 def sync_files(target)
   host = target_host(target)
   dir = "/var/www/otp-api/shared/uploads"
-  push = "rsync -az --rsync-path=#{q("mkdir -p #{dir} && rsync")} -e #{q(SSH)} #{dir}/ #{user}@#{host}:#{dir}/"
+  push = "rsync -avz -e #{q(SSH)} #{dir}/ #{user}@#{host}:#{dir}/"
   run "#{SSH} -A #{user}@#{prod} #{q(push)}"
 end
 
