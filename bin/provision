@@ -18,9 +18,17 @@ install_ufw = ENV["UFW"] != "false"
 install_letsencrypt = ENV["LETSENCRYPT"] != "false"
 root_access = ENV["ROOT_ACCESS"]
 
+# Enable HTTP Basic auth by default everywhere except production. Override with
+# AUTH_BASIC=true|false. The password is read from the local environment and
+# never leaves this machine in plaintext (only its apr1 hash is uploaded).
+auth_basic = ENV.fetch("AUTH_BASIC", env == "production" ? "false" : "true") != "false"
+auth_basic_user = ENV["AUTH_BASIC_USER"] || "otp"
+auth_basic_password = ENV["AUTH_BASIC_PASSWORD"]
+
 abort "Please provide SSH_USER" unless user
 abort "Please provide LETSENCRYPT_EMAIL" unless email || !install_letsencrypt
 abort "Please provide #{env.upcase}_HOST" unless host
+abort "Please provide AUTH_BASIC_PASSWORD" if auth_basic && (auth_basic_password.nil? || auth_basic_password.empty?)
 
 ruby_version = File.read(".ruby-version").strip
 api_dir = "/var/www/otp-api"
@@ -52,6 +60,20 @@ sidekiq_service_config = StringIO.new(ERB.new(File.read("./config/server/sidekiq
 otp_portal_post_receive = DeployFrontendTemplate.new("/var/www/otp-portal", user, "otp-portal", rails_env).render
 obs_tool_post_receive = DeployFrontendTemplate.new("/var/www/otp-observations-tool", user, "otp-observations-tool", rails_env).render
 nginx_config = StringIO.new(ERB.new(File.read("./config/server/nginx.conf.erb"), trim_mode: ">").result)
+
+# Build the .htpasswd entry locally. The plaintext password is piped to openssl
+# via stdin so it never appears in a command line, and only the apr1 hash leaves
+# this machine.
+htpasswd_config =
+  if auth_basic
+    hash = IO.popen(["openssl", "passwd", "-apr1", "-stdin"], "r+") do |io|
+      io.puts(auth_basic_password)
+      io.close_write
+      io.read
+    end.to_s.strip
+    abort "Failed to generate .htpasswd entry with openssl" unless $?.success? && !hash.empty?
+    StringIO.new("#{auth_basic_user}:#{hash}\n")
+  end
 
 upgrade_packages = <<~EOF
   sudo apt-get update -qq && sudo apt upgrade -y
@@ -345,6 +367,8 @@ puts "  Ruby version:     #{ruby_version}"
 puts "  Configure UFW:    #{install_ufw ? 'yes' : 'no'}"
 puts "  Let's Encrypt:    #{install_letsencrypt ? 'yes' : 'no'}"
 puts "  Root access step: #{root_access ? 'yes' : 'no'}"
+puts "  Basic auth:       #{auth_basic ? 'yes' : 'no'}"
+puts "  Basic auth user:  #{auth_basic_user}" if auth_basic
 puts "=============================================="
 
 print "Do you want to proceed (yes/no)? "
@@ -392,6 +416,11 @@ Net::SSH.start(host, user) do |ssh|
   puts "Upload Nginx configuration..."
   Net::SCP.upload!(host, user, nginx_config, "/home/#{user}/deploy/otp.conf")
   ssh_exec.call("sudo mv /home/#{user}/deploy/otp.conf /etc/nginx/sites-available/otp.conf")
+  if auth_basic
+    puts "Upload htpasswd..."
+    Net::SCP.upload!(host, user, htpasswd_config, "/home/#{user}/deploy/.htpasswd")
+    ssh_exec.call("sudo mv /home/#{user}/deploy/.htpasswd /etc/nginx/.htpasswd && sudo chown root:www-data /etc/nginx/.htpasswd && sudo chmod 640 /etc/nginx/.htpasswd")
+  end
   puts "Setting up Nginx..."
   ssh_exec.call(setup_nginx)
   puts "Configuring logrotate..."

@@ -32,6 +32,11 @@ server {
   proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/uploads/=/files/;
   proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/bundle/ruby/=/__gems_internal__/;
 
+<% if auth_basic %>
+  auth_basic "Restricted Content";
+  auth_basic_user_file /etc/nginx/.htpasswd;
+<% end %>
+
   client_body_timeout 12;
   client_header_timeout 12;
   keepalive_timeout 15;
@@ -53,6 +58,7 @@ server {
 
   location ~ ^/api(/.*|$) {
     root <%= api_dir %>/current/public;
+    auth_basic off;
     proxy_pass http://api_admin;
     proxy_redirect off;
 
@@ -69,7 +75,14 @@ server {
     alias <%= api_dir %>/current/uploads/;
   }
 
-  location ~ ^/(admin|uploads|private|rails|health_check)(/.*|$) {
+  location = /health_check {
+    root <%= api_dir %>/current/public;
+    auth_basic off;
+    proxy_pass http://api_admin;
+    proxy_redirect off;
+  }
+
+  location ~ ^/(admin|uploads|private|rails)(/.*|$) {
     root <%= api_dir %>/current/public;
 
     proxy_connect_timeout       600;
@@ -87,6 +100,14 @@ server {
     expires max;
     add_header Cache-Control "public, immutable";
   }
+
+<% if auth_basic %>
+  location = /robots.txt {
+    auth_basic off;
+    proxy_pass http://portal;
+    proxy_redirect off;
+  }
+<% end %>
 
   # Angular app
   location /observations-tool {
