@@ -14,16 +14,12 @@ resource "terraform_data" "workspace_guard" {
   }
 }
 
-# Existing default VPC — no custom networking for a single self-hosted host.
-data "aws_vpc" "default" {
-  default = true
-}
+# Per-environment network. This account has no default VPC, so each workspace
+# builds its own VPC + public subnet (otp-staging / otp-production).
+module "network" {
+  source = "./modules/network"
 
-data "aws_subnets" "default" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.default.id]
-  }
+  name = local.name
 }
 
 module "storage" {
@@ -36,8 +32,8 @@ module "compute" {
   source = "./modules/compute"
 
   name                     = local.name
-  vpc_id                   = data.aws_vpc.default.id
-  subnet_id                = var.subnet_id != "" ? var.subnet_id : tolist(data.aws_subnets.default.ids)[0]
+  vpc_id                   = module.network.vpc_id
+  subnet_id                = var.subnet_id != "" ? var.subnet_id : module.network.subnet_id
   instance_type            = var.instance_type
   ami_id                   = var.ami_id
   key_name                 = var.key_name

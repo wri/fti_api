@@ -65,7 +65,7 @@ the `remote-state/` config (which keeps its own state local by design):
 ```bash
 cd infrastructure/remote-state
 terraform init
-terraform apply            # creates the otp-wri-terraform-state bucket
+terraform apply            # creates the otp-wri-tf-state bucket
 ```
 
 The bucket name/region are hard-coded in the `backend "s3"` block (`versions.tf`)

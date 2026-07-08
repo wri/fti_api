@@ -13,5 +13,5 @@ output "bucket_name" {
 }
 
 output "vpc_id" {
-  value = data.aws_vpc.default.id
+  value = module.network.vpc_id
 }

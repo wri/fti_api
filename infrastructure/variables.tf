@@ -25,7 +25,7 @@ variable "ami_id" {
 }
 
 variable "subnet_id" {
-  description = "Subnet to launch the host into. Empty picks the first default-VPC subnet."
+  description = "Subnet to launch the host into. Empty uses the public subnet from the network module."
   type        = string
   default     = ""
 }
