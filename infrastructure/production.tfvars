@@ -1,7 +1,7 @@
-region        = "eu-central-1"
+region        = "us-east-1"
 instance_type = "t4g.large"
 
-# An existing EC2 key pair name in eu-central-1.
+# An existing EC2 key pair name in us-east-1.
 # key_name = "otp-api"
 
 # Lock SSH down to known admin IPs. 0.0.0.0/0 is open to the world — narrow it.

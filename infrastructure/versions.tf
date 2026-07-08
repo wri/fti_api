@@ -15,7 +15,7 @@ terraform {
   backend "s3" {
     bucket       = "otp-wri-terraform-state"
     key          = "terraform.tfstate"
-    region       = "eu-central-1"
+    region       = "us-east-1"
     encrypt      = true
     use_lockfile = true
   }
