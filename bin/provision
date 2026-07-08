@@ -292,6 +292,20 @@ install_aws_cli = <<~EOF
   fi
 EOF
 
+# Two S3 sync cron jobs (Postgres backups + uploads). The instance uses an IAM role
+setup_s3_sync_cron = <<~EOF
+  ( crontab -l 2>/dev/null | sed '/# BEGIN otp-s3-sync/,/# END otp-s3-sync/d'; cat <<'CRON'
+# BEGIN otp-s3-sync
+# Postgres backups -> S3 (autopostgresqlbackup writes /home/#{user}/backup/db on its daily run)
+00 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/ s3://otp-wri-#{env}/db/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+20 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/daily s3://otp-wri-#{env}/db/daily --delete --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+# Uploads -> S3
+30 * * * * /usr/local/bin/aws s3 sync #{api_dir}/shared/uploads/ s3://otp-wri-#{env}/uploads/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+# END otp-s3-sync
+CRON
+  ) | crontab -
+EOF
+
 # Disable root. Use a drop-in, which overrides the /etc/ssh/sshd_config.d/*
 # cloud-init defaults that a sed on the main config would miss.
 disable_root = <<~EOF
@@ -431,6 +445,8 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(install_transifex_cli)
   puts "Install AWS CLI..."
   ssh_exec.call(install_aws_cli)
+  puts "Setup S3 sync cron jobs..."
+  ssh_exec.call(setup_s3_sync_cron)
   puts "Cleanup..."
   ssh_exec.call("rm -rf /home/#{user}/deploy")
 end
