@@ -18,6 +18,10 @@ install_ufw = ENV["UFW"] != "false"
 install_letsencrypt = ENV["LETSENCRYPT"] != "false"
 root_access = ENV["ROOT_ACCESS"]
 
+# A bare IP address can't be issued a Let's Encrypt cert; certbot is still installed but we
+# generate a self-signed cert instead of issuing one, and nginx serves TLS with it.
+self_signed = domain.split(",").size == 1 && domain.match?(/\A\d{1,3}(\.\d{1,3}){3}\z/)
+
 # Enable HTTP Basic auth by default everywhere except production. Override with
 # AUTH_BASIC=true|false. The password is read from the local environment and
 # never leaves this machine in plaintext (only its apr1 hash is uploaded).
@@ -196,15 +200,29 @@ setup_nginx = <<~EOF
   sudo ln -sf /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
 EOF
 
-# Prepare Let's Encrypt. Install certbot from snap (the EFF-recommended channel) rather than
-# apt, which ships an outdated build; the snap bundles the nginx plugin and a renewal timer.
-prepare_letsencrypt = <<~EOF
+# Install certbot from snap (the EFF-recommended channel) rather than apt, which ships an
+# outdated build; the snap bundles the nginx plugin and a renewal timer.
+install_certbot = <<~EOF
   sudo apt-get remove -y certbot python3-certbot-nginx || true;
   sudo apt-get install -y snapd;
   sudo snap install core; sudo snap refresh core;
   snap list certbot >/dev/null 2>&1 || sudo snap install --classic certbot;
   sudo ln -sf /snap/bin/certbot /usr/bin/certbot;
+EOF
+
+# Issue and install a Let's Encrypt certificate into the nginx config.
+issue_certbot = <<~EOF
   sudo certbot --nginx -d #{domain} --non-interactive --agree-tos -m #{email};
+EOF
+
+# A bare IP can't get a Let's Encrypt cert, so generate a self-signed one for nginx to serve.
+# The nginx template renders the ssl_certificate directives when self_signed (see nginx.conf.erb).
+setup_self_signed_cert = <<~EOF
+  sudo install -d -m 755 /etc/nginx/ssl;
+  if [ ! -f /etc/nginx/ssl/self-signed.crt ]; then
+    sudo openssl req -x509 -nodes -newkey rsa:2048 -days 3650 -keyout /etc/nginx/ssl/self-signed.key -out /etc/nginx/ssl/self-signed.crt -subj "/CN=#{domain}" -addext "subjectAltName=IP:#{domain}";
+    sudo chmod 600 /etc/nginx/ssl/self-signed.key;
+  fi
 EOF
 
 setup_capistrano = <<~EOF
@@ -371,6 +389,7 @@ puts "  Let's Encrypt:    #{email}"
 puts "  Ruby version:     #{ruby_version}"
 puts "  Configure UFW:    #{install_ufw ? 'yes' : 'no'}"
 puts "  Let's Encrypt:    #{install_letsencrypt ? 'yes' : 'no'}"
+puts "  TLS certificate:  #{self_signed ? 'self-signed (IP)' : (install_letsencrypt ? "Let's Encrypt" : 'none')}"
 puts "  Root access step: #{root_access ? 'yes' : 'no'}"
 puts "  Basic auth:       #{auth_basic ? 'yes' : 'no'}"
 puts "  Basic auth user:  #{auth_basic_user}" if auth_basic
@@ -430,9 +449,17 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(setup_nginx)
   puts "Configuring logrotate..."
   ssh_exec.call(configure_logrotate)
+  if self_signed
+    puts "Create self-signed certificate (domain is an IP)..."
+    ssh_exec.call(setup_self_signed_cert)
+  end
   if install_letsencrypt
-    puts "Install letsencrypt..."
-    ssh_exec.call(prepare_letsencrypt)
+    puts "Install certbot..."
+    ssh_exec.call(install_certbot)
+    unless self_signed
+      puts "Issue Let's Encrypt certificate..."
+      ssh_exec.call(issue_certbot)
+    end
   end
   puts "Install rvm..."
   ssh_exec.call(install_rvm)

@@ -6,7 +6,20 @@ upstream portal {
   server localhost:5000;
 }
 
+<% if self_signed %>
 server {
+  listen 80;
+  server_name <%= domain %>;
+  return 301 https://$host$request_uri;
+}
+<% end %>
+
+server {
+<% if self_signed %>
+  listen 443 ssl;
+  ssl_certificate     /etc/nginx/ssl/self-signed.crt;
+  ssl_certificate_key /etc/nginx/ssl/self-signed.key;
+<% end %>
   server_name <%= domain.split(",").join(" ") %>;
 
   server_tokens off;
@@ -35,6 +48,11 @@ server {
 <% if auth_basic %>
   auth_basic "Restricted Content";
   auth_basic_user_file /etc/nginx/.htpasswd;
+
+  # Let certbot's ACME HTTP-01 challenge through without basic auth.
+  location ^~ /.well-known/acme-challenge/ {
+    auth_basic off;
+  }
 <% end %>
 
   client_body_timeout 12;
@@ -145,5 +163,6 @@ server {
     rewrite ^(.*)$ /system/maintenance.html break;
   }
 
-  # certbot will install certificates
+  # For a real domain, certbot installs the certificate directives here;
+  # for a bare IP the self-signed ssl_certificate lines above are used instead.
 }
