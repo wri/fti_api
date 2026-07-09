@@ -108,7 +108,10 @@ module V1
     end
 
     def self.apply_includes(records, directives)
-      super.includes(:observation_report, :observation_documents, :translations)
+      result = super
+      return result unless result.respond_to?(:includes)
+
+      result.includes(:observation_report, :observation_documents, :translations)
     end
 
     def validation_status_id
