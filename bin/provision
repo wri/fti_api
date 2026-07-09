@@ -196,9 +196,14 @@ setup_nginx = <<~EOF
   sudo ln -sf /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
 EOF
 
-# Prepare Let's Encrypt
+# Prepare Let's Encrypt. Install certbot from snap (the EFF-recommended channel) rather than
+# apt, which ships an outdated build; the snap bundles the nginx plugin and a renewal timer.
 prepare_letsencrypt = <<~EOF
-  sudo apt-get install -y certbot python3-certbot-nginx;
+  sudo apt-get remove -y certbot python3-certbot-nginx || true;
+  sudo apt-get install -y snapd;
+  sudo snap install core; sudo snap refresh core;
+  snap list certbot >/dev/null 2>&1 || sudo snap install --classic certbot;
+  sudo ln -sf /snap/bin/certbot /usr/bin/certbot;
   sudo certbot --nginx -d #{domain} --non-interactive --agree-tos -m #{email};
 EOF
 
