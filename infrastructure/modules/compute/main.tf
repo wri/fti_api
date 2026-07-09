@@ -123,6 +123,14 @@ resource "aws_instance" "app" {
   vpc_security_group_ids = [aws_security_group.app.id]
   iam_instance_profile   = aws_iam_instance_profile.app.name
 
+  disable_api_termination = var.termination_protection
+
+  # Require IMDSv2: stops SSRF-style theft of the instance role's credentials
+  # from the metadata endpoint.
+  metadata_options {
+    http_tokens = "required"
+  }
+
   root_block_device {
     volume_type           = "gp3"
     volume_size           = var.root_volume_size
@@ -130,8 +138,10 @@ resource "aws_instance" "app" {
     encrypted             = true
 
     tags = {
-      Name     = "${var.name}-root"
-      Snapshot = "true"
+      Name = "${var.name}-root"
+      # Environment-scoped value: DLM target_tags match account+region-wide, so a
+      # bare "true" would make each env's policy snapshot the other env's volume.
+      Snapshot = var.name
     }
   }
 
@@ -156,8 +166,8 @@ resource "aws_eip" "app" {
 }
 
 # -----------------------------------------------------------------------------
-# Automated EBS snapshots via Data Lifecycle Manager. Targets volumes tagged
-# Snapshot=true (the host's root volume).
+# Automated EBS snapshots via Data Lifecycle Manager. Targets this environment's
+# volumes via Snapshot=<name> (the host's root volume).
 # -----------------------------------------------------------------------------
 data "aws_iam_policy_document" "dlm_assume" {
   statement {
@@ -184,13 +194,13 @@ resource "aws_iam_role_policy_attachment" "dlm" {
 resource "aws_dlm_lifecycle_policy" "ebs" {
   description        = "${var.name} automated EBS snapshots"
   execution_role_arn = aws_iam_role.dlm.arn
-  state              = "ENABLED"
+  state              = var.enable_snapshots ? "ENABLED" : "DISABLED"
 
   policy_details {
     resource_types = ["VOLUME"]
 
     target_tags = {
-      Snapshot = "true"
+      Snapshot = var.name
     }
 
     schedule {

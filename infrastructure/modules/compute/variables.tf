@@ -40,9 +40,21 @@ variable "root_volume_size" {
   default     = 100
 }
 
+variable "termination_protection" {
+  description = "Protect the instance from accidental termination."
+  type        = bool
+  default     = false
+}
+
 variable "bucket_access_policy_arn" {
   description = "IAM policy ARN (from the storage module) granting S3 access."
   type        = string
+}
+
+variable "enable_snapshots" {
+  description = "Whether the DLM snapshot policy is ENABLED. False keeps the policy (and IAM role) but sets it to DISABLED."
+  type        = bool
+  default     = true
 }
 
 variable "snapshot_retain_count" {
