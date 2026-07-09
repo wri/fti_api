@@ -7,10 +7,12 @@ instance_type = "t4g.large"
 # Lock SSH down to known admin IPs. 0.0.0.0/0 is open to the world — narrow it.
 ssh_allowed_cidrs = ["0.0.0.0/0"]
 
-# Optional: pin a specific subnet. Empty uses the first default-VPC subnet.
+# Optional: pin a specific subnet. Empty uses the network module's public subnet.
 # subnet_id = "subnet-0123456789abcdef0"
 
-root_volume_size = 100
+root_volume_size       = 100
+termination_protection = true
 
 bucket_name           = "otp-wri-production"
+enable_snapshots      = true
 snapshot_retain_count = 14

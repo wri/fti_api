@@ -11,7 +11,7 @@ Three layers, each with one job:
 
 | Layer | Owns | Where |
 | --- | --- | --- |
-| **Terraform** | Cloud resources: EC2, Elastic IP, security group, IAM instance profile, S3 bucket, EBS snapshot policy | this directory |
+| **Terraform** | Cloud resources: VPC + public subnet, EC2, Elastic IP, security group, IAM instance profile, S3 bucket, EBS snapshot policy | this directory |
 | **`bin/provision`** | Host OS/software: swap, fail2ban, ufw, Postgres+PostGIS, Redis, nginx, certbot, RVM/Ruby, nvm/node, aws-cli, puma/sidekiq systemd units | repo root |
 | **Capistrano** | Application deploys | `config/deploy*` |
 
@@ -23,8 +23,9 @@ Postgres and Redis run **self-hosted on each host** (no RDS / ElastiCache).
 infrastructure/
   remote-state/     # creates the S3 bucket that holds Terraform state (run once)
   modules/
+    network/        # per-env VPC + single public subnet + IGW (no default VPC in this account)
     compute/        # EC2 + EIP + security group + IAM instance profile + DLM EBS snapshots
-    storage/        # one S3 bucket (uploads/ + db-backups/ prefixes) + IAM access policy
+    storage/        # one S3 bucket (uploads/ + db/ prefixes) + IAM access policy
   main.tf           # module wiring — shared by all environments
   variables.tf
   outputs.tf
@@ -39,9 +40,9 @@ the state file (Terraform namespaces it automatically) and the `*.tfvars` you pa
 `terraform.workspace` drives the resource-name prefix (`otp-<workspace>`) and
 the `Environment` tag, so there's nothing per-env to duplicate.
 
-The host launches into the account's **default VPC** (looked up via data source);
-no custom VPC is created. Pin a specific subnet with `subnet_id` in the tfvars if
-you don't want the first default-VPC subnet.
+The account has **no default VPC**, so each workspace builds its own minimal
+network (`modules/network`): a VPC with one public subnet routed through an
+internet gateway. Pin a different subnet with `subnet_id` in the tfvars if needed.
 
 > A guard rail (`terraform_data.workspace_guard`) refuses to run in the `default`
 > workspace or any name other than `staging`/`production`, so a forgotten
@@ -121,7 +122,8 @@ Production and staging already exist. Running `terraform apply` as-is creates
    terraform workspace select production
    terraform import -var-file=production.tfvars module.compute.aws_instance.app i-0123456789abcdef0
    terraform import -var-file=production.tfvars module.compute.aws_eip.app eipalloc-0123456789abcdef0
-   # the default VPC/subnet are read-only data sources, so nothing to import there
+   # if the live host sits in an existing VPC, import that too (module.network.aws_vpc.main
+   # etc.) or set subnet_id in the tfvars and remove the network module for that env
    ```
    Run `terraform plan` afterwards and reconcile `terraform.tfvars` until the plan
    shows **no destructive changes**.
@@ -135,17 +137,22 @@ The bucket is created but the app must opt in:
   is already there) and point Active Storage / CarrierWave at the bucket's
   `uploads/` prefix. The host uses its instance-profile IAM role, so **no static
   AWS keys** are required.
-- **DB backups** — the host-side `aws s3 sync` cron should target
-  `s3://otp-wri-production/db-backups/` (production only). Retention/pruning is
-  handled host-side by the backup script (no S3 lifecycle rule).
+- **DB backups** — the host-side `aws s3 sync` cron (set up by `bin/provision`)
+  targets `s3://otp-wri-<env>/db/`. Retention/pruning of current objects is
+  handled host-side by the backup script; a bucket lifecycle rule expires
+  noncurrent versions after 30 days so `sync --delete` churn doesn't accumulate.
 
 ## Backups & snapshots
 
 - **EBS snapshots** — Data Lifecycle Manager snapshots the host's root volume
-  (tagged `Snapshot = true`) daily, retaining `snapshot_retain_count`
-  (prod 14 / staging 7). Block-level protection for the self-hosted Postgres data.
-- **Logical DB dumps** — the existing `aws s3 sync` cron under `db-backups/`
-  (production). The two are complementary.
+  daily, retaining `snapshot_retain_count` (prod 14). Staging sets
+  `enable_snapshots = false`, which keeps the DLM policy but in `DISABLED` state.
+  The volume is tagged `Snapshot = otp-<env>` and each env's DLM policy targets
+  only that value (DLM matches account+region-wide, so a shared tag would
+  cross-snapshot both envs). Block-level protection for the self-hosted Postgres
+  data.
+- **Logical DB dumps** — the `aws s3 sync` cron under `db/`. The two are
+  complementary.
 
 ## Notes
 

@@ -36,9 +36,21 @@ variable "root_volume_size" {
   default     = 100
 }
 
+variable "termination_protection" {
+  description = "Protect the instance from accidental termination."
+  type        = bool
+  default     = false
+}
+
 variable "bucket_name" {
   description = "S3 bucket name for uploads + db-backups (globally unique)."
   type        = string
+}
+
+variable "enable_snapshots" {
+  description = "Whether the DLM snapshot policy is ENABLED. False keeps the policy but sets it to DISABLED."
+  type        = bool
+  default     = true
 }
 
 variable "snapshot_retain_count" {

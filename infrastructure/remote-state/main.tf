@@ -16,14 +16,23 @@ resource "aws_s3_bucket_versioning" "state" {
   }
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "state" {
+# Keep the rollback window bounded: old state versions expire after 90 days
+# instead of accumulating forever.
+resource "aws_s3_bucket_lifecycle_configuration" "state" {
   bucket = aws_s3_bucket.state.id
 
   rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
+    id     = "expire-noncurrent-versions"
+    status = "Enabled"
+
+    filter {}
+
+    noncurrent_version_expiration {
+      noncurrent_days = 90
     }
   }
+
+  depends_on = [aws_s3_bucket_versioning.state]
 }
 
 resource "aws_s3_bucket_public_access_block" "state" {

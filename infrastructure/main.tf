@@ -39,6 +39,8 @@ module "compute" {
   key_name                 = var.key_name
   ssh_allowed_cidrs        = var.ssh_allowed_cidrs
   root_volume_size         = var.root_volume_size
+  termination_protection   = var.termination_protection
   bucket_access_policy_arn = module.storage.access_policy_arn
+  enable_snapshots         = var.enable_snapshots
   snapshot_retain_count    = var.snapshot_retain_count
 }
