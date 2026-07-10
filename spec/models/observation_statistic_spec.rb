@@ -101,10 +101,10 @@ RSpec.describe ObservationStatistic, type: :model do
       add_history(observations[0], "Created", "2020-01-01")
       add_history(observations[1], "Created", "2020-01-01", country: other_country)
 
-      result = query(country_id_eq: country.id.to_s)
+      result = query(by_country: country.id.to_s)
       expect(result.map(&:country_id).uniq).to contain_exactly(country.id)
 
-      result = query(country_id_eq: "null")
+      result = query(by_country: "null")
       expect(result.map(&:country_id).uniq).to eq([nil])
       expect(row_for(result, "2020-01-10", nil)).to have_attributes(created: 2, total_count: 2)
     end

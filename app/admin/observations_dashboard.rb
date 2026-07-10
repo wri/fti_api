@@ -7,7 +7,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
 
   actions :index
 
-  filter :country_id,
+  filter :by_country,
     as: :select,
     label: proc { I18n.t("activerecord.models.country.one") },
     collection: -> {
@@ -19,19 +19,21 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
   filter :fmu_forest_type, as: :select, collection: -> { ForestType.select_collection }
   filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :subcategory, as: :select, collection: -> { Subcategory.by_name_asc }
-  filter :severity_level, as: :select, collection: -> { [
-    [I18n.t("filters.unknown"), 0],
-    [I18n.t("filters.low"), 1],
-    [I18n.t("filters.medium"), 2],
-    [I18n.t("filters.high"), 3]
-  ] }
+  filter :severity_level, as: :select, collection: -> {
+    [
+      [I18n.t("filters.unknown"), 0],
+      [I18n.t("filters.low"), 1],
+      [I18n.t("filters.medium"), 2],
+      [I18n.t("filters.high"), 3]
+    ]
+  }
   filter :hidden
   filter :is_active
   filter :date
 
   dependent_filters do
     {
-      country_id: {
+      by_country: {
         fmu_forest_type: Fmu.distinct.pluck(:country_id, :forest_type).map { |c, f| [c, ForestType::TYPES[f][:index]] },
         operator_id: Operator.pluck(:country_id, :id)
       },
@@ -104,7 +106,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     column :published_modified
     column :published_all
     column :total_count, sortable: false
-    chart_collection = if params.dig(:q, :country_id_eq).present?
+    chart_collection = if params.dig(:q, :by_country).present?
       collection
     else
       collection.select { |r| r.country_id.nil? }
