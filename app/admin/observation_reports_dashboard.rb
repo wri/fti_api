@@ -7,7 +7,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
 
   actions :index
 
-  filter :country_id,
+  filter :by_country,
     as: :select,
     label: -> { I18n.t("activerecord.models.country.one") },
     collection: -> {
@@ -23,7 +23,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
 
   dependent_filters do
     {
-      country_id: {
+      by_country: {
         observer_id: Observer.joins(:countries).distinct.pluck(:country_id, :id)
       }
     }
@@ -46,7 +46,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
         res.send("o_#{o.id}") || "0"
       end
     end
-    chart_collection = if params.dig(:q, :country_id_eq).present?
+    chart_collection = if params.dig(:q, :by_country).present?
       collection
     else
       collection.select { |r| r.country_id.nil? }

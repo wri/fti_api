@@ -34,6 +34,26 @@ RSpec.describe Admin::ObservationReportsDashboardsController, type: :controller 
     it { is_expected.to be_successful }
   end
 
+  describe "GET index with all countries filter" do
+    before do
+      ObservationReportStatistic.generate_for_country_and_day(nil, 3.days.ago.to_date, true)
+      get :index, params: {q: {by_country: "null"}}
+    end
+
+    it "keeps the option selected, shows it in current filters and returns only all countries rows" do
+      doc = Nokogiri::HTML(response.body)
+
+      expect(doc.css("#q_by_country option[selected]").map { |o| o["value"] }).to eq(["null"])
+
+      current_filters = doc.css("#search_status_sidebar_section li").map { |li| li.text.squish }
+      expect(current_filters).to include("Country equals All Countries")
+
+      rows = doc.css(".index_table tbody tr")
+      expect(rows).to be_present
+      expect(rows).to all(satisfy { |row| row.text.include?("All Countries") })
+    end
+  end
+
   describe "GET index with .csv format" do
     before do
       get :index, format: "csv"
