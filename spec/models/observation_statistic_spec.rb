@@ -4,16 +4,21 @@ require "rails_helper"
 
 RSpec.describe ObservationStatistic, type: :model do
   describe ".query_dashboard_report" do
-    let(:country) { create(:country) }
-    let(:other_country) { create(:country) }
-
-    # midday timestamp, as the query counts a history from the day after its date
-    def add_history(observation, status, date)
-      create(:observation_history, observation: observation, validation_status: status, observation_updated_at: Time.zone.parse("#{date} 12:00"))
+    # observations are expensive to create and the query only reads observation_histories,
+    # so prebuild them once and let examples create just the history rows
+    before(:all) do
+      @country = create(:country)
+      @other_country = create(:country)
+      @observations = create_list(:observation, 5, country: @country)
     end
 
-    def observation_with_history(status, date, country: self.country)
-      create(:observation, country: country).tap { |obs| add_history(obs, status, date) }
+    let(:country) { @country }
+    let(:other_country) { @other_country }
+    let(:observations) { @observations }
+
+    # midday timestamp, as the query counts a history from the day after its date
+    def add_history(observation, status, date, country: observation.country)
+      create(:observation_history, observation: observation, country: country, validation_status: status, observation_updated_at: Time.zone.parse("#{date} 12:00"))
     end
 
     def query(search = {})
@@ -27,12 +32,12 @@ RSpec.describe ObservationStatistic, type: :model do
     end
 
     it "returns counts per validation status as of the end date, with 0 for statuses without observations" do
-      observation_with_history("Created", "2020-01-01")
-      obs = observation_with_history("Created", "2020-01-01")
-      add_history(obs, "Approved", "2020-01-05")
-      observation_with_history("Published (no comments)", "2020-01-01")
-      observation_with_history("Published (not modified)", "2020-01-01")
-      observation_with_history("Published (modified)", "2020-01-01")
+      add_history(observations[0], "Created", "2020-01-01")
+      add_history(observations[1], "Created", "2020-01-01")
+      add_history(observations[1], "Approved", "2020-01-05")
+      add_history(observations[2], "Published (no comments)", "2020-01-01")
+      add_history(observations[3], "Published (not modified)", "2020-01-01")
+      add_history(observations[4], "Published (modified)", "2020-01-01")
 
       row = row_for(query, "2020-01-10", country.id)
 
@@ -50,8 +55,8 @@ RSpec.describe ObservationStatistic, type: :model do
     end
 
     it "returns a rollup row aggregating all countries" do
-      observation_with_history("Created", "2020-01-01")
-      observation_with_history("Created", "2020-01-01", country: other_country)
+      add_history(observations[0], "Created", "2020-01-01")
+      add_history(observations[1], "Created", "2020-01-01", country: other_country)
 
       result = query
 
@@ -61,10 +66,10 @@ RSpec.describe ObservationStatistic, type: :model do
     end
 
     it "filters by the published all status combining all published statuses" do
-      observation_with_history("Published (no comments)", "2020-01-01")
-      observation_with_history("Published (not modified)", "2020-01-01")
-      observation_with_history("Published (modified)", "2020-01-01")
-      observation_with_history("Created", "2020-01-01")
+      add_history(observations[0], "Published (no comments)", "2020-01-01")
+      add_history(observations[1], "Published (not modified)", "2020-01-01")
+      add_history(observations[2], "Published (modified)", "2020-01-01")
+      add_history(observations[3], "Created", "2020-01-01")
 
       row = row_for(query(validation_status_eq: "789"), "2020-01-10", country.id)
 
@@ -72,24 +77,23 @@ RSpec.describe ObservationStatistic, type: :model do
     end
 
     it "filters by operator" do
-      obs = observation_with_history("Created", "2020-01-01")
-      observation_with_history("Created", "2020-01-01")
+      add_history(observations[0], "Created", "2020-01-01")
+      add_history(observations[1], "Created", "2020-01-01")
 
-      row = row_for(query(operator_id_eq: obs.operator_id.to_s), "2020-01-10", country.id)
+      row = row_for(query(operator_id_eq: observations[0].operator_id.to_s), "2020-01-10", country.id)
 
-      expect(row).to have_attributes(created: 1, total_count: 1, operator_id: obs.operator_id)
+      expect(row).to have_attributes(created: 1, total_count: 1, operator_id: observations[0].operator_id)
     end
 
     it "does not count soft deleted histories" do
-      obs = create(:observation, country: country)
-      add_history(obs, "Created", "2020-01-01").destroy
+      add_history(observations[0], "Created", "2020-01-01").destroy
 
       expect(row_for(query, "2020-01-10", country.id)).to be_nil
     end
 
     it "filters by country, including the all countries option" do
-      observation_with_history("Created", "2020-01-01")
-      observation_with_history("Created", "2020-01-01", country: other_country)
+      add_history(observations[0], "Created", "2020-01-01")
+      add_history(observations[1], "Created", "2020-01-01", country: other_country)
 
       result = query(country_id_eq: country.id.to_s)
       expect(result.map(&:country_id).uniq).to contain_exactly(country.id)
@@ -100,7 +104,7 @@ RSpec.describe ObservationStatistic, type: :model do
     end
 
     it "filters by date, counting the latest status of each observation as of each date" do
-      observations = Array.new(4) { observation_with_history("Created", "2020-01-01") }
+      observations[0..3].each { |obs| add_history(obs, "Created", "2020-01-01") }
       add_history(observations[3], "Approved", "2020-01-04")
       observations[0..2].each { |obs| add_history(obs, "Approved", "2020-01-07") }
       add_history(observations[0], "Rejected", "2020-01-15")
@@ -115,8 +119,8 @@ RSpec.describe ObservationStatistic, type: :model do
     end
 
     it "returns the same counts for a date regardless of the date range" do
-      observation_with_history("Created", "2020-01-01")
-      observation_with_history("Approved", "2020-01-05")
+      add_history(observations[0], "Created", "2020-01-01")
+      add_history(observations[1], "Approved", "2020-01-05")
 
       row_from_full_range = row_for(query, "2020-01-06", country.id)
       row_from_boundary_range = row_for(query(date_gteq: "2020-01-06"), "2020-01-06", country.id)
