@@ -87,8 +87,14 @@ RSpec.describe ObservationStatistic, type: :model do
 
     it "does not count soft deleted histories" do
       add_history(observations[0], "Created", "2020-01-01").destroy
+      add_history(observations[1], "Created", "2020-01-01")
+      add_history(observations[1], "Approved", "2020-01-05").destroy
 
-      expect(row_for(query, "2020-01-10", country.id)).to be_nil
+      result = query
+
+      # deleting the latest history hides the observation instead of reverting it
+      expect(row_for(result, "2020-01-02", country.id)).to have_attributes(created: 1, total_count: 1)
+      expect(row_for(result, "2020-01-10", country.id)).to be_nil
     end
 
     it "filters by country, including the all countries option" do
