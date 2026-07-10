@@ -19,12 +19,12 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
   filter :fmu_forest_type, as: :select, collection: -> { ForestType.select_collection }
   filter :category, as: :select, collection: -> { Category.by_name_asc }
   filter :subcategory, as: :select, collection: -> { Subcategory.by_name_asc }
-  filter :severity_level, as: :select, collection: [
+  filter :severity_level, as: :select, collection: -> { [
     [I18n.t("filters.unknown"), 0],
     [I18n.t("filters.low"), 1],
     [I18n.t("filters.medium"), 2],
     [I18n.t("filters.high"), 3]
-  ]
+  ] }
   filter :hidden
   filter :is_active
   filter :date
