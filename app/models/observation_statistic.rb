@@ -64,6 +64,13 @@ class ObservationStatistic < ApplicationRecord
     total_count: nil
   }.freeze
 
+  # filter form sends "null" for the All Countries option, define country_id as
+  # a string ransacker so the value round trips back to the form unchanged;
+  # the search object never runs the query, it only keeps the filter form state
+  ransacker :country_id do |parent|
+    parent.table[:country_id]
+  end
+
   # just to hack around active admin
   def self.ransackable_scopes(auth_object = nil)
     [:by_country]
