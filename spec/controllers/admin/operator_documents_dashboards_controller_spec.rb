@@ -30,6 +30,17 @@ RSpec.describe Admin::ProducerDocumentsDashboardsController, type: :controller d
     it { is_expected.to be_successful }
   end
 
+  describe "GET index with all countries filter" do
+    before { get :index, params: {q: {by_country: "null"}} }
+
+    it "keeps the option selected and shows it in current filters" do
+      doc = Nokogiri::HTML(response.body)
+      expect(doc.css("#q_by_country option[selected]").map { |o| o["value"] }).to eq(["null"])
+      current_filters = doc.css("#search_status_sidebar_section li").map { |li| li.text.squish }
+      expect(current_filters).to include("Country equals All Countries")
+    end
+  end
+
   describe "GET index with .csv format" do
     before do
       get :index, format: "csv"
