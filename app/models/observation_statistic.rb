@@ -61,7 +61,7 @@ class ObservationStatistic < ApplicationRecord
   def self.query_dashboard_report(search = {})
     date_from = (search[:date_gteq] || Observation.order(:created_at).first.created_at).to_date.to_fs(:db)
     date_to = (search[:date_lteq] || Time.zone.today).to_date.to_fs(:db)
-    country_id = search[:by_country]
+    country_id = search[:country_id_eq]
     operator_id = search[:operator_id_eq]
     subcategory_id = search[:subcategory_id_eq]
     category_id = search[:category_id_eq]
@@ -72,7 +72,7 @@ class ObservationStatistic < ApplicationRecord
     is_active = search[:is_active_eq]
     hidden = search[:hidden_eq]
 
-    validation_status_filter = (validation_status.to_i === 789) ? "7,8,9" : validation_status
+    validation_status_filter = (validation_status.to_i === 789) ? [7, 8, 9] : validation_status
 
     filters = []
     if country_id.nil? || country_id == "null"
@@ -121,23 +121,42 @@ class ObservationStatistic < ApplicationRecord
           ) as observations_by_date on 1=1
         where deleted_at is null #{"AND " + filters_sql if filters_sql.present?}
         group by date, validation_status, rollup(country_id)
+      ),
+      pivoted as (
+        select
+          date,
+          country_id,
+          coalesce(sum(total_count) filter (where validation_status = 0), 0) as created,
+          coalesce(sum(total_count) filter (where validation_status IN (1, 10)), 0) as ready_for_qc,
+          coalesce(sum(total_count) filter (where validation_status IN (2, 11)), 0) as qc_in_progress,
+          coalesce(sum(total_count) filter (where validation_status = 3), 0) as approved,
+          coalesce(sum(total_count) filter (where validation_status = 4), 0) as rejected,
+          coalesce(sum(total_count) filter (where validation_status = 5), 0) as needs_revision,
+          coalesce(sum(total_count) filter (where validation_status = 6), 0) as ready_for_publication,
+          coalesce(sum(total_count) filter (where validation_status = 7), 0) as published_no_comments,
+          coalesce(sum(total_count) filter (where validation_status = 8), 0) as published_not_modified,
+          coalesce(sum(total_count) filter (where validation_status = 9), 0) as published_modified,
+          coalesce(sum(total_count) filter (where validation_status IN (7, 8, 9)), 0) as published_all,
+          coalesce(sum(total_count), 0) as total_count
+        from grouped
+        group by date, country_id
       )
       select
         date,
         country_id,
         #{operator_id.presence || "null"} as operator_id,
-        sum(total_count) filter (where validation_status = 0) as created,
-        sum(total_count) filter (where validation_status IN (1, 10)) as ready_for_qc,
-        sum(total_count) filter (where validation_status IN (2, 11)) as qc_in_progress,
-        sum(total_count) filter (where validation_status = 3) as approved,
-        sum(total_count) filter (where validation_status = 4) as rejected,
-        sum(total_count) filter (where validation_status = 5) as needs_revision,
-        sum(total_count) filter (where validation_status = 6) as ready_for_publication,
-        sum(total_count) filter (where validation_status = 7) as published_no_comments,
-        sum(total_count) filter (where validation_status = 8) as published_not_modified,
-        sum(total_count) filter (where validation_status = 9) as published_modified,
-        sum(total_count) filter (where validation_status IN (7,8, 9)) as published_all,
-        sum(total_count) as total_count,
+        created,
+        ready_for_qc,
+        qc_in_progress,
+        approved,
+        rejected,
+        needs_revision,
+        ready_for_publication,
+        published_no_comments,
+        published_not_modified,
+        published_modified,
+        published_all,
+        total_count,
         null as validation_status,
         #{severity_level.presence || "null"} as severity_level,
         #{subcategory_id.presence || "null"} as subcategory_id,
@@ -149,17 +168,22 @@ class ObservationStatistic < ApplicationRecord
       from (
         select
           *,
-          LAG(total_count,1) OVER (
+          lag(array[created, ready_for_qc, qc_in_progress, approved, rejected, needs_revision,
+            ready_for_publication, published_no_comments, published_not_modified,
+            published_modified, total_count]) over (
             partition by country_id
-            ORDER BY date
-          ) prev_total
-          from grouped
-      ) as total_c
+            order by date
+          ) as prev_counts
+        from pivoted
+      ) as with_prev
       where
-        (prev_total is null or prev_total != total_count or date = :date_to or date = :date_from)
+        (prev_counts is null
+          or prev_counts <> array[created, ready_for_qc, qc_in_progress, approved, rejected, needs_revision,
+            ready_for_publication, published_no_comments, published_not_modified,
+            published_modified, total_count]
+          or date = :date_to or date = :date_from)
         AND (#{(country_id.nil? || country_id == "null") ? "1=1" : "country_id is not null"})
         AND (#{(country_id == "null") ? "country_id is null" : "1=1"})
-      group by date, country_id
       order by date desc, country_id asc nulls first
     SQL
 
