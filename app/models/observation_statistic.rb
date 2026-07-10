@@ -64,19 +64,12 @@ class ObservationStatistic < ApplicationRecord
     total_count: nil
   }.freeze
 
-  # filter form sends "null" for the All Countries option, define country_id as
-  # a string ransacker so the value round trips back to the form unchanged;
-  # the search object never runs the query, it only keeps the filter form state
-  ransacker :country_id do |parent|
-    parent.table[:country_id]
-  end
-
-  # just to hack around active admin
   def self.ransackable_scopes(auth_object = nil)
     [:by_country]
   end
 
-  # just to hack around active admin, does not have to filter by country
+  # does not filter, the search object only keeps the filter form state,
+  # actual filtering happens in query_dashboard_report
   def self.by_country(country_id = nil)
     all
   end
@@ -84,7 +77,7 @@ class ObservationStatistic < ApplicationRecord
   def self.query_dashboard_report(search = {})
     date_from = (search[:date_gteq] || Observation.order(:created_at).first.created_at).to_date.to_fs(:db)
     date_to = (search[:date_lteq] || Time.zone.today).to_date.to_fs(:db)
-    country_id = search[:country_id_eq]
+    country_id = search[:by_country]
     operator_id = search[:operator_id_eq]
     subcategory_id = search[:subcategory_id_eq]
     category_id = search[:category_id_eq]
