@@ -10,9 +10,9 @@ ssh_allowed_cidrs = ["0.0.0.0/0"]
 # Optional: pin a specific subnet. Empty uses the network module's public subnet.
 # subnet_id = "subnet-0123456789abcdef0"
 
-root_volume_size       = 100
+root_volume_size       = 120
 termination_protection = true
 
 bucket_name           = "otp-wri-production"
 enable_snapshots      = true
-snapshot_retain_count = 14
+snapshot_retain_count = 7
