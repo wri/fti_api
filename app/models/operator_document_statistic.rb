@@ -20,53 +20,16 @@
 #  updated_at                          :datetime         not null
 #
 class OperatorDocumentStatistic < ApplicationRecord
-  belongs_to :country, optional: true
+  include DailyStatistic
+
   belongs_to :required_operator_document_group, optional: true
 
   enum :fmu_forest_type, ForestType::TYPES_WITH_CODE
 
-  validates :date, presence: true
   validates :date, uniqueness: {scope: [:country_id, :required_operator_document_group_id, :fmu_forest_type, :document_type]}
 
-  def self.from_date(date)
-    date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
-    from_date_sql = where("date > ?", date_obj.to_fs(:db)).to_sql
-    first_rows_sql = at_date(date_obj).to_sql
-
-    from("(#{from_date_sql} UNION #{first_rows_sql}) as operator_document_statistics")
-  end
-
-  def self.at_date(date)
-    return none if date.blank?
-
-    date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
-
-    query = <<~SQL
-      (select
-        id,
-        :date_obj::date as date,
-        country_id,
-        required_operator_document_group_id,
-        fmu_forest_type,
-        document_type,
-        valid_count,
-        invalid_count,
-        pending_count,
-        not_provided_count,
-        not_required_count,
-        expired_count,
-        created_at,
-        updated_at
-       from
-       (select row_number() over (partition by country_id, required_operator_document_group_id, fmu_forest_type, document_type order by date desc), *
-        from operator_document_statistics ods
-        where date <= :date_obj
-       ) as stats_by_date
-       where stats_by_date.row_number = 1
-      ) as operator_document_statistics
-    SQL
-
-    OperatorDocumentStatistic.from(ActiveRecord::Base.sanitize_sql([query, {date_obj: date_obj.to_fs(:db)}]))
+  def self.statistic_dimensions
+    %w[country_id required_operator_document_group_id fmu_forest_type document_type]
   end
 
   def self.generate_for_country_and_day(country_id, day, delete_old = false)
@@ -144,41 +107,11 @@ class OperatorDocumentStatistic < ApplicationRecord
     [:by_country, :by_required_operator_document_group]
   end
 
-  def self.by_country(country_id)
-    return all if country_id.nil?
-    return where(country_id: nil) if country_id == "null"
-
-    where(country_id: country_id)
-  end
-
   def self.by_required_operator_document_group(*group_id)
     where(required_operator_document_group_id: group_id.map { |c| (c === "null") ? nil : c })
   end
 
-  def previous_stat
-    OperatorDocumentStatistic.where(
-      country_id: country_id,
-      fmu_forest_type: fmu_forest_type,
-      required_operator_document_group_id: required_operator_document_group_id,
-      document_type: document_type
-    ).where("date < ?", date).order(:date).last
-  end
-
   def valid_and_expired_count
     valid_count + expired_count
-  end
-
-  def country_name
-    return country.name if country.present?
-
-    "All Countries"
-  end
-
-  def ==(other)
-    return false unless other.is_a? self.class
-
-    %w[country_id required_operator_document_group_id fmu_forest_type document_type pending_count expired_count invalid_count valid_count not_provided_count not_required_count].reject do |attr|
-      send(attr) == other.send(attr)
-    end.none?
   end
 end
