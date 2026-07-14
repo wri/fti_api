@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Gracefully drain and stop Sidekiq: wait for the queues to empty, quiet all
+# Sidekiq processes (stop picking up new jobs), wait for running jobs to finish,
+# then stop them. Unlike a plain kill/systemctl stop, no job is cut off mid-run
+# or pushed back to Redis.
+#
+# Run from the app directory:
+#
+#   bundle exec bin/sidekiq-wait                          # development
+#   RAILS_ENV=staging bundle exec bin/sidekiq-wait        # on a server
+#
+# On staging/production the final stop goes through systemd so the unit ends up
+# cleanly stopped; elsewhere the stop signal is sent through Redis.
+
+require "dotenv"
+Dotenv.load
+require "sidekiq/api"
+
+env = ENV["RAILS_ENV"] || "development"
+
+def busy = Sidekiq::Workers.new.size
+def enqueued = Sidekiq::Stats.new.enqueued
+
+def run(cmd)
+  puts "+ #{cmd}"
+  system(cmd) || abort("Command failed")
+end
+
+def wait_until(what)
+  loop do
+    counts = {busy: busy, enqueued: enqueued}
+    break if yield(counts)
+
+    puts "#{what}... #{counts.map { |k, v| "#{k}: #{v}" }.join(", ")}"
+    sleep 5
+  end
+end
+
+abort "No Sidekiq processes running." if Sidekiq::ProcessSet.new.size.zero?
+
+wait_until("waiting for queues to drain") { |c| c[:enqueued].zero? }
+
+puts "Quieting Sidekiq..."
+Sidekiq::ProcessSet.new.each(&:quiet!)
+
+wait_until("waiting for running jobs to finish") { |c| c[:busy].zero? }
+
+# Quieted workers can't process anything, so jobs enqueued by the last running
+# jobs would be stranded; restart Sidekiq and drain again.
+abort "Jobs were enqueued after quieting. Restart Sidekiq and start over." if enqueued > 0
+
+puts "Stopping Sidekiq..."
+if %w[staging production].include?(env)
+  run "sudo systemctl stop sidekiq"
+else
+  Sidekiq::ProcessSet.new.each(&:stop!)
+end
+
+wait_until("waiting for processes to exit") { Sidekiq::ProcessSet.new.size.zero? }
+puts "Sidekiq stopped."

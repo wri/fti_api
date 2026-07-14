@@ -156,11 +156,18 @@ Downtime starts at step 3 and ends at step 5.
    ```
 
 2. Freeze the **old** server — stop background processing and cron so nothing
-   writes to the old DB after the final sync:
+   writes to the old DB after the final sync. Remove the crontab first so no new
+   jobs get scheduled, then drain Sidekiq (waits for queued and running jobs to
+   finish before stopping — a plain `systemctl stop` would push long-running
+   jobs back into the old Redis, where they'd be lost):
 
    ```bash
    crontab -l > cronbackup.txt && crontab -r     # restore with: crontab cronbackup.txt
-   sudo systemctl stop sidekiq puma
+
+   cd /var/www/otp-api/current
+   RAILS_ENV=<staging|production> bundle exec bin/sidekiq-wait
+
+   sudo systemctl stop puma
    ```
 
 3. Turn the old server into a TCP proxy for the new one, so traffic works during
