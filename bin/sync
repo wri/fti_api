@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Copy data from production to another server (separate from the Capistrano db tasks).
+#
+#   bin/sync db <target> [db]   # production DB      -> target
+#   bin/sync files <target>     # production uploads -> target
+#
+# <target> is either "staging" (a convenience alias for STAGING_HOST + fti_api_staging)
+# or a hostname/IP of another box (clones into fti_api_production, e.g. when moving to a
+# new production server). Pass [db] to override the target database name.
+#
+# Everything streams straight from production to the target over a forwarded SSH agent
+# (ssh -A), so nothing lands on this machine.
+
+require "dotenv"
+Dotenv.load
+
+SSH = "ssh -o StrictHostKeyChecking=accept-new"
+
+def user = ENV.fetch("SSH_USER")
+def prod = ENV.fetch("PRODUCTION_HOST")
+
+# POSIX single-quote so a command survives one shell hop verbatim; q(q(..)) nests safely.
+def q(str) = "'#{str.gsub("'") { "'\\''" }}'"
+
+def run(cmd)
+  puts "+ #{cmd}"
+  system("bash", "-c", "set -o pipefail; #{cmd}") || abort("Command failed")
+end
+
+def confirm(msg)
+  print "#{msg} (yes/no)? "
+  abort "Aborted." unless $stdin.gets.to_s.strip.downcase.start_with?("y")
+end
+
+# "staging" is a convenience alias; anything else is a raw host/IP.
+def target_host(target)
+  host = target == "staging" ? ENV.fetch("STAGING_HOST") : target
+  abort "Refusing to target production (#{prod})." if host == prod
+  host
+end
+
+def sync_db(target, db)
+  host = target_host(target)
+  db ||= (target == "staging" ? "fti_api_staging" : "fti_api_production")
+  confirm "Drop and recreate #{db} on #{host} from production?"
+  # Restore runs as the postgres superuser (needed to create the PostGIS extension). The dump
+  # keeps ownership, so pg_restore assigns every object to the deploy user recorded in it (that
+  # role exists on the target); object privileges are dropped (--no-acl).
+  dump = "pg_dump -Fc --no-acl fti_api_production"
+  restore = [
+    "sudo -u postgres dropdb --force --if-exists #{db}",
+    "sudo -u postgres createdb -O #{user} #{db}",
+    "sudo -u postgres pg_restore --no-acl -d #{db}",
+  ].join(" && ")
+  run "#{SSH} -A #{user}@#{prod} #{q("#{dump} | #{SSH} #{user}@#{host} #{q(restore)}")}"
+end
+
+def sync_files(target)
+  host = target_host(target)
+  dir = "/var/www/otp-api/shared/uploads"
+  push = "rsync -avz -e #{q(SSH)} #{dir}/ #{user}@#{host}:#{dir}/"
+  run "#{SSH} -A #{user}@#{prod} #{q(push)}"
+end
+
+case ARGV[0]
+when "db" then sync_db(ARGV[1] || abort("target required"), ARGV[2])
+when "files" then sync_files(ARGV[1] || abort("target required"))
+else abort "Usage: bin/sync db <target> [db] | bin/sync files <target>"
+end

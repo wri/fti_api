@@ -5,7 +5,6 @@
 require "net/ssh"
 require "net/scp"
 require "erb"
-require "highline"
 
 require "dotenv"
 Dotenv.load
@@ -15,12 +14,25 @@ host = ENV[env.upcase + "_HOST"]
 domain = ENV[env.upcase + "_DOMAIN"] || host
 email = ENV["LETSENCRYPT_EMAIL"]
 user = ENV["SSH_USER"]
-install_ufw = ENV["UFW"]
+install_ufw = ENV["UFW"] != "false"
+install_letsencrypt = ENV["LETSENCRYPT"] != "false"
 root_access = ENV["ROOT_ACCESS"]
 
+# A bare IP address can't be issued a Let's Encrypt cert; certbot is still installed but we
+# generate a self-signed cert instead of issuing one, and nginx serves TLS with it.
+self_signed = domain.split(",").size == 1 && domain.match?(/\A\d{1,3}(\.\d{1,3}){3}\z/)
+
+# Enable HTTP Basic auth by default everywhere except production. Override with
+# AUTH_BASIC=true|false. The password is read from the local environment and
+# never leaves this machine in plaintext (only its apr1 hash is uploaded).
+auth_basic = ENV.fetch("AUTH_BASIC", env == "production" ? "false" : "true") != "false"
+auth_basic_user = ENV["AUTH_BASIC_USER"] || "otp"
+auth_basic_password = ENV["AUTH_BASIC_PASSWORD"]
+
 abort "Please provide SSH_USER" unless user
-abort "Please provide LETSENCRYPT_EMAIL" unless email
+abort "Please provide LETSENCRYPT_EMAIL" unless email || !install_letsencrypt
 abort "Please provide #{env.upcase}_HOST" unless host
+abort "Please provide AUTH_BASIC_PASSWORD" if auth_basic && (auth_basic_password.nil? || auth_basic_password.empty?)
 
 ruby_version = File.read(".ruby-version").strip
 api_dir = "/var/www/otp-api"
@@ -53,6 +65,20 @@ otp_portal_post_receive = DeployFrontendTemplate.new("/var/www/otp-portal", user
 obs_tool_post_receive = DeployFrontendTemplate.new("/var/www/otp-observations-tool", user, "otp-observations-tool", rails_env).render
 nginx_config = StringIO.new(ERB.new(File.read("./config/server/nginx.conf.erb"), trim_mode: ">").result)
 
+# Build the .htpasswd entry locally. The plaintext password is piped to openssl
+# via stdin so it never appears in a command line, and only the apr1 hash leaves
+# this machine.
+htpasswd_config =
+  if auth_basic
+    hash = IO.popen(["openssl", "passwd", "-apr1", "-stdin"], "r+") do |io|
+      io.puts(auth_basic_password)
+      io.close_write
+      io.read
+    end.to_s.strip
+    abort "Failed to generate .htpasswd entry with openssl" unless $?.success? && !hash.empty?
+    StringIO.new("#{auth_basic_user}:#{hash}\n")
+  end
+
 upgrade_packages = <<~EOF
   sudo apt-get update -qq && sudo apt upgrade -y
 EOF
@@ -63,19 +89,21 @@ EOF
 
 # Add swap space
 add_swap = <<~EOF
-  sudo fallocate -l 4GB /swapfile;
-  sudo chmod 600 /swapfile;
-  sudo mkswap /swapfile;
-  sudo swapon /swapfile;
-  echo "/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab;
+  if ! sudo swapon --show | grep -q '/swapfile'; then
+    sudo fallocate -l 4GB /swapfile;
+    sudo chmod 600 /swapfile;
+    sudo mkswap /swapfile;
+    sudo swapon /swapfile;
+  fi
+  grep -q '^/swapfile ' /etc/fstab || echo "/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab;
   sudo sysctl vm.swappiness=20;
-  echo "vm.swappiness=20" | sudo tee -a /etc/sysctl.conf
+  grep -q '^vm.swappiness=' /etc/sysctl.conf || echo "vm.swappiness=20" | sudo tee -a /etc/sysctl.conf;
   sudo sysctl vm.vfs_cache_pressure=50;
-  echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.conf
+  grep -q '^vm.vfs_cache_pressure=' /etc/sysctl.conf || echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.conf;
 EOF
 # Add non-root user
 add_user = <<~EOF
-  useradd --create-home --shell /bin/bash #{user};
+  id -u #{user} >/dev/null 2>&1 || useradd --create-home --shell /bin/bash #{user};
   rsync --archive --chown=#{user}:#{user} /root/.ssh /home/#{user};
   echo '#{user} ALL=(ALL:ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/#{user};
   chmod 0440 /etc/sudoers.d/#{user};
@@ -100,35 +128,101 @@ configure_firewall = <<~EOF
 EOF
 
 install_postgres = <<~EOF
-  sudo apt-get install -y postgresql-16-postgis-3 libpq-dev imagemagick
+  sudo apt-get install -y postgresql-18-postgis-3 libpq-dev imagemagick autopostgresqlbackup
 EOF
 
 configure_postgres = <<~EOF
-  sudo -u postgres createuser -s #{user}
-  sudo -u postgres createdb #{user}
+  if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='#{user}'" | grep -q 1; then
+    sudo -u postgres createuser --createdb #{user};
+    sudo -u postgres createdb #{user};
+  fi
+EOF
+
+# Configure autopostgresqlbackup (config: /etc/default/autopostgresqlbackup)
+configure_postgres_backups = <<~EOF
+  mkdir -p /home/#{user}/backup/db;
+  sudo sed -i -E 's|^#?\\s*DBNAMES=.*|DBNAMES="fti_api_#{env}"|' /etc/default/autopostgresqlbackup;
+  sudo sed -i -E 's|^#?\\s*BACKUPDIR=.*|BACKUPDIR="/home/#{user}/backup/db"|' /etc/default/autopostgresqlbackup;
 EOF
 
 install_app_dependencies = <<~EOF
-  sudo apt-get install -y libvips
+  sudo apt-get install -y libvips gdal-bin libgdal-dev
 EOF
 
 install_redis = <<~EOF
   sudo apt-get install -y redis-server
 EOF
 
+# Redis is only used by Sidekiq/background jobs, so tune it for a job queue:
+# - maxmemory + noeviction: cap RAM and reject new writes (backpressure) rather
+#   than dropping queued jobs or OOM-killing Postgres/Puma on this shared host
+# - appendonly: persist queued/scheduled jobs across restarts
+configure_redis = <<~EOF
+  sudo grep -q "OTP Sidekiq settings" /etc/redis/redis.conf || sudo tee -a /etc/redis/redis.conf > /dev/null <<'CONF'
+
+# --- OTP Sidekiq settings ---
+maxmemory 256mb
+maxmemory-policy noeviction
+appendonly yes
+appendfsync everysec
+CONF
+  sudo systemctl enable redis-server;
+  sudo systemctl restart redis-server;
+EOF
+
 install_nginx = <<~EOF
-  sudo apt-get install -y nginx
+  sudo apt-get install -y nginx libnginx-mod-http-brotli-static
+EOF
+
+# Rotate the app's log files, all of which land in the Capistrano shared/log dir:
+#   staging.log/production.log (Rails), puma.access.log/puma.error.log (Puma via
+#   systemd `append:`) and cron.log (whenever, see config/schedule.rb).
+# These writers hold the fd open across a rename, so copytruncate is required.
+# nginx and journald (Sidekiq) rotate themselves, so only this dir needs it.
+configure_logrotate = <<~EOF
+  sudo tee /etc/logrotate.d/otp-api > /dev/null <<'CONF'
+#{api_dir}/shared/log/*.log {
+  daily
+  maxsize 100M
+  rotate 14
+  missingok
+  notifempty
+  compress
+  delaycompress
+  copytruncate
+  su #{user} #{user}
+}
+CONF
 EOF
 
 setup_nginx = <<~EOF
-  sudo rm /etc/nginx/sites-enabled/default;
-  sudo ln -s /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
+  sudo rm -f /etc/nginx/sites-enabled/default;
+  sudo ln -sf /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
 EOF
 
-# Prepare Let's Encrypt
-prepare_letsencrypt = <<~EOF
-  sudo apt-get install -y certbot python3-certbot-nginx;
+# Install certbot from snap (the EFF-recommended channel) rather than apt, which ships an
+# outdated build; the snap bundles the nginx plugin and a renewal timer.
+install_certbot = <<~EOF
+  sudo apt-get remove -y certbot python3-certbot-nginx || true;
+  sudo apt-get install -y snapd;
+  sudo snap install core; sudo snap refresh core;
+  snap list certbot >/dev/null 2>&1 || sudo snap install --classic certbot;
+  sudo ln -sf /snap/bin/certbot /usr/bin/certbot;
+EOF
+
+# Issue and install a Let's Encrypt certificate into the nginx config.
+issue_certbot = <<~EOF
   sudo certbot --nginx -d #{domain} --non-interactive --agree-tos -m #{email};
+EOF
+
+# A bare IP can't get a Let's Encrypt cert, so generate a self-signed one for nginx to serve.
+# The nginx template renders the ssl_certificate directives when self_signed (see nginx.conf.erb).
+setup_self_signed_cert = <<~EOF
+  sudo install -d -m 755 /etc/nginx/ssl;
+  if [ ! -f /etc/nginx/ssl/self-signed.crt ]; then
+    sudo openssl req -x509 -nodes -newkey rsa:2048 -days 3650 -keyout /etc/nginx/ssl/self-signed.key -out /etc/nginx/ssl/self-signed.crt -subj "/CN=#{domain}" -addext "subjectAltName=IP:#{domain}";
+    sudo chmod 600 /etc/nginx/ssl/self-signed.key;
+  fi
 EOF
 
 setup_capistrano = <<~EOF
@@ -137,34 +231,51 @@ setup_capistrano = <<~EOF
 EOF
 
 install_rvm = <<~EOF
-  sudo apt-add-repository -y ppa:rael-gc/rvm;
-  sudo apt-get update;
-  sudo apt-get install -y rvm
+  if [ ! -d /usr/share/rvm ]; then
+    sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+    curl -sSL https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer -o /tmp/rvm-installer
+    curl -sSL https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer.asc -o /tmp/rvm-installer.asc
+    sudo gpg --verify /tmp/rvm-installer.asc /tmp/rvm-installer
+    sudo rvm_path=/usr/share/rvm bash /tmp/rvm-installer master
+    rm -f /tmp/rvm-installer /tmp/rvm-installer.asc
+  fi
   sudo usermod -a -G rvm #{user}
 EOF
 
 install_ruby = <<~EOF
-  . /usr/share/rvm/scripts/rvm;
+  . /etc/profile.d/rvm.sh;
   rvm install #{ruby_version}
 EOF
 
 install_nvm = <<~EOF
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash;
-  cat <<EOT >> ~/.profile
+  if [ ! -s "$HOME/.nvm/nvm.sh" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash;
+    cat <<EOT >> ~/.profile
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
   EOT
+  fi
 EOF
 
 # obs tool needs node 16
-# the rest will be running on node 20
+# the rest will be running on node 24
 install_node = <<~EOF
   . /home/#{user}/.nvm/nvm.sh
   nvm install v16.20.2;
   npm install -g yarn;
-  nvm install v20;
-  nvm alias default 20;
+  nvm install v24;
+  nvm alias default 24;
   npm install -g yarn mjml@4 pm2;
+EOF
+
+# Rotate the pm2-managed frontend logs (~/.pm2/logs/otp-portal-*.log).
+# Applies daemon-wide to any pm2 app; `pm2 install`/`pm2 set` are idempotent.
+configure_pm2_logrotate = <<~EOF
+  . /home/#{user}/.nvm/nvm.sh;
+  pm2 install pm2-logrotate;
+  pm2 set pm2-logrotate:max_size 20M;
+  pm2 set pm2-logrotate:retain 14;
+  pm2 set pm2-logrotate:compress true;
 EOF
 
 setup_puma_service = <<~EOF
@@ -182,16 +293,18 @@ setup_sidekiq_service = <<~EOF
 EOF
 
 setup_frontend_repos = <<~EOF
-  mkdir -p /home/#{user}/git;
-  cd /home/#{user}/git;
-  git init --bare otp-observations-tool.git;
-  git init --bare otp-portal.git;
-  rm /home/#{user}/git/otp-observations-tool.git/hooks/*;
-  rm /home/#{user}/git/otp-portal.git/hooks/*;
-  sudo mkdir -p #{portal_dir};
-  sudo mkdir -p #{obs_tool_dir};
-  sudo chown #{user}:#{user} #{portal_dir};
-  sudo chown #{user}:#{user} #{obs_tool_dir};
+  if [ ! -d /home/#{user}/git ]; then
+    mkdir -p /home/#{user}/git;
+    cd /home/#{user}/git;
+    git init --bare otp-observations-tool.git;
+    git init --bare otp-portal.git;
+    rm /home/#{user}/git/otp-observations-tool.git/hooks/*;
+    rm /home/#{user}/git/otp-portal.git/hooks/*;
+    sudo mkdir -p #{portal_dir};
+    sudo mkdir -p #{obs_tool_dir};
+    sudo chown #{user}:#{user} #{portal_dir};
+    sudo chown #{user}:#{user} #{obs_tool_dir};
+  fi
 EOF
 
 ensure_githooks_executable = <<~EOF
@@ -204,41 +317,86 @@ restart_nginx = <<~EOF
 EOF
 
 install_transifex_cli = <<~EOF
-  mkdir -p /home/#{user}/.local/bin;
-  mkdir -p /home/#{user}/tx;
-  cd /home/#{user}/tx;
-  curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
-  ln -s /home/#{user}/tx/tx /home/#{user}/.local/bin/tx
+  if [ ! -x /home/#{user}/.local/bin/tx ]; then
+    mkdir -p /home/#{user}/.local/bin;
+    mkdir -p /home/#{user}/tx;
+    cd /home/#{user}/tx;
+    curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
+    ln -sf /home/#{user}/tx/tx /home/#{user}/.local/bin/tx
+  fi
 EOF
 
 install_aws_cli = <<~EOF
-  cd ~;
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip";
-  unzip -q awscliv2.zip;
-  sudo ./aws/install
-  rm awscliv2.zip;
-  rm -rf aws;
+  if ! command -v aws >/dev/null 2>&1; then
+    cd ~;
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip";
+    unzip -q awscliv2.zip;
+    sudo ./aws/install
+    rm awscliv2.zip;
+    rm -rf aws;
+  fi
 EOF
 
-# Disable root
+# Two S3 sync cron jobs (Postgres backups + uploads). The instance uses an IAM role
+setup_s3_sync_cron = <<~EOF
+  ( crontab -l 2>/dev/null | sed '/# BEGIN otp-s3-sync/,/# END otp-s3-sync/d'; cat <<'CRON'
+# BEGIN otp-s3-sync
+# Postgres backups -> S3 (autopostgresqlbackup writes /home/#{user}/backup/db on its daily run)
+00 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/ s3://otp-wri-#{env}/db/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+20 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/daily s3://otp-wri-#{env}/db/daily --delete --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+# Uploads -> S3
+30 * * * * /usr/local/bin/aws s3 sync #{api_dir}/shared/uploads/ s3://otp-wri-#{env}/uploads/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+# END otp-s3-sync
+CRON
+  ) | crontab -
+EOF
+
+# Disable root. Use a drop-in, which overrides the /etc/ssh/sshd_config.d/*
+# cloud-init defaults that a sed on the main config would miss.
 disable_root = <<~EOF
-  sed -i 's@PasswordAuthentication yes@PasswordAuthentication no@g' /etc/ssh/sshd_config;
-  sed -i 's@PermitRootLogin yes@PermitRootLogin no@g' /etc/ssh/sshd_config;
+  printf 'PasswordAuthentication no\\nPermitRootLogin no\\n' | sudo tee /etc/ssh/sshd_config.d/99-hardening.conf;
   chage -E 0 root;
   systemctl restart ssh
 EOF
 
+# Run `cmd` on the remote host, streaming output. Aborts provisioning if the
+# step fails: `set -e` makes the remote shell stop at the first failing command
+# (instead of running on with `;`-chained commands), and we capture the channel
+# exit status and bail so we never print "Done!" over a half-provisioned box.
 execute_command = ->(ssh, cmd) {
   puts cmd
   puts "=============================================="
-  ssh.exec!(cmd) do |_channel, _stream, data|
-    print data
+  exit_code = 0
+  ssh.open_channel do |channel|
+    channel.exec("set -e\n#{cmd}") do |ch, success|
+      abort "Could not start command on remote host." unless success
+      ch.on_data { |_ch, data| print data }
+      ch.on_extended_data { |_ch, _type, data| print data }
+      ch.on_request("exit-status") { |_ch, data| exit_code = data.read_long }
+    end
   end
+  ssh.loop
+  abort "\nStep failed (exit status #{exit_code}). Aborting provisioning." unless exit_code.zero?
 }
 
-puts "Provisioning server '#{host}' with user '#{user}'..."
+puts "Provisioning server with the following parameters:"
+puts "=============================================="
+puts "  Environment:      #{env}"
+puts "  Host:             #{host}"
+puts "  Domain:           #{domain}"
+puts "  SSH user:         #{user}"
+puts "  Let's Encrypt:    #{email}"
+puts "  Ruby version:     #{ruby_version}"
+puts "  Configure UFW:    #{install_ufw ? 'yes' : 'no'}"
+puts "  Let's Encrypt:    #{install_letsencrypt ? 'yes' : 'no'}"
+puts "  TLS certificate:  #{self_signed ? 'self-signed (IP)' : (install_letsencrypt ? "Let's Encrypt" : 'none')}"
+puts "  Root access step: #{root_access ? 'yes' : 'no'}"
+puts "  Basic auth:       #{auth_basic ? 'yes' : 'no'}"
+puts "  Basic auth user:  #{auth_basic_user}" if auth_basic
+puts "=============================================="
 
-exit unless HighLine.agree("Do you want to proceed (yes/no)?")
+print "Do you want to proceed (yes/no)? "
+exit unless $stdin.gets.to_s.strip.downcase =~ /\A(y|yes)\z/
 
 if root_access
   Net::SSH.start(host, "root") do |ssh|
@@ -269,8 +427,12 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(install_postgres)
   puts "Configuring Postgres..."
   ssh_exec.call(configure_postgres)
+  puts "Configuring Postgres backups..."
+  ssh_exec.call(configure_postgres_backups)
   puts "Installing Redis..."
   ssh_exec.call(install_redis)
+  puts "Configuring Redis..."
+  ssh_exec.call(configure_redis)
   puts "Make tmp deploy directory..."
   ssh_exec.call("mkdir -p /home/#{user}/deploy")
   puts "Installing Nginx..."
@@ -278,14 +440,35 @@ Net::SSH.start(host, user) do |ssh|
   puts "Upload Nginx configuration..."
   Net::SCP.upload!(host, user, nginx_config, "/home/#{user}/deploy/otp.conf")
   ssh_exec.call("sudo mv /home/#{user}/deploy/otp.conf /etc/nginx/sites-available/otp.conf")
+  if auth_basic
+    puts "Upload htpasswd..."
+    Net::SCP.upload!(host, user, htpasswd_config, "/home/#{user}/deploy/.htpasswd")
+    ssh_exec.call("sudo mv /home/#{user}/deploy/.htpasswd /etc/nginx/.htpasswd && sudo chown root:www-data /etc/nginx/.htpasswd && sudo chmod 640 /etc/nginx/.htpasswd")
+  end
   puts "Setting up Nginx..."
   ssh_exec.call(setup_nginx)
-  puts "Install letsencrypt..."
-  ssh_exec.call(prepare_letsencrypt)
+  puts "Configuring logrotate..."
+  ssh_exec.call(configure_logrotate)
+  if self_signed
+    puts "Create self-signed certificate (domain is an IP)..."
+    ssh_exec.call(setup_self_signed_cert)
+  end
+  if install_letsencrypt
+    puts "Install certbot..."
+    ssh_exec.call(install_certbot)
+    unless self_signed
+      puts "Issue Let's Encrypt certificate..."
+      ssh_exec.call(issue_certbot)
+    end
+  end
   puts "Install rvm..."
   ssh_exec.call(install_rvm)
 end
 
+# NOTE: This is intentionally a second, separate SSH session.
+# install_rvm runs `usermod -a -G rvm #{user}`, but group membership only takes
+# effect on a new login. Reconnecting here gives the user its `rvm` group so the
+# steps below (rvm install ruby, etc.) can use RVM. Do not merge these two blocks.
 Net::SSH.start(host, user) do |ssh|
   ssh_exec = ->(cmd) { execute_command.call(ssh, cmd) }
   puts "Install ruby..."
@@ -294,13 +477,15 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(install_nvm)
   puts "Install node..."
   ssh_exec.call(install_node)
+  puts "Configuring pm2-logrotate..."
+  ssh_exec.call(configure_pm2_logrotate)
   puts "Installing app dependencies..."
   ssh_exec.call(install_app_dependencies)
   puts "Setup capistrano"
   ssh_exec.call(setup_capistrano)
   puts "Upload env..."
   Net::SCP.upload!(host, user, ".env.#{env}", "/home/#{user}/deploy/.env")
-  ssh_exec.call("sudo mv /home/#{user}/deploy/.env #{api_dir}/shared/.env")
+  ssh_exec.call("sudo mv /home/#{user}/deploy/.env #{api_dir}/shared/.env && sudo chown #{user}:#{user} #{api_dir}/shared/.env && sudo chmod 600 #{api_dir}/shared/.env")
   puts "Setup PUMA..."
   Net::SCP.upload!(host, user, puma_service_config, "/home/#{user}/deploy/puma.service")
   ssh_exec.call(setup_puma_service)
@@ -321,6 +506,8 @@ Net::SSH.start(host, user) do |ssh|
   ssh_exec.call(install_transifex_cli)
   puts "Install AWS CLI..."
   ssh_exec.call(install_aws_cli)
+  puts "Setup S3 sync cron jobs..."
+  ssh_exec.call(setup_s3_sync_cron)
   puts "Cleanup..."
   ssh_exec.call("rm -rf /home/#{user}/deploy")
 end
