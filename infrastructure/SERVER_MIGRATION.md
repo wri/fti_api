@@ -21,9 +21,11 @@ Placeholders used below:
 
 1. Create the infrastructure (see [README](./README.md) for the workspace setup):
 
-2. Leave `STAGING_DOMAIN` / `PRODUCTION_DOMAIN` **unset** for now — DNS still
-   points at the old server, so provisioning issues a self-signed cert for the
-   bare IP instead of trying Let's Encrypt.
+2. Set `STAGING_DOMAIN` / `PRODUCTION_DOMAIN` to `<NEW_IP>` in `.env` for now —
+   a bare-IP domain makes `bin/provision` issue a self-signed cert. Keeping the
+   real domain here would make certbot attempt a Let's Encrypt challenge that
+   still resolves to the old server and fail; the real domain comes back in
+   Phase 3.
 
 3. Add the new host key unhashed, otherwise Capistrano fails with
    `HostKeyMismatch` (net-ssh can't read hashed `known_hosts` entries):
@@ -45,18 +47,16 @@ Placeholders used below:
 
 ## Phase 2 — Seed data and deploy
 
-Both sync commands stream from the production server directly to the target. A
-raw-IP target restores into `fti_api_production`; `bin/sync` refuses the
-`production` alias as a target on purpose:
+Sync the database first (streams from the production server directly to the
+target; a raw-IP target restores into `fti_api_production`, and `bin/sync`
+refuses the `production` alias as a target on purpose):
 
 ```bash
 # staging
 bin/sync db staging
-bin/sync files staging
 
 # production
 bin/sync db <NEW_IP>
-bin/sync files <NEW_IP>
 ```
 
 Deploy the API:
@@ -67,6 +67,16 @@ cap staging deploy
 
 # production
 PRODUCTION_HOST=<NEW_IP> cap production deploy
+```
+
+Then sync the uploads (the deploy created `shared/uploads` on the target):
+
+```bash
+# staging
+bin/sync files staging
+
+# production
+bin/sync files <NEW_IP>
 ```
 
 > **Production only:** after this deploy the new server runs Sidekiq and the app
@@ -137,12 +147,12 @@ and redeploy both apps from their checkouts:
 script/deploy staging
 
 # production
-script/deploy production
+script/deploy
 ```
 
 ## Phase 4 — Cutover
 
-Downtime starts at step 3 and ends at step 5.
+Downtime starts at step 2 and ends at step 5.
 
 1. Put the **new** server in maintenance mode, so anything arriving during the
    final sync sees the maintenance page:
@@ -155,25 +165,11 @@ Downtime starts at step 3 and ends at step 5.
    PRODUCTION_HOST=<NEW_IP> cap production maintenance:enable
    ```
 
-2. Freeze the **old** server — stop background processing and cron so nothing
-   writes to the old DB after the final sync. Remove the crontab first so no new
-   jobs get scheduled, then drain Sidekiq (waits for queued and running jobs to
-   finish before stopping — a plain `systemctl stop` would push long-running
-   jobs back into the old Redis, where they'd be lost):
-
-   ```bash
-   crontab -l > cronbackup.txt && crontab -r     # restore with: crontab cronbackup.txt
-
-   cd /var/www/otp-api/current
-   RAILS_ENV=<staging|production> bundle exec bin/sidekiq-wait
-
-   sudo systemctl stop puma
-   ```
-
-3. Turn the old server into a TCP proxy for the new one, so traffic works during
-   DNS propagation. On the **old** server (stream is a top-level context — put
-   this in `/etc/nginx/nginx.conf`, not inside `http {}`; install
-   `libnginx-mod-stream` if missing):
+2. Turn the old server into a TCP proxy for the new one — this cuts traffic to
+   the old app (visitors now see the new server's maintenance page) and keeps
+   the domain working during DNS propagation. On the **old** server (stream is
+   a top-level context — put this in `/etc/nginx/nginx.conf`, not inside
+   `http {}`; install `libnginx-mod-stream` if missing):
 
    ```nginx
    stream {
@@ -201,6 +197,21 @@ Downtime starts at step 3 and ends at step 5.
    # remove the stream block, then
    sudo ln -sf /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf
    sudo systemctl restart nginx
+   ```
+
+3. Freeze the **old** server — stop background processing and cron so nothing
+   writes to the old DB after the final sync. Remove the crontab first so no new
+   jobs get scheduled, then drain Sidekiq (waits for queued and running jobs to
+   finish before stopping — a plain `systemctl stop` would push long-running
+   jobs back into the old Redis, where they'd be lost):
+
+   ```bash
+   crontab -l > cronbackup.txt && crontab -r     # restore with: crontab cronbackup.txt
+
+   cd /var/www/otp-api/current
+   RAILS_ENV=<staging|production> bundle exec bin/sidekiq-wait
+
+   sudo systemctl stop puma
    ```
 
 4. Final sync of everything written since Phase 2:
