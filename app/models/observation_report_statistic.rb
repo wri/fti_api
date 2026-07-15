@@ -13,44 +13,14 @@
 #  updated_at  :datetime         not null
 #
 class ObservationReportStatistic < ApplicationRecord
-  belongs_to :country, optional: true
+  include DailyStatistic
+
   belongs_to :observer, optional: true
 
-  validates :date, presence: true
   validates :date, uniqueness: {scope: [:country_id, :observer_id]}
 
-  def self.from_date(date)
-    date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
-    from_date_sql = where("date > ?", date_obj.to_fs(:db)).to_sql
-    first_rows_sql = at_date(date_obj).to_sql
-
-    from("(#{from_date_sql} UNION #{first_rows_sql}) as observation_report_statistics")
-  end
-
-  def self.at_date(date)
-    return none if date.blank?
-
-    date_obj = date.respond_to?(:strftime) ? date : Date.parse(date)
-
-    query = <<~SQL
-      (select
-        id,
-        :date_obj::date as date,
-        country_id,
-        observer_id,
-        total_count,
-        created_at,
-        updated_at
-       from
-       (select row_number() over (partition by country_id, observer_id order by date desc), *
-        from observation_report_statistics ors
-        where date <= :date_obj
-       ) as stats_by_date
-       where stats_by_date.row_number = 1
-      ) as observation_report_statistics
-    SQL
-
-    ObservationReportStatistic.from(ActiveRecord::Base.sanitize_sql([query, {date_obj: date_obj.to_fs(:db)}]))
+  def self.statistic_dimensions
+    %w[country_id observer_id]
   end
 
   def self.generate_for_country_and_day(country_id, day, delete_old = false)
@@ -95,37 +65,5 @@ class ObservationReportStatistic < ApplicationRecord
         end
       end
     end
-  end
-
-  def self.ransackable_scopes(auth_object = nil)
-    [:by_country]
-  end
-
-  def self.by_country(country_id)
-    return all if country_id.nil?
-    return where(country_id: nil) if country_id == "null"
-
-    where(country_id: country_id)
-  end
-
-  def country_name
-    return country.name if country.present?
-
-    "All Countries"
-  end
-
-  def previous_stat
-    ObservationReportStatistic.where(
-      country_id: country_id,
-      observer_id: observer_id
-    ).where("date < ?", date).order(:date).last
-  end
-
-  def ==(other)
-    return false unless other.is_a? self.class
-
-    %w[country_id observer_id total_count].reject do |attr|
-      send(attr) == other.send(attr)
-    end.none?
   end
 end

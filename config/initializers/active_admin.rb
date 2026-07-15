@@ -361,6 +361,7 @@ ActiveAdmin.before_load do |app|
   ActiveAdmin::DSL.include ActiveAdmin::Paranoia::DSLExtension
   ActiveAdmin::Views::IndexAsTable::IndexTableFor.prepend ActiveAdmin::Paranoia::IndexTableForExtension
   ActiveAdmin::Views::AttributesTable.prepend ActiveAdmin::Translations::TranslatedRowExtension
+  ActiveAdmin::Views::ActiveFiltersSidebarContent.prepend ActiveAdmin::ActiveFiltersSidebarExtension
 end
 
 ActiveAdmin.after_load do |app|

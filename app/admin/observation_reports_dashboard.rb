@@ -7,7 +7,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
 
   actions :index
 
-  filter :country_id,
+  filter :by_country,
     as: :select,
     label: -> { I18n.t("activerecord.models.country.one") },
     collection: -> {
@@ -23,7 +23,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
 
   dependent_filters do
     {
-      country_id: {
+      by_country: {
         observer_id: Observer.joins(:countries).distinct.pluck(:country_id, :id)
       }
     }
@@ -46,7 +46,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
         res.send("o_#{o.id}") || "0"
       end
     end
-    chart_collection = if params.dig(:q, :country_id_eq).present?
+    chart_collection = if params.dig(:q, :by_country).present?
       collection
     else
       collection.select { |r| r.country_id.nil? }
@@ -77,16 +77,8 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
   controller do
     skip_before_action :restore_search_filters
     skip_after_action :save_search_filters
-    before_action :set_default_filters
 
     helper_method :returned_observers
-
-    def set_default_filters
-      return unless request.format.html?
-
-      params[:q] ||= {}
-      params[:q][:observer_id_null] = true if params.dig(:q, :observer_id_in).blank?
-    end
 
     def find_collection(options = {})
       col = if params.dig(:q, :date_gteq).present?
@@ -94,6 +86,8 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
       else
         ObservationReportStatistic.all
       end
+      # show only total rows unless filtering by observers, csv export includes all
+      col = col.where(observer_id: nil) if request.format.html? && params.dig(:q, :observer_id_in).blank?
       observer_ids = Observer.with_at_least_one_report.pluck(:id)
 
       @search = col.ransack(params[:q] || {})
