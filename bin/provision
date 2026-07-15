@@ -138,11 +138,19 @@ configure_postgres = <<~EOF
   fi
 EOF
 
-# Configure autopostgresqlbackup (config: /etc/default/autopostgresqlbackup)
+# Configure autopostgresqlbackup (config: /etc/default/autopostgresqlbackup).
+# The drop-in relaxes the stock unit's ProtectHome=true so it can write to
+# BACKUPDIR under /home; PERM=644 lets the deploy user's S3 sync cron read
+# the root-owned dumps.
 configure_postgres_backups = <<~EOF
   mkdir -p /home/#{user}/backup/db;
   sudo sed -i -E 's|^#?\\s*DBNAMES=.*|DBNAMES="fti_api_#{env}"|' /etc/default/autopostgresqlbackup;
   sudo sed -i -E 's|^#?\\s*BACKUPDIR=.*|BACKUPDIR="/home/#{user}/backup/db"|' /etc/default/autopostgresqlbackup;
+  if ! grep -qE '^#?\\s*PERM=' /etc/default/autopostgresqlbackup; then echo 'PERM=644' | sudo tee -a /etc/default/autopostgresqlbackup; fi;
+  sudo sed -i -E 's|^#?\\s*PERM=.*|PERM=644|' /etc/default/autopostgresqlbackup;
+  sudo mkdir -p /etc/systemd/system/autopostgresqlbackup.service.d;
+  printf '[Service]\\nProtectHome=read-only\\nReadWritePaths=/home/#{user}/backup/db\\n' | sudo tee /etc/systemd/system/autopostgresqlbackup.service.d/override.conf;
+  sudo systemctl daemon-reload
 EOF
 
 install_app_dependencies = <<~EOF
