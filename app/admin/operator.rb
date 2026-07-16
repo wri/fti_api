@@ -248,7 +248,7 @@ ActiveAdmin.register Operator, as: "Producer" do
       row :slug
       row :operator_type
       row :fa_id
-      row :details
+      translated_row :details
       row :country
       row :logo do |o|
         link_to o.logo&.identifier, o.logo&.url if o.logo&.url
