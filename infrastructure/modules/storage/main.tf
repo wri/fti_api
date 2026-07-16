@@ -36,6 +36,19 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
     }
   }
 
+  # Enable intelligent tiering for all objects, so that infrequently accessed files are automatically moved to a cheaper storage class.
+  rule {
+    id     = "intelligent-tiering"
+    status = "Enabled"
+
+    filter {}
+
+    transition {
+      days          = 0
+      storage_class = "INTELLIGENT_TIERING"
+    }
+  }
+
   depends_on = [aws_s3_bucket_versioning.this]
 }
 
