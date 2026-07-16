@@ -17,6 +17,7 @@ user = ENV["SSH_USER"]
 install_ufw = ENV["UFW"] != "false"
 install_letsencrypt = ENV["LETSENCRYPT"] != "false"
 root_access = ENV["ROOT_ACCESS"]
+disable_sync_cron = ENV["DISABLE_SYNC_CRON"] == "true"
 
 # A bare IP address can't be issued a Let's Encrypt cert; certbot is still installed but we
 # generate a self-signed cert instead of issuing one, and nginx serves TLS with it.
@@ -346,18 +347,26 @@ install_aws_cli = <<~EOF
 EOF
 
 # Two S3 sync cron jobs (Postgres backups + uploads). The instance uses an IAM role
-setup_s3_sync_cron = <<~EOF
-  ( crontab -l 2>/dev/null | sed '/# BEGIN otp-s3-sync/,/# END otp-s3-sync/d'; cat <<'CRON'
-# BEGIN otp-s3-sync
-# Postgres backups -> S3 (autopostgresqlbackup writes /home/#{user}/backup/db on its daily run)
-00 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/ s3://otp-wri-#{env}/db/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
-20 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/daily s3://otp-wri-#{env}/db/daily --delete --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
-# Uploads -> S3
-30 * * * * /usr/local/bin/aws s3 sync #{api_dir}/shared/uploads/ s3://otp-wri-#{env}/uploads/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
-# END otp-s3-sync
-CRON
-  ) | crontab -
-EOF
+# DISABLE_SYNC_CRON=true removes the block instead (also from already-provisioned hosts).
+setup_s3_sync_cron =
+  if disable_sync_cron
+    <<~EOF
+      crontab -l 2>/dev/null | sed '/# BEGIN otp-s3-sync/,/# END otp-s3-sync/d' | crontab -
+    EOF
+  else
+    <<~EOF
+      ( crontab -l 2>/dev/null | sed '/# BEGIN otp-s3-sync/,/# END otp-s3-sync/d'; cat <<'CRON'
+    # BEGIN otp-s3-sync
+    # Postgres backups -> S3 (autopostgresqlbackup writes /home/#{user}/backup/db on its daily run)
+    00 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/ s3://otp-wri-#{env}/db/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+    20 7 * * * /usr/local/bin/aws s3 sync /home/#{user}/backup/db/daily s3://otp-wri-#{env}/db/daily --delete --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+    # Uploads -> S3
+    30 * * * * /usr/local/bin/aws s3 sync #{api_dir}/shared/uploads/ s3://otp-wri-#{env}/uploads/ --no-progress >> #{api_dir}/shared/log/s3-sync.log 2>&1
+    # END otp-s3-sync
+    CRON
+      ) | crontab -
+    EOF
+  end
 
 # Disable root. Use a drop-in, which overrides the /etc/ssh/sshd_config.d/*
 # cloud-init defaults that a sed on the main config would miss.
@@ -389,18 +398,19 @@ execute_command = ->(ssh, cmd) {
 
 puts "Provisioning server with the following parameters:"
 puts "=============================================="
-puts "  Environment:      #{env}"
-puts "  Host:             #{host}"
-puts "  Domain:           #{domain}"
-puts "  SSH user:         #{user}"
-puts "  Let's Encrypt:    #{email}"
-puts "  Ruby version:     #{ruby_version}"
-puts "  Configure UFW:    #{install_ufw ? 'yes' : 'no'}"
-puts "  Let's Encrypt:    #{install_letsencrypt ? 'yes' : 'no'}"
-puts "  TLS certificate:  #{self_signed ? 'self-signed (IP)' : (install_letsencrypt ? "Let's Encrypt" : 'none')}"
-puts "  Root access step: #{root_access ? 'yes' : 'no'}"
-puts "  Basic auth:       #{auth_basic ? 'yes' : 'no'}"
-puts "  Basic auth user:  #{auth_basic_user}" if auth_basic
+puts "  Environment:       #{env}"
+puts "  Host:              #{host}"
+puts "  Domain:            #{domain}"
+puts "  SSH user:          #{user}"
+puts "  Let's Encrypt:     #{email}"
+puts "  Ruby version:      #{ruby_version}"
+puts "  Configure UFW:     #{install_ufw ? 'yes' : 'no'}"
+puts "  Let's Encrypt:     #{install_letsencrypt ? 'yes' : 'no'}"
+puts "  TLS certificate:   #{self_signed ? 'self-signed (IP)' : (install_letsencrypt ? "Let's Encrypt" : 'none')}"
+puts "  Disable sync cron: #{disable_sync_cron ? 'yes' : 'no'}"
+puts "  Root access step:  #{root_access ? 'yes' : 'no'}"
+puts "  Basic auth:        #{auth_basic ? 'yes' : 'no'}"
+puts "  Basic auth user:   #{auth_basic_user}" if auth_basic
 puts "=============================================="
 
 print "Do you want to proceed (yes/no)? "
