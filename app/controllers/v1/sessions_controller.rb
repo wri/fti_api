@@ -3,8 +3,13 @@
 module V1
   class SessionsController < APIController
     skip_before_action :authenticate, only: [:create]
+    # login has no prior cookie/header, so CSRF doesn't apply yet — credentials
+    # themselves are the proof of intent
+    skip_before_action :verify_csrf_token!, only: [:create]
 
     include ActionController::Cookies
+
+    REMEMBER_ME_TTL = 30.days
 
     def create
       @user = User.find_by(email: auth_params[:email])
@@ -13,6 +18,10 @@ module V1
         @user.update_column(:should_change_password, true) unless User.strong_password?(auth_params[:password])
         @user.update_tracked_fields!(request)
         set_download_session_cookie_for(@user)
+        if ActiveModel::Type::Boolean.new.cast(auth_params[:set_cookie])
+          set_auth_cookie(@user)
+          set_csrf_cookie(expires: remember_me? ? REMEMBER_ME_TTL.from_now : nil)
+        end
         render json: {token: token, role: @user.user_permission.user_role,
                       user_id: @user.id, country: @user.country_id,
                       operator_ids: @user.operator_ids, observer: @user.observer_id}, status: :ok
@@ -23,6 +32,8 @@ module V1
 
     def destroy
       cookies.delete(download_user_cookie_name)
+      cookies.delete(auth_cookie_name)
+      cookies.delete(csrf_cookie_name)
     end
 
     # each app, like portal and observation tool can have it's own download user cookie to prevent some edgecases
@@ -34,7 +45,26 @@ module V1
     private
 
     def auth_params
-      params.expect(auth: [:email, :password, :current_sign_in_ip])
+      params.expect(auth: [:email, :password, :current_sign_in_ip, :set_cookie, :remember_me])
+    end
+
+    def set_auth_cookie(user)
+      cookie = {
+        value: user.id,
+        same_site: :strict,
+        secure: Rails.env.production? || Rails.env.staging?,
+        httponly: true
+      }
+      # remember_me persists the cookie across browser restarts for 30 days
+      # (Rails embeds a server-verified expiry into the encrypted payload via
+      # use_cookies_with_metadata); without it the browser drops the cookie on
+      # close
+      cookie[:expires] = REMEMBER_ME_TTL.from_now if remember_me?
+      cookies.encrypted[auth_cookie_name] = cookie
+    end
+
+    def remember_me?
+      ActiveModel::Type::Boolean.new.cast(auth_params[:remember_me])
     end
 
     def set_download_session_cookie_for(user)

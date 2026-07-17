@@ -82,6 +82,12 @@ module IntegrationHelper
     }
   end
 
+  # the raw Set-Cookie header entry for the auth cookie, so expiry attributes
+  # (expires/max-age) can be asserted on
+  def auth_set_cookie_header
+    Array(response.headers["Set-Cookie"]).find { |c| c.start_with?("#{APIController::AUTH_COOKIE_NAME}=") }
+  end
+
   def initialize_download_session(user_headers, app: nil)
     url = "/sessions/download-session"
     url += "?app=#{app}" if app.present?
