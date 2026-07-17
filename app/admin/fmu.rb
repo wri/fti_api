@@ -179,7 +179,7 @@ ActiveAdmin.register Fmu do
           f.input :country, input_html: {disabled: object.persisted?}, required: true
           f.input :forest_type, as: :select,
             collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
-            input_html: {disabled: object.persisted?}
+            input_html: {disabled: object.persisted? && object.country&.iso != "COD"}
           li class: "checkboxes_label" do
             label I18n.t("active_admin.fmus_page.certification")
           end
