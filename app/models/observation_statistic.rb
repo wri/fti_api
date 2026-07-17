@@ -48,12 +48,28 @@ class ObservationStatistic < ApplicationRecord
 
   validates :date, presence: true
 
-  # just to hack around active admin
+  # report count columns with theirs observation history validation status conditions
+  REPORT_COUNT_COLUMNS = {
+    created: "= 0",
+    ready_for_qc: "IN (1, 10)",
+    qc_in_progress: "IN (2, 11)",
+    approved: "= 3",
+    rejected: "= 4",
+    needs_revision: "= 5",
+    ready_for_publication: "= 6",
+    published_no_comments: "= 7",
+    published_not_modified: "= 8",
+    published_modified: "= 9",
+    published_all: "IN (7, 8, 9)",
+    total_count: nil
+  }.freeze
+
   def self.ransackable_scopes(auth_object = nil)
     [:by_country]
   end
 
-  # just to hack around active admin, does not have to filter by country
+  # does not filter, the search object only keeps the filter form state,
+  # actual filtering happens in query_dashboard_report
   def self.by_country(country_id = nil)
     all
   end
@@ -72,7 +88,7 @@ class ObservationStatistic < ApplicationRecord
     is_active = search[:is_active_eq]
     hidden = search[:hidden_eq]
 
-    validation_status_filter = (validation_status.to_i === 789) ? "7,8,9" : validation_status
+    validation_status_filter = (validation_status.to_i === 789) ? [7, 8, 9] : validation_status
 
     filters = []
     if country_id.nil? || country_id == "null"
@@ -91,6 +107,12 @@ class ObservationStatistic < ApplicationRecord
     filters.push(["is_active = ?", is_active]) if is_active.present?
     filters_sql = ActiveRecord::Base.sanitize_sql_for_conditions([filters.map(&:first).join(" AND "), *filters.map(&:last).compact])
 
+    count_sums = REPORT_COUNT_COLUMNS.map { |column, condition|
+      status_filter = condition && "filter (where validation_status #{condition}) "
+      "coalesce(sum(total_count) #{status_filter}, 0) as #{column}"
+    }.join(",\n")
+    count_vector = "array[#{REPORT_COUNT_COLUMNS.keys.join(", ")}]"
+
     sql = <<~SQL
       with dates as (
         select distinct date from (
@@ -102,64 +124,59 @@ class ObservationStatistic < ApplicationRecord
         ) as important_dates
         where date between :date_from and :date_to
       ),
+      statuses as (
+        select
+          *,
+          lead(observation_updated_at) over (partition by observation_id order by observation_updated_at) as next_updated_at
+        from observation_histories
+      ),
       grouped as (
         select
           date,
           country_id,
           validation_status,
           count(*)::integer as total_count
-        from
-        dates
-        left join lateral
-          (
-            select * from (
-              select row_number() over (partition by observation_id order by observation_updated_at desc), *
-                from observation_histories
-              where observation_updated_at <= dates.date
-            ) as sq
-            where sq.row_number = 1
-          ) as observations_by_date on 1=1
+        from dates
+        join statuses on
+          observation_updated_at <= dates.date
+          and (next_updated_at is null or next_updated_at > dates.date)
         where deleted_at is null #{"AND " + filters_sql if filters_sql.present?}
         group by date, validation_status, rollup(country_id)
+      ),
+      pivoted as (
+        select
+          date,
+          country_id,
+          #{count_sums}
+        from grouped
+        group by date, country_id
       )
       select
         date,
         country_id,
-        #{operator_id.presence || "null"} as operator_id,
-        sum(total_count) filter (where validation_status = 0) as created,
-        sum(total_count) filter (where validation_status IN (1, 10)) as ready_for_qc,
-        sum(total_count) filter (where validation_status IN (2, 11)) as qc_in_progress,
-        sum(total_count) filter (where validation_status = 3) as approved,
-        sum(total_count) filter (where validation_status = 4) as rejected,
-        sum(total_count) filter (where validation_status = 5) as needs_revision,
-        sum(total_count) filter (where validation_status = 6) as ready_for_publication,
-        sum(total_count) filter (where validation_status = 7) as published_no_comments,
-        sum(total_count) filter (where validation_status = 8) as published_not_modified,
-        sum(total_count) filter (where validation_status = 9) as published_modified,
-        sum(total_count) filter (where validation_status IN (7,8, 9)) as published_all,
-        sum(total_count) as total_count,
+        #{REPORT_COUNT_COLUMNS.keys.join(",\n")},
+        #{sql_literal(operator_id)} as operator_id,
         null as validation_status,
-        #{severity_level.presence || "null"} as severity_level,
-        #{subcategory_id.presence || "null"} as subcategory_id,
-        #{category_id.presence || "null"} as category_id,
-        #{observation_type.presence || "null"} as observation_type,
-        #{forest_type.presence || "null"} as fmu_forest_type,
-        #{is_active.nil? ? "null" : is_active} as is_active,
-        #{hidden.nil? ? "null" : hidden} as hidden
+        #{sql_literal(severity_level)} as severity_level,
+        #{sql_literal(subcategory_id)} as subcategory_id,
+        #{sql_literal(category_id)} as category_id,
+        #{sql_literal(observation_type)} as observation_type,
+        #{sql_literal(forest_type)} as fmu_forest_type,
+        #{sql_literal(is_active)} as is_active,
+        #{sql_literal(hidden)} as hidden
       from (
         select
           *,
-          LAG(total_count,1) OVER (
+          lag(#{count_vector}) over (
             partition by country_id
-            ORDER BY date
-          ) prev_total
-          from grouped
-      ) as total_c
+            order by date
+          ) as prev_counts
+        from pivoted
+      ) as with_prev
       where
-        (prev_total is null or prev_total != total_count or date = :date_to or date = :date_from)
-        AND (#{(country_id.nil? || country_id == "null") ? "1=1" : "country_id is not null"})
-        AND (#{(country_id == "null") ? "country_id is null" : "1=1"})
-      group by date, country_id
+        (prev_counts is null or prev_counts <> #{count_vector} or date in (:date_from, :date_to))
+        and (#{(country_id.nil? || country_id == "null") ? "true" : "country_id is not null"})
+        and (#{(country_id == "null") ? "country_id is null" : "true"})
       order by date desc, country_id asc nulls first
     SQL
 
@@ -170,6 +187,11 @@ class ObservationStatistic < ApplicationRecord
       ])
     ).includes(country: :translations)
   end
+
+  def self.sql_literal(value)
+    connection.quote(value.presence)
+  end
+  private_class_method :sql_literal
 
   def country_name
     return country.name if country.present?

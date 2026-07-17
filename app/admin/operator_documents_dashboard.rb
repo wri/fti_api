@@ -152,14 +152,6 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
   controller do
     skip_before_action :restore_search_filters
     skip_after_action :save_search_filters
-    before_action :set_default_filters
-
-    def set_default_filters
-      params[:q] ||= {}
-      params[:q][:required_operator_document_group_id_null] = true if params.dig(:q, :required_operator_document_group_id_eq).blank?
-      params[:q][:fmu_forest_type_null] = true if params.dig(:q, :fmu_forest_type_eq).blank?
-      params[:q][:document_type_null] = true if params.dig(:q, :document_type_eq).blank?
-    end
 
     def scoped_collection
       col = if params.dig(:q, :date_gteq).present?
@@ -167,6 +159,10 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
       else
         super
       end
+      # show only rollup rows of dimensions not filtered by the user
+      col = col.where(required_operator_document_group_id: nil) if params.dig(:q, :required_operator_document_group_id_eq).blank?
+      col = col.where(fmu_forest_type: nil) if params.dig(:q, :fmu_forest_type_eq).blank?
+      col = col.where(document_type: nil) if params.dig(:q, :document_type_eq).blank?
       col.includes(:required_operator_document_group, country: :translations)
     end
   end
