@@ -6,7 +6,9 @@ class ForestType
     vdc: {index: 3, label: "Vente de Coupe", geojson_label: "ventes_de_coupe"},
     cpaet: {index: 4, label: "CPAET", geojson_label: "CPAET"},
     cfad: {index: 5, label: "CFAD", geojson_label: "CFAD"},
-    pea: {index: 6, label: "PEA", geojson_label: "PEA"}
+    pea: {index: 6, label: "PEA", geojson_label: "PEA"},
+    cdc: {index: 7, label: "Concession de conservation", geojson_label: "cdc"},
+    cdcf: {index: 8, label: "Concession de concession forestière", geojson_label: "cdcf"}
   }.with_indifferent_access.freeze
   TYPES_WITH_CODE = TYPES.map { |k, v| {k => v[:index]} }.reduce({}, :merge).with_indifferent_access
 

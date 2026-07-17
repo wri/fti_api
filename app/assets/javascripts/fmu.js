@@ -11,11 +11,13 @@ $(document).ready(function() {
 
 function updateFmuFields() {
   const countryList = {
+    7: ['cdc', 'cdcf'],
     45: ['ufa', 'cf', 'vdc'],
     53: ['cpaet', 'cfad']
   }
   var forestTypes = $('#fmu_forest_type:not([type="checkbox"])');
   var country = $('#fmu_country_id').val();
+  var currentValue = forestTypes.val();
 
   if (country in countryList) {
     forestTypes.prop('disabled', false);
@@ -33,6 +35,8 @@ function updateFmuFields() {
     forestTypes.prop('disabled', true);
   }
 
-  forestTypes.val([])
+  if (!(country in countryList) || !countryList[country].includes(currentValue)) {
+    forestTypes.val([])
+  }
   forestTypes.select2({width: '80%'}).trigger('change')
 }
