@@ -112,11 +112,13 @@ class FmuOperator < ApplicationRecord
       # commit current transaction
       next if current_operator.blank? || current_operator.fa_id.blank?
 
-      # Only the RODF for this fmu's forest_type should be created
-      rodf_query = "country_id = #{fmu.country_id} "
-      rodf_query += " AND '#{Fmu.forest_types[fmu.forest_type]}' = ANY (forest_types)" if fmu.forest_type != "fmu"
+      # Only the RODF for this fmu's forest_type should be created, empty forest_types means the document applies to all FMUs
+      required_documents = RequiredOperatorDocumentFmu.where(
+        "country_id = :country_id AND (forest_types = '{}' OR :forest_type = ANY (forest_types))",
+        country_id: fmu.country_id, forest_type: Fmu.forest_types[fmu.forest_type]
+      )
 
-      RequiredOperatorDocumentFmu.where(rodf_query).find_each do |rodf|
+      required_documents.find_each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
           operator_id: current_operator.id,
           fmu_id: fmu_id).first_or_create do |odf|
