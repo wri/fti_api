@@ -49,6 +49,20 @@ ActiveAdmin.register Operator, as: "Producer" do
     link_to I18n.t("active_admin.operator_page.new"), new_admin_producer_path
   end
 
+  member_action :force_translations do
+    translate_from = params[:translate_from] || I18n.locale
+    TranslationJob.perform_later(resource, translate_from)
+    redirect_to admin_producer_path(resource), notice: I18n.t("active_admin.shared.translating_entity")
+  end
+
+  action_item :force_translations, only: :show do
+    dropdown_menu I18n.t("active_admin.shared.force_translations") do
+      I18n.available_locales.sort.each do |locale|
+        item I18n.t("locales.#{locale}"), force_translations_admin_producer_path(producer, translate_from: locale)
+      end
+    end
+  end
+
   csv do
     column :id
     column :holding_id
