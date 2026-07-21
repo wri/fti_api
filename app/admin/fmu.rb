@@ -152,6 +152,7 @@ ActiveAdmin.register Fmu do
     selectable_column
     column :id, sortable: true
     column :name, sortable: true
+    column :forest_type
     column :country, sortable: "country_translations.name"
     column :operator
     column "FSC", :certification_fsc
