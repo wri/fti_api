@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 function updateFmuFields() {
   const countryList = {
-    7: ['cdc', 'cdcf'],
+    7: ['cdc', 'ccf'],
     45: ['ufa', 'cf', 'vdc'],
     53: ['cpaet', 'cfad']
   }
