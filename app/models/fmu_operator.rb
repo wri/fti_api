@@ -119,6 +119,7 @@ class FmuOperator < ApplicationRecord
       Rails.logger.info "Destroyed #{to_destroy.size} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id} or no longer match the forest type"
 
       if current_operator.present? && current_operator.fa_id.present?
+        created_count = 0
         required_documents.find_each do |required_document|
           OperatorDocumentFmu.where(
             required_operator_document_id: required_document.id,
@@ -127,13 +128,17 @@ class FmuOperator < ApplicationRecord
           ).first_or_create do |document|
             document.skip_score_recalculation = true
             document.status = OperatorDocument.statuses[:doc_not_provided]
+            created_count += 1
           end
         end
-        operators_to_recalculate << current_operator
-        Rails.logger.info "Created the documents for operator #{current_operator.id} and FMU #{fmu_id}"
+        operators_to_recalculate << current_operator if created_count > 0
+        Rails.logger.info "Created #{created_count} documents for operator #{current_operator.id} and FMU #{fmu_id}"
       end
 
-      operators_to_recalculate.uniq.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
+      operators_to_recalculate.uniq.each do |operator|
+        ScoreOperatorDocument.recalculate!(operator)
+        Rails.logger.info "Recalculated scores for operator #{operator.id}"
+      end
     end
   end
 
