@@ -186,8 +186,7 @@ class OperatorDocument < ApplicationRecord
   private
 
   def no_longer_required_for_fmu_forest_type?
-    forest_type_indexes = required_operator_document[:forest_types]
-    forest_type_indexes.present? && forest_type_indexes.exclude?(Fmu.forest_types[fmu.forest_type])
+    !required_operator_document.applies_to_forest_type?(fmu.forest_type)
   end
 
   def disconnect_annexes

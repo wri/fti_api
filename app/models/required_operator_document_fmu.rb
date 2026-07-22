@@ -27,6 +27,14 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
 
   validates :contract_signature, absence: true
 
+  # empty forest_types means the document applies to all forest types
+  scope :for_forest_type, ->(forest_type) {
+    where(
+      "COALESCE(cardinality(forest_types), 0) = 0 OR :forest_type = ANY (forest_types)",
+      forest_type: Fmu.forest_types[forest_type]
+    )
+  }
+
   after_create :create_operator_document_fmus, unless: :disable_document_creation
 
   def create_operator_document_fmus
@@ -39,6 +47,10 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
         end
       end
     end
+  end
+
+  def applies_to_forest_type?(forest_type)
+    forest_types.blank? || forest_types.include?(forest_type.to_sym)
   end
 
   def fmus

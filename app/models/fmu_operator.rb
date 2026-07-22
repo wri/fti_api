@@ -93,16 +93,16 @@ class FmuOperator < ApplicationRecord
     end
   end
 
-  # Updates the list of documents for this FMU, TODO: move it to some service object
+  # Updates the list of documents for this FMU
   def update_documents_list
-    current_operator = self&.fmu&.reload&.operator
+    return if fmu_id.blank?
+
+    current_operator = fmu.reload.operator
 
     OperatorDocumentFmu.transaction do
-      # Only the RODF for this fmu's forest_type should be created, empty forest_types means the document applies to all FMUs
-      required_documents = RequiredOperatorDocumentFmu.where(
-        "country_id = :country_id AND (COALESCE(cardinality(forest_types), 0) = 0 OR :forest_type = ANY (forest_types))",
-        country_id: fmu.country_id, forest_type: Fmu.forest_types[fmu.forest_type]
-      )
+      required_documents = RequiredOperatorDocumentFmu
+        .where(country_id: fmu.country_id)
+        .for_forest_type(fmu.forest_type)
 
       to_destroy = OperatorDocumentFmu.includes(:operator).where(fmu_id: fmu_id)
       if current_operator.present?
@@ -110,28 +110,30 @@ class FmuOperator < ApplicationRecord
           .where.not(operator_id: current_operator.id)
           .or(to_destroy.where.not(required_operator_document_id: required_documents.select(:id)))
       end
-      destroyed_count = to_destroy.count
-      to_destroy.each do |doc|
-        doc.skip_score_recalculation = true # just do it once for each operator at the end
-        doc.destroy
+
+      operators_to_recalculate = to_destroy.map(&:operator).uniq
+      to_destroy.each do |document|
+        document.skip_score_recalculation = true # just do it once for each operator at the end
+        document.destroy
       end
-      to_destroy.map(&:operator).uniq.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
+      Rails.logger.info "Destroyed #{to_destroy.size} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id} or no longer match the forest type"
 
-      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id} or no longer match the forest type"
-
-      # commit current transaction
-      next if current_operator.blank? || current_operator.fa_id.blank?
-
-      required_documents.find_each do |rodf|
-        OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
-          operator_id: current_operator.id,
-          fmu_id: fmu_id).first_or_create do |odf|
-          odf.skip_score_recalculation = true # just do it once at the end
-          odf.update!(status: OperatorDocument.statuses[:doc_not_provided]) unless odf.persisted?
+      if current_operator.present? && current_operator.fa_id.present?
+        required_documents.find_each do |required_document|
+          OperatorDocumentFmu.where(
+            required_operator_document_id: required_document.id,
+            operator_id: current_operator.id,
+            fmu_id: fmu_id
+          ).first_or_create do |document|
+            document.skip_score_recalculation = true
+            document.status = OperatorDocument.statuses[:doc_not_provided]
+          end
         end
+        operators_to_recalculate << current_operator
+        Rails.logger.info "Created the documents for operator #{current_operator.id} and FMU #{fmu_id}"
       end
-      ScoreOperatorDocument.recalculate!(current_operator)
-      Rails.logger.info "Create the documents for operator #{current_operator.id} and FMU #{fmu_id}"
+
+      operators_to_recalculate.uniq.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
     end
   end
 
@@ -142,6 +144,6 @@ class FmuOperator < ApplicationRecord
     return if end_date && (end_date < Time.zone.today)
     return if start_date > Time.zone.today
 
-    fmu.save
+    fmu.reload.save
   end
 end
