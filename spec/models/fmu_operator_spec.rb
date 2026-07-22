@@ -212,6 +212,30 @@ RSpec.describe FmuOperator, type: :model do
           end
         end
       end
+
+      context "when matching required documents by forest type" do
+        let(:country) { create(:country) }
+        let(:operator) { create(:operator, country: country, fa_id: "fa_id") }
+        let!(:document_without_forest_types) { create(:required_operator_document_fmu, country: country, forest_types: []) }
+        let!(:document_for_cf) { create(:required_operator_document_fmu, country: country, forest_types: [ForestType::TYPES[:cf][:index]]) }
+        let!(:document_for_vdc) { create(:required_operator_document_fmu, country: country, forest_types: [ForestType::TYPES[:vdc][:index]]) }
+        let!(:document_with_null_forest_types) do
+          create(:required_operator_document_fmu, country: country, forest_types: []).tap do |document|
+            document.update_column(:forest_types, nil)
+          end
+        end
+
+        def operator_document_ids(fmu)
+          OperatorDocumentFmu.where(fmu_id: fmu.id, operator_id: operator.id).pluck(:required_operator_document_id)
+        end
+
+        it "creates documents with matching forest type and documents without forest types" do
+          fmu = create(:fmu, country: country, forest_type: :cf)
+          create(:fmu_operator, operator: operator, fmu: fmu, current: true)
+
+          expect(operator_document_ids(fmu)).to match_array([document_without_forest_types.id, document_with_null_forest_types.id, document_for_cf.id])
+        end
+      end
     end
   end
 

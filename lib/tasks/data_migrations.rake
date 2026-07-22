@@ -83,4 +83,29 @@ namespace :data_migrations do
     warn "\n  #{errors} version(s) failed to parse and were skipped." if errors > 0
     puts "\nFinished migrating PaperTrail versions to JSON columns. You can now remove the old YAML columns with a separate migration."
   end
+
+  desc "Set forest_types to CCF on existing COD required operator documents and migrate COD FMUs to the CCF forest type."
+  task new_drc_concession: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+    puts "DRY RUN" unless for_real
+
+    cod = Country.find_by!(iso: "COD")
+    ccf_index = ForestType::TYPES[:ccf][:index]
+
+    required_documents = RequiredOperatorDocumentFmu.with_archived.where(country_id: cod.id)
+    puts "Setting forest_types to [ccf] on #{required_documents.count} required operator document(s) for COD..."
+    required_documents.find_each do |document|
+      document.forest_types = [ccf_index]
+      document.save!(validate: false) if for_real
+    end
+
+    fmus = Fmu.where(country_id: cod.id)
+    puts "Setting forest_type to ccf on #{fmus.count} FMU(s) for COD..."
+    fmus.find_each do |fmu|
+      fmu.forest_type = :ccf
+      fmu.save!(validate: false) if for_real
+    end
+
+    puts "Done."
+  end
 end
