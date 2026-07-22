@@ -98,8 +98,18 @@ class FmuOperator < ApplicationRecord
     current_operator = self&.fmu&.reload&.operator
 
     OperatorDocumentFmu.transaction do
+      # Only the RODF for this fmu's forest_type should be created, empty forest_types means the document applies to all FMUs
+      required_documents = RequiredOperatorDocumentFmu.where(
+        "country_id = :country_id AND (COALESCE(cardinality(forest_types), 0) = 0 OR :forest_type = ANY (forest_types))",
+        country_id: fmu.country_id, forest_type: Fmu.forest_types[fmu.forest_type]
+      )
+
       to_destroy = OperatorDocumentFmu.includes(:operator).where(fmu_id: fmu_id)
-      to_destroy = to_destroy.where.not(operator_id: current_operator.id) if current_operator.present?
+      if current_operator.present?
+        to_destroy = to_destroy
+          .where.not(operator_id: current_operator.id)
+          .or(to_destroy.where.not(required_operator_document_id: required_documents.select(:id)))
+      end
       destroyed_count = to_destroy.count
       to_destroy.each do |doc|
         doc.skip_score_recalculation = true # just do it once for each operator at the end
@@ -107,16 +117,10 @@ class FmuOperator < ApplicationRecord
       end
       to_destroy.map(&:operator).uniq.each { |operator| ScoreOperatorDocument.recalculate!(operator) }
 
-      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id}"
+      Rails.logger.info "Destroyed #{destroyed_count} documents for FMU #{fmu_id} that don't belong to #{current_operator&.id} or no longer match the forest type"
 
       # commit current transaction
       next if current_operator.blank? || current_operator.fa_id.blank?
-
-      # Only the RODF for this fmu's forest_type should be created, empty forest_types means the document applies to all FMUs
-      required_documents = RequiredOperatorDocumentFmu.where(
-        "country_id = :country_id AND (COALESCE(cardinality(forest_types), 0) = 0 OR :forest_type = ANY (forest_types))",
-        country_id: fmu.country_id, forest_type: Fmu.forest_types[fmu.forest_type]
-      )
 
       required_documents.find_each do |rodf|
         OperatorDocumentFmu.where(required_operator_document_id: rodf.id,
