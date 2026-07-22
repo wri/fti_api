@@ -219,6 +219,11 @@ RSpec.describe FmuOperator, type: :model do
         let!(:document_without_forest_types) { create(:required_operator_document_fmu, country: country, forest_types: []) }
         let!(:document_for_cf) { create(:required_operator_document_fmu, country: country, forest_types: [ForestType::TYPES[:cf][:index]]) }
         let!(:document_for_vdc) { create(:required_operator_document_fmu, country: country, forest_types: [ForestType::TYPES[:vdc][:index]]) }
+        let!(:document_with_null_forest_types) do
+          create(:required_operator_document_fmu, country: country, forest_types: []).tap do |document|
+            document.update_column(:forest_types, nil)
+          end
+        end
 
         def operator_document_ids(fmu)
           OperatorDocumentFmu.where(fmu_id: fmu.id, operator_id: operator.id).pluck(:required_operator_document_id)
@@ -228,7 +233,7 @@ RSpec.describe FmuOperator, type: :model do
           fmu = create(:fmu, country: country, forest_type: :cf)
           create(:fmu_operator, operator: operator, fmu: fmu, current: true)
 
-          expect(operator_document_ids(fmu)).to match_array([document_without_forest_types.id, document_for_cf.id])
+          expect(operator_document_ids(fmu)).to match_array([document_without_forest_types.id, document_with_null_forest_types.id, document_for_cf.id])
         end
       end
     end

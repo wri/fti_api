@@ -114,7 +114,7 @@ class FmuOperator < ApplicationRecord
 
       # Only the RODF for this fmu's forest_type should be created, empty forest_types means the document applies to all FMUs
       required_documents = RequiredOperatorDocumentFmu.where(
-        "country_id = :country_id AND (forest_types = '{}' OR :forest_type = ANY (forest_types))",
+        "country_id = :country_id AND (COALESCE(cardinality(forest_types), 0) = 0 OR :forest_type = ANY (forest_types))",
         country_id: fmu.country_id, forest_type: Fmu.forest_types[fmu.forest_type]
       )
 
