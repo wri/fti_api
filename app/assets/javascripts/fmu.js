@@ -7,6 +7,14 @@ $(document).ready(function() {
   $('#fmu_country_id').on('change', function(){
     updateFmuFields();
   })
+
+  const warning = $('#forest_type_warning');
+  if (warning.length > 0 && $('body').hasClass('edit')) {
+    const initialValue = forestType.val();
+    forestType.on('change', function() {
+      warning.toggle(forestType.val() !== initialValue);
+    })
+  }
 })
 
 function updateFmuFields() {

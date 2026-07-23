@@ -335,6 +335,7 @@ en:
       download_shapefile: 'Download shapefile'
       download_filtered_shapefiles: 'Download Filtered Shapefiles'
       confirm_delete: 'Are you sure you want to delete this FMU?'
+      forest_type_warning: "Changing the forest type will update this FMU's document list. Documents that are not required for the new forest type will be removed, and any newly required documents will have to be provided."
     operator_page:
       producer: 'Producer'
       producer_activated: 'Producer activated'

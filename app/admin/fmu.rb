@@ -183,6 +183,11 @@ ActiveAdmin.register Fmu do
           f.input :forest_type, as: :select,
             collection: ForestType::TYPES.map { |key, _v| [ForestType.label(key), key] },
             input_html: {disabled: object.persisted? && object.country&.iso != "COD"}
+          li id: "forest_type_warning", class: "input", style: "display: none;" do
+            div class: "flash flash_warning" do
+              I18n.t("active_admin.fmus_page.forest_type_warning")
+            end
+          end
           li class: "checkboxes_label" do
             label I18n.t("active_admin.fmus_page.certification")
           end

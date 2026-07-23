@@ -349,6 +349,7 @@ es:
       download_shapefile: 'Descargar shapefile'
       download_filtered_shapefiles: 'Descargar Shapefiles Filtrados'
       confirm_delete: '¿Estás seguro de que quieres eliminar este FMU?'
+      forest_type_warning: 'Cambiar el tipo de bosque actualizará la lista de documentos de esta FMU. Los documentos que no sean necesarios para el nuevo tipo de bosque se eliminarán, y deberán proporcionarse los nuevos documentos requeridos.'
     operator_page:
       producer: 'Productor'
       producer_activated: 'Productor activado'
