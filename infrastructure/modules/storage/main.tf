@@ -1,6 +1,7 @@
-# Single bucket per environment, serving two purposes via key prefixes:
-#   db/      -> host-side `aws s3 sync` database dumps (cron in bin/provision)
-#   uploads/ -> reserved for CarrierWave uploads (currently local disk, not wired)
+# Single bucket per environment: a backup target fed by host-side `aws s3 sync`
+# cron jobs (bin/provision), via two key prefixes:
+#   db/      -> nightly database dumps
+#   uploads/ -> hourly mirror of local CarrierWave uploads (app serves from disk)
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
 
