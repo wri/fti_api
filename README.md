@@ -1,5 +1,13 @@
 # OPEN TIMBER PORTAL API #
 
+Ruby on Rails backend for the [Open Timber Portal](https://opentimberportal.org),
+serving the public portal and the observations tool. It exposes a JSON API, an
+admin interface, and background processing (Sidekiq) for imports, notifications,
+and scheduled jobs.
+
+- **Local development:** [Docker](#using-docker) or [natively](#natively)
+- **Deployment & hosting:** [Deployment](#deployment) · [infrastructure/](infrastructure/README.md)
+
 ## DOCUMENTATION ##
 
 [API Documentation](https://fti-api-documentation.herokuapp.com)
@@ -199,7 +207,21 @@ bin/rails docs:generate
 
 ## DEPLOYMENT ##
 
-Deploy to production with `cap production deploy` it will deploy the `master` branch.
+Each environment (staging, production) is a single self-contained EC2 host running
+the whole stack — nginx, puma, Sidekiq, and self-hosted PostgreSQL+PostGIS and
+Redis. The provisioning is split across three layers:
+
+- **Terraform** owns the AWS resources (VPC, EC2, Elastic IP, S3, snapshots).
+- **`bin/provision`** configures the host OS and software (nginx, certbot, DB,
+  Redis, Ruby, systemd units).
+- **Capistrano** deploys the application.
+
+See [infrastructure/README.md](infrastructure/README.md) for the full architecture
+overview and Terraform usage, and the
+[server migration runbook](infrastructure/SERVER_MIGRATION.md) for moving an
+environment to a new host with minimal downtime.
+
+Deploy to production with `cap production deploy` — it will deploy the `master` branch.
 
 To deploy the API to staging environment use `cap staging deploy`, by default that will deploy `staging` branch, but you can change it with `BRANCH` env variable (ex. `cap staging deploy BRANCH=develop`)
 
