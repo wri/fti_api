@@ -29,9 +29,9 @@ low-cost, low-moving-parts design for a low-traffic service; scaling is vertical
   +----------------------------------|-----------------------------------------+
                                      | IAM instance role (no static keys)
                                      v
-                        S3 bucket  otp-wri-<env>
-                          db/       nightly pg_dump (aws s3 sync cron)
-                          uploads/  reserved (not wired yet — see below)
+                        S3 bucket  otp-wri-<env>   (backup mirror, via cron)
+                          db/       nightly pg_dump  (aws s3 sync)
+                          uploads/  hourly mirror of local uploads (aws s3 sync)
 
         EBS root volume  --daily snapshot (DLM)-->  block-level backups
 ```
@@ -53,14 +53,15 @@ How traffic and data flow:
   they are never exposed, which is why the security group opens just 22/80/443.
 - **Everything runs as systemd units** (`puma`, `sidekiq`) set up by
   `bin/provision`; Sidekiq handles background jobs and app-level cron.
-- **User uploads are on the host's local disk.** CarrierWave stores under
-  `uploads/` on the EBS root volume (Active Storage is not used); the files are
-  moved between hosts with `bin/sync files` and protected by the daily EBS
-  snapshots. They do **not** currently go to S3.
-- **What lives off-box** is the DB dumps in S3 `db/` (via the instance's IAM
-  role, so no AWS keys sit on disk) plus the daily DLM snapshots of the encrypted
-  root volume for block-level recovery. The bucket's `uploads/` prefix is
-  reserved for a future move of uploads to S3 (see below) but is unused today.
+- **User uploads live on the host's local disk.** CarrierWave stores them under
+  `shared/uploads/` on the EBS root volume (Active Storage is not used) and the
+  app serves them from there — it does **not** read from S3. They are moved
+  between hosts with `bin/sync files`.
+- **What lives off-box is backups.** `bin/provision` installs two `aws s3 sync`
+  cron jobs (via the instance's IAM role, so no AWS keys sit on disk): nightly
+  Postgres dumps to `db/` and an hourly one-way mirror of `shared/uploads/` to
+  `uploads/`. Plus the daily DLM snapshots of the encrypted root volume for
+  block-level recovery. So S3 is a **backup target**, not app storage.
 
 Provisioning is split across three layers (Terraform / `bin/provision` /
 Capistrano) — the next section breaks down who owns what.
@@ -170,6 +171,77 @@ ENV=staging bin/provision       # configure the host
 cap staging deploy              # deploy the app
 ```
 
+## Host provisioning (`bin/provision`)
+
+Terraform creates the bare instance; [`bin/provision`](../bin/provision) turns it
+into a working app host. It's a Ruby script **run from your machine** (repo root,
+not on the server) that SSHes in and installs/configures the whole software stack:
+swap, fail2ban, ufw, PostgreSQL+PostGIS, Redis, nginx, TLS (certbot or self-signed),
+RVM/Ruby, nvm/Node, the `puma`/`sidekiq` systemd units, logrotate, the frontend
+bare-repo deploy hooks, aws-cli, and the S3 sync cron jobs. It uploads `.env.<env>`
+to the host's `shared/.env`.
+
+It reads config from your local `.env` (via dotenv), prints a summary, and
+**prompts for confirmation** before doing anything.
+
+On AWS this is the whole thing — first run and every re-run are the same command,
+because the Ubuntu AMI already ships a sudo-capable default user (`ubuntu`) with no
+root login. Set `SSH_USER=ubuntu` (or your key pair's user) and just run:
+
+```bash
+ENV=staging bin/provision
+```
+
+> `ROOT_ACCESS` is **not** used on AWS. It's a bootstrap step for generic
+> root-login VPS providers (DigitalOcean, bare metal): it connects as `root`,
+> creates the deploy user from root's authorized keys, then disables root. The AWS
+> AMI already comes that way, so skip it.
+
+Configuration (env vars, from `.env` or inline):
+
+| Var | Purpose |
+| --- | --- |
+| `ENV` | Target environment: `staging` (default) or `production`. Selects the host, domain and `.env.<env>` file. |
+| `SSH_USER` | Deploy user on the host (**required**). On AWS this is the AMI's default sudo user, `ubuntu`. |
+| `<ENV>_HOST` | Host IP / DNS, e.g. `STAGING_HOST`, `PRODUCTION_HOST` (**required**). |
+| `<ENV>_DOMAIN` | Domain(s) for nginx/TLS, comma-separated; defaults to the host. A single bare IP triggers a **self-signed** cert instead of Let's Encrypt. |
+| `LETSENCRYPT_EMAIL` | ACME contact (**required** unless `LETSENCRYPT=false`). |
+| `ROOT_ACCESS` | **Not used on AWS.** Bootstrap for root-login VPS providers only: connects as `root` to create the deploy user and disable root. |
+| `AUTH_BASIC` | HTTP Basic auth on nginx. Defaults **on** everywhere except production. |
+| `AUTH_BASIC_USER` / `AUTH_BASIC_PASSWORD` | Basic-auth credentials (password **required** when basic auth is on; only its hash is uploaded). |
+| `UFW` | `false` skips the host firewall step. |
+| `LETSENCRYPT` | `false` skips certbot install and cert issuance. |
+| `DISABLE_SYNC_CRON` | `true` **removes** the S3 sync cron block (also from an already-provisioned host). |
+
+### Re-running against a live server (with caution)
+
+Every step is written to be idempotent — it checks before creating the swapfile,
+DB role, Redis tuning, etc. — so re-running `bin/provision` mostly
+**converges** the host's config to match the repo (updated nginx template, service
+units, `.env`, cron jobs). This is the intended way to roll out a config change to
+a running box.
+
+But it is **not** a zero-impact operation, so treat production re-runs carefully:
+
+- It runs `apt update && apt upgrade -y` — packages (incl. kernel) get updated.
+- It **restarts** nginx, puma, sidekiq and redis, and re-uploads `shared/.env` —
+  expect a brief blip. Consider a maintenance window / draining Sidekiq first.
+- It re-uploads the nginx config and, for a real domain, re-runs `certbot`.
+- On a bare-IP domain it (re)generates a self-signed cert.
+- A failing step aborts the run (`set -e` + exit-status check), so it can leave
+  the host partway through a change — read the output before assuming success.
+
+If you only want to skip the risky bits, combine the flags above (e.g.
+`LETSENCRYPT=false`, `UFW=false`). To just refresh the app itself, use
+`cap <env> deploy` — not this script.
+
+The safest way to apply one change to a live host is to **run only the step you
+want**. The bottom of `bin/provision` is a flat list of `ssh_exec.call(...)` steps
+— comment out the ones you don't need and leave just the step you're changing (e.g.
+only `configure_redis`, or only the `nginx_config` upload + `restart_nginx`). Each
+step is self-contained and idempotent, so a single one applies cleanly on its own.
+Revert your edits (don't commit them) once you're done.
+
 ## Adopting the existing live servers
 
 Production and staging already exist. Running `terraform apply` as-is creates
@@ -189,20 +261,22 @@ Production and staging already exist. Running `terraform apply` as-is creates
    shows **no destructive changes**.
 2. **Greenfield** — apply fresh, then cut over DNS and Capistrano to the new EIP.
 
-## Wiring the S3 bucket into the app
+## How the S3 bucket is used
 
-The bucket is created but the app must opt in:
+The bucket is a **backup target**, fed by two host-side `aws s3 sync` cron jobs
+that `bin/provision` installs (the host authenticates with its instance-profile
+IAM role, so **no static AWS keys** are required). Both can be removed with
+`DISABLE_SYNC_CRON=true bin/provision`.
 
-- **Uploads** *(not wired yet)* — uploads currently use CarrierWave with
-  `storage :file` on the local disk. Moving them to the bucket's `uploads/` prefix
-  means adding an S3-backed CarrierWave storage (e.g. `fog-aws`) and switching the
-  uploaders' `storage`. The host uses its instance-profile IAM role, so **no
-  static AWS keys** are required. (Active Storage is not used; the `amazon:` stub
-  in `config/storage.yml` is inert.)
-- **DB backups** — the host-side `aws s3 sync` cron (set up by `bin/provision`)
-  targets `s3://otp-wri-<env>/db/`. Retention/pruning of current objects is
-  handled host-side by the backup script; a bucket lifecycle rule expires
+- **DB backups** — nightly `s3://otp-wri-<env>/db/`. `autopostgresqlbackup` writes
+  the dumps locally; the cron mirrors them up. A bucket lifecycle rule expires
   noncurrent versions after 30 days so `sync --delete` churn doesn't accumulate.
+- **Uploads backup** — hourly one-way mirror of `shared/uploads/` to
+  `s3://otp-wri-<env>/uploads/`. This is a **backup only**: the app stores and
+  serves uploads from local disk via CarrierWave (`storage :file`). Serving them
+  *from* S3 would need an S3-backed CarrierWave storage (e.g. `fog-aws`) and a
+  change to the uploaders — it is not wired that way today. (Active Storage is not
+  used; the `amazon:` stub in `config/storage.yml` is inert.)
 
 ## Backups & snapshots
 
@@ -213,8 +287,9 @@ The bucket is created but the app must opt in:
   only that value (DLM matches account+region-wide, so a shared tag would
   cross-snapshot both envs). Block-level protection for the self-hosted Postgres
   data.
-- **Logical DB dumps** — the `aws s3 sync` cron under `db/`. The two are
-  complementary.
+- **Logical DB + uploads backups to S3** — the two `aws s3 sync` cron jobs (see
+  [How the S3 bucket is used](#how-the-s3-bucket-is-used)). Complementary to the
+  snapshots: block-level recovery vs. portable per-object dumps.
 
 ## Notes
 
