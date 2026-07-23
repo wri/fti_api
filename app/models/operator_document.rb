@@ -169,7 +169,10 @@ class OperatorDocument < ApplicationRecord
     # 2 - The Fmu was deleted (destroyed_by_association)
     # 3 - The Required Operator Document was deleted (destroyed_by_association)
     # 4 - The Operator is no longer active for this Fmu
-    return super if destroyed_by_association || (fmu_id && (operator_id != fmu.operator&.id))
+    # 5 - The Required Operator Document no longer applies to the Fmu forest type
+    return super if destroyed_by_association ||
+      (fmu_id && (operator_id != fmu.operator&.id)) ||
+      (fmu_id && no_longer_required_for_fmu_forest_type?)
 
     update!(
       status: OperatorDocument.statuses[:doc_not_provided],
@@ -181,6 +184,10 @@ class OperatorDocument < ApplicationRecord
   end
 
   private
+
+  def no_longer_required_for_fmu_forest_type?
+    !required_operator_document.applies_to_forest_type?(fmu.forest_type)
+  end
 
   def disconnect_annexes
     self.annex_documents = []

@@ -119,7 +119,9 @@ ActiveAdmin.register Fmu do
     attributes_table do
       row :id
       row :name
-      row :forest_type
+      row :forest_type do |r|
+        ForestType.label(r.forest_type)
+      end
       row :country
       row :operator
 
@@ -152,6 +154,7 @@ ActiveAdmin.register Fmu do
     selectable_column
     column :id, sortable: true
     column :name, sortable: true
+    column :forest_type
     column :country, sortable: "country_translations.name"
     column :operator
     column "FSC", :certification_fsc
@@ -178,8 +181,13 @@ ActiveAdmin.register Fmu do
           f.input :name
           f.input :country, input_html: {disabled: object.persisted?}, required: true
           f.input :forest_type, as: :select,
-            collection: ForestType::TYPES.map { |key, v| [v[:label], key] },
-            input_html: {disabled: object.persisted?}
+            collection: ForestType::TYPES.map { |key, _v| [ForestType.label(key), key] },
+            input_html: {disabled: object.persisted? && object.country&.iso != "COD"}
+          li id: "forest_type_warning", class: "input", style: "display: none;" do
+            div class: "flash flash_warning" do
+              I18n.t("active_admin.fmus_page.forest_type_warning")
+            end
+          end
           li class: "checkboxes_label" do
             label I18n.t("active_admin.fmus_page.certification")
           end

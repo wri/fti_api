@@ -48,7 +48,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
       if r.fmu_forest_type.nil?
         I18n.t("active_admin.producer_documents_dashboard_page.all_forest_types")
       else
-        ForestType::TYPES[r.fmu_forest_type][:label]
+        ForestType.label(r.fmu_forest_type)
       end
     end
     column :document_type do |r|
@@ -130,7 +130,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
       if r.fmu_forest_type.nil?
         I18n.t("active_admin.producer_documents_dashboard_page.all_forest_types")
       else
-        ForestType::TYPES[r.fmu_forest_type][:label]
+        ForestType.label(r.fmu_forest_type)
       end
     end
     column :document_type do |r|

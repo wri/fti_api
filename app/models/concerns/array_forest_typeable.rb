@@ -13,7 +13,7 @@ module ArrayForestTypeable
     end
 
     def forest_types
-      super.map { |x| ForestType::TYPES.select { |_, h| h[:index] == x }.keys[0] }
+      (super || []).map { |x| ForestType::TYPES.select { |_, h| h[:index] == x }.keys[0] }
     end
 
     def forest_types=(array)
