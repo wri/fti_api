@@ -54,10 +54,12 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
   end
 
   def fmus
-    return Fmu.where.not(country_id: Country.active) if country_id.blank?
-
-    fmu_attributes = {country_id: country_id}
-    fmu_attributes[:forest_type] = forest_types if forest_types.present?
-    Fmu.where(fmu_attributes)
+    scope = if country_id.blank?
+      Fmu.where.not(country_id: Country.active)
+    else
+      Fmu.where(country_id: country_id)
+    end
+    scope = scope.where(forest_type: forest_types) if forest_types.present?
+    scope
   end
 end

@@ -100,8 +100,10 @@ class FmuOperator < ApplicationRecord
     current_operator = fmu.reload.operator
 
     OperatorDocumentFmu.transaction do
+      # FMUs in non-active countries use the generic required documents (country_id is null)
+      documents_country_id = Country.active.exists?(id: fmu.country_id) ? fmu.country_id : nil
       required_documents = RequiredOperatorDocumentFmu
-        .where(country_id: fmu.country_id)
+        .where(country_id: documents_country_id)
         .for_forest_type(fmu.forest_type)
 
       to_destroy = OperatorDocumentFmu.includes(:operator).where(fmu_id: fmu_id)

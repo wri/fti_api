@@ -235,6 +235,19 @@ RSpec.describe FmuOperator, type: :model do
 
           expect(operator_document_ids(fmu)).to match_array([document_without_forest_types.id, document_with_null_forest_types.id, document_for_cf.id])
         end
+
+        context "when the fmu country is not active" do
+          let(:country) { create(:country, is_active: false) }
+          let!(:generic_document) { create(:required_operator_document_fmu, country: nil, forest_types: []) }
+          let!(:generic_document_for_vdc) { create(:required_operator_document_fmu, country: nil, forest_types: [ForestType::TYPES[:vdc][:index]]) }
+
+          it "creates documents from generic required documents" do
+            fmu = create(:fmu, country: country, forest_type: :cf)
+            create(:fmu_operator, operator: operator, fmu: fmu, current: true)
+
+            expect(operator_document_ids(fmu)).to match_array([generic_document.id])
+          end
+        end
       end
     end
   end
