@@ -1619,8 +1619,16 @@ fr:
       doc_not_required: 'Document non requis'
       producer: 'Producteur'
 
-
-
+  forest_types:
+    fmu: 'UGF'
+    ufa: 'UFA'
+    cf: 'Forêt Communale'
+    vdc: 'Vente de coupe'
+    cpaet: 'CPAET'
+    cfad: 'CFAD'
+    pea: 'PEA'
+    cdc: 'Concession de conservation'
+    ccf: 'Concession de concession forestière'
 
   filters:
     operator: 'Operateur'

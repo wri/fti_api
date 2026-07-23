@@ -1721,6 +1721,15 @@ es:
       doc_not_required: 'Documento No Requerido'
       producer: 'Productor'
 
+  forest_types:
+    fmu: 'UGF'
+    ufa: 'UFA'
+    cf: 'Bosque comunal'
+    vdc: 'Venta de Volumen en Pie'
+    cpaet: 'CPAET'
+    cfad: 'CFAD'
+    pea: 'PEA'
+
   filters:
     operator: 'Operador'
     governance: 'Gobernanza'
