@@ -5,6 +5,66 @@ single-host EC2 architecture for **staging** and **production** so the cloud
 resources are reproducible and version-controlled. It deliberately does **not**
 change the deploy workflow.
 
+## Architecture overview
+
+The whole system is **one self-contained EC2 host per environment**. There is no
+load balancer, no RDS, no ElastiCache, no multi-AZ — every tier (web, app,
+background jobs, database, cache) runs on the same box. This is a deliberate
+low-cost, low-moving-parts design for a low-traffic service; scaling is vertical
+(bigger instance) rather than horizontal. AWS is `us-east-1`.
+
+```
+                     DNS A record  ->  Elastic IP (stable, survives host rebuild)
+                                          |
+  Internet  --443/80-->  [ Security group: 22 / 80 / 443 ]  +  host ufw
+                                          |
+  +------------------------- EC2 instance (Ubuntu, Graviton/ARM) --------------+
+  |                                                                            |
+  |   nginx  --(TLS termination, Let's Encrypt)-->  puma  ---> Rails API       |
+  |     |                                                        |             |
+  |     |                                            sidekiq  ---+  (jobs+cron) |
+  |     |                                                        |             |
+  |   static + uploads/                       PostgreSQL+PostGIS |   Redis      |
+  |   (CarrierWave, local disk)                 (loopback only)  |  (loopback)  |
+  +----------------------------------|-----------------------------------------+
+                                     | IAM instance role (no static keys)
+                                     v
+                        S3 bucket  otp-wri-<env>
+                          db/       nightly pg_dump (aws s3 sync cron)
+                          uploads/  reserved (not wired yet — see below)
+
+        EBS root volume  --daily snapshot (DLM)-->  block-level backups
+```
+
+Two identical environments, differing only in size and safety settings:
+
+| | Instance | Root vol | Snapshots | Termination protection |
+| --- | --- | --- | --- | --- |
+| **production** | `t4g.large` | 120 GB gp3 (encrypted) | daily, retain 7 | on |
+| **staging** | `t4g.small` | 100 GB gp3 (encrypted) | daily, retain 7 | off |
+
+How traffic and data flow:
+
+- **DNS → EIP → host.** The A record points at an Elastic IP so the host can be
+  rebuilt or replaced without a DNS change (see [SERVER_MIGRATION.md](./SERVER_MIGRATION.md)).
+- **nginx is the only public listener.** It terminates TLS (Let's Encrypt via
+  certbot, or a self-signed cert for bare-IP hosts), serves static assets, and
+  reverse-proxies the rest to puma. Postgres and Redis bind to loopback only —
+  they are never exposed, which is why the security group opens just 22/80/443.
+- **Everything runs as systemd units** (`puma`, `sidekiq`) set up by
+  `bin/provision`; Sidekiq handles background jobs and app-level cron.
+- **User uploads are on the host's local disk.** CarrierWave stores under
+  `uploads/` on the EBS root volume (Active Storage is not used); the files are
+  moved between hosts with `bin/sync files` and protected by the daily EBS
+  snapshots. They do **not** currently go to S3.
+- **What lives off-box** is the DB dumps in S3 `db/` (via the instance's IAM
+  role, so no AWS keys sit on disk) plus the daily DLM snapshots of the encrypted
+  root volume for block-level recovery. The bucket's `uploads/` prefix is
+  reserved for a future move of uploads to S3 (see below) but is unused today.
+
+Provisioning is split across three layers (Terraform / `bin/provision` /
+Capistrano) — the next section breaks down who owns what.
+
 ## What Terraform owns (and what it doesn't)
 
 Three layers, each with one job:
@@ -133,10 +193,12 @@ Production and staging already exist. Running `terraform apply` as-is creates
 
 The bucket is created but the app must opt in:
 
-- **Uploads** — enable the `amazon:` service in `config/storage.yml` (the S3 stub
-  is already there) and point Active Storage / CarrierWave at the bucket's
-  `uploads/` prefix. The host uses its instance-profile IAM role, so **no static
-  AWS keys** are required.
+- **Uploads** *(not wired yet)* — uploads currently use CarrierWave with
+  `storage :file` on the local disk. Moving them to the bucket's `uploads/` prefix
+  means adding an S3-backed CarrierWave storage (e.g. `fog-aws`) and switching the
+  uploaders' `storage`. The host uses its instance-profile IAM role, so **no
+  static AWS keys** are required. (Active Storage is not used; the `amazon:` stub
+  in `config/storage.yml` is inert.)
 - **DB backups** — the host-side `aws s3 sync` cron (set up by `bin/provision`)
   targets `s3://otp-wri-<env>/db/`. Retention/pruning of current objects is
   handled host-side by the backup script; a bucket lifecycle rule expires
@@ -145,8 +207,8 @@ The bucket is created but the app must opt in:
 ## Backups & snapshots
 
 - **EBS snapshots** — Data Lifecycle Manager snapshots the host's root volume
-  daily, retaining `snapshot_retain_count` (prod 14). Staging sets
-  `enable_snapshots = false`, which keeps the DLM policy but in `DISABLED` state.
+  daily, retaining `snapshot_retain_count` (7). Setting `enable_snapshots = false`
+  keeps the DLM policy but in `DISABLED` state.
   The volume is tagged `Snapshot = otp-<env>` and each env's DLM policy targets
   only that value (DLM matches account+region-wide, so a shared tag would
   cross-snapshot both envs). Block-level protection for the self-hosted Postgres
