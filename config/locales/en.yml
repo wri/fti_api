@@ -1712,6 +1712,17 @@ en:
       doc_not_required: 'Not Required Document'
       producer: 'Producer'
 
+  forest_types:
+    fmu: 'FMU'
+    ufa: 'UFA'
+    cf: 'Communal forest'
+    vdc: 'Sale of Standing Volume'
+    cpaet: 'CPAET'
+    cfad: 'CFAD'
+    pea: 'PEA'
+    cdc: 'Conservation Concession'
+    ccf: 'Forest Concession Contracts'
+
   filters:
     operator: 'Operator'
     governance: 'Governance'
