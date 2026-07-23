@@ -365,6 +365,7 @@ fr:
       download_shapefile: 'Télécharger shapefile'
       download_filtered_shapefiles: 'Télécharger les shapefiles filtrés'
       confirm_delete: 'Êtes-vous sûr de vouloir supprimer cette FMU?'
+      forest_type_warning: 'Changer le type de forêt mettra à jour la liste des documents de cette FMU. Les documents qui ne sont pas requis pour le nouveau type de forêt seront supprimés, et tout nouveau document requis devra être fourni.'
     required_operator_document_page:
       exists: 'Existe'
       publication_authorization: 'Autorisation de publication'
@@ -1619,8 +1620,16 @@ fr:
       doc_not_required: 'Document non requis'
       producer: 'Producteur'
 
-
-
+  forest_types:
+    fmu: 'UGF'
+    ufa: 'UFA'
+    cf: 'Forêt Communale'
+    vdc: 'Vente de coupe'
+    cpaet: 'CPAET'
+    cfad: 'CFAD'
+    pea: 'PEA'
+    cdc: 'Concession de conservation'
+    ccf: 'Concession de concession forestière'
 
   filters:
     operator: 'Operateur'

@@ -68,7 +68,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
       if r.fmu_forest_type.nil?
         I18n.t("active_admin.producer_documents_dashboard_page.all_forest_types")
       else
-        ForestType::TYPES[r.fmu_forest_type][:label]
+        ForestType.label(r.fmu_forest_type)
       end
     end
     column :severity_level, sortable: false do |r|
@@ -192,7 +192,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
       if r.fmu_forest_type.nil?
         I18n.t("active_admin.producer_documents_dashboard_page.all_forest_types")
       else
-        ForestType::TYPES[r.fmu_forest_type][:label]
+        ForestType.label(r.fmu_forest_type)
       end
     end
     column :validation_status do |r|
