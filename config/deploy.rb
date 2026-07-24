@@ -42,6 +42,18 @@ set :disallow_pushing, true # Do not change this
 set :compressor, :gzip
 # end of db tasks config
 
+# Dump as the postgres superuser (peer auth, no credentials) so pg_dump can read every table,
+# including extension tables like us_gaz, without the app role holding a standing read-all grant.
+# set -o pipefail makes a pg_dump failure abort instead of the gzip pipe masking it into a truncated dump.
+module Database
+  class Remote
+    def dump
+      @cap.execute "cd #{@cap.current_path} && set -o pipefail && sudo -u postgres pg_dump #{database} #{dump_cmd_opts} | #{compressor.compress("-", db_dump_file_path)}"
+      self
+    end
+  end
+end
+
 namespace :db do
   task :download do
     on roles(:db) do
@@ -51,8 +63,6 @@ namespace :db do
       begin
         remote_db.dump
         remote_db.download "#{dump_dir}/#{remote_db.output_file}"
-      rescue e
-        $stdout.puts "E[#{e.class}]: #{e.message}"
       ensure
         remote_db.clean_dump_if_needed
       end
