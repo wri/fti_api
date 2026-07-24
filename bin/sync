@@ -48,7 +48,7 @@ def sync_db(target, db)
   # Restore runs as the postgres superuser (needed to create the PostGIS extension). The dump
   # keeps ownership, so pg_restore assigns every object to the deploy user recorded in it (that
   # role exists on the target); object privileges are dropped (--no-acl).
-  dump = "pg_dump -Fc --no-acl fti_api_production"
+  dump = "sudo -u postgres pg_dump -Fc --no-acl fti_api_production"
   restore = [
     "sudo -u postgres dropdb --force --if-exists #{db}",
     "sudo -u postgres createdb -O #{user} #{db}",
