@@ -90,7 +90,7 @@ bin/dev
 ### REQUIREMENTS ###
 
   - **Ruby version:** 4.0.5
-  - **PostgreSQL 12.1+** [How to install](http://exponential.io/blog/2015/02/21/install-postgresql-on-mac-os-x-via-brew/)
+  - **PostgreSQL 18** with **PostGIS 3.6**
 
 **Just execute the script file in `bin/setup`**
 
