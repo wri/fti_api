@@ -116,7 +116,7 @@ namespace :scheduler do
     disablable_users = User.where(is_active: true)
       .where.not(email: "webuser@example.com")
       .joins(:user_permission)
-      .where.not(user_permissions: {user_role: %w[ngo ngo_manager] })
+      .where.not(user_permissions: {user_role: %w[ngo ngo_manager]})
       .where("last_activated_at IS NULL OR last_activated_at <= ?", activation_grace_period)
 
     time = Benchmark.ms do
