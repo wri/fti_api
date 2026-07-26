@@ -7,6 +7,76 @@ module V1
 
       expect(status).to eq(401)
       expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
+      expect(user.reload.failed_attempts).to eq(1)
+    end
+
+    describe "Account lockout" do
+      def lock_account!(account)
+        Devise.maximum_attempts.times do
+          post "/login", params: {auth: {email: account.email, password: "wrong password"}}
+          expect(status).to eq(401)
+        end
+      end
+
+      it "Locks the account after the maximum failed attempts" do
+        lock_account!(user)
+
+        expect(user.reload).to be_access_locked
+
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+
+        expect(status).to eq(401)
+        expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
+      end
+
+      it "Sends unlock instructions when the account is locked" do
+        expect {
+          lock_account!(user)
+        }.to have_enqueued_mail(Devise::Mailer, :unlock_instructions).once
+
+        expect(user.reload).to be_access_locked
+        expect(user.unlock_token).to be_present
+      end
+
+      it "Unlocks the account when the email unlock link is visited" do
+        ActionMailer::Base.deliveries.clear
+
+        perform_enqueued_jobs do
+          lock_account!(user)
+        end
+
+        expect(user.reload).to be_access_locked
+
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail).to be_present
+        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.subject).to eq(I18n.t("devise.mailer.unlock_instructions.subject"))
+
+        body = (mail.html_part || mail).body.to_s
+        unlock_path = body[%r{https?://[^"]+(/admin/unlock\?unlock_token=[^"]+)}, 1]
+        expect(unlock_path).to be_present
+
+        get CGI.unescapeHTML(unlock_path)
+
+        expect(response).to redirect_to(new_user_session_path)
+        expect(flash[:notice]).to eq(I18n.t("devise.unlocks.unlocked"))
+        expect(user.reload).not_to be_access_locked
+        expect(user.failed_attempts).to eq(0)
+        expect(user.unlock_token).to be_nil
+
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+        expect(status).to eq(200)
+      end
+
+      it "Resets failed attempts after a successful login" do
+        post "/login", params: {auth: {email: user.email, password: "wrong password"}}
+        expect(user.reload.failed_attempts).to eq(1)
+
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+
+        expect(status).to eq(200)
+        expect(user.reload.failed_attempts).to eq(0)
+      end
     end
 
     it "Valid login" do

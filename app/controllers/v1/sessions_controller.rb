@@ -13,7 +13,10 @@ module V1
 
     def create
       @user = User.find_by(email: auth_params[:email])
-      if @user.present? && @user.valid_password?(auth_params[:password]) && @user.is_active
+      if @user.present? &&
+          @user.valid_for_authentication? { @user.valid_password?(auth_params[:password]) } &&
+          @user.active_for_authentication?
+        @user.reset_failed_attempts!
         @user.update_column(:should_change_password, true) unless User.strong_password?(auth_params[:password])
         @user.update_tracked_fields!(request)
         set_download_session_cookie_for(@user)

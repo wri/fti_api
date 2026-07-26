@@ -31,13 +31,16 @@
 #  last_name              :string
 #  organization_account   :boolean          default(FALSE), not null
 #  should_change_password :boolean          default(FALSE), not null
+#  failed_attempts        :integer          default(0), not null
+#  unlock_token           :string
+#  locked_at              :datetime
 #
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :timeoutable and :omniauthable
   devise :database_authenticatable,
-    :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   PERMISSIONS = %w[operator ngo ngo_manager government]
   PASSWORD_COMPLEXITY_REGEX = /\A(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+\z/
@@ -164,7 +167,7 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    "You are not allowed to sign in."
+    access_locked? ? :locked : "You are not allowed to sign in."
   end
 
   def send_reset_password_instructions
