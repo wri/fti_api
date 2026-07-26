@@ -67,4 +67,28 @@ describe "deactivate_inactive_users" do
 
     expect(ActionMailer::Base.deliveries.first.to).to eq([never_logged_user.email])
   end
+
+  it "does not warn or deactivate users within the activation grace period" do
+    recently_activated_user = create(
+      :operator_user,
+      is_active: true,
+      last_sign_in_at: 2.years.ago - 1.day,
+      last_activated_at: 1.month.ago
+    )
+
+    expect { run_task }.not_to change { recently_activated_user.reload.is_active }
+    expect(ActionMailer::Base.deliveries).to be_empty
+  end
+
+  it "deactivates users after the activation grace period has passed" do
+    previously_activated_user = create(
+      :operator_user,
+      is_active: true,
+      last_sign_in_at: 2.years.ago - 1.day,
+      last_activated_at: 2.months.ago - 1.day,
+      deactivated_at: nil
+    )
+
+    expect { run_task }.to change { previously_activated_user.reload.is_active }.from(true).to(false)
+  end
 end

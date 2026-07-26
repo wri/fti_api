@@ -108,6 +108,7 @@ namespace :scheduler do
     warning_threshold = 18.months.ago.end_of_day
     warning_cooldown = 1.month.ago.end_of_day
     deactivation_threshold = 2.years.ago.end_of_day
+    activation_grace_period = 2.months.ago.end_of_day
 
     warned_users = 0
     deactivated_users = 0
@@ -116,6 +117,7 @@ namespace :scheduler do
       .where.not(email: "webuser@example.com")
       .joins(:user_permission)
       .where.not(user_permissions: {user_role: %w[ngo ngo_manager] })
+      .where("last_activated_at IS NULL OR last_activated_at <= ?", activation_grace_period)
 
     time = Benchmark.ms do
       warning_users = disablable_users

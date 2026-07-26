@@ -11,6 +11,19 @@ RSpec.shared_examples "activable" do |model_name, model|
     end
   end
 
+  if model.attributes.key? "last_activated_at"
+    context "hooks" do
+      describe "#set_last_activated_at" do
+        it "set last_activated_at when #{model_name} is activated" do
+          model.deactivate
+          model.activate
+
+          expect(model.last_activated_at).not_to eql nil
+        end
+      end
+    end
+  end
+
   describe "#activate" do
     it "mark #{model_name} as actived" do
       model.activate
