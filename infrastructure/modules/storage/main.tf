@@ -1,6 +1,7 @@
-# Single bucket per environment, serving two purposes via key prefixes:
-#   uploads/ -> Active Storage / CarrierWave files
-#   db/      -> host-side `aws s3 sync` database dumps (cron in bin/provision)
+# Single bucket per environment: a backup target fed by host-side `aws s3 sync`
+# cron jobs (bin/provision), via two key prefixes:
+#   db/      -> nightly database dumps
+#   uploads/ -> hourly mirror of local CarrierWave uploads (app serves from disk)
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
 
@@ -33,6 +34,19 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
 
     abort_incomplete_multipart_upload {
       days_after_initiation = 7
+    }
+  }
+
+  # Enable intelligent tiering for all objects, so that infrequently accessed files are automatically moved to a cheaper storage class.
+  rule {
+    id     = "intelligent-tiering"
+    status = "Enabled"
+
+    filter {}
+
+    transition {
+      days          = 0
+      storage_class = "INTELLIGENT_TIERING"
     }
   }
 
