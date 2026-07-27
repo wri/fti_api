@@ -14,7 +14,7 @@ module ScoreEvolutionHelper
     scores.map do |column, options|
       {
         name: options[:name] || active_admin_config.resource_class.human_attribute_name(column),
-        data: rows_by_date.transform_values { |rows| rows.map(&column).max },
+        data: rows_by_date.transform_values { |row| row.public_send(column) },
         **{dataset: {id: column.to_s}}.deep_merge(options.except(:name))
       }
     end
@@ -22,7 +22,8 @@ module ScoreEvolutionHelper
 
   private
 
-  # only the all countries rollup rows are charted, unless a country is selected
+  # only the all countries rollup rows are charted, unless a country is selected,
+  # either way statistics of a single country give one row per date
   def score_evolution_rows_by_date(collection)
     rows = if params.dig(:q, :by_country).present?
       collection
@@ -30,6 +31,6 @@ module ScoreEvolutionHelper
       collection.select { |r| r.country_id.nil? }
     end
 
-    rows.group_by { |r| r.date.to_date }
+    rows.index_by { |r| r.date.to_date }
   end
 end

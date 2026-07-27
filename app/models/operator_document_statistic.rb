@@ -78,12 +78,12 @@ class OperatorDocumentStatistic < ApplicationRecord
             )
 
             prev_stat = new_stat.previous_stat
-            if prev_stat.present? && prev_stat == new_stat
+            if prev_stat.present? && prev_stat.same_counters?(new_stat)
               Rails.logger.info "Prev score the same, update date of prev score"
               prev_stat.date = day
               prev_stat.updated_at = DateTime.current
               to_update << prev_stat
-            elsif prev_stat.blank? || prev_stat != new_stat
+            else
               Rails.logger.info "Adding score for country: #{country_id} and #{day}"
               to_save << new_stat
             end

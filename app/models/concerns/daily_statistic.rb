@@ -78,7 +78,7 @@ module DailyStatistic
 
   # same series with the same counters, generators use it to move the date
   # of the previous stat forward instead of storing an unchanged snapshot
-  def ==(other)
+  def same_counters?(other)
     return false unless other.is_a?(self.class)
 
     (self.class.column_names - %w[id date created_at updated_at]).all? do |attr|

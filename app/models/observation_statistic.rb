@@ -48,8 +48,8 @@ class ObservationStatistic < ApplicationRecord
 
   validates :date, presence: true
 
-  # report count columns with theirs observation history validation status conditions
-  REPORT_COUNT_COLUMNS = {
+  # count columns with theirs observation history validation status conditions
+  STATUS_COUNT_COLUMNS = {
     created: "= 0",
     ready_for_qc: "IN (1, 10)",
     qc_in_progress: "IN (2, 11)",
@@ -75,7 +75,7 @@ class ObservationStatistic < ApplicationRecord
   end
 
   def self.query_dashboard_report(search = {})
-    date_from = (search[:date_gteq] || Observation.order(:created_at).first.created_at).to_date.to_fs(:db)
+    date_from = (search[:date_gteq] || Observation.minimum(:created_at) || Time.zone.today).to_date.to_fs(:db)
     date_to = (search[:date_lteq] || Time.zone.today).to_date.to_fs(:db)
     country_id = search[:by_country]
     operator_id = search[:operator_id_eq]
@@ -107,11 +107,11 @@ class ObservationStatistic < ApplicationRecord
     filters.push(["is_active = ?", is_active]) if is_active.present?
     filters_sql = ActiveRecord::Base.sanitize_sql_for_conditions([filters.map(&:first).join(" AND "), *filters.map(&:last).compact])
 
-    count_sums = REPORT_COUNT_COLUMNS.map { |column, condition|
+    count_sums = STATUS_COUNT_COLUMNS.map { |column, condition|
       status_filter = condition && "filter (where validation_status #{condition}) "
       "coalesce(sum(total_count) #{status_filter}, 0) as #{column}"
     }.join(",\n")
-    count_vector = "array[#{REPORT_COUNT_COLUMNS.keys.join(", ")}]"
+    count_vector = "array[#{STATUS_COUNT_COLUMNS.keys.join(", ")}]"
 
     sql = <<~SQL
       with dates as (
@@ -154,7 +154,7 @@ class ObservationStatistic < ApplicationRecord
       select
         date,
         country_id,
-        #{REPORT_COUNT_COLUMNS.keys.join(",\n")},
+        #{STATUS_COUNT_COLUMNS.keys.join(",\n")},
         #{sql_literal(operator_id)} as operator_id,
         null as validation_status,
         #{sql_literal(severity_level)} as severity_level,

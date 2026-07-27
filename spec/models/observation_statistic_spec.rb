@@ -3,6 +3,12 @@
 require "rails_helper"
 
 RSpec.describe ObservationStatistic, type: :model do
+  describe ".query_dashboard_report without observations" do
+    it "falls back to today when there is no observation to start the range at" do
+      expect { described_class.query_dashboard_report({}).to_a }.not_to raise_error
+    end
+  end
+
   describe ".query_dashboard_report" do
     # observations are expensive to create and the query only reads observation_histories,
     # so prebuild them once and let examples create just the history rows

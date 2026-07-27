@@ -55,7 +55,7 @@ class ObservationReportStatistic < ApplicationRecord
         )
         prev_stat = new_stat.previous_stat
 
-        if prev_stat.present? && prev_stat == new_stat
+        if prev_stat.present? && prev_stat.same_counters?(new_stat)
           Rails.logger.info "Prev score the same, update date of prev score"
           prev_stat.date = day
           prev_stat.save!
