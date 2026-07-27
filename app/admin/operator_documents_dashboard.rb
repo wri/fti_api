@@ -66,31 +66,16 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
     column :not_required_count, sortable: false
     column :not_provided_count, sortable: false
 
-    chart_collection = if params.dig(:q, :by_country).present?
-      collection
-    else
-      collection.select { |r| r.country_id.nil? }
-    end
-    chart_collection_by_date = chart_collection.group_by(&:date)
-    hidden = {dataset: {hidden: true}}
-    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
-    get_score = ->(score_key, options = {}) {
-      {
-        name: OperatorDocumentStatistic.human_attribute_name(score_key),
-        data: get_data.call(&score_key),
-        **{dataset: {id: score_key.to_s}}.deep_merge(options)
-      }
-    }
+    hidden = ScoreEvolutionHelper::HIDDEN_SCORE
     render partial: "score_evolution", locals: {
-      scores: [
-        get_score.call(:not_provided_count, hidden),
-        get_score.call(:pending_count, hidden),
-        get_score.call(:invalid_count, hidden),
-        get_score.call(:valid_and_expired_count),
-        get_score.call(:valid_count),
-        get_score.call(:expired_count),
-        get_score.call(:not_required_count, hidden)
-      ]
+      scores: score_evolution_scores(collection,
+        not_provided_count: hidden,
+        pending_count: hidden,
+        invalid_count: hidden,
+        valid_and_expired_count: {},
+        valid_count: {},
+        expired_count: {},
+        not_required_count: hidden)
     }
 
     panel I18n.t("active_admin.producer_documents_dashboard_page.visible_columns") do

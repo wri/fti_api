@@ -46,18 +46,9 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
         res.send("o_#{o.id}") || "0"
       end
     end
-    chart_collection = if params.dig(:q, :by_country).present?
-      collection
-    else
-      collection.select { |r| r.country_id.nil? }
-    end
-    chart_collection_by_date = chart_collection.group_by(&:date)
-    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
-
     render partial: "score_evolution", locals: {
-      scores: [
-        {name: I18n.t("active_admin.observation_reports_dashboard_page.reports"), data: get_data.call(&:total_count)}
-      ]
+      scores: score_evolution_scores(collection,
+        total_count: {name: I18n.t("active_admin.observation_reports_dashboard_page.reports")})
     }
   end
 

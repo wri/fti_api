@@ -106,36 +106,20 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     column :published_modified
     column :published_all
     column :total_count, sortable: false
-    chart_collection = if params.dig(:q, :by_country).present?
-      collection
-    else
-      collection.select { |r| r.country_id.nil? }
-    end
-    chart_collection_by_date = chart_collection.group_by(&:date)
-    hidden = {dataset: {hidden: true}}
-    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
-    get_score = ->(score_key, options = {}) {
-      {
-        name: ObservationStatistic.human_attribute_name(score_key),
-        data: get_data.call(&score_key),
-        **{dataset: {id: score_key.to_s}}.deep_merge(options)
-      }
-    }
-
+    hidden = ScoreEvolutionHelper::HIDDEN_SCORE
     render partial: "score_evolution", locals: {
-      scores: [
-        get_score.call(:created, hidden),
-        get_score.call(:ready_for_qc, hidden),
-        get_score.call(:qc_in_progress, hidden),
-        get_score.call(:approved, hidden),
-        get_score.call(:rejected, hidden),
-        get_score.call(:needs_revision, hidden),
-        get_score.call(:ready_for_publication, hidden),
-        get_score.call(:published_no_comments, hidden),
-        get_score.call(:published_not_modified, hidden),
-        get_score.call(:published_modified, hidden),
-        get_score.call(:published_all, hidden)
-      ]
+      scores: score_evolution_scores(collection,
+        created: hidden,
+        ready_for_qc: hidden,
+        qc_in_progress: hidden,
+        approved: hidden,
+        rejected: hidden,
+        needs_revision: hidden,
+        ready_for_publication: hidden,
+        published_no_comments: hidden,
+        published_not_modified: hidden,
+        published_modified: hidden,
+        published_all: hidden)
     }
 
     panel "Visible columns" do
