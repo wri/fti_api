@@ -23,6 +23,17 @@ RSpec.describe Admin::ObservationsDashboardsController, type: :controller do
     it { is_expected.to be_successful }
   end
 
+  describe "GET index with all countries filter" do
+    before { get :index, params: {q: {by_country: "null"}} }
+
+    it "keeps the option selected and shows it in current filters" do
+      doc = response.parsed_body
+      expect(doc.css("#q_by_country option[selected]").pluck("value")).to eq(["null"])
+      current_filters = doc.css("#search_status_sidebar_section li").map { |li| li.text.squish }
+      expect(current_filters).to include("Country equals All Countries")
+    end
+  end
+
   describe "GET index with .csv format" do
     before do
       get :index, format: "csv"

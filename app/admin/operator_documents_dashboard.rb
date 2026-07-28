@@ -66,31 +66,16 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
     column :not_required_count, sortable: false
     column :not_provided_count, sortable: false
 
-    chart_collection = if params.dig(:q, :by_country).present?
-      collection
-    else
-      collection.select { |r| r.country_id.nil? }
-    end
-    chart_collection_by_date = chart_collection.group_by(&:date)
-    hidden = {dataset: {hidden: true}}
-    get_data = ->(&block) { chart_collection_by_date.map { |date, data| {date.to_date => data.map(&block).max} }.reduce(&:merge) }
-    get_score = ->(score_key, options = {}) {
-      {
-        name: OperatorDocumentStatistic.human_attribute_name(score_key),
-        data: get_data.call(&score_key),
-        **{dataset: {id: score_key.to_s}}.deep_merge(options)
-      }
-    }
+    hidden = ScoreEvolutionHelper::HIDDEN_SCORE
     render partial: "score_evolution", locals: {
-      scores: [
-        get_score.call(:not_provided_count, hidden),
-        get_score.call(:pending_count, hidden),
-        get_score.call(:invalid_count, hidden),
-        get_score.call(:valid_and_expired_count),
-        get_score.call(:valid_count),
-        get_score.call(:expired_count),
-        get_score.call(:not_required_count, hidden)
-      ]
+      scores: score_evolution_scores(collection,
+        not_provided_count: hidden,
+        pending_count: hidden,
+        invalid_count: hidden,
+        valid_and_expired_count: {},
+        valid_count: {},
+        expired_count: {},
+        not_required_count: hidden)
     }
 
     panel I18n.t("active_admin.producer_documents_dashboard_page.visible_columns") do
@@ -152,14 +137,6 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
   controller do
     skip_before_action :restore_search_filters
     skip_after_action :save_search_filters
-    before_action :set_default_filters
-
-    def set_default_filters
-      params[:q] ||= {}
-      params[:q][:required_operator_document_group_id_null] = true if params.dig(:q, :required_operator_document_group_id_eq).blank?
-      params[:q][:fmu_forest_type_null] = true if params.dig(:q, :fmu_forest_type_eq).blank?
-      params[:q][:document_type_null] = true if params.dig(:q, :document_type_eq).blank?
-    end
 
     def scoped_collection
       col = if params.dig(:q, :date_gteq).present?
@@ -167,6 +144,10 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
       else
         super
       end
+      # show only rollup rows of dimensions not filtered by the user
+      col = col.where(required_operator_document_group_id: nil) if params.dig(:q, :required_operator_document_group_id_eq).blank?
+      col = col.where(fmu_forest_type: nil) if params.dig(:q, :fmu_forest_type_eq).blank?
+      col = col.where(document_type: nil) if params.dig(:q, :document_type_eq).blank?
       col.includes(:required_operator_document_group, country: :translations)
     end
   end
