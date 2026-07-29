@@ -46,6 +46,7 @@ RSpec.describe UserMailer, type: :mailer do
 
     it "links to the portal" do
       expect(mail.body.encoded).to include(ENV["FRONTEND_URL"])
+      expect(mail.body.encoded).not_to include(ENV["OBSERVATIONS_TOOL_URL"])
     end
 
     context "when user is an observation tool user" do
