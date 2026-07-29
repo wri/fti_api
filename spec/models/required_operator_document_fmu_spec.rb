@@ -57,6 +57,23 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
 
         it { expect { subject }.to_not change { OperatorDocument.count } }
       end
+
+      context "when the document is generic (country is null)" do
+        let(:operator_country) { create :country, is_active: false }
+        let(:rod) { create :required_operator_document_fmu, country: nil, forest_types: forest_types }
+
+        context "with forest types matching the fmu" do
+          let(:forest_types) { [fmu.read_attribute_before_type_cast(:forest_type)] }
+
+          it { expect { subject }.to change { OperatorDocument.count }.from(0).to(1) }
+        end
+
+        context "with forest types not matching the fmu" do
+          let(:forest_types) { [ForestType::TYPES[:vdc][:index]] }
+
+          it { expect { subject }.to_not change { OperatorDocument.count } }
+        end
+      end
     end
   end
 end

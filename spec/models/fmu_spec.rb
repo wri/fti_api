@@ -133,6 +133,23 @@ RSpec.describe Fmu, type: :model do
       end
     end
 
+    describe "#sync_operator_documents" do
+      it "updates the operator documents list when the forest type changes" do
+        country = create(:country)
+        operator = create(:operator, country: country, fa_id: "fa_id")
+        document_for_cf = create(:required_operator_document_fmu, country: country, forest_types: [ForestType::TYPES[:cf][:index]])
+        document_for_vdc = create(:required_operator_document_fmu, country: country, forest_types: [ForestType::TYPES[:vdc][:index]])
+        fmu = create(:fmu, country: country, forest_type: :cf, operator: operator)
+
+        operator_documents = OperatorDocumentFmu.where(fmu_id: fmu.id, operator_id: operator.id)
+        expect(operator_documents.pluck(:required_operator_document_id)).to eq([document_for_cf.id])
+
+        fmu.update!(forest_type: :vdc)
+
+        expect(operator_documents.pluck(:required_operator_document_id)).to eq([document_for_vdc.id])
+      end
+    end
+
     describe "#destroy" do
       it "destroy operator_documents associated with the fmu" do
         another_fmu = create(:fmu)

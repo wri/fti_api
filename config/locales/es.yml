@@ -349,6 +349,7 @@ es:
       download_shapefile: 'Descargar shapefile'
       download_filtered_shapefiles: 'Descargar Shapefiles Filtrados'
       confirm_delete: '¿Estás seguro de que quieres eliminar este FMU?'
+      forest_type_warning: 'Cambiar el tipo de bosque actualizará la lista de documentos de esta FMU. Los documentos que no sean necesarios para el nuevo tipo de bosque se eliminarán, y deberán proporcionarse los nuevos documentos requeridos.'
     operator_page:
       producer: 'Productor'
       producer_activated: 'Productor activado'
@@ -1720,6 +1721,15 @@ es:
       doc_valid: 'Documento Válido'
       doc_not_required: 'Documento No Requerido'
       producer: 'Productor'
+
+  forest_types:
+    fmu: 'UGF'
+    ufa: 'UFA'
+    cf: 'Bosque comunal'
+    vdc: 'Venta de Volumen en Pie'
+    cpaet: 'CPAET'
+    cfad: 'CFAD'
+    pea: 'PEA'
 
   filters:
     operator: 'Operador'

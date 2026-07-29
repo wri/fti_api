@@ -48,7 +48,7 @@ class OperatorDocumentFilterTree
 
   def forest_types
     ForestType::TYPES.map do |key, value|
-      {key: key, id: value[:index], name: value[:label]}
+      {key: key, id: value[:index], name: ForestType.label(key)}
     end.sort_by { |x| x[:name] }
   end
 
@@ -117,7 +117,7 @@ class OperatorDocumentFilterTree
 
   def serialize_forest_types(forest_types)
     ForestType::TYPES.filter_map do |key, value|
-      {key: key, id: value[:index], name: value[:label]} if forest_types.include?(key.to_s)
+      {key: key, id: value[:index], name: ForestType.label(key)} if forest_types.include?(key.to_s)
     end
   end
 

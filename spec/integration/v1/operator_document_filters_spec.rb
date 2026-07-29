@@ -149,7 +149,7 @@ module V1
 
     def forest_type_entry(key)
       value = ForestType::TYPES[key]
-      {key: key.to_s, id: value[:index], name: value[:label]}
+      {key: key.to_s, id: value[:index], name: ForestType.label(key)}
     end
   end
 end

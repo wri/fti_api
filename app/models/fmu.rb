@@ -52,6 +52,7 @@ class Fmu < ApplicationRecord
 
   after_create :update_geometry, if: :geojson
   after_update :update_geometry, if: :saved_change_to_geojson?
+  after_update :sync_operator_documents, if: :saved_change_to_forest_type?
   after_save :update_geojson_properties
 
   # TODO Redo all of those
@@ -141,6 +142,10 @@ class Fmu < ApplicationRecord
       matches.any? ? matches : nil
     } do |parent|
     parent.table[:id]
+  end
+
+  def sync_operator_documents
+    fmu_operator&.update_documents_list
   end
 
   def update_geometry
