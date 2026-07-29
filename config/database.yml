@@ -1,6 +1,8 @@
 default: &default
   adapter: postgis
   encoding: unicode
+  # postgis extensions put tiger/topology on the database search_path, keep them out of schema.rb
+  schema_search_path: public
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV["POSTGRES_USER"] %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
