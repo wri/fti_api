@@ -11,6 +11,14 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.forgotten_password test_user_operator
   end
 
+  def inactive_account_warning
+    UserMailer.inactive_account_warning test_user_operator, 30.days.from_now.to_date
+  end
+
+  def account_deactivated_for_inactivity
+    UserMailer.account_deactivated_for_inactivity test_user_operator
+  end
+
   private
 
   def test_user_observer
