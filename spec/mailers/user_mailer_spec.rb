@@ -43,6 +43,27 @@ RSpec.describe UserMailer, type: :mailer do
     it "renders the body" do
       expect(mail.body.encoded).to match(I18n.t("user_mailer.inactive_account_warning.message", disable_date: I18n.l(disable_date)))
     end
+
+    it "links to the portal" do
+      expect(mail.body.encoded).to include(ENV["FRONTEND_URL"])
+      expect(mail.body.encoded).not_to include(ENV["OBSERVATIONS_TOOL_URL"])
+    end
+
+    context "when user is an observation tool user" do
+      let(:user) { create(:ngo_manager) }
+
+      it "links to the observations tool" do
+        expect(mail.body.encoded).to include(ENV["OBSERVATIONS_TOOL_URL"])
+      end
+    end
+
+    context "when user is an admin" do
+      let(:user) { create(:admin) }
+
+      it "links to the admin panel" do
+        expect(mail.body.encoded).to include(admin_root_url)
+      end
+    end
   end
 
   describe "account_deactivated_for_inactivity" do

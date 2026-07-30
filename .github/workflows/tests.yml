@@ -5,6 +5,7 @@ env:
   POSTGRES_PORT: 5432
   APP_URL: http://localhost:3000
   FRONTEND_URL: http://localhost:5000
+  OBSERVATIONS_TOOL_URL: http://localhost:5000/observations-tool
   SENDGRID_API_KEY: asdf
   CONTACT_EMAIL: nomail@nomail.com
   RESPONSIBLE_EMAIL: test@nomail.com

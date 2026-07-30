@@ -17,6 +17,10 @@ module Roleable
       user_permission.user_role.in?("admin")
     end
 
+    def bo_manager?
+      user_permission.user_role.in?("bo_manager")
+    end
+
     def holding?
       user_permission.user_role.in?("holding")
     end

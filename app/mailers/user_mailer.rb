@@ -24,6 +24,7 @@ class UserMailer < ApplicationMailer
   def inactive_account_warning(user, disable_date)
     @user = user
     @disable_date = disable_date
+    @link = generate_app_url(user)
     mail(to: user.email, subject: I18n.t("user_mailer.inactive_account_warning.subject", disable_date: I18n.l(disable_date)))
   end
 
@@ -41,6 +42,16 @@ class UserMailer < ApplicationMailer
       ENV["OBSERVATIONS_TOOL_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
     else
       ENV["FRONTEND_URL"] + "/reset-password?reset_password_token=" + generate_reset_token(user)
+    end
+  end
+
+  def generate_app_url(user)
+    if user.admin? || user.bo_manager?
+      admin_root_url
+    elsif user.observation_tool_user?
+      ENV["OBSERVATIONS_TOOL_URL"]
+    else
+      ENV["FRONTEND_URL"]
     end
   end
 
