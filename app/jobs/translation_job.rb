@@ -38,9 +38,10 @@ class TranslationJob < ApplicationJob
         end
       end
     end
-    entity.save
+    entity.save!
   rescue => e
+    Rails.logger.error "TranslationJob failed for #{entity.class.name}##{entity.id}: #{e.class}: #{e.message}"
     Sentry.capture_exception(e)
-    raise TranslationException
+    raise TranslationException, "#{e.class}: #{e.message}"
   end
 end
