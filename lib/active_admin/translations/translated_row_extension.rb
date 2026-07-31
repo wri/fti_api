@@ -25,7 +25,7 @@ module ActiveAdmin
 
               div class: "translation-content", data: {locale: locale}, style: ((locale == I18n.locale) ? "" : "display: none;") do
                 if value.present?
-                  text_node value
+                  text_node(value.html_safe? ? value : simple_format(value))
                   if translated_from.present?
                     br
                     text_node I18n.t("active_admin.shared.auto_translated_from", translated_from: translated_from)
