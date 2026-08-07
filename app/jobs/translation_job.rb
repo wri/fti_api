@@ -2,6 +2,8 @@ class TranslationJob < ApplicationJob
   class TranslationException < StandardError
   end
 
+  WHODUNNIT = "Automatic translation"
+
   queue_as :default
   retry_on TranslationException, wait: 5.minutes, attempts: 3
 
@@ -38,7 +40,9 @@ class TranslationJob < ApplicationJob
         end
       end
     end
-    entity.save!
+    PaperTrail.request(whodunnit: WHODUNNIT) do
+      entity.save!
+    end
   rescue => e
     Rails.logger.error "TranslationJob failed for #{entity.class.name}##{entity.id}: #{e.class}: #{e.message}"
     Sentry.capture_exception(e)

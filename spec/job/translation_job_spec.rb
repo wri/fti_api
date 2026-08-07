@@ -102,6 +102,12 @@ RSpec.describe TranslationJob, type: :job do
             end
           end
         end
+
+        it "records the automatic translation as the paper trail whodunnit", versioning: true do
+          expect { subject }.to change {
+            PaperTrail::Version.where(whodunnit: TranslationJob::WHODUNNIT).count
+          }.from(0)
+        end
       end
 
       context "when the translation service raises an error" do
