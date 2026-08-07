@@ -1,6 +1,7 @@
 class CreateTranslationTableForOperators < ActiveRecord::Migration[8.0]
   def change
     PaperTrail.request.disable_model(Operator)
+    PaperTrail.request.disable_model(Operator::Translation)
     reversible do |dir|
       dir.up do
         Operator.create_translation_table!({
@@ -22,6 +23,7 @@ class CreateTranslationTableForOperators < ActiveRecord::Migration[8.0]
       end
     end
     PaperTrail.request.enable_model(Operator)
+    PaperTrail.request.enable_model(Operator::Translation)
   end
 
   def migrate_data_down
