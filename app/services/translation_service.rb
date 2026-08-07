@@ -6,9 +6,15 @@ class TranslationService
     )
   end
 
+  # the API returns line breaks it was not given, so lines are translated separately and the layout rebuilt here
   def call(text, from, to)
-    translation = @translator.translate text, from: from, to: to
+    lines = text.to_s.gsub(/\r\n?/, "\n").split("\n", -1)
+    translatable = lines.compact_blank
+    return text if translatable.empty?
 
-    translation.text
+    result = @translator.translate(*translatable, from: from, to: to, format: :text)
+    translated = Array.wrap(result).map { |t| t.text.gsub(/\s*\n\s*/, " ").strip }
+
+    lines.map { |line| line.present? ? translated.shift : line }.join("\n")
   end
 end

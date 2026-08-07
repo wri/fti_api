@@ -70,7 +70,7 @@ div class: "vh-container", "data-vh-mode": "diff" do
       v.created_at.strftime("%Y-%m-%d %H:%M")
     end
     column I18n.t("active_admin.versionate.user", default: "User") do |v|
-      User.find_by(id: v.whodunnit)&.email
+      User.find_by(id: v.whodunnit)&.email.presence || v.whodunnit.to_s.presence
     end
     column changes_header, class: "col-changes" do |v|
       grouped = v.grouped_changeset

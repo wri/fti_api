@@ -2,6 +2,8 @@ class TranslationJob < ApplicationJob
   class TranslationException < StandardError
   end
 
+  WHODUNNIT = "Automatic translation"
+
   queue_as :default
   retry_on TranslationException, wait: 5.minutes, attempts: 3
 
@@ -31,16 +33,19 @@ class TranslationJob < ApplicationJob
     translated_fields.each do |field, translation|
       translation.each do |locale, text_raw|
         I18n.with_locale locale do
-          # Some UTF charactes returned by google API are HTML encoded
-          text = Nokogiri::HTML.parse(text_raw).text
+          # Some UTF characters returned by google API are HTML encoded
+          text = CGI.unescapeHTML(text_raw)
           entity.send("#{field}=", text)
           entity.translation.send("#{field}_translated_from=", original_locale)
         end
       end
     end
-    entity.save
+    PaperTrail.request(whodunnit: WHODUNNIT) do
+      entity.save!
+    end
   rescue => e
+    Rails.logger.error "TranslationJob failed for #{entity.class.name}##{entity.id}: #{e.class}: #{e.message}"
     Sentry.capture_exception(e)
-    raise TranslationException
+    raise TranslationException, "#{e.class}: #{e.message}"
   end
 end

@@ -5,7 +5,7 @@ RSpec.describe TranslationJob, type: :job do
   let(:original_locale) { :en }
 
   context "when entity does not have AUTOMATICALLY_TRANSLATABLE_FIELDS" do
-    let(:entity) { create(:operator) }
+    let(:entity) { create(:country) }
 
     it "does not perform translation" do
       expect(TranslationService).not_to receive(:new)
@@ -101,6 +101,12 @@ RSpec.describe TranslationJob, type: :job do
               end
             end
           end
+        end
+
+        it "records the automatic translation as the paper trail whodunnit", versioning: true do
+          expect { subject }.to change {
+            PaperTrail::Version.where(whodunnit: TranslationJob::WHODUNNIT).count
+          }.from(0)
         end
       end
 

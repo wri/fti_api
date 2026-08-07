@@ -52,6 +52,30 @@ module V1
           expect(parsed_attributes[:logo]).to_not be_empty
           expect(parsed_attributes.dig(:logo, :url)).to include("operator/logo/#{operator.id}/logo.png")
         end
+
+        context "when the operator has details" do
+          let(:operator) { create(:operator, details: "Some details") }
+
+          it "forces re-translations from the locale of the request when details change" do
+            expect(TranslationJob).to receive(:perform_later).with(operator, :fr)
+
+            patch("/operators/#{operator.id}?locale=fr",
+              params: jsonapi_params("operators", operator.id, {details: "Nouveaux details"}),
+              headers: admin_headers)
+
+            expect(status).to eq(200)
+          end
+
+          it "does not force re-translations when details are unchanged" do
+            expect(TranslationJob).to_not receive(:perform_later)
+
+            patch("/operators/#{operator.id}?locale=fr",
+              params: jsonapi_params("operators", operator.id, {details: operator.details, name: "New name"}),
+              headers: admin_headers)
+
+            expect(status).to eq(200)
+          end
+        end
       end
     end
 

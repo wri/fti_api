@@ -27,6 +27,7 @@ module V1
     filters :country, :is_active, :name, :operator_type, :fa, :slug
 
     before_create :set_active
+    before_save :force_translations, unless: :is_new?
     after_create :send_notification
 
     delegate :type, to: :@model
@@ -126,6 +127,14 @@ module V1
     end
 
     private
+
+    # Details are edited in the locale of the request, so the other locales have to be translated again
+    def force_translations
+      old_details, new_details = @model.changes["details"]
+      return if old_details.to_s.strip == new_details.to_s.strip
+
+      @model.force_translations_from = I18n.locale
+    end
 
     def send_notification
       SystemMailer.operator_created(@model).deliver_later

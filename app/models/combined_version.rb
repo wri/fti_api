@@ -5,7 +5,7 @@
 # a short time window. Used in the version history UI instead of raw PaperTrail
 # versions so that translation-only changes are visible alongside model changes.
 class CombinedVersion
-  GROUPING_WINDOW_SECONDS = 5
+  GROUPING_WINDOW_SECONDS = 10
 
   attr_reader :parent_version, :translation_versions
   attr_accessor :previous, :next # set by build_for to link adjacent combined versions

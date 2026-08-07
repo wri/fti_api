@@ -9,8 +9,8 @@ ActiveAdmin.register Operator, as: "Producer" do
   config.sort_order = "created_at_desc"
 
   actions :all
-  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :details, :is_active, :website,
-    :logo, :delete_logo, fmu_ids: []
+  permit_params :holding_id, :name, :fa_id, :operator_type, :country_id, :is_active, :website,
+    :logo, :delete_logo, :force_translations_from, fmu_ids: [], translations_attributes: [:id, :locale, :details]
 
   member_action :activate, method: :put do
     resource.update(is_active: true)
@@ -47,6 +47,20 @@ ActiveAdmin.register Operator, as: "Producer" do
 
   action_item :new, only: [:index] do
     link_to I18n.t("active_admin.operator_page.new"), new_admin_producer_path
+  end
+
+  member_action :force_translations do
+    translate_from = params[:translate_from] || I18n.locale
+    TranslationJob.perform_later(resource, translate_from)
+    redirect_to admin_producer_path(resource), notice: I18n.t("active_admin.shared.translating_entity")
+  end
+
+  action_item :force_translations, only: :show do
+    dropdown_menu I18n.t("active_admin.shared.force_translations") do
+      I18n.available_locales.sort.each do |locale|
+        item I18n.t("locales.#{locale}"), force_translations_admin_producer_path(producer, translate_from: locale)
+      end
+    end
   end
 
   csv do
@@ -200,7 +214,6 @@ ActiveAdmin.register Operator, as: "Producer" do
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs I18n.t("active_admin.operator_page.operator_details") do
       f.input :name
-      f.input :details
       f.input :holding, as: :select
       f.input :fa_id, as: :string, label: I18n.t("active_admin.operator_page.with_fa_uuid")
       f.input :operator_type, as: :select,
@@ -226,6 +239,16 @@ ActiveAdmin.register Operator, as: "Producer" do
         f.input :fmus, collection: available_fmus
       end
       f.input :is_active
+      f.input :force_translations_from, label: I18n.t("active_admin.shared.translate_from"),
+        as: :select,
+        collection: I18n.available_locales.sort,
+        include_blank: true,
+        hint: I18n.t("active_admin.shared.translate_from_hint"),
+        input_html: {class: "translate_from"}
+      f.translated_inputs "Translations", switch_locale: false do |t|
+        t.input :details, as: :text
+        t.input :details_translated_from, input_html: {disabled: true}
+      end
     end
     f.actions
   end
@@ -239,7 +262,7 @@ ActiveAdmin.register Operator, as: "Producer" do
       row :slug
       row :operator_type
       row :fa_id
-      row :details
+      translated_row :details
       row :country
       row :logo do |o|
         link_to o.logo&.identifier, o.logo&.url if o.logo&.url

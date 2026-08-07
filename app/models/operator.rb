@@ -20,12 +20,23 @@
 #  country_doc_rank  :integer
 #  country_operators :integer
 #  name              :string
-#  details           :string
 #  slug              :string
 #
 
 class Operator < ApplicationRecord
   has_paper_trail skip: %i[country_doc_rank country_operators]
+
+  include Translatable
+
+  translates :details, touch: true, versioning: :paper_trail
+  active_admin_translates :details
+
+  attr_accessor :force_translations_from
+  AUTOMATICALLY_TRANSLATABLE_FIELDS = %w[details]
+
+  class Translation
+    normalizes :details, with: -> { it.strip }
+  end
 
   mount_base64_uploader :logo, LogoUploader
   attr_accessor :delete_logo
@@ -33,7 +44,7 @@ class Operator < ApplicationRecord
   TYPES = ["Logging company", "Artisanal", "Community forest", "Estate", "Industrial agriculture", "Mining company",
     "Sawmill", "Other", "Unknown"].freeze
 
-  normalizes :name, :details, :address, :website, with: -> { it.strip }
+  normalizes :name, :address, :website, with: -> { it.strip }
 
   belongs_to :country, inverse_of: :operators, optional: true
   belongs_to :holding, inverse_of: :operators, optional: true
@@ -82,6 +93,8 @@ class Operator < ApplicationRecord
 
   after_save :update_operator_name_on_fmus, if: :saved_change_to_name?
 
+  after_commit :auto_translate, if: :force_translations_from
+
   validates :name, presence: true, uniqueness: {case_sensitive: false}
   validates :website, url: true
   validates :operator_type, inclusion: {in: TYPES, message: "can't be %{value}. Valid values are: #{TYPES.join(", ")} "}
@@ -119,6 +132,10 @@ class Operator < ApplicationRecord
     def translated_types
       types.map { |t| [I18n.t("operator_types.#{t}", default: t), t.camelize] }
     end
+  end
+
+  def cache_key
+    super + "-" + Globalize.locale.to_s
   end
 
   def publication_authorization_signed?
@@ -161,6 +178,10 @@ class Operator < ApplicationRecord
   end
 
   private
+
+  def auto_translate
+    TranslationJob.perform_later(self, force_translations_from) if force_translations_from.present?
+  end
 
   # Saves the fmus of the operator to update the operator's name.
   # This is called in an `after_save` to keep the name of the operator in the fmu's geojson property in sync
