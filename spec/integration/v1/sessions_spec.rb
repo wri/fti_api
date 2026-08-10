@@ -94,6 +94,26 @@ module V1
         expect(parsed_attributes[:email]).to eq(user.email)
       end
 
+      it "ignores an unknown app and falls back to the portal cookie" do
+        post "/login?app=bogus", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        expect(status).to eq(200)
+        expect(response.cookies["bogus_#{APIController::AUTH_COOKIE_NAME}"]).to be_nil
+        expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_present
+      end
+
+      it "stops authenticating once the password changes" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        get "/users/current-user"
+        expect(status).to eq(200)
+
+        user.update!(password: "Supersecret2", password_confirmation: "Supersecret2")
+
+        get "/users/current-user"
+        expect(status).to eq(401)
+      end
+
       it "does not authenticate when the app does not match the cookie" do
         post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
 
@@ -134,6 +154,15 @@ module V1
         expect(csrf_set_cookie).not_to match(/httponly/i)
       end
 
+      it "issues a URL-safe token so the frontend can echo it back verbatim" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        csrf_set_cookie = Array(response.headers["Set-Cookie"]).find { |c| c.start_with?("#{APIController::CSRF_COOKIE_NAME}=") }
+        value = csrf_set_cookie.split("=", 2).last.split(";").first
+        # no percent-encoding in the raw header means document.cookie needs no decoding
+        expect(value).to match(/\A[A-Za-z0-9_-]+--[a-f0-9]+\z/)
+      end
+
       it "blocks cookie-authenticated unsafe requests without the CSRF header" do
         post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
 
@@ -156,6 +185,28 @@ module V1
         delete "/logout", headers: {APIController::CSRF_HEADER => cookies[APIController::CSRF_COOKIE_NAME]}
 
         expect(status).to eq(204)
+      end
+
+      it "rejects a matching cookie and header that is not signed by the app" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        forged = "not-a-signed-token"
+        cookies[APIController::CSRF_COOKIE_NAME] = forged
+        delete "/logout", headers: {APIController::CSRF_HEADER => forged}
+
+        expect(status).to eq(403)
+      end
+
+      it "rejects a token signed for another user" do
+        other_user = create(:admin)
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+
+        other_token = CsrfProtection.verifier
+          .generate({"user_id" => other_user.id, "nonce" => SecureRandom.urlsafe_base64(16)})
+        cookies[APIController::CSRF_COOKIE_NAME] = other_token
+        delete "/logout", headers: {APIController::CSRF_HEADER => other_token}
+
+        expect(status).to eq(403)
       end
 
       it "exempts safe (GET) cookie-authenticated requests from CSRF" do

@@ -20,7 +20,7 @@ module V1
         set_download_session_cookie_for(@user)
         if ActiveModel::Type::Boolean.new.cast(auth_params[:set_cookie])
           set_auth_cookie(@user)
-          set_csrf_cookie(expires: remember_me? ? REMEMBER_ME_TTL.from_now : nil)
+          set_csrf_cookie(@user.id, expires: remember_me? ? REMEMBER_ME_TTL.from_now : nil)
         end
         render json: {token: token, role: @user.user_permission.user_role,
                       user_id: @user.id, country: @user.country_id,
@@ -50,7 +50,8 @@ module V1
 
     def set_auth_cookie(user)
       cookie = {
-        value: user.id,
+        # the salt is checked on every request, so a password change drops the cookie
+        value: [user.id, user.authenticatable_salt],
         same_site: :strict,
         secure: Rails.env.production? || Rails.env.staging?,
         httponly: true

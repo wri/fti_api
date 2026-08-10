@@ -12,10 +12,12 @@ class APIController < ActionController::API
   include CsrfProtection
 
   AUTH_COOKIE_NAME = "otp_auth_token"
+  # frontends allowed to namespace their own cookies and scope resources via ?app=
+  APPS = %w[observations-tool].freeze
 
   def context
     {current_user: current_user,
-     app: params[:app],
+     app: app_name,
      action: params[:action],
      controller: params[:controller],
      filters: params[:filter],
@@ -46,8 +48,7 @@ class APIController < ActionController::API
 
   def current_user
     @current_user ||= begin
-      id = user_id_from_token
-      user = User.find_by(id: id) if id
+      user = user_from_bearer_token || auth_cookie_user
       user if user&.is_active
     end
   rescue
@@ -84,17 +85,13 @@ class APIController < ActionController::API
     render json: json_errors, status: :unprocessable_content
   end
 
-  # Resolve the authenticated user id from either the Bearer JWT (API clients)
-  # or the encrypted session cookie set at login. The Bearer header takes
-  # precedence so an explicit token always wins over a stored cookie.
-  def user_id_from_token
-    user_id_from_bearer_token || user_id_from_auth_cookie
-  end
-
-  def user_id_from_bearer_token
+  # The Bearer JWT (API clients) takes precedence over the session cookie so an
+  # explicit token always wins over whatever the browser has stored.
+  def user_from_bearer_token
     return unless bearer_token.present?
 
-    Auth.decode(bearer_token)&.dig("user")
+    id = Auth.decode(bearer_token)&.dig("user")
+    User.find_by(id: id) if id
   end
 
   # The cookie is encrypted with the app's secret_key_base (opaque, tamper-proof)
@@ -102,15 +99,31 @@ class APIController < ActionController::API
   # remember_me logins Rails embeds a server-verified expiry into the payload
   # via use_cookies_with_metadata; the default browser-session cookie has no
   # server-side expiry and is dropped client-side when the browser closes.
-  def user_id_from_auth_cookie
-    cookies.encrypted[auth_cookie_name]
+  #
+  # The payload pairs the user id with their authenticatable_salt (derived from
+  # the password digest), so changing a password invalidates every cookie issued
+  # before it without needing a server-side session store.
+  def auth_cookie_user
+    return @auth_cookie_user if defined?(@auth_cookie_user)
+
+    @auth_cookie_user = begin
+      id, salt = cookies.encrypted[auth_cookie_name]
+      user = User.find_by(id: id) if id
+      user if user && ActiveSupport::SecurityUtils.secure_compare(salt.to_s, user.authenticatable_salt.to_s)
+    end
   end
 
   # each app, like portal and observations tool, has its own auth cookie so a
   # user can be logged into both at the same time. portal (no app param) uses
   # the bare name, observations-tool gets an "observations-tool_" prefix.
   def auth_cookie_name
-    [params[:app], AUTH_COOKIE_NAME].compact.join("_")
+    [app_name, AUTH_COOKIE_NAME].compact.join("_")
+  end
+
+  # unknown values fall back to the portal, so a caller can't have an arbitrary
+  # param decide which cookie authenticates them or what a resource scopes to
+  def app_name
+    params[:app].presence_in(APPS)
   end
 
   def bearer_token
