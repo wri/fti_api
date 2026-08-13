@@ -61,9 +61,8 @@ server {
   proxy_set_header Upgrade $http_upgrade;
   proxy_set_header Connection "upgrade";
   proxy_cache_bypass $http_upgrade;
-  proxy_set_header X-Sendfile-Type X-Accel-Redirect;
-  proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/uploads/=/files/;
-  proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/bundle/ruby/=/__gems_internal__/;
+  # One header, comma-separated: a repeated name breaks nginx's proxy_headers_hash.
+  proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/uploads/=/files/,<%= api_dir %>/shared/bundle/ruby/=/__gems_internal__/;
 
 <% if auth_basic %>
   auth_basic "Restricted Content";
