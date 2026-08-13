@@ -23,6 +23,26 @@ server {
   server_name <%= domain.split(",").join(" ") %>;
 
   server_tokens off;
+
+  http2 on;
+
+  gzip              on;
+  gzip_vary         on;
+  gzip_proxied      any;
+  gzip_comp_level   5;
+  gzip_min_length   1024;
+  gzip_types
+    application/javascript
+    application/json
+    application/manifest+json
+    application/vnd.api+json
+    application/xml
+    image/svg+xml
+    text/css
+    text/javascript
+    text/plain
+    text/xml;
+
   <% domains = domain.split(",") %>
   <% if domains.count > 1 %>
     <% domains.drop(1).each do |d| %>
@@ -142,8 +162,20 @@ server {
   location /_next/static/ {
     alias <%= portal_dir %>/.next/static/;
     brotli_static on;
+    gzip_static on;
     add_header Cache-Control "public, immutable";
     expires max;
+    access_log off;
+    log_not_found off;
+  }
+
+  # Files from the Next.js public/ dir. Without this they fall through to the Node
+  # app below, which serves them with max-age=0 - forcing a revalidation round trip
+  # per asset per page load. Not immutable: these filenames are not content-hashed.
+  location /static/ {
+    alias <%= portal_dir %>/public/static/;
+    add_header Cache-Control "public";
+    expires 30d;
     access_log off;
     log_not_found off;
   }
