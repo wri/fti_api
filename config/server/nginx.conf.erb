@@ -173,8 +173,8 @@ server {
   # per asset per page load. Not immutable: these filenames are not content-hashed.
   location /static/ {
     alias <%= portal_dir %>/public/static/;
-    add_header Cache-Control "public";
-    expires 30d;
+    add_header Cache-Control "public, stale-while-revalidate=2592000";
+    expires 7d;
     access_log off;
     log_not_found off;
   }
