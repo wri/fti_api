@@ -45,7 +45,7 @@ ActiveAdmin.register OperatorDocumentAnnex do
   end
 
   actions :all, except: [:destroy, :new]
-  permit_params :name, :status, :expire_date, :start_date, :attachment, :uploaded_by
+  permit_params :name, :expire_date, :start_date, :attachment
 
   csv do
     column :status
@@ -155,11 +155,12 @@ ActiveAdmin.register OperatorDocumentAnnex do
     f.inputs I18n.t("active_admin.operator_document_annexes_page.details") do
       f.input :operator_document_name, label: I18n.t("active_admin.operator_document_annexes_page.operator_document"),
         input_html: {disabled: true}
-      f.input :uploaded_by
+      f.input :uploaded_by, input_html: {disabled: true}
       f.input :name
       f.input :status, include_blank: false, input_html: {disabled: true}
-      f.input :attachment, hint: preview_file_tag(f.object.attachment)
+      f.input :attachment, as: :file, hint: preview_file_tag(f.object.attachment)
     end
+    f.actions
   end
 
   show do
