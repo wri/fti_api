@@ -530,6 +530,92 @@ namespace :fix do
     puts "Non required document count: #{non_required_document}"
   end
 
+  desc "One-time fix of annexes left from fixing annexes filenames investigation (Aug 2026)"
+  task annexes_names_leftovers: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN"
+
+    # annexes 100613, 100912, 100914, 100915 are left as they are, no document file to derive the name from
+    # 100155 applies to the current version of its document, the rest only to the version history they were uploaded for
+    target_connections = {
+      100155 => {"OperatorDocument" => [19354], "OperatorDocumentHistory" => [69865]},
+      100207 => {"OperatorDocumentHistory" => [79685, 79697, 79698, 82783]},
+      100653 => {"OperatorDocumentHistory" => [85673, 85705, 86909]},
+      100703 => {"OperatorDocumentHistory" => [86550, 86561, 86562]}
+    }
+
+    ActiveRecord::Base.transaction do
+      target_connections.each do |annex_id, documentables|
+        documentables.each do |documentable_type, documentable_ids|
+          documentable_ids.each do |documentable_id|
+            next if AnnexDocument.exists?(operator_document_annex_id: annex_id,
+              documentable_type: documentable_type, documentable_id: documentable_id)
+
+            puts "Connecting annex #{annex_id} with #{documentable_type} #{documentable_id}"
+            AnnexDocument.create!(operator_document_annex_id: annex_id,
+              documentable_type: documentable_type, documentable_id: documentable_id)
+          end
+        end
+
+        AnnexDocument.where(operator_document_annex_id: annex_id).find_each do |link|
+          next if documentables[link.documentable_type]&.include?(link.documentable_id)
+
+          puts "Removing connection of annex #{annex_id} with #{link.documentable_type} #{link.documentable_id}"
+          link.destroy!
+        end
+      end
+
+      target_connections.each_key do |annex_id|
+        annex = OperatorDocumentAnnex.find(annex_id)
+
+        unless annex.attachment.identifier.to_s.include?("no_document")
+          puts "Annex #{annex.id} name already fixed, skipping"
+          next
+        end
+
+        operator_document_record = annex.operator_document_histories.order(operator_document_updated_at: :asc).first ||
+          annex.operator_document
+        document_file = operator_document_record&.document_file
+
+        if document_file&.attachment&.file.blank?
+          puts "NO document file to derive the name from for annex #{annex.id}, skipping"
+          next
+        end
+
+        unless File.exist?(annex.attachment.file.file)
+          puts "File for annex #{annex.id} does not exist, skipping"
+          next
+        end
+
+        old_name = annex.attachment.identifier
+        new_suffix = document_file.attachment.file.basename.parameterize.first(200)
+        new_name = old_name.gsub("no_document", new_suffix)
+        puts "Changing annex #{annex.id} name from #{old_name} to new name: #{new_name}"
+        new_file_path = File.join(File.dirname(annex.attachment.file.file), new_name)
+
+        annex.attachment.file.move!(new_file_path) if for_real
+        annex.update_columns(attachment: new_name)
+
+        # also take a peek into paper trail history and update the filenames there
+        # object and object_changes are jsonb, filename sits nested in the serialized uploader
+        annex.versions.each do |version|
+          new_object = version.object && JSON.parse(version.object.to_json.gsub(old_name, new_name))
+          new_object_changes = version.object_changes && JSON.parse(version.object_changes.to_json.gsub(old_name, new_name))
+
+          next if new_object == version.object && new_object_changes == version.object_changes
+
+          version.update_columns(object: new_object, object_changes: new_object_changes)
+          puts "Updated paper trail version #{version.id}"
+        end
+      end
+
+      Rails.cache.delete_matched(/operator_document_annexes/) if for_real
+
+      raise ActiveRecord::Rollback unless for_real
+    end
+  end
+
   desc "Fix filenames saved in db for annexes with timestamp mismatch"
   task annexes_timestamps: :environment do
     for_real = ENV["FOR_REAL"] == "true"
