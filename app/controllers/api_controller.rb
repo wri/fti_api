@@ -16,6 +16,10 @@ class APIController < ActionController::API
   # frontends allowed to namespace their own cookies and scope resources via ?app=
   APPS = %w[observations-tool].freeze
 
+  # kill switch for token auth once both frontends run on cookies, so the
+  # cutover is an .env edit and a puma restart rather than a release
+  DISABLE_BEARER_AUTH_ENV_VAR = "DISABLE_BEARER_AUTH"
+
   def context
     {current_user: current_user,
      app: app_name,
@@ -127,7 +131,13 @@ class APIController < ActionController::API
     params[:app].presence_in(APPS)
   end
 
+  # Pretending the header isn't there is what makes the kill switch safe: it
+  # disables the bearer login path and, in the same stroke, the CSRF exemption
+  # that keys off this method. Gating only #user_from_bearer_token would leave a
+  # stale Authorization header skipping CSRF on a cookie-authenticated request.
   def bearer_token
+    return if ENV[DISABLE_BEARER_AUTH_ENV_VAR] == "true"
+
     request.env["HTTP_AUTHORIZATION"]&.scan(/Bearer (.*)$/)&.flatten&.last
   end
 
