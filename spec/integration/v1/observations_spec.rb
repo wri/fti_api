@@ -16,7 +16,8 @@ module V1
 
     let(:ngo_observer) { create(:observer) }
     let(:ngo) { create(:ngo, observer: ngo_observer) }
-    let(:ngo_headers) { authorize_headers(ngo.id) }
+    let(:ngo_headers) { authorize_headers(ngo.id, app: "observations-tool") }
+    let(:admin_tool_headers) { authorize_headers(admin.id, app: "observations-tool") }
     let!(:country) { create(:country) }
 
     let(:observation) { create(:observation) }
@@ -165,7 +166,7 @@ module V1
         it "Returns error object when the observation cannot be updated by admin" do
           patch("/observations/#{observation.id}?app=observations-tool",
             params: jsonapi_params("observations", observation.id, {"country-id": ""}),
-            headers: admin_headers)
+            headers: admin_tool_headers)
 
           expect(parsed_body).to eq(jsonapi_errors(422, 100, {relationships_country: ["must exist"]}))
           expect(status).to eq(422)
@@ -174,7 +175,7 @@ module V1
         it "Returns success object when the observation was successfully updated by admin" do
           patch("/observations/#{observation.id}?app=observations-tool",
             params: jsonapi_params("observations", observation.id, {"is-active": false}),
-            headers: admin_headers)
+            headers: admin_tool_headers)
 
           expect(parsed_attributes[:"is-active"]).to eq(false)
           expect(observation.reload.deactivated?).to eq(true)
@@ -184,7 +185,7 @@ module V1
         it "Returns success object when the observation was successfully deactivated by admin" do
           patch("/observations/#{observation.id}?app=observations-tool",
             params: jsonapi_params("observations", observation.id, {"is-active": false}),
-            headers: admin_headers)
+            headers: admin_tool_headers)
 
           expect(observation.reload.is_active).to eq(false)
           expect(status).to eq(200)
@@ -193,7 +194,7 @@ module V1
         xit "Allows to translate observation" do
           patch("/observations/#{observation.id}?locale=fr&app=observations-tool",
             params: jsonapi_params("observations", observation.id, {details: "FR Observation one"}),
-            headers: admin_headers)
+            headers: admin_tool_headers)
 
           expect(observation.reload.details).to eq("FR Observation one")
           I18n.with_locale(:en) do
@@ -231,7 +232,7 @@ module V1
           it "Status goes from Created to Ready for QC2" do
             patch("/observations/#{observation.id}?app=observations-tool",
               params: jsonapi_params("observations", observation.id, {"validation-status": "Ready for QC2"}),
-              headers: admin_headers)
+              headers: admin_tool_headers)
             expect(status).to eq(200)
             expect(parsed_body[:data][:attributes][:"validation-status"]).to eq("Ready for QC2")
           end
@@ -239,7 +240,7 @@ module V1
           it "Status cannot go to Needs revision" do
             patch("/observations/#{observation.id}?app=observations-tool",
               params: jsonapi_params("observations", observation.id, {"validation-status": "Needs revision"}),
-              headers: admin_headers)
+              headers: admin_tool_headers)
 
             expect(parsed_body[:errors].first[:title]).to eq("Invalid validation change for monitor. Can't move from 'Created' to 'Needs revision'")
             expect(status).to eq(422)

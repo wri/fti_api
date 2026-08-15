@@ -9,7 +9,7 @@ module V1
       show: {},
       create: {
         success_roles: %i[admin],
-        failure_roles: %i[operator],
+        failure_roles: %i[operator_user],
         valid_params: -> { {"min-fine": 1, "max-fine": 2, relationships: {subcategory: subcategory.id, country: country.id}} },
         invalid_params: -> { {"min-fine": 1, "max-fine": -2, relationships: {subcategory: subcategory.id}} },
         error_attributes: [

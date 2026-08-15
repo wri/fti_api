@@ -1,4 +1,6 @@
 module IntegrationHelper
+  FACTORY_PASSWORD = "Supersecret1"
+
   ERRORS = {
     "401" => {status: 401, title: "You are not authorized to access this page."},
     "422" => {status: 422, title: "Unprocessable entity."},
@@ -39,16 +41,12 @@ module IntegrationHelper
       headers: jsonapi_headers)
   end
 
-  def generate_token(id)
-    JWT.encode({user: id}, ENV["AUTH_SECRET"], "HS256")
-  end
-
   def admin
     @admin ||= create(:admin)
   end
 
   def admin_headers
-    @admin_headers ||= authorize_headers(admin.id)
+    authorize_headers(admin.id)
   end
 
   def user
@@ -56,7 +54,7 @@ module IntegrationHelper
   end
 
   def user_headers
-    @user_headers ||= authorize_headers(user.id)
+    authorize_headers(user.id)
   end
 
   def operator_user
@@ -64,13 +62,27 @@ module IntegrationHelper
   end
 
   def operator_user_headers
-    @operator_user_headers ||= authorize_headers(operator_user.id)
+    authorize_headers(operator_user.id)
   end
 
-  def authorize_headers(id, jsonapi: true)
-    headers = {
-      "Authorization" => "Bearer #{generate_token(id)}"
-    }
+  # Logs the user in for real and hands back the headers a browser would send.
+  # The auth cookie lands in the shared jar as a side effect, so the login has
+  # to happen immediately before the request it authorizes — hence no
+  # memoization on the *_headers helpers: whichever role logged in last owns
+  # the jar, and re-logging in per call keeps each request honest.
+  #
+  # Every user factory inherits the same password, so an id is enough to log in.
+  def authorize_headers(id, jsonapi: true, app: nil)
+    user = User.find(id)
+    url = "/login"
+    url += "?app=#{app}" if app.present?
+    post url, params: {auth: {email: user.email, password: FACTORY_PASSWORD}}
+
+    # both cookies are namespaced per app, so a request sent with ?app= only
+    # authenticates against a login made for that same app
+    csrf_cookie_name = [app, APIController::CSRF_COOKIE_NAME].compact.join("_")
+    # unsafe requests need the double-submit token echoed back from the cookie
+    headers = {APIController::CSRF_HEADER => cookies[csrf_cookie_name]}
     headers.merge!(jsonapi_headers) if jsonapi
     headers
   end
