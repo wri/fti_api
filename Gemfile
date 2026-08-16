@@ -79,7 +79,7 @@ gem "carrierwave-base64"
 gem "mini_magick"
 
 # Mail
-gem "mjml-rails", "~> 4.0"
+gem "mjml-rails", "~> 5.0"
 gem "letter_opener_web"
 gem "sendgrid-actionmailer"
 

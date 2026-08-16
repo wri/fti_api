@@ -65,7 +65,7 @@ jobs:
 
       - name: Install other dependencies
         run: |
-          npm install -g mjml@4
+          npm install -g mjml@5
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
