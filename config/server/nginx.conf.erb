@@ -151,10 +151,26 @@ server {
     rewrite ^([^.]*[^/])$ $1/ permanent;
   }
 
+  location ~ "^/observations-tool/(?<otp_hashed>.+\.[0-9a-f]{20}\.(?:worker\.)?(?:js|css))$" {
+    alias <%= obs_tool_dir %>/dist/$otp_hashed;
+    # Serve the .br/.gz written by script/precompress at deploy time. Pre-compressing
+    # lets us use brotli q11, which dynamic compression is far too slow for.
+    brotli_static on;
+    gzip_static on;
+    add_header Cache-Control "public, immutable";
+    expires max;
+    access_log off;
+  }
+
+  # Everything else in dist/ keeps its name across deploys (index.html, the locale
+  # JSON refreshed by transifex:pull, fonts, icons), so it must be revalidated.
   location /observations-tool/ {
     alias <%= obs_tool_dir %>/dist/;
     index index.html;
-    try_files $uri $uri/ /index.html =404;
+    brotli_static on;
+    gzip_static on;
+    add_header Cache-Control "no-cache";
+    try_files $uri $uri/ /observations-tool/index.html;
   }
 
   # Next.js frontend
