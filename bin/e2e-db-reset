@@ -1,0 +1,38 @@
+#!/bin/sh
+# Fast path for resetting the e2e database between Cypress tests.
+#
+# lib/tasks/e2e.rake does the same work, but every rake entry point first loads
+# config/application.rb, whose Bundler.require pulls in Rails and all gems (~2s)
+# before rake can even look up the task. Talking to psql directly is ~0.5s, and
+# Cypress pays this once per test. Keep in sync with the e2e:db_reset task.
+set -e
+
+cd "$(dirname "$0")/.."
+
+DATABASE=fti_e2e
+TEMPLATE=fti_e2e_template
+
+# A real environment wins (CI sets these directly); otherwise fall back to .env,
+# the same file dotenv-rails loads for the app.
+read_env() {
+  [ -f .env ] || return 0
+  sed -n "s/^$1=//p" .env | tail -1 | sed -e 's/^"\(.*\)"$/\1/' -e "s/^'\(.*\)'\$/\1/"
+}
+
+POSTGRES_HOST="${POSTGRES_HOST:-$(read_env POSTGRES_HOST)}"
+POSTGRES_PORT="${POSTGRES_PORT:-$(read_env POSTGRES_PORT)}"
+POSTGRES_USER="${POSTGRES_USER:-$(read_env POSTGRES_USER)}"
+POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-$(read_env POSTGRES_PASSWORD)}"
+
+CONN=""
+[ -n "$POSTGRES_HOST" ] && CONN="$CONN --host=$POSTGRES_HOST"
+[ -n "$POSTGRES_PORT" ] && CONN="$CONN --port=$POSTGRES_PORT"
+[ -n "$POSTGRES_USER" ] && CONN="$CONN --username=$POSTGRES_USER"
+[ -n "$POSTGRES_PASSWORD" ] && export PGPASSWORD="$POSTGRES_PASSWORD"
+
+TERMINATE="SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = '$DATABASE' AND pid <> pg_backend_pid();"
+
+# Matches the rake task: terminating connections is best-effort.
+psql -c "$TERMINATE" $CONN "$DATABASE" >/dev/null 2>&1 || true
+dropdb --if-exists $CONN "$DATABASE"
+createdb $CONN --template="$TEMPLATE" "$DATABASE"

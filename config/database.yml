@@ -22,6 +22,11 @@ test:
 e2e:
   <<: *default
   database: fti_e2e
+  # Cypress drops and recreates this database between tests, which terminates
+  # the server's pooled connections. ActiveRecord skips verification for any
+  # connection used within verify_timeout (default 2s) and would hand out a dead
+  # one, 500ing the first requests of the next test. Always verify instead.
+  verify_timeout: 0
 
 staging:
   <<: *default
