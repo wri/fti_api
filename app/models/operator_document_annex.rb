@@ -45,6 +45,7 @@ class OperatorDocumentAnnex < ApplicationRecord
 
   validates :name, :start_date, :status, presence: true
   validates :invalidation_reason, presence: {if: :doc_invalid?}
+  validates :attachment, presence: true
 
   enum :status, {doc_pending: 1, doc_invalid: 2, doc_valid: 3, doc_expired: 4}
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
