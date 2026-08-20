@@ -1,0 +1,53 @@
+#!/bin/sh
+# Fast path for resetting the e2e database between Cypress tests.
+#
+# lib/tasks/e2e.rake does the same work, but every rake entry point first loads
+# config/application.rb, whose Bundler.require pulls in Rails and all gems (~2s)
+# before rake can even look up the task. This is ~0.3s, and Cypress pays it once
+# per test. Keep in sync with the e2e:db_reset task.
+#
+# Note: the server must run with verify_timeout: 0 (see config/database.yml).
+# Dropping the database terminates its pooled connections, and ActiveRecord
+# would otherwise hand out a dead one and 500 the next test's first requests.
+set -e
+
+cd "$(dirname "$0")/.."
+
+DATABASE=fti_e2e
+TEMPLATE=fti_e2e_template
+
+# A real environment wins (CI sets these directly); otherwise fall back to .env,
+# the same file dotenv-rails loads for the app. Parsed with shell builtins in a
+# single pass -- spawning sed per variable cost more than the reset itself.
+if [ -f .env ]; then
+  while IFS='=' read -r key value; do
+    case "$key" in
+      POSTGRES_HOST|POSTGRES_PORT|POSTGRES_USER|POSTGRES_PASSWORD) ;;
+      *) continue ;;
+    esac
+    case "$value" in
+      \"*\") value=${value#\"}; value=${value%\"} ;;
+      \'*\') value=${value#\'}; value=${value%\'} ;;
+    esac
+    case "$key" in
+      POSTGRES_HOST) : "${POSTGRES_HOST:=$value}" ;;
+      POSTGRES_PORT) : "${POSTGRES_PORT:=$value}" ;;
+      POSTGRES_USER) : "${POSTGRES_USER:=$value}" ;;
+      POSTGRES_PASSWORD) : "${POSTGRES_PASSWORD:=$value}" ;;
+    esac
+  done < .env
+fi
+
+CONN=""
+[ -n "$POSTGRES_HOST" ] && CONN="$CONN --host=$POSTGRES_HOST"
+[ -n "$POSTGRES_PORT" ] && CONN="$CONN --port=$POSTGRES_PORT"
+[ -n "$POSTGRES_USER" ] && CONN="$CONN --username=$POSTGRES_USER"
+[ -n "$POSTGRES_PASSWORD" ] && export PGPASSWORD="$POSTGRES_PASSWORD"
+
+# One session against `postgres`, since you cannot drop the database you are
+# connected to. Separate -c flags rather than one semicolon-separated string:
+# each runs in its own implicit transaction, which DROP/CREATE DATABASE require.
+psql -q $CONN postgres \
+  -c "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname='$DATABASE' AND pid<>pg_backend_pid();" \
+  -c "DROP DATABASE IF EXISTS $DATABASE;" \
+  -c "CREATE DATABASE $DATABASE TEMPLATE $TEMPLATE;" >/dev/null
