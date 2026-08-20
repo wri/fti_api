@@ -94,6 +94,25 @@
       "note": ""
     },
     {
+      "warning_type": "Unmaintained Dependency",
+      "warning_code": 122,
+      "fingerprint": "21ab0fe00fdd5899ffc405cff75aadb91b805ee996a614f7e27b08a287e9062d",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 8.0.5.1 ends on 2026-10-07",
+      "file": "Gemfile.lock",
+      "line": 564,
+      "link": "https://brakemanscanner.org/docs/warning_types/unmaintained_dependency/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "Weak",
+      "cwe_id": [
+        1104
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "File Access",
       "warning_code": 16,
       "fingerprint": "49345b1c4e5bd083953300f9545745fbc0dd77f23f7070aba71cd6f04cc0011d",
@@ -141,5 +160,5 @@
       "note": ""
     }
   ],
-  "brakeman_version": "8.0.4"
+  "brakeman_version": "8.0.5"
 }

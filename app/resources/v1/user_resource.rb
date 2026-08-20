@@ -7,6 +7,7 @@ module V1
     attributes :name, :first_name, :last_name, :email,
       :is_active, :deactivated_at, :locale, :organization_account,
       :permissions_request, :permissions_accepted, :password, :password_confirmation,
+      :operator_ids, :observer_id, :country_id,
       :managed_observer_ids, :qc1_observer_ids, :qc2_observer_ids
 
     has_one :country
