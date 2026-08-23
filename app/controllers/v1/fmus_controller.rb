@@ -2,7 +2,7 @@
 
 module V1
   class FmusController < APIController
-    skip_before_action :authenticate, only: %w[index tiles]
+    skip_before_action :authenticate, only: %w[index show tiles]
     skip_authorize_resource only: :tiles
     load_and_authorize_resource class: "Fmu"
 
@@ -10,6 +10,14 @@ module V1
       if params[:format].present? && params[:format].include?("geojson")
         fmus = Fmu.fetch_all(options_filter)
         render json: build_json(fmus)
+      else
+        super
+      end
+    end
+
+    def show
+      if params[:format].present? && params[:format].include?("geojson")
+        render json: build_json([Fmu.find(params[:id])])
       else
         super
       end
