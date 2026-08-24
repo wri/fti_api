@@ -4,17 +4,25 @@ on: push
 
 jobs:
   linters:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      - name: Refresh apt index
+        run: sudo apt-get update
       - uses: awalsh128/cache-apt-pkgs-action@v1
+        id: apt-pkgs
         with:
-          packages: libgdal-dev
-          version: 1.0
+          packages: gdal-bin imagemagick libgdal-dev
+          version: 2.0
+      - name: Key gem cache on apt package versions
+        run: |
+          echo "APT_PKGS_HASH=$(printf '%s' '${{ steps.apt-pkgs.outputs.package-version-list }}' \
+            | md5sum | cut -c1-8)" >> $GITHUB_ENV
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+          cache-version: ${{ env.APT_PKGS_HASH }}
       - name: Run RuboCop
         run: bundle exec rubocop

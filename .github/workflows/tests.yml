@@ -28,12 +28,15 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
         ports: ["5432:5432"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+
+      - name: Refresh apt index
+        run: sudo apt-get update
 
       - uses: awalsh128/cache-apt-pkgs-action@v1
         id: apt-pkgs
         with:
-          packages: libgdal-dev
+          packages: gdal-bin imagemagick libgdal-dev
           version: 2.0
 
       - name: Key gem cache on apt package versions
@@ -63,12 +66,15 @@ jobs:
           RAILS_ENV: test
         ports: ["5432:5432"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+
+      - name: Refresh apt index
+        run: sudo apt-get update
 
       - uses: awalsh128/cache-apt-pkgs-action@v1
         id: apt-pkgs
         with:
-          packages: gdal-bin libgdal-dev
+          packages: gdal-bin imagemagick libgdal-dev
           version: 2.0
 
       - name: Key gem cache on apt package versions
@@ -93,7 +99,7 @@ jobs:
         run: bin/rake parallel:spec
 
       - name: Upload Code Coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: code-coverage
           path: coverage/
