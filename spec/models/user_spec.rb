@@ -234,6 +234,24 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "Scopes" do
+    describe ".access_locked" do
+      let!(:unlocked_user) { create(:user) }
+      let!(:locked_user) do
+        create(:user).tap { |u| u.lock_access!(send_instructions: false) }
+      end
+      let!(:expired_lock_user) do
+        create(:user).tap do |u|
+          u.update_columns(locked_at: 2.hours.ago, failed_attempts: 10)
+        end
+      end
+
+      it "includes only users whose lock has not expired" do
+        expect(User.access_locked).to contain_exactly(locked_user)
+      end
+    end
+  end
+
   describe "Instance methods" do
     describe "#is_operator?" do
       before do

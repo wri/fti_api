@@ -27,6 +27,9 @@ ActiveAdmin.register User do
   filter :email, as: :select
   filter :created_at
 
+  scope -> { I18n.t("active_admin.all") }, :all, default: true
+  scope -> { I18n.t("active_admin.shared.locked") }, :access_locked
+
   controller do
     def scoped_collection
       User.includes([country: :translations], :user_permission)
@@ -76,7 +79,16 @@ ActiveAdmin.register User do
         end
       end
     end
+    column I18n.t("active_admin.shared.unlock") do |user|
+      if user.access_locked?
+        a I18n.t("active_admin.shared.unlock"), href: unlock_admin_user_path(user), "data-method": :put,
+          "data-confirm": I18n.t("active_admin.shared.confirm_unlock", name: user.name)
+      end
+    end
     column :is_active
+    column I18n.t("active_admin.shared.locked"), :locked_at do |user|
+      status_tag user.access_locked?
+    end
     column I18n.t("shared.role"), :user_permission do |user|
       user.user_permission&.user_role
     end
@@ -110,6 +122,10 @@ ActiveAdmin.register User do
       row :qc1_observers if resource.admin? || resource.ngo_manager?
       row :qc2_observers if resource.admin? || resource.ngo_manager?
       row :is_active
+      row I18n.t("active_admin.shared.locked") do |user|
+        status_tag user.access_locked?
+      end
+      row :locked_at if resource.locked_at.present?
       row :locale
       row :country
       row :web_url
@@ -162,5 +178,10 @@ ActiveAdmin.register User do
   member_action :deactivate, method: :put do
     resource.update(is_active: false) unless resource.id == current_user.id
     redirect_to collection_path, notice: I18n.t("active_admin.shared.user_deactivated")
+  end
+
+  member_action :unlock, method: :put do
+    resource.unlock_access! if resource.access_locked?
+    redirect_to collection_path, notice: I18n.t("active_admin.shared.user_unlocked")
   end
 end

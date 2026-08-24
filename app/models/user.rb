@@ -93,6 +93,7 @@ class User < ApplicationRecord
 
   scope :recent, -> { order("users.updated_at DESC") }
   scope :inactive, -> { where(is_active: false) }
+  scope :access_locked, -> { where.not(locked_at: nil).where(locked_at: unlock_in.ago..) }
   scope :with_roles, ->(role) { joins(:user_permission).where(user_permission: {user_role: role}) }
 
   delegate :can?, :cannot, to: :ability
