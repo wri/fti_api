@@ -43,7 +43,7 @@ class OperatorDocumentStatistic < ApplicationRecord
       docs = docs.where(required_operator_documents: {country_id: country_id}) if country_id.present?
 
       types = (docs.pluck(:type) + [nil]).uniq
-      forest_types = (docs.pluck(:forest_type) + [nil]).uniq
+      forest_types = (docs.map(&:forest_type) + [nil]).uniq
       groups = (docs.pluck(:required_operator_document_group_id) + [nil]).uniq
 
       to_save = []
