@@ -1,28 +1,38 @@
 module Select2Helper
   def select2(value, options = {})
-    # Find the select2 container
-    container = find(:xpath, "//label[contains(text(), '#{options[:from]}')]/following-sibling::span[contains(@class, 'select2-container')]")
-    container.click # to open the dropdown
-    container.find(:xpath, "//span[contains(@class, 'select2-container--open')]//li[contains(text(), '#{value}')]").click # find the option and select
+    select2_container(options[:from]).click # to open the dropdown
+    find(:css, "span.select2-container--open li", text: text_matcher(value)).click # find the option and select
   end
 
   def select2_clear(options = {})
-    container = find(:xpath, "//label[contains(text(), '#{options[:from]}')]/following-sibling::span[contains(@class, 'select2-container')]")
-    container.find(:xpath, ".//span[contains(@class, 'select2-selection__clear')]").click
+    select2_container(options[:from]).find(:css, "span.select2-selection__clear").click
   end
 
   def select2_options(options = {})
-    container = find(:xpath, "//label[contains(text(), '#{options[:from]}')]/following-sibling::span[contains(@class, 'select2-container')]")
+    container = select2_container(options[:from])
     container.click # to open the dropdown
-    results = container.all(:xpath, "//span[contains(@class, 'select2-container--open')]//li").map(&:text)
+    results = all(:css, "span.select2-container--open li").map(&:text)
     container.click # to close the dropdown
     results
   end
 
   def select2_selected_options(options = {})
-    container = find(:xpath, "//label[contains(text(), '#{options[:from]}')]/following-sibling::span[contains(@class, 'select2-container')]")
-    return container.all(:xpath, ".//li[contains(@class, 'select2-selection__choice')]").map(&:text) if options[:multiple]
+    container = select2_container(options[:from])
+    return container.all(:css, "li.select2-selection__choice").map(&:text) if options[:multiple]
 
-    [container.find(:xpath, ".//span[contains(@class, 'select2-selection__rendered')]")[:title]]
+    [container.find(:css, "span.select2-selection__rendered")[:title]]
+  end
+
+  private
+
+  def select2_container(label_text)
+    find(:css, "label", text: text_matcher(label_text))
+      .find(:xpath, "./following-sibling::span[contains(@class, 'select2-container')]")
+  end
+
+  # matched by Capybara filters instead of being interpolated into a selector, so values
+  # with quotes (like "Cote d'Ivoire") work; case insensitive because labels are uppercased by CSS
+  def text_matcher(text)
+    /#{Regexp.escape(text)}/i
   end
 end

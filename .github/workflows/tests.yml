@@ -98,6 +98,14 @@ jobs:
       - name: Run tests
         run: bin/rake parallel:spec
 
+      - name: Upload system test screenshots
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: capybara-failures
+          path: tmp/capybara/
+          if-no-files-found: ignore
+
       - name: Upload Code Coverage
         uses: actions/upload-artifact@v7
         with:
