@@ -48,6 +48,33 @@ If not, then the request is processed as a typical JSON API request.'
     end
   end
 
+  get "/fmus/:id" do
+    route_summary "Fetches a fmu by id"
+    route_description 'It fetches a fmu by id.
+If the parameter format=geojson is provided, the fmu will come in the geojson format.
+If not, then the request is processed as a typical JSON API request.'
+
+    parameter :id, "id", in: :path, type: :integer
+    add_include_parameter example: %w[country operator]
+    add_field_parameter_for :fmu
+
+    let(:id) { fmus.first.id }
+
+    context "200" do
+      example_request "Get one fmu" do
+        expect(status).to eql 200
+        expect(JSON.parse(response_body)["data"]["id"]).to eql(id.to_s)
+      end
+    end
+
+    context "404" do
+      let(:id) { 1000 }
+      example_request "Fmu not found" do
+        expect(status).to eql 404
+      end
+    end
+  end
+
   get "fmus?format=geojson" do
     route_summary "Lists all the fmus in geojson format"
     route_description "All the fmus retrieved in the geojson format"
