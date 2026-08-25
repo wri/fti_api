@@ -123,5 +123,36 @@ RSpec.describe OperatorDocumentStatistic, type: :model do
       expect(all_countries_rollup.valid_count).to eq(1)
       expect(all_countries_rollup.pending_count).to eq(1)
     end
+
+    it "counts documents in the forest type slice of their fmu" do
+      fmu_country = create(:country)
+      operator = create(:operator, country: fmu_country, fa_id: "fa_id")
+      fmu = create(:fmu, country: fmu_country, forest_type: ForestType::TYPES[:ufa][:index])
+      create(:fmu_operator, fmu: fmu, operator: operator)
+      rod = create(
+        :required_operator_document_fmu,
+        country: fmu_country,
+        forest_types: [ForestType::TYPES[:ufa][:index]],
+        disable_document_creation: true
+      )
+
+      doc = travel_to(5.days.ago) { create(:operator_document_fmu, operator: operator, fmu: fmu, required_operator_document_fmu: rod) }
+      travel_to(4.days.ago) { doc.update!(status: "doc_valid") }
+
+      described_class.generate_for_country_and_day(fmu_country.id, day)
+
+      sliced = described_class.find_by(
+        country: fmu_country,
+        fmu_forest_type: "ufa",
+        document_type: "fmu",
+        required_operator_document_group: rod.required_operator_document_group
+      )
+      expect(sliced.valid_count).to eq(1)
+
+      rollup = described_class.find_by(
+        country: fmu_country, fmu_forest_type: nil, document_type: nil, required_operator_document_group: nil
+      )
+      expect(rollup.valid_count).to eq(1)
+    end
   end
 end
