@@ -2,6 +2,117 @@ require "benchmark"
 require "csv"
 
 namespace :fix do
+  # One time repair of the two operator documents deleted on 2026-08-21 by the forest type
+  # string/symbol comparison bug in RequiredOperatorDocumentFmu#applies_to_forest_type?.
+  # The documents were restored by hand, this removes everything else the deletion left behind.
+  # SKIP_STATISTICS=true leaves the statistics alone, for when a backfill regenerates them anyway.
+  task erroneous_document_deletion: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+    skip_statistics = ENV["SKIP_STATISTICS"] == "true"
+    puts "DRY RUN, pass FOR_REAL=true to apply" unless for_real
+    puts "Skipping statistics regeneration" if skip_statistics
+
+    document_ids = [19045, 19349]
+    statistic_country_ids = [45, nil]
+
+    ActiveRecord::Base.transaction do
+      documents = OperatorDocument.where(id: document_ids)
+      raise "expected #{document_ids.size} live documents, found #{documents.count}" unless documents.count == document_ids.size
+
+      operator_ids = documents.distinct.pluck(:operator_id)
+      raise "expected a single operator, found #{operator_ids.inspect}" unless operator_ids.size == 1
+
+      operator_id = operator_ids.first
+
+      versions = PaperTrail::Version.where(
+        item_type: %w[OperatorDocument OperatorDocumentFmu OperatorDocumentCountry],
+        item_id: document_ids, event: "destroy"
+      )
+      raise "expected #{document_ids.size} destroy versions, found #{versions.count}" unless versions.count == document_ids.size
+
+      deletion_time = versions.minimum(:created_at)
+      puts "Deletion at #{deletion_time}, operator #{operator_id}"
+
+      histories = OperatorDocumentHistory.only_deleted.where(operator_document_id: document_ids)
+      raise "expected #{document_ids.size} deleted history rows, found #{histories.count}" unless histories.count == document_ids.size
+
+      histories.each do |history|
+        raise "history #{history.id} was not born deleted" unless (history.deleted_at - history.created_at).abs < 1
+        raise "history #{history.id} has annexes" if history.annex_documents.any?
+
+        puts "Purging history #{history.id} (operator document #{history.operator_document_id})"
+        history.really_destroy!
+      end
+
+      puts "Deleting #{versions.count} destroy versions: #{versions.pluck(:id).inspect}"
+      versions.delete_all
+
+      # the restore moved updated_at forward, put it back on the last real change so it lines up with history
+      documents.each do |document|
+        last_history = OperatorDocumentHistory.where(operator_document_id: document.id).order(:operator_document_updated_at).last
+        raise "no history left for document #{document.id}" if last_history.nil?
+
+        puts "Document #{document.id} updated_at #{document.updated_at} -> #{last_history.operator_document_updated_at}"
+        document.update_columns(updated_at: last_history.operator_document_updated_at)
+      end
+
+      # the deletion recalculated the score, which added a score for that day and superseded the then
+      # current one. Only that score is an artifact, later ones would have been created anyway because
+      # their summaries differ from the superseded score.
+      superseded_score = ScoreOperatorDocument.where(operator_id: operator_id)
+        .where("created_at < ?", deletion_time).order(:created_at, :id).last
+      raise "no score from before the deletion for operator #{operator_id}" if superseded_score.nil?
+
+      bug_scores = ScoreOperatorDocument.where(operator_id: operator_id, date: deletion_time.to_date).to_a
+      raise "expected one score dated #{deletion_time.to_date}, found #{bug_scores.map(&:id).inspect}" unless bug_scores.size == 1
+
+      bug_score = bug_scores.first
+      raise "score #{bug_score.id} is current, refusing to delete it" if bug_score.current?
+
+      expected_total = superseded_score.total - document_ids.size
+      raise "score #{bug_score.id} has total #{bug_score.total}, expected #{expected_total}" unless bug_score.total == expected_total
+
+      successor_score = ScoreOperatorDocument.where(operator_id: operator_id)
+        .where("created_at > ?", bug_score.created_at).order(:created_at, :id).first
+      raise "nothing superseded score #{bug_score.id}" if successor_score.nil?
+
+      puts "Deleting score #{bug_score.id} (date #{bug_score.date}, total #{bug_score.total})"
+      ScoreOperatorDocument.where(id: bug_score.id).delete_all
+
+      puts "Score #{superseded_score.id} updated_at #{superseded_score.updated_at} -> #{successor_score.created_at}"
+      superseded_score.update_columns(updated_at: successor_score.created_at)
+
+      unless skip_statistics
+        # every statistic from the deletion day onwards was generated while the documents were hidden
+        statistic_days = OperatorDocumentStatistic
+          .where(country_id: statistic_country_ids)
+          .where("date >= ?", deletion_time.to_date)
+          .distinct.order(:date).pluck(:date)
+
+        statistic_days.each do |day|
+          statistic_country_ids.each do |country_id|
+            puts "Regenerating document statistics for country #{country_id.inspect} on #{day}"
+            OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, true)
+          end
+        end
+      end
+
+      puts
+      puts "Verification:"
+      [deletion_time.to_date, Date.current].uniq.each do |day|
+        visible = OperatorDocumentHistory.at_date(day).where(operator_document_id: document_ids).count
+        puts "  #{day}: #{visible} of #{document_ids.size} documents visible in history"
+      end
+      ScoreOperatorDocument.where(operator_id: operator_id).order(:date, :id).last(3).each do |score|
+        puts "  score #{score.id} date=#{score.date} current=#{score.current} all=#{score.all} total=#{score.total}"
+      end
+
+      raise ActiveRecord::Rollback unless for_real
+    end
+
+    puts for_real ? "Applied." : "Rolled back."
+  end
+
   task annexes: :environment do
     ActiveRecord::Base.transaction do
       for_real = ENV["FOR_REAL"] == "true"
