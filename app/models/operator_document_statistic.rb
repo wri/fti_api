@@ -39,12 +39,35 @@ class OperatorDocumentStatistic < ApplicationRecord
       docs = OperatorDocumentHistory.at_date(day)
         .non_signature
         .left_joins(:fmu)
-        .select(:status, "operator_document_histories.type", "fmus.forest_type", "required_operator_documents.required_operator_document_group_id")
       docs = docs.where(required_operator_documents: {country_id: country_id}) if country_id.present?
 
-      types = (docs.pluck(:type) + [nil]).uniq
-      forest_types = (docs.map(&:forest_type) + [nil]).uniq
-      groups = (docs.pluck(:required_operator_document_group_id) + [nil]).uniq
+      # plucked rather than instantiated, forest_type and required_operator_document_group_id come from
+      # the joins, so reading them off a record goes through method_missing and dominates the runtime
+      rows = docs.pluck(
+        :status,
+        "operator_document_histories.type",
+        "fmus.forest_type",
+        "required_operator_documents.required_operator_document_group_id"
+      )
+
+      types = (rows.map { |row| row[1] } + [nil]).uniq
+      forest_types = (rows.map { |row| row[2] } + [nil]).uniq
+      groups = (rows.map { |row| row[3] } + [nil]).uniq
+
+      # a document counts towards its own value and towards the nil (all) bucket of every dimension,
+      # counted in one pass instead of scanning every document once per combination
+      counters = Hash.new(0)
+      rows.each do |status, type, forest_type, group_id|
+        [type, nil].uniq.each do |a_type|
+          [forest_type, nil].uniq.each do |a_forest_type|
+            [group_id, nil].uniq.each do |a_group_id|
+              counters[[a_type, a_forest_type, a_group_id, status]] += 1
+            end
+          end
+        end
+      end
+
+      previous_stats = latest_stats_before(country_id, day)
 
       to_save = []
       to_update = []
@@ -52,12 +75,6 @@ class OperatorDocumentStatistic < ApplicationRecord
       types.each do |type|
         forest_types.each do |forest_type|
           groups.each do |group_id|
-            filtered = docs.select do |d|
-              (forest_type.nil? || d.forest_type == forest_type) &&
-                (type.nil? || d.type == type) &&
-                (group_id.nil? || d.required_operator_document_group_id == group_id)
-            end.group_by(&:status)
-
             new_stat = OperatorDocumentStatistic.new(
               document_type: case type
                              when "OperatorDocumentFmuHistory"
@@ -69,15 +86,15 @@ class OperatorDocumentStatistic < ApplicationRecord
               required_operator_document_group_id: group_id,
               country_id: country_id,
               date: day,
-              pending_count: filtered["doc_pending"]&.count || 0,
-              invalid_count: filtered["doc_invalid"]&.count || 0,
-              valid_count: filtered["doc_valid"]&.count || 0,
-              expired_count: filtered["doc_expired"]&.count || 0,
-              not_required_count: filtered["doc_not_required"]&.count || 0,
-              not_provided_count: filtered["doc_not_provided"]&.count || 0
+              pending_count: counters[[type, forest_type, group_id, "doc_pending"]],
+              invalid_count: counters[[type, forest_type, group_id, "doc_invalid"]],
+              valid_count: counters[[type, forest_type, group_id, "doc_valid"]],
+              expired_count: counters[[type, forest_type, group_id, "doc_expired"]],
+              not_required_count: counters[[type, forest_type, group_id, "doc_not_required"]],
+              not_provided_count: counters[[type, forest_type, group_id, "doc_not_provided"]]
             )
 
-            prev_stat = new_stat.previous_stat
+            prev_stat = previous_stats[new_stat.attributes.slice(*statistic_dimensions)]
             if prev_stat.present? && prev_stat.same_counters?(new_stat)
               Rails.logger.info "Prev score the same, update date of prev score"
               prev_stat.date = day
@@ -102,6 +119,18 @@ class OperatorDocumentStatistic < ApplicationRecord
       end
     end
   end
+
+  # latest stat of every series before the day, in one query instead of one per combination
+  def self.latest_stats_before(country_id, day)
+    dimensions = statistic_dimensions.join(", ")
+
+    where(country_id: country_id)
+      .where("date < ?", day)
+      .select(Arel.sql("distinct on (#{dimensions}) #{table_name}.*"))
+      .order(Arel.sql("#{dimensions}, date desc, id desc"))
+      .index_by { |stat| stat.attributes.slice(*statistic_dimensions) }
+  end
+  private_class_method :latest_stats_before
 
   def self.ransackable_scopes(auth_object = nil)
     [:by_country, :by_required_operator_document_group]
