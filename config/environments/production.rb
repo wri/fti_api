@@ -20,6 +20,9 @@ Rails.application.configure do
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
+  # Hand `send_file` responses to NGINX. Set to blank when running without it in front.
+  config.action_dispatch.x_sendfile_header = ENV.fetch("RAILS_X_SENDFILE_HEADER", "X-Accel-Redirect").presence
+
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(harmony: true)
   # config.assets.css_compressor = :sass

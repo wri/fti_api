@@ -6,6 +6,12 @@ upstream portal {
   server localhost:5000;
 }
 
+# Only send Connection: upgrade when the client actually asked for an upgrade.
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  ''      close;
+}
+
 <% if self_signed %>
 server {
   listen 80;
@@ -23,6 +29,26 @@ server {
   server_name <%= domain.split(",").join(" ") %>;
 
   server_tokens off;
+
+  http2 on;
+
+  gzip              on;
+  gzip_vary         on;
+  gzip_proxied      any;
+  gzip_comp_level   5;
+  gzip_min_length   1024;
+  gzip_types
+    application/javascript
+    application/json
+    application/manifest+json
+    application/vnd.api+json
+    application/xml
+    image/svg+xml
+    text/css
+    text/javascript
+    text/plain
+    text/xml;
+
   <% domains = domain.split(",") %>
   <% if domains.count > 1 %>
     <% domains.drop(1).each do |d| %>
@@ -39,11 +65,10 @@ server {
   proxy_hide_header X-Powered-By;
   proxy_http_version 1.1;
   proxy_set_header Upgrade $http_upgrade;
-  proxy_set_header Connection "upgrade";
+  proxy_set_header Connection $connection_upgrade;
   proxy_cache_bypass $http_upgrade;
-  proxy_set_header X-Sendfile-Type X-Accel-Redirect;
-  proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/uploads/=/files/;
-  proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/bundle/ruby/=/__gems_internal__/;
+  # One header, comma-separated: a repeated name breaks nginx's proxy_headers_hash.
+  proxy_set_header X-Accel-Mapping <%= api_dir %>/shared/uploads/=/files/,<%= api_dir %>/shared/bundle/ruby/=/__gems_internal__/;
 
 <% if auth_basic %>
   auth_basic "Restricted Content";
@@ -74,13 +99,20 @@ server {
 
   rewrite ^/api/admin(/.*|$) /admin permanent;
 
-  location ~ ^/api(/.*|$) {
-    root <%= api_dir %>/current/public;
+  # The trailing slash on proxy_pass strips /api, so /api/operators reaches Rails
+  # as /operators. Do not replace this with a regex location + `rewrite ... break`
+  # - some nginx builds then proxy the original URI cut to the rewritten length.
+  location ^~ /api/ {
     auth_basic off;
-    proxy_pass http://api_admin;
-    proxy_redirect off;
 
-    rewrite ^/api(/.*)$ $1 break;
+    proxy_read_timeout 600;
+
+    proxy_pass http://api_admin/;
+    proxy_redirect off;
+  }
+
+  location = /api {
+    return 301 /api/;
   }
 
   location /__gems_internal__/ {
@@ -132,18 +164,46 @@ server {
     rewrite ^([^.]*[^/])$ $1/ permanent;
   }
 
+  location ~ "^/observations-tool/(?<otp_hashed>.+\.[0-9a-f]{20}\.(?:worker\.)?(?:js|css))$" {
+    alias <%= obs_tool_dir %>/dist/$otp_hashed;
+    # Serve the .br/.gz written by script/precompress at deploy time. Pre-compressing
+    # lets us use brotli q11, which dynamic compression is far too slow for.
+    brotli_static on;
+    gzip_static on;
+    add_header Cache-Control "public, immutable";
+    expires max;
+    access_log off;
+  }
+
+  # Everything else in dist/ keeps its name across deploys (index.html, the locale
+  # JSON refreshed by transifex:pull, fonts, icons), so it must be revalidated.
   location /observations-tool/ {
     alias <%= obs_tool_dir %>/dist/;
     index index.html;
-    try_files $uri $uri/ /index.html =404;
+    brotli_static on;
+    gzip_static on;
+    add_header Cache-Control "no-cache";
+    try_files $uri $uri/ /observations-tool/index.html;
   }
 
   # Next.js frontend
   location /_next/static/ {
     alias <%= portal_dir %>/.next/static/;
     brotli_static on;
+    gzip_static on;
     add_header Cache-Control "public, immutable";
     expires max;
+    access_log off;
+    log_not_found off;
+  }
+
+  # Files from the Next.js public/ dir. Without this they fall through to the Node
+  # app below, which serves them with max-age=0 - forcing a revalidation round trip
+  # per asset per page load. Not immutable: these filenames are not content-hashed.
+  location /static/ {
+    alias <%= portal_dir %>/public/static/;
+    add_header Cache-Control "public, stale-while-revalidate=2592000";
+    expires 7d;
     access_log off;
     log_not_found off;
   }
