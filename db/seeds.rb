@@ -11,6 +11,11 @@ fixture_files = Dir["#{fixtures_dir}/**/*.yml"].pluck((fixtures_dir.size + 1)..-
 $stdout.puts "Loading fixtures..."
 ActiveRecord::FixtureSet.create_fixtures(fixtures_dir, fixture_files)
 
+sample_pdf_file = "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
+sample_image1 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample1.jpg")))}"
+sample_image2 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample2.jpg")))}"
+sample_image3 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample3.jpg")))}"
+
 $stdout.puts "Creating test users..."
 
 common_fields = {password: "Supersecret1", password_confirmation: "Supersecret1", locale: :en, last_name: "User"}
@@ -59,14 +64,17 @@ government.update!(country: cameroon)
 admin.update!(responsible_for_countries: [cameroon, congo])
 
 Observer.find_each { |o| o.update!(responsible_qc2: admin) }
-OperatorDocumentAnnex.find_each { |a| a.update!(user: operator) }
+# document files are missing from public/uploads too, and annex file names are derived from them, so do these first
+DocumentFile.find_each do |document_file|
+  document_file.update!(attachment: sample_pdf_file) if document_file.attachment.blank?
+end
+# annex has validation on attachment, so give a sample file to the ones whose file is not in public/uploads
+OperatorDocumentAnnex.find_each do |annex|
+  annex.attachment = sample_pdf_file if annex.attachment.blank?
+  annex.update!(user: operator)
+end
 
 $stdout.puts "Syncing test data..."
-
-sample_pdf_file = "data:application/pdf;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "doc.pdf")))}"
-sample_image1 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample1.jpg")))}"
-sample_image2 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample2.jpg")))}"
-sample_image3 = "data:image/jpeg;base64,#{Base64.encode64(File.read(File.join(Rails.root, "spec", "support", "files", "sample3.jpg")))}"
 
 # observation report has validation on attachment, so to not fail some e2e specs make sure all reports has some attachments
 ObservationReport.find_each do |report|

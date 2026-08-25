@@ -35,7 +35,7 @@ module V1
               relationships: {"operator-document": operator_document.id}
             }
           },
-          error_attributes: [422, 100, {name: ["can't be blank"], "start-date": ["can't be blank"]}]
+          error_attributes: [422, 100, {name: ["can't be blank"], "start-date": ["can't be blank"], attachment: ["can't be blank"]}]
         },
         edit: {
           resource: -> { operator_document_annex },
@@ -79,7 +79,7 @@ module V1
             headers: operator_user_headers
           )
 
-          expect(parsed_body).to eq(jsonapi_errors(422, 100, {name: ["can't be blank"], "start-date": ["can't be blank"]}))
+          expect(parsed_body).to eq(jsonapi_errors(422, 100, {name: ["can't be blank"], "start-date": ["can't be blank"], attachment: ["can't be blank"]}))
           expect(status).to eq(422)
         end
 
