@@ -46,10 +46,8 @@ class SyncTasks
     # delete_old has to be true, otherwise series whose counters did not change keep their older date
     # while the rollups move on, and the slices stop adding up to the rollup when read back with at_date
     [from_date, *important_dates, Time.zone.today.to_date].uniq.each do |day|
-      countries.each do |country_id|
-        puts "Checking score for country: #{country_id} and #{day}"
-        OperatorDocumentStatistic.generate_for_country_and_day(country_id, day, true)
-      end
+      puts "Checking scores for #{day}"
+      OperatorDocumentStatistic.generate_for_day(day, countries, delete_old: true)
     end
     # after generating all we need to ensure we have stats for first point in time, regenerate for first day only
     countries.each do |country_id|

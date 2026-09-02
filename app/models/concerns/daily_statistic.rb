@@ -11,6 +11,11 @@ module DailyStatistic
   end
 
   class_methods do
+    # counter columns compared by same_counters?, memoized because it runs once per series per day
+    def comparable_columns
+      @comparable_columns ||= column_names - %w[id date created_at updated_at]
+    end
+
     # columns identifying a single statistic series, implemented by the models
     def statistic_dimensions
       raise NotImplementedError
@@ -81,8 +86,6 @@ module DailyStatistic
   def same_counters?(other)
     return false unless other.is_a?(self.class)
 
-    (self.class.column_names - %w[id date created_at updated_at]).all? do |attr|
-      send(attr) == other.send(attr)
-    end
+    self.class.comparable_columns.all? { |attr| send(attr) == other.send(attr) }
   end
 end
