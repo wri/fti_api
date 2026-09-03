@@ -8,6 +8,34 @@ RSpec.describe Admin::OperatorDocumentAnnexesController, type: :controller do
 
   before { sign_in admin }
 
+  describe "GET index" do
+    let(:operator_document) { create(:operator_document_country) }
+    let!(:annex) { create(:operator_document_annex, operator_document: operator_document) }
+
+    it "links to the operator document" do
+      get :index
+
+      expect(response.body).to include(admin_operator_document_path(operator_document))
+      expect(response.body).not_to include("History version")
+    end
+
+    context "when the annex is only related to the document history" do
+      before do
+        annex.annex_document.destroy!
+        annex.reload
+      end
+
+      it "links to the document history and marks it as a history version" do
+        document_history = annex.related_operator_document
+        get :index
+
+        expect(document_history).to be_a(OperatorDocumentHistory)
+        expect(response.body).to include(admin_operator_document_history_path(document_history))
+        expect(response.body).to include("#{operator_document.name} (History version)")
+      end
+    end
+  end
+
   describe "GET reject" do
     let(:annex) { create(:operator_document_annex, force_status: "doc_pending") }
 
