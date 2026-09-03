@@ -19,6 +19,10 @@ RSpec.describe OperatorDocumentAnnexMailer, type: :mailer do
   shared_examples "annex mail" do
     include_examples "renders the related document name"
 
+    it "does not mark the document as a history version" do
+      expect(mail.body.encoded).not_to include("History version")
+    end
+
     context "when the annex is only related to the document history" do
       before do
         annex.annex_document.destroy!
@@ -26,6 +30,16 @@ RSpec.describe OperatorDocumentAnnexMailer, type: :mailer do
       end
 
       include_examples "renders the related document name"
+
+      it "marks the document as a history version" do
+        expect(mail.body.encoded).to include("#{operator_document.name} (History version)")
+      end
+
+      it "translates the history version suffix" do
+        I18n.with_locale(:fr) do
+          expect(mail.body.encoded).to include("(Version historique)")
+        end
+      end
     end
   end
 

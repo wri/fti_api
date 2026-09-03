@@ -24,5 +24,7 @@ class OperatorDocumentAnnexMailer < ApplicationMailer
     @document = document
     @operator_document = document.related_operator_document
     @operator = @operator_document.operator
+    @operator_document_name = @operator_document.name_with_fmu
+    @operator_document_name += " (#{t("mailers.history_version")})" if @operator_document.is_a?(OperatorDocumentHistory)
   end
 end
