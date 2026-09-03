@@ -1,0 +1,30 @@
+name: Setup Ruby environment
+description: Installs the GDAL/ImageMagick system packages and Ruby, with the bundler cache keyed on the installed package versions
+
+runs:
+  using: composite
+  steps:
+    - name: Refresh apt index
+      shell: bash
+      run: sudo apt-get update
+
+    - uses: awalsh128/cache-apt-pkgs-action@v1
+      id: apt-pkgs
+      with:
+        packages: gdal-bin imagemagick libgdal-dev
+        version: 2.1
+        # required: the cache cannot capture update-alternatives symlinks (libblas.so.3)
+        execute_install_scripts: true
+
+    - name: Key gem cache on apt package versions
+      id: gem-cache-key
+      shell: bash
+      run: |
+        echo "hash=$(printf '%s' '${{ steps.apt-pkgs.outputs.package-version-list }}' \
+          | md5sum | cut -c1-8)" >> $GITHUB_OUTPUT
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        cache-version: ${{ steps.gem-cache-key.outputs.hash }}

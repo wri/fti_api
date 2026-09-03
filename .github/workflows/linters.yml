@@ -4,17 +4,10 @@ on: push
 
 jobs:
   linters:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: libgdal-dev
-          version: 1.0
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup-ruby-env
       - name: Run RuboCop
         run: bundle exec rubocop

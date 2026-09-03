@@ -85,7 +85,7 @@ Rails.application.routes.draw do
       jsonapi_resources :quality_controls, only: [:create] do; end
       # rubocop:enable Standard/BlockSingleLineBraces
 
-      resources :fmus, only: [:index, :update] do
+      resources :fmus, only: [:index, :show, :update] do
         get "tiles/:z/:x/:y", to: "fmus#tiles", on: :collection
       end
       get "protected_areas/tiles/:z/:x/:y", to: "protected_areas#tiles"
