@@ -70,19 +70,28 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   index do
     tag_column :status
-    column I18n.t("active_admin.operator_page.documents") do |od|
-      next if od.annex_document.nil?
+    column I18n.t("active_admin.operator_page.documents") do |annex|
+      next if annex.related_operator_document.nil?
 
-      doc = OperatorDocument.unscoped.find(od.annex_document.documentable_id)
-      link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
+      if annex.related_operator_document.is_a?(OperatorDocumentHistory)
+        name = "#{annex.related_operator_document.required_operator_document.name} " \
+          "(#{I18n.t("active_admin.operator_document_annexes_page.history_version")})"
+        link = admin_operator_document_history_path(annex.related_operator_document.id)
+      else
+        doc = OperatorDocument.unscoped.find(annex.related_operator_document.id)
+        name = doc.required_operator_document.name
+        link = admin_operator_document_path(doc.id)
+      end
+
+      link_to(name, link)
     end
-    column I18n.t("active_admin.dashboard_page.columns.operator") do |od|
-      o = od.annex_documents_history.first.documentable.operator
+    column I18n.t("active_admin.dashboard_page.columns.operator") do |annex|
+      o = annex.annex_documents_history.first.documentable.operator
       link_to(o.name, admin_producer_path(o.id))
     rescue
     end
-    column I18n.t("activerecord.models.fmu.one") do |od|
-      doc = od.annex_documents.first
+    column I18n.t("activerecord.models.fmu.one") do |annex|
+      doc = annex.annex_documents.first
       next if doc.nil?
 
       fmu = doc.documentable_type.constantize.unscoped.find(doc.documentable_id).fmu
