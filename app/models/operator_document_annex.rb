@@ -76,8 +76,14 @@ class OperatorDocumentAnnex < ApplicationRecord
     true
   end
 
+  # annexes are disconnected from the operator document when a new version of the document is uploaded,
+  # from then on they are only related to the document history
+  def related_operator_document
+    operator_document || operator_document_histories.last
+  end
+
   def operator
-    operator_document&.operator || operator_document_histories.first&.operator
+    related_operator_document&.operator
   end
 
   def self.expire_document_annexes
@@ -90,7 +96,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   end
 
   def operator_document_name
-    operator_document&.required_operator_document&.name
+    related_operator_document&.name
   end
 
   def expire_document_annex

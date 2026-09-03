@@ -3,7 +3,7 @@
 </p>
 
 <p>
-  <%= t(".paragraph1", annex: @document.name, document: @document.operator_document.name_with_fmu).html_safe %>
+  <%= t(".paragraph1", annex: @document.name, document: @operator_document.name_with_fmu).html_safe %>
 </p>
 
 <p>
