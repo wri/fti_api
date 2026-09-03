@@ -31,6 +31,33 @@ RSpec.describe RequiredOperatorDocumentFmu, type: :model do
     it { is_expected.to validate_absence_of(:contract_signature) }
   end
 
+  describe "#applies_to_forest_type?" do
+    subject { rod.applies_to_forest_type?(forest_type) }
+
+    let(:rod) { build :required_operator_document_fmu, forest_types: forest_types }
+
+    context "when the required document has no forest types" do
+      let(:forest_types) { [] }
+      let(:forest_type) { "ufa" }
+
+      it { is_expected.to be true }
+    end
+
+    context "when the forest type is one of the required document forest types" do
+      let(:forest_types) { [ForestType::TYPES[:ufa][:index], ForestType::TYPES[:cf][:index]] }
+      let(:forest_type) { "ufa" }
+
+      it { is_expected.to be true }
+    end
+
+    context "when the forest type is not one of the required document forest types" do
+      let(:forest_types) { [ForestType::TYPES[:ufa][:index]] }
+      let(:forest_type) { "vdc" }
+
+      it { is_expected.to be false }
+    end
+  end
+
   describe "Hooks" do
     describe "#create_operator_document_fmus" do
       let(:operator_country) { create :country }

@@ -321,6 +321,45 @@ RSpec.describe OperatorDocument, type: :model do
         expect(history_pending.annex_documents.count).to eql 1
         expect(history_not_provided.annex_documents.count).to eql 0
       end
+
+      context "with an fmu document" do
+        let(:forest_types) { [ForestType::TYPES[:ufa][:index]] } # @fmu forest type
+        let(:required_operator_document_fmu) {
+          create(
+            :required_operator_document_fmu,
+            country: @country,
+            forest_types: forest_types,
+            disable_document_creation: true
+          )
+        }
+        let!(:operator_document) {
+          create(
+            :operator_document_fmu,
+            operator: @operator,
+            fmu: @fmu,
+            required_operator_document_fmu: required_operator_document_fmu
+          )
+        }
+
+        context "when the required document still applies to the fmu forest type" do
+          it "regenerates document state to not provided" do
+            operator_document.destroy
+
+            expect(operator_document.reload.deleted?).to be(false)
+            expect(operator_document.status).to eq("doc_not_provided")
+          end
+        end
+
+        context "when the required document no longer applies to the fmu forest type" do
+          let(:forest_types) { [ForestType::TYPES[:vdc][:index]] }
+
+          it "deletes the document" do
+            operator_document.destroy
+
+            expect(operator_document.reload.deleted?).to be(true)
+          end
+        end
+      end
     end
   end
 

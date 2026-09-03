@@ -49,8 +49,9 @@ class RequiredOperatorDocumentFmu < RequiredOperatorDocument
     end
   end
 
+  # forest_types are strings (ForestType::TYPES is a HashWithIndifferentAccess), fmu.forest_type is an enum string
   def applies_to_forest_type?(forest_type)
-    forest_types.blank? || forest_types.include?(forest_type.to_sym)
+    forest_types.blank? || forest_types.map(&:to_s).include?(forest_type.to_s)
   end
 
   def fmus
