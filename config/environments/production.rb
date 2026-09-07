@@ -56,7 +56,8 @@ Rails.application.configure do
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
-  config.cache_store = :file_store, Rails.root.join("tmp/cache"), {expires_in: 7.days}
+  # config.cache_store = :file_store, Rails.root.join("tmp/cache"), {expires_in: 7.days}
+  config.cache_store = :memory_store, {size: 128.megabytes, expires_in: 7.days}
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
