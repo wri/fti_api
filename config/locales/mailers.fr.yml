@@ -10,6 +10,7 @@ fr:
     document: Document
     associated_to: Associé à
     annex: Annexe
+    history_version: Version historique
   user_mailer:
     user_acceptance:
       subject: Bienvenue sur la plateforme Open Timber Portal

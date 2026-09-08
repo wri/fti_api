@@ -83,7 +83,7 @@ gem "letter_opener_web"
 gem "sendgrid-actionmailer"
 
 # File utilities
-gem "rubyzip", "~> 2.3.0"
+gem "rubyzip", "~> 3.6"
 
 # Changes monitoring
 gem "globalize-versioning", github: "tsubik/globalize-versioning", branch: "custom"

@@ -398,6 +398,7 @@ en:
       operator_document: 'Operator Document'
       orphaned: 'Orphaned'
       history_annexes: 'History Annexes'
+      history_version: 'History version'
       details: 'Operator Document Annex Details'
       comment: 'Reason for rejection'
     observations_page:

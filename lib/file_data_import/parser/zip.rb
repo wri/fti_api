@@ -12,8 +12,7 @@ module FileDataImport
 
         ::Zip::File.open(path_to_file) do |zip_file|
           zip_file.each do |file|
-            file_path = File.join(folder_path, file.name)
-            zip_file.extract(file, file_path)
+            zip_file.extract(file, destination_directory: folder_path)
           end
         end
       end

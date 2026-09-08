@@ -10,6 +10,7 @@ es:
     document: "Documento"
     associated_to: "Asociado a"
     annex: "Anexo"
+    history_version: "Versión histórica"
   user_mailer:
     user_acceptance:
       subject: "¡Bienvenido/a al Open Timber Portal!"

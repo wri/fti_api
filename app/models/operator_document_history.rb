@@ -52,6 +52,14 @@ class OperatorDocumentHistory < ApplicationRecord
   enum :uploaded_by, {operator: 1, monitor: 2, admin: 3, other: 4}
   enum :source, {company: 1, forest_atlas: 2, other_source: 3}
 
+  delegate :name, to: :required_operator_document
+
+  def name_with_fmu
+    return name if fmu.nil?
+
+    "#{name} (#{fmu.name})"
+  end
+
   def publication_authorization?
     required_operator_document.contract_signature?
   end
