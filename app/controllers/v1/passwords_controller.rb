@@ -2,7 +2,21 @@
 
 module V1
   class PasswordsController < APIController
+    include AuthRateLimiting
+
     skip_before_action :authenticate, only: [:create, :update]
+
+    rate_limit to: 3, within: 1.hour, only: :create,
+      by: -> { request.remote_ip },
+      with: -> { render_too_many_requests },
+      store: AuthRateLimiting::STORE,
+      name: "request"
+    # token guessing is cheaper than inbox-bombing, but still needs a cap
+    rate_limit to: 5, within: 15.minutes, only: :update,
+      by: -> { request.remote_ip },
+      with: -> { render_too_many_requests },
+      store: AuthRateLimiting::STORE,
+      name: "reset"
 
     def create
       User.send_reset_password_instructions(create_params)
