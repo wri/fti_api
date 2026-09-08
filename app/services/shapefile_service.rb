@@ -46,7 +46,7 @@ class ShapefileService
       files = Dir.glob("#{dir}/*")
 
       zipfile_path = File.join(dir, "#{shapes_name}.zip")
-      Zip::File.open(zipfile_path, Zip::File::CREATE) do |zipfile|
+      Zip::File.open(zipfile_path, create: true) do |zipfile|
         files.each do |file|
           zipfile.add(File.basename(file), file)
         end

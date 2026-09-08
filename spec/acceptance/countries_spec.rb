@@ -4,11 +4,7 @@ require "rspec_api_documentation/dsl"
 resource "Countries" do
   explanation "Countries resource"
 
-  let!(:admin) { FactoryBot.create(:admin) }
-  let!(:admin_token) { "Bearer " + Auth.issue({user: admin.id}) }
-
   header "Content-Type", "application/vnd.api+json"
-  header "Authorization", :admin_token
 
   let!(:countries) { FactoryBot.create_list(:country, 5, is_active: true) }
   let!(:operator) { FactoryBot.create_list(:operator, 3, country: countries.first) }

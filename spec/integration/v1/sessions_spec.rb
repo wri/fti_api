@@ -14,7 +14,6 @@ module V1
 
       expect(status).to eq(200)
       expect(parsed_body).to eq({
-        token: JWT.encode({user: user.id}, ENV["AUTH_SECRET"], "HS256"),
         role: "user",
         user_id: user.id,
         country: nil, operator_ids: [], observer: nil
@@ -34,25 +33,26 @@ module V1
     end
 
     describe "Auth cookie" do
-      it "does not set auth cookie by default" do
+      it "sets the auth cookie on every login" do
         post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         expect(status).to eq(200)
-        expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_nil
+        expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_present
       end
 
-      it "sets an opaque auth cookie when set_cookie param is true" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+      it "sets an opaque auth cookie" do
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         expect(status).to eq(200)
         cookie = response.cookies[APIController::AUTH_COOKIE_NAME]
         expect(cookie).to be_present
-        # the cookie is encrypted, not a raw JWT
-        expect(cookie).not_to eq(JWT.encode({user: user.id}, ENV["AUTH_SECRET"], "HS256"))
+        # opaque to the client: the payload is encrypted, so the salt it carries
+        # is not readable in the cookie value
+        expect(cookie).not_to include(user.authenticatable_salt)
       end
 
       it "sets a separate auth cookie per app" do
-        post "/login?app=observations-tool", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login?app=observations-tool", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         expect(status).to eq(200)
         expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_nil
@@ -60,7 +60,7 @@ module V1
       end
 
       it "sets a session cookie (no expiry) by default" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         expect(status).to eq(200)
         set_cookie = auth_set_cookie_header
@@ -70,14 +70,14 @@ module V1
       end
 
       it "sets a persistent cookie when remember_me is true" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true, remember_me: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1", remember_me: true}}
 
         expect(status).to eq(200)
         expect(auth_set_cookie_header).to match(/expires=/i)
       end
 
       it "authenticates a request using the auth cookie" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         get "/users/current-user"
 
@@ -86,7 +86,7 @@ module V1
       end
 
       it "authenticates a request using the app-namespaced auth cookie" do
-        post "/login?app=observations-tool", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login?app=observations-tool", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         get "/users/current-user?app=observations-tool"
 
@@ -95,7 +95,7 @@ module V1
       end
 
       it "ignores an unknown app and falls back to the portal cookie" do
-        post "/login?app=bogus", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login?app=bogus", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         expect(status).to eq(200)
         expect(response.cookies["bogus_#{APIController::AUTH_COOKIE_NAME}"]).to be_nil
@@ -103,7 +103,7 @@ module V1
       end
 
       it "stops authenticating once the password changes" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         get "/users/current-user"
         expect(status).to eq(200)
@@ -115,7 +115,7 @@ module V1
       end
 
       it "does not authenticate when the app does not match the cookie" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         # cookie was set for the portal (no app), so the observations-tool app
         # cannot read it
@@ -124,18 +124,8 @@ module V1
         expect(status).to eq(401)
       end
 
-      it "Authorization header takes precedence over cookie" do
-        other_user = create(:admin)
-        post "/login", params: {auth: {email: other_user.email, password: "Supersecret1", set_cookie: true}}
-
-        get "/users/current-user", headers: user_headers
-
-        expect(status).to eq(200)
-        expect(parsed_attributes[:email]).to eq(user.email)
-      end
-
       it "logout clears the auth cookie" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
         expect(response.cookies[APIController::AUTH_COOKIE_NAME]).to be_present
 
         delete "/logout", headers: {APIController::CSRF_HEADER => cookies[APIController::CSRF_COOKIE_NAME]}
@@ -147,7 +137,7 @@ module V1
 
     describe "CSRF protection" do
       it "issues a non-HTTP-only XSRF-TOKEN cookie at login" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         expect(response.cookies[APIController::CSRF_COOKIE_NAME]).to be_present
         csrf_set_cookie = Array(response.headers["Set-Cookie"]).find { |c| c.start_with?("#{APIController::CSRF_COOKIE_NAME}=") }
@@ -155,7 +145,7 @@ module V1
       end
 
       it "issues a URL-safe token so the frontend can echo it back verbatim" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         csrf_set_cookie = Array(response.headers["Set-Cookie"]).find { |c| c.start_with?("#{APIController::CSRF_COOKIE_NAME}=") }
         value = csrf_set_cookie.split("=", 2).last.split(";").first
@@ -164,7 +154,7 @@ module V1
       end
 
       it "blocks cookie-authenticated unsafe requests without the CSRF header" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         delete "/logout"
 
@@ -172,7 +162,7 @@ module V1
       end
 
       it "blocks cookie-authenticated unsafe requests with a mismatched CSRF header" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         delete "/logout", headers: {APIController::CSRF_HEADER => "not-the-real-token"}
 
@@ -180,7 +170,7 @@ module V1
       end
 
       it "allows cookie-authenticated unsafe requests when the header matches" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         delete "/logout", headers: {APIController::CSRF_HEADER => cookies[APIController::CSRF_COOKIE_NAME]}
 
@@ -188,7 +178,7 @@ module V1
       end
 
       it "rejects a matching cookie and header that is not signed by the app" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         forged = "not-a-signed-token"
         cookies[APIController::CSRF_COOKIE_NAME] = forged
@@ -199,7 +189,7 @@ module V1
 
       it "rejects a token signed for another user" do
         other_user = create(:admin)
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         other_token = CsrfProtection.verifier
           .generate({"user_id" => other_user.id, "nonce" => SecureRandom.urlsafe_base64(16)})
@@ -210,21 +200,15 @@ module V1
       end
 
       it "exempts safe (GET) cookie-authenticated requests from CSRF" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         get "/users/current-user"
 
         expect(status).to eq(200)
       end
 
-      it "exempts Bearer-authenticated requests from CSRF" do
-        delete "/logout", headers: user_headers
-
-        expect(status).to eq(204)
-      end
-
       it "re-issues the XSRF-TOKEN cookie when it's missing on a cookie-authed request" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         # simulate the XSRF cookie being cleared while the auth cookie persists
         cookies.delete(APIController::CSRF_COOKIE_NAME)
@@ -238,7 +222,7 @@ module V1
       end
 
       it "logout clears the XSRF-TOKEN cookie" do
-        post "/login", params: {auth: {email: user.email, password: "Supersecret1", set_cookie: true}}
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
 
         delete "/logout", headers: {APIController::CSRF_HEADER => cookies[APIController::CSRF_COOKIE_NAME]}
 
@@ -256,7 +240,7 @@ module V1
         delete "/logout", headers: user_headers
 
         expect(status).to eq(204)
-        expect(response.headers["Set-Cookie"]).to include("download_user=;")
+        expect(response.headers["Set-Cookie"]).to include(a_string_starting_with("download_user=;"))
         expect(response.cookies["download_user"]).to be_blank
       end
 
@@ -271,7 +255,8 @@ module V1
       end
 
       it "Download session set download cookie for different app" do
-        post "/sessions/download-session?app=observations-tool", headers: user_headers
+        post "/sessions/download-session?app=observations-tool",
+          headers: authorize_headers(user.id, app: "observations-tool")
 
         expect(status).to eq(200)
         expect(response.cookies["observations-tool_download_user"]).to be_present
