@@ -4,11 +4,9 @@
 # requests. The XSRF-TOKEN cookie is not HTTP-only so the frontend JS can
 # copy its value into the X-XSRF-TOKEN header on unsafe requests; a
 # cross-site page cannot read the cookie (same-origin policy) and so cannot
-# forge the header. Bearer-authenticated clients and unauthenticated
-# requests are exempt.
+# forge the header. Unauthenticated requests are exempt.
 #
-# Depends on the including controller exposing #bearer_token, #auth_cookie_user
-# and #app_name.
+# Depends on the including controller exposing #auth_cookie_user and #app_name.
 module CsrfProtection
   extend ActiveSupport::Concern
 
@@ -39,7 +37,6 @@ module CsrfProtection
 
   def verify_csrf_token!
     return if request.get? || request.head? || request.options?
-    return if bearer_token.present?
 
     user_id = auth_cookie_user&.id
     return if user_id.blank?

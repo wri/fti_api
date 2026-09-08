@@ -4,11 +4,7 @@ require "rspec_api_documentation/dsl"
 resource "Operators" do
   explanation "Operators resource"
 
-  let!(:admin) { FactoryBot.create(:admin) }
-  let!(:admin_token) { "Bearer " + Auth.issue({user: admin.id}) }
-
   header "Content-Type", "application/vnd.api+json"
-  header "Authorization", :admin_token
 
   let!(:country) { FactoryBot.create :country }
   let!(:operators) { FactoryBot.create_list(:operator, 5, country: country) }

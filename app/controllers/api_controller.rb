@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "oj"
-require "auth"
 
 class APIController < ActionController::API
   class UnprocessableContentError < StandardError; end
@@ -15,10 +14,6 @@ class APIController < ActionController::API
   AUTH_COOKIE_NAME = "otp_auth_token"
   # frontends allowed to namespace their own cookies and scope resources via ?app=
   APPS = %w[observations-tool].freeze
-
-  # kill switch for token auth once both frontends run on cookies, so the
-  # cutover is an .env edit and a puma restart rather than a release
-  DISABLE_BEARER_AUTH_ENV_VAR = "DISABLE_BEARER_AUTH"
 
   def context
     {current_user: current_user,
@@ -35,7 +30,6 @@ class APIController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActionController::RoutingError, with: :record_not_found
-  rescue_from JWT::VerificationError, with: :bad_auth_key
   rescue_from UnprocessableContentError, with: :unprocessable_content
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -53,7 +47,7 @@ class APIController < ActionController::API
 
   def current_user
     @current_user ||= begin
-      user = user_from_bearer_token || auth_cookie_user
+      user = auth_cookie_user
       user if user&.is_active
     end
   rescue
@@ -90,17 +84,8 @@ class APIController < ActionController::API
     render json: json_errors, status: :unprocessable_content
   end
 
-  # The Bearer JWT (API clients) takes precedence over the session cookie so an
-  # explicit token always wins over whatever the browser has stored.
-  def user_from_bearer_token
-    return unless bearer_token.present?
-
-    id = Auth.decode(bearer_token)&.dig("user")
-    User.find_by(id: id) if id
-  end
-
-  # The cookie is encrypted with the app's secret_key_base (opaque, tamper-proof)
-  # rather than a JWT, so its payload is not readable by the client. For
+  # The cookie is encrypted with the app's secret_key_base, so it is opaque and
+  # tamper-proof and its payload is not readable by the client. For
   # remember_me logins Rails embeds a server-verified expiry into the payload
   # via use_cookies_with_metadata; the default browser-session cookie has no
   # server-side expiry and is dropped client-side when the browser closes.
@@ -129,20 +114,6 @@ class APIController < ActionController::API
   # param decide which cookie authenticates them or what a resource scopes to
   def app_name
     params[:app].presence_in(APPS)
-  end
-
-  # Pretending the header isn't there is what makes the kill switch safe: it
-  # disables the bearer login path and, in the same stroke, the CSRF exemption
-  # that keys off this method. Gating only #user_from_bearer_token would leave a
-  # stale Authorization header skipping CSRF on a cookie-authenticated request.
-  def bearer_token
-    return if ENV[DISABLE_BEARER_AUTH_ENV_VAR] == "true"
-
-    request.env["HTTP_AUTHORIZATION"]&.scan(/Bearer (.*)$/)&.flatten&.last
-  end
-
-  def bad_auth_key
-    render json: {errors: [{status: 400, title: "API Key/Authorization Key mal formed"}]}, status: :bad_request
   end
 
   def set_locale(&action)

@@ -14,15 +14,14 @@ module V1
     def create
       @user = User.find_by(email: auth_params[:email])
       if @user.present? && @user.valid_password?(auth_params[:password]) && @user.is_active
-        token = Auth.issue({user: @user.id})
         @user.update_column(:should_change_password, true) unless User.strong_password?(auth_params[:password])
         @user.update_tracked_fields!(request)
         set_download_session_cookie_for(@user)
-        if ActiveModel::Type::Boolean.new.cast(auth_params[:set_cookie])
-          set_auth_cookie(@user)
-          set_csrf_cookie(@user.id, expires: remember_me? ? REMEMBER_ME_TTL.from_now : nil)
-        end
-        render json: {token: token, role: @user.user_permission.user_role,
+        # cookies are the only way to authenticate now, so a login that did not
+        # set them would hand back a 200 and no session at all
+        set_auth_cookie(@user)
+        set_csrf_cookie(@user.id, expires: remember_me? ? REMEMBER_ME_TTL.from_now : nil)
+        render json: {role: @user.user_permission.user_role,
                       user_id: @user.id, country: @user.country_id,
                       operator_ids: @user.operator_ids, observer: @user.observer_id}, status: :ok
       else
@@ -45,7 +44,7 @@ module V1
     private
 
     def auth_params
-      params.expect(auth: [:email, :password, :current_sign_in_ip, :set_cookie, :remember_me])
+      params.expect(auth: [:email, :password, :current_sign_in_ip, :remember_me])
     end
 
     def set_auth_cookie(user)
