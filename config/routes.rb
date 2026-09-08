@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
+  devise_config = ActiveAdmin::Devise.config
+  devise_config[:skip] = Array(devise_config[:skip]) | [:unlocks]
+  devise_for :users, devise_config
+  get "/unlock", to: "unlocks#show", as: :user_unlock
   begin
     ActiveAdmin.routes(self)
   rescue

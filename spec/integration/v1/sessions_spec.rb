@@ -32,40 +32,68 @@ module V1
       it "Sends unlock instructions when the account is locked" do
         expect {
           lock_account!(user)
-        }.to have_enqueued_mail(Devise::Mailer, :unlock_instructions).once
+        }.to have_enqueued_mail(DeviseMailer, :unlock_instructions).once
 
         expect(user.reload).to be_access_locked
         expect(user.unlock_token).to be_present
       end
 
-      it "Unlocks the account when the email unlock link is visited" do
+      def visit_unlock_link_for(account)
         ActionMailer::Base.deliveries.clear
 
         perform_enqueued_jobs do
-          lock_account!(user)
+          lock_account!(account)
         end
 
-        expect(user.reload).to be_access_locked
+        expect(account.reload).to be_access_locked
 
         mail = ActionMailer::Base.deliveries.last
         expect(mail).to be_present
-        expect(mail.to).to contain_exactly(user.email)
+        expect(mail.to).to contain_exactly(account.email)
         expect(mail.subject).to eq(I18n.t("devise.mailer.unlock_instructions.subject"))
 
         body = (mail.html_part || mail).body.to_s
-        unlock_path = body[%r{https?://[^"]+(/admin/unlock\?unlock_token=[^"]+)}, 1]
-        expect(unlock_path).to be_present
+        unlock_url = body[%r{(https?://[^"]+/unlock\?unlock_token=[^"]+)}, 1]
+        expect(unlock_url).to be_present
+        expect(unlock_url).not_to include("/admin/unlock")
 
-        get CGI.unescapeHTML(unlock_path)
+        get CGI.unescapeHTML(URI.parse(unlock_url).request_uri)
+      end
 
-        expect(response).to redirect_to(new_user_session_path)
-        expect(flash[:notice]).to eq(I18n.t("devise.unlocks.unlocked"))
+      it "Unlocks the account when the email unlock link is visited" do
+        visit_unlock_link_for(user)
+
+        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL"))
         expect(user.reload).not_to be_access_locked
         expect(user.failed_attempts).to eq(0)
         expect(user.unlock_token).to be_nil
 
         post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
         expect(status).to eq(200)
+      end
+
+      it "Redirects operators to the portal after unlock" do
+        visit_unlock_link_for(operator_user)
+
+        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL"))
+        expect(operator_user.reload).not_to be_access_locked
+      end
+
+      it "Redirects observation tool users to the observations tool after unlock" do
+        ngo = create(:ngo)
+
+        visit_unlock_link_for(ngo)
+
+        expect(response).to redirect_to(ENV.fetch("OBSERVATIONS_TOOL_URL"))
+        expect(ngo.reload).not_to be_access_locked
+      end
+
+      it "Redirects admins to the backoffice login after unlock" do
+        visit_unlock_link_for(admin)
+
+        expect(response).to redirect_to(new_user_session_path)
+        expect(flash[:notice]).to eq(I18n.t("devise.unlocks.unlocked"))
+        expect(admin.reload).not_to be_access_locked
       end
 
       it "Resets failed attempts after a successful login" do
