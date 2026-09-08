@@ -49,9 +49,11 @@ class OperatorDocumentStatistic < ApplicationRecord
       country_ids.each do |country_id|
         OperatorDocumentStatistic.where(country_id: country_id, date: day).delete_all if delete_old
 
+        # a nil country_id is the all countries scope, keyed as :all in the counters
         country_key = country_id.nil? ? :all : country_id
         dims = observed[country_key] || {types: [], forest_types: [], groups: []}
 
+        # a nil dimension is the rollup over that dimension, which the counters key as :all
         (dims[:types] + [nil]).uniq.each do |type|
           (dims[:forest_types] + [nil]).uniq.each do |forest_type|
             (dims[:groups] + [nil]).uniq.each do |group_id|
@@ -74,6 +76,7 @@ class OperatorDocumentStatistic < ApplicationRecord
                 not_provided_count: count.call("doc_not_provided")
               )
 
+              # unchanged counters move the previous row's date forward instead of adding a new one
               prev_stat = previous_stats[[country_id, group_id, forest_type, DOCUMENT_TYPES[type]]]
               if prev_stat.present? && prev_stat.same_counters?(new_stat)
                 prev_stat.date = day
@@ -134,6 +137,7 @@ class OperatorDocumentStatistic < ApplicationRecord
       group = (row["g_group"] == 1) ? :all : row["group_id"]
       forest = (row["g_forest"] == 1) ? :all : forest_type_name(row["forest_type"])
       doc_type = (row["g_doc"] == 1) ? :all : row["doc_type"]
+      # select_all skips the AR enum casting, so integers have to be mapped back to names
       status = OperatorDocumentHistory.statuses.key(row["status"]) || row["status"]
 
       counters[[country, group, forest, doc_type, status]] = row["n"]
@@ -160,6 +164,7 @@ class OperatorDocumentStatistic < ApplicationRecord
   def self.latest_stats_before(country_ids, day)
     dimensions = statistic_dimensions.join(", ")
 
+    # distinct on requires the order to start with the same dimensions, date desc then picks the latest
     where(country_id: country_ids)
       .where("date < ?", day)
       .select(Arel.sql("distinct on (#{dimensions}) #{table_name}.*"))
