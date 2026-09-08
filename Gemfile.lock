@@ -674,7 +674,7 @@ GEM
       logger
     ruby2_keywords (0.0.5)
     ruby_http_client (3.6.0)
-    rubyzip (2.3.2)
+    rubyzip (3.6.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -866,7 +866,7 @@ DEPENDENCIES
   rswag-api
   rswag-ui
   rubocop-rails
-  rubyzip (~> 2.3.0)
+  rubyzip (~> 3.6)
   sass-rails
   sassc-rails
   sendgrid-actionmailer
