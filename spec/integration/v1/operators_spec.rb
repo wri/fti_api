@@ -79,6 +79,34 @@ module V1
       end
     end
 
+    describe "Rate limiting" do
+      def create_operator(name)
+        post "/operators",
+          params: jsonapi_params("operators", nil, {
+            name: name,
+            "operator-type": "Other",
+            relationships: {country: country.id}
+          }),
+          headers: jsonapi_headers
+      end
+
+      it "Allows 5 operator creations per IP per hour" do
+        5.times do |i|
+          create_operator("Public operator #{i}")
+          expect(status).to eq(201)
+        end
+      end
+
+      it "Throttles a 6th operator creation from the same IP" do
+        5.times { |i| create_operator("Public operator #{i}") }
+
+        create_operator("Blocked operator")
+
+        expect(status).to eq(429)
+        expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
+      end
+    end
+
     context "filters" do
       describe "by observer_id" do
         let(:observer) { create(:observer) }
