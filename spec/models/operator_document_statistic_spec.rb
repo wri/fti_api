@@ -5,6 +5,7 @@ require "rails_helper"
 RSpec.describe OperatorDocumentStatistic, type: :model do
   let(:country) { create(:country) }
   let(:other_country) { create(:country) }
+  let(:day) { 2.days.ago.to_date }
 
   def create_stat(date:, valid_count: 0, country: nil, group: nil, document_type: nil)
     described_class.create!(
@@ -14,6 +15,13 @@ RSpec.describe OperatorDocumentStatistic, type: :model do
       document_type: document_type,
       valid_count: valid_count
     )
+  end
+
+  def create_document(status, **attributes)
+    doc = travel_to(5.days.ago) { create(:operator_document_country, **attributes) }
+    # later than creation, so the status change history is the latest one
+    travel_to(4.days.ago) { doc.update!(status: status) }
+    doc
   end
 
   describe ".at_date and .from_date" do
@@ -80,15 +88,6 @@ RSpec.describe OperatorDocumentStatistic, type: :model do
   end
 
   describe ".generate_for_country_and_day" do
-    let(:day) { 2.days.ago.to_date }
-
-    def create_document(status, **attributes)
-      doc = travel_to(5.days.ago) { create(:operator_document_country, **attributes) }
-      # later than creation, so the status change history is the latest one
-      travel_to(4.days.ago) { doc.update!(status: status) }
-      doc
-    end
-
     it "counts document statuses of the given country, moving forward dates of unchanged stats" do
       doc = create_document("doc_valid")
       create_document("doc_pending") # different country
@@ -122,6 +121,90 @@ RSpec.describe OperatorDocumentStatistic, type: :model do
       )
       expect(all_countries_rollup.valid_count).to eq(1)
       expect(all_countries_rollup.pending_count).to eq(1)
+    end
+
+    it "counts documents in the forest type slice of their fmu" do
+      fmu_country = create(:country)
+      operator = create(:operator, country: fmu_country, fa_id: "fa_id")
+      fmu = create(:fmu, country: fmu_country, forest_type: ForestType::TYPES[:ufa][:index])
+      create(:fmu_operator, fmu: fmu, operator: operator)
+      rod = create(
+        :required_operator_document_fmu,
+        country: fmu_country,
+        forest_types: [ForestType::TYPES[:ufa][:index]],
+        disable_document_creation: true
+      )
+
+      doc = travel_to(5.days.ago) { create(:operator_document_fmu, operator: operator, fmu: fmu, required_operator_document_fmu: rod) }
+      travel_to(4.days.ago) { doc.update!(status: "doc_valid") }
+
+      described_class.generate_for_country_and_day(fmu_country.id, day)
+
+      sliced = described_class.find_by(
+        country: fmu_country,
+        fmu_forest_type: "ufa",
+        document_type: "fmu",
+        required_operator_document_group: rod.required_operator_document_group
+      )
+      expect(sliced.valid_count).to eq(1)
+
+      rollup = described_class.find_by(
+        country: fmu_country, fmu_forest_type: nil, document_type: nil, required_operator_document_group: nil
+      )
+      expect(rollup.valid_count).to eq(1)
+    end
+  end
+
+  describe ".generate_for_day" do
+    it "counts every given country in a single call, without mixing their dimensions" do
+      country_a = create(:country)
+      country_b = create(:country)
+      doc_a = create_document("doc_valid", operator: create(:operator, country: country_a))
+      doc_b = create_document("doc_pending", operator: create(:operator, country: country_b))
+      group_a = doc_a.required_operator_document.required_operator_document_group
+      group_b = doc_b.required_operator_document.required_operator_document_group
+
+      described_class.generate_for_day(day, [country_a.id, country_b.id, nil])
+
+      rollup_a = described_class.find_by(
+        country: country_a, required_operator_document_group: nil, document_type: nil, fmu_forest_type: nil
+      )
+      expect([rollup_a.valid_count, rollup_a.pending_count]).to eq([1, 0])
+
+      rollup_b = described_class.find_by(
+        country: country_b, required_operator_document_group: nil, document_type: nil, fmu_forest_type: nil
+      )
+      expect([rollup_b.valid_count, rollup_b.pending_count]).to eq([0, 1])
+
+      all_countries_rollup = described_class.find_by(
+        country: nil, required_operator_document_group: nil, document_type: nil, fmu_forest_type: nil
+      )
+      expect([all_countries_rollup.valid_count, all_countries_rollup.pending_count]).to eq([1, 1])
+
+      # a country only gets slices of the groups its own documents belong to
+      expect(described_class.where(country: country_a).distinct.pluck(:required_operator_document_group_id))
+        .to contain_exactly(nil, group_a.id)
+      expect(described_class.where(country: country_b).distinct.pluck(:required_operator_document_group_id))
+        .to contain_exactly(nil, group_b.id)
+    end
+
+    it "replaces the stats of the day when delete_old is set" do
+      doc = create_document("doc_valid")
+      doc_country = doc.required_operator_document.country
+
+      described_class.generate_for_day(day, [doc_country.id])
+      rows = described_class.where(country: doc_country, date: day).count
+
+      travel_to(3.days.ago) { doc.update!(status: "doc_expired") }
+
+      expect {
+        described_class.generate_for_day(day, [doc_country.id], delete_old: true)
+      }.not_to change { described_class.where(country: doc_country, date: day).count }.from(rows)
+
+      rollup = described_class.find_by(
+        country: doc_country, required_operator_document_group: nil, document_type: nil, fmu_forest_type: nil
+      )
+      expect([rollup.valid_count, rollup.expired_count]).to eq([0, 1])
     end
   end
 end
