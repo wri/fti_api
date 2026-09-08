@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   devise_config = ActiveAdmin::Devise.config
   devise_config[:skip] = Array(devise_config[:skip]) | [:unlocks]
   devise_for :users, devise_config
-  get "/unlock", to: "unlocks#show", as: :user_unlock
+  devise_scope :user do
+    # Email unlock links hit GET /unlock (no ActiveAdmin page). The admin
+    # login "resend unlock instructions" link still needs Devise's new/create.
+    get "/unlock", to: "unlocks#show", as: :user_unlock, format: false
+    post "/unlock", to: "active_admin/devise/unlocks#create"
+    get "/admin/unlock/new", to: "active_admin/devise/unlocks#new", as: :new_user_unlock
+  end
   begin
     ActiveAdmin.routes(self)
   rescue

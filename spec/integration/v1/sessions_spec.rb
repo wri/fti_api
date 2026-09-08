@@ -11,6 +11,13 @@ module V1
     end
 
     describe "Account lockout" do
+      it "renders the backoffice login page with the resend unlock link" do
+        get new_user_session_path
+
+        expect(response).to be_successful
+        expect(response.body).to include(I18n.t("active_admin.devise.links.resend_unlock_instructions"))
+      end
+
       def lock_account!(account)
         Devise.maximum_attempts.times do
           post "/login", params: {auth: {email: account.email, password: "wrong password"}}
