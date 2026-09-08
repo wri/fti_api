@@ -41,7 +41,7 @@ namespace :check do
       fmu = od.fmu
       rod = od.required_operator_document
 
-      unless rod.forest_types.include?(fmu.forest_type.to_sym)
+      unless rod.applies_to_forest_type?(fmu.forest_type)
         mismatch_count += 1
 
         expected_forest_types = rod.forest_types.join(", ")
@@ -49,8 +49,8 @@ namespace :check do
         puts "Document id: #{od.id} - status: #{od.status}, last updated at: #{od.updated_at} versions: #{od.versions.count}, operator: #{od.operator.name} (id: #{od.operator.id}), Country: #{od.operator.country.name}, FMU forest type: #{fmu.forest_type} but this document is for forest types: #{expected_forest_types}"
 
         if ENV["VERBOSE"]
-          fmu_any_version_with_forest_type = rod.forest_types.any? { |ftype| fmu.versions.where_object(forest_type: ftype).exists? }
-          rod_any_version_with_forest_type = rod.versions.any? { |v| v.reify.forest_types.include?(fmu.forest_type.to_sym) }
+          fmu_any_version_with_forest_type = rod.forest_types.any? { |ftype| fmu.versions.where_object(forest_type: Fmu.forest_types[ftype]).exists? }
+          rod_any_version_with_forest_type = rod.versions.any? { |v| v.reify.applies_to_forest_type?(fmu.forest_type) }
           puts "======> FMU: #{od.fmu.id}, versions: #{fmu.versions.count}, any version with any of #{expected_forest_types} type: #{fmu_any_version_with_forest_type}"
           puts "======> Required Document: #{rod.id}, versions: #{rod.versions.count}, any with #{fmu.forest_type} type: #{rod_any_version_with_forest_type}"
         end
