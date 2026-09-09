@@ -2,12 +2,27 @@
 
 module V1
   class SessionsController < APIController
+    include AuthRateLimiting
+
     skip_before_action :authenticate, only: [:create]
     # login has no prior cookie/header, so CSRF doesn't apply yet — credentials
     # themselves are the proof of intent
     skip_before_action :verify_csrf_token!, only: [:create]
 
     include ActionController::Cookies
+
+    # email bucket stops password spraying one account; IP bucket stops
+    # credential stuffing many emails from one client
+    rate_limit to: 5, within: 1.minute, only: :create,
+      by: -> { login_email_key },
+      with: -> { render_too_many_requests },
+      store: AuthRateLimiting::STORE,
+      name: "email"
+    rate_limit to: 20, within: 1.minute, only: :create,
+      by: -> { request.remote_ip },
+      with: -> { render_too_many_requests },
+      store: AuthRateLimiting::STORE,
+      name: "ip"
 
     REMEMBER_ME_TTL = 30.days
 
@@ -45,6 +60,10 @@ module V1
 
     def auth_params
       params.expect(auth: [:email, :password, :current_sign_in_ip, :remember_me])
+    end
+
+    def login_email_key
+      params.dig(:auth, :email).to_s.downcase.strip.presence || request.remote_ip
     end
 
     def set_auth_cookie(user)

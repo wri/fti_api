@@ -292,5 +292,51 @@ module V1
         expect(parsed_body).to eq(default_status_errors(401))
       end
     end
+
+    describe "Rate limiting" do
+      def login(email, password: "wrong password")
+        post "/login", params: {auth: {email: email, password: password}}
+      end
+
+      it "Allows 5 login attempts per email per minute" do
+        5.times do
+          login(user.email)
+          expect(status).to eq(401)
+        end
+      end
+
+      it "Throttles a 6th login attempt for the same email" do
+        5.times { login(user.email) }
+
+        login(user.email, password: "Supersecret1")
+
+        expect(status).to eq(429)
+        expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
+      end
+
+      it "Does not throttle a different email" do
+        5.times { login(user.email) }
+
+        login(create(:user).email)
+
+        expect(status).to eq(401)
+      end
+
+      it "Treats emails as case-insensitive for the throttle" do
+        5.times { login(user.email.upcase) }
+
+        login(user.email)
+
+        expect(status).to eq(429)
+      end
+
+      it "Throttles login attempts from the same IP" do
+        20.times { |i| login("user#{i}@example.com") }
+
+        login("another@example.com")
+
+        expect(status).to eq(429)
+      end
+    end
   end
 end
