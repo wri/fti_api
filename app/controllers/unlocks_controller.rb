@@ -17,9 +17,9 @@ class UnlocksController < ApplicationController
     if user.admin? || user.bo_manager?
       new_user_session_path
     elsif user.observation_tool_user?
-      ENV.fetch("OBSERVATIONS_TOOL_URL")
+      ENV.fetch("OBSERVATIONS_TOOL_URL") + "?message=user_unlocked"
     else
-      ENV.fetch("FRONTEND_URL")
+      ENV.fetch("FRONTEND_URL") + "?message=user_unlocked"
     end
   end
 end

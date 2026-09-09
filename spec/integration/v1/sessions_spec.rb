@@ -10,6 +10,13 @@ module V1
       expect(user.reload.failed_attempts).to eq(1)
     end
 
+    it "Returns the same error object for an email that is not in the database" do
+      post "/login", params: {auth: {email: "nobody@example.com", password: "Supersecret1"}}
+
+      expect(status).to eq(401)
+      expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
+    end
+
     describe "Account lockout" do
       it "renders the backoffice login page with the resend unlock link" do
         get new_user_session_path
@@ -29,8 +36,21 @@ module V1
         lock_account!(user)
 
         expect(user.reload).to be_access_locked
+      end
+
+      it "Tells a locked user their account is locked once they get the password right" do
+        lock_account!(user)
 
         post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+
+        expect(status).to eq(401)
+        expect(parsed_body).to eq({errors: [{status: 401, title: "Your account is locked. Check your email for unlock instructions."}]})
+      end
+
+      it "Keeps the generic error for a locked account when the password is wrong" do
+        lock_account!(user)
+
+        post "/login", params: {auth: {email: user.email, password: "still wrong"}}
 
         expect(status).to eq(401)
         expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
@@ -70,7 +90,7 @@ module V1
       it "Unlocks the account when the email unlock link is visited" do
         visit_unlock_link_for(user)
 
-        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL"))
+        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL") + "?message=user_unlocked")
         expect(user.reload).not_to be_access_locked
         expect(user.failed_attempts).to eq(0)
         expect(user.unlock_token).to be_nil
@@ -82,7 +102,7 @@ module V1
       it "Redirects operators to the portal after unlock" do
         visit_unlock_link_for(operator_user)
 
-        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL"))
+        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL") + "?message=user_unlocked")
         expect(operator_user.reload).not_to be_access_locked
       end
 
@@ -91,7 +111,7 @@ module V1
 
         visit_unlock_link_for(ngo)
 
-        expect(response).to redirect_to(ENV.fetch("OBSERVATIONS_TOOL_URL"))
+        expect(response).to redirect_to(ENV.fetch("OBSERVATIONS_TOOL_URL") + "?message=user_unlocked")
         expect(ngo.reload).not_to be_access_locked
       end
 
