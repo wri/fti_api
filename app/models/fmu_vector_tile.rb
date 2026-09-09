@@ -13,7 +13,7 @@ class FmuVectorTile
         FROM (
           SELECT id, geojson -> 'properties' as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(:z,:x,:y), 4096, 256, true) AS mvtgeometry
           FROM (
-            SELECT fmus.*, st_transform(geometry, 3857) as the_geom_webmercator
+            SELECT fmus.*
             FROM fmus
               LEFT JOIN fmu_operators fo on fo.fmu_id = fmus.id and fo.current = true
             WHERE fmus.deleted_at IS NULL #{operator_condition}

@@ -11,7 +11,7 @@ class ProtectedAreaVectorTile
         FROM (
           SELECT id, json_build_object('name', name) as properties, ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(:z,:x,:y), 4096, 256, true) AS mvtgeometry
           FROM (
-            SELECT protected_areas.*, st_transform(geometry, 3857) as the_geom_webmercator
+            SELECT protected_areas.*
             FROM protected_areas
           ) as data
           WHERE ST_AsMVTGeom(the_geom_webmercator, ST_TileEnvelope(:z,:x,:y),4096,0,true) IS NOT NULL

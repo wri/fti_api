@@ -2,17 +2,21 @@
 #
 # Table name: protected_areas
 #
-#  id         :bigint           not null, primary key
-#  country_id :bigint           not null
-#  name       :string           not null
-#  wdpa_pid   :string           not null
-#  geojson    :jsonb            not null
-#  geometry   :geometry         geometry, 0
-#  centroid   :geometry         point, 0
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                   :bigint           not null, primary key
+#  country_id           :bigint           not null
+#  name                 :string           not null
+#  wdpa_pid             :string           not null
+#  geojson              :jsonb            not null
+#  geometry             :geometry         geometry, 0
+#  centroid             :geometry         point, 0
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  the_geom_webmercator :geometry         geometry, 3857
 #
 class ProtectedArea < ApplicationRecord
+  # tile queries use it in raw SQL only; loading it would add ~12MB to every SELECT *
+  self.ignored_columns += %w[the_geom_webmercator]
+
   include EsriShapefileUpload
 
   belongs_to :country
