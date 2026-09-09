@@ -16,11 +16,10 @@ class FmuVectorTile
 
     # && is an index-backed bbox prefilter; it can only exclude rows the
     # ST_AsMVTGeom test below would have excluded anyway, so the tile is unchanged.
-    # It also keeps `geojson` from being detoasted for rows outside the tile.
     query = <<~SQL
       SELECT ST_AsMVT(tile, 'layer0', 4096, 'mvtgeometry', 'id') as tile
         FROM (
-          SELECT fmus.id, fmus.geojson -> 'properties' as properties,
+          SELECT fmus.id, fmus.tile_properties as properties,
                  ST_AsMVTGeom(fmus.the_geom_webmercator, ST_TileEnvelope(:z,:x,:y), 4096, 256, true) AS mvtgeometry
           FROM fmus
           WHERE fmus.deleted_at IS NULL
