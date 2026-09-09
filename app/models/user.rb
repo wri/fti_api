@@ -230,6 +230,8 @@ class User < ApplicationRecord
 
   # Devise ActiveJob integration
   def send_devise_notification(notification, *)
-    devise_mailer.send(notification, self, *).deliver_later
+    I18n.with_locale(locale.presence || I18n.default_locale) do
+      devise_mailer.send(notification, self, *).deliver_later
+    end
   end
 end

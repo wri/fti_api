@@ -31,6 +31,8 @@ en:
         subject: "Reset password instructions"
       unlock_instructions:
         subject: "Unlock instructions"
+        message: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
+        instruction: "Follow the link below to unlock your account:"
       email_changed:
         subject: "Email Changed"
       password_change:
