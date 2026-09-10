@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_26_100000) do
+ActiveRecord::Schema[8.0].define(version: 2026_09_09_140000) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -236,9 +236,12 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_26_100000) do
     t.boolean "certification_ls", default: false, null: false
     t.string "name", null: false
     t.boolean "certification_pbn", default: false, null: false
+    t.virtual "the_geom_webmercator", type: :geometry, limit: {srid: 3857, type: "geometry"}, as: "st_transform(geometry, 3857)", stored: true
+    t.virtual "tile_properties", type: :jsonb, as: "(geojson -> 'properties'::text)", stored: true
     t.index ["country_id"], name: "index_fmus_on_country_id"
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at"
     t.index ["forest_type"], name: "index_fmus_on_forest_type"
+    t.index ["the_geom_webmercator"], name: "index_fmus_on_the_geom_webmercator", using: :gist
   end
 
   create_table "gov_documents", id: :serial, force: :cascade do |t|
@@ -797,7 +800,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_26_100000) do
     t.virtual "centroid", type: :geometry, limit: {srid: 0, type: "st_point"}, as: "st_centroid(geometry)", stored: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.virtual "the_geom_webmercator", type: :geometry, limit: {srid: 3857, type: "geometry"}, as: "st_transform(geometry, 3857)", stored: true
     t.index ["country_id"], name: "index_protected_areas_on_country_id"
+    t.index ["the_geom_webmercator"], name: "index_protected_areas_on_the_geom_webmercator", using: :gist
   end
 
   create_table "quality_controls", force: :cascade do |t|

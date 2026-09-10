@@ -21,10 +21,14 @@
 #  certification_ls     :boolean          default(FALSE), not null
 #  name                 :string           not null
 #  certification_pbn    :boolean          default(FALSE), not null
+#  the_geom_webmercator :geometry         geometry, 3857
 #
 
 class Fmu < ApplicationRecord
-  has_paper_trail skip: %i[geometry]
+  # tile queries use it in raw SQL only; loading it would add ~12MB to every SELECT *
+  self.ignored_columns += %w[the_geom_webmercator tile_properties]
+
+  has_paper_trail skip: %i[geometry the_geom_webmercator]
   acts_as_paranoid
 
   include EsriShapefileUpload
