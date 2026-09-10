@@ -86,23 +86,48 @@ If not, then the request is processed as a typical JSON API request.'
     end
   end
 
-  get "/fmus/tiles/:x/:y/:z" do
+  get "/fmus/tiles/:z/:x/:y" do
     route_summary "Fetches the vector tiles"
-    route_description "It gets the vector tiles for the provided coordinates and Z index"
+    route_description "It gets the vector tiles for the provided Z index and coordinates"
 
-    parameter :x, "X coordinate", in: "path",
-      type: :integer, with_example: true, default: 1, minimum: 1
-    parameter :y, "Y coordinate", in: "path",
-      type: :integer, with_example: true, default: 1, minimum: 1
     parameter :z, "Z index", in: "path",
-      type: :integer, with_example: true, default: 1, minimum: 1
+      type: :integer, with_example: true, default: 6, minimum: 0
+    parameter :x, "X coordinate", in: "path",
+      type: :integer, with_example: true, default: 34, minimum: 0
+    parameter :y, "Y coordinate", in: "path",
+      type: :integer, with_example: true, default: 32, minimum: 0
     parameter :operator_id, "Operator Id", in: "query", type: :integer
 
-    let(:operator_id) { operator.id }
+    # z/x/y covering the :geojson trait polygon, so a swapped path segment
+    # yields a different, empty tile and fails the body expectation below.
+    let(:z) { 6 }
+    let(:x) { 34 }
+    let(:y) { 32 }
+    let!(:fmu_with_geometry) { create(:fmu, :geojson, country: country, operator: operator) }
 
     context "200" do
-      example_request "Getting highest level tiles" do
+      example_request "Getting tiles for a zoom level and coordinates" do
         expect(status).to eql 200
+        expect(response_headers["Content-Type"]).to eql "application/vnd.mapbox-vector-tile"
+        expect(response_headers["Cache-Control"]).to eql "max-age=900, public, stale-while-revalidate=86400"
+        expect(response_body).not_to be_empty
+      end
+    end
+
+    context "200 with an operator filter" do
+      let(:operator_id) { operator.id }
+
+      example_request "Getting tiles for a single operator" do
+        expect(status).to eql 200
+      end
+    end
+
+    context "200 for a tile with no data" do
+      let(:x) { 0 }
+
+      example_request "Getting an empty tile" do
+        expect(status).to eql 200
+        expect(response_body).to be_empty
       end
     end
   end
