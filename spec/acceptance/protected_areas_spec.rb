@@ -27,6 +27,7 @@ resource "Protected Areas" do
       example_request "Getting tiles for a zoom level and coordinates" do
         expect(status).to eql 200
         expect(response_headers["Content-Type"]).to eql "application/vnd.mapbox-vector-tile"
+        expect(response_headers["Cache-Control"]).to eql "max-age=86400, public, stale-while-revalidate=604800"
         expect(response_body).not_to be_empty
       end
     end

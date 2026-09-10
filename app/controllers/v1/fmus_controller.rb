@@ -24,6 +24,7 @@ module V1
     end
 
     def tiles
+      expires_in 15.minutes, public: true, stale_while_revalidate: 1.day
       send_data FmuVectorTile.fetch(params[:x], params[:y], params[:z], params[:operator_id]),
         type: "application/vnd.mapbox-vector-tile", disposition: "inline"
     end
