@@ -27,6 +27,12 @@ unless ENV["SKIP_CRON"] == "true"
     rake_with_check "scheduler:create_notifications", check_in: "create-notifications"
   end
 
+  if env == "production"
+    every 12.hours do
+      rake "scheduler:send_email_heartbeat" # no check-in: the email reaching hc-ping.com is the ping
+    end
+  end
+
   every 1.day, at: "6 am" do
     rake_with_check "notify_expiration:send", check_in: "notify-about-expired-documents"
   end
