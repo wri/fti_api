@@ -3,7 +3,8 @@ module V1
     skip_before_action :authenticate, only: [:tiles]
 
     def tiles
-      send_data ProtectedAreaVectorTile.fetch params[:x], params[:y], params[:z]
+      send_data ProtectedAreaVectorTile.fetch(params[:x], params[:y], params[:z]),
+        type: "application/vnd.mapbox-vector-tile", disposition: "inline"
     end
   end
 end
