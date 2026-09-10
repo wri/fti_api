@@ -109,6 +109,7 @@ If not, then the request is processed as a typical JSON API request.'
       example_request "Getting tiles for a zoom level and coordinates" do
         expect(status).to eql 200
         expect(response_headers["Content-Type"]).to eql "application/vnd.mapbox-vector-tile"
+        expect(response_headers["Cache-Control"]).to eql "max-age=900, public, stale-while-revalidate=86400"
         expect(response_body).not_to be_empty
       end
     end
