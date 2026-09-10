@@ -137,6 +137,18 @@ table {
   }
 }
 
+body.logged_out {
+  #login {
+    a {
+      margin-top: -32px;
+    }
+
+    br:last-of-type {
+      display: none; // workaround to fix extra padding after the last action link in login page
+    }
+  }
+}
+
 body.active_admin {
   #hidden_active_admin_goto_page {
     width: 100%;

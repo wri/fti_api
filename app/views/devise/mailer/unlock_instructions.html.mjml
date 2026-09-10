@@ -1,0 +1,16 @@
+<p>
+  <%= t("mailers.greeting", name: @resource.display_name, fallback: true) %>
+</p>
+
+<p>
+  <%= t(".message") %>
+</p>
+
+<p>
+  <%= t(".instruction") %> <%= link_to nil, unlock_url(@resource, unlock_token: @token), target: "_blank" %>
+</p>
+
+<p>
+  <%= t("mailers.salutation") %> <br />
+  <%= t("mailers.signature") %>
+</p>
