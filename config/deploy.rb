@@ -10,10 +10,7 @@ ruby_version = File.read(".ruby-version").strip
 rvm_path = "/usr/share/rvm"
 user = ENV["SSH_USER"]
 
-set :puma_threads, [4, 16]
-set :puma_workers, 0
 set :puma_service_unit_name, "puma"
-set :puma_service_unit_env_vars, %w[RAILS_ENV=staging]
 
 set :systemctl_user, :system
 
