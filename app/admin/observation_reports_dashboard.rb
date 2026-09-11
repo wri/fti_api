@@ -5,6 +5,8 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
 
   menu false
 
+  config.per_page = 50
+
   actions :index
 
   filter :by_country,
@@ -46,8 +48,9 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
         res.send("o_#{o.id}") || "0"
       end
     end
+    # the table is paged, the chart shows all filtered rows
     render partial: "score_evolution", locals: {
-      scores: score_evolution_scores(collection,
+      scores: score_evolution_scores(collection.except(:limit, :offset, :includes),
         total_count: {name: I18n.t("active_admin.observation_reports_dashboard_page.reports")})
     }
   end
@@ -104,7 +107,7 @@ ActiveAdmin.register ObservationReportStatistic, as: "Observation Reports Dashbo
         .order("date desc, country_id NULLS first")
         .includes(country: :translations)
         .page(params[:page])
-        .per(10000)
+        .per(per_page)
     end
 
     def returned_observers
