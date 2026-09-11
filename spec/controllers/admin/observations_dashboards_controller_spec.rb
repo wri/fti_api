@@ -47,6 +47,26 @@ RSpec.describe Admin::ObservationsDashboardsController, type: :controller do
     end
   end
 
+  describe "GET index default date filter" do
+    before do
+      travel_to 2.years.ago do
+        create(:observation)
+      end
+    end
+
+    it "shows the last year on a plain visit" do
+      get :index
+
+      expect(chart_dates(response.body)).to be_present.and all(be >= 1.year.ago.to_date.to_s)
+    end
+
+    it "shows all history when the filter form is submitted with an empty date" do
+      get :index, params: {commit: "Filter"}
+
+      expect(chart_dates(response.body)).to include(be < 1.year.ago.to_date.to_s)
+    end
+  end
+
   describe "GET index with .csv format" do
     before do
       get :index, format: "csv"

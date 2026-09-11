@@ -224,9 +224,12 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
 
     helper_method :dashboard_rows
 
+    # a plain visit or clear filters starts with the last year, submitting the form with an empty date shows all history
     def set_default_filters
+      return if params[:commit].present?
+
       params[:q] ||= {}
-      params[:q][:date_gteq] = 1.year.ago if params.dig(:q, :date_gteq).blank?
+      params[:q][:date_gteq] = 1.year.ago.to_date if params.dig(:q, :date_gteq).blank?
     end
 
     # config.per_page didn't work, but this does probably related to use of paginate_array? dunno
