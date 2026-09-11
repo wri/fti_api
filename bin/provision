@@ -85,7 +85,8 @@ upgrade_packages = <<~EOF
 EOF
 # Install Docker and add the private network
 install_essentials = <<~EOF
-  sudo apt-get install -y build-essential curl git unzip
+  sudo apt-get install -y build-essential curl git unzip libjemalloc2
+  sudo ln -sf "$(find /usr/lib -name libjemalloc.so.2 -print -quit)" /usr/local/lib/libjemalloc.so
 EOF
 
 # Add swap space
