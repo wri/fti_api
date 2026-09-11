@@ -54,6 +54,19 @@ RSpec.describe Admin::ObservationReportsDashboardsController, type: :controller 
     end
   end
 
+  describe "GET index with more rows than a page" do
+    before do
+      ObservationReportStatistic.generate_for_country_and_day(nil, 3.days.ago.to_date, true)
+      ObservationReportStatistic.generate_for_country_and_day(nil, 2.days.ago.to_date, true)
+      get :index, params: {per_page: 1}
+    end
+
+    it "pages the table but charts all dates" do
+      expect(response.parsed_body.css(".index_table tbody tr").size).to eq(1)
+      expect(chart_dates(response.body)).to contain_exactly(3.days.ago.to_date.to_s, 2.days.ago.to_date.to_s)
+    end
+  end
+
   describe "GET index with .csv format" do
     before do
       get :index, format: "csv"

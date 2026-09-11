@@ -34,6 +34,19 @@ RSpec.describe Admin::ObservationsDashboardsController, type: :controller do
     end
   end
 
+  describe "GET index with more rows than a page" do
+    before { get :index, params: {per_page: 1} }
+
+    it "pages the table but charts all dates" do
+      all_countries_dates = ObservationStatistic.query_dashboard_report(date_gteq: 1.year.ago)
+        .select { |r| r.country_id.nil? }.map { |r| r.date.to_date.to_s }.uniq
+
+      expect(all_countries_dates.size).to be > 1
+      expect(response.parsed_body.css(".index_table tbody tr").size).to eq(1)
+      expect(chart_dates(response.body)).to match_array(all_countries_dates)
+    end
+  end
+
   describe "GET index with .csv format" do
     before do
       get :index, format: "csv"
