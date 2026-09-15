@@ -304,6 +304,7 @@ RSpec.describe OperatorDocument, type: :model do
         expect(OperatorDocument.count).to eql 1
         expect(operator_document.annex_documents.count).to eql 1
 
+        operator_document.reload # no stale annex associations cached on creation
         expect {
           operator_document.destroy
         }.to change { OperatorDocumentHistory.count }.by(1)
