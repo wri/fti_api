@@ -113,68 +113,29 @@ namespace :fix do
     puts for_real ? "Applied." : "Rolled back."
   end
 
-  desc "Disconnect annexes from not provided document versions and from versions following them"
-  task annexes_after_not_provided: :environment do
+  desc "Disconnect annexes from not provided document history versions"
+  task annexes_not_provided_history: :environment do
     for_real = ENV["FOR_REAL"] == "true"
     puts "DRY RUN, pass FOR_REAL=true to apply" unless for_real
 
-    links_by_documentable = ->(type) {
-      AnnexDocument.where(documentable_type: type)
-        .pluck(:id, :documentable_id, :operator_document_annex_id)
-        .group_by { |_, documentable_id, _| documentable_id }
-    }
-    history_links = links_by_documentable.call("OperatorDocumentHistory")
-    document_links = links_by_documentable.call("OperatorDocument")
+    # annexes carried over to later versions before disconnecting was deployed (PR #565, 2026-01-09) are left as they are
+    links = AnnexDocument.where(
+      documentable_type: "OperatorDocumentHistory",
+      documentable_id: OperatorDocumentHistory.with_deleted.where(status: :doc_not_provided).select(:id)
+    )
 
-    links_to_remove = []
-    affected_documents = 0
-    OperatorDocumentHistory.with_deleted
-      .where(id: history_links.keys)
-      .distinct.pluck(:operator_document_id)
-      .each_slice(1000) do |document_ids|
-        OperatorDocumentHistory.with_deleted
-          .where(operator_document_id: document_ids)
-          .order(:operator_document_updated_at, :id)
-          .pluck(:id, :operator_document_id, :status, :operator_document_updated_at)
-          .group_by { |_, document_id, _, _| document_id }
-          .each do |document_id, histories|
-            document_links_to_remove = []
-            seen_annex_ids = Set.new
-            disconnected_annex_ids = Set.new
-
-            histories.each do |history_id, _, status, updated_at|
-              links = history_links[history_id] || []
-              not_provided = status == "doc_not_provided"
-              disconnected_annex_ids.merge(seen_annex_ids) if not_provided
-
-              # annexes linked for the first time to a not provided version were added before the next upload, keep them there
-              stale = links.select { |_, _, annex_id| not_provided || disconnected_annex_ids.include?(annex_id) }
-              seen_annex_ids.merge(links.map(&:last))
-              next if stale.empty?
-
-              puts "Document #{document_id} history #{history_id} (#{status} at #{updated_at}): " \
-                "removing annexes #{stale.map(&:last).inspect}"
-              document_links_to_remove.concat(stale)
-            end
-
-            stale = (document_links[document_id] || []).select { |_, _, annex_id| disconnected_annex_ids.include?(annex_id) }
-            if stale.any?
-              puts "Document #{document_id}: removing annexes #{stale.map(&:last).inspect}"
-              document_links_to_remove.concat(stale)
-            end
-
-            next if document_links_to_remove.empty?
-
-            affected_documents += 1
-            links_to_remove.concat(document_links_to_remove.map(&:first))
-          end
+    links
+      .joins("INNER JOIN operator_document_histories ON operator_document_histories.id = annex_documents.documentable_id")
+      .order("operator_document_histories.operator_document_id, operator_document_histories.operator_document_updated_at")
+      .pluck("operator_document_histories.operator_document_id", :documentable_id, "operator_document_histories.operator_document_updated_at", :operator_document_annex_id)
+      .group_by { |document_id, history_id, updated_at, _| [document_id, history_id, updated_at] }
+      .each do |(document_id, history_id, updated_at), rows|
+        puts "Document #{document_id} history #{history_id} (#{updated_at}): removing annexes #{rows.map(&:last).inspect}"
       end
-
-    puts "Documents affected: #{affected_documents}, annex links to remove: #{links_to_remove.size}"
 
     ActiveRecord::Base.transaction do
       orphaned_before = OperatorDocumentAnnex.with_deleted.orphaned.pluck(:id)
-      AnnexDocument.where(id: links_to_remove).delete_all
+      puts "Annex links removed: #{links.delete_all}"
       newly_orphaned = OperatorDocumentAnnex.with_deleted.orphaned.pluck(:id) - orphaned_before
       puts "Annexes left without any document: #{newly_orphaned.inspect}"
 
