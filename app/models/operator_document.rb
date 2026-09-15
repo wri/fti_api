@@ -174,13 +174,16 @@ class OperatorDocument < ApplicationRecord
       (fmu_id && (operator_id != fmu.operator&.id)) ||
       (fmu_id && no_longer_required_for_fmu_forest_type?)
 
-    update!(
-      status: OperatorDocument.statuses[:doc_not_provided],
-      expire_date: nil, start_date: Time.zone.today, created_at: DateTime.now, updated_at: DateTime.now,
-      deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, response_date: nil,
-      source: nil, source_info: nil, document_file_id: nil
-    )
-    disconnect_annexes
+    transaction do
+      # before update! as its after_save create_history copies the connected annexes
+      disconnect_annexes
+      update!(
+        status: OperatorDocument.statuses[:doc_not_provided],
+        expire_date: nil, start_date: Time.zone.today, created_at: DateTime.now, updated_at: DateTime.now,
+        deleted_at: nil, uploaded_by: nil, user_id: nil, reason: nil, response_date: nil,
+        source: nil, source_info: nil, document_file_id: nil
+      )
+    end
   end
 
   private
@@ -191,6 +194,7 @@ class OperatorDocument < ApplicationRecord
 
   def disconnect_annexes
     self.annex_documents = []
+    operator_document_annexes.reset
   end
 
   def recalculate_scores
