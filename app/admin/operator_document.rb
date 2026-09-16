@@ -12,7 +12,8 @@ ActiveAdmin.register OperatorDocument do
   controller do
     def scoped_collection
       end_of_association_chain
-        .includes([:required_operator_document, :user, :operator, :fmu,
+        .includes([:required_operator_document, :operator, :fmu, :document_file, :operator_document_annexes,
+          [user: [:user_permission, :operator, :observer]],
           [required_operator_document:
              [required_operator_document_group: :translations, country: :translations]]])
     end
@@ -236,7 +237,7 @@ ActiveAdmin.register OperatorDocument do
     as: :select,
     collection: -> { Country.joins(:required_operator_documents).by_name_asc.distinct }
   filter :required_operator_document,
-    collection: -> { RequiredOperatorDocument.with_generic.order(:country_id, :name).map { |r| [r.name_with_country, r.id] } }
+    collection: -> { RequiredOperatorDocument.with_generic.includes(country: :translations).order(:country_id, :name).map { |r| [r.name_with_country, r.id] } }
   filter :operator, as: :select, collection: -> { Operator.by_name_asc }
   filter :fmu, as: :select, label: -> { I18n.t("activerecord.models.fmu.other") }, collection: -> { Fmu.by_name_asc }
   filter :status, as: :select, collection: -> { OperatorDocument.statuses.transform_keys(&:humanize) }
@@ -308,7 +309,7 @@ ActiveAdmin.register OperatorDocument do
     render partial: "annexes_table", locals: {resource: resource}
 
     panel I18n.t("activerecord.models.operator_document_history") do
-      table_for OperatorDocumentHistory.where(operator_document_id: resource.id).order(operator_document_updated_at: :desc) do
+      table_for OperatorDocumentHistory.where(operator_document_id: resource.id).includes(:document_file, :operator_document_annexes).order(operator_document_updated_at: :desc) do
         column :id do |history|
           link_to history.id, admin_operator_document_history_path(history)
         end

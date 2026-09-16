@@ -10,8 +10,12 @@ ActiveAdmin.register Observation do
         [
           [country: :translations],
           [severity: :translations],
-          [subcategory: [category: :translations]],
-          :observers
+          [subcategory: [:translations, category: :translations]],
+          :observers,
+          :operator, :fmu, :law, :observation_report, :observation_documents, :relevant_operators,
+          [governments: :translations],
+          [user: [:user_permission, :operator, :observer]],
+          [modified_user: [:user_permission, :operator, :observer]]
         ]
       )
     end
@@ -165,8 +169,8 @@ ActiveAdmin.register Observation do
   filter :observation_report,
     label: -> { I18n.t("activerecord.models.observation_report") }, as: :select,
     collection: -> { ObservationReport.order(:title) }
-  filter :user, label: -> { I18n.t("active_admin.observations_page.created_user") }, as: :select, collection: -> { User.order(:name) }
-  filter :modified_user, label: -> { I18n.t("active_admin.observations_page.modified_user") }, as: :select, collection: -> { User.order(:name) }
+  filter :user, label: -> { I18n.t("active_admin.observations_page.created_user") }, as: :select, collection: -> { User.includes(:user_permission, :operator, :observer, country: :translations).order(:name) }
+  filter :modified_user, label: -> { I18n.t("active_admin.observations_page.modified_user") }, as: :select, collection: -> { User.includes(:user_permission, :operator, :observer, country: :translations).order(:name) }
   filter :is_active
   filter :publication_date
   filter :updated_at

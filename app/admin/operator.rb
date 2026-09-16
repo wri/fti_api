@@ -191,20 +191,20 @@ ActiveAdmin.register Operator, as: "Producer" do
   end
 
   sidebar I18n.t("active_admin.operator_page.valid_documents"), only: :show, if: proc { resource.operator_documents.where(status: "doc_valid").any? } do
-    table_for resource.operator_documents.where(status: "doc_valid").collect do |od|
+    table_for resource.operator_documents.where(status: "doc_valid").includes(:required_operator_document).collect do |od|
       column("") { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
   end
 
   sidebar I18n.t("active_admin.operator_page.pending_documents"), only: :show, if: proc { resource.operator_documents.where(status: "doc_pending").any? } do
-    table_for resource.operator_documents.where(status: "doc_pending").collect do |od|
+    table_for resource.operator_documents.where(status: "doc_pending").includes(:required_operator_document).collect do |od|
       column("") { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
   end
 
   sidebar I18n.t("active_admin.operator_page.invalid_documents"), only: :show,
     if: proc { resource.operator_documents.where(status: %w[doc_not_provided doc_invalid doc_expired]).any? } do
-    table_for resource.operator_documents.where(status: %w[doc_not_provided doc_invalid doc_expired]).collect do |od|
+    table_for resource.operator_documents.where(status: %w[doc_not_provided doc_invalid doc_expired]).includes(:required_operator_document).collect do |od|
       column("") { |od| link_to od.required_operator_document.name, admin_operator_document_path(od.id) }
     end
   end
@@ -333,6 +333,8 @@ ActiveAdmin.register Operator, as: "Producer" do
         .includes(
           :score_operator_document,
           :score_operator_observation,
+          :holding,
+          :fmus,
           country: :translations
         )
     end
