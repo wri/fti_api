@@ -23,5 +23,14 @@ module V1
     def current_ability
       @current_ability ||= Ability.new(context[:current_user])
     end
+
+    # records are loaded here on fragment cache misses and for included resources,
+    # without it every translated attribute read runs its own translations query
+    def self.apply_includes(records, options = {})
+      result = super
+      return result unless _model_class.translates? && result.respond_to?(:preload)
+
+      result.preload(:translations)
+    end
   end
 end
