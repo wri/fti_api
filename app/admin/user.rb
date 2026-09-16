@@ -23,13 +23,13 @@ ActiveAdmin.register User do
     label: proc { I18n.t("shared.role") },
     as: :select,
     collection: -> { UserPermission.user_roles }
-  filter :name_in, label: -> { User.human_attribute_name(:name) }, as: :select, collection: -> { User.all.map(&:name).uniq.compact.sort_by(&:downcase) }
+  filter :name_in, label: -> { User.human_attribute_name(:name) }, as: :select, collection: -> { User.includes(:user_permission, :operator, :observer, country: :translations).map(&:name).uniq.compact.sort_by(&:downcase) }
   filter :email, as: :select
   filter :created_at
 
   controller do
     def scoped_collection
-      User.includes([country: :translations], :user_permission)
+      User.includes([country: :translations], :user_permission, :observer, :operator, :holding)
     end
   end
 
@@ -132,15 +132,15 @@ ActiveAdmin.register User do
       f.input :qc1_observers,
         as: :select,
         hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
-        collection: Observer.left_outer_joins(:responsible_qc1).by_name_asc.map { |o| [o.responsible_qc1.present? ? "#{o.name} (QC: #{o.responsible_qc1.name})" : o.name, o.id] }
+        collection: Observer.includes(:responsible_qc1).by_name_asc.map { |o| [o.responsible_qc1.present? ? "#{o.name} (QC: #{o.responsible_qc1.name})" : o.name, o.id] }
       f.input :qc2_observers,
         as: :select,
         hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
-        collection: Observer.left_outer_joins(:responsible_qc2).by_name_asc.map { |o| [o.responsible_qc2.present? ? "#{o.name} (QC: #{o.responsible_qc2.name})" : o.name, o.id] }
+        collection: Observer.includes(:responsible_qc2).by_name_asc.map { |o| [o.responsible_qc2.present? ? "#{o.name} (QC: #{o.responsible_qc2.name})" : o.name, o.id] }
       f.input :operator
       f.input :holding
       f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)
-      f.input :country
+      f.input :country, collection: Country.includes(:translations)
       f.input :locale, as: :select, collection: I18n.available_locales
       f.input :name, input_html: {disabled: true}
       f.input :first_name
