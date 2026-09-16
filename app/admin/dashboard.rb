@@ -106,7 +106,7 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel t("active_admin.dashboard_page.pending_observations", count: Observation.Created.count) do
-          table_for Observation.Created.includes(:country, :subcategory, :operator).order(updated_at: :desc).limit(20).each do
+          table_for Observation.Created.includes(:operator, country: :translations, subcategory: :translations).order(updated_at: :desc).limit(20).each do
             column("ID") { |obs| link_to obs.id, admin_observation_path(obs.id) }
             column(t("active_admin.dashboard_page.columns.country")) { |obs| obs.country }
             column(t("active_admin.dashboard_page.columns.subcategory")) { |obs| obs.subcategory }
@@ -129,7 +129,7 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
     panel t("active_admin.dashboard_page.recently_updated_content") do
-      table_for PaperTrail::Version.order(id: :desc).limit(20) do # Use PaperTrail::Version if this throws an error
+      table_for PaperTrail::Version.includes(:item).order(id: :desc).limit(20) do # Use PaperTrail::Version if this throws an error
         column(t("active_admin.dashboard_page.columns.item")) { |v| v.item }
         column(t("active_admin.dashboard_page.columns.type")) { |v| v.item_type.underscore.humanize }
         column(t("active_admin.dashboard_page.columns.modified_at")) { |v| v.created_at.to_fs :long }
