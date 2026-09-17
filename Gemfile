@@ -49,7 +49,7 @@ gem "gdal"
 # API
 # patches are on that branch and they seem not to release new versions to rubygems
 # TODO: switch back to rubygems version when they release new version
-gem "jsonapi-resources", github: "JSONAPI-Resources/jsonapi-resources", branch: "release-0-9"
+gem "jsonapi-resources", github: "tsubik/jsonapi-resources", branch: "release-0-9-custom"
 gem "oj"
 gem "oj_mimic_json"
 
