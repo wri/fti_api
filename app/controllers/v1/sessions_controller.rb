@@ -13,7 +13,12 @@ module V1
 
     def create
       @user = User.find_by(email: auth_params[:email])
-      if @user.present? && @user.valid_password?(auth_params[:password]) && @user.is_active
+      password_correct = @user&.valid_password?(auth_params[:password])
+
+      if @user.present? &&
+          @user.valid_for_authentication? { password_correct } &&
+          @user.active_for_authentication?
+        @user.reset_failed_attempts!
         @user.update_column(:should_change_password, true) unless User.strong_password?(auth_params[:password])
         @user.update_tracked_fields!(request)
         set_download_session_cookie_for(@user)
@@ -24,6 +29,8 @@ module V1
         render json: {role: @user.user_permission.user_role,
                       user_id: @user.id, country: @user.country_id,
                       operator_ids: @user.operator_ids, observer: @user.observer_id}, status: :ok
+      elsif password_correct && @user.access_locked?
+        render json: {errors: [{status: 401, title: "Your account is locked. Check your email for unlock instructions."}]}, status: :unauthorized
       else
         render json: {errors: [{status: 401, title: "Incorrect email or password"}]}, status: :unauthorized
       end

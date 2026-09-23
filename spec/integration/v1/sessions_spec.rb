@@ -7,6 +7,131 @@ module V1
 
       expect(status).to eq(401)
       expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
+      expect(user.reload.failed_attempts).to eq(1)
+    end
+
+    it "Returns the same error object for an email that is not in the database" do
+      post "/login", params: {auth: {email: "nobody@example.com", password: "Supersecret1"}}
+
+      expect(status).to eq(401)
+      expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
+    end
+
+    describe "Account lockout" do
+      it "renders the backoffice login page with the resend unlock link" do
+        get new_user_session_path
+
+        expect(response).to be_successful
+        expect(response.body).to include(I18n.t("active_admin.devise.links.resend_unlock_instructions"))
+      end
+
+      def lock_account!(account)
+        Devise.maximum_attempts.times do
+          post "/login", params: {auth: {email: account.email, password: "wrong password"}}
+          expect(status).to eq(401)
+        end
+      end
+
+      it "Locks the account after the maximum failed attempts" do
+        lock_account!(user)
+
+        expect(user.reload).to be_access_locked
+      end
+
+      it "Tells a locked user their account is locked once they get the password right" do
+        lock_account!(user)
+
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+
+        expect(status).to eq(401)
+        expect(parsed_body).to eq({errors: [{status: 401, title: "Your account is locked. Check your email for unlock instructions."}]})
+      end
+
+      it "Keeps the generic error for a locked account when the password is wrong" do
+        lock_account!(user)
+
+        post "/login", params: {auth: {email: user.email, password: "still wrong"}}
+
+        expect(status).to eq(401)
+        expect(parsed_body).to eq({errors: [{status: 401, title: "Incorrect email or password"}]})
+      end
+
+      it "Sends unlock instructions when the account is locked" do
+        expect {
+          lock_account!(user)
+        }.to have_enqueued_mail(DeviseMailer, :unlock_instructions).once
+
+        expect(user.reload).to be_access_locked
+        expect(user.unlock_token).to be_present
+      end
+
+      def visit_unlock_link_for(account)
+        ActionMailer::Base.deliveries.clear
+
+        perform_enqueued_jobs do
+          lock_account!(account)
+        end
+
+        expect(account.reload).to be_access_locked
+
+        mail = ActionMailer::Base.deliveries.last
+        expect(mail).to be_present
+        expect(mail.to).to contain_exactly(account.email)
+        expect(mail.subject).to eq(I18n.t("devise.mailer.unlock_instructions.subject"))
+
+        body = (mail.html_part || mail).body.to_s
+        unlock_url = body[%r{(https?://[^"]+/unlock\?unlock_token=[^"]+)}, 1]
+        expect(unlock_url).to be_present
+        expect(unlock_url).not_to include("/admin/unlock")
+
+        get CGI.unescapeHTML(URI.parse(unlock_url).request_uri)
+      end
+
+      it "Unlocks the account when the email unlock link is visited" do
+        visit_unlock_link_for(user)
+
+        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL") + "?message=user_unlocked")
+        expect(user.reload).not_to be_access_locked
+        expect(user.failed_attempts).to eq(0)
+        expect(user.unlock_token).to be_nil
+
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+        expect(status).to eq(200)
+      end
+
+      it "Redirects operators to the portal after unlock" do
+        visit_unlock_link_for(operator_user)
+
+        expect(response).to redirect_to(ENV.fetch("FRONTEND_URL") + "?message=user_unlocked")
+        expect(operator_user.reload).not_to be_access_locked
+      end
+
+      it "Redirects observation tool users to the observations tool after unlock" do
+        ngo = create(:ngo)
+
+        visit_unlock_link_for(ngo)
+
+        expect(response).to redirect_to(ENV.fetch("OBSERVATIONS_TOOL_URL") + "?message=user_unlocked")
+        expect(ngo.reload).not_to be_access_locked
+      end
+
+      it "Redirects admins to the backoffice login after unlock" do
+        visit_unlock_link_for(admin)
+
+        expect(response).to redirect_to(new_user_session_path)
+        expect(flash[:notice]).to eq(I18n.t("devise.unlocks.unlocked"))
+        expect(admin.reload).not_to be_access_locked
+      end
+
+      it "Resets failed attempts after a successful login" do
+        post "/login", params: {auth: {email: user.email, password: "wrong password"}}
+        expect(user.reload.failed_attempts).to eq(1)
+
+        post "/login", params: {auth: {email: user.email, password: "Supersecret1"}}
+
+        expect(status).to eq(200)
+        expect(user.reload.failed_attempts).to eq(0)
+      end
     end
 
     it "Valid login" do

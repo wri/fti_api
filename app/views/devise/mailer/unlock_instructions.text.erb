@@ -1,0 +1,8 @@
+<%= t("mailers.greeting", name: @resource.display_name, fallback: true) %>
+
+<%= t(".message") %>
+
+<%= t(".instruction") %> <%= unlock_url(@resource, unlock_token: @token) %>
+
+<%= t("mailers.salutation") %>
+<%= t("mailers.signature") %>

@@ -1,0 +1,7 @@
+es:
+  devise:
+    mailer:
+      unlock_instructions:
+        subject: "Instrucciones de desbloqueo"
+        message: "Su cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión."
+        instruction: "Siga el enlace a continuación para desbloquear su cuenta:"
