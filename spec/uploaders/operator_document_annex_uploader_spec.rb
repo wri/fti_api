@@ -34,6 +34,7 @@ RSpec.describe OperatorDocumentAnnexUploader do
 
     context "when operator_document_annex has attachment" do
       before do
+        freeze_time
         uploader.store!(File.open(Rails.root.join("spec", "support", "files", "doc.pdf")))
       end
 
