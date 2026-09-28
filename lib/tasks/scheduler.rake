@@ -91,6 +91,14 @@ namespace :scheduler do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
   end
 
+  desc "Send an email to the Healthchecks email heartbeat check"
+  task send_email_heartbeat: :environment do
+    raise "HEALTHCHECKS_ACCOUNT_ID is not set" if ENV["HEALTHCHECKS_ACCOUNT_ID"].blank?
+
+    SystemMailer.heartbeat.deliver_later
+    Rails.logger.info "Email heartbeat enqueued at: #{Time.zone.now.strftime("%d/%m/%Y %H:%M")}"
+  end
+
   desc "Delete expired entries from the Rails cache"
   task clean_cache: :environment do
     Rails.logger.info "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"

@@ -13,4 +13,13 @@ class SystemMailer < ApplicationMailer
     @operator = operator
     mail(subject: I18n.t("system_mailer.operator_created.subject"))
   end
+
+  def heartbeat
+    mail(
+      to: "#{ENV["HEALTHCHECKS_ACCOUNT_ID"]}+#{Rails.env}-email-heartbeat@hc-ping.com",
+      subject: "OTP API email heartbeat", # rubocop:disable Rails/I18nLocaleTexts
+      body: "Email heartbeat sent at #{Time.zone.now.iso8601}.",
+      content_type: "text/plain"
+    )
+  end
 end

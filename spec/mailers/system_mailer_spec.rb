@@ -30,4 +30,22 @@ RSpec.describe SystemMailer, type: :mailer do
       expect(mail.body.encoded).to match("A new operator has been created through the portal and needs to be approved.")
     end
   end
+
+  describe "heartbeat" do
+    let(:mail) { SystemMailer.heartbeat }
+
+    before do
+      allow(ENV).to receive(:[]).and_call_original
+      allow(ENV).to receive(:[]).with("HEALTHCHECKS_ACCOUNT_ID").and_return("ping-key")
+    end
+
+    it "renders the headers" do
+      expect(mail.subject).to eq("OTP API email heartbeat")
+      expect(mail.to).to eq(["ping-key+test-email-heartbeat@hc-ping.com"])
+    end
+
+    it "renders the body" do
+      expect(mail.body.encoded).to match("Email heartbeat sent at")
+    end
+  end
 end
