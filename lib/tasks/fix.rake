@@ -113,6 +113,38 @@ namespace :fix do
     puts for_real ? "Applied." : "Rolled back."
   end
 
+  desc "Disconnect annexes from not provided document history versions"
+  task annexes_not_provided_history: :environment do
+    for_real = ENV["FOR_REAL"] == "true"
+    puts "DRY RUN, pass FOR_REAL=true to apply" unless for_real
+
+    # annexes carried over to later versions before disconnecting was deployed (PR #565, 2026-01-09) are left as they are
+    links = AnnexDocument.where(
+      documentable_type: "OperatorDocumentHistory",
+      documentable_id: OperatorDocumentHistory.with_deleted.where(status: :doc_not_provided).select(:id)
+    )
+
+    links
+      .joins("INNER JOIN operator_document_histories ON operator_document_histories.id = annex_documents.documentable_id")
+      .order("operator_document_histories.operator_document_id, operator_document_histories.operator_document_updated_at")
+      .pluck("operator_document_histories.operator_document_id", :documentable_id, "operator_document_histories.operator_document_updated_at", :operator_document_annex_id)
+      .group_by { |document_id, history_id, updated_at, _| [document_id, history_id, updated_at] }
+      .each do |(document_id, history_id, updated_at), rows|
+        puts "Document #{document_id} history #{history_id} (#{updated_at}): removing annexes #{rows.map(&:last).inspect}"
+      end
+
+    ActiveRecord::Base.transaction do
+      orphaned_before = OperatorDocumentAnnex.with_deleted.orphaned.pluck(:id)
+      puts "Annex links removed: #{links.delete_all}"
+      newly_orphaned = OperatorDocumentAnnex.with_deleted.orphaned.pluck(:id) - orphaned_before
+      puts "Annexes left without any document: #{newly_orphaned.inspect}"
+
+      raise ActiveRecord::Rollback unless for_real
+    end
+
+    puts for_real ? "Applied." : "Rolled back."
+  end
+
   task annexes: :environment do
     ActiveRecord::Base.transaction do
       for_real = ENV["FOR_REAL"] == "true"
