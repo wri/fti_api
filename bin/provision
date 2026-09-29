@@ -85,7 +85,7 @@ upgrade_packages = <<~EOF
 EOF
 # Install Docker and add the private network
 install_essentials = <<~EOF
-  sudo apt-get install -y build-essential curl git unzip libjemalloc2
+  sudo apt-get install -y build-essential curl git unzip libjemalloc2 rustc
   sudo ln -sf "$(find /usr/lib -name libjemalloc.so.2 -print -quit)" /usr/local/lib/libjemalloc.so
 EOF
 
@@ -254,7 +254,7 @@ EOF
 
 install_ruby = <<~EOF
   . /etc/profile.d/rvm.sh;
-  rvm install #{ruby_version}
+  rvm install #{ruby_version} --disable-binary -C --enable-yjit
 EOF
 
 install_nvm = <<~EOF
