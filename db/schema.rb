@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_07_26_120000) do
+ActiveRecord::Schema[8.0].define(version: 2026_09_29_090000) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -239,6 +239,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_26_120000) do
     t.index ["country_id"], name: "index_fmus_on_country_id"
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at"
     t.index ["forest_type"], name: "index_fmus_on_forest_type"
+    t.index ["geometry"], name: "index_fmus_on_geometry", using: :gist
   end
 
   create_table "gov_documents", id: :serial, force: :cascade do |t|
@@ -798,6 +799,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_07_26_120000) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_protected_areas_on_country_id"
+    t.index ["geometry"], name: "index_protected_areas_on_geometry", using: :gist
   end
 
   create_table "quality_controls", force: :cascade do |t|
