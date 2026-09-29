@@ -4,8 +4,7 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
   extend BackRedirectable
 
   config.sort_order = "date_desc"
-  config.paginate = false
-  config.per_page = 10000
+  config.per_page = 50
 
   menu false
 
@@ -67,8 +66,9 @@ ActiveAdmin.register OperatorDocumentStatistic, as: "Producer Documents Dashboar
     column :not_provided_count, sortable: false
 
     hidden = ScoreEvolutionHelper::HIDDEN_SCORE
+    # the table is paged, the chart shows all filtered rows
     render partial: "score_evolution", locals: {
-      scores: score_evolution_scores(collection,
+      scores: score_evolution_scores(collection.except(:limit, :offset, :includes),
         not_provided_count: hidden,
         pending_count: hidden,
         invalid_count: hidden,

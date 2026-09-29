@@ -107,8 +107,9 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     column :published_all
     column :total_count, sortable: false
     hidden = ScoreEvolutionHelper::HIDDEN_SCORE
+    # the table is paged, the chart shows all filtered rows
     render partial: "score_evolution", locals: {
-      scores: score_evolution_scores(collection,
+      scores: score_evolution_scores(dashboard_rows,
         created: hidden,
         ready_for_qc: hidden,
         qc_in_progress: hidden,
@@ -221,23 +222,31 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
     before_action :set_default_filters
     before_action :set_paging
 
+    helper_method :dashboard_rows
+
+    # a plain visit or clear filters starts with the last year, submitting the form with an empty date shows all history
     def set_default_filters
+      return if params[:commit].present?
+
       params[:q] ||= {}
-      params[:q][:date_gteq] = 1.year.ago if params.dig(:q, :date_gteq).blank?
+      params[:q][:date_gteq] = 1.year.ago.to_date if params.dig(:q, :date_gteq).blank?
     end
 
     # config.per_page didn't work, but this does probably related to use of paginate_array? dunno
     def set_paging
       @page = params[:page]
-      @per_page = 500
+      @per_page = 50
     end
 
     def find_collection(options = {})
-      collection = ObservationStatistic.query_dashboard_report(params[:q] || {})
       # keep the ransack to maintain filters in active admin
       @search = ObservationStatistic.ransack(params[:q] || {})
       # collection must be paged otherwise aa is complaining
-      Kaminari.paginate_array(collection).page(@page).per(@per_page)
+      Kaminari.paginate_array(dashboard_rows).page(@page).per(per_page)
+    end
+
+    def dashboard_rows
+      @dashboard_rows ||= ObservationStatistic.query_dashboard_report(params[:q] || {}).to_a
     end
   end
 end
