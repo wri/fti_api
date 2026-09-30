@@ -79,7 +79,7 @@ class OperatorDocumentAnnex < ApplicationRecord
   # annexes are disconnected from the operator document when a new version of the document is uploaded,
   # from then on they are only related to the document history
   def related_operator_document
-    operator_document || operator_document_histories.last
+    operator_document || operator_document_histories.max_by(&:id)
   end
 
   def operator

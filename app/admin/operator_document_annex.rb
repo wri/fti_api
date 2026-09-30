@@ -11,7 +11,12 @@ ActiveAdmin.register OperatorDocumentAnnex do
 
   controller do
     def scoped_collection
-      end_of_association_chain.includes([:user, annex_documents: [documentable: [:operator, required_operator_document: :translations]]])
+      end_of_association_chain.includes(
+        :user,
+        operator_document: [:operator, :fmu, :required_operator_document],
+        operator_document_histories: [:operator, :fmu, :required_operator_document],
+        annex_documents: [documentable: [:operator, required_operator_document: :translations]]
+      )
     end
 
     def apply_filtering(chain)
@@ -71,30 +76,23 @@ ActiveAdmin.register OperatorDocumentAnnex do
   index do
     tag_column :status
     column I18n.t("active_admin.operator_page.documents") do |annex|
-      next if annex.related_operator_document.nil?
-
-      if annex.related_operator_document.is_a?(OperatorDocumentHistory)
-        name = "#{annex.related_operator_document.required_operator_document.name} " \
-          "(#{I18n.t("active_admin.operator_document_annexes_page.history_version")})"
-        link = admin_operator_document_history_path(annex.related_operator_document.id)
-      else
-        doc = OperatorDocument.unscoped.find(annex.related_operator_document.id)
-        name = doc.required_operator_document.name
-        link = admin_operator_document_path(doc.id)
-      end
-
-      link_to(name, link)
-    end
-    column I18n.t("active_admin.dashboard_page.columns.operator") do |annex|
-      o = annex.annex_documents_history.first.documentable.operator
-      link_to(o.name, admin_producer_path(o.id))
-    rescue
-    end
-    column I18n.t("activerecord.models.fmu.one") do |annex|
-      doc = annex.annex_documents.first
+      doc = annex.related_operator_document
       next if doc.nil?
 
-      fmu = doc.documentable_type.constantize.unscoped.find(doc.documentable_id).fmu
+      if doc.is_a?(OperatorDocumentHistory)
+        name = "#{doc.required_operator_document.name} " \
+          "(#{I18n.t("active_admin.operator_document_annexes_page.history_version")})"
+        link_to(name, admin_operator_document_history_path(doc.id))
+      else
+        link_to(doc.required_operator_document.name, admin_operator_document_path(doc.id))
+      end
+    end
+    column I18n.t("active_admin.dashboard_page.columns.operator") do |annex|
+      o = annex.operator
+      link_to(o.name, admin_producer_path(o.id)) if o
+    end
+    column I18n.t("activerecord.models.fmu.one") do |annex|
+      fmu = annex.related_operator_document&.fmu
       link_to(fmu.name, admin_fmu_path(fmu.id)) if fmu
     end
     column :user, sortable: "users.name"
