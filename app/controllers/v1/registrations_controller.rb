@@ -2,8 +2,15 @@
 
 module V1
   class RegistrationsController < APIController
+    include AuthRateLimiting
+
     skip_before_action :authenticate
     before_action :reject_params
+
+    rate_limit to: 5, within: 1.hour, only: :create,
+      by: -> { request.remote_ip },
+      with: -> { render_too_many_requests },
+      store: AuthRateLimiting::STORE
 
     def create
       @user = User.new(user_params)
