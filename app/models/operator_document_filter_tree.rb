@@ -6,42 +6,48 @@ class OperatorDocumentFilterTree
   def tree
     @tree ||= {
       forest_types: forest_types,
-      status: STATUSES,
+      status: statuses,
       country_ids: country_ids,
       operator_id: operator_ids,
       fmu_id: fmu_ids,
       required_operator_document_id: required_operator_document_ids,
-      source: SOURCES,
+      source: sources,
       legal_categories: legal_categories
     }
   end
 
-  TYPES = [
-    {id: "OperatorDocumentCountry", name: I18n.t("operator_documents.filters.producer")},
-    {id: "OperatorDocumentFmu", name: I18n.t("operator_documents.filters.fmu")}
-  ].freeze
-
-  STATUSES = [
-    {id: "doc_not_provided", name: I18n.t("operator_documents.filters.doc_not_provided")},
-    {id: "doc_valid", name: I18n.t("operator_documents.filters.doc_valid")},
-    {id: "doc_expired", name: I18n.t("operator_documents.filters.doc_expired")},
-    {id: "doc_not_required", name: I18n.t("operator_documents.filters.doc_not_required")}
-  ].freeze
-
-  SOURCES = [
-    {id: 1, name: I18n.t("filters.company")},
-    {id: 2, name: I18n.t("filters.forest_atlas")},
-    {id: 3, name: I18n.t("filters.other")}
-  ].freeze
-
   private
 
+  # labels are translated per request, constants would keep the locale of the first request after boot
+  def statuses
+    [
+      {id: "doc_not_provided", name: I18n.t("operator_documents.filters.doc_not_provided")},
+      {id: "doc_valid", name: I18n.t("operator_documents.filters.doc_valid")},
+      {id: "doc_expired", name: I18n.t("operator_documents.filters.doc_expired")},
+      {id: "doc_not_required", name: I18n.t("operator_documents.filters.doc_not_required")}
+    ]
+  end
+
+  def sources
+    [
+      {id: 1, name: I18n.t("filters.company")},
+      {id: 2, name: I18n.t("filters.forest_atlas")},
+      {id: 3, name: I18n.t("filters.other")}
+    ]
+  end
+
   def legal_categories
-    RequiredOperatorDocumentGroup.with_translations.where.not(id: required_operator_group_id_to_exclude).map do |x|
+    groups = RequiredOperatorDocumentGroup.with_translations.where.not(id: required_operator_group_id_to_exclude).to_a
+    document_ids = group_values(
+      RequiredOperatorDocument.where(required_operator_document_group_id: groups.map(&:id)),
+      :required_operator_document_group_id, :id
+    )
+
+    groups.map do |x|
       {
         id: x.id,
         name: x.name,
-        required_operator_document_ids: x.required_operator_documents.pluck(:id).sort
+        required_operator_document_ids: document_ids.fetch(x.id, []).sort
       }
     end.sort_by { |x| x[:name] }
   end
@@ -72,7 +78,7 @@ class OperatorDocumentFilterTree
     fmu_forest_types = Fmu.pluck(:id, :forest_type).to_h
 
     Operator
-      .filter_by_country_ids(country_ids.pluck(:id))
+      .where(country_id: country_ids.pluck(:id))
       .active.fa_operator
       .includes(:fmu_operators).map do |x| # Beware includes :fmus is pretty slow, something with translations
         fmu_ids = x.fmu_operators.pluck(:fmu_id).sort
@@ -88,19 +94,32 @@ class OperatorDocumentFilterTree
   end
 
   def country_ids
-    required_operator_doc_ids_to_exclude = RequiredOperatorDocument
-      .where(required_operator_document_group_id: required_operator_group_id_to_exclude)
-      .pluck(:id)
+    @country_ids ||= begin
+      countries = Country.active.with_translations.to_a
+      ids = countries.map(&:id)
+      operators = group_values(Operator.where(country_id: ids), :country_id, :id)
+      fmus = group_values(Fmu.where(country_id: ids), :country_id, :id)
+      forest_types = group_values(Fmu.where(country_id: ids), :country_id, :forest_type)
+      required_operator_documents = group_values(RequiredOperatorDocument.where(country_id: ids), :country_id, :id)
+      required_operator_doc_ids_to_exclude = RequiredOperatorDocument
+        .where(required_operator_document_group_id: required_operator_group_id_to_exclude)
+        .pluck(:id)
 
-    Country.active.with_translations.map do |x|
-      {
-        id: x.id, iso: x.iso, name: x.name,
-        operators: x.operators.pluck(:id).uniq.sort,
-        fmus: x.fmus.pluck(:id).uniq.sort,
-        forest_types: serialize_forest_types(x.forest_types),
-        required_operator_document_ids: (x.required_operator_documents.pluck(:id).uniq - required_operator_doc_ids_to_exclude).sort
-      }
-    end.sort_by { |x| x[:name] }
+      countries.map do |x|
+        {
+          id: x.id, iso: x.iso, name: x.name,
+          operators: operators.fetch(x.id, []).sort,
+          fmus: fmus.fetch(x.id, []).sort,
+          forest_types: serialize_forest_types(forest_types.fetch(x.id, [])),
+          required_operator_document_ids: (required_operator_documents.fetch(x.id, []) - required_operator_doc_ids_to_exclude).sort
+        }
+      end.sort_by { |x| x[:name] }
+    end
+  end
+
+  # {key => distinct values} in one query instead of one query per key
+  def group_values(relation, key, value)
+    relation.distinct.pluck(key, value).group_by(&:first).transform_values { |pairs| pairs.map(&:last) }
   end
 
   def beautify_name(name)
@@ -121,9 +140,9 @@ class OperatorDocumentFilterTree
     end
   end
 
-  private
-
   def required_operator_group_id_to_exclude
-    RequiredOperatorDocumentGroup.with_translations("en").where(name: "Publication Authorization").first&.id
+    return @required_operator_group_id_to_exclude if defined?(@required_operator_group_id_to_exclude)
+
+    @required_operator_group_id_to_exclude = RequiredOperatorDocumentGroup.with_translations("en").where(name: "Publication Authorization").first&.id
   end
 end

@@ -90,7 +90,7 @@ module V1
     def report_ids
       having_published_observations = Observation.published.distinct.pluck(:observation_report_id)
 
-      ObservationReport.where(id: having_published_observations).map { |x| {id: x.id, name: x.title} }.sort_by { |x| x[:title] }
+      ObservationReport.where(id: having_published_observations).map { |x| {id: x.id, name: x.title} }.sort_by { |x| x[:name].to_s }
     end
 
     def subcategory_ids
@@ -126,19 +126,27 @@ module V1
     end
 
     def country_ids
-      Country
-        .with_translations(I18n.locale)
-        .with_observations(Observation.published)
-        .map do |x|
-          {
-            id: x.id, iso: x.iso, name: x.name,
-            operators: x.operators.pluck(:id).uniq,
-            observers: x.observations.joins(:observers).pluck(:observer_id).uniq,
-            fmus: x.fmus.pluck(:id).uniq,
-            governments: x.governments.pluck(:id).uniq
-          }
-        end
-        .sort_by { |x| x[:name] }
+      countries = Country.with_translations(I18n.locale).with_observations(Observation.published).to_a
+      ids = countries.map(&:id)
+      operators = group_values(Operator.where(country_id: ids), :country_id, :id)
+      observers = group_values(Observation.joins(:observers).where(country_id: ids), :country_id, "observer_observations.observer_id")
+      fmus = group_values(Fmu.where(country_id: ids), :country_id, :id)
+      governments = group_values(Government.where(country_id: ids), :country_id, :id)
+
+      countries.map do |x|
+        {
+          id: x.id, iso: x.iso, name: x.name,
+          operators: operators.fetch(x.id, []).sort,
+          observers: observers.fetch(x.id, []).sort,
+          fmus: fmus.fetch(x.id, []).sort,
+          governments: governments.fetch(x.id, []).sort
+        }
+      end.sort_by { |x| x[:name] }
+    end
+
+    # {key => distinct values} in one query instead of one query per key
+    def group_values(relation, key, value)
+      relation.distinct.pluck(key, value).group_by(&:first).transform_values { |pairs| pairs.map(&:last) }
     end
   end
 end

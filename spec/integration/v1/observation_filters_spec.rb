@@ -18,6 +18,16 @@ module V1
 
         expect(status).to eql(200)
       end
+
+      it "sorts observation reports by title" do
+        create(:observation, observation_report: create(:observation_report, title: "B report"))
+        create(:observation, observation_report: create(:observation_report, title: "A report"))
+
+        get "/observation_filters_tree"
+
+        names = parsed_body[:"observation-report"].pluck(:name)
+        expect(names).to eq(names.sort)
+      end
     end
   end
 end
