@@ -32,6 +32,10 @@ server {
 
   http2 on;
 
+  # The 16k default packs headers + body into one TLS record that overflows a cold
+  # connection's congestion window, delaying the first byte by a round trip.
+  ssl_buffer_size 4k;
+
   gzip              on;
   gzip_vary         on;
   gzip_proxied      any;
