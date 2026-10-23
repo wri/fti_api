@@ -696,3 +696,13 @@ Page_2_fr_translation:
     Terms are between You and Us, and no one else can enforce them.</li><li>These
     Terms are the entire statement of the agreement between You and Us regarding the
     Services and their contents.</li></ol><p><br></p>'
+
+Page_3_en_translation:
+  page_id: 3
+  locale: en
+  title: About
+
+Page_3_fr_translation:
+  page_id: 3
+  locale: fr
+  title: About

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_09_29_090000) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_22_100100) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -770,6 +770,26 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_29_090000) do
     t.index ["slug"], name: "index_operators_on_slug", unique: true
   end
 
+  create_table "page_section_translations", force: :cascade do |t|
+    t.bigint "page_section_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "body"
+    t.index ["locale"], name: "index_page_section_translations_on_locale"
+    t.index ["page_section_id"], name: "index_page_section_translations_on_page_section_id"
+  end
+
+  create_table "page_sections", force: :cascade do |t|
+    t.bigint "page_id", null: false
+    t.integer "position", null: false
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_id", "position"], name: "index_page_sections_on_page_id_and_position"
+  end
+
   create_table "page_translations", force: :cascade do |t|
     t.bigint "page_id", null: false
     t.string "locale", null: false
@@ -1124,11 +1144,11 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_29_090000) do
     t.string "last_name"
     t.boolean "organization_account", default: false, null: false
     t.boolean "should_change_password", default: false, null: false
+    t.datetime "last_inactivity_warning_sent_at"
+    t.datetime "last_activated_at"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.datetime "last_inactivity_warning_sent_at"
-    t.datetime "last_activated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -1204,6 +1224,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_09_29_090000) do
   add_foreign_key "operator_documents", "required_operator_documents"
   add_foreign_key "operator_documents", "users", on_delete: :nullify
   add_foreign_key "operators", "holdings", on_delete: :nullify
+  add_foreign_key "page_sections", "pages", on_delete: :cascade
   add_foreign_key "protected_areas", "countries", on_delete: :cascade
   add_foreign_key "quality_controls", "users", column: "reviewer_id"
   add_foreign_key "required_gov_document_groups", "required_gov_document_groups", column: "parent_id"
