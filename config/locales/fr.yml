@@ -1272,6 +1272,8 @@ fr:
         password_complexity: "doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre"
         not_allowed_for_country: "n'est pas autorisé pour ce pays"
         qc_in_progress: "Le contrôle qualité doit être en cours"
+        cannot_change_protected_slug: "ne peut pas être modifié, le portail renvoie vers cette page"
+        cannot_delete_protected_page: "Cette page ne peut pas être supprimée, le portail renvoie vers elle"
         record_invalid: 'La validation a échoué : %{errors}'
         restrict_dependent_destroy:
           has_one: "Vous ne pouvez pas supprimer l'enregistrement car une personne à charge %{record} existe"

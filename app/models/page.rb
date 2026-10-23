@@ -40,13 +40,13 @@ class Page < ApplicationRecord
   private
 
   def protected_slug_unchanged
-    errors.add(:slug, "cannot be changed, the portal links to this page") if slug_changed? && protected?
+    errors.add(:slug, :cannot_change_protected_slug) if slug_changed? && protected?
   end
 
   def prevent_destroying_protected_page
     return unless protected?
 
-    errors.add(:base, "This page cannot be deleted, the portal links to it")
+    errors.add(:base, :cannot_delete_protected_page)
     throw :abort
   end
 
