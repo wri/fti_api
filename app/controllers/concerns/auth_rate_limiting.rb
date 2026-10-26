@@ -4,6 +4,8 @@
 #
 # Test/dev use an isolated MemoryStore so we don't depend on Rails.cache
 # (null_store there, and JSONAPI resource caching also points at it).
+# E2E uses a NullStore (increment returns nil, so nothing is ever throttled)
+# because frontend suites log in as the same seeded users from one IP.
 # Production-like envs use Rails.cache so Puma workers on one host share
 # the counters.
 module AuthRateLimiting
@@ -11,6 +13,8 @@ module AuthRateLimiting
 
   STORE = if Rails.env.local?
     ActiveSupport::Cache::MemoryStore.new
+  elsif Rails.env.e2e?
+    ActiveSupport::Cache::NullStore.new
   else
     Rails.cache
   end
