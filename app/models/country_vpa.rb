@@ -23,7 +23,5 @@ class CountryVpa < ApplicationRecord
   active_admin_translates :name do
     validates :name, presence: true
   end
-  # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :description do; end
-  # rubocop:enable Standard/BlockSingleLineBraces
 end

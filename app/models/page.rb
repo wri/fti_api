@@ -18,9 +18,7 @@ class Page < ApplicationRecord
     validates :title, presence: true
   end
 
-  # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :body do; end
-  # rubocop:enable Standard/BlockSingleLineBraces
 
   validates :slug, presence: true, uniqueness: true
 

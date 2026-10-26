@@ -16,9 +16,7 @@ class Severity < ApplicationRecord
   include Translatable
 
   translates :details, touch: true
-  # rubocop:disable Standard/BlockSingleLineBraces
   active_admin_translates :details do; end
-  # rubocop:enable Standard/BlockSingleLineBraces
 
   belongs_to :subcategory, inverse_of: :severities
   has_many :observations, inverse_of: :severity
