@@ -82,6 +82,28 @@ module V1
         })
         expect(status).to eq(422)
       end
+
+      describe "Rate limiting" do
+        def register(email)
+          post "/register", params: {user: valid_user_params.merge(email: email)}
+        end
+
+        it "Allows 20 registrations per IP per hour" do
+          20.times do |i|
+            register("user#{i}@example.com")
+            expect(status).to eq(201)
+          end
+        end
+
+        it "Throttles a 21st registration from the same IP" do
+          20.times { |i| register("user#{i}@example.com") }
+
+          register("another@example.com")
+
+          expect(status).to eq(429)
+          expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
+        end
+      end
     end
   end
 end

@@ -14,7 +14,8 @@ class Ability
       if user.activated?
         user.user_permission.permissions.each do |entity, actions|
           actions.each do |action, conditions|
-            can action.to_sym, (klass = entity.classify.safe_constantize) ? klass : entity.to_sym, conditions
+            # jsonb keys are strings; cancancan needs symbols to join associations
+            can action.to_sym, (klass = entity.classify.safe_constantize) ? klass : entity.to_sym, conditions.deep_symbolize_keys
           end
         end
 

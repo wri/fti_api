@@ -28,6 +28,44 @@ module V1
           expect(status).to eq(200)
         end
       end
+
+      describe "Rate limiting" do
+        def request_reset(email)
+          post("/reset-password", params: {password: {email: email}})
+        end
+
+        it "Allows 3 password reset requests per email per hour" do
+          3.times do
+            request_reset(user.email)
+            expect(status).to eq(200)
+          end
+        end
+
+        it "Throttles a 4th password reset request for the same email" do
+          3.times { request_reset(user.email) }
+
+          request_reset(user.email.upcase)
+
+          expect(status).to eq(429)
+          expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
+        end
+
+        it "Does not throttle a different email from the same IP" do
+          3.times { request_reset(user.email) }
+
+          request_reset("other@example.com")
+
+          expect(status).to eq(200)
+        end
+
+        it "Throttles a 21st password reset request from the same IP" do
+          20.times { |i| request_reset("user#{i}@example.com") }
+
+          request_reset("another@example.com")
+
+          expect(status).to eq(429)
+        end
+      end
     end
 
     context "Reset password by token" do
@@ -90,6 +128,33 @@ module V1
 
           expect(parsed_body).to eq({errors: [{status: 422, title: "reset_password_token has expired, please request a new one"}]})
           expect(status).to eq(422)
+        end
+      end
+
+      describe "Rate limiting" do
+        def reset_with_token(token)
+          post("/users/password",
+            params: {password: {
+              reset_password_token: token,
+              password: "Supersecret1",
+              password_confirmation: "Supersecret1"
+            }})
+        end
+
+        it "Allows 30 password reset-by-token attempts per IP per 15 minutes" do
+          30.times do |i|
+            reset_with_token("invalid-#{i}")
+            expect(status).to eq(422)
+          end
+        end
+
+        it "Throttles a 31st password reset-by-token attempt from the same IP" do
+          30.times { |i| reset_with_token("invalid-#{i}") }
+
+          reset_with_token(user.send(:set_reset_password_token))
+
+          expect(status).to eq(429)
+          expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
         end
       end
     end

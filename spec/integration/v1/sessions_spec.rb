@@ -27,6 +27,8 @@ module V1
 
       def lock_account!(account)
         Devise.maximum_attempts.times do
+          # lockout takes more attempts than the per-email rate limit allows in a minute
+          AuthRateLimiting::STORE.clear
           post "/login", params: {auth: {email: account.email, password: "wrong password"}}
           expect(status).to eq(401)
         end
@@ -415,6 +417,60 @@ module V1
       it "Request without valid authorization for current user" do
         get "/users/current-user"
         expect(parsed_body).to eq(default_status_errors(401))
+      end
+    end
+
+    describe "Rate limiting" do
+      def login(email, password: "wrong password")
+        post "/login", params: {auth: {email: email, password: password}}
+      end
+
+      it "Allows 5 login attempts per email per minute" do
+        5.times do
+          login(user.email)
+          expect(status).to eq(401)
+        end
+      end
+
+      it "Throttles a 6th login attempt for the same email" do
+        5.times { login(user.email) }
+
+        login(user.email, password: "Supersecret1")
+
+        expect(status).to eq(429)
+        expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
+      end
+
+      it "Does not throttle a different email" do
+        5.times { login(user.email) }
+
+        login(create(:user).email)
+
+        expect(status).to eq(401)
+      end
+
+      it "Treats emails as case-insensitive for the throttle" do
+        5.times { login(user.email.upcase) }
+
+        login(user.email)
+
+        expect(status).to eq(429)
+      end
+
+      it "Allows 30 login attempts per IP per minute" do
+        30.times do |i|
+          login("user#{i}@example.com")
+          expect(status).to eq(401)
+        end
+      end
+
+      it "Throttles a 31st login attempt from the same IP" do
+        30.times { |i| login("user#{i}@example.com") }
+
+        login(user.email, password: "Supersecret1")
+
+        expect(status).to eq(429)
+        expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
       end
     end
   end

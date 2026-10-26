@@ -55,7 +55,6 @@ Rails.application.routes.draw do
       # https://jsonapi-resources.com/v0.9/guide/routing.html#Nested-Routes
       # Big plus of generating relationships routes is that it validates configured
       # relationships, but it's better to keep API smaller
-      # rubocop:disable Standard/BlockSingleLineBraces
       jsonapi_resources :about_page_entries, only: [:index, :show] do; end
       jsonapi_resources :categories, only: [:index, :show] do; end
       jsonapi_resources :countries, only: [:index, :show] do; end
@@ -92,7 +91,6 @@ Rails.application.routes.draw do
       jsonapi_resources :users do; end
       jsonapi_resources :pages do; end
       jsonapi_resources :quality_controls, only: [:create] do; end
-      # rubocop:enable Standard/BlockSingleLineBraces
 
       resources :fmus, only: [:index, :show, :update] do
         get "tiles/:z/:x/:y", to: "fmus#tiles", on: :collection
