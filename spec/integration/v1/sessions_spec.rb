@@ -27,6 +27,8 @@ module V1
 
       def lock_account!(account)
         Devise.maximum_attempts.times do
+          # lockout takes more attempts than the per-email rate limit allows in a minute
+          AuthRateLimiting::STORE.clear
           post "/login", params: {auth: {email: account.email, password: "wrong password"}}
           expect(status).to eq(401)
         end
