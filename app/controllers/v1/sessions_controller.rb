@@ -12,13 +12,14 @@ module V1
     include ActionController::Cookies
 
     # email bucket stops password spraying one account; IP bucket stops
-    # credential stuffing many emails from one client
+    # credential stuffing many emails from one client. IP limit is generous
+    # because users share carrier-NAT IPs.
     rate_limit to: 5, within: 1.minute, only: :create,
       by: -> { login_email_key },
       with: -> { render_too_many_requests },
       store: AuthRateLimiting::STORE,
       name: "email"
-    rate_limit to: 20, within: 1.minute, only: :create,
+    rate_limit to: 30, within: 1.minute, only: :create,
       by: -> { request.remote_ip },
       with: -> { render_too_many_requests },
       store: AuthRateLimiting::STORE,

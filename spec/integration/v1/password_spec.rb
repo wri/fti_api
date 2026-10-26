@@ -34,20 +34,36 @@ module V1
           post("/reset-password", params: {password: {email: email}})
         end
 
-        it "Allows 3 password reset requests per IP per hour" do
+        it "Allows 3 password reset requests per email per hour" do
           3.times do
             request_reset(user.email)
             expect(status).to eq(200)
           end
         end
 
-        it "Throttles a 4th password reset request from the same IP" do
+        it "Throttles a 4th password reset request for the same email" do
+          3.times { request_reset(user.email) }
+
+          request_reset(user.email.upcase)
+
+          expect(status).to eq(429)
+          expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
+        end
+
+        it "Does not throttle a different email from the same IP" do
           3.times { request_reset(user.email) }
 
           request_reset("other@example.com")
 
+          expect(status).to eq(200)
+        end
+
+        it "Throttles a 21st password reset request from the same IP" do
+          20.times { |i| request_reset("user#{i}@example.com") }
+
+          request_reset("another@example.com")
+
           expect(status).to eq(429)
-          expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
         end
       end
     end
@@ -125,15 +141,15 @@ module V1
             }})
         end
 
-        it "Allows 5 password reset-by-token attempts per IP per 15 minutes" do
-          5.times do |i|
+        it "Allows 30 password reset-by-token attempts per IP per 15 minutes" do
+          30.times do |i|
             reset_with_token("invalid-#{i}")
             expect(status).to eq(422)
           end
         end
 
-        it "Throttles a 6th password reset-by-token attempt from the same IP" do
-          5.times { |i| reset_with_token("invalid-#{i}") }
+        it "Throttles a 31st password reset-by-token attempt from the same IP" do
+          30.times { |i| reset_with_token("invalid-#{i}") }
 
           reset_with_token(user.send(:set_reset_password_token))
 

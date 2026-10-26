@@ -6,13 +6,20 @@ module V1
 
     skip_before_action :authenticate, only: [:create, :update]
 
+    # email bucket stops inbox-bombing one address; IP bucket stops one client
+    # mailing many addresses. Keyed by email so users behind a shared IP don't collide.
     rate_limit to: 3, within: 1.hour, only: :create,
+      by: -> { reset_email_key },
+      with: -> { render_too_many_requests },
+      store: AuthRateLimiting::STORE,
+      name: "request-email"
+    rate_limit to: 20, within: 1.hour, only: :create,
       by: -> { request.remote_ip },
       with: -> { render_too_many_requests },
       store: AuthRateLimiting::STORE,
-      name: "request"
-    # token guessing is cheaper than inbox-bombing, but still needs a cap
-    rate_limit to: 5, within: 15.minutes, only: :update,
+      name: "request-ip"
+    # reset tokens are unguessable; this only caps hammering from one client
+    rate_limit to: 30, within: 15.minutes, only: :update,
       by: -> { request.remote_ip },
       with: -> { render_too_many_requests },
       store: AuthRateLimiting::STORE,
@@ -41,6 +48,10 @@ module V1
 
     def create_params
       params.expect(password: [:email])
+    end
+
+    def reset_email_key
+      params.dig(:password, :email).to_s.downcase.strip.presence || request.remote_ip
     end
 
     def update_params

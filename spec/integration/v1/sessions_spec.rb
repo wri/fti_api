@@ -455,12 +455,20 @@ module V1
         expect(status).to eq(429)
       end
 
-      it "Throttles login attempts from the same IP" do
-        20.times { |i| login("user#{i}@example.com") }
+      it "Allows 30 login attempts per IP per minute" do
+        30.times do |i|
+          login("user#{i}@example.com")
+          expect(status).to eq(401)
+        end
+      end
 
-        login("another@example.com")
+      it "Throttles a 31st login attempt from the same IP" do
+        30.times { |i| login("user#{i}@example.com") }
+
+        login(user.email, password: "Supersecret1")
 
         expect(status).to eq(429)
+        expect(parsed_body).to eq({errors: [{status: 429, title: "Too many requests"}]})
       end
     end
   end

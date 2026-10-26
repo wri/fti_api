@@ -7,7 +7,7 @@ module V1
     skip_before_action :authenticate
     before_action :reject_params
 
-    rate_limit to: 5, within: 1.hour, only: :create,
+    rate_limit to: 20, within: 1.hour, only: :create,
       by: -> { request.remote_ip },
       with: -> { render_too_many_requests },
       store: AuthRateLimiting::STORE
