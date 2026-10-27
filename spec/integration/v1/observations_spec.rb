@@ -245,6 +245,27 @@ module V1
             expect(parsed_body[:errors].first[:title]).to eq("Invalid validation change for monitor. Can't move from 'Created' to 'Needs revision'")
             expect(status).to eq(422)
           end
+
+          it "Status cannot be set to a non-existent value" do
+            patch("/observations/#{observation.id}?app=observations-tool",
+              params: jsonapi_params("observations", observation.id, {"validation-status": "Wrong status"}),
+              headers: admin_tool_headers)
+
+            expect(status).to eq(422)
+            expect(observation.reload.validation_status).to eq("Created")
+          end
+
+          it "Cannot start QC when QC is already in progress" do
+            observation.update_columns(validation_status: Observation.validation_statuses["QC1 in progress"])
+
+            patch("/observations/#{observation.id}?app=observations-tool",
+              params: jsonapi_params("observations", observation.id, {"validation-status": "QC in progress"}),
+              headers: admin_tool_headers)
+
+            expect(status).to eq(422)
+            expect(parsed_body[:errors].pluck(:title)).to include("Invalid validation change for monitor. Can't move from 'QC1 in progress' to 'QC in progress'")
+            expect(observation.reload.validation_status).to eq("QC1 in progress")
+          end
         end
       end
     end
