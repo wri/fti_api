@@ -15,6 +15,7 @@ class SeedsTasks
         generate_for_model "Country"
         generate_for_model "AboutPageEntry"
         generate_for_model "Page", locale: %w[en fr]
+        generate_for_model "PageSection"
         generate_for_model "Tool"
         generate_for_model "Tutorial"
         generate_for_model "HowTo"
