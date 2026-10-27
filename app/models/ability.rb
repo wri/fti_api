@@ -49,7 +49,7 @@ class Ability
       RequiredOperatorDocumentGroup, ObservationReport, ObservationDocument,
       Partner, OperatorDocumentAnnex, Sawmill, Faq, Tutorial, HowTo, Tool, Newsletter,
       CountryLink, CountryVpa, RequiredGovDocumentGroup, RequiredGovDocument,
-      GovDocument, ScoreOperatorDocument, AboutPageEntry, Page]
+      GovDocument, ScoreOperatorDocument, AboutPageEntry, Page, PageSection]
     can :read, Observation, is_active: true
     can :read, Observer, is_active: true
     can :read, Operator, is_active: true
