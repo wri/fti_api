@@ -9,6 +9,8 @@ module V1
 
     attributes :title, :slug, :body
 
+    has_many :sections, class_name: "PageSection"
+
     filters :slug
   end
 end

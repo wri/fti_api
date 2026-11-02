@@ -34,7 +34,7 @@ ActiveAdmin.register Page do
   form do |f|
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
-      f.input :slug
+      f.input :slug, input_html: {disabled: f.object.protected?}, hint: f.object.protected? ? "The portal links to this page, the slug cannot be changed" : nil
       f.input :available_in_languages, collection: I18n.available_locales, multiple: true, hint: "Leave empty to make page available in all languages"
     end
     f.translated_inputs "Translations", switch_locale: false, available_locales: f.object.available_in_languages&.map(&:to_sym) || I18n.available_locales do |t|
@@ -52,6 +52,21 @@ ActiveAdmin.register Page do
       translated_row(:body, locales: resource.available_in_languages) { |entry| sanitize(entry.body) }
       row :created_at
       row :updated_at
+    end
+
+    panel "Sections" do
+      table_for resource.sections.includes(:translations) do
+        column :position
+        column :title
+        column :code
+        column("") do |section|
+          safe_join([
+            link_to("Edit", edit_admin_page_page_section_path(resource, section)),
+            link_to("Delete", admin_page_page_section_path(resource, section), method: :delete, data: {confirm: "Are you sure?"})
+          ], " ")
+        end
+      end
+      div link_to("Add section", new_admin_page_page_section_path(resource))
     end
   end
 end

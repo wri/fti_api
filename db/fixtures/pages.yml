@@ -10,3 +10,7 @@ Page_2:
   slug: terms
   available_in_languages:
   - en
+
+Page_3:
+  id: 3
+  slug: about

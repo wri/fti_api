@@ -252,7 +252,6 @@ en:
         pages: 'Pages'
         partners: 'Partners'
         donors: 'Donors'
-        about_page: 'About page'
         help_page:
           help_page: 'Help page'
           faqs: 'Faqs'
@@ -1343,6 +1342,8 @@ en:
         password_complexity: "must contain at least one uppercase letter, one lowercase letter, and one digit"
         not_allowed_for_country: "is not allowed for this country"
         qc_in_progress: "QC must be in progress"
+        cannot_change_protected_slug: "cannot be changed, the portal links to this page"
+        cannot_delete_protected_page: "This page cannot be deleted, the portal links to it"
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
           has_one: "Cannot delete record because a dependent %{record} exists"

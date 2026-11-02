@@ -1,0 +1,22 @@
+
+PageSection_1:
+  id: 1
+  page_id: 3
+  position: 1
+
+PageSection_2:
+  id: 2
+  page_id: 3
+  position: 2
+
+PageSection_3:
+  id: 3
+  page_id: 3
+  position: 3
+  code: partners
+
+PageSection_4:
+  id: 4
+  page_id: 3
+  position: 4
+  code: donors

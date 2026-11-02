@@ -265,7 +265,6 @@ es:
         pages: 'Páginas'
         partners: 'Socios'
         donors: 'Donantes'
-        about_page: 'Página sobre nosotros'
         help_page:
           help_page: 'Página de ayuda'
           faqs: 'Preguntas frecuentes'
@@ -1351,6 +1350,8 @@ es:
         password_complexity: "debe contener al menos una letra mayúscula, una minúscula y un dígito"
         not_allowed_for_country: "no está permitido para este país"
         qc_in_progress: "QC debe estar en progreso"
+        cannot_change_protected_slug: "no se puede cambiar, el portal enlaza a esta página"
+        cannot_delete_protected_page: "Esta página no se puede eliminar, el portal enlaza a ella"
         record_invalid: "Error de validación: %{errors}"
         restrict_dependent_destroy:
           has_one: "No se puede eliminar el registro porque existe un %{record} dependiente"
