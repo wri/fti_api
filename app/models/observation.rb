@@ -73,7 +73,7 @@ class Observation < ApplicationRecord
     "Published (no comments)" => 7,
     "Published (not modified)" => 8,
     "Published (modified)" => 9
-  }
+  }, validate: true
   enum :location_accuracy, {
     "Estimated location" => 0, "GPS coordinates extracted from photo" => 1, "Accurate GPS coordinates" => 2
   }, validate: {allow_nil: true}
