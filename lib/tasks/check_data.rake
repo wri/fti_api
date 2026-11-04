@@ -32,9 +32,9 @@ namespace :check do
     end
   end
 
-  # FMU documents exist only for FMUs whose forest type is listed in the required document forest types
-  # (empty list means all types), the same rule FmuOperator#update_documents_list creates and destroys them by.
-  # Reports documents breaking that rule and documents the rule says should exist but do not.
+  # FMU documents exist only for the FMU's current operator and for FMUs whose forest type is listed in the
+  # required document forest types (empty list means all types), rules FmuOperator#update_documents_list creates
+  # and destroys them by. Reports documents breaking those rules and documents that should exist but do not.
   # VERBOSE=true adds paper trail hints about where a wrong document came from.
   task docs_forest_type_mismatch: :environment do
     mismatched = OperatorDocumentFmu
@@ -60,6 +60,23 @@ namespace :check do
         puts "======> Document versions: #{od.versions.count}"
         puts "======> FMU: #{fmu.id}, versions: #{fmu.versions.count}, any version with any of #{expected_forest_types} type: #{fmu_any_version_with_forest_type}"
       end
+    end
+
+    wrong_operator = OperatorDocumentFmu
+      .joins(:fmu)
+      .joins("LEFT JOIN fmu_operators ON fmu_operators.fmu_id = fmus.id AND fmu_operators.current AND fmu_operators.deleted_at IS NULL")
+      .where("fmu_operators.operator_id IS DISTINCT FROM operator_documents.operator_id")
+      .includes(fmu: :operator, operator: :country)
+      .order(:fmu_id, :id)
+      .to_a
+
+    puts
+    puts "== Documents for a wrong operator =="
+    wrong_operator.each do |od|
+      fmu = od.fmu
+      current_operator = fmu.operator ? "#{fmu.operator.name} (id: #{fmu.operator.id})" : "none"
+
+      puts "Document id: #{od.id} - status: #{od.status}, file: #{od.document_file_id.present?}, last updated at: #{od.updated_at}, operator: #{od.operator.name} (id: #{od.operator.id}), Country: #{od.operator.country&.name}, FMU: #{fmu.name} (id: #{fmu.id}) current operator: #{current_operator}"
     end
 
     puts
@@ -91,6 +108,7 @@ namespace :check do
     mismatched.group_by { it.fmu.forest_type }.each do |forest_type, documents|
       puts "  FMU forest type #{forest_type}: #{documents.size} documents, #{documents.map(&:fmu_id).uniq.size} FMUs"
     end
+    puts "Wrong operator: #{wrong_operator.size} documents, #{wrong_operator.map(&:fmu_id).uniq.size} FMUs"
     puts "Missing: #{missing_count}"
     puts "Without FMU, not checked: #{without_fmu.count} #{without_fmu.ids.inspect}"
   end
