@@ -54,11 +54,11 @@ namespace :check do
       puts "Document id: #{od.id} - status: #{od.status}, last updated at: #{od.updated_at}, operator: #{od.operator.name} (id: #{od.operator.id}), Country: #{od.operator.country&.name}, FMU: #{fmu.name} (id: #{fmu.id}) forest type: #{fmu.forest_type} but required document #{rod.id} is for forest types: #{expected_forest_types}"
 
       if ENV["VERBOSE"]
-        fmu_any_version_with_forest_type = rod.forest_types.any? { |ftype| fmu.versions.where_object(forest_type: Fmu.forest_types[ftype]).exists? }
-        rod_any_version_with_forest_type = rod.versions.any? { |v| v.reify&.applies_to_forest_type?(fmu.forest_type) }
+        # older versions store forest_type as the enum name, newer ones as the integer
+        fmu_versions_forest_types = fmu.versions.filter_map { |v| v.object&.dig("forest_type") }.map { it.is_a?(Integer) ? Fmu.forest_types.key(it) : it }
+        fmu_any_version_with_forest_type = rod.forest_types.intersect?(fmu_versions_forest_types)
         puts "======> Document versions: #{od.versions.count}"
         puts "======> FMU: #{fmu.id}, versions: #{fmu.versions.count}, any version with any of #{expected_forest_types} type: #{fmu_any_version_with_forest_type}"
-        puts "======> Required Document: #{rod.id}, versions: #{rod.versions.count}, any with #{fmu.forest_type} type: #{rod_any_version_with_forest_type}"
       end
     end
 
