@@ -847,6 +847,7 @@ DEPENDENCIES
   nokogiri
   oj
   oj_mimic_json
+  ostruct
   paper_trail
   parallel_tests
   paranoia

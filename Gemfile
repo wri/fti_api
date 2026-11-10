@@ -57,6 +57,7 @@ gem "oj_mimic_json"
 gem "rspec_api_documentation", github: "tsubik/rspec_api_documentation", branch: "fix/open-api-parameter-format"
 gem "rswag-api"
 gem "rswag-ui"
+gem "ostruct" # rswag-ui requires it but does not declare it (removed from default gems in Ruby 4.0)
 
 # Activejob
 gem "sidekiq"
