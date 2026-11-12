@@ -89,7 +89,7 @@ bin/dev
 
 ### REQUIREMENTS ###
 
-  - **Ruby version:** 4.0.5
+  - **Ruby version:** 4.0.9
   - **PostgreSQL 18** with **PostGIS 3.6**
 
 **Just execute the script file in `bin/setup`**
