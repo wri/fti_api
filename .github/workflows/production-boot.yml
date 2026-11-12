@@ -1,0 +1,20 @@
+name: Production Boot
+on:
+  push:
+    branches: [develop, master, staging]
+
+jobs:
+  production-boot:
+    name: Production Boot
+    runs-on: ubuntu-24.04
+    env:
+      RAILS_ENV: production
+      BUNDLE_WITHOUT: development:test
+      SECRET_KEY_BASE_DUMMY: 1
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: ./.github/actions/setup-ruby-env
+
+      - name: Precompile assets
+        run: bin/rails assets:precompile
