@@ -32,32 +32,85 @@ namespace :check do
     end
   end
 
+  # FMU documents exist only for the FMU's current operator and for FMUs whose forest type is listed in the
+  # required document forest types (empty list means all types), rules FmuOperator#update_documents_list creates
+  # and destroys them by. Reports documents breaking those rules and documents that should exist but do not.
+  # VERBOSE=true adds paper trail hints about where a wrong document came from.
   task docs_forest_type_mismatch: :environment do
-    mismatch_count = 0
+    mismatched = OperatorDocumentFmu
+      .joins(:fmu, :required_operator_document)
+      .where("cardinality(required_operator_documents.forest_types) > 0")
+      .where("NOT (fmus.forest_type = ANY (required_operator_documents.forest_types))")
+      .includes(:fmu, :required_operator_document, operator: :country)
+      .order("fmus.forest_type", :fmu_id, :id)
+      .to_a
 
-    OperatorDocumentFmu.includes(:operator, :required_operator_document).find_each do |od|
-      next if od.fmu.forest_type == "fmu"
-
+    puts "== Documents for a wrong forest type =="
+    mismatched.each do |od|
       fmu = od.fmu
       rod = od.required_operator_document
+      expected_forest_types = rod.forest_types.join(", ")
 
-      unless rod.applies_to_forest_type?(fmu.forest_type)
-        mismatch_count += 1
+      puts "Document id: #{od.id} - status: #{od.status}, last updated at: #{od.updated_at}, operator: #{od.operator.name} (id: #{od.operator.id}), Country: #{od.operator.country&.name}, FMU: #{fmu.name} (id: #{fmu.id}) forest type: #{fmu.forest_type} but required document #{rod.id} is for forest types: #{expected_forest_types}"
 
-        expected_forest_types = rod.forest_types.join(", ")
-
-        puts "Document id: #{od.id} - status: #{od.status}, last updated at: #{od.updated_at} versions: #{od.versions.count}, operator: #{od.operator.name} (id: #{od.operator.id}), Country: #{od.operator.country.name}, FMU forest type: #{fmu.forest_type} but this document is for forest types: #{expected_forest_types}"
-
-        if ENV["VERBOSE"]
-          fmu_any_version_with_forest_type = rod.forest_types.any? { |ftype| fmu.versions.where_object(forest_type: Fmu.forest_types[ftype]).exists? }
-          rod_any_version_with_forest_type = rod.versions.any? { |v| v.reify.applies_to_forest_type?(fmu.forest_type) }
-          puts "======> FMU: #{od.fmu.id}, versions: #{fmu.versions.count}, any version with any of #{expected_forest_types} type: #{fmu_any_version_with_forest_type}"
-          puts "======> Required Document: #{rod.id}, versions: #{rod.versions.count}, any with #{fmu.forest_type} type: #{rod_any_version_with_forest_type}"
-        end
+      if ENV["VERBOSE"]
+        # older versions store forest_type as the enum name, newer ones as the integer
+        fmu_versions_forest_types = fmu.versions.filter_map { |v| v.object&.dig("forest_type") }.map { it.is_a?(Integer) ? Fmu.forest_types.key(it) : it }
+        fmu_any_version_with_forest_type = rod.forest_types.intersect?(fmu_versions_forest_types)
+        puts "======> Document versions: #{od.versions.count}"
+        puts "======> FMU: #{fmu.id}, versions: #{fmu.versions.count}, any version with any of #{expected_forest_types} type: #{fmu_any_version_with_forest_type}"
       end
     end
 
-    puts "Mismatch count: #{mismatch_count}"
+    wrong_operator = OperatorDocumentFmu
+      .joins(:fmu)
+      .joins("LEFT JOIN fmu_operators ON fmu_operators.fmu_id = fmus.id AND fmu_operators.current AND fmu_operators.deleted_at IS NULL")
+      .where("fmu_operators.operator_id IS DISTINCT FROM operator_documents.operator_id")
+      .includes(fmu: :operator, operator: :country)
+      .order(:fmu_id, :id)
+      .to_a
+
+    puts
+    puts "== Documents for a wrong operator =="
+    wrong_operator.each do |od|
+      fmu = od.fmu
+      current_operator = fmu.operator ? "#{fmu.operator.name} (id: #{fmu.operator.id})" : "none"
+
+      puts "Document id: #{od.id} - status: #{od.status}, file: #{od.document_file_id.present?}, last updated at: #{od.updated_at}, operator: #{od.operator.name} (id: #{od.operator.id}), Country: #{od.operator.country&.name}, FMU: #{fmu.name} (id: #{fmu.id}) current operator: #{current_operator}"
+    end
+
+    puts
+    puts "== Missing documents =="
+    active_country_ids = Country.active.ids
+    required_documents = RequiredOperatorDocumentFmu.order(:id).group_by(&:country_id)
+    existing = OperatorDocumentFmu.pluck(:fmu_id, :operator_id, :required_operator_document_id).to_set
+    missing_count = 0
+
+    Fmu.joins(:operator).includes(:operator).where.not(operators: {fa_id: [nil, ""]}).order(:id).each do |fmu|
+      # FMUs in non-active countries use the generic required documents (country_id is null)
+      documents_country_id = active_country_ids.include?(fmu.country_id) ? fmu.country_id : nil
+
+      required_documents.fetch(documents_country_id, []).each do |rod|
+        next unless rod.applies_to_forest_type?(fmu.forest_type)
+        next if existing.include?([fmu.id, fmu.operator.id, rod.id])
+
+        missing_count += 1
+        puts "FMU: #{fmu.name} (id: #{fmu.id}) forest type: #{fmu.forest_type}, operator: #{fmu.operator.name} (id: #{fmu.operator.id}) has no document for required document #{rod.id} (forest types: #{rod.forest_types.join(", ").presence || "all"})"
+      end
+    end
+
+    without_fmu = OperatorDocumentFmu.where.not(fmu_id: Fmu.select(:id)).or(OperatorDocumentFmu.where(fmu_id: nil))
+
+    puts
+    puts "== Summary =="
+    puts "FMU documents: #{OperatorDocumentFmu.count}"
+    puts "Wrong forest type: #{mismatched.size}"
+    mismatched.group_by { it.fmu.forest_type }.each do |forest_type, documents|
+      puts "  FMU forest type #{forest_type}: #{documents.size} documents, #{documents.map(&:fmu_id).uniq.size} FMUs"
+    end
+    puts "Wrong operator: #{wrong_operator.size} documents, #{wrong_operator.map(&:fmu_id).uniq.size} FMUs"
+    puts "Missing: #{missing_count}"
+    puts "Without FMU, not checked: #{without_fmu.count} #{without_fmu.ids.inspect}"
   end
 
   task operator_approved: :environment do
