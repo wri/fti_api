@@ -206,6 +206,8 @@ CONF
 EOF
 
 setup_nginx = <<~EOF
+  sudo sed -i 's/^\\(\\s*\\)worker_connections [0-9]*;/\\1worker_connections 4096;/' /etc/nginx/nginx.conf;
+  grep -q '^worker_rlimit_nofile' /etc/nginx/nginx.conf || sudo sed -i '/^worker_processes/a worker_rlimit_nofile 8192;' /etc/nginx/nginx.conf;
   sudo rm -f /etc/nginx/sites-enabled/default;
   sudo ln -sf /etc/nginx/sites-available/otp.conf /etc/nginx/sites-enabled/otp.conf;
 EOF
