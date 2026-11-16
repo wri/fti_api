@@ -231,6 +231,16 @@ body.active_admin {
   input[type=text] {
     box-sizing: border-box;
   }
+
+  // date range preset filter, dates below the preset select
+  .date-range-preset-custom {
+    display: block;
+    margin-top: 8px;
+
+    &[hidden] {
+      display: none;
+    }
+  }
 }
 
 .ui-datepicker-header {

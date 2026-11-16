@@ -29,7 +29,7 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
   }
   filter :hidden
   filter :is_active
-  filter :date
+  filter :date, as: :date_range_preset
 
   dependent_filters do
     {
@@ -217,20 +217,14 @@ ActiveAdmin.register ObservationStatistic, as: "Observations Dashboard" do
   end
 
   controller do
+    include DateRangePreset
+
     skip_before_action :restore_search_filters
     skip_after_action :save_search_filters
-    before_action :set_default_filters
+    before_action -> { apply_date_range_preset(:date, default: DateRangePreset::LAST_YEAR) }
     before_action :set_paging
 
     helper_method :dashboard_rows
-
-    # a plain visit or clear filters starts with the last year, submitting the form with an empty date shows all history
-    def set_default_filters
-      return if params[:commit].present?
-
-      params[:q] ||= {}
-      params[:q][:date_gteq] = 1.year.ago.to_date if params.dig(:q, :date_gteq).blank?
-    end
 
     # config.per_page didn't work, but this does probably related to use of paginate_array? dunno
     def set_paging

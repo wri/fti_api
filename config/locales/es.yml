@@ -48,6 +48,10 @@ es:
         lteq_datetime: "Menor o igual a"
         from: "Desde"
         to: "Hasta"
+      date_presets:
+        last_year: "Últimos 12 meses"
+        all_time: "Todo el período"
+        custom: "Personalizado"
     scopes:
       all: "Todos"
       newly_created: "Recientemente creado"

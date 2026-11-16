@@ -60,6 +60,10 @@ fr:
         lteq_datetime: "Antérieur ou égal à"
         from: "De"
         to: "À"
+      date_presets:
+        last_year: "12 derniers mois"
+        all_time: "Toute la période"
+        custom: "Personnalisé"
     scopes:
       all: "Tous"
       newly_created: "Nouveaux"

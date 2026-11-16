@@ -49,6 +49,10 @@ en:
         lteq_datetime: "Lesser or equal to"
         from: "From"
         to: "To"
+      date_presets:
+        last_year: "Last 12 months"
+        all_time: "All time"
+        custom: "Custom"
     scopes:
       all: "All"
       newly_created: "Newly created"

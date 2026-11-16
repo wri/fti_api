@@ -47,23 +47,42 @@ RSpec.describe Admin::ObservationsDashboardsController, type: :controller do
     end
   end
 
-  describe "GET index default date filter" do
+  describe "GET index date range presets" do
+    let(:year_ago) { 1.year.ago.to_date.to_s }
+    let(:selected_preset) { response.parsed_body.at_css("#q_date_preset option[selected]")["value"] }
+
     before do
       travel_to 2.years.ago do
         create(:observation)
       end
     end
 
-    it "shows the last year on a plain visit" do
+    it "shows the last year by default" do
       get :index
 
-      expect(chart_dates(response.body)).to be_present.and all(be >= 1.year.ago.to_date.to_s)
+      expect(selected_preset).to eq("last_year")
+      expect(chart_dates(response.body)).to be_present.and all(be >= year_ago)
     end
 
-    it "shows all history when the filter form is submitted with an empty date" do
-      get :index, params: {commit: "Filter"}
+    it "shows all history for all time" do
+      get :index, params: {q: {date_preset: "all_time"}}
 
-      expect(chart_dates(response.body)).to include(be < 1.year.ago.to_date.to_s)
+      expect(selected_preset).to eq("all_time")
+      expect(chart_dates(response.body)).to include(be < year_ago)
+    end
+
+    it "uses the dates of a custom range" do
+      get :index, params: {q: {date_preset: "custom", date_gteq: 3.years.ago.to_date, date_lteq: 18.months.ago.to_date}}
+
+      expect(selected_preset).to eq("custom")
+      expect(chart_dates(response.body)).to be_present.and all(be <= 18.months.ago.to_date.to_s)
+    end
+
+    it "treats dates without a preset as a custom range" do
+      get :index, params: {q: {date_gteq: 3.years.ago.to_date}}
+
+      expect(selected_preset).to eq("custom")
+      expect(chart_dates(response.body)).to include(be < year_ago)
     end
   end
 

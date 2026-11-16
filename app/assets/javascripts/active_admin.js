@@ -14,6 +14,7 @@
 //= require pagination
 //= require visibility
 //= require dependent_filters
+//= require date_range_preset_filter
 //= require sentry
 //= require quality_controls
 
