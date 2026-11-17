@@ -62,7 +62,7 @@ RSpec.describe Fmu, type: :model do
       end
     end
 
-    describe "#update_geometry" do
+    describe "generated geometry" do
       it "sets same coordinates than the ones provided in geojson" do
         country = create(:country)
         operator = create(:operator, country: country, fa_id: "fa_id")

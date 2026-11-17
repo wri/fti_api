@@ -6,22 +6,22 @@ class ExtractFmuGeometries < ActiveRecord::Migration[8.0]
     create_table :fmu_geometries do |t|
       t.references :fmu, type: :integer, null: false, index: {unique: true}, foreign_key: {on_delete: :cascade}
       t.jsonb :geojson
-      t.geometry :geometry, limit: {srid: 0, type: "geometry"}
-      t.geometry :centroid, limit: {srid: 0, type: "geometry"}
+      t.virtual :geometry, type: :geometry, limit: {srid: 0, type: "geometry"}, as: "ST_GeomFromGeoJSON(geojson -> 'geometry')", stored: true
+      t.virtual :centroid, type: :geometry, limit: {srid: 0, type: "geometry"}, as: "ST_Centroid(ST_GeomFromGeoJSON(geojson -> 'geometry'))", stored: true
       t.jsonb :source_properties
       t.timestamps
     end
     add_index :fmu_geometries, :geometry, using: :gist
 
     execute <<~SQL
-      INSERT INTO fmu_geometries (fmu_id, geojson, geometry, centroid, source_properties, created_at, updated_at)
-      SELECT id, jsonb_set(geojson, '{properties}', '{}'), geometry, ST_Centroid(geometry),
+      INSERT INTO fmu_geometries (fmu_id, geojson, source_properties, created_at, updated_at)
+      SELECT id, jsonb_set(geojson, '{properties}', '{}'),
         CASE WHEN jsonb_typeof(geojson -> 'properties') = 'object'
           THEN NULLIF((geojson -> 'properties') - ARRAY[#{DERIVED_PROPERTY_KEYS.map { |k| "'#{k}'" }.join(", ")}], '{}'::jsonb)
         END,
         NOW(), NOW()
       FROM fmus
-      WHERE geojson IS NOT NULL OR geometry IS NOT NULL
+      WHERE geojson IS NOT NULL
     SQL
 
     change_table :fmus, bulk: true do |t|

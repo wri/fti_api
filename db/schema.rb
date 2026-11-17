@@ -208,8 +208,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_17_100000) do
   create_table "fmu_geometries", force: :cascade do |t|
     t.integer "fmu_id", null: false
     t.jsonb "geojson"
-    t.geometry "geometry", limit: {srid: 0, type: "geometry"}
-    t.geometry "centroid", limit: {srid: 0, type: "geometry"}
+    t.virtual "geometry", type: :geometry, limit: {srid: 0, type: "geometry"}, as: "st_geomfromgeojson((geojson -> 'geometry'::text))", stored: true
+    t.virtual "centroid", type: :geometry, limit: {srid: 0, type: "geometry"}, as: "st_centroid(st_geomfromgeojson((geojson -> 'geometry'::text)))", stored: true
     t.jsonb "source_properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

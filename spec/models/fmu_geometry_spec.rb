@@ -18,6 +18,14 @@ RSpec.describe FmuGeometry, type: :model, versioning: true do
     expect(fmu.geometry.coordinates).to eq(fmu.geojson.dig("geometry", "coordinates"))
   end
 
+  it "has the generated geometry and centroid in memory right after an update" do
+    fmu.geojson = moved_geojson
+    fmu.save!
+
+    expect(fmu.geometry.coordinates).to eq(moved_geojson.dig("geometry", "coordinates"))
+    expect([fmu.centroid.x, fmu.centroid.y]).to eq([10.5, 0.5])
+  end
+
   it "stores only the shape, keeping imported attributes apart from computed ones" do
     fmu.geojson = moved_geojson.merge("properties" => {"fmu_name" => "raw", "centroid" => {}, "num_ccf" => "005/11"}, "id" => 5)
     fmu.save!
