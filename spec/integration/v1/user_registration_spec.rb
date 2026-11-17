@@ -83,6 +83,32 @@ module V1
         expect(status).to eq(422)
       end
 
+      it "Returns error object when the user permissions_request is not a string" do
+        post "/register", params: {user: valid_user_params.merge(permissions_request: 6)}, as: :json
+
+        expect(status).to eq(422)
+      end
+
+      describe "Malformed payloads" do
+        it "Returns bad request when user is missing" do
+          post "/register", params: {email: "test@gmail.com", password: "Password123"}, as: :json
+
+          expect(status).to eq(400)
+        end
+
+        it "Returns bad request when user is an array" do
+          post "/register", params: {user: ["test@gmail.com"], pass: {test: 1}}, as: :json
+
+          expect(status).to eq(400)
+        end
+
+        it "Returns bad request when the body is a JSON array" do
+          post "/register", params: ["test@gmail.com", "123"], as: :json
+
+          expect(status).to eq(400)
+        end
+      end
+
       describe "Rate limiting" do
         def register(email)
           post "/register", params: {user: valid_user_params.merge(email: email)}
