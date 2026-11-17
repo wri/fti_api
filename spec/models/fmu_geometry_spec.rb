@@ -12,9 +12,30 @@ RSpec.describe FmuGeometry, type: :model, versioning: true do
   let!(:fmu) { create(:fmu, :geojson_no_props) }
   let(:fmu_geometry) { fmu.reload.fmu_geometry }
 
-  it "stores the geometry computed from the geojson" do
+  it "stores the geometry and centroid computed from the geojson" do
     expect(fmu_geometry.geometry).to be_present
+    expect(fmu_geometry.centroid).to be_present
     expect(fmu.geometry.coordinates).to eq(fmu.geojson.dig("geometry", "coordinates"))
+  end
+
+  it "stores only the shape, dropping any properties" do
+    fmu.geojson = moved_geojson.merge("properties" => {"fmu_name" => "raw", "num_ccf" => 1}, "id" => 5)
+    fmu.save!
+
+    expect(fmu_geometry.reload.geojson).to eq(moved_geojson)
+  end
+
+  it "parses a geojson string instead of storing it double-encoded" do
+    fmu.geojson = moved_geojson.to_json
+    fmu.save!
+
+    expect(fmu_geometry.reload.geojson).to eq(moved_geojson)
+  end
+
+  it "does not version a change that only touches properties" do
+    fmu.geojson = fmu.geojson.merge("properties" => {"fmu_name" => "other"})
+
+    expect { fmu.save! }.not_to change { fmu_geometry.versions.count }
   end
 
   it "versions geojson changes without the geometry column" do
@@ -27,7 +48,7 @@ RSpec.describe FmuGeometry, type: :model, versioning: true do
     expect(versions.map(&:event)).to eq(%w[create update])
     expect(versions.last.object["geojson"]).to eq(original)
     expect(versions.last.object_changes["geojson"].last).to eq(moved_geojson)
-    expect(versions.map(&:object).compact + versions.map(&:object_changes)).to all(satisfy { |h| !h.key?("geometry") })
+    expect(versions.map(&:object).compact + versions.map(&:object_changes)).to all(satisfy { |h| !h.key?("geometry") && !h.key?("centroid") })
     expect(fmu.versions.flat_map { |v| [v.object, v.object_changes] }.compact).to all(satisfy { |h| !h.key?("geojson") })
   end
 
@@ -38,11 +59,6 @@ RSpec.describe FmuGeometry, type: :model, versioning: true do
     fmu.save!
 
     expect(fmu.reload.updated_at).to be > 1.minute.ago
-  end
-
-  it "does not version geojson properties refreshes" do
-    expect { fmu.update_geojson_properties }.not_to change { fmu_geometry.versions.count }
-    expect(fmu_geometry.reload.properties["fmu_name"]).to eq(fmu.name)
   end
 
   it "keeps the geometry of a soft-deleted fmu" do

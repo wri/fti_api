@@ -48,76 +48,16 @@ RSpec.describe Fmu, type: :model do
       end
 
       context "when geojson is present" do
-        it "updates geometry and centroid" do
+        it "updates geometry and centroid, storing only the shape" do
           country = create(:country)
           fmu = create(:fmu, :geojson_no_props, country: country)
           fmu.reload
 
           expect(fmu.geometry).not_to be_nil
           expect(fmu.geojson["geometry"]["coordinates"]).to eql(fmu.geometry.coordinates)
-          expect(fmu.geojson["properties"]["centroid"]).to eql({
-            "type" => "Point",
-            "coordinates" => [
-              18.777923313,
-              50.50818234
-            ]
-          })
-        end
-
-        it "fill geojson with properties from fmu" do
-          country = create(:country)
-          operator = create(:operator, country: country, fa_id: "fa_id")
-          fmu = create(:fmu_geojson, country: country)
-          create(:fmu_operator, fmu: fmu, operator: operator)
-          fmu.reload
-          fmu.save
-
-          expect(fmu.geojson["properties"]["fmu_name"]).to eql fmu.name
-          expect(fmu.geojson["properties"]["company_na"]).to eql fmu.operator.name
-          expect(fmu.geojson["properties"]["operator_id"]).to eql fmu.operator.id
-          expect(fmu.geojson["properties"]["certification_fsc"]).to eql fmu.certification_fsc
-          expect(fmu.geojson["properties"]["certification_pefc"]).to eql fmu.certification_pefc
-          expect(fmu.geojson["properties"]["certification_olb"]).to eql fmu.certification_olb
-          expect(fmu.geojson["properties"]["certification_pafc"]).to eql fmu.certification_pafc
-          expect(fmu.geojson["properties"]["certification_pbn"]).to eql fmu.certification_pbn
-          expect(fmu.geojson["properties"]["certification_fsc_cw"]).to eql fmu.certification_fsc_cw
-          expect(fmu.geojson["properties"]["certification_tlv"]).to eql fmu.certification_tlv
-          expect(fmu.geojson["properties"]["certification_ls"]).to eql fmu.certification_ls
-        end
-      end
-
-      context "when a new observation is added" do
-        it "number of observations should be in the geojson" do
-          country = create(:country)
-          operator = create(:operator, country: country, fa_id: "fa_id")
-          fmu = create(:fmu_geojson, operator: operator, country: country)
-          fmu.reload
-
-          expect(fmu.geojson["properties"]["observations"]).to eql 0
-
-          observation = create(:observation, operator: operator, fmu: fmu)
-          observation.save
-          fmu.reload
-
-          expect(fmu.geojson["properties"]["observations"]).to eql 1
-        end
-      end
-
-      context "when an observation is removed" do
-        it "number of observations should be in the geojson" do
-          country = create(:country)
-          operator = create(:operator, country: country, fa_id: "fa_id")
-          fmu = create(:fmu_geojson, operator: operator, country: country)
-          observation = create(:observation, operator: operator, fmu: fmu)
-          observation.save
-
-          fmu.reload
-          expect(fmu.geojson["properties"]["observations"]).to eql 1
-
-          observation.destroy
-          fmu.reload
-
-          expect(fmu.geojson["properties"]["observations"]).to eql 0
+          expect(fmu.geojson["properties"]).to eq({})
+          expect(fmu.centroid.x).to be_within(1e-6).of(18.777923313)
+          expect(fmu.centroid.y).to be_within(1e-6).of(50.50818234)
         end
       end
     end

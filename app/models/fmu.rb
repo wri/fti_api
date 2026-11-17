@@ -51,10 +51,9 @@ class Fmu < ApplicationRecord
   validates :forest_type, presence: true
   validates :geojson, geojson: true, if: :geojson_changed?
 
-  delegate :geometry, :bbox, :centroid, :properties, to: :fmu_geometry, allow_nil: true
+  delegate :geometry, :bbox, :centroid, to: :fmu_geometry, allow_nil: true
 
   after_update :sync_operator_documents, if: :saved_change_to_forest_type?
-  after_save :update_geojson_properties
 
   # TODO Redo all of those
   scope :filter_by_countries, ->(country_ids) { where(country_id: country_ids.split(",")) }
@@ -97,35 +96,8 @@ class Fmu < ApplicationRecord
     fmu_geometry.present? && fmu_geometry.geojson_changed?
   end
 
-  def update_geojson_properties
-    fmu_type_label = begin
-      ForestType::TYPES[forest_type.to_sym][:geojson_label]
-    rescue
-      ""
-    end
-    new_properties = {
-      "id" => id,
-      "fmu_name" => name,
-      "iso3_fmu" => country&.iso,
-      "company_na" => operator&.name,
-      "operator_id" => operator&.id,
-      "certification_fsc" => certification_fsc,
-      "certification_pefc" => certification_pefc,
-      "certification_olb" => certification_olb,
-      "certification_pafc" => certification_pafc,
-      "certification_fsc_cw" => certification_fsc_cw,
-      "certification_pbn" => certification_pbn,
-      "certification_tlv" => certification_tlv,
-      "certification_ls" => certification_ls,
-      "observations" => active_observations.reload.uniq.count,
-      "forest_type" => forest_type,
-      "fmu_type_label" => fmu_type_label # old one deprecated, to be removed in the future
-    }
-    # we want to omit tracking those changes in properties in the paper trail
-    # we only will track changes to geojson->geometry via upload
-    FmuGeometry.where(fmu_id: id).where.not(geojson: nil).update_all(
-      ["geojson = jsonb_set(geojson, '{properties}', COALESCE(geojson->'properties', '{}') || ?::jsonb, true)", new_properties.to_json]
-    )
+  def properties
+    FmuProperties.for([id])[id]
   end
 
   def cache_key

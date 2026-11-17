@@ -31,7 +31,6 @@ class FmuOperator < ApplicationRecord
   validate :non_colliding_dates
 
   after_save :update_documents_list
-  after_save :update_fmu_geojson
 
   # Sets the start date as today, if none is provided
   def set_current_start_date
@@ -142,15 +141,5 @@ class FmuOperator < ApplicationRecord
         Rails.logger.info "Recalculated scores for operator #{operator.id}"
       end
     end
-  end
-
-  private
-
-  def update_fmu_geojson
-    return unless current
-    return if end_date && (end_date < Time.zone.today)
-    return if start_date > Time.zone.today
-
-    fmu.reload.save
   end
 end

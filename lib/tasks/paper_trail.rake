@@ -584,7 +584,6 @@ namespace :paper_trail do
     end
 
     connection = ActiveRecord::Base.connection
-    parse = ->(value) { value.is_a?(String) ? JSON.parse(value) : value }
     geometry_ids = FmuGeometry.pluck(:fmu_id, :id).to_h
     stats = Hash.new(0)
 
@@ -598,8 +597,8 @@ namespace :paper_trail do
         processed += 1
         paper_trail_print_progress(processed, total)
 
-        old_geojson, new_geojson = version.object_changes["geojson"].map(&parse)
-        if old_geojson&.dig("geometry") == new_geojson&.dig("geometry")
+        old_geojson, new_geojson = version.object_changes["geojson"].map { |value| FmuGeometry.normalize_geojson(value) }
+        if old_geojson == new_geojson
           stats[:properties_only] += 1
           next
         end

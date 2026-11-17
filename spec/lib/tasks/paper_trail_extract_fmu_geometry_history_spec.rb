@@ -17,6 +17,8 @@ describe "paper_trail:extract_fmu_geometry_history" do
     }
   end
 
+  def shape(lng) = feature(lng).merge("properties" => {})
+
   def legacy_version(item_id:, event: "update", object: nil, object_changes: nil, item_type: "Fmu", created_at: Time.zone.parse("2024-01-01"))
     PaperTrail::Version.create!(
       item_type: item_type, item_id: item_id, event: event, whodunnit: "42",
@@ -104,10 +106,10 @@ describe "paper_trail:extract_fmu_geometry_history" do
       expect(versions.map(&:created_at)).to eq([created, geometry_only, mixed].map(&:created_at))
 
       expect(versions.first.object).to be_nil
-      expect(versions.first.object_changes).to eq("fmu_id" => [nil, fmu.id], "geojson" => [nil, feature(13.0)])
-      expect(versions.second.object).to eq("id" => fmu_geometry.id, "fmu_id" => fmu.id, "geojson" => feature(13.0))
-      expect(versions.second.object_changes).to eq("geojson" => [feature(13.0), feature(14.0)])
-      expect(versions.third.object_changes).to eq("geojson" => [feature(14.0), feature(15.0, name: "B")])
+      expect(versions.first.object_changes).to eq("fmu_id" => [nil, fmu.id], "geojson" => [nil, shape(13.0)])
+      expect(versions.second.object).to eq("id" => fmu_geometry.id, "fmu_id" => fmu.id, "geojson" => shape(13.0))
+      expect(versions.second.object_changes).to eq("geojson" => [shape(13.0), shape(14.0)])
+      expect(versions.third.object_changes).to eq("geojson" => [shape(14.0), shape(15.0)])
     end
 
     it "deletes geojson-only Fmu versions and strips geojson and geometry from the rest" do
@@ -127,7 +129,7 @@ describe "paper_trail:extract_fmu_geometry_history" do
       expect { run_task }.to output.to_stdout
 
       reified = PaperTrail::Version.where(item_type: "FmuGeometry").order(:created_at).second.reify
-      expect(reified.geojson).to eq(feature(13.0))
+      expect(reified.geojson).to eq(shape(13.0))
     end
 
     it "does nothing when run again" do

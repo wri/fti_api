@@ -2113,48 +2113,7 @@ FmuGeometry_12:
             - 0.553035
           - - 25.880422
             - 0.550784
-    properties:
-      id: 12
-      num_ccf: 047/11
-      centroid:
-        type: Point
-        coordinates:
-        - 25.695359028
-        - 0.269268543
-      end_date: '2036-10-23T00:00:00.000Z'
-      fmu_name: 047/11
-      fmu_type:
-      iso3_fmu: COD
-      sawmills:
-      open_year:
-      capital_or: Suisse + Etat Congolais/Nordsud Timber
-      cartodb_id: 57
-      ccf_status: Signé
-      certific_1:
-      certific_2:
-      certific_3:
-      certificat:
-      close_year:
-      company_na: CFT
-      last_updat:
-      m_plan_sta: validé
-      management:
-      start_date: 24/10/2011
-      validation:
-      forest_type: fmu
-      operator_id: 197
-      observations: 3
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc: false
-      certification_vlo: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_49:
   id: 49
@@ -5370,48 +5329,7 @@ FmuGeometry_49:
             - 1.343616
           - - 25.965556
             - 1.344455
-    properties:
-      id: 49
-      num_ccf: 003/11
-      centroid:
-        type: Point
-        coordinates:
-        - 25.811743953
-        - 0.762962245
-      end_date: '2036-08-03T00:00:00.000Z'
-      fmu_name: 005/18
-      fmu_type:
-      iso3_fmu: COD
-      sawmills:
-      open_year:
-      capital_or: Italien/Feretti
-      cartodb_id: 53
-      ccf_status: Signé
-      certific_1:
-      certific_2:
-      certific_3:
-      certificat:
-      close_year:
-      company_na: CFT
-      last_updat:
-      m_plan_sta: validé
-      management:
-      start_date: 04/08/2011
-      validation:
-      forest_type: fmu
-      operator_id: 197
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc: false
-      certification_vlo: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_50:
   id: 50
@@ -7067,68 +6985,7 @@ FmuGeometry_50:
             - 0.503175
           - - 25.185828
             - 0.502797
-    properties:
-      id: 50
-      centroid:
-        type: Point
-        coordinates:
-        - 25.309282884
-        - 0.232798098
-      fmu_name: 046/11
-      iso3_fmu: COD
-      company_na: Outdoor furnitures
-      properties:
-        id: 50
-        num_ccf: 046/11
-        centroid:
-          type: Point
-          coordinates:
-          - 25.3092828837085
-          - 0.232798098454755
-        end_date: '2036-10-23T00:00:00.000Z'
-        fmu_name: 046/11
-        fmu_type:
-        iso3_fmu: COD
-        sawmills:
-        open_year:
-        capital_or: Suisse/Nordsud Timber
-        cartodb_id: 55
-        ccf_status: Signé
-        certific_1:
-        certific_2:
-        certific_3:
-        certificat:
-        close_year:
-        company_na: CFT
-        last_updat:
-        m_plan_sta: validé
-        management:
-        start_date: 24/10/2011
-        validation:
-        operator_id: 197
-        observations: 0
-        fmu_type_label: ''
-        certification_ls: true
-        certification_fsc: false
-        certification_olb: false
-        certification_tlv: false
-        certification_vlc: false
-        certification_vlo: false
-        certification_pafc: false
-        certification_pefc: false
-        certification_tltv: false
-        certification_fsc_cw: false
-      forest_type: fmu
-      operator_id: 100271
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: true
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_53:
   id: 53
@@ -22224,27 +22081,7 @@ FmuGeometry_53:
           - 2.440207532000045
         - - 17.45174573500003
           - 2.437208131000034
-    properties:
-      id: 53
-      centroid:
-        type: Point
-        coordinates:
-        - 17.027458356
-        - 2.169885902
-      fmu_name: Loundoungou-toukoulaka
-      iso3_fmu: COG
-      company_na: CIB
-      forest_type: fmu
-      operator_id: 151
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: true
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_54:
   id: 54
@@ -38358,27 +38195,7 @@ FmuGeometry_54:
           - 2.2
         - - 16.725853228000062
           - 2.2
-    properties:
-      id: 54
-      centroid:
-        type: Point
-        coordinates:
-        - 16.390161086
-        - 1.999736632
-      fmu_name: Kabo
-      iso3_fmu: COG
-      company_na: CIB
-      forest_type: fmu
-      operator_id: 151
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: true
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_55:
   id: 55
@@ -49154,27 +48971,7 @@ FmuGeometry_55:
           - 1.096760393000068
         - - 16.75002958400006
           - 1.088090761000046
-    properties:
-      id: 55
-      centroid:
-        type: Point
-        coordinates:
-        - 16.524647589
-        - 1.303662526
-      fmu_name: Pokola
-      iso3_fmu: COG
-      company_na: CIB
-      forest_type: fmu
-      operator_id: 151
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: true
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_56:
   id: 56
@@ -64702,27 +64499,7 @@ FmuGeometry_56:
             - 1.572868079000159
           - - 15.741060656000059
             - 1.575739529000032
-    properties:
-      id: 56
-      centroid:
-        type: Point
-        coordinates:
-        - 15.884108858
-        - 1.035403764
-      fmu_name: Ngombe
-      iso3_fmu: COG
-      company_na: IFO / Interholco
-      forest_type: fmu
-      operator_id: 161
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: true
-      certification_fsc: true
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_68:
   id: 68
@@ -80578,27 +80355,7 @@ FmuGeometry_68:
           - 1.787385890000053
         - - 15.87609838800006
           - 1.787141942000062
-    properties:
-      id: 68
-      centroid:
-        type: Point
-        coordinates:
-        - 15.227031364
-        - 1.772872348
-      fmu_name: Tala-tala
-      iso3_fmu: COG
-      company_na: SIFCO
-      forest_type: fmu
-      operator_id: 172
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_83:
   id: 83
@@ -81228,27 +80985,7 @@ FmuGeometry_83:
           - -4.366073082999947
         - - 12.338080479000041
           - -4.368817122999928
-    properties:
-      id: 83
-      centroid:
-        type: Point
-        coordinates:
-        - 12.289935805
-        - -4.384615465
-      fmu_name: Doumanga
-      iso3_fmu: COG
-      company_na: AFRIWOOD INDUSTRIES
-      forest_type: fmu
-      operator_id: 145
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_84:
   id: 84
@@ -97950,27 +97687,7 @@ FmuGeometry_84:
           - -3.774533044999941
         - - 11.89356815800005
           - -3.774614241999927
-    properties:
-      id: 84
-      centroid:
-        type: Point
-        coordinates:
-        - 11.928910282
-        - -3.998493751
-      fmu_name: Nkola
-      iso3_fmu: COG
-      company_na: AFRIWOOD INDUSTRIES
-      forest_type: fmu
-      operator_id: 145
-      observations: 8
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_105:
   id: 105
@@ -114310,27 +114027,7 @@ FmuGeometry_105:
           - 3.618051366000032
         - - 17.367341255000042
           - 3.620594420000032
-    properties:
-      id: 105
-      centroid:
-        type: Point
-        coordinates:
-        - 16.990688758
-        - 3.276738266
-      fmu_name: Mokabi dzanga
-      iso3_fmu: COG
-      company_na: MOKABI SA
-      forest_type: fmu
-      operator_id: 165
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: true
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_107:
   id: 107
@@ -116748,27 +116445,7 @@ FmuGeometry_107:
           - -4.732118870999955
         - - 12.145156821000057
           - -4.732666076999976
-    properties:
-      id: 107
-      centroid:
-        type: Point
-        coordinates:
-        - 12.110763505
-        - -4.828439081
-      fmu_name: Cayo
-      iso3_fmu: COG
-      company_na: AFRIWOOD INDUSTRIES
-      forest_type: fmu
-      operator_id: 145
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_109:
   id: 109
@@ -133096,27 +132773,7 @@ FmuGeometry_109:
           - 3.200934004000032
         - - 17.657679717000065
           - 3.201025081000068
-    properties:
-      id: 109
-      centroid:
-        type: Point
-        coordinates:
-        - 17.860344252
-        - 2.920158711
-      fmu_name: Mimbeli ibenga
-      iso3_fmu: COG
-      company_na: CIB
-      forest_type: fmu
-      operator_id: 151
-      observations: 0
-      fmu_type_label: ''
-      certification_ls: false
-      certification_fsc: true
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11496:
   id: 11496
@@ -134296,48 +133953,7 @@ FmuGeometry_11496:
           - 4.71610459200002
         - - 10.494134965
           - 4.717067783
-    properties:
-      id: 11496
-      type_: 4110100
-      rfa_ha: 2650.0
-      centroid:
-        type: Point
-        coordinates:
-        - 10.484909411
-        - 4.647114083
-      fmu_name: 00-004
-      fmu_type: ufa
-      globalid: "{2AD3916F-8EE6-4E5F-996B-99DD769CD371}"
-      iso3_fmu: CMR
-      objectid: 926
-      desc_type: UFA
-      nom_foret: 00-004
-      company_na: SIENCAM
-      date_class: 1313107200000.0
-      nom_conces: '1029'
-      sup_adm_ha: 94917
-      sup_sig_ha: 94627.0
-      forest_type: ufa
-      operator_id: 10623
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.077132425942214
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 1.57876488956753
-      certification_fsc: false
-      certification_olb: true
-      certification_tlv: false
-      certification_vlc: false
-      certification_vlo: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11499:
   id: 11499
@@ -141723,48 +141339,7 @@ FmuGeometry_11499:
           - 5.349678799
         - - 9.16918672399999
           - 5.349717032
-    properties:
-      id: 11499
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 9.22175703
-        - 5.507011307
-      fmu_name: 11-001
-      fmu_type: ufa
-      globalid: "{C2C47742-2DF4-41CC-A67F-DD7491CF4A52}"
-      iso3_fmu: CMR
-      objectid: 778
-      desc_type: UFA
-      nom_foret: 11-001
-      company_na: SIENCAM
-      date_class: 1152403200000.0
-      nom_conces: '1086'
-      sup_adm_ha: 55580
-      sup_sig_ha: 55109.0
-      forest_type: ufa
-      operator_id: 10623
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0450083777984499
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 1.76504979354595
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc: false
-      certification_vlo: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11502:
   id: 11502
@@ -142406,48 +141981,7 @@ FmuGeometry_11502:
           - 5.376567728
         - - 12.052740822
           - 5.38172666299999
-    properties:
-      id: 11502
-      type_: 4110100
-      rfa_ha: 0.0
-      centroid:
-        type: Point
-        coordinates:
-        - 12.084281663
-        - 5.276228525
-      fmu_name: '08-009'
-      fmu_type: ufa
-      globalid: "{ACC7A70A-62E4-44B8-AF2A-1B1FA9F58D6F}"
-      iso3_fmu: CMR
-      objectid: 913
-      desc_type: UFA
-      nom_foret: '08-009'
-      company_na:
-      date_class: 1109635200000.0
-      nom_conces: '1031'
-      sup_adm_ha: 49640
-      sup_sig_ha: 48829.0
-      forest_type: ufa
-      operator_id:
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0397622124102312
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 0.864834489078773
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_vlc:
-      certification_vlo:
-      certification_pafc:
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_11521:
   id: 11521
@@ -144675,48 +144209,7 @@ FmuGeometry_11521:
             - 5.501103408
           - - 11.274922477
             - 5.50087791099998
-    properties:
-      id: 11521
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 11.284126525
-        - 5.613499941
-      fmu_name: '08-003'
-      fmu_type: ufa
-      globalid: "{963162AA-3245-43D4-B76F-E2E332C6C121}"
-      iso3_fmu: CMR
-      objectid: 800
-      desc_type: UFA
-      nom_foret: '08-003'
-      company_na:
-      date_class: 1109635200000.0
-      nom_conces: '1020'
-      sup_adm_ha: 45210
-      sup_sig_ha: 46292.0
-      forest_type: ufa
-      operator_id:
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0377548803250918
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 1.3302200873512
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_vlc:
-      certification_vlo:
-      certification_pafc:
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_11523:
   id: 11523
@@ -146402,48 +145895,7 @@ FmuGeometry_11523:
           - 5.05821747200002
         - - 11.123758394
           - 5.05687472400001
-    properties:
-      id: 11523
-      type_: 4110100
-      rfa_ha: 0.0
-      centroid:
-        type: Point
-        coordinates:
-        - 11.161667312
-        - 5.248451595
-      fmu_name: '08-005'
-      fmu_type: ufa
-      globalid: "{C691F8CA-70BC-46E9-B37C-9A82EC1AD556}"
-      iso3_fmu: CMR
-      objectid: 1753
-      desc_type: UFA
-      nom_foret: '08-005'
-      company_na:
-      date_class: 1109635200000.0
-      nom_conces: '1077'
-      sup_adm_ha: 36340
-      sup_sig_ha: 36302.0
-      forest_type: ufa
-      operator_id:
-      statu_class: classe
-      created_date: 2147483647
-      created_user: WRI
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.029594262662317
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 1.0152365443672
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_vlc:
-      certification_vlo:
-      certification_pafc:
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_11569:
   id: 11569
@@ -149841,48 +149293,7 @@ FmuGeometry_11569:
           - 3.24377904
         - - 15.360432607
           - 3.243808263
-    properties:
-      id: 11569
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 15.297743696
-        - 3.11802979
-      fmu_name: 10-003
-      fmu_type: ufa
-      globalid: "{7A0FECFB-0263-43E0-9DCF-428A92B05305}"
-      iso3_fmu: CMR
-      objectid: 1751
-      desc_type: UFA
-      nom_foret: 10-003
-      company_na: CFC
-      date_class: 1106697600000.0
-      nom_conces: '1025'
-      sup_adm_ha: 48830
-      sup_sig_ha: 49076.0
-      forest_type: ufa
-      operator_id: 10615
-      statu_class: classe
-      created_date: 2147483647
-      created_user: KENDY
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0399582816691207
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 1.00546850248735
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc:
-      certification_vlo:
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11579:
   id: 11579
@@ -150228,48 +149639,7 @@ FmuGeometry_11579:
           - 2.47872789299998
         - - 13.134333592
           - 2.51453222200001
-    properties:
-      id: 11579
-      type_: 4110100
-      rfa_ha: 0.0
-      centroid:
-        type: Point
-        coordinates:
-        - 13.100566981
-        - 2.462602763
-      fmu_name: '09-005A'
-      fmu_type: ufa
-      globalid: "{DA074629-50B0-40E7-9708-BCABB64B7A8A}"
-      iso3_fmu: CMR
-      objectid: 925
-      desc_type: UFA
-      nom_foret: '09-005A'
-      company_na: LOREMA
-      date_class: 969235200000.0
-      nom_conces: '1032'
-      sup_adm_ha: 0
-      sup_sig_ha: 10423.0
-      forest_type: ufa
-      operator_id: 10637
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.00847266254497893
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 0.487911414934503
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_vlc:
-      certification_vlo:
-      certification_pafc:
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_11602:
   id: 11602
@@ -153887,48 +153257,7 @@ FmuGeometry_11602:
           - 3.29529722699999
         - - 15.148520191
           - 3.29561186699999
-    properties:
-      id: 11602
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 15.14836202
-        - 3.155652864
-      fmu_name: 10-002
-      fmu_type: ufa
-      globalid: "{86ED6719-BBCE-4732-984C-EF29956E7134}"
-      iso3_fmu: CMR
-      objectid: 887
-      desc_type: UFA
-      nom_foret: 10-002
-      company_na: CFC
-      date_class: 1106697600000.0
-      nom_conces: '1025'
-      sup_adm_ha: 22784
-      sup_sig_ha: 22743.0
-      forest_type: ufa
-      operator_id: 10615
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0185182146112081
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 0.920688843571645
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc:
-      certification_vlo:
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11604:
   id: 11604
@@ -158174,48 +157503,7 @@ FmuGeometry_11604:
           - 3.40718026299999
         - - 15.518989764
           - 3.42815268599998
-    properties:
-      id: 11604
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 15.492743619
-        - 3.27322439
-      fmu_name: 10-004
-      fmu_type: ufa
-      globalid: "{E532817C-C515-4376-8BC4-C4B102ED426F}"
-      iso3_fmu: CMR
-      objectid: 881
-      desc_type: UFA
-      nom_foret: 10-004
-      company_na: CFC
-      date_class: 1106697600000.0
-      nom_conces: '1025'
-      sup_adm_ha: 52473
-      sup_sig_ha: 52647.0
-      forest_type: ufa
-      operator_id: 10615
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.042866899551421
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 0.950347358965914
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc:
-      certification_vlo:
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11617:
   id: 11617
@@ -160307,48 +159595,7 @@ FmuGeometry_11617:
           - 2.675275425
         - - 15.597540647
           - 2.67542416700002
-    properties:
-      id: 11617
-      type_: 4110100
-      rfa_ha: 2000.0
-      centroid:
-        type: Point
-        coordinates:
-        - 15.593222899
-        - 2.559410853
-      fmu_name: 10-011
-      fmu_type: ufa
-      globalid: "{CE9B41AA-199E-4A5E-9136-7E3E946B6AB6}"
-      iso3_fmu: CMR
-      objectid: 858
-      desc_type: UFA
-      nom_foret: 10-011
-      company_na: SAB
-      date_class: 1106697600000.0
-      nom_conces: '1013'
-      sup_adm_ha: 48554
-      sup_sig_ha: 48264.0
-      forest_type: ufa
-      operator_id: 10604
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0392893983494483
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 1.15825627295701
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc:
-      certification_vlo:
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11618:
   id: 11618
@@ -165884,48 +165131,7 @@ FmuGeometry_11618:
             - 2.35708094300003
           - - 13.259061196
             - 2.357359008
-    properties:
-      id: 11618
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 13.095652525
-        - 2.391020247
-      fmu_name: '09-003'
-      fmu_type: ufa
-      globalid: "{0AB517E4-E323-4128-A022-AB0EE967AD36}"
-      iso3_fmu: CMR
-      objectid: 857
-      desc_type: UFA
-      nom_foret: '09-003'
-      company_na: LOREMA
-      date_class: 969235200000.0
-      nom_conces: '1032'
-      sup_adm_ha: 183350
-      sup_sig_ha: 108667.0
-      forest_type: ufa
-      operator_id: 10637
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0883291473814157
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 2.08965851006195
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_vlc:
-      certification_vlo:
-      certification_pafc:
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_11621:
   id: 11621
@@ -171603,27 +170809,7 @@ FmuGeometry_11621:
           - 3.170231005
         - - 15.502842724
           - 3.17022672500002
-    properties:
-      id: 11621
-      centroid:
-        type: Point
-        coordinates:
-        - 15.577539185
-        - 2.946520468
-      fmu_name: 10-007
-      iso3_fmu: CMR
-      company_na: SEBC
-      forest_type: ufa
-      operator_id: 10589
-      observations: 0
-      fmu_type_label: ufa
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11634:
   id: 11634
@@ -173407,48 +172593,7 @@ FmuGeometry_11634:
           - 2.57223301
         - - 12.842637227
           - 2.58114417799999
-    properties:
-      id: 11634
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 12.855552104
-        - 2.516295457
-      fmu_name: '09-004A'
-      fmu_type: ufa
-      globalid: "{4350C455-4A82-499C-A74B-06659FB52C34}"
-      iso3_fmu: CMR
-      objectid: 819
-      desc_type: UFA
-      nom_foret: '09-004A'
-      company_na: LOREMA
-      date_class: 969235200000.0
-      nom_conces: '1032'
-      sup_adm_ha: 0
-      sup_sig_ha: 20784.0
-      forest_type: ufa
-      operator_id: 10637
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0168905738141221
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 0.628912120220715
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_vlc:
-      certification_vlo:
-      certification_pafc:
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_11660:
   id: 11660
@@ -176876,48 +176021,7 @@ FmuGeometry_11660:
           - 3.44990900499999
         - - 15.263893201
           - 3.45082655200002
-    properties:
-      id: 11660
-      type_: 4110100
-      rfa_ha: 1500.0
-      centroid:
-        type: Point
-        coordinates:
-        - 15.266426619
-        - 3.324132821
-      fmu_name: 10-001
-      fmu_type: ufa
-      globalid: "{6E008FE3-EE3C-4073-B834-264B0CAF9ED8}"
-      iso3_fmu: CMR
-      objectid: 767
-      desc_type: UFA
-      nom_foret: 10-001
-      company_na: CFC
-      date_class: 1106697600000.0
-      nom_conces: '1025'
-      sup_adm_ha: 69018
-      sup_sig_ha: 69612.0
-      forest_type: ufa
-      operator_id: 10615
-      statu_class: classe
-      created_date: 2147483647
-      created_user: SHEVA
-      observations: 0
-      fmu_type_label: ufa
-      st_area(shape): 0.0566939442731758
-      certification_ls: false
-      last_edited_date: 2147483647
-      last_edited_user: CARTO
-      st_length(shape): 1.16912392234139
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_vlc:
-      certification_vlo:
-      certification_pafc: false
-      certification_pefc: false
-      certification_tltv:
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_11740:
   id: 11740
@@ -176937,63 +176041,7 @@ FmuGeometry_11740:
           - 3.47623162399998
         - - 15.23693734
           - 3.49528672500003
-    properties:
-      id: 11740
-      centroid:
-        type: Point
-        coordinates:
-        - 15.268416566
-        - 3.471530154
-      fmu_name: '1001311'
-      iso3_fmu: CMR
-      company_na:
-      properties:
-        id: 11740
-        type_: 4110510
-        nom_vc: '1001311'
-        rfa_ha: 65500.0
-        fmu_name: '1001311'
-        fmu_type: ventes_de_coupe
-        globalid: "{7B217AAE-0DB4-425C-89FF-21DEB9AC6DBB}"
-        iso3_fmu: CMR
-        objectid: 4187
-        date_attr: 1504656000000.0
-        date_expr: 1599350400000.0
-        desc_type: Vente de coupe
-        statut_vc: active
-        attributai: CFC
-        company_na: CFC
-        sup_adm_ha: 2500.0
-        operator_id: 10615
-        created_date: 2147483647
-        created_user: CARTO
-        observations: 0
-        fmu_type_label: ventes_de_coupe
-        st_area(shape): 0.00203557848295076
-        certification_ls: false
-        last_edited_date: 2147483647
-        last_edited_user: CARTO
-        st_length(shape): 0.200319157063968
-        certification_fsc: false
-        certification_olb: false
-        certification_tlv:
-        certification_vlc:
-        certification_vlo:
-        certification_pafc:
-        certification_pefc: false
-        certification_tltv:
-        certification_fsc_cw:
-      forest_type: vdc
-      operator_id:
-      observations: 0
-      fmu_type_label: ventes_de_coupe
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_pafc:
-      certification_pefc: false
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_11749:
   id: 11749
@@ -177437,63 +176485,7 @@ FmuGeometry_11749:
           - 3.35755003100002
         - - 15.100379165
           - 3.35779176099999
-    properties:
-      id: 11749
-      centroid:
-        type: Point
-        coordinates:
-        - 15.126850559
-        - 3.322698739
-      fmu_name: '1001309'
-      iso3_fmu: CMR
-      company_na:
-      properties:
-        id: 11749
-        type_: 4110510
-        nom_vc: '1001309'
-        rfa_ha: 95000.0
-        fmu_name: '1001309'
-        fmu_type: ventes_de_coupe
-        globalid: "{50E0021D-88DC-4F62-BE09-03D44342054D}"
-        iso3_fmu: CMR
-        objectid: 4567
-        date_attr: 1504656000000.0
-        date_expr: 1599350400000.0
-        desc_type: Vente de coupe
-        statut_vc: active
-        attributai: CFC
-        company_na: CFC
-        sup_adm_ha: 2358.0
-        operator_id: 10615
-        created_date: 2147483647
-        created_user: CARTO
-        observations: 0
-        fmu_type_label: ventes_de_coupe
-        st_area(shape): 0.00192045089542876
-        certification_ls: false
-        last_edited_date: 2147483647
-        last_edited_user: CARTO
-        st_length(shape): 0.20850068509941
-        certification_fsc: false
-        certification_olb: false
-        certification_tlv:
-        certification_vlc:
-        certification_vlo:
-        certification_pafc:
-        certification_pefc: false
-        certification_tltv:
-        certification_fsc_cw:
-      forest_type: vdc
-      operator_id:
-      observations: 0
-      fmu_type_label: ventes_de_coupe
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv:
-      certification_pafc:
-      certification_pefc: false
-      certification_fsc_cw:
+    properties: {}
 
 FmuGeometry_20099:
   id: 20099
@@ -177747,27 +176739,7 @@ FmuGeometry_20099:
           - 4.489154914999972
         - - 10.014353222000011
           - 4.48913992199999
-    properties:
-      id: 20099
-      centroid:
-        type: Point
-        coordinates:
-        - 10.044127216
-        - 4.502686011
-      fmu_name: '0702111'
-      iso3_fmu: CMR
-      company_na:
-      forest_type: vdc
-      operator_id:
-      observations: 0
-      fmu_type_label: ventes_de_coupe
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_100420:
   id: 100420
@@ -180601,27 +179573,7 @@ FmuGeometry_100420:
           - 4.92135103517984
         - - 10.342474454975315
           - 4.92134693221741
-    properties:
-      id: 100420
-      centroid:
-        type: Point
-        coordinates:
-        - 10.327314103
-        - 4.883794239
-      fmu_name: '0702114'
-      iso3_fmu: CMR
-      company_na:
-      forest_type: vdc
-      operator_id:
-      observations: 0
-      fmu_type_label: ventes_de_coupe
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: true
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_100438:
   id: 100438
@@ -181185,27 +180137,7 @@ FmuGeometry_100438:
           - 4.848795394000034
         - - 10.413883455999933
           - 4.850197657000023
-    properties:
-      id: 100438
-      centroid:
-        type: Point
-        coordinates:
-        - 10.44049604
-        - 4.845377585
-      fmu_name: '0702118'
-      iso3_fmu: CMR
-      company_na: SIENCAM
-      forest_type: vdc
-      operator_id: 10623
-      observations: 0
-      fmu_type_label: ventes_de_coupe
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
 
 FmuGeometry_100458:
   id: 100458
@@ -181357,24 +180289,4 @@ FmuGeometry_100458:
           - 4.870746763861112
         - - 10.305977101887523
           - 4.868923974648818
-    properties:
-      id: 100458
-      centroid:
-        type: Point
-        coordinates:
-        - 10.290210895
-        - 4.869244158
-      fmu_name: '0702135'
-      iso3_fmu: CMR
-      company_na: SIENCAM
-      forest_type: vdc
-      operator_id: 10623
-      observations: 0
-      fmu_type_label: ventes_de_coupe
-      certification_ls: false
-      certification_fsc: false
-      certification_olb: false
-      certification_tlv: false
-      certification_pafc: false
-      certification_pefc: false
-      certification_fsc_cw: false
+    properties: {}
