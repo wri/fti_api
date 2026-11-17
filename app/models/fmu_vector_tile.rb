@@ -21,11 +21,12 @@ class FmuVectorTile
       SELECT ST_AsMVT(tile.*, 'layer0', 4096, 'mvtgeometry', 'id') AS tile
       FROM (
         SELECT fmus.id,
-               fmus.geojson -> 'properties' AS properties,
-               ST_AsMVTGeom(ST_Transform(ST_Simplify(fmus.geometry, :tolerance, true), 3857), ST_TileEnvelope(:z, :x, :y), 4096, 256, true) AS mvtgeometry
+               fg.geojson -> 'properties' AS properties,
+               ST_AsMVTGeom(ST_Transform(ST_Simplify(fg.geometry, :tolerance, true), 3857), ST_TileEnvelope(:z, :x, :y), 4096, 256, true) AS mvtgeometry
         FROM fmus
+        INNER JOIN fmu_geometries fg ON fg.fmu_id = fmus.id
         WHERE fmus.deleted_at IS NULL
-          AND fmus.geometry && ST_Transform(ST_TileEnvelope(:z, :x, :y), 4326)
+          AND fg.geometry && ST_Transform(ST_TileEnvelope(:z, :x, :y), 4326)
           #{operator_condition}
       ) AS tile
       WHERE tile.mvtgeometry IS NOT NULL

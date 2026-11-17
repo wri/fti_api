@@ -30,6 +30,8 @@ describe GeojsonFmusImporter, type: :importer do
         # in that case I would just ignore those properties by treating them as dynamic ones
         dynamic_attributes: %w[end_date last_updat start_date]
       )
+      expect(fmu.reload.geojson.dig("geometry", "type")).to eq("Polygon")
+      expect(fmu.geometry).to be_present
     end
   end
 end

@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 # Wraps one logical "change event" which may consist of a parent model version,
-# one or more translation versions, or both — grouped by the same author within
-# a short time window. Used in the version history UI instead of raw PaperTrail
-# versions so that translation-only changes are visible alongside model changes.
+# one or more translation versions and an Fmu geometry version — grouped by the same
+# author within a short time window. Used in the version history UI instead of raw
+# PaperTrail versions so that translation-only and geometry-only changes are visible
+# alongside model changes.
 class CombinedVersion
   GROUPING_WINDOW_SECONDS = 10
 
-  attr_reader :parent_version, :translation_versions
+  attr_reader :parent_version, :translation_versions, :geometry_version
   attr_accessor :previous, :next # set by build_for to link adjacent combined versions
 
   def self.build_for(record)
-    all_versions = (record.versions.to_a + translation_versions_for(record)).sort_by(&:created_at)
+    all_versions = (record.versions.to_a + translation_versions_for(record) + geometry_versions_for(record)).sort_by(&:created_at)
 
     combined = group(all_versions)
     combined.each_cons(2) do |a, b|
@@ -32,6 +33,10 @@ class CombinedVersion
     ).to_a
   end
 
+  def self.geometry_versions_for(record)
+    record.try(:fmu_geometry)&.versions.to_a
+  end
+
   def self.group(versions)
     versions.each.with_object([]) do |version, combined|
       match = combined.find { |c| c.can_absorb?(version) }
@@ -42,19 +47,23 @@ class CombinedVersion
   def initialize(first_version)
     @parent_version = nil
     @translation_versions = []
+    @geometry_version = nil
     add(first_version)
   end
 
   def add(version)
     if translation_version?(version)
       @translation_versions << version
+    elsif geometry_version?(version)
+      @geometry_version = version
     else
       @parent_version = version
     end
   end
 
   def can_absorb?(version)
-    return false if !translation_version?(version) && parent_version
+    return false if geometry_version?(version) && geometry_version
+    return false if !translation_version?(version) && !geometry_version?(version) && parent_version
 
     whodunnit == version.whodunnit &&
       (created_at - version.created_at).abs <= GROUPING_WINDOW_SECONDS
@@ -63,11 +72,11 @@ class CombinedVersion
   delegate :id, :created_at, :whodunnit, to: :primary_version
 
   def event
-    parent_version&.event || translation_versions.first&.event
+    parent_version&.event || geometry_version&.event || translation_versions.first&.event
   end
 
   def changeset
-    parent_cs = parent_version&.changeset || {}
+    parent_cs = (parent_version&.changeset || {}).merge(geometry_version&.changeset&.slice("geojson") || {})
     translation_cs = translation_versions.each_with_object({}) do |v, h|
       # create events have locale in changeset; update/destroy don't (it never changes),
       # so fall back to reify which parses v.object without a DB query.
@@ -124,6 +133,7 @@ class CombinedVersion
     end
 
     reify_translations!(resource, record)
+    reify_geometry!(resource, record)
     resource.id ||= record.id
     resource
   end
@@ -131,11 +141,24 @@ class CombinedVersion
   private
 
   def primary_version
-    parent_version || translation_versions.first
+    parent_version || geometry_version || translation_versions.first
   end
 
   def translation_version?(version)
     version.item_type.end_with?("::Translation")
+  end
+
+  def geometry_version?(version)
+    version.item_type == "FmuGeometry"
+  end
+
+  # Assigns the association target in memory only: `resource.fmu_geometry =` would save and replace the live row.
+  def reify_geometry!(resource, record)
+    live = record.try(:fmu_geometry)
+    return unless live
+
+    version = geometry_version || live.versions.where("created_at > ?", created_at).reorder(:created_at, :id).first
+    resource.association(:fmu_geometry).target = version ? version.reify(dup: true) : live
   end
 
   def reify_translations!(resource, record)

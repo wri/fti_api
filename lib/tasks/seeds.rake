@@ -49,7 +49,8 @@ class SeedsTasks
         generate_for_model "Holding", entries: holdings
         generate_for_model "Operator", entries: operators
         generate_for_model "FmuOperator", entries: fmu_operators
-        generate_for_model "Fmu", entries: fmus, exclude: %w[geometry created_at updated_at]
+        generate_for_model "Fmu", entries: fmus
+        generate_for_model "FmuGeometry", entries: FmuGeometry.where(fmu: fmus).order(:fmu_id), exclude: %w[geometry created_at updated_at]
 
         # documents
         documents = OperatorDocument.where(operator: operators).where(fmu: [nil, fmus]).order(:id)

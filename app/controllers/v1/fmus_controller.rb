@@ -17,7 +17,7 @@ module V1
 
     def show
       if params[:format].present? && params[:format].include?("geojson")
-        render json: build_json([Fmu.find(params[:id])])
+        render json: build_json([Fmu.includes(:fmu_geometry).find(params[:id])])
       else
         super
       end

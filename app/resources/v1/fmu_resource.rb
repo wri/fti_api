@@ -41,5 +41,12 @@ module V1
         id: Observation.own_with_inactive(value[0].to_i).select(:fmu_id).distinct.select(:fmu_id)
       )
     }
+
+    def self.apply_includes(records, directives)
+      result = super
+      return result unless result.respond_to?(:includes)
+
+      result.includes(:fmu_geometry)
+    end
   end
 end

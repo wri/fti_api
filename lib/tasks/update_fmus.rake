@@ -10,11 +10,11 @@ namespace :update do
 
   desc "Updates FMUs geojsons' centroid"
   task centroid: :environment do
-    query = "with subquery as (select id, ST_AsGeoJSON(st_centroid(ST_GeomFromGeoJSON(to_json(geojson->'geometry')::TEXT))) as centro from fmus)
-update fmus
+    query = "with subquery as (select id, ST_AsGeoJSON(st_centroid(ST_GeomFromGeoJSON(to_json(geojson->'geometry')::TEXT))) as centro from fmu_geometries)
+update fmu_geometries
 set geojson = jsonb_set(geojson, '{properties,centroid}', subquery.centro::jsonb, true)
 from subquery
-WHERE subquery.id = fmus.id"
+WHERE subquery.id = fmu_geometries.id"
 
     result = ActiveRecord::Base.connection.execute(query)
 

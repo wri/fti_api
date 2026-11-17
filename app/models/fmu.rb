@@ -6,7 +6,6 @@
 #
 #  id                   :integer          not null, primary key
 #  country_id           :integer
-#  geojson              :jsonb
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  certification_fsc    :boolean          default(FALSE), not null
@@ -16,7 +15,6 @@
 #  certification_fsc_cw :boolean          default(FALSE), not null
 #  certification_tlv    :boolean          default(FALSE), not null
 #  forest_type          :integer          default("fmu"), not null
-#  geometry             :geometry         geometry, 0
 #  deleted_at           :datetime
 #  certification_ls     :boolean          default(FALSE), not null
 #  name                 :string           not null
@@ -24,7 +22,7 @@
 #
 
 class Fmu < ApplicationRecord
-  has_paper_trail skip: %i[geometry]
+  has_paper_trail
   acts_as_paranoid
 
   include EsriShapefileUpload
@@ -33,6 +31,9 @@ class Fmu < ApplicationRecord
   enum :forest_type, ForestType::TYPES_WITH_CODE
 
   belongs_to :country, inverse_of: :fmus
+  # declared before the operator associations: their save callbacks reload the fmu, dropping an unsaved geometry
+  # no dependent: :destroy - soft-deleted fmus keep their geometry, hard deletes cascade in the DB
+  has_one :fmu_geometry, autosave: true, inverse_of: :fmu
   has_many :observations, inverse_of: :fmu, dependent: :destroy
   has_many :active_observations, -> { active }, class_name: "Observation", inverse_of: :fmu
 
@@ -50,8 +51,8 @@ class Fmu < ApplicationRecord
   validates :forest_type, presence: true
   validates :geojson, geojson: true, if: :geojson_changed?
 
-  after_create :update_geometry, if: :geojson
-  after_update :update_geometry, if: :saved_change_to_geojson?
+  delegate :geometry, :bbox, :centroid, :properties, to: :fmu_geometry, allow_nil: true
+
   after_update :sync_operator_documents, if: :saved_change_to_forest_type?
   after_save :update_geojson_properties
 
@@ -74,12 +75,26 @@ class Fmu < ApplicationRecord
       operator_ids = options["operator_ids"] if options.present? && options["operator_ids"].present? && ValidationHelper.ids?(options["operator_ids"])
       free = options.present? && options["free"] == "true"
 
-      fmus = includes([:country, :operator])
+      fmus = includes([:country, :operator, :fmu_geometry])
       fmus = fmus.filter_by_countries(country_ids) if country_ids.present?
       fmus = fmus.filter_by_operators(operator_ids) if operator_ids.present?
       fmus = fmus.filter_by_free if free
       fmus
     end
+  end
+
+  def geojson
+    fmu_geometry&.geojson
+  end
+
+  def geojson=(value)
+    return if value.nil? && fmu_geometry.nil?
+
+    (fmu_geometry || build_fmu_geometry).geojson = value
+  end
+
+  def geojson_changed?
+    fmu_geometry.present? && fmu_geometry.geojson_changed?
   end
 
   def update_geojson_properties
@@ -108,26 +123,9 @@ class Fmu < ApplicationRecord
     }
     # we want to omit tracking those changes in properties in the paper trail
     # we only will track changes to geojson->geometry via upload
-    self.class.unscoped.where(id: id).where.not(geojson: nil).update_all(
+    FmuGeometry.where(fmu_id: id).where.not(geojson: nil).update_all(
       ["geojson = jsonb_set(geojson, '{properties}', COALESCE(geojson->'properties', '{}') || ?::jsonb, true)", new_properties.to_json]
     )
-  end
-
-  def properties
-    geojson["properties"]
-  end
-
-  def centroid
-    RGeo::GeoJSON.decode(geojson["properties"]["centroid"])
-  rescue
-    nil
-  end
-
-  def bbox
-    return nil if geometry.nil?
-
-    bbox = RGeo::Cartesian::BoundingBox.create_from_geometry(geometry)
-    [bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y]
   end
 
   def cache_key
@@ -146,14 +144,5 @@ class Fmu < ApplicationRecord
 
   def sync_operator_documents
     fmu_operator&.update_documents_list
-  end
-
-  def update_geometry
-    self.class.unscoped.where(id: id).update_all("geometry = ST_GeomFromGeoJSON(geojson -> 'geometry')")
-    update_centroid
-  end
-
-  def update_centroid
-    self.class.unscoped.where(id: id).update_all("geojson = jsonb_set(jsonb_set(geojson, '{properties}', COALESCE(geojson -> 'properties', '{}'), true), '{properties,centroid}', ST_AsGeoJSON(st_centroid(geometry))::jsonb, true)")
   end
 end

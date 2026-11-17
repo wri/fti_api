@@ -79,7 +79,7 @@ ActiveAdmin.register Fmu do
   end
 
   collection_action :download_filtered_shapefiles, method: :get do
-    fmus = Fmu.ransack(params.dig(:q)).result(distinct: true)
+    fmus = Fmu.ransack(params.dig(:q)).result(distinct: true).includes(:fmu_geometry)
     download_shapefiles(fmus)
   end
 
