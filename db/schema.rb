@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_10_22_100100) do
+ActiveRecord::Schema[8.0].define(version: 2026_11_17_100000) do
   create_schema "tiger"
   create_schema "tiger_data"
   create_schema "topology"
@@ -205,6 +205,18 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_22_100100) do
     t.index ["position"], name: "index_faqs_on_position", unique: true
   end
 
+  create_table "fmu_geometries", force: :cascade do |t|
+    t.integer "fmu_id", null: false
+    t.jsonb "geojson"
+    t.virtual "geometry", type: :geometry, limit: {srid: 0, type: "geometry"}, as: "st_geomfromgeojson((geojson -> 'geometry'::text))", stored: true
+    t.virtual "centroid", type: :geometry, limit: {srid: 0, type: "geometry"}, as: "st_centroid(st_geomfromgeojson((geojson -> 'geometry'::text)))", stored: true
+    t.jsonb "source_properties"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fmu_id"], name: "index_fmu_geometries_on_fmu_id", unique: true
+    t.index ["geometry"], name: "index_fmu_geometries_on_geometry", using: :gist
+  end
+
   create_table "fmu_operators", id: :serial, force: :cascade do |t|
     t.integer "fmu_id", null: false
     t.integer "operator_id", null: false
@@ -221,7 +233,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_22_100100) do
 
   create_table "fmus", id: :serial, force: :cascade do |t|
     t.integer "country_id"
-    t.jsonb "geojson"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "certification_fsc", default: false, null: false
@@ -231,7 +242,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_22_100100) do
     t.boolean "certification_fsc_cw", default: false, null: false
     t.boolean "certification_tlv", default: false, null: false
     t.integer "forest_type", default: 0, null: false
-    t.geometry "geometry", limit: {srid: 0, type: "geometry"}
     t.datetime "deleted_at", precision: nil
     t.boolean "certification_ls", default: false, null: false
     t.string "name", null: false
@@ -239,7 +249,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_22_100100) do
     t.index ["country_id"], name: "index_fmus_on_country_id"
     t.index ["deleted_at"], name: "index_fmus_on_deleted_at"
     t.index ["forest_type"], name: "index_fmus_on_forest_type"
-    t.index ["geometry"], name: "index_fmus_on_geometry", using: :gist
   end
 
   create_table "gov_documents", id: :serial, force: :cascade do |t|
@@ -1173,6 +1182,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_10_22_100100) do
   add_foreign_key "country_responsible_admins", "countries", on_delete: :cascade
   add_foreign_key "country_responsible_admins", "users", on_delete: :cascade
   add_foreign_key "country_vpas", "countries", on_delete: :cascade
+  add_foreign_key "fmu_geometries", "fmus", on_delete: :cascade
   add_foreign_key "gov_documents", "countries", on_delete: :cascade
   add_foreign_key "gov_documents", "required_gov_documents", on_delete: :cascade
   add_foreign_key "gov_documents", "users", on_delete: :cascade

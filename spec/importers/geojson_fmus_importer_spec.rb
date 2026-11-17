@@ -30,6 +30,11 @@ describe GeojsonFmusImporter, type: :importer do
         # in that case I would just ignore those properties by treating them as dynamic ones
         dynamic_attributes: %w[end_date last_updat start_date]
       )
+      expect(fmu.reload.geojson.dig("geometry", "type")).to eq("Polygon")
+      expect(fmu.geometry).to be_present
+      expect(fmu.geojson["properties"]).to eq({})
+      expect(fmu.source_properties).to include("Contractor" => "SEPFCO", "num_ccf" => nil)
+      expect(fmu.source_properties.keys & FmuGeometry::DERIVED_PROPERTY_KEYS).to be_empty
     end
   end
 end

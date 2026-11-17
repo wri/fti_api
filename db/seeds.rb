@@ -85,7 +85,6 @@ ObservationReport.find_each do |report|
     report.update!(attachment: sample_pdf_file)
   end
 end
-Fmu.find_each(&:update_geometry)
 Rake::Task["sync:ranking"].invoke
 Operator.find_each { |o| ScoreOperatorDocument.recalculate!(o) }
 

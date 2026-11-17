@@ -79,7 +79,7 @@ ActiveAdmin.register Fmu do
   end
 
   collection_action :download_filtered_shapefiles, method: :get do
-    fmus = Fmu.ransack(params.dig(:q)).result(distinct: true)
+    fmus = Fmu.ransack(params.dig(:q)).result(distinct: true).includes(:fmu_geometry)
     download_shapefiles(fmus)
   end
 
@@ -142,6 +142,14 @@ ActiveAdmin.register Fmu do
             resource.properties&.to_json
           end
           link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
+        end
+        if resource.source_properties.present?
+          row(:source_properties) do
+            dialog id: "source_properties_modal", title: Fmu.human_attribute_name(:source_properties) do
+              resource.source_properties.to_json
+            end
+            link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#source_properties_modal').showModal()"
+          end
         end
       end
       row :created_at

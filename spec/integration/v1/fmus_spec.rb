@@ -35,6 +35,15 @@ module V1
         expect(json["features"].first.dig("properties", "id")).to eq(fmu.id)
       end
 
+      it "Merges imported attributes under the computed properties when format=geojson" do
+        fmu.update!(geojson: fmu.geojson.merge("properties" => {"num_ccf" => "005/11", "fmu_name" => "stale"}))
+
+        get "/fmus/#{fmu.id}?format=geojson"
+
+        properties = JSON.parse(response.body)["features"].first["properties"]
+        expect(properties).to include("num_ccf" => "005/11", "fmu_name" => fmu.name)
+      end
+
       it "Returns 404 for an unknown fmu" do
         get "/fmus/0"
 

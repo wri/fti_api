@@ -568,4 +568,85 @@ namespace :paper_trail do
     end
     puts "Updated #{ids_to_update.size} versions."
   end
+
+  desc "Rebuild FmuGeometry history from geojson changes stored in Fmu versions, then strip geojson and geometry from Fmu versions. Set FOR_REAL=true to apply, then run VACUUM FULL versions, fmus."
+  task extract_fmu_geometry_history: :environment do
+    puts "Rebuilding FmuGeometry history from Fmu versions and stripping geojson/geometry from Fmu versions..."
+    for_real = ENV["FOR_REAL"] == "true"
+    puts for_real ? "RUNNING FOR REAL" : "DRY RUN (set FOR_REAL=true to apply changes)"
+
+    legacy_keys = "(object ?| array['geojson', 'geometry'] OR object_changes ?| array['geojson', 'geometry'])"
+    fmu_versions = PaperTrail::Version.where(item_type: "Fmu")
+
+    unless fmu_versions.where(legacy_keys).exists?
+      puts "No Fmu versions with geojson or geometry left, nothing to do."
+      next
+    end
+
+    connection = ActiveRecord::Base.connection
+    geometry_ids = FmuGeometry.pluck(:fmu_id, :id).to_h
+    stats = Hash.new(0)
+
+    ActiveRecord::Base.transaction do
+      geojson_changes = fmu_versions.where("object_changes ? 'geojson'")
+      total = geojson_changes.count
+      processed = 0
+      puts "Scanning #{total} Fmu versions with geojson changes..."
+
+      geojson_changes.find_each(batch_size: 100) do |version|
+        processed += 1
+        paper_trail_print_progress(processed, total)
+
+        old_geojson, new_geojson = version.object_changes["geojson"].map { |value| FmuGeometry.normalize_geojson(value) }
+        if old_geojson == new_geojson
+          stats[:properties_only] += 1
+          next
+        end
+
+        geometry_id = geometry_ids[version.item_id]
+        if geometry_id.nil?
+          stats[:no_fmu_geometry] += 1
+          next
+        end
+
+        created = old_geojson.nil?
+        PaperTrail::Version.create!(
+          item_type: "FmuGeometry",
+          item_id: geometry_id,
+          event: created ? "create" : "update",
+          whodunnit: version.whodunnit,
+          created_at: version.created_at,
+          object: created ? nil : {"id" => geometry_id, "fmu_id" => version.item_id, "geojson" => old_geojson},
+          object_changes: created ? {"fmu_id" => [nil, version.item_id], "geojson" => [nil, new_geojson]} : {"geojson" => [old_geojson, new_geojson]}
+        )
+        stats[:created] += 1
+      end
+
+      emptied_ids = connection.select_values(<<~SQL)
+        SELECT id FROM versions
+        WHERE item_type = 'Fmu' AND event = 'update' AND object_changes ? 'geojson'
+          AND (object_changes - 'geojson' - 'geometry' - 'updated_at') = '{}'::jsonb
+      SQL
+      stats[:deleted] = PaperTrail::Version.where(id: emptied_ids).delete_all
+
+      stats[:stripped] = connection.update(<<~SQL)
+        UPDATE versions
+        SET object = object - 'geojson' - 'geometry', object_changes = object_changes - 'geojson' - 'geometry'
+        WHERE item_type = 'Fmu' AND #{legacy_keys}
+      SQL
+
+      remaining = fmu_versions.where(legacy_keys).count
+      raise "#{remaining} Fmu versions still have geojson or geometry, rolled back" unless remaining.zero?
+
+      puts "\n\nFmuGeometry versions created: #{stats[:created]}"
+      puts "Skipped, only geojson properties changed: #{stats[:properties_only]}"
+      puts "Skipped, Fmu has no geometry row (hard-deleted or geojson removed): #{stats[:no_fmu_geometry]}"
+      puts "Fmu versions deleted (geojson was the only change): #{stats[:deleted]}"
+      puts "Fmu versions stripped of geojson/geometry: #{stats[:stripped]}"
+
+      raise ActiveRecord::Rollback unless for_real
+    end
+
+    puts "\nDone. Run `VACUUM FULL versions, fmus;` to return the freed space to disk (it locks both tables while it runs)." if for_real
+  end
 end

@@ -175,12 +175,10 @@ class Observation < ApplicationRecord
   after_update :update_operator_scores, if: -> { saved_change_to_publication_date? || saved_change_to_severity_id? || saved_change_to_is_active? || saved_change_to_operator_id? || saved_change_to_fmu_id? }
 
   after_destroy :update_operator_scores
-  after_destroy :update_fmu_geojson
 
   after_save :create_history, if: :saved_changes?
 
   after_save :remove_documents, if: -> { evidence_type != "Uploaded documents" }
-  after_save :update_fmu_geojson
   after_save :force_translations
 
   after_commit :notify_about_creation, on: :create
@@ -334,16 +332,8 @@ class Observation < ApplicationRecord
   def set_centroid
     return if fmu.blank? || lat.present? || lng.present?
 
-    self.lng = begin
-      fmu.geojson.dig("properties", "centroid", "coordinates").first
-    rescue
-      nil
-    end
-    self.lat = begin
-      fmu.geojson.dig("properties", "centroid", "coordinates").second
-    rescue
-      nil
-    end
+    self.lng = fmu.centroid&.x
+    self.lat = fmu.centroid&.y
   end
 
   def update_operator_scores
@@ -394,14 +384,6 @@ class Observation < ApplicationRecord
 
   def remove_documents
     self.observation_documents = []
-  end
-
-  # If the observation is for an fmu, it updates its geojson with the new count
-  def update_fmu_geojson
-    return unless fmu_id
-
-    fmu.update_geojson_properties
-    fmu.touch # to update cache
   end
 
   def assign_observers_from_report

@@ -66,13 +66,13 @@ namespace :observations do
           ST_DISTANCE(pointSwapped, centroid) < ST_DISTANCE(point, centroid) as swapped_closer_to_centroid
         from
         (
-          select o.*, o.name as operator_name, f.geometry, ST_CENTROID(f.geometry) as centroid,
+          select o.*, o.name as operator_name, fg.geometry, ST_CENTROID(fg.geometry) as centroid,
             ST_SetSRID(ST_POINT(o.lng, o.lat), 4326) as point,
             ST_SetSRID(ST_POINT(o.lat, o.lng), 4326) as pointSwapped
           from
             observations o
-          inner join fmus f on f.id = o.fmu_id
-          where f.geojson is not null
+          inner join fmu_geometries fg on fg.fmu_id = o.fmu_id
+          where fg.geojson is not null
         ) as temp
       ) as temp2
       where swapped_closer_to_centroid = true
@@ -82,7 +82,6 @@ namespace :observations do
     puts "#{results.count} results with swapped lng lat inside fmu"
     puts "Observation ids: #{results.pluck("id").join(", ")}"
     ActiveRecord::Base.transaction do
-      Observation.skip_callback(:save, :after, :update_fmu_geojson)
       results.each do |res|
         observation = Observation.find(res["id"])
         lng = observation.lat
@@ -90,7 +89,6 @@ namespace :observations do
         puts "Updating lng/lat for observation #{observation.id}"
         observation.update!(lng: lng, lat: lat)
       end
-      Observation.set_callback(:save, :after, :update_fmu_geojson)
 
       raise ActiveRecord::Rollback unless for_real
     end
