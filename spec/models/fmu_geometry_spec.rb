@@ -18,11 +18,41 @@ RSpec.describe FmuGeometry, type: :model, versioning: true do
     expect(fmu.geometry.coordinates).to eq(fmu.geojson.dig("geometry", "coordinates"))
   end
 
-  it "stores only the shape, dropping any properties" do
-    fmu.geojson = moved_geojson.merge("properties" => {"fmu_name" => "raw", "num_ccf" => 1}, "id" => 5)
+  it "stores only the shape, keeping imported attributes apart from computed ones" do
+    fmu.geojson = moved_geojson.merge("properties" => {"fmu_name" => "raw", "centroid" => {}, "num_ccf" => "005/11"}, "id" => 5)
     fmu.save!
 
     expect(fmu_geometry.reload.geojson).to eq(moved_geojson)
+    expect(fmu_geometry.source_properties).to eq("num_ccf" => "005/11")
+  end
+
+  describe "source properties" do
+    before do
+      fmu.geojson = moved_geojson.merge("properties" => {"num_ccf" => "005/11"})
+      fmu.save!
+    end
+
+    it "keeps them when the same shape is assigned again without attributes" do
+      fmu.reload.geojson = fmu.geojson
+      fmu.save!
+
+      expect(fmu_geometry.reload.source_properties).to eq("num_ccf" => "005/11")
+    end
+
+    it "clears them when a new shape comes without attributes" do
+      fmu.reload.geojson = fmu.geojson.merge("geometry" => {"type" => "Point", "coordinates" => [12.0, 1.0]})
+      fmu.save!
+
+      expect(fmu_geometry.reload.source_properties).to be_nil
+    end
+
+    it "updates them without versioning when only the attributes change" do
+      geometry = fmu_geometry
+      fmu.geojson = moved_geojson.merge("properties" => {"num_ccf" => "006/11"})
+
+      expect { fmu.save! }.not_to change { geometry.versions.count }
+      expect(geometry.reload.source_properties).to eq("num_ccf" => "006/11")
+    end
   end
 
   it "parses a geojson string instead of storing it double-encoded" do

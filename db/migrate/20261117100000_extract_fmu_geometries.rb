@@ -1,17 +1,25 @@
 class ExtractFmuGeometries < ActiveRecord::Migration[8.0]
+  # properties computed at read time (FmuProperties) plus the old cached centroid; everything else is imported data
+  DERIVED_PROPERTY_KEYS = %w[id fmu_name iso3_fmu company_na operator_id forest_type fmu_type_label observations centroid certification_fsc certification_pefc certification_olb certification_pafc certification_fsc_cw certification_pbn certification_tlv certification_ls].freeze
+
   def up
     create_table :fmu_geometries do |t|
       t.references :fmu, type: :integer, null: false, index: {unique: true}, foreign_key: {on_delete: :cascade}
       t.jsonb :geojson
       t.geometry :geometry, limit: {srid: 0, type: "geometry"}
       t.geometry :centroid, limit: {srid: 0, type: "geometry"}
+      t.jsonb :source_properties
       t.timestamps
     end
     add_index :fmu_geometries, :geometry, using: :gist
 
     execute <<~SQL
-      INSERT INTO fmu_geometries (fmu_id, geojson, geometry, centroid, created_at, updated_at)
-      SELECT id, jsonb_set(geojson, '{properties}', '{}'), geometry, ST_Centroid(geometry), NOW(), NOW()
+      INSERT INTO fmu_geometries (fmu_id, geojson, geometry, centroid, source_properties, created_at, updated_at)
+      SELECT id, jsonb_set(geojson, '{properties}', '{}'), geometry, ST_Centroid(geometry),
+        CASE WHEN jsonb_typeof(geojson -> 'properties') = 'object'
+          THEN NULLIF((geojson -> 'properties') - ARRAY[#{DERIVED_PROPERTY_KEYS.map { |k| "'#{k}'" }.join(", ")}], '{}'::jsonb)
+        END,
+        NOW(), NOW()
       FROM fmus
       WHERE geojson IS NOT NULL OR geometry IS NOT NULL
     SQL
@@ -31,7 +39,7 @@ class ExtractFmuGeometries < ActiveRecord::Migration[8.0]
 
     execute <<~SQL
       UPDATE fmus
-      SET geojson = fg.geojson, geometry = fg.geometry
+      SET geojson = jsonb_set(fg.geojson, '{properties}', COALESCE(fg.source_properties, '{}')), geometry = fg.geometry
       FROM fmu_geometries fg
       WHERE fg.fmu_id = fmus.id
     SQL

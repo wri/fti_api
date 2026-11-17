@@ -210,6 +210,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_11_17_100000) do
     t.jsonb "geojson"
     t.geometry "geometry", limit: {srid: 0, type: "geometry"}
     t.geometry "centroid", limit: {srid: 0, type: "geometry"}
+    t.jsonb "source_properties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["fmu_id"], name: "index_fmu_geometries_on_fmu_id", unique: true

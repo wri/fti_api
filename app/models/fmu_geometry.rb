@@ -8,34 +8,45 @@
 #  fmu_id     :integer          not null
 #  geojson    :jsonb
 #  geometry   :geometry         geometry, 0
-#  centroid   :geometry         geometry, 0
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  centroid          :geometry         geometry, 0
+#  source_properties :jsonb
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 
-# Only the shape is stored; feature properties are computed at read time by FmuProperties.
+# Only the shape is stored in geojson; feature properties are computed at read time by FmuProperties.
+# Attributes that came with an imported shape are kept apart in source_properties.
 class FmuGeometry < ApplicationRecord
-  has_paper_trail skip: %i[geometry centroid]
+  DERIVED_PROPERTY_KEYS = (FmuProperties::KEYS + %w[centroid]).freeze
+
+  has_paper_trail skip: %i[geometry centroid source_properties]
 
   belongs_to :fmu, -> { with_deleted }, inverse_of: :fmu_geometry, touch: true
 
   after_create :update_geometry, if: :geojson
   after_update :update_geometry, if: :saved_change_to_geojson?
 
-  def self.normalize_geojson(value)
+  def self.parse_geojson(value)
     value = JSON.parse(value) if value.is_a?(String)
-    return value unless value.is_a?(Hash)
-
-    value = value.deep_stringify_keys
-    return value unless value["type"] == "Feature"
-
-    {"type" => "Feature", "geometry" => value["geometry"], "properties" => {}}
+    value.is_a?(Hash) ? value.deep_stringify_keys : value
   rescue JSON::ParserError
     value
   end
 
+  def self.normalize_geojson(value)
+    value = parse_geojson(value)
+    return value unless feature?(value)
+
+    {"type" => "Feature", "geometry" => value["geometry"], "properties" => {}}
+  end
+
+  def self.feature?(value) = value.is_a?(Hash) && value["type"] == "Feature"
+
   def geojson=(value)
-    super(self.class.normalize_geojson(value))
+    value = self.class.parse_geojson(value)
+    normalized = self.class.normalize_geojson(value)
+    assign_source_properties(value, shape_changed: normalized != geojson)
+    super(normalized)
   end
 
   def bbox
@@ -53,5 +64,13 @@ class FmuGeometry < ApplicationRecord
     self.geometry = computed.geometry
     self.centroid = computed.centroid
     clear_attribute_changes(%w[geometry centroid])
+  end
+
+  private
+
+  # a re-assigned shape without attributes keeps the ones it was imported with; a new shape replaces them
+  def assign_source_properties(value, shape_changed:)
+    imported = (value["properties"].except(*DERIVED_PROPERTY_KEYS) if self.class.feature?(value) && value["properties"].is_a?(Hash))
+    self.source_properties = imported.presence if imported.present? || shape_changed
   end
 end

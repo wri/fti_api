@@ -39,7 +39,7 @@ module V1
       properties = FmuProperties.for(fmus.map(&:id))
       {
         type: "FeatureCollection",
-        features: fmus.map { |fmu| fmu.geojson&.merge("properties" => properties[fmu.id]) }
+        features: fmus.map { |fmu| fmu.geojson&.merge("properties" => (fmu.source_properties || {}).merge(properties[fmu.id])) }
       }
     end
   end

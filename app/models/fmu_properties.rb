@@ -4,6 +4,8 @@
 # SQL expects `fmus` in FROM together with JOINS_SQL.
 module FmuProperties
   CERTIFICATIONS = %w[fsc pefc olb pafc fsc_cw pbn tlv ls].freeze
+  KEYS = (%w[id fmu_name iso3_fmu company_na operator_id forest_type fmu_type_label observations] +
+    CERTIFICATIONS.map { |c| "certification_#{c}" }).freeze
 
   JOINS_SQL = <<~SQL.squish
     LEFT JOIN countries fmu_country ON fmu_country.id = fmus.country_id

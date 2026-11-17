@@ -143,6 +143,14 @@ ActiveAdmin.register Fmu do
           end
           link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#properties_modal').showModal()"
         end
+        if resource.source_properties.present?
+          row(:source_properties) do
+            dialog id: "source_properties_modal", title: Fmu.human_attribute_name(:source_properties) do
+              resource.source_properties.to_json
+            end
+            link_to t("active_admin.view"), "javascript:void(0)", onclick: "document.querySelector('#source_properties_modal').showModal()"
+          end
+        end
       end
       row :created_at
       row :updated_at

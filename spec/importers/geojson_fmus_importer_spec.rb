@@ -32,6 +32,9 @@ describe GeojsonFmusImporter, type: :importer do
       )
       expect(fmu.reload.geojson.dig("geometry", "type")).to eq("Polygon")
       expect(fmu.geometry).to be_present
+      expect(fmu.geojson["properties"]).to eq({})
+      expect(fmu.source_properties).to include("Contractor" => "SEPFCO", "num_ccf" => nil)
+      expect(fmu.source_properties.keys & FmuGeometry::DERIVED_PROPERTY_KEYS).to be_empty
     end
   end
 end

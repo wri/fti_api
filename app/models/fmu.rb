@@ -51,7 +51,7 @@ class Fmu < ApplicationRecord
   validates :forest_type, presence: true
   validates :geojson, geojson: true, if: :geojson_changed?
 
-  delegate :geometry, :bbox, :centroid, to: :fmu_geometry, allow_nil: true
+  delegate :geometry, :bbox, :centroid, :source_properties, to: :fmu_geometry, allow_nil: true
 
   after_update :sync_operator_documents, if: :saved_change_to_forest_type?
 
