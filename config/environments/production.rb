@@ -24,7 +24,7 @@ Rails.application.configure do
   config.action_dispatch.x_sendfile_header = ENV.fetch("RAILS_X_SENDFILE_HEADER", "X-Accel-Redirect").presence
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor = Uglifier.new(harmony: true)
+  config.assets.js_compressor = :terser
   # config.assets.css_compressor = :sass
 
   # Do not fall back to assets pipeline if a precompiled asset is missed.

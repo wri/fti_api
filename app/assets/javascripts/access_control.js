@@ -1,4 +1,4 @@
-$(document).ready(function() {
+onPageLoad(function() {
   $('#access-control input[type="checkbox"]').on('change', onChangePermissions)
 })
 

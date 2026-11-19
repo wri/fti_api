@@ -74,7 +74,7 @@ ActiveAdmin.register Fmu do
     div do
       link_to I18n.t("active_admin.fmus_page.download_filtered_shapefiles"), download_filtered_shapefiles_admin_fmus_path(
         q: params[:q]&.to_unsafe_h
-      ), class: "button text-center mt-10px"
+      ), class: "button text-center mt-10px", data: {turbo: false}
     end
   end
 

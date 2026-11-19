@@ -1,4 +1,4 @@
-$(document).ready(function() {
+onPageLoad(function() {
   if ($('.visible-columns').length === 0) return;
 
   const page = $('.visible-columns').data('page');

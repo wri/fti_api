@@ -1,4 +1,4 @@
-$(document).ready(function() {
+onPageLoad(function() {
   updateFields();
   $('#user_user_permission_attributes_user_role').on('change', function(){
     updateFields();

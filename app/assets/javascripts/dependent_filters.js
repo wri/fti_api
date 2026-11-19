@@ -91,5 +91,4 @@ const dependentFiltersInitializer = function() {
     }
   }
 };
-$(dependentFiltersInitializer);
-$(document).on('turbolinks:load turbo:load', dependentFiltersInitializer);
+onPageLoad(dependentFiltersInitializer);

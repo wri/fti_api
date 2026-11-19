@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/tsubik/activeadmin-globalize.git
-  revision: 70b9d9768f0a4d6fc02b8ce69441418ba910aa91
+  revision: 47d0004bbadd46bbac08e7f9d9f2531f8bffb431
   branch: custom
   specs:
     activeadmin-globalize (1.0.0.pre)
@@ -746,16 +746,19 @@ GEM
       attr_extras (>= 6.2.4, < 8)
       diff-lcs (~> 1.5)
       patience_diff (~> 1.2)
+    terser (1.2.8)
+      execjs (>= 0.3.0, < 3)
     thor (1.5.0)
     tilt (2.9.0)
     timeout (0.6.1)
     tsort (0.2.0)
+    turbo-rails (2.0.23)
+      actionpack (>= 7.1.0)
+      railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2026.6)
       tzinfo (>= 1.0.0)
-    uglifier (4.2.1)
-      execjs (>= 0.3.0, < 3)
     unaccent (0.4.0)
     unicode-display_width (3.3.0)
       unicode-emoji (~> 4.3)
@@ -879,8 +882,9 @@ DEPENDENCIES
   sprockets-rails
   standard
   super_diff
+  terser
+  turbo-rails
   tzinfo-data
-  uglifier
   warning
   web-console (>= 4.1.0)
   webmock

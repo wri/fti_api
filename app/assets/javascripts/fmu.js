@@ -1,4 +1,4 @@
-$(document).ready(function() {
+onPageLoad(function() {
   const forestType = $('#fmu_forest_type:not([type="checkbox"])');
   if (forestType.length === 0 || forestType.prop('disabled') == true){
     return

@@ -25,5 +25,5 @@ function initializeDialog(root) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", function() { initializeDialog(document); });
+onPageLoad(function() { initializeDialog(document); });
 document.addEventListener("app:content_load", function(e) { initializeDialog(e.target); });

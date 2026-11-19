@@ -1,4 +1,4 @@
-$(document).ready(function() {
+onPageLoad(function() {
   function changeFieldVisibility() {
     const evidenceType = $('#observation_evidence_type').val();
     const evidenceOnReportInput = $('#observation_evidence_on_report');

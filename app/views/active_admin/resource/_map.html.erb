@@ -15,60 +15,68 @@
 </div>
 
 <script>
-  mapboxgl.accessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
-  const map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location,
-    center: <%= center %>,
-    zoom: 8
-  });
+  (function() {
+    function initMap() {
+      mapboxgl.accessToken = '<%= ENV['MAPBOX_API_KEY'] %>';
+      const map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location,
+        center: <%= center %>,
+        zoom: 8
+      });
 
-  <% if show_center_marker %>
-  new mapboxgl.Marker()
-    .setLngLat(<%= center %>)
-    .addTo(map);
-  <% end %>
+      <% if show_center_marker %>
+      new mapboxgl.Marker()
+        .setLngLat(<%= center %>)
+        .addTo(map);
+      <% end %>
 
-  map.on('load', function() {
-    <% if bbox.present? %>
-    map.once('moveend', () => {
-      setTimeout(() => {
-        const newBounds = map.getBounds();
-        newBounds.extend(<%= center %>)
-        map.fitBounds(newBounds, { padding: 50 });
-      }, 500);
-    })
-    map.fitBounds(<%= bbox || [] %>, {
-      padding: 50
-    });
-    <% end %>
+      map.on('load', function() {
+        <% if bbox.present? %>
+        map.once('moveend', () => {
+          setTimeout(() => {
+            const newBounds = map.getBounds();
+            newBounds.extend(<%= center %>)
+            map.fitBounds(newBounds, { padding: 50 });
+          }, 500);
+        })
+        map.fitBounds(<%= bbox || [] %>, {
+          padding: 50
+        });
+        <% end %>
 
-    <% if geojson.present? %>
-    map.addSource('feature', {
-      'type': 'geojson',
-      'data': <%= raw(geojson.to_json) %>
-    });
-    map.addLayer({
-      'id': 'feature-fill',
-      'type': 'fill',
-      'source': 'feature',
-      'layout': {},
-      'paint': {
-        'fill-color': '#AAA',
-        'fill-opacity': 0.8
-      }
-    });
-    map.addLayer({
-      'id': 'feature-line',
-      'type': 'line',
-      'source': 'feature',
-      'layout': {},
-      'paint': {
-        'line-color': '#000000',
-        'line-opacity': 1,
-        'line-width': 4
-      }
-    });
-    <% end %>
-  });
+        <% if geojson.present? %>
+        map.addSource('feature', {
+          'type': 'geojson',
+          'data': <%= raw(geojson.to_json) %>
+        });
+        map.addLayer({
+          'id': 'feature-fill',
+          'type': 'fill',
+          'source': 'feature',
+          'layout': {},
+          'paint': {
+            'fill-color': '#AAA',
+            'fill-opacity': 0.8
+          }
+        });
+        map.addLayer({
+          'id': 'feature-line',
+          'type': 'line',
+          'source': 'feature',
+          'layout': {},
+          'paint': {
+            'line-color': '#000000',
+            'line-opacity': 1,
+            'line-width': 4
+          }
+        });
+        <% end %>
+      });
+    }
+
+    // after a Turbo visit the mapbox script above loads asynchronously
+    if (window.mapboxgl) initMap();
+    else document.querySelector('script[src*="mapbox-gl.js"]').addEventListener('load', initMap);
+  })();
 </script>
