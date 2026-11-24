@@ -4,13 +4,19 @@ ActiveAdmin.register User do
   extend BackRedirectable
 
   menu false
-  permit_params :email, :password, :password_confirmation, :country_id,
-    :name, :first_name, :last_name, :is_active, :organization_account,
-    :observer_id, :operator_id, :holding_id, :locale,
-    qc1_observer_ids: [], qc2_observer_ids: [],
-    managed_observer_ids: [],
-    responsible_for_country_ids: [],
-    user_permission_attributes: [:id, :user_role]
+  permit_params do
+    permitted = [:email, :password, :password_confirmation, :country_id,
+      :name, :first_name, :last_name, :organization_account, :locale]
+    next permitted unless current_user.admin?
+
+    permitted += [:observer_id, :operator_id, :holding_id,
+      {qc1_observer_ids: [], qc2_observer_ids: [],
+       managed_observer_ids: [],
+       responsible_for_country_ids: []}]
+    next permitted if params[:id].present? && params[:id].to_s == current_user.id.to_s
+
+    permitted + [:is_active, {user_permission_attributes: [:id, :user_role]}]
+  end
 
   filter :country, as: :select, collection: -> { Country.joins(:users).by_name_asc.distinct }
   filter :holding_id_or_operator_holding_id,
@@ -136,26 +142,33 @@ ActiveAdmin.register User do
   end
 
   form do |f|
+    editor_is_admin = current_user.admin?
+    own_record = f.object.persisted? && f.object.id == current_user.id
+
     f.semantic_errors(*f.object.errors.attribute_names)
     f.inputs do
-      f.object.build_user_permission if f.object.user_permission.nil?
-      f.semantic_fields_for :user_permission do |p|
-        p.input :user_role, as: :select, collection: UserPermission.user_roles.keys, include_blank: false
+      if editor_is_admin && !own_record
+        f.object.build_user_permission if f.object.user_permission.nil?
+        f.semantic_fields_for :user_permission do |p|
+          p.input :user_role, as: :select, collection: UserPermission.user_roles.keys, include_blank: false
+        end
       end
-      f.input :observer
-      # TODO: remove if removing managed_observers
-      # f.input :managed_observers
-      f.input :qc1_observers,
-        as: :select,
-        hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
-        collection: Observer.includes(:responsible_qc1).by_name_asc.map { |o| [o.responsible_qc1.present? ? "#{o.name} (QC: #{o.responsible_qc1.name})" : o.name, o.id] }
-      f.input :qc2_observers,
-        as: :select,
-        hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
-        collection: Observer.includes(:responsible_qc2).by_name_asc.map { |o| [o.responsible_qc2.present? ? "#{o.name} (QC: #{o.responsible_qc2.name})" : o.name, o.id] }
-      f.input :operator
-      f.input :holding
-      f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)
+      if editor_is_admin
+        f.input :observer
+        # TODO: remove if removing managed_observers
+        # f.input :managed_observers
+        f.input :qc1_observers,
+          as: :select,
+          hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
+          collection: Observer.includes(:responsible_qc1).by_name_asc.map { |o| [o.responsible_qc1.present? ? "#{o.name} (QC: #{o.responsible_qc1.name})" : o.name, o.id] }
+        f.input :qc2_observers,
+          as: :select,
+          hint: "You can see the current QC person in parentheses. Setting a new QC person will replace the current one",
+          collection: Observer.includes(:responsible_qc2).by_name_asc.map { |o| [o.responsible_qc2.present? ? "#{o.name} (QC: #{o.responsible_qc2.name})" : o.name, o.id] }
+        f.input :operator
+        f.input :holding
+        f.input :responsible_for_countries, hint: I18n.t("active_admin.users_page.responsible_for_countries_hint"), collection: Country.active.order(:name)
+      end
       f.input :country, collection: Country.includes(:translations)
       f.input :locale, as: :select, collection: I18n.available_locales
       f.input :name, input_html: {disabled: true}
@@ -165,7 +178,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input :is_active
+      f.input :is_active if editor_is_admin && !own_record
     end
     f.actions
   end

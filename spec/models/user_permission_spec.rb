@@ -44,6 +44,14 @@ RSpec.describe UserPermission, type: :model do
       it { is_expected.not_to be_able_to(:cru, QualityControl.new(reviewable: @observation2)) }
       it { is_expected.not_to be_able_to(:delete, QualityControl.new(reviewable: @observation2)) }
       it { is_expected.not_to be_able_to(:delete, QualityControl.new) }
+
+      context "with a permissions override for users" do
+        before { user.user_permission.update!(permissions: {user: {manage: {}}, severity: {cru: {}}}) }
+
+        it { is_expected.to be_able_to(:update, user) }
+        it { is_expected.not_to be_able_to(:update, create(:admin)) }
+        it { is_expected.to be_able_to(:update, Severity.new) }
+      end
     end
 
     describe "ngo_manager" do
