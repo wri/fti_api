@@ -24,7 +24,8 @@ class UserPermission < ApplicationRecord
 
     return hash if permissions_overwrite.blank?
 
-    hash.merge(permissions_overwrite) { |_key, oldval, newval| newval } # keep only top level overwrite
+    # rights over users come only from the role, overrides could grant managing other accounts
+    hash.merge(permissions_overwrite.except("user")) { |_key, oldval, newval| newval } # keep only top level overwrite
   end
 
   def role_permissions

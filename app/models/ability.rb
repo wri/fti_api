@@ -23,7 +23,7 @@ class Ability
         cannot [:edit, :update], UserPermission, user_id: user.id
 
         if user.user_permission.user_role == "bo_manager"
-          can :read, ActiveAdmin::Page, name: "Dashboard"
+          can [:read, :change_language], ActiveAdmin::Page, name: "Dashboard"
           can :read, ActiveAdmin::Comment
           can :create, ActiveAdmin::Comment
           can :manage, ActiveAdmin::Comment, author_id: user.id
