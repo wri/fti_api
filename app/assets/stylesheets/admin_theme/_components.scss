@@ -917,8 +917,31 @@ form {
       }
     }
 
-    &.boolean label {
-      color: $gray-700;
+    // AA floats this label, which collapses the row to zero height
+    &.boolean {
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+      label {
+        align-items: center;
+        color: $gray-700;
+        display: flex;
+        float: none;
+        gap: 8px;
+        margin-left: 20%;
+        padding: 0;
+        width: fit-content;
+
+        input[type=checkbox] {
+          flex-shrink: 0;
+          height: 16px;
+          margin: 0;
+          width: 16px;
+        }
+      }
+    }
+
+    &.boolean + li.boolean {
       padding-top: 0;
     }
 
@@ -1392,6 +1415,7 @@ body.logged_out {
         }
 
         &.boolean label {
+          margin-left: 0;
           padding: 0;
           display: flex;
           align-items: center;
