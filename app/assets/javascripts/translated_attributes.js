@@ -21,5 +21,5 @@ function initializeTranslatedAttributes(root) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", function() { initializeTranslatedAttributes(document); });
+onPageLoad(function() { initializeTranslatedAttributes(document); });
 document.addEventListener("app:content_load", function(e) { initializeTranslatedAttributes(e.target); });

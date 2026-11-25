@@ -1,5 +1,6 @@
 //= require active_admin/base
 //= require activeadmin_addons/all
+//= require turbo_bridge
 //= require access_control
 //= require editor
 //= require dialog
@@ -10,7 +11,7 @@
 //= require translated_attributes
 //= require version_history
 //= require index-filters
-//= require active_admin_sidebar
+//= require collapsible_sidebar
 //= require pagination
 //= require visibility
 //= require dependent_filters

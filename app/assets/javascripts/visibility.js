@@ -1,4 +1,4 @@
-$(document).ready(function() {
+onPageLoad(function() {
   if ($('.visible-columns').length === 0) return;
 
   const page = $('.visible-columns').data('page');
@@ -24,7 +24,11 @@ $(document).ready(function() {
     }
   }
 
+  const container = $('.visible-columns')[0];
+
   setTimeout(function() {
+    // a Turbo visit may have replaced the page in the meantime
+    if (!container.isConnected) return;
     if (Chartkick && Chartkick.charts['chart-1']) {
       const chart = Chartkick.charts['chart-1'].chart;
       const oldOnClick = chart.legend.options.onClick;

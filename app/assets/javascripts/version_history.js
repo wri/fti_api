@@ -12,5 +12,5 @@ function initializeVersionHistory(root) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() { initializeVersionHistory(document); });
+onPageLoad(function() { initializeVersionHistory(document); });
 document.addEventListener('app:content_load', function(e) { initializeVersionHistory(e.target); });

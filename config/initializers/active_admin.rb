@@ -181,6 +181,10 @@ ActiveAdmin.setup do |config|
   #
   # Add tags to all pages logged in users see:
   #   config.meta_tags = { author: 'My Company' }
+  config.meta_tags = {
+    "turbo-cache-control" => "no-cache",
+    "turbo-prefetch" => "false"
+  }
 
   # By default, sign up/sign in/recover password pages are excluded
   # from showing up in search engine results by adding a robots meta
@@ -216,6 +220,11 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
+  config.clear_stylesheets!
+  config.clear_javascripts!
+  config.register_stylesheet "active_admin.css", media: "all", "data-turbo-track": "reload"
+  config.register_javascript "active_admin.js", "data-turbo-track": "reload"
+  config.register_javascript "turbo.min.js", type: "module", "data-turbo-track": "reload"
 
   # == CSV options
   #
