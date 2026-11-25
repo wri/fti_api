@@ -24,7 +24,11 @@ onPageLoad(function() {
     }
   }
 
+  const container = $('.visible-columns')[0];
+
   setTimeout(function() {
+    // a Turbo visit may have replaced the page in the meantime
+    if (!container.isConnected) return;
     if (Chartkick && Chartkick.charts['chart-1']) {
       const chart = Chartkick.charts['chart-1'].chart;
       const oldOnClick = chart.legend.options.onClick;

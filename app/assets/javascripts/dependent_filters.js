@@ -45,6 +45,8 @@ const dependentFiltersInitializer = function() {
       $parentFilter.on('change', onFilterChange.bind(null, parentFilterKey));
       // trigger change after load for initial values
       setTimeout(() => {
+        // a Turbo visit may have replaced the page in the meantime
+        if (!$parentFilter[0].isConnected) return;
         $parentFilter.trigger('change');
       }, 200);
     });
