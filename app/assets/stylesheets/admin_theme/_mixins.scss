@@ -1,0 +1,161 @@
+// Flat redefinitions of ActiveAdmin's mixins. Imported after active_admin/mixins
+// and before active_admin/base so every AA component is compiled with them.
+
+@mixin sans-family {
+  font-family: $font-sans;
+}
+
+@mixin gradient($start, $end) {
+  background-color: $start;
+  background-image: none;
+}
+
+@mixin primary-gradient {
+  background-color: $brand;
+  background-image: none;
+}
+
+@mixin secondary-gradient {
+  background-color: $gray-50;
+  background-image: none;
+}
+
+@mixin highlight-gradient {
+  background-color: $gray-100;
+  background-image: none;
+}
+
+@mixin reverse-highlight-gradient {
+  background-color: $gray-200;
+  background-image: none;
+}
+
+@mixin text-shadow($color: #fff, $x: 0, $y: 1px, $blur: 0) {
+  text-shadow: none;
+}
+
+@mixin shadow($x: 0, $y: 1px, $blur: 2px, $color: rgba(0, 0, 0, 0.37)) {
+  box-shadow: $shadow-xs;
+}
+
+@mixin inset-shadow($x: 0, $y: 1px, $blur: 2px, $color: #aaa) {
+  box-shadow: none;
+}
+
+@mixin section-header {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid $border-color;
+  box-shadow: none;
+  text-shadow: none;
+  color: $gray-900;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  padding: 12px 16px;
+}
+
+@mixin section-background {
+  background: $surface;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow-xs;
+}
+
+@mixin section {
+  @include section-background;
+  margin-bottom: 20px;
+
+  > h3 {
+    @include section-header;
+
+    .header_action {
+      float: right;
+    }
+  }
+
+  > div {
+    padding: 16px;
+  }
+
+  hr {
+    border: none;
+    border-bottom: 1px solid $gray-100;
+  }
+}
+
+@mixin basic-button {
+  border-radius: $radius-sm;
+  display: inline-block;
+  font-family: $font-sans;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  margin-right: 4px;
+  padding: 7px 14px;
+  text-decoration: none;
+  text-shadow: none;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+@mixin default-button {
+  @include basic-button;
+  background: $brand;
+  border: 1px solid $brand;
+  box-shadow: $shadow-xs;
+  color: #fff;
+
+  &:not(.disabled) {
+    &:hover {
+      background: $brand-600;
+      border-color: $brand-600;
+      color: #fff;
+    }
+
+    &:active {
+      background: $brand-700;
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: $focus-ring;
+    }
+  }
+}
+
+@mixin dark-button {
+  @include default-button;
+}
+
+@mixin light-button {
+  @include basic-button;
+  background: $surface;
+  border: 1px solid $gray-300;
+  box-shadow: $shadow-xs;
+  color: $gray-700;
+
+  &:not(.disabled) {
+    &:hover {
+      background: $gray-50;
+      color: $gray-900;
+    }
+
+    &:active {
+      background: $gray-100;
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: $focus-ring;
+    }
+  }
+}

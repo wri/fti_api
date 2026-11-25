@@ -24,7 +24,6 @@ gem "uglifier"
 gem "sprockets-rails"
 
 # Active Admin skins
-gem "active_skin"
 
 # WYSIWYG
 gem "activeadmin_quill_editor", "~> 1.0"

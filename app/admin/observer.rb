@@ -39,7 +39,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
       observer.countries.each do |country|
         links << link_to(country.name, admin_country_path(country.id))
       end
-      safe_join(links, " ")
+      safe_join(links, ", ")
     end
     column :observer_type, sortable: true
     column :name
@@ -84,7 +84,7 @@ ActiveAdmin.register Observer, as: "Monitor" do
         observer.countries.each do |country|
           links << link_to(country.name, admin_country_path(country.id))
         end
-        safe_join(links, " ")
+        safe_join(links, ", ")
       end
       row :address
       row :information_name

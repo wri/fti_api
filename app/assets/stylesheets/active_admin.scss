@@ -1,35 +1,15 @@
+@import "admin_theme/variables";
+
 @import 'activeadmin_addons/all';
-
 @import 'active_admin/active_admin_globalize';
-// SASS variable overrides must be declared before loading up Active Admin's styles.
-//
-// To view the variables that Active Admin provides, take a look at
-// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
-// Active Admin source.
-//
-// For example, to change the sidebar width:
-// $sidebar-width: 242px;
 
-// Active Admin's got SASS!
 @import "active_admin/mixins";
+@import "admin_theme/mixins";
 @import "active_admin/base";
-
-// Change the sidebar place
 @import "active_admin_sidebar";
 
-// Overriding any non-variable SASS must be done after the fact.
-// For example, to change the default status-tag color:
-//
-//   .status_tag { background: #6090DB; }
-
-$skinActiveColor: #4A422C;
-$skinHeaderBck: #317a4b;
-$panelHeaderBck: #317a4b;
-
-$skinLogo: image_url("logo.svg") no-repeat 0 0;
-@import "active_skin";
-
-@import "new_menu";
+@import "admin_theme/header";
+@import "admin_theme/components";
 @import "helpers";
 @import "editor";
 
@@ -54,55 +34,38 @@ $expired-color: #772222;
 $not-required-color: #AA8888;
 $to-be-reviewed: #99AA99;
 
+@mixin status-color($c) {
+  background: $c;
+}
+
 .status_tag {
-  &.under_revision { background: $pending-color; }
-  &.rejected { background: $rejected-color; }
-  &.approved { background: $approved-color; }
-  &.doc_pending { background: $pending-color; }
-  &.doc_pending_non_applicable { background: $pending-color; }
-  &.doc_invalid { background: $rejected-color; }
-  &.doc_valid { background: $approved-color; }
-  &.doc_expired { background: $expired-color; }
-  &.doc_not_required { background: $not-required-color; }
-  &.ready_for_revision { background: $to-be-reviewed; }
+  &.under_revision { @include status-color($pending-color); }
+  &.rejected { @include status-color($rejected-color); }
+  &.approved { @include status-color($approved-color); }
+  &.doc_pending { @include status-color($pending-color); }
+  &.doc_pending_non_applicable { @include status-color($pending-color); }
+  &.doc_invalid { @include status-color($rejected-color); }
+  &.doc_valid { @include status-color($approved-color); }
+  &.doc_expired { @include status-color($expired-color); }
+  &.doc_not_required { @include status-color($not-required-color); }
+  &.ready_for_revision { @include status-color($to-be-reviewed); }
 
   // Observations
-  &.created { background: $created-color; }
-  &.ready_for_qc1 { background: $ready-for-qc-color; }
-  &.ready_for_qc2 { background: $ready-for-qc-color; }
-  &.qc1_in_progress { background: $qc-in-progress-color; }
-  &.qc2_in_progress { background: $qc-in-progress-color; }
-  &.needs_revision { background: $needs-revision-color; }
-  &.ready_for_publication { background: $ready-for-publication-color; }
-  &.published\(no_comments\) { background: $published-no-comments-color; }
-  &.published\(not_modified\) { background: $published-not-modified-color; }
-  &.published\(modified\) { background: $published_modified-color; }
+  &.created { @include status-color($created-color); }
+  &.ready_for_qc1 { @include status-color($ready-for-qc-color); }
+  &.ready_for_qc2 { @include status-color($ready-for-qc-color); }
+  &.qc1_in_progress { @include status-color($qc-in-progress-color); }
+  &.qc2_in_progress { @include status-color($qc-in-progress-color); }
+  &.needs_revision { @include status-color($needs-revision-color); }
+  &.ready_for_publication { @include status-color($ready-for-publication-color); }
+  &.published\(no_comments\) { @include status-color($published-no-comments-color); }
+  &.published\(not_modified\) { @include status-color($published-not-modified-color); }
+  &.published\(modified\) { @include status-color($published_modified-color); }
 }
 
 // fix issue with top margin in panel title
 .panel > h3 {
   margin-top: 0;
-}
-
-.button {
-  @include no-shadow();
-  @include rounded(0);
-  background: $skinActiveColor;
-  color: #fff;
-  border: none;
-  text-shadow: none;
-  padding: 10px 20px;
-
-  &:hover {
-    background: lighten( $skinActiveColor, 10% ) !important;
-  }
-}
-
-.actions {
-  .cancel a {
-    padding-top: 9px !important;
-    padding-bottom: 9px !important;
-  }
 }
 
 // To increase the width of observations-details
@@ -133,18 +96,6 @@ table {
   tr.highlight {
     td {
       background-color: lighten( $pending-color, 35% ) !important;
-    }
-  }
-}
-
-body.logged_out {
-  #login {
-    a {
-      margin-top: -32px;
-    }
-
-    br:last-of-type {
-      display: none; // workaround to fix extra padding after the last action link in login page
     }
   }
 }
@@ -270,31 +221,37 @@ body.active_admin {
 
 dialog {
   border: 0;
+  border-radius: $radius-lg;
   padding: 0;
-  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.18);
 
   header {
     display: flex;
-    background-color: $panelHeaderBck;
-    color: #fff;
+    background-color: $surface;
+    border-bottom: 1px solid $border-color;
+    color: $gray-900;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 12px 12px 12px 20px;
 
     > strong {
-      font-size: 1.2em;
+      font-size: 15px;
+      font-weight: 600;
       margin-right: 20px;
     }
 
     .close-dialog-button {
+      @include light-button;
+      border-color: transparent;
+      box-shadow: none;
       cursor: pointer;
-      padding: 10px 15px;
-      margin-left: auto;
+      padding: 6px 10px;
+      margin: 0 0 0 auto;
     }
   }
 
   > div {
-    padding: 10px;
+    padding: 16px 20px;
 
     max-height: 80vh;
     max-width: 70vw;

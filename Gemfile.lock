@@ -101,7 +101,6 @@ GEM
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6, >= 1.7.2)
     active_material (2.1.5)
-    active_skin (0.0.13)
     activeadmin (3.5.2)
       arbre (~> 1.2, >= 1.2.1)
       csv
@@ -795,7 +794,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_admin_sidebar!
-  active_skin
   activeadmin
   activeadmin-globalize!
   activeadmin_addons
