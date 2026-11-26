@@ -1,4 +1,4 @@
-// Long index cells are wrapped in .cell-clamp on the server (config/initializers/active_admin_table_cells.rb).
+// Long index cells are wrapped in .cell-clamp on the server (lib/active_admin/cell_clamp_extension.rb).
 // Here we only mark the truncated ones and let them expand on click.
 $(document).ready(function() {
   document.querySelectorAll('.index_as_table table.index_table > tbody > tr > td > .cell-clamp').forEach(clamp => {

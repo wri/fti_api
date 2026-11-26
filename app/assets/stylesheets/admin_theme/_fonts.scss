@@ -1,5 +1,5 @@
 // Inter variable font, self-hosted (SIL Open Font License, see app/assets/fonts/inter/LICENSE.txt).
-// Preloaded in the admin head (config/initializers/active_admin_font_preload.rb) to keep the swap from the fallback font short.
+// Preloaded in the admin head (lib/active_admin/font_preload_extension.rb) to keep the swap from the fallback font short.
 
 @font-face {
   font-display: swap;
