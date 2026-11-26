@@ -231,9 +231,9 @@ dialog {
 
   header {
     display: flex;
-    background-color: $brand-50;
-    border-bottom: 1px solid $brand-100;
-    color: $brand-700;
+    background-color: $surface;
+    border-bottom: 1px solid $border-color;
+    color: $gray-900;
     justify-content: space-between;
     align-items: center;
     padding: 12px 12px 12px 20px;
@@ -249,15 +249,15 @@ dialog {
       background: transparent;
       border-color: transparent;
       box-shadow: none;
-      color: $brand-700;
+      color: $gray-700;
       cursor: pointer;
       padding: 6px 10px;
       margin: 0 0 0 auto;
 
       &:not(.disabled):hover,
       &:not(.disabled):active {
-        background: $brand-100;
-        color: $brand-700;
+        background: $gray-100;
+        color: $gray-900;
       }
     }
   }
