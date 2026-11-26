@@ -1522,11 +1522,23 @@ body.logged_out {
     padding: 14px 20px 16px;
   }
 
+  // confirm_dialog.js moves Cancel before OK, so the primary action ends up on the right
   .ui-dialog-buttonset {
     display: flex;
     gap: 8px;
+    justify-content: flex-end;
 
     button {
+      margin: 0;
+    }
+
+    button:first-child {
+      @include light-button;
+      margin: 0;
+    }
+
+    button:last-child {
+      @include default-button;
       margin: 0;
     }
   }
@@ -1571,4 +1583,52 @@ body.logged_out {
   -webkit-line-clamp: unset;
   display: block;
   line-clamp: none;
+}
+
+// Styled replacement for the browser confirm() popup (confirm_dialog.js)
+dialog.confirm-dialog {
+  max-width: calc(100vw - 32px);
+  width: 420px;
+
+  .confirm-dialog__message {
+    color: $gray-900;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0;
+    padding: 20px 20px 4px;
+  }
+
+  > .confirm-dialog__actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    max-height: none;
+    padding: 16px 20px;
+  }
+
+  button {
+    margin: 0;
+  }
+
+  .confirm-dialog__cancel {
+    @include light-button;
+    margin: 0;
+  }
+}
+
+// Destructive primary buttons: reject dialogs, delete confirmations
+body.active_admin {
+  input[type=submit].danger,
+  button.danger {
+    background: $danger;
+    border-color: $danger;
+
+    &:not(.disabled):hover,
+    &:not(.disabled):active {
+      background: $danger;
+      border-color: $danger;
+      filter: brightness(0.92);
+    }
+  }
 }

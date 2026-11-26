@@ -3,6 +3,7 @@
 //= require access_control
 //= require editor
 //= require dialog
+//= require confirm_dialog
 //= require users
 //= require rod
 //= require fmu

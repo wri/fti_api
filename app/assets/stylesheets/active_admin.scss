@@ -393,7 +393,10 @@ dialog.version_history {
 
 dialog .vertical-form {
   .inputs {
+    background: none;
     border: 0;
+    border-radius: 0;
+    box-shadow: none;
     padding: 0;
     margin: 0;
 
@@ -410,7 +413,6 @@ dialog .vertical-form {
 
     input, a {
       margin: 0;
-      margin-left: 10px;
     }
   }
 }
