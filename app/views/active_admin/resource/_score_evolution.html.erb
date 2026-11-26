@@ -1,5 +1,5 @@
-<% options ||= { library: {tooltips:{intersect:false, mode: 'nearest'}} } %>
+<% options ||= {} %>
 
-<div>
-  <%= line_chart scores, **options %>
+<div class="score-evolution">
+  <%= line_chart scores, **ScoreEvolutionHelper::CHART_OPTIONS.deep_merge(options) %>
 </div>

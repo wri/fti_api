@@ -424,6 +424,10 @@ form.filter_form {
   gap: 8px 12px;
   margin-bottom: 16px;
 
+  &:not(:has(*)) {
+    display: none;
+  }
+
   &::after {
     display: none;
   }
@@ -1531,5 +1535,19 @@ body.logged_out {
     button {
       margin: 0;
     }
+  }
+}
+
+.score-evolution {
+  @include section-background;
+  margin-bottom: 20px;
+  padding: 16px 16px 10px;
+
+  .attributes_table & {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
   }
 }
