@@ -13,7 +13,7 @@ dialog id: dialog_id, title: I18n.t("active_admin.reject") + " " + I18n.t("activ
 
     f.actions do
       f.cancel_link "javascript:void(0)", class: "close-dialog-button"
-      f.action :submit, label: I18n.t("active_admin.reject"), button_html: {data: {disable_with: I18n.t("active_admin.rejecting")}}
+      f.action :submit, label: I18n.t("active_admin.reject"), button_html: {class: "danger", data: {disable_with: I18n.t("active_admin.rejecting")}}
     end
   end
 end

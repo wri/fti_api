@@ -1,0 +1,1634 @@
+// ---------------------------------------------------------------- Base
+
+html {
+  background: $page-bg;
+}
+
+body.active_admin {
+  background: $page-bg;
+  color: $gray-800;
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  accent-color: $brand;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $gray-900;
+  }
+
+  strong, b {
+    font-weight: 600;
+  }
+}
+
+a, a:link, a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a.button:hover,
+a.table_tools_button:hover,
+.dropdown_menu a:hover {
+  text-decoration: none;
+}
+
+#active_admin_content {
+  padding: 24px 30px;
+}
+
+// AA lays out index pages as a table so the header stretches with wide tables;
+// wide tables scroll inside .index_as_table instead.
+.index #wrapper {
+  display: block;
+}
+
+// ---------------------------------------------------------------- Title bar
+
+#title_bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  background: $surface;
+  border: 0;
+  border-bottom: 1px solid $border-color;
+  box-shadow: none;
+  padding: 18px 30px 20px;
+  z-index: 800;
+
+  &::after {
+    display: none;
+  }
+
+  #titlebar_left,
+  #titlebar_right {
+    display: block;
+    height: auto;
+  }
+
+  h2 {
+    color: $gray-900;
+    font-size: 24px;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 32px;
+  }
+
+  .breadcrumb {
+    font-size: 12.5px;
+    line-height: 18px;
+    margin-bottom: 2px;
+    text-transform: none;
+
+    a, a:link, a:visited {
+      color: $gray-500;
+    }
+
+    a:hover {
+      color: $gray-800;
+      text-decoration: none;
+    }
+  }
+
+  .action_items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+
+    span.action_item {
+      &:empty {
+        display: none;
+      }
+
+      & > a,
+      & > .dropdown_menu > a {
+        margin: 0;
+        padding: 8px 14px;
+      }
+
+      & > a[data-method="delete"] {
+        color: $danger;
+
+        &:hover {
+          background: $danger-50;
+          border-color: $danger-200;
+          color: $danger;
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------- Flash
+
+body.logged_in .flashes {
+  padding: 16px 30px 0;
+
+  .flash {
+    background: $warning-50;
+    border: 1px solid $warning-200;
+    border-radius: $radius;
+    color: $warning;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+    padding: 10px 14px;
+    text-shadow: none;
+
+    & + .flash {
+      margin-top: 8px;
+    }
+
+    &.flash_notice {
+      background: $success-50;
+      border-color: $success-200;
+      color: $success;
+    }
+
+    &.flash_error {
+      background: $danger-50;
+      border-color: $danger-200;
+      color: $danger;
+    }
+  }
+}
+
+// ---------------------------------------------------------------- Panels & sidebar
+
+@mixin card-header {
+  background: $surface;
+  border-bottom-color: $border-color;
+  color: $gray-900;
+}
+
+body.active_admin .panel,
+body.active_admin .sidebar_section {
+  > h3 {
+    @include card-header;
+    border-radius: ($radius - 1px) ($radius - 1px) 0 0;
+  }
+}
+
+.panel_contents h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+#sidebar {
+  .sidebar_section {
+    .panel_contents {
+      padding: 16px;
+    }
+  }
+
+}
+
+// Collapsible sidebar toggle (active_admin_sidebar plugin), drawn as a tab on the sidebar card
+$sidebar-gutter: 32px;
+$sidebar-tab-width: 20px;
+$sidebar-tab-height: 46px; // card border + .panel > h3 (12px + 20px + 12px + 1px border)
+
+body.active_admin #active_admin_content.collapsible_sidebar.left_sidebar {
+  #main_content_wrapper {
+    margin-left: $sidebar-width + $sidebar-gutter;
+  }
+
+  .sidebar_toggle_btn {
+    width: $sidebar-tab-width;
+    height: $sidebar-tab-height;
+    top: 0;
+    right: -$sidebar-tab-width + 1px;
+    background: $gray-50;
+    border: 1px solid $border-color;
+    border-radius: 0 $radius $radius 0;
+    box-shadow: 1px 1px 2px rgba(16, 24, 40, 0.05);
+    box-sizing: border-box;
+    color: $gray-500;
+    transition: background-color 0.15s, color 0.15s;
+
+    &:hover {
+      background: $gray-100;
+      color: $brand;
+    }
+
+    .chevron {
+      width: 6px;
+      height: 6px;
+      border: 0;
+      border-left: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: translateX(1px) rotate(45deg);
+    }
+  }
+
+  #sidebar:has(> .sidebar_toggle_btn) > .sidebar_section:first-of-type,
+  #sidebar:has(> .sidebar_toggle_btn) > .sidebar_section:first-of-type > h3 {
+    border-top-right-radius: 0;
+  }
+
+  &.collapsed_sidebar {
+    #main_content_wrapper {
+      margin-left: $sidebar-tab-width + 12px;
+    }
+
+    .sidebar_toggle_btn {
+      left: 0;
+      right: auto;
+
+      .chevron {
+        border: 0;
+        border-right: 2px solid currentColor;
+        border-top: 2px solid currentColor;
+        transform: translateX(-1px) rotate(45deg);
+      }
+    }
+  }
+}
+
+// Filters
+form.filter_form {
+  .filter_form_field {
+    margin-bottom: 14px;
+
+    label {
+      color: $gray-700;
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      padding: 0;
+      text-transform: none;
+    }
+
+    input[type=text],
+    input[type=number],
+    input[type=email],
+    input[type=date],
+    select {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    &.filter_numeric_range_filter {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      label {
+        width: 100%;
+      }
+
+      input {
+        flex: 1;
+        min-width: 0;
+        width: auto;
+      }
+
+      .separator {
+        width: 16px;
+        text-align: center;
+        color: $gray-400;
+      }
+    }
+
+    &.select_and_search {
+      select {
+        width: 40%;
+      }
+
+      input[type=text] {
+        width: calc(60% - 6px);
+        margin-left: 6px;
+      }
+    }
+
+    &.filter_date_range {
+      input[type=text] {
+        width: calc(50% - 8px);
+      }
+
+      .seperator {
+        display: inline-block;
+        width: 16px;
+        text-align: center;
+        color: $gray-400;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 18px -16px -16px;
+    padding: 12px 16px;
+    background: $gray-50;
+    border-top: 1px solid $border-color;
+    border-radius: 0 0 $radius $radius;
+
+    input[type=submit] {
+      margin: 0;
+    }
+  }
+
+  a.clear_filters_btn {
+    @include light-button;
+    margin: 0;
+  }
+}
+
+.sidebar_section .attributes_table th {
+  width: auto;
+}
+
+// ---------------------------------------------------------------- Dropdown menus
+
+.dropdown_menu {
+  .dropdown_menu_button {
+    &::before {
+      display: none;
+    }
+
+    &::after {
+      border: 0;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      width: 5px;
+      height: 5px;
+      top: 50%;
+      right: 11px;
+      opacity: 0.6;
+      transform: translateY(-70%) rotate(45deg);
+    }
+  }
+
+  .dropdown_menu_nipple {
+    display: none;
+  }
+
+  .dropdown_menu_list_wrapper {
+    background: $surface;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    box-shadow: $shadow-lg;
+    margin-top: 4px;
+    padding: 6px;
+
+    .dropdown_menu_list {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+
+      li {
+        border: 0;
+
+        a {
+          border-radius: $radius-sm;
+          color: $gray-700;
+          font-size: 13px;
+          font-weight: 500;
+          padding: 7px 12px;
+          text-align: left;
+
+          &:hover,
+          &:active {
+            background: $gray-100;
+            color: $gray-900;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------- Table tools & scopes
+
+.table_tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 16px;
+
+  &:not(:has(*)) {
+    display: none;
+  }
+
+  &::after {
+    display: none;
+  }
+
+  .dropdown_menu {
+    float: none;
+  }
+
+  .scopes {
+    float: none;
+  }
+}
+
+a.table_tools_button,
+.table_tools .dropdown_menu_button {
+  font-size: 12.5px;
+  padding: 5px 12px;
+}
+
+.table_tools .dropdown_menu_button {
+  padding-right: 26px !important;
+}
+
+.table_tools_segmented_control {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  background: $gray-100;
+  border-radius: $radius;
+
+  li {
+    float: none;
+
+    a.table_tools_button,
+    &:first-child a,
+    &:last-child a {
+      background: transparent;
+      border: 0;
+      border-radius: $radius-sm;
+      box-shadow: none;
+      color: $gray-600;
+      display: block;
+      font-weight: 500;
+      margin: 0;
+      padding: 4px 10px;
+      white-space: nowrap;
+
+      .count {
+        color: $gray-400;
+        font-weight: 400;
+        margin-left: 2px;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.6);
+        color: $gray-900;
+      }
+    }
+
+    &.selected a,
+    &.selected a:hover {
+      background: $surface;
+      box-shadow: $shadow-xs, 0 0 0 1px $gray-200;
+      color: $gray-900;
+
+      .count {
+        color: $brand;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------- Index table
+
+.index_as_table {
+  overflow-x: auto;
+}
+
+table.index_table {
+  background: $surface;
+  border: 1px solid $border-color;
+  border-collapse: separate;
+  border-radius: $radius;
+  border-spacing: 0;
+  box-shadow: $shadow-xs;
+  margin-bottom: 16px;
+
+  th {
+    background: $gray-50;
+    border: 0;
+    border-bottom: 1px solid $border-color;
+    color: $gray-600;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    padding: 10px 12px;
+    vertical-align: bottom;
+    white-space: nowrap;
+
+    &:first-child {
+      border-top-left-radius: $radius;
+    }
+
+    &:last-child {
+      border-right: 0;
+      border-top-right-radius: $radius;
+    }
+
+    a, a:link, a:visited {
+      color: $gray-600;
+    }
+
+    &.sortable a {
+      background-position: 0 3px;
+    }
+
+    &.sorted-asc a {
+      background-position: 0 -28px;
+    }
+
+    &.sorted-desc a {
+      background-position: 0 -57px;
+    }
+
+    &.sorted-asc,
+    &.sorted-desc {
+      background: $gray-100;
+
+      a {
+        color: $gray-900;
+      }
+    }
+  }
+
+  td {
+    border-bottom: 1px solid $gray-100;
+    color: $gray-700;
+    padding: 10px 12px;
+    vertical-align: top;
+
+    a, a:link, a:visited {
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+
+  tr.even td,
+  tr.odd td {
+    background: transparent;
+  }
+
+  tbody tr:hover td {
+    background: $gray-50;
+  }
+
+  tr.selected td,
+  tr.selected:hover td {
+    background: $table-selected-color;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .table_actions {
+    display: flex;
+    gap: 12px;
+
+    a {
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    a.member_link {
+      margin: 0;
+    }
+
+    a[data-method="delete"] {
+      color: $danger;
+    }
+  }
+
+  a.member_link {
+    font-weight: 500;
+    margin-right: 10px;
+
+    &.delete_link,
+    &[data-method="delete"] {
+      color: $danger;
+    }
+  }
+}
+
+// Tables inside panels (dashboard etc.)
+.panel_contents table {
+  border-collapse: collapse;
+  margin-top: 0;
+  width: 100%;
+
+  th {
+    background: none;
+    border-bottom: 1px solid $border-color;
+    color: $gray-500;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 10px;
+    text-transform: none;
+  }
+
+  td {
+    border-bottom: 1px solid $gray-100;
+    padding: 8px 10px;
+  }
+
+  tr.odd td,
+  tr.even td {
+    background: transparent;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+// Attributes table (show pages)
+.attributes_table table {
+  col.even,
+  col.odd {
+    background: transparent;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid $gray-100;
+    padding: 10px 12px 10px 0;
+  }
+
+  th {
+    color: $gray-500;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: none;
+    width: 200px;
+  }
+
+  td {
+    color: $gray-800;
+
+    .empty {
+      color: $gray-400;
+      font-size: 12px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+  }
+
+  tr:last-child th,
+  tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+.panel_contents .attributes_table table th,
+.panel_contents .attributes_table table td {
+  background: none;
+  font-size: 13px;
+  padding: 10px 12px 10px 0;
+}
+
+.panel_contents .attributes_table table th {
+  color: $gray-500;
+  font-weight: 500;
+}
+
+// ---------------------------------------------------------------- Status tags
+
+.status_tag {
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  background: #cacaca;
+  color: #fff;
+
+  &.yes { background: #6090db; }
+  &.no { background: grey; }
+}
+
+// ---------------------------------------------------------------- Pagination & index footer
+
+#index_footer {
+  clear: both;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px 20px;
+  font-size: 12.5px;
+  padding-top: 0;
+
+  &::after {
+    display: none;
+  }
+
+  .pagination_information {
+    color: $gray-500;
+    float: none;
+    margin: 0 auto 0 0;
+    order: 1;
+
+    b {
+      color: $gray-800;
+    }
+  }
+
+  .pagination {
+    float: none;
+    margin: 0;
+    order: 2;
+  }
+
+  .pagination_per_page {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: $gray-500;
+  font-size: 12.5px;
+  white-space: nowrap;
+
+  .select2-container {
+    width: auto !important;
+    min-width: 64px;
+  }
+
+  .select2-container--default .select2-selection--single {
+    height: 30px;
+    min-height: 30px;
+
+    .select2-selection__rendered {
+      line-height: 28px;
+      padding-right: 26px;
+    }
+
+    .select2-selection__arrow {
+      height: 28px;
+    }
+
+    .select2-selection__clear {
+      display: none;
+    }
+  }
+}
+
+.download_links {
+    float: none;
+    order: 3;
+  }
+
+  .pagination_per_page {
+    float: none;
+    order: 4;
+  }
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 12.5px;
+
+  a,
+  span.page.current,
+  .page.gap {
+    border-radius: $radius-sm;
+    display: inline-block;
+    font-weight: 500;
+    line-height: 18px;
+    margin: 0;
+    min-width: 30px;
+    padding: 5px 8px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  a {
+    @include light-button;
+    margin: 0;
+    padding: 5px 9px;
+  }
+
+  span.page.current {
+    background: $brand;
+    border: 1px solid $brand;
+    color: #fff;
+  }
+
+  .page.gap {
+    color: $gray-400;
+  }
+}
+
+.download_links {
+  color: $gray-500;
+  font-size: 12.5px;
+
+  a, a:link, a:visited {
+    @include light-button;
+    font-size: 12px;
+    margin: 0 0 0 6px;
+    padding: 3px 10px;
+  }
+}
+
+// ---------------------------------------------------------------- Forms
+
+$label-width: 20%;
+
+form {
+  fieldset.inputs {
+    margin-bottom: 20px;
+    padding: 8px 0;
+    position: relative;
+
+    &:has(> legend) {
+      padding-top: 54px;
+    }
+
+    > legend {
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+
+      span {
+        @include section-header;
+        @include card-header;
+        border-radius: ($radius - 1px) ($radius - 1px) 0 0;
+        display: block;
+        padding: 14px 20px;
+      }
+    }
+  }
+
+  // Nested f.inputs with a title: a divided sub-section of the parent card
+  fieldset.inputs > ol > fieldset.inputs {
+    border: 0;
+    border-top: 1px solid $border-color;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 10px 0 0;
+
+    > legend span {
+      border-radius: 0;
+    }
+  }
+
+  // Fieldsets wrapped in an input row (nested attributes): no box, rows aligned with the parent
+  fieldset.inputs > ol > li > fieldset.inputs {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+
+    > ol > li {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  // f.actions called inside an f.inputs block
+  fieldset.inputs fieldset.actions {
+    margin: 0;
+    padding: 10px 20px 12px;
+  }
+
+  fieldset > ol > li input[type=date] {
+    width: calc(80% - 22px);
+  }
+
+  fieldset > ol > li {
+    padding: 10px 20px;
+
+    label {
+      color: $gray-700;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 20px;
+      padding-top: 8px;
+      text-transform: none;
+
+      abbr {
+        color: $danger;
+        margin-left: 2px;
+        text-decoration: none;
+      }
+    }
+
+    // AA floats this label, which collapses the row to zero height
+    &.boolean {
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+      label {
+        align-items: center;
+        color: $gray-700;
+        display: flex;
+        float: none;
+        gap: 8px;
+        margin-left: 20%;
+        padding: 0;
+        width: fit-content;
+
+        input[type=checkbox] {
+          flex-shrink: 0;
+          height: 16px;
+          margin: 0;
+          width: 16px;
+        }
+      }
+    }
+
+    &.boolean + li.boolean {
+      padding-top: 0;
+    }
+
+    p.inline-hints {
+      color: $gray-500;
+      font-size: 12.5px;
+      font-style: normal;
+      margin-top: 6px;
+    }
+
+    p.inline-errors {
+      color: $danger;
+      font-weight: 500;
+      margin-top: 6px;
+    }
+
+    &.error {
+      input[type=text], input[type=password], input[type=email], input[type=number],
+      input[type=url], input[type=tel], textarea, select {
+        border-color: $danger;
+      }
+    }
+  }
+
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=number],
+  input[type=url],
+  input[type=tel],
+  input[type=date],
+  input[type=time],
+  input[type=search],
+  textarea,
+  select {
+    background-color: $surface;
+    border: 1px solid $gray-300;
+    border-radius: $radius-sm;
+    box-shadow: $shadow-xs;
+    color: $gray-900;
+    font-family: $font-sans;
+    font-size: 13px;
+    line-height: 20px;
+    padding: 7px 10px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+
+    &:focus {
+      border-color: $brand;
+      box-shadow: $focus-ring;
+      outline: none;
+    }
+
+    &:disabled,
+    &[readonly] {
+      background-color: $gray-50;
+      color: $gray-500;
+    }
+
+    &::placeholder {
+      color: $gray-400;
+    }
+  }
+
+  select {
+    min-height: 36px;
+  }
+
+  input[type=file] {
+    font-size: 13px;
+
+    &::file-selector-button {
+      @include light-button;
+      font-size: 12.5px;
+      margin-right: 10px;
+      padding: 5px 12px;
+    }
+  }
+
+  ul.errors {
+    background: $danger-50;
+    border: 1px solid $danger-200;
+    border-radius: $radius;
+    color: $danger;
+    font-weight: 500;
+  }
+
+  .buttons,
+  .actions {
+    margin-top: 16px;
+
+    ol {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    li {
+      float: none;
+      margin: 0;
+    }
+
+    input[type=submit],
+    input[type=button],
+    button {
+      margin: 0;
+    }
+  }
+
+  fieldset.buttons li.cancel a,
+  fieldset.actions li.cancel a {
+    @include light-button;
+    margin: 0;
+  }
+
+  .has_many_container {
+    h3 {
+      color: $gray-900;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    fieldset.inputs.has_many_fields {
+      background: $gray-50;
+      box-shadow: none;
+    }
+
+    a.button.has_many_add {
+      @include light-button;
+    }
+
+    a.button.has_many_remove {
+      @include light-button;
+      color: $danger;
+    }
+  }
+}
+
+// Select2 (activeadmin_addons)
+.select2-container--default {
+  .select2-selection--single,
+  .select2-selection--multiple {
+    background-color: $surface;
+    border: 1px solid $gray-300;
+    border-radius: $radius-sm;
+    box-shadow: $shadow-xs;
+    min-height: 36px;
+  }
+
+  .select2-selection--single {
+    height: 36px;
+
+    .select2-selection__rendered {
+      color: $gray-900;
+      line-height: 34px;
+      padding-left: 10px;
+    }
+
+    .select2-selection__placeholder {
+      color: $gray-400;
+    }
+
+    .select2-selection__arrow {
+      height: 34px;
+      right: 4px;
+    }
+  }
+
+  .select2-selection--multiple {
+    .select2-selection__rendered {
+      padding: 2px 6px;
+    }
+
+    .select2-selection__choice {
+      background: $gray-100;
+      border: 1px solid $gray-200;
+      border-radius: $radius-sm;
+      color: $gray-800;
+      margin-top: 4px;
+      padding: 1px 8px;
+    }
+
+    .select2-search__field {
+      margin-top: 6px;
+    }
+  }
+
+  &.select2-container--focus,
+  &.select2-container--open {
+    .select2-selection--single,
+    .select2-selection--multiple {
+      border-color: $brand;
+      box-shadow: $focus-ring;
+    }
+  }
+
+  &.select2-container--disabled {
+    .select2-selection--single,
+    .select2-selection--multiple {
+      background-color: $gray-50;
+    }
+  }
+
+  .select2-results__option--highlighted[aria-selected],
+  .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: $brand;
+  }
+
+  .select2-search--dropdown .select2-search__field {
+    border: 1px solid $gray-300;
+    border-radius: $radius-sm;
+  }
+}
+
+.select2-dropdown {
+  border-color: $gray-300;
+  border-radius: $radius-sm;
+  box-shadow: $shadow-lg;
+  overflow: hidden;
+}
+
+// ---------------------------------------------------------------- Tabs
+
+.active_admin .activeadmin-translations {
+  > ul {
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 20px 16px;
+    padding: 0;
+    top: 0;
+
+    > li > a,
+    > li.add-locale > a {
+      background: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      box-shadow: none;
+      color: $gray-600;
+      font-size: 13px;
+      font-weight: 500;
+      margin: 0 0 -1px;
+      padding: 8px 12px;
+
+      &:hover {
+        color: $gray-900;
+      }
+
+      &.active {
+        background: none;
+        border-bottom-color: $brand;
+        box-shadow: none;
+        color: $brand !important;
+      }
+    }
+
+    > li.add-locale {
+      &:hover {
+        background: none;
+        box-shadow: none;
+      }
+
+      > ul {
+        background: $surface;
+        border: 1px solid $border-color;
+        border-radius: $radius;
+        box-shadow: $shadow-lg;
+        padding: 4px;
+
+        > li {
+          border-radius: $radius-sm;
+          font-size: 13px;
+          padding: 6px 12px;
+
+          &:hover {
+            background: $gray-100;
+          }
+        }
+      }
+    }
+  }
+
+  > fieldset.inputs {
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+}
+
+// translated_inputs used outside f.inputs: give it its own card
+.active_admin form > .activeadmin-translations {
+  @include section-background;
+  padding: 16px 0 8px;
+
+  > ul {
+    margin-bottom: 8px;
+  }
+}
+
+.ui-tabs-nav {
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  gap: 4px;
+  margin: 0 0 16px;
+  overflow: visible;
+
+  li {
+    float: none;
+
+    a,
+    &:first-child a,
+    &:last-child a {
+      background: none;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      box-shadow: none;
+      color: $gray-600;
+      font-weight: 500;
+      margin-bottom: -1px;
+      padding: 8px 12px;
+    }
+
+    &.ui-tabs-active a {
+      background: none;
+      border-bottom-color: $brand;
+      box-shadow: none;
+      color: $brand;
+    }
+  }
+}
+
+.tab-content {
+  background: $surface;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  padding: 16px;
+}
+
+// ---------------------------------------------------------------- Blank slate
+
+.blank_slate_container .blank_slate {
+  background: $surface;
+  border: 1px dashed $gray-300;
+  border-radius: $radius;
+  color: $gray-500;
+  font-size: 14px;
+  padding: 32px 24px;
+
+  a {
+    font-weight: 500;
+  }
+}
+
+// ---------------------------------------------------------------- Footer
+
+body.active_admin {
+  padding-bottom: 0;
+}
+
+#footer {
+  background: transparent;
+  border: 0;
+  color: $gray-400;
+  font-size: 12px;
+  padding: 8px 30px 24px;
+  position: static;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// ---------------------------------------------------------------- Login
+
+body.logged_out {
+  background: $page-bg;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+
+  #wrapper {
+    width: 100%;
+  }
+
+  #content_wrapper {
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 32px 16px;
+    width: auto;
+
+    #active_admin_content {
+      background: $surface;
+      border: 1px solid $border-color;
+      border-radius: $radius-lg;
+      box-shadow: $shadow-lg;
+      padding: 32px;
+    }
+  }
+
+  #footer {
+    display: none;
+  }
+
+  h2 {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    color: $gray-900;
+    font-size: 20px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    margin: 0 0 24px;
+    padding: 0;
+    text-shadow: none;
+
+    &::before {
+      content: "";
+      display: block;
+      height: 40px;
+      margin-bottom: 24px;
+      background: image-url("logo.svg") no-repeat left center;
+      background-size: contain;
+    }
+  }
+
+  .flash {
+    background: $warning-50;
+    border: 1px solid $warning-200;
+    border-radius: $radius;
+    color: $warning;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    position: static;
+
+    &.flash_notice {
+      background: $success-50;
+      border-color: $success-200;
+      color: $success;
+    }
+
+    &.flash_error,
+    &.flash_alert {
+      background: $danger-50;
+      border-color: $danger-200;
+      color: $danger;
+    }
+  }
+
+  #login,
+  #password_reset,
+  #unlock {
+    form fieldset {
+      background: none;
+      border: 0;
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+
+      ol > li {
+        padding: 0 0 16px;
+
+        label {
+          float: none;
+          padding: 0 0 6px;
+          width: auto;
+        }
+
+        &.boolean label {
+          margin-left: 0;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          input {
+            margin: 0;
+          }
+        }
+      }
+
+      input[type=text],
+      input[type=email],
+      input[type=password] {
+        box-sizing: border-box;
+        width: 100%;
+      }
+
+      &.actions,
+      &.buttons {
+        margin: 8px 0 0;
+
+        ol {
+          display: block;
+        }
+
+        input[type=submit] {
+          padding: 9px 14px;
+          width: 100%;
+        }
+      }
+    }
+
+    > a {
+      display: inline-block;
+      float: none;
+      font-size: 12.5px;
+      margin: 16px 16px 0 0;
+    }
+
+    > br {
+      display: none;
+    }
+  }
+}
+
+// ---------------------------------------------------------------- Misc
+
+.comments .active_admin_comment {
+  border-color: $gray-100;
+}
+
+#mini-profiler {
+  font-family: $font-sans;
+}
+
+// ActiveAdmin's jQuery UI modal (batch action confirmations), matched to the <dialog> modals
+.ui-widget-overlay {
+  backdrop-filter: blur(2px);
+  background: rgba(16, 24, 40, 0.3);
+}
+
+.ui-dialog.active_admin_dialog {
+  border: 0;
+  border-radius: $radius-lg;
+  box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.18);
+  outline: none;
+  overflow: hidden;
+
+  .ui-dialog-titlebar {
+    @include card-header;
+    border-radius: 0;
+    padding: 14px 20px;
+
+    .ui-dialog-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+
+  form {
+    padding: 16px 20px 0;
+
+    &:not(:has(input:not([type=hidden]), select, textarea)) {
+      display: none;
+    }
+  }
+
+  .ui-dialog-buttonpane {
+    padding: 14px 20px 16px;
+  }
+
+  // confirm_dialog.js moves Cancel before OK, so the primary action ends up on the right
+  .ui-dialog-buttonset {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+
+    button {
+      margin: 0;
+    }
+
+    button:first-child {
+      @include light-button;
+      margin: 0;
+    }
+
+    button:last-child {
+      @include default-button;
+      margin: 0;
+    }
+  }
+}
+
+.score-evolution {
+  @include section-background;
+  margin-bottom: 20px;
+  padding: 16px 16px 10px;
+
+  .attributes_table & {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// Long index cells are clamped to two lines and expand on click (table_cells.js)
+.index_as_table .cell-clamp {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  line-clamp: 2;
+  overflow: hidden;
+
+  &--long {
+    min-width: 200px;
+  }
+}
+
+.index_as_table td.is-clamped {
+  cursor: pointer;
+
+  &:hover .cell-clamp {
+    color: $gray-900;
+  }
+}
+
+.index_as_table td.is-expanded .cell-clamp {
+  -webkit-line-clamp: unset;
+  display: block;
+  line-clamp: none;
+}
+
+// Styled replacement for the browser confirm() popup (confirm_dialog.js)
+dialog.confirm-dialog {
+  max-width: calc(100vw - 32px);
+  width: 420px;
+
+  .confirm-dialog__message {
+    color: $gray-900;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0;
+    padding: 20px 20px 4px;
+  }
+
+  > .confirm-dialog__actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    max-height: none;
+    padding: 16px 20px;
+  }
+
+  button {
+    margin: 0;
+  }
+
+  .confirm-dialog__cancel {
+    @include light-button;
+    margin: 0;
+  }
+}
+
+// Destructive primary buttons: reject dialogs, delete confirmations
+body.active_admin {
+  input[type=submit].danger,
+  button.danger {
+    background: $danger;
+    border-color: $danger;
+
+    &:not(.disabled):hover,
+    &:not(.disabled):active {
+      background: $danger;
+      border-color: $danger;
+      filter: brightness(0.92);
+    }
+  }
+}

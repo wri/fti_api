@@ -99,7 +99,7 @@ ActiveAdmin.register Operator, as: "Producer" do
       operator.fmus.each do |fmu|
         fmus << (link_to fmu.name, admin_fmu_path(fmu))
       end
-      fmus.reduce(:+)
+      safe_join(fmus, ", ")
     end
     column I18n.t("active_admin.operator_page.obs_visit"), :obs_per_visit, sortable: true do |operator|
       operator.score_operator_observation&.obs_per_visit

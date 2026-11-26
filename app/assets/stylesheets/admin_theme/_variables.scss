@@ -1,0 +1,70 @@
+// Brand
+$brand: #317a4b;
+$brand-600: #2a6b41;
+$brand-700: #225636;
+$brand-100: #d7ebdf;
+$brand-50: #eef6f1;
+
+// Neutrals
+$gray-25: #fcfcfd;
+$gray-50: #f8f9fb;
+$gray-100: #f1f3f6;
+$gray-200: #e4e7ec;
+$gray-300: #d0d5dd;
+$gray-400: #98a2b3;
+$gray-500: #667085;
+$gray-600: #475467;
+$gray-700: #344054;
+$gray-800: #1d2939;
+$gray-900: #101828;
+
+// Semantic
+$danger: #d92d20;
+$danger-50: #fef3f2;
+$danger-200: #fecdca;
+$warning: #b54708;
+$warning-50: #fffaeb;
+$warning-200: #fedf89;
+$info: #175cd3;
+$info-50: #eff8ff;
+$info-200: #b2ddff;
+$success: #067647;
+$success-50: #ecfdf3;
+$success-200: #abefc6;
+
+$surface: #fff;
+$page-bg: #f5f6f8;
+$border-color: $gray-200;
+
+$font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-size-base: 13px;
+
+$radius-sm: 6px;
+$radius: 8px;
+$radius-lg: 12px;
+
+$shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
+$shadow-md: 0 4px 8px -2px rgba(16, 24, 40, 0.1), 0 2px 4px -2px rgba(16, 24, 40, 0.06);
+$shadow-lg: 0 12px 16px -4px rgba(16, 24, 40, 0.08), 0 4px 6px -2px rgba(16, 24, 40, 0.03);
+$focus-ring: 0 0 0 3px rgba($brand, 0.18);
+
+// ActiveAdmin variables (must be set before active_admin/mixins is imported)
+$primary-color: $gray-700;
+$text-color: $gray-800;
+$link-color: $brand;
+$section-header-text-color: $gray-900;
+$table-stripe-color: $surface;
+$table-selected-color: $brand-50;
+$error-color: $danger;
+$blank-slate-primary-color: $gray-500;
+$breadcrumbs-color: $gray-500;
+$breadcrumbs-separator-color: $gray-300;
+$required-field-marker-color: $gray-400;
+$form-label-color: $gray-700;
+$secondary-gradient-start: $gray-50;
+$secondary-gradient-stop: $gray-50;
+
+// Kept for existing custom styles
+$skinActiveColor: $brand;
+$skinHeaderBck: $brand;
+$panelHeaderBck: $brand;

@@ -1,4 +1,5 @@
 //= link_tree ../images
+//= link_tree ../fonts .woff2
 //= link_directory ../javascripts .js
 //= link_directory ../stylesheets .css
 //= link fileicons/file_extension_bmp.png

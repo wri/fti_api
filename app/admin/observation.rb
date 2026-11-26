@@ -25,18 +25,18 @@ ActiveAdmin.register Observation do
 
   menu false
 
-  per_page = [10, 20, 40, 60].freeze
+  per_page = [10, 30, 60].freeze
 
   config.order_clause
   config.per_page = per_page
   config.sort_order = "updated_at_desc"
 
   before_action only: :index do
-    if per_page.include? params[:per_page]
-      @per_page = params[:per_page]
+    if per_page.include? params[:per_page].to_i
+      @per_page = params[:per_page].to_i
       session[:obs_per_page] = @per_page
     else
-      session[:obs_per_page] = per_page.include?(session[:obs_per_page]) ? session[:obs_per_page] : 10
+      session[:obs_per_page] = per_page.include?(session[:obs_per_page]) ? session[:obs_per_page] : 30
       @per_page = session[:obs_per_page]
     end
   end
@@ -309,15 +309,14 @@ ActiveAdmin.register Observation do
       observers.each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
       end
-      links.reduce(:+)
+      safe_join(links, ", ")
     end
     column :observation_type, sortable: "observation_type"
     column :operator, sortable: false
     column I18n.t("governments.governments"), class: "col-governments", sortable: false do |o|
       governments = params["scope"].eql?("recycle_bin") ? o.governments.unscope(where: :deleted_at) : o.governments
-      governments.each_with_object([]) do |government, links|
-        links << link_to(government.government_entity, admin_government_path(government.id))
-      end.reduce(:+)
+      links = governments.map { |government| link_to(government.government_entity, admin_government_path(government.id)) }
+      safe_join(links, ", ")
     end
     column :relevant_operators do |o|
       links = []
@@ -325,7 +324,7 @@ ActiveAdmin.register Observation do
       relevant_operators.each do |operator|
         links << link_to(operator.name, admin_producer_path(operator.id))
       end
-      links.reduce(:+)
+      safe_join(links, ", ")
     end
     column :subcategory, sortable: false
 
@@ -354,7 +353,7 @@ ActiveAdmin.register Observation do
       documents.each do |d|
         links << link_to(d.name, admin_evidence_path(d.id))
       end
-      links.reduce(:+)
+      safe_join(links, ", ")
     end
     column :evidence_on_report, sortable: false
     column :concern_opinion, class: "col-concern_opinion" do |o|

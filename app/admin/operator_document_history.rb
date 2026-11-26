@@ -56,7 +56,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column I18n.t("active_admin.operator_documents_page.annexes") do |o|
       links = []
       o.operator_document_annexes.each { |a| links << a.name }
-      safe_join(links, " ")
+      safe_join(links, ", ")
     end
     column :admin_comment
     column :reason
@@ -117,7 +117,7 @@ ActiveAdmin.register OperatorDocumentHistory do
     column I18n.t("active_admin.operator_documents_page.annexes") do |od|
       links = []
       od.operator_document_annexes.each { |a| links << link_to(a.id, admin_operator_document_annex_path(a)) }
-      safe_join(links, " ")
+      safe_join(links, ", ")
     end
     column :reason
     column :response_date

@@ -108,14 +108,14 @@ ActiveAdmin.register ObservationReport do
       o.observations.sort_by(&:id).each do |obs|
         links << link_to(obs.id, admin_observation_path(obs.id))
       end
-      links.reduce(:+)
+      safe_join(links, ", ")
     end
     column :observers do |o|
       links = []
       o.observers.find_each do |observer|
         links << link_to(observer.name, admin_monitor_path(observer.id))
       end
-      links.reduce(:+)
+      safe_join(links, ", ")
     end
     column :created_at
     column :updated_at

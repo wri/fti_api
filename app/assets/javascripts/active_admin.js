@@ -3,6 +3,7 @@
 //= require access_control
 //= require editor
 //= require dialog
+//= require confirm_dialog
 //= require users
 //= require rod
 //= require fmu
@@ -12,6 +13,7 @@
 //= require index-filters
 //= require active_admin_sidebar
 //= require pagination
+//= require table_cells
 //= require visibility
 //= require dependent_filters
 //= require sentry

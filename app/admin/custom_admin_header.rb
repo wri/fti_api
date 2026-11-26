@@ -9,7 +9,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
         div do
           image_tag(image_url("logo.svg"))
         end
-        div class: "env" do
+        div class: "env env-#{Rails.env}" do
           Rails.env.humanize
         end
       end
@@ -133,27 +133,37 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
       end
     end
 
-    div class: "c-nav" do
+    current_user = @arbre_context.assigns[:current_user]
+    div class: "c-nav user-nav" do
       div class: "list" do
         ul do
           li do
-            text_node content_tag "a", t("active_admin.menu.language.language")
+            a class: "user-menu-toggle", title: current_user.email do
+              span current_user.email.first.upcase, class: "avatar"
+            end
             ul do
-              li { link_to t("locales.en"), admin_dashboard_change_language_path(locale: :en), method: :post }
-              li { link_to t("locales.fr"), admin_dashboard_change_language_path(locale: :fr), method: :post }
-              li { link_to t("locales.es"), admin_dashboard_change_language_path(locale: :es), method: :post }
+              li class: "menu-section" do
+                link_to current_user.email, admin_user_path(current_user.id), class: "menu-user"
+              end
+              li class: "menu-label" do
+                text_node t("active_admin.menu.language.language")
+              end
+              %i[en fr es].each do |locale|
+                li do
+                  link_to t("locales.#{locale}"), admin_dashboard_change_language_path(locale: locale), method: :post,
+                    class: (I18n.locale == locale) ? "current" : nil
+                end
+              end
+              li class: "menu-section" do
+                link_to t("active_admin.menu.logout"), destroy_user_session_path, class: "logout"
+              end
             end
           end
-        end
-        ul class: "user" do
-          li { link_to @arbre_context.assigns[:current_user].email, admin_user_path(@arbre_context.assigns[:current_user].id) }
-        end
-        ul class: "logout" do
-          li { link_to t("active_admin.menu.logout"), destroy_user_session_path }
         end
       end
     end
     # workaround for translating jump to page string
     div id: "jump-to-page", style: "display: none;", "data-value": I18n.t("active_admin.js.jump_to_page")
+    div id: "confirm-dialog-i18n", style: "display: none;", "data-ok": "OK", "data-cancel": I18n.t("active_admin.cancel"), "data-delete": I18n.t("active_admin.delete")
   end
 end
