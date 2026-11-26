@@ -281,13 +281,20 @@ dialog.version_history {
     padding: 0px;
   }
 
+  // Table and sticky header both sit 1px up, hiding the collapsed top border that left a gap while scrolling
   table {
-    margin-top: 0px;
+    border-top: 0;
+    margin-top: -1px;
     margin-bottom: 0px;
 
     thead {
       position: sticky;
-      top: 0;
+      top: -1px;
+      z-index: 1;
+
+      th {
+        background: $gray-50;
+      }
     }
 
     tr.odd td {
