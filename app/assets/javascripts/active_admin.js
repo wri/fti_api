@@ -13,7 +13,6 @@
 //= require version_history
 //= require index-filters
 //= require active_admin_sidebar
-//= require pagination
 //= require table_cells
 //= require visibility
 //= require dependent_filters
