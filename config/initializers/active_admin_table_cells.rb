@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Wraps long index table cells in a clamp container on the server, so rows render at their
-# final two-line height from the first paint (styles in admin_theme/_components.scss,
+# final three-line height from the first paint (styles in admin_theme/_components.scss,
 # click-to-expand in table_cells.js).
 module ActiveAdminTableCellClamp
   SKIPPED_COLUMNS = %w[col-selectable col-actions].freeze
