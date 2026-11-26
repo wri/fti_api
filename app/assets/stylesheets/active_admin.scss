@@ -164,8 +164,12 @@ body.active_admin {
   }
 
   // fixing max width issues with long select2 fields in the form
+  form fieldset.inputs {
+    min-width: 0;
+  }
+
   form .inputs ol {
-    max-width: calc(100vw - 100px);
+    max-width: 100%;
   }
 }
 
@@ -227,9 +231,9 @@ dialog {
 
   header {
     display: flex;
-    background-color: $surface;
-    border-bottom: 1px solid $border-color;
-    color: $gray-900;
+    background-color: $brand-50;
+    border-bottom: 1px solid $brand-100;
+    color: $brand-700;
     justify-content: space-between;
     align-items: center;
     padding: 12px 12px 12px 20px;
@@ -242,11 +246,19 @@ dialog {
 
     .close-dialog-button {
       @include light-button;
+      background: transparent;
       border-color: transparent;
       box-shadow: none;
+      color: $brand-700;
       cursor: pointer;
       padding: 6px 10px;
       margin: 0 0 0 auto;
+
+      &:not(.disabled):hover,
+      &:not(.disabled):active {
+        background: $brand-100;
+        color: $brand-700;
+      }
     }
   }
 

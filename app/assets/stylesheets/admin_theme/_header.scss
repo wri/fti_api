@@ -26,8 +26,8 @@ body.active_admin .custom_admin_header {
   column-gap: 16px;
   min-height: 60px;
   padding: 0 30px;
-  background: $surface;
-  border-bottom: 1px solid $border-color;
+  background: $brand;
+  border-bottom: 1px solid $brand;
   box-shadow: $shadow-xs;
   font-family: $font-sans;
 
@@ -44,6 +44,7 @@ body.active_admin .custom_admin_header {
 
     img {
       display: block;
+      filter: brightness(0) invert(1);
       height: 34px;
     }
   }
@@ -119,6 +120,12 @@ body.active_admin .custom_admin_header {
       white-space: nowrap;
       cursor: pointer;
       transition: background-color 0.15s, color 0.15s;
+
+      &,
+      &:link,
+      &:visited {
+        color: rgba(255, 255, 255, 0.9);
+      }
     }
 
     &:has(> ul) > a::after {
@@ -126,8 +133,8 @@ body.active_admin .custom_admin_header {
     }
 
     &:hover > a {
-      background: $gray-100;
-      color: $gray-900;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
   }
 
@@ -143,10 +150,7 @@ body.active_admin .custom_admin_header {
     border: 1px solid $border-color;
     border-radius: 10px;
     box-shadow: $shadow-lg;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(4px);
-    transition: opacity 0.12s, transform 0.12s, visibility 0.12s;
+    display: none;
 
     li > a {
       display: flex;
@@ -176,14 +180,22 @@ body.active_admin .custom_admin_header {
     ul {
       top: -7px;
       left: 100%;
-      transform: translateX(4px);
     }
   }
 
   li:hover > ul {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
+    animation: admin-header-dropdown-in 0.12s ease-out;
+    display: block;
+  }
+
+  li ul li:hover > ul {
+    animation-name: admin-header-flyout-in;
+  }
+
+  // Flyouts of the rightmost menu open to the left to stay on screen
+  .c-nav:not(.user-nav) > .list > ul:last-child li ul ul {
+    left: auto;
+    right: 100%;
   }
 
   // User menu
@@ -212,9 +224,9 @@ body.active_admin .custom_admin_header {
       width: 30px;
       height: 30px;
       border-radius: 999px;
-      background: $brand-50;
-      box-shadow: inset 0 0 0 1px $brand-100;
-      color: $brand-700;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+      color: #fff;
       font-size: 13px;
       font-weight: 600;
     }
@@ -265,5 +277,18 @@ body.active_admin .custom_admin_header {
       background: $danger-50;
       color: $danger;
     }
+  }
+}
+
+@keyframes admin-header-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes admin-header-flyout-in {
+  from {
+    opacity: 0;
   }
 }

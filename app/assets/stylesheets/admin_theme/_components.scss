@@ -161,10 +161,23 @@ body.logged_in .flashes {
 
 // ---------------------------------------------------------------- Panels & sidebar
 
-.panel,
-.sidebar_section {
+@mixin card-header-brand {
+  background: $brand-50;
+  border-bottom-color: $brand-100;
+  color: $brand-700;
+
+  a,
+  a:link,
+  a:visited {
+    color: $brand-700;
+  }
+}
+
+body.active_admin .panel,
+body.active_admin .sidebar_section {
   > h3 {
-    border-radius: $radius $radius 0 0;
+    @include card-header-brand;
+    border-radius: ($radius - 1px) ($radius - 1px) 0 0;
   }
 }
 
@@ -198,17 +211,17 @@ body.active_admin #active_admin_content.collapsible_sidebar.left_sidebar {
     height: $sidebar-tab-height;
     top: 0;
     right: -$sidebar-tab-width + 1px;
-    background: $gray-50;
+    background: $brand-50;
     border: 1px solid $border-color;
     border-radius: 0 $radius $radius 0;
     box-shadow: 1px 1px 2px rgba(16, 24, 40, 0.05);
     box-sizing: border-box;
-    color: $gray-500;
+    color: $brand-700;
     transition: background-color 0.15s, color 0.15s;
 
     &:hover {
-      background: $gray-100;
-      color: $brand;
+      background: $brand-100;
+      color: $brand-700;
     }
 
     .chevron {
@@ -855,7 +868,8 @@ form {
 
       span {
         @include section-header;
-        border-radius: $radius $radius 0 0;
+        @include card-header-brand;
+        border-radius: ($radius - 1px) ($radius - 1px) 0 0;
         display: block;
         padding: 14px 20px;
       }
@@ -1470,4 +1484,52 @@ body.logged_out {
 
 #mini-profiler {
   font-family: $font-sans;
+}
+
+// ActiveAdmin's jQuery UI modal (batch action confirmations), matched to the <dialog> modals
+.ui-widget-overlay {
+  backdrop-filter: blur(2px);
+  background: rgba(16, 24, 40, 0.3);
+}
+
+.ui-dialog.active_admin_dialog {
+  border: 0;
+  border-radius: $radius-lg;
+  box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.18);
+  outline: none;
+  overflow: hidden;
+
+  .ui-dialog-titlebar {
+    @include card-header-brand;
+    border-radius: 0;
+    padding: 14px 20px;
+
+    .ui-dialog-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+  }
+
+  form {
+    padding: 16px 20px 0;
+
+    &:not(:has(input:not([type=hidden]), select, textarea)) {
+      display: none;
+    }
+  }
+
+  .ui-dialog-buttonpane {
+    padding: 14px 20px 16px;
+  }
+
+  .ui-dialog-buttonset {
+    display: flex;
+    gap: 8px;
+
+    button {
+      margin: 0;
+    }
+  }
 }
