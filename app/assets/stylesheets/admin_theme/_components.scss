@@ -234,8 +234,8 @@ body.active_admin #active_admin_content.collapsible_sidebar.left_sidebar {
     }
   }
 
-  #sidebar > .sidebar_section:first-of-type,
-  #sidebar > .sidebar_section:first-of-type > h3 {
+  #sidebar:has(> .sidebar_toggle_btn) > .sidebar_section:first-of-type,
+  #sidebar:has(> .sidebar_toggle_btn) > .sidebar_section:first-of-type > h3 {
     border-top-right-radius: 0;
   }
 
