@@ -162,6 +162,7 @@ fr:
       show_diff: 'Diff'
       show_old_new: 'Ancien/Nouveau'
     shared:
+      close: "Fermer"
       translated_fields: 'Champs traduits'
       monitor_details: 'Détails de l’observateur'
       edit_report: 'Modifier le rapport'

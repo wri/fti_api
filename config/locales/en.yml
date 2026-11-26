@@ -154,6 +154,7 @@ en:
       show_diff: 'Diff'
       show_old_new: 'Old/New'
     shared:
+      close: "Close"
       translated_fields: 'Translated Fields'
       monitor_details: 'Monitor Details'
       edit_report: 'Edit Report'

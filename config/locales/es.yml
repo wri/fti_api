@@ -167,6 +167,7 @@ es:
       show_diff: 'Diff'
       show_old_new: 'Antiguo/Nuevo'
     shared:
+      close: "Cerrar"
       translated_fields: 'Campos traducidos'
       monitor_details: 'Detalles del monitor'
       edit_report: 'Editar informe'

@@ -226,6 +226,7 @@ body.active_admin {
 dialog {
   border: 0;
   border-radius: $radius-lg;
+  outline: none;
   padding: 0;
   box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.18);
 
@@ -244,25 +245,38 @@ dialog {
       margin-right: 20px;
     }
 
-    .close-dialog-button {
-      @include light-button;
+    .close-dialog-button,
+    .close-dialog-button:not(.disabled):hover,
+    .close-dialog-button:not(.disabled):active {
+      align-items: center;
       background: transparent;
-      border-color: transparent;
+      border: 0;
+      border-radius: $radius-sm;
       box-shadow: none;
-      color: $gray-700;
+      color: $gray-500;
       cursor: pointer;
-      padding: 6px 10px;
+      display: inline-flex;
+      flex-shrink: 0;
+      height: 32px;
+      justify-content: center;
       margin: 0 0 0 auto;
+      padding: 0;
+      width: 32px;
+    }
 
-      &:not(.disabled):hover,
-      &:not(.disabled):active {
-        background: $gray-100;
-        color: $gray-900;
-      }
+    .close-dialog-button:not(.disabled):hover {
+      background: $gray-100;
+      color: $gray-900;
+    }
+
+    .close-dialog-button:focus-visible {
+      box-shadow: $focus-ring;
+      outline: none;
     }
   }
 
   > div {
+    outline: none;
     padding: 16px 20px;
 
     max-height: 80vh;
