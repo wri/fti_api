@@ -4,6 +4,7 @@
 //= require editor
 //= require dialog
 //= require confirm_dialog
+//= require toasts
 //= require users
 //= require rod
 //= require fmu

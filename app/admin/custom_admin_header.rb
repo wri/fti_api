@@ -164,6 +164,7 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
     end
     # workaround for translating jump to page string
     div id: "jump-to-page", style: "display: none;", "data-value": I18n.t("active_admin.js.jump_to_page")
-    div id: "confirm-dialog-i18n", style: "display: none;", "data-ok": "OK", "data-cancel": I18n.t("active_admin.cancel"), "data-delete": I18n.t("active_admin.delete")
+    div id: "confirm-dialog-i18n", style: "display: none;", "data-ok": "OK", "data-cancel": I18n.t("active_admin.cancel"),
+      "data-delete": I18n.t("active_admin.delete"), "data-close": I18n.t("active_admin.shared.close")
   end
 end
