@@ -4,7 +4,7 @@ $(document).ready(function() {
   const container = document.querySelector('body.logged_in .flashes');
   if (!container) return;
 
-  const closeLabel = ($('#confirm-dialog-i18n').data() || {}).close || 'Close';
+  const closeLabel = ($('#admin-js-i18n').data() || {}).close || 'Close';
   const AUTO_DISMISS_MS = 5000;
 
   function dismiss(toast) {

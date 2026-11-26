@@ -1605,7 +1605,7 @@ body.logged_out {
     padding: 14px 20px 16px;
   }
 
-  // confirm_dialog.js moves Cancel before OK, so the primary action ends up on the right
+  // batch_action_modal.js moves Cancel before OK, so the primary action ends up on the right
   .ui-dialog-buttonset {
     display: flex;
     gap: 8px;
@@ -1682,7 +1682,7 @@ dialog.confirm-dialog {
     padding: 20px 20px 4px;
   }
 
-  > .confirm-dialog__actions {
+  .confirm-dialog__actions {
     display: flex;
     gap: 8px;
     justify-content: flex-end;
