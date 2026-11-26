@@ -1545,3 +1545,30 @@ body.logged_out {
     padding: 0;
   }
 }
+
+// Long index cells are clamped to two lines and expand on click (table_cells.js)
+.index_as_table .cell-clamp {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  line-clamp: 2;
+  overflow: hidden;
+
+  &--long {
+    min-width: 200px;
+  }
+}
+
+.index_as_table td.is-clamped {
+  cursor: pointer;
+
+  &:hover .cell-clamp {
+    color: $gray-900;
+  }
+}
+
+.index_as_table td.is-expanded .cell-clamp {
+  -webkit-line-clamp: unset;
+  display: block;
+  line-clamp: none;
+}
