@@ -162,17 +162,8 @@ class CustomAdminHeader < ActiveAdmin::Views::Header
         end
       end
     end
-    # translated labels for scripts (toasts.js)
-    div id: "admin-js-i18n", style: "display: none;", "data-close": I18n.t("active_admin.shared.close")
-    # styled replacement for the browser confirm() popup (confirm_dialog.js)
-    text_node helpers.content_tag(:dialog, id: "confirm-dialog", class: "confirm-dialog") {
-      helpers.content_tag(:form, method: "dialog") do
-        helpers.content_tag(:p, "", class: "confirm-dialog__message") +
-          helpers.content_tag(:div, class: "confirm-dialog__actions") do
-            helpers.button_tag(I18n.t("active_admin.cancel"), value: "cancel", class: "confirm-dialog__cancel") +
-              helpers.button_tag("OK", value: "ok", class: "confirm-dialog__ok", data: {ok: "OK", delete: I18n.t("active_admin.delete")})
-          end
-      end
-    }
+    # translated labels for scripts (confirm_dialog.js, toasts.js)
+    div id: "admin-js-i18n", style: "display: none;", "data-ok": "OK", "data-cancel": I18n.t("active_admin.cancel"),
+      "data-delete": I18n.t("active_admin.delete"), "data-close": I18n.t("active_admin.shared.close")
   end
 end
