@@ -362,6 +362,9 @@ ActiveAdmin.before_load do |app|
   ActiveAdmin::Views::IndexAsTable::IndexTableFor.prepend ActiveAdmin::Paranoia::IndexTableForExtension
   ActiveAdmin::Views::AttributesTable.prepend ActiveAdmin::Translations::TranslatedRowExtension
   ActiveAdmin::Views::ActiveFiltersSidebarContent.prepend ActiveAdmin::ActiveFiltersSidebarExtension
+  ActiveAdmin::Views::Pages::Base.prepend ActiveAdmin::FontPreloadExtension
+  ActiveAdmin::Filters::ViewHelper.prepend ActiveAdmin::JumpToPageExtension
+  ActiveAdmin::Views::IndexAsTable::IndexTableFor.prepend ActiveAdmin::CellClampExtension
 end
 
 ActiveAdmin.after_load do |app|

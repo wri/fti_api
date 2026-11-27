@@ -103,7 +103,7 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6, >= 1.7.2)
-    active_material (2.1.5)
+    active_material (1.5.2)
     activeadmin (3.5.2)
       arbre (~> 1.2, >= 1.2.1)
       csv
@@ -114,8 +114,8 @@ GEM
       kaminari (>= 1.2.1)
       railties (>= 6.1)
       ransack (>= 4.0)
-    activeadmin_addons (1.10.1)
-      active_material
+    activeadmin_addons (1.10.2)
+      active_material (~> 1.5)
       railties
       redcarpet
       require_all

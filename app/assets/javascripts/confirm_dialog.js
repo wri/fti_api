@@ -1,70 +1,49 @@
-// Replaces the browser's confirm() for data-confirm links and buttons (jquery_ujs) with a styled dialog.
-// jquery_ujs expects a synchronous answer, so the action is stopped, and replayed once the user confirms.
+// Styled replacement for the browser confirm() on data-confirm links and buttons (jquery_ujs).
+// Returning false from jquery_ujs's "confirm" event stops the action; after "OK" it is replayed
+// without data-confirm.
 (function() {
-  const rails = $.rails;
-  const i18n = () => $('#confirm-dialog-i18n').data() || {};
+  const escape = text => $('<div>').text(text).html();
 
-  function replay($element) {
-    $element.data('confirm-dialog-accepted', true);
-    if ($element.is('form')) {
-      $element.trigger('submit');
-    } else {
-      $element[0].click();
-    }
+  function buildDialog(destructive) {
+    const labels = $('#admin-js-i18n').data() || {};
+    const okLabel = destructive ? (labels.delete || 'Delete') : (labels.ok || 'OK');
+
+    return $(`
+      <dialog class="confirm-dialog">
+        <form method="dialog">
+          <p class="confirm-dialog__message"></p>
+          <div class="confirm-dialog__actions">
+            <button value="cancel" class="confirm-dialog__cancel">${escape(labels.cancel || 'Cancel')}</button>
+            <button value="ok" class="confirm-dialog__ok ${destructive ? 'danger' : ''}">${escape(okLabel)}</button>
+          </div>
+        </form>
+      </dialog>
+    `).appendTo('body')[0];
   }
 
-  function open(message, $element) {
+  function replay($element) {
+    const message = $element.attr('data-confirm');
+    $element.removeAttr('data-confirm').removeData('confirm');
+    $element.is('form') ? $element.trigger('submit') : $element[0].click();
+    $element.attr('data-confirm', message);
+  }
+
+  $(document).on('confirm', '[data-confirm]', function() {
+    const $element = $(this);
     const destructive = String($element.data('method')).toLowerCase() === 'delete';
-    const labels = i18n();
+    const dialog = buildDialog(destructive);
 
-    const dialog = document.createElement('dialog');
-    dialog.className = 'confirm-dialog';
-    const text = document.createElement('p');
-    text.className = 'confirm-dialog__message';
-    text.textContent = message;
-    const actions = document.createElement('div');
-    actions.className = 'confirm-dialog__actions';
-    const ok = document.createElement('button');
-    ok.type = 'button';
-    ok.className = destructive ? 'confirm-dialog__ok danger' : 'confirm-dialog__ok';
-    ok.textContent = destructive ? (labels.delete || 'Delete') : (labels.ok || 'OK');
-    const cancel = document.createElement('button');
-    cancel.type = 'button';
-    cancel.className = 'confirm-dialog__cancel';
-    cancel.textContent = labels.cancel || 'Cancel';
-    actions.append(cancel, ok);
-    dialog.append(text, actions);
-    document.body.appendChild(dialog);
+    // set as text, never interpolated: messages can contain user-entered names
+    dialog.querySelector('.confirm-dialog__message').textContent = $element.data('confirm');
 
-    let answer = false;
-    ok.addEventListener('click', () => { answer = true; dialog.close(); });
-    cancel.addEventListener('click', () => dialog.close());
     dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
     dialog.addEventListener('close', () => {
       dialog.remove();
-      if (rails.fire($element, 'confirm:complete', [answer]) && answer) replay($element);
+      if (dialog.returnValue === 'ok') replay($element);
     });
 
     dialog.showModal();
-    (destructive ? cancel : ok).focus();
-  }
-
-  // ActiveAdmin's batch action modal renders OK, Cancel; dialogs keep the primary action on the right
-  $(document).on('modal_dialog:after_open', (_event, form) => {
-    const $buttons = $(form).closest('.ui-dialog').find('.ui-dialog-buttonset');
-    $buttons.prepend($buttons.children().last());
-  });
-
-  rails.allowAction = function($element) {
-    const message = $element.data('confirm');
-    if (!message) return true;
-
-    if ($element.data('confirm-dialog-accepted')) {
-      $element.removeData('confirm-dialog-accepted');
-      return true;
-    }
-
-    if (rails.fire($element, 'confirm')) open(message, $element);
+    dialog.querySelector(destructive ? '.confirm-dialog__cancel' : '.confirm-dialog__ok').focus();
     return false;
-  };
+  });
 })();

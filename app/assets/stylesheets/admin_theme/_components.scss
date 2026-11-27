@@ -127,35 +127,115 @@ a.table_tools_button:hover,
 
 // ---------------------------------------------------------------- Flash
 
+// Flash messages as toasts in the top-right corner (toasts.js adds close buttons and auto-dismiss).
+// Positioned in CSS so the page never reserves space for them.
 body.logged_in .flashes {
-  padding: 16px 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: calc(100vw - 32px);
+  pointer-events: none;
+  position: fixed;
+  right: 24px;
+  top: 76px;
+  width: 380px;
+  z-index: 995;
 
   .flash {
-    background: $warning-50;
-    border: 1px solid $warning-200;
+    align-items: flex-start;
+    animation: toast-in 0.2s ease-out;
+    background: $surface;
+    border: 1px solid $border-color;
     border-radius: $radius;
-    color: $warning;
+    box-shadow: $shadow-lg;
+    color: $gray-800;
+    display: flex;
     font-size: 13px;
     font-weight: 500;
+    gap: 10px;
     line-height: 20px;
-    padding: 10px 14px;
+    padding: 12px 12px 12px 14px;
+    pointer-events: auto;
     text-shadow: none;
 
-    & + .flash {
-      margin-top: 8px;
+    &::before {
+      align-items: center;
+      background: $warning;
+      border-radius: 999px;
+      color: #fff;
+      content: "!";
+      display: inline-flex;
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 700;
+      height: 20px;
+      justify-content: center;
+      width: 20px;
     }
 
-    &.flash_notice {
-      background: $success-50;
-      border-color: $success-200;
-      color: $success;
+    &.flash_notice::before {
+      background: $success;
+      content: "\2713";
     }
 
-    &.flash_error {
-      background: $danger-50;
-      border-color: $danger-200;
-      color: $danger;
+    &.flash_alert::before,
+    &.flash_error::before {
+      background: $danger;
     }
+
+    &.is-leaving {
+      animation: toast-out 0.2s ease-in forwards;
+    }
+  }
+
+  .flash__close,
+  .flash__close:not(.disabled):hover,
+  .flash__close:not(.disabled):active {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: $radius-sm;
+    box-shadow: none;
+    color: $gray-400;
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    height: 24px;
+    justify-content: center;
+    margin: -2px 0 -2px auto;
+    padding: 0;
+    width: 24px;
+  }
+
+  .flash__close:not(.disabled):hover {
+    background: $gray-100;
+    color: $gray-900;
+  }
+
+  .flash__close:focus-visible {
+    box-shadow: $focus-ring;
+    outline: none;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.logged_in .flashes .flash,
+  body.logged_in .flashes .flash.is-leaving {
+    animation: none;
   }
 }
 
@@ -262,6 +342,8 @@ form.filter_form {
       display: block;
       font-size: 12.5px;
       font-weight: 500;
+      // fixed, so the height doesn't change when the web font replaces the fallback
+      line-height: 18px;
       margin-bottom: 6px;
       padding: 0;
       text-transform: none;
@@ -274,6 +356,7 @@ form.filter_form {
     select {
       width: 100%;
       box-sizing: border-box;
+      line-height: 20px;
     }
 
     &.filter_numeric_range_filter {
@@ -1522,7 +1605,7 @@ body.logged_out {
     padding: 14px 20px 16px;
   }
 
-  // confirm_dialog.js moves Cancel before OK, so the primary action ends up on the right
+  // batch_action_modal.js moves Cancel before OK, so the primary action ends up on the right
   .ui-dialog-buttonset {
     display: flex;
     gap: 8px;
@@ -1558,12 +1641,12 @@ body.logged_out {
   }
 }
 
-// Long index cells are clamped to two lines and expand on click (table_cells.js)
+// Long index cells are clamped to three lines and expand on click (table_cells.js)
 .index_as_table .cell-clamp {
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   display: -webkit-box;
-  line-clamp: 2;
+  line-clamp: 3;
   overflow: hidden;
 
   &--long {
@@ -1599,7 +1682,7 @@ dialog.confirm-dialog {
     padding: 20px 20px 4px;
   }
 
-  > .confirm-dialog__actions {
+  .confirm-dialog__actions {
     display: flex;
     gap: 8px;
     justify-content: flex-end;
